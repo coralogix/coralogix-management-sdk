@@ -26,6 +26,11 @@ service PresetsService {
       body: "preset"
       additional_bindings: {post: "/v1/notification-center/presets/custom"}
     };
+
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Presets service"]
+      summary: "Create Custom Preset"
+    };
   }
 
   rpc ReplaceCustomPreset(ReplaceCustomPresetRequest) returns (ReplaceCustomPresetResponse) {
@@ -34,6 +39,11 @@ service PresetsService {
       body: "preset"
       additional_bindings: {put: "/v1/notification-center/presets/custom"}
     };
+
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Presets service"]
+      summary: "Replace Custom Preset"
+    };
   }
 
   rpc DeleteCustomPreset(DeleteCustomPresetRequest) returns (DeleteCustomPresetResponse) {
@@ -41,12 +51,22 @@ service PresetsService {
       delete: "/notifications/notification-center/v1/presets/custom/{id}"
       additional_bindings: {delete: "/v1/notification-center/presets/custom/{id}"}
     };
+
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Presets service"]
+      summary: "Delete Custom Preset"
+    };
   }
 
   rpc SetCustomPresetAsDefault(SetCustomPresetAsDefaultRequest) returns (SetCustomPresetAsDefaultResponse) {
     option (google.api.http) = {
       post: "/notifications/notification-center/v1/presets/custom/{id}:defaultSet"
       additional_bindings: {post: "/v1/notification-center/presets/custom/{id}:defaultSet"}
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Presets service"]
+      summary: "Set Custom Preset As Default"
     };
     option deprecated = true;
   }
@@ -56,12 +76,20 @@ service PresetsService {
       post: "/notifications/notification-center/v1/presets/{id}:defaultSet"
       additional_bindings: {post: "/v1/notification-center/presets/{id}:defaultSet"}
     };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Presets service"]
+      summary: "Set Preset As Default"
+    };
   }
 
   rpc GetPreset(GetPresetRequest) returns (GetPresetResponse) {
     option (google.api.http) = {
       get: "/notifications/notification-center/v1/presets/{id}"
       additional_bindings: {get: "/v1/notification-center/presets/{id}"}
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Presets service"]
+      summary: "Get Preset"
     };
   }
 
@@ -70,12 +98,20 @@ service PresetsService {
       get: "/notifications/notification-center/v1/presets:summariesList"
       additional_bindings: {get: "/v1/notification-center/presets:summariesList"}
     };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Presets service"]
+      summary: "List Preset Summaries"
+    };
   }
 
   rpc BatchGetPresets(BatchGetPresetsRequest) returns (BatchGetPresetsResponse) {
     option (google.api.http) = {
       get: "/notifications/notification-center/v1/presets:batchGet"
       additional_bindings: {get: "/v1/notification-center/presets:batchGet"}
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Presets service"]
+      summary: "Batch Get Presets"
     };
   }
 
@@ -84,12 +120,20 @@ service PresetsService {
       get: "/notifications/notification-center/v1/presets:defaultSummaryGet"
       additional_bindings: {get: "/v1/notification-center/presets:defaultSummaryGet"}
     };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Presets service"]
+      summary: "Get Default Preset Summary"
+    };
   }
 
   rpc GetSystemDefaultPresetSummary(GetSystemDefaultPresetSummaryRequest) returns (GetSystemDefaultPresetSummaryResponse) {
     option (google.api.http) = {
       get: "/notifications/notification-center/v1/presets:systemDefaultSummaryGet"
       additional_bindings: {get: "/v1/notification-center/presets:systemDefaultSummaryGet"}
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Presets service"]
+      summary: "Get System Default Preset Summary"
     };
   }
 }

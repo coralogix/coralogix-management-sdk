@@ -26,6 +26,7 @@ const (
 	GlobalRoutersService_GetGlobalRouter_FullMethodName             = "/com.coralogixapis.notification_center.routers.v1.GlobalRoutersService/GetGlobalRouter"
 	GlobalRoutersService_ListGlobalRouters_FullMethodName           = "/com.coralogixapis.notification_center.routers.v1.GlobalRoutersService/ListGlobalRouters"
 	GlobalRoutersService_BatchGetGlobalRouters_FullMethodName       = "/com.coralogixapis.notification_center.routers.v1.GlobalRoutersService/BatchGetGlobalRouters"
+	GlobalRoutersService_ValidateEntityLabelMatcher_FullMethodName  = "/com.coralogixapis.notification_center.routers.v1.GlobalRoutersService/ValidateEntityLabelMatcher"
 )
 
 // GlobalRoutersServiceClient is the client API for GlobalRoutersService service.
@@ -41,6 +42,7 @@ type GlobalRoutersServiceClient interface {
 	GetGlobalRouter(ctx context.Context, in *GetGlobalRouterRequest, opts ...grpc.CallOption) (*GetGlobalRouterResponse, error)
 	ListGlobalRouters(ctx context.Context, in *ListGlobalRoutersRequest, opts ...grpc.CallOption) (*ListGlobalRoutersResponse, error)
 	BatchGetGlobalRouters(ctx context.Context, in *BatchGetGlobalRoutersRequest, opts ...grpc.CallOption) (*BatchGetGlobalRoutersResponse, error)
+	ValidateEntityLabelMatcher(ctx context.Context, in *ValidateEntityLabelMatcherRequest, opts ...grpc.CallOption) (*ValidateEntityLabelMatcherResponse, error)
 }
 
 type globalRoutersServiceClient struct {
@@ -121,6 +123,16 @@ func (c *globalRoutersServiceClient) BatchGetGlobalRouters(ctx context.Context, 
 	return out, nil
 }
 
+func (c *globalRoutersServiceClient) ValidateEntityLabelMatcher(ctx context.Context, in *ValidateEntityLabelMatcherRequest, opts ...grpc.CallOption) (*ValidateEntityLabelMatcherResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ValidateEntityLabelMatcherResponse)
+	err := c.cc.Invoke(ctx, GlobalRoutersService_ValidateEntityLabelMatcher_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GlobalRoutersServiceServer is the server API for GlobalRoutersService service.
 // All implementations must embed UnimplementedGlobalRoutersServiceServer
 // for forward compatibility.
@@ -134,6 +146,7 @@ type GlobalRoutersServiceServer interface {
 	GetGlobalRouter(context.Context, *GetGlobalRouterRequest) (*GetGlobalRouterResponse, error)
 	ListGlobalRouters(context.Context, *ListGlobalRoutersRequest) (*ListGlobalRoutersResponse, error)
 	BatchGetGlobalRouters(context.Context, *BatchGetGlobalRoutersRequest) (*BatchGetGlobalRoutersResponse, error)
+	ValidateEntityLabelMatcher(context.Context, *ValidateEntityLabelMatcherRequest) (*ValidateEntityLabelMatcherResponse, error)
 	mustEmbedUnimplementedGlobalRoutersServiceServer()
 }
 
@@ -164,6 +177,9 @@ func (UnimplementedGlobalRoutersServiceServer) ListGlobalRouters(context.Context
 }
 func (UnimplementedGlobalRoutersServiceServer) BatchGetGlobalRouters(context.Context, *BatchGetGlobalRoutersRequest) (*BatchGetGlobalRoutersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BatchGetGlobalRouters not implemented")
+}
+func (UnimplementedGlobalRoutersServiceServer) ValidateEntityLabelMatcher(context.Context, *ValidateEntityLabelMatcherRequest) (*ValidateEntityLabelMatcherResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ValidateEntityLabelMatcher not implemented")
 }
 func (UnimplementedGlobalRoutersServiceServer) mustEmbedUnimplementedGlobalRoutersServiceServer() {}
 func (UnimplementedGlobalRoutersServiceServer) testEmbeddedByValue()                              {}
@@ -312,6 +328,24 @@ func _GlobalRoutersService_BatchGetGlobalRouters_Handler(srv interface{}, ctx co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GlobalRoutersService_ValidateEntityLabelMatcher_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ValidateEntityLabelMatcherRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GlobalRoutersServiceServer).ValidateEntityLabelMatcher(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GlobalRoutersService_ValidateEntityLabelMatcher_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GlobalRoutersServiceServer).ValidateEntityLabelMatcher(ctx, req.(*ValidateEntityLabelMatcherRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // GlobalRoutersService_ServiceDesc is the grpc.ServiceDesc for GlobalRoutersService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -346,6 +380,10 @@ var GlobalRoutersService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BatchGetGlobalRouters",
 			Handler:    _GlobalRoutersService_BatchGetGlobalRouters_Handler,
+		},
+		{
+			MethodName: "ValidateEntityLabelMatcher",
+			Handler:    _GlobalRoutersService_ValidateEntityLabelMatcher_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

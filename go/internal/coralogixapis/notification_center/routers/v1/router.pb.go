@@ -150,6 +150,168 @@ func (x *GlobalRouter) GetEntityLabelMatcher() map[string]string {
 	return nil
 }
 
+type ValidateEntityLabelMatcherResult struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Result:
+	//
+	//	*ValidateEntityLabelMatcherResult_Success_
+	//	*ValidateEntityLabelMatcherResult_Failure_
+	Result        isValidateEntityLabelMatcherResult_Result `protobuf_oneof:"result"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ValidateEntityLabelMatcherResult) Reset() {
+	*x = ValidateEntityLabelMatcherResult{}
+	mi := &file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ValidateEntityLabelMatcherResult) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ValidateEntityLabelMatcherResult) ProtoMessage() {}
+
+func (x *ValidateEntityLabelMatcherResult) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ValidateEntityLabelMatcherResult.ProtoReflect.Descriptor instead.
+func (*ValidateEntityLabelMatcherResult) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ValidateEntityLabelMatcherResult) GetResult() isValidateEntityLabelMatcherResult_Result {
+	if x != nil {
+		return x.Result
+	}
+	return nil
+}
+
+func (x *ValidateEntityLabelMatcherResult) GetSuccess() *ValidateEntityLabelMatcherResult_Success {
+	if x != nil {
+		if x, ok := x.Result.(*ValidateEntityLabelMatcherResult_Success_); ok {
+			return x.Success
+		}
+	}
+	return nil
+}
+
+func (x *ValidateEntityLabelMatcherResult) GetFailure() *ValidateEntityLabelMatcherResult_Failure {
+	if x != nil {
+		if x, ok := x.Result.(*ValidateEntityLabelMatcherResult_Failure_); ok {
+			return x.Failure
+		}
+	}
+	return nil
+}
+
+type isValidateEntityLabelMatcherResult_Result interface {
+	isValidateEntityLabelMatcherResult_Result()
+}
+
+type ValidateEntityLabelMatcherResult_Success_ struct {
+	Success *ValidateEntityLabelMatcherResult_Success `protobuf:"bytes,1,opt,name=success,proto3,oneof"`
+}
+
+type ValidateEntityLabelMatcherResult_Failure_ struct {
+	Failure *ValidateEntityLabelMatcherResult_Failure `protobuf:"bytes,2,opt,name=failure,proto3,oneof"`
+}
+
+func (*ValidateEntityLabelMatcherResult_Success_) isValidateEntityLabelMatcherResult_Result() {}
+
+func (*ValidateEntityLabelMatcherResult_Failure_) isValidateEntityLabelMatcherResult_Result() {}
+
+type ValidateEntityLabelMatcherResult_Success struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ValidateEntityLabelMatcherResult_Success) Reset() {
+	*x = ValidateEntityLabelMatcherResult_Success{}
+	mi := &file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ValidateEntityLabelMatcherResult_Success) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ValidateEntityLabelMatcherResult_Success) ProtoMessage() {}
+
+func (x *ValidateEntityLabelMatcherResult_Success) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ValidateEntityLabelMatcherResult_Success.ProtoReflect.Descriptor instead.
+func (*ValidateEntityLabelMatcherResult_Success) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDescGZIP(), []int{1, 0}
+}
+
+type ValidateEntityLabelMatcherResult_Failure struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ValidateEntityLabelMatcherResult_Failure) Reset() {
+	*x = ValidateEntityLabelMatcherResult_Failure{}
+	mi := &file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ValidateEntityLabelMatcherResult_Failure) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ValidateEntityLabelMatcherResult_Failure) ProtoMessage() {}
+
+func (x *ValidateEntityLabelMatcherResult_Failure) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ValidateEntityLabelMatcherResult_Failure.ProtoReflect.Descriptor instead.
+func (*ValidateEntityLabelMatcherResult_Failure) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDescGZIP(), []int{1, 1}
+}
+
+func (x *ValidateEntityLabelMatcherResult_Failure) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 var File_com_coralogixapis_notification_center_routers_v1_router_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDesc = "" +
@@ -182,7 +344,14 @@ const file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDesc
 	"\x03_idB\x0e\n" +
 	"\f_create_timeB\x0e\n" +
 	"\f_update_timeB\x0e\n" +
-	"\f_entity_typeJ\x04\b\x02\x10\x03J\x04\b\x03\x10\x04J\x04\b\f\x10\rR\x0fuser_defined_idR\x16deprecated_entity_typeR\x0fevaluation_modeB2Z0com/coralogixapis/notification_center/routers/v1b\x06proto3"
+	"\f_entity_typeJ\x04\b\x02\x10\x03J\x04\b\x03\x10\x04J\x04\b\f\x10\rR\x0fuser_defined_idR\x16deprecated_entity_typeR\x0fevaluation_mode\"\xcc\x02\n" +
+	" ValidateEntityLabelMatcherResult\x12v\n" +
+	"\asuccess\x18\x01 \x01(\v2Z.com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherResult.SuccessH\x00R\asuccess\x12v\n" +
+	"\afailure\x18\x02 \x01(\v2Z.com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherResult.FailureH\x00R\afailure\x1a\t\n" +
+	"\aSuccess\x1a#\n" +
+	"\aFailure\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessageB\b\n" +
+	"\x06resultB2Z0com/coralogixapis/notification_center/routers/v1b\x06proto3"
 
 var (
 	file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDescOnce sync.Once
@@ -196,29 +365,34 @@ func file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDescG
 	return file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDescData
 }
 
-var file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_com_coralogixapis_notification_center_routers_v1_router_proto_goTypes = []any{
-	(*GlobalRouter)(nil),          // 0: com.coralogixapis.notification_center.routers.v1.GlobalRouter
-	nil,                           // 1: com.coralogixapis.notification_center.routers.v1.GlobalRouter.EntityLabelsEntry
-	nil,                           // 2: com.coralogixapis.notification_center.routers.v1.GlobalRouter.EntityLabelMatcherEntry
-	(*routing.RoutingRule)(nil),   // 3: com.coralogixapis.notification_center.routing.RoutingRule
-	(*routing.RoutingTarget)(nil), // 4: com.coralogixapis.notification_center.routing.RoutingTarget
-	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
-	(common.EntityType)(0),        // 6: com.coralogixapis.notification_center.EntityType
+	(*GlobalRouter)(nil),                     // 0: com.coralogixapis.notification_center.routers.v1.GlobalRouter
+	(*ValidateEntityLabelMatcherResult)(nil), // 1: com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherResult
+	nil,                                      // 2: com.coralogixapis.notification_center.routers.v1.GlobalRouter.EntityLabelsEntry
+	nil,                                      // 3: com.coralogixapis.notification_center.routers.v1.GlobalRouter.EntityLabelMatcherEntry
+	(*ValidateEntityLabelMatcherResult_Success)(nil), // 4: com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherResult.Success
+	(*ValidateEntityLabelMatcherResult_Failure)(nil), // 5: com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherResult.Failure
+	(*routing.RoutingRule)(nil),                      // 6: com.coralogixapis.notification_center.routing.RoutingRule
+	(*routing.RoutingTarget)(nil),                    // 7: com.coralogixapis.notification_center.routing.RoutingTarget
+	(*timestamppb.Timestamp)(nil),                    // 8: google.protobuf.Timestamp
+	(common.EntityType)(0),                           // 9: com.coralogixapis.notification_center.EntityType
 }
 var file_com_coralogixapis_notification_center_routers_v1_router_proto_depIdxs = []int32{
-	3, // 0: com.coralogixapis.notification_center.routers.v1.GlobalRouter.rules:type_name -> com.coralogixapis.notification_center.routing.RoutingRule
-	4, // 1: com.coralogixapis.notification_center.routers.v1.GlobalRouter.fallback:type_name -> com.coralogixapis.notification_center.routing.RoutingTarget
-	5, // 2: com.coralogixapis.notification_center.routers.v1.GlobalRouter.create_time:type_name -> google.protobuf.Timestamp
-	5, // 3: com.coralogixapis.notification_center.routers.v1.GlobalRouter.update_time:type_name -> google.protobuf.Timestamp
-	1, // 4: com.coralogixapis.notification_center.routers.v1.GlobalRouter.entity_labels:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter.EntityLabelsEntry
-	6, // 5: com.coralogixapis.notification_center.routers.v1.GlobalRouter.entity_type:type_name -> com.coralogixapis.notification_center.EntityType
-	2, // 6: com.coralogixapis.notification_center.routers.v1.GlobalRouter.entity_label_matcher:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter.EntityLabelMatcherEntry
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	6, // 0: com.coralogixapis.notification_center.routers.v1.GlobalRouter.rules:type_name -> com.coralogixapis.notification_center.routing.RoutingRule
+	7, // 1: com.coralogixapis.notification_center.routers.v1.GlobalRouter.fallback:type_name -> com.coralogixapis.notification_center.routing.RoutingTarget
+	8, // 2: com.coralogixapis.notification_center.routers.v1.GlobalRouter.create_time:type_name -> google.protobuf.Timestamp
+	8, // 3: com.coralogixapis.notification_center.routers.v1.GlobalRouter.update_time:type_name -> google.protobuf.Timestamp
+	2, // 4: com.coralogixapis.notification_center.routers.v1.GlobalRouter.entity_labels:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter.EntityLabelsEntry
+	9, // 5: com.coralogixapis.notification_center.routers.v1.GlobalRouter.entity_type:type_name -> com.coralogixapis.notification_center.EntityType
+	3, // 6: com.coralogixapis.notification_center.routers.v1.GlobalRouter.entity_label_matcher:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter.EntityLabelMatcherEntry
+	4, // 7: com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherResult.success:type_name -> com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherResult.Success
+	5, // 8: com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherResult.failure:type_name -> com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherResult.Failure
+	9, // [9:9] is the sub-list for method output_type
+	9, // [9:9] is the sub-list for method input_type
+	9, // [9:9] is the sub-list for extension type_name
+	9, // [9:9] is the sub-list for extension extendee
+	0, // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_notification_center_routers_v1_router_proto_init() }
@@ -227,13 +401,17 @@ func file_com_coralogixapis_notification_center_routers_v1_router_proto_init() {
 		return
 	}
 	file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[0].OneofWrappers = []any{}
+	file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[1].OneofWrappers = []any{
+		(*ValidateEntityLabelMatcherResult_Success_)(nil),
+		(*ValidateEntityLabelMatcherResult_Failure_)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDesc), len(file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

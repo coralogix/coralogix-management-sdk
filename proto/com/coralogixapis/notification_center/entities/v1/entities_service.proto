@@ -25,12 +25,22 @@ service EntitiesService {
       get: "/notifications/notification-center/v1/entity-types"
       additional_bindings: {get: "/v1/notification-center/entity-types"}
     };
+
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Entities service"]
+      summary: "List Entity Types"
+    };
   }
 
   rpc ListEntitySubTypes(ListEntitySubTypesRequest) returns (ListEntitySubTypesResponse) {
     option (google.api.http) = {
       get: "/notifications/notification-center/v1/entity-types/{entity_type}/entity-subtypes"
       additional_bindings: {get: "/v1/notification-center/entity-types/{entity_type}/entity-subtypes"}
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Entities service"]
+      summary: "List Entity Subtypes"
     };
   }
 }

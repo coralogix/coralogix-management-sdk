@@ -209,10 +209,12 @@ const file_com_coralogixapis_notification_center_entities_v1_entities_service_pr
 	"h*\x15List Entity Sub Types2ORequest to list entity subtypes by entity type supported by Notification Center*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"F\n" +
 	"\x1aListEntitySubTypesResponse\x12(\n" +
-	"\x10entity_sub_types\x18\x02 \x03(\tR\x0eentitySubTypes2\xe2\x06\n" +
-	"\x0fEntitiesService\x12\x8c\x02\n" +
-	"\x0fListEntityTypes\x12I.com.coralogixapis.notification_center.entities.v1.ListEntityTypesRequest\x1aJ.com.coralogixapis.notification_center.entities.v1.ListEntityTypesResponse\"b\x82\xd3\xe4\x93\x02\\Z&\x12$/v1/notification-center/entity-types\x122/notifications/notification-center/v1/entity-types\x12\xd3\x02\n" +
-	"\x12ListEntitySubTypes\x12L.com.coralogixapis.notification_center.entities.v1.ListEntitySubTypesRequest\x1aM.com.coralogixapis.notification_center.entities.v1.ListEntitySubTypesResponse\"\x9f\x01\x82\xd3\xe4\x93\x02\x98\x01ZD\x12B/v1/notification-center/entity-types/{entity_type}/entity-subtypes\x12P/notifications/notification-center/v1/entity-types/{entity_type}/entity-subtypes\x1a\xe9\x01\x9aA\xe5\x01\n" +
+	"\x10entity_sub_types\x18\x02 \x03(\tR\x0eentitySubTypes2\xb6\a\n" +
+	"\x0fEntitiesService\x12\xb5\x02\n" +
+	"\x0fListEntityTypes\x12I.com.coralogixapis.notification_center.entities.v1.ListEntityTypesRequest\x1aJ.com.coralogixapis.notification_center.entities.v1.ListEntityTypesResponse\"\x8a\x01\x9aA%\n" +
+	"\x10Entities service\x12\x11List Entity Types\x82\xd3\xe4\x93\x02\\Z&\x12$/v1/notification-center/entity-types\x122/notifications/notification-center/v1/entity-types\x12\xfe\x02\n" +
+	"\x12ListEntitySubTypes\x12L.com.coralogixapis.notification_center.entities.v1.ListEntitySubTypesRequest\x1aM.com.coralogixapis.notification_center.entities.v1.ListEntitySubTypesResponse\"\xca\x01\x9aA(\n" +
+	"\x10Entities service\x12\x14List Entity Subtypes\x82\xd3\xe4\x93\x02\x98\x01ZD\x12B/v1/notification-center/entity-types/{entity_type}/entity-subtypes\x12P/notifications/notification-center/v1/entity-types/{entity_type}/entity-subtypes\x1a\xe9\x01\x9aA\xe5\x01\n" +
 	"\x10Entities service\x12FQuery information about registered entities in the notification center\x1a\x88\x01\n" +
 	"<Lean more about the notification center in our documentation\x12Hhttps://coralogix.com/docs/user-guides/notification-center/introduction/B3Z1com/coralogixapis/notification_center/entities/v1b\x06proto3"
 

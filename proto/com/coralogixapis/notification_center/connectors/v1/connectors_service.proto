@@ -27,6 +27,10 @@ service ConnectorsService {
       body: "connector"
       additional_bindings: {post: "/v1/notification-center/connectors"}
     };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Connectors service"]
+      summary: "Create a Connector"
+    };
   }
 
   rpc ReplaceConnector(ReplaceConnectorRequest) returns (ReplaceConnectorResponse) {
@@ -35,12 +39,21 @@ service ConnectorsService {
       body: "connector"
       additional_bindings: {put: "/v1/notification-center/connector"}
     };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Connectors service"]
+      summary: "Replace a Connector"
+    };
   }
 
   rpc DeleteConnector(DeleteConnectorRequest) returns (DeleteConnectorResponse) {
     option (google.api.http) = {
       delete: "/notifications/notification-center/v1/connectors/{id}"
       additional_bindings: {delete: "/v1/notification-center/connectors/{id}"}
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Connectors service"]
+      summary: "Delete a Connector"
     };
   }
 
@@ -49,12 +62,22 @@ service ConnectorsService {
       get: "/notifications/notification-center/v1/connectors/{id}"
       additional_bindings: {get: "/v1/notification-center/connectors/{id}"}
     };
+
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Connectors service"]
+      summary: "Get a Connector"
+    };
   }
 
   rpc ListConnectors(ListConnectorsRequest) returns (ListConnectorsResponse) {
     option (google.api.http) = {
       get: "/notifications/notification-center/v1/connectors"
       additional_bindings: {get: "/v1/notification-center/connectors"}
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Connectors service"]
+      summary: "List Connectors"
     };
   }
 
@@ -63,12 +86,22 @@ service ConnectorsService {
       get: "/notifications/notification-center/v1/connectors:batchGet"
       additional_bindings: {get: "/v1/notification-center/connectors:batchGet"}
     };
+
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Connectors service"]
+      summary: "Batch Get Connectors"
+    };
   }
 
   rpc BatchGetConnectorSummaries(BatchGetConnectorSummariesRequest) returns (BatchGetConnectorSummariesResponse) {
     option (google.api.http) = {
       get: "/notifications/notification-center/v1/connectors:batchGetSummaries"
       additional_bindings: {get: "/v1/notification-center/connectors:batchGetSummaries"}
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Connectors service"]
+      summary: "Batch Get Connectors Summaries"
     };
   }
 
@@ -77,12 +110,21 @@ service ConnectorsService {
       get: "/notifications/notification-center/v1/connectors:listSummaries"
       additional_bindings: {get: "/v1/notification-center/connectors:listSummaries"}
     };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Connectors service"]
+      summary: "List Connector Summaries"
+    };
   }
 
   rpc GetConnectorTypeSummaries(GetConnectorTypeSummariesRequest) returns (GetConnectorTypeSummariesResponse) {
     option (google.api.http) = {
       get: "/notifications/notification-center/v1/connectors:getTypeSummaries"
       additional_bindings: {get: "/v1/notification-center/connectors:getTypeSummaries"}
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Connectors service"]
+      summary: "Get Connector Type Summaries"
     };
   }
 }
