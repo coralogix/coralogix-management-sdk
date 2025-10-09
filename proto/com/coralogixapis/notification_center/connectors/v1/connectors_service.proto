@@ -12,6 +12,15 @@ option go_package = "com/coralogixapis/notification_center/connectors/v1";
 
 // Public API that allows managing connectors.
 service ConnectorsService {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
+    name: "Connectors service"
+    description: "View and manage your connectors - integration instances for notification destinations"
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/connectors/introduction/"
+      description: "Lean more about connectors in our documentation"
+    }
+  };
+
   rpc CreateConnector(CreateConnectorRequest) returns (CreateConnectorResponse) {
     option (google.api.http) = {
       post: "/notifications/notification-center/v1/connectors"

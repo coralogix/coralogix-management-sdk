@@ -9,8 +9,17 @@ import "protoc-gen-openapiv3/options/annotations.proto";
 
 option go_package = "com/coralogixapis/notification_center/entities/v1";
 
-// Public API to query information on registered entities in the Notification Center
+// Public API to query information about registered entities in the Notification Center
 service EntitiesService {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
+    name: "Entities service"
+    description: "Query information about registered entities in the notification center"
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/"
+      description: "Lean more about the notification center in our documentation"
+    }
+  };
+
   rpc ListEntityTypes(ListEntityTypesRequest) returns (ListEntityTypesResponse) {
     option (google.api.http) = {
       get: "/notifications/notification-center/v1/entity-types"
