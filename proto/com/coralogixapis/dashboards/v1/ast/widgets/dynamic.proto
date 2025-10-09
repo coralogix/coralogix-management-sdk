@@ -351,6 +351,8 @@ message Dynamic {
       }];
 
       google.protobuf.BoolValue display_series_name = 13 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "(multi-stat display only) Whether to show the series names above the value"}];
+
+      common.ThresholdBy threshold_by = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Indicates which widget element should be colorized as the threshold, either the value or the background"}];
     }
 
     message Gauge {
