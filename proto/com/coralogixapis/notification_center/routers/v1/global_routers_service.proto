@@ -28,6 +28,10 @@ service GlobalRoutersService {
       body: "router"
       additional_bindings: {post: "/v1/notification-center/routers"}
     };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Global routers service"]
+      summary: "Create Global Router"
+    };
   }
 
   rpc ReplaceGlobalRouter(ReplaceGlobalRouterRequest) returns (ReplaceGlobalRouterResponse) {
@@ -35,6 +39,10 @@ service GlobalRoutersService {
       put: "/notifications/notification-center/v1/routers"
       body: "router"
       additional_bindings: {put: "/v1/notification-center/routers"}
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Global routers service"]
+      summary: "Replace Global Router"
     };
   }
 
@@ -45,12 +53,20 @@ service GlobalRoutersService {
       delete: "/notifications/notification-center/v1/routers/{id}"
       additional_bindings: {delete: "/v1/notification-center/routers/{id}"}
     };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Global routers service"]
+      summary: "Delete Global Router"
+    };
   }
 
   rpc GetGlobalRouter(GetGlobalRouterRequest) returns (GetGlobalRouterResponse) {
     option (google.api.http) = {
       get: "/notifications/notification-center/v1/routers/{id}"
       additional_bindings: {get: "/v1/notification-center/routers/{id}"}
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Global routers service"]
+      summary: "Get Global Router"
     };
   }
 
@@ -59,12 +75,27 @@ service GlobalRoutersService {
       get: "/notifications/notification-center/v1/routers"
       additional_bindings: {get: "/v1/notification-center/routers"}
     };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Global routers service"]
+      summary: "List Global Routers"
+    };
   }
 
   rpc BatchGetGlobalRouters(BatchGetGlobalRoutersRequest) returns (BatchGetGlobalRoutersResponse) {
     option (google.api.http) = {
       get: "/notifications/notification-center/v1/routers:batchGetSummaries"
       additional_bindings: {get: "/v1/notification-center/routers:batchGetSummaries"}
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Global routers service"]
+      summary: "Batch Get Global Routers"
+    };
+  }
+
+  rpc ValidateEntityLabelMatcher(ValidateEntityLabelMatcherRequest) returns (ValidateEntityLabelMatcherResponse) {
+    option (google.api.http) = {
+      post: "/notifications/notification-center/v1/routers:validateEntityLabelMatcher"
+      additional_bindings: {post: "/v1/notification-center/routers:validateEntityLabelMatcher"}
     };
   }
 }
@@ -272,4 +303,33 @@ message BatchGetGlobalRoutersResponse {
   };
   map<string, GlobalRouter> routers = 1;
   repeated string not_found_ids = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "[\"global-router-id-3\"]"}];
+}
+
+message ValidateEntityLabelMatcherRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Validate Entity Label Matcher Request"
+      description: "Request to validate an entity label matcher"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+  map<string, string> entity_label_matcher = 1;
+}
+message ValidateEntityLabelMatcherResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Validate Entity Label Matcher Response"
+      description: "Response which contains whether the given entity label matcher is valid"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+  ValidateEntityLabelMatcherResult result = 1;
 }

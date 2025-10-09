@@ -653,6 +653,94 @@ func (x *BatchGetGlobalRoutersResponse) GetNotFoundIds() []string {
 	return nil
 }
 
+type ValidateEntityLabelMatcherRequest struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	EntityLabelMatcher map[string]string      `protobuf:"bytes,1,rep,name=entity_label_matcher,json=entityLabelMatcher,proto3" json:"entity_label_matcher,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *ValidateEntityLabelMatcherRequest) Reset() {
+	*x = ValidateEntityLabelMatcherRequest{}
+	mi := &file_com_coralogixapis_notification_center_routers_v1_global_routers_service_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ValidateEntityLabelMatcherRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ValidateEntityLabelMatcherRequest) ProtoMessage() {}
+
+func (x *ValidateEntityLabelMatcherRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_notification_center_routers_v1_global_routers_service_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ValidateEntityLabelMatcherRequest.ProtoReflect.Descriptor instead.
+func (*ValidateEntityLabelMatcherRequest) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_notification_center_routers_v1_global_routers_service_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *ValidateEntityLabelMatcherRequest) GetEntityLabelMatcher() map[string]string {
+	if x != nil {
+		return x.EntityLabelMatcher
+	}
+	return nil
+}
+
+type ValidateEntityLabelMatcherResponse struct {
+	state         protoimpl.MessageState            `protogen:"open.v1"`
+	Result        *ValidateEntityLabelMatcherResult `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ValidateEntityLabelMatcherResponse) Reset() {
+	*x = ValidateEntityLabelMatcherResponse{}
+	mi := &file_com_coralogixapis_notification_center_routers_v1_global_routers_service_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ValidateEntityLabelMatcherResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ValidateEntityLabelMatcherResponse) ProtoMessage() {}
+
+func (x *ValidateEntityLabelMatcherResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_notification_center_routers_v1_global_routers_service_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ValidateEntityLabelMatcherResponse.ProtoReflect.Descriptor instead.
+func (*ValidateEntityLabelMatcherResponse) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_notification_center_routers_v1_global_routers_service_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *ValidateEntityLabelMatcherResponse) GetResult() *ValidateEntityLabelMatcherResult {
+	if x != nil {
+		return x.Result
+	}
+	return nil
+}
+
 var File_com_coralogixapis_notification_center_routers_v1_global_routers_service_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_notification_center_routers_v1_global_routers_service_proto_rawDesc = "" +
@@ -722,15 +810,33 @@ const file_com_coralogixapis_notification_center_routers_v1_global_routers_servi
 	"\x03key\x18\x01 \x01(\tR\x03key\x12T\n" +
 	"\x05value\x18\x02 \x01(\v2>.com.coralogixapis.notification_center.routers.v1.GlobalRouterR\x05value:\x028\x01:\xf3\x01\x9aA\xef\x01\n" +
 	"p*!Batch Get Global Routers Response2KResponse containing requested global routers and missing global routers ids*{\n" +
-	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/2\x97\x11\n" +
-	"\x14GlobalRoutersService\x12\x91\x02\n" +
-	"\x12CreateGlobalRouter\x12K.com.coralogixapis.notification_center.routers.v1.CreateGlobalRouterRequest\x1aL.com.coralogixapis.notification_center.routers.v1.CreateGlobalRouterResponse\"`\x82\xd3\xe4\x93\x02Z:\x06routerZ!\"\x1f/v1/notification-center/routers\"-/notifications/notification-center/v1/routers\x12\x94\x02\n" +
-	"\x13ReplaceGlobalRouter\x12L.com.coralogixapis.notification_center.routers.v1.ReplaceGlobalRouterRequest\x1aM.com.coralogixapis.notification_center.routers.v1.ReplaceGlobalRouterResponse\"`\x82\xd3\xe4\x93\x02Z:\x06routerZ!\x1a\x1f/v1/notification-center/routers\x1a-/notifications/notification-center/v1/routers\x12\xcc\x01\n" +
-	"\x1bCreateOrReplaceGlobalRouter\x12T.com.coralogixapis.notification_center.routers.v1.CreateOrReplaceGlobalRouterRequest\x1aU.com.coralogixapis.notification_center.routers.v1.CreateOrReplaceGlobalRouterResponse\"\x00\x12\x93\x02\n" +
-	"\x12DeleteGlobalRouter\x12K.com.coralogixapis.notification_center.routers.v1.DeleteGlobalRouterRequest\x1aL.com.coralogixapis.notification_center.routers.v1.DeleteGlobalRouterResponse\"b\x82\xd3\xe4\x93\x02\\Z&*$/v1/notification-center/routers/{id}*2/notifications/notification-center/v1/routers/{id}\x12\x8a\x02\n" +
-	"\x0fGetGlobalRouter\x12H.com.coralogixapis.notification_center.routers.v1.GetGlobalRouterRequest\x1aI.com.coralogixapis.notification_center.routers.v1.GetGlobalRouterResponse\"b\x82\xd3\xe4\x93\x02\\Z&\x12$/v1/notification-center/routers/{id}\x122/notifications/notification-center/v1/routers/{id}\x12\x86\x02\n" +
-	"\x11ListGlobalRouters\x12J.com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersRequest\x1aK.com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersResponse\"X\x82\xd3\xe4\x93\x02RZ!\x12\x1f/v1/notification-center/routers\x12-/notifications/notification-center/v1/routers\x12\xb6\x02\n" +
-	"\x15BatchGetGlobalRouters\x12N.com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersRequest\x1aO.com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersResponse\"|\x82\xd3\xe4\x93\x02vZ3\x121/v1/notification-center/routers:batchGetSummaries\x12?/notifications/notification-center/v1/routers:batchGetSummaries\x1a\x9f\x02\x9aA\x9b\x02\n" +
+	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\xe4\x03\n" +
+	"!ValidateEntityLabelMatcherRequest\x12\x9d\x01\n" +
+	"\x14entity_label_matcher\x18\x01 \x03(\v2k.com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherRequest.EntityLabelMatcherEntryR\x12entityLabelMatcher\x1aE\n" +
+	"\x17EntityLabelMatcherEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xd7\x01\x9aA\xd3\x01\n" +
+	"T*%Validate Entity Label Matcher Request2+Request to validate an entity label matcher*{\n" +
+	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\x87\x03\n" +
+	"\"ValidateEntityLabelMatcherResponse\x12j\n" +
+	"\x06result\x18\x01 \x01(\v2R.com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherResultR\x06result:\xf4\x01\x9aA\xf0\x01\n" +
+	"q*&Validate Entity Label Matcher Response2GResponse which contains whether the given entity label matcher is valid*{\n" +
+	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/2\xa0\x16\n" +
+	"\x14GlobalRoutersService\x12\xc3\x02\n" +
+	"\x12CreateGlobalRouter\x12K.com.coralogixapis.notification_center.routers.v1.CreateGlobalRouterRequest\x1aL.com.coralogixapis.notification_center.routers.v1.CreateGlobalRouterResponse\"\x91\x01\x9aA.\n" +
+	"\x16Global routers service\x12\x14Create Global Router\x82\xd3\xe4\x93\x02Z:\x06routerZ!\"\x1f/v1/notification-center/routers\"-/notifications/notification-center/v1/routers\x12\xc7\x02\n" +
+	"\x13ReplaceGlobalRouter\x12L.com.coralogixapis.notification_center.routers.v1.ReplaceGlobalRouterRequest\x1aM.com.coralogixapis.notification_center.routers.v1.ReplaceGlobalRouterResponse\"\x92\x01\x9aA/\n" +
+	"\x16Global routers service\x12\x15Replace Global Router\x82\xd3\xe4\x93\x02Z:\x06routerZ!\x1a\x1f/v1/notification-center/routers\x1a-/notifications/notification-center/v1/routers\x12\xcc\x01\n" +
+	"\x1bCreateOrReplaceGlobalRouter\x12T.com.coralogixapis.notification_center.routers.v1.CreateOrReplaceGlobalRouterRequest\x1aU.com.coralogixapis.notification_center.routers.v1.CreateOrReplaceGlobalRouterResponse\"\x00\x12\xc5\x02\n" +
+	"\x12DeleteGlobalRouter\x12K.com.coralogixapis.notification_center.routers.v1.DeleteGlobalRouterRequest\x1aL.com.coralogixapis.notification_center.routers.v1.DeleteGlobalRouterResponse\"\x93\x01\x9aA.\n" +
+	"\x16Global routers service\x12\x14Delete Global Router\x82\xd3\xe4\x93\x02\\Z&*$/v1/notification-center/routers/{id}*2/notifications/notification-center/v1/routers/{id}\x12\xb9\x02\n" +
+	"\x0fGetGlobalRouter\x12H.com.coralogixapis.notification_center.routers.v1.GetGlobalRouterRequest\x1aI.com.coralogixapis.notification_center.routers.v1.GetGlobalRouterResponse\"\x90\x01\x9aA+\n" +
+	"\x16Global routers service\x12\x11Get Global Router\x82\xd3\xe4\x93\x02\\Z&\x12$/v1/notification-center/routers/{id}\x122/notifications/notification-center/v1/routers/{id}\x12\xb7\x02\n" +
+	"\x11ListGlobalRouters\x12J.com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersRequest\x1aK.com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersResponse\"\x88\x01\x9aA-\n" +
+	"\x16Global routers service\x12\x13List Global Routers\x82\xd3\xe4\x93\x02RZ!\x12\x1f/v1/notification-center/routers\x12-/notifications/notification-center/v1/routers\x12\xec\x02\n" +
+	"\x15BatchGetGlobalRouters\x12N.com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersRequest\x1aO.com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersResponse\"\xb1\x01\x9aA2\n" +
+	"\x16Global routers service\x12\x18Batch Get Global Routers\x82\xd3\xe4\x93\x02vZ3\x121/v1/notification-center/routers:batchGetSummaries\x12?/notifications/notification-center/v1/routers:batchGetSummaries\x12\xd9\x02\n" +
+	"\x1aValidateEntityLabelMatcher\x12S.com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherRequest\x1aT.com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherResponse\"\x8f\x01\x82\xd3\xe4\x93\x02\x88\x01Z<\":/v1/notification-center/routers:validateEntityLabelMatcher\"H/notifications/notification-center/v1/routers:validateEntityLabelMatcher\x1a\x9f\x02\x9aA\x9b\x02\n" +
 	"\x16Global routers service\x12wView and manage your global routers - entities that direct notifications to configured destinations based on conditions\x1a\x87\x01\n" +
 	"3Lean more about global routers in our documentation\x12Phttps://coralogix.com/docs/user-guides/notification-center/routing/introduction/B2Z0com/coralogixapis/notification_center/routers/v1b\x06proto3"
 
@@ -746,7 +852,7 @@ func file_com_coralogixapis_notification_center_routers_v1_global_routers_servic
 	return file_com_coralogixapis_notification_center_routers_v1_global_routers_service_proto_rawDescData
 }
 
-var file_com_coralogixapis_notification_center_routers_v1_global_routers_service_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_com_coralogixapis_notification_center_routers_v1_global_routers_service_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_com_coralogixapis_notification_center_routers_v1_global_routers_service_proto_goTypes = []any{
 	(*CreateGlobalRouterRequest)(nil),           // 0: com.coralogixapis.notification_center.routers.v1.CreateGlobalRouterRequest
 	(*CreateGlobalRouterResponse)(nil),          // 1: com.coralogixapis.notification_center.routers.v1.CreateGlobalRouterResponse
@@ -762,45 +868,53 @@ var file_com_coralogixapis_notification_center_routers_v1_global_routers_service
 	(*ListGlobalRoutersResponse)(nil),           // 11: com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersResponse
 	(*BatchGetGlobalRoutersRequest)(nil),        // 12: com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersRequest
 	(*BatchGetGlobalRoutersResponse)(nil),       // 13: com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersResponse
-	nil,                                         // 14: com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersRequest.SourceEntityLabelsEntry
-	nil,                                         // 15: com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersResponse.RoutersEntry
-	(*GlobalRouter)(nil),                        // 16: com.coralogixapis.notification_center.routers.v1.GlobalRouter
-	(common.EntityType)(0),                      // 17: com.coralogixapis.notification_center.EntityType
-	(*v1.EntityLabelValues)(nil),                // 18: com.coralogixapis.notification_center.EntityLabelValues
+	(*ValidateEntityLabelMatcherRequest)(nil),   // 14: com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherRequest
+	(*ValidateEntityLabelMatcherResponse)(nil),  // 15: com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherResponse
+	nil,                                      // 16: com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersRequest.SourceEntityLabelsEntry
+	nil,                                      // 17: com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersResponse.RoutersEntry
+	nil,                                      // 18: com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherRequest.EntityLabelMatcherEntry
+	(*GlobalRouter)(nil),                     // 19: com.coralogixapis.notification_center.routers.v1.GlobalRouter
+	(common.EntityType)(0),                   // 20: com.coralogixapis.notification_center.EntityType
+	(*ValidateEntityLabelMatcherResult)(nil), // 21: com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherResult
+	(*v1.EntityLabelValues)(nil),             // 22: com.coralogixapis.notification_center.EntityLabelValues
 }
 var file_com_coralogixapis_notification_center_routers_v1_global_routers_service_proto_depIdxs = []int32{
-	16, // 0: com.coralogixapis.notification_center.routers.v1.CreateGlobalRouterRequest.router:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter
-	16, // 1: com.coralogixapis.notification_center.routers.v1.CreateGlobalRouterResponse.router:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter
-	16, // 2: com.coralogixapis.notification_center.routers.v1.ReplaceGlobalRouterRequest.router:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter
-	16, // 3: com.coralogixapis.notification_center.routers.v1.ReplaceGlobalRouterResponse.router:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter
-	16, // 4: com.coralogixapis.notification_center.routers.v1.CreateOrReplaceGlobalRouterRequest.router:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter
-	16, // 5: com.coralogixapis.notification_center.routers.v1.CreateOrReplaceGlobalRouterResponse.router:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter
-	16, // 6: com.coralogixapis.notification_center.routers.v1.GetGlobalRouterResponse.router:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter
-	17, // 7: com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersRequest.entity_type:type_name -> com.coralogixapis.notification_center.EntityType
-	14, // 8: com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersRequest.source_entity_labels:type_name -> com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersRequest.SourceEntityLabelsEntry
-	16, // 9: com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersResponse.routers:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter
-	15, // 10: com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersResponse.routers:type_name -> com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersResponse.RoutersEntry
-	18, // 11: com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersRequest.SourceEntityLabelsEntry.value:type_name -> com.coralogixapis.notification_center.EntityLabelValues
-	16, // 12: com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersResponse.RoutersEntry.value:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter
-	0,  // 13: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.CreateGlobalRouter:input_type -> com.coralogixapis.notification_center.routers.v1.CreateGlobalRouterRequest
-	2,  // 14: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.ReplaceGlobalRouter:input_type -> com.coralogixapis.notification_center.routers.v1.ReplaceGlobalRouterRequest
-	4,  // 15: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.CreateOrReplaceGlobalRouter:input_type -> com.coralogixapis.notification_center.routers.v1.CreateOrReplaceGlobalRouterRequest
-	6,  // 16: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.DeleteGlobalRouter:input_type -> com.coralogixapis.notification_center.routers.v1.DeleteGlobalRouterRequest
-	8,  // 17: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.GetGlobalRouter:input_type -> com.coralogixapis.notification_center.routers.v1.GetGlobalRouterRequest
-	10, // 18: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.ListGlobalRouters:input_type -> com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersRequest
-	12, // 19: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.BatchGetGlobalRouters:input_type -> com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersRequest
-	1,  // 20: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.CreateGlobalRouter:output_type -> com.coralogixapis.notification_center.routers.v1.CreateGlobalRouterResponse
-	3,  // 21: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.ReplaceGlobalRouter:output_type -> com.coralogixapis.notification_center.routers.v1.ReplaceGlobalRouterResponse
-	5,  // 22: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.CreateOrReplaceGlobalRouter:output_type -> com.coralogixapis.notification_center.routers.v1.CreateOrReplaceGlobalRouterResponse
-	7,  // 23: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.DeleteGlobalRouter:output_type -> com.coralogixapis.notification_center.routers.v1.DeleteGlobalRouterResponse
-	9,  // 24: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.GetGlobalRouter:output_type -> com.coralogixapis.notification_center.routers.v1.GetGlobalRouterResponse
-	11, // 25: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.ListGlobalRouters:output_type -> com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersResponse
-	13, // 26: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.BatchGetGlobalRouters:output_type -> com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersResponse
-	20, // [20:27] is the sub-list for method output_type
-	13, // [13:20] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	19, // 0: com.coralogixapis.notification_center.routers.v1.CreateGlobalRouterRequest.router:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter
+	19, // 1: com.coralogixapis.notification_center.routers.v1.CreateGlobalRouterResponse.router:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter
+	19, // 2: com.coralogixapis.notification_center.routers.v1.ReplaceGlobalRouterRequest.router:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter
+	19, // 3: com.coralogixapis.notification_center.routers.v1.ReplaceGlobalRouterResponse.router:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter
+	19, // 4: com.coralogixapis.notification_center.routers.v1.CreateOrReplaceGlobalRouterRequest.router:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter
+	19, // 5: com.coralogixapis.notification_center.routers.v1.CreateOrReplaceGlobalRouterResponse.router:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter
+	19, // 6: com.coralogixapis.notification_center.routers.v1.GetGlobalRouterResponse.router:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter
+	20, // 7: com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersRequest.entity_type:type_name -> com.coralogixapis.notification_center.EntityType
+	16, // 8: com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersRequest.source_entity_labels:type_name -> com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersRequest.SourceEntityLabelsEntry
+	19, // 9: com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersResponse.routers:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter
+	17, // 10: com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersResponse.routers:type_name -> com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersResponse.RoutersEntry
+	18, // 11: com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherRequest.entity_label_matcher:type_name -> com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherRequest.EntityLabelMatcherEntry
+	21, // 12: com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherResponse.result:type_name -> com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherResult
+	22, // 13: com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersRequest.SourceEntityLabelsEntry.value:type_name -> com.coralogixapis.notification_center.EntityLabelValues
+	19, // 14: com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersResponse.RoutersEntry.value:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter
+	0,  // 15: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.CreateGlobalRouter:input_type -> com.coralogixapis.notification_center.routers.v1.CreateGlobalRouterRequest
+	2,  // 16: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.ReplaceGlobalRouter:input_type -> com.coralogixapis.notification_center.routers.v1.ReplaceGlobalRouterRequest
+	4,  // 17: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.CreateOrReplaceGlobalRouter:input_type -> com.coralogixapis.notification_center.routers.v1.CreateOrReplaceGlobalRouterRequest
+	6,  // 18: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.DeleteGlobalRouter:input_type -> com.coralogixapis.notification_center.routers.v1.DeleteGlobalRouterRequest
+	8,  // 19: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.GetGlobalRouter:input_type -> com.coralogixapis.notification_center.routers.v1.GetGlobalRouterRequest
+	10, // 20: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.ListGlobalRouters:input_type -> com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersRequest
+	12, // 21: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.BatchGetGlobalRouters:input_type -> com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersRequest
+	14, // 22: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.ValidateEntityLabelMatcher:input_type -> com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherRequest
+	1,  // 23: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.CreateGlobalRouter:output_type -> com.coralogixapis.notification_center.routers.v1.CreateGlobalRouterResponse
+	3,  // 24: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.ReplaceGlobalRouter:output_type -> com.coralogixapis.notification_center.routers.v1.ReplaceGlobalRouterResponse
+	5,  // 25: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.CreateOrReplaceGlobalRouter:output_type -> com.coralogixapis.notification_center.routers.v1.CreateOrReplaceGlobalRouterResponse
+	7,  // 26: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.DeleteGlobalRouter:output_type -> com.coralogixapis.notification_center.routers.v1.DeleteGlobalRouterResponse
+	9,  // 27: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.GetGlobalRouter:output_type -> com.coralogixapis.notification_center.routers.v1.GetGlobalRouterResponse
+	11, // 28: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.ListGlobalRouters:output_type -> com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersResponse
+	13, // 29: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.BatchGetGlobalRouters:output_type -> com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersResponse
+	15, // 30: com.coralogixapis.notification_center.routers.v1.GlobalRoutersService.ValidateEntityLabelMatcher:output_type -> com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherResponse
+	23, // [23:31] is the sub-list for method output_type
+	15, // [15:23] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() {
@@ -818,7 +932,7 @@ func file_com_coralogixapis_notification_center_routers_v1_global_routers_servic
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_notification_center_routers_v1_global_routers_service_proto_rawDesc), len(file_com_coralogixapis_notification_center_routers_v1_global_routers_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   16,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
