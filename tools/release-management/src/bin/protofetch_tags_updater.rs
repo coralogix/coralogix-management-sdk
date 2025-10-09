@@ -17,7 +17,7 @@ use std::path::PathBuf;
 use clap::Parser;
 use git_cmd::Repo;
 use time::format_description;
-use toml_edit::{value, DocumentMut};
+use toml_edit::{DocumentMut, value};
 
 const GO_DIR: &str = "../../go";
 
@@ -103,11 +103,11 @@ async fn main() -> eyre::Result<()> {
 
         let url = val["url"].as_str().expect("URL must be a string");
         let (owner, repo) = owner_repo_from_url(url).expect("Invalid URL");
-        
-        // skip if repos if they don't match the provided filter 
+
+        // skip if repos if they don't match the provided filter
         if args.prefix_filter.is_some() && !repo.starts_with(args.prefix_filter.as_ref().unwrap()) {
             tracing::info!(%url, "Skipping repo due to prefix filter");
-            continue; 
+            continue;
         }
 
         if val.get("revision").is_none() {
@@ -149,7 +149,7 @@ async fn main() -> eyre::Result<()> {
         tracing::info!("No changes");
         return Ok(());
     }
-    
+
     tokio::fs::write(&protofetch_path, protofetch_descriptor.to_string()).await?;
 
     // Make: protofetch & build Go proxies
@@ -201,7 +201,14 @@ async fn main() -> eyre::Result<()> {
     tracing::info!(%owner, %repo_name, ?branch_name, ?pr_message);
     authed_github
         .pulls(owner, repo_name)
-        .create(format!("chore: updating '{}' protobufs", args.prefix_filter.as_ref().map_or_else(|| "all", |p| p)), branch_name, "master")
+        .create(
+            format!(
+                "chore: updating '{}' protobufs",
+                args.prefix_filter.as_ref().map_or_else(|| "all", |p| p)
+            ),
+            branch_name,
+            "master",
+        )
         .body(pr_message)
         .send()
         .await?;
