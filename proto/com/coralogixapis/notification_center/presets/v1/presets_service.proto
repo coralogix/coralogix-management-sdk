@@ -11,6 +11,15 @@ option go_package = "com/coralogixapis/notification_center/presets/v1";
 
 // Public API that allows retrieving available presets and managing custom presets.
 service PresetsService {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
+    name: "Presets service"
+    description: "View and manage your presets - pre-configured templates for notification content rendering"
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/presets/introduction/"
+      description: "Lean more about presets in our documentation"
+    }
+  };
+
   rpc CreateCustomPreset(CreateCustomPresetRequest) returns (CreateCustomPresetResponse) {
     option (google.api.http) = {
       post: "/notifications/notification-center/v1/presets/custom"

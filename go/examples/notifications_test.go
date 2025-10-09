@@ -120,7 +120,7 @@ func TestSlackConnector(t *testing.T) {
 		Description: "This is the slack connector to use for Notification Center testing.",
 		ConnectorConfig: &cxsdk.ConnectorConfig{
 			Fields: []*cxsdk.ConnectorConfigField{
-				{FieldName: "integrationId", Value: "c6e72871-388b-4776-a7de-8b7d17ed4828"},
+				{FieldName: "integrationId", Value: "60d87305-1110-4a0a-b388-85fb769892ee"},
 				{FieldName: "fallbackChannel", Value: "luigis-testing-grounds"},
 				{FieldName: "channel", Value: "luigis-testing-grounds"},
 			},

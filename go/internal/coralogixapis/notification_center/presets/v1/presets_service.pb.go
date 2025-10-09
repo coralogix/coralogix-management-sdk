@@ -991,7 +991,7 @@ const file_com_coralogixapis_notification_center_presets_v1_presets_service_prot
 	"\x89\x01*)Get System Default Preset Summary Request2\\Returns the preset summary for the system default preset (i.e., not a user-selected default)*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/J\x04\b\x02\x10\x03R\x16deprecated_entity_type\"\x8f\x01\n" +
 	"%GetSystemDefaultPresetSummaryResponse\x12f\n" +
-	"\x0epreset_summary\x18\x01 \x01(\v2?.com.coralogixapis.notification_center.presets.v1.PresetSummaryR\rpresetSummary2\xd1\x17\n" +
+	"\x0epreset_summary\x18\x01 \x01(\v2?.com.coralogixapis.notification_center.presets.v1.PresetSummaryR\rpresetSummary2\xc8\x19\n" +
 	"\x0ePresetsService\x12\x9f\x02\n" +
 	"\x12CreateCustomPreset\x12K.com.coralogixapis.notification_center.presets.v1.CreateCustomPresetRequest\x1aL.com.coralogixapis.notification_center.presets.v1.CreateCustomPresetResponse\"n\x82\xd3\xe4\x93\x02h:\x06presetZ(\"&/v1/notification-center/presets/custom\"4/notifications/notification-center/v1/presets/custom\x12\xa2\x02\n" +
 	"\x13ReplaceCustomPreset\x12L.com.coralogixapis.notification_center.presets.v1.ReplaceCustomPresetRequest\x1aM.com.coralogixapis.notification_center.presets.v1.ReplaceCustomPresetResponse\"n\x82\xd3\xe4\x93\x02h:\x06presetZ(\x1a&/v1/notification-center/presets/custom\x1a4/notifications/notification-center/v1/presets/custom\x12\xa1\x02\n" +
@@ -1002,7 +1002,9 @@ const file_com_coralogixapis_notification_center_presets_v1_presets_service_prot
 	"\x13ListPresetSummaries\x12L.com.coralogixapis.notification_center.presets.v1.ListPresetSummariesRequest\x1aM.com.coralogixapis.notification_center.presets.v1.ListPresetSummariesResponse\"t\x82\xd3\xe4\x93\x02nZ/\x12-/v1/notification-center/presets:summariesList\x12;/notifications/notification-center/v1/presets:summariesList\x12\x92\x02\n" +
 	"\x0fBatchGetPresets\x12H.com.coralogixapis.notification_center.presets.v1.BatchGetPresetsRequest\x1aI.com.coralogixapis.notification_center.presets.v1.BatchGetPresetsResponse\"j\x82\xd3\xe4\x93\x02dZ*\x12(/v1/notification-center/presets:batchGet\x126/notifications/notification-center/v1/presets:batchGet\x12\xbc\x02\n" +
 	"\x17GetDefaultPresetSummary\x12P.com.coralogixapis.notification_center.presets.v1.GetDefaultPresetSummaryRequest\x1aQ.com.coralogixapis.notification_center.presets.v1.GetDefaultPresetSummaryResponse\"|\x82\xd3\xe4\x93\x02vZ3\x121/v1/notification-center/presets:defaultSummaryGet\x12?/notifications/notification-center/v1/presets:defaultSummaryGet\x12\xdc\x02\n" +
-	"\x1dGetSystemDefaultPresetSummary\x12V.com.coralogixapis.notification_center.presets.v1.GetSystemDefaultPresetSummaryRequest\x1aW.com.coralogixapis.notification_center.presets.v1.GetSystemDefaultPresetSummaryResponse\"\x89\x01\x82\xd3\xe4\x93\x02\x82\x01Z9\x127/v1/notification-center/presets:systemDefaultSummaryGet\x12E/notifications/notification-center/v1/presets:systemDefaultSummaryGetB2Z0com/coralogixapis/notification_center/presets/v1b\x06proto3"
+	"\x1dGetSystemDefaultPresetSummary\x12V.com.coralogixapis.notification_center.presets.v1.GetSystemDefaultPresetSummaryRequest\x1aW.com.coralogixapis.notification_center.presets.v1.GetSystemDefaultPresetSummaryResponse\"\x89\x01\x82\xd3\xe4\x93\x02\x82\x01Z9\x127/v1/notification-center/presets:systemDefaultSummaryGet\x12E/notifications/notification-center/v1/presets:systemDefaultSummaryGet\x1a\xf4\x01\x9aA\xf0\x01\n" +
+	"\x0fPresets service\x12ZView and manage your presets - pre-configured templates for notification content rendering\x1a\x80\x01\n" +
+	",Lean more about presets in our documentation\x12Phttps://coralogix.com/docs/user-guides/notification-center/presets/introduction/B2Z0com/coralogixapis/notification_center/presets/v1b\x06proto3"
 
 var (
 	file_com_coralogixapis_notification_center_presets_v1_presets_service_proto_rawDescOnce sync.Once

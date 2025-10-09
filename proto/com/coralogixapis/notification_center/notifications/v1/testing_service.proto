@@ -14,6 +14,15 @@ option go_package = "com/coralogixapis/notification_center/notifications/v1";
 
 // Public API for testing Notification Center configurations including connectors, presets, and templates.
 service TestingService {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
+    name: "Testing service"
+    description: "Test your notification center configurations including connectors, presets, and templates"
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/"
+      description: "Lean more about the notification center in our documentation"
+    }
+  };
+
   rpc TestConnectorConfig(TestConnectorConfigRequest) returns (TestConnectorConfigResponse) {
     option (google.api.http) = {
       post: "/notifications/notification-center/v1/notifications/testing:testConnectorConfiguration"

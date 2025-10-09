@@ -937,7 +937,7 @@ const file_com_coralogixapis_notification_center_connectors_v1_connectors_servic
 	"!GetConnectorTypeSummariesResponse\x12\x83\x01\n" +
 	"\x18connector_type_summaries\x18\x01 \x03(\v2I.com.coralogixapis.notification_center.connectors.v1.ConnectorTypeSummaryR\x16connectorTypeSummaries:\xdc\x01\x9aA\xd8\x01\n" +
 	"Y*%Get Connector Type Summaries Response20Response containing summaries of connector types*{\n" +
-	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/2\x8c\x15\n" +
+	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/2\x87\x17\n" +
 	"\x11ConnectorsService\x12\x97\x02\n" +
 	"\x0fCreateConnector\x12K.com.coralogixapis.notification_center.connectors.v1.CreateConnectorRequest\x1aL.com.coralogixapis.notification_center.connectors.v1.CreateConnectorResponse\"i\x82\xd3\xe4\x93\x02c:\tconnectorZ$\"\"/v1/notification-center/connectors\"0/notifications/notification-center/v1/connectors\x12\x98\x02\n" +
 	"\x10ReplaceConnector\x12L.com.coralogixapis.notification_center.connectors.v1.ReplaceConnectorRequest\x1aM.com.coralogixapis.notification_center.connectors.v1.ReplaceConnectorResponse\"g\x82\xd3\xe4\x93\x02a:\tconnectorZ#\x1a!/v1/notification-center/connector\x1a//notifications/notification-center/v1/connector\x12\x96\x02\n" +
@@ -947,7 +947,9 @@ const file_com_coralogixapis_notification_center_connectors_v1_connectors_servic
 	"\x12BatchGetConnectors\x12N.com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorsRequest\x1aO.com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorsResponse\"p\x82\xd3\xe4\x93\x02jZ-\x12+/v1/notification-center/connectors:batchGet\x129/notifications/notification-center/v1/connectors:batchGet\x12\xd2\x02\n" +
 	"\x1aBatchGetConnectorSummaries\x12V.com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorSummariesRequest\x1aW.com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorSummariesResponse\"\x82\x01\x82\xd3\xe4\x93\x02|Z6\x124/v1/notification-center/connectors:batchGetSummaries\x12B/notifications/notification-center/v1/connectors:batchGetSummaries\x12\xbd\x02\n" +
 	"\x16ListConnectorSummaries\x12R.com.coralogixapis.notification_center.connectors.v1.ListConnectorSummariesRequest\x1aS.com.coralogixapis.notification_center.connectors.v1.ListConnectorSummariesResponse\"z\x82\xd3\xe4\x93\x02tZ2\x120/v1/notification-center/connectors:listSummaries\x12>/notifications/notification-center/v1/connectors:listSummaries\x12\xcd\x02\n" +
-	"\x19GetConnectorTypeSummaries\x12U.com.coralogixapis.notification_center.connectors.v1.GetConnectorTypeSummariesRequest\x1aV.com.coralogixapis.notification_center.connectors.v1.GetConnectorTypeSummariesResponse\"\x80\x01\x82\xd3\xe4\x93\x02zZ5\x123/v1/notification-center/connectors:getTypeSummaries\x12A/notifications/notification-center/v1/connectors:getTypeSummariesB5Z3com/coralogixapis/notification_center/connectors/v1b\x06proto3"
+	"\x19GetConnectorTypeSummaries\x12U.com.coralogixapis.notification_center.connectors.v1.GetConnectorTypeSummariesRequest\x1aV.com.coralogixapis.notification_center.connectors.v1.GetConnectorTypeSummariesResponse\"\x80\x01\x82\xd3\xe4\x93\x02zZ5\x123/v1/notification-center/connectors:getTypeSummaries\x12A/notifications/notification-center/v1/connectors:getTypeSummaries\x1a\xf8\x01\x9aA\xf4\x01\n" +
+	"\x12Connectors service\x12UView and manage your connectors - integration instances for notification destinations\x1a\x86\x01\n" +
+	"/Lean more about connectors in our documentation\x12Shttps://coralogix.com/docs/user-guides/notification-center/connectors/introduction/B5Z3com/coralogixapis/notification_center/connectors/v1b\x06proto3"
 
 var (
 	file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_rawDescOnce sync.Once
