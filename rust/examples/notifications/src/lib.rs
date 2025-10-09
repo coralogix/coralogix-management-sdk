@@ -128,7 +128,7 @@ mod tests {
                 fields: vec![
                     ConnectorConfigField {
                         field_name: "integrationId".into(),
-                        value: "c6e72871-388b-4776-a7de-8b7d17ed4828".into(),
+                        value: "60d87305-1110-4a0a-b388-85fb769892ee".into(),
                     },
                     ConnectorConfigField {
                         field_name: "channel".into(),
