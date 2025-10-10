@@ -518,6 +518,11 @@ message Dynamic {
 
       common.Legend legend = 16 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Widget's legend settings"}];
 
+      google.protobuf.BoolValue show_total = 17 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to show the total amount as a title"
+        example: "false"
+      }];
+
       message LabelDefinition {
         LabelSource label_source = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Source of the label"}];
         google.protobuf.BoolValue is_visible = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Are labels visible"}];
@@ -601,6 +606,11 @@ message Dynamic {
         description: "Sort type, by name or by value"
         example: "1"
       }];
+
+      google.protobuf.StringValue group_name_template = 20 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Custom template name for a group, can contain variables"
+        example: '{ "value": "Slice - {{ variable }}" }'
+      }];
     }
 
     message VerticalBars {
@@ -671,6 +681,19 @@ message Dynamic {
         description: "Sort type, by name or by value"
         example: "1"
       }];
+
+      YAxisViewBy y_axis_view_by = 20 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Specifies how to organize the y-axis view"}];
+
+      google.protobuf.StringValue group_name_template = 21 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Custom template name for a group, can contain variables"
+        example: '{ "value": "Slice - {{ variable }}" }'
+      }];
+
+      enum YAxisViewBy {
+        Y_AXIS_VIEW_BY_UNSPECIFIED = 0;
+        Y_AXIS_VIEW_BY_CATEGORY = 1;
+        Y_AXIS_VIEW_BY_VALUE = 2;
+      }
     }
 
     message TimeSeriesTooltip {
