@@ -394,7 +394,7 @@ url = 'github.com/coralogix/cx-api-metrics-configurator'
 allow_policies = [
     "/src/com/coralogix/metrics/metrics-configurator.proto",
 ]
-revision = 'v.0.0.6'
+revision = "v0.0.7"
 
 [cx-api-metrics-rule-manager]
 url = "github.com/coralogix/cx-api-metrics-rule-manager"
