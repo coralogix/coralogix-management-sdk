@@ -199,7 +199,7 @@ var File_com_coralogixapis_alerts_v3_event_alert_event_proto protoreflect.FileDe
 
 const file_com_coralogixapis_alerts_v3_event_alert_event_proto_rawDesc = "" +
 	"\n" +
-	"3com/coralogixapis/alerts/v3/event/alert_event.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a_com/coralogixapis/alerts/v3/alert_def_type_definition/activity_analysis/activity_analysis.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xb8\t\n" +
+	"3com/coralogixapis/alerts/v3/event/alert_event.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a_com/coralogixapis/alerts/v3/alert_def_type_definition/activity_analysis/activity_analysis.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xb8\t\n" +
 	"\n" +
 	"AlertEvent\x12m\n" +
 	"\x12permutation_labels\x18\x01 \x03(\v2>.com.coralogixapis.alerts.v3.AlertEvent.PermutationLabelsEntryR\x11permutationLabels\x12[\n" +

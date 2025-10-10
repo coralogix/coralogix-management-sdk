@@ -103,7 +103,7 @@ var File_com_coralogixapis_alerts_v3_event_payload_unique_count_event_unique_cou
 
 const file_com_coralogixapis_alerts_v3_event_payload_unique_count_event_unique_count_proto_rawDesc = "" +
 	"\n" +
-	"Ocom/coralogixapis/alerts/v3/event/payload/unique_count/event_unique_count.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd7\x03\n" +
+	"Ocom/coralogixapis/alerts/v3/event/payload/unique_count/event_unique_count.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xd7\x03\n" +
 	"\x10EventUniqueCount\x12a\n" +
 	"\fcounters_map\x18\x01 \x03(\v2>.com.coralogixapis.alerts.v3.EventUniqueCount.CountersMapEntryR\vcountersMap\x12;\n" +
 	"\n" +

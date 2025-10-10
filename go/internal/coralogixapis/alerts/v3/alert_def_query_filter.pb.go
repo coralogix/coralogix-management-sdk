@@ -746,7 +746,7 @@ var File_com_coralogixapis_alerts_v3_alert_def_query_filter_proto protoreflect.F
 
 const file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_rawDesc = "" +
 	"\n" +
-	"8com/coralogixapis/alerts/v3/alert_def_query_filter.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a0com/coralogixapis/alerts/v3/alert_def_type.proto\x1a4com/coralogixapis/alerts/v3/alert_def_priority.proto\x1a,com/coralogixapis/alerts/v3/time_range.proto\x1a)com/coralogixapis/alerts/v3/commons.proto\"\xf3\n" +
+	"8com/coralogixapis/alerts/v3/alert_def_query_filter.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a4com/coralogixapis/alerts/v3/alert_def_priority.proto\x1a0com/coralogixapis/alerts/v3/alert_def_type.proto\x1a)com/coralogixapis/alerts/v3/commons.proto\x1a,com/coralogixapis/alerts/v3/time_range.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xf3\n" +
 	"\n" +
 	"\x13AlertDefQueryFilter\x12e\n" +
 	"\vname_filter\x18\x01 \x01(\v2/.com.coralogixapis.alerts.v3.AlertDefNameFilterB\x13\x9aA\x102\x0eFilter by nameR\n" +
@@ -887,10 +887,10 @@ func file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_init() {
 	if File_com_coralogixapis_alerts_v3_alert_def_query_filter_proto != nil {
 		return
 	}
-	file_com_coralogixapis_alerts_v3_alert_def_type_proto_init()
 	file_com_coralogixapis_alerts_v3_alert_def_priority_proto_init()
-	file_com_coralogixapis_alerts_v3_time_range_proto_init()
+	file_com_coralogixapis_alerts_v3_alert_def_type_proto_init()
 	file_com_coralogixapis_alerts_v3_commons_proto_init()
+	file_com_coralogixapis_alerts_v3_time_range_proto_init()
 	file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_msgTypes[8].OneofWrappers = []any{
 		(*AlertDefTypeSpecificFilter_SloFilter)(nil),
 	}

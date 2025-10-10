@@ -127,7 +127,7 @@ var File_com_coralogixapis_alerts_v3_notification_metric_threshold_notification_
 
 const file_com_coralogixapis_alerts_v3_notification_metric_threshold_notification_proto_rawDesc = "" +
 	"\n" +
-	"Lcom/coralogixapis/alerts/v3/notification/metric_threshold_notification.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1alcom/coralogixapis/alerts/v3/alert_def_type_definition/metric/threshold/metric_threshold_condition_type.proto\"\x9e\x05\n" +
+	"Lcom/coralogixapis/alerts/v3/notification/metric_threshold_notification.proto\x12\x1bcom.coralogixapis.alerts.v3\x1alcom/coralogixapis/alerts/v3/alert_def_type_definition/metric/threshold/metric_threshold_condition_type.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x9e\x05\n" +
 	"\x1bMetricThresholdNotification\x12J\n" +
 	"\x12pct_over_threshold\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueR\x10pctOverThreshold\x12U\n" +
 	"\x18avg_value_over_threshold\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueR\x15avgValueOverThreshold\x12U\n" +

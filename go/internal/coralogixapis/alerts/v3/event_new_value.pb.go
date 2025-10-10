@@ -87,7 +87,7 @@ var File_com_coralogixapis_alerts_v3_event_payload_new_value_event_new_value_pro
 
 const file_com_coralogixapis_alerts_v3_event_payload_new_value_event_new_value_proto_rawDesc = "" +
 	"\n" +
-	"Icom/coralogixapis/alerts/v3/event/payload/new_value/event_new_value.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a6com/coralogixapis/alerts/v3/event/payload/common.proto\"\xf6\x01\n" +
+	"Icom/coralogixapis/alerts/v3/event/payload/new_value/event_new_value.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a6com/coralogixapis/alerts/v3/event/payload/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xf6\x01\n" +
 	"\rEventNewValue\x12;\n" +
 	"\n" +
 	"log_record\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\tlogRecord\x12g\n" +
