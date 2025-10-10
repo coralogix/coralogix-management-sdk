@@ -2,12 +2,12 @@ syntax = "proto3";
 
 package com.coralogixapis.alerts.v3;
 
+import "com/coralogixapis/alerts/v3/alert_def_priority.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type.proto";
+import "com/coralogixapis/alerts/v3/commons.proto";
+import "com/coralogixapis/alerts/v3/time_range.proto";
 import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
-import "com/coralogixapis/alerts/v3/alert_def_type.proto";
-import "com/coralogixapis/alerts/v3/alert_def_priority.proto";
-import "com/coralogixapis/alerts/v3/time_range.proto";
-import "com/coralogixapis/alerts/v3/commons.proto";
 
 message AlertDefQueryFilter {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
@@ -32,15 +32,14 @@ message AlertDefNameFilter {
     json_schema: {
       title: "AlertDef Name Filter"
       description: "Filter by alert definition names"
-      required: ["name", "matcher"]
+      required: [
+        "name",
+        "matcher"
+      ]
     }
   };
-  repeated google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "The name(s) of the alert definition - multiple values are OR'd together"
-  }];
-  FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "The filter operator (EQUALS, NOT_EQUALS, CONTAINS)"
-  }];
+  repeated google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The name(s) of the alert definition - multiple values are OR'd together"}];
+  FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The filter operator (EQUALS, NOT_EQUALS, CONTAINS)"}];
 }
 
 message AlertDefPriorityFilter {
@@ -48,15 +47,14 @@ message AlertDefPriorityFilter {
     json_schema: {
       title: "AlertDef Priority Filter"
       description: "Filter by alert definition priorities"
-      required: ["priority", "matcher"]
+      required: [
+        "priority",
+        "matcher"
+      ]
     }
   };
-  repeated AlertDefPriority priority = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "The priority(ies) of the alert definition - multiple values are OR'd together"
-  }];
-  FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "The filter operator (EQUALS, NOT_EQUALS)"
-  }];
+  repeated AlertDefPriority priority = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The priority(ies) of the alert definition - multiple values are OR'd together"}];
+  FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The filter operator (EQUALS, NOT_EQUALS)"}];
 }
 
 message AlertDefEntityLabelsFilter {
@@ -64,16 +62,17 @@ message AlertDefEntityLabelsFilter {
     json_schema: {
       title: "AlertDef Entity Labels Filter"
       description: "Filter by alert definition entity labels"
-      required: ["entity_labels", "values_operator"]
+      required: [
+        "entity_labels",
+        "values_operator"
+      ]
     }
   };
   map<string, string> entity_labels = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The entity label key-value pairs to filter by"
     example: "{\"environment\": \"production\", \"team\": \"backend\"}"
   }];
-  FilterValuesOperator values_operator = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "Whether all labels must match (AND) or any label can match (OR)"
-  }];
+  FilterValuesOperator values_operator = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Whether all labels must match (AND) or any label can match (OR)"}];
 }
 
 message AlertDefModifiedTimeFilter {
@@ -103,15 +102,14 @@ message AlertDefTypeFilter {
     json_schema: {
       title: "AlertDef Type Filter"
       description: "Filter by alert definition types"
-      required: ["type", "matcher"]
+      required: [
+        "type",
+        "matcher"
+      ]
     }
   };
-  repeated AlertDefType type = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "The alert type(s) - multiple values are OR'd together"
-  }];
-  FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "The filter operator (EQUALS, NOT_EQUALS)"
-  }];
+  repeated AlertDefType type = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The alert type(s) - multiple values are OR'd together"}];
+  FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The filter operator (EQUALS, NOT_EQUALS)"}];
 }
 
 message AlertDefEnabledFilter {
@@ -122,9 +120,7 @@ message AlertDefEnabledFilter {
       required: ["enabled"]
     }
   };
-  google.protobuf.BoolValue enabled = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "Whether to filter for enabled (true) or disabled (false) alerts"
-  }];
+  google.protobuf.BoolValue enabled = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Whether to filter for enabled (true) or disabled (false) alerts"}];
 }
 
 message AlertDefTypeSpecificFilter {
@@ -144,16 +140,17 @@ message AlertDefSloSpecificFilter {
     json_schema: {
       title: "AlertDef SLO Specific Filter"
       description: "Filter SLO-based alerts by SLO-specific fields"
-      required: ["slo_id", "matcher"]
+      required: [
+        "slo_id",
+        "matcher"
+      ]
     }
   };
   repeated google.protobuf.StringValue slo_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The SLO ID(s) to filter by - multiple values are OR'd together"
     example: "[\"123e4567-e89b-12d3-a456-426614174000\"]"
   }];
-  FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "The filter operator (EQUALS, NOT_EQUALS)"
-  }];
+  FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The filter operator (EQUALS, NOT_EQUALS)"}];
 }
 
 enum FilterMatcher {
@@ -174,13 +171,12 @@ message AlertDefStatusFilter {
     json_schema: {
       title: "AlertDef Status Filter"
       description: "Filter by alert definition status"
-      required: ["status", "matcher"]
+      required: [
+        "status",
+        "matcher"
+      ]
     }
   };
-  repeated AlertDefStatus status = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "The status(es) of the alert definition - multiple values are OR'd together"
-  }];
-  FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "The filter operator (EQUALS, NOT_EQUALS)"
-  }];
+  repeated AlertDefStatus status = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The status(es) of the alert definition - multiple values are OR'd together"}];
+  FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The filter operator (EQUALS, NOT_EQUALS)"}];
 }

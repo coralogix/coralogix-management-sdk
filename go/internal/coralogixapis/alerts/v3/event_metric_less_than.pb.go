@@ -127,7 +127,7 @@ var File_com_coralogixapis_alerts_v3_event_payload_metric_event_metric_less_than
 
 const file_com_coralogixapis_alerts_v3_event_payload_metric_event_metric_less_than_proto_rawDesc = "" +
 	"\n" +
-	"Mcom/coralogixapis/alerts/v3/event/payload/metric/event_metric_less_than.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a4com/coralogixapis/alerts/v3/alert_def_severity.proto\"\xf0\x05\n" +
+	"Mcom/coralogixapis/alerts/v3/event/payload/metric/event_metric_less_than.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a4com/coralogixapis/alerts/v3/alert_def_severity.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xf0\x05\n" +
 	"\x13EventMetricLessThan\x12W\n" +
 	"\x19percentage_over_threshold\x18\x01 \x01(\v2\x1b.google.protobuf.FloatValueR\x17percentageOverThreshold\x12]\n" +
 	"\x1aavg_value_across_threshold\x18\x02 \x01(\v2\x1b.google.protobuf.FloatValueH\x00R\x17avgValueAcrossThreshold\x88\x01\x01\x12]\n" +

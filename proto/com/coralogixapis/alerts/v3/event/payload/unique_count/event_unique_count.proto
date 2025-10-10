@@ -2,8 +2,8 @@ syntax = "proto3";
 
 package com.coralogixapis.alerts.v3;
 
-import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
 message EventUniqueCount {
   map<string, uint32> counters_map = 1;

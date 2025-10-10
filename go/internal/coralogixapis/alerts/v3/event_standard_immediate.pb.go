@@ -87,7 +87,7 @@ var File_com_coralogixapis_alerts_v3_event_payload_standard_event_standard_immed
 
 const file_com_coralogixapis_alerts_v3_event_payload_standard_event_standard_immediate_proto_rawDesc = "" +
 	"\n" +
-	"Qcom/coralogixapis/alerts/v3/event/payload/standard/event_standard_immediate.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a6com/coralogixapis/alerts/v3/event/payload/common.proto\"\xff\x01\n" +
+	"Qcom/coralogixapis/alerts/v3/event/payload/standard/event_standard_immediate.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a6com/coralogixapis/alerts/v3/event/payload/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xff\x01\n" +
 	"\x16EventStandardImmediate\x12;\n" +
 	"\n" +
 	"log_record\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\tlogRecord\x12g\n" +

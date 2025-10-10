@@ -2,12 +2,12 @@ syntax = "proto3";
 
 package com.coralogixapis.alerts.v3;
 
+import "com/coralogixapis/alerts/v3/alert_def_priority.proto";
+import "com/coralogixapis/alerts/v3/alert_def_query_filter.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type.proto";
+import "com/coralogixapis/alerts/v3/commons.proto";
 import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
-import "com/coralogixapis/alerts/v3/alert_def_type.proto";
-import "com/coralogixapis/alerts/v3/alert_def_priority.proto";
-import "com/coralogixapis/alerts/v3/commons.proto";
-import "com/coralogixapis/alerts/v3/alert_def_query_filter.proto";
 
 message FilterOptionCountsRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
@@ -16,9 +16,7 @@ message FilterOptionCountsRequest {
       description: "Request to get counts for filter options based on applied filters"
     }
   };
-  FilterOptionCountsFilter query_filter = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "The filter to apply when counting options"
-  }];
+  FilterOptionCountsFilter query_filter = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The filter to apply when counting options"}];
 }
 
 message FilterOptionCountsResponse {
@@ -28,9 +26,7 @@ message FilterOptionCountsResponse {
       description: "Response containing counts for different filter options"
     }
   };
-  FilterOptionCounts counts = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "The counts for different filter options"
-  }];
+  FilterOptionCounts counts = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The counts for different filter options"}];
 }
 
 message FilterOptionCountsFilter {
@@ -40,24 +36,12 @@ message FilterOptionCountsFilter {
       description: "Filter configuration for counting filter options"
     }
   };
-  FilterOptionCountsNameFilter name_filter = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "Filter by alert definition names"
-  }];
-  FilterOptionCountsTypeFilter type_filter = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "Filter by alert definition types"
-  }];
-  FilterOptionCountsPriorityFilter priority_filter = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "Filter by alert definition priorities"
-  }];
-  FilterOptionCountsEntityLabelsFilter entity_labels_filter = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "Filter by alert definition entity labels"
-  }];
-  FilterOptionCountsStatusFilter status_filter = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "Filter by alert definition status"
-  }];
-  FilterOptionCountsEnabledFilter enabled_filter = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "Filter by alert definition enabled status"
-  }];
+  FilterOptionCountsNameFilter name_filter = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter by alert definition names"}];
+  FilterOptionCountsTypeFilter type_filter = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter by alert definition types"}];
+  FilterOptionCountsPriorityFilter priority_filter = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter by alert definition priorities"}];
+  FilterOptionCountsEntityLabelsFilter entity_labels_filter = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter by alert definition entity labels"}];
+  FilterOptionCountsStatusFilter status_filter = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter by alert definition status"}];
+  FilterOptionCountsEnabledFilter enabled_filter = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter by alert definition enabled status"}];
 }
 
 message FilterOptionCountsNameFilter {
@@ -132,9 +116,9 @@ message FilterOptionCountsStatusFilter {
     example: "[\"ALERT_DEF_STATUS_ALERTING\", \"ALERT_DEF_STATUS_OK\", \"ALERT_DEF_STATUS_NO_DATA\"]"
   }];
   FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-      description: "The filter operator (EQUALS, NOT_EQUALS)"
-      example: "\"FILTER_MATCHER_EQUALS\""
-    }];
+    description: "The filter operator (EQUALS, NOT_EQUALS)"
+    example: "\"FILTER_MATCHER_EQUALS\""
+  }];
 }
 
 message FilterOptionCountsEnabledFilter {
@@ -157,21 +141,11 @@ message FilterOptionCounts {
       description: "Counts for different filter options"
     }
   };
-  repeated TypeCount type_counts = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "Counts for different alert types"
-  }];
-  repeated PriorityCount priority_counts = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "Counts for different alert priorities"
-  }];
-  repeated EntityLabelCount entity_label_counts = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "Counts for different entity label values"
-  }];
-  repeated StatusCount status_counts = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "Counts for different alert statuses"
-  }];
-  repeated EnabledCount enabled_counts = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "Counts for different alert enabled statuses"
-  }];
+  repeated TypeCount type_counts = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Counts for different alert types"}];
+  repeated PriorityCount priority_counts = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Counts for different alert priorities"}];
+  repeated EntityLabelCount entity_label_counts = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Counts for different entity label values"}];
+  repeated StatusCount status_counts = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Counts for different alert statuses"}];
+  repeated EnabledCount enabled_counts = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Counts for different alert enabled statuses"}];
 }
 
 message TypeCount {

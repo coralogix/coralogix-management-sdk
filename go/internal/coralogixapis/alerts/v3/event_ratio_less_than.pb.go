@@ -149,7 +149,7 @@ var File_com_coralogixapis_alerts_v3_event_payload_ratio_event_ratio_less_than_p
 
 const file_com_coralogixapis_alerts_v3_event_payload_ratio_event_ratio_less_than_proto_rawDesc = "" +
 	"\n" +
-	"Kcom/coralogixapis/alerts/v3/event/payload/ratio/event_ratio_less_than.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1aDcom/coralogixapis/alerts/v3/event/payload/ratio_special_values.proto\x1a4com/coralogixapis/alerts/v3/alert_def_severity.proto\"\x99\x04\n" +
+	"Kcom/coralogixapis/alerts/v3/event/payload/ratio/event_ratio_less_than.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a4com/coralogixapis/alerts/v3/alert_def_severity.proto\x1aDcom/coralogixapis/alerts/v3/event/payload/ratio_special_values.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x99\x04\n" +
 	"\x12EventRatioLessThan\x12K\n" +
 	"\x13numerator_hit_value\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x11numeratorHitValue\x12O\n" +
 	"\x15denominator_hit_value\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\x13denominatorHitValue\x127\n" +
@@ -201,8 +201,8 @@ func file_com_coralogixapis_alerts_v3_event_payload_ratio_event_ratio_less_than_
 	if File_com_coralogixapis_alerts_v3_event_payload_ratio_event_ratio_less_than_proto != nil {
 		return
 	}
-	file_com_coralogixapis_alerts_v3_event_payload_ratio_special_values_proto_init()
 	file_com_coralogixapis_alerts_v3_alert_def_severity_proto_init()
+	file_com_coralogixapis_alerts_v3_event_payload_ratio_special_values_proto_init()
 	file_com_coralogixapis_alerts_v3_event_payload_ratio_event_ratio_less_than_proto_msgTypes[0].OneofWrappers = []any{
 		(*EventRatioLessThan_Numeric)(nil),
 		(*EventRatioLessThan_Special)(nil),

@@ -139,7 +139,7 @@ var File_com_coralogixapis_alerts_v3_notification_slo_burn_rate_threshold_notifi
 
 const file_com_coralogixapis_alerts_v3_notification_slo_burn_rate_threshold_notification_proto_rawDesc = "" +
 	"\n" +
-	"Scom/coralogixapis/alerts/v3/notification/slo_burn_rate_threshold_notification.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe2\x02\n" +
+	"Scom/coralogixapis/alerts/v3/notification/slo_burn_rate_threshold_notification.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xe2\x02\n" +
 	" SloBurnRateThresholdNotification\x12J\n" +
 	"\x12pct_over_threshold\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueR\x10pctOverThreshold\x12A\n" +
 	"\x0efrom_timestamp\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\rfromTimestamp\x12=\n" +

@@ -327,7 +327,7 @@ var File_com_coralogixapis_alerts_v3_notification_notification_event_proto proto
 
 const file_com_coralogixapis_alerts_v3_notification_notification_event_proto_rawDesc = "" +
 	"\n" +
-	"Acom/coralogixapis/alerts/v3/notification/notification_event.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a3com/coralogixapis/alerts/v3/event/alert_event.proto\x1a4com/coralogixapis/alerts/v3/alert_def_priority.proto\x1aJcom/coralogixapis/alerts/v3/notification/logs_immediate_notification.proto\x1aJcom/coralogixapis/alerts/v3/notification/logs_threshold_notification.proto\x1aLcom/coralogixapis/alerts/v3/notification/metric_threshold_notification.proto\x1aScom/coralogixapis/alerts/v3/notification/slo_burn_rate_threshold_notification.proto\x1aVcom/coralogixapis/alerts/v3/notification/slo_error_budget_threshold_notification.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xcd\x05\n" +
+	"Acom/coralogixapis/alerts/v3/notification/notification_event.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a4com/coralogixapis/alerts/v3/alert_def_priority.proto\x1a3com/coralogixapis/alerts/v3/event/alert_event.proto\x1aJcom/coralogixapis/alerts/v3/notification/logs_immediate_notification.proto\x1aJcom/coralogixapis/alerts/v3/notification/logs_threshold_notification.proto\x1aLcom/coralogixapis/alerts/v3/notification/metric_threshold_notification.proto\x1aScom/coralogixapis/alerts/v3/notification/slo_burn_rate_threshold_notification.proto\x1aVcom/coralogixapis/alerts/v3/notification/slo_error_budget_threshold_notification.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xcd\x05\n" +
 	"\x16AlertNotificationEvent\x128\n" +
 	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12,\n" +
 	"\x02id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x12@\n" +
@@ -429,8 +429,8 @@ func file_com_coralogixapis_alerts_v3_notification_notification_event_proto_init
 	if File_com_coralogixapis_alerts_v3_notification_notification_event_proto != nil {
 		return
 	}
-	file_com_coralogixapis_alerts_v3_event_alert_event_proto_init()
 	file_com_coralogixapis_alerts_v3_alert_def_priority_proto_init()
+	file_com_coralogixapis_alerts_v3_event_alert_event_proto_init()
 	file_com_coralogixapis_alerts_v3_notification_logs_immediate_notification_proto_init()
 	file_com_coralogixapis_alerts_v3_notification_logs_threshold_notification_proto_init()
 	file_com_coralogixapis_alerts_v3_notification_metric_threshold_notification_proto_init()
