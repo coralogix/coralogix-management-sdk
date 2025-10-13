@@ -9,7 +9,6 @@ message LogsUniqueValueTimeWindow {
     json_schema: {
       title: "Log-based unique value alert time window"
       description: "Time window configuration for log-based unique value alerts"
-      required: ["type"]
     }
   };
   oneof type {

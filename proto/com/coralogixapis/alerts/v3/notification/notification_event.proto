@@ -47,8 +47,7 @@ message Group {
         "status",
         "suppressed",
         "priority",
-        "key_values",
-        "details"
+        "key_values"
       ]
     }
   };

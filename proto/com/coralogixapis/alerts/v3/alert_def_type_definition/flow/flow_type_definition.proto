@@ -30,7 +30,6 @@ message FlowStages {
       title: "Flow stages"
       description: "Defines stages in a flow alert"
       required: [
-        "flow_stages",
         "timeframe_ms",
         "timeframe_type"
       ]

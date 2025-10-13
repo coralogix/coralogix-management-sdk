@@ -188,11 +188,11 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_metric_common_met
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_metric_common_metric_timewindow_proto_rawDesc = "" +
 	"\n" +
-	"[com/coralogixapis/alerts/v3/alert_def_type_definition/metric/common/metric_timewindow.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xb9\x03\n" +
+	"[com/coralogixapis/alerts/v3/alert_def_type_definition/metric/common/metric_timewindow.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xb2\x03\n" +
 	"\x10MetricTimeWindow\x12\xce\x01\n" +
 	"!metric_time_window_specific_value\x18\x01 \x01(\x0e22.com.coralogixapis.alerts.v3.MetricTimeWindowValueBN\x9aAK2#The time window as a specific valueJ$\"METRIC_TIME_WINDOW_VALUE_MINUTES_5\"H\x00R\x1dmetricTimeWindowSpecificValue\x12\xa9\x01\n" +
-	"#metric_time_window_dynamic_duration\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB;\x9aA82\"The time window as a dynamic valueJ\a\"1h30m\"\xa2\x02\bdurationH\x00R\x1fmetricTimeWindowDynamicDuration: \x9aA\x1d\n" +
-	"\x1b*\x12Metric time window\xd2\x01\x04typeB\x06\n" +
+	"#metric_time_window_dynamic_duration\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB;\x9aA82\"The time window as a dynamic valueJ\a\"1h30m\"\xa2\x02\bdurationH\x00R\x1fmetricTimeWindowDynamicDuration:\x19\x9aA\x16\n" +
+	"\x14*\x12Metric time windowB\x06\n" +
 	"\x04type*\xa6\x04\n" +
 	"\x15MetricTimeWindowValue\x125\n" +
 	"1METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED\x10\x00\x12&\n" +

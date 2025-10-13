@@ -9,7 +9,6 @@ message LogsRatioTimeWindow {
     json_schema: {
       title: "Logs ratio time window"
       description: "Time window configuration for ratio alerts"
-      required: ["type"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/ratio-alerts/"

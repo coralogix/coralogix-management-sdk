@@ -10,7 +10,6 @@ message LogsFilter {
     json_schema: {
       title: "Log filter"
       description: "Filter configuration for log-based alerts"
-      required: ["filter_type"]
     }
   };
   oneof filter_type {

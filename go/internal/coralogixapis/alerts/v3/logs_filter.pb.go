@@ -367,12 +367,12 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_common_logs_
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_common_logs_filter_proto_rawDesc = "" +
 	"\n" +
-	"Scom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xff\x01\n" +
+	"Scom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xf1\x01\n" +
 	"\n" +
 	"LogsFilter\x12\x95\x01\n" +
-	"\rsimple_filter\x18\x01 \x01(\v2-.com.coralogixapis.alerts.v3.LogsSimpleFilterB?\x9aA<2:A simple filter that uses a Lucene query and label filtersH\x00R\fsimpleFilter:J\x9aAG\n" +
-	"E*\n" +
-	"Log filter2)Filter configuration for log-based alerts\xd2\x01\vfilter_typeB\r\n" +
+	"\rsimple_filter\x18\x01 \x01(\v2-.com.coralogixapis.alerts.v3.LogsSimpleFilterB?\x9aA<2:A simple filter that uses a Lucene query and label filtersH\x00R\fsimpleFilter:<\x9aA9\n" +
+	"7*\n" +
+	"Log filter2)Filter configuration for log-based alertsB\r\n" +
 	"\vfilter_type\"\x80\x02\n" +
 	"\x10LogsSimpleFilter\x12?\n" +
 	"\flucene_query\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\vluceneQuery\x12N\n" +

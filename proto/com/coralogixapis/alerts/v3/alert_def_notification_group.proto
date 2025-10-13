@@ -67,7 +67,6 @@ message IntegrationType {
     json_schema: {
       title: "Integration type"
       description: "Defines the type of integration to use for notifications"
-      required: ["integration_type"]
     }
   };
   oneof integration_type {

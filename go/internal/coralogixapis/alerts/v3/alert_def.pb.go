@@ -522,7 +522,7 @@ const file_com_coralogixapis_alerts_v3_alert_def_proto_rawDesc = "" +
 	"\x06status\x18\x06 \x01(\x0e2+.com.coralogixapis.alerts.v3.AlertDefStatusB;\x9aA82\x1fThe current status of the alertJ\x15\"ALERT_DEF_STATUS_OK\"H\x00R\x06status\x88\x01\x01:\xf7\x01\x9aA\xf3\x01\n" +
 	"u*\x10Alert definition22This data structure represents an alert definition\xd2\x01\x14alert_def_properties\xd2\x01\x02id\xd2\x01\x10alert_version_id*z\n" +
 	"/Find out more about alerts in our documentation\x12Ghttps://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/B\t\n" +
-	"\a_status\"\xbc\x1f\n" +
+	"\a_status\"\xa9\x1f\n" +
 	"\x12AlertDefProperties\x12c\n" +
 	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB1\x9aA.2 The name of the alert definitionJ\n" +
 	"\"My Alert\"R\x04name\x12\xa0\x01\n" +
@@ -555,8 +555,8 @@ const file_com_coralogixapis_alerts_v3_alert_def_proto_rawDesc = "" +
 	"\adeleted\x18\f \x01(\v2\x1a.google.protobuf.BoolValueB?\x9aA<2,Whether the alert has been marked as deleted:\x05falseJ\x05falseR\adeleted\x1a?\n" +
 	"\x11EntityLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\x82\x01\x9aA\x7f\n" +
-	"}*\x1bAlert definition properties23User-configurable properties of an alert definition\xd2\x01\x04name\xd2\x01\bpriority\xd2\x01\x04type\xd2\x01\x0ftype_definitionB\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:p\x9aAm\n" +
+	"k*\x1bAlert definition properties23User-configurable properties of an alert definition\xd2\x01\x04name\xd2\x01\bpriority\xd2\x01\x04typeB\n" +
 	"\n" +
 	"\bscheduleB\x11\n" +
 	"\x0ftype_definitionb\x06proto3"

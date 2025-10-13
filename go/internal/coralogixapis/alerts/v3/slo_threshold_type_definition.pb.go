@@ -435,12 +435,12 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_slo_slo_threshold
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_slo_slo_threshold_type_definition_proto_rawDesc = "" +
 	"\n" +
-	"]com/coralogixapis/alerts/v3/alert_def_type_definition/slo/slo_threshold_type_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aEcom/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto\x1aNcom/coralogixapis/alerts/v3/alert_def_type_definition/slo/slo_definition.proto\x1a)com/coralogixapis/alerts/v3/commons.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xbc\x03\n" +
+	"]com/coralogixapis/alerts/v3/alert_def_type_definition/slo/slo_threshold_type_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aEcom/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto\x1aNcom/coralogixapis/alerts/v3/alert_def_type_definition/slo/slo_definition.proto\x1a)com/coralogixapis/alerts/v3/commons.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xb0\x03\n" +
 	"\x10SloThresholdType\x12f\n" +
 	"\x0eslo_definition\x18\x01 \x01(\v2*.com.coralogixapis.alerts.v3.SloDefinitionB\x13\x9aA\x102\x0eSLO definitionR\rsloDefinition\x12s\n" +
 	"\ferror_budget\x18\x02 \x01(\v21.com.coralogixapis.alerts.v3.ErrorBudgetThresholdB\x1b\x9aA\x182\x16Error budget thresholdH\x00R\verrorBudget\x12g\n" +
-	"\tburn_rate\x18\x03 \x01(\v2..com.coralogixapis.alerts.v3.BurnRateThresholdB\x18\x9aA\x152\x13Burn rate thresholdH\x00R\bburnRate:U\x9aAR\n" +
-	"P*\x12SLO Threshold Type2\x1dSLO threshold type definition\xd2\x01\x0eslo_definition\xd2\x01\tthresholdB\v\n" +
+	"\tburn_rate\x18\x03 \x01(\v2..com.coralogixapis.alerts.v3.BurnRateThresholdB\x18\x9aA\x152\x13Burn rate thresholdH\x00R\bburnRate:I\x9aAF\n" +
+	"D*\x12SLO Threshold Type2\x1dSLO threshold type definition\xd2\x01\x0eslo_definitionB\v\n" +
 	"\tthreshold\"\xda\x01\n" +
 	"\x14ErrorBudgetThreshold\x12x\n" +
 	"\x05rules\x18\x01 \x03(\v2-.com.coralogixapis.alerts.v3.SloThresholdRuleB3\x9aA02(The rules for the error budget threshold\xa0\x01\x05\xa8\x01\x01R\x05rules:H\x9aAE\n" +
@@ -451,12 +451,12 @@ const file_com_coralogixapis_alerts_v3_alert_def_type_definition_slo_slo_thresho
 	"J*\x12SLO Threshold Rule2\x1dSLO threshold rule definition\xd2\x01\tcondition\xd2\x01\boverride\"\xa5\x01\n" +
 	"\x15SloThresholdCondition\x12:\n" +
 	"\tthreshold\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueR\tthreshold:P\x9aAM\n" +
-	"K*\x17SLO Threshold Condition2$Condition for the SLO threshold rule\xd2\x01\tthreshold\"\xa3\x03\n" +
+	"K*\x17SLO Threshold Condition2$Condition for the SLO threshold rule\xd2\x01\tthreshold\"\x9c\x03\n" +
 	"\x11BurnRateThreshold\x12u\n" +
 	"\x05rules\x18\x01 \x03(\v2-.com.coralogixapis.alerts.v3.SloThresholdRuleB0\x9aA-2%The rules for the burn rate threshold\xa0\x01\x05\xa8\x01\x01R\x05rules\x12]\n" +
 	"\x04dual\x18\x02 \x01(\v2-.com.coralogixapis.alerts.v3.BurnRateTypeDualB\x18\x9aA\x152\x13Burn rate type dualH\x00R\x04dual\x12e\n" +
-	"\x06single\x18\x03 \x01(\v2/.com.coralogixapis.alerts.v3.BurnRateTypeSingleB\x1a\x9aA\x172\x15Burn rate type singleH\x00R\x06single:I\x9aAF\n" +
-	"D*\x13Burn Rate Threshold2\x1eBurn rate threshold definition\xd2\x01\x05rules\xd2\x01\x04typeB\x06\n" +
+	"\x06single\x18\x03 \x01(\v2/.com.coralogixapis.alerts.v3.BurnRateTypeSingleB\x1a\x9aA\x172\x15Burn rate type singleH\x00R\x06single:B\x9aA?\n" +
+	"=*\x13Burn Rate Threshold2\x1eBurn rate threshold definition\xd2\x01\x05rulesB\x06\n" +
 	"\x04type\"\xb4\x01\n" +
 	"\x12BurnRateTypeSingle\x12N\n" +
 	"\rtime_duration\x18\x01 \x01(\v2).com.coralogixapis.alerts.v3.TimeDurationR\ftimeDuration:N\x9aAK\n" +

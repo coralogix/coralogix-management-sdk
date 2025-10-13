@@ -14,8 +14,7 @@ message SloThresholdType {
       title: "SLO Threshold Type"
       description: "SLO threshold type definition"
       required: [
-        "slo_definition",
-        "threshold"
+        "slo_definition"
       ]
     }
   };
@@ -73,8 +72,7 @@ message BurnRateThreshold {
       title: "Burn Rate Threshold"
       description: "Burn rate threshold definition"
       required: [
-        "rules",
-        "type"
+        "rules"
       ]
     }
   };

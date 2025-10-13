@@ -460,14 +460,14 @@ const file_com_coralogixapis_alerts_v3_alert_def_type_definition_flow_flow_type_
 	"\x06stages\x18\x01 \x03(\v2'.com.coralogixapis.alerts.v3.FlowStagesB%\x9aA\"2\x1dThe stages of the flow alert.\xa8\x01\x01R\x06stages\x12K\n" +
 	"\x13enforce_suppression\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x12enforceSuppression:\xde\x01\x9aA\xda\x01\n" +
 	"T*\x0fFlow alert type28Configuration for flow-based alerts with multiple stages\xd2\x01\x06stages*\x81\x01\n" +
-	"1Learn more about flow alerts in our documentation\x12Lhttps://coralogix.com/docs/user-guides/alerting/create-an-alert/flow-alerts/\"\xd6\x03\n" +
+	"1Learn more about flow alerts in our documentation\x12Lhttps://coralogix.com/docs/user-guides/alerting/create-an-alert/flow-alerts/\"\xc8\x03\n" +
 	"\n" +
 	"FlowStages\x12{\n" +
 	"\x12flow_stages_groups\x18\n" +
 	" \x01(\v2-.com.coralogixapis.alerts.v3.FlowStagesGroupsB\x1c\x9aA\x192\x17The flow stages groups.H\x00R\x10flowStagesGroups\x12>\n" +
 	"\ftimeframe_ms\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\vtimeframeMs\x12\x99\x01\n" +
-	"\x0etimeframe_type\x18\x04 \x01(\x0e2*.com.coralogixapis.alerts.v3.TimeframeTypeBF\x9aAC2)The type of timeframe for the flow alert.J\x16\"TIMEFRAME_TYPE_UP_TO\"R\rtimeframeType:`\x9aA]\n" +
-	"[*\vFlow stages2\x1eDefines stages in a flow alert\xd2\x01\vflow_stages\xd2\x01\ftimeframe_ms\xd2\x01\x0etimeframe_typeB\r\n" +
+	"\x0etimeframe_type\x18\x04 \x01(\x0e2*.com.coralogixapis.alerts.v3.TimeframeTypeBF\x9aAC2)The type of timeframe for the flow alert.J\x16\"TIMEFRAME_TYPE_UP_TO\"R\rtimeframeType:R\x9aAO\n" +
+	"M*\vFlow stages2\x1eDefines stages in a flow alert\xd2\x01\ftimeframe_ms\xd2\x01\x0etimeframe_typeB\r\n" +
 	"\vflow_stages\"\x9d\x01\n" +
 	"\x10FlowStagesGroups\x12D\n" +
 	"\x06groups\x18\x01 \x03(\v2,.com.coralogixapis.alerts.v3.FlowStagesGroupR\x06groups:C\x9aA@\n" +

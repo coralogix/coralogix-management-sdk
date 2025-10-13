@@ -339,7 +339,7 @@ const file_com_coralogixapis_alerts_v3_notification_notification_event_proto_raw
 	"\vGroupsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x128\n" +
 	"\x05value\x18\x02 \x01(\v2\".com.coralogixapis.alerts.v3.GroupR\x05value:\x028\x01:r\x9aAo\n" +
-	"m*\x18Alert notification event\xd2\x01\ttimestamp\xd2\x01\x02id\xd2\x01\x06status\xd2\x01\vattachments\xd2\x01\x06groups\xd2\x01\fgrouping_key\xd2\x01\x10highest_priority\"\x99\b\n" +
+	"m*\x18Alert notification event\xd2\x01\ttimestamp\xd2\x01\x02id\xd2\x01\x06status\xd2\x01\vattachments\xd2\x01\x06groups\xd2\x01\fgrouping_key\xd2\x01\x10highest_priority\"\x8c\b\n" +
 	"\x05Group\x12@\n" +
 	"\x06status\x18\x01 \x01(\x0e2(.com.coralogixapis.alerts.v3.AlertStatusR\x06status\x12:\n" +
 	"\n" +
@@ -355,10 +355,10 @@ const file_com_coralogixapis_alerts_v3_notification_notification_event_proto_raw
 	"\x1aslo_error_budget_threshold\x18h \x01(\v2@.com.coralogixapis.alerts.v3.SloErrorBudgetThresholdNotificationH\x00R\x17sloErrorBudgetThreshold\x1a<\n" +
 	"\x0eKeyValuesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\x89\x01\x9aA\x85\x01\n" +
-	"\x82\x01*\x18Alert notification group2.A group of related alerts with the same status\xd2\x01\x06status\xd2\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:}\x9aAz\n" +
+	"x*\x18Alert notification group2.A group of related alerts with the same status\xd2\x01\x06status\xd2\x01\n" +
 	"suppressed\xd2\x01\bpriority\xd2\x01\n" +
-	"key_values\xd2\x01\adetailsB\t\n" +
+	"key_valuesB\t\n" +
 	"\adetails\"\x7f\n" +
 	"\vAttachments\x12<\n" +
 	"\n" +
