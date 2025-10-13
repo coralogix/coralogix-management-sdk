@@ -9,7 +9,6 @@ message LogsNewValueTimeWindow {
     json_schema: {
       title: "Log-based new value alert time window"
       description: "Time window configuration for log-based new value alerts"
-      required: ["type"]
     }
   };
   oneof type {

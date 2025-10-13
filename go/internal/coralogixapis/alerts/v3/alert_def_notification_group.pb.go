@@ -397,13 +397,13 @@ const file_com_coralogixapis_alerts_v3_alert_def_notification_group_proto_rawDes
 	"g*!Alert definition webhook settings24Configuration for webhook notifications for an alert\xd2\x01\vintegrationB\x15\n" +
 	"\x13retriggering_periodB\f\n" +
 	"\n" +
-	"_notify_on\"\xfb\x02\n" +
+	"_notify_on\"\xe8\x02\n" +
 	"\x0fIntegrationType\x12x\n" +
 	"\x0eintegration_id\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB1\x9aA.2'The integration ID for the notificationJ\x03123H\x00R\rintegrationId\x12t\n" +
 	"\n" +
 	"recipients\x18\x03 \x01(\v2'.com.coralogixapis.alerts.v3.RecipientsB)\x9aA&2$The recipients for the notification.H\x00R\n" +
-	"recipients:d\x9aAa\n" +
-	"_*\x10Integration type28Defines the type of integration to use for notifications\xd2\x01\x10integration_typeB\x12\n" +
+	"recipients:Q\x9aAN\n" +
+	"L*\x10Integration type28Defines the type of integration to use for notificationsB\x12\n" +
 	"\x10integration_type\"\xf4\x01\n" +
 	"\n" +
 	"Recipients\x12\x97\x01\n" +

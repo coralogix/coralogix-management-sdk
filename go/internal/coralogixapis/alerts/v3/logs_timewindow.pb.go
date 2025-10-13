@@ -168,10 +168,10 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_common_logs_
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_common_logs_timewindow_proto_rawDesc = "" +
 	"\n" +
-	"Wcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_timewindow.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xd1\x02\n" +
+	"Wcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_timewindow.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xca\x02\n" +
 	"\x0eLogsTimeWindow\x12\xdb\x01\n" +
-	"\x1flogs_time_window_specific_value\x18\x01 \x01(\x0e20.com.coralogixapis.alerts.v3.LogsTimeWindowValueBa\x9aA^2)A time window defined by a specific valueJ1\"LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED\"H\x00R\x1blogsTimeWindowSpecificValue:Y\x9aAV\n" +
-	"T*\x1bLog-based alert time window2.Time window configuration for log-based alerts\xd2\x01\x04typeB\x06\n" +
+	"\x1flogs_time_window_specific_value\x18\x01 \x01(\x0e20.com.coralogixapis.alerts.v3.LogsTimeWindowValueBa\x9aA^2)A time window defined by a specific valueJ1\"LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED\"H\x00R\x1blogsTimeWindowSpecificValue:R\x9aAO\n" +
+	"M*\x1bLog-based alert time window2.Time window configuration for log-based alertsB\x06\n" +
 	"\x04type*\xe4\x03\n" +
 	"\x13LogsTimeWindowValue\x123\n" +
 	"/LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED\x10\x00\x12%\n" +

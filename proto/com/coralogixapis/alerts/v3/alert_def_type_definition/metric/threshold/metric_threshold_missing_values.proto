@@ -9,7 +9,6 @@ message MetricMissingValues {
     json_schema: {
       title: "Metric Missing Values Configuration"
       description: "Configuration for handling missing values in metric threshold alerts."
-      required: ["missing_values"]
     }
   };
   oneof missing_values {
