@@ -32,6 +32,7 @@ message Annotation {
     Strategy strategy = 2;
     google.protobuf.StringValue message_template = 3;
     repeated google.protobuf.StringValue labels = 4;
+    AnnotationOrientation orientation = 5;
 
     // A strategy for turning metrics data into annotations
     message Strategy {
@@ -110,6 +111,7 @@ message Annotation {
     google.protobuf.StringValue message_template = 3;
     v1.common.DataModeType data_mode_type = 4;
     repeated common.ObservationField label_fields = 5;
+    AnnotationOrientation orientation = 6;
 
     message Strategy {
       oneof value {
@@ -137,6 +139,7 @@ message Annotation {
   message ManualSource {
     Strategy strategy = 1;
     google.protobuf.StringValue message_template = 3;
+    AnnotationOrientation orientation = 4;
 
     message Strategy {
       oneof value {
@@ -155,5 +158,10 @@ message Annotation {
         google.protobuf.DoubleValue end_value = 3;
       }
     }
+  }
+
+  enum AnnotationOrientation {
+    ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED = 0;
+    ANNOTATION_ORIENTATION_HORIZONTAL = 1;
   }
 }
