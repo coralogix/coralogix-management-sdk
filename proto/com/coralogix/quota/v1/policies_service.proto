@@ -2,28 +2,27 @@ syntax = "proto3";
 
 package com.coralogix.quota.v1;
 
-import "com/coralogixapis/common/v1/audit_log.proto";
-
-import "com/coralogix/quota/v1/get_policy_request.proto";
-import "com/coralogix/quota/v1/get_policy_response.proto";
-import "com/coralogix/quota/v1/create_policy_request.proto";
-import "com/coralogix/quota/v1/create_policy_response.proto";
-import "com/coralogix/quota/v1/update_policy_request.proto";
-import "com/coralogix/quota/v1/update_policy_response.proto";
-import "com/coralogix/quota/v1/get_company_policies_request.proto";
-import "com/coralogix/quota/v1/get_company_policies_response.proto";
-import "com/coralogix/quota/v1/delete_policy_request.proto";
-import "com/coralogix/quota/v1/delete_policy_response.proto";
-import "com/coralogix/quota/v1/reorder_policies_request.proto";
-import "com/coralogix/quota/v1/reorder_policies_response.proto";
-import "com/coralogix/quota/v1/bulk_test_log_policies_request.proto";
-import "com/coralogix/quota/v1/bulk_test_log_policies_response.proto";
-import "com/coralogix/quota/v1/toggle_policy_request.proto";
-import "com/coralogix/quota/v1/toggle_policy_response.proto";
+import "com/coralogix/quota/v1/atomic_overwrite_policies_request.proto";
+import "com/coralogix/quota/v1/atomic_overwrite_policies_response.proto";
 import "com/coralogix/quota/v1/bulk_create_policy_request.proto";
 import "com/coralogix/quota/v1/bulk_create_policy_response.proto";
-import "com/coralogix/quota/v1/atomic_overwrite_policies_response.proto";
-import "com/coralogix/quota/v1/atomic_overwrite_policies_request.proto";
+import "com/coralogix/quota/v1/bulk_test_log_policies_request.proto";
+import "com/coralogix/quota/v1/bulk_test_log_policies_response.proto";
+import "com/coralogix/quota/v1/create_policy_request.proto";
+import "com/coralogix/quota/v1/create_policy_response.proto";
+import "com/coralogix/quota/v1/delete_policy_request.proto";
+import "com/coralogix/quota/v1/delete_policy_response.proto";
+import "com/coralogix/quota/v1/get_company_policies_request.proto";
+import "com/coralogix/quota/v1/get_company_policies_response.proto";
+import "com/coralogix/quota/v1/get_policy_request.proto";
+import "com/coralogix/quota/v1/get_policy_response.proto";
+import "com/coralogix/quota/v1/reorder_policies_request.proto";
+import "com/coralogix/quota/v1/reorder_policies_response.proto";
+import "com/coralogix/quota/v1/toggle_policy_request.proto";
+import "com/coralogix/quota/v1/toggle_policy_response.proto";
+import "com/coralogix/quota/v1/update_policy_request.proto";
+import "com/coralogix/quota/v1/update_policy_response.proto";
+import "com/coralogixapis/common/v1/audit_log.proto";
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
@@ -52,7 +51,8 @@ service PoliciesService {
       summary: "Get Policy by ID"
     };
     option (google.api.http) = {
-      get: "/v1/policies/{id}"
+      get: "/dataplans/policies/v1/{id}"
+      additional_bindings: { get: "/v1/policies/{id}" }
     };
   }
 
@@ -75,8 +75,9 @@ service PoliciesService {
       summary: "Get Policy by ID"
     };
     option (google.api.http) = {
-      post: "/v1/policies"
+      post: "/dataplans/policies/v1"
       body: "*"
+      additional_bindings: { post: "/v1/policies" body: "*" }
     };
   }
 
@@ -99,8 +100,9 @@ service PoliciesService {
       summary: "Update Policy"
     };
     option (google.api.http) = {
-      put: "/v1/policies"
+      put: "/dataplans/policies/v1"
       body: "*"
+      additional_bindings: { put: "/v1/policies" body: "*" }
     };
   }
 
@@ -123,7 +125,8 @@ service PoliciesService {
       summary: "Get Company Policies"
     };
     option (google.api.http) = {
-      get: "/v1/policies"
+      get: "/dataplans/policies/v1"
+      additional_bindings: { get: "/v1/policies" }
     };
   }
 
@@ -146,7 +149,8 @@ service PoliciesService {
       summary: "Delete Policy"
     };
     option (google.api.http) = {
-      delete: "/v1/policies/{id}"
+      delete: "/dataplans/policies/v1/{id}"
+      additional_bindings: { delete: "/v1/policies/{id}" }
     };
   }
 
@@ -169,8 +173,9 @@ service PoliciesService {
       summary: "Reorder Policies"
     };
     option (google.api.http) = {
-      post: "/v1/policies:reorder"
+      post: "/dataplans/policies/v1/reorder"
       body: "*"
+      additional_bindings: { post: "/v1/policies:reorder" body: "*" }
     };
   }
 
@@ -193,8 +198,9 @@ service PoliciesService {
       summary: "Bulk Test Log Policies"
     };
     option (google.api.http) = {
-      post: "/v1/policies:bulkTestLog"
+      post: "/dataplans/policies/v1/bulkTestLog"
       body: "*"
+      additional_bindings: { post: "/v1/policies:bulkTestLog" body: "*" }
     };
   }
 
@@ -217,8 +223,9 @@ service PoliciesService {
       summary: "Toggle Policies"
     };
     option (google.api.http) = {
-      post: "/v1/policies:toggle"
+      post: "/dataplans/policies/v1/toggle"
       body: "*"
+      additional_bindings: { post: "/v1/policies:toggle" body: "*" }
     };
   }
 
@@ -241,8 +248,9 @@ service PoliciesService {
       summary: "Atomic Batch Create Policy"
     };
     option (google.api.http) = {
-      post: "/v1/policies:bulkCreate"
+      post: "/dataplans/policies/v1/bulkCreate"
       body: "*"
+      additional_bindings: { post: "/v1/policies:bulkCreate" body: "*" }
     };
   }
 
@@ -265,8 +273,9 @@ service PoliciesService {
       summary: "Atomic Overwrite Log Policies"
     };
     option (google.api.http) = {
-      post: "/v1/policies:atomicOverwriteLogPolicies"
+      post: "/dataplans/policies/v1/atomicOverwriteLogPolicies"
       body: "*"
+      additional_bindings: { post: "/v1/policies:atomicOverwriteLogPolicies" body: "*" }
     };
   }
 
@@ -289,8 +298,9 @@ service PoliciesService {
       summary: "Atomic Overwrite Span Policies"
     };
     option (google.api.http) = {
-      post: "/v1/policies:atomicOverwriteSpanPolicies"
+      post: "/dataplans/policies/v1/atomicOverwriteSpanPolicies"
       body: "*"
+      additional_bindings: { post: "/v1/policies:atomicOverwriteSpanPolicies" body: "*" }
     };
   }
 }
