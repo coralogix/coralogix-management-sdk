@@ -1578,6 +1578,7 @@ type Annotation_ManualSource_Strategy_Instant struct {
 	state         protoimpl.MessageState  `protogen:"open.v1"`
 	Unit          common1.Unit            `protobuf:"varint,1,opt,name=unit,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.common.Unit" json:"unit,omitempty"`
 	Value         *wrapperspb.DoubleValue `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	CustomUnit    *wrapperspb.StringValue `protobuf:"bytes,3,opt,name=custom_unit,json=customUnit,proto3" json:"custom_unit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1626,11 +1627,19 @@ func (x *Annotation_ManualSource_Strategy_Instant) GetValue() *wrapperspb.Double
 	return nil
 }
 
+func (x *Annotation_ManualSource_Strategy_Instant) GetCustomUnit() *wrapperspb.StringValue {
+	if x != nil {
+		return x.CustomUnit
+	}
+	return nil
+}
+
 type Annotation_ManualSource_Strategy_Range struct {
 	state         protoimpl.MessageState  `protogen:"open.v1"`
 	Unit          common1.Unit            `protobuf:"varint,1,opt,name=unit,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.common.Unit" json:"unit,omitempty"`
 	StartValue    *wrapperspb.DoubleValue `protobuf:"bytes,2,opt,name=start_value,json=startValue,proto3" json:"start_value,omitempty"`
 	EndValue      *wrapperspb.DoubleValue `protobuf:"bytes,3,opt,name=end_value,json=endValue,proto3" json:"end_value,omitempty"`
+	CustomUnit    *wrapperspb.StringValue `protobuf:"bytes,4,opt,name=custom_unit,json=customUnit,proto3" json:"custom_unit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1686,11 +1695,18 @@ func (x *Annotation_ManualSource_Strategy_Range) GetEndValue() *wrapperspb.Doubl
 	return nil
 }
 
+func (x *Annotation_ManualSource_Strategy_Range) GetCustomUnit() *wrapperspb.StringValue {
+	if x != nil {
+		return x.CustomUnit
+	}
+	return nil
+}
+
 var File_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDesc = "" +
 	"\n" +
-	"@com/coralogixapis/dashboards/v1/ast/annotations/annotation.proto\x12/com.coralogixapis.dashboards.v1.ast.annotations\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a;com/coralogixapis/dashboards/v1/common/data_mode_type.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xbc5\n" +
+	"@com/coralogixapis/dashboards/v1/ast/annotations/annotation.proto\x12/com.coralogixapis.dashboards.v1.ast.annotations\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a;com/coralogixapis/dashboards/v1/common/data_mode_type.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xba6\n" +
 	"\n" +
 	"Annotation\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x120\n" +
@@ -1775,22 +1791,26 @@ const file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawD
 	"\bDuration\x12l\n" +
 	"\x15start_timestamp_field\x18\x01 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldR\x13startTimestampField\x12_\n" +
 	"\x0eduration_field\x18\x02 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldR\rdurationFieldB\a\n" +
-	"\x05value\x1a\x99\a\n" +
+	"\x05value\x1a\x97\b\n" +
 	"\fManualSource\x12m\n" +
 	"\bstrategy\x18\x01 \x01(\v2Q.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.StrategyR\bstrategy\x12G\n" +
 	"\x10message_template\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\x0fmessageTemplate\x12s\n" +
-	"\vorientation\x18\x04 \x01(\x0e2Q.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.AnnotationOrientationR\vorientation\x1a\xdb\x04\n" +
+	"\vorientation\x18\x04 \x01(\x0e2Q.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.AnnotationOrientationR\vorientation\x1a\xd9\x05\n" +
 	"\bStrategy\x12u\n" +
 	"\ainstant\x18\x01 \x01(\v2Y.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.InstantH\x00R\ainstant\x12o\n" +
-	"\x05range\x18\x02 \x01(\v2W.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.RangeH\x00R\x05range\x1a\x8b\x01\n" +
+	"\x05range\x18\x02 \x01(\v2W.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.RangeH\x00R\x05range\x1a\xca\x01\n" +
 	"\aInstant\x12L\n" +
 	"\x04unit\x18\x01 \x01(\x0e28.com.coralogixapis.dashboards.v1.ast.widgets.common.UnitR\x04unit\x122\n" +
-	"\x05value\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueR\x05value\x1a\xcf\x01\n" +
+	"\x05value\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueR\x05value\x12=\n" +
+	"\vcustom_unit\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\n" +
+	"customUnit\x1a\x8e\x02\n" +
 	"\x05Range\x12L\n" +
 	"\x04unit\x18\x01 \x01(\x0e28.com.coralogixapis.dashboards.v1.ast.widgets.common.UnitR\x04unit\x12=\n" +
 	"\vstart_value\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueR\n" +
 	"startValue\x129\n" +
-	"\tend_value\x18\x03 \x01(\v2\x1c.google.protobuf.DoubleValueR\bendValueB\a\n" +
+	"\tend_value\x18\x03 \x01(\v2\x1c.google.protobuf.DoubleValueR\bendValue\x12=\n" +
+	"\vcustom_unit\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueR\n" +
+	"customUnitB\a\n" +
 	"\x05value\"o\n" +
 	"\x15AnnotationOrientation\x12/\n" +
 	"+ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\x10\x00\x12%\n" +
@@ -1910,14 +1930,16 @@ var file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_depIdx
 	24, // 60: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.range:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Range
 	32, // 61: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Instant.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
 	33, // 62: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Instant.value:type_name -> google.protobuf.DoubleValue
-	32, // 63: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Range.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
-	33, // 64: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Range.start_value:type_name -> google.protobuf.DoubleValue
-	33, // 65: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Range.end_value:type_name -> google.protobuf.DoubleValue
-	66, // [66:66] is the sub-list for method output_type
-	66, // [66:66] is the sub-list for method input_type
-	66, // [66:66] is the sub-list for extension type_name
-	66, // [66:66] is the sub-list for extension extendee
-	0,  // [0:66] is the sub-list for field type_name
+	25, // 63: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Instant.custom_unit:type_name -> google.protobuf.StringValue
+	32, // 64: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Range.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
+	33, // 65: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Range.start_value:type_name -> google.protobuf.DoubleValue
+	33, // 66: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Range.end_value:type_name -> google.protobuf.DoubleValue
+	25, // 67: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Range.custom_unit:type_name -> google.protobuf.StringValue
+	68, // [68:68] is the sub-list for method output_type
+	68, // [68:68] is the sub-list for method input_type
+	68, // [68:68] is the sub-list for extension type_name
+	68, // [68:68] is the sub-list for extension extendee
+	0,  // [0:68] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_init() }
