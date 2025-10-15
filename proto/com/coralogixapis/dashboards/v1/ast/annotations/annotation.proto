@@ -150,12 +150,14 @@ message Annotation {
       message Instant {
         widgets.common.Unit unit = 1;
         google.protobuf.DoubleValue value = 2;
+        google.protobuf.StringValue custom_unit = 3;
       }
 
       message Range {
         widgets.common.Unit unit = 1;
         google.protobuf.DoubleValue start_value = 2;
         google.protobuf.DoubleValue end_value = 3;
+        google.protobuf.StringValue custom_unit = 4;
       }
     }
   }
