@@ -16,6 +16,7 @@ message Annotation {
   google.protobuf.BoolValue enabled = 3;
 
   Source source = 4;
+  WidgetScope scope = 6;
 
   message Source {
     oneof value {
@@ -159,6 +160,19 @@ message Annotation {
         google.protobuf.DoubleValue end_value = 3;
         google.protobuf.StringValue custom_unit = 4;
       }
+    }
+  }
+
+  message WidgetScope {
+    oneof value {
+      AllWidgets all_widgets = 1;
+      SpecificWidgets specific_widgets = 2;
+    }
+
+    message AllWidgets {}
+
+    message SpecificWidgets {
+      repeated google.protobuf.StringValue widget_ids = 1;
     }
   }
 
