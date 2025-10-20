@@ -1,10 +1,9 @@
 syntax = "proto3";
 
-import "google/protobuf/wrappers.proto";
-
-import "protoc-gen-openapiv3/options/annotations.proto";
-
 package com.coralogix.enrichment.v1;
+
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message EnrichmentType {
   oneof type {
@@ -22,9 +21,9 @@ message GeoIpType {
 message SuspiciousIpType {}
 
 message AwsType {
-  google.protobuf.StringValue resource_type = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"ec2\"" }];
+  google.protobuf.StringValue resource_type = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"ec2\""}];
 }
 
 message CustomEnrichmentType {
-  google.protobuf.UInt32Value id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "1" }];
+  google.protobuf.UInt32Value id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "1"}];
 }
