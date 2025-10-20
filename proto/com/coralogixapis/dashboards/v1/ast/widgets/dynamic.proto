@@ -150,6 +150,7 @@ message Dynamic {
       PieChart pie_chart = 7;
       HorizontalBars horizontal_bars = 8;
       VerticalBars vertical_bars = 9;
+      Heatmap heatmap = 10;
     }
 
     message Table {
@@ -745,6 +746,60 @@ message Dynamic {
         description: "Custom template name for a group, can contain variables"
         example: '{ "value": "Slice - {{ variable }}" }'
       }];
+    }
+
+    message Heatmap {
+      v1.common.ObservationField value_field = 1;
+
+      repeated v1.common.ObservationField x_axis_fields = 2;
+
+      repeated v1.common.ObservationField y_axis_fields = 3;
+
+      google.protobuf.BoolValue show_numbers = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Whether to render numeric values inside the heatmap tiles"}];
+
+      common.ScaleType scale_type = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Scale type - linear/logarithmic"}];
+
+      oneof color_config {
+        HeatmapColorPreset preset = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Color configuration for the heatmap"}];
+      }
+
+      google.protobuf.BoolValue allow_abbreviation = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to render numeric value without abbreviation"
+        example: "false"
+      }];
+
+      common.Unit unit = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Unit of the query results - one from a predefined list, or custom"
+        example: "3"
+      }];
+
+      google.protobuf.StringValue custom_unit = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Custom unit (requires to have unit field as 'custom' to take effect)"
+        example: '{ "value": "rpm" }'
+      }];
+
+      google.protobuf.Int32Value decimal_precision = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the decimal precision of the numeric values, within range 0-15"
+        example: "4"
+      }];
+
+      google.protobuf.FloatValue color_axis_min = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Optional number indicating the lowest value for gradient color axis. Automatically calculated from data if not provided."
+        example: "-1000"
+      }];
+
+      google.protobuf.FloatValue color_axis_max = 12 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Optional number indicating the max value for gradient color axis. Automatically calculated from data if not provided."
+        example: "1000"
+      }];
+    }
+
+    enum HeatmapColorPreset {
+      HEATMAP_COLOR_PRESET_UNSPECIFIED = 0;
+      HEATMAP_COLOR_PRESET_BLUE = 1;
+      HEATMAP_COLOR_PRESET_GREEN = 2;
+      HEATMAP_COLOR_PRESET_RED = 3;
+      HEATMAP_COLOR_PRESET_THRESHOLD = 4;
     }
 
     message TimeSeriesTooltip {
