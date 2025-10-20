@@ -17,9 +17,11 @@ package examples
 import (
 	"context"
 	"os"
+	"strings"
 	"testing"
 
 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
+	"github.com/google/uuid"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 
 	"github.com/stretchr/testify/assert"
@@ -60,9 +62,9 @@ func TestDataSets(t *testing.T) {
 	raw, e := os.ReadFile("date-to-day-of-the-week.csv")
 	assertNilAndPrintError(t, e)
 	textual := string(raw)
-
+	name := uuid.NewString()
 	data, e := c.Create(context.Background(), &cxsdk.CreateDataSetRequest{
-		Name:        wrapperspb.String("my-enrichment"),
+		Name:        wrapperspb.String(strings.ReplaceAll(name, "-", "")),
 		Description: wrapperspb.String("My custom enrichment description"),
 		File: &cxsdk.File{
 			Name:      wrapperspb.String("date-to-day-of-the-week"),

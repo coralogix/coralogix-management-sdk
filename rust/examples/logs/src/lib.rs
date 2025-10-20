@@ -28,6 +28,7 @@ mod tests {
         },
     };
     use tokio::fs;
+    use uuid::Uuid;
 
     #[tokio::test]
     async fn test_logs_archive() {
@@ -59,9 +60,11 @@ mod tests {
             CoralogixRegion::from_env().unwrap(),
         )
         .unwrap();
+        let name = Uuid::new_v4().to_string().replace("-", "");
+
         let dataset = client
             .create(
-                "my-enrichment".into(),
+                name.clone(),
                 Some("My custom enrichment description".to_string()),
                 fs::read_to_string("date-to-day-of-the-week.csv")
                     .await
@@ -76,7 +79,7 @@ mod tests {
         let updated = client
             .replace(
                 dataset_id,
-                "my-enrichment".into(),
+                name.into(),
                 Some("My updated enrichment description".to_string()),
                 fs::read_to_string("date-to-day-of-the-week.csv")
                     .await
