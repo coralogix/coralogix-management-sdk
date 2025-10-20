@@ -78,6 +78,7 @@ func TestDataSets(t *testing.T) {
 
 	updated, e := c.Update(context.Background(), &cxsdk.UpdateDataSetRequest{
 		CustomEnrichmentId: wrapperspb.UInt32(data.CustomEnrichment.Id),
+		Name:               wrapperspb.String(strings.ReplaceAll(name, "-", "")),
 		Description:        wrapperspb.String("My updated enrichment description"),
 		File: &cxsdk.File{
 			Name:      wrapperspb.String("date-to-day-of-the-week"),
