@@ -158,7 +158,7 @@ var File_com_coralogix_enrichment_v1_enrichment_request_model_proto protoreflect
 
 const file_com_coralogix_enrichment_v1_enrichment_request_model_proto_rawDesc = "" +
 	"\n" +
-	":com/coralogix/enrichment/v1/enrichment_request_model.proto\x12\x1bcom.coralogix.enrichment.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a1com/coralogix/enrichment/v1/enrichment_type.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xad\x04\n" +
+	":com/coralogix/enrichment/v1/enrichment_request_model.proto\x12\x1bcom.coralogix.enrichment.v1\x1a1com/coralogix/enrichment/v1/enrichment_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xad\x04\n" +
 	"\x16EnrichmentRequestModel\x12M\n" +
 	"\n" +
 	"field_name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x10\x9aA\rJ\v\"sourceIPs\"R\tfieldName\x12T\n" +

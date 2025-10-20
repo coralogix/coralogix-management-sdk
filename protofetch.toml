@@ -291,7 +291,7 @@ allow_policies = [
 
 [cx-api-enrichment]
 url = 'github.com/coralogix/cx-api-enrichment'
-revision = "v0.6.9"
+revision = "v0.6.10"
 content_roots = ['src']
 allow_policies = [
     "com/coralogix/enrichment/v1/company_enrichment_settings.proto",

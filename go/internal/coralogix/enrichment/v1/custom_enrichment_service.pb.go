@@ -802,7 +802,7 @@ var File_com_coralogix_enrichment_v1_custom_enrichment_service_proto protoreflec
 
 const file_com_coralogix_enrichment_v1_custom_enrichment_service_proto_rawDesc = "" +
 	"\n" +
-	";com/coralogix/enrichment/v1/custom_enrichment_service.proto\x12\x1bcom.coralogix.enrichment.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a3com/coralogix/enrichment/v1/custom_enrichment.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\xaf\x04\n" +
+	";com/coralogix/enrichment/v1/custom_enrichment_service.proto\x12\x1bcom.coralogix.enrichment.v1\x1a3com/coralogix/enrichment/v1/custom_enrichment.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xaf\x04\n" +
 	"\x04File\x12B\n" +
 	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x10\x9aA\rJ\v\"file_name\"R\x04name\x12F\n" +
 	"\textension\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\n" +
@@ -868,20 +868,20 @@ const file_com_coralogix_enrichment_v1_custom_enrichment_service_proto_rawDesc =
 	"~*%Search Custom Enrichment Data Request2DThis request data structure is used to search custom enrichment data\xd2\x01\x0esearch_clauses*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\x8f\x01\n" +
 	"\"SearchCustomEnrichmentDataResponse\x12i\n" +
-	"\x17custom_enrichments_data\x18\x01 \x03(\v21.com.coralogix.enrichment.v1.CustomEnrichmentDataR\x15customEnrichmentsData2\x84\f\n" +
-	"\x17CustomEnrichmentService\x12\xe2\x01\n" +
-	"\x13GetCustomEnrichment\x127.com.coralogix.enrichment.v1.GetCustomEnrichmentRequest\x1a8.com.coralogix.enrichment.v1.GetCustomEnrichmentResponse\"X\x9aA3\n" +
-	"\x1aCustom Enrichments Service\x12\x15Get Custom Enrichment\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v1/custom_enrichment/{id}\x12\xe1\x01\n" +
-	"\x14GetCustomEnrichments\x128.com.coralogix.enrichment.v1.GetCustomEnrichmentsRequest\x1a9.com.coralogix.enrichment.v1.GetCustomEnrichmentsResponse\"T\x9aA4\n" +
-	"\x1aCustom Enrichments Service\x12\x16Get Custom Enrichments\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/custom_enrichment\x12\xed\x01\n" +
-	"\x16CreateCustomEnrichment\x12:.com.coralogix.enrichment.v1.CreateCustomEnrichmentRequest\x1a;.com.coralogix.enrichment.v1.CreateCustomEnrichmentResponse\"Z\x9aA7\n" +
-	"\x1aCustom Enrichments Service\x12\x19Create Custom Enrichments\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v1/custom_enrichment\x12\xec\x01\n" +
-	"\x16UpdateCustomEnrichment\x12:.com.coralogix.enrichment.v1.UpdateCustomEnrichmentRequest\x1a;.com.coralogix.enrichment.v1.UpdateCustomEnrichmentResponse\"Y\x9aA6\n" +
-	"\x1aCustom Enrichments Service\x12\x18Update Custom Enrichment\x82\xd3\xe4\x93\x02\x1a:\x01*\x1a\x15/v1/custom_enrichment\x12\x81\x02\n" +
-	"\x16DeleteCustomEnrichment\x12:.com.coralogix.enrichment.v1.DeleteCustomEnrichmentRequest\x1a;.com.coralogix.enrichment.v1.DeleteCustomEnrichmentResponse\"n\x9aA7\n" +
-	"\x1aCustom Enrichments Service\x12\x19Delete Custom Enrichments\x82\xd3\xe4\x93\x02.*,/v1/custom_enrichment/{custom_enrichment_id}\x12\x81\x02\n" +
-	"\x1aSearchCustomEnrichmentData\x12>.com.coralogix.enrichment.v1.SearchCustomEnrichmentDataRequest\x1a?.com.coralogix.enrichment.v1.SearchCustomEnrichmentDataResponse\"b\x9aA;\n" +
-	"\x1aCustom Enrichments Service\x12\x1dSearch Custom Enrichment Data\x82\xd3\xe4\x93\x02\x1e\"\x1c/v1/custom_enrichment/search\x1a9\x9aA6\n" +
+	"\x17custom_enrichments_data\x18\x01 \x03(\v21.com.coralogix.enrichment.v1.CustomEnrichmentDataR\x15customEnrichmentsData2\x9e\x0e\n" +
+	"\x17CustomEnrichmentService\x12\x98\x02\n" +
+	"\x13GetCustomEnrichment\x127.com.coralogix.enrichment.v1.GetCustomEnrichmentRequest\x1a8.com.coralogix.enrichment.v1.GetCustomEnrichmentResponse\"\x8d\x01\x9aA3\n" +
+	"\x1aCustom Enrichments Service\x12\x15Get Custom Enrichment\x82\xd3\xe4\x93\x02QZ\x1c\x12\x1a/v1/custom_enrichment/{id}\x121/enrichment-rules/custom-enrichment-rules/v1/{id}\x12\x92\x02\n" +
+	"\x14GetCustomEnrichments\x128.com.coralogix.enrichment.v1.GetCustomEnrichmentsRequest\x1a9.com.coralogix.enrichment.v1.GetCustomEnrichmentsResponse\"\x84\x01\x9aA4\n" +
+	"\x1aCustom Enrichments Service\x12\x16Get Custom Enrichments\x82\xd3\xe4\x93\x02GZ\x17\x12\x15/v1/custom_enrichment\x12,/enrichment-rules/custom-enrichment-rules/v1\x12\xef\x01\n" +
+	"\x16CreateCustomEnrichment\x12:.com.coralogix.enrichment.v1.CreateCustomEnrichmentRequest\x1a;.com.coralogix.enrichment.v1.CreateCustomEnrichmentResponse\"\\\x9aA7\n" +
+	"\x1aCustom Enrichments Service\x12\x19Create Custom Enrichments\x82\xd3\xe4\x93\x02\x1c:\x01*Z\x17\"\x15/v1/custom_enrichment\x12\x9d\x02\n" +
+	"\x16UpdateCustomEnrichment\x12:.com.coralogix.enrichment.v1.UpdateCustomEnrichmentRequest\x1a;.com.coralogix.enrichment.v1.UpdateCustomEnrichmentResponse\"\x89\x01\x9aA6\n" +
+	"\x1aCustom Enrichments Service\x12\x18Update Custom Enrichment\x82\xd3\xe4\x93\x02J:\x01*Z\x17\x1a\x15/v1/custom_enrichment\x1a,/enrichment-rules/custom-enrichment-rules/v1\x12\xc9\x02\n" +
+	"\x16DeleteCustomEnrichment\x12:.com.coralogix.enrichment.v1.DeleteCustomEnrichmentRequest\x1a;.com.coralogix.enrichment.v1.DeleteCustomEnrichmentResponse\"\xb5\x01\x9aA7\n" +
+	"\x1aCustom Enrichments Service\x12\x19Delete Custom Enrichments\x82\xd3\xe4\x93\x02uZ.*,/v1/custom_enrichment/{custom_enrichment_id}*C/enrichment-rules/custom-enrichment-rules/v1/{custom_enrichment_id}\x12\xb9\x02\n" +
+	"\x1aSearchCustomEnrichmentData\x12>.com.coralogix.enrichment.v1.SearchCustomEnrichmentDataRequest\x1a?.com.coralogix.enrichment.v1.SearchCustomEnrichmentDataResponse\"\x99\x01\x9aA;\n" +
+	"\x1aCustom Enrichments Service\x12\x1dSearch Custom Enrichment Data\x82\xd3\xe4\x93\x02UZ\x1e\"\x1c/v1/custom_enrichment/search\"3/enrichment-rules/custom-enrichment-rules/v1/search\x1a9\x9aA6\n" +
 	"\x1aCustom Enrichments Service\x12\x18Manage your enrichments.b\x06proto3"
 
 var (
