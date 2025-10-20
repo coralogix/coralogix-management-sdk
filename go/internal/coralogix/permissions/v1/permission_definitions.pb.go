@@ -493,6 +493,8 @@ const (
 	Permission_PERMISSION_CASE_COMMENT                              Permission = 290
 	Permission_PERMISSION_CASE_READ                                 Permission = 291
 	Permission_PERMISSION_CASE_UPDATE                               Permission = 292
+	Permission_PERMISSION_SYSTEM_DATASETS_READ_ACCESS_POLICY        Permission = 293
+	Permission_PERMISSION_SYSTEM_DATASETS_UPDATE_ACCESS_POLICY      Permission = 294
 )
 
 // Enum value maps for Permission.
@@ -786,6 +788,8 @@ var (
 		290: "PERMISSION_CASE_COMMENT",
 		291: "PERMISSION_CASE_READ",
 		292: "PERMISSION_CASE_UPDATE",
+		293: "PERMISSION_SYSTEM_DATASETS_READ_ACCESS_POLICY",
+		294: "PERMISSION_SYSTEM_DATASETS_UPDATE_ACCESS_POLICY",
 	}
 	Permission_value = map[string]int32{
 		"PERMISSION_UNSPECIFIED":                                      0,
@@ -1076,6 +1080,8 @@ var (
 		"PERMISSION_CASE_COMMENT":                                     290,
 		"PERMISSION_CASE_READ":                                        291,
 		"PERMISSION_CASE_UPDATE":                                      292,
+		"PERMISSION_SYSTEM_DATASETS_READ_ACCESS_POLICY":               293,
+		"PERMISSION_SYSTEM_DATASETS_UPDATE_ACCESS_POLICY":             294,
 	}
 )
 
@@ -1286,7 +1292,7 @@ const file_com_coralogix_permissions_models_v1_permission_definitions_proto_rawD
 	"\x1bPERMISSION_GROUP_DATAENGINE\x10(\x1a+\x92\x82\x19\n" +
 	"dataengine҂\x19\n" +
 	"Dataengine\xe2\x82\x19\vData Engine\x123\n" +
-	"\x15PERMISSION_GROUP_CASE\x10)\x1a\x18\x92\x82\x19\x04case҂\x19\x04Case\xe2\x82\x19\x04Case*\xd2\xf0\x03\n" +
+	"\x15PERMISSION_GROUP_CASE\x10)\x1a\x18\x92\x82\x19\x04case҂\x19\x04Case\xe2\x82\x19\x04Case*\xfc\xf3\x03\n" +
 	"\n" +
 	"Permission\x12\x1a\n" +
 	"\x16PERMISSION_UNSPECIFIED\x10\x00\x12\xaa\x01\n" +
@@ -1630,7 +1636,9 @@ const file_com_coralogix_permissions_models_v1_permission_definitions_proto_rawD
 	"case:Close\xc0\x82\x19\x17Ȃ\x19\x99\x01҂\x19\x1bAllow user to close a case.\u0602\x19)\xea\x82\x19\x00\xf2\x82\x19\x1bAllow user to close a case.\xf8\x82\x19\x01\x88\x83\x19\x01\x12\x8f\x01\n" +
 	"\x17PERMISSION_CASE_COMMENT\x10\xa2\x02\x1aq\xba\x82\x19\fcase:Comment\xc0\x82\x19;Ȃ\x19\x99\x01҂\x19 Allow user to comment on a case.\u0602\x19)\xea\x82\x19\x00\xf2\x82\x19 Allow user to comment on a case.\xf8\x82\x19\x01\x88\x83\x19\x01\x12\xbc\x01\n" +
 	"\x14PERMISSION_CASE_READ\x10\xa3\x02\x1a\xa0\x01\xba\x82\x19\tcase:Read\xc0\x82\x19\vȂ\x19\x99\x01҂\x199Allow user to see the list of cases and individual cases.\u0602\x19)\xea\x82\x19\x00\xf2\x82\x199Allow user to see the list of cases and individual cases.\xf8\x82\x19\x01\x88\x83\x19\x01\x12\x81\x01\n" +
-	"\x16PERMISSION_CASE_UPDATE\x10\xa4\x02\x1ad\xba\x82\x19\vcase:Update\xc0\x82\x19\x0fȂ\x19\x99\x01҂\x19\x1aAllow user to update case.\u0602\x19)\xea\x82\x19\x00\xf2\x82\x19\x1aAllow user to update case.\xf8\x82\x19\x01\x88\x83\x19\x01\"\x04\b%\x10%\"\x04\b&\x10&\"\x04\b'\x10'\"\x04\b*\x10*\"\x06\b\xa9\x01\x10\xa9\x01:F\n" +
+	"\x16PERMISSION_CASE_UPDATE\x10\xa4\x02\x1ad\xba\x82\x19\vcase:Update\xc0\x82\x19\x0fȂ\x19\x99\x01҂\x19\x1aAllow user to update case.\u0602\x19)\xea\x82\x19\x00\xf2\x82\x19\x1aAllow user to update case.\xf8\x82\x19\x01\x88\x83\x19\x01\x12\xce\x01\n" +
+	"-PERMISSION_SYSTEM_DATASETS_READ_ACCESS_POLICY\x10\xa5\x02\x1a\x99\x01\xba\x82\x19 system-datasets:ReadAccessPolicy\xc0\x82\x196Ȃ\x19\x91\x01҂\x19*Read access policy for a specific dataset.\u0602\x19(\xea\x82\x19\x00\xf2\x82\x19*Read access policy for a specific dataset.\xf8\x82\x19\x01\x88\x83\x19\x01\x12\xd6\x01\n" +
+	"/PERMISSION_SYSTEM_DATASETS_UPDATE_ACCESS_POLICY\x10\xa6\x02\x1a\x9f\x01\xba\x82\x19\"system-datasets:UpdateAccessPolicy\xc0\x82\x197Ȃ\x19\x91\x01҂\x19,Update access policy for a specific dataset.\u0602\x19(\xea\x82\x19\x00\xf2\x82\x19,Update access policy for a specific dataset.\xf8\x82\x19\x01\x88\x83\x19\x01\"\x04\b%\x10%\"\x04\b&\x10&\"\x04\b'\x10'\"\x04\b*\x10*\"\x06\b\xa9\x01\x10\xa9\x01:F\n" +
 	"\n" +
 	"expression\x12!.google.protobuf.EnumValueOptions\x18\xa7\x90\x03 \x01(\tR\n" +
 	"expression\x88\x01\x01:d\n" +

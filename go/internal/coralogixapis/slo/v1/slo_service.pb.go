@@ -554,7 +554,7 @@ func (x *GetSloResponse) GetSlo() *Slo {
 
 type ListSlosRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Filters       *SloFilters            `protobuf:"bytes,1,opt,name=filters,proto3" json:"filters,omitempty"`
+	Filters       []*SloFilter           `protobuf:"bytes,1,rep,name=filters,proto3" json:"filters,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -589,7 +589,7 @@ func (*ListSlosRequest) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *ListSlosRequest) GetFilters() *SloFilters {
+func (x *ListSlosRequest) GetFilters() []*SloFilter {
 	if x != nil {
 		return x.Filters
 	}
@@ -1112,7 +1112,7 @@ var File_com_coralogixapis_slo_v1_slo_service_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_slo_v1_slo_service_proto_rawDesc = "" +
 	"\n" +
-	"*com/coralogixapis/slo/v1/slo_service.proto\x12\x18com.coralogixapis.slo.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"com/coralogixapis/slo/v1/slo.proto\x1a\x15google/rpc/code.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a(com/coralogixapis/slo/v1/slo_alert.proto\"\xdb\x02\n" +
+	"*com/coralogixapis/slo/v1/slo_service.proto\x12\x18com.coralogixapis.slo.v1\x1a\"com/coralogixapis/slo/v1/slo.proto\x1a(com/coralogixapis/slo/v1/slo_alert.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x15google/rpc/code.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xdb\x02\n" +
 	"\x0eResponseStatus\x121\n" +
 	"\vstatus_code\x18\x01 \x01(\x0e2\x10.google.rpc.CodeR\n" +
 	"statusCode\x12\x1d\n" +
@@ -1158,9 +1158,9 @@ const file_com_coralogixapis_slo_v1_slo_service_proto_rawDesc = "" +
 	"C*\rGetSloRequest2-Request to retrieve a specific SLO by its ID.\xd2\x01\x02id\"\x92\x01\n" +
 	"\x0eGetSloResponse\x12/\n" +
 	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo:O\x9aAL\n" +
-	"J*\x0eGetSloResponse22Response containing the details of a specific SLO.\xd2\x01\x03slo\"\x96\x01\n" +
-	"\x0fListSlosRequest\x12>\n" +
-	"\afilters\x18\x01 \x01(\v2$.com.coralogixapis.slo.v1.SloFiltersR\afilters:C\x9aA@\n" +
+	"J*\x0eGetSloResponse22Response containing the details of a specific SLO.\xd2\x01\x03slo\"\x95\x01\n" +
+	"\x0fListSlosRequest\x12=\n" +
+	"\afilters\x18\x01 \x03(\v2#.com.coralogixapis.slo.v1.SloFilterR\afilters:C\x9aA@\n" +
 	">*\x0fListSlosRequest2+Request to list SLOs with optional filters.\"\x8a\x01\n" +
 	"\x10ListSlosResponse\x121\n" +
 	"\x04slos\x18\x01 \x03(\v2\x1d.com.coralogixapis.slo.v1.SloR\x04slos:C\x9aA@\n" +
@@ -1198,9 +1198,9 @@ const file_com_coralogixapis_slo_v1_slo_service_proto_rawDesc = "" +
 	"\n" +
 	"zero_state\x18\x01 \x01(\bR\tzeroState:C\x9aA@\n" +
 	">*\x14GetZeroStateResponse2\x19Response with Zero State.\xd2\x01\n" +
-	"zero_state2\xfe\x12\n" +
-	"\vSlosService\x12\xf2\x01\n" +
-	"\tCreateSlo\x12*.com.coralogixapis.slo.v1.CreateSloRequest\x1a+.com.coralogixapis.slo.v1.CreateSloResponse\"\x8b\x01\x9aAo\n" +
+	"zero_state2\xae\x14\n" +
+	"\vSlosService\x12\x81\x02\n" +
+	"\tCreateSlo\x12*.com.coralogixapis.slo.v1.CreateSloRequest\x1a+.com.coralogixapis.slo.v1.CreateSloResponse\"\x9a\x01\x9aAo\n" +
 	"\fSlos Service\x12\n" +
 	"Create SloJ\x14\n" +
 	"\x03400\x12\r\n" +
@@ -1208,25 +1208,25 @@ const file_com_coralogixapis_slo_v1_slo_service_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x13:\x03slo\"\f/v1/slo/slos\x12\xf6\x01\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\":\x03sloZ\x0e\"\f/v1/slo/slos\"\v/slo/slo/v1\x12\x85\x02\n" +
 	"\n" +
-	"ReplaceSlo\x12+.com.coralogixapis.slo.v1.ReplaceSloRequest\x1a,.com.coralogixapis.slo.v1.ReplaceSloResponse\"\x8c\x01\x9aAp\n" +
+	"ReplaceSlo\x12+.com.coralogixapis.slo.v1.ReplaceSloRequest\x1a,.com.coralogixapis.slo.v1.ReplaceSloResponse\"\x9b\x01\x9aAp\n" +
 	"\fSlos Service\x12\vReplace SloJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x13:\x03slo\x1a\f/v1/slo/slos\x12\xc4\x02\n" +
-	"\x18ValidateReplaceSloAlerts\x12<.com.coralogixapis.slo.v1.ReplaceSloAlertsValidationsRequest\x1a=.com.coralogixapis.slo.v1.ReplaceSloAlertsValidationsResponse\"\xaa\x01\x9aA\x84\x01\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\":\x03sloZ\x0e\x1a\f/v1/slo/slos\x1a\v/slo/slo/v1\x12\xdc\x02\n" +
+	"\x18ValidateReplaceSloAlerts\x12<.com.coralogixapis.slo.v1.ReplaceSloAlertsValidationsRequest\x1a=.com.coralogixapis.slo.v1.ReplaceSloAlertsValidationsResponse\"\xc2\x01\x9aA\x84\x01\n" +
 	"\fSlos Service\x12\x1fReplace Slo Pre-Validate AlertsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1c:\x03slo\"\x15/v1/slo/slos/validate\x12\xf2\x01\n" +
-	"\tDeleteSlo\x12*.com.coralogixapis.slo.v1.DeleteSloRequest\x1a+.com.coralogixapis.slo.v1.DeleteSloResponse\"\x8b\x01\x9aAo\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x024:\x03sloZ\x17\"\x15/v1/slo/slos/validate\"\x14/slo/slo/v1/validate\x12\x86\x02\n" +
+	"\tDeleteSlo\x12*.com.coralogixapis.slo.v1.DeleteSloRequest\x1a+.com.coralogixapis.slo.v1.DeleteSloResponse\"\x9f\x01\x9aAo\n" +
 	"\fSlos Service\x12\n" +
 	"Delete SloJ\x14\n" +
 	"\x03400\x12\r\n" +
@@ -1234,47 +1234,47 @@ const file_com_coralogixapis_slo_v1_slo_service_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x13*\x11/v1/slo/slos/{id}\x12\xe6\x01\n" +
-	"\x06GetSlo\x12'.com.coralogixapis.slo.v1.GetSloRequest\x1a(.com.coralogixapis.slo.v1.GetSloResponse\"\x88\x01\x9aAl\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02'Z\x13*\x11/v1/slo/slos/{id}*\x10/slo/slo/v1/{id}\x12\xfa\x01\n" +
+	"\x06GetSlo\x12'.com.coralogixapis.slo.v1.GetSloRequest\x1a(.com.coralogixapis.slo.v1.GetSloResponse\"\x9c\x01\x9aAl\n" +
 	"\fSlos Service\x12\aGet SloJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x13\x12\x11/v1/slo/slos/{id}\x12\xe9\x01\n" +
-	"\bListSlos\x12).com.coralogixapis.slo.v1.ListSlosRequest\x1a*.com.coralogixapis.slo.v1.ListSlosResponse\"\x85\x01\x9aAn\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02'Z\x13\x12\x11/v1/slo/slos/{id}\x12\x10/slo/slo/v1/{id}\x12\xf8\x01\n" +
+	"\bListSlos\x12).com.coralogixapis.slo.v1.ListSlosRequest\x1a*.com.coralogixapis.slo.v1.ListSlosResponse\"\x94\x01\x9aAn\n" +
 	"\fSlos Service\x12\tList SlosJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x0e\x12\f/v1/slo/slos\x12\x88\x02\n" +
-	"\fGetZeroState\x12-.com.coralogixapis.slo.v1.GetZeroStateRequest\x1a..com.coralogixapis.slo.v1.GetZeroStateResponse\"\x98\x01\x9aAw\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1dZ\x0e\x12\f/v1/slo/slos\x12\v/slo/slo/v1\x12\xa1\x02\n" +
+	"\fGetZeroState\x12-.com.coralogixapis.slo.v1.GetZeroStateRequest\x1a..com.coralogixapis.slo.v1.GetZeroStateResponse\"\xb1\x01\x9aAw\n" +
 	"\fSlos Service\x12\x12Get Slo Zero StateJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/slo/slos/zeroState\x12\x82\x02\n" +
-	"\fBatchGetSlos\x12-.com.coralogixapis.slo.v1.BatchGetSlosRequest\x1a..com.coralogixapis.slo.v1.BatchGetSlosResponse\"\x92\x01\x9aAr\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x021Z\x18\x12\x16/v1/slo/slos/zeroState\x12\x15/slo/slo/v1/zeroState\x12\x97\x02\n" +
+	"\fBatchGetSlos\x12-.com.coralogixapis.slo.v1.BatchGetSlosRequest\x1a..com.coralogixapis.slo.v1.BatchGetSlosResponse\"\xa7\x01\x9aAr\n" +
 	"\fSlos Service\x12\rBatch Get SloJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/slo/slos:batchGet\x12\x93\x02\n" +
-	"\x0fBatchExecuteSlo\x120.com.coralogixapis.slo.v1.BatchExecuteSloRequest\x1a1.com.coralogixapis.slo.v1.BatchExecuteSloResponse\"\x9a\x01\x9aAv\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02,Z\x17\x12\x15/v1/slo/slos:batchGet\x12\x11/slo/slo/v1/batch\x12\xa8\x02\n" +
+	"\x0fBatchExecuteSlo\x120.com.coralogixapis.slo.v1.BatchExecuteSloRequest\x1a1.com.coralogixapis.slo.v1.BatchExecuteSloResponse\"\xaf\x01\x9aAv\n" +
 	"\fSlos Service\x12\x11Batch Execute SloJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1b\"\x19/v1/slo/slos:batchExecute\x1aJ\x9aAG\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x020Z\x1b\"\x19/v1/slo/slos:batchExecute\"\x11/slo/slo/v1/batch\x1aJ\x9aAG\n" +
 	"\fSlos Service\x127A service for managing Service Level Objectives (SLOs).b\x06proto3"
 
 var (
@@ -1316,7 +1316,7 @@ var file_com_coralogixapis_slo_v1_slo_service_proto_goTypes = []any{
 	(code.Code)(0),                              // 22: google.rpc.Code
 	(*Slo)(nil),                                 // 23: com.coralogixapis.slo.v1.Slo
 	(*SloAlertValidityResult)(nil),              // 24: com.coralogixapis.slo.v1.SloAlertValidityResult
-	(*SloFilters)(nil),                          // 25: com.coralogixapis.slo.v1.SloFilters
+	(*SloFilter)(nil),                           // 25: com.coralogixapis.slo.v1.SloFilter
 }
 var file_com_coralogixapis_slo_v1_slo_service_proto_depIdxs = []int32{
 	22, // 0: com.coralogixapis.slo.v1.ResponseStatus.status_code:type_name -> google.rpc.Code
@@ -1328,7 +1328,7 @@ var file_com_coralogixapis_slo_v1_slo_service_proto_depIdxs = []int32{
 	23, // 6: com.coralogixapis.slo.v1.ReplaceSloRequest.slo:type_name -> com.coralogixapis.slo.v1.Slo
 	23, // 7: com.coralogixapis.slo.v1.ReplaceSloResponse.slo:type_name -> com.coralogixapis.slo.v1.Slo
 	23, // 8: com.coralogixapis.slo.v1.GetSloResponse.slo:type_name -> com.coralogixapis.slo.v1.Slo
-	25, // 9: com.coralogixapis.slo.v1.ListSlosRequest.filters:type_name -> com.coralogixapis.slo.v1.SloFilters
+	25, // 9: com.coralogixapis.slo.v1.ListSlosRequest.filters:type_name -> com.coralogixapis.slo.v1.SloFilter
 	23, // 10: com.coralogixapis.slo.v1.ListSlosResponse.slos:type_name -> com.coralogixapis.slo.v1.Slo
 	23, // 11: com.coralogixapis.slo.v1.BatchGetSlosResponse.slos:type_name -> com.coralogixapis.slo.v1.Slo
 	3,  // 12: com.coralogixapis.slo.v1.SloExecutionRequest.create_slo_request:type_name -> com.coralogixapis.slo.v1.CreateSloRequest

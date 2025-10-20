@@ -197,7 +197,7 @@ message PresetInfo {
     }
   };
   string name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"my_preset\""}];
-  repeated string permissions = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "[\"read_logs\"]"}];
+  repeated string permissions = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"read_logs\""}];
 }
 
 message UpdateApiKeyRequest {
@@ -302,8 +302,8 @@ message CreateApiKeyRequest {
         description: "Find out more about api keys"
       }
     };
-    repeated string presets = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "[\"my_preset\"]"}];
-    repeated string permissions = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "[\"read_logs\"]"}];
+    repeated string presets = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"my_preset\""}];
+    repeated string permissions = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"read_logs\""}];
   }
 
   string name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"my_api_key\""}];

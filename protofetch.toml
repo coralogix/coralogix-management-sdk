@@ -15,7 +15,7 @@ allow_policies = [
 
 [cx-api-alerts]
 url = 'github.com/coralogix/cx-api-alerts'
-revision = "v0.5.34"
+revision = "v0.5.35"
 allow_policies = [
     "src/com/coralogixapis/alerts/v3/alert_def.proto",
     "src/com/coralogixapis/alerts/v3/alert_def_notification_group.proto",
@@ -199,7 +199,7 @@ allow_policies = [
 
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
-revision = "v2.7.36"
+revision = "v2.7.38"
 allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/annotation.proto",
     "src/com/coralogixapis/dashboards/v1/ast/dashboard.proto",
@@ -281,7 +281,7 @@ revision = "v0.3.5"
 
 [cx-api-data-usage]
 url = 'github.com/coralogix/cx-api-data-usage'
-revision = "v0.3.22"
+revision = "v0.3.24"
 allow_policies = [
     "src/com/coralogix/datausage/v1/common.proto",
     "src/com/coralogix/datausage/v2/data_usage.proto",
@@ -333,7 +333,7 @@ allow_policies = [
 
 [cx-api-slo]
 url = 'github.com/coralogix/cx-api-slo'
-revision = "v0.0.36"
+revision = "v0.0.40"
 allow_policies = [
     "src/com/coralogixapis/slo/v1/slo_alert.proto",
     "src/com/coralogixapis/slo/v1/slo.proto",
@@ -358,7 +358,7 @@ allow_policies = [
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
-revision = "v0.1.134"
+revision = "v0.1.137"
 allow_policies = [
     "src/com/coralogix/permissions/models/v1/permission_definitions.proto",
     "src/com/coralogix/permissions/v1/actions_resources.proto",
@@ -374,7 +374,7 @@ allow_policies = [
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = "v0.0.147"
+revision = "v0.0.148"
 allow_policies = [
     "src/com/coralogix/archive/format/csv/v1/csv.proto",
     "src/com/coralogix/archive/format/generic/v1/generic.proto",
@@ -403,7 +403,7 @@ allow_policies = ["src/com/coralogixapis/metrics_rule_manager/v1/groups.proto"]
 
 [cx-api-notification-center]
 url = 'github.com/coralogix/cx-api-notification-center'
-revision = "v1.3.2"
+revision = "v1.4.0"
 allow_policies = [
     "src/com/coralogixapis/notification_center/common/common.proto",
     "src/com/coralogixapis/notification_center/common/config_overrides.proto",
