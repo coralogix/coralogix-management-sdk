@@ -1,12 +1,11 @@
 syntax = "proto3";
-import "google/protobuf/wrappers.proto";
-import "com/coralogix/enrichment/v1/custom_enrichment.proto";
-
-import "protoc-gen-openapiv3/options/annotations.proto";
-import "google/api/annotations.proto";
-
 
 package com.coralogix.enrichment.v1;
+
+import "com/coralogix/enrichment/v1/custom_enrichment.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message File {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
@@ -21,12 +20,12 @@ message File {
     }
   };
 
-  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"file_name\"" }];
-  google.protobuf.StringValue extension = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"csv\"" }];
-  google.protobuf.UInt32Value size = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "100" }];
+  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"file_name\""}];
+  google.protobuf.StringValue extension = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"csv\""}];
+  google.protobuf.UInt32Value size = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "100"}];
   oneof content {
-    google.protobuf.StringValue textual = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"row1,row2 value1,value2\"" }];
-    google.protobuf.BytesValue binary = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"0xFABB32\"" }];
+    google.protobuf.StringValue textual = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"row1,row2 value1,value2\""}];
+    google.protobuf.BytesValue binary = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"0xFABB32\""}];
   }
 }
 
@@ -42,7 +41,7 @@ message GetCustomEnrichmentRequest {
       description: "Find out more about enrichments"
     }
   };
-  google.protobuf.UInt32Value id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "1" }];
+  google.protobuf.UInt32Value id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "1"}];
 }
 
 message GetCustomEnrichmentResponse {
@@ -50,9 +49,7 @@ message GetCustomEnrichmentResponse {
     json_schema: {
       title: "Get Custom Enrichment Response"
       description: "This response data structure is obtained when a custom enrichment is retrieved"
-      required: [
-        "custom_enrichment"
-      ]
+      required: ["custom_enrichment"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
@@ -69,9 +66,7 @@ message GetCustomEnrichmentsResponse {
     json_schema: {
       title: "Get Custom Enrichments Response"
       description: "This response data structure is obtained when all custom enrichments are retrieved"
-      required: [
-        "custom_enrichments"
-      ]
+      required: ["custom_enrichments"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
@@ -98,8 +93,8 @@ message CreateCustomEnrichmentRequest {
     }
   };
 
-  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"custom_enrichment_name\"" }];
-  google.protobuf.StringValue description = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"custom_enrichment_description\"" }];
+  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"custom_enrichment_name\""}];
+  google.protobuf.StringValue description = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"custom_enrichment_description\""}];
   File file = 4;
 }
 
@@ -108,17 +103,15 @@ message CreateCustomEnrichmentResponse {
     json_schema: {
       title: "Create Custom Enrichment Response"
       description: "This response data structure is obtained when a custom enrichment is created"
-      required: [
-        "custom_enrichment"
-      ]
+      required: ["custom_enrichment"]
     }
     external_docs: {
-      url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/",
+      url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
       description: "Find out more about enrichments"
     }
   };
 
-  string message = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"Custom enrichment created successfully\"" }];
+  string message = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"Custom enrichment created successfully\""}];
   CustomEnrichment custom_enrichment = 2;
 }
 
@@ -140,9 +133,9 @@ message UpdateCustomEnrichmentRequest {
     }
   };
 
-  google.protobuf.UInt32Value custom_enrichment_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "1" }];
-  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"custom_enrichment_name\"" }];
-  google.protobuf.StringValue description = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"custom_enrichment_description\"" }];
+  google.protobuf.UInt32Value custom_enrichment_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "1"}];
+  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"custom_enrichment_name\""}];
+  google.protobuf.StringValue description = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"custom_enrichment_description\""}];
   File file = 4;
 }
 
@@ -151,9 +144,7 @@ message UpdateCustomEnrichmentResponse {
     json_schema: {
       title: "Update Custom Enrichment Response"
       description: "This response data structure is obtained when a custom enrichment is updated"
-      required: [
-        "custom_enrichment"
-      ]
+      required: ["custom_enrichment"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
@@ -161,7 +152,7 @@ message UpdateCustomEnrichmentResponse {
     }
   };
 
-  string message = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"Custom enrichment updated successfully\"" }];
+  string message = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"Custom enrichment updated successfully\""}];
   CustomEnrichment custom_enrichment = 2;
 }
 
@@ -170,33 +161,27 @@ message DeleteCustomEnrichmentRequest {
     json_schema: {
       title: "Delete Custom Enrichment Request"
       description: "This request data structure is used to delete a custom enrichment"
-      required: [
-        "custom_enrichment_id"
-      ]
+      required: ["custom_enrichment_id"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
       description: "Find out more about enrichments"
     }
   };
-  google.protobuf.UInt32Value custom_enrichment_id = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "1" }];
+  google.protobuf.UInt32Value custom_enrichment_id = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "1"}];
 }
 
-
 message DeleteCustomEnrichmentResponse {
-  string message = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"Custom enrichment deleted successfully\"" }];
-  uint32 custom_enrichment_id = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "1" }];
+  string message = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"Custom enrichment deleted successfully\""}];
+  uint32 custom_enrichment_id = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "1"}];
 }
 
 message SearchCustomEnrichmentDataRequest {
-
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Search Custom Enrichment Data Request"
       description: "This request data structure is used to search custom enrichment data"
-      required: [
-        "search_clauses"
-      ]
+      required: ["search_clauses"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
@@ -208,9 +193,7 @@ message SearchCustomEnrichmentDataRequest {
       json_schema: {
         title: "Search Clause"
         description: "This data structure represents a search clause"
-        required: [
-          "search_by"
-        ]
+        required: ["search_by"]
       }
       external_docs: {
         url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
@@ -218,8 +201,8 @@ message SearchCustomEnrichmentDataRequest {
       }
     };
     oneof search_by {
-      google.protobuf.UInt32Value id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "1" }];
-      google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"custom_enrichment_name\"" }];
+      google.protobuf.UInt32Value id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "1"}];
+      google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"custom_enrichment_name\""}];
     }
   }
   repeated SearchClause search_clauses = 1;
@@ -236,58 +219,64 @@ service CustomEnrichmentService {
   };
   rpc GetCustomEnrichment(GetCustomEnrichmentRequest) returns (GetCustomEnrichmentResponse) {
     option (google.api.http) = {
-      get: "/v1/custom_enrichment/{id}"
+      get: "/enrichment-rules/custom-enrichment-rules/v1/{id}"
+      additional_bindings: {get: "/v1/custom_enrichment/{id}"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Custom Enrichments Service"]
       summary: "Get Custom Enrichment"
     };
-  };
+  }
+
   rpc GetCustomEnrichments(GetCustomEnrichmentsRequest) returns (GetCustomEnrichmentsResponse) {
     option (google.api.http) = {
-      get: "/v1/custom_enrichment"
+      get: "/enrichment-rules/custom-enrichment-rules/v1"
+      additional_bindings: {get: "/v1/custom_enrichment"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Custom Enrichments Service"]
       summary: "Get Custom Enrichments"
     };
-  };
+  }
   rpc CreateCustomEnrichment(CreateCustomEnrichmentRequest) returns (CreateCustomEnrichmentResponse) {
     option (google.api.http) = {
-      post: "/v1/custom_enrichment"
       body: "*"
+      additional_bindings: {post: "/v1/custom_enrichment"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Custom Enrichments Service"]
       summary: "Create Custom Enrichments"
     };
-  };
+  }
   rpc UpdateCustomEnrichment(UpdateCustomEnrichmentRequest) returns (UpdateCustomEnrichmentResponse) {
     option (google.api.http) = {
-      put: "/v1/custom_enrichment"
+      put: "/enrichment-rules/custom-enrichment-rules/v1"
       body: "*"
+      additional_bindings: {put: "/v1/custom_enrichment"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Custom Enrichments Service"]
       summary: "Update Custom Enrichment"
     };
-  };
+  }
   rpc DeleteCustomEnrichment(DeleteCustomEnrichmentRequest) returns (DeleteCustomEnrichmentResponse) {
     option (google.api.http) = {
-      delete: "/v1/custom_enrichment/{custom_enrichment_id}"
+      delete: "/enrichment-rules/custom-enrichment-rules/v1/{custom_enrichment_id}"
+      additional_bindings: {delete: "/v1/custom_enrichment/{custom_enrichment_id}"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Custom Enrichments Service"]
       summary: "Delete Custom Enrichments"
     };
-  };
+  }
   rpc SearchCustomEnrichmentData(SearchCustomEnrichmentDataRequest) returns (SearchCustomEnrichmentDataResponse) {
     option (google.api.http) = {
-      post: "/v1/custom_enrichment/search"
+      post: "/enrichment-rules/custom-enrichment-rules/v1/search"
+      additional_bindings: {post: "/v1/custom_enrichment/search"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Custom Enrichments Service"]
       summary: "Search Custom Enrichment Data"
     };
-  };
+  }
 }

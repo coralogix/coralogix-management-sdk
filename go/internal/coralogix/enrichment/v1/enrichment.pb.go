@@ -103,7 +103,7 @@ var File_com_coralogix_enrichment_v1_enrichment_proto protoreflect.FileDescripto
 
 const file_com_coralogix_enrichment_v1_enrichment_proto_rawDesc = "" +
 	"\n" +
-	",com/coralogix/enrichment/v1/enrichment.proto\x12\x1bcom.coralogix.enrichment.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a1com/coralogix/enrichment/v1/enrichment_type.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xc1\x04\n" +
+	",com/coralogix/enrichment/v1/enrichment.proto\x12\x1bcom.coralogix.enrichment.v1\x1a1com/coralogix/enrichment/v1/enrichment_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xc1\x04\n" +
 	"\n" +
 	"Enrichment\x12\x16\n" +
 	"\x02id\x18\x01 \x01(\rB\x06\x9aA\x03J\x011R\x02id\x12%\n" +

@@ -9,6 +9,7 @@ import "com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/scale.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/sort_by.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/text_alignment.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto";
 import "com/coralogixapis/dashboards/v1/common/logs_aggregation.proto";
@@ -16,6 +17,7 @@ import "com/coralogixapis/dashboards/v1/common/metrics_series_limit_type.proto";
 import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
 import "com/coralogixapis/dashboards/v1/common/query.proto";
 import "com/coralogixapis/dashboards/v1/common/time_frame.proto";
+import "com/coralogixapis/dashboards/v1/types.proto";
 import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
 
@@ -152,9 +154,58 @@ message Dynamic {
 
     message Table {
       repeated Column columns = 1;
+      repeated Rule rules = 2;
 
       message Column {
         v1.common.ObservationField field = 1;
+      }
+
+      message Rule {
+        UUID id = 1;
+        google.protobuf.StringValue name = 2;
+        google.protobuf.StringValue description = 3;
+        RuleScope rule_scope = 4;
+        repeated Property properties = 5;
+      }
+
+      message RuleScope {
+        oneof value {
+          v1.common.ObservationField field = 1;
+          google.protobuf.StringValue regex = 2;
+          FieldDataType field_type = 3;
+        }
+      }
+
+      enum FieldDataType {
+        FIELD_DATA_TYPE_UNSPECIFIED = 0;
+        FIELD_DATA_TYPE_NUMBER = 1;
+        FIELD_DATA_TYPE_STRING = 2;
+        FIELD_DATA_TYPE_BOOLEAN = 3;
+        FIELD_DATA_TYPE_TIMESTAMP = 4;
+        FIELD_DATA_TYPE_OBJECT = 5;
+        FIELD_DATA_TYPE_ARRAY = 6;
+        FIELD_DATA_TYPE_REGEX = 7;
+        FIELD_DATA_TYPE_UNION = 8;
+        FIELD_DATA_TYPE_ENUM = 9;
+      }
+
+      message Property {
+        UUID id = 1;
+        PropertyDefinition definition = 2;
+      }
+
+      message PropertyDefinition {
+        oneof value {
+          PropertyThresholds thresholds = 1;
+          common.TextAlignment alignment = 2;
+        }
+      }
+
+      message PropertyThresholds {
+        repeated common.Threshold values = 1;
+        common.ThresholdType type = 2;
+        optional google.protobuf.DoubleValue min = 3;
+        optional google.protobuf.DoubleValue max = 4;
       }
     }
 

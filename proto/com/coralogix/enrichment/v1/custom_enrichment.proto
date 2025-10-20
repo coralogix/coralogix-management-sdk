@@ -1,6 +1,7 @@
 syntax = "proto3";
-import "google/protobuf/wrappers.proto";
 package com.coralogix.enrichment.v1;
+
+import "google/protobuf/wrappers.proto";
 
 message CustomEnrichment {
   uint32 id = 1;

@@ -39,8 +39,8 @@ commit_hash = "5b3ac4ca2376cc60f987bf14918a63b92a7f0b2f"
 [[dependencies]]
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
-revision = "v2.7.36"
-commit_hash = "7d9cc9813a21a0e985a0d24a6ab3d77e29d9b423"
+revision = "v2.7.38"
+commit_hash = "9f071a33d03d8b8f99b981319b21d711825158f4"
 
 [[dependencies]]
 name = "cx-api-data-usage"
@@ -51,8 +51,8 @@ commit_hash = "3b5aa33ff2716ff51eeffc0b973a5b9307d8cbe3"
 [[dependencies]]
 name = "cx-api-enrichment"
 url = "github.com/coralogix/cx-api-enrichment"
-revision = "v0.6.9"
-commit_hash = "5d70908545f61111648ecc09a1b07aa0218a6145"
+revision = "v0.6.10"
+commit_hash = "034cf6a4b8108e8cb5e83933b299c41108c3cc0b"
 
 [[dependencies]]
 name = "cx-api-events"
@@ -76,7 +76,7 @@ commit_hash = "b960466df912ba67e7157e2f016af02eb6c9f669"
 name = "cx-api-lmd-model"
 url = "github.com/coralogix/cx-api-lmd-model"
 branch = "master"
-commit_hash = "c3519ef689aca1a640f985e7b339394028c261f4"
+commit_hash = "fa71ff99fdcdeaf13b525f65ad2b2afa9a70abcb"
 
 [[dependencies]]
 name = "cx-api-logs2metrics"
