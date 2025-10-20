@@ -210,6 +210,7 @@ allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/variable.proto",
     "src/com/coralogixapis/dashboards/v1/ast/widget.proto",
     "src/com/coralogixapis/dashboards/v1/ast/widgets/bar_chart.proto",
+    "src/com/coralogixapis/dashboards/v1/ast/widgets/common/text_alignment.proto",
     "src/com/coralogixapis/dashboards/v1/ast/widgets/common/colors_by.proto",
     "src/com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto",
     "src/com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto",

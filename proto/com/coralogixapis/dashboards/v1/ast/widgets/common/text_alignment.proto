@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.ast.widgets.common;
+
+enum TextAlignment {
+  TEXT_ALIGNMENT_UNSPECIFIED = 0;
+  TEXT_ALIGNMENT_LEFT = 1;
+  TEXT_ALIGNMENT_CENTER = 2;
+  TEXT_ALIGNMENT_RIGHT = 3;
+}
