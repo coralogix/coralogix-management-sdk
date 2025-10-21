@@ -16,6 +16,7 @@ package examples
 
 import (
 	"context"
+	"fmt"
 	"os"
 	"strings"
 	"testing"
@@ -62,9 +63,10 @@ func TestDataSets(t *testing.T) {
 	raw, e := os.ReadFile("date-to-day-of-the-week.csv")
 	assertNilAndPrintError(t, e)
 	textual := string(raw)
-	name := uuid.NewString()
+	// A letter is the required name
+	name := fmt.Sprintf("a%v", strings.ReplaceAll(uuid.NewString(), "-", ""))
 	data, e := c.Create(context.Background(), &cxsdk.CreateDataSetRequest{
-		Name:        wrapperspb.String(strings.ReplaceAll(name, "-", "")),
+		Name:        wrapperspb.String(name),
 		Description: wrapperspb.String("My custom enrichment description"),
 		File: &cxsdk.File{
 			Name:      wrapperspb.String("date-to-day-of-the-week"),

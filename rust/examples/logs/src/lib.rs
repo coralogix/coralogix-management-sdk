@@ -60,7 +60,7 @@ mod tests {
             CoralogixRegion::from_env().unwrap(),
         )
         .unwrap();
-        let name = Uuid::new_v4().to_string().replace("-", "");
+        let name = format!("a{}", Uuid::new_v4().to_string().replace("-", ""));
 
         let dataset = client
             .create(
