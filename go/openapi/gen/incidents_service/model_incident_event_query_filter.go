@@ -28,8 +28,8 @@ type IncidentEventQueryFilter struct {
 	Labels interface{} `json:"labels,omitempty"`
 	// The name of the incident
 	Name *string `json:"name,omitempty"`
-	Severity []string `json:"severity,omitempty"`
-	Status []string `json:"status,omitempty"`
+	Severity []IncidentSeverity `json:"severity,omitempty"`
+	Status []IncidentStatus `json:"status,omitempty"`
 	Timestamp interface{} `json:"timestamp,omitempty"`
 }
 
@@ -212,9 +212,9 @@ func (o *IncidentEventQueryFilter) SetName(v string) {
 }
 
 // GetSeverity returns the Severity field value if set, zero value otherwise.
-func (o *IncidentEventQueryFilter) GetSeverity() []string {
+func (o *IncidentEventQueryFilter) GetSeverity() []IncidentSeverity {
 	if o == nil || IsNil(o.Severity) {
-		var ret []string
+		var ret []IncidentSeverity
 		return ret
 	}
 	return o.Severity
@@ -222,7 +222,7 @@ func (o *IncidentEventQueryFilter) GetSeverity() []string {
 
 // GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentEventQueryFilter) GetSeverityOk() ([]string, bool) {
+func (o *IncidentEventQueryFilter) GetSeverityOk() ([]IncidentSeverity, bool) {
 	if o == nil || IsNil(o.Severity) {
 		return nil, false
 	}
@@ -238,15 +238,15 @@ func (o *IncidentEventQueryFilter) HasSeverity() bool {
 	return false
 }
 
-// SetSeverity gets a reference to the given []string and assigns it to the Severity field.
-func (o *IncidentEventQueryFilter) SetSeverity(v []string) {
+// SetSeverity gets a reference to the given []IncidentSeverity and assigns it to the Severity field.
+func (o *IncidentEventQueryFilter) SetSeverity(v []IncidentSeverity) {
 	o.Severity = v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *IncidentEventQueryFilter) GetStatus() []string {
+func (o *IncidentEventQueryFilter) GetStatus() []IncidentStatus {
 	if o == nil || IsNil(o.Status) {
-		var ret []string
+		var ret []IncidentStatus
 		return ret
 	}
 	return o.Status
@@ -254,7 +254,7 @@ func (o *IncidentEventQueryFilter) GetStatus() []string {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentEventQueryFilter) GetStatusOk() ([]string, bool) {
+func (o *IncidentEventQueryFilter) GetStatusOk() ([]IncidentStatus, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -270,8 +270,8 @@ func (o *IncidentEventQueryFilter) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given []string and assigns it to the Status field.
-func (o *IncidentEventQueryFilter) SetStatus(v []string) {
+// SetStatus gets a reference to the given []IncidentStatus and assigns it to the Status field.
+func (o *IncidentEventQueryFilter) SetStatus(v []IncidentStatus) {
 	o.Status = v
 }
 

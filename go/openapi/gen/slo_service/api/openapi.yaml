@@ -1,0 +1,1078 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /apm/apm-slo/v1:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ServiceSloService_ListServiceSlos
+      parameters:
+      - explode: true
+        in: query
+        name: order_by
+        required: false
+        schema:
+          $ref: "#/components/schemas/Order_By"
+        style: form
+      - explode: true
+        in: query
+        name: service_names
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListServiceSlosResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List Service SLOs
+      tags:
+      - SLO Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/apm/apm-slo/v1?order_by=SOME_OBJECT_VALUE&service_names=SOME_ARRAY_VALUE';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/apm/apm-slo/v1"
+
+          querystring = {"order_by":"SOME_OBJECT_VALUE","service_names":"SOME_ARRAY_VALUE"}
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers, params=querystring)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.coralogix.com/mgmt/openapi/apm/apm-slo/v1?order_by=SOME_OBJECT_VALUE&service_names=SOME_ARRAY_VALUE' \
+            --header 'Authorization: Bearer <API_KEY>'
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ServiceSloService_CreateServiceSlo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Create_Service_SLO_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateServiceSloResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Create Service SLO
+      tags:
+      - SLO Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/apm/apm-slo/v1';
+
+          let options = {
+            method: 'POST',
+            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+            body: '{"slo":{"createdAt":"2021-01-01T00:00:00.000Z","description":"slo_description","filters":[{"compareType":"COMPARE_TYPE_UNSPECIFIED","field":"field_name","fieldValues":[["value1","value2"]]}],"id":"slo_id","latencySli":{"thresholdMicroseconds":"1000000","thresholdSymbol":"THRESHOLD_SYMBOL_UNSPECIFIED"},"name":"slo_name","period":"SLO_PERIOD_UNSPECIFIED","remainingErrorBudgetPercentage":1,"serviceName":"service_name","status":"SLO_STATUS_UNSPECIFIED","targetPercentage":99}}'
+          };
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/apm/apm-slo/v1"
+
+          payload = {"slo": {
+                  "createdAt": "2021-01-01T00:00:00.000Z",
+                  "description": "slo_description",
+                  "filters": [
+                      {
+                          "compareType": "COMPARE_TYPE_UNSPECIFIED",
+                          "field": "field_name",
+                          "fieldValues": [["value1", "value2"]]
+                      }
+                  ],
+                  "id": "slo_id",
+                  "latencySli": {
+                      "thresholdMicroseconds": "1000000",
+                      "thresholdSymbol": "THRESHOLD_SYMBOL_UNSPECIFIED"
+                  },
+                  "name": "slo_name",
+                  "period": "SLO_PERIOD_UNSPECIFIED",
+                  "remainingErrorBudgetPercentage": 1,
+                  "serviceName": "service_name",
+                  "status": "SLO_STATUS_UNSPECIFIED",
+                  "targetPercentage": 99
+              }}
+          headers = {
+              "Authorization": "Bearer <API_KEY>",
+              "content-type": "application/json"
+          }
+
+          response = requests.request("POST", url, json=payload, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://api.coralogix.com/mgmt/openapi/apm/apm-slo/v1 \
+            --header 'Authorization: Bearer <API_KEY>' \
+            --header 'content-type: application/json' \
+            --data '{"slo":{"createdAt":"2021-01-01T00:00:00.000Z","description":"slo_description","filters":[{"compareType":"COMPARE_TYPE_UNSPECIFIED","field":"field_name","fieldValues":[["value1","value2"]]}],"id":"slo_id","latencySli":{"thresholdMicroseconds":"1000000","thresholdSymbol":"THRESHOLD_SYMBOL_UNSPECIFIED"},"name":"slo_name","period":"SLO_PERIOD_UNSPECIFIED","remainingErrorBudgetPercentage":1,"serviceName":"service_name","status":"SLO_STATUS_UNSPECIFIED","targetPercentage":99}}'
+    put:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ServiceSloService_ReplaceServiceSlo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Replace_Service_SLO_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReplaceServiceSloResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Replace Service SLO
+      tags:
+      - SLO Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/apm/apm-slo/v1';
+
+          let options = {
+            method: 'PUT',
+            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+            body: '{"slo":{"createdAt":"2021-01-01T00:00:00.000Z","description":"slo_description","filters":[{"compareType":"COMPARE_TYPE_UNSPECIFIED","field":"field_name","fieldValues":[["value1","value2"]]}],"id":"slo_id","latencySli":{"thresholdMicroseconds":"1000000","thresholdSymbol":"THRESHOLD_SYMBOL_UNSPECIFIED"},"name":"slo_name","period":"SLO_PERIOD_UNSPECIFIED","remainingErrorBudgetPercentage":1,"serviceName":"service_name","status":"SLO_STATUS_UNSPECIFIED","targetPercentage":99}}'
+          };
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/apm/apm-slo/v1"
+
+          payload = {"slo": {
+                  "createdAt": "2021-01-01T00:00:00.000Z",
+                  "description": "slo_description",
+                  "filters": [
+                      {
+                          "compareType": "COMPARE_TYPE_UNSPECIFIED",
+                          "field": "field_name",
+                          "fieldValues": [["value1", "value2"]]
+                      }
+                  ],
+                  "id": "slo_id",
+                  "latencySli": {
+                      "thresholdMicroseconds": "1000000",
+                      "thresholdSymbol": "THRESHOLD_SYMBOL_UNSPECIFIED"
+                  },
+                  "name": "slo_name",
+                  "period": "SLO_PERIOD_UNSPECIFIED",
+                  "remainingErrorBudgetPercentage": 1,
+                  "serviceName": "service_name",
+                  "status": "SLO_STATUS_UNSPECIFIED",
+                  "targetPercentage": 99
+              }}
+          headers = {
+              "Authorization": "Bearer <API_KEY>",
+              "content-type": "application/json"
+          }
+
+          response = requests.request("PUT", url, json=payload, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request PUT \
+            --url https://api.coralogix.com/mgmt/openapi/apm/apm-slo/v1 \
+            --header 'Authorization: Bearer <API_KEY>' \
+            --header 'content-type: application/json' \
+            --data '{"slo":{"createdAt":"2021-01-01T00:00:00.000Z","description":"slo_description","filters":[{"compareType":"COMPARE_TYPE_UNSPECIFIED","field":"field_name","fieldValues":[["value1","value2"]]}],"id":"slo_id","latencySli":{"thresholdMicroseconds":"1000000","thresholdSymbol":"THRESHOLD_SYMBOL_UNSPECIFIED"},"name":"slo_name","period":"SLO_PERIOD_UNSPECIFIED","remainingErrorBudgetPercentage":1,"serviceName":"service_name","status":"SLO_STATUS_UNSPECIFIED","targetPercentage":99}}'
+  /apm/apm-slo/v1/batch:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ServiceSloService_BatchGetServiceSlos
+      parameters:
+      - explode: true
+        in: query
+        name: ids
+        required: false
+        schema:
+          items:
+            example: "[\"slo_id1\",\"slo_id2\"]"
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchGetServiceSlosResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Batch Get Service SLOs
+      tags:
+      - SLO Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/apm/apm-slo/v1/batch?ids=SOME_ARRAY_VALUE';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/apm/apm-slo/v1/batch"
+
+          querystring = {"ids":"SOME_ARRAY_VALUE"}
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers, params=querystring)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.coralogix.com/mgmt/openapi/apm/apm-slo/v1/batch?ids=SOME_ARRAY_VALUE' \
+            --header 'Authorization: Bearer <API_KEY>'
+  /apm/apm-slo/v1/{id}:
+    delete:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ServiceSloService_DeleteServiceSlo
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: slo_id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteServiceSloResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Delete Service SLO
+      tags:
+      - SLO Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/apm/apm-slo/v1/slo_id';
+
+          let options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/apm/apm-slo/v1/slo_id"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("DELETE", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request DELETE \
+            --url https://api.coralogix.com/mgmt/openapi/apm/apm-slo/v1/slo_id \
+            --header 'Authorization: Bearer <API_KEY>'
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ServiceSloService_GetServiceSlo
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: slo_id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetServiceSloResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Service SLO
+      tags:
+      - SLO Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/apm/apm-slo/v1/slo_id';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/apm/apm-slo/v1/slo_id"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.coralogix.com/mgmt/openapi/apm/apm-slo/v1/slo_id \
+            --header 'Authorization: Bearer <API_KEY>'
+components:
+  schemas:
+    BatchGetServiceSlosResponse:
+      description: This data structure represents a response to batch get Service
+        SLOs.
+      example:
+        notFoundIds:
+        - "[\"slo_id1\",\"slo_id2\"]"
+        - "[\"slo_id1\",\"slo_id2\"]"
+        slos:
+          key:
+            createdAt: 2021-01-01T00:00:00Z
+            period: SLO_PERIOD_UNSPECIFIED
+            latencySli:
+              thresholdSymbol: THRESHOLD_SYMBOL_UNSPECIFIED
+              thresholdMicroseconds: "1000000"
+            targetPercentage: 99
+            name: slo_name
+            description: slo_description
+            filters:
+            - compareType: COMPARE_TYPE_UNSPECIFIED
+              field: field_name
+              fieldValues:
+              - "[\"value1\",\"value2\"]"
+              - "[\"value1\",\"value2\"]"
+            - compareType: COMPARE_TYPE_UNSPECIFIED
+              field: field_name
+              fieldValues:
+              - "[\"value1\",\"value2\"]"
+              - "[\"value1\",\"value2\"]"
+            id: slo_id
+            serviceName: service_name
+            remainingErrorBudgetPercentage: 1
+            status: SLO_STATUS_UNSPECIFIED
+      externalDocs:
+        description: Find out more about SLOs in Coralogix APM
+        url: https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/
+      properties:
+        notFoundIds:
+          items:
+            example: "[\"slo_id1\",\"slo_id2\"]"
+            type: string
+          type: array
+        slos:
+          additionalProperties:
+            $ref: "#/components/schemas/ServiceSlo"
+          type: object
+      required:
+      - slos
+      title: Batch Get Service SLOs Response
+      type: object
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
+    CompareType:
+      enum:
+      - COMPARE_TYPE_UNSPECIFIED
+      - COMPARE_TYPE_IS
+      - COMPARE_TYPE_START_WITH
+      - COMPARE_TYPE_ENDS_WITH
+      - COMPARE_TYPE_INCLUDES
+      type: string
+    CreateServiceSloResponse:
+      description: This data structure represents a response to create a Service SLO.
+      example:
+        slo:
+          createdAt: 2021-01-01T00:00:00Z
+          period: SLO_PERIOD_UNSPECIFIED
+          latencySli:
+            thresholdSymbol: THRESHOLD_SYMBOL_UNSPECIFIED
+            thresholdMicroseconds: "1000000"
+          targetPercentage: 99
+          name: slo_name
+          description: slo_description
+          filters:
+          - compareType: COMPARE_TYPE_UNSPECIFIED
+            field: field_name
+            fieldValues:
+            - "[\"value1\",\"value2\"]"
+            - "[\"value1\",\"value2\"]"
+          - compareType: COMPARE_TYPE_UNSPECIFIED
+            field: field_name
+            fieldValues:
+            - "[\"value1\",\"value2\"]"
+            - "[\"value1\",\"value2\"]"
+          id: slo_id
+          serviceName: service_name
+          remainingErrorBudgetPercentage: 1
+          status: SLO_STATUS_UNSPECIFIED
+      externalDocs:
+        description: Find out more about SLOs in Coralogix APM
+        url: https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/
+      properties:
+        slo:
+          $ref: "#/components/schemas/ServiceSlo"
+      required:
+      - slo
+      title: Create Service SLO Response
+      type: object
+    DeleteServiceSloResponse:
+      type: object
+    ErrorSli:
+      type: object
+    FieldGroup:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    GetServiceSloResponse:
+      description: This data structure represents a response to get a Service SLO.
+      example:
+        slo:
+          createdAt: 2021-01-01T00:00:00Z
+          period: SLO_PERIOD_UNSPECIFIED
+          latencySli:
+            thresholdSymbol: THRESHOLD_SYMBOL_UNSPECIFIED
+            thresholdMicroseconds: "1000000"
+          targetPercentage: 99
+          name: slo_name
+          description: slo_description
+          filters:
+          - compareType: COMPARE_TYPE_UNSPECIFIED
+            field: field_name
+            fieldValues:
+            - "[\"value1\",\"value2\"]"
+            - "[\"value1\",\"value2\"]"
+          - compareType: COMPARE_TYPE_UNSPECIFIED
+            field: field_name
+            fieldValues:
+            - "[\"value1\",\"value2\"]"
+            - "[\"value1\",\"value2\"]"
+          id: slo_id
+          serviceName: service_name
+          remainingErrorBudgetPercentage: 1
+          status: SLO_STATUS_UNSPECIFIED
+      externalDocs:
+        description: Find out more about SLOs in Coralogix APM
+        url: https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/
+      properties:
+        slo:
+          $ref: "#/components/schemas/ServiceSlo"
+      required:
+      - slo
+      title: Get Service SLO Response
+      type: object
+    LatencySli:
+      description: This data structure represents a Latency Service Level Indicator
+        (SLO) in Coralogix APM.
+      example:
+        thresholdSymbol: THRESHOLD_SYMBOL_UNSPECIFIED
+        thresholdMicroseconds: "1000000"
+      externalDocs:
+        description: Find out more about SLOs in Coralogix APM
+        url: https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/
+      properties:
+        thresholdMicroseconds:
+          example: "1000000"
+          type: string
+        thresholdSymbol:
+          $ref: "#/components/schemas/ThresholdSymbol"
+      required:
+      - thresholdMicroseconds
+      - thresholdSymbol
+      title: Latency SLO
+      type: object
+    ListServiceSlosResponse:
+      description: This data structure represents a response to list Service SLOs.
+      example:
+        slos:
+        - createdAt: 2021-01-01T00:00:00Z
+          period: SLO_PERIOD_UNSPECIFIED
+          latencySli:
+            thresholdSymbol: THRESHOLD_SYMBOL_UNSPECIFIED
+            thresholdMicroseconds: "1000000"
+          targetPercentage: 99
+          name: slo_name
+          description: slo_description
+          filters:
+          - compareType: COMPARE_TYPE_UNSPECIFIED
+            field: field_name
+            fieldValues:
+            - "[\"value1\",\"value2\"]"
+            - "[\"value1\",\"value2\"]"
+          - compareType: COMPARE_TYPE_UNSPECIFIED
+            field: field_name
+            fieldValues:
+            - "[\"value1\",\"value2\"]"
+            - "[\"value1\",\"value2\"]"
+          id: slo_id
+          serviceName: service_name
+          remainingErrorBudgetPercentage: 1
+          status: SLO_STATUS_UNSPECIFIED
+        - createdAt: 2021-01-01T00:00:00Z
+          period: SLO_PERIOD_UNSPECIFIED
+          latencySli:
+            thresholdSymbol: THRESHOLD_SYMBOL_UNSPECIFIED
+            thresholdMicroseconds: "1000000"
+          targetPercentage: 99
+          name: slo_name
+          description: slo_description
+          filters:
+          - compareType: COMPARE_TYPE_UNSPECIFIED
+            field: field_name
+            fieldValues:
+            - "[\"value1\",\"value2\"]"
+            - "[\"value1\",\"value2\"]"
+          - compareType: COMPARE_TYPE_UNSPECIFIED
+            field: field_name
+            fieldValues:
+            - "[\"value1\",\"value2\"]"
+            - "[\"value1\",\"value2\"]"
+          id: slo_id
+          serviceName: service_name
+          remainingErrorBudgetPercentage: 1
+          status: SLO_STATUS_UNSPECIFIED
+      externalDocs:
+        description: Find out more about SLOs in Coralogix APM
+        url: https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/
+      properties:
+        slos:
+          items:
+            $ref: "#/components/schemas/ServiceSlo"
+          type: array
+      required:
+      - slos
+      title: List Service SLOs Response
+      type: object
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    ReplaceServiceSloResponse:
+      description: This data structure represents a response to update a Service SLO.
+      example:
+        slo:
+          createdAt: 2021-01-01T00:00:00Z
+          period: SLO_PERIOD_UNSPECIFIED
+          latencySli:
+            thresholdSymbol: THRESHOLD_SYMBOL_UNSPECIFIED
+            thresholdMicroseconds: "1000000"
+          targetPercentage: 99
+          name: slo_name
+          description: slo_description
+          filters:
+          - compareType: COMPARE_TYPE_UNSPECIFIED
+            field: field_name
+            fieldValues:
+            - "[\"value1\",\"value2\"]"
+            - "[\"value1\",\"value2\"]"
+          - compareType: COMPARE_TYPE_UNSPECIFIED
+            field: field_name
+            fieldValues:
+            - "[\"value1\",\"value2\"]"
+            - "[\"value1\",\"value2\"]"
+          id: slo_id
+          serviceName: service_name
+          remainingErrorBudgetPercentage: 1
+          status: SLO_STATUS_UNSPECIFIED
+      externalDocs:
+        description: Find out more about SLOs in Coralogix APM
+        url: https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/
+      properties:
+        slo:
+          $ref: "#/components/schemas/ServiceSlo"
+      required:
+      - slo
+      title: Replace Service SLO Response
+      type: object
+    ServiceSlo:
+      oneOf:
+      - $ref: "#/components/schemas/ServiceSloLatencySli"
+      - $ref: "#/components/schemas/ServiceSloErrorSli"
+    ServiceSloErrorSli:
+      additionalProperties: false
+      description: This data structure represents a Service Level Objective (SLO)
+        in Coralogix APM.
+      externalDocs:
+        description: Find out more about SLOs in Coralogix APM
+        url: https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/
+      properties:
+        createdAt:
+          example: 2021-01-01T00:00:00Z
+          format: date-time
+          type: string
+        description:
+          example: slo_description
+          type: string
+        errorSli:
+          type: object
+        filters:
+          items:
+            $ref: "#/components/schemas/SliFilter"
+          type: array
+        id:
+          example: slo_id
+          type: string
+        name:
+          example: slo_name
+          type: string
+        period:
+          $ref: "#/components/schemas/SloPeriod"
+        remainingErrorBudgetPercentage:
+          example: 1
+          format: int64
+          type: integer
+        serviceName:
+          example: service_name
+          type: string
+        status:
+          $ref: "#/components/schemas/services.v1.SloStatus"
+        targetPercentage:
+          example: 99
+          format: int64
+          type: integer
+      required:
+      - description
+      - filters
+      - name
+      - period
+      - serviceName
+      - sliType
+      - status
+      - targetPercentage
+      title: Service SLO
+      type: object
+    ServiceSloLatencySli:
+      additionalProperties: false
+      description: This data structure represents a Service Level Objective (SLO)
+        in Coralogix APM.
+      example:
+        createdAt: 2021-01-01T00:00:00Z
+        period: SLO_PERIOD_UNSPECIFIED
+        latencySli:
+          thresholdSymbol: THRESHOLD_SYMBOL_UNSPECIFIED
+          thresholdMicroseconds: "1000000"
+        targetPercentage: 99
+        name: slo_name
+        description: slo_description
+        filters:
+        - compareType: COMPARE_TYPE_UNSPECIFIED
+          field: field_name
+          fieldValues:
+          - "[\"value1\",\"value2\"]"
+          - "[\"value1\",\"value2\"]"
+        - compareType: COMPARE_TYPE_UNSPECIFIED
+          field: field_name
+          fieldValues:
+          - "[\"value1\",\"value2\"]"
+          - "[\"value1\",\"value2\"]"
+        id: slo_id
+        serviceName: service_name
+        remainingErrorBudgetPercentage: 1
+        status: SLO_STATUS_UNSPECIFIED
+      externalDocs:
+        description: Find out more about SLOs in Coralogix APM
+        url: https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/
+      properties:
+        createdAt:
+          example: 2021-01-01T00:00:00Z
+          format: date-time
+          type: string
+        description:
+          example: slo_description
+          type: string
+        filters:
+          items:
+            $ref: "#/components/schemas/SliFilter"
+          type: array
+        id:
+          example: slo_id
+          type: string
+        latencySli:
+          $ref: "#/components/schemas/LatencySli"
+        name:
+          example: slo_name
+          type: string
+        period:
+          $ref: "#/components/schemas/SloPeriod"
+        remainingErrorBudgetPercentage:
+          example: 1
+          format: int64
+          type: integer
+        serviceName:
+          example: service_name
+          type: string
+        status:
+          $ref: "#/components/schemas/services.v1.SloStatus"
+        targetPercentage:
+          example: 99
+          format: int64
+          type: integer
+      required:
+      - description
+      - filters
+      - name
+      - period
+      - serviceName
+      - sliType
+      - status
+      - targetPercentage
+      title: Service SLO
+      type: object
+    SliFilter:
+      description: This data structure represents a filter for a Service Level Indicator
+        (SLI) in Coralogix APM.
+      example:
+        compareType: COMPARE_TYPE_UNSPECIFIED
+        field: field_name
+        fieldValues:
+        - "[\"value1\",\"value2\"]"
+        - "[\"value1\",\"value2\"]"
+      externalDocs:
+        description: Find out more about SLOs in Coralogix APM
+        url: https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/
+      properties:
+        compareType:
+          $ref: "#/components/schemas/CompareType"
+        field:
+          example: field_name
+          type: string
+        fieldValues:
+          items:
+            example: "[\"value1\",\"value2\"]"
+            type: string
+          type: array
+      required:
+      - compareType
+      - field
+      - fieldValues
+      title: SLI Filter
+      type: object
+    SloPeriod:
+      enum:
+      - SLO_PERIOD_UNSPECIFIED
+      - SLO_PERIOD_7_DAYS
+      - SLO_PERIOD_14_DAYS
+      - SLO_PERIOD_30_DAYS
+      type: string
+    ThresholdSymbol:
+      enum:
+      - THRESHOLD_SYMBOL_UNSPECIFIED
+      - THRESHOLD_SYMBOL_GREATER
+      - THRESHOLD_SYMBOL_GREATER_OR_EQUAL
+      - THRESHOLD_SYMBOL_LESS
+      - THRESHOLD_SYMBOL_LESS_OR_EQUAL
+      - THRESHOLD_SYMBOL_EQUAL
+      - THRESHOLD_SYMBOL_NOT_EQUAL
+      type: string
+    YAxisViewByCategory:
+      additionalProperties: false
+      properties:
+        category:
+          $ref: "#/components/schemas/YAxisViewByCategory"
+      type: object
+    YAxisViewByValue:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: "#/components/schemas/YAxisViewByValue"
+      type: object
+    common.Group:
+      properties:
+        field:
+          $ref: "#/components/schemas/FieldGroup"
+        groups:
+          items:
+            $ref: "#/components/schemas/common.Group"
+          type: array
+        value:
+          format: double
+          type: number
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    services.v1.SloStatus:
+      enum:
+      - SLO_STATUS_UNSPECIFIED
+      - SLO_STATUS_OK
+      - SLO_STATUS_BREACHED
+      type: string
+    v2.OrderByDirection:
+      enum:
+      - ORDER_BY_DIRECTION_UNSPECIFIED
+      - ORDER_BY_DIRECTION_ASC
+      - ORDER_BY_DIRECTION_DESC
+      type: string
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    Order_By:
+      description: This data structure represents an order by clause in Coralogix
+        APM.
+      externalDocs:
+        description: Find out more about SLOs in Coralogix APM
+        url: https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/
+      properties:
+        direction:
+          $ref: "#/components/schemas/v2.OrderByDirection"
+        fieldName:
+          example: field_name
+          type: string
+      required:
+      - direction
+      - fieldName
+      title: Order By
+      type: object
+    Replace_Service_SLO_Request:
+      additionalProperties: false
+      description: This data structure represents a request to update a Service SLO.
+      properties:
+        slo:
+          $ref: "#/components/schemas/ServiceSlo"
+      required:
+      - slo
+      title: Replace Service SLO Request
+      type: object
+    Create_Service_SLO_Request:
+      additionalProperties: false
+      description: This data structure represents a request to create a Service SLO.
+      properties:
+        slo:
+          $ref: "#/components/schemas/ServiceSlo"
+      required:
+      - slo
+      title: Create Service SLO Request
+      type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

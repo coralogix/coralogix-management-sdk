@@ -18,53 +18,53 @@ import (
 
 // VariableValueV2 - struct for VariableValueV2
 type VariableValueV2 struct {
-	VariableValueV2OneOf *VariableValueV2OneOf
-	VariableValueV2OneOf1 *VariableValueV2OneOf1
-	VariableValueV2OneOf2 *VariableValueV2OneOf2
-	VariableValueV2OneOf3 *VariableValueV2OneOf3
-	VariableValueV2OneOf4 *VariableValueV2OneOf4
-	VariableValueV2OneOf5 *VariableValueV2OneOf5
+	VariableValueV2Interval *VariableValueV2Interval
+	VariableValueV2Lucene *VariableValueV2Lucene
+	VariableValueV2MultiString *VariableValueV2MultiString
+	VariableValueV2Regex *VariableValueV2Regex
+	VariableValueV2SingleNumeric *VariableValueV2SingleNumeric
+	VariableValueV2SingleString *VariableValueV2SingleString
 }
 
-// VariableValueV2OneOfAsVariableValueV2 is a convenience function that returns VariableValueV2OneOf wrapped in VariableValueV2
-func VariableValueV2OneOfAsVariableValueV2(v *VariableValueV2OneOf) VariableValueV2 {
+// VariableValueV2IntervalAsVariableValueV2 is a convenience function that returns VariableValueV2Interval wrapped in VariableValueV2
+func VariableValueV2IntervalAsVariableValueV2(v *VariableValueV2Interval) VariableValueV2 {
 	return VariableValueV2{
-		VariableValueV2OneOf: v,
+		VariableValueV2Interval: v,
 	}
 }
 
-// VariableValueV2OneOf1AsVariableValueV2 is a convenience function that returns VariableValueV2OneOf1 wrapped in VariableValueV2
-func VariableValueV2OneOf1AsVariableValueV2(v *VariableValueV2OneOf1) VariableValueV2 {
+// VariableValueV2LuceneAsVariableValueV2 is a convenience function that returns VariableValueV2Lucene wrapped in VariableValueV2
+func VariableValueV2LuceneAsVariableValueV2(v *VariableValueV2Lucene) VariableValueV2 {
 	return VariableValueV2{
-		VariableValueV2OneOf1: v,
+		VariableValueV2Lucene: v,
 	}
 }
 
-// VariableValueV2OneOf2AsVariableValueV2 is a convenience function that returns VariableValueV2OneOf2 wrapped in VariableValueV2
-func VariableValueV2OneOf2AsVariableValueV2(v *VariableValueV2OneOf2) VariableValueV2 {
+// VariableValueV2MultiStringAsVariableValueV2 is a convenience function that returns VariableValueV2MultiString wrapped in VariableValueV2
+func VariableValueV2MultiStringAsVariableValueV2(v *VariableValueV2MultiString) VariableValueV2 {
 	return VariableValueV2{
-		VariableValueV2OneOf2: v,
+		VariableValueV2MultiString: v,
 	}
 }
 
-// VariableValueV2OneOf3AsVariableValueV2 is a convenience function that returns VariableValueV2OneOf3 wrapped in VariableValueV2
-func VariableValueV2OneOf3AsVariableValueV2(v *VariableValueV2OneOf3) VariableValueV2 {
+// VariableValueV2RegexAsVariableValueV2 is a convenience function that returns VariableValueV2Regex wrapped in VariableValueV2
+func VariableValueV2RegexAsVariableValueV2(v *VariableValueV2Regex) VariableValueV2 {
 	return VariableValueV2{
-		VariableValueV2OneOf3: v,
+		VariableValueV2Regex: v,
 	}
 }
 
-// VariableValueV2OneOf4AsVariableValueV2 is a convenience function that returns VariableValueV2OneOf4 wrapped in VariableValueV2
-func VariableValueV2OneOf4AsVariableValueV2(v *VariableValueV2OneOf4) VariableValueV2 {
+// VariableValueV2SingleNumericAsVariableValueV2 is a convenience function that returns VariableValueV2SingleNumeric wrapped in VariableValueV2
+func VariableValueV2SingleNumericAsVariableValueV2(v *VariableValueV2SingleNumeric) VariableValueV2 {
 	return VariableValueV2{
-		VariableValueV2OneOf4: v,
+		VariableValueV2SingleNumeric: v,
 	}
 }
 
-// VariableValueV2OneOf5AsVariableValueV2 is a convenience function that returns VariableValueV2OneOf5 wrapped in VariableValueV2
-func VariableValueV2OneOf5AsVariableValueV2(v *VariableValueV2OneOf5) VariableValueV2 {
+// VariableValueV2SingleStringAsVariableValueV2 is a convenience function that returns VariableValueV2SingleString wrapped in VariableValueV2
+func VariableValueV2SingleStringAsVariableValueV2(v *VariableValueV2SingleString) VariableValueV2 {
 	return VariableValueV2{
-		VariableValueV2OneOf5: v,
+		VariableValueV2SingleString: v,
 	}
 }
 
@@ -73,116 +73,116 @@ func VariableValueV2OneOf5AsVariableValueV2(v *VariableValueV2OneOf5) VariableVa
 func (dst *VariableValueV2) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into VariableValueV2OneOf
-	err = newStrictDecoder(data).Decode(&dst.VariableValueV2OneOf)
+	// try to unmarshal data into VariableValueV2Interval
+	err = newStrictDecoder(data).Decode(&dst.VariableValueV2Interval)
 	if err == nil {
-		jsonVariableValueV2OneOf, _ := json.Marshal(dst.VariableValueV2OneOf)
-		if string(jsonVariableValueV2OneOf) == "{}" { // empty struct
-			dst.VariableValueV2OneOf = nil
+		jsonVariableValueV2Interval, _ := json.Marshal(dst.VariableValueV2Interval)
+		if string(jsonVariableValueV2Interval) == "{}" { // empty struct
+			dst.VariableValueV2Interval = nil
 		} else {
-			if err = validator.Validate(dst.VariableValueV2OneOf); err != nil {
-				dst.VariableValueV2OneOf = nil
+			if err = validator.Validate(dst.VariableValueV2Interval); err != nil {
+				dst.VariableValueV2Interval = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VariableValueV2OneOf = nil
+		dst.VariableValueV2Interval = nil
 	}
 
-	// try to unmarshal data into VariableValueV2OneOf1
-	err = newStrictDecoder(data).Decode(&dst.VariableValueV2OneOf1)
+	// try to unmarshal data into VariableValueV2Lucene
+	err = newStrictDecoder(data).Decode(&dst.VariableValueV2Lucene)
 	if err == nil {
-		jsonVariableValueV2OneOf1, _ := json.Marshal(dst.VariableValueV2OneOf1)
-		if string(jsonVariableValueV2OneOf1) == "{}" { // empty struct
-			dst.VariableValueV2OneOf1 = nil
+		jsonVariableValueV2Lucene, _ := json.Marshal(dst.VariableValueV2Lucene)
+		if string(jsonVariableValueV2Lucene) == "{}" { // empty struct
+			dst.VariableValueV2Lucene = nil
 		} else {
-			if err = validator.Validate(dst.VariableValueV2OneOf1); err != nil {
-				dst.VariableValueV2OneOf1 = nil
+			if err = validator.Validate(dst.VariableValueV2Lucene); err != nil {
+				dst.VariableValueV2Lucene = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VariableValueV2OneOf1 = nil
+		dst.VariableValueV2Lucene = nil
 	}
 
-	// try to unmarshal data into VariableValueV2OneOf2
-	err = newStrictDecoder(data).Decode(&dst.VariableValueV2OneOf2)
+	// try to unmarshal data into VariableValueV2MultiString
+	err = newStrictDecoder(data).Decode(&dst.VariableValueV2MultiString)
 	if err == nil {
-		jsonVariableValueV2OneOf2, _ := json.Marshal(dst.VariableValueV2OneOf2)
-		if string(jsonVariableValueV2OneOf2) == "{}" { // empty struct
-			dst.VariableValueV2OneOf2 = nil
+		jsonVariableValueV2MultiString, _ := json.Marshal(dst.VariableValueV2MultiString)
+		if string(jsonVariableValueV2MultiString) == "{}" { // empty struct
+			dst.VariableValueV2MultiString = nil
 		} else {
-			if err = validator.Validate(dst.VariableValueV2OneOf2); err != nil {
-				dst.VariableValueV2OneOf2 = nil
+			if err = validator.Validate(dst.VariableValueV2MultiString); err != nil {
+				dst.VariableValueV2MultiString = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VariableValueV2OneOf2 = nil
+		dst.VariableValueV2MultiString = nil
 	}
 
-	// try to unmarshal data into VariableValueV2OneOf3
-	err = newStrictDecoder(data).Decode(&dst.VariableValueV2OneOf3)
+	// try to unmarshal data into VariableValueV2Regex
+	err = newStrictDecoder(data).Decode(&dst.VariableValueV2Regex)
 	if err == nil {
-		jsonVariableValueV2OneOf3, _ := json.Marshal(dst.VariableValueV2OneOf3)
-		if string(jsonVariableValueV2OneOf3) == "{}" { // empty struct
-			dst.VariableValueV2OneOf3 = nil
+		jsonVariableValueV2Regex, _ := json.Marshal(dst.VariableValueV2Regex)
+		if string(jsonVariableValueV2Regex) == "{}" { // empty struct
+			dst.VariableValueV2Regex = nil
 		} else {
-			if err = validator.Validate(dst.VariableValueV2OneOf3); err != nil {
-				dst.VariableValueV2OneOf3 = nil
+			if err = validator.Validate(dst.VariableValueV2Regex); err != nil {
+				dst.VariableValueV2Regex = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VariableValueV2OneOf3 = nil
+		dst.VariableValueV2Regex = nil
 	}
 
-	// try to unmarshal data into VariableValueV2OneOf4
-	err = newStrictDecoder(data).Decode(&dst.VariableValueV2OneOf4)
+	// try to unmarshal data into VariableValueV2SingleNumeric
+	err = newStrictDecoder(data).Decode(&dst.VariableValueV2SingleNumeric)
 	if err == nil {
-		jsonVariableValueV2OneOf4, _ := json.Marshal(dst.VariableValueV2OneOf4)
-		if string(jsonVariableValueV2OneOf4) == "{}" { // empty struct
-			dst.VariableValueV2OneOf4 = nil
+		jsonVariableValueV2SingleNumeric, _ := json.Marshal(dst.VariableValueV2SingleNumeric)
+		if string(jsonVariableValueV2SingleNumeric) == "{}" { // empty struct
+			dst.VariableValueV2SingleNumeric = nil
 		} else {
-			if err = validator.Validate(dst.VariableValueV2OneOf4); err != nil {
-				dst.VariableValueV2OneOf4 = nil
+			if err = validator.Validate(dst.VariableValueV2SingleNumeric); err != nil {
+				dst.VariableValueV2SingleNumeric = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VariableValueV2OneOf4 = nil
+		dst.VariableValueV2SingleNumeric = nil
 	}
 
-	// try to unmarshal data into VariableValueV2OneOf5
-	err = newStrictDecoder(data).Decode(&dst.VariableValueV2OneOf5)
+	// try to unmarshal data into VariableValueV2SingleString
+	err = newStrictDecoder(data).Decode(&dst.VariableValueV2SingleString)
 	if err == nil {
-		jsonVariableValueV2OneOf5, _ := json.Marshal(dst.VariableValueV2OneOf5)
-		if string(jsonVariableValueV2OneOf5) == "{}" { // empty struct
-			dst.VariableValueV2OneOf5 = nil
+		jsonVariableValueV2SingleString, _ := json.Marshal(dst.VariableValueV2SingleString)
+		if string(jsonVariableValueV2SingleString) == "{}" { // empty struct
+			dst.VariableValueV2SingleString = nil
 		} else {
-			if err = validator.Validate(dst.VariableValueV2OneOf5); err != nil {
-				dst.VariableValueV2OneOf5 = nil
+			if err = validator.Validate(dst.VariableValueV2SingleString); err != nil {
+				dst.VariableValueV2SingleString = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VariableValueV2OneOf5 = nil
+		dst.VariableValueV2SingleString = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.VariableValueV2OneOf = nil
-		dst.VariableValueV2OneOf1 = nil
-		dst.VariableValueV2OneOf2 = nil
-		dst.VariableValueV2OneOf3 = nil
-		dst.VariableValueV2OneOf4 = nil
-		dst.VariableValueV2OneOf5 = nil
+		dst.VariableValueV2Interval = nil
+		dst.VariableValueV2Lucene = nil
+		dst.VariableValueV2MultiString = nil
+		dst.VariableValueV2Regex = nil
+		dst.VariableValueV2SingleNumeric = nil
+		dst.VariableValueV2SingleString = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(VariableValueV2)")
 	} else if match == 1 {
@@ -194,28 +194,28 @@ func (dst *VariableValueV2) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src VariableValueV2) MarshalJSON() ([]byte, error) {
-	if src.VariableValueV2OneOf != nil {
-		return json.Marshal(&src.VariableValueV2OneOf)
+	if src.VariableValueV2Interval != nil {
+		return json.Marshal(&src.VariableValueV2Interval)
 	}
 
-	if src.VariableValueV2OneOf1 != nil {
-		return json.Marshal(&src.VariableValueV2OneOf1)
+	if src.VariableValueV2Lucene != nil {
+		return json.Marshal(&src.VariableValueV2Lucene)
 	}
 
-	if src.VariableValueV2OneOf2 != nil {
-		return json.Marshal(&src.VariableValueV2OneOf2)
+	if src.VariableValueV2MultiString != nil {
+		return json.Marshal(&src.VariableValueV2MultiString)
 	}
 
-	if src.VariableValueV2OneOf3 != nil {
-		return json.Marshal(&src.VariableValueV2OneOf3)
+	if src.VariableValueV2Regex != nil {
+		return json.Marshal(&src.VariableValueV2Regex)
 	}
 
-	if src.VariableValueV2OneOf4 != nil {
-		return json.Marshal(&src.VariableValueV2OneOf4)
+	if src.VariableValueV2SingleNumeric != nil {
+		return json.Marshal(&src.VariableValueV2SingleNumeric)
 	}
 
-	if src.VariableValueV2OneOf5 != nil {
-		return json.Marshal(&src.VariableValueV2OneOf5)
+	if src.VariableValueV2SingleString != nil {
+		return json.Marshal(&src.VariableValueV2SingleString)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -226,28 +226,28 @@ func (obj *VariableValueV2) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.VariableValueV2OneOf != nil {
-		return obj.VariableValueV2OneOf
+	if obj.VariableValueV2Interval != nil {
+		return obj.VariableValueV2Interval
 	}
 
-	if obj.VariableValueV2OneOf1 != nil {
-		return obj.VariableValueV2OneOf1
+	if obj.VariableValueV2Lucene != nil {
+		return obj.VariableValueV2Lucene
 	}
 
-	if obj.VariableValueV2OneOf2 != nil {
-		return obj.VariableValueV2OneOf2
+	if obj.VariableValueV2MultiString != nil {
+		return obj.VariableValueV2MultiString
 	}
 
-	if obj.VariableValueV2OneOf3 != nil {
-		return obj.VariableValueV2OneOf3
+	if obj.VariableValueV2Regex != nil {
+		return obj.VariableValueV2Regex
 	}
 
-	if obj.VariableValueV2OneOf4 != nil {
-		return obj.VariableValueV2OneOf4
+	if obj.VariableValueV2SingleNumeric != nil {
+		return obj.VariableValueV2SingleNumeric
 	}
 
-	if obj.VariableValueV2OneOf5 != nil {
-		return obj.VariableValueV2OneOf5
+	if obj.VariableValueV2SingleString != nil {
+		return obj.VariableValueV2SingleString
 	}
 
 	// all schemas are nil
@@ -256,28 +256,28 @@ func (obj *VariableValueV2) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj VariableValueV2) GetActualInstanceValue() (interface{}) {
-	if obj.VariableValueV2OneOf != nil {
-		return *obj.VariableValueV2OneOf
+	if obj.VariableValueV2Interval != nil {
+		return *obj.VariableValueV2Interval
 	}
 
-	if obj.VariableValueV2OneOf1 != nil {
-		return *obj.VariableValueV2OneOf1
+	if obj.VariableValueV2Lucene != nil {
+		return *obj.VariableValueV2Lucene
 	}
 
-	if obj.VariableValueV2OneOf2 != nil {
-		return *obj.VariableValueV2OneOf2
+	if obj.VariableValueV2MultiString != nil {
+		return *obj.VariableValueV2MultiString
 	}
 
-	if obj.VariableValueV2OneOf3 != nil {
-		return *obj.VariableValueV2OneOf3
+	if obj.VariableValueV2Regex != nil {
+		return *obj.VariableValueV2Regex
 	}
 
-	if obj.VariableValueV2OneOf4 != nil {
-		return *obj.VariableValueV2OneOf4
+	if obj.VariableValueV2SingleNumeric != nil {
+		return *obj.VariableValueV2SingleNumeric
 	}
 
-	if obj.VariableValueV2OneOf5 != nil {
-		return *obj.VariableValueV2OneOf5
+	if obj.VariableValueV2SingleString != nil {
+		return *obj.VariableValueV2SingleString
 	}
 
 	// all schemas are nil

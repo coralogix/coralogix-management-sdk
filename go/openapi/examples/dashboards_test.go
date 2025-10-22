@@ -41,13 +41,13 @@ func TestDashboards(t *testing.T) {
 		t.Fatalf("failed to read dashboard.json: %v", err)
 	}
 
-	var dashboard dashboards.Dashboard1
+	var dashboard dashboards.DashboardTwoMinutesFolderIdAbsoluteTimeFrame
 	err = json.Unmarshal(data, &dashboard)
 	assertNilAndPrintError(t, err)
 
 	req := dashboards.CreateDashboardRequestDataStructure{
 		Dashboard: dashboards.Dashboard{
-			Dashboard1: &dashboard,
+			DashboardTwoMinutesFolderIdAbsoluteTimeFrame: &dashboard,
 		},
 	}
 	created, httpResp, err := client.

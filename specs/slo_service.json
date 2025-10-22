@@ -30,12 +30,7 @@
               "type": "object",
               "properties": {
                 "direction": {
-                  "type": "string",
-                  "enum": [
-                    "ORDER_BY_DIRECTION_UNSPECIFIED",
-                    "ORDER_BY_DIRECTION_ASC",
-                    "ORDER_BY_DIRECTION_DESC"
-                  ]
+                  "$ref": "#/components/schemas/v2.OrderByDirection"
                 },
                 "fieldName": {
                   "example": "field_name",
@@ -500,6 +495,33 @@
           "slos"
         ]
       },
+      "ColorsByAggregation": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/ColorsByAggregation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByGroupBy": {
+        "type": "object",
+        "properties": {
+          "groupBy": {
+            "$ref": "#/components/schemas/ColorsByGroupBy"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByStack": {
+        "type": "object",
+        "properties": {
+          "stack": {
+            "$ref": "#/components/schemas/ColorsByStack"
+          }
+        },
+        "additionalProperties": false
+      },
       "CompareType": {
         "type": "string",
         "enum": [
@@ -547,50 +569,56 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "multipleValues": {
-                "$ref": "#/components/schemas/MultipleValues"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "filters": {
-                "$ref": "#/components/schemas/Filters"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
+      },
+      "FilterPathAndValuesFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "FilterPathAndValuesMultipleValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
       },
       "Filters": {
         "externalDocs": {
@@ -707,142 +735,148 @@
       "ServiceSlo": {
         "oneOf": [
           {
-            "externalDocs": {
-              "description": "Find out more about SLOs in Coralogix APM",
-              "url": "https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/"
-            },
-            "title": "Service SLO",
-            "description": "This data structure represents a Service Level Objective (SLO) in Coralogix APM.",
-            "type": "object",
-            "properties": {
-              "createdAt": {
-                "example": "2021-01-01T00:00:00.000Z",
-                "type": "string",
-                "format": "date-time"
-              },
-              "description": {
-                "example": "slo_description",
-                "type": "string"
-              },
-              "filters": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/SliFilter"
-                }
-              },
-              "id": {
-                "example": "slo_id",
-                "type": "string"
-              },
-              "latencySli": {
-                "$ref": "#/components/schemas/LatencySli"
-              },
-              "name": {
-                "example": "slo_name",
-                "type": "string"
-              },
-              "period": {
-                "$ref": "#/components/schemas/SloPeriod"
-              },
-              "remainingErrorBudgetPercentage": {
-                "example": 1,
-                "type": "integer",
-                "format": "int64"
-              },
-              "serviceName": {
-                "example": "service_name",
-                "type": "string"
-              },
-              "status": {
-                "$ref": "#/components/schemas/services.v1.SloStatus"
-              },
-              "targetPercentage": {
-                "example": 99,
-                "type": "integer",
-                "format": "int64"
-              }
-            },
-            "required": [
-              "name",
-              "serviceName",
-              "status",
-              "description",
-              "targetPercentage",
-              "sliType",
-              "filters",
-              "period"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/ServiceSloLatencySli"
           },
           {
-            "externalDocs": {
-              "description": "Find out more about SLOs in Coralogix APM",
-              "url": "https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/"
-            },
-            "title": "Service SLO",
-            "description": "This data structure represents a Service Level Objective (SLO) in Coralogix APM.",
-            "type": "object",
-            "properties": {
-              "createdAt": {
-                "example": "2021-01-01T00:00:00.000Z",
-                "type": "string",
-                "format": "date-time"
-              },
-              "description": {
-                "example": "slo_description",
-                "type": "string"
-              },
-              "errorSli": {
-                "$ref": "#/components/schemas/ErrorSli"
-              },
-              "filters": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/SliFilter"
-                }
-              },
-              "id": {
-                "example": "slo_id",
-                "type": "string"
-              },
-              "name": {
-                "example": "slo_name",
-                "type": "string"
-              },
-              "period": {
-                "$ref": "#/components/schemas/SloPeriod"
-              },
-              "remainingErrorBudgetPercentage": {
-                "example": 1,
-                "type": "integer",
-                "format": "int64"
-              },
-              "serviceName": {
-                "example": "service_name",
-                "type": "string"
-              },
-              "status": {
-                "$ref": "#/components/schemas/services.v1.SloStatus"
-              },
-              "targetPercentage": {
-                "example": 99,
-                "type": "integer",
-                "format": "int64"
-              }
-            },
-            "required": [
-              "name",
-              "serviceName",
-              "status",
-              "description",
-              "targetPercentage",
-              "sliType",
-              "filters",
-              "period"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/ServiceSloErrorSli"
           }
         ]
+      },
+      "ServiceSloErrorSli": {
+        "externalDocs": {
+          "description": "Find out more about SLOs in Coralogix APM",
+          "url": "https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/"
+        },
+        "title": "Service SLO",
+        "description": "This data structure represents a Service Level Objective (SLO) in Coralogix APM.",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "example": "2021-01-01T00:00:00.000Z",
+            "type": "string",
+            "format": "date-time"
+          },
+          "description": {
+            "example": "slo_description",
+            "type": "string"
+          },
+          "errorSli": {
+            "$ref": "#/components/schemas/ErrorSli"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SliFilter"
+            }
+          },
+          "id": {
+            "example": "slo_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "slo_name",
+            "type": "string"
+          },
+          "period": {
+            "$ref": "#/components/schemas/SloPeriod"
+          },
+          "remainingErrorBudgetPercentage": {
+            "example": 1,
+            "type": "integer",
+            "format": "int64"
+          },
+          "serviceName": {
+            "example": "service_name",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/services.v1.SloStatus"
+          },
+          "targetPercentage": {
+            "example": 99,
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "name",
+          "serviceName",
+          "status",
+          "description",
+          "targetPercentage",
+          "sliType",
+          "filters",
+          "period"
+        ],
+        "additionalProperties": false
+      },
+      "ServiceSloLatencySli": {
+        "externalDocs": {
+          "description": "Find out more about SLOs in Coralogix APM",
+          "url": "https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/"
+        },
+        "title": "Service SLO",
+        "description": "This data structure represents a Service Level Objective (SLO) in Coralogix APM.",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "example": "2021-01-01T00:00:00.000Z",
+            "type": "string",
+            "format": "date-time"
+          },
+          "description": {
+            "example": "slo_description",
+            "type": "string"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SliFilter"
+            }
+          },
+          "id": {
+            "example": "slo_id",
+            "type": "string"
+          },
+          "latencySli": {
+            "$ref": "#/components/schemas/LatencySli"
+          },
+          "name": {
+            "example": "slo_name",
+            "type": "string"
+          },
+          "period": {
+            "$ref": "#/components/schemas/SloPeriod"
+          },
+          "remainingErrorBudgetPercentage": {
+            "example": 1,
+            "type": "integer",
+            "format": "int64"
+          },
+          "serviceName": {
+            "example": "service_name",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/services.v1.SloStatus"
+          },
+          "targetPercentage": {
+            "example": 99,
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "name",
+          "serviceName",
+          "status",
+          "description",
+          "targetPercentage",
+          "sliType",
+          "filters",
+          "period"
+        ],
+        "additionalProperties": false
       },
       "SliFilter": {
         "externalDocs": {
@@ -898,6 +932,24 @@
           "THRESHOLD_SYMBOL_NOT_EQUAL"
         ]
       },
+      "YAxisViewByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/YAxisViewByCategory"
+          }
+        },
+        "additionalProperties": false
+      },
+      "YAxisViewByValue": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/YAxisViewByValue"
+          }
+        },
+        "additionalProperties": false
+      },
       "common.Group": {
         "type": "object",
         "properties": {
@@ -929,6 +981,14 @@
           "SLO_STATUS_UNSPECIFIED",
           "SLO_STATUS_OK",
           "SLO_STATUS_BREACHED"
+        ]
+      },
+      "v2.OrderByDirection": {
+        "type": "string",
+        "enum": [
+          "ORDER_BY_DIRECTION_UNSPECIFIED",
+          "ORDER_BY_DIRECTION_ASC",
+          "ORDER_BY_DIRECTION_DESC"
         ]
       },
       "v3.FilterOperator": {

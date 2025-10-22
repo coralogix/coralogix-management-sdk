@@ -12,223 +12,124 @@ package integration_service
 
 import (
 	"encoding/json"
+	"fmt"
+	"gopkg.in/validator.v2"
 )
 
-// checks if the IntegrationDetails type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &IntegrationDetails{}
-
-// IntegrationDetails This data structure represents a set of integration details.
+// IntegrationDetails - struct for IntegrationDetails
 type IntegrationDetails struct {
-	Default *DefaultIntegrationDetails `json:"default,omitempty"`
-	Docs []IntegrationDoc `json:"docs,omitempty"`
-	Extensions []V1Extension `json:"extensions,omitempty"`
-	Integration *Integration `json:"integration,omitempty"`
-	Local *LocalChangelog `json:"local,omitempty"`
+	IntegrationDetailsExternal *IntegrationDetailsExternal
+	IntegrationDetailsLocal *IntegrationDetailsLocal
 }
 
-// NewIntegrationDetails instantiates a new IntegrationDetails object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewIntegrationDetails() *IntegrationDetails {
-	this := IntegrationDetails{}
-	return &this
-}
-
-// NewIntegrationDetailsWithDefaults instantiates a new IntegrationDetails object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewIntegrationDetailsWithDefaults() *IntegrationDetails {
-	this := IntegrationDetails{}
-	return &this
-}
-
-// GetDefault returns the Default field value if set, zero value otherwise.
-func (o *IntegrationDetails) GetDefault() DefaultIntegrationDetails {
-	if o == nil || IsNil(o.Default) {
-		var ret DefaultIntegrationDetails
-		return ret
+// IntegrationDetailsExternalAsIntegrationDetails is a convenience function that returns IntegrationDetailsExternal wrapped in IntegrationDetails
+func IntegrationDetailsExternalAsIntegrationDetails(v *IntegrationDetailsExternal) IntegrationDetails {
+	return IntegrationDetails{
+		IntegrationDetailsExternal: v,
 	}
-	return *o.Default
 }
 
-// GetDefaultOk returns a tuple with the Default field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IntegrationDetails) GetDefaultOk() (*DefaultIntegrationDetails, bool) {
-	if o == nil || IsNil(o.Default) {
-		return nil, false
+// IntegrationDetailsLocalAsIntegrationDetails is a convenience function that returns IntegrationDetailsLocal wrapped in IntegrationDetails
+func IntegrationDetailsLocalAsIntegrationDetails(v *IntegrationDetailsLocal) IntegrationDetails {
+	return IntegrationDetails{
+		IntegrationDetailsLocal: v,
 	}
-	return o.Default, true
 }
 
-// HasDefault returns a boolean if a field has been set.
-func (o *IntegrationDetails) HasDefault() bool {
-	if o != nil && !IsNil(o.Default) {
-		return true
+
+// Unmarshal JSON data into one of the pointers in the struct
+func (dst *IntegrationDetails) UnmarshalJSON(data []byte) error {
+	var err error
+	match := 0
+	// try to unmarshal data into IntegrationDetailsExternal
+	err = newStrictDecoder(data).Decode(&dst.IntegrationDetailsExternal)
+	if err == nil {
+		jsonIntegrationDetailsExternal, _ := json.Marshal(dst.IntegrationDetailsExternal)
+		if string(jsonIntegrationDetailsExternal) == "{}" { // empty struct
+			dst.IntegrationDetailsExternal = nil
+		} else {
+			if err = validator.Validate(dst.IntegrationDetailsExternal); err != nil {
+				dst.IntegrationDetailsExternal = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.IntegrationDetailsExternal = nil
 	}
 
-	return false
-}
-
-// SetDefault gets a reference to the given DefaultIntegrationDetails and assigns it to the Default field.
-func (o *IntegrationDetails) SetDefault(v DefaultIntegrationDetails) {
-	o.Default = &v
-}
-
-// GetDocs returns the Docs field value if set, zero value otherwise.
-func (o *IntegrationDetails) GetDocs() []IntegrationDoc {
-	if o == nil || IsNil(o.Docs) {
-		var ret []IntegrationDoc
-		return ret
-	}
-	return o.Docs
-}
-
-// GetDocsOk returns a tuple with the Docs field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IntegrationDetails) GetDocsOk() ([]IntegrationDoc, bool) {
-	if o == nil || IsNil(o.Docs) {
-		return nil, false
-	}
-	return o.Docs, true
-}
-
-// HasDocs returns a boolean if a field has been set.
-func (o *IntegrationDetails) HasDocs() bool {
-	if o != nil && !IsNil(o.Docs) {
-		return true
+	// try to unmarshal data into IntegrationDetailsLocal
+	err = newStrictDecoder(data).Decode(&dst.IntegrationDetailsLocal)
+	if err == nil {
+		jsonIntegrationDetailsLocal, _ := json.Marshal(dst.IntegrationDetailsLocal)
+		if string(jsonIntegrationDetailsLocal) == "{}" { // empty struct
+			dst.IntegrationDetailsLocal = nil
+		} else {
+			if err = validator.Validate(dst.IntegrationDetailsLocal); err != nil {
+				dst.IntegrationDetailsLocal = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.IntegrationDetailsLocal = nil
 	}
 
-	return false
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.IntegrationDetailsExternal = nil
+		dst.IntegrationDetailsLocal = nil
+
+		return fmt.Errorf("data matches more than one schema in oneOf(IntegrationDetails)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("data failed to match schemas in oneOf(IntegrationDetails)")
+	}
 }
 
-// SetDocs gets a reference to the given []IntegrationDoc and assigns it to the Docs field.
-func (o *IntegrationDetails) SetDocs(v []IntegrationDoc) {
-	o.Docs = v
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src IntegrationDetails) MarshalJSON() ([]byte, error) {
+	if src.IntegrationDetailsExternal != nil {
+		return json.Marshal(&src.IntegrationDetailsExternal)
+	}
+
+	if src.IntegrationDetailsLocal != nil {
+		return json.Marshal(&src.IntegrationDetailsLocal)
+	}
+
+	return nil, nil // no data in oneOf schemas
 }
 
-// GetExtensions returns the Extensions field value if set, zero value otherwise.
-func (o *IntegrationDetails) GetExtensions() []V1Extension {
-	if o == nil || IsNil(o.Extensions) {
-		var ret []V1Extension
-		return ret
+// Get the actual instance
+func (obj *IntegrationDetails) GetActualInstance() (interface{}) {
+	if obj == nil {
+		return nil
 	}
-	return o.Extensions
+	if obj.IntegrationDetailsExternal != nil {
+		return obj.IntegrationDetailsExternal
+	}
+
+	if obj.IntegrationDetailsLocal != nil {
+		return obj.IntegrationDetailsLocal
+	}
+
+	// all schemas are nil
+	return nil
 }
 
-// GetExtensionsOk returns a tuple with the Extensions field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IntegrationDetails) GetExtensionsOk() ([]V1Extension, bool) {
-	if o == nil || IsNil(o.Extensions) {
-		return nil, false
-	}
-	return o.Extensions, true
-}
-
-// HasExtensions returns a boolean if a field has been set.
-func (o *IntegrationDetails) HasExtensions() bool {
-	if o != nil && !IsNil(o.Extensions) {
-		return true
+// Get the actual instance value
+func (obj IntegrationDetails) GetActualInstanceValue() (interface{}) {
+	if obj.IntegrationDetailsExternal != nil {
+		return *obj.IntegrationDetailsExternal
 	}
 
-	return false
-}
-
-// SetExtensions gets a reference to the given []V1Extension and assigns it to the Extensions field.
-func (o *IntegrationDetails) SetExtensions(v []V1Extension) {
-	o.Extensions = v
-}
-
-// GetIntegration returns the Integration field value if set, zero value otherwise.
-func (o *IntegrationDetails) GetIntegration() Integration {
-	if o == nil || IsNil(o.Integration) {
-		var ret Integration
-		return ret
-	}
-	return *o.Integration
-}
-
-// GetIntegrationOk returns a tuple with the Integration field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IntegrationDetails) GetIntegrationOk() (*Integration, bool) {
-	if o == nil || IsNil(o.Integration) {
-		return nil, false
-	}
-	return o.Integration, true
-}
-
-// HasIntegration returns a boolean if a field has been set.
-func (o *IntegrationDetails) HasIntegration() bool {
-	if o != nil && !IsNil(o.Integration) {
-		return true
+	if obj.IntegrationDetailsLocal != nil {
+		return *obj.IntegrationDetailsLocal
 	}
 
-	return false
-}
-
-// SetIntegration gets a reference to the given Integration and assigns it to the Integration field.
-func (o *IntegrationDetails) SetIntegration(v Integration) {
-	o.Integration = &v
-}
-
-// GetLocal returns the Local field value if set, zero value otherwise.
-func (o *IntegrationDetails) GetLocal() LocalChangelog {
-	if o == nil || IsNil(o.Local) {
-		var ret LocalChangelog
-		return ret
-	}
-	return *o.Local
-}
-
-// GetLocalOk returns a tuple with the Local field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IntegrationDetails) GetLocalOk() (*LocalChangelog, bool) {
-	if o == nil || IsNil(o.Local) {
-		return nil, false
-	}
-	return o.Local, true
-}
-
-// HasLocal returns a boolean if a field has been set.
-func (o *IntegrationDetails) HasLocal() bool {
-	if o != nil && !IsNil(o.Local) {
-		return true
-	}
-
-	return false
-}
-
-// SetLocal gets a reference to the given LocalChangelog and assigns it to the Local field.
-func (o *IntegrationDetails) SetLocal(v LocalChangelog) {
-	o.Local = &v
-}
-
-func (o IntegrationDetails) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o IntegrationDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Default) {
-		toSerialize["default"] = o.Default
-	}
-	if !IsNil(o.Docs) {
-		toSerialize["docs"] = o.Docs
-	}
-	if !IsNil(o.Extensions) {
-		toSerialize["extensions"] = o.Extensions
-	}
-	if !IsNil(o.Integration) {
-		toSerialize["integration"] = o.Integration
-	}
-	if !IsNil(o.Local) {
-		toSerialize["local"] = o.Local
-	}
-	return toSerialize, nil
+	// all schemas are nil
+	return nil
 }
 
 type NullableIntegrationDetails struct {

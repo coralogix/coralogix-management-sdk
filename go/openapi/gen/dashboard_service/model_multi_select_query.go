@@ -18,29 +18,29 @@ import (
 
 // MultiSelectQuery - struct for MultiSelectQuery
 type MultiSelectQuery struct {
-	MultiSelectQueryOneOf *MultiSelectQueryOneOf
-	MultiSelectQueryOneOf1 *MultiSelectQueryOneOf1
-	MultiSelectQueryOneOf2 *MultiSelectQueryOneOf2
+	QueryLogsQuery *QueryLogsQuery
+	QueryMetricsQuery *QueryMetricsQuery
+	QuerySpansQuery *QuerySpansQuery
 }
 
-// MultiSelectQueryOneOfAsMultiSelectQuery is a convenience function that returns MultiSelectQueryOneOf wrapped in MultiSelectQuery
-func MultiSelectQueryOneOfAsMultiSelectQuery(v *MultiSelectQueryOneOf) MultiSelectQuery {
+// QueryLogsQueryAsMultiSelectQuery is a convenience function that returns QueryLogsQuery wrapped in MultiSelectQuery
+func QueryLogsQueryAsMultiSelectQuery(v *QueryLogsQuery) MultiSelectQuery {
 	return MultiSelectQuery{
-		MultiSelectQueryOneOf: v,
+		QueryLogsQuery: v,
 	}
 }
 
-// MultiSelectQueryOneOf1AsMultiSelectQuery is a convenience function that returns MultiSelectQueryOneOf1 wrapped in MultiSelectQuery
-func MultiSelectQueryOneOf1AsMultiSelectQuery(v *MultiSelectQueryOneOf1) MultiSelectQuery {
+// QueryMetricsQueryAsMultiSelectQuery is a convenience function that returns QueryMetricsQuery wrapped in MultiSelectQuery
+func QueryMetricsQueryAsMultiSelectQuery(v *QueryMetricsQuery) MultiSelectQuery {
 	return MultiSelectQuery{
-		MultiSelectQueryOneOf1: v,
+		QueryMetricsQuery: v,
 	}
 }
 
-// MultiSelectQueryOneOf2AsMultiSelectQuery is a convenience function that returns MultiSelectQueryOneOf2 wrapped in MultiSelectQuery
-func MultiSelectQueryOneOf2AsMultiSelectQuery(v *MultiSelectQueryOneOf2) MultiSelectQuery {
+// QuerySpansQueryAsMultiSelectQuery is a convenience function that returns QuerySpansQuery wrapped in MultiSelectQuery
+func QuerySpansQueryAsMultiSelectQuery(v *QuerySpansQuery) MultiSelectQuery {
 	return MultiSelectQuery{
-		MultiSelectQueryOneOf2: v,
+		QuerySpansQuery: v,
 	}
 }
 
@@ -49,62 +49,62 @@ func MultiSelectQueryOneOf2AsMultiSelectQuery(v *MultiSelectQueryOneOf2) MultiSe
 func (dst *MultiSelectQuery) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into MultiSelectQueryOneOf
-	err = newStrictDecoder(data).Decode(&dst.MultiSelectQueryOneOf)
+	// try to unmarshal data into QueryLogsQuery
+	err = newStrictDecoder(data).Decode(&dst.QueryLogsQuery)
 	if err == nil {
-		jsonMultiSelectQueryOneOf, _ := json.Marshal(dst.MultiSelectQueryOneOf)
-		if string(jsonMultiSelectQueryOneOf) == "{}" { // empty struct
-			dst.MultiSelectQueryOneOf = nil
+		jsonQueryLogsQuery, _ := json.Marshal(dst.QueryLogsQuery)
+		if string(jsonQueryLogsQuery) == "{}" { // empty struct
+			dst.QueryLogsQuery = nil
 		} else {
-			if err = validator.Validate(dst.MultiSelectQueryOneOf); err != nil {
-				dst.MultiSelectQueryOneOf = nil
+			if err = validator.Validate(dst.QueryLogsQuery); err != nil {
+				dst.QueryLogsQuery = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.MultiSelectQueryOneOf = nil
+		dst.QueryLogsQuery = nil
 	}
 
-	// try to unmarshal data into MultiSelectQueryOneOf1
-	err = newStrictDecoder(data).Decode(&dst.MultiSelectQueryOneOf1)
+	// try to unmarshal data into QueryMetricsQuery
+	err = newStrictDecoder(data).Decode(&dst.QueryMetricsQuery)
 	if err == nil {
-		jsonMultiSelectQueryOneOf1, _ := json.Marshal(dst.MultiSelectQueryOneOf1)
-		if string(jsonMultiSelectQueryOneOf1) == "{}" { // empty struct
-			dst.MultiSelectQueryOneOf1 = nil
+		jsonQueryMetricsQuery, _ := json.Marshal(dst.QueryMetricsQuery)
+		if string(jsonQueryMetricsQuery) == "{}" { // empty struct
+			dst.QueryMetricsQuery = nil
 		} else {
-			if err = validator.Validate(dst.MultiSelectQueryOneOf1); err != nil {
-				dst.MultiSelectQueryOneOf1 = nil
+			if err = validator.Validate(dst.QueryMetricsQuery); err != nil {
+				dst.QueryMetricsQuery = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.MultiSelectQueryOneOf1 = nil
+		dst.QueryMetricsQuery = nil
 	}
 
-	// try to unmarshal data into MultiSelectQueryOneOf2
-	err = newStrictDecoder(data).Decode(&dst.MultiSelectQueryOneOf2)
+	// try to unmarshal data into QuerySpansQuery
+	err = newStrictDecoder(data).Decode(&dst.QuerySpansQuery)
 	if err == nil {
-		jsonMultiSelectQueryOneOf2, _ := json.Marshal(dst.MultiSelectQueryOneOf2)
-		if string(jsonMultiSelectQueryOneOf2) == "{}" { // empty struct
-			dst.MultiSelectQueryOneOf2 = nil
+		jsonQuerySpansQuery, _ := json.Marshal(dst.QuerySpansQuery)
+		if string(jsonQuerySpansQuery) == "{}" { // empty struct
+			dst.QuerySpansQuery = nil
 		} else {
-			if err = validator.Validate(dst.MultiSelectQueryOneOf2); err != nil {
-				dst.MultiSelectQueryOneOf2 = nil
+			if err = validator.Validate(dst.QuerySpansQuery); err != nil {
+				dst.QuerySpansQuery = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.MultiSelectQueryOneOf2 = nil
+		dst.QuerySpansQuery = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.MultiSelectQueryOneOf = nil
-		dst.MultiSelectQueryOneOf1 = nil
-		dst.MultiSelectQueryOneOf2 = nil
+		dst.QueryLogsQuery = nil
+		dst.QueryMetricsQuery = nil
+		dst.QuerySpansQuery = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(MultiSelectQuery)")
 	} else if match == 1 {
@@ -116,16 +116,16 @@ func (dst *MultiSelectQuery) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src MultiSelectQuery) MarshalJSON() ([]byte, error) {
-	if src.MultiSelectQueryOneOf != nil {
-		return json.Marshal(&src.MultiSelectQueryOneOf)
+	if src.QueryLogsQuery != nil {
+		return json.Marshal(&src.QueryLogsQuery)
 	}
 
-	if src.MultiSelectQueryOneOf1 != nil {
-		return json.Marshal(&src.MultiSelectQueryOneOf1)
+	if src.QueryMetricsQuery != nil {
+		return json.Marshal(&src.QueryMetricsQuery)
 	}
 
-	if src.MultiSelectQueryOneOf2 != nil {
-		return json.Marshal(&src.MultiSelectQueryOneOf2)
+	if src.QuerySpansQuery != nil {
+		return json.Marshal(&src.QuerySpansQuery)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -136,16 +136,16 @@ func (obj *MultiSelectQuery) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.MultiSelectQueryOneOf != nil {
-		return obj.MultiSelectQueryOneOf
+	if obj.QueryLogsQuery != nil {
+		return obj.QueryLogsQuery
 	}
 
-	if obj.MultiSelectQueryOneOf1 != nil {
-		return obj.MultiSelectQueryOneOf1
+	if obj.QueryMetricsQuery != nil {
+		return obj.QueryMetricsQuery
 	}
 
-	if obj.MultiSelectQueryOneOf2 != nil {
-		return obj.MultiSelectQueryOneOf2
+	if obj.QuerySpansQuery != nil {
+		return obj.QuerySpansQuery
 	}
 
 	// all schemas are nil
@@ -154,16 +154,16 @@ func (obj *MultiSelectQuery) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj MultiSelectQuery) GetActualInstanceValue() (interface{}) {
-	if obj.MultiSelectQueryOneOf != nil {
-		return *obj.MultiSelectQueryOneOf
+	if obj.QueryLogsQuery != nil {
+		return *obj.QueryLogsQuery
 	}
 
-	if obj.MultiSelectQueryOneOf1 != nil {
-		return *obj.MultiSelectQueryOneOf1
+	if obj.QueryMetricsQuery != nil {
+		return *obj.QueryMetricsQuery
 	}
 
-	if obj.MultiSelectQueryOneOf2 != nil {
-		return *obj.MultiSelectQueryOneOf2
+	if obj.QuerySpansQuery != nil {
+		return *obj.QuerySpansQuery
 	}
 
 	// all schemas are nil

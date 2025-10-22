@@ -204,43 +204,10 @@
               "items": {
                 "oneOf": [
                   {
-                    "externalDocs": {
-                      "description": "Find out more about enrichments",
-                      "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
-                    },
-                    "title": "Search Clause",
-                    "description": "This data structure represents a search clause",
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "example": 1,
-                        "type": "integer",
-                        "format": "int64"
-                      }
-                    },
-                    "required": [
-                      "searchBy"
-                    ],
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/SearchClauseId"
                   },
                   {
-                    "externalDocs": {
-                      "description": "Find out more about enrichments",
-                      "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
-                    },
-                    "title": "Search Clause",
-                    "description": "This data structure represents a search clause",
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "example": "custom_enrichment_name",
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "searchBy"
-                    ],
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/SearchClauseName"
                   }
                 ]
               }
@@ -383,6 +350,33 @@
   },
   "components": {
     "schemas": {
+      "ColorsByAggregation": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/ColorsByAggregation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByGroupBy": {
+        "type": "object",
+        "properties": {
+          "groupBy": {
+            "$ref": "#/components/schemas/ColorsByGroupBy"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByStack": {
+        "type": "object",
+        "properties": {
+          "stack": {
+            "$ref": "#/components/schemas/ColorsByStack"
+          }
+        },
+        "additionalProperties": false
+      },
       "CreateCustomEnrichmentResponse": {
         "externalDocs": {
           "description": "Find out more about enrichments",
@@ -436,31 +430,37 @@
       "CustomEnrichmentData": {
         "oneOf": [
           {
-            "type": "object",
-            "properties": {
-              "definition": {
-                "$ref": "#/components/schemas/CustomEnrichment"
-              },
-              "textual": {
-                "type": "string"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/CustomEnrichmentDataBinary"
           },
           {
-            "type": "object",
-            "properties": {
-              "binary": {
-                "type": "string",
-                "format": "byte"
-              },
-              "definition": {
-                "$ref": "#/components/schemas/CustomEnrichment"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/CustomEnrichmentDataTextual"
           }
         ]
+      },
+      "CustomEnrichmentDataBinary": {
+        "type": "object",
+        "properties": {
+          "binary": {
+            "type": "string",
+            "format": "byte"
+          },
+          "definition": {
+            "$ref": "#/components/schemas/CustomEnrichment"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomEnrichmentDataTextual": {
+        "type": "object",
+        "properties": {
+          "definition": {
+            "$ref": "#/components/schemas/CustomEnrichment"
+          },
+          "textual": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
       },
       "DeleteCustomEnrichmentResponse": {
         "type": "object",
@@ -490,113 +490,125 @@
       "File": {
         "oneOf": [
           {
-            "externalDocs": {
-              "description": "Find out more about enrichments",
-              "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
-            },
-            "title": "File",
-            "description": "This data structure represents a file",
-            "type": "object",
-            "properties": {
-              "extension": {
-                "example": "csv",
-                "type": "string"
-              },
-              "name": {
-                "example": "file_name",
-                "type": "string"
-              },
-              "size": {
-                "example": 100,
-                "type": "integer",
-                "format": "int64"
-              },
-              "textual": {
-                "example": "row1,row2 value1,value2",
-                "type": "string"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FileTextual"
           },
           {
-            "externalDocs": {
-              "description": "Find out more about enrichments",
-              "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
-            },
-            "title": "File",
-            "description": "This data structure represents a file",
-            "type": "object",
-            "properties": {
-              "binary": {
-                "example": "0xFABB32",
-                "type": "string",
-                "format": "byte"
-              },
-              "extension": {
-                "example": "csv",
-                "type": "string"
-              },
-              "name": {
-                "example": "file_name",
-                "type": "string"
-              },
-              "size": {
-                "example": 100,
-                "type": "integer",
-                "format": "int64"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FileBinary"
           }
         ]
+      },
+      "FileBinary": {
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        },
+        "title": "File",
+        "description": "This data structure represents a file",
+        "type": "object",
+        "properties": {
+          "binary": {
+            "example": "0xFABB32",
+            "type": "string",
+            "format": "byte"
+          },
+          "extension": {
+            "example": "csv",
+            "type": "string"
+          },
+          "name": {
+            "example": "file_name",
+            "type": "string"
+          },
+          "size": {
+            "example": 100,
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FileTextual": {
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        },
+        "title": "File",
+        "description": "This data structure represents a file",
+        "type": "object",
+        "properties": {
+          "extension": {
+            "example": "csv",
+            "type": "string"
+          },
+          "name": {
+            "example": "file_name",
+            "type": "string"
+          },
+          "size": {
+            "example": 100,
+            "type": "integer",
+            "format": "int64"
+          },
+          "textual": {
+            "example": "row1,row2 value1,value2",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
       },
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "multipleValues": {
-                "$ref": "#/components/schemas/MultipleValues"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "filters": {
-                "$ref": "#/components/schemas/Filters"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
+      },
+      "FilterPathAndValuesFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "FilterPathAndValuesMultipleValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
       },
       "Filters": {
         "externalDocs": {
@@ -671,6 +683,45 @@
           }
         }
       },
+      "SearchClauseId": {
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        },
+        "title": "Search Clause",
+        "description": "This data structure represents a search clause",
+        "type": "object",
+        "properties": {
+          "id": {
+            "example": 1,
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "searchBy"
+        ],
+        "additionalProperties": false
+      },
+      "SearchClauseName": {
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        },
+        "title": "Search Clause",
+        "description": "This data structure represents a search clause",
+        "type": "object",
+        "properties": {
+          "name": {
+            "example": "custom_enrichment_name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "searchBy"
+        ],
+        "additionalProperties": false
+      },
       "SearchCustomEnrichmentDataResponse": {
         "type": "object",
         "properties": {
@@ -702,6 +753,24 @@
         "required": [
           "customEnrichment"
         ]
+      },
+      "YAxisViewByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/YAxisViewByCategory"
+          }
+        },
+        "additionalProperties": false
+      },
+      "YAxisViewByValue": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/YAxisViewByValue"
+          }
+        },
+        "additionalProperties": false
       },
       "common.Group": {
         "type": "object",

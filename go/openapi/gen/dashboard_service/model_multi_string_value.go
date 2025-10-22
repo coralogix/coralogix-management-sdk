@@ -18,21 +18,21 @@ import (
 
 // MultiStringValue - struct for MultiStringValue
 type MultiStringValue struct {
-	MultiStringValueOneOf *MultiStringValueOneOf
-	MultiStringValueOneOf1 *MultiStringValueOneOf1
+	MultiStringValueAll *MultiStringValueAll
+	MultiStringValueList *MultiStringValueList
 }
 
-// MultiStringValueOneOfAsMultiStringValue is a convenience function that returns MultiStringValueOneOf wrapped in MultiStringValue
-func MultiStringValueOneOfAsMultiStringValue(v *MultiStringValueOneOf) MultiStringValue {
+// MultiStringValueAllAsMultiStringValue is a convenience function that returns MultiStringValueAll wrapped in MultiStringValue
+func MultiStringValueAllAsMultiStringValue(v *MultiStringValueAll) MultiStringValue {
 	return MultiStringValue{
-		MultiStringValueOneOf: v,
+		MultiStringValueAll: v,
 	}
 }
 
-// MultiStringValueOneOf1AsMultiStringValue is a convenience function that returns MultiStringValueOneOf1 wrapped in MultiStringValue
-func MultiStringValueOneOf1AsMultiStringValue(v *MultiStringValueOneOf1) MultiStringValue {
+// MultiStringValueListAsMultiStringValue is a convenience function that returns MultiStringValueList wrapped in MultiStringValue
+func MultiStringValueListAsMultiStringValue(v *MultiStringValueList) MultiStringValue {
 	return MultiStringValue{
-		MultiStringValueOneOf1: v,
+		MultiStringValueList: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func MultiStringValueOneOf1AsMultiStringValue(v *MultiStringValueOneOf1) MultiSt
 func (dst *MultiStringValue) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into MultiStringValueOneOf
-	err = newStrictDecoder(data).Decode(&dst.MultiStringValueOneOf)
+	// try to unmarshal data into MultiStringValueAll
+	err = newStrictDecoder(data).Decode(&dst.MultiStringValueAll)
 	if err == nil {
-		jsonMultiStringValueOneOf, _ := json.Marshal(dst.MultiStringValueOneOf)
-		if string(jsonMultiStringValueOneOf) == "{}" { // empty struct
-			dst.MultiStringValueOneOf = nil
+		jsonMultiStringValueAll, _ := json.Marshal(dst.MultiStringValueAll)
+		if string(jsonMultiStringValueAll) == "{}" { // empty struct
+			dst.MultiStringValueAll = nil
 		} else {
-			if err = validator.Validate(dst.MultiStringValueOneOf); err != nil {
-				dst.MultiStringValueOneOf = nil
+			if err = validator.Validate(dst.MultiStringValueAll); err != nil {
+				dst.MultiStringValueAll = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.MultiStringValueOneOf = nil
+		dst.MultiStringValueAll = nil
 	}
 
-	// try to unmarshal data into MultiStringValueOneOf1
-	err = newStrictDecoder(data).Decode(&dst.MultiStringValueOneOf1)
+	// try to unmarshal data into MultiStringValueList
+	err = newStrictDecoder(data).Decode(&dst.MultiStringValueList)
 	if err == nil {
-		jsonMultiStringValueOneOf1, _ := json.Marshal(dst.MultiStringValueOneOf1)
-		if string(jsonMultiStringValueOneOf1) == "{}" { // empty struct
-			dst.MultiStringValueOneOf1 = nil
+		jsonMultiStringValueList, _ := json.Marshal(dst.MultiStringValueList)
+		if string(jsonMultiStringValueList) == "{}" { // empty struct
+			dst.MultiStringValueList = nil
 		} else {
-			if err = validator.Validate(dst.MultiStringValueOneOf1); err != nil {
-				dst.MultiStringValueOneOf1 = nil
+			if err = validator.Validate(dst.MultiStringValueList); err != nil {
+				dst.MultiStringValueList = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.MultiStringValueOneOf1 = nil
+		dst.MultiStringValueList = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.MultiStringValueOneOf = nil
-		dst.MultiStringValueOneOf1 = nil
+		dst.MultiStringValueAll = nil
+		dst.MultiStringValueList = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(MultiStringValue)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *MultiStringValue) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src MultiStringValue) MarshalJSON() ([]byte, error) {
-	if src.MultiStringValueOneOf != nil {
-		return json.Marshal(&src.MultiStringValueOneOf)
+	if src.MultiStringValueAll != nil {
+		return json.Marshal(&src.MultiStringValueAll)
 	}
 
-	if src.MultiStringValueOneOf1 != nil {
-		return json.Marshal(&src.MultiStringValueOneOf1)
+	if src.MultiStringValueList != nil {
+		return json.Marshal(&src.MultiStringValueList)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *MultiStringValue) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.MultiStringValueOneOf != nil {
-		return obj.MultiStringValueOneOf
+	if obj.MultiStringValueAll != nil {
+		return obj.MultiStringValueAll
 	}
 
-	if obj.MultiStringValueOneOf1 != nil {
-		return obj.MultiStringValueOneOf1
+	if obj.MultiStringValueList != nil {
+		return obj.MultiStringValueList
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *MultiStringValue) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj MultiStringValue) GetActualInstanceValue() (interface{}) {
-	if obj.MultiStringValueOneOf != nil {
-		return *obj.MultiStringValueOneOf
+	if obj.MultiStringValueAll != nil {
+		return *obj.MultiStringValueAll
 	}
 
-	if obj.MultiStringValueOneOf1 != nil {
-		return *obj.MultiStringValueOneOf1
+	if obj.MultiStringValueList != nil {
+		return *obj.MultiStringValueList
 	}
 
 	// all schemas are nil

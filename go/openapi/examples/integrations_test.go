@@ -43,35 +43,35 @@ func TestIntegration(t *testing.T) {
 	version := "0.1.0"
 
 	params := []integrations.Parameter{
-		integrations.Parameter1AsParameter(&integrations.Parameter1{
+		integrations.ParameterStringValueAsParameter(&integrations.ParameterStringValue{
 			Key:         strPtr("ApplicationName"),
 			StringValue: strPtr("cxsdk"),
 		}),
-		integrations.Parameter1AsParameter(&integrations.Parameter1{
+		integrations.ParameterStringValueAsParameter(&integrations.ParameterStringValue{
 			Key:         strPtr("SubsystemName"),
 			StringValue: strPtr("aws-metrics-collector"),
 		}),
-		integrations.Parameter1AsParameter(&integrations.Parameter1{
+		integrations.ParameterStringValueAsParameter(&integrations.ParameterStringValue{
 			Key:         strPtr("AwsRoleArn"),
 			StringValue: strPtr(role),
 		}),
-		integrations.Parameter1AsParameter(&integrations.Parameter1{
+		integrations.ParameterStringValueAsParameter(&integrations.ParameterStringValue{
 			Key:         strPtr("IntegrationName"),
 			StringValue: strPtr("sdk-integration-setup"),
 		}),
-		integrations.Parameter1AsParameter(&integrations.Parameter1{
+		integrations.ParameterStringValueAsParameter(&integrations.ParameterStringValue{
 			Key:         strPtr("AwsRegion"),
 			StringValue: strPtr(awsRegion),
 		}),
-		integrations.Parameter2AsParameter(&integrations.Parameter2{
+		integrations.ParameterBooleanValueAsParameter(&integrations.ParameterBooleanValue{
 			Key:          strPtr("WithAggregations"),
 			BooleanValue: boolPtr(false),
 		}),
-		integrations.Parameter2AsParameter(&integrations.Parameter2{
+		integrations.ParameterBooleanValueAsParameter(&integrations.ParameterBooleanValue{
 			Key:          strPtr("EnrichWithTags"),
 			BooleanValue: boolPtr(false),
 		}),
-		integrations.Parameter3AsParameter(&integrations.Parameter3{
+		integrations.ParameterStringListAsParameter(&integrations.ParameterStringList{
 			Key: strPtr("MetricNamespaces"),
 			StringList: &integrations.StringList{
 				Values: []string{"AWS/S3"},

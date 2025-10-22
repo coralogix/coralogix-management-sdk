@@ -18,77 +18,77 @@ import (
 
 // WidgetDefinition - struct for WidgetDefinition
 type WidgetDefinition struct {
-	WidgetDefinitionOneOf *WidgetDefinitionOneOf
-	WidgetDefinitionOneOf1 *WidgetDefinitionOneOf1
-	WidgetDefinitionOneOf2 *WidgetDefinitionOneOf2
-	WidgetDefinitionOneOf3 *WidgetDefinitionOneOf3
-	WidgetDefinitionOneOf4 *WidgetDefinitionOneOf4
-	WidgetDefinitionOneOf5 *WidgetDefinitionOneOf5
-	WidgetDefinitionOneOf6 *WidgetDefinitionOneOf6
-	WidgetDefinitionOneOf7 *WidgetDefinitionOneOf7
-	WidgetDefinitionOneOf8 *WidgetDefinitionOneOf8
+	DefinitionBarChart *DefinitionBarChart
+	DefinitionDataTable *DefinitionDataTable
+	DefinitionDynamic *DefinitionDynamic
+	DefinitionGauge *DefinitionGauge
+	DefinitionHexagon *DefinitionHexagon
+	DefinitionHorizontalBarChart *DefinitionHorizontalBarChart
+	DefinitionLineChart *DefinitionLineChart
+	DefinitionMarkdown *DefinitionMarkdown
+	DefinitionPieChart *DefinitionPieChart
 }
 
-// WidgetDefinitionOneOfAsWidgetDefinition is a convenience function that returns WidgetDefinitionOneOf wrapped in WidgetDefinition
-func WidgetDefinitionOneOfAsWidgetDefinition(v *WidgetDefinitionOneOf) WidgetDefinition {
+// DefinitionBarChartAsWidgetDefinition is a convenience function that returns DefinitionBarChart wrapped in WidgetDefinition
+func DefinitionBarChartAsWidgetDefinition(v *DefinitionBarChart) WidgetDefinition {
 	return WidgetDefinition{
-		WidgetDefinitionOneOf: v,
+		DefinitionBarChart: v,
 	}
 }
 
-// WidgetDefinitionOneOf1AsWidgetDefinition is a convenience function that returns WidgetDefinitionOneOf1 wrapped in WidgetDefinition
-func WidgetDefinitionOneOf1AsWidgetDefinition(v *WidgetDefinitionOneOf1) WidgetDefinition {
+// DefinitionDataTableAsWidgetDefinition is a convenience function that returns DefinitionDataTable wrapped in WidgetDefinition
+func DefinitionDataTableAsWidgetDefinition(v *DefinitionDataTable) WidgetDefinition {
 	return WidgetDefinition{
-		WidgetDefinitionOneOf1: v,
+		DefinitionDataTable: v,
 	}
 }
 
-// WidgetDefinitionOneOf2AsWidgetDefinition is a convenience function that returns WidgetDefinitionOneOf2 wrapped in WidgetDefinition
-func WidgetDefinitionOneOf2AsWidgetDefinition(v *WidgetDefinitionOneOf2) WidgetDefinition {
+// DefinitionDynamicAsWidgetDefinition is a convenience function that returns DefinitionDynamic wrapped in WidgetDefinition
+func DefinitionDynamicAsWidgetDefinition(v *DefinitionDynamic) WidgetDefinition {
 	return WidgetDefinition{
-		WidgetDefinitionOneOf2: v,
+		DefinitionDynamic: v,
 	}
 }
 
-// WidgetDefinitionOneOf3AsWidgetDefinition is a convenience function that returns WidgetDefinitionOneOf3 wrapped in WidgetDefinition
-func WidgetDefinitionOneOf3AsWidgetDefinition(v *WidgetDefinitionOneOf3) WidgetDefinition {
+// DefinitionGaugeAsWidgetDefinition is a convenience function that returns DefinitionGauge wrapped in WidgetDefinition
+func DefinitionGaugeAsWidgetDefinition(v *DefinitionGauge) WidgetDefinition {
 	return WidgetDefinition{
-		WidgetDefinitionOneOf3: v,
+		DefinitionGauge: v,
 	}
 }
 
-// WidgetDefinitionOneOf4AsWidgetDefinition is a convenience function that returns WidgetDefinitionOneOf4 wrapped in WidgetDefinition
-func WidgetDefinitionOneOf4AsWidgetDefinition(v *WidgetDefinitionOneOf4) WidgetDefinition {
+// DefinitionHexagonAsWidgetDefinition is a convenience function that returns DefinitionHexagon wrapped in WidgetDefinition
+func DefinitionHexagonAsWidgetDefinition(v *DefinitionHexagon) WidgetDefinition {
 	return WidgetDefinition{
-		WidgetDefinitionOneOf4: v,
+		DefinitionHexagon: v,
 	}
 }
 
-// WidgetDefinitionOneOf5AsWidgetDefinition is a convenience function that returns WidgetDefinitionOneOf5 wrapped in WidgetDefinition
-func WidgetDefinitionOneOf5AsWidgetDefinition(v *WidgetDefinitionOneOf5) WidgetDefinition {
+// DefinitionHorizontalBarChartAsWidgetDefinition is a convenience function that returns DefinitionHorizontalBarChart wrapped in WidgetDefinition
+func DefinitionHorizontalBarChartAsWidgetDefinition(v *DefinitionHorizontalBarChart) WidgetDefinition {
 	return WidgetDefinition{
-		WidgetDefinitionOneOf5: v,
+		DefinitionHorizontalBarChart: v,
 	}
 }
 
-// WidgetDefinitionOneOf6AsWidgetDefinition is a convenience function that returns WidgetDefinitionOneOf6 wrapped in WidgetDefinition
-func WidgetDefinitionOneOf6AsWidgetDefinition(v *WidgetDefinitionOneOf6) WidgetDefinition {
+// DefinitionLineChartAsWidgetDefinition is a convenience function that returns DefinitionLineChart wrapped in WidgetDefinition
+func DefinitionLineChartAsWidgetDefinition(v *DefinitionLineChart) WidgetDefinition {
 	return WidgetDefinition{
-		WidgetDefinitionOneOf6: v,
+		DefinitionLineChart: v,
 	}
 }
 
-// WidgetDefinitionOneOf7AsWidgetDefinition is a convenience function that returns WidgetDefinitionOneOf7 wrapped in WidgetDefinition
-func WidgetDefinitionOneOf7AsWidgetDefinition(v *WidgetDefinitionOneOf7) WidgetDefinition {
+// DefinitionMarkdownAsWidgetDefinition is a convenience function that returns DefinitionMarkdown wrapped in WidgetDefinition
+func DefinitionMarkdownAsWidgetDefinition(v *DefinitionMarkdown) WidgetDefinition {
 	return WidgetDefinition{
-		WidgetDefinitionOneOf7: v,
+		DefinitionMarkdown: v,
 	}
 }
 
-// WidgetDefinitionOneOf8AsWidgetDefinition is a convenience function that returns WidgetDefinitionOneOf8 wrapped in WidgetDefinition
-func WidgetDefinitionOneOf8AsWidgetDefinition(v *WidgetDefinitionOneOf8) WidgetDefinition {
+// DefinitionPieChartAsWidgetDefinition is a convenience function that returns DefinitionPieChart wrapped in WidgetDefinition
+func DefinitionPieChartAsWidgetDefinition(v *DefinitionPieChart) WidgetDefinition {
 	return WidgetDefinition{
-		WidgetDefinitionOneOf8: v,
+		DefinitionPieChart: v,
 	}
 }
 
@@ -97,170 +97,170 @@ func WidgetDefinitionOneOf8AsWidgetDefinition(v *WidgetDefinitionOneOf8) WidgetD
 func (dst *WidgetDefinition) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into WidgetDefinitionOneOf
-	err = newStrictDecoder(data).Decode(&dst.WidgetDefinitionOneOf)
+	// try to unmarshal data into DefinitionBarChart
+	err = newStrictDecoder(data).Decode(&dst.DefinitionBarChart)
 	if err == nil {
-		jsonWidgetDefinitionOneOf, _ := json.Marshal(dst.WidgetDefinitionOneOf)
-		if string(jsonWidgetDefinitionOneOf) == "{}" { // empty struct
-			dst.WidgetDefinitionOneOf = nil
+		jsonDefinitionBarChart, _ := json.Marshal(dst.DefinitionBarChart)
+		if string(jsonDefinitionBarChart) == "{}" { // empty struct
+			dst.DefinitionBarChart = nil
 		} else {
-			if err = validator.Validate(dst.WidgetDefinitionOneOf); err != nil {
-				dst.WidgetDefinitionOneOf = nil
+			if err = validator.Validate(dst.DefinitionBarChart); err != nil {
+				dst.DefinitionBarChart = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.WidgetDefinitionOneOf = nil
+		dst.DefinitionBarChart = nil
 	}
 
-	// try to unmarshal data into WidgetDefinitionOneOf1
-	err = newStrictDecoder(data).Decode(&dst.WidgetDefinitionOneOf1)
+	// try to unmarshal data into DefinitionDataTable
+	err = newStrictDecoder(data).Decode(&dst.DefinitionDataTable)
 	if err == nil {
-		jsonWidgetDefinitionOneOf1, _ := json.Marshal(dst.WidgetDefinitionOneOf1)
-		if string(jsonWidgetDefinitionOneOf1) == "{}" { // empty struct
-			dst.WidgetDefinitionOneOf1 = nil
+		jsonDefinitionDataTable, _ := json.Marshal(dst.DefinitionDataTable)
+		if string(jsonDefinitionDataTable) == "{}" { // empty struct
+			dst.DefinitionDataTable = nil
 		} else {
-			if err = validator.Validate(dst.WidgetDefinitionOneOf1); err != nil {
-				dst.WidgetDefinitionOneOf1 = nil
+			if err = validator.Validate(dst.DefinitionDataTable); err != nil {
+				dst.DefinitionDataTable = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.WidgetDefinitionOneOf1 = nil
+		dst.DefinitionDataTable = nil
 	}
 
-	// try to unmarshal data into WidgetDefinitionOneOf2
-	err = newStrictDecoder(data).Decode(&dst.WidgetDefinitionOneOf2)
+	// try to unmarshal data into DefinitionDynamic
+	err = newStrictDecoder(data).Decode(&dst.DefinitionDynamic)
 	if err == nil {
-		jsonWidgetDefinitionOneOf2, _ := json.Marshal(dst.WidgetDefinitionOneOf2)
-		if string(jsonWidgetDefinitionOneOf2) == "{}" { // empty struct
-			dst.WidgetDefinitionOneOf2 = nil
+		jsonDefinitionDynamic, _ := json.Marshal(dst.DefinitionDynamic)
+		if string(jsonDefinitionDynamic) == "{}" { // empty struct
+			dst.DefinitionDynamic = nil
 		} else {
-			if err = validator.Validate(dst.WidgetDefinitionOneOf2); err != nil {
-				dst.WidgetDefinitionOneOf2 = nil
+			if err = validator.Validate(dst.DefinitionDynamic); err != nil {
+				dst.DefinitionDynamic = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.WidgetDefinitionOneOf2 = nil
+		dst.DefinitionDynamic = nil
 	}
 
-	// try to unmarshal data into WidgetDefinitionOneOf3
-	err = newStrictDecoder(data).Decode(&dst.WidgetDefinitionOneOf3)
+	// try to unmarshal data into DefinitionGauge
+	err = newStrictDecoder(data).Decode(&dst.DefinitionGauge)
 	if err == nil {
-		jsonWidgetDefinitionOneOf3, _ := json.Marshal(dst.WidgetDefinitionOneOf3)
-		if string(jsonWidgetDefinitionOneOf3) == "{}" { // empty struct
-			dst.WidgetDefinitionOneOf3 = nil
+		jsonDefinitionGauge, _ := json.Marshal(dst.DefinitionGauge)
+		if string(jsonDefinitionGauge) == "{}" { // empty struct
+			dst.DefinitionGauge = nil
 		} else {
-			if err = validator.Validate(dst.WidgetDefinitionOneOf3); err != nil {
-				dst.WidgetDefinitionOneOf3 = nil
+			if err = validator.Validate(dst.DefinitionGauge); err != nil {
+				dst.DefinitionGauge = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.WidgetDefinitionOneOf3 = nil
+		dst.DefinitionGauge = nil
 	}
 
-	// try to unmarshal data into WidgetDefinitionOneOf4
-	err = newStrictDecoder(data).Decode(&dst.WidgetDefinitionOneOf4)
+	// try to unmarshal data into DefinitionHexagon
+	err = newStrictDecoder(data).Decode(&dst.DefinitionHexagon)
 	if err == nil {
-		jsonWidgetDefinitionOneOf4, _ := json.Marshal(dst.WidgetDefinitionOneOf4)
-		if string(jsonWidgetDefinitionOneOf4) == "{}" { // empty struct
-			dst.WidgetDefinitionOneOf4 = nil
+		jsonDefinitionHexagon, _ := json.Marshal(dst.DefinitionHexagon)
+		if string(jsonDefinitionHexagon) == "{}" { // empty struct
+			dst.DefinitionHexagon = nil
 		} else {
-			if err = validator.Validate(dst.WidgetDefinitionOneOf4); err != nil {
-				dst.WidgetDefinitionOneOf4 = nil
+			if err = validator.Validate(dst.DefinitionHexagon); err != nil {
+				dst.DefinitionHexagon = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.WidgetDefinitionOneOf4 = nil
+		dst.DefinitionHexagon = nil
 	}
 
-	// try to unmarshal data into WidgetDefinitionOneOf5
-	err = newStrictDecoder(data).Decode(&dst.WidgetDefinitionOneOf5)
+	// try to unmarshal data into DefinitionHorizontalBarChart
+	err = newStrictDecoder(data).Decode(&dst.DefinitionHorizontalBarChart)
 	if err == nil {
-		jsonWidgetDefinitionOneOf5, _ := json.Marshal(dst.WidgetDefinitionOneOf5)
-		if string(jsonWidgetDefinitionOneOf5) == "{}" { // empty struct
-			dst.WidgetDefinitionOneOf5 = nil
+		jsonDefinitionHorizontalBarChart, _ := json.Marshal(dst.DefinitionHorizontalBarChart)
+		if string(jsonDefinitionHorizontalBarChart) == "{}" { // empty struct
+			dst.DefinitionHorizontalBarChart = nil
 		} else {
-			if err = validator.Validate(dst.WidgetDefinitionOneOf5); err != nil {
-				dst.WidgetDefinitionOneOf5 = nil
+			if err = validator.Validate(dst.DefinitionHorizontalBarChart); err != nil {
+				dst.DefinitionHorizontalBarChart = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.WidgetDefinitionOneOf5 = nil
+		dst.DefinitionHorizontalBarChart = nil
 	}
 
-	// try to unmarshal data into WidgetDefinitionOneOf6
-	err = newStrictDecoder(data).Decode(&dst.WidgetDefinitionOneOf6)
+	// try to unmarshal data into DefinitionLineChart
+	err = newStrictDecoder(data).Decode(&dst.DefinitionLineChart)
 	if err == nil {
-		jsonWidgetDefinitionOneOf6, _ := json.Marshal(dst.WidgetDefinitionOneOf6)
-		if string(jsonWidgetDefinitionOneOf6) == "{}" { // empty struct
-			dst.WidgetDefinitionOneOf6 = nil
+		jsonDefinitionLineChart, _ := json.Marshal(dst.DefinitionLineChart)
+		if string(jsonDefinitionLineChart) == "{}" { // empty struct
+			dst.DefinitionLineChart = nil
 		} else {
-			if err = validator.Validate(dst.WidgetDefinitionOneOf6); err != nil {
-				dst.WidgetDefinitionOneOf6 = nil
+			if err = validator.Validate(dst.DefinitionLineChart); err != nil {
+				dst.DefinitionLineChart = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.WidgetDefinitionOneOf6 = nil
+		dst.DefinitionLineChart = nil
 	}
 
-	// try to unmarshal data into WidgetDefinitionOneOf7
-	err = newStrictDecoder(data).Decode(&dst.WidgetDefinitionOneOf7)
+	// try to unmarshal data into DefinitionMarkdown
+	err = newStrictDecoder(data).Decode(&dst.DefinitionMarkdown)
 	if err == nil {
-		jsonWidgetDefinitionOneOf7, _ := json.Marshal(dst.WidgetDefinitionOneOf7)
-		if string(jsonWidgetDefinitionOneOf7) == "{}" { // empty struct
-			dst.WidgetDefinitionOneOf7 = nil
+		jsonDefinitionMarkdown, _ := json.Marshal(dst.DefinitionMarkdown)
+		if string(jsonDefinitionMarkdown) == "{}" { // empty struct
+			dst.DefinitionMarkdown = nil
 		} else {
-			if err = validator.Validate(dst.WidgetDefinitionOneOf7); err != nil {
-				dst.WidgetDefinitionOneOf7 = nil
+			if err = validator.Validate(dst.DefinitionMarkdown); err != nil {
+				dst.DefinitionMarkdown = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.WidgetDefinitionOneOf7 = nil
+		dst.DefinitionMarkdown = nil
 	}
 
-	// try to unmarshal data into WidgetDefinitionOneOf8
-	err = newStrictDecoder(data).Decode(&dst.WidgetDefinitionOneOf8)
+	// try to unmarshal data into DefinitionPieChart
+	err = newStrictDecoder(data).Decode(&dst.DefinitionPieChart)
 	if err == nil {
-		jsonWidgetDefinitionOneOf8, _ := json.Marshal(dst.WidgetDefinitionOneOf8)
-		if string(jsonWidgetDefinitionOneOf8) == "{}" { // empty struct
-			dst.WidgetDefinitionOneOf8 = nil
+		jsonDefinitionPieChart, _ := json.Marshal(dst.DefinitionPieChart)
+		if string(jsonDefinitionPieChart) == "{}" { // empty struct
+			dst.DefinitionPieChart = nil
 		} else {
-			if err = validator.Validate(dst.WidgetDefinitionOneOf8); err != nil {
-				dst.WidgetDefinitionOneOf8 = nil
+			if err = validator.Validate(dst.DefinitionPieChart); err != nil {
+				dst.DefinitionPieChart = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.WidgetDefinitionOneOf8 = nil
+		dst.DefinitionPieChart = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.WidgetDefinitionOneOf = nil
-		dst.WidgetDefinitionOneOf1 = nil
-		dst.WidgetDefinitionOneOf2 = nil
-		dst.WidgetDefinitionOneOf3 = nil
-		dst.WidgetDefinitionOneOf4 = nil
-		dst.WidgetDefinitionOneOf5 = nil
-		dst.WidgetDefinitionOneOf6 = nil
-		dst.WidgetDefinitionOneOf7 = nil
-		dst.WidgetDefinitionOneOf8 = nil
+		dst.DefinitionBarChart = nil
+		dst.DefinitionDataTable = nil
+		dst.DefinitionDynamic = nil
+		dst.DefinitionGauge = nil
+		dst.DefinitionHexagon = nil
+		dst.DefinitionHorizontalBarChart = nil
+		dst.DefinitionLineChart = nil
+		dst.DefinitionMarkdown = nil
+		dst.DefinitionPieChart = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(WidgetDefinition)")
 	} else if match == 1 {
@@ -272,40 +272,40 @@ func (dst *WidgetDefinition) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src WidgetDefinition) MarshalJSON() ([]byte, error) {
-	if src.WidgetDefinitionOneOf != nil {
-		return json.Marshal(&src.WidgetDefinitionOneOf)
+	if src.DefinitionBarChart != nil {
+		return json.Marshal(&src.DefinitionBarChart)
 	}
 
-	if src.WidgetDefinitionOneOf1 != nil {
-		return json.Marshal(&src.WidgetDefinitionOneOf1)
+	if src.DefinitionDataTable != nil {
+		return json.Marshal(&src.DefinitionDataTable)
 	}
 
-	if src.WidgetDefinitionOneOf2 != nil {
-		return json.Marshal(&src.WidgetDefinitionOneOf2)
+	if src.DefinitionDynamic != nil {
+		return json.Marshal(&src.DefinitionDynamic)
 	}
 
-	if src.WidgetDefinitionOneOf3 != nil {
-		return json.Marshal(&src.WidgetDefinitionOneOf3)
+	if src.DefinitionGauge != nil {
+		return json.Marshal(&src.DefinitionGauge)
 	}
 
-	if src.WidgetDefinitionOneOf4 != nil {
-		return json.Marshal(&src.WidgetDefinitionOneOf4)
+	if src.DefinitionHexagon != nil {
+		return json.Marshal(&src.DefinitionHexagon)
 	}
 
-	if src.WidgetDefinitionOneOf5 != nil {
-		return json.Marshal(&src.WidgetDefinitionOneOf5)
+	if src.DefinitionHorizontalBarChart != nil {
+		return json.Marshal(&src.DefinitionHorizontalBarChart)
 	}
 
-	if src.WidgetDefinitionOneOf6 != nil {
-		return json.Marshal(&src.WidgetDefinitionOneOf6)
+	if src.DefinitionLineChart != nil {
+		return json.Marshal(&src.DefinitionLineChart)
 	}
 
-	if src.WidgetDefinitionOneOf7 != nil {
-		return json.Marshal(&src.WidgetDefinitionOneOf7)
+	if src.DefinitionMarkdown != nil {
+		return json.Marshal(&src.DefinitionMarkdown)
 	}
 
-	if src.WidgetDefinitionOneOf8 != nil {
-		return json.Marshal(&src.WidgetDefinitionOneOf8)
+	if src.DefinitionPieChart != nil {
+		return json.Marshal(&src.DefinitionPieChart)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -316,40 +316,40 @@ func (obj *WidgetDefinition) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.WidgetDefinitionOneOf != nil {
-		return obj.WidgetDefinitionOneOf
+	if obj.DefinitionBarChart != nil {
+		return obj.DefinitionBarChart
 	}
 
-	if obj.WidgetDefinitionOneOf1 != nil {
-		return obj.WidgetDefinitionOneOf1
+	if obj.DefinitionDataTable != nil {
+		return obj.DefinitionDataTable
 	}
 
-	if obj.WidgetDefinitionOneOf2 != nil {
-		return obj.WidgetDefinitionOneOf2
+	if obj.DefinitionDynamic != nil {
+		return obj.DefinitionDynamic
 	}
 
-	if obj.WidgetDefinitionOneOf3 != nil {
-		return obj.WidgetDefinitionOneOf3
+	if obj.DefinitionGauge != nil {
+		return obj.DefinitionGauge
 	}
 
-	if obj.WidgetDefinitionOneOf4 != nil {
-		return obj.WidgetDefinitionOneOf4
+	if obj.DefinitionHexagon != nil {
+		return obj.DefinitionHexagon
 	}
 
-	if obj.WidgetDefinitionOneOf5 != nil {
-		return obj.WidgetDefinitionOneOf5
+	if obj.DefinitionHorizontalBarChart != nil {
+		return obj.DefinitionHorizontalBarChart
 	}
 
-	if obj.WidgetDefinitionOneOf6 != nil {
-		return obj.WidgetDefinitionOneOf6
+	if obj.DefinitionLineChart != nil {
+		return obj.DefinitionLineChart
 	}
 
-	if obj.WidgetDefinitionOneOf7 != nil {
-		return obj.WidgetDefinitionOneOf7
+	if obj.DefinitionMarkdown != nil {
+		return obj.DefinitionMarkdown
 	}
 
-	if obj.WidgetDefinitionOneOf8 != nil {
-		return obj.WidgetDefinitionOneOf8
+	if obj.DefinitionPieChart != nil {
+		return obj.DefinitionPieChart
 	}
 
 	// all schemas are nil
@@ -358,40 +358,40 @@ func (obj *WidgetDefinition) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj WidgetDefinition) GetActualInstanceValue() (interface{}) {
-	if obj.WidgetDefinitionOneOf != nil {
-		return *obj.WidgetDefinitionOneOf
+	if obj.DefinitionBarChart != nil {
+		return *obj.DefinitionBarChart
 	}
 
-	if obj.WidgetDefinitionOneOf1 != nil {
-		return *obj.WidgetDefinitionOneOf1
+	if obj.DefinitionDataTable != nil {
+		return *obj.DefinitionDataTable
 	}
 
-	if obj.WidgetDefinitionOneOf2 != nil {
-		return *obj.WidgetDefinitionOneOf2
+	if obj.DefinitionDynamic != nil {
+		return *obj.DefinitionDynamic
 	}
 
-	if obj.WidgetDefinitionOneOf3 != nil {
-		return *obj.WidgetDefinitionOneOf3
+	if obj.DefinitionGauge != nil {
+		return *obj.DefinitionGauge
 	}
 
-	if obj.WidgetDefinitionOneOf4 != nil {
-		return *obj.WidgetDefinitionOneOf4
+	if obj.DefinitionHexagon != nil {
+		return *obj.DefinitionHexagon
 	}
 
-	if obj.WidgetDefinitionOneOf5 != nil {
-		return *obj.WidgetDefinitionOneOf5
+	if obj.DefinitionHorizontalBarChart != nil {
+		return *obj.DefinitionHorizontalBarChart
 	}
 
-	if obj.WidgetDefinitionOneOf6 != nil {
-		return *obj.WidgetDefinitionOneOf6
+	if obj.DefinitionLineChart != nil {
+		return *obj.DefinitionLineChart
 	}
 
-	if obj.WidgetDefinitionOneOf7 != nil {
-		return *obj.WidgetDefinitionOneOf7
+	if obj.DefinitionMarkdown != nil {
+		return *obj.DefinitionMarkdown
 	}
 
-	if obj.WidgetDefinitionOneOf8 != nil {
-		return *obj.WidgetDefinitionOneOf8
+	if obj.DefinitionPieChart != nil {
+		return *obj.DefinitionPieChart
 	}
 
 	// all schemas are nil

@@ -18,45 +18,45 @@ import (
 
 // Dimension - struct for Dimension
 type Dimension struct {
-	DimensionOneOf *DimensionOneOf
-	DimensionOneOf1 *DimensionOneOf1
-	DimensionOneOf2 *DimensionOneOf2
-	DimensionOneOf3 *DimensionOneOf3
-	DimensionOneOf4 *DimensionOneOf4
+	DimensionGenericDimension *DimensionGenericDimension
+	DimensionPillar *DimensionPillar
+	DimensionPriority *DimensionPriority
+	DimensionSeverity *DimensionSeverity
+	DimensionTier *DimensionTier
 }
 
-// DimensionOneOfAsDimension is a convenience function that returns DimensionOneOf wrapped in Dimension
-func DimensionOneOfAsDimension(v *DimensionOneOf) Dimension {
+// DimensionGenericDimensionAsDimension is a convenience function that returns DimensionGenericDimension wrapped in Dimension
+func DimensionGenericDimensionAsDimension(v *DimensionGenericDimension) Dimension {
 	return Dimension{
-		DimensionOneOf: v,
+		DimensionGenericDimension: v,
 	}
 }
 
-// DimensionOneOf1AsDimension is a convenience function that returns DimensionOneOf1 wrapped in Dimension
-func DimensionOneOf1AsDimension(v *DimensionOneOf1) Dimension {
+// DimensionPillarAsDimension is a convenience function that returns DimensionPillar wrapped in Dimension
+func DimensionPillarAsDimension(v *DimensionPillar) Dimension {
 	return Dimension{
-		DimensionOneOf1: v,
+		DimensionPillar: v,
 	}
 }
 
-// DimensionOneOf2AsDimension is a convenience function that returns DimensionOneOf2 wrapped in Dimension
-func DimensionOneOf2AsDimension(v *DimensionOneOf2) Dimension {
+// DimensionPriorityAsDimension is a convenience function that returns DimensionPriority wrapped in Dimension
+func DimensionPriorityAsDimension(v *DimensionPriority) Dimension {
 	return Dimension{
-		DimensionOneOf2: v,
+		DimensionPriority: v,
 	}
 }
 
-// DimensionOneOf3AsDimension is a convenience function that returns DimensionOneOf3 wrapped in Dimension
-func DimensionOneOf3AsDimension(v *DimensionOneOf3) Dimension {
+// DimensionSeverityAsDimension is a convenience function that returns DimensionSeverity wrapped in Dimension
+func DimensionSeverityAsDimension(v *DimensionSeverity) Dimension {
 	return Dimension{
-		DimensionOneOf3: v,
+		DimensionSeverity: v,
 	}
 }
 
-// DimensionOneOf4AsDimension is a convenience function that returns DimensionOneOf4 wrapped in Dimension
-func DimensionOneOf4AsDimension(v *DimensionOneOf4) Dimension {
+// DimensionTierAsDimension is a convenience function that returns DimensionTier wrapped in Dimension
+func DimensionTierAsDimension(v *DimensionTier) Dimension {
 	return Dimension{
-		DimensionOneOf4: v,
+		DimensionTier: v,
 	}
 }
 
@@ -65,98 +65,98 @@ func DimensionOneOf4AsDimension(v *DimensionOneOf4) Dimension {
 func (dst *Dimension) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into DimensionOneOf
-	err = newStrictDecoder(data).Decode(&dst.DimensionOneOf)
+	// try to unmarshal data into DimensionGenericDimension
+	err = newStrictDecoder(data).Decode(&dst.DimensionGenericDimension)
 	if err == nil {
-		jsonDimensionOneOf, _ := json.Marshal(dst.DimensionOneOf)
-		if string(jsonDimensionOneOf) == "{}" { // empty struct
-			dst.DimensionOneOf = nil
+		jsonDimensionGenericDimension, _ := json.Marshal(dst.DimensionGenericDimension)
+		if string(jsonDimensionGenericDimension) == "{}" { // empty struct
+			dst.DimensionGenericDimension = nil
 		} else {
-			if err = validator.Validate(dst.DimensionOneOf); err != nil {
-				dst.DimensionOneOf = nil
+			if err = validator.Validate(dst.DimensionGenericDimension); err != nil {
+				dst.DimensionGenericDimension = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.DimensionOneOf = nil
+		dst.DimensionGenericDimension = nil
 	}
 
-	// try to unmarshal data into DimensionOneOf1
-	err = newStrictDecoder(data).Decode(&dst.DimensionOneOf1)
+	// try to unmarshal data into DimensionPillar
+	err = newStrictDecoder(data).Decode(&dst.DimensionPillar)
 	if err == nil {
-		jsonDimensionOneOf1, _ := json.Marshal(dst.DimensionOneOf1)
-		if string(jsonDimensionOneOf1) == "{}" { // empty struct
-			dst.DimensionOneOf1 = nil
+		jsonDimensionPillar, _ := json.Marshal(dst.DimensionPillar)
+		if string(jsonDimensionPillar) == "{}" { // empty struct
+			dst.DimensionPillar = nil
 		} else {
-			if err = validator.Validate(dst.DimensionOneOf1); err != nil {
-				dst.DimensionOneOf1 = nil
+			if err = validator.Validate(dst.DimensionPillar); err != nil {
+				dst.DimensionPillar = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.DimensionOneOf1 = nil
+		dst.DimensionPillar = nil
 	}
 
-	// try to unmarshal data into DimensionOneOf2
-	err = newStrictDecoder(data).Decode(&dst.DimensionOneOf2)
+	// try to unmarshal data into DimensionPriority
+	err = newStrictDecoder(data).Decode(&dst.DimensionPriority)
 	if err == nil {
-		jsonDimensionOneOf2, _ := json.Marshal(dst.DimensionOneOf2)
-		if string(jsonDimensionOneOf2) == "{}" { // empty struct
-			dst.DimensionOneOf2 = nil
+		jsonDimensionPriority, _ := json.Marshal(dst.DimensionPriority)
+		if string(jsonDimensionPriority) == "{}" { // empty struct
+			dst.DimensionPriority = nil
 		} else {
-			if err = validator.Validate(dst.DimensionOneOf2); err != nil {
-				dst.DimensionOneOf2 = nil
+			if err = validator.Validate(dst.DimensionPriority); err != nil {
+				dst.DimensionPriority = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.DimensionOneOf2 = nil
+		dst.DimensionPriority = nil
 	}
 
-	// try to unmarshal data into DimensionOneOf3
-	err = newStrictDecoder(data).Decode(&dst.DimensionOneOf3)
+	// try to unmarshal data into DimensionSeverity
+	err = newStrictDecoder(data).Decode(&dst.DimensionSeverity)
 	if err == nil {
-		jsonDimensionOneOf3, _ := json.Marshal(dst.DimensionOneOf3)
-		if string(jsonDimensionOneOf3) == "{}" { // empty struct
-			dst.DimensionOneOf3 = nil
+		jsonDimensionSeverity, _ := json.Marshal(dst.DimensionSeverity)
+		if string(jsonDimensionSeverity) == "{}" { // empty struct
+			dst.DimensionSeverity = nil
 		} else {
-			if err = validator.Validate(dst.DimensionOneOf3); err != nil {
-				dst.DimensionOneOf3 = nil
+			if err = validator.Validate(dst.DimensionSeverity); err != nil {
+				dst.DimensionSeverity = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.DimensionOneOf3 = nil
+		dst.DimensionSeverity = nil
 	}
 
-	// try to unmarshal data into DimensionOneOf4
-	err = newStrictDecoder(data).Decode(&dst.DimensionOneOf4)
+	// try to unmarshal data into DimensionTier
+	err = newStrictDecoder(data).Decode(&dst.DimensionTier)
 	if err == nil {
-		jsonDimensionOneOf4, _ := json.Marshal(dst.DimensionOneOf4)
-		if string(jsonDimensionOneOf4) == "{}" { // empty struct
-			dst.DimensionOneOf4 = nil
+		jsonDimensionTier, _ := json.Marshal(dst.DimensionTier)
+		if string(jsonDimensionTier) == "{}" { // empty struct
+			dst.DimensionTier = nil
 		} else {
-			if err = validator.Validate(dst.DimensionOneOf4); err != nil {
-				dst.DimensionOneOf4 = nil
+			if err = validator.Validate(dst.DimensionTier); err != nil {
+				dst.DimensionTier = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.DimensionOneOf4 = nil
+		dst.DimensionTier = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.DimensionOneOf = nil
-		dst.DimensionOneOf1 = nil
-		dst.DimensionOneOf2 = nil
-		dst.DimensionOneOf3 = nil
-		dst.DimensionOneOf4 = nil
+		dst.DimensionGenericDimension = nil
+		dst.DimensionPillar = nil
+		dst.DimensionPriority = nil
+		dst.DimensionSeverity = nil
+		dst.DimensionTier = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(Dimension)")
 	} else if match == 1 {
@@ -168,24 +168,24 @@ func (dst *Dimension) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src Dimension) MarshalJSON() ([]byte, error) {
-	if src.DimensionOneOf != nil {
-		return json.Marshal(&src.DimensionOneOf)
+	if src.DimensionGenericDimension != nil {
+		return json.Marshal(&src.DimensionGenericDimension)
 	}
 
-	if src.DimensionOneOf1 != nil {
-		return json.Marshal(&src.DimensionOneOf1)
+	if src.DimensionPillar != nil {
+		return json.Marshal(&src.DimensionPillar)
 	}
 
-	if src.DimensionOneOf2 != nil {
-		return json.Marshal(&src.DimensionOneOf2)
+	if src.DimensionPriority != nil {
+		return json.Marshal(&src.DimensionPriority)
 	}
 
-	if src.DimensionOneOf3 != nil {
-		return json.Marshal(&src.DimensionOneOf3)
+	if src.DimensionSeverity != nil {
+		return json.Marshal(&src.DimensionSeverity)
 	}
 
-	if src.DimensionOneOf4 != nil {
-		return json.Marshal(&src.DimensionOneOf4)
+	if src.DimensionTier != nil {
+		return json.Marshal(&src.DimensionTier)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -196,24 +196,24 @@ func (obj *Dimension) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.DimensionOneOf != nil {
-		return obj.DimensionOneOf
+	if obj.DimensionGenericDimension != nil {
+		return obj.DimensionGenericDimension
 	}
 
-	if obj.DimensionOneOf1 != nil {
-		return obj.DimensionOneOf1
+	if obj.DimensionPillar != nil {
+		return obj.DimensionPillar
 	}
 
-	if obj.DimensionOneOf2 != nil {
-		return obj.DimensionOneOf2
+	if obj.DimensionPriority != nil {
+		return obj.DimensionPriority
 	}
 
-	if obj.DimensionOneOf3 != nil {
-		return obj.DimensionOneOf3
+	if obj.DimensionSeverity != nil {
+		return obj.DimensionSeverity
 	}
 
-	if obj.DimensionOneOf4 != nil {
-		return obj.DimensionOneOf4
+	if obj.DimensionTier != nil {
+		return obj.DimensionTier
 	}
 
 	// all schemas are nil
@@ -222,24 +222,24 @@ func (obj *Dimension) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj Dimension) GetActualInstanceValue() (interface{}) {
-	if obj.DimensionOneOf != nil {
-		return *obj.DimensionOneOf
+	if obj.DimensionGenericDimension != nil {
+		return *obj.DimensionGenericDimension
 	}
 
-	if obj.DimensionOneOf1 != nil {
-		return *obj.DimensionOneOf1
+	if obj.DimensionPillar != nil {
+		return *obj.DimensionPillar
 	}
 
-	if obj.DimensionOneOf2 != nil {
-		return *obj.DimensionOneOf2
+	if obj.DimensionPriority != nil {
+		return *obj.DimensionPriority
 	}
 
-	if obj.DimensionOneOf3 != nil {
-		return *obj.DimensionOneOf3
+	if obj.DimensionSeverity != nil {
+		return *obj.DimensionSeverity
 	}
 
-	if obj.DimensionOneOf4 != nil {
-		return *obj.DimensionOneOf4
+	if obj.DimensionTier != nil {
+		return *obj.DimensionTier
 	}
 
 	// all schemas are nil

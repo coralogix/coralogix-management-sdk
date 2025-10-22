@@ -435,6 +435,24 @@ components:
         pagination:
           $ref: "#/components/schemas/events.v3.PaginationResponse"
       type: object
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
     CxEvent:
       description: This data structure represents an event
       example:
@@ -515,8 +533,46 @@ components:
       type: object
     CxEventSingleOrMultiple:
       oneOf:
-      - $ref: "#/components/schemas/CxEventSingleOrMultiple_1"
-      - $ref: "#/components/schemas/CxEventSingleOrMultiple_2"
+      - $ref: "#/components/schemas/CxEventSingleOrMultipleSingleEvent"
+      - $ref: "#/components/schemas/CxEventSingleOrMultipleMultipleEvents"
+    CxEventSingleOrMultipleMultipleEvents:
+      additionalProperties: false
+      description: This data structure represents a single or multiple events
+      externalDocs:
+        url: ""
+      properties:
+        multipleEvents:
+          $ref: "#/components/schemas/CxEventArray"
+      required:
+      - event
+      title: CxEventSingleOrMultiple
+      type: object
+    CxEventSingleOrMultipleSingleEvent:
+      additionalProperties: false
+      description: This data structure represents a single or multiple events
+      example:
+        singleEvent:
+          cxEventType: test_type
+          companyId: 1
+          cxEventKey: test
+          cxEventMetadata:
+            test: test
+          cxEventPayload:
+            test: test
+          cxEventPayloadType: test_payload_type
+          cxEventDedupKey: test_dedup_key
+          cxEventLabels:
+            test: test
+          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        singleEvent:
+          $ref: "#/components/schemas/CxEvent"
+      required:
+      - event
+      title: CxEventSingleOrMultiple
+      type: object
     FieldGroup:
       properties:
         name:
@@ -537,8 +593,40 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValues_1"
-      - $ref: "#/components/schemas/FilterPathAndValues_2"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
     Filters:
       description: This data structure represents a filter
       externalDocs:
@@ -678,6 +766,18 @@ components:
             type: string
           type: array
       type: object
+    YAxisViewByCategory:
+      additionalProperties: false
+      properties:
+        category:
+          $ref: "#/components/schemas/YAxisViewByCategory"
+      type: object
+    YAxisViewByValue:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: "#/components/schemas/YAxisViewByValue"
+      type: object
     common.Group:
       properties:
         field:
@@ -694,6 +794,17 @@ components:
       enum:
       - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
       - FILTER_MATCHER_REGEXP
+      type: string
+    events.v3.OrderByDirection:
+      enum:
+      - ORDER_BY_DIRECTION_UNSPECIFIED
+      - ORDER_BY_DIRECTION_ASC
+      - ORDER_BY_DIRECTION_DESC
+      type: string
+    events.v3.OrderByFields:
+      enum:
+      - ORDER_BY_FIELDS_UNSPECIFIED
+      - ORDER_BY_FIELDS_TIMESTAMP
       type: string
     events.v3.PaginationResponse:
       example:
@@ -740,18 +851,9 @@ components:
     EventsService_ListEvents_order_bys_parameter_inner:
       properties:
         direction:
-          enum:
-          - ORDER_BY_DIRECTION_UNSPECIFIED
-          - ORDER_BY_DIRECTION_ASC
-          - ORDER_BY_DIRECTION_DESC
-          example: ORDER_BY_DIRECTION_ASC
-          type: string
+          $ref: "#/components/schemas/events.v3.OrderByDirection"
         fieldName:
-          enum:
-          - ORDER_BY_FIELDS_UNSPECIFIED
-          - ORDER_BY_FIELDS_TIMESTAMP
-          example: ORDER_BY_FIELDS_TIMESTAMP
-          type: string
+          $ref: "#/components/schemas/events.v3.OrderByFields"
       type: object
     EventsService_ListEvents_pagination_parameter:
       properties:
@@ -766,76 +868,6 @@ components:
     EventsService_BatchGetEvent_filter_parameter:
       properties:
         timestamp: {}
-      type: object
-    CxEventSingleOrMultiple_1:
-      additionalProperties: false
-      description: This data structure represents a single or multiple events
-      example:
-        singleEvent:
-          cxEventType: test_type
-          companyId: 1
-          cxEventKey: test
-          cxEventMetadata:
-            test: test
-          cxEventPayload:
-            test: test
-          cxEventPayloadType: test_payload_type
-          cxEventDedupKey: test_dedup_key
-          cxEventLabels:
-            test: test
-          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
-      externalDocs:
-        url: ""
-      properties:
-        singleEvent:
-          $ref: "#/components/schemas/CxEvent"
-      required:
-      - event
-      title: CxEventSingleOrMultiple
-      type: object
-    CxEventSingleOrMultiple_2:
-      additionalProperties: false
-      description: This data structure represents a single or multiple events
-      externalDocs:
-        url: ""
-      properties:
-        multipleEvents:
-          $ref: "#/components/schemas/CxEventArray"
-      required:
-      - event
-      title: CxEventSingleOrMultiple
-      type: object
-    FilterPathAndValues_1:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValues_2:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
       type: object
   securitySchemes:
     apiKeyAuth:

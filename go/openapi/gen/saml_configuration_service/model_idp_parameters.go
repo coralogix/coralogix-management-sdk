@@ -12,203 +12,124 @@ package saml_configuration_service
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
+	"gopkg.in/validator.v2"
 )
 
-// checks if the IDPParameters type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &IDPParameters{}
-
-// IDPParameters This data structure represents a set of SAML identity provider parameters
+// IDPParameters - struct for IDPParameters
 type IDPParameters struct {
-	Active bool `json:"active"`
-	GroupNames []string `json:"groupNames"`
-	MetadataUrl *string `json:"metadataUrl,omitempty"`
-	TeamEntityId int64 `json:"teamEntityId"`
+	IDPParametersMetadataContent *IDPParametersMetadataContent
+	IDPParametersMetadataUrl *IDPParametersMetadataUrl
 }
 
-type _IDPParameters IDPParameters
-
-// NewIDPParameters instantiates a new IDPParameters object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewIDPParameters(active bool, groupNames []string, teamEntityId int64) *IDPParameters {
-	this := IDPParameters{}
-	this.Active = active
-	this.GroupNames = groupNames
-	this.TeamEntityId = teamEntityId
-	return &this
-}
-
-// NewIDPParametersWithDefaults instantiates a new IDPParameters object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewIDPParametersWithDefaults() *IDPParameters {
-	this := IDPParameters{}
-	return &this
-}
-
-// GetActive returns the Active field value
-func (o *IDPParameters) GetActive() bool {
-	if o == nil {
-		var ret bool
-		return ret
+// IDPParametersMetadataContentAsIDPParameters is a convenience function that returns IDPParametersMetadataContent wrapped in IDPParameters
+func IDPParametersMetadataContentAsIDPParameters(v *IDPParametersMetadataContent) IDPParameters {
+	return IDPParameters{
+		IDPParametersMetadataContent: v,
 	}
-
-	return o.Active
 }
 
-// GetActiveOk returns a tuple with the Active field value
-// and a boolean to check if the value has been set.
-func (o *IDPParameters) GetActiveOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
+// IDPParametersMetadataUrlAsIDPParameters is a convenience function that returns IDPParametersMetadataUrl wrapped in IDPParameters
+func IDPParametersMetadataUrlAsIDPParameters(v *IDPParametersMetadataUrl) IDPParameters {
+	return IDPParameters{
+		IDPParametersMetadataUrl: v,
 	}
-	return &o.Active, true
 }
 
-// SetActive sets field value
-func (o *IDPParameters) SetActive(v bool) {
-	o.Active = v
-}
 
-// GetGroupNames returns the GroupNames field value
-func (o *IDPParameters) GetGroupNames() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-
-	return o.GroupNames
-}
-
-// GetGroupNamesOk returns a tuple with the GroupNames field value
-// and a boolean to check if the value has been set.
-func (o *IDPParameters) GetGroupNamesOk() ([]string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.GroupNames, true
-}
-
-// SetGroupNames sets field value
-func (o *IDPParameters) SetGroupNames(v []string) {
-	o.GroupNames = v
-}
-
-// GetMetadataUrl returns the MetadataUrl field value if set, zero value otherwise.
-func (o *IDPParameters) GetMetadataUrl() string {
-	if o == nil || IsNil(o.MetadataUrl) {
-		var ret string
-		return ret
-	}
-	return *o.MetadataUrl
-}
-
-// GetMetadataUrlOk returns a tuple with the MetadataUrl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IDPParameters) GetMetadataUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.MetadataUrl) {
-		return nil, false
-	}
-	return o.MetadataUrl, true
-}
-
-// HasMetadataUrl returns a boolean if a field has been set.
-func (o *IDPParameters) HasMetadataUrl() bool {
-	if o != nil && !IsNil(o.MetadataUrl) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetadataUrl gets a reference to the given string and assigns it to the MetadataUrl field.
-func (o *IDPParameters) SetMetadataUrl(v string) {
-	o.MetadataUrl = &v
-}
-
-// GetTeamEntityId returns the TeamEntityId field value
-func (o *IDPParameters) GetTeamEntityId() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.TeamEntityId
-}
-
-// GetTeamEntityIdOk returns a tuple with the TeamEntityId field value
-// and a boolean to check if the value has been set.
-func (o *IDPParameters) GetTeamEntityIdOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.TeamEntityId, true
-}
-
-// SetTeamEntityId sets field value
-func (o *IDPParameters) SetTeamEntityId(v int64) {
-	o.TeamEntityId = v
-}
-
-func (o IDPParameters) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o IDPParameters) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["active"] = o.Active
-	toSerialize["groupNames"] = o.GroupNames
-	if !IsNil(o.MetadataUrl) {
-		toSerialize["metadataUrl"] = o.MetadataUrl
-	}
-	toSerialize["teamEntityId"] = o.TeamEntityId
-	return toSerialize, nil
-}
-
-func (o *IDPParameters) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"active",
-		"groupNames",
-		"teamEntityId",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
+// Unmarshal JSON data into one of the pointers in the struct
+func (dst *IDPParameters) UnmarshalJSON(data []byte) error {
+	var err error
+	match := 0
+	// try to unmarshal data into IDPParametersMetadataContent
+	err = newStrictDecoder(data).Decode(&dst.IDPParametersMetadataContent)
+	if err == nil {
+		jsonIDPParametersMetadataContent, _ := json.Marshal(dst.IDPParametersMetadataContent)
+		if string(jsonIDPParametersMetadataContent) == "{}" { // empty struct
+			dst.IDPParametersMetadataContent = nil
+		} else {
+			if err = validator.Validate(dst.IDPParametersMetadataContent); err != nil {
+				dst.IDPParametersMetadataContent = nil
+			} else {
+				match++
+			}
 		}
+	} else {
+		dst.IDPParametersMetadataContent = nil
 	}
 
-	varIDPParameters := _IDPParameters{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varIDPParameters)
-
-	if err != nil {
-		return err
+	// try to unmarshal data into IDPParametersMetadataUrl
+	err = newStrictDecoder(data).Decode(&dst.IDPParametersMetadataUrl)
+	if err == nil {
+		jsonIDPParametersMetadataUrl, _ := json.Marshal(dst.IDPParametersMetadataUrl)
+		if string(jsonIDPParametersMetadataUrl) == "{}" { // empty struct
+			dst.IDPParametersMetadataUrl = nil
+		} else {
+			if err = validator.Validate(dst.IDPParametersMetadataUrl); err != nil {
+				dst.IDPParametersMetadataUrl = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.IDPParametersMetadataUrl = nil
 	}
 
-	*o = IDPParameters(varIDPParameters)
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.IDPParametersMetadataContent = nil
+		dst.IDPParametersMetadataUrl = nil
 
-	return err
+		return fmt.Errorf("data matches more than one schema in oneOf(IDPParameters)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("data failed to match schemas in oneOf(IDPParameters)")
+	}
+}
+
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src IDPParameters) MarshalJSON() ([]byte, error) {
+	if src.IDPParametersMetadataContent != nil {
+		return json.Marshal(&src.IDPParametersMetadataContent)
+	}
+
+	if src.IDPParametersMetadataUrl != nil {
+		return json.Marshal(&src.IDPParametersMetadataUrl)
+	}
+
+	return nil, nil // no data in oneOf schemas
+}
+
+// Get the actual instance
+func (obj *IDPParameters) GetActualInstance() (interface{}) {
+	if obj == nil {
+		return nil
+	}
+	if obj.IDPParametersMetadataContent != nil {
+		return obj.IDPParametersMetadataContent
+	}
+
+	if obj.IDPParametersMetadataUrl != nil {
+		return obj.IDPParametersMetadataUrl
+	}
+
+	// all schemas are nil
+	return nil
+}
+
+// Get the actual instance value
+func (obj IDPParameters) GetActualInstanceValue() (interface{}) {
+	if obj.IDPParametersMetadataContent != nil {
+		return *obj.IDPParametersMetadataContent
+	}
+
+	if obj.IDPParametersMetadataUrl != nil {
+		return *obj.IDPParametersMetadataUrl
+	}
+
+	// all schemas are nil
+	return nil
 }
 
 type NullableIDPParameters struct {

@@ -87,13 +87,16 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [ColorsByAggregation](docs/ColorsByAggregation.md)
+ - [ColorsByGroupBy](docs/ColorsByGroupBy.md)
+ - [ColorsByStack](docs/ColorsByStack.md)
  - [CommonGroup](docs/CommonGroup.md)
  - [CustomTimeSelection](docs/CustomTimeSelection.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FieldGroup](docs/FieldGroup.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
- - [FilterPathAndValues1](docs/FilterPathAndValues1.md)
- - [FilterPathAndValues2](docs/FilterPathAndValues2.md)
+ - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
+ - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [ListViewsResponse](docs/ListViewsResponse.md)
  - [MultipleValues](docs/MultipleValues.md)
@@ -101,14 +104,16 @@ Class | Method | HTTP request | Description
  - [SearchQuery](docs/SearchQuery.md)
  - [SelectedFilters](docs/SelectedFilters.md)
  - [TimeSelection](docs/TimeSelection.md)
- - [TimeSelectionOneOf](docs/TimeSelectionOneOf.md)
- - [TimeSelectionOneOf1](docs/TimeSelectionOneOf1.md)
+ - [TimeSelectionCustomSelection](docs/TimeSelectionCustomSelection.md)
+ - [TimeSelectionQuickSelection](docs/TimeSelectionQuickSelection.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
  - [View](docs/View.md)
  - [View1](docs/View1.md)
  - [ViewFolder](docs/ViewFolder.md)
  - [ViewType](docs/ViewType.md)
  - [ViewsV1Filter](docs/ViewsV1Filter.md)
+ - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
+ - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

@@ -18,29 +18,29 @@ import (
 
 // FilterSource - struct for FilterSource
 type FilterSource struct {
-	Source *Source
-	Source1 *Source1
-	Source2 *Source2
+	SourceLogs *SourceLogs
+	SourceMetrics *SourceMetrics
+	SourceSpans *SourceSpans
 }
 
-// SourceAsFilterSource is a convenience function that returns Source wrapped in FilterSource
-func SourceAsFilterSource(v *Source) FilterSource {
+// SourceLogsAsFilterSource is a convenience function that returns SourceLogs wrapped in FilterSource
+func SourceLogsAsFilterSource(v *SourceLogs) FilterSource {
 	return FilterSource{
-		Source: v,
+		SourceLogs: v,
 	}
 }
 
-// Source1AsFilterSource is a convenience function that returns Source1 wrapped in FilterSource
-func Source1AsFilterSource(v *Source1) FilterSource {
+// SourceMetricsAsFilterSource is a convenience function that returns SourceMetrics wrapped in FilterSource
+func SourceMetricsAsFilterSource(v *SourceMetrics) FilterSource {
 	return FilterSource{
-		Source1: v,
+		SourceMetrics: v,
 	}
 }
 
-// Source2AsFilterSource is a convenience function that returns Source2 wrapped in FilterSource
-func Source2AsFilterSource(v *Source2) FilterSource {
+// SourceSpansAsFilterSource is a convenience function that returns SourceSpans wrapped in FilterSource
+func SourceSpansAsFilterSource(v *SourceSpans) FilterSource {
 	return FilterSource{
-		Source2: v,
+		SourceSpans: v,
 	}
 }
 
@@ -49,62 +49,62 @@ func Source2AsFilterSource(v *Source2) FilterSource {
 func (dst *FilterSource) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into Source
-	err = newStrictDecoder(data).Decode(&dst.Source)
+	// try to unmarshal data into SourceLogs
+	err = newStrictDecoder(data).Decode(&dst.SourceLogs)
 	if err == nil {
-		jsonSource, _ := json.Marshal(dst.Source)
-		if string(jsonSource) == "{}" { // empty struct
-			dst.Source = nil
+		jsonSourceLogs, _ := json.Marshal(dst.SourceLogs)
+		if string(jsonSourceLogs) == "{}" { // empty struct
+			dst.SourceLogs = nil
 		} else {
-			if err = validator.Validate(dst.Source); err != nil {
-				dst.Source = nil
+			if err = validator.Validate(dst.SourceLogs); err != nil {
+				dst.SourceLogs = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Source = nil
+		dst.SourceLogs = nil
 	}
 
-	// try to unmarshal data into Source1
-	err = newStrictDecoder(data).Decode(&dst.Source1)
+	// try to unmarshal data into SourceMetrics
+	err = newStrictDecoder(data).Decode(&dst.SourceMetrics)
 	if err == nil {
-		jsonSource1, _ := json.Marshal(dst.Source1)
-		if string(jsonSource1) == "{}" { // empty struct
-			dst.Source1 = nil
+		jsonSourceMetrics, _ := json.Marshal(dst.SourceMetrics)
+		if string(jsonSourceMetrics) == "{}" { // empty struct
+			dst.SourceMetrics = nil
 		} else {
-			if err = validator.Validate(dst.Source1); err != nil {
-				dst.Source1 = nil
+			if err = validator.Validate(dst.SourceMetrics); err != nil {
+				dst.SourceMetrics = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Source1 = nil
+		dst.SourceMetrics = nil
 	}
 
-	// try to unmarshal data into Source2
-	err = newStrictDecoder(data).Decode(&dst.Source2)
+	// try to unmarshal data into SourceSpans
+	err = newStrictDecoder(data).Decode(&dst.SourceSpans)
 	if err == nil {
-		jsonSource2, _ := json.Marshal(dst.Source2)
-		if string(jsonSource2) == "{}" { // empty struct
-			dst.Source2 = nil
+		jsonSourceSpans, _ := json.Marshal(dst.SourceSpans)
+		if string(jsonSourceSpans) == "{}" { // empty struct
+			dst.SourceSpans = nil
 		} else {
-			if err = validator.Validate(dst.Source2); err != nil {
-				dst.Source2 = nil
+			if err = validator.Validate(dst.SourceSpans); err != nil {
+				dst.SourceSpans = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Source2 = nil
+		dst.SourceSpans = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.Source = nil
-		dst.Source1 = nil
-		dst.Source2 = nil
+		dst.SourceLogs = nil
+		dst.SourceMetrics = nil
+		dst.SourceSpans = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(FilterSource)")
 	} else if match == 1 {
@@ -116,16 +116,16 @@ func (dst *FilterSource) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src FilterSource) MarshalJSON() ([]byte, error) {
-	if src.Source != nil {
-		return json.Marshal(&src.Source)
+	if src.SourceLogs != nil {
+		return json.Marshal(&src.SourceLogs)
 	}
 
-	if src.Source1 != nil {
-		return json.Marshal(&src.Source1)
+	if src.SourceMetrics != nil {
+		return json.Marshal(&src.SourceMetrics)
 	}
 
-	if src.Source2 != nil {
-		return json.Marshal(&src.Source2)
+	if src.SourceSpans != nil {
+		return json.Marshal(&src.SourceSpans)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -136,16 +136,16 @@ func (obj *FilterSource) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.Source != nil {
-		return obj.Source
+	if obj.SourceLogs != nil {
+		return obj.SourceLogs
 	}
 
-	if obj.Source1 != nil {
-		return obj.Source1
+	if obj.SourceMetrics != nil {
+		return obj.SourceMetrics
 	}
 
-	if obj.Source2 != nil {
-		return obj.Source2
+	if obj.SourceSpans != nil {
+		return obj.SourceSpans
 	}
 
 	// all schemas are nil
@@ -154,16 +154,16 @@ func (obj *FilterSource) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj FilterSource) GetActualInstanceValue() (interface{}) {
-	if obj.Source != nil {
-		return *obj.Source
+	if obj.SourceLogs != nil {
+		return *obj.SourceLogs
 	}
 
-	if obj.Source1 != nil {
-		return *obj.Source1
+	if obj.SourceMetrics != nil {
+		return *obj.SourceMetrics
 	}
 
-	if obj.Source2 != nil {
-		return *obj.Source2
+	if obj.SourceSpans != nil {
+		return *obj.SourceSpans
 	}
 
 	// all schemas are nil

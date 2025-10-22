@@ -48,7 +48,7 @@ paths:
           let options = {
             method: 'POST',
             headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"alertSchedulerRule":{"createdAt":"string","description":"string","enabled":true,"filter":{"alertMetaLabels":{"value":[{"id":"string","key":"string","value":"string"}]},"whatExpression":"string"},"id":"string","metaLabels":[{"id":"string","key":"string","value":"string"}],"name":"string","schedule":{"oneTime":{"timeframe":{"endTime":"string","startTime":"string","timezone":"string"}},"scheduleOperation":"SCHEDULE_OPERATION_UNSPECIFIED"},"uniqueIdentifier":"string","updatedAt":"string"}}'
+            body: '{"alertSchedulerRule":{"createdAt":"string","description":"string","enabled":true,"filter":{"alertMetaLabels":{"value":[{"id":"string","key":"string","value":"string"}]},"whatExpression":"string"},"id":"string","metaLabels":[{"id":"string","key":"string","value":"string"}],"name":"string","schedule":{"recurring":{"always":{}},"scheduleOperation":"SCHEDULE_OPERATION_UNSPECIFIED"},"uniqueIdentifier":"string","updatedAt":"string"}}'
           };
 
           fetch(url, options)
@@ -85,11 +85,7 @@ paths:
                   ],
                   "name": "string",
                   "schedule": {
-                      "oneTime": {"timeframe": {
-                              "endTime": "string",
-                              "startTime": "string",
-                              "timezone": "string"
-                          }},
+                      "recurring": {"always": {}},
                       "scheduleOperation": "SCHEDULE_OPERATION_UNSPECIFIED"
                   },
                   "uniqueIdentifier": "string",
@@ -109,7 +105,7 @@ paths:
             --url https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules \
             --header 'Authorization: Bearer <API_KEY>' \
             --header 'content-type: application/json' \
-            --data '{"alertSchedulerRule":{"createdAt":"string","description":"string","enabled":true,"filter":{"alertMetaLabels":{"value":[{"id":"string","key":"string","value":"string"}]},"whatExpression":"string"},"id":"string","metaLabels":[{"id":"string","key":"string","value":"string"}],"name":"string","schedule":{"oneTime":{"timeframe":{"endTime":"string","startTime":"string","timezone":"string"}},"scheduleOperation":"SCHEDULE_OPERATION_UNSPECIFIED"},"uniqueIdentifier":"string","updatedAt":"string"}}'
+            --data '{"alertSchedulerRule":{"createdAt":"string","description":"string","enabled":true,"filter":{"alertMetaLabels":{"value":[{"id":"string","key":"string","value":"string"}]},"whatExpression":"string"},"id":"string","metaLabels":[{"id":"string","key":"string","value":"string"}],"name":"string","schedule":{"recurring":{"always":{}},"scheduleOperation":"SCHEDULE_OPERATION_UNSPECIFIED"},"uniqueIdentifier":"string","updatedAt":"string"}}'
     put:
       description: No description available
       externalDocs:
@@ -152,7 +148,7 @@ paths:
           let options = {
             method: 'PUT',
             headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"alertSchedulerRule":{"createdAt":"string","description":"string","enabled":true,"filter":{"alertMetaLabels":{"value":[{"id":"string","key":"string","value":"string"}]},"whatExpression":"string"},"id":"string","metaLabels":[{"id":"string","key":"string","value":"string"}],"name":"string","schedule":{"oneTime":{"timeframe":{"endTime":"string","startTime":"string","timezone":"string"}},"scheduleOperation":"SCHEDULE_OPERATION_UNSPECIFIED"},"uniqueIdentifier":"string","updatedAt":"string"}}'
+            body: '{"alertSchedulerRule":{"createdAt":"string","description":"string","enabled":true,"filter":{"alertMetaLabels":{"value":[{"id":"string","key":"string","value":"string"}]},"whatExpression":"string"},"id":"string","metaLabels":[{"id":"string","key":"string","value":"string"}],"name":"string","schedule":{"recurring":{"always":{}},"scheduleOperation":"SCHEDULE_OPERATION_UNSPECIFIED"},"uniqueIdentifier":"string","updatedAt":"string"}}'
           };
 
           fetch(url, options)
@@ -189,11 +185,7 @@ paths:
                   ],
                   "name": "string",
                   "schedule": {
-                      "oneTime": {"timeframe": {
-                              "endTime": "string",
-                              "startTime": "string",
-                              "timezone": "string"
-                          }},
+                      "recurring": {"always": {}},
                       "scheduleOperation": "SCHEDULE_OPERATION_UNSPECIFIED"
                   },
                   "uniqueIdentifier": "string",
@@ -213,7 +205,7 @@ paths:
             --url https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules \
             --header 'Authorization: Bearer <API_KEY>' \
             --header 'content-type: application/json' \
-            --data '{"alertSchedulerRule":{"createdAt":"string","description":"string","enabled":true,"filter":{"alertMetaLabels":{"value":[{"id":"string","key":"string","value":"string"}]},"whatExpression":"string"},"id":"string","metaLabels":[{"id":"string","key":"string","value":"string"}],"name":"string","schedule":{"oneTime":{"timeframe":{"endTime":"string","startTime":"string","timezone":"string"}},"scheduleOperation":"SCHEDULE_OPERATION_UNSPECIFIED"},"uniqueIdentifier":"string","updatedAt":"string"}}'
+            --data '{"alertSchedulerRule":{"createdAt":"string","description":"string","enabled":true,"filter":{"alertMetaLabels":{"value":[{"id":"string","key":"string","value":"string"}]},"whatExpression":"string"},"id":"string","metaLabels":[{"id":"string","key":"string","value":"string"}],"name":"string","schedule":{"recurring":{"always":{}},"scheduleOperation":"SCHEDULE_OPERATION_UNSPECIFIED"},"uniqueIdentifier":"string","updatedAt":"string"}}'
   /v1/alert-scheduler-rules/bulk:
     get:
       externalDocs:
@@ -312,7 +304,7 @@ paths:
           let options = {
             method: 'POST',
             headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"createAlertSchedulerRuleRequests":[{"alertSchedulerRule":{"createdAt":"string","description":"string","enabled":true,"filter":{"alertMetaLabels":{"value":[{"id":"string","key":"string","value":"string"}]},"whatExpression":"string"},"id":"string","metaLabels":[{"id":"string","key":"string","value":"string"}],"name":"string","schedule":{"oneTime":{"timeframe":{"endTime":"string","startTime":"string","timezone":"string"}},"scheduleOperation":"SCHEDULE_OPERATION_UNSPECIFIED"},"uniqueIdentifier":"string","updatedAt":"string"}}]}'
+            body: '{"createAlertSchedulerRuleRequests":[{"alertSchedulerRule":{"createdAt":"string","description":"string","enabled":true,"filter":{"alertMetaLabels":{"value":[{"id":"string","key":"string","value":"string"}]},"whatExpression":"string"},"id":"string","metaLabels":[{"id":"string","key":"string","value":"string"}],"name":"string","schedule":{"recurring":{"always":{}},"scheduleOperation":"SCHEDULE_OPERATION_UNSPECIFIED"},"uniqueIdentifier":"string","updatedAt":"string"}}]}'
           };
 
           fetch(url, options)
@@ -349,11 +341,7 @@ paths:
                           ],
                           "name": "string",
                           "schedule": {
-                              "oneTime": {"timeframe": {
-                                      "endTime": "string",
-                                      "startTime": "string",
-                                      "timezone": "string"
-                                  }},
+                              "recurring": {"always": {}},
                               "scheduleOperation": "SCHEDULE_OPERATION_UNSPECIFIED"
                           },
                           "uniqueIdentifier": "string",
@@ -373,7 +361,7 @@ paths:
             --url https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules/bulk \
             --header 'Authorization: Bearer <API_KEY>' \
             --header 'content-type: application/json' \
-            --data '{"createAlertSchedulerRuleRequests":[{"alertSchedulerRule":{"createdAt":"string","description":"string","enabled":true,"filter":{"alertMetaLabels":{"value":[{"id":"string","key":"string","value":"string"}]},"whatExpression":"string"},"id":"string","metaLabels":[{"id":"string","key":"string","value":"string"}],"name":"string","schedule":{"oneTime":{"timeframe":{"endTime":"string","startTime":"string","timezone":"string"}},"scheduleOperation":"SCHEDULE_OPERATION_UNSPECIFIED"},"uniqueIdentifier":"string","updatedAt":"string"}}]}'
+            --data '{"createAlertSchedulerRuleRequests":[{"alertSchedulerRule":{"createdAt":"string","description":"string","enabled":true,"filter":{"alertMetaLabels":{"value":[{"id":"string","key":"string","value":"string"}]},"whatExpression":"string"},"id":"string","metaLabels":[{"id":"string","key":"string","value":"string"}],"name":"string","schedule":{"recurring":{"always":{}},"scheduleOperation":"SCHEDULE_OPERATION_UNSPECIFIED"},"uniqueIdentifier":"string","updatedAt":"string"}}]}'
     put:
       description: No description available
       externalDocs:
@@ -416,7 +404,7 @@ paths:
           let options = {
             method: 'PUT',
             headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"updateAlertSchedulerRuleRequests":[{"alertSchedulerRule":{"createdAt":"string","description":"string","enabled":true,"filter":{"alertMetaLabels":{"value":[{"id":"string","key":"string","value":"string"}]},"whatExpression":"string"},"id":"string","metaLabels":[{"id":"string","key":"string","value":"string"}],"name":"string","schedule":{"oneTime":{"timeframe":{"endTime":"string","startTime":"string","timezone":"string"}},"scheduleOperation":"SCHEDULE_OPERATION_UNSPECIFIED"},"uniqueIdentifier":"string","updatedAt":"string"}}]}'
+            body: '{"updateAlertSchedulerRuleRequests":[{"alertSchedulerRule":{"createdAt":"string","description":"string","enabled":true,"filter":{"alertMetaLabels":{"value":[{"id":"string","key":"string","value":"string"}]},"whatExpression":"string"},"id":"string","metaLabels":[{"id":"string","key":"string","value":"string"}],"name":"string","schedule":{"recurring":{"always":{}},"scheduleOperation":"SCHEDULE_OPERATION_UNSPECIFIED"},"uniqueIdentifier":"string","updatedAt":"string"}}]}'
           };
 
           fetch(url, options)
@@ -453,11 +441,7 @@ paths:
                           ],
                           "name": "string",
                           "schedule": {
-                              "oneTime": {"timeframe": {
-                                      "endTime": "string",
-                                      "startTime": "string",
-                                      "timezone": "string"
-                                  }},
+                              "recurring": {"always": {}},
                               "scheduleOperation": "SCHEDULE_OPERATION_UNSPECIFIED"
                           },
                           "uniqueIdentifier": "string",
@@ -477,7 +461,7 @@ paths:
             --url https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules/bulk \
             --header 'Authorization: Bearer <API_KEY>' \
             --header 'content-type: application/json' \
-            --data '{"updateAlertSchedulerRuleRequests":[{"alertSchedulerRule":{"createdAt":"string","description":"string","enabled":true,"filter":{"alertMetaLabels":{"value":[{"id":"string","key":"string","value":"string"}]},"whatExpression":"string"},"id":"string","metaLabels":[{"id":"string","key":"string","value":"string"}],"name":"string","schedule":{"oneTime":{"timeframe":{"endTime":"string","startTime":"string","timezone":"string"}},"scheduleOperation":"SCHEDULE_OPERATION_UNSPECIFIED"},"uniqueIdentifier":"string","updatedAt":"string"}}]}'
+            --data '{"updateAlertSchedulerRuleRequests":[{"alertSchedulerRule":{"createdAt":"string","description":"string","enabled":true,"filter":{"alertMetaLabels":{"value":[{"id":"string","key":"string","value":"string"}]},"whatExpression":"string"},"id":"string","metaLabels":[{"id":"string","key":"string","value":"string"}],"name":"string","schedule":{"recurring":{"always":{}},"scheduleOperation":"SCHEDULE_OPERATION_UNSPECIFIED"},"uniqueIdentifier":"string","updatedAt":"string"}}]}'
   /v1/alert-scheduler-rules/{alert_scheduler_rule_id}:
     delete:
       description: No description available
@@ -623,7 +607,6 @@ components:
           type: string
       type: object
     AlertSchedulerRule:
-      additionalProperties: false
       example:
         filter:
           alertMetaLabels:
@@ -637,11 +620,8 @@ components:
           whatExpression: whatExpression
         createdAt: createdAt
         schedule:
-          oneTime:
-            timeframe:
-              timezone: timezone
-              startTime: startTime
-              endTime: endTime
+          recurring:
+            always: "{}"
           scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
         name: name
         description: description
@@ -680,6 +660,20 @@ components:
         updatedAt:
           type: string
       type: object
+    AlertSchedulerRuleIds:
+      properties:
+        alertSchedulerRuleIds:
+          items:
+            type: string
+          type: array
+      type: object
+    AlertSchedulerRuleVersionIds:
+      properties:
+        alertSchedulerRuleVersionIds:
+          items:
+            type: string
+          type: array
+      type: object
     AlertSchedulerRuleWithActiveTimeframe:
       example:
         nextActiveTimeframes:
@@ -702,11 +696,8 @@ components:
             whatExpression: whatExpression
           createdAt: createdAt
           schedule:
-            oneTime:
-              timeframe:
-                timezone: timezone
-                startTime: startTime
-                endTime: endTime
+            recurring:
+              always: "{}"
             scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
           name: name
           description: description
@@ -738,6 +729,24 @@ components:
       type: object
     Always:
       type: object
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
     CreateAlertSchedulerRuleRequest:
       description: This is a request sent to create an alert scheduler rule
       externalDocs:
@@ -766,11 +775,8 @@ components:
             whatExpression: whatExpression
           createdAt: createdAt
           schedule:
-            oneTime:
-              timeframe:
-                timezone: timezone
-                startTime: startTime
-                endTime: endTime
+            recurring:
+              always: "{}"
             scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
           name: name
           description: description
@@ -813,11 +819,8 @@ components:
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
-              oneTime:
-                timeframe:
-                  timezone: timezone
-                  startTime: startTime
-                  endTime: endTime
+              recurring:
+                always: "{}"
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -845,11 +848,8 @@ components:
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
-              oneTime:
-                timeframe:
-                  timezone: timezone
-                  startTime: startTime
-                  endTime: endTime
+              recurring:
+                always: "{}"
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -887,6 +887,45 @@ components:
       - DURATION_FREQUENCY_HOUR
       - DURATION_FREQUENCY_DAY
       type: string
+    DynamicDaily:
+      additionalProperties: false
+      properties:
+        daily:
+          type: object
+        repeatEvery:
+          format: int32
+          type: integer
+        terminationDate:
+          type: string
+        timeframe:
+          $ref: "#/components/schemas/Timeframe"
+      type: object
+    DynamicMonthly:
+      additionalProperties: false
+      properties:
+        monthly:
+          $ref: "#/components/schemas/Monthly"
+        repeatEvery:
+          format: int32
+          type: integer
+        terminationDate:
+          type: string
+        timeframe:
+          $ref: "#/components/schemas/Timeframe"
+      type: object
+    DynamicWeekly:
+      additionalProperties: false
+      properties:
+        repeatEvery:
+          format: int32
+          type: integer
+        terminationDate:
+          type: string
+        timeframe:
+          $ref: "#/components/schemas/Timeframe"
+        weekly:
+          $ref: "#/components/schemas/Weekly"
+      type: object
     FieldGroup:
       properties:
         name:
@@ -894,10 +933,80 @@ components:
         value:
           type: string
       type: object
+    FilterAlertMetaLabels:
+      additionalProperties: false
+      example:
+        alertMetaLabels:
+          value:
+          - id: id
+            value: value
+            key: key
+          - id: id
+            value: value
+            key: key
+        whatExpression: whatExpression
+      properties:
+        alertMetaLabels:
+          $ref: "#/components/schemas/MetaLabels"
+        whatExpression:
+          type: string
+      type: object
+    FilterAlertUniqueIds:
+      additionalProperties: false
+      properties:
+        alertUniqueIds:
+          $ref: "#/components/schemas/AlertUniqueIds"
+        whatExpression:
+          type: string
+      type: object
+    FilterByAlertSchedulerRuleIdsAlertSchedulerIds:
+      additionalProperties: false
+      properties:
+        alertSchedulerIds:
+          $ref: "#/components/schemas/AlertSchedulerRuleIds"
+      type: object
+    FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds:
+      additionalProperties: false
+      properties:
+        alertSchedulerVersionIds:
+          $ref: "#/components/schemas/AlertSchedulerRuleVersionIds"
+      type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValues_1"
-      - $ref: "#/components/schemas/FilterPathAndValues_2"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
     Filters:
       description: This data structure represents a filter
       externalDocs:
@@ -929,11 +1038,8 @@ components:
             whatExpression: whatExpression
           createdAt: createdAt
           schedule:
-            oneTime:
-              timeframe:
-                timezone: timezone
-                startTime: startTime
-                endTime: endTime
+            recurring:
+              always: "{}"
             scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
           name: name
           description: description
@@ -984,11 +1090,8 @@ components:
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
-              oneTime:
-                timeframe:
-                  timezone: timezone
-                  startTime: startTime
-                  endTime: endTime
+              recurring:
+                always: "{}"
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -1023,11 +1126,8 @@ components:
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
-              oneTime:
-                timeframe:
-                  timezone: timezone
-                  startTime: startTime
-                  endTime: endTime
+              recurring:
+                always: "{}"
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -1089,38 +1189,87 @@ components:
           type: array
       type: object
     OneTime:
-      example:
-        timeframe:
-          timezone: timezone
-          startTime: startTime
-          endTime: endTime
       properties:
         timeframe:
           $ref: "#/components/schemas/Timeframe"
       type: object
     Recurring:
       oneOf:
-      - $ref: "#/components/schemas/Recurring_oneOf"
-      - $ref: "#/components/schemas/Recurring_oneOf_1"
+      - $ref: "#/components/schemas/RecurringAlways"
+      - $ref: "#/components/schemas/RecurringDynamic"
     Recurring.Dynamic:
       oneOf:
-      - $ref: "#/components/schemas/Recurring_Dynamic_oneOf"
-      - $ref: "#/components/schemas/Recurring_Dynamic_oneOf_1"
-      - $ref: "#/components/schemas/Recurring_Dynamic_oneOf_2"
+      - $ref: "#/components/schemas/DynamicDaily"
+      - $ref: "#/components/schemas/DynamicWeekly"
+      - $ref: "#/components/schemas/DynamicMonthly"
+    RecurringAlways:
+      additionalProperties: false
+      example:
+        always: "{}"
+      properties:
+        always:
+          type: object
+      type: object
+    RecurringDynamic:
+      additionalProperties: false
+      properties:
+        dynamic:
+          $ref: "#/components/schemas/Recurring.Dynamic"
+      type: object
     Schedule:
       oneOf:
-      - $ref: "#/components/schemas/Schedule_oneOf"
-      - $ref: "#/components/schemas/Schedule_oneOf_1"
+      - $ref: "#/components/schemas/ScheduleRecurring"
+      - $ref: "#/components/schemas/ScheduleOneTime"
+    ScheduleOneTime:
+      additionalProperties: false
+      properties:
+        oneTime:
+          $ref: "#/components/schemas/OneTime"
+        scheduleOperation:
+          $ref: "#/components/schemas/ScheduleOperation"
+      type: object
     ScheduleOperation:
       enum:
       - SCHEDULE_OPERATION_UNSPECIFIED
       - SCHEDULE_OPERATION_MUTE
       - SCHEDULE_OPERATION_ACTIVATE
       type: string
+    ScheduleRecurring:
+      additionalProperties: false
+      example:
+        recurring:
+          always: "{}"
+        scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
+      properties:
+        recurring:
+          $ref: "#/components/schemas/Recurring"
+        scheduleOperation:
+          $ref: "#/components/schemas/ScheduleOperation"
+      type: object
     Timeframe:
       oneOf:
-      - $ref: "#/components/schemas/Timeframe_oneOf"
-      - $ref: "#/components/schemas/Timeframe_oneOf_1"
+      - $ref: "#/components/schemas/TimeframeEndTime"
+      - $ref: "#/components/schemas/TimeframeDuration"
+    TimeframeDuration:
+      additionalProperties: false
+      properties:
+        duration:
+          $ref: "#/components/schemas/v1.Duration"
+        startTime:
+          type: string
+        timezone:
+          type: string
+      type: object
+    TimeframeEndTime:
+      additionalProperties: false
+      properties:
+        endTime:
+          type: string
+        startTime:
+          type: string
+        timezone:
+          type: string
+      type: object
     UpdateAlertSchedulerRuleRequest:
       description: This is a request sent to update an alert scheduler rule
       externalDocs:
@@ -1149,11 +1298,8 @@ components:
             whatExpression: whatExpression
           createdAt: createdAt
           schedule:
-            oneTime:
-              timeframe:
-                timezone: timezone
-                startTime: startTime
-                endTime: endTime
+            recurring:
+              always: "{}"
             scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
           name: name
           description: description
@@ -1196,11 +1342,8 @@ components:
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
-              oneTime:
-                timeframe:
-                  timezone: timezone
-                  startTime: startTime
-                  endTime: endTime
+              recurring:
+                always: "{}"
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -1228,11 +1371,8 @@ components:
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
-              oneTime:
-                timeframe:
-                  timezone: timezone
-                  startTime: startTime
-                  endTime: endTime
+              recurring:
+                always: "{}"
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -1267,10 +1407,22 @@ components:
             type: integer
           type: array
       type: object
+    YAxisViewByCategory:
+      additionalProperties: false
+      properties:
+        category:
+          $ref: "#/components/schemas/YAxisViewByCategory"
+      type: object
+    YAxisViewByValue:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: "#/components/schemas/YAxisViewByValue"
+      type: object
     alert_scheduler_rule_protobuf.v1.Filter:
       oneOf:
-      - $ref: "#/components/schemas/alert_scheduler_rule_protobuf_v1_Filter_oneOf"
-      - $ref: "#/components/schemas/alert_scheduler_rule_protobuf_v1_Filter_oneOf_1"
+      - $ref: "#/components/schemas/FilterAlertMetaLabels"
+      - $ref: "#/components/schemas/FilterAlertUniqueIds"
     common.Group:
       properties:
         field:
@@ -1289,7 +1441,6 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     meta_labels_protobuf.v1.MetaLabel:
-      additionalProperties: false
       example:
         id: id
         value: value
@@ -1344,36 +1495,10 @@ components:
         timezone:
           type: string
       type: object
-    AlertSchedulerRuleService_GetBulkAlertSchedulerRule_alert_scheduler_rules_ids_parameter_oneOf_alertSchedulerIds:
-      properties:
-        alertSchedulerRuleIds:
-          items:
-            type: string
-          type: array
-      type: object
-    AlertSchedulerRuleService_GetBulkAlertSchedulerRule_alert_scheduler_rules_ids_parameter_oneOf:
-      additionalProperties: false
-      properties:
-        alertSchedulerIds:
-          $ref: "#/components/schemas/AlertSchedulerRuleService_GetBulkAlertSchedulerRule_alert_scheduler_rules_ids_parameter_oneOf_alertSchedulerIds"
-      type: object
-    AlertSchedulerRuleService_GetBulkAlertSchedulerRule_alert_scheduler_rules_ids_parameter_oneOf_1_alertSchedulerVersionIds:
-      properties:
-        alertSchedulerRuleVersionIds:
-          items:
-            type: string
-          type: array
-      type: object
-    AlertSchedulerRuleService_GetBulkAlertSchedulerRule_alert_scheduler_rules_ids_parameter_oneOf_1:
-      additionalProperties: false
-      properties:
-        alertSchedulerVersionIds:
-          $ref: "#/components/schemas/AlertSchedulerRuleService_GetBulkAlertSchedulerRule_alert_scheduler_rules_ids_parameter_oneOf_1_alertSchedulerVersionIds"
-      type: object
     AlertSchedulerRuleService_GetBulkAlertSchedulerRule_alert_scheduler_rules_ids_parameter:
       oneOf:
-      - $ref: "#/components/schemas/AlertSchedulerRuleService_GetBulkAlertSchedulerRule_alert_scheduler_rules_ids_parameter_oneOf"
-      - $ref: "#/components/schemas/AlertSchedulerRuleService_GetBulkAlertSchedulerRule_alert_scheduler_rules_ids_parameter_oneOf_1"
+      - $ref: "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds"
+      - $ref: "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds"
     Update_bulk_alert_scheduler_rule_request_data_structure:
       additionalProperties: false
       description: This is a request sent to update multiple alert scheduler rules
@@ -1397,162 +1522,6 @@ components:
       required:
       - createAlertSchedulerRuleRequests
       title: Create bulk alert scheduler rule request data structure
-      type: object
-    FilterPathAndValues_1:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValues_2:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    Recurring_oneOf:
-      additionalProperties: false
-      properties:
-        always:
-          type: object
-      type: object
-    Recurring_oneOf_1:
-      additionalProperties: false
-      properties:
-        dynamic:
-          $ref: "#/components/schemas/Recurring.Dynamic"
-      type: object
-    Recurring_Dynamic_oneOf:
-      additionalProperties: false
-      properties:
-        daily:
-          type: object
-        repeatEvery:
-          format: int32
-          type: integer
-        terminationDate:
-          type: string
-        timeframe:
-          $ref: "#/components/schemas/Timeframe"
-      type: object
-    Recurring_Dynamic_oneOf_1:
-      additionalProperties: false
-      properties:
-        repeatEvery:
-          format: int32
-          type: integer
-        terminationDate:
-          type: string
-        timeframe:
-          $ref: "#/components/schemas/Timeframe"
-        weekly:
-          $ref: "#/components/schemas/Weekly"
-      type: object
-    Recurring_Dynamic_oneOf_2:
-      additionalProperties: false
-      properties:
-        monthly:
-          $ref: "#/components/schemas/Monthly"
-        repeatEvery:
-          format: int32
-          type: integer
-        terminationDate:
-          type: string
-        timeframe:
-          $ref: "#/components/schemas/Timeframe"
-      type: object
-    Schedule_oneOf:
-      additionalProperties: false
-      example:
-        oneTime:
-          timeframe:
-            timezone: timezone
-            startTime: startTime
-            endTime: endTime
-        scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
-      properties:
-        oneTime:
-          $ref: "#/components/schemas/OneTime"
-        scheduleOperation:
-          $ref: "#/components/schemas/ScheduleOperation"
-      type: object
-    Schedule_oneOf_1:
-      additionalProperties: false
-      properties:
-        recurring:
-          $ref: "#/components/schemas/Recurring"
-        scheduleOperation:
-          $ref: "#/components/schemas/ScheduleOperation"
-      type: object
-    Timeframe_oneOf:
-      additionalProperties: false
-      example:
-        timezone: timezone
-        startTime: startTime
-        endTime: endTime
-      properties:
-        endTime:
-          type: string
-        startTime:
-          type: string
-        timezone:
-          type: string
-      type: object
-    Timeframe_oneOf_1:
-      additionalProperties: false
-      properties:
-        duration:
-          $ref: "#/components/schemas/v1.Duration"
-        startTime:
-          type: string
-        timezone:
-          type: string
-      type: object
-    alert_scheduler_rule_protobuf_v1_Filter_oneOf:
-      additionalProperties: false
-      example:
-        alertMetaLabels:
-          value:
-          - id: id
-            value: value
-            key: key
-          - id: id
-            value: value
-            key: key
-        whatExpression: whatExpression
-      properties:
-        alertMetaLabels:
-          $ref: "#/components/schemas/MetaLabels"
-        whatExpression:
-          type: string
-      type: object
-    alert_scheduler_rule_protobuf_v1_Filter_oneOf_1:
-      additionalProperties: false
-      properties:
-        alertUniqueIds:
-          $ref: "#/components/schemas/AlertUniqueIds"
-        whatExpression:
-          type: string
       type: object
   securitySchemes:
     apiKeyAuth:

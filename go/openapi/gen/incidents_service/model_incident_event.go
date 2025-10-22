@@ -12,240 +12,504 @@ package incidents_service
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
+	"gopkg.in/validator.v2"
 )
 
-// checks if the IncidentEvent type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &IncidentEvent{}
-
-// IncidentEvent struct for IncidentEvent
+// IncidentEvent - struct for IncidentEvent
 type IncidentEvent struct {
-	AdministrativeEvent *IncidentEventOriginatorAdministrative `json:"administrativeEvent,omitempty"`
-	// The ID of the incident event
-	Id string `json:"id"`
-	IncidentEventType IncidentEventType `json:"incidentEventType"`
-	OriginatorType OriginatorType `json:"originatorType"`
-	SnoozeIndicator *IncidentEventSnoozeIndicator `json:"snoozeIndicator,omitempty"`
+	IncidentEventAcknowledgeAdministrativeEvent *IncidentEventAcknowledgeAdministrativeEvent
+	IncidentEventAcknowledgeOperationalEvent *IncidentEventAcknowledgeOperationalEvent
+	IncidentEventAssignmentAdministrativeEvent *IncidentEventAssignmentAdministrativeEvent
+	IncidentEventAssignmentOperationalEvent *IncidentEventAssignmentOperationalEvent
+	IncidentEventCloseAdministrativeEvent *IncidentEventCloseAdministrativeEvent
+	IncidentEventCloseOperationalEvent *IncidentEventCloseOperationalEvent
+	IncidentEventSnoozeIndicatorAdministrativeEvent *IncidentEventSnoozeIndicatorAdministrativeEvent
+	IncidentEventSnoozeIndicatorOperationalEvent *IncidentEventSnoozeIndicatorOperationalEvent
+	IncidentEventUnassignAdministrativeEvent *IncidentEventUnassignAdministrativeEvent
+	IncidentEventUnassignOperationalEvent *IncidentEventUnassignOperationalEvent
+	IncidentEventUpsertStateAdministrativeEvent *IncidentEventUpsertStateAdministrativeEvent
+	IncidentEventUpsertStateOperationalEvent *IncidentEventUpsertStateOperationalEvent
 }
 
-type _IncidentEvent IncidentEvent
-
-// NewIncidentEvent instantiates a new IncidentEvent object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewIncidentEvent(id string, incidentEventType IncidentEventType, originatorType OriginatorType) *IncidentEvent {
-	this := IncidentEvent{}
-	this.Id = id
-	this.IncidentEventType = incidentEventType
-	this.OriginatorType = originatorType
-	return &this
-}
-
-// NewIncidentEventWithDefaults instantiates a new IncidentEvent object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewIncidentEventWithDefaults() *IncidentEvent {
-	this := IncidentEvent{}
-	return &this
-}
-
-// GetAdministrativeEvent returns the AdministrativeEvent field value if set, zero value otherwise.
-func (o *IncidentEvent) GetAdministrativeEvent() IncidentEventOriginatorAdministrative {
-	if o == nil || IsNil(o.AdministrativeEvent) {
-		var ret IncidentEventOriginatorAdministrative
-		return ret
+// IncidentEventAcknowledgeAdministrativeEventAsIncidentEvent is a convenience function that returns IncidentEventAcknowledgeAdministrativeEvent wrapped in IncidentEvent
+func IncidentEventAcknowledgeAdministrativeEventAsIncidentEvent(v *IncidentEventAcknowledgeAdministrativeEvent) IncidentEvent {
+	return IncidentEvent{
+		IncidentEventAcknowledgeAdministrativeEvent: v,
 	}
-	return *o.AdministrativeEvent
 }
 
-// GetAdministrativeEventOk returns a tuple with the AdministrativeEvent field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IncidentEvent) GetAdministrativeEventOk() (*IncidentEventOriginatorAdministrative, bool) {
-	if o == nil || IsNil(o.AdministrativeEvent) {
-		return nil, false
+// IncidentEventAcknowledgeOperationalEventAsIncidentEvent is a convenience function that returns IncidentEventAcknowledgeOperationalEvent wrapped in IncidentEvent
+func IncidentEventAcknowledgeOperationalEventAsIncidentEvent(v *IncidentEventAcknowledgeOperationalEvent) IncidentEvent {
+	return IncidentEvent{
+		IncidentEventAcknowledgeOperationalEvent: v,
 	}
-	return o.AdministrativeEvent, true
 }
 
-// HasAdministrativeEvent returns a boolean if a field has been set.
-func (o *IncidentEvent) HasAdministrativeEvent() bool {
-	if o != nil && !IsNil(o.AdministrativeEvent) {
-		return true
+// IncidentEventAssignmentAdministrativeEventAsIncidentEvent is a convenience function that returns IncidentEventAssignmentAdministrativeEvent wrapped in IncidentEvent
+func IncidentEventAssignmentAdministrativeEventAsIncidentEvent(v *IncidentEventAssignmentAdministrativeEvent) IncidentEvent {
+	return IncidentEvent{
+		IncidentEventAssignmentAdministrativeEvent: v,
 	}
-
-	return false
 }
 
-// SetAdministrativeEvent gets a reference to the given IncidentEventOriginatorAdministrative and assigns it to the AdministrativeEvent field.
-func (o *IncidentEvent) SetAdministrativeEvent(v IncidentEventOriginatorAdministrative) {
-	o.AdministrativeEvent = &v
-}
-
-// GetId returns the Id field value
-func (o *IncidentEvent) GetId() string {
-	if o == nil {
-		var ret string
-		return ret
+// IncidentEventAssignmentOperationalEventAsIncidentEvent is a convenience function that returns IncidentEventAssignmentOperationalEvent wrapped in IncidentEvent
+func IncidentEventAssignmentOperationalEventAsIncidentEvent(v *IncidentEventAssignmentOperationalEvent) IncidentEvent {
+	return IncidentEvent{
+		IncidentEventAssignmentOperationalEvent: v,
 	}
-
-	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value
-// and a boolean to check if the value has been set.
-func (o *IncidentEvent) GetIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
+// IncidentEventCloseAdministrativeEventAsIncidentEvent is a convenience function that returns IncidentEventCloseAdministrativeEvent wrapped in IncidentEvent
+func IncidentEventCloseAdministrativeEventAsIncidentEvent(v *IncidentEventCloseAdministrativeEvent) IncidentEvent {
+	return IncidentEvent{
+		IncidentEventCloseAdministrativeEvent: v,
 	}
-	return &o.Id, true
 }
 
-// SetId sets field value
-func (o *IncidentEvent) SetId(v string) {
-	o.Id = v
-}
-
-// GetIncidentEventType returns the IncidentEventType field value
-func (o *IncidentEvent) GetIncidentEventType() IncidentEventType {
-	if o == nil {
-		var ret IncidentEventType
-		return ret
+// IncidentEventCloseOperationalEventAsIncidentEvent is a convenience function that returns IncidentEventCloseOperationalEvent wrapped in IncidentEvent
+func IncidentEventCloseOperationalEventAsIncidentEvent(v *IncidentEventCloseOperationalEvent) IncidentEvent {
+	return IncidentEvent{
+		IncidentEventCloseOperationalEvent: v,
 	}
-
-	return o.IncidentEventType
 }
 
-// GetIncidentEventTypeOk returns a tuple with the IncidentEventType field value
-// and a boolean to check if the value has been set.
-func (o *IncidentEvent) GetIncidentEventTypeOk() (*IncidentEventType, bool) {
-	if o == nil {
-		return nil, false
+// IncidentEventSnoozeIndicatorAdministrativeEventAsIncidentEvent is a convenience function that returns IncidentEventSnoozeIndicatorAdministrativeEvent wrapped in IncidentEvent
+func IncidentEventSnoozeIndicatorAdministrativeEventAsIncidentEvent(v *IncidentEventSnoozeIndicatorAdministrativeEvent) IncidentEvent {
+	return IncidentEvent{
+		IncidentEventSnoozeIndicatorAdministrativeEvent: v,
 	}
-	return &o.IncidentEventType, true
 }
 
-// SetIncidentEventType sets field value
-func (o *IncidentEvent) SetIncidentEventType(v IncidentEventType) {
-	o.IncidentEventType = v
-}
-
-// GetOriginatorType returns the OriginatorType field value
-func (o *IncidentEvent) GetOriginatorType() OriginatorType {
-	if o == nil {
-		var ret OriginatorType
-		return ret
+// IncidentEventSnoozeIndicatorOperationalEventAsIncidentEvent is a convenience function that returns IncidentEventSnoozeIndicatorOperationalEvent wrapped in IncidentEvent
+func IncidentEventSnoozeIndicatorOperationalEventAsIncidentEvent(v *IncidentEventSnoozeIndicatorOperationalEvent) IncidentEvent {
+	return IncidentEvent{
+		IncidentEventSnoozeIndicatorOperationalEvent: v,
 	}
-
-	return o.OriginatorType
 }
 
-// GetOriginatorTypeOk returns a tuple with the OriginatorType field value
-// and a boolean to check if the value has been set.
-func (o *IncidentEvent) GetOriginatorTypeOk() (*OriginatorType, bool) {
-	if o == nil {
-		return nil, false
+// IncidentEventUnassignAdministrativeEventAsIncidentEvent is a convenience function that returns IncidentEventUnassignAdministrativeEvent wrapped in IncidentEvent
+func IncidentEventUnassignAdministrativeEventAsIncidentEvent(v *IncidentEventUnassignAdministrativeEvent) IncidentEvent {
+	return IncidentEvent{
+		IncidentEventUnassignAdministrativeEvent: v,
 	}
-	return &o.OriginatorType, true
 }
 
-// SetOriginatorType sets field value
-func (o *IncidentEvent) SetOriginatorType(v OriginatorType) {
-	o.OriginatorType = v
+// IncidentEventUnassignOperationalEventAsIncidentEvent is a convenience function that returns IncidentEventUnassignOperationalEvent wrapped in IncidentEvent
+func IncidentEventUnassignOperationalEventAsIncidentEvent(v *IncidentEventUnassignOperationalEvent) IncidentEvent {
+	return IncidentEvent{
+		IncidentEventUnassignOperationalEvent: v,
+	}
 }
 
-// GetSnoozeIndicator returns the SnoozeIndicator field value if set, zero value otherwise.
-func (o *IncidentEvent) GetSnoozeIndicator() IncidentEventSnoozeIndicator {
-	if o == nil || IsNil(o.SnoozeIndicator) {
-		var ret IncidentEventSnoozeIndicator
-		return ret
+// IncidentEventUpsertStateAdministrativeEventAsIncidentEvent is a convenience function that returns IncidentEventUpsertStateAdministrativeEvent wrapped in IncidentEvent
+func IncidentEventUpsertStateAdministrativeEventAsIncidentEvent(v *IncidentEventUpsertStateAdministrativeEvent) IncidentEvent {
+	return IncidentEvent{
+		IncidentEventUpsertStateAdministrativeEvent: v,
 	}
-	return *o.SnoozeIndicator
 }
 
-// GetSnoozeIndicatorOk returns a tuple with the SnoozeIndicator field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IncidentEvent) GetSnoozeIndicatorOk() (*IncidentEventSnoozeIndicator, bool) {
-	if o == nil || IsNil(o.SnoozeIndicator) {
-		return nil, false
+// IncidentEventUpsertStateOperationalEventAsIncidentEvent is a convenience function that returns IncidentEventUpsertStateOperationalEvent wrapped in IncidentEvent
+func IncidentEventUpsertStateOperationalEventAsIncidentEvent(v *IncidentEventUpsertStateOperationalEvent) IncidentEvent {
+	return IncidentEvent{
+		IncidentEventUpsertStateOperationalEvent: v,
 	}
-	return o.SnoozeIndicator, true
 }
 
-// HasSnoozeIndicator returns a boolean if a field has been set.
-func (o *IncidentEvent) HasSnoozeIndicator() bool {
-	if o != nil && !IsNil(o.SnoozeIndicator) {
-		return true
-	}
 
-	return false
-}
-
-// SetSnoozeIndicator gets a reference to the given IncidentEventSnoozeIndicator and assigns it to the SnoozeIndicator field.
-func (o *IncidentEvent) SetSnoozeIndicator(v IncidentEventSnoozeIndicator) {
-	o.SnoozeIndicator = &v
-}
-
-func (o IncidentEvent) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o IncidentEvent) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AdministrativeEvent) {
-		toSerialize["administrativeEvent"] = o.AdministrativeEvent
-	}
-	toSerialize["id"] = o.Id
-	toSerialize["incidentEventType"] = o.IncidentEventType
-	toSerialize["originatorType"] = o.OriginatorType
-	if !IsNil(o.SnoozeIndicator) {
-		toSerialize["snoozeIndicator"] = o.SnoozeIndicator
-	}
-	return toSerialize, nil
-}
-
-func (o *IncidentEvent) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"id",
-		"incidentEventType",
-		"originatorType",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
+// Unmarshal JSON data into one of the pointers in the struct
+func (dst *IncidentEvent) UnmarshalJSON(data []byte) error {
+	var err error
+	match := 0
+	// try to unmarshal data into IncidentEventAcknowledgeAdministrativeEvent
+	err = newStrictDecoder(data).Decode(&dst.IncidentEventAcknowledgeAdministrativeEvent)
+	if err == nil {
+		jsonIncidentEventAcknowledgeAdministrativeEvent, _ := json.Marshal(dst.IncidentEventAcknowledgeAdministrativeEvent)
+		if string(jsonIncidentEventAcknowledgeAdministrativeEvent) == "{}" { // empty struct
+			dst.IncidentEventAcknowledgeAdministrativeEvent = nil
+		} else {
+			if err = validator.Validate(dst.IncidentEventAcknowledgeAdministrativeEvent); err != nil {
+				dst.IncidentEventAcknowledgeAdministrativeEvent = nil
+			} else {
+				match++
+			}
 		}
+	} else {
+		dst.IncidentEventAcknowledgeAdministrativeEvent = nil
 	}
 
-	varIncidentEvent := _IncidentEvent{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varIncidentEvent)
-
-	if err != nil {
-		return err
+	// try to unmarshal data into IncidentEventAcknowledgeOperationalEvent
+	err = newStrictDecoder(data).Decode(&dst.IncidentEventAcknowledgeOperationalEvent)
+	if err == nil {
+		jsonIncidentEventAcknowledgeOperationalEvent, _ := json.Marshal(dst.IncidentEventAcknowledgeOperationalEvent)
+		if string(jsonIncidentEventAcknowledgeOperationalEvent) == "{}" { // empty struct
+			dst.IncidentEventAcknowledgeOperationalEvent = nil
+		} else {
+			if err = validator.Validate(dst.IncidentEventAcknowledgeOperationalEvent); err != nil {
+				dst.IncidentEventAcknowledgeOperationalEvent = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.IncidentEventAcknowledgeOperationalEvent = nil
 	}
 
-	*o = IncidentEvent(varIncidentEvent)
+	// try to unmarshal data into IncidentEventAssignmentAdministrativeEvent
+	err = newStrictDecoder(data).Decode(&dst.IncidentEventAssignmentAdministrativeEvent)
+	if err == nil {
+		jsonIncidentEventAssignmentAdministrativeEvent, _ := json.Marshal(dst.IncidentEventAssignmentAdministrativeEvent)
+		if string(jsonIncidentEventAssignmentAdministrativeEvent) == "{}" { // empty struct
+			dst.IncidentEventAssignmentAdministrativeEvent = nil
+		} else {
+			if err = validator.Validate(dst.IncidentEventAssignmentAdministrativeEvent); err != nil {
+				dst.IncidentEventAssignmentAdministrativeEvent = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.IncidentEventAssignmentAdministrativeEvent = nil
+	}
 
-	return err
+	// try to unmarshal data into IncidentEventAssignmentOperationalEvent
+	err = newStrictDecoder(data).Decode(&dst.IncidentEventAssignmentOperationalEvent)
+	if err == nil {
+		jsonIncidentEventAssignmentOperationalEvent, _ := json.Marshal(dst.IncidentEventAssignmentOperationalEvent)
+		if string(jsonIncidentEventAssignmentOperationalEvent) == "{}" { // empty struct
+			dst.IncidentEventAssignmentOperationalEvent = nil
+		} else {
+			if err = validator.Validate(dst.IncidentEventAssignmentOperationalEvent); err != nil {
+				dst.IncidentEventAssignmentOperationalEvent = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.IncidentEventAssignmentOperationalEvent = nil
+	}
+
+	// try to unmarshal data into IncidentEventCloseAdministrativeEvent
+	err = newStrictDecoder(data).Decode(&dst.IncidentEventCloseAdministrativeEvent)
+	if err == nil {
+		jsonIncidentEventCloseAdministrativeEvent, _ := json.Marshal(dst.IncidentEventCloseAdministrativeEvent)
+		if string(jsonIncidentEventCloseAdministrativeEvent) == "{}" { // empty struct
+			dst.IncidentEventCloseAdministrativeEvent = nil
+		} else {
+			if err = validator.Validate(dst.IncidentEventCloseAdministrativeEvent); err != nil {
+				dst.IncidentEventCloseAdministrativeEvent = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.IncidentEventCloseAdministrativeEvent = nil
+	}
+
+	// try to unmarshal data into IncidentEventCloseOperationalEvent
+	err = newStrictDecoder(data).Decode(&dst.IncidentEventCloseOperationalEvent)
+	if err == nil {
+		jsonIncidentEventCloseOperationalEvent, _ := json.Marshal(dst.IncidentEventCloseOperationalEvent)
+		if string(jsonIncidentEventCloseOperationalEvent) == "{}" { // empty struct
+			dst.IncidentEventCloseOperationalEvent = nil
+		} else {
+			if err = validator.Validate(dst.IncidentEventCloseOperationalEvent); err != nil {
+				dst.IncidentEventCloseOperationalEvent = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.IncidentEventCloseOperationalEvent = nil
+	}
+
+	// try to unmarshal data into IncidentEventSnoozeIndicatorAdministrativeEvent
+	err = newStrictDecoder(data).Decode(&dst.IncidentEventSnoozeIndicatorAdministrativeEvent)
+	if err == nil {
+		jsonIncidentEventSnoozeIndicatorAdministrativeEvent, _ := json.Marshal(dst.IncidentEventSnoozeIndicatorAdministrativeEvent)
+		if string(jsonIncidentEventSnoozeIndicatorAdministrativeEvent) == "{}" { // empty struct
+			dst.IncidentEventSnoozeIndicatorAdministrativeEvent = nil
+		} else {
+			if err = validator.Validate(dst.IncidentEventSnoozeIndicatorAdministrativeEvent); err != nil {
+				dst.IncidentEventSnoozeIndicatorAdministrativeEvent = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.IncidentEventSnoozeIndicatorAdministrativeEvent = nil
+	}
+
+	// try to unmarshal data into IncidentEventSnoozeIndicatorOperationalEvent
+	err = newStrictDecoder(data).Decode(&dst.IncidentEventSnoozeIndicatorOperationalEvent)
+	if err == nil {
+		jsonIncidentEventSnoozeIndicatorOperationalEvent, _ := json.Marshal(dst.IncidentEventSnoozeIndicatorOperationalEvent)
+		if string(jsonIncidentEventSnoozeIndicatorOperationalEvent) == "{}" { // empty struct
+			dst.IncidentEventSnoozeIndicatorOperationalEvent = nil
+		} else {
+			if err = validator.Validate(dst.IncidentEventSnoozeIndicatorOperationalEvent); err != nil {
+				dst.IncidentEventSnoozeIndicatorOperationalEvent = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.IncidentEventSnoozeIndicatorOperationalEvent = nil
+	}
+
+	// try to unmarshal data into IncidentEventUnassignAdministrativeEvent
+	err = newStrictDecoder(data).Decode(&dst.IncidentEventUnassignAdministrativeEvent)
+	if err == nil {
+		jsonIncidentEventUnassignAdministrativeEvent, _ := json.Marshal(dst.IncidentEventUnassignAdministrativeEvent)
+		if string(jsonIncidentEventUnassignAdministrativeEvent) == "{}" { // empty struct
+			dst.IncidentEventUnassignAdministrativeEvent = nil
+		} else {
+			if err = validator.Validate(dst.IncidentEventUnassignAdministrativeEvent); err != nil {
+				dst.IncidentEventUnassignAdministrativeEvent = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.IncidentEventUnassignAdministrativeEvent = nil
+	}
+
+	// try to unmarshal data into IncidentEventUnassignOperationalEvent
+	err = newStrictDecoder(data).Decode(&dst.IncidentEventUnassignOperationalEvent)
+	if err == nil {
+		jsonIncidentEventUnassignOperationalEvent, _ := json.Marshal(dst.IncidentEventUnassignOperationalEvent)
+		if string(jsonIncidentEventUnassignOperationalEvent) == "{}" { // empty struct
+			dst.IncidentEventUnassignOperationalEvent = nil
+		} else {
+			if err = validator.Validate(dst.IncidentEventUnassignOperationalEvent); err != nil {
+				dst.IncidentEventUnassignOperationalEvent = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.IncidentEventUnassignOperationalEvent = nil
+	}
+
+	// try to unmarshal data into IncidentEventUpsertStateAdministrativeEvent
+	err = newStrictDecoder(data).Decode(&dst.IncidentEventUpsertStateAdministrativeEvent)
+	if err == nil {
+		jsonIncidentEventUpsertStateAdministrativeEvent, _ := json.Marshal(dst.IncidentEventUpsertStateAdministrativeEvent)
+		if string(jsonIncidentEventUpsertStateAdministrativeEvent) == "{}" { // empty struct
+			dst.IncidentEventUpsertStateAdministrativeEvent = nil
+		} else {
+			if err = validator.Validate(dst.IncidentEventUpsertStateAdministrativeEvent); err != nil {
+				dst.IncidentEventUpsertStateAdministrativeEvent = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.IncidentEventUpsertStateAdministrativeEvent = nil
+	}
+
+	// try to unmarshal data into IncidentEventUpsertStateOperationalEvent
+	err = newStrictDecoder(data).Decode(&dst.IncidentEventUpsertStateOperationalEvent)
+	if err == nil {
+		jsonIncidentEventUpsertStateOperationalEvent, _ := json.Marshal(dst.IncidentEventUpsertStateOperationalEvent)
+		if string(jsonIncidentEventUpsertStateOperationalEvent) == "{}" { // empty struct
+			dst.IncidentEventUpsertStateOperationalEvent = nil
+		} else {
+			if err = validator.Validate(dst.IncidentEventUpsertStateOperationalEvent); err != nil {
+				dst.IncidentEventUpsertStateOperationalEvent = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.IncidentEventUpsertStateOperationalEvent = nil
+	}
+
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.IncidentEventAcknowledgeAdministrativeEvent = nil
+		dst.IncidentEventAcknowledgeOperationalEvent = nil
+		dst.IncidentEventAssignmentAdministrativeEvent = nil
+		dst.IncidentEventAssignmentOperationalEvent = nil
+		dst.IncidentEventCloseAdministrativeEvent = nil
+		dst.IncidentEventCloseOperationalEvent = nil
+		dst.IncidentEventSnoozeIndicatorAdministrativeEvent = nil
+		dst.IncidentEventSnoozeIndicatorOperationalEvent = nil
+		dst.IncidentEventUnassignAdministrativeEvent = nil
+		dst.IncidentEventUnassignOperationalEvent = nil
+		dst.IncidentEventUpsertStateAdministrativeEvent = nil
+		dst.IncidentEventUpsertStateOperationalEvent = nil
+
+		return fmt.Errorf("data matches more than one schema in oneOf(IncidentEvent)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("data failed to match schemas in oneOf(IncidentEvent)")
+	}
+}
+
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src IncidentEvent) MarshalJSON() ([]byte, error) {
+	if src.IncidentEventAcknowledgeAdministrativeEvent != nil {
+		return json.Marshal(&src.IncidentEventAcknowledgeAdministrativeEvent)
+	}
+
+	if src.IncidentEventAcknowledgeOperationalEvent != nil {
+		return json.Marshal(&src.IncidentEventAcknowledgeOperationalEvent)
+	}
+
+	if src.IncidentEventAssignmentAdministrativeEvent != nil {
+		return json.Marshal(&src.IncidentEventAssignmentAdministrativeEvent)
+	}
+
+	if src.IncidentEventAssignmentOperationalEvent != nil {
+		return json.Marshal(&src.IncidentEventAssignmentOperationalEvent)
+	}
+
+	if src.IncidentEventCloseAdministrativeEvent != nil {
+		return json.Marshal(&src.IncidentEventCloseAdministrativeEvent)
+	}
+
+	if src.IncidentEventCloseOperationalEvent != nil {
+		return json.Marshal(&src.IncidentEventCloseOperationalEvent)
+	}
+
+	if src.IncidentEventSnoozeIndicatorAdministrativeEvent != nil {
+		return json.Marshal(&src.IncidentEventSnoozeIndicatorAdministrativeEvent)
+	}
+
+	if src.IncidentEventSnoozeIndicatorOperationalEvent != nil {
+		return json.Marshal(&src.IncidentEventSnoozeIndicatorOperationalEvent)
+	}
+
+	if src.IncidentEventUnassignAdministrativeEvent != nil {
+		return json.Marshal(&src.IncidentEventUnassignAdministrativeEvent)
+	}
+
+	if src.IncidentEventUnassignOperationalEvent != nil {
+		return json.Marshal(&src.IncidentEventUnassignOperationalEvent)
+	}
+
+	if src.IncidentEventUpsertStateAdministrativeEvent != nil {
+		return json.Marshal(&src.IncidentEventUpsertStateAdministrativeEvent)
+	}
+
+	if src.IncidentEventUpsertStateOperationalEvent != nil {
+		return json.Marshal(&src.IncidentEventUpsertStateOperationalEvent)
+	}
+
+	return nil, nil // no data in oneOf schemas
+}
+
+// Get the actual instance
+func (obj *IncidentEvent) GetActualInstance() (interface{}) {
+	if obj == nil {
+		return nil
+	}
+	if obj.IncidentEventAcknowledgeAdministrativeEvent != nil {
+		return obj.IncidentEventAcknowledgeAdministrativeEvent
+	}
+
+	if obj.IncidentEventAcknowledgeOperationalEvent != nil {
+		return obj.IncidentEventAcknowledgeOperationalEvent
+	}
+
+	if obj.IncidentEventAssignmentAdministrativeEvent != nil {
+		return obj.IncidentEventAssignmentAdministrativeEvent
+	}
+
+	if obj.IncidentEventAssignmentOperationalEvent != nil {
+		return obj.IncidentEventAssignmentOperationalEvent
+	}
+
+	if obj.IncidentEventCloseAdministrativeEvent != nil {
+		return obj.IncidentEventCloseAdministrativeEvent
+	}
+
+	if obj.IncidentEventCloseOperationalEvent != nil {
+		return obj.IncidentEventCloseOperationalEvent
+	}
+
+	if obj.IncidentEventSnoozeIndicatorAdministrativeEvent != nil {
+		return obj.IncidentEventSnoozeIndicatorAdministrativeEvent
+	}
+
+	if obj.IncidentEventSnoozeIndicatorOperationalEvent != nil {
+		return obj.IncidentEventSnoozeIndicatorOperationalEvent
+	}
+
+	if obj.IncidentEventUnassignAdministrativeEvent != nil {
+		return obj.IncidentEventUnassignAdministrativeEvent
+	}
+
+	if obj.IncidentEventUnassignOperationalEvent != nil {
+		return obj.IncidentEventUnassignOperationalEvent
+	}
+
+	if obj.IncidentEventUpsertStateAdministrativeEvent != nil {
+		return obj.IncidentEventUpsertStateAdministrativeEvent
+	}
+
+	if obj.IncidentEventUpsertStateOperationalEvent != nil {
+		return obj.IncidentEventUpsertStateOperationalEvent
+	}
+
+	// all schemas are nil
+	return nil
+}
+
+// Get the actual instance value
+func (obj IncidentEvent) GetActualInstanceValue() (interface{}) {
+	if obj.IncidentEventAcknowledgeAdministrativeEvent != nil {
+		return *obj.IncidentEventAcknowledgeAdministrativeEvent
+	}
+
+	if obj.IncidentEventAcknowledgeOperationalEvent != nil {
+		return *obj.IncidentEventAcknowledgeOperationalEvent
+	}
+
+	if obj.IncidentEventAssignmentAdministrativeEvent != nil {
+		return *obj.IncidentEventAssignmentAdministrativeEvent
+	}
+
+	if obj.IncidentEventAssignmentOperationalEvent != nil {
+		return *obj.IncidentEventAssignmentOperationalEvent
+	}
+
+	if obj.IncidentEventCloseAdministrativeEvent != nil {
+		return *obj.IncidentEventCloseAdministrativeEvent
+	}
+
+	if obj.IncidentEventCloseOperationalEvent != nil {
+		return *obj.IncidentEventCloseOperationalEvent
+	}
+
+	if obj.IncidentEventSnoozeIndicatorAdministrativeEvent != nil {
+		return *obj.IncidentEventSnoozeIndicatorAdministrativeEvent
+	}
+
+	if obj.IncidentEventSnoozeIndicatorOperationalEvent != nil {
+		return *obj.IncidentEventSnoozeIndicatorOperationalEvent
+	}
+
+	if obj.IncidentEventUnassignAdministrativeEvent != nil {
+		return *obj.IncidentEventUnassignAdministrativeEvent
+	}
+
+	if obj.IncidentEventUnassignOperationalEvent != nil {
+		return *obj.IncidentEventUnassignOperationalEvent
+	}
+
+	if obj.IncidentEventUpsertStateAdministrativeEvent != nil {
+		return *obj.IncidentEventUpsertStateAdministrativeEvent
+	}
+
+	if obj.IncidentEventUpsertStateOperationalEvent != nil {
+		return *obj.IncidentEventUpsertStateOperationalEvent
+	}
+
+	// all schemas are nil
+	return nil
 }
 
 type NullableIncidentEvent struct {

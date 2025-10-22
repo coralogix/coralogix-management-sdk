@@ -18,21 +18,21 @@ import (
 
 // TimeFrameSelect - struct for TimeFrameSelect
 type TimeFrameSelect struct {
-	TimeFrameSelectOneOf *TimeFrameSelectOneOf
-	TimeFrameSelectOneOf1 *TimeFrameSelectOneOf1
+	TimeFrameSelectAbsoluteTimeFrame *TimeFrameSelectAbsoluteTimeFrame
+	TimeFrameSelectRelativeTimeFrame *TimeFrameSelectRelativeTimeFrame
 }
 
-// TimeFrameSelectOneOfAsTimeFrameSelect is a convenience function that returns TimeFrameSelectOneOf wrapped in TimeFrameSelect
-func TimeFrameSelectOneOfAsTimeFrameSelect(v *TimeFrameSelectOneOf) TimeFrameSelect {
+// TimeFrameSelectAbsoluteTimeFrameAsTimeFrameSelect is a convenience function that returns TimeFrameSelectAbsoluteTimeFrame wrapped in TimeFrameSelect
+func TimeFrameSelectAbsoluteTimeFrameAsTimeFrameSelect(v *TimeFrameSelectAbsoluteTimeFrame) TimeFrameSelect {
 	return TimeFrameSelect{
-		TimeFrameSelectOneOf: v,
+		TimeFrameSelectAbsoluteTimeFrame: v,
 	}
 }
 
-// TimeFrameSelectOneOf1AsTimeFrameSelect is a convenience function that returns TimeFrameSelectOneOf1 wrapped in TimeFrameSelect
-func TimeFrameSelectOneOf1AsTimeFrameSelect(v *TimeFrameSelectOneOf1) TimeFrameSelect {
+// TimeFrameSelectRelativeTimeFrameAsTimeFrameSelect is a convenience function that returns TimeFrameSelectRelativeTimeFrame wrapped in TimeFrameSelect
+func TimeFrameSelectRelativeTimeFrameAsTimeFrameSelect(v *TimeFrameSelectRelativeTimeFrame) TimeFrameSelect {
 	return TimeFrameSelect{
-		TimeFrameSelectOneOf1: v,
+		TimeFrameSelectRelativeTimeFrame: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func TimeFrameSelectOneOf1AsTimeFrameSelect(v *TimeFrameSelectOneOf1) TimeFrameS
 func (dst *TimeFrameSelect) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into TimeFrameSelectOneOf
-	err = newStrictDecoder(data).Decode(&dst.TimeFrameSelectOneOf)
+	// try to unmarshal data into TimeFrameSelectAbsoluteTimeFrame
+	err = newStrictDecoder(data).Decode(&dst.TimeFrameSelectAbsoluteTimeFrame)
 	if err == nil {
-		jsonTimeFrameSelectOneOf, _ := json.Marshal(dst.TimeFrameSelectOneOf)
-		if string(jsonTimeFrameSelectOneOf) == "{}" { // empty struct
-			dst.TimeFrameSelectOneOf = nil
+		jsonTimeFrameSelectAbsoluteTimeFrame, _ := json.Marshal(dst.TimeFrameSelectAbsoluteTimeFrame)
+		if string(jsonTimeFrameSelectAbsoluteTimeFrame) == "{}" { // empty struct
+			dst.TimeFrameSelectAbsoluteTimeFrame = nil
 		} else {
-			if err = validator.Validate(dst.TimeFrameSelectOneOf); err != nil {
-				dst.TimeFrameSelectOneOf = nil
+			if err = validator.Validate(dst.TimeFrameSelectAbsoluteTimeFrame); err != nil {
+				dst.TimeFrameSelectAbsoluteTimeFrame = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.TimeFrameSelectOneOf = nil
+		dst.TimeFrameSelectAbsoluteTimeFrame = nil
 	}
 
-	// try to unmarshal data into TimeFrameSelectOneOf1
-	err = newStrictDecoder(data).Decode(&dst.TimeFrameSelectOneOf1)
+	// try to unmarshal data into TimeFrameSelectRelativeTimeFrame
+	err = newStrictDecoder(data).Decode(&dst.TimeFrameSelectRelativeTimeFrame)
 	if err == nil {
-		jsonTimeFrameSelectOneOf1, _ := json.Marshal(dst.TimeFrameSelectOneOf1)
-		if string(jsonTimeFrameSelectOneOf1) == "{}" { // empty struct
-			dst.TimeFrameSelectOneOf1 = nil
+		jsonTimeFrameSelectRelativeTimeFrame, _ := json.Marshal(dst.TimeFrameSelectRelativeTimeFrame)
+		if string(jsonTimeFrameSelectRelativeTimeFrame) == "{}" { // empty struct
+			dst.TimeFrameSelectRelativeTimeFrame = nil
 		} else {
-			if err = validator.Validate(dst.TimeFrameSelectOneOf1); err != nil {
-				dst.TimeFrameSelectOneOf1 = nil
+			if err = validator.Validate(dst.TimeFrameSelectRelativeTimeFrame); err != nil {
+				dst.TimeFrameSelectRelativeTimeFrame = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.TimeFrameSelectOneOf1 = nil
+		dst.TimeFrameSelectRelativeTimeFrame = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.TimeFrameSelectOneOf = nil
-		dst.TimeFrameSelectOneOf1 = nil
+		dst.TimeFrameSelectAbsoluteTimeFrame = nil
+		dst.TimeFrameSelectRelativeTimeFrame = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(TimeFrameSelect)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *TimeFrameSelect) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src TimeFrameSelect) MarshalJSON() ([]byte, error) {
-	if src.TimeFrameSelectOneOf != nil {
-		return json.Marshal(&src.TimeFrameSelectOneOf)
+	if src.TimeFrameSelectAbsoluteTimeFrame != nil {
+		return json.Marshal(&src.TimeFrameSelectAbsoluteTimeFrame)
 	}
 
-	if src.TimeFrameSelectOneOf1 != nil {
-		return json.Marshal(&src.TimeFrameSelectOneOf1)
+	if src.TimeFrameSelectRelativeTimeFrame != nil {
+		return json.Marshal(&src.TimeFrameSelectRelativeTimeFrame)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *TimeFrameSelect) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.TimeFrameSelectOneOf != nil {
-		return obj.TimeFrameSelectOneOf
+	if obj.TimeFrameSelectAbsoluteTimeFrame != nil {
+		return obj.TimeFrameSelectAbsoluteTimeFrame
 	}
 
-	if obj.TimeFrameSelectOneOf1 != nil {
-		return obj.TimeFrameSelectOneOf1
+	if obj.TimeFrameSelectRelativeTimeFrame != nil {
+		return obj.TimeFrameSelectRelativeTimeFrame
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *TimeFrameSelect) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj TimeFrameSelect) GetActualInstanceValue() (interface{}) {
-	if obj.TimeFrameSelectOneOf != nil {
-		return *obj.TimeFrameSelectOneOf
+	if obj.TimeFrameSelectAbsoluteTimeFrame != nil {
+		return *obj.TimeFrameSelectAbsoluteTimeFrame
 	}
 
-	if obj.TimeFrameSelectOneOf1 != nil {
-		return *obj.TimeFrameSelectOneOf1
+	if obj.TimeFrameSelectRelativeTimeFrame != nil {
+		return *obj.TimeFrameSelectRelativeTimeFrame
 	}
 
 	// all schemas are nil

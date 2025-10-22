@@ -882,6 +882,33 @@
           "roleName"
         ]
       },
+      "ColorsByAggregation": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/ColorsByAggregation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByGroupBy": {
+        "type": "object",
+        "properties": {
+          "groupBy": {
+            "$ref": "#/components/schemas/ColorsByGroupBy"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByStack": {
+        "type": "object",
+        "properties": {
+          "stack": {
+            "$ref": "#/components/schemas/ColorsByStack"
+          }
+        },
+        "additionalProperties": false
+      },
       "CreateOutgoingWebhookResponse": {
         "externalDocs": {
           "url": ""
@@ -995,50 +1022,56 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "multipleValues": {
-                "$ref": "#/components/schemas/MultipleValues"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "filters": {
-                "$ref": "#/components/schemas/Filters"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
+      },
+      "FilterPathAndValuesFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "FilterPathAndValuesMultipleValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
       },
       "Filters": {
         "externalDocs": {
@@ -1326,582 +1359,138 @@
       "OutgoingWebhook": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook",
-            "type": "object",
-            "properties": {
-              "createdAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "externalId": {
-                "example": 123456,
-                "type": "integer",
-                "format": "int64"
-              },
-              "genericWebhook": {
-                "$ref": "#/components/schemas/GenericWebhookConfig"
-              },
-              "id": {
-                "example": "webhook_id",
-                "type": "string"
-              },
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "updatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "id",
-              "type",
-              "name",
-              "createdAt",
-              "externalId"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookJira"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook",
-            "type": "object",
-            "properties": {
-              "createdAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "externalId": {
-                "example": 123456,
-                "type": "integer",
-                "format": "int64"
-              },
-              "id": {
-                "example": "webhook_id",
-                "type": "string"
-              },
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "slack": {
-                "$ref": "#/components/schemas/SlackConfig"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "updatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "id",
-              "type",
-              "name",
-              "createdAt",
-              "externalId"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookOpsgenie"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook",
-            "type": "object",
-            "properties": {
-              "createdAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "externalId": {
-                "example": 123456,
-                "type": "integer",
-                "format": "int64"
-              },
-              "id": {
-                "example": "webhook_id",
-                "type": "string"
-              },
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "pagerDuty": {
-                "$ref": "#/components/schemas/PagerDutyConfig"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "updatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "id",
-              "type",
-              "name",
-              "createdAt",
-              "externalId"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookGenericWebhook"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook",
-            "type": "object",
-            "properties": {
-              "createdAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "externalId": {
-                "example": 123456,
-                "type": "integer",
-                "format": "int64"
-              },
-              "id": {
-                "example": "webhook_id",
-                "type": "string"
-              },
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "sendLog": {
-                "$ref": "#/components/schemas/SendLogConfig"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "updatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "id",
-              "type",
-              "name",
-              "createdAt",
-              "externalId"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookPagerDuty"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook",
-            "type": "object",
-            "properties": {
-              "createdAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "emailGroup": {
-                "$ref": "#/components/schemas/EmailGroupConfig"
-              },
-              "externalId": {
-                "example": 123456,
-                "type": "integer",
-                "format": "int64"
-              },
-              "id": {
-                "example": "webhook_id",
-                "type": "string"
-              },
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "updatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "id",
-              "type",
-              "name",
-              "createdAt",
-              "externalId"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookSendLog"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook",
-            "type": "object",
-            "properties": {
-              "createdAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "externalId": {
-                "example": 123456,
-                "type": "integer",
-                "format": "int64"
-              },
-              "id": {
-                "example": "webhook_id",
-                "type": "string"
-              },
-              "microsoftTeams": {
-                "$ref": "#/components/schemas/MicrosoftTeamsConfig"
-              },
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "updatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "id",
-              "type",
-              "name",
-              "createdAt",
-              "externalId"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookMicrosoftTeams"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook",
-            "type": "object",
-            "properties": {
-              "createdAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "externalId": {
-                "example": 123456,
-                "type": "integer",
-                "format": "int64"
-              },
-              "id": {
-                "example": "webhook_id",
-                "type": "string"
-              },
-              "jira": {
-                "$ref": "#/components/schemas/JiraConfig"
-              },
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "updatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "id",
-              "type",
-              "name",
-              "createdAt",
-              "externalId"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookDemisto"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook",
-            "type": "object",
-            "properties": {
-              "createdAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "externalId": {
-                "example": 123456,
-                "type": "integer",
-                "format": "int64"
-              },
-              "id": {
-                "example": "webhook_id",
-                "type": "string"
-              },
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "opsgenie": {
-                "$ref": "#/components/schemas/OpsgenieConfig"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "updatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "id",
-              "type",
-              "name",
-              "createdAt",
-              "externalId"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookAwsEventBridge"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook",
-            "type": "object",
-            "properties": {
-              "createdAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "demisto": {
-                "$ref": "#/components/schemas/DemistoConfig"
-              },
-              "externalId": {
-                "example": 123456,
-                "type": "integer",
-                "format": "int64"
-              },
-              "id": {
-                "example": "webhook_id",
-                "type": "string"
-              },
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "updatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "id",
-              "type",
-              "name",
-              "createdAt",
-              "externalId"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookIbmEventNotifications"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook",
-            "type": "object",
-            "properties": {
-              "awsEventBridge": {
-                "$ref": "#/components/schemas/AwsEventBridgeConfig"
-              },
-              "createdAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "externalId": {
-                "example": 123456,
-                "type": "integer",
-                "format": "int64"
-              },
-              "id": {
-                "example": "webhook_id",
-                "type": "string"
-              },
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "updatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "id",
-              "type",
-              "name",
-              "createdAt",
-              "externalId"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook",
-            "type": "object",
-            "properties": {
-              "createdAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "externalId": {
-                "example": 123456,
-                "type": "integer",
-                "format": "int64"
-              },
-              "ibmEventNotifications": {
-                "$ref": "#/components/schemas/IbmEventNotificationsConfig"
-              },
-              "id": {
-                "example": "webhook_id",
-                "type": "string"
-              },
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "updatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "id",
-              "type",
-              "name",
-              "createdAt",
-              "externalId"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookSlack"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook",
-            "type": "object",
-            "properties": {
-              "createdAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "externalId": {
-                "example": 123456,
-                "type": "integer",
-                "format": "int64"
-              },
-              "id": {
-                "example": "webhook_id",
-                "type": "string"
-              },
-              "msTeamsWorkflow": {
-                "$ref": "#/components/schemas/MSTeamsWorkflowConfig"
-              },
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "updatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "id",
-              "type",
-              "name",
-              "createdAt",
-              "externalId"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookEmailGroup"
           }
         ]
+      },
+      "OutgoingWebhookAwsEventBridge": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "awsEventBridge": {
+            "$ref": "#/components/schemas/AwsEventBridgeConfig"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "name",
+          "createdAt",
+          "externalId"
+        ],
+        "additionalProperties": false
+      },
+      "OutgoingWebhookDemisto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "demisto": {
+            "$ref": "#/components/schemas/DemistoConfig"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "name",
+          "createdAt",
+          "externalId"
+        ],
+        "additionalProperties": false
       },
       "OutgoingWebhookDetails": {
         "externalDocs": {
@@ -1922,6 +1511,54 @@
           "label",
           "type"
         ]
+      },
+      "OutgoingWebhookEmailGroup": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "emailGroup": {
+            "$ref": "#/components/schemas/EmailGroupConfig"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "name",
+          "createdAt",
+          "externalId"
+        ],
+        "additionalProperties": false
       },
       "OutgoingWebhookExtendedSummary": {
         "externalDocs": {
@@ -1967,357 +1604,825 @@
           "type"
         ]
       },
+      "OutgoingWebhookGenericWebhook": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "genericWebhook": {
+            "$ref": "#/components/schemas/GenericWebhookConfig"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "name",
+          "createdAt",
+          "externalId"
+        ],
+        "additionalProperties": false
+      },
+      "OutgoingWebhookIbmEventNotifications": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "ibmEventNotifications": {
+            "$ref": "#/components/schemas/IbmEventNotificationsConfig"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "name",
+          "createdAt",
+          "externalId"
+        ],
+        "additionalProperties": false
+      },
       "OutgoingWebhookInputData": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook input data",
-            "type": "object",
-            "properties": {
-              "genericWebhook": {
-                "$ref": "#/components/schemas/GenericWebhookConfig"
-              },
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "name",
-              "config",
-              "type"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataGenericWebhook"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook input data",
-            "type": "object",
-            "properties": {
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "slack": {
-                "$ref": "#/components/schemas/SlackConfig"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "name",
-              "config",
-              "type"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataSendLog"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook input data",
-            "type": "object",
-            "properties": {
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "pagerDuty": {
-                "$ref": "#/components/schemas/PagerDutyConfig"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "name",
-              "config",
-              "type"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook input data",
-            "type": "object",
-            "properties": {
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "sendLog": {
-                "$ref": "#/components/schemas/SendLogConfig"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "name",
-              "config",
-              "type"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook input data",
-            "type": "object",
-            "properties": {
-              "emailGroup": {
-                "$ref": "#/components/schemas/EmailGroupConfig"
-              },
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "name",
-              "config",
-              "type"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataJira"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook input data",
-            "type": "object",
-            "properties": {
-              "microsoftTeams": {
-                "$ref": "#/components/schemas/MicrosoftTeamsConfig"
-              },
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "name",
-              "config",
-              "type"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook input data",
-            "type": "object",
-            "properties": {
-              "jira": {
-                "$ref": "#/components/schemas/JiraConfig"
-              },
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "name",
-              "config",
-              "type"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook input data",
-            "type": "object",
-            "properties": {
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "opsgenie": {
-                "$ref": "#/components/schemas/OpsgenieConfig"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "name",
-              "config",
-              "type"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataSlack"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook input data",
-            "type": "object",
-            "properties": {
-              "demisto": {
-                "$ref": "#/components/schemas/DemistoConfig"
-              },
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "name",
-              "config",
-              "type"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook input data",
-            "type": "object",
-            "properties": {
-              "awsEventBridge": {
-                "$ref": "#/components/schemas/AwsEventBridgeConfig"
-              },
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "name",
-              "config",
-              "type"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataOpsgenie"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook input data",
-            "type": "object",
-            "properties": {
-              "ibmEventNotifications": {
-                "$ref": "#/components/schemas/IbmEventNotificationsConfig"
-              },
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "name",
-              "config",
-              "type"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataDemisto"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Outgoing webhook input data",
-            "type": "object",
-            "properties": {
-              "msTeamsWorkflow": {
-                "$ref": "#/components/schemas/MSTeamsWorkflowConfig"
-              },
-              "name": {
-                "example": "my_webhook",
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/WebhookType"
-              },
-              "url": {
-                "example": "slack.webhook.com",
-                "type": "string"
-              }
-            },
-            "required": [
-              "name",
-              "config",
-              "type"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
           }
         ]
+      },
+      "OutgoingWebhookInputDataAwsEventBridge": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "awsEventBridge": {
+            "$ref": "#/components/schemas/AwsEventBridgeConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "config",
+          "type"
+        ],
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataDemisto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "demisto": {
+            "$ref": "#/components/schemas/DemistoConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "config",
+          "type"
+        ],
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataEmailGroup": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "emailGroup": {
+            "$ref": "#/components/schemas/EmailGroupConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "config",
+          "type"
+        ],
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataGenericWebhook": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "genericWebhook": {
+            "$ref": "#/components/schemas/GenericWebhookConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "config",
+          "type"
+        ],
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataIbmEventNotifications": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "ibmEventNotifications": {
+            "$ref": "#/components/schemas/IbmEventNotificationsConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "config",
+          "type"
+        ],
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataJira": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "jira": {
+            "$ref": "#/components/schemas/JiraConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "config",
+          "type"
+        ],
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataMicrosoftTeams": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "microsoftTeams": {
+            "$ref": "#/components/schemas/MicrosoftTeamsConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "config",
+          "type"
+        ],
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataMsTeamsWorkflow": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "msTeamsWorkflow": {
+            "$ref": "#/components/schemas/MSTeamsWorkflowConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "config",
+          "type"
+        ],
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataOpsgenie": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "opsgenie": {
+            "$ref": "#/components/schemas/OpsgenieConfig"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "config",
+          "type"
+        ],
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataPagerDuty": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "pagerDuty": {
+            "$ref": "#/components/schemas/PagerDutyConfig"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "config",
+          "type"
+        ],
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataSendLog": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "sendLog": {
+            "$ref": "#/components/schemas/SendLogConfig"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "config",
+          "type"
+        ],
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataSlack": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "slack": {
+            "$ref": "#/components/schemas/SlackConfig"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "config",
+          "type"
+        ],
+        "additionalProperties": false
+      },
+      "OutgoingWebhookJira": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "jira": {
+            "$ref": "#/components/schemas/JiraConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "name",
+          "createdAt",
+          "externalId"
+        ],
+        "additionalProperties": false
+      },
+      "OutgoingWebhookMicrosoftTeams": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "microsoftTeams": {
+            "$ref": "#/components/schemas/MicrosoftTeamsConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "name",
+          "createdAt",
+          "externalId"
+        ],
+        "additionalProperties": false
+      },
+      "OutgoingWebhookMsTeamsWorkflow": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "msTeamsWorkflow": {
+            "$ref": "#/components/schemas/MSTeamsWorkflowConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "name",
+          "createdAt",
+          "externalId"
+        ],
+        "additionalProperties": false
+      },
+      "OutgoingWebhookOpsgenie": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "opsgenie": {
+            "$ref": "#/components/schemas/OpsgenieConfig"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "name",
+          "createdAt",
+          "externalId"
+        ],
+        "additionalProperties": false
+      },
+      "OutgoingWebhookPagerDuty": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "pagerDuty": {
+            "$ref": "#/components/schemas/PagerDutyConfig"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "name",
+          "createdAt",
+          "externalId"
+        ],
+        "additionalProperties": false
+      },
+      "OutgoingWebhookSendLog": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "sendLog": {
+            "$ref": "#/components/schemas/SendLogConfig"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "name",
+          "createdAt",
+          "externalId"
+        ],
+        "additionalProperties": false
+      },
+      "OutgoingWebhookSlack": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "slack": {
+            "$ref": "#/components/schemas/SlackConfig"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "name",
+          "createdAt",
+          "externalId"
+        ],
+        "additionalProperties": false
       },
       "OutgoingWebhookSummary": {
         "externalDocs": {
@@ -2448,30 +2553,10 @@
       "TestOutgoingWebhookResponse": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Test outgoing webhook response",
-            "type": "object",
-            "properties": {
-              "success": {
-                "$ref": "#/components/schemas/TestOutgoingWebhookResponse.Success"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/TestOutgoingWebhookResponseSuccess"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Test outgoing webhook response",
-            "type": "object",
-            "properties": {
-              "failure": {
-                "$ref": "#/components/schemas/TestOutgoingWebhookResponse.Failure"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/TestOutgoingWebhookResponseFailure"
           }
         ]
       },
@@ -2499,8 +2584,7 @@
         "required": [
           "errorMessage",
           "displayMessage"
-        ],
-        "additionalProperties": false
+        ]
       },
       "TestOutgoingWebhookResponse.Success": {
         "externalDocs": {
@@ -2508,6 +2592,32 @@
         },
         "title": "Test outgoing webhook success",
         "type": "object"
+      },
+      "TestOutgoingWebhookResponseFailure": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Test outgoing webhook response",
+        "type": "object",
+        "properties": {
+          "failure": {
+            "$ref": "#/components/schemas/TestOutgoingWebhookResponse.Failure"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TestOutgoingWebhookResponseSuccess": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Test outgoing webhook response",
+        "type": "object",
+        "properties": {
+          "success": {
+            "$ref": "#/components/schemas/TestOutgoingWebhookResponse.Success"
+          }
+        },
+        "additionalProperties": false
       },
       "UpdateOutgoingWebhookResponse": {
         "externalDocs": {
@@ -2533,6 +2643,24 @@
           "IBM_EVENT_NOTIFICATIONS",
           "MS_TEAMS_WORKFLOW"
         ]
+      },
+      "YAxisViewByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/YAxisViewByCategory"
+          }
+        },
+        "additionalProperties": false
+      },
+      "YAxisViewByValue": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/YAxisViewByValue"
+          }
+        },
+        "additionalProperties": false
       },
       "common.Group": {
         "type": "object",

@@ -18,29 +18,29 @@ import (
 
 // QueryMetricsQueryType - struct for QueryMetricsQueryType
 type QueryMetricsQueryType struct {
-	QueryMetricsQueryTypeOneOf *QueryMetricsQueryTypeOneOf
-	QueryMetricsQueryTypeOneOf1 *QueryMetricsQueryTypeOneOf1
-	QueryMetricsQueryTypeOneOf2 *QueryMetricsQueryTypeOneOf2
+	TypeLabelName *TypeLabelName
+	TypeLabelValue *TypeLabelValue
+	TypeMetricName *TypeMetricName
 }
 
-// QueryMetricsQueryTypeOneOfAsQueryMetricsQueryType is a convenience function that returns QueryMetricsQueryTypeOneOf wrapped in QueryMetricsQueryType
-func QueryMetricsQueryTypeOneOfAsQueryMetricsQueryType(v *QueryMetricsQueryTypeOneOf) QueryMetricsQueryType {
+// TypeLabelNameAsQueryMetricsQueryType is a convenience function that returns TypeLabelName wrapped in QueryMetricsQueryType
+func TypeLabelNameAsQueryMetricsQueryType(v *TypeLabelName) QueryMetricsQueryType {
 	return QueryMetricsQueryType{
-		QueryMetricsQueryTypeOneOf: v,
+		TypeLabelName: v,
 	}
 }
 
-// QueryMetricsQueryTypeOneOf1AsQueryMetricsQueryType is a convenience function that returns QueryMetricsQueryTypeOneOf1 wrapped in QueryMetricsQueryType
-func QueryMetricsQueryTypeOneOf1AsQueryMetricsQueryType(v *QueryMetricsQueryTypeOneOf1) QueryMetricsQueryType {
+// TypeLabelValueAsQueryMetricsQueryType is a convenience function that returns TypeLabelValue wrapped in QueryMetricsQueryType
+func TypeLabelValueAsQueryMetricsQueryType(v *TypeLabelValue) QueryMetricsQueryType {
 	return QueryMetricsQueryType{
-		QueryMetricsQueryTypeOneOf1: v,
+		TypeLabelValue: v,
 	}
 }
 
-// QueryMetricsQueryTypeOneOf2AsQueryMetricsQueryType is a convenience function that returns QueryMetricsQueryTypeOneOf2 wrapped in QueryMetricsQueryType
-func QueryMetricsQueryTypeOneOf2AsQueryMetricsQueryType(v *QueryMetricsQueryTypeOneOf2) QueryMetricsQueryType {
+// TypeMetricNameAsQueryMetricsQueryType is a convenience function that returns TypeMetricName wrapped in QueryMetricsQueryType
+func TypeMetricNameAsQueryMetricsQueryType(v *TypeMetricName) QueryMetricsQueryType {
 	return QueryMetricsQueryType{
-		QueryMetricsQueryTypeOneOf2: v,
+		TypeMetricName: v,
 	}
 }
 
@@ -49,62 +49,62 @@ func QueryMetricsQueryTypeOneOf2AsQueryMetricsQueryType(v *QueryMetricsQueryType
 func (dst *QueryMetricsQueryType) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into QueryMetricsQueryTypeOneOf
-	err = newStrictDecoder(data).Decode(&dst.QueryMetricsQueryTypeOneOf)
+	// try to unmarshal data into TypeLabelName
+	err = newStrictDecoder(data).Decode(&dst.TypeLabelName)
 	if err == nil {
-		jsonQueryMetricsQueryTypeOneOf, _ := json.Marshal(dst.QueryMetricsQueryTypeOneOf)
-		if string(jsonQueryMetricsQueryTypeOneOf) == "{}" { // empty struct
-			dst.QueryMetricsQueryTypeOneOf = nil
+		jsonTypeLabelName, _ := json.Marshal(dst.TypeLabelName)
+		if string(jsonTypeLabelName) == "{}" { // empty struct
+			dst.TypeLabelName = nil
 		} else {
-			if err = validator.Validate(dst.QueryMetricsQueryTypeOneOf); err != nil {
-				dst.QueryMetricsQueryTypeOneOf = nil
+			if err = validator.Validate(dst.TypeLabelName); err != nil {
+				dst.TypeLabelName = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QueryMetricsQueryTypeOneOf = nil
+		dst.TypeLabelName = nil
 	}
 
-	// try to unmarshal data into QueryMetricsQueryTypeOneOf1
-	err = newStrictDecoder(data).Decode(&dst.QueryMetricsQueryTypeOneOf1)
+	// try to unmarshal data into TypeLabelValue
+	err = newStrictDecoder(data).Decode(&dst.TypeLabelValue)
 	if err == nil {
-		jsonQueryMetricsQueryTypeOneOf1, _ := json.Marshal(dst.QueryMetricsQueryTypeOneOf1)
-		if string(jsonQueryMetricsQueryTypeOneOf1) == "{}" { // empty struct
-			dst.QueryMetricsQueryTypeOneOf1 = nil
+		jsonTypeLabelValue, _ := json.Marshal(dst.TypeLabelValue)
+		if string(jsonTypeLabelValue) == "{}" { // empty struct
+			dst.TypeLabelValue = nil
 		} else {
-			if err = validator.Validate(dst.QueryMetricsQueryTypeOneOf1); err != nil {
-				dst.QueryMetricsQueryTypeOneOf1 = nil
+			if err = validator.Validate(dst.TypeLabelValue); err != nil {
+				dst.TypeLabelValue = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QueryMetricsQueryTypeOneOf1 = nil
+		dst.TypeLabelValue = nil
 	}
 
-	// try to unmarshal data into QueryMetricsQueryTypeOneOf2
-	err = newStrictDecoder(data).Decode(&dst.QueryMetricsQueryTypeOneOf2)
+	// try to unmarshal data into TypeMetricName
+	err = newStrictDecoder(data).Decode(&dst.TypeMetricName)
 	if err == nil {
-		jsonQueryMetricsQueryTypeOneOf2, _ := json.Marshal(dst.QueryMetricsQueryTypeOneOf2)
-		if string(jsonQueryMetricsQueryTypeOneOf2) == "{}" { // empty struct
-			dst.QueryMetricsQueryTypeOneOf2 = nil
+		jsonTypeMetricName, _ := json.Marshal(dst.TypeMetricName)
+		if string(jsonTypeMetricName) == "{}" { // empty struct
+			dst.TypeMetricName = nil
 		} else {
-			if err = validator.Validate(dst.QueryMetricsQueryTypeOneOf2); err != nil {
-				dst.QueryMetricsQueryTypeOneOf2 = nil
+			if err = validator.Validate(dst.TypeMetricName); err != nil {
+				dst.TypeMetricName = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QueryMetricsQueryTypeOneOf2 = nil
+		dst.TypeMetricName = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.QueryMetricsQueryTypeOneOf = nil
-		dst.QueryMetricsQueryTypeOneOf1 = nil
-		dst.QueryMetricsQueryTypeOneOf2 = nil
+		dst.TypeLabelName = nil
+		dst.TypeLabelValue = nil
+		dst.TypeMetricName = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(QueryMetricsQueryType)")
 	} else if match == 1 {
@@ -116,16 +116,16 @@ func (dst *QueryMetricsQueryType) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src QueryMetricsQueryType) MarshalJSON() ([]byte, error) {
-	if src.QueryMetricsQueryTypeOneOf != nil {
-		return json.Marshal(&src.QueryMetricsQueryTypeOneOf)
+	if src.TypeLabelName != nil {
+		return json.Marshal(&src.TypeLabelName)
 	}
 
-	if src.QueryMetricsQueryTypeOneOf1 != nil {
-		return json.Marshal(&src.QueryMetricsQueryTypeOneOf1)
+	if src.TypeLabelValue != nil {
+		return json.Marshal(&src.TypeLabelValue)
 	}
 
-	if src.QueryMetricsQueryTypeOneOf2 != nil {
-		return json.Marshal(&src.QueryMetricsQueryTypeOneOf2)
+	if src.TypeMetricName != nil {
+		return json.Marshal(&src.TypeMetricName)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -136,16 +136,16 @@ func (obj *QueryMetricsQueryType) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.QueryMetricsQueryTypeOneOf != nil {
-		return obj.QueryMetricsQueryTypeOneOf
+	if obj.TypeLabelName != nil {
+		return obj.TypeLabelName
 	}
 
-	if obj.QueryMetricsQueryTypeOneOf1 != nil {
-		return obj.QueryMetricsQueryTypeOneOf1
+	if obj.TypeLabelValue != nil {
+		return obj.TypeLabelValue
 	}
 
-	if obj.QueryMetricsQueryTypeOneOf2 != nil {
-		return obj.QueryMetricsQueryTypeOneOf2
+	if obj.TypeMetricName != nil {
+		return obj.TypeMetricName
 	}
 
 	// all schemas are nil
@@ -154,16 +154,16 @@ func (obj *QueryMetricsQueryType) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj QueryMetricsQueryType) GetActualInstanceValue() (interface{}) {
-	if obj.QueryMetricsQueryTypeOneOf != nil {
-		return *obj.QueryMetricsQueryTypeOneOf
+	if obj.TypeLabelName != nil {
+		return *obj.TypeLabelName
 	}
 
-	if obj.QueryMetricsQueryTypeOneOf1 != nil {
-		return *obj.QueryMetricsQueryTypeOneOf1
+	if obj.TypeLabelValue != nil {
+		return *obj.TypeLabelValue
 	}
 
-	if obj.QueryMetricsQueryTypeOneOf2 != nil {
-		return *obj.QueryMetricsQueryTypeOneOf2
+	if obj.TypeMetricName != nil {
+		return *obj.TypeMetricName
 	}
 
 	// all schemas are nil

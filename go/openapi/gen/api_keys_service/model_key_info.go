@@ -259,7 +259,7 @@ func (o *KeyInfo) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"active",
-		//"hashed",
+		"hashed",
 		"id",
 		"keyPermissions",
 		"name",

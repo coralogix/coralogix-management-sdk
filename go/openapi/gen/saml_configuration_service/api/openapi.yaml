@@ -299,6 +299,24 @@ paths:
             --header 'Authorization: Bearer <API_KEY>'
 components:
   schemas:
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
     FieldGroup:
       properties:
         name:
@@ -308,8 +326,40 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValues_1"
-      - $ref: "#/components/schemas/FilterPathAndValues_2"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
     Filters:
       description: This data structure represents a filter
       externalDocs:
@@ -326,7 +376,6 @@ components:
       title: Filters
       type: object
     GetConfigurationResponse:
-      additionalProperties: false
       description: This data structure is obtained as a response to a request to retrieve
         the configuration of a SAML service provider and identity provider
       example:
@@ -398,8 +447,75 @@ components:
       type: object
     IDPParameters:
       oneOf:
-      - $ref: "#/components/schemas/IDP_Parameters"
-      - $ref: "#/components/schemas/IDP_Parameters_1"
+      - $ref: "#/components/schemas/IDPParametersMetadataUrl"
+      - $ref: "#/components/schemas/IDPParametersMetadataContent"
+    IDPParametersMetadataContent:
+      additionalProperties: false
+      description: This data structure represents a set of SAML identity provider
+        parameters
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        active:
+          example: true
+          type: boolean
+        groupNames:
+          items:
+            example: "[\"group1\"]"
+            type: string
+          type: array
+        metadataContent:
+          example: <?xml version= ...
+          type: string
+        teamEntityId:
+          example: 1234567
+          format: int64
+          type: integer
+      required:
+      - active
+      - groupNames
+      - metadata
+      - teamEntityId
+      title: IDP Parameters
+      type: object
+    IDPParametersMetadataUrl:
+      additionalProperties: false
+      description: This data structure represents a set of SAML identity provider
+        parameters
+      example:
+        groupNames:
+        - "[\"group1\"]"
+        - "[\"group1\"]"
+        metadataUrl: https://<...>.okta.com/app/<...>/sso/saml/metadata
+        teamEntityId: 1234567
+        active: true
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        active:
+          example: true
+          type: boolean
+        groupNames:
+          items:
+            example: "[\"group1\"]"
+            type: string
+          type: array
+        metadataUrl:
+          example: https://<...>.okta.com/app/<...>/sso/saml/metadata
+          type: string
+        teamEntityId:
+          example: 1234567
+          format: int64
+          type: integer
+      required:
+      - active
+      - groupNames
+      - metadata
+      - teamEntityId
+      title: IDP Parameters
+      type: object
     MultipleValues:
       properties:
         matcher:
@@ -446,6 +562,18 @@ components:
       title: Service Provider Parameters
       type: object
     SetIDPParametersResponse:
+      type: object
+    YAxisViewByCategory:
+      additionalProperties: false
+      properties:
+        category:
+          $ref: "#/components/schemas/YAxisViewByCategory"
+      type: object
+    YAxisViewByValue:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: "#/components/schemas/YAxisViewByValue"
       type: object
     common.Group:
       properties:
@@ -500,105 +628,6 @@ components:
       - params
       - teamId
       title: Set IDP Parameters Request
-      type: object
-    FilterPathAndValues_1:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValues_2:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    IDP_Parameters:
-      additionalProperties: false
-      description: This data structure represents a set of SAML identity provider
-        parameters
-      example:
-        groupNames:
-        - "[\"group1\"]"
-        - "[\"group1\"]"
-        metadataUrl: https://<...>.okta.com/app/<...>/sso/saml/metadata
-        teamEntityId: 1234567
-        active: true
-      externalDocs:
-        description: Find out more about enrichments
-        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
-      properties:
-        active:
-          example: true
-          type: boolean
-        groupNames:
-          items:
-            example: "[\"group1\"]"
-            type: string
-          type: array
-        metadataUrl:
-          example: https://<...>.okta.com/app/<...>/sso/saml/metadata
-          type: string
-        teamEntityId:
-          example: 1234567
-          format: int64
-          type: integer
-      required:
-      - active
-      - groupNames
-      - metadata
-      - teamEntityId
-      title: IDP Parameters
-      type: object
-    IDP_Parameters_1:
-      additionalProperties: false
-      description: This data structure represents a set of SAML identity provider
-        parameters
-      externalDocs:
-        description: Find out more about enrichments
-        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
-      properties:
-        active:
-          example: true
-          type: boolean
-        groupNames:
-          items:
-            example: "[\"group1\"]"
-            type: string
-          type: array
-        metadataContent:
-          example: <?xml version= ...
-          type: string
-        teamEntityId:
-          example: 1234567
-          format: int64
-          type: integer
-      required:
-      - active
-      - groupNames
-      - metadata
-      - teamEntityId
-      title: IDP Parameters
       type: object
   securitySchemes:
     apiKeyAuth:

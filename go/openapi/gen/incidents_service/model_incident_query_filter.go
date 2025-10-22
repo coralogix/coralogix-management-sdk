@@ -34,15 +34,14 @@ type IncidentQueryFilter struct {
 	// Indicates if the incident is muted
 	IsMuted *bool `json:"isMuted,omitempty"`
 	MetaLabels []IncidentMetaLabel `json:"metaLabels,omitempty"`
-	// The operator for the meta labels filter
-	MetaLabelsOp *string `json:"metaLabelsOp,omitempty"`
+	MetaLabelsOp *V1FilterOperator `json:"metaLabelsOp,omitempty"`
 	SearchQuery interface{} `json:"searchQuery,omitempty"`
-	Severity []string `json:"severity,omitempty"`
+	Severity []IncidentSeverity `json:"severity,omitempty"`
 	// Filters all incidents that were open in the given timeframe start time (deprecated, use incident_open_range instead)
 	// Deprecated
 	StartTime *time.Time `json:"startTime,omitempty"`
-	State []string `json:"state,omitempty"`
-	Status []string `json:"status,omitempty"`
+	State []IncidentState `json:"state,omitempty"`
+	Status []IncidentStatus `json:"status,omitempty"`
 	SubsystemName []string `json:"subsystemName,omitempty"`
 }
 
@@ -357,9 +356,9 @@ func (o *IncidentQueryFilter) SetMetaLabels(v []IncidentMetaLabel) {
 }
 
 // GetMetaLabelsOp returns the MetaLabelsOp field value if set, zero value otherwise.
-func (o *IncidentQueryFilter) GetMetaLabelsOp() string {
+func (o *IncidentQueryFilter) GetMetaLabelsOp() V1FilterOperator {
 	if o == nil || IsNil(o.MetaLabelsOp) {
-		var ret string
+		var ret V1FilterOperator
 		return ret
 	}
 	return *o.MetaLabelsOp
@@ -367,7 +366,7 @@ func (o *IncidentQueryFilter) GetMetaLabelsOp() string {
 
 // GetMetaLabelsOpOk returns a tuple with the MetaLabelsOp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentQueryFilter) GetMetaLabelsOpOk() (*string, bool) {
+func (o *IncidentQueryFilter) GetMetaLabelsOpOk() (*V1FilterOperator, bool) {
 	if o == nil || IsNil(o.MetaLabelsOp) {
 		return nil, false
 	}
@@ -383,8 +382,8 @@ func (o *IncidentQueryFilter) HasMetaLabelsOp() bool {
 	return false
 }
 
-// SetMetaLabelsOp gets a reference to the given string and assigns it to the MetaLabelsOp field.
-func (o *IncidentQueryFilter) SetMetaLabelsOp(v string) {
+// SetMetaLabelsOp gets a reference to the given V1FilterOperator and assigns it to the MetaLabelsOp field.
+func (o *IncidentQueryFilter) SetMetaLabelsOp(v V1FilterOperator) {
 	o.MetaLabelsOp = &v
 }
 
@@ -422,9 +421,9 @@ func (o *IncidentQueryFilter) SetSearchQuery(v interface{}) {
 }
 
 // GetSeverity returns the Severity field value if set, zero value otherwise.
-func (o *IncidentQueryFilter) GetSeverity() []string {
+func (o *IncidentQueryFilter) GetSeverity() []IncidentSeverity {
 	if o == nil || IsNil(o.Severity) {
-		var ret []string
+		var ret []IncidentSeverity
 		return ret
 	}
 	return o.Severity
@@ -432,7 +431,7 @@ func (o *IncidentQueryFilter) GetSeverity() []string {
 
 // GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentQueryFilter) GetSeverityOk() ([]string, bool) {
+func (o *IncidentQueryFilter) GetSeverityOk() ([]IncidentSeverity, bool) {
 	if o == nil || IsNil(o.Severity) {
 		return nil, false
 	}
@@ -448,8 +447,8 @@ func (o *IncidentQueryFilter) HasSeverity() bool {
 	return false
 }
 
-// SetSeverity gets a reference to the given []string and assigns it to the Severity field.
-func (o *IncidentQueryFilter) SetSeverity(v []string) {
+// SetSeverity gets a reference to the given []IncidentSeverity and assigns it to the Severity field.
+func (o *IncidentQueryFilter) SetSeverity(v []IncidentSeverity) {
 	o.Severity = v
 }
 
@@ -489,9 +488,9 @@ func (o *IncidentQueryFilter) SetStartTime(v time.Time) {
 }
 
 // GetState returns the State field value if set, zero value otherwise.
-func (o *IncidentQueryFilter) GetState() []string {
+func (o *IncidentQueryFilter) GetState() []IncidentState {
 	if o == nil || IsNil(o.State) {
-		var ret []string
+		var ret []IncidentState
 		return ret
 	}
 	return o.State
@@ -499,7 +498,7 @@ func (o *IncidentQueryFilter) GetState() []string {
 
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentQueryFilter) GetStateOk() ([]string, bool) {
+func (o *IncidentQueryFilter) GetStateOk() ([]IncidentState, bool) {
 	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
@@ -515,15 +514,15 @@ func (o *IncidentQueryFilter) HasState() bool {
 	return false
 }
 
-// SetState gets a reference to the given []string and assigns it to the State field.
-func (o *IncidentQueryFilter) SetState(v []string) {
+// SetState gets a reference to the given []IncidentState and assigns it to the State field.
+func (o *IncidentQueryFilter) SetState(v []IncidentState) {
 	o.State = v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *IncidentQueryFilter) GetStatus() []string {
+func (o *IncidentQueryFilter) GetStatus() []IncidentStatus {
 	if o == nil || IsNil(o.Status) {
-		var ret []string
+		var ret []IncidentStatus
 		return ret
 	}
 	return o.Status
@@ -531,7 +530,7 @@ func (o *IncidentQueryFilter) GetStatus() []string {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentQueryFilter) GetStatusOk() ([]string, bool) {
+func (o *IncidentQueryFilter) GetStatusOk() ([]IncidentStatus, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -547,8 +546,8 @@ func (o *IncidentQueryFilter) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given []string and assigns it to the Status field.
-func (o *IncidentQueryFilter) SetStatus(v []string) {
+// SetStatus gets a reference to the given []IncidentStatus and assigns it to the Status field.
+func (o *IncidentQueryFilter) SetStatus(v []IncidentStatus) {
 	o.Status = v
 }
 

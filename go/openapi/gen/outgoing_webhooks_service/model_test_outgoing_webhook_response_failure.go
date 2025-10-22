@@ -12,8 +12,6 @@ package outgoing_webhooks_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the TestOutgoingWebhookResponseFailure type satisfies the MappedNullable interface at compile time
@@ -21,21 +19,15 @@ var _ MappedNullable = &TestOutgoingWebhookResponseFailure{}
 
 // TestOutgoingWebhookResponseFailure struct for TestOutgoingWebhookResponseFailure
 type TestOutgoingWebhookResponseFailure struct {
-	DisplayMessage string `json:"displayMessage"`
-	ErrorMessage string `json:"errorMessage"`
-	StatusCode *int64 `json:"statusCode,omitempty"`
+	Failure *TestOutgoingWebhookResponseFailure `json:"failure,omitempty"`
 }
-
-type _TestOutgoingWebhookResponseFailure TestOutgoingWebhookResponseFailure
 
 // NewTestOutgoingWebhookResponseFailure instantiates a new TestOutgoingWebhookResponseFailure object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTestOutgoingWebhookResponseFailure(displayMessage string, errorMessage string) *TestOutgoingWebhookResponseFailure {
+func NewTestOutgoingWebhookResponseFailure() *TestOutgoingWebhookResponseFailure {
 	this := TestOutgoingWebhookResponseFailure{}
-	this.DisplayMessage = displayMessage
-	this.ErrorMessage = errorMessage
 	return &this
 }
 
@@ -47,84 +39,36 @@ func NewTestOutgoingWebhookResponseFailureWithDefaults() *TestOutgoingWebhookRes
 	return &this
 }
 
-// GetDisplayMessage returns the DisplayMessage field value
-func (o *TestOutgoingWebhookResponseFailure) GetDisplayMessage() string {
-	if o == nil {
-		var ret string
+// GetFailure returns the Failure field value if set, zero value otherwise.
+func (o *TestOutgoingWebhookResponseFailure) GetFailure() TestOutgoingWebhookResponseFailure {
+	if o == nil || IsNil(o.Failure) {
+		var ret TestOutgoingWebhookResponseFailure
 		return ret
 	}
-
-	return o.DisplayMessage
+	return *o.Failure
 }
 
-// GetDisplayMessageOk returns a tuple with the DisplayMessage field value
+// GetFailureOk returns a tuple with the Failure field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TestOutgoingWebhookResponseFailure) GetDisplayMessageOk() (*string, bool) {
-	if o == nil {
+func (o *TestOutgoingWebhookResponseFailure) GetFailureOk() (*TestOutgoingWebhookResponseFailure, bool) {
+	if o == nil || IsNil(o.Failure) {
 		return nil, false
 	}
-	return &o.DisplayMessage, true
+	return o.Failure, true
 }
 
-// SetDisplayMessage sets field value
-func (o *TestOutgoingWebhookResponseFailure) SetDisplayMessage(v string) {
-	o.DisplayMessage = v
-}
-
-// GetErrorMessage returns the ErrorMessage field value
-func (o *TestOutgoingWebhookResponseFailure) GetErrorMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ErrorMessage
-}
-
-// GetErrorMessageOk returns a tuple with the ErrorMessage field value
-// and a boolean to check if the value has been set.
-func (o *TestOutgoingWebhookResponseFailure) GetErrorMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ErrorMessage, true
-}
-
-// SetErrorMessage sets field value
-func (o *TestOutgoingWebhookResponseFailure) SetErrorMessage(v string) {
-	o.ErrorMessage = v
-}
-
-// GetStatusCode returns the StatusCode field value if set, zero value otherwise.
-func (o *TestOutgoingWebhookResponseFailure) GetStatusCode() int64 {
-	if o == nil || IsNil(o.StatusCode) {
-		var ret int64
-		return ret
-	}
-	return *o.StatusCode
-}
-
-// GetStatusCodeOk returns a tuple with the StatusCode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TestOutgoingWebhookResponseFailure) GetStatusCodeOk() (*int64, bool) {
-	if o == nil || IsNil(o.StatusCode) {
-		return nil, false
-	}
-	return o.StatusCode, true
-}
-
-// HasStatusCode returns a boolean if a field has been set.
-func (o *TestOutgoingWebhookResponseFailure) HasStatusCode() bool {
-	if o != nil && !IsNil(o.StatusCode) {
+// HasFailure returns a boolean if a field has been set.
+func (o *TestOutgoingWebhookResponseFailure) HasFailure() bool {
+	if o != nil && !IsNil(o.Failure) {
 		return true
 	}
 
 	return false
 }
 
-// SetStatusCode gets a reference to the given int64 and assigns it to the StatusCode field.
-func (o *TestOutgoingWebhookResponseFailure) SetStatusCode(v int64) {
-	o.StatusCode = &v
+// SetFailure gets a reference to the given TestOutgoingWebhookResponseFailure and assigns it to the Failure field.
+func (o *TestOutgoingWebhookResponseFailure) SetFailure(v TestOutgoingWebhookResponseFailure) {
+	o.Failure = &v
 }
 
 func (o TestOutgoingWebhookResponseFailure) MarshalJSON() ([]byte, error) {
@@ -137,50 +81,10 @@ func (o TestOutgoingWebhookResponseFailure) MarshalJSON() ([]byte, error) {
 
 func (o TestOutgoingWebhookResponseFailure) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["displayMessage"] = o.DisplayMessage
-	toSerialize["errorMessage"] = o.ErrorMessage
-	if !IsNil(o.StatusCode) {
-		toSerialize["statusCode"] = o.StatusCode
+	if !IsNil(o.Failure) {
+		toSerialize["failure"] = o.Failure
 	}
 	return toSerialize, nil
-}
-
-func (o *TestOutgoingWebhookResponseFailure) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"displayMessage",
-		"errorMessage",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varTestOutgoingWebhookResponseFailure := _TestOutgoingWebhookResponseFailure{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTestOutgoingWebhookResponseFailure)
-
-	if err != nil {
-		return err
-	}
-
-	*o = TestOutgoingWebhookResponseFailure(varTestOutgoingWebhookResponseFailure)
-
-	return err
 }
 
 type NullableTestOutgoingWebhookResponseFailure struct {

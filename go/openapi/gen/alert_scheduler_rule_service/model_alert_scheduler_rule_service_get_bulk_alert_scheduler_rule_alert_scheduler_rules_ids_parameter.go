@@ -18,21 +18,21 @@ import (
 
 // AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter - struct for AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter
 type AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter struct {
-	AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf
-	AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1 *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1
+	FilterByAlertSchedulerRuleIdsAlertSchedulerIds *FilterByAlertSchedulerRuleIdsAlertSchedulerIds
+	FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds *FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds
 }
 
-// AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOfAsAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter is a convenience function that returns AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf wrapped in AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter
-func AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOfAsAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter(v *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf) AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter {
+// FilterByAlertSchedulerRuleIdsAlertSchedulerIdsAsAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter is a convenience function that returns FilterByAlertSchedulerRuleIdsAlertSchedulerIds wrapped in AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter
+func FilterByAlertSchedulerRuleIdsAlertSchedulerIdsAsAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter(v *FilterByAlertSchedulerRuleIdsAlertSchedulerIds) AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter {
 	return AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter{
-		AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf: v,
+		FilterByAlertSchedulerRuleIdsAlertSchedulerIds: v,
 	}
 }
 
-// AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1AsAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter is a convenience function that returns AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1 wrapped in AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter
-func AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1AsAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter(v *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1) AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter {
+// FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIdsAsAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter is a convenience function that returns FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds wrapped in AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter
+func FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIdsAsAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter(v *FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds) AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter {
 	return AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter{
-		AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1: v,
+		FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsPar
 func (dst *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf
-	err = newStrictDecoder(data).Decode(&dst.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf)
+	// try to unmarshal data into FilterByAlertSchedulerRuleIdsAlertSchedulerIds
+	err = newStrictDecoder(data).Decode(&dst.FilterByAlertSchedulerRuleIdsAlertSchedulerIds)
 	if err == nil {
-		jsonAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf, _ := json.Marshal(dst.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf)
-		if string(jsonAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf) == "{}" { // empty struct
-			dst.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf = nil
+		jsonFilterByAlertSchedulerRuleIdsAlertSchedulerIds, _ := json.Marshal(dst.FilterByAlertSchedulerRuleIdsAlertSchedulerIds)
+		if string(jsonFilterByAlertSchedulerRuleIdsAlertSchedulerIds) == "{}" { // empty struct
+			dst.FilterByAlertSchedulerRuleIdsAlertSchedulerIds = nil
 		} else {
-			if err = validator.Validate(dst.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf); err != nil {
-				dst.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf = nil
+			if err = validator.Validate(dst.FilterByAlertSchedulerRuleIdsAlertSchedulerIds); err != nil {
+				dst.FilterByAlertSchedulerRuleIdsAlertSchedulerIds = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf = nil
+		dst.FilterByAlertSchedulerRuleIdsAlertSchedulerIds = nil
 	}
 
-	// try to unmarshal data into AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1
-	err = newStrictDecoder(data).Decode(&dst.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1)
+	// try to unmarshal data into FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds
+	err = newStrictDecoder(data).Decode(&dst.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds)
 	if err == nil {
-		jsonAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1, _ := json.Marshal(dst.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1)
-		if string(jsonAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1) == "{}" { // empty struct
-			dst.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1 = nil
+		jsonFilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds, _ := json.Marshal(dst.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds)
+		if string(jsonFilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds) == "{}" { // empty struct
+			dst.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds = nil
 		} else {
-			if err = validator.Validate(dst.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1); err != nil {
-				dst.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1 = nil
+			if err = validator.Validate(dst.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds); err != nil {
+				dst.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1 = nil
+		dst.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf = nil
-		dst.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1 = nil
+		dst.FilterByAlertSchedulerRuleIdsAlertSchedulerIds = nil
+		dst.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRules
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter) MarshalJSON() ([]byte, error) {
-	if src.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf != nil {
-		return json.Marshal(&src.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf)
+	if src.FilterByAlertSchedulerRuleIdsAlertSchedulerIds != nil {
+		return json.Marshal(&src.FilterByAlertSchedulerRuleIdsAlertSchedulerIds)
 	}
 
-	if src.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1 != nil {
-		return json.Marshal(&src.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1)
+	if src.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds != nil {
+		return json.Marshal(&src.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRules
 	if obj == nil {
 		return nil
 	}
-	if obj.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf != nil {
-		return obj.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf
+	if obj.FilterByAlertSchedulerRuleIdsAlertSchedulerIds != nil {
+		return obj.FilterByAlertSchedulerRuleIdsAlertSchedulerIds
 	}
 
-	if obj.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1 != nil {
-		return obj.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1
+	if obj.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds != nil {
+		return obj.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRules
 
 // Get the actual instance value
 func (obj AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter) GetActualInstanceValue() (interface{}) {
-	if obj.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf != nil {
-		return *obj.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf
+	if obj.FilterByAlertSchedulerRuleIdsAlertSchedulerIds != nil {
+		return *obj.FilterByAlertSchedulerRuleIdsAlertSchedulerIds
 	}
 
-	if obj.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1 != nil {
-		return *obj.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterOneOf1
+	if obj.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds != nil {
+		return *obj.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds
 	}
 
 	// all schemas are nil

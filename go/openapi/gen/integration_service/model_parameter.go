@@ -18,53 +18,53 @@ import (
 
 // Parameter - struct for Parameter
 type Parameter struct {
-	Parameter1 *Parameter1
-	Parameter2 *Parameter2
-	Parameter3 *Parameter3
-	Parameter4 *Parameter4
-	Parameter5 *Parameter5
-	Parameter6 *Parameter6
+	ParameterApiKey *ParameterApiKey
+	ParameterBooleanValue *ParameterBooleanValue
+	ParameterNumericValue *ParameterNumericValue
+	ParameterSensitiveData *ParameterSensitiveData
+	ParameterStringList *ParameterStringList
+	ParameterStringValue *ParameterStringValue
 }
 
-// Parameter1AsParameter is a convenience function that returns Parameter1 wrapped in Parameter
-func Parameter1AsParameter(v *Parameter1) Parameter {
+// ParameterApiKeyAsParameter is a convenience function that returns ParameterApiKey wrapped in Parameter
+func ParameterApiKeyAsParameter(v *ParameterApiKey) Parameter {
 	return Parameter{
-		Parameter1: v,
+		ParameterApiKey: v,
 	}
 }
 
-// Parameter2AsParameter is a convenience function that returns Parameter2 wrapped in Parameter
-func Parameter2AsParameter(v *Parameter2) Parameter {
+// ParameterBooleanValueAsParameter is a convenience function that returns ParameterBooleanValue wrapped in Parameter
+func ParameterBooleanValueAsParameter(v *ParameterBooleanValue) Parameter {
 	return Parameter{
-		Parameter2: v,
+		ParameterBooleanValue: v,
 	}
 }
 
-// Parameter3AsParameter is a convenience function that returns Parameter3 wrapped in Parameter
-func Parameter3AsParameter(v *Parameter3) Parameter {
+// ParameterNumericValueAsParameter is a convenience function that returns ParameterNumericValue wrapped in Parameter
+func ParameterNumericValueAsParameter(v *ParameterNumericValue) Parameter {
 	return Parameter{
-		Parameter3: v,
+		ParameterNumericValue: v,
 	}
 }
 
-// Parameter4AsParameter is a convenience function that returns Parameter4 wrapped in Parameter
-func Parameter4AsParameter(v *Parameter4) Parameter {
+// ParameterSensitiveDataAsParameter is a convenience function that returns ParameterSensitiveData wrapped in Parameter
+func ParameterSensitiveDataAsParameter(v *ParameterSensitiveData) Parameter {
 	return Parameter{
-		Parameter4: v,
+		ParameterSensitiveData: v,
 	}
 }
 
-// Parameter5AsParameter is a convenience function that returns Parameter5 wrapped in Parameter
-func Parameter5AsParameter(v *Parameter5) Parameter {
+// ParameterStringListAsParameter is a convenience function that returns ParameterStringList wrapped in Parameter
+func ParameterStringListAsParameter(v *ParameterStringList) Parameter {
 	return Parameter{
-		Parameter5: v,
+		ParameterStringList: v,
 	}
 }
 
-// Parameter6AsParameter is a convenience function that returns Parameter6 wrapped in Parameter
-func Parameter6AsParameter(v *Parameter6) Parameter {
+// ParameterStringValueAsParameter is a convenience function that returns ParameterStringValue wrapped in Parameter
+func ParameterStringValueAsParameter(v *ParameterStringValue) Parameter {
 	return Parameter{
-		Parameter6: v,
+		ParameterStringValue: v,
 	}
 }
 
@@ -73,116 +73,116 @@ func Parameter6AsParameter(v *Parameter6) Parameter {
 func (dst *Parameter) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into Parameter1
-	err = newStrictDecoder(data).Decode(&dst.Parameter1)
+	// try to unmarshal data into ParameterApiKey
+	err = newStrictDecoder(data).Decode(&dst.ParameterApiKey)
 	if err == nil {
-		jsonParameter1, _ := json.Marshal(dst.Parameter1)
-		if string(jsonParameter1) == "{}" { // empty struct
-			dst.Parameter1 = nil
+		jsonParameterApiKey, _ := json.Marshal(dst.ParameterApiKey)
+		if string(jsonParameterApiKey) == "{}" { // empty struct
+			dst.ParameterApiKey = nil
 		} else {
-			if err = validator.Validate(dst.Parameter1); err != nil {
-				dst.Parameter1 = nil
+			if err = validator.Validate(dst.ParameterApiKey); err != nil {
+				dst.ParameterApiKey = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Parameter1 = nil
+		dst.ParameterApiKey = nil
 	}
 
-	// try to unmarshal data into Parameter2
-	err = newStrictDecoder(data).Decode(&dst.Parameter2)
+	// try to unmarshal data into ParameterBooleanValue
+	err = newStrictDecoder(data).Decode(&dst.ParameterBooleanValue)
 	if err == nil {
-		jsonParameter2, _ := json.Marshal(dst.Parameter2)
-		if string(jsonParameter2) == "{}" { // empty struct
-			dst.Parameter2 = nil
+		jsonParameterBooleanValue, _ := json.Marshal(dst.ParameterBooleanValue)
+		if string(jsonParameterBooleanValue) == "{}" { // empty struct
+			dst.ParameterBooleanValue = nil
 		} else {
-			if err = validator.Validate(dst.Parameter2); err != nil {
-				dst.Parameter2 = nil
+			if err = validator.Validate(dst.ParameterBooleanValue); err != nil {
+				dst.ParameterBooleanValue = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Parameter2 = nil
+		dst.ParameterBooleanValue = nil
 	}
 
-	// try to unmarshal data into Parameter3
-	err = newStrictDecoder(data).Decode(&dst.Parameter3)
+	// try to unmarshal data into ParameterNumericValue
+	err = newStrictDecoder(data).Decode(&dst.ParameterNumericValue)
 	if err == nil {
-		jsonParameter3, _ := json.Marshal(dst.Parameter3)
-		if string(jsonParameter3) == "{}" { // empty struct
-			dst.Parameter3 = nil
+		jsonParameterNumericValue, _ := json.Marshal(dst.ParameterNumericValue)
+		if string(jsonParameterNumericValue) == "{}" { // empty struct
+			dst.ParameterNumericValue = nil
 		} else {
-			if err = validator.Validate(dst.Parameter3); err != nil {
-				dst.Parameter3 = nil
+			if err = validator.Validate(dst.ParameterNumericValue); err != nil {
+				dst.ParameterNumericValue = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Parameter3 = nil
+		dst.ParameterNumericValue = nil
 	}
 
-	// try to unmarshal data into Parameter4
-	err = newStrictDecoder(data).Decode(&dst.Parameter4)
+	// try to unmarshal data into ParameterSensitiveData
+	err = newStrictDecoder(data).Decode(&dst.ParameterSensitiveData)
 	if err == nil {
-		jsonParameter4, _ := json.Marshal(dst.Parameter4)
-		if string(jsonParameter4) == "{}" { // empty struct
-			dst.Parameter4 = nil
+		jsonParameterSensitiveData, _ := json.Marshal(dst.ParameterSensitiveData)
+		if string(jsonParameterSensitiveData) == "{}" { // empty struct
+			dst.ParameterSensitiveData = nil
 		} else {
-			if err = validator.Validate(dst.Parameter4); err != nil {
-				dst.Parameter4 = nil
+			if err = validator.Validate(dst.ParameterSensitiveData); err != nil {
+				dst.ParameterSensitiveData = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Parameter4 = nil
+		dst.ParameterSensitiveData = nil
 	}
 
-	// try to unmarshal data into Parameter5
-	err = newStrictDecoder(data).Decode(&dst.Parameter5)
+	// try to unmarshal data into ParameterStringList
+	err = newStrictDecoder(data).Decode(&dst.ParameterStringList)
 	if err == nil {
-		jsonParameter5, _ := json.Marshal(dst.Parameter5)
-		if string(jsonParameter5) == "{}" { // empty struct
-			dst.Parameter5 = nil
+		jsonParameterStringList, _ := json.Marshal(dst.ParameterStringList)
+		if string(jsonParameterStringList) == "{}" { // empty struct
+			dst.ParameterStringList = nil
 		} else {
-			if err = validator.Validate(dst.Parameter5); err != nil {
-				dst.Parameter5 = nil
+			if err = validator.Validate(dst.ParameterStringList); err != nil {
+				dst.ParameterStringList = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Parameter5 = nil
+		dst.ParameterStringList = nil
 	}
 
-	// try to unmarshal data into Parameter6
-	err = newStrictDecoder(data).Decode(&dst.Parameter6)
+	// try to unmarshal data into ParameterStringValue
+	err = newStrictDecoder(data).Decode(&dst.ParameterStringValue)
 	if err == nil {
-		jsonParameter6, _ := json.Marshal(dst.Parameter6)
-		if string(jsonParameter6) == "{}" { // empty struct
-			dst.Parameter6 = nil
+		jsonParameterStringValue, _ := json.Marshal(dst.ParameterStringValue)
+		if string(jsonParameterStringValue) == "{}" { // empty struct
+			dst.ParameterStringValue = nil
 		} else {
-			if err = validator.Validate(dst.Parameter6); err != nil {
-				dst.Parameter6 = nil
+			if err = validator.Validate(dst.ParameterStringValue); err != nil {
+				dst.ParameterStringValue = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Parameter6 = nil
+		dst.ParameterStringValue = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.Parameter1 = nil
-		dst.Parameter2 = nil
-		dst.Parameter3 = nil
-		dst.Parameter4 = nil
-		dst.Parameter5 = nil
-		dst.Parameter6 = nil
+		dst.ParameterApiKey = nil
+		dst.ParameterBooleanValue = nil
+		dst.ParameterNumericValue = nil
+		dst.ParameterSensitiveData = nil
+		dst.ParameterStringList = nil
+		dst.ParameterStringValue = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(Parameter)")
 	} else if match == 1 {
@@ -194,28 +194,28 @@ func (dst *Parameter) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src Parameter) MarshalJSON() ([]byte, error) {
-	if src.Parameter1 != nil {
-		return json.Marshal(&src.Parameter1)
+	if src.ParameterApiKey != nil {
+		return json.Marshal(&src.ParameterApiKey)
 	}
 
-	if src.Parameter2 != nil {
-		return json.Marshal(&src.Parameter2)
+	if src.ParameterBooleanValue != nil {
+		return json.Marshal(&src.ParameterBooleanValue)
 	}
 
-	if src.Parameter3 != nil {
-		return json.Marshal(&src.Parameter3)
+	if src.ParameterNumericValue != nil {
+		return json.Marshal(&src.ParameterNumericValue)
 	}
 
-	if src.Parameter4 != nil {
-		return json.Marshal(&src.Parameter4)
+	if src.ParameterSensitiveData != nil {
+		return json.Marshal(&src.ParameterSensitiveData)
 	}
 
-	if src.Parameter5 != nil {
-		return json.Marshal(&src.Parameter5)
+	if src.ParameterStringList != nil {
+		return json.Marshal(&src.ParameterStringList)
 	}
 
-	if src.Parameter6 != nil {
-		return json.Marshal(&src.Parameter6)
+	if src.ParameterStringValue != nil {
+		return json.Marshal(&src.ParameterStringValue)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -226,28 +226,28 @@ func (obj *Parameter) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.Parameter1 != nil {
-		return obj.Parameter1
+	if obj.ParameterApiKey != nil {
+		return obj.ParameterApiKey
 	}
 
-	if obj.Parameter2 != nil {
-		return obj.Parameter2
+	if obj.ParameterBooleanValue != nil {
+		return obj.ParameterBooleanValue
 	}
 
-	if obj.Parameter3 != nil {
-		return obj.Parameter3
+	if obj.ParameterNumericValue != nil {
+		return obj.ParameterNumericValue
 	}
 
-	if obj.Parameter4 != nil {
-		return obj.Parameter4
+	if obj.ParameterSensitiveData != nil {
+		return obj.ParameterSensitiveData
 	}
 
-	if obj.Parameter5 != nil {
-		return obj.Parameter5
+	if obj.ParameterStringList != nil {
+		return obj.ParameterStringList
 	}
 
-	if obj.Parameter6 != nil {
-		return obj.Parameter6
+	if obj.ParameterStringValue != nil {
+		return obj.ParameterStringValue
 	}
 
 	// all schemas are nil
@@ -256,28 +256,28 @@ func (obj *Parameter) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj Parameter) GetActualInstanceValue() (interface{}) {
-	if obj.Parameter1 != nil {
-		return *obj.Parameter1
+	if obj.ParameterApiKey != nil {
+		return *obj.ParameterApiKey
 	}
 
-	if obj.Parameter2 != nil {
-		return *obj.Parameter2
+	if obj.ParameterBooleanValue != nil {
+		return *obj.ParameterBooleanValue
 	}
 
-	if obj.Parameter3 != nil {
-		return *obj.Parameter3
+	if obj.ParameterNumericValue != nil {
+		return *obj.ParameterNumericValue
 	}
 
-	if obj.Parameter4 != nil {
-		return *obj.Parameter4
+	if obj.ParameterSensitiveData != nil {
+		return *obj.ParameterSensitiveData
 	}
 
-	if obj.Parameter5 != nil {
-		return *obj.Parameter5
+	if obj.ParameterStringList != nil {
+		return *obj.ParameterStringList
 	}
 
-	if obj.Parameter6 != nil {
-		return *obj.Parameter6
+	if obj.ParameterStringValue != nil {
+		return *obj.ParameterStringValue
 	}
 
 	// all schemas are nil

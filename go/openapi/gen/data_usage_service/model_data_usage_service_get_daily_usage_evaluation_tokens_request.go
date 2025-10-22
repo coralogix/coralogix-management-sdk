@@ -18,21 +18,21 @@ import (
 
 // DataUsageServiceGetDailyUsageEvaluationTokensRequest - struct for DataUsageServiceGetDailyUsageEvaluationTokensRequest
 type DataUsageServiceGetDailyUsageEvaluationTokensRequest struct {
-	DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf *DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf
-	DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1 *DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1
+	GetDailyUsageEvaluationTokensRequestDateRange *GetDailyUsageEvaluationTokensRequestDateRange
+	GetDailyUsageEvaluationTokensRequestRange *GetDailyUsageEvaluationTokensRequestRange
 }
 
-// DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOfAsDataUsageServiceGetDailyUsageEvaluationTokensRequest is a convenience function that returns DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf wrapped in DataUsageServiceGetDailyUsageEvaluationTokensRequest
-func DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOfAsDataUsageServiceGetDailyUsageEvaluationTokensRequest(v *DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf) DataUsageServiceGetDailyUsageEvaluationTokensRequest {
+// GetDailyUsageEvaluationTokensRequestDateRangeAsDataUsageServiceGetDailyUsageEvaluationTokensRequest is a convenience function that returns GetDailyUsageEvaluationTokensRequestDateRange wrapped in DataUsageServiceGetDailyUsageEvaluationTokensRequest
+func GetDailyUsageEvaluationTokensRequestDateRangeAsDataUsageServiceGetDailyUsageEvaluationTokensRequest(v *GetDailyUsageEvaluationTokensRequestDateRange) DataUsageServiceGetDailyUsageEvaluationTokensRequest {
 	return DataUsageServiceGetDailyUsageEvaluationTokensRequest{
-		DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf: v,
+		GetDailyUsageEvaluationTokensRequestDateRange: v,
 	}
 }
 
-// DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1AsDataUsageServiceGetDailyUsageEvaluationTokensRequest is a convenience function that returns DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1 wrapped in DataUsageServiceGetDailyUsageEvaluationTokensRequest
-func DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1AsDataUsageServiceGetDailyUsageEvaluationTokensRequest(v *DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1) DataUsageServiceGetDailyUsageEvaluationTokensRequest {
+// GetDailyUsageEvaluationTokensRequestRangeAsDataUsageServiceGetDailyUsageEvaluationTokensRequest is a convenience function that returns GetDailyUsageEvaluationTokensRequestRange wrapped in DataUsageServiceGetDailyUsageEvaluationTokensRequest
+func GetDailyUsageEvaluationTokensRequestRangeAsDataUsageServiceGetDailyUsageEvaluationTokensRequest(v *GetDailyUsageEvaluationTokensRequestRange) DataUsageServiceGetDailyUsageEvaluationTokensRequest {
 	return DataUsageServiceGetDailyUsageEvaluationTokensRequest{
-		DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1: v,
+		GetDailyUsageEvaluationTokensRequestRange: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1AsDataUsageServic
 func (dst *DataUsageServiceGetDailyUsageEvaluationTokensRequest) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf
-	err = newStrictDecoder(data).Decode(&dst.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf)
+	// try to unmarshal data into GetDailyUsageEvaluationTokensRequestDateRange
+	err = newStrictDecoder(data).Decode(&dst.GetDailyUsageEvaluationTokensRequestDateRange)
 	if err == nil {
-		jsonDataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf, _ := json.Marshal(dst.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf)
-		if string(jsonDataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf) == "{}" { // empty struct
-			dst.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf = nil
+		jsonGetDailyUsageEvaluationTokensRequestDateRange, _ := json.Marshal(dst.GetDailyUsageEvaluationTokensRequestDateRange)
+		if string(jsonGetDailyUsageEvaluationTokensRequestDateRange) == "{}" { // empty struct
+			dst.GetDailyUsageEvaluationTokensRequestDateRange = nil
 		} else {
-			if err = validator.Validate(dst.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf); err != nil {
-				dst.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf = nil
+			if err = validator.Validate(dst.GetDailyUsageEvaluationTokensRequestDateRange); err != nil {
+				dst.GetDailyUsageEvaluationTokensRequestDateRange = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf = nil
+		dst.GetDailyUsageEvaluationTokensRequestDateRange = nil
 	}
 
-	// try to unmarshal data into DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1
-	err = newStrictDecoder(data).Decode(&dst.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1)
+	// try to unmarshal data into GetDailyUsageEvaluationTokensRequestRange
+	err = newStrictDecoder(data).Decode(&dst.GetDailyUsageEvaluationTokensRequestRange)
 	if err == nil {
-		jsonDataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1, _ := json.Marshal(dst.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1)
-		if string(jsonDataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1) == "{}" { // empty struct
-			dst.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1 = nil
+		jsonGetDailyUsageEvaluationTokensRequestRange, _ := json.Marshal(dst.GetDailyUsageEvaluationTokensRequestRange)
+		if string(jsonGetDailyUsageEvaluationTokensRequestRange) == "{}" { // empty struct
+			dst.GetDailyUsageEvaluationTokensRequestRange = nil
 		} else {
-			if err = validator.Validate(dst.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1); err != nil {
-				dst.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1 = nil
+			if err = validator.Validate(dst.GetDailyUsageEvaluationTokensRequestRange); err != nil {
+				dst.GetDailyUsageEvaluationTokensRequestRange = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1 = nil
+		dst.GetDailyUsageEvaluationTokensRequestRange = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf = nil
-		dst.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1 = nil
+		dst.GetDailyUsageEvaluationTokensRequestDateRange = nil
+		dst.GetDailyUsageEvaluationTokensRequestRange = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(DataUsageServiceGetDailyUsageEvaluationTokensRequest)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *DataUsageServiceGetDailyUsageEvaluationTokensRequest) UnmarshalJSON(d
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src DataUsageServiceGetDailyUsageEvaluationTokensRequest) MarshalJSON() ([]byte, error) {
-	if src.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf != nil {
-		return json.Marshal(&src.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf)
+	if src.GetDailyUsageEvaluationTokensRequestDateRange != nil {
+		return json.Marshal(&src.GetDailyUsageEvaluationTokensRequestDateRange)
 	}
 
-	if src.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1 != nil {
-		return json.Marshal(&src.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1)
+	if src.GetDailyUsageEvaluationTokensRequestRange != nil {
+		return json.Marshal(&src.GetDailyUsageEvaluationTokensRequestRange)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *DataUsageServiceGetDailyUsageEvaluationTokensRequest) GetActualInstan
 	if obj == nil {
 		return nil
 	}
-	if obj.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf != nil {
-		return obj.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf
+	if obj.GetDailyUsageEvaluationTokensRequestDateRange != nil {
+		return obj.GetDailyUsageEvaluationTokensRequestDateRange
 	}
 
-	if obj.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1 != nil {
-		return obj.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1
+	if obj.GetDailyUsageEvaluationTokensRequestRange != nil {
+		return obj.GetDailyUsageEvaluationTokensRequestRange
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *DataUsageServiceGetDailyUsageEvaluationTokensRequest) GetActualInstan
 
 // Get the actual instance value
 func (obj DataUsageServiceGetDailyUsageEvaluationTokensRequest) GetActualInstanceValue() (interface{}) {
-	if obj.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf != nil {
-		return *obj.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf
+	if obj.GetDailyUsageEvaluationTokensRequestDateRange != nil {
+		return *obj.GetDailyUsageEvaluationTokensRequestDateRange
 	}
 
-	if obj.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1 != nil {
-		return *obj.DataUsageServiceGetDailyUsageEvaluationTokensRequestOneOf1
+	if obj.GetDailyUsageEvaluationTokensRequestRange != nil {
+		return *obj.GetDailyUsageEvaluationTokensRequestRange
 	}
 
 	// all schemas are nil

@@ -137,7 +137,7 @@ paths:
           let options = {
             method: 'POST',
             headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"requestEnrichments":[{"enrichedFieldName":"string","enrichmentType":{"geoIp":{"withAsn":true}},"fieldName":"sourceIPs","selectedColumns":["string"]}]}'
+            body: '{"requestEnrichments":[{"enrichedFieldName":"string","enrichmentType":{"aws":{"resourceType":"ec2"}},"fieldName":"sourceIPs","selectedColumns":["string"]}]}'
           };
 
           fetch(url, options)
@@ -153,7 +153,7 @@ paths:
           payload = {"requestEnrichments": [
                   {
                       "enrichedFieldName": "string",
-                      "enrichmentType": {"geoIp": {"withAsn": True}},
+                      "enrichmentType": {"aws": {"resourceType": "ec2"}},
                       "fieldName": "sourceIPs",
                       "selectedColumns": ["string"]
                   }
@@ -172,7 +172,7 @@ paths:
             --url https://api.coralogix.com/mgmt/openapi/enrichments \
             --header 'Authorization: Bearer <API_KEY>' \
             --header 'content-type: application/json' \
-            --data '{"requestEnrichments":[{"enrichedFieldName":"string","enrichmentType":{"geoIp":{"withAsn":true}},"fieldName":"sourceIPs","selectedColumns":["string"]}]}'
+            --data '{"requestEnrichments":[{"enrichedFieldName":"string","enrichmentType":{"aws":{"resourceType":"ec2"}},"fieldName":"sourceIPs","selectedColumns":["string"]}]}'
   /enrichments/limit:
     get:
       description: No description available
@@ -294,7 +294,7 @@ paths:
           let options = {
             method: 'PATCH',
             headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"enrichmentFields":[{"enrichedFieldName":"string","fieldName":"string","selectedColumns":["string"]}],"enrichmentType":{"geoIp":{"withAsn":true}},"requestEnrichments":[{"enrichedFieldName":"string","enrichmentType":{"geoIp":{"withAsn":true}},"fieldName":"sourceIPs","selectedColumns":["string"]}]}'
+            body: '{"enrichmentFields":[{"enrichedFieldName":"string","fieldName":"string","selectedColumns":["string"]}],"enrichmentType":{"aws":{"resourceType":"ec2"}},"requestEnrichments":[{"enrichedFieldName":"string","enrichmentType":{"aws":{"resourceType":"ec2"}},"fieldName":"sourceIPs","selectedColumns":["string"]}]}'
           };
 
           fetch(url, options)
@@ -315,11 +315,11 @@ paths:
                       "selectedColumns": ["string"]
                   }
               ],
-              "enrichmentType": {"geoIp": {"withAsn": True}},
+              "enrichmentType": {"aws": {"resourceType": "ec2"}},
               "requestEnrichments": [
                   {
                       "enrichedFieldName": "string",
-                      "enrichmentType": {"geoIp": {"withAsn": True}},
+                      "enrichmentType": {"aws": {"resourceType": "ec2"}},
                       "fieldName": "sourceIPs",
                       "selectedColumns": ["string"]
                   }
@@ -339,7 +339,7 @@ paths:
             --url https://api.coralogix.com/mgmt/openapi/enrichments:atomicOverwrite \
             --header 'Authorization: Bearer <API_KEY>' \
             --header 'content-type: application/json' \
-            --data '{"enrichmentFields":[{"enrichedFieldName":"string","fieldName":"string","selectedColumns":["string"]}],"enrichmentType":{"geoIp":{"withAsn":true}},"requestEnrichments":[{"enrichedFieldName":"string","enrichmentType":{"geoIp":{"withAsn":true}},"fieldName":"sourceIPs","selectedColumns":["string"]}]}'
+            --data '{"enrichmentFields":[{"enrichedFieldName":"string","fieldName":"string","selectedColumns":["string"]}],"enrichmentType":{"aws":{"resourceType":"ec2"}},"requestEnrichments":[{"enrichedFieldName":"string","enrichmentType":{"aws":{"resourceType":"ec2"}},"fieldName":"sourceIPs","selectedColumns":["string"]}]}'
 components:
   schemas:
     AddEnrichmentsResponse:
@@ -347,8 +347,8 @@ components:
       example:
         enrichments:
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            aws:
+              resourceType: ec2
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -356,8 +356,8 @@ components:
           enrichedFieldName: "1"
           id: 1
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            aws:
+              resourceType: ec2
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -380,8 +380,8 @@ components:
       example:
         enrichments:
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            aws:
+              resourceType: ec2
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -389,8 +389,8 @@ components:
           enrichedFieldName: "1"
           id: 1
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            aws:
+              resourceType: ec2
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -404,10 +404,30 @@ components:
           type: array
       type: object
     AwsType:
+      example:
+        resourceType: ec2
       properties:
         resourceType:
           example: ec2
           type: string
+      type: object
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
       type: object
     CompanyEnrichmentSettings:
       example:
@@ -445,12 +465,11 @@ components:
           type: integer
       type: object
     Enrichment:
-      additionalProperties: false
       description: This data structure represents an enrichment
       example:
         enrichmentType:
-          geoIp:
-            withAsn: true
+          aws:
+            resourceType: ec2
         selectedColumns:
         - "[\"city\",\"population\"]"
         - "[\"city\",\"population\"]"
@@ -485,7 +504,6 @@ components:
       title: Enrichment
       type: object
     EnrichmentFieldDefinition:
-      additionalProperties: false
       properties:
         enrichedFieldName:
           type: string
@@ -497,7 +515,6 @@ components:
           type: array
       type: object
     EnrichmentRequestModel:
-      additionalProperties: false
       description: The enrichment request model
       externalDocs:
         description: Find out more about enrichments
@@ -521,10 +538,37 @@ components:
       type: object
     EnrichmentType:
       oneOf:
-      - $ref: "#/components/schemas/EnrichmentType_oneOf"
-      - $ref: "#/components/schemas/EnrichmentType_oneOf_1"
-      - $ref: "#/components/schemas/EnrichmentType_oneOf_2"
-      - $ref: "#/components/schemas/EnrichmentType_oneOf_3"
+      - $ref: "#/components/schemas/EnrichmentTypeAws"
+      - $ref: "#/components/schemas/EnrichmentTypeCustomEnrichment"
+      - $ref: "#/components/schemas/EnrichmentTypeGeoIp"
+      - $ref: "#/components/schemas/EnrichmentTypeSuspiciousIp"
+    EnrichmentTypeAws:
+      additionalProperties: false
+      example:
+        aws:
+          resourceType: ec2
+      properties:
+        aws:
+          $ref: "#/components/schemas/AwsType"
+      type: object
+    EnrichmentTypeCustomEnrichment:
+      additionalProperties: false
+      properties:
+        customEnrichment:
+          $ref: "#/components/schemas/CustomEnrichmentType"
+      type: object
+    EnrichmentTypeGeoIp:
+      additionalProperties: false
+      properties:
+        geoIp:
+          $ref: "#/components/schemas/GeoIpType"
+      type: object
+    EnrichmentTypeSuspiciousIp:
+      additionalProperties: false
+      properties:
+        suspiciousIp:
+          type: object
+      type: object
     FieldGroup:
       properties:
         name:
@@ -534,8 +578,40 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValues_1"
-      - $ref: "#/components/schemas/FilterPathAndValues_2"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
     Filters:
       description: This data structure represents a filter
       externalDocs:
@@ -552,9 +628,6 @@ components:
       title: Filters
       type: object
     GeoIpType:
-      additionalProperties: false
-      example:
-        withAsn: true
       properties:
         withAsn:
           type: boolean
@@ -599,8 +672,8 @@ components:
       example:
         enrichments:
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            aws:
+              resourceType: ec2
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -608,8 +681,8 @@ components:
           enrichedFieldName: "1"
           id: 1
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            aws:
+              resourceType: ec2
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -642,8 +715,8 @@ components:
       example:
         remainingEnrichments:
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            aws:
+              resourceType: ec2
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -651,8 +724,8 @@ components:
           enrichedFieldName: "1"
           id: 1
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            aws:
+              resourceType: ec2
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -672,6 +745,18 @@ components:
       title: Encrichments Delettion Response
       type: object
     SuspiciousIpType:
+      type: object
+    YAxisViewByCategory:
+      additionalProperties: false
+      properties:
+        category:
+          $ref: "#/components/schemas/YAxisViewByCategory"
+      type: object
+    YAxisViewByValue:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: "#/components/schemas/YAxisViewByValue"
       type: object
     common.Group:
       properties:
@@ -720,65 +805,6 @@ components:
           items:
             $ref: "#/components/schemas/EnrichmentRequestModel"
           type: array
-      type: object
-    EnrichmentType_oneOf:
-      additionalProperties: false
-      example:
-        geoIp:
-          withAsn: true
-      properties:
-        geoIp:
-          $ref: "#/components/schemas/GeoIpType"
-      type: object
-    EnrichmentType_oneOf_1:
-      additionalProperties: false
-      properties:
-        suspiciousIp:
-          type: object
-      type: object
-    EnrichmentType_oneOf_2:
-      additionalProperties: false
-      properties:
-        aws:
-          $ref: "#/components/schemas/AwsType"
-      type: object
-    EnrichmentType_oneOf_3:
-      additionalProperties: false
-      properties:
-        customEnrichment:
-          $ref: "#/components/schemas/CustomEnrichmentType"
-      type: object
-    FilterPathAndValues_1:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValues_2:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
       type: object
   securitySchemes:
     apiKeyAuth:

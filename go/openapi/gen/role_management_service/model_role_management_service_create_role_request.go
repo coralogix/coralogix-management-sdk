@@ -18,21 +18,21 @@ import (
 
 // RoleManagementServiceCreateRoleRequest - struct for RoleManagementServiceCreateRoleRequest
 type RoleManagementServiceCreateRoleRequest struct {
-	RoleManagementServiceCreateRoleRequestOneOf *RoleManagementServiceCreateRoleRequestOneOf
-	RoleManagementServiceCreateRoleRequestOneOf1 *RoleManagementServiceCreateRoleRequestOneOf1
+	CreateRoleRequestParentRoleId *CreateRoleRequestParentRoleId
+	CreateRoleRequestParentRoleName *CreateRoleRequestParentRoleName
 }
 
-// RoleManagementServiceCreateRoleRequestOneOfAsRoleManagementServiceCreateRoleRequest is a convenience function that returns RoleManagementServiceCreateRoleRequestOneOf wrapped in RoleManagementServiceCreateRoleRequest
-func RoleManagementServiceCreateRoleRequestOneOfAsRoleManagementServiceCreateRoleRequest(v *RoleManagementServiceCreateRoleRequestOneOf) RoleManagementServiceCreateRoleRequest {
+// CreateRoleRequestParentRoleIdAsRoleManagementServiceCreateRoleRequest is a convenience function that returns CreateRoleRequestParentRoleId wrapped in RoleManagementServiceCreateRoleRequest
+func CreateRoleRequestParentRoleIdAsRoleManagementServiceCreateRoleRequest(v *CreateRoleRequestParentRoleId) RoleManagementServiceCreateRoleRequest {
 	return RoleManagementServiceCreateRoleRequest{
-		RoleManagementServiceCreateRoleRequestOneOf: v,
+		CreateRoleRequestParentRoleId: v,
 	}
 }
 
-// RoleManagementServiceCreateRoleRequestOneOf1AsRoleManagementServiceCreateRoleRequest is a convenience function that returns RoleManagementServiceCreateRoleRequestOneOf1 wrapped in RoleManagementServiceCreateRoleRequest
-func RoleManagementServiceCreateRoleRequestOneOf1AsRoleManagementServiceCreateRoleRequest(v *RoleManagementServiceCreateRoleRequestOneOf1) RoleManagementServiceCreateRoleRequest {
+// CreateRoleRequestParentRoleNameAsRoleManagementServiceCreateRoleRequest is a convenience function that returns CreateRoleRequestParentRoleName wrapped in RoleManagementServiceCreateRoleRequest
+func CreateRoleRequestParentRoleNameAsRoleManagementServiceCreateRoleRequest(v *CreateRoleRequestParentRoleName) RoleManagementServiceCreateRoleRequest {
 	return RoleManagementServiceCreateRoleRequest{
-		RoleManagementServiceCreateRoleRequestOneOf1: v,
+		CreateRoleRequestParentRoleName: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func RoleManagementServiceCreateRoleRequestOneOf1AsRoleManagementServiceCreateRo
 func (dst *RoleManagementServiceCreateRoleRequest) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into RoleManagementServiceCreateRoleRequestOneOf
-	err = newStrictDecoder(data).Decode(&dst.RoleManagementServiceCreateRoleRequestOneOf)
+	// try to unmarshal data into CreateRoleRequestParentRoleId
+	err = newStrictDecoder(data).Decode(&dst.CreateRoleRequestParentRoleId)
 	if err == nil {
-		jsonRoleManagementServiceCreateRoleRequestOneOf, _ := json.Marshal(dst.RoleManagementServiceCreateRoleRequestOneOf)
-		if string(jsonRoleManagementServiceCreateRoleRequestOneOf) == "{}" { // empty struct
-			dst.RoleManagementServiceCreateRoleRequestOneOf = nil
+		jsonCreateRoleRequestParentRoleId, _ := json.Marshal(dst.CreateRoleRequestParentRoleId)
+		if string(jsonCreateRoleRequestParentRoleId) == "{}" { // empty struct
+			dst.CreateRoleRequestParentRoleId = nil
 		} else {
-			if err = validator.Validate(dst.RoleManagementServiceCreateRoleRequestOneOf); err != nil {
-				dst.RoleManagementServiceCreateRoleRequestOneOf = nil
+			if err = validator.Validate(dst.CreateRoleRequestParentRoleId); err != nil {
+				dst.CreateRoleRequestParentRoleId = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.RoleManagementServiceCreateRoleRequestOneOf = nil
+		dst.CreateRoleRequestParentRoleId = nil
 	}
 
-	// try to unmarshal data into RoleManagementServiceCreateRoleRequestOneOf1
-	err = newStrictDecoder(data).Decode(&dst.RoleManagementServiceCreateRoleRequestOneOf1)
+	// try to unmarshal data into CreateRoleRequestParentRoleName
+	err = newStrictDecoder(data).Decode(&dst.CreateRoleRequestParentRoleName)
 	if err == nil {
-		jsonRoleManagementServiceCreateRoleRequestOneOf1, _ := json.Marshal(dst.RoleManagementServiceCreateRoleRequestOneOf1)
-		if string(jsonRoleManagementServiceCreateRoleRequestOneOf1) == "{}" { // empty struct
-			dst.RoleManagementServiceCreateRoleRequestOneOf1 = nil
+		jsonCreateRoleRequestParentRoleName, _ := json.Marshal(dst.CreateRoleRequestParentRoleName)
+		if string(jsonCreateRoleRequestParentRoleName) == "{}" { // empty struct
+			dst.CreateRoleRequestParentRoleName = nil
 		} else {
-			if err = validator.Validate(dst.RoleManagementServiceCreateRoleRequestOneOf1); err != nil {
-				dst.RoleManagementServiceCreateRoleRequestOneOf1 = nil
+			if err = validator.Validate(dst.CreateRoleRequestParentRoleName); err != nil {
+				dst.CreateRoleRequestParentRoleName = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.RoleManagementServiceCreateRoleRequestOneOf1 = nil
+		dst.CreateRoleRequestParentRoleName = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.RoleManagementServiceCreateRoleRequestOneOf = nil
-		dst.RoleManagementServiceCreateRoleRequestOneOf1 = nil
+		dst.CreateRoleRequestParentRoleId = nil
+		dst.CreateRoleRequestParentRoleName = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(RoleManagementServiceCreateRoleRequest)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *RoleManagementServiceCreateRoleRequest) UnmarshalJSON(data []byte) er
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src RoleManagementServiceCreateRoleRequest) MarshalJSON() ([]byte, error) {
-	if src.RoleManagementServiceCreateRoleRequestOneOf != nil {
-		return json.Marshal(&src.RoleManagementServiceCreateRoleRequestOneOf)
+	if src.CreateRoleRequestParentRoleId != nil {
+		return json.Marshal(&src.CreateRoleRequestParentRoleId)
 	}
 
-	if src.RoleManagementServiceCreateRoleRequestOneOf1 != nil {
-		return json.Marshal(&src.RoleManagementServiceCreateRoleRequestOneOf1)
+	if src.CreateRoleRequestParentRoleName != nil {
+		return json.Marshal(&src.CreateRoleRequestParentRoleName)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *RoleManagementServiceCreateRoleRequest) GetActualInstance() (interfac
 	if obj == nil {
 		return nil
 	}
-	if obj.RoleManagementServiceCreateRoleRequestOneOf != nil {
-		return obj.RoleManagementServiceCreateRoleRequestOneOf
+	if obj.CreateRoleRequestParentRoleId != nil {
+		return obj.CreateRoleRequestParentRoleId
 	}
 
-	if obj.RoleManagementServiceCreateRoleRequestOneOf1 != nil {
-		return obj.RoleManagementServiceCreateRoleRequestOneOf1
+	if obj.CreateRoleRequestParentRoleName != nil {
+		return obj.CreateRoleRequestParentRoleName
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *RoleManagementServiceCreateRoleRequest) GetActualInstance() (interfac
 
 // Get the actual instance value
 func (obj RoleManagementServiceCreateRoleRequest) GetActualInstanceValue() (interface{}) {
-	if obj.RoleManagementServiceCreateRoleRequestOneOf != nil {
-		return *obj.RoleManagementServiceCreateRoleRequestOneOf
+	if obj.CreateRoleRequestParentRoleId != nil {
+		return *obj.CreateRoleRequestParentRoleId
 	}
 
-	if obj.RoleManagementServiceCreateRoleRequestOneOf1 != nil {
-		return *obj.RoleManagementServiceCreateRoleRequestOneOf1
+	if obj.CreateRoleRequestParentRoleName != nil {
+		return *obj.CreateRoleRequestParentRoleName
 	}
 
 	// all schemas are nil

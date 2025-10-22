@@ -32,15 +32,7 @@ paths:
         required: false
         schema:
           items:
-            enum:
-            - AGGREGATE_BY_UNSPECIFIED
-            - AGGREGATE_BY_APPLICATION
-            - AGGREGATE_BY_SUBSYSTEM
-            - AGGREGATE_BY_PILLAR
-            - AGGREGATE_BY_PRIORITY
-            - AGGREGATE_BY_POLICY_NAME
-            - AGGREGATE_BY_SEVERITY
-            type: string
+            $ref: "#/components/schemas/AggregateBy"
           type: array
         style: form
       - explode: true
@@ -148,7 +140,7 @@ paths:
           let options = {
             method: 'POST',
             headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"range":"RANGE_UNSPECIFIED"}'
+            body: '{"dateRange":{"fromDate":"2021-01-01T00:00:00.000Z","toDate":"2021-01-01T00:00:00.000Z"}}'
           };
 
           fetch(url, options)
@@ -161,7 +153,10 @@ paths:
 
           url = "https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/daily:evaluation-tokens"
 
-          payload = {"range": "RANGE_UNSPECIFIED"}
+          payload = {"dateRange": {
+                  "fromDate": "2021-01-01T00:00:00.000Z",
+                  "toDate": "2021-01-01T00:00:00.000Z"
+              }}
           headers = {
               "Authorization": "Bearer <API_KEY>",
               "content-type": "application/json"
@@ -176,7 +171,7 @@ paths:
             --url https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/daily:evaluation-tokens \
             --header 'Authorization: Bearer <API_KEY>' \
             --header 'content-type: application/json' \
-            --data '{"range":"RANGE_UNSPECIFIED"}'
+            --data '{"dateRange":{"fromDate":"2021-01-01T00:00:00.000Z","toDate":"2021-01-01T00:00:00.000Z"}}'
   /dataplans/data-usage/v2/daily:processed-gbs:
     post:
       description: No description available
@@ -187,7 +182,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_request"
+              $ref: "#/components/schemas/DataUsageService_GetDailyUsageProcessedGbs_request"
       responses:
         "200":
           content:
@@ -259,7 +254,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_request"
+              $ref: "#/components/schemas/DataUsageService_GetDailyUsageUnits_request"
       responses:
         "200":
           content:
@@ -613,6 +608,34 @@ paths:
             --header 'Authorization: Bearer <API_KEY>'
 components:
   schemas:
+    AggregateBy:
+      enum:
+      - AGGREGATE_BY_UNSPECIFIED
+      - AGGREGATE_BY_APPLICATION
+      - AGGREGATE_BY_SUBSYSTEM
+      - AGGREGATE_BY_PILLAR
+      - AGGREGATE_BY_PRIORITY
+      - AGGREGATE_BY_POLICY_NAME
+      - AGGREGATE_BY_SEVERITY
+      type: string
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
     DataUsageEntry:
       description: This data structure represents a data usage entry.
       example:
@@ -782,11 +805,43 @@ components:
       type: object
     Dimension:
       oneOf:
-      - $ref: "#/components/schemas/Dimension_oneOf"
-      - $ref: "#/components/schemas/Dimension_oneOf_1"
-      - $ref: "#/components/schemas/Dimension_oneOf_2"
-      - $ref: "#/components/schemas/Dimension_oneOf_3"
-      - $ref: "#/components/schemas/Dimension_oneOf_4"
+      - $ref: "#/components/schemas/DimensionPillar"
+      - $ref: "#/components/schemas/DimensionGenericDimension"
+      - $ref: "#/components/schemas/DimensionTier"
+      - $ref: "#/components/schemas/DimensionSeverity"
+      - $ref: "#/components/schemas/DimensionPriority"
+    DimensionGenericDimension:
+      additionalProperties: false
+      properties:
+        genericDimension:
+          $ref: "#/components/schemas/GenericDimension"
+      type: object
+    DimensionPillar:
+      additionalProperties: false
+      example:
+        pillar: PILLAR_UNSPECIFIED
+      properties:
+        pillar:
+          $ref: "#/components/schemas/v2.Pillar"
+      type: object
+    DimensionPriority:
+      additionalProperties: false
+      properties:
+        priority:
+          $ref: "#/components/schemas/v2.Priority"
+      type: object
+    DimensionSeverity:
+      additionalProperties: false
+      properties:
+        severity:
+          $ref: "#/components/schemas/datausage.v2.Severity"
+      type: object
+    DimensionTier:
+      additionalProperties: false
+      properties:
+        tier:
+          $ref: "#/components/schemas/v2.TcoTier"
+      type: object
     Evaluation:
       example:
         evaluationTokens:
@@ -807,8 +862,40 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValues_1"
-      - $ref: "#/components/schemas/FilterPathAndValues_2"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
     Filters:
       description: This data structure represents a filter
       externalDocs:
@@ -838,6 +925,18 @@ components:
           type: string
       title: Generic Dimension
       type: object
+    GetDailyUsageEvaluationTokensRequestDateRange:
+      additionalProperties: false
+      properties:
+        dateRange:
+          $ref: "#/components/schemas/v2.DateRange"
+      type: object
+    GetDailyUsageEvaluationTokensRequestRange:
+      additionalProperties: false
+      properties:
+        range:
+          $ref: "#/components/schemas/v2.Range"
+      type: object
     GetDailyUsageEvaluationTokensResponse:
       example:
         tokens:
@@ -866,6 +965,18 @@ components:
           items:
             $ref: "#/components/schemas/DetailedDailyEvaluationTokens"
           type: array
+      type: object
+    GetDailyUsageProcessedGbsRequestDateRange:
+      additionalProperties: false
+      properties:
+        dateRange:
+          $ref: "#/components/schemas/v2.DateRange"
+      type: object
+    GetDailyUsageProcessedGbsRequestRange:
+      additionalProperties: false
+      properties:
+        range:
+          $ref: "#/components/schemas/v2.Range"
       type: object
     GetDailyUsageProcessedGbsResponse:
       example:
@@ -925,6 +1036,18 @@ components:
           items:
             $ref: "#/components/schemas/DetailedDailyProcessedGbs"
           type: array
+      type: object
+    GetDailyUsageUnitsRequestDateRange:
+      additionalProperties: false
+      properties:
+        dateRange:
+          $ref: "#/components/schemas/v2.DateRange"
+      type: object
+    GetDailyUsageUnitsRequestRange:
+      additionalProperties: false
+      properties:
+        range:
+          $ref: "#/components/schemas/v2.Range"
       type: object
     GetDailyUsageUnitsResponse:
       example:
@@ -1178,6 +1301,18 @@ components:
           type: boolean
       title: Update Data Usage Metrics Export Status Response
       type: object
+    YAxisViewByCategory:
+      additionalProperties: false
+      properties:
+        category:
+          $ref: "#/components/schemas/YAxisViewByCategory"
+      type: object
+    YAxisViewByValue:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: "#/components/schemas/YAxisViewByValue"
+      type: object
     common.Group:
       properties:
         field:
@@ -1291,101 +1426,27 @@ components:
           type: string
       title: Date Range
       type: object
-    DataUsageService_GetDataUsage_dimension_filters_parameter_inner_oneOf:
-      additionalProperties: false
-      properties:
-        pillar:
-          enum:
-          - PILLAR_UNSPECIFIED
-          - PILLAR_METRICS
-          - PILLAR_LOGS
-          - PILLAR_SPANS
-          - PILLAR_BINARY
-          - PILLAR_PROFILES
-          type: string
-      type: object
-    Generic_Dimension:
-      description: This data structure represents a generic dimension.
-      externalDocs:
-        description: Find out more about data usage.
-        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
-      properties:
-        key:
-          example: key
-          type: string
-        value:
-          example: value
-          type: string
-      title: Generic Dimension
-      type: object
-    DataUsageService_GetDataUsage_dimension_filters_parameter_inner_oneOf_1:
-      additionalProperties: false
-      properties:
-        genericDimension:
-          $ref: "#/components/schemas/Generic_Dimension"
-      type: object
-    DataUsageService_GetDataUsage_dimension_filters_parameter_inner_oneOf_2:
-      additionalProperties: false
-      properties:
-        tier:
-          deprecated: true
-          enum:
-          - TCO_TIER_UNSPECIFIED
-          - TCO_TIER_LOW
-          - TCO_TIER_MEDIUM
-          - TCO_TIER_HIGH
-          - TCO_TIER_BLOCKED
-          type: string
-      type: object
-    DataUsageService_GetDataUsage_dimension_filters_parameter_inner_oneOf_3:
-      additionalProperties: false
-      properties:
-        severity:
-          enum:
-          - SEVERITY_UNSPECIFIED
-          - SEVERITY_DEBUG
-          - SEVERITY_VERBOSE
-          - SEVERITY_INFO
-          - SEVERITY_WARNING
-          - SEVERITY_ERROR
-          - SEVERITY_CRITICAL
-          type: string
-      type: object
-    DataUsageService_GetDataUsage_dimension_filters_parameter_inner_oneOf_4:
-      additionalProperties: false
-      properties:
-        priority:
-          enum:
-          - PRIORITY_UNSPECIFIED
-          - PRIORITY_LOW
-          - PRIORITY_MEDIUM
-          - PRIORITY_HIGH
-          - PRIORITY_BLOCKED
-          type: string
-      type: object
     DataUsageService_GetDataUsage_dimension_filters_parameter_inner:
       oneOf:
-      - $ref: "#/components/schemas/DataUsageService_GetDataUsage_dimension_filters_parameter_inner_oneOf"
-      - $ref: "#/components/schemas/DataUsageService_GetDataUsage_dimension_filters_parameter_inner_oneOf_1"
-      - $ref: "#/components/schemas/DataUsageService_GetDataUsage_dimension_filters_parameter_inner_oneOf_2"
-      - $ref: "#/components/schemas/DataUsageService_GetDataUsage_dimension_filters_parameter_inner_oneOf_3"
-      - $ref: "#/components/schemas/DataUsageService_GetDataUsage_dimension_filters_parameter_inner_oneOf_4"
-    DataUsageService_GetDailyUsageEvaluationTokens_request_oneOf:
-      additionalProperties: false
-      properties:
-        range:
-          $ref: "#/components/schemas/v2.Range"
-      type: object
-    DataUsageService_GetDailyUsageEvaluationTokens_request_oneOf_1:
-      additionalProperties: false
-      properties:
-        dateRange:
-          $ref: "#/components/schemas/v2.DateRange"
-      type: object
+      - $ref: "#/components/schemas/DimensionTier"
+      - $ref: "#/components/schemas/DimensionSeverity"
+      - $ref: "#/components/schemas/DimensionPriority"
+      - $ref: "#/components/schemas/DimensionPillar"
+      - $ref: "#/components/schemas/DimensionGenericDimension"
     DataUsageService_GetDailyUsageEvaluationTokens_request:
       oneOf:
-      - $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_request_oneOf"
-      - $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_request_oneOf_1"
+      - $ref: "#/components/schemas/GetDailyUsageEvaluationTokensRequestDateRange"
+      - $ref: "#/components/schemas/GetDailyUsageEvaluationTokensRequestRange"
+      type: object
+    DataUsageService_GetDailyUsageProcessedGbs_request:
+      oneOf:
+      - $ref: "#/components/schemas/GetDailyUsageProcessedGbsRequestRange"
+      - $ref: "#/components/schemas/GetDailyUsageProcessedGbsRequestDateRange"
+      type: object
+    DataUsageService_GetDailyUsageUnits_request:
+      oneOf:
+      - $ref: "#/components/schemas/GetDailyUsageUnitsRequestRange"
+      - $ref: "#/components/schemas/GetDailyUsageUnitsRequestDateRange"
       type: object
     Update_Data_Usage_Metrics_Export_Status_Request:
       additionalProperties: false
@@ -1414,70 +1475,6 @@ components:
             type: string
           type: array
       title: Scopes Filter
-      type: object
-    Dimension_oneOf:
-      additionalProperties: false
-      example:
-        pillar: PILLAR_UNSPECIFIED
-      properties:
-        pillar:
-          $ref: "#/components/schemas/v2.Pillar"
-      type: object
-    Dimension_oneOf_1:
-      additionalProperties: false
-      properties:
-        genericDimension:
-          $ref: "#/components/schemas/GenericDimension"
-      type: object
-    Dimension_oneOf_2:
-      additionalProperties: false
-      properties:
-        tier:
-          $ref: "#/components/schemas/v2.TcoTier"
-      type: object
-    Dimension_oneOf_3:
-      additionalProperties: false
-      properties:
-        severity:
-          $ref: "#/components/schemas/datausage.v2.Severity"
-      type: object
-    Dimension_oneOf_4:
-      additionalProperties: false
-      properties:
-        priority:
-          $ref: "#/components/schemas/v2.Priority"
-      type: object
-    FilterPathAndValues_1:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValues_2:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
       type: object
   securitySchemes:
     apiKeyAuth:
