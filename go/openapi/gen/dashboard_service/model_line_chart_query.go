@@ -18,37 +18,37 @@ import (
 
 // LineChartQuery - struct for LineChartQuery
 type LineChartQuery struct {
-	LineChartQueryOneOf *LineChartQueryOneOf
-	LineChartQueryOneOf1 *LineChartQueryOneOf1
-	LineChartQueryOneOf2 *LineChartQueryOneOf2
-	LineChartQueryOneOf3 *LineChartQueryOneOf3
+	QueryDataprime *QueryDataprime
+	QueryLogs *QueryLogs
+	QueryMetrics *QueryMetrics
+	QuerySpans *QuerySpans
 }
 
-// LineChartQueryOneOfAsLineChartQuery is a convenience function that returns LineChartQueryOneOf wrapped in LineChartQuery
-func LineChartQueryOneOfAsLineChartQuery(v *LineChartQueryOneOf) LineChartQuery {
+// QueryDataprimeAsLineChartQuery is a convenience function that returns QueryDataprime wrapped in LineChartQuery
+func QueryDataprimeAsLineChartQuery(v *QueryDataprime) LineChartQuery {
 	return LineChartQuery{
-		LineChartQueryOneOf: v,
+		QueryDataprime: v,
 	}
 }
 
-// LineChartQueryOneOf1AsLineChartQuery is a convenience function that returns LineChartQueryOneOf1 wrapped in LineChartQuery
-func LineChartQueryOneOf1AsLineChartQuery(v *LineChartQueryOneOf1) LineChartQuery {
+// QueryLogsAsLineChartQuery is a convenience function that returns QueryLogs wrapped in LineChartQuery
+func QueryLogsAsLineChartQuery(v *QueryLogs) LineChartQuery {
 	return LineChartQuery{
-		LineChartQueryOneOf1: v,
+		QueryLogs: v,
 	}
 }
 
-// LineChartQueryOneOf2AsLineChartQuery is a convenience function that returns LineChartQueryOneOf2 wrapped in LineChartQuery
-func LineChartQueryOneOf2AsLineChartQuery(v *LineChartQueryOneOf2) LineChartQuery {
+// QueryMetricsAsLineChartQuery is a convenience function that returns QueryMetrics wrapped in LineChartQuery
+func QueryMetricsAsLineChartQuery(v *QueryMetrics) LineChartQuery {
 	return LineChartQuery{
-		LineChartQueryOneOf2: v,
+		QueryMetrics: v,
 	}
 }
 
-// LineChartQueryOneOf3AsLineChartQuery is a convenience function that returns LineChartQueryOneOf3 wrapped in LineChartQuery
-func LineChartQueryOneOf3AsLineChartQuery(v *LineChartQueryOneOf3) LineChartQuery {
+// QuerySpansAsLineChartQuery is a convenience function that returns QuerySpans wrapped in LineChartQuery
+func QuerySpansAsLineChartQuery(v *QuerySpans) LineChartQuery {
 	return LineChartQuery{
-		LineChartQueryOneOf3: v,
+		QuerySpans: v,
 	}
 }
 
@@ -57,80 +57,80 @@ func LineChartQueryOneOf3AsLineChartQuery(v *LineChartQueryOneOf3) LineChartQuer
 func (dst *LineChartQuery) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into LineChartQueryOneOf
-	err = newStrictDecoder(data).Decode(&dst.LineChartQueryOneOf)
+	// try to unmarshal data into QueryDataprime
+	err = newStrictDecoder(data).Decode(&dst.QueryDataprime)
 	if err == nil {
-		jsonLineChartQueryOneOf, _ := json.Marshal(dst.LineChartQueryOneOf)
-		if string(jsonLineChartQueryOneOf) == "{}" { // empty struct
-			dst.LineChartQueryOneOf = nil
+		jsonQueryDataprime, _ := json.Marshal(dst.QueryDataprime)
+		if string(jsonQueryDataprime) == "{}" { // empty struct
+			dst.QueryDataprime = nil
 		} else {
-			if err = validator.Validate(dst.LineChartQueryOneOf); err != nil {
-				dst.LineChartQueryOneOf = nil
+			if err = validator.Validate(dst.QueryDataprime); err != nil {
+				dst.QueryDataprime = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.LineChartQueryOneOf = nil
+		dst.QueryDataprime = nil
 	}
 
-	// try to unmarshal data into LineChartQueryOneOf1
-	err = newStrictDecoder(data).Decode(&dst.LineChartQueryOneOf1)
+	// try to unmarshal data into QueryLogs
+	err = newStrictDecoder(data).Decode(&dst.QueryLogs)
 	if err == nil {
-		jsonLineChartQueryOneOf1, _ := json.Marshal(dst.LineChartQueryOneOf1)
-		if string(jsonLineChartQueryOneOf1) == "{}" { // empty struct
-			dst.LineChartQueryOneOf1 = nil
+		jsonQueryLogs, _ := json.Marshal(dst.QueryLogs)
+		if string(jsonQueryLogs) == "{}" { // empty struct
+			dst.QueryLogs = nil
 		} else {
-			if err = validator.Validate(dst.LineChartQueryOneOf1); err != nil {
-				dst.LineChartQueryOneOf1 = nil
+			if err = validator.Validate(dst.QueryLogs); err != nil {
+				dst.QueryLogs = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.LineChartQueryOneOf1 = nil
+		dst.QueryLogs = nil
 	}
 
-	// try to unmarshal data into LineChartQueryOneOf2
-	err = newStrictDecoder(data).Decode(&dst.LineChartQueryOneOf2)
+	// try to unmarshal data into QueryMetrics
+	err = newStrictDecoder(data).Decode(&dst.QueryMetrics)
 	if err == nil {
-		jsonLineChartQueryOneOf2, _ := json.Marshal(dst.LineChartQueryOneOf2)
-		if string(jsonLineChartQueryOneOf2) == "{}" { // empty struct
-			dst.LineChartQueryOneOf2 = nil
+		jsonQueryMetrics, _ := json.Marshal(dst.QueryMetrics)
+		if string(jsonQueryMetrics) == "{}" { // empty struct
+			dst.QueryMetrics = nil
 		} else {
-			if err = validator.Validate(dst.LineChartQueryOneOf2); err != nil {
-				dst.LineChartQueryOneOf2 = nil
+			if err = validator.Validate(dst.QueryMetrics); err != nil {
+				dst.QueryMetrics = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.LineChartQueryOneOf2 = nil
+		dst.QueryMetrics = nil
 	}
 
-	// try to unmarshal data into LineChartQueryOneOf3
-	err = newStrictDecoder(data).Decode(&dst.LineChartQueryOneOf3)
+	// try to unmarshal data into QuerySpans
+	err = newStrictDecoder(data).Decode(&dst.QuerySpans)
 	if err == nil {
-		jsonLineChartQueryOneOf3, _ := json.Marshal(dst.LineChartQueryOneOf3)
-		if string(jsonLineChartQueryOneOf3) == "{}" { // empty struct
-			dst.LineChartQueryOneOf3 = nil
+		jsonQuerySpans, _ := json.Marshal(dst.QuerySpans)
+		if string(jsonQuerySpans) == "{}" { // empty struct
+			dst.QuerySpans = nil
 		} else {
-			if err = validator.Validate(dst.LineChartQueryOneOf3); err != nil {
-				dst.LineChartQueryOneOf3 = nil
+			if err = validator.Validate(dst.QuerySpans); err != nil {
+				dst.QuerySpans = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.LineChartQueryOneOf3 = nil
+		dst.QuerySpans = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.LineChartQueryOneOf = nil
-		dst.LineChartQueryOneOf1 = nil
-		dst.LineChartQueryOneOf2 = nil
-		dst.LineChartQueryOneOf3 = nil
+		dst.QueryDataprime = nil
+		dst.QueryLogs = nil
+		dst.QueryMetrics = nil
+		dst.QuerySpans = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(LineChartQuery)")
 	} else if match == 1 {
@@ -142,20 +142,20 @@ func (dst *LineChartQuery) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src LineChartQuery) MarshalJSON() ([]byte, error) {
-	if src.LineChartQueryOneOf != nil {
-		return json.Marshal(&src.LineChartQueryOneOf)
+	if src.QueryDataprime != nil {
+		return json.Marshal(&src.QueryDataprime)
 	}
 
-	if src.LineChartQueryOneOf1 != nil {
-		return json.Marshal(&src.LineChartQueryOneOf1)
+	if src.QueryLogs != nil {
+		return json.Marshal(&src.QueryLogs)
 	}
 
-	if src.LineChartQueryOneOf2 != nil {
-		return json.Marshal(&src.LineChartQueryOneOf2)
+	if src.QueryMetrics != nil {
+		return json.Marshal(&src.QueryMetrics)
 	}
 
-	if src.LineChartQueryOneOf3 != nil {
-		return json.Marshal(&src.LineChartQueryOneOf3)
+	if src.QuerySpans != nil {
+		return json.Marshal(&src.QuerySpans)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -166,20 +166,20 @@ func (obj *LineChartQuery) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.LineChartQueryOneOf != nil {
-		return obj.LineChartQueryOneOf
+	if obj.QueryDataprime != nil {
+		return obj.QueryDataprime
 	}
 
-	if obj.LineChartQueryOneOf1 != nil {
-		return obj.LineChartQueryOneOf1
+	if obj.QueryLogs != nil {
+		return obj.QueryLogs
 	}
 
-	if obj.LineChartQueryOneOf2 != nil {
-		return obj.LineChartQueryOneOf2
+	if obj.QueryMetrics != nil {
+		return obj.QueryMetrics
 	}
 
-	if obj.LineChartQueryOneOf3 != nil {
-		return obj.LineChartQueryOneOf3
+	if obj.QuerySpans != nil {
+		return obj.QuerySpans
 	}
 
 	// all schemas are nil
@@ -188,20 +188,20 @@ func (obj *LineChartQuery) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj LineChartQuery) GetActualInstanceValue() (interface{}) {
-	if obj.LineChartQueryOneOf != nil {
-		return *obj.LineChartQueryOneOf
+	if obj.QueryDataprime != nil {
+		return *obj.QueryDataprime
 	}
 
-	if obj.LineChartQueryOneOf1 != nil {
-		return *obj.LineChartQueryOneOf1
+	if obj.QueryLogs != nil {
+		return *obj.QueryLogs
 	}
 
-	if obj.LineChartQueryOneOf2 != nil {
-		return *obj.LineChartQueryOneOf2
+	if obj.QueryMetrics != nil {
+		return *obj.QueryMetrics
 	}
 
-	if obj.LineChartQueryOneOf3 != nil {
-		return *obj.LineChartQueryOneOf3
+	if obj.QuerySpans != nil {
+		return *obj.QuerySpans
 	}
 
 	// all schemas are nil

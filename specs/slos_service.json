@@ -41,38 +41,10 @@
                       "field": {
                         "oneOf": [
                           {
-                            "externalDocs": {
-                              "url": ""
-                            },
-                            "title": "SloFilterField",
-                            "description": "Field used for filtering SLOs",
-                            "type": "object",
-                            "properties": {
-                              "constFilter": {
-                                "type": "string",
-                                "enum": [
-                                  "SLO_CONST_FILTER_FIELD_UNSPECIFIED",
-                                  "SLO_CONST_FILTER_FIELD_USER_NAME",
-                                  "SLO_CONST_FILTER_FIELD_SLO_NAME"
-                                ]
-                              }
-                            },
-                            "additionalProperties": false
+                            "$ref": "#/components/schemas/SloFilterFieldLabelName"
                           },
                           {
-                            "externalDocs": {
-                              "url": ""
-                            },
-                            "title": "SloFilterField",
-                            "description": "Field used for filtering SLOs",
-                            "type": "object",
-                            "properties": {
-                              "labelName": {
-                                "example": "environment",
-                                "type": "string"
-                              }
-                            },
-                            "additionalProperties": false
+                            "$ref": "#/components/schemas/SloFilterFieldConstFilter"
                           }
                         ]
                       },
@@ -100,8 +72,7 @@
                               }
                             }
                           }
-                        },
-                        "additionalProperties": false
+                        }
                       }
                     },
                     "required": [
@@ -188,134 +159,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "title": "Slo",
-                    "description": "Definition of an SLO",
-                    "type": "object",
-                    "properties": {
-                      "createTime": {
-                        "type": "string",
-                        "format": "date-time"
-                      },
-                      "creator": {
-                        "example": "test@domain.com",
-                        "type": "string"
-                      },
-                      "description": {
-                        "example": "A brief description of my SLO",
-                        "type": "string"
-                      },
-                      "grouping": {
-                        "$ref": "#/components/schemas/v1.Grouping"
-                      },
-                      "id": {
-                        "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
-                        "type": "string"
-                      },
-                      "labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                          "type": "string"
-                        }
-                      },
-                      "name": {
-                        "example": "Example Slo Name",
-                        "type": "string"
-                      },
-                      "requestBasedMetricSli": {
-                        "$ref": "#/components/schemas/RequestBasedMetricSli"
-                      },
-                      "revision": {
-                        "$ref": "#/components/schemas/v1.Revision"
-                      },
-                      "sloTimeFrame": {
-                        "$ref": "#/components/schemas/SloTimeFrame"
-                      },
-                      "targetThresholdPercentage": {
-                        "example": 99.999,
-                        "type": "number",
-                        "format": "float"
-                      },
-                      "type": {
-                        "example": "request",
-                        "type": "string"
-                      },
-                      "updateTime": {
-                        "type": "string",
-                        "format": "date-time"
-                      }
-                    },
-                    "required": [
-                      "name",
-                      "targetThresholdPercentage",
-                      "window",
-                      "sli"
-                    ],
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
                   },
                   {
-                    "title": "Slo",
-                    "description": "Definition of an SLO",
-                    "type": "object",
-                    "properties": {
-                      "createTime": {
-                        "type": "string",
-                        "format": "date-time"
-                      },
-                      "creator": {
-                        "example": "test@domain.com",
-                        "type": "string"
-                      },
-                      "description": {
-                        "example": "A brief description of my SLO",
-                        "type": "string"
-                      },
-                      "grouping": {
-                        "$ref": "#/components/schemas/v1.Grouping"
-                      },
-                      "id": {
-                        "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
-                        "type": "string"
-                      },
-                      "labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                          "type": "string"
-                        }
-                      },
-                      "name": {
-                        "example": "Example Slo Name",
-                        "type": "string"
-                      },
-                      "revision": {
-                        "$ref": "#/components/schemas/v1.Revision"
-                      },
-                      "sloTimeFrame": {
-                        "$ref": "#/components/schemas/SloTimeFrame"
-                      },
-                      "targetThresholdPercentage": {
-                        "example": 99.999,
-                        "type": "number",
-                        "format": "float"
-                      },
-                      "type": {
-                        "example": "request",
-                        "type": "string"
-                      },
-                      "updateTime": {
-                        "type": "string",
-                        "format": "date-time"
-                      },
-                      "windowBasedMetricSli": {
-                        "$ref": "#/components/schemas/WindowBasedMetricSli"
-                      }
-                    },
-                    "required": [
-                      "name",
-                      "targetThresholdPercentage",
-                      "window",
-                      "sli"
-                    ],
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
                   }
                 ]
               }
@@ -395,134 +242,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "title": "Slo",
-                    "description": "Definition of an SLO",
-                    "type": "object",
-                    "properties": {
-                      "createTime": {
-                        "type": "string",
-                        "format": "date-time"
-                      },
-                      "creator": {
-                        "example": "test@domain.com",
-                        "type": "string"
-                      },
-                      "description": {
-                        "example": "A brief description of my SLO",
-                        "type": "string"
-                      },
-                      "grouping": {
-                        "$ref": "#/components/schemas/v1.Grouping"
-                      },
-                      "id": {
-                        "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
-                        "type": "string"
-                      },
-                      "labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                          "type": "string"
-                        }
-                      },
-                      "name": {
-                        "example": "Example Slo Name",
-                        "type": "string"
-                      },
-                      "requestBasedMetricSli": {
-                        "$ref": "#/components/schemas/RequestBasedMetricSli"
-                      },
-                      "revision": {
-                        "$ref": "#/components/schemas/v1.Revision"
-                      },
-                      "sloTimeFrame": {
-                        "$ref": "#/components/schemas/SloTimeFrame"
-                      },
-                      "targetThresholdPercentage": {
-                        "example": 99.999,
-                        "type": "number",
-                        "format": "float"
-                      },
-                      "type": {
-                        "example": "request",
-                        "type": "string"
-                      },
-                      "updateTime": {
-                        "type": "string",
-                        "format": "date-time"
-                      }
-                    },
-                    "required": [
-                      "name",
-                      "targetThresholdPercentage",
-                      "window",
-                      "sli"
-                    ],
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
                   },
                   {
-                    "title": "Slo",
-                    "description": "Definition of an SLO",
-                    "type": "object",
-                    "properties": {
-                      "createTime": {
-                        "type": "string",
-                        "format": "date-time"
-                      },
-                      "creator": {
-                        "example": "test@domain.com",
-                        "type": "string"
-                      },
-                      "description": {
-                        "example": "A brief description of my SLO",
-                        "type": "string"
-                      },
-                      "grouping": {
-                        "$ref": "#/components/schemas/v1.Grouping"
-                      },
-                      "id": {
-                        "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
-                        "type": "string"
-                      },
-                      "labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                          "type": "string"
-                        }
-                      },
-                      "name": {
-                        "example": "Example Slo Name",
-                        "type": "string"
-                      },
-                      "revision": {
-                        "$ref": "#/components/schemas/v1.Revision"
-                      },
-                      "sloTimeFrame": {
-                        "$ref": "#/components/schemas/SloTimeFrame"
-                      },
-                      "targetThresholdPercentage": {
-                        "example": 99.999,
-                        "type": "number",
-                        "format": "float"
-                      },
-                      "type": {
-                        "example": "request",
-                        "type": "string"
-                      },
-                      "updateTime": {
-                        "type": "string",
-                        "format": "date-time"
-                      },
-                      "windowBasedMetricSli": {
-                        "$ref": "#/components/schemas/WindowBasedMetricSli"
-                      }
-                    },
-                    "required": [
-                      "name",
-                      "targetThresholdPercentage",
-                      "window",
-                      "sli"
-                    ],
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
                   }
                 ]
               }
@@ -593,134 +316,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "title": "Slo",
-                    "description": "Definition of an SLO",
-                    "type": "object",
-                    "properties": {
-                      "createTime": {
-                        "type": "string",
-                        "format": "date-time"
-                      },
-                      "creator": {
-                        "example": "test@domain.com",
-                        "type": "string"
-                      },
-                      "description": {
-                        "example": "A brief description of my SLO",
-                        "type": "string"
-                      },
-                      "grouping": {
-                        "$ref": "#/components/schemas/v1.Grouping"
-                      },
-                      "id": {
-                        "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
-                        "type": "string"
-                      },
-                      "labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                          "type": "string"
-                        }
-                      },
-                      "name": {
-                        "example": "Example Slo Name",
-                        "type": "string"
-                      },
-                      "requestBasedMetricSli": {
-                        "$ref": "#/components/schemas/RequestBasedMetricSli"
-                      },
-                      "revision": {
-                        "$ref": "#/components/schemas/v1.Revision"
-                      },
-                      "sloTimeFrame": {
-                        "$ref": "#/components/schemas/SloTimeFrame"
-                      },
-                      "targetThresholdPercentage": {
-                        "example": 99.999,
-                        "type": "number",
-                        "format": "float"
-                      },
-                      "type": {
-                        "example": "request",
-                        "type": "string"
-                      },
-                      "updateTime": {
-                        "type": "string",
-                        "format": "date-time"
-                      }
-                    },
-                    "required": [
-                      "name",
-                      "targetThresholdPercentage",
-                      "window",
-                      "sli"
-                    ],
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
                   },
                   {
-                    "title": "Slo",
-                    "description": "Definition of an SLO",
-                    "type": "object",
-                    "properties": {
-                      "createTime": {
-                        "type": "string",
-                        "format": "date-time"
-                      },
-                      "creator": {
-                        "example": "test@domain.com",
-                        "type": "string"
-                      },
-                      "description": {
-                        "example": "A brief description of my SLO",
-                        "type": "string"
-                      },
-                      "grouping": {
-                        "$ref": "#/components/schemas/v1.Grouping"
-                      },
-                      "id": {
-                        "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
-                        "type": "string"
-                      },
-                      "labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                          "type": "string"
-                        }
-                      },
-                      "name": {
-                        "example": "Example Slo Name",
-                        "type": "string"
-                      },
-                      "revision": {
-                        "$ref": "#/components/schemas/v1.Revision"
-                      },
-                      "sloTimeFrame": {
-                        "$ref": "#/components/schemas/SloTimeFrame"
-                      },
-                      "targetThresholdPercentage": {
-                        "example": 99.999,
-                        "type": "number",
-                        "format": "float"
-                      },
-                      "type": {
-                        "example": "request",
-                        "type": "string"
-                      },
-                      "updateTime": {
-                        "type": "string",
-                        "format": "date-time"
-                      },
-                      "windowBasedMetricSli": {
-                        "$ref": "#/components/schemas/WindowBasedMetricSli"
-                      }
-                    },
-                    "required": [
-                      "name",
-                      "targetThresholdPercentage",
-                      "window",
-                      "sli"
-                    ],
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
                   }
                 ]
               }
@@ -984,734 +583,13 @@
               "items": {
                 "oneOf": [
                   {
-                    "externalDocs": {
-                      "url": ""
-                    },
-                    "title": "SloExecutionRequest",
-                    "description": "Request for executing an SLO operation.",
-                    "type": "object",
-                    "properties": {
-                      "createSloRequest": {
-                        "externalDocs": {
-                          "url": ""
-                        },
-                        "title": "CreateSloRequest",
-                        "description": "Request to create a new SLO.",
-                        "type": "object",
-                        "properties": {
-                          "silenceDataValidations": {
-                            "deprecated": true,
-                            "type": "boolean"
-                          },
-                          "slo": {
-                            "oneOf": [
-                              {
-                                "externalDocs": {
-                                  "url": ""
-                                },
-                                "title": "Slo",
-                                "description": "Definition of an SLO",
-                                "type": "object",
-                                "properties": {
-                                  "createTime": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  },
-                                  "creator": {
-                                    "example": "test@domain.com",
-                                    "type": "string"
-                                  },
-                                  "description": {
-                                    "example": "A brief description of my SLO",
-                                    "type": "string"
-                                  },
-                                  "grouping": {
-                                    "externalDocs": {
-                                      "url": ""
-                                    },
-                                    "title": "Grouping",
-                                    "description": "Definition of the SLO grouping fields",
-                                    "type": "object",
-                                    "properties": {
-                                      "labels": {
-                                        "type": "array",
-                                        "items": {
-                                          "type": "string"
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "id": {
-                                    "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
-                                    "type": "string"
-                                  },
-                                  "labels": {
-                                    "type": "object",
-                                    "additionalProperties": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "name": {
-                                    "example": "Example Slo Name",
-                                    "type": "string"
-                                  },
-                                  "requestBasedMetricSli": {
-                                    "externalDocs": {
-                                      "url": ""
-                                    },
-                                    "title": "RequestBasedMetricSli",
-                                    "description": "Definition of a request-based SLI based on metrics",
-                                    "type": "object",
-                                    "properties": {
-                                      "goodEvents": {
-                                        "externalDocs": {
-                                          "url": ""
-                                        },
-                                        "title": "Metric",
-                                        "description": "Definition of a metric used in SLOs",
-                                        "type": "object",
-                                        "properties": {
-                                          "query": {
-                                            "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))",
-                                            "type": "string"
-                                          }
-                                        },
-                                        "required": [
-                                          "query"
-                                        ]
-                                      },
-                                      "totalEvents": {
-                                        "externalDocs": {
-                                          "url": ""
-                                        },
-                                        "title": "Metric",
-                                        "description": "Definition of a metric used in SLOs",
-                                        "type": "object",
-                                        "properties": {
-                                          "query": {
-                                            "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))",
-                                            "type": "string"
-                                          }
-                                        },
-                                        "required": [
-                                          "query"
-                                        ]
-                                      }
-                                    },
-                                    "required": [
-                                      "goodEvents",
-                                      "totalEvents"
-                                    ]
-                                  },
-                                  "revision": {
-                                    "externalDocs": {
-                                      "url": ""
-                                    },
-                                    "title": "Revision",
-                                    "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
-                                    "type": "object",
-                                    "properties": {
-                                      "revision": {
-                                        "example": 1,
-                                        "type": "integer",
-                                        "format": "int32"
-                                      },
-                                      "updateTime": {
-                                        "type": "string",
-                                        "format": "date-time"
-                                      }
-                                    }
-                                  },
-                                  "sloTimeFrame": {
-                                    "type": "string",
-                                    "enum": [
-                                      "SLO_TIME_FRAME_UNSPECIFIED",
-                                      "SLO_TIME_FRAME_7_DAYS",
-                                      "SLO_TIME_FRAME_14_DAYS",
-                                      "SLO_TIME_FRAME_21_DAYS",
-                                      "SLO_TIME_FRAME_28_DAYS"
-                                    ]
-                                  },
-                                  "targetThresholdPercentage": {
-                                    "example": 99.999,
-                                    "type": "number",
-                                    "format": "float"
-                                  },
-                                  "type": {
-                                    "example": "request",
-                                    "type": "string"
-                                  },
-                                  "updateTime": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  }
-                                },
-                                "required": [
-                                  "name",
-                                  "targetThresholdPercentage",
-                                  "window",
-                                  "sli"
-                                ],
-                                "additionalProperties": false
-                              },
-                              {
-                                "externalDocs": {
-                                  "url": ""
-                                },
-                                "title": "Slo",
-                                "description": "Definition of an SLO",
-                                "type": "object",
-                                "properties": {
-                                  "createTime": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  },
-                                  "creator": {
-                                    "example": "test@domain.com",
-                                    "type": "string"
-                                  },
-                                  "description": {
-                                    "example": "A brief description of my SLO",
-                                    "type": "string"
-                                  },
-                                  "grouping": {
-                                    "externalDocs": {
-                                      "url": ""
-                                    },
-                                    "title": "Grouping",
-                                    "description": "Definition of the SLO grouping fields",
-                                    "type": "object",
-                                    "properties": {
-                                      "labels": {
-                                        "type": "array",
-                                        "items": {
-                                          "type": "string"
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "id": {
-                                    "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
-                                    "type": "string"
-                                  },
-                                  "labels": {
-                                    "type": "object",
-                                    "additionalProperties": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "name": {
-                                    "example": "Example Slo Name",
-                                    "type": "string"
-                                  },
-                                  "revision": {
-                                    "externalDocs": {
-                                      "url": ""
-                                    },
-                                    "title": "Revision",
-                                    "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
-                                    "type": "object",
-                                    "properties": {
-                                      "revision": {
-                                        "example": 1,
-                                        "type": "integer",
-                                        "format": "int32"
-                                      },
-                                      "updateTime": {
-                                        "type": "string",
-                                        "format": "date-time"
-                                      }
-                                    }
-                                  },
-                                  "sloTimeFrame": {
-                                    "type": "string",
-                                    "enum": [
-                                      "SLO_TIME_FRAME_UNSPECIFIED",
-                                      "SLO_TIME_FRAME_7_DAYS",
-                                      "SLO_TIME_FRAME_14_DAYS",
-                                      "SLO_TIME_FRAME_21_DAYS",
-                                      "SLO_TIME_FRAME_28_DAYS"
-                                    ]
-                                  },
-                                  "targetThresholdPercentage": {
-                                    "example": 99.999,
-                                    "type": "number",
-                                    "format": "float"
-                                  },
-                                  "type": {
-                                    "example": "request",
-                                    "type": "string"
-                                  },
-                                  "updateTime": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  },
-                                  "windowBasedMetricSli": {
-                                    "externalDocs": {
-                                      "url": ""
-                                    },
-                                    "title": "WindowBasedMetricSli",
-                                    "description": "Definition of a window-based SLI based on metrics",
-                                    "type": "object",
-                                    "properties": {
-                                      "comparisonOperator": {
-                                        "type": "string",
-                                        "enum": [
-                                          "COMPARISON_OPERATOR_UNSPECIFIED",
-                                          "COMPARISON_OPERATOR_GREATER_THAN",
-                                          "COMPARISON_OPERATOR_GREATER_THAN_OR_EQUALS",
-                                          "COMPARISON_OPERATOR_LESS_THAN",
-                                          "COMPARISON_OPERATOR_LESS_THAN_OR_EQUALS"
-                                        ]
-                                      },
-                                      "missingDataStrategy": {
-                                        "type": "string",
-                                        "enum": [
-                                          "MISSING_DATA_STRATEGY_UNCOUNTED",
-                                          "MISSING_DATA_STRATEGY_GOOD",
-                                          "MISSING_DATA_STRATEGY_BAD"
-                                        ]
-                                      },
-                                      "query": {
-                                        "externalDocs": {
-                                          "url": ""
-                                        },
-                                        "title": "Metric",
-                                        "description": "Definition of a metric used in SLOs",
-                                        "type": "object",
-                                        "properties": {
-                                          "query": {
-                                            "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))",
-                                            "type": "string"
-                                          }
-                                        },
-                                        "required": [
-                                          "query"
-                                        ]
-                                      },
-                                      "threshold": {
-                                        "example": 0.95,
-                                        "type": "number",
-                                        "format": "float"
-                                      },
-                                      "window": {
-                                        "type": "string",
-                                        "enum": [
-                                          "WINDOW_SLO_WINDOW_UNSPECIFIED",
-                                          "WINDOW_SLO_WINDOW_1_MINUTE",
-                                          "WINDOW_SLO_WINDOW_5_MINUTES"
-                                        ]
-                                      }
-                                    },
-                                    "required": [
-                                      "query",
-                                      "window",
-                                      "comparisonOperator",
-                                      "threshold"
-                                    ]
-                                  }
-                                },
-                                "required": [
-                                  "name",
-                                  "targetThresholdPercentage",
-                                  "window",
-                                  "sli"
-                                ],
-                                "additionalProperties": false
-                              }
-                            ]
-                          }
-                        },
-                        "required": [
-                          "slo"
-                        ],
-                        "additionalProperties": false
-                      }
-                    },
-                    "required": [
-                      "request"
-                    ],
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/SloExecutionRequestReplaceSloRequest"
                   },
                   {
-                    "externalDocs": {
-                      "url": ""
-                    },
-                    "title": "SloExecutionRequest",
-                    "description": "Request for executing an SLO operation.",
-                    "type": "object",
-                    "properties": {
-                      "replaceSloRequest": {
-                        "externalDocs": {
-                          "url": ""
-                        },
-                        "title": "ReplaceSloRequest",
-                        "description": "Request to replace an existing SLO.",
-                        "type": "object",
-                        "properties": {
-                          "silenceDataValidations": {
-                            "deprecated": true,
-                            "type": "boolean"
-                          },
-                          "slo": {
-                            "oneOf": [
-                              {
-                                "externalDocs": {
-                                  "url": ""
-                                },
-                                "title": "Slo",
-                                "description": "Definition of an SLO",
-                                "type": "object",
-                                "properties": {
-                                  "createTime": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  },
-                                  "creator": {
-                                    "example": "test@domain.com",
-                                    "type": "string"
-                                  },
-                                  "description": {
-                                    "example": "A brief description of my SLO",
-                                    "type": "string"
-                                  },
-                                  "grouping": {
-                                    "externalDocs": {
-                                      "url": ""
-                                    },
-                                    "title": "Grouping",
-                                    "description": "Definition of the SLO grouping fields",
-                                    "type": "object",
-                                    "properties": {
-                                      "labels": {
-                                        "type": "array",
-                                        "items": {
-                                          "type": "string"
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "id": {
-                                    "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
-                                    "type": "string"
-                                  },
-                                  "labels": {
-                                    "type": "object",
-                                    "additionalProperties": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "name": {
-                                    "example": "Example Slo Name",
-                                    "type": "string"
-                                  },
-                                  "requestBasedMetricSli": {
-                                    "externalDocs": {
-                                      "url": ""
-                                    },
-                                    "title": "RequestBasedMetricSli",
-                                    "description": "Definition of a request-based SLI based on metrics",
-                                    "type": "object",
-                                    "properties": {
-                                      "goodEvents": {
-                                        "externalDocs": {
-                                          "url": ""
-                                        },
-                                        "title": "Metric",
-                                        "description": "Definition of a metric used in SLOs",
-                                        "type": "object",
-                                        "properties": {
-                                          "query": {
-                                            "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))",
-                                            "type": "string"
-                                          }
-                                        },
-                                        "required": [
-                                          "query"
-                                        ]
-                                      },
-                                      "totalEvents": {
-                                        "externalDocs": {
-                                          "url": ""
-                                        },
-                                        "title": "Metric",
-                                        "description": "Definition of a metric used in SLOs",
-                                        "type": "object",
-                                        "properties": {
-                                          "query": {
-                                            "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))",
-                                            "type": "string"
-                                          }
-                                        },
-                                        "required": [
-                                          "query"
-                                        ]
-                                      }
-                                    },
-                                    "required": [
-                                      "goodEvents",
-                                      "totalEvents"
-                                    ]
-                                  },
-                                  "revision": {
-                                    "externalDocs": {
-                                      "url": ""
-                                    },
-                                    "title": "Revision",
-                                    "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
-                                    "type": "object",
-                                    "properties": {
-                                      "revision": {
-                                        "example": 1,
-                                        "type": "integer",
-                                        "format": "int32"
-                                      },
-                                      "updateTime": {
-                                        "type": "string",
-                                        "format": "date-time"
-                                      }
-                                    }
-                                  },
-                                  "sloTimeFrame": {
-                                    "type": "string",
-                                    "enum": [
-                                      "SLO_TIME_FRAME_UNSPECIFIED",
-                                      "SLO_TIME_FRAME_7_DAYS",
-                                      "SLO_TIME_FRAME_14_DAYS",
-                                      "SLO_TIME_FRAME_21_DAYS",
-                                      "SLO_TIME_FRAME_28_DAYS"
-                                    ]
-                                  },
-                                  "targetThresholdPercentage": {
-                                    "example": 99.999,
-                                    "type": "number",
-                                    "format": "float"
-                                  },
-                                  "type": {
-                                    "example": "request",
-                                    "type": "string"
-                                  },
-                                  "updateTime": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  }
-                                },
-                                "required": [
-                                  "name",
-                                  "targetThresholdPercentage",
-                                  "window",
-                                  "sli"
-                                ],
-                                "additionalProperties": false
-                              },
-                              {
-                                "externalDocs": {
-                                  "url": ""
-                                },
-                                "title": "Slo",
-                                "description": "Definition of an SLO",
-                                "type": "object",
-                                "properties": {
-                                  "createTime": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  },
-                                  "creator": {
-                                    "example": "test@domain.com",
-                                    "type": "string"
-                                  },
-                                  "description": {
-                                    "example": "A brief description of my SLO",
-                                    "type": "string"
-                                  },
-                                  "grouping": {
-                                    "externalDocs": {
-                                      "url": ""
-                                    },
-                                    "title": "Grouping",
-                                    "description": "Definition of the SLO grouping fields",
-                                    "type": "object",
-                                    "properties": {
-                                      "labels": {
-                                        "type": "array",
-                                        "items": {
-                                          "type": "string"
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "id": {
-                                    "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
-                                    "type": "string"
-                                  },
-                                  "labels": {
-                                    "type": "object",
-                                    "additionalProperties": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "name": {
-                                    "example": "Example Slo Name",
-                                    "type": "string"
-                                  },
-                                  "revision": {
-                                    "externalDocs": {
-                                      "url": ""
-                                    },
-                                    "title": "Revision",
-                                    "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
-                                    "type": "object",
-                                    "properties": {
-                                      "revision": {
-                                        "example": 1,
-                                        "type": "integer",
-                                        "format": "int32"
-                                      },
-                                      "updateTime": {
-                                        "type": "string",
-                                        "format": "date-time"
-                                      }
-                                    }
-                                  },
-                                  "sloTimeFrame": {
-                                    "type": "string",
-                                    "enum": [
-                                      "SLO_TIME_FRAME_UNSPECIFIED",
-                                      "SLO_TIME_FRAME_7_DAYS",
-                                      "SLO_TIME_FRAME_14_DAYS",
-                                      "SLO_TIME_FRAME_21_DAYS",
-                                      "SLO_TIME_FRAME_28_DAYS"
-                                    ]
-                                  },
-                                  "targetThresholdPercentage": {
-                                    "example": 99.999,
-                                    "type": "number",
-                                    "format": "float"
-                                  },
-                                  "type": {
-                                    "example": "request",
-                                    "type": "string"
-                                  },
-                                  "updateTime": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  },
-                                  "windowBasedMetricSli": {
-                                    "externalDocs": {
-                                      "url": ""
-                                    },
-                                    "title": "WindowBasedMetricSli",
-                                    "description": "Definition of a window-based SLI based on metrics",
-                                    "type": "object",
-                                    "properties": {
-                                      "comparisonOperator": {
-                                        "type": "string",
-                                        "enum": [
-                                          "COMPARISON_OPERATOR_UNSPECIFIED",
-                                          "COMPARISON_OPERATOR_GREATER_THAN",
-                                          "COMPARISON_OPERATOR_GREATER_THAN_OR_EQUALS",
-                                          "COMPARISON_OPERATOR_LESS_THAN",
-                                          "COMPARISON_OPERATOR_LESS_THAN_OR_EQUALS"
-                                        ]
-                                      },
-                                      "missingDataStrategy": {
-                                        "type": "string",
-                                        "enum": [
-                                          "MISSING_DATA_STRATEGY_UNCOUNTED",
-                                          "MISSING_DATA_STRATEGY_GOOD",
-                                          "MISSING_DATA_STRATEGY_BAD"
-                                        ]
-                                      },
-                                      "query": {
-                                        "externalDocs": {
-                                          "url": ""
-                                        },
-                                        "title": "Metric",
-                                        "description": "Definition of a metric used in SLOs",
-                                        "type": "object",
-                                        "properties": {
-                                          "query": {
-                                            "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))",
-                                            "type": "string"
-                                          }
-                                        },
-                                        "required": [
-                                          "query"
-                                        ]
-                                      },
-                                      "threshold": {
-                                        "example": 0.95,
-                                        "type": "number",
-                                        "format": "float"
-                                      },
-                                      "window": {
-                                        "type": "string",
-                                        "enum": [
-                                          "WINDOW_SLO_WINDOW_UNSPECIFIED",
-                                          "WINDOW_SLO_WINDOW_1_MINUTE",
-                                          "WINDOW_SLO_WINDOW_5_MINUTES"
-                                        ]
-                                      }
-                                    },
-                                    "required": [
-                                      "query",
-                                      "window",
-                                      "comparisonOperator",
-                                      "threshold"
-                                    ]
-                                  }
-                                },
-                                "required": [
-                                  "name",
-                                  "targetThresholdPercentage",
-                                  "window",
-                                  "sli"
-                                ],
-                                "additionalProperties": false
-                              }
-                            ]
-                          }
-                        },
-                        "required": [
-                          "slo"
-                        ],
-                        "additionalProperties": false
-                      }
-                    },
-                    "required": [
-                      "request"
-                    ],
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/SloExecutionRequestDeleteSloRequest"
                   },
                   {
-                    "externalDocs": {
-                      "url": ""
-                    },
-                    "title": "SloExecutionRequest",
-                    "description": "Request for executing an SLO operation.",
-                    "type": "object",
-                    "properties": {
-                      "deleteSloRequest": {
-                        "externalDocs": {
-                          "url": ""
-                        },
-                        "title": "DeleteSloRequest",
-                        "description": "Request to delete an existing SLO.",
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "id"
-                        ]
-                      }
-                    },
-                    "required": [
-                      "request"
-                    ],
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/SloExecutionRequestCreateSloRequest"
                   }
                 ]
               }
@@ -1907,6 +785,33 @@
           "DATA_LOSS"
         ]
       },
+      "ColorsByAggregation": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/ColorsByAggregation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByGroupBy": {
+        "type": "object",
+        "properties": {
+          "groupBy": {
+            "$ref": "#/components/schemas/ColorsByGroupBy"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByStack": {
+        "type": "object",
+        "properties": {
+          "stack": {
+            "$ref": "#/components/schemas/ColorsByStack"
+          }
+        },
+        "additionalProperties": false
+      },
       "ComparisonOperator": {
         "type": "string",
         "enum": [
@@ -1915,6 +820,26 @@
           "COMPARISON_OPERATOR_GREATER_THAN_OR_EQUALS",
           "COMPARISON_OPERATOR_LESS_THAN",
           "COMPARISON_OPERATOR_LESS_THAN_OR_EQUALS"
+        ]
+      },
+      "CreateSloRequest": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "CreateSloRequest",
+        "description": "Request to create a new SLO.",
+        "type": "object",
+        "properties": {
+          "silenceDataValidations": {
+            "deprecated": true,
+            "type": "boolean"
+          },
+          "slo": {
+            "$ref": "#/components/schemas/Slo"
+          }
+        },
+        "required": [
+          "slo"
         ]
       },
       "CreateSloResponse": {
@@ -1931,6 +856,22 @@
         },
         "required": [
           "slo"
+        ]
+      },
+      "DeleteSloRequest": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "DeleteSloRequest",
+        "description": "Request to delete an existing SLO.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
         ]
       },
       "DeleteSloResponse": {
@@ -1963,50 +904,56 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "multipleValues": {
-                "$ref": "#/components/schemas/MultipleValues"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "filters": {
-                "$ref": "#/components/schemas/Filters"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
+      },
+      "FilterPathAndValuesFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "FilterPathAndValuesMultipleValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
       },
       "Filters": {
         "externalDocs": {
@@ -2139,6 +1086,26 @@
           "alertsValidationResult"
         ]
       },
+      "ReplaceSloRequest": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "ReplaceSloRequest",
+        "description": "Request to replace an existing SLO.",
+        "type": "object",
+        "properties": {
+          "silenceDataValidations": {
+            "deprecated": true,
+            "type": "boolean"
+          },
+          "slo": {
+            "$ref": "#/components/schemas/Slo"
+          }
+        },
+        "required": [
+          "slo"
+        ]
+      },
       "ReplaceSloResponse": {
         "externalDocs": {
           "url": ""
@@ -2204,146 +1171,15 @@
         },
         "required": [
           "statusCode"
-        ],
-        "additionalProperties": false
+        ]
       },
       "Slo": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Slo",
-            "description": "Definition of an SLO",
-            "type": "object",
-            "properties": {
-              "createTime": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "creator": {
-                "example": "test@domain.com",
-                "type": "string"
-              },
-              "description": {
-                "example": "A brief description of my SLO",
-                "type": "string"
-              },
-              "grouping": {
-                "$ref": "#/components/schemas/v1.Grouping"
-              },
-              "id": {
-                "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
-                "type": "string"
-              },
-              "labels": {
-                "type": "object",
-                "additionalProperties": {
-                  "type": "string"
-                }
-              },
-              "name": {
-                "example": "Example Slo Name",
-                "type": "string"
-              },
-              "requestBasedMetricSli": {
-                "$ref": "#/components/schemas/RequestBasedMetricSli"
-              },
-              "revision": {
-                "$ref": "#/components/schemas/v1.Revision"
-              },
-              "sloTimeFrame": {
-                "$ref": "#/components/schemas/SloTimeFrame"
-              },
-              "targetThresholdPercentage": {
-                "example": 99.999,
-                "type": "number",
-                "format": "float"
-              },
-              "type": {
-                "example": "request",
-                "type": "string"
-              },
-              "updateTime": {
-                "type": "string",
-                "format": "date-time"
-              }
-            },
-            "required": [
-              "name",
-              "targetThresholdPercentage",
-              "window",
-              "sli"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/SloRequestBasedMetricSli"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Slo",
-            "description": "Definition of an SLO",
-            "type": "object",
-            "properties": {
-              "createTime": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "creator": {
-                "example": "test@domain.com",
-                "type": "string"
-              },
-              "description": {
-                "example": "A brief description of my SLO",
-                "type": "string"
-              },
-              "grouping": {
-                "$ref": "#/components/schemas/v1.Grouping"
-              },
-              "id": {
-                "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
-                "type": "string"
-              },
-              "labels": {
-                "type": "object",
-                "additionalProperties": {
-                  "type": "string"
-                }
-              },
-              "name": {
-                "example": "Example Slo Name",
-                "type": "string"
-              },
-              "revision": {
-                "$ref": "#/components/schemas/v1.Revision"
-              },
-              "sloTimeFrame": {
-                "$ref": "#/components/schemas/SloTimeFrame"
-              },
-              "targetThresholdPercentage": {
-                "example": 99.999,
-                "type": "number",
-                "format": "float"
-              },
-              "type": {
-                "example": "request",
-                "type": "string"
-              },
-              "updateTime": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "windowBasedMetricSli": {
-                "$ref": "#/components/schemas/WindowBasedMetricSli"
-              }
-            },
-            "required": [
-              "name",
-              "targetThresholdPercentage",
-              "window",
-              "sli"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/SloWindowBasedMetricSli"
           }
         ]
       },
@@ -2362,54 +1198,218 @@
           "name": {
             "type": "string"
           }
+        }
+      },
+      "SloConstantFilterField": {
+        "type": "string",
+        "enum": [
+          "SLO_CONST_FILTER_FIELD_UNSPECIFIED",
+          "SLO_CONST_FILTER_FIELD_USER_NAME",
+          "SLO_CONST_FILTER_FIELD_SLO_NAME"
+        ]
+      },
+      "SloExecutionRequestCreateSloRequest": {
+        "externalDocs": {
+          "url": ""
         },
+        "title": "SloExecutionRequest",
+        "description": "Request for executing an SLO operation.",
+        "type": "object",
+        "properties": {
+          "createSloRequest": {
+            "$ref": "#/components/schemas/CreateSloRequest"
+          }
+        },
+        "required": [
+          "request"
+        ],
+        "additionalProperties": false
+      },
+      "SloExecutionRequestDeleteSloRequest": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SloExecutionRequest",
+        "description": "Request for executing an SLO operation.",
+        "type": "object",
+        "properties": {
+          "deleteSloRequest": {
+            "$ref": "#/components/schemas/DeleteSloRequest"
+          }
+        },
+        "required": [
+          "request"
+        ],
+        "additionalProperties": false
+      },
+      "SloExecutionRequestReplaceSloRequest": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SloExecutionRequest",
+        "description": "Request for executing an SLO operation.",
+        "type": "object",
+        "properties": {
+          "replaceSloRequest": {
+            "$ref": "#/components/schemas/ReplaceSloRequest"
+          }
+        },
+        "required": [
+          "request"
+        ],
         "additionalProperties": false
       },
       "SloExecutionResponse": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "SloExecutionResponse",
-            "description": "Response for an executed SLO operation.",
-            "type": "object",
-            "properties": {
-              "createSloResponse": {
-                "$ref": "#/components/schemas/CreateSloResponse"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/SloExecutionResponseCreateSloResponse"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "SloExecutionResponse",
-            "description": "Response for an executed SLO operation.",
-            "type": "object",
-            "properties": {
-              "replaceSloResponse": {
-                "$ref": "#/components/schemas/ReplaceSloResponse"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/SloExecutionResponseReplaceSloResponse"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "SloExecutionResponse",
-            "description": "Response for an executed SLO operation.",
-            "type": "object",
-            "properties": {
-              "deleteSloResponse": {
-                "$ref": "#/components/schemas/DeleteSloResponse"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/SloExecutionResponseDeleteSloResponse"
           }
         ]
+      },
+      "SloExecutionResponseCreateSloResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SloExecutionResponse",
+        "description": "Response for an executed SLO operation.",
+        "type": "object",
+        "properties": {
+          "createSloResponse": {
+            "$ref": "#/components/schemas/CreateSloResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SloExecutionResponseDeleteSloResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SloExecutionResponse",
+        "description": "Response for an executed SLO operation.",
+        "type": "object",
+        "properties": {
+          "deleteSloResponse": {
+            "$ref": "#/components/schemas/DeleteSloResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SloExecutionResponseReplaceSloResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SloExecutionResponse",
+        "description": "Response for an executed SLO operation.",
+        "type": "object",
+        "properties": {
+          "replaceSloResponse": {
+            "$ref": "#/components/schemas/ReplaceSloResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SloFilterFieldConstFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SloFilterField",
+        "description": "Field used for filtering SLOs",
+        "type": "object",
+        "properties": {
+          "constFilter": {
+            "$ref": "#/components/schemas/SloConstantFilterField"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SloFilterFieldLabelName": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SloFilterField",
+        "description": "Field used for filtering SLOs",
+        "type": "object",
+        "properties": {
+          "labelName": {
+            "example": "environment",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SloRequestBasedMetricSli": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Slo",
+        "description": "Definition of an SLO",
+        "type": "object",
+        "properties": {
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "creator": {
+            "example": "test@domain.com",
+            "type": "string"
+          },
+          "description": {
+            "example": "A brief description of my SLO",
+            "type": "string"
+          },
+          "grouping": {
+            "$ref": "#/components/schemas/v1.Grouping"
+          },
+          "id": {
+            "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
+            "type": "string"
+          },
+          "labels": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "name": {
+            "example": "Example Slo Name",
+            "type": "string"
+          },
+          "requestBasedMetricSli": {
+            "$ref": "#/components/schemas/RequestBasedMetricSli"
+          },
+          "revision": {
+            "$ref": "#/components/schemas/v1.Revision"
+          },
+          "sloTimeFrame": {
+            "$ref": "#/components/schemas/SloTimeFrame"
+          },
+          "targetThresholdPercentage": {
+            "example": 99.999,
+            "type": "number",
+            "format": "float"
+          },
+          "type": {
+            "example": "request",
+            "type": "string"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "name",
+          "targetThresholdPercentage",
+          "window",
+          "sli"
+        ],
+        "additionalProperties": false
       },
       "SloTimeFrame": {
         "type": "string",
@@ -2420,6 +1420,74 @@
           "SLO_TIME_FRAME_21_DAYS",
           "SLO_TIME_FRAME_28_DAYS"
         ]
+      },
+      "SloWindowBasedMetricSli": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Slo",
+        "description": "Definition of an SLO",
+        "type": "object",
+        "properties": {
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "creator": {
+            "example": "test@domain.com",
+            "type": "string"
+          },
+          "description": {
+            "example": "A brief description of my SLO",
+            "type": "string"
+          },
+          "grouping": {
+            "$ref": "#/components/schemas/v1.Grouping"
+          },
+          "id": {
+            "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
+            "type": "string"
+          },
+          "labels": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "name": {
+            "example": "Example Slo Name",
+            "type": "string"
+          },
+          "revision": {
+            "$ref": "#/components/schemas/v1.Revision"
+          },
+          "sloTimeFrame": {
+            "$ref": "#/components/schemas/SloTimeFrame"
+          },
+          "targetThresholdPercentage": {
+            "example": 99.999,
+            "type": "number",
+            "format": "float"
+          },
+          "type": {
+            "example": "request",
+            "type": "string"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "windowBasedMetricSli": {
+            "$ref": "#/components/schemas/WindowBasedMetricSli"
+          }
+        },
+        "required": [
+          "name",
+          "targetThresholdPercentage",
+          "window",
+          "sli"
+        ],
+        "additionalProperties": false
       },
       "WindowBasedMetricSli": {
         "externalDocs": {
@@ -2461,6 +1529,24 @@
           "WINDOW_SLO_WINDOW_1_MINUTE",
           "WINDOW_SLO_WINDOW_5_MINUTES"
         ]
+      },
+      "YAxisViewByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/YAxisViewByCategory"
+          }
+        },
+        "additionalProperties": false
+      },
+      "YAxisViewByValue": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/YAxisViewByValue"
+          }
+        },
+        "additionalProperties": false
       },
       "common.Group": {
         "type": "object",

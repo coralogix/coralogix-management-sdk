@@ -19,8 +19,8 @@ var _ MappedNullable = &AlertEventServiceGetAlertEventsStatsOrderBysParameterInn
 
 // AlertEventServiceGetAlertEventsStatsOrderBysParameterInner struct for AlertEventServiceGetAlertEventsStatsOrderBysParameterInner
 type AlertEventServiceGetAlertEventsStatsOrderBysParameterInner struct {
-	Direction *string `json:"direction,omitempty"`
-	FieldName *string `json:"fieldName,omitempty"`
+	Direction *OrderByAlertEventDirection `json:"direction,omitempty"`
+	FieldName *OrderByAlertEventFields `json:"fieldName,omitempty"`
 }
 
 // NewAlertEventServiceGetAlertEventsStatsOrderBysParameterInner instantiates a new AlertEventServiceGetAlertEventsStatsOrderBysParameterInner object
@@ -41,9 +41,9 @@ func NewAlertEventServiceGetAlertEventsStatsOrderBysParameterInnerWithDefaults()
 }
 
 // GetDirection returns the Direction field value if set, zero value otherwise.
-func (o *AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) GetDirection() string {
+func (o *AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) GetDirection() OrderByAlertEventDirection {
 	if o == nil || IsNil(o.Direction) {
-		var ret string
+		var ret OrderByAlertEventDirection
 		return ret
 	}
 	return *o.Direction
@@ -51,7 +51,7 @@ func (o *AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) GetDirectio
 
 // GetDirectionOk returns a tuple with the Direction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) GetDirectionOk() (*string, bool) {
+func (o *AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) GetDirectionOk() (*OrderByAlertEventDirection, bool) {
 	if o == nil || IsNil(o.Direction) {
 		return nil, false
 	}
@@ -67,15 +67,15 @@ func (o *AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) HasDirectio
 	return false
 }
 
-// SetDirection gets a reference to the given string and assigns it to the Direction field.
-func (o *AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) SetDirection(v string) {
+// SetDirection gets a reference to the given OrderByAlertEventDirection and assigns it to the Direction field.
+func (o *AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) SetDirection(v OrderByAlertEventDirection) {
 	o.Direction = &v
 }
 
 // GetFieldName returns the FieldName field value if set, zero value otherwise.
-func (o *AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) GetFieldName() string {
+func (o *AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) GetFieldName() OrderByAlertEventFields {
 	if o == nil || IsNil(o.FieldName) {
-		var ret string
+		var ret OrderByAlertEventFields
 		return ret
 	}
 	return *o.FieldName
@@ -83,7 +83,7 @@ func (o *AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) GetFieldNam
 
 // GetFieldNameOk returns a tuple with the FieldName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) GetFieldNameOk() (*string, bool) {
+func (o *AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) GetFieldNameOk() (*OrderByAlertEventFields, bool) {
 	if o == nil || IsNil(o.FieldName) {
 		return nil, false
 	}
@@ -99,8 +99,8 @@ func (o *AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) HasFieldNam
 	return false
 }
 
-// SetFieldName gets a reference to the given string and assigns it to the FieldName field.
-func (o *AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) SetFieldName(v string) {
+// SetFieldName gets a reference to the given OrderByAlertEventFields and assigns it to the FieldName field.
+func (o *AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) SetFieldName(v OrderByAlertEventFields) {
 	o.FieldName = &v
 }
 

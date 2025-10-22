@@ -359,6 +359,24 @@ paths:
             --data '{"isActive":true,"newName":"my_new_name","permissions":{"permissions":["string"]},"presets":{"presets":["string"]}}'
 components:
   schemas:
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
     CreateApiKeyRequest.KeyPermissions:
       description: This data structure allows to specify loose permissions and permission
         presets for an API key.
@@ -418,8 +436,40 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValues_1"
-      - $ref: "#/components/schemas/FilterPathAndValues_2"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
     Filters:
       description: This data structure represents a filter
       externalDocs:
@@ -528,7 +578,6 @@ components:
       title: Get Api Key Response
       type: object
     KeyInfo:
-      additionalProperties: false
       description: This data structure represents the information associated with
         an API key.
       example:
@@ -625,9 +674,30 @@ components:
       type: object
     Owner:
       oneOf:
-      - $ref: "#/components/schemas/Owner_oneOf"
-      - $ref: "#/components/schemas/Owner_oneOf_1"
-      - $ref: "#/components/schemas/Owner_oneOf_2"
+      - $ref: "#/components/schemas/OwnerUserId"
+      - $ref: "#/components/schemas/OwnerTeamId"
+      - $ref: "#/components/schemas/OwnerOrganisationId"
+    OwnerOrganisationId:
+      additionalProperties: false
+      properties:
+        organisationId:
+          type: string
+      type: object
+    OwnerTeamId:
+      additionalProperties: false
+      properties:
+        teamId:
+          format: int64
+          type: integer
+      type: object
+    OwnerUserId:
+      additionalProperties: false
+      example:
+        userId: userId
+      properties:
+        userId:
+          type: string
+      type: object
     PresetInfo:
       description: This data structure represents a preset set of permissions on an
         API key.
@@ -683,6 +753,18 @@ components:
       title: Permissions
       type: object
     UpdateApiKeyResponse:
+      type: object
+    YAxisViewByCategory:
+      additionalProperties: false
+      properties:
+        category:
+          $ref: "#/components/schemas/YAxisViewByCategory"
+      type: object
+    YAxisViewByValue:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: "#/components/schemas/YAxisViewByValue"
       type: object
     common.Group:
       properties:
@@ -744,59 +826,6 @@ components:
       required:
       - keyId
       title: Update Api Key Request
-      type: object
-    FilterPathAndValues_1:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValues_2:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    Owner_oneOf:
-      additionalProperties: false
-      example:
-        userId: userId
-      properties:
-        userId:
-          type: string
-      type: object
-    Owner_oneOf_1:
-      additionalProperties: false
-      properties:
-        teamId:
-          format: int64
-          type: integer
-      type: object
-    Owner_oneOf_2:
-      additionalProperties: false
-      properties:
-        organisationId:
-          type: string
       type: object
   securitySchemes:
     apiKeyAuth:

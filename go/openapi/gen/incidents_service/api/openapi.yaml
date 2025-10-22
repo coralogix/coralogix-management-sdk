@@ -1342,24 +1342,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+            unassign: "{}"
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -1404,24 +1398,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+            unassign: "{}"
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
         - displayLabels:
@@ -1453,24 +1441,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+            unassign: "{}"
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -1517,24 +1499,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+            unassign: "{}"
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
         - displayLabels:
@@ -1566,24 +1542,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+            unassign: "{}"
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -1674,24 +1644,18 @@ components:
             state: INCIDENT_STATE_UNSPECIFIED
             closedAt: 2024-01-01T00:00:00Z
             events:
-            - snoozeIndicator:
-                durationMinutes: 0
-                startTime: 2000-01-23T04:56:07.000+00:00
-                userId: userId
+            - operationalEvent:
+                systemName: systemName
               id: incident_event_id
-              administrativeEvent:
-                userId: userId
               originatorType: ORIGINATOR_TYPE_UNSPECIFIED
               incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            - snoozeIndicator:
-                durationMinutes: 0
-                startTime: 2000-01-23T04:56:07.000+00:00
-                userId: userId
+              unassign: "{}"
+            - operationalEvent:
+                systemName: systemName
               id: incident_event_id
-              administrativeEvent:
-                userId: userId
               originatorType: ORIGINATOR_TYPE_UNSPECIFIED
               incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+              unassign: "{}"
             isMuted: false
             status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -1746,24 +1710,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+            unassign: "{}"
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
         - displayLabels:
@@ -1795,24 +1753,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+            unassign: "{}"
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -1825,6 +1777,24 @@ components:
       required:
       - incidents
       title: Close incidents response
+      type: object
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
       type: object
     ContextualLabelValueWithCount:
       example:
@@ -1924,8 +1894,40 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValues_1"
-      - $ref: "#/components/schemas/FilterPathAndValues_2"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
     Filters:
       description: This data structure represents a filter
       externalDocs:
@@ -2031,24 +2033,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+            unassign: "{}"
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -2064,24 +2060,18 @@ components:
       description: Response containing all events associated with the requested incident
       example:
         incidentEvents:
-        - snoozeIndicator:
-            durationMinutes: 0
-            startTime: 2000-01-23T04:56:07.000+00:00
-            userId: userId
+        - operationalEvent:
+            systemName: systemName
           id: incident_event_id
-          administrativeEvent:
-            userId: userId
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-        - snoozeIndicator:
-            durationMinutes: 0
-            startTime: 2000-01-23T04:56:07.000+00:00
-            userId: userId
+          unassign: "{}"
+        - operationalEvent:
+            systemName: systemName
           id: incident_event_id
-          administrativeEvent:
-            userId: userId
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          unassign: "{}"
       externalDocs:
         url: ""
       properties:
@@ -2124,24 +2114,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+            unassign: "{}"
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -2153,10 +2137,52 @@ components:
       - incident
       title: Get incident response
       type: object
+    GroupByContextualLabel:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        contextualLabel:
+          description: The contextual label to group by.
+          type: string
+        orderByDirection:
+          $ref: "#/components/schemas/v1.OrderByDirection"
+      required:
+      - field
+      title: Incident group by
+      type: object
+    GroupByIncidentField:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        incidentField:
+          $ref: "#/components/schemas/IncidentFields"
+        orderByDirection:
+          $ref: "#/components/schemas/v1.OrderByDirection"
+      required:
+      - field
+      title: Incident group by
+      type: object
     GroupByValues:
       oneOf:
-      - $ref: "#/components/schemas/GroupByValues_oneOf"
-      - $ref: "#/components/schemas/GroupByValues_oneOf_1"
+      - $ref: "#/components/schemas/GroupByValuesIncidentField"
+      - $ref: "#/components/schemas/GroupByValuesContextualLabels"
+    GroupByValuesContextualLabels:
+      additionalProperties: false
+      properties:
+        contextualLabels:
+          $ref: "#/components/schemas/ContextualLabels"
+      type: object
+    GroupByValuesIncidentField:
+      additionalProperties: false
+      example:
+        incidentField:
+          status: null
+      properties:
+        incidentField:
+          $ref: "#/components/schemas/IncidentFieldOneOf"
+      type: object
     Incident:
       example:
         displayLabels:
@@ -2188,24 +2214,18 @@ components:
         state: INCIDENT_STATE_UNSPECIFIED
         closedAt: 2024-01-01T00:00:00Z
         events:
-        - snoozeIndicator:
-            durationMinutes: 0
-            startTime: 2000-01-23T04:56:07.000+00:00
-            userId: userId
+        - operationalEvent:
+            systemName: systemName
           id: incident_event_id
-          administrativeEvent:
-            userId: userId
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-        - snoozeIndicator:
-            durationMinutes: 0
-            startTime: 2000-01-23T04:56:07.000+00:00
-            userId: userId
+          unassign: "{}"
+        - operationalEvent:
+            systemName: systemName
           id: incident_event_id
-          administrativeEvent:
-            userId: userId
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          unassign: "{}"
         isMuted: false
         status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -2285,9 +2305,9 @@ components:
       example:
         groupBysValue:
         - incidentField:
-            id: id
+            status: null
         - incidentField:
-            id: id
+            status: null
         aggAssignmentsCount:
         - count: 10
           assignedTo:
@@ -2404,22 +2424,72 @@ components:
       type: object
     IncidentEvent:
       oneOf:
-      - $ref: "#/components/schemas/Incident_event"
-      - $ref: "#/components/schemas/Incident_event_1"
-      - $ref: "#/components/schemas/Incident_event_2"
-      - $ref: "#/components/schemas/Incident_event_3"
-      - $ref: "#/components/schemas/Incident_event_4"
-      - $ref: "#/components/schemas/Incident_event_5"
-      - $ref: "#/components/schemas/Incident_event_6"
-      - $ref: "#/components/schemas/Incident_event_7"
-      - $ref: "#/components/schemas/Incident_event_8"
-      - $ref: "#/components/schemas/Incident_event_9"
-      - $ref: "#/components/schemas/Incident_event_10"
-      - $ref: "#/components/schemas/Incident_event_11"
+      - $ref: "#/components/schemas/IncidentEventUnassignOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventCloseAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventCloseOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventAssignmentOperationalEvent"
     IncidentEventAcknowledge:
       properties:
         acknowledgedBy:
           $ref: "#/components/schemas/UserDetails"
+      type: object
+    IncidentEventAcknowledgeAdministrativeEvent:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        acknowledge:
+          $ref: "#/components/schemas/IncidentEventAcknowledge"
+        administrativeEvent:
+          $ref: "#/components/schemas/IncidentEventOriginatorAdministrative"
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          $ref: "#/components/schemas/IncidentEventType"
+        originatorType:
+          $ref: "#/components/schemas/OriginatorType"
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
+    IncidentEventAcknowledgeOperationalEvent:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        acknowledge:
+          $ref: "#/components/schemas/IncidentEventAcknowledge"
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          $ref: "#/components/schemas/IncidentEventType"
+        operationalEvent:
+          $ref: "#/components/schemas/IncidentEventOriginatorOperational"
+        originatorType:
+          $ref: "#/components/schemas/OriginatorType"
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
       type: object
     IncidentEventAlertType:
       enum:
@@ -2441,23 +2511,120 @@ components:
           $ref: "#/components/schemas/Assignment"
       title: Incident event assignment details
       type: object
+    IncidentEventAssignmentAdministrativeEvent:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        administrativeEvent:
+          $ref: "#/components/schemas/IncidentEventOriginatorAdministrative"
+        assignment:
+          $ref: "#/components/schemas/IncidentEventAssign"
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          $ref: "#/components/schemas/IncidentEventType"
+        originatorType:
+          $ref: "#/components/schemas/OriginatorType"
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
+    IncidentEventAssignmentOperationalEvent:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        assignment:
+          $ref: "#/components/schemas/IncidentEventAssign"
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          $ref: "#/components/schemas/IncidentEventType"
+        operationalEvent:
+          $ref: "#/components/schemas/IncidentEventOriginatorOperational"
+        originatorType:
+          $ref: "#/components/schemas/OriginatorType"
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
     IncidentEventClose:
       properties:
         closedBy:
           $ref: "#/components/schemas/UserDetails"
       type: object
+    IncidentEventCloseAdministrativeEvent:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        administrativeEvent:
+          $ref: "#/components/schemas/IncidentEventOriginatorAdministrative"
+        close:
+          $ref: "#/components/schemas/IncidentEventClose"
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          $ref: "#/components/schemas/IncidentEventType"
+        originatorType:
+          $ref: "#/components/schemas/OriginatorType"
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
+    IncidentEventCloseOperationalEvent:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        close:
+          $ref: "#/components/schemas/IncidentEventClose"
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          $ref: "#/components/schemas/IncidentEventType"
+        operationalEvent:
+          $ref: "#/components/schemas/IncidentEventOriginatorOperational"
+        originatorType:
+          $ref: "#/components/schemas/OriginatorType"
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
     IncidentEventExtended:
       example:
         incidentEvent:
-          snoozeIndicator:
-            durationMinutes: 0
-            startTime: 2000-01-23T04:56:07.000+00:00
-            userId: userId
+          operationalEvent:
+            systemName: systemName
           id: incident_event_id
-          administrativeEvent:
-            userId: userId
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          unassign: "{}"
         cxEventKey: cxEventKey
         incidentEventExtendedMetadata:
           alertType: INCIDENT_EVENT_ALERT_TYPE_STANDARD_OR_UNSPECIFIED
@@ -2543,23 +2710,23 @@ components:
         isMuted:
           type: boolean
       type: object
+    IncidentEventOrderByFieldType:
+      enum:
+      - INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED
+      type: string
     IncidentEventOriginatorAdministrative:
-      example:
-        userId: userId
       properties:
         userId:
           type: string
       type: object
     IncidentEventOriginatorOperational:
+      example:
+        systemName: systemName
       properties:
         systemName:
           type: string
       type: object
     IncidentEventSnoozeIndicator:
-      example:
-        durationMinutes: 0
-        startTime: 2000-01-23T04:56:07.000+00:00
-        userId: userId
       externalDocs:
         url: ""
       properties:
@@ -2573,6 +2740,56 @@ components:
           type: string
       title: Incident event snooze indicator
       type: object
+    IncidentEventSnoozeIndicatorAdministrativeEvent:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        administrativeEvent:
+          $ref: "#/components/schemas/IncidentEventOriginatorAdministrative"
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          $ref: "#/components/schemas/IncidentEventType"
+        originatorType:
+          $ref: "#/components/schemas/OriginatorType"
+        snoozeIndicator:
+          $ref: "#/components/schemas/IncidentEventSnoozeIndicator"
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
+    IncidentEventSnoozeIndicatorOperationalEvent:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          $ref: "#/components/schemas/IncidentEventType"
+        operationalEvent:
+          $ref: "#/components/schemas/IncidentEventOriginatorOperational"
+        originatorType:
+          $ref: "#/components/schemas/OriginatorType"
+        snoozeIndicator:
+          $ref: "#/components/schemas/IncidentEventSnoozeIndicator"
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
     IncidentEventType:
       enum:
       - INCIDENT_EVENT_TYPE_UNSPECIFIED
@@ -2585,6 +2802,63 @@ components:
       - INCIDENT_EVENT_TYPE_ACKNOWLEDGE
       type: string
     IncidentEventUnassign:
+      type: object
+    IncidentEventUnassignAdministrativeEvent:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        administrativeEvent:
+          $ref: "#/components/schemas/IncidentEventOriginatorAdministrative"
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          $ref: "#/components/schemas/IncidentEventType"
+        originatorType:
+          $ref: "#/components/schemas/OriginatorType"
+        unassign:
+          type: object
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
+    IncidentEventUnassignOperationalEvent:
+      additionalProperties: false
+      example:
+        operationalEvent:
+          systemName: systemName
+        id: incident_event_id
+        originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+        incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+        unassign: "{}"
+      externalDocs:
+        url: ""
+      properties:
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          $ref: "#/components/schemas/IncidentEventType"
+        operationalEvent:
+          $ref: "#/components/schemas/IncidentEventOriginatorOperational"
+        originatorType:
+          $ref: "#/components/schemas/OriginatorType"
+        unassign:
+          type: object
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
       type: object
     IncidentEventUpsertState:
       externalDocs:
@@ -2601,19 +2875,155 @@ components:
       - stateType
       title: Incident event upsert state
       type: object
+    IncidentEventUpsertStateAdministrativeEvent:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        administrativeEvent:
+          $ref: "#/components/schemas/IncidentEventOriginatorAdministrative"
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          $ref: "#/components/schemas/IncidentEventType"
+        originatorType:
+          $ref: "#/components/schemas/OriginatorType"
+        upsertState:
+          $ref: "#/components/schemas/IncidentEventUpsertState"
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
+    IncidentEventUpsertStateOperationalEvent:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          $ref: "#/components/schemas/IncidentEventType"
+        operationalEvent:
+          $ref: "#/components/schemas/IncidentEventOriginatorOperational"
+        originatorType:
+          $ref: "#/components/schemas/OriginatorType"
+        upsertState:
+          $ref: "#/components/schemas/IncidentEventUpsertState"
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
     IncidentFieldOneOf:
       oneOf:
-      - $ref: "#/components/schemas/IncidentFieldOneOf_oneOf"
-      - $ref: "#/components/schemas/IncidentFieldOneOf_oneOf_1"
-      - $ref: "#/components/schemas/IncidentFieldOneOf_oneOf_2"
-      - $ref: "#/components/schemas/IncidentFieldOneOf_oneOf_3"
-      - $ref: "#/components/schemas/IncidentFieldOneOf_oneOf_4"
-      - $ref: "#/components/schemas/IncidentFieldOneOf_oneOf_5"
-      - $ref: "#/components/schemas/IncidentFieldOneOf_oneOf_6"
-      - $ref: "#/components/schemas/IncidentFieldOneOf_oneOf_7"
-      - $ref: "#/components/schemas/IncidentFieldOneOf_oneOf_8"
-      - $ref: "#/components/schemas/IncidentFieldOneOf_oneOf_9"
-      - $ref: "#/components/schemas/IncidentFieldOneOf_oneOf_10"
+      - $ref: "#/components/schemas/IncidentFieldOneOfStatus"
+      - $ref: "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
+      - $ref: "#/components/schemas/IncidentFieldOneOfApplicationName"
+      - $ref: "#/components/schemas/IncidentFieldOneOfDuration"
+      - $ref: "#/components/schemas/IncidentFieldOneOfClosedAt"
+      - $ref: "#/components/schemas/IncidentFieldOneOfState"
+      - $ref: "#/components/schemas/IncidentFieldOneOfSubsystemName"
+      - $ref: "#/components/schemas/IncidentFieldOneOfId"
+      - $ref: "#/components/schemas/IncidentFieldOneOfSeverity"
+      - $ref: "#/components/schemas/IncidentFieldOneOfName"
+      - $ref: "#/components/schemas/IncidentFieldOneOfCreatedAt"
+    IncidentFieldOneOfApplicationName:
+      additionalProperties: false
+      properties:
+        applicationName:
+          type: string
+      type: object
+    IncidentFieldOneOfClosedAt:
+      additionalProperties: false
+      properties:
+        closedAt:
+          format: date-time
+          type: string
+      type: object
+    IncidentFieldOneOfCreatedAt:
+      additionalProperties: false
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+      type: object
+    IncidentFieldOneOfDuration:
+      additionalProperties: false
+      properties:
+        duration:
+          type: string
+      type: object
+    IncidentFieldOneOfId:
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+      type: object
+    IncidentFieldOneOfLastStateUpdateTime:
+      additionalProperties: false
+      properties:
+        lastStateUpdateTime:
+          format: date-time
+          type: string
+      type: object
+    IncidentFieldOneOfName:
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+      type: object
+    IncidentFieldOneOfSeverity:
+      additionalProperties: false
+      properties:
+        severity:
+          $ref: "#/components/schemas/IncidentSeverity"
+      type: object
+    IncidentFieldOneOfState:
+      additionalProperties: false
+      properties:
+        state:
+          $ref: "#/components/schemas/IncidentState"
+      type: object
+    IncidentFieldOneOfStatus:
+      additionalProperties: false
+      example:
+        status: null
+      properties:
+        status:
+          $ref: "#/components/schemas/IncidentStatus"
+      type: object
+    IncidentFieldOneOfSubsystemName:
+      additionalProperties: false
+      properties:
+        subsystemName:
+          type: string
+      type: object
+    IncidentFields:
+      enum:
+      - INCIDENTS_FIELDS_UNSPECIFIED
+      - INCIDENTS_FIELDS_ID
+      - INCIDENTS_FIELDS_SEVERITY
+      - INCIDENTS_FIELDS_NAME
+      - INCIDENTS_FIELDS_CREATED_TIME
+      - INCIDENTS_FIELDS_CLOSED_TIME
+      - INCIDENTS_FIELDS_STATE
+      - INCIDENTS_FIELDS_STATUS
+      - INCIDENTS_FIELDS_LAST_STATE_UPDATE_TIME
+      - INCIDENTS_FIELDS_APPLICATION_NAME
+      - INCIDENTS_FIELDS_SUBSYSTEM_NAME
+      - INCIDENTS_FIELDS_DURATION
+      type: string
     IncidentMetaLabelsCount:
       example:
         metaLabel:
@@ -2883,9 +3293,9 @@ components:
         incidentAggs:
         - groupBysValue:
           - incidentField:
-              id: id
+              status: null
           - incidentField:
-              id: id
+              status: null
           aggAssignmentsCount:
           - count: 10
             assignedTo:
@@ -2926,9 +3336,9 @@ components:
           lastStateUpdateTime: 2000-01-23T04:56:07.000+00:00
         - groupBysValue:
           - incidentField:
-              id: id
+              status: null
           - incidentField:
-              id: id
+              status: null
           aggAssignmentsCount:
           - count: 10
             assignedTo:
@@ -3045,15 +3455,12 @@ components:
           nextPageToken: next_page_token
         items:
         - incidentEvent:
-            snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+            operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           cxEventKey: cxEventKey
           incidentEventExtendedMetadata:
             alertType: INCIDENT_EVENT_ALERT_TYPE_STANDARD_OR_UNSPECIFIED
@@ -3075,15 +3482,12 @@ components:
             incidentStatus: INCIDENT_STATUS_UNSPECIFIED
           cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
         - incidentEvent:
-            snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+            operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           cxEventKey: cxEventKey
           incidentEventExtendedMetadata:
             alertType: INCIDENT_EVENT_ALERT_TYPE_STANDARD_OR_UNSPECIFIED
@@ -3173,24 +3577,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+            unassign: "{}"
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
         - displayLabels:
@@ -3222,24 +3620,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+            unassign: "{}"
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -3264,6 +3656,34 @@ components:
           items:
             type: string
           type: array
+      type: object
+    OrderByContextualLabel:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        contextualLabel:
+          type: string
+        direction:
+          $ref: "#/components/schemas/v1.OrderByDirection"
+      required:
+      - direction
+      - field
+      title: Incident order by
+      type: object
+    OrderByIncidentField:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        direction:
+          $ref: "#/components/schemas/v1.OrderByDirection"
+        incidentField:
+          $ref: "#/components/schemas/IncidentFields"
+      required:
+      - direction
+      - field
+      title: Incident order by
       type: object
     OriginatorType:
       enum:
@@ -3304,24 +3724,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+            unassign: "{}"
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -3366,24 +3780,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+            unassign: "{}"
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
         - displayLabels:
@@ -3415,24 +3823,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+            unassign: "{}"
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -3479,24 +3881,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+            unassign: "{}"
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
         - displayLabels:
@@ -3528,24 +3924,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+            unassign: "{}"
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -3583,6 +3973,18 @@ components:
       - userId
       title: User details
       type: object
+    YAxisViewByCategory:
+      additionalProperties: false
+      properties:
+        category:
+          $ref: "#/components/schemas/YAxisViewByCategory"
+      type: object
+    YAxisViewByValue:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: "#/components/schemas/YAxisViewByValue"
+      type: object
     common.Group:
       properties:
         field:
@@ -3619,6 +4021,12 @@ components:
       enum:
       - FILTER_OPERATOR_OR_OR_UNSPECIFIED
       - FILTER_OPERATOR_AND
+      type: string
+    v1.OrderByDirection:
+      enum:
+      - ORDER_BY_DIRECTION_UNSPECIFIED
+      - ORDER_BY_DIRECTION_ASC
+      - ORDER_BY_DIRECTION_DESC
       type: string
     v1.PaginationResponse:
       description: Pagination information for list responses
@@ -3697,23 +4105,11 @@ components:
             $ref: "#/components/schemas/Incident_meta_label"
           type: array
         metaLabelsOp:
-          description: The operator for the meta labels filter
-          enum:
-          - FILTER_OPERATOR_OR_OR_UNSPECIFIED
-          - FILTER_OPERATOR_AND
-          type: string
+          $ref: "#/components/schemas/v1.FilterOperator"
         searchQuery: {}
         severity:
           items:
-            description: Filter by incident severity
-            enum:
-            - INCIDENT_SEVERITY_UNSPECIFIED
-            - INCIDENT_SEVERITY_INFO
-            - INCIDENT_SEVERITY_WARNING
-            - INCIDENT_SEVERITY_ERROR
-            - INCIDENT_SEVERITY_CRITICAL
-            - INCIDENT_SEVERITY_LOW
-            type: string
+            $ref: "#/components/schemas/IncidentSeverity"
           type: array
         startTime:
           deprecated: true
@@ -3723,22 +4119,11 @@ components:
           type: string
         state:
           items:
-            description: Filter by incident state
-            enum:
-            - INCIDENT_STATE_UNSPECIFIED
-            - INCIDENT_STATE_TRIGGERED
-            - INCIDENT_STATE_RESOLVED
-            type: string
+            $ref: "#/components/schemas/IncidentState"
           type: array
         status:
           items:
-            description: Filter by incident status
-            enum:
-            - INCIDENT_STATUS_UNSPECIFIED
-            - INCIDENT_STATUS_TRIGGERED
-            - INCIDENT_STATUS_ACKNOWLEDGED
-            - INCIDENT_STATUS_RESOLVED
-            type: string
+            $ref: "#/components/schemas/IncidentStatus"
           type: array
         subsystemName:
           items:
@@ -3765,117 +4150,14 @@ components:
       - pageSize
       title: Pagination request
       type: object
-    Incident_order_by:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        direction:
-          enum:
-          - ORDER_BY_DIRECTION_UNSPECIFIED
-          - ORDER_BY_DIRECTION_ASC
-          - ORDER_BY_DIRECTION_DESC
-          type: string
-        incidentField:
-          enum:
-          - INCIDENTS_FIELDS_UNSPECIFIED
-          - INCIDENTS_FIELDS_ID
-          - INCIDENTS_FIELDS_SEVERITY
-          - INCIDENTS_FIELDS_NAME
-          - INCIDENTS_FIELDS_CREATED_TIME
-          - INCIDENTS_FIELDS_CLOSED_TIME
-          - INCIDENTS_FIELDS_STATE
-          - INCIDENTS_FIELDS_STATUS
-          - INCIDENTS_FIELDS_LAST_STATE_UPDATE_TIME
-          - INCIDENTS_FIELDS_APPLICATION_NAME
-          - INCIDENTS_FIELDS_SUBSYSTEM_NAME
-          - INCIDENTS_FIELDS_DURATION
-          type: string
-      required:
-      - direction
-      - field
-      title: Incident order by
-      type: object
-    Incident_order_by_1:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        contextualLabel:
-          type: string
-        direction:
-          enum:
-          - ORDER_BY_DIRECTION_UNSPECIFIED
-          - ORDER_BY_DIRECTION_ASC
-          - ORDER_BY_DIRECTION_DESC
-          type: string
-      required:
-      - direction
-      - field
-      title: Incident order by
-      type: object
     IncidentsService_ListIncidents_order_bys_parameter_inner:
       oneOf:
-      - $ref: "#/components/schemas/Incident_order_by"
-      - $ref: "#/components/schemas/Incident_order_by_1"
-    Incident_group_by:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        incidentField:
-          description: The field to group by
-          enum:
-          - INCIDENTS_FIELDS_UNSPECIFIED
-          - INCIDENTS_FIELDS_ID
-          - INCIDENTS_FIELDS_SEVERITY
-          - INCIDENTS_FIELDS_NAME
-          - INCIDENTS_FIELDS_CREATED_TIME
-          - INCIDENTS_FIELDS_CLOSED_TIME
-          - INCIDENTS_FIELDS_STATE
-          - INCIDENTS_FIELDS_STATUS
-          - INCIDENTS_FIELDS_LAST_STATE_UPDATE_TIME
-          - INCIDENTS_FIELDS_APPLICATION_NAME
-          - INCIDENTS_FIELDS_SUBSYSTEM_NAME
-          - INCIDENTS_FIELDS_DURATION
-          example: INCIDENTS_FIELDS_ID
-          type: string
-        orderByDirection:
-          description: The order by direction.
-          enum:
-          - ORDER_BY_DIRECTION_UNSPECIFIED
-          - ORDER_BY_DIRECTION_ASC
-          - ORDER_BY_DIRECTION_DESC
-          example: ORDER_BY_DIRECTION_ASC
-          type: string
-      required:
-      - field
-      title: Incident group by
-      type: object
-    Incident_group_by_1:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        contextualLabel:
-          description: The contextual label to group by.
-          type: string
-        orderByDirection:
-          description: The order by direction.
-          enum:
-          - ORDER_BY_DIRECTION_UNSPECIFIED
-          - ORDER_BY_DIRECTION_ASC
-          - ORDER_BY_DIRECTION_DESC
-          example: ORDER_BY_DIRECTION_ASC
-          type: string
-      required:
-      - field
-      title: Incident group by
-      type: object
+      - $ref: "#/components/schemas/OrderByContextualLabel"
+      - $ref: "#/components/schemas/OrderByIncidentField"
     IncidentsService_ListIncidentAggregations_group_bys_parameter_inner:
       oneOf:
-      - $ref: "#/components/schemas/Incident_group_by"
-      - $ref: "#/components/schemas/Incident_group_by_1"
+      - $ref: "#/components/schemas/GroupByContextualLabel"
+      - $ref: "#/components/schemas/GroupByIncidentField"
     User_details:
       externalDocs:
         url: ""
@@ -3909,25 +4191,11 @@ components:
           type: string
         severity:
           items:
-            description: The severity of the incident
-            enum:
-            - INCIDENT_SEVERITY_UNSPECIFIED
-            - INCIDENT_SEVERITY_INFO
-            - INCIDENT_SEVERITY_WARNING
-            - INCIDENT_SEVERITY_ERROR
-            - INCIDENT_SEVERITY_CRITICAL
-            - INCIDENT_SEVERITY_LOW
-            type: string
+            $ref: "#/components/schemas/IncidentSeverity"
           type: array
         status:
           items:
-            description: The status of the incident
-            enum:
-            - INCIDENT_STATUS_UNSPECIFIED
-            - INCIDENT_STATUS_TRIGGERED
-            - INCIDENT_STATUS_ACKNOWLEDGED
-            - INCIDENT_STATUS_RESOLVED
-            type: string
+            $ref: "#/components/schemas/IncidentStatus"
           type: array
         timestamp: {}
       title: Incident event query filter
@@ -3937,448 +4205,10 @@ components:
         url: ""
       properties:
         direction:
-          description: Sort direction (ascending or descending)
-          enum:
-          - ORDER_BY_DIRECTION_UNSPECIFIED
-          - ORDER_BY_DIRECTION_ASC
-          - ORDER_BY_DIRECTION_DESC
-          example: ORDER_BY_DIRECTION_ASC
-          type: string
+          $ref: "#/components/schemas/v1.OrderByDirection"
         field:
-          description: Field to order by
-          enum:
-          - INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED
-          example: INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED
-          type: string
+          $ref: "#/components/schemas/IncidentEventOrderByFieldType"
       title: List incident events order by request
-      type: object
-    FilterPathAndValues_1:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValues_2:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    GroupByValues_oneOf:
-      additionalProperties: false
-      example:
-        incidentField:
-          id: id
-      properties:
-        incidentField:
-          $ref: "#/components/schemas/IncidentFieldOneOf"
-      type: object
-    GroupByValues_oneOf_1:
-      additionalProperties: false
-      properties:
-        contextualLabels:
-          $ref: "#/components/schemas/ContextualLabels"
-      type: object
-    Incident_event:
-      additionalProperties: false
-      example:
-        snoozeIndicator:
-          durationMinutes: 0
-          startTime: 2000-01-23T04:56:07.000+00:00
-          userId: userId
-        id: incident_event_id
-        administrativeEvent:
-          userId: userId
-        originatorType: ORIGINATOR_TYPE_UNSPECIFIED
-        incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-      externalDocs:
-        url: ""
-      properties:
-        administrativeEvent:
-          $ref: "#/components/schemas/IncidentEventOriginatorAdministrative"
-        id:
-          description: The ID of the incident event
-          example: incident_event_id
-          type: string
-        incidentEventType:
-          $ref: "#/components/schemas/IncidentEventType"
-        originatorType:
-          $ref: "#/components/schemas/OriginatorType"
-        snoozeIndicator:
-          $ref: "#/components/schemas/IncidentEventSnoozeIndicator"
-      required:
-      - id
-      - incidentEventPayload
-      - incidentEventType
-      - originator
-      - originatorType
-      title: Incident event
-      type: object
-    Incident_event_1:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        id:
-          description: The ID of the incident event
-          example: incident_event_id
-          type: string
-        incidentEventType:
-          $ref: "#/components/schemas/IncidentEventType"
-        operationalEvent:
-          $ref: "#/components/schemas/IncidentEventOriginatorOperational"
-        originatorType:
-          $ref: "#/components/schemas/OriginatorType"
-        snoozeIndicator:
-          $ref: "#/components/schemas/IncidentEventSnoozeIndicator"
-      required:
-      - id
-      - incidentEventPayload
-      - incidentEventType
-      - originator
-      - originatorType
-      title: Incident event
-      type: object
-    Incident_event_2:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        administrativeEvent:
-          $ref: "#/components/schemas/IncidentEventOriginatorAdministrative"
-        assignment:
-          $ref: "#/components/schemas/IncidentEventAssign"
-        id:
-          description: The ID of the incident event
-          example: incident_event_id
-          type: string
-        incidentEventType:
-          $ref: "#/components/schemas/IncidentEventType"
-        originatorType:
-          $ref: "#/components/schemas/OriginatorType"
-      required:
-      - id
-      - incidentEventPayload
-      - incidentEventType
-      - originator
-      - originatorType
-      title: Incident event
-      type: object
-    Incident_event_3:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        assignment:
-          $ref: "#/components/schemas/IncidentEventAssign"
-        id:
-          description: The ID of the incident event
-          example: incident_event_id
-          type: string
-        incidentEventType:
-          $ref: "#/components/schemas/IncidentEventType"
-        operationalEvent:
-          $ref: "#/components/schemas/IncidentEventOriginatorOperational"
-        originatorType:
-          $ref: "#/components/schemas/OriginatorType"
-      required:
-      - id
-      - incidentEventPayload
-      - incidentEventType
-      - originator
-      - originatorType
-      title: Incident event
-      type: object
-    Incident_event_4:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        administrativeEvent:
-          $ref: "#/components/schemas/IncidentEventOriginatorAdministrative"
-        id:
-          description: The ID of the incident event
-          example: incident_event_id
-          type: string
-        incidentEventType:
-          $ref: "#/components/schemas/IncidentEventType"
-        originatorType:
-          $ref: "#/components/schemas/OriginatorType"
-        unassign:
-          type: object
-      required:
-      - id
-      - incidentEventPayload
-      - incidentEventType
-      - originator
-      - originatorType
-      title: Incident event
-      type: object
-    Incident_event_5:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        id:
-          description: The ID of the incident event
-          example: incident_event_id
-          type: string
-        incidentEventType:
-          $ref: "#/components/schemas/IncidentEventType"
-        operationalEvent:
-          $ref: "#/components/schemas/IncidentEventOriginatorOperational"
-        originatorType:
-          $ref: "#/components/schemas/OriginatorType"
-        unassign:
-          type: object
-      required:
-      - id
-      - incidentEventPayload
-      - incidentEventType
-      - originator
-      - originatorType
-      title: Incident event
-      type: object
-    Incident_event_6:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        administrativeEvent:
-          $ref: "#/components/schemas/IncidentEventOriginatorAdministrative"
-        id:
-          description: The ID of the incident event
-          example: incident_event_id
-          type: string
-        incidentEventType:
-          $ref: "#/components/schemas/IncidentEventType"
-        originatorType:
-          $ref: "#/components/schemas/OriginatorType"
-        upsertState:
-          $ref: "#/components/schemas/IncidentEventUpsertState"
-      required:
-      - id
-      - incidentEventPayload
-      - incidentEventType
-      - originator
-      - originatorType
-      title: Incident event
-      type: object
-    Incident_event_7:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        id:
-          description: The ID of the incident event
-          example: incident_event_id
-          type: string
-        incidentEventType:
-          $ref: "#/components/schemas/IncidentEventType"
-        operationalEvent:
-          $ref: "#/components/schemas/IncidentEventOriginatorOperational"
-        originatorType:
-          $ref: "#/components/schemas/OriginatorType"
-        upsertState:
-          $ref: "#/components/schemas/IncidentEventUpsertState"
-      required:
-      - id
-      - incidentEventPayload
-      - incidentEventType
-      - originator
-      - originatorType
-      title: Incident event
-      type: object
-    Incident_event_8:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        acknowledge:
-          $ref: "#/components/schemas/IncidentEventAcknowledge"
-        administrativeEvent:
-          $ref: "#/components/schemas/IncidentEventOriginatorAdministrative"
-        id:
-          description: The ID of the incident event
-          example: incident_event_id
-          type: string
-        incidentEventType:
-          $ref: "#/components/schemas/IncidentEventType"
-        originatorType:
-          $ref: "#/components/schemas/OriginatorType"
-      required:
-      - id
-      - incidentEventPayload
-      - incidentEventType
-      - originator
-      - originatorType
-      title: Incident event
-      type: object
-    Incident_event_9:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        acknowledge:
-          $ref: "#/components/schemas/IncidentEventAcknowledge"
-        id:
-          description: The ID of the incident event
-          example: incident_event_id
-          type: string
-        incidentEventType:
-          $ref: "#/components/schemas/IncidentEventType"
-        operationalEvent:
-          $ref: "#/components/schemas/IncidentEventOriginatorOperational"
-        originatorType:
-          $ref: "#/components/schemas/OriginatorType"
-      required:
-      - id
-      - incidentEventPayload
-      - incidentEventType
-      - originator
-      - originatorType
-      title: Incident event
-      type: object
-    Incident_event_10:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        administrativeEvent:
-          $ref: "#/components/schemas/IncidentEventOriginatorAdministrative"
-        close:
-          $ref: "#/components/schemas/IncidentEventClose"
-        id:
-          description: The ID of the incident event
-          example: incident_event_id
-          type: string
-        incidentEventType:
-          $ref: "#/components/schemas/IncidentEventType"
-        originatorType:
-          $ref: "#/components/schemas/OriginatorType"
-      required:
-      - id
-      - incidentEventPayload
-      - incidentEventType
-      - originator
-      - originatorType
-      title: Incident event
-      type: object
-    Incident_event_11:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        close:
-          $ref: "#/components/schemas/IncidentEventClose"
-        id:
-          description: The ID of the incident event
-          example: incident_event_id
-          type: string
-        incidentEventType:
-          $ref: "#/components/schemas/IncidentEventType"
-        operationalEvent:
-          $ref: "#/components/schemas/IncidentEventOriginatorOperational"
-        originatorType:
-          $ref: "#/components/schemas/OriginatorType"
-      required:
-      - id
-      - incidentEventPayload
-      - incidentEventType
-      - originator
-      - originatorType
-      title: Incident event
-      type: object
-    IncidentFieldOneOf_oneOf:
-      additionalProperties: false
-      example:
-        id: id
-      properties:
-        id:
-          type: string
-      type: object
-    IncidentFieldOneOf_oneOf_1:
-      additionalProperties: false
-      properties:
-        severity:
-          $ref: "#/components/schemas/IncidentSeverity"
-      type: object
-    IncidentFieldOneOf_oneOf_2:
-      additionalProperties: false
-      properties:
-        name:
-          type: string
-      type: object
-    IncidentFieldOneOf_oneOf_3:
-      additionalProperties: false
-      properties:
-        createdAt:
-          format: date-time
-          type: string
-      type: object
-    IncidentFieldOneOf_oneOf_4:
-      additionalProperties: false
-      properties:
-        closedAt:
-          format: date-time
-          type: string
-      type: object
-    IncidentFieldOneOf_oneOf_5:
-      additionalProperties: false
-      properties:
-        state:
-          $ref: "#/components/schemas/IncidentState"
-      type: object
-    IncidentFieldOneOf_oneOf_6:
-      additionalProperties: false
-      properties:
-        status:
-          $ref: "#/components/schemas/IncidentStatus"
-      type: object
-    IncidentFieldOneOf_oneOf_7:
-      additionalProperties: false
-      properties:
-        lastStateUpdateTime:
-          format: date-time
-          type: string
-      type: object
-    IncidentFieldOneOf_oneOf_8:
-      additionalProperties: false
-      properties:
-        applicationName:
-          type: string
-      type: object
-    IncidentFieldOneOf_oneOf_9:
-      additionalProperties: false
-      properties:
-        subsystemName:
-          type: string
-      type: object
-    IncidentFieldOneOf_oneOf_10:
-      additionalProperties: false
-      properties:
-        duration:
-          type: string
       type: object
   securitySchemes:
     apiKeyAuth:

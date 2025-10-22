@@ -19,7 +19,7 @@ var _ MappedNullable = &TestIntegrationResultFailure{}
 
 // TestIntegrationResultFailure struct for TestIntegrationResultFailure
 type TestIntegrationResultFailure struct {
-	ErrorMessage *string `json:"errorMessage,omitempty"`
+	Failure *TestIntegrationResultFailure `json:"failure,omitempty"`
 }
 
 // NewTestIntegrationResultFailure instantiates a new TestIntegrationResultFailure object
@@ -39,36 +39,36 @@ func NewTestIntegrationResultFailureWithDefaults() *TestIntegrationResultFailure
 	return &this
 }
 
-// GetErrorMessage returns the ErrorMessage field value if set, zero value otherwise.
-func (o *TestIntegrationResultFailure) GetErrorMessage() string {
-	if o == nil || IsNil(o.ErrorMessage) {
-		var ret string
+// GetFailure returns the Failure field value if set, zero value otherwise.
+func (o *TestIntegrationResultFailure) GetFailure() TestIntegrationResultFailure {
+	if o == nil || IsNil(o.Failure) {
+		var ret TestIntegrationResultFailure
 		return ret
 	}
-	return *o.ErrorMessage
+	return *o.Failure
 }
 
-// GetErrorMessageOk returns a tuple with the ErrorMessage field value if set, nil otherwise
+// GetFailureOk returns a tuple with the Failure field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TestIntegrationResultFailure) GetErrorMessageOk() (*string, bool) {
-	if o == nil || IsNil(o.ErrorMessage) {
+func (o *TestIntegrationResultFailure) GetFailureOk() (*TestIntegrationResultFailure, bool) {
+	if o == nil || IsNil(o.Failure) {
 		return nil, false
 	}
-	return o.ErrorMessage, true
+	return o.Failure, true
 }
 
-// HasErrorMessage returns a boolean if a field has been set.
-func (o *TestIntegrationResultFailure) HasErrorMessage() bool {
-	if o != nil && !IsNil(o.ErrorMessage) {
+// HasFailure returns a boolean if a field has been set.
+func (o *TestIntegrationResultFailure) HasFailure() bool {
+	if o != nil && !IsNil(o.Failure) {
 		return true
 	}
 
 	return false
 }
 
-// SetErrorMessage gets a reference to the given string and assigns it to the ErrorMessage field.
-func (o *TestIntegrationResultFailure) SetErrorMessage(v string) {
-	o.ErrorMessage = &v
+// SetFailure gets a reference to the given TestIntegrationResultFailure and assigns it to the Failure field.
+func (o *TestIntegrationResultFailure) SetFailure(v TestIntegrationResultFailure) {
+	o.Failure = &v
 }
 
 func (o TestIntegrationResultFailure) MarshalJSON() ([]byte, error) {
@@ -81,8 +81,8 @@ func (o TestIntegrationResultFailure) MarshalJSON() ([]byte, error) {
 
 func (o TestIntegrationResultFailure) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ErrorMessage) {
-		toSerialize["errorMessage"] = o.ErrorMessage
+	if !IsNil(o.Failure) {
+		toSerialize["failure"] = o.Failure
 	}
 	return toSerialize, nil
 }

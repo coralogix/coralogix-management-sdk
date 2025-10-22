@@ -18,21 +18,21 @@ import (
 
 // Timeframe - struct for Timeframe
 type Timeframe struct {
-	TimeframeOneOf *TimeframeOneOf
-	TimeframeOneOf1 *TimeframeOneOf1
+	TimeframeDuration *TimeframeDuration
+	TimeframeEndTime *TimeframeEndTime
 }
 
-// TimeframeOneOfAsTimeframe is a convenience function that returns TimeframeOneOf wrapped in Timeframe
-func TimeframeOneOfAsTimeframe(v *TimeframeOneOf) Timeframe {
+// TimeframeDurationAsTimeframe is a convenience function that returns TimeframeDuration wrapped in Timeframe
+func TimeframeDurationAsTimeframe(v *TimeframeDuration) Timeframe {
 	return Timeframe{
-		TimeframeOneOf: v,
+		TimeframeDuration: v,
 	}
 }
 
-// TimeframeOneOf1AsTimeframe is a convenience function that returns TimeframeOneOf1 wrapped in Timeframe
-func TimeframeOneOf1AsTimeframe(v *TimeframeOneOf1) Timeframe {
+// TimeframeEndTimeAsTimeframe is a convenience function that returns TimeframeEndTime wrapped in Timeframe
+func TimeframeEndTimeAsTimeframe(v *TimeframeEndTime) Timeframe {
 	return Timeframe{
-		TimeframeOneOf1: v,
+		TimeframeEndTime: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func TimeframeOneOf1AsTimeframe(v *TimeframeOneOf1) Timeframe {
 func (dst *Timeframe) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into TimeframeOneOf
-	err = newStrictDecoder(data).Decode(&dst.TimeframeOneOf)
+	// try to unmarshal data into TimeframeDuration
+	err = newStrictDecoder(data).Decode(&dst.TimeframeDuration)
 	if err == nil {
-		jsonTimeframeOneOf, _ := json.Marshal(dst.TimeframeOneOf)
-		if string(jsonTimeframeOneOf) == "{}" { // empty struct
-			dst.TimeframeOneOf = nil
+		jsonTimeframeDuration, _ := json.Marshal(dst.TimeframeDuration)
+		if string(jsonTimeframeDuration) == "{}" { // empty struct
+			dst.TimeframeDuration = nil
 		} else {
-			if err = validator.Validate(dst.TimeframeOneOf); err != nil {
-				dst.TimeframeOneOf = nil
+			if err = validator.Validate(dst.TimeframeDuration); err != nil {
+				dst.TimeframeDuration = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.TimeframeOneOf = nil
+		dst.TimeframeDuration = nil
 	}
 
-	// try to unmarshal data into TimeframeOneOf1
-	err = newStrictDecoder(data).Decode(&dst.TimeframeOneOf1)
+	// try to unmarshal data into TimeframeEndTime
+	err = newStrictDecoder(data).Decode(&dst.TimeframeEndTime)
 	if err == nil {
-		jsonTimeframeOneOf1, _ := json.Marshal(dst.TimeframeOneOf1)
-		if string(jsonTimeframeOneOf1) == "{}" { // empty struct
-			dst.TimeframeOneOf1 = nil
+		jsonTimeframeEndTime, _ := json.Marshal(dst.TimeframeEndTime)
+		if string(jsonTimeframeEndTime) == "{}" { // empty struct
+			dst.TimeframeEndTime = nil
 		} else {
-			if err = validator.Validate(dst.TimeframeOneOf1); err != nil {
-				dst.TimeframeOneOf1 = nil
+			if err = validator.Validate(dst.TimeframeEndTime); err != nil {
+				dst.TimeframeEndTime = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.TimeframeOneOf1 = nil
+		dst.TimeframeEndTime = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.TimeframeOneOf = nil
-		dst.TimeframeOneOf1 = nil
+		dst.TimeframeDuration = nil
+		dst.TimeframeEndTime = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(Timeframe)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *Timeframe) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src Timeframe) MarshalJSON() ([]byte, error) {
-	if src.TimeframeOneOf != nil {
-		return json.Marshal(&src.TimeframeOneOf)
+	if src.TimeframeDuration != nil {
+		return json.Marshal(&src.TimeframeDuration)
 	}
 
-	if src.TimeframeOneOf1 != nil {
-		return json.Marshal(&src.TimeframeOneOf1)
+	if src.TimeframeEndTime != nil {
+		return json.Marshal(&src.TimeframeEndTime)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *Timeframe) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.TimeframeOneOf != nil {
-		return obj.TimeframeOneOf
+	if obj.TimeframeDuration != nil {
+		return obj.TimeframeDuration
 	}
 
-	if obj.TimeframeOneOf1 != nil {
-		return obj.TimeframeOneOf1
+	if obj.TimeframeEndTime != nil {
+		return obj.TimeframeEndTime
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *Timeframe) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj Timeframe) GetActualInstanceValue() (interface{}) {
-	if obj.TimeframeOneOf != nil {
-		return *obj.TimeframeOneOf
+	if obj.TimeframeDuration != nil {
+		return *obj.TimeframeDuration
 	}
 
-	if obj.TimeframeOneOf1 != nil {
-		return *obj.TimeframeOneOf1
+	if obj.TimeframeEndTime != nil {
+		return *obj.TimeframeEndTime
 	}
 
 	// all schemas are nil

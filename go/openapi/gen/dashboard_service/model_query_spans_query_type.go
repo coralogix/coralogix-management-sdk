@@ -18,21 +18,21 @@ import (
 
 // QuerySpansQueryType - struct for QuerySpansQueryType
 type QuerySpansQueryType struct {
-	QuerySpansQueryTypeOneOf *QuerySpansQueryTypeOneOf
-	QuerySpansQueryTypeOneOf1 *QuerySpansQueryTypeOneOf1
+	TypeFieldName *TypeFieldName
+	TypeFieldValue *TypeFieldValue
 }
 
-// QuerySpansQueryTypeOneOfAsQuerySpansQueryType is a convenience function that returns QuerySpansQueryTypeOneOf wrapped in QuerySpansQueryType
-func QuerySpansQueryTypeOneOfAsQuerySpansQueryType(v *QuerySpansQueryTypeOneOf) QuerySpansQueryType {
+// TypeFieldNameAsQuerySpansQueryType is a convenience function that returns TypeFieldName wrapped in QuerySpansQueryType
+func TypeFieldNameAsQuerySpansQueryType(v *TypeFieldName) QuerySpansQueryType {
 	return QuerySpansQueryType{
-		QuerySpansQueryTypeOneOf: v,
+		TypeFieldName: v,
 	}
 }
 
-// QuerySpansQueryTypeOneOf1AsQuerySpansQueryType is a convenience function that returns QuerySpansQueryTypeOneOf1 wrapped in QuerySpansQueryType
-func QuerySpansQueryTypeOneOf1AsQuerySpansQueryType(v *QuerySpansQueryTypeOneOf1) QuerySpansQueryType {
+// TypeFieldValueAsQuerySpansQueryType is a convenience function that returns TypeFieldValue wrapped in QuerySpansQueryType
+func TypeFieldValueAsQuerySpansQueryType(v *TypeFieldValue) QuerySpansQueryType {
 	return QuerySpansQueryType{
-		QuerySpansQueryTypeOneOf1: v,
+		TypeFieldValue: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func QuerySpansQueryTypeOneOf1AsQuerySpansQueryType(v *QuerySpansQueryTypeOneOf1
 func (dst *QuerySpansQueryType) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into QuerySpansQueryTypeOneOf
-	err = newStrictDecoder(data).Decode(&dst.QuerySpansQueryTypeOneOf)
+	// try to unmarshal data into TypeFieldName
+	err = newStrictDecoder(data).Decode(&dst.TypeFieldName)
 	if err == nil {
-		jsonQuerySpansQueryTypeOneOf, _ := json.Marshal(dst.QuerySpansQueryTypeOneOf)
-		if string(jsonQuerySpansQueryTypeOneOf) == "{}" { // empty struct
-			dst.QuerySpansQueryTypeOneOf = nil
+		jsonTypeFieldName, _ := json.Marshal(dst.TypeFieldName)
+		if string(jsonTypeFieldName) == "{}" { // empty struct
+			dst.TypeFieldName = nil
 		} else {
-			if err = validator.Validate(dst.QuerySpansQueryTypeOneOf); err != nil {
-				dst.QuerySpansQueryTypeOneOf = nil
+			if err = validator.Validate(dst.TypeFieldName); err != nil {
+				dst.TypeFieldName = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QuerySpansQueryTypeOneOf = nil
+		dst.TypeFieldName = nil
 	}
 
-	// try to unmarshal data into QuerySpansQueryTypeOneOf1
-	err = newStrictDecoder(data).Decode(&dst.QuerySpansQueryTypeOneOf1)
+	// try to unmarshal data into TypeFieldValue
+	err = newStrictDecoder(data).Decode(&dst.TypeFieldValue)
 	if err == nil {
-		jsonQuerySpansQueryTypeOneOf1, _ := json.Marshal(dst.QuerySpansQueryTypeOneOf1)
-		if string(jsonQuerySpansQueryTypeOneOf1) == "{}" { // empty struct
-			dst.QuerySpansQueryTypeOneOf1 = nil
+		jsonTypeFieldValue, _ := json.Marshal(dst.TypeFieldValue)
+		if string(jsonTypeFieldValue) == "{}" { // empty struct
+			dst.TypeFieldValue = nil
 		} else {
-			if err = validator.Validate(dst.QuerySpansQueryTypeOneOf1); err != nil {
-				dst.QuerySpansQueryTypeOneOf1 = nil
+			if err = validator.Validate(dst.TypeFieldValue); err != nil {
+				dst.TypeFieldValue = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QuerySpansQueryTypeOneOf1 = nil
+		dst.TypeFieldValue = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.QuerySpansQueryTypeOneOf = nil
-		dst.QuerySpansQueryTypeOneOf1 = nil
+		dst.TypeFieldName = nil
+		dst.TypeFieldValue = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(QuerySpansQueryType)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *QuerySpansQueryType) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src QuerySpansQueryType) MarshalJSON() ([]byte, error) {
-	if src.QuerySpansQueryTypeOneOf != nil {
-		return json.Marshal(&src.QuerySpansQueryTypeOneOf)
+	if src.TypeFieldName != nil {
+		return json.Marshal(&src.TypeFieldName)
 	}
 
-	if src.QuerySpansQueryTypeOneOf1 != nil {
-		return json.Marshal(&src.QuerySpansQueryTypeOneOf1)
+	if src.TypeFieldValue != nil {
+		return json.Marshal(&src.TypeFieldValue)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *QuerySpansQueryType) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.QuerySpansQueryTypeOneOf != nil {
-		return obj.QuerySpansQueryTypeOneOf
+	if obj.TypeFieldName != nil {
+		return obj.TypeFieldName
 	}
 
-	if obj.QuerySpansQueryTypeOneOf1 != nil {
-		return obj.QuerySpansQueryTypeOneOf1
+	if obj.TypeFieldValue != nil {
+		return obj.TypeFieldValue
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *QuerySpansQueryType) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj QuerySpansQueryType) GetActualInstanceValue() (interface{}) {
-	if obj.QuerySpansQueryTypeOneOf != nil {
-		return *obj.QuerySpansQueryTypeOneOf
+	if obj.TypeFieldName != nil {
+		return *obj.TypeFieldName
 	}
 
-	if obj.QuerySpansQueryTypeOneOf1 != nil {
-		return *obj.QuerySpansQueryTypeOneOf1
+	if obj.TypeFieldValue != nil {
+		return *obj.TypeFieldValue
 	}
 
 	// all schemas are nil

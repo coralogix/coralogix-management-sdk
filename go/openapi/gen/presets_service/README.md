@@ -93,15 +93,20 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [BatchGetPresetsResponse](docs/BatchGetPresetsResponse.md)
+ - [ColorsByAggregation](docs/ColorsByAggregation.md)
+ - [ColorsByGroupBy](docs/ColorsByGroupBy.md)
+ - [ColorsByStack](docs/ColorsByStack.md)
  - [CommonGroup](docs/CommonGroup.md)
+ - [ConditionTypeMatchEntityType](docs/ConditionTypeMatchEntityType.md)
+ - [ConditionTypeMatchEntityTypeAndSubType](docs/ConditionTypeMatchEntityTypeAndSubType.md)
  - [ConfigOverrides](docs/ConfigOverrides.md)
  - [ConnectorType](docs/ConnectorType.md)
  - [CreateCustomPresetResponse](docs/CreateCustomPresetResponse.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FieldGroup](docs/FieldGroup.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
- - [FilterPathAndValues1](docs/FilterPathAndValues1.md)
- - [FilterPathAndValues2](docs/FilterPathAndValues2.md)
+ - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
+ - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [GetDefaultPresetSummaryResponse](docs/GetDefaultPresetSummaryResponse.md)
  - [GetPresetResponse](docs/GetPresetResponse.md)
@@ -111,8 +116,6 @@ Class | Method | HTTP request | Description
  - [MessageConfig](docs/MessageConfig.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [NotificationCenterConditionType](docs/NotificationCenterConditionType.md)
- - [NotificationCenterConditionTypeOneOf](docs/NotificationCenterConditionTypeOneOf.md)
- - [NotificationCenterConditionTypeOneOf1](docs/NotificationCenterConditionTypeOneOf1.md)
  - [NotificationCenterEntityType](docs/NotificationCenterEntityType.md)
  - [NotificationCenterMessageConfigField](docs/NotificationCenterMessageConfigField.md)
  - [Preset](docs/Preset.md)
@@ -121,6 +124,8 @@ Class | Method | HTTP request | Description
  - [PresetType](docs/PresetType.md)
  - [ReplaceCustomPresetResponse](docs/ReplaceCustomPresetResponse.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
+ - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
+ - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

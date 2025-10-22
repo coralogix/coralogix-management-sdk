@@ -18,21 +18,21 @@ import (
 
 // V3IntegrationType - struct for V3IntegrationType
 type V3IntegrationType struct {
-	IntegrationType *IntegrationType
-	IntegrationType1 *IntegrationType1
+	IntegrationTypeIntegrationId *IntegrationTypeIntegrationId
+	IntegrationTypeRecipients *IntegrationTypeRecipients
 }
 
-// IntegrationTypeAsV3IntegrationType is a convenience function that returns IntegrationType wrapped in V3IntegrationType
-func IntegrationTypeAsV3IntegrationType(v *IntegrationType) V3IntegrationType {
+// IntegrationTypeIntegrationIdAsV3IntegrationType is a convenience function that returns IntegrationTypeIntegrationId wrapped in V3IntegrationType
+func IntegrationTypeIntegrationIdAsV3IntegrationType(v *IntegrationTypeIntegrationId) V3IntegrationType {
 	return V3IntegrationType{
-		IntegrationType: v,
+		IntegrationTypeIntegrationId: v,
 	}
 }
 
-// IntegrationType1AsV3IntegrationType is a convenience function that returns IntegrationType1 wrapped in V3IntegrationType
-func IntegrationType1AsV3IntegrationType(v *IntegrationType1) V3IntegrationType {
+// IntegrationTypeRecipientsAsV3IntegrationType is a convenience function that returns IntegrationTypeRecipients wrapped in V3IntegrationType
+func IntegrationTypeRecipientsAsV3IntegrationType(v *IntegrationTypeRecipients) V3IntegrationType {
 	return V3IntegrationType{
-		IntegrationType1: v,
+		IntegrationTypeRecipients: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func IntegrationType1AsV3IntegrationType(v *IntegrationType1) V3IntegrationType 
 func (dst *V3IntegrationType) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into IntegrationType
-	err = newStrictDecoder(data).Decode(&dst.IntegrationType)
+	// try to unmarshal data into IntegrationTypeIntegrationId
+	err = newStrictDecoder(data).Decode(&dst.IntegrationTypeIntegrationId)
 	if err == nil {
-		jsonIntegrationType, _ := json.Marshal(dst.IntegrationType)
-		if string(jsonIntegrationType) == "{}" { // empty struct
-			dst.IntegrationType = nil
+		jsonIntegrationTypeIntegrationId, _ := json.Marshal(dst.IntegrationTypeIntegrationId)
+		if string(jsonIntegrationTypeIntegrationId) == "{}" { // empty struct
+			dst.IntegrationTypeIntegrationId = nil
 		} else {
-			if err = validator.Validate(dst.IntegrationType); err != nil {
-				dst.IntegrationType = nil
+			if err = validator.Validate(dst.IntegrationTypeIntegrationId); err != nil {
+				dst.IntegrationTypeIntegrationId = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IntegrationType = nil
+		dst.IntegrationTypeIntegrationId = nil
 	}
 
-	// try to unmarshal data into IntegrationType1
-	err = newStrictDecoder(data).Decode(&dst.IntegrationType1)
+	// try to unmarshal data into IntegrationTypeRecipients
+	err = newStrictDecoder(data).Decode(&dst.IntegrationTypeRecipients)
 	if err == nil {
-		jsonIntegrationType1, _ := json.Marshal(dst.IntegrationType1)
-		if string(jsonIntegrationType1) == "{}" { // empty struct
-			dst.IntegrationType1 = nil
+		jsonIntegrationTypeRecipients, _ := json.Marshal(dst.IntegrationTypeRecipients)
+		if string(jsonIntegrationTypeRecipients) == "{}" { // empty struct
+			dst.IntegrationTypeRecipients = nil
 		} else {
-			if err = validator.Validate(dst.IntegrationType1); err != nil {
-				dst.IntegrationType1 = nil
+			if err = validator.Validate(dst.IntegrationTypeRecipients); err != nil {
+				dst.IntegrationTypeRecipients = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IntegrationType1 = nil
+		dst.IntegrationTypeRecipients = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.IntegrationType = nil
-		dst.IntegrationType1 = nil
+		dst.IntegrationTypeIntegrationId = nil
+		dst.IntegrationTypeRecipients = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(V3IntegrationType)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *V3IntegrationType) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src V3IntegrationType) MarshalJSON() ([]byte, error) {
-	if src.IntegrationType != nil {
-		return json.Marshal(&src.IntegrationType)
+	if src.IntegrationTypeIntegrationId != nil {
+		return json.Marshal(&src.IntegrationTypeIntegrationId)
 	}
 
-	if src.IntegrationType1 != nil {
-		return json.Marshal(&src.IntegrationType1)
+	if src.IntegrationTypeRecipients != nil {
+		return json.Marshal(&src.IntegrationTypeRecipients)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *V3IntegrationType) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.IntegrationType != nil {
-		return obj.IntegrationType
+	if obj.IntegrationTypeIntegrationId != nil {
+		return obj.IntegrationTypeIntegrationId
 	}
 
-	if obj.IntegrationType1 != nil {
-		return obj.IntegrationType1
+	if obj.IntegrationTypeRecipients != nil {
+		return obj.IntegrationTypeRecipients
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *V3IntegrationType) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj V3IntegrationType) GetActualInstanceValue() (interface{}) {
-	if obj.IntegrationType != nil {
-		return *obj.IntegrationType
+	if obj.IntegrationTypeIntegrationId != nil {
+		return *obj.IntegrationTypeIntegrationId
 	}
 
-	if obj.IntegrationType1 != nil {
-		return *obj.IntegrationType1
+	if obj.IntegrationTypeRecipients != nil {
+		return *obj.IntegrationTypeRecipients
 	}
 
 	// all schemas are nil

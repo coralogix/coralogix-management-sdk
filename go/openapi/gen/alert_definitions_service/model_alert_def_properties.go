@@ -18,109 +18,109 @@ import (
 
 // AlertDefProperties - struct for AlertDefProperties
 type AlertDefProperties struct {
-	AlertDefinitionProperties13 *AlertDefinitionProperties13
-	AlertDefinitionProperties14 *AlertDefinitionProperties14
-	AlertDefinitionProperties15 *AlertDefinitionProperties15
-	AlertDefinitionProperties16 *AlertDefinitionProperties16
-	AlertDefinitionProperties17 *AlertDefinitionProperties17
-	AlertDefinitionProperties18 *AlertDefinitionProperties18
-	AlertDefinitionProperties19 *AlertDefinitionProperties19
-	AlertDefinitionProperties20 *AlertDefinitionProperties20
-	AlertDefinitionProperties21 *AlertDefinitionProperties21
-	AlertDefinitionProperties22 *AlertDefinitionProperties22
-	AlertDefinitionProperties23 *AlertDefinitionProperties23
-	AlertDefinitionProperties24 *AlertDefinitionProperties24
-	AlertDefinitionProperties25 *AlertDefinitionProperties25
+	AlertDefPropertiesFlow *AlertDefPropertiesFlow
+	AlertDefPropertiesLogsAnomaly *AlertDefPropertiesLogsAnomaly
+	AlertDefPropertiesLogsImmediate *AlertDefPropertiesLogsImmediate
+	AlertDefPropertiesLogsNewValue *AlertDefPropertiesLogsNewValue
+	AlertDefPropertiesLogsRatioThreshold *AlertDefPropertiesLogsRatioThreshold
+	AlertDefPropertiesLogsThreshold *AlertDefPropertiesLogsThreshold
+	AlertDefPropertiesLogsTimeRelativeThreshold *AlertDefPropertiesLogsTimeRelativeThreshold
+	AlertDefPropertiesLogsUniqueCount *AlertDefPropertiesLogsUniqueCount
+	AlertDefPropertiesMetricAnomaly *AlertDefPropertiesMetricAnomaly
+	AlertDefPropertiesMetricThreshold *AlertDefPropertiesMetricThreshold
+	AlertDefPropertiesSloThreshold *AlertDefPropertiesSloThreshold
+	AlertDefPropertiesTracingImmediate *AlertDefPropertiesTracingImmediate
+	AlertDefPropertiesTracingThreshold *AlertDefPropertiesTracingThreshold
 }
 
-// AlertDefinitionProperties13AsAlertDefProperties is a convenience function that returns AlertDefinitionProperties13 wrapped in AlertDefProperties
-func AlertDefinitionProperties13AsAlertDefProperties(v *AlertDefinitionProperties13) AlertDefProperties {
+// AlertDefPropertiesFlowAsAlertDefProperties is a convenience function that returns AlertDefPropertiesFlow wrapped in AlertDefProperties
+func AlertDefPropertiesFlowAsAlertDefProperties(v *AlertDefPropertiesFlow) AlertDefProperties {
 	return AlertDefProperties{
-		AlertDefinitionProperties13: v,
+		AlertDefPropertiesFlow: v,
 	}
 }
 
-// AlertDefinitionProperties14AsAlertDefProperties is a convenience function that returns AlertDefinitionProperties14 wrapped in AlertDefProperties
-func AlertDefinitionProperties14AsAlertDefProperties(v *AlertDefinitionProperties14) AlertDefProperties {
+// AlertDefPropertiesLogsAnomalyAsAlertDefProperties is a convenience function that returns AlertDefPropertiesLogsAnomaly wrapped in AlertDefProperties
+func AlertDefPropertiesLogsAnomalyAsAlertDefProperties(v *AlertDefPropertiesLogsAnomaly) AlertDefProperties {
 	return AlertDefProperties{
-		AlertDefinitionProperties14: v,
+		AlertDefPropertiesLogsAnomaly: v,
 	}
 }
 
-// AlertDefinitionProperties15AsAlertDefProperties is a convenience function that returns AlertDefinitionProperties15 wrapped in AlertDefProperties
-func AlertDefinitionProperties15AsAlertDefProperties(v *AlertDefinitionProperties15) AlertDefProperties {
+// AlertDefPropertiesLogsImmediateAsAlertDefProperties is a convenience function that returns AlertDefPropertiesLogsImmediate wrapped in AlertDefProperties
+func AlertDefPropertiesLogsImmediateAsAlertDefProperties(v *AlertDefPropertiesLogsImmediate) AlertDefProperties {
 	return AlertDefProperties{
-		AlertDefinitionProperties15: v,
+		AlertDefPropertiesLogsImmediate: v,
 	}
 }
 
-// AlertDefinitionProperties16AsAlertDefProperties is a convenience function that returns AlertDefinitionProperties16 wrapped in AlertDefProperties
-func AlertDefinitionProperties16AsAlertDefProperties(v *AlertDefinitionProperties16) AlertDefProperties {
+// AlertDefPropertiesLogsNewValueAsAlertDefProperties is a convenience function that returns AlertDefPropertiesLogsNewValue wrapped in AlertDefProperties
+func AlertDefPropertiesLogsNewValueAsAlertDefProperties(v *AlertDefPropertiesLogsNewValue) AlertDefProperties {
 	return AlertDefProperties{
-		AlertDefinitionProperties16: v,
+		AlertDefPropertiesLogsNewValue: v,
 	}
 }
 
-// AlertDefinitionProperties17AsAlertDefProperties is a convenience function that returns AlertDefinitionProperties17 wrapped in AlertDefProperties
-func AlertDefinitionProperties17AsAlertDefProperties(v *AlertDefinitionProperties17) AlertDefProperties {
+// AlertDefPropertiesLogsRatioThresholdAsAlertDefProperties is a convenience function that returns AlertDefPropertiesLogsRatioThreshold wrapped in AlertDefProperties
+func AlertDefPropertiesLogsRatioThresholdAsAlertDefProperties(v *AlertDefPropertiesLogsRatioThreshold) AlertDefProperties {
 	return AlertDefProperties{
-		AlertDefinitionProperties17: v,
+		AlertDefPropertiesLogsRatioThreshold: v,
 	}
 }
 
-// AlertDefinitionProperties18AsAlertDefProperties is a convenience function that returns AlertDefinitionProperties18 wrapped in AlertDefProperties
-func AlertDefinitionProperties18AsAlertDefProperties(v *AlertDefinitionProperties18) AlertDefProperties {
+// AlertDefPropertiesLogsThresholdAsAlertDefProperties is a convenience function that returns AlertDefPropertiesLogsThreshold wrapped in AlertDefProperties
+func AlertDefPropertiesLogsThresholdAsAlertDefProperties(v *AlertDefPropertiesLogsThreshold) AlertDefProperties {
 	return AlertDefProperties{
-		AlertDefinitionProperties18: v,
+		AlertDefPropertiesLogsThreshold: v,
 	}
 }
 
-// AlertDefinitionProperties19AsAlertDefProperties is a convenience function that returns AlertDefinitionProperties19 wrapped in AlertDefProperties
-func AlertDefinitionProperties19AsAlertDefProperties(v *AlertDefinitionProperties19) AlertDefProperties {
+// AlertDefPropertiesLogsTimeRelativeThresholdAsAlertDefProperties is a convenience function that returns AlertDefPropertiesLogsTimeRelativeThreshold wrapped in AlertDefProperties
+func AlertDefPropertiesLogsTimeRelativeThresholdAsAlertDefProperties(v *AlertDefPropertiesLogsTimeRelativeThreshold) AlertDefProperties {
 	return AlertDefProperties{
-		AlertDefinitionProperties19: v,
+		AlertDefPropertiesLogsTimeRelativeThreshold: v,
 	}
 }
 
-// AlertDefinitionProperties20AsAlertDefProperties is a convenience function that returns AlertDefinitionProperties20 wrapped in AlertDefProperties
-func AlertDefinitionProperties20AsAlertDefProperties(v *AlertDefinitionProperties20) AlertDefProperties {
+// AlertDefPropertiesLogsUniqueCountAsAlertDefProperties is a convenience function that returns AlertDefPropertiesLogsUniqueCount wrapped in AlertDefProperties
+func AlertDefPropertiesLogsUniqueCountAsAlertDefProperties(v *AlertDefPropertiesLogsUniqueCount) AlertDefProperties {
 	return AlertDefProperties{
-		AlertDefinitionProperties20: v,
+		AlertDefPropertiesLogsUniqueCount: v,
 	}
 }
 
-// AlertDefinitionProperties21AsAlertDefProperties is a convenience function that returns AlertDefinitionProperties21 wrapped in AlertDefProperties
-func AlertDefinitionProperties21AsAlertDefProperties(v *AlertDefinitionProperties21) AlertDefProperties {
+// AlertDefPropertiesMetricAnomalyAsAlertDefProperties is a convenience function that returns AlertDefPropertiesMetricAnomaly wrapped in AlertDefProperties
+func AlertDefPropertiesMetricAnomalyAsAlertDefProperties(v *AlertDefPropertiesMetricAnomaly) AlertDefProperties {
 	return AlertDefProperties{
-		AlertDefinitionProperties21: v,
+		AlertDefPropertiesMetricAnomaly: v,
 	}
 }
 
-// AlertDefinitionProperties22AsAlertDefProperties is a convenience function that returns AlertDefinitionProperties22 wrapped in AlertDefProperties
-func AlertDefinitionProperties22AsAlertDefProperties(v *AlertDefinitionProperties22) AlertDefProperties {
+// AlertDefPropertiesMetricThresholdAsAlertDefProperties is a convenience function that returns AlertDefPropertiesMetricThreshold wrapped in AlertDefProperties
+func AlertDefPropertiesMetricThresholdAsAlertDefProperties(v *AlertDefPropertiesMetricThreshold) AlertDefProperties {
 	return AlertDefProperties{
-		AlertDefinitionProperties22: v,
+		AlertDefPropertiesMetricThreshold: v,
 	}
 }
 
-// AlertDefinitionProperties23AsAlertDefProperties is a convenience function that returns AlertDefinitionProperties23 wrapped in AlertDefProperties
-func AlertDefinitionProperties23AsAlertDefProperties(v *AlertDefinitionProperties23) AlertDefProperties {
+// AlertDefPropertiesSloThresholdAsAlertDefProperties is a convenience function that returns AlertDefPropertiesSloThreshold wrapped in AlertDefProperties
+func AlertDefPropertiesSloThresholdAsAlertDefProperties(v *AlertDefPropertiesSloThreshold) AlertDefProperties {
 	return AlertDefProperties{
-		AlertDefinitionProperties23: v,
+		AlertDefPropertiesSloThreshold: v,
 	}
 }
 
-// AlertDefinitionProperties24AsAlertDefProperties is a convenience function that returns AlertDefinitionProperties24 wrapped in AlertDefProperties
-func AlertDefinitionProperties24AsAlertDefProperties(v *AlertDefinitionProperties24) AlertDefProperties {
+// AlertDefPropertiesTracingImmediateAsAlertDefProperties is a convenience function that returns AlertDefPropertiesTracingImmediate wrapped in AlertDefProperties
+func AlertDefPropertiesTracingImmediateAsAlertDefProperties(v *AlertDefPropertiesTracingImmediate) AlertDefProperties {
 	return AlertDefProperties{
-		AlertDefinitionProperties24: v,
+		AlertDefPropertiesTracingImmediate: v,
 	}
 }
 
-// AlertDefinitionProperties25AsAlertDefProperties is a convenience function that returns AlertDefinitionProperties25 wrapped in AlertDefProperties
-func AlertDefinitionProperties25AsAlertDefProperties(v *AlertDefinitionProperties25) AlertDefProperties {
+// AlertDefPropertiesTracingThresholdAsAlertDefProperties is a convenience function that returns AlertDefPropertiesTracingThreshold wrapped in AlertDefProperties
+func AlertDefPropertiesTracingThresholdAsAlertDefProperties(v *AlertDefPropertiesTracingThreshold) AlertDefProperties {
 	return AlertDefProperties{
-		AlertDefinitionProperties25: v,
+		AlertDefPropertiesTracingThreshold: v,
 	}
 }
 
@@ -129,242 +129,242 @@ func AlertDefinitionProperties25AsAlertDefProperties(v *AlertDefinitionPropertie
 func (dst *AlertDefProperties) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into AlertDefinitionProperties13
-	err = newStrictDecoder(data).Decode(&dst.AlertDefinitionProperties13)
+	// try to unmarshal data into AlertDefPropertiesFlow
+	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesFlow)
 	if err == nil {
-		jsonAlertDefinitionProperties13, _ := json.Marshal(dst.AlertDefinitionProperties13)
-		if string(jsonAlertDefinitionProperties13) == "{}" { // empty struct
-			dst.AlertDefinitionProperties13 = nil
+		jsonAlertDefPropertiesFlow, _ := json.Marshal(dst.AlertDefPropertiesFlow)
+		if string(jsonAlertDefPropertiesFlow) == "{}" { // empty struct
+			dst.AlertDefPropertiesFlow = nil
 		} else {
-			if err = validator.Validate(dst.AlertDefinitionProperties13); err != nil {
-				dst.AlertDefinitionProperties13 = nil
+			if err = validator.Validate(dst.AlertDefPropertiesFlow); err != nil {
+				dst.AlertDefPropertiesFlow = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AlertDefinitionProperties13 = nil
+		dst.AlertDefPropertiesFlow = nil
 	}
 
-	// try to unmarshal data into AlertDefinitionProperties14
-	err = newStrictDecoder(data).Decode(&dst.AlertDefinitionProperties14)
+	// try to unmarshal data into AlertDefPropertiesLogsAnomaly
+	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesLogsAnomaly)
 	if err == nil {
-		jsonAlertDefinitionProperties14, _ := json.Marshal(dst.AlertDefinitionProperties14)
-		if string(jsonAlertDefinitionProperties14) == "{}" { // empty struct
-			dst.AlertDefinitionProperties14 = nil
+		jsonAlertDefPropertiesLogsAnomaly, _ := json.Marshal(dst.AlertDefPropertiesLogsAnomaly)
+		if string(jsonAlertDefPropertiesLogsAnomaly) == "{}" { // empty struct
+			dst.AlertDefPropertiesLogsAnomaly = nil
 		} else {
-			if err = validator.Validate(dst.AlertDefinitionProperties14); err != nil {
-				dst.AlertDefinitionProperties14 = nil
+			if err = validator.Validate(dst.AlertDefPropertiesLogsAnomaly); err != nil {
+				dst.AlertDefPropertiesLogsAnomaly = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AlertDefinitionProperties14 = nil
+		dst.AlertDefPropertiesLogsAnomaly = nil
 	}
 
-	// try to unmarshal data into AlertDefinitionProperties15
-	err = newStrictDecoder(data).Decode(&dst.AlertDefinitionProperties15)
+	// try to unmarshal data into AlertDefPropertiesLogsImmediate
+	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesLogsImmediate)
 	if err == nil {
-		jsonAlertDefinitionProperties15, _ := json.Marshal(dst.AlertDefinitionProperties15)
-		if string(jsonAlertDefinitionProperties15) == "{}" { // empty struct
-			dst.AlertDefinitionProperties15 = nil
+		jsonAlertDefPropertiesLogsImmediate, _ := json.Marshal(dst.AlertDefPropertiesLogsImmediate)
+		if string(jsonAlertDefPropertiesLogsImmediate) == "{}" { // empty struct
+			dst.AlertDefPropertiesLogsImmediate = nil
 		} else {
-			if err = validator.Validate(dst.AlertDefinitionProperties15); err != nil {
-				dst.AlertDefinitionProperties15 = nil
+			if err = validator.Validate(dst.AlertDefPropertiesLogsImmediate); err != nil {
+				dst.AlertDefPropertiesLogsImmediate = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AlertDefinitionProperties15 = nil
+		dst.AlertDefPropertiesLogsImmediate = nil
 	}
 
-	// try to unmarshal data into AlertDefinitionProperties16
-	err = newStrictDecoder(data).Decode(&dst.AlertDefinitionProperties16)
+	// try to unmarshal data into AlertDefPropertiesLogsNewValue
+	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesLogsNewValue)
 	if err == nil {
-		jsonAlertDefinitionProperties16, _ := json.Marshal(dst.AlertDefinitionProperties16)
-		if string(jsonAlertDefinitionProperties16) == "{}" { // empty struct
-			dst.AlertDefinitionProperties16 = nil
+		jsonAlertDefPropertiesLogsNewValue, _ := json.Marshal(dst.AlertDefPropertiesLogsNewValue)
+		if string(jsonAlertDefPropertiesLogsNewValue) == "{}" { // empty struct
+			dst.AlertDefPropertiesLogsNewValue = nil
 		} else {
-			if err = validator.Validate(dst.AlertDefinitionProperties16); err != nil {
-				dst.AlertDefinitionProperties16 = nil
+			if err = validator.Validate(dst.AlertDefPropertiesLogsNewValue); err != nil {
+				dst.AlertDefPropertiesLogsNewValue = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AlertDefinitionProperties16 = nil
+		dst.AlertDefPropertiesLogsNewValue = nil
 	}
 
-	// try to unmarshal data into AlertDefinitionProperties17
-	err = newStrictDecoder(data).Decode(&dst.AlertDefinitionProperties17)
+	// try to unmarshal data into AlertDefPropertiesLogsRatioThreshold
+	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesLogsRatioThreshold)
 	if err == nil {
-		jsonAlertDefinitionProperties17, _ := json.Marshal(dst.AlertDefinitionProperties17)
-		if string(jsonAlertDefinitionProperties17) == "{}" { // empty struct
-			dst.AlertDefinitionProperties17 = nil
+		jsonAlertDefPropertiesLogsRatioThreshold, _ := json.Marshal(dst.AlertDefPropertiesLogsRatioThreshold)
+		if string(jsonAlertDefPropertiesLogsRatioThreshold) == "{}" { // empty struct
+			dst.AlertDefPropertiesLogsRatioThreshold = nil
 		} else {
-			if err = validator.Validate(dst.AlertDefinitionProperties17); err != nil {
-				dst.AlertDefinitionProperties17 = nil
+			if err = validator.Validate(dst.AlertDefPropertiesLogsRatioThreshold); err != nil {
+				dst.AlertDefPropertiesLogsRatioThreshold = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AlertDefinitionProperties17 = nil
+		dst.AlertDefPropertiesLogsRatioThreshold = nil
 	}
 
-	// try to unmarshal data into AlertDefinitionProperties18
-	err = newStrictDecoder(data).Decode(&dst.AlertDefinitionProperties18)
+	// try to unmarshal data into AlertDefPropertiesLogsThreshold
+	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesLogsThreshold)
 	if err == nil {
-		jsonAlertDefinitionProperties18, _ := json.Marshal(dst.AlertDefinitionProperties18)
-		if string(jsonAlertDefinitionProperties18) == "{}" { // empty struct
-			dst.AlertDefinitionProperties18 = nil
+		jsonAlertDefPropertiesLogsThreshold, _ := json.Marshal(dst.AlertDefPropertiesLogsThreshold)
+		if string(jsonAlertDefPropertiesLogsThreshold) == "{}" { // empty struct
+			dst.AlertDefPropertiesLogsThreshold = nil
 		} else {
-			if err = validator.Validate(dst.AlertDefinitionProperties18); err != nil {
-				dst.AlertDefinitionProperties18 = nil
+			if err = validator.Validate(dst.AlertDefPropertiesLogsThreshold); err != nil {
+				dst.AlertDefPropertiesLogsThreshold = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AlertDefinitionProperties18 = nil
+		dst.AlertDefPropertiesLogsThreshold = nil
 	}
 
-	// try to unmarshal data into AlertDefinitionProperties19
-	err = newStrictDecoder(data).Decode(&dst.AlertDefinitionProperties19)
+	// try to unmarshal data into AlertDefPropertiesLogsTimeRelativeThreshold
+	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesLogsTimeRelativeThreshold)
 	if err == nil {
-		jsonAlertDefinitionProperties19, _ := json.Marshal(dst.AlertDefinitionProperties19)
-		if string(jsonAlertDefinitionProperties19) == "{}" { // empty struct
-			dst.AlertDefinitionProperties19 = nil
+		jsonAlertDefPropertiesLogsTimeRelativeThreshold, _ := json.Marshal(dst.AlertDefPropertiesLogsTimeRelativeThreshold)
+		if string(jsonAlertDefPropertiesLogsTimeRelativeThreshold) == "{}" { // empty struct
+			dst.AlertDefPropertiesLogsTimeRelativeThreshold = nil
 		} else {
-			if err = validator.Validate(dst.AlertDefinitionProperties19); err != nil {
-				dst.AlertDefinitionProperties19 = nil
+			if err = validator.Validate(dst.AlertDefPropertiesLogsTimeRelativeThreshold); err != nil {
+				dst.AlertDefPropertiesLogsTimeRelativeThreshold = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AlertDefinitionProperties19 = nil
+		dst.AlertDefPropertiesLogsTimeRelativeThreshold = nil
 	}
 
-	// try to unmarshal data into AlertDefinitionProperties20
-	err = newStrictDecoder(data).Decode(&dst.AlertDefinitionProperties20)
+	// try to unmarshal data into AlertDefPropertiesLogsUniqueCount
+	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesLogsUniqueCount)
 	if err == nil {
-		jsonAlertDefinitionProperties20, _ := json.Marshal(dst.AlertDefinitionProperties20)
-		if string(jsonAlertDefinitionProperties20) == "{}" { // empty struct
-			dst.AlertDefinitionProperties20 = nil
+		jsonAlertDefPropertiesLogsUniqueCount, _ := json.Marshal(dst.AlertDefPropertiesLogsUniqueCount)
+		if string(jsonAlertDefPropertiesLogsUniqueCount) == "{}" { // empty struct
+			dst.AlertDefPropertiesLogsUniqueCount = nil
 		} else {
-			if err = validator.Validate(dst.AlertDefinitionProperties20); err != nil {
-				dst.AlertDefinitionProperties20 = nil
+			if err = validator.Validate(dst.AlertDefPropertiesLogsUniqueCount); err != nil {
+				dst.AlertDefPropertiesLogsUniqueCount = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AlertDefinitionProperties20 = nil
+		dst.AlertDefPropertiesLogsUniqueCount = nil
 	}
 
-	// try to unmarshal data into AlertDefinitionProperties21
-	err = newStrictDecoder(data).Decode(&dst.AlertDefinitionProperties21)
+	// try to unmarshal data into AlertDefPropertiesMetricAnomaly
+	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesMetricAnomaly)
 	if err == nil {
-		jsonAlertDefinitionProperties21, _ := json.Marshal(dst.AlertDefinitionProperties21)
-		if string(jsonAlertDefinitionProperties21) == "{}" { // empty struct
-			dst.AlertDefinitionProperties21 = nil
+		jsonAlertDefPropertiesMetricAnomaly, _ := json.Marshal(dst.AlertDefPropertiesMetricAnomaly)
+		if string(jsonAlertDefPropertiesMetricAnomaly) == "{}" { // empty struct
+			dst.AlertDefPropertiesMetricAnomaly = nil
 		} else {
-			if err = validator.Validate(dst.AlertDefinitionProperties21); err != nil {
-				dst.AlertDefinitionProperties21 = nil
+			if err = validator.Validate(dst.AlertDefPropertiesMetricAnomaly); err != nil {
+				dst.AlertDefPropertiesMetricAnomaly = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AlertDefinitionProperties21 = nil
+		dst.AlertDefPropertiesMetricAnomaly = nil
 	}
 
-	// try to unmarshal data into AlertDefinitionProperties22
-	err = newStrictDecoder(data).Decode(&dst.AlertDefinitionProperties22)
+	// try to unmarshal data into AlertDefPropertiesMetricThreshold
+	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesMetricThreshold)
 	if err == nil {
-		jsonAlertDefinitionProperties22, _ := json.Marshal(dst.AlertDefinitionProperties22)
-		if string(jsonAlertDefinitionProperties22) == "{}" { // empty struct
-			dst.AlertDefinitionProperties22 = nil
+		jsonAlertDefPropertiesMetricThreshold, _ := json.Marshal(dst.AlertDefPropertiesMetricThreshold)
+		if string(jsonAlertDefPropertiesMetricThreshold) == "{}" { // empty struct
+			dst.AlertDefPropertiesMetricThreshold = nil
 		} else {
-			if err = validator.Validate(dst.AlertDefinitionProperties22); err != nil {
-				dst.AlertDefinitionProperties22 = nil
+			if err = validator.Validate(dst.AlertDefPropertiesMetricThreshold); err != nil {
+				dst.AlertDefPropertiesMetricThreshold = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AlertDefinitionProperties22 = nil
+		dst.AlertDefPropertiesMetricThreshold = nil
 	}
 
-	// try to unmarshal data into AlertDefinitionProperties23
-	err = newStrictDecoder(data).Decode(&dst.AlertDefinitionProperties23)
+	// try to unmarshal data into AlertDefPropertiesSloThreshold
+	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesSloThreshold)
 	if err == nil {
-		jsonAlertDefinitionProperties23, _ := json.Marshal(dst.AlertDefinitionProperties23)
-		if string(jsonAlertDefinitionProperties23) == "{}" { // empty struct
-			dst.AlertDefinitionProperties23 = nil
+		jsonAlertDefPropertiesSloThreshold, _ := json.Marshal(dst.AlertDefPropertiesSloThreshold)
+		if string(jsonAlertDefPropertiesSloThreshold) == "{}" { // empty struct
+			dst.AlertDefPropertiesSloThreshold = nil
 		} else {
-			if err = validator.Validate(dst.AlertDefinitionProperties23); err != nil {
-				dst.AlertDefinitionProperties23 = nil
+			if err = validator.Validate(dst.AlertDefPropertiesSloThreshold); err != nil {
+				dst.AlertDefPropertiesSloThreshold = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AlertDefinitionProperties23 = nil
+		dst.AlertDefPropertiesSloThreshold = nil
 	}
 
-	// try to unmarshal data into AlertDefinitionProperties24
-	err = newStrictDecoder(data).Decode(&dst.AlertDefinitionProperties24)
+	// try to unmarshal data into AlertDefPropertiesTracingImmediate
+	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesTracingImmediate)
 	if err == nil {
-		jsonAlertDefinitionProperties24, _ := json.Marshal(dst.AlertDefinitionProperties24)
-		if string(jsonAlertDefinitionProperties24) == "{}" { // empty struct
-			dst.AlertDefinitionProperties24 = nil
+		jsonAlertDefPropertiesTracingImmediate, _ := json.Marshal(dst.AlertDefPropertiesTracingImmediate)
+		if string(jsonAlertDefPropertiesTracingImmediate) == "{}" { // empty struct
+			dst.AlertDefPropertiesTracingImmediate = nil
 		} else {
-			if err = validator.Validate(dst.AlertDefinitionProperties24); err != nil {
-				dst.AlertDefinitionProperties24 = nil
+			if err = validator.Validate(dst.AlertDefPropertiesTracingImmediate); err != nil {
+				dst.AlertDefPropertiesTracingImmediate = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AlertDefinitionProperties24 = nil
+		dst.AlertDefPropertiesTracingImmediate = nil
 	}
 
-	// try to unmarshal data into AlertDefinitionProperties25
-	err = newStrictDecoder(data).Decode(&dst.AlertDefinitionProperties25)
+	// try to unmarshal data into AlertDefPropertiesTracingThreshold
+	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesTracingThreshold)
 	if err == nil {
-		jsonAlertDefinitionProperties25, _ := json.Marshal(dst.AlertDefinitionProperties25)
-		if string(jsonAlertDefinitionProperties25) == "{}" { // empty struct
-			dst.AlertDefinitionProperties25 = nil
+		jsonAlertDefPropertiesTracingThreshold, _ := json.Marshal(dst.AlertDefPropertiesTracingThreshold)
+		if string(jsonAlertDefPropertiesTracingThreshold) == "{}" { // empty struct
+			dst.AlertDefPropertiesTracingThreshold = nil
 		} else {
-			if err = validator.Validate(dst.AlertDefinitionProperties25); err != nil {
-				dst.AlertDefinitionProperties25 = nil
+			if err = validator.Validate(dst.AlertDefPropertiesTracingThreshold); err != nil {
+				dst.AlertDefPropertiesTracingThreshold = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AlertDefinitionProperties25 = nil
+		dst.AlertDefPropertiesTracingThreshold = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.AlertDefinitionProperties13 = nil
-		dst.AlertDefinitionProperties14 = nil
-		dst.AlertDefinitionProperties15 = nil
-		dst.AlertDefinitionProperties16 = nil
-		dst.AlertDefinitionProperties17 = nil
-		dst.AlertDefinitionProperties18 = nil
-		dst.AlertDefinitionProperties19 = nil
-		dst.AlertDefinitionProperties20 = nil
-		dst.AlertDefinitionProperties21 = nil
-		dst.AlertDefinitionProperties22 = nil
-		dst.AlertDefinitionProperties23 = nil
-		dst.AlertDefinitionProperties24 = nil
-		dst.AlertDefinitionProperties25 = nil
+		dst.AlertDefPropertiesFlow = nil
+		dst.AlertDefPropertiesLogsAnomaly = nil
+		dst.AlertDefPropertiesLogsImmediate = nil
+		dst.AlertDefPropertiesLogsNewValue = nil
+		dst.AlertDefPropertiesLogsRatioThreshold = nil
+		dst.AlertDefPropertiesLogsThreshold = nil
+		dst.AlertDefPropertiesLogsTimeRelativeThreshold = nil
+		dst.AlertDefPropertiesLogsUniqueCount = nil
+		dst.AlertDefPropertiesMetricAnomaly = nil
+		dst.AlertDefPropertiesMetricThreshold = nil
+		dst.AlertDefPropertiesSloThreshold = nil
+		dst.AlertDefPropertiesTracingImmediate = nil
+		dst.AlertDefPropertiesTracingThreshold = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(AlertDefProperties)")
 	} else if match == 1 {
@@ -376,56 +376,56 @@ func (dst *AlertDefProperties) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src AlertDefProperties) MarshalJSON() ([]byte, error) {
-	if src.AlertDefinitionProperties13 != nil {
-		return json.Marshal(&src.AlertDefinitionProperties13)
+	if src.AlertDefPropertiesFlow != nil {
+		return json.Marshal(&src.AlertDefPropertiesFlow)
 	}
 
-	if src.AlertDefinitionProperties14 != nil {
-		return json.Marshal(&src.AlertDefinitionProperties14)
+	if src.AlertDefPropertiesLogsAnomaly != nil {
+		return json.Marshal(&src.AlertDefPropertiesLogsAnomaly)
 	}
 
-	if src.AlertDefinitionProperties15 != nil {
-		return json.Marshal(&src.AlertDefinitionProperties15)
+	if src.AlertDefPropertiesLogsImmediate != nil {
+		return json.Marshal(&src.AlertDefPropertiesLogsImmediate)
 	}
 
-	if src.AlertDefinitionProperties16 != nil {
-		return json.Marshal(&src.AlertDefinitionProperties16)
+	if src.AlertDefPropertiesLogsNewValue != nil {
+		return json.Marshal(&src.AlertDefPropertiesLogsNewValue)
 	}
 
-	if src.AlertDefinitionProperties17 != nil {
-		return json.Marshal(&src.AlertDefinitionProperties17)
+	if src.AlertDefPropertiesLogsRatioThreshold != nil {
+		return json.Marshal(&src.AlertDefPropertiesLogsRatioThreshold)
 	}
 
-	if src.AlertDefinitionProperties18 != nil {
-		return json.Marshal(&src.AlertDefinitionProperties18)
+	if src.AlertDefPropertiesLogsThreshold != nil {
+		return json.Marshal(&src.AlertDefPropertiesLogsThreshold)
 	}
 
-	if src.AlertDefinitionProperties19 != nil {
-		return json.Marshal(&src.AlertDefinitionProperties19)
+	if src.AlertDefPropertiesLogsTimeRelativeThreshold != nil {
+		return json.Marshal(&src.AlertDefPropertiesLogsTimeRelativeThreshold)
 	}
 
-	if src.AlertDefinitionProperties20 != nil {
-		return json.Marshal(&src.AlertDefinitionProperties20)
+	if src.AlertDefPropertiesLogsUniqueCount != nil {
+		return json.Marshal(&src.AlertDefPropertiesLogsUniqueCount)
 	}
 
-	if src.AlertDefinitionProperties21 != nil {
-		return json.Marshal(&src.AlertDefinitionProperties21)
+	if src.AlertDefPropertiesMetricAnomaly != nil {
+		return json.Marshal(&src.AlertDefPropertiesMetricAnomaly)
 	}
 
-	if src.AlertDefinitionProperties22 != nil {
-		return json.Marshal(&src.AlertDefinitionProperties22)
+	if src.AlertDefPropertiesMetricThreshold != nil {
+		return json.Marshal(&src.AlertDefPropertiesMetricThreshold)
 	}
 
-	if src.AlertDefinitionProperties23 != nil {
-		return json.Marshal(&src.AlertDefinitionProperties23)
+	if src.AlertDefPropertiesSloThreshold != nil {
+		return json.Marshal(&src.AlertDefPropertiesSloThreshold)
 	}
 
-	if src.AlertDefinitionProperties24 != nil {
-		return json.Marshal(&src.AlertDefinitionProperties24)
+	if src.AlertDefPropertiesTracingImmediate != nil {
+		return json.Marshal(&src.AlertDefPropertiesTracingImmediate)
 	}
 
-	if src.AlertDefinitionProperties25 != nil {
-		return json.Marshal(&src.AlertDefinitionProperties25)
+	if src.AlertDefPropertiesTracingThreshold != nil {
+		return json.Marshal(&src.AlertDefPropertiesTracingThreshold)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -436,56 +436,56 @@ func (obj *AlertDefProperties) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.AlertDefinitionProperties13 != nil {
-		return obj.AlertDefinitionProperties13
+	if obj.AlertDefPropertiesFlow != nil {
+		return obj.AlertDefPropertiesFlow
 	}
 
-	if obj.AlertDefinitionProperties14 != nil {
-		return obj.AlertDefinitionProperties14
+	if obj.AlertDefPropertiesLogsAnomaly != nil {
+		return obj.AlertDefPropertiesLogsAnomaly
 	}
 
-	if obj.AlertDefinitionProperties15 != nil {
-		return obj.AlertDefinitionProperties15
+	if obj.AlertDefPropertiesLogsImmediate != nil {
+		return obj.AlertDefPropertiesLogsImmediate
 	}
 
-	if obj.AlertDefinitionProperties16 != nil {
-		return obj.AlertDefinitionProperties16
+	if obj.AlertDefPropertiesLogsNewValue != nil {
+		return obj.AlertDefPropertiesLogsNewValue
 	}
 
-	if obj.AlertDefinitionProperties17 != nil {
-		return obj.AlertDefinitionProperties17
+	if obj.AlertDefPropertiesLogsRatioThreshold != nil {
+		return obj.AlertDefPropertiesLogsRatioThreshold
 	}
 
-	if obj.AlertDefinitionProperties18 != nil {
-		return obj.AlertDefinitionProperties18
+	if obj.AlertDefPropertiesLogsThreshold != nil {
+		return obj.AlertDefPropertiesLogsThreshold
 	}
 
-	if obj.AlertDefinitionProperties19 != nil {
-		return obj.AlertDefinitionProperties19
+	if obj.AlertDefPropertiesLogsTimeRelativeThreshold != nil {
+		return obj.AlertDefPropertiesLogsTimeRelativeThreshold
 	}
 
-	if obj.AlertDefinitionProperties20 != nil {
-		return obj.AlertDefinitionProperties20
+	if obj.AlertDefPropertiesLogsUniqueCount != nil {
+		return obj.AlertDefPropertiesLogsUniqueCount
 	}
 
-	if obj.AlertDefinitionProperties21 != nil {
-		return obj.AlertDefinitionProperties21
+	if obj.AlertDefPropertiesMetricAnomaly != nil {
+		return obj.AlertDefPropertiesMetricAnomaly
 	}
 
-	if obj.AlertDefinitionProperties22 != nil {
-		return obj.AlertDefinitionProperties22
+	if obj.AlertDefPropertiesMetricThreshold != nil {
+		return obj.AlertDefPropertiesMetricThreshold
 	}
 
-	if obj.AlertDefinitionProperties23 != nil {
-		return obj.AlertDefinitionProperties23
+	if obj.AlertDefPropertiesSloThreshold != nil {
+		return obj.AlertDefPropertiesSloThreshold
 	}
 
-	if obj.AlertDefinitionProperties24 != nil {
-		return obj.AlertDefinitionProperties24
+	if obj.AlertDefPropertiesTracingImmediate != nil {
+		return obj.AlertDefPropertiesTracingImmediate
 	}
 
-	if obj.AlertDefinitionProperties25 != nil {
-		return obj.AlertDefinitionProperties25
+	if obj.AlertDefPropertiesTracingThreshold != nil {
+		return obj.AlertDefPropertiesTracingThreshold
 	}
 
 	// all schemas are nil
@@ -494,56 +494,56 @@ func (obj *AlertDefProperties) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj AlertDefProperties) GetActualInstanceValue() (interface{}) {
-	if obj.AlertDefinitionProperties13 != nil {
-		return *obj.AlertDefinitionProperties13
+	if obj.AlertDefPropertiesFlow != nil {
+		return *obj.AlertDefPropertiesFlow
 	}
 
-	if obj.AlertDefinitionProperties14 != nil {
-		return *obj.AlertDefinitionProperties14
+	if obj.AlertDefPropertiesLogsAnomaly != nil {
+		return *obj.AlertDefPropertiesLogsAnomaly
 	}
 
-	if obj.AlertDefinitionProperties15 != nil {
-		return *obj.AlertDefinitionProperties15
+	if obj.AlertDefPropertiesLogsImmediate != nil {
+		return *obj.AlertDefPropertiesLogsImmediate
 	}
 
-	if obj.AlertDefinitionProperties16 != nil {
-		return *obj.AlertDefinitionProperties16
+	if obj.AlertDefPropertiesLogsNewValue != nil {
+		return *obj.AlertDefPropertiesLogsNewValue
 	}
 
-	if obj.AlertDefinitionProperties17 != nil {
-		return *obj.AlertDefinitionProperties17
+	if obj.AlertDefPropertiesLogsRatioThreshold != nil {
+		return *obj.AlertDefPropertiesLogsRatioThreshold
 	}
 
-	if obj.AlertDefinitionProperties18 != nil {
-		return *obj.AlertDefinitionProperties18
+	if obj.AlertDefPropertiesLogsThreshold != nil {
+		return *obj.AlertDefPropertiesLogsThreshold
 	}
 
-	if obj.AlertDefinitionProperties19 != nil {
-		return *obj.AlertDefinitionProperties19
+	if obj.AlertDefPropertiesLogsTimeRelativeThreshold != nil {
+		return *obj.AlertDefPropertiesLogsTimeRelativeThreshold
 	}
 
-	if obj.AlertDefinitionProperties20 != nil {
-		return *obj.AlertDefinitionProperties20
+	if obj.AlertDefPropertiesLogsUniqueCount != nil {
+		return *obj.AlertDefPropertiesLogsUniqueCount
 	}
 
-	if obj.AlertDefinitionProperties21 != nil {
-		return *obj.AlertDefinitionProperties21
+	if obj.AlertDefPropertiesMetricAnomaly != nil {
+		return *obj.AlertDefPropertiesMetricAnomaly
 	}
 
-	if obj.AlertDefinitionProperties22 != nil {
-		return *obj.AlertDefinitionProperties22
+	if obj.AlertDefPropertiesMetricThreshold != nil {
+		return *obj.AlertDefPropertiesMetricThreshold
 	}
 
-	if obj.AlertDefinitionProperties23 != nil {
-		return *obj.AlertDefinitionProperties23
+	if obj.AlertDefPropertiesSloThreshold != nil {
+		return *obj.AlertDefPropertiesSloThreshold
 	}
 
-	if obj.AlertDefinitionProperties24 != nil {
-		return *obj.AlertDefinitionProperties24
+	if obj.AlertDefPropertiesTracingImmediate != nil {
+		return *obj.AlertDefPropertiesTracingImmediate
 	}
 
-	if obj.AlertDefinitionProperties25 != nil {
-		return *obj.AlertDefinitionProperties25
+	if obj.AlertDefPropertiesTracingThreshold != nil {
+		return *obj.AlertDefPropertiesTracingThreshold
 	}
 
 	// all schemas are nil

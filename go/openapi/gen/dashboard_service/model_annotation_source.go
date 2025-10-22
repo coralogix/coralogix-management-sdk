@@ -18,45 +18,45 @@ import (
 
 // AnnotationSource - struct for AnnotationSource
 type AnnotationSource struct {
-	AnnotationSourceOneOf *AnnotationSourceOneOf
-	AnnotationSourceOneOf1 *AnnotationSourceOneOf1
-	AnnotationSourceOneOf2 *AnnotationSourceOneOf2
-	AnnotationSourceOneOf3 *AnnotationSourceOneOf3
-	AnnotationSourceOneOf4 *AnnotationSourceOneOf4
+	SourceDataprime *SourceDataprime
+	SourceLogs *SourceLogs
+	SourceManual *SourceManual
+	SourceMetrics *SourceMetrics
+	SourceSpans *SourceSpans
 }
 
-// AnnotationSourceOneOfAsAnnotationSource is a convenience function that returns AnnotationSourceOneOf wrapped in AnnotationSource
-func AnnotationSourceOneOfAsAnnotationSource(v *AnnotationSourceOneOf) AnnotationSource {
+// SourceDataprimeAsAnnotationSource is a convenience function that returns SourceDataprime wrapped in AnnotationSource
+func SourceDataprimeAsAnnotationSource(v *SourceDataprime) AnnotationSource {
 	return AnnotationSource{
-		AnnotationSourceOneOf: v,
+		SourceDataprime: v,
 	}
 }
 
-// AnnotationSourceOneOf1AsAnnotationSource is a convenience function that returns AnnotationSourceOneOf1 wrapped in AnnotationSource
-func AnnotationSourceOneOf1AsAnnotationSource(v *AnnotationSourceOneOf1) AnnotationSource {
+// SourceLogsAsAnnotationSource is a convenience function that returns SourceLogs wrapped in AnnotationSource
+func SourceLogsAsAnnotationSource(v *SourceLogs) AnnotationSource {
 	return AnnotationSource{
-		AnnotationSourceOneOf1: v,
+		SourceLogs: v,
 	}
 }
 
-// AnnotationSourceOneOf2AsAnnotationSource is a convenience function that returns AnnotationSourceOneOf2 wrapped in AnnotationSource
-func AnnotationSourceOneOf2AsAnnotationSource(v *AnnotationSourceOneOf2) AnnotationSource {
+// SourceManualAsAnnotationSource is a convenience function that returns SourceManual wrapped in AnnotationSource
+func SourceManualAsAnnotationSource(v *SourceManual) AnnotationSource {
 	return AnnotationSource{
-		AnnotationSourceOneOf2: v,
+		SourceManual: v,
 	}
 }
 
-// AnnotationSourceOneOf3AsAnnotationSource is a convenience function that returns AnnotationSourceOneOf3 wrapped in AnnotationSource
-func AnnotationSourceOneOf3AsAnnotationSource(v *AnnotationSourceOneOf3) AnnotationSource {
+// SourceMetricsAsAnnotationSource is a convenience function that returns SourceMetrics wrapped in AnnotationSource
+func SourceMetricsAsAnnotationSource(v *SourceMetrics) AnnotationSource {
 	return AnnotationSource{
-		AnnotationSourceOneOf3: v,
+		SourceMetrics: v,
 	}
 }
 
-// AnnotationSourceOneOf4AsAnnotationSource is a convenience function that returns AnnotationSourceOneOf4 wrapped in AnnotationSource
-func AnnotationSourceOneOf4AsAnnotationSource(v *AnnotationSourceOneOf4) AnnotationSource {
+// SourceSpansAsAnnotationSource is a convenience function that returns SourceSpans wrapped in AnnotationSource
+func SourceSpansAsAnnotationSource(v *SourceSpans) AnnotationSource {
 	return AnnotationSource{
-		AnnotationSourceOneOf4: v,
+		SourceSpans: v,
 	}
 }
 
@@ -65,98 +65,98 @@ func AnnotationSourceOneOf4AsAnnotationSource(v *AnnotationSourceOneOf4) Annotat
 func (dst *AnnotationSource) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into AnnotationSourceOneOf
-	err = newStrictDecoder(data).Decode(&dst.AnnotationSourceOneOf)
+	// try to unmarshal data into SourceDataprime
+	err = newStrictDecoder(data).Decode(&dst.SourceDataprime)
 	if err == nil {
-		jsonAnnotationSourceOneOf, _ := json.Marshal(dst.AnnotationSourceOneOf)
-		if string(jsonAnnotationSourceOneOf) == "{}" { // empty struct
-			dst.AnnotationSourceOneOf = nil
+		jsonSourceDataprime, _ := json.Marshal(dst.SourceDataprime)
+		if string(jsonSourceDataprime) == "{}" { // empty struct
+			dst.SourceDataprime = nil
 		} else {
-			if err = validator.Validate(dst.AnnotationSourceOneOf); err != nil {
-				dst.AnnotationSourceOneOf = nil
+			if err = validator.Validate(dst.SourceDataprime); err != nil {
+				dst.SourceDataprime = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AnnotationSourceOneOf = nil
+		dst.SourceDataprime = nil
 	}
 
-	// try to unmarshal data into AnnotationSourceOneOf1
-	err = newStrictDecoder(data).Decode(&dst.AnnotationSourceOneOf1)
+	// try to unmarshal data into SourceLogs
+	err = newStrictDecoder(data).Decode(&dst.SourceLogs)
 	if err == nil {
-		jsonAnnotationSourceOneOf1, _ := json.Marshal(dst.AnnotationSourceOneOf1)
-		if string(jsonAnnotationSourceOneOf1) == "{}" { // empty struct
-			dst.AnnotationSourceOneOf1 = nil
+		jsonSourceLogs, _ := json.Marshal(dst.SourceLogs)
+		if string(jsonSourceLogs) == "{}" { // empty struct
+			dst.SourceLogs = nil
 		} else {
-			if err = validator.Validate(dst.AnnotationSourceOneOf1); err != nil {
-				dst.AnnotationSourceOneOf1 = nil
+			if err = validator.Validate(dst.SourceLogs); err != nil {
+				dst.SourceLogs = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AnnotationSourceOneOf1 = nil
+		dst.SourceLogs = nil
 	}
 
-	// try to unmarshal data into AnnotationSourceOneOf2
-	err = newStrictDecoder(data).Decode(&dst.AnnotationSourceOneOf2)
+	// try to unmarshal data into SourceManual
+	err = newStrictDecoder(data).Decode(&dst.SourceManual)
 	if err == nil {
-		jsonAnnotationSourceOneOf2, _ := json.Marshal(dst.AnnotationSourceOneOf2)
-		if string(jsonAnnotationSourceOneOf2) == "{}" { // empty struct
-			dst.AnnotationSourceOneOf2 = nil
+		jsonSourceManual, _ := json.Marshal(dst.SourceManual)
+		if string(jsonSourceManual) == "{}" { // empty struct
+			dst.SourceManual = nil
 		} else {
-			if err = validator.Validate(dst.AnnotationSourceOneOf2); err != nil {
-				dst.AnnotationSourceOneOf2 = nil
+			if err = validator.Validate(dst.SourceManual); err != nil {
+				dst.SourceManual = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AnnotationSourceOneOf2 = nil
+		dst.SourceManual = nil
 	}
 
-	// try to unmarshal data into AnnotationSourceOneOf3
-	err = newStrictDecoder(data).Decode(&dst.AnnotationSourceOneOf3)
+	// try to unmarshal data into SourceMetrics
+	err = newStrictDecoder(data).Decode(&dst.SourceMetrics)
 	if err == nil {
-		jsonAnnotationSourceOneOf3, _ := json.Marshal(dst.AnnotationSourceOneOf3)
-		if string(jsonAnnotationSourceOneOf3) == "{}" { // empty struct
-			dst.AnnotationSourceOneOf3 = nil
+		jsonSourceMetrics, _ := json.Marshal(dst.SourceMetrics)
+		if string(jsonSourceMetrics) == "{}" { // empty struct
+			dst.SourceMetrics = nil
 		} else {
-			if err = validator.Validate(dst.AnnotationSourceOneOf3); err != nil {
-				dst.AnnotationSourceOneOf3 = nil
+			if err = validator.Validate(dst.SourceMetrics); err != nil {
+				dst.SourceMetrics = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AnnotationSourceOneOf3 = nil
+		dst.SourceMetrics = nil
 	}
 
-	// try to unmarshal data into AnnotationSourceOneOf4
-	err = newStrictDecoder(data).Decode(&dst.AnnotationSourceOneOf4)
+	// try to unmarshal data into SourceSpans
+	err = newStrictDecoder(data).Decode(&dst.SourceSpans)
 	if err == nil {
-		jsonAnnotationSourceOneOf4, _ := json.Marshal(dst.AnnotationSourceOneOf4)
-		if string(jsonAnnotationSourceOneOf4) == "{}" { // empty struct
-			dst.AnnotationSourceOneOf4 = nil
+		jsonSourceSpans, _ := json.Marshal(dst.SourceSpans)
+		if string(jsonSourceSpans) == "{}" { // empty struct
+			dst.SourceSpans = nil
 		} else {
-			if err = validator.Validate(dst.AnnotationSourceOneOf4); err != nil {
-				dst.AnnotationSourceOneOf4 = nil
+			if err = validator.Validate(dst.SourceSpans); err != nil {
+				dst.SourceSpans = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AnnotationSourceOneOf4 = nil
+		dst.SourceSpans = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.AnnotationSourceOneOf = nil
-		dst.AnnotationSourceOneOf1 = nil
-		dst.AnnotationSourceOneOf2 = nil
-		dst.AnnotationSourceOneOf3 = nil
-		dst.AnnotationSourceOneOf4 = nil
+		dst.SourceDataprime = nil
+		dst.SourceLogs = nil
+		dst.SourceManual = nil
+		dst.SourceMetrics = nil
+		dst.SourceSpans = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(AnnotationSource)")
 	} else if match == 1 {
@@ -168,24 +168,24 @@ func (dst *AnnotationSource) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src AnnotationSource) MarshalJSON() ([]byte, error) {
-	if src.AnnotationSourceOneOf != nil {
-		return json.Marshal(&src.AnnotationSourceOneOf)
+	if src.SourceDataprime != nil {
+		return json.Marshal(&src.SourceDataprime)
 	}
 
-	if src.AnnotationSourceOneOf1 != nil {
-		return json.Marshal(&src.AnnotationSourceOneOf1)
+	if src.SourceLogs != nil {
+		return json.Marshal(&src.SourceLogs)
 	}
 
-	if src.AnnotationSourceOneOf2 != nil {
-		return json.Marshal(&src.AnnotationSourceOneOf2)
+	if src.SourceManual != nil {
+		return json.Marshal(&src.SourceManual)
 	}
 
-	if src.AnnotationSourceOneOf3 != nil {
-		return json.Marshal(&src.AnnotationSourceOneOf3)
+	if src.SourceMetrics != nil {
+		return json.Marshal(&src.SourceMetrics)
 	}
 
-	if src.AnnotationSourceOneOf4 != nil {
-		return json.Marshal(&src.AnnotationSourceOneOf4)
+	if src.SourceSpans != nil {
+		return json.Marshal(&src.SourceSpans)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -196,24 +196,24 @@ func (obj *AnnotationSource) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.AnnotationSourceOneOf != nil {
-		return obj.AnnotationSourceOneOf
+	if obj.SourceDataprime != nil {
+		return obj.SourceDataprime
 	}
 
-	if obj.AnnotationSourceOneOf1 != nil {
-		return obj.AnnotationSourceOneOf1
+	if obj.SourceLogs != nil {
+		return obj.SourceLogs
 	}
 
-	if obj.AnnotationSourceOneOf2 != nil {
-		return obj.AnnotationSourceOneOf2
+	if obj.SourceManual != nil {
+		return obj.SourceManual
 	}
 
-	if obj.AnnotationSourceOneOf3 != nil {
-		return obj.AnnotationSourceOneOf3
+	if obj.SourceMetrics != nil {
+		return obj.SourceMetrics
 	}
 
-	if obj.AnnotationSourceOneOf4 != nil {
-		return obj.AnnotationSourceOneOf4
+	if obj.SourceSpans != nil {
+		return obj.SourceSpans
 	}
 
 	// all schemas are nil
@@ -222,24 +222,24 @@ func (obj *AnnotationSource) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj AnnotationSource) GetActualInstanceValue() (interface{}) {
-	if obj.AnnotationSourceOneOf != nil {
-		return *obj.AnnotationSourceOneOf
+	if obj.SourceDataprime != nil {
+		return *obj.SourceDataprime
 	}
 
-	if obj.AnnotationSourceOneOf1 != nil {
-		return *obj.AnnotationSourceOneOf1
+	if obj.SourceLogs != nil {
+		return *obj.SourceLogs
 	}
 
-	if obj.AnnotationSourceOneOf2 != nil {
-		return *obj.AnnotationSourceOneOf2
+	if obj.SourceManual != nil {
+		return *obj.SourceManual
 	}
 
-	if obj.AnnotationSourceOneOf3 != nil {
-		return *obj.AnnotationSourceOneOf3
+	if obj.SourceMetrics != nil {
+		return *obj.SourceMetrics
 	}
 
-	if obj.AnnotationSourceOneOf4 != nil {
-		return *obj.AnnotationSourceOneOf4
+	if obj.SourceSpans != nil {
+		return *obj.SourceSpans
 	}
 
 	// all schemas are nil

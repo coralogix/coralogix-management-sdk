@@ -18,21 +18,21 @@ import (
 
 // Schedule - struct for Schedule
 type Schedule struct {
-	ScheduleOneOf *ScheduleOneOf
-	ScheduleOneOf1 *ScheduleOneOf1
+	ScheduleOneTime *ScheduleOneTime
+	ScheduleRecurring *ScheduleRecurring
 }
 
-// ScheduleOneOfAsSchedule is a convenience function that returns ScheduleOneOf wrapped in Schedule
-func ScheduleOneOfAsSchedule(v *ScheduleOneOf) Schedule {
+// ScheduleOneTimeAsSchedule is a convenience function that returns ScheduleOneTime wrapped in Schedule
+func ScheduleOneTimeAsSchedule(v *ScheduleOneTime) Schedule {
 	return Schedule{
-		ScheduleOneOf: v,
+		ScheduleOneTime: v,
 	}
 }
 
-// ScheduleOneOf1AsSchedule is a convenience function that returns ScheduleOneOf1 wrapped in Schedule
-func ScheduleOneOf1AsSchedule(v *ScheduleOneOf1) Schedule {
+// ScheduleRecurringAsSchedule is a convenience function that returns ScheduleRecurring wrapped in Schedule
+func ScheduleRecurringAsSchedule(v *ScheduleRecurring) Schedule {
 	return Schedule{
-		ScheduleOneOf1: v,
+		ScheduleRecurring: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func ScheduleOneOf1AsSchedule(v *ScheduleOneOf1) Schedule {
 func (dst *Schedule) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into ScheduleOneOf
-	err = newStrictDecoder(data).Decode(&dst.ScheduleOneOf)
+	// try to unmarshal data into ScheduleOneTime
+	err = newStrictDecoder(data).Decode(&dst.ScheduleOneTime)
 	if err == nil {
-		jsonScheduleOneOf, _ := json.Marshal(dst.ScheduleOneOf)
-		if string(jsonScheduleOneOf) == "{}" { // empty struct
-			dst.ScheduleOneOf = nil
+		jsonScheduleOneTime, _ := json.Marshal(dst.ScheduleOneTime)
+		if string(jsonScheduleOneTime) == "{}" { // empty struct
+			dst.ScheduleOneTime = nil
 		} else {
-			if err = validator.Validate(dst.ScheduleOneOf); err != nil {
-				dst.ScheduleOneOf = nil
+			if err = validator.Validate(dst.ScheduleOneTime); err != nil {
+				dst.ScheduleOneTime = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.ScheduleOneOf = nil
+		dst.ScheduleOneTime = nil
 	}
 
-	// try to unmarshal data into ScheduleOneOf1
-	err = newStrictDecoder(data).Decode(&dst.ScheduleOneOf1)
+	// try to unmarshal data into ScheduleRecurring
+	err = newStrictDecoder(data).Decode(&dst.ScheduleRecurring)
 	if err == nil {
-		jsonScheduleOneOf1, _ := json.Marshal(dst.ScheduleOneOf1)
-		if string(jsonScheduleOneOf1) == "{}" { // empty struct
-			dst.ScheduleOneOf1 = nil
+		jsonScheduleRecurring, _ := json.Marshal(dst.ScheduleRecurring)
+		if string(jsonScheduleRecurring) == "{}" { // empty struct
+			dst.ScheduleRecurring = nil
 		} else {
-			if err = validator.Validate(dst.ScheduleOneOf1); err != nil {
-				dst.ScheduleOneOf1 = nil
+			if err = validator.Validate(dst.ScheduleRecurring); err != nil {
+				dst.ScheduleRecurring = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.ScheduleOneOf1 = nil
+		dst.ScheduleRecurring = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.ScheduleOneOf = nil
-		dst.ScheduleOneOf1 = nil
+		dst.ScheduleOneTime = nil
+		dst.ScheduleRecurring = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(Schedule)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *Schedule) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src Schedule) MarshalJSON() ([]byte, error) {
-	if src.ScheduleOneOf != nil {
-		return json.Marshal(&src.ScheduleOneOf)
+	if src.ScheduleOneTime != nil {
+		return json.Marshal(&src.ScheduleOneTime)
 	}
 
-	if src.ScheduleOneOf1 != nil {
-		return json.Marshal(&src.ScheduleOneOf1)
+	if src.ScheduleRecurring != nil {
+		return json.Marshal(&src.ScheduleRecurring)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *Schedule) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.ScheduleOneOf != nil {
-		return obj.ScheduleOneOf
+	if obj.ScheduleOneTime != nil {
+		return obj.ScheduleOneTime
 	}
 
-	if obj.ScheduleOneOf1 != nil {
-		return obj.ScheduleOneOf1
+	if obj.ScheduleRecurring != nil {
+		return obj.ScheduleRecurring
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *Schedule) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj Schedule) GetActualInstanceValue() (interface{}) {
-	if obj.ScheduleOneOf != nil {
-		return *obj.ScheduleOneOf
+	if obj.ScheduleOneTime != nil {
+		return *obj.ScheduleOneTime
 	}
 
-	if obj.ScheduleOneOf1 != nil {
-		return *obj.ScheduleOneOf1
+	if obj.ScheduleRecurring != nil {
+		return *obj.ScheduleRecurring
 	}
 
 	// all schemas are nil

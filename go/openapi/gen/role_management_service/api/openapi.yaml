@@ -123,7 +123,7 @@ paths:
           let options = {
             method: 'PUT',
             headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"description":"string","name":"string","parentRoleId":0,"permissions":["string"],"teamId":0}'
+            body: '{"description":"string","name":"string","parentRoleName":"string","permissions":["string"],"teamId":0}'
           };
 
           fetch(url, options)
@@ -139,7 +139,7 @@ paths:
           payload = {
               "description": "string",
               "name": "string",
-              "parentRoleId": 0,
+              "parentRoleName": "string",
               "permissions": ["string"],
               "teamId": 0
           }
@@ -157,7 +157,7 @@ paths:
             --url https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles \
             --header 'Authorization: Bearer <API_KEY>' \
             --header 'content-type: application/json' \
-            --data '{"description":"string","name":"string","parentRoleId":0,"permissions":["string"],"teamId":0}'
+            --data '{"description":"string","name":"string","parentRoleName":"string","permissions":["string"],"teamId":0}'
   /aaa/team-roles/v1/custom-roles/{role_id}:
     delete:
       description: No description available
@@ -448,6 +448,59 @@ paths:
             --header 'Authorization: Bearer <API_KEY>'
 components:
   schemas:
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
+    CreateRoleRequestParentRoleId:
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        parentRoleId:
+          format: int64
+          type: integer
+        permissions:
+          items:
+            type: string
+          type: array
+        teamId:
+          format: int64
+          type: integer
+      type: object
+    CreateRoleRequestParentRoleName:
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        parentRoleName:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+        teamId:
+          format: int64
+          type: integer
+      type: object
     CreateRoleResponse:
       example:
         id: 0
@@ -467,8 +520,40 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValues_1"
-      - $ref: "#/components/schemas/FilterPathAndValues_2"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
     Filters:
       description: This data structure represents a filter
       externalDocs:
@@ -485,7 +570,6 @@ components:
       title: Filters
       type: object
     GetCustomRoleResponse:
-      additionalProperties: false
       example:
         role:
           parentRoleName: parentRoleName
@@ -559,6 +643,18 @@ components:
           type: array
       type: object
     UpdateRoleResponse:
+      type: object
+    YAxisViewByCategory:
+      additionalProperties: false
+      properties:
+        category:
+          $ref: "#/components/schemas/YAxisViewByCategory"
+      type: object
+    YAxisViewByValue:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: "#/components/schemas/YAxisViewByValue"
       type: object
     common.Group:
       properties:
@@ -642,45 +738,10 @@ components:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
-    RoleManagementService_CreateRole_request_oneOf:
-      additionalProperties: false
-      properties:
-        description:
-          type: string
-        name:
-          type: string
-        parentRoleId:
-          format: int64
-          type: integer
-        permissions:
-          items:
-            type: string
-          type: array
-        teamId:
-          format: int64
-          type: integer
-      type: object
-    RoleManagementService_CreateRole_request_oneOf_1:
-      additionalProperties: false
-      properties:
-        description:
-          type: string
-        name:
-          type: string
-        parentRoleName:
-          type: string
-        permissions:
-          items:
-            type: string
-          type: array
-        teamId:
-          format: int64
-          type: integer
-      type: object
     RoleManagementService_CreateRole_request:
       oneOf:
-      - $ref: "#/components/schemas/RoleManagementService_CreateRole_request_oneOf"
-      - $ref: "#/components/schemas/RoleManagementService_CreateRole_request_oneOf_1"
+      - $ref: "#/components/schemas/CreateRoleRequestParentRoleName"
+      - $ref: "#/components/schemas/CreateRoleRequestParentRoleId"
       type: object
     RoleManagementService_UpdateRole_request:
       additionalProperties: false
@@ -691,38 +752,6 @@ components:
           type: string
         newPermissions:
           $ref: "#/components/schemas/v2.Permissions"
-      type: object
-    FilterPathAndValues_1:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValues_2:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
       type: object
   securitySchemes:
     apiKeyAuth:

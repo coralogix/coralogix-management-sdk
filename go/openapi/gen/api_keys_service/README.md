@@ -87,6 +87,9 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [ColorsByAggregation](docs/ColorsByAggregation.md)
+ - [ColorsByGroupBy](docs/ColorsByGroupBy.md)
+ - [ColorsByStack](docs/ColorsByStack.md)
  - [CommonGroup](docs/CommonGroup.md)
  - [CreateApiKeyRequest](docs/CreateApiKeyRequest.md)
  - [CreateApiKeyRequestKeyPermissions](docs/CreateApiKeyRequestKeyPermissions.md)
@@ -94,8 +97,8 @@ Class | Method | HTTP request | Description
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FieldGroup](docs/FieldGroup.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
- - [FilterPathAndValues1](docs/FilterPathAndValues1.md)
- - [FilterPathAndValues2](docs/FilterPathAndValues2.md)
+ - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
+ - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [GetApiKeyResponse](docs/GetApiKeyResponse.md)
  - [GetSendDataApiKeysResponse](docs/GetSendDataApiKeysResponse.md)
@@ -103,14 +106,16 @@ Class | Method | HTTP request | Description
  - [KeyInfoKeyPermissions](docs/KeyInfoKeyPermissions.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [Owner](docs/Owner.md)
- - [OwnerOneOf](docs/OwnerOneOf.md)
- - [OwnerOneOf1](docs/OwnerOneOf1.md)
- - [OwnerOneOf2](docs/OwnerOneOf2.md)
+ - [OwnerOrganisationId](docs/OwnerOrganisationId.md)
+ - [OwnerTeamId](docs/OwnerTeamId.md)
+ - [OwnerUserId](docs/OwnerUserId.md)
  - [PresetInfo](docs/PresetInfo.md)
  - [Presets](docs/Presets.md)
  - [UpdateApiKeyRequest](docs/UpdateApiKeyRequest.md)
  - [UpdateApiKeyRequestPermissions](docs/UpdateApiKeyRequestPermissions.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
+ - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
+ - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

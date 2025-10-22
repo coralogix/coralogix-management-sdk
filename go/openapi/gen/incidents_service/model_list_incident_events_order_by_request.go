@@ -19,10 +19,8 @@ var _ MappedNullable = &ListIncidentEventsOrderByRequest{}
 
 // ListIncidentEventsOrderByRequest struct for ListIncidentEventsOrderByRequest
 type ListIncidentEventsOrderByRequest struct {
-	// Sort direction (ascending or descending)
-	Direction *string `json:"direction,omitempty"`
-	// Field to order by
-	Field *string `json:"field,omitempty"`
+	Direction *V1OrderByDirection `json:"direction,omitempty"`
+	Field *IncidentEventOrderByFieldType `json:"field,omitempty"`
 }
 
 // NewListIncidentEventsOrderByRequest instantiates a new ListIncidentEventsOrderByRequest object
@@ -43,9 +41,9 @@ func NewListIncidentEventsOrderByRequestWithDefaults() *ListIncidentEventsOrderB
 }
 
 // GetDirection returns the Direction field value if set, zero value otherwise.
-func (o *ListIncidentEventsOrderByRequest) GetDirection() string {
+func (o *ListIncidentEventsOrderByRequest) GetDirection() V1OrderByDirection {
 	if o == nil || IsNil(o.Direction) {
-		var ret string
+		var ret V1OrderByDirection
 		return ret
 	}
 	return *o.Direction
@@ -53,7 +51,7 @@ func (o *ListIncidentEventsOrderByRequest) GetDirection() string {
 
 // GetDirectionOk returns a tuple with the Direction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListIncidentEventsOrderByRequest) GetDirectionOk() (*string, bool) {
+func (o *ListIncidentEventsOrderByRequest) GetDirectionOk() (*V1OrderByDirection, bool) {
 	if o == nil || IsNil(o.Direction) {
 		return nil, false
 	}
@@ -69,15 +67,15 @@ func (o *ListIncidentEventsOrderByRequest) HasDirection() bool {
 	return false
 }
 
-// SetDirection gets a reference to the given string and assigns it to the Direction field.
-func (o *ListIncidentEventsOrderByRequest) SetDirection(v string) {
+// SetDirection gets a reference to the given V1OrderByDirection and assigns it to the Direction field.
+func (o *ListIncidentEventsOrderByRequest) SetDirection(v V1OrderByDirection) {
 	o.Direction = &v
 }
 
 // GetField returns the Field field value if set, zero value otherwise.
-func (o *ListIncidentEventsOrderByRequest) GetField() string {
+func (o *ListIncidentEventsOrderByRequest) GetField() IncidentEventOrderByFieldType {
 	if o == nil || IsNil(o.Field) {
-		var ret string
+		var ret IncidentEventOrderByFieldType
 		return ret
 	}
 	return *o.Field
@@ -85,7 +83,7 @@ func (o *ListIncidentEventsOrderByRequest) GetField() string {
 
 // GetFieldOk returns a tuple with the Field field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListIncidentEventsOrderByRequest) GetFieldOk() (*string, bool) {
+func (o *ListIncidentEventsOrderByRequest) GetFieldOk() (*IncidentEventOrderByFieldType, bool) {
 	if o == nil || IsNil(o.Field) {
 		return nil, false
 	}
@@ -101,8 +99,8 @@ func (o *ListIncidentEventsOrderByRequest) HasField() bool {
 	return false
 }
 
-// SetField gets a reference to the given string and assigns it to the Field field.
-func (o *ListIncidentEventsOrderByRequest) SetField(v string) {
+// SetField gets a reference to the given IncidentEventOrderByFieldType and assigns it to the Field field.
+func (o *ListIncidentEventsOrderByRequest) SetField(v IncidentEventOrderByFieldType) {
 	o.Field = &v
 }
 

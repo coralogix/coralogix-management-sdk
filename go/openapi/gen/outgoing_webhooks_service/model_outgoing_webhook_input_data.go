@@ -12,211 +12,504 @@ package outgoing_webhooks_service
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
+	"gopkg.in/validator.v2"
 )
 
-// checks if the OutgoingWebhookInputData type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &OutgoingWebhookInputData{}
-
-// OutgoingWebhookInputData struct for OutgoingWebhookInputData
+// OutgoingWebhookInputData - struct for OutgoingWebhookInputData
 type OutgoingWebhookInputData struct {
-	GenericWebhook *GenericWebhookConfig `json:"genericWebhook,omitempty"`
-	Name string `json:"name"`
-	Type WebhookType `json:"type"`
-	Url *string `json:"url,omitempty"`
+	OutgoingWebhookInputDataAwsEventBridge *OutgoingWebhookInputDataAwsEventBridge
+	OutgoingWebhookInputDataDemisto *OutgoingWebhookInputDataDemisto
+	OutgoingWebhookInputDataEmailGroup *OutgoingWebhookInputDataEmailGroup
+	OutgoingWebhookInputDataGenericWebhook *OutgoingWebhookInputDataGenericWebhook
+	OutgoingWebhookInputDataIbmEventNotifications *OutgoingWebhookInputDataIbmEventNotifications
+	OutgoingWebhookInputDataJira *OutgoingWebhookInputDataJira
+	OutgoingWebhookInputDataMicrosoftTeams *OutgoingWebhookInputDataMicrosoftTeams
+	OutgoingWebhookInputDataMsTeamsWorkflow *OutgoingWebhookInputDataMsTeamsWorkflow
+	OutgoingWebhookInputDataOpsgenie *OutgoingWebhookInputDataOpsgenie
+	OutgoingWebhookInputDataPagerDuty *OutgoingWebhookInputDataPagerDuty
+	OutgoingWebhookInputDataSendLog *OutgoingWebhookInputDataSendLog
+	OutgoingWebhookInputDataSlack *OutgoingWebhookInputDataSlack
 }
 
-type _OutgoingWebhookInputData OutgoingWebhookInputData
-
-// NewOutgoingWebhookInputData instantiates a new OutgoingWebhookInputData object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewOutgoingWebhookInputData(name string, type_ WebhookType) *OutgoingWebhookInputData {
-	this := OutgoingWebhookInputData{}
-	this.Name = name
-	this.Type = type_
-	return &this
-}
-
-// NewOutgoingWebhookInputDataWithDefaults instantiates a new OutgoingWebhookInputData object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewOutgoingWebhookInputDataWithDefaults() *OutgoingWebhookInputData {
-	this := OutgoingWebhookInputData{}
-	return &this
-}
-
-// GetGenericWebhook returns the GenericWebhook field value if set, zero value otherwise.
-func (o *OutgoingWebhookInputData) GetGenericWebhook() GenericWebhookConfig {
-	if o == nil || IsNil(o.GenericWebhook) {
-		var ret GenericWebhookConfig
-		return ret
+// OutgoingWebhookInputDataAwsEventBridgeAsOutgoingWebhookInputData is a convenience function that returns OutgoingWebhookInputDataAwsEventBridge wrapped in OutgoingWebhookInputData
+func OutgoingWebhookInputDataAwsEventBridgeAsOutgoingWebhookInputData(v *OutgoingWebhookInputDataAwsEventBridge) OutgoingWebhookInputData {
+	return OutgoingWebhookInputData{
+		OutgoingWebhookInputDataAwsEventBridge: v,
 	}
-	return *o.GenericWebhook
 }
 
-// GetGenericWebhookOk returns a tuple with the GenericWebhook field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OutgoingWebhookInputData) GetGenericWebhookOk() (*GenericWebhookConfig, bool) {
-	if o == nil || IsNil(o.GenericWebhook) {
-		return nil, false
+// OutgoingWebhookInputDataDemistoAsOutgoingWebhookInputData is a convenience function that returns OutgoingWebhookInputDataDemisto wrapped in OutgoingWebhookInputData
+func OutgoingWebhookInputDataDemistoAsOutgoingWebhookInputData(v *OutgoingWebhookInputDataDemisto) OutgoingWebhookInputData {
+	return OutgoingWebhookInputData{
+		OutgoingWebhookInputDataDemisto: v,
 	}
-	return o.GenericWebhook, true
 }
 
-// HasGenericWebhook returns a boolean if a field has been set.
-func (o *OutgoingWebhookInputData) HasGenericWebhook() bool {
-	if o != nil && !IsNil(o.GenericWebhook) {
-		return true
+// OutgoingWebhookInputDataEmailGroupAsOutgoingWebhookInputData is a convenience function that returns OutgoingWebhookInputDataEmailGroup wrapped in OutgoingWebhookInputData
+func OutgoingWebhookInputDataEmailGroupAsOutgoingWebhookInputData(v *OutgoingWebhookInputDataEmailGroup) OutgoingWebhookInputData {
+	return OutgoingWebhookInputData{
+		OutgoingWebhookInputDataEmailGroup: v,
 	}
-
-	return false
 }
 
-// SetGenericWebhook gets a reference to the given GenericWebhookConfig and assigns it to the GenericWebhook field.
-func (o *OutgoingWebhookInputData) SetGenericWebhook(v GenericWebhookConfig) {
-	o.GenericWebhook = &v
-}
-
-// GetName returns the Name field value
-func (o *OutgoingWebhookInputData) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
+// OutgoingWebhookInputDataGenericWebhookAsOutgoingWebhookInputData is a convenience function that returns OutgoingWebhookInputDataGenericWebhook wrapped in OutgoingWebhookInputData
+func OutgoingWebhookInputDataGenericWebhookAsOutgoingWebhookInputData(v *OutgoingWebhookInputDataGenericWebhook) OutgoingWebhookInputData {
+	return OutgoingWebhookInputData{
+		OutgoingWebhookInputDataGenericWebhook: v,
 	}
-
-	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *OutgoingWebhookInputData) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
+// OutgoingWebhookInputDataIbmEventNotificationsAsOutgoingWebhookInputData is a convenience function that returns OutgoingWebhookInputDataIbmEventNotifications wrapped in OutgoingWebhookInputData
+func OutgoingWebhookInputDataIbmEventNotificationsAsOutgoingWebhookInputData(v *OutgoingWebhookInputDataIbmEventNotifications) OutgoingWebhookInputData {
+	return OutgoingWebhookInputData{
+		OutgoingWebhookInputDataIbmEventNotifications: v,
 	}
-	return &o.Name, true
 }
 
-// SetName sets field value
-func (o *OutgoingWebhookInputData) SetName(v string) {
-	o.Name = v
-}
-
-// GetType returns the Type field value
-func (o *OutgoingWebhookInputData) GetType() WebhookType {
-	if o == nil {
-		var ret WebhookType
-		return ret
+// OutgoingWebhookInputDataJiraAsOutgoingWebhookInputData is a convenience function that returns OutgoingWebhookInputDataJira wrapped in OutgoingWebhookInputData
+func OutgoingWebhookInputDataJiraAsOutgoingWebhookInputData(v *OutgoingWebhookInputDataJira) OutgoingWebhookInputData {
+	return OutgoingWebhookInputData{
+		OutgoingWebhookInputDataJira: v,
 	}
-
-	return o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value
-// and a boolean to check if the value has been set.
-func (o *OutgoingWebhookInputData) GetTypeOk() (*WebhookType, bool) {
-	if o == nil {
-		return nil, false
+// OutgoingWebhookInputDataMicrosoftTeamsAsOutgoingWebhookInputData is a convenience function that returns OutgoingWebhookInputDataMicrosoftTeams wrapped in OutgoingWebhookInputData
+func OutgoingWebhookInputDataMicrosoftTeamsAsOutgoingWebhookInputData(v *OutgoingWebhookInputDataMicrosoftTeams) OutgoingWebhookInputData {
+	return OutgoingWebhookInputData{
+		OutgoingWebhookInputDataMicrosoftTeams: v,
 	}
-	return &o.Type, true
 }
 
-// SetType sets field value
-func (o *OutgoingWebhookInputData) SetType(v WebhookType) {
-	o.Type = v
+// OutgoingWebhookInputDataMsTeamsWorkflowAsOutgoingWebhookInputData is a convenience function that returns OutgoingWebhookInputDataMsTeamsWorkflow wrapped in OutgoingWebhookInputData
+func OutgoingWebhookInputDataMsTeamsWorkflowAsOutgoingWebhookInputData(v *OutgoingWebhookInputDataMsTeamsWorkflow) OutgoingWebhookInputData {
+	return OutgoingWebhookInputData{
+		OutgoingWebhookInputDataMsTeamsWorkflow: v,
+	}
 }
 
-// GetUrl returns the Url field value if set, zero value otherwise.
-func (o *OutgoingWebhookInputData) GetUrl() string {
-	if o == nil || IsNil(o.Url) {
-		var ret string
-		return ret
+// OutgoingWebhookInputDataOpsgenieAsOutgoingWebhookInputData is a convenience function that returns OutgoingWebhookInputDataOpsgenie wrapped in OutgoingWebhookInputData
+func OutgoingWebhookInputDataOpsgenieAsOutgoingWebhookInputData(v *OutgoingWebhookInputDataOpsgenie) OutgoingWebhookInputData {
+	return OutgoingWebhookInputData{
+		OutgoingWebhookInputDataOpsgenie: v,
 	}
-	return *o.Url
 }
 
-// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OutgoingWebhookInputData) GetUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.Url) {
-		return nil, false
+// OutgoingWebhookInputDataPagerDutyAsOutgoingWebhookInputData is a convenience function that returns OutgoingWebhookInputDataPagerDuty wrapped in OutgoingWebhookInputData
+func OutgoingWebhookInputDataPagerDutyAsOutgoingWebhookInputData(v *OutgoingWebhookInputDataPagerDuty) OutgoingWebhookInputData {
+	return OutgoingWebhookInputData{
+		OutgoingWebhookInputDataPagerDuty: v,
 	}
-	return o.Url, true
 }
 
-// HasUrl returns a boolean if a field has been set.
-func (o *OutgoingWebhookInputData) HasUrl() bool {
-	if o != nil && !IsNil(o.Url) {
-		return true
+// OutgoingWebhookInputDataSendLogAsOutgoingWebhookInputData is a convenience function that returns OutgoingWebhookInputDataSendLog wrapped in OutgoingWebhookInputData
+func OutgoingWebhookInputDataSendLogAsOutgoingWebhookInputData(v *OutgoingWebhookInputDataSendLog) OutgoingWebhookInputData {
+	return OutgoingWebhookInputData{
+		OutgoingWebhookInputDataSendLog: v,
 	}
-
-	return false
 }
 
-// SetUrl gets a reference to the given string and assigns it to the Url field.
-func (o *OutgoingWebhookInputData) SetUrl(v string) {
-	o.Url = &v
+// OutgoingWebhookInputDataSlackAsOutgoingWebhookInputData is a convenience function that returns OutgoingWebhookInputDataSlack wrapped in OutgoingWebhookInputData
+func OutgoingWebhookInputDataSlackAsOutgoingWebhookInputData(v *OutgoingWebhookInputDataSlack) OutgoingWebhookInputData {
+	return OutgoingWebhookInputData{
+		OutgoingWebhookInputDataSlack: v,
+	}
 }
 
-func (o OutgoingWebhookInputData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
 
-func (o OutgoingWebhookInputData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	if !IsNil(o.GenericWebhook) {
-		toSerialize["genericWebhook"] = o.GenericWebhook
-	}
-	toSerialize["name"] = o.Name
-	toSerialize["type"] = o.Type
-	if !IsNil(o.Url) {
-		toSerialize["url"] = o.Url
-	}
-	return toSerialize, nil
-}
-
-func (o *OutgoingWebhookInputData) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"name",
-		"type",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
+// Unmarshal JSON data into one of the pointers in the struct
+func (dst *OutgoingWebhookInputData) UnmarshalJSON(data []byte) error {
+	var err error
+	match := 0
+	// try to unmarshal data into OutgoingWebhookInputDataAwsEventBridge
+	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookInputDataAwsEventBridge)
+	if err == nil {
+		jsonOutgoingWebhookInputDataAwsEventBridge, _ := json.Marshal(dst.OutgoingWebhookInputDataAwsEventBridge)
+		if string(jsonOutgoingWebhookInputDataAwsEventBridge) == "{}" { // empty struct
+			dst.OutgoingWebhookInputDataAwsEventBridge = nil
+		} else {
+			if err = validator.Validate(dst.OutgoingWebhookInputDataAwsEventBridge); err != nil {
+				dst.OutgoingWebhookInputDataAwsEventBridge = nil
+			} else {
+				match++
+			}
 		}
+	} else {
+		dst.OutgoingWebhookInputDataAwsEventBridge = nil
 	}
 
-	varOutgoingWebhookInputData := _OutgoingWebhookInputData{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOutgoingWebhookInputData)
-
-	if err != nil {
-		return err
+	// try to unmarshal data into OutgoingWebhookInputDataDemisto
+	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookInputDataDemisto)
+	if err == nil {
+		jsonOutgoingWebhookInputDataDemisto, _ := json.Marshal(dst.OutgoingWebhookInputDataDemisto)
+		if string(jsonOutgoingWebhookInputDataDemisto) == "{}" { // empty struct
+			dst.OutgoingWebhookInputDataDemisto = nil
+		} else {
+			if err = validator.Validate(dst.OutgoingWebhookInputDataDemisto); err != nil {
+				dst.OutgoingWebhookInputDataDemisto = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.OutgoingWebhookInputDataDemisto = nil
 	}
 
-	*o = OutgoingWebhookInputData(varOutgoingWebhookInputData)
+	// try to unmarshal data into OutgoingWebhookInputDataEmailGroup
+	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookInputDataEmailGroup)
+	if err == nil {
+		jsonOutgoingWebhookInputDataEmailGroup, _ := json.Marshal(dst.OutgoingWebhookInputDataEmailGroup)
+		if string(jsonOutgoingWebhookInputDataEmailGroup) == "{}" { // empty struct
+			dst.OutgoingWebhookInputDataEmailGroup = nil
+		} else {
+			if err = validator.Validate(dst.OutgoingWebhookInputDataEmailGroup); err != nil {
+				dst.OutgoingWebhookInputDataEmailGroup = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.OutgoingWebhookInputDataEmailGroup = nil
+	}
 
-	return err
+	// try to unmarshal data into OutgoingWebhookInputDataGenericWebhook
+	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookInputDataGenericWebhook)
+	if err == nil {
+		jsonOutgoingWebhookInputDataGenericWebhook, _ := json.Marshal(dst.OutgoingWebhookInputDataGenericWebhook)
+		if string(jsonOutgoingWebhookInputDataGenericWebhook) == "{}" { // empty struct
+			dst.OutgoingWebhookInputDataGenericWebhook = nil
+		} else {
+			if err = validator.Validate(dst.OutgoingWebhookInputDataGenericWebhook); err != nil {
+				dst.OutgoingWebhookInputDataGenericWebhook = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.OutgoingWebhookInputDataGenericWebhook = nil
+	}
+
+	// try to unmarshal data into OutgoingWebhookInputDataIbmEventNotifications
+	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookInputDataIbmEventNotifications)
+	if err == nil {
+		jsonOutgoingWebhookInputDataIbmEventNotifications, _ := json.Marshal(dst.OutgoingWebhookInputDataIbmEventNotifications)
+		if string(jsonOutgoingWebhookInputDataIbmEventNotifications) == "{}" { // empty struct
+			dst.OutgoingWebhookInputDataIbmEventNotifications = nil
+		} else {
+			if err = validator.Validate(dst.OutgoingWebhookInputDataIbmEventNotifications); err != nil {
+				dst.OutgoingWebhookInputDataIbmEventNotifications = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.OutgoingWebhookInputDataIbmEventNotifications = nil
+	}
+
+	// try to unmarshal data into OutgoingWebhookInputDataJira
+	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookInputDataJira)
+	if err == nil {
+		jsonOutgoingWebhookInputDataJira, _ := json.Marshal(dst.OutgoingWebhookInputDataJira)
+		if string(jsonOutgoingWebhookInputDataJira) == "{}" { // empty struct
+			dst.OutgoingWebhookInputDataJira = nil
+		} else {
+			if err = validator.Validate(dst.OutgoingWebhookInputDataJira); err != nil {
+				dst.OutgoingWebhookInputDataJira = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.OutgoingWebhookInputDataJira = nil
+	}
+
+	// try to unmarshal data into OutgoingWebhookInputDataMicrosoftTeams
+	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookInputDataMicrosoftTeams)
+	if err == nil {
+		jsonOutgoingWebhookInputDataMicrosoftTeams, _ := json.Marshal(dst.OutgoingWebhookInputDataMicrosoftTeams)
+		if string(jsonOutgoingWebhookInputDataMicrosoftTeams) == "{}" { // empty struct
+			dst.OutgoingWebhookInputDataMicrosoftTeams = nil
+		} else {
+			if err = validator.Validate(dst.OutgoingWebhookInputDataMicrosoftTeams); err != nil {
+				dst.OutgoingWebhookInputDataMicrosoftTeams = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.OutgoingWebhookInputDataMicrosoftTeams = nil
+	}
+
+	// try to unmarshal data into OutgoingWebhookInputDataMsTeamsWorkflow
+	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookInputDataMsTeamsWorkflow)
+	if err == nil {
+		jsonOutgoingWebhookInputDataMsTeamsWorkflow, _ := json.Marshal(dst.OutgoingWebhookInputDataMsTeamsWorkflow)
+		if string(jsonOutgoingWebhookInputDataMsTeamsWorkflow) == "{}" { // empty struct
+			dst.OutgoingWebhookInputDataMsTeamsWorkflow = nil
+		} else {
+			if err = validator.Validate(dst.OutgoingWebhookInputDataMsTeamsWorkflow); err != nil {
+				dst.OutgoingWebhookInputDataMsTeamsWorkflow = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.OutgoingWebhookInputDataMsTeamsWorkflow = nil
+	}
+
+	// try to unmarshal data into OutgoingWebhookInputDataOpsgenie
+	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookInputDataOpsgenie)
+	if err == nil {
+		jsonOutgoingWebhookInputDataOpsgenie, _ := json.Marshal(dst.OutgoingWebhookInputDataOpsgenie)
+		if string(jsonOutgoingWebhookInputDataOpsgenie) == "{}" { // empty struct
+			dst.OutgoingWebhookInputDataOpsgenie = nil
+		} else {
+			if err = validator.Validate(dst.OutgoingWebhookInputDataOpsgenie); err != nil {
+				dst.OutgoingWebhookInputDataOpsgenie = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.OutgoingWebhookInputDataOpsgenie = nil
+	}
+
+	// try to unmarshal data into OutgoingWebhookInputDataPagerDuty
+	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookInputDataPagerDuty)
+	if err == nil {
+		jsonOutgoingWebhookInputDataPagerDuty, _ := json.Marshal(dst.OutgoingWebhookInputDataPagerDuty)
+		if string(jsonOutgoingWebhookInputDataPagerDuty) == "{}" { // empty struct
+			dst.OutgoingWebhookInputDataPagerDuty = nil
+		} else {
+			if err = validator.Validate(dst.OutgoingWebhookInputDataPagerDuty); err != nil {
+				dst.OutgoingWebhookInputDataPagerDuty = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.OutgoingWebhookInputDataPagerDuty = nil
+	}
+
+	// try to unmarshal data into OutgoingWebhookInputDataSendLog
+	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookInputDataSendLog)
+	if err == nil {
+		jsonOutgoingWebhookInputDataSendLog, _ := json.Marshal(dst.OutgoingWebhookInputDataSendLog)
+		if string(jsonOutgoingWebhookInputDataSendLog) == "{}" { // empty struct
+			dst.OutgoingWebhookInputDataSendLog = nil
+		} else {
+			if err = validator.Validate(dst.OutgoingWebhookInputDataSendLog); err != nil {
+				dst.OutgoingWebhookInputDataSendLog = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.OutgoingWebhookInputDataSendLog = nil
+	}
+
+	// try to unmarshal data into OutgoingWebhookInputDataSlack
+	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookInputDataSlack)
+	if err == nil {
+		jsonOutgoingWebhookInputDataSlack, _ := json.Marshal(dst.OutgoingWebhookInputDataSlack)
+		if string(jsonOutgoingWebhookInputDataSlack) == "{}" { // empty struct
+			dst.OutgoingWebhookInputDataSlack = nil
+		} else {
+			if err = validator.Validate(dst.OutgoingWebhookInputDataSlack); err != nil {
+				dst.OutgoingWebhookInputDataSlack = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.OutgoingWebhookInputDataSlack = nil
+	}
+
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.OutgoingWebhookInputDataAwsEventBridge = nil
+		dst.OutgoingWebhookInputDataDemisto = nil
+		dst.OutgoingWebhookInputDataEmailGroup = nil
+		dst.OutgoingWebhookInputDataGenericWebhook = nil
+		dst.OutgoingWebhookInputDataIbmEventNotifications = nil
+		dst.OutgoingWebhookInputDataJira = nil
+		dst.OutgoingWebhookInputDataMicrosoftTeams = nil
+		dst.OutgoingWebhookInputDataMsTeamsWorkflow = nil
+		dst.OutgoingWebhookInputDataOpsgenie = nil
+		dst.OutgoingWebhookInputDataPagerDuty = nil
+		dst.OutgoingWebhookInputDataSendLog = nil
+		dst.OutgoingWebhookInputDataSlack = nil
+
+		return fmt.Errorf("data matches more than one schema in oneOf(OutgoingWebhookInputData)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("data failed to match schemas in oneOf(OutgoingWebhookInputData)")
+	}
+}
+
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src OutgoingWebhookInputData) MarshalJSON() ([]byte, error) {
+	if src.OutgoingWebhookInputDataAwsEventBridge != nil {
+		return json.Marshal(&src.OutgoingWebhookInputDataAwsEventBridge)
+	}
+
+	if src.OutgoingWebhookInputDataDemisto != nil {
+		return json.Marshal(&src.OutgoingWebhookInputDataDemisto)
+	}
+
+	if src.OutgoingWebhookInputDataEmailGroup != nil {
+		return json.Marshal(&src.OutgoingWebhookInputDataEmailGroup)
+	}
+
+	if src.OutgoingWebhookInputDataGenericWebhook != nil {
+		return json.Marshal(&src.OutgoingWebhookInputDataGenericWebhook)
+	}
+
+	if src.OutgoingWebhookInputDataIbmEventNotifications != nil {
+		return json.Marshal(&src.OutgoingWebhookInputDataIbmEventNotifications)
+	}
+
+	if src.OutgoingWebhookInputDataJira != nil {
+		return json.Marshal(&src.OutgoingWebhookInputDataJira)
+	}
+
+	if src.OutgoingWebhookInputDataMicrosoftTeams != nil {
+		return json.Marshal(&src.OutgoingWebhookInputDataMicrosoftTeams)
+	}
+
+	if src.OutgoingWebhookInputDataMsTeamsWorkflow != nil {
+		return json.Marshal(&src.OutgoingWebhookInputDataMsTeamsWorkflow)
+	}
+
+	if src.OutgoingWebhookInputDataOpsgenie != nil {
+		return json.Marshal(&src.OutgoingWebhookInputDataOpsgenie)
+	}
+
+	if src.OutgoingWebhookInputDataPagerDuty != nil {
+		return json.Marshal(&src.OutgoingWebhookInputDataPagerDuty)
+	}
+
+	if src.OutgoingWebhookInputDataSendLog != nil {
+		return json.Marshal(&src.OutgoingWebhookInputDataSendLog)
+	}
+
+	if src.OutgoingWebhookInputDataSlack != nil {
+		return json.Marshal(&src.OutgoingWebhookInputDataSlack)
+	}
+
+	return nil, nil // no data in oneOf schemas
+}
+
+// Get the actual instance
+func (obj *OutgoingWebhookInputData) GetActualInstance() (interface{}) {
+	if obj == nil {
+		return nil
+	}
+	if obj.OutgoingWebhookInputDataAwsEventBridge != nil {
+		return obj.OutgoingWebhookInputDataAwsEventBridge
+	}
+
+	if obj.OutgoingWebhookInputDataDemisto != nil {
+		return obj.OutgoingWebhookInputDataDemisto
+	}
+
+	if obj.OutgoingWebhookInputDataEmailGroup != nil {
+		return obj.OutgoingWebhookInputDataEmailGroup
+	}
+
+	if obj.OutgoingWebhookInputDataGenericWebhook != nil {
+		return obj.OutgoingWebhookInputDataGenericWebhook
+	}
+
+	if obj.OutgoingWebhookInputDataIbmEventNotifications != nil {
+		return obj.OutgoingWebhookInputDataIbmEventNotifications
+	}
+
+	if obj.OutgoingWebhookInputDataJira != nil {
+		return obj.OutgoingWebhookInputDataJira
+	}
+
+	if obj.OutgoingWebhookInputDataMicrosoftTeams != nil {
+		return obj.OutgoingWebhookInputDataMicrosoftTeams
+	}
+
+	if obj.OutgoingWebhookInputDataMsTeamsWorkflow != nil {
+		return obj.OutgoingWebhookInputDataMsTeamsWorkflow
+	}
+
+	if obj.OutgoingWebhookInputDataOpsgenie != nil {
+		return obj.OutgoingWebhookInputDataOpsgenie
+	}
+
+	if obj.OutgoingWebhookInputDataPagerDuty != nil {
+		return obj.OutgoingWebhookInputDataPagerDuty
+	}
+
+	if obj.OutgoingWebhookInputDataSendLog != nil {
+		return obj.OutgoingWebhookInputDataSendLog
+	}
+
+	if obj.OutgoingWebhookInputDataSlack != nil {
+		return obj.OutgoingWebhookInputDataSlack
+	}
+
+	// all schemas are nil
+	return nil
+}
+
+// Get the actual instance value
+func (obj OutgoingWebhookInputData) GetActualInstanceValue() (interface{}) {
+	if obj.OutgoingWebhookInputDataAwsEventBridge != nil {
+		return *obj.OutgoingWebhookInputDataAwsEventBridge
+	}
+
+	if obj.OutgoingWebhookInputDataDemisto != nil {
+		return *obj.OutgoingWebhookInputDataDemisto
+	}
+
+	if obj.OutgoingWebhookInputDataEmailGroup != nil {
+		return *obj.OutgoingWebhookInputDataEmailGroup
+	}
+
+	if obj.OutgoingWebhookInputDataGenericWebhook != nil {
+		return *obj.OutgoingWebhookInputDataGenericWebhook
+	}
+
+	if obj.OutgoingWebhookInputDataIbmEventNotifications != nil {
+		return *obj.OutgoingWebhookInputDataIbmEventNotifications
+	}
+
+	if obj.OutgoingWebhookInputDataJira != nil {
+		return *obj.OutgoingWebhookInputDataJira
+	}
+
+	if obj.OutgoingWebhookInputDataMicrosoftTeams != nil {
+		return *obj.OutgoingWebhookInputDataMicrosoftTeams
+	}
+
+	if obj.OutgoingWebhookInputDataMsTeamsWorkflow != nil {
+		return *obj.OutgoingWebhookInputDataMsTeamsWorkflow
+	}
+
+	if obj.OutgoingWebhookInputDataOpsgenie != nil {
+		return *obj.OutgoingWebhookInputDataOpsgenie
+	}
+
+	if obj.OutgoingWebhookInputDataPagerDuty != nil {
+		return *obj.OutgoingWebhookInputDataPagerDuty
+	}
+
+	if obj.OutgoingWebhookInputDataSendLog != nil {
+		return *obj.OutgoingWebhookInputDataSendLog
+	}
+
+	if obj.OutgoingWebhookInputDataSlack != nil {
+		return *obj.OutgoingWebhookInputDataSlack
+	}
+
+	// all schemas are nil
+	return nil
 }
 
 type NullableOutgoingWebhookInputData struct {

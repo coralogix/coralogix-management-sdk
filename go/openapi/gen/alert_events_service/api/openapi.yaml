@@ -218,7 +218,6 @@ components:
       - ACTIVITY_ANALYSIS_STATUS_MUTE
       type: string
     AlertEvent:
-      additionalProperties: false
       example:
         preGroupingEventId: preGroupingEventId
         incidentCorrelationKey: incidentCorrelationKey
@@ -293,6 +292,24 @@ components:
       - ALERT_STATUS_RESOLVED_OR_UNSPECIFIED
       - ALERT_STATUS_TRIGGERED
       type: string
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
     EventStats:
       example:
         resolvedPermutationsSamples:
@@ -346,8 +363,40 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValues_1"
-      - $ref: "#/components/schemas/FilterPathAndValues_2"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
     Filters:
       description: This data structure represents a filter
       externalDocs:
@@ -365,8 +414,57 @@ components:
       type: object
     GetAlertEventResponse:
       oneOf:
-      - $ref: "#/components/schemas/Get_alert_event_response"
-      - $ref: "#/components/schemas/Get_alert_event_response_1"
+      - $ref: "#/components/schemas/GetAlertEventResponseSinglePermutation"
+      - $ref: "#/components/schemas/GetAlertEventResponseMultiplePermutation"
+    GetAlertEventResponseMultiplePermutation:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        id:
+          type: string
+        multiplePermutation:
+          $ref: "#/components/schemas/AlertEventMultiplePermutation"
+        pagination:
+          $ref: "#/components/schemas/alerts.v3.PaginationResponse"
+      title: Get alert event response
+      type: object
+    GetAlertEventResponseSinglePermutation:
+      additionalProperties: false
+      example:
+        pagination:
+          totalSize: 0
+          nextPageToken: nextPageToken
+        singlePermutation:
+          preGroupingEventId: preGroupingEventId
+          incidentCorrelationKey: incidentCorrelationKey
+          groupLabels:
+            key: groupLabels
+          payloadType: payloadType
+          payload: "{}"
+          alertId: alertId
+          activityAnalysis:
+            rules:
+            - rules
+            - rules
+            status: ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED
+          permutationLabels:
+            key: permutationLabels
+          permutationId: permutationId
+          status: ALERT_STATUS_RESOLVED_OR_UNSPECIFIED
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        id: id
+      externalDocs:
+        url: ""
+      properties:
+        id:
+          type: string
+        pagination:
+          $ref: "#/components/schemas/alerts.v3.PaginationResponse"
+        singlePermutation:
+          $ref: "#/components/schemas/AlertEvent"
+      title: Get alert event response
+      type: object
     GetAlertEventStatsResponse:
       example:
         eventsStats:
@@ -407,6 +505,17 @@ components:
             type: string
           type: array
       type: object
+    OrderByAlertEventDirection:
+      enum:
+      - ORDER_BY_ALERT_EVENT_DIRECTION_UNSPECIFIED
+      - ORDER_BY_ALERT_EVENT_DIRECTION_ASC
+      - ORDER_BY_ALERT_EVENT_DIRECTION_DESC
+      type: string
+    OrderByAlertEventFields:
+      enum:
+      - ORDER_BY_ALERT_EVENT_FIELDS_UNSPECIFIED
+      - ORDER_BY_ALERT_EVENT_FIELDS_TIMESTAMP
+      type: string
     Permutation:
       example:
         permutationLabels:
@@ -419,6 +528,18 @@ components:
             type: string
           type: object
       title: Permutation data structure
+      type: object
+    YAxisViewByCategory:
+      additionalProperties: false
+      properties:
+        category:
+          $ref: "#/components/schemas/YAxisViewByCategory"
+      type: object
+    YAxisViewByValue:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: "#/components/schemas/YAxisViewByValue"
       type: object
     alerts.v3.PaginationResponse:
       example:
@@ -456,16 +577,9 @@ components:
     AlertEventService_GetAlertEventsStats_order_bys_parameter_inner:
       properties:
         direction:
-          enum:
-          - ORDER_BY_ALERT_EVENT_DIRECTION_UNSPECIFIED
-          - ORDER_BY_ALERT_EVENT_DIRECTION_ASC
-          - ORDER_BY_ALERT_EVENT_DIRECTION_DESC
-          type: string
+          $ref: "#/components/schemas/OrderByAlertEventDirection"
         fieldName:
-          enum:
-          - ORDER_BY_ALERT_EVENT_FIELDS_UNSPECIFIED
-          - ORDER_BY_ALERT_EVENT_FIELDS_TIMESTAMP
-          type: string
+          $ref: "#/components/schemas/OrderByAlertEventFields"
       type: object
     AlertEventService_GetAlertEvent_pagination_parameter:
       properties:
@@ -474,87 +588,6 @@ components:
           type: integer
         pageToken:
           type: string
-      type: object
-    FilterPathAndValues_1:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValues_2:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    Get_alert_event_response:
-      additionalProperties: false
-      example:
-        pagination:
-          totalSize: 0
-          nextPageToken: nextPageToken
-        singlePermutation:
-          preGroupingEventId: preGroupingEventId
-          incidentCorrelationKey: incidentCorrelationKey
-          groupLabels:
-            key: groupLabels
-          payloadType: payloadType
-          payload: "{}"
-          alertId: alertId
-          activityAnalysis:
-            rules:
-            - rules
-            - rules
-            status: ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED
-          permutationLabels:
-            key: permutationLabels
-          permutationId: permutationId
-          status: ALERT_STATUS_RESOLVED_OR_UNSPECIFIED
-          timestamp: 2000-01-23T04:56:07.000+00:00
-        id: id
-      externalDocs:
-        url: ""
-      properties:
-        id:
-          type: string
-        pagination:
-          $ref: "#/components/schemas/alerts.v3.PaginationResponse"
-        singlePermutation:
-          $ref: "#/components/schemas/AlertEvent"
-      title: Get alert event response
-      type: object
-    Get_alert_event_response_1:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        id:
-          type: string
-        multiplePermutation:
-          $ref: "#/components/schemas/AlertEventMultiplePermutation"
-        pagination:
-          $ref: "#/components/schemas/alerts.v3.PaginationResponse"
-      title: Get alert event response
       type: object
   securitySchemes:
     apiKeyAuth:

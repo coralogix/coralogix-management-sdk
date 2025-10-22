@@ -18,45 +18,45 @@ import (
 
 // DataUsageServiceGetDataUsageDimensionFiltersParameterInner - struct for DataUsageServiceGetDataUsageDimensionFiltersParameterInner
 type DataUsageServiceGetDataUsageDimensionFiltersParameterInner struct {
-	DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf *DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf
-	DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1 *DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1
-	DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2 *DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2
-	DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3 *DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3
-	DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4 *DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4
+	DimensionGenericDimension *DimensionGenericDimension
+	DimensionPillar *DimensionPillar
+	DimensionPriority *DimensionPriority
+	DimensionSeverity *DimensionSeverity
+	DimensionTier *DimensionTier
 }
 
-// DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOfAsDataUsageServiceGetDataUsageDimensionFiltersParameterInner is a convenience function that returns DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf wrapped in DataUsageServiceGetDataUsageDimensionFiltersParameterInner
-func DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOfAsDataUsageServiceGetDataUsageDimensionFiltersParameterInner(v *DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf) DataUsageServiceGetDataUsageDimensionFiltersParameterInner {
+// DimensionGenericDimensionAsDataUsageServiceGetDataUsageDimensionFiltersParameterInner is a convenience function that returns DimensionGenericDimension wrapped in DataUsageServiceGetDataUsageDimensionFiltersParameterInner
+func DimensionGenericDimensionAsDataUsageServiceGetDataUsageDimensionFiltersParameterInner(v *DimensionGenericDimension) DataUsageServiceGetDataUsageDimensionFiltersParameterInner {
 	return DataUsageServiceGetDataUsageDimensionFiltersParameterInner{
-		DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf: v,
+		DimensionGenericDimension: v,
 	}
 }
 
-// DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1AsDataUsageServiceGetDataUsageDimensionFiltersParameterInner is a convenience function that returns DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1 wrapped in DataUsageServiceGetDataUsageDimensionFiltersParameterInner
-func DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1AsDataUsageServiceGetDataUsageDimensionFiltersParameterInner(v *DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1) DataUsageServiceGetDataUsageDimensionFiltersParameterInner {
+// DimensionPillarAsDataUsageServiceGetDataUsageDimensionFiltersParameterInner is a convenience function that returns DimensionPillar wrapped in DataUsageServiceGetDataUsageDimensionFiltersParameterInner
+func DimensionPillarAsDataUsageServiceGetDataUsageDimensionFiltersParameterInner(v *DimensionPillar) DataUsageServiceGetDataUsageDimensionFiltersParameterInner {
 	return DataUsageServiceGetDataUsageDimensionFiltersParameterInner{
-		DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1: v,
+		DimensionPillar: v,
 	}
 }
 
-// DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2AsDataUsageServiceGetDataUsageDimensionFiltersParameterInner is a convenience function that returns DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2 wrapped in DataUsageServiceGetDataUsageDimensionFiltersParameterInner
-func DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2AsDataUsageServiceGetDataUsageDimensionFiltersParameterInner(v *DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2) DataUsageServiceGetDataUsageDimensionFiltersParameterInner {
+// DimensionPriorityAsDataUsageServiceGetDataUsageDimensionFiltersParameterInner is a convenience function that returns DimensionPriority wrapped in DataUsageServiceGetDataUsageDimensionFiltersParameterInner
+func DimensionPriorityAsDataUsageServiceGetDataUsageDimensionFiltersParameterInner(v *DimensionPriority) DataUsageServiceGetDataUsageDimensionFiltersParameterInner {
 	return DataUsageServiceGetDataUsageDimensionFiltersParameterInner{
-		DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2: v,
+		DimensionPriority: v,
 	}
 }
 
-// DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3AsDataUsageServiceGetDataUsageDimensionFiltersParameterInner is a convenience function that returns DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3 wrapped in DataUsageServiceGetDataUsageDimensionFiltersParameterInner
-func DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3AsDataUsageServiceGetDataUsageDimensionFiltersParameterInner(v *DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3) DataUsageServiceGetDataUsageDimensionFiltersParameterInner {
+// DimensionSeverityAsDataUsageServiceGetDataUsageDimensionFiltersParameterInner is a convenience function that returns DimensionSeverity wrapped in DataUsageServiceGetDataUsageDimensionFiltersParameterInner
+func DimensionSeverityAsDataUsageServiceGetDataUsageDimensionFiltersParameterInner(v *DimensionSeverity) DataUsageServiceGetDataUsageDimensionFiltersParameterInner {
 	return DataUsageServiceGetDataUsageDimensionFiltersParameterInner{
-		DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3: v,
+		DimensionSeverity: v,
 	}
 }
 
-// DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4AsDataUsageServiceGetDataUsageDimensionFiltersParameterInner is a convenience function that returns DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4 wrapped in DataUsageServiceGetDataUsageDimensionFiltersParameterInner
-func DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4AsDataUsageServiceGetDataUsageDimensionFiltersParameterInner(v *DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4) DataUsageServiceGetDataUsageDimensionFiltersParameterInner {
+// DimensionTierAsDataUsageServiceGetDataUsageDimensionFiltersParameterInner is a convenience function that returns DimensionTier wrapped in DataUsageServiceGetDataUsageDimensionFiltersParameterInner
+func DimensionTierAsDataUsageServiceGetDataUsageDimensionFiltersParameterInner(v *DimensionTier) DataUsageServiceGetDataUsageDimensionFiltersParameterInner {
 	return DataUsageServiceGetDataUsageDimensionFiltersParameterInner{
-		DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4: v,
+		DimensionTier: v,
 	}
 }
 
@@ -65,98 +65,98 @@ func DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4AsDataUsage
 func (dst *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf
-	err = newStrictDecoder(data).Decode(&dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf)
+	// try to unmarshal data into DimensionGenericDimension
+	err = newStrictDecoder(data).Decode(&dst.DimensionGenericDimension)
 	if err == nil {
-		jsonDataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf, _ := json.Marshal(dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf)
-		if string(jsonDataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf) == "{}" { // empty struct
-			dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf = nil
+		jsonDimensionGenericDimension, _ := json.Marshal(dst.DimensionGenericDimension)
+		if string(jsonDimensionGenericDimension) == "{}" { // empty struct
+			dst.DimensionGenericDimension = nil
 		} else {
-			if err = validator.Validate(dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf); err != nil {
-				dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf = nil
+			if err = validator.Validate(dst.DimensionGenericDimension); err != nil {
+				dst.DimensionGenericDimension = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf = nil
+		dst.DimensionGenericDimension = nil
 	}
 
-	// try to unmarshal data into DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1
-	err = newStrictDecoder(data).Decode(&dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1)
+	// try to unmarshal data into DimensionPillar
+	err = newStrictDecoder(data).Decode(&dst.DimensionPillar)
 	if err == nil {
-		jsonDataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1, _ := json.Marshal(dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1)
-		if string(jsonDataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1) == "{}" { // empty struct
-			dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1 = nil
+		jsonDimensionPillar, _ := json.Marshal(dst.DimensionPillar)
+		if string(jsonDimensionPillar) == "{}" { // empty struct
+			dst.DimensionPillar = nil
 		} else {
-			if err = validator.Validate(dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1); err != nil {
-				dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1 = nil
+			if err = validator.Validate(dst.DimensionPillar); err != nil {
+				dst.DimensionPillar = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1 = nil
+		dst.DimensionPillar = nil
 	}
 
-	// try to unmarshal data into DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2
-	err = newStrictDecoder(data).Decode(&dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2)
+	// try to unmarshal data into DimensionPriority
+	err = newStrictDecoder(data).Decode(&dst.DimensionPriority)
 	if err == nil {
-		jsonDataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2, _ := json.Marshal(dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2)
-		if string(jsonDataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2) == "{}" { // empty struct
-			dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2 = nil
+		jsonDimensionPriority, _ := json.Marshal(dst.DimensionPriority)
+		if string(jsonDimensionPriority) == "{}" { // empty struct
+			dst.DimensionPriority = nil
 		} else {
-			if err = validator.Validate(dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2); err != nil {
-				dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2 = nil
+			if err = validator.Validate(dst.DimensionPriority); err != nil {
+				dst.DimensionPriority = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2 = nil
+		dst.DimensionPriority = nil
 	}
 
-	// try to unmarshal data into DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3
-	err = newStrictDecoder(data).Decode(&dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3)
+	// try to unmarshal data into DimensionSeverity
+	err = newStrictDecoder(data).Decode(&dst.DimensionSeverity)
 	if err == nil {
-		jsonDataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3, _ := json.Marshal(dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3)
-		if string(jsonDataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3) == "{}" { // empty struct
-			dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3 = nil
+		jsonDimensionSeverity, _ := json.Marshal(dst.DimensionSeverity)
+		if string(jsonDimensionSeverity) == "{}" { // empty struct
+			dst.DimensionSeverity = nil
 		} else {
-			if err = validator.Validate(dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3); err != nil {
-				dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3 = nil
+			if err = validator.Validate(dst.DimensionSeverity); err != nil {
+				dst.DimensionSeverity = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3 = nil
+		dst.DimensionSeverity = nil
 	}
 
-	// try to unmarshal data into DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4
-	err = newStrictDecoder(data).Decode(&dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4)
+	// try to unmarshal data into DimensionTier
+	err = newStrictDecoder(data).Decode(&dst.DimensionTier)
 	if err == nil {
-		jsonDataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4, _ := json.Marshal(dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4)
-		if string(jsonDataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4) == "{}" { // empty struct
-			dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4 = nil
+		jsonDimensionTier, _ := json.Marshal(dst.DimensionTier)
+		if string(jsonDimensionTier) == "{}" { // empty struct
+			dst.DimensionTier = nil
 		} else {
-			if err = validator.Validate(dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4); err != nil {
-				dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4 = nil
+			if err = validator.Validate(dst.DimensionTier); err != nil {
+				dst.DimensionTier = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4 = nil
+		dst.DimensionTier = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf = nil
-		dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1 = nil
-		dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2 = nil
-		dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3 = nil
-		dst.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4 = nil
+		dst.DimensionGenericDimension = nil
+		dst.DimensionPillar = nil
+		dst.DimensionPriority = nil
+		dst.DimensionSeverity = nil
+		dst.DimensionTier = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(DataUsageServiceGetDataUsageDimensionFiltersParameterInner)")
 	} else if match == 1 {
@@ -168,24 +168,24 @@ func (dst *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) Unmarshal
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src DataUsageServiceGetDataUsageDimensionFiltersParameterInner) MarshalJSON() ([]byte, error) {
-	if src.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf != nil {
-		return json.Marshal(&src.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf)
+	if src.DimensionGenericDimension != nil {
+		return json.Marshal(&src.DimensionGenericDimension)
 	}
 
-	if src.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1 != nil {
-		return json.Marshal(&src.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1)
+	if src.DimensionPillar != nil {
+		return json.Marshal(&src.DimensionPillar)
 	}
 
-	if src.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2 != nil {
-		return json.Marshal(&src.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2)
+	if src.DimensionPriority != nil {
+		return json.Marshal(&src.DimensionPriority)
 	}
 
-	if src.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3 != nil {
-		return json.Marshal(&src.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3)
+	if src.DimensionSeverity != nil {
+		return json.Marshal(&src.DimensionSeverity)
 	}
 
-	if src.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4 != nil {
-		return json.Marshal(&src.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4)
+	if src.DimensionTier != nil {
+		return json.Marshal(&src.DimensionTier)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -196,24 +196,24 @@ func (obj *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) GetActual
 	if obj == nil {
 		return nil
 	}
-	if obj.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf != nil {
-		return obj.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf
+	if obj.DimensionGenericDimension != nil {
+		return obj.DimensionGenericDimension
 	}
 
-	if obj.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1 != nil {
-		return obj.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1
+	if obj.DimensionPillar != nil {
+		return obj.DimensionPillar
 	}
 
-	if obj.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2 != nil {
-		return obj.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2
+	if obj.DimensionPriority != nil {
+		return obj.DimensionPriority
 	}
 
-	if obj.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3 != nil {
-		return obj.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3
+	if obj.DimensionSeverity != nil {
+		return obj.DimensionSeverity
 	}
 
-	if obj.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4 != nil {
-		return obj.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4
+	if obj.DimensionTier != nil {
+		return obj.DimensionTier
 	}
 
 	// all schemas are nil
@@ -222,24 +222,24 @@ func (obj *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) GetActual
 
 // Get the actual instance value
 func (obj DataUsageServiceGetDataUsageDimensionFiltersParameterInner) GetActualInstanceValue() (interface{}) {
-	if obj.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf != nil {
-		return *obj.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf
+	if obj.DimensionGenericDimension != nil {
+		return *obj.DimensionGenericDimension
 	}
 
-	if obj.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1 != nil {
-		return *obj.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf1
+	if obj.DimensionPillar != nil {
+		return *obj.DimensionPillar
 	}
 
-	if obj.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2 != nil {
-		return *obj.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf2
+	if obj.DimensionPriority != nil {
+		return *obj.DimensionPriority
 	}
 
-	if obj.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3 != nil {
-		return *obj.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf3
+	if obj.DimensionSeverity != nil {
+		return *obj.DimensionSeverity
 	}
 
-	if obj.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4 != nil {
-		return *obj.DataUsageServiceGetDataUsageDimensionFiltersParameterInnerOneOf4
+	if obj.DimensionTier != nil {
+		return *obj.DimensionTier
 	}
 
 	// all schemas are nil

@@ -514,14 +514,66 @@ components:
   schemas:
     ActionExecutionRequest:
       oneOf:
-      - $ref: "#/components/schemas/ActionExecutionRequest_oneOf"
-      - $ref: "#/components/schemas/ActionExecutionRequest_oneOf_1"
-      - $ref: "#/components/schemas/ActionExecutionRequest_oneOf_2"
+      - $ref: "#/components/schemas/ActionExecutionRequestCreate"
+      - $ref: "#/components/schemas/ActionExecutionRequestReplace"
+      - $ref: "#/components/schemas/ActionExecutionRequestDelete"
+    ActionExecutionRequestCreate:
+      additionalProperties: false
+      properties:
+        create:
+          $ref: "#/components/schemas/CreateActionRequest"
+      type: object
+    ActionExecutionRequestDelete:
+      additionalProperties: false
+      properties:
+        delete:
+          $ref: "#/components/schemas/DeleteActionRequest"
+      type: object
+    ActionExecutionRequestReplace:
+      additionalProperties: false
+      properties:
+        replace:
+          $ref: "#/components/schemas/ReplaceActionRequest"
+      type: object
     ActionExecutionResponse:
       oneOf:
-      - $ref: "#/components/schemas/ActionExecutionResponse_oneOf"
-      - $ref: "#/components/schemas/ActionExecutionResponse_oneOf_1"
-      - $ref: "#/components/schemas/ActionExecutionResponse_oneOf_2"
+      - $ref: "#/components/schemas/ActionExecutionResponseCreate"
+      - $ref: "#/components/schemas/ActionExecutionResponseReplace"
+      - $ref: "#/components/schemas/ActionExecutionResponseDelete"
+    ActionExecutionResponseCreate:
+      additionalProperties: false
+      example:
+        create:
+          action:
+            createdBy: createdBy
+            sourceType: SOURCE_TYPE_UNSPECIFIED
+            subsystemNames:
+            - subsystemNames
+            - subsystemNames
+            name: name
+            applicationNames:
+            - applicationNames
+            - applicationNames
+            id: id
+            isPrivate: true
+            url: url
+            isHidden: true
+      properties:
+        create:
+          $ref: "#/components/schemas/CreateActionResponse"
+      type: object
+    ActionExecutionResponseDelete:
+      additionalProperties: false
+      properties:
+        delete:
+          type: object
+      type: object
+    ActionExecutionResponseReplace:
+      additionalProperties: false
+      properties:
+        replace:
+          $ref: "#/components/schemas/ReplaceActionResponse"
+      type: object
     AtomicBatchExecuteActionsResponse:
       example:
         matchingResponses:
@@ -560,6 +612,24 @@ components:
           items:
             $ref: "#/components/schemas/ActionExecutionResponse"
           type: array
+      type: object
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
       type: object
     CreateActionRequest:
       properties:
@@ -616,8 +686,40 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValues_1"
-      - $ref: "#/components/schemas/FilterPathAndValues_2"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
     Filters:
       description: This data structure represents a filter
       externalDocs:
@@ -723,6 +825,18 @@ components:
       properties:
         action:
           $ref: "#/components/schemas/v2.Action"
+      type: object
+    YAxisViewByCategory:
+      additionalProperties: false
+      properties:
+        category:
+          $ref: "#/components/schemas/YAxisViewByCategory"
+      type: object
+    YAxisViewByValue:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: "#/components/schemas/YAxisViewByValue"
       type: object
     common.Group:
       properties:
@@ -838,90 +952,6 @@ components:
             format: int64
             type: integer
           type: object
-      type: object
-    ActionExecutionRequest_oneOf:
-      additionalProperties: false
-      properties:
-        create:
-          $ref: "#/components/schemas/CreateActionRequest"
-      type: object
-    ActionExecutionRequest_oneOf_1:
-      additionalProperties: false
-      properties:
-        replace:
-          $ref: "#/components/schemas/ReplaceActionRequest"
-      type: object
-    ActionExecutionRequest_oneOf_2:
-      additionalProperties: false
-      properties:
-        delete:
-          $ref: "#/components/schemas/DeleteActionRequest"
-      type: object
-    ActionExecutionResponse_oneOf:
-      additionalProperties: false
-      example:
-        create:
-          action:
-            createdBy: createdBy
-            sourceType: SOURCE_TYPE_UNSPECIFIED
-            subsystemNames:
-            - subsystemNames
-            - subsystemNames
-            name: name
-            applicationNames:
-            - applicationNames
-            - applicationNames
-            id: id
-            isPrivate: true
-            url: url
-            isHidden: true
-      properties:
-        create:
-          $ref: "#/components/schemas/CreateActionResponse"
-      type: object
-    ActionExecutionResponse_oneOf_1:
-      additionalProperties: false
-      properties:
-        replace:
-          $ref: "#/components/schemas/ReplaceActionResponse"
-      type: object
-    ActionExecutionResponse_oneOf_2:
-      additionalProperties: false
-      properties:
-        delete:
-          type: object
-      type: object
-    FilterPathAndValues_1:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValues_2:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
       type: object
   securitySchemes:
     apiKeyAuth:

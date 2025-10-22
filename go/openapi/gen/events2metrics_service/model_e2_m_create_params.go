@@ -12,327 +12,124 @@ package events2metrics_service
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
+	"gopkg.in/validator.v2"
 )
 
-// checks if the E2MCreateParams type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &E2MCreateParams{}
-
-// E2MCreateParams This data structure is used to create a new event to metric definition
+// E2MCreateParams - struct for E2MCreateParams
 type E2MCreateParams struct {
-	Description *string `json:"description,omitempty"`
-	MetricFields []V2MetricField `json:"metricFields,omitempty"`
-	MetricLabels []MetricLabel `json:"metricLabels,omitempty"`
-	Name string `json:"name"`
-	PermutationsLimit *int32 `json:"permutationsLimit,omitempty"`
-	SpansQuery *V2SpansQuery `json:"spansQuery,omitempty"`
-	Type *E2MType `json:"type,omitempty"`
+	E2MCreateParamsLogsQuery *E2MCreateParamsLogsQuery
+	E2MCreateParamsSpansQuery *E2MCreateParamsSpansQuery
 }
 
-type _E2MCreateParams E2MCreateParams
-
-// NewE2MCreateParams instantiates a new E2MCreateParams object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewE2MCreateParams(name string) *E2MCreateParams {
-	this := E2MCreateParams{}
-	this.Name = name
-	return &this
-}
-
-// NewE2MCreateParamsWithDefaults instantiates a new E2MCreateParams object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewE2MCreateParamsWithDefaults() *E2MCreateParams {
-	this := E2MCreateParams{}
-	return &this
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *E2MCreateParams) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
-		var ret string
-		return ret
+// E2MCreateParamsLogsQueryAsE2MCreateParams is a convenience function that returns E2MCreateParamsLogsQuery wrapped in E2MCreateParams
+func E2MCreateParamsLogsQueryAsE2MCreateParams(v *E2MCreateParamsLogsQuery) E2MCreateParams {
+	return E2MCreateParams{
+		E2MCreateParamsLogsQuery: v,
 	}
-	return *o.Description
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *E2MCreateParams) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
-		return nil, false
+// E2MCreateParamsSpansQueryAsE2MCreateParams is a convenience function that returns E2MCreateParamsSpansQuery wrapped in E2MCreateParams
+func E2MCreateParamsSpansQueryAsE2MCreateParams(v *E2MCreateParamsSpansQuery) E2MCreateParams {
+	return E2MCreateParams{
+		E2MCreateParamsSpansQuery: v,
 	}
-	return o.Description, true
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *E2MCreateParams) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
-		return true
-	}
 
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *E2MCreateParams) SetDescription(v string) {
-	o.Description = &v
-}
-
-// GetMetricFields returns the MetricFields field value if set, zero value otherwise.
-func (o *E2MCreateParams) GetMetricFields() []V2MetricField {
-	if o == nil || IsNil(o.MetricFields) {
-		var ret []V2MetricField
-		return ret
-	}
-	return o.MetricFields
-}
-
-// GetMetricFieldsOk returns a tuple with the MetricFields field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *E2MCreateParams) GetMetricFieldsOk() ([]V2MetricField, bool) {
-	if o == nil || IsNil(o.MetricFields) {
-		return nil, false
-	}
-	return o.MetricFields, true
-}
-
-// HasMetricFields returns a boolean if a field has been set.
-func (o *E2MCreateParams) HasMetricFields() bool {
-	if o != nil && !IsNil(o.MetricFields) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetricFields gets a reference to the given []V2MetricField and assigns it to the MetricFields field.
-func (o *E2MCreateParams) SetMetricFields(v []V2MetricField) {
-	o.MetricFields = v
-}
-
-// GetMetricLabels returns the MetricLabels field value if set, zero value otherwise.
-func (o *E2MCreateParams) GetMetricLabels() []MetricLabel {
-	if o == nil || IsNil(o.MetricLabels) {
-		var ret []MetricLabel
-		return ret
-	}
-	return o.MetricLabels
-}
-
-// GetMetricLabelsOk returns a tuple with the MetricLabels field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *E2MCreateParams) GetMetricLabelsOk() ([]MetricLabel, bool) {
-	if o == nil || IsNil(o.MetricLabels) {
-		return nil, false
-	}
-	return o.MetricLabels, true
-}
-
-// HasMetricLabels returns a boolean if a field has been set.
-func (o *E2MCreateParams) HasMetricLabels() bool {
-	if o != nil && !IsNil(o.MetricLabels) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetricLabels gets a reference to the given []MetricLabel and assigns it to the MetricLabels field.
-func (o *E2MCreateParams) SetMetricLabels(v []MetricLabel) {
-	o.MetricLabels = v
-}
-
-// GetName returns the Name field value
-func (o *E2MCreateParams) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *E2MCreateParams) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *E2MCreateParams) SetName(v string) {
-	o.Name = v
-}
-
-// GetPermutationsLimit returns the PermutationsLimit field value if set, zero value otherwise.
-func (o *E2MCreateParams) GetPermutationsLimit() int32 {
-	if o == nil || IsNil(o.PermutationsLimit) {
-		var ret int32
-		return ret
-	}
-	return *o.PermutationsLimit
-}
-
-// GetPermutationsLimitOk returns a tuple with the PermutationsLimit field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *E2MCreateParams) GetPermutationsLimitOk() (*int32, bool) {
-	if o == nil || IsNil(o.PermutationsLimit) {
-		return nil, false
-	}
-	return o.PermutationsLimit, true
-}
-
-// HasPermutationsLimit returns a boolean if a field has been set.
-func (o *E2MCreateParams) HasPermutationsLimit() bool {
-	if o != nil && !IsNil(o.PermutationsLimit) {
-		return true
-	}
-
-	return false
-}
-
-// SetPermutationsLimit gets a reference to the given int32 and assigns it to the PermutationsLimit field.
-func (o *E2MCreateParams) SetPermutationsLimit(v int32) {
-	o.PermutationsLimit = &v
-}
-
-// GetSpansQuery returns the SpansQuery field value if set, zero value otherwise.
-func (o *E2MCreateParams) GetSpansQuery() V2SpansQuery {
-	if o == nil || IsNil(o.SpansQuery) {
-		var ret V2SpansQuery
-		return ret
-	}
-	return *o.SpansQuery
-}
-
-// GetSpansQueryOk returns a tuple with the SpansQuery field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *E2MCreateParams) GetSpansQueryOk() (*V2SpansQuery, bool) {
-	if o == nil || IsNil(o.SpansQuery) {
-		return nil, false
-	}
-	return o.SpansQuery, true
-}
-
-// HasSpansQuery returns a boolean if a field has been set.
-func (o *E2MCreateParams) HasSpansQuery() bool {
-	if o != nil && !IsNil(o.SpansQuery) {
-		return true
-	}
-
-	return false
-}
-
-// SetSpansQuery gets a reference to the given V2SpansQuery and assigns it to the SpansQuery field.
-func (o *E2MCreateParams) SetSpansQuery(v V2SpansQuery) {
-	o.SpansQuery = &v
-}
-
-// GetType returns the Type field value if set, zero value otherwise.
-func (o *E2MCreateParams) GetType() E2MType {
-	if o == nil || IsNil(o.Type) {
-		var ret E2MType
-		return ret
-	}
-	return *o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *E2MCreateParams) GetTypeOk() (*E2MType, bool) {
-	if o == nil || IsNil(o.Type) {
-		return nil, false
-	}
-	return o.Type, true
-}
-
-// HasType returns a boolean if a field has been set.
-func (o *E2MCreateParams) HasType() bool {
-	if o != nil && !IsNil(o.Type) {
-		return true
-	}
-
-	return false
-}
-
-// SetType gets a reference to the given E2MType and assigns it to the Type field.
-func (o *E2MCreateParams) SetType(v E2MType) {
-	o.Type = &v
-}
-
-func (o E2MCreateParams) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o E2MCreateParams) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
-	if !IsNil(o.MetricFields) {
-		toSerialize["metricFields"] = o.MetricFields
-	}
-	if !IsNil(o.MetricLabels) {
-		toSerialize["metricLabels"] = o.MetricLabels
-	}
-	toSerialize["name"] = o.Name
-	if !IsNil(o.PermutationsLimit) {
-		toSerialize["permutationsLimit"] = o.PermutationsLimit
-	}
-	if !IsNil(o.SpansQuery) {
-		toSerialize["spansQuery"] = o.SpansQuery
-	}
-	if !IsNil(o.Type) {
-		toSerialize["type"] = o.Type
-	}
-	return toSerialize, nil
-}
-
-func (o *E2MCreateParams) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"name",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
+// Unmarshal JSON data into one of the pointers in the struct
+func (dst *E2MCreateParams) UnmarshalJSON(data []byte) error {
+	var err error
+	match := 0
+	// try to unmarshal data into E2MCreateParamsLogsQuery
+	err = newStrictDecoder(data).Decode(&dst.E2MCreateParamsLogsQuery)
+	if err == nil {
+		jsonE2MCreateParamsLogsQuery, _ := json.Marshal(dst.E2MCreateParamsLogsQuery)
+		if string(jsonE2MCreateParamsLogsQuery) == "{}" { // empty struct
+			dst.E2MCreateParamsLogsQuery = nil
+		} else {
+			if err = validator.Validate(dst.E2MCreateParamsLogsQuery); err != nil {
+				dst.E2MCreateParamsLogsQuery = nil
+			} else {
+				match++
+			}
 		}
+	} else {
+		dst.E2MCreateParamsLogsQuery = nil
 	}
 
-	varE2MCreateParams := _E2MCreateParams{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varE2MCreateParams)
-
-	if err != nil {
-		return err
+	// try to unmarshal data into E2MCreateParamsSpansQuery
+	err = newStrictDecoder(data).Decode(&dst.E2MCreateParamsSpansQuery)
+	if err == nil {
+		jsonE2MCreateParamsSpansQuery, _ := json.Marshal(dst.E2MCreateParamsSpansQuery)
+		if string(jsonE2MCreateParamsSpansQuery) == "{}" { // empty struct
+			dst.E2MCreateParamsSpansQuery = nil
+		} else {
+			if err = validator.Validate(dst.E2MCreateParamsSpansQuery); err != nil {
+				dst.E2MCreateParamsSpansQuery = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.E2MCreateParamsSpansQuery = nil
 	}
 
-	*o = E2MCreateParams(varE2MCreateParams)
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.E2MCreateParamsLogsQuery = nil
+		dst.E2MCreateParamsSpansQuery = nil
 
-	return err
+		return fmt.Errorf("data matches more than one schema in oneOf(E2MCreateParams)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("data failed to match schemas in oneOf(E2MCreateParams)")
+	}
+}
+
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src E2MCreateParams) MarshalJSON() ([]byte, error) {
+	if src.E2MCreateParamsLogsQuery != nil {
+		return json.Marshal(&src.E2MCreateParamsLogsQuery)
+	}
+
+	if src.E2MCreateParamsSpansQuery != nil {
+		return json.Marshal(&src.E2MCreateParamsSpansQuery)
+	}
+
+	return nil, nil // no data in oneOf schemas
+}
+
+// Get the actual instance
+func (obj *E2MCreateParams) GetActualInstance() (interface{}) {
+	if obj == nil {
+		return nil
+	}
+	if obj.E2MCreateParamsLogsQuery != nil {
+		return obj.E2MCreateParamsLogsQuery
+	}
+
+	if obj.E2MCreateParamsSpansQuery != nil {
+		return obj.E2MCreateParamsSpansQuery
+	}
+
+	// all schemas are nil
+	return nil
+}
+
+// Get the actual instance value
+func (obj E2MCreateParams) GetActualInstanceValue() (interface{}) {
+	if obj.E2MCreateParamsLogsQuery != nil {
+		return *obj.E2MCreateParamsLogsQuery
+	}
+
+	if obj.E2MCreateParamsSpansQuery != nil {
+		return *obj.E2MCreateParamsSpansQuery
+	}
+
+	// all schemas are nil
+	return nil
 }
 
 type NullableE2MCreateParams struct {

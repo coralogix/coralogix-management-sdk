@@ -18,37 +18,37 @@ import (
 
 // GaugeQuery - struct for GaugeQuery
 type GaugeQuery struct {
-	GaugeQueryOneOf *GaugeQueryOneOf
-	GaugeQueryOneOf1 *GaugeQueryOneOf1
-	GaugeQueryOneOf2 *GaugeQueryOneOf2
-	GaugeQueryOneOf3 *GaugeQueryOneOf3
+	QueryDataprime *QueryDataprime
+	QueryLogs *QueryLogs
+	QueryMetrics *QueryMetrics
+	QuerySpans *QuerySpans
 }
 
-// GaugeQueryOneOfAsGaugeQuery is a convenience function that returns GaugeQueryOneOf wrapped in GaugeQuery
-func GaugeQueryOneOfAsGaugeQuery(v *GaugeQueryOneOf) GaugeQuery {
+// QueryDataprimeAsGaugeQuery is a convenience function that returns QueryDataprime wrapped in GaugeQuery
+func QueryDataprimeAsGaugeQuery(v *QueryDataprime) GaugeQuery {
 	return GaugeQuery{
-		GaugeQueryOneOf: v,
+		QueryDataprime: v,
 	}
 }
 
-// GaugeQueryOneOf1AsGaugeQuery is a convenience function that returns GaugeQueryOneOf1 wrapped in GaugeQuery
-func GaugeQueryOneOf1AsGaugeQuery(v *GaugeQueryOneOf1) GaugeQuery {
+// QueryLogsAsGaugeQuery is a convenience function that returns QueryLogs wrapped in GaugeQuery
+func QueryLogsAsGaugeQuery(v *QueryLogs) GaugeQuery {
 	return GaugeQuery{
-		GaugeQueryOneOf1: v,
+		QueryLogs: v,
 	}
 }
 
-// GaugeQueryOneOf2AsGaugeQuery is a convenience function that returns GaugeQueryOneOf2 wrapped in GaugeQuery
-func GaugeQueryOneOf2AsGaugeQuery(v *GaugeQueryOneOf2) GaugeQuery {
+// QueryMetricsAsGaugeQuery is a convenience function that returns QueryMetrics wrapped in GaugeQuery
+func QueryMetricsAsGaugeQuery(v *QueryMetrics) GaugeQuery {
 	return GaugeQuery{
-		GaugeQueryOneOf2: v,
+		QueryMetrics: v,
 	}
 }
 
-// GaugeQueryOneOf3AsGaugeQuery is a convenience function that returns GaugeQueryOneOf3 wrapped in GaugeQuery
-func GaugeQueryOneOf3AsGaugeQuery(v *GaugeQueryOneOf3) GaugeQuery {
+// QuerySpansAsGaugeQuery is a convenience function that returns QuerySpans wrapped in GaugeQuery
+func QuerySpansAsGaugeQuery(v *QuerySpans) GaugeQuery {
 	return GaugeQuery{
-		GaugeQueryOneOf3: v,
+		QuerySpans: v,
 	}
 }
 
@@ -57,80 +57,80 @@ func GaugeQueryOneOf3AsGaugeQuery(v *GaugeQueryOneOf3) GaugeQuery {
 func (dst *GaugeQuery) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into GaugeQueryOneOf
-	err = newStrictDecoder(data).Decode(&dst.GaugeQueryOneOf)
+	// try to unmarshal data into QueryDataprime
+	err = newStrictDecoder(data).Decode(&dst.QueryDataprime)
 	if err == nil {
-		jsonGaugeQueryOneOf, _ := json.Marshal(dst.GaugeQueryOneOf)
-		if string(jsonGaugeQueryOneOf) == "{}" { // empty struct
-			dst.GaugeQueryOneOf = nil
+		jsonQueryDataprime, _ := json.Marshal(dst.QueryDataprime)
+		if string(jsonQueryDataprime) == "{}" { // empty struct
+			dst.QueryDataprime = nil
 		} else {
-			if err = validator.Validate(dst.GaugeQueryOneOf); err != nil {
-				dst.GaugeQueryOneOf = nil
+			if err = validator.Validate(dst.QueryDataprime); err != nil {
+				dst.QueryDataprime = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.GaugeQueryOneOf = nil
+		dst.QueryDataprime = nil
 	}
 
-	// try to unmarshal data into GaugeQueryOneOf1
-	err = newStrictDecoder(data).Decode(&dst.GaugeQueryOneOf1)
+	// try to unmarshal data into QueryLogs
+	err = newStrictDecoder(data).Decode(&dst.QueryLogs)
 	if err == nil {
-		jsonGaugeQueryOneOf1, _ := json.Marshal(dst.GaugeQueryOneOf1)
-		if string(jsonGaugeQueryOneOf1) == "{}" { // empty struct
-			dst.GaugeQueryOneOf1 = nil
+		jsonQueryLogs, _ := json.Marshal(dst.QueryLogs)
+		if string(jsonQueryLogs) == "{}" { // empty struct
+			dst.QueryLogs = nil
 		} else {
-			if err = validator.Validate(dst.GaugeQueryOneOf1); err != nil {
-				dst.GaugeQueryOneOf1 = nil
+			if err = validator.Validate(dst.QueryLogs); err != nil {
+				dst.QueryLogs = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.GaugeQueryOneOf1 = nil
+		dst.QueryLogs = nil
 	}
 
-	// try to unmarshal data into GaugeQueryOneOf2
-	err = newStrictDecoder(data).Decode(&dst.GaugeQueryOneOf2)
+	// try to unmarshal data into QueryMetrics
+	err = newStrictDecoder(data).Decode(&dst.QueryMetrics)
 	if err == nil {
-		jsonGaugeQueryOneOf2, _ := json.Marshal(dst.GaugeQueryOneOf2)
-		if string(jsonGaugeQueryOneOf2) == "{}" { // empty struct
-			dst.GaugeQueryOneOf2 = nil
+		jsonQueryMetrics, _ := json.Marshal(dst.QueryMetrics)
+		if string(jsonQueryMetrics) == "{}" { // empty struct
+			dst.QueryMetrics = nil
 		} else {
-			if err = validator.Validate(dst.GaugeQueryOneOf2); err != nil {
-				dst.GaugeQueryOneOf2 = nil
+			if err = validator.Validate(dst.QueryMetrics); err != nil {
+				dst.QueryMetrics = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.GaugeQueryOneOf2 = nil
+		dst.QueryMetrics = nil
 	}
 
-	// try to unmarshal data into GaugeQueryOneOf3
-	err = newStrictDecoder(data).Decode(&dst.GaugeQueryOneOf3)
+	// try to unmarshal data into QuerySpans
+	err = newStrictDecoder(data).Decode(&dst.QuerySpans)
 	if err == nil {
-		jsonGaugeQueryOneOf3, _ := json.Marshal(dst.GaugeQueryOneOf3)
-		if string(jsonGaugeQueryOneOf3) == "{}" { // empty struct
-			dst.GaugeQueryOneOf3 = nil
+		jsonQuerySpans, _ := json.Marshal(dst.QuerySpans)
+		if string(jsonQuerySpans) == "{}" { // empty struct
+			dst.QuerySpans = nil
 		} else {
-			if err = validator.Validate(dst.GaugeQueryOneOf3); err != nil {
-				dst.GaugeQueryOneOf3 = nil
+			if err = validator.Validate(dst.QuerySpans); err != nil {
+				dst.QuerySpans = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.GaugeQueryOneOf3 = nil
+		dst.QuerySpans = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.GaugeQueryOneOf = nil
-		dst.GaugeQueryOneOf1 = nil
-		dst.GaugeQueryOneOf2 = nil
-		dst.GaugeQueryOneOf3 = nil
+		dst.QueryDataprime = nil
+		dst.QueryLogs = nil
+		dst.QueryMetrics = nil
+		dst.QuerySpans = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(GaugeQuery)")
 	} else if match == 1 {
@@ -142,20 +142,20 @@ func (dst *GaugeQuery) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src GaugeQuery) MarshalJSON() ([]byte, error) {
-	if src.GaugeQueryOneOf != nil {
-		return json.Marshal(&src.GaugeQueryOneOf)
+	if src.QueryDataprime != nil {
+		return json.Marshal(&src.QueryDataprime)
 	}
 
-	if src.GaugeQueryOneOf1 != nil {
-		return json.Marshal(&src.GaugeQueryOneOf1)
+	if src.QueryLogs != nil {
+		return json.Marshal(&src.QueryLogs)
 	}
 
-	if src.GaugeQueryOneOf2 != nil {
-		return json.Marshal(&src.GaugeQueryOneOf2)
+	if src.QueryMetrics != nil {
+		return json.Marshal(&src.QueryMetrics)
 	}
 
-	if src.GaugeQueryOneOf3 != nil {
-		return json.Marshal(&src.GaugeQueryOneOf3)
+	if src.QuerySpans != nil {
+		return json.Marshal(&src.QuerySpans)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -166,20 +166,20 @@ func (obj *GaugeQuery) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.GaugeQueryOneOf != nil {
-		return obj.GaugeQueryOneOf
+	if obj.QueryDataprime != nil {
+		return obj.QueryDataprime
 	}
 
-	if obj.GaugeQueryOneOf1 != nil {
-		return obj.GaugeQueryOneOf1
+	if obj.QueryLogs != nil {
+		return obj.QueryLogs
 	}
 
-	if obj.GaugeQueryOneOf2 != nil {
-		return obj.GaugeQueryOneOf2
+	if obj.QueryMetrics != nil {
+		return obj.QueryMetrics
 	}
 
-	if obj.GaugeQueryOneOf3 != nil {
-		return obj.GaugeQueryOneOf3
+	if obj.QuerySpans != nil {
+		return obj.QuerySpans
 	}
 
 	// all schemas are nil
@@ -188,20 +188,20 @@ func (obj *GaugeQuery) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj GaugeQuery) GetActualInstanceValue() (interface{}) {
-	if obj.GaugeQueryOneOf != nil {
-		return *obj.GaugeQueryOneOf
+	if obj.QueryDataprime != nil {
+		return *obj.QueryDataprime
 	}
 
-	if obj.GaugeQueryOneOf1 != nil {
-		return *obj.GaugeQueryOneOf1
+	if obj.QueryLogs != nil {
+		return *obj.QueryLogs
 	}
 
-	if obj.GaugeQueryOneOf2 != nil {
-		return *obj.GaugeQueryOneOf2
+	if obj.QueryMetrics != nil {
+		return *obj.QueryMetrics
 	}
 
-	if obj.GaugeQueryOneOf3 != nil {
-		return *obj.GaugeQueryOneOf3
+	if obj.QuerySpans != nil {
+		return *obj.QuerySpans
 	}
 
 	// all schemas are nil

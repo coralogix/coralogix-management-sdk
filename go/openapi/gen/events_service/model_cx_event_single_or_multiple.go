@@ -18,21 +18,21 @@ import (
 
 // CxEventSingleOrMultiple - struct for CxEventSingleOrMultiple
 type CxEventSingleOrMultiple struct {
-	CxEventSingleOrMultiple1 *CxEventSingleOrMultiple1
-	CxEventSingleOrMultiple2 *CxEventSingleOrMultiple2
+	CxEventSingleOrMultipleMultipleEvents *CxEventSingleOrMultipleMultipleEvents
+	CxEventSingleOrMultipleSingleEvent *CxEventSingleOrMultipleSingleEvent
 }
 
-// CxEventSingleOrMultiple1AsCxEventSingleOrMultiple is a convenience function that returns CxEventSingleOrMultiple1 wrapped in CxEventSingleOrMultiple
-func CxEventSingleOrMultiple1AsCxEventSingleOrMultiple(v *CxEventSingleOrMultiple1) CxEventSingleOrMultiple {
+// CxEventSingleOrMultipleMultipleEventsAsCxEventSingleOrMultiple is a convenience function that returns CxEventSingleOrMultipleMultipleEvents wrapped in CxEventSingleOrMultiple
+func CxEventSingleOrMultipleMultipleEventsAsCxEventSingleOrMultiple(v *CxEventSingleOrMultipleMultipleEvents) CxEventSingleOrMultiple {
 	return CxEventSingleOrMultiple{
-		CxEventSingleOrMultiple1: v,
+		CxEventSingleOrMultipleMultipleEvents: v,
 	}
 }
 
-// CxEventSingleOrMultiple2AsCxEventSingleOrMultiple is a convenience function that returns CxEventSingleOrMultiple2 wrapped in CxEventSingleOrMultiple
-func CxEventSingleOrMultiple2AsCxEventSingleOrMultiple(v *CxEventSingleOrMultiple2) CxEventSingleOrMultiple {
+// CxEventSingleOrMultipleSingleEventAsCxEventSingleOrMultiple is a convenience function that returns CxEventSingleOrMultipleSingleEvent wrapped in CxEventSingleOrMultiple
+func CxEventSingleOrMultipleSingleEventAsCxEventSingleOrMultiple(v *CxEventSingleOrMultipleSingleEvent) CxEventSingleOrMultiple {
 	return CxEventSingleOrMultiple{
-		CxEventSingleOrMultiple2: v,
+		CxEventSingleOrMultipleSingleEvent: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func CxEventSingleOrMultiple2AsCxEventSingleOrMultiple(v *CxEventSingleOrMultipl
 func (dst *CxEventSingleOrMultiple) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into CxEventSingleOrMultiple1
-	err = newStrictDecoder(data).Decode(&dst.CxEventSingleOrMultiple1)
+	// try to unmarshal data into CxEventSingleOrMultipleMultipleEvents
+	err = newStrictDecoder(data).Decode(&dst.CxEventSingleOrMultipleMultipleEvents)
 	if err == nil {
-		jsonCxEventSingleOrMultiple1, _ := json.Marshal(dst.CxEventSingleOrMultiple1)
-		if string(jsonCxEventSingleOrMultiple1) == "{}" { // empty struct
-			dst.CxEventSingleOrMultiple1 = nil
+		jsonCxEventSingleOrMultipleMultipleEvents, _ := json.Marshal(dst.CxEventSingleOrMultipleMultipleEvents)
+		if string(jsonCxEventSingleOrMultipleMultipleEvents) == "{}" { // empty struct
+			dst.CxEventSingleOrMultipleMultipleEvents = nil
 		} else {
-			if err = validator.Validate(dst.CxEventSingleOrMultiple1); err != nil {
-				dst.CxEventSingleOrMultiple1 = nil
+			if err = validator.Validate(dst.CxEventSingleOrMultipleMultipleEvents); err != nil {
+				dst.CxEventSingleOrMultipleMultipleEvents = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.CxEventSingleOrMultiple1 = nil
+		dst.CxEventSingleOrMultipleMultipleEvents = nil
 	}
 
-	// try to unmarshal data into CxEventSingleOrMultiple2
-	err = newStrictDecoder(data).Decode(&dst.CxEventSingleOrMultiple2)
+	// try to unmarshal data into CxEventSingleOrMultipleSingleEvent
+	err = newStrictDecoder(data).Decode(&dst.CxEventSingleOrMultipleSingleEvent)
 	if err == nil {
-		jsonCxEventSingleOrMultiple2, _ := json.Marshal(dst.CxEventSingleOrMultiple2)
-		if string(jsonCxEventSingleOrMultiple2) == "{}" { // empty struct
-			dst.CxEventSingleOrMultiple2 = nil
+		jsonCxEventSingleOrMultipleSingleEvent, _ := json.Marshal(dst.CxEventSingleOrMultipleSingleEvent)
+		if string(jsonCxEventSingleOrMultipleSingleEvent) == "{}" { // empty struct
+			dst.CxEventSingleOrMultipleSingleEvent = nil
 		} else {
-			if err = validator.Validate(dst.CxEventSingleOrMultiple2); err != nil {
-				dst.CxEventSingleOrMultiple2 = nil
+			if err = validator.Validate(dst.CxEventSingleOrMultipleSingleEvent); err != nil {
+				dst.CxEventSingleOrMultipleSingleEvent = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.CxEventSingleOrMultiple2 = nil
+		dst.CxEventSingleOrMultipleSingleEvent = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.CxEventSingleOrMultiple1 = nil
-		dst.CxEventSingleOrMultiple2 = nil
+		dst.CxEventSingleOrMultipleMultipleEvents = nil
+		dst.CxEventSingleOrMultipleSingleEvent = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(CxEventSingleOrMultiple)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *CxEventSingleOrMultiple) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src CxEventSingleOrMultiple) MarshalJSON() ([]byte, error) {
-	if src.CxEventSingleOrMultiple1 != nil {
-		return json.Marshal(&src.CxEventSingleOrMultiple1)
+	if src.CxEventSingleOrMultipleMultipleEvents != nil {
+		return json.Marshal(&src.CxEventSingleOrMultipleMultipleEvents)
 	}
 
-	if src.CxEventSingleOrMultiple2 != nil {
-		return json.Marshal(&src.CxEventSingleOrMultiple2)
+	if src.CxEventSingleOrMultipleSingleEvent != nil {
+		return json.Marshal(&src.CxEventSingleOrMultipleSingleEvent)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *CxEventSingleOrMultiple) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.CxEventSingleOrMultiple1 != nil {
-		return obj.CxEventSingleOrMultiple1
+	if obj.CxEventSingleOrMultipleMultipleEvents != nil {
+		return obj.CxEventSingleOrMultipleMultipleEvents
 	}
 
-	if obj.CxEventSingleOrMultiple2 != nil {
-		return obj.CxEventSingleOrMultiple2
+	if obj.CxEventSingleOrMultipleSingleEvent != nil {
+		return obj.CxEventSingleOrMultipleSingleEvent
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *CxEventSingleOrMultiple) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj CxEventSingleOrMultiple) GetActualInstanceValue() (interface{}) {
-	if obj.CxEventSingleOrMultiple1 != nil {
-		return *obj.CxEventSingleOrMultiple1
+	if obj.CxEventSingleOrMultipleMultipleEvents != nil {
+		return *obj.CxEventSingleOrMultipleMultipleEvents
 	}
 
-	if obj.CxEventSingleOrMultiple2 != nil {
-		return *obj.CxEventSingleOrMultiple2
+	if obj.CxEventSingleOrMultipleSingleEvent != nil {
+		return *obj.CxEventSingleOrMultipleSingleEvent
 	}
 
 	// all schemas are nil

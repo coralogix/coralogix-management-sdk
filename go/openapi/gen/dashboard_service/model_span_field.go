@@ -18,29 +18,29 @@ import (
 
 // SpanField - struct for SpanField
 type SpanField struct {
-	SpanFieldOneOf *SpanFieldOneOf
-	SpanFieldOneOf1 *SpanFieldOneOf1
-	SpanFieldOneOf2 *SpanFieldOneOf2
+	SpanFieldMetadataField *SpanFieldMetadataField
+	SpanFieldProcessTagField *SpanFieldProcessTagField
+	SpanFieldTagField *SpanFieldTagField
 }
 
-// SpanFieldOneOfAsSpanField is a convenience function that returns SpanFieldOneOf wrapped in SpanField
-func SpanFieldOneOfAsSpanField(v *SpanFieldOneOf) SpanField {
+// SpanFieldMetadataFieldAsSpanField is a convenience function that returns SpanFieldMetadataField wrapped in SpanField
+func SpanFieldMetadataFieldAsSpanField(v *SpanFieldMetadataField) SpanField {
 	return SpanField{
-		SpanFieldOneOf: v,
+		SpanFieldMetadataField: v,
 	}
 }
 
-// SpanFieldOneOf1AsSpanField is a convenience function that returns SpanFieldOneOf1 wrapped in SpanField
-func SpanFieldOneOf1AsSpanField(v *SpanFieldOneOf1) SpanField {
+// SpanFieldProcessTagFieldAsSpanField is a convenience function that returns SpanFieldProcessTagField wrapped in SpanField
+func SpanFieldProcessTagFieldAsSpanField(v *SpanFieldProcessTagField) SpanField {
 	return SpanField{
-		SpanFieldOneOf1: v,
+		SpanFieldProcessTagField: v,
 	}
 }
 
-// SpanFieldOneOf2AsSpanField is a convenience function that returns SpanFieldOneOf2 wrapped in SpanField
-func SpanFieldOneOf2AsSpanField(v *SpanFieldOneOf2) SpanField {
+// SpanFieldTagFieldAsSpanField is a convenience function that returns SpanFieldTagField wrapped in SpanField
+func SpanFieldTagFieldAsSpanField(v *SpanFieldTagField) SpanField {
 	return SpanField{
-		SpanFieldOneOf2: v,
+		SpanFieldTagField: v,
 	}
 }
 
@@ -49,62 +49,62 @@ func SpanFieldOneOf2AsSpanField(v *SpanFieldOneOf2) SpanField {
 func (dst *SpanField) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into SpanFieldOneOf
-	err = newStrictDecoder(data).Decode(&dst.SpanFieldOneOf)
+	// try to unmarshal data into SpanFieldMetadataField
+	err = newStrictDecoder(data).Decode(&dst.SpanFieldMetadataField)
 	if err == nil {
-		jsonSpanFieldOneOf, _ := json.Marshal(dst.SpanFieldOneOf)
-		if string(jsonSpanFieldOneOf) == "{}" { // empty struct
-			dst.SpanFieldOneOf = nil
+		jsonSpanFieldMetadataField, _ := json.Marshal(dst.SpanFieldMetadataField)
+		if string(jsonSpanFieldMetadataField) == "{}" { // empty struct
+			dst.SpanFieldMetadataField = nil
 		} else {
-			if err = validator.Validate(dst.SpanFieldOneOf); err != nil {
-				dst.SpanFieldOneOf = nil
+			if err = validator.Validate(dst.SpanFieldMetadataField); err != nil {
+				dst.SpanFieldMetadataField = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SpanFieldOneOf = nil
+		dst.SpanFieldMetadataField = nil
 	}
 
-	// try to unmarshal data into SpanFieldOneOf1
-	err = newStrictDecoder(data).Decode(&dst.SpanFieldOneOf1)
+	// try to unmarshal data into SpanFieldProcessTagField
+	err = newStrictDecoder(data).Decode(&dst.SpanFieldProcessTagField)
 	if err == nil {
-		jsonSpanFieldOneOf1, _ := json.Marshal(dst.SpanFieldOneOf1)
-		if string(jsonSpanFieldOneOf1) == "{}" { // empty struct
-			dst.SpanFieldOneOf1 = nil
+		jsonSpanFieldProcessTagField, _ := json.Marshal(dst.SpanFieldProcessTagField)
+		if string(jsonSpanFieldProcessTagField) == "{}" { // empty struct
+			dst.SpanFieldProcessTagField = nil
 		} else {
-			if err = validator.Validate(dst.SpanFieldOneOf1); err != nil {
-				dst.SpanFieldOneOf1 = nil
+			if err = validator.Validate(dst.SpanFieldProcessTagField); err != nil {
+				dst.SpanFieldProcessTagField = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SpanFieldOneOf1 = nil
+		dst.SpanFieldProcessTagField = nil
 	}
 
-	// try to unmarshal data into SpanFieldOneOf2
-	err = newStrictDecoder(data).Decode(&dst.SpanFieldOneOf2)
+	// try to unmarshal data into SpanFieldTagField
+	err = newStrictDecoder(data).Decode(&dst.SpanFieldTagField)
 	if err == nil {
-		jsonSpanFieldOneOf2, _ := json.Marshal(dst.SpanFieldOneOf2)
-		if string(jsonSpanFieldOneOf2) == "{}" { // empty struct
-			dst.SpanFieldOneOf2 = nil
+		jsonSpanFieldTagField, _ := json.Marshal(dst.SpanFieldTagField)
+		if string(jsonSpanFieldTagField) == "{}" { // empty struct
+			dst.SpanFieldTagField = nil
 		} else {
-			if err = validator.Validate(dst.SpanFieldOneOf2); err != nil {
-				dst.SpanFieldOneOf2 = nil
+			if err = validator.Validate(dst.SpanFieldTagField); err != nil {
+				dst.SpanFieldTagField = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SpanFieldOneOf2 = nil
+		dst.SpanFieldTagField = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.SpanFieldOneOf = nil
-		dst.SpanFieldOneOf1 = nil
-		dst.SpanFieldOneOf2 = nil
+		dst.SpanFieldMetadataField = nil
+		dst.SpanFieldProcessTagField = nil
+		dst.SpanFieldTagField = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(SpanField)")
 	} else if match == 1 {
@@ -116,16 +116,16 @@ func (dst *SpanField) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src SpanField) MarshalJSON() ([]byte, error) {
-	if src.SpanFieldOneOf != nil {
-		return json.Marshal(&src.SpanFieldOneOf)
+	if src.SpanFieldMetadataField != nil {
+		return json.Marshal(&src.SpanFieldMetadataField)
 	}
 
-	if src.SpanFieldOneOf1 != nil {
-		return json.Marshal(&src.SpanFieldOneOf1)
+	if src.SpanFieldProcessTagField != nil {
+		return json.Marshal(&src.SpanFieldProcessTagField)
 	}
 
-	if src.SpanFieldOneOf2 != nil {
-		return json.Marshal(&src.SpanFieldOneOf2)
+	if src.SpanFieldTagField != nil {
+		return json.Marshal(&src.SpanFieldTagField)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -136,16 +136,16 @@ func (obj *SpanField) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.SpanFieldOneOf != nil {
-		return obj.SpanFieldOneOf
+	if obj.SpanFieldMetadataField != nil {
+		return obj.SpanFieldMetadataField
 	}
 
-	if obj.SpanFieldOneOf1 != nil {
-		return obj.SpanFieldOneOf1
+	if obj.SpanFieldProcessTagField != nil {
+		return obj.SpanFieldProcessTagField
 	}
 
-	if obj.SpanFieldOneOf2 != nil {
-		return obj.SpanFieldOneOf2
+	if obj.SpanFieldTagField != nil {
+		return obj.SpanFieldTagField
 	}
 
 	// all schemas are nil
@@ -154,16 +154,16 @@ func (obj *SpanField) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj SpanField) GetActualInstanceValue() (interface{}) {
-	if obj.SpanFieldOneOf != nil {
-		return *obj.SpanFieldOneOf
+	if obj.SpanFieldMetadataField != nil {
+		return *obj.SpanFieldMetadataField
 	}
 
-	if obj.SpanFieldOneOf1 != nil {
-		return *obj.SpanFieldOneOf1
+	if obj.SpanFieldProcessTagField != nil {
+		return *obj.SpanFieldProcessTagField
 	}
 
-	if obj.SpanFieldOneOf2 != nil {
-		return *obj.SpanFieldOneOf2
+	if obj.SpanFieldTagField != nil {
+		return *obj.SpanFieldTagField
 	}
 
 	// all schemas are nil

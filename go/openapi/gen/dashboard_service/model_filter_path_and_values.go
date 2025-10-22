@@ -18,21 +18,21 @@ import (
 
 // FilterPathAndValues - struct for FilterPathAndValues
 type FilterPathAndValues struct {
-	FilterPathAndValues1 *FilterPathAndValues1
-	FilterPathAndValues2 *FilterPathAndValues2
+	FilterPathAndValuesFilters *FilterPathAndValuesFilters
+	FilterPathAndValuesMultipleValues *FilterPathAndValuesMultipleValues
 }
 
-// FilterPathAndValues1AsFilterPathAndValues is a convenience function that returns FilterPathAndValues1 wrapped in FilterPathAndValues
-func FilterPathAndValues1AsFilterPathAndValues(v *FilterPathAndValues1) FilterPathAndValues {
+// FilterPathAndValuesFiltersAsFilterPathAndValues is a convenience function that returns FilterPathAndValuesFilters wrapped in FilterPathAndValues
+func FilterPathAndValuesFiltersAsFilterPathAndValues(v *FilterPathAndValuesFilters) FilterPathAndValues {
 	return FilterPathAndValues{
-		FilterPathAndValues1: v,
+		FilterPathAndValuesFilters: v,
 	}
 }
 
-// FilterPathAndValues2AsFilterPathAndValues is a convenience function that returns FilterPathAndValues2 wrapped in FilterPathAndValues
-func FilterPathAndValues2AsFilterPathAndValues(v *FilterPathAndValues2) FilterPathAndValues {
+// FilterPathAndValuesMultipleValuesAsFilterPathAndValues is a convenience function that returns FilterPathAndValuesMultipleValues wrapped in FilterPathAndValues
+func FilterPathAndValuesMultipleValuesAsFilterPathAndValues(v *FilterPathAndValuesMultipleValues) FilterPathAndValues {
 	return FilterPathAndValues{
-		FilterPathAndValues2: v,
+		FilterPathAndValuesMultipleValues: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func FilterPathAndValues2AsFilterPathAndValues(v *FilterPathAndValues2) FilterPa
 func (dst *FilterPathAndValues) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into FilterPathAndValues1
-	err = newStrictDecoder(data).Decode(&dst.FilterPathAndValues1)
+	// try to unmarshal data into FilterPathAndValuesFilters
+	err = newStrictDecoder(data).Decode(&dst.FilterPathAndValuesFilters)
 	if err == nil {
-		jsonFilterPathAndValues1, _ := json.Marshal(dst.FilterPathAndValues1)
-		if string(jsonFilterPathAndValues1) == "{}" { // empty struct
-			dst.FilterPathAndValues1 = nil
+		jsonFilterPathAndValuesFilters, _ := json.Marshal(dst.FilterPathAndValuesFilters)
+		if string(jsonFilterPathAndValuesFilters) == "{}" { // empty struct
+			dst.FilterPathAndValuesFilters = nil
 		} else {
-			if err = validator.Validate(dst.FilterPathAndValues1); err != nil {
-				dst.FilterPathAndValues1 = nil
+			if err = validator.Validate(dst.FilterPathAndValuesFilters); err != nil {
+				dst.FilterPathAndValuesFilters = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.FilterPathAndValues1 = nil
+		dst.FilterPathAndValuesFilters = nil
 	}
 
-	// try to unmarshal data into FilterPathAndValues2
-	err = newStrictDecoder(data).Decode(&dst.FilterPathAndValues2)
+	// try to unmarshal data into FilterPathAndValuesMultipleValues
+	err = newStrictDecoder(data).Decode(&dst.FilterPathAndValuesMultipleValues)
 	if err == nil {
-		jsonFilterPathAndValues2, _ := json.Marshal(dst.FilterPathAndValues2)
-		if string(jsonFilterPathAndValues2) == "{}" { // empty struct
-			dst.FilterPathAndValues2 = nil
+		jsonFilterPathAndValuesMultipleValues, _ := json.Marshal(dst.FilterPathAndValuesMultipleValues)
+		if string(jsonFilterPathAndValuesMultipleValues) == "{}" { // empty struct
+			dst.FilterPathAndValuesMultipleValues = nil
 		} else {
-			if err = validator.Validate(dst.FilterPathAndValues2); err != nil {
-				dst.FilterPathAndValues2 = nil
+			if err = validator.Validate(dst.FilterPathAndValuesMultipleValues); err != nil {
+				dst.FilterPathAndValuesMultipleValues = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.FilterPathAndValues2 = nil
+		dst.FilterPathAndValuesMultipleValues = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.FilterPathAndValues1 = nil
-		dst.FilterPathAndValues2 = nil
+		dst.FilterPathAndValuesFilters = nil
+		dst.FilterPathAndValuesMultipleValues = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(FilterPathAndValues)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *FilterPathAndValues) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src FilterPathAndValues) MarshalJSON() ([]byte, error) {
-	if src.FilterPathAndValues1 != nil {
-		return json.Marshal(&src.FilterPathAndValues1)
+	if src.FilterPathAndValuesFilters != nil {
+		return json.Marshal(&src.FilterPathAndValuesFilters)
 	}
 
-	if src.FilterPathAndValues2 != nil {
-		return json.Marshal(&src.FilterPathAndValues2)
+	if src.FilterPathAndValuesMultipleValues != nil {
+		return json.Marshal(&src.FilterPathAndValuesMultipleValues)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *FilterPathAndValues) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.FilterPathAndValues1 != nil {
-		return obj.FilterPathAndValues1
+	if obj.FilterPathAndValuesFilters != nil {
+		return obj.FilterPathAndValuesFilters
 	}
 
-	if obj.FilterPathAndValues2 != nil {
-		return obj.FilterPathAndValues2
+	if obj.FilterPathAndValuesMultipleValues != nil {
+		return obj.FilterPathAndValuesMultipleValues
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *FilterPathAndValues) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj FilterPathAndValues) GetActualInstanceValue() (interface{}) {
-	if obj.FilterPathAndValues1 != nil {
-		return *obj.FilterPathAndValues1
+	if obj.FilterPathAndValuesFilters != nil {
+		return *obj.FilterPathAndValuesFilters
 	}
 
-	if obj.FilterPathAndValues2 != nil {
-		return *obj.FilterPathAndValues2
+	if obj.FilterPathAndValuesMultipleValues != nil {
+		return *obj.FilterPathAndValuesMultipleValues
 	}
 
 	// all schemas are nil

@@ -12,79 +12,124 @@ package outgoing_webhooks_service
 
 import (
 	"encoding/json"
+	"fmt"
+	"gopkg.in/validator.v2"
 )
 
-// checks if the TestOutgoingWebhookResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &TestOutgoingWebhookResponse{}
-
-// TestOutgoingWebhookResponse struct for TestOutgoingWebhookResponse
+// TestOutgoingWebhookResponse - struct for TestOutgoingWebhookResponse
 type TestOutgoingWebhookResponse struct {
-	Success map[string]interface{} `json:"success,omitempty"`
+	TestOutgoingWebhookResponseFailure *TestOutgoingWebhookResponseFailure
+	TestOutgoingWebhookResponseSuccess *TestOutgoingWebhookResponseSuccess
 }
 
-// NewTestOutgoingWebhookResponse instantiates a new TestOutgoingWebhookResponse object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewTestOutgoingWebhookResponse() *TestOutgoingWebhookResponse {
-	this := TestOutgoingWebhookResponse{}
-	return &this
-}
-
-// NewTestOutgoingWebhookResponseWithDefaults instantiates a new TestOutgoingWebhookResponse object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewTestOutgoingWebhookResponseWithDefaults() *TestOutgoingWebhookResponse {
-	this := TestOutgoingWebhookResponse{}
-	return &this
-}
-
-// GetSuccess returns the Success field value if set, zero value otherwise.
-func (o *TestOutgoingWebhookResponse) GetSuccess() map[string]interface{} {
-	if o == nil || IsNil(o.Success) {
-		var ret map[string]interface{}
-		return ret
+// TestOutgoingWebhookResponseFailureAsTestOutgoingWebhookResponse is a convenience function that returns TestOutgoingWebhookResponseFailure wrapped in TestOutgoingWebhookResponse
+func TestOutgoingWebhookResponseFailureAsTestOutgoingWebhookResponse(v *TestOutgoingWebhookResponseFailure) TestOutgoingWebhookResponse {
+	return TestOutgoingWebhookResponse{
+		TestOutgoingWebhookResponseFailure: v,
 	}
-	return o.Success
 }
 
-// GetSuccessOk returns a tuple with the Success field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TestOutgoingWebhookResponse) GetSuccessOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Success) {
-		return map[string]interface{}{}, false
+// TestOutgoingWebhookResponseSuccessAsTestOutgoingWebhookResponse is a convenience function that returns TestOutgoingWebhookResponseSuccess wrapped in TestOutgoingWebhookResponse
+func TestOutgoingWebhookResponseSuccessAsTestOutgoingWebhookResponse(v *TestOutgoingWebhookResponseSuccess) TestOutgoingWebhookResponse {
+	return TestOutgoingWebhookResponse{
+		TestOutgoingWebhookResponseSuccess: v,
 	}
-	return o.Success, true
 }
 
-// HasSuccess returns a boolean if a field has been set.
-func (o *TestOutgoingWebhookResponse) HasSuccess() bool {
-	if o != nil && !IsNil(o.Success) {
-		return true
+
+// Unmarshal JSON data into one of the pointers in the struct
+func (dst *TestOutgoingWebhookResponse) UnmarshalJSON(data []byte) error {
+	var err error
+	match := 0
+	// try to unmarshal data into TestOutgoingWebhookResponseFailure
+	err = newStrictDecoder(data).Decode(&dst.TestOutgoingWebhookResponseFailure)
+	if err == nil {
+		jsonTestOutgoingWebhookResponseFailure, _ := json.Marshal(dst.TestOutgoingWebhookResponseFailure)
+		if string(jsonTestOutgoingWebhookResponseFailure) == "{}" { // empty struct
+			dst.TestOutgoingWebhookResponseFailure = nil
+		} else {
+			if err = validator.Validate(dst.TestOutgoingWebhookResponseFailure); err != nil {
+				dst.TestOutgoingWebhookResponseFailure = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.TestOutgoingWebhookResponseFailure = nil
 	}
 
-	return false
-}
-
-// SetSuccess gets a reference to the given map[string]interface{} and assigns it to the Success field.
-func (o *TestOutgoingWebhookResponse) SetSuccess(v map[string]interface{}) {
-	o.Success = v
-}
-
-func (o TestOutgoingWebhookResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	// try to unmarshal data into TestOutgoingWebhookResponseSuccess
+	err = newStrictDecoder(data).Decode(&dst.TestOutgoingWebhookResponseSuccess)
+	if err == nil {
+		jsonTestOutgoingWebhookResponseSuccess, _ := json.Marshal(dst.TestOutgoingWebhookResponseSuccess)
+		if string(jsonTestOutgoingWebhookResponseSuccess) == "{}" { // empty struct
+			dst.TestOutgoingWebhookResponseSuccess = nil
+		} else {
+			if err = validator.Validate(dst.TestOutgoingWebhookResponseSuccess); err != nil {
+				dst.TestOutgoingWebhookResponseSuccess = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.TestOutgoingWebhookResponseSuccess = nil
 	}
-	return json.Marshal(toSerialize)
+
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.TestOutgoingWebhookResponseFailure = nil
+		dst.TestOutgoingWebhookResponseSuccess = nil
+
+		return fmt.Errorf("data matches more than one schema in oneOf(TestOutgoingWebhookResponse)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("data failed to match schemas in oneOf(TestOutgoingWebhookResponse)")
+	}
 }
 
-func (o TestOutgoingWebhookResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Success) {
-		toSerialize["success"] = o.Success
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src TestOutgoingWebhookResponse) MarshalJSON() ([]byte, error) {
+	if src.TestOutgoingWebhookResponseFailure != nil {
+		return json.Marshal(&src.TestOutgoingWebhookResponseFailure)
 	}
-	return toSerialize, nil
+
+	if src.TestOutgoingWebhookResponseSuccess != nil {
+		return json.Marshal(&src.TestOutgoingWebhookResponseSuccess)
+	}
+
+	return nil, nil // no data in oneOf schemas
+}
+
+// Get the actual instance
+func (obj *TestOutgoingWebhookResponse) GetActualInstance() (interface{}) {
+	if obj == nil {
+		return nil
+	}
+	if obj.TestOutgoingWebhookResponseFailure != nil {
+		return obj.TestOutgoingWebhookResponseFailure
+	}
+
+	if obj.TestOutgoingWebhookResponseSuccess != nil {
+		return obj.TestOutgoingWebhookResponseSuccess
+	}
+
+	// all schemas are nil
+	return nil
+}
+
+// Get the actual instance value
+func (obj TestOutgoingWebhookResponse) GetActualInstanceValue() (interface{}) {
+	if obj.TestOutgoingWebhookResponseFailure != nil {
+		return *obj.TestOutgoingWebhookResponseFailure
+	}
+
+	if obj.TestOutgoingWebhookResponseSuccess != nil {
+		return *obj.TestOutgoingWebhookResponseSuccess
+	}
+
+	// all schemas are nil
+	return nil
 }
 
 type NullableTestOutgoingWebhookResponse struct {

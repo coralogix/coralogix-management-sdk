@@ -18,21 +18,21 @@ import (
 
 // E2M - struct for E2M
 type E2M struct {
-	E2M3 *E2M3
-	E2M4 *E2M4
+	E2MLogsQuery *E2MLogsQuery
+	E2MSpansQuery *E2MSpansQuery
 }
 
-// E2M3AsE2M is a convenience function that returns E2M3 wrapped in E2M
-func E2M3AsE2M(v *E2M3) E2M {
+// E2MLogsQueryAsE2M is a convenience function that returns E2MLogsQuery wrapped in E2M
+func E2MLogsQueryAsE2M(v *E2MLogsQuery) E2M {
 	return E2M{
-		E2M3: v,
+		E2MLogsQuery: v,
 	}
 }
 
-// E2M4AsE2M is a convenience function that returns E2M4 wrapped in E2M
-func E2M4AsE2M(v *E2M4) E2M {
+// E2MSpansQueryAsE2M is a convenience function that returns E2MSpansQuery wrapped in E2M
+func E2MSpansQueryAsE2M(v *E2MSpansQuery) E2M {
 	return E2M{
-		E2M4: v,
+		E2MSpansQuery: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func E2M4AsE2M(v *E2M4) E2M {
 func (dst *E2M) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into E2M3
-	err = newStrictDecoder(data).Decode(&dst.E2M3)
+	// try to unmarshal data into E2MLogsQuery
+	err = newStrictDecoder(data).Decode(&dst.E2MLogsQuery)
 	if err == nil {
-		jsonE2M3, _ := json.Marshal(dst.E2M3)
-		if string(jsonE2M3) == "{}" { // empty struct
-			dst.E2M3 = nil
+		jsonE2MLogsQuery, _ := json.Marshal(dst.E2MLogsQuery)
+		if string(jsonE2MLogsQuery) == "{}" { // empty struct
+			dst.E2MLogsQuery = nil
 		} else {
-			if err = validator.Validate(dst.E2M3); err != nil {
-				dst.E2M3 = nil
+			if err = validator.Validate(dst.E2MLogsQuery); err != nil {
+				dst.E2MLogsQuery = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.E2M3 = nil
+		dst.E2MLogsQuery = nil
 	}
 
-	// try to unmarshal data into E2M4
-	err = newStrictDecoder(data).Decode(&dst.E2M4)
+	// try to unmarshal data into E2MSpansQuery
+	err = newStrictDecoder(data).Decode(&dst.E2MSpansQuery)
 	if err == nil {
-		jsonE2M4, _ := json.Marshal(dst.E2M4)
-		if string(jsonE2M4) == "{}" { // empty struct
-			dst.E2M4 = nil
+		jsonE2MSpansQuery, _ := json.Marshal(dst.E2MSpansQuery)
+		if string(jsonE2MSpansQuery) == "{}" { // empty struct
+			dst.E2MSpansQuery = nil
 		} else {
-			if err = validator.Validate(dst.E2M4); err != nil {
-				dst.E2M4 = nil
+			if err = validator.Validate(dst.E2MSpansQuery); err != nil {
+				dst.E2MSpansQuery = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.E2M4 = nil
+		dst.E2MSpansQuery = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.E2M3 = nil
-		dst.E2M4 = nil
+		dst.E2MLogsQuery = nil
+		dst.E2MSpansQuery = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(E2M)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *E2M) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src E2M) MarshalJSON() ([]byte, error) {
-	if src.E2M3 != nil {
-		return json.Marshal(&src.E2M3)
+	if src.E2MLogsQuery != nil {
+		return json.Marshal(&src.E2MLogsQuery)
 	}
 
-	if src.E2M4 != nil {
-		return json.Marshal(&src.E2M4)
+	if src.E2MSpansQuery != nil {
+		return json.Marshal(&src.E2MSpansQuery)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *E2M) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.E2M3 != nil {
-		return obj.E2M3
+	if obj.E2MLogsQuery != nil {
+		return obj.E2MLogsQuery
 	}
 
-	if obj.E2M4 != nil {
-		return obj.E2M4
+	if obj.E2MSpansQuery != nil {
+		return obj.E2MSpansQuery
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *E2M) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj E2M) GetActualInstanceValue() (interface{}) {
-	if obj.E2M3 != nil {
-		return *obj.E2M3
+	if obj.E2MLogsQuery != nil {
+		return *obj.E2MLogsQuery
 	}
 
-	if obj.E2M4 != nil {
-		return *obj.E2M4
+	if obj.E2MSpansQuery != nil {
+		return *obj.E2MSpansQuery
 	}
 
 	// all schemas are nil

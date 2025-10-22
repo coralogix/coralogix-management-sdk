@@ -37,19 +37,10 @@
                 "type": "object",
                 "properties": {
                   "direction": {
-                    "type": "string",
-                    "enum": [
-                      "ORDER_BY_ALERT_EVENT_DIRECTION_UNSPECIFIED",
-                      "ORDER_BY_ALERT_EVENT_DIRECTION_ASC",
-                      "ORDER_BY_ALERT_EVENT_DIRECTION_DESC"
-                    ]
+                    "$ref": "#/components/schemas/OrderByAlertEventDirection"
                   },
                   "fieldName": {
-                    "type": "string",
-                    "enum": [
-                      "ORDER_BY_ALERT_EVENT_FIELDS_UNSPECIFIED",
-                      "ORDER_BY_ALERT_EVENT_FIELDS_TIMESTAMP"
-                    ]
+                    "$ref": "#/components/schemas/OrderByAlertEventFields"
                   }
                 }
               }
@@ -136,19 +127,10 @@
                 "type": "object",
                 "properties": {
                   "direction": {
-                    "type": "string",
-                    "enum": [
-                      "ORDER_BY_ALERT_EVENT_DIRECTION_UNSPECIFIED",
-                      "ORDER_BY_ALERT_EVENT_DIRECTION_ASC",
-                      "ORDER_BY_ALERT_EVENT_DIRECTION_DESC"
-                    ]
+                    "$ref": "#/components/schemas/OrderByAlertEventDirection"
                   },
                   "fieldName": {
-                    "type": "string",
-                    "enum": [
-                      "ORDER_BY_ALERT_EVENT_FIELDS_UNSPECIFIED",
-                      "ORDER_BY_ALERT_EVENT_FIELDS_TIMESTAMP"
-                    ]
+                    "$ref": "#/components/schemas/OrderByAlertEventFields"
                   }
                 }
               }
@@ -334,8 +316,7 @@
           "permutationId",
           "incidentCorrelationKey",
           "activityAnalysis"
-        ],
-        "additionalProperties": false
+        ]
       },
       "AlertEventMultiplePermutation": {
         "type": "object",
@@ -354,6 +335,33 @@
           "ALERT_STATUS_RESOLVED_OR_UNSPECIFIED",
           "ALERT_STATUS_TRIGGERED"
         ]
+      },
+      "ColorsByAggregation": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/ColorsByAggregation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByGroupBy": {
+        "type": "object",
+        "properties": {
+          "groupBy": {
+            "$ref": "#/components/schemas/ColorsByGroupBy"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByStack": {
+        "type": "object",
+        "properties": {
+          "stack": {
+            "$ref": "#/components/schemas/ColorsByStack"
+          }
+        },
+        "additionalProperties": false
       },
       "EventStats": {
         "externalDocs": {
@@ -405,50 +413,56 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "multipleValues": {
-                "$ref": "#/components/schemas/MultipleValues"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "filters": {
-                "$ref": "#/components/schemas/Filters"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
+      },
+      "FilterPathAndValuesFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "FilterPathAndValuesMultipleValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
       },
       "Filters": {
         "externalDocs": {
@@ -475,44 +489,50 @@
       "GetAlertEventResponse": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Get alert event response",
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "pagination": {
-                "$ref": "#/components/schemas/alerts.v3.PaginationResponse"
-              },
-              "singlePermutation": {
-                "$ref": "#/components/schemas/AlertEvent"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/GetAlertEventResponseSinglePermutation"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Get alert event response",
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "multiplePermutation": {
-                "$ref": "#/components/schemas/AlertEventMultiplePermutation"
-              },
-              "pagination": {
-                "$ref": "#/components/schemas/alerts.v3.PaginationResponse"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/GetAlertEventResponseMultiplePermutation"
           }
         ]
+      },
+      "GetAlertEventResponseMultiplePermutation": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Get alert event response",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "multiplePermutation": {
+            "$ref": "#/components/schemas/AlertEventMultiplePermutation"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/alerts.v3.PaginationResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetAlertEventResponseSinglePermutation": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Get alert event response",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/alerts.v3.PaginationResponse"
+          },
+          "singlePermutation": {
+            "$ref": "#/components/schemas/AlertEvent"
+          }
+        },
+        "additionalProperties": false
       },
       "GetAlertEventStatsResponse": {
         "externalDocs": {
@@ -543,6 +563,21 @@
           }
         }
       },
+      "OrderByAlertEventDirection": {
+        "type": "string",
+        "enum": [
+          "ORDER_BY_ALERT_EVENT_DIRECTION_UNSPECIFIED",
+          "ORDER_BY_ALERT_EVENT_DIRECTION_ASC",
+          "ORDER_BY_ALERT_EVENT_DIRECTION_DESC"
+        ]
+      },
+      "OrderByAlertEventFields": {
+        "type": "string",
+        "enum": [
+          "ORDER_BY_ALERT_EVENT_FIELDS_UNSPECIFIED",
+          "ORDER_BY_ALERT_EVENT_FIELDS_TIMESTAMP"
+        ]
+      },
       "Permutation": {
         "externalDocs": {
           "url": ""
@@ -557,6 +592,24 @@
             }
           }
         }
+      },
+      "YAxisViewByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/YAxisViewByCategory"
+          }
+        },
+        "additionalProperties": false
+      },
+      "YAxisViewByValue": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/YAxisViewByValue"
+          }
+        },
+        "additionalProperties": false
       },
       "alerts.v3.PaginationResponse": {
         "type": "object",

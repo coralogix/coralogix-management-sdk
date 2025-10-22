@@ -18,21 +18,21 @@ import (
 
 // Events2MetricServiceCreateE2MRequest - struct for Events2MetricServiceCreateE2MRequest
 type Events2MetricServiceCreateE2MRequest struct {
-	E2MCreateParams *E2MCreateParams
-	E2MCreateParams1 *E2MCreateParams1
+	E2MCreateParamsLogsQuery *E2MCreateParamsLogsQuery
+	E2MCreateParamsSpansQuery *E2MCreateParamsSpansQuery
 }
 
-// E2MCreateParamsAsEvents2MetricServiceCreateE2MRequest is a convenience function that returns E2MCreateParams wrapped in Events2MetricServiceCreateE2MRequest
-func E2MCreateParamsAsEvents2MetricServiceCreateE2MRequest(v *E2MCreateParams) Events2MetricServiceCreateE2MRequest {
+// E2MCreateParamsLogsQueryAsEvents2MetricServiceCreateE2MRequest is a convenience function that returns E2MCreateParamsLogsQuery wrapped in Events2MetricServiceCreateE2MRequest
+func E2MCreateParamsLogsQueryAsEvents2MetricServiceCreateE2MRequest(v *E2MCreateParamsLogsQuery) Events2MetricServiceCreateE2MRequest {
 	return Events2MetricServiceCreateE2MRequest{
-		E2MCreateParams: v,
+		E2MCreateParamsLogsQuery: v,
 	}
 }
 
-// E2MCreateParams1AsEvents2MetricServiceCreateE2MRequest is a convenience function that returns E2MCreateParams1 wrapped in Events2MetricServiceCreateE2MRequest
-func E2MCreateParams1AsEvents2MetricServiceCreateE2MRequest(v *E2MCreateParams1) Events2MetricServiceCreateE2MRequest {
+// E2MCreateParamsSpansQueryAsEvents2MetricServiceCreateE2MRequest is a convenience function that returns E2MCreateParamsSpansQuery wrapped in Events2MetricServiceCreateE2MRequest
+func E2MCreateParamsSpansQueryAsEvents2MetricServiceCreateE2MRequest(v *E2MCreateParamsSpansQuery) Events2MetricServiceCreateE2MRequest {
 	return Events2MetricServiceCreateE2MRequest{
-		E2MCreateParams1: v,
+		E2MCreateParamsSpansQuery: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func E2MCreateParams1AsEvents2MetricServiceCreateE2MRequest(v *E2MCreateParams1)
 func (dst *Events2MetricServiceCreateE2MRequest) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into E2MCreateParams
-	err = newStrictDecoder(data).Decode(&dst.E2MCreateParams)
+	// try to unmarshal data into E2MCreateParamsLogsQuery
+	err = newStrictDecoder(data).Decode(&dst.E2MCreateParamsLogsQuery)
 	if err == nil {
-		jsonE2MCreateParams, _ := json.Marshal(dst.E2MCreateParams)
-		if string(jsonE2MCreateParams) == "{}" { // empty struct
-			dst.E2MCreateParams = nil
+		jsonE2MCreateParamsLogsQuery, _ := json.Marshal(dst.E2MCreateParamsLogsQuery)
+		if string(jsonE2MCreateParamsLogsQuery) == "{}" { // empty struct
+			dst.E2MCreateParamsLogsQuery = nil
 		} else {
-			if err = validator.Validate(dst.E2MCreateParams); err != nil {
-				dst.E2MCreateParams = nil
+			if err = validator.Validate(dst.E2MCreateParamsLogsQuery); err != nil {
+				dst.E2MCreateParamsLogsQuery = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.E2MCreateParams = nil
+		dst.E2MCreateParamsLogsQuery = nil
 	}
 
-	// try to unmarshal data into E2MCreateParams1
-	err = newStrictDecoder(data).Decode(&dst.E2MCreateParams1)
+	// try to unmarshal data into E2MCreateParamsSpansQuery
+	err = newStrictDecoder(data).Decode(&dst.E2MCreateParamsSpansQuery)
 	if err == nil {
-		jsonE2MCreateParams1, _ := json.Marshal(dst.E2MCreateParams1)
-		if string(jsonE2MCreateParams1) == "{}" { // empty struct
-			dst.E2MCreateParams1 = nil
+		jsonE2MCreateParamsSpansQuery, _ := json.Marshal(dst.E2MCreateParamsSpansQuery)
+		if string(jsonE2MCreateParamsSpansQuery) == "{}" { // empty struct
+			dst.E2MCreateParamsSpansQuery = nil
 		} else {
-			if err = validator.Validate(dst.E2MCreateParams1); err != nil {
-				dst.E2MCreateParams1 = nil
+			if err = validator.Validate(dst.E2MCreateParamsSpansQuery); err != nil {
+				dst.E2MCreateParamsSpansQuery = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.E2MCreateParams1 = nil
+		dst.E2MCreateParamsSpansQuery = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.E2MCreateParams = nil
-		dst.E2MCreateParams1 = nil
+		dst.E2MCreateParamsLogsQuery = nil
+		dst.E2MCreateParamsSpansQuery = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(Events2MetricServiceCreateE2MRequest)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *Events2MetricServiceCreateE2MRequest) UnmarshalJSON(data []byte) erro
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src Events2MetricServiceCreateE2MRequest) MarshalJSON() ([]byte, error) {
-	if src.E2MCreateParams != nil {
-		return json.Marshal(&src.E2MCreateParams)
+	if src.E2MCreateParamsLogsQuery != nil {
+		return json.Marshal(&src.E2MCreateParamsLogsQuery)
 	}
 
-	if src.E2MCreateParams1 != nil {
-		return json.Marshal(&src.E2MCreateParams1)
+	if src.E2MCreateParamsSpansQuery != nil {
+		return json.Marshal(&src.E2MCreateParamsSpansQuery)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *Events2MetricServiceCreateE2MRequest) GetActualInstance() (interface{
 	if obj == nil {
 		return nil
 	}
-	if obj.E2MCreateParams != nil {
-		return obj.E2MCreateParams
+	if obj.E2MCreateParamsLogsQuery != nil {
+		return obj.E2MCreateParamsLogsQuery
 	}
 
-	if obj.E2MCreateParams1 != nil {
-		return obj.E2MCreateParams1
+	if obj.E2MCreateParamsSpansQuery != nil {
+		return obj.E2MCreateParamsSpansQuery
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *Events2MetricServiceCreateE2MRequest) GetActualInstance() (interface{
 
 // Get the actual instance value
 func (obj Events2MetricServiceCreateE2MRequest) GetActualInstanceValue() (interface{}) {
-	if obj.E2MCreateParams != nil {
-		return *obj.E2MCreateParams
+	if obj.E2MCreateParamsLogsQuery != nil {
+		return *obj.E2MCreateParamsLogsQuery
 	}
 
-	if obj.E2MCreateParams1 != nil {
-		return *obj.E2MCreateParams1
+	if obj.E2MCreateParamsSpansQuery != nil {
+		return *obj.E2MCreateParamsSpansQuery
 	}
 
 	// all schemas are nil

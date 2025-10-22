@@ -378,6 +378,33 @@
   },
   "components": {
     "schemas": {
+      "ColorsByAggregation": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/ColorsByAggregation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByGroupBy": {
+        "type": "object",
+        "properties": {
+          "groupBy": {
+            "$ref": "#/components/schemas/ColorsByGroupBy"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByStack": {
+        "type": "object",
+        "properties": {
+          "stack": {
+            "$ref": "#/components/schemas/ColorsByStack"
+          }
+        },
+        "additionalProperties": false
+      },
       "CreateDashboardFolderResponse": {
         "externalDocs": {
           "description": "Find out more Dashboards in our documentation.",
@@ -427,50 +454,56 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "multipleValues": {
-                "$ref": "#/components/schemas/MultipleValues"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "filters": {
-                "$ref": "#/components/schemas/Filters"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
+      },
+      "FilterPathAndValuesFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "FilterPathAndValuesMultipleValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
       },
       "Filters": {
         "externalDocs": {
@@ -544,6 +577,24 @@
         },
         "title": "Replace dashboard folder response data structure",
         "type": "object"
+      },
+      "YAxisViewByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/YAxisViewByCategory"
+          }
+        },
+        "additionalProperties": false
+      },
+      "YAxisViewByValue": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/YAxisViewByValue"
+          }
+        },
+        "additionalProperties": false
       },
       "common.Group": {
         "type": "object",

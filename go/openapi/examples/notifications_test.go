@@ -232,7 +232,7 @@ func TestSlackPreset(t *testing.T) {
 		ConfigOverrides: []presets.ConfigOverrides{
 			{
 				ConditionType: &presets.NotificationCenterConditionType{
-					NotificationCenterConditionTypeOneOf1: &presets.NotificationCenterConditionTypeOneOf1{
+					ConditionTypeMatchEntityTypeAndSubType: &presets.ConditionTypeMatchEntityTypeAndSubType{
 						MatchEntityTypeAndSubType: &presets.MatchEntityTypeAndSubTypeCondition{
 							EntitySubType: presets.PtrString("logsImmediateResolved"),
 						},
@@ -309,7 +309,7 @@ func TestPagerdutyPreset(t *testing.T) {
 		ConfigOverrides: []presets.ConfigOverrides{
 			{
 				ConditionType: &presets.NotificationCenterConditionType{
-					NotificationCenterConditionTypeOneOf1: &presets.NotificationCenterConditionTypeOneOf1{
+					ConditionTypeMatchEntityTypeAndSubType: &presets.ConditionTypeMatchEntityTypeAndSubType{
 						MatchEntityTypeAndSubType: &presets.MatchEntityTypeAndSubTypeCondition{
 							EntitySubType: presets.PtrString("logsImmediateTriggered"),
 						},
@@ -492,7 +492,7 @@ func getHttpsPreset(name string) *presets.Preset1 {
 					},
 				},
 				ConditionType: &presets.NotificationCenterConditionType{
-					NotificationCenterConditionTypeOneOf1: &presets.NotificationCenterConditionTypeOneOf1{
+					ConditionTypeMatchEntityTypeAndSubType: &presets.ConditionTypeMatchEntityTypeAndSubType{
 						MatchEntityTypeAndSubType: &presets.MatchEntityTypeAndSubTypeCondition{
 							EntitySubType: presets.PtrString("logsImmediateResolved"),
 						},

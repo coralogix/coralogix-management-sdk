@@ -12,79 +12,124 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
+	"fmt"
+	"gopkg.in/validator.v2"
 )
 
-// checks if the MetricTimeWindow type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &MetricTimeWindow{}
-
-// MetricTimeWindow struct for MetricTimeWindow
+// MetricTimeWindow - struct for MetricTimeWindow
 type MetricTimeWindow struct {
-	MetricTimeWindowSpecificValue *MetricTimeWindowValue `json:"metricTimeWindowSpecificValue,omitempty"`
+	MetricTimeWindowMetricTimeWindowDynamicDuration *MetricTimeWindowMetricTimeWindowDynamicDuration
+	MetricTimeWindowMetricTimeWindowSpecificValue *MetricTimeWindowMetricTimeWindowSpecificValue
 }
 
-// NewMetricTimeWindow instantiates a new MetricTimeWindow object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewMetricTimeWindow() *MetricTimeWindow {
-	this := MetricTimeWindow{}
-	return &this
-}
-
-// NewMetricTimeWindowWithDefaults instantiates a new MetricTimeWindow object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewMetricTimeWindowWithDefaults() *MetricTimeWindow {
-	this := MetricTimeWindow{}
-	return &this
-}
-
-// GetMetricTimeWindowSpecificValue returns the MetricTimeWindowSpecificValue field value if set, zero value otherwise.
-func (o *MetricTimeWindow) GetMetricTimeWindowSpecificValue() MetricTimeWindowValue {
-	if o == nil || IsNil(o.MetricTimeWindowSpecificValue) {
-		var ret MetricTimeWindowValue
-		return ret
+// MetricTimeWindowMetricTimeWindowDynamicDurationAsMetricTimeWindow is a convenience function that returns MetricTimeWindowMetricTimeWindowDynamicDuration wrapped in MetricTimeWindow
+func MetricTimeWindowMetricTimeWindowDynamicDurationAsMetricTimeWindow(v *MetricTimeWindowMetricTimeWindowDynamicDuration) MetricTimeWindow {
+	return MetricTimeWindow{
+		MetricTimeWindowMetricTimeWindowDynamicDuration: v,
 	}
-	return *o.MetricTimeWindowSpecificValue
 }
 
-// GetMetricTimeWindowSpecificValueOk returns a tuple with the MetricTimeWindowSpecificValue field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *MetricTimeWindow) GetMetricTimeWindowSpecificValueOk() (*MetricTimeWindowValue, bool) {
-	if o == nil || IsNil(o.MetricTimeWindowSpecificValue) {
-		return nil, false
+// MetricTimeWindowMetricTimeWindowSpecificValueAsMetricTimeWindow is a convenience function that returns MetricTimeWindowMetricTimeWindowSpecificValue wrapped in MetricTimeWindow
+func MetricTimeWindowMetricTimeWindowSpecificValueAsMetricTimeWindow(v *MetricTimeWindowMetricTimeWindowSpecificValue) MetricTimeWindow {
+	return MetricTimeWindow{
+		MetricTimeWindowMetricTimeWindowSpecificValue: v,
 	}
-	return o.MetricTimeWindowSpecificValue, true
 }
 
-// HasMetricTimeWindowSpecificValue returns a boolean if a field has been set.
-func (o *MetricTimeWindow) HasMetricTimeWindowSpecificValue() bool {
-	if o != nil && !IsNil(o.MetricTimeWindowSpecificValue) {
-		return true
+
+// Unmarshal JSON data into one of the pointers in the struct
+func (dst *MetricTimeWindow) UnmarshalJSON(data []byte) error {
+	var err error
+	match := 0
+	// try to unmarshal data into MetricTimeWindowMetricTimeWindowDynamicDuration
+	err = newStrictDecoder(data).Decode(&dst.MetricTimeWindowMetricTimeWindowDynamicDuration)
+	if err == nil {
+		jsonMetricTimeWindowMetricTimeWindowDynamicDuration, _ := json.Marshal(dst.MetricTimeWindowMetricTimeWindowDynamicDuration)
+		if string(jsonMetricTimeWindowMetricTimeWindowDynamicDuration) == "{}" { // empty struct
+			dst.MetricTimeWindowMetricTimeWindowDynamicDuration = nil
+		} else {
+			if err = validator.Validate(dst.MetricTimeWindowMetricTimeWindowDynamicDuration); err != nil {
+				dst.MetricTimeWindowMetricTimeWindowDynamicDuration = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.MetricTimeWindowMetricTimeWindowDynamicDuration = nil
 	}
 
-	return false
-}
-
-// SetMetricTimeWindowSpecificValue gets a reference to the given MetricTimeWindowValue and assigns it to the MetricTimeWindowSpecificValue field.
-func (o *MetricTimeWindow) SetMetricTimeWindowSpecificValue(v MetricTimeWindowValue) {
-	o.MetricTimeWindowSpecificValue = &v
-}
-
-func (o MetricTimeWindow) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	// try to unmarshal data into MetricTimeWindowMetricTimeWindowSpecificValue
+	err = newStrictDecoder(data).Decode(&dst.MetricTimeWindowMetricTimeWindowSpecificValue)
+	if err == nil {
+		jsonMetricTimeWindowMetricTimeWindowSpecificValue, _ := json.Marshal(dst.MetricTimeWindowMetricTimeWindowSpecificValue)
+		if string(jsonMetricTimeWindowMetricTimeWindowSpecificValue) == "{}" { // empty struct
+			dst.MetricTimeWindowMetricTimeWindowSpecificValue = nil
+		} else {
+			if err = validator.Validate(dst.MetricTimeWindowMetricTimeWindowSpecificValue); err != nil {
+				dst.MetricTimeWindowMetricTimeWindowSpecificValue = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.MetricTimeWindowMetricTimeWindowSpecificValue = nil
 	}
-	return json.Marshal(toSerialize)
+
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.MetricTimeWindowMetricTimeWindowDynamicDuration = nil
+		dst.MetricTimeWindowMetricTimeWindowSpecificValue = nil
+
+		return fmt.Errorf("data matches more than one schema in oneOf(MetricTimeWindow)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("data failed to match schemas in oneOf(MetricTimeWindow)")
+	}
 }
 
-func (o MetricTimeWindow) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MetricTimeWindowSpecificValue) {
-		toSerialize["metricTimeWindowSpecificValue"] = o.MetricTimeWindowSpecificValue
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src MetricTimeWindow) MarshalJSON() ([]byte, error) {
+	if src.MetricTimeWindowMetricTimeWindowDynamicDuration != nil {
+		return json.Marshal(&src.MetricTimeWindowMetricTimeWindowDynamicDuration)
 	}
-	return toSerialize, nil
+
+	if src.MetricTimeWindowMetricTimeWindowSpecificValue != nil {
+		return json.Marshal(&src.MetricTimeWindowMetricTimeWindowSpecificValue)
+	}
+
+	return nil, nil // no data in oneOf schemas
+}
+
+// Get the actual instance
+func (obj *MetricTimeWindow) GetActualInstance() (interface{}) {
+	if obj == nil {
+		return nil
+	}
+	if obj.MetricTimeWindowMetricTimeWindowDynamicDuration != nil {
+		return obj.MetricTimeWindowMetricTimeWindowDynamicDuration
+	}
+
+	if obj.MetricTimeWindowMetricTimeWindowSpecificValue != nil {
+		return obj.MetricTimeWindowMetricTimeWindowSpecificValue
+	}
+
+	// all schemas are nil
+	return nil
+}
+
+// Get the actual instance value
+func (obj MetricTimeWindow) GetActualInstanceValue() (interface{}) {
+	if obj.MetricTimeWindowMetricTimeWindowDynamicDuration != nil {
+		return *obj.MetricTimeWindowMetricTimeWindowDynamicDuration
+	}
+
+	if obj.MetricTimeWindowMetricTimeWindowSpecificValue != nil {
+		return *obj.MetricTimeWindowMetricTimeWindowSpecificValue
+	}
+
+	// all schemas are nil
+	return nil
 }
 
 type NullableMetricTimeWindow struct {

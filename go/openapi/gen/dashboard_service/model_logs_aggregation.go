@@ -18,61 +18,61 @@ import (
 
 // LogsAggregation - struct for LogsAggregation
 type LogsAggregation struct {
-	LogsAggregationOneOf *LogsAggregationOneOf
-	LogsAggregationOneOf1 *LogsAggregationOneOf1
-	LogsAggregationOneOf2 *LogsAggregationOneOf2
-	LogsAggregationOneOf3 *LogsAggregationOneOf3
-	LogsAggregationOneOf4 *LogsAggregationOneOf4
-	LogsAggregationOneOf5 *LogsAggregationOneOf5
-	LogsAggregationOneOf6 *LogsAggregationOneOf6
+	LogsAggregationAverage *LogsAggregationAverage
+	LogsAggregationCount *LogsAggregationCount
+	LogsAggregationCountDistinct *LogsAggregationCountDistinct
+	LogsAggregationMax *LogsAggregationMax
+	LogsAggregationMin *LogsAggregationMin
+	LogsAggregationPercentile *LogsAggregationPercentile
+	LogsAggregationSum *LogsAggregationSum
 }
 
-// LogsAggregationOneOfAsLogsAggregation is a convenience function that returns LogsAggregationOneOf wrapped in LogsAggregation
-func LogsAggregationOneOfAsLogsAggregation(v *LogsAggregationOneOf) LogsAggregation {
+// LogsAggregationAverageAsLogsAggregation is a convenience function that returns LogsAggregationAverage wrapped in LogsAggregation
+func LogsAggregationAverageAsLogsAggregation(v *LogsAggregationAverage) LogsAggregation {
 	return LogsAggregation{
-		LogsAggregationOneOf: v,
+		LogsAggregationAverage: v,
 	}
 }
 
-// LogsAggregationOneOf1AsLogsAggregation is a convenience function that returns LogsAggregationOneOf1 wrapped in LogsAggregation
-func LogsAggregationOneOf1AsLogsAggregation(v *LogsAggregationOneOf1) LogsAggregation {
+// LogsAggregationCountAsLogsAggregation is a convenience function that returns LogsAggregationCount wrapped in LogsAggregation
+func LogsAggregationCountAsLogsAggregation(v *LogsAggregationCount) LogsAggregation {
 	return LogsAggregation{
-		LogsAggregationOneOf1: v,
+		LogsAggregationCount: v,
 	}
 }
 
-// LogsAggregationOneOf2AsLogsAggregation is a convenience function that returns LogsAggregationOneOf2 wrapped in LogsAggregation
-func LogsAggregationOneOf2AsLogsAggregation(v *LogsAggregationOneOf2) LogsAggregation {
+// LogsAggregationCountDistinctAsLogsAggregation is a convenience function that returns LogsAggregationCountDistinct wrapped in LogsAggregation
+func LogsAggregationCountDistinctAsLogsAggregation(v *LogsAggregationCountDistinct) LogsAggregation {
 	return LogsAggregation{
-		LogsAggregationOneOf2: v,
+		LogsAggregationCountDistinct: v,
 	}
 }
 
-// LogsAggregationOneOf3AsLogsAggregation is a convenience function that returns LogsAggregationOneOf3 wrapped in LogsAggregation
-func LogsAggregationOneOf3AsLogsAggregation(v *LogsAggregationOneOf3) LogsAggregation {
+// LogsAggregationMaxAsLogsAggregation is a convenience function that returns LogsAggregationMax wrapped in LogsAggregation
+func LogsAggregationMaxAsLogsAggregation(v *LogsAggregationMax) LogsAggregation {
 	return LogsAggregation{
-		LogsAggregationOneOf3: v,
+		LogsAggregationMax: v,
 	}
 }
 
-// LogsAggregationOneOf4AsLogsAggregation is a convenience function that returns LogsAggregationOneOf4 wrapped in LogsAggregation
-func LogsAggregationOneOf4AsLogsAggregation(v *LogsAggregationOneOf4) LogsAggregation {
+// LogsAggregationMinAsLogsAggregation is a convenience function that returns LogsAggregationMin wrapped in LogsAggregation
+func LogsAggregationMinAsLogsAggregation(v *LogsAggregationMin) LogsAggregation {
 	return LogsAggregation{
-		LogsAggregationOneOf4: v,
+		LogsAggregationMin: v,
 	}
 }
 
-// LogsAggregationOneOf5AsLogsAggregation is a convenience function that returns LogsAggregationOneOf5 wrapped in LogsAggregation
-func LogsAggregationOneOf5AsLogsAggregation(v *LogsAggregationOneOf5) LogsAggregation {
+// LogsAggregationPercentileAsLogsAggregation is a convenience function that returns LogsAggregationPercentile wrapped in LogsAggregation
+func LogsAggregationPercentileAsLogsAggregation(v *LogsAggregationPercentile) LogsAggregation {
 	return LogsAggregation{
-		LogsAggregationOneOf5: v,
+		LogsAggregationPercentile: v,
 	}
 }
 
-// LogsAggregationOneOf6AsLogsAggregation is a convenience function that returns LogsAggregationOneOf6 wrapped in LogsAggregation
-func LogsAggregationOneOf6AsLogsAggregation(v *LogsAggregationOneOf6) LogsAggregation {
+// LogsAggregationSumAsLogsAggregation is a convenience function that returns LogsAggregationSum wrapped in LogsAggregation
+func LogsAggregationSumAsLogsAggregation(v *LogsAggregationSum) LogsAggregation {
 	return LogsAggregation{
-		LogsAggregationOneOf6: v,
+		LogsAggregationSum: v,
 	}
 }
 
@@ -81,134 +81,134 @@ func LogsAggregationOneOf6AsLogsAggregation(v *LogsAggregationOneOf6) LogsAggreg
 func (dst *LogsAggregation) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into LogsAggregationOneOf
-	err = newStrictDecoder(data).Decode(&dst.LogsAggregationOneOf)
+	// try to unmarshal data into LogsAggregationAverage
+	err = newStrictDecoder(data).Decode(&dst.LogsAggregationAverage)
 	if err == nil {
-		jsonLogsAggregationOneOf, _ := json.Marshal(dst.LogsAggregationOneOf)
-		if string(jsonLogsAggregationOneOf) == "{}" { // empty struct
-			dst.LogsAggregationOneOf = nil
+		jsonLogsAggregationAverage, _ := json.Marshal(dst.LogsAggregationAverage)
+		if string(jsonLogsAggregationAverage) == "{}" { // empty struct
+			dst.LogsAggregationAverage = nil
 		} else {
-			if err = validator.Validate(dst.LogsAggregationOneOf); err != nil {
-				dst.LogsAggregationOneOf = nil
+			if err = validator.Validate(dst.LogsAggregationAverage); err != nil {
+				dst.LogsAggregationAverage = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.LogsAggregationOneOf = nil
+		dst.LogsAggregationAverage = nil
 	}
 
-	// try to unmarshal data into LogsAggregationOneOf1
-	err = newStrictDecoder(data).Decode(&dst.LogsAggregationOneOf1)
+	// try to unmarshal data into LogsAggregationCount
+	err = newStrictDecoder(data).Decode(&dst.LogsAggregationCount)
 	if err == nil {
-		jsonLogsAggregationOneOf1, _ := json.Marshal(dst.LogsAggregationOneOf1)
-		if string(jsonLogsAggregationOneOf1) == "{}" { // empty struct
-			dst.LogsAggregationOneOf1 = nil
+		jsonLogsAggregationCount, _ := json.Marshal(dst.LogsAggregationCount)
+		if string(jsonLogsAggregationCount) == "{}" { // empty struct
+			dst.LogsAggregationCount = nil
 		} else {
-			if err = validator.Validate(dst.LogsAggregationOneOf1); err != nil {
-				dst.LogsAggregationOneOf1 = nil
+			if err = validator.Validate(dst.LogsAggregationCount); err != nil {
+				dst.LogsAggregationCount = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.LogsAggregationOneOf1 = nil
+		dst.LogsAggregationCount = nil
 	}
 
-	// try to unmarshal data into LogsAggregationOneOf2
-	err = newStrictDecoder(data).Decode(&dst.LogsAggregationOneOf2)
+	// try to unmarshal data into LogsAggregationCountDistinct
+	err = newStrictDecoder(data).Decode(&dst.LogsAggregationCountDistinct)
 	if err == nil {
-		jsonLogsAggregationOneOf2, _ := json.Marshal(dst.LogsAggregationOneOf2)
-		if string(jsonLogsAggregationOneOf2) == "{}" { // empty struct
-			dst.LogsAggregationOneOf2 = nil
+		jsonLogsAggregationCountDistinct, _ := json.Marshal(dst.LogsAggregationCountDistinct)
+		if string(jsonLogsAggregationCountDistinct) == "{}" { // empty struct
+			dst.LogsAggregationCountDistinct = nil
 		} else {
-			if err = validator.Validate(dst.LogsAggregationOneOf2); err != nil {
-				dst.LogsAggregationOneOf2 = nil
+			if err = validator.Validate(dst.LogsAggregationCountDistinct); err != nil {
+				dst.LogsAggregationCountDistinct = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.LogsAggregationOneOf2 = nil
+		dst.LogsAggregationCountDistinct = nil
 	}
 
-	// try to unmarshal data into LogsAggregationOneOf3
-	err = newStrictDecoder(data).Decode(&dst.LogsAggregationOneOf3)
+	// try to unmarshal data into LogsAggregationMax
+	err = newStrictDecoder(data).Decode(&dst.LogsAggregationMax)
 	if err == nil {
-		jsonLogsAggregationOneOf3, _ := json.Marshal(dst.LogsAggregationOneOf3)
-		if string(jsonLogsAggregationOneOf3) == "{}" { // empty struct
-			dst.LogsAggregationOneOf3 = nil
+		jsonLogsAggregationMax, _ := json.Marshal(dst.LogsAggregationMax)
+		if string(jsonLogsAggregationMax) == "{}" { // empty struct
+			dst.LogsAggregationMax = nil
 		} else {
-			if err = validator.Validate(dst.LogsAggregationOneOf3); err != nil {
-				dst.LogsAggregationOneOf3 = nil
+			if err = validator.Validate(dst.LogsAggregationMax); err != nil {
+				dst.LogsAggregationMax = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.LogsAggregationOneOf3 = nil
+		dst.LogsAggregationMax = nil
 	}
 
-	// try to unmarshal data into LogsAggregationOneOf4
-	err = newStrictDecoder(data).Decode(&dst.LogsAggregationOneOf4)
+	// try to unmarshal data into LogsAggregationMin
+	err = newStrictDecoder(data).Decode(&dst.LogsAggregationMin)
 	if err == nil {
-		jsonLogsAggregationOneOf4, _ := json.Marshal(dst.LogsAggregationOneOf4)
-		if string(jsonLogsAggregationOneOf4) == "{}" { // empty struct
-			dst.LogsAggregationOneOf4 = nil
+		jsonLogsAggregationMin, _ := json.Marshal(dst.LogsAggregationMin)
+		if string(jsonLogsAggregationMin) == "{}" { // empty struct
+			dst.LogsAggregationMin = nil
 		} else {
-			if err = validator.Validate(dst.LogsAggregationOneOf4); err != nil {
-				dst.LogsAggregationOneOf4 = nil
+			if err = validator.Validate(dst.LogsAggregationMin); err != nil {
+				dst.LogsAggregationMin = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.LogsAggregationOneOf4 = nil
+		dst.LogsAggregationMin = nil
 	}
 
-	// try to unmarshal data into LogsAggregationOneOf5
-	err = newStrictDecoder(data).Decode(&dst.LogsAggregationOneOf5)
+	// try to unmarshal data into LogsAggregationPercentile
+	err = newStrictDecoder(data).Decode(&dst.LogsAggregationPercentile)
 	if err == nil {
-		jsonLogsAggregationOneOf5, _ := json.Marshal(dst.LogsAggregationOneOf5)
-		if string(jsonLogsAggregationOneOf5) == "{}" { // empty struct
-			dst.LogsAggregationOneOf5 = nil
+		jsonLogsAggregationPercentile, _ := json.Marshal(dst.LogsAggregationPercentile)
+		if string(jsonLogsAggregationPercentile) == "{}" { // empty struct
+			dst.LogsAggregationPercentile = nil
 		} else {
-			if err = validator.Validate(dst.LogsAggregationOneOf5); err != nil {
-				dst.LogsAggregationOneOf5 = nil
+			if err = validator.Validate(dst.LogsAggregationPercentile); err != nil {
+				dst.LogsAggregationPercentile = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.LogsAggregationOneOf5 = nil
+		dst.LogsAggregationPercentile = nil
 	}
 
-	// try to unmarshal data into LogsAggregationOneOf6
-	err = newStrictDecoder(data).Decode(&dst.LogsAggregationOneOf6)
+	// try to unmarshal data into LogsAggregationSum
+	err = newStrictDecoder(data).Decode(&dst.LogsAggregationSum)
 	if err == nil {
-		jsonLogsAggregationOneOf6, _ := json.Marshal(dst.LogsAggregationOneOf6)
-		if string(jsonLogsAggregationOneOf6) == "{}" { // empty struct
-			dst.LogsAggregationOneOf6 = nil
+		jsonLogsAggregationSum, _ := json.Marshal(dst.LogsAggregationSum)
+		if string(jsonLogsAggregationSum) == "{}" { // empty struct
+			dst.LogsAggregationSum = nil
 		} else {
-			if err = validator.Validate(dst.LogsAggregationOneOf6); err != nil {
-				dst.LogsAggregationOneOf6 = nil
+			if err = validator.Validate(dst.LogsAggregationSum); err != nil {
+				dst.LogsAggregationSum = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.LogsAggregationOneOf6 = nil
+		dst.LogsAggregationSum = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.LogsAggregationOneOf = nil
-		dst.LogsAggregationOneOf1 = nil
-		dst.LogsAggregationOneOf2 = nil
-		dst.LogsAggregationOneOf3 = nil
-		dst.LogsAggregationOneOf4 = nil
-		dst.LogsAggregationOneOf5 = nil
-		dst.LogsAggregationOneOf6 = nil
+		dst.LogsAggregationAverage = nil
+		dst.LogsAggregationCount = nil
+		dst.LogsAggregationCountDistinct = nil
+		dst.LogsAggregationMax = nil
+		dst.LogsAggregationMin = nil
+		dst.LogsAggregationPercentile = nil
+		dst.LogsAggregationSum = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(LogsAggregation)")
 	} else if match == 1 {
@@ -220,32 +220,32 @@ func (dst *LogsAggregation) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src LogsAggregation) MarshalJSON() ([]byte, error) {
-	if src.LogsAggregationOneOf != nil {
-		return json.Marshal(&src.LogsAggregationOneOf)
+	if src.LogsAggregationAverage != nil {
+		return json.Marshal(&src.LogsAggregationAverage)
 	}
 
-	if src.LogsAggregationOneOf1 != nil {
-		return json.Marshal(&src.LogsAggregationOneOf1)
+	if src.LogsAggregationCount != nil {
+		return json.Marshal(&src.LogsAggregationCount)
 	}
 
-	if src.LogsAggregationOneOf2 != nil {
-		return json.Marshal(&src.LogsAggregationOneOf2)
+	if src.LogsAggregationCountDistinct != nil {
+		return json.Marshal(&src.LogsAggregationCountDistinct)
 	}
 
-	if src.LogsAggregationOneOf3 != nil {
-		return json.Marshal(&src.LogsAggregationOneOf3)
+	if src.LogsAggregationMax != nil {
+		return json.Marshal(&src.LogsAggregationMax)
 	}
 
-	if src.LogsAggregationOneOf4 != nil {
-		return json.Marshal(&src.LogsAggregationOneOf4)
+	if src.LogsAggregationMin != nil {
+		return json.Marshal(&src.LogsAggregationMin)
 	}
 
-	if src.LogsAggregationOneOf5 != nil {
-		return json.Marshal(&src.LogsAggregationOneOf5)
+	if src.LogsAggregationPercentile != nil {
+		return json.Marshal(&src.LogsAggregationPercentile)
 	}
 
-	if src.LogsAggregationOneOf6 != nil {
-		return json.Marshal(&src.LogsAggregationOneOf6)
+	if src.LogsAggregationSum != nil {
+		return json.Marshal(&src.LogsAggregationSum)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -256,32 +256,32 @@ func (obj *LogsAggregation) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.LogsAggregationOneOf != nil {
-		return obj.LogsAggregationOneOf
+	if obj.LogsAggregationAverage != nil {
+		return obj.LogsAggregationAverage
 	}
 
-	if obj.LogsAggregationOneOf1 != nil {
-		return obj.LogsAggregationOneOf1
+	if obj.LogsAggregationCount != nil {
+		return obj.LogsAggregationCount
 	}
 
-	if obj.LogsAggregationOneOf2 != nil {
-		return obj.LogsAggregationOneOf2
+	if obj.LogsAggregationCountDistinct != nil {
+		return obj.LogsAggregationCountDistinct
 	}
 
-	if obj.LogsAggregationOneOf3 != nil {
-		return obj.LogsAggregationOneOf3
+	if obj.LogsAggregationMax != nil {
+		return obj.LogsAggregationMax
 	}
 
-	if obj.LogsAggregationOneOf4 != nil {
-		return obj.LogsAggregationOneOf4
+	if obj.LogsAggregationMin != nil {
+		return obj.LogsAggregationMin
 	}
 
-	if obj.LogsAggregationOneOf5 != nil {
-		return obj.LogsAggregationOneOf5
+	if obj.LogsAggregationPercentile != nil {
+		return obj.LogsAggregationPercentile
 	}
 
-	if obj.LogsAggregationOneOf6 != nil {
-		return obj.LogsAggregationOneOf6
+	if obj.LogsAggregationSum != nil {
+		return obj.LogsAggregationSum
 	}
 
 	// all schemas are nil
@@ -290,32 +290,32 @@ func (obj *LogsAggregation) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj LogsAggregation) GetActualInstanceValue() (interface{}) {
-	if obj.LogsAggregationOneOf != nil {
-		return *obj.LogsAggregationOneOf
+	if obj.LogsAggregationAverage != nil {
+		return *obj.LogsAggregationAverage
 	}
 
-	if obj.LogsAggregationOneOf1 != nil {
-		return *obj.LogsAggregationOneOf1
+	if obj.LogsAggregationCount != nil {
+		return *obj.LogsAggregationCount
 	}
 
-	if obj.LogsAggregationOneOf2 != nil {
-		return *obj.LogsAggregationOneOf2
+	if obj.LogsAggregationCountDistinct != nil {
+		return *obj.LogsAggregationCountDistinct
 	}
 
-	if obj.LogsAggregationOneOf3 != nil {
-		return *obj.LogsAggregationOneOf3
+	if obj.LogsAggregationMax != nil {
+		return *obj.LogsAggregationMax
 	}
 
-	if obj.LogsAggregationOneOf4 != nil {
-		return *obj.LogsAggregationOneOf4
+	if obj.LogsAggregationMin != nil {
+		return *obj.LogsAggregationMin
 	}
 
-	if obj.LogsAggregationOneOf5 != nil {
-		return *obj.LogsAggregationOneOf5
+	if obj.LogsAggregationPercentile != nil {
+		return *obj.LogsAggregationPercentile
 	}
 
-	if obj.LogsAggregationOneOf6 != nil {
-		return *obj.LogsAggregationOneOf6
+	if obj.LogsAggregationSum != nil {
+		return *obj.LogsAggregationSum
 	}
 
 	// all schemas are nil

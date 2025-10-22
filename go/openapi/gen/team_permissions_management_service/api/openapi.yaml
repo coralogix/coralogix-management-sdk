@@ -1054,6 +1054,24 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
       title: AddUsersToTeamGroupsResponse
       type: object
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
     CreateTeamGroupResponse:
       description: Response containing the unique identifier of the newly created
         team group.
@@ -1085,8 +1103,40 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValues_1"
-      - $ref: "#/components/schemas/FilterPathAndValues_2"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
     FilterType:
       enum:
       - FILTER_TYPE_UNSPECIFIED
@@ -1112,8 +1162,65 @@ components:
       type: object
     GetGroupUsersResponse:
       oneOf:
-      - $ref: "#/components/schemas/GetGroupUsersResponse_1"
-      - $ref: "#/components/schemas/GetGroupUsersResponse_2"
+      - $ref: "#/components/schemas/GetGroupUsersResponseNoMorePages"
+      - $ref: "#/components/schemas/GetGroupUsersResponseToken"
+    GetGroupUsersResponseNoMorePages:
+      additionalProperties: false
+      description: Response containing the list of all users currently assigned to
+        the requested team group.
+      example:
+        noMorePages: "{}"
+        users:
+        - firstName: firstName
+          lastName: lastName
+          userAccountId:
+            id: 0
+          userId:
+            id: id
+          status: USER_STATUS_UNSPECIFIED
+          username: username
+        - firstName: firstName
+          lastName: lastName
+          userAccountId:
+            id: 0
+          userId:
+            id: id
+          status: USER_STATUS_UNSPECIFIED
+          username: username
+      externalDocs:
+        description: Find out more about groups
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
+      properties:
+        noMorePages:
+          description: This data structure represents the information associated with
+            an API key.
+          externalDocs:
+            description: Find out more about groups
+            url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
+          title: NoMorePages
+          type: object
+        users:
+          items:
+            $ref: "#/components/schemas/v1.User"
+          type: array
+      title: GetGroupUsersResponse
+      type: object
+    GetGroupUsersResponseToken:
+      additionalProperties: false
+      description: Response containing the list of all users currently assigned to
+        the requested team group.
+      externalDocs:
+        description: Find out more about groups
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
+      properties:
+        token:
+          $ref: "#/components/schemas/NextPageToken"
+        users:
+          items:
+            $ref: "#/components/schemas/v1.User"
+          type: array
+      title: GetGroupUsersResponse
+      type: object
     GetTeamGroupByNameResponse:
       description: "Response containing the complete details of a team group that\
         \ matches the requested name, including its members, roles, and scope settings."
@@ -1211,7 +1318,6 @@ components:
       title: GetTeamGroupResponse
       type: object
     GetTeamGroupScopeResponse:
-      additionalProperties: false
       description: Response message containing the optional scope configuration (filters
         for subsystems and applications) for a team group
       example:
@@ -1473,7 +1579,6 @@ components:
       title: SetTeamGroupScopeResponse
       type: object
     TeamGroup:
-      additionalProperties: false
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
         groupType: GROUP_TYPE_UNSPECIFIED
@@ -1583,6 +1688,18 @@ components:
             $ref: "#/components/schemas/v1.UserId"
           type: array
       title: UserUpdates
+      type: object
+    YAxisViewByCategory:
+      additionalProperties: false
+      properties:
+        category:
+          $ref: "#/components/schemas/YAxisViewByCategory"
+      type: object
+    YAxisViewByValue:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: "#/components/schemas/YAxisViewByValue"
       type: object
     common.Group:
       properties:
@@ -1867,95 +1984,6 @@ components:
         scopeFilters:
           $ref: "#/components/schemas/ScopeFilters"
       title: SetTeamGroupScopeRequest
-      type: object
-    FilterPathAndValues_1:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValues_2:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    GetGroupUsersResponse_1:
-      additionalProperties: false
-      description: Response containing the list of all users currently assigned to
-        the requested team group.
-      example:
-        noMorePages: "{}"
-        users:
-        - firstName: firstName
-          lastName: lastName
-          userAccountId:
-            id: 0
-          userId:
-            id: id
-          status: USER_STATUS_UNSPECIFIED
-          username: username
-        - firstName: firstName
-          lastName: lastName
-          userAccountId:
-            id: 0
-          userId:
-            id: id
-          status: USER_STATUS_UNSPECIFIED
-          username: username
-      externalDocs:
-        description: Find out more about groups
-        url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
-      properties:
-        noMorePages:
-          description: This data structure represents the information associated with
-            an API key.
-          externalDocs:
-            description: Find out more about groups
-            url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
-          title: NoMorePages
-          type: object
-        users:
-          items:
-            $ref: "#/components/schemas/v1.User"
-          type: array
-      title: GetGroupUsersResponse
-      type: object
-    GetGroupUsersResponse_2:
-      additionalProperties: false
-      description: Response containing the list of all users currently assigned to
-        the requested team group.
-      externalDocs:
-        description: Find out more about groups
-        url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
-      properties:
-        token:
-          $ref: "#/components/schemas/NextPageToken"
-        users:
-          items:
-            $ref: "#/components/schemas/v1.User"
-          type: array
-      title: GetGroupUsersResponse
       type: object
   securitySchemes:
     apiKeyAuth:

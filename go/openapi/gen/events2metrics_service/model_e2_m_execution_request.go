@@ -18,29 +18,29 @@ import (
 
 // E2MExecutionRequest - struct for E2MExecutionRequest
 type E2MExecutionRequest struct {
-	E2MExecutionRequestOneOf *E2MExecutionRequestOneOf
-	E2MExecutionRequestOneOf1 *E2MExecutionRequestOneOf1
-	E2MExecutionRequestOneOf2 *E2MExecutionRequestOneOf2
+	E2MExecutionRequestCreate *E2MExecutionRequestCreate
+	E2MExecutionRequestDelete *E2MExecutionRequestDelete
+	E2MExecutionRequestReplace *E2MExecutionRequestReplace
 }
 
-// E2MExecutionRequestOneOfAsE2MExecutionRequest is a convenience function that returns E2MExecutionRequestOneOf wrapped in E2MExecutionRequest
-func E2MExecutionRequestOneOfAsE2MExecutionRequest(v *E2MExecutionRequestOneOf) E2MExecutionRequest {
+// E2MExecutionRequestCreateAsE2MExecutionRequest is a convenience function that returns E2MExecutionRequestCreate wrapped in E2MExecutionRequest
+func E2MExecutionRequestCreateAsE2MExecutionRequest(v *E2MExecutionRequestCreate) E2MExecutionRequest {
 	return E2MExecutionRequest{
-		E2MExecutionRequestOneOf: v,
+		E2MExecutionRequestCreate: v,
 	}
 }
 
-// E2MExecutionRequestOneOf1AsE2MExecutionRequest is a convenience function that returns E2MExecutionRequestOneOf1 wrapped in E2MExecutionRequest
-func E2MExecutionRequestOneOf1AsE2MExecutionRequest(v *E2MExecutionRequestOneOf1) E2MExecutionRequest {
+// E2MExecutionRequestDeleteAsE2MExecutionRequest is a convenience function that returns E2MExecutionRequestDelete wrapped in E2MExecutionRequest
+func E2MExecutionRequestDeleteAsE2MExecutionRequest(v *E2MExecutionRequestDelete) E2MExecutionRequest {
 	return E2MExecutionRequest{
-		E2MExecutionRequestOneOf1: v,
+		E2MExecutionRequestDelete: v,
 	}
 }
 
-// E2MExecutionRequestOneOf2AsE2MExecutionRequest is a convenience function that returns E2MExecutionRequestOneOf2 wrapped in E2MExecutionRequest
-func E2MExecutionRequestOneOf2AsE2MExecutionRequest(v *E2MExecutionRequestOneOf2) E2MExecutionRequest {
+// E2MExecutionRequestReplaceAsE2MExecutionRequest is a convenience function that returns E2MExecutionRequestReplace wrapped in E2MExecutionRequest
+func E2MExecutionRequestReplaceAsE2MExecutionRequest(v *E2MExecutionRequestReplace) E2MExecutionRequest {
 	return E2MExecutionRequest{
-		E2MExecutionRequestOneOf2: v,
+		E2MExecutionRequestReplace: v,
 	}
 }
 
@@ -49,62 +49,62 @@ func E2MExecutionRequestOneOf2AsE2MExecutionRequest(v *E2MExecutionRequestOneOf2
 func (dst *E2MExecutionRequest) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into E2MExecutionRequestOneOf
-	err = newStrictDecoder(data).Decode(&dst.E2MExecutionRequestOneOf)
+	// try to unmarshal data into E2MExecutionRequestCreate
+	err = newStrictDecoder(data).Decode(&dst.E2MExecutionRequestCreate)
 	if err == nil {
-		jsonE2MExecutionRequestOneOf, _ := json.Marshal(dst.E2MExecutionRequestOneOf)
-		if string(jsonE2MExecutionRequestOneOf) == "{}" { // empty struct
-			dst.E2MExecutionRequestOneOf = nil
+		jsonE2MExecutionRequestCreate, _ := json.Marshal(dst.E2MExecutionRequestCreate)
+		if string(jsonE2MExecutionRequestCreate) == "{}" { // empty struct
+			dst.E2MExecutionRequestCreate = nil
 		} else {
-			if err = validator.Validate(dst.E2MExecutionRequestOneOf); err != nil {
-				dst.E2MExecutionRequestOneOf = nil
+			if err = validator.Validate(dst.E2MExecutionRequestCreate); err != nil {
+				dst.E2MExecutionRequestCreate = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.E2MExecutionRequestOneOf = nil
+		dst.E2MExecutionRequestCreate = nil
 	}
 
-	// try to unmarshal data into E2MExecutionRequestOneOf1
-	err = newStrictDecoder(data).Decode(&dst.E2MExecutionRequestOneOf1)
+	// try to unmarshal data into E2MExecutionRequestDelete
+	err = newStrictDecoder(data).Decode(&dst.E2MExecutionRequestDelete)
 	if err == nil {
-		jsonE2MExecutionRequestOneOf1, _ := json.Marshal(dst.E2MExecutionRequestOneOf1)
-		if string(jsonE2MExecutionRequestOneOf1) == "{}" { // empty struct
-			dst.E2MExecutionRequestOneOf1 = nil
+		jsonE2MExecutionRequestDelete, _ := json.Marshal(dst.E2MExecutionRequestDelete)
+		if string(jsonE2MExecutionRequestDelete) == "{}" { // empty struct
+			dst.E2MExecutionRequestDelete = nil
 		} else {
-			if err = validator.Validate(dst.E2MExecutionRequestOneOf1); err != nil {
-				dst.E2MExecutionRequestOneOf1 = nil
+			if err = validator.Validate(dst.E2MExecutionRequestDelete); err != nil {
+				dst.E2MExecutionRequestDelete = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.E2MExecutionRequestOneOf1 = nil
+		dst.E2MExecutionRequestDelete = nil
 	}
 
-	// try to unmarshal data into E2MExecutionRequestOneOf2
-	err = newStrictDecoder(data).Decode(&dst.E2MExecutionRequestOneOf2)
+	// try to unmarshal data into E2MExecutionRequestReplace
+	err = newStrictDecoder(data).Decode(&dst.E2MExecutionRequestReplace)
 	if err == nil {
-		jsonE2MExecutionRequestOneOf2, _ := json.Marshal(dst.E2MExecutionRequestOneOf2)
-		if string(jsonE2MExecutionRequestOneOf2) == "{}" { // empty struct
-			dst.E2MExecutionRequestOneOf2 = nil
+		jsonE2MExecutionRequestReplace, _ := json.Marshal(dst.E2MExecutionRequestReplace)
+		if string(jsonE2MExecutionRequestReplace) == "{}" { // empty struct
+			dst.E2MExecutionRequestReplace = nil
 		} else {
-			if err = validator.Validate(dst.E2MExecutionRequestOneOf2); err != nil {
-				dst.E2MExecutionRequestOneOf2 = nil
+			if err = validator.Validate(dst.E2MExecutionRequestReplace); err != nil {
+				dst.E2MExecutionRequestReplace = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.E2MExecutionRequestOneOf2 = nil
+		dst.E2MExecutionRequestReplace = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.E2MExecutionRequestOneOf = nil
-		dst.E2MExecutionRequestOneOf1 = nil
-		dst.E2MExecutionRequestOneOf2 = nil
+		dst.E2MExecutionRequestCreate = nil
+		dst.E2MExecutionRequestDelete = nil
+		dst.E2MExecutionRequestReplace = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(E2MExecutionRequest)")
 	} else if match == 1 {
@@ -116,16 +116,16 @@ func (dst *E2MExecutionRequest) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src E2MExecutionRequest) MarshalJSON() ([]byte, error) {
-	if src.E2MExecutionRequestOneOf != nil {
-		return json.Marshal(&src.E2MExecutionRequestOneOf)
+	if src.E2MExecutionRequestCreate != nil {
+		return json.Marshal(&src.E2MExecutionRequestCreate)
 	}
 
-	if src.E2MExecutionRequestOneOf1 != nil {
-		return json.Marshal(&src.E2MExecutionRequestOneOf1)
+	if src.E2MExecutionRequestDelete != nil {
+		return json.Marshal(&src.E2MExecutionRequestDelete)
 	}
 
-	if src.E2MExecutionRequestOneOf2 != nil {
-		return json.Marshal(&src.E2MExecutionRequestOneOf2)
+	if src.E2MExecutionRequestReplace != nil {
+		return json.Marshal(&src.E2MExecutionRequestReplace)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -136,16 +136,16 @@ func (obj *E2MExecutionRequest) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.E2MExecutionRequestOneOf != nil {
-		return obj.E2MExecutionRequestOneOf
+	if obj.E2MExecutionRequestCreate != nil {
+		return obj.E2MExecutionRequestCreate
 	}
 
-	if obj.E2MExecutionRequestOneOf1 != nil {
-		return obj.E2MExecutionRequestOneOf1
+	if obj.E2MExecutionRequestDelete != nil {
+		return obj.E2MExecutionRequestDelete
 	}
 
-	if obj.E2MExecutionRequestOneOf2 != nil {
-		return obj.E2MExecutionRequestOneOf2
+	if obj.E2MExecutionRequestReplace != nil {
+		return obj.E2MExecutionRequestReplace
 	}
 
 	// all schemas are nil
@@ -154,16 +154,16 @@ func (obj *E2MExecutionRequest) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj E2MExecutionRequest) GetActualInstanceValue() (interface{}) {
-	if obj.E2MExecutionRequestOneOf != nil {
-		return *obj.E2MExecutionRequestOneOf
+	if obj.E2MExecutionRequestCreate != nil {
+		return *obj.E2MExecutionRequestCreate
 	}
 
-	if obj.E2MExecutionRequestOneOf1 != nil {
-		return *obj.E2MExecutionRequestOneOf1
+	if obj.E2MExecutionRequestDelete != nil {
+		return *obj.E2MExecutionRequestDelete
 	}
 
-	if obj.E2MExecutionRequestOneOf2 != nil {
-		return *obj.E2MExecutionRequestOneOf2
+	if obj.E2MExecutionRequestReplace != nil {
+		return *obj.E2MExecutionRequestReplace
 	}
 
 	// all schemas are nil

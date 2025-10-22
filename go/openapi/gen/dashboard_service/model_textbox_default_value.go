@@ -18,61 +18,61 @@ import (
 
 // TextboxDefaultValue - struct for TextboxDefaultValue
 type TextboxDefaultValue struct {
-	TextboxDefaultValueOneOf *TextboxDefaultValueOneOf
-	TextboxDefaultValueOneOf1 *TextboxDefaultValueOneOf1
-	TextboxDefaultValueOneOf2 *TextboxDefaultValueOneOf2
-	TextboxDefaultValueOneOf3 *TextboxDefaultValueOneOf3
-	TextboxDefaultValueOneOf4 *TextboxDefaultValueOneOf4
-	TextboxDefaultValueOneOf5 *TextboxDefaultValueOneOf5
-	TextboxDefaultValueOneOf6 *TextboxDefaultValueOneOf6
+	TextboxDefaultValueDefaultIntervalValue *TextboxDefaultValueDefaultIntervalValue
+	TextboxDefaultValueDefaultLuceneValue *TextboxDefaultValueDefaultLuceneValue
+	TextboxDefaultValueDefaultNumericValue *TextboxDefaultValueDefaultNumericValue
+	TextboxDefaultValueDefaultRegexValue *TextboxDefaultValueDefaultRegexValue
+	TextboxDefaultValueDefaultStringValue *TextboxDefaultValueDefaultStringValue
+	TextboxDefaultValueSingleNumeric *TextboxDefaultValueSingleNumeric
+	TextboxDefaultValueSingleString *TextboxDefaultValueSingleString
 }
 
-// TextboxDefaultValueOneOfAsTextboxDefaultValue is a convenience function that returns TextboxDefaultValueOneOf wrapped in TextboxDefaultValue
-func TextboxDefaultValueOneOfAsTextboxDefaultValue(v *TextboxDefaultValueOneOf) TextboxDefaultValue {
+// TextboxDefaultValueDefaultIntervalValueAsTextboxDefaultValue is a convenience function that returns TextboxDefaultValueDefaultIntervalValue wrapped in TextboxDefaultValue
+func TextboxDefaultValueDefaultIntervalValueAsTextboxDefaultValue(v *TextboxDefaultValueDefaultIntervalValue) TextboxDefaultValue {
 	return TextboxDefaultValue{
-		TextboxDefaultValueOneOf: v,
+		TextboxDefaultValueDefaultIntervalValue: v,
 	}
 }
 
-// TextboxDefaultValueOneOf1AsTextboxDefaultValue is a convenience function that returns TextboxDefaultValueOneOf1 wrapped in TextboxDefaultValue
-func TextboxDefaultValueOneOf1AsTextboxDefaultValue(v *TextboxDefaultValueOneOf1) TextboxDefaultValue {
+// TextboxDefaultValueDefaultLuceneValueAsTextboxDefaultValue is a convenience function that returns TextboxDefaultValueDefaultLuceneValue wrapped in TextboxDefaultValue
+func TextboxDefaultValueDefaultLuceneValueAsTextboxDefaultValue(v *TextboxDefaultValueDefaultLuceneValue) TextboxDefaultValue {
 	return TextboxDefaultValue{
-		TextboxDefaultValueOneOf1: v,
+		TextboxDefaultValueDefaultLuceneValue: v,
 	}
 }
 
-// TextboxDefaultValueOneOf2AsTextboxDefaultValue is a convenience function that returns TextboxDefaultValueOneOf2 wrapped in TextboxDefaultValue
-func TextboxDefaultValueOneOf2AsTextboxDefaultValue(v *TextboxDefaultValueOneOf2) TextboxDefaultValue {
+// TextboxDefaultValueDefaultNumericValueAsTextboxDefaultValue is a convenience function that returns TextboxDefaultValueDefaultNumericValue wrapped in TextboxDefaultValue
+func TextboxDefaultValueDefaultNumericValueAsTextboxDefaultValue(v *TextboxDefaultValueDefaultNumericValue) TextboxDefaultValue {
 	return TextboxDefaultValue{
-		TextboxDefaultValueOneOf2: v,
+		TextboxDefaultValueDefaultNumericValue: v,
 	}
 }
 
-// TextboxDefaultValueOneOf3AsTextboxDefaultValue is a convenience function that returns TextboxDefaultValueOneOf3 wrapped in TextboxDefaultValue
-func TextboxDefaultValueOneOf3AsTextboxDefaultValue(v *TextboxDefaultValueOneOf3) TextboxDefaultValue {
+// TextboxDefaultValueDefaultRegexValueAsTextboxDefaultValue is a convenience function that returns TextboxDefaultValueDefaultRegexValue wrapped in TextboxDefaultValue
+func TextboxDefaultValueDefaultRegexValueAsTextboxDefaultValue(v *TextboxDefaultValueDefaultRegexValue) TextboxDefaultValue {
 	return TextboxDefaultValue{
-		TextboxDefaultValueOneOf3: v,
+		TextboxDefaultValueDefaultRegexValue: v,
 	}
 }
 
-// TextboxDefaultValueOneOf4AsTextboxDefaultValue is a convenience function that returns TextboxDefaultValueOneOf4 wrapped in TextboxDefaultValue
-func TextboxDefaultValueOneOf4AsTextboxDefaultValue(v *TextboxDefaultValueOneOf4) TextboxDefaultValue {
+// TextboxDefaultValueDefaultStringValueAsTextboxDefaultValue is a convenience function that returns TextboxDefaultValueDefaultStringValue wrapped in TextboxDefaultValue
+func TextboxDefaultValueDefaultStringValueAsTextboxDefaultValue(v *TextboxDefaultValueDefaultStringValue) TextboxDefaultValue {
 	return TextboxDefaultValue{
-		TextboxDefaultValueOneOf4: v,
+		TextboxDefaultValueDefaultStringValue: v,
 	}
 }
 
-// TextboxDefaultValueOneOf5AsTextboxDefaultValue is a convenience function that returns TextboxDefaultValueOneOf5 wrapped in TextboxDefaultValue
-func TextboxDefaultValueOneOf5AsTextboxDefaultValue(v *TextboxDefaultValueOneOf5) TextboxDefaultValue {
+// TextboxDefaultValueSingleNumericAsTextboxDefaultValue is a convenience function that returns TextboxDefaultValueSingleNumeric wrapped in TextboxDefaultValue
+func TextboxDefaultValueSingleNumericAsTextboxDefaultValue(v *TextboxDefaultValueSingleNumeric) TextboxDefaultValue {
 	return TextboxDefaultValue{
-		TextboxDefaultValueOneOf5: v,
+		TextboxDefaultValueSingleNumeric: v,
 	}
 }
 
-// TextboxDefaultValueOneOf6AsTextboxDefaultValue is a convenience function that returns TextboxDefaultValueOneOf6 wrapped in TextboxDefaultValue
-func TextboxDefaultValueOneOf6AsTextboxDefaultValue(v *TextboxDefaultValueOneOf6) TextboxDefaultValue {
+// TextboxDefaultValueSingleStringAsTextboxDefaultValue is a convenience function that returns TextboxDefaultValueSingleString wrapped in TextboxDefaultValue
+func TextboxDefaultValueSingleStringAsTextboxDefaultValue(v *TextboxDefaultValueSingleString) TextboxDefaultValue {
 	return TextboxDefaultValue{
-		TextboxDefaultValueOneOf6: v,
+		TextboxDefaultValueSingleString: v,
 	}
 }
 
@@ -81,134 +81,134 @@ func TextboxDefaultValueOneOf6AsTextboxDefaultValue(v *TextboxDefaultValueOneOf6
 func (dst *TextboxDefaultValue) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into TextboxDefaultValueOneOf
-	err = newStrictDecoder(data).Decode(&dst.TextboxDefaultValueOneOf)
+	// try to unmarshal data into TextboxDefaultValueDefaultIntervalValue
+	err = newStrictDecoder(data).Decode(&dst.TextboxDefaultValueDefaultIntervalValue)
 	if err == nil {
-		jsonTextboxDefaultValueOneOf, _ := json.Marshal(dst.TextboxDefaultValueOneOf)
-		if string(jsonTextboxDefaultValueOneOf) == "{}" { // empty struct
-			dst.TextboxDefaultValueOneOf = nil
+		jsonTextboxDefaultValueDefaultIntervalValue, _ := json.Marshal(dst.TextboxDefaultValueDefaultIntervalValue)
+		if string(jsonTextboxDefaultValueDefaultIntervalValue) == "{}" { // empty struct
+			dst.TextboxDefaultValueDefaultIntervalValue = nil
 		} else {
-			if err = validator.Validate(dst.TextboxDefaultValueOneOf); err != nil {
-				dst.TextboxDefaultValueOneOf = nil
+			if err = validator.Validate(dst.TextboxDefaultValueDefaultIntervalValue); err != nil {
+				dst.TextboxDefaultValueDefaultIntervalValue = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.TextboxDefaultValueOneOf = nil
+		dst.TextboxDefaultValueDefaultIntervalValue = nil
 	}
 
-	// try to unmarshal data into TextboxDefaultValueOneOf1
-	err = newStrictDecoder(data).Decode(&dst.TextboxDefaultValueOneOf1)
+	// try to unmarshal data into TextboxDefaultValueDefaultLuceneValue
+	err = newStrictDecoder(data).Decode(&dst.TextboxDefaultValueDefaultLuceneValue)
 	if err == nil {
-		jsonTextboxDefaultValueOneOf1, _ := json.Marshal(dst.TextboxDefaultValueOneOf1)
-		if string(jsonTextboxDefaultValueOneOf1) == "{}" { // empty struct
-			dst.TextboxDefaultValueOneOf1 = nil
+		jsonTextboxDefaultValueDefaultLuceneValue, _ := json.Marshal(dst.TextboxDefaultValueDefaultLuceneValue)
+		if string(jsonTextboxDefaultValueDefaultLuceneValue) == "{}" { // empty struct
+			dst.TextboxDefaultValueDefaultLuceneValue = nil
 		} else {
-			if err = validator.Validate(dst.TextboxDefaultValueOneOf1); err != nil {
-				dst.TextboxDefaultValueOneOf1 = nil
+			if err = validator.Validate(dst.TextboxDefaultValueDefaultLuceneValue); err != nil {
+				dst.TextboxDefaultValueDefaultLuceneValue = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.TextboxDefaultValueOneOf1 = nil
+		dst.TextboxDefaultValueDefaultLuceneValue = nil
 	}
 
-	// try to unmarshal data into TextboxDefaultValueOneOf2
-	err = newStrictDecoder(data).Decode(&dst.TextboxDefaultValueOneOf2)
+	// try to unmarshal data into TextboxDefaultValueDefaultNumericValue
+	err = newStrictDecoder(data).Decode(&dst.TextboxDefaultValueDefaultNumericValue)
 	if err == nil {
-		jsonTextboxDefaultValueOneOf2, _ := json.Marshal(dst.TextboxDefaultValueOneOf2)
-		if string(jsonTextboxDefaultValueOneOf2) == "{}" { // empty struct
-			dst.TextboxDefaultValueOneOf2 = nil
+		jsonTextboxDefaultValueDefaultNumericValue, _ := json.Marshal(dst.TextboxDefaultValueDefaultNumericValue)
+		if string(jsonTextboxDefaultValueDefaultNumericValue) == "{}" { // empty struct
+			dst.TextboxDefaultValueDefaultNumericValue = nil
 		} else {
-			if err = validator.Validate(dst.TextboxDefaultValueOneOf2); err != nil {
-				dst.TextboxDefaultValueOneOf2 = nil
+			if err = validator.Validate(dst.TextboxDefaultValueDefaultNumericValue); err != nil {
+				dst.TextboxDefaultValueDefaultNumericValue = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.TextboxDefaultValueOneOf2 = nil
+		dst.TextboxDefaultValueDefaultNumericValue = nil
 	}
 
-	// try to unmarshal data into TextboxDefaultValueOneOf3
-	err = newStrictDecoder(data).Decode(&dst.TextboxDefaultValueOneOf3)
+	// try to unmarshal data into TextboxDefaultValueDefaultRegexValue
+	err = newStrictDecoder(data).Decode(&dst.TextboxDefaultValueDefaultRegexValue)
 	if err == nil {
-		jsonTextboxDefaultValueOneOf3, _ := json.Marshal(dst.TextboxDefaultValueOneOf3)
-		if string(jsonTextboxDefaultValueOneOf3) == "{}" { // empty struct
-			dst.TextboxDefaultValueOneOf3 = nil
+		jsonTextboxDefaultValueDefaultRegexValue, _ := json.Marshal(dst.TextboxDefaultValueDefaultRegexValue)
+		if string(jsonTextboxDefaultValueDefaultRegexValue) == "{}" { // empty struct
+			dst.TextboxDefaultValueDefaultRegexValue = nil
 		} else {
-			if err = validator.Validate(dst.TextboxDefaultValueOneOf3); err != nil {
-				dst.TextboxDefaultValueOneOf3 = nil
+			if err = validator.Validate(dst.TextboxDefaultValueDefaultRegexValue); err != nil {
+				dst.TextboxDefaultValueDefaultRegexValue = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.TextboxDefaultValueOneOf3 = nil
+		dst.TextboxDefaultValueDefaultRegexValue = nil
 	}
 
-	// try to unmarshal data into TextboxDefaultValueOneOf4
-	err = newStrictDecoder(data).Decode(&dst.TextboxDefaultValueOneOf4)
+	// try to unmarshal data into TextboxDefaultValueDefaultStringValue
+	err = newStrictDecoder(data).Decode(&dst.TextboxDefaultValueDefaultStringValue)
 	if err == nil {
-		jsonTextboxDefaultValueOneOf4, _ := json.Marshal(dst.TextboxDefaultValueOneOf4)
-		if string(jsonTextboxDefaultValueOneOf4) == "{}" { // empty struct
-			dst.TextboxDefaultValueOneOf4 = nil
+		jsonTextboxDefaultValueDefaultStringValue, _ := json.Marshal(dst.TextboxDefaultValueDefaultStringValue)
+		if string(jsonTextboxDefaultValueDefaultStringValue) == "{}" { // empty struct
+			dst.TextboxDefaultValueDefaultStringValue = nil
 		} else {
-			if err = validator.Validate(dst.TextboxDefaultValueOneOf4); err != nil {
-				dst.TextboxDefaultValueOneOf4 = nil
+			if err = validator.Validate(dst.TextboxDefaultValueDefaultStringValue); err != nil {
+				dst.TextboxDefaultValueDefaultStringValue = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.TextboxDefaultValueOneOf4 = nil
+		dst.TextboxDefaultValueDefaultStringValue = nil
 	}
 
-	// try to unmarshal data into TextboxDefaultValueOneOf5
-	err = newStrictDecoder(data).Decode(&dst.TextboxDefaultValueOneOf5)
+	// try to unmarshal data into TextboxDefaultValueSingleNumeric
+	err = newStrictDecoder(data).Decode(&dst.TextboxDefaultValueSingleNumeric)
 	if err == nil {
-		jsonTextboxDefaultValueOneOf5, _ := json.Marshal(dst.TextboxDefaultValueOneOf5)
-		if string(jsonTextboxDefaultValueOneOf5) == "{}" { // empty struct
-			dst.TextboxDefaultValueOneOf5 = nil
+		jsonTextboxDefaultValueSingleNumeric, _ := json.Marshal(dst.TextboxDefaultValueSingleNumeric)
+		if string(jsonTextboxDefaultValueSingleNumeric) == "{}" { // empty struct
+			dst.TextboxDefaultValueSingleNumeric = nil
 		} else {
-			if err = validator.Validate(dst.TextboxDefaultValueOneOf5); err != nil {
-				dst.TextboxDefaultValueOneOf5 = nil
+			if err = validator.Validate(dst.TextboxDefaultValueSingleNumeric); err != nil {
+				dst.TextboxDefaultValueSingleNumeric = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.TextboxDefaultValueOneOf5 = nil
+		dst.TextboxDefaultValueSingleNumeric = nil
 	}
 
-	// try to unmarshal data into TextboxDefaultValueOneOf6
-	err = newStrictDecoder(data).Decode(&dst.TextboxDefaultValueOneOf6)
+	// try to unmarshal data into TextboxDefaultValueSingleString
+	err = newStrictDecoder(data).Decode(&dst.TextboxDefaultValueSingleString)
 	if err == nil {
-		jsonTextboxDefaultValueOneOf6, _ := json.Marshal(dst.TextboxDefaultValueOneOf6)
-		if string(jsonTextboxDefaultValueOneOf6) == "{}" { // empty struct
-			dst.TextboxDefaultValueOneOf6 = nil
+		jsonTextboxDefaultValueSingleString, _ := json.Marshal(dst.TextboxDefaultValueSingleString)
+		if string(jsonTextboxDefaultValueSingleString) == "{}" { // empty struct
+			dst.TextboxDefaultValueSingleString = nil
 		} else {
-			if err = validator.Validate(dst.TextboxDefaultValueOneOf6); err != nil {
-				dst.TextboxDefaultValueOneOf6 = nil
+			if err = validator.Validate(dst.TextboxDefaultValueSingleString); err != nil {
+				dst.TextboxDefaultValueSingleString = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.TextboxDefaultValueOneOf6 = nil
+		dst.TextboxDefaultValueSingleString = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.TextboxDefaultValueOneOf = nil
-		dst.TextboxDefaultValueOneOf1 = nil
-		dst.TextboxDefaultValueOneOf2 = nil
-		dst.TextboxDefaultValueOneOf3 = nil
-		dst.TextboxDefaultValueOneOf4 = nil
-		dst.TextboxDefaultValueOneOf5 = nil
-		dst.TextboxDefaultValueOneOf6 = nil
+		dst.TextboxDefaultValueDefaultIntervalValue = nil
+		dst.TextboxDefaultValueDefaultLuceneValue = nil
+		dst.TextboxDefaultValueDefaultNumericValue = nil
+		dst.TextboxDefaultValueDefaultRegexValue = nil
+		dst.TextboxDefaultValueDefaultStringValue = nil
+		dst.TextboxDefaultValueSingleNumeric = nil
+		dst.TextboxDefaultValueSingleString = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(TextboxDefaultValue)")
 	} else if match == 1 {
@@ -220,32 +220,32 @@ func (dst *TextboxDefaultValue) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src TextboxDefaultValue) MarshalJSON() ([]byte, error) {
-	if src.TextboxDefaultValueOneOf != nil {
-		return json.Marshal(&src.TextboxDefaultValueOneOf)
+	if src.TextboxDefaultValueDefaultIntervalValue != nil {
+		return json.Marshal(&src.TextboxDefaultValueDefaultIntervalValue)
 	}
 
-	if src.TextboxDefaultValueOneOf1 != nil {
-		return json.Marshal(&src.TextboxDefaultValueOneOf1)
+	if src.TextboxDefaultValueDefaultLuceneValue != nil {
+		return json.Marshal(&src.TextboxDefaultValueDefaultLuceneValue)
 	}
 
-	if src.TextboxDefaultValueOneOf2 != nil {
-		return json.Marshal(&src.TextboxDefaultValueOneOf2)
+	if src.TextboxDefaultValueDefaultNumericValue != nil {
+		return json.Marshal(&src.TextboxDefaultValueDefaultNumericValue)
 	}
 
-	if src.TextboxDefaultValueOneOf3 != nil {
-		return json.Marshal(&src.TextboxDefaultValueOneOf3)
+	if src.TextboxDefaultValueDefaultRegexValue != nil {
+		return json.Marshal(&src.TextboxDefaultValueDefaultRegexValue)
 	}
 
-	if src.TextboxDefaultValueOneOf4 != nil {
-		return json.Marshal(&src.TextboxDefaultValueOneOf4)
+	if src.TextboxDefaultValueDefaultStringValue != nil {
+		return json.Marshal(&src.TextboxDefaultValueDefaultStringValue)
 	}
 
-	if src.TextboxDefaultValueOneOf5 != nil {
-		return json.Marshal(&src.TextboxDefaultValueOneOf5)
+	if src.TextboxDefaultValueSingleNumeric != nil {
+		return json.Marshal(&src.TextboxDefaultValueSingleNumeric)
 	}
 
-	if src.TextboxDefaultValueOneOf6 != nil {
-		return json.Marshal(&src.TextboxDefaultValueOneOf6)
+	if src.TextboxDefaultValueSingleString != nil {
+		return json.Marshal(&src.TextboxDefaultValueSingleString)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -256,32 +256,32 @@ func (obj *TextboxDefaultValue) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.TextboxDefaultValueOneOf != nil {
-		return obj.TextboxDefaultValueOneOf
+	if obj.TextboxDefaultValueDefaultIntervalValue != nil {
+		return obj.TextboxDefaultValueDefaultIntervalValue
 	}
 
-	if obj.TextboxDefaultValueOneOf1 != nil {
-		return obj.TextboxDefaultValueOneOf1
+	if obj.TextboxDefaultValueDefaultLuceneValue != nil {
+		return obj.TextboxDefaultValueDefaultLuceneValue
 	}
 
-	if obj.TextboxDefaultValueOneOf2 != nil {
-		return obj.TextboxDefaultValueOneOf2
+	if obj.TextboxDefaultValueDefaultNumericValue != nil {
+		return obj.TextboxDefaultValueDefaultNumericValue
 	}
 
-	if obj.TextboxDefaultValueOneOf3 != nil {
-		return obj.TextboxDefaultValueOneOf3
+	if obj.TextboxDefaultValueDefaultRegexValue != nil {
+		return obj.TextboxDefaultValueDefaultRegexValue
 	}
 
-	if obj.TextboxDefaultValueOneOf4 != nil {
-		return obj.TextboxDefaultValueOneOf4
+	if obj.TextboxDefaultValueDefaultStringValue != nil {
+		return obj.TextboxDefaultValueDefaultStringValue
 	}
 
-	if obj.TextboxDefaultValueOneOf5 != nil {
-		return obj.TextboxDefaultValueOneOf5
+	if obj.TextboxDefaultValueSingleNumeric != nil {
+		return obj.TextboxDefaultValueSingleNumeric
 	}
 
-	if obj.TextboxDefaultValueOneOf6 != nil {
-		return obj.TextboxDefaultValueOneOf6
+	if obj.TextboxDefaultValueSingleString != nil {
+		return obj.TextboxDefaultValueSingleString
 	}
 
 	// all schemas are nil
@@ -290,32 +290,32 @@ func (obj *TextboxDefaultValue) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj TextboxDefaultValue) GetActualInstanceValue() (interface{}) {
-	if obj.TextboxDefaultValueOneOf != nil {
-		return *obj.TextboxDefaultValueOneOf
+	if obj.TextboxDefaultValueDefaultIntervalValue != nil {
+		return *obj.TextboxDefaultValueDefaultIntervalValue
 	}
 
-	if obj.TextboxDefaultValueOneOf1 != nil {
-		return *obj.TextboxDefaultValueOneOf1
+	if obj.TextboxDefaultValueDefaultLuceneValue != nil {
+		return *obj.TextboxDefaultValueDefaultLuceneValue
 	}
 
-	if obj.TextboxDefaultValueOneOf2 != nil {
-		return *obj.TextboxDefaultValueOneOf2
+	if obj.TextboxDefaultValueDefaultNumericValue != nil {
+		return *obj.TextboxDefaultValueDefaultNumericValue
 	}
 
-	if obj.TextboxDefaultValueOneOf3 != nil {
-		return *obj.TextboxDefaultValueOneOf3
+	if obj.TextboxDefaultValueDefaultRegexValue != nil {
+		return *obj.TextboxDefaultValueDefaultRegexValue
 	}
 
-	if obj.TextboxDefaultValueOneOf4 != nil {
-		return *obj.TextboxDefaultValueOneOf4
+	if obj.TextboxDefaultValueDefaultStringValue != nil {
+		return *obj.TextboxDefaultValueDefaultStringValue
 	}
 
-	if obj.TextboxDefaultValueOneOf5 != nil {
-		return *obj.TextboxDefaultValueOneOf5
+	if obj.TextboxDefaultValueSingleNumeric != nil {
+		return *obj.TextboxDefaultValueSingleNumeric
 	}
 
-	if obj.TextboxDefaultValueOneOf6 != nil {
-		return *obj.TextboxDefaultValueOneOf6
+	if obj.TextboxDefaultValueSingleString != nil {
+		return *obj.TextboxDefaultValueSingleString
 	}
 
 	// all schemas are nil

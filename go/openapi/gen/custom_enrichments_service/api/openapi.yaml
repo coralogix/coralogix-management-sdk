@@ -356,6 +356,24 @@ paths:
             --header 'Authorization: Bearer <API_KEY>'
 components:
   schemas:
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
     CreateCustomEnrichmentResponse:
       description: This response data structure is obtained when a custom enrichment
         is created
@@ -412,8 +430,35 @@ components:
       type: object
     CustomEnrichmentData:
       oneOf:
-      - $ref: "#/components/schemas/CustomEnrichmentData_oneOf"
-      - $ref: "#/components/schemas/CustomEnrichmentData_oneOf_1"
+      - $ref: "#/components/schemas/CustomEnrichmentDataBinary"
+      - $ref: "#/components/schemas/CustomEnrichmentDataTextual"
+    CustomEnrichmentDataBinary:
+      additionalProperties: false
+      example:
+        binary: binary
+        definition:
+          fileName: fileName
+          isQueryOnly: true
+          fileSize: 0
+          name: name
+          description: description
+          id: 6
+          version: 1
+      properties:
+        binary:
+          format: byte
+          type: string
+        definition:
+          $ref: "#/components/schemas/CustomEnrichment"
+      type: object
+    CustomEnrichmentDataTextual:
+      additionalProperties: false
+      properties:
+        definition:
+          $ref: "#/components/schemas/CustomEnrichment"
+        textual:
+          type: string
+      type: object
     DeleteCustomEnrichmentResponse:
       example:
         customEnrichmentId: 1
@@ -436,12 +481,90 @@ components:
       type: object
     File:
       oneOf:
-      - $ref: "#/components/schemas/File_1"
-      - $ref: "#/components/schemas/File_2"
+      - $ref: "#/components/schemas/FileTextual"
+      - $ref: "#/components/schemas/FileBinary"
+    FileBinary:
+      additionalProperties: false
+      description: This data structure represents a file
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        binary:
+          example: !!binary |-
+            MHhGQUJCMzI=
+          format: byte
+          type: string
+        extension:
+          example: csv
+          type: string
+        name:
+          example: file_name
+          type: string
+        size:
+          example: 100
+          format: int64
+          type: integer
+      title: File
+      type: object
+    FileTextual:
+      additionalProperties: false
+      description: This data structure represents a file
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        extension:
+          example: csv
+          type: string
+        name:
+          example: file_name
+          type: string
+        size:
+          example: 100
+          format: int64
+          type: integer
+        textual:
+          example: "row1,row2 value1,value2"
+          type: string
+      title: File
+      type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValues_1"
-      - $ref: "#/components/schemas/FilterPathAndValues_2"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
     Filters:
       description: This data structure represents a filter
       externalDocs:
@@ -519,10 +642,40 @@ components:
             type: string
           type: array
       type: object
+    SearchClauseId:
+      additionalProperties: false
+      description: This data structure represents a search clause
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        id:
+          example: 1
+          format: int64
+          type: integer
+      required:
+      - searchBy
+      title: Search Clause
+      type: object
+    SearchClauseName:
+      additionalProperties: false
+      description: This data structure represents a search clause
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        name:
+          example: custom_enrichment_name
+          type: string
+      required:
+      - searchBy
+      title: Search Clause
+      type: object
     SearchCustomEnrichmentDataResponse:
       example:
         customEnrichmentsData:
-        - definition:
+        - binary: binary
+          definition:
             fileName: fileName
             isQueryOnly: true
             fileSize: 0
@@ -530,8 +683,8 @@ components:
             description: description
             id: 6
             version: 1
-          textual: textual
-        - definition:
+        - binary: binary
+          definition:
             fileName: fileName
             isQueryOnly: true
             fileSize: 0
@@ -539,7 +692,6 @@ components:
             description: description
             id: 6
             version: 1
-          textual: textual
       properties:
         customEnrichmentsData:
           items:
@@ -571,6 +723,18 @@ components:
       required:
       - customEnrichment
       title: Update Custom Enrichment Response
+      type: object
+    YAxisViewByCategory:
+      additionalProperties: false
+      properties:
+        category:
+          $ref: "#/components/schemas/YAxisViewByCategory"
+      type: object
+    YAxisViewByValue:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: "#/components/schemas/YAxisViewByValue"
       type: object
     common.Group:
       properties:
@@ -635,144 +799,10 @@ components:
       - name
       title: Create Custom Enrichment Request
       type: object
-    Search_Clause:
-      additionalProperties: false
-      description: This data structure represents a search clause
-      externalDocs:
-        description: Find out more about enrichments
-        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
-      properties:
-        id:
-          example: 1
-          format: int64
-          type: integer
-      required:
-      - searchBy
-      title: Search Clause
-      type: object
-    Search_Clause_1:
-      additionalProperties: false
-      description: This data structure represents a search clause
-      externalDocs:
-        description: Find out more about enrichments
-        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
-      properties:
-        name:
-          example: custom_enrichment_name
-          type: string
-      required:
-      - searchBy
-      title: Search Clause
-      type: object
     CustomEnrichmentService_SearchCustomEnrichmentData_search_clauses_parameter_inner:
       oneOf:
-      - $ref: "#/components/schemas/Search_Clause"
-      - $ref: "#/components/schemas/Search_Clause_1"
-    CustomEnrichmentData_oneOf:
-      additionalProperties: false
-      example:
-        definition:
-          fileName: fileName
-          isQueryOnly: true
-          fileSize: 0
-          name: name
-          description: description
-          id: 6
-          version: 1
-        textual: textual
-      properties:
-        definition:
-          $ref: "#/components/schemas/CustomEnrichment"
-        textual:
-          type: string
-      type: object
-    CustomEnrichmentData_oneOf_1:
-      additionalProperties: false
-      properties:
-        binary:
-          format: byte
-          type: string
-        definition:
-          $ref: "#/components/schemas/CustomEnrichment"
-      type: object
-    File_1:
-      additionalProperties: false
-      description: This data structure represents a file
-      externalDocs:
-        description: Find out more about enrichments
-        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
-      properties:
-        extension:
-          example: csv
-          type: string
-        name:
-          example: file_name
-          type: string
-        size:
-          example: 100
-          format: int64
-          type: integer
-        textual:
-          example: "row1,row2 value1,value2"
-          type: string
-      title: File
-      type: object
-    File_2:
-      additionalProperties: false
-      description: This data structure represents a file
-      externalDocs:
-        description: Find out more about enrichments
-        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
-      properties:
-        binary:
-          example: !!binary |-
-            MHhGQUJCMzI=
-          format: byte
-          type: string
-        extension:
-          example: csv
-          type: string
-        name:
-          example: file_name
-          type: string
-        size:
-          example: 100
-          format: int64
-          type: integer
-      title: File
-      type: object
-    FilterPathAndValues_1:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValues_2:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
+      - $ref: "#/components/schemas/SearchClauseId"
+      - $ref: "#/components/schemas/SearchClauseName"
   securitySchemes:
     apiKeyAuth:
       description: API key authentication

@@ -1110,6 +1110,33 @@
         "description": "Response confirming the successful bulk addition of users to multiple team groups.",
         "type": "object"
       },
+      "ColorsByAggregation": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/ColorsByAggregation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByGroupBy": {
+        "type": "object",
+        "properties": {
+          "groupBy": {
+            "$ref": "#/components/schemas/ColorsByGroupBy"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByStack": {
+        "type": "object",
+        "properties": {
+          "stack": {
+            "$ref": "#/components/schemas/ColorsByStack"
+          }
+        },
+        "additionalProperties": false
+      },
       "CreateTeamGroupResponse": {
         "externalDocs": {
           "description": "Find out more about groups",
@@ -1147,50 +1174,56 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "multipleValues": {
-                "$ref": "#/components/schemas/MultipleValues"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "filters": {
-                "$ref": "#/components/schemas/Filters"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
+      },
+      "FilterPathAndValuesFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "FilterPathAndValuesMultipleValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
       },
       "FilterType": {
         "type": "string",
@@ -1227,48 +1260,54 @@
       "GetGroupUsersResponse": {
         "oneOf": [
           {
-            "externalDocs": {
-              "description": "Find out more about groups",
-              "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
-            },
-            "title": "GetGroupUsersResponse",
-            "description": "Response containing the list of all users currently assigned to the requested team group.",
-            "type": "object",
-            "properties": {
-              "noMorePages": {
-                "$ref": "#/components/schemas/NoMorePages"
-              },
-              "users": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/v1.User"
-                }
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/GetGroupUsersResponseNoMorePages"
           },
           {
-            "externalDocs": {
-              "description": "Find out more about groups",
-              "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
-            },
-            "title": "GetGroupUsersResponse",
-            "description": "Response containing the list of all users currently assigned to the requested team group.",
-            "type": "object",
-            "properties": {
-              "token": {
-                "$ref": "#/components/schemas/NextPageToken"
-              },
-              "users": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/v1.User"
-                }
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/GetGroupUsersResponseToken"
           }
         ]
+      },
+      "GetGroupUsersResponseNoMorePages": {
+        "externalDocs": {
+          "description": "Find out more about groups",
+          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+        },
+        "title": "GetGroupUsersResponse",
+        "description": "Response containing the list of all users currently assigned to the requested team group.",
+        "type": "object",
+        "properties": {
+          "noMorePages": {
+            "$ref": "#/components/schemas/NoMorePages"
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/v1.User"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetGroupUsersResponseToken": {
+        "externalDocs": {
+          "description": "Find out more about groups",
+          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+        },
+        "title": "GetGroupUsersResponse",
+        "description": "Response containing the list of all users currently assigned to the requested team group.",
+        "type": "object",
+        "properties": {
+          "token": {
+            "$ref": "#/components/schemas/NextPageToken"
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/v1.User"
+            }
+          }
+        },
+        "additionalProperties": false
       },
       "GetTeamGroupByNameResponse": {
         "externalDocs": {
@@ -1310,8 +1349,7 @@
           "scope": {
             "$ref": "#/components/schemas/permissions.v1.Scope"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "GetTeamGroupsResponse": {
         "externalDocs": {
@@ -1537,8 +1575,7 @@
             "type": "string",
             "format": "date-time"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "TeamGroupId": {
         "externalDocs": {
@@ -1588,6 +1625,24 @@
             }
           }
         }
+      },
+      "YAxisViewByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/YAxisViewByCategory"
+          }
+        },
+        "additionalProperties": false
+      },
+      "YAxisViewByValue": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/YAxisViewByValue"
+          }
+        },
+        "additionalProperties": false
       },
       "common.Group": {
         "type": "object",
