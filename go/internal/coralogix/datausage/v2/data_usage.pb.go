@@ -32,6 +32,7 @@ const (
 	Range_RANGE_LAST_30_DAYS  Range = 2
 	Range_RANGE_LAST_90_DAYS  Range = 3
 	Range_RANGE_LAST_WEEK     Range = 4
+	Range_RANGE_LAST_YEAR     Range = 5
 )
 
 // Enum value maps for Range.
@@ -42,6 +43,7 @@ var (
 		2: "RANGE_LAST_30_DAYS",
 		3: "RANGE_LAST_90_DAYS",
 		4: "RANGE_LAST_WEEK",
+		5: "RANGE_LAST_YEAR",
 	}
 	Range_value = map[string]int32{
 		"RANGE_UNSPECIFIED":   0,
@@ -49,6 +51,7 @@ var (
 		"RANGE_LAST_30_DAYS":  2,
 		"RANGE_LAST_90_DAYS":  3,
 		"RANGE_LAST_WEEK":     4,
+		"RANGE_LAST_YEAR":     5,
 	}
 )
 
@@ -1200,13 +1203,14 @@ const file_com_coralogix_datausage_v2_data_usage_proto_rawDesc = "" +
 	"\n" +
 	"Evaluation\x12C\n" +
 	"\x0eevaluator_name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\revaluatorName\x12N\n" +
-	"\x11evaluation_tokens\x18\x02 \x01(\v2!.com.coralogix.datausage.v2.TokenR\x10evaluationTokens*|\n" +
+	"\x11evaluation_tokens\x18\x02 \x01(\v2!.com.coralogix.datausage.v2.TokenR\x10evaluationTokens*\x91\x01\n" +
 	"\x05Range\x12\x15\n" +
 	"\x11RANGE_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13RANGE_CURRENT_MONTH\x10\x01\x12\x16\n" +
 	"\x12RANGE_LAST_30_DAYS\x10\x02\x12\x16\n" +
 	"\x12RANGE_LAST_90_DAYS\x10\x03\x12\x13\n" +
-	"\x0fRANGE_LAST_WEEK\x10\x04*\x7f\n" +
+	"\x0fRANGE_LAST_WEEK\x10\x04\x12\x13\n" +
+	"\x0fRANGE_LAST_YEAR\x10\x05*\x7f\n" +
 	"\x06Pillar\x12\x16\n" +
 	"\x12PILLAR_UNSPECIFIED\x10\x00\x12\x12\n" +
 	"\x0ePILLAR_METRICS\x10\x01\x12\x0f\n" +
