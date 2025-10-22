@@ -87,8 +87,8 @@ commit_hash = "5921c0e9bea453e15a75845dcfffc29cd5a1950b"
 [[dependencies]]
 name = "cx-api-metrics-configurator"
 url = "github.com/coralogix/cx-api-metrics-configurator"
-revision = "v0.0.7"
-commit_hash = "3375a13ba3f09e976d932abeef046a90f56dce7a"
+revision = "v0.0.8"
+commit_hash = "e403cfc9c89159e6a9a22d5c9120e0c4855f6deb"
 
 [[dependencies]]
 name = "cx-api-metrics-rule-manager"
