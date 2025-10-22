@@ -203,6 +203,7 @@ const (
 	Range_RANGE_LAST_30_DAYS  Range = 2
 	Range_RANGE_LAST_90_DAYS  Range = 3
 	Range_RANGE_LAST_WEEK     Range = 4
+	Range_RANGE_LAST_YEAR     Range = 5
 )
 
 // Enum value maps for Range.
@@ -213,6 +214,7 @@ var (
 		2: "RANGE_LAST_30_DAYS",
 		3: "RANGE_LAST_90_DAYS",
 		4: "RANGE_LAST_WEEK",
+		5: "RANGE_LAST_YEAR",
 	}
 	Range_value = map[string]int32{
 		"RANGE_UNSPECIFIED":   0,
@@ -220,6 +222,7 @@ var (
 		"RANGE_LAST_30_DAYS":  2,
 		"RANGE_LAST_90_DAYS":  3,
 		"RANGE_LAST_WEEK":     4,
+		"RANGE_LAST_YEAR":     5,
 	}
 )
 
@@ -577,13 +580,14 @@ const file_com_coralogix_datausage_v1_common_proto_rawDesc = "" +
 	"\rSEVERITY_INFO\x10\x03\x12\x14\n" +
 	"\x10SEVERITY_WARNING\x10\x04\x12\x12\n" +
 	"\x0eSEVERITY_ERROR\x10\x05\x12\x15\n" +
-	"\x11SEVERITY_CRITICAL\x10\x06*|\n" +
+	"\x11SEVERITY_CRITICAL\x10\x06*\x91\x01\n" +
 	"\x05Range\x12\x15\n" +
 	"\x11RANGE_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13RANGE_CURRENT_MONTH\x10\x01\x12\x16\n" +
 	"\x12RANGE_LAST_30_DAYS\x10\x02\x12\x16\n" +
 	"\x12RANGE_LAST_90_DAYS\x10\x03\x12\x13\n" +
-	"\x0fRANGE_LAST_WEEK\x10\x04*\xe4\x01\n" +
+	"\x0fRANGE_LAST_WEEK\x10\x04\x12\x13\n" +
+	"\x0fRANGE_LAST_YEAR\x10\x05*\xe4\x01\n" +
 	"\n" +
 	"Resolution\x12\x1a\n" +
 	"\x16RESOLUTION_UNSPECIFIED\x10\x00\x12\x19\n" +

@@ -45,6 +45,7 @@ enum Range {
   RANGE_LAST_30_DAYS = 2;
   RANGE_LAST_90_DAYS = 3;
   RANGE_LAST_WEEK = 4;
+  RANGE_LAST_YEAR = 5;
 }
 
 enum Pillar {
