@@ -67,21 +67,10 @@
                 "type": "object",
                 "properties": {
                   "direction": {
-                    "example": "ORDER_BY_DIRECTION_ASC",
-                    "type": "string",
-                    "enum": [
-                      "ORDER_BY_DIRECTION_UNSPECIFIED",
-                      "ORDER_BY_DIRECTION_ASC",
-                      "ORDER_BY_DIRECTION_DESC"
-                    ]
+                    "$ref": "#/components/schemas/events.v3.OrderByDirection"
                   },
                   "fieldName": {
-                    "example": "ORDER_BY_FIELDS_TIMESTAMP",
-                    "type": "string",
-                    "enum": [
-                      "ORDER_BY_FIELDS_UNSPECIFIED",
-                      "ORDER_BY_FIELDS_TIMESTAMP"
-                    ]
+                    "$ref": "#/components/schemas/events.v3.OrderByFields"
                   }
                 }
               }
@@ -186,21 +175,10 @@
                 "type": "object",
                 "properties": {
                   "direction": {
-                    "example": "ORDER_BY_DIRECTION_ASC",
-                    "type": "string",
-                    "enum": [
-                      "ORDER_BY_DIRECTION_UNSPECIFIED",
-                      "ORDER_BY_DIRECTION_ASC",
-                      "ORDER_BY_DIRECTION_DESC"
-                    ]
+                    "$ref": "#/components/schemas/events.v3.OrderByDirection"
                   },
                   "fieldName": {
-                    "example": "ORDER_BY_FIELDS_TIMESTAMP",
-                    "type": "string",
-                    "enum": [
-                      "ORDER_BY_FIELDS_UNSPECIFIED",
-                      "ORDER_BY_FIELDS_TIMESTAMP"
-                    ]
+                    "$ref": "#/components/schemas/events.v3.OrderByFields"
                   }
                 }
               }
@@ -315,21 +293,10 @@
                 "type": "object",
                 "properties": {
                   "direction": {
-                    "example": "ORDER_BY_DIRECTION_ASC",
-                    "type": "string",
-                    "enum": [
-                      "ORDER_BY_DIRECTION_UNSPECIFIED",
-                      "ORDER_BY_DIRECTION_ASC",
-                      "ORDER_BY_DIRECTION_DESC"
-                    ]
+                    "$ref": "#/components/schemas/events.v3.OrderByDirection"
                   },
                   "fieldName": {
-                    "example": "ORDER_BY_FIELDS_TIMESTAMP",
-                    "type": "string",
-                    "enum": [
-                      "ORDER_BY_FIELDS_UNSPECIFIED",
-                      "ORDER_BY_FIELDS_TIMESTAMP"
-                    ]
+                    "$ref": "#/components/schemas/events.v3.OrderByFields"
                   }
                 }
               }
@@ -625,6 +592,33 @@
           }
         }
       },
+      "ColorsByAggregation": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/ColorsByAggregation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByGroupBy": {
+        "type": "object",
+        "properties": {
+          "groupBy": {
+            "$ref": "#/components/schemas/ColorsByGroupBy"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByStack": {
+        "type": "object",
+        "properties": {
+          "stack": {
+            "$ref": "#/components/schemas/ColorsByStack"
+          }
+        },
+        "additionalProperties": false
+      },
       "CxEvent": {
         "externalDocs": {
           "description": "Find out more about events",
@@ -718,40 +712,46 @@
       "CxEventSingleOrMultiple": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "CxEventSingleOrMultiple",
-            "description": "This data structure represents a single or multiple events",
-            "type": "object",
-            "properties": {
-              "singleEvent": {
-                "$ref": "#/components/schemas/CxEvent"
-              }
-            },
-            "required": [
-              "event"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/CxEventSingleOrMultipleSingleEvent"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "CxEventSingleOrMultiple",
-            "description": "This data structure represents a single or multiple events",
-            "type": "object",
-            "properties": {
-              "multipleEvents": {
-                "$ref": "#/components/schemas/CxEventArray"
-              }
-            },
-            "required": [
-              "event"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/CxEventSingleOrMultipleMultipleEvents"
           }
         ]
+      },
+      "CxEventSingleOrMultipleMultipleEvents": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "CxEventSingleOrMultiple",
+        "description": "This data structure represents a single or multiple events",
+        "type": "object",
+        "properties": {
+          "multipleEvents": {
+            "$ref": "#/components/schemas/CxEventArray"
+          }
+        },
+        "required": [
+          "event"
+        ],
+        "additionalProperties": false
+      },
+      "CxEventSingleOrMultipleSingleEvent": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "CxEventSingleOrMultiple",
+        "description": "This data structure represents a single or multiple events",
+        "type": "object",
+        "properties": {
+          "singleEvent": {
+            "$ref": "#/components/schemas/CxEvent"
+          }
+        },
+        "required": [
+          "event"
+        ],
+        "additionalProperties": false
       },
       "FieldGroup": {
         "type": "object",
@@ -779,50 +779,56 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "multipleValues": {
-                "$ref": "#/components/schemas/MultipleValues"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "filters": {
-                "$ref": "#/components/schemas/Filters"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
+      },
+      "FilterPathAndValuesFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "FilterPathAndValuesMultipleValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
       },
       "Filters": {
         "externalDocs": {
@@ -941,6 +947,24 @@
           }
         }
       },
+      "YAxisViewByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/YAxisViewByCategory"
+          }
+        },
+        "additionalProperties": false
+      },
+      "YAxisViewByValue": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/YAxisViewByValue"
+          }
+        },
+        "additionalProperties": false
+      },
       "common.Group": {
         "type": "object",
         "properties": {
@@ -964,6 +988,21 @@
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "events.v3.OrderByDirection": {
+        "type": "string",
+        "enum": [
+          "ORDER_BY_DIRECTION_UNSPECIFIED",
+          "ORDER_BY_DIRECTION_ASC",
+          "ORDER_BY_DIRECTION_DESC"
+        ]
+      },
+      "events.v3.OrderByFields": {
+        "type": "string",
+        "enum": [
+          "ORDER_BY_FIELDS_UNSPECIFIED",
+          "ORDER_BY_FIELDS_TIMESTAMP"
         ]
       },
       "events.v3.PaginationResponse": {

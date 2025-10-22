@@ -330,6 +330,24 @@ paths:
             --data '{"filters":{"filters":[{"name":"applicationName","selectedValues":{"demo":true,"cs-rest-test1":true}}]},"folderId":"3dc02998-0b50-4ea8-b68a-4779d716fa1f","isCompactMode":true,"name":"Logs view","searchQuery":{"query":"string"},"timeSelection":{"quickSelection":{"caption":"Last Hour","seconds":3600}},"viewType":"VIEW_TYPE_UNSPECIFIED"}'
 components:
   schemas:
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
     CustomTimeSelection:
       externalDocs:
         url: ""
@@ -359,8 +377,40 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValues_1"
-      - $ref: "#/components/schemas/FilterPathAndValues_2"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
     Filters:
       description: This data structure represents a filter
       externalDocs:
@@ -489,8 +539,24 @@ components:
       type: object
     TimeSelection:
       oneOf:
-      - $ref: "#/components/schemas/TimeSelection_oneOf"
-      - $ref: "#/components/schemas/TimeSelection_oneOf_1"
+      - $ref: "#/components/schemas/TimeSelectionQuickSelection"
+      - $ref: "#/components/schemas/TimeSelectionCustomSelection"
+    TimeSelectionCustomSelection:
+      additionalProperties: false
+      properties:
+        customSelection:
+          $ref: "#/components/schemas/CustomTimeSelection"
+      type: object
+    TimeSelectionQuickSelection:
+      additionalProperties: false
+      example:
+        quickSelection:
+          seconds: 3600
+          caption: Last Hour
+      properties:
+        quickSelection:
+          $ref: "#/components/schemas/QuickTimeSelection"
+      type: object
     View:
       description: Response for views.
       example:
@@ -559,6 +625,18 @@ components:
       - VIEW_TYPE_ARCHIVE_LOGS
       - VIEW_TYPE_ARCHIVE_TEMPLATES
       type: string
+    YAxisViewByCategory:
+      additionalProperties: false
+      properties:
+        category:
+          $ref: "#/components/schemas/YAxisViewByCategory"
+      type: object
+    YAxisViewByValue:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: "#/components/schemas/YAxisViewByValue"
+      type: object
     common.Group:
       properties:
         field:
@@ -689,54 +767,6 @@ components:
       - name
       - timeSelection
       title: View
-      type: object
-    FilterPathAndValues_1:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValues_2:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    TimeSelection_oneOf:
-      additionalProperties: false
-      example:
-        quickSelection:
-          seconds: 3600
-          caption: Last Hour
-      properties:
-        quickSelection:
-          $ref: "#/components/schemas/QuickTimeSelection"
-      type: object
-    TimeSelection_oneOf_1:
-      additionalProperties: false
-      properties:
-        customSelection:
-          $ref: "#/components/schemas/CustomTimeSelection"
       type: object
   securitySchemes:
     apiKeyAuth:

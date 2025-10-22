@@ -23,7 +23,7 @@ var _ MappedNullable = &ReplaceSloRequest{}
 type ReplaceSloRequest struct {
 	// Deprecated
 	SilenceDataValidations *bool `json:"silenceDataValidations,omitempty"`
-	Slo CreateSloRequestSlo `json:"slo"`
+	Slo Slo `json:"slo"`
 }
 
 type _ReplaceSloRequest ReplaceSloRequest
@@ -32,7 +32,7 @@ type _ReplaceSloRequest ReplaceSloRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReplaceSloRequest(slo CreateSloRequestSlo) *ReplaceSloRequest {
+func NewReplaceSloRequest(slo Slo) *ReplaceSloRequest {
 	this := ReplaceSloRequest{}
 	this.Slo = slo
 	return &this
@@ -82,9 +82,9 @@ func (o *ReplaceSloRequest) SetSilenceDataValidations(v bool) {
 }
 
 // GetSlo returns the Slo field value
-func (o *ReplaceSloRequest) GetSlo() CreateSloRequestSlo {
+func (o *ReplaceSloRequest) GetSlo() Slo {
 	if o == nil {
-		var ret CreateSloRequestSlo
+		var ret Slo
 		return ret
 	}
 
@@ -93,7 +93,7 @@ func (o *ReplaceSloRequest) GetSlo() CreateSloRequestSlo {
 
 // GetSloOk returns a tuple with the Slo field value
 // and a boolean to check if the value has been set.
-func (o *ReplaceSloRequest) GetSloOk() (*CreateSloRequestSlo, bool) {
+func (o *ReplaceSloRequest) GetSloOk() (*Slo, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -101,7 +101,7 @@ func (o *ReplaceSloRequest) GetSloOk() (*CreateSloRequestSlo, bool) {
 }
 
 // SetSlo sets field value
-func (o *ReplaceSloRequest) SetSlo(v CreateSloRequestSlo) {
+func (o *ReplaceSloRequest) SetSlo(v Slo) {
 	o.Slo = v
 }
 

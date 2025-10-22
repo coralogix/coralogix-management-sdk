@@ -18,21 +18,21 @@ import (
 
 // XAxis - struct for XAxis
 type XAxis struct {
-	XAxisOneOf *XAxisOneOf
-	XAxisOneOf1 *XAxisOneOf1
+	XAxisTime *XAxisTime
+	XAxisValue *XAxisValue
 }
 
-// XAxisOneOfAsXAxis is a convenience function that returns XAxisOneOf wrapped in XAxis
-func XAxisOneOfAsXAxis(v *XAxisOneOf) XAxis {
+// XAxisTimeAsXAxis is a convenience function that returns XAxisTime wrapped in XAxis
+func XAxisTimeAsXAxis(v *XAxisTime) XAxis {
 	return XAxis{
-		XAxisOneOf: v,
+		XAxisTime: v,
 	}
 }
 
-// XAxisOneOf1AsXAxis is a convenience function that returns XAxisOneOf1 wrapped in XAxis
-func XAxisOneOf1AsXAxis(v *XAxisOneOf1) XAxis {
+// XAxisValueAsXAxis is a convenience function that returns XAxisValue wrapped in XAxis
+func XAxisValueAsXAxis(v *XAxisValue) XAxis {
 	return XAxis{
-		XAxisOneOf1: v,
+		XAxisValue: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func XAxisOneOf1AsXAxis(v *XAxisOneOf1) XAxis {
 func (dst *XAxis) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into XAxisOneOf
-	err = newStrictDecoder(data).Decode(&dst.XAxisOneOf)
+	// try to unmarshal data into XAxisTime
+	err = newStrictDecoder(data).Decode(&dst.XAxisTime)
 	if err == nil {
-		jsonXAxisOneOf, _ := json.Marshal(dst.XAxisOneOf)
-		if string(jsonXAxisOneOf) == "{}" { // empty struct
-			dst.XAxisOneOf = nil
+		jsonXAxisTime, _ := json.Marshal(dst.XAxisTime)
+		if string(jsonXAxisTime) == "{}" { // empty struct
+			dst.XAxisTime = nil
 		} else {
-			if err = validator.Validate(dst.XAxisOneOf); err != nil {
-				dst.XAxisOneOf = nil
+			if err = validator.Validate(dst.XAxisTime); err != nil {
+				dst.XAxisTime = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.XAxisOneOf = nil
+		dst.XAxisTime = nil
 	}
 
-	// try to unmarshal data into XAxisOneOf1
-	err = newStrictDecoder(data).Decode(&dst.XAxisOneOf1)
+	// try to unmarshal data into XAxisValue
+	err = newStrictDecoder(data).Decode(&dst.XAxisValue)
 	if err == nil {
-		jsonXAxisOneOf1, _ := json.Marshal(dst.XAxisOneOf1)
-		if string(jsonXAxisOneOf1) == "{}" { // empty struct
-			dst.XAxisOneOf1 = nil
+		jsonXAxisValue, _ := json.Marshal(dst.XAxisValue)
+		if string(jsonXAxisValue) == "{}" { // empty struct
+			dst.XAxisValue = nil
 		} else {
-			if err = validator.Validate(dst.XAxisOneOf1); err != nil {
-				dst.XAxisOneOf1 = nil
+			if err = validator.Validate(dst.XAxisValue); err != nil {
+				dst.XAxisValue = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.XAxisOneOf1 = nil
+		dst.XAxisValue = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.XAxisOneOf = nil
-		dst.XAxisOneOf1 = nil
+		dst.XAxisTime = nil
+		dst.XAxisValue = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(XAxis)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *XAxis) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src XAxis) MarshalJSON() ([]byte, error) {
-	if src.XAxisOneOf != nil {
-		return json.Marshal(&src.XAxisOneOf)
+	if src.XAxisTime != nil {
+		return json.Marshal(&src.XAxisTime)
 	}
 
-	if src.XAxisOneOf1 != nil {
-		return json.Marshal(&src.XAxisOneOf1)
+	if src.XAxisValue != nil {
+		return json.Marshal(&src.XAxisValue)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *XAxis) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.XAxisOneOf != nil {
-		return obj.XAxisOneOf
+	if obj.XAxisTime != nil {
+		return obj.XAxisTime
 	}
 
-	if obj.XAxisOneOf1 != nil {
-		return obj.XAxisOneOf1
+	if obj.XAxisValue != nil {
+		return obj.XAxisValue
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *XAxis) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj XAxis) GetActualInstanceValue() (interface{}) {
-	if obj.XAxisOneOf != nil {
-		return *obj.XAxisOneOf
+	if obj.XAxisTime != nil {
+		return *obj.XAxisTime
 	}
 
-	if obj.XAxisOneOf1 != nil {
-		return *obj.XAxisOneOf1
+	if obj.XAxisValue != nil {
+		return *obj.XAxisValue
 	}
 
 	// all schemas are nil

@@ -12,295 +12,276 @@ package integration_service
 
 import (
 	"encoding/json"
+	"fmt"
+	"gopkg.in/validator.v2"
 )
 
-// checks if the IntegrationRevision type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &IntegrationRevision{}
-
-// IntegrationRevision This data structure represents an integration revision.
+// IntegrationRevision - struct for IntegrationRevision
 type IntegrationRevision struct {
-	CloudFormation *CloudFormationTemplate `json:"cloudFormation,omitempty"`
-	FeatureFlag *string `json:"featureFlag,omitempty"`
-	Fields []FieldInformation `json:"fields,omitempty"`
-	Groups []IntegrationRevisionGroup `json:"groups,omitempty"`
-	Id *string `json:"id,omitempty"`
-	RevisionDeploymentSupported *bool `json:"revisionDeploymentSupported,omitempty"`
-	UpgradeInstructionsMd *string `json:"upgradeInstructionsMd,omitempty"`
+	IntegrationRevisionAzureArmTemplate *IntegrationRevisionAzureArmTemplate
+	IntegrationRevisionCloudFormation *IntegrationRevisionCloudFormation
+	IntegrationRevisionHelmChart *IntegrationRevisionHelmChart
+	IntegrationRevisionManagedService *IntegrationRevisionManagedService
+	IntegrationRevisionRum *IntegrationRevisionRum
+	IntegrationRevisionTerraform *IntegrationRevisionTerraform
 }
 
-// NewIntegrationRevision instantiates a new IntegrationRevision object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewIntegrationRevision() *IntegrationRevision {
-	this := IntegrationRevision{}
-	return &this
-}
-
-// NewIntegrationRevisionWithDefaults instantiates a new IntegrationRevision object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewIntegrationRevisionWithDefaults() *IntegrationRevision {
-	this := IntegrationRevision{}
-	return &this
-}
-
-// GetCloudFormation returns the CloudFormation field value if set, zero value otherwise.
-func (o *IntegrationRevision) GetCloudFormation() CloudFormationTemplate {
-	if o == nil || IsNil(o.CloudFormation) {
-		var ret CloudFormationTemplate
-		return ret
+// IntegrationRevisionAzureArmTemplateAsIntegrationRevision is a convenience function that returns IntegrationRevisionAzureArmTemplate wrapped in IntegrationRevision
+func IntegrationRevisionAzureArmTemplateAsIntegrationRevision(v *IntegrationRevisionAzureArmTemplate) IntegrationRevision {
+	return IntegrationRevision{
+		IntegrationRevisionAzureArmTemplate: v,
 	}
-	return *o.CloudFormation
 }
 
-// GetCloudFormationOk returns a tuple with the CloudFormation field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IntegrationRevision) GetCloudFormationOk() (*CloudFormationTemplate, bool) {
-	if o == nil || IsNil(o.CloudFormation) {
-		return nil, false
+// IntegrationRevisionCloudFormationAsIntegrationRevision is a convenience function that returns IntegrationRevisionCloudFormation wrapped in IntegrationRevision
+func IntegrationRevisionCloudFormationAsIntegrationRevision(v *IntegrationRevisionCloudFormation) IntegrationRevision {
+	return IntegrationRevision{
+		IntegrationRevisionCloudFormation: v,
 	}
-	return o.CloudFormation, true
 }
 
-// HasCloudFormation returns a boolean if a field has been set.
-func (o *IntegrationRevision) HasCloudFormation() bool {
-	if o != nil && !IsNil(o.CloudFormation) {
-		return true
+// IntegrationRevisionHelmChartAsIntegrationRevision is a convenience function that returns IntegrationRevisionHelmChart wrapped in IntegrationRevision
+func IntegrationRevisionHelmChartAsIntegrationRevision(v *IntegrationRevisionHelmChart) IntegrationRevision {
+	return IntegrationRevision{
+		IntegrationRevisionHelmChart: v,
 	}
-
-	return false
 }
 
-// SetCloudFormation gets a reference to the given CloudFormationTemplate and assigns it to the CloudFormation field.
-func (o *IntegrationRevision) SetCloudFormation(v CloudFormationTemplate) {
-	o.CloudFormation = &v
-}
-
-// GetFeatureFlag returns the FeatureFlag field value if set, zero value otherwise.
-func (o *IntegrationRevision) GetFeatureFlag() string {
-	if o == nil || IsNil(o.FeatureFlag) {
-		var ret string
-		return ret
+// IntegrationRevisionManagedServiceAsIntegrationRevision is a convenience function that returns IntegrationRevisionManagedService wrapped in IntegrationRevision
+func IntegrationRevisionManagedServiceAsIntegrationRevision(v *IntegrationRevisionManagedService) IntegrationRevision {
+	return IntegrationRevision{
+		IntegrationRevisionManagedService: v,
 	}
-	return *o.FeatureFlag
 }
 
-// GetFeatureFlagOk returns a tuple with the FeatureFlag field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IntegrationRevision) GetFeatureFlagOk() (*string, bool) {
-	if o == nil || IsNil(o.FeatureFlag) {
-		return nil, false
+// IntegrationRevisionRumAsIntegrationRevision is a convenience function that returns IntegrationRevisionRum wrapped in IntegrationRevision
+func IntegrationRevisionRumAsIntegrationRevision(v *IntegrationRevisionRum) IntegrationRevision {
+	return IntegrationRevision{
+		IntegrationRevisionRum: v,
 	}
-	return o.FeatureFlag, true
 }
 
-// HasFeatureFlag returns a boolean if a field has been set.
-func (o *IntegrationRevision) HasFeatureFlag() bool {
-	if o != nil && !IsNil(o.FeatureFlag) {
-		return true
+// IntegrationRevisionTerraformAsIntegrationRevision is a convenience function that returns IntegrationRevisionTerraform wrapped in IntegrationRevision
+func IntegrationRevisionTerraformAsIntegrationRevision(v *IntegrationRevisionTerraform) IntegrationRevision {
+	return IntegrationRevision{
+		IntegrationRevisionTerraform: v,
+	}
+}
+
+
+// Unmarshal JSON data into one of the pointers in the struct
+func (dst *IntegrationRevision) UnmarshalJSON(data []byte) error {
+	var err error
+	match := 0
+	// try to unmarshal data into IntegrationRevisionAzureArmTemplate
+	err = newStrictDecoder(data).Decode(&dst.IntegrationRevisionAzureArmTemplate)
+	if err == nil {
+		jsonIntegrationRevisionAzureArmTemplate, _ := json.Marshal(dst.IntegrationRevisionAzureArmTemplate)
+		if string(jsonIntegrationRevisionAzureArmTemplate) == "{}" { // empty struct
+			dst.IntegrationRevisionAzureArmTemplate = nil
+		} else {
+			if err = validator.Validate(dst.IntegrationRevisionAzureArmTemplate); err != nil {
+				dst.IntegrationRevisionAzureArmTemplate = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.IntegrationRevisionAzureArmTemplate = nil
 	}
 
-	return false
-}
-
-// SetFeatureFlag gets a reference to the given string and assigns it to the FeatureFlag field.
-func (o *IntegrationRevision) SetFeatureFlag(v string) {
-	o.FeatureFlag = &v
-}
-
-// GetFields returns the Fields field value if set, zero value otherwise.
-func (o *IntegrationRevision) GetFields() []FieldInformation {
-	if o == nil || IsNil(o.Fields) {
-		var ret []FieldInformation
-		return ret
-	}
-	return o.Fields
-}
-
-// GetFieldsOk returns a tuple with the Fields field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IntegrationRevision) GetFieldsOk() ([]FieldInformation, bool) {
-	if o == nil || IsNil(o.Fields) {
-		return nil, false
-	}
-	return o.Fields, true
-}
-
-// HasFields returns a boolean if a field has been set.
-func (o *IntegrationRevision) HasFields() bool {
-	if o != nil && !IsNil(o.Fields) {
-		return true
+	// try to unmarshal data into IntegrationRevisionCloudFormation
+	err = newStrictDecoder(data).Decode(&dst.IntegrationRevisionCloudFormation)
+	if err == nil {
+		jsonIntegrationRevisionCloudFormation, _ := json.Marshal(dst.IntegrationRevisionCloudFormation)
+		if string(jsonIntegrationRevisionCloudFormation) == "{}" { // empty struct
+			dst.IntegrationRevisionCloudFormation = nil
+		} else {
+			if err = validator.Validate(dst.IntegrationRevisionCloudFormation); err != nil {
+				dst.IntegrationRevisionCloudFormation = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.IntegrationRevisionCloudFormation = nil
 	}
 
-	return false
+	// try to unmarshal data into IntegrationRevisionHelmChart
+	err = newStrictDecoder(data).Decode(&dst.IntegrationRevisionHelmChart)
+	if err == nil {
+		jsonIntegrationRevisionHelmChart, _ := json.Marshal(dst.IntegrationRevisionHelmChart)
+		if string(jsonIntegrationRevisionHelmChart) == "{}" { // empty struct
+			dst.IntegrationRevisionHelmChart = nil
+		} else {
+			if err = validator.Validate(dst.IntegrationRevisionHelmChart); err != nil {
+				dst.IntegrationRevisionHelmChart = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.IntegrationRevisionHelmChart = nil
+	}
+
+	// try to unmarshal data into IntegrationRevisionManagedService
+	err = newStrictDecoder(data).Decode(&dst.IntegrationRevisionManagedService)
+	if err == nil {
+		jsonIntegrationRevisionManagedService, _ := json.Marshal(dst.IntegrationRevisionManagedService)
+		if string(jsonIntegrationRevisionManagedService) == "{}" { // empty struct
+			dst.IntegrationRevisionManagedService = nil
+		} else {
+			if err = validator.Validate(dst.IntegrationRevisionManagedService); err != nil {
+				dst.IntegrationRevisionManagedService = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.IntegrationRevisionManagedService = nil
+	}
+
+	// try to unmarshal data into IntegrationRevisionRum
+	err = newStrictDecoder(data).Decode(&dst.IntegrationRevisionRum)
+	if err == nil {
+		jsonIntegrationRevisionRum, _ := json.Marshal(dst.IntegrationRevisionRum)
+		if string(jsonIntegrationRevisionRum) == "{}" { // empty struct
+			dst.IntegrationRevisionRum = nil
+		} else {
+			if err = validator.Validate(dst.IntegrationRevisionRum); err != nil {
+				dst.IntegrationRevisionRum = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.IntegrationRevisionRum = nil
+	}
+
+	// try to unmarshal data into IntegrationRevisionTerraform
+	err = newStrictDecoder(data).Decode(&dst.IntegrationRevisionTerraform)
+	if err == nil {
+		jsonIntegrationRevisionTerraform, _ := json.Marshal(dst.IntegrationRevisionTerraform)
+		if string(jsonIntegrationRevisionTerraform) == "{}" { // empty struct
+			dst.IntegrationRevisionTerraform = nil
+		} else {
+			if err = validator.Validate(dst.IntegrationRevisionTerraform); err != nil {
+				dst.IntegrationRevisionTerraform = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.IntegrationRevisionTerraform = nil
+	}
+
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.IntegrationRevisionAzureArmTemplate = nil
+		dst.IntegrationRevisionCloudFormation = nil
+		dst.IntegrationRevisionHelmChart = nil
+		dst.IntegrationRevisionManagedService = nil
+		dst.IntegrationRevisionRum = nil
+		dst.IntegrationRevisionTerraform = nil
+
+		return fmt.Errorf("data matches more than one schema in oneOf(IntegrationRevision)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("data failed to match schemas in oneOf(IntegrationRevision)")
+	}
 }
 
-// SetFields gets a reference to the given []FieldInformation and assigns it to the Fields field.
-func (o *IntegrationRevision) SetFields(v []FieldInformation) {
-	o.Fields = v
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src IntegrationRevision) MarshalJSON() ([]byte, error) {
+	if src.IntegrationRevisionAzureArmTemplate != nil {
+		return json.Marshal(&src.IntegrationRevisionAzureArmTemplate)
+	}
+
+	if src.IntegrationRevisionCloudFormation != nil {
+		return json.Marshal(&src.IntegrationRevisionCloudFormation)
+	}
+
+	if src.IntegrationRevisionHelmChart != nil {
+		return json.Marshal(&src.IntegrationRevisionHelmChart)
+	}
+
+	if src.IntegrationRevisionManagedService != nil {
+		return json.Marshal(&src.IntegrationRevisionManagedService)
+	}
+
+	if src.IntegrationRevisionRum != nil {
+		return json.Marshal(&src.IntegrationRevisionRum)
+	}
+
+	if src.IntegrationRevisionTerraform != nil {
+		return json.Marshal(&src.IntegrationRevisionTerraform)
+	}
+
+	return nil, nil // no data in oneOf schemas
 }
 
-// GetGroups returns the Groups field value if set, zero value otherwise.
-func (o *IntegrationRevision) GetGroups() []IntegrationRevisionGroup {
-	if o == nil || IsNil(o.Groups) {
-		var ret []IntegrationRevisionGroup
-		return ret
+// Get the actual instance
+func (obj *IntegrationRevision) GetActualInstance() (interface{}) {
+	if obj == nil {
+		return nil
 	}
-	return o.Groups
+	if obj.IntegrationRevisionAzureArmTemplate != nil {
+		return obj.IntegrationRevisionAzureArmTemplate
+	}
+
+	if obj.IntegrationRevisionCloudFormation != nil {
+		return obj.IntegrationRevisionCloudFormation
+	}
+
+	if obj.IntegrationRevisionHelmChart != nil {
+		return obj.IntegrationRevisionHelmChart
+	}
+
+	if obj.IntegrationRevisionManagedService != nil {
+		return obj.IntegrationRevisionManagedService
+	}
+
+	if obj.IntegrationRevisionRum != nil {
+		return obj.IntegrationRevisionRum
+	}
+
+	if obj.IntegrationRevisionTerraform != nil {
+		return obj.IntegrationRevisionTerraform
+	}
+
+	// all schemas are nil
+	return nil
 }
 
-// GetGroupsOk returns a tuple with the Groups field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IntegrationRevision) GetGroupsOk() ([]IntegrationRevisionGroup, bool) {
-	if o == nil || IsNil(o.Groups) {
-		return nil, false
-	}
-	return o.Groups, true
-}
-
-// HasGroups returns a boolean if a field has been set.
-func (o *IntegrationRevision) HasGroups() bool {
-	if o != nil && !IsNil(o.Groups) {
-		return true
+// Get the actual instance value
+func (obj IntegrationRevision) GetActualInstanceValue() (interface{}) {
+	if obj.IntegrationRevisionAzureArmTemplate != nil {
+		return *obj.IntegrationRevisionAzureArmTemplate
 	}
 
-	return false
-}
-
-// SetGroups gets a reference to the given []IntegrationRevisionGroup and assigns it to the Groups field.
-func (o *IntegrationRevision) SetGroups(v []IntegrationRevisionGroup) {
-	o.Groups = v
-}
-
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *IntegrationRevision) GetId() string {
-	if o == nil || IsNil(o.Id) {
-		var ret string
-		return ret
-	}
-	return *o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IntegrationRevision) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
-		return nil, false
-	}
-	return o.Id, true
-}
-
-// HasId returns a boolean if a field has been set.
-func (o *IntegrationRevision) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
+	if obj.IntegrationRevisionCloudFormation != nil {
+		return *obj.IntegrationRevisionCloudFormation
 	}
 
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
-func (o *IntegrationRevision) SetId(v string) {
-	o.Id = &v
-}
-
-// GetRevisionDeploymentSupported returns the RevisionDeploymentSupported field value if set, zero value otherwise.
-func (o *IntegrationRevision) GetRevisionDeploymentSupported() bool {
-	if o == nil || IsNil(o.RevisionDeploymentSupported) {
-		var ret bool
-		return ret
-	}
-	return *o.RevisionDeploymentSupported
-}
-
-// GetRevisionDeploymentSupportedOk returns a tuple with the RevisionDeploymentSupported field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IntegrationRevision) GetRevisionDeploymentSupportedOk() (*bool, bool) {
-	if o == nil || IsNil(o.RevisionDeploymentSupported) {
-		return nil, false
-	}
-	return o.RevisionDeploymentSupported, true
-}
-
-// HasRevisionDeploymentSupported returns a boolean if a field has been set.
-func (o *IntegrationRevision) HasRevisionDeploymentSupported() bool {
-	if o != nil && !IsNil(o.RevisionDeploymentSupported) {
-		return true
+	if obj.IntegrationRevisionHelmChart != nil {
+		return *obj.IntegrationRevisionHelmChart
 	}
 
-	return false
-}
-
-// SetRevisionDeploymentSupported gets a reference to the given bool and assigns it to the RevisionDeploymentSupported field.
-func (o *IntegrationRevision) SetRevisionDeploymentSupported(v bool) {
-	o.RevisionDeploymentSupported = &v
-}
-
-// GetUpgradeInstructionsMd returns the UpgradeInstructionsMd field value if set, zero value otherwise.
-func (o *IntegrationRevision) GetUpgradeInstructionsMd() string {
-	if o == nil || IsNil(o.UpgradeInstructionsMd) {
-		var ret string
-		return ret
-	}
-	return *o.UpgradeInstructionsMd
-}
-
-// GetUpgradeInstructionsMdOk returns a tuple with the UpgradeInstructionsMd field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IntegrationRevision) GetUpgradeInstructionsMdOk() (*string, bool) {
-	if o == nil || IsNil(o.UpgradeInstructionsMd) {
-		return nil, false
-	}
-	return o.UpgradeInstructionsMd, true
-}
-
-// HasUpgradeInstructionsMd returns a boolean if a field has been set.
-func (o *IntegrationRevision) HasUpgradeInstructionsMd() bool {
-	if o != nil && !IsNil(o.UpgradeInstructionsMd) {
-		return true
+	if obj.IntegrationRevisionManagedService != nil {
+		return *obj.IntegrationRevisionManagedService
 	}
 
-	return false
-}
+	if obj.IntegrationRevisionRum != nil {
+		return *obj.IntegrationRevisionRum
+	}
 
-// SetUpgradeInstructionsMd gets a reference to the given string and assigns it to the UpgradeInstructionsMd field.
-func (o *IntegrationRevision) SetUpgradeInstructionsMd(v string) {
-	o.UpgradeInstructionsMd = &v
-}
+	if obj.IntegrationRevisionTerraform != nil {
+		return *obj.IntegrationRevisionTerraform
+	}
 
-func (o IntegrationRevision) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o IntegrationRevision) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CloudFormation) {
-		toSerialize["cloudFormation"] = o.CloudFormation
-	}
-	if !IsNil(o.FeatureFlag) {
-		toSerialize["featureFlag"] = o.FeatureFlag
-	}
-	if !IsNil(o.Fields) {
-		toSerialize["fields"] = o.Fields
-	}
-	if !IsNil(o.Groups) {
-		toSerialize["groups"] = o.Groups
-	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.RevisionDeploymentSupported) {
-		toSerialize["revisionDeploymentSupported"] = o.RevisionDeploymentSupported
-	}
-	if !IsNil(o.UpgradeInstructionsMd) {
-		toSerialize["upgradeInstructionsMd"] = o.UpgradeInstructionsMd
-	}
-	return toSerialize, nil
+	// all schemas are nil
+	return nil
 }
 
 type NullableIntegrationRevision struct {

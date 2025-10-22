@@ -19,8 +19,8 @@ var _ MappedNullable = &EventsServiceListEventsOrderBysParameterInner{}
 
 // EventsServiceListEventsOrderBysParameterInner struct for EventsServiceListEventsOrderBysParameterInner
 type EventsServiceListEventsOrderBysParameterInner struct {
-	Direction *string `json:"direction,omitempty"`
-	FieldName *string `json:"fieldName,omitempty"`
+	Direction *EventsV3OrderByDirection `json:"direction,omitempty"`
+	FieldName *EventsV3OrderByFields `json:"fieldName,omitempty"`
 }
 
 // NewEventsServiceListEventsOrderBysParameterInner instantiates a new EventsServiceListEventsOrderBysParameterInner object
@@ -41,9 +41,9 @@ func NewEventsServiceListEventsOrderBysParameterInnerWithDefaults() *EventsServi
 }
 
 // GetDirection returns the Direction field value if set, zero value otherwise.
-func (o *EventsServiceListEventsOrderBysParameterInner) GetDirection() string {
+func (o *EventsServiceListEventsOrderBysParameterInner) GetDirection() EventsV3OrderByDirection {
 	if o == nil || IsNil(o.Direction) {
-		var ret string
+		var ret EventsV3OrderByDirection
 		return ret
 	}
 	return *o.Direction
@@ -51,7 +51,7 @@ func (o *EventsServiceListEventsOrderBysParameterInner) GetDirection() string {
 
 // GetDirectionOk returns a tuple with the Direction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EventsServiceListEventsOrderBysParameterInner) GetDirectionOk() (*string, bool) {
+func (o *EventsServiceListEventsOrderBysParameterInner) GetDirectionOk() (*EventsV3OrderByDirection, bool) {
 	if o == nil || IsNil(o.Direction) {
 		return nil, false
 	}
@@ -67,15 +67,15 @@ func (o *EventsServiceListEventsOrderBysParameterInner) HasDirection() bool {
 	return false
 }
 
-// SetDirection gets a reference to the given string and assigns it to the Direction field.
-func (o *EventsServiceListEventsOrderBysParameterInner) SetDirection(v string) {
+// SetDirection gets a reference to the given EventsV3OrderByDirection and assigns it to the Direction field.
+func (o *EventsServiceListEventsOrderBysParameterInner) SetDirection(v EventsV3OrderByDirection) {
 	o.Direction = &v
 }
 
 // GetFieldName returns the FieldName field value if set, zero value otherwise.
-func (o *EventsServiceListEventsOrderBysParameterInner) GetFieldName() string {
+func (o *EventsServiceListEventsOrderBysParameterInner) GetFieldName() EventsV3OrderByFields {
 	if o == nil || IsNil(o.FieldName) {
-		var ret string
+		var ret EventsV3OrderByFields
 		return ret
 	}
 	return *o.FieldName
@@ -83,7 +83,7 @@ func (o *EventsServiceListEventsOrderBysParameterInner) GetFieldName() string {
 
 // GetFieldNameOk returns a tuple with the FieldName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EventsServiceListEventsOrderBysParameterInner) GetFieldNameOk() (*string, bool) {
+func (o *EventsServiceListEventsOrderBysParameterInner) GetFieldNameOk() (*EventsV3OrderByFields, bool) {
 	if o == nil || IsNil(o.FieldName) {
 		return nil, false
 	}
@@ -99,8 +99,8 @@ func (o *EventsServiceListEventsOrderBysParameterInner) HasFieldName() bool {
 	return false
 }
 
-// SetFieldName gets a reference to the given string and assigns it to the FieldName field.
-func (o *EventsServiceListEventsOrderBysParameterInner) SetFieldName(v string) {
+// SetFieldName gets a reference to the given EventsV3OrderByFields and assigns it to the FieldName field.
+func (o *EventsServiceListEventsOrderBysParameterInner) SetFieldName(v EventsV3OrderByFields) {
 	o.FieldName = &v
 }
 

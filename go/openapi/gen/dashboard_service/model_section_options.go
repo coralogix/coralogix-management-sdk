@@ -18,21 +18,21 @@ import (
 
 // SectionOptions - struct for SectionOptions
 type SectionOptions struct {
-	SectionOptionsOneOf *SectionOptionsOneOf
-	SectionOptionsOneOf1 *SectionOptionsOneOf1
+	SectionOptionsCustom *SectionOptionsCustom
+	SectionOptionsInternal *SectionOptionsInternal
 }
 
-// SectionOptionsOneOfAsSectionOptions is a convenience function that returns SectionOptionsOneOf wrapped in SectionOptions
-func SectionOptionsOneOfAsSectionOptions(v *SectionOptionsOneOf) SectionOptions {
+// SectionOptionsCustomAsSectionOptions is a convenience function that returns SectionOptionsCustom wrapped in SectionOptions
+func SectionOptionsCustomAsSectionOptions(v *SectionOptionsCustom) SectionOptions {
 	return SectionOptions{
-		SectionOptionsOneOf: v,
+		SectionOptionsCustom: v,
 	}
 }
 
-// SectionOptionsOneOf1AsSectionOptions is a convenience function that returns SectionOptionsOneOf1 wrapped in SectionOptions
-func SectionOptionsOneOf1AsSectionOptions(v *SectionOptionsOneOf1) SectionOptions {
+// SectionOptionsInternalAsSectionOptions is a convenience function that returns SectionOptionsInternal wrapped in SectionOptions
+func SectionOptionsInternalAsSectionOptions(v *SectionOptionsInternal) SectionOptions {
 	return SectionOptions{
-		SectionOptionsOneOf1: v,
+		SectionOptionsInternal: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func SectionOptionsOneOf1AsSectionOptions(v *SectionOptionsOneOf1) SectionOption
 func (dst *SectionOptions) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into SectionOptionsOneOf
-	err = newStrictDecoder(data).Decode(&dst.SectionOptionsOneOf)
+	// try to unmarshal data into SectionOptionsCustom
+	err = newStrictDecoder(data).Decode(&dst.SectionOptionsCustom)
 	if err == nil {
-		jsonSectionOptionsOneOf, _ := json.Marshal(dst.SectionOptionsOneOf)
-		if string(jsonSectionOptionsOneOf) == "{}" { // empty struct
-			dst.SectionOptionsOneOf = nil
+		jsonSectionOptionsCustom, _ := json.Marshal(dst.SectionOptionsCustom)
+		if string(jsonSectionOptionsCustom) == "{}" { // empty struct
+			dst.SectionOptionsCustom = nil
 		} else {
-			if err = validator.Validate(dst.SectionOptionsOneOf); err != nil {
-				dst.SectionOptionsOneOf = nil
+			if err = validator.Validate(dst.SectionOptionsCustom); err != nil {
+				dst.SectionOptionsCustom = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SectionOptionsOneOf = nil
+		dst.SectionOptionsCustom = nil
 	}
 
-	// try to unmarshal data into SectionOptionsOneOf1
-	err = newStrictDecoder(data).Decode(&dst.SectionOptionsOneOf1)
+	// try to unmarshal data into SectionOptionsInternal
+	err = newStrictDecoder(data).Decode(&dst.SectionOptionsInternal)
 	if err == nil {
-		jsonSectionOptionsOneOf1, _ := json.Marshal(dst.SectionOptionsOneOf1)
-		if string(jsonSectionOptionsOneOf1) == "{}" { // empty struct
-			dst.SectionOptionsOneOf1 = nil
+		jsonSectionOptionsInternal, _ := json.Marshal(dst.SectionOptionsInternal)
+		if string(jsonSectionOptionsInternal) == "{}" { // empty struct
+			dst.SectionOptionsInternal = nil
 		} else {
-			if err = validator.Validate(dst.SectionOptionsOneOf1); err != nil {
-				dst.SectionOptionsOneOf1 = nil
+			if err = validator.Validate(dst.SectionOptionsInternal); err != nil {
+				dst.SectionOptionsInternal = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SectionOptionsOneOf1 = nil
+		dst.SectionOptionsInternal = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.SectionOptionsOneOf = nil
-		dst.SectionOptionsOneOf1 = nil
+		dst.SectionOptionsCustom = nil
+		dst.SectionOptionsInternal = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(SectionOptions)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *SectionOptions) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src SectionOptions) MarshalJSON() ([]byte, error) {
-	if src.SectionOptionsOneOf != nil {
-		return json.Marshal(&src.SectionOptionsOneOf)
+	if src.SectionOptionsCustom != nil {
+		return json.Marshal(&src.SectionOptionsCustom)
 	}
 
-	if src.SectionOptionsOneOf1 != nil {
-		return json.Marshal(&src.SectionOptionsOneOf1)
+	if src.SectionOptionsInternal != nil {
+		return json.Marshal(&src.SectionOptionsInternal)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *SectionOptions) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.SectionOptionsOneOf != nil {
-		return obj.SectionOptionsOneOf
+	if obj.SectionOptionsCustom != nil {
+		return obj.SectionOptionsCustom
 	}
 
-	if obj.SectionOptionsOneOf1 != nil {
-		return obj.SectionOptionsOneOf1
+	if obj.SectionOptionsInternal != nil {
+		return obj.SectionOptionsInternal
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *SectionOptions) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj SectionOptions) GetActualInstanceValue() (interface{}) {
-	if obj.SectionOptionsOneOf != nil {
-		return *obj.SectionOptionsOneOf
+	if obj.SectionOptionsCustom != nil {
+		return *obj.SectionOptionsCustom
 	}
 
-	if obj.SectionOptionsOneOf1 != nil {
-		return *obj.SectionOptionsOneOf1
+	if obj.SectionOptionsInternal != nil {
+		return *obj.SectionOptionsInternal
 	}
 
 	// all schemas are nil

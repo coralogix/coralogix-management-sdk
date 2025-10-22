@@ -18,21 +18,21 @@ import (
 
 // Events2MetricServiceReplaceE2MRequest - struct for Events2MetricServiceReplaceE2MRequest
 type Events2MetricServiceReplaceE2MRequest struct {
-	E2M1 *E2M1
-	E2M2 *E2M2
+	E2MLogsQuery *E2MLogsQuery
+	E2MSpansQuery *E2MSpansQuery
 }
 
-// E2M1AsEvents2MetricServiceReplaceE2MRequest is a convenience function that returns E2M1 wrapped in Events2MetricServiceReplaceE2MRequest
-func E2M1AsEvents2MetricServiceReplaceE2MRequest(v *E2M1) Events2MetricServiceReplaceE2MRequest {
+// E2MLogsQueryAsEvents2MetricServiceReplaceE2MRequest is a convenience function that returns E2MLogsQuery wrapped in Events2MetricServiceReplaceE2MRequest
+func E2MLogsQueryAsEvents2MetricServiceReplaceE2MRequest(v *E2MLogsQuery) Events2MetricServiceReplaceE2MRequest {
 	return Events2MetricServiceReplaceE2MRequest{
-		E2M1: v,
+		E2MLogsQuery: v,
 	}
 }
 
-// E2M2AsEvents2MetricServiceReplaceE2MRequest is a convenience function that returns E2M2 wrapped in Events2MetricServiceReplaceE2MRequest
-func E2M2AsEvents2MetricServiceReplaceE2MRequest(v *E2M2) Events2MetricServiceReplaceE2MRequest {
+// E2MSpansQueryAsEvents2MetricServiceReplaceE2MRequest is a convenience function that returns E2MSpansQuery wrapped in Events2MetricServiceReplaceE2MRequest
+func E2MSpansQueryAsEvents2MetricServiceReplaceE2MRequest(v *E2MSpansQuery) Events2MetricServiceReplaceE2MRequest {
 	return Events2MetricServiceReplaceE2MRequest{
-		E2M2: v,
+		E2MSpansQuery: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func E2M2AsEvents2MetricServiceReplaceE2MRequest(v *E2M2) Events2MetricServiceRe
 func (dst *Events2MetricServiceReplaceE2MRequest) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into E2M1
-	err = newStrictDecoder(data).Decode(&dst.E2M1)
+	// try to unmarshal data into E2MLogsQuery
+	err = newStrictDecoder(data).Decode(&dst.E2MLogsQuery)
 	if err == nil {
-		jsonE2M1, _ := json.Marshal(dst.E2M1)
-		if string(jsonE2M1) == "{}" { // empty struct
-			dst.E2M1 = nil
+		jsonE2MLogsQuery, _ := json.Marshal(dst.E2MLogsQuery)
+		if string(jsonE2MLogsQuery) == "{}" { // empty struct
+			dst.E2MLogsQuery = nil
 		} else {
-			if err = validator.Validate(dst.E2M1); err != nil {
-				dst.E2M1 = nil
+			if err = validator.Validate(dst.E2MLogsQuery); err != nil {
+				dst.E2MLogsQuery = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.E2M1 = nil
+		dst.E2MLogsQuery = nil
 	}
 
-	// try to unmarshal data into E2M2
-	err = newStrictDecoder(data).Decode(&dst.E2M2)
+	// try to unmarshal data into E2MSpansQuery
+	err = newStrictDecoder(data).Decode(&dst.E2MSpansQuery)
 	if err == nil {
-		jsonE2M2, _ := json.Marshal(dst.E2M2)
-		if string(jsonE2M2) == "{}" { // empty struct
-			dst.E2M2 = nil
+		jsonE2MSpansQuery, _ := json.Marshal(dst.E2MSpansQuery)
+		if string(jsonE2MSpansQuery) == "{}" { // empty struct
+			dst.E2MSpansQuery = nil
 		} else {
-			if err = validator.Validate(dst.E2M2); err != nil {
-				dst.E2M2 = nil
+			if err = validator.Validate(dst.E2MSpansQuery); err != nil {
+				dst.E2MSpansQuery = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.E2M2 = nil
+		dst.E2MSpansQuery = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.E2M1 = nil
-		dst.E2M2 = nil
+		dst.E2MLogsQuery = nil
+		dst.E2MSpansQuery = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(Events2MetricServiceReplaceE2MRequest)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *Events2MetricServiceReplaceE2MRequest) UnmarshalJSON(data []byte) err
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src Events2MetricServiceReplaceE2MRequest) MarshalJSON() ([]byte, error) {
-	if src.E2M1 != nil {
-		return json.Marshal(&src.E2M1)
+	if src.E2MLogsQuery != nil {
+		return json.Marshal(&src.E2MLogsQuery)
 	}
 
-	if src.E2M2 != nil {
-		return json.Marshal(&src.E2M2)
+	if src.E2MSpansQuery != nil {
+		return json.Marshal(&src.E2MSpansQuery)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *Events2MetricServiceReplaceE2MRequest) GetActualInstance() (interface
 	if obj == nil {
 		return nil
 	}
-	if obj.E2M1 != nil {
-		return obj.E2M1
+	if obj.E2MLogsQuery != nil {
+		return obj.E2MLogsQuery
 	}
 
-	if obj.E2M2 != nil {
-		return obj.E2M2
+	if obj.E2MSpansQuery != nil {
+		return obj.E2MSpansQuery
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *Events2MetricServiceReplaceE2MRequest) GetActualInstance() (interface
 
 // Get the actual instance value
 func (obj Events2MetricServiceReplaceE2MRequest) GetActualInstanceValue() (interface{}) {
-	if obj.E2M1 != nil {
-		return *obj.E2M1
+	if obj.E2MLogsQuery != nil {
+		return *obj.E2MLogsQuery
 	}
 
-	if obj.E2M2 != nil {
-		return *obj.E2M2
+	if obj.E2MSpansQuery != nil {
+		return *obj.E2MSpansQuery
 	}
 
 	// all schemas are nil

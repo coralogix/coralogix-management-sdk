@@ -45,7 +45,7 @@ func TestApiKeys(t *testing.T) {
 	createReq := apikeys.CreateApiKeyRequest{
 		Name: "My APM KEY",
 		Owner: apikeys.Owner{
-			OwnerOneOf1: &apikeys.OwnerOneOf1{
+			OwnerTeamId: &apikeys.OwnerTeamId{
 				TeamId: &teamID,
 			},
 		},

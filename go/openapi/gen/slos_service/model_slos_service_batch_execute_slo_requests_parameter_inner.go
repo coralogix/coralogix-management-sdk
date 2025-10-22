@@ -18,29 +18,29 @@ import (
 
 // SlosServiceBatchExecuteSloRequestsParameterInner - struct for SlosServiceBatchExecuteSloRequestsParameterInner
 type SlosServiceBatchExecuteSloRequestsParameterInner struct {
-	SloExecutionRequest *SloExecutionRequest
-	SloExecutionRequest1 *SloExecutionRequest1
-	SloExecutionRequest2 *SloExecutionRequest2
+	SloExecutionRequestCreateSloRequest *SloExecutionRequestCreateSloRequest
+	SloExecutionRequestDeleteSloRequest *SloExecutionRequestDeleteSloRequest
+	SloExecutionRequestReplaceSloRequest *SloExecutionRequestReplaceSloRequest
 }
 
-// SloExecutionRequestAsSlosServiceBatchExecuteSloRequestsParameterInner is a convenience function that returns SloExecutionRequest wrapped in SlosServiceBatchExecuteSloRequestsParameterInner
-func SloExecutionRequestAsSlosServiceBatchExecuteSloRequestsParameterInner(v *SloExecutionRequest) SlosServiceBatchExecuteSloRequestsParameterInner {
+// SloExecutionRequestCreateSloRequestAsSlosServiceBatchExecuteSloRequestsParameterInner is a convenience function that returns SloExecutionRequestCreateSloRequest wrapped in SlosServiceBatchExecuteSloRequestsParameterInner
+func SloExecutionRequestCreateSloRequestAsSlosServiceBatchExecuteSloRequestsParameterInner(v *SloExecutionRequestCreateSloRequest) SlosServiceBatchExecuteSloRequestsParameterInner {
 	return SlosServiceBatchExecuteSloRequestsParameterInner{
-		SloExecutionRequest: v,
+		SloExecutionRequestCreateSloRequest: v,
 	}
 }
 
-// SloExecutionRequest1AsSlosServiceBatchExecuteSloRequestsParameterInner is a convenience function that returns SloExecutionRequest1 wrapped in SlosServiceBatchExecuteSloRequestsParameterInner
-func SloExecutionRequest1AsSlosServiceBatchExecuteSloRequestsParameterInner(v *SloExecutionRequest1) SlosServiceBatchExecuteSloRequestsParameterInner {
+// SloExecutionRequestDeleteSloRequestAsSlosServiceBatchExecuteSloRequestsParameterInner is a convenience function that returns SloExecutionRequestDeleteSloRequest wrapped in SlosServiceBatchExecuteSloRequestsParameterInner
+func SloExecutionRequestDeleteSloRequestAsSlosServiceBatchExecuteSloRequestsParameterInner(v *SloExecutionRequestDeleteSloRequest) SlosServiceBatchExecuteSloRequestsParameterInner {
 	return SlosServiceBatchExecuteSloRequestsParameterInner{
-		SloExecutionRequest1: v,
+		SloExecutionRequestDeleteSloRequest: v,
 	}
 }
 
-// SloExecutionRequest2AsSlosServiceBatchExecuteSloRequestsParameterInner is a convenience function that returns SloExecutionRequest2 wrapped in SlosServiceBatchExecuteSloRequestsParameterInner
-func SloExecutionRequest2AsSlosServiceBatchExecuteSloRequestsParameterInner(v *SloExecutionRequest2) SlosServiceBatchExecuteSloRequestsParameterInner {
+// SloExecutionRequestReplaceSloRequestAsSlosServiceBatchExecuteSloRequestsParameterInner is a convenience function that returns SloExecutionRequestReplaceSloRequest wrapped in SlosServiceBatchExecuteSloRequestsParameterInner
+func SloExecutionRequestReplaceSloRequestAsSlosServiceBatchExecuteSloRequestsParameterInner(v *SloExecutionRequestReplaceSloRequest) SlosServiceBatchExecuteSloRequestsParameterInner {
 	return SlosServiceBatchExecuteSloRequestsParameterInner{
-		SloExecutionRequest2: v,
+		SloExecutionRequestReplaceSloRequest: v,
 	}
 }
 
@@ -49,62 +49,62 @@ func SloExecutionRequest2AsSlosServiceBatchExecuteSloRequestsParameterInner(v *S
 func (dst *SlosServiceBatchExecuteSloRequestsParameterInner) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into SloExecutionRequest
-	err = newStrictDecoder(data).Decode(&dst.SloExecutionRequest)
+	// try to unmarshal data into SloExecutionRequestCreateSloRequest
+	err = newStrictDecoder(data).Decode(&dst.SloExecutionRequestCreateSloRequest)
 	if err == nil {
-		jsonSloExecutionRequest, _ := json.Marshal(dst.SloExecutionRequest)
-		if string(jsonSloExecutionRequest) == "{}" { // empty struct
-			dst.SloExecutionRequest = nil
+		jsonSloExecutionRequestCreateSloRequest, _ := json.Marshal(dst.SloExecutionRequestCreateSloRequest)
+		if string(jsonSloExecutionRequestCreateSloRequest) == "{}" { // empty struct
+			dst.SloExecutionRequestCreateSloRequest = nil
 		} else {
-			if err = validator.Validate(dst.SloExecutionRequest); err != nil {
-				dst.SloExecutionRequest = nil
+			if err = validator.Validate(dst.SloExecutionRequestCreateSloRequest); err != nil {
+				dst.SloExecutionRequestCreateSloRequest = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SloExecutionRequest = nil
+		dst.SloExecutionRequestCreateSloRequest = nil
 	}
 
-	// try to unmarshal data into SloExecutionRequest1
-	err = newStrictDecoder(data).Decode(&dst.SloExecutionRequest1)
+	// try to unmarshal data into SloExecutionRequestDeleteSloRequest
+	err = newStrictDecoder(data).Decode(&dst.SloExecutionRequestDeleteSloRequest)
 	if err == nil {
-		jsonSloExecutionRequest1, _ := json.Marshal(dst.SloExecutionRequest1)
-		if string(jsonSloExecutionRequest1) == "{}" { // empty struct
-			dst.SloExecutionRequest1 = nil
+		jsonSloExecutionRequestDeleteSloRequest, _ := json.Marshal(dst.SloExecutionRequestDeleteSloRequest)
+		if string(jsonSloExecutionRequestDeleteSloRequest) == "{}" { // empty struct
+			dst.SloExecutionRequestDeleteSloRequest = nil
 		} else {
-			if err = validator.Validate(dst.SloExecutionRequest1); err != nil {
-				dst.SloExecutionRequest1 = nil
+			if err = validator.Validate(dst.SloExecutionRequestDeleteSloRequest); err != nil {
+				dst.SloExecutionRequestDeleteSloRequest = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SloExecutionRequest1 = nil
+		dst.SloExecutionRequestDeleteSloRequest = nil
 	}
 
-	// try to unmarshal data into SloExecutionRequest2
-	err = newStrictDecoder(data).Decode(&dst.SloExecutionRequest2)
+	// try to unmarshal data into SloExecutionRequestReplaceSloRequest
+	err = newStrictDecoder(data).Decode(&dst.SloExecutionRequestReplaceSloRequest)
 	if err == nil {
-		jsonSloExecutionRequest2, _ := json.Marshal(dst.SloExecutionRequest2)
-		if string(jsonSloExecutionRequest2) == "{}" { // empty struct
-			dst.SloExecutionRequest2 = nil
+		jsonSloExecutionRequestReplaceSloRequest, _ := json.Marshal(dst.SloExecutionRequestReplaceSloRequest)
+		if string(jsonSloExecutionRequestReplaceSloRequest) == "{}" { // empty struct
+			dst.SloExecutionRequestReplaceSloRequest = nil
 		} else {
-			if err = validator.Validate(dst.SloExecutionRequest2); err != nil {
-				dst.SloExecutionRequest2 = nil
+			if err = validator.Validate(dst.SloExecutionRequestReplaceSloRequest); err != nil {
+				dst.SloExecutionRequestReplaceSloRequest = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SloExecutionRequest2 = nil
+		dst.SloExecutionRequestReplaceSloRequest = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.SloExecutionRequest = nil
-		dst.SloExecutionRequest1 = nil
-		dst.SloExecutionRequest2 = nil
+		dst.SloExecutionRequestCreateSloRequest = nil
+		dst.SloExecutionRequestDeleteSloRequest = nil
+		dst.SloExecutionRequestReplaceSloRequest = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(SlosServiceBatchExecuteSloRequestsParameterInner)")
 	} else if match == 1 {
@@ -116,16 +116,16 @@ func (dst *SlosServiceBatchExecuteSloRequestsParameterInner) UnmarshalJSON(data 
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src SlosServiceBatchExecuteSloRequestsParameterInner) MarshalJSON() ([]byte, error) {
-	if src.SloExecutionRequest != nil {
-		return json.Marshal(&src.SloExecutionRequest)
+	if src.SloExecutionRequestCreateSloRequest != nil {
+		return json.Marshal(&src.SloExecutionRequestCreateSloRequest)
 	}
 
-	if src.SloExecutionRequest1 != nil {
-		return json.Marshal(&src.SloExecutionRequest1)
+	if src.SloExecutionRequestDeleteSloRequest != nil {
+		return json.Marshal(&src.SloExecutionRequestDeleteSloRequest)
 	}
 
-	if src.SloExecutionRequest2 != nil {
-		return json.Marshal(&src.SloExecutionRequest2)
+	if src.SloExecutionRequestReplaceSloRequest != nil {
+		return json.Marshal(&src.SloExecutionRequestReplaceSloRequest)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -136,16 +136,16 @@ func (obj *SlosServiceBatchExecuteSloRequestsParameterInner) GetActualInstance()
 	if obj == nil {
 		return nil
 	}
-	if obj.SloExecutionRequest != nil {
-		return obj.SloExecutionRequest
+	if obj.SloExecutionRequestCreateSloRequest != nil {
+		return obj.SloExecutionRequestCreateSloRequest
 	}
 
-	if obj.SloExecutionRequest1 != nil {
-		return obj.SloExecutionRequest1
+	if obj.SloExecutionRequestDeleteSloRequest != nil {
+		return obj.SloExecutionRequestDeleteSloRequest
 	}
 
-	if obj.SloExecutionRequest2 != nil {
-		return obj.SloExecutionRequest2
+	if obj.SloExecutionRequestReplaceSloRequest != nil {
+		return obj.SloExecutionRequestReplaceSloRequest
 	}
 
 	// all schemas are nil
@@ -154,16 +154,16 @@ func (obj *SlosServiceBatchExecuteSloRequestsParameterInner) GetActualInstance()
 
 // Get the actual instance value
 func (obj SlosServiceBatchExecuteSloRequestsParameterInner) GetActualInstanceValue() (interface{}) {
-	if obj.SloExecutionRequest != nil {
-		return *obj.SloExecutionRequest
+	if obj.SloExecutionRequestCreateSloRequest != nil {
+		return *obj.SloExecutionRequestCreateSloRequest
 	}
 
-	if obj.SloExecutionRequest1 != nil {
-		return *obj.SloExecutionRequest1
+	if obj.SloExecutionRequestDeleteSloRequest != nil {
+		return *obj.SloExecutionRequestDeleteSloRequest
 	}
 
-	if obj.SloExecutionRequest2 != nil {
-		return *obj.SloExecutionRequest2
+	if obj.SloExecutionRequestReplaceSloRequest != nil {
+		return *obj.SloExecutionRequestReplaceSloRequest
 	}
 
 	// all schemas are nil

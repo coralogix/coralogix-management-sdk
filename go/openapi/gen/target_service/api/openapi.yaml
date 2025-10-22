@@ -164,6 +164,24 @@ components:
       - bucket
       title: Archive Spec
       type: object
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
     FieldGroup:
       properties:
         name:
@@ -173,8 +191,40 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValues_1"
-      - $ref: "#/components/schemas/FilterPathAndValues_2"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
     Filters:
       description: This data structure represents a filter
       externalDocs:
@@ -191,7 +241,6 @@ components:
       title: Filters
       type: object
     IBMCosTargetSpec:
-      additionalProperties: false
       description: This data structure represents an IBM COS target.
       externalDocs:
         description: Find out more about archives
@@ -272,7 +321,6 @@ components:
       title: Set Target Response
       type: object
     S3TargetSpec:
-      additionalProperties: false
       description: This data structure represents an S3 target.
       example:
         bucket: bucket
@@ -293,8 +341,58 @@ components:
       type: object
     Target:
       oneOf:
-      - $ref: "#/components/schemas/Target_1"
-      - $ref: "#/components/schemas/Target_2"
+      - $ref: "#/components/schemas/TargetS3"
+      - $ref: "#/components/schemas/TargetIbmCos"
+    TargetIbmCos:
+      additionalProperties: false
+      description: This data structure represents a target to archive logs.
+      externalDocs:
+        description: Find out more about archives
+        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
+      properties:
+        archiveSpec:
+          $ref: "#/components/schemas/ArchiveSpec"
+        ibmCos:
+          $ref: "#/components/schemas/IBMCosTargetSpec"
+      required:
+      - targetSpecarchiveSpec
+      title: Target
+      type: object
+    TargetS3:
+      additionalProperties: false
+      description: This data structure represents a target to archive logs.
+      example:
+        s3:
+          bucket: bucket
+          region: us-west-2
+        archiveSpec:
+          enableTags: true
+          archivingFormatId: json_id
+          isActive: true
+      externalDocs:
+        description: Find out more about archives
+        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
+      properties:
+        archiveSpec:
+          $ref: "#/components/schemas/ArchiveSpec"
+        s3:
+          $ref: "#/components/schemas/S3TargetSpec"
+      required:
+      - targetSpecarchiveSpec
+      title: Target
+      type: object
+    YAxisViewByCategory:
+      additionalProperties: false
+      properties:
+        category:
+          $ref: "#/components/schemas/YAxisViewByCategory"
+      type: object
+    YAxisViewByValue:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: "#/components/schemas/YAxisViewByValue"
+      type: object
     common.Group:
       properties:
         field:
@@ -330,76 +428,6 @@ components:
       - isActive
       - targetSpec
       title: Set Target Response
-      type: object
-    FilterPathAndValues_1:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValues_2:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    Target_1:
-      additionalProperties: false
-      description: This data structure represents a target to archive logs.
-      example:
-        s3:
-          bucket: bucket
-          region: us-west-2
-        archiveSpec:
-          enableTags: true
-          archivingFormatId: json_id
-          isActive: true
-      externalDocs:
-        description: Find out more about archives
-        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
-      properties:
-        archiveSpec:
-          $ref: "#/components/schemas/ArchiveSpec"
-        s3:
-          $ref: "#/components/schemas/S3TargetSpec"
-      required:
-      - targetSpecarchiveSpec
-      title: Target
-      type: object
-    Target_2:
-      additionalProperties: false
-      description: This data structure represents a target to archive logs.
-      externalDocs:
-        description: Find out more about archives
-        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
-      properties:
-        archiveSpec:
-          $ref: "#/components/schemas/ArchiveSpec"
-        ibmCos:
-          $ref: "#/components/schemas/IBMCosTargetSpec"
-      required:
-      - targetSpecarchiveSpec
-      title: Target
       type: object
   securitySchemes:
     apiKeyAuth:

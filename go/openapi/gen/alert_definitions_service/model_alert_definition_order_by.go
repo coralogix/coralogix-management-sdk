@@ -21,10 +21,8 @@ var _ MappedNullable = &AlertDefinitionOrderBy{}
 
 // AlertDefinitionOrderBy A data structure that specifies the field and direction for ordering alert definitions
 type AlertDefinitionOrderBy struct {
-	// Direction for ordering
-	Direction string `json:"direction"`
-	// Field name to order by
-	FieldName string `json:"fieldName"`
+	Direction AlertDefOrderByDirection `json:"direction"`
+	FieldName AlertDefOrderByFields `json:"fieldName"`
 }
 
 type _AlertDefinitionOrderBy AlertDefinitionOrderBy
@@ -33,7 +31,7 @@ type _AlertDefinitionOrderBy AlertDefinitionOrderBy
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDefinitionOrderBy(direction string, fieldName string) *AlertDefinitionOrderBy {
+func NewAlertDefinitionOrderBy(direction AlertDefOrderByDirection, fieldName AlertDefOrderByFields) *AlertDefinitionOrderBy {
 	this := AlertDefinitionOrderBy{}
 	this.Direction = direction
 	this.FieldName = fieldName
@@ -49,9 +47,9 @@ func NewAlertDefinitionOrderByWithDefaults() *AlertDefinitionOrderBy {
 }
 
 // GetDirection returns the Direction field value
-func (o *AlertDefinitionOrderBy) GetDirection() string {
+func (o *AlertDefinitionOrderBy) GetDirection() AlertDefOrderByDirection {
 	if o == nil {
-		var ret string
+		var ret AlertDefOrderByDirection
 		return ret
 	}
 
@@ -60,7 +58,7 @@ func (o *AlertDefinitionOrderBy) GetDirection() string {
 
 // GetDirectionOk returns a tuple with the Direction field value
 // and a boolean to check if the value has been set.
-func (o *AlertDefinitionOrderBy) GetDirectionOk() (*string, bool) {
+func (o *AlertDefinitionOrderBy) GetDirectionOk() (*AlertDefOrderByDirection, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,14 +66,14 @@ func (o *AlertDefinitionOrderBy) GetDirectionOk() (*string, bool) {
 }
 
 // SetDirection sets field value
-func (o *AlertDefinitionOrderBy) SetDirection(v string) {
+func (o *AlertDefinitionOrderBy) SetDirection(v AlertDefOrderByDirection) {
 	o.Direction = v
 }
 
 // GetFieldName returns the FieldName field value
-func (o *AlertDefinitionOrderBy) GetFieldName() string {
+func (o *AlertDefinitionOrderBy) GetFieldName() AlertDefOrderByFields {
 	if o == nil {
-		var ret string
+		var ret AlertDefOrderByFields
 		return ret
 	}
 
@@ -84,7 +82,7 @@ func (o *AlertDefinitionOrderBy) GetFieldName() string {
 
 // GetFieldNameOk returns a tuple with the FieldName field value
 // and a boolean to check if the value has been set.
-func (o *AlertDefinitionOrderBy) GetFieldNameOk() (*string, bool) {
+func (o *AlertDefinitionOrderBy) GetFieldNameOk() (*AlertDefOrderByFields, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -92,7 +90,7 @@ func (o *AlertDefinitionOrderBy) GetFieldNameOk() (*string, bool) {
 }
 
 // SetFieldName sets field value
-func (o *AlertDefinitionOrderBy) SetFieldName(v string) {
+func (o *AlertDefinitionOrderBy) SetFieldName(v AlertDefOrderByFields) {
 	o.FieldName = v
 }
 

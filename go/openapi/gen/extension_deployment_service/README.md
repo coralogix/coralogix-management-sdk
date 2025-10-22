@@ -86,6 +86,9 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [ColorsByAggregation](docs/ColorsByAggregation.md)
+ - [ColorsByGroupBy](docs/ColorsByGroupBy.md)
+ - [ColorsByStack](docs/ColorsByStack.md)
  - [CommonGroup](docs/CommonGroup.md)
  - [DeployExtensionResponse](docs/DeployExtensionResponse.md)
  - [DeployedExtension](docs/DeployedExtension.md)
@@ -95,8 +98,8 @@ Class | Method | HTTP request | Description
  - [FailedItem](docs/FailedItem.md)
  - [FieldGroup](docs/FieldGroup.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
- - [FilterPathAndValues1](docs/FilterPathAndValues1.md)
- - [FilterPathAndValues2](docs/FilterPathAndValues2.md)
+ - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
+ - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [GetDeployedExtensionsResponse](docs/GetDeployedExtensionsResponse.md)
  - [ItemCounts](docs/ItemCounts.md)
@@ -105,6 +108,8 @@ Class | Method | HTTP request | Description
  - [UndeployExtensionResponse](docs/UndeployExtensionResponse.md)
  - [UpdateExtensionResponse](docs/UpdateExtensionResponse.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
+ - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
+ - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

@@ -18,21 +18,21 @@ import (
 
 // SloFilterField - struct for SloFilterField
 type SloFilterField struct {
-	SloFilterField *SloFilterField
-	SloFilterField1 *SloFilterField1
+	SloFilterFieldConstFilter *SloFilterFieldConstFilter
+	SloFilterFieldLabelName *SloFilterFieldLabelName
 }
 
-// SloFilterFieldAsSloFilterField is a convenience function that returns SloFilterField wrapped in SloFilterField
-func SloFilterFieldAsSloFilterField(v *SloFilterField) SloFilterField {
+// SloFilterFieldConstFilterAsSloFilterField is a convenience function that returns SloFilterFieldConstFilter wrapped in SloFilterField
+func SloFilterFieldConstFilterAsSloFilterField(v *SloFilterFieldConstFilter) SloFilterField {
 	return SloFilterField{
-		SloFilterField: v,
+		SloFilterFieldConstFilter: v,
 	}
 }
 
-// SloFilterField1AsSloFilterField is a convenience function that returns SloFilterField1 wrapped in SloFilterField
-func SloFilterField1AsSloFilterField(v *SloFilterField1) SloFilterField {
+// SloFilterFieldLabelNameAsSloFilterField is a convenience function that returns SloFilterFieldLabelName wrapped in SloFilterField
+func SloFilterFieldLabelNameAsSloFilterField(v *SloFilterFieldLabelName) SloFilterField {
 	return SloFilterField{
-		SloFilterField1: v,
+		SloFilterFieldLabelName: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func SloFilterField1AsSloFilterField(v *SloFilterField1) SloFilterField {
 func (dst *SloFilterField) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into SloFilterField
-	err = newStrictDecoder(data).Decode(&dst.SloFilterField)
+	// try to unmarshal data into SloFilterFieldConstFilter
+	err = newStrictDecoder(data).Decode(&dst.SloFilterFieldConstFilter)
 	if err == nil {
-		jsonSloFilterField, _ := json.Marshal(dst.SloFilterField)
-		if string(jsonSloFilterField) == "{}" { // empty struct
-			dst.SloFilterField = nil
+		jsonSloFilterFieldConstFilter, _ := json.Marshal(dst.SloFilterFieldConstFilter)
+		if string(jsonSloFilterFieldConstFilter) == "{}" { // empty struct
+			dst.SloFilterFieldConstFilter = nil
 		} else {
-			if err = validator.Validate(dst.SloFilterField); err != nil {
-				dst.SloFilterField = nil
+			if err = validator.Validate(dst.SloFilterFieldConstFilter); err != nil {
+				dst.SloFilterFieldConstFilter = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SloFilterField = nil
+		dst.SloFilterFieldConstFilter = nil
 	}
 
-	// try to unmarshal data into SloFilterField1
-	err = newStrictDecoder(data).Decode(&dst.SloFilterField1)
+	// try to unmarshal data into SloFilterFieldLabelName
+	err = newStrictDecoder(data).Decode(&dst.SloFilterFieldLabelName)
 	if err == nil {
-		jsonSloFilterField1, _ := json.Marshal(dst.SloFilterField1)
-		if string(jsonSloFilterField1) == "{}" { // empty struct
-			dst.SloFilterField1 = nil
+		jsonSloFilterFieldLabelName, _ := json.Marshal(dst.SloFilterFieldLabelName)
+		if string(jsonSloFilterFieldLabelName) == "{}" { // empty struct
+			dst.SloFilterFieldLabelName = nil
 		} else {
-			if err = validator.Validate(dst.SloFilterField1); err != nil {
-				dst.SloFilterField1 = nil
+			if err = validator.Validate(dst.SloFilterFieldLabelName); err != nil {
+				dst.SloFilterFieldLabelName = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SloFilterField1 = nil
+		dst.SloFilterFieldLabelName = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.SloFilterField = nil
-		dst.SloFilterField1 = nil
+		dst.SloFilterFieldConstFilter = nil
+		dst.SloFilterFieldLabelName = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(SloFilterField)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *SloFilterField) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src SloFilterField) MarshalJSON() ([]byte, error) {
-	if src.SloFilterField != nil {
-		return json.Marshal(&src.SloFilterField)
+	if src.SloFilterFieldConstFilter != nil {
+		return json.Marshal(&src.SloFilterFieldConstFilter)
 	}
 
-	if src.SloFilterField1 != nil {
-		return json.Marshal(&src.SloFilterField1)
+	if src.SloFilterFieldLabelName != nil {
+		return json.Marshal(&src.SloFilterFieldLabelName)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *SloFilterField) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.SloFilterField != nil {
-		return obj.SloFilterField
+	if obj.SloFilterFieldConstFilter != nil {
+		return obj.SloFilterFieldConstFilter
 	}
 
-	if obj.SloFilterField1 != nil {
-		return obj.SloFilterField1
+	if obj.SloFilterFieldLabelName != nil {
+		return obj.SloFilterFieldLabelName
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *SloFilterField) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj SloFilterField) GetActualInstanceValue() (interface{}) {
-	if obj.SloFilterField != nil {
-		return *obj.SloFilterField
+	if obj.SloFilterFieldConstFilter != nil {
+		return *obj.SloFilterFieldConstFilter
 	}
 
-	if obj.SloFilterField1 != nil {
-		return *obj.SloFilterField1
+	if obj.SloFilterFieldLabelName != nil {
+		return *obj.SloFilterFieldLabelName
 	}
 
 	// all schemas are nil

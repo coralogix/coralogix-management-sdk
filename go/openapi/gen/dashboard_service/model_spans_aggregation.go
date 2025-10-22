@@ -18,21 +18,21 @@ import (
 
 // SpansAggregation - struct for SpansAggregation
 type SpansAggregation struct {
-	SpansAggregationOneOf *SpansAggregationOneOf
-	SpansAggregationOneOf1 *SpansAggregationOneOf1
+	SpansAggregationDimensionAggregation *SpansAggregationDimensionAggregation
+	SpansAggregationMetricAggregation *SpansAggregationMetricAggregation
 }
 
-// SpansAggregationOneOfAsSpansAggregation is a convenience function that returns SpansAggregationOneOf wrapped in SpansAggregation
-func SpansAggregationOneOfAsSpansAggregation(v *SpansAggregationOneOf) SpansAggregation {
+// SpansAggregationDimensionAggregationAsSpansAggregation is a convenience function that returns SpansAggregationDimensionAggregation wrapped in SpansAggregation
+func SpansAggregationDimensionAggregationAsSpansAggregation(v *SpansAggregationDimensionAggregation) SpansAggregation {
 	return SpansAggregation{
-		SpansAggregationOneOf: v,
+		SpansAggregationDimensionAggregation: v,
 	}
 }
 
-// SpansAggregationOneOf1AsSpansAggregation is a convenience function that returns SpansAggregationOneOf1 wrapped in SpansAggregation
-func SpansAggregationOneOf1AsSpansAggregation(v *SpansAggregationOneOf1) SpansAggregation {
+// SpansAggregationMetricAggregationAsSpansAggregation is a convenience function that returns SpansAggregationMetricAggregation wrapped in SpansAggregation
+func SpansAggregationMetricAggregationAsSpansAggregation(v *SpansAggregationMetricAggregation) SpansAggregation {
 	return SpansAggregation{
-		SpansAggregationOneOf1: v,
+		SpansAggregationMetricAggregation: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func SpansAggregationOneOf1AsSpansAggregation(v *SpansAggregationOneOf1) SpansAg
 func (dst *SpansAggregation) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into SpansAggregationOneOf
-	err = newStrictDecoder(data).Decode(&dst.SpansAggregationOneOf)
+	// try to unmarshal data into SpansAggregationDimensionAggregation
+	err = newStrictDecoder(data).Decode(&dst.SpansAggregationDimensionAggregation)
 	if err == nil {
-		jsonSpansAggregationOneOf, _ := json.Marshal(dst.SpansAggregationOneOf)
-		if string(jsonSpansAggregationOneOf) == "{}" { // empty struct
-			dst.SpansAggregationOneOf = nil
+		jsonSpansAggregationDimensionAggregation, _ := json.Marshal(dst.SpansAggregationDimensionAggregation)
+		if string(jsonSpansAggregationDimensionAggregation) == "{}" { // empty struct
+			dst.SpansAggregationDimensionAggregation = nil
 		} else {
-			if err = validator.Validate(dst.SpansAggregationOneOf); err != nil {
-				dst.SpansAggregationOneOf = nil
+			if err = validator.Validate(dst.SpansAggregationDimensionAggregation); err != nil {
+				dst.SpansAggregationDimensionAggregation = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SpansAggregationOneOf = nil
+		dst.SpansAggregationDimensionAggregation = nil
 	}
 
-	// try to unmarshal data into SpansAggregationOneOf1
-	err = newStrictDecoder(data).Decode(&dst.SpansAggregationOneOf1)
+	// try to unmarshal data into SpansAggregationMetricAggregation
+	err = newStrictDecoder(data).Decode(&dst.SpansAggregationMetricAggregation)
 	if err == nil {
-		jsonSpansAggregationOneOf1, _ := json.Marshal(dst.SpansAggregationOneOf1)
-		if string(jsonSpansAggregationOneOf1) == "{}" { // empty struct
-			dst.SpansAggregationOneOf1 = nil
+		jsonSpansAggregationMetricAggregation, _ := json.Marshal(dst.SpansAggregationMetricAggregation)
+		if string(jsonSpansAggregationMetricAggregation) == "{}" { // empty struct
+			dst.SpansAggregationMetricAggregation = nil
 		} else {
-			if err = validator.Validate(dst.SpansAggregationOneOf1); err != nil {
-				dst.SpansAggregationOneOf1 = nil
+			if err = validator.Validate(dst.SpansAggregationMetricAggregation); err != nil {
+				dst.SpansAggregationMetricAggregation = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SpansAggregationOneOf1 = nil
+		dst.SpansAggregationMetricAggregation = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.SpansAggregationOneOf = nil
-		dst.SpansAggregationOneOf1 = nil
+		dst.SpansAggregationDimensionAggregation = nil
+		dst.SpansAggregationMetricAggregation = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(SpansAggregation)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *SpansAggregation) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src SpansAggregation) MarshalJSON() ([]byte, error) {
-	if src.SpansAggregationOneOf != nil {
-		return json.Marshal(&src.SpansAggregationOneOf)
+	if src.SpansAggregationDimensionAggregation != nil {
+		return json.Marshal(&src.SpansAggregationDimensionAggregation)
 	}
 
-	if src.SpansAggregationOneOf1 != nil {
-		return json.Marshal(&src.SpansAggregationOneOf1)
+	if src.SpansAggregationMetricAggregation != nil {
+		return json.Marshal(&src.SpansAggregationMetricAggregation)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *SpansAggregation) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.SpansAggregationOneOf != nil {
-		return obj.SpansAggregationOneOf
+	if obj.SpansAggregationDimensionAggregation != nil {
+		return obj.SpansAggregationDimensionAggregation
 	}
 
-	if obj.SpansAggregationOneOf1 != nil {
-		return obj.SpansAggregationOneOf1
+	if obj.SpansAggregationMetricAggregation != nil {
+		return obj.SpansAggregationMetricAggregation
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *SpansAggregation) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj SpansAggregation) GetActualInstanceValue() (interface{}) {
-	if obj.SpansAggregationOneOf != nil {
-		return *obj.SpansAggregationOneOf
+	if obj.SpansAggregationDimensionAggregation != nil {
+		return *obj.SpansAggregationDimensionAggregation
 	}
 
-	if obj.SpansAggregationOneOf1 != nil {
-		return *obj.SpansAggregationOneOf1
+	if obj.SpansAggregationMetricAggregation != nil {
+		return *obj.SpansAggregationMetricAggregation
 	}
 
 	// all schemas are nil

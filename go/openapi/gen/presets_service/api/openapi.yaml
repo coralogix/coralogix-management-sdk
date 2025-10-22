@@ -467,7 +467,6 @@ paths:
           - ALERTS
           - TEST_NOTIFICATIONS
           - CASES
-          example: ALERTS
           type: string
         style: form
       responses:
@@ -485,7 +484,7 @@ paths:
         source: |-
           const fetch = require('node-fetch');
 
-          let url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:defaultSummaryGet?connector_type=SOME_STRING_VALUE&entity_type=ALERTS';
+          let url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:defaultSummaryGet?connector_type=SOME_STRING_VALUE&entity_type=SOME_STRING_VALUE';
 
           let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
 
@@ -499,7 +498,7 @@ paths:
 
           url = "https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:defaultSummaryGet"
 
-          querystring = {"connector_type":"SOME_STRING_VALUE","entity_type":"ALERTS"}
+          querystring = {"connector_type":"SOME_STRING_VALUE","entity_type":"SOME_STRING_VALUE"}
 
           headers = {"Authorization": "Bearer <API_KEY>"}
 
@@ -509,7 +508,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:defaultSummaryGet?connector_type=SOME_STRING_VALUE&entity_type=ALERTS' \
+            --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:defaultSummaryGet?connector_type=SOME_STRING_VALUE&entity_type=SOME_STRING_VALUE' \
             --header 'Authorization: Bearer <API_KEY>'
   /notifications/notification-center/v1/presets:summariesList:
     get:
@@ -541,7 +540,6 @@ paths:
           - ALERTS
           - TEST_NOTIFICATIONS
           - CASES
-          example: ALERTS
           type: string
         style: form
       responses:
@@ -559,7 +557,7 @@ paths:
         source: |-
           const fetch = require('node-fetch');
 
-          let url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:summariesList?connector_type=SOME_STRING_VALUE&entity_type=ALERTS';
+          let url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:summariesList?connector_type=SOME_STRING_VALUE&entity_type=SOME_STRING_VALUE';
 
           let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
 
@@ -573,7 +571,7 @@ paths:
 
           url = "https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:summariesList"
 
-          querystring = {"connector_type":"SOME_STRING_VALUE","entity_type":"ALERTS"}
+          querystring = {"connector_type":"SOME_STRING_VALUE","entity_type":"SOME_STRING_VALUE"}
 
           headers = {"Authorization": "Bearer <API_KEY>"}
 
@@ -583,7 +581,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:summariesList?connector_type=SOME_STRING_VALUE&entity_type=ALERTS' \
+            --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:summariesList?connector_type=SOME_STRING_VALUE&entity_type=SOME_STRING_VALUE' \
             --header 'Authorization: Bearer <API_KEY>'
   /notifications/notification-center/v1/presets:systemDefaultSummaryGet:
     get:
@@ -615,7 +613,6 @@ paths:
           - ALERTS
           - TEST_NOTIFICATIONS
           - CASES
-          example: ALERTS
           type: string
         style: form
       responses:
@@ -633,7 +630,7 @@ paths:
         source: |-
           const fetch = require('node-fetch');
 
-          let url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:systemDefaultSummaryGet?connector_type=SOME_STRING_VALUE&entity_type=ALERTS';
+          let url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:systemDefaultSummaryGet?connector_type=SOME_STRING_VALUE&entity_type=SOME_STRING_VALUE';
 
           let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
 
@@ -647,7 +644,7 @@ paths:
 
           url = "https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:systemDefaultSummaryGet"
 
-          querystring = {"connector_type":"SOME_STRING_VALUE","entity_type":"ALERTS"}
+          querystring = {"connector_type":"SOME_STRING_VALUE","entity_type":"SOME_STRING_VALUE"}
 
           headers = {"Authorization": "Bearer <API_KEY>"}
 
@@ -657,7 +654,7 @@ paths:
       - lang: Shell
         source: |-
           curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:systemDefaultSummaryGet?connector_type=SOME_STRING_VALUE&entity_type=ALERTS' \
+            --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:systemDefaultSummaryGet?connector_type=SOME_STRING_VALUE&entity_type=SOME_STRING_VALUE' \
             --header 'Authorization: Bearer <API_KEY>'
 components:
   schemas:
@@ -711,8 +708,39 @@ components:
           type: object
       title: Batch Get Presets Response
       type: object
-    ConfigOverrides:
+    ColorsByAggregation:
       additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
+    ConditionTypeMatchEntityType:
+      additionalProperties: false
+      example:
+        matchEntityType: "{}"
+      properties:
+        matchEntityType:
+          type: object
+      type: object
+    ConditionTypeMatchEntityTypeAndSubType:
+      additionalProperties: false
+      properties:
+        matchEntityTypeAndSubType:
+          $ref: "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
+      type: object
+    ConfigOverrides:
       example:
         messageConfig:
           fields:
@@ -790,8 +818,40 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValues_1"
-      - $ref: "#/components/schemas/FilterPathAndValues_2"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
     Filters:
       description: This data structure represents a filter
       externalDocs:
@@ -931,7 +991,6 @@ components:
           type: array
       type: object
     Preset:
-      additionalProperties: false
       description: Set of preconfigured templates for notification content rendering
       example:
         connectorType: CONNECTOR_TYPE_UNSPECIFIED
@@ -1001,7 +1060,6 @@ components:
       title: Preset
       type: object
     PresetSummary:
-      additionalProperties: false
       description: Provides a concise overview of a preset
       example:
         connectorType: CONNECTOR_TYPE_UNSPECIFIED
@@ -1095,6 +1153,18 @@ components:
       type: object
     SetPresetAsDefaultResponse:
       type: object
+    YAxisViewByCategory:
+      additionalProperties: false
+      properties:
+        category:
+          $ref: "#/components/schemas/YAxisViewByCategory"
+      type: object
+    YAxisViewByValue:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: "#/components/schemas/YAxisViewByValue"
+      type: object
     common.Group:
       properties:
         field:
@@ -1114,8 +1184,8 @@ components:
       type: string
     notification_center.ConditionType:
       oneOf:
-      - $ref: "#/components/schemas/notification_center_ConditionType_oneOf"
-      - $ref: "#/components/schemas/notification_center_ConditionType_oneOf_1"
+      - $ref: "#/components/schemas/ConditionTypeMatchEntityType"
+      - $ref: "#/components/schemas/ConditionTypeMatchEntityTypeAndSubType"
     notification_center.EntityType:
       enum:
       - ENTITY_TYPE_UNSPECIFIED
@@ -1186,52 +1256,6 @@ components:
       - entityType
       - name
       title: Preset
-      type: object
-    FilterPathAndValues_1:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValues_2:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    notification_center_ConditionType_oneOf:
-      additionalProperties: false
-      example:
-        matchEntityType: "{}"
-      properties:
-        matchEntityType:
-          type: object
-      type: object
-    notification_center_ConditionType_oneOf_1:
-      additionalProperties: false
-      properties:
-        matchEntityTypeAndSubType:
-          $ref: "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
       type: object
   securitySchemes:
     apiKeyAuth:

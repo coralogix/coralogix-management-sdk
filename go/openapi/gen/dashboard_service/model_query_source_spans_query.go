@@ -19,7 +19,11 @@ var _ MappedNullable = &QuerySourceSpansQuery{}
 
 // QuerySourceSpansQuery struct for QuerySourceSpansQuery
 type QuerySourceSpansQuery struct {
-	Type *QuerySourceSpansQueryType `json:"type,omitempty"`
+	AllOption *AllOption `json:"allOption,omitempty"`
+	RefreshStrategy *VariableSourceV2RefreshStrategy `json:"refreshStrategy,omitempty"`
+	SpansQuery *QuerySourceSpansQuery `json:"spansQuery,omitempty"`
+	ValueDisplayOptions *VariableSourceV2ValueDisplayOptions `json:"valueDisplayOptions,omitempty"`
+	ValuesOrderDirection *OrderDirection `json:"valuesOrderDirection,omitempty"`
 }
 
 // NewQuerySourceSpansQuery instantiates a new QuerySourceSpansQuery object
@@ -39,36 +43,164 @@ func NewQuerySourceSpansQueryWithDefaults() *QuerySourceSpansQuery {
 	return &this
 }
 
-// GetType returns the Type field value if set, zero value otherwise.
-func (o *QuerySourceSpansQuery) GetType() QuerySourceSpansQueryType {
-	if o == nil || IsNil(o.Type) {
-		var ret QuerySourceSpansQueryType
+// GetAllOption returns the AllOption field value if set, zero value otherwise.
+func (o *QuerySourceSpansQuery) GetAllOption() AllOption {
+	if o == nil || IsNil(o.AllOption) {
+		var ret AllOption
 		return ret
 	}
-	return *o.Type
+	return *o.AllOption
 }
 
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// GetAllOptionOk returns a tuple with the AllOption field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QuerySourceSpansQuery) GetTypeOk() (*QuerySourceSpansQueryType, bool) {
-	if o == nil || IsNil(o.Type) {
+func (o *QuerySourceSpansQuery) GetAllOptionOk() (*AllOption, bool) {
+	if o == nil || IsNil(o.AllOption) {
 		return nil, false
 	}
-	return o.Type, true
+	return o.AllOption, true
 }
 
-// HasType returns a boolean if a field has been set.
-func (o *QuerySourceSpansQuery) HasType() bool {
-	if o != nil && !IsNil(o.Type) {
+// HasAllOption returns a boolean if a field has been set.
+func (o *QuerySourceSpansQuery) HasAllOption() bool {
+	if o != nil && !IsNil(o.AllOption) {
 		return true
 	}
 
 	return false
 }
 
-// SetType gets a reference to the given QuerySourceSpansQueryType and assigns it to the Type field.
-func (o *QuerySourceSpansQuery) SetType(v QuerySourceSpansQueryType) {
-	o.Type = &v
+// SetAllOption gets a reference to the given AllOption and assigns it to the AllOption field.
+func (o *QuerySourceSpansQuery) SetAllOption(v AllOption) {
+	o.AllOption = &v
+}
+
+// GetRefreshStrategy returns the RefreshStrategy field value if set, zero value otherwise.
+func (o *QuerySourceSpansQuery) GetRefreshStrategy() VariableSourceV2RefreshStrategy {
+	if o == nil || IsNil(o.RefreshStrategy) {
+		var ret VariableSourceV2RefreshStrategy
+		return ret
+	}
+	return *o.RefreshStrategy
+}
+
+// GetRefreshStrategyOk returns a tuple with the RefreshStrategy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QuerySourceSpansQuery) GetRefreshStrategyOk() (*VariableSourceV2RefreshStrategy, bool) {
+	if o == nil || IsNil(o.RefreshStrategy) {
+		return nil, false
+	}
+	return o.RefreshStrategy, true
+}
+
+// HasRefreshStrategy returns a boolean if a field has been set.
+func (o *QuerySourceSpansQuery) HasRefreshStrategy() bool {
+	if o != nil && !IsNil(o.RefreshStrategy) {
+		return true
+	}
+
+	return false
+}
+
+// SetRefreshStrategy gets a reference to the given VariableSourceV2RefreshStrategy and assigns it to the RefreshStrategy field.
+func (o *QuerySourceSpansQuery) SetRefreshStrategy(v VariableSourceV2RefreshStrategy) {
+	o.RefreshStrategy = &v
+}
+
+// GetSpansQuery returns the SpansQuery field value if set, zero value otherwise.
+func (o *QuerySourceSpansQuery) GetSpansQuery() QuerySourceSpansQuery {
+	if o == nil || IsNil(o.SpansQuery) {
+		var ret QuerySourceSpansQuery
+		return ret
+	}
+	return *o.SpansQuery
+}
+
+// GetSpansQueryOk returns a tuple with the SpansQuery field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QuerySourceSpansQuery) GetSpansQueryOk() (*QuerySourceSpansQuery, bool) {
+	if o == nil || IsNil(o.SpansQuery) {
+		return nil, false
+	}
+	return o.SpansQuery, true
+}
+
+// HasSpansQuery returns a boolean if a field has been set.
+func (o *QuerySourceSpansQuery) HasSpansQuery() bool {
+	if o != nil && !IsNil(o.SpansQuery) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpansQuery gets a reference to the given QuerySourceSpansQuery and assigns it to the SpansQuery field.
+func (o *QuerySourceSpansQuery) SetSpansQuery(v QuerySourceSpansQuery) {
+	o.SpansQuery = &v
+}
+
+// GetValueDisplayOptions returns the ValueDisplayOptions field value if set, zero value otherwise.
+func (o *QuerySourceSpansQuery) GetValueDisplayOptions() VariableSourceV2ValueDisplayOptions {
+	if o == nil || IsNil(o.ValueDisplayOptions) {
+		var ret VariableSourceV2ValueDisplayOptions
+		return ret
+	}
+	return *o.ValueDisplayOptions
+}
+
+// GetValueDisplayOptionsOk returns a tuple with the ValueDisplayOptions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QuerySourceSpansQuery) GetValueDisplayOptionsOk() (*VariableSourceV2ValueDisplayOptions, bool) {
+	if o == nil || IsNil(o.ValueDisplayOptions) {
+		return nil, false
+	}
+	return o.ValueDisplayOptions, true
+}
+
+// HasValueDisplayOptions returns a boolean if a field has been set.
+func (o *QuerySourceSpansQuery) HasValueDisplayOptions() bool {
+	if o != nil && !IsNil(o.ValueDisplayOptions) {
+		return true
+	}
+
+	return false
+}
+
+// SetValueDisplayOptions gets a reference to the given VariableSourceV2ValueDisplayOptions and assigns it to the ValueDisplayOptions field.
+func (o *QuerySourceSpansQuery) SetValueDisplayOptions(v VariableSourceV2ValueDisplayOptions) {
+	o.ValueDisplayOptions = &v
+}
+
+// GetValuesOrderDirection returns the ValuesOrderDirection field value if set, zero value otherwise.
+func (o *QuerySourceSpansQuery) GetValuesOrderDirection() OrderDirection {
+	if o == nil || IsNil(o.ValuesOrderDirection) {
+		var ret OrderDirection
+		return ret
+	}
+	return *o.ValuesOrderDirection
+}
+
+// GetValuesOrderDirectionOk returns a tuple with the ValuesOrderDirection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QuerySourceSpansQuery) GetValuesOrderDirectionOk() (*OrderDirection, bool) {
+	if o == nil || IsNil(o.ValuesOrderDirection) {
+		return nil, false
+	}
+	return o.ValuesOrderDirection, true
+}
+
+// HasValuesOrderDirection returns a boolean if a field has been set.
+func (o *QuerySourceSpansQuery) HasValuesOrderDirection() bool {
+	if o != nil && !IsNil(o.ValuesOrderDirection) {
+		return true
+	}
+
+	return false
+}
+
+// SetValuesOrderDirection gets a reference to the given OrderDirection and assigns it to the ValuesOrderDirection field.
+func (o *QuerySourceSpansQuery) SetValuesOrderDirection(v OrderDirection) {
+	o.ValuesOrderDirection = &v
 }
 
 func (o QuerySourceSpansQuery) MarshalJSON() ([]byte, error) {
@@ -81,8 +213,20 @@ func (o QuerySourceSpansQuery) MarshalJSON() ([]byte, error) {
 
 func (o QuerySourceSpansQuery) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Type) {
-		toSerialize["type"] = o.Type
+	if !IsNil(o.AllOption) {
+		toSerialize["allOption"] = o.AllOption
+	}
+	if !IsNil(o.RefreshStrategy) {
+		toSerialize["refreshStrategy"] = o.RefreshStrategy
+	}
+	if !IsNil(o.SpansQuery) {
+		toSerialize["spansQuery"] = o.SpansQuery
+	}
+	if !IsNil(o.ValueDisplayOptions) {
+		toSerialize["valueDisplayOptions"] = o.ValueDisplayOptions
+	}
+	if !IsNil(o.ValuesOrderDirection) {
+		toSerialize["valuesOrderDirection"] = o.ValuesOrderDirection
 	}
 	return toSerialize, nil
 }

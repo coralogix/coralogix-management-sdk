@@ -18,21 +18,21 @@ import (
 
 // SloThresholdType - struct for SloThresholdType
 type SloThresholdType struct {
-	BurnRateSLOThresholdType *BurnRateSLOThresholdType
-	ErrorBudgetSLOThresholdType *ErrorBudgetSLOThresholdType
+	SloThresholdTypeBurnRate *SloThresholdTypeBurnRate
+	SloThresholdTypeErrorBudget *SloThresholdTypeErrorBudget
 }
 
-// BurnRateSLOThresholdTypeAsSloThresholdType is a convenience function that returns BurnRateSLOThresholdType wrapped in SloThresholdType
-func BurnRateSLOThresholdTypeAsSloThresholdType(v *BurnRateSLOThresholdType) SloThresholdType {
+// SloThresholdTypeBurnRateAsSloThresholdType is a convenience function that returns SloThresholdTypeBurnRate wrapped in SloThresholdType
+func SloThresholdTypeBurnRateAsSloThresholdType(v *SloThresholdTypeBurnRate) SloThresholdType {
 	return SloThresholdType{
-		BurnRateSLOThresholdType: v,
+		SloThresholdTypeBurnRate: v,
 	}
 }
 
-// ErrorBudgetSLOThresholdTypeAsSloThresholdType is a convenience function that returns ErrorBudgetSLOThresholdType wrapped in SloThresholdType
-func ErrorBudgetSLOThresholdTypeAsSloThresholdType(v *ErrorBudgetSLOThresholdType) SloThresholdType {
+// SloThresholdTypeErrorBudgetAsSloThresholdType is a convenience function that returns SloThresholdTypeErrorBudget wrapped in SloThresholdType
+func SloThresholdTypeErrorBudgetAsSloThresholdType(v *SloThresholdTypeErrorBudget) SloThresholdType {
 	return SloThresholdType{
-		ErrorBudgetSLOThresholdType: v,
+		SloThresholdTypeErrorBudget: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func ErrorBudgetSLOThresholdTypeAsSloThresholdType(v *ErrorBudgetSLOThresholdTyp
 func (dst *SloThresholdType) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into BurnRateSLOThresholdType
-	err = newStrictDecoder(data).Decode(&dst.BurnRateSLOThresholdType)
+	// try to unmarshal data into SloThresholdTypeBurnRate
+	err = newStrictDecoder(data).Decode(&dst.SloThresholdTypeBurnRate)
 	if err == nil {
-		jsonBurnRateSLOThresholdType, _ := json.Marshal(dst.BurnRateSLOThresholdType)
-		if string(jsonBurnRateSLOThresholdType) == "{}" { // empty struct
-			dst.BurnRateSLOThresholdType = nil
+		jsonSloThresholdTypeBurnRate, _ := json.Marshal(dst.SloThresholdTypeBurnRate)
+		if string(jsonSloThresholdTypeBurnRate) == "{}" { // empty struct
+			dst.SloThresholdTypeBurnRate = nil
 		} else {
-			if err = validator.Validate(dst.BurnRateSLOThresholdType); err != nil {
-				dst.BurnRateSLOThresholdType = nil
+			if err = validator.Validate(dst.SloThresholdTypeBurnRate); err != nil {
+				dst.SloThresholdTypeBurnRate = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.BurnRateSLOThresholdType = nil
+		dst.SloThresholdTypeBurnRate = nil
 	}
 
-	// try to unmarshal data into ErrorBudgetSLOThresholdType
-	err = newStrictDecoder(data).Decode(&dst.ErrorBudgetSLOThresholdType)
+	// try to unmarshal data into SloThresholdTypeErrorBudget
+	err = newStrictDecoder(data).Decode(&dst.SloThresholdTypeErrorBudget)
 	if err == nil {
-		jsonErrorBudgetSLOThresholdType, _ := json.Marshal(dst.ErrorBudgetSLOThresholdType)
-		if string(jsonErrorBudgetSLOThresholdType) == "{}" { // empty struct
-			dst.ErrorBudgetSLOThresholdType = nil
+		jsonSloThresholdTypeErrorBudget, _ := json.Marshal(dst.SloThresholdTypeErrorBudget)
+		if string(jsonSloThresholdTypeErrorBudget) == "{}" { // empty struct
+			dst.SloThresholdTypeErrorBudget = nil
 		} else {
-			if err = validator.Validate(dst.ErrorBudgetSLOThresholdType); err != nil {
-				dst.ErrorBudgetSLOThresholdType = nil
+			if err = validator.Validate(dst.SloThresholdTypeErrorBudget); err != nil {
+				dst.SloThresholdTypeErrorBudget = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.ErrorBudgetSLOThresholdType = nil
+		dst.SloThresholdTypeErrorBudget = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.BurnRateSLOThresholdType = nil
-		dst.ErrorBudgetSLOThresholdType = nil
+		dst.SloThresholdTypeBurnRate = nil
+		dst.SloThresholdTypeErrorBudget = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(SloThresholdType)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *SloThresholdType) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src SloThresholdType) MarshalJSON() ([]byte, error) {
-	if src.BurnRateSLOThresholdType != nil {
-		return json.Marshal(&src.BurnRateSLOThresholdType)
+	if src.SloThresholdTypeBurnRate != nil {
+		return json.Marshal(&src.SloThresholdTypeBurnRate)
 	}
 
-	if src.ErrorBudgetSLOThresholdType != nil {
-		return json.Marshal(&src.ErrorBudgetSLOThresholdType)
+	if src.SloThresholdTypeErrorBudget != nil {
+		return json.Marshal(&src.SloThresholdTypeErrorBudget)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *SloThresholdType) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.BurnRateSLOThresholdType != nil {
-		return obj.BurnRateSLOThresholdType
+	if obj.SloThresholdTypeBurnRate != nil {
+		return obj.SloThresholdTypeBurnRate
 	}
 
-	if obj.ErrorBudgetSLOThresholdType != nil {
-		return obj.ErrorBudgetSLOThresholdType
+	if obj.SloThresholdTypeErrorBudget != nil {
+		return obj.SloThresholdTypeErrorBudget
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *SloThresholdType) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj SloThresholdType) GetActualInstanceValue() (interface{}) {
-	if obj.BurnRateSLOThresholdType != nil {
-		return *obj.BurnRateSLOThresholdType
+	if obj.SloThresholdTypeBurnRate != nil {
+		return *obj.SloThresholdTypeBurnRate
 	}
 
-	if obj.ErrorBudgetSLOThresholdType != nil {
-		return *obj.ErrorBudgetSLOThresholdType
+	if obj.SloThresholdTypeErrorBudget != nil {
+		return *obj.SloThresholdTypeErrorBudget
 	}
 
 	// all schemas are nil

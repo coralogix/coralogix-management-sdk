@@ -13,8 +13,8 @@ import (
 )
 
 // CreateAlert returns a reusable OpenAPI alert definition payload
-func CreateAlert() *alerts.AlertDefinitionProperties2 {
-	return &alerts.AlertDefinitionProperties2{
+func CreateAlert() *alerts.AlertDefPropertiesLogsThreshold {
+	return &alerts.AlertDefPropertiesLogsThreshold{
 		Name:        "Standard alert example",
 		Description: alerts.PtrString("Standard alert example from OpenAPI SDK"),
 		Enabled:     alerts.PtrBool(true),
@@ -31,7 +31,7 @@ func CreateAlert() *alerts.AlertDefinitionProperties2 {
 					Minutes:  alerts.PtrInt64(5),
 					NotifyOn: alerts.NOTIFYON_NOTIFY_ON_TRIGGERED_AND_RESOLVED.Ptr(),
 					Integration: alerts.V3IntegrationType{
-						IntegrationType1: &alerts.IntegrationType1{
+						IntegrationTypeRecipients: &alerts.IntegrationTypeRecipients{
 							Recipients: &alerts.Recipients{
 								Emails: []string{"example@coralogix.com"},
 							},
@@ -97,7 +97,7 @@ func TestAlerts(t *testing.T) {
 	ctx := context.Background()
 
 	createReq := alerts.AlertDefsServiceCreateAlertDefRequest{
-		AlertDefinitionProperties2: CreateAlert(),
+		AlertDefPropertiesLogsThreshold: CreateAlert(),
 	}
 	created, httpResp, err := client.
 		AlertDefsServiceCreateAlertDef(ctx).
@@ -116,16 +116,16 @@ func TestAlerts(t *testing.T) {
 	updateReq := alerts.ReplaceAlertDefinitionRequest{
 		Id: created.AlertDef.Id,
 		AlertDefProperties: alerts.AlertDefProperties{
-			AlertDefinitionProperties15: &alerts.AlertDefinitionProperties15{
-				Name:          created.AlertDef.AlertDefProperties.AlertDefinitionProperties15.Name,
+			AlertDefPropertiesLogsThreshold: &alerts.AlertDefPropertiesLogsThreshold{
+				Name:          created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsThreshold.Name,
 				Description:   &newDesc,
-				Enabled:       created.AlertDef.AlertDefProperties.AlertDefinitionProperties15.Enabled,
-				Priority:      created.AlertDef.AlertDefProperties.AlertDefinitionProperties15.Priority,
-				Type:          created.AlertDef.AlertDefProperties.AlertDefinitionProperties15.Type,
-				EntityLabels:  created.AlertDef.AlertDefProperties.AlertDefinitionProperties15.EntityLabels,
-				GroupByKeys:   created.AlertDef.AlertDefProperties.AlertDefinitionProperties15.GroupByKeys,
-				PhantomMode:   created.AlertDef.AlertDefProperties.AlertDefinitionProperties15.PhantomMode,
-				LogsThreshold: created.AlertDef.AlertDefProperties.AlertDefinitionProperties15.LogsThreshold,
+				Enabled:       created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsThreshold.Enabled,
+				Priority:      created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsThreshold.Priority,
+				Type:          created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsThreshold.Type,
+				EntityLabels:  created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsThreshold.EntityLabels,
+				GroupByKeys:   created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsThreshold.GroupByKeys,
+				PhantomMode:   created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsThreshold.PhantomMode,
+				LogsThreshold: created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsThreshold.LogsThreshold,
 			},
 		},
 	}
@@ -134,7 +134,7 @@ func TestAlerts(t *testing.T) {
 		ReplaceAlertDefinitionRequest(updateReq).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, *updated.AlertDef.AlertDefProperties.AlertDefinitionProperties15.Description, newDesc)
+	assert.Equal(t, *updated.AlertDef.AlertDefProperties.AlertDefPropertiesLogsThreshold.Description, newDesc)
 
 	_, httpResp, err = client.
 		AlertDefsServiceDeleteAlertDef(ctx, updated.AlertDef.Id).
@@ -157,7 +157,7 @@ func TestAlertScheduler(t *testing.T) {
 
 	alertsClient := cxsdk.NewAlertsClient(cpc)
 	createAlertReq := alerts.AlertDefsServiceCreateAlertDefRequest{
-		AlertDefinitionProperties2: CreateAlert(),
+		AlertDefPropertiesLogsThreshold: CreateAlert(),
 	}
 
 	createdAlert, httpResp, err := alertsClient.
@@ -172,11 +172,11 @@ func TestAlertScheduler(t *testing.T) {
 	name := "Scheduler Test " + time.Now().Format(time.RFC3339)
 	enabled := true
 
-	schedule := scheduler.ScheduleOneOfAsSchedule(&scheduler.ScheduleOneOf{
+	schedule := scheduler.ScheduleOneTimeAsSchedule(&scheduler.ScheduleOneTime{
 		ScheduleOperation: scheduler.SCHEDULEOPERATION_SCHEDULE_OPERATION_MUTE.Ptr(),
 		OneTime: &scheduler.OneTime{
 			Timeframe: &scheduler.Timeframe{
-				TimeframeOneOf: &scheduler.TimeframeOneOf{
+				TimeframeEndTime: &scheduler.TimeframeEndTime{
 					StartTime: scheduler.PtrString("2025-01-01T00:00:00.000Z"),
 					EndTime:   scheduler.PtrString("2025-12-31T23:59:59.000Z"),
 					Timezone:  scheduler.PtrString("UTC"),
@@ -186,7 +186,7 @@ func TestAlertScheduler(t *testing.T) {
 	})
 
 	filter := scheduler.AlertSchedulerRuleProtobufV1Filter{
-		AlertSchedulerRuleProtobufV1FilterOneOf1: &scheduler.AlertSchedulerRuleProtobufV1FilterOneOf1{
+		FilterAlertUniqueIds: &scheduler.FilterAlertUniqueIds{
 			WhatExpression: scheduler.PtrString("source logs | filter $d.cpodId:string == '122'"),
 			AlertUniqueIds: &scheduler.AlertUniqueIds{
 				Value: []string{createdAlert.AlertDef.Id},

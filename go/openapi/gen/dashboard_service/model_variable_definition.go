@@ -18,21 +18,21 @@ import (
 
 // VariableDefinition - struct for VariableDefinition
 type VariableDefinition struct {
-	VariableDefinitionOneOf *VariableDefinitionOneOf
-	VariableDefinitionOneOf1 *VariableDefinitionOneOf1
+	DefinitionConstant *DefinitionConstant
+	DefinitionMultiSelect *DefinitionMultiSelect
 }
 
-// VariableDefinitionOneOfAsVariableDefinition is a convenience function that returns VariableDefinitionOneOf wrapped in VariableDefinition
-func VariableDefinitionOneOfAsVariableDefinition(v *VariableDefinitionOneOf) VariableDefinition {
+// DefinitionConstantAsVariableDefinition is a convenience function that returns DefinitionConstant wrapped in VariableDefinition
+func DefinitionConstantAsVariableDefinition(v *DefinitionConstant) VariableDefinition {
 	return VariableDefinition{
-		VariableDefinitionOneOf: v,
+		DefinitionConstant: v,
 	}
 }
 
-// VariableDefinitionOneOf1AsVariableDefinition is a convenience function that returns VariableDefinitionOneOf1 wrapped in VariableDefinition
-func VariableDefinitionOneOf1AsVariableDefinition(v *VariableDefinitionOneOf1) VariableDefinition {
+// DefinitionMultiSelectAsVariableDefinition is a convenience function that returns DefinitionMultiSelect wrapped in VariableDefinition
+func DefinitionMultiSelectAsVariableDefinition(v *DefinitionMultiSelect) VariableDefinition {
 	return VariableDefinition{
-		VariableDefinitionOneOf1: v,
+		DefinitionMultiSelect: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func VariableDefinitionOneOf1AsVariableDefinition(v *VariableDefinitionOneOf1) V
 func (dst *VariableDefinition) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into VariableDefinitionOneOf
-	err = newStrictDecoder(data).Decode(&dst.VariableDefinitionOneOf)
+	// try to unmarshal data into DefinitionConstant
+	err = newStrictDecoder(data).Decode(&dst.DefinitionConstant)
 	if err == nil {
-		jsonVariableDefinitionOneOf, _ := json.Marshal(dst.VariableDefinitionOneOf)
-		if string(jsonVariableDefinitionOneOf) == "{}" { // empty struct
-			dst.VariableDefinitionOneOf = nil
+		jsonDefinitionConstant, _ := json.Marshal(dst.DefinitionConstant)
+		if string(jsonDefinitionConstant) == "{}" { // empty struct
+			dst.DefinitionConstant = nil
 		} else {
-			if err = validator.Validate(dst.VariableDefinitionOneOf); err != nil {
-				dst.VariableDefinitionOneOf = nil
+			if err = validator.Validate(dst.DefinitionConstant); err != nil {
+				dst.DefinitionConstant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VariableDefinitionOneOf = nil
+		dst.DefinitionConstant = nil
 	}
 
-	// try to unmarshal data into VariableDefinitionOneOf1
-	err = newStrictDecoder(data).Decode(&dst.VariableDefinitionOneOf1)
+	// try to unmarshal data into DefinitionMultiSelect
+	err = newStrictDecoder(data).Decode(&dst.DefinitionMultiSelect)
 	if err == nil {
-		jsonVariableDefinitionOneOf1, _ := json.Marshal(dst.VariableDefinitionOneOf1)
-		if string(jsonVariableDefinitionOneOf1) == "{}" { // empty struct
-			dst.VariableDefinitionOneOf1 = nil
+		jsonDefinitionMultiSelect, _ := json.Marshal(dst.DefinitionMultiSelect)
+		if string(jsonDefinitionMultiSelect) == "{}" { // empty struct
+			dst.DefinitionMultiSelect = nil
 		} else {
-			if err = validator.Validate(dst.VariableDefinitionOneOf1); err != nil {
-				dst.VariableDefinitionOneOf1 = nil
+			if err = validator.Validate(dst.DefinitionMultiSelect); err != nil {
+				dst.DefinitionMultiSelect = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VariableDefinitionOneOf1 = nil
+		dst.DefinitionMultiSelect = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.VariableDefinitionOneOf = nil
-		dst.VariableDefinitionOneOf1 = nil
+		dst.DefinitionConstant = nil
+		dst.DefinitionMultiSelect = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(VariableDefinition)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *VariableDefinition) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src VariableDefinition) MarshalJSON() ([]byte, error) {
-	if src.VariableDefinitionOneOf != nil {
-		return json.Marshal(&src.VariableDefinitionOneOf)
+	if src.DefinitionConstant != nil {
+		return json.Marshal(&src.DefinitionConstant)
 	}
 
-	if src.VariableDefinitionOneOf1 != nil {
-		return json.Marshal(&src.VariableDefinitionOneOf1)
+	if src.DefinitionMultiSelect != nil {
+		return json.Marshal(&src.DefinitionMultiSelect)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *VariableDefinition) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.VariableDefinitionOneOf != nil {
-		return obj.VariableDefinitionOneOf
+	if obj.DefinitionConstant != nil {
+		return obj.DefinitionConstant
 	}
 
-	if obj.VariableDefinitionOneOf1 != nil {
-		return obj.VariableDefinitionOneOf1
+	if obj.DefinitionMultiSelect != nil {
+		return obj.DefinitionMultiSelect
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *VariableDefinition) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj VariableDefinition) GetActualInstanceValue() (interface{}) {
-	if obj.VariableDefinitionOneOf != nil {
-		return *obj.VariableDefinitionOneOf
+	if obj.DefinitionConstant != nil {
+		return *obj.DefinitionConstant
 	}
 
-	if obj.VariableDefinitionOneOf1 != nil {
-		return *obj.VariableDefinitionOneOf1
+	if obj.DefinitionMultiSelect != nil {
+		return *obj.DefinitionMultiSelect
 	}
 
 	// all schemas are nil

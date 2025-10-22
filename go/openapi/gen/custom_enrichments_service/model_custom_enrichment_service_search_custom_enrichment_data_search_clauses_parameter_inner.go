@@ -18,21 +18,21 @@ import (
 
 // CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner - struct for CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner
 type CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner struct {
-	SearchClause *SearchClause
-	SearchClause1 *SearchClause1
+	SearchClauseId *SearchClauseId
+	SearchClauseName *SearchClauseName
 }
 
-// SearchClauseAsCustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner is a convenience function that returns SearchClause wrapped in CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner
-func SearchClauseAsCustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner(v *SearchClause) CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner {
+// SearchClauseIdAsCustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner is a convenience function that returns SearchClauseId wrapped in CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner
+func SearchClauseIdAsCustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner(v *SearchClauseId) CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner {
 	return CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner{
-		SearchClause: v,
+		SearchClauseId: v,
 	}
 }
 
-// SearchClause1AsCustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner is a convenience function that returns SearchClause1 wrapped in CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner
-func SearchClause1AsCustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner(v *SearchClause1) CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner {
+// SearchClauseNameAsCustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner is a convenience function that returns SearchClauseName wrapped in CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner
+func SearchClauseNameAsCustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner(v *SearchClauseName) CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner {
 	return CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner{
-		SearchClause1: v,
+		SearchClauseName: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func SearchClause1AsCustomEnrichmentServiceSearchCustomEnrichmentDataSearchClaus
 func (dst *CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into SearchClause
-	err = newStrictDecoder(data).Decode(&dst.SearchClause)
+	// try to unmarshal data into SearchClauseId
+	err = newStrictDecoder(data).Decode(&dst.SearchClauseId)
 	if err == nil {
-		jsonSearchClause, _ := json.Marshal(dst.SearchClause)
-		if string(jsonSearchClause) == "{}" { // empty struct
-			dst.SearchClause = nil
+		jsonSearchClauseId, _ := json.Marshal(dst.SearchClauseId)
+		if string(jsonSearchClauseId) == "{}" { // empty struct
+			dst.SearchClauseId = nil
 		} else {
-			if err = validator.Validate(dst.SearchClause); err != nil {
-				dst.SearchClause = nil
+			if err = validator.Validate(dst.SearchClauseId); err != nil {
+				dst.SearchClauseId = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SearchClause = nil
+		dst.SearchClauseId = nil
 	}
 
-	// try to unmarshal data into SearchClause1
-	err = newStrictDecoder(data).Decode(&dst.SearchClause1)
+	// try to unmarshal data into SearchClauseName
+	err = newStrictDecoder(data).Decode(&dst.SearchClauseName)
 	if err == nil {
-		jsonSearchClause1, _ := json.Marshal(dst.SearchClause1)
-		if string(jsonSearchClause1) == "{}" { // empty struct
-			dst.SearchClause1 = nil
+		jsonSearchClauseName, _ := json.Marshal(dst.SearchClauseName)
+		if string(jsonSearchClauseName) == "{}" { // empty struct
+			dst.SearchClauseName = nil
 		} else {
-			if err = validator.Validate(dst.SearchClause1); err != nil {
-				dst.SearchClause1 = nil
+			if err = validator.Validate(dst.SearchClauseName); err != nil {
+				dst.SearchClauseName = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SearchClause1 = nil
+		dst.SearchClauseName = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.SearchClause = nil
-		dst.SearchClause1 = nil
+		dst.SearchClauseId = nil
+		dst.SearchClauseName = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParamet
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner) MarshalJSON() ([]byte, error) {
-	if src.SearchClause != nil {
-		return json.Marshal(&src.SearchClause)
+	if src.SearchClauseId != nil {
+		return json.Marshal(&src.SearchClauseId)
 	}
 
-	if src.SearchClause1 != nil {
-		return json.Marshal(&src.SearchClause1)
+	if src.SearchClauseName != nil {
+		return json.Marshal(&src.SearchClauseName)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParamet
 	if obj == nil {
 		return nil
 	}
-	if obj.SearchClause != nil {
-		return obj.SearchClause
+	if obj.SearchClauseId != nil {
+		return obj.SearchClauseId
 	}
 
-	if obj.SearchClause1 != nil {
-		return obj.SearchClause1
+	if obj.SearchClauseName != nil {
+		return obj.SearchClauseName
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParamet
 
 // Get the actual instance value
 func (obj CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner) GetActualInstanceValue() (interface{}) {
-	if obj.SearchClause != nil {
-		return *obj.SearchClause
+	if obj.SearchClauseId != nil {
+		return *obj.SearchClauseId
 	}
 
-	if obj.SearchClause1 != nil {
-		return *obj.SearchClause1
+	if obj.SearchClauseName != nil {
+		return *obj.SearchClauseName
 	}
 
 	// all schemas are nil

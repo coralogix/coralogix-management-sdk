@@ -19,7 +19,11 @@ var _ MappedNullable = &QuerySourceDataprimeQuery{}
 
 // QuerySourceDataprimeQuery struct for QuerySourceDataprimeQuery
 type QuerySourceDataprimeQuery struct {
-	Type *DataprimeQueryType `json:"type,omitempty"`
+	AllOption *AllOption `json:"allOption,omitempty"`
+	DataprimeQuery *QuerySourceDataprimeQuery `json:"dataprimeQuery,omitempty"`
+	RefreshStrategy *VariableSourceV2RefreshStrategy `json:"refreshStrategy,omitempty"`
+	ValueDisplayOptions *VariableSourceV2ValueDisplayOptions `json:"valueDisplayOptions,omitempty"`
+	ValuesOrderDirection *OrderDirection `json:"valuesOrderDirection,omitempty"`
 }
 
 // NewQuerySourceDataprimeQuery instantiates a new QuerySourceDataprimeQuery object
@@ -39,36 +43,164 @@ func NewQuerySourceDataprimeQueryWithDefaults() *QuerySourceDataprimeQuery {
 	return &this
 }
 
-// GetType returns the Type field value if set, zero value otherwise.
-func (o *QuerySourceDataprimeQuery) GetType() DataprimeQueryType {
-	if o == nil || IsNil(o.Type) {
-		var ret DataprimeQueryType
+// GetAllOption returns the AllOption field value if set, zero value otherwise.
+func (o *QuerySourceDataprimeQuery) GetAllOption() AllOption {
+	if o == nil || IsNil(o.AllOption) {
+		var ret AllOption
 		return ret
 	}
-	return *o.Type
+	return *o.AllOption
 }
 
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// GetAllOptionOk returns a tuple with the AllOption field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QuerySourceDataprimeQuery) GetTypeOk() (*DataprimeQueryType, bool) {
-	if o == nil || IsNil(o.Type) {
+func (o *QuerySourceDataprimeQuery) GetAllOptionOk() (*AllOption, bool) {
+	if o == nil || IsNil(o.AllOption) {
 		return nil, false
 	}
-	return o.Type, true
+	return o.AllOption, true
 }
 
-// HasType returns a boolean if a field has been set.
-func (o *QuerySourceDataprimeQuery) HasType() bool {
-	if o != nil && !IsNil(o.Type) {
+// HasAllOption returns a boolean if a field has been set.
+func (o *QuerySourceDataprimeQuery) HasAllOption() bool {
+	if o != nil && !IsNil(o.AllOption) {
 		return true
 	}
 
 	return false
 }
 
-// SetType gets a reference to the given DataprimeQueryType and assigns it to the Type field.
-func (o *QuerySourceDataprimeQuery) SetType(v DataprimeQueryType) {
-	o.Type = &v
+// SetAllOption gets a reference to the given AllOption and assigns it to the AllOption field.
+func (o *QuerySourceDataprimeQuery) SetAllOption(v AllOption) {
+	o.AllOption = &v
+}
+
+// GetDataprimeQuery returns the DataprimeQuery field value if set, zero value otherwise.
+func (o *QuerySourceDataprimeQuery) GetDataprimeQuery() QuerySourceDataprimeQuery {
+	if o == nil || IsNil(o.DataprimeQuery) {
+		var ret QuerySourceDataprimeQuery
+		return ret
+	}
+	return *o.DataprimeQuery
+}
+
+// GetDataprimeQueryOk returns a tuple with the DataprimeQuery field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QuerySourceDataprimeQuery) GetDataprimeQueryOk() (*QuerySourceDataprimeQuery, bool) {
+	if o == nil || IsNil(o.DataprimeQuery) {
+		return nil, false
+	}
+	return o.DataprimeQuery, true
+}
+
+// HasDataprimeQuery returns a boolean if a field has been set.
+func (o *QuerySourceDataprimeQuery) HasDataprimeQuery() bool {
+	if o != nil && !IsNil(o.DataprimeQuery) {
+		return true
+	}
+
+	return false
+}
+
+// SetDataprimeQuery gets a reference to the given QuerySourceDataprimeQuery and assigns it to the DataprimeQuery field.
+func (o *QuerySourceDataprimeQuery) SetDataprimeQuery(v QuerySourceDataprimeQuery) {
+	o.DataprimeQuery = &v
+}
+
+// GetRefreshStrategy returns the RefreshStrategy field value if set, zero value otherwise.
+func (o *QuerySourceDataprimeQuery) GetRefreshStrategy() VariableSourceV2RefreshStrategy {
+	if o == nil || IsNil(o.RefreshStrategy) {
+		var ret VariableSourceV2RefreshStrategy
+		return ret
+	}
+	return *o.RefreshStrategy
+}
+
+// GetRefreshStrategyOk returns a tuple with the RefreshStrategy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QuerySourceDataprimeQuery) GetRefreshStrategyOk() (*VariableSourceV2RefreshStrategy, bool) {
+	if o == nil || IsNil(o.RefreshStrategy) {
+		return nil, false
+	}
+	return o.RefreshStrategy, true
+}
+
+// HasRefreshStrategy returns a boolean if a field has been set.
+func (o *QuerySourceDataprimeQuery) HasRefreshStrategy() bool {
+	if o != nil && !IsNil(o.RefreshStrategy) {
+		return true
+	}
+
+	return false
+}
+
+// SetRefreshStrategy gets a reference to the given VariableSourceV2RefreshStrategy and assigns it to the RefreshStrategy field.
+func (o *QuerySourceDataprimeQuery) SetRefreshStrategy(v VariableSourceV2RefreshStrategy) {
+	o.RefreshStrategy = &v
+}
+
+// GetValueDisplayOptions returns the ValueDisplayOptions field value if set, zero value otherwise.
+func (o *QuerySourceDataprimeQuery) GetValueDisplayOptions() VariableSourceV2ValueDisplayOptions {
+	if o == nil || IsNil(o.ValueDisplayOptions) {
+		var ret VariableSourceV2ValueDisplayOptions
+		return ret
+	}
+	return *o.ValueDisplayOptions
+}
+
+// GetValueDisplayOptionsOk returns a tuple with the ValueDisplayOptions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QuerySourceDataprimeQuery) GetValueDisplayOptionsOk() (*VariableSourceV2ValueDisplayOptions, bool) {
+	if o == nil || IsNil(o.ValueDisplayOptions) {
+		return nil, false
+	}
+	return o.ValueDisplayOptions, true
+}
+
+// HasValueDisplayOptions returns a boolean if a field has been set.
+func (o *QuerySourceDataprimeQuery) HasValueDisplayOptions() bool {
+	if o != nil && !IsNil(o.ValueDisplayOptions) {
+		return true
+	}
+
+	return false
+}
+
+// SetValueDisplayOptions gets a reference to the given VariableSourceV2ValueDisplayOptions and assigns it to the ValueDisplayOptions field.
+func (o *QuerySourceDataprimeQuery) SetValueDisplayOptions(v VariableSourceV2ValueDisplayOptions) {
+	o.ValueDisplayOptions = &v
+}
+
+// GetValuesOrderDirection returns the ValuesOrderDirection field value if set, zero value otherwise.
+func (o *QuerySourceDataprimeQuery) GetValuesOrderDirection() OrderDirection {
+	if o == nil || IsNil(o.ValuesOrderDirection) {
+		var ret OrderDirection
+		return ret
+	}
+	return *o.ValuesOrderDirection
+}
+
+// GetValuesOrderDirectionOk returns a tuple with the ValuesOrderDirection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QuerySourceDataprimeQuery) GetValuesOrderDirectionOk() (*OrderDirection, bool) {
+	if o == nil || IsNil(o.ValuesOrderDirection) {
+		return nil, false
+	}
+	return o.ValuesOrderDirection, true
+}
+
+// HasValuesOrderDirection returns a boolean if a field has been set.
+func (o *QuerySourceDataprimeQuery) HasValuesOrderDirection() bool {
+	if o != nil && !IsNil(o.ValuesOrderDirection) {
+		return true
+	}
+
+	return false
+}
+
+// SetValuesOrderDirection gets a reference to the given OrderDirection and assigns it to the ValuesOrderDirection field.
+func (o *QuerySourceDataprimeQuery) SetValuesOrderDirection(v OrderDirection) {
+	o.ValuesOrderDirection = &v
 }
 
 func (o QuerySourceDataprimeQuery) MarshalJSON() ([]byte, error) {
@@ -81,8 +213,20 @@ func (o QuerySourceDataprimeQuery) MarshalJSON() ([]byte, error) {
 
 func (o QuerySourceDataprimeQuery) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Type) {
-		toSerialize["type"] = o.Type
+	if !IsNil(o.AllOption) {
+		toSerialize["allOption"] = o.AllOption
+	}
+	if !IsNil(o.DataprimeQuery) {
+		toSerialize["dataprimeQuery"] = o.DataprimeQuery
+	}
+	if !IsNil(o.RefreshStrategy) {
+		toSerialize["refreshStrategy"] = o.RefreshStrategy
+	}
+	if !IsNil(o.ValueDisplayOptions) {
+		toSerialize["valueDisplayOptions"] = o.ValueDisplayOptions
+	}
+	if !IsNil(o.ValuesOrderDirection) {
+		toSerialize["valuesOrderDirection"] = o.ValuesOrderDirection
 	}
 	return toSerialize, nil
 }

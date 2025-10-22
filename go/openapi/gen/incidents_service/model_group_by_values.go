@@ -18,21 +18,21 @@ import (
 
 // GroupByValues - struct for GroupByValues
 type GroupByValues struct {
-	GroupByValuesOneOf *GroupByValuesOneOf
-	GroupByValuesOneOf1 *GroupByValuesOneOf1
+	GroupByValuesContextualLabels *GroupByValuesContextualLabels
+	GroupByValuesIncidentField *GroupByValuesIncidentField
 }
 
-// GroupByValuesOneOfAsGroupByValues is a convenience function that returns GroupByValuesOneOf wrapped in GroupByValues
-func GroupByValuesOneOfAsGroupByValues(v *GroupByValuesOneOf) GroupByValues {
+// GroupByValuesContextualLabelsAsGroupByValues is a convenience function that returns GroupByValuesContextualLabels wrapped in GroupByValues
+func GroupByValuesContextualLabelsAsGroupByValues(v *GroupByValuesContextualLabels) GroupByValues {
 	return GroupByValues{
-		GroupByValuesOneOf: v,
+		GroupByValuesContextualLabels: v,
 	}
 }
 
-// GroupByValuesOneOf1AsGroupByValues is a convenience function that returns GroupByValuesOneOf1 wrapped in GroupByValues
-func GroupByValuesOneOf1AsGroupByValues(v *GroupByValuesOneOf1) GroupByValues {
+// GroupByValuesIncidentFieldAsGroupByValues is a convenience function that returns GroupByValuesIncidentField wrapped in GroupByValues
+func GroupByValuesIncidentFieldAsGroupByValues(v *GroupByValuesIncidentField) GroupByValues {
 	return GroupByValues{
-		GroupByValuesOneOf1: v,
+		GroupByValuesIncidentField: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func GroupByValuesOneOf1AsGroupByValues(v *GroupByValuesOneOf1) GroupByValues {
 func (dst *GroupByValues) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into GroupByValuesOneOf
-	err = newStrictDecoder(data).Decode(&dst.GroupByValuesOneOf)
+	// try to unmarshal data into GroupByValuesContextualLabels
+	err = newStrictDecoder(data).Decode(&dst.GroupByValuesContextualLabels)
 	if err == nil {
-		jsonGroupByValuesOneOf, _ := json.Marshal(dst.GroupByValuesOneOf)
-		if string(jsonGroupByValuesOneOf) == "{}" { // empty struct
-			dst.GroupByValuesOneOf = nil
+		jsonGroupByValuesContextualLabels, _ := json.Marshal(dst.GroupByValuesContextualLabels)
+		if string(jsonGroupByValuesContextualLabels) == "{}" { // empty struct
+			dst.GroupByValuesContextualLabels = nil
 		} else {
-			if err = validator.Validate(dst.GroupByValuesOneOf); err != nil {
-				dst.GroupByValuesOneOf = nil
+			if err = validator.Validate(dst.GroupByValuesContextualLabels); err != nil {
+				dst.GroupByValuesContextualLabels = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.GroupByValuesOneOf = nil
+		dst.GroupByValuesContextualLabels = nil
 	}
 
-	// try to unmarshal data into GroupByValuesOneOf1
-	err = newStrictDecoder(data).Decode(&dst.GroupByValuesOneOf1)
+	// try to unmarshal data into GroupByValuesIncidentField
+	err = newStrictDecoder(data).Decode(&dst.GroupByValuesIncidentField)
 	if err == nil {
-		jsonGroupByValuesOneOf1, _ := json.Marshal(dst.GroupByValuesOneOf1)
-		if string(jsonGroupByValuesOneOf1) == "{}" { // empty struct
-			dst.GroupByValuesOneOf1 = nil
+		jsonGroupByValuesIncidentField, _ := json.Marshal(dst.GroupByValuesIncidentField)
+		if string(jsonGroupByValuesIncidentField) == "{}" { // empty struct
+			dst.GroupByValuesIncidentField = nil
 		} else {
-			if err = validator.Validate(dst.GroupByValuesOneOf1); err != nil {
-				dst.GroupByValuesOneOf1 = nil
+			if err = validator.Validate(dst.GroupByValuesIncidentField); err != nil {
+				dst.GroupByValuesIncidentField = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.GroupByValuesOneOf1 = nil
+		dst.GroupByValuesIncidentField = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.GroupByValuesOneOf = nil
-		dst.GroupByValuesOneOf1 = nil
+		dst.GroupByValuesContextualLabels = nil
+		dst.GroupByValuesIncidentField = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(GroupByValues)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *GroupByValues) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src GroupByValues) MarshalJSON() ([]byte, error) {
-	if src.GroupByValuesOneOf != nil {
-		return json.Marshal(&src.GroupByValuesOneOf)
+	if src.GroupByValuesContextualLabels != nil {
+		return json.Marshal(&src.GroupByValuesContextualLabels)
 	}
 
-	if src.GroupByValuesOneOf1 != nil {
-		return json.Marshal(&src.GroupByValuesOneOf1)
+	if src.GroupByValuesIncidentField != nil {
+		return json.Marshal(&src.GroupByValuesIncidentField)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *GroupByValues) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.GroupByValuesOneOf != nil {
-		return obj.GroupByValuesOneOf
+	if obj.GroupByValuesContextualLabels != nil {
+		return obj.GroupByValuesContextualLabels
 	}
 
-	if obj.GroupByValuesOneOf1 != nil {
-		return obj.GroupByValuesOneOf1
+	if obj.GroupByValuesIncidentField != nil {
+		return obj.GroupByValuesIncidentField
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *GroupByValues) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj GroupByValues) GetActualInstanceValue() (interface{}) {
-	if obj.GroupByValuesOneOf != nil {
-		return *obj.GroupByValuesOneOf
+	if obj.GroupByValuesContextualLabels != nil {
+		return *obj.GroupByValuesContextualLabels
 	}
 
-	if obj.GroupByValuesOneOf1 != nil {
-		return *obj.GroupByValuesOneOf1
+	if obj.GroupByValuesIncidentField != nil {
+		return *obj.GroupByValuesIncidentField
 	}
 
 	// all schemas are nil

@@ -18,29 +18,29 @@ import (
 
 // E2MExecutionResponse - struct for E2MExecutionResponse
 type E2MExecutionResponse struct {
-	E2MExecutionResponseOneOf *E2MExecutionResponseOneOf
-	E2MExecutionResponseOneOf1 *E2MExecutionResponseOneOf1
-	E2MExecutionResponseOneOf2 *E2MExecutionResponseOneOf2
+	E2MExecutionResponseCreated *E2MExecutionResponseCreated
+	E2MExecutionResponseDeleted *E2MExecutionResponseDeleted
+	E2MExecutionResponseReplaced *E2MExecutionResponseReplaced
 }
 
-// E2MExecutionResponseOneOfAsE2MExecutionResponse is a convenience function that returns E2MExecutionResponseOneOf wrapped in E2MExecutionResponse
-func E2MExecutionResponseOneOfAsE2MExecutionResponse(v *E2MExecutionResponseOneOf) E2MExecutionResponse {
+// E2MExecutionResponseCreatedAsE2MExecutionResponse is a convenience function that returns E2MExecutionResponseCreated wrapped in E2MExecutionResponse
+func E2MExecutionResponseCreatedAsE2MExecutionResponse(v *E2MExecutionResponseCreated) E2MExecutionResponse {
 	return E2MExecutionResponse{
-		E2MExecutionResponseOneOf: v,
+		E2MExecutionResponseCreated: v,
 	}
 }
 
-// E2MExecutionResponseOneOf1AsE2MExecutionResponse is a convenience function that returns E2MExecutionResponseOneOf1 wrapped in E2MExecutionResponse
-func E2MExecutionResponseOneOf1AsE2MExecutionResponse(v *E2MExecutionResponseOneOf1) E2MExecutionResponse {
+// E2MExecutionResponseDeletedAsE2MExecutionResponse is a convenience function that returns E2MExecutionResponseDeleted wrapped in E2MExecutionResponse
+func E2MExecutionResponseDeletedAsE2MExecutionResponse(v *E2MExecutionResponseDeleted) E2MExecutionResponse {
 	return E2MExecutionResponse{
-		E2MExecutionResponseOneOf1: v,
+		E2MExecutionResponseDeleted: v,
 	}
 }
 
-// E2MExecutionResponseOneOf2AsE2MExecutionResponse is a convenience function that returns E2MExecutionResponseOneOf2 wrapped in E2MExecutionResponse
-func E2MExecutionResponseOneOf2AsE2MExecutionResponse(v *E2MExecutionResponseOneOf2) E2MExecutionResponse {
+// E2MExecutionResponseReplacedAsE2MExecutionResponse is a convenience function that returns E2MExecutionResponseReplaced wrapped in E2MExecutionResponse
+func E2MExecutionResponseReplacedAsE2MExecutionResponse(v *E2MExecutionResponseReplaced) E2MExecutionResponse {
 	return E2MExecutionResponse{
-		E2MExecutionResponseOneOf2: v,
+		E2MExecutionResponseReplaced: v,
 	}
 }
 
@@ -49,62 +49,62 @@ func E2MExecutionResponseOneOf2AsE2MExecutionResponse(v *E2MExecutionResponseOne
 func (dst *E2MExecutionResponse) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into E2MExecutionResponseOneOf
-	err = newStrictDecoder(data).Decode(&dst.E2MExecutionResponseOneOf)
+	// try to unmarshal data into E2MExecutionResponseCreated
+	err = newStrictDecoder(data).Decode(&dst.E2MExecutionResponseCreated)
 	if err == nil {
-		jsonE2MExecutionResponseOneOf, _ := json.Marshal(dst.E2MExecutionResponseOneOf)
-		if string(jsonE2MExecutionResponseOneOf) == "{}" { // empty struct
-			dst.E2MExecutionResponseOneOf = nil
+		jsonE2MExecutionResponseCreated, _ := json.Marshal(dst.E2MExecutionResponseCreated)
+		if string(jsonE2MExecutionResponseCreated) == "{}" { // empty struct
+			dst.E2MExecutionResponseCreated = nil
 		} else {
-			if err = validator.Validate(dst.E2MExecutionResponseOneOf); err != nil {
-				dst.E2MExecutionResponseOneOf = nil
+			if err = validator.Validate(dst.E2MExecutionResponseCreated); err != nil {
+				dst.E2MExecutionResponseCreated = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.E2MExecutionResponseOneOf = nil
+		dst.E2MExecutionResponseCreated = nil
 	}
 
-	// try to unmarshal data into E2MExecutionResponseOneOf1
-	err = newStrictDecoder(data).Decode(&dst.E2MExecutionResponseOneOf1)
+	// try to unmarshal data into E2MExecutionResponseDeleted
+	err = newStrictDecoder(data).Decode(&dst.E2MExecutionResponseDeleted)
 	if err == nil {
-		jsonE2MExecutionResponseOneOf1, _ := json.Marshal(dst.E2MExecutionResponseOneOf1)
-		if string(jsonE2MExecutionResponseOneOf1) == "{}" { // empty struct
-			dst.E2MExecutionResponseOneOf1 = nil
+		jsonE2MExecutionResponseDeleted, _ := json.Marshal(dst.E2MExecutionResponseDeleted)
+		if string(jsonE2MExecutionResponseDeleted) == "{}" { // empty struct
+			dst.E2MExecutionResponseDeleted = nil
 		} else {
-			if err = validator.Validate(dst.E2MExecutionResponseOneOf1); err != nil {
-				dst.E2MExecutionResponseOneOf1 = nil
+			if err = validator.Validate(dst.E2MExecutionResponseDeleted); err != nil {
+				dst.E2MExecutionResponseDeleted = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.E2MExecutionResponseOneOf1 = nil
+		dst.E2MExecutionResponseDeleted = nil
 	}
 
-	// try to unmarshal data into E2MExecutionResponseOneOf2
-	err = newStrictDecoder(data).Decode(&dst.E2MExecutionResponseOneOf2)
+	// try to unmarshal data into E2MExecutionResponseReplaced
+	err = newStrictDecoder(data).Decode(&dst.E2MExecutionResponseReplaced)
 	if err == nil {
-		jsonE2MExecutionResponseOneOf2, _ := json.Marshal(dst.E2MExecutionResponseOneOf2)
-		if string(jsonE2MExecutionResponseOneOf2) == "{}" { // empty struct
-			dst.E2MExecutionResponseOneOf2 = nil
+		jsonE2MExecutionResponseReplaced, _ := json.Marshal(dst.E2MExecutionResponseReplaced)
+		if string(jsonE2MExecutionResponseReplaced) == "{}" { // empty struct
+			dst.E2MExecutionResponseReplaced = nil
 		} else {
-			if err = validator.Validate(dst.E2MExecutionResponseOneOf2); err != nil {
-				dst.E2MExecutionResponseOneOf2 = nil
+			if err = validator.Validate(dst.E2MExecutionResponseReplaced); err != nil {
+				dst.E2MExecutionResponseReplaced = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.E2MExecutionResponseOneOf2 = nil
+		dst.E2MExecutionResponseReplaced = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.E2MExecutionResponseOneOf = nil
-		dst.E2MExecutionResponseOneOf1 = nil
-		dst.E2MExecutionResponseOneOf2 = nil
+		dst.E2MExecutionResponseCreated = nil
+		dst.E2MExecutionResponseDeleted = nil
+		dst.E2MExecutionResponseReplaced = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(E2MExecutionResponse)")
 	} else if match == 1 {
@@ -116,16 +116,16 @@ func (dst *E2MExecutionResponse) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src E2MExecutionResponse) MarshalJSON() ([]byte, error) {
-	if src.E2MExecutionResponseOneOf != nil {
-		return json.Marshal(&src.E2MExecutionResponseOneOf)
+	if src.E2MExecutionResponseCreated != nil {
+		return json.Marshal(&src.E2MExecutionResponseCreated)
 	}
 
-	if src.E2MExecutionResponseOneOf1 != nil {
-		return json.Marshal(&src.E2MExecutionResponseOneOf1)
+	if src.E2MExecutionResponseDeleted != nil {
+		return json.Marshal(&src.E2MExecutionResponseDeleted)
 	}
 
-	if src.E2MExecutionResponseOneOf2 != nil {
-		return json.Marshal(&src.E2MExecutionResponseOneOf2)
+	if src.E2MExecutionResponseReplaced != nil {
+		return json.Marshal(&src.E2MExecutionResponseReplaced)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -136,16 +136,16 @@ func (obj *E2MExecutionResponse) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.E2MExecutionResponseOneOf != nil {
-		return obj.E2MExecutionResponseOneOf
+	if obj.E2MExecutionResponseCreated != nil {
+		return obj.E2MExecutionResponseCreated
 	}
 
-	if obj.E2MExecutionResponseOneOf1 != nil {
-		return obj.E2MExecutionResponseOneOf1
+	if obj.E2MExecutionResponseDeleted != nil {
+		return obj.E2MExecutionResponseDeleted
 	}
 
-	if obj.E2MExecutionResponseOneOf2 != nil {
-		return obj.E2MExecutionResponseOneOf2
+	if obj.E2MExecutionResponseReplaced != nil {
+		return obj.E2MExecutionResponseReplaced
 	}
 
 	// all schemas are nil
@@ -154,16 +154,16 @@ func (obj *E2MExecutionResponse) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj E2MExecutionResponse) GetActualInstanceValue() (interface{}) {
-	if obj.E2MExecutionResponseOneOf != nil {
-		return *obj.E2MExecutionResponseOneOf
+	if obj.E2MExecutionResponseCreated != nil {
+		return *obj.E2MExecutionResponseCreated
 	}
 
-	if obj.E2MExecutionResponseOneOf1 != nil {
-		return *obj.E2MExecutionResponseOneOf1
+	if obj.E2MExecutionResponseDeleted != nil {
+		return *obj.E2MExecutionResponseDeleted
 	}
 
-	if obj.E2MExecutionResponseOneOf2 != nil {
-		return *obj.E2MExecutionResponseOneOf2
+	if obj.E2MExecutionResponseReplaced != nil {
+		return *obj.E2MExecutionResponseReplaced
 	}
 
 	// all schemas are nil

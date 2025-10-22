@@ -18,61 +18,61 @@ import (
 
 // V1IntegrationType - struct for V1IntegrationType
 type V1IntegrationType struct {
-	IntegrationType *IntegrationType
-	IntegrationType1 *IntegrationType1
-	IntegrationType2 *IntegrationType2
-	IntegrationType3 *IntegrationType3
-	IntegrationType4 *IntegrationType4
-	IntegrationType5 *IntegrationType5
-	IntegrationType6 *IntegrationType6
+	IntegrationTypeArm *IntegrationTypeArm
+	IntegrationTypeCloudformation *IntegrationTypeCloudformation
+	IntegrationTypeContextualData *IntegrationTypeContextualData
+	IntegrationTypeGenericWebhook *IntegrationTypeGenericWebhook
+	IntegrationTypeManaged *IntegrationTypeManaged
+	IntegrationTypePushBasedContextualData *IntegrationTypePushBasedContextualData
+	IntegrationTypeUntracked *IntegrationTypeUntracked
 }
 
-// IntegrationTypeAsV1IntegrationType is a convenience function that returns IntegrationType wrapped in V1IntegrationType
-func IntegrationTypeAsV1IntegrationType(v *IntegrationType) V1IntegrationType {
+// IntegrationTypeArmAsV1IntegrationType is a convenience function that returns IntegrationTypeArm wrapped in V1IntegrationType
+func IntegrationTypeArmAsV1IntegrationType(v *IntegrationTypeArm) V1IntegrationType {
 	return V1IntegrationType{
-		IntegrationType: v,
+		IntegrationTypeArm: v,
 	}
 }
 
-// IntegrationType1AsV1IntegrationType is a convenience function that returns IntegrationType1 wrapped in V1IntegrationType
-func IntegrationType1AsV1IntegrationType(v *IntegrationType1) V1IntegrationType {
+// IntegrationTypeCloudformationAsV1IntegrationType is a convenience function that returns IntegrationTypeCloudformation wrapped in V1IntegrationType
+func IntegrationTypeCloudformationAsV1IntegrationType(v *IntegrationTypeCloudformation) V1IntegrationType {
 	return V1IntegrationType{
-		IntegrationType1: v,
+		IntegrationTypeCloudformation: v,
 	}
 }
 
-// IntegrationType2AsV1IntegrationType is a convenience function that returns IntegrationType2 wrapped in V1IntegrationType
-func IntegrationType2AsV1IntegrationType(v *IntegrationType2) V1IntegrationType {
+// IntegrationTypeContextualDataAsV1IntegrationType is a convenience function that returns IntegrationTypeContextualData wrapped in V1IntegrationType
+func IntegrationTypeContextualDataAsV1IntegrationType(v *IntegrationTypeContextualData) V1IntegrationType {
 	return V1IntegrationType{
-		IntegrationType2: v,
+		IntegrationTypeContextualData: v,
 	}
 }
 
-// IntegrationType3AsV1IntegrationType is a convenience function that returns IntegrationType3 wrapped in V1IntegrationType
-func IntegrationType3AsV1IntegrationType(v *IntegrationType3) V1IntegrationType {
+// IntegrationTypeGenericWebhookAsV1IntegrationType is a convenience function that returns IntegrationTypeGenericWebhook wrapped in V1IntegrationType
+func IntegrationTypeGenericWebhookAsV1IntegrationType(v *IntegrationTypeGenericWebhook) V1IntegrationType {
 	return V1IntegrationType{
-		IntegrationType3: v,
+		IntegrationTypeGenericWebhook: v,
 	}
 }
 
-// IntegrationType4AsV1IntegrationType is a convenience function that returns IntegrationType4 wrapped in V1IntegrationType
-func IntegrationType4AsV1IntegrationType(v *IntegrationType4) V1IntegrationType {
+// IntegrationTypeManagedAsV1IntegrationType is a convenience function that returns IntegrationTypeManaged wrapped in V1IntegrationType
+func IntegrationTypeManagedAsV1IntegrationType(v *IntegrationTypeManaged) V1IntegrationType {
 	return V1IntegrationType{
-		IntegrationType4: v,
+		IntegrationTypeManaged: v,
 	}
 }
 
-// IntegrationType5AsV1IntegrationType is a convenience function that returns IntegrationType5 wrapped in V1IntegrationType
-func IntegrationType5AsV1IntegrationType(v *IntegrationType5) V1IntegrationType {
+// IntegrationTypePushBasedContextualDataAsV1IntegrationType is a convenience function that returns IntegrationTypePushBasedContextualData wrapped in V1IntegrationType
+func IntegrationTypePushBasedContextualDataAsV1IntegrationType(v *IntegrationTypePushBasedContextualData) V1IntegrationType {
 	return V1IntegrationType{
-		IntegrationType5: v,
+		IntegrationTypePushBasedContextualData: v,
 	}
 }
 
-// IntegrationType6AsV1IntegrationType is a convenience function that returns IntegrationType6 wrapped in V1IntegrationType
-func IntegrationType6AsV1IntegrationType(v *IntegrationType6) V1IntegrationType {
+// IntegrationTypeUntrackedAsV1IntegrationType is a convenience function that returns IntegrationTypeUntracked wrapped in V1IntegrationType
+func IntegrationTypeUntrackedAsV1IntegrationType(v *IntegrationTypeUntracked) V1IntegrationType {
 	return V1IntegrationType{
-		IntegrationType6: v,
+		IntegrationTypeUntracked: v,
 	}
 }
 
@@ -81,134 +81,134 @@ func IntegrationType6AsV1IntegrationType(v *IntegrationType6) V1IntegrationType 
 func (dst *V1IntegrationType) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into IntegrationType
-	err = newStrictDecoder(data).Decode(&dst.IntegrationType)
+	// try to unmarshal data into IntegrationTypeArm
+	err = newStrictDecoder(data).Decode(&dst.IntegrationTypeArm)
 	if err == nil {
-		jsonIntegrationType, _ := json.Marshal(dst.IntegrationType)
-		if string(jsonIntegrationType) == "{}" { // empty struct
-			dst.IntegrationType = nil
+		jsonIntegrationTypeArm, _ := json.Marshal(dst.IntegrationTypeArm)
+		if string(jsonIntegrationTypeArm) == "{}" { // empty struct
+			dst.IntegrationTypeArm = nil
 		} else {
-			if err = validator.Validate(dst.IntegrationType); err != nil {
-				dst.IntegrationType = nil
+			if err = validator.Validate(dst.IntegrationTypeArm); err != nil {
+				dst.IntegrationTypeArm = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IntegrationType = nil
+		dst.IntegrationTypeArm = nil
 	}
 
-	// try to unmarshal data into IntegrationType1
-	err = newStrictDecoder(data).Decode(&dst.IntegrationType1)
+	// try to unmarshal data into IntegrationTypeCloudformation
+	err = newStrictDecoder(data).Decode(&dst.IntegrationTypeCloudformation)
 	if err == nil {
-		jsonIntegrationType1, _ := json.Marshal(dst.IntegrationType1)
-		if string(jsonIntegrationType1) == "{}" { // empty struct
-			dst.IntegrationType1 = nil
+		jsonIntegrationTypeCloudformation, _ := json.Marshal(dst.IntegrationTypeCloudformation)
+		if string(jsonIntegrationTypeCloudformation) == "{}" { // empty struct
+			dst.IntegrationTypeCloudformation = nil
 		} else {
-			if err = validator.Validate(dst.IntegrationType1); err != nil {
-				dst.IntegrationType1 = nil
+			if err = validator.Validate(dst.IntegrationTypeCloudformation); err != nil {
+				dst.IntegrationTypeCloudformation = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IntegrationType1 = nil
+		dst.IntegrationTypeCloudformation = nil
 	}
 
-	// try to unmarshal data into IntegrationType2
-	err = newStrictDecoder(data).Decode(&dst.IntegrationType2)
+	// try to unmarshal data into IntegrationTypeContextualData
+	err = newStrictDecoder(data).Decode(&dst.IntegrationTypeContextualData)
 	if err == nil {
-		jsonIntegrationType2, _ := json.Marshal(dst.IntegrationType2)
-		if string(jsonIntegrationType2) == "{}" { // empty struct
-			dst.IntegrationType2 = nil
+		jsonIntegrationTypeContextualData, _ := json.Marshal(dst.IntegrationTypeContextualData)
+		if string(jsonIntegrationTypeContextualData) == "{}" { // empty struct
+			dst.IntegrationTypeContextualData = nil
 		} else {
-			if err = validator.Validate(dst.IntegrationType2); err != nil {
-				dst.IntegrationType2 = nil
+			if err = validator.Validate(dst.IntegrationTypeContextualData); err != nil {
+				dst.IntegrationTypeContextualData = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IntegrationType2 = nil
+		dst.IntegrationTypeContextualData = nil
 	}
 
-	// try to unmarshal data into IntegrationType3
-	err = newStrictDecoder(data).Decode(&dst.IntegrationType3)
+	// try to unmarshal data into IntegrationTypeGenericWebhook
+	err = newStrictDecoder(data).Decode(&dst.IntegrationTypeGenericWebhook)
 	if err == nil {
-		jsonIntegrationType3, _ := json.Marshal(dst.IntegrationType3)
-		if string(jsonIntegrationType3) == "{}" { // empty struct
-			dst.IntegrationType3 = nil
+		jsonIntegrationTypeGenericWebhook, _ := json.Marshal(dst.IntegrationTypeGenericWebhook)
+		if string(jsonIntegrationTypeGenericWebhook) == "{}" { // empty struct
+			dst.IntegrationTypeGenericWebhook = nil
 		} else {
-			if err = validator.Validate(dst.IntegrationType3); err != nil {
-				dst.IntegrationType3 = nil
+			if err = validator.Validate(dst.IntegrationTypeGenericWebhook); err != nil {
+				dst.IntegrationTypeGenericWebhook = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IntegrationType3 = nil
+		dst.IntegrationTypeGenericWebhook = nil
 	}
 
-	// try to unmarshal data into IntegrationType4
-	err = newStrictDecoder(data).Decode(&dst.IntegrationType4)
+	// try to unmarshal data into IntegrationTypeManaged
+	err = newStrictDecoder(data).Decode(&dst.IntegrationTypeManaged)
 	if err == nil {
-		jsonIntegrationType4, _ := json.Marshal(dst.IntegrationType4)
-		if string(jsonIntegrationType4) == "{}" { // empty struct
-			dst.IntegrationType4 = nil
+		jsonIntegrationTypeManaged, _ := json.Marshal(dst.IntegrationTypeManaged)
+		if string(jsonIntegrationTypeManaged) == "{}" { // empty struct
+			dst.IntegrationTypeManaged = nil
 		} else {
-			if err = validator.Validate(dst.IntegrationType4); err != nil {
-				dst.IntegrationType4 = nil
+			if err = validator.Validate(dst.IntegrationTypeManaged); err != nil {
+				dst.IntegrationTypeManaged = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IntegrationType4 = nil
+		dst.IntegrationTypeManaged = nil
 	}
 
-	// try to unmarshal data into IntegrationType5
-	err = newStrictDecoder(data).Decode(&dst.IntegrationType5)
+	// try to unmarshal data into IntegrationTypePushBasedContextualData
+	err = newStrictDecoder(data).Decode(&dst.IntegrationTypePushBasedContextualData)
 	if err == nil {
-		jsonIntegrationType5, _ := json.Marshal(dst.IntegrationType5)
-		if string(jsonIntegrationType5) == "{}" { // empty struct
-			dst.IntegrationType5 = nil
+		jsonIntegrationTypePushBasedContextualData, _ := json.Marshal(dst.IntegrationTypePushBasedContextualData)
+		if string(jsonIntegrationTypePushBasedContextualData) == "{}" { // empty struct
+			dst.IntegrationTypePushBasedContextualData = nil
 		} else {
-			if err = validator.Validate(dst.IntegrationType5); err != nil {
-				dst.IntegrationType5 = nil
+			if err = validator.Validate(dst.IntegrationTypePushBasedContextualData); err != nil {
+				dst.IntegrationTypePushBasedContextualData = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IntegrationType5 = nil
+		dst.IntegrationTypePushBasedContextualData = nil
 	}
 
-	// try to unmarshal data into IntegrationType6
-	err = newStrictDecoder(data).Decode(&dst.IntegrationType6)
+	// try to unmarshal data into IntegrationTypeUntracked
+	err = newStrictDecoder(data).Decode(&dst.IntegrationTypeUntracked)
 	if err == nil {
-		jsonIntegrationType6, _ := json.Marshal(dst.IntegrationType6)
-		if string(jsonIntegrationType6) == "{}" { // empty struct
-			dst.IntegrationType6 = nil
+		jsonIntegrationTypeUntracked, _ := json.Marshal(dst.IntegrationTypeUntracked)
+		if string(jsonIntegrationTypeUntracked) == "{}" { // empty struct
+			dst.IntegrationTypeUntracked = nil
 		} else {
-			if err = validator.Validate(dst.IntegrationType6); err != nil {
-				dst.IntegrationType6 = nil
+			if err = validator.Validate(dst.IntegrationTypeUntracked); err != nil {
+				dst.IntegrationTypeUntracked = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IntegrationType6 = nil
+		dst.IntegrationTypeUntracked = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.IntegrationType = nil
-		dst.IntegrationType1 = nil
-		dst.IntegrationType2 = nil
-		dst.IntegrationType3 = nil
-		dst.IntegrationType4 = nil
-		dst.IntegrationType5 = nil
-		dst.IntegrationType6 = nil
+		dst.IntegrationTypeArm = nil
+		dst.IntegrationTypeCloudformation = nil
+		dst.IntegrationTypeContextualData = nil
+		dst.IntegrationTypeGenericWebhook = nil
+		dst.IntegrationTypeManaged = nil
+		dst.IntegrationTypePushBasedContextualData = nil
+		dst.IntegrationTypeUntracked = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(V1IntegrationType)")
 	} else if match == 1 {
@@ -220,32 +220,32 @@ func (dst *V1IntegrationType) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src V1IntegrationType) MarshalJSON() ([]byte, error) {
-	if src.IntegrationType != nil {
-		return json.Marshal(&src.IntegrationType)
+	if src.IntegrationTypeArm != nil {
+		return json.Marshal(&src.IntegrationTypeArm)
 	}
 
-	if src.IntegrationType1 != nil {
-		return json.Marshal(&src.IntegrationType1)
+	if src.IntegrationTypeCloudformation != nil {
+		return json.Marshal(&src.IntegrationTypeCloudformation)
 	}
 
-	if src.IntegrationType2 != nil {
-		return json.Marshal(&src.IntegrationType2)
+	if src.IntegrationTypeContextualData != nil {
+		return json.Marshal(&src.IntegrationTypeContextualData)
 	}
 
-	if src.IntegrationType3 != nil {
-		return json.Marshal(&src.IntegrationType3)
+	if src.IntegrationTypeGenericWebhook != nil {
+		return json.Marshal(&src.IntegrationTypeGenericWebhook)
 	}
 
-	if src.IntegrationType4 != nil {
-		return json.Marshal(&src.IntegrationType4)
+	if src.IntegrationTypeManaged != nil {
+		return json.Marshal(&src.IntegrationTypeManaged)
 	}
 
-	if src.IntegrationType5 != nil {
-		return json.Marshal(&src.IntegrationType5)
+	if src.IntegrationTypePushBasedContextualData != nil {
+		return json.Marshal(&src.IntegrationTypePushBasedContextualData)
 	}
 
-	if src.IntegrationType6 != nil {
-		return json.Marshal(&src.IntegrationType6)
+	if src.IntegrationTypeUntracked != nil {
+		return json.Marshal(&src.IntegrationTypeUntracked)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -256,32 +256,32 @@ func (obj *V1IntegrationType) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.IntegrationType != nil {
-		return obj.IntegrationType
+	if obj.IntegrationTypeArm != nil {
+		return obj.IntegrationTypeArm
 	}
 
-	if obj.IntegrationType1 != nil {
-		return obj.IntegrationType1
+	if obj.IntegrationTypeCloudformation != nil {
+		return obj.IntegrationTypeCloudformation
 	}
 
-	if obj.IntegrationType2 != nil {
-		return obj.IntegrationType2
+	if obj.IntegrationTypeContextualData != nil {
+		return obj.IntegrationTypeContextualData
 	}
 
-	if obj.IntegrationType3 != nil {
-		return obj.IntegrationType3
+	if obj.IntegrationTypeGenericWebhook != nil {
+		return obj.IntegrationTypeGenericWebhook
 	}
 
-	if obj.IntegrationType4 != nil {
-		return obj.IntegrationType4
+	if obj.IntegrationTypeManaged != nil {
+		return obj.IntegrationTypeManaged
 	}
 
-	if obj.IntegrationType5 != nil {
-		return obj.IntegrationType5
+	if obj.IntegrationTypePushBasedContextualData != nil {
+		return obj.IntegrationTypePushBasedContextualData
 	}
 
-	if obj.IntegrationType6 != nil {
-		return obj.IntegrationType6
+	if obj.IntegrationTypeUntracked != nil {
+		return obj.IntegrationTypeUntracked
 	}
 
 	// all schemas are nil
@@ -290,32 +290,32 @@ func (obj *V1IntegrationType) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj V1IntegrationType) GetActualInstanceValue() (interface{}) {
-	if obj.IntegrationType != nil {
-		return *obj.IntegrationType
+	if obj.IntegrationTypeArm != nil {
+		return *obj.IntegrationTypeArm
 	}
 
-	if obj.IntegrationType1 != nil {
-		return *obj.IntegrationType1
+	if obj.IntegrationTypeCloudformation != nil {
+		return *obj.IntegrationTypeCloudformation
 	}
 
-	if obj.IntegrationType2 != nil {
-		return *obj.IntegrationType2
+	if obj.IntegrationTypeContextualData != nil {
+		return *obj.IntegrationTypeContextualData
 	}
 
-	if obj.IntegrationType3 != nil {
-		return *obj.IntegrationType3
+	if obj.IntegrationTypeGenericWebhook != nil {
+		return *obj.IntegrationTypeGenericWebhook
 	}
 
-	if obj.IntegrationType4 != nil {
-		return *obj.IntegrationType4
+	if obj.IntegrationTypeManaged != nil {
+		return *obj.IntegrationTypeManaged
 	}
 
-	if obj.IntegrationType5 != nil {
-		return *obj.IntegrationType5
+	if obj.IntegrationTypePushBasedContextualData != nil {
+		return *obj.IntegrationTypePushBasedContextualData
 	}
 
-	if obj.IntegrationType6 != nil {
-		return *obj.IntegrationType6
+	if obj.IntegrationTypeUntracked != nil {
+		return *obj.IntegrationTypeUntracked
 	}
 
 	// all schemas are nil

@@ -309,6 +309,33 @@
   },
   "components": {
     "schemas": {
+      "ColorsByAggregation": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/ColorsByAggregation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByGroupBy": {
+        "type": "object",
+        "properties": {
+          "groupBy": {
+            "$ref": "#/components/schemas/ColorsByGroupBy"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByStack": {
+        "type": "object",
+        "properties": {
+          "stack": {
+            "$ref": "#/components/schemas/ColorsByStack"
+          }
+        },
+        "additionalProperties": false
+      },
       "FieldGroup": {
         "type": "object",
         "properties": {
@@ -323,50 +350,56 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "multipleValues": {
-                "$ref": "#/components/schemas/MultipleValues"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "filters": {
-                "$ref": "#/components/schemas/Filters"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
+      },
+      "FilterPathAndValuesFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "FilterPathAndValuesMultipleValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
       },
       "Filters": {
         "externalDocs": {
@@ -417,8 +450,7 @@
           "teamId",
           "spParameters",
           "idpParameters"
-        ],
-        "additionalProperties": false
+        ]
       },
       "GetSPParametersResponse": {
         "externalDocs": {
@@ -451,86 +483,92 @@
       "IDPParameters": {
         "oneOf": [
           {
-            "externalDocs": {
-              "description": "Find out more about enrichments",
-              "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
-            },
-            "title": "IDP Parameters",
-            "description": "This data structure represents a set of SAML identity provider parameters",
-            "type": "object",
-            "properties": {
-              "active": {
-                "example": true,
-                "type": "boolean"
-              },
-              "groupNames": {
-                "type": "array",
-                "items": {
-                  "example": [
-                    "group1"
-                  ],
-                  "type": "string"
-                }
-              },
-              "metadataUrl": {
-                "example": "https://<...>.okta.com/app/<...>/sso/saml/metadata",
-                "type": "string"
-              },
-              "teamEntityId": {
-                "example": 1234567,
-                "type": "integer",
-                "format": "int64"
-              }
-            },
-            "required": [
-              "active",
-              "metadata",
-              "teamEntityId",
-              "groupNames"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/IDPParametersMetadataUrl"
           },
           {
-            "externalDocs": {
-              "description": "Find out more about enrichments",
-              "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
-            },
-            "title": "IDP Parameters",
-            "description": "This data structure represents a set of SAML identity provider parameters",
-            "type": "object",
-            "properties": {
-              "active": {
-                "example": true,
-                "type": "boolean"
-              },
-              "groupNames": {
-                "type": "array",
-                "items": {
-                  "example": [
-                    "group1"
-                  ],
-                  "type": "string"
-                }
-              },
-              "metadataContent": {
-                "example": "<?xml version= ...",
-                "type": "string"
-              },
-              "teamEntityId": {
-                "example": 1234567,
-                "type": "integer",
-                "format": "int64"
-              }
-            },
-            "required": [
-              "active",
-              "metadata",
-              "teamEntityId",
-              "groupNames"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/IDPParametersMetadataContent"
           }
         ]
+      },
+      "IDPParametersMetadataContent": {
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        },
+        "title": "IDP Parameters",
+        "description": "This data structure represents a set of SAML identity provider parameters",
+        "type": "object",
+        "properties": {
+          "active": {
+            "example": true,
+            "type": "boolean"
+          },
+          "groupNames": {
+            "type": "array",
+            "items": {
+              "example": [
+                "group1"
+              ],
+              "type": "string"
+            }
+          },
+          "metadataContent": {
+            "example": "<?xml version= ...",
+            "type": "string"
+          },
+          "teamEntityId": {
+            "example": 1234567,
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "active",
+          "metadata",
+          "teamEntityId",
+          "groupNames"
+        ],
+        "additionalProperties": false
+      },
+      "IDPParametersMetadataUrl": {
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        },
+        "title": "IDP Parameters",
+        "description": "This data structure represents a set of SAML identity provider parameters",
+        "type": "object",
+        "properties": {
+          "active": {
+            "example": true,
+            "type": "boolean"
+          },
+          "groupNames": {
+            "type": "array",
+            "items": {
+              "example": [
+                "group1"
+              ],
+              "type": "string"
+            }
+          },
+          "metadataUrl": {
+            "example": "https://<...>.okta.com/app/<...>/sso/saml/metadata",
+            "type": "string"
+          },
+          "teamEntityId": {
+            "example": 1234567,
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "active",
+          "metadata",
+          "teamEntityId",
+          "groupNames"
+        ],
+        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",
@@ -586,6 +624,24 @@
       },
       "SetIDPParametersResponse": {
         "type": "object"
+      },
+      "YAxisViewByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/YAxisViewByCategory"
+          }
+        },
+        "additionalProperties": false
+      },
+      "YAxisViewByValue": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/YAxisViewByValue"
+          }
+        },
+        "additionalProperties": false
       },
       "common.Group": {
         "type": "object",

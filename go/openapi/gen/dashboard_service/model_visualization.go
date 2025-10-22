@@ -18,77 +18,77 @@ import (
 
 // Visualization - struct for Visualization
 type Visualization struct {
-	VisualizationOneOf *VisualizationOneOf
-	VisualizationOneOf1 *VisualizationOneOf1
-	VisualizationOneOf2 *VisualizationOneOf2
-	VisualizationOneOf3 *VisualizationOneOf3
-	VisualizationOneOf4 *VisualizationOneOf4
-	VisualizationOneOf5 *VisualizationOneOf5
-	VisualizationOneOf6 *VisualizationOneOf6
-	VisualizationOneOf7 *VisualizationOneOf7
-	VisualizationOneOf8 *VisualizationOneOf8
+	VisualizationGauge *VisualizationGauge
+	VisualizationHexagonBins *VisualizationHexagonBins
+	VisualizationHorizontalBars *VisualizationHorizontalBars
+	VisualizationPieChart *VisualizationPieChart
+	VisualizationStat *VisualizationStat
+	VisualizationTable *VisualizationTable
+	VisualizationTimeSeriesBars *VisualizationTimeSeriesBars
+	VisualizationTimeSeriesLines *VisualizationTimeSeriesLines
+	VisualizationVerticalBars *VisualizationVerticalBars
 }
 
-// VisualizationOneOfAsVisualization is a convenience function that returns VisualizationOneOf wrapped in Visualization
-func VisualizationOneOfAsVisualization(v *VisualizationOneOf) Visualization {
+// VisualizationGaugeAsVisualization is a convenience function that returns VisualizationGauge wrapped in Visualization
+func VisualizationGaugeAsVisualization(v *VisualizationGauge) Visualization {
 	return Visualization{
-		VisualizationOneOf: v,
+		VisualizationGauge: v,
 	}
 }
 
-// VisualizationOneOf1AsVisualization is a convenience function that returns VisualizationOneOf1 wrapped in Visualization
-func VisualizationOneOf1AsVisualization(v *VisualizationOneOf1) Visualization {
+// VisualizationHexagonBinsAsVisualization is a convenience function that returns VisualizationHexagonBins wrapped in Visualization
+func VisualizationHexagonBinsAsVisualization(v *VisualizationHexagonBins) Visualization {
 	return Visualization{
-		VisualizationOneOf1: v,
+		VisualizationHexagonBins: v,
 	}
 }
 
-// VisualizationOneOf2AsVisualization is a convenience function that returns VisualizationOneOf2 wrapped in Visualization
-func VisualizationOneOf2AsVisualization(v *VisualizationOneOf2) Visualization {
+// VisualizationHorizontalBarsAsVisualization is a convenience function that returns VisualizationHorizontalBars wrapped in Visualization
+func VisualizationHorizontalBarsAsVisualization(v *VisualizationHorizontalBars) Visualization {
 	return Visualization{
-		VisualizationOneOf2: v,
+		VisualizationHorizontalBars: v,
 	}
 }
 
-// VisualizationOneOf3AsVisualization is a convenience function that returns VisualizationOneOf3 wrapped in Visualization
-func VisualizationOneOf3AsVisualization(v *VisualizationOneOf3) Visualization {
+// VisualizationPieChartAsVisualization is a convenience function that returns VisualizationPieChart wrapped in Visualization
+func VisualizationPieChartAsVisualization(v *VisualizationPieChart) Visualization {
 	return Visualization{
-		VisualizationOneOf3: v,
+		VisualizationPieChart: v,
 	}
 }
 
-// VisualizationOneOf4AsVisualization is a convenience function that returns VisualizationOneOf4 wrapped in Visualization
-func VisualizationOneOf4AsVisualization(v *VisualizationOneOf4) Visualization {
+// VisualizationStatAsVisualization is a convenience function that returns VisualizationStat wrapped in Visualization
+func VisualizationStatAsVisualization(v *VisualizationStat) Visualization {
 	return Visualization{
-		VisualizationOneOf4: v,
+		VisualizationStat: v,
 	}
 }
 
-// VisualizationOneOf5AsVisualization is a convenience function that returns VisualizationOneOf5 wrapped in Visualization
-func VisualizationOneOf5AsVisualization(v *VisualizationOneOf5) Visualization {
+// VisualizationTableAsVisualization is a convenience function that returns VisualizationTable wrapped in Visualization
+func VisualizationTableAsVisualization(v *VisualizationTable) Visualization {
 	return Visualization{
-		VisualizationOneOf5: v,
+		VisualizationTable: v,
 	}
 }
 
-// VisualizationOneOf6AsVisualization is a convenience function that returns VisualizationOneOf6 wrapped in Visualization
-func VisualizationOneOf6AsVisualization(v *VisualizationOneOf6) Visualization {
+// VisualizationTimeSeriesBarsAsVisualization is a convenience function that returns VisualizationTimeSeriesBars wrapped in Visualization
+func VisualizationTimeSeriesBarsAsVisualization(v *VisualizationTimeSeriesBars) Visualization {
 	return Visualization{
-		VisualizationOneOf6: v,
+		VisualizationTimeSeriesBars: v,
 	}
 }
 
-// VisualizationOneOf7AsVisualization is a convenience function that returns VisualizationOneOf7 wrapped in Visualization
-func VisualizationOneOf7AsVisualization(v *VisualizationOneOf7) Visualization {
+// VisualizationTimeSeriesLinesAsVisualization is a convenience function that returns VisualizationTimeSeriesLines wrapped in Visualization
+func VisualizationTimeSeriesLinesAsVisualization(v *VisualizationTimeSeriesLines) Visualization {
 	return Visualization{
-		VisualizationOneOf7: v,
+		VisualizationTimeSeriesLines: v,
 	}
 }
 
-// VisualizationOneOf8AsVisualization is a convenience function that returns VisualizationOneOf8 wrapped in Visualization
-func VisualizationOneOf8AsVisualization(v *VisualizationOneOf8) Visualization {
+// VisualizationVerticalBarsAsVisualization is a convenience function that returns VisualizationVerticalBars wrapped in Visualization
+func VisualizationVerticalBarsAsVisualization(v *VisualizationVerticalBars) Visualization {
 	return Visualization{
-		VisualizationOneOf8: v,
+		VisualizationVerticalBars: v,
 	}
 }
 
@@ -97,170 +97,170 @@ func VisualizationOneOf8AsVisualization(v *VisualizationOneOf8) Visualization {
 func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into VisualizationOneOf
-	err = newStrictDecoder(data).Decode(&dst.VisualizationOneOf)
+	// try to unmarshal data into VisualizationGauge
+	err = newStrictDecoder(data).Decode(&dst.VisualizationGauge)
 	if err == nil {
-		jsonVisualizationOneOf, _ := json.Marshal(dst.VisualizationOneOf)
-		if string(jsonVisualizationOneOf) == "{}" { // empty struct
-			dst.VisualizationOneOf = nil
+		jsonVisualizationGauge, _ := json.Marshal(dst.VisualizationGauge)
+		if string(jsonVisualizationGauge) == "{}" { // empty struct
+			dst.VisualizationGauge = nil
 		} else {
-			if err = validator.Validate(dst.VisualizationOneOf); err != nil {
-				dst.VisualizationOneOf = nil
+			if err = validator.Validate(dst.VisualizationGauge); err != nil {
+				dst.VisualizationGauge = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VisualizationOneOf = nil
+		dst.VisualizationGauge = nil
 	}
 
-	// try to unmarshal data into VisualizationOneOf1
-	err = newStrictDecoder(data).Decode(&dst.VisualizationOneOf1)
+	// try to unmarshal data into VisualizationHexagonBins
+	err = newStrictDecoder(data).Decode(&dst.VisualizationHexagonBins)
 	if err == nil {
-		jsonVisualizationOneOf1, _ := json.Marshal(dst.VisualizationOneOf1)
-		if string(jsonVisualizationOneOf1) == "{}" { // empty struct
-			dst.VisualizationOneOf1 = nil
+		jsonVisualizationHexagonBins, _ := json.Marshal(dst.VisualizationHexagonBins)
+		if string(jsonVisualizationHexagonBins) == "{}" { // empty struct
+			dst.VisualizationHexagonBins = nil
 		} else {
-			if err = validator.Validate(dst.VisualizationOneOf1); err != nil {
-				dst.VisualizationOneOf1 = nil
+			if err = validator.Validate(dst.VisualizationHexagonBins); err != nil {
+				dst.VisualizationHexagonBins = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VisualizationOneOf1 = nil
+		dst.VisualizationHexagonBins = nil
 	}
 
-	// try to unmarshal data into VisualizationOneOf2
-	err = newStrictDecoder(data).Decode(&dst.VisualizationOneOf2)
+	// try to unmarshal data into VisualizationHorizontalBars
+	err = newStrictDecoder(data).Decode(&dst.VisualizationHorizontalBars)
 	if err == nil {
-		jsonVisualizationOneOf2, _ := json.Marshal(dst.VisualizationOneOf2)
-		if string(jsonVisualizationOneOf2) == "{}" { // empty struct
-			dst.VisualizationOneOf2 = nil
+		jsonVisualizationHorizontalBars, _ := json.Marshal(dst.VisualizationHorizontalBars)
+		if string(jsonVisualizationHorizontalBars) == "{}" { // empty struct
+			dst.VisualizationHorizontalBars = nil
 		} else {
-			if err = validator.Validate(dst.VisualizationOneOf2); err != nil {
-				dst.VisualizationOneOf2 = nil
+			if err = validator.Validate(dst.VisualizationHorizontalBars); err != nil {
+				dst.VisualizationHorizontalBars = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VisualizationOneOf2 = nil
+		dst.VisualizationHorizontalBars = nil
 	}
 
-	// try to unmarshal data into VisualizationOneOf3
-	err = newStrictDecoder(data).Decode(&dst.VisualizationOneOf3)
+	// try to unmarshal data into VisualizationPieChart
+	err = newStrictDecoder(data).Decode(&dst.VisualizationPieChart)
 	if err == nil {
-		jsonVisualizationOneOf3, _ := json.Marshal(dst.VisualizationOneOf3)
-		if string(jsonVisualizationOneOf3) == "{}" { // empty struct
-			dst.VisualizationOneOf3 = nil
+		jsonVisualizationPieChart, _ := json.Marshal(dst.VisualizationPieChart)
+		if string(jsonVisualizationPieChart) == "{}" { // empty struct
+			dst.VisualizationPieChart = nil
 		} else {
-			if err = validator.Validate(dst.VisualizationOneOf3); err != nil {
-				dst.VisualizationOneOf3 = nil
+			if err = validator.Validate(dst.VisualizationPieChart); err != nil {
+				dst.VisualizationPieChart = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VisualizationOneOf3 = nil
+		dst.VisualizationPieChart = nil
 	}
 
-	// try to unmarshal data into VisualizationOneOf4
-	err = newStrictDecoder(data).Decode(&dst.VisualizationOneOf4)
+	// try to unmarshal data into VisualizationStat
+	err = newStrictDecoder(data).Decode(&dst.VisualizationStat)
 	if err == nil {
-		jsonVisualizationOneOf4, _ := json.Marshal(dst.VisualizationOneOf4)
-		if string(jsonVisualizationOneOf4) == "{}" { // empty struct
-			dst.VisualizationOneOf4 = nil
+		jsonVisualizationStat, _ := json.Marshal(dst.VisualizationStat)
+		if string(jsonVisualizationStat) == "{}" { // empty struct
+			dst.VisualizationStat = nil
 		} else {
-			if err = validator.Validate(dst.VisualizationOneOf4); err != nil {
-				dst.VisualizationOneOf4 = nil
+			if err = validator.Validate(dst.VisualizationStat); err != nil {
+				dst.VisualizationStat = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VisualizationOneOf4 = nil
+		dst.VisualizationStat = nil
 	}
 
-	// try to unmarshal data into VisualizationOneOf5
-	err = newStrictDecoder(data).Decode(&dst.VisualizationOneOf5)
+	// try to unmarshal data into VisualizationTable
+	err = newStrictDecoder(data).Decode(&dst.VisualizationTable)
 	if err == nil {
-		jsonVisualizationOneOf5, _ := json.Marshal(dst.VisualizationOneOf5)
-		if string(jsonVisualizationOneOf5) == "{}" { // empty struct
-			dst.VisualizationOneOf5 = nil
+		jsonVisualizationTable, _ := json.Marshal(dst.VisualizationTable)
+		if string(jsonVisualizationTable) == "{}" { // empty struct
+			dst.VisualizationTable = nil
 		} else {
-			if err = validator.Validate(dst.VisualizationOneOf5); err != nil {
-				dst.VisualizationOneOf5 = nil
+			if err = validator.Validate(dst.VisualizationTable); err != nil {
+				dst.VisualizationTable = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VisualizationOneOf5 = nil
+		dst.VisualizationTable = nil
 	}
 
-	// try to unmarshal data into VisualizationOneOf6
-	err = newStrictDecoder(data).Decode(&dst.VisualizationOneOf6)
+	// try to unmarshal data into VisualizationTimeSeriesBars
+	err = newStrictDecoder(data).Decode(&dst.VisualizationTimeSeriesBars)
 	if err == nil {
-		jsonVisualizationOneOf6, _ := json.Marshal(dst.VisualizationOneOf6)
-		if string(jsonVisualizationOneOf6) == "{}" { // empty struct
-			dst.VisualizationOneOf6 = nil
+		jsonVisualizationTimeSeriesBars, _ := json.Marshal(dst.VisualizationTimeSeriesBars)
+		if string(jsonVisualizationTimeSeriesBars) == "{}" { // empty struct
+			dst.VisualizationTimeSeriesBars = nil
 		} else {
-			if err = validator.Validate(dst.VisualizationOneOf6); err != nil {
-				dst.VisualizationOneOf6 = nil
+			if err = validator.Validate(dst.VisualizationTimeSeriesBars); err != nil {
+				dst.VisualizationTimeSeriesBars = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VisualizationOneOf6 = nil
+		dst.VisualizationTimeSeriesBars = nil
 	}
 
-	// try to unmarshal data into VisualizationOneOf7
-	err = newStrictDecoder(data).Decode(&dst.VisualizationOneOf7)
+	// try to unmarshal data into VisualizationTimeSeriesLines
+	err = newStrictDecoder(data).Decode(&dst.VisualizationTimeSeriesLines)
 	if err == nil {
-		jsonVisualizationOneOf7, _ := json.Marshal(dst.VisualizationOneOf7)
-		if string(jsonVisualizationOneOf7) == "{}" { // empty struct
-			dst.VisualizationOneOf7 = nil
+		jsonVisualizationTimeSeriesLines, _ := json.Marshal(dst.VisualizationTimeSeriesLines)
+		if string(jsonVisualizationTimeSeriesLines) == "{}" { // empty struct
+			dst.VisualizationTimeSeriesLines = nil
 		} else {
-			if err = validator.Validate(dst.VisualizationOneOf7); err != nil {
-				dst.VisualizationOneOf7 = nil
+			if err = validator.Validate(dst.VisualizationTimeSeriesLines); err != nil {
+				dst.VisualizationTimeSeriesLines = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VisualizationOneOf7 = nil
+		dst.VisualizationTimeSeriesLines = nil
 	}
 
-	// try to unmarshal data into VisualizationOneOf8
-	err = newStrictDecoder(data).Decode(&dst.VisualizationOneOf8)
+	// try to unmarshal data into VisualizationVerticalBars
+	err = newStrictDecoder(data).Decode(&dst.VisualizationVerticalBars)
 	if err == nil {
-		jsonVisualizationOneOf8, _ := json.Marshal(dst.VisualizationOneOf8)
-		if string(jsonVisualizationOneOf8) == "{}" { // empty struct
-			dst.VisualizationOneOf8 = nil
+		jsonVisualizationVerticalBars, _ := json.Marshal(dst.VisualizationVerticalBars)
+		if string(jsonVisualizationVerticalBars) == "{}" { // empty struct
+			dst.VisualizationVerticalBars = nil
 		} else {
-			if err = validator.Validate(dst.VisualizationOneOf8); err != nil {
-				dst.VisualizationOneOf8 = nil
+			if err = validator.Validate(dst.VisualizationVerticalBars); err != nil {
+				dst.VisualizationVerticalBars = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VisualizationOneOf8 = nil
+		dst.VisualizationVerticalBars = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.VisualizationOneOf = nil
-		dst.VisualizationOneOf1 = nil
-		dst.VisualizationOneOf2 = nil
-		dst.VisualizationOneOf3 = nil
-		dst.VisualizationOneOf4 = nil
-		dst.VisualizationOneOf5 = nil
-		dst.VisualizationOneOf6 = nil
-		dst.VisualizationOneOf7 = nil
-		dst.VisualizationOneOf8 = nil
+		dst.VisualizationGauge = nil
+		dst.VisualizationHexagonBins = nil
+		dst.VisualizationHorizontalBars = nil
+		dst.VisualizationPieChart = nil
+		dst.VisualizationStat = nil
+		dst.VisualizationTable = nil
+		dst.VisualizationTimeSeriesBars = nil
+		dst.VisualizationTimeSeriesLines = nil
+		dst.VisualizationVerticalBars = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(Visualization)")
 	} else if match == 1 {
@@ -272,40 +272,40 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src Visualization) MarshalJSON() ([]byte, error) {
-	if src.VisualizationOneOf != nil {
-		return json.Marshal(&src.VisualizationOneOf)
+	if src.VisualizationGauge != nil {
+		return json.Marshal(&src.VisualizationGauge)
 	}
 
-	if src.VisualizationOneOf1 != nil {
-		return json.Marshal(&src.VisualizationOneOf1)
+	if src.VisualizationHexagonBins != nil {
+		return json.Marshal(&src.VisualizationHexagonBins)
 	}
 
-	if src.VisualizationOneOf2 != nil {
-		return json.Marshal(&src.VisualizationOneOf2)
+	if src.VisualizationHorizontalBars != nil {
+		return json.Marshal(&src.VisualizationHorizontalBars)
 	}
 
-	if src.VisualizationOneOf3 != nil {
-		return json.Marshal(&src.VisualizationOneOf3)
+	if src.VisualizationPieChart != nil {
+		return json.Marshal(&src.VisualizationPieChart)
 	}
 
-	if src.VisualizationOneOf4 != nil {
-		return json.Marshal(&src.VisualizationOneOf4)
+	if src.VisualizationStat != nil {
+		return json.Marshal(&src.VisualizationStat)
 	}
 
-	if src.VisualizationOneOf5 != nil {
-		return json.Marshal(&src.VisualizationOneOf5)
+	if src.VisualizationTable != nil {
+		return json.Marshal(&src.VisualizationTable)
 	}
 
-	if src.VisualizationOneOf6 != nil {
-		return json.Marshal(&src.VisualizationOneOf6)
+	if src.VisualizationTimeSeriesBars != nil {
+		return json.Marshal(&src.VisualizationTimeSeriesBars)
 	}
 
-	if src.VisualizationOneOf7 != nil {
-		return json.Marshal(&src.VisualizationOneOf7)
+	if src.VisualizationTimeSeriesLines != nil {
+		return json.Marshal(&src.VisualizationTimeSeriesLines)
 	}
 
-	if src.VisualizationOneOf8 != nil {
-		return json.Marshal(&src.VisualizationOneOf8)
+	if src.VisualizationVerticalBars != nil {
+		return json.Marshal(&src.VisualizationVerticalBars)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -316,40 +316,40 @@ func (obj *Visualization) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.VisualizationOneOf != nil {
-		return obj.VisualizationOneOf
+	if obj.VisualizationGauge != nil {
+		return obj.VisualizationGauge
 	}
 
-	if obj.VisualizationOneOf1 != nil {
-		return obj.VisualizationOneOf1
+	if obj.VisualizationHexagonBins != nil {
+		return obj.VisualizationHexagonBins
 	}
 
-	if obj.VisualizationOneOf2 != nil {
-		return obj.VisualizationOneOf2
+	if obj.VisualizationHorizontalBars != nil {
+		return obj.VisualizationHorizontalBars
 	}
 
-	if obj.VisualizationOneOf3 != nil {
-		return obj.VisualizationOneOf3
+	if obj.VisualizationPieChart != nil {
+		return obj.VisualizationPieChart
 	}
 
-	if obj.VisualizationOneOf4 != nil {
-		return obj.VisualizationOneOf4
+	if obj.VisualizationStat != nil {
+		return obj.VisualizationStat
 	}
 
-	if obj.VisualizationOneOf5 != nil {
-		return obj.VisualizationOneOf5
+	if obj.VisualizationTable != nil {
+		return obj.VisualizationTable
 	}
 
-	if obj.VisualizationOneOf6 != nil {
-		return obj.VisualizationOneOf6
+	if obj.VisualizationTimeSeriesBars != nil {
+		return obj.VisualizationTimeSeriesBars
 	}
 
-	if obj.VisualizationOneOf7 != nil {
-		return obj.VisualizationOneOf7
+	if obj.VisualizationTimeSeriesLines != nil {
+		return obj.VisualizationTimeSeriesLines
 	}
 
-	if obj.VisualizationOneOf8 != nil {
-		return obj.VisualizationOneOf8
+	if obj.VisualizationVerticalBars != nil {
+		return obj.VisualizationVerticalBars
 	}
 
 	// all schemas are nil
@@ -358,40 +358,40 @@ func (obj *Visualization) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj Visualization) GetActualInstanceValue() (interface{}) {
-	if obj.VisualizationOneOf != nil {
-		return *obj.VisualizationOneOf
+	if obj.VisualizationGauge != nil {
+		return *obj.VisualizationGauge
 	}
 
-	if obj.VisualizationOneOf1 != nil {
-		return *obj.VisualizationOneOf1
+	if obj.VisualizationHexagonBins != nil {
+		return *obj.VisualizationHexagonBins
 	}
 
-	if obj.VisualizationOneOf2 != nil {
-		return *obj.VisualizationOneOf2
+	if obj.VisualizationHorizontalBars != nil {
+		return *obj.VisualizationHorizontalBars
 	}
 
-	if obj.VisualizationOneOf3 != nil {
-		return *obj.VisualizationOneOf3
+	if obj.VisualizationPieChart != nil {
+		return *obj.VisualizationPieChart
 	}
 
-	if obj.VisualizationOneOf4 != nil {
-		return *obj.VisualizationOneOf4
+	if obj.VisualizationStat != nil {
+		return *obj.VisualizationStat
 	}
 
-	if obj.VisualizationOneOf5 != nil {
-		return *obj.VisualizationOneOf5
+	if obj.VisualizationTable != nil {
+		return *obj.VisualizationTable
 	}
 
-	if obj.VisualizationOneOf6 != nil {
-		return *obj.VisualizationOneOf6
+	if obj.VisualizationTimeSeriesBars != nil {
+		return *obj.VisualizationTimeSeriesBars
 	}
 
-	if obj.VisualizationOneOf7 != nil {
-		return *obj.VisualizationOneOf7
+	if obj.VisualizationTimeSeriesLines != nil {
+		return *obj.VisualizationTimeSeriesLines
 	}
 
-	if obj.VisualizationOneOf8 != nil {
-		return *obj.VisualizationOneOf8
+	if obj.VisualizationVerticalBars != nil {
+		return *obj.VisualizationVerticalBars
 	}
 
 	// all schemas are nil

@@ -18,21 +18,21 @@ import (
 
 // IncidentsServiceListIncidentAggregationsGroupBysParameterInner - struct for IncidentsServiceListIncidentAggregationsGroupBysParameterInner
 type IncidentsServiceListIncidentAggregationsGroupBysParameterInner struct {
-	IncidentGroupBy *IncidentGroupBy
-	IncidentGroupBy1 *IncidentGroupBy1
+	GroupByContextualLabel *GroupByContextualLabel
+	GroupByIncidentField *GroupByIncidentField
 }
 
-// IncidentGroupByAsIncidentsServiceListIncidentAggregationsGroupBysParameterInner is a convenience function that returns IncidentGroupBy wrapped in IncidentsServiceListIncidentAggregationsGroupBysParameterInner
-func IncidentGroupByAsIncidentsServiceListIncidentAggregationsGroupBysParameterInner(v *IncidentGroupBy) IncidentsServiceListIncidentAggregationsGroupBysParameterInner {
+// GroupByContextualLabelAsIncidentsServiceListIncidentAggregationsGroupBysParameterInner is a convenience function that returns GroupByContextualLabel wrapped in IncidentsServiceListIncidentAggregationsGroupBysParameterInner
+func GroupByContextualLabelAsIncidentsServiceListIncidentAggregationsGroupBysParameterInner(v *GroupByContextualLabel) IncidentsServiceListIncidentAggregationsGroupBysParameterInner {
 	return IncidentsServiceListIncidentAggregationsGroupBysParameterInner{
-		IncidentGroupBy: v,
+		GroupByContextualLabel: v,
 	}
 }
 
-// IncidentGroupBy1AsIncidentsServiceListIncidentAggregationsGroupBysParameterInner is a convenience function that returns IncidentGroupBy1 wrapped in IncidentsServiceListIncidentAggregationsGroupBysParameterInner
-func IncidentGroupBy1AsIncidentsServiceListIncidentAggregationsGroupBysParameterInner(v *IncidentGroupBy1) IncidentsServiceListIncidentAggregationsGroupBysParameterInner {
+// GroupByIncidentFieldAsIncidentsServiceListIncidentAggregationsGroupBysParameterInner is a convenience function that returns GroupByIncidentField wrapped in IncidentsServiceListIncidentAggregationsGroupBysParameterInner
+func GroupByIncidentFieldAsIncidentsServiceListIncidentAggregationsGroupBysParameterInner(v *GroupByIncidentField) IncidentsServiceListIncidentAggregationsGroupBysParameterInner {
 	return IncidentsServiceListIncidentAggregationsGroupBysParameterInner{
-		IncidentGroupBy1: v,
+		GroupByIncidentField: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func IncidentGroupBy1AsIncidentsServiceListIncidentAggregationsGroupBysParameter
 func (dst *IncidentsServiceListIncidentAggregationsGroupBysParameterInner) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into IncidentGroupBy
-	err = newStrictDecoder(data).Decode(&dst.IncidentGroupBy)
+	// try to unmarshal data into GroupByContextualLabel
+	err = newStrictDecoder(data).Decode(&dst.GroupByContextualLabel)
 	if err == nil {
-		jsonIncidentGroupBy, _ := json.Marshal(dst.IncidentGroupBy)
-		if string(jsonIncidentGroupBy) == "{}" { // empty struct
-			dst.IncidentGroupBy = nil
+		jsonGroupByContextualLabel, _ := json.Marshal(dst.GroupByContextualLabel)
+		if string(jsonGroupByContextualLabel) == "{}" { // empty struct
+			dst.GroupByContextualLabel = nil
 		} else {
-			if err = validator.Validate(dst.IncidentGroupBy); err != nil {
-				dst.IncidentGroupBy = nil
+			if err = validator.Validate(dst.GroupByContextualLabel); err != nil {
+				dst.GroupByContextualLabel = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IncidentGroupBy = nil
+		dst.GroupByContextualLabel = nil
 	}
 
-	// try to unmarshal data into IncidentGroupBy1
-	err = newStrictDecoder(data).Decode(&dst.IncidentGroupBy1)
+	// try to unmarshal data into GroupByIncidentField
+	err = newStrictDecoder(data).Decode(&dst.GroupByIncidentField)
 	if err == nil {
-		jsonIncidentGroupBy1, _ := json.Marshal(dst.IncidentGroupBy1)
-		if string(jsonIncidentGroupBy1) == "{}" { // empty struct
-			dst.IncidentGroupBy1 = nil
+		jsonGroupByIncidentField, _ := json.Marshal(dst.GroupByIncidentField)
+		if string(jsonGroupByIncidentField) == "{}" { // empty struct
+			dst.GroupByIncidentField = nil
 		} else {
-			if err = validator.Validate(dst.IncidentGroupBy1); err != nil {
-				dst.IncidentGroupBy1 = nil
+			if err = validator.Validate(dst.GroupByIncidentField); err != nil {
+				dst.GroupByIncidentField = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IncidentGroupBy1 = nil
+		dst.GroupByIncidentField = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.IncidentGroupBy = nil
-		dst.IncidentGroupBy1 = nil
+		dst.GroupByContextualLabel = nil
+		dst.GroupByIncidentField = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(IncidentsServiceListIncidentAggregationsGroupBysParameterInner)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *IncidentsServiceListIncidentAggregationsGroupBysParameterInner) Unmar
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src IncidentsServiceListIncidentAggregationsGroupBysParameterInner) MarshalJSON() ([]byte, error) {
-	if src.IncidentGroupBy != nil {
-		return json.Marshal(&src.IncidentGroupBy)
+	if src.GroupByContextualLabel != nil {
+		return json.Marshal(&src.GroupByContextualLabel)
 	}
 
-	if src.IncidentGroupBy1 != nil {
-		return json.Marshal(&src.IncidentGroupBy1)
+	if src.GroupByIncidentField != nil {
+		return json.Marshal(&src.GroupByIncidentField)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *IncidentsServiceListIncidentAggregationsGroupBysParameterInner) GetAc
 	if obj == nil {
 		return nil
 	}
-	if obj.IncidentGroupBy != nil {
-		return obj.IncidentGroupBy
+	if obj.GroupByContextualLabel != nil {
+		return obj.GroupByContextualLabel
 	}
 
-	if obj.IncidentGroupBy1 != nil {
-		return obj.IncidentGroupBy1
+	if obj.GroupByIncidentField != nil {
+		return obj.GroupByIncidentField
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *IncidentsServiceListIncidentAggregationsGroupBysParameterInner) GetAc
 
 // Get the actual instance value
 func (obj IncidentsServiceListIncidentAggregationsGroupBysParameterInner) GetActualInstanceValue() (interface{}) {
-	if obj.IncidentGroupBy != nil {
-		return *obj.IncidentGroupBy
+	if obj.GroupByContextualLabel != nil {
+		return *obj.GroupByContextualLabel
 	}
 
-	if obj.IncidentGroupBy1 != nil {
-		return *obj.IncidentGroupBy1
+	if obj.GroupByIncidentField != nil {
+		return *obj.GroupByIncidentField
 	}
 
 	// all schemas are nil

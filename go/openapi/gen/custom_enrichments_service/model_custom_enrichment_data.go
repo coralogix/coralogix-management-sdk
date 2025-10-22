@@ -18,21 +18,21 @@ import (
 
 // CustomEnrichmentData - struct for CustomEnrichmentData
 type CustomEnrichmentData struct {
-	CustomEnrichmentDataOneOf *CustomEnrichmentDataOneOf
-	CustomEnrichmentDataOneOf1 *CustomEnrichmentDataOneOf1
+	CustomEnrichmentDataBinary *CustomEnrichmentDataBinary
+	CustomEnrichmentDataTextual *CustomEnrichmentDataTextual
 }
 
-// CustomEnrichmentDataOneOfAsCustomEnrichmentData is a convenience function that returns CustomEnrichmentDataOneOf wrapped in CustomEnrichmentData
-func CustomEnrichmentDataOneOfAsCustomEnrichmentData(v *CustomEnrichmentDataOneOf) CustomEnrichmentData {
+// CustomEnrichmentDataBinaryAsCustomEnrichmentData is a convenience function that returns CustomEnrichmentDataBinary wrapped in CustomEnrichmentData
+func CustomEnrichmentDataBinaryAsCustomEnrichmentData(v *CustomEnrichmentDataBinary) CustomEnrichmentData {
 	return CustomEnrichmentData{
-		CustomEnrichmentDataOneOf: v,
+		CustomEnrichmentDataBinary: v,
 	}
 }
 
-// CustomEnrichmentDataOneOf1AsCustomEnrichmentData is a convenience function that returns CustomEnrichmentDataOneOf1 wrapped in CustomEnrichmentData
-func CustomEnrichmentDataOneOf1AsCustomEnrichmentData(v *CustomEnrichmentDataOneOf1) CustomEnrichmentData {
+// CustomEnrichmentDataTextualAsCustomEnrichmentData is a convenience function that returns CustomEnrichmentDataTextual wrapped in CustomEnrichmentData
+func CustomEnrichmentDataTextualAsCustomEnrichmentData(v *CustomEnrichmentDataTextual) CustomEnrichmentData {
 	return CustomEnrichmentData{
-		CustomEnrichmentDataOneOf1: v,
+		CustomEnrichmentDataTextual: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func CustomEnrichmentDataOneOf1AsCustomEnrichmentData(v *CustomEnrichmentDataOne
 func (dst *CustomEnrichmentData) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into CustomEnrichmentDataOneOf
-	err = newStrictDecoder(data).Decode(&dst.CustomEnrichmentDataOneOf)
+	// try to unmarshal data into CustomEnrichmentDataBinary
+	err = newStrictDecoder(data).Decode(&dst.CustomEnrichmentDataBinary)
 	if err == nil {
-		jsonCustomEnrichmentDataOneOf, _ := json.Marshal(dst.CustomEnrichmentDataOneOf)
-		if string(jsonCustomEnrichmentDataOneOf) == "{}" { // empty struct
-			dst.CustomEnrichmentDataOneOf = nil
+		jsonCustomEnrichmentDataBinary, _ := json.Marshal(dst.CustomEnrichmentDataBinary)
+		if string(jsonCustomEnrichmentDataBinary) == "{}" { // empty struct
+			dst.CustomEnrichmentDataBinary = nil
 		} else {
-			if err = validator.Validate(dst.CustomEnrichmentDataOneOf); err != nil {
-				dst.CustomEnrichmentDataOneOf = nil
+			if err = validator.Validate(dst.CustomEnrichmentDataBinary); err != nil {
+				dst.CustomEnrichmentDataBinary = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.CustomEnrichmentDataOneOf = nil
+		dst.CustomEnrichmentDataBinary = nil
 	}
 
-	// try to unmarshal data into CustomEnrichmentDataOneOf1
-	err = newStrictDecoder(data).Decode(&dst.CustomEnrichmentDataOneOf1)
+	// try to unmarshal data into CustomEnrichmentDataTextual
+	err = newStrictDecoder(data).Decode(&dst.CustomEnrichmentDataTextual)
 	if err == nil {
-		jsonCustomEnrichmentDataOneOf1, _ := json.Marshal(dst.CustomEnrichmentDataOneOf1)
-		if string(jsonCustomEnrichmentDataOneOf1) == "{}" { // empty struct
-			dst.CustomEnrichmentDataOneOf1 = nil
+		jsonCustomEnrichmentDataTextual, _ := json.Marshal(dst.CustomEnrichmentDataTextual)
+		if string(jsonCustomEnrichmentDataTextual) == "{}" { // empty struct
+			dst.CustomEnrichmentDataTextual = nil
 		} else {
-			if err = validator.Validate(dst.CustomEnrichmentDataOneOf1); err != nil {
-				dst.CustomEnrichmentDataOneOf1 = nil
+			if err = validator.Validate(dst.CustomEnrichmentDataTextual); err != nil {
+				dst.CustomEnrichmentDataTextual = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.CustomEnrichmentDataOneOf1 = nil
+		dst.CustomEnrichmentDataTextual = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.CustomEnrichmentDataOneOf = nil
-		dst.CustomEnrichmentDataOneOf1 = nil
+		dst.CustomEnrichmentDataBinary = nil
+		dst.CustomEnrichmentDataTextual = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(CustomEnrichmentData)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *CustomEnrichmentData) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src CustomEnrichmentData) MarshalJSON() ([]byte, error) {
-	if src.CustomEnrichmentDataOneOf != nil {
-		return json.Marshal(&src.CustomEnrichmentDataOneOf)
+	if src.CustomEnrichmentDataBinary != nil {
+		return json.Marshal(&src.CustomEnrichmentDataBinary)
 	}
 
-	if src.CustomEnrichmentDataOneOf1 != nil {
-		return json.Marshal(&src.CustomEnrichmentDataOneOf1)
+	if src.CustomEnrichmentDataTextual != nil {
+		return json.Marshal(&src.CustomEnrichmentDataTextual)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *CustomEnrichmentData) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.CustomEnrichmentDataOneOf != nil {
-		return obj.CustomEnrichmentDataOneOf
+	if obj.CustomEnrichmentDataBinary != nil {
+		return obj.CustomEnrichmentDataBinary
 	}
 
-	if obj.CustomEnrichmentDataOneOf1 != nil {
-		return obj.CustomEnrichmentDataOneOf1
+	if obj.CustomEnrichmentDataTextual != nil {
+		return obj.CustomEnrichmentDataTextual
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *CustomEnrichmentData) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj CustomEnrichmentData) GetActualInstanceValue() (interface{}) {
-	if obj.CustomEnrichmentDataOneOf != nil {
-		return *obj.CustomEnrichmentDataOneOf
+	if obj.CustomEnrichmentDataBinary != nil {
+		return *obj.CustomEnrichmentDataBinary
 	}
 
-	if obj.CustomEnrichmentDataOneOf1 != nil {
-		return *obj.CustomEnrichmentDataOneOf1
+	if obj.CustomEnrichmentDataTextual != nil {
+		return *obj.CustomEnrichmentDataTextual
 	}
 
 	// all schemas are nil

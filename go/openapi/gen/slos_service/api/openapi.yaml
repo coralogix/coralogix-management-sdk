@@ -863,6 +863,24 @@ components:
       - UNAVAILABLE
       - DATA_LOSS
       type: string
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
     ComparisonOperator:
       enum:
       - COMPARISON_OPERATOR_UNSPECIFIED
@@ -871,6 +889,20 @@ components:
       - COMPARISON_OPERATOR_LESS_THAN
       - COMPARISON_OPERATOR_LESS_THAN_OR_EQUALS
       type: string
+    CreateSloRequest:
+      description: Request to create a new SLO.
+      externalDocs:
+        url: ""
+      properties:
+        silenceDataValidations:
+          deprecated: true
+          type: boolean
+        slo:
+          $ref: "#/components/schemas/Slo"
+      required:
+      - slo
+      title: CreateSloRequest
+      type: object
     CreateSloResponse:
       description: Response after creating a new SLO.
       example:
@@ -907,6 +939,17 @@ components:
       - slo
       title: CreateSloResponse
       type: object
+    DeleteSloRequest:
+      description: Request to delete an existing SLO.
+      externalDocs:
+        url: ""
+      properties:
+        id:
+          type: string
+      required:
+      - id
+      title: DeleteSloRequest
+      type: object
     DeleteSloResponse:
       description: Response after deleting an existing SLO.
       example:
@@ -931,8 +974,40 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValues_1"
-      - $ref: "#/components/schemas/FilterPathAndValues_2"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
     Filters:
       description: This data structure represents a filter
       externalDocs:
@@ -1110,6 +1185,20 @@ components:
       - alertsValidationResult
       title: ReplaceSloAlertsValidationsResponse
       type: object
+    ReplaceSloRequest:
+      description: Request to replace an existing SLO.
+      externalDocs:
+        url: ""
+      properties:
+        silenceDataValidations:
+          deprecated: true
+          type: boolean
+        slo:
+          $ref: "#/components/schemas/Slo"
+      required:
+      - slo
+      title: ReplaceSloRequest
+      type: object
     ReplaceSloResponse:
       description: Response after replacing an existing SLO.
       example:
@@ -1173,7 +1262,6 @@ components:
       title: RequestBasedMetricSli
       type: object
     ResponseStatus:
-      additionalProperties: false
       description: "Status of the response, including error code and message."
       example:
         details:
@@ -1197,10 +1285,9 @@ components:
       type: object
     Slo:
       oneOf:
-      - $ref: "#/components/schemas/Slo_5"
-      - $ref: "#/components/schemas/Slo_6"
+      - $ref: "#/components/schemas/SloRequestBasedMetricSli"
+      - $ref: "#/components/schemas/SloWindowBasedMetricSli"
     SloAlertValidityResult:
-      additionalProperties: false
       example:
         errorMessage: errorMessage
         name: name
@@ -1216,503 +1303,13 @@ components:
         name:
           type: string
       type: object
-    SloExecutionResponse:
-      oneOf:
-      - $ref: "#/components/schemas/SloExecutionResponse_1"
-      - $ref: "#/components/schemas/SloExecutionResponse_2"
-      - $ref: "#/components/schemas/SloExecutionResponse_3"
-    SloTimeFrame:
+    SloConstantFilterField:
       enum:
-      - SLO_TIME_FRAME_UNSPECIFIED
-      - SLO_TIME_FRAME_7_DAYS
-      - SLO_TIME_FRAME_14_DAYS
-      - SLO_TIME_FRAME_21_DAYS
-      - SLO_TIME_FRAME_28_DAYS
+      - SLO_CONST_FILTER_FIELD_UNSPECIFIED
+      - SLO_CONST_FILTER_FIELD_USER_NAME
+      - SLO_CONST_FILTER_FIELD_SLO_NAME
       type: string
-    WindowBasedMetricSli:
-      description: Definition of a window-based SLI based on metrics
-      externalDocs:
-        url: ""
-      properties:
-        comparisonOperator:
-          $ref: "#/components/schemas/ComparisonOperator"
-        missingDataStrategy:
-          $ref: "#/components/schemas/MissingDataStrategy"
-        query:
-          $ref: "#/components/schemas/Metric"
-        threshold:
-          example: 0.95
-          format: float
-          type: number
-        window:
-          $ref: "#/components/schemas/WindowSloWindow"
-      required:
-      - comparisonOperator
-      - query
-      - threshold
-      - window
-      title: WindowBasedMetricSli
-      type: object
-    WindowSloWindow:
-      enum:
-      - WINDOW_SLO_WINDOW_UNSPECIFIED
-      - WINDOW_SLO_WINDOW_1_MINUTE
-      - WINDOW_SLO_WINDOW_5_MINUTES
-      type: string
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
-      type: object
-    events.v3.FilterMatcher:
-      enum:
-      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
-      - FILTER_MATCHER_REGEXP
-      type: string
-    v1.Grouping:
-      description: Definition of the SLO grouping fields
-      example:
-        labels:
-        - labels
-        - labels
-      externalDocs:
-        url: ""
-      properties:
-        labels:
-          items:
-            type: string
-          type: array
-      title: Grouping
-      type: object
-    v1.Revision:
-      description: "The revision of the slo, used to differentiate between different\
-        \ versions of the same SLO"
-      example:
-        updateTime: 2000-01-23T04:56:07.000+00:00
-        revision: 1
-      externalDocs:
-        url: ""
-      properties:
-        revision:
-          example: 1
-          format: int32
-          type: integer
-        updateTime:
-          format: date-time
-          type: string
-      title: Revision
-      type: object
-    v3.FilterOperator:
-      enum:
-      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
-      - FILTER_OPERATOR_OR
-      type: string
-    SloFilterField:
-      additionalProperties: false
-      description: Field used for filtering SLOs
-      externalDocs:
-        url: ""
-      properties:
-        constFilter:
-          enum:
-          - SLO_CONST_FILTER_FIELD_UNSPECIFIED
-          - SLO_CONST_FILTER_FIELD_USER_NAME
-          - SLO_CONST_FILTER_FIELD_SLO_NAME
-          type: string
-      title: SloFilterField
-      type: object
-    SloFilterField_1:
-      additionalProperties: false
-      description: Field used for filtering SLOs
-      externalDocs:
-        url: ""
-      properties:
-        labelName:
-          example: environment
-          type: string
-      title: SloFilterField
-      type: object
-    SloFilter_field:
-      oneOf:
-      - $ref: "#/components/schemas/SloFilterField"
-      - $ref: "#/components/schemas/SloFilterField_1"
-    IsFilterPredicate:
-      description: Predicate for SLO filters that checks if a field is equal to one
-        of multiple values
-      externalDocs:
-        url: ""
-      properties:
-        is:
-          items:
-            type: string
-          type: array
-      title: IsFilterPredicate
-      type: object
-    SloFilterPredicate:
-      additionalProperties: false
-      description: Predicate used for filtering SLOs
-      externalDocs:
-        url: ""
-      properties:
-        is:
-          $ref: "#/components/schemas/IsFilterPredicate"
-      title: SloFilterPredicate
-      type: object
-    SloFilter:
-      description: "A filter for SLOs, consisting of a field and a predicate"
-      externalDocs:
-        url: ""
-      properties:
-        field:
-          $ref: "#/components/schemas/SloFilter_field"
-        predicate:
-          $ref: "#/components/schemas/SloFilterPredicate"
-      required:
-      - field
-      - predicate
-      title: SloFilter
-      type: object
-    SloFilters:
-      description: A collection of filters for SLOs
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          items:
-            $ref: "#/components/schemas/SloFilter"
-          type: array
-      title: SloFilters
-      type: object
-    Slo_1:
-      additionalProperties: false
-      description: Definition of an SLO
-      properties:
-        createTime:
-          format: date-time
-          type: string
-        creator:
-          example: test@domain.com
-          type: string
-        description:
-          example: A brief description of my SLO
-          type: string
-        grouping:
-          $ref: "#/components/schemas/v1.Grouping"
-        id:
-          example: b11919d5-ef85-4bb1-8655-02640dbe94d9
-          type: string
-        labels:
-          additionalProperties:
-            type: string
-          type: object
-        name:
-          example: Example Slo Name
-          type: string
-        requestBasedMetricSli:
-          $ref: "#/components/schemas/RequestBasedMetricSli"
-        revision:
-          $ref: "#/components/schemas/v1.Revision"
-        sloTimeFrame:
-          $ref: "#/components/schemas/SloTimeFrame"
-        targetThresholdPercentage:
-          example: 99.999
-          format: float
-          type: number
-        type:
-          example: request
-          type: string
-        updateTime:
-          format: date-time
-          type: string
-      required:
-      - name
-      - sli
-      - targetThresholdPercentage
-      - window
-      title: Slo
-      type: object
-    Slo_2:
-      additionalProperties: false
-      description: Definition of an SLO
-      properties:
-        createTime:
-          format: date-time
-          type: string
-        creator:
-          example: test@domain.com
-          type: string
-        description:
-          example: A brief description of my SLO
-          type: string
-        grouping:
-          $ref: "#/components/schemas/v1.Grouping"
-        id:
-          example: b11919d5-ef85-4bb1-8655-02640dbe94d9
-          type: string
-        labels:
-          additionalProperties:
-            type: string
-          type: object
-        name:
-          example: Example Slo Name
-          type: string
-        revision:
-          $ref: "#/components/schemas/v1.Revision"
-        sloTimeFrame:
-          $ref: "#/components/schemas/SloTimeFrame"
-        targetThresholdPercentage:
-          example: 99.999
-          format: float
-          type: number
-        type:
-          example: request
-          type: string
-        updateTime:
-          format: date-time
-          type: string
-        windowBasedMetricSli:
-          $ref: "#/components/schemas/WindowBasedMetricSli"
-      required:
-      - name
-      - sli
-      - targetThresholdPercentage
-      - window
-      title: Slo
-      type: object
-    SlosService_ReplaceSlo_request:
-      oneOf:
-      - $ref: "#/components/schemas/Slo_1"
-      - $ref: "#/components/schemas/Slo_2"
-      type: object
-    Grouping:
-      description: Definition of the SLO grouping fields
-      externalDocs:
-        url: ""
-      properties:
-        labels:
-          items:
-            type: string
-          type: array
-      title: Grouping
-      type: object
-    Metric_1:
-      description: Definition of a metric used in SLOs
-      externalDocs:
-        url: ""
-      properties:
-        query:
-          example: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-          type: string
-      required:
-      - query
-      title: Metric
-      type: object
-    RequestBasedMetricSli_1:
-      description: Definition of a request-based SLI based on metrics
-      externalDocs:
-        url: ""
-      properties:
-        goodEvents:
-          $ref: "#/components/schemas/Metric_1"
-        totalEvents:
-          $ref: "#/components/schemas/Metric_1"
-      required:
-      - goodEvents
-      - totalEvents
-      title: RequestBasedMetricSli
-      type: object
-    Revision:
-      description: "The revision of the slo, used to differentiate between different\
-        \ versions of the same SLO"
-      externalDocs:
-        url: ""
-      properties:
-        revision:
-          example: 1
-          format: int32
-          type: integer
-        updateTime:
-          format: date-time
-          type: string
-      title: Revision
-      type: object
-    Slo_3:
-      additionalProperties: false
-      description: Definition of an SLO
-      externalDocs:
-        url: ""
-      properties:
-        createTime:
-          format: date-time
-          type: string
-        creator:
-          example: test@domain.com
-          type: string
-        description:
-          example: A brief description of my SLO
-          type: string
-        grouping:
-          $ref: "#/components/schemas/Grouping"
-        id:
-          example: b11919d5-ef85-4bb1-8655-02640dbe94d9
-          type: string
-        labels:
-          additionalProperties:
-            type: string
-          type: object
-        name:
-          example: Example Slo Name
-          type: string
-        requestBasedMetricSli:
-          $ref: "#/components/schemas/RequestBasedMetricSli_1"
-        revision:
-          $ref: "#/components/schemas/Revision"
-        sloTimeFrame:
-          enum:
-          - SLO_TIME_FRAME_UNSPECIFIED
-          - SLO_TIME_FRAME_7_DAYS
-          - SLO_TIME_FRAME_14_DAYS
-          - SLO_TIME_FRAME_21_DAYS
-          - SLO_TIME_FRAME_28_DAYS
-          type: string
-        targetThresholdPercentage:
-          example: 99.999
-          format: float
-          type: number
-        type:
-          example: request
-          type: string
-        updateTime:
-          format: date-time
-          type: string
-      required:
-      - name
-      - sli
-      - targetThresholdPercentage
-      - window
-      title: Slo
-      type: object
-    WindowBasedMetricSli_1:
-      description: Definition of a window-based SLI based on metrics
-      externalDocs:
-        url: ""
-      properties:
-        comparisonOperator:
-          enum:
-          - COMPARISON_OPERATOR_UNSPECIFIED
-          - COMPARISON_OPERATOR_GREATER_THAN
-          - COMPARISON_OPERATOR_GREATER_THAN_OR_EQUALS
-          - COMPARISON_OPERATOR_LESS_THAN
-          - COMPARISON_OPERATOR_LESS_THAN_OR_EQUALS
-          type: string
-        missingDataStrategy:
-          enum:
-          - MISSING_DATA_STRATEGY_UNCOUNTED
-          - MISSING_DATA_STRATEGY_GOOD
-          - MISSING_DATA_STRATEGY_BAD
-          type: string
-        query:
-          $ref: "#/components/schemas/Metric_1"
-        threshold:
-          example: 0.95
-          format: float
-          type: number
-        window:
-          enum:
-          - WINDOW_SLO_WINDOW_UNSPECIFIED
-          - WINDOW_SLO_WINDOW_1_MINUTE
-          - WINDOW_SLO_WINDOW_5_MINUTES
-          type: string
-      required:
-      - comparisonOperator
-      - query
-      - threshold
-      - window
-      title: WindowBasedMetricSli
-      type: object
-    Slo_4:
-      additionalProperties: false
-      description: Definition of an SLO
-      externalDocs:
-        url: ""
-      properties:
-        createTime:
-          format: date-time
-          type: string
-        creator:
-          example: test@domain.com
-          type: string
-        description:
-          example: A brief description of my SLO
-          type: string
-        grouping:
-          $ref: "#/components/schemas/Grouping"
-        id:
-          example: b11919d5-ef85-4bb1-8655-02640dbe94d9
-          type: string
-        labels:
-          additionalProperties:
-            type: string
-          type: object
-        name:
-          example: Example Slo Name
-          type: string
-        revision:
-          $ref: "#/components/schemas/Revision"
-        sloTimeFrame:
-          enum:
-          - SLO_TIME_FRAME_UNSPECIFIED
-          - SLO_TIME_FRAME_7_DAYS
-          - SLO_TIME_FRAME_14_DAYS
-          - SLO_TIME_FRAME_21_DAYS
-          - SLO_TIME_FRAME_28_DAYS
-          type: string
-        targetThresholdPercentage:
-          example: 99.999
-          format: float
-          type: number
-        type:
-          example: request
-          type: string
-        updateTime:
-          format: date-time
-          type: string
-        windowBasedMetricSli:
-          $ref: "#/components/schemas/WindowBasedMetricSli_1"
-      required:
-      - name
-      - sli
-      - targetThresholdPercentage
-      - window
-      title: Slo
-      type: object
-    CreateSloRequest_slo:
-      oneOf:
-      - $ref: "#/components/schemas/Slo_3"
-      - $ref: "#/components/schemas/Slo_4"
-    CreateSloRequest:
-      additionalProperties: false
-      description: Request to create a new SLO.
-      externalDocs:
-        url: ""
-      properties:
-        silenceDataValidations:
-          deprecated: true
-          type: boolean
-        slo:
-          $ref: "#/components/schemas/CreateSloRequest_slo"
-      required:
-      - slo
-      title: CreateSloRequest
-      type: object
-    SloExecutionRequest:
+    SloExecutionRequestCreateSloRequest:
       additionalProperties: false
       description: Request for executing an SLO operation.
       externalDocs:
@@ -1724,45 +1321,7 @@ components:
       - request
       title: SloExecutionRequest
       type: object
-    ReplaceSloRequest:
-      additionalProperties: false
-      description: Request to replace an existing SLO.
-      externalDocs:
-        url: ""
-      properties:
-        silenceDataValidations:
-          deprecated: true
-          type: boolean
-        slo:
-          $ref: "#/components/schemas/CreateSloRequest_slo"
-      required:
-      - slo
-      title: ReplaceSloRequest
-      type: object
-    SloExecutionRequest_1:
-      additionalProperties: false
-      description: Request for executing an SLO operation.
-      externalDocs:
-        url: ""
-      properties:
-        replaceSloRequest:
-          $ref: "#/components/schemas/ReplaceSloRequest"
-      required:
-      - request
-      title: SloExecutionRequest
-      type: object
-    DeleteSloRequest:
-      description: Request to delete an existing SLO.
-      externalDocs:
-        url: ""
-      properties:
-        id:
-          type: string
-      required:
-      - id
-      title: DeleteSloRequest
-      type: object
-    SloExecutionRequest_2:
+    SloExecutionRequestDeleteSloRequest:
       additionalProperties: false
       description: Request for executing an SLO operation.
       externalDocs:
@@ -1774,44 +1333,101 @@ components:
       - request
       title: SloExecutionRequest
       type: object
-    SlosService_BatchExecuteSlo_requests_parameter_inner:
+    SloExecutionRequestReplaceSloRequest:
+      additionalProperties: false
+      description: Request for executing an SLO operation.
+      externalDocs:
+        url: ""
+      properties:
+        replaceSloRequest:
+          $ref: "#/components/schemas/ReplaceSloRequest"
+      required:
+      - request
+      title: SloExecutionRequest
+      type: object
+    SloExecutionResponse:
       oneOf:
-      - $ref: "#/components/schemas/SloExecutionRequest"
-      - $ref: "#/components/schemas/SloExecutionRequest_1"
-      - $ref: "#/components/schemas/SloExecutionRequest_2"
-    FilterPathAndValues_1:
+      - $ref: "#/components/schemas/SloExecutionResponseCreateSloResponse"
+      - $ref: "#/components/schemas/SloExecutionResponseReplaceSloResponse"
+      - $ref: "#/components/schemas/SloExecutionResponseDeleteSloResponse"
+    SloExecutionResponseCreateSloResponse:
       additionalProperties: false
-      description: This data structure represents a filter path and values
+      description: Response for an executed SLO operation.
+      example:
+        createSloResponse:
+          slo:
+            creator: test@domain.com
+            requestBasedMetricSli:
+              goodEvents:
+                query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+              totalEvents:
+                query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+            description: A brief description of my SLO
+            sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
+            updateTime: 2000-01-23T04:56:07.000+00:00
+            type: request
+            grouping:
+              labels:
+              - labels
+              - labels
+            labels:
+              key: labels
+            revision:
+              updateTime: 2000-01-23T04:56:07.000+00:00
+              revision: 1
+            createTime: 2000-01-23T04:56:07.000+00:00
+            name: Example Slo Name
+            id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+            targetThresholdPercentage: 99.999
       externalDocs:
         url: ""
       properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
+        createSloResponse:
+          $ref: "#/components/schemas/CreateSloResponse"
+      title: SloExecutionResponse
       type: object
-    FilterPathAndValues_2:
+    SloExecutionResponseDeleteSloResponse:
       additionalProperties: false
-      description: This data structure represents a filter path and values
+      description: Response for an executed SLO operation.
       externalDocs:
         url: ""
       properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
+        deleteSloResponse:
+          $ref: "#/components/schemas/DeleteSloResponse"
+      title: SloExecutionResponse
       type: object
-    Slo_5:
+    SloExecutionResponseReplaceSloResponse:
+      additionalProperties: false
+      description: Response for an executed SLO operation.
+      externalDocs:
+        url: ""
+      properties:
+        replaceSloResponse:
+          $ref: "#/components/schemas/ReplaceSloResponse"
+      title: SloExecutionResponse
+      type: object
+    SloFilterFieldConstFilter:
+      additionalProperties: false
+      description: Field used for filtering SLOs
+      externalDocs:
+        url: ""
+      properties:
+        constFilter:
+          $ref: "#/components/schemas/SloConstantFilterField"
+      title: SloFilterField
+      type: object
+    SloFilterFieldLabelName:
+      additionalProperties: false
+      description: Field used for filtering SLOs
+      externalDocs:
+        url: ""
+      properties:
+        labelName:
+          example: environment
+          type: string
+      title: SloFilterField
+      type: object
+    SloRequestBasedMetricSli:
       additionalProperties: false
       description: Definition of an SLO
       example:
@@ -1885,7 +1501,15 @@ components:
       - window
       title: Slo
       type: object
-    Slo_6:
+    SloTimeFrame:
+      enum:
+      - SLO_TIME_FRAME_UNSPECIFIED
+      - SLO_TIME_FRAME_7_DAYS
+      - SLO_TIME_FRAME_14_DAYS
+      - SLO_TIME_FRAME_21_DAYS
+      - SLO_TIME_FRAME_28_DAYS
+      type: string
+    SloWindowBasedMetricSli:
       additionalProperties: false
       description: Definition of an SLO
       externalDocs:
@@ -1935,62 +1559,163 @@ components:
       - window
       title: Slo
       type: object
-    SloExecutionResponse_1:
+    WindowBasedMetricSli:
+      description: Definition of a window-based SLI based on metrics
+      externalDocs:
+        url: ""
+      properties:
+        comparisonOperator:
+          $ref: "#/components/schemas/ComparisonOperator"
+        missingDataStrategy:
+          $ref: "#/components/schemas/MissingDataStrategy"
+        query:
+          $ref: "#/components/schemas/Metric"
+        threshold:
+          example: 0.95
+          format: float
+          type: number
+        window:
+          $ref: "#/components/schemas/WindowSloWindow"
+      required:
+      - comparisonOperator
+      - query
+      - threshold
+      - window
+      title: WindowBasedMetricSli
+      type: object
+    WindowSloWindow:
+      enum:
+      - WINDOW_SLO_WINDOW_UNSPECIFIED
+      - WINDOW_SLO_WINDOW_1_MINUTE
+      - WINDOW_SLO_WINDOW_5_MINUTES
+      type: string
+    YAxisViewByCategory:
       additionalProperties: false
-      description: Response for an executed SLO operation.
+      properties:
+        category:
+          $ref: "#/components/schemas/YAxisViewByCategory"
+      type: object
+    YAxisViewByValue:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: "#/components/schemas/YAxisViewByValue"
+      type: object
+    common.Group:
+      properties:
+        field:
+          $ref: "#/components/schemas/FieldGroup"
+        groups:
+          items:
+            $ref: "#/components/schemas/common.Group"
+          type: array
+        value:
+          format: double
+          type: number
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    v1.Grouping:
+      description: Definition of the SLO grouping fields
       example:
-        createSloResponse:
-          slo:
-            creator: test@domain.com
-            requestBasedMetricSli:
-              goodEvents:
-                query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-              totalEvents:
-                query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-            description: A brief description of my SLO
-            sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
-            updateTime: 2000-01-23T04:56:07.000+00:00
-            type: request
-            grouping:
-              labels:
-              - labels
-              - labels
-            labels:
-              key: labels
-            revision:
-              updateTime: 2000-01-23T04:56:07.000+00:00
-              revision: 1
-            createTime: 2000-01-23T04:56:07.000+00:00
-            name: Example Slo Name
-            id: b11919d5-ef85-4bb1-8655-02640dbe94d9
-            targetThresholdPercentage: 99.999
+        labels:
+        - labels
+        - labels
       externalDocs:
         url: ""
       properties:
-        createSloResponse:
-          $ref: "#/components/schemas/CreateSloResponse"
-      title: SloExecutionResponse
+        labels:
+          items:
+            type: string
+          type: array
+      title: Grouping
       type: object
-    SloExecutionResponse_2:
-      additionalProperties: false
-      description: Response for an executed SLO operation.
+    v1.Revision:
+      description: "The revision of the slo, used to differentiate between different\
+        \ versions of the same SLO"
+      example:
+        updateTime: 2000-01-23T04:56:07.000+00:00
+        revision: 1
       externalDocs:
         url: ""
       properties:
-        replaceSloResponse:
-          $ref: "#/components/schemas/ReplaceSloResponse"
-      title: SloExecutionResponse
+        revision:
+          example: 1
+          format: int32
+          type: integer
+        updateTime:
+          format: date-time
+          type: string
+      title: Revision
       type: object
-    SloExecutionResponse_3:
-      additionalProperties: false
-      description: Response for an executed SLO operation.
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    SloFilter_field:
+      oneOf:
+      - $ref: "#/components/schemas/SloFilterFieldLabelName"
+      - $ref: "#/components/schemas/SloFilterFieldConstFilter"
+    IsFilterPredicate:
+      description: Predicate for SLO filters that checks if a field is equal to one
+        of multiple values
       externalDocs:
         url: ""
       properties:
-        deleteSloResponse:
-          $ref: "#/components/schemas/DeleteSloResponse"
-      title: SloExecutionResponse
+        is:
+          items:
+            type: string
+          type: array
+      title: IsFilterPredicate
       type: object
+    SloFilterPredicate:
+      description: Predicate used for filtering SLOs
+      externalDocs:
+        url: ""
+      properties:
+        is:
+          $ref: "#/components/schemas/IsFilterPredicate"
+      title: SloFilterPredicate
+      type: object
+    SloFilter:
+      description: "A filter for SLOs, consisting of a field and a predicate"
+      externalDocs:
+        url: ""
+      properties:
+        field:
+          $ref: "#/components/schemas/SloFilter_field"
+        predicate:
+          $ref: "#/components/schemas/SloFilterPredicate"
+      required:
+      - field
+      - predicate
+      title: SloFilter
+      type: object
+    SloFilters:
+      description: A collection of filters for SLOs
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          items:
+            $ref: "#/components/schemas/SloFilter"
+          type: array
+      title: SloFilters
+      type: object
+    SlosService_ReplaceSlo_request:
+      oneOf:
+      - $ref: "#/components/schemas/SloRequestBasedMetricSli"
+      - $ref: "#/components/schemas/SloWindowBasedMetricSli"
+      type: object
+    SlosService_BatchExecuteSlo_requests_parameter_inner:
+      oneOf:
+      - $ref: "#/components/schemas/SloExecutionRequestReplaceSloRequest"
+      - $ref: "#/components/schemas/SloExecutionRequestDeleteSloRequest"
+      - $ref: "#/components/schemas/SloExecutionRequestCreateSloRequest"
   securitySchemes:
     apiKeyAuth:
       description: API key authentication

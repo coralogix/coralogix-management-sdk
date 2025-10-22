@@ -84,18 +84,23 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [ColorsByAggregation](docs/ColorsByAggregation.md)
+ - [ColorsByGroupBy](docs/ColorsByGroupBy.md)
+ - [ColorsByStack](docs/ColorsByStack.md)
  - [CommonGroup](docs/CommonGroup.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FieldGroup](docs/FieldGroup.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
- - [FilterPathAndValues1](docs/FilterPathAndValues1.md)
- - [FilterPathAndValues2](docs/FilterPathAndValues2.md)
+ - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
+ - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [ListEntitySubTypesResponse](docs/ListEntitySubTypesResponse.md)
  - [ListEntityTypesResponse](docs/ListEntityTypesResponse.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [NotificationCenterEntityType](docs/NotificationCenterEntityType.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
+ - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
+ - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

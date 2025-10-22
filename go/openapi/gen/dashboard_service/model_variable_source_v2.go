@@ -18,29 +18,29 @@ import (
 
 // VariableSourceV2 - struct for VariableSourceV2
 type VariableSourceV2 struct {
-	VariableSourceV2OneOf *VariableSourceV2OneOf
-	VariableSourceV2OneOf1 *VariableSourceV2OneOf1
-	VariableSourceV2OneOf2 *VariableSourceV2OneOf2
+	VariableSourceV2Query *VariableSourceV2Query
+	VariableSourceV2Static *VariableSourceV2Static
+	VariableSourceV2Textbox *VariableSourceV2Textbox
 }
 
-// VariableSourceV2OneOfAsVariableSourceV2 is a convenience function that returns VariableSourceV2OneOf wrapped in VariableSourceV2
-func VariableSourceV2OneOfAsVariableSourceV2(v *VariableSourceV2OneOf) VariableSourceV2 {
+// VariableSourceV2QueryAsVariableSourceV2 is a convenience function that returns VariableSourceV2Query wrapped in VariableSourceV2
+func VariableSourceV2QueryAsVariableSourceV2(v *VariableSourceV2Query) VariableSourceV2 {
 	return VariableSourceV2{
-		VariableSourceV2OneOf: v,
+		VariableSourceV2Query: v,
 	}
 }
 
-// VariableSourceV2OneOf1AsVariableSourceV2 is a convenience function that returns VariableSourceV2OneOf1 wrapped in VariableSourceV2
-func VariableSourceV2OneOf1AsVariableSourceV2(v *VariableSourceV2OneOf1) VariableSourceV2 {
+// VariableSourceV2StaticAsVariableSourceV2 is a convenience function that returns VariableSourceV2Static wrapped in VariableSourceV2
+func VariableSourceV2StaticAsVariableSourceV2(v *VariableSourceV2Static) VariableSourceV2 {
 	return VariableSourceV2{
-		VariableSourceV2OneOf1: v,
+		VariableSourceV2Static: v,
 	}
 }
 
-// VariableSourceV2OneOf2AsVariableSourceV2 is a convenience function that returns VariableSourceV2OneOf2 wrapped in VariableSourceV2
-func VariableSourceV2OneOf2AsVariableSourceV2(v *VariableSourceV2OneOf2) VariableSourceV2 {
+// VariableSourceV2TextboxAsVariableSourceV2 is a convenience function that returns VariableSourceV2Textbox wrapped in VariableSourceV2
+func VariableSourceV2TextboxAsVariableSourceV2(v *VariableSourceV2Textbox) VariableSourceV2 {
 	return VariableSourceV2{
-		VariableSourceV2OneOf2: v,
+		VariableSourceV2Textbox: v,
 	}
 }
 
@@ -49,62 +49,62 @@ func VariableSourceV2OneOf2AsVariableSourceV2(v *VariableSourceV2OneOf2) Variabl
 func (dst *VariableSourceV2) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into VariableSourceV2OneOf
-	err = newStrictDecoder(data).Decode(&dst.VariableSourceV2OneOf)
+	// try to unmarshal data into VariableSourceV2Query
+	err = newStrictDecoder(data).Decode(&dst.VariableSourceV2Query)
 	if err == nil {
-		jsonVariableSourceV2OneOf, _ := json.Marshal(dst.VariableSourceV2OneOf)
-		if string(jsonVariableSourceV2OneOf) == "{}" { // empty struct
-			dst.VariableSourceV2OneOf = nil
+		jsonVariableSourceV2Query, _ := json.Marshal(dst.VariableSourceV2Query)
+		if string(jsonVariableSourceV2Query) == "{}" { // empty struct
+			dst.VariableSourceV2Query = nil
 		} else {
-			if err = validator.Validate(dst.VariableSourceV2OneOf); err != nil {
-				dst.VariableSourceV2OneOf = nil
+			if err = validator.Validate(dst.VariableSourceV2Query); err != nil {
+				dst.VariableSourceV2Query = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VariableSourceV2OneOf = nil
+		dst.VariableSourceV2Query = nil
 	}
 
-	// try to unmarshal data into VariableSourceV2OneOf1
-	err = newStrictDecoder(data).Decode(&dst.VariableSourceV2OneOf1)
+	// try to unmarshal data into VariableSourceV2Static
+	err = newStrictDecoder(data).Decode(&dst.VariableSourceV2Static)
 	if err == nil {
-		jsonVariableSourceV2OneOf1, _ := json.Marshal(dst.VariableSourceV2OneOf1)
-		if string(jsonVariableSourceV2OneOf1) == "{}" { // empty struct
-			dst.VariableSourceV2OneOf1 = nil
+		jsonVariableSourceV2Static, _ := json.Marshal(dst.VariableSourceV2Static)
+		if string(jsonVariableSourceV2Static) == "{}" { // empty struct
+			dst.VariableSourceV2Static = nil
 		} else {
-			if err = validator.Validate(dst.VariableSourceV2OneOf1); err != nil {
-				dst.VariableSourceV2OneOf1 = nil
+			if err = validator.Validate(dst.VariableSourceV2Static); err != nil {
+				dst.VariableSourceV2Static = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VariableSourceV2OneOf1 = nil
+		dst.VariableSourceV2Static = nil
 	}
 
-	// try to unmarshal data into VariableSourceV2OneOf2
-	err = newStrictDecoder(data).Decode(&dst.VariableSourceV2OneOf2)
+	// try to unmarshal data into VariableSourceV2Textbox
+	err = newStrictDecoder(data).Decode(&dst.VariableSourceV2Textbox)
 	if err == nil {
-		jsonVariableSourceV2OneOf2, _ := json.Marshal(dst.VariableSourceV2OneOf2)
-		if string(jsonVariableSourceV2OneOf2) == "{}" { // empty struct
-			dst.VariableSourceV2OneOf2 = nil
+		jsonVariableSourceV2Textbox, _ := json.Marshal(dst.VariableSourceV2Textbox)
+		if string(jsonVariableSourceV2Textbox) == "{}" { // empty struct
+			dst.VariableSourceV2Textbox = nil
 		} else {
-			if err = validator.Validate(dst.VariableSourceV2OneOf2); err != nil {
-				dst.VariableSourceV2OneOf2 = nil
+			if err = validator.Validate(dst.VariableSourceV2Textbox); err != nil {
+				dst.VariableSourceV2Textbox = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VariableSourceV2OneOf2 = nil
+		dst.VariableSourceV2Textbox = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.VariableSourceV2OneOf = nil
-		dst.VariableSourceV2OneOf1 = nil
-		dst.VariableSourceV2OneOf2 = nil
+		dst.VariableSourceV2Query = nil
+		dst.VariableSourceV2Static = nil
+		dst.VariableSourceV2Textbox = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(VariableSourceV2)")
 	} else if match == 1 {
@@ -116,16 +116,16 @@ func (dst *VariableSourceV2) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src VariableSourceV2) MarshalJSON() ([]byte, error) {
-	if src.VariableSourceV2OneOf != nil {
-		return json.Marshal(&src.VariableSourceV2OneOf)
+	if src.VariableSourceV2Query != nil {
+		return json.Marshal(&src.VariableSourceV2Query)
 	}
 
-	if src.VariableSourceV2OneOf1 != nil {
-		return json.Marshal(&src.VariableSourceV2OneOf1)
+	if src.VariableSourceV2Static != nil {
+		return json.Marshal(&src.VariableSourceV2Static)
 	}
 
-	if src.VariableSourceV2OneOf2 != nil {
-		return json.Marshal(&src.VariableSourceV2OneOf2)
+	if src.VariableSourceV2Textbox != nil {
+		return json.Marshal(&src.VariableSourceV2Textbox)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -136,16 +136,16 @@ func (obj *VariableSourceV2) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.VariableSourceV2OneOf != nil {
-		return obj.VariableSourceV2OneOf
+	if obj.VariableSourceV2Query != nil {
+		return obj.VariableSourceV2Query
 	}
 
-	if obj.VariableSourceV2OneOf1 != nil {
-		return obj.VariableSourceV2OneOf1
+	if obj.VariableSourceV2Static != nil {
+		return obj.VariableSourceV2Static
 	}
 
-	if obj.VariableSourceV2OneOf2 != nil {
-		return obj.VariableSourceV2OneOf2
+	if obj.VariableSourceV2Textbox != nil {
+		return obj.VariableSourceV2Textbox
 	}
 
 	// all schemas are nil
@@ -154,16 +154,16 @@ func (obj *VariableSourceV2) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj VariableSourceV2) GetActualInstanceValue() (interface{}) {
-	if obj.VariableSourceV2OneOf != nil {
-		return *obj.VariableSourceV2OneOf
+	if obj.VariableSourceV2Query != nil {
+		return *obj.VariableSourceV2Query
 	}
 
-	if obj.VariableSourceV2OneOf1 != nil {
-		return *obj.VariableSourceV2OneOf1
+	if obj.VariableSourceV2Static != nil {
+		return *obj.VariableSourceV2Static
 	}
 
-	if obj.VariableSourceV2OneOf2 != nil {
-		return *obj.VariableSourceV2OneOf2
+	if obj.VariableSourceV2Textbox != nil {
+		return *obj.VariableSourceV2Textbox
 	}
 
 	// all schemas are nil

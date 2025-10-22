@@ -57,16 +57,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "type": "string",
-                "enum": [
-                  "AGGREGATE_BY_UNSPECIFIED",
-                  "AGGREGATE_BY_APPLICATION",
-                  "AGGREGATE_BY_SUBSYSTEM",
-                  "AGGREGATE_BY_PILLAR",
-                  "AGGREGATE_BY_PRIORITY",
-                  "AGGREGATE_BY_POLICY_NAME",
-                  "AGGREGATE_BY_SEVERITY"
-                ]
+                "$ref": "#/components/schemas/AggregateBy"
               }
             },
             "style": "form"
@@ -79,97 +70,19 @@
               "items": {
                 "oneOf": [
                   {
-                    "type": "object",
-                    "properties": {
-                      "pillar": {
-                        "type": "string",
-                        "enum": [
-                          "PILLAR_UNSPECIFIED",
-                          "PILLAR_METRICS",
-                          "PILLAR_LOGS",
-                          "PILLAR_SPANS",
-                          "PILLAR_BINARY",
-                          "PILLAR_PROFILES"
-                        ]
-                      }
-                    },
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/DimensionTier"
                   },
                   {
-                    "type": "object",
-                    "properties": {
-                      "genericDimension": {
-                        "externalDocs": {
-                          "description": "Find out more about data usage.",
-                          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
-                        },
-                        "title": "Generic Dimension",
-                        "description": "This data structure represents a generic dimension.",
-                        "type": "object",
-                        "properties": {
-                          "key": {
-                            "example": "key",
-                            "type": "string"
-                          },
-                          "value": {
-                            "example": "value",
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/DimensionSeverity"
                   },
                   {
-                    "type": "object",
-                    "properties": {
-                      "tier": {
-                        "deprecated": true,
-                        "type": "string",
-                        "enum": [
-                          "TCO_TIER_UNSPECIFIED",
-                          "TCO_TIER_LOW",
-                          "TCO_TIER_MEDIUM",
-                          "TCO_TIER_HIGH",
-                          "TCO_TIER_BLOCKED"
-                        ]
-                      }
-                    },
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/DimensionPriority"
                   },
                   {
-                    "type": "object",
-                    "properties": {
-                      "severity": {
-                        "type": "string",
-                        "enum": [
-                          "SEVERITY_UNSPECIFIED",
-                          "SEVERITY_DEBUG",
-                          "SEVERITY_VERBOSE",
-                          "SEVERITY_INFO",
-                          "SEVERITY_WARNING",
-                          "SEVERITY_ERROR",
-                          "SEVERITY_CRITICAL"
-                        ]
-                      }
-                    },
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/DimensionPillar"
                   },
                   {
-                    "type": "object",
-                    "properties": {
-                      "priority": {
-                        "type": "string",
-                        "enum": [
-                          "PRIORITY_UNSPECIFIED",
-                          "PRIORITY_LOW",
-                          "PRIORITY_MEDIUM",
-                          "PRIORITY_HIGH",
-                          "PRIORITY_BLOCKED"
-                        ]
-                      }
-                    },
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/DimensionGenericDimension"
                   }
                 ]
               }
@@ -241,22 +154,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "type": "object",
-                    "properties": {
-                      "range": {
-                        "$ref": "#/components/schemas/v2.Range"
-                      }
-                    },
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/GetDailyUsageEvaluationTokensRequestDateRange"
                   },
                   {
-                    "type": "object",
-                    "properties": {
-                      "dateRange": {
-                        "$ref": "#/components/schemas/v2.DateRange"
-                      }
-                    },
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/GetDailyUsageEvaluationTokensRequestRange"
                   }
                 ]
               }
@@ -296,15 +197,15 @@
         "x-codeSamples": [
           {
             "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/daily:evaluation-tokens';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"range\":\"RANGE_UNSPECIFIED\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/daily:evaluation-tokens';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"dateRange\":{\"fromDate\":\"2021-01-01T00:00:00.000Z\",\"toDate\":\"2021-01-01T00:00:00.000Z\"}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/daily:evaluation-tokens\"\n\npayload = {\"range\": \"RANGE_UNSPECIFIED\"}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/daily:evaluation-tokens\"\n\npayload = {\"dateRange\": {\n        \"fromDate\": \"2021-01-01T00:00:00.000Z\",\n        \"toDate\": \"2021-01-01T00:00:00.000Z\"\n    }}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/daily:evaluation-tokens \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"range\":\"RANGE_UNSPECIFIED\"}'"
+            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/daily:evaluation-tokens \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"dateRange\":{\"fromDate\":\"2021-01-01T00:00:00.000Z\",\"toDate\":\"2021-01-01T00:00:00.000Z\"}}'"
           }
         ]
       }
@@ -327,22 +228,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "type": "object",
-                    "properties": {
-                      "range": {
-                        "$ref": "#/components/schemas/v2.Range"
-                      }
-                    },
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestRange"
                   },
                   {
-                    "type": "object",
-                    "properties": {
-                      "dateRange": {
-                        "$ref": "#/components/schemas/v2.DateRange"
-                      }
-                    },
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestDateRange"
                   }
                 ]
               }
@@ -413,22 +302,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "type": "object",
-                    "properties": {
-                      "range": {
-                        "$ref": "#/components/schemas/v2.Range"
-                      }
-                    },
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestRange"
                   },
                   {
-                    "type": "object",
-                    "properties": {
-                      "dateRange": {
-                        "$ref": "#/components/schemas/v2.DateRange"
-                      }
-                    },
-                    "additionalProperties": false
+                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestDateRange"
                   }
                 ]
               }
@@ -860,6 +737,45 @@
   },
   "components": {
     "schemas": {
+      "AggregateBy": {
+        "type": "string",
+        "enum": [
+          "AGGREGATE_BY_UNSPECIFIED",
+          "AGGREGATE_BY_APPLICATION",
+          "AGGREGATE_BY_SUBSYSTEM",
+          "AGGREGATE_BY_PILLAR",
+          "AGGREGATE_BY_PRIORITY",
+          "AGGREGATE_BY_POLICY_NAME",
+          "AGGREGATE_BY_SEVERITY"
+        ]
+      },
+      "ColorsByAggregation": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/ColorsByAggregation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByGroupBy": {
+        "type": "object",
+        "properties": {
+          "groupBy": {
+            "$ref": "#/components/schemas/ColorsByGroupBy"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByStack": {
+        "type": "object",
+        "properties": {
+          "stack": {
+            "$ref": "#/components/schemas/ColorsByStack"
+          }
+        },
+        "additionalProperties": false
+      },
       "DataUsageEntry": {
         "externalDocs": {
           "description": "Find out more about data usage.",
@@ -1003,51 +919,66 @@
       "Dimension": {
         "oneOf": [
           {
-            "type": "object",
-            "properties": {
-              "pillar": {
-                "$ref": "#/components/schemas/v2.Pillar"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/DimensionPillar"
           },
           {
-            "type": "object",
-            "properties": {
-              "genericDimension": {
-                "$ref": "#/components/schemas/GenericDimension"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/DimensionGenericDimension"
           },
           {
-            "type": "object",
-            "properties": {
-              "tier": {
-                "$ref": "#/components/schemas/v2.TcoTier"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/DimensionTier"
           },
           {
-            "type": "object",
-            "properties": {
-              "severity": {
-                "$ref": "#/components/schemas/datausage.v2.Severity"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/DimensionSeverity"
           },
           {
-            "type": "object",
-            "properties": {
-              "priority": {
-                "$ref": "#/components/schemas/v2.Priority"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/DimensionPriority"
           }
         ]
+      },
+      "DimensionGenericDimension": {
+        "type": "object",
+        "properties": {
+          "genericDimension": {
+            "$ref": "#/components/schemas/GenericDimension"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DimensionPillar": {
+        "type": "object",
+        "properties": {
+          "pillar": {
+            "$ref": "#/components/schemas/v2.Pillar"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DimensionPriority": {
+        "type": "object",
+        "properties": {
+          "priority": {
+            "$ref": "#/components/schemas/v2.Priority"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DimensionSeverity": {
+        "type": "object",
+        "properties": {
+          "severity": {
+            "$ref": "#/components/schemas/datausage.v2.Severity"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DimensionTier": {
+        "type": "object",
+        "properties": {
+          "tier": {
+            "$ref": "#/components/schemas/v2.TcoTier"
+          }
+        },
+        "additionalProperties": false
       },
       "Evaluation": {
         "type": "object",
@@ -1074,50 +1005,56 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "multipleValues": {
-                "$ref": "#/components/schemas/MultipleValues"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "filters": {
-                "$ref": "#/components/schemas/Filters"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
+      },
+      "FilterPathAndValuesFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "FilterPathAndValuesMultipleValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
       },
       "Filters": {
         "externalDocs": {
@@ -1160,6 +1097,24 @@
           }
         }
       },
+      "GetDailyUsageEvaluationTokensRequestDateRange": {
+        "type": "object",
+        "properties": {
+          "dateRange": {
+            "$ref": "#/components/schemas/v2.DateRange"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetDailyUsageEvaluationTokensRequestRange": {
+        "type": "object",
+        "properties": {
+          "range": {
+            "$ref": "#/components/schemas/v2.Range"
+          }
+        },
+        "additionalProperties": false
+      },
       "GetDailyUsageEvaluationTokensResponse": {
         "type": "object",
         "properties": {
@@ -1171,6 +1126,24 @@
           }
         }
       },
+      "GetDailyUsageProcessedGbsRequestDateRange": {
+        "type": "object",
+        "properties": {
+          "dateRange": {
+            "$ref": "#/components/schemas/v2.DateRange"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetDailyUsageProcessedGbsRequestRange": {
+        "type": "object",
+        "properties": {
+          "range": {
+            "$ref": "#/components/schemas/v2.Range"
+          }
+        },
+        "additionalProperties": false
+      },
       "GetDailyUsageProcessedGbsResponse": {
         "type": "object",
         "properties": {
@@ -1181,6 +1154,24 @@
             }
           }
         }
+      },
+      "GetDailyUsageUnitsRequestDateRange": {
+        "type": "object",
+        "properties": {
+          "dateRange": {
+            "$ref": "#/components/schemas/v2.DateRange"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetDailyUsageUnitsRequestRange": {
+        "type": "object",
+        "properties": {
+          "range": {
+            "$ref": "#/components/schemas/v2.Range"
+          }
+        },
+        "additionalProperties": false
       },
       "GetDailyUsageUnitsResponse": {
         "type": "object",
@@ -1368,6 +1359,24 @@
             "type": "boolean"
           }
         }
+      },
+      "YAxisViewByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/YAxisViewByCategory"
+          }
+        },
+        "additionalProperties": false
+      },
+      "YAxisViewByValue": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/YAxisViewByValue"
+          }
+        },
+        "additionalProperties": false
       },
       "common.Group": {
         "type": "object",

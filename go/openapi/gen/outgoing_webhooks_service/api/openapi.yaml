@@ -854,6 +854,24 @@ components:
       - source
       title: AWS EventBridge configuration
       type: object
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
     CreateOutgoingWebhookResponse:
       example:
         id: example_id
@@ -932,8 +950,40 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValues_1"
-      - $ref: "#/components/schemas/FilterPathAndValues_2"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
     Filters:
       description: This data structure represents a filter
       externalDocs:
@@ -950,12 +1000,6 @@ components:
       title: Filters
       type: object
     GenericWebhookConfig:
-      example:
-        headers:
-          Content-Type: application/json
-        method: UNKNOWN
-        payload: "{\"key\":\"value\"}"
-        uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
       externalDocs:
         url: ""
       properties:
@@ -982,17 +1026,15 @@ components:
       example:
         webhook:
           createdAt: 2000-01-23T04:56:07.000+00:00
-          genericWebhook:
-            headers:
-              Content-Type: application/json
-            method: UNKNOWN
-            payload: "{\"key\":\"value\"}"
-            uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
           name: my_webhook
           externalId: 123456
           id: webhook_id
           type: UNKNOWN
           url: slack.webhook.com
+          jira:
+            projectKey: jira_project_key
+            apiToken: jira_api_token
+            email: jira_email
           updatedAt: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
@@ -1038,6 +1080,10 @@ components:
       title: IBM event notification configuration
       type: object
     JiraConfig:
+      example:
+        projectKey: jira_project_key
+        apiToken: jira_api_token
+        email: jira_email
       externalDocs:
         url: ""
       properties:
@@ -1215,18 +1261,90 @@ components:
       type: object
     OutgoingWebhook:
       oneOf:
-      - $ref: "#/components/schemas/Outgoing_webhook"
-      - $ref: "#/components/schemas/Outgoing_webhook_1"
-      - $ref: "#/components/schemas/Outgoing_webhook_2"
-      - $ref: "#/components/schemas/Outgoing_webhook_3"
-      - $ref: "#/components/schemas/Outgoing_webhook_4"
-      - $ref: "#/components/schemas/Outgoing_webhook_5"
-      - $ref: "#/components/schemas/Outgoing_webhook_6"
-      - $ref: "#/components/schemas/Outgoing_webhook_7"
-      - $ref: "#/components/schemas/Outgoing_webhook_8"
-      - $ref: "#/components/schemas/Outgoing_webhook_9"
-      - $ref: "#/components/schemas/Outgoing_webhook_10"
-      - $ref: "#/components/schemas/Outgoing_webhook_11"
+      - $ref: "#/components/schemas/OutgoingWebhookJira"
+      - $ref: "#/components/schemas/OutgoingWebhookOpsgenie"
+      - $ref: "#/components/schemas/OutgoingWebhookGenericWebhook"
+      - $ref: "#/components/schemas/OutgoingWebhookPagerDuty"
+      - $ref: "#/components/schemas/OutgoingWebhookSendLog"
+      - $ref: "#/components/schemas/OutgoingWebhookMicrosoftTeams"
+      - $ref: "#/components/schemas/OutgoingWebhookDemisto"
+      - $ref: "#/components/schemas/OutgoingWebhookAwsEventBridge"
+      - $ref: "#/components/schemas/OutgoingWebhookIbmEventNotifications"
+      - $ref: "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
+      - $ref: "#/components/schemas/OutgoingWebhookSlack"
+      - $ref: "#/components/schemas/OutgoingWebhookEmailGroup"
+    OutgoingWebhookAwsEventBridge:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        awsEventBridge:
+          $ref: "#/components/schemas/AwsEventBridgeConfig"
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    OutgoingWebhookDemisto:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        demisto:
+          $ref: "#/components/schemas/DemistoConfig"
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
     OutgoingWebhookDetails:
       example:
         label: example_label
@@ -1243,6 +1361,42 @@ components:
       - label
       - type
       title: Outgoing webhook details
+      type: object
+    OutgoingWebhookEmailGroup:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        emailGroup:
+          $ref: "#/components/schemas/EmailGroupConfig"
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
       type: object
     OutgoingWebhookExtendedSummary:
       example:
@@ -1285,20 +1439,626 @@ components:
       - type
       title: Outgoing webhook extended summary
       type: object
+    OutgoingWebhookGenericWebhook:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        genericWebhook:
+          $ref: "#/components/schemas/GenericWebhookConfig"
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    OutgoingWebhookIbmEventNotifications:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        ibmEventNotifications:
+          $ref: "#/components/schemas/IbmEventNotificationsConfig"
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
     OutgoingWebhookInputData:
       oneOf:
-      - $ref: "#/components/schemas/Outgoing_webhook_input_data"
-      - $ref: "#/components/schemas/Outgoing_webhook_input_data_1"
-      - $ref: "#/components/schemas/Outgoing_webhook_input_data_2"
-      - $ref: "#/components/schemas/Outgoing_webhook_input_data_3"
-      - $ref: "#/components/schemas/Outgoing_webhook_input_data_4"
-      - $ref: "#/components/schemas/Outgoing_webhook_input_data_5"
-      - $ref: "#/components/schemas/Outgoing_webhook_input_data_6"
-      - $ref: "#/components/schemas/Outgoing_webhook_input_data_7"
-      - $ref: "#/components/schemas/Outgoing_webhook_input_data_8"
-      - $ref: "#/components/schemas/Outgoing_webhook_input_data_9"
-      - $ref: "#/components/schemas/Outgoing_webhook_input_data_10"
-      - $ref: "#/components/schemas/Outgoing_webhook_input_data_11"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataGenericWebhook"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataSendLog"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataJira"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataSlack"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataOpsgenie"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataDemisto"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
+    OutgoingWebhookInputDataAwsEventBridge:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        awsEventBridge:
+          $ref: "#/components/schemas/AwsEventBridgeConfig"
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    OutgoingWebhookInputDataDemisto:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        demisto:
+          $ref: "#/components/schemas/DemistoConfig"
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    OutgoingWebhookInputDataEmailGroup:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        emailGroup:
+          $ref: "#/components/schemas/EmailGroupConfig"
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    OutgoingWebhookInputDataGenericWebhook:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        genericWebhook:
+          $ref: "#/components/schemas/GenericWebhookConfig"
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    OutgoingWebhookInputDataIbmEventNotifications:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        ibmEventNotifications:
+          $ref: "#/components/schemas/IbmEventNotificationsConfig"
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    OutgoingWebhookInputDataJira:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        jira:
+          $ref: "#/components/schemas/JiraConfig"
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    OutgoingWebhookInputDataMicrosoftTeams:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        microsoftTeams:
+          externalDocs:
+            url: ""
+          title: Microsoft Teams configuration
+          type: object
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    OutgoingWebhookInputDataMsTeamsWorkflow:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        msTeamsWorkflow:
+          externalDocs:
+            url: ""
+          title: Microsoft Teams workflow configuration
+          type: object
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    OutgoingWebhookInputDataOpsgenie:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        name:
+          example: my_webhook
+          type: string
+        opsgenie:
+          externalDocs:
+            url: ""
+          title: Opsgenie configuration
+          type: object
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    OutgoingWebhookInputDataPagerDuty:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        name:
+          example: my_webhook
+          type: string
+        pagerDuty:
+          $ref: "#/components/schemas/PagerDutyConfig"
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    OutgoingWebhookInputDataSendLog:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        name:
+          example: my_webhook
+          type: string
+        sendLog:
+          $ref: "#/components/schemas/SendLogConfig"
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    OutgoingWebhookInputDataSlack:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        name:
+          example: my_webhook
+          type: string
+        slack:
+          $ref: "#/components/schemas/SlackConfig"
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    OutgoingWebhookJira:
+      additionalProperties: false
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        name: my_webhook
+        externalId: 123456
+        id: webhook_id
+        type: UNKNOWN
+        url: slack.webhook.com
+        jira:
+          projectKey: jira_project_key
+          apiToken: jira_api_token
+          email: jira_email
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        jira:
+          $ref: "#/components/schemas/JiraConfig"
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    OutgoingWebhookMicrosoftTeams:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        microsoftTeams:
+          externalDocs:
+            url: ""
+          title: Microsoft Teams configuration
+          type: object
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    OutgoingWebhookMsTeamsWorkflow:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        msTeamsWorkflow:
+          externalDocs:
+            url: ""
+          title: Microsoft Teams workflow configuration
+          type: object
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    OutgoingWebhookOpsgenie:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        opsgenie:
+          externalDocs:
+            url: ""
+          title: Opsgenie configuration
+          type: object
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    OutgoingWebhookPagerDuty:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        pagerDuty:
+          $ref: "#/components/schemas/PagerDutyConfig"
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    OutgoingWebhookSendLog:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        sendLog:
+          $ref: "#/components/schemas/SendLogConfig"
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    OutgoingWebhookSlack:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        slack:
+          $ref: "#/components/schemas/SlackConfig"
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
     OutgoingWebhookSummary:
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
@@ -1401,10 +2161,9 @@ components:
       type: object
     TestOutgoingWebhookResponse:
       oneOf:
-      - $ref: "#/components/schemas/Test_outgoing_webhook_response"
-      - $ref: "#/components/schemas/Test_outgoing_webhook_response_1"
+      - $ref: "#/components/schemas/TestOutgoingWebhookResponseSuccess"
+      - $ref: "#/components/schemas/TestOutgoingWebhookResponseFailure"
     TestOutgoingWebhookResponse.Failure:
-      additionalProperties: false
       externalDocs:
         url: ""
       properties:
@@ -1428,6 +2187,29 @@ components:
         url: ""
       title: Test outgoing webhook success
       type: object
+    TestOutgoingWebhookResponseFailure:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        failure:
+          $ref: "#/components/schemas/TestOutgoingWebhookResponse.Failure"
+      title: Test outgoing webhook response
+      type: object
+    TestOutgoingWebhookResponseSuccess:
+      additionalProperties: false
+      example:
+        success: "{}"
+      externalDocs:
+        url: ""
+      properties:
+        success:
+          externalDocs:
+            url: ""
+          title: Test outgoing webhook success
+          type: object
+      title: Test outgoing webhook response
+      type: object
     UpdateOutgoingWebhookResponse:
       externalDocs:
         url: ""
@@ -1449,6 +2231,18 @@ components:
       - IBM_EVENT_NOTIFICATIONS
       - MS_TEAMS_WORKFLOW
       type: string
+    YAxisViewByCategory:
+      additionalProperties: false
+      properties:
+        category:
+          $ref: "#/components/schemas/YAxisViewByCategory"
+      type: object
+    YAxisViewByValue:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: "#/components/schemas/YAxisViewByValue"
+      type: object
     common.Group:
       properties:
         field:
@@ -1511,777 +2305,6 @@ components:
       required:
       - id
       title: Test existing outgoing webhook request
-      type: object
-    FilterPathAndValues_1:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValues_2:
-      additionalProperties: false
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          type: string
-      required:
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    Outgoing_webhook:
-      additionalProperties: false
-      example:
-        createdAt: 2000-01-23T04:56:07.000+00:00
-        genericWebhook:
-          headers:
-            Content-Type: application/json
-          method: UNKNOWN
-          payload: "{\"key\":\"value\"}"
-          uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
-        name: my_webhook
-        externalId: 123456
-        id: webhook_id
-        type: UNKNOWN
-        url: slack.webhook.com
-        updatedAt: 2000-01-23T04:56:07.000+00:00
-      externalDocs:
-        url: ""
-      properties:
-        createdAt:
-          format: date-time
-          type: string
-        externalId:
-          example: 123456
-          format: int64
-          type: integer
-        genericWebhook:
-          $ref: "#/components/schemas/GenericWebhookConfig"
-        id:
-          example: webhook_id
-          type: string
-        name:
-          example: my_webhook
-          type: string
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        updatedAt:
-          format: date-time
-          type: string
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
-      title: Outgoing webhook
-      type: object
-    Outgoing_webhook_1:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        createdAt:
-          format: date-time
-          type: string
-        externalId:
-          example: 123456
-          format: int64
-          type: integer
-        id:
-          example: webhook_id
-          type: string
-        name:
-          example: my_webhook
-          type: string
-        slack:
-          $ref: "#/components/schemas/SlackConfig"
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        updatedAt:
-          format: date-time
-          type: string
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
-      title: Outgoing webhook
-      type: object
-    Outgoing_webhook_2:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        createdAt:
-          format: date-time
-          type: string
-        externalId:
-          example: 123456
-          format: int64
-          type: integer
-        id:
-          example: webhook_id
-          type: string
-        name:
-          example: my_webhook
-          type: string
-        pagerDuty:
-          $ref: "#/components/schemas/PagerDutyConfig"
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        updatedAt:
-          format: date-time
-          type: string
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
-      title: Outgoing webhook
-      type: object
-    Outgoing_webhook_3:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        createdAt:
-          format: date-time
-          type: string
-        externalId:
-          example: 123456
-          format: int64
-          type: integer
-        id:
-          example: webhook_id
-          type: string
-        name:
-          example: my_webhook
-          type: string
-        sendLog:
-          $ref: "#/components/schemas/SendLogConfig"
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        updatedAt:
-          format: date-time
-          type: string
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
-      title: Outgoing webhook
-      type: object
-    Outgoing_webhook_4:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        createdAt:
-          format: date-time
-          type: string
-        emailGroup:
-          $ref: "#/components/schemas/EmailGroupConfig"
-        externalId:
-          example: 123456
-          format: int64
-          type: integer
-        id:
-          example: webhook_id
-          type: string
-        name:
-          example: my_webhook
-          type: string
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        updatedAt:
-          format: date-time
-          type: string
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
-      title: Outgoing webhook
-      type: object
-    Outgoing_webhook_5:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        createdAt:
-          format: date-time
-          type: string
-        externalId:
-          example: 123456
-          format: int64
-          type: integer
-        id:
-          example: webhook_id
-          type: string
-        microsoftTeams:
-          externalDocs:
-            url: ""
-          title: Microsoft Teams configuration
-          type: object
-        name:
-          example: my_webhook
-          type: string
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        updatedAt:
-          format: date-time
-          type: string
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
-      title: Outgoing webhook
-      type: object
-    Outgoing_webhook_6:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        createdAt:
-          format: date-time
-          type: string
-        externalId:
-          example: 123456
-          format: int64
-          type: integer
-        id:
-          example: webhook_id
-          type: string
-        jira:
-          $ref: "#/components/schemas/JiraConfig"
-        name:
-          example: my_webhook
-          type: string
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        updatedAt:
-          format: date-time
-          type: string
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
-      title: Outgoing webhook
-      type: object
-    Outgoing_webhook_7:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        createdAt:
-          format: date-time
-          type: string
-        externalId:
-          example: 123456
-          format: int64
-          type: integer
-        id:
-          example: webhook_id
-          type: string
-        name:
-          example: my_webhook
-          type: string
-        opsgenie:
-          externalDocs:
-            url: ""
-          title: Opsgenie configuration
-          type: object
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        updatedAt:
-          format: date-time
-          type: string
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
-      title: Outgoing webhook
-      type: object
-    Outgoing_webhook_8:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        createdAt:
-          format: date-time
-          type: string
-        demisto:
-          $ref: "#/components/schemas/DemistoConfig"
-        externalId:
-          example: 123456
-          format: int64
-          type: integer
-        id:
-          example: webhook_id
-          type: string
-        name:
-          example: my_webhook
-          type: string
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        updatedAt:
-          format: date-time
-          type: string
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
-      title: Outgoing webhook
-      type: object
-    Outgoing_webhook_9:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        awsEventBridge:
-          $ref: "#/components/schemas/AwsEventBridgeConfig"
-        createdAt:
-          format: date-time
-          type: string
-        externalId:
-          example: 123456
-          format: int64
-          type: integer
-        id:
-          example: webhook_id
-          type: string
-        name:
-          example: my_webhook
-          type: string
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        updatedAt:
-          format: date-time
-          type: string
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
-      title: Outgoing webhook
-      type: object
-    Outgoing_webhook_10:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        createdAt:
-          format: date-time
-          type: string
-        externalId:
-          example: 123456
-          format: int64
-          type: integer
-        ibmEventNotifications:
-          $ref: "#/components/schemas/IbmEventNotificationsConfig"
-        id:
-          example: webhook_id
-          type: string
-        name:
-          example: my_webhook
-          type: string
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        updatedAt:
-          format: date-time
-          type: string
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
-      title: Outgoing webhook
-      type: object
-    Outgoing_webhook_11:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        createdAt:
-          format: date-time
-          type: string
-        externalId:
-          example: 123456
-          format: int64
-          type: integer
-        id:
-          example: webhook_id
-          type: string
-        msTeamsWorkflow:
-          externalDocs:
-            url: ""
-          title: Microsoft Teams workflow configuration
-          type: object
-        name:
-          example: my_webhook
-          type: string
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        updatedAt:
-          format: date-time
-          type: string
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
-      title: Outgoing webhook
-      type: object
-    Outgoing_webhook_input_data:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        genericWebhook:
-          $ref: "#/components/schemas/GenericWebhookConfig"
-        name:
-          example: my_webhook
-          type: string
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - config
-      - name
-      - type
-      title: Outgoing webhook input data
-      type: object
-    Outgoing_webhook_input_data_1:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        name:
-          example: my_webhook
-          type: string
-        slack:
-          $ref: "#/components/schemas/SlackConfig"
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - config
-      - name
-      - type
-      title: Outgoing webhook input data
-      type: object
-    Outgoing_webhook_input_data_2:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        name:
-          example: my_webhook
-          type: string
-        pagerDuty:
-          $ref: "#/components/schemas/PagerDutyConfig"
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - config
-      - name
-      - type
-      title: Outgoing webhook input data
-      type: object
-    Outgoing_webhook_input_data_3:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        name:
-          example: my_webhook
-          type: string
-        sendLog:
-          $ref: "#/components/schemas/SendLogConfig"
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - config
-      - name
-      - type
-      title: Outgoing webhook input data
-      type: object
-    Outgoing_webhook_input_data_4:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        emailGroup:
-          $ref: "#/components/schemas/EmailGroupConfig"
-        name:
-          example: my_webhook
-          type: string
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - config
-      - name
-      - type
-      title: Outgoing webhook input data
-      type: object
-    Outgoing_webhook_input_data_5:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        microsoftTeams:
-          externalDocs:
-            url: ""
-          title: Microsoft Teams configuration
-          type: object
-        name:
-          example: my_webhook
-          type: string
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - config
-      - name
-      - type
-      title: Outgoing webhook input data
-      type: object
-    Outgoing_webhook_input_data_6:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        jira:
-          $ref: "#/components/schemas/JiraConfig"
-        name:
-          example: my_webhook
-          type: string
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - config
-      - name
-      - type
-      title: Outgoing webhook input data
-      type: object
-    Outgoing_webhook_input_data_7:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        name:
-          example: my_webhook
-          type: string
-        opsgenie:
-          externalDocs:
-            url: ""
-          title: Opsgenie configuration
-          type: object
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - config
-      - name
-      - type
-      title: Outgoing webhook input data
-      type: object
-    Outgoing_webhook_input_data_8:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        demisto:
-          $ref: "#/components/schemas/DemistoConfig"
-        name:
-          example: my_webhook
-          type: string
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - config
-      - name
-      - type
-      title: Outgoing webhook input data
-      type: object
-    Outgoing_webhook_input_data_9:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        awsEventBridge:
-          $ref: "#/components/schemas/AwsEventBridgeConfig"
-        name:
-          example: my_webhook
-          type: string
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - config
-      - name
-      - type
-      title: Outgoing webhook input data
-      type: object
-    Outgoing_webhook_input_data_10:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        ibmEventNotifications:
-          $ref: "#/components/schemas/IbmEventNotificationsConfig"
-        name:
-          example: my_webhook
-          type: string
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - config
-      - name
-      - type
-      title: Outgoing webhook input data
-      type: object
-    Outgoing_webhook_input_data_11:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        msTeamsWorkflow:
-          externalDocs:
-            url: ""
-          title: Microsoft Teams workflow configuration
-          type: object
-        name:
-          example: my_webhook
-          type: string
-        type:
-          $ref: "#/components/schemas/WebhookType"
-        url:
-          example: slack.webhook.com
-          type: string
-      required:
-      - config
-      - name
-      - type
-      title: Outgoing webhook input data
-      type: object
-    Test_outgoing_webhook_response:
-      additionalProperties: false
-      example:
-        success: "{}"
-      externalDocs:
-        url: ""
-      properties:
-        success:
-          externalDocs:
-            url: ""
-          title: Test outgoing webhook success
-          type: object
-      title: Test outgoing webhook response
-      type: object
-    Test_outgoing_webhook_response_1:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        failure:
-          $ref: "#/components/schemas/TestOutgoingWebhookResponse.Failure"
-      title: Test outgoing webhook response
       type: object
   securitySchemes:
     apiKeyAuth:

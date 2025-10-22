@@ -18,21 +18,21 @@ import (
 
 // SlosServiceReplaceSloRequest - struct for SlosServiceReplaceSloRequest
 type SlosServiceReplaceSloRequest struct {
-	Slo1 *Slo1
-	Slo2 *Slo2
+	SloRequestBasedMetricSli *SloRequestBasedMetricSli
+	SloWindowBasedMetricSli *SloWindowBasedMetricSli
 }
 
-// Slo1AsSlosServiceReplaceSloRequest is a convenience function that returns Slo1 wrapped in SlosServiceReplaceSloRequest
-func Slo1AsSlosServiceReplaceSloRequest(v *Slo1) SlosServiceReplaceSloRequest {
+// SloRequestBasedMetricSliAsSlosServiceReplaceSloRequest is a convenience function that returns SloRequestBasedMetricSli wrapped in SlosServiceReplaceSloRequest
+func SloRequestBasedMetricSliAsSlosServiceReplaceSloRequest(v *SloRequestBasedMetricSli) SlosServiceReplaceSloRequest {
 	return SlosServiceReplaceSloRequest{
-		Slo1: v,
+		SloRequestBasedMetricSli: v,
 	}
 }
 
-// Slo2AsSlosServiceReplaceSloRequest is a convenience function that returns Slo2 wrapped in SlosServiceReplaceSloRequest
-func Slo2AsSlosServiceReplaceSloRequest(v *Slo2) SlosServiceReplaceSloRequest {
+// SloWindowBasedMetricSliAsSlosServiceReplaceSloRequest is a convenience function that returns SloWindowBasedMetricSli wrapped in SlosServiceReplaceSloRequest
+func SloWindowBasedMetricSliAsSlosServiceReplaceSloRequest(v *SloWindowBasedMetricSli) SlosServiceReplaceSloRequest {
 	return SlosServiceReplaceSloRequest{
-		Slo2: v,
+		SloWindowBasedMetricSli: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func Slo2AsSlosServiceReplaceSloRequest(v *Slo2) SlosServiceReplaceSloRequest {
 func (dst *SlosServiceReplaceSloRequest) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into Slo1
-	err = newStrictDecoder(data).Decode(&dst.Slo1)
+	// try to unmarshal data into SloRequestBasedMetricSli
+	err = newStrictDecoder(data).Decode(&dst.SloRequestBasedMetricSli)
 	if err == nil {
-		jsonSlo1, _ := json.Marshal(dst.Slo1)
-		if string(jsonSlo1) == "{}" { // empty struct
-			dst.Slo1 = nil
+		jsonSloRequestBasedMetricSli, _ := json.Marshal(dst.SloRequestBasedMetricSli)
+		if string(jsonSloRequestBasedMetricSli) == "{}" { // empty struct
+			dst.SloRequestBasedMetricSli = nil
 		} else {
-			if err = validator.Validate(dst.Slo1); err != nil {
-				dst.Slo1 = nil
+			if err = validator.Validate(dst.SloRequestBasedMetricSli); err != nil {
+				dst.SloRequestBasedMetricSli = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Slo1 = nil
+		dst.SloRequestBasedMetricSli = nil
 	}
 
-	// try to unmarshal data into Slo2
-	err = newStrictDecoder(data).Decode(&dst.Slo2)
+	// try to unmarshal data into SloWindowBasedMetricSli
+	err = newStrictDecoder(data).Decode(&dst.SloWindowBasedMetricSli)
 	if err == nil {
-		jsonSlo2, _ := json.Marshal(dst.Slo2)
-		if string(jsonSlo2) == "{}" { // empty struct
-			dst.Slo2 = nil
+		jsonSloWindowBasedMetricSli, _ := json.Marshal(dst.SloWindowBasedMetricSli)
+		if string(jsonSloWindowBasedMetricSli) == "{}" { // empty struct
+			dst.SloWindowBasedMetricSli = nil
 		} else {
-			if err = validator.Validate(dst.Slo2); err != nil {
-				dst.Slo2 = nil
+			if err = validator.Validate(dst.SloWindowBasedMetricSli); err != nil {
+				dst.SloWindowBasedMetricSli = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Slo2 = nil
+		dst.SloWindowBasedMetricSli = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.Slo1 = nil
-		dst.Slo2 = nil
+		dst.SloRequestBasedMetricSli = nil
+		dst.SloWindowBasedMetricSli = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(SlosServiceReplaceSloRequest)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *SlosServiceReplaceSloRequest) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src SlosServiceReplaceSloRequest) MarshalJSON() ([]byte, error) {
-	if src.Slo1 != nil {
-		return json.Marshal(&src.Slo1)
+	if src.SloRequestBasedMetricSli != nil {
+		return json.Marshal(&src.SloRequestBasedMetricSli)
 	}
 
-	if src.Slo2 != nil {
-		return json.Marshal(&src.Slo2)
+	if src.SloWindowBasedMetricSli != nil {
+		return json.Marshal(&src.SloWindowBasedMetricSli)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *SlosServiceReplaceSloRequest) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.Slo1 != nil {
-		return obj.Slo1
+	if obj.SloRequestBasedMetricSli != nil {
+		return obj.SloRequestBasedMetricSli
 	}
 
-	if obj.Slo2 != nil {
-		return obj.Slo2
+	if obj.SloWindowBasedMetricSli != nil {
+		return obj.SloWindowBasedMetricSli
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *SlosServiceReplaceSloRequest) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj SlosServiceReplaceSloRequest) GetActualInstanceValue() (interface{}) {
-	if obj.Slo1 != nil {
-		return *obj.Slo1
+	if obj.SloRequestBasedMetricSli != nil {
+		return *obj.SloRequestBasedMetricSli
 	}
 
-	if obj.Slo2 != nil {
-		return *obj.Slo2
+	if obj.SloWindowBasedMetricSli != nil {
+		return *obj.SloWindowBasedMetricSli
 	}
 
 	// all schemas are nil

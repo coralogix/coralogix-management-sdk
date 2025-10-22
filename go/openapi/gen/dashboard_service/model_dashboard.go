@@ -18,101 +18,101 @@ import (
 
 // Dashboard - struct for Dashboard
 type Dashboard struct {
-	Dashboard1 *Dashboard1
-	Dashboard10 *Dashboard10
-	Dashboard11 *Dashboard11
-	Dashboard12 *Dashboard12
-	Dashboard2 *Dashboard2
-	Dashboard3 *Dashboard3
-	Dashboard4 *Dashboard4
-	Dashboard5 *Dashboard5
-	Dashboard6 *Dashboard6
-	Dashboard7 *Dashboard7
-	Dashboard8 *Dashboard8
-	Dashboard9 *Dashboard9
+	DashboardFiveMinutesFolderIdAbsoluteTimeFrame *DashboardFiveMinutesFolderIdAbsoluteTimeFrame
+	DashboardFiveMinutesFolderIdRelativeTimeFrame *DashboardFiveMinutesFolderIdRelativeTimeFrame
+	DashboardFiveMinutesFolderPathAbsoluteTimeFrame *DashboardFiveMinutesFolderPathAbsoluteTimeFrame
+	DashboardFiveMinutesFolderPathRelativeTimeFrame *DashboardFiveMinutesFolderPathRelativeTimeFrame
+	DashboardOffFolderIdAbsoluteTimeFrame *DashboardOffFolderIdAbsoluteTimeFrame
+	DashboardOffFolderIdRelativeTimeFrame *DashboardOffFolderIdRelativeTimeFrame
+	DashboardOffFolderPathAbsoluteTimeFrame *DashboardOffFolderPathAbsoluteTimeFrame
+	DashboardOffFolderPathRelativeTimeFrame *DashboardOffFolderPathRelativeTimeFrame
+	DashboardTwoMinutesFolderIdAbsoluteTimeFrame *DashboardTwoMinutesFolderIdAbsoluteTimeFrame
+	DashboardTwoMinutesFolderIdRelativeTimeFrame *DashboardTwoMinutesFolderIdRelativeTimeFrame
+	DashboardTwoMinutesFolderPathAbsoluteTimeFrame *DashboardTwoMinutesFolderPathAbsoluteTimeFrame
+	DashboardTwoMinutesFolderPathRelativeTimeFrame *DashboardTwoMinutesFolderPathRelativeTimeFrame
 }
 
-// Dashboard1AsDashboard is a convenience function that returns Dashboard1 wrapped in Dashboard
-func Dashboard1AsDashboard(v *Dashboard1) Dashboard {
+// DashboardFiveMinutesFolderIdAbsoluteTimeFrameAsDashboard is a convenience function that returns DashboardFiveMinutesFolderIdAbsoluteTimeFrame wrapped in Dashboard
+func DashboardFiveMinutesFolderIdAbsoluteTimeFrameAsDashboard(v *DashboardFiveMinutesFolderIdAbsoluteTimeFrame) Dashboard {
 	return Dashboard{
-		Dashboard1: v,
+		DashboardFiveMinutesFolderIdAbsoluteTimeFrame: v,
 	}
 }
 
-// Dashboard10AsDashboard is a convenience function that returns Dashboard10 wrapped in Dashboard
-func Dashboard10AsDashboard(v *Dashboard10) Dashboard {
+// DashboardFiveMinutesFolderIdRelativeTimeFrameAsDashboard is a convenience function that returns DashboardFiveMinutesFolderIdRelativeTimeFrame wrapped in Dashboard
+func DashboardFiveMinutesFolderIdRelativeTimeFrameAsDashboard(v *DashboardFiveMinutesFolderIdRelativeTimeFrame) Dashboard {
 	return Dashboard{
-		Dashboard10: v,
+		DashboardFiveMinutesFolderIdRelativeTimeFrame: v,
 	}
 }
 
-// Dashboard11AsDashboard is a convenience function that returns Dashboard11 wrapped in Dashboard
-func Dashboard11AsDashboard(v *Dashboard11) Dashboard {
+// DashboardFiveMinutesFolderPathAbsoluteTimeFrameAsDashboard is a convenience function that returns DashboardFiveMinutesFolderPathAbsoluteTimeFrame wrapped in Dashboard
+func DashboardFiveMinutesFolderPathAbsoluteTimeFrameAsDashboard(v *DashboardFiveMinutesFolderPathAbsoluteTimeFrame) Dashboard {
 	return Dashboard{
-		Dashboard11: v,
+		DashboardFiveMinutesFolderPathAbsoluteTimeFrame: v,
 	}
 }
 
-// Dashboard12AsDashboard is a convenience function that returns Dashboard12 wrapped in Dashboard
-func Dashboard12AsDashboard(v *Dashboard12) Dashboard {
+// DashboardFiveMinutesFolderPathRelativeTimeFrameAsDashboard is a convenience function that returns DashboardFiveMinutesFolderPathRelativeTimeFrame wrapped in Dashboard
+func DashboardFiveMinutesFolderPathRelativeTimeFrameAsDashboard(v *DashboardFiveMinutesFolderPathRelativeTimeFrame) Dashboard {
 	return Dashboard{
-		Dashboard12: v,
+		DashboardFiveMinutesFolderPathRelativeTimeFrame: v,
 	}
 }
 
-// Dashboard2AsDashboard is a convenience function that returns Dashboard2 wrapped in Dashboard
-func Dashboard2AsDashboard(v *Dashboard2) Dashboard {
+// DashboardOffFolderIdAbsoluteTimeFrameAsDashboard is a convenience function that returns DashboardOffFolderIdAbsoluteTimeFrame wrapped in Dashboard
+func DashboardOffFolderIdAbsoluteTimeFrameAsDashboard(v *DashboardOffFolderIdAbsoluteTimeFrame) Dashboard {
 	return Dashboard{
-		Dashboard2: v,
+		DashboardOffFolderIdAbsoluteTimeFrame: v,
 	}
 }
 
-// Dashboard3AsDashboard is a convenience function that returns Dashboard3 wrapped in Dashboard
-func Dashboard3AsDashboard(v *Dashboard3) Dashboard {
+// DashboardOffFolderIdRelativeTimeFrameAsDashboard is a convenience function that returns DashboardOffFolderIdRelativeTimeFrame wrapped in Dashboard
+func DashboardOffFolderIdRelativeTimeFrameAsDashboard(v *DashboardOffFolderIdRelativeTimeFrame) Dashboard {
 	return Dashboard{
-		Dashboard3: v,
+		DashboardOffFolderIdRelativeTimeFrame: v,
 	}
 }
 
-// Dashboard4AsDashboard is a convenience function that returns Dashboard4 wrapped in Dashboard
-func Dashboard4AsDashboard(v *Dashboard4) Dashboard {
+// DashboardOffFolderPathAbsoluteTimeFrameAsDashboard is a convenience function that returns DashboardOffFolderPathAbsoluteTimeFrame wrapped in Dashboard
+func DashboardOffFolderPathAbsoluteTimeFrameAsDashboard(v *DashboardOffFolderPathAbsoluteTimeFrame) Dashboard {
 	return Dashboard{
-		Dashboard4: v,
+		DashboardOffFolderPathAbsoluteTimeFrame: v,
 	}
 }
 
-// Dashboard5AsDashboard is a convenience function that returns Dashboard5 wrapped in Dashboard
-func Dashboard5AsDashboard(v *Dashboard5) Dashboard {
+// DashboardOffFolderPathRelativeTimeFrameAsDashboard is a convenience function that returns DashboardOffFolderPathRelativeTimeFrame wrapped in Dashboard
+func DashboardOffFolderPathRelativeTimeFrameAsDashboard(v *DashboardOffFolderPathRelativeTimeFrame) Dashboard {
 	return Dashboard{
-		Dashboard5: v,
+		DashboardOffFolderPathRelativeTimeFrame: v,
 	}
 }
 
-// Dashboard6AsDashboard is a convenience function that returns Dashboard6 wrapped in Dashboard
-func Dashboard6AsDashboard(v *Dashboard6) Dashboard {
+// DashboardTwoMinutesFolderIdAbsoluteTimeFrameAsDashboard is a convenience function that returns DashboardTwoMinutesFolderIdAbsoluteTimeFrame wrapped in Dashboard
+func DashboardTwoMinutesFolderIdAbsoluteTimeFrameAsDashboard(v *DashboardTwoMinutesFolderIdAbsoluteTimeFrame) Dashboard {
 	return Dashboard{
-		Dashboard6: v,
+		DashboardTwoMinutesFolderIdAbsoluteTimeFrame: v,
 	}
 }
 
-// Dashboard7AsDashboard is a convenience function that returns Dashboard7 wrapped in Dashboard
-func Dashboard7AsDashboard(v *Dashboard7) Dashboard {
+// DashboardTwoMinutesFolderIdRelativeTimeFrameAsDashboard is a convenience function that returns DashboardTwoMinutesFolderIdRelativeTimeFrame wrapped in Dashboard
+func DashboardTwoMinutesFolderIdRelativeTimeFrameAsDashboard(v *DashboardTwoMinutesFolderIdRelativeTimeFrame) Dashboard {
 	return Dashboard{
-		Dashboard7: v,
+		DashboardTwoMinutesFolderIdRelativeTimeFrame: v,
 	}
 }
 
-// Dashboard8AsDashboard is a convenience function that returns Dashboard8 wrapped in Dashboard
-func Dashboard8AsDashboard(v *Dashboard8) Dashboard {
+// DashboardTwoMinutesFolderPathAbsoluteTimeFrameAsDashboard is a convenience function that returns DashboardTwoMinutesFolderPathAbsoluteTimeFrame wrapped in Dashboard
+func DashboardTwoMinutesFolderPathAbsoluteTimeFrameAsDashboard(v *DashboardTwoMinutesFolderPathAbsoluteTimeFrame) Dashboard {
 	return Dashboard{
-		Dashboard8: v,
+		DashboardTwoMinutesFolderPathAbsoluteTimeFrame: v,
 	}
 }
 
-// Dashboard9AsDashboard is a convenience function that returns Dashboard9 wrapped in Dashboard
-func Dashboard9AsDashboard(v *Dashboard9) Dashboard {
+// DashboardTwoMinutesFolderPathRelativeTimeFrameAsDashboard is a convenience function that returns DashboardTwoMinutesFolderPathRelativeTimeFrame wrapped in Dashboard
+func DashboardTwoMinutesFolderPathRelativeTimeFrameAsDashboard(v *DashboardTwoMinutesFolderPathRelativeTimeFrame) Dashboard {
 	return Dashboard{
-		Dashboard9: v,
+		DashboardTwoMinutesFolderPathRelativeTimeFrame: v,
 	}
 }
 
@@ -121,224 +121,224 @@ func Dashboard9AsDashboard(v *Dashboard9) Dashboard {
 func (dst *Dashboard) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into Dashboard1
-	err = newStrictDecoder(data).Decode(&dst.Dashboard1)
+	// try to unmarshal data into DashboardFiveMinutesFolderIdAbsoluteTimeFrame
+	err = newStrictDecoder(data).Decode(&dst.DashboardFiveMinutesFolderIdAbsoluteTimeFrame)
 	if err == nil {
-		jsonDashboard1, _ := json.Marshal(dst.Dashboard1)
-		if string(jsonDashboard1) == "{}" { // empty struct
-			dst.Dashboard1 = nil
+		jsonDashboardFiveMinutesFolderIdAbsoluteTimeFrame, _ := json.Marshal(dst.DashboardFiveMinutesFolderIdAbsoluteTimeFrame)
+		if string(jsonDashboardFiveMinutesFolderIdAbsoluteTimeFrame) == "{}" { // empty struct
+			dst.DashboardFiveMinutesFolderIdAbsoluteTimeFrame = nil
 		} else {
-			if err = validator.Validate(dst.Dashboard1); err != nil {
-				dst.Dashboard1 = nil
+			if err = validator.Validate(dst.DashboardFiveMinutesFolderIdAbsoluteTimeFrame); err != nil {
+				dst.DashboardFiveMinutesFolderIdAbsoluteTimeFrame = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Dashboard1 = nil
+		dst.DashboardFiveMinutesFolderIdAbsoluteTimeFrame = nil
 	}
 
-	// try to unmarshal data into Dashboard10
-	err = newStrictDecoder(data).Decode(&dst.Dashboard10)
+	// try to unmarshal data into DashboardFiveMinutesFolderIdRelativeTimeFrame
+	err = newStrictDecoder(data).Decode(&dst.DashboardFiveMinutesFolderIdRelativeTimeFrame)
 	if err == nil {
-		jsonDashboard10, _ := json.Marshal(dst.Dashboard10)
-		if string(jsonDashboard10) == "{}" { // empty struct
-			dst.Dashboard10 = nil
+		jsonDashboardFiveMinutesFolderIdRelativeTimeFrame, _ := json.Marshal(dst.DashboardFiveMinutesFolderIdRelativeTimeFrame)
+		if string(jsonDashboardFiveMinutesFolderIdRelativeTimeFrame) == "{}" { // empty struct
+			dst.DashboardFiveMinutesFolderIdRelativeTimeFrame = nil
 		} else {
-			if err = validator.Validate(dst.Dashboard10); err != nil {
-				dst.Dashboard10 = nil
+			if err = validator.Validate(dst.DashboardFiveMinutesFolderIdRelativeTimeFrame); err != nil {
+				dst.DashboardFiveMinutesFolderIdRelativeTimeFrame = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Dashboard10 = nil
+		dst.DashboardFiveMinutesFolderIdRelativeTimeFrame = nil
 	}
 
-	// try to unmarshal data into Dashboard11
-	err = newStrictDecoder(data).Decode(&dst.Dashboard11)
+	// try to unmarshal data into DashboardFiveMinutesFolderPathAbsoluteTimeFrame
+	err = newStrictDecoder(data).Decode(&dst.DashboardFiveMinutesFolderPathAbsoluteTimeFrame)
 	if err == nil {
-		jsonDashboard11, _ := json.Marshal(dst.Dashboard11)
-		if string(jsonDashboard11) == "{}" { // empty struct
-			dst.Dashboard11 = nil
+		jsonDashboardFiveMinutesFolderPathAbsoluteTimeFrame, _ := json.Marshal(dst.DashboardFiveMinutesFolderPathAbsoluteTimeFrame)
+		if string(jsonDashboardFiveMinutesFolderPathAbsoluteTimeFrame) == "{}" { // empty struct
+			dst.DashboardFiveMinutesFolderPathAbsoluteTimeFrame = nil
 		} else {
-			if err = validator.Validate(dst.Dashboard11); err != nil {
-				dst.Dashboard11 = nil
+			if err = validator.Validate(dst.DashboardFiveMinutesFolderPathAbsoluteTimeFrame); err != nil {
+				dst.DashboardFiveMinutesFolderPathAbsoluteTimeFrame = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Dashboard11 = nil
+		dst.DashboardFiveMinutesFolderPathAbsoluteTimeFrame = nil
 	}
 
-	// try to unmarshal data into Dashboard12
-	err = newStrictDecoder(data).Decode(&dst.Dashboard12)
+	// try to unmarshal data into DashboardFiveMinutesFolderPathRelativeTimeFrame
+	err = newStrictDecoder(data).Decode(&dst.DashboardFiveMinutesFolderPathRelativeTimeFrame)
 	if err == nil {
-		jsonDashboard12, _ := json.Marshal(dst.Dashboard12)
-		if string(jsonDashboard12) == "{}" { // empty struct
-			dst.Dashboard12 = nil
+		jsonDashboardFiveMinutesFolderPathRelativeTimeFrame, _ := json.Marshal(dst.DashboardFiveMinutesFolderPathRelativeTimeFrame)
+		if string(jsonDashboardFiveMinutesFolderPathRelativeTimeFrame) == "{}" { // empty struct
+			dst.DashboardFiveMinutesFolderPathRelativeTimeFrame = nil
 		} else {
-			if err = validator.Validate(dst.Dashboard12); err != nil {
-				dst.Dashboard12 = nil
+			if err = validator.Validate(dst.DashboardFiveMinutesFolderPathRelativeTimeFrame); err != nil {
+				dst.DashboardFiveMinutesFolderPathRelativeTimeFrame = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Dashboard12 = nil
+		dst.DashboardFiveMinutesFolderPathRelativeTimeFrame = nil
 	}
 
-	// try to unmarshal data into Dashboard2
-	err = newStrictDecoder(data).Decode(&dst.Dashboard2)
+	// try to unmarshal data into DashboardOffFolderIdAbsoluteTimeFrame
+	err = newStrictDecoder(data).Decode(&dst.DashboardOffFolderIdAbsoluteTimeFrame)
 	if err == nil {
-		jsonDashboard2, _ := json.Marshal(dst.Dashboard2)
-		if string(jsonDashboard2) == "{}" { // empty struct
-			dst.Dashboard2 = nil
+		jsonDashboardOffFolderIdAbsoluteTimeFrame, _ := json.Marshal(dst.DashboardOffFolderIdAbsoluteTimeFrame)
+		if string(jsonDashboardOffFolderIdAbsoluteTimeFrame) == "{}" { // empty struct
+			dst.DashboardOffFolderIdAbsoluteTimeFrame = nil
 		} else {
-			if err = validator.Validate(dst.Dashboard2); err != nil {
-				dst.Dashboard2 = nil
+			if err = validator.Validate(dst.DashboardOffFolderIdAbsoluteTimeFrame); err != nil {
+				dst.DashboardOffFolderIdAbsoluteTimeFrame = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Dashboard2 = nil
+		dst.DashboardOffFolderIdAbsoluteTimeFrame = nil
 	}
 
-	// try to unmarshal data into Dashboard3
-	err = newStrictDecoder(data).Decode(&dst.Dashboard3)
+	// try to unmarshal data into DashboardOffFolderIdRelativeTimeFrame
+	err = newStrictDecoder(data).Decode(&dst.DashboardOffFolderIdRelativeTimeFrame)
 	if err == nil {
-		jsonDashboard3, _ := json.Marshal(dst.Dashboard3)
-		if string(jsonDashboard3) == "{}" { // empty struct
-			dst.Dashboard3 = nil
+		jsonDashboardOffFolderIdRelativeTimeFrame, _ := json.Marshal(dst.DashboardOffFolderIdRelativeTimeFrame)
+		if string(jsonDashboardOffFolderIdRelativeTimeFrame) == "{}" { // empty struct
+			dst.DashboardOffFolderIdRelativeTimeFrame = nil
 		} else {
-			if err = validator.Validate(dst.Dashboard3); err != nil {
-				dst.Dashboard3 = nil
+			if err = validator.Validate(dst.DashboardOffFolderIdRelativeTimeFrame); err != nil {
+				dst.DashboardOffFolderIdRelativeTimeFrame = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Dashboard3 = nil
+		dst.DashboardOffFolderIdRelativeTimeFrame = nil
 	}
 
-	// try to unmarshal data into Dashboard4
-	err = newStrictDecoder(data).Decode(&dst.Dashboard4)
+	// try to unmarshal data into DashboardOffFolderPathAbsoluteTimeFrame
+	err = newStrictDecoder(data).Decode(&dst.DashboardOffFolderPathAbsoluteTimeFrame)
 	if err == nil {
-		jsonDashboard4, _ := json.Marshal(dst.Dashboard4)
-		if string(jsonDashboard4) == "{}" { // empty struct
-			dst.Dashboard4 = nil
+		jsonDashboardOffFolderPathAbsoluteTimeFrame, _ := json.Marshal(dst.DashboardOffFolderPathAbsoluteTimeFrame)
+		if string(jsonDashboardOffFolderPathAbsoluteTimeFrame) == "{}" { // empty struct
+			dst.DashboardOffFolderPathAbsoluteTimeFrame = nil
 		} else {
-			if err = validator.Validate(dst.Dashboard4); err != nil {
-				dst.Dashboard4 = nil
+			if err = validator.Validate(dst.DashboardOffFolderPathAbsoluteTimeFrame); err != nil {
+				dst.DashboardOffFolderPathAbsoluteTimeFrame = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Dashboard4 = nil
+		dst.DashboardOffFolderPathAbsoluteTimeFrame = nil
 	}
 
-	// try to unmarshal data into Dashboard5
-	err = newStrictDecoder(data).Decode(&dst.Dashboard5)
+	// try to unmarshal data into DashboardOffFolderPathRelativeTimeFrame
+	err = newStrictDecoder(data).Decode(&dst.DashboardOffFolderPathRelativeTimeFrame)
 	if err == nil {
-		jsonDashboard5, _ := json.Marshal(dst.Dashboard5)
-		if string(jsonDashboard5) == "{}" { // empty struct
-			dst.Dashboard5 = nil
+		jsonDashboardOffFolderPathRelativeTimeFrame, _ := json.Marshal(dst.DashboardOffFolderPathRelativeTimeFrame)
+		if string(jsonDashboardOffFolderPathRelativeTimeFrame) == "{}" { // empty struct
+			dst.DashboardOffFolderPathRelativeTimeFrame = nil
 		} else {
-			if err = validator.Validate(dst.Dashboard5); err != nil {
-				dst.Dashboard5 = nil
+			if err = validator.Validate(dst.DashboardOffFolderPathRelativeTimeFrame); err != nil {
+				dst.DashboardOffFolderPathRelativeTimeFrame = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Dashboard5 = nil
+		dst.DashboardOffFolderPathRelativeTimeFrame = nil
 	}
 
-	// try to unmarshal data into Dashboard6
-	err = newStrictDecoder(data).Decode(&dst.Dashboard6)
+	// try to unmarshal data into DashboardTwoMinutesFolderIdAbsoluteTimeFrame
+	err = newStrictDecoder(data).Decode(&dst.DashboardTwoMinutesFolderIdAbsoluteTimeFrame)
 	if err == nil {
-		jsonDashboard6, _ := json.Marshal(dst.Dashboard6)
-		if string(jsonDashboard6) == "{}" { // empty struct
-			dst.Dashboard6 = nil
+		jsonDashboardTwoMinutesFolderIdAbsoluteTimeFrame, _ := json.Marshal(dst.DashboardTwoMinutesFolderIdAbsoluteTimeFrame)
+		if string(jsonDashboardTwoMinutesFolderIdAbsoluteTimeFrame) == "{}" { // empty struct
+			dst.DashboardTwoMinutesFolderIdAbsoluteTimeFrame = nil
 		} else {
-			if err = validator.Validate(dst.Dashboard6); err != nil {
-				dst.Dashboard6 = nil
+			if err = validator.Validate(dst.DashboardTwoMinutesFolderIdAbsoluteTimeFrame); err != nil {
+				dst.DashboardTwoMinutesFolderIdAbsoluteTimeFrame = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Dashboard6 = nil
+		dst.DashboardTwoMinutesFolderIdAbsoluteTimeFrame = nil
 	}
 
-	// try to unmarshal data into Dashboard7
-	err = newStrictDecoder(data).Decode(&dst.Dashboard7)
+	// try to unmarshal data into DashboardTwoMinutesFolderIdRelativeTimeFrame
+	err = newStrictDecoder(data).Decode(&dst.DashboardTwoMinutesFolderIdRelativeTimeFrame)
 	if err == nil {
-		jsonDashboard7, _ := json.Marshal(dst.Dashboard7)
-		if string(jsonDashboard7) == "{}" { // empty struct
-			dst.Dashboard7 = nil
+		jsonDashboardTwoMinutesFolderIdRelativeTimeFrame, _ := json.Marshal(dst.DashboardTwoMinutesFolderIdRelativeTimeFrame)
+		if string(jsonDashboardTwoMinutesFolderIdRelativeTimeFrame) == "{}" { // empty struct
+			dst.DashboardTwoMinutesFolderIdRelativeTimeFrame = nil
 		} else {
-			if err = validator.Validate(dst.Dashboard7); err != nil {
-				dst.Dashboard7 = nil
+			if err = validator.Validate(dst.DashboardTwoMinutesFolderIdRelativeTimeFrame); err != nil {
+				dst.DashboardTwoMinutesFolderIdRelativeTimeFrame = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Dashboard7 = nil
+		dst.DashboardTwoMinutesFolderIdRelativeTimeFrame = nil
 	}
 
-	// try to unmarshal data into Dashboard8
-	err = newStrictDecoder(data).Decode(&dst.Dashboard8)
+	// try to unmarshal data into DashboardTwoMinutesFolderPathAbsoluteTimeFrame
+	err = newStrictDecoder(data).Decode(&dst.DashboardTwoMinutesFolderPathAbsoluteTimeFrame)
 	if err == nil {
-		jsonDashboard8, _ := json.Marshal(dst.Dashboard8)
-		if string(jsonDashboard8) == "{}" { // empty struct
-			dst.Dashboard8 = nil
+		jsonDashboardTwoMinutesFolderPathAbsoluteTimeFrame, _ := json.Marshal(dst.DashboardTwoMinutesFolderPathAbsoluteTimeFrame)
+		if string(jsonDashboardTwoMinutesFolderPathAbsoluteTimeFrame) == "{}" { // empty struct
+			dst.DashboardTwoMinutesFolderPathAbsoluteTimeFrame = nil
 		} else {
-			if err = validator.Validate(dst.Dashboard8); err != nil {
-				dst.Dashboard8 = nil
+			if err = validator.Validate(dst.DashboardTwoMinutesFolderPathAbsoluteTimeFrame); err != nil {
+				dst.DashboardTwoMinutesFolderPathAbsoluteTimeFrame = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Dashboard8 = nil
+		dst.DashboardTwoMinutesFolderPathAbsoluteTimeFrame = nil
 	}
 
-	// try to unmarshal data into Dashboard9
-	err = newStrictDecoder(data).Decode(&dst.Dashboard9)
+	// try to unmarshal data into DashboardTwoMinutesFolderPathRelativeTimeFrame
+	err = newStrictDecoder(data).Decode(&dst.DashboardTwoMinutesFolderPathRelativeTimeFrame)
 	if err == nil {
-		jsonDashboard9, _ := json.Marshal(dst.Dashboard9)
-		if string(jsonDashboard9) == "{}" { // empty struct
-			dst.Dashboard9 = nil
+		jsonDashboardTwoMinutesFolderPathRelativeTimeFrame, _ := json.Marshal(dst.DashboardTwoMinutesFolderPathRelativeTimeFrame)
+		if string(jsonDashboardTwoMinutesFolderPathRelativeTimeFrame) == "{}" { // empty struct
+			dst.DashboardTwoMinutesFolderPathRelativeTimeFrame = nil
 		} else {
-			if err = validator.Validate(dst.Dashboard9); err != nil {
-				dst.Dashboard9 = nil
+			if err = validator.Validate(dst.DashboardTwoMinutesFolderPathRelativeTimeFrame); err != nil {
+				dst.DashboardTwoMinutesFolderPathRelativeTimeFrame = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Dashboard9 = nil
+		dst.DashboardTwoMinutesFolderPathRelativeTimeFrame = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.Dashboard1 = nil
-		dst.Dashboard10 = nil
-		dst.Dashboard11 = nil
-		dst.Dashboard12 = nil
-		dst.Dashboard2 = nil
-		dst.Dashboard3 = nil
-		dst.Dashboard4 = nil
-		dst.Dashboard5 = nil
-		dst.Dashboard6 = nil
-		dst.Dashboard7 = nil
-		dst.Dashboard8 = nil
-		dst.Dashboard9 = nil
+		dst.DashboardFiveMinutesFolderIdAbsoluteTimeFrame = nil
+		dst.DashboardFiveMinutesFolderIdRelativeTimeFrame = nil
+		dst.DashboardFiveMinutesFolderPathAbsoluteTimeFrame = nil
+		dst.DashboardFiveMinutesFolderPathRelativeTimeFrame = nil
+		dst.DashboardOffFolderIdAbsoluteTimeFrame = nil
+		dst.DashboardOffFolderIdRelativeTimeFrame = nil
+		dst.DashboardOffFolderPathAbsoluteTimeFrame = nil
+		dst.DashboardOffFolderPathRelativeTimeFrame = nil
+		dst.DashboardTwoMinutesFolderIdAbsoluteTimeFrame = nil
+		dst.DashboardTwoMinutesFolderIdRelativeTimeFrame = nil
+		dst.DashboardTwoMinutesFolderPathAbsoluteTimeFrame = nil
+		dst.DashboardTwoMinutesFolderPathRelativeTimeFrame = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(Dashboard)")
 	} else if match == 1 {
@@ -350,52 +350,52 @@ func (dst *Dashboard) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src Dashboard) MarshalJSON() ([]byte, error) {
-	if src.Dashboard1 != nil {
-		return json.Marshal(&src.Dashboard1)
+	if src.DashboardFiveMinutesFolderIdAbsoluteTimeFrame != nil {
+		return json.Marshal(&src.DashboardFiveMinutesFolderIdAbsoluteTimeFrame)
 	}
 
-	if src.Dashboard10 != nil {
-		return json.Marshal(&src.Dashboard10)
+	if src.DashboardFiveMinutesFolderIdRelativeTimeFrame != nil {
+		return json.Marshal(&src.DashboardFiveMinutesFolderIdRelativeTimeFrame)
 	}
 
-	if src.Dashboard11 != nil {
-		return json.Marshal(&src.Dashboard11)
+	if src.DashboardFiveMinutesFolderPathAbsoluteTimeFrame != nil {
+		return json.Marshal(&src.DashboardFiveMinutesFolderPathAbsoluteTimeFrame)
 	}
 
-	if src.Dashboard12 != nil {
-		return json.Marshal(&src.Dashboard12)
+	if src.DashboardFiveMinutesFolderPathRelativeTimeFrame != nil {
+		return json.Marshal(&src.DashboardFiveMinutesFolderPathRelativeTimeFrame)
 	}
 
-	if src.Dashboard2 != nil {
-		return json.Marshal(&src.Dashboard2)
+	if src.DashboardOffFolderIdAbsoluteTimeFrame != nil {
+		return json.Marshal(&src.DashboardOffFolderIdAbsoluteTimeFrame)
 	}
 
-	if src.Dashboard3 != nil {
-		return json.Marshal(&src.Dashboard3)
+	if src.DashboardOffFolderIdRelativeTimeFrame != nil {
+		return json.Marshal(&src.DashboardOffFolderIdRelativeTimeFrame)
 	}
 
-	if src.Dashboard4 != nil {
-		return json.Marshal(&src.Dashboard4)
+	if src.DashboardOffFolderPathAbsoluteTimeFrame != nil {
+		return json.Marshal(&src.DashboardOffFolderPathAbsoluteTimeFrame)
 	}
 
-	if src.Dashboard5 != nil {
-		return json.Marshal(&src.Dashboard5)
+	if src.DashboardOffFolderPathRelativeTimeFrame != nil {
+		return json.Marshal(&src.DashboardOffFolderPathRelativeTimeFrame)
 	}
 
-	if src.Dashboard6 != nil {
-		return json.Marshal(&src.Dashboard6)
+	if src.DashboardTwoMinutesFolderIdAbsoluteTimeFrame != nil {
+		return json.Marshal(&src.DashboardTwoMinutesFolderIdAbsoluteTimeFrame)
 	}
 
-	if src.Dashboard7 != nil {
-		return json.Marshal(&src.Dashboard7)
+	if src.DashboardTwoMinutesFolderIdRelativeTimeFrame != nil {
+		return json.Marshal(&src.DashboardTwoMinutesFolderIdRelativeTimeFrame)
 	}
 
-	if src.Dashboard8 != nil {
-		return json.Marshal(&src.Dashboard8)
+	if src.DashboardTwoMinutesFolderPathAbsoluteTimeFrame != nil {
+		return json.Marshal(&src.DashboardTwoMinutesFolderPathAbsoluteTimeFrame)
 	}
 
-	if src.Dashboard9 != nil {
-		return json.Marshal(&src.Dashboard9)
+	if src.DashboardTwoMinutesFolderPathRelativeTimeFrame != nil {
+		return json.Marshal(&src.DashboardTwoMinutesFolderPathRelativeTimeFrame)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -406,52 +406,52 @@ func (obj *Dashboard) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.Dashboard1 != nil {
-		return obj.Dashboard1
+	if obj.DashboardFiveMinutesFolderIdAbsoluteTimeFrame != nil {
+		return obj.DashboardFiveMinutesFolderIdAbsoluteTimeFrame
 	}
 
-	if obj.Dashboard10 != nil {
-		return obj.Dashboard10
+	if obj.DashboardFiveMinutesFolderIdRelativeTimeFrame != nil {
+		return obj.DashboardFiveMinutesFolderIdRelativeTimeFrame
 	}
 
-	if obj.Dashboard11 != nil {
-		return obj.Dashboard11
+	if obj.DashboardFiveMinutesFolderPathAbsoluteTimeFrame != nil {
+		return obj.DashboardFiveMinutesFolderPathAbsoluteTimeFrame
 	}
 
-	if obj.Dashboard12 != nil {
-		return obj.Dashboard12
+	if obj.DashboardFiveMinutesFolderPathRelativeTimeFrame != nil {
+		return obj.DashboardFiveMinutesFolderPathRelativeTimeFrame
 	}
 
-	if obj.Dashboard2 != nil {
-		return obj.Dashboard2
+	if obj.DashboardOffFolderIdAbsoluteTimeFrame != nil {
+		return obj.DashboardOffFolderIdAbsoluteTimeFrame
 	}
 
-	if obj.Dashboard3 != nil {
-		return obj.Dashboard3
+	if obj.DashboardOffFolderIdRelativeTimeFrame != nil {
+		return obj.DashboardOffFolderIdRelativeTimeFrame
 	}
 
-	if obj.Dashboard4 != nil {
-		return obj.Dashboard4
+	if obj.DashboardOffFolderPathAbsoluteTimeFrame != nil {
+		return obj.DashboardOffFolderPathAbsoluteTimeFrame
 	}
 
-	if obj.Dashboard5 != nil {
-		return obj.Dashboard5
+	if obj.DashboardOffFolderPathRelativeTimeFrame != nil {
+		return obj.DashboardOffFolderPathRelativeTimeFrame
 	}
 
-	if obj.Dashboard6 != nil {
-		return obj.Dashboard6
+	if obj.DashboardTwoMinutesFolderIdAbsoluteTimeFrame != nil {
+		return obj.DashboardTwoMinutesFolderIdAbsoluteTimeFrame
 	}
 
-	if obj.Dashboard7 != nil {
-		return obj.Dashboard7
+	if obj.DashboardTwoMinutesFolderIdRelativeTimeFrame != nil {
+		return obj.DashboardTwoMinutesFolderIdRelativeTimeFrame
 	}
 
-	if obj.Dashboard8 != nil {
-		return obj.Dashboard8
+	if obj.DashboardTwoMinutesFolderPathAbsoluteTimeFrame != nil {
+		return obj.DashboardTwoMinutesFolderPathAbsoluteTimeFrame
 	}
 
-	if obj.Dashboard9 != nil {
-		return obj.Dashboard9
+	if obj.DashboardTwoMinutesFolderPathRelativeTimeFrame != nil {
+		return obj.DashboardTwoMinutesFolderPathRelativeTimeFrame
 	}
 
 	// all schemas are nil
@@ -460,52 +460,52 @@ func (obj *Dashboard) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj Dashboard) GetActualInstanceValue() (interface{}) {
-	if obj.Dashboard1 != nil {
-		return *obj.Dashboard1
+	if obj.DashboardFiveMinutesFolderIdAbsoluteTimeFrame != nil {
+		return *obj.DashboardFiveMinutesFolderIdAbsoluteTimeFrame
 	}
 
-	if obj.Dashboard10 != nil {
-		return *obj.Dashboard10
+	if obj.DashboardFiveMinutesFolderIdRelativeTimeFrame != nil {
+		return *obj.DashboardFiveMinutesFolderIdRelativeTimeFrame
 	}
 
-	if obj.Dashboard11 != nil {
-		return *obj.Dashboard11
+	if obj.DashboardFiveMinutesFolderPathAbsoluteTimeFrame != nil {
+		return *obj.DashboardFiveMinutesFolderPathAbsoluteTimeFrame
 	}
 
-	if obj.Dashboard12 != nil {
-		return *obj.Dashboard12
+	if obj.DashboardFiveMinutesFolderPathRelativeTimeFrame != nil {
+		return *obj.DashboardFiveMinutesFolderPathRelativeTimeFrame
 	}
 
-	if obj.Dashboard2 != nil {
-		return *obj.Dashboard2
+	if obj.DashboardOffFolderIdAbsoluteTimeFrame != nil {
+		return *obj.DashboardOffFolderIdAbsoluteTimeFrame
 	}
 
-	if obj.Dashboard3 != nil {
-		return *obj.Dashboard3
+	if obj.DashboardOffFolderIdRelativeTimeFrame != nil {
+		return *obj.DashboardOffFolderIdRelativeTimeFrame
 	}
 
-	if obj.Dashboard4 != nil {
-		return *obj.Dashboard4
+	if obj.DashboardOffFolderPathAbsoluteTimeFrame != nil {
+		return *obj.DashboardOffFolderPathAbsoluteTimeFrame
 	}
 
-	if obj.Dashboard5 != nil {
-		return *obj.Dashboard5
+	if obj.DashboardOffFolderPathRelativeTimeFrame != nil {
+		return *obj.DashboardOffFolderPathRelativeTimeFrame
 	}
 
-	if obj.Dashboard6 != nil {
-		return *obj.Dashboard6
+	if obj.DashboardTwoMinutesFolderIdAbsoluteTimeFrame != nil {
+		return *obj.DashboardTwoMinutesFolderIdAbsoluteTimeFrame
 	}
 
-	if obj.Dashboard7 != nil {
-		return *obj.Dashboard7
+	if obj.DashboardTwoMinutesFolderIdRelativeTimeFrame != nil {
+		return *obj.DashboardTwoMinutesFolderIdRelativeTimeFrame
 	}
 
-	if obj.Dashboard8 != nil {
-		return *obj.Dashboard8
+	if obj.DashboardTwoMinutesFolderPathAbsoluteTimeFrame != nil {
+		return *obj.DashboardTwoMinutesFolderPathAbsoluteTimeFrame
 	}
 
-	if obj.Dashboard9 != nil {
-		return *obj.Dashboard9
+	if obj.DashboardTwoMinutesFolderPathRelativeTimeFrame != nil {
+		return *obj.DashboardTwoMinutesFolderPathRelativeTimeFrame
 	}
 
 	// all schemas are nil

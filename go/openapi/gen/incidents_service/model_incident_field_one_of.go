@@ -18,93 +18,93 @@ import (
 
 // IncidentFieldOneOf - struct for IncidentFieldOneOf
 type IncidentFieldOneOf struct {
-	IncidentFieldOneOfOneOf *IncidentFieldOneOfOneOf
-	IncidentFieldOneOfOneOf1 *IncidentFieldOneOfOneOf1
-	IncidentFieldOneOfOneOf10 *IncidentFieldOneOfOneOf10
-	IncidentFieldOneOfOneOf2 *IncidentFieldOneOfOneOf2
-	IncidentFieldOneOfOneOf3 *IncidentFieldOneOfOneOf3
-	IncidentFieldOneOfOneOf4 *IncidentFieldOneOfOneOf4
-	IncidentFieldOneOfOneOf5 *IncidentFieldOneOfOneOf5
-	IncidentFieldOneOfOneOf6 *IncidentFieldOneOfOneOf6
-	IncidentFieldOneOfOneOf7 *IncidentFieldOneOfOneOf7
-	IncidentFieldOneOfOneOf8 *IncidentFieldOneOfOneOf8
-	IncidentFieldOneOfOneOf9 *IncidentFieldOneOfOneOf9
+	IncidentFieldOneOfApplicationName *IncidentFieldOneOfApplicationName
+	IncidentFieldOneOfClosedAt *IncidentFieldOneOfClosedAt
+	IncidentFieldOneOfCreatedAt *IncidentFieldOneOfCreatedAt
+	IncidentFieldOneOfDuration *IncidentFieldOneOfDuration
+	IncidentFieldOneOfId *IncidentFieldOneOfId
+	IncidentFieldOneOfLastStateUpdateTime *IncidentFieldOneOfLastStateUpdateTime
+	IncidentFieldOneOfName *IncidentFieldOneOfName
+	IncidentFieldOneOfSeverity *IncidentFieldOneOfSeverity
+	IncidentFieldOneOfState *IncidentFieldOneOfState
+	IncidentFieldOneOfStatus *IncidentFieldOneOfStatus
+	IncidentFieldOneOfSubsystemName *IncidentFieldOneOfSubsystemName
 }
 
-// IncidentFieldOneOfOneOfAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfOneOf wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfOneOfAsIncidentFieldOneOf(v *IncidentFieldOneOfOneOf) IncidentFieldOneOf {
+// IncidentFieldOneOfApplicationNameAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfApplicationName wrapped in IncidentFieldOneOf
+func IncidentFieldOneOfApplicationNameAsIncidentFieldOneOf(v *IncidentFieldOneOfApplicationName) IncidentFieldOneOf {
 	return IncidentFieldOneOf{
-		IncidentFieldOneOfOneOf: v,
+		IncidentFieldOneOfApplicationName: v,
 	}
 }
 
-// IncidentFieldOneOfOneOf1AsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfOneOf1 wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfOneOf1AsIncidentFieldOneOf(v *IncidentFieldOneOfOneOf1) IncidentFieldOneOf {
+// IncidentFieldOneOfClosedAtAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfClosedAt wrapped in IncidentFieldOneOf
+func IncidentFieldOneOfClosedAtAsIncidentFieldOneOf(v *IncidentFieldOneOfClosedAt) IncidentFieldOneOf {
 	return IncidentFieldOneOf{
-		IncidentFieldOneOfOneOf1: v,
+		IncidentFieldOneOfClosedAt: v,
 	}
 }
 
-// IncidentFieldOneOfOneOf10AsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfOneOf10 wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfOneOf10AsIncidentFieldOneOf(v *IncidentFieldOneOfOneOf10) IncidentFieldOneOf {
+// IncidentFieldOneOfCreatedAtAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfCreatedAt wrapped in IncidentFieldOneOf
+func IncidentFieldOneOfCreatedAtAsIncidentFieldOneOf(v *IncidentFieldOneOfCreatedAt) IncidentFieldOneOf {
 	return IncidentFieldOneOf{
-		IncidentFieldOneOfOneOf10: v,
+		IncidentFieldOneOfCreatedAt: v,
 	}
 }
 
-// IncidentFieldOneOfOneOf2AsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfOneOf2 wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfOneOf2AsIncidentFieldOneOf(v *IncidentFieldOneOfOneOf2) IncidentFieldOneOf {
+// IncidentFieldOneOfDurationAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfDuration wrapped in IncidentFieldOneOf
+func IncidentFieldOneOfDurationAsIncidentFieldOneOf(v *IncidentFieldOneOfDuration) IncidentFieldOneOf {
 	return IncidentFieldOneOf{
-		IncidentFieldOneOfOneOf2: v,
+		IncidentFieldOneOfDuration: v,
 	}
 }
 
-// IncidentFieldOneOfOneOf3AsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfOneOf3 wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfOneOf3AsIncidentFieldOneOf(v *IncidentFieldOneOfOneOf3) IncidentFieldOneOf {
+// IncidentFieldOneOfIdAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfId wrapped in IncidentFieldOneOf
+func IncidentFieldOneOfIdAsIncidentFieldOneOf(v *IncidentFieldOneOfId) IncidentFieldOneOf {
 	return IncidentFieldOneOf{
-		IncidentFieldOneOfOneOf3: v,
+		IncidentFieldOneOfId: v,
 	}
 }
 
-// IncidentFieldOneOfOneOf4AsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfOneOf4 wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfOneOf4AsIncidentFieldOneOf(v *IncidentFieldOneOfOneOf4) IncidentFieldOneOf {
+// IncidentFieldOneOfLastStateUpdateTimeAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfLastStateUpdateTime wrapped in IncidentFieldOneOf
+func IncidentFieldOneOfLastStateUpdateTimeAsIncidentFieldOneOf(v *IncidentFieldOneOfLastStateUpdateTime) IncidentFieldOneOf {
 	return IncidentFieldOneOf{
-		IncidentFieldOneOfOneOf4: v,
+		IncidentFieldOneOfLastStateUpdateTime: v,
 	}
 }
 
-// IncidentFieldOneOfOneOf5AsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfOneOf5 wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfOneOf5AsIncidentFieldOneOf(v *IncidentFieldOneOfOneOf5) IncidentFieldOneOf {
+// IncidentFieldOneOfNameAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfName wrapped in IncidentFieldOneOf
+func IncidentFieldOneOfNameAsIncidentFieldOneOf(v *IncidentFieldOneOfName) IncidentFieldOneOf {
 	return IncidentFieldOneOf{
-		IncidentFieldOneOfOneOf5: v,
+		IncidentFieldOneOfName: v,
 	}
 }
 
-// IncidentFieldOneOfOneOf6AsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfOneOf6 wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfOneOf6AsIncidentFieldOneOf(v *IncidentFieldOneOfOneOf6) IncidentFieldOneOf {
+// IncidentFieldOneOfSeverityAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfSeverity wrapped in IncidentFieldOneOf
+func IncidentFieldOneOfSeverityAsIncidentFieldOneOf(v *IncidentFieldOneOfSeverity) IncidentFieldOneOf {
 	return IncidentFieldOneOf{
-		IncidentFieldOneOfOneOf6: v,
+		IncidentFieldOneOfSeverity: v,
 	}
 }
 
-// IncidentFieldOneOfOneOf7AsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfOneOf7 wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfOneOf7AsIncidentFieldOneOf(v *IncidentFieldOneOfOneOf7) IncidentFieldOneOf {
+// IncidentFieldOneOfStateAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfState wrapped in IncidentFieldOneOf
+func IncidentFieldOneOfStateAsIncidentFieldOneOf(v *IncidentFieldOneOfState) IncidentFieldOneOf {
 	return IncidentFieldOneOf{
-		IncidentFieldOneOfOneOf7: v,
+		IncidentFieldOneOfState: v,
 	}
 }
 
-// IncidentFieldOneOfOneOf8AsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfOneOf8 wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfOneOf8AsIncidentFieldOneOf(v *IncidentFieldOneOfOneOf8) IncidentFieldOneOf {
+// IncidentFieldOneOfStatusAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfStatus wrapped in IncidentFieldOneOf
+func IncidentFieldOneOfStatusAsIncidentFieldOneOf(v *IncidentFieldOneOfStatus) IncidentFieldOneOf {
 	return IncidentFieldOneOf{
-		IncidentFieldOneOfOneOf8: v,
+		IncidentFieldOneOfStatus: v,
 	}
 }
 
-// IncidentFieldOneOfOneOf9AsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfOneOf9 wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfOneOf9AsIncidentFieldOneOf(v *IncidentFieldOneOfOneOf9) IncidentFieldOneOf {
+// IncidentFieldOneOfSubsystemNameAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfSubsystemName wrapped in IncidentFieldOneOf
+func IncidentFieldOneOfSubsystemNameAsIncidentFieldOneOf(v *IncidentFieldOneOfSubsystemName) IncidentFieldOneOf {
 	return IncidentFieldOneOf{
-		IncidentFieldOneOfOneOf9: v,
+		IncidentFieldOneOfSubsystemName: v,
 	}
 }
 
@@ -113,206 +113,206 @@ func IncidentFieldOneOfOneOf9AsIncidentFieldOneOf(v *IncidentFieldOneOfOneOf9) I
 func (dst *IncidentFieldOneOf) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into IncidentFieldOneOfOneOf
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfOneOf)
+	// try to unmarshal data into IncidentFieldOneOfApplicationName
+	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfApplicationName)
 	if err == nil {
-		jsonIncidentFieldOneOfOneOf, _ := json.Marshal(dst.IncidentFieldOneOfOneOf)
-		if string(jsonIncidentFieldOneOfOneOf) == "{}" { // empty struct
-			dst.IncidentFieldOneOfOneOf = nil
+		jsonIncidentFieldOneOfApplicationName, _ := json.Marshal(dst.IncidentFieldOneOfApplicationName)
+		if string(jsonIncidentFieldOneOfApplicationName) == "{}" { // empty struct
+			dst.IncidentFieldOneOfApplicationName = nil
 		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfOneOf); err != nil {
-				dst.IncidentFieldOneOfOneOf = nil
+			if err = validator.Validate(dst.IncidentFieldOneOfApplicationName); err != nil {
+				dst.IncidentFieldOneOfApplicationName = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IncidentFieldOneOfOneOf = nil
+		dst.IncidentFieldOneOfApplicationName = nil
 	}
 
-	// try to unmarshal data into IncidentFieldOneOfOneOf1
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfOneOf1)
+	// try to unmarshal data into IncidentFieldOneOfClosedAt
+	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfClosedAt)
 	if err == nil {
-		jsonIncidentFieldOneOfOneOf1, _ := json.Marshal(dst.IncidentFieldOneOfOneOf1)
-		if string(jsonIncidentFieldOneOfOneOf1) == "{}" { // empty struct
-			dst.IncidentFieldOneOfOneOf1 = nil
+		jsonIncidentFieldOneOfClosedAt, _ := json.Marshal(dst.IncidentFieldOneOfClosedAt)
+		if string(jsonIncidentFieldOneOfClosedAt) == "{}" { // empty struct
+			dst.IncidentFieldOneOfClosedAt = nil
 		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfOneOf1); err != nil {
-				dst.IncidentFieldOneOfOneOf1 = nil
+			if err = validator.Validate(dst.IncidentFieldOneOfClosedAt); err != nil {
+				dst.IncidentFieldOneOfClosedAt = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IncidentFieldOneOfOneOf1 = nil
+		dst.IncidentFieldOneOfClosedAt = nil
 	}
 
-	// try to unmarshal data into IncidentFieldOneOfOneOf10
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfOneOf10)
+	// try to unmarshal data into IncidentFieldOneOfCreatedAt
+	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfCreatedAt)
 	if err == nil {
-		jsonIncidentFieldOneOfOneOf10, _ := json.Marshal(dst.IncidentFieldOneOfOneOf10)
-		if string(jsonIncidentFieldOneOfOneOf10) == "{}" { // empty struct
-			dst.IncidentFieldOneOfOneOf10 = nil
+		jsonIncidentFieldOneOfCreatedAt, _ := json.Marshal(dst.IncidentFieldOneOfCreatedAt)
+		if string(jsonIncidentFieldOneOfCreatedAt) == "{}" { // empty struct
+			dst.IncidentFieldOneOfCreatedAt = nil
 		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfOneOf10); err != nil {
-				dst.IncidentFieldOneOfOneOf10 = nil
+			if err = validator.Validate(dst.IncidentFieldOneOfCreatedAt); err != nil {
+				dst.IncidentFieldOneOfCreatedAt = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IncidentFieldOneOfOneOf10 = nil
+		dst.IncidentFieldOneOfCreatedAt = nil
 	}
 
-	// try to unmarshal data into IncidentFieldOneOfOneOf2
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfOneOf2)
+	// try to unmarshal data into IncidentFieldOneOfDuration
+	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfDuration)
 	if err == nil {
-		jsonIncidentFieldOneOfOneOf2, _ := json.Marshal(dst.IncidentFieldOneOfOneOf2)
-		if string(jsonIncidentFieldOneOfOneOf2) == "{}" { // empty struct
-			dst.IncidentFieldOneOfOneOf2 = nil
+		jsonIncidentFieldOneOfDuration, _ := json.Marshal(dst.IncidentFieldOneOfDuration)
+		if string(jsonIncidentFieldOneOfDuration) == "{}" { // empty struct
+			dst.IncidentFieldOneOfDuration = nil
 		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfOneOf2); err != nil {
-				dst.IncidentFieldOneOfOneOf2 = nil
+			if err = validator.Validate(dst.IncidentFieldOneOfDuration); err != nil {
+				dst.IncidentFieldOneOfDuration = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IncidentFieldOneOfOneOf2 = nil
+		dst.IncidentFieldOneOfDuration = nil
 	}
 
-	// try to unmarshal data into IncidentFieldOneOfOneOf3
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfOneOf3)
+	// try to unmarshal data into IncidentFieldOneOfId
+	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfId)
 	if err == nil {
-		jsonIncidentFieldOneOfOneOf3, _ := json.Marshal(dst.IncidentFieldOneOfOneOf3)
-		if string(jsonIncidentFieldOneOfOneOf3) == "{}" { // empty struct
-			dst.IncidentFieldOneOfOneOf3 = nil
+		jsonIncidentFieldOneOfId, _ := json.Marshal(dst.IncidentFieldOneOfId)
+		if string(jsonIncidentFieldOneOfId) == "{}" { // empty struct
+			dst.IncidentFieldOneOfId = nil
 		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfOneOf3); err != nil {
-				dst.IncidentFieldOneOfOneOf3 = nil
+			if err = validator.Validate(dst.IncidentFieldOneOfId); err != nil {
+				dst.IncidentFieldOneOfId = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IncidentFieldOneOfOneOf3 = nil
+		dst.IncidentFieldOneOfId = nil
 	}
 
-	// try to unmarshal data into IncidentFieldOneOfOneOf4
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfOneOf4)
+	// try to unmarshal data into IncidentFieldOneOfLastStateUpdateTime
+	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfLastStateUpdateTime)
 	if err == nil {
-		jsonIncidentFieldOneOfOneOf4, _ := json.Marshal(dst.IncidentFieldOneOfOneOf4)
-		if string(jsonIncidentFieldOneOfOneOf4) == "{}" { // empty struct
-			dst.IncidentFieldOneOfOneOf4 = nil
+		jsonIncidentFieldOneOfLastStateUpdateTime, _ := json.Marshal(dst.IncidentFieldOneOfLastStateUpdateTime)
+		if string(jsonIncidentFieldOneOfLastStateUpdateTime) == "{}" { // empty struct
+			dst.IncidentFieldOneOfLastStateUpdateTime = nil
 		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfOneOf4); err != nil {
-				dst.IncidentFieldOneOfOneOf4 = nil
+			if err = validator.Validate(dst.IncidentFieldOneOfLastStateUpdateTime); err != nil {
+				dst.IncidentFieldOneOfLastStateUpdateTime = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IncidentFieldOneOfOneOf4 = nil
+		dst.IncidentFieldOneOfLastStateUpdateTime = nil
 	}
 
-	// try to unmarshal data into IncidentFieldOneOfOneOf5
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfOneOf5)
+	// try to unmarshal data into IncidentFieldOneOfName
+	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfName)
 	if err == nil {
-		jsonIncidentFieldOneOfOneOf5, _ := json.Marshal(dst.IncidentFieldOneOfOneOf5)
-		if string(jsonIncidentFieldOneOfOneOf5) == "{}" { // empty struct
-			dst.IncidentFieldOneOfOneOf5 = nil
+		jsonIncidentFieldOneOfName, _ := json.Marshal(dst.IncidentFieldOneOfName)
+		if string(jsonIncidentFieldOneOfName) == "{}" { // empty struct
+			dst.IncidentFieldOneOfName = nil
 		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfOneOf5); err != nil {
-				dst.IncidentFieldOneOfOneOf5 = nil
+			if err = validator.Validate(dst.IncidentFieldOneOfName); err != nil {
+				dst.IncidentFieldOneOfName = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IncidentFieldOneOfOneOf5 = nil
+		dst.IncidentFieldOneOfName = nil
 	}
 
-	// try to unmarshal data into IncidentFieldOneOfOneOf6
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfOneOf6)
+	// try to unmarshal data into IncidentFieldOneOfSeverity
+	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfSeverity)
 	if err == nil {
-		jsonIncidentFieldOneOfOneOf6, _ := json.Marshal(dst.IncidentFieldOneOfOneOf6)
-		if string(jsonIncidentFieldOneOfOneOf6) == "{}" { // empty struct
-			dst.IncidentFieldOneOfOneOf6 = nil
+		jsonIncidentFieldOneOfSeverity, _ := json.Marshal(dst.IncidentFieldOneOfSeverity)
+		if string(jsonIncidentFieldOneOfSeverity) == "{}" { // empty struct
+			dst.IncidentFieldOneOfSeverity = nil
 		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfOneOf6); err != nil {
-				dst.IncidentFieldOneOfOneOf6 = nil
+			if err = validator.Validate(dst.IncidentFieldOneOfSeverity); err != nil {
+				dst.IncidentFieldOneOfSeverity = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IncidentFieldOneOfOneOf6 = nil
+		dst.IncidentFieldOneOfSeverity = nil
 	}
 
-	// try to unmarshal data into IncidentFieldOneOfOneOf7
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfOneOf7)
+	// try to unmarshal data into IncidentFieldOneOfState
+	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfState)
 	if err == nil {
-		jsonIncidentFieldOneOfOneOf7, _ := json.Marshal(dst.IncidentFieldOneOfOneOf7)
-		if string(jsonIncidentFieldOneOfOneOf7) == "{}" { // empty struct
-			dst.IncidentFieldOneOfOneOf7 = nil
+		jsonIncidentFieldOneOfState, _ := json.Marshal(dst.IncidentFieldOneOfState)
+		if string(jsonIncidentFieldOneOfState) == "{}" { // empty struct
+			dst.IncidentFieldOneOfState = nil
 		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfOneOf7); err != nil {
-				dst.IncidentFieldOneOfOneOf7 = nil
+			if err = validator.Validate(dst.IncidentFieldOneOfState); err != nil {
+				dst.IncidentFieldOneOfState = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IncidentFieldOneOfOneOf7 = nil
+		dst.IncidentFieldOneOfState = nil
 	}
 
-	// try to unmarshal data into IncidentFieldOneOfOneOf8
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfOneOf8)
+	// try to unmarshal data into IncidentFieldOneOfStatus
+	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfStatus)
 	if err == nil {
-		jsonIncidentFieldOneOfOneOf8, _ := json.Marshal(dst.IncidentFieldOneOfOneOf8)
-		if string(jsonIncidentFieldOneOfOneOf8) == "{}" { // empty struct
-			dst.IncidentFieldOneOfOneOf8 = nil
+		jsonIncidentFieldOneOfStatus, _ := json.Marshal(dst.IncidentFieldOneOfStatus)
+		if string(jsonIncidentFieldOneOfStatus) == "{}" { // empty struct
+			dst.IncidentFieldOneOfStatus = nil
 		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfOneOf8); err != nil {
-				dst.IncidentFieldOneOfOneOf8 = nil
+			if err = validator.Validate(dst.IncidentFieldOneOfStatus); err != nil {
+				dst.IncidentFieldOneOfStatus = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IncidentFieldOneOfOneOf8 = nil
+		dst.IncidentFieldOneOfStatus = nil
 	}
 
-	// try to unmarshal data into IncidentFieldOneOfOneOf9
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfOneOf9)
+	// try to unmarshal data into IncidentFieldOneOfSubsystemName
+	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfSubsystemName)
 	if err == nil {
-		jsonIncidentFieldOneOfOneOf9, _ := json.Marshal(dst.IncidentFieldOneOfOneOf9)
-		if string(jsonIncidentFieldOneOfOneOf9) == "{}" { // empty struct
-			dst.IncidentFieldOneOfOneOf9 = nil
+		jsonIncidentFieldOneOfSubsystemName, _ := json.Marshal(dst.IncidentFieldOneOfSubsystemName)
+		if string(jsonIncidentFieldOneOfSubsystemName) == "{}" { // empty struct
+			dst.IncidentFieldOneOfSubsystemName = nil
 		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfOneOf9); err != nil {
-				dst.IncidentFieldOneOfOneOf9 = nil
+			if err = validator.Validate(dst.IncidentFieldOneOfSubsystemName); err != nil {
+				dst.IncidentFieldOneOfSubsystemName = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IncidentFieldOneOfOneOf9 = nil
+		dst.IncidentFieldOneOfSubsystemName = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.IncidentFieldOneOfOneOf = nil
-		dst.IncidentFieldOneOfOneOf1 = nil
-		dst.IncidentFieldOneOfOneOf10 = nil
-		dst.IncidentFieldOneOfOneOf2 = nil
-		dst.IncidentFieldOneOfOneOf3 = nil
-		dst.IncidentFieldOneOfOneOf4 = nil
-		dst.IncidentFieldOneOfOneOf5 = nil
-		dst.IncidentFieldOneOfOneOf6 = nil
-		dst.IncidentFieldOneOfOneOf7 = nil
-		dst.IncidentFieldOneOfOneOf8 = nil
-		dst.IncidentFieldOneOfOneOf9 = nil
+		dst.IncidentFieldOneOfApplicationName = nil
+		dst.IncidentFieldOneOfClosedAt = nil
+		dst.IncidentFieldOneOfCreatedAt = nil
+		dst.IncidentFieldOneOfDuration = nil
+		dst.IncidentFieldOneOfId = nil
+		dst.IncidentFieldOneOfLastStateUpdateTime = nil
+		dst.IncidentFieldOneOfName = nil
+		dst.IncidentFieldOneOfSeverity = nil
+		dst.IncidentFieldOneOfState = nil
+		dst.IncidentFieldOneOfStatus = nil
+		dst.IncidentFieldOneOfSubsystemName = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(IncidentFieldOneOf)")
 	} else if match == 1 {
@@ -324,48 +324,48 @@ func (dst *IncidentFieldOneOf) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src IncidentFieldOneOf) MarshalJSON() ([]byte, error) {
-	if src.IncidentFieldOneOfOneOf != nil {
-		return json.Marshal(&src.IncidentFieldOneOfOneOf)
+	if src.IncidentFieldOneOfApplicationName != nil {
+		return json.Marshal(&src.IncidentFieldOneOfApplicationName)
 	}
 
-	if src.IncidentFieldOneOfOneOf1 != nil {
-		return json.Marshal(&src.IncidentFieldOneOfOneOf1)
+	if src.IncidentFieldOneOfClosedAt != nil {
+		return json.Marshal(&src.IncidentFieldOneOfClosedAt)
 	}
 
-	if src.IncidentFieldOneOfOneOf10 != nil {
-		return json.Marshal(&src.IncidentFieldOneOfOneOf10)
+	if src.IncidentFieldOneOfCreatedAt != nil {
+		return json.Marshal(&src.IncidentFieldOneOfCreatedAt)
 	}
 
-	if src.IncidentFieldOneOfOneOf2 != nil {
-		return json.Marshal(&src.IncidentFieldOneOfOneOf2)
+	if src.IncidentFieldOneOfDuration != nil {
+		return json.Marshal(&src.IncidentFieldOneOfDuration)
 	}
 
-	if src.IncidentFieldOneOfOneOf3 != nil {
-		return json.Marshal(&src.IncidentFieldOneOfOneOf3)
+	if src.IncidentFieldOneOfId != nil {
+		return json.Marshal(&src.IncidentFieldOneOfId)
 	}
 
-	if src.IncidentFieldOneOfOneOf4 != nil {
-		return json.Marshal(&src.IncidentFieldOneOfOneOf4)
+	if src.IncidentFieldOneOfLastStateUpdateTime != nil {
+		return json.Marshal(&src.IncidentFieldOneOfLastStateUpdateTime)
 	}
 
-	if src.IncidentFieldOneOfOneOf5 != nil {
-		return json.Marshal(&src.IncidentFieldOneOfOneOf5)
+	if src.IncidentFieldOneOfName != nil {
+		return json.Marshal(&src.IncidentFieldOneOfName)
 	}
 
-	if src.IncidentFieldOneOfOneOf6 != nil {
-		return json.Marshal(&src.IncidentFieldOneOfOneOf6)
+	if src.IncidentFieldOneOfSeverity != nil {
+		return json.Marshal(&src.IncidentFieldOneOfSeverity)
 	}
 
-	if src.IncidentFieldOneOfOneOf7 != nil {
-		return json.Marshal(&src.IncidentFieldOneOfOneOf7)
+	if src.IncidentFieldOneOfState != nil {
+		return json.Marshal(&src.IncidentFieldOneOfState)
 	}
 
-	if src.IncidentFieldOneOfOneOf8 != nil {
-		return json.Marshal(&src.IncidentFieldOneOfOneOf8)
+	if src.IncidentFieldOneOfStatus != nil {
+		return json.Marshal(&src.IncidentFieldOneOfStatus)
 	}
 
-	if src.IncidentFieldOneOfOneOf9 != nil {
-		return json.Marshal(&src.IncidentFieldOneOfOneOf9)
+	if src.IncidentFieldOneOfSubsystemName != nil {
+		return json.Marshal(&src.IncidentFieldOneOfSubsystemName)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -376,48 +376,48 @@ func (obj *IncidentFieldOneOf) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.IncidentFieldOneOfOneOf != nil {
-		return obj.IncidentFieldOneOfOneOf
+	if obj.IncidentFieldOneOfApplicationName != nil {
+		return obj.IncidentFieldOneOfApplicationName
 	}
 
-	if obj.IncidentFieldOneOfOneOf1 != nil {
-		return obj.IncidentFieldOneOfOneOf1
+	if obj.IncidentFieldOneOfClosedAt != nil {
+		return obj.IncidentFieldOneOfClosedAt
 	}
 
-	if obj.IncidentFieldOneOfOneOf10 != nil {
-		return obj.IncidentFieldOneOfOneOf10
+	if obj.IncidentFieldOneOfCreatedAt != nil {
+		return obj.IncidentFieldOneOfCreatedAt
 	}
 
-	if obj.IncidentFieldOneOfOneOf2 != nil {
-		return obj.IncidentFieldOneOfOneOf2
+	if obj.IncidentFieldOneOfDuration != nil {
+		return obj.IncidentFieldOneOfDuration
 	}
 
-	if obj.IncidentFieldOneOfOneOf3 != nil {
-		return obj.IncidentFieldOneOfOneOf3
+	if obj.IncidentFieldOneOfId != nil {
+		return obj.IncidentFieldOneOfId
 	}
 
-	if obj.IncidentFieldOneOfOneOf4 != nil {
-		return obj.IncidentFieldOneOfOneOf4
+	if obj.IncidentFieldOneOfLastStateUpdateTime != nil {
+		return obj.IncidentFieldOneOfLastStateUpdateTime
 	}
 
-	if obj.IncidentFieldOneOfOneOf5 != nil {
-		return obj.IncidentFieldOneOfOneOf5
+	if obj.IncidentFieldOneOfName != nil {
+		return obj.IncidentFieldOneOfName
 	}
 
-	if obj.IncidentFieldOneOfOneOf6 != nil {
-		return obj.IncidentFieldOneOfOneOf6
+	if obj.IncidentFieldOneOfSeverity != nil {
+		return obj.IncidentFieldOneOfSeverity
 	}
 
-	if obj.IncidentFieldOneOfOneOf7 != nil {
-		return obj.IncidentFieldOneOfOneOf7
+	if obj.IncidentFieldOneOfState != nil {
+		return obj.IncidentFieldOneOfState
 	}
 
-	if obj.IncidentFieldOneOfOneOf8 != nil {
-		return obj.IncidentFieldOneOfOneOf8
+	if obj.IncidentFieldOneOfStatus != nil {
+		return obj.IncidentFieldOneOfStatus
 	}
 
-	if obj.IncidentFieldOneOfOneOf9 != nil {
-		return obj.IncidentFieldOneOfOneOf9
+	if obj.IncidentFieldOneOfSubsystemName != nil {
+		return obj.IncidentFieldOneOfSubsystemName
 	}
 
 	// all schemas are nil
@@ -426,48 +426,48 @@ func (obj *IncidentFieldOneOf) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj IncidentFieldOneOf) GetActualInstanceValue() (interface{}) {
-	if obj.IncidentFieldOneOfOneOf != nil {
-		return *obj.IncidentFieldOneOfOneOf
+	if obj.IncidentFieldOneOfApplicationName != nil {
+		return *obj.IncidentFieldOneOfApplicationName
 	}
 
-	if obj.IncidentFieldOneOfOneOf1 != nil {
-		return *obj.IncidentFieldOneOfOneOf1
+	if obj.IncidentFieldOneOfClosedAt != nil {
+		return *obj.IncidentFieldOneOfClosedAt
 	}
 
-	if obj.IncidentFieldOneOfOneOf10 != nil {
-		return *obj.IncidentFieldOneOfOneOf10
+	if obj.IncidentFieldOneOfCreatedAt != nil {
+		return *obj.IncidentFieldOneOfCreatedAt
 	}
 
-	if obj.IncidentFieldOneOfOneOf2 != nil {
-		return *obj.IncidentFieldOneOfOneOf2
+	if obj.IncidentFieldOneOfDuration != nil {
+		return *obj.IncidentFieldOneOfDuration
 	}
 
-	if obj.IncidentFieldOneOfOneOf3 != nil {
-		return *obj.IncidentFieldOneOfOneOf3
+	if obj.IncidentFieldOneOfId != nil {
+		return *obj.IncidentFieldOneOfId
 	}
 
-	if obj.IncidentFieldOneOfOneOf4 != nil {
-		return *obj.IncidentFieldOneOfOneOf4
+	if obj.IncidentFieldOneOfLastStateUpdateTime != nil {
+		return *obj.IncidentFieldOneOfLastStateUpdateTime
 	}
 
-	if obj.IncidentFieldOneOfOneOf5 != nil {
-		return *obj.IncidentFieldOneOfOneOf5
+	if obj.IncidentFieldOneOfName != nil {
+		return *obj.IncidentFieldOneOfName
 	}
 
-	if obj.IncidentFieldOneOfOneOf6 != nil {
-		return *obj.IncidentFieldOneOfOneOf6
+	if obj.IncidentFieldOneOfSeverity != nil {
+		return *obj.IncidentFieldOneOfSeverity
 	}
 
-	if obj.IncidentFieldOneOfOneOf7 != nil {
-		return *obj.IncidentFieldOneOfOneOf7
+	if obj.IncidentFieldOneOfState != nil {
+		return *obj.IncidentFieldOneOfState
 	}
 
-	if obj.IncidentFieldOneOfOneOf8 != nil {
-		return *obj.IncidentFieldOneOfOneOf8
+	if obj.IncidentFieldOneOfStatus != nil {
+		return *obj.IncidentFieldOneOfStatus
 	}
 
-	if obj.IncidentFieldOneOfOneOf9 != nil {
-		return *obj.IncidentFieldOneOfOneOf9
+	if obj.IncidentFieldOneOfSubsystemName != nil {
+		return *obj.IncidentFieldOneOfSubsystemName
 	}
 
 	// all schemas are nil

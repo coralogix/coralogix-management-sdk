@@ -12,162 +12,79 @@ package alert_scheduler_rule_service
 
 import (
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
-// RecurringDynamic - struct for RecurringDynamic
+// checks if the RecurringDynamic type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RecurringDynamic{}
+
+// RecurringDynamic struct for RecurringDynamic
 type RecurringDynamic struct {
-	RecurringDynamicOneOf *RecurringDynamicOneOf
-	RecurringDynamicOneOf1 *RecurringDynamicOneOf1
-	RecurringDynamicOneOf2 *RecurringDynamicOneOf2
+	Dynamic *RecurringDynamic `json:"dynamic,omitempty"`
 }
 
-// RecurringDynamicOneOfAsRecurringDynamic is a convenience function that returns RecurringDynamicOneOf wrapped in RecurringDynamic
-func RecurringDynamicOneOfAsRecurringDynamic(v *RecurringDynamicOneOf) RecurringDynamic {
-	return RecurringDynamic{
-		RecurringDynamicOneOf: v,
-	}
+// NewRecurringDynamic instantiates a new RecurringDynamic object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewRecurringDynamic() *RecurringDynamic {
+	this := RecurringDynamic{}
+	return &this
 }
 
-// RecurringDynamicOneOf1AsRecurringDynamic is a convenience function that returns RecurringDynamicOneOf1 wrapped in RecurringDynamic
-func RecurringDynamicOneOf1AsRecurringDynamic(v *RecurringDynamicOneOf1) RecurringDynamic {
-	return RecurringDynamic{
-		RecurringDynamicOneOf1: v,
-	}
+// NewRecurringDynamicWithDefaults instantiates a new RecurringDynamic object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewRecurringDynamicWithDefaults() *RecurringDynamic {
+	this := RecurringDynamic{}
+	return &this
 }
 
-// RecurringDynamicOneOf2AsRecurringDynamic is a convenience function that returns RecurringDynamicOneOf2 wrapped in RecurringDynamic
-func RecurringDynamicOneOf2AsRecurringDynamic(v *RecurringDynamicOneOf2) RecurringDynamic {
-	return RecurringDynamic{
-		RecurringDynamicOneOf2: v,
+// GetDynamic returns the Dynamic field value if set, zero value otherwise.
+func (o *RecurringDynamic) GetDynamic() RecurringDynamic {
+	if o == nil || IsNil(o.Dynamic) {
+		var ret RecurringDynamic
+		return ret
 	}
+	return *o.Dynamic
 }
 
-
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *RecurringDynamic) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into RecurringDynamicOneOf
-	err = newStrictDecoder(data).Decode(&dst.RecurringDynamicOneOf)
-	if err == nil {
-		jsonRecurringDynamicOneOf, _ := json.Marshal(dst.RecurringDynamicOneOf)
-		if string(jsonRecurringDynamicOneOf) == "{}" { // empty struct
-			dst.RecurringDynamicOneOf = nil
-		} else {
-			if err = validator.Validate(dst.RecurringDynamicOneOf); err != nil {
-				dst.RecurringDynamicOneOf = nil
-			} else {
-				match++
-			}
-		}
-	} else {
-		dst.RecurringDynamicOneOf = nil
+// GetDynamicOk returns a tuple with the Dynamic field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RecurringDynamic) GetDynamicOk() (*RecurringDynamic, bool) {
+	if o == nil || IsNil(o.Dynamic) {
+		return nil, false
 	}
-
-	// try to unmarshal data into RecurringDynamicOneOf1
-	err = newStrictDecoder(data).Decode(&dst.RecurringDynamicOneOf1)
-	if err == nil {
-		jsonRecurringDynamicOneOf1, _ := json.Marshal(dst.RecurringDynamicOneOf1)
-		if string(jsonRecurringDynamicOneOf1) == "{}" { // empty struct
-			dst.RecurringDynamicOneOf1 = nil
-		} else {
-			if err = validator.Validate(dst.RecurringDynamicOneOf1); err != nil {
-				dst.RecurringDynamicOneOf1 = nil
-			} else {
-				match++
-			}
-		}
-	} else {
-		dst.RecurringDynamicOneOf1 = nil
-	}
-
-	// try to unmarshal data into RecurringDynamicOneOf2
-	err = newStrictDecoder(data).Decode(&dst.RecurringDynamicOneOf2)
-	if err == nil {
-		jsonRecurringDynamicOneOf2, _ := json.Marshal(dst.RecurringDynamicOneOf2)
-		if string(jsonRecurringDynamicOneOf2) == "{}" { // empty struct
-			dst.RecurringDynamicOneOf2 = nil
-		} else {
-			if err = validator.Validate(dst.RecurringDynamicOneOf2); err != nil {
-				dst.RecurringDynamicOneOf2 = nil
-			} else {
-				match++
-			}
-		}
-	} else {
-		dst.RecurringDynamicOneOf2 = nil
-	}
-
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.RecurringDynamicOneOf = nil
-		dst.RecurringDynamicOneOf1 = nil
-		dst.RecurringDynamicOneOf2 = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(RecurringDynamic)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("data failed to match schemas in oneOf(RecurringDynamic)")
-	}
+	return o.Dynamic, true
 }
 
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src RecurringDynamic) MarshalJSON() ([]byte, error) {
-	if src.RecurringDynamicOneOf != nil {
-		return json.Marshal(&src.RecurringDynamicOneOf)
+// HasDynamic returns a boolean if a field has been set.
+func (o *RecurringDynamic) HasDynamic() bool {
+	if o != nil && !IsNil(o.Dynamic) {
+		return true
 	}
 
-	if src.RecurringDynamicOneOf1 != nil {
-		return json.Marshal(&src.RecurringDynamicOneOf1)
-	}
-
-	if src.RecurringDynamicOneOf2 != nil {
-		return json.Marshal(&src.RecurringDynamicOneOf2)
-	}
-
-	return nil, nil // no data in oneOf schemas
+	return false
 }
 
-// Get the actual instance
-func (obj *RecurringDynamic) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.RecurringDynamicOneOf != nil {
-		return obj.RecurringDynamicOneOf
-	}
-
-	if obj.RecurringDynamicOneOf1 != nil {
-		return obj.RecurringDynamicOneOf1
-	}
-
-	if obj.RecurringDynamicOneOf2 != nil {
-		return obj.RecurringDynamicOneOf2
-	}
-
-	// all schemas are nil
-	return nil
+// SetDynamic gets a reference to the given RecurringDynamic and assigns it to the Dynamic field.
+func (o *RecurringDynamic) SetDynamic(v RecurringDynamic) {
+	o.Dynamic = &v
 }
 
-// Get the actual instance value
-func (obj RecurringDynamic) GetActualInstanceValue() (interface{}) {
-	if obj.RecurringDynamicOneOf != nil {
-		return *obj.RecurringDynamicOneOf
+func (o RecurringDynamic) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
+	return json.Marshal(toSerialize)
+}
 
-	if obj.RecurringDynamicOneOf1 != nil {
-		return *obj.RecurringDynamicOneOf1
+func (o RecurringDynamic) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Dynamic) {
+		toSerialize["dynamic"] = o.Dynamic
 	}
-
-	if obj.RecurringDynamicOneOf2 != nil {
-		return *obj.RecurringDynamicOneOf2
-	}
-
-	// all schemas are nil
-	return nil
+	return toSerialize, nil
 }
 
 type NullableRecurringDynamic struct {

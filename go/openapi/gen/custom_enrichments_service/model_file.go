@@ -18,21 +18,21 @@ import (
 
 // File - struct for File
 type File struct {
-	File1 *File1
-	File2 *File2
+	FileBinary *FileBinary
+	FileTextual *FileTextual
 }
 
-// File1AsFile is a convenience function that returns File1 wrapped in File
-func File1AsFile(v *File1) File {
+// FileBinaryAsFile is a convenience function that returns FileBinary wrapped in File
+func FileBinaryAsFile(v *FileBinary) File {
 	return File{
-		File1: v,
+		FileBinary: v,
 	}
 }
 
-// File2AsFile is a convenience function that returns File2 wrapped in File
-func File2AsFile(v *File2) File {
+// FileTextualAsFile is a convenience function that returns FileTextual wrapped in File
+func FileTextualAsFile(v *FileTextual) File {
 	return File{
-		File2: v,
+		FileTextual: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func File2AsFile(v *File2) File {
 func (dst *File) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into File1
-	err = newStrictDecoder(data).Decode(&dst.File1)
+	// try to unmarshal data into FileBinary
+	err = newStrictDecoder(data).Decode(&dst.FileBinary)
 	if err == nil {
-		jsonFile1, _ := json.Marshal(dst.File1)
-		if string(jsonFile1) == "{}" { // empty struct
-			dst.File1 = nil
+		jsonFileBinary, _ := json.Marshal(dst.FileBinary)
+		if string(jsonFileBinary) == "{}" { // empty struct
+			dst.FileBinary = nil
 		} else {
-			if err = validator.Validate(dst.File1); err != nil {
-				dst.File1 = nil
+			if err = validator.Validate(dst.FileBinary); err != nil {
+				dst.FileBinary = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.File1 = nil
+		dst.FileBinary = nil
 	}
 
-	// try to unmarshal data into File2
-	err = newStrictDecoder(data).Decode(&dst.File2)
+	// try to unmarshal data into FileTextual
+	err = newStrictDecoder(data).Decode(&dst.FileTextual)
 	if err == nil {
-		jsonFile2, _ := json.Marshal(dst.File2)
-		if string(jsonFile2) == "{}" { // empty struct
-			dst.File2 = nil
+		jsonFileTextual, _ := json.Marshal(dst.FileTextual)
+		if string(jsonFileTextual) == "{}" { // empty struct
+			dst.FileTextual = nil
 		} else {
-			if err = validator.Validate(dst.File2); err != nil {
-				dst.File2 = nil
+			if err = validator.Validate(dst.FileTextual); err != nil {
+				dst.FileTextual = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.File2 = nil
+		dst.FileTextual = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.File1 = nil
-		dst.File2 = nil
+		dst.FileBinary = nil
+		dst.FileTextual = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(File)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *File) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src File) MarshalJSON() ([]byte, error) {
-	if src.File1 != nil {
-		return json.Marshal(&src.File1)
+	if src.FileBinary != nil {
+		return json.Marshal(&src.FileBinary)
 	}
 
-	if src.File2 != nil {
-		return json.Marshal(&src.File2)
+	if src.FileTextual != nil {
+		return json.Marshal(&src.FileTextual)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *File) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.File1 != nil {
-		return obj.File1
+	if obj.FileBinary != nil {
+		return obj.FileBinary
 	}
 
-	if obj.File2 != nil {
-		return obj.File2
+	if obj.FileTextual != nil {
+		return obj.FileTextual
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *File) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj File) GetActualInstanceValue() (interface{}) {
-	if obj.File1 != nil {
-		return *obj.File1
+	if obj.FileBinary != nil {
+		return *obj.FileBinary
 	}
 
-	if obj.File2 != nil {
-		return *obj.File2
+	if obj.FileTextual != nil {
+		return *obj.FileTextual
 	}
 
 	// all schemas are nil

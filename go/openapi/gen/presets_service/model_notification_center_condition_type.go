@@ -18,21 +18,21 @@ import (
 
 // NotificationCenterConditionType - struct for NotificationCenterConditionType
 type NotificationCenterConditionType struct {
-	NotificationCenterConditionTypeOneOf *NotificationCenterConditionTypeOneOf
-	NotificationCenterConditionTypeOneOf1 *NotificationCenterConditionTypeOneOf1
+	ConditionTypeMatchEntityType *ConditionTypeMatchEntityType
+	ConditionTypeMatchEntityTypeAndSubType *ConditionTypeMatchEntityTypeAndSubType
 }
 
-// NotificationCenterConditionTypeOneOfAsNotificationCenterConditionType is a convenience function that returns NotificationCenterConditionTypeOneOf wrapped in NotificationCenterConditionType
-func NotificationCenterConditionTypeOneOfAsNotificationCenterConditionType(v *NotificationCenterConditionTypeOneOf) NotificationCenterConditionType {
+// ConditionTypeMatchEntityTypeAsNotificationCenterConditionType is a convenience function that returns ConditionTypeMatchEntityType wrapped in NotificationCenterConditionType
+func ConditionTypeMatchEntityTypeAsNotificationCenterConditionType(v *ConditionTypeMatchEntityType) NotificationCenterConditionType {
 	return NotificationCenterConditionType{
-		NotificationCenterConditionTypeOneOf: v,
+		ConditionTypeMatchEntityType: v,
 	}
 }
 
-// NotificationCenterConditionTypeOneOf1AsNotificationCenterConditionType is a convenience function that returns NotificationCenterConditionTypeOneOf1 wrapped in NotificationCenterConditionType
-func NotificationCenterConditionTypeOneOf1AsNotificationCenterConditionType(v *NotificationCenterConditionTypeOneOf1) NotificationCenterConditionType {
+// ConditionTypeMatchEntityTypeAndSubTypeAsNotificationCenterConditionType is a convenience function that returns ConditionTypeMatchEntityTypeAndSubType wrapped in NotificationCenterConditionType
+func ConditionTypeMatchEntityTypeAndSubTypeAsNotificationCenterConditionType(v *ConditionTypeMatchEntityTypeAndSubType) NotificationCenterConditionType {
 	return NotificationCenterConditionType{
-		NotificationCenterConditionTypeOneOf1: v,
+		ConditionTypeMatchEntityTypeAndSubType: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func NotificationCenterConditionTypeOneOf1AsNotificationCenterConditionType(v *N
 func (dst *NotificationCenterConditionType) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into NotificationCenterConditionTypeOneOf
-	err = newStrictDecoder(data).Decode(&dst.NotificationCenterConditionTypeOneOf)
+	// try to unmarshal data into ConditionTypeMatchEntityType
+	err = newStrictDecoder(data).Decode(&dst.ConditionTypeMatchEntityType)
 	if err == nil {
-		jsonNotificationCenterConditionTypeOneOf, _ := json.Marshal(dst.NotificationCenterConditionTypeOneOf)
-		if string(jsonNotificationCenterConditionTypeOneOf) == "{}" { // empty struct
-			dst.NotificationCenterConditionTypeOneOf = nil
+		jsonConditionTypeMatchEntityType, _ := json.Marshal(dst.ConditionTypeMatchEntityType)
+		if string(jsonConditionTypeMatchEntityType) == "{}" { // empty struct
+			dst.ConditionTypeMatchEntityType = nil
 		} else {
-			if err = validator.Validate(dst.NotificationCenterConditionTypeOneOf); err != nil {
-				dst.NotificationCenterConditionTypeOneOf = nil
+			if err = validator.Validate(dst.ConditionTypeMatchEntityType); err != nil {
+				dst.ConditionTypeMatchEntityType = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.NotificationCenterConditionTypeOneOf = nil
+		dst.ConditionTypeMatchEntityType = nil
 	}
 
-	// try to unmarshal data into NotificationCenterConditionTypeOneOf1
-	err = newStrictDecoder(data).Decode(&dst.NotificationCenterConditionTypeOneOf1)
+	// try to unmarshal data into ConditionTypeMatchEntityTypeAndSubType
+	err = newStrictDecoder(data).Decode(&dst.ConditionTypeMatchEntityTypeAndSubType)
 	if err == nil {
-		jsonNotificationCenterConditionTypeOneOf1, _ := json.Marshal(dst.NotificationCenterConditionTypeOneOf1)
-		if string(jsonNotificationCenterConditionTypeOneOf1) == "{}" { // empty struct
-			dst.NotificationCenterConditionTypeOneOf1 = nil
+		jsonConditionTypeMatchEntityTypeAndSubType, _ := json.Marshal(dst.ConditionTypeMatchEntityTypeAndSubType)
+		if string(jsonConditionTypeMatchEntityTypeAndSubType) == "{}" { // empty struct
+			dst.ConditionTypeMatchEntityTypeAndSubType = nil
 		} else {
-			if err = validator.Validate(dst.NotificationCenterConditionTypeOneOf1); err != nil {
-				dst.NotificationCenterConditionTypeOneOf1 = nil
+			if err = validator.Validate(dst.ConditionTypeMatchEntityTypeAndSubType); err != nil {
+				dst.ConditionTypeMatchEntityTypeAndSubType = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.NotificationCenterConditionTypeOneOf1 = nil
+		dst.ConditionTypeMatchEntityTypeAndSubType = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.NotificationCenterConditionTypeOneOf = nil
-		dst.NotificationCenterConditionTypeOneOf1 = nil
+		dst.ConditionTypeMatchEntityType = nil
+		dst.ConditionTypeMatchEntityTypeAndSubType = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(NotificationCenterConditionType)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *NotificationCenterConditionType) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src NotificationCenterConditionType) MarshalJSON() ([]byte, error) {
-	if src.NotificationCenterConditionTypeOneOf != nil {
-		return json.Marshal(&src.NotificationCenterConditionTypeOneOf)
+	if src.ConditionTypeMatchEntityType != nil {
+		return json.Marshal(&src.ConditionTypeMatchEntityType)
 	}
 
-	if src.NotificationCenterConditionTypeOneOf1 != nil {
-		return json.Marshal(&src.NotificationCenterConditionTypeOneOf1)
+	if src.ConditionTypeMatchEntityTypeAndSubType != nil {
+		return json.Marshal(&src.ConditionTypeMatchEntityTypeAndSubType)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *NotificationCenterConditionType) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.NotificationCenterConditionTypeOneOf != nil {
-		return obj.NotificationCenterConditionTypeOneOf
+	if obj.ConditionTypeMatchEntityType != nil {
+		return obj.ConditionTypeMatchEntityType
 	}
 
-	if obj.NotificationCenterConditionTypeOneOf1 != nil {
-		return obj.NotificationCenterConditionTypeOneOf1
+	if obj.ConditionTypeMatchEntityTypeAndSubType != nil {
+		return obj.ConditionTypeMatchEntityTypeAndSubType
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *NotificationCenterConditionType) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj NotificationCenterConditionType) GetActualInstanceValue() (interface{}) {
-	if obj.NotificationCenterConditionTypeOneOf != nil {
-		return *obj.NotificationCenterConditionTypeOneOf
+	if obj.ConditionTypeMatchEntityType != nil {
+		return *obj.ConditionTypeMatchEntityType
 	}
 
-	if obj.NotificationCenterConditionTypeOneOf1 != nil {
-		return *obj.NotificationCenterConditionTypeOneOf1
+	if obj.ConditionTypeMatchEntityTypeAndSubType != nil {
+		return *obj.ConditionTypeMatchEntityTypeAndSubType
 	}
 
 	// all schemas are nil

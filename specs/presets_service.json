@@ -480,7 +480,6 @@
             "in": "query",
             "name": "entity_type",
             "schema": {
-              "example": "ALERTS",
               "type": "string",
               "enum": [
                 "ENTITY_TYPE_UNSPECIFIED",
@@ -507,15 +506,15 @@
         "x-codeSamples": [
           {
             "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:defaultSummaryGet?connector_type=SOME_STRING_VALUE&entity_type=ALERTS';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:defaultSummaryGet?connector_type=SOME_STRING_VALUE&entity_type=SOME_STRING_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:defaultSummaryGet\"\n\nquerystring = {\"connector_type\":\"SOME_STRING_VALUE\",\"entity_type\":\"ALERTS\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:defaultSummaryGet\"\n\nquerystring = {\"connector_type\":\"SOME_STRING_VALUE\",\"entity_type\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
           },
           {
             "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:defaultSummaryGet?connector_type=SOME_STRING_VALUE&entity_type=ALERTS' \\\n  --header 'Authorization: Bearer <API_KEY>'"
+            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:defaultSummaryGet?connector_type=SOME_STRING_VALUE&entity_type=SOME_STRING_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
           }
         ]
       }
@@ -551,7 +550,6 @@
             "in": "query",
             "name": "entity_type",
             "schema": {
-              "example": "ALERTS",
               "type": "string",
               "enum": [
                 "ENTITY_TYPE_UNSPECIFIED",
@@ -578,15 +576,15 @@
         "x-codeSamples": [
           {
             "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:summariesList?connector_type=SOME_STRING_VALUE&entity_type=ALERTS';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:summariesList?connector_type=SOME_STRING_VALUE&entity_type=SOME_STRING_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:summariesList\"\n\nquerystring = {\"connector_type\":\"SOME_STRING_VALUE\",\"entity_type\":\"ALERTS\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:summariesList\"\n\nquerystring = {\"connector_type\":\"SOME_STRING_VALUE\",\"entity_type\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
           },
           {
             "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:summariesList?connector_type=SOME_STRING_VALUE&entity_type=ALERTS' \\\n  --header 'Authorization: Bearer <API_KEY>'"
+            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:summariesList?connector_type=SOME_STRING_VALUE&entity_type=SOME_STRING_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
           }
         ]
       }
@@ -622,7 +620,6 @@
             "in": "query",
             "name": "entity_type",
             "schema": {
-              "example": "ALERTS",
               "type": "string",
               "enum": [
                 "ENTITY_TYPE_UNSPECIFIED",
@@ -649,15 +646,15 @@
         "x-codeSamples": [
           {
             "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:systemDefaultSummaryGet?connector_type=SOME_STRING_VALUE&entity_type=ALERTS';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:systemDefaultSummaryGet?connector_type=SOME_STRING_VALUE&entity_type=SOME_STRING_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:systemDefaultSummaryGet\"\n\nquerystring = {\"connector_type\":\"SOME_STRING_VALUE\",\"entity_type\":\"ALERTS\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:systemDefaultSummaryGet\"\n\nquerystring = {\"connector_type\":\"SOME_STRING_VALUE\",\"entity_type\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
           },
           {
             "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:systemDefaultSummaryGet?connector_type=SOME_STRING_VALUE&entity_type=ALERTS' \\\n  --header 'Authorization: Bearer <API_KEY>'"
+            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:systemDefaultSummaryGet?connector_type=SOME_STRING_VALUE&entity_type=SOME_STRING_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
           }
         ]
       }
@@ -688,6 +685,51 @@
           }
         }
       },
+      "ColorsByAggregation": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/ColorsByAggregation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByGroupBy": {
+        "type": "object",
+        "properties": {
+          "groupBy": {
+            "$ref": "#/components/schemas/ColorsByGroupBy"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByStack": {
+        "type": "object",
+        "properties": {
+          "stack": {
+            "$ref": "#/components/schemas/ColorsByStack"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConditionTypeMatchEntityType": {
+        "type": "object",
+        "properties": {
+          "matchEntityType": {
+            "$ref": "#/components/schemas/MatchEntityTypeCondition"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConditionTypeMatchEntityTypeAndSubType": {
+        "type": "object",
+        "properties": {
+          "matchEntityTypeAndSubType": {
+            "$ref": "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
+          }
+        },
+        "additionalProperties": false
+      },
       "ConfigOverrides": {
         "type": "object",
         "properties": {
@@ -700,8 +742,7 @@
           "payloadType": {
             "type": "string"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "ConnectorType": {
         "type": "string",
@@ -744,50 +785,56 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "multipleValues": {
-                "$ref": "#/components/schemas/MultipleValues"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "filters": {
-                "$ref": "#/components/schemas/Filters"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
+      },
+      "FilterPathAndValuesFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "FilterPathAndValuesMultipleValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
       },
       "Filters": {
         "externalDocs": {
@@ -935,8 +982,7 @@
           "entityType",
           "configOverrides",
           "name"
-        ],
-        "additionalProperties": false
+        ]
       },
       "PresetSummary": {
         "externalDocs": {
@@ -982,8 +1028,7 @@
             "type": "string",
             "format": "date-time"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "PresetType": {
         "type": "string",
@@ -1013,6 +1058,24 @@
       "SetPresetAsDefaultResponse": {
         "type": "object"
       },
+      "YAxisViewByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/YAxisViewByCategory"
+          }
+        },
+        "additionalProperties": false
+      },
+      "YAxisViewByValue": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/YAxisViewByValue"
+          }
+        },
+        "additionalProperties": false
+      },
       "common.Group": {
         "type": "object",
         "properties": {
@@ -1041,22 +1104,10 @@
       "notification_center.ConditionType": {
         "oneOf": [
           {
-            "type": "object",
-            "properties": {
-              "matchEntityType": {
-                "$ref": "#/components/schemas/MatchEntityTypeCondition"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/ConditionTypeMatchEntityType"
           },
           {
-            "type": "object",
-            "properties": {
-              "matchEntityTypeAndSubType": {
-                "$ref": "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/ConditionTypeMatchEntityTypeAndSubType"
           }
         ]
       },

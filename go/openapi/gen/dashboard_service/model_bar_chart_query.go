@@ -18,37 +18,37 @@ import (
 
 // BarChartQuery - struct for BarChartQuery
 type BarChartQuery struct {
-	BarChartQueryOneOf *BarChartQueryOneOf
-	BarChartQueryOneOf1 *BarChartQueryOneOf1
-	BarChartQueryOneOf2 *BarChartQueryOneOf2
-	BarChartQueryOneOf3 *BarChartQueryOneOf3
+	QueryDataprime *QueryDataprime
+	QueryLogs *QueryLogs
+	QueryMetrics *QueryMetrics
+	QuerySpans *QuerySpans
 }
 
-// BarChartQueryOneOfAsBarChartQuery is a convenience function that returns BarChartQueryOneOf wrapped in BarChartQuery
-func BarChartQueryOneOfAsBarChartQuery(v *BarChartQueryOneOf) BarChartQuery {
+// QueryDataprimeAsBarChartQuery is a convenience function that returns QueryDataprime wrapped in BarChartQuery
+func QueryDataprimeAsBarChartQuery(v *QueryDataprime) BarChartQuery {
 	return BarChartQuery{
-		BarChartQueryOneOf: v,
+		QueryDataprime: v,
 	}
 }
 
-// BarChartQueryOneOf1AsBarChartQuery is a convenience function that returns BarChartQueryOneOf1 wrapped in BarChartQuery
-func BarChartQueryOneOf1AsBarChartQuery(v *BarChartQueryOneOf1) BarChartQuery {
+// QueryLogsAsBarChartQuery is a convenience function that returns QueryLogs wrapped in BarChartQuery
+func QueryLogsAsBarChartQuery(v *QueryLogs) BarChartQuery {
 	return BarChartQuery{
-		BarChartQueryOneOf1: v,
+		QueryLogs: v,
 	}
 }
 
-// BarChartQueryOneOf2AsBarChartQuery is a convenience function that returns BarChartQueryOneOf2 wrapped in BarChartQuery
-func BarChartQueryOneOf2AsBarChartQuery(v *BarChartQueryOneOf2) BarChartQuery {
+// QueryMetricsAsBarChartQuery is a convenience function that returns QueryMetrics wrapped in BarChartQuery
+func QueryMetricsAsBarChartQuery(v *QueryMetrics) BarChartQuery {
 	return BarChartQuery{
-		BarChartQueryOneOf2: v,
+		QueryMetrics: v,
 	}
 }
 
-// BarChartQueryOneOf3AsBarChartQuery is a convenience function that returns BarChartQueryOneOf3 wrapped in BarChartQuery
-func BarChartQueryOneOf3AsBarChartQuery(v *BarChartQueryOneOf3) BarChartQuery {
+// QuerySpansAsBarChartQuery is a convenience function that returns QuerySpans wrapped in BarChartQuery
+func QuerySpansAsBarChartQuery(v *QuerySpans) BarChartQuery {
 	return BarChartQuery{
-		BarChartQueryOneOf3: v,
+		QuerySpans: v,
 	}
 }
 
@@ -57,80 +57,80 @@ func BarChartQueryOneOf3AsBarChartQuery(v *BarChartQueryOneOf3) BarChartQuery {
 func (dst *BarChartQuery) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into BarChartQueryOneOf
-	err = newStrictDecoder(data).Decode(&dst.BarChartQueryOneOf)
+	// try to unmarshal data into QueryDataprime
+	err = newStrictDecoder(data).Decode(&dst.QueryDataprime)
 	if err == nil {
-		jsonBarChartQueryOneOf, _ := json.Marshal(dst.BarChartQueryOneOf)
-		if string(jsonBarChartQueryOneOf) == "{}" { // empty struct
-			dst.BarChartQueryOneOf = nil
+		jsonQueryDataprime, _ := json.Marshal(dst.QueryDataprime)
+		if string(jsonQueryDataprime) == "{}" { // empty struct
+			dst.QueryDataprime = nil
 		} else {
-			if err = validator.Validate(dst.BarChartQueryOneOf); err != nil {
-				dst.BarChartQueryOneOf = nil
+			if err = validator.Validate(dst.QueryDataprime); err != nil {
+				dst.QueryDataprime = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.BarChartQueryOneOf = nil
+		dst.QueryDataprime = nil
 	}
 
-	// try to unmarshal data into BarChartQueryOneOf1
-	err = newStrictDecoder(data).Decode(&dst.BarChartQueryOneOf1)
+	// try to unmarshal data into QueryLogs
+	err = newStrictDecoder(data).Decode(&dst.QueryLogs)
 	if err == nil {
-		jsonBarChartQueryOneOf1, _ := json.Marshal(dst.BarChartQueryOneOf1)
-		if string(jsonBarChartQueryOneOf1) == "{}" { // empty struct
-			dst.BarChartQueryOneOf1 = nil
+		jsonQueryLogs, _ := json.Marshal(dst.QueryLogs)
+		if string(jsonQueryLogs) == "{}" { // empty struct
+			dst.QueryLogs = nil
 		} else {
-			if err = validator.Validate(dst.BarChartQueryOneOf1); err != nil {
-				dst.BarChartQueryOneOf1 = nil
+			if err = validator.Validate(dst.QueryLogs); err != nil {
+				dst.QueryLogs = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.BarChartQueryOneOf1 = nil
+		dst.QueryLogs = nil
 	}
 
-	// try to unmarshal data into BarChartQueryOneOf2
-	err = newStrictDecoder(data).Decode(&dst.BarChartQueryOneOf2)
+	// try to unmarshal data into QueryMetrics
+	err = newStrictDecoder(data).Decode(&dst.QueryMetrics)
 	if err == nil {
-		jsonBarChartQueryOneOf2, _ := json.Marshal(dst.BarChartQueryOneOf2)
-		if string(jsonBarChartQueryOneOf2) == "{}" { // empty struct
-			dst.BarChartQueryOneOf2 = nil
+		jsonQueryMetrics, _ := json.Marshal(dst.QueryMetrics)
+		if string(jsonQueryMetrics) == "{}" { // empty struct
+			dst.QueryMetrics = nil
 		} else {
-			if err = validator.Validate(dst.BarChartQueryOneOf2); err != nil {
-				dst.BarChartQueryOneOf2 = nil
+			if err = validator.Validate(dst.QueryMetrics); err != nil {
+				dst.QueryMetrics = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.BarChartQueryOneOf2 = nil
+		dst.QueryMetrics = nil
 	}
 
-	// try to unmarshal data into BarChartQueryOneOf3
-	err = newStrictDecoder(data).Decode(&dst.BarChartQueryOneOf3)
+	// try to unmarshal data into QuerySpans
+	err = newStrictDecoder(data).Decode(&dst.QuerySpans)
 	if err == nil {
-		jsonBarChartQueryOneOf3, _ := json.Marshal(dst.BarChartQueryOneOf3)
-		if string(jsonBarChartQueryOneOf3) == "{}" { // empty struct
-			dst.BarChartQueryOneOf3 = nil
+		jsonQuerySpans, _ := json.Marshal(dst.QuerySpans)
+		if string(jsonQuerySpans) == "{}" { // empty struct
+			dst.QuerySpans = nil
 		} else {
-			if err = validator.Validate(dst.BarChartQueryOneOf3); err != nil {
-				dst.BarChartQueryOneOf3 = nil
+			if err = validator.Validate(dst.QuerySpans); err != nil {
+				dst.QuerySpans = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.BarChartQueryOneOf3 = nil
+		dst.QuerySpans = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.BarChartQueryOneOf = nil
-		dst.BarChartQueryOneOf1 = nil
-		dst.BarChartQueryOneOf2 = nil
-		dst.BarChartQueryOneOf3 = nil
+		dst.QueryDataprime = nil
+		dst.QueryLogs = nil
+		dst.QueryMetrics = nil
+		dst.QuerySpans = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(BarChartQuery)")
 	} else if match == 1 {
@@ -142,20 +142,20 @@ func (dst *BarChartQuery) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src BarChartQuery) MarshalJSON() ([]byte, error) {
-	if src.BarChartQueryOneOf != nil {
-		return json.Marshal(&src.BarChartQueryOneOf)
+	if src.QueryDataprime != nil {
+		return json.Marshal(&src.QueryDataprime)
 	}
 
-	if src.BarChartQueryOneOf1 != nil {
-		return json.Marshal(&src.BarChartQueryOneOf1)
+	if src.QueryLogs != nil {
+		return json.Marshal(&src.QueryLogs)
 	}
 
-	if src.BarChartQueryOneOf2 != nil {
-		return json.Marshal(&src.BarChartQueryOneOf2)
+	if src.QueryMetrics != nil {
+		return json.Marshal(&src.QueryMetrics)
 	}
 
-	if src.BarChartQueryOneOf3 != nil {
-		return json.Marshal(&src.BarChartQueryOneOf3)
+	if src.QuerySpans != nil {
+		return json.Marshal(&src.QuerySpans)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -166,20 +166,20 @@ func (obj *BarChartQuery) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.BarChartQueryOneOf != nil {
-		return obj.BarChartQueryOneOf
+	if obj.QueryDataprime != nil {
+		return obj.QueryDataprime
 	}
 
-	if obj.BarChartQueryOneOf1 != nil {
-		return obj.BarChartQueryOneOf1
+	if obj.QueryLogs != nil {
+		return obj.QueryLogs
 	}
 
-	if obj.BarChartQueryOneOf2 != nil {
-		return obj.BarChartQueryOneOf2
+	if obj.QueryMetrics != nil {
+		return obj.QueryMetrics
 	}
 
-	if obj.BarChartQueryOneOf3 != nil {
-		return obj.BarChartQueryOneOf3
+	if obj.QuerySpans != nil {
+		return obj.QuerySpans
 	}
 
 	// all schemas are nil
@@ -188,20 +188,20 @@ func (obj *BarChartQuery) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj BarChartQuery) GetActualInstanceValue() (interface{}) {
-	if obj.BarChartQueryOneOf != nil {
-		return *obj.BarChartQueryOneOf
+	if obj.QueryDataprime != nil {
+		return *obj.QueryDataprime
 	}
 
-	if obj.BarChartQueryOneOf1 != nil {
-		return *obj.BarChartQueryOneOf1
+	if obj.QueryLogs != nil {
+		return *obj.QueryLogs
 	}
 
-	if obj.BarChartQueryOneOf2 != nil {
-		return *obj.BarChartQueryOneOf2
+	if obj.QueryMetrics != nil {
+		return *obj.QueryMetrics
 	}
 
-	if obj.BarChartQueryOneOf3 != nil {
-		return *obj.BarChartQueryOneOf3
+	if obj.QuerySpans != nil {
+		return *obj.QuerySpans
 	}
 
 	// all schemas are nil

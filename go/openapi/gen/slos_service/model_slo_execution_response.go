@@ -18,29 +18,29 @@ import (
 
 // SloExecutionResponse - struct for SloExecutionResponse
 type SloExecutionResponse struct {
-	SloExecutionResponse1 *SloExecutionResponse1
-	SloExecutionResponse2 *SloExecutionResponse2
-	SloExecutionResponse3 *SloExecutionResponse3
+	SloExecutionResponseCreateSloResponse *SloExecutionResponseCreateSloResponse
+	SloExecutionResponseDeleteSloResponse *SloExecutionResponseDeleteSloResponse
+	SloExecutionResponseReplaceSloResponse *SloExecutionResponseReplaceSloResponse
 }
 
-// SloExecutionResponse1AsSloExecutionResponse is a convenience function that returns SloExecutionResponse1 wrapped in SloExecutionResponse
-func SloExecutionResponse1AsSloExecutionResponse(v *SloExecutionResponse1) SloExecutionResponse {
+// SloExecutionResponseCreateSloResponseAsSloExecutionResponse is a convenience function that returns SloExecutionResponseCreateSloResponse wrapped in SloExecutionResponse
+func SloExecutionResponseCreateSloResponseAsSloExecutionResponse(v *SloExecutionResponseCreateSloResponse) SloExecutionResponse {
 	return SloExecutionResponse{
-		SloExecutionResponse1: v,
+		SloExecutionResponseCreateSloResponse: v,
 	}
 }
 
-// SloExecutionResponse2AsSloExecutionResponse is a convenience function that returns SloExecutionResponse2 wrapped in SloExecutionResponse
-func SloExecutionResponse2AsSloExecutionResponse(v *SloExecutionResponse2) SloExecutionResponse {
+// SloExecutionResponseDeleteSloResponseAsSloExecutionResponse is a convenience function that returns SloExecutionResponseDeleteSloResponse wrapped in SloExecutionResponse
+func SloExecutionResponseDeleteSloResponseAsSloExecutionResponse(v *SloExecutionResponseDeleteSloResponse) SloExecutionResponse {
 	return SloExecutionResponse{
-		SloExecutionResponse2: v,
+		SloExecutionResponseDeleteSloResponse: v,
 	}
 }
 
-// SloExecutionResponse3AsSloExecutionResponse is a convenience function that returns SloExecutionResponse3 wrapped in SloExecutionResponse
-func SloExecutionResponse3AsSloExecutionResponse(v *SloExecutionResponse3) SloExecutionResponse {
+// SloExecutionResponseReplaceSloResponseAsSloExecutionResponse is a convenience function that returns SloExecutionResponseReplaceSloResponse wrapped in SloExecutionResponse
+func SloExecutionResponseReplaceSloResponseAsSloExecutionResponse(v *SloExecutionResponseReplaceSloResponse) SloExecutionResponse {
 	return SloExecutionResponse{
-		SloExecutionResponse3: v,
+		SloExecutionResponseReplaceSloResponse: v,
 	}
 }
 
@@ -49,62 +49,62 @@ func SloExecutionResponse3AsSloExecutionResponse(v *SloExecutionResponse3) SloEx
 func (dst *SloExecutionResponse) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into SloExecutionResponse1
-	err = newStrictDecoder(data).Decode(&dst.SloExecutionResponse1)
+	// try to unmarshal data into SloExecutionResponseCreateSloResponse
+	err = newStrictDecoder(data).Decode(&dst.SloExecutionResponseCreateSloResponse)
 	if err == nil {
-		jsonSloExecutionResponse1, _ := json.Marshal(dst.SloExecutionResponse1)
-		if string(jsonSloExecutionResponse1) == "{}" { // empty struct
-			dst.SloExecutionResponse1 = nil
+		jsonSloExecutionResponseCreateSloResponse, _ := json.Marshal(dst.SloExecutionResponseCreateSloResponse)
+		if string(jsonSloExecutionResponseCreateSloResponse) == "{}" { // empty struct
+			dst.SloExecutionResponseCreateSloResponse = nil
 		} else {
-			if err = validator.Validate(dst.SloExecutionResponse1); err != nil {
-				dst.SloExecutionResponse1 = nil
+			if err = validator.Validate(dst.SloExecutionResponseCreateSloResponse); err != nil {
+				dst.SloExecutionResponseCreateSloResponse = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SloExecutionResponse1 = nil
+		dst.SloExecutionResponseCreateSloResponse = nil
 	}
 
-	// try to unmarshal data into SloExecutionResponse2
-	err = newStrictDecoder(data).Decode(&dst.SloExecutionResponse2)
+	// try to unmarshal data into SloExecutionResponseDeleteSloResponse
+	err = newStrictDecoder(data).Decode(&dst.SloExecutionResponseDeleteSloResponse)
 	if err == nil {
-		jsonSloExecutionResponse2, _ := json.Marshal(dst.SloExecutionResponse2)
-		if string(jsonSloExecutionResponse2) == "{}" { // empty struct
-			dst.SloExecutionResponse2 = nil
+		jsonSloExecutionResponseDeleteSloResponse, _ := json.Marshal(dst.SloExecutionResponseDeleteSloResponse)
+		if string(jsonSloExecutionResponseDeleteSloResponse) == "{}" { // empty struct
+			dst.SloExecutionResponseDeleteSloResponse = nil
 		} else {
-			if err = validator.Validate(dst.SloExecutionResponse2); err != nil {
-				dst.SloExecutionResponse2 = nil
+			if err = validator.Validate(dst.SloExecutionResponseDeleteSloResponse); err != nil {
+				dst.SloExecutionResponseDeleteSloResponse = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SloExecutionResponse2 = nil
+		dst.SloExecutionResponseDeleteSloResponse = nil
 	}
 
-	// try to unmarshal data into SloExecutionResponse3
-	err = newStrictDecoder(data).Decode(&dst.SloExecutionResponse3)
+	// try to unmarshal data into SloExecutionResponseReplaceSloResponse
+	err = newStrictDecoder(data).Decode(&dst.SloExecutionResponseReplaceSloResponse)
 	if err == nil {
-		jsonSloExecutionResponse3, _ := json.Marshal(dst.SloExecutionResponse3)
-		if string(jsonSloExecutionResponse3) == "{}" { // empty struct
-			dst.SloExecutionResponse3 = nil
+		jsonSloExecutionResponseReplaceSloResponse, _ := json.Marshal(dst.SloExecutionResponseReplaceSloResponse)
+		if string(jsonSloExecutionResponseReplaceSloResponse) == "{}" { // empty struct
+			dst.SloExecutionResponseReplaceSloResponse = nil
 		} else {
-			if err = validator.Validate(dst.SloExecutionResponse3); err != nil {
-				dst.SloExecutionResponse3 = nil
+			if err = validator.Validate(dst.SloExecutionResponseReplaceSloResponse); err != nil {
+				dst.SloExecutionResponseReplaceSloResponse = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SloExecutionResponse3 = nil
+		dst.SloExecutionResponseReplaceSloResponse = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.SloExecutionResponse1 = nil
-		dst.SloExecutionResponse2 = nil
-		dst.SloExecutionResponse3 = nil
+		dst.SloExecutionResponseCreateSloResponse = nil
+		dst.SloExecutionResponseDeleteSloResponse = nil
+		dst.SloExecutionResponseReplaceSloResponse = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(SloExecutionResponse)")
 	} else if match == 1 {
@@ -116,16 +116,16 @@ func (dst *SloExecutionResponse) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src SloExecutionResponse) MarshalJSON() ([]byte, error) {
-	if src.SloExecutionResponse1 != nil {
-		return json.Marshal(&src.SloExecutionResponse1)
+	if src.SloExecutionResponseCreateSloResponse != nil {
+		return json.Marshal(&src.SloExecutionResponseCreateSloResponse)
 	}
 
-	if src.SloExecutionResponse2 != nil {
-		return json.Marshal(&src.SloExecutionResponse2)
+	if src.SloExecutionResponseDeleteSloResponse != nil {
+		return json.Marshal(&src.SloExecutionResponseDeleteSloResponse)
 	}
 
-	if src.SloExecutionResponse3 != nil {
-		return json.Marshal(&src.SloExecutionResponse3)
+	if src.SloExecutionResponseReplaceSloResponse != nil {
+		return json.Marshal(&src.SloExecutionResponseReplaceSloResponse)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -136,16 +136,16 @@ func (obj *SloExecutionResponse) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.SloExecutionResponse1 != nil {
-		return obj.SloExecutionResponse1
+	if obj.SloExecutionResponseCreateSloResponse != nil {
+		return obj.SloExecutionResponseCreateSloResponse
 	}
 
-	if obj.SloExecutionResponse2 != nil {
-		return obj.SloExecutionResponse2
+	if obj.SloExecutionResponseDeleteSloResponse != nil {
+		return obj.SloExecutionResponseDeleteSloResponse
 	}
 
-	if obj.SloExecutionResponse3 != nil {
-		return obj.SloExecutionResponse3
+	if obj.SloExecutionResponseReplaceSloResponse != nil {
+		return obj.SloExecutionResponseReplaceSloResponse
 	}
 
 	// all schemas are nil
@@ -154,16 +154,16 @@ func (obj *SloExecutionResponse) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj SloExecutionResponse) GetActualInstanceValue() (interface{}) {
-	if obj.SloExecutionResponse1 != nil {
-		return *obj.SloExecutionResponse1
+	if obj.SloExecutionResponseCreateSloResponse != nil {
+		return *obj.SloExecutionResponseCreateSloResponse
 	}
 
-	if obj.SloExecutionResponse2 != nil {
-		return *obj.SloExecutionResponse2
+	if obj.SloExecutionResponseDeleteSloResponse != nil {
+		return *obj.SloExecutionResponseDeleteSloResponse
 	}
 
-	if obj.SloExecutionResponse3 != nil {
-		return *obj.SloExecutionResponse3
+	if obj.SloExecutionResponseReplaceSloResponse != nil {
+		return *obj.SloExecutionResponseReplaceSloResponse
 	}
 
 	// all schemas are nil

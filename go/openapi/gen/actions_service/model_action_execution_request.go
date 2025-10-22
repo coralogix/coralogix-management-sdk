@@ -18,29 +18,29 @@ import (
 
 // ActionExecutionRequest - struct for ActionExecutionRequest
 type ActionExecutionRequest struct {
-	ActionExecutionRequestOneOf *ActionExecutionRequestOneOf
-	ActionExecutionRequestOneOf1 *ActionExecutionRequestOneOf1
-	ActionExecutionRequestOneOf2 *ActionExecutionRequestOneOf2
+	ActionExecutionRequestCreate *ActionExecutionRequestCreate
+	ActionExecutionRequestDelete *ActionExecutionRequestDelete
+	ActionExecutionRequestReplace *ActionExecutionRequestReplace
 }
 
-// ActionExecutionRequestOneOfAsActionExecutionRequest is a convenience function that returns ActionExecutionRequestOneOf wrapped in ActionExecutionRequest
-func ActionExecutionRequestOneOfAsActionExecutionRequest(v *ActionExecutionRequestOneOf) ActionExecutionRequest {
+// ActionExecutionRequestCreateAsActionExecutionRequest is a convenience function that returns ActionExecutionRequestCreate wrapped in ActionExecutionRequest
+func ActionExecutionRequestCreateAsActionExecutionRequest(v *ActionExecutionRequestCreate) ActionExecutionRequest {
 	return ActionExecutionRequest{
-		ActionExecutionRequestOneOf: v,
+		ActionExecutionRequestCreate: v,
 	}
 }
 
-// ActionExecutionRequestOneOf1AsActionExecutionRequest is a convenience function that returns ActionExecutionRequestOneOf1 wrapped in ActionExecutionRequest
-func ActionExecutionRequestOneOf1AsActionExecutionRequest(v *ActionExecutionRequestOneOf1) ActionExecutionRequest {
+// ActionExecutionRequestDeleteAsActionExecutionRequest is a convenience function that returns ActionExecutionRequestDelete wrapped in ActionExecutionRequest
+func ActionExecutionRequestDeleteAsActionExecutionRequest(v *ActionExecutionRequestDelete) ActionExecutionRequest {
 	return ActionExecutionRequest{
-		ActionExecutionRequestOneOf1: v,
+		ActionExecutionRequestDelete: v,
 	}
 }
 
-// ActionExecutionRequestOneOf2AsActionExecutionRequest is a convenience function that returns ActionExecutionRequestOneOf2 wrapped in ActionExecutionRequest
-func ActionExecutionRequestOneOf2AsActionExecutionRequest(v *ActionExecutionRequestOneOf2) ActionExecutionRequest {
+// ActionExecutionRequestReplaceAsActionExecutionRequest is a convenience function that returns ActionExecutionRequestReplace wrapped in ActionExecutionRequest
+func ActionExecutionRequestReplaceAsActionExecutionRequest(v *ActionExecutionRequestReplace) ActionExecutionRequest {
 	return ActionExecutionRequest{
-		ActionExecutionRequestOneOf2: v,
+		ActionExecutionRequestReplace: v,
 	}
 }
 
@@ -49,62 +49,62 @@ func ActionExecutionRequestOneOf2AsActionExecutionRequest(v *ActionExecutionRequ
 func (dst *ActionExecutionRequest) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into ActionExecutionRequestOneOf
-	err = newStrictDecoder(data).Decode(&dst.ActionExecutionRequestOneOf)
+	// try to unmarshal data into ActionExecutionRequestCreate
+	err = newStrictDecoder(data).Decode(&dst.ActionExecutionRequestCreate)
 	if err == nil {
-		jsonActionExecutionRequestOneOf, _ := json.Marshal(dst.ActionExecutionRequestOneOf)
-		if string(jsonActionExecutionRequestOneOf) == "{}" { // empty struct
-			dst.ActionExecutionRequestOneOf = nil
+		jsonActionExecutionRequestCreate, _ := json.Marshal(dst.ActionExecutionRequestCreate)
+		if string(jsonActionExecutionRequestCreate) == "{}" { // empty struct
+			dst.ActionExecutionRequestCreate = nil
 		} else {
-			if err = validator.Validate(dst.ActionExecutionRequestOneOf); err != nil {
-				dst.ActionExecutionRequestOneOf = nil
+			if err = validator.Validate(dst.ActionExecutionRequestCreate); err != nil {
+				dst.ActionExecutionRequestCreate = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.ActionExecutionRequestOneOf = nil
+		dst.ActionExecutionRequestCreate = nil
 	}
 
-	// try to unmarshal data into ActionExecutionRequestOneOf1
-	err = newStrictDecoder(data).Decode(&dst.ActionExecutionRequestOneOf1)
+	// try to unmarshal data into ActionExecutionRequestDelete
+	err = newStrictDecoder(data).Decode(&dst.ActionExecutionRequestDelete)
 	if err == nil {
-		jsonActionExecutionRequestOneOf1, _ := json.Marshal(dst.ActionExecutionRequestOneOf1)
-		if string(jsonActionExecutionRequestOneOf1) == "{}" { // empty struct
-			dst.ActionExecutionRequestOneOf1 = nil
+		jsonActionExecutionRequestDelete, _ := json.Marshal(dst.ActionExecutionRequestDelete)
+		if string(jsonActionExecutionRequestDelete) == "{}" { // empty struct
+			dst.ActionExecutionRequestDelete = nil
 		} else {
-			if err = validator.Validate(dst.ActionExecutionRequestOneOf1); err != nil {
-				dst.ActionExecutionRequestOneOf1 = nil
+			if err = validator.Validate(dst.ActionExecutionRequestDelete); err != nil {
+				dst.ActionExecutionRequestDelete = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.ActionExecutionRequestOneOf1 = nil
+		dst.ActionExecutionRequestDelete = nil
 	}
 
-	// try to unmarshal data into ActionExecutionRequestOneOf2
-	err = newStrictDecoder(data).Decode(&dst.ActionExecutionRequestOneOf2)
+	// try to unmarshal data into ActionExecutionRequestReplace
+	err = newStrictDecoder(data).Decode(&dst.ActionExecutionRequestReplace)
 	if err == nil {
-		jsonActionExecutionRequestOneOf2, _ := json.Marshal(dst.ActionExecutionRequestOneOf2)
-		if string(jsonActionExecutionRequestOneOf2) == "{}" { // empty struct
-			dst.ActionExecutionRequestOneOf2 = nil
+		jsonActionExecutionRequestReplace, _ := json.Marshal(dst.ActionExecutionRequestReplace)
+		if string(jsonActionExecutionRequestReplace) == "{}" { // empty struct
+			dst.ActionExecutionRequestReplace = nil
 		} else {
-			if err = validator.Validate(dst.ActionExecutionRequestOneOf2); err != nil {
-				dst.ActionExecutionRequestOneOf2 = nil
+			if err = validator.Validate(dst.ActionExecutionRequestReplace); err != nil {
+				dst.ActionExecutionRequestReplace = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.ActionExecutionRequestOneOf2 = nil
+		dst.ActionExecutionRequestReplace = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.ActionExecutionRequestOneOf = nil
-		dst.ActionExecutionRequestOneOf1 = nil
-		dst.ActionExecutionRequestOneOf2 = nil
+		dst.ActionExecutionRequestCreate = nil
+		dst.ActionExecutionRequestDelete = nil
+		dst.ActionExecutionRequestReplace = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(ActionExecutionRequest)")
 	} else if match == 1 {
@@ -116,16 +116,16 @@ func (dst *ActionExecutionRequest) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src ActionExecutionRequest) MarshalJSON() ([]byte, error) {
-	if src.ActionExecutionRequestOneOf != nil {
-		return json.Marshal(&src.ActionExecutionRequestOneOf)
+	if src.ActionExecutionRequestCreate != nil {
+		return json.Marshal(&src.ActionExecutionRequestCreate)
 	}
 
-	if src.ActionExecutionRequestOneOf1 != nil {
-		return json.Marshal(&src.ActionExecutionRequestOneOf1)
+	if src.ActionExecutionRequestDelete != nil {
+		return json.Marshal(&src.ActionExecutionRequestDelete)
 	}
 
-	if src.ActionExecutionRequestOneOf2 != nil {
-		return json.Marshal(&src.ActionExecutionRequestOneOf2)
+	if src.ActionExecutionRequestReplace != nil {
+		return json.Marshal(&src.ActionExecutionRequestReplace)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -136,16 +136,16 @@ func (obj *ActionExecutionRequest) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.ActionExecutionRequestOneOf != nil {
-		return obj.ActionExecutionRequestOneOf
+	if obj.ActionExecutionRequestCreate != nil {
+		return obj.ActionExecutionRequestCreate
 	}
 
-	if obj.ActionExecutionRequestOneOf1 != nil {
-		return obj.ActionExecutionRequestOneOf1
+	if obj.ActionExecutionRequestDelete != nil {
+		return obj.ActionExecutionRequestDelete
 	}
 
-	if obj.ActionExecutionRequestOneOf2 != nil {
-		return obj.ActionExecutionRequestOneOf2
+	if obj.ActionExecutionRequestReplace != nil {
+		return obj.ActionExecutionRequestReplace
 	}
 
 	// all schemas are nil
@@ -154,16 +154,16 @@ func (obj *ActionExecutionRequest) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj ActionExecutionRequest) GetActualInstanceValue() (interface{}) {
-	if obj.ActionExecutionRequestOneOf != nil {
-		return *obj.ActionExecutionRequestOneOf
+	if obj.ActionExecutionRequestCreate != nil {
+		return *obj.ActionExecutionRequestCreate
 	}
 
-	if obj.ActionExecutionRequestOneOf1 != nil {
-		return *obj.ActionExecutionRequestOneOf1
+	if obj.ActionExecutionRequestDelete != nil {
+		return *obj.ActionExecutionRequestDelete
 	}
 
-	if obj.ActionExecutionRequestOneOf2 != nil {
-		return *obj.ActionExecutionRequestOneOf2
+	if obj.ActionExecutionRequestReplace != nil {
+		return *obj.ActionExecutionRequestReplace
 	}
 
 	// all schemas are nil

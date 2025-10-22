@@ -9,6 +9,9 @@ configuration.go
 git_push.sh
 model_batch_get_connector_summaries_response.go
 model_batch_get_connectors_response.go
+model_colors_by_aggregation.go
+model_colors_by_group_by.go
+model_colors_by_stack.go
 model_common_group.go
 model_connector.go
 model_connector_1.go
@@ -21,8 +24,8 @@ model_entity_type_config_overrides.go
 model_events_v3_filter_matcher.go
 model_field_group.go
 model_filter_path_and_values.go
-model_filter_path_and_values_1.go
-model_filter_path_and_values_2.go
+model_filter_path_and_values_filters.go
+model_filter_path_and_values_multiple_values.go
 model_filters.go
 model_get_connector_response.go
 model_get_connector_type_summaries_response.go
@@ -34,5 +37,7 @@ model_notification_center_entity_type.go
 model_replace_connector_response.go
 model_templated_connector_config_field.go
 model_v3_filter_operator.go
+model_y_axis_view_by_category.go
+model_y_axis_view_by_value.go
 response.go
 utils.go

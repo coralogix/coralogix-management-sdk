@@ -18,21 +18,21 @@ import (
 
 // MetricMissingValues - struct for MetricMissingValues
 type MetricMissingValues struct {
-	MetricMissingValuesConfiguration *MetricMissingValuesConfiguration
-	MetricMissingValuesConfiguration1 *MetricMissingValuesConfiguration1
+	MetricMissingValuesMinNonNullValuesPct *MetricMissingValuesMinNonNullValuesPct
+	MetricMissingValuesReplaceWithZero *MetricMissingValuesReplaceWithZero
 }
 
-// MetricMissingValuesConfigurationAsMetricMissingValues is a convenience function that returns MetricMissingValuesConfiguration wrapped in MetricMissingValues
-func MetricMissingValuesConfigurationAsMetricMissingValues(v *MetricMissingValuesConfiguration) MetricMissingValues {
+// MetricMissingValuesMinNonNullValuesPctAsMetricMissingValues is a convenience function that returns MetricMissingValuesMinNonNullValuesPct wrapped in MetricMissingValues
+func MetricMissingValuesMinNonNullValuesPctAsMetricMissingValues(v *MetricMissingValuesMinNonNullValuesPct) MetricMissingValues {
 	return MetricMissingValues{
-		MetricMissingValuesConfiguration: v,
+		MetricMissingValuesMinNonNullValuesPct: v,
 	}
 }
 
-// MetricMissingValuesConfiguration1AsMetricMissingValues is a convenience function that returns MetricMissingValuesConfiguration1 wrapped in MetricMissingValues
-func MetricMissingValuesConfiguration1AsMetricMissingValues(v *MetricMissingValuesConfiguration1) MetricMissingValues {
+// MetricMissingValuesReplaceWithZeroAsMetricMissingValues is a convenience function that returns MetricMissingValuesReplaceWithZero wrapped in MetricMissingValues
+func MetricMissingValuesReplaceWithZeroAsMetricMissingValues(v *MetricMissingValuesReplaceWithZero) MetricMissingValues {
 	return MetricMissingValues{
-		MetricMissingValuesConfiguration1: v,
+		MetricMissingValuesReplaceWithZero: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func MetricMissingValuesConfiguration1AsMetricMissingValues(v *MetricMissingValu
 func (dst *MetricMissingValues) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into MetricMissingValuesConfiguration
-	err = newStrictDecoder(data).Decode(&dst.MetricMissingValuesConfiguration)
+	// try to unmarshal data into MetricMissingValuesMinNonNullValuesPct
+	err = newStrictDecoder(data).Decode(&dst.MetricMissingValuesMinNonNullValuesPct)
 	if err == nil {
-		jsonMetricMissingValuesConfiguration, _ := json.Marshal(dst.MetricMissingValuesConfiguration)
-		if string(jsonMetricMissingValuesConfiguration) == "{}" { // empty struct
-			dst.MetricMissingValuesConfiguration = nil
+		jsonMetricMissingValuesMinNonNullValuesPct, _ := json.Marshal(dst.MetricMissingValuesMinNonNullValuesPct)
+		if string(jsonMetricMissingValuesMinNonNullValuesPct) == "{}" { // empty struct
+			dst.MetricMissingValuesMinNonNullValuesPct = nil
 		} else {
-			if err = validator.Validate(dst.MetricMissingValuesConfiguration); err != nil {
-				dst.MetricMissingValuesConfiguration = nil
+			if err = validator.Validate(dst.MetricMissingValuesMinNonNullValuesPct); err != nil {
+				dst.MetricMissingValuesMinNonNullValuesPct = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.MetricMissingValuesConfiguration = nil
+		dst.MetricMissingValuesMinNonNullValuesPct = nil
 	}
 
-	// try to unmarshal data into MetricMissingValuesConfiguration1
-	err = newStrictDecoder(data).Decode(&dst.MetricMissingValuesConfiguration1)
+	// try to unmarshal data into MetricMissingValuesReplaceWithZero
+	err = newStrictDecoder(data).Decode(&dst.MetricMissingValuesReplaceWithZero)
 	if err == nil {
-		jsonMetricMissingValuesConfiguration1, _ := json.Marshal(dst.MetricMissingValuesConfiguration1)
-		if string(jsonMetricMissingValuesConfiguration1) == "{}" { // empty struct
-			dst.MetricMissingValuesConfiguration1 = nil
+		jsonMetricMissingValuesReplaceWithZero, _ := json.Marshal(dst.MetricMissingValuesReplaceWithZero)
+		if string(jsonMetricMissingValuesReplaceWithZero) == "{}" { // empty struct
+			dst.MetricMissingValuesReplaceWithZero = nil
 		} else {
-			if err = validator.Validate(dst.MetricMissingValuesConfiguration1); err != nil {
-				dst.MetricMissingValuesConfiguration1 = nil
+			if err = validator.Validate(dst.MetricMissingValuesReplaceWithZero); err != nil {
+				dst.MetricMissingValuesReplaceWithZero = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.MetricMissingValuesConfiguration1 = nil
+		dst.MetricMissingValuesReplaceWithZero = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.MetricMissingValuesConfiguration = nil
-		dst.MetricMissingValuesConfiguration1 = nil
+		dst.MetricMissingValuesMinNonNullValuesPct = nil
+		dst.MetricMissingValuesReplaceWithZero = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(MetricMissingValues)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *MetricMissingValues) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src MetricMissingValues) MarshalJSON() ([]byte, error) {
-	if src.MetricMissingValuesConfiguration != nil {
-		return json.Marshal(&src.MetricMissingValuesConfiguration)
+	if src.MetricMissingValuesMinNonNullValuesPct != nil {
+		return json.Marshal(&src.MetricMissingValuesMinNonNullValuesPct)
 	}
 
-	if src.MetricMissingValuesConfiguration1 != nil {
-		return json.Marshal(&src.MetricMissingValuesConfiguration1)
+	if src.MetricMissingValuesReplaceWithZero != nil {
+		return json.Marshal(&src.MetricMissingValuesReplaceWithZero)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *MetricMissingValues) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.MetricMissingValuesConfiguration != nil {
-		return obj.MetricMissingValuesConfiguration
+	if obj.MetricMissingValuesMinNonNullValuesPct != nil {
+		return obj.MetricMissingValuesMinNonNullValuesPct
 	}
 
-	if obj.MetricMissingValuesConfiguration1 != nil {
-		return obj.MetricMissingValuesConfiguration1
+	if obj.MetricMissingValuesReplaceWithZero != nil {
+		return obj.MetricMissingValuesReplaceWithZero
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *MetricMissingValues) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj MetricMissingValues) GetActualInstanceValue() (interface{}) {
-	if obj.MetricMissingValuesConfiguration != nil {
-		return *obj.MetricMissingValuesConfiguration
+	if obj.MetricMissingValuesMinNonNullValuesPct != nil {
+		return *obj.MetricMissingValuesMinNonNullValuesPct
 	}
 
-	if obj.MetricMissingValuesConfiguration1 != nil {
-		return *obj.MetricMissingValuesConfiguration1
+	if obj.MetricMissingValuesReplaceWithZero != nil {
+		return *obj.MetricMissingValuesReplaceWithZero
 	}
 
 	// all schemas are nil

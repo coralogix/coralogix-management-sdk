@@ -12,297 +12,162 @@ package contextual_data_integration_service
 
 import (
 	"encoding/json"
-	"time"
+	"fmt"
+	"gopkg.in/validator.v2"
 )
 
-// checks if the RegisteredInstance type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &RegisteredInstance{}
-
-// RegisteredInstance struct for RegisteredInstance
+// RegisteredInstance - struct for RegisteredInstance
 type RegisteredInstance struct {
-	DefinitionVersion *string `json:"definitionVersion,omitempty"`
-	// This data structure represents an integration that does not require deployment.
-	Empty map[string]interface{} `json:"empty,omitempty"`
-	Id *string `json:"id,omitempty"`
-	IntegrationStatus *IntegrationStatus `json:"integrationStatus,omitempty"`
-	IsTesting *bool `json:"isTesting,omitempty"`
-	LastUpdated *time.Time `json:"lastUpdated,omitempty"`
-	Parameters []Parameter `json:"parameters,omitempty"`
+	RegisteredInstanceArm *RegisteredInstanceArm
+	RegisteredInstanceCloudformation *RegisteredInstanceCloudformation
+	RegisteredInstanceEmpty *RegisteredInstanceEmpty
 }
 
-// NewRegisteredInstance instantiates a new RegisteredInstance object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewRegisteredInstance() *RegisteredInstance {
-	this := RegisteredInstance{}
-	return &this
-}
-
-// NewRegisteredInstanceWithDefaults instantiates a new RegisteredInstance object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewRegisteredInstanceWithDefaults() *RegisteredInstance {
-	this := RegisteredInstance{}
-	return &this
-}
-
-// GetDefinitionVersion returns the DefinitionVersion field value if set, zero value otherwise.
-func (o *RegisteredInstance) GetDefinitionVersion() string {
-	if o == nil || IsNil(o.DefinitionVersion) {
-		var ret string
-		return ret
+// RegisteredInstanceArmAsRegisteredInstance is a convenience function that returns RegisteredInstanceArm wrapped in RegisteredInstance
+func RegisteredInstanceArmAsRegisteredInstance(v *RegisteredInstanceArm) RegisteredInstance {
+	return RegisteredInstance{
+		RegisteredInstanceArm: v,
 	}
-	return *o.DefinitionVersion
 }
 
-// GetDefinitionVersionOk returns a tuple with the DefinitionVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RegisteredInstance) GetDefinitionVersionOk() (*string, bool) {
-	if o == nil || IsNil(o.DefinitionVersion) {
-		return nil, false
+// RegisteredInstanceCloudformationAsRegisteredInstance is a convenience function that returns RegisteredInstanceCloudformation wrapped in RegisteredInstance
+func RegisteredInstanceCloudformationAsRegisteredInstance(v *RegisteredInstanceCloudformation) RegisteredInstance {
+	return RegisteredInstance{
+		RegisteredInstanceCloudformation: v,
 	}
-	return o.DefinitionVersion, true
 }
 
-// HasDefinitionVersion returns a boolean if a field has been set.
-func (o *RegisteredInstance) HasDefinitionVersion() bool {
-	if o != nil && !IsNil(o.DefinitionVersion) {
-		return true
+// RegisteredInstanceEmptyAsRegisteredInstance is a convenience function that returns RegisteredInstanceEmpty wrapped in RegisteredInstance
+func RegisteredInstanceEmptyAsRegisteredInstance(v *RegisteredInstanceEmpty) RegisteredInstance {
+	return RegisteredInstance{
+		RegisteredInstanceEmpty: v,
+	}
+}
+
+
+// Unmarshal JSON data into one of the pointers in the struct
+func (dst *RegisteredInstance) UnmarshalJSON(data []byte) error {
+	var err error
+	match := 0
+	// try to unmarshal data into RegisteredInstanceArm
+	err = newStrictDecoder(data).Decode(&dst.RegisteredInstanceArm)
+	if err == nil {
+		jsonRegisteredInstanceArm, _ := json.Marshal(dst.RegisteredInstanceArm)
+		if string(jsonRegisteredInstanceArm) == "{}" { // empty struct
+			dst.RegisteredInstanceArm = nil
+		} else {
+			if err = validator.Validate(dst.RegisteredInstanceArm); err != nil {
+				dst.RegisteredInstanceArm = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.RegisteredInstanceArm = nil
 	}
 
-	return false
-}
-
-// SetDefinitionVersion gets a reference to the given string and assigns it to the DefinitionVersion field.
-func (o *RegisteredInstance) SetDefinitionVersion(v string) {
-	o.DefinitionVersion = &v
-}
-
-// GetEmpty returns the Empty field value if set, zero value otherwise.
-func (o *RegisteredInstance) GetEmpty() map[string]interface{} {
-	if o == nil || IsNil(o.Empty) {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.Empty
-}
-
-// GetEmptyOk returns a tuple with the Empty field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RegisteredInstance) GetEmptyOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Empty) {
-		return map[string]interface{}{}, false
-	}
-	return o.Empty, true
-}
-
-// HasEmpty returns a boolean if a field has been set.
-func (o *RegisteredInstance) HasEmpty() bool {
-	if o != nil && !IsNil(o.Empty) {
-		return true
+	// try to unmarshal data into RegisteredInstanceCloudformation
+	err = newStrictDecoder(data).Decode(&dst.RegisteredInstanceCloudformation)
+	if err == nil {
+		jsonRegisteredInstanceCloudformation, _ := json.Marshal(dst.RegisteredInstanceCloudformation)
+		if string(jsonRegisteredInstanceCloudformation) == "{}" { // empty struct
+			dst.RegisteredInstanceCloudformation = nil
+		} else {
+			if err = validator.Validate(dst.RegisteredInstanceCloudformation); err != nil {
+				dst.RegisteredInstanceCloudformation = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.RegisteredInstanceCloudformation = nil
 	}
 
-	return false
-}
-
-// SetEmpty gets a reference to the given map[string]interface{} and assigns it to the Empty field.
-func (o *RegisteredInstance) SetEmpty(v map[string]interface{}) {
-	o.Empty = v
-}
-
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *RegisteredInstance) GetId() string {
-	if o == nil || IsNil(o.Id) {
-		var ret string
-		return ret
-	}
-	return *o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RegisteredInstance) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
-		return nil, false
-	}
-	return o.Id, true
-}
-
-// HasId returns a boolean if a field has been set.
-func (o *RegisteredInstance) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
+	// try to unmarshal data into RegisteredInstanceEmpty
+	err = newStrictDecoder(data).Decode(&dst.RegisteredInstanceEmpty)
+	if err == nil {
+		jsonRegisteredInstanceEmpty, _ := json.Marshal(dst.RegisteredInstanceEmpty)
+		if string(jsonRegisteredInstanceEmpty) == "{}" { // empty struct
+			dst.RegisteredInstanceEmpty = nil
+		} else {
+			if err = validator.Validate(dst.RegisteredInstanceEmpty); err != nil {
+				dst.RegisteredInstanceEmpty = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.RegisteredInstanceEmpty = nil
 	}
 
-	return false
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.RegisteredInstanceArm = nil
+		dst.RegisteredInstanceCloudformation = nil
+		dst.RegisteredInstanceEmpty = nil
+
+		return fmt.Errorf("data matches more than one schema in oneOf(RegisteredInstance)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("data failed to match schemas in oneOf(RegisteredInstance)")
+	}
 }
 
-// SetId gets a reference to the given string and assigns it to the Id field.
-func (o *RegisteredInstance) SetId(v string) {
-	o.Id = &v
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src RegisteredInstance) MarshalJSON() ([]byte, error) {
+	if src.RegisteredInstanceArm != nil {
+		return json.Marshal(&src.RegisteredInstanceArm)
+	}
+
+	if src.RegisteredInstanceCloudformation != nil {
+		return json.Marshal(&src.RegisteredInstanceCloudformation)
+	}
+
+	if src.RegisteredInstanceEmpty != nil {
+		return json.Marshal(&src.RegisteredInstanceEmpty)
+	}
+
+	return nil, nil // no data in oneOf schemas
 }
 
-// GetIntegrationStatus returns the IntegrationStatus field value if set, zero value otherwise.
-func (o *RegisteredInstance) GetIntegrationStatus() IntegrationStatus {
-	if o == nil || IsNil(o.IntegrationStatus) {
-		var ret IntegrationStatus
-		return ret
+// Get the actual instance
+func (obj *RegisteredInstance) GetActualInstance() (interface{}) {
+	if obj == nil {
+		return nil
 	}
-	return *o.IntegrationStatus
+	if obj.RegisteredInstanceArm != nil {
+		return obj.RegisteredInstanceArm
+	}
+
+	if obj.RegisteredInstanceCloudformation != nil {
+		return obj.RegisteredInstanceCloudformation
+	}
+
+	if obj.RegisteredInstanceEmpty != nil {
+		return obj.RegisteredInstanceEmpty
+	}
+
+	// all schemas are nil
+	return nil
 }
 
-// GetIntegrationStatusOk returns a tuple with the IntegrationStatus field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RegisteredInstance) GetIntegrationStatusOk() (*IntegrationStatus, bool) {
-	if o == nil || IsNil(o.IntegrationStatus) {
-		return nil, false
-	}
-	return o.IntegrationStatus, true
-}
-
-// HasIntegrationStatus returns a boolean if a field has been set.
-func (o *RegisteredInstance) HasIntegrationStatus() bool {
-	if o != nil && !IsNil(o.IntegrationStatus) {
-		return true
+// Get the actual instance value
+func (obj RegisteredInstance) GetActualInstanceValue() (interface{}) {
+	if obj.RegisteredInstanceArm != nil {
+		return *obj.RegisteredInstanceArm
 	}
 
-	return false
-}
-
-// SetIntegrationStatus gets a reference to the given IntegrationStatus and assigns it to the IntegrationStatus field.
-func (o *RegisteredInstance) SetIntegrationStatus(v IntegrationStatus) {
-	o.IntegrationStatus = &v
-}
-
-// GetIsTesting returns the IsTesting field value if set, zero value otherwise.
-func (o *RegisteredInstance) GetIsTesting() bool {
-	if o == nil || IsNil(o.IsTesting) {
-		var ret bool
-		return ret
-	}
-	return *o.IsTesting
-}
-
-// GetIsTestingOk returns a tuple with the IsTesting field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RegisteredInstance) GetIsTestingOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsTesting) {
-		return nil, false
-	}
-	return o.IsTesting, true
-}
-
-// HasIsTesting returns a boolean if a field has been set.
-func (o *RegisteredInstance) HasIsTesting() bool {
-	if o != nil && !IsNil(o.IsTesting) {
-		return true
+	if obj.RegisteredInstanceCloudformation != nil {
+		return *obj.RegisteredInstanceCloudformation
 	}
 
-	return false
-}
-
-// SetIsTesting gets a reference to the given bool and assigns it to the IsTesting field.
-func (o *RegisteredInstance) SetIsTesting(v bool) {
-	o.IsTesting = &v
-}
-
-// GetLastUpdated returns the LastUpdated field value if set, zero value otherwise.
-func (o *RegisteredInstance) GetLastUpdated() time.Time {
-	if o == nil || IsNil(o.LastUpdated) {
-		var ret time.Time
-		return ret
-	}
-	return *o.LastUpdated
-}
-
-// GetLastUpdatedOk returns a tuple with the LastUpdated field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RegisteredInstance) GetLastUpdatedOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.LastUpdated) {
-		return nil, false
-	}
-	return o.LastUpdated, true
-}
-
-// HasLastUpdated returns a boolean if a field has been set.
-func (o *RegisteredInstance) HasLastUpdated() bool {
-	if o != nil && !IsNil(o.LastUpdated) {
-		return true
+	if obj.RegisteredInstanceEmpty != nil {
+		return *obj.RegisteredInstanceEmpty
 	}
 
-	return false
-}
-
-// SetLastUpdated gets a reference to the given time.Time and assigns it to the LastUpdated field.
-func (o *RegisteredInstance) SetLastUpdated(v time.Time) {
-	o.LastUpdated = &v
-}
-
-// GetParameters returns the Parameters field value if set, zero value otherwise.
-func (o *RegisteredInstance) GetParameters() []Parameter {
-	if o == nil || IsNil(o.Parameters) {
-		var ret []Parameter
-		return ret
-	}
-	return o.Parameters
-}
-
-// GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RegisteredInstance) GetParametersOk() ([]Parameter, bool) {
-	if o == nil || IsNil(o.Parameters) {
-		return nil, false
-	}
-	return o.Parameters, true
-}
-
-// HasParameters returns a boolean if a field has been set.
-func (o *RegisteredInstance) HasParameters() bool {
-	if o != nil && !IsNil(o.Parameters) {
-		return true
-	}
-
-	return false
-}
-
-// SetParameters gets a reference to the given []Parameter and assigns it to the Parameters field.
-func (o *RegisteredInstance) SetParameters(v []Parameter) {
-	o.Parameters = v
-}
-
-func (o RegisteredInstance) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o RegisteredInstance) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DefinitionVersion) {
-		toSerialize["definitionVersion"] = o.DefinitionVersion
-	}
-	if !IsNil(o.Empty) {
-		toSerialize["empty"] = o.Empty
-	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.IntegrationStatus) {
-		toSerialize["integrationStatus"] = o.IntegrationStatus
-	}
-	if !IsNil(o.IsTesting) {
-		toSerialize["isTesting"] = o.IsTesting
-	}
-	if !IsNil(o.LastUpdated) {
-		toSerialize["lastUpdated"] = o.LastUpdated
-	}
-	if !IsNil(o.Parameters) {
-		toSerialize["parameters"] = o.Parameters
-	}
-	return toSerialize, nil
+	// all schemas are nil
+	return nil
 }
 
 type NullableRegisteredInstance struct {

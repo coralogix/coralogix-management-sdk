@@ -87,6 +87,9 @@ Class | Method | HTTP request | Description
 
  - [ChangelogEntry](docs/ChangelogEntry.md)
  - [CleanupTestingRevisionRequest](docs/CleanupTestingRevisionRequest.md)
+ - [ColorsByAggregation](docs/ColorsByAggregation.md)
+ - [ColorsByGroupBy](docs/ColorsByGroupBy.md)
+ - [ColorsByStack](docs/ColorsByStack.md)
  - [CommonGroup](docs/CommonGroup.md)
  - [Deprecation](docs/Deprecation.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
@@ -98,8 +101,8 @@ Class | Method | HTTP request | Description
  - [ExtensionItemData](docs/ExtensionItemData.md)
  - [FieldGroup](docs/FieldGroup.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
- - [FilterPathAndValues1](docs/FilterPathAndValues1.md)
- - [FilterPathAndValues2](docs/FilterPathAndValues2.md)
+ - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
+ - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [InitializeTestingRevisionRequest](docs/InitializeTestingRevisionRequest.md)
  - [IntegrationDetail](docs/IntegrationDetail.md)
@@ -108,6 +111,8 @@ Class | Method | HTTP request | Description
  - [TargetDomain](docs/TargetDomain.md)
  - [TestExtensionRevisionRequest](docs/TestExtensionRevisionRequest.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
+ - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
+ - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

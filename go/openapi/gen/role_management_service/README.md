@@ -88,26 +88,31 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [ColorsByAggregation](docs/ColorsByAggregation.md)
+ - [ColorsByGroupBy](docs/ColorsByGroupBy.md)
+ - [ColorsByStack](docs/ColorsByStack.md)
  - [CommonGroup](docs/CommonGroup.md)
+ - [CreateRoleRequestParentRoleId](docs/CreateRoleRequestParentRoleId.md)
+ - [CreateRoleRequestParentRoleName](docs/CreateRoleRequestParentRoleName.md)
  - [CreateRoleResponse](docs/CreateRoleResponse.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FieldGroup](docs/FieldGroup.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
- - [FilterPathAndValues1](docs/FilterPathAndValues1.md)
- - [FilterPathAndValues2](docs/FilterPathAndValues2.md)
+ - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
+ - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [GetCustomRoleResponse](docs/GetCustomRoleResponse.md)
  - [ListCustomRolesResponse](docs/ListCustomRolesResponse.md)
  - [ListSystemRolesResponse](docs/ListSystemRolesResponse.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [RoleManagementServiceCreateRoleRequest](docs/RoleManagementServiceCreateRoleRequest.md)
- - [RoleManagementServiceCreateRoleRequestOneOf](docs/RoleManagementServiceCreateRoleRequestOneOf.md)
- - [RoleManagementServiceCreateRoleRequestOneOf1](docs/RoleManagementServiceCreateRoleRequestOneOf1.md)
  - [RoleManagementServiceUpdateRoleRequest](docs/RoleManagementServiceUpdateRoleRequest.md)
  - [V2CustomRole](docs/V2CustomRole.md)
  - [V2Permissions](docs/V2Permissions.md)
  - [V2SystemRole](docs/V2SystemRole.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
+ - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
+ - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

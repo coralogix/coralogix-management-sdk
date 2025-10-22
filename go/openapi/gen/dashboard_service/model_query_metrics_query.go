@@ -19,7 +19,7 @@ var _ MappedNullable = &QueryMetricsQuery{}
 
 // QueryMetricsQuery struct for QueryMetricsQuery
 type QueryMetricsQuery struct {
-	Type *QueryMetricsQueryType `json:"type,omitempty"`
+	MetricsQuery *QueryMetricsQuery `json:"metricsQuery,omitempty"`
 }
 
 // NewQueryMetricsQuery instantiates a new QueryMetricsQuery object
@@ -39,36 +39,36 @@ func NewQueryMetricsQueryWithDefaults() *QueryMetricsQuery {
 	return &this
 }
 
-// GetType returns the Type field value if set, zero value otherwise.
-func (o *QueryMetricsQuery) GetType() QueryMetricsQueryType {
-	if o == nil || IsNil(o.Type) {
-		var ret QueryMetricsQueryType
+// GetMetricsQuery returns the MetricsQuery field value if set, zero value otherwise.
+func (o *QueryMetricsQuery) GetMetricsQuery() QueryMetricsQuery {
+	if o == nil || IsNil(o.MetricsQuery) {
+		var ret QueryMetricsQuery
 		return ret
 	}
-	return *o.Type
+	return *o.MetricsQuery
 }
 
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// GetMetricsQueryOk returns a tuple with the MetricsQuery field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QueryMetricsQuery) GetTypeOk() (*QueryMetricsQueryType, bool) {
-	if o == nil || IsNil(o.Type) {
+func (o *QueryMetricsQuery) GetMetricsQueryOk() (*QueryMetricsQuery, bool) {
+	if o == nil || IsNil(o.MetricsQuery) {
 		return nil, false
 	}
-	return o.Type, true
+	return o.MetricsQuery, true
 }
 
-// HasType returns a boolean if a field has been set.
-func (o *QueryMetricsQuery) HasType() bool {
-	if o != nil && !IsNil(o.Type) {
+// HasMetricsQuery returns a boolean if a field has been set.
+func (o *QueryMetricsQuery) HasMetricsQuery() bool {
+	if o != nil && !IsNil(o.MetricsQuery) {
 		return true
 	}
 
 	return false
 }
 
-// SetType gets a reference to the given QueryMetricsQueryType and assigns it to the Type field.
-func (o *QueryMetricsQuery) SetType(v QueryMetricsQueryType) {
-	o.Type = &v
+// SetMetricsQuery gets a reference to the given QueryMetricsQuery and assigns it to the MetricsQuery field.
+func (o *QueryMetricsQuery) SetMetricsQuery(v QueryMetricsQuery) {
+	o.MetricsQuery = &v
 }
 
 func (o QueryMetricsQuery) MarshalJSON() ([]byte, error) {
@@ -81,8 +81,8 @@ func (o QueryMetricsQuery) MarshalJSON() ([]byte, error) {
 
 func (o QueryMetricsQuery) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Type) {
-		toSerialize["type"] = o.Type
+	if !IsNil(o.MetricsQuery) {
+		toSerialize["metricsQuery"] = o.MetricsQuery
 	}
 	return toSerialize, nil
 }

@@ -18,37 +18,37 @@ import (
 
 // EnrichmentType - struct for EnrichmentType
 type EnrichmentType struct {
-	EnrichmentTypeOneOf *EnrichmentTypeOneOf
-	EnrichmentTypeOneOf1 *EnrichmentTypeOneOf1
-	EnrichmentTypeOneOf2 *EnrichmentTypeOneOf2
-	EnrichmentTypeOneOf3 *EnrichmentTypeOneOf3
+	EnrichmentTypeAws *EnrichmentTypeAws
+	EnrichmentTypeCustomEnrichment *EnrichmentTypeCustomEnrichment
+	EnrichmentTypeGeoIp *EnrichmentTypeGeoIp
+	EnrichmentTypeSuspiciousIp *EnrichmentTypeSuspiciousIp
 }
 
-// EnrichmentTypeOneOfAsEnrichmentType is a convenience function that returns EnrichmentTypeOneOf wrapped in EnrichmentType
-func EnrichmentTypeOneOfAsEnrichmentType(v *EnrichmentTypeOneOf) EnrichmentType {
+// EnrichmentTypeAwsAsEnrichmentType is a convenience function that returns EnrichmentTypeAws wrapped in EnrichmentType
+func EnrichmentTypeAwsAsEnrichmentType(v *EnrichmentTypeAws) EnrichmentType {
 	return EnrichmentType{
-		EnrichmentTypeOneOf: v,
+		EnrichmentTypeAws: v,
 	}
 }
 
-// EnrichmentTypeOneOf1AsEnrichmentType is a convenience function that returns EnrichmentTypeOneOf1 wrapped in EnrichmentType
-func EnrichmentTypeOneOf1AsEnrichmentType(v *EnrichmentTypeOneOf1) EnrichmentType {
+// EnrichmentTypeCustomEnrichmentAsEnrichmentType is a convenience function that returns EnrichmentTypeCustomEnrichment wrapped in EnrichmentType
+func EnrichmentTypeCustomEnrichmentAsEnrichmentType(v *EnrichmentTypeCustomEnrichment) EnrichmentType {
 	return EnrichmentType{
-		EnrichmentTypeOneOf1: v,
+		EnrichmentTypeCustomEnrichment: v,
 	}
 }
 
-// EnrichmentTypeOneOf2AsEnrichmentType is a convenience function that returns EnrichmentTypeOneOf2 wrapped in EnrichmentType
-func EnrichmentTypeOneOf2AsEnrichmentType(v *EnrichmentTypeOneOf2) EnrichmentType {
+// EnrichmentTypeGeoIpAsEnrichmentType is a convenience function that returns EnrichmentTypeGeoIp wrapped in EnrichmentType
+func EnrichmentTypeGeoIpAsEnrichmentType(v *EnrichmentTypeGeoIp) EnrichmentType {
 	return EnrichmentType{
-		EnrichmentTypeOneOf2: v,
+		EnrichmentTypeGeoIp: v,
 	}
 }
 
-// EnrichmentTypeOneOf3AsEnrichmentType is a convenience function that returns EnrichmentTypeOneOf3 wrapped in EnrichmentType
-func EnrichmentTypeOneOf3AsEnrichmentType(v *EnrichmentTypeOneOf3) EnrichmentType {
+// EnrichmentTypeSuspiciousIpAsEnrichmentType is a convenience function that returns EnrichmentTypeSuspiciousIp wrapped in EnrichmentType
+func EnrichmentTypeSuspiciousIpAsEnrichmentType(v *EnrichmentTypeSuspiciousIp) EnrichmentType {
 	return EnrichmentType{
-		EnrichmentTypeOneOf3: v,
+		EnrichmentTypeSuspiciousIp: v,
 	}
 }
 
@@ -57,80 +57,80 @@ func EnrichmentTypeOneOf3AsEnrichmentType(v *EnrichmentTypeOneOf3) EnrichmentTyp
 func (dst *EnrichmentType) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into EnrichmentTypeOneOf
-	err = newStrictDecoder(data).Decode(&dst.EnrichmentTypeOneOf)
+	// try to unmarshal data into EnrichmentTypeAws
+	err = newStrictDecoder(data).Decode(&dst.EnrichmentTypeAws)
 	if err == nil {
-		jsonEnrichmentTypeOneOf, _ := json.Marshal(dst.EnrichmentTypeOneOf)
-		if string(jsonEnrichmentTypeOneOf) == "{}" { // empty struct
-			dst.EnrichmentTypeOneOf = nil
+		jsonEnrichmentTypeAws, _ := json.Marshal(dst.EnrichmentTypeAws)
+		if string(jsonEnrichmentTypeAws) == "{}" { // empty struct
+			dst.EnrichmentTypeAws = nil
 		} else {
-			if err = validator.Validate(dst.EnrichmentTypeOneOf); err != nil {
-				dst.EnrichmentTypeOneOf = nil
+			if err = validator.Validate(dst.EnrichmentTypeAws); err != nil {
+				dst.EnrichmentTypeAws = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.EnrichmentTypeOneOf = nil
+		dst.EnrichmentTypeAws = nil
 	}
 
-	// try to unmarshal data into EnrichmentTypeOneOf1
-	err = newStrictDecoder(data).Decode(&dst.EnrichmentTypeOneOf1)
+	// try to unmarshal data into EnrichmentTypeCustomEnrichment
+	err = newStrictDecoder(data).Decode(&dst.EnrichmentTypeCustomEnrichment)
 	if err == nil {
-		jsonEnrichmentTypeOneOf1, _ := json.Marshal(dst.EnrichmentTypeOneOf1)
-		if string(jsonEnrichmentTypeOneOf1) == "{}" { // empty struct
-			dst.EnrichmentTypeOneOf1 = nil
+		jsonEnrichmentTypeCustomEnrichment, _ := json.Marshal(dst.EnrichmentTypeCustomEnrichment)
+		if string(jsonEnrichmentTypeCustomEnrichment) == "{}" { // empty struct
+			dst.EnrichmentTypeCustomEnrichment = nil
 		} else {
-			if err = validator.Validate(dst.EnrichmentTypeOneOf1); err != nil {
-				dst.EnrichmentTypeOneOf1 = nil
+			if err = validator.Validate(dst.EnrichmentTypeCustomEnrichment); err != nil {
+				dst.EnrichmentTypeCustomEnrichment = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.EnrichmentTypeOneOf1 = nil
+		dst.EnrichmentTypeCustomEnrichment = nil
 	}
 
-	// try to unmarshal data into EnrichmentTypeOneOf2
-	err = newStrictDecoder(data).Decode(&dst.EnrichmentTypeOneOf2)
+	// try to unmarshal data into EnrichmentTypeGeoIp
+	err = newStrictDecoder(data).Decode(&dst.EnrichmentTypeGeoIp)
 	if err == nil {
-		jsonEnrichmentTypeOneOf2, _ := json.Marshal(dst.EnrichmentTypeOneOf2)
-		if string(jsonEnrichmentTypeOneOf2) == "{}" { // empty struct
-			dst.EnrichmentTypeOneOf2 = nil
+		jsonEnrichmentTypeGeoIp, _ := json.Marshal(dst.EnrichmentTypeGeoIp)
+		if string(jsonEnrichmentTypeGeoIp) == "{}" { // empty struct
+			dst.EnrichmentTypeGeoIp = nil
 		} else {
-			if err = validator.Validate(dst.EnrichmentTypeOneOf2); err != nil {
-				dst.EnrichmentTypeOneOf2 = nil
+			if err = validator.Validate(dst.EnrichmentTypeGeoIp); err != nil {
+				dst.EnrichmentTypeGeoIp = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.EnrichmentTypeOneOf2 = nil
+		dst.EnrichmentTypeGeoIp = nil
 	}
 
-	// try to unmarshal data into EnrichmentTypeOneOf3
-	err = newStrictDecoder(data).Decode(&dst.EnrichmentTypeOneOf3)
+	// try to unmarshal data into EnrichmentTypeSuspiciousIp
+	err = newStrictDecoder(data).Decode(&dst.EnrichmentTypeSuspiciousIp)
 	if err == nil {
-		jsonEnrichmentTypeOneOf3, _ := json.Marshal(dst.EnrichmentTypeOneOf3)
-		if string(jsonEnrichmentTypeOneOf3) == "{}" { // empty struct
-			dst.EnrichmentTypeOneOf3 = nil
+		jsonEnrichmentTypeSuspiciousIp, _ := json.Marshal(dst.EnrichmentTypeSuspiciousIp)
+		if string(jsonEnrichmentTypeSuspiciousIp) == "{}" { // empty struct
+			dst.EnrichmentTypeSuspiciousIp = nil
 		} else {
-			if err = validator.Validate(dst.EnrichmentTypeOneOf3); err != nil {
-				dst.EnrichmentTypeOneOf3 = nil
+			if err = validator.Validate(dst.EnrichmentTypeSuspiciousIp); err != nil {
+				dst.EnrichmentTypeSuspiciousIp = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.EnrichmentTypeOneOf3 = nil
+		dst.EnrichmentTypeSuspiciousIp = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.EnrichmentTypeOneOf = nil
-		dst.EnrichmentTypeOneOf1 = nil
-		dst.EnrichmentTypeOneOf2 = nil
-		dst.EnrichmentTypeOneOf3 = nil
+		dst.EnrichmentTypeAws = nil
+		dst.EnrichmentTypeCustomEnrichment = nil
+		dst.EnrichmentTypeGeoIp = nil
+		dst.EnrichmentTypeSuspiciousIp = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(EnrichmentType)")
 	} else if match == 1 {
@@ -142,20 +142,20 @@ func (dst *EnrichmentType) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src EnrichmentType) MarshalJSON() ([]byte, error) {
-	if src.EnrichmentTypeOneOf != nil {
-		return json.Marshal(&src.EnrichmentTypeOneOf)
+	if src.EnrichmentTypeAws != nil {
+		return json.Marshal(&src.EnrichmentTypeAws)
 	}
 
-	if src.EnrichmentTypeOneOf1 != nil {
-		return json.Marshal(&src.EnrichmentTypeOneOf1)
+	if src.EnrichmentTypeCustomEnrichment != nil {
+		return json.Marshal(&src.EnrichmentTypeCustomEnrichment)
 	}
 
-	if src.EnrichmentTypeOneOf2 != nil {
-		return json.Marshal(&src.EnrichmentTypeOneOf2)
+	if src.EnrichmentTypeGeoIp != nil {
+		return json.Marshal(&src.EnrichmentTypeGeoIp)
 	}
 
-	if src.EnrichmentTypeOneOf3 != nil {
-		return json.Marshal(&src.EnrichmentTypeOneOf3)
+	if src.EnrichmentTypeSuspiciousIp != nil {
+		return json.Marshal(&src.EnrichmentTypeSuspiciousIp)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -166,20 +166,20 @@ func (obj *EnrichmentType) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.EnrichmentTypeOneOf != nil {
-		return obj.EnrichmentTypeOneOf
+	if obj.EnrichmentTypeAws != nil {
+		return obj.EnrichmentTypeAws
 	}
 
-	if obj.EnrichmentTypeOneOf1 != nil {
-		return obj.EnrichmentTypeOneOf1
+	if obj.EnrichmentTypeCustomEnrichment != nil {
+		return obj.EnrichmentTypeCustomEnrichment
 	}
 
-	if obj.EnrichmentTypeOneOf2 != nil {
-		return obj.EnrichmentTypeOneOf2
+	if obj.EnrichmentTypeGeoIp != nil {
+		return obj.EnrichmentTypeGeoIp
 	}
 
-	if obj.EnrichmentTypeOneOf3 != nil {
-		return obj.EnrichmentTypeOneOf3
+	if obj.EnrichmentTypeSuspiciousIp != nil {
+		return obj.EnrichmentTypeSuspiciousIp
 	}
 
 	// all schemas are nil
@@ -188,20 +188,20 @@ func (obj *EnrichmentType) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj EnrichmentType) GetActualInstanceValue() (interface{}) {
-	if obj.EnrichmentTypeOneOf != nil {
-		return *obj.EnrichmentTypeOneOf
+	if obj.EnrichmentTypeAws != nil {
+		return *obj.EnrichmentTypeAws
 	}
 
-	if obj.EnrichmentTypeOneOf1 != nil {
-		return *obj.EnrichmentTypeOneOf1
+	if obj.EnrichmentTypeCustomEnrichment != nil {
+		return *obj.EnrichmentTypeCustomEnrichment
 	}
 
-	if obj.EnrichmentTypeOneOf2 != nil {
-		return *obj.EnrichmentTypeOneOf2
+	if obj.EnrichmentTypeGeoIp != nil {
+		return *obj.EnrichmentTypeGeoIp
 	}
 
-	if obj.EnrichmentTypeOneOf3 != nil {
-		return *obj.EnrichmentTypeOneOf3
+	if obj.EnrichmentTypeSuspiciousIp != nil {
+		return *obj.EnrichmentTypeSuspiciousIp
 	}
 
 	// all schemas are nil

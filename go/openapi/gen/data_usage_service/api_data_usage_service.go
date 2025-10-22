@@ -133,11 +133,11 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageEvaluationToke
 type ApiDataUsageServiceGetDailyUsageProcessedGbsRequest struct {
 	ctx context.Context
 	ApiService *DataUsageServiceAPIService
-	dataUsageServiceGetDailyUsageEvaluationTokensRequest *DataUsageServiceGetDailyUsageEvaluationTokensRequest
+	dataUsageServiceGetDailyUsageProcessedGbsRequest *DataUsageServiceGetDailyUsageProcessedGbsRequest
 }
 
-func (r ApiDataUsageServiceGetDailyUsageProcessedGbsRequest) DataUsageServiceGetDailyUsageEvaluationTokensRequest(dataUsageServiceGetDailyUsageEvaluationTokensRequest DataUsageServiceGetDailyUsageEvaluationTokensRequest) ApiDataUsageServiceGetDailyUsageProcessedGbsRequest {
-	r.dataUsageServiceGetDailyUsageEvaluationTokensRequest = &dataUsageServiceGetDailyUsageEvaluationTokensRequest
+func (r ApiDataUsageServiceGetDailyUsageProcessedGbsRequest) DataUsageServiceGetDailyUsageProcessedGbsRequest(dataUsageServiceGetDailyUsageProcessedGbsRequest DataUsageServiceGetDailyUsageProcessedGbsRequest) ApiDataUsageServiceGetDailyUsageProcessedGbsRequest {
+	r.dataUsageServiceGetDailyUsageProcessedGbsRequest = &dataUsageServiceGetDailyUsageProcessedGbsRequest
 	return r
 }
 
@@ -199,7 +199,7 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageProcessedGbsEx
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.dataUsageServiceGetDailyUsageEvaluationTokensRequest
+	localVarPostBody = r.dataUsageServiceGetDailyUsageProcessedGbsRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -240,11 +240,11 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageProcessedGbsEx
 type ApiDataUsageServiceGetDailyUsageUnitsRequest struct {
 	ctx context.Context
 	ApiService *DataUsageServiceAPIService
-	dataUsageServiceGetDailyUsageEvaluationTokensRequest *DataUsageServiceGetDailyUsageEvaluationTokensRequest
+	dataUsageServiceGetDailyUsageUnitsRequest *DataUsageServiceGetDailyUsageUnitsRequest
 }
 
-func (r ApiDataUsageServiceGetDailyUsageUnitsRequest) DataUsageServiceGetDailyUsageEvaluationTokensRequest(dataUsageServiceGetDailyUsageEvaluationTokensRequest DataUsageServiceGetDailyUsageEvaluationTokensRequest) ApiDataUsageServiceGetDailyUsageUnitsRequest {
-	r.dataUsageServiceGetDailyUsageEvaluationTokensRequest = &dataUsageServiceGetDailyUsageEvaluationTokensRequest
+func (r ApiDataUsageServiceGetDailyUsageUnitsRequest) DataUsageServiceGetDailyUsageUnitsRequest(dataUsageServiceGetDailyUsageUnitsRequest DataUsageServiceGetDailyUsageUnitsRequest) ApiDataUsageServiceGetDailyUsageUnitsRequest {
+	r.dataUsageServiceGetDailyUsageUnitsRequest = &dataUsageServiceGetDailyUsageUnitsRequest
 	return r
 }
 
@@ -306,7 +306,7 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageUnitsExecute(r
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.dataUsageServiceGetDailyUsageEvaluationTokensRequest
+	localVarPostBody = r.dataUsageServiceGetDailyUsageUnitsRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -349,7 +349,7 @@ type ApiDataUsageServiceGetDataUsageRequest struct {
 	ApiService *DataUsageServiceAPIService
 	dateRange *DateRange
 	resolution *string
-	aggregate *[]string
+	aggregate *[]AggregateBy
 	dimensionFilters *[]DataUsageServiceGetDataUsageDimensionFiltersParameterInner
 }
 
@@ -363,7 +363,7 @@ func (r ApiDataUsageServiceGetDataUsageRequest) Resolution(resolution string) Ap
 	return r
 }
 
-func (r ApiDataUsageServiceGetDataUsageRequest) Aggregate(aggregate []string) ApiDataUsageServiceGetDataUsageRequest {
+func (r ApiDataUsageServiceGetDataUsageRequest) Aggregate(aggregate []AggregateBy) ApiDataUsageServiceGetDataUsageRequest {
 	r.aggregate = &aggregate
 	return r
 }

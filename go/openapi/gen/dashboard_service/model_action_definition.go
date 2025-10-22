@@ -18,21 +18,21 @@ import (
 
 // ActionDefinition - struct for ActionDefinition
 type ActionDefinition struct {
-	ActionDefinitionOneOf *ActionDefinitionOneOf
-	ActionDefinitionOneOf1 *ActionDefinitionOneOf1
+	ActionDefinitionCustomAction *ActionDefinitionCustomAction
+	ActionDefinitionGoToDashboardAction *ActionDefinitionGoToDashboardAction
 }
 
-// ActionDefinitionOneOfAsActionDefinition is a convenience function that returns ActionDefinitionOneOf wrapped in ActionDefinition
-func ActionDefinitionOneOfAsActionDefinition(v *ActionDefinitionOneOf) ActionDefinition {
+// ActionDefinitionCustomActionAsActionDefinition is a convenience function that returns ActionDefinitionCustomAction wrapped in ActionDefinition
+func ActionDefinitionCustomActionAsActionDefinition(v *ActionDefinitionCustomAction) ActionDefinition {
 	return ActionDefinition{
-		ActionDefinitionOneOf: v,
+		ActionDefinitionCustomAction: v,
 	}
 }
 
-// ActionDefinitionOneOf1AsActionDefinition is a convenience function that returns ActionDefinitionOneOf1 wrapped in ActionDefinition
-func ActionDefinitionOneOf1AsActionDefinition(v *ActionDefinitionOneOf1) ActionDefinition {
+// ActionDefinitionGoToDashboardActionAsActionDefinition is a convenience function that returns ActionDefinitionGoToDashboardAction wrapped in ActionDefinition
+func ActionDefinitionGoToDashboardActionAsActionDefinition(v *ActionDefinitionGoToDashboardAction) ActionDefinition {
 	return ActionDefinition{
-		ActionDefinitionOneOf1: v,
+		ActionDefinitionGoToDashboardAction: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func ActionDefinitionOneOf1AsActionDefinition(v *ActionDefinitionOneOf1) ActionD
 func (dst *ActionDefinition) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into ActionDefinitionOneOf
-	err = newStrictDecoder(data).Decode(&dst.ActionDefinitionOneOf)
+	// try to unmarshal data into ActionDefinitionCustomAction
+	err = newStrictDecoder(data).Decode(&dst.ActionDefinitionCustomAction)
 	if err == nil {
-		jsonActionDefinitionOneOf, _ := json.Marshal(dst.ActionDefinitionOneOf)
-		if string(jsonActionDefinitionOneOf) == "{}" { // empty struct
-			dst.ActionDefinitionOneOf = nil
+		jsonActionDefinitionCustomAction, _ := json.Marshal(dst.ActionDefinitionCustomAction)
+		if string(jsonActionDefinitionCustomAction) == "{}" { // empty struct
+			dst.ActionDefinitionCustomAction = nil
 		} else {
-			if err = validator.Validate(dst.ActionDefinitionOneOf); err != nil {
-				dst.ActionDefinitionOneOf = nil
+			if err = validator.Validate(dst.ActionDefinitionCustomAction); err != nil {
+				dst.ActionDefinitionCustomAction = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.ActionDefinitionOneOf = nil
+		dst.ActionDefinitionCustomAction = nil
 	}
 
-	// try to unmarshal data into ActionDefinitionOneOf1
-	err = newStrictDecoder(data).Decode(&dst.ActionDefinitionOneOf1)
+	// try to unmarshal data into ActionDefinitionGoToDashboardAction
+	err = newStrictDecoder(data).Decode(&dst.ActionDefinitionGoToDashboardAction)
 	if err == nil {
-		jsonActionDefinitionOneOf1, _ := json.Marshal(dst.ActionDefinitionOneOf1)
-		if string(jsonActionDefinitionOneOf1) == "{}" { // empty struct
-			dst.ActionDefinitionOneOf1 = nil
+		jsonActionDefinitionGoToDashboardAction, _ := json.Marshal(dst.ActionDefinitionGoToDashboardAction)
+		if string(jsonActionDefinitionGoToDashboardAction) == "{}" { // empty struct
+			dst.ActionDefinitionGoToDashboardAction = nil
 		} else {
-			if err = validator.Validate(dst.ActionDefinitionOneOf1); err != nil {
-				dst.ActionDefinitionOneOf1 = nil
+			if err = validator.Validate(dst.ActionDefinitionGoToDashboardAction); err != nil {
+				dst.ActionDefinitionGoToDashboardAction = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.ActionDefinitionOneOf1 = nil
+		dst.ActionDefinitionGoToDashboardAction = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.ActionDefinitionOneOf = nil
-		dst.ActionDefinitionOneOf1 = nil
+		dst.ActionDefinitionCustomAction = nil
+		dst.ActionDefinitionGoToDashboardAction = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(ActionDefinition)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *ActionDefinition) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src ActionDefinition) MarshalJSON() ([]byte, error) {
-	if src.ActionDefinitionOneOf != nil {
-		return json.Marshal(&src.ActionDefinitionOneOf)
+	if src.ActionDefinitionCustomAction != nil {
+		return json.Marshal(&src.ActionDefinitionCustomAction)
 	}
 
-	if src.ActionDefinitionOneOf1 != nil {
-		return json.Marshal(&src.ActionDefinitionOneOf1)
+	if src.ActionDefinitionGoToDashboardAction != nil {
+		return json.Marshal(&src.ActionDefinitionGoToDashboardAction)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *ActionDefinition) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.ActionDefinitionOneOf != nil {
-		return obj.ActionDefinitionOneOf
+	if obj.ActionDefinitionCustomAction != nil {
+		return obj.ActionDefinitionCustomAction
 	}
 
-	if obj.ActionDefinitionOneOf1 != nil {
-		return obj.ActionDefinitionOneOf1
+	if obj.ActionDefinitionGoToDashboardAction != nil {
+		return obj.ActionDefinitionGoToDashboardAction
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *ActionDefinition) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj ActionDefinition) GetActualInstanceValue() (interface{}) {
-	if obj.ActionDefinitionOneOf != nil {
-		return *obj.ActionDefinitionOneOf
+	if obj.ActionDefinitionCustomAction != nil {
+		return *obj.ActionDefinitionCustomAction
 	}
 
-	if obj.ActionDefinitionOneOf1 != nil {
-		return *obj.ActionDefinitionOneOf1
+	if obj.ActionDefinitionGoToDashboardAction != nil {
+		return *obj.ActionDefinitionGoToDashboardAction
 	}
 
 	// all schemas are nil

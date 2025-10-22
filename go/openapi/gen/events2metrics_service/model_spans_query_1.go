@@ -22,7 +22,7 @@ type SpansQuery1 struct {
 	Alias *string `json:"alias,omitempty"`
 	ApplicationnameFilters []string `json:"applicationnameFilters,omitempty"`
 	Lucene *string `json:"lucene,omitempty"`
-	SeverityFilters []string `json:"severityFilters,omitempty"`
+	SeverityFilters []Logs2metricsV2Severity `json:"severityFilters,omitempty"`
 	SubsystemnameFilters []string `json:"subsystemnameFilters,omitempty"`
 }
 
@@ -140,9 +140,9 @@ func (o *SpansQuery1) SetLucene(v string) {
 }
 
 // GetSeverityFilters returns the SeverityFilters field value if set, zero value otherwise.
-func (o *SpansQuery1) GetSeverityFilters() []string {
+func (o *SpansQuery1) GetSeverityFilters() []Logs2metricsV2Severity {
 	if o == nil || IsNil(o.SeverityFilters) {
-		var ret []string
+		var ret []Logs2metricsV2Severity
 		return ret
 	}
 	return o.SeverityFilters
@@ -150,7 +150,7 @@ func (o *SpansQuery1) GetSeverityFilters() []string {
 
 // GetSeverityFiltersOk returns a tuple with the SeverityFilters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SpansQuery1) GetSeverityFiltersOk() ([]string, bool) {
+func (o *SpansQuery1) GetSeverityFiltersOk() ([]Logs2metricsV2Severity, bool) {
 	if o == nil || IsNil(o.SeverityFilters) {
 		return nil, false
 	}
@@ -166,8 +166,8 @@ func (o *SpansQuery1) HasSeverityFilters() bool {
 	return false
 }
 
-// SetSeverityFilters gets a reference to the given []string and assigns it to the SeverityFilters field.
-func (o *SpansQuery1) SetSeverityFilters(v []string) {
+// SetSeverityFilters gets a reference to the given []Logs2metricsV2Severity and assigns it to the SeverityFilters field.
+func (o *SpansQuery1) SetSeverityFilters(v []Logs2metricsV2Severity) {
 	o.SeverityFilters = v
 }
 

@@ -18,21 +18,21 @@ import (
 
 // TimeSelection - struct for TimeSelection
 type TimeSelection struct {
-	TimeSelectionOneOf *TimeSelectionOneOf
-	TimeSelectionOneOf1 *TimeSelectionOneOf1
+	TimeSelectionCustomSelection *TimeSelectionCustomSelection
+	TimeSelectionQuickSelection *TimeSelectionQuickSelection
 }
 
-// TimeSelectionOneOfAsTimeSelection is a convenience function that returns TimeSelectionOneOf wrapped in TimeSelection
-func TimeSelectionOneOfAsTimeSelection(v *TimeSelectionOneOf) TimeSelection {
+// TimeSelectionCustomSelectionAsTimeSelection is a convenience function that returns TimeSelectionCustomSelection wrapped in TimeSelection
+func TimeSelectionCustomSelectionAsTimeSelection(v *TimeSelectionCustomSelection) TimeSelection {
 	return TimeSelection{
-		TimeSelectionOneOf: v,
+		TimeSelectionCustomSelection: v,
 	}
 }
 
-// TimeSelectionOneOf1AsTimeSelection is a convenience function that returns TimeSelectionOneOf1 wrapped in TimeSelection
-func TimeSelectionOneOf1AsTimeSelection(v *TimeSelectionOneOf1) TimeSelection {
+// TimeSelectionQuickSelectionAsTimeSelection is a convenience function that returns TimeSelectionQuickSelection wrapped in TimeSelection
+func TimeSelectionQuickSelectionAsTimeSelection(v *TimeSelectionQuickSelection) TimeSelection {
 	return TimeSelection{
-		TimeSelectionOneOf1: v,
+		TimeSelectionQuickSelection: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func TimeSelectionOneOf1AsTimeSelection(v *TimeSelectionOneOf1) TimeSelection {
 func (dst *TimeSelection) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into TimeSelectionOneOf
-	err = newStrictDecoder(data).Decode(&dst.TimeSelectionOneOf)
+	// try to unmarshal data into TimeSelectionCustomSelection
+	err = newStrictDecoder(data).Decode(&dst.TimeSelectionCustomSelection)
 	if err == nil {
-		jsonTimeSelectionOneOf, _ := json.Marshal(dst.TimeSelectionOneOf)
-		if string(jsonTimeSelectionOneOf) == "{}" { // empty struct
-			dst.TimeSelectionOneOf = nil
+		jsonTimeSelectionCustomSelection, _ := json.Marshal(dst.TimeSelectionCustomSelection)
+		if string(jsonTimeSelectionCustomSelection) == "{}" { // empty struct
+			dst.TimeSelectionCustomSelection = nil
 		} else {
-			if err = validator.Validate(dst.TimeSelectionOneOf); err != nil {
-				dst.TimeSelectionOneOf = nil
+			if err = validator.Validate(dst.TimeSelectionCustomSelection); err != nil {
+				dst.TimeSelectionCustomSelection = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.TimeSelectionOneOf = nil
+		dst.TimeSelectionCustomSelection = nil
 	}
 
-	// try to unmarshal data into TimeSelectionOneOf1
-	err = newStrictDecoder(data).Decode(&dst.TimeSelectionOneOf1)
+	// try to unmarshal data into TimeSelectionQuickSelection
+	err = newStrictDecoder(data).Decode(&dst.TimeSelectionQuickSelection)
 	if err == nil {
-		jsonTimeSelectionOneOf1, _ := json.Marshal(dst.TimeSelectionOneOf1)
-		if string(jsonTimeSelectionOneOf1) == "{}" { // empty struct
-			dst.TimeSelectionOneOf1 = nil
+		jsonTimeSelectionQuickSelection, _ := json.Marshal(dst.TimeSelectionQuickSelection)
+		if string(jsonTimeSelectionQuickSelection) == "{}" { // empty struct
+			dst.TimeSelectionQuickSelection = nil
 		} else {
-			if err = validator.Validate(dst.TimeSelectionOneOf1); err != nil {
-				dst.TimeSelectionOneOf1 = nil
+			if err = validator.Validate(dst.TimeSelectionQuickSelection); err != nil {
+				dst.TimeSelectionQuickSelection = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.TimeSelectionOneOf1 = nil
+		dst.TimeSelectionQuickSelection = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.TimeSelectionOneOf = nil
-		dst.TimeSelectionOneOf1 = nil
+		dst.TimeSelectionCustomSelection = nil
+		dst.TimeSelectionQuickSelection = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(TimeSelection)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *TimeSelection) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src TimeSelection) MarshalJSON() ([]byte, error) {
-	if src.TimeSelectionOneOf != nil {
-		return json.Marshal(&src.TimeSelectionOneOf)
+	if src.TimeSelectionCustomSelection != nil {
+		return json.Marshal(&src.TimeSelectionCustomSelection)
 	}
 
-	if src.TimeSelectionOneOf1 != nil {
-		return json.Marshal(&src.TimeSelectionOneOf1)
+	if src.TimeSelectionQuickSelection != nil {
+		return json.Marshal(&src.TimeSelectionQuickSelection)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *TimeSelection) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.TimeSelectionOneOf != nil {
-		return obj.TimeSelectionOneOf
+	if obj.TimeSelectionCustomSelection != nil {
+		return obj.TimeSelectionCustomSelection
 	}
 
-	if obj.TimeSelectionOneOf1 != nil {
-		return obj.TimeSelectionOneOf1
+	if obj.TimeSelectionQuickSelection != nil {
+		return obj.TimeSelectionQuickSelection
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *TimeSelection) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj TimeSelection) GetActualInstanceValue() (interface{}) {
-	if obj.TimeSelectionOneOf != nil {
-		return *obj.TimeSelectionOneOf
+	if obj.TimeSelectionCustomSelection != nil {
+		return *obj.TimeSelectionCustomSelection
 	}
 
-	if obj.TimeSelectionOneOf1 != nil {
-		return *obj.TimeSelectionOneOf1
+	if obj.TimeSelectionQuickSelection != nil {
+		return *obj.TimeSelectionQuickSelection
 	}
 
 	// all schemas are nil

@@ -18,21 +18,21 @@ import (
 
 // Target - struct for Target
 type Target struct {
-	Target1 *Target1
-	Target2 *Target2
+	TargetIbmCos *TargetIbmCos
+	TargetS3 *TargetS3
 }
 
-// Target1AsTarget is a convenience function that returns Target1 wrapped in Target
-func Target1AsTarget(v *Target1) Target {
+// TargetIbmCosAsTarget is a convenience function that returns TargetIbmCos wrapped in Target
+func TargetIbmCosAsTarget(v *TargetIbmCos) Target {
 	return Target{
-		Target1: v,
+		TargetIbmCos: v,
 	}
 }
 
-// Target2AsTarget is a convenience function that returns Target2 wrapped in Target
-func Target2AsTarget(v *Target2) Target {
+// TargetS3AsTarget is a convenience function that returns TargetS3 wrapped in Target
+func TargetS3AsTarget(v *TargetS3) Target {
 	return Target{
-		Target2: v,
+		TargetS3: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func Target2AsTarget(v *Target2) Target {
 func (dst *Target) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into Target1
-	err = newStrictDecoder(data).Decode(&dst.Target1)
+	// try to unmarshal data into TargetIbmCos
+	err = newStrictDecoder(data).Decode(&dst.TargetIbmCos)
 	if err == nil {
-		jsonTarget1, _ := json.Marshal(dst.Target1)
-		if string(jsonTarget1) == "{}" { // empty struct
-			dst.Target1 = nil
+		jsonTargetIbmCos, _ := json.Marshal(dst.TargetIbmCos)
+		if string(jsonTargetIbmCos) == "{}" { // empty struct
+			dst.TargetIbmCos = nil
 		} else {
-			if err = validator.Validate(dst.Target1); err != nil {
-				dst.Target1 = nil
+			if err = validator.Validate(dst.TargetIbmCos); err != nil {
+				dst.TargetIbmCos = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Target1 = nil
+		dst.TargetIbmCos = nil
 	}
 
-	// try to unmarshal data into Target2
-	err = newStrictDecoder(data).Decode(&dst.Target2)
+	// try to unmarshal data into TargetS3
+	err = newStrictDecoder(data).Decode(&dst.TargetS3)
 	if err == nil {
-		jsonTarget2, _ := json.Marshal(dst.Target2)
-		if string(jsonTarget2) == "{}" { // empty struct
-			dst.Target2 = nil
+		jsonTargetS3, _ := json.Marshal(dst.TargetS3)
+		if string(jsonTargetS3) == "{}" { // empty struct
+			dst.TargetS3 = nil
 		} else {
-			if err = validator.Validate(dst.Target2); err != nil {
-				dst.Target2 = nil
+			if err = validator.Validate(dst.TargetS3); err != nil {
+				dst.TargetS3 = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Target2 = nil
+		dst.TargetS3 = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.Target1 = nil
-		dst.Target2 = nil
+		dst.TargetIbmCos = nil
+		dst.TargetS3 = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(Target)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *Target) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src Target) MarshalJSON() ([]byte, error) {
-	if src.Target1 != nil {
-		return json.Marshal(&src.Target1)
+	if src.TargetIbmCos != nil {
+		return json.Marshal(&src.TargetIbmCos)
 	}
 
-	if src.Target2 != nil {
-		return json.Marshal(&src.Target2)
+	if src.TargetS3 != nil {
+		return json.Marshal(&src.TargetS3)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *Target) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.Target1 != nil {
-		return obj.Target1
+	if obj.TargetIbmCos != nil {
+		return obj.TargetIbmCos
 	}
 
-	if obj.Target2 != nil {
-		return obj.Target2
+	if obj.TargetS3 != nil {
+		return obj.TargetS3
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *Target) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj Target) GetActualInstanceValue() (interface{}) {
-	if obj.Target1 != nil {
-		return *obj.Target1
+	if obj.TargetIbmCos != nil {
+		return *obj.TargetIbmCos
 	}
 
-	if obj.Target2 != nil {
-		return *obj.Target2
+	if obj.TargetS3 != nil {
+		return *obj.TargetS3
 	}
 
 	// all schemas are nil

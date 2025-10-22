@@ -18,37 +18,37 @@ import (
 
 // DataTableQuery - struct for DataTableQuery
 type DataTableQuery struct {
-	DataTableQueryOneOf *DataTableQueryOneOf
-	DataTableQueryOneOf1 *DataTableQueryOneOf1
-	DataTableQueryOneOf2 *DataTableQueryOneOf2
-	DataTableQueryOneOf3 *DataTableQueryOneOf3
+	QueryDataprime *QueryDataprime
+	QueryLogs *QueryLogs
+	QueryMetrics *QueryMetrics
+	QuerySpans *QuerySpans
 }
 
-// DataTableQueryOneOfAsDataTableQuery is a convenience function that returns DataTableQueryOneOf wrapped in DataTableQuery
-func DataTableQueryOneOfAsDataTableQuery(v *DataTableQueryOneOf) DataTableQuery {
+// QueryDataprimeAsDataTableQuery is a convenience function that returns QueryDataprime wrapped in DataTableQuery
+func QueryDataprimeAsDataTableQuery(v *QueryDataprime) DataTableQuery {
 	return DataTableQuery{
-		DataTableQueryOneOf: v,
+		QueryDataprime: v,
 	}
 }
 
-// DataTableQueryOneOf1AsDataTableQuery is a convenience function that returns DataTableQueryOneOf1 wrapped in DataTableQuery
-func DataTableQueryOneOf1AsDataTableQuery(v *DataTableQueryOneOf1) DataTableQuery {
+// QueryLogsAsDataTableQuery is a convenience function that returns QueryLogs wrapped in DataTableQuery
+func QueryLogsAsDataTableQuery(v *QueryLogs) DataTableQuery {
 	return DataTableQuery{
-		DataTableQueryOneOf1: v,
+		QueryLogs: v,
 	}
 }
 
-// DataTableQueryOneOf2AsDataTableQuery is a convenience function that returns DataTableQueryOneOf2 wrapped in DataTableQuery
-func DataTableQueryOneOf2AsDataTableQuery(v *DataTableQueryOneOf2) DataTableQuery {
+// QueryMetricsAsDataTableQuery is a convenience function that returns QueryMetrics wrapped in DataTableQuery
+func QueryMetricsAsDataTableQuery(v *QueryMetrics) DataTableQuery {
 	return DataTableQuery{
-		DataTableQueryOneOf2: v,
+		QueryMetrics: v,
 	}
 }
 
-// DataTableQueryOneOf3AsDataTableQuery is a convenience function that returns DataTableQueryOneOf3 wrapped in DataTableQuery
-func DataTableQueryOneOf3AsDataTableQuery(v *DataTableQueryOneOf3) DataTableQuery {
+// QuerySpansAsDataTableQuery is a convenience function that returns QuerySpans wrapped in DataTableQuery
+func QuerySpansAsDataTableQuery(v *QuerySpans) DataTableQuery {
 	return DataTableQuery{
-		DataTableQueryOneOf3: v,
+		QuerySpans: v,
 	}
 }
 
@@ -57,80 +57,80 @@ func DataTableQueryOneOf3AsDataTableQuery(v *DataTableQueryOneOf3) DataTableQuer
 func (dst *DataTableQuery) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into DataTableQueryOneOf
-	err = newStrictDecoder(data).Decode(&dst.DataTableQueryOneOf)
+	// try to unmarshal data into QueryDataprime
+	err = newStrictDecoder(data).Decode(&dst.QueryDataprime)
 	if err == nil {
-		jsonDataTableQueryOneOf, _ := json.Marshal(dst.DataTableQueryOneOf)
-		if string(jsonDataTableQueryOneOf) == "{}" { // empty struct
-			dst.DataTableQueryOneOf = nil
+		jsonQueryDataprime, _ := json.Marshal(dst.QueryDataprime)
+		if string(jsonQueryDataprime) == "{}" { // empty struct
+			dst.QueryDataprime = nil
 		} else {
-			if err = validator.Validate(dst.DataTableQueryOneOf); err != nil {
-				dst.DataTableQueryOneOf = nil
+			if err = validator.Validate(dst.QueryDataprime); err != nil {
+				dst.QueryDataprime = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.DataTableQueryOneOf = nil
+		dst.QueryDataprime = nil
 	}
 
-	// try to unmarshal data into DataTableQueryOneOf1
-	err = newStrictDecoder(data).Decode(&dst.DataTableQueryOneOf1)
+	// try to unmarshal data into QueryLogs
+	err = newStrictDecoder(data).Decode(&dst.QueryLogs)
 	if err == nil {
-		jsonDataTableQueryOneOf1, _ := json.Marshal(dst.DataTableQueryOneOf1)
-		if string(jsonDataTableQueryOneOf1) == "{}" { // empty struct
-			dst.DataTableQueryOneOf1 = nil
+		jsonQueryLogs, _ := json.Marshal(dst.QueryLogs)
+		if string(jsonQueryLogs) == "{}" { // empty struct
+			dst.QueryLogs = nil
 		} else {
-			if err = validator.Validate(dst.DataTableQueryOneOf1); err != nil {
-				dst.DataTableQueryOneOf1 = nil
+			if err = validator.Validate(dst.QueryLogs); err != nil {
+				dst.QueryLogs = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.DataTableQueryOneOf1 = nil
+		dst.QueryLogs = nil
 	}
 
-	// try to unmarshal data into DataTableQueryOneOf2
-	err = newStrictDecoder(data).Decode(&dst.DataTableQueryOneOf2)
+	// try to unmarshal data into QueryMetrics
+	err = newStrictDecoder(data).Decode(&dst.QueryMetrics)
 	if err == nil {
-		jsonDataTableQueryOneOf2, _ := json.Marshal(dst.DataTableQueryOneOf2)
-		if string(jsonDataTableQueryOneOf2) == "{}" { // empty struct
-			dst.DataTableQueryOneOf2 = nil
+		jsonQueryMetrics, _ := json.Marshal(dst.QueryMetrics)
+		if string(jsonQueryMetrics) == "{}" { // empty struct
+			dst.QueryMetrics = nil
 		} else {
-			if err = validator.Validate(dst.DataTableQueryOneOf2); err != nil {
-				dst.DataTableQueryOneOf2 = nil
+			if err = validator.Validate(dst.QueryMetrics); err != nil {
+				dst.QueryMetrics = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.DataTableQueryOneOf2 = nil
+		dst.QueryMetrics = nil
 	}
 
-	// try to unmarshal data into DataTableQueryOneOf3
-	err = newStrictDecoder(data).Decode(&dst.DataTableQueryOneOf3)
+	// try to unmarshal data into QuerySpans
+	err = newStrictDecoder(data).Decode(&dst.QuerySpans)
 	if err == nil {
-		jsonDataTableQueryOneOf3, _ := json.Marshal(dst.DataTableQueryOneOf3)
-		if string(jsonDataTableQueryOneOf3) == "{}" { // empty struct
-			dst.DataTableQueryOneOf3 = nil
+		jsonQuerySpans, _ := json.Marshal(dst.QuerySpans)
+		if string(jsonQuerySpans) == "{}" { // empty struct
+			dst.QuerySpans = nil
 		} else {
-			if err = validator.Validate(dst.DataTableQueryOneOf3); err != nil {
-				dst.DataTableQueryOneOf3 = nil
+			if err = validator.Validate(dst.QuerySpans); err != nil {
+				dst.QuerySpans = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.DataTableQueryOneOf3 = nil
+		dst.QuerySpans = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.DataTableQueryOneOf = nil
-		dst.DataTableQueryOneOf1 = nil
-		dst.DataTableQueryOneOf2 = nil
-		dst.DataTableQueryOneOf3 = nil
+		dst.QueryDataprime = nil
+		dst.QueryLogs = nil
+		dst.QueryMetrics = nil
+		dst.QuerySpans = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(DataTableQuery)")
 	} else if match == 1 {
@@ -142,20 +142,20 @@ func (dst *DataTableQuery) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src DataTableQuery) MarshalJSON() ([]byte, error) {
-	if src.DataTableQueryOneOf != nil {
-		return json.Marshal(&src.DataTableQueryOneOf)
+	if src.QueryDataprime != nil {
+		return json.Marshal(&src.QueryDataprime)
 	}
 
-	if src.DataTableQueryOneOf1 != nil {
-		return json.Marshal(&src.DataTableQueryOneOf1)
+	if src.QueryLogs != nil {
+		return json.Marshal(&src.QueryLogs)
 	}
 
-	if src.DataTableQueryOneOf2 != nil {
-		return json.Marshal(&src.DataTableQueryOneOf2)
+	if src.QueryMetrics != nil {
+		return json.Marshal(&src.QueryMetrics)
 	}
 
-	if src.DataTableQueryOneOf3 != nil {
-		return json.Marshal(&src.DataTableQueryOneOf3)
+	if src.QuerySpans != nil {
+		return json.Marshal(&src.QuerySpans)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -166,20 +166,20 @@ func (obj *DataTableQuery) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.DataTableQueryOneOf != nil {
-		return obj.DataTableQueryOneOf
+	if obj.QueryDataprime != nil {
+		return obj.QueryDataprime
 	}
 
-	if obj.DataTableQueryOneOf1 != nil {
-		return obj.DataTableQueryOneOf1
+	if obj.QueryLogs != nil {
+		return obj.QueryLogs
 	}
 
-	if obj.DataTableQueryOneOf2 != nil {
-		return obj.DataTableQueryOneOf2
+	if obj.QueryMetrics != nil {
+		return obj.QueryMetrics
 	}
 
-	if obj.DataTableQueryOneOf3 != nil {
-		return obj.DataTableQueryOneOf3
+	if obj.QuerySpans != nil {
+		return obj.QuerySpans
 	}
 
 	// all schemas are nil
@@ -188,20 +188,20 @@ func (obj *DataTableQuery) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj DataTableQuery) GetActualInstanceValue() (interface{}) {
-	if obj.DataTableQueryOneOf != nil {
-		return *obj.DataTableQueryOneOf
+	if obj.QueryDataprime != nil {
+		return *obj.QueryDataprime
 	}
 
-	if obj.DataTableQueryOneOf1 != nil {
-		return *obj.DataTableQueryOneOf1
+	if obj.QueryLogs != nil {
+		return *obj.QueryLogs
 	}
 
-	if obj.DataTableQueryOneOf2 != nil {
-		return *obj.DataTableQueryOneOf2
+	if obj.QueryMetrics != nil {
+		return *obj.QueryMetrics
 	}
 
-	if obj.DataTableQueryOneOf3 != nil {
-		return *obj.DataTableQueryOneOf3
+	if obj.QuerySpans != nil {
+		return *obj.QuerySpans
 	}
 
 	// all schemas are nil

@@ -18,29 +18,29 @@ import (
 
 // LogsSourceStrategy - struct for LogsSourceStrategy
 type LogsSourceStrategy struct {
-	LogsSourceStrategyOneOf *LogsSourceStrategyOneOf
-	LogsSourceStrategyOneOf1 *LogsSourceStrategyOneOf1
-	LogsSourceStrategyOneOf2 *LogsSourceStrategyOneOf2
+	StrategyDuration *StrategyDuration
+	StrategyInstant *StrategyInstant
+	StrategyRange *StrategyRange
 }
 
-// LogsSourceStrategyOneOfAsLogsSourceStrategy is a convenience function that returns LogsSourceStrategyOneOf wrapped in LogsSourceStrategy
-func LogsSourceStrategyOneOfAsLogsSourceStrategy(v *LogsSourceStrategyOneOf) LogsSourceStrategy {
+// StrategyDurationAsLogsSourceStrategy is a convenience function that returns StrategyDuration wrapped in LogsSourceStrategy
+func StrategyDurationAsLogsSourceStrategy(v *StrategyDuration) LogsSourceStrategy {
 	return LogsSourceStrategy{
-		LogsSourceStrategyOneOf: v,
+		StrategyDuration: v,
 	}
 }
 
-// LogsSourceStrategyOneOf1AsLogsSourceStrategy is a convenience function that returns LogsSourceStrategyOneOf1 wrapped in LogsSourceStrategy
-func LogsSourceStrategyOneOf1AsLogsSourceStrategy(v *LogsSourceStrategyOneOf1) LogsSourceStrategy {
+// StrategyInstantAsLogsSourceStrategy is a convenience function that returns StrategyInstant wrapped in LogsSourceStrategy
+func StrategyInstantAsLogsSourceStrategy(v *StrategyInstant) LogsSourceStrategy {
 	return LogsSourceStrategy{
-		LogsSourceStrategyOneOf1: v,
+		StrategyInstant: v,
 	}
 }
 
-// LogsSourceStrategyOneOf2AsLogsSourceStrategy is a convenience function that returns LogsSourceStrategyOneOf2 wrapped in LogsSourceStrategy
-func LogsSourceStrategyOneOf2AsLogsSourceStrategy(v *LogsSourceStrategyOneOf2) LogsSourceStrategy {
+// StrategyRangeAsLogsSourceStrategy is a convenience function that returns StrategyRange wrapped in LogsSourceStrategy
+func StrategyRangeAsLogsSourceStrategy(v *StrategyRange) LogsSourceStrategy {
 	return LogsSourceStrategy{
-		LogsSourceStrategyOneOf2: v,
+		StrategyRange: v,
 	}
 }
 
@@ -49,62 +49,62 @@ func LogsSourceStrategyOneOf2AsLogsSourceStrategy(v *LogsSourceStrategyOneOf2) L
 func (dst *LogsSourceStrategy) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into LogsSourceStrategyOneOf
-	err = newStrictDecoder(data).Decode(&dst.LogsSourceStrategyOneOf)
+	// try to unmarshal data into StrategyDuration
+	err = newStrictDecoder(data).Decode(&dst.StrategyDuration)
 	if err == nil {
-		jsonLogsSourceStrategyOneOf, _ := json.Marshal(dst.LogsSourceStrategyOneOf)
-		if string(jsonLogsSourceStrategyOneOf) == "{}" { // empty struct
-			dst.LogsSourceStrategyOneOf = nil
+		jsonStrategyDuration, _ := json.Marshal(dst.StrategyDuration)
+		if string(jsonStrategyDuration) == "{}" { // empty struct
+			dst.StrategyDuration = nil
 		} else {
-			if err = validator.Validate(dst.LogsSourceStrategyOneOf); err != nil {
-				dst.LogsSourceStrategyOneOf = nil
+			if err = validator.Validate(dst.StrategyDuration); err != nil {
+				dst.StrategyDuration = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.LogsSourceStrategyOneOf = nil
+		dst.StrategyDuration = nil
 	}
 
-	// try to unmarshal data into LogsSourceStrategyOneOf1
-	err = newStrictDecoder(data).Decode(&dst.LogsSourceStrategyOneOf1)
+	// try to unmarshal data into StrategyInstant
+	err = newStrictDecoder(data).Decode(&dst.StrategyInstant)
 	if err == nil {
-		jsonLogsSourceStrategyOneOf1, _ := json.Marshal(dst.LogsSourceStrategyOneOf1)
-		if string(jsonLogsSourceStrategyOneOf1) == "{}" { // empty struct
-			dst.LogsSourceStrategyOneOf1 = nil
+		jsonStrategyInstant, _ := json.Marshal(dst.StrategyInstant)
+		if string(jsonStrategyInstant) == "{}" { // empty struct
+			dst.StrategyInstant = nil
 		} else {
-			if err = validator.Validate(dst.LogsSourceStrategyOneOf1); err != nil {
-				dst.LogsSourceStrategyOneOf1 = nil
+			if err = validator.Validate(dst.StrategyInstant); err != nil {
+				dst.StrategyInstant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.LogsSourceStrategyOneOf1 = nil
+		dst.StrategyInstant = nil
 	}
 
-	// try to unmarshal data into LogsSourceStrategyOneOf2
-	err = newStrictDecoder(data).Decode(&dst.LogsSourceStrategyOneOf2)
+	// try to unmarshal data into StrategyRange
+	err = newStrictDecoder(data).Decode(&dst.StrategyRange)
 	if err == nil {
-		jsonLogsSourceStrategyOneOf2, _ := json.Marshal(dst.LogsSourceStrategyOneOf2)
-		if string(jsonLogsSourceStrategyOneOf2) == "{}" { // empty struct
-			dst.LogsSourceStrategyOneOf2 = nil
+		jsonStrategyRange, _ := json.Marshal(dst.StrategyRange)
+		if string(jsonStrategyRange) == "{}" { // empty struct
+			dst.StrategyRange = nil
 		} else {
-			if err = validator.Validate(dst.LogsSourceStrategyOneOf2); err != nil {
-				dst.LogsSourceStrategyOneOf2 = nil
+			if err = validator.Validate(dst.StrategyRange); err != nil {
+				dst.StrategyRange = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.LogsSourceStrategyOneOf2 = nil
+		dst.StrategyRange = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.LogsSourceStrategyOneOf = nil
-		dst.LogsSourceStrategyOneOf1 = nil
-		dst.LogsSourceStrategyOneOf2 = nil
+		dst.StrategyDuration = nil
+		dst.StrategyInstant = nil
+		dst.StrategyRange = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(LogsSourceStrategy)")
 	} else if match == 1 {
@@ -116,16 +116,16 @@ func (dst *LogsSourceStrategy) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src LogsSourceStrategy) MarshalJSON() ([]byte, error) {
-	if src.LogsSourceStrategyOneOf != nil {
-		return json.Marshal(&src.LogsSourceStrategyOneOf)
+	if src.StrategyDuration != nil {
+		return json.Marshal(&src.StrategyDuration)
 	}
 
-	if src.LogsSourceStrategyOneOf1 != nil {
-		return json.Marshal(&src.LogsSourceStrategyOneOf1)
+	if src.StrategyInstant != nil {
+		return json.Marshal(&src.StrategyInstant)
 	}
 
-	if src.LogsSourceStrategyOneOf2 != nil {
-		return json.Marshal(&src.LogsSourceStrategyOneOf2)
+	if src.StrategyRange != nil {
+		return json.Marshal(&src.StrategyRange)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -136,16 +136,16 @@ func (obj *LogsSourceStrategy) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.LogsSourceStrategyOneOf != nil {
-		return obj.LogsSourceStrategyOneOf
+	if obj.StrategyDuration != nil {
+		return obj.StrategyDuration
 	}
 
-	if obj.LogsSourceStrategyOneOf1 != nil {
-		return obj.LogsSourceStrategyOneOf1
+	if obj.StrategyInstant != nil {
+		return obj.StrategyInstant
 	}
 
-	if obj.LogsSourceStrategyOneOf2 != nil {
-		return obj.LogsSourceStrategyOneOf2
+	if obj.StrategyRange != nil {
+		return obj.StrategyRange
 	}
 
 	// all schemas are nil
@@ -154,16 +154,16 @@ func (obj *LogsSourceStrategy) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj LogsSourceStrategy) GetActualInstanceValue() (interface{}) {
-	if obj.LogsSourceStrategyOneOf != nil {
-		return *obj.LogsSourceStrategyOneOf
+	if obj.StrategyDuration != nil {
+		return *obj.StrategyDuration
 	}
 
-	if obj.LogsSourceStrategyOneOf1 != nil {
-		return *obj.LogsSourceStrategyOneOf1
+	if obj.StrategyInstant != nil {
+		return *obj.StrategyInstant
 	}
 
-	if obj.LogsSourceStrategyOneOf2 != nil {
-		return *obj.LogsSourceStrategyOneOf2
+	if obj.StrategyRange != nil {
+		return *obj.StrategyRange
 	}
 
 	// all schemas are nil

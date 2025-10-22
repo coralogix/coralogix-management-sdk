@@ -18,21 +18,21 @@ import (
 
 // AlertSchedulerRuleProtobufV1Filter - struct for AlertSchedulerRuleProtobufV1Filter
 type AlertSchedulerRuleProtobufV1Filter struct {
-	AlertSchedulerRuleProtobufV1FilterOneOf *AlertSchedulerRuleProtobufV1FilterOneOf
-	AlertSchedulerRuleProtobufV1FilterOneOf1 *AlertSchedulerRuleProtobufV1FilterOneOf1
+	FilterAlertMetaLabels *FilterAlertMetaLabels
+	FilterAlertUniqueIds *FilterAlertUniqueIds
 }
 
-// AlertSchedulerRuleProtobufV1FilterOneOfAsAlertSchedulerRuleProtobufV1Filter is a convenience function that returns AlertSchedulerRuleProtobufV1FilterOneOf wrapped in AlertSchedulerRuleProtobufV1Filter
-func AlertSchedulerRuleProtobufV1FilterOneOfAsAlertSchedulerRuleProtobufV1Filter(v *AlertSchedulerRuleProtobufV1FilterOneOf) AlertSchedulerRuleProtobufV1Filter {
+// FilterAlertMetaLabelsAsAlertSchedulerRuleProtobufV1Filter is a convenience function that returns FilterAlertMetaLabels wrapped in AlertSchedulerRuleProtobufV1Filter
+func FilterAlertMetaLabelsAsAlertSchedulerRuleProtobufV1Filter(v *FilterAlertMetaLabels) AlertSchedulerRuleProtobufV1Filter {
 	return AlertSchedulerRuleProtobufV1Filter{
-		AlertSchedulerRuleProtobufV1FilterOneOf: v,
+		FilterAlertMetaLabels: v,
 	}
 }
 
-// AlertSchedulerRuleProtobufV1FilterOneOf1AsAlertSchedulerRuleProtobufV1Filter is a convenience function that returns AlertSchedulerRuleProtobufV1FilterOneOf1 wrapped in AlertSchedulerRuleProtobufV1Filter
-func AlertSchedulerRuleProtobufV1FilterOneOf1AsAlertSchedulerRuleProtobufV1Filter(v *AlertSchedulerRuleProtobufV1FilterOneOf1) AlertSchedulerRuleProtobufV1Filter {
+// FilterAlertUniqueIdsAsAlertSchedulerRuleProtobufV1Filter is a convenience function that returns FilterAlertUniqueIds wrapped in AlertSchedulerRuleProtobufV1Filter
+func FilterAlertUniqueIdsAsAlertSchedulerRuleProtobufV1Filter(v *FilterAlertUniqueIds) AlertSchedulerRuleProtobufV1Filter {
 	return AlertSchedulerRuleProtobufV1Filter{
-		AlertSchedulerRuleProtobufV1FilterOneOf1: v,
+		FilterAlertUniqueIds: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func AlertSchedulerRuleProtobufV1FilterOneOf1AsAlertSchedulerRuleProtobufV1Filte
 func (dst *AlertSchedulerRuleProtobufV1Filter) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into AlertSchedulerRuleProtobufV1FilterOneOf
-	err = newStrictDecoder(data).Decode(&dst.AlertSchedulerRuleProtobufV1FilterOneOf)
+	// try to unmarshal data into FilterAlertMetaLabels
+	err = newStrictDecoder(data).Decode(&dst.FilterAlertMetaLabels)
 	if err == nil {
-		jsonAlertSchedulerRuleProtobufV1FilterOneOf, _ := json.Marshal(dst.AlertSchedulerRuleProtobufV1FilterOneOf)
-		if string(jsonAlertSchedulerRuleProtobufV1FilterOneOf) == "{}" { // empty struct
-			dst.AlertSchedulerRuleProtobufV1FilterOneOf = nil
+		jsonFilterAlertMetaLabels, _ := json.Marshal(dst.FilterAlertMetaLabels)
+		if string(jsonFilterAlertMetaLabels) == "{}" { // empty struct
+			dst.FilterAlertMetaLabels = nil
 		} else {
-			if err = validator.Validate(dst.AlertSchedulerRuleProtobufV1FilterOneOf); err != nil {
-				dst.AlertSchedulerRuleProtobufV1FilterOneOf = nil
+			if err = validator.Validate(dst.FilterAlertMetaLabels); err != nil {
+				dst.FilterAlertMetaLabels = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AlertSchedulerRuleProtobufV1FilterOneOf = nil
+		dst.FilterAlertMetaLabels = nil
 	}
 
-	// try to unmarshal data into AlertSchedulerRuleProtobufV1FilterOneOf1
-	err = newStrictDecoder(data).Decode(&dst.AlertSchedulerRuleProtobufV1FilterOneOf1)
+	// try to unmarshal data into FilterAlertUniqueIds
+	err = newStrictDecoder(data).Decode(&dst.FilterAlertUniqueIds)
 	if err == nil {
-		jsonAlertSchedulerRuleProtobufV1FilterOneOf1, _ := json.Marshal(dst.AlertSchedulerRuleProtobufV1FilterOneOf1)
-		if string(jsonAlertSchedulerRuleProtobufV1FilterOneOf1) == "{}" { // empty struct
-			dst.AlertSchedulerRuleProtobufV1FilterOneOf1 = nil
+		jsonFilterAlertUniqueIds, _ := json.Marshal(dst.FilterAlertUniqueIds)
+		if string(jsonFilterAlertUniqueIds) == "{}" { // empty struct
+			dst.FilterAlertUniqueIds = nil
 		} else {
-			if err = validator.Validate(dst.AlertSchedulerRuleProtobufV1FilterOneOf1); err != nil {
-				dst.AlertSchedulerRuleProtobufV1FilterOneOf1 = nil
+			if err = validator.Validate(dst.FilterAlertUniqueIds); err != nil {
+				dst.FilterAlertUniqueIds = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AlertSchedulerRuleProtobufV1FilterOneOf1 = nil
+		dst.FilterAlertUniqueIds = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.AlertSchedulerRuleProtobufV1FilterOneOf = nil
-		dst.AlertSchedulerRuleProtobufV1FilterOneOf1 = nil
+		dst.FilterAlertMetaLabels = nil
+		dst.FilterAlertUniqueIds = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(AlertSchedulerRuleProtobufV1Filter)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *AlertSchedulerRuleProtobufV1Filter) UnmarshalJSON(data []byte) error 
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src AlertSchedulerRuleProtobufV1Filter) MarshalJSON() ([]byte, error) {
-	if src.AlertSchedulerRuleProtobufV1FilterOneOf != nil {
-		return json.Marshal(&src.AlertSchedulerRuleProtobufV1FilterOneOf)
+	if src.FilterAlertMetaLabels != nil {
+		return json.Marshal(&src.FilterAlertMetaLabels)
 	}
 
-	if src.AlertSchedulerRuleProtobufV1FilterOneOf1 != nil {
-		return json.Marshal(&src.AlertSchedulerRuleProtobufV1FilterOneOf1)
+	if src.FilterAlertUniqueIds != nil {
+		return json.Marshal(&src.FilterAlertUniqueIds)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *AlertSchedulerRuleProtobufV1Filter) GetActualInstance() (interface{})
 	if obj == nil {
 		return nil
 	}
-	if obj.AlertSchedulerRuleProtobufV1FilterOneOf != nil {
-		return obj.AlertSchedulerRuleProtobufV1FilterOneOf
+	if obj.FilterAlertMetaLabels != nil {
+		return obj.FilterAlertMetaLabels
 	}
 
-	if obj.AlertSchedulerRuleProtobufV1FilterOneOf1 != nil {
-		return obj.AlertSchedulerRuleProtobufV1FilterOneOf1
+	if obj.FilterAlertUniqueIds != nil {
+		return obj.FilterAlertUniqueIds
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *AlertSchedulerRuleProtobufV1Filter) GetActualInstance() (interface{})
 
 // Get the actual instance value
 func (obj AlertSchedulerRuleProtobufV1Filter) GetActualInstanceValue() (interface{}) {
-	if obj.AlertSchedulerRuleProtobufV1FilterOneOf != nil {
-		return *obj.AlertSchedulerRuleProtobufV1FilterOneOf
+	if obj.FilterAlertMetaLabels != nil {
+		return *obj.FilterAlertMetaLabels
 	}
 
-	if obj.AlertSchedulerRuleProtobufV1FilterOneOf1 != nil {
-		return *obj.AlertSchedulerRuleProtobufV1FilterOneOf1
+	if obj.FilterAlertUniqueIds != nil {
+		return *obj.FilterAlertUniqueIds
 	}
 
 	// all schemas are nil

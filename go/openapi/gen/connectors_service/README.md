@@ -93,6 +93,9 @@ Class | Method | HTTP request | Description
 
  - [BatchGetConnectorSummariesResponse](docs/BatchGetConnectorSummariesResponse.md)
  - [BatchGetConnectorsResponse](docs/BatchGetConnectorsResponse.md)
+ - [ColorsByAggregation](docs/ColorsByAggregation.md)
+ - [ColorsByGroupBy](docs/ColorsByGroupBy.md)
+ - [ColorsByStack](docs/ColorsByStack.md)
  - [CommonGroup](docs/CommonGroup.md)
  - [Connector](docs/Connector.md)
  - [Connector1](docs/Connector1.md)
@@ -105,8 +108,8 @@ Class | Method | HTTP request | Description
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FieldGroup](docs/FieldGroup.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
- - [FilterPathAndValues1](docs/FilterPathAndValues1.md)
- - [FilterPathAndValues2](docs/FilterPathAndValues2.md)
+ - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
+ - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [GetConnectorResponse](docs/GetConnectorResponse.md)
  - [GetConnectorTypeSummariesResponse](docs/GetConnectorTypeSummariesResponse.md)
@@ -118,6 +121,8 @@ Class | Method | HTTP request | Description
  - [ReplaceConnectorResponse](docs/ReplaceConnectorResponse.md)
  - [TemplatedConnectorConfigField](docs/TemplatedConnectorConfigField.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
+ - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
+ - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

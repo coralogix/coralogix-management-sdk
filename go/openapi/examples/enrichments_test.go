@@ -33,7 +33,7 @@ func TestEnrichmentsGeoIp(t *testing.T) {
 	client := cxsdk.NewEnrichmentsClient(cpc)
 
 	enrichmentType := enrichments.EnrichmentType{
-		EnrichmentTypeOneOf: &enrichments.EnrichmentTypeOneOf{
+		EnrichmentTypeGeoIp: &enrichments.EnrichmentTypeGeoIp{
 			GeoIp: &enrichments.GeoIpType{
 				WithAsn: enrichments.PtrBool(true),
 			},
@@ -78,7 +78,7 @@ func TestEnrichmentsAws(t *testing.T) {
 	client := cxsdk.NewEnrichmentsClient(cpc)
 
 	enrichmentType := enrichments.EnrichmentType{
-		EnrichmentTypeOneOf2: &enrichments.EnrichmentTypeOneOf2{
+		EnrichmentTypeAws: &enrichments.EnrichmentTypeAws{
 			Aws: &enrichments.AwsType{
 				ResourceType: enrichments.PtrString("ec2"),
 			},
@@ -116,7 +116,7 @@ func TestEnrichmentsCustom(t *testing.T) {
 	client := cxsdk.NewEnrichmentsClient(cpc)
 
 	enrichmentType := enrichments.EnrichmentType{
-		EnrichmentTypeOneOf3: &enrichments.EnrichmentTypeOneOf3{
+		EnrichmentTypeCustomEnrichment: &enrichments.EnrichmentTypeCustomEnrichment{
 			CustomEnrichment: &enrichments.CustomEnrichmentType{},
 		},
 	}
@@ -150,7 +150,7 @@ func TestEnrichmentsSuspiciousIp(t *testing.T) {
 
 	client := cxsdk.NewEnrichmentsClient(cpc)
 	enrichmentType := enrichments.EnrichmentType{
-		EnrichmentTypeOneOf1: &enrichments.EnrichmentTypeOneOf1{
+		EnrichmentTypeSuspiciousIp: &enrichments.EnrichmentTypeSuspiciousIp{
 			SuspiciousIp: map[string]interface{}{},
 		},
 	}

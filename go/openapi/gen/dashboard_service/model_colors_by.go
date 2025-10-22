@@ -18,29 +18,29 @@ import (
 
 // ColorsBy - struct for ColorsBy
 type ColorsBy struct {
-	ColorsByOneOf *ColorsByOneOf
-	ColorsByOneOf1 *ColorsByOneOf1
-	ColorsByOneOf2 *ColorsByOneOf2
+	ColorsByAggregation *ColorsByAggregation
+	ColorsByGroupBy *ColorsByGroupBy
+	ColorsByStack *ColorsByStack
 }
 
-// ColorsByOneOfAsColorsBy is a convenience function that returns ColorsByOneOf wrapped in ColorsBy
-func ColorsByOneOfAsColorsBy(v *ColorsByOneOf) ColorsBy {
+// ColorsByAggregationAsColorsBy is a convenience function that returns ColorsByAggregation wrapped in ColorsBy
+func ColorsByAggregationAsColorsBy(v *ColorsByAggregation) ColorsBy {
 	return ColorsBy{
-		ColorsByOneOf: v,
+		ColorsByAggregation: v,
 	}
 }
 
-// ColorsByOneOf1AsColorsBy is a convenience function that returns ColorsByOneOf1 wrapped in ColorsBy
-func ColorsByOneOf1AsColorsBy(v *ColorsByOneOf1) ColorsBy {
+// ColorsByGroupByAsColorsBy is a convenience function that returns ColorsByGroupBy wrapped in ColorsBy
+func ColorsByGroupByAsColorsBy(v *ColorsByGroupBy) ColorsBy {
 	return ColorsBy{
-		ColorsByOneOf1: v,
+		ColorsByGroupBy: v,
 	}
 }
 
-// ColorsByOneOf2AsColorsBy is a convenience function that returns ColorsByOneOf2 wrapped in ColorsBy
-func ColorsByOneOf2AsColorsBy(v *ColorsByOneOf2) ColorsBy {
+// ColorsByStackAsColorsBy is a convenience function that returns ColorsByStack wrapped in ColorsBy
+func ColorsByStackAsColorsBy(v *ColorsByStack) ColorsBy {
 	return ColorsBy{
-		ColorsByOneOf2: v,
+		ColorsByStack: v,
 	}
 }
 
@@ -49,62 +49,62 @@ func ColorsByOneOf2AsColorsBy(v *ColorsByOneOf2) ColorsBy {
 func (dst *ColorsBy) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into ColorsByOneOf
-	err = newStrictDecoder(data).Decode(&dst.ColorsByOneOf)
+	// try to unmarshal data into ColorsByAggregation
+	err = newStrictDecoder(data).Decode(&dst.ColorsByAggregation)
 	if err == nil {
-		jsonColorsByOneOf, _ := json.Marshal(dst.ColorsByOneOf)
-		if string(jsonColorsByOneOf) == "{}" { // empty struct
-			dst.ColorsByOneOf = nil
+		jsonColorsByAggregation, _ := json.Marshal(dst.ColorsByAggregation)
+		if string(jsonColorsByAggregation) == "{}" { // empty struct
+			dst.ColorsByAggregation = nil
 		} else {
-			if err = validator.Validate(dst.ColorsByOneOf); err != nil {
-				dst.ColorsByOneOf = nil
+			if err = validator.Validate(dst.ColorsByAggregation); err != nil {
+				dst.ColorsByAggregation = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.ColorsByOneOf = nil
+		dst.ColorsByAggregation = nil
 	}
 
-	// try to unmarshal data into ColorsByOneOf1
-	err = newStrictDecoder(data).Decode(&dst.ColorsByOneOf1)
+	// try to unmarshal data into ColorsByGroupBy
+	err = newStrictDecoder(data).Decode(&dst.ColorsByGroupBy)
 	if err == nil {
-		jsonColorsByOneOf1, _ := json.Marshal(dst.ColorsByOneOf1)
-		if string(jsonColorsByOneOf1) == "{}" { // empty struct
-			dst.ColorsByOneOf1 = nil
+		jsonColorsByGroupBy, _ := json.Marshal(dst.ColorsByGroupBy)
+		if string(jsonColorsByGroupBy) == "{}" { // empty struct
+			dst.ColorsByGroupBy = nil
 		} else {
-			if err = validator.Validate(dst.ColorsByOneOf1); err != nil {
-				dst.ColorsByOneOf1 = nil
+			if err = validator.Validate(dst.ColorsByGroupBy); err != nil {
+				dst.ColorsByGroupBy = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.ColorsByOneOf1 = nil
+		dst.ColorsByGroupBy = nil
 	}
 
-	// try to unmarshal data into ColorsByOneOf2
-	err = newStrictDecoder(data).Decode(&dst.ColorsByOneOf2)
+	// try to unmarshal data into ColorsByStack
+	err = newStrictDecoder(data).Decode(&dst.ColorsByStack)
 	if err == nil {
-		jsonColorsByOneOf2, _ := json.Marshal(dst.ColorsByOneOf2)
-		if string(jsonColorsByOneOf2) == "{}" { // empty struct
-			dst.ColorsByOneOf2 = nil
+		jsonColorsByStack, _ := json.Marshal(dst.ColorsByStack)
+		if string(jsonColorsByStack) == "{}" { // empty struct
+			dst.ColorsByStack = nil
 		} else {
-			if err = validator.Validate(dst.ColorsByOneOf2); err != nil {
-				dst.ColorsByOneOf2 = nil
+			if err = validator.Validate(dst.ColorsByStack); err != nil {
+				dst.ColorsByStack = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.ColorsByOneOf2 = nil
+		dst.ColorsByStack = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.ColorsByOneOf = nil
-		dst.ColorsByOneOf1 = nil
-		dst.ColorsByOneOf2 = nil
+		dst.ColorsByAggregation = nil
+		dst.ColorsByGroupBy = nil
+		dst.ColorsByStack = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(ColorsBy)")
 	} else if match == 1 {
@@ -116,16 +116,16 @@ func (dst *ColorsBy) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src ColorsBy) MarshalJSON() ([]byte, error) {
-	if src.ColorsByOneOf != nil {
-		return json.Marshal(&src.ColorsByOneOf)
+	if src.ColorsByAggregation != nil {
+		return json.Marshal(&src.ColorsByAggregation)
 	}
 
-	if src.ColorsByOneOf1 != nil {
-		return json.Marshal(&src.ColorsByOneOf1)
+	if src.ColorsByGroupBy != nil {
+		return json.Marshal(&src.ColorsByGroupBy)
 	}
 
-	if src.ColorsByOneOf2 != nil {
-		return json.Marshal(&src.ColorsByOneOf2)
+	if src.ColorsByStack != nil {
+		return json.Marshal(&src.ColorsByStack)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -136,16 +136,16 @@ func (obj *ColorsBy) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.ColorsByOneOf != nil {
-		return obj.ColorsByOneOf
+	if obj.ColorsByAggregation != nil {
+		return obj.ColorsByAggregation
 	}
 
-	if obj.ColorsByOneOf1 != nil {
-		return obj.ColorsByOneOf1
+	if obj.ColorsByGroupBy != nil {
+		return obj.ColorsByGroupBy
 	}
 
-	if obj.ColorsByOneOf2 != nil {
-		return obj.ColorsByOneOf2
+	if obj.ColorsByStack != nil {
+		return obj.ColorsByStack
 	}
 
 	// all schemas are nil
@@ -154,16 +154,16 @@ func (obj *ColorsBy) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj ColorsBy) GetActualInstanceValue() (interface{}) {
-	if obj.ColorsByOneOf != nil {
-		return *obj.ColorsByOneOf
+	if obj.ColorsByAggregation != nil {
+		return *obj.ColorsByAggregation
 	}
 
-	if obj.ColorsByOneOf1 != nil {
-		return *obj.ColorsByOneOf1
+	if obj.ColorsByGroupBy != nil {
+		return *obj.ColorsByGroupBy
 	}
 
-	if obj.ColorsByOneOf2 != nil {
-		return *obj.ColorsByOneOf2
+	if obj.ColorsByStack != nil {
+		return *obj.ColorsByStack
 	}
 
 	// all schemas are nil

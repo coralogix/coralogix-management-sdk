@@ -18,37 +18,37 @@ import (
 
 // DynamicQuery - struct for DynamicQuery
 type DynamicQuery struct {
-	DynamicQueryOneOf *DynamicQueryOneOf
-	DynamicQueryOneOf1 *DynamicQueryOneOf1
-	DynamicQueryOneOf2 *DynamicQueryOneOf2
-	DynamicQueryOneOf3 *DynamicQueryOneOf3
+	QueryDataprime *QueryDataprime
+	QueryLogs *QueryLogs
+	QueryMetrics *QueryMetrics
+	QuerySpans *QuerySpans
 }
 
-// DynamicQueryOneOfAsDynamicQuery is a convenience function that returns DynamicQueryOneOf wrapped in DynamicQuery
-func DynamicQueryOneOfAsDynamicQuery(v *DynamicQueryOneOf) DynamicQuery {
+// QueryDataprimeAsDynamicQuery is a convenience function that returns QueryDataprime wrapped in DynamicQuery
+func QueryDataprimeAsDynamicQuery(v *QueryDataprime) DynamicQuery {
 	return DynamicQuery{
-		DynamicQueryOneOf: v,
+		QueryDataprime: v,
 	}
 }
 
-// DynamicQueryOneOf1AsDynamicQuery is a convenience function that returns DynamicQueryOneOf1 wrapped in DynamicQuery
-func DynamicQueryOneOf1AsDynamicQuery(v *DynamicQueryOneOf1) DynamicQuery {
+// QueryLogsAsDynamicQuery is a convenience function that returns QueryLogs wrapped in DynamicQuery
+func QueryLogsAsDynamicQuery(v *QueryLogs) DynamicQuery {
 	return DynamicQuery{
-		DynamicQueryOneOf1: v,
+		QueryLogs: v,
 	}
 }
 
-// DynamicQueryOneOf2AsDynamicQuery is a convenience function that returns DynamicQueryOneOf2 wrapped in DynamicQuery
-func DynamicQueryOneOf2AsDynamicQuery(v *DynamicQueryOneOf2) DynamicQuery {
+// QueryMetricsAsDynamicQuery is a convenience function that returns QueryMetrics wrapped in DynamicQuery
+func QueryMetricsAsDynamicQuery(v *QueryMetrics) DynamicQuery {
 	return DynamicQuery{
-		DynamicQueryOneOf2: v,
+		QueryMetrics: v,
 	}
 }
 
-// DynamicQueryOneOf3AsDynamicQuery is a convenience function that returns DynamicQueryOneOf3 wrapped in DynamicQuery
-func DynamicQueryOneOf3AsDynamicQuery(v *DynamicQueryOneOf3) DynamicQuery {
+// QuerySpansAsDynamicQuery is a convenience function that returns QuerySpans wrapped in DynamicQuery
+func QuerySpansAsDynamicQuery(v *QuerySpans) DynamicQuery {
 	return DynamicQuery{
-		DynamicQueryOneOf3: v,
+		QuerySpans: v,
 	}
 }
 
@@ -57,80 +57,80 @@ func DynamicQueryOneOf3AsDynamicQuery(v *DynamicQueryOneOf3) DynamicQuery {
 func (dst *DynamicQuery) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into DynamicQueryOneOf
-	err = newStrictDecoder(data).Decode(&dst.DynamicQueryOneOf)
+	// try to unmarshal data into QueryDataprime
+	err = newStrictDecoder(data).Decode(&dst.QueryDataprime)
 	if err == nil {
-		jsonDynamicQueryOneOf, _ := json.Marshal(dst.DynamicQueryOneOf)
-		if string(jsonDynamicQueryOneOf) == "{}" { // empty struct
-			dst.DynamicQueryOneOf = nil
+		jsonQueryDataprime, _ := json.Marshal(dst.QueryDataprime)
+		if string(jsonQueryDataprime) == "{}" { // empty struct
+			dst.QueryDataprime = nil
 		} else {
-			if err = validator.Validate(dst.DynamicQueryOneOf); err != nil {
-				dst.DynamicQueryOneOf = nil
+			if err = validator.Validate(dst.QueryDataprime); err != nil {
+				dst.QueryDataprime = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.DynamicQueryOneOf = nil
+		dst.QueryDataprime = nil
 	}
 
-	// try to unmarshal data into DynamicQueryOneOf1
-	err = newStrictDecoder(data).Decode(&dst.DynamicQueryOneOf1)
+	// try to unmarshal data into QueryLogs
+	err = newStrictDecoder(data).Decode(&dst.QueryLogs)
 	if err == nil {
-		jsonDynamicQueryOneOf1, _ := json.Marshal(dst.DynamicQueryOneOf1)
-		if string(jsonDynamicQueryOneOf1) == "{}" { // empty struct
-			dst.DynamicQueryOneOf1 = nil
+		jsonQueryLogs, _ := json.Marshal(dst.QueryLogs)
+		if string(jsonQueryLogs) == "{}" { // empty struct
+			dst.QueryLogs = nil
 		} else {
-			if err = validator.Validate(dst.DynamicQueryOneOf1); err != nil {
-				dst.DynamicQueryOneOf1 = nil
+			if err = validator.Validate(dst.QueryLogs); err != nil {
+				dst.QueryLogs = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.DynamicQueryOneOf1 = nil
+		dst.QueryLogs = nil
 	}
 
-	// try to unmarshal data into DynamicQueryOneOf2
-	err = newStrictDecoder(data).Decode(&dst.DynamicQueryOneOf2)
+	// try to unmarshal data into QueryMetrics
+	err = newStrictDecoder(data).Decode(&dst.QueryMetrics)
 	if err == nil {
-		jsonDynamicQueryOneOf2, _ := json.Marshal(dst.DynamicQueryOneOf2)
-		if string(jsonDynamicQueryOneOf2) == "{}" { // empty struct
-			dst.DynamicQueryOneOf2 = nil
+		jsonQueryMetrics, _ := json.Marshal(dst.QueryMetrics)
+		if string(jsonQueryMetrics) == "{}" { // empty struct
+			dst.QueryMetrics = nil
 		} else {
-			if err = validator.Validate(dst.DynamicQueryOneOf2); err != nil {
-				dst.DynamicQueryOneOf2 = nil
+			if err = validator.Validate(dst.QueryMetrics); err != nil {
+				dst.QueryMetrics = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.DynamicQueryOneOf2 = nil
+		dst.QueryMetrics = nil
 	}
 
-	// try to unmarshal data into DynamicQueryOneOf3
-	err = newStrictDecoder(data).Decode(&dst.DynamicQueryOneOf3)
+	// try to unmarshal data into QuerySpans
+	err = newStrictDecoder(data).Decode(&dst.QuerySpans)
 	if err == nil {
-		jsonDynamicQueryOneOf3, _ := json.Marshal(dst.DynamicQueryOneOf3)
-		if string(jsonDynamicQueryOneOf3) == "{}" { // empty struct
-			dst.DynamicQueryOneOf3 = nil
+		jsonQuerySpans, _ := json.Marshal(dst.QuerySpans)
+		if string(jsonQuerySpans) == "{}" { // empty struct
+			dst.QuerySpans = nil
 		} else {
-			if err = validator.Validate(dst.DynamicQueryOneOf3); err != nil {
-				dst.DynamicQueryOneOf3 = nil
+			if err = validator.Validate(dst.QuerySpans); err != nil {
+				dst.QuerySpans = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.DynamicQueryOneOf3 = nil
+		dst.QuerySpans = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.DynamicQueryOneOf = nil
-		dst.DynamicQueryOneOf1 = nil
-		dst.DynamicQueryOneOf2 = nil
-		dst.DynamicQueryOneOf3 = nil
+		dst.QueryDataprime = nil
+		dst.QueryLogs = nil
+		dst.QueryMetrics = nil
+		dst.QuerySpans = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(DynamicQuery)")
 	} else if match == 1 {
@@ -142,20 +142,20 @@ func (dst *DynamicQuery) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src DynamicQuery) MarshalJSON() ([]byte, error) {
-	if src.DynamicQueryOneOf != nil {
-		return json.Marshal(&src.DynamicQueryOneOf)
+	if src.QueryDataprime != nil {
+		return json.Marshal(&src.QueryDataprime)
 	}
 
-	if src.DynamicQueryOneOf1 != nil {
-		return json.Marshal(&src.DynamicQueryOneOf1)
+	if src.QueryLogs != nil {
+		return json.Marshal(&src.QueryLogs)
 	}
 
-	if src.DynamicQueryOneOf2 != nil {
-		return json.Marshal(&src.DynamicQueryOneOf2)
+	if src.QueryMetrics != nil {
+		return json.Marshal(&src.QueryMetrics)
 	}
 
-	if src.DynamicQueryOneOf3 != nil {
-		return json.Marshal(&src.DynamicQueryOneOf3)
+	if src.QuerySpans != nil {
+		return json.Marshal(&src.QuerySpans)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -166,20 +166,20 @@ func (obj *DynamicQuery) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.DynamicQueryOneOf != nil {
-		return obj.DynamicQueryOneOf
+	if obj.QueryDataprime != nil {
+		return obj.QueryDataprime
 	}
 
-	if obj.DynamicQueryOneOf1 != nil {
-		return obj.DynamicQueryOneOf1
+	if obj.QueryLogs != nil {
+		return obj.QueryLogs
 	}
 
-	if obj.DynamicQueryOneOf2 != nil {
-		return obj.DynamicQueryOneOf2
+	if obj.QueryMetrics != nil {
+		return obj.QueryMetrics
 	}
 
-	if obj.DynamicQueryOneOf3 != nil {
-		return obj.DynamicQueryOneOf3
+	if obj.QuerySpans != nil {
+		return obj.QuerySpans
 	}
 
 	// all schemas are nil
@@ -188,20 +188,20 @@ func (obj *DynamicQuery) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj DynamicQuery) GetActualInstanceValue() (interface{}) {
-	if obj.DynamicQueryOneOf != nil {
-		return *obj.DynamicQueryOneOf
+	if obj.QueryDataprime != nil {
+		return *obj.QueryDataprime
 	}
 
-	if obj.DynamicQueryOneOf1 != nil {
-		return *obj.DynamicQueryOneOf1
+	if obj.QueryLogs != nil {
+		return *obj.QueryLogs
 	}
 
-	if obj.DynamicQueryOneOf2 != nil {
-		return *obj.DynamicQueryOneOf2
+	if obj.QueryMetrics != nil {
+		return *obj.QueryMetrics
 	}
 
-	if obj.DynamicQueryOneOf3 != nil {
-		return *obj.DynamicQueryOneOf3
+	if obj.QuerySpans != nil {
+		return *obj.QuerySpans
 	}
 
 	// all schemas are nil

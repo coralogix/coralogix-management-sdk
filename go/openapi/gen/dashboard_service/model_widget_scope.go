@@ -18,21 +18,21 @@ import (
 
 // WidgetScope - struct for WidgetScope
 type WidgetScope struct {
-	WidgetScopeOneOf *WidgetScopeOneOf
-	WidgetScopeOneOf1 *WidgetScopeOneOf1
+	WidgetScopeAllWidgets *WidgetScopeAllWidgets
+	WidgetScopeSpecificWidgets *WidgetScopeSpecificWidgets
 }
 
-// WidgetScopeOneOfAsWidgetScope is a convenience function that returns WidgetScopeOneOf wrapped in WidgetScope
-func WidgetScopeOneOfAsWidgetScope(v *WidgetScopeOneOf) WidgetScope {
+// WidgetScopeAllWidgetsAsWidgetScope is a convenience function that returns WidgetScopeAllWidgets wrapped in WidgetScope
+func WidgetScopeAllWidgetsAsWidgetScope(v *WidgetScopeAllWidgets) WidgetScope {
 	return WidgetScope{
-		WidgetScopeOneOf: v,
+		WidgetScopeAllWidgets: v,
 	}
 }
 
-// WidgetScopeOneOf1AsWidgetScope is a convenience function that returns WidgetScopeOneOf1 wrapped in WidgetScope
-func WidgetScopeOneOf1AsWidgetScope(v *WidgetScopeOneOf1) WidgetScope {
+// WidgetScopeSpecificWidgetsAsWidgetScope is a convenience function that returns WidgetScopeSpecificWidgets wrapped in WidgetScope
+func WidgetScopeSpecificWidgetsAsWidgetScope(v *WidgetScopeSpecificWidgets) WidgetScope {
 	return WidgetScope{
-		WidgetScopeOneOf1: v,
+		WidgetScopeSpecificWidgets: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func WidgetScopeOneOf1AsWidgetScope(v *WidgetScopeOneOf1) WidgetScope {
 func (dst *WidgetScope) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into WidgetScopeOneOf
-	err = newStrictDecoder(data).Decode(&dst.WidgetScopeOneOf)
+	// try to unmarshal data into WidgetScopeAllWidgets
+	err = newStrictDecoder(data).Decode(&dst.WidgetScopeAllWidgets)
 	if err == nil {
-		jsonWidgetScopeOneOf, _ := json.Marshal(dst.WidgetScopeOneOf)
-		if string(jsonWidgetScopeOneOf) == "{}" { // empty struct
-			dst.WidgetScopeOneOf = nil
+		jsonWidgetScopeAllWidgets, _ := json.Marshal(dst.WidgetScopeAllWidgets)
+		if string(jsonWidgetScopeAllWidgets) == "{}" { // empty struct
+			dst.WidgetScopeAllWidgets = nil
 		} else {
-			if err = validator.Validate(dst.WidgetScopeOneOf); err != nil {
-				dst.WidgetScopeOneOf = nil
+			if err = validator.Validate(dst.WidgetScopeAllWidgets); err != nil {
+				dst.WidgetScopeAllWidgets = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.WidgetScopeOneOf = nil
+		dst.WidgetScopeAllWidgets = nil
 	}
 
-	// try to unmarshal data into WidgetScopeOneOf1
-	err = newStrictDecoder(data).Decode(&dst.WidgetScopeOneOf1)
+	// try to unmarshal data into WidgetScopeSpecificWidgets
+	err = newStrictDecoder(data).Decode(&dst.WidgetScopeSpecificWidgets)
 	if err == nil {
-		jsonWidgetScopeOneOf1, _ := json.Marshal(dst.WidgetScopeOneOf1)
-		if string(jsonWidgetScopeOneOf1) == "{}" { // empty struct
-			dst.WidgetScopeOneOf1 = nil
+		jsonWidgetScopeSpecificWidgets, _ := json.Marshal(dst.WidgetScopeSpecificWidgets)
+		if string(jsonWidgetScopeSpecificWidgets) == "{}" { // empty struct
+			dst.WidgetScopeSpecificWidgets = nil
 		} else {
-			if err = validator.Validate(dst.WidgetScopeOneOf1); err != nil {
-				dst.WidgetScopeOneOf1 = nil
+			if err = validator.Validate(dst.WidgetScopeSpecificWidgets); err != nil {
+				dst.WidgetScopeSpecificWidgets = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.WidgetScopeOneOf1 = nil
+		dst.WidgetScopeSpecificWidgets = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.WidgetScopeOneOf = nil
-		dst.WidgetScopeOneOf1 = nil
+		dst.WidgetScopeAllWidgets = nil
+		dst.WidgetScopeSpecificWidgets = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(WidgetScope)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *WidgetScope) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src WidgetScope) MarshalJSON() ([]byte, error) {
-	if src.WidgetScopeOneOf != nil {
-		return json.Marshal(&src.WidgetScopeOneOf)
+	if src.WidgetScopeAllWidgets != nil {
+		return json.Marshal(&src.WidgetScopeAllWidgets)
 	}
 
-	if src.WidgetScopeOneOf1 != nil {
-		return json.Marshal(&src.WidgetScopeOneOf1)
+	if src.WidgetScopeSpecificWidgets != nil {
+		return json.Marshal(&src.WidgetScopeSpecificWidgets)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *WidgetScope) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.WidgetScopeOneOf != nil {
-		return obj.WidgetScopeOneOf
+	if obj.WidgetScopeAllWidgets != nil {
+		return obj.WidgetScopeAllWidgets
 	}
 
-	if obj.WidgetScopeOneOf1 != nil {
-		return obj.WidgetScopeOneOf1
+	if obj.WidgetScopeSpecificWidgets != nil {
+		return obj.WidgetScopeSpecificWidgets
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *WidgetScope) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj WidgetScope) GetActualInstanceValue() (interface{}) {
-	if obj.WidgetScopeOneOf != nil {
-		return *obj.WidgetScopeOneOf
+	if obj.WidgetScopeAllWidgets != nil {
+		return *obj.WidgetScopeAllWidgets
 	}
 
-	if obj.WidgetScopeOneOf1 != nil {
-		return *obj.WidgetScopeOneOf1
+	if obj.WidgetScopeSpecificWidgets != nil {
+		return *obj.WidgetScopeSpecificWidgets
 	}
 
 	// all schemas are nil

@@ -18,21 +18,21 @@ import (
 
 // IncidentsServiceListIncidentsOrderBysParameterInner - struct for IncidentsServiceListIncidentsOrderBysParameterInner
 type IncidentsServiceListIncidentsOrderBysParameterInner struct {
-	IncidentOrderBy *IncidentOrderBy
-	IncidentOrderBy1 *IncidentOrderBy1
+	OrderByContextualLabel *OrderByContextualLabel
+	OrderByIncidentField *OrderByIncidentField
 }
 
-// IncidentOrderByAsIncidentsServiceListIncidentsOrderBysParameterInner is a convenience function that returns IncidentOrderBy wrapped in IncidentsServiceListIncidentsOrderBysParameterInner
-func IncidentOrderByAsIncidentsServiceListIncidentsOrderBysParameterInner(v *IncidentOrderBy) IncidentsServiceListIncidentsOrderBysParameterInner {
+// OrderByContextualLabelAsIncidentsServiceListIncidentsOrderBysParameterInner is a convenience function that returns OrderByContextualLabel wrapped in IncidentsServiceListIncidentsOrderBysParameterInner
+func OrderByContextualLabelAsIncidentsServiceListIncidentsOrderBysParameterInner(v *OrderByContextualLabel) IncidentsServiceListIncidentsOrderBysParameterInner {
 	return IncidentsServiceListIncidentsOrderBysParameterInner{
-		IncidentOrderBy: v,
+		OrderByContextualLabel: v,
 	}
 }
 
-// IncidentOrderBy1AsIncidentsServiceListIncidentsOrderBysParameterInner is a convenience function that returns IncidentOrderBy1 wrapped in IncidentsServiceListIncidentsOrderBysParameterInner
-func IncidentOrderBy1AsIncidentsServiceListIncidentsOrderBysParameterInner(v *IncidentOrderBy1) IncidentsServiceListIncidentsOrderBysParameterInner {
+// OrderByIncidentFieldAsIncidentsServiceListIncidentsOrderBysParameterInner is a convenience function that returns OrderByIncidentField wrapped in IncidentsServiceListIncidentsOrderBysParameterInner
+func OrderByIncidentFieldAsIncidentsServiceListIncidentsOrderBysParameterInner(v *OrderByIncidentField) IncidentsServiceListIncidentsOrderBysParameterInner {
 	return IncidentsServiceListIncidentsOrderBysParameterInner{
-		IncidentOrderBy1: v,
+		OrderByIncidentField: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func IncidentOrderBy1AsIncidentsServiceListIncidentsOrderBysParameterInner(v *In
 func (dst *IncidentsServiceListIncidentsOrderBysParameterInner) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into IncidentOrderBy
-	err = newStrictDecoder(data).Decode(&dst.IncidentOrderBy)
+	// try to unmarshal data into OrderByContextualLabel
+	err = newStrictDecoder(data).Decode(&dst.OrderByContextualLabel)
 	if err == nil {
-		jsonIncidentOrderBy, _ := json.Marshal(dst.IncidentOrderBy)
-		if string(jsonIncidentOrderBy) == "{}" { // empty struct
-			dst.IncidentOrderBy = nil
+		jsonOrderByContextualLabel, _ := json.Marshal(dst.OrderByContextualLabel)
+		if string(jsonOrderByContextualLabel) == "{}" { // empty struct
+			dst.OrderByContextualLabel = nil
 		} else {
-			if err = validator.Validate(dst.IncidentOrderBy); err != nil {
-				dst.IncidentOrderBy = nil
+			if err = validator.Validate(dst.OrderByContextualLabel); err != nil {
+				dst.OrderByContextualLabel = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IncidentOrderBy = nil
+		dst.OrderByContextualLabel = nil
 	}
 
-	// try to unmarshal data into IncidentOrderBy1
-	err = newStrictDecoder(data).Decode(&dst.IncidentOrderBy1)
+	// try to unmarshal data into OrderByIncidentField
+	err = newStrictDecoder(data).Decode(&dst.OrderByIncidentField)
 	if err == nil {
-		jsonIncidentOrderBy1, _ := json.Marshal(dst.IncidentOrderBy1)
-		if string(jsonIncidentOrderBy1) == "{}" { // empty struct
-			dst.IncidentOrderBy1 = nil
+		jsonOrderByIncidentField, _ := json.Marshal(dst.OrderByIncidentField)
+		if string(jsonOrderByIncidentField) == "{}" { // empty struct
+			dst.OrderByIncidentField = nil
 		} else {
-			if err = validator.Validate(dst.IncidentOrderBy1); err != nil {
-				dst.IncidentOrderBy1 = nil
+			if err = validator.Validate(dst.OrderByIncidentField); err != nil {
+				dst.OrderByIncidentField = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.IncidentOrderBy1 = nil
+		dst.OrderByIncidentField = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.IncidentOrderBy = nil
-		dst.IncidentOrderBy1 = nil
+		dst.OrderByContextualLabel = nil
+		dst.OrderByIncidentField = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(IncidentsServiceListIncidentsOrderBysParameterInner)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *IncidentsServiceListIncidentsOrderBysParameterInner) UnmarshalJSON(da
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src IncidentsServiceListIncidentsOrderBysParameterInner) MarshalJSON() ([]byte, error) {
-	if src.IncidentOrderBy != nil {
-		return json.Marshal(&src.IncidentOrderBy)
+	if src.OrderByContextualLabel != nil {
+		return json.Marshal(&src.OrderByContextualLabel)
 	}
 
-	if src.IncidentOrderBy1 != nil {
-		return json.Marshal(&src.IncidentOrderBy1)
+	if src.OrderByIncidentField != nil {
+		return json.Marshal(&src.OrderByIncidentField)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *IncidentsServiceListIncidentsOrderBysParameterInner) GetActualInstanc
 	if obj == nil {
 		return nil
 	}
-	if obj.IncidentOrderBy != nil {
-		return obj.IncidentOrderBy
+	if obj.OrderByContextualLabel != nil {
+		return obj.OrderByContextualLabel
 	}
 
-	if obj.IncidentOrderBy1 != nil {
-		return obj.IncidentOrderBy1
+	if obj.OrderByIncidentField != nil {
+		return obj.OrderByIncidentField
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *IncidentsServiceListIncidentsOrderBysParameterInner) GetActualInstanc
 
 // Get the actual instance value
 func (obj IncidentsServiceListIncidentsOrderBysParameterInner) GetActualInstanceValue() (interface{}) {
-	if obj.IncidentOrderBy != nil {
-		return *obj.IncidentOrderBy
+	if obj.OrderByContextualLabel != nil {
+		return *obj.OrderByContextualLabel
 	}
 
-	if obj.IncidentOrderBy1 != nil {
-		return *obj.IncidentOrderBy1
+	if obj.OrderByIncidentField != nil {
+		return *obj.OrderByIncidentField
 	}
 
 	// all schemas are nil

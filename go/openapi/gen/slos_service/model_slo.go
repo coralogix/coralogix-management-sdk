@@ -18,21 +18,21 @@ import (
 
 // Slo - struct for Slo
 type Slo struct {
-	Slo5 *Slo5
-	Slo6 *Slo6
+	SloRequestBasedMetricSli *SloRequestBasedMetricSli
+	SloWindowBasedMetricSli *SloWindowBasedMetricSli
 }
 
-// Slo5AsSlo is a convenience function that returns Slo5 wrapped in Slo
-func Slo5AsSlo(v *Slo5) Slo {
+// SloRequestBasedMetricSliAsSlo is a convenience function that returns SloRequestBasedMetricSli wrapped in Slo
+func SloRequestBasedMetricSliAsSlo(v *SloRequestBasedMetricSli) Slo {
 	return Slo{
-		Slo5: v,
+		SloRequestBasedMetricSli: v,
 	}
 }
 
-// Slo6AsSlo is a convenience function that returns Slo6 wrapped in Slo
-func Slo6AsSlo(v *Slo6) Slo {
+// SloWindowBasedMetricSliAsSlo is a convenience function that returns SloWindowBasedMetricSli wrapped in Slo
+func SloWindowBasedMetricSliAsSlo(v *SloWindowBasedMetricSli) Slo {
 	return Slo{
-		Slo6: v,
+		SloWindowBasedMetricSli: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func Slo6AsSlo(v *Slo6) Slo {
 func (dst *Slo) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into Slo5
-	err = newStrictDecoder(data).Decode(&dst.Slo5)
+	// try to unmarshal data into SloRequestBasedMetricSli
+	err = newStrictDecoder(data).Decode(&dst.SloRequestBasedMetricSli)
 	if err == nil {
-		jsonSlo5, _ := json.Marshal(dst.Slo5)
-		if string(jsonSlo5) == "{}" { // empty struct
-			dst.Slo5 = nil
+		jsonSloRequestBasedMetricSli, _ := json.Marshal(dst.SloRequestBasedMetricSli)
+		if string(jsonSloRequestBasedMetricSli) == "{}" { // empty struct
+			dst.SloRequestBasedMetricSli = nil
 		} else {
-			if err = validator.Validate(dst.Slo5); err != nil {
-				dst.Slo5 = nil
+			if err = validator.Validate(dst.SloRequestBasedMetricSli); err != nil {
+				dst.SloRequestBasedMetricSli = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Slo5 = nil
+		dst.SloRequestBasedMetricSli = nil
 	}
 
-	// try to unmarshal data into Slo6
-	err = newStrictDecoder(data).Decode(&dst.Slo6)
+	// try to unmarshal data into SloWindowBasedMetricSli
+	err = newStrictDecoder(data).Decode(&dst.SloWindowBasedMetricSli)
 	if err == nil {
-		jsonSlo6, _ := json.Marshal(dst.Slo6)
-		if string(jsonSlo6) == "{}" { // empty struct
-			dst.Slo6 = nil
+		jsonSloWindowBasedMetricSli, _ := json.Marshal(dst.SloWindowBasedMetricSli)
+		if string(jsonSloWindowBasedMetricSli) == "{}" { // empty struct
+			dst.SloWindowBasedMetricSli = nil
 		} else {
-			if err = validator.Validate(dst.Slo6); err != nil {
-				dst.Slo6 = nil
+			if err = validator.Validate(dst.SloWindowBasedMetricSli); err != nil {
+				dst.SloWindowBasedMetricSli = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.Slo6 = nil
+		dst.SloWindowBasedMetricSli = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.Slo5 = nil
-		dst.Slo6 = nil
+		dst.SloRequestBasedMetricSli = nil
+		dst.SloWindowBasedMetricSli = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(Slo)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *Slo) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src Slo) MarshalJSON() ([]byte, error) {
-	if src.Slo5 != nil {
-		return json.Marshal(&src.Slo5)
+	if src.SloRequestBasedMetricSli != nil {
+		return json.Marshal(&src.SloRequestBasedMetricSli)
 	}
 
-	if src.Slo6 != nil {
-		return json.Marshal(&src.Slo6)
+	if src.SloWindowBasedMetricSli != nil {
+		return json.Marshal(&src.SloWindowBasedMetricSli)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *Slo) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.Slo5 != nil {
-		return obj.Slo5
+	if obj.SloRequestBasedMetricSli != nil {
+		return obj.SloRequestBasedMetricSli
 	}
 
-	if obj.Slo6 != nil {
-		return obj.Slo6
+	if obj.SloWindowBasedMetricSli != nil {
+		return obj.SloWindowBasedMetricSli
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *Slo) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj Slo) GetActualInstanceValue() (interface{}) {
-	if obj.Slo5 != nil {
-		return *obj.Slo5
+	if obj.SloRequestBasedMetricSli != nil {
+		return *obj.SloRequestBasedMetricSli
 	}
 
-	if obj.Slo6 != nil {
-		return *obj.Slo6
+	if obj.SloWindowBasedMetricSli != nil {
+		return *obj.SloWindowBasedMetricSli
 	}
 
 	// all schemas are nil

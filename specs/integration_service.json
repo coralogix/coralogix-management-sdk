@@ -500,15 +500,15 @@
         "x-codeSamples": [
           {
             "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/integrations/v1/metadata';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"id\":\"string\",\"metadata\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"key\":\"string\",\"stringValue\":\"string\"}]},\"version\":\"string\"}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/integrations/v1/metadata';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"id\":\"string\",\"metadata\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"apiKey\":{\"id\":\"string\",\"value\":\"string\"},\"key\":\"string\"}]},\"version\":\"string\"}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/integrations/v1/metadata\"\n\npayload = {\n    \"id\": \"string\",\n    \"metadata\": {\n        \"integrationKey\": \"string\",\n        \"integrationParameters\": {\"parameters\": [\n                {\n                    \"key\": \"string\",\n                    \"stringValue\": \"string\"\n                }\n            ]},\n        \"version\": \"string\"\n    }\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/integrations/v1/metadata\"\n\npayload = {\n    \"id\": \"string\",\n    \"metadata\": {\n        \"integrationKey\": \"string\",\n        \"integrationParameters\": {\"parameters\": [\n                {\n                    \"apiKey\": {\n                        \"id\": \"string\",\n                        \"value\": \"string\"\n                    },\n                    \"key\": \"string\"\n                }\n            ]},\n        \"version\": \"string\"\n    }\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/integrations/v1/metadata \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"id\":\"string\",\"metadata\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"key\":\"string\",\"stringValue\":\"string\"}]},\"version\":\"string\"}}'"
+            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/integrations/v1/metadata \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"id\":\"string\",\"metadata\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"apiKey\":{\"id\":\"string\",\"value\":\"string\"},\"key\":\"string\"}]},\"version\":\"string\"}}'"
           }
         ]
       },
@@ -577,15 +577,15 @@
         "x-codeSamples": [
           {
             "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/integrations/v1/metadata';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"metadata\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"key\":\"string\",\"stringValue\":\"string\"}]},\"version\":\"string\"}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/integrations/v1/metadata';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"metadata\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"apiKey\":{\"id\":\"string\",\"value\":\"string\"},\"key\":\"string\"}]},\"version\":\"string\"}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/integrations/v1/metadata\"\n\npayload = {\"metadata\": {\n        \"integrationKey\": \"string\",\n        \"integrationParameters\": {\"parameters\": [\n                {\n                    \"key\": \"string\",\n                    \"stringValue\": \"string\"\n                }\n            ]},\n        \"version\": \"string\"\n    }}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/integrations/v1/metadata\"\n\npayload = {\"metadata\": {\n        \"integrationKey\": \"string\",\n        \"integrationParameters\": {\"parameters\": [\n                {\n                    \"apiKey\": {\n                        \"id\": \"string\",\n                        \"value\": \"string\"\n                    },\n                    \"key\": \"string\"\n                }\n            ]},\n        \"version\": \"string\"\n    }}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/integrations/v1/metadata \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"metadata\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"key\":\"string\",\"stringValue\":\"string\"}]},\"version\":\"string\"}}'"
+            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/integrations/v1/metadata \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"metadata\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"apiKey\":{\"id\":\"string\",\"value\":\"string\"},\"key\":\"string\"}]},\"version\":\"string\"}}'"
           }
         ]
       }
@@ -659,15 +659,15 @@
         "x-codeSamples": [
           {
             "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/integrations/v1/metadata/test';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"integrationData\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"key\":\"string\",\"stringValue\":\"string\"}]},\"version\":\"string\"},\"integrationId\":\"string\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/integrations/v1/metadata/test';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"integrationData\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"apiKey\":{\"id\":\"string\",\"value\":\"string\"},\"key\":\"string\"}]},\"version\":\"string\"},\"integrationId\":\"string\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/integrations/v1/metadata/test\"\n\npayload = {\n    \"integrationData\": {\n        \"integrationKey\": \"string\",\n        \"integrationParameters\": {\"parameters\": [\n                {\n                    \"key\": \"string\",\n                    \"stringValue\": \"string\"\n                }\n            ]},\n        \"version\": \"string\"\n    },\n    \"integrationId\": \"string\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/integrations/v1/metadata/test\"\n\npayload = {\n    \"integrationData\": {\n        \"integrationKey\": \"string\",\n        \"integrationParameters\": {\"parameters\": [\n                {\n                    \"apiKey\": {\n                        \"id\": \"string\",\n                        \"value\": \"string\"\n                    },\n                    \"key\": \"string\"\n                }\n            ]},\n        \"version\": \"string\"\n    },\n    \"integrationId\": \"string\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/integrations/v1/metadata/test \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"integrationData\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"key\":\"string\",\"stringValue\":\"string\"}]},\"version\":\"string\"},\"integrationId\":\"string\"}'"
+            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/integrations/v1/metadata/test \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"integrationData\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"apiKey\":{\"id\":\"string\",\"value\":\"string\"},\"key\":\"string\"}]},\"version\":\"string\"},\"integrationId\":\"string\"}'"
           }
         ]
       }
@@ -1036,8 +1036,7 @@
           "value": {
             "type": "string"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "AzureArm": {
         "externalDocs": {
@@ -1134,6 +1133,33 @@
         "description": "This data structure represents a CloudFormation integration.",
         "type": "object"
       },
+      "ColorsByAggregation": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/ColorsByAggregation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByGroupBy": {
+        "type": "object",
+        "properties": {
+          "groupBy": {
+            "$ref": "#/components/schemas/ColorsByGroupBy"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByStack": {
+        "type": "object",
+        "properties": {
+          "stack": {
+            "$ref": "#/components/schemas/ColorsByStack"
+          }
+        },
+        "additionalProperties": false
+      },
       "CommandInformation": {
         "externalDocs": {
           "url": ""
@@ -1162,8 +1188,7 @@
           "tooltipText": {
             "type": "string"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "ConfigurationBlock": {
         "externalDocs": {
@@ -1500,402 +1525,426 @@
       "FieldInformation": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Field information",
-            "type": "object",
-            "properties": {
-              "allowedPattern": {
-                "type": "string"
-              },
-              "applicableIf": {
-                "$ref": "#/components/schemas/FieldCondition"
-              },
-              "documentationReference": {
-                "type": "string"
-              },
-              "groupId": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "placeholder": {
-                "type": "string"
-              },
-              "predefined": {
-                "type": "boolean"
-              },
-              "readonly": {
-                "type": "boolean"
-              },
-              "required": {
-                "type": "boolean"
-              },
-              "single": {
-                "$ref": "#/components/schemas/SingleValue"
-              },
-              "templateParamName": {
-                "type": "string"
-              },
-              "tooltip": {
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/InputType"
-              },
-              "upgradeNotice": {
-                "type": "string"
-              },
-              "visible": {
-                "type": "boolean"
-              }
-            },
-            "required": [
-              "type"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FieldInformationSingleNumber"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Field information",
-            "type": "object",
-            "properties": {
-              "allowedPattern": {
-                "type": "string"
-              },
-              "applicableIf": {
-                "$ref": "#/components/schemas/FieldCondition"
-              },
-              "documentationReference": {
-                "type": "string"
-              },
-              "groupId": {
-                "type": "string"
-              },
-              "multiText": {
-                "$ref": "#/components/schemas/ListTextValue"
-              },
-              "name": {
-                "type": "string"
-              },
-              "placeholder": {
-                "type": "string"
-              },
-              "predefined": {
-                "type": "boolean"
-              },
-              "readonly": {
-                "type": "boolean"
-              },
-              "required": {
-                "type": "boolean"
-              },
-              "templateParamName": {
-                "type": "string"
-              },
-              "tooltip": {
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/InputType"
-              },
-              "upgradeNotice": {
-                "type": "string"
-              },
-              "visible": {
-                "type": "boolean"
-              }
-            },
-            "required": [
-              "type"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FieldInformationSingle"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Field information",
-            "type": "object",
-            "properties": {
-              "allowedPattern": {
-                "type": "string"
-              },
-              "applicableIf": {
-                "$ref": "#/components/schemas/FieldCondition"
-              },
-              "documentationReference": {
-                "type": "string"
-              },
-              "groupId": {
-                "type": "string"
-              },
-              "multipleSelection": {
-                "$ref": "#/components/schemas/MultipleSelectionValue"
-              },
-              "name": {
-                "type": "string"
-              },
-              "placeholder": {
-                "type": "string"
-              },
-              "predefined": {
-                "type": "boolean"
-              },
-              "readonly": {
-                "type": "boolean"
-              },
-              "required": {
-                "type": "boolean"
-              },
-              "templateParamName": {
-                "type": "string"
-              },
-              "tooltip": {
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/InputType"
-              },
-              "upgradeNotice": {
-                "type": "string"
-              },
-              "visible": {
-                "type": "boolean"
-              }
-            },
-            "required": [
-              "type"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FieldInformationMultiText"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Field information",
-            "type": "object",
-            "properties": {
-              "allowedPattern": {
-                "type": "string"
-              },
-              "applicableIf": {
-                "$ref": "#/components/schemas/FieldCondition"
-              },
-              "documentationReference": {
-                "type": "string"
-              },
-              "groupId": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "placeholder": {
-                "type": "string"
-              },
-              "predefined": {
-                "type": "boolean"
-              },
-              "readonly": {
-                "type": "boolean"
-              },
-              "required": {
-                "type": "boolean"
-              },
-              "singleBoolean": {
-                "$ref": "#/components/schemas/SingleBooleanValue"
-              },
-              "templateParamName": {
-                "type": "string"
-              },
-              "tooltip": {
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/InputType"
-              },
-              "upgradeNotice": {
-                "type": "string"
-              },
-              "visible": {
-                "type": "boolean"
-              }
-            },
-            "required": [
-              "type"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FieldInformationMultipleSelection"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Field information",
-            "type": "object",
-            "properties": {
-              "allowedPattern": {
-                "type": "string"
-              },
-              "applicableIf": {
-                "$ref": "#/components/schemas/FieldCondition"
-              },
-              "documentationReference": {
-                "type": "string"
-              },
-              "groupId": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "placeholder": {
-                "type": "string"
-              },
-              "predefined": {
-                "type": "boolean"
-              },
-              "readonly": {
-                "type": "boolean"
-              },
-              "required": {
-                "type": "boolean"
-              },
-              "selection": {
-                "$ref": "#/components/schemas/SelectionValue"
-              },
-              "templateParamName": {
-                "type": "string"
-              },
-              "tooltip": {
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/InputType"
-              },
-              "upgradeNotice": {
-                "type": "string"
-              },
-              "visible": {
-                "type": "boolean"
-              }
-            },
-            "required": [
-              "type"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FieldInformationSingleBoolean"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Field information",
-            "type": "object",
-            "properties": {
-              "allowedPattern": {
-                "type": "string"
-              },
-              "applicableIf": {
-                "$ref": "#/components/schemas/FieldCondition"
-              },
-              "documentationReference": {
-                "type": "string"
-              },
-              "groupId": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "placeholder": {
-                "type": "string"
-              },
-              "predefined": {
-                "type": "boolean"
-              },
-              "readonly": {
-                "type": "boolean"
-              },
-              "required": {
-                "type": "boolean"
-              },
-              "singleNumber": {
-                "$ref": "#/components/schemas/IntegrationRevision.SingleNumericValue"
-              },
-              "templateParamName": {
-                "type": "string"
-              },
-              "tooltip": {
-                "type": "string"
-              },
-              "type": {
-                "$ref": "#/components/schemas/InputType"
-              },
-              "upgradeNotice": {
-                "type": "string"
-              },
-              "visible": {
-                "type": "boolean"
-              }
-            },
-            "required": [
-              "type"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FieldInformationSelection"
           }
         ]
+      },
+      "FieldInformationMultiText": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Field information",
+        "type": "object",
+        "properties": {
+          "allowedPattern": {
+            "type": "string"
+          },
+          "applicableIf": {
+            "$ref": "#/components/schemas/FieldCondition"
+          },
+          "documentationReference": {
+            "type": "string"
+          },
+          "groupId": {
+            "type": "string"
+          },
+          "multiText": {
+            "$ref": "#/components/schemas/ListTextValue"
+          },
+          "name": {
+            "type": "string"
+          },
+          "placeholder": {
+            "type": "string"
+          },
+          "predefined": {
+            "type": "boolean"
+          },
+          "readonly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "templateParamName": {
+            "type": "string"
+          },
+          "tooltip": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/InputType"
+          },
+          "upgradeNotice": {
+            "type": "string"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "additionalProperties": false
+      },
+      "FieldInformationMultipleSelection": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Field information",
+        "type": "object",
+        "properties": {
+          "allowedPattern": {
+            "type": "string"
+          },
+          "applicableIf": {
+            "$ref": "#/components/schemas/FieldCondition"
+          },
+          "documentationReference": {
+            "type": "string"
+          },
+          "groupId": {
+            "type": "string"
+          },
+          "multipleSelection": {
+            "$ref": "#/components/schemas/MultipleSelectionValue"
+          },
+          "name": {
+            "type": "string"
+          },
+          "placeholder": {
+            "type": "string"
+          },
+          "predefined": {
+            "type": "boolean"
+          },
+          "readonly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "templateParamName": {
+            "type": "string"
+          },
+          "tooltip": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/InputType"
+          },
+          "upgradeNotice": {
+            "type": "string"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "additionalProperties": false
+      },
+      "FieldInformationSelection": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Field information",
+        "type": "object",
+        "properties": {
+          "allowedPattern": {
+            "type": "string"
+          },
+          "applicableIf": {
+            "$ref": "#/components/schemas/FieldCondition"
+          },
+          "documentationReference": {
+            "type": "string"
+          },
+          "groupId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "placeholder": {
+            "type": "string"
+          },
+          "predefined": {
+            "type": "boolean"
+          },
+          "readonly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "selection": {
+            "$ref": "#/components/schemas/SelectionValue"
+          },
+          "templateParamName": {
+            "type": "string"
+          },
+          "tooltip": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/InputType"
+          },
+          "upgradeNotice": {
+            "type": "string"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "additionalProperties": false
+      },
+      "FieldInformationSingle": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Field information",
+        "type": "object",
+        "properties": {
+          "allowedPattern": {
+            "type": "string"
+          },
+          "applicableIf": {
+            "$ref": "#/components/schemas/FieldCondition"
+          },
+          "documentationReference": {
+            "type": "string"
+          },
+          "groupId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "placeholder": {
+            "type": "string"
+          },
+          "predefined": {
+            "type": "boolean"
+          },
+          "readonly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "single": {
+            "$ref": "#/components/schemas/SingleValue"
+          },
+          "templateParamName": {
+            "type": "string"
+          },
+          "tooltip": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/InputType"
+          },
+          "upgradeNotice": {
+            "type": "string"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "additionalProperties": false
+      },
+      "FieldInformationSingleBoolean": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Field information",
+        "type": "object",
+        "properties": {
+          "allowedPattern": {
+            "type": "string"
+          },
+          "applicableIf": {
+            "$ref": "#/components/schemas/FieldCondition"
+          },
+          "documentationReference": {
+            "type": "string"
+          },
+          "groupId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "placeholder": {
+            "type": "string"
+          },
+          "predefined": {
+            "type": "boolean"
+          },
+          "readonly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "singleBoolean": {
+            "$ref": "#/components/schemas/SingleBooleanValue"
+          },
+          "templateParamName": {
+            "type": "string"
+          },
+          "tooltip": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/InputType"
+          },
+          "upgradeNotice": {
+            "type": "string"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "additionalProperties": false
+      },
+      "FieldInformationSingleNumber": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Field information",
+        "type": "object",
+        "properties": {
+          "allowedPattern": {
+            "type": "string"
+          },
+          "applicableIf": {
+            "$ref": "#/components/schemas/FieldCondition"
+          },
+          "documentationReference": {
+            "type": "string"
+          },
+          "groupId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "placeholder": {
+            "type": "string"
+          },
+          "predefined": {
+            "type": "boolean"
+          },
+          "readonly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "singleNumber": {
+            "$ref": "#/components/schemas/IntegrationRevision.SingleNumericValue"
+          },
+          "templateParamName": {
+            "type": "string"
+          },
+          "tooltip": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/InputType"
+          },
+          "upgradeNotice": {
+            "type": "string"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "additionalProperties": false
       },
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "multipleValues": {
-                "$ref": "#/components/schemas/MultipleValues"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "FilterPathAndValues",
-            "description": "This data structure represents a filter path and values",
-            "type": "object",
-            "properties": {
-              "filters": {
-                "$ref": "#/components/schemas/Filters"
-              },
-              "path": {
-                "example": "test",
-                "type": "string"
-              }
-            },
-            "required": [
-              "path",
-              "values"
-            ],
-            "additionalProperties": false
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
+      },
+      "FilterPathAndValuesFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "FilterPathAndValuesMultipleValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
       },
       "Filters": {
         "externalDocs": {
@@ -2101,8 +2150,7 @@
           "template": {
             "type": "string"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "InputType": {
         "type": "string",
@@ -2209,70 +2257,76 @@
       "IntegrationDetails": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Integration details",
-            "description": "This data structure represents a set of integration details.",
-            "type": "object",
-            "properties": {
-              "default": {
-                "$ref": "#/components/schemas/DefaultIntegrationDetails"
-              },
-              "docs": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/IntegrationDoc"
-                }
-              },
-              "extensions": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/v1.Extension"
-                }
-              },
-              "integration": {
-                "$ref": "#/components/schemas/Integration"
-              },
-              "local": {
-                "$ref": "#/components/schemas/LocalChangelog"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/IntegrationDetailsLocal"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Integration details",
-            "description": "This data structure represents a set of integration details.",
-            "type": "object",
-            "properties": {
-              "default": {
-                "$ref": "#/components/schemas/DefaultIntegrationDetails"
-              },
-              "docs": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/IntegrationDoc"
-                }
-              },
-              "extensions": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/v1.Extension"
-                }
-              },
-              "external": {
-                "$ref": "#/components/schemas/ExternalUrl"
-              },
-              "integration": {
-                "$ref": "#/components/schemas/Integration"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/IntegrationDetailsExternal"
           }
         ]
+      },
+      "IntegrationDetailsExternal": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration details",
+        "description": "This data structure represents a set of integration details.",
+        "type": "object",
+        "properties": {
+          "default": {
+            "$ref": "#/components/schemas/DefaultIntegrationDetails"
+          },
+          "docs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IntegrationDoc"
+            }
+          },
+          "extensions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/v1.Extension"
+            }
+          },
+          "external": {
+            "$ref": "#/components/schemas/ExternalUrl"
+          },
+          "integration": {
+            "$ref": "#/components/schemas/Integration"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IntegrationDetailsLocal": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration details",
+        "description": "This data structure represents a set of integration details.",
+        "type": "object",
+        "properties": {
+          "default": {
+            "$ref": "#/components/schemas/DefaultIntegrationDetails"
+          },
+          "docs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IntegrationDoc"
+            }
+          },
+          "extensions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/v1.Extension"
+            }
+          },
+          "integration": {
+            "$ref": "#/components/schemas/Integration"
+          },
+          "local": {
+            "$ref": "#/components/schemas/LocalChangelog"
+          }
+        },
+        "additionalProperties": false
       },
       "IntegrationDoc": {
         "externalDocs": {
@@ -2303,8 +2357,7 @@
           "introduction": {
             "type": "string"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "IntegrationMetadata": {
         "externalDocs": {
@@ -2323,238 +2376,27 @@
           "version": {
             "type": "string"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "IntegrationRevision": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Integration revision",
-            "description": "This data structure represents an integration revision.",
-            "type": "object",
-            "properties": {
-              "cloudFormation": {
-                "$ref": "#/components/schemas/CloudFormationTemplate"
-              },
-              "featureFlag": {
-                "type": "string"
-              },
-              "fields": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/FieldInformation"
-                }
-              },
-              "groups": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/IntegrationRevision.Group"
-                }
-              },
-              "id": {
-                "type": "string"
-              },
-              "revisionDeploymentSupported": {
-                "type": "boolean"
-              },
-              "upgradeInstructionsMd": {
-                "type": "string"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/IntegrationRevisionCloudFormation"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Integration revision",
-            "description": "This data structure represents an integration revision.",
-            "type": "object",
-            "properties": {
-              "featureFlag": {
-                "type": "string"
-              },
-              "fields": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/FieldInformation"
-                }
-              },
-              "groups": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/IntegrationRevision.Group"
-                }
-              },
-              "id": {
-                "type": "string"
-              },
-              "managedService": {
-                "$ref": "#/components/schemas/ManagedService"
-              },
-              "revisionDeploymentSupported": {
-                "type": "boolean"
-              },
-              "upgradeInstructionsMd": {
-                "type": "string"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/IntegrationRevisionManagedService"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Integration revision",
-            "description": "This data structure represents an integration revision.",
-            "type": "object",
-            "properties": {
-              "featureFlag": {
-                "type": "string"
-              },
-              "fields": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/FieldInformation"
-                }
-              },
-              "groups": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/IntegrationRevision.Group"
-                }
-              },
-              "helmChart": {
-                "$ref": "#/components/schemas/HelmChart"
-              },
-              "id": {
-                "type": "string"
-              },
-              "revisionDeploymentSupported": {
-                "type": "boolean"
-              },
-              "upgradeInstructionsMd": {
-                "type": "string"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/IntegrationRevisionHelmChart"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Integration revision",
-            "description": "This data structure represents an integration revision.",
-            "type": "object",
-            "properties": {
-              "azureArmTemplate": {
-                "$ref": "#/components/schemas/AzureArmTemplate"
-              },
-              "featureFlag": {
-                "type": "string"
-              },
-              "fields": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/FieldInformation"
-                }
-              },
-              "groups": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/IntegrationRevision.Group"
-                }
-              },
-              "id": {
-                "type": "string"
-              },
-              "revisionDeploymentSupported": {
-                "type": "boolean"
-              },
-              "upgradeInstructionsMd": {
-                "type": "string"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/IntegrationRevisionAzureArmTemplate"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Integration revision",
-            "description": "This data structure represents an integration revision.",
-            "type": "object",
-            "properties": {
-              "featureFlag": {
-                "type": "string"
-              },
-              "fields": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/FieldInformation"
-                }
-              },
-              "groups": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/IntegrationRevision.Group"
-                }
-              },
-              "id": {
-                "type": "string"
-              },
-              "revisionDeploymentSupported": {
-                "type": "boolean"
-              },
-              "rum": {
-                "$ref": "#/components/schemas/Rum"
-              },
-              "upgradeInstructionsMd": {
-                "type": "string"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/IntegrationRevisionRum"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Integration revision",
-            "description": "This data structure represents an integration revision.",
-            "type": "object",
-            "properties": {
-              "featureFlag": {
-                "type": "string"
-              },
-              "fields": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/FieldInformation"
-                }
-              },
-              "groups": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/IntegrationRevision.Group"
-                }
-              },
-              "id": {
-                "type": "string"
-              },
-              "revisionDeploymentSupported": {
-                "type": "boolean"
-              },
-              "terraform": {
-                "$ref": "#/components/schemas/Terraform"
-              },
-              "upgradeInstructionsMd": {
-                "type": "string"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/IntegrationRevisionTerraform"
           }
         ]
       },
@@ -2583,6 +2425,233 @@
           "defaultValue": {
             "type": "number",
             "format": "double"
+          }
+        }
+      },
+      "IntegrationRevisionAzureArmTemplate": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration revision",
+        "description": "This data structure represents an integration revision.",
+        "type": "object",
+        "properties": {
+          "azureArmTemplate": {
+            "$ref": "#/components/schemas/AzureArmTemplate"
+          },
+          "featureFlag": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldInformation"
+            }
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IntegrationRevision.Group"
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "revisionDeploymentSupported": {
+            "type": "boolean"
+          },
+          "upgradeInstructionsMd": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IntegrationRevisionCloudFormation": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration revision",
+        "description": "This data structure represents an integration revision.",
+        "type": "object",
+        "properties": {
+          "cloudFormation": {
+            "$ref": "#/components/schemas/CloudFormationTemplate"
+          },
+          "featureFlag": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldInformation"
+            }
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IntegrationRevision.Group"
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "revisionDeploymentSupported": {
+            "type": "boolean"
+          },
+          "upgradeInstructionsMd": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IntegrationRevisionHelmChart": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration revision",
+        "description": "This data structure represents an integration revision.",
+        "type": "object",
+        "properties": {
+          "featureFlag": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldInformation"
+            }
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IntegrationRevision.Group"
+            }
+          },
+          "helmChart": {
+            "$ref": "#/components/schemas/HelmChart"
+          },
+          "id": {
+            "type": "string"
+          },
+          "revisionDeploymentSupported": {
+            "type": "boolean"
+          },
+          "upgradeInstructionsMd": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IntegrationRevisionManagedService": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration revision",
+        "description": "This data structure represents an integration revision.",
+        "type": "object",
+        "properties": {
+          "featureFlag": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldInformation"
+            }
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IntegrationRevision.Group"
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "managedService": {
+            "$ref": "#/components/schemas/ManagedService"
+          },
+          "revisionDeploymentSupported": {
+            "type": "boolean"
+          },
+          "upgradeInstructionsMd": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IntegrationRevisionRum": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration revision",
+        "description": "This data structure represents an integration revision.",
+        "type": "object",
+        "properties": {
+          "featureFlag": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldInformation"
+            }
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IntegrationRevision.Group"
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "revisionDeploymentSupported": {
+            "type": "boolean"
+          },
+          "rum": {
+            "$ref": "#/components/schemas/Rum"
+          },
+          "upgradeInstructionsMd": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IntegrationRevisionTerraform": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration revision",
+        "description": "This data structure represents an integration revision.",
+        "type": "object",
+        "properties": {
+          "featureFlag": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldInformation"
+            }
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IntegrationRevision.Group"
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "revisionDeploymentSupported": {
+            "type": "boolean"
+          },
+          "terraform": {
+            "$ref": "#/components/schemas/Terraform"
+          },
+          "upgradeInstructionsMd": {
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -2614,6 +2683,104 @@
         "required": [
           "connectionStatus"
         ]
+      },
+      "IntegrationTypeArm": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration type",
+        "description": "This data structure represents an integration type.",
+        "type": "object",
+        "properties": {
+          "arm": {
+            "$ref": "#/components/schemas/AzureArm"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IntegrationTypeCloudformation": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration type",
+        "description": "This data structure represents an integration type.",
+        "type": "object",
+        "properties": {
+          "cloudformation": {
+            "$ref": "#/components/schemas/Cloudformation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IntegrationTypeContextualData": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration type",
+        "description": "This data structure represents an integration type.",
+        "type": "object",
+        "properties": {
+          "contextualData": {
+            "$ref": "#/components/schemas/ContextualData"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IntegrationTypeGenericWebhook": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration type",
+        "description": "This data structure represents an integration type.",
+        "type": "object",
+        "properties": {
+          "genericWebhook": {
+            "$ref": "#/components/schemas/GenericWebhook"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IntegrationTypeManaged": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration type",
+        "description": "This data structure represents an integration type.",
+        "type": "object",
+        "properties": {
+          "managed": {
+            "$ref": "#/components/schemas/Managed"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IntegrationTypePushBasedContextualData": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration type",
+        "description": "This data structure represents an integration type.",
+        "type": "object",
+        "properties": {
+          "pushBasedContextualData": {
+            "$ref": "#/components/schemas/PushBasedContextualData"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IntegrationTypeUntracked": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration type",
+        "description": "This data structure represents an integration type.",
+        "type": "object",
+        "properties": {
+          "untracked": {
+            "$ref": "#/components/schemas/Untracked"
+          }
+        },
+        "additionalProperties": false
       },
       "Language": {
         "type": "string",
@@ -2776,103 +2943,121 @@
       "Parameter": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Parameter",
-            "type": "object",
-            "properties": {
-              "key": {
-                "type": "string"
-              },
-              "stringValue": {
-                "type": "string"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/ParameterApiKey"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Parameter",
-            "type": "object",
-            "properties": {
-              "booleanValue": {
-                "type": "boolean"
-              },
-              "key": {
-                "type": "string"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/ParameterNumericValue"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Parameter",
-            "type": "object",
-            "properties": {
-              "key": {
-                "type": "string"
-              },
-              "stringList": {
-                "$ref": "#/components/schemas/StringList"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/ParameterSensitiveData"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Parameter",
-            "type": "object",
-            "properties": {
-              "apiKey": {
-                "$ref": "#/components/schemas/ApiKeyData"
-              },
-              "key": {
-                "type": "string"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/ParameterStringValue"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Parameter",
-            "type": "object",
-            "properties": {
-              "key": {
-                "type": "string"
-              },
-              "numericValue": {
-                "type": "number",
-                "format": "double"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/ParameterBooleanValue"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Parameter",
-            "type": "object",
-            "properties": {
-              "key": {
-                "type": "string"
-              },
-              "sensitiveData": {
-                "$ref": "#/components/schemas/SensitiveDataPlaceholder"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/ParameterStringList"
           }
         ]
+      },
+      "ParameterApiKey": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Parameter",
+        "type": "object",
+        "properties": {
+          "apiKey": {
+            "$ref": "#/components/schemas/ApiKeyData"
+          },
+          "key": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ParameterBooleanValue": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Parameter",
+        "type": "object",
+        "properties": {
+          "booleanValue": {
+            "type": "boolean"
+          },
+          "key": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ParameterNumericValue": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Parameter",
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "numericValue": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ParameterSensitiveData": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Parameter",
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "sensitiveData": {
+            "$ref": "#/components/schemas/SensitiveDataPlaceholder"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ParameterStringList": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Parameter",
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "stringList": {
+            "$ref": "#/components/schemas/StringList"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ParameterStringValue": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Parameter",
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "stringValue": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
       },
       "PermissionResource": {
         "type": "string",
@@ -2905,111 +3090,120 @@
       "RegisteredInstance": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Registered instance",
-            "type": "object",
-            "properties": {
-              "definitionVersion": {
-                "type": "string"
-              },
-              "empty": {
-                "$ref": "#/components/schemas/NoDeployment"
-              },
-              "id": {
-                "type": "string"
-              },
-              "integrationStatus": {
-                "$ref": "#/components/schemas/IntegrationStatus"
-              },
-              "isTesting": {
-                "type": "boolean"
-              },
-              "lastUpdated": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "parameters": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Parameter"
-                }
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/RegisteredInstanceEmpty"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Registered instance",
-            "type": "object",
-            "properties": {
-              "cloudformation": {
-                "$ref": "#/components/schemas/CloudFormationStack"
-              },
-              "definitionVersion": {
-                "type": "string"
-              },
-              "id": {
-                "type": "string"
-              },
-              "integrationStatus": {
-                "$ref": "#/components/schemas/IntegrationStatus"
-              },
-              "isTesting": {
-                "type": "boolean"
-              },
-              "lastUpdated": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "parameters": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Parameter"
-                }
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/RegisteredInstanceCloudformation"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Registered instance",
-            "type": "object",
-            "properties": {
-              "arm": {
-                "$ref": "#/components/schemas/ARMStack"
-              },
-              "definitionVersion": {
-                "type": "string"
-              },
-              "id": {
-                "type": "string"
-              },
-              "integrationStatus": {
-                "$ref": "#/components/schemas/IntegrationStatus"
-              },
-              "isTesting": {
-                "type": "boolean"
-              },
-              "lastUpdated": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "parameters": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Parameter"
-                }
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/RegisteredInstanceArm"
           }
         ]
+      },
+      "RegisteredInstanceArm": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Registered instance",
+        "type": "object",
+        "properties": {
+          "arm": {
+            "$ref": "#/components/schemas/ARMStack"
+          },
+          "definitionVersion": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "integrationStatus": {
+            "$ref": "#/components/schemas/IntegrationStatus"
+          },
+          "isTesting": {
+            "type": "boolean"
+          },
+          "lastUpdated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Parameter"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisteredInstanceCloudformation": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Registered instance",
+        "type": "object",
+        "properties": {
+          "cloudformation": {
+            "$ref": "#/components/schemas/CloudFormationStack"
+          },
+          "definitionVersion": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "integrationStatus": {
+            "$ref": "#/components/schemas/IntegrationStatus"
+          },
+          "isTesting": {
+            "type": "boolean"
+          },
+          "lastUpdated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Parameter"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisteredInstanceEmpty": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Registered instance",
+        "type": "object",
+        "properties": {
+          "definitionVersion": {
+            "type": "string"
+          },
+          "empty": {
+            "$ref": "#/components/schemas/NoDeployment"
+          },
+          "id": {
+            "type": "string"
+          },
+          "integrationStatus": {
+            "$ref": "#/components/schemas/IntegrationStatus"
+          },
+          "isTesting": {
+            "type": "boolean"
+          },
+          "lastUpdated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Parameter"
+            }
+          }
+        },
+        "additionalProperties": false
       },
       "RevisionRef": {
         "externalDocs": {
@@ -3116,8 +3310,7 @@
               "type": "string"
             }
           }
-        },
-        "additionalProperties": false
+        }
       },
       "SensitiveDataPlaceholder": {
         "externalDocs": {
@@ -3136,8 +3329,7 @@
           "defaultValue": {
             "type": "boolean"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "SingleValue": {
         "externalDocs": {
@@ -3149,8 +3341,7 @@
           "defaultValue": {
             "type": "string"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "SourceMapMetadata": {
         "externalDocs": {
@@ -3252,30 +3443,10 @@
       "TestIntegrationResult": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Test integration result",
-            "type": "object",
-            "properties": {
-              "success": {
-                "$ref": "#/components/schemas/TestIntegrationResult.Success"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/TestIntegrationResultSuccess"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Test integration result",
-            "type": "object",
-            "properties": {
-              "failure": {
-                "$ref": "#/components/schemas/TestIntegrationResult.Failure"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/TestIntegrationResultFailure"
           }
         ]
       },
@@ -3298,6 +3469,32 @@
         "title": "Success",
         "type": "object"
       },
+      "TestIntegrationResultFailure": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Test integration result",
+        "type": "object",
+        "properties": {
+          "failure": {
+            "$ref": "#/components/schemas/TestIntegrationResult.Failure"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TestIntegrationResultSuccess": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Test integration result",
+        "type": "object",
+        "properties": {
+          "success": {
+            "$ref": "#/components/schemas/TestIntegrationResult.Success"
+          }
+        },
+        "additionalProperties": false
+      },
       "Untracked": {
         "externalDocs": {
           "url": ""
@@ -3317,6 +3514,24 @@
           "OAUTH",
           "CUSTOM"
         ]
+      },
+      "YAxisViewByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/YAxisViewByCategory"
+          }
+        },
+        "additionalProperties": false
+      },
+      "YAxisViewByValue": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/YAxisViewByValue"
+          }
+        },
+        "additionalProperties": false
       },
       "common.Group": {
         "type": "object",
@@ -3408,102 +3623,25 @@
       "v1.IntegrationType": {
         "oneOf": [
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Integration type",
-            "description": "This data structure represents an integration type.",
-            "type": "object",
-            "properties": {
-              "managed": {
-                "$ref": "#/components/schemas/Managed"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/IntegrationTypeGenericWebhook"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Integration type",
-            "description": "This data structure represents an integration type.",
-            "type": "object",
-            "properties": {
-              "untracked": {
-                "$ref": "#/components/schemas/Untracked"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/IntegrationTypeManaged"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Integration type",
-            "description": "This data structure represents an integration type.",
-            "type": "object",
-            "properties": {
-              "cloudformation": {
-                "$ref": "#/components/schemas/Cloudformation"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/IntegrationTypeUntracked"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Integration type",
-            "description": "This data structure represents an integration type.",
-            "type": "object",
-            "properties": {
-              "arm": {
-                "$ref": "#/components/schemas/AzureArm"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/IntegrationTypeCloudformation"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Integration type",
-            "description": "This data structure represents an integration type.",
-            "type": "object",
-            "properties": {
-              "pushBasedContextualData": {
-                "$ref": "#/components/schemas/PushBasedContextualData"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/IntegrationTypeArm"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Integration type",
-            "description": "This data structure represents an integration type.",
-            "type": "object",
-            "properties": {
-              "contextualData": {
-                "$ref": "#/components/schemas/ContextualData"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/IntegrationTypePushBasedContextualData"
           },
           {
-            "externalDocs": {
-              "url": ""
-            },
-            "title": "Integration type",
-            "description": "This data structure represents an integration type.",
-            "type": "object",
-            "properties": {
-              "genericWebhook": {
-                "$ref": "#/components/schemas/GenericWebhook"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/components/schemas/IntegrationTypeContextualData"
           }
         ]
       },

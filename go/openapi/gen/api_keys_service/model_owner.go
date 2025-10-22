@@ -18,29 +18,29 @@ import (
 
 // Owner - struct for Owner
 type Owner struct {
-	OwnerOneOf *OwnerOneOf
-	OwnerOneOf1 *OwnerOneOf1
-	OwnerOneOf2 *OwnerOneOf2
+	OwnerOrganisationId *OwnerOrganisationId
+	OwnerTeamId *OwnerTeamId
+	OwnerUserId *OwnerUserId
 }
 
-// OwnerOneOfAsOwner is a convenience function that returns OwnerOneOf wrapped in Owner
-func OwnerOneOfAsOwner(v *OwnerOneOf) Owner {
+// OwnerOrganisationIdAsOwner is a convenience function that returns OwnerOrganisationId wrapped in Owner
+func OwnerOrganisationIdAsOwner(v *OwnerOrganisationId) Owner {
 	return Owner{
-		OwnerOneOf: v,
+		OwnerOrganisationId: v,
 	}
 }
 
-// OwnerOneOf1AsOwner is a convenience function that returns OwnerOneOf1 wrapped in Owner
-func OwnerOneOf1AsOwner(v *OwnerOneOf1) Owner {
+// OwnerTeamIdAsOwner is a convenience function that returns OwnerTeamId wrapped in Owner
+func OwnerTeamIdAsOwner(v *OwnerTeamId) Owner {
 	return Owner{
-		OwnerOneOf1: v,
+		OwnerTeamId: v,
 	}
 }
 
-// OwnerOneOf2AsOwner is a convenience function that returns OwnerOneOf2 wrapped in Owner
-func OwnerOneOf2AsOwner(v *OwnerOneOf2) Owner {
+// OwnerUserIdAsOwner is a convenience function that returns OwnerUserId wrapped in Owner
+func OwnerUserIdAsOwner(v *OwnerUserId) Owner {
 	return Owner{
-		OwnerOneOf2: v,
+		OwnerUserId: v,
 	}
 }
 
@@ -49,62 +49,62 @@ func OwnerOneOf2AsOwner(v *OwnerOneOf2) Owner {
 func (dst *Owner) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into OwnerOneOf
-	err = newStrictDecoder(data).Decode(&dst.OwnerOneOf)
+	// try to unmarshal data into OwnerOrganisationId
+	err = newStrictDecoder(data).Decode(&dst.OwnerOrganisationId)
 	if err == nil {
-		jsonOwnerOneOf, _ := json.Marshal(dst.OwnerOneOf)
-		if string(jsonOwnerOneOf) == "{}" { // empty struct
-			dst.OwnerOneOf = nil
+		jsonOwnerOrganisationId, _ := json.Marshal(dst.OwnerOrganisationId)
+		if string(jsonOwnerOrganisationId) == "{}" { // empty struct
+			dst.OwnerOrganisationId = nil
 		} else {
-			if err = validator.Validate(dst.OwnerOneOf); err != nil {
-				dst.OwnerOneOf = nil
+			if err = validator.Validate(dst.OwnerOrganisationId); err != nil {
+				dst.OwnerOrganisationId = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.OwnerOneOf = nil
+		dst.OwnerOrganisationId = nil
 	}
 
-	// try to unmarshal data into OwnerOneOf1
-	err = newStrictDecoder(data).Decode(&dst.OwnerOneOf1)
+	// try to unmarshal data into OwnerTeamId
+	err = newStrictDecoder(data).Decode(&dst.OwnerTeamId)
 	if err == nil {
-		jsonOwnerOneOf1, _ := json.Marshal(dst.OwnerOneOf1)
-		if string(jsonOwnerOneOf1) == "{}" { // empty struct
-			dst.OwnerOneOf1 = nil
+		jsonOwnerTeamId, _ := json.Marshal(dst.OwnerTeamId)
+		if string(jsonOwnerTeamId) == "{}" { // empty struct
+			dst.OwnerTeamId = nil
 		} else {
-			if err = validator.Validate(dst.OwnerOneOf1); err != nil {
-				dst.OwnerOneOf1 = nil
+			if err = validator.Validate(dst.OwnerTeamId); err != nil {
+				dst.OwnerTeamId = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.OwnerOneOf1 = nil
+		dst.OwnerTeamId = nil
 	}
 
-	// try to unmarshal data into OwnerOneOf2
-	err = newStrictDecoder(data).Decode(&dst.OwnerOneOf2)
+	// try to unmarshal data into OwnerUserId
+	err = newStrictDecoder(data).Decode(&dst.OwnerUserId)
 	if err == nil {
-		jsonOwnerOneOf2, _ := json.Marshal(dst.OwnerOneOf2)
-		if string(jsonOwnerOneOf2) == "{}" { // empty struct
-			dst.OwnerOneOf2 = nil
+		jsonOwnerUserId, _ := json.Marshal(dst.OwnerUserId)
+		if string(jsonOwnerUserId) == "{}" { // empty struct
+			dst.OwnerUserId = nil
 		} else {
-			if err = validator.Validate(dst.OwnerOneOf2); err != nil {
-				dst.OwnerOneOf2 = nil
+			if err = validator.Validate(dst.OwnerUserId); err != nil {
+				dst.OwnerUserId = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.OwnerOneOf2 = nil
+		dst.OwnerUserId = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.OwnerOneOf = nil
-		dst.OwnerOneOf1 = nil
-		dst.OwnerOneOf2 = nil
+		dst.OwnerOrganisationId = nil
+		dst.OwnerTeamId = nil
+		dst.OwnerUserId = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(Owner)")
 	} else if match == 1 {
@@ -116,16 +116,16 @@ func (dst *Owner) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src Owner) MarshalJSON() ([]byte, error) {
-	if src.OwnerOneOf != nil {
-		return json.Marshal(&src.OwnerOneOf)
+	if src.OwnerOrganisationId != nil {
+		return json.Marshal(&src.OwnerOrganisationId)
 	}
 
-	if src.OwnerOneOf1 != nil {
-		return json.Marshal(&src.OwnerOneOf1)
+	if src.OwnerTeamId != nil {
+		return json.Marshal(&src.OwnerTeamId)
 	}
 
-	if src.OwnerOneOf2 != nil {
-		return json.Marshal(&src.OwnerOneOf2)
+	if src.OwnerUserId != nil {
+		return json.Marshal(&src.OwnerUserId)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -136,16 +136,16 @@ func (obj *Owner) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.OwnerOneOf != nil {
-		return obj.OwnerOneOf
+	if obj.OwnerOrganisationId != nil {
+		return obj.OwnerOrganisationId
 	}
 
-	if obj.OwnerOneOf1 != nil {
-		return obj.OwnerOneOf1
+	if obj.OwnerTeamId != nil {
+		return obj.OwnerTeamId
 	}
 
-	if obj.OwnerOneOf2 != nil {
-		return obj.OwnerOneOf2
+	if obj.OwnerUserId != nil {
+		return obj.OwnerUserId
 	}
 
 	// all schemas are nil
@@ -154,16 +154,16 @@ func (obj *Owner) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj Owner) GetActualInstanceValue() (interface{}) {
-	if obj.OwnerOneOf != nil {
-		return *obj.OwnerOneOf
+	if obj.OwnerOrganisationId != nil {
+		return *obj.OwnerOrganisationId
 	}
 
-	if obj.OwnerOneOf1 != nil {
-		return *obj.OwnerOneOf1
+	if obj.OwnerTeamId != nil {
+		return *obj.OwnerTeamId
 	}
 
-	if obj.OwnerOneOf2 != nil {
-		return *obj.OwnerOneOf2
+	if obj.OwnerUserId != nil {
+		return *obj.OwnerUserId
 	}
 
 	// all schemas are nil

@@ -18,21 +18,21 @@ import (
 
 // GetGroupUsersResponse - struct for GetGroupUsersResponse
 type GetGroupUsersResponse struct {
-	GetGroupUsersResponse1 *GetGroupUsersResponse1
-	GetGroupUsersResponse2 *GetGroupUsersResponse2
+	GetGroupUsersResponseNoMorePages *GetGroupUsersResponseNoMorePages
+	GetGroupUsersResponseToken *GetGroupUsersResponseToken
 }
 
-// GetGroupUsersResponse1AsGetGroupUsersResponse is a convenience function that returns GetGroupUsersResponse1 wrapped in GetGroupUsersResponse
-func GetGroupUsersResponse1AsGetGroupUsersResponse(v *GetGroupUsersResponse1) GetGroupUsersResponse {
+// GetGroupUsersResponseNoMorePagesAsGetGroupUsersResponse is a convenience function that returns GetGroupUsersResponseNoMorePages wrapped in GetGroupUsersResponse
+func GetGroupUsersResponseNoMorePagesAsGetGroupUsersResponse(v *GetGroupUsersResponseNoMorePages) GetGroupUsersResponse {
 	return GetGroupUsersResponse{
-		GetGroupUsersResponse1: v,
+		GetGroupUsersResponseNoMorePages: v,
 	}
 }
 
-// GetGroupUsersResponse2AsGetGroupUsersResponse is a convenience function that returns GetGroupUsersResponse2 wrapped in GetGroupUsersResponse
-func GetGroupUsersResponse2AsGetGroupUsersResponse(v *GetGroupUsersResponse2) GetGroupUsersResponse {
+// GetGroupUsersResponseTokenAsGetGroupUsersResponse is a convenience function that returns GetGroupUsersResponseToken wrapped in GetGroupUsersResponse
+func GetGroupUsersResponseTokenAsGetGroupUsersResponse(v *GetGroupUsersResponseToken) GetGroupUsersResponse {
 	return GetGroupUsersResponse{
-		GetGroupUsersResponse2: v,
+		GetGroupUsersResponseToken: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func GetGroupUsersResponse2AsGetGroupUsersResponse(v *GetGroupUsersResponse2) Ge
 func (dst *GetGroupUsersResponse) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into GetGroupUsersResponse1
-	err = newStrictDecoder(data).Decode(&dst.GetGroupUsersResponse1)
+	// try to unmarshal data into GetGroupUsersResponseNoMorePages
+	err = newStrictDecoder(data).Decode(&dst.GetGroupUsersResponseNoMorePages)
 	if err == nil {
-		jsonGetGroupUsersResponse1, _ := json.Marshal(dst.GetGroupUsersResponse1)
-		if string(jsonGetGroupUsersResponse1) == "{}" { // empty struct
-			dst.GetGroupUsersResponse1 = nil
+		jsonGetGroupUsersResponseNoMorePages, _ := json.Marshal(dst.GetGroupUsersResponseNoMorePages)
+		if string(jsonGetGroupUsersResponseNoMorePages) == "{}" { // empty struct
+			dst.GetGroupUsersResponseNoMorePages = nil
 		} else {
-			if err = validator.Validate(dst.GetGroupUsersResponse1); err != nil {
-				dst.GetGroupUsersResponse1 = nil
+			if err = validator.Validate(dst.GetGroupUsersResponseNoMorePages); err != nil {
+				dst.GetGroupUsersResponseNoMorePages = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.GetGroupUsersResponse1 = nil
+		dst.GetGroupUsersResponseNoMorePages = nil
 	}
 
-	// try to unmarshal data into GetGroupUsersResponse2
-	err = newStrictDecoder(data).Decode(&dst.GetGroupUsersResponse2)
+	// try to unmarshal data into GetGroupUsersResponseToken
+	err = newStrictDecoder(data).Decode(&dst.GetGroupUsersResponseToken)
 	if err == nil {
-		jsonGetGroupUsersResponse2, _ := json.Marshal(dst.GetGroupUsersResponse2)
-		if string(jsonGetGroupUsersResponse2) == "{}" { // empty struct
-			dst.GetGroupUsersResponse2 = nil
+		jsonGetGroupUsersResponseToken, _ := json.Marshal(dst.GetGroupUsersResponseToken)
+		if string(jsonGetGroupUsersResponseToken) == "{}" { // empty struct
+			dst.GetGroupUsersResponseToken = nil
 		} else {
-			if err = validator.Validate(dst.GetGroupUsersResponse2); err != nil {
-				dst.GetGroupUsersResponse2 = nil
+			if err = validator.Validate(dst.GetGroupUsersResponseToken); err != nil {
+				dst.GetGroupUsersResponseToken = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.GetGroupUsersResponse2 = nil
+		dst.GetGroupUsersResponseToken = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.GetGroupUsersResponse1 = nil
-		dst.GetGroupUsersResponse2 = nil
+		dst.GetGroupUsersResponseNoMorePages = nil
+		dst.GetGroupUsersResponseToken = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(GetGroupUsersResponse)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *GetGroupUsersResponse) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src GetGroupUsersResponse) MarshalJSON() ([]byte, error) {
-	if src.GetGroupUsersResponse1 != nil {
-		return json.Marshal(&src.GetGroupUsersResponse1)
+	if src.GetGroupUsersResponseNoMorePages != nil {
+		return json.Marshal(&src.GetGroupUsersResponseNoMorePages)
 	}
 
-	if src.GetGroupUsersResponse2 != nil {
-		return json.Marshal(&src.GetGroupUsersResponse2)
+	if src.GetGroupUsersResponseToken != nil {
+		return json.Marshal(&src.GetGroupUsersResponseToken)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *GetGroupUsersResponse) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.GetGroupUsersResponse1 != nil {
-		return obj.GetGroupUsersResponse1
+	if obj.GetGroupUsersResponseNoMorePages != nil {
+		return obj.GetGroupUsersResponseNoMorePages
 	}
 
-	if obj.GetGroupUsersResponse2 != nil {
-		return obj.GetGroupUsersResponse2
+	if obj.GetGroupUsersResponseToken != nil {
+		return obj.GetGroupUsersResponseToken
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *GetGroupUsersResponse) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj GetGroupUsersResponse) GetActualInstanceValue() (interface{}) {
-	if obj.GetGroupUsersResponse1 != nil {
-		return *obj.GetGroupUsersResponse1
+	if obj.GetGroupUsersResponseNoMorePages != nil {
+		return *obj.GetGroupUsersResponseNoMorePages
 	}
 
-	if obj.GetGroupUsersResponse2 != nil {
-		return *obj.GetGroupUsersResponse2
+	if obj.GetGroupUsersResponseToken != nil {
+		return *obj.GetGroupUsersResponseToken
 	}
 
 	// all schemas are nil
