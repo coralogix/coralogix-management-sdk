@@ -19,9 +19,7 @@ var _ MappedNullable = &ManualSourceStrategyInstant{}
 
 // ManualSourceStrategyInstant struct for ManualSourceStrategyInstant
 type ManualSourceStrategyInstant struct {
-	CustomUnit *string `json:"customUnit,omitempty"`
-	Unit *CommonUnit `json:"unit,omitempty"`
-	Value *float64 `json:"value,omitempty"`
+	Instant *ManualSourceStrategyInstant `json:"instant,omitempty"`
 }
 
 // NewManualSourceStrategyInstant instantiates a new ManualSourceStrategyInstant object
@@ -41,100 +39,36 @@ func NewManualSourceStrategyInstantWithDefaults() *ManualSourceStrategyInstant {
 	return &this
 }
 
-// GetCustomUnit returns the CustomUnit field value if set, zero value otherwise.
-func (o *ManualSourceStrategyInstant) GetCustomUnit() string {
-	if o == nil || IsNil(o.CustomUnit) {
-		var ret string
+// GetInstant returns the Instant field value if set, zero value otherwise.
+func (o *ManualSourceStrategyInstant) GetInstant() ManualSourceStrategyInstant {
+	if o == nil || IsNil(o.Instant) {
+		var ret ManualSourceStrategyInstant
 		return ret
 	}
-	return *o.CustomUnit
+	return *o.Instant
 }
 
-// GetCustomUnitOk returns a tuple with the CustomUnit field value if set, nil otherwise
+// GetInstantOk returns a tuple with the Instant field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ManualSourceStrategyInstant) GetCustomUnitOk() (*string, bool) {
-	if o == nil || IsNil(o.CustomUnit) {
+func (o *ManualSourceStrategyInstant) GetInstantOk() (*ManualSourceStrategyInstant, bool) {
+	if o == nil || IsNil(o.Instant) {
 		return nil, false
 	}
-	return o.CustomUnit, true
+	return o.Instant, true
 }
 
-// HasCustomUnit returns a boolean if a field has been set.
-func (o *ManualSourceStrategyInstant) HasCustomUnit() bool {
-	if o != nil && !IsNil(o.CustomUnit) {
+// HasInstant returns a boolean if a field has been set.
+func (o *ManualSourceStrategyInstant) HasInstant() bool {
+	if o != nil && !IsNil(o.Instant) {
 		return true
 	}
 
 	return false
 }
 
-// SetCustomUnit gets a reference to the given string and assigns it to the CustomUnit field.
-func (o *ManualSourceStrategyInstant) SetCustomUnit(v string) {
-	o.CustomUnit = &v
-}
-
-// GetUnit returns the Unit field value if set, zero value otherwise.
-func (o *ManualSourceStrategyInstant) GetUnit() CommonUnit {
-	if o == nil || IsNil(o.Unit) {
-		var ret CommonUnit
-		return ret
-	}
-	return *o.Unit
-}
-
-// GetUnitOk returns a tuple with the Unit field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ManualSourceStrategyInstant) GetUnitOk() (*CommonUnit, bool) {
-	if o == nil || IsNil(o.Unit) {
-		return nil, false
-	}
-	return o.Unit, true
-}
-
-// HasUnit returns a boolean if a field has been set.
-func (o *ManualSourceStrategyInstant) HasUnit() bool {
-	if o != nil && !IsNil(o.Unit) {
-		return true
-	}
-
-	return false
-}
-
-// SetUnit gets a reference to the given CommonUnit and assigns it to the Unit field.
-func (o *ManualSourceStrategyInstant) SetUnit(v CommonUnit) {
-	o.Unit = &v
-}
-
-// GetValue returns the Value field value if set, zero value otherwise.
-func (o *ManualSourceStrategyInstant) GetValue() float64 {
-	if o == nil || IsNil(o.Value) {
-		var ret float64
-		return ret
-	}
-	return *o.Value
-}
-
-// GetValueOk returns a tuple with the Value field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ManualSourceStrategyInstant) GetValueOk() (*float64, bool) {
-	if o == nil || IsNil(o.Value) {
-		return nil, false
-	}
-	return o.Value, true
-}
-
-// HasValue returns a boolean if a field has been set.
-func (o *ManualSourceStrategyInstant) HasValue() bool {
-	if o != nil && !IsNil(o.Value) {
-		return true
-	}
-
-	return false
-}
-
-// SetValue gets a reference to the given float64 and assigns it to the Value field.
-func (o *ManualSourceStrategyInstant) SetValue(v float64) {
-	o.Value = &v
+// SetInstant gets a reference to the given ManualSourceStrategyInstant and assigns it to the Instant field.
+func (o *ManualSourceStrategyInstant) SetInstant(v ManualSourceStrategyInstant) {
+	o.Instant = &v
 }
 
 func (o ManualSourceStrategyInstant) MarshalJSON() ([]byte, error) {
@@ -147,14 +81,8 @@ func (o ManualSourceStrategyInstant) MarshalJSON() ([]byte, error) {
 
 func (o ManualSourceStrategyInstant) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CustomUnit) {
-		toSerialize["customUnit"] = o.CustomUnit
-	}
-	if !IsNil(o.Unit) {
-		toSerialize["unit"] = o.Unit
-	}
-	if !IsNil(o.Value) {
-		toSerialize["value"] = o.Value
+	if !IsNil(o.Instant) {
+		toSerialize["instant"] = o.Instant
 	}
 	return toSerialize, nil
 }

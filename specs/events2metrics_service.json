@@ -529,56 +529,6 @@
           "AGG_TYPE_SAMPLES"
         ]
       },
-      "AggregationHistogram": {
-        "externalDocs": {
-          "description": "Find out more about events2metrics",
-          "url": "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
-        },
-        "title": "Aggregation",
-        "description": "This data structure represents an aggregation",
-        "type": "object",
-        "properties": {
-          "aggType": {
-            "$ref": "#/components/schemas/AggType"
-          },
-          "enabled": {
-            "type": "boolean"
-          },
-          "histogram": {
-            "$ref": "#/components/schemas/E2MAggHistogram"
-          },
-          "targetMetricName": {
-            "example": "alias_field_name_agg_func",
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "AggregationSamples": {
-        "externalDocs": {
-          "description": "Find out more about events2metrics",
-          "url": "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
-        },
-        "title": "Aggregation",
-        "description": "This data structure represents an aggregation",
-        "type": "object",
-        "properties": {
-          "aggType": {
-            "$ref": "#/components/schemas/AggType"
-          },
-          "enabled": {
-            "type": "boolean"
-          },
-          "samples": {
-            "$ref": "#/components/schemas/E2MAggSamples"
-          },
-          "targetMetricName": {
-            "example": "alias_field_name_agg_func",
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
       "AtomicBatchExecuteE2MResponse": {
         "type": "object",
         "properties": {
@@ -680,10 +630,10 @@
       "E2M": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/E2MLogsQuery"
+            "$ref": "#/components/schemas/E2MSpansQuery"
           },
           {
-            "$ref": "#/components/schemas/E2MSpansQuery"
+            "$ref": "#/components/schemas/E2MLogsQuery"
           }
         ]
       },
@@ -865,13 +815,13 @@
       "E2MExecutionResponse": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/E2MExecutionResponseDeleted"
-          },
-          {
             "$ref": "#/components/schemas/E2MExecutionResponseCreated"
           },
           {
             "$ref": "#/components/schemas/E2MExecutionResponseReplaced"
+          },
+          {
+            "$ref": "#/components/schemas/E2MExecutionResponseDeleted"
           }
         ]
       },
@@ -1317,20 +1267,52 @@
           "SAMPLE_TYPE_MAX"
         ]
       },
-      "YAxisViewByCategory": {
+      "V2AggregationHistogram": {
+        "externalDocs": {
+          "description": "Find out more about events2metrics",
+          "url": "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
+        },
+        "title": "Aggregation",
+        "description": "This data structure represents an aggregation",
         "type": "object",
         "properties": {
-          "category": {
-            "$ref": "#/components/schemas/YAxisViewByCategory"
+          "aggType": {
+            "$ref": "#/components/schemas/AggType"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "histogram": {
+            "$ref": "#/components/schemas/E2MAggHistogram"
+          },
+          "targetMetricName": {
+            "example": "alias_field_name_agg_func",
+            "type": "string"
           }
         },
         "additionalProperties": false
       },
-      "YAxisViewByValue": {
+      "V2AggregationSamples": {
+        "externalDocs": {
+          "description": "Find out more about events2metrics",
+          "url": "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
+        },
+        "title": "Aggregation",
+        "description": "This data structure represents an aggregation",
         "type": "object",
         "properties": {
-          "value": {
-            "$ref": "#/components/schemas/YAxisViewByValue"
+          "aggType": {
+            "$ref": "#/components/schemas/AggType"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "samples": {
+            "$ref": "#/components/schemas/E2MAggSamples"
+          },
+          "targetMetricName": {
+            "example": "alias_field_name_agg_func",
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -1375,10 +1357,10 @@
       "v2.Aggregation": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AggregationSamples"
+            "$ref": "#/components/schemas/V2AggregationSamples"
           },
           {
-            "$ref": "#/components/schemas/AggregationHistogram"
+            "$ref": "#/components/schemas/V2AggregationHistogram"
           }
         ]
       },

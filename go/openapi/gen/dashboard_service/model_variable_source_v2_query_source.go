@@ -18,37 +18,37 @@ import (
 
 // VariableSourceV2QuerySource - struct for VariableSourceV2QuerySource
 type VariableSourceV2QuerySource struct {
-	QuerySourceDataprimeQuery *QuerySourceDataprimeQuery
-	QuerySourceLogsQuery *QuerySourceLogsQuery
-	QuerySourceMetricsQuery *QuerySourceMetricsQuery
-	QuerySourceSpansQuery *QuerySourceSpansQuery
+	VariableSourceV2QuerySourceDataprimeQuery *VariableSourceV2QuerySourceDataprimeQuery
+	VariableSourceV2QuerySourceLogsQuery *VariableSourceV2QuerySourceLogsQuery
+	VariableSourceV2QuerySourceMetricsQuery *VariableSourceV2QuerySourceMetricsQuery
+	VariableSourceV2QuerySourceSpansQuery *VariableSourceV2QuerySourceSpansQuery
 }
 
-// QuerySourceDataprimeQueryAsVariableSourceV2QuerySource is a convenience function that returns QuerySourceDataprimeQuery wrapped in VariableSourceV2QuerySource
-func QuerySourceDataprimeQueryAsVariableSourceV2QuerySource(v *QuerySourceDataprimeQuery) VariableSourceV2QuerySource {
+// VariableSourceV2QuerySourceDataprimeQueryAsVariableSourceV2QuerySource is a convenience function that returns VariableSourceV2QuerySourceDataprimeQuery wrapped in VariableSourceV2QuerySource
+func VariableSourceV2QuerySourceDataprimeQueryAsVariableSourceV2QuerySource(v *VariableSourceV2QuerySourceDataprimeQuery) VariableSourceV2QuerySource {
 	return VariableSourceV2QuerySource{
-		QuerySourceDataprimeQuery: v,
+		VariableSourceV2QuerySourceDataprimeQuery: v,
 	}
 }
 
-// QuerySourceLogsQueryAsVariableSourceV2QuerySource is a convenience function that returns QuerySourceLogsQuery wrapped in VariableSourceV2QuerySource
-func QuerySourceLogsQueryAsVariableSourceV2QuerySource(v *QuerySourceLogsQuery) VariableSourceV2QuerySource {
+// VariableSourceV2QuerySourceLogsQueryAsVariableSourceV2QuerySource is a convenience function that returns VariableSourceV2QuerySourceLogsQuery wrapped in VariableSourceV2QuerySource
+func VariableSourceV2QuerySourceLogsQueryAsVariableSourceV2QuerySource(v *VariableSourceV2QuerySourceLogsQuery) VariableSourceV2QuerySource {
 	return VariableSourceV2QuerySource{
-		QuerySourceLogsQuery: v,
+		VariableSourceV2QuerySourceLogsQuery: v,
 	}
 }
 
-// QuerySourceMetricsQueryAsVariableSourceV2QuerySource is a convenience function that returns QuerySourceMetricsQuery wrapped in VariableSourceV2QuerySource
-func QuerySourceMetricsQueryAsVariableSourceV2QuerySource(v *QuerySourceMetricsQuery) VariableSourceV2QuerySource {
+// VariableSourceV2QuerySourceMetricsQueryAsVariableSourceV2QuerySource is a convenience function that returns VariableSourceV2QuerySourceMetricsQuery wrapped in VariableSourceV2QuerySource
+func VariableSourceV2QuerySourceMetricsQueryAsVariableSourceV2QuerySource(v *VariableSourceV2QuerySourceMetricsQuery) VariableSourceV2QuerySource {
 	return VariableSourceV2QuerySource{
-		QuerySourceMetricsQuery: v,
+		VariableSourceV2QuerySourceMetricsQuery: v,
 	}
 }
 
-// QuerySourceSpansQueryAsVariableSourceV2QuerySource is a convenience function that returns QuerySourceSpansQuery wrapped in VariableSourceV2QuerySource
-func QuerySourceSpansQueryAsVariableSourceV2QuerySource(v *QuerySourceSpansQuery) VariableSourceV2QuerySource {
+// VariableSourceV2QuerySourceSpansQueryAsVariableSourceV2QuerySource is a convenience function that returns VariableSourceV2QuerySourceSpansQuery wrapped in VariableSourceV2QuerySource
+func VariableSourceV2QuerySourceSpansQueryAsVariableSourceV2QuerySource(v *VariableSourceV2QuerySourceSpansQuery) VariableSourceV2QuerySource {
 	return VariableSourceV2QuerySource{
-		QuerySourceSpansQuery: v,
+		VariableSourceV2QuerySourceSpansQuery: v,
 	}
 }
 
@@ -57,80 +57,80 @@ func QuerySourceSpansQueryAsVariableSourceV2QuerySource(v *QuerySourceSpansQuery
 func (dst *VariableSourceV2QuerySource) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into QuerySourceDataprimeQuery
-	err = newStrictDecoder(data).Decode(&dst.QuerySourceDataprimeQuery)
+	// try to unmarshal data into VariableSourceV2QuerySourceDataprimeQuery
+	err = newStrictDecoder(data).Decode(&dst.VariableSourceV2QuerySourceDataprimeQuery)
 	if err == nil {
-		jsonQuerySourceDataprimeQuery, _ := json.Marshal(dst.QuerySourceDataprimeQuery)
-		if string(jsonQuerySourceDataprimeQuery) == "{}" { // empty struct
-			dst.QuerySourceDataprimeQuery = nil
+		jsonVariableSourceV2QuerySourceDataprimeQuery, _ := json.Marshal(dst.VariableSourceV2QuerySourceDataprimeQuery)
+		if string(jsonVariableSourceV2QuerySourceDataprimeQuery) == "{}" { // empty struct
+			dst.VariableSourceV2QuerySourceDataprimeQuery = nil
 		} else {
-			if err = validator.Validate(dst.QuerySourceDataprimeQuery); err != nil {
-				dst.QuerySourceDataprimeQuery = nil
+			if err = validator.Validate(dst.VariableSourceV2QuerySourceDataprimeQuery); err != nil {
+				dst.VariableSourceV2QuerySourceDataprimeQuery = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QuerySourceDataprimeQuery = nil
+		dst.VariableSourceV2QuerySourceDataprimeQuery = nil
 	}
 
-	// try to unmarshal data into QuerySourceLogsQuery
-	err = newStrictDecoder(data).Decode(&dst.QuerySourceLogsQuery)
+	// try to unmarshal data into VariableSourceV2QuerySourceLogsQuery
+	err = newStrictDecoder(data).Decode(&dst.VariableSourceV2QuerySourceLogsQuery)
 	if err == nil {
-		jsonQuerySourceLogsQuery, _ := json.Marshal(dst.QuerySourceLogsQuery)
-		if string(jsonQuerySourceLogsQuery) == "{}" { // empty struct
-			dst.QuerySourceLogsQuery = nil
+		jsonVariableSourceV2QuerySourceLogsQuery, _ := json.Marshal(dst.VariableSourceV2QuerySourceLogsQuery)
+		if string(jsonVariableSourceV2QuerySourceLogsQuery) == "{}" { // empty struct
+			dst.VariableSourceV2QuerySourceLogsQuery = nil
 		} else {
-			if err = validator.Validate(dst.QuerySourceLogsQuery); err != nil {
-				dst.QuerySourceLogsQuery = nil
+			if err = validator.Validate(dst.VariableSourceV2QuerySourceLogsQuery); err != nil {
+				dst.VariableSourceV2QuerySourceLogsQuery = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QuerySourceLogsQuery = nil
+		dst.VariableSourceV2QuerySourceLogsQuery = nil
 	}
 
-	// try to unmarshal data into QuerySourceMetricsQuery
-	err = newStrictDecoder(data).Decode(&dst.QuerySourceMetricsQuery)
+	// try to unmarshal data into VariableSourceV2QuerySourceMetricsQuery
+	err = newStrictDecoder(data).Decode(&dst.VariableSourceV2QuerySourceMetricsQuery)
 	if err == nil {
-		jsonQuerySourceMetricsQuery, _ := json.Marshal(dst.QuerySourceMetricsQuery)
-		if string(jsonQuerySourceMetricsQuery) == "{}" { // empty struct
-			dst.QuerySourceMetricsQuery = nil
+		jsonVariableSourceV2QuerySourceMetricsQuery, _ := json.Marshal(dst.VariableSourceV2QuerySourceMetricsQuery)
+		if string(jsonVariableSourceV2QuerySourceMetricsQuery) == "{}" { // empty struct
+			dst.VariableSourceV2QuerySourceMetricsQuery = nil
 		} else {
-			if err = validator.Validate(dst.QuerySourceMetricsQuery); err != nil {
-				dst.QuerySourceMetricsQuery = nil
+			if err = validator.Validate(dst.VariableSourceV2QuerySourceMetricsQuery); err != nil {
+				dst.VariableSourceV2QuerySourceMetricsQuery = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QuerySourceMetricsQuery = nil
+		dst.VariableSourceV2QuerySourceMetricsQuery = nil
 	}
 
-	// try to unmarshal data into QuerySourceSpansQuery
-	err = newStrictDecoder(data).Decode(&dst.QuerySourceSpansQuery)
+	// try to unmarshal data into VariableSourceV2QuerySourceSpansQuery
+	err = newStrictDecoder(data).Decode(&dst.VariableSourceV2QuerySourceSpansQuery)
 	if err == nil {
-		jsonQuerySourceSpansQuery, _ := json.Marshal(dst.QuerySourceSpansQuery)
-		if string(jsonQuerySourceSpansQuery) == "{}" { // empty struct
-			dst.QuerySourceSpansQuery = nil
+		jsonVariableSourceV2QuerySourceSpansQuery, _ := json.Marshal(dst.VariableSourceV2QuerySourceSpansQuery)
+		if string(jsonVariableSourceV2QuerySourceSpansQuery) == "{}" { // empty struct
+			dst.VariableSourceV2QuerySourceSpansQuery = nil
 		} else {
-			if err = validator.Validate(dst.QuerySourceSpansQuery); err != nil {
-				dst.QuerySourceSpansQuery = nil
+			if err = validator.Validate(dst.VariableSourceV2QuerySourceSpansQuery); err != nil {
+				dst.VariableSourceV2QuerySourceSpansQuery = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QuerySourceSpansQuery = nil
+		dst.VariableSourceV2QuerySourceSpansQuery = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.QuerySourceDataprimeQuery = nil
-		dst.QuerySourceLogsQuery = nil
-		dst.QuerySourceMetricsQuery = nil
-		dst.QuerySourceSpansQuery = nil
+		dst.VariableSourceV2QuerySourceDataprimeQuery = nil
+		dst.VariableSourceV2QuerySourceLogsQuery = nil
+		dst.VariableSourceV2QuerySourceMetricsQuery = nil
+		dst.VariableSourceV2QuerySourceSpansQuery = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(VariableSourceV2QuerySource)")
 	} else if match == 1 {
@@ -142,20 +142,20 @@ func (dst *VariableSourceV2QuerySource) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src VariableSourceV2QuerySource) MarshalJSON() ([]byte, error) {
-	if src.QuerySourceDataprimeQuery != nil {
-		return json.Marshal(&src.QuerySourceDataprimeQuery)
+	if src.VariableSourceV2QuerySourceDataprimeQuery != nil {
+		return json.Marshal(&src.VariableSourceV2QuerySourceDataprimeQuery)
 	}
 
-	if src.QuerySourceLogsQuery != nil {
-		return json.Marshal(&src.QuerySourceLogsQuery)
+	if src.VariableSourceV2QuerySourceLogsQuery != nil {
+		return json.Marshal(&src.VariableSourceV2QuerySourceLogsQuery)
 	}
 
-	if src.QuerySourceMetricsQuery != nil {
-		return json.Marshal(&src.QuerySourceMetricsQuery)
+	if src.VariableSourceV2QuerySourceMetricsQuery != nil {
+		return json.Marshal(&src.VariableSourceV2QuerySourceMetricsQuery)
 	}
 
-	if src.QuerySourceSpansQuery != nil {
-		return json.Marshal(&src.QuerySourceSpansQuery)
+	if src.VariableSourceV2QuerySourceSpansQuery != nil {
+		return json.Marshal(&src.VariableSourceV2QuerySourceSpansQuery)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -166,20 +166,20 @@ func (obj *VariableSourceV2QuerySource) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.QuerySourceDataprimeQuery != nil {
-		return obj.QuerySourceDataprimeQuery
+	if obj.VariableSourceV2QuerySourceDataprimeQuery != nil {
+		return obj.VariableSourceV2QuerySourceDataprimeQuery
 	}
 
-	if obj.QuerySourceLogsQuery != nil {
-		return obj.QuerySourceLogsQuery
+	if obj.VariableSourceV2QuerySourceLogsQuery != nil {
+		return obj.VariableSourceV2QuerySourceLogsQuery
 	}
 
-	if obj.QuerySourceMetricsQuery != nil {
-		return obj.QuerySourceMetricsQuery
+	if obj.VariableSourceV2QuerySourceMetricsQuery != nil {
+		return obj.VariableSourceV2QuerySourceMetricsQuery
 	}
 
-	if obj.QuerySourceSpansQuery != nil {
-		return obj.QuerySourceSpansQuery
+	if obj.VariableSourceV2QuerySourceSpansQuery != nil {
+		return obj.VariableSourceV2QuerySourceSpansQuery
 	}
 
 	// all schemas are nil
@@ -188,20 +188,20 @@ func (obj *VariableSourceV2QuerySource) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj VariableSourceV2QuerySource) GetActualInstanceValue() (interface{}) {
-	if obj.QuerySourceDataprimeQuery != nil {
-		return *obj.QuerySourceDataprimeQuery
+	if obj.VariableSourceV2QuerySourceDataprimeQuery != nil {
+		return *obj.VariableSourceV2QuerySourceDataprimeQuery
 	}
 
-	if obj.QuerySourceLogsQuery != nil {
-		return *obj.QuerySourceLogsQuery
+	if obj.VariableSourceV2QuerySourceLogsQuery != nil {
+		return *obj.VariableSourceV2QuerySourceLogsQuery
 	}
 
-	if obj.QuerySourceMetricsQuery != nil {
-		return *obj.QuerySourceMetricsQuery
+	if obj.VariableSourceV2QuerySourceMetricsQuery != nil {
+		return *obj.VariableSourceV2QuerySourceMetricsQuery
 	}
 
-	if obj.QuerySourceSpansQuery != nil {
-		return *obj.QuerySourceSpansQuery
+	if obj.VariableSourceV2QuerySourceSpansQuery != nil {
+		return *obj.VariableSourceV2QuerySourceSpansQuery
 	}
 
 	// all schemas are nil

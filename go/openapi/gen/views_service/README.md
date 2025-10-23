@@ -112,8 +112,6 @@ Class | Method | HTTP request | Description
  - [ViewFolder](docs/ViewFolder.md)
  - [ViewType](docs/ViewType.md)
  - [ViewsV1Filter](docs/ViewsV1Filter.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

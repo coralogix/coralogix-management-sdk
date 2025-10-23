@@ -18,21 +18,21 @@ import (
 
 // V2Aggregation - struct for V2Aggregation
 type V2Aggregation struct {
-	AggregationHistogram *AggregationHistogram
-	AggregationSamples *AggregationSamples
+	V2AggregationHistogram *V2AggregationHistogram
+	V2AggregationSamples *V2AggregationSamples
 }
 
-// AggregationHistogramAsV2Aggregation is a convenience function that returns AggregationHistogram wrapped in V2Aggregation
-func AggregationHistogramAsV2Aggregation(v *AggregationHistogram) V2Aggregation {
+// V2AggregationHistogramAsV2Aggregation is a convenience function that returns V2AggregationHistogram wrapped in V2Aggregation
+func V2AggregationHistogramAsV2Aggregation(v *V2AggregationHistogram) V2Aggregation {
 	return V2Aggregation{
-		AggregationHistogram: v,
+		V2AggregationHistogram: v,
 	}
 }
 
-// AggregationSamplesAsV2Aggregation is a convenience function that returns AggregationSamples wrapped in V2Aggregation
-func AggregationSamplesAsV2Aggregation(v *AggregationSamples) V2Aggregation {
+// V2AggregationSamplesAsV2Aggregation is a convenience function that returns V2AggregationSamples wrapped in V2Aggregation
+func V2AggregationSamplesAsV2Aggregation(v *V2AggregationSamples) V2Aggregation {
 	return V2Aggregation{
-		AggregationSamples: v,
+		V2AggregationSamples: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func AggregationSamplesAsV2Aggregation(v *AggregationSamples) V2Aggregation {
 func (dst *V2Aggregation) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into AggregationHistogram
-	err = newStrictDecoder(data).Decode(&dst.AggregationHistogram)
+	// try to unmarshal data into V2AggregationHistogram
+	err = newStrictDecoder(data).Decode(&dst.V2AggregationHistogram)
 	if err == nil {
-		jsonAggregationHistogram, _ := json.Marshal(dst.AggregationHistogram)
-		if string(jsonAggregationHistogram) == "{}" { // empty struct
-			dst.AggregationHistogram = nil
+		jsonV2AggregationHistogram, _ := json.Marshal(dst.V2AggregationHistogram)
+		if string(jsonV2AggregationHistogram) == "{}" { // empty struct
+			dst.V2AggregationHistogram = nil
 		} else {
-			if err = validator.Validate(dst.AggregationHistogram); err != nil {
-				dst.AggregationHistogram = nil
+			if err = validator.Validate(dst.V2AggregationHistogram); err != nil {
+				dst.V2AggregationHistogram = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AggregationHistogram = nil
+		dst.V2AggregationHistogram = nil
 	}
 
-	// try to unmarshal data into AggregationSamples
-	err = newStrictDecoder(data).Decode(&dst.AggregationSamples)
+	// try to unmarshal data into V2AggregationSamples
+	err = newStrictDecoder(data).Decode(&dst.V2AggregationSamples)
 	if err == nil {
-		jsonAggregationSamples, _ := json.Marshal(dst.AggregationSamples)
-		if string(jsonAggregationSamples) == "{}" { // empty struct
-			dst.AggregationSamples = nil
+		jsonV2AggregationSamples, _ := json.Marshal(dst.V2AggregationSamples)
+		if string(jsonV2AggregationSamples) == "{}" { // empty struct
+			dst.V2AggregationSamples = nil
 		} else {
-			if err = validator.Validate(dst.AggregationSamples); err != nil {
-				dst.AggregationSamples = nil
+			if err = validator.Validate(dst.V2AggregationSamples); err != nil {
+				dst.V2AggregationSamples = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.AggregationSamples = nil
+		dst.V2AggregationSamples = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.AggregationHistogram = nil
-		dst.AggregationSamples = nil
+		dst.V2AggregationHistogram = nil
+		dst.V2AggregationSamples = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(V2Aggregation)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *V2Aggregation) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src V2Aggregation) MarshalJSON() ([]byte, error) {
-	if src.AggregationHistogram != nil {
-		return json.Marshal(&src.AggregationHistogram)
+	if src.V2AggregationHistogram != nil {
+		return json.Marshal(&src.V2AggregationHistogram)
 	}
 
-	if src.AggregationSamples != nil {
-		return json.Marshal(&src.AggregationSamples)
+	if src.V2AggregationSamples != nil {
+		return json.Marshal(&src.V2AggregationSamples)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *V2Aggregation) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.AggregationHistogram != nil {
-		return obj.AggregationHistogram
+	if obj.V2AggregationHistogram != nil {
+		return obj.V2AggregationHistogram
 	}
 
-	if obj.AggregationSamples != nil {
-		return obj.AggregationSamples
+	if obj.V2AggregationSamples != nil {
+		return obj.V2AggregationSamples
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *V2Aggregation) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj V2Aggregation) GetActualInstanceValue() (interface{}) {
-	if obj.AggregationHistogram != nil {
-		return *obj.AggregationHistogram
+	if obj.V2AggregationHistogram != nil {
+		return *obj.V2AggregationHistogram
 	}
 
-	if obj.AggregationSamples != nil {
-		return *obj.AggregationSamples
+	if obj.V2AggregationSamples != nil {
+		return *obj.V2AggregationSamples
 	}
 
 	// all schemas are nil

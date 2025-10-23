@@ -11,6 +11,8 @@ model_active_timeframe.go
 model_alert_scheduler_rule.go
 model_alert_scheduler_rule_ids.go
 model_alert_scheduler_rule_protobuf_v1_filter.go
+model_alert_scheduler_rule_protobuf_v1_filter_alert_meta_labels.go
+model_alert_scheduler_rule_protobuf_v1_filter_alert_unique_ids.go
 model_alert_scheduler_rule_service_get_bulk_alert_scheduler_rule_active_timeframe_parameter.go
 model_alert_scheduler_rule_service_get_bulk_alert_scheduler_rule_alert_scheduler_rules_ids_parameter.go
 model_alert_scheduler_rule_version_ids.go
@@ -26,13 +28,8 @@ model_create_alert_scheduler_rule_response.go
 model_create_bulk_alert_scheduler_rule_request_data_structure.go
 model_create_bulk_alert_scheduler_rule_response.go
 model_duration_frequency.go
-model_dynamic_daily.go
-model_dynamic_monthly.go
-model_dynamic_weekly.go
 model_events_v3_filter_matcher.go
 model_field_group.go
-model_filter_alert_meta_labels.go
-model_filter_alert_unique_ids.go
 model_filter_by_alert_scheduler_rule_ids_alert_scheduler_ids.go
 model_filter_by_alert_scheduler_rule_ids_alert_scheduler_version_ids.go
 model_filter_path_and_values.go
@@ -49,6 +46,9 @@ model_one_time.go
 model_recurring.go
 model_recurring_always.go
 model_recurring_dynamic.go
+model_recurring_dynamic_daily.go
+model_recurring_dynamic_monthly.go
+model_recurring_dynamic_weekly.go
 model_schedule.go
 model_schedule_one_time.go
 model_schedule_operation.go
@@ -64,7 +64,5 @@ model_update_bulk_alert_scheduler_rule_response.go
 model_v1_duration.go
 model_v3_filter_operator.go
 model_weekly.go
-model_y_axis_view_by_category.go
-model_y_axis_view_by_value.go
 response.go
 utils.go

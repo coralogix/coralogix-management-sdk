@@ -57,13 +57,12 @@ model_slo_request_based_metric_sli.go
 model_slo_time_frame.go
 model_slo_window_based_metric_sli.go
 model_slos_service_batch_execute_slo_requests_parameter_inner.go
+model_slos_service_create_slo_request.go
 model_slos_service_replace_slo_request.go
 model_v1_grouping.go
 model_v1_revision.go
 model_v3_filter_operator.go
 model_window_based_metric_sli.go
 model_window_slo_window.go
-model_y_axis_view_by_category.go
-model_y_axis_view_by_value.go
 response.go
 utils.go

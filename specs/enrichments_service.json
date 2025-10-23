@@ -91,15 +91,15 @@
         "x-codeSamples": [
           {
             "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/enrichments';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"requestEnrichments\":[{\"enrichedFieldName\":\"string\",\"enrichmentType\":{\"aws\":{\"resourceType\":\"ec2\"}},\"fieldName\":\"sourceIPs\",\"selectedColumns\":[\"string\"]}]}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/enrichments';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"requestEnrichments\":[{\"enrichedFieldName\":\"string\",\"enrichmentType\":{\"suspiciousIp\":{}},\"fieldName\":\"sourceIPs\",\"selectedColumns\":[\"string\"]}]}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/enrichments\"\n\npayload = {\"requestEnrichments\": [\n        {\n            \"enrichedFieldName\": \"string\",\n            \"enrichmentType\": {\"aws\": {\"resourceType\": \"ec2\"}},\n            \"fieldName\": \"sourceIPs\",\n            \"selectedColumns\": [\"string\"]\n        }\n    ]}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/enrichments\"\n\npayload = {\"requestEnrichments\": [\n        {\n            \"enrichedFieldName\": \"string\",\n            \"enrichmentType\": {\"suspiciousIp\": {}},\n            \"fieldName\": \"sourceIPs\",\n            \"selectedColumns\": [\"string\"]\n        }\n    ]}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/enrichments \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"requestEnrichments\":[{\"enrichedFieldName\":\"string\",\"enrichmentType\":{\"aws\":{\"resourceType\":\"ec2\"}},\"fieldName\":\"sourceIPs\",\"selectedColumns\":[\"string\"]}]}'"
+            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/enrichments \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"requestEnrichments\":[{\"enrichedFieldName\":\"string\",\"enrichmentType\":{\"suspiciousIp\":{}},\"fieldName\":\"sourceIPs\",\"selectedColumns\":[\"string\"]}]}'"
           }
         ]
       },
@@ -291,15 +291,15 @@
         "x-codeSamples": [
           {
             "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/enrichments:atomicOverwrite';\n\nlet options = {\n  method: 'PATCH',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"enrichmentFields\":[{\"enrichedFieldName\":\"string\",\"fieldName\":\"string\",\"selectedColumns\":[\"string\"]}],\"enrichmentType\":{\"aws\":{\"resourceType\":\"ec2\"}},\"requestEnrichments\":[{\"enrichedFieldName\":\"string\",\"enrichmentType\":{\"aws\":{\"resourceType\":\"ec2\"}},\"fieldName\":\"sourceIPs\",\"selectedColumns\":[\"string\"]}]}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/enrichments:atomicOverwrite';\n\nlet options = {\n  method: 'PATCH',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"enrichmentFields\":[{\"enrichedFieldName\":\"string\",\"fieldName\":\"string\",\"selectedColumns\":[\"string\"]}],\"enrichmentType\":{\"suspiciousIp\":{}},\"requestEnrichments\":[{\"enrichedFieldName\":\"string\",\"enrichmentType\":{\"suspiciousIp\":{}},\"fieldName\":\"sourceIPs\",\"selectedColumns\":[\"string\"]}]}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/enrichments:atomicOverwrite\"\n\npayload = {\n    \"enrichmentFields\": [\n        {\n            \"enrichedFieldName\": \"string\",\n            \"fieldName\": \"string\",\n            \"selectedColumns\": [\"string\"]\n        }\n    ],\n    \"enrichmentType\": {\"aws\": {\"resourceType\": \"ec2\"}},\n    \"requestEnrichments\": [\n        {\n            \"enrichedFieldName\": \"string\",\n            \"enrichmentType\": {\"aws\": {\"resourceType\": \"ec2\"}},\n            \"fieldName\": \"sourceIPs\",\n            \"selectedColumns\": [\"string\"]\n        }\n    ]\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PATCH\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/enrichments:atomicOverwrite\"\n\npayload = {\n    \"enrichmentFields\": [\n        {\n            \"enrichedFieldName\": \"string\",\n            \"fieldName\": \"string\",\n            \"selectedColumns\": [\"string\"]\n        }\n    ],\n    \"enrichmentType\": {\"suspiciousIp\": {}},\n    \"requestEnrichments\": [\n        {\n            \"enrichedFieldName\": \"string\",\n            \"enrichmentType\": {\"suspiciousIp\": {}},\n            \"fieldName\": \"sourceIPs\",\n            \"selectedColumns\": [\"string\"]\n        }\n    ]\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PATCH\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Shell",
-            "source": "curl --request PATCH \\\n  --url https://api.coralogix.com/mgmt/openapi/enrichments:atomicOverwrite \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"enrichmentFields\":[{\"enrichedFieldName\":\"string\",\"fieldName\":\"string\",\"selectedColumns\":[\"string\"]}],\"enrichmentType\":{\"aws\":{\"resourceType\":\"ec2\"}},\"requestEnrichments\":[{\"enrichedFieldName\":\"string\",\"enrichmentType\":{\"aws\":{\"resourceType\":\"ec2\"}},\"fieldName\":\"sourceIPs\",\"selectedColumns\":[\"string\"]}]}'"
+            "source": "curl --request PATCH \\\n  --url https://api.coralogix.com/mgmt/openapi/enrichments:atomicOverwrite \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"enrichmentFields\":[{\"enrichedFieldName\":\"string\",\"fieldName\":\"string\",\"selectedColumns\":[\"string\"]}],\"enrichmentType\":{\"suspiciousIp\":{}},\"requestEnrichments\":[{\"enrichedFieldName\":\"string\",\"enrichmentType\":{\"suspiciousIp\":{}},\"fieldName\":\"sourceIPs\",\"selectedColumns\":[\"string\"]}]}'"
           }
         ]
       }
@@ -506,6 +506,9 @@
       "EnrichmentType": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/EnrichmentTypeSuspiciousIp"
+          },
+          {
             "$ref": "#/components/schemas/EnrichmentTypeAws"
           },
           {
@@ -513,9 +516,6 @@
           },
           {
             "$ref": "#/components/schemas/EnrichmentTypeGeoIp"
-          },
-          {
-            "$ref": "#/components/schemas/EnrichmentTypeSuspiciousIp"
           }
         ]
       },
@@ -739,24 +739,6 @@
       },
       "SuspiciousIpType": {
         "type": "object"
-      },
-      "YAxisViewByCategory": {
-        "type": "object",
-        "properties": {
-          "category": {
-            "$ref": "#/components/schemas/YAxisViewByCategory"
-          }
-        },
-        "additionalProperties": false
-      },
-      "YAxisViewByValue": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "$ref": "#/components/schemas/YAxisViewByValue"
-          }
-        },
-        "additionalProperties": false
       },
       "common.Group": {
         "type": "object",

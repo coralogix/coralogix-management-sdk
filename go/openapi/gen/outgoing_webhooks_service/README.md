@@ -166,8 +166,6 @@ Class | Method | HTTP request | Description
  - [UpdateOutgoingWebhookRequest](docs/UpdateOutgoingWebhookRequest.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
  - [WebhookType](docs/WebhookType.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

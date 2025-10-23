@@ -120,8 +120,6 @@ Class | Method | HTTP request | Description
  - [MultipleValues](docs/MultipleValues.md)
  - [RemoveEnrichmentsResponse](docs/RemoveEnrichmentsResponse.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

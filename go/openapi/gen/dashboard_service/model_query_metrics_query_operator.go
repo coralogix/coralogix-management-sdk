@@ -18,21 +18,21 @@ import (
 
 // QueryMetricsQueryOperator - struct for QueryMetricsQueryOperator
 type QueryMetricsQueryOperator struct {
-	OperatorEquals *OperatorEquals
-	OperatorNotEquals *OperatorNotEquals
+	QueryMetricsQueryOperatorEquals *QueryMetricsQueryOperatorEquals
+	QueryMetricsQueryOperatorNotEquals *QueryMetricsQueryOperatorNotEquals
 }
 
-// OperatorEqualsAsQueryMetricsQueryOperator is a convenience function that returns OperatorEquals wrapped in QueryMetricsQueryOperator
-func OperatorEqualsAsQueryMetricsQueryOperator(v *OperatorEquals) QueryMetricsQueryOperator {
+// QueryMetricsQueryOperatorEqualsAsQueryMetricsQueryOperator is a convenience function that returns QueryMetricsQueryOperatorEquals wrapped in QueryMetricsQueryOperator
+func QueryMetricsQueryOperatorEqualsAsQueryMetricsQueryOperator(v *QueryMetricsQueryOperatorEquals) QueryMetricsQueryOperator {
 	return QueryMetricsQueryOperator{
-		OperatorEquals: v,
+		QueryMetricsQueryOperatorEquals: v,
 	}
 }
 
-// OperatorNotEqualsAsQueryMetricsQueryOperator is a convenience function that returns OperatorNotEquals wrapped in QueryMetricsQueryOperator
-func OperatorNotEqualsAsQueryMetricsQueryOperator(v *OperatorNotEquals) QueryMetricsQueryOperator {
+// QueryMetricsQueryOperatorNotEqualsAsQueryMetricsQueryOperator is a convenience function that returns QueryMetricsQueryOperatorNotEquals wrapped in QueryMetricsQueryOperator
+func QueryMetricsQueryOperatorNotEqualsAsQueryMetricsQueryOperator(v *QueryMetricsQueryOperatorNotEquals) QueryMetricsQueryOperator {
 	return QueryMetricsQueryOperator{
-		OperatorNotEquals: v,
+		QueryMetricsQueryOperatorNotEquals: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func OperatorNotEqualsAsQueryMetricsQueryOperator(v *OperatorNotEquals) QueryMet
 func (dst *QueryMetricsQueryOperator) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into OperatorEquals
-	err = newStrictDecoder(data).Decode(&dst.OperatorEquals)
+	// try to unmarshal data into QueryMetricsQueryOperatorEquals
+	err = newStrictDecoder(data).Decode(&dst.QueryMetricsQueryOperatorEquals)
 	if err == nil {
-		jsonOperatorEquals, _ := json.Marshal(dst.OperatorEquals)
-		if string(jsonOperatorEquals) == "{}" { // empty struct
-			dst.OperatorEquals = nil
+		jsonQueryMetricsQueryOperatorEquals, _ := json.Marshal(dst.QueryMetricsQueryOperatorEquals)
+		if string(jsonQueryMetricsQueryOperatorEquals) == "{}" { // empty struct
+			dst.QueryMetricsQueryOperatorEquals = nil
 		} else {
-			if err = validator.Validate(dst.OperatorEquals); err != nil {
-				dst.OperatorEquals = nil
+			if err = validator.Validate(dst.QueryMetricsQueryOperatorEquals); err != nil {
+				dst.QueryMetricsQueryOperatorEquals = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.OperatorEquals = nil
+		dst.QueryMetricsQueryOperatorEquals = nil
 	}
 
-	// try to unmarshal data into OperatorNotEquals
-	err = newStrictDecoder(data).Decode(&dst.OperatorNotEquals)
+	// try to unmarshal data into QueryMetricsQueryOperatorNotEquals
+	err = newStrictDecoder(data).Decode(&dst.QueryMetricsQueryOperatorNotEquals)
 	if err == nil {
-		jsonOperatorNotEquals, _ := json.Marshal(dst.OperatorNotEquals)
-		if string(jsonOperatorNotEquals) == "{}" { // empty struct
-			dst.OperatorNotEquals = nil
+		jsonQueryMetricsQueryOperatorNotEquals, _ := json.Marshal(dst.QueryMetricsQueryOperatorNotEquals)
+		if string(jsonQueryMetricsQueryOperatorNotEquals) == "{}" { // empty struct
+			dst.QueryMetricsQueryOperatorNotEquals = nil
 		} else {
-			if err = validator.Validate(dst.OperatorNotEquals); err != nil {
-				dst.OperatorNotEquals = nil
+			if err = validator.Validate(dst.QueryMetricsQueryOperatorNotEquals); err != nil {
+				dst.QueryMetricsQueryOperatorNotEquals = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.OperatorNotEquals = nil
+		dst.QueryMetricsQueryOperatorNotEquals = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.OperatorEquals = nil
-		dst.OperatorNotEquals = nil
+		dst.QueryMetricsQueryOperatorEquals = nil
+		dst.QueryMetricsQueryOperatorNotEquals = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(QueryMetricsQueryOperator)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *QueryMetricsQueryOperator) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src QueryMetricsQueryOperator) MarshalJSON() ([]byte, error) {
-	if src.OperatorEquals != nil {
-		return json.Marshal(&src.OperatorEquals)
+	if src.QueryMetricsQueryOperatorEquals != nil {
+		return json.Marshal(&src.QueryMetricsQueryOperatorEquals)
 	}
 
-	if src.OperatorNotEquals != nil {
-		return json.Marshal(&src.OperatorNotEquals)
+	if src.QueryMetricsQueryOperatorNotEquals != nil {
+		return json.Marshal(&src.QueryMetricsQueryOperatorNotEquals)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *QueryMetricsQueryOperator) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.OperatorEquals != nil {
-		return obj.OperatorEquals
+	if obj.QueryMetricsQueryOperatorEquals != nil {
+		return obj.QueryMetricsQueryOperatorEquals
 	}
 
-	if obj.OperatorNotEquals != nil {
-		return obj.OperatorNotEquals
+	if obj.QueryMetricsQueryOperatorNotEquals != nil {
+		return obj.QueryMetricsQueryOperatorNotEquals
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *QueryMetricsQueryOperator) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj QueryMetricsQueryOperator) GetActualInstanceValue() (interface{}) {
-	if obj.OperatorEquals != nil {
-		return *obj.OperatorEquals
+	if obj.QueryMetricsQueryOperatorEquals != nil {
+		return *obj.QueryMetricsQueryOperatorEquals
 	}
 
-	if obj.OperatorNotEquals != nil {
-		return *obj.OperatorNotEquals
+	if obj.QueryMetricsQueryOperatorNotEquals != nil {
+		return *obj.QueryMetricsQueryOperatorNotEquals
 	}
 
 	// all schemas are nil

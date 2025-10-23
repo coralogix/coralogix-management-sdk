@@ -18,21 +18,21 @@ import (
 
 // FilterOperator - struct for FilterOperator
 type FilterOperator struct {
-	OperatorEquals *OperatorEquals
-	OperatorNotEquals *OperatorNotEquals
+	FilterOperatorEquals *FilterOperatorEquals
+	FilterOperatorNotEquals *FilterOperatorNotEquals
 }
 
-// OperatorEqualsAsFilterOperator is a convenience function that returns OperatorEquals wrapped in FilterOperator
-func OperatorEqualsAsFilterOperator(v *OperatorEquals) FilterOperator {
+// FilterOperatorEqualsAsFilterOperator is a convenience function that returns FilterOperatorEquals wrapped in FilterOperator
+func FilterOperatorEqualsAsFilterOperator(v *FilterOperatorEquals) FilterOperator {
 	return FilterOperator{
-		OperatorEquals: v,
+		FilterOperatorEquals: v,
 	}
 }
 
-// OperatorNotEqualsAsFilterOperator is a convenience function that returns OperatorNotEquals wrapped in FilterOperator
-func OperatorNotEqualsAsFilterOperator(v *OperatorNotEquals) FilterOperator {
+// FilterOperatorNotEqualsAsFilterOperator is a convenience function that returns FilterOperatorNotEquals wrapped in FilterOperator
+func FilterOperatorNotEqualsAsFilterOperator(v *FilterOperatorNotEquals) FilterOperator {
 	return FilterOperator{
-		OperatorNotEquals: v,
+		FilterOperatorNotEquals: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func OperatorNotEqualsAsFilterOperator(v *OperatorNotEquals) FilterOperator {
 func (dst *FilterOperator) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into OperatorEquals
-	err = newStrictDecoder(data).Decode(&dst.OperatorEquals)
+	// try to unmarshal data into FilterOperatorEquals
+	err = newStrictDecoder(data).Decode(&dst.FilterOperatorEquals)
 	if err == nil {
-		jsonOperatorEquals, _ := json.Marshal(dst.OperatorEquals)
-		if string(jsonOperatorEquals) == "{}" { // empty struct
-			dst.OperatorEquals = nil
+		jsonFilterOperatorEquals, _ := json.Marshal(dst.FilterOperatorEquals)
+		if string(jsonFilterOperatorEquals) == "{}" { // empty struct
+			dst.FilterOperatorEquals = nil
 		} else {
-			if err = validator.Validate(dst.OperatorEquals); err != nil {
-				dst.OperatorEquals = nil
+			if err = validator.Validate(dst.FilterOperatorEquals); err != nil {
+				dst.FilterOperatorEquals = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.OperatorEquals = nil
+		dst.FilterOperatorEquals = nil
 	}
 
-	// try to unmarshal data into OperatorNotEquals
-	err = newStrictDecoder(data).Decode(&dst.OperatorNotEquals)
+	// try to unmarshal data into FilterOperatorNotEquals
+	err = newStrictDecoder(data).Decode(&dst.FilterOperatorNotEquals)
 	if err == nil {
-		jsonOperatorNotEquals, _ := json.Marshal(dst.OperatorNotEquals)
-		if string(jsonOperatorNotEquals) == "{}" { // empty struct
-			dst.OperatorNotEquals = nil
+		jsonFilterOperatorNotEquals, _ := json.Marshal(dst.FilterOperatorNotEquals)
+		if string(jsonFilterOperatorNotEquals) == "{}" { // empty struct
+			dst.FilterOperatorNotEquals = nil
 		} else {
-			if err = validator.Validate(dst.OperatorNotEquals); err != nil {
-				dst.OperatorNotEquals = nil
+			if err = validator.Validate(dst.FilterOperatorNotEquals); err != nil {
+				dst.FilterOperatorNotEquals = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.OperatorNotEquals = nil
+		dst.FilterOperatorNotEquals = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.OperatorEquals = nil
-		dst.OperatorNotEquals = nil
+		dst.FilterOperatorEquals = nil
+		dst.FilterOperatorNotEquals = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(FilterOperator)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *FilterOperator) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src FilterOperator) MarshalJSON() ([]byte, error) {
-	if src.OperatorEquals != nil {
-		return json.Marshal(&src.OperatorEquals)
+	if src.FilterOperatorEquals != nil {
+		return json.Marshal(&src.FilterOperatorEquals)
 	}
 
-	if src.OperatorNotEquals != nil {
-		return json.Marshal(&src.OperatorNotEquals)
+	if src.FilterOperatorNotEquals != nil {
+		return json.Marshal(&src.FilterOperatorNotEquals)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *FilterOperator) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.OperatorEquals != nil {
-		return obj.OperatorEquals
+	if obj.FilterOperatorEquals != nil {
+		return obj.FilterOperatorEquals
 	}
 
-	if obj.OperatorNotEquals != nil {
-		return obj.OperatorNotEquals
+	if obj.FilterOperatorNotEquals != nil {
+		return obj.FilterOperatorNotEquals
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *FilterOperator) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj FilterOperator) GetActualInstanceValue() (interface{}) {
-	if obj.OperatorEquals != nil {
-		return *obj.OperatorEquals
+	if obj.FilterOperatorEquals != nil {
+		return *obj.FilterOperatorEquals
 	}
 
-	if obj.OperatorNotEquals != nil {
-		return *obj.OperatorNotEquals
+	if obj.FilterOperatorNotEquals != nil {
+		return *obj.FilterOperatorNotEquals
 	}
 
 	// all schemas are nil

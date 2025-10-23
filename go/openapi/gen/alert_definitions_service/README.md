@@ -161,8 +161,6 @@ Class | Method | HTTP request | Description
  - [FlowType](docs/FlowType.md)
  - [GetAlertDefByVersionIdResponse](docs/GetAlertDefByVersionIdResponse.md)
  - [GetAlertDefResponse](docs/GetAlertDefResponse.md)
- - [IntegrationTypeIntegrationId](docs/IntegrationTypeIntegrationId.md)
- - [IntegrationTypeRecipients](docs/IntegrationTypeRecipients.md)
  - [LabelFilterType](docs/LabelFilterType.md)
  - [LabelFilters](docs/LabelFilters.md)
  - [ListAlertDefsResponse](docs/ListAlertDefsResponse.md)
@@ -255,13 +253,13 @@ Class | Method | HTTP request | Description
  - [V3ConnectorConfigField](docs/V3ConnectorConfigField.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
  - [V3IntegrationType](docs/V3IntegrationType.md)
+ - [V3IntegrationTypeIntegrationId](docs/V3IntegrationTypeIntegrationId.md)
+ - [V3IntegrationTypeRecipients](docs/V3IntegrationTypeRecipients.md)
  - [V3LogsFilter](docs/V3LogsFilter.md)
  - [V3MessageConfigField](docs/V3MessageConfigField.md)
  - [V3SloDefinition](docs/V3SloDefinition.md)
  - [V3SourceOverrides](docs/V3SourceOverrides.md)
  - [V3UndetectedValuesManagement](docs/V3UndetectedValuesManagement.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

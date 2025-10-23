@@ -18,29 +18,29 @@ import (
 
 // DataprimeSourceStrategy - struct for DataprimeSourceStrategy
 type DataprimeSourceStrategy struct {
-	StrategyDuration *StrategyDuration
-	StrategyInstant *StrategyInstant
-	StrategyRange *StrategyRange
+	DataprimeSourceStrategyDuration *DataprimeSourceStrategyDuration
+	DataprimeSourceStrategyInstant *DataprimeSourceStrategyInstant
+	DataprimeSourceStrategyRange *DataprimeSourceStrategyRange
 }
 
-// StrategyDurationAsDataprimeSourceStrategy is a convenience function that returns StrategyDuration wrapped in DataprimeSourceStrategy
-func StrategyDurationAsDataprimeSourceStrategy(v *StrategyDuration) DataprimeSourceStrategy {
+// DataprimeSourceStrategyDurationAsDataprimeSourceStrategy is a convenience function that returns DataprimeSourceStrategyDuration wrapped in DataprimeSourceStrategy
+func DataprimeSourceStrategyDurationAsDataprimeSourceStrategy(v *DataprimeSourceStrategyDuration) DataprimeSourceStrategy {
 	return DataprimeSourceStrategy{
-		StrategyDuration: v,
+		DataprimeSourceStrategyDuration: v,
 	}
 }
 
-// StrategyInstantAsDataprimeSourceStrategy is a convenience function that returns StrategyInstant wrapped in DataprimeSourceStrategy
-func StrategyInstantAsDataprimeSourceStrategy(v *StrategyInstant) DataprimeSourceStrategy {
+// DataprimeSourceStrategyInstantAsDataprimeSourceStrategy is a convenience function that returns DataprimeSourceStrategyInstant wrapped in DataprimeSourceStrategy
+func DataprimeSourceStrategyInstantAsDataprimeSourceStrategy(v *DataprimeSourceStrategyInstant) DataprimeSourceStrategy {
 	return DataprimeSourceStrategy{
-		StrategyInstant: v,
+		DataprimeSourceStrategyInstant: v,
 	}
 }
 
-// StrategyRangeAsDataprimeSourceStrategy is a convenience function that returns StrategyRange wrapped in DataprimeSourceStrategy
-func StrategyRangeAsDataprimeSourceStrategy(v *StrategyRange) DataprimeSourceStrategy {
+// DataprimeSourceStrategyRangeAsDataprimeSourceStrategy is a convenience function that returns DataprimeSourceStrategyRange wrapped in DataprimeSourceStrategy
+func DataprimeSourceStrategyRangeAsDataprimeSourceStrategy(v *DataprimeSourceStrategyRange) DataprimeSourceStrategy {
 	return DataprimeSourceStrategy{
-		StrategyRange: v,
+		DataprimeSourceStrategyRange: v,
 	}
 }
 
@@ -49,62 +49,62 @@ func StrategyRangeAsDataprimeSourceStrategy(v *StrategyRange) DataprimeSourceStr
 func (dst *DataprimeSourceStrategy) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into StrategyDuration
-	err = newStrictDecoder(data).Decode(&dst.StrategyDuration)
+	// try to unmarshal data into DataprimeSourceStrategyDuration
+	err = newStrictDecoder(data).Decode(&dst.DataprimeSourceStrategyDuration)
 	if err == nil {
-		jsonStrategyDuration, _ := json.Marshal(dst.StrategyDuration)
-		if string(jsonStrategyDuration) == "{}" { // empty struct
-			dst.StrategyDuration = nil
+		jsonDataprimeSourceStrategyDuration, _ := json.Marshal(dst.DataprimeSourceStrategyDuration)
+		if string(jsonDataprimeSourceStrategyDuration) == "{}" { // empty struct
+			dst.DataprimeSourceStrategyDuration = nil
 		} else {
-			if err = validator.Validate(dst.StrategyDuration); err != nil {
-				dst.StrategyDuration = nil
+			if err = validator.Validate(dst.DataprimeSourceStrategyDuration); err != nil {
+				dst.DataprimeSourceStrategyDuration = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.StrategyDuration = nil
+		dst.DataprimeSourceStrategyDuration = nil
 	}
 
-	// try to unmarshal data into StrategyInstant
-	err = newStrictDecoder(data).Decode(&dst.StrategyInstant)
+	// try to unmarshal data into DataprimeSourceStrategyInstant
+	err = newStrictDecoder(data).Decode(&dst.DataprimeSourceStrategyInstant)
 	if err == nil {
-		jsonStrategyInstant, _ := json.Marshal(dst.StrategyInstant)
-		if string(jsonStrategyInstant) == "{}" { // empty struct
-			dst.StrategyInstant = nil
+		jsonDataprimeSourceStrategyInstant, _ := json.Marshal(dst.DataprimeSourceStrategyInstant)
+		if string(jsonDataprimeSourceStrategyInstant) == "{}" { // empty struct
+			dst.DataprimeSourceStrategyInstant = nil
 		} else {
-			if err = validator.Validate(dst.StrategyInstant); err != nil {
-				dst.StrategyInstant = nil
+			if err = validator.Validate(dst.DataprimeSourceStrategyInstant); err != nil {
+				dst.DataprimeSourceStrategyInstant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.StrategyInstant = nil
+		dst.DataprimeSourceStrategyInstant = nil
 	}
 
-	// try to unmarshal data into StrategyRange
-	err = newStrictDecoder(data).Decode(&dst.StrategyRange)
+	// try to unmarshal data into DataprimeSourceStrategyRange
+	err = newStrictDecoder(data).Decode(&dst.DataprimeSourceStrategyRange)
 	if err == nil {
-		jsonStrategyRange, _ := json.Marshal(dst.StrategyRange)
-		if string(jsonStrategyRange) == "{}" { // empty struct
-			dst.StrategyRange = nil
+		jsonDataprimeSourceStrategyRange, _ := json.Marshal(dst.DataprimeSourceStrategyRange)
+		if string(jsonDataprimeSourceStrategyRange) == "{}" { // empty struct
+			dst.DataprimeSourceStrategyRange = nil
 		} else {
-			if err = validator.Validate(dst.StrategyRange); err != nil {
-				dst.StrategyRange = nil
+			if err = validator.Validate(dst.DataprimeSourceStrategyRange); err != nil {
+				dst.DataprimeSourceStrategyRange = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.StrategyRange = nil
+		dst.DataprimeSourceStrategyRange = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.StrategyDuration = nil
-		dst.StrategyInstant = nil
-		dst.StrategyRange = nil
+		dst.DataprimeSourceStrategyDuration = nil
+		dst.DataprimeSourceStrategyInstant = nil
+		dst.DataprimeSourceStrategyRange = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(DataprimeSourceStrategy)")
 	} else if match == 1 {
@@ -116,16 +116,16 @@ func (dst *DataprimeSourceStrategy) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src DataprimeSourceStrategy) MarshalJSON() ([]byte, error) {
-	if src.StrategyDuration != nil {
-		return json.Marshal(&src.StrategyDuration)
+	if src.DataprimeSourceStrategyDuration != nil {
+		return json.Marshal(&src.DataprimeSourceStrategyDuration)
 	}
 
-	if src.StrategyInstant != nil {
-		return json.Marshal(&src.StrategyInstant)
+	if src.DataprimeSourceStrategyInstant != nil {
+		return json.Marshal(&src.DataprimeSourceStrategyInstant)
 	}
 
-	if src.StrategyRange != nil {
-		return json.Marshal(&src.StrategyRange)
+	if src.DataprimeSourceStrategyRange != nil {
+		return json.Marshal(&src.DataprimeSourceStrategyRange)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -136,16 +136,16 @@ func (obj *DataprimeSourceStrategy) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.StrategyDuration != nil {
-		return obj.StrategyDuration
+	if obj.DataprimeSourceStrategyDuration != nil {
+		return obj.DataprimeSourceStrategyDuration
 	}
 
-	if obj.StrategyInstant != nil {
-		return obj.StrategyInstant
+	if obj.DataprimeSourceStrategyInstant != nil {
+		return obj.DataprimeSourceStrategyInstant
 	}
 
-	if obj.StrategyRange != nil {
-		return obj.StrategyRange
+	if obj.DataprimeSourceStrategyRange != nil {
+		return obj.DataprimeSourceStrategyRange
 	}
 
 	// all schemas are nil
@@ -154,16 +154,16 @@ func (obj *DataprimeSourceStrategy) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj DataprimeSourceStrategy) GetActualInstanceValue() (interface{}) {
-	if obj.StrategyDuration != nil {
-		return *obj.StrategyDuration
+	if obj.DataprimeSourceStrategyDuration != nil {
+		return *obj.DataprimeSourceStrategyDuration
 	}
 
-	if obj.StrategyInstant != nil {
-		return *obj.StrategyInstant
+	if obj.DataprimeSourceStrategyInstant != nil {
+		return *obj.DataprimeSourceStrategyInstant
 	}
 
-	if obj.StrategyRange != nil {
-		return *obj.StrategyRange
+	if obj.DataprimeSourceStrategyRange != nil {
+		return *obj.DataprimeSourceStrategyRange
 	}
 
 	// all schemas are nil

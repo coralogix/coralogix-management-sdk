@@ -430,10 +430,10 @@
       "CustomEnrichmentData": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/CustomEnrichmentDataBinary"
+            "$ref": "#/components/schemas/CustomEnrichmentDataTextual"
           },
           {
-            "$ref": "#/components/schemas/CustomEnrichmentDataTextual"
+            "$ref": "#/components/schemas/CustomEnrichmentDataBinary"
           }
         ]
       },
@@ -753,24 +753,6 @@
         "required": [
           "customEnrichment"
         ]
-      },
-      "YAxisViewByCategory": {
-        "type": "object",
-        "properties": {
-          "category": {
-            "$ref": "#/components/schemas/YAxisViewByCategory"
-          }
-        },
-        "additionalProperties": false
-      },
-      "YAxisViewByValue": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "$ref": "#/components/schemas/YAxisViewByValue"
-          }
-        },
-        "additionalProperties": false
       },
       "common.Group": {
         "type": "object",

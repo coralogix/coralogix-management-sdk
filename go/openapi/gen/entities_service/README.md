@@ -99,8 +99,6 @@ Class | Method | HTTP request | Description
  - [MultipleValues](docs/MultipleValues.md)
  - [NotificationCenterEntityType](docs/NotificationCenterEntityType.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

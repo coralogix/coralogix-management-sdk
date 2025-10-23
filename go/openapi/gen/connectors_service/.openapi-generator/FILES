@@ -37,7 +37,5 @@ model_notification_center_entity_type.go
 model_replace_connector_response.go
 model_templated_connector_config_field.go
 model_v3_filter_operator.go
-model_y_axis_view_by_category.go
-model_y_axis_view_by_value.go
 response.go
 utils.go

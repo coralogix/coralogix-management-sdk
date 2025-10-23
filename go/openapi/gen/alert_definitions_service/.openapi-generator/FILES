@@ -76,8 +76,6 @@ model_flow_stages_groups_alert_defs.go
 model_flow_type.go
 model_get_alert_def_by_version_id_response.go
 model_get_alert_def_response.go
-model_integration_type_integration_id.go
-model_integration_type_recipients.go
 model_label_filter_type.go
 model_label_filters.go
 model_list_alert_defs_response.go
@@ -170,12 +168,12 @@ model_v3_auto_retire_timeframe.go
 model_v3_connector_config_field.go
 model_v3_filter_operator.go
 model_v3_integration_type.go
+model_v3_integration_type_integration_id.go
+model_v3_integration_type_recipients.go
 model_v3_logs_filter.go
 model_v3_message_config_field.go
 model_v3_slo_definition.go
 model_v3_source_overrides.go
 model_v3_undetected_values_management.go
-model_y_axis_view_by_category.go
-model_y_axis_view_by_value.go
 response.go
 utils.go

@@ -726,20 +726,6 @@ components:
         stack:
           $ref: "#/components/schemas/ColorsByStack"
       type: object
-    ConditionTypeMatchEntityType:
-      additionalProperties: false
-      example:
-        matchEntityType: "{}"
-      properties:
-        matchEntityType:
-          type: object
-      type: object
-    ConditionTypeMatchEntityTypeAndSubType:
-      additionalProperties: false
-      properties:
-        matchEntityTypeAndSubType:
-          $ref: "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
-      type: object
     ConfigOverrides:
       example:
         messageConfig:
@@ -990,6 +976,20 @@ components:
             type: string
           type: array
       type: object
+    NotificationCenterConditionTypeMatchEntityType:
+      additionalProperties: false
+      example:
+        matchEntityType: "{}"
+      properties:
+        matchEntityType:
+          type: object
+      type: object
+    NotificationCenterConditionTypeMatchEntityTypeAndSubType:
+      additionalProperties: false
+      properties:
+        matchEntityTypeAndSubType:
+          $ref: "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
+      type: object
     Preset:
       description: Set of preconfigured templates for notification content rendering
       example:
@@ -1153,18 +1153,6 @@ components:
       type: object
     SetPresetAsDefaultResponse:
       type: object
-    YAxisViewByCategory:
-      additionalProperties: false
-      properties:
-        category:
-          $ref: "#/components/schemas/YAxisViewByCategory"
-      type: object
-    YAxisViewByValue:
-      additionalProperties: false
-      properties:
-        value:
-          $ref: "#/components/schemas/YAxisViewByValue"
-      type: object
     common.Group:
       properties:
         field:
@@ -1184,8 +1172,8 @@ components:
       type: string
     notification_center.ConditionType:
       oneOf:
-      - $ref: "#/components/schemas/ConditionTypeMatchEntityType"
-      - $ref: "#/components/schemas/ConditionTypeMatchEntityTypeAndSubType"
+      - $ref: "#/components/schemas/NotificationCenterConditionTypeMatchEntityType"
+      - $ref: "#/components/schemas/NotificationCenterConditionTypeMatchEntityTypeAndSubType"
     notification_center.EntityType:
       enum:
       - ENTITY_TYPE_UNSPECIFIED

@@ -18,37 +18,37 @@ import (
 
 // GaugeQuery - struct for GaugeQuery
 type GaugeQuery struct {
-	QueryDataprime *QueryDataprime
-	QueryLogs *QueryLogs
-	QueryMetrics *QueryMetrics
-	QuerySpans *QuerySpans
+	GaugeQueryDataprime *GaugeQueryDataprime
+	GaugeQueryLogs *GaugeQueryLogs
+	GaugeQueryMetrics *GaugeQueryMetrics
+	GaugeQuerySpans *GaugeQuerySpans
 }
 
-// QueryDataprimeAsGaugeQuery is a convenience function that returns QueryDataprime wrapped in GaugeQuery
-func QueryDataprimeAsGaugeQuery(v *QueryDataprime) GaugeQuery {
+// GaugeQueryDataprimeAsGaugeQuery is a convenience function that returns GaugeQueryDataprime wrapped in GaugeQuery
+func GaugeQueryDataprimeAsGaugeQuery(v *GaugeQueryDataprime) GaugeQuery {
 	return GaugeQuery{
-		QueryDataprime: v,
+		GaugeQueryDataprime: v,
 	}
 }
 
-// QueryLogsAsGaugeQuery is a convenience function that returns QueryLogs wrapped in GaugeQuery
-func QueryLogsAsGaugeQuery(v *QueryLogs) GaugeQuery {
+// GaugeQueryLogsAsGaugeQuery is a convenience function that returns GaugeQueryLogs wrapped in GaugeQuery
+func GaugeQueryLogsAsGaugeQuery(v *GaugeQueryLogs) GaugeQuery {
 	return GaugeQuery{
-		QueryLogs: v,
+		GaugeQueryLogs: v,
 	}
 }
 
-// QueryMetricsAsGaugeQuery is a convenience function that returns QueryMetrics wrapped in GaugeQuery
-func QueryMetricsAsGaugeQuery(v *QueryMetrics) GaugeQuery {
+// GaugeQueryMetricsAsGaugeQuery is a convenience function that returns GaugeQueryMetrics wrapped in GaugeQuery
+func GaugeQueryMetricsAsGaugeQuery(v *GaugeQueryMetrics) GaugeQuery {
 	return GaugeQuery{
-		QueryMetrics: v,
+		GaugeQueryMetrics: v,
 	}
 }
 
-// QuerySpansAsGaugeQuery is a convenience function that returns QuerySpans wrapped in GaugeQuery
-func QuerySpansAsGaugeQuery(v *QuerySpans) GaugeQuery {
+// GaugeQuerySpansAsGaugeQuery is a convenience function that returns GaugeQuerySpans wrapped in GaugeQuery
+func GaugeQuerySpansAsGaugeQuery(v *GaugeQuerySpans) GaugeQuery {
 	return GaugeQuery{
-		QuerySpans: v,
+		GaugeQuerySpans: v,
 	}
 }
 
@@ -57,80 +57,80 @@ func QuerySpansAsGaugeQuery(v *QuerySpans) GaugeQuery {
 func (dst *GaugeQuery) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into QueryDataprime
-	err = newStrictDecoder(data).Decode(&dst.QueryDataprime)
+	// try to unmarshal data into GaugeQueryDataprime
+	err = newStrictDecoder(data).Decode(&dst.GaugeQueryDataprime)
 	if err == nil {
-		jsonQueryDataprime, _ := json.Marshal(dst.QueryDataprime)
-		if string(jsonQueryDataprime) == "{}" { // empty struct
-			dst.QueryDataprime = nil
+		jsonGaugeQueryDataprime, _ := json.Marshal(dst.GaugeQueryDataprime)
+		if string(jsonGaugeQueryDataprime) == "{}" { // empty struct
+			dst.GaugeQueryDataprime = nil
 		} else {
-			if err = validator.Validate(dst.QueryDataprime); err != nil {
-				dst.QueryDataprime = nil
+			if err = validator.Validate(dst.GaugeQueryDataprime); err != nil {
+				dst.GaugeQueryDataprime = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QueryDataprime = nil
+		dst.GaugeQueryDataprime = nil
 	}
 
-	// try to unmarshal data into QueryLogs
-	err = newStrictDecoder(data).Decode(&dst.QueryLogs)
+	// try to unmarshal data into GaugeQueryLogs
+	err = newStrictDecoder(data).Decode(&dst.GaugeQueryLogs)
 	if err == nil {
-		jsonQueryLogs, _ := json.Marshal(dst.QueryLogs)
-		if string(jsonQueryLogs) == "{}" { // empty struct
-			dst.QueryLogs = nil
+		jsonGaugeQueryLogs, _ := json.Marshal(dst.GaugeQueryLogs)
+		if string(jsonGaugeQueryLogs) == "{}" { // empty struct
+			dst.GaugeQueryLogs = nil
 		} else {
-			if err = validator.Validate(dst.QueryLogs); err != nil {
-				dst.QueryLogs = nil
+			if err = validator.Validate(dst.GaugeQueryLogs); err != nil {
+				dst.GaugeQueryLogs = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QueryLogs = nil
+		dst.GaugeQueryLogs = nil
 	}
 
-	// try to unmarshal data into QueryMetrics
-	err = newStrictDecoder(data).Decode(&dst.QueryMetrics)
+	// try to unmarshal data into GaugeQueryMetrics
+	err = newStrictDecoder(data).Decode(&dst.GaugeQueryMetrics)
 	if err == nil {
-		jsonQueryMetrics, _ := json.Marshal(dst.QueryMetrics)
-		if string(jsonQueryMetrics) == "{}" { // empty struct
-			dst.QueryMetrics = nil
+		jsonGaugeQueryMetrics, _ := json.Marshal(dst.GaugeQueryMetrics)
+		if string(jsonGaugeQueryMetrics) == "{}" { // empty struct
+			dst.GaugeQueryMetrics = nil
 		} else {
-			if err = validator.Validate(dst.QueryMetrics); err != nil {
-				dst.QueryMetrics = nil
+			if err = validator.Validate(dst.GaugeQueryMetrics); err != nil {
+				dst.GaugeQueryMetrics = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QueryMetrics = nil
+		dst.GaugeQueryMetrics = nil
 	}
 
-	// try to unmarshal data into QuerySpans
-	err = newStrictDecoder(data).Decode(&dst.QuerySpans)
+	// try to unmarshal data into GaugeQuerySpans
+	err = newStrictDecoder(data).Decode(&dst.GaugeQuerySpans)
 	if err == nil {
-		jsonQuerySpans, _ := json.Marshal(dst.QuerySpans)
-		if string(jsonQuerySpans) == "{}" { // empty struct
-			dst.QuerySpans = nil
+		jsonGaugeQuerySpans, _ := json.Marshal(dst.GaugeQuerySpans)
+		if string(jsonGaugeQuerySpans) == "{}" { // empty struct
+			dst.GaugeQuerySpans = nil
 		} else {
-			if err = validator.Validate(dst.QuerySpans); err != nil {
-				dst.QuerySpans = nil
+			if err = validator.Validate(dst.GaugeQuerySpans); err != nil {
+				dst.GaugeQuerySpans = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QuerySpans = nil
+		dst.GaugeQuerySpans = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.QueryDataprime = nil
-		dst.QueryLogs = nil
-		dst.QueryMetrics = nil
-		dst.QuerySpans = nil
+		dst.GaugeQueryDataprime = nil
+		dst.GaugeQueryLogs = nil
+		dst.GaugeQueryMetrics = nil
+		dst.GaugeQuerySpans = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(GaugeQuery)")
 	} else if match == 1 {
@@ -142,20 +142,20 @@ func (dst *GaugeQuery) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src GaugeQuery) MarshalJSON() ([]byte, error) {
-	if src.QueryDataprime != nil {
-		return json.Marshal(&src.QueryDataprime)
+	if src.GaugeQueryDataprime != nil {
+		return json.Marshal(&src.GaugeQueryDataprime)
 	}
 
-	if src.QueryLogs != nil {
-		return json.Marshal(&src.QueryLogs)
+	if src.GaugeQueryLogs != nil {
+		return json.Marshal(&src.GaugeQueryLogs)
 	}
 
-	if src.QueryMetrics != nil {
-		return json.Marshal(&src.QueryMetrics)
+	if src.GaugeQueryMetrics != nil {
+		return json.Marshal(&src.GaugeQueryMetrics)
 	}
 
-	if src.QuerySpans != nil {
-		return json.Marshal(&src.QuerySpans)
+	if src.GaugeQuerySpans != nil {
+		return json.Marshal(&src.GaugeQuerySpans)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -166,20 +166,20 @@ func (obj *GaugeQuery) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.QueryDataprime != nil {
-		return obj.QueryDataprime
+	if obj.GaugeQueryDataprime != nil {
+		return obj.GaugeQueryDataprime
 	}
 
-	if obj.QueryLogs != nil {
-		return obj.QueryLogs
+	if obj.GaugeQueryLogs != nil {
+		return obj.GaugeQueryLogs
 	}
 
-	if obj.QueryMetrics != nil {
-		return obj.QueryMetrics
+	if obj.GaugeQueryMetrics != nil {
+		return obj.GaugeQueryMetrics
 	}
 
-	if obj.QuerySpans != nil {
-		return obj.QuerySpans
+	if obj.GaugeQuerySpans != nil {
+		return obj.GaugeQuerySpans
 	}
 
 	// all schemas are nil
@@ -188,20 +188,20 @@ func (obj *GaugeQuery) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj GaugeQuery) GetActualInstanceValue() (interface{}) {
-	if obj.QueryDataprime != nil {
-		return *obj.QueryDataprime
+	if obj.GaugeQueryDataprime != nil {
+		return *obj.GaugeQueryDataprime
 	}
 
-	if obj.QueryLogs != nil {
-		return *obj.QueryLogs
+	if obj.GaugeQueryLogs != nil {
+		return *obj.GaugeQueryLogs
 	}
 
-	if obj.QueryMetrics != nil {
-		return *obj.QueryMetrics
+	if obj.GaugeQueryMetrics != nil {
+		return *obj.GaugeQueryMetrics
 	}
 
-	if obj.QuerySpans != nil {
-		return *obj.QuerySpans
+	if obj.GaugeQuerySpans != nil {
+		return *obj.GaugeQuerySpans
 	}
 
 	// all schemas are nil

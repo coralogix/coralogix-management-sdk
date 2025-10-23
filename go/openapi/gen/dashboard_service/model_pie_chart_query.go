@@ -18,37 +18,37 @@ import (
 
 // PieChartQuery - struct for PieChartQuery
 type PieChartQuery struct {
-	QueryDataprime *QueryDataprime
-	QueryLogs *QueryLogs
-	QueryMetrics *QueryMetrics
-	QuerySpans *QuerySpans
+	PieChartQueryDataprime *PieChartQueryDataprime
+	PieChartQueryLogs *PieChartQueryLogs
+	PieChartQueryMetrics *PieChartQueryMetrics
+	PieChartQuerySpans *PieChartQuerySpans
 }
 
-// QueryDataprimeAsPieChartQuery is a convenience function that returns QueryDataprime wrapped in PieChartQuery
-func QueryDataprimeAsPieChartQuery(v *QueryDataprime) PieChartQuery {
+// PieChartQueryDataprimeAsPieChartQuery is a convenience function that returns PieChartQueryDataprime wrapped in PieChartQuery
+func PieChartQueryDataprimeAsPieChartQuery(v *PieChartQueryDataprime) PieChartQuery {
 	return PieChartQuery{
-		QueryDataprime: v,
+		PieChartQueryDataprime: v,
 	}
 }
 
-// QueryLogsAsPieChartQuery is a convenience function that returns QueryLogs wrapped in PieChartQuery
-func QueryLogsAsPieChartQuery(v *QueryLogs) PieChartQuery {
+// PieChartQueryLogsAsPieChartQuery is a convenience function that returns PieChartQueryLogs wrapped in PieChartQuery
+func PieChartQueryLogsAsPieChartQuery(v *PieChartQueryLogs) PieChartQuery {
 	return PieChartQuery{
-		QueryLogs: v,
+		PieChartQueryLogs: v,
 	}
 }
 
-// QueryMetricsAsPieChartQuery is a convenience function that returns QueryMetrics wrapped in PieChartQuery
-func QueryMetricsAsPieChartQuery(v *QueryMetrics) PieChartQuery {
+// PieChartQueryMetricsAsPieChartQuery is a convenience function that returns PieChartQueryMetrics wrapped in PieChartQuery
+func PieChartQueryMetricsAsPieChartQuery(v *PieChartQueryMetrics) PieChartQuery {
 	return PieChartQuery{
-		QueryMetrics: v,
+		PieChartQueryMetrics: v,
 	}
 }
 
-// QuerySpansAsPieChartQuery is a convenience function that returns QuerySpans wrapped in PieChartQuery
-func QuerySpansAsPieChartQuery(v *QuerySpans) PieChartQuery {
+// PieChartQuerySpansAsPieChartQuery is a convenience function that returns PieChartQuerySpans wrapped in PieChartQuery
+func PieChartQuerySpansAsPieChartQuery(v *PieChartQuerySpans) PieChartQuery {
 	return PieChartQuery{
-		QuerySpans: v,
+		PieChartQuerySpans: v,
 	}
 }
 
@@ -57,80 +57,80 @@ func QuerySpansAsPieChartQuery(v *QuerySpans) PieChartQuery {
 func (dst *PieChartQuery) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into QueryDataprime
-	err = newStrictDecoder(data).Decode(&dst.QueryDataprime)
+	// try to unmarshal data into PieChartQueryDataprime
+	err = newStrictDecoder(data).Decode(&dst.PieChartQueryDataprime)
 	if err == nil {
-		jsonQueryDataprime, _ := json.Marshal(dst.QueryDataprime)
-		if string(jsonQueryDataprime) == "{}" { // empty struct
-			dst.QueryDataprime = nil
+		jsonPieChartQueryDataprime, _ := json.Marshal(dst.PieChartQueryDataprime)
+		if string(jsonPieChartQueryDataprime) == "{}" { // empty struct
+			dst.PieChartQueryDataprime = nil
 		} else {
-			if err = validator.Validate(dst.QueryDataprime); err != nil {
-				dst.QueryDataprime = nil
+			if err = validator.Validate(dst.PieChartQueryDataprime); err != nil {
+				dst.PieChartQueryDataprime = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QueryDataprime = nil
+		dst.PieChartQueryDataprime = nil
 	}
 
-	// try to unmarshal data into QueryLogs
-	err = newStrictDecoder(data).Decode(&dst.QueryLogs)
+	// try to unmarshal data into PieChartQueryLogs
+	err = newStrictDecoder(data).Decode(&dst.PieChartQueryLogs)
 	if err == nil {
-		jsonQueryLogs, _ := json.Marshal(dst.QueryLogs)
-		if string(jsonQueryLogs) == "{}" { // empty struct
-			dst.QueryLogs = nil
+		jsonPieChartQueryLogs, _ := json.Marshal(dst.PieChartQueryLogs)
+		if string(jsonPieChartQueryLogs) == "{}" { // empty struct
+			dst.PieChartQueryLogs = nil
 		} else {
-			if err = validator.Validate(dst.QueryLogs); err != nil {
-				dst.QueryLogs = nil
+			if err = validator.Validate(dst.PieChartQueryLogs); err != nil {
+				dst.PieChartQueryLogs = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QueryLogs = nil
+		dst.PieChartQueryLogs = nil
 	}
 
-	// try to unmarshal data into QueryMetrics
-	err = newStrictDecoder(data).Decode(&dst.QueryMetrics)
+	// try to unmarshal data into PieChartQueryMetrics
+	err = newStrictDecoder(data).Decode(&dst.PieChartQueryMetrics)
 	if err == nil {
-		jsonQueryMetrics, _ := json.Marshal(dst.QueryMetrics)
-		if string(jsonQueryMetrics) == "{}" { // empty struct
-			dst.QueryMetrics = nil
+		jsonPieChartQueryMetrics, _ := json.Marshal(dst.PieChartQueryMetrics)
+		if string(jsonPieChartQueryMetrics) == "{}" { // empty struct
+			dst.PieChartQueryMetrics = nil
 		} else {
-			if err = validator.Validate(dst.QueryMetrics); err != nil {
-				dst.QueryMetrics = nil
+			if err = validator.Validate(dst.PieChartQueryMetrics); err != nil {
+				dst.PieChartQueryMetrics = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QueryMetrics = nil
+		dst.PieChartQueryMetrics = nil
 	}
 
-	// try to unmarshal data into QuerySpans
-	err = newStrictDecoder(data).Decode(&dst.QuerySpans)
+	// try to unmarshal data into PieChartQuerySpans
+	err = newStrictDecoder(data).Decode(&dst.PieChartQuerySpans)
 	if err == nil {
-		jsonQuerySpans, _ := json.Marshal(dst.QuerySpans)
-		if string(jsonQuerySpans) == "{}" { // empty struct
-			dst.QuerySpans = nil
+		jsonPieChartQuerySpans, _ := json.Marshal(dst.PieChartQuerySpans)
+		if string(jsonPieChartQuerySpans) == "{}" { // empty struct
+			dst.PieChartQuerySpans = nil
 		} else {
-			if err = validator.Validate(dst.QuerySpans); err != nil {
-				dst.QuerySpans = nil
+			if err = validator.Validate(dst.PieChartQuerySpans); err != nil {
+				dst.PieChartQuerySpans = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QuerySpans = nil
+		dst.PieChartQuerySpans = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.QueryDataprime = nil
-		dst.QueryLogs = nil
-		dst.QueryMetrics = nil
-		dst.QuerySpans = nil
+		dst.PieChartQueryDataprime = nil
+		dst.PieChartQueryLogs = nil
+		dst.PieChartQueryMetrics = nil
+		dst.PieChartQuerySpans = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(PieChartQuery)")
 	} else if match == 1 {
@@ -142,20 +142,20 @@ func (dst *PieChartQuery) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src PieChartQuery) MarshalJSON() ([]byte, error) {
-	if src.QueryDataprime != nil {
-		return json.Marshal(&src.QueryDataprime)
+	if src.PieChartQueryDataprime != nil {
+		return json.Marshal(&src.PieChartQueryDataprime)
 	}
 
-	if src.QueryLogs != nil {
-		return json.Marshal(&src.QueryLogs)
+	if src.PieChartQueryLogs != nil {
+		return json.Marshal(&src.PieChartQueryLogs)
 	}
 
-	if src.QueryMetrics != nil {
-		return json.Marshal(&src.QueryMetrics)
+	if src.PieChartQueryMetrics != nil {
+		return json.Marshal(&src.PieChartQueryMetrics)
 	}
 
-	if src.QuerySpans != nil {
-		return json.Marshal(&src.QuerySpans)
+	if src.PieChartQuerySpans != nil {
+		return json.Marshal(&src.PieChartQuerySpans)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -166,20 +166,20 @@ func (obj *PieChartQuery) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.QueryDataprime != nil {
-		return obj.QueryDataprime
+	if obj.PieChartQueryDataprime != nil {
+		return obj.PieChartQueryDataprime
 	}
 
-	if obj.QueryLogs != nil {
-		return obj.QueryLogs
+	if obj.PieChartQueryLogs != nil {
+		return obj.PieChartQueryLogs
 	}
 
-	if obj.QueryMetrics != nil {
-		return obj.QueryMetrics
+	if obj.PieChartQueryMetrics != nil {
+		return obj.PieChartQueryMetrics
 	}
 
-	if obj.QuerySpans != nil {
-		return obj.QuerySpans
+	if obj.PieChartQuerySpans != nil {
+		return obj.PieChartQuerySpans
 	}
 
 	// all schemas are nil
@@ -188,20 +188,20 @@ func (obj *PieChartQuery) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj PieChartQuery) GetActualInstanceValue() (interface{}) {
-	if obj.QueryDataprime != nil {
-		return *obj.QueryDataprime
+	if obj.PieChartQueryDataprime != nil {
+		return *obj.PieChartQueryDataprime
 	}
 
-	if obj.QueryLogs != nil {
-		return *obj.QueryLogs
+	if obj.PieChartQueryLogs != nil {
+		return *obj.PieChartQueryLogs
 	}
 
-	if obj.QueryMetrics != nil {
-		return *obj.QueryMetrics
+	if obj.PieChartQueryMetrics != nil {
+		return *obj.PieChartQueryMetrics
 	}
 
-	if obj.QuerySpans != nil {
-		return *obj.QuerySpans
+	if obj.PieChartQuerySpans != nil {
+		return *obj.PieChartQuerySpans
 	}
 
 	// all schemas are nil

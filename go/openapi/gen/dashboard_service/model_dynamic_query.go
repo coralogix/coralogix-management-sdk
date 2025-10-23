@@ -18,37 +18,37 @@ import (
 
 // DynamicQuery - struct for DynamicQuery
 type DynamicQuery struct {
-	QueryDataprime *QueryDataprime
-	QueryLogs *QueryLogs
-	QueryMetrics *QueryMetrics
-	QuerySpans *QuerySpans
+	DynamicQueryDataprime *DynamicQueryDataprime
+	DynamicQueryLogs *DynamicQueryLogs
+	DynamicQueryMetrics *DynamicQueryMetrics
+	DynamicQuerySpans *DynamicQuerySpans
 }
 
-// QueryDataprimeAsDynamicQuery is a convenience function that returns QueryDataprime wrapped in DynamicQuery
-func QueryDataprimeAsDynamicQuery(v *QueryDataprime) DynamicQuery {
+// DynamicQueryDataprimeAsDynamicQuery is a convenience function that returns DynamicQueryDataprime wrapped in DynamicQuery
+func DynamicQueryDataprimeAsDynamicQuery(v *DynamicQueryDataprime) DynamicQuery {
 	return DynamicQuery{
-		QueryDataprime: v,
+		DynamicQueryDataprime: v,
 	}
 }
 
-// QueryLogsAsDynamicQuery is a convenience function that returns QueryLogs wrapped in DynamicQuery
-func QueryLogsAsDynamicQuery(v *QueryLogs) DynamicQuery {
+// DynamicQueryLogsAsDynamicQuery is a convenience function that returns DynamicQueryLogs wrapped in DynamicQuery
+func DynamicQueryLogsAsDynamicQuery(v *DynamicQueryLogs) DynamicQuery {
 	return DynamicQuery{
-		QueryLogs: v,
+		DynamicQueryLogs: v,
 	}
 }
 
-// QueryMetricsAsDynamicQuery is a convenience function that returns QueryMetrics wrapped in DynamicQuery
-func QueryMetricsAsDynamicQuery(v *QueryMetrics) DynamicQuery {
+// DynamicQueryMetricsAsDynamicQuery is a convenience function that returns DynamicQueryMetrics wrapped in DynamicQuery
+func DynamicQueryMetricsAsDynamicQuery(v *DynamicQueryMetrics) DynamicQuery {
 	return DynamicQuery{
-		QueryMetrics: v,
+		DynamicQueryMetrics: v,
 	}
 }
 
-// QuerySpansAsDynamicQuery is a convenience function that returns QuerySpans wrapped in DynamicQuery
-func QuerySpansAsDynamicQuery(v *QuerySpans) DynamicQuery {
+// DynamicQuerySpansAsDynamicQuery is a convenience function that returns DynamicQuerySpans wrapped in DynamicQuery
+func DynamicQuerySpansAsDynamicQuery(v *DynamicQuerySpans) DynamicQuery {
 	return DynamicQuery{
-		QuerySpans: v,
+		DynamicQuerySpans: v,
 	}
 }
 
@@ -57,80 +57,80 @@ func QuerySpansAsDynamicQuery(v *QuerySpans) DynamicQuery {
 func (dst *DynamicQuery) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into QueryDataprime
-	err = newStrictDecoder(data).Decode(&dst.QueryDataprime)
+	// try to unmarshal data into DynamicQueryDataprime
+	err = newStrictDecoder(data).Decode(&dst.DynamicQueryDataprime)
 	if err == nil {
-		jsonQueryDataprime, _ := json.Marshal(dst.QueryDataprime)
-		if string(jsonQueryDataprime) == "{}" { // empty struct
-			dst.QueryDataprime = nil
+		jsonDynamicQueryDataprime, _ := json.Marshal(dst.DynamicQueryDataprime)
+		if string(jsonDynamicQueryDataprime) == "{}" { // empty struct
+			dst.DynamicQueryDataprime = nil
 		} else {
-			if err = validator.Validate(dst.QueryDataprime); err != nil {
-				dst.QueryDataprime = nil
+			if err = validator.Validate(dst.DynamicQueryDataprime); err != nil {
+				dst.DynamicQueryDataprime = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QueryDataprime = nil
+		dst.DynamicQueryDataprime = nil
 	}
 
-	// try to unmarshal data into QueryLogs
-	err = newStrictDecoder(data).Decode(&dst.QueryLogs)
+	// try to unmarshal data into DynamicQueryLogs
+	err = newStrictDecoder(data).Decode(&dst.DynamicQueryLogs)
 	if err == nil {
-		jsonQueryLogs, _ := json.Marshal(dst.QueryLogs)
-		if string(jsonQueryLogs) == "{}" { // empty struct
-			dst.QueryLogs = nil
+		jsonDynamicQueryLogs, _ := json.Marshal(dst.DynamicQueryLogs)
+		if string(jsonDynamicQueryLogs) == "{}" { // empty struct
+			dst.DynamicQueryLogs = nil
 		} else {
-			if err = validator.Validate(dst.QueryLogs); err != nil {
-				dst.QueryLogs = nil
+			if err = validator.Validate(dst.DynamicQueryLogs); err != nil {
+				dst.DynamicQueryLogs = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QueryLogs = nil
+		dst.DynamicQueryLogs = nil
 	}
 
-	// try to unmarshal data into QueryMetrics
-	err = newStrictDecoder(data).Decode(&dst.QueryMetrics)
+	// try to unmarshal data into DynamicQueryMetrics
+	err = newStrictDecoder(data).Decode(&dst.DynamicQueryMetrics)
 	if err == nil {
-		jsonQueryMetrics, _ := json.Marshal(dst.QueryMetrics)
-		if string(jsonQueryMetrics) == "{}" { // empty struct
-			dst.QueryMetrics = nil
+		jsonDynamicQueryMetrics, _ := json.Marshal(dst.DynamicQueryMetrics)
+		if string(jsonDynamicQueryMetrics) == "{}" { // empty struct
+			dst.DynamicQueryMetrics = nil
 		} else {
-			if err = validator.Validate(dst.QueryMetrics); err != nil {
-				dst.QueryMetrics = nil
+			if err = validator.Validate(dst.DynamicQueryMetrics); err != nil {
+				dst.DynamicQueryMetrics = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QueryMetrics = nil
+		dst.DynamicQueryMetrics = nil
 	}
 
-	// try to unmarshal data into QuerySpans
-	err = newStrictDecoder(data).Decode(&dst.QuerySpans)
+	// try to unmarshal data into DynamicQuerySpans
+	err = newStrictDecoder(data).Decode(&dst.DynamicQuerySpans)
 	if err == nil {
-		jsonQuerySpans, _ := json.Marshal(dst.QuerySpans)
-		if string(jsonQuerySpans) == "{}" { // empty struct
-			dst.QuerySpans = nil
+		jsonDynamicQuerySpans, _ := json.Marshal(dst.DynamicQuerySpans)
+		if string(jsonDynamicQuerySpans) == "{}" { // empty struct
+			dst.DynamicQuerySpans = nil
 		} else {
-			if err = validator.Validate(dst.QuerySpans); err != nil {
-				dst.QuerySpans = nil
+			if err = validator.Validate(dst.DynamicQuerySpans); err != nil {
+				dst.DynamicQuerySpans = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QuerySpans = nil
+		dst.DynamicQuerySpans = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.QueryDataprime = nil
-		dst.QueryLogs = nil
-		dst.QueryMetrics = nil
-		dst.QuerySpans = nil
+		dst.DynamicQueryDataprime = nil
+		dst.DynamicQueryLogs = nil
+		dst.DynamicQueryMetrics = nil
+		dst.DynamicQuerySpans = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(DynamicQuery)")
 	} else if match == 1 {
@@ -142,20 +142,20 @@ func (dst *DynamicQuery) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src DynamicQuery) MarshalJSON() ([]byte, error) {
-	if src.QueryDataprime != nil {
-		return json.Marshal(&src.QueryDataprime)
+	if src.DynamicQueryDataprime != nil {
+		return json.Marshal(&src.DynamicQueryDataprime)
 	}
 
-	if src.QueryLogs != nil {
-		return json.Marshal(&src.QueryLogs)
+	if src.DynamicQueryLogs != nil {
+		return json.Marshal(&src.DynamicQueryLogs)
 	}
 
-	if src.QueryMetrics != nil {
-		return json.Marshal(&src.QueryMetrics)
+	if src.DynamicQueryMetrics != nil {
+		return json.Marshal(&src.DynamicQueryMetrics)
 	}
 
-	if src.QuerySpans != nil {
-		return json.Marshal(&src.QuerySpans)
+	if src.DynamicQuerySpans != nil {
+		return json.Marshal(&src.DynamicQuerySpans)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -166,20 +166,20 @@ func (obj *DynamicQuery) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.QueryDataprime != nil {
-		return obj.QueryDataprime
+	if obj.DynamicQueryDataprime != nil {
+		return obj.DynamicQueryDataprime
 	}
 
-	if obj.QueryLogs != nil {
-		return obj.QueryLogs
+	if obj.DynamicQueryLogs != nil {
+		return obj.DynamicQueryLogs
 	}
 
-	if obj.QueryMetrics != nil {
-		return obj.QueryMetrics
+	if obj.DynamicQueryMetrics != nil {
+		return obj.DynamicQueryMetrics
 	}
 
-	if obj.QuerySpans != nil {
-		return obj.QuerySpans
+	if obj.DynamicQuerySpans != nil {
+		return obj.DynamicQuerySpans
 	}
 
 	// all schemas are nil
@@ -188,20 +188,20 @@ func (obj *DynamicQuery) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj DynamicQuery) GetActualInstanceValue() (interface{}) {
-	if obj.QueryDataprime != nil {
-		return *obj.QueryDataprime
+	if obj.DynamicQueryDataprime != nil {
+		return *obj.DynamicQueryDataprime
 	}
 
-	if obj.QueryLogs != nil {
-		return *obj.QueryLogs
+	if obj.DynamicQueryLogs != nil {
+		return *obj.DynamicQueryLogs
 	}
 
-	if obj.QueryMetrics != nil {
-		return *obj.QueryMetrics
+	if obj.DynamicQueryMetrics != nil {
+		return *obj.DynamicQueryMetrics
 	}
 
-	if obj.QuerySpans != nil {
-		return *obj.QuerySpans
+	if obj.DynamicQuerySpans != nil {
+		return *obj.DynamicQuerySpans
 	}
 
 	// all schemas are nil

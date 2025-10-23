@@ -140,7 +140,7 @@ paths:
           let options = {
             method: 'POST',
             headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"dateRange":{"fromDate":"2021-01-01T00:00:00.000Z","toDate":"2021-01-01T00:00:00.000Z"}}'
+            body: '{"range":"RANGE_UNSPECIFIED"}'
           };
 
           fetch(url, options)
@@ -153,10 +153,7 @@ paths:
 
           url = "https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/daily:evaluation-tokens"
 
-          payload = {"dateRange": {
-                  "fromDate": "2021-01-01T00:00:00.000Z",
-                  "toDate": "2021-01-01T00:00:00.000Z"
-              }}
+          payload = {"range": "RANGE_UNSPECIFIED"}
           headers = {
               "Authorization": "Bearer <API_KEY>",
               "content-type": "application/json"
@@ -171,7 +168,7 @@ paths:
             --url https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/daily:evaluation-tokens \
             --header 'Authorization: Bearer <API_KEY>' \
             --header 'content-type: application/json' \
-            --data '{"dateRange":{"fromDate":"2021-01-01T00:00:00.000Z","toDate":"2021-01-01T00:00:00.000Z"}}'
+            --data '{"range":"RANGE_UNSPECIFIED"}'
   /dataplans/data-usage/v2/daily:processed-gbs:
     post:
       description: No description available
@@ -215,7 +212,7 @@ paths:
           let options = {
             method: 'POST',
             headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"range":"RANGE_UNSPECIFIED"}'
+            body: '{"dateRange":{"fromDate":"2021-01-01T00:00:00.000Z","toDate":"2021-01-01T00:00:00.000Z"}}'
           };
 
           fetch(url, options)
@@ -228,7 +225,10 @@ paths:
 
           url = "https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/daily:processed-gbs"
 
-          payload = {"range": "RANGE_UNSPECIFIED"}
+          payload = {"dateRange": {
+                  "fromDate": "2021-01-01T00:00:00.000Z",
+                  "toDate": "2021-01-01T00:00:00.000Z"
+              }}
           headers = {
               "Authorization": "Bearer <API_KEY>",
               "content-type": "application/json"
@@ -243,7 +243,7 @@ paths:
             --url https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/daily:processed-gbs \
             --header 'Authorization: Bearer <API_KEY>' \
             --header 'content-type: application/json' \
-            --data '{"range":"RANGE_UNSPECIFIED"}'
+            --data '{"dateRange":{"fromDate":"2021-01-01T00:00:00.000Z","toDate":"2021-01-01T00:00:00.000Z"}}'
   /dataplans/data-usage/v2/daily:units:
     post:
       description: No description available
@@ -642,8 +642,8 @@ components:
         sizeGb: 0.8008282
         units: 6.0274563
         dimensions:
-        - pillar: PILLAR_UNSPECIFIED
-        - pillar: PILLAR_UNSPECIFIED
+        - severity: SEVERITY_UNSPECIFIED
+        - severity: SEVERITY_UNSPECIFIED
         timestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about data usage.
@@ -805,11 +805,11 @@ components:
       type: object
     Dimension:
       oneOf:
+      - $ref: "#/components/schemas/DimensionSeverity"
+      - $ref: "#/components/schemas/DimensionPriority"
       - $ref: "#/components/schemas/DimensionPillar"
       - $ref: "#/components/schemas/DimensionGenericDimension"
       - $ref: "#/components/schemas/DimensionTier"
-      - $ref: "#/components/schemas/DimensionSeverity"
-      - $ref: "#/components/schemas/DimensionPriority"
     DimensionGenericDimension:
       additionalProperties: false
       properties:
@@ -818,8 +818,6 @@ components:
       type: object
     DimensionPillar:
       additionalProperties: false
-      example:
-        pillar: PILLAR_UNSPECIFIED
       properties:
         pillar:
           $ref: "#/components/schemas/v2.Pillar"
@@ -832,6 +830,8 @@ components:
       type: object
     DimensionSeverity:
       additionalProperties: false
+      example:
+        severity: SEVERITY_UNSPECIFIED
       properties:
         severity:
           $ref: "#/components/schemas/datausage.v2.Severity"
@@ -1133,14 +1133,14 @@ components:
         - sizeGb: 0.8008282
           units: 6.0274563
           dimensions:
-          - pillar: PILLAR_UNSPECIFIED
-          - pillar: PILLAR_UNSPECIFIED
+          - severity: SEVERITY_UNSPECIFIED
+          - severity: SEVERITY_UNSPECIFIED
           timestamp: 2000-01-23T04:56:07.000+00:00
         - sizeGb: 0.8008282
           units: 6.0274563
           dimensions:
-          - pillar: PILLAR_UNSPECIFIED
-          - pillar: PILLAR_UNSPECIFIED
+          - severity: SEVERITY_UNSPECIFIED
+          - severity: SEVERITY_UNSPECIFIED
           timestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about data usage.
@@ -1301,18 +1301,6 @@ components:
           type: boolean
       title: Update Data Usage Metrics Export Status Response
       type: object
-    YAxisViewByCategory:
-      additionalProperties: false
-      properties:
-        category:
-          $ref: "#/components/schemas/YAxisViewByCategory"
-      type: object
-    YAxisViewByValue:
-      additionalProperties: false
-      properties:
-        value:
-          $ref: "#/components/schemas/YAxisViewByValue"
-      type: object
     common.Group:
       properties:
         field:
@@ -1428,20 +1416,20 @@ components:
       type: object
     DataUsageService_GetDataUsage_dimension_filters_parameter_inner:
       oneOf:
+      - $ref: "#/components/schemas/DimensionPillar"
+      - $ref: "#/components/schemas/DimensionGenericDimension"
       - $ref: "#/components/schemas/DimensionTier"
       - $ref: "#/components/schemas/DimensionSeverity"
       - $ref: "#/components/schemas/DimensionPriority"
-      - $ref: "#/components/schemas/DimensionPillar"
-      - $ref: "#/components/schemas/DimensionGenericDimension"
     DataUsageService_GetDailyUsageEvaluationTokens_request:
       oneOf:
-      - $ref: "#/components/schemas/GetDailyUsageEvaluationTokensRequestDateRange"
       - $ref: "#/components/schemas/GetDailyUsageEvaluationTokensRequestRange"
+      - $ref: "#/components/schemas/GetDailyUsageEvaluationTokensRequestDateRange"
       type: object
     DataUsageService_GetDailyUsageProcessedGbs_request:
       oneOf:
-      - $ref: "#/components/schemas/GetDailyUsageProcessedGbsRequestRange"
       - $ref: "#/components/schemas/GetDailyUsageProcessedGbsRequestDateRange"
+      - $ref: "#/components/schemas/GetDailyUsageProcessedGbsRequestRange"
       type: object
     DataUsageService_GetDailyUsageUnits_request:
       oneOf:

@@ -34,7 +34,5 @@ model_presets.go
 model_update_api_key_request.go
 model_update_api_key_request_permissions.go
 model_v3_filter_operator.go
-model_y_axis_view_by_category.go
-model_y_axis_view_by_value.go
 response.go
 utils.go

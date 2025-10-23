@@ -145,8 +145,6 @@ Class | Method | HTTP request | Description
  - [V1UserAccountId](docs/V1UserAccountId.md)
  - [V1UserId](docs/V1UserId.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

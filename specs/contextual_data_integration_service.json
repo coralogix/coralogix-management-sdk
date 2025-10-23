@@ -1045,12 +1045,6 @@
       "FieldInformation": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FieldInformationSingleNumber"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationSingle"
-          },
-          {
             "$ref": "#/components/schemas/FieldInformationMultiText"
           },
           {
@@ -1061,6 +1055,12 @@
           },
           {
             "$ref": "#/components/schemas/FieldInformationSelection"
+          },
+          {
+            "$ref": "#/components/schemas/FieldInformationSingleNumber"
+          },
+          {
+            "$ref": "#/components/schemas/FieldInformationSingle"
           }
         ]
       },
@@ -1839,6 +1839,9 @@
       "IntegrationRevision": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/IntegrationRevisionTerraform"
+          },
+          {
             "$ref": "#/components/schemas/IntegrationRevisionCloudFormation"
           },
           {
@@ -1852,9 +1855,6 @@
           },
           {
             "$ref": "#/components/schemas/IntegrationRevisionRum"
-          },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionTerraform"
           }
         ]
       },
@@ -2141,104 +2141,6 @@
         "required": [
           "connectionStatus"
         ]
-      },
-      "IntegrationTypeArm": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration type",
-        "description": "This data structure represents an integration type.",
-        "type": "object",
-        "properties": {
-          "arm": {
-            "$ref": "#/components/schemas/AzureArm"
-          }
-        },
-        "additionalProperties": false
-      },
-      "IntegrationTypeCloudformation": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration type",
-        "description": "This data structure represents an integration type.",
-        "type": "object",
-        "properties": {
-          "cloudformation": {
-            "$ref": "#/components/schemas/Cloudformation"
-          }
-        },
-        "additionalProperties": false
-      },
-      "IntegrationTypeContextualData": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration type",
-        "description": "This data structure represents an integration type.",
-        "type": "object",
-        "properties": {
-          "contextualData": {
-            "$ref": "#/components/schemas/ContextualData"
-          }
-        },
-        "additionalProperties": false
-      },
-      "IntegrationTypeGenericWebhook": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration type",
-        "description": "This data structure represents an integration type.",
-        "type": "object",
-        "properties": {
-          "genericWebhook": {
-            "$ref": "#/components/schemas/GenericWebhook"
-          }
-        },
-        "additionalProperties": false
-      },
-      "IntegrationTypeManaged": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration type",
-        "description": "This data structure represents an integration type.",
-        "type": "object",
-        "properties": {
-          "managed": {
-            "$ref": "#/components/schemas/Managed"
-          }
-        },
-        "additionalProperties": false
-      },
-      "IntegrationTypePushBasedContextualData": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration type",
-        "description": "This data structure represents an integration type.",
-        "type": "object",
-        "properties": {
-          "pushBasedContextualData": {
-            "$ref": "#/components/schemas/PushBasedContextualData"
-          }
-        },
-        "additionalProperties": false
-      },
-      "IntegrationTypeUntracked": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration type",
-        "description": "This data structure represents an integration type.",
-        "type": "object",
-        "properties": {
-          "untracked": {
-            "$ref": "#/components/schemas/Untracked"
-          }
-        },
-        "additionalProperties": false
       },
       "Language": {
         "type": "string",
@@ -2861,6 +2763,104 @@
         "title": "Update contextual data integration response",
         "type": "object"
       },
+      "V1IntegrationTypeArm": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration type",
+        "description": "This data structure represents an integration type.",
+        "type": "object",
+        "properties": {
+          "arm": {
+            "$ref": "#/components/schemas/AzureArm"
+          }
+        },
+        "additionalProperties": false
+      },
+      "V1IntegrationTypeCloudformation": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration type",
+        "description": "This data structure represents an integration type.",
+        "type": "object",
+        "properties": {
+          "cloudformation": {
+            "$ref": "#/components/schemas/Cloudformation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "V1IntegrationTypeContextualData": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration type",
+        "description": "This data structure represents an integration type.",
+        "type": "object",
+        "properties": {
+          "contextualData": {
+            "$ref": "#/components/schemas/ContextualData"
+          }
+        },
+        "additionalProperties": false
+      },
+      "V1IntegrationTypeGenericWebhook": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration type",
+        "description": "This data structure represents an integration type.",
+        "type": "object",
+        "properties": {
+          "genericWebhook": {
+            "$ref": "#/components/schemas/GenericWebhook"
+          }
+        },
+        "additionalProperties": false
+      },
+      "V1IntegrationTypeManaged": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration type",
+        "description": "This data structure represents an integration type.",
+        "type": "object",
+        "properties": {
+          "managed": {
+            "$ref": "#/components/schemas/Managed"
+          }
+        },
+        "additionalProperties": false
+      },
+      "V1IntegrationTypePushBasedContextualData": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration type",
+        "description": "This data structure represents an integration type.",
+        "type": "object",
+        "properties": {
+          "pushBasedContextualData": {
+            "$ref": "#/components/schemas/PushBasedContextualData"
+          }
+        },
+        "additionalProperties": false
+      },
+      "V1IntegrationTypeUntracked": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration type",
+        "description": "This data structure represents an integration type.",
+        "type": "object",
+        "properties": {
+          "untracked": {
+            "$ref": "#/components/schemas/Untracked"
+          }
+        },
+        "additionalProperties": false
+      },
       "Variant": {
         "type": "string",
         "enum": [
@@ -2869,24 +2869,6 @@
           "OAUTH",
           "CUSTOM"
         ]
-      },
-      "YAxisViewByCategory": {
-        "type": "object",
-        "properties": {
-          "category": {
-            "$ref": "#/components/schemas/YAxisViewByCategory"
-          }
-        },
-        "additionalProperties": false
-      },
-      "YAxisViewByValue": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "$ref": "#/components/schemas/YAxisViewByValue"
-          }
-        },
-        "additionalProperties": false
       },
       "common.Group": {
         "type": "object",
@@ -2978,25 +2960,25 @@
       "v1.IntegrationType": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IntegrationTypeGenericWebhook"
+            "$ref": "#/components/schemas/V1IntegrationTypeManaged"
           },
           {
-            "$ref": "#/components/schemas/IntegrationTypeManaged"
+            "$ref": "#/components/schemas/V1IntegrationTypeUntracked"
           },
           {
-            "$ref": "#/components/schemas/IntegrationTypeUntracked"
+            "$ref": "#/components/schemas/V1IntegrationTypeCloudformation"
           },
           {
-            "$ref": "#/components/schemas/IntegrationTypeCloudformation"
+            "$ref": "#/components/schemas/V1IntegrationTypeArm"
           },
           {
-            "$ref": "#/components/schemas/IntegrationTypeArm"
+            "$ref": "#/components/schemas/V1IntegrationTypePushBasedContextualData"
           },
           {
-            "$ref": "#/components/schemas/IntegrationTypePushBasedContextualData"
+            "$ref": "#/components/schemas/V1IntegrationTypeContextualData"
           },
           {
-            "$ref": "#/components/schemas/IntegrationTypeContextualData"
+            "$ref": "#/components/schemas/V1IntegrationTypeGenericWebhook"
           }
         ]
       },

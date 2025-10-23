@@ -19,7 +19,7 @@ var _ MappedNullable = &QuerySpansQueryTypeFieldName{}
 
 // QuerySpansQueryTypeFieldName struct for QuerySpansQueryTypeFieldName
 type QuerySpansQueryTypeFieldName struct {
-	SpanRegex *string `json:"spanRegex,omitempty"`
+	FieldName *QuerySpansQueryTypeFieldName `json:"fieldName,omitempty"`
 }
 
 // NewQuerySpansQueryTypeFieldName instantiates a new QuerySpansQueryTypeFieldName object
@@ -39,36 +39,36 @@ func NewQuerySpansQueryTypeFieldNameWithDefaults() *QuerySpansQueryTypeFieldName
 	return &this
 }
 
-// GetSpanRegex returns the SpanRegex field value if set, zero value otherwise.
-func (o *QuerySpansQueryTypeFieldName) GetSpanRegex() string {
-	if o == nil || IsNil(o.SpanRegex) {
-		var ret string
+// GetFieldName returns the FieldName field value if set, zero value otherwise.
+func (o *QuerySpansQueryTypeFieldName) GetFieldName() QuerySpansQueryTypeFieldName {
+	if o == nil || IsNil(o.FieldName) {
+		var ret QuerySpansQueryTypeFieldName
 		return ret
 	}
-	return *o.SpanRegex
+	return *o.FieldName
 }
 
-// GetSpanRegexOk returns a tuple with the SpanRegex field value if set, nil otherwise
+// GetFieldNameOk returns a tuple with the FieldName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QuerySpansQueryTypeFieldName) GetSpanRegexOk() (*string, bool) {
-	if o == nil || IsNil(o.SpanRegex) {
+func (o *QuerySpansQueryTypeFieldName) GetFieldNameOk() (*QuerySpansQueryTypeFieldName, bool) {
+	if o == nil || IsNil(o.FieldName) {
 		return nil, false
 	}
-	return o.SpanRegex, true
+	return o.FieldName, true
 }
 
-// HasSpanRegex returns a boolean if a field has been set.
-func (o *QuerySpansQueryTypeFieldName) HasSpanRegex() bool {
-	if o != nil && !IsNil(o.SpanRegex) {
+// HasFieldName returns a boolean if a field has been set.
+func (o *QuerySpansQueryTypeFieldName) HasFieldName() bool {
+	if o != nil && !IsNil(o.FieldName) {
 		return true
 	}
 
 	return false
 }
 
-// SetSpanRegex gets a reference to the given string and assigns it to the SpanRegex field.
-func (o *QuerySpansQueryTypeFieldName) SetSpanRegex(v string) {
-	o.SpanRegex = &v
+// SetFieldName gets a reference to the given QuerySpansQueryTypeFieldName and assigns it to the FieldName field.
+func (o *QuerySpansQueryTypeFieldName) SetFieldName(v QuerySpansQueryTypeFieldName) {
+	o.FieldName = &v
 }
 
 func (o QuerySpansQueryTypeFieldName) MarshalJSON() ([]byte, error) {
@@ -81,8 +81,8 @@ func (o QuerySpansQueryTypeFieldName) MarshalJSON() ([]byte, error) {
 
 func (o QuerySpansQueryTypeFieldName) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.SpanRegex) {
-		toSerialize["spanRegex"] = o.SpanRegex
+	if !IsNil(o.FieldName) {
+		toSerialize["fieldName"] = o.FieldName
 	}
 	return toSerialize, nil
 }

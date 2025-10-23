@@ -110,8 +110,6 @@ Class | Method | HTTP request | Description
  - [RoutingRule](docs/RoutingRule.md)
  - [RoutingTarget](docs/RoutingTarget.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

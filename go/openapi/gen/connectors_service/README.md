@@ -121,8 +121,6 @@ Class | Method | HTTP request | Description
  - [ReplaceConnectorResponse](docs/ReplaceConnectorResponse.md)
  - [TemplatedConnectorConfigField](docs/TemplatedConnectorConfigField.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

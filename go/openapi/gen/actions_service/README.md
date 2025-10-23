@@ -123,8 +123,6 @@ Class | Method | HTTP request | Description
  - [V2Action](docs/V2Action.md)
  - [V2SourceType](docs/V2SourceType.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

@@ -29,7 +29,5 @@ model_replace_global_router_response.go
 model_routing_rule.go
 model_routing_target.go
 model_v3_filter_operator.go
-model_y_axis_view_by_category.go
-model_y_axis_view_by_value.go
 response.go
 utils.go

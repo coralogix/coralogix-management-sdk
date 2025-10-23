@@ -529,18 +529,6 @@ components:
           type: object
       title: Permutation data structure
       type: object
-    YAxisViewByCategory:
-      additionalProperties: false
-      properties:
-        category:
-          $ref: "#/components/schemas/YAxisViewByCategory"
-      type: object
-    YAxisViewByValue:
-      additionalProperties: false
-      properties:
-        value:
-          $ref: "#/components/schemas/YAxisViewByValue"
-      type: object
     alerts.v3.PaginationResponse:
       example:
         totalSize: 0

@@ -90,7 +90,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SlosService_ReplaceSlo_request"
+              $ref: "#/components/schemas/SlosService_CreateSlo_request"
       responses:
         "200":
           content:
@@ -123,7 +123,7 @@ paths:
           let options = {
             method: 'POST',
             headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"createTime":"2019-08-24T14:15:22Z","creator":"test@domain.com","description":"A brief description of my SLO","grouping":{"labels":["string"]},"id":"b11919d5-ef85-4bb1-8655-02640dbe94d9","labels":{"property1":"string","property2":"string"},"name":"Example Slo Name","requestBasedMetricSli":{"goodEvents":{"query":"sum(rate(http_requests_total{status=\"200\"}[5m]))"},"totalEvents":{"query":"sum(rate(http_requests_total{status=\"200\"}[5m]))"}},"revision":{"revision":1,"updateTime":"2019-08-24T14:15:22Z"},"sloTimeFrame":"SLO_TIME_FRAME_UNSPECIFIED","targetThresholdPercentage":99.999,"type":"request","updateTime":"2019-08-24T14:15:22Z"}'
+            body: '{"createTime":"2019-08-24T14:15:22Z","creator":"test@domain.com","description":"A brief description of my SLO","grouping":{"labels":["string"]},"id":"b11919d5-ef85-4bb1-8655-02640dbe94d9","labels":{"property1":"string","property2":"string"},"name":"Example Slo Name","revision":{"revision":1,"updateTime":"2019-08-24T14:15:22Z"},"sloTimeFrame":"SLO_TIME_FRAME_UNSPECIFIED","targetThresholdPercentage":99.999,"type":"request","updateTime":"2019-08-24T14:15:22Z","windowBasedMetricSli":{"comparisonOperator":"COMPARISON_OPERATOR_UNSPECIFIED","missingDataStrategy":"MISSING_DATA_STRATEGY_UNCOUNTED","query":{"query":"sum(rate(http_requests_total{status=\"200\"}[5m]))"},"threshold":0.95,"window":"WINDOW_SLO_WINDOW_UNSPECIFIED"}}'
           };
 
           fetch(url, options)
@@ -149,10 +149,6 @@ paths:
                   "property2": "string"
               },
               "name": "Example Slo Name",
-              "requestBasedMetricSli": {
-                  "goodEvents": {"query": "sum(rate(http_requests_total{status=\"200\"}[5m]))"},
-                  "totalEvents": {"query": "sum(rate(http_requests_total{status=\"200\"}[5m]))"}
-              },
               "revision": {
                   "revision": 1,
                   "updateTime": "2019-08-24T14:15:22Z"
@@ -160,7 +156,14 @@ paths:
               "sloTimeFrame": "SLO_TIME_FRAME_UNSPECIFIED",
               "targetThresholdPercentage": 99.999,
               "type": "request",
-              "updateTime": "2019-08-24T14:15:22Z"
+              "updateTime": "2019-08-24T14:15:22Z",
+              "windowBasedMetricSli": {
+                  "comparisonOperator": "COMPARISON_OPERATOR_UNSPECIFIED",
+                  "missingDataStrategy": "MISSING_DATA_STRATEGY_UNCOUNTED",
+                  "query": {"query": "sum(rate(http_requests_total{status=\"200\"}[5m]))"},
+                  "threshold": 0.95,
+                  "window": "WINDOW_SLO_WINDOW_UNSPECIFIED"
+              }
           }
           headers = {
               "Authorization": "Bearer <API_KEY>",
@@ -176,7 +179,7 @@ paths:
             --url 'https://api.coralogix.com/mgmt/openapi/v1/slo/slos?silence_data_validations=SOME_BOOLEAN_VALUE' \
             --header 'Authorization: Bearer <API_KEY>' \
             --header 'content-type: application/json' \
-            --data '{"createTime":"2019-08-24T14:15:22Z","creator":"test@domain.com","description":"A brief description of my SLO","grouping":{"labels":["string"]},"id":"b11919d5-ef85-4bb1-8655-02640dbe94d9","labels":{"property1":"string","property2":"string"},"name":"Example Slo Name","requestBasedMetricSli":{"goodEvents":{"query":"sum(rate(http_requests_total{status=\"200\"}[5m]))"},"totalEvents":{"query":"sum(rate(http_requests_total{status=\"200\"}[5m]))"}},"revision":{"revision":1,"updateTime":"2019-08-24T14:15:22Z"},"sloTimeFrame":"SLO_TIME_FRAME_UNSPECIFIED","targetThresholdPercentage":99.999,"type":"request","updateTime":"2019-08-24T14:15:22Z"}'
+            --data '{"createTime":"2019-08-24T14:15:22Z","creator":"test@domain.com","description":"A brief description of my SLO","grouping":{"labels":["string"]},"id":"b11919d5-ef85-4bb1-8655-02640dbe94d9","labels":{"property1":"string","property2":"string"},"name":"Example Slo Name","revision":{"revision":1,"updateTime":"2019-08-24T14:15:22Z"},"sloTimeFrame":"SLO_TIME_FRAME_UNSPECIFIED","targetThresholdPercentage":99.999,"type":"request","updateTime":"2019-08-24T14:15:22Z","windowBasedMetricSli":{"comparisonOperator":"COMPARISON_OPERATOR_UNSPECIFIED","missingDataStrategy":"MISSING_DATA_STRATEGY_UNCOUNTED","query":{"query":"sum(rate(http_requests_total{status=\"200\"}[5m]))"},"threshold":0.95,"window":"WINDOW_SLO_WINDOW_UNSPECIFIED"}}'
     put:
       description: No description available
       externalDocs:
@@ -707,56 +710,14 @@ components:
       description: Response containing the results of batch executed SLO operations.
       example:
         matchingResponses:
-        - createSloResponse:
-            slo:
-              creator: test@domain.com
-              requestBasedMetricSli:
-                goodEvents:
-                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-                totalEvents:
-                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-              description: A brief description of my SLO
-              sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
-              updateTime: 2000-01-23T04:56:07.000+00:00
-              type: request
-              grouping:
-                labels:
-                - labels
-                - labels
-              labels:
-                key: labels
-              revision:
-                updateTime: 2000-01-23T04:56:07.000+00:00
-                revision: 1
-              createTime: 2000-01-23T04:56:07.000+00:00
-              name: Example Slo Name
-              id: b11919d5-ef85-4bb1-8655-02640dbe94d9
-              targetThresholdPercentage: 99.999
-        - createSloResponse:
-            slo:
-              creator: test@domain.com
-              requestBasedMetricSli:
-                goodEvents:
-                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-                totalEvents:
-                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-              description: A brief description of my SLO
-              sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
-              updateTime: 2000-01-23T04:56:07.000+00:00
-              type: request
-              grouping:
-                labels:
-                - labels
-                - labels
-              labels:
-                key: labels
-              revision:
-                updateTime: 2000-01-23T04:56:07.000+00:00
-                revision: 1
-              createTime: 2000-01-23T04:56:07.000+00:00
-              name: Example Slo Name
-              id: b11919d5-ef85-4bb1-8655-02640dbe94d9
-              targetThresholdPercentage: 99.999
+        - deleteSloResponse:
+            effectedSloAlertIds:
+            - effectedSloAlertIds
+            - effectedSloAlertIds
+        - deleteSloResponse:
+            effectedSloAlertIds:
+            - effectedSloAlertIds
+            - effectedSloAlertIds
         status:
           details:
             key: details
@@ -1347,38 +1308,12 @@ components:
       type: object
     SloExecutionResponse:
       oneOf:
+      - $ref: "#/components/schemas/SloExecutionResponseDeleteSloResponse"
       - $ref: "#/components/schemas/SloExecutionResponseCreateSloResponse"
       - $ref: "#/components/schemas/SloExecutionResponseReplaceSloResponse"
-      - $ref: "#/components/schemas/SloExecutionResponseDeleteSloResponse"
     SloExecutionResponseCreateSloResponse:
       additionalProperties: false
       description: Response for an executed SLO operation.
-      example:
-        createSloResponse:
-          slo:
-            creator: test@domain.com
-            requestBasedMetricSli:
-              goodEvents:
-                query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-              totalEvents:
-                query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-            description: A brief description of my SLO
-            sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
-            updateTime: 2000-01-23T04:56:07.000+00:00
-            type: request
-            grouping:
-              labels:
-              - labels
-              - labels
-            labels:
-              key: labels
-            revision:
-              updateTime: 2000-01-23T04:56:07.000+00:00
-              revision: 1
-            createTime: 2000-01-23T04:56:07.000+00:00
-            name: Example Slo Name
-            id: b11919d5-ef85-4bb1-8655-02640dbe94d9
-            targetThresholdPercentage: 99.999
       externalDocs:
         url: ""
       properties:
@@ -1389,6 +1324,11 @@ components:
     SloExecutionResponseDeleteSloResponse:
       additionalProperties: false
       description: Response for an executed SLO operation.
+      example:
+        deleteSloResponse:
+          effectedSloAlertIds:
+          - effectedSloAlertIds
+          - effectedSloAlertIds
       externalDocs:
         url: ""
       properties:
@@ -1589,18 +1529,6 @@ components:
       - WINDOW_SLO_WINDOW_1_MINUTE
       - WINDOW_SLO_WINDOW_5_MINUTES
       type: string
-    YAxisViewByCategory:
-      additionalProperties: false
-      properties:
-        category:
-          $ref: "#/components/schemas/YAxisViewByCategory"
-      type: object
-    YAxisViewByValue:
-      additionalProperties: false
-      properties:
-        value:
-          $ref: "#/components/schemas/YAxisViewByValue"
-      type: object
     common.Group:
       properties:
         field:
@@ -1658,8 +1586,8 @@ components:
       type: string
     SloFilter_field:
       oneOf:
-      - $ref: "#/components/schemas/SloFilterFieldLabelName"
       - $ref: "#/components/schemas/SloFilterFieldConstFilter"
+      - $ref: "#/components/schemas/SloFilterFieldLabelName"
     IsFilterPredicate:
       description: Predicate for SLO filters that checks if a field is equal to one
         of multiple values
@@ -1711,11 +1639,16 @@ components:
       - $ref: "#/components/schemas/SloRequestBasedMetricSli"
       - $ref: "#/components/schemas/SloWindowBasedMetricSli"
       type: object
+    SlosService_CreateSlo_request:
+      oneOf:
+      - $ref: "#/components/schemas/SloWindowBasedMetricSli"
+      - $ref: "#/components/schemas/SloRequestBasedMetricSli"
+      type: object
     SlosService_BatchExecuteSlo_requests_parameter_inner:
       oneOf:
+      - $ref: "#/components/schemas/SloExecutionRequestCreateSloRequest"
       - $ref: "#/components/schemas/SloExecutionRequestReplaceSloRequest"
       - $ref: "#/components/schemas/SloExecutionRequestDeleteSloRequest"
-      - $ref: "#/components/schemas/SloExecutionRequestCreateSloRequest"
   securitySchemes:
     apiKeyAuth:
       description: API key authentication

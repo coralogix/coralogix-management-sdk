@@ -19,7 +19,7 @@ var _ MappedNullable = &QuerySpansQuery{}
 
 // QuerySpansQuery struct for QuerySpansQuery
 type QuerySpansQuery struct {
-	SpansQuery *QuerySpansQuery `json:"spansQuery,omitempty"`
+	Type *QuerySpansQueryType `json:"type,omitempty"`
 }
 
 // NewQuerySpansQuery instantiates a new QuerySpansQuery object
@@ -39,36 +39,36 @@ func NewQuerySpansQueryWithDefaults() *QuerySpansQuery {
 	return &this
 }
 
-// GetSpansQuery returns the SpansQuery field value if set, zero value otherwise.
-func (o *QuerySpansQuery) GetSpansQuery() QuerySpansQuery {
-	if o == nil || IsNil(o.SpansQuery) {
-		var ret QuerySpansQuery
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *QuerySpansQuery) GetType() QuerySpansQueryType {
+	if o == nil || IsNil(o.Type) {
+		var ret QuerySpansQueryType
 		return ret
 	}
-	return *o.SpansQuery
+	return *o.Type
 }
 
-// GetSpansQueryOk returns a tuple with the SpansQuery field value if set, nil otherwise
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QuerySpansQuery) GetSpansQueryOk() (*QuerySpansQuery, bool) {
-	if o == nil || IsNil(o.SpansQuery) {
+func (o *QuerySpansQuery) GetTypeOk() (*QuerySpansQueryType, bool) {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
-	return o.SpansQuery, true
+	return o.Type, true
 }
 
-// HasSpansQuery returns a boolean if a field has been set.
-func (o *QuerySpansQuery) HasSpansQuery() bool {
-	if o != nil && !IsNil(o.SpansQuery) {
+// HasType returns a boolean if a field has been set.
+func (o *QuerySpansQuery) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
 	return false
 }
 
-// SetSpansQuery gets a reference to the given QuerySpansQuery and assigns it to the SpansQuery field.
-func (o *QuerySpansQuery) SetSpansQuery(v QuerySpansQuery) {
-	o.SpansQuery = &v
+// SetType gets a reference to the given QuerySpansQueryType and assigns it to the Type field.
+func (o *QuerySpansQuery) SetType(v QuerySpansQueryType) {
+	o.Type = &v
 }
 
 func (o QuerySpansQuery) MarshalJSON() ([]byte, error) {
@@ -81,8 +81,8 @@ func (o QuerySpansQuery) MarshalJSON() ([]byte, error) {
 
 func (o QuerySpansQuery) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.SpansQuery) {
-		toSerialize["spansQuery"] = o.SpansQuery
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
 	}
 	return toSerialize, nil
 }

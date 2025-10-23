@@ -118,8 +118,6 @@ Class | Method | HTTP request | Description
  - [UpdateCustomEnrichmentRequest](docs/UpdateCustomEnrichmentRequest.md)
  - [UpdateCustomEnrichmentResponse](docs/UpdateCustomEnrichmentResponse.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

@@ -103,8 +103,6 @@ Class | Method | HTTP request | Description
  - [V3FilterOperator](docs/V3FilterOperator.md)
  - [ViewFolder](docs/ViewFolder.md)
  - [ViewFolder1](docs/ViewFolder1.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization
