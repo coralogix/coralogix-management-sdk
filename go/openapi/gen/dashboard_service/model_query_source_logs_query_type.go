@@ -18,21 +18,21 @@ import (
 
 // QuerySourceLogsQueryType - struct for QuerySourceLogsQueryType
 type QuerySourceLogsQueryType struct {
-	TypeFieldName *TypeFieldName
-	TypeFieldValue *TypeFieldValue
+	QuerySourceLogsQueryTypeFieldName *QuerySourceLogsQueryTypeFieldName
+	QuerySourceLogsQueryTypeFieldValue *QuerySourceLogsQueryTypeFieldValue
 }
 
-// TypeFieldNameAsQuerySourceLogsQueryType is a convenience function that returns TypeFieldName wrapped in QuerySourceLogsQueryType
-func TypeFieldNameAsQuerySourceLogsQueryType(v *TypeFieldName) QuerySourceLogsQueryType {
+// QuerySourceLogsQueryTypeFieldNameAsQuerySourceLogsQueryType is a convenience function that returns QuerySourceLogsQueryTypeFieldName wrapped in QuerySourceLogsQueryType
+func QuerySourceLogsQueryTypeFieldNameAsQuerySourceLogsQueryType(v *QuerySourceLogsQueryTypeFieldName) QuerySourceLogsQueryType {
 	return QuerySourceLogsQueryType{
-		TypeFieldName: v,
+		QuerySourceLogsQueryTypeFieldName: v,
 	}
 }
 
-// TypeFieldValueAsQuerySourceLogsQueryType is a convenience function that returns TypeFieldValue wrapped in QuerySourceLogsQueryType
-func TypeFieldValueAsQuerySourceLogsQueryType(v *TypeFieldValue) QuerySourceLogsQueryType {
+// QuerySourceLogsQueryTypeFieldValueAsQuerySourceLogsQueryType is a convenience function that returns QuerySourceLogsQueryTypeFieldValue wrapped in QuerySourceLogsQueryType
+func QuerySourceLogsQueryTypeFieldValueAsQuerySourceLogsQueryType(v *QuerySourceLogsQueryTypeFieldValue) QuerySourceLogsQueryType {
 	return QuerySourceLogsQueryType{
-		TypeFieldValue: v,
+		QuerySourceLogsQueryTypeFieldValue: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func TypeFieldValueAsQuerySourceLogsQueryType(v *TypeFieldValue) QuerySourceLogs
 func (dst *QuerySourceLogsQueryType) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into TypeFieldName
-	err = newStrictDecoder(data).Decode(&dst.TypeFieldName)
+	// try to unmarshal data into QuerySourceLogsQueryTypeFieldName
+	err = newStrictDecoder(data).Decode(&dst.QuerySourceLogsQueryTypeFieldName)
 	if err == nil {
-		jsonTypeFieldName, _ := json.Marshal(dst.TypeFieldName)
-		if string(jsonTypeFieldName) == "{}" { // empty struct
-			dst.TypeFieldName = nil
+		jsonQuerySourceLogsQueryTypeFieldName, _ := json.Marshal(dst.QuerySourceLogsQueryTypeFieldName)
+		if string(jsonQuerySourceLogsQueryTypeFieldName) == "{}" { // empty struct
+			dst.QuerySourceLogsQueryTypeFieldName = nil
 		} else {
-			if err = validator.Validate(dst.TypeFieldName); err != nil {
-				dst.TypeFieldName = nil
+			if err = validator.Validate(dst.QuerySourceLogsQueryTypeFieldName); err != nil {
+				dst.QuerySourceLogsQueryTypeFieldName = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.TypeFieldName = nil
+		dst.QuerySourceLogsQueryTypeFieldName = nil
 	}
 
-	// try to unmarshal data into TypeFieldValue
-	err = newStrictDecoder(data).Decode(&dst.TypeFieldValue)
+	// try to unmarshal data into QuerySourceLogsQueryTypeFieldValue
+	err = newStrictDecoder(data).Decode(&dst.QuerySourceLogsQueryTypeFieldValue)
 	if err == nil {
-		jsonTypeFieldValue, _ := json.Marshal(dst.TypeFieldValue)
-		if string(jsonTypeFieldValue) == "{}" { // empty struct
-			dst.TypeFieldValue = nil
+		jsonQuerySourceLogsQueryTypeFieldValue, _ := json.Marshal(dst.QuerySourceLogsQueryTypeFieldValue)
+		if string(jsonQuerySourceLogsQueryTypeFieldValue) == "{}" { // empty struct
+			dst.QuerySourceLogsQueryTypeFieldValue = nil
 		} else {
-			if err = validator.Validate(dst.TypeFieldValue); err != nil {
-				dst.TypeFieldValue = nil
+			if err = validator.Validate(dst.QuerySourceLogsQueryTypeFieldValue); err != nil {
+				dst.QuerySourceLogsQueryTypeFieldValue = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.TypeFieldValue = nil
+		dst.QuerySourceLogsQueryTypeFieldValue = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.TypeFieldName = nil
-		dst.TypeFieldValue = nil
+		dst.QuerySourceLogsQueryTypeFieldName = nil
+		dst.QuerySourceLogsQueryTypeFieldValue = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(QuerySourceLogsQueryType)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *QuerySourceLogsQueryType) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src QuerySourceLogsQueryType) MarshalJSON() ([]byte, error) {
-	if src.TypeFieldName != nil {
-		return json.Marshal(&src.TypeFieldName)
+	if src.QuerySourceLogsQueryTypeFieldName != nil {
+		return json.Marshal(&src.QuerySourceLogsQueryTypeFieldName)
 	}
 
-	if src.TypeFieldValue != nil {
-		return json.Marshal(&src.TypeFieldValue)
+	if src.QuerySourceLogsQueryTypeFieldValue != nil {
+		return json.Marshal(&src.QuerySourceLogsQueryTypeFieldValue)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *QuerySourceLogsQueryType) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.TypeFieldName != nil {
-		return obj.TypeFieldName
+	if obj.QuerySourceLogsQueryTypeFieldName != nil {
+		return obj.QuerySourceLogsQueryTypeFieldName
 	}
 
-	if obj.TypeFieldValue != nil {
-		return obj.TypeFieldValue
+	if obj.QuerySourceLogsQueryTypeFieldValue != nil {
+		return obj.QuerySourceLogsQueryTypeFieldValue
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *QuerySourceLogsQueryType) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj QuerySourceLogsQueryType) GetActualInstanceValue() (interface{}) {
-	if obj.TypeFieldName != nil {
-		return *obj.TypeFieldName
+	if obj.QuerySourceLogsQueryTypeFieldName != nil {
+		return *obj.QuerySourceLogsQueryTypeFieldName
 	}
 
-	if obj.TypeFieldValue != nil {
-		return *obj.TypeFieldValue
+	if obj.QuerySourceLogsQueryTypeFieldValue != nil {
+		return *obj.QuerySourceLogsQueryTypeFieldValue
 	}
 
 	// all schemas are nil

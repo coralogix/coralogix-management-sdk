@@ -18,37 +18,37 @@ import (
 
 // HorizontalBarChartQuery - struct for HorizontalBarChartQuery
 type HorizontalBarChartQuery struct {
-	QueryDataprime *QueryDataprime
-	QueryLogs *QueryLogs
-	QueryMetrics *QueryMetrics
-	QuerySpans *QuerySpans
+	HorizontalBarChartQueryDataprime *HorizontalBarChartQueryDataprime
+	HorizontalBarChartQueryLogs *HorizontalBarChartQueryLogs
+	HorizontalBarChartQueryMetrics *HorizontalBarChartQueryMetrics
+	HorizontalBarChartQuerySpans *HorizontalBarChartQuerySpans
 }
 
-// QueryDataprimeAsHorizontalBarChartQuery is a convenience function that returns QueryDataprime wrapped in HorizontalBarChartQuery
-func QueryDataprimeAsHorizontalBarChartQuery(v *QueryDataprime) HorizontalBarChartQuery {
+// HorizontalBarChartQueryDataprimeAsHorizontalBarChartQuery is a convenience function that returns HorizontalBarChartQueryDataprime wrapped in HorizontalBarChartQuery
+func HorizontalBarChartQueryDataprimeAsHorizontalBarChartQuery(v *HorizontalBarChartQueryDataprime) HorizontalBarChartQuery {
 	return HorizontalBarChartQuery{
-		QueryDataprime: v,
+		HorizontalBarChartQueryDataprime: v,
 	}
 }
 
-// QueryLogsAsHorizontalBarChartQuery is a convenience function that returns QueryLogs wrapped in HorizontalBarChartQuery
-func QueryLogsAsHorizontalBarChartQuery(v *QueryLogs) HorizontalBarChartQuery {
+// HorizontalBarChartQueryLogsAsHorizontalBarChartQuery is a convenience function that returns HorizontalBarChartQueryLogs wrapped in HorizontalBarChartQuery
+func HorizontalBarChartQueryLogsAsHorizontalBarChartQuery(v *HorizontalBarChartQueryLogs) HorizontalBarChartQuery {
 	return HorizontalBarChartQuery{
-		QueryLogs: v,
+		HorizontalBarChartQueryLogs: v,
 	}
 }
 
-// QueryMetricsAsHorizontalBarChartQuery is a convenience function that returns QueryMetrics wrapped in HorizontalBarChartQuery
-func QueryMetricsAsHorizontalBarChartQuery(v *QueryMetrics) HorizontalBarChartQuery {
+// HorizontalBarChartQueryMetricsAsHorizontalBarChartQuery is a convenience function that returns HorizontalBarChartQueryMetrics wrapped in HorizontalBarChartQuery
+func HorizontalBarChartQueryMetricsAsHorizontalBarChartQuery(v *HorizontalBarChartQueryMetrics) HorizontalBarChartQuery {
 	return HorizontalBarChartQuery{
-		QueryMetrics: v,
+		HorizontalBarChartQueryMetrics: v,
 	}
 }
 
-// QuerySpansAsHorizontalBarChartQuery is a convenience function that returns QuerySpans wrapped in HorizontalBarChartQuery
-func QuerySpansAsHorizontalBarChartQuery(v *QuerySpans) HorizontalBarChartQuery {
+// HorizontalBarChartQuerySpansAsHorizontalBarChartQuery is a convenience function that returns HorizontalBarChartQuerySpans wrapped in HorizontalBarChartQuery
+func HorizontalBarChartQuerySpansAsHorizontalBarChartQuery(v *HorizontalBarChartQuerySpans) HorizontalBarChartQuery {
 	return HorizontalBarChartQuery{
-		QuerySpans: v,
+		HorizontalBarChartQuerySpans: v,
 	}
 }
 
@@ -57,80 +57,80 @@ func QuerySpansAsHorizontalBarChartQuery(v *QuerySpans) HorizontalBarChartQuery 
 func (dst *HorizontalBarChartQuery) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into QueryDataprime
-	err = newStrictDecoder(data).Decode(&dst.QueryDataprime)
+	// try to unmarshal data into HorizontalBarChartQueryDataprime
+	err = newStrictDecoder(data).Decode(&dst.HorizontalBarChartQueryDataprime)
 	if err == nil {
-		jsonQueryDataprime, _ := json.Marshal(dst.QueryDataprime)
-		if string(jsonQueryDataprime) == "{}" { // empty struct
-			dst.QueryDataprime = nil
+		jsonHorizontalBarChartQueryDataprime, _ := json.Marshal(dst.HorizontalBarChartQueryDataprime)
+		if string(jsonHorizontalBarChartQueryDataprime) == "{}" { // empty struct
+			dst.HorizontalBarChartQueryDataprime = nil
 		} else {
-			if err = validator.Validate(dst.QueryDataprime); err != nil {
-				dst.QueryDataprime = nil
+			if err = validator.Validate(dst.HorizontalBarChartQueryDataprime); err != nil {
+				dst.HorizontalBarChartQueryDataprime = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QueryDataprime = nil
+		dst.HorizontalBarChartQueryDataprime = nil
 	}
 
-	// try to unmarshal data into QueryLogs
-	err = newStrictDecoder(data).Decode(&dst.QueryLogs)
+	// try to unmarshal data into HorizontalBarChartQueryLogs
+	err = newStrictDecoder(data).Decode(&dst.HorizontalBarChartQueryLogs)
 	if err == nil {
-		jsonQueryLogs, _ := json.Marshal(dst.QueryLogs)
-		if string(jsonQueryLogs) == "{}" { // empty struct
-			dst.QueryLogs = nil
+		jsonHorizontalBarChartQueryLogs, _ := json.Marshal(dst.HorizontalBarChartQueryLogs)
+		if string(jsonHorizontalBarChartQueryLogs) == "{}" { // empty struct
+			dst.HorizontalBarChartQueryLogs = nil
 		} else {
-			if err = validator.Validate(dst.QueryLogs); err != nil {
-				dst.QueryLogs = nil
+			if err = validator.Validate(dst.HorizontalBarChartQueryLogs); err != nil {
+				dst.HorizontalBarChartQueryLogs = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QueryLogs = nil
+		dst.HorizontalBarChartQueryLogs = nil
 	}
 
-	// try to unmarshal data into QueryMetrics
-	err = newStrictDecoder(data).Decode(&dst.QueryMetrics)
+	// try to unmarshal data into HorizontalBarChartQueryMetrics
+	err = newStrictDecoder(data).Decode(&dst.HorizontalBarChartQueryMetrics)
 	if err == nil {
-		jsonQueryMetrics, _ := json.Marshal(dst.QueryMetrics)
-		if string(jsonQueryMetrics) == "{}" { // empty struct
-			dst.QueryMetrics = nil
+		jsonHorizontalBarChartQueryMetrics, _ := json.Marshal(dst.HorizontalBarChartQueryMetrics)
+		if string(jsonHorizontalBarChartQueryMetrics) == "{}" { // empty struct
+			dst.HorizontalBarChartQueryMetrics = nil
 		} else {
-			if err = validator.Validate(dst.QueryMetrics); err != nil {
-				dst.QueryMetrics = nil
+			if err = validator.Validate(dst.HorizontalBarChartQueryMetrics); err != nil {
+				dst.HorizontalBarChartQueryMetrics = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QueryMetrics = nil
+		dst.HorizontalBarChartQueryMetrics = nil
 	}
 
-	// try to unmarshal data into QuerySpans
-	err = newStrictDecoder(data).Decode(&dst.QuerySpans)
+	// try to unmarshal data into HorizontalBarChartQuerySpans
+	err = newStrictDecoder(data).Decode(&dst.HorizontalBarChartQuerySpans)
 	if err == nil {
-		jsonQuerySpans, _ := json.Marshal(dst.QuerySpans)
-		if string(jsonQuerySpans) == "{}" { // empty struct
-			dst.QuerySpans = nil
+		jsonHorizontalBarChartQuerySpans, _ := json.Marshal(dst.HorizontalBarChartQuerySpans)
+		if string(jsonHorizontalBarChartQuerySpans) == "{}" { // empty struct
+			dst.HorizontalBarChartQuerySpans = nil
 		} else {
-			if err = validator.Validate(dst.QuerySpans); err != nil {
-				dst.QuerySpans = nil
+			if err = validator.Validate(dst.HorizontalBarChartQuerySpans); err != nil {
+				dst.HorizontalBarChartQuerySpans = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QuerySpans = nil
+		dst.HorizontalBarChartQuerySpans = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.QueryDataprime = nil
-		dst.QueryLogs = nil
-		dst.QueryMetrics = nil
-		dst.QuerySpans = nil
+		dst.HorizontalBarChartQueryDataprime = nil
+		dst.HorizontalBarChartQueryLogs = nil
+		dst.HorizontalBarChartQueryMetrics = nil
+		dst.HorizontalBarChartQuerySpans = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(HorizontalBarChartQuery)")
 	} else if match == 1 {
@@ -142,20 +142,20 @@ func (dst *HorizontalBarChartQuery) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src HorizontalBarChartQuery) MarshalJSON() ([]byte, error) {
-	if src.QueryDataprime != nil {
-		return json.Marshal(&src.QueryDataprime)
+	if src.HorizontalBarChartQueryDataprime != nil {
+		return json.Marshal(&src.HorizontalBarChartQueryDataprime)
 	}
 
-	if src.QueryLogs != nil {
-		return json.Marshal(&src.QueryLogs)
+	if src.HorizontalBarChartQueryLogs != nil {
+		return json.Marshal(&src.HorizontalBarChartQueryLogs)
 	}
 
-	if src.QueryMetrics != nil {
-		return json.Marshal(&src.QueryMetrics)
+	if src.HorizontalBarChartQueryMetrics != nil {
+		return json.Marshal(&src.HorizontalBarChartQueryMetrics)
 	}
 
-	if src.QuerySpans != nil {
-		return json.Marshal(&src.QuerySpans)
+	if src.HorizontalBarChartQuerySpans != nil {
+		return json.Marshal(&src.HorizontalBarChartQuerySpans)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -166,20 +166,20 @@ func (obj *HorizontalBarChartQuery) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.QueryDataprime != nil {
-		return obj.QueryDataprime
+	if obj.HorizontalBarChartQueryDataprime != nil {
+		return obj.HorizontalBarChartQueryDataprime
 	}
 
-	if obj.QueryLogs != nil {
-		return obj.QueryLogs
+	if obj.HorizontalBarChartQueryLogs != nil {
+		return obj.HorizontalBarChartQueryLogs
 	}
 
-	if obj.QueryMetrics != nil {
-		return obj.QueryMetrics
+	if obj.HorizontalBarChartQueryMetrics != nil {
+		return obj.HorizontalBarChartQueryMetrics
 	}
 
-	if obj.QuerySpans != nil {
-		return obj.QuerySpans
+	if obj.HorizontalBarChartQuerySpans != nil {
+		return obj.HorizontalBarChartQuerySpans
 	}
 
 	// all schemas are nil
@@ -188,20 +188,20 @@ func (obj *HorizontalBarChartQuery) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj HorizontalBarChartQuery) GetActualInstanceValue() (interface{}) {
-	if obj.QueryDataprime != nil {
-		return *obj.QueryDataprime
+	if obj.HorizontalBarChartQueryDataprime != nil {
+		return *obj.HorizontalBarChartQueryDataprime
 	}
 
-	if obj.QueryLogs != nil {
-		return *obj.QueryLogs
+	if obj.HorizontalBarChartQueryLogs != nil {
+		return *obj.HorizontalBarChartQueryLogs
 	}
 
-	if obj.QueryMetrics != nil {
-		return *obj.QueryMetrics
+	if obj.HorizontalBarChartQueryMetrics != nil {
+		return *obj.HorizontalBarChartQueryMetrics
 	}
 
-	if obj.QuerySpans != nil {
-		return *obj.QuerySpans
+	if obj.HorizontalBarChartQuerySpans != nil {
+		return *obj.HorizontalBarChartQuerySpans
 	}
 
 	// all schemas are nil

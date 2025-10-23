@@ -107,8 +107,6 @@ Class | Method | HTTP request | Description
  - [UpdateScopeResponse](docs/UpdateScopeResponse.md)
  - [V1EntityType](docs/V1EntityType.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

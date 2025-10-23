@@ -104,8 +104,6 @@ model_list_incident_events_response.go
 model_list_incident_events_total_count_response.go
 model_list_incidents_response.go
 model_multiple_values.go
-model_order_by_contextual_label.go
-model_order_by_incident_field.go
 model_originator_type.go
 model_pagination_request.go
 model_resolve_incident_by_event_id_response.go
@@ -115,10 +113,10 @@ model_upsert_incident_state_payload.go
 model_upsert_incident_state_type.go
 model_user_details.go
 model_v1_filter_operator.go
+model_v1_order_by_contextual_label.go
 model_v1_order_by_direction.go
+model_v1_order_by_incident_field.go
 model_v1_pagination_response.go
 model_v3_filter_operator.go
-model_y_axis_view_by_category.go
-model_y_axis_view_by_value.go
 response.go
 utils.go

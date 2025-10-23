@@ -18,37 +18,37 @@ import (
 
 // HexagonQuery - struct for HexagonQuery
 type HexagonQuery struct {
-	QueryDataprime *QueryDataprime
-	QueryLogs *QueryLogs
-	QueryMetrics *QueryMetrics
-	QuerySpans *QuerySpans
+	HexagonQueryDataprime *HexagonQueryDataprime
+	HexagonQueryLogs *HexagonQueryLogs
+	HexagonQueryMetrics *HexagonQueryMetrics
+	HexagonQuerySpans *HexagonQuerySpans
 }
 
-// QueryDataprimeAsHexagonQuery is a convenience function that returns QueryDataprime wrapped in HexagonQuery
-func QueryDataprimeAsHexagonQuery(v *QueryDataprime) HexagonQuery {
+// HexagonQueryDataprimeAsHexagonQuery is a convenience function that returns HexagonQueryDataprime wrapped in HexagonQuery
+func HexagonQueryDataprimeAsHexagonQuery(v *HexagonQueryDataprime) HexagonQuery {
 	return HexagonQuery{
-		QueryDataprime: v,
+		HexagonQueryDataprime: v,
 	}
 }
 
-// QueryLogsAsHexagonQuery is a convenience function that returns QueryLogs wrapped in HexagonQuery
-func QueryLogsAsHexagonQuery(v *QueryLogs) HexagonQuery {
+// HexagonQueryLogsAsHexagonQuery is a convenience function that returns HexagonQueryLogs wrapped in HexagonQuery
+func HexagonQueryLogsAsHexagonQuery(v *HexagonQueryLogs) HexagonQuery {
 	return HexagonQuery{
-		QueryLogs: v,
+		HexagonQueryLogs: v,
 	}
 }
 
-// QueryMetricsAsHexagonQuery is a convenience function that returns QueryMetrics wrapped in HexagonQuery
-func QueryMetricsAsHexagonQuery(v *QueryMetrics) HexagonQuery {
+// HexagonQueryMetricsAsHexagonQuery is a convenience function that returns HexagonQueryMetrics wrapped in HexagonQuery
+func HexagonQueryMetricsAsHexagonQuery(v *HexagonQueryMetrics) HexagonQuery {
 	return HexagonQuery{
-		QueryMetrics: v,
+		HexagonQueryMetrics: v,
 	}
 }
 
-// QuerySpansAsHexagonQuery is a convenience function that returns QuerySpans wrapped in HexagonQuery
-func QuerySpansAsHexagonQuery(v *QuerySpans) HexagonQuery {
+// HexagonQuerySpansAsHexagonQuery is a convenience function that returns HexagonQuerySpans wrapped in HexagonQuery
+func HexagonQuerySpansAsHexagonQuery(v *HexagonQuerySpans) HexagonQuery {
 	return HexagonQuery{
-		QuerySpans: v,
+		HexagonQuerySpans: v,
 	}
 }
 
@@ -57,80 +57,80 @@ func QuerySpansAsHexagonQuery(v *QuerySpans) HexagonQuery {
 func (dst *HexagonQuery) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into QueryDataprime
-	err = newStrictDecoder(data).Decode(&dst.QueryDataprime)
+	// try to unmarshal data into HexagonQueryDataprime
+	err = newStrictDecoder(data).Decode(&dst.HexagonQueryDataprime)
 	if err == nil {
-		jsonQueryDataprime, _ := json.Marshal(dst.QueryDataprime)
-		if string(jsonQueryDataprime) == "{}" { // empty struct
-			dst.QueryDataprime = nil
+		jsonHexagonQueryDataprime, _ := json.Marshal(dst.HexagonQueryDataprime)
+		if string(jsonHexagonQueryDataprime) == "{}" { // empty struct
+			dst.HexagonQueryDataprime = nil
 		} else {
-			if err = validator.Validate(dst.QueryDataprime); err != nil {
-				dst.QueryDataprime = nil
+			if err = validator.Validate(dst.HexagonQueryDataprime); err != nil {
+				dst.HexagonQueryDataprime = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QueryDataprime = nil
+		dst.HexagonQueryDataprime = nil
 	}
 
-	// try to unmarshal data into QueryLogs
-	err = newStrictDecoder(data).Decode(&dst.QueryLogs)
+	// try to unmarshal data into HexagonQueryLogs
+	err = newStrictDecoder(data).Decode(&dst.HexagonQueryLogs)
 	if err == nil {
-		jsonQueryLogs, _ := json.Marshal(dst.QueryLogs)
-		if string(jsonQueryLogs) == "{}" { // empty struct
-			dst.QueryLogs = nil
+		jsonHexagonQueryLogs, _ := json.Marshal(dst.HexagonQueryLogs)
+		if string(jsonHexagonQueryLogs) == "{}" { // empty struct
+			dst.HexagonQueryLogs = nil
 		} else {
-			if err = validator.Validate(dst.QueryLogs); err != nil {
-				dst.QueryLogs = nil
+			if err = validator.Validate(dst.HexagonQueryLogs); err != nil {
+				dst.HexagonQueryLogs = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QueryLogs = nil
+		dst.HexagonQueryLogs = nil
 	}
 
-	// try to unmarshal data into QueryMetrics
-	err = newStrictDecoder(data).Decode(&dst.QueryMetrics)
+	// try to unmarshal data into HexagonQueryMetrics
+	err = newStrictDecoder(data).Decode(&dst.HexagonQueryMetrics)
 	if err == nil {
-		jsonQueryMetrics, _ := json.Marshal(dst.QueryMetrics)
-		if string(jsonQueryMetrics) == "{}" { // empty struct
-			dst.QueryMetrics = nil
+		jsonHexagonQueryMetrics, _ := json.Marshal(dst.HexagonQueryMetrics)
+		if string(jsonHexagonQueryMetrics) == "{}" { // empty struct
+			dst.HexagonQueryMetrics = nil
 		} else {
-			if err = validator.Validate(dst.QueryMetrics); err != nil {
-				dst.QueryMetrics = nil
+			if err = validator.Validate(dst.HexagonQueryMetrics); err != nil {
+				dst.HexagonQueryMetrics = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QueryMetrics = nil
+		dst.HexagonQueryMetrics = nil
 	}
 
-	// try to unmarshal data into QuerySpans
-	err = newStrictDecoder(data).Decode(&dst.QuerySpans)
+	// try to unmarshal data into HexagonQuerySpans
+	err = newStrictDecoder(data).Decode(&dst.HexagonQuerySpans)
 	if err == nil {
-		jsonQuerySpans, _ := json.Marshal(dst.QuerySpans)
-		if string(jsonQuerySpans) == "{}" { // empty struct
-			dst.QuerySpans = nil
+		jsonHexagonQuerySpans, _ := json.Marshal(dst.HexagonQuerySpans)
+		if string(jsonHexagonQuerySpans) == "{}" { // empty struct
+			dst.HexagonQuerySpans = nil
 		} else {
-			if err = validator.Validate(dst.QuerySpans); err != nil {
-				dst.QuerySpans = nil
+			if err = validator.Validate(dst.HexagonQuerySpans); err != nil {
+				dst.HexagonQuerySpans = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QuerySpans = nil
+		dst.HexagonQuerySpans = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.QueryDataprime = nil
-		dst.QueryLogs = nil
-		dst.QueryMetrics = nil
-		dst.QuerySpans = nil
+		dst.HexagonQueryDataprime = nil
+		dst.HexagonQueryLogs = nil
+		dst.HexagonQueryMetrics = nil
+		dst.HexagonQuerySpans = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(HexagonQuery)")
 	} else if match == 1 {
@@ -142,20 +142,20 @@ func (dst *HexagonQuery) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src HexagonQuery) MarshalJSON() ([]byte, error) {
-	if src.QueryDataprime != nil {
-		return json.Marshal(&src.QueryDataprime)
+	if src.HexagonQueryDataprime != nil {
+		return json.Marshal(&src.HexagonQueryDataprime)
 	}
 
-	if src.QueryLogs != nil {
-		return json.Marshal(&src.QueryLogs)
+	if src.HexagonQueryLogs != nil {
+		return json.Marshal(&src.HexagonQueryLogs)
 	}
 
-	if src.QueryMetrics != nil {
-		return json.Marshal(&src.QueryMetrics)
+	if src.HexagonQueryMetrics != nil {
+		return json.Marshal(&src.HexagonQueryMetrics)
 	}
 
-	if src.QuerySpans != nil {
-		return json.Marshal(&src.QuerySpans)
+	if src.HexagonQuerySpans != nil {
+		return json.Marshal(&src.HexagonQuerySpans)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -166,20 +166,20 @@ func (obj *HexagonQuery) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.QueryDataprime != nil {
-		return obj.QueryDataprime
+	if obj.HexagonQueryDataprime != nil {
+		return obj.HexagonQueryDataprime
 	}
 
-	if obj.QueryLogs != nil {
-		return obj.QueryLogs
+	if obj.HexagonQueryLogs != nil {
+		return obj.HexagonQueryLogs
 	}
 
-	if obj.QueryMetrics != nil {
-		return obj.QueryMetrics
+	if obj.HexagonQueryMetrics != nil {
+		return obj.HexagonQueryMetrics
 	}
 
-	if obj.QuerySpans != nil {
-		return obj.QuerySpans
+	if obj.HexagonQuerySpans != nil {
+		return obj.HexagonQuerySpans
 	}
 
 	// all schemas are nil
@@ -188,20 +188,20 @@ func (obj *HexagonQuery) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj HexagonQuery) GetActualInstanceValue() (interface{}) {
-	if obj.QueryDataprime != nil {
-		return *obj.QueryDataprime
+	if obj.HexagonQueryDataprime != nil {
+		return *obj.HexagonQueryDataprime
 	}
 
-	if obj.QueryLogs != nil {
-		return *obj.QueryLogs
+	if obj.HexagonQueryLogs != nil {
+		return *obj.HexagonQueryLogs
 	}
 
-	if obj.QueryMetrics != nil {
-		return *obj.QueryMetrics
+	if obj.HexagonQueryMetrics != nil {
+		return *obj.HexagonQueryMetrics
 	}
 
-	if obj.QuerySpans != nil {
-		return *obj.QuerySpans
+	if obj.HexagonQuerySpans != nil {
+		return *obj.HexagonQuerySpans
 	}
 
 	// all schemas are nil

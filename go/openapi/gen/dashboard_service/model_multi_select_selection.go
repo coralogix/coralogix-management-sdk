@@ -18,21 +18,21 @@ import (
 
 // MultiSelectSelection - struct for MultiSelectSelection
 type MultiSelectSelection struct {
-	SelectionAll *SelectionAll
-	SelectionList *SelectionList
+	MultiSelectSelectionAll *MultiSelectSelectionAll
+	MultiSelectSelectionList *MultiSelectSelectionList
 }
 
-// SelectionAllAsMultiSelectSelection is a convenience function that returns SelectionAll wrapped in MultiSelectSelection
-func SelectionAllAsMultiSelectSelection(v *SelectionAll) MultiSelectSelection {
+// MultiSelectSelectionAllAsMultiSelectSelection is a convenience function that returns MultiSelectSelectionAll wrapped in MultiSelectSelection
+func MultiSelectSelectionAllAsMultiSelectSelection(v *MultiSelectSelectionAll) MultiSelectSelection {
 	return MultiSelectSelection{
-		SelectionAll: v,
+		MultiSelectSelectionAll: v,
 	}
 }
 
-// SelectionListAsMultiSelectSelection is a convenience function that returns SelectionList wrapped in MultiSelectSelection
-func SelectionListAsMultiSelectSelection(v *SelectionList) MultiSelectSelection {
+// MultiSelectSelectionListAsMultiSelectSelection is a convenience function that returns MultiSelectSelectionList wrapped in MultiSelectSelection
+func MultiSelectSelectionListAsMultiSelectSelection(v *MultiSelectSelectionList) MultiSelectSelection {
 	return MultiSelectSelection{
-		SelectionList: v,
+		MultiSelectSelectionList: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func SelectionListAsMultiSelectSelection(v *SelectionList) MultiSelectSelection 
 func (dst *MultiSelectSelection) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into SelectionAll
-	err = newStrictDecoder(data).Decode(&dst.SelectionAll)
+	// try to unmarshal data into MultiSelectSelectionAll
+	err = newStrictDecoder(data).Decode(&dst.MultiSelectSelectionAll)
 	if err == nil {
-		jsonSelectionAll, _ := json.Marshal(dst.SelectionAll)
-		if string(jsonSelectionAll) == "{}" { // empty struct
-			dst.SelectionAll = nil
+		jsonMultiSelectSelectionAll, _ := json.Marshal(dst.MultiSelectSelectionAll)
+		if string(jsonMultiSelectSelectionAll) == "{}" { // empty struct
+			dst.MultiSelectSelectionAll = nil
 		} else {
-			if err = validator.Validate(dst.SelectionAll); err != nil {
-				dst.SelectionAll = nil
+			if err = validator.Validate(dst.MultiSelectSelectionAll); err != nil {
+				dst.MultiSelectSelectionAll = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SelectionAll = nil
+		dst.MultiSelectSelectionAll = nil
 	}
 
-	// try to unmarshal data into SelectionList
-	err = newStrictDecoder(data).Decode(&dst.SelectionList)
+	// try to unmarshal data into MultiSelectSelectionList
+	err = newStrictDecoder(data).Decode(&dst.MultiSelectSelectionList)
 	if err == nil {
-		jsonSelectionList, _ := json.Marshal(dst.SelectionList)
-		if string(jsonSelectionList) == "{}" { // empty struct
-			dst.SelectionList = nil
+		jsonMultiSelectSelectionList, _ := json.Marshal(dst.MultiSelectSelectionList)
+		if string(jsonMultiSelectSelectionList) == "{}" { // empty struct
+			dst.MultiSelectSelectionList = nil
 		} else {
-			if err = validator.Validate(dst.SelectionList); err != nil {
-				dst.SelectionList = nil
+			if err = validator.Validate(dst.MultiSelectSelectionList); err != nil {
+				dst.MultiSelectSelectionList = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SelectionList = nil
+		dst.MultiSelectSelectionList = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.SelectionAll = nil
-		dst.SelectionList = nil
+		dst.MultiSelectSelectionAll = nil
+		dst.MultiSelectSelectionList = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(MultiSelectSelection)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *MultiSelectSelection) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src MultiSelectSelection) MarshalJSON() ([]byte, error) {
-	if src.SelectionAll != nil {
-		return json.Marshal(&src.SelectionAll)
+	if src.MultiSelectSelectionAll != nil {
+		return json.Marshal(&src.MultiSelectSelectionAll)
 	}
 
-	if src.SelectionList != nil {
-		return json.Marshal(&src.SelectionList)
+	if src.MultiSelectSelectionList != nil {
+		return json.Marshal(&src.MultiSelectSelectionList)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *MultiSelectSelection) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.SelectionAll != nil {
-		return obj.SelectionAll
+	if obj.MultiSelectSelectionAll != nil {
+		return obj.MultiSelectSelectionAll
 	}
 
-	if obj.SelectionList != nil {
-		return obj.SelectionList
+	if obj.MultiSelectSelectionList != nil {
+		return obj.MultiSelectSelectionList
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *MultiSelectSelection) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj MultiSelectSelection) GetActualInstanceValue() (interface{}) {
-	if obj.SelectionAll != nil {
-		return *obj.SelectionAll
+	if obj.MultiSelectSelectionAll != nil {
+		return *obj.MultiSelectSelectionAll
 	}
 
-	if obj.SelectionList != nil {
-		return *obj.SelectionList
+	if obj.MultiSelectSelectionList != nil {
+		return *obj.MultiSelectSelectionList
 	}
 
 	// all schemas are nil

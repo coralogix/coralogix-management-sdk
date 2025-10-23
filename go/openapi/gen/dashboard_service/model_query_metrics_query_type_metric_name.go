@@ -19,7 +19,7 @@ var _ MappedNullable = &QueryMetricsQueryTypeMetricName{}
 
 // QueryMetricsQueryTypeMetricName struct for QueryMetricsQueryTypeMetricName
 type QueryMetricsQueryTypeMetricName struct {
-	MetricRegex *string `json:"metricRegex,omitempty"`
+	MetricName *QueryMetricsQueryTypeMetricName `json:"metricName,omitempty"`
 }
 
 // NewQueryMetricsQueryTypeMetricName instantiates a new QueryMetricsQueryTypeMetricName object
@@ -39,36 +39,36 @@ func NewQueryMetricsQueryTypeMetricNameWithDefaults() *QueryMetricsQueryTypeMetr
 	return &this
 }
 
-// GetMetricRegex returns the MetricRegex field value if set, zero value otherwise.
-func (o *QueryMetricsQueryTypeMetricName) GetMetricRegex() string {
-	if o == nil || IsNil(o.MetricRegex) {
-		var ret string
+// GetMetricName returns the MetricName field value if set, zero value otherwise.
+func (o *QueryMetricsQueryTypeMetricName) GetMetricName() QueryMetricsQueryTypeMetricName {
+	if o == nil || IsNil(o.MetricName) {
+		var ret QueryMetricsQueryTypeMetricName
 		return ret
 	}
-	return *o.MetricRegex
+	return *o.MetricName
 }
 
-// GetMetricRegexOk returns a tuple with the MetricRegex field value if set, nil otherwise
+// GetMetricNameOk returns a tuple with the MetricName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QueryMetricsQueryTypeMetricName) GetMetricRegexOk() (*string, bool) {
-	if o == nil || IsNil(o.MetricRegex) {
+func (o *QueryMetricsQueryTypeMetricName) GetMetricNameOk() (*QueryMetricsQueryTypeMetricName, bool) {
+	if o == nil || IsNil(o.MetricName) {
 		return nil, false
 	}
-	return o.MetricRegex, true
+	return o.MetricName, true
 }
 
-// HasMetricRegex returns a boolean if a field has been set.
-func (o *QueryMetricsQueryTypeMetricName) HasMetricRegex() bool {
-	if o != nil && !IsNil(o.MetricRegex) {
+// HasMetricName returns a boolean if a field has been set.
+func (o *QueryMetricsQueryTypeMetricName) HasMetricName() bool {
+	if o != nil && !IsNil(o.MetricName) {
 		return true
 	}
 
 	return false
 }
 
-// SetMetricRegex gets a reference to the given string and assigns it to the MetricRegex field.
-func (o *QueryMetricsQueryTypeMetricName) SetMetricRegex(v string) {
-	o.MetricRegex = &v
+// SetMetricName gets a reference to the given QueryMetricsQueryTypeMetricName and assigns it to the MetricName field.
+func (o *QueryMetricsQueryTypeMetricName) SetMetricName(v QueryMetricsQueryTypeMetricName) {
+	o.MetricName = &v
 }
 
 func (o QueryMetricsQueryTypeMetricName) MarshalJSON() ([]byte, error) {
@@ -81,8 +81,8 @@ func (o QueryMetricsQueryTypeMetricName) MarshalJSON() ([]byte, error) {
 
 func (o QueryMetricsQueryTypeMetricName) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MetricRegex) {
-		toSerialize["metricRegex"] = o.MetricRegex
+	if !IsNil(o.MetricName) {
+		toSerialize["metricName"] = o.MetricName
 	}
 	return toSerialize, nil
 }

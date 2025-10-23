@@ -8,8 +8,6 @@ client.go
 configuration.go
 git_push.sh
 model_agg_type.go
-model_aggregation_histogram.go
-model_aggregation_samples.go
 model_atomic_batch_execute_e2_m_response.go
 model_colors_by_aggregation.go
 model_colors_by_group_by.go
@@ -61,11 +59,11 @@ model_sample_type.go
 model_spans_query.go
 model_spans_query_1.go
 model_v2_aggregation.go
+model_v2_aggregation_histogram.go
+model_v2_aggregation_samples.go
 model_v2_logs_query.go
 model_v2_metric_field.go
 model_v2_spans_query.go
 model_v3_filter_operator.go
-model_y_axis_view_by_category.go
-model_y_axis_view_by_value.go
 response.go
 utils.go

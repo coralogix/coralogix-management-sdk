@@ -19,7 +19,7 @@ var _ MappedNullable = &QueryLogsQuery{}
 
 // QueryLogsQuery struct for QueryLogsQuery
 type QueryLogsQuery struct {
-	LogsQuery *QueryLogsQuery `json:"logsQuery,omitempty"`
+	Type *QueryLogsQueryType `json:"type,omitempty"`
 }
 
 // NewQueryLogsQuery instantiates a new QueryLogsQuery object
@@ -39,36 +39,36 @@ func NewQueryLogsQueryWithDefaults() *QueryLogsQuery {
 	return &this
 }
 
-// GetLogsQuery returns the LogsQuery field value if set, zero value otherwise.
-func (o *QueryLogsQuery) GetLogsQuery() QueryLogsQuery {
-	if o == nil || IsNil(o.LogsQuery) {
-		var ret QueryLogsQuery
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *QueryLogsQuery) GetType() QueryLogsQueryType {
+	if o == nil || IsNil(o.Type) {
+		var ret QueryLogsQueryType
 		return ret
 	}
-	return *o.LogsQuery
+	return *o.Type
 }
 
-// GetLogsQueryOk returns a tuple with the LogsQuery field value if set, nil otherwise
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QueryLogsQuery) GetLogsQueryOk() (*QueryLogsQuery, bool) {
-	if o == nil || IsNil(o.LogsQuery) {
+func (o *QueryLogsQuery) GetTypeOk() (*QueryLogsQueryType, bool) {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
-	return o.LogsQuery, true
+	return o.Type, true
 }
 
-// HasLogsQuery returns a boolean if a field has been set.
-func (o *QueryLogsQuery) HasLogsQuery() bool {
-	if o != nil && !IsNil(o.LogsQuery) {
+// HasType returns a boolean if a field has been set.
+func (o *QueryLogsQuery) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
 	return false
 }
 
-// SetLogsQuery gets a reference to the given QueryLogsQuery and assigns it to the LogsQuery field.
-func (o *QueryLogsQuery) SetLogsQuery(v QueryLogsQuery) {
-	o.LogsQuery = &v
+// SetType gets a reference to the given QueryLogsQueryType and assigns it to the Type field.
+func (o *QueryLogsQuery) SetType(v QueryLogsQueryType) {
+	o.Type = &v
 }
 
 func (o QueryLogsQuery) MarshalJSON() ([]byte, error) {
@@ -81,8 +81,8 @@ func (o QueryLogsQuery) MarshalJSON() ([]byte, error) {
 
 func (o QueryLogsQuery) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.LogsQuery) {
-		toSerialize["logsQuery"] = o.LogsQuery
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
 	}
 	return toSerialize, nil
 }

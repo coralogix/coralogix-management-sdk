@@ -106,8 +106,6 @@ Class | Method | HTTP request | Description
  - [ReplaceCompanyIPAccessSettingsRequest](docs/ReplaceCompanyIPAccessSettingsRequest.md)
  - [ReplaceCompanyIpAccessSettingsResponse](docs/ReplaceCompanyIpAccessSettingsResponse.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

@@ -97,8 +97,6 @@ Class | Method | HTTP request | Description
  - [ColorsByGroupBy](docs/ColorsByGroupBy.md)
  - [ColorsByStack](docs/ColorsByStack.md)
  - [CommonGroup](docs/CommonGroup.md)
- - [ConditionTypeMatchEntityType](docs/ConditionTypeMatchEntityType.md)
- - [ConditionTypeMatchEntityTypeAndSubType](docs/ConditionTypeMatchEntityTypeAndSubType.md)
  - [ConfigOverrides](docs/ConfigOverrides.md)
  - [ConnectorType](docs/ConnectorType.md)
  - [CreateCustomPresetResponse](docs/CreateCustomPresetResponse.md)
@@ -116,6 +114,8 @@ Class | Method | HTTP request | Description
  - [MessageConfig](docs/MessageConfig.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [NotificationCenterConditionType](docs/NotificationCenterConditionType.md)
+ - [NotificationCenterConditionTypeMatchEntityType](docs/NotificationCenterConditionTypeMatchEntityType.md)
+ - [NotificationCenterConditionTypeMatchEntityTypeAndSubType](docs/NotificationCenterConditionTypeMatchEntityTypeAndSubType.md)
  - [NotificationCenterEntityType](docs/NotificationCenterEntityType.md)
  - [NotificationCenterMessageConfigField](docs/NotificationCenterMessageConfigField.md)
  - [Preset](docs/Preset.md)
@@ -124,8 +124,6 @@ Class | Method | HTTP request | Description
  - [PresetType](docs/PresetType.md)
  - [ReplaceCustomPresetResponse](docs/ReplaceCustomPresetResponse.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

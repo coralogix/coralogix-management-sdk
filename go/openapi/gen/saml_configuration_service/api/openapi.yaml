@@ -563,18 +563,6 @@ components:
       type: object
     SetIDPParametersResponse:
       type: object
-    YAxisViewByCategory:
-      additionalProperties: false
-      properties:
-        category:
-          $ref: "#/components/schemas/YAxisViewByCategory"
-      type: object
-    YAxisViewByValue:
-      additionalProperties: false
-      properties:
-        value:
-          $ref: "#/components/schemas/YAxisViewByValue"
-      type: object
     common.Group:
       properties:
         field:

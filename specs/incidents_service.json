@@ -160,10 +160,10 @@
               "items": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/OrderByContextualLabel"
+                    "$ref": "#/components/schemas/V1OrderByIncidentField"
                   },
                   {
-                    "$ref": "#/components/schemas/OrderByIncidentField"
+                    "$ref": "#/components/schemas/V1OrderByContextualLabel"
                   }
                 ]
               }
@@ -424,10 +424,10 @@
               "items": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GroupByContextualLabel"
+                    "$ref": "#/components/schemas/GroupByIncidentField"
                   },
                   {
-                    "$ref": "#/components/schemas/GroupByIncidentField"
+                    "$ref": "#/components/schemas/GroupByContextualLabel"
                   }
                 ]
               }
@@ -2525,25 +2525,16 @@
       "IncidentEvent": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IncidentEventUnassignOperationalEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventCloseAdministrativeEvent"
-          },
-          {
             "$ref": "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
           },
           {
+            "$ref": "#/components/schemas/IncidentEventAssignmentOperationalEvent"
+          },
+          {
             "$ref": "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventUnassignOperationalEvent"
           },
           {
             "$ref": "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
@@ -2558,7 +2549,16 @@
             "$ref": "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
           },
           {
-            "$ref": "#/components/schemas/IncidentEventAssignmentOperationalEvent"
+            "$ref": "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventCloseAdministrativeEvent"
           }
         ]
       },
@@ -3166,37 +3166,37 @@
       "IncidentFieldOneOf": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/IncidentFieldOneOfSeverity"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfCreatedAt"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfState"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfApplicationName"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfName"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfClosedAt"
+          },
+          {
             "$ref": "#/components/schemas/IncidentFieldOneOfStatus"
           },
           {
             "$ref": "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
           },
           {
-            "$ref": "#/components/schemas/IncidentFieldOneOfApplicationName"
+            "$ref": "#/components/schemas/IncidentFieldOneOfSubsystemName"
           },
           {
             "$ref": "#/components/schemas/IncidentFieldOneOfDuration"
           },
           {
-            "$ref": "#/components/schemas/IncidentFieldOneOfClosedAt"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfState"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfSubsystemName"
-          },
-          {
             "$ref": "#/components/schemas/IncidentFieldOneOfId"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfSeverity"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfName"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfCreatedAt"
           }
         ]
       },
@@ -3695,46 +3695,6 @@
           }
         }
       },
-      "OrderByContextualLabel": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Incident order by",
-        "type": "object",
-        "properties": {
-          "contextualLabel": {
-            "type": "string"
-          },
-          "direction": {
-            "$ref": "#/components/schemas/v1.OrderByDirection"
-          }
-        },
-        "required": [
-          "field",
-          "direction"
-        ],
-        "additionalProperties": false
-      },
-      "OrderByIncidentField": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Incident order by",
-        "type": "object",
-        "properties": {
-          "direction": {
-            "$ref": "#/components/schemas/v1.OrderByDirection"
-          },
-          "incidentField": {
-            "$ref": "#/components/schemas/IncidentFields"
-          }
-        },
-        "required": [
-          "field",
-          "direction"
-        ],
-        "additionalProperties": false
-      },
       "OriginatorType": {
         "type": "string",
         "enum": [
@@ -3829,22 +3789,44 @@
           "userId"
         ]
       },
-      "YAxisViewByCategory": {
+      "V1OrderByContextualLabel": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Incident order by",
         "type": "object",
         "properties": {
-          "category": {
-            "$ref": "#/components/schemas/YAxisViewByCategory"
+          "contextualLabel": {
+            "type": "string"
+          },
+          "direction": {
+            "$ref": "#/components/schemas/v1.OrderByDirection"
           }
         },
+        "required": [
+          "field",
+          "direction"
+        ],
         "additionalProperties": false
       },
-      "YAxisViewByValue": {
+      "V1OrderByIncidentField": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Incident order by",
         "type": "object",
         "properties": {
-          "value": {
-            "$ref": "#/components/schemas/YAxisViewByValue"
+          "direction": {
+            "$ref": "#/components/schemas/v1.OrderByDirection"
+          },
+          "incidentField": {
+            "$ref": "#/components/schemas/IncidentFields"
           }
         },
+        "required": [
+          "field",
+          "direction"
+        ],
         "additionalProperties": false
       },
       "common.Group": {

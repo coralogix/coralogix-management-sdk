@@ -23,7 +23,5 @@ model_multiple_values.go
 model_v3_filter_operator.go
 model_view_folder.go
 model_view_folder_1.go
-model_y_axis_view_by_category.go
-model_y_axis_view_by_value.go
 response.go
 utils.go

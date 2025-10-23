@@ -12,8 +12,6 @@ model_colors_by_aggregation.go
 model_colors_by_group_by.go
 model_colors_by_stack.go
 model_common_group.go
-model_condition_type_match_entity_type.go
-model_condition_type_match_entity_type_and_sub_type.go
 model_config_overrides.go
 model_connector_type.go
 model_create_custom_preset_response.go
@@ -31,6 +29,8 @@ model_match_entity_type_and_sub_type_condition.go
 model_message_config.go
 model_multiple_values.go
 model_notification_center_condition_type.go
+model_notification_center_condition_type_match_entity_type.go
+model_notification_center_condition_type_match_entity_type_and_sub_type.go
 model_notification_center_entity_type.go
 model_notification_center_message_config_field.go
 model_preset.go
@@ -39,7 +39,5 @@ model_preset_summary.go
 model_preset_type.go
 model_replace_custom_preset_response.go
 model_v3_filter_operator.go
-model_y_axis_view_by_category.go
-model_y_axis_view_by_value.go
 response.go
 utils.go

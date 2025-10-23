@@ -196,8 +196,6 @@ Class | Method | HTTP request | Description
  - [ListIncidentEventsTotalCountResponse](docs/ListIncidentEventsTotalCountResponse.md)
  - [ListIncidentsResponse](docs/ListIncidentsResponse.md)
  - [MultipleValues](docs/MultipleValues.md)
- - [OrderByContextualLabel](docs/OrderByContextualLabel.md)
- - [OrderByIncidentField](docs/OrderByIncidentField.md)
  - [OriginatorType](docs/OriginatorType.md)
  - [PaginationRequest](docs/PaginationRequest.md)
  - [ResolveIncidentByEventIdResponse](docs/ResolveIncidentByEventIdResponse.md)
@@ -207,11 +205,11 @@ Class | Method | HTTP request | Description
  - [UpsertIncidentStateType](docs/UpsertIncidentStateType.md)
  - [UserDetails](docs/UserDetails.md)
  - [V1FilterOperator](docs/V1FilterOperator.md)
+ - [V1OrderByContextualLabel](docs/V1OrderByContextualLabel.md)
  - [V1OrderByDirection](docs/V1OrderByDirection.md)
+ - [V1OrderByIncidentField](docs/V1OrderByIncidentField.md)
  - [V1PaginationResponse](docs/V1PaginationResponse.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

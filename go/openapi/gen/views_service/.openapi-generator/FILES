@@ -32,7 +32,5 @@ model_view_1.go
 model_view_folder.go
 model_view_type.go
 model_views_v1_filter.go
-model_y_axis_view_by_category.go
-model_y_axis_view_by_value.go
 response.go
 utils.go

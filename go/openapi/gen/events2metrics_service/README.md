@@ -91,8 +91,6 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [AggType](docs/AggType.md)
- - [AggregationHistogram](docs/AggregationHistogram.md)
- - [AggregationSamples](docs/AggregationSamples.md)
  - [AtomicBatchExecuteE2MResponse](docs/AtomicBatchExecuteE2MResponse.md)
  - [ColorsByAggregation](docs/ColorsByAggregation.md)
  - [ColorsByGroupBy](docs/ColorsByGroupBy.md)
@@ -144,12 +142,12 @@ Class | Method | HTTP request | Description
  - [SpansQuery](docs/SpansQuery.md)
  - [SpansQuery1](docs/SpansQuery1.md)
  - [V2Aggregation](docs/V2Aggregation.md)
+ - [V2AggregationHistogram](docs/V2AggregationHistogram.md)
+ - [V2AggregationSamples](docs/V2AggregationSamples.md)
  - [V2LogsQuery](docs/V2LogsQuery.md)
  - [V2MetricField](docs/V2MetricField.md)
  - [V2SpansQuery](docs/V2SpansQuery.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization
