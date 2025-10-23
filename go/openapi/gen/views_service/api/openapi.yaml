@@ -625,18 +625,6 @@ components:
       - VIEW_TYPE_ARCHIVE_LOGS
       - VIEW_TYPE_ARCHIVE_TEMPLATES
       type: string
-    YAxisViewByCategory:
-      additionalProperties: false
-      properties:
-        category:
-          $ref: "#/components/schemas/YAxisViewByCategory"
-      type: object
-    YAxisViewByValue:
-      additionalProperties: false
-      properties:
-        value:
-          $ref: "#/components/schemas/YAxisViewByValue"
-      type: object
     common.Group:
       properties:
         field:

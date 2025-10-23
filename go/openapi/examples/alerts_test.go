@@ -31,7 +31,7 @@ func CreateAlert() *alerts.AlertDefPropertiesLogsThreshold {
 					Minutes:  alerts.PtrInt64(5),
 					NotifyOn: alerts.NOTIFYON_NOTIFY_ON_TRIGGERED_AND_RESOLVED.Ptr(),
 					Integration: alerts.V3IntegrationType{
-						IntegrationTypeRecipients: &alerts.IntegrationTypeRecipients{
+						V3IntegrationTypeRecipients: &alerts.V3IntegrationTypeRecipients{
 							Recipients: &alerts.Recipients{
 								Emails: []string{"example@coralogix.com"},
 							},
@@ -186,7 +186,7 @@ func TestAlertScheduler(t *testing.T) {
 	})
 
 	filter := scheduler.AlertSchedulerRuleProtobufV1Filter{
-		FilterAlertUniqueIds: &scheduler.FilterAlertUniqueIds{
+		AlertSchedulerRuleProtobufV1FilterAlertUniqueIds: &scheduler.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds{
 			WhatExpression: scheduler.PtrString("source logs | filter $d.cpodId:string == '122'"),
 			AlertUniqueIds: &scheduler.AlertUniqueIds{
 				Value: []string{createdAlert.AlertDef.Id},

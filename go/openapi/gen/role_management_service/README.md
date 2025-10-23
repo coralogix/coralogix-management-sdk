@@ -111,8 +111,6 @@ Class | Method | HTTP request | Description
  - [V2Permissions](docs/V2Permissions.md)
  - [V2SystemRole](docs/V2SystemRole.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

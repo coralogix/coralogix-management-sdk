@@ -210,15 +210,15 @@
         "x-codeSamples": [
           {
             "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"dashboard\":{\"actions\":[{\"dataSource\":\"ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED\",\"definition\":{\"customAction\":{\"url\":\"string\"}},\"id\":\"string\",\"name\":\"string\",\"shouldOpenInNewWindow\":true,\"widgetId\":\"string\"}],\"annotations\":[{\"description\":\"string\",\"enabled\":true,\"id\":\"string\",\"name\":\"string\",\"scope\":{\"allWidgets\":{}},\"source\":{\"manual\":{\"messageTemplate\":\"string\",\"orientation\":\"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\"strategy\":{\"instant\":{\"customUnit\":\"string\",\"unit\":\"UNIT_UNSPECIFIED\",\"value\":0.1}}}}}],\"description\":\"Sample description\",\"filters\":[{\"collapsed\":true,\"displayName\":\"string\",\"enabled\":true,\"source\":{\"metrics\":{\"labels\":[\"string\"],\"messageTemplate\":\"string\",\"orientation\":\"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\"promqlQuery\":{\"value\":\"string\"},\"strategy\":{\"startTimeMetric\":{}}}}}],\"folderPath\":{\"segments\":[\"string\"]},\"id\":\"GZLHSeqelCbD3I7HbIDtL\",\"layout\":{\"sections\":[{\"id\":{\"value\":\"string\"},\"options\":{\"custom\":{\"collapsed\":false,\"color\":{\"predefined\":\"SECTION_PREDEFINED_COLOR_UNSPECIFIED\"},\"description\":{\"value\":\"Section with important statistics\"},\"name\":{\"value\":\"Main stats section\"},\"repetitiveVar\":{\"name\":\"pod_name\"}}},\"rows\":[{\"appearance\":{\"height\":{\"value\":16}},\"id\":{\"value\":\"string\"},\"widgets\":[{\"appearance\":{\"width\":0},\"createdAt\":\"2019-08-24T14:15:22Z\",\"definition\":{\"gauge\":{\"customUnit\":{\"value\":\"kvs\"},\"dataModeType\":\"DATA_MODE_TYPE_HIGH_UNSPECIFIED\",\"decimal\":3,\"decimalPrecision\":false,\"displaySeriesName\":true,\"legend\":{\"columns\":[\"LEGEND_COLUMN_UNSPECIFIED\"],\"groupByQuery\":true,\"isVisible\":true,\"placement\":\"LEGEND_PLACEMENT_UNSPECIFIED\"},\"legendBy\":\"LEGEND_BY_UNSPECIFIED\",\"max\":150000,\"min\":0,\"query\":{\"metrics\":{\"aggregation\":\"AGGREGATION_UNSPECIFIED\",\"editorMode\":\"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED\",\"filters\":[{}],\"groupNames\":[\"string\"],\"promqlQuery\":{\"value\":\"string\"},\"promqlQueryType\":\"PROM_QL_QUERY_TYPE_UNSPECIFIED\",\"stackedGroupName\":\"string\",\"timeFrame\":{\"absoluteTimeFrame\":{}}}},\"showInnerArc\":false,\"showOuterArc\":true,\"thresholdBy\":\"THRESHOLD_BY_UNSPECIFIED\",\"thresholdType\":\"THRESHOLD_TYPE_UNSPECIFIED\",\"thresholds\":[{\"color\":\"string\",\"from\":0.1,\"label\":\"string\"}],\"unit\":\"UNIT_UNSPECIFIED\"}},\"description\":{\"value\":\"Average delay of application\"},\"id\":{\"value\":\"string\"},\"title\":{\"value\":\"Gauge\"},\"updatedAt\":\"2019-08-24T14:15:22Z\"}]}]}]},\"name\":\"Example Name\",\"off\":{},\"relativeTimeFrame\":\"string\",\"slugName\":\"system-health-monitoring\",\"variables\":[{\"definition\":{\"constant\":{\"value\":\"string\"}},\"description\":\"string\",\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_UNSPECIFIED\",\"name\":\"string\"}],\"variablesV2\":[{\"description\":\"string\",\"displayFullRow\":true,\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED\",\"name\":\"string\",\"source\":{\"static\":{\"allOption\":{\"includeAll\":true,\"label\":\"string\"},\"values\":[{\"isDefault\":true,\"label\":\"string\",\"value\":\"string\"}],\"valuesOrderDirection\":\"ORDER_DIRECTION_UNSPECIFIED\"}},\"value\":{\"interval\":{\"value\":{\"label\":\"string\",\"value\":\"string\"}}}}]},\"isLocked\":true,\"requestId\":\"string\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"dashboard\":{\"actions\":[{\"dataSource\":\"ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED\",\"definition\":{\"customAction\":{\"url\":\"string\"}},\"id\":\"string\",\"name\":\"string\",\"shouldOpenInNewWindow\":true,\"widgetId\":\"string\"}],\"annotations\":[{\"description\":\"string\",\"enabled\":true,\"id\":\"string\",\"name\":\"string\",\"scope\":{\"allWidgets\":{}},\"source\":{\"metrics\":{\"labels\":[\"string\"],\"messageTemplate\":\"string\",\"orientation\":\"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\"promqlQuery\":{\"value\":\"string\"},\"strategy\":{\"startTimeMetric\":{}}}}}],\"description\":\"Sample description\",\"filters\":[{\"collapsed\":true,\"displayName\":\"string\",\"enabled\":true,\"source\":{\"logs\":{\"field\":\"string\",\"observationField\":{\"keypath\":[\"string\"],\"scope\":\"DATASET_SCOPE_UNSPECIFIED\"},\"operator\":{\"equals\":{\"selection\":{\"all\":{}}}}}}}],\"folderPath\":{\"segments\":[\"string\"]},\"id\":\"GZLHSeqelCbD3I7HbIDtL\",\"layout\":{\"sections\":[{\"id\":{\"value\":\"string\"},\"options\":{\"custom\":{\"collapsed\":false,\"color\":{\"predefined\":\"SECTION_PREDEFINED_COLOR_UNSPECIFIED\"},\"description\":{\"value\":\"Section with important statistics\"},\"name\":{\"value\":\"Main stats section\"},\"repetitiveVar\":{\"name\":\"pod_name\"}}},\"rows\":[{\"appearance\":{\"height\":{\"value\":16}},\"id\":{\"value\":\"string\"},\"widgets\":[{\"appearance\":{\"width\":0},\"createdAt\":\"2019-08-24T14:15:22Z\",\"definition\":{\"markdown\":{\"markdownText\":{\"value\":\"# This is a markdown example\"},\"tooltipText\":{\"value\":\"This is a description in a tooltip\"}}},\"description\":{\"value\":\"Average delay of application\"},\"id\":{\"value\":\"string\"},\"title\":{\"value\":\"Gauge\"},\"updatedAt\":\"2019-08-24T14:15:22Z\"}]}]}]},\"name\":\"Example Name\",\"relativeTimeFrame\":\"string\",\"slugName\":\"system-health-monitoring\",\"twoMinutes\":{},\"variables\":[{\"definition\":{\"constant\":{\"value\":\"string\"}},\"description\":\"string\",\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_UNSPECIFIED\",\"name\":\"string\"}],\"variablesV2\":[{\"description\":\"string\",\"displayFullRow\":true,\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED\",\"name\":\"string\",\"source\":{\"query\":{\"allOption\":{\"includeAll\":true,\"label\":\"string\"},\"logsQuery\":{\"type\":{\"fieldValue\":{\"observationField\":{\"keypath\":[\"string\"],\"scope\":\"DATASET_SCOPE_UNSPECIFIED\"}}}},\"refreshStrategy\":\"REFRESH_STRATEGY_UNSPECIFIED\",\"valueDisplayOptions\":{\"labelRegex\":\"string\",\"valueRegex\":\"string\"},\"valuesOrderDirection\":\"ORDER_DIRECTION_UNSPECIFIED\"}},\"value\":{\"multiString\":{\"all\":{}}}}]},\"isLocked\":true,\"requestId\":\"string\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards\"\n\npayload = {\n    \"dashboard\": {\n        \"actions\": [\n            {\n                \"dataSource\": \"ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED\",\n                \"definition\": {\"customAction\": {\"url\": \"string\"}},\n                \"id\": \"string\",\n                \"name\": \"string\",\n                \"shouldOpenInNewWindow\": True,\n                \"widgetId\": \"string\"\n            }\n        ],\n        \"annotations\": [\n            {\n                \"description\": \"string\",\n                \"enabled\": True,\n                \"id\": \"string\",\n                \"name\": \"string\",\n                \"scope\": {\"allWidgets\": {}},\n                \"source\": {\"manual\": {\n                        \"messageTemplate\": \"string\",\n                        \"orientation\": \"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\n                        \"strategy\": {\"instant\": {\n                                \"customUnit\": \"string\",\n                                \"unit\": \"UNIT_UNSPECIFIED\",\n                                \"value\": 0.1\n                            }}\n                    }}\n            }\n        ],\n        \"description\": \"Sample description\",\n        \"filters\": [\n            {\n                \"collapsed\": True,\n                \"displayName\": \"string\",\n                \"enabled\": True,\n                \"source\": {\"metrics\": {\n                        \"labels\": [\"string\"],\n                        \"messageTemplate\": \"string\",\n                        \"orientation\": \"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\n                        \"promqlQuery\": {\"value\": \"string\"},\n                        \"strategy\": {\"startTimeMetric\": {}}\n                    }}\n            }\n        ],\n        \"folderPath\": {\"segments\": [\"string\"]},\n        \"id\": \"GZLHSeqelCbD3I7HbIDtL\",\n        \"layout\": {\"sections\": [\n                {\n                    \"id\": {\"value\": \"string\"},\n                    \"options\": {\"custom\": {\n                            \"collapsed\": False,\n                            \"color\": {\"predefined\": \"SECTION_PREDEFINED_COLOR_UNSPECIFIED\"},\n                            \"description\": {\"value\": \"Section with important statistics\"},\n                            \"name\": {\"value\": \"Main stats section\"},\n                            \"repetitiveVar\": {\"name\": \"pod_name\"}\n                        }},\n                    \"rows\": [\n                        {\n                            \"appearance\": {\"height\": {\"value\": 16}},\n                            \"id\": {\"value\": \"string\"},\n                            \"widgets\": [\n                                {\n                                    \"appearance\": {\"width\": 0},\n                                    \"createdAt\": \"2019-08-24T14:15:22Z\",\n                                    \"definition\": {\"gauge\": {\n                                            \"customUnit\": {\"value\": \"kvs\"},\n                                            \"dataModeType\": \"DATA_MODE_TYPE_HIGH_UNSPECIFIED\",\n                                            \"decimal\": 3,\n                                            \"decimalPrecision\": False,\n                                            \"displaySeriesName\": True,\n                                            \"legend\": {\n                                                \"columns\": [\"LEGEND_COLUMN_UNSPECIFIED\"],\n                                                \"groupByQuery\": True,\n                                                \"isVisible\": True,\n                                                \"placement\": \"LEGEND_PLACEMENT_UNSPECIFIED\"\n                                            },\n                                            \"legendBy\": \"LEGEND_BY_UNSPECIFIED\",\n                                            \"max\": 150000,\n                                            \"min\": 0,\n                                            \"query\": {\"metrics\": {\n                                                    \"aggregation\": \"AGGREGATION_UNSPECIFIED\",\n                                                    \"editorMode\": \"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED\",\n                                                    \"filters\": [{}],\n                                                    \"groupNames\": [\"string\"],\n                                                    \"promqlQuery\": {\"value\": \"string\"},\n                                                    \"promqlQueryType\": \"PROM_QL_QUERY_TYPE_UNSPECIFIED\",\n                                                    \"stackedGroupName\": \"string\",\n                                                    \"timeFrame\": {\"absoluteTimeFrame\": {}}\n                                                }},\n                                            \"showInnerArc\": False,\n                                            \"showOuterArc\": True,\n                                            \"thresholdBy\": \"THRESHOLD_BY_UNSPECIFIED\",\n                                            \"thresholdType\": \"THRESHOLD_TYPE_UNSPECIFIED\",\n                                            \"thresholds\": [\n                                                {\n                                                    \"color\": \"string\",\n                                                    \"from\": 0.1,\n                                                    \"label\": \"string\"\n                                                }\n                                            ],\n                                            \"unit\": \"UNIT_UNSPECIFIED\"\n                                        }},\n                                    \"description\": {\"value\": \"Average delay of application\"},\n                                    \"id\": {\"value\": \"string\"},\n                                    \"title\": {\"value\": \"Gauge\"},\n                                    \"updatedAt\": \"2019-08-24T14:15:22Z\"\n                                }\n                            ]\n                        }\n                    ]\n                }\n            ]},\n        \"name\": \"Example Name\",\n        \"off\": {},\n        \"relativeTimeFrame\": \"string\",\n        \"slugName\": \"system-health-monitoring\",\n        \"variables\": [\n            {\n                \"definition\": {\"constant\": {\"value\": \"string\"}},\n                \"description\": \"string\",\n                \"displayName\": \"string\",\n                \"displayType\": \"VARIABLE_DISPLAY_TYPE_UNSPECIFIED\",\n                \"name\": \"string\"\n            }\n        ],\n        \"variablesV2\": [\n            {\n                \"description\": \"string\",\n                \"displayFullRow\": True,\n                \"displayName\": \"string\",\n                \"displayType\": \"VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED\",\n                \"name\": \"string\",\n                \"source\": {\"static\": {\n                        \"allOption\": {\n                            \"includeAll\": True,\n                            \"label\": \"string\"\n                        },\n                        \"values\": [\n                            {\n                                \"isDefault\": True,\n                                \"label\": \"string\",\n                                \"value\": \"string\"\n                            }\n                        ],\n                        \"valuesOrderDirection\": \"ORDER_DIRECTION_UNSPECIFIED\"\n                    }},\n                \"value\": {\"interval\": {\"value\": {\n                            \"label\": \"string\",\n                            \"value\": \"string\"\n                        }}}\n            }\n        ]\n    },\n    \"isLocked\": True,\n    \"requestId\": \"string\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards\"\n\npayload = {\n    \"dashboard\": {\n        \"actions\": [\n            {\n                \"dataSource\": \"ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED\",\n                \"definition\": {\"customAction\": {\"url\": \"string\"}},\n                \"id\": \"string\",\n                \"name\": \"string\",\n                \"shouldOpenInNewWindow\": True,\n                \"widgetId\": \"string\"\n            }\n        ],\n        \"annotations\": [\n            {\n                \"description\": \"string\",\n                \"enabled\": True,\n                \"id\": \"string\",\n                \"name\": \"string\",\n                \"scope\": {\"allWidgets\": {}},\n                \"source\": {\"metrics\": {\n                        \"labels\": [\"string\"],\n                        \"messageTemplate\": \"string\",\n                        \"orientation\": \"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\n                        \"promqlQuery\": {\"value\": \"string\"},\n                        \"strategy\": {\"startTimeMetric\": {}}\n                    }}\n            }\n        ],\n        \"description\": \"Sample description\",\n        \"filters\": [\n            {\n                \"collapsed\": True,\n                \"displayName\": \"string\",\n                \"enabled\": True,\n                \"source\": {\"logs\": {\n                        \"field\": \"string\",\n                        \"observationField\": {\n                            \"keypath\": [\"string\"],\n                            \"scope\": \"DATASET_SCOPE_UNSPECIFIED\"\n                        },\n                        \"operator\": {\"equals\": {\"selection\": {\"all\": {}}}}\n                    }}\n            }\n        ],\n        \"folderPath\": {\"segments\": [\"string\"]},\n        \"id\": \"GZLHSeqelCbD3I7HbIDtL\",\n        \"layout\": {\"sections\": [\n                {\n                    \"id\": {\"value\": \"string\"},\n                    \"options\": {\"custom\": {\n                            \"collapsed\": False,\n                            \"color\": {\"predefined\": \"SECTION_PREDEFINED_COLOR_UNSPECIFIED\"},\n                            \"description\": {\"value\": \"Section with important statistics\"},\n                            \"name\": {\"value\": \"Main stats section\"},\n                            \"repetitiveVar\": {\"name\": \"pod_name\"}\n                        }},\n                    \"rows\": [\n                        {\n                            \"appearance\": {\"height\": {\"value\": 16}},\n                            \"id\": {\"value\": \"string\"},\n                            \"widgets\": [\n                                {\n                                    \"appearance\": {\"width\": 0},\n                                    \"createdAt\": \"2019-08-24T14:15:22Z\",\n                                    \"definition\": {\"markdown\": {\n                                            \"markdownText\": {\"value\": \"# This is a markdown example\"},\n                                            \"tooltipText\": {\"value\": \"This is a description in a tooltip\"}\n                                        }},\n                                    \"description\": {\"value\": \"Average delay of application\"},\n                                    \"id\": {\"value\": \"string\"},\n                                    \"title\": {\"value\": \"Gauge\"},\n                                    \"updatedAt\": \"2019-08-24T14:15:22Z\"\n                                }\n                            ]\n                        }\n                    ]\n                }\n            ]},\n        \"name\": \"Example Name\",\n        \"relativeTimeFrame\": \"string\",\n        \"slugName\": \"system-health-monitoring\",\n        \"twoMinutes\": {},\n        \"variables\": [\n            {\n                \"definition\": {\"constant\": {\"value\": \"string\"}},\n                \"description\": \"string\",\n                \"displayName\": \"string\",\n                \"displayType\": \"VARIABLE_DISPLAY_TYPE_UNSPECIFIED\",\n                \"name\": \"string\"\n            }\n        ],\n        \"variablesV2\": [\n            {\n                \"description\": \"string\",\n                \"displayFullRow\": True,\n                \"displayName\": \"string\",\n                \"displayType\": \"VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED\",\n                \"name\": \"string\",\n                \"source\": {\"query\": {\n                        \"allOption\": {\n                            \"includeAll\": True,\n                            \"label\": \"string\"\n                        },\n                        \"logsQuery\": {\"type\": {\"fieldValue\": {\"observationField\": {\n                                        \"keypath\": [\"string\"],\n                                        \"scope\": \"DATASET_SCOPE_UNSPECIFIED\"\n                                    }}}},\n                        \"refreshStrategy\": \"REFRESH_STRATEGY_UNSPECIFIED\",\n                        \"valueDisplayOptions\": {\n                            \"labelRegex\": \"string\",\n                            \"valueRegex\": \"string\"\n                        },\n                        \"valuesOrderDirection\": \"ORDER_DIRECTION_UNSPECIFIED\"\n                    }},\n                \"value\": {\"multiString\": {\"all\": {}}}\n            }\n        ]\n    },\n    \"isLocked\": True,\n    \"requestId\": \"string\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"dashboard\":{\"actions\":[{\"dataSource\":\"ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED\",\"definition\":{\"customAction\":{\"url\":\"string\"}},\"id\":\"string\",\"name\":\"string\",\"shouldOpenInNewWindow\":true,\"widgetId\":\"string\"}],\"annotations\":[{\"description\":\"string\",\"enabled\":true,\"id\":\"string\",\"name\":\"string\",\"scope\":{\"allWidgets\":{}},\"source\":{\"manual\":{\"messageTemplate\":\"string\",\"orientation\":\"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\"strategy\":{\"instant\":{\"customUnit\":\"string\",\"unit\":\"UNIT_UNSPECIFIED\",\"value\":0.1}}}}}],\"description\":\"Sample description\",\"filters\":[{\"collapsed\":true,\"displayName\":\"string\",\"enabled\":true,\"source\":{\"metrics\":{\"labels\":[\"string\"],\"messageTemplate\":\"string\",\"orientation\":\"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\"promqlQuery\":{\"value\":\"string\"},\"strategy\":{\"startTimeMetric\":{}}}}}],\"folderPath\":{\"segments\":[\"string\"]},\"id\":\"GZLHSeqelCbD3I7HbIDtL\",\"layout\":{\"sections\":[{\"id\":{\"value\":\"string\"},\"options\":{\"custom\":{\"collapsed\":false,\"color\":{\"predefined\":\"SECTION_PREDEFINED_COLOR_UNSPECIFIED\"},\"description\":{\"value\":\"Section with important statistics\"},\"name\":{\"value\":\"Main stats section\"},\"repetitiveVar\":{\"name\":\"pod_name\"}}},\"rows\":[{\"appearance\":{\"height\":{\"value\":16}},\"id\":{\"value\":\"string\"},\"widgets\":[{\"appearance\":{\"width\":0},\"createdAt\":\"2019-08-24T14:15:22Z\",\"definition\":{\"gauge\":{\"customUnit\":{\"value\":\"kvs\"},\"dataModeType\":\"DATA_MODE_TYPE_HIGH_UNSPECIFIED\",\"decimal\":3,\"decimalPrecision\":false,\"displaySeriesName\":true,\"legend\":{\"columns\":[\"LEGEND_COLUMN_UNSPECIFIED\"],\"groupByQuery\":true,\"isVisible\":true,\"placement\":\"LEGEND_PLACEMENT_UNSPECIFIED\"},\"legendBy\":\"LEGEND_BY_UNSPECIFIED\",\"max\":150000,\"min\":0,\"query\":{\"metrics\":{\"aggregation\":\"AGGREGATION_UNSPECIFIED\",\"editorMode\":\"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED\",\"filters\":[{}],\"groupNames\":[\"string\"],\"promqlQuery\":{\"value\":\"string\"},\"promqlQueryType\":\"PROM_QL_QUERY_TYPE_UNSPECIFIED\",\"stackedGroupName\":\"string\",\"timeFrame\":{\"absoluteTimeFrame\":{}}}},\"showInnerArc\":false,\"showOuterArc\":true,\"thresholdBy\":\"THRESHOLD_BY_UNSPECIFIED\",\"thresholdType\":\"THRESHOLD_TYPE_UNSPECIFIED\",\"thresholds\":[{\"color\":\"string\",\"from\":0.1,\"label\":\"string\"}],\"unit\":\"UNIT_UNSPECIFIED\"}},\"description\":{\"value\":\"Average delay of application\"},\"id\":{\"value\":\"string\"},\"title\":{\"value\":\"Gauge\"},\"updatedAt\":\"2019-08-24T14:15:22Z\"}]}]}]},\"name\":\"Example Name\",\"off\":{},\"relativeTimeFrame\":\"string\",\"slugName\":\"system-health-monitoring\",\"variables\":[{\"definition\":{\"constant\":{\"value\":\"string\"}},\"description\":\"string\",\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_UNSPECIFIED\",\"name\":\"string\"}],\"variablesV2\":[{\"description\":\"string\",\"displayFullRow\":true,\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED\",\"name\":\"string\",\"source\":{\"static\":{\"allOption\":{\"includeAll\":true,\"label\":\"string\"},\"values\":[{\"isDefault\":true,\"label\":\"string\",\"value\":\"string\"}],\"valuesOrderDirection\":\"ORDER_DIRECTION_UNSPECIFIED\"}},\"value\":{\"interval\":{\"value\":{\"label\":\"string\",\"value\":\"string\"}}}}]},\"isLocked\":true,\"requestId\":\"string\"}'"
+            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"dashboard\":{\"actions\":[{\"dataSource\":\"ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED\",\"definition\":{\"customAction\":{\"url\":\"string\"}},\"id\":\"string\",\"name\":\"string\",\"shouldOpenInNewWindow\":true,\"widgetId\":\"string\"}],\"annotations\":[{\"description\":\"string\",\"enabled\":true,\"id\":\"string\",\"name\":\"string\",\"scope\":{\"allWidgets\":{}},\"source\":{\"metrics\":{\"labels\":[\"string\"],\"messageTemplate\":\"string\",\"orientation\":\"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\"promqlQuery\":{\"value\":\"string\"},\"strategy\":{\"startTimeMetric\":{}}}}}],\"description\":\"Sample description\",\"filters\":[{\"collapsed\":true,\"displayName\":\"string\",\"enabled\":true,\"source\":{\"logs\":{\"field\":\"string\",\"observationField\":{\"keypath\":[\"string\"],\"scope\":\"DATASET_SCOPE_UNSPECIFIED\"},\"operator\":{\"equals\":{\"selection\":{\"all\":{}}}}}}}],\"folderPath\":{\"segments\":[\"string\"]},\"id\":\"GZLHSeqelCbD3I7HbIDtL\",\"layout\":{\"sections\":[{\"id\":{\"value\":\"string\"},\"options\":{\"custom\":{\"collapsed\":false,\"color\":{\"predefined\":\"SECTION_PREDEFINED_COLOR_UNSPECIFIED\"},\"description\":{\"value\":\"Section with important statistics\"},\"name\":{\"value\":\"Main stats section\"},\"repetitiveVar\":{\"name\":\"pod_name\"}}},\"rows\":[{\"appearance\":{\"height\":{\"value\":16}},\"id\":{\"value\":\"string\"},\"widgets\":[{\"appearance\":{\"width\":0},\"createdAt\":\"2019-08-24T14:15:22Z\",\"definition\":{\"markdown\":{\"markdownText\":{\"value\":\"# This is a markdown example\"},\"tooltipText\":{\"value\":\"This is a description in a tooltip\"}}},\"description\":{\"value\":\"Average delay of application\"},\"id\":{\"value\":\"string\"},\"title\":{\"value\":\"Gauge\"},\"updatedAt\":\"2019-08-24T14:15:22Z\"}]}]}]},\"name\":\"Example Name\",\"relativeTimeFrame\":\"string\",\"slugName\":\"system-health-monitoring\",\"twoMinutes\":{},\"variables\":[{\"definition\":{\"constant\":{\"value\":\"string\"}},\"description\":\"string\",\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_UNSPECIFIED\",\"name\":\"string\"}],\"variablesV2\":[{\"description\":\"string\",\"displayFullRow\":true,\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED\",\"name\":\"string\",\"source\":{\"query\":{\"allOption\":{\"includeAll\":true,\"label\":\"string\"},\"logsQuery\":{\"type\":{\"fieldValue\":{\"observationField\":{\"keypath\":[\"string\"],\"scope\":\"DATASET_SCOPE_UNSPECIFIED\"}}}},\"refreshStrategy\":\"REFRESH_STRATEGY_UNSPECIFIED\",\"valueDisplayOptions\":{\"labelRegex\":\"string\",\"valueRegex\":\"string\"},\"valuesOrderDirection\":\"ORDER_DIRECTION_UNSPECIFIED\"}},\"value\":{\"multiString\":{\"all\":{}}}}]},\"isLocked\":true,\"requestId\":\"string\"}'"
           }
         ]
       },
@@ -295,15 +295,15 @@
         "x-codeSamples": [
           {
             "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"dashboard\":{\"actions\":[{\"dataSource\":\"ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED\",\"definition\":{\"customAction\":{\"url\":\"string\"}},\"id\":\"string\",\"name\":\"string\",\"shouldOpenInNewWindow\":true,\"widgetId\":\"string\"}],\"annotations\":[{\"description\":\"string\",\"enabled\":true,\"id\":\"string\",\"name\":\"string\",\"scope\":{\"allWidgets\":{}},\"source\":{\"manual\":{\"messageTemplate\":\"string\",\"orientation\":\"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\"strategy\":{\"instant\":{\"customUnit\":\"string\",\"unit\":\"UNIT_UNSPECIFIED\",\"value\":0.1}}}}}],\"description\":\"Sample description\",\"filters\":[{\"collapsed\":true,\"displayName\":\"string\",\"enabled\":true,\"source\":{\"metrics\":{\"labels\":[\"string\"],\"messageTemplate\":\"string\",\"orientation\":\"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\"promqlQuery\":{\"value\":\"string\"},\"strategy\":{\"startTimeMetric\":{}}}}}],\"folderPath\":{\"segments\":[\"string\"]},\"id\":\"GZLHSeqelCbD3I7HbIDtL\",\"layout\":{\"sections\":[{\"id\":{\"value\":\"string\"},\"options\":{\"custom\":{\"collapsed\":false,\"color\":{\"predefined\":\"SECTION_PREDEFINED_COLOR_UNSPECIFIED\"},\"description\":{\"value\":\"Section with important statistics\"},\"name\":{\"value\":\"Main stats section\"},\"repetitiveVar\":{\"name\":\"pod_name\"}}},\"rows\":[{\"appearance\":{\"height\":{\"value\":16}},\"id\":{\"value\":\"string\"},\"widgets\":[{\"appearance\":{\"width\":0},\"createdAt\":\"2019-08-24T14:15:22Z\",\"definition\":{\"gauge\":{\"customUnit\":{\"value\":\"kvs\"},\"dataModeType\":\"DATA_MODE_TYPE_HIGH_UNSPECIFIED\",\"decimal\":3,\"decimalPrecision\":false,\"displaySeriesName\":true,\"legend\":{\"columns\":[\"LEGEND_COLUMN_UNSPECIFIED\"],\"groupByQuery\":true,\"isVisible\":true,\"placement\":\"LEGEND_PLACEMENT_UNSPECIFIED\"},\"legendBy\":\"LEGEND_BY_UNSPECIFIED\",\"max\":150000,\"min\":0,\"query\":{\"metrics\":{\"aggregation\":\"AGGREGATION_UNSPECIFIED\",\"editorMode\":\"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED\",\"filters\":[{}],\"groupNames\":[\"string\"],\"promqlQuery\":{\"value\":\"string\"},\"promqlQueryType\":\"PROM_QL_QUERY_TYPE_UNSPECIFIED\",\"stackedGroupName\":\"string\",\"timeFrame\":{\"absoluteTimeFrame\":{}}}},\"showInnerArc\":false,\"showOuterArc\":true,\"thresholdBy\":\"THRESHOLD_BY_UNSPECIFIED\",\"thresholdType\":\"THRESHOLD_TYPE_UNSPECIFIED\",\"thresholds\":[{\"color\":\"string\",\"from\":0.1,\"label\":\"string\"}],\"unit\":\"UNIT_UNSPECIFIED\"}},\"description\":{\"value\":\"Average delay of application\"},\"id\":{\"value\":\"string\"},\"title\":{\"value\":\"Gauge\"},\"updatedAt\":\"2019-08-24T14:15:22Z\"}]}]}]},\"name\":\"Example Name\",\"off\":{},\"relativeTimeFrame\":\"string\",\"slugName\":\"system-health-monitoring\",\"variables\":[{\"definition\":{\"constant\":{\"value\":\"string\"}},\"description\":\"string\",\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_UNSPECIFIED\",\"name\":\"string\"}],\"variablesV2\":[{\"description\":\"string\",\"displayFullRow\":true,\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED\",\"name\":\"string\",\"source\":{\"static\":{\"allOption\":{\"includeAll\":true,\"label\":\"string\"},\"values\":[{\"isDefault\":true,\"label\":\"string\",\"value\":\"string\"}],\"valuesOrderDirection\":\"ORDER_DIRECTION_UNSPECIFIED\"}},\"value\":{\"interval\":{\"value\":{\"label\":\"string\",\"value\":\"string\"}}}}]},\"isLocked\":true,\"requestId\":\"string\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"dashboard\":{\"actions\":[{\"dataSource\":\"ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED\",\"definition\":{\"customAction\":{\"url\":\"string\"}},\"id\":\"string\",\"name\":\"string\",\"shouldOpenInNewWindow\":true,\"widgetId\":\"string\"}],\"annotations\":[{\"description\":\"string\",\"enabled\":true,\"id\":\"string\",\"name\":\"string\",\"scope\":{\"allWidgets\":{}},\"source\":{\"metrics\":{\"labels\":[\"string\"],\"messageTemplate\":\"string\",\"orientation\":\"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\"promqlQuery\":{\"value\":\"string\"},\"strategy\":{\"startTimeMetric\":{}}}}}],\"description\":\"Sample description\",\"filters\":[{\"collapsed\":true,\"displayName\":\"string\",\"enabled\":true,\"source\":{\"logs\":{\"field\":\"string\",\"observationField\":{\"keypath\":[\"string\"],\"scope\":\"DATASET_SCOPE_UNSPECIFIED\"},\"operator\":{\"equals\":{\"selection\":{\"all\":{}}}}}}}],\"folderPath\":{\"segments\":[\"string\"]},\"id\":\"GZLHSeqelCbD3I7HbIDtL\",\"layout\":{\"sections\":[{\"id\":{\"value\":\"string\"},\"options\":{\"custom\":{\"collapsed\":false,\"color\":{\"predefined\":\"SECTION_PREDEFINED_COLOR_UNSPECIFIED\"},\"description\":{\"value\":\"Section with important statistics\"},\"name\":{\"value\":\"Main stats section\"},\"repetitiveVar\":{\"name\":\"pod_name\"}}},\"rows\":[{\"appearance\":{\"height\":{\"value\":16}},\"id\":{\"value\":\"string\"},\"widgets\":[{\"appearance\":{\"width\":0},\"createdAt\":\"2019-08-24T14:15:22Z\",\"definition\":{\"markdown\":{\"markdownText\":{\"value\":\"# This is a markdown example\"},\"tooltipText\":{\"value\":\"This is a description in a tooltip\"}}},\"description\":{\"value\":\"Average delay of application\"},\"id\":{\"value\":\"string\"},\"title\":{\"value\":\"Gauge\"},\"updatedAt\":\"2019-08-24T14:15:22Z\"}]}]}]},\"name\":\"Example Name\",\"relativeTimeFrame\":\"string\",\"slugName\":\"system-health-monitoring\",\"twoMinutes\":{},\"variables\":[{\"definition\":{\"constant\":{\"value\":\"string\"}},\"description\":\"string\",\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_UNSPECIFIED\",\"name\":\"string\"}],\"variablesV2\":[{\"description\":\"string\",\"displayFullRow\":true,\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED\",\"name\":\"string\",\"source\":{\"query\":{\"allOption\":{\"includeAll\":true,\"label\":\"string\"},\"logsQuery\":{\"type\":{\"fieldValue\":{\"observationField\":{\"keypath\":[\"string\"],\"scope\":\"DATASET_SCOPE_UNSPECIFIED\"}}}},\"refreshStrategy\":\"REFRESH_STRATEGY_UNSPECIFIED\",\"valueDisplayOptions\":{\"labelRegex\":\"string\",\"valueRegex\":\"string\"},\"valuesOrderDirection\":\"ORDER_DIRECTION_UNSPECIFIED\"}},\"value\":{\"multiString\":{\"all\":{}}}}]},\"isLocked\":true,\"requestId\":\"string\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards\"\n\npayload = {\n    \"dashboard\": {\n        \"actions\": [\n            {\n                \"dataSource\": \"ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED\",\n                \"definition\": {\"customAction\": {\"url\": \"string\"}},\n                \"id\": \"string\",\n                \"name\": \"string\",\n                \"shouldOpenInNewWindow\": True,\n                \"widgetId\": \"string\"\n            }\n        ],\n        \"annotations\": [\n            {\n                \"description\": \"string\",\n                \"enabled\": True,\n                \"id\": \"string\",\n                \"name\": \"string\",\n                \"scope\": {\"allWidgets\": {}},\n                \"source\": {\"manual\": {\n                        \"messageTemplate\": \"string\",\n                        \"orientation\": \"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\n                        \"strategy\": {\"instant\": {\n                                \"customUnit\": \"string\",\n                                \"unit\": \"UNIT_UNSPECIFIED\",\n                                \"value\": 0.1\n                            }}\n                    }}\n            }\n        ],\n        \"description\": \"Sample description\",\n        \"filters\": [\n            {\n                \"collapsed\": True,\n                \"displayName\": \"string\",\n                \"enabled\": True,\n                \"source\": {\"metrics\": {\n                        \"labels\": [\"string\"],\n                        \"messageTemplate\": \"string\",\n                        \"orientation\": \"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\n                        \"promqlQuery\": {\"value\": \"string\"},\n                        \"strategy\": {\"startTimeMetric\": {}}\n                    }}\n            }\n        ],\n        \"folderPath\": {\"segments\": [\"string\"]},\n        \"id\": \"GZLHSeqelCbD3I7HbIDtL\",\n        \"layout\": {\"sections\": [\n                {\n                    \"id\": {\"value\": \"string\"},\n                    \"options\": {\"custom\": {\n                            \"collapsed\": False,\n                            \"color\": {\"predefined\": \"SECTION_PREDEFINED_COLOR_UNSPECIFIED\"},\n                            \"description\": {\"value\": \"Section with important statistics\"},\n                            \"name\": {\"value\": \"Main stats section\"},\n                            \"repetitiveVar\": {\"name\": \"pod_name\"}\n                        }},\n                    \"rows\": [\n                        {\n                            \"appearance\": {\"height\": {\"value\": 16}},\n                            \"id\": {\"value\": \"string\"},\n                            \"widgets\": [\n                                {\n                                    \"appearance\": {\"width\": 0},\n                                    \"createdAt\": \"2019-08-24T14:15:22Z\",\n                                    \"definition\": {\"gauge\": {\n                                            \"customUnit\": {\"value\": \"kvs\"},\n                                            \"dataModeType\": \"DATA_MODE_TYPE_HIGH_UNSPECIFIED\",\n                                            \"decimal\": 3,\n                                            \"decimalPrecision\": False,\n                                            \"displaySeriesName\": True,\n                                            \"legend\": {\n                                                \"columns\": [\"LEGEND_COLUMN_UNSPECIFIED\"],\n                                                \"groupByQuery\": True,\n                                                \"isVisible\": True,\n                                                \"placement\": \"LEGEND_PLACEMENT_UNSPECIFIED\"\n                                            },\n                                            \"legendBy\": \"LEGEND_BY_UNSPECIFIED\",\n                                            \"max\": 150000,\n                                            \"min\": 0,\n                                            \"query\": {\"metrics\": {\n                                                    \"aggregation\": \"AGGREGATION_UNSPECIFIED\",\n                                                    \"editorMode\": \"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED\",\n                                                    \"filters\": [{}],\n                                                    \"groupNames\": [\"string\"],\n                                                    \"promqlQuery\": {\"value\": \"string\"},\n                                                    \"promqlQueryType\": \"PROM_QL_QUERY_TYPE_UNSPECIFIED\",\n                                                    \"stackedGroupName\": \"string\",\n                                                    \"timeFrame\": {\"absoluteTimeFrame\": {}}\n                                                }},\n                                            \"showInnerArc\": False,\n                                            \"showOuterArc\": True,\n                                            \"thresholdBy\": \"THRESHOLD_BY_UNSPECIFIED\",\n                                            \"thresholdType\": \"THRESHOLD_TYPE_UNSPECIFIED\",\n                                            \"thresholds\": [\n                                                {\n                                                    \"color\": \"string\",\n                                                    \"from\": 0.1,\n                                                    \"label\": \"string\"\n                                                }\n                                            ],\n                                            \"unit\": \"UNIT_UNSPECIFIED\"\n                                        }},\n                                    \"description\": {\"value\": \"Average delay of application\"},\n                                    \"id\": {\"value\": \"string\"},\n                                    \"title\": {\"value\": \"Gauge\"},\n                                    \"updatedAt\": \"2019-08-24T14:15:22Z\"\n                                }\n                            ]\n                        }\n                    ]\n                }\n            ]},\n        \"name\": \"Example Name\",\n        \"off\": {},\n        \"relativeTimeFrame\": \"string\",\n        \"slugName\": \"system-health-monitoring\",\n        \"variables\": [\n            {\n                \"definition\": {\"constant\": {\"value\": \"string\"}},\n                \"description\": \"string\",\n                \"displayName\": \"string\",\n                \"displayType\": \"VARIABLE_DISPLAY_TYPE_UNSPECIFIED\",\n                \"name\": \"string\"\n            }\n        ],\n        \"variablesV2\": [\n            {\n                \"description\": \"string\",\n                \"displayFullRow\": True,\n                \"displayName\": \"string\",\n                \"displayType\": \"VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED\",\n                \"name\": \"string\",\n                \"source\": {\"static\": {\n                        \"allOption\": {\n                            \"includeAll\": True,\n                            \"label\": \"string\"\n                        },\n                        \"values\": [\n                            {\n                                \"isDefault\": True,\n                                \"label\": \"string\",\n                                \"value\": \"string\"\n                            }\n                        ],\n                        \"valuesOrderDirection\": \"ORDER_DIRECTION_UNSPECIFIED\"\n                    }},\n                \"value\": {\"interval\": {\"value\": {\n                            \"label\": \"string\",\n                            \"value\": \"string\"\n                        }}}\n            }\n        ]\n    },\n    \"isLocked\": True,\n    \"requestId\": \"string\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards\"\n\npayload = {\n    \"dashboard\": {\n        \"actions\": [\n            {\n                \"dataSource\": \"ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED\",\n                \"definition\": {\"customAction\": {\"url\": \"string\"}},\n                \"id\": \"string\",\n                \"name\": \"string\",\n                \"shouldOpenInNewWindow\": True,\n                \"widgetId\": \"string\"\n            }\n        ],\n        \"annotations\": [\n            {\n                \"description\": \"string\",\n                \"enabled\": True,\n                \"id\": \"string\",\n                \"name\": \"string\",\n                \"scope\": {\"allWidgets\": {}},\n                \"source\": {\"metrics\": {\n                        \"labels\": [\"string\"],\n                        \"messageTemplate\": \"string\",\n                        \"orientation\": \"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\n                        \"promqlQuery\": {\"value\": \"string\"},\n                        \"strategy\": {\"startTimeMetric\": {}}\n                    }}\n            }\n        ],\n        \"description\": \"Sample description\",\n        \"filters\": [\n            {\n                \"collapsed\": True,\n                \"displayName\": \"string\",\n                \"enabled\": True,\n                \"source\": {\"logs\": {\n                        \"field\": \"string\",\n                        \"observationField\": {\n                            \"keypath\": [\"string\"],\n                            \"scope\": \"DATASET_SCOPE_UNSPECIFIED\"\n                        },\n                        \"operator\": {\"equals\": {\"selection\": {\"all\": {}}}}\n                    }}\n            }\n        ],\n        \"folderPath\": {\"segments\": [\"string\"]},\n        \"id\": \"GZLHSeqelCbD3I7HbIDtL\",\n        \"layout\": {\"sections\": [\n                {\n                    \"id\": {\"value\": \"string\"},\n                    \"options\": {\"custom\": {\n                            \"collapsed\": False,\n                            \"color\": {\"predefined\": \"SECTION_PREDEFINED_COLOR_UNSPECIFIED\"},\n                            \"description\": {\"value\": \"Section with important statistics\"},\n                            \"name\": {\"value\": \"Main stats section\"},\n                            \"repetitiveVar\": {\"name\": \"pod_name\"}\n                        }},\n                    \"rows\": [\n                        {\n                            \"appearance\": {\"height\": {\"value\": 16}},\n                            \"id\": {\"value\": \"string\"},\n                            \"widgets\": [\n                                {\n                                    \"appearance\": {\"width\": 0},\n                                    \"createdAt\": \"2019-08-24T14:15:22Z\",\n                                    \"definition\": {\"markdown\": {\n                                            \"markdownText\": {\"value\": \"# This is a markdown example\"},\n                                            \"tooltipText\": {\"value\": \"This is a description in a tooltip\"}\n                                        }},\n                                    \"description\": {\"value\": \"Average delay of application\"},\n                                    \"id\": {\"value\": \"string\"},\n                                    \"title\": {\"value\": \"Gauge\"},\n                                    \"updatedAt\": \"2019-08-24T14:15:22Z\"\n                                }\n                            ]\n                        }\n                    ]\n                }\n            ]},\n        \"name\": \"Example Name\",\n        \"relativeTimeFrame\": \"string\",\n        \"slugName\": \"system-health-monitoring\",\n        \"twoMinutes\": {},\n        \"variables\": [\n            {\n                \"definition\": {\"constant\": {\"value\": \"string\"}},\n                \"description\": \"string\",\n                \"displayName\": \"string\",\n                \"displayType\": \"VARIABLE_DISPLAY_TYPE_UNSPECIFIED\",\n                \"name\": \"string\"\n            }\n        ],\n        \"variablesV2\": [\n            {\n                \"description\": \"string\",\n                \"displayFullRow\": True,\n                \"displayName\": \"string\",\n                \"displayType\": \"VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED\",\n                \"name\": \"string\",\n                \"source\": {\"query\": {\n                        \"allOption\": {\n                            \"includeAll\": True,\n                            \"label\": \"string\"\n                        },\n                        \"logsQuery\": {\"type\": {\"fieldValue\": {\"observationField\": {\n                                        \"keypath\": [\"string\"],\n                                        \"scope\": \"DATASET_SCOPE_UNSPECIFIED\"\n                                    }}}},\n                        \"refreshStrategy\": \"REFRESH_STRATEGY_UNSPECIFIED\",\n                        \"valueDisplayOptions\": {\n                            \"labelRegex\": \"string\",\n                            \"valueRegex\": \"string\"\n                        },\n                        \"valuesOrderDirection\": \"ORDER_DIRECTION_UNSPECIFIED\"\n                    }},\n                \"value\": {\"multiString\": {\"all\": {}}}\n            }\n        ]\n    },\n    \"isLocked\": True,\n    \"requestId\": \"string\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"dashboard\":{\"actions\":[{\"dataSource\":\"ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED\",\"definition\":{\"customAction\":{\"url\":\"string\"}},\"id\":\"string\",\"name\":\"string\",\"shouldOpenInNewWindow\":true,\"widgetId\":\"string\"}],\"annotations\":[{\"description\":\"string\",\"enabled\":true,\"id\":\"string\",\"name\":\"string\",\"scope\":{\"allWidgets\":{}},\"source\":{\"manual\":{\"messageTemplate\":\"string\",\"orientation\":\"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\"strategy\":{\"instant\":{\"customUnit\":\"string\",\"unit\":\"UNIT_UNSPECIFIED\",\"value\":0.1}}}}}],\"description\":\"Sample description\",\"filters\":[{\"collapsed\":true,\"displayName\":\"string\",\"enabled\":true,\"source\":{\"metrics\":{\"labels\":[\"string\"],\"messageTemplate\":\"string\",\"orientation\":\"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\"promqlQuery\":{\"value\":\"string\"},\"strategy\":{\"startTimeMetric\":{}}}}}],\"folderPath\":{\"segments\":[\"string\"]},\"id\":\"GZLHSeqelCbD3I7HbIDtL\",\"layout\":{\"sections\":[{\"id\":{\"value\":\"string\"},\"options\":{\"custom\":{\"collapsed\":false,\"color\":{\"predefined\":\"SECTION_PREDEFINED_COLOR_UNSPECIFIED\"},\"description\":{\"value\":\"Section with important statistics\"},\"name\":{\"value\":\"Main stats section\"},\"repetitiveVar\":{\"name\":\"pod_name\"}}},\"rows\":[{\"appearance\":{\"height\":{\"value\":16}},\"id\":{\"value\":\"string\"},\"widgets\":[{\"appearance\":{\"width\":0},\"createdAt\":\"2019-08-24T14:15:22Z\",\"definition\":{\"gauge\":{\"customUnit\":{\"value\":\"kvs\"},\"dataModeType\":\"DATA_MODE_TYPE_HIGH_UNSPECIFIED\",\"decimal\":3,\"decimalPrecision\":false,\"displaySeriesName\":true,\"legend\":{\"columns\":[\"LEGEND_COLUMN_UNSPECIFIED\"],\"groupByQuery\":true,\"isVisible\":true,\"placement\":\"LEGEND_PLACEMENT_UNSPECIFIED\"},\"legendBy\":\"LEGEND_BY_UNSPECIFIED\",\"max\":150000,\"min\":0,\"query\":{\"metrics\":{\"aggregation\":\"AGGREGATION_UNSPECIFIED\",\"editorMode\":\"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED\",\"filters\":[{}],\"groupNames\":[\"string\"],\"promqlQuery\":{\"value\":\"string\"},\"promqlQueryType\":\"PROM_QL_QUERY_TYPE_UNSPECIFIED\",\"stackedGroupName\":\"string\",\"timeFrame\":{\"absoluteTimeFrame\":{}}}},\"showInnerArc\":false,\"showOuterArc\":true,\"thresholdBy\":\"THRESHOLD_BY_UNSPECIFIED\",\"thresholdType\":\"THRESHOLD_TYPE_UNSPECIFIED\",\"thresholds\":[{\"color\":\"string\",\"from\":0.1,\"label\":\"string\"}],\"unit\":\"UNIT_UNSPECIFIED\"}},\"description\":{\"value\":\"Average delay of application\"},\"id\":{\"value\":\"string\"},\"title\":{\"value\":\"Gauge\"},\"updatedAt\":\"2019-08-24T14:15:22Z\"}]}]}]},\"name\":\"Example Name\",\"off\":{},\"relativeTimeFrame\":\"string\",\"slugName\":\"system-health-monitoring\",\"variables\":[{\"definition\":{\"constant\":{\"value\":\"string\"}},\"description\":\"string\",\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_UNSPECIFIED\",\"name\":\"string\"}],\"variablesV2\":[{\"description\":\"string\",\"displayFullRow\":true,\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED\",\"name\":\"string\",\"source\":{\"static\":{\"allOption\":{\"includeAll\":true,\"label\":\"string\"},\"values\":[{\"isDefault\":true,\"label\":\"string\",\"value\":\"string\"}],\"valuesOrderDirection\":\"ORDER_DIRECTION_UNSPECIFIED\"}},\"value\":{\"interval\":{\"value\":{\"label\":\"string\",\"value\":\"string\"}}}}]},\"isLocked\":true,\"requestId\":\"string\"}'"
+            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"dashboard\":{\"actions\":[{\"dataSource\":\"ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED\",\"definition\":{\"customAction\":{\"url\":\"string\"}},\"id\":\"string\",\"name\":\"string\",\"shouldOpenInNewWindow\":true,\"widgetId\":\"string\"}],\"annotations\":[{\"description\":\"string\",\"enabled\":true,\"id\":\"string\",\"name\":\"string\",\"scope\":{\"allWidgets\":{}},\"source\":{\"metrics\":{\"labels\":[\"string\"],\"messageTemplate\":\"string\",\"orientation\":\"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\"promqlQuery\":{\"value\":\"string\"},\"strategy\":{\"startTimeMetric\":{}}}}}],\"description\":\"Sample description\",\"filters\":[{\"collapsed\":true,\"displayName\":\"string\",\"enabled\":true,\"source\":{\"logs\":{\"field\":\"string\",\"observationField\":{\"keypath\":[\"string\"],\"scope\":\"DATASET_SCOPE_UNSPECIFIED\"},\"operator\":{\"equals\":{\"selection\":{\"all\":{}}}}}}}],\"folderPath\":{\"segments\":[\"string\"]},\"id\":\"GZLHSeqelCbD3I7HbIDtL\",\"layout\":{\"sections\":[{\"id\":{\"value\":\"string\"},\"options\":{\"custom\":{\"collapsed\":false,\"color\":{\"predefined\":\"SECTION_PREDEFINED_COLOR_UNSPECIFIED\"},\"description\":{\"value\":\"Section with important statistics\"},\"name\":{\"value\":\"Main stats section\"},\"repetitiveVar\":{\"name\":\"pod_name\"}}},\"rows\":[{\"appearance\":{\"height\":{\"value\":16}},\"id\":{\"value\":\"string\"},\"widgets\":[{\"appearance\":{\"width\":0},\"createdAt\":\"2019-08-24T14:15:22Z\",\"definition\":{\"markdown\":{\"markdownText\":{\"value\":\"# This is a markdown example\"},\"tooltipText\":{\"value\":\"This is a description in a tooltip\"}}},\"description\":{\"value\":\"Average delay of application\"},\"id\":{\"value\":\"string\"},\"title\":{\"value\":\"Gauge\"},\"updatedAt\":\"2019-08-24T14:15:22Z\"}]}]}]},\"name\":\"Example Name\",\"relativeTimeFrame\":\"string\",\"slugName\":\"system-health-monitoring\",\"twoMinutes\":{},\"variables\":[{\"definition\":{\"constant\":{\"value\":\"string\"}},\"description\":\"string\",\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_UNSPECIFIED\",\"name\":\"string\"}],\"variablesV2\":[{\"description\":\"string\",\"displayFullRow\":true,\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED\",\"name\":\"string\",\"source\":{\"query\":{\"allOption\":{\"includeAll\":true,\"label\":\"string\"},\"logsQuery\":{\"type\":{\"fieldValue\":{\"observationField\":{\"keypath\":[\"string\"],\"scope\":\"DATASET_SCOPE_UNSPECIFIED\"}}}},\"refreshStrategy\":\"REFRESH_STRATEGY_UNSPECIFIED\",\"valueDisplayOptions\":{\"labelRegex\":\"string\",\"valueRegex\":\"string\"},\"valuesOrderDirection\":\"ORDER_DIRECTION_UNSPECIFIED\"}},\"value\":{\"multiString\":{\"all\":{}}}}]},\"isLocked\":true,\"requestId\":\"string\"}'"
           }
         ]
       }
@@ -911,19 +911,19 @@
       "Annotation.Source": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SourceManual"
+            "$ref": "#/components/schemas/AnnotationSourceMetrics"
           },
           {
-            "$ref": "#/components/schemas/SourceMetrics"
+            "$ref": "#/components/schemas/AnnotationSourceLogs"
           },
           {
-            "$ref": "#/components/schemas/SourceLogs"
+            "$ref": "#/components/schemas/AnnotationSourceSpans"
           },
           {
-            "$ref": "#/components/schemas/SourceSpans"
+            "$ref": "#/components/schemas/AnnotationSourceDataprime"
           },
           {
-            "$ref": "#/components/schemas/SourceDataprime"
+            "$ref": "#/components/schemas/AnnotationSourceManual"
           }
         ]
       },
@@ -933,6 +933,51 @@
           "ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED",
           "ANNOTATION_ORIENTATION_HORIZONTAL"
         ]
+      },
+      "AnnotationSourceDataprime": {
+        "type": "object",
+        "properties": {
+          "dataprime": {
+            "$ref": "#/components/schemas/DataprimeSource"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AnnotationSourceLogs": {
+        "type": "object",
+        "properties": {
+          "logs": {
+            "$ref": "#/components/schemas/LogsSource"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AnnotationSourceManual": {
+        "type": "object",
+        "properties": {
+          "manual": {
+            "$ref": "#/components/schemas/ManualSource"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AnnotationSourceMetrics": {
+        "type": "object",
+        "properties": {
+          "metrics": {
+            "$ref": "#/components/schemas/MetricsSource"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AnnotationSourceSpans": {
+        "type": "object",
+        "properties": {
+          "spans": {
+            "$ref": "#/components/schemas/SpansSource"
+          }
+        },
+        "additionalProperties": false
       },
       "AssignDashboardFolderResponse": {
         "externalDocs": {
@@ -1052,21 +1097,184 @@
           }
         }
       },
+      "BarChart.DataprimeQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "DataprimeQuery",
+        "description": "A Dataprime variant of the query",
+        "type": "object",
+        "properties": {
+          "dataprimeQuery": {
+            "$ref": "#/components/schemas/common.DataprimeQuery"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter.Source"
+            }
+          },
+          "groupNames": {
+            "type": "array",
+            "items": {
+              "description": "List of field names by which results are grouped",
+              "type": "string"
+            }
+          },
+          "stackedGroupName": {
+            "description": "Field name by which results in groups are divided into subgroups",
+            "type": "string"
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
+      },
+      "BarChart.LogsQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "LogsQuery",
+        "description": "A logs variant of the query",
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/LogsAggregation"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter.LogsFilter"
+            }
+          },
+          "groupNames": {
+            "type": "array",
+            "items": {
+              "description": "List of field names to group the query results",
+              "type": "string"
+            }
+          },
+          "groupNamesFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObservationField"
+            }
+          },
+          "luceneQuery": {
+            "$ref": "#/components/schemas/LuceneQuery"
+          },
+          "stackedGroupName": {
+            "description": "Field name by which results are stacked in individual group",
+            "type": "string"
+          },
+          "stackedGroupNameField": {
+            "$ref": "#/components/schemas/ObservationField"
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
+      },
+      "BarChart.MetricsQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "MetricsQuery",
+        "description": "A metrics variant of the query",
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/common.Aggregation"
+          },
+          "editorMode": {
+            "$ref": "#/components/schemas/MetricsQueryEditorMode"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricsFilter"
+            }
+          },
+          "groupNames": {
+            "type": "array",
+            "items": {
+              "description": "List of field names by which metric results are grouped",
+              "type": "string"
+            }
+          },
+          "promqlQuery": {
+            "$ref": "#/components/schemas/PromQlQuery"
+          },
+          "promqlQueryType": {
+            "$ref": "#/components/schemas/PromQLQueryType"
+          },
+          "stackedGroupName": {
+            "description": "Field name by which results in groups are divided into subgroups",
+            "type": "string"
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
+      },
       "BarChart.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QuerySpans"
+            "$ref": "#/components/schemas/BarChartQueryLogs"
           },
           {
-            "$ref": "#/components/schemas/QueryMetrics"
+            "$ref": "#/components/schemas/BarChartQuerySpans"
           },
           {
-            "$ref": "#/components/schemas/QueryDataprime"
+            "$ref": "#/components/schemas/BarChartQueryMetrics"
           },
           {
-            "$ref": "#/components/schemas/QueryLogs"
+            "$ref": "#/components/schemas/BarChartQueryDataprime"
           }
         ]
+      },
+      "BarChart.SpansQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SpansQuery",
+        "description": "A spans variant of the query",
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/SpansAggregation"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpansFilter"
+            }
+          },
+          "groupNames": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpanField"
+            }
+          },
+          "groupNamesFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpanObservationField"
+            }
+          },
+          "luceneQuery": {
+            "$ref": "#/components/schemas/LuceneQuery"
+          },
+          "stackedGroupName": {
+            "$ref": "#/components/schemas/SpanField"
+          },
+          "stackedGroupNameField": {
+            "$ref": "#/components/schemas/SpanObservationField"
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
       },
       "BarChart.StackDefinition": {
         "type": "object",
@@ -1082,16 +1290,52 @@
           }
         }
       },
+      "BarChartQueryDataprime": {
+        "type": "object",
+        "properties": {
+          "dataprime": {
+            "$ref": "#/components/schemas/BarChart.DataprimeQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BarChartQueryLogs": {
+        "type": "object",
+        "properties": {
+          "logs": {
+            "$ref": "#/components/schemas/BarChart.LogsQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BarChartQueryMetrics": {
+        "type": "object",
+        "properties": {
+          "metrics": {
+            "$ref": "#/components/schemas/BarChart.MetricsQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BarChartQuerySpans": {
+        "type": "object",
+        "properties": {
+          "spans": {
+            "$ref": "#/components/schemas/BarChart.SpansQuery"
+          }
+        },
+        "additionalProperties": false
+      },
       "ColorsBy": {
         "oneOf": [
-          {
-            "$ref": "#/components/schemas/ColorsByStack"
-          },
           {
             "$ref": "#/components/schemas/ColorsByGroupBy"
           },
           {
             "$ref": "#/components/schemas/ColorsByAggregation"
+          },
+          {
+            "$ref": "#/components/schemas/ColorsByStack"
           }
         ]
       },
@@ -1211,25 +1455,13 @@
       "Dashboard": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DashboardOffFolderPathRelativeTimeFrame"
-          },
-          {
-            "$ref": "#/components/schemas/DashboardTwoMinutesFolderIdAbsoluteTimeFrame"
-          },
-          {
-            "$ref": "#/components/schemas/DashboardTwoMinutesFolderIdRelativeTimeFrame"
-          },
-          {
-            "$ref": "#/components/schemas/DashboardTwoMinutesFolderPathAbsoluteTimeFrame"
-          },
-          {
             "$ref": "#/components/schemas/DashboardTwoMinutesFolderPathRelativeTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardFiveMinutesFolderPathAbsoluteTimeFrame"
+            "$ref": "#/components/schemas/DashboardFiveMinutesFolderIdRelativeTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardOffFolderIdAbsoluteTimeFrame"
+            "$ref": "#/components/schemas/DashboardFiveMinutesFolderPathRelativeTimeFrame"
           },
           {
             "$ref": "#/components/schemas/DashboardOffFolderIdRelativeTimeFrame"
@@ -1238,13 +1470,25 @@
             "$ref": "#/components/schemas/DashboardOffFolderPathAbsoluteTimeFrame"
           },
           {
+            "$ref": "#/components/schemas/DashboardOffFolderPathRelativeTimeFrame"
+          },
+          {
+            "$ref": "#/components/schemas/DashboardTwoMinutesFolderIdAbsoluteTimeFrame"
+          },
+          {
+            "$ref": "#/components/schemas/DashboardTwoMinutesFolderPathAbsoluteTimeFrame"
+          },
+          {
             "$ref": "#/components/schemas/DashboardFiveMinutesFolderIdAbsoluteTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardFiveMinutesFolderIdRelativeTimeFrame"
+            "$ref": "#/components/schemas/DashboardFiveMinutesFolderPathAbsoluteTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardFiveMinutesFolderPathRelativeTimeFrame"
+            "$ref": "#/components/schemas/DashboardOffFolderIdAbsoluteTimeFrame"
+          },
+          {
+            "$ref": "#/components/schemas/DashboardTwoMinutesFolderIdRelativeTimeFrame"
           }
         ]
       },
@@ -2331,21 +2575,173 @@
           }
         }
       },
+      "DataTable.DataprimeQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "DataprimeQuery",
+        "description": "A Dataprime variant of the query",
+        "type": "object",
+        "properties": {
+          "dataprimeQuery": {
+            "$ref": "#/components/schemas/common.DataprimeQuery"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter.Source"
+            }
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
+      },
+      "DataTable.LogsQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "LogsQuery",
+        "description": "A logs variant of the query",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter.LogsFilter"
+            }
+          },
+          "grouping": {
+            "$ref": "#/components/schemas/LogsQuery.Grouping"
+          },
+          "luceneQuery": {
+            "$ref": "#/components/schemas/LuceneQuery"
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
+      },
+      "DataTable.MetricsQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "MetricsQuery",
+        "description": "A metrics variant of the query",
+        "type": "object",
+        "properties": {
+          "editorMode": {
+            "$ref": "#/components/schemas/MetricsQueryEditorMode"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricsFilter"
+            }
+          },
+          "promqlQuery": {
+            "$ref": "#/components/schemas/PromQlQuery"
+          },
+          "promqlQueryType": {
+            "$ref": "#/components/schemas/PromQLQueryType"
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
+      },
       "DataTable.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QueryLogs"
+            "$ref": "#/components/schemas/DataTableQuerySpans"
           },
           {
-            "$ref": "#/components/schemas/QuerySpans"
+            "$ref": "#/components/schemas/DataTableQueryMetrics"
           },
           {
-            "$ref": "#/components/schemas/QueryMetrics"
+            "$ref": "#/components/schemas/DataTableQueryDataprime"
           },
           {
-            "$ref": "#/components/schemas/QueryDataprime"
+            "$ref": "#/components/schemas/DataTableQueryLogs"
           }
         ]
+      },
+      "DataTable.SpansQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SpansQuery",
+        "description": "A spans variant of the query",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpansFilter"
+            }
+          },
+          "grouping": {
+            "$ref": "#/components/schemas/SpansQuery.Grouping"
+          },
+          "luceneQuery": {
+            "$ref": "#/components/schemas/LuceneQuery"
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
+      },
+      "DataTableQueryDataprime": {
+        "type": "object",
+        "properties": {
+          "dataprime": {
+            "$ref": "#/components/schemas/DataTable.DataprimeQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DataTableQueryLogs": {
+        "type": "object",
+        "properties": {
+          "logs": {
+            "$ref": "#/components/schemas/DataTable.LogsQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DataTableQueryMetrics": {
+        "type": "object",
+        "properties": {
+          "metrics": {
+            "$ref": "#/components/schemas/DataTable.MetricsQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DataTableQuerySpans": {
+        "type": "object",
+        "properties": {
+          "spans": {
+            "$ref": "#/components/schemas/DataTable.SpansQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Dataprime": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "DataprimeQuery",
+        "description": "A Dataprime variant of the query",
+        "type": "object",
+        "properties": {
+          "dataModeType": {
+            "$ref": "#/components/schemas/widgets.common.DataModeType"
+          },
+          "dataprimeQuery": {
+            "$ref": "#/components/schemas/common.DataprimeQuery"
+          }
+        }
       },
       "DataprimeQuery.Type": {
         "type": "object",
@@ -2384,13 +2780,13 @@
       "DataprimeSource.Strategy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/StrategyInstant"
+            "$ref": "#/components/schemas/DataprimeSourceStrategyRange"
           },
           {
-            "$ref": "#/components/schemas/StrategyRange"
+            "$ref": "#/components/schemas/DataprimeSourceStrategyDuration"
           },
           {
-            "$ref": "#/components/schemas/StrategyDuration"
+            "$ref": "#/components/schemas/DataprimeSourceStrategyInstant"
           }
         ]
       },
@@ -2405,6 +2801,52 @@
           }
         }
       },
+      "DataprimeSource.Strategy.Instant": {
+        "type": "object",
+        "properties": {
+          "timestampField": {
+            "$ref": "#/components/schemas/ObservationField"
+          }
+        }
+      },
+      "DataprimeSource.Strategy.Range": {
+        "type": "object",
+        "properties": {
+          "endTimestampField": {
+            "$ref": "#/components/schemas/ObservationField"
+          },
+          "startTimestampField": {
+            "$ref": "#/components/schemas/ObservationField"
+          }
+        }
+      },
+      "DataprimeSourceStrategyDuration": {
+        "type": "object",
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/DataprimeSource.Strategy.Duration"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DataprimeSourceStrategyInstant": {
+        "type": "object",
+        "properties": {
+          "instant": {
+            "$ref": "#/components/schemas/DataprimeSource.Strategy.Instant"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DataprimeSourceStrategyRange": {
+        "type": "object",
+        "properties": {
+          "range": {
+            "$ref": "#/components/schemas/DataprimeSource.Strategy.Range"
+          }
+        },
+        "additionalProperties": false
+      },
       "DatasetScope": {
         "type": "string",
         "enum": [
@@ -2413,105 +2855,6 @@
           "DATASET_SCOPE_LABEL",
           "DATASET_SCOPE_METADATA"
         ]
-      },
-      "DefinitionBarChart": {
-        "type": "object",
-        "properties": {
-          "barChart": {
-            "$ref": "#/components/schemas/BarChart"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DefinitionConstant": {
-        "type": "object",
-        "properties": {
-          "constant": {
-            "$ref": "#/components/schemas/Constant"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DefinitionDataTable": {
-        "type": "object",
-        "properties": {
-          "dataTable": {
-            "$ref": "#/components/schemas/DataTable"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DefinitionDynamic": {
-        "type": "object",
-        "properties": {
-          "dynamic": {
-            "$ref": "#/components/schemas/widgets.Dynamic"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DefinitionGauge": {
-        "type": "object",
-        "properties": {
-          "gauge": {
-            "$ref": "#/components/schemas/widgets.Gauge"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DefinitionHexagon": {
-        "type": "object",
-        "properties": {
-          "hexagon": {
-            "$ref": "#/components/schemas/Hexagon"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DefinitionHorizontalBarChart": {
-        "type": "object",
-        "properties": {
-          "horizontalBarChart": {
-            "$ref": "#/components/schemas/HorizontalBarChart"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DefinitionLineChart": {
-        "type": "object",
-        "properties": {
-          "lineChart": {
-            "$ref": "#/components/schemas/LineChart"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DefinitionMarkdown": {
-        "type": "object",
-        "properties": {
-          "markdown": {
-            "$ref": "#/components/schemas/Markdown"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DefinitionMultiSelect": {
-        "type": "object",
-        "properties": {
-          "multiSelect": {
-            "$ref": "#/components/schemas/MultiSelect"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DefinitionPieChart": {
-        "type": "object",
-        "properties": {
-          "pieChart": {
-            "$ref": "#/components/schemas/widgets.PieChart"
-          }
-        },
-        "additionalProperties": false
       },
       "DeleteDashboardResponse": {
         "externalDocs": {
@@ -2551,18 +2894,117 @@
       "Dynamic.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QueryLogs"
+            "$ref": "#/components/schemas/DynamicQueryMetrics"
           },
           {
-            "$ref": "#/components/schemas/QuerySpans"
+            "$ref": "#/components/schemas/DynamicQueryDataprime"
           },
           {
-            "$ref": "#/components/schemas/QueryMetrics"
+            "$ref": "#/components/schemas/DynamicQueryLogs"
           },
           {
-            "$ref": "#/components/schemas/QueryDataprime"
+            "$ref": "#/components/schemas/DynamicQuerySpans"
           }
         ]
+      },
+      "DynamicQueryDataprime": {
+        "type": "object",
+        "properties": {
+          "dataprime": {
+            "$ref": "#/components/schemas/Dataprime"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DynamicQueryLogs": {
+        "type": "object",
+        "properties": {
+          "logs": {
+            "$ref": "#/components/schemas/Logs"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DynamicQueryMetrics": {
+        "type": "object",
+        "properties": {
+          "metrics": {
+            "$ref": "#/components/schemas/Metrics"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DynamicQuerySpans": {
+        "type": "object",
+        "properties": {
+          "spans": {
+            "$ref": "#/components/schemas/Spans"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Equals.Selection": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/EqualsSelectionAll"
+          },
+          {
+            "$ref": "#/components/schemas/EqualsSelectionList"
+          }
+        ]
+      },
+      "Equals.Selection.AllSelection": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "AllSelection",
+        "description": "This data structure indicates that all values are selected.",
+        "type": "object"
+      },
+      "Equals.Selection.ListSelection": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "ListSelection",
+        "description": "This data structure represents a selection from a list of specific values.",
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "description": "A list of selected values.",
+              "type": "string"
+            }
+          }
+        }
+      },
+      "EqualsSelectionAll": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Selection",
+        "description": "This data structure defines the values for the equality comparison.",
+        "type": "object",
+        "properties": {
+          "all": {
+            "$ref": "#/components/schemas/Equals.Selection.AllSelection"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EqualsSelectionList": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Selection",
+        "description": "This data structure defines the values for the equality comparison.",
+        "type": "object",
+        "properties": {
+          "list": {
+            "$ref": "#/components/schemas/Equals.Selection.ListSelection"
+          }
+        },
+        "additionalProperties": false
       },
       "FieldGroup": {
         "type": "object",
@@ -2572,6 +3014,19 @@
           },
           "value": {
             "type": "string"
+          }
+        }
+      },
+      "Filter.Equals": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Equals",
+        "description": "This data structure represents an equality comparison operation.",
+        "type": "object",
+        "properties": {
+          "selection": {
+            "$ref": "#/components/schemas/Equals.Selection"
           }
         }
       },
@@ -2595,28 +3050,69 @@
           }
         }
       },
+      "Filter.NotEquals": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "NotEquals",
+        "description": "This data structure represents a non-equality comparison operation.",
+        "type": "object",
+        "properties": {
+          "selection": {
+            "$ref": "#/components/schemas/NotEquals.Selection"
+          }
+        }
+      },
       "Filter.Operator": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/OperatorEquals"
+            "$ref": "#/components/schemas/FilterOperatorEquals"
           },
           {
-            "$ref": "#/components/schemas/OperatorNotEquals"
+            "$ref": "#/components/schemas/FilterOperatorNotEquals"
           }
         ]
       },
       "Filter.Source": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SourceMetrics"
+            "$ref": "#/components/schemas/FilterSourceLogs"
           },
           {
-            "$ref": "#/components/schemas/SourceLogs"
+            "$ref": "#/components/schemas/FilterSourceSpans"
           },
           {
-            "$ref": "#/components/schemas/SourceSpans"
+            "$ref": "#/components/schemas/FilterSourceMetrics"
           }
         ]
+      },
+      "FilterOperatorEquals": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Operator",
+        "description": "This data structure defines the comparison operation for the filter.",
+        "type": "object",
+        "properties": {
+          "equals": {
+            "$ref": "#/components/schemas/Filter.Equals"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FilterOperatorNotEquals": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Operator",
+        "description": "This data structure defines the comparison operation for the filter.",
+        "type": "object",
+        "properties": {
+          "notEquals": {
+            "$ref": "#/components/schemas/Filter.NotEquals"
+          }
+        },
+        "additionalProperties": false
       },
       "FilterPathAndValues": {
         "oneOf": [
@@ -2672,6 +3168,48 @@
         ],
         "additionalProperties": false
       },
+      "FilterSourceLogs": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Source",
+        "description": "Defines the type of data the filter applies to.",
+        "type": "object",
+        "properties": {
+          "logs": {
+            "$ref": "#/components/schemas/Filter.LogsFilter"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FilterSourceMetrics": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Source",
+        "description": "Defines the type of data the filter applies to.",
+        "type": "object",
+        "properties": {
+          "metrics": {
+            "$ref": "#/components/schemas/MetricsFilter"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FilterSourceSpans": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Source",
+        "description": "Defines the type of data the filter applies to.",
+        "type": "object",
+        "properties": {
+          "spans": {
+            "$ref": "#/components/schemas/SpansFilter"
+          }
+        },
+        "additionalProperties": false
+      },
       "Filters": {
         "externalDocs": {
           "url": ""
@@ -2705,21 +3243,159 @@
           }
         }
       },
+      "Gauge.Aggregation": {
+        "type": "string",
+        "enum": [
+          "AGGREGATION_UNSPECIFIED",
+          "AGGREGATION_LAST",
+          "AGGREGATION_MIN",
+          "AGGREGATION_MAX",
+          "AGGREGATION_AVG",
+          "AGGREGATION_SUM"
+        ]
+      },
+      "Gauge.DataprimeQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "DataprimeQuery",
+        "description": "A Dataprime variant of the query",
+        "type": "object",
+        "properties": {
+          "dataprimeQuery": {
+            "$ref": "#/components/schemas/common.DataprimeQuery"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter.Source"
+            }
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
+      },
+      "Gauge.LogsQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "LogsQuery",
+        "description": "A logs variant of the query",
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/Gauge.Aggregation"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter.LogsFilter"
+            }
+          },
+          "groupBy": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObservationField"
+            }
+          },
+          "logsAggregation": {
+            "$ref": "#/components/schemas/LogsAggregation"
+          },
+          "luceneQuery": {
+            "$ref": "#/components/schemas/LuceneQuery"
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
+      },
+      "Gauge.MetricsQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "MetricsQuery",
+        "description": "A metrics variant of the query",
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/Gauge.Aggregation"
+          },
+          "editorMode": {
+            "$ref": "#/components/schemas/MetricsQueryEditorMode"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricsFilter"
+            }
+          },
+          "promqlQuery": {
+            "$ref": "#/components/schemas/PromQlQuery"
+          },
+          "promqlQueryType": {
+            "$ref": "#/components/schemas/PromQLQueryType"
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
+      },
       "Gauge.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QueryMetrics"
+            "$ref": "#/components/schemas/GaugeQueryMetrics"
           },
           {
-            "$ref": "#/components/schemas/QueryLogs"
+            "$ref": "#/components/schemas/GaugeQueryLogs"
           },
           {
-            "$ref": "#/components/schemas/QuerySpans"
+            "$ref": "#/components/schemas/GaugeQuerySpans"
           },
           {
-            "$ref": "#/components/schemas/QueryDataprime"
+            "$ref": "#/components/schemas/GaugeQueryDataprime"
           }
         ]
+      },
+      "Gauge.SpansQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SpansQuery",
+        "description": "A spans variant of the query",
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/Gauge.Aggregation"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpansFilter"
+            }
+          },
+          "groupBy": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpanField"
+            }
+          },
+          "groupBys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpanObservationField"
+            }
+          },
+          "luceneQuery": {
+            "$ref": "#/components/schemas/LuceneQuery"
+          },
+          "spansAggregation": {
+            "$ref": "#/components/schemas/SpansAggregation"
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
       },
       "Gauge.Threshold": {
         "externalDocs": {
@@ -2778,6 +3454,42 @@
           "UNIT_PERCENT_ZERO_HUNDRED",
           "UNIT_NANOSECONDS"
         ]
+      },
+      "GaugeQueryDataprime": {
+        "type": "object",
+        "properties": {
+          "dataprime": {
+            "$ref": "#/components/schemas/Gauge.DataprimeQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GaugeQueryLogs": {
+        "type": "object",
+        "properties": {
+          "logs": {
+            "$ref": "#/components/schemas/Gauge.LogsQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GaugeQueryMetrics": {
+        "type": "object",
+        "properties": {
+          "metrics": {
+            "$ref": "#/components/schemas/Gauge.MetricsQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GaugeQuerySpans": {
+        "type": "object",
+        "properties": {
+          "spans": {
+            "$ref": "#/components/schemas/Gauge.SpansQuery"
+          }
+        },
+        "additionalProperties": false
       },
       "GetDashboardBySlugResponse": {
         "externalDocs": {
@@ -2960,21 +3672,142 @@
           }
         }
       },
+      "Hexagon.DataprimeQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "DataprimeQuery",
+        "description": "A Dataprime variant of the query",
+        "type": "object",
+        "properties": {
+          "dataprimeQuery": {
+            "$ref": "#/components/schemas/common.DataprimeQuery"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter.Source"
+            }
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
+      },
+      "Hexagon.LogsQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "LogsQuery",
+        "description": "A logs variant of the query",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter.LogsFilter"
+            }
+          },
+          "groupBy": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObservationField"
+            }
+          },
+          "logsAggregation": {
+            "$ref": "#/components/schemas/LogsAggregation"
+          },
+          "luceneQuery": {
+            "$ref": "#/components/schemas/LuceneQuery"
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
+      },
+      "Hexagon.MetricsQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "MetricsQuery",
+        "description": "A metrics variant of the query",
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/common.Aggregation"
+          },
+          "editorMode": {
+            "$ref": "#/components/schemas/MetricsQueryEditorMode"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricsFilter"
+            }
+          },
+          "promqlQuery": {
+            "$ref": "#/components/schemas/PromQlQuery"
+          },
+          "promqlQueryType": {
+            "$ref": "#/components/schemas/PromQLQueryType"
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
+      },
       "Hexagon.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QueryMetrics"
+            "$ref": "#/components/schemas/HexagonQueryMetrics"
           },
           {
-            "$ref": "#/components/schemas/QueryLogs"
+            "$ref": "#/components/schemas/HexagonQueryLogs"
           },
           {
-            "$ref": "#/components/schemas/QuerySpans"
+            "$ref": "#/components/schemas/HexagonQuerySpans"
           },
           {
-            "$ref": "#/components/schemas/QueryDataprime"
+            "$ref": "#/components/schemas/HexagonQueryDataprime"
           }
         ]
+      },
+      "Hexagon.SpansQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SpansQuery",
+        "description": "A spans variant of the query",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpansFilter"
+            }
+          },
+          "groupBy": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpanField"
+            }
+          },
+          "groupBys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpanObservationField"
+            }
+          },
+          "luceneQuery": {
+            "$ref": "#/components/schemas/LuceneQuery"
+          },
+          "spansAggregation": {
+            "$ref": "#/components/schemas/SpansAggregation"
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
       },
       "HexagonBins": {
         "type": "object",
@@ -3037,6 +3870,42 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         }
+      },
+      "HexagonQueryDataprime": {
+        "type": "object",
+        "properties": {
+          "dataprime": {
+            "$ref": "#/components/schemas/Hexagon.DataprimeQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HexagonQueryLogs": {
+        "type": "object",
+        "properties": {
+          "logs": {
+            "$ref": "#/components/schemas/Hexagon.LogsQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HexagonQueryMetrics": {
+        "type": "object",
+        "properties": {
+          "metrics": {
+            "$ref": "#/components/schemas/Hexagon.MetricsQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HexagonQuerySpans": {
+        "type": "object",
+        "properties": {
+          "spans": {
+            "$ref": "#/components/schemas/Hexagon.SpansQuery"
+          }
+        },
+        "additionalProperties": false
       },
       "HorizontalBarChart": {
         "type": "object",
@@ -3252,16 +4121,16 @@
       "HorizontalBarChart.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QueryLogs"
+            "$ref": "#/components/schemas/HorizontalBarChartQueryLogs"
           },
           {
-            "$ref": "#/components/schemas/QuerySpans"
+            "$ref": "#/components/schemas/HorizontalBarChartQuerySpans"
           },
           {
-            "$ref": "#/components/schemas/QueryMetrics"
+            "$ref": "#/components/schemas/HorizontalBarChartQueryMetrics"
           },
           {
-            "$ref": "#/components/schemas/QueryDataprime"
+            "$ref": "#/components/schemas/HorizontalBarChartQueryDataprime"
           }
         ]
       },
@@ -3325,12 +4194,66 @@
       "HorizontalBarChart.YAxisViewBy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/YAxisViewByCategory"
+            "$ref": "#/components/schemas/HorizontalBarChartYAxisViewByCategory"
           },
           {
-            "$ref": "#/components/schemas/YAxisViewByValue"
+            "$ref": "#/components/schemas/HorizontalBarChartYAxisViewByValue"
           }
         ]
+      },
+      "HorizontalBarChartQueryDataprime": {
+        "type": "object",
+        "properties": {
+          "dataprime": {
+            "$ref": "#/components/schemas/HorizontalBarChart.DataprimeQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HorizontalBarChartQueryLogs": {
+        "type": "object",
+        "properties": {
+          "logs": {
+            "$ref": "#/components/schemas/HorizontalBarChart.LogsQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HorizontalBarChartQueryMetrics": {
+        "type": "object",
+        "properties": {
+          "metrics": {
+            "$ref": "#/components/schemas/HorizontalBarChart.MetricsQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HorizontalBarChartQuerySpans": {
+        "type": "object",
+        "properties": {
+          "spans": {
+            "$ref": "#/components/schemas/HorizontalBarChart.SpansQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HorizontalBarChartYAxisViewByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/YAxisViewByCategory"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HorizontalBarChartYAxisViewByValue": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/YAxisViewByValue"
+          }
+        },
+        "additionalProperties": false
       },
       "HorizontalBars": {
         "type": "object",
@@ -3572,19 +4495,95 @@
           "queryDefinitions"
         ]
       },
+      "LineChart.DataprimeQuery": {
+        "type": "object",
+        "properties": {
+          "dataprimeQuery": {
+            "$ref": "#/components/schemas/common.DataprimeQuery"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter.Source"
+            }
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
+      },
+      "LineChart.LogsQuery": {
+        "type": "object",
+        "properties": {
+          "aggregations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LogsAggregation"
+            }
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter.LogsFilter"
+            }
+          },
+          "groupBy": {
+            "type": "array",
+            "items": {
+              "description": "List of field names to group the query results",
+              "type": "string"
+            }
+          },
+          "groupBys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObservationField"
+            }
+          },
+          "luceneQuery": {
+            "$ref": "#/components/schemas/LuceneQuery"
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
+      },
+      "LineChart.MetricsQuery": {
+        "type": "object",
+        "properties": {
+          "editorMode": {
+            "$ref": "#/components/schemas/MetricsQueryEditorMode"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricsFilter"
+            }
+          },
+          "promqlQuery": {
+            "$ref": "#/components/schemas/PromQlQuery"
+          },
+          "seriesLimitType": {
+            "$ref": "#/components/schemas/MetricsSeriesLimitType"
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
+      },
       "LineChart.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QueryLogs"
+            "$ref": "#/components/schemas/LineChartQueryLogs"
           },
           {
-            "$ref": "#/components/schemas/QueryMetrics"
+            "$ref": "#/components/schemas/LineChartQueryMetrics"
           },
           {
-            "$ref": "#/components/schemas/QuerySpans"
+            "$ref": "#/components/schemas/LineChartQuerySpans"
           },
           {
-            "$ref": "#/components/schemas/QueryDataprime"
+            "$ref": "#/components/schemas/LineChartQueryDataprime"
           }
         ]
       },
@@ -3602,6 +4601,41 @@
           }
         }
       },
+      "LineChart.SpansQuery": {
+        "type": "object",
+        "properties": {
+          "aggregations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpansAggregation"
+            }
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpansFilter"
+            }
+          },
+          "groupBy": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpanField"
+            }
+          },
+          "groupBys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpanObservationField"
+            }
+          },
+          "luceneQuery": {
+            "$ref": "#/components/schemas/LuceneQuery"
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
+      },
       "LineChart.StackedLine": {
         "type": "string",
         "enum": [
@@ -3609,6 +4643,42 @@
           "STACKED_LINE_ABSOLUTE",
           "STACKED_LINE_RELATIVE"
         ]
+      },
+      "LineChartQueryDataprime": {
+        "type": "object",
+        "properties": {
+          "dataprime": {
+            "$ref": "#/components/schemas/LineChart.DataprimeQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LineChartQueryLogs": {
+        "type": "object",
+        "properties": {
+          "logs": {
+            "$ref": "#/components/schemas/LineChart.LogsQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LineChartQueryMetrics": {
+        "type": "object",
+        "properties": {
+          "metrics": {
+            "$ref": "#/components/schemas/LineChart.MetricsQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LineChartQuerySpans": {
+        "type": "object",
+        "properties": {
+          "spans": {
+            "$ref": "#/components/schemas/LineChart.SpansQuery"
+          }
+        },
+        "additionalProperties": false
       },
       "ListValue": {
         "type": "object",
@@ -3621,17 +4691,42 @@
           }
         }
       },
+      "Logs": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "LogsQuery",
+        "description": "A logs variant of the query",
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LogsAggregation"
+            }
+          },
+          "dataModeType": {
+            "$ref": "#/components/schemas/widgets.common.DataModeType"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter.LogsFilter"
+            }
+          },
+          "groupBy": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObservationField"
+            }
+          },
+          "luceneQuery": {
+            "$ref": "#/components/schemas/LuceneQuery"
+          }
+        }
+      },
       "LogsAggregation": {
         "oneOf": [
-          {
-            "$ref": "#/components/schemas/LogsAggregationSum"
-          },
-          {
-            "$ref": "#/components/schemas/LogsAggregationAverage"
-          },
-          {
-            "$ref": "#/components/schemas/LogsAggregationMin"
-          },
           {
             "$ref": "#/components/schemas/LogsAggregationMax"
           },
@@ -3643,6 +4738,15 @@
           },
           {
             "$ref": "#/components/schemas/LogsAggregationCountDistinct"
+          },
+          {
+            "$ref": "#/components/schemas/LogsAggregationSum"
+          },
+          {
+            "$ref": "#/components/schemas/LogsAggregationAverage"
+          },
+          {
+            "$ref": "#/components/schemas/LogsAggregationMin"
           }
         ]
       },
@@ -3720,6 +4824,53 @@
           }
         }
       },
+      "LogsQuery.Aggregation": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/LogsAggregation"
+          },
+          "id": {
+            "example": {
+              "value": "52d192ac-a28f-4c51-97f5-5ba004249ba1"
+            },
+            "description": "Aggregation unique identifier",
+            "type": "string"
+          },
+          "isVisible": {
+            "description": "Whether the aggregation is visible in the table",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Aggregation name",
+            "type": "string"
+          }
+        }
+      },
+      "LogsQuery.Grouping": {
+        "type": "object",
+        "properties": {
+          "aggregations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LogsQuery.Aggregation"
+            }
+          },
+          "groupBy": {
+            "type": "array",
+            "items": {
+              "description": "List of field names to group the query results",
+              "type": "string"
+            }
+          },
+          "groupBys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObservationField"
+            }
+          }
+        }
+      },
       "LogsSource": {
         "type": "object",
         "properties": {
@@ -3746,15 +4897,72 @@
       "LogsSource.Strategy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/StrategyRange"
+            "$ref": "#/components/schemas/LogsSourceStrategyDuration"
           },
           {
-            "$ref": "#/components/schemas/StrategyDuration"
+            "$ref": "#/components/schemas/LogsSourceStrategyInstant"
           },
           {
-            "$ref": "#/components/schemas/StrategyInstant"
+            "$ref": "#/components/schemas/LogsSourceStrategyRange"
           }
         ]
+      },
+      "LogsSource.Strategy.Duration": {
+        "type": "object",
+        "properties": {
+          "durationField": {
+            "$ref": "#/components/schemas/ObservationField"
+          },
+          "startTimestampField": {
+            "$ref": "#/components/schemas/ObservationField"
+          }
+        }
+      },
+      "LogsSource.Strategy.Instant": {
+        "type": "object",
+        "properties": {
+          "timestampField": {
+            "$ref": "#/components/schemas/ObservationField"
+          }
+        }
+      },
+      "LogsSource.Strategy.Range": {
+        "type": "object",
+        "properties": {
+          "endTimestampField": {
+            "$ref": "#/components/schemas/ObservationField"
+          },
+          "startTimestampField": {
+            "$ref": "#/components/schemas/ObservationField"
+          }
+        }
+      },
+      "LogsSourceStrategyDuration": {
+        "type": "object",
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/LogsSource.Strategy.Duration"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LogsSourceStrategyInstant": {
+        "type": "object",
+        "properties": {
+          "instant": {
+            "$ref": "#/components/schemas/LogsSource.Strategy.Instant"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LogsSourceStrategyRange": {
+        "type": "object",
+        "properties": {
+          "range": {
+            "$ref": "#/components/schemas/LogsSource.Strategy.Range"
+          }
+        },
+        "additionalProperties": false
       },
       "LuceneQuery": {
         "type": "object",
@@ -3789,10 +4997,10 @@
       "ManualSource.Strategy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/StrategyInstant"
+            "$ref": "#/components/schemas/ManualSourceStrategyInstant"
           },
           {
-            "$ref": "#/components/schemas/StrategyRange"
+            "$ref": "#/components/schemas/ManualSourceStrategyRange"
           }
         ]
       },
@@ -3829,6 +5037,24 @@
             "$ref": "#/components/schemas/common.Unit"
           }
         }
+      },
+      "ManualSourceStrategyInstant": {
+        "type": "object",
+        "properties": {
+          "instant": {
+            "$ref": "#/components/schemas/ManualSource.Strategy.Instant"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ManualSourceStrategyRange": {
+        "type": "object",
+        "properties": {
+          "range": {
+            "$ref": "#/components/schemas/ManualSource.Strategy.Range"
+          }
+        },
+        "additionalProperties": false
       },
       "Markdown": {
         "type": "object",
@@ -3912,6 +5138,28 @@
           }
         }
       },
+      "Metrics": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "MetricsQuery",
+        "description": "A metrics variant of the query",
+        "type": "object",
+        "properties": {
+          "editorMode": {
+            "$ref": "#/components/schemas/MetricsQueryEditorMode"
+          },
+          "promqlQuery": {
+            "$ref": "#/components/schemas/PromQlQuery"
+          },
+          "promqlQueryType": {
+            "$ref": "#/components/schemas/PromQLQueryType"
+          },
+          "seriesLimitType": {
+            "$ref": "#/components/schemas/MetricsSeriesLimitType"
+          }
+        }
+      },
       "MetricsFilter": {
         "externalDocs": {
           "url": ""
@@ -3939,6 +5187,14 @@
           "METRICS_QUERY_EDITOR_MODE_UNSPECIFIED",
           "METRICS_QUERY_EDITOR_MODE_TEXT",
           "METRICS_QUERY_EDITOR_MODE_BUILDER"
+        ]
+      },
+      "MetricsSeriesLimitType": {
+        "type": "string",
+        "enum": [
+          "METRICS_SERIES_LIMIT_TYPE_UNSPECIFIED",
+          "METRICS_SERIES_LIMIT_TYPE_BY_SERIES_COUNT",
+          "METRICS_SERIES_LIMIT_TYPE_BY_POINT_COUNT"
         ]
       },
       "MetricsSource": {
@@ -4010,13 +5266,13 @@
       "MultiSelect.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QueryLogsQuery"
+            "$ref": "#/components/schemas/MultiSelectQueryLogsQuery"
           },
           {
-            "$ref": "#/components/schemas/QueryMetricsQuery"
+            "$ref": "#/components/schemas/MultiSelectQueryMetricsQuery"
           },
           {
-            "$ref": "#/components/schemas/QuerySpansQuery"
+            "$ref": "#/components/schemas/MultiSelectQuerySpansQuery"
           }
         ]
       },
@@ -4045,10 +5301,10 @@
       "MultiSelect.Selection": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SelectionAll"
+            "$ref": "#/components/schemas/MultiSelectSelectionAll"
           },
           {
-            "$ref": "#/components/schemas/SelectionList"
+            "$ref": "#/components/schemas/MultiSelectSelectionList"
           }
         ]
       },
@@ -4075,19 +5331,19 @@
       "MultiSelect.Source": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SourceLogsPath"
+            "$ref": "#/components/schemas/MultiSelectSourceLogsPath"
           },
           {
-            "$ref": "#/components/schemas/SourceMetricLabel"
+            "$ref": "#/components/schemas/MultiSelectSourceMetricLabel"
           },
           {
-            "$ref": "#/components/schemas/SourceConstantList"
+            "$ref": "#/components/schemas/MultiSelectSourceConstantList"
           },
           {
-            "$ref": "#/components/schemas/SourceSpanField"
+            "$ref": "#/components/schemas/MultiSelectSourceSpanField"
           },
           {
-            "$ref": "#/components/schemas/SourceQuery"
+            "$ref": "#/components/schemas/MultiSelectSourceQuery"
           }
         ]
       },
@@ -4101,6 +5357,96 @@
             "type": "string"
           }
         }
+      },
+      "MultiSelectQueryLogsQuery": {
+        "type": "object",
+        "properties": {
+          "logsQuery": {
+            "$ref": "#/components/schemas/Query.LogsQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MultiSelectQueryMetricsQuery": {
+        "type": "object",
+        "properties": {
+          "metricsQuery": {
+            "$ref": "#/components/schemas/Query.MetricsQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MultiSelectQuerySpansQuery": {
+        "type": "object",
+        "properties": {
+          "spansQuery": {
+            "$ref": "#/components/schemas/Query.SpansQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MultiSelectSelectionAll": {
+        "type": "object",
+        "properties": {
+          "all": {
+            "$ref": "#/components/schemas/MultiSelect.Selection.AllSelection"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MultiSelectSelectionList": {
+        "type": "object",
+        "properties": {
+          "list": {
+            "$ref": "#/components/schemas/MultiSelect.Selection.ListSelection"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MultiSelectSourceConstantList": {
+        "type": "object",
+        "properties": {
+          "constantList": {
+            "$ref": "#/components/schemas/ConstantListSource"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MultiSelectSourceLogsPath": {
+        "type": "object",
+        "properties": {
+          "logsPath": {
+            "$ref": "#/components/schemas/LogsPathSource"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MultiSelectSourceMetricLabel": {
+        "type": "object",
+        "properties": {
+          "metricLabel": {
+            "$ref": "#/components/schemas/MetricLabelSource"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MultiSelectSourceQuery": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "$ref": "#/components/schemas/MultiSelect.QuerySource"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MultiSelectSourceSpanField": {
+        "type": "object",
+        "properties": {
+          "spanField": {
+            "$ref": "#/components/schemas/SpanFieldSource"
+          }
+        },
+        "additionalProperties": false
       },
       "MultiStringValue": {
         "oneOf": [
@@ -4144,6 +5490,36 @@
           }
         }
       },
+      "NotEquals.Selection": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Selection",
+        "description": "This data structure defines the values for the non-equality comparison.",
+        "type": "object",
+        "properties": {
+          "list": {
+            "$ref": "#/components/schemas/NotEquals.Selection.ListSelection"
+          }
+        }
+      },
+      "NotEquals.Selection.ListSelection": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "ListSelection",
+        "description": "This data structure represents a selection from a list of specific values.",
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "description": "A list of values for the selection.",
+              "type": "string"
+            }
+          }
+        }
+      },
       "NumericValueLabel": {
         "type": "object",
         "properties": {
@@ -4169,24 +5545,6 @@
             "$ref": "#/components/schemas/DatasetScope"
           }
         }
-      },
-      "OperatorEquals": {
-        "type": "object",
-        "properties": {
-          "equals": {
-            "$ref": "#/components/schemas/Query.MetricsQuery.Equals"
-          }
-        },
-        "additionalProperties": false
-      },
-      "OperatorNotEquals": {
-        "type": "object",
-        "properties": {
-          "notEquals": {
-            "$ref": "#/components/schemas/Query.MetricsQuery.NotEquals"
-          }
-        },
-        "additionalProperties": false
       },
       "OrderDirection": {
         "type": "string",
@@ -4226,21 +5584,184 @@
           }
         }
       },
+      "PieChart.DataprimeQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "DataprimeQuery",
+        "description": "A Dataprime variant of the query",
+        "type": "object",
+        "properties": {
+          "dataprimeQuery": {
+            "$ref": "#/components/schemas/common.DataprimeQuery"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter.Source"
+            }
+          },
+          "groupNames": {
+            "type": "array",
+            "items": {
+              "description": "List of field names by which results are grouped",
+              "type": "string"
+            }
+          },
+          "stackedGroupName": {
+            "description": "Field name by which results in groups are divided into subgroups",
+            "type": "string"
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
+      },
+      "PieChart.LogsQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "LogsQuery",
+        "description": "A logs variant of the query",
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/LogsAggregation"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter.LogsFilter"
+            }
+          },
+          "groupNames": {
+            "type": "array",
+            "items": {
+              "description": "List of field names to group the query results",
+              "type": "string"
+            }
+          },
+          "groupNamesFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObservationField"
+            }
+          },
+          "luceneQuery": {
+            "$ref": "#/components/schemas/LuceneQuery"
+          },
+          "stackedGroupName": {
+            "description": "Field name by which results are stacked in individual group",
+            "type": "string"
+          },
+          "stackedGroupNameField": {
+            "$ref": "#/components/schemas/ObservationField"
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
+      },
+      "PieChart.MetricsQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "MetricsQuery",
+        "description": "A metrics variant of the query",
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/common.Aggregation"
+          },
+          "editorMode": {
+            "$ref": "#/components/schemas/MetricsQueryEditorMode"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricsFilter"
+            }
+          },
+          "groupNames": {
+            "type": "array",
+            "items": {
+              "description": "List of field names by which metric results are grouped",
+              "type": "string"
+            }
+          },
+          "promqlQuery": {
+            "$ref": "#/components/schemas/PromQlQuery"
+          },
+          "promqlQueryType": {
+            "$ref": "#/components/schemas/PromQLQueryType"
+          },
+          "stackedGroupName": {
+            "description": "Field name by which results in groups are divided into subgroups",
+            "type": "string"
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
+      },
       "PieChart.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QueryLogs"
+            "$ref": "#/components/schemas/PieChartQueryLogs"
           },
           {
-            "$ref": "#/components/schemas/QuerySpans"
+            "$ref": "#/components/schemas/PieChartQuerySpans"
           },
           {
-            "$ref": "#/components/schemas/QueryMetrics"
+            "$ref": "#/components/schemas/PieChartQueryMetrics"
           },
           {
-            "$ref": "#/components/schemas/QueryDataprime"
+            "$ref": "#/components/schemas/PieChartQueryDataprime"
           }
         ]
+      },
+      "PieChart.SpansQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SpansQuery",
+        "description": "A spans variant of the query",
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/SpansAggregation"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpansFilter"
+            }
+          },
+          "groupNames": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpanField"
+            }
+          },
+          "groupNamesFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpanObservationField"
+            }
+          },
+          "luceneQuery": {
+            "$ref": "#/components/schemas/LuceneQuery"
+          },
+          "stackedGroupName": {
+            "$ref": "#/components/schemas/SpanField"
+          },
+          "stackedGroupNameField": {
+            "$ref": "#/components/schemas/SpanObservationField"
+          },
+          "timeFrame": {
+            "$ref": "#/components/schemas/TimeFrameSelect"
+          }
+        }
       },
       "PieChart.StackDefinition": {
         "type": "object",
@@ -4258,6 +5779,42 @@
             "type": "string"
           }
         }
+      },
+      "PieChartQueryDataprime": {
+        "type": "object",
+        "properties": {
+          "dataprime": {
+            "$ref": "#/components/schemas/PieChart.DataprimeQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PieChartQueryLogs": {
+        "type": "object",
+        "properties": {
+          "logs": {
+            "$ref": "#/components/schemas/PieChart.LogsQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PieChartQueryMetrics": {
+        "type": "object",
+        "properties": {
+          "metrics": {
+            "$ref": "#/components/schemas/PieChart.MetricsQuery"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PieChartQuerySpans": {
+        "type": "object",
+        "properties": {
+          "spans": {
+            "$ref": "#/components/schemas/PieChart.SpansQuery"
+          }
+        },
+        "additionalProperties": false
       },
       "PinDashboardResponse": {
         "externalDocs": {
@@ -4295,12 +5852,28 @@
       "Query.LogsQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TypeFieldName"
+            "$ref": "#/components/schemas/QueryLogsQueryTypeFieldName"
           },
           {
-            "$ref": "#/components/schemas/TypeFieldValue"
+            "$ref": "#/components/schemas/QueryLogsQueryTypeFieldValue"
           }
         ]
+      },
+      "Query.LogsQuery.Type.FieldName": {
+        "type": "object",
+        "properties": {
+          "logRegex": {
+            "type": "string"
+          }
+        }
+      },
+      "Query.LogsQuery.Type.FieldValue": {
+        "type": "object",
+        "properties": {
+          "observationField": {
+            "$ref": "#/components/schemas/ObservationField"
+          }
+        }
       },
       "Query.MetricsQuery": {
         "type": "object",
@@ -4343,10 +5916,10 @@
       "Query.MetricsQuery.Operator": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/OperatorEquals"
+            "$ref": "#/components/schemas/QueryMetricsQueryOperatorEquals"
           },
           {
-            "$ref": "#/components/schemas/OperatorNotEquals"
+            "$ref": "#/components/schemas/QueryMetricsQueryOperatorNotEquals"
           }
         ]
       },
@@ -4372,23 +5945,23 @@
       "Query.MetricsQuery.StringOrVariable": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/StringOrVariableVariableName"
+            "$ref": "#/components/schemas/QueryMetricsQueryStringOrVariableStringValue"
           },
           {
-            "$ref": "#/components/schemas/StringOrVariableStringValue"
+            "$ref": "#/components/schemas/QueryMetricsQueryStringOrVariableVariableName"
           }
         ]
       },
       "Query.MetricsQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TypeMetricName"
+            "$ref": "#/components/schemas/QueryMetricsQueryTypeMetricName"
           },
           {
-            "$ref": "#/components/schemas/TypeLabelName"
+            "$ref": "#/components/schemas/QueryMetricsQueryTypeLabelName"
           },
           {
-            "$ref": "#/components/schemas/TypeLabelValue"
+            "$ref": "#/components/schemas/QueryMetricsQueryTypeLabelValue"
           }
         ]
       },
@@ -4436,10 +6009,10 @@
       "Query.SpansQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TypeFieldName"
+            "$ref": "#/components/schemas/QuerySpansQueryTypeFieldName"
           },
           {
-            "$ref": "#/components/schemas/TypeFieldValue"
+            "$ref": "#/components/schemas/QuerySpansQueryTypeFieldValue"
           }
         ]
       },
@@ -4461,15 +6034,6 @@
             "$ref": "#/components/schemas/SpanField"
           }
         }
-      },
-      "QueryDataprime": {
-        "type": "object",
-        "properties": {
-          "dataprime": {
-            "$ref": "#/components/schemas/HorizontalBarChart.DataprimeQuery"
-          }
-        },
-        "additionalProperties": false
       },
       "QueryDefinition": {
         "externalDocs": {
@@ -4576,38 +6140,83 @@
           "query"
         ]
       },
-      "QueryLogs": {
+      "QueryLogsQueryTypeFieldName": {
         "type": "object",
         "properties": {
-          "logs": {
-            "$ref": "#/components/schemas/HorizontalBarChart.LogsQuery"
+          "fieldName": {
+            "$ref": "#/components/schemas/Query.LogsQuery.Type.FieldName"
           }
         },
         "additionalProperties": false
       },
-      "QueryLogsQuery": {
+      "QueryLogsQueryTypeFieldValue": {
         "type": "object",
         "properties": {
-          "logsQuery": {
-            "$ref": "#/components/schemas/Query.LogsQuery"
+          "fieldValue": {
+            "$ref": "#/components/schemas/Query.LogsQuery.Type.FieldValue"
           }
         },
         "additionalProperties": false
       },
-      "QueryMetrics": {
+      "QueryMetricsQueryOperatorEquals": {
         "type": "object",
         "properties": {
-          "metrics": {
-            "$ref": "#/components/schemas/HorizontalBarChart.MetricsQuery"
+          "equals": {
+            "$ref": "#/components/schemas/Query.MetricsQuery.Equals"
           }
         },
         "additionalProperties": false
       },
-      "QueryMetricsQuery": {
+      "QueryMetricsQueryOperatorNotEquals": {
         "type": "object",
         "properties": {
-          "metricsQuery": {
-            "$ref": "#/components/schemas/Query.MetricsQuery"
+          "notEquals": {
+            "$ref": "#/components/schemas/Query.MetricsQuery.NotEquals"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QueryMetricsQueryStringOrVariableStringValue": {
+        "type": "object",
+        "properties": {
+          "stringValue": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QueryMetricsQueryStringOrVariableVariableName": {
+        "type": "object",
+        "properties": {
+          "variableName": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QueryMetricsQueryTypeLabelName": {
+        "type": "object",
+        "properties": {
+          "labelName": {
+            "$ref": "#/components/schemas/Query.MetricsQuery.Type.LabelName"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QueryMetricsQueryTypeLabelValue": {
+        "type": "object",
+        "properties": {
+          "labelValue": {
+            "$ref": "#/components/schemas/Query.MetricsQuery.Type.LabelValue"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QueryMetricsQueryTypeMetricName": {
+        "type": "object",
+        "properties": {
+          "metricName": {
+            "$ref": "#/components/schemas/Query.MetricsQuery.Type.MetricName"
           }
         },
         "additionalProperties": false
@@ -4631,12 +6240,28 @@
       "QuerySource.LogsQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TypeFieldName"
+            "$ref": "#/components/schemas/QuerySourceLogsQueryTypeFieldValue"
           },
           {
-            "$ref": "#/components/schemas/TypeFieldValue"
+            "$ref": "#/components/schemas/QuerySourceLogsQueryTypeFieldName"
           }
         ]
+      },
+      "QuerySource.LogsQuery.Type.FieldName": {
+        "type": "object",
+        "properties": {
+          "logRegex": {
+            "type": "string"
+          }
+        }
+      },
+      "QuerySource.LogsQuery.Type.FieldValue": {
+        "type": "object",
+        "properties": {
+          "observationField": {
+            "$ref": "#/components/schemas/ObservationField"
+          }
+        }
       },
       "QuerySource.MetricsQuery": {
         "type": "object",
@@ -4646,18 +6271,120 @@
           }
         }
       },
+      "QuerySource.MetricsQuery.Equals": {
+        "type": "object",
+        "properties": {
+          "selection": {
+            "$ref": "#/components/schemas/QuerySource.MetricsQuery.Selection"
+          }
+        }
+      },
+      "QuerySource.MetricsQuery.MetricsLabelFilter": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "$ref": "#/components/schemas/QuerySource.MetricsQuery.StringOrVariable"
+          },
+          "metric": {
+            "$ref": "#/components/schemas/QuerySource.MetricsQuery.StringOrVariable"
+          },
+          "operator": {
+            "$ref": "#/components/schemas/QuerySource.MetricsQuery.Operator"
+          }
+        }
+      },
+      "QuerySource.MetricsQuery.NotEquals": {
+        "type": "object",
+        "properties": {
+          "selection": {
+            "$ref": "#/components/schemas/QuerySource.MetricsQuery.Selection"
+          }
+        }
+      },
+      "QuerySource.MetricsQuery.Operator": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/QuerySourceMetricsQueryOperatorEquals"
+          },
+          {
+            "$ref": "#/components/schemas/QuerySourceMetricsQueryOperatorNotEquals"
+          }
+        ]
+      },
+      "QuerySource.MetricsQuery.Selection": {
+        "type": "object",
+        "properties": {
+          "list": {
+            "$ref": "#/components/schemas/QuerySource.MetricsQuery.Selection.ListSelection"
+          }
+        }
+      },
+      "QuerySource.MetricsQuery.Selection.ListSelection": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuerySource.MetricsQuery.StringOrVariable"
+            }
+          }
+        }
+      },
+      "QuerySource.MetricsQuery.StringOrVariable": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/QuerySourceMetricsQueryStringOrVariableStringValue"
+          },
+          {
+            "$ref": "#/components/schemas/QuerySourceMetricsQueryStringOrVariableVariableName"
+          }
+        ]
+      },
       "QuerySource.MetricsQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TypeMetricName"
+            "$ref": "#/components/schemas/QuerySourceMetricsQueryTypeMetricName"
           },
           {
-            "$ref": "#/components/schemas/TypeLabelName"
+            "$ref": "#/components/schemas/QuerySourceMetricsQueryTypeLabelName"
           },
           {
-            "$ref": "#/components/schemas/TypeLabelValue"
+            "$ref": "#/components/schemas/QuerySourceMetricsQueryTypeLabelValue"
           }
         ]
+      },
+      "QuerySource.MetricsQuery.Type.LabelName": {
+        "type": "object",
+        "properties": {
+          "metricRegex": {
+            "type": "string"
+          }
+        }
+      },
+      "QuerySource.MetricsQuery.Type.LabelValue": {
+        "type": "object",
+        "properties": {
+          "labelFilters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuerySource.MetricsQuery.MetricsLabelFilter"
+            }
+          },
+          "labelName": {
+            "$ref": "#/components/schemas/QuerySource.MetricsQuery.StringOrVariable"
+          },
+          "metricName": {
+            "$ref": "#/components/schemas/QuerySource.MetricsQuery.StringOrVariable"
+          }
+        }
+      },
+      "QuerySource.MetricsQuery.Type.MetricName": {
+        "type": "object",
+        "properties": {
+          "metricRegex": {
+            "type": "string"
+          }
+        }
       },
       "QuerySource.SpansQuery": {
         "type": "object",
@@ -4670,111 +6397,145 @@
       "QuerySource.SpansQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TypeFieldName"
+            "$ref": "#/components/schemas/QuerySourceSpansQueryTypeFieldValue"
           },
           {
-            "$ref": "#/components/schemas/TypeFieldValue"
+            "$ref": "#/components/schemas/QuerySourceSpansQueryTypeFieldName"
           }
         ]
       },
-      "QuerySourceDataprimeQuery": {
+      "QuerySource.SpansQuery.Type.FieldName": {
         "type": "object",
         "properties": {
-          "allOption": {
-            "$ref": "#/components/schemas/AllOption"
+          "spanRegex": {
+            "type": "string"
+          }
+        }
+      },
+      "QuerySource.SpansQuery.Type.FieldValue": {
+        "type": "object",
+        "properties": {
+          "observationField": {
+            "$ref": "#/components/schemas/ObservationField"
           },
-          "dataprimeQuery": {
-            "$ref": "#/components/schemas/QuerySource.DataprimeQuery"
-          },
-          "refreshStrategy": {
-            "$ref": "#/components/schemas/VariableSourceV2.RefreshStrategy"
-          },
-          "valueDisplayOptions": {
-            "$ref": "#/components/schemas/VariableSourceV2.ValueDisplayOptions"
-          },
-          "valuesOrderDirection": {
-            "$ref": "#/components/schemas/OrderDirection"
+          "value": {
+            "$ref": "#/components/schemas/SpanField"
+          }
+        }
+      },
+      "QuerySourceLogsQueryTypeFieldName": {
+        "type": "object",
+        "properties": {
+          "fieldName": {
+            "$ref": "#/components/schemas/QuerySource.LogsQuery.Type.FieldName"
           }
         },
         "additionalProperties": false
       },
-      "QuerySourceLogsQuery": {
+      "QuerySourceLogsQueryTypeFieldValue": {
         "type": "object",
         "properties": {
-          "allOption": {
-            "$ref": "#/components/schemas/AllOption"
-          },
-          "logsQuery": {
-            "$ref": "#/components/schemas/QuerySource.LogsQuery"
-          },
-          "refreshStrategy": {
-            "$ref": "#/components/schemas/VariableSourceV2.RefreshStrategy"
-          },
-          "valueDisplayOptions": {
-            "$ref": "#/components/schemas/VariableSourceV2.ValueDisplayOptions"
-          },
-          "valuesOrderDirection": {
-            "$ref": "#/components/schemas/OrderDirection"
+          "fieldValue": {
+            "$ref": "#/components/schemas/QuerySource.LogsQuery.Type.FieldValue"
           }
         },
         "additionalProperties": false
       },
-      "QuerySourceMetricsQuery": {
+      "QuerySourceMetricsQueryOperatorEquals": {
         "type": "object",
         "properties": {
-          "allOption": {
-            "$ref": "#/components/schemas/AllOption"
-          },
-          "metricsQuery": {
-            "$ref": "#/components/schemas/QuerySource.MetricsQuery"
-          },
-          "refreshStrategy": {
-            "$ref": "#/components/schemas/VariableSourceV2.RefreshStrategy"
-          },
-          "valueDisplayOptions": {
-            "$ref": "#/components/schemas/VariableSourceV2.ValueDisplayOptions"
-          },
-          "valuesOrderDirection": {
-            "$ref": "#/components/schemas/OrderDirection"
+          "equals": {
+            "$ref": "#/components/schemas/QuerySource.MetricsQuery.Equals"
           }
         },
         "additionalProperties": false
       },
-      "QuerySourceSpansQuery": {
+      "QuerySourceMetricsQueryOperatorNotEquals": {
         "type": "object",
         "properties": {
-          "allOption": {
-            "$ref": "#/components/schemas/AllOption"
-          },
-          "refreshStrategy": {
-            "$ref": "#/components/schemas/VariableSourceV2.RefreshStrategy"
-          },
-          "spansQuery": {
-            "$ref": "#/components/schemas/QuerySource.SpansQuery"
-          },
-          "valueDisplayOptions": {
-            "$ref": "#/components/schemas/VariableSourceV2.ValueDisplayOptions"
-          },
-          "valuesOrderDirection": {
-            "$ref": "#/components/schemas/OrderDirection"
+          "notEquals": {
+            "$ref": "#/components/schemas/QuerySource.MetricsQuery.NotEquals"
           }
         },
         "additionalProperties": false
       },
-      "QuerySpans": {
+      "QuerySourceMetricsQueryStringOrVariableStringValue": {
         "type": "object",
         "properties": {
-          "spans": {
-            "$ref": "#/components/schemas/HorizontalBarChart.SpansQuery"
+          "stringValue": {
+            "type": "string"
           }
         },
         "additionalProperties": false
       },
-      "QuerySpansQuery": {
+      "QuerySourceMetricsQueryStringOrVariableVariableName": {
         "type": "object",
         "properties": {
-          "spansQuery": {
-            "$ref": "#/components/schemas/Query.SpansQuery"
+          "variableName": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuerySourceMetricsQueryTypeLabelName": {
+        "type": "object",
+        "properties": {
+          "labelName": {
+            "$ref": "#/components/schemas/QuerySource.MetricsQuery.Type.LabelName"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuerySourceMetricsQueryTypeLabelValue": {
+        "type": "object",
+        "properties": {
+          "labelValue": {
+            "$ref": "#/components/schemas/QuerySource.MetricsQuery.Type.LabelValue"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuerySourceMetricsQueryTypeMetricName": {
+        "type": "object",
+        "properties": {
+          "metricName": {
+            "$ref": "#/components/schemas/QuerySource.MetricsQuery.Type.MetricName"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuerySourceSpansQueryTypeFieldName": {
+        "type": "object",
+        "properties": {
+          "fieldName": {
+            "$ref": "#/components/schemas/QuerySource.SpansQuery.Type.FieldName"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuerySourceSpansQueryTypeFieldValue": {
+        "type": "object",
+        "properties": {
+          "fieldValue": {
+            "$ref": "#/components/schemas/QuerySource.SpansQuery.Type.FieldValue"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuerySpansQueryTypeFieldName": {
+        "type": "object",
+        "properties": {
+          "fieldName": {
+            "$ref": "#/components/schemas/Query.SpansQuery.Type.FieldName"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuerySpansQueryTypeFieldValue": {
+        "type": "object",
+        "properties": {
+          "fieldValue": {
+            "$ref": "#/components/schemas/Query.SpansQuery.Type.FieldValue"
           }
         },
         "additionalProperties": false
@@ -4941,24 +6702,6 @@
           "SECTION_PREDEFINED_COLOR_ORANGE"
         ]
       },
-      "SelectionAll": {
-        "type": "object",
-        "properties": {
-          "all": {
-            "$ref": "#/components/schemas/MultiSelect.Selection.AllSelection"
-          }
-        },
-        "additionalProperties": false
-      },
-      "SelectionList": {
-        "type": "object",
-        "properties": {
-          "list": {
-            "$ref": "#/components/schemas/MultiSelect.Selection.ListSelection"
-          }
-        },
-        "additionalProperties": false
-      },
       "SelectionType": {
         "type": "string",
         "enum": [
@@ -4983,96 +6726,6 @@
           "SORT_BY_TYPE_VALUE",
           "SORT_BY_TYPE_NAME"
         ]
-      },
-      "SourceConstantList": {
-        "type": "object",
-        "properties": {
-          "constantList": {
-            "$ref": "#/components/schemas/ConstantListSource"
-          }
-        },
-        "additionalProperties": false
-      },
-      "SourceDataprime": {
-        "type": "object",
-        "properties": {
-          "dataprime": {
-            "$ref": "#/components/schemas/DataprimeSource"
-          }
-        },
-        "additionalProperties": false
-      },
-      "SourceLogs": {
-        "type": "object",
-        "properties": {
-          "logs": {
-            "$ref": "#/components/schemas/LogsSource"
-          }
-        },
-        "additionalProperties": false
-      },
-      "SourceLogsPath": {
-        "type": "object",
-        "properties": {
-          "logsPath": {
-            "$ref": "#/components/schemas/LogsPathSource"
-          }
-        },
-        "additionalProperties": false
-      },
-      "SourceManual": {
-        "type": "object",
-        "properties": {
-          "manual": {
-            "$ref": "#/components/schemas/ManualSource"
-          }
-        },
-        "additionalProperties": false
-      },
-      "SourceMetricLabel": {
-        "type": "object",
-        "properties": {
-          "metricLabel": {
-            "$ref": "#/components/schemas/MetricLabelSource"
-          }
-        },
-        "additionalProperties": false
-      },
-      "SourceMetrics": {
-        "type": "object",
-        "properties": {
-          "metrics": {
-            "$ref": "#/components/schemas/MetricsSource"
-          }
-        },
-        "additionalProperties": false
-      },
-      "SourceQuery": {
-        "type": "object",
-        "properties": {
-          "query": {
-            "$ref": "#/components/schemas/MultiSelect.QuerySource"
-          }
-        },
-        "additionalProperties": false
-      },
-      "SourceSpanField": {
-        "type": "object",
-        "properties": {
-          "spanField": {
-            "$ref": "#/components/schemas/SpanFieldSource"
-          }
-        },
-        "additionalProperties": false
-      },
-      "SourceSpans": {
-        "type": "object",
-        "properties": {
-          "spans": {
-            "$ref": "#/components/schemas/SpansSource"
-          }
-        },
-        "additionalProperties": false
       },
       "SpanField": {
         "oneOf": [
@@ -5148,6 +6801,40 @@
           "SPAN_RELATION_TYPE_ROOT"
         ]
       },
+      "Spans": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SpansQuery",
+        "description": "A spans variant of the query",
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LogsAggregation"
+            }
+          },
+          "dataModeType": {
+            "$ref": "#/components/schemas/widgets.common.DataModeType"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpansFilter"
+            }
+          },
+          "groupBy": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpanObservationField"
+            }
+          },
+          "luceneQuery": {
+            "$ref": "#/components/schemas/LuceneQuery"
+          }
+        }
+      },
       "SpansAggregation": {
         "oneOf": [
           {
@@ -5195,6 +6882,52 @@
           }
         }
       },
+      "SpansQuery.Aggregation": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/SpansAggregation"
+          },
+          "id": {
+            "example": {
+              "value": "52d192ac-a28f-4c51-97f5-5ba004249ba1"
+            },
+            "description": "Aggregation unique identifier",
+            "type": "string"
+          },
+          "isVisible": {
+            "description": "Whether the aggregation is visible in the table",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Aggregation name",
+            "type": "string"
+          }
+        }
+      },
+      "SpansQuery.Grouping": {
+        "type": "object",
+        "properties": {
+          "aggregations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpansQuery.Aggregation"
+            }
+          },
+          "groupBy": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpanField"
+            }
+          },
+          "groupBys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpanObservationField"
+            }
+          }
+        }
+      },
       "SpansSource": {
         "type": "object",
         "properties": {
@@ -5221,15 +6954,72 @@
       "SpansSource.Strategy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/StrategyInstant"
+            "$ref": "#/components/schemas/SpansSourceStrategyInstant"
           },
           {
-            "$ref": "#/components/schemas/StrategyRange"
+            "$ref": "#/components/schemas/SpansSourceStrategyRange"
           },
           {
-            "$ref": "#/components/schemas/StrategyDuration"
+            "$ref": "#/components/schemas/SpansSourceStrategyDuration"
           }
         ]
+      },
+      "SpansSource.Strategy.Duration": {
+        "type": "object",
+        "properties": {
+          "durationField": {
+            "$ref": "#/components/schemas/ObservationField"
+          },
+          "startTimestampField": {
+            "$ref": "#/components/schemas/ObservationField"
+          }
+        }
+      },
+      "SpansSource.Strategy.Instant": {
+        "type": "object",
+        "properties": {
+          "timestampField": {
+            "$ref": "#/components/schemas/ObservationField"
+          }
+        }
+      },
+      "SpansSource.Strategy.Range": {
+        "type": "object",
+        "properties": {
+          "endTimestampField": {
+            "$ref": "#/components/schemas/ObservationField"
+          },
+          "startTimestampField": {
+            "$ref": "#/components/schemas/ObservationField"
+          }
+        }
+      },
+      "SpansSourceStrategyDuration": {
+        "type": "object",
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/SpansSource.Strategy.Duration"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpansSourceStrategyInstant": {
+        "type": "object",
+        "properties": {
+          "instant": {
+            "$ref": "#/components/schemas/SpansSource.Strategy.Instant"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpansSourceStrategyRange": {
+        "type": "object",
+        "properties": {
+          "range": {
+            "$ref": "#/components/schemas/SpansSource.Strategy.Range"
+          }
+        },
+        "additionalProperties": false
       },
       "SpecificWidgets": {
         "type": "object",
@@ -5331,51 +7121,6 @@
           }
         }
       },
-      "StrategyDuration": {
-        "type": "object",
-        "properties": {
-          "duration": {
-            "$ref": "#/components/schemas/DataprimeSource.Strategy.Duration"
-          }
-        },
-        "additionalProperties": false
-      },
-      "StrategyInstant": {
-        "type": "object",
-        "properties": {
-          "instant": {
-            "$ref": "#/components/schemas/ManualSource.Strategy.Instant"
-          }
-        },
-        "additionalProperties": false
-      },
-      "StrategyRange": {
-        "type": "object",
-        "properties": {
-          "range": {
-            "$ref": "#/components/schemas/ManualSource.Strategy.Range"
-          }
-        },
-        "additionalProperties": false
-      },
-      "StringOrVariableStringValue": {
-        "type": "object",
-        "properties": {
-          "stringValue": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "StringOrVariableVariableName": {
-        "type": "object",
-        "properties": {
-          "variableName": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
       "StringValueLabel": {
         "type": "object",
         "properties": {
@@ -5475,6 +7220,12 @@
       "TextboxDefaultValue": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/TextboxDefaultValueDefaultLuceneValue"
+          },
+          {
+            "$ref": "#/components/schemas/TextboxDefaultValueDefaultRegexValue"
+          },
+          {
             "$ref": "#/components/schemas/TextboxDefaultValueDefaultIntervalValue"
           },
           {
@@ -5488,12 +7239,6 @@
           },
           {
             "$ref": "#/components/schemas/TextboxDefaultValueDefaultNumericValue"
-          },
-          {
-            "$ref": "#/components/schemas/TextboxDefaultValueDefaultLuceneValue"
-          },
-          {
-            "$ref": "#/components/schemas/TextboxDefaultValueDefaultRegexValue"
           }
         ]
       },
@@ -5862,51 +7607,6 @@
           "TOOLTIP_TYPE_SINGLE"
         ]
       },
-      "TypeFieldName": {
-        "type": "object",
-        "properties": {
-          "fieldName": {
-            "$ref": "#/components/schemas/Query.SpansQuery.Type.FieldName"
-          }
-        },
-        "additionalProperties": false
-      },
-      "TypeFieldValue": {
-        "type": "object",
-        "properties": {
-          "fieldValue": {
-            "$ref": "#/components/schemas/Query.SpansQuery.Type.FieldValue"
-          }
-        },
-        "additionalProperties": false
-      },
-      "TypeLabelName": {
-        "type": "object",
-        "properties": {
-          "labelName": {
-            "$ref": "#/components/schemas/Query.MetricsQuery.Type.LabelName"
-          }
-        },
-        "additionalProperties": false
-      },
-      "TypeLabelValue": {
-        "type": "object",
-        "properties": {
-          "labelValue": {
-            "$ref": "#/components/schemas/Query.MetricsQuery.Type.LabelValue"
-          }
-        },
-        "additionalProperties": false
-      },
-      "TypeMetricName": {
-        "type": "object",
-        "properties": {
-          "metricName": {
-            "$ref": "#/components/schemas/Query.MetricsQuery.Type.MetricName"
-          }
-        },
-        "additionalProperties": false
-      },
       "UUID": {
         "type": "object",
         "properties": {
@@ -5961,12 +7661,30 @@
       "Variable.Definition": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DefinitionConstant"
+            "$ref": "#/components/schemas/VariableDefinitionConstant"
           },
           {
-            "$ref": "#/components/schemas/DefinitionMultiSelect"
+            "$ref": "#/components/schemas/VariableDefinitionMultiSelect"
           }
         ]
+      },
+      "VariableDefinitionConstant": {
+        "type": "object",
+        "properties": {
+          "constant": {
+            "$ref": "#/components/schemas/Constant"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VariableDefinitionMultiSelect": {
+        "type": "object",
+        "properties": {
+          "multiSelect": {
+            "$ref": "#/components/schemas/MultiSelect"
+          }
+        },
+        "additionalProperties": false
       },
       "VariableDisplayType": {
         "type": "string",
@@ -5997,29 +7715,29 @@
       "VariableSourceV2": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/VariableSourceV2Static"
-          },
-          {
             "$ref": "#/components/schemas/VariableSourceV2Query"
           },
           {
             "$ref": "#/components/schemas/VariableSourceV2Textbox"
+          },
+          {
+            "$ref": "#/components/schemas/VariableSourceV2Static"
           }
         ]
       },
       "VariableSourceV2.QuerySource": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QuerySourceLogsQuery"
+            "$ref": "#/components/schemas/VariableSourceV2QuerySourceLogsQuery"
           },
           {
-            "$ref": "#/components/schemas/QuerySourceMetricsQuery"
+            "$ref": "#/components/schemas/VariableSourceV2QuerySourceMetricsQuery"
           },
           {
-            "$ref": "#/components/schemas/QuerySourceSpansQuery"
+            "$ref": "#/components/schemas/VariableSourceV2QuerySourceSpansQuery"
           },
           {
-            "$ref": "#/components/schemas/QuerySourceDataprimeQuery"
+            "$ref": "#/components/schemas/VariableSourceV2QuerySourceDataprimeQuery"
           }
         ]
       },
@@ -6047,6 +7765,90 @@
         "properties": {
           "query": {
             "$ref": "#/components/schemas/VariableSourceV2.QuerySource"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VariableSourceV2QuerySourceDataprimeQuery": {
+        "type": "object",
+        "properties": {
+          "allOption": {
+            "$ref": "#/components/schemas/AllOption"
+          },
+          "dataprimeQuery": {
+            "$ref": "#/components/schemas/QuerySource.DataprimeQuery"
+          },
+          "refreshStrategy": {
+            "$ref": "#/components/schemas/VariableSourceV2.RefreshStrategy"
+          },
+          "valueDisplayOptions": {
+            "$ref": "#/components/schemas/VariableSourceV2.ValueDisplayOptions"
+          },
+          "valuesOrderDirection": {
+            "$ref": "#/components/schemas/OrderDirection"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VariableSourceV2QuerySourceLogsQuery": {
+        "type": "object",
+        "properties": {
+          "allOption": {
+            "$ref": "#/components/schemas/AllOption"
+          },
+          "logsQuery": {
+            "$ref": "#/components/schemas/QuerySource.LogsQuery"
+          },
+          "refreshStrategy": {
+            "$ref": "#/components/schemas/VariableSourceV2.RefreshStrategy"
+          },
+          "valueDisplayOptions": {
+            "$ref": "#/components/schemas/VariableSourceV2.ValueDisplayOptions"
+          },
+          "valuesOrderDirection": {
+            "$ref": "#/components/schemas/OrderDirection"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VariableSourceV2QuerySourceMetricsQuery": {
+        "type": "object",
+        "properties": {
+          "allOption": {
+            "$ref": "#/components/schemas/AllOption"
+          },
+          "metricsQuery": {
+            "$ref": "#/components/schemas/QuerySource.MetricsQuery"
+          },
+          "refreshStrategy": {
+            "$ref": "#/components/schemas/VariableSourceV2.RefreshStrategy"
+          },
+          "valueDisplayOptions": {
+            "$ref": "#/components/schemas/VariableSourceV2.ValueDisplayOptions"
+          },
+          "valuesOrderDirection": {
+            "$ref": "#/components/schemas/OrderDirection"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VariableSourceV2QuerySourceSpansQuery": {
+        "type": "object",
+        "properties": {
+          "allOption": {
+            "$ref": "#/components/schemas/AllOption"
+          },
+          "refreshStrategy": {
+            "$ref": "#/components/schemas/VariableSourceV2.RefreshStrategy"
+          },
+          "spansQuery": {
+            "$ref": "#/components/schemas/QuerySource.SpansQuery"
+          },
+          "valueDisplayOptions": {
+            "$ref": "#/components/schemas/VariableSourceV2.ValueDisplayOptions"
+          },
+          "valuesOrderDirection": {
+            "$ref": "#/components/schemas/OrderDirection"
           }
         },
         "additionalProperties": false
@@ -6098,9 +7900,6 @@
       "VariableValueV2": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/VariableValueV2Interval"
-          },
-          {
             "$ref": "#/components/schemas/VariableValueV2MultiString"
           },
           {
@@ -6114,6 +7913,9 @@
           },
           {
             "$ref": "#/components/schemas/VariableValueV2Lucene"
+          },
+          {
+            "$ref": "#/components/schemas/VariableValueV2Interval"
           }
         ]
       },
@@ -6284,22 +8086,13 @@
       "Visualization": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/VisualizationTable"
-          },
-          {
             "$ref": "#/components/schemas/VisualizationTimeSeriesLines"
           },
           {
-            "$ref": "#/components/schemas/VisualizationGauge"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationHorizontalBars"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationTimeSeriesBars"
-          },
-          {
             "$ref": "#/components/schemas/VisualizationStat"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationGauge"
           },
           {
             "$ref": "#/components/schemas/VisualizationHexagonBins"
@@ -6308,7 +8101,16 @@
             "$ref": "#/components/schemas/VisualizationPieChart"
           },
           {
+            "$ref": "#/components/schemas/VisualizationHorizontalBars"
+          },
+          {
             "$ref": "#/components/schemas/VisualizationVerticalBars"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationTable"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationTimeSeriesBars"
           }
         ]
       },
@@ -6659,33 +8461,114 @@
       "Widget.Definition": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DefinitionGauge"
+            "$ref": "#/components/schemas/WidgetDefinitionMarkdown"
           },
           {
-            "$ref": "#/components/schemas/DefinitionBarChart"
+            "$ref": "#/components/schemas/WidgetDefinitionHexagon"
           },
           {
-            "$ref": "#/components/schemas/DefinitionHorizontalBarChart"
+            "$ref": "#/components/schemas/WidgetDefinitionDynamic"
           },
           {
-            "$ref": "#/components/schemas/DefinitionHexagon"
+            "$ref": "#/components/schemas/WidgetDefinitionDataTable"
           },
           {
-            "$ref": "#/components/schemas/DefinitionDynamic"
+            "$ref": "#/components/schemas/WidgetDefinitionBarChart"
           },
           {
-            "$ref": "#/components/schemas/DefinitionLineChart"
+            "$ref": "#/components/schemas/WidgetDefinitionHorizontalBarChart"
           },
           {
-            "$ref": "#/components/schemas/DefinitionDataTable"
+            "$ref": "#/components/schemas/WidgetDefinitionLineChart"
           },
           {
-            "$ref": "#/components/schemas/DefinitionPieChart"
+            "$ref": "#/components/schemas/WidgetDefinitionGauge"
           },
           {
-            "$ref": "#/components/schemas/DefinitionMarkdown"
+            "$ref": "#/components/schemas/WidgetDefinitionPieChart"
           }
         ]
+      },
+      "WidgetDefinitionBarChart": {
+        "type": "object",
+        "properties": {
+          "barChart": {
+            "$ref": "#/components/schemas/BarChart"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WidgetDefinitionDataTable": {
+        "type": "object",
+        "properties": {
+          "dataTable": {
+            "$ref": "#/components/schemas/DataTable"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WidgetDefinitionDynamic": {
+        "type": "object",
+        "properties": {
+          "dynamic": {
+            "$ref": "#/components/schemas/widgets.Dynamic"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WidgetDefinitionGauge": {
+        "type": "object",
+        "properties": {
+          "gauge": {
+            "$ref": "#/components/schemas/widgets.Gauge"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WidgetDefinitionHexagon": {
+        "type": "object",
+        "properties": {
+          "hexagon": {
+            "$ref": "#/components/schemas/Hexagon"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WidgetDefinitionHorizontalBarChart": {
+        "type": "object",
+        "properties": {
+          "horizontalBarChart": {
+            "$ref": "#/components/schemas/HorizontalBarChart"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WidgetDefinitionLineChart": {
+        "type": "object",
+        "properties": {
+          "lineChart": {
+            "$ref": "#/components/schemas/LineChart"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WidgetDefinitionMarkdown": {
+        "type": "object",
+        "properties": {
+          "markdown": {
+            "$ref": "#/components/schemas/Markdown"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WidgetDefinitionPieChart": {
+        "type": "object",
+        "properties": {
+          "pieChart": {
+            "$ref": "#/components/schemas/widgets.PieChart"
+          }
+        },
+        "additionalProperties": false
       },
       "WidgetScope": {
         "oneOf": [
@@ -6761,22 +8644,10 @@
         "additionalProperties": false
       },
       "YAxisViewByCategory": {
-        "type": "object",
-        "properties": {
-          "category": {
-            "$ref": "#/components/schemas/YAxisViewByCategory"
-          }
-        },
-        "additionalProperties": false
+        "type": "object"
       },
       "YAxisViewByValue": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "$ref": "#/components/schemas/YAxisViewByValue"
-          }
-        },
-        "additionalProperties": false
+        "type": "object"
       },
       "common.Aggregation": {
         "type": "string",

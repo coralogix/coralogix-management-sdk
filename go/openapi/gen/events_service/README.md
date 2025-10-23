@@ -117,8 +117,6 @@ Class | Method | HTTP request | Description
  - [ListEventsResponse](docs/ListEventsResponse.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

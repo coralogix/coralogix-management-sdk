@@ -18,21 +18,21 @@ import (
 
 // HorizontalBarChartYAxisViewBy - struct for HorizontalBarChartYAxisViewBy
 type HorizontalBarChartYAxisViewBy struct {
-	YAxisViewByCategory *YAxisViewByCategory
-	YAxisViewByValue *YAxisViewByValue
+	HorizontalBarChartYAxisViewByCategory *HorizontalBarChartYAxisViewByCategory
+	HorizontalBarChartYAxisViewByValue *HorizontalBarChartYAxisViewByValue
 }
 
-// YAxisViewByCategoryAsHorizontalBarChartYAxisViewBy is a convenience function that returns YAxisViewByCategory wrapped in HorizontalBarChartYAxisViewBy
-func YAxisViewByCategoryAsHorizontalBarChartYAxisViewBy(v *YAxisViewByCategory) HorizontalBarChartYAxisViewBy {
+// HorizontalBarChartYAxisViewByCategoryAsHorizontalBarChartYAxisViewBy is a convenience function that returns HorizontalBarChartYAxisViewByCategory wrapped in HorizontalBarChartYAxisViewBy
+func HorizontalBarChartYAxisViewByCategoryAsHorizontalBarChartYAxisViewBy(v *HorizontalBarChartYAxisViewByCategory) HorizontalBarChartYAxisViewBy {
 	return HorizontalBarChartYAxisViewBy{
-		YAxisViewByCategory: v,
+		HorizontalBarChartYAxisViewByCategory: v,
 	}
 }
 
-// YAxisViewByValueAsHorizontalBarChartYAxisViewBy is a convenience function that returns YAxisViewByValue wrapped in HorizontalBarChartYAxisViewBy
-func YAxisViewByValueAsHorizontalBarChartYAxisViewBy(v *YAxisViewByValue) HorizontalBarChartYAxisViewBy {
+// HorizontalBarChartYAxisViewByValueAsHorizontalBarChartYAxisViewBy is a convenience function that returns HorizontalBarChartYAxisViewByValue wrapped in HorizontalBarChartYAxisViewBy
+func HorizontalBarChartYAxisViewByValueAsHorizontalBarChartYAxisViewBy(v *HorizontalBarChartYAxisViewByValue) HorizontalBarChartYAxisViewBy {
 	return HorizontalBarChartYAxisViewBy{
-		YAxisViewByValue: v,
+		HorizontalBarChartYAxisViewByValue: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func YAxisViewByValueAsHorizontalBarChartYAxisViewBy(v *YAxisViewByValue) Horizo
 func (dst *HorizontalBarChartYAxisViewBy) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into YAxisViewByCategory
-	err = newStrictDecoder(data).Decode(&dst.YAxisViewByCategory)
+	// try to unmarshal data into HorizontalBarChartYAxisViewByCategory
+	err = newStrictDecoder(data).Decode(&dst.HorizontalBarChartYAxisViewByCategory)
 	if err == nil {
-		jsonYAxisViewByCategory, _ := json.Marshal(dst.YAxisViewByCategory)
-		if string(jsonYAxisViewByCategory) == "{}" { // empty struct
-			dst.YAxisViewByCategory = nil
+		jsonHorizontalBarChartYAxisViewByCategory, _ := json.Marshal(dst.HorizontalBarChartYAxisViewByCategory)
+		if string(jsonHorizontalBarChartYAxisViewByCategory) == "{}" { // empty struct
+			dst.HorizontalBarChartYAxisViewByCategory = nil
 		} else {
-			if err = validator.Validate(dst.YAxisViewByCategory); err != nil {
-				dst.YAxisViewByCategory = nil
+			if err = validator.Validate(dst.HorizontalBarChartYAxisViewByCategory); err != nil {
+				dst.HorizontalBarChartYAxisViewByCategory = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.YAxisViewByCategory = nil
+		dst.HorizontalBarChartYAxisViewByCategory = nil
 	}
 
-	// try to unmarshal data into YAxisViewByValue
-	err = newStrictDecoder(data).Decode(&dst.YAxisViewByValue)
+	// try to unmarshal data into HorizontalBarChartYAxisViewByValue
+	err = newStrictDecoder(data).Decode(&dst.HorizontalBarChartYAxisViewByValue)
 	if err == nil {
-		jsonYAxisViewByValue, _ := json.Marshal(dst.YAxisViewByValue)
-		if string(jsonYAxisViewByValue) == "{}" { // empty struct
-			dst.YAxisViewByValue = nil
+		jsonHorizontalBarChartYAxisViewByValue, _ := json.Marshal(dst.HorizontalBarChartYAxisViewByValue)
+		if string(jsonHorizontalBarChartYAxisViewByValue) == "{}" { // empty struct
+			dst.HorizontalBarChartYAxisViewByValue = nil
 		} else {
-			if err = validator.Validate(dst.YAxisViewByValue); err != nil {
-				dst.YAxisViewByValue = nil
+			if err = validator.Validate(dst.HorizontalBarChartYAxisViewByValue); err != nil {
+				dst.HorizontalBarChartYAxisViewByValue = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.YAxisViewByValue = nil
+		dst.HorizontalBarChartYAxisViewByValue = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.YAxisViewByCategory = nil
-		dst.YAxisViewByValue = nil
+		dst.HorizontalBarChartYAxisViewByCategory = nil
+		dst.HorizontalBarChartYAxisViewByValue = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(HorizontalBarChartYAxisViewBy)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *HorizontalBarChartYAxisViewBy) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src HorizontalBarChartYAxisViewBy) MarshalJSON() ([]byte, error) {
-	if src.YAxisViewByCategory != nil {
-		return json.Marshal(&src.YAxisViewByCategory)
+	if src.HorizontalBarChartYAxisViewByCategory != nil {
+		return json.Marshal(&src.HorizontalBarChartYAxisViewByCategory)
 	}
 
-	if src.YAxisViewByValue != nil {
-		return json.Marshal(&src.YAxisViewByValue)
+	if src.HorizontalBarChartYAxisViewByValue != nil {
+		return json.Marshal(&src.HorizontalBarChartYAxisViewByValue)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *HorizontalBarChartYAxisViewBy) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.YAxisViewByCategory != nil {
-		return obj.YAxisViewByCategory
+	if obj.HorizontalBarChartYAxisViewByCategory != nil {
+		return obj.HorizontalBarChartYAxisViewByCategory
 	}
 
-	if obj.YAxisViewByValue != nil {
-		return obj.YAxisViewByValue
+	if obj.HorizontalBarChartYAxisViewByValue != nil {
+		return obj.HorizontalBarChartYAxisViewByValue
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *HorizontalBarChartYAxisViewBy) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj HorizontalBarChartYAxisViewBy) GetActualInstanceValue() (interface{}) {
-	if obj.YAxisViewByCategory != nil {
-		return *obj.YAxisViewByCategory
+	if obj.HorizontalBarChartYAxisViewByCategory != nil {
+		return *obj.HorizontalBarChartYAxisViewByCategory
 	}
 
-	if obj.YAxisViewByValue != nil {
-		return *obj.YAxisViewByValue
+	if obj.HorizontalBarChartYAxisViewByValue != nil {
+		return *obj.HorizontalBarChartYAxisViewByValue
 	}
 
 	// all schemas are nil

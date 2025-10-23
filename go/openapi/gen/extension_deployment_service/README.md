@@ -108,8 +108,6 @@ Class | Method | HTTP request | Description
  - [UndeployExtensionResponse](docs/UndeployExtensionResponse.md)
  - [UpdateExtensionResponse](docs/UpdateExtensionResponse.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

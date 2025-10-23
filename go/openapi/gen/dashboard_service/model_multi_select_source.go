@@ -18,45 +18,45 @@ import (
 
 // MultiSelectSource - struct for MultiSelectSource
 type MultiSelectSource struct {
-	SourceConstantList *SourceConstantList
-	SourceLogsPath *SourceLogsPath
-	SourceMetricLabel *SourceMetricLabel
-	SourceQuery *SourceQuery
-	SourceSpanField *SourceSpanField
+	MultiSelectSourceConstantList *MultiSelectSourceConstantList
+	MultiSelectSourceLogsPath *MultiSelectSourceLogsPath
+	MultiSelectSourceMetricLabel *MultiSelectSourceMetricLabel
+	MultiSelectSourceQuery *MultiSelectSourceQuery
+	MultiSelectSourceSpanField *MultiSelectSourceSpanField
 }
 
-// SourceConstantListAsMultiSelectSource is a convenience function that returns SourceConstantList wrapped in MultiSelectSource
-func SourceConstantListAsMultiSelectSource(v *SourceConstantList) MultiSelectSource {
+// MultiSelectSourceConstantListAsMultiSelectSource is a convenience function that returns MultiSelectSourceConstantList wrapped in MultiSelectSource
+func MultiSelectSourceConstantListAsMultiSelectSource(v *MultiSelectSourceConstantList) MultiSelectSource {
 	return MultiSelectSource{
-		SourceConstantList: v,
+		MultiSelectSourceConstantList: v,
 	}
 }
 
-// SourceLogsPathAsMultiSelectSource is a convenience function that returns SourceLogsPath wrapped in MultiSelectSource
-func SourceLogsPathAsMultiSelectSource(v *SourceLogsPath) MultiSelectSource {
+// MultiSelectSourceLogsPathAsMultiSelectSource is a convenience function that returns MultiSelectSourceLogsPath wrapped in MultiSelectSource
+func MultiSelectSourceLogsPathAsMultiSelectSource(v *MultiSelectSourceLogsPath) MultiSelectSource {
 	return MultiSelectSource{
-		SourceLogsPath: v,
+		MultiSelectSourceLogsPath: v,
 	}
 }
 
-// SourceMetricLabelAsMultiSelectSource is a convenience function that returns SourceMetricLabel wrapped in MultiSelectSource
-func SourceMetricLabelAsMultiSelectSource(v *SourceMetricLabel) MultiSelectSource {
+// MultiSelectSourceMetricLabelAsMultiSelectSource is a convenience function that returns MultiSelectSourceMetricLabel wrapped in MultiSelectSource
+func MultiSelectSourceMetricLabelAsMultiSelectSource(v *MultiSelectSourceMetricLabel) MultiSelectSource {
 	return MultiSelectSource{
-		SourceMetricLabel: v,
+		MultiSelectSourceMetricLabel: v,
 	}
 }
 
-// SourceQueryAsMultiSelectSource is a convenience function that returns SourceQuery wrapped in MultiSelectSource
-func SourceQueryAsMultiSelectSource(v *SourceQuery) MultiSelectSource {
+// MultiSelectSourceQueryAsMultiSelectSource is a convenience function that returns MultiSelectSourceQuery wrapped in MultiSelectSource
+func MultiSelectSourceQueryAsMultiSelectSource(v *MultiSelectSourceQuery) MultiSelectSource {
 	return MultiSelectSource{
-		SourceQuery: v,
+		MultiSelectSourceQuery: v,
 	}
 }
 
-// SourceSpanFieldAsMultiSelectSource is a convenience function that returns SourceSpanField wrapped in MultiSelectSource
-func SourceSpanFieldAsMultiSelectSource(v *SourceSpanField) MultiSelectSource {
+// MultiSelectSourceSpanFieldAsMultiSelectSource is a convenience function that returns MultiSelectSourceSpanField wrapped in MultiSelectSource
+func MultiSelectSourceSpanFieldAsMultiSelectSource(v *MultiSelectSourceSpanField) MultiSelectSource {
 	return MultiSelectSource{
-		SourceSpanField: v,
+		MultiSelectSourceSpanField: v,
 	}
 }
 
@@ -65,98 +65,98 @@ func SourceSpanFieldAsMultiSelectSource(v *SourceSpanField) MultiSelectSource {
 func (dst *MultiSelectSource) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into SourceConstantList
-	err = newStrictDecoder(data).Decode(&dst.SourceConstantList)
+	// try to unmarshal data into MultiSelectSourceConstantList
+	err = newStrictDecoder(data).Decode(&dst.MultiSelectSourceConstantList)
 	if err == nil {
-		jsonSourceConstantList, _ := json.Marshal(dst.SourceConstantList)
-		if string(jsonSourceConstantList) == "{}" { // empty struct
-			dst.SourceConstantList = nil
+		jsonMultiSelectSourceConstantList, _ := json.Marshal(dst.MultiSelectSourceConstantList)
+		if string(jsonMultiSelectSourceConstantList) == "{}" { // empty struct
+			dst.MultiSelectSourceConstantList = nil
 		} else {
-			if err = validator.Validate(dst.SourceConstantList); err != nil {
-				dst.SourceConstantList = nil
+			if err = validator.Validate(dst.MultiSelectSourceConstantList); err != nil {
+				dst.MultiSelectSourceConstantList = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SourceConstantList = nil
+		dst.MultiSelectSourceConstantList = nil
 	}
 
-	// try to unmarshal data into SourceLogsPath
-	err = newStrictDecoder(data).Decode(&dst.SourceLogsPath)
+	// try to unmarshal data into MultiSelectSourceLogsPath
+	err = newStrictDecoder(data).Decode(&dst.MultiSelectSourceLogsPath)
 	if err == nil {
-		jsonSourceLogsPath, _ := json.Marshal(dst.SourceLogsPath)
-		if string(jsonSourceLogsPath) == "{}" { // empty struct
-			dst.SourceLogsPath = nil
+		jsonMultiSelectSourceLogsPath, _ := json.Marshal(dst.MultiSelectSourceLogsPath)
+		if string(jsonMultiSelectSourceLogsPath) == "{}" { // empty struct
+			dst.MultiSelectSourceLogsPath = nil
 		} else {
-			if err = validator.Validate(dst.SourceLogsPath); err != nil {
-				dst.SourceLogsPath = nil
+			if err = validator.Validate(dst.MultiSelectSourceLogsPath); err != nil {
+				dst.MultiSelectSourceLogsPath = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SourceLogsPath = nil
+		dst.MultiSelectSourceLogsPath = nil
 	}
 
-	// try to unmarshal data into SourceMetricLabel
-	err = newStrictDecoder(data).Decode(&dst.SourceMetricLabel)
+	// try to unmarshal data into MultiSelectSourceMetricLabel
+	err = newStrictDecoder(data).Decode(&dst.MultiSelectSourceMetricLabel)
 	if err == nil {
-		jsonSourceMetricLabel, _ := json.Marshal(dst.SourceMetricLabel)
-		if string(jsonSourceMetricLabel) == "{}" { // empty struct
-			dst.SourceMetricLabel = nil
+		jsonMultiSelectSourceMetricLabel, _ := json.Marshal(dst.MultiSelectSourceMetricLabel)
+		if string(jsonMultiSelectSourceMetricLabel) == "{}" { // empty struct
+			dst.MultiSelectSourceMetricLabel = nil
 		} else {
-			if err = validator.Validate(dst.SourceMetricLabel); err != nil {
-				dst.SourceMetricLabel = nil
+			if err = validator.Validate(dst.MultiSelectSourceMetricLabel); err != nil {
+				dst.MultiSelectSourceMetricLabel = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SourceMetricLabel = nil
+		dst.MultiSelectSourceMetricLabel = nil
 	}
 
-	// try to unmarshal data into SourceQuery
-	err = newStrictDecoder(data).Decode(&dst.SourceQuery)
+	// try to unmarshal data into MultiSelectSourceQuery
+	err = newStrictDecoder(data).Decode(&dst.MultiSelectSourceQuery)
 	if err == nil {
-		jsonSourceQuery, _ := json.Marshal(dst.SourceQuery)
-		if string(jsonSourceQuery) == "{}" { // empty struct
-			dst.SourceQuery = nil
+		jsonMultiSelectSourceQuery, _ := json.Marshal(dst.MultiSelectSourceQuery)
+		if string(jsonMultiSelectSourceQuery) == "{}" { // empty struct
+			dst.MultiSelectSourceQuery = nil
 		} else {
-			if err = validator.Validate(dst.SourceQuery); err != nil {
-				dst.SourceQuery = nil
+			if err = validator.Validate(dst.MultiSelectSourceQuery); err != nil {
+				dst.MultiSelectSourceQuery = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SourceQuery = nil
+		dst.MultiSelectSourceQuery = nil
 	}
 
-	// try to unmarshal data into SourceSpanField
-	err = newStrictDecoder(data).Decode(&dst.SourceSpanField)
+	// try to unmarshal data into MultiSelectSourceSpanField
+	err = newStrictDecoder(data).Decode(&dst.MultiSelectSourceSpanField)
 	if err == nil {
-		jsonSourceSpanField, _ := json.Marshal(dst.SourceSpanField)
-		if string(jsonSourceSpanField) == "{}" { // empty struct
-			dst.SourceSpanField = nil
+		jsonMultiSelectSourceSpanField, _ := json.Marshal(dst.MultiSelectSourceSpanField)
+		if string(jsonMultiSelectSourceSpanField) == "{}" { // empty struct
+			dst.MultiSelectSourceSpanField = nil
 		} else {
-			if err = validator.Validate(dst.SourceSpanField); err != nil {
-				dst.SourceSpanField = nil
+			if err = validator.Validate(dst.MultiSelectSourceSpanField); err != nil {
+				dst.MultiSelectSourceSpanField = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.SourceSpanField = nil
+		dst.MultiSelectSourceSpanField = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.SourceConstantList = nil
-		dst.SourceLogsPath = nil
-		dst.SourceMetricLabel = nil
-		dst.SourceQuery = nil
-		dst.SourceSpanField = nil
+		dst.MultiSelectSourceConstantList = nil
+		dst.MultiSelectSourceLogsPath = nil
+		dst.MultiSelectSourceMetricLabel = nil
+		dst.MultiSelectSourceQuery = nil
+		dst.MultiSelectSourceSpanField = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(MultiSelectSource)")
 	} else if match == 1 {
@@ -168,24 +168,24 @@ func (dst *MultiSelectSource) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src MultiSelectSource) MarshalJSON() ([]byte, error) {
-	if src.SourceConstantList != nil {
-		return json.Marshal(&src.SourceConstantList)
+	if src.MultiSelectSourceConstantList != nil {
+		return json.Marshal(&src.MultiSelectSourceConstantList)
 	}
 
-	if src.SourceLogsPath != nil {
-		return json.Marshal(&src.SourceLogsPath)
+	if src.MultiSelectSourceLogsPath != nil {
+		return json.Marshal(&src.MultiSelectSourceLogsPath)
 	}
 
-	if src.SourceMetricLabel != nil {
-		return json.Marshal(&src.SourceMetricLabel)
+	if src.MultiSelectSourceMetricLabel != nil {
+		return json.Marshal(&src.MultiSelectSourceMetricLabel)
 	}
 
-	if src.SourceQuery != nil {
-		return json.Marshal(&src.SourceQuery)
+	if src.MultiSelectSourceQuery != nil {
+		return json.Marshal(&src.MultiSelectSourceQuery)
 	}
 
-	if src.SourceSpanField != nil {
-		return json.Marshal(&src.SourceSpanField)
+	if src.MultiSelectSourceSpanField != nil {
+		return json.Marshal(&src.MultiSelectSourceSpanField)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -196,24 +196,24 @@ func (obj *MultiSelectSource) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.SourceConstantList != nil {
-		return obj.SourceConstantList
+	if obj.MultiSelectSourceConstantList != nil {
+		return obj.MultiSelectSourceConstantList
 	}
 
-	if obj.SourceLogsPath != nil {
-		return obj.SourceLogsPath
+	if obj.MultiSelectSourceLogsPath != nil {
+		return obj.MultiSelectSourceLogsPath
 	}
 
-	if obj.SourceMetricLabel != nil {
-		return obj.SourceMetricLabel
+	if obj.MultiSelectSourceMetricLabel != nil {
+		return obj.MultiSelectSourceMetricLabel
 	}
 
-	if obj.SourceQuery != nil {
-		return obj.SourceQuery
+	if obj.MultiSelectSourceQuery != nil {
+		return obj.MultiSelectSourceQuery
 	}
 
-	if obj.SourceSpanField != nil {
-		return obj.SourceSpanField
+	if obj.MultiSelectSourceSpanField != nil {
+		return obj.MultiSelectSourceSpanField
 	}
 
 	// all schemas are nil
@@ -222,24 +222,24 @@ func (obj *MultiSelectSource) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj MultiSelectSource) GetActualInstanceValue() (interface{}) {
-	if obj.SourceConstantList != nil {
-		return *obj.SourceConstantList
+	if obj.MultiSelectSourceConstantList != nil {
+		return *obj.MultiSelectSourceConstantList
 	}
 
-	if obj.SourceLogsPath != nil {
-		return *obj.SourceLogsPath
+	if obj.MultiSelectSourceLogsPath != nil {
+		return *obj.MultiSelectSourceLogsPath
 	}
 
-	if obj.SourceMetricLabel != nil {
-		return *obj.SourceMetricLabel
+	if obj.MultiSelectSourceMetricLabel != nil {
+		return *obj.MultiSelectSourceMetricLabel
 	}
 
-	if obj.SourceQuery != nil {
-		return *obj.SourceQuery
+	if obj.MultiSelectSourceQuery != nil {
+		return *obj.MultiSelectSourceQuery
 	}
 
-	if obj.SourceSpanField != nil {
-		return *obj.SourceSpanField
+	if obj.MultiSelectSourceSpanField != nil {
+		return *obj.MultiSelectSourceSpanField
 	}
 
 	// all schemas are nil

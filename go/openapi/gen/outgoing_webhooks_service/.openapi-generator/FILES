@@ -80,7 +80,5 @@ model_test_outgoing_webhook_response_success.go
 model_update_outgoing_webhook_request.go
 model_v3_filter_operator.go
 model_webhook_type.go
-model_y_axis_view_by_category.go
-model_y_axis_view_by_value.go
 response.go
 utils.go

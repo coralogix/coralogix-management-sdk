@@ -111,8 +111,6 @@ Class | Method | HTTP request | Description
  - [TargetDomain](docs/TargetDomain.md)
  - [TestExtensionRevisionRequest](docs/TestExtensionRevisionRequest.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

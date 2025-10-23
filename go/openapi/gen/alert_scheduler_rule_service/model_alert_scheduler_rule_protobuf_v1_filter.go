@@ -18,21 +18,21 @@ import (
 
 // AlertSchedulerRuleProtobufV1Filter - struct for AlertSchedulerRuleProtobufV1Filter
 type AlertSchedulerRuleProtobufV1Filter struct {
-	FilterAlertMetaLabels *FilterAlertMetaLabels
-	FilterAlertUniqueIds *FilterAlertUniqueIds
+	AlertSchedulerRuleProtobufV1FilterAlertMetaLabels *AlertSchedulerRuleProtobufV1FilterAlertMetaLabels
+	AlertSchedulerRuleProtobufV1FilterAlertUniqueIds *AlertSchedulerRuleProtobufV1FilterAlertUniqueIds
 }
 
-// FilterAlertMetaLabelsAsAlertSchedulerRuleProtobufV1Filter is a convenience function that returns FilterAlertMetaLabels wrapped in AlertSchedulerRuleProtobufV1Filter
-func FilterAlertMetaLabelsAsAlertSchedulerRuleProtobufV1Filter(v *FilterAlertMetaLabels) AlertSchedulerRuleProtobufV1Filter {
+// AlertSchedulerRuleProtobufV1FilterAlertMetaLabelsAsAlertSchedulerRuleProtobufV1Filter is a convenience function that returns AlertSchedulerRuleProtobufV1FilterAlertMetaLabels wrapped in AlertSchedulerRuleProtobufV1Filter
+func AlertSchedulerRuleProtobufV1FilterAlertMetaLabelsAsAlertSchedulerRuleProtobufV1Filter(v *AlertSchedulerRuleProtobufV1FilterAlertMetaLabels) AlertSchedulerRuleProtobufV1Filter {
 	return AlertSchedulerRuleProtobufV1Filter{
-		FilterAlertMetaLabels: v,
+		AlertSchedulerRuleProtobufV1FilterAlertMetaLabels: v,
 	}
 }
 
-// FilterAlertUniqueIdsAsAlertSchedulerRuleProtobufV1Filter is a convenience function that returns FilterAlertUniqueIds wrapped in AlertSchedulerRuleProtobufV1Filter
-func FilterAlertUniqueIdsAsAlertSchedulerRuleProtobufV1Filter(v *FilterAlertUniqueIds) AlertSchedulerRuleProtobufV1Filter {
+// AlertSchedulerRuleProtobufV1FilterAlertUniqueIdsAsAlertSchedulerRuleProtobufV1Filter is a convenience function that returns AlertSchedulerRuleProtobufV1FilterAlertUniqueIds wrapped in AlertSchedulerRuleProtobufV1Filter
+func AlertSchedulerRuleProtobufV1FilterAlertUniqueIdsAsAlertSchedulerRuleProtobufV1Filter(v *AlertSchedulerRuleProtobufV1FilterAlertUniqueIds) AlertSchedulerRuleProtobufV1Filter {
 	return AlertSchedulerRuleProtobufV1Filter{
-		FilterAlertUniqueIds: v,
+		AlertSchedulerRuleProtobufV1FilterAlertUniqueIds: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func FilterAlertUniqueIdsAsAlertSchedulerRuleProtobufV1Filter(v *FilterAlertUniq
 func (dst *AlertSchedulerRuleProtobufV1Filter) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into FilterAlertMetaLabels
-	err = newStrictDecoder(data).Decode(&dst.FilterAlertMetaLabels)
+	// try to unmarshal data into AlertSchedulerRuleProtobufV1FilterAlertMetaLabels
+	err = newStrictDecoder(data).Decode(&dst.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels)
 	if err == nil {
-		jsonFilterAlertMetaLabels, _ := json.Marshal(dst.FilterAlertMetaLabels)
-		if string(jsonFilterAlertMetaLabels) == "{}" { // empty struct
-			dst.FilterAlertMetaLabels = nil
+		jsonAlertSchedulerRuleProtobufV1FilterAlertMetaLabels, _ := json.Marshal(dst.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels)
+		if string(jsonAlertSchedulerRuleProtobufV1FilterAlertMetaLabels) == "{}" { // empty struct
+			dst.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels = nil
 		} else {
-			if err = validator.Validate(dst.FilterAlertMetaLabels); err != nil {
-				dst.FilterAlertMetaLabels = nil
+			if err = validator.Validate(dst.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels); err != nil {
+				dst.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.FilterAlertMetaLabels = nil
+		dst.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels = nil
 	}
 
-	// try to unmarshal data into FilterAlertUniqueIds
-	err = newStrictDecoder(data).Decode(&dst.FilterAlertUniqueIds)
+	// try to unmarshal data into AlertSchedulerRuleProtobufV1FilterAlertUniqueIds
+	err = newStrictDecoder(data).Decode(&dst.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds)
 	if err == nil {
-		jsonFilterAlertUniqueIds, _ := json.Marshal(dst.FilterAlertUniqueIds)
-		if string(jsonFilterAlertUniqueIds) == "{}" { // empty struct
-			dst.FilterAlertUniqueIds = nil
+		jsonAlertSchedulerRuleProtobufV1FilterAlertUniqueIds, _ := json.Marshal(dst.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds)
+		if string(jsonAlertSchedulerRuleProtobufV1FilterAlertUniqueIds) == "{}" { // empty struct
+			dst.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds = nil
 		} else {
-			if err = validator.Validate(dst.FilterAlertUniqueIds); err != nil {
-				dst.FilterAlertUniqueIds = nil
+			if err = validator.Validate(dst.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds); err != nil {
+				dst.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.FilterAlertUniqueIds = nil
+		dst.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.FilterAlertMetaLabels = nil
-		dst.FilterAlertUniqueIds = nil
+		dst.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels = nil
+		dst.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(AlertSchedulerRuleProtobufV1Filter)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *AlertSchedulerRuleProtobufV1Filter) UnmarshalJSON(data []byte) error 
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src AlertSchedulerRuleProtobufV1Filter) MarshalJSON() ([]byte, error) {
-	if src.FilterAlertMetaLabels != nil {
-		return json.Marshal(&src.FilterAlertMetaLabels)
+	if src.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels != nil {
+		return json.Marshal(&src.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels)
 	}
 
-	if src.FilterAlertUniqueIds != nil {
-		return json.Marshal(&src.FilterAlertUniqueIds)
+	if src.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds != nil {
+		return json.Marshal(&src.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *AlertSchedulerRuleProtobufV1Filter) GetActualInstance() (interface{})
 	if obj == nil {
 		return nil
 	}
-	if obj.FilterAlertMetaLabels != nil {
-		return obj.FilterAlertMetaLabels
+	if obj.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels != nil {
+		return obj.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels
 	}
 
-	if obj.FilterAlertUniqueIds != nil {
-		return obj.FilterAlertUniqueIds
+	if obj.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds != nil {
+		return obj.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *AlertSchedulerRuleProtobufV1Filter) GetActualInstance() (interface{})
 
 // Get the actual instance value
 func (obj AlertSchedulerRuleProtobufV1Filter) GetActualInstanceValue() (interface{}) {
-	if obj.FilterAlertMetaLabels != nil {
-		return *obj.FilterAlertMetaLabels
+	if obj.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels != nil {
+		return *obj.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels
 	}
 
-	if obj.FilterAlertUniqueIds != nil {
-		return *obj.FilterAlertUniqueIds
+	if obj.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds != nil {
+		return *obj.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds
 	}
 
 	// all schemas are nil

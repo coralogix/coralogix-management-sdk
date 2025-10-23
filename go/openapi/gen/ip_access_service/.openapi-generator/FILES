@@ -27,7 +27,5 @@ model_multiple_values.go
 model_replace_company_ip_access_settings_request.go
 model_replace_company_ip_access_settings_response.go
 model_v3_filter_operator.go
-model_y_axis_view_by_category.go
-model_y_axis_view_by_value.go
 response.go
 utils.go

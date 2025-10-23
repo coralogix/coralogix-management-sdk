@@ -19,11 +19,7 @@ var _ MappedNullable = &QuerySourceMetricsQuery{}
 
 // QuerySourceMetricsQuery struct for QuerySourceMetricsQuery
 type QuerySourceMetricsQuery struct {
-	AllOption *AllOption `json:"allOption,omitempty"`
-	MetricsQuery *QuerySourceMetricsQuery `json:"metricsQuery,omitempty"`
-	RefreshStrategy *VariableSourceV2RefreshStrategy `json:"refreshStrategy,omitempty"`
-	ValueDisplayOptions *VariableSourceV2ValueDisplayOptions `json:"valueDisplayOptions,omitempty"`
-	ValuesOrderDirection *OrderDirection `json:"valuesOrderDirection,omitempty"`
+	Type *QuerySourceMetricsQueryType `json:"type,omitempty"`
 }
 
 // NewQuerySourceMetricsQuery instantiates a new QuerySourceMetricsQuery object
@@ -43,164 +39,36 @@ func NewQuerySourceMetricsQueryWithDefaults() *QuerySourceMetricsQuery {
 	return &this
 }
 
-// GetAllOption returns the AllOption field value if set, zero value otherwise.
-func (o *QuerySourceMetricsQuery) GetAllOption() AllOption {
-	if o == nil || IsNil(o.AllOption) {
-		var ret AllOption
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *QuerySourceMetricsQuery) GetType() QuerySourceMetricsQueryType {
+	if o == nil || IsNil(o.Type) {
+		var ret QuerySourceMetricsQueryType
 		return ret
 	}
-	return *o.AllOption
+	return *o.Type
 }
 
-// GetAllOptionOk returns a tuple with the AllOption field value if set, nil otherwise
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QuerySourceMetricsQuery) GetAllOptionOk() (*AllOption, bool) {
-	if o == nil || IsNil(o.AllOption) {
+func (o *QuerySourceMetricsQuery) GetTypeOk() (*QuerySourceMetricsQueryType, bool) {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
-	return o.AllOption, true
+	return o.Type, true
 }
 
-// HasAllOption returns a boolean if a field has been set.
-func (o *QuerySourceMetricsQuery) HasAllOption() bool {
-	if o != nil && !IsNil(o.AllOption) {
+// HasType returns a boolean if a field has been set.
+func (o *QuerySourceMetricsQuery) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
 	return false
 }
 
-// SetAllOption gets a reference to the given AllOption and assigns it to the AllOption field.
-func (o *QuerySourceMetricsQuery) SetAllOption(v AllOption) {
-	o.AllOption = &v
-}
-
-// GetMetricsQuery returns the MetricsQuery field value if set, zero value otherwise.
-func (o *QuerySourceMetricsQuery) GetMetricsQuery() QuerySourceMetricsQuery {
-	if o == nil || IsNil(o.MetricsQuery) {
-		var ret QuerySourceMetricsQuery
-		return ret
-	}
-	return *o.MetricsQuery
-}
-
-// GetMetricsQueryOk returns a tuple with the MetricsQuery field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *QuerySourceMetricsQuery) GetMetricsQueryOk() (*QuerySourceMetricsQuery, bool) {
-	if o == nil || IsNil(o.MetricsQuery) {
-		return nil, false
-	}
-	return o.MetricsQuery, true
-}
-
-// HasMetricsQuery returns a boolean if a field has been set.
-func (o *QuerySourceMetricsQuery) HasMetricsQuery() bool {
-	if o != nil && !IsNil(o.MetricsQuery) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetricsQuery gets a reference to the given QuerySourceMetricsQuery and assigns it to the MetricsQuery field.
-func (o *QuerySourceMetricsQuery) SetMetricsQuery(v QuerySourceMetricsQuery) {
-	o.MetricsQuery = &v
-}
-
-// GetRefreshStrategy returns the RefreshStrategy field value if set, zero value otherwise.
-func (o *QuerySourceMetricsQuery) GetRefreshStrategy() VariableSourceV2RefreshStrategy {
-	if o == nil || IsNil(o.RefreshStrategy) {
-		var ret VariableSourceV2RefreshStrategy
-		return ret
-	}
-	return *o.RefreshStrategy
-}
-
-// GetRefreshStrategyOk returns a tuple with the RefreshStrategy field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *QuerySourceMetricsQuery) GetRefreshStrategyOk() (*VariableSourceV2RefreshStrategy, bool) {
-	if o == nil || IsNil(o.RefreshStrategy) {
-		return nil, false
-	}
-	return o.RefreshStrategy, true
-}
-
-// HasRefreshStrategy returns a boolean if a field has been set.
-func (o *QuerySourceMetricsQuery) HasRefreshStrategy() bool {
-	if o != nil && !IsNil(o.RefreshStrategy) {
-		return true
-	}
-
-	return false
-}
-
-// SetRefreshStrategy gets a reference to the given VariableSourceV2RefreshStrategy and assigns it to the RefreshStrategy field.
-func (o *QuerySourceMetricsQuery) SetRefreshStrategy(v VariableSourceV2RefreshStrategy) {
-	o.RefreshStrategy = &v
-}
-
-// GetValueDisplayOptions returns the ValueDisplayOptions field value if set, zero value otherwise.
-func (o *QuerySourceMetricsQuery) GetValueDisplayOptions() VariableSourceV2ValueDisplayOptions {
-	if o == nil || IsNil(o.ValueDisplayOptions) {
-		var ret VariableSourceV2ValueDisplayOptions
-		return ret
-	}
-	return *o.ValueDisplayOptions
-}
-
-// GetValueDisplayOptionsOk returns a tuple with the ValueDisplayOptions field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *QuerySourceMetricsQuery) GetValueDisplayOptionsOk() (*VariableSourceV2ValueDisplayOptions, bool) {
-	if o == nil || IsNil(o.ValueDisplayOptions) {
-		return nil, false
-	}
-	return o.ValueDisplayOptions, true
-}
-
-// HasValueDisplayOptions returns a boolean if a field has been set.
-func (o *QuerySourceMetricsQuery) HasValueDisplayOptions() bool {
-	if o != nil && !IsNil(o.ValueDisplayOptions) {
-		return true
-	}
-
-	return false
-}
-
-// SetValueDisplayOptions gets a reference to the given VariableSourceV2ValueDisplayOptions and assigns it to the ValueDisplayOptions field.
-func (o *QuerySourceMetricsQuery) SetValueDisplayOptions(v VariableSourceV2ValueDisplayOptions) {
-	o.ValueDisplayOptions = &v
-}
-
-// GetValuesOrderDirection returns the ValuesOrderDirection field value if set, zero value otherwise.
-func (o *QuerySourceMetricsQuery) GetValuesOrderDirection() OrderDirection {
-	if o == nil || IsNil(o.ValuesOrderDirection) {
-		var ret OrderDirection
-		return ret
-	}
-	return *o.ValuesOrderDirection
-}
-
-// GetValuesOrderDirectionOk returns a tuple with the ValuesOrderDirection field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *QuerySourceMetricsQuery) GetValuesOrderDirectionOk() (*OrderDirection, bool) {
-	if o == nil || IsNil(o.ValuesOrderDirection) {
-		return nil, false
-	}
-	return o.ValuesOrderDirection, true
-}
-
-// HasValuesOrderDirection returns a boolean if a field has been set.
-func (o *QuerySourceMetricsQuery) HasValuesOrderDirection() bool {
-	if o != nil && !IsNil(o.ValuesOrderDirection) {
-		return true
-	}
-
-	return false
-}
-
-// SetValuesOrderDirection gets a reference to the given OrderDirection and assigns it to the ValuesOrderDirection field.
-func (o *QuerySourceMetricsQuery) SetValuesOrderDirection(v OrderDirection) {
-	o.ValuesOrderDirection = &v
+// SetType gets a reference to the given QuerySourceMetricsQueryType and assigns it to the Type field.
+func (o *QuerySourceMetricsQuery) SetType(v QuerySourceMetricsQueryType) {
+	o.Type = &v
 }
 
 func (o QuerySourceMetricsQuery) MarshalJSON() ([]byte, error) {
@@ -213,20 +81,8 @@ func (o QuerySourceMetricsQuery) MarshalJSON() ([]byte, error) {
 
 func (o QuerySourceMetricsQuery) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AllOption) {
-		toSerialize["allOption"] = o.AllOption
-	}
-	if !IsNil(o.MetricsQuery) {
-		toSerialize["metricsQuery"] = o.MetricsQuery
-	}
-	if !IsNil(o.RefreshStrategy) {
-		toSerialize["refreshStrategy"] = o.RefreshStrategy
-	}
-	if !IsNil(o.ValueDisplayOptions) {
-		toSerialize["valueDisplayOptions"] = o.ValueDisplayOptions
-	}
-	if !IsNil(o.ValuesOrderDirection) {
-		toSerialize["valuesOrderDirection"] = o.ValuesOrderDirection
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
 	}
 	return toSerialize, nil
 }

@@ -1050,37 +1050,6 @@ components:
       title: CloudFormation stack
       type: object
     CloudFormationTemplate:
-      example:
-        postInstallationSteps:
-          key: postInstallationSteps
-        parameters:
-          key: parameters
-        commands:
-        - tooltipText: tooltipText
-          name: name
-          description: description
-          language: UNKNOWN
-          links:
-          - text: text
-            key: key
-            url: url
-          - text: text
-            key: key
-            url: url
-          command: command
-        - tooltipText: tooltipText
-          name: name
-          description: description
-          language: UNKNOWN
-          links:
-          - text: text
-            key: key
-            url: url
-          - text: text
-            key: key
-            url: url
-          command: command
-        templateUrl: templateUrl
       externalDocs:
         url: ""
       properties:
@@ -1125,19 +1094,6 @@ components:
           $ref: "#/components/schemas/ColorsByStack"
       type: object
     CommandInformation:
-      example:
-        tooltipText: tooltipText
-        name: name
-        description: description
-        language: UNKNOWN
-        links:
-        - text: text
-          key: key
-          url: url
-        - text: text
-          key: key
-          url: url
-        command: command
       externalDocs:
         url: ""
       properties:
@@ -1158,6 +1114,10 @@ components:
       title: Command information
       type: object
     ConfigurationBlock:
+      example:
+        name: name
+        description: description
+        value: value
       externalDocs:
         url: ""
       properties:
@@ -1578,14 +1538,42 @@ components:
       type: object
     FieldInformation:
       oneOf:
-      - $ref: "#/components/schemas/FieldInformationSingleNumber"
-      - $ref: "#/components/schemas/FieldInformationSingle"
       - $ref: "#/components/schemas/FieldInformationMultiText"
       - $ref: "#/components/schemas/FieldInformationMultipleSelection"
       - $ref: "#/components/schemas/FieldInformationSingleBoolean"
       - $ref: "#/components/schemas/FieldInformationSelection"
+      - $ref: "#/components/schemas/FieldInformationSingleNumber"
+      - $ref: "#/components/schemas/FieldInformationSingle"
     FieldInformationMultiText:
       additionalProperties: false
+      example:
+        visible: true
+        groupId: groupId
+        tooltip: tooltip
+        multiText:
+          options:
+          - options
+          - options
+          defaultValues:
+          - defaultValues
+          - defaultValues
+        type: API_KEY
+        upgradeNotice: upgradeNotice
+        predefined: true
+        required: true
+        templateParamName: templateParamName
+        readonly: true
+        documentationReference: documentationReference
+        name: name
+        placeholder: placeholder
+        applicableIf:
+          values:
+          - fieldName: fieldName
+            valuePattern: valuePattern
+          - fieldName: fieldName
+            valuePattern: valuePattern
+          type: UNKNOWN
+        allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -1781,29 +1769,6 @@ components:
       type: object
     FieldInformationSingleNumber:
       additionalProperties: false
-      example:
-        visible: true
-        groupId: groupId
-        tooltip: tooltip
-        type: API_KEY
-        upgradeNotice: upgradeNotice
-        predefined: true
-        required: true
-        templateParamName: templateParamName
-        singleNumber:
-          defaultValue: 0.8008281904610115
-        readonly: true
-        documentationReference: documentationReference
-        name: name
-        placeholder: placeholder
-        applicableIf:
-          values:
-          - fieldName: fieldName
-            valuePattern: valuePattern
-          - fieldName: fieldName
-            valuePattern: valuePattern
-          type: UNKNOWN
-        allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -1945,59 +1910,42 @@ components:
         integrationDefinition:
           featureFlag: featureFlag
           integrationType:
-            genericWebhook: "{}"
+            managed:
+              variant: DEFAULT
           revisions:
           - revisionDeploymentSupported: true
             featureFlag: featureFlag
             upgradeInstructionsMd: upgradeInstructionsMd
-            cloudFormation:
-              postInstallationSteps:
-                key: postInstallationSteps
-              parameters:
-                key: parameters
-              commands:
-              - tooltipText: tooltipText
-                name: name
-                description: description
-                language: UNKNOWN
-                links:
-                - text: text
-                  key: key
-                  url: url
-                - text: text
-                  key: key
-                  url: url
-                command: command
-              - tooltipText: tooltipText
-                name: name
-                description: description
-                language: UNKNOWN
-                links:
-                - text: text
-                  key: key
-                  url: url
-                - text: text
-                  key: key
-                  url: url
-                command: command
-              templateUrl: templateUrl
             groups:
             - name: name
               id: id
             - name: name
               id: id
+            terraform:
+              configurationBlocks:
+              - name: name
+                description: description
+                value: value
+              - name: name
+                description: description
+                value: value
             id: id
             fields:
             - visible: true
               groupId: groupId
               tooltip: tooltip
+              multiText:
+                options:
+                - options
+                - options
+                defaultValues:
+                - defaultValues
+                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
               required: true
               templateParamName: templateParamName
-              singleNumber:
-                defaultValue: 0.8008281904610115
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -2013,13 +1961,18 @@ components:
             - visible: true
               groupId: groupId
               tooltip: tooltip
+              multiText:
+                options:
+                - options
+                - options
+                defaultValues:
+                - defaultValues
+                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
               required: true
               templateParamName: templateParamName
-              singleNumber:
-                defaultValue: 0.8008281904610115
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -2035,54 +1988,36 @@ components:
           - revisionDeploymentSupported: true
             featureFlag: featureFlag
             upgradeInstructionsMd: upgradeInstructionsMd
-            cloudFormation:
-              postInstallationSteps:
-                key: postInstallationSteps
-              parameters:
-                key: parameters
-              commands:
-              - tooltipText: tooltipText
-                name: name
-                description: description
-                language: UNKNOWN
-                links:
-                - text: text
-                  key: key
-                  url: url
-                - text: text
-                  key: key
-                  url: url
-                command: command
-              - tooltipText: tooltipText
-                name: name
-                description: description
-                language: UNKNOWN
-                links:
-                - text: text
-                  key: key
-                  url: url
-                - text: text
-                  key: key
-                  url: url
-                command: command
-              templateUrl: templateUrl
             groups:
             - name: name
               id: id
             - name: name
               id: id
+            terraform:
+              configurationBlocks:
+              - name: name
+                description: description
+                value: value
+              - name: name
+                description: description
+                value: value
             id: id
             fields:
             - visible: true
               groupId: groupId
               tooltip: tooltip
+              multiText:
+                options:
+                - options
+                - options
+                defaultValues:
+                - defaultValues
+                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
               required: true
               templateParamName: templateParamName
-              singleNumber:
-                defaultValue: 0.8008281904610115
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -2098,13 +2033,18 @@ components:
             - visible: true
               groupId: groupId
               tooltip: tooltip
+              multiText:
+                options:
+                - options
+                - options
+                defaultValues:
+                - defaultValues
+                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
               required: true
               templateParamName: templateParamName
-              singleNumber:
-                defaultValue: 0.8008281904610115
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -2925,7 +2865,8 @@ components:
           integration:
             featureFlag: featureFlag
             integrationType:
-              genericWebhook: "{}"
+              managed:
+                variant: DEFAULT
             versions:
             - versions
             - versions
@@ -2959,7 +2900,8 @@ components:
         - integration:
             featureFlag: featureFlag
             integrationType:
-              genericWebhook: "{}"
+              managed:
+                variant: DEFAULT
             versions:
             - versions
             - versions
@@ -2980,7 +2922,8 @@ components:
         - integration:
             featureFlag: featureFlag
             integrationType:
-              genericWebhook: "{}"
+              managed:
+                variant: DEFAULT
             versions:
             - versions
             - versions
@@ -3012,7 +2955,8 @@ components:
         integration:
           featureFlag: featureFlag
           integrationType:
-            genericWebhook: "{}"
+            managed:
+              variant: DEFAULT
           versions:
           - versions
           - versions
@@ -3143,7 +3087,8 @@ components:
       example:
         featureFlag: featureFlag
         integrationType:
-          genericWebhook: "{}"
+          managed:
+            variant: DEFAULT
         versions:
         - versions
         - versions
@@ -3187,59 +3132,42 @@ components:
       example:
         featureFlag: featureFlag
         integrationType:
-          genericWebhook: "{}"
+          managed:
+            variant: DEFAULT
         revisions:
         - revisionDeploymentSupported: true
           featureFlag: featureFlag
           upgradeInstructionsMd: upgradeInstructionsMd
-          cloudFormation:
-            postInstallationSteps:
-              key: postInstallationSteps
-            parameters:
-              key: parameters
-            commands:
-            - tooltipText: tooltipText
-              name: name
-              description: description
-              language: UNKNOWN
-              links:
-              - text: text
-                key: key
-                url: url
-              - text: text
-                key: key
-                url: url
-              command: command
-            - tooltipText: tooltipText
-              name: name
-              description: description
-              language: UNKNOWN
-              links:
-              - text: text
-                key: key
-                url: url
-              - text: text
-                key: key
-                url: url
-              command: command
-            templateUrl: templateUrl
           groups:
           - name: name
             id: id
           - name: name
             id: id
+          terraform:
+            configurationBlocks:
+            - name: name
+              description: description
+              value: value
+            - name: name
+              description: description
+              value: value
           id: id
           fields:
           - visible: true
             groupId: groupId
             tooltip: tooltip
+            multiText:
+              options:
+              - options
+              - options
+              defaultValues:
+              - defaultValues
+              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
             required: true
             templateParamName: templateParamName
-            singleNumber:
-              defaultValue: 0.8008281904610115
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -3255,13 +3183,18 @@ components:
           - visible: true
             groupId: groupId
             tooltip: tooltip
+            multiText:
+              options:
+              - options
+              - options
+              defaultValues:
+              - defaultValues
+              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
             required: true
             templateParamName: templateParamName
-            singleNumber:
-              defaultValue: 0.8008281904610115
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -3277,54 +3210,36 @@ components:
         - revisionDeploymentSupported: true
           featureFlag: featureFlag
           upgradeInstructionsMd: upgradeInstructionsMd
-          cloudFormation:
-            postInstallationSteps:
-              key: postInstallationSteps
-            parameters:
-              key: parameters
-            commands:
-            - tooltipText: tooltipText
-              name: name
-              description: description
-              language: UNKNOWN
-              links:
-              - text: text
-                key: key
-                url: url
-              - text: text
-                key: key
-                url: url
-              command: command
-            - tooltipText: tooltipText
-              name: name
-              description: description
-              language: UNKNOWN
-              links:
-              - text: text
-                key: key
-                url: url
-              - text: text
-                key: key
-                url: url
-              command: command
-            templateUrl: templateUrl
           groups:
           - name: name
             id: id
           - name: name
             id: id
+          terraform:
+            configurationBlocks:
+            - name: name
+              description: description
+              value: value
+            - name: name
+              description: description
+              value: value
           id: id
           fields:
           - visible: true
             groupId: groupId
             tooltip: tooltip
+            multiText:
+              options:
+              - options
+              - options
+              defaultValues:
+              - defaultValues
+              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
             required: true
             templateParamName: templateParamName
-            singleNumber:
-              defaultValue: 0.8008281904610115
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -3340,13 +3255,18 @@ components:
           - visible: true
             groupId: groupId
             tooltip: tooltip
+            multiText:
+              options:
+              - options
+              - options
+              defaultValues:
+              - defaultValues
+              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
             required: true
             templateParamName: templateParamName
-            singleNumber:
-              defaultValue: 0.8008281904610115
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -4216,7 +4136,8 @@ components:
         integration:
           featureFlag: featureFlag
           integrationType:
-            genericWebhook: "{}"
+            managed:
+              variant: DEFAULT
           versions:
           - versions
           - versions
@@ -4292,12 +4213,12 @@ components:
       type: object
     IntegrationRevision:
       oneOf:
+      - $ref: "#/components/schemas/IntegrationRevisionTerraform"
       - $ref: "#/components/schemas/IntegrationRevisionCloudFormation"
       - $ref: "#/components/schemas/IntegrationRevisionManagedService"
       - $ref: "#/components/schemas/IntegrationRevisionHelmChart"
       - $ref: "#/components/schemas/IntegrationRevisionAzureArmTemplate"
       - $ref: "#/components/schemas/IntegrationRevisionRum"
-      - $ref: "#/components/schemas/IntegrationRevisionTerraform"
     IntegrationRevision.Group:
       example:
         name: name
@@ -4312,8 +4233,6 @@ components:
       title: Group
       type: object
     IntegrationRevision.SingleNumericValue:
-      example:
-        defaultValue: 0.8008281904610115
       externalDocs:
         url: ""
       properties:
@@ -4351,92 +4270,6 @@ components:
     IntegrationRevisionCloudFormation:
       additionalProperties: false
       description: This data structure represents an integration revision.
-      example:
-        revisionDeploymentSupported: true
-        featureFlag: featureFlag
-        upgradeInstructionsMd: upgradeInstructionsMd
-        cloudFormation:
-          postInstallationSteps:
-            key: postInstallationSteps
-          parameters:
-            key: parameters
-          commands:
-          - tooltipText: tooltipText
-            name: name
-            description: description
-            language: UNKNOWN
-            links:
-            - text: text
-              key: key
-              url: url
-            - text: text
-              key: key
-              url: url
-            command: command
-          - tooltipText: tooltipText
-            name: name
-            description: description
-            language: UNKNOWN
-            links:
-            - text: text
-              key: key
-              url: url
-            - text: text
-              key: key
-              url: url
-            command: command
-          templateUrl: templateUrl
-        groups:
-        - name: name
-          id: id
-        - name: name
-          id: id
-        id: id
-        fields:
-        - visible: true
-          groupId: groupId
-          tooltip: tooltip
-          type: API_KEY
-          upgradeNotice: upgradeNotice
-          predefined: true
-          required: true
-          templateParamName: templateParamName
-          singleNumber:
-            defaultValue: 0.8008281904610115
-          readonly: true
-          documentationReference: documentationReference
-          name: name
-          placeholder: placeholder
-          applicableIf:
-            values:
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            type: UNKNOWN
-          allowedPattern: allowedPattern
-        - visible: true
-          groupId: groupId
-          tooltip: tooltip
-          type: API_KEY
-          upgradeNotice: upgradeNotice
-          predefined: true
-          required: true
-          templateParamName: templateParamName
-          singleNumber:
-            defaultValue: 0.8008281904610115
-          readonly: true
-          documentationReference: documentationReference
-          name: name
-          placeholder: placeholder
-          applicableIf:
-            values:
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            type: UNKNOWN
-          allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -4545,6 +4378,79 @@ components:
     IntegrationRevisionTerraform:
       additionalProperties: false
       description: This data structure represents an integration revision.
+      example:
+        revisionDeploymentSupported: true
+        featureFlag: featureFlag
+        upgradeInstructionsMd: upgradeInstructionsMd
+        groups:
+        - name: name
+          id: id
+        - name: name
+          id: id
+        terraform:
+          configurationBlocks:
+          - name: name
+            description: description
+            value: value
+          - name: name
+            description: description
+            value: value
+        id: id
+        fields:
+        - visible: true
+          groupId: groupId
+          tooltip: tooltip
+          multiText:
+            options:
+            - options
+            - options
+            defaultValues:
+            - defaultValues
+            - defaultValues
+          type: API_KEY
+          upgradeNotice: upgradeNotice
+          predefined: true
+          required: true
+          templateParamName: templateParamName
+          readonly: true
+          documentationReference: documentationReference
+          name: name
+          placeholder: placeholder
+          applicableIf:
+            values:
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            type: UNKNOWN
+          allowedPattern: allowedPattern
+        - visible: true
+          groupId: groupId
+          tooltip: tooltip
+          multiText:
+            options:
+            - options
+            - options
+            defaultValues:
+            - defaultValues
+            - defaultValues
+          type: API_KEY
+          upgradeNotice: upgradeNotice
+          predefined: true
+          required: true
+          templateParamName: templateParamName
+          readonly: true
+          documentationReference: documentationReference
+          name: name
+          placeholder: placeholder
+          applicableIf:
+            values:
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            type: UNKNOWN
+          allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -4594,103 +4500,6 @@ components:
       - connectionStatus
       title: Integration status
       type: object
-    IntegrationTypeArm:
-      additionalProperties: false
-      description: This data structure represents an integration type.
-      externalDocs:
-        url: ""
-      properties:
-        arm:
-          description: This data structure represents an Azure ARM integration.
-          externalDocs:
-            url: ""
-          title: Azure ARM
-          type: object
-      title: Integration type
-      type: object
-    IntegrationTypeCloudformation:
-      additionalProperties: false
-      description: This data structure represents an integration type.
-      externalDocs:
-        url: ""
-      properties:
-        cloudformation:
-          description: This data structure represents a CloudFormation integration.
-          externalDocs:
-            url: ""
-          title: CloudFormation
-          type: object
-      title: Integration type
-      type: object
-    IntegrationTypeContextualData:
-      additionalProperties: false
-      description: This data structure represents an integration type.
-      externalDocs:
-        url: ""
-      properties:
-        contextualData:
-          description: This data structure represents a contextual data integration.
-          externalDocs:
-            url: ""
-          title: Contextual data
-          type: object
-      title: Integration type
-      type: object
-    IntegrationTypeGenericWebhook:
-      additionalProperties: false
-      description: This data structure represents an integration type.
-      example:
-        genericWebhook: "{}"
-      externalDocs:
-        url: ""
-      properties:
-        genericWebhook:
-          description: This data structure represents a generic webhook integration.
-          externalDocs:
-            url: ""
-          title: Generic webhook
-          type: object
-      title: Integration type
-      type: object
-    IntegrationTypeManaged:
-      additionalProperties: false
-      description: This data structure represents an integration type.
-      externalDocs:
-        url: ""
-      properties:
-        managed:
-          $ref: "#/components/schemas/Managed"
-      title: Integration type
-      type: object
-    IntegrationTypePushBasedContextualData:
-      additionalProperties: false
-      description: This data structure represents an integration type.
-      externalDocs:
-        url: ""
-      properties:
-        pushBasedContextualData:
-          description: This data structure represents a push based contextual data
-            integration.
-          externalDocs:
-            url: ""
-          title: Push based contextual data
-          type: object
-      title: Integration type
-      type: object
-    IntegrationTypeUntracked:
-      additionalProperties: false
-      description: This data structure represents an integration type.
-      externalDocs:
-        url: ""
-      properties:
-        untracked:
-          description: This data structure represents an untracked integration.
-          externalDocs:
-            url: ""
-          title: Untracked
-          type: object
-      title: Integration type
-      type: object
     Language:
       enum:
       - UNKNOWN
@@ -4698,10 +4507,6 @@ components:
       - JAVASCRIPT
       type: string
     Link:
-      example:
-        text: text
-        key: key
-        url: url
       externalDocs:
         url: ""
       properties:
@@ -4730,6 +4535,13 @@ components:
       title: List managed integration keys response
       type: object
     ListTextValue:
+      example:
+        options:
+        - options
+        - options
+        defaultValues:
+        - defaultValues
+        - defaultValues
       externalDocs:
         url: ""
       properties:
@@ -4776,6 +4588,8 @@ components:
       type: object
     Managed:
       description: This data structure represents a managed integration.
+      example:
+        variant: DEFAULT
       externalDocs:
         url: ""
       properties:
@@ -5207,6 +5021,14 @@ components:
       type: string
     Terraform:
       description: This data structure represents a Terraform integration.
+      example:
+        configurationBlocks:
+        - name: name
+          description: description
+          value: value
+        - name: name
+          description: description
+          value: value
       externalDocs:
         url: ""
       properties:
@@ -5277,6 +5099,104 @@ components:
       type: object
     UpdateIntegrationResponse:
       type: object
+    V1IntegrationTypeArm:
+      additionalProperties: false
+      description: This data structure represents an integration type.
+      externalDocs:
+        url: ""
+      properties:
+        arm:
+          description: This data structure represents an Azure ARM integration.
+          externalDocs:
+            url: ""
+          title: Azure ARM
+          type: object
+      title: Integration type
+      type: object
+    V1IntegrationTypeCloudformation:
+      additionalProperties: false
+      description: This data structure represents an integration type.
+      externalDocs:
+        url: ""
+      properties:
+        cloudformation:
+          description: This data structure represents a CloudFormation integration.
+          externalDocs:
+            url: ""
+          title: CloudFormation
+          type: object
+      title: Integration type
+      type: object
+    V1IntegrationTypeContextualData:
+      additionalProperties: false
+      description: This data structure represents an integration type.
+      externalDocs:
+        url: ""
+      properties:
+        contextualData:
+          description: This data structure represents a contextual data integration.
+          externalDocs:
+            url: ""
+          title: Contextual data
+          type: object
+      title: Integration type
+      type: object
+    V1IntegrationTypeGenericWebhook:
+      additionalProperties: false
+      description: This data structure represents an integration type.
+      externalDocs:
+        url: ""
+      properties:
+        genericWebhook:
+          description: This data structure represents a generic webhook integration.
+          externalDocs:
+            url: ""
+          title: Generic webhook
+          type: object
+      title: Integration type
+      type: object
+    V1IntegrationTypeManaged:
+      additionalProperties: false
+      description: This data structure represents an integration type.
+      example:
+        managed:
+          variant: DEFAULT
+      externalDocs:
+        url: ""
+      properties:
+        managed:
+          $ref: "#/components/schemas/Managed"
+      title: Integration type
+      type: object
+    V1IntegrationTypePushBasedContextualData:
+      additionalProperties: false
+      description: This data structure represents an integration type.
+      externalDocs:
+        url: ""
+      properties:
+        pushBasedContextualData:
+          description: This data structure represents a push based contextual data
+            integration.
+          externalDocs:
+            url: ""
+          title: Push based contextual data
+          type: object
+      title: Integration type
+      type: object
+    V1IntegrationTypeUntracked:
+      additionalProperties: false
+      description: This data structure represents an integration type.
+      externalDocs:
+        url: ""
+      properties:
+        untracked:
+          description: This data structure represents an untracked integration.
+          externalDocs:
+            url: ""
+          title: Untracked
+          type: object
+      title: Integration type
+      type: object
     Variant:
       enum:
       - DEFAULT
@@ -5284,18 +5204,6 @@ components:
       - OAUTH
       - CUSTOM
       type: string
-    YAxisViewByCategory:
-      additionalProperties: false
-      properties:
-        category:
-          $ref: "#/components/schemas/YAxisViewByCategory"
-      type: object
-    YAxisViewByValue:
-      additionalProperties: false
-      properties:
-        value:
-          $ref: "#/components/schemas/YAxisViewByValue"
-      type: object
     common.Group:
       properties:
         field:
@@ -5729,13 +5637,13 @@ components:
       type: object
     v1.IntegrationType:
       oneOf:
-      - $ref: "#/components/schemas/IntegrationTypeGenericWebhook"
-      - $ref: "#/components/schemas/IntegrationTypeManaged"
-      - $ref: "#/components/schemas/IntegrationTypeUntracked"
-      - $ref: "#/components/schemas/IntegrationTypeCloudformation"
-      - $ref: "#/components/schemas/IntegrationTypeArm"
-      - $ref: "#/components/schemas/IntegrationTypePushBasedContextualData"
-      - $ref: "#/components/schemas/IntegrationTypeContextualData"
+      - $ref: "#/components/schemas/V1IntegrationTypeManaged"
+      - $ref: "#/components/schemas/V1IntegrationTypeUntracked"
+      - $ref: "#/components/schemas/V1IntegrationTypeCloudformation"
+      - $ref: "#/components/schemas/V1IntegrationTypeArm"
+      - $ref: "#/components/schemas/V1IntegrationTypePushBasedContextualData"
+      - $ref: "#/components/schemas/V1IntegrationTypeContextualData"
+      - $ref: "#/components/schemas/V1IntegrationTypeGenericWebhook"
     v3.FilterOperator:
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED

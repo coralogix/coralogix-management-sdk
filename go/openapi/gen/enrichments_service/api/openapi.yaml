@@ -137,7 +137,7 @@ paths:
           let options = {
             method: 'POST',
             headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"requestEnrichments":[{"enrichedFieldName":"string","enrichmentType":{"aws":{"resourceType":"ec2"}},"fieldName":"sourceIPs","selectedColumns":["string"]}]}'
+            body: '{"requestEnrichments":[{"enrichedFieldName":"string","enrichmentType":{"suspiciousIp":{}},"fieldName":"sourceIPs","selectedColumns":["string"]}]}'
           };
 
           fetch(url, options)
@@ -153,7 +153,7 @@ paths:
           payload = {"requestEnrichments": [
                   {
                       "enrichedFieldName": "string",
-                      "enrichmentType": {"aws": {"resourceType": "ec2"}},
+                      "enrichmentType": {"suspiciousIp": {}},
                       "fieldName": "sourceIPs",
                       "selectedColumns": ["string"]
                   }
@@ -172,7 +172,7 @@ paths:
             --url https://api.coralogix.com/mgmt/openapi/enrichments \
             --header 'Authorization: Bearer <API_KEY>' \
             --header 'content-type: application/json' \
-            --data '{"requestEnrichments":[{"enrichedFieldName":"string","enrichmentType":{"aws":{"resourceType":"ec2"}},"fieldName":"sourceIPs","selectedColumns":["string"]}]}'
+            --data '{"requestEnrichments":[{"enrichedFieldName":"string","enrichmentType":{"suspiciousIp":{}},"fieldName":"sourceIPs","selectedColumns":["string"]}]}'
   /enrichments/limit:
     get:
       description: No description available
@@ -294,7 +294,7 @@ paths:
           let options = {
             method: 'PATCH',
             headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"enrichmentFields":[{"enrichedFieldName":"string","fieldName":"string","selectedColumns":["string"]}],"enrichmentType":{"aws":{"resourceType":"ec2"}},"requestEnrichments":[{"enrichedFieldName":"string","enrichmentType":{"aws":{"resourceType":"ec2"}},"fieldName":"sourceIPs","selectedColumns":["string"]}]}'
+            body: '{"enrichmentFields":[{"enrichedFieldName":"string","fieldName":"string","selectedColumns":["string"]}],"enrichmentType":{"suspiciousIp":{}},"requestEnrichments":[{"enrichedFieldName":"string","enrichmentType":{"suspiciousIp":{}},"fieldName":"sourceIPs","selectedColumns":["string"]}]}'
           };
 
           fetch(url, options)
@@ -315,11 +315,11 @@ paths:
                       "selectedColumns": ["string"]
                   }
               ],
-              "enrichmentType": {"aws": {"resourceType": "ec2"}},
+              "enrichmentType": {"suspiciousIp": {}},
               "requestEnrichments": [
                   {
                       "enrichedFieldName": "string",
-                      "enrichmentType": {"aws": {"resourceType": "ec2"}},
+                      "enrichmentType": {"suspiciousIp": {}},
                       "fieldName": "sourceIPs",
                       "selectedColumns": ["string"]
                   }
@@ -339,7 +339,7 @@ paths:
             --url https://api.coralogix.com/mgmt/openapi/enrichments:atomicOverwrite \
             --header 'Authorization: Bearer <API_KEY>' \
             --header 'content-type: application/json' \
-            --data '{"enrichmentFields":[{"enrichedFieldName":"string","fieldName":"string","selectedColumns":["string"]}],"enrichmentType":{"aws":{"resourceType":"ec2"}},"requestEnrichments":[{"enrichedFieldName":"string","enrichmentType":{"aws":{"resourceType":"ec2"}},"fieldName":"sourceIPs","selectedColumns":["string"]}]}'
+            --data '{"enrichmentFields":[{"enrichedFieldName":"string","fieldName":"string","selectedColumns":["string"]}],"enrichmentType":{"suspiciousIp":{}},"requestEnrichments":[{"enrichedFieldName":"string","enrichmentType":{"suspiciousIp":{}},"fieldName":"sourceIPs","selectedColumns":["string"]}]}'
 components:
   schemas:
     AddEnrichmentsResponse:
@@ -347,8 +347,7 @@ components:
       example:
         enrichments:
         - enrichmentType:
-            aws:
-              resourceType: ec2
+            suspiciousIp: "{}"
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -356,8 +355,7 @@ components:
           enrichedFieldName: "1"
           id: 1
         - enrichmentType:
-            aws:
-              resourceType: ec2
+            suspiciousIp: "{}"
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -380,8 +378,7 @@ components:
       example:
         enrichments:
         - enrichmentType:
-            aws:
-              resourceType: ec2
+            suspiciousIp: "{}"
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -389,8 +386,7 @@ components:
           enrichedFieldName: "1"
           id: 1
         - enrichmentType:
-            aws:
-              resourceType: ec2
+            suspiciousIp: "{}"
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -404,8 +400,6 @@ components:
           type: array
       type: object
     AwsType:
-      example:
-        resourceType: ec2
       properties:
         resourceType:
           example: ec2
@@ -468,8 +462,7 @@ components:
       description: This data structure represents an enrichment
       example:
         enrichmentType:
-          aws:
-            resourceType: ec2
+          suspiciousIp: "{}"
         selectedColumns:
         - "[\"city\",\"population\"]"
         - "[\"city\",\"population\"]"
@@ -538,15 +531,12 @@ components:
       type: object
     EnrichmentType:
       oneOf:
+      - $ref: "#/components/schemas/EnrichmentTypeSuspiciousIp"
       - $ref: "#/components/schemas/EnrichmentTypeAws"
       - $ref: "#/components/schemas/EnrichmentTypeCustomEnrichment"
       - $ref: "#/components/schemas/EnrichmentTypeGeoIp"
-      - $ref: "#/components/schemas/EnrichmentTypeSuspiciousIp"
     EnrichmentTypeAws:
       additionalProperties: false
-      example:
-        aws:
-          resourceType: ec2
       properties:
         aws:
           $ref: "#/components/schemas/AwsType"
@@ -565,6 +555,8 @@ components:
       type: object
     EnrichmentTypeSuspiciousIp:
       additionalProperties: false
+      example:
+        suspiciousIp: "{}"
       properties:
         suspiciousIp:
           type: object
@@ -672,8 +664,7 @@ components:
       example:
         enrichments:
         - enrichmentType:
-            aws:
-              resourceType: ec2
+            suspiciousIp: "{}"
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -681,8 +672,7 @@ components:
           enrichedFieldName: "1"
           id: 1
         - enrichmentType:
-            aws:
-              resourceType: ec2
+            suspiciousIp: "{}"
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -715,8 +705,7 @@ components:
       example:
         remainingEnrichments:
         - enrichmentType:
-            aws:
-              resourceType: ec2
+            suspiciousIp: "{}"
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -724,8 +713,7 @@ components:
           enrichedFieldName: "1"
           id: 1
         - enrichmentType:
-            aws:
-              resourceType: ec2
+            suspiciousIp: "{}"
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -745,18 +733,6 @@ components:
       title: Encrichments Delettion Response
       type: object
     SuspiciousIpType:
-      type: object
-    YAxisViewByCategory:
-      additionalProperties: false
-      properties:
-        category:
-          $ref: "#/components/schemas/YAxisViewByCategory"
-      type: object
-    YAxisViewByValue:
-      additionalProperties: false
-      properties:
-        value:
-          $ref: "#/components/schemas/YAxisViewByValue"
       type: object
     common.Group:
       properties:

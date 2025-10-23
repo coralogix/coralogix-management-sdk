@@ -18,21 +18,21 @@ import (
 
 // QueryMetricsQueryStringOrVariable - struct for QueryMetricsQueryStringOrVariable
 type QueryMetricsQueryStringOrVariable struct {
-	StringOrVariableStringValue *StringOrVariableStringValue
-	StringOrVariableVariableName *StringOrVariableVariableName
+	QueryMetricsQueryStringOrVariableStringValue *QueryMetricsQueryStringOrVariableStringValue
+	QueryMetricsQueryStringOrVariableVariableName *QueryMetricsQueryStringOrVariableVariableName
 }
 
-// StringOrVariableStringValueAsQueryMetricsQueryStringOrVariable is a convenience function that returns StringOrVariableStringValue wrapped in QueryMetricsQueryStringOrVariable
-func StringOrVariableStringValueAsQueryMetricsQueryStringOrVariable(v *StringOrVariableStringValue) QueryMetricsQueryStringOrVariable {
+// QueryMetricsQueryStringOrVariableStringValueAsQueryMetricsQueryStringOrVariable is a convenience function that returns QueryMetricsQueryStringOrVariableStringValue wrapped in QueryMetricsQueryStringOrVariable
+func QueryMetricsQueryStringOrVariableStringValueAsQueryMetricsQueryStringOrVariable(v *QueryMetricsQueryStringOrVariableStringValue) QueryMetricsQueryStringOrVariable {
 	return QueryMetricsQueryStringOrVariable{
-		StringOrVariableStringValue: v,
+		QueryMetricsQueryStringOrVariableStringValue: v,
 	}
 }
 
-// StringOrVariableVariableNameAsQueryMetricsQueryStringOrVariable is a convenience function that returns StringOrVariableVariableName wrapped in QueryMetricsQueryStringOrVariable
-func StringOrVariableVariableNameAsQueryMetricsQueryStringOrVariable(v *StringOrVariableVariableName) QueryMetricsQueryStringOrVariable {
+// QueryMetricsQueryStringOrVariableVariableNameAsQueryMetricsQueryStringOrVariable is a convenience function that returns QueryMetricsQueryStringOrVariableVariableName wrapped in QueryMetricsQueryStringOrVariable
+func QueryMetricsQueryStringOrVariableVariableNameAsQueryMetricsQueryStringOrVariable(v *QueryMetricsQueryStringOrVariableVariableName) QueryMetricsQueryStringOrVariable {
 	return QueryMetricsQueryStringOrVariable{
-		StringOrVariableVariableName: v,
+		QueryMetricsQueryStringOrVariableVariableName: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func StringOrVariableVariableNameAsQueryMetricsQueryStringOrVariable(v *StringOr
 func (dst *QueryMetricsQueryStringOrVariable) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into StringOrVariableStringValue
-	err = newStrictDecoder(data).Decode(&dst.StringOrVariableStringValue)
+	// try to unmarshal data into QueryMetricsQueryStringOrVariableStringValue
+	err = newStrictDecoder(data).Decode(&dst.QueryMetricsQueryStringOrVariableStringValue)
 	if err == nil {
-		jsonStringOrVariableStringValue, _ := json.Marshal(dst.StringOrVariableStringValue)
-		if string(jsonStringOrVariableStringValue) == "{}" { // empty struct
-			dst.StringOrVariableStringValue = nil
+		jsonQueryMetricsQueryStringOrVariableStringValue, _ := json.Marshal(dst.QueryMetricsQueryStringOrVariableStringValue)
+		if string(jsonQueryMetricsQueryStringOrVariableStringValue) == "{}" { // empty struct
+			dst.QueryMetricsQueryStringOrVariableStringValue = nil
 		} else {
-			if err = validator.Validate(dst.StringOrVariableStringValue); err != nil {
-				dst.StringOrVariableStringValue = nil
+			if err = validator.Validate(dst.QueryMetricsQueryStringOrVariableStringValue); err != nil {
+				dst.QueryMetricsQueryStringOrVariableStringValue = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.StringOrVariableStringValue = nil
+		dst.QueryMetricsQueryStringOrVariableStringValue = nil
 	}
 
-	// try to unmarshal data into StringOrVariableVariableName
-	err = newStrictDecoder(data).Decode(&dst.StringOrVariableVariableName)
+	// try to unmarshal data into QueryMetricsQueryStringOrVariableVariableName
+	err = newStrictDecoder(data).Decode(&dst.QueryMetricsQueryStringOrVariableVariableName)
 	if err == nil {
-		jsonStringOrVariableVariableName, _ := json.Marshal(dst.StringOrVariableVariableName)
-		if string(jsonStringOrVariableVariableName) == "{}" { // empty struct
-			dst.StringOrVariableVariableName = nil
+		jsonQueryMetricsQueryStringOrVariableVariableName, _ := json.Marshal(dst.QueryMetricsQueryStringOrVariableVariableName)
+		if string(jsonQueryMetricsQueryStringOrVariableVariableName) == "{}" { // empty struct
+			dst.QueryMetricsQueryStringOrVariableVariableName = nil
 		} else {
-			if err = validator.Validate(dst.StringOrVariableVariableName); err != nil {
-				dst.StringOrVariableVariableName = nil
+			if err = validator.Validate(dst.QueryMetricsQueryStringOrVariableVariableName); err != nil {
+				dst.QueryMetricsQueryStringOrVariableVariableName = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.StringOrVariableVariableName = nil
+		dst.QueryMetricsQueryStringOrVariableVariableName = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.StringOrVariableStringValue = nil
-		dst.StringOrVariableVariableName = nil
+		dst.QueryMetricsQueryStringOrVariableStringValue = nil
+		dst.QueryMetricsQueryStringOrVariableVariableName = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(QueryMetricsQueryStringOrVariable)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *QueryMetricsQueryStringOrVariable) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src QueryMetricsQueryStringOrVariable) MarshalJSON() ([]byte, error) {
-	if src.StringOrVariableStringValue != nil {
-		return json.Marshal(&src.StringOrVariableStringValue)
+	if src.QueryMetricsQueryStringOrVariableStringValue != nil {
+		return json.Marshal(&src.QueryMetricsQueryStringOrVariableStringValue)
 	}
 
-	if src.StringOrVariableVariableName != nil {
-		return json.Marshal(&src.StringOrVariableVariableName)
+	if src.QueryMetricsQueryStringOrVariableVariableName != nil {
+		return json.Marshal(&src.QueryMetricsQueryStringOrVariableVariableName)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *QueryMetricsQueryStringOrVariable) GetActualInstance() (interface{}) 
 	if obj == nil {
 		return nil
 	}
-	if obj.StringOrVariableStringValue != nil {
-		return obj.StringOrVariableStringValue
+	if obj.QueryMetricsQueryStringOrVariableStringValue != nil {
+		return obj.QueryMetricsQueryStringOrVariableStringValue
 	}
 
-	if obj.StringOrVariableVariableName != nil {
-		return obj.StringOrVariableVariableName
+	if obj.QueryMetricsQueryStringOrVariableVariableName != nil {
+		return obj.QueryMetricsQueryStringOrVariableVariableName
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *QueryMetricsQueryStringOrVariable) GetActualInstance() (interface{}) 
 
 // Get the actual instance value
 func (obj QueryMetricsQueryStringOrVariable) GetActualInstanceValue() (interface{}) {
-	if obj.StringOrVariableStringValue != nil {
-		return *obj.StringOrVariableStringValue
+	if obj.QueryMetricsQueryStringOrVariableStringValue != nil {
+		return *obj.QueryMetricsQueryStringOrVariableStringValue
 	}
 
-	if obj.StringOrVariableVariableName != nil {
-		return *obj.StringOrVariableVariableName
+	if obj.QueryMetricsQueryStringOrVariableVariableName != nil {
+		return *obj.QueryMetricsQueryStringOrVariableVariableName
 	}
 
 	// all schemas are nil

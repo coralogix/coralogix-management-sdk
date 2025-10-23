@@ -147,8 +147,6 @@ Class | Method | HTTP request | Description
  - [V2TcoTier](docs/V2TcoTier.md)
  - [V2Unit](docs/V2Unit.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

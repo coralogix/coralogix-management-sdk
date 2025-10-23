@@ -36,7 +36,5 @@ model_order_by_alert_event_direction.go
 model_order_by_alert_event_fields.go
 model_permutation.go
 model_v3_filter_operator.go
-model_y_axis_view_by_category.go
-model_y_axis_view_by_value.go
 response.go
 utils.go

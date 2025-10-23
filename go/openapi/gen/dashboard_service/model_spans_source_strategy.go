@@ -18,29 +18,29 @@ import (
 
 // SpansSourceStrategy - struct for SpansSourceStrategy
 type SpansSourceStrategy struct {
-	StrategyDuration *StrategyDuration
-	StrategyInstant *StrategyInstant
-	StrategyRange *StrategyRange
+	SpansSourceStrategyDuration *SpansSourceStrategyDuration
+	SpansSourceStrategyInstant *SpansSourceStrategyInstant
+	SpansSourceStrategyRange *SpansSourceStrategyRange
 }
 
-// StrategyDurationAsSpansSourceStrategy is a convenience function that returns StrategyDuration wrapped in SpansSourceStrategy
-func StrategyDurationAsSpansSourceStrategy(v *StrategyDuration) SpansSourceStrategy {
+// SpansSourceStrategyDurationAsSpansSourceStrategy is a convenience function that returns SpansSourceStrategyDuration wrapped in SpansSourceStrategy
+func SpansSourceStrategyDurationAsSpansSourceStrategy(v *SpansSourceStrategyDuration) SpansSourceStrategy {
 	return SpansSourceStrategy{
-		StrategyDuration: v,
+		SpansSourceStrategyDuration: v,
 	}
 }
 
-// StrategyInstantAsSpansSourceStrategy is a convenience function that returns StrategyInstant wrapped in SpansSourceStrategy
-func StrategyInstantAsSpansSourceStrategy(v *StrategyInstant) SpansSourceStrategy {
+// SpansSourceStrategyInstantAsSpansSourceStrategy is a convenience function that returns SpansSourceStrategyInstant wrapped in SpansSourceStrategy
+func SpansSourceStrategyInstantAsSpansSourceStrategy(v *SpansSourceStrategyInstant) SpansSourceStrategy {
 	return SpansSourceStrategy{
-		StrategyInstant: v,
+		SpansSourceStrategyInstant: v,
 	}
 }
 
-// StrategyRangeAsSpansSourceStrategy is a convenience function that returns StrategyRange wrapped in SpansSourceStrategy
-func StrategyRangeAsSpansSourceStrategy(v *StrategyRange) SpansSourceStrategy {
+// SpansSourceStrategyRangeAsSpansSourceStrategy is a convenience function that returns SpansSourceStrategyRange wrapped in SpansSourceStrategy
+func SpansSourceStrategyRangeAsSpansSourceStrategy(v *SpansSourceStrategyRange) SpansSourceStrategy {
 	return SpansSourceStrategy{
-		StrategyRange: v,
+		SpansSourceStrategyRange: v,
 	}
 }
 
@@ -49,62 +49,62 @@ func StrategyRangeAsSpansSourceStrategy(v *StrategyRange) SpansSourceStrategy {
 func (dst *SpansSourceStrategy) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into StrategyDuration
-	err = newStrictDecoder(data).Decode(&dst.StrategyDuration)
+	// try to unmarshal data into SpansSourceStrategyDuration
+	err = newStrictDecoder(data).Decode(&dst.SpansSourceStrategyDuration)
 	if err == nil {
-		jsonStrategyDuration, _ := json.Marshal(dst.StrategyDuration)
-		if string(jsonStrategyDuration) == "{}" { // empty struct
-			dst.StrategyDuration = nil
+		jsonSpansSourceStrategyDuration, _ := json.Marshal(dst.SpansSourceStrategyDuration)
+		if string(jsonSpansSourceStrategyDuration) == "{}" { // empty struct
+			dst.SpansSourceStrategyDuration = nil
 		} else {
-			if err = validator.Validate(dst.StrategyDuration); err != nil {
-				dst.StrategyDuration = nil
+			if err = validator.Validate(dst.SpansSourceStrategyDuration); err != nil {
+				dst.SpansSourceStrategyDuration = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.StrategyDuration = nil
+		dst.SpansSourceStrategyDuration = nil
 	}
 
-	// try to unmarshal data into StrategyInstant
-	err = newStrictDecoder(data).Decode(&dst.StrategyInstant)
+	// try to unmarshal data into SpansSourceStrategyInstant
+	err = newStrictDecoder(data).Decode(&dst.SpansSourceStrategyInstant)
 	if err == nil {
-		jsonStrategyInstant, _ := json.Marshal(dst.StrategyInstant)
-		if string(jsonStrategyInstant) == "{}" { // empty struct
-			dst.StrategyInstant = nil
+		jsonSpansSourceStrategyInstant, _ := json.Marshal(dst.SpansSourceStrategyInstant)
+		if string(jsonSpansSourceStrategyInstant) == "{}" { // empty struct
+			dst.SpansSourceStrategyInstant = nil
 		} else {
-			if err = validator.Validate(dst.StrategyInstant); err != nil {
-				dst.StrategyInstant = nil
+			if err = validator.Validate(dst.SpansSourceStrategyInstant); err != nil {
+				dst.SpansSourceStrategyInstant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.StrategyInstant = nil
+		dst.SpansSourceStrategyInstant = nil
 	}
 
-	// try to unmarshal data into StrategyRange
-	err = newStrictDecoder(data).Decode(&dst.StrategyRange)
+	// try to unmarshal data into SpansSourceStrategyRange
+	err = newStrictDecoder(data).Decode(&dst.SpansSourceStrategyRange)
 	if err == nil {
-		jsonStrategyRange, _ := json.Marshal(dst.StrategyRange)
-		if string(jsonStrategyRange) == "{}" { // empty struct
-			dst.StrategyRange = nil
+		jsonSpansSourceStrategyRange, _ := json.Marshal(dst.SpansSourceStrategyRange)
+		if string(jsonSpansSourceStrategyRange) == "{}" { // empty struct
+			dst.SpansSourceStrategyRange = nil
 		} else {
-			if err = validator.Validate(dst.StrategyRange); err != nil {
-				dst.StrategyRange = nil
+			if err = validator.Validate(dst.SpansSourceStrategyRange); err != nil {
+				dst.SpansSourceStrategyRange = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.StrategyRange = nil
+		dst.SpansSourceStrategyRange = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.StrategyDuration = nil
-		dst.StrategyInstant = nil
-		dst.StrategyRange = nil
+		dst.SpansSourceStrategyDuration = nil
+		dst.SpansSourceStrategyInstant = nil
+		dst.SpansSourceStrategyRange = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(SpansSourceStrategy)")
 	} else if match == 1 {
@@ -116,16 +116,16 @@ func (dst *SpansSourceStrategy) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src SpansSourceStrategy) MarshalJSON() ([]byte, error) {
-	if src.StrategyDuration != nil {
-		return json.Marshal(&src.StrategyDuration)
+	if src.SpansSourceStrategyDuration != nil {
+		return json.Marshal(&src.SpansSourceStrategyDuration)
 	}
 
-	if src.StrategyInstant != nil {
-		return json.Marshal(&src.StrategyInstant)
+	if src.SpansSourceStrategyInstant != nil {
+		return json.Marshal(&src.SpansSourceStrategyInstant)
 	}
 
-	if src.StrategyRange != nil {
-		return json.Marshal(&src.StrategyRange)
+	if src.SpansSourceStrategyRange != nil {
+		return json.Marshal(&src.SpansSourceStrategyRange)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -136,16 +136,16 @@ func (obj *SpansSourceStrategy) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.StrategyDuration != nil {
-		return obj.StrategyDuration
+	if obj.SpansSourceStrategyDuration != nil {
+		return obj.SpansSourceStrategyDuration
 	}
 
-	if obj.StrategyInstant != nil {
-		return obj.StrategyInstant
+	if obj.SpansSourceStrategyInstant != nil {
+		return obj.SpansSourceStrategyInstant
 	}
 
-	if obj.StrategyRange != nil {
-		return obj.StrategyRange
+	if obj.SpansSourceStrategyRange != nil {
+		return obj.SpansSourceStrategyRange
 	}
 
 	// all schemas are nil
@@ -154,16 +154,16 @@ func (obj *SpansSourceStrategy) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj SpansSourceStrategy) GetActualInstanceValue() (interface{}) {
-	if obj.StrategyDuration != nil {
-		return *obj.StrategyDuration
+	if obj.SpansSourceStrategyDuration != nil {
+		return *obj.SpansSourceStrategyDuration
 	}
 
-	if obj.StrategyInstant != nil {
-		return *obj.StrategyInstant
+	if obj.SpansSourceStrategyInstant != nil {
+		return *obj.SpansSourceStrategyInstant
 	}
 
-	if obj.StrategyRange != nil {
-		return *obj.StrategyRange
+	if obj.SpansSourceStrategyRange != nil {
+		return *obj.SpansSourceStrategyRange
 	}
 
 	// all schemas are nil

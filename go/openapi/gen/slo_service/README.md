@@ -118,8 +118,6 @@ Class | Method | HTTP request | Description
  - [ThresholdSymbol](docs/ThresholdSymbol.md)
  - [V2OrderByDirection](docs/V2OrderByDirection.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
- - [YAxisViewByCategory](docs/YAxisViewByCategory.md)
- - [YAxisViewByValue](docs/YAxisViewByValue.md)
 
 
 ## Documentation For Authorization

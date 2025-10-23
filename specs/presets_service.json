@@ -712,24 +712,6 @@
         },
         "additionalProperties": false
       },
-      "ConditionTypeMatchEntityType": {
-        "type": "object",
-        "properties": {
-          "matchEntityType": {
-            "$ref": "#/components/schemas/MatchEntityTypeCondition"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ConditionTypeMatchEntityTypeAndSubType": {
-        "type": "object",
-        "properties": {
-          "matchEntityTypeAndSubType": {
-            "$ref": "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
-          }
-        },
-        "additionalProperties": false
-      },
       "ConfigOverrides": {
         "type": "object",
         "properties": {
@@ -929,6 +911,24 @@
           }
         }
       },
+      "NotificationCenterConditionTypeMatchEntityType": {
+        "type": "object",
+        "properties": {
+          "matchEntityType": {
+            "$ref": "#/components/schemas/MatchEntityTypeCondition"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NotificationCenterConditionTypeMatchEntityTypeAndSubType": {
+        "type": "object",
+        "properties": {
+          "matchEntityTypeAndSubType": {
+            "$ref": "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
+          }
+        },
+        "additionalProperties": false
+      },
       "Preset": {
         "externalDocs": {
           "description": "Find out more about notification center",
@@ -1058,24 +1058,6 @@
       "SetPresetAsDefaultResponse": {
         "type": "object"
       },
-      "YAxisViewByCategory": {
-        "type": "object",
-        "properties": {
-          "category": {
-            "$ref": "#/components/schemas/YAxisViewByCategory"
-          }
-        },
-        "additionalProperties": false
-      },
-      "YAxisViewByValue": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "$ref": "#/components/schemas/YAxisViewByValue"
-          }
-        },
-        "additionalProperties": false
-      },
       "common.Group": {
         "type": "object",
         "properties": {
@@ -1104,10 +1086,10 @@
       "notification_center.ConditionType": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ConditionTypeMatchEntityType"
+            "$ref": "#/components/schemas/NotificationCenterConditionTypeMatchEntityType"
           },
           {
-            "$ref": "#/components/schemas/ConditionTypeMatchEntityTypeAndSubType"
+            "$ref": "#/components/schemas/NotificationCenterConditionTypeMatchEntityTypeAndSubType"
           }
         ]
       },

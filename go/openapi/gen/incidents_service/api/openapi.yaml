@@ -1342,18 +1342,24 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -1398,18 +1404,24 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
         - displayLabels:
@@ -1441,18 +1453,24 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -1499,18 +1517,24 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
         - displayLabels:
@@ -1542,18 +1566,24 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -1644,18 +1674,24 @@ components:
             state: INCIDENT_STATE_UNSPECIFIED
             closedAt: 2024-01-01T00:00:00Z
             events:
-            - operationalEvent:
+            - snoozeIndicator:
+                durationMinutes: 0
+                startTime: 2000-01-23T04:56:07.000+00:00
+                userId: userId
+              operationalEvent:
                 systemName: systemName
               id: incident_event_id
               originatorType: ORIGINATOR_TYPE_UNSPECIFIED
               incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-              unassign: "{}"
-            - operationalEvent:
+            - snoozeIndicator:
+                durationMinutes: 0
+                startTime: 2000-01-23T04:56:07.000+00:00
+                userId: userId
+              operationalEvent:
                 systemName: systemName
               id: incident_event_id
               originatorType: ORIGINATOR_TYPE_UNSPECIFIED
               incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-              unassign: "{}"
             isMuted: false
             status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -1710,18 +1746,24 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
         - displayLabels:
@@ -1753,18 +1795,24 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -2033,18 +2081,24 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -2060,18 +2114,24 @@ components:
       description: Response containing all events associated with the requested incident
       example:
         incidentEvents:
-        - operationalEvent:
+        - snoozeIndicator:
+            durationMinutes: 0
+            startTime: 2000-01-23T04:56:07.000+00:00
+            userId: userId
+          operationalEvent:
             systemName: systemName
           id: incident_event_id
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          unassign: "{}"
-        - operationalEvent:
+        - snoozeIndicator:
+            durationMinutes: 0
+            startTime: 2000-01-23T04:56:07.000+00:00
+            userId: userId
+          operationalEvent:
             systemName: systemName
           id: incident_event_id
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          unassign: "{}"
       externalDocs:
         url: ""
       properties:
@@ -2114,18 +2174,24 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -2178,7 +2244,7 @@ components:
       additionalProperties: false
       example:
         incidentField:
-          status: null
+          severity: null
       properties:
         incidentField:
           $ref: "#/components/schemas/IncidentFieldOneOf"
@@ -2214,18 +2280,24 @@ components:
         state: INCIDENT_STATE_UNSPECIFIED
         closedAt: 2024-01-01T00:00:00Z
         events:
-        - operationalEvent:
+        - snoozeIndicator:
+            durationMinutes: 0
+            startTime: 2000-01-23T04:56:07.000+00:00
+            userId: userId
+          operationalEvent:
             systemName: systemName
           id: incident_event_id
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          unassign: "{}"
-        - operationalEvent:
+        - snoozeIndicator:
+            durationMinutes: 0
+            startTime: 2000-01-23T04:56:07.000+00:00
+            userId: userId
+          operationalEvent:
             systemName: systemName
           id: incident_event_id
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          unassign: "{}"
         isMuted: false
         status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -2305,9 +2377,9 @@ components:
       example:
         groupBysValue:
         - incidentField:
-            status: null
+            severity: null
         - incidentField:
-            status: null
+            severity: null
         aggAssignmentsCount:
         - count: 10
           assignedTo:
@@ -2424,18 +2496,18 @@ components:
       type: object
     IncidentEvent:
       oneOf:
-      - $ref: "#/components/schemas/IncidentEventUnassignOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventCloseAdministrativeEvent"
       - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventAssignmentOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventUnassignOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventCloseOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent"
       - $ref: "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventAssignmentOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventCloseAdministrativeEvent"
     IncidentEventAcknowledge:
       properties:
         acknowledgedBy:
@@ -2619,12 +2691,15 @@ components:
     IncidentEventExtended:
       example:
         incidentEvent:
+          snoozeIndicator:
+            durationMinutes: 0
+            startTime: 2000-01-23T04:56:07.000+00:00
+            userId: userId
           operationalEvent:
             systemName: systemName
           id: incident_event_id
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          unassign: "{}"
         cxEventKey: cxEventKey
         incidentEventExtendedMetadata:
           alertType: INCIDENT_EVENT_ALERT_TYPE_STANDARD_OR_UNSPECIFIED
@@ -2727,6 +2802,10 @@ components:
           type: string
       type: object
     IncidentEventSnoozeIndicator:
+      example:
+        durationMinutes: 0
+        startTime: 2000-01-23T04:56:07.000+00:00
+        userId: userId
       externalDocs:
         url: ""
       properties:
@@ -2767,6 +2846,16 @@ components:
       type: object
     IncidentEventSnoozeIndicatorOperationalEvent:
       additionalProperties: false
+      example:
+        snoozeIndicator:
+          durationMinutes: 0
+          startTime: 2000-01-23T04:56:07.000+00:00
+          userId: userId
+        operationalEvent:
+          systemName: systemName
+        id: incident_event_id
+        originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+        incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -2830,13 +2919,6 @@ components:
       type: object
     IncidentEventUnassignOperationalEvent:
       additionalProperties: false
-      example:
-        operationalEvent:
-          systemName: systemName
-        id: incident_event_id
-        originatorType: ORIGINATOR_TYPE_UNSPECIFIED
-        incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-        unassign: "{}"
       externalDocs:
         url: ""
       properties:
@@ -2927,17 +3009,17 @@ components:
       type: object
     IncidentFieldOneOf:
       oneOf:
+      - $ref: "#/components/schemas/IncidentFieldOneOfSeverity"
+      - $ref: "#/components/schemas/IncidentFieldOneOfCreatedAt"
+      - $ref: "#/components/schemas/IncidentFieldOneOfState"
+      - $ref: "#/components/schemas/IncidentFieldOneOfApplicationName"
+      - $ref: "#/components/schemas/IncidentFieldOneOfName"
+      - $ref: "#/components/schemas/IncidentFieldOneOfClosedAt"
       - $ref: "#/components/schemas/IncidentFieldOneOfStatus"
       - $ref: "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
-      - $ref: "#/components/schemas/IncidentFieldOneOfApplicationName"
-      - $ref: "#/components/schemas/IncidentFieldOneOfDuration"
-      - $ref: "#/components/schemas/IncidentFieldOneOfClosedAt"
-      - $ref: "#/components/schemas/IncidentFieldOneOfState"
       - $ref: "#/components/schemas/IncidentFieldOneOfSubsystemName"
+      - $ref: "#/components/schemas/IncidentFieldOneOfDuration"
       - $ref: "#/components/schemas/IncidentFieldOneOfId"
-      - $ref: "#/components/schemas/IncidentFieldOneOfSeverity"
-      - $ref: "#/components/schemas/IncidentFieldOneOfName"
-      - $ref: "#/components/schemas/IncidentFieldOneOfCreatedAt"
     IncidentFieldOneOfApplicationName:
       additionalProperties: false
       properties:
@@ -2985,6 +3067,8 @@ components:
       type: object
     IncidentFieldOneOfSeverity:
       additionalProperties: false
+      example:
+        severity: null
       properties:
         severity:
           $ref: "#/components/schemas/IncidentSeverity"
@@ -2997,8 +3081,6 @@ components:
       type: object
     IncidentFieldOneOfStatus:
       additionalProperties: false
-      example:
-        status: null
       properties:
         status:
           $ref: "#/components/schemas/IncidentStatus"
@@ -3293,9 +3375,9 @@ components:
         incidentAggs:
         - groupBysValue:
           - incidentField:
-              status: null
+              severity: null
           - incidentField:
-              status: null
+              severity: null
           aggAssignmentsCount:
           - count: 10
             assignedTo:
@@ -3336,9 +3418,9 @@ components:
           lastStateUpdateTime: 2000-01-23T04:56:07.000+00:00
         - groupBysValue:
           - incidentField:
-              status: null
+              severity: null
           - incidentField:
-              status: null
+              severity: null
           aggAssignmentsCount:
           - count: 10
             assignedTo:
@@ -3455,12 +3537,15 @@ components:
           nextPageToken: next_page_token
         items:
         - incidentEvent:
+            snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
             operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
           cxEventKey: cxEventKey
           incidentEventExtendedMetadata:
             alertType: INCIDENT_EVENT_ALERT_TYPE_STANDARD_OR_UNSPECIFIED
@@ -3482,12 +3567,15 @@ components:
             incidentStatus: INCIDENT_STATUS_UNSPECIFIED
           cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
         - incidentEvent:
+            snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
             operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
           cxEventKey: cxEventKey
           incidentEventExtendedMetadata:
             alertType: INCIDENT_EVENT_ALERT_TYPE_STANDARD_OR_UNSPECIFIED
@@ -3577,18 +3665,24 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
         - displayLabels:
@@ -3620,18 +3714,24 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -3656,34 +3756,6 @@ components:
           items:
             type: string
           type: array
-      type: object
-    OrderByContextualLabel:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        contextualLabel:
-          type: string
-        direction:
-          $ref: "#/components/schemas/v1.OrderByDirection"
-      required:
-      - direction
-      - field
-      title: Incident order by
-      type: object
-    OrderByIncidentField:
-      additionalProperties: false
-      externalDocs:
-        url: ""
-      properties:
-        direction:
-          $ref: "#/components/schemas/v1.OrderByDirection"
-        incidentField:
-          $ref: "#/components/schemas/IncidentFields"
-      required:
-      - direction
-      - field
-      title: Incident order by
       type: object
     OriginatorType:
       enum:
@@ -3724,18 +3796,24 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -3780,18 +3858,24 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
         - displayLabels:
@@ -3823,18 +3907,24 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -3881,18 +3971,24 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
         - displayLabels:
@@ -3924,18 +4020,24 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
-          - operationalEvent:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            operationalEvent:
               systemName: systemName
             id: incident_event_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -3973,17 +4075,33 @@ components:
       - userId
       title: User details
       type: object
-    YAxisViewByCategory:
+    V1OrderByContextualLabel:
       additionalProperties: false
+      externalDocs:
+        url: ""
       properties:
-        category:
-          $ref: "#/components/schemas/YAxisViewByCategory"
+        contextualLabel:
+          type: string
+        direction:
+          $ref: "#/components/schemas/v1.OrderByDirection"
+      required:
+      - direction
+      - field
+      title: Incident order by
       type: object
-    YAxisViewByValue:
+    V1OrderByIncidentField:
       additionalProperties: false
+      externalDocs:
+        url: ""
       properties:
-        value:
-          $ref: "#/components/schemas/YAxisViewByValue"
+        direction:
+          $ref: "#/components/schemas/v1.OrderByDirection"
+        incidentField:
+          $ref: "#/components/schemas/IncidentFields"
+      required:
+      - direction
+      - field
+      title: Incident order by
       type: object
     common.Group:
       properties:
@@ -4152,12 +4270,12 @@ components:
       type: object
     IncidentsService_ListIncidents_order_bys_parameter_inner:
       oneOf:
-      - $ref: "#/components/schemas/OrderByContextualLabel"
-      - $ref: "#/components/schemas/OrderByIncidentField"
+      - $ref: "#/components/schemas/V1OrderByIncidentField"
+      - $ref: "#/components/schemas/V1OrderByContextualLabel"
     IncidentsService_ListIncidentAggregations_group_bys_parameter_inner:
       oneOf:
-      - $ref: "#/components/schemas/GroupByContextualLabel"
       - $ref: "#/components/schemas/GroupByIncidentField"
+      - $ref: "#/components/schemas/GroupByContextualLabel"
     User_details:
       externalDocs:
         url: ""

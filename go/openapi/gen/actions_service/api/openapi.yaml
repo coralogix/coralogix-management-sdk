@@ -264,7 +264,7 @@ paths:
           let options = {
             method: 'POST',
             headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"requests":[{"create":{"applicationNames":["string"],"isPrivate":true,"name":"string","sourceType":"SOURCE_TYPE_UNSPECIFIED","subsystemNames":["string"],"url":"string"}}]}'
+            body: '{"requests":[{"delete":{"id":"string"}}]}'
           };
 
           fetch(url, options)
@@ -277,14 +277,7 @@ paths:
 
           url = "https://api.coralogix.com/mgmt/openapi/v2/actions/actions:atomicBatchExecute"
 
-          payload = {"requests": [{"create": {
-                          "applicationNames": ["string"],
-                          "isPrivate": True,
-                          "name": "string",
-                          "sourceType": "SOURCE_TYPE_UNSPECIFIED",
-                          "subsystemNames": ["string"],
-                          "url": "string"
-                      }}]}
+          payload = {"requests": [{"delete": {"id": "string"}}]}
           headers = {
               "Authorization": "Bearer <API_KEY>",
               "content-type": "application/json"
@@ -299,7 +292,7 @@ paths:
             --url https://api.coralogix.com/mgmt/openapi/v2/actions/actions:atomicBatchExecute \
             --header 'Authorization: Bearer <API_KEY>' \
             --header 'content-type: application/json' \
-            --data '{"requests":[{"create":{"applicationNames":["string"],"isPrivate":true,"name":"string","sourceType":"SOURCE_TYPE_UNSPECIFIED","subsystemNames":["string"],"url":"string"}}]}'
+            --data '{"requests":[{"delete":{"id":"string"}}]}'
   /v2/actions/actions:order:
     post:
       description: No description available
@@ -514,9 +507,9 @@ components:
   schemas:
     ActionExecutionRequest:
       oneOf:
+      - $ref: "#/components/schemas/ActionExecutionRequestDelete"
       - $ref: "#/components/schemas/ActionExecutionRequestCreate"
       - $ref: "#/components/schemas/ActionExecutionRequestReplace"
-      - $ref: "#/components/schemas/ActionExecutionRequestDelete"
     ActionExecutionRequestCreate:
       additionalProperties: false
       properties:
@@ -825,18 +818,6 @@ components:
       properties:
         action:
           $ref: "#/components/schemas/v2.Action"
-      type: object
-    YAxisViewByCategory:
-      additionalProperties: false
-      properties:
-        category:
-          $ref: "#/components/schemas/YAxisViewByCategory"
-      type: object
-    YAxisViewByValue:
-      additionalProperties: false
-      properties:
-        value:
-          $ref: "#/components/schemas/YAxisViewByValue"
       type: object
     common.Group:
       properties:

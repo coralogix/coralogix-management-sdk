@@ -359,7 +359,7 @@ paths:
           let options = {
             method: 'PUT',
             headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"alertDefProperties":{"activeOn":{"dayOfWeek":["DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED"],"endTime":{"hours":14,"minutes":30},"startTime":{"hours":14,"minutes":30}},"deleted":false,"description":"Alert description","enabled":true,"entityLabels":{"key":"value"},"groupByKeys":[["key1","key2"]],"incidentsSettings":{"minutes":30,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"metricAnomaly":{"anomalyAlertSettings":{"percentageOfDeviation":0.1},"evaluationDelayMs":60000,"metricFilter":{"promql":"avg_over_time(metric_name[5m]) > 10"},"rules":[{"condition":{"conditionType":"METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED","forOverPct":20,"minNonNullValuesPct":10,"ofTheLast":{"metricTimeWindowSpecificValue":"METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED"},"threshold":10}}]},"name":"My Alert","notificationGroup":{"destinations":[{"connectorId":"connector_id_example","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED","presetId":"preset_id_example","resolvedRouteOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}},"triggeredRoutingOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}}}],"groupByKeys":[["key1","key2"]],"router":{"id":"123e4567-e89b-12d3-a456-426614174000","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"webhooks":[{"integration":{"integrationId":123},"minutes":15,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"}]},"notificationGroupExcess":[{"destinations":[{"connectorId":"connector_id_example","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED","presetId":"preset_id_example","resolvedRouteOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}},"triggeredRoutingOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}}}],"groupByKeys":[["key1","key2"]],"router":{"id":"123e4567-e89b-12d3-a456-426614174000","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"webhooks":[{"integration":{"integrationId":123},"minutes":15,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"}]}],"phantomMode":false,"priority":"ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED","type":"ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED"},"id":"123e4567-e89b-12d3-a456-426614174000"}'
+            body: '{"alertDefProperties":{"activeOn":{"dayOfWeek":["DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED"],"endTime":{"hours":14,"minutes":30},"startTime":{"hours":14,"minutes":30}},"deleted":false,"description":"Alert description","enabled":true,"entityLabels":{"key":"value"},"flow":{"enforceSuppression":true,"stages":[{"flowStagesGroups":{"groups":[{"alertDefs":[{"id":"123e4567-e89b-12d3-a456-426614174000","not":true}],"alertsOp":"ALERTS_OP_AND_OR_UNSPECIFIED","nextOp":"NEXT_OP_AND_OR_UNSPECIFIED"}]},"timeframeMs":"string","timeframeType":"TIMEFRAME_TYPE_UNSPECIFIED"}]},"groupByKeys":[["key1","key2"]],"incidentsSettings":{"minutes":30,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"name":"My Alert","notificationGroup":{"destinations":[{"connectorId":"connector_id_example","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED","presetId":"preset_id_example","resolvedRouteOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}},"triggeredRoutingOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}}}],"groupByKeys":[["key1","key2"]],"router":{"id":"123e4567-e89b-12d3-a456-426614174000","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"webhooks":[{"integration":{"integrationId":123},"minutes":15,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"}]},"notificationGroupExcess":[{"destinations":[{"connectorId":"connector_id_example","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED","presetId":"preset_id_example","resolvedRouteOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}},"triggeredRoutingOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}}}],"groupByKeys":[["key1","key2"]],"router":{"id":"123e4567-e89b-12d3-a456-426614174000","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"webhooks":[{"integration":{"integrationId":123},"minutes":15,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"}]}],"phantomMode":false,"priority":"ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED","type":"ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED"},"id":"123e4567-e89b-12d3-a456-426614174000"}'
           };
 
           fetch(url, options)
@@ -389,22 +389,31 @@ paths:
                   "description": "Alert description",
                   "enabled": True,
                   "entityLabels": {"key": "value"},
+                  "flow": {
+                      "enforceSuppression": True,
+                      "stages": [
+                          {
+                              "flowStagesGroups": {"groups": [
+                                      {
+                                          "alertDefs": [
+                                              {
+                                                  "id": "123e4567-e89b-12d3-a456-426614174000",
+                                                  "not": True
+                                              }
+                                          ],
+                                          "alertsOp": "ALERTS_OP_AND_OR_UNSPECIFIED",
+                                          "nextOp": "NEXT_OP_AND_OR_UNSPECIFIED"
+                                      }
+                                  ]},
+                              "timeframeMs": "string",
+                              "timeframeType": "TIMEFRAME_TYPE_UNSPECIFIED"
+                          }
+                      ]
+                  },
                   "groupByKeys": [["key1", "key2"]],
                   "incidentsSettings": {
                       "minutes": 30,
                       "notifyOn": "NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"
-                  },
-                  "metricAnomaly": {
-                      "anomalyAlertSettings": {"percentageOfDeviation": 0.1},
-                      "evaluationDelayMs": 60000,
-                      "metricFilter": {"promql": "avg_over_time(metric_name[5m]) > 10"},
-                      "rules": [{"condition": {
-                                  "conditionType": "METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED",
-                                  "forOverPct": 20,
-                                  "minNonNullValuesPct": 10,
-                                  "ofTheLast": {"metricTimeWindowSpecificValue": "METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED"},
-                                  "threshold": 10
-                              }}]
                   },
                   "name": "My Alert",
                   "notificationGroup": {
@@ -531,7 +540,7 @@ paths:
             --url https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3 \
             --header 'Authorization: Bearer <API_KEY>' \
             --header 'content-type: application/json' \
-            --data '{"alertDefProperties":{"activeOn":{"dayOfWeek":["DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED"],"endTime":{"hours":14,"minutes":30},"startTime":{"hours":14,"minutes":30}},"deleted":false,"description":"Alert description","enabled":true,"entityLabels":{"key":"value"},"groupByKeys":[["key1","key2"]],"incidentsSettings":{"minutes":30,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"metricAnomaly":{"anomalyAlertSettings":{"percentageOfDeviation":0.1},"evaluationDelayMs":60000,"metricFilter":{"promql":"avg_over_time(metric_name[5m]) > 10"},"rules":[{"condition":{"conditionType":"METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED","forOverPct":20,"minNonNullValuesPct":10,"ofTheLast":{"metricTimeWindowSpecificValue":"METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED"},"threshold":10}}]},"name":"My Alert","notificationGroup":{"destinations":[{"connectorId":"connector_id_example","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED","presetId":"preset_id_example","resolvedRouteOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}},"triggeredRoutingOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}}}],"groupByKeys":[["key1","key2"]],"router":{"id":"123e4567-e89b-12d3-a456-426614174000","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"webhooks":[{"integration":{"integrationId":123},"minutes":15,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"}]},"notificationGroupExcess":[{"destinations":[{"connectorId":"connector_id_example","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED","presetId":"preset_id_example","resolvedRouteOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}},"triggeredRoutingOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}}}],"groupByKeys":[["key1","key2"]],"router":{"id":"123e4567-e89b-12d3-a456-426614174000","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"webhooks":[{"integration":{"integrationId":123},"minutes":15,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"}]}],"phantomMode":false,"priority":"ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED","type":"ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED"},"id":"123e4567-e89b-12d3-a456-426614174000"}'
+            --data '{"alertDefProperties":{"activeOn":{"dayOfWeek":["DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED"],"endTime":{"hours":14,"minutes":30},"startTime":{"hours":14,"minutes":30}},"deleted":false,"description":"Alert description","enabled":true,"entityLabels":{"key":"value"},"flow":{"enforceSuppression":true,"stages":[{"flowStagesGroups":{"groups":[{"alertDefs":[{"id":"123e4567-e89b-12d3-a456-426614174000","not":true}],"alertsOp":"ALERTS_OP_AND_OR_UNSPECIFIED","nextOp":"NEXT_OP_AND_OR_UNSPECIFIED"}]},"timeframeMs":"string","timeframeType":"TIMEFRAME_TYPE_UNSPECIFIED"}]},"groupByKeys":[["key1","key2"]],"incidentsSettings":{"minutes":30,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"name":"My Alert","notificationGroup":{"destinations":[{"connectorId":"connector_id_example","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED","presetId":"preset_id_example","resolvedRouteOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}},"triggeredRoutingOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}}}],"groupByKeys":[["key1","key2"]],"router":{"id":"123e4567-e89b-12d3-a456-426614174000","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"webhooks":[{"integration":{"integrationId":123},"minutes":15,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"}]},"notificationGroupExcess":[{"destinations":[{"connectorId":"connector_id_example","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED","presetId":"preset_id_example","resolvedRouteOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}},"triggeredRoutingOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}}}],"groupByKeys":[["key1","key2"]],"router":{"id":"123e4567-e89b-12d3-a456-426614174000","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"webhooks":[{"integration":{"integrationId":123},"minutes":15,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"}]}],"phantomMode":false,"priority":"ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED","type":"ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED"},"id":"123e4567-e89b-12d3-a456-426614174000"}'
   /alerts/alerts-general/v3/alert-version-id/{alert_version_id}:
     get:
       description: No description available
@@ -646,7 +655,7 @@ paths:
           let options = {
             method: 'PUT',
             headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"alertDefsToReplace":[{"alertDefProperties":{"activeOn":{"dayOfWeek":["DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED"],"endTime":{"hours":14,"minutes":30},"startTime":{"hours":14,"minutes":30}},"deleted":false,"description":"Alert description","enabled":true,"entityLabels":{"key":"value"},"groupByKeys":[["key1","key2"]],"incidentsSettings":{"minutes":30,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"metricAnomaly":{"anomalyAlertSettings":{"percentageOfDeviation":0.1},"evaluationDelayMs":60000,"metricFilter":{"promql":"avg_over_time(metric_name[5m]) > 10"},"rules":[{"condition":{"conditionType":"METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED","forOverPct":20,"minNonNullValuesPct":10,"ofTheLast":{"metricTimeWindowSpecificValue":"METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED"},"threshold":10}}]},"name":"My Alert","notificationGroup":{"destinations":[{"connectorId":"connector_id_example","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED","presetId":"preset_id_example","resolvedRouteOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}},"triggeredRoutingOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}}}],"groupByKeys":[["key1","key2"]],"router":{"id":"123e4567-e89b-12d3-a456-426614174000","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"webhooks":[{"integration":{"integrationId":123},"minutes":15,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"}]},"notificationGroupExcess":[{"destinations":[{"connectorId":"connector_id_example","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED","presetId":"preset_id_example","resolvedRouteOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}},"triggeredRoutingOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}}}],"groupByKeys":[["key1","key2"]],"router":{"id":"123e4567-e89b-12d3-a456-426614174000","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"webhooks":[{"integration":{"integrationId":123},"minutes":15,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"}]}],"phantomMode":false,"priority":"ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED","type":"ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED"},"id":"123e4567-e89b-12d3-a456-426614174000"}]}'
+            body: '{"alertDefsToReplace":[{"alertDefProperties":{"activeOn":{"dayOfWeek":["DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED"],"endTime":{"hours":14,"minutes":30},"startTime":{"hours":14,"minutes":30}},"deleted":false,"description":"Alert description","enabled":true,"entityLabels":{"key":"value"},"flow":{"enforceSuppression":true,"stages":[{"flowStagesGroups":{"groups":[{"alertDefs":[{"id":"123e4567-e89b-12d3-a456-426614174000","not":true}],"alertsOp":"ALERTS_OP_AND_OR_UNSPECIFIED","nextOp":"NEXT_OP_AND_OR_UNSPECIFIED"}]},"timeframeMs":"string","timeframeType":"TIMEFRAME_TYPE_UNSPECIFIED"}]},"groupByKeys":[["key1","key2"]],"incidentsSettings":{"minutes":30,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"name":"My Alert","notificationGroup":{"destinations":[{"connectorId":"connector_id_example","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED","presetId":"preset_id_example","resolvedRouteOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}},"triggeredRoutingOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}}}],"groupByKeys":[["key1","key2"]],"router":{"id":"123e4567-e89b-12d3-a456-426614174000","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"webhooks":[{"integration":{"integrationId":123},"minutes":15,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"}]},"notificationGroupExcess":[{"destinations":[{"connectorId":"connector_id_example","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED","presetId":"preset_id_example","resolvedRouteOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}},"triggeredRoutingOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}}}],"groupByKeys":[["key1","key2"]],"router":{"id":"123e4567-e89b-12d3-a456-426614174000","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"webhooks":[{"integration":{"integrationId":123},"minutes":15,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"}]}],"phantomMode":false,"priority":"ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED","type":"ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED"},"id":"123e4567-e89b-12d3-a456-426614174000"}]}'
           };
 
           fetch(url, options)
@@ -677,22 +686,31 @@ paths:
                           "description": "Alert description",
                           "enabled": True,
                           "entityLabels": {"key": "value"},
+                          "flow": {
+                              "enforceSuppression": True,
+                              "stages": [
+                                  {
+                                      "flowStagesGroups": {"groups": [
+                                              {
+                                                  "alertDefs": [
+                                                      {
+                                                          "id": "123e4567-e89b-12d3-a456-426614174000",
+                                                          "not": True
+                                                      }
+                                                  ],
+                                                  "alertsOp": "ALERTS_OP_AND_OR_UNSPECIFIED",
+                                                  "nextOp": "NEXT_OP_AND_OR_UNSPECIFIED"
+                                              }
+                                          ]},
+                                      "timeframeMs": "string",
+                                      "timeframeType": "TIMEFRAME_TYPE_UNSPECIFIED"
+                                  }
+                              ]
+                          },
                           "groupByKeys": [["key1", "key2"]],
                           "incidentsSettings": {
                               "minutes": 30,
                               "notifyOn": "NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"
-                          },
-                          "metricAnomaly": {
-                              "anomalyAlertSettings": {"percentageOfDeviation": 0.1},
-                              "evaluationDelayMs": 60000,
-                              "metricFilter": {"promql": "avg_over_time(metric_name[5m]) > 10"},
-                              "rules": [{"condition": {
-                                          "conditionType": "METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED",
-                                          "forOverPct": 20,
-                                          "minNonNullValuesPct": 10,
-                                          "ofTheLast": {"metricTimeWindowSpecificValue": "METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED"},
-                                          "threshold": 10
-                                      }}]
                           },
                           "name": "My Alert",
                           "notificationGroup": {
@@ -820,7 +838,7 @@ paths:
             --url https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/bulk \
             --header 'Authorization: Bearer <API_KEY>' \
             --header 'content-type: application/json' \
-            --data '{"alertDefsToReplace":[{"alertDefProperties":{"activeOn":{"dayOfWeek":["DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED"],"endTime":{"hours":14,"minutes":30},"startTime":{"hours":14,"minutes":30}},"deleted":false,"description":"Alert description","enabled":true,"entityLabels":{"key":"value"},"groupByKeys":[["key1","key2"]],"incidentsSettings":{"minutes":30,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"metricAnomaly":{"anomalyAlertSettings":{"percentageOfDeviation":0.1},"evaluationDelayMs":60000,"metricFilter":{"promql":"avg_over_time(metric_name[5m]) > 10"},"rules":[{"condition":{"conditionType":"METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED","forOverPct":20,"minNonNullValuesPct":10,"ofTheLast":{"metricTimeWindowSpecificValue":"METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED"},"threshold":10}}]},"name":"My Alert","notificationGroup":{"destinations":[{"connectorId":"connector_id_example","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED","presetId":"preset_id_example","resolvedRouteOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}},"triggeredRoutingOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}}}],"groupByKeys":[["key1","key2"]],"router":{"id":"123e4567-e89b-12d3-a456-426614174000","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"webhooks":[{"integration":{"integrationId":123},"minutes":15,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"}]},"notificationGroupExcess":[{"destinations":[{"connectorId":"connector_id_example","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED","presetId":"preset_id_example","resolvedRouteOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}},"triggeredRoutingOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}}}],"groupByKeys":[["key1","key2"]],"router":{"id":"123e4567-e89b-12d3-a456-426614174000","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"webhooks":[{"integration":{"integrationId":123},"minutes":15,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"}]}],"phantomMode":false,"priority":"ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED","type":"ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED"},"id":"123e4567-e89b-12d3-a456-426614174000"}]}'
+            --data '{"alertDefsToReplace":[{"alertDefProperties":{"activeOn":{"dayOfWeek":["DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED"],"endTime":{"hours":14,"minutes":30},"startTime":{"hours":14,"minutes":30}},"deleted":false,"description":"Alert description","enabled":true,"entityLabels":{"key":"value"},"flow":{"enforceSuppression":true,"stages":[{"flowStagesGroups":{"groups":[{"alertDefs":[{"id":"123e4567-e89b-12d3-a456-426614174000","not":true}],"alertsOp":"ALERTS_OP_AND_OR_UNSPECIFIED","nextOp":"NEXT_OP_AND_OR_UNSPECIFIED"}]},"timeframeMs":"string","timeframeType":"TIMEFRAME_TYPE_UNSPECIFIED"}]},"groupByKeys":[["key1","key2"]],"incidentsSettings":{"minutes":30,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"name":"My Alert","notificationGroup":{"destinations":[{"connectorId":"connector_id_example","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED","presetId":"preset_id_example","resolvedRouteOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}},"triggeredRoutingOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}}}],"groupByKeys":[["key1","key2"]],"router":{"id":"123e4567-e89b-12d3-a456-426614174000","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"webhooks":[{"integration":{"integrationId":123},"minutes":15,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"}]},"notificationGroupExcess":[{"destinations":[{"connectorId":"connector_id_example","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED","presetId":"preset_id_example","resolvedRouteOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}},"triggeredRoutingOverrides":{"configOverrides":{"connectorConfigFields":[{"fieldName":"description","template":"template_example"}],"messageConfigFields":[{"fieldName":"description","template":"template_example"}],"payloadType":"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default"}}}],"groupByKeys":[["key1","key2"]],"router":{"id":"123e4567-e89b-12d3-a456-426614174000","notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"},"webhooks":[{"integration":{"integrationId":123},"minutes":15,"notifyOn":"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"}]}],"phantomMode":false,"priority":"ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED","type":"ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED"},"id":"123e4567-e89b-12d3-a456-426614174000"}]}'
   /alerts/alerts-general/v3/download:
     get:
       description: |-
@@ -1371,27 +1389,6 @@ components:
             groupByKeys:
             - "[\"key1\",\"key2\"]"
             - "[\"key1\",\"key2\"]"
-          metricAnomaly:
-            anomalyAlertSettings:
-              percentageOfDeviation: 0.8008282
-            evaluationDelayMs: 60000
-            metricFilter:
-              promql: "avg_over_time(metric_name[5m]) > 10"
-            rules:
-            - condition:
-                minNonNullValuesPct: 10
-                forOverPct: 20
-                conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-                ofTheLast:
-                  metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-                threshold: 10
-            - condition:
-                minNonNullValuesPct: 10
-                forOverPct: 20
-                conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-                ofTheLast:
-                  metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-                threshold: 10
           description: Alert description
           priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
           type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
@@ -1490,6 +1487,45 @@ components:
             minutes: 30
             notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
           name: My Alert
+          flow:
+            enforceSuppression: true
+            stages:
+            - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+              flowStagesGroups:
+                groups:
+                - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                  alertDefs:
+                  - not: true
+                    id: 123e4567-e89b-12d3-a456-426614174000
+                  - not: true
+                    id: 123e4567-e89b-12d3-a456-426614174000
+                  nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                  alertDefs:
+                  - not: true
+                    id: 123e4567-e89b-12d3-a456-426614174000
+                  - not: true
+                    id: 123e4567-e89b-12d3-a456-426614174000
+                  nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+              timeframeMs: timeframeMs
+            - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+              flowStagesGroups:
+                groups:
+                - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                  alertDefs:
+                  - not: true
+                    id: 123e4567-e89b-12d3-a456-426614174000
+                  - not: true
+                    id: 123e4567-e89b-12d3-a456-426614174000
+                  nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                  alertDefs:
+                  - not: true
+                    id: 123e4567-e89b-12d3-a456-426614174000
+                  - not: true
+                    id: 123e4567-e89b-12d3-a456-426614174000
+                  nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+              timeframeMs: timeframeMs
           groupByKeys:
           - "[\"key1\",\"key2\"]"
           - "[\"key1\",\"key2\"]"
@@ -1682,22 +1718,323 @@ components:
       type: string
     AlertDefProperties:
       oneOf:
-      - $ref: "#/components/schemas/AlertDefPropertiesMetricAnomaly"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsNewValue"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsImmediate"
-      - $ref: "#/components/schemas/AlertDefPropertiesTracingImmediate"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesTracingThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesFlow"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsAnomaly"
+      - $ref: "#/components/schemas/AlertDefPropertiesMetricAnomaly"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsImmediate"
+      - $ref: "#/components/schemas/AlertDefPropertiesTracingThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsNewValue"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
       - $ref: "#/components/schemas/AlertDefPropertiesSloThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesTracingImmediate"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesMetricThreshold"
     AlertDefPropertiesFlow:
       additionalProperties: false
       description: User-configurable properties of an alert definition
+      example:
+        entityLabels:
+          key: value
+        phantomMode: false
+        notificationGroupExcess:
+        - router:
+            notifyOn: null
+            id: 123e4567-e89b-12d3-a456-426614174000
+          webhooks:
+          - minutes: 15
+            notifyOn: null
+            integration:
+              integrationId: 123
+          - minutes: 15
+            notifyOn: null
+            integration:
+              integrationId: 123
+          destinations:
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          groupByKeys:
+          - "[\"key1\",\"key2\"]"
+          - "[\"key1\",\"key2\"]"
+        - router:
+            notifyOn: null
+            id: 123e4567-e89b-12d3-a456-426614174000
+          webhooks:
+          - minutes: 15
+            notifyOn: null
+            integration:
+              integrationId: 123
+          - minutes: 15
+            notifyOn: null
+            integration:
+              integrationId: 123
+          destinations:
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          groupByKeys:
+          - "[\"key1\",\"key2\"]"
+          - "[\"key1\",\"key2\"]"
+        description: Alert description
+        priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+        type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
+        activeOn:
+          dayOfWeek:
+          - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+          - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+          startTime:
+            hours: 14
+            minutes: 30
+          endTime:
+            hours: 14
+            minutes: 30
+        enabled: true
+        notificationGroup:
+          router:
+            notifyOn: null
+            id: 123e4567-e89b-12d3-a456-426614174000
+          webhooks:
+          - minutes: 15
+            notifyOn: null
+            integration:
+              integrationId: 123
+          - minutes: 15
+            notifyOn: null
+            integration:
+              integrationId: 123
+          destinations:
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          groupByKeys:
+          - "[\"key1\",\"key2\"]"
+          - "[\"key1\",\"key2\"]"
+        deleted: false
+        incidentsSettings:
+          minutes: 30
+          notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+        name: My Alert
+        flow:
+          enforceSuppression: true
+          stages:
+          - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+            flowStagesGroups:
+              groups:
+              - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                alertDefs:
+                - not: true
+                  id: 123e4567-e89b-12d3-a456-426614174000
+                - not: true
+                  id: 123e4567-e89b-12d3-a456-426614174000
+                nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+              - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                alertDefs:
+                - not: true
+                  id: 123e4567-e89b-12d3-a456-426614174000
+                - not: true
+                  id: 123e4567-e89b-12d3-a456-426614174000
+                nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+            timeframeMs: timeframeMs
+          - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+            flowStagesGroups:
+              groups:
+              - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                alertDefs:
+                - not: true
+                  id: 123e4567-e89b-12d3-a456-426614174000
+                - not: true
+                  id: 123e4567-e89b-12d3-a456-426614174000
+                nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+              - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                alertDefs:
+                - not: true
+                  id: 123e4567-e89b-12d3-a456-426614174000
+                - not: true
+                  id: 123e4567-e89b-12d3-a456-426614174000
+                nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+            timeframeMs: timeframeMs
+        groupByKeys:
+        - "[\"key1\",\"key2\"]"
+        - "[\"key1\",\"key2\"]"
       externalDocs:
         url: ""
       properties:
@@ -2202,289 +2539,6 @@ components:
     AlertDefPropertiesMetricAnomaly:
       additionalProperties: false
       description: User-configurable properties of an alert definition
-      example:
-        entityLabels:
-          key: value
-        phantomMode: false
-        notificationGroupExcess:
-        - router:
-            notifyOn: null
-            id: 123e4567-e89b-12d3-a456-426614174000
-          webhooks:
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          destinations:
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          groupByKeys:
-          - "[\"key1\",\"key2\"]"
-          - "[\"key1\",\"key2\"]"
-        - router:
-            notifyOn: null
-            id: 123e4567-e89b-12d3-a456-426614174000
-          webhooks:
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          destinations:
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          groupByKeys:
-          - "[\"key1\",\"key2\"]"
-          - "[\"key1\",\"key2\"]"
-        metricAnomaly:
-          anomalyAlertSettings:
-            percentageOfDeviation: 0.8008282
-          evaluationDelayMs: 60000
-          metricFilter:
-            promql: "avg_over_time(metric_name[5m]) > 10"
-          rules:
-          - condition:
-              minNonNullValuesPct: 10
-              forOverPct: 20
-              conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-              ofTheLast:
-                metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-              threshold: 10
-          - condition:
-              minNonNullValuesPct: 10
-              forOverPct: 20
-              conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-              ofTheLast:
-                metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-              threshold: 10
-        description: Alert description
-        priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-        type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
-        activeOn:
-          dayOfWeek:
-          - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
-          - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
-          startTime:
-            hours: 14
-            minutes: 30
-          endTime:
-            hours: 14
-            minutes: 30
-        enabled: true
-        notificationGroup:
-          router:
-            notifyOn: null
-            id: 123e4567-e89b-12d3-a456-426614174000
-          webhooks:
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          destinations:
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          groupByKeys:
-          - "[\"key1\",\"key2\"]"
-          - "[\"key1\",\"key2\"]"
-        deleted: false
-        incidentsSettings:
-          minutes: 30
-          notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
-        name: My Alert
-        groupByKeys:
-        - "[\"key1\",\"key2\"]"
-        - "[\"key1\",\"key2\"]"
       externalDocs:
         url: ""
       properties:
@@ -2866,8 +2920,6 @@ components:
       type: string
     AnomalyAlertSettings:
       description: Common settings for anomaly-based alerts.
-      example:
-        percentageOfDeviation: 0.8008282
       externalDocs:
         url: ""
       properties:
@@ -3054,27 +3106,6 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
-            metricAnomaly:
-              anomalyAlertSettings:
-                percentageOfDeviation: 0.8008282
-              evaluationDelayMs: 60000
-              metricFilter:
-                promql: "avg_over_time(metric_name[5m]) > 10"
-              rules:
-              - condition:
-                  minNonNullValuesPct: 10
-                  forOverPct: 20
-                  conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-                  ofTheLast:
-                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-                  threshold: 10
-              - condition:
-                  minNonNullValuesPct: 10
-                  forOverPct: 20
-                  conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-                  ofTheLast:
-                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-                  threshold: 10
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
@@ -3173,6 +3204,45 @@ components:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
+            flow:
+              enforceSuppression: true
+              stages:
+              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+                flowStagesGroups:
+                  groups:
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                timeframeMs: timeframeMs
+              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+                flowStagesGroups:
+                  groups:
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                timeframeMs: timeframeMs
             groupByKeys:
             - "[\"key1\",\"key2\"]"
             - "[\"key1\",\"key2\"]"
@@ -3343,27 +3413,6 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
-            metricAnomaly:
-              anomalyAlertSettings:
-                percentageOfDeviation: 0.8008282
-              evaluationDelayMs: 60000
-              metricFilter:
-                promql: "avg_over_time(metric_name[5m]) > 10"
-              rules:
-              - condition:
-                  minNonNullValuesPct: 10
-                  forOverPct: 20
-                  conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-                  ofTheLast:
-                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-                  threshold: 10
-              - condition:
-                  minNonNullValuesPct: 10
-                  forOverPct: 20
-                  conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-                  ofTheLast:
-                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-                  threshold: 10
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
@@ -3462,6 +3511,45 @@ components:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
+            flow:
+              enforceSuppression: true
+              stages:
+              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+                flowStagesGroups:
+                  groups:
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                timeframeMs: timeframeMs
+              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+                flowStagesGroups:
+                  groups:
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                timeframeMs: timeframeMs
             groupByKeys:
             - "[\"key1\",\"key2\"]"
             - "[\"key1\",\"key2\"]"
@@ -3743,27 +3831,6 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
-            metricAnomaly:
-              anomalyAlertSettings:
-                percentageOfDeviation: 0.8008282
-              evaluationDelayMs: 60000
-              metricFilter:
-                promql: "avg_over_time(metric_name[5m]) > 10"
-              rules:
-              - condition:
-                  minNonNullValuesPct: 10
-                  forOverPct: 20
-                  conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-                  ofTheLast:
-                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-                  threshold: 10
-              - condition:
-                  minNonNullValuesPct: 10
-                  forOverPct: 20
-                  conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-                  ofTheLast:
-                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-                  threshold: 10
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
@@ -3862,6 +3929,45 @@ components:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
+            flow:
+              enforceSuppression: true
+              stages:
+              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+                flowStagesGroups:
+                  groups:
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                timeframeMs: timeframeMs
+              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+                flowStagesGroups:
+                  groups:
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                timeframeMs: timeframeMs
             groupByKeys:
             - "[\"key1\",\"key2\"]"
             - "[\"key1\",\"key2\"]"
@@ -4141,6 +4247,25 @@ components:
       type: object
     FlowStages:
       description: Defines stages in a flow alert
+      example:
+        timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+        flowStagesGroups:
+          groups:
+          - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+            alertDefs:
+            - not: true
+              id: 123e4567-e89b-12d3-a456-426614174000
+            - not: true
+              id: 123e4567-e89b-12d3-a456-426614174000
+            nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+          - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+            alertDefs:
+            - not: true
+              id: 123e4567-e89b-12d3-a456-426614174000
+            - not: true
+              id: 123e4567-e89b-12d3-a456-426614174000
+            nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+        timeframeMs: timeframeMs
       externalDocs:
         url: ""
       properties:
@@ -4158,6 +4283,14 @@ components:
       type: object
     FlowStagesGroup:
       description: Defines a group of stages in a flow alert
+      example:
+        alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+        alertDefs:
+        - not: true
+          id: 123e4567-e89b-12d3-a456-426614174000
+        - not: true
+          id: 123e4567-e89b-12d3-a456-426614174000
+        nextOp: NEXT_OP_AND_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -4177,6 +4310,22 @@ components:
       type: object
     FlowStagesGroups:
       description: Groups of stages in a flow alert
+      example:
+        groups:
+        - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+          alertDefs:
+          - not: true
+            id: 123e4567-e89b-12d3-a456-426614174000
+          - not: true
+            id: 123e4567-e89b-12d3-a456-426614174000
+          nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+        - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+          alertDefs:
+          - not: true
+            id: 123e4567-e89b-12d3-a456-426614174000
+          - not: true
+            id: 123e4567-e89b-12d3-a456-426614174000
+          nextOp: NEXT_OP_AND_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -4190,6 +4339,9 @@ components:
       type: object
     FlowStagesGroupsAlertDefs:
       description: Alert definitions for a flow stage group
+      example:
+        not: true
+        id: 123e4567-e89b-12d3-a456-426614174000
       externalDocs:
         url: ""
       properties:
@@ -4207,6 +4359,45 @@ components:
       type: object
     FlowType:
       description: Configuration for flow-based alerts with multiple stages
+      example:
+        enforceSuppression: true
+        stages:
+        - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+          flowStagesGroups:
+            groups:
+            - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+              alertDefs:
+              - not: true
+                id: 123e4567-e89b-12d3-a456-426614174000
+              - not: true
+                id: 123e4567-e89b-12d3-a456-426614174000
+              nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+            - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+              alertDefs:
+              - not: true
+                id: 123e4567-e89b-12d3-a456-426614174000
+              - not: true
+                id: 123e4567-e89b-12d3-a456-426614174000
+              nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+          timeframeMs: timeframeMs
+        - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+          flowStagesGroups:
+            groups:
+            - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+              alertDefs:
+              - not: true
+                id: 123e4567-e89b-12d3-a456-426614174000
+              - not: true
+                id: 123e4567-e89b-12d3-a456-426614174000
+              nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+            - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+              alertDefs:
+              - not: true
+                id: 123e4567-e89b-12d3-a456-426614174000
+              - not: true
+                id: 123e4567-e89b-12d3-a456-426614174000
+              nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+          timeframeMs: timeframeMs
       externalDocs:
         description: Learn more about flow alerts in our documentation
         url: https://coralogix.com/docs/user-guides/alerting/create-an-alert/flow-alerts/
@@ -4389,27 +4580,6 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
-            metricAnomaly:
-              anomalyAlertSettings:
-                percentageOfDeviation: 0.8008282
-              evaluationDelayMs: 60000
-              metricFilter:
-                promql: "avg_over_time(metric_name[5m]) > 10"
-              rules:
-              - condition:
-                  minNonNullValuesPct: 10
-                  forOverPct: 20
-                  conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-                  ofTheLast:
-                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-                  threshold: 10
-              - condition:
-                  minNonNullValuesPct: 10
-                  forOverPct: 20
-                  conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-                  ofTheLast:
-                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-                  threshold: 10
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
@@ -4508,6 +4678,45 @@ components:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
+            flow:
+              enforceSuppression: true
+              stages:
+              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+                flowStagesGroups:
+                  groups:
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                timeframeMs: timeframeMs
+              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+                flowStagesGroups:
+                  groups:
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                timeframeMs: timeframeMs
             groupByKeys:
             - "[\"key1\",\"key2\"]"
             - "[\"key1\",\"key2\"]"
@@ -4691,27 +4900,6 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
-            metricAnomaly:
-              anomalyAlertSettings:
-                percentageOfDeviation: 0.8008282
-              evaluationDelayMs: 60000
-              metricFilter:
-                promql: "avg_over_time(metric_name[5m]) > 10"
-              rules:
-              - condition:
-                  minNonNullValuesPct: 10
-                  forOverPct: 20
-                  conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-                  ofTheLast:
-                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-                  threshold: 10
-              - condition:
-                  minNonNullValuesPct: 10
-                  forOverPct: 20
-                  conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-                  ofTheLast:
-                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-                  threshold: 10
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
@@ -4810,6 +4998,45 @@ components:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
+            flow:
+              enforceSuppression: true
+              stages:
+              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+                flowStagesGroups:
+                  groups:
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                timeframeMs: timeframeMs
+              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+                flowStagesGroups:
+                  groups:
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                timeframeMs: timeframeMs
             groupByKeys:
             - "[\"key1\",\"key2\"]"
             - "[\"key1\",\"key2\"]"
@@ -4825,31 +5052,6 @@ components:
       required:
       - alertDef
       title: Get alert definition response
-      type: object
-    IntegrationTypeIntegrationId:
-      additionalProperties: false
-      description: Defines the type of integration to use for notifications
-      example:
-        integrationId: 123
-      externalDocs:
-        url: ""
-      properties:
-        integrationId:
-          description: The integration ID for the notification
-          example: 123
-          format: int64
-          type: integer
-      title: Integration type
-      type: object
-    IntegrationTypeRecipients:
-      additionalProperties: false
-      description: Defines the type of integration to use for notifications
-      externalDocs:
-        url: ""
-      properties:
-        recipients:
-          $ref: "#/components/schemas/Recipients"
-      title: Integration type
       type: object
     LabelFilterType:
       description: Label filter type for log entries
@@ -4890,7 +5092,7 @@ components:
       description: A response that contains a list of alert definitions
       example:
         pagination:
-          totalSize: 6
+          totalSize: 0
           nextPageToken: nextPageToken
         alertDefs:
         - updatedTime: 2023-10-01T12:00:00Z
@@ -5056,27 +5258,6 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
-            metricAnomaly:
-              anomalyAlertSettings:
-                percentageOfDeviation: 0.8008282
-              evaluationDelayMs: 60000
-              metricFilter:
-                promql: "avg_over_time(metric_name[5m]) > 10"
-              rules:
-              - condition:
-                  minNonNullValuesPct: 10
-                  forOverPct: 20
-                  conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-                  ofTheLast:
-                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-                  threshold: 10
-              - condition:
-                  minNonNullValuesPct: 10
-                  forOverPct: 20
-                  conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-                  ofTheLast:
-                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-                  threshold: 10
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
@@ -5175,6 +5356,45 @@ components:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
+            flow:
+              enforceSuppression: true
+              stages:
+              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+                flowStagesGroups:
+                  groups:
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                timeframeMs: timeframeMs
+              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+                flowStagesGroups:
+                  groups:
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                timeframeMs: timeframeMs
             groupByKeys:
             - "[\"key1\",\"key2\"]"
             - "[\"key1\",\"key2\"]"
@@ -5345,27 +5565,6 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
-            metricAnomaly:
-              anomalyAlertSettings:
-                percentageOfDeviation: 0.8008282
-              evaluationDelayMs: 60000
-              metricFilter:
-                promql: "avg_over_time(metric_name[5m]) > 10"
-              rules:
-              - condition:
-                  minNonNullValuesPct: 10
-                  forOverPct: 20
-                  conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-                  ofTheLast:
-                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-                  threshold: 10
-              - condition:
-                  minNonNullValuesPct: 10
-                  forOverPct: 20
-                  conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-                  ofTheLast:
-                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-                  threshold: 10
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
@@ -5464,6 +5663,45 @@ components:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
+            flow:
+              enforceSuppression: true
+              stages:
+              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+                flowStagesGroups:
+                  groups:
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                timeframeMs: timeframeMs
+              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+                flowStagesGroups:
+                  groups:
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                timeframeMs: timeframeMs
             groupByKeys:
             - "[\"key1\",\"key2\"]"
             - "[\"key1\",\"key2\"]"
@@ -6051,13 +6289,6 @@ components:
       - LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_36
       type: string
     MetricAnomalyCondition:
-      example:
-        minNonNullValuesPct: 10
-        forOverPct: 20
-        conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-        ofTheLast:
-          metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-        threshold: 10
       externalDocs:
         url: ""
       properties:
@@ -6095,14 +6326,6 @@ components:
       type: string
     MetricAnomalyRule:
       description: A rule for metric-based anomaly detection alerts
-      example:
-        condition:
-          minNonNullValuesPct: 10
-          forOverPct: 20
-          conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-          ofTheLast:
-            metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-          threshold: 10
       externalDocs:
         url: ""
       properties:
@@ -6114,27 +6337,6 @@ components:
       type: object
     MetricAnomalyType:
       description: Configuration for alerts triggered by anomalous metric patterns
-      example:
-        anomalyAlertSettings:
-          percentageOfDeviation: 0.8008282
-        evaluationDelayMs: 60000
-        metricFilter:
-          promql: "avg_over_time(metric_name[5m]) > 10"
-        rules:
-        - condition:
-            minNonNullValuesPct: 10
-            forOverPct: 20
-            conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-            ofTheLast:
-              metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-            threshold: 10
-        - condition:
-            minNonNullValuesPct: 10
-            forOverPct: 20
-            conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-            ofTheLast:
-              metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-            threshold: 10
       externalDocs:
         description: Learn more about metric-based anomaly alerts in our documentation
         url: https://coralogix.com/docs/user-guides/alerting/create-an-alert/metrics/anomaly-detection-alerts/
@@ -6158,8 +6360,6 @@ components:
       title: Metric-based anomaly alert type
       type: object
     MetricFilter:
-      example:
-        promql: "avg_over_time(metric_name[5m]) > 10"
       externalDocs:
         url: ""
       properties:
@@ -6296,8 +6496,6 @@ components:
       type: object
     MetricTimeWindowMetricTimeWindowSpecificValue:
       additionalProperties: false
-      example:
-        metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -6635,27 +6833,6 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
-            metricAnomaly:
-              anomalyAlertSettings:
-                percentageOfDeviation: 0.8008282
-              evaluationDelayMs: 60000
-              metricFilter:
-                promql: "avg_over_time(metric_name[5m]) > 10"
-              rules:
-              - condition:
-                  minNonNullValuesPct: 10
-                  forOverPct: 20
-                  conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-                  ofTheLast:
-                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-                  threshold: 10
-              - condition:
-                  minNonNullValuesPct: 10
-                  forOverPct: 20
-                  conditionType: METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-                  ofTheLast:
-                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
-                  threshold: 10
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
@@ -6754,6 +6931,45 @@ components:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
+            flow:
+              enforceSuppression: true
+              stages:
+              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+                flowStagesGroups:
+                  groups:
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                timeframeMs: timeframeMs
+              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
+                flowStagesGroups:
+                  groups:
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
+                    alertDefs:
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    - not: true
+                      id: 123e4567-e89b-12d3-a456-426614174000
+                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
+                timeframeMs: timeframeMs
             groupByKeys:
             - "[\"key1\",\"key2\"]"
             - "[\"key1\",\"key2\"]"
@@ -6798,8 +7014,8 @@ components:
       type: object
     SloThresholdType:
       oneOf:
-      - $ref: "#/components/schemas/SloThresholdTypeBurnRate"
       - $ref: "#/components/schemas/SloThresholdTypeErrorBudget"
+      - $ref: "#/components/schemas/SloThresholdTypeBurnRate"
     SloThresholdTypeBurnRate:
       additionalProperties: false
       description: SLO threshold type definition
@@ -7106,21 +7322,34 @@ components:
           $ref: "#/components/schemas/AlertDefType"
       title: Type count
       type: object
-    YAxisViewByCategory:
+    V3IntegrationTypeIntegrationId:
       additionalProperties: false
+      description: Defines the type of integration to use for notifications
+      example:
+        integrationId: 123
+      externalDocs:
+        url: ""
       properties:
-        category:
-          $ref: "#/components/schemas/YAxisViewByCategory"
+        integrationId:
+          description: The integration ID for the notification
+          example: 123
+          format: int64
+          type: integer
+      title: Integration type
       type: object
-    YAxisViewByValue:
+    V3IntegrationTypeRecipients:
       additionalProperties: false
+      description: Defines the type of integration to use for notifications
+      externalDocs:
+        url: ""
       properties:
-        value:
-          $ref: "#/components/schemas/YAxisViewByValue"
+        recipients:
+          $ref: "#/components/schemas/Recipients"
+      title: Integration type
       type: object
     alerts.v3.PaginationResponse:
       example:
-        totalSize: 6
+        totalSize: 0
         nextPageToken: nextPageToken
       properties:
         nextPageToken:
@@ -7184,8 +7413,8 @@ components:
       type: string
     v3.IntegrationType:
       oneOf:
-      - $ref: "#/components/schemas/IntegrationTypeIntegrationId"
-      - $ref: "#/components/schemas/IntegrationTypeRecipients"
+      - $ref: "#/components/schemas/V3IntegrationTypeIntegrationId"
+      - $ref: "#/components/schemas/V3IntegrationTypeRecipients"
     v3.LogsFilter:
       description: Filter configuration for log-based alerts
       externalDocs:
@@ -7356,18 +7585,18 @@ components:
     AlertDefsService_CreateAlertDef_request:
       oneOf:
       - $ref: "#/components/schemas/AlertDefPropertiesLogsNewValue"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesFlow"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesMetricThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsImmediate"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesTracingThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesMetricAnomaly"
+      - $ref: "#/components/schemas/AlertDefPropertiesSloThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
       - $ref: "#/components/schemas/AlertDefPropertiesTracingImmediate"
-      - $ref: "#/components/schemas/AlertDefPropertiesTracingThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesMetricThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsAnomaly"
-      - $ref: "#/components/schemas/AlertDefPropertiesSloThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesFlow"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsImmediate"
-      - $ref: "#/components/schemas/AlertDefPropertiesMetricAnomaly"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsThreshold"
       type: object
     Bulk_replace_alert_definitions_request:
       additionalProperties: false

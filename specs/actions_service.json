@@ -285,15 +285,15 @@
         "x-codeSamples": [
           {
             "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v2/actions/actions:atomicBatchExecute';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"requests\":[{\"create\":{\"applicationNames\":[\"string\"],\"isPrivate\":true,\"name\":\"string\",\"sourceType\":\"SOURCE_TYPE_UNSPECIFIED\",\"subsystemNames\":[\"string\"],\"url\":\"string\"}}]}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v2/actions/actions:atomicBatchExecute';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"requests\":[{\"delete\":{\"id\":\"string\"}}]}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v2/actions/actions:atomicBatchExecute\"\n\npayload = {\"requests\": [{\"create\": {\n                \"applicationNames\": [\"string\"],\n                \"isPrivate\": True,\n                \"name\": \"string\",\n                \"sourceType\": \"SOURCE_TYPE_UNSPECIFIED\",\n                \"subsystemNames\": [\"string\"],\n                \"url\": \"string\"\n            }}]}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v2/actions/actions:atomicBatchExecute\"\n\npayload = {\"requests\": [{\"delete\": {\"id\": \"string\"}}]}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/v2/actions/actions:atomicBatchExecute \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"requests\":[{\"create\":{\"applicationNames\":[\"string\"],\"isPrivate\":true,\"name\":\"string\",\"sourceType\":\"SOURCE_TYPE_UNSPECIFIED\",\"subsystemNames\":[\"string\"],\"url\":\"string\"}}]}'"
+            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/v2/actions/actions:atomicBatchExecute \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"requests\":[{\"delete\":{\"id\":\"string\"}}]}'"
           }
         ]
       }
@@ -521,13 +521,13 @@
       "ActionExecutionRequest": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/ActionExecutionRequestDelete"
+          },
+          {
             "$ref": "#/components/schemas/ActionExecutionRequestCreate"
           },
           {
             "$ref": "#/components/schemas/ActionExecutionRequestReplace"
-          },
-          {
-            "$ref": "#/components/schemas/ActionExecutionRequestDelete"
           }
         ]
       },
@@ -822,24 +822,6 @@
             "$ref": "#/components/schemas/v2.Action"
           }
         }
-      },
-      "YAxisViewByCategory": {
-        "type": "object",
-        "properties": {
-          "category": {
-            "$ref": "#/components/schemas/YAxisViewByCategory"
-          }
-        },
-        "additionalProperties": false
-      },
-      "YAxisViewByValue": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "$ref": "#/components/schemas/YAxisViewByValue"
-          }
-        },
-        "additionalProperties": false
       },
       "common.Group": {
         "type": "object",
