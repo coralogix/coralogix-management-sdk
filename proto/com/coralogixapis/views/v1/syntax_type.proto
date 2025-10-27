@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package com.coralogixapis.views.v1;
+
+enum SyntaxType {
+  SYNTAX_TYPE_UNSPECIFIED = 0;
+  SYNTAX_TYPE_LUCENE = 1;
+  SYNTAX_TYPE_DATAPRIME = 2;
+}

@@ -11,7 +11,10 @@ message Filter {
     json_schema: {
       title: "ViewFolder"
       description: "View folder."
-      required: ["name", "selected_values"]
+      required: [
+        "name",
+        "selected_values"
+      ]
     }
   };
   // Filter name
@@ -31,7 +34,5 @@ message Filter {
 // Selected filters
 message SelectedFilters {
   // Selected filters
-  repeated Filter filters = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    min_items: 1
-  }];
+  repeated Filter filters = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {min_items: 1}];
 }
