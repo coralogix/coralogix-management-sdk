@@ -135,6 +135,7 @@ allow_policies = [
     "src/com/coralogixapis/views/v1/time_selection.proto",
     "src/com/coralogixapis/views/v1/view_folder.proto",
     "src/com/coralogixapis/views/v1/view_type.proto",
+    "src/com/coralogixapis/views/v1/syntax_type.proto"
 ]
 
 [cx-api-actions]
