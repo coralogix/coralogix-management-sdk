@@ -6,7 +6,6 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
 
-
 // Time selection
 message TimeSelection {
   oneof selection_type {
@@ -20,18 +19,20 @@ message TimeSelection {
 // Quick time selection
 message QuickTimeSelection {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        required: ["seconds"]
-      }
-    };
+    json_schema: {
+      required: ["seconds"]
+    }
+  };
 
-  google.protobuf.StringValue caption = 2 [deprecated = true, 
-  (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "Folder name"
-    min_length: 1
-    example: "\"Last Hour\""
-  }];
-  uint32 seconds = 3[(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+  google.protobuf.StringValue caption = 2 [
+    deprecated = true,
+    (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+      description: "Folder name"
+      min_length: 1
+      example: "\"Last Hour\""
+    }
+  ];
+  uint32 seconds = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Folder name"
     example: "3600"
   }];
@@ -40,10 +41,13 @@ message QuickTimeSelection {
 // Custom time selection
 message CustomTimeSelection {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        required: ["from_time", "to_time"]
-      }
-    };
+    json_schema: {
+      required: [
+        "from_time",
+        "to_time"
+      ]
+    }
+  };
 
   // Custom time selection start timestamp
   google.protobuf.Timestamp from_time = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {

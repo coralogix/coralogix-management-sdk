@@ -5,23 +5,22 @@ package com.coralogixapis.views.v1;
 import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
 
-
 // View folder
 message ViewFolder {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "ViewFolder"
-        description: "View folder."
-        required: ["name"]
-      }
-    };
+    json_schema: {
+      title: "ViewFolder"
+      description: "View folder."
+      required: ["name"]
+    }
+  };
 
-  google.protobuf.StringValue id = 1  [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Unique identifier for folders"
     format: "uuid"
-    min_length: 36,
-    max_length: 36,
-    example: "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+    min_length: 36
+    max_length: 36
+    example: "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\""
     pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
   }];
 

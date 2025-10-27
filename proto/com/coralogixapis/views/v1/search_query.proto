@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package com.coralogixapis.views.v1;
 
+import "com/coralogixapis/views/v1/syntax_type.proto";
 import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
 
@@ -15,8 +16,8 @@ message SearchQuery {
   };
 
   // View search query
-  google.protobuf.StringValue query = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    min_length: 1
-  }];
+  google.protobuf.StringValue query = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {min_length: 1}];
 
+  // Query syntax type
+  SyntaxType syntax_type = 2;
 }
