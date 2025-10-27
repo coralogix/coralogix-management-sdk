@@ -33,6 +33,7 @@ import (
 	globalrouters "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/global_routers_service"
 	integrations "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/integration_service"
 	ipaccess "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/ip_access_service"
+	webhooks "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/outgoing_webhooks_service"
 	presets "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/presets_service"
 	saml "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/saml_configuration_service"
 	groups "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/team_permissions_management_service"
@@ -72,6 +73,7 @@ type ClientSet struct {
 	presets              *presets.PresetsServiceAPIService
 	saml                 *saml.SAMLConfigurationServiceAPIService
 	//slos             *slos.SLOServiceAPIService
+	webhooks     *webhooks.OutgoingWebhooksServiceAPIService
 	views        *views.ViewsServiceAPIService
 	viewsFolders *viewsfolders.FoldersForViewsServiceAPIService
 }
@@ -161,6 +163,11 @@ func (c *ClientSet) SAML() *saml.SAMLConfigurationServiceAPIService {
 	return c.saml
 }
 
+// Webhooks returns the OutgoingWebhooksServiceAPIService client.
+func (c *ClientSet) Webhooks() *webhooks.OutgoingWebhooksServiceAPIService {
+	return c.webhooks
+}
+
 // Views returns the ViewsServiceAPIService client.
 func (c *ClientSet) Views() *views.ViewsServiceAPIService {
 	return c.views
@@ -191,6 +198,7 @@ func NewClientSet(c CallPropertiesCreator) *ClientSet {
 		presets:              NewPresetsClient(c),
 		saml:                 NewSAMLClient(c),
 		//slos:             NewSLOsClient(c),
+		webhooks:     NewWebhooksClient(c),
 		views:        NewViewsClient(c),
 		viewsFolders: NewViewsFoldersClient(c),
 	}
@@ -365,6 +373,16 @@ func NewSAMLClient(c CallPropertiesCreator) *saml.SAMLConfigurationServiceAPISer
 //	}
 //	return slos.NewAPIClient(cfg).SLOServiceAPI
 //}
+
+// NewWebhooksClient builds a new OutgoingWebhooksServiceAPIService from CallPropertiesCreator.
+func NewWebhooksClient(c CallPropertiesCreator) *webhooks.OutgoingWebhooksServiceAPIService {
+	cfg := webhooks.NewConfiguration()
+	cfg.Servers = webhooks.ServerConfigurations{{URL: c.URL()}}
+	for k, v := range c.Headers() {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return webhooks.NewAPIClient(cfg).OutgoingWebhooksServiceAPI
+}
 
 // NewViewsClient builds a new ViewsServiceAPIService from CallPropertiesCreator.
 func NewViewsClient(c CallPropertiesCreator) *views.ViewsServiceAPIService {
