@@ -162,12 +162,12 @@ message CompanyIpAccessSettings {
 
   string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The unique identifier for the company IP access settings. This is typically a company ID."
-    example: "405"
+    example: "\"d662a2f1-21c3-493c-8f8a-595d3ab05ef3\""
   }];
 
   map<string, IpAccess> ip_access = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The list of IP access entries."
-    example: "405"
+    example: "\"d662a2f1-21c3-493c-8f8a-595d3ab05ef3\""
   }];
 
   CoralogixCustomerSupportAccess enable_coralogix_customer_support_access = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
@@ -210,7 +210,7 @@ message ReplaceCompanyIpAccessSettingsRequest {
       description: "This data structure represents the request to replace company IP access settings."
     }
   };
-  optional string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "405"}];
+  optional string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"d662a2f1-21c3-493c-8f8a-595d3ab05ef3\""}];
   repeated IpAccess ip_access = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of IP access entries to replace."}];
 
   CoralogixCustomerSupportAccess enable_coralogix_customer_support_access = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
@@ -259,7 +259,7 @@ message DeleteCompanyIpAccessSettingsRequest {
     }
   };
 
-  optional string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "405"}];
+  optional string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"d662a2f1-21c3-493c-8f8a-595d3ab05ef3\""}];
 }
 
 message DeleteCompanyIpAccessSettingsResponse {

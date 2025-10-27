@@ -970,11 +970,11 @@ const file_com_coralogixapis_aaa_apikeys_v3_api_keys_proto_rawDesc = "" +
 	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/:\x83\x02\x9aA\xff\x01\n" +
 	"\x8e\x01*\bKey Info2JThis data structure represents the information associated with an API key.\xd2\x01\x02id\xd2\x01\x04name\xd2\x01\x05owner\xd2\x01\x06active\xd2\x01\x06hashed\xd2\x01\x0fkey_permissions*l\n" +
 	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/B\b\n" +
-	"\x06_value\"\xcc\x02\n" +
+	"\x06_value\"\xca\x02\n" +
 	"\n" +
 	"PresetInfo\x12$\n" +
-	"\x04name\x18\x01 \x01(\tB\x10\x9aA\rJ\v\"my_preset\"R\x04name\x124\n" +
-	"\vpermissions\x18\x02 \x03(\tB\x12\x9aA\x0fJ\r[\"read_logs\"]R\vpermissions:\xe1\x01\x9aA\xdd\x01\n" +
+	"\x04name\x18\x01 \x01(\tB\x10\x9aA\rJ\v\"my_preset\"R\x04name\x122\n" +
+	"\vpermissions\x18\x02 \x03(\tB\x10\x9aA\rJ\v\"read_logs\"R\vpermissions:\xe1\x01\x9aA\xdd\x01\n" +
 	"m*\vPreset Info2IThis data structure represents a preset set of permissions on an API key.\xd2\x01\x04name\xd2\x01\vpermissions*l\n" +
 	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/\"\xed\b\n" +
 	"\x13UpdateApiKeyRequest\x12'\n" +
@@ -1004,15 +1004,15 @@ const file_com_coralogixapis_aaa_apikeys_v3_api_keys_proto_rawDesc = "" +
 	"\x06key_id\x18\x01 \x01(\tR\x05keyId:\xc8\x01\x9aA\xc4\x01\n" +
 	"T*\x16Delete Api Key Request21This data structure is used to delete an API key.\xd2\x01\x06key_id*l\n" +
 	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/\"\x16\n" +
-	"\x14DeleteApiKeyResponse\"\xf1\x06\n" +
+	"\x14DeleteApiKeyResponse\"\xed\x06\n" +
 	"\x13CreateApiKeyRequest\x12%\n" +
 	"\x04name\x18\x01 \x01(\tB\x11\x9aA\x0eJ\f\"my_api_key\"R\x04name\x12=\n" +
 	"\x05owner\x18\x02 \x01(\v2'.com.coralogixapis.aaa.apikeys.v3.OwnerR\x05owner\x12m\n" +
 	"\x0fkey_permissions\x18\x03 \x01(\v2D.com.coralogixapis.aaa.apikeys.v3.CreateApiKeyRequest.KeyPermissionsR\x0ekeyPermissions\x12!\n" +
-	"\x06hashed\x18\x04 \x01(\bB\t\x9aA\x06J\x04trueR\x06hashed\x1a\xf5\x02\n" +
-	"\x0eKeyPermissions\x12,\n" +
-	"\apresets\x18\x01 \x03(\tB\x12\x9aA\x0fJ\r[\"my_preset\"]R\apresets\x124\n" +
-	"\vpermissions\x18\x02 \x03(\tB\x12\x9aA\x0fJ\r[\"read_logs\"]R\vpermissions:\xfe\x01\x9aA\xfa\x01\n" +
+	"\x06hashed\x18\x04 \x01(\bB\t\x9aA\x06J\x04trueR\x06hashed\x1a\xf1\x02\n" +
+	"\x0eKeyPermissions\x12*\n" +
+	"\apresets\x18\x01 \x03(\tB\x10\x9aA\rJ\v\"my_preset\"R\apresets\x122\n" +
+	"\vpermissions\x18\x02 \x03(\tB\x10\x9aA\rJ\v\"read_logs\"R\vpermissions:\xfe\x01\x9aA\xfa\x01\n" +
 	"\x89\x01*\x0fKey Permissions2^This data structure allows to specify loose permissions and permission presets for an API key.\xd2\x01\apresets\xd2\x01\vpermissions*l\n" +
 	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/:\xe9\x01\x9aA\xe5\x01\n" +
 	"u*\x16Create Api Key Request21This data structure is used to create an API key.\xd2\x01\x04name\xd2\x01\x05owner\xd2\x01\x0fkey_permissions\xd2\x01\x06hashed*l\n" +

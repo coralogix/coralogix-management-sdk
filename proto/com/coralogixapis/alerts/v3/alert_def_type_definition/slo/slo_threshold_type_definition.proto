@@ -13,9 +13,7 @@ message SloThresholdType {
     json_schema: {
       title: "SLO Threshold Type"
       description: "SLO threshold type definition"
-      required: [
-        "slo_definition"
-      ]
+      required: ["slo_definition"]
     }
   };
   SloDefinition slo_definition = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "SLO definition"}];
@@ -71,9 +69,7 @@ message BurnRateThreshold {
     json_schema: {
       title: "Burn Rate Threshold"
       description: "Burn rate threshold definition"
-      required: [
-        "rules"
-      ]
+      required: ["rules"]
     }
   };
   repeated SloThresholdRule rules = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
