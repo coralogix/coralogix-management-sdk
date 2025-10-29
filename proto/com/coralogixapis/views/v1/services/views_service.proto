@@ -21,7 +21,10 @@ service ViewsService {
       post: "/data-exploration/saved-views/v1"
       body: "*"
       response_body: "view"
-      additional_bindings: {post: "/v1/views"}
+      additional_bindings: {
+        post: "/v1/views"
+        body: "*"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Views service"]
@@ -44,7 +47,10 @@ service ViewsService {
       put: "/data-exploration/saved-views/v1/{view.id}"
       body: "view"
       response_body: "view"
-      additional_bindings: {put: "/v1/views/{view.id}"}
+      additional_bindings: {
+        put: "/v1/views/{view.id}"
+        body: "view"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Views service"]

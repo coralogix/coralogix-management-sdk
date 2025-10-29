@@ -482,26 +482,26 @@ const file_com_coralogixapis_views_v1_services_views_folders_service_proto_rawDe
 	"\x18ReplaceViewFolderRequest\x12>\n" +
 	"\x06folder\x18\x01 \x01(\v2&.com.coralogixapis.views.v1.ViewFolderR\x06folder\"[\n" +
 	"\x19ReplaceViewFolderResponse\x12>\n" +
-	"\x06folder\x18\x01 \x01(\v2&.com.coralogixapis.views.v1.ViewFolderR\x06folder2\xc9\x0f\n" +
-	"\x13ViewsFoldersService\x12\x8c\x03\n" +
-	"\x0fListViewFolders\x12;.com.coralogixapis.views.v1.services.ListViewFoldersRequest\x1a<.com.coralogixapis.views.v1.services.ListViewFoldersResponse\"\xfd\x01\x9aA\xbd\x01\n" +
+	"\x06folder\x18\x01 \x01(\v2&.com.coralogixapis.views.v1.ViewFolderR\x06folder2\x86\x10\n" +
+	"\x13ViewsFoldersService\x12\x94\x03\n" +
+	"\x0fListViewFolders\x12;.com.coralogixapis.views.v1.services.ListViewFoldersRequest\x1a<.com.coralogixapis.views.v1.services.ListViewFoldersResponse\"\x85\x02\x9aA\xbd\x01\n" +
 	"\x19Folders for views service\x12\x19List view folders service\x1a\x13List view's foldersJp\n" +
 	"\x03200\x12i\"g\n" +
-	"\x10application/json\x12S{\"view_folders\":[{\"id\":\"0cd4ed54-9b59-4eef-b329-151a167e2304\",\"name\":\"My Folder\"}]}\x82\xd3\xe4\x93\x026Z\x12\x12\x10/v1/view_folders\x12 /data-exploration/saved-views/v1\x12\xfd\x02\n" +
-	"\rGetViewFolder\x129.com.coralogixapis.views.v1.services.GetViewFolderRequest\x1a:.com.coralogixapis.views.v1.services.GetViewFolderResponse\"\xf4\x01\x9aA\xa7\x01\n" +
+	"\x10application/json\x12S{\"view_folders\":[{\"id\":\"0cd4ed54-9b59-4eef-b329-151a167e2304\",\"name\":\"My Folder\"}]}\x82\xd3\xe4\x93\x02>Z\x12\x12\x10/v1/view_folders\x12(/data-exploration/saved-views/v1/folders\x12\x8a\x03\n" +
+	"\rGetViewFolder\x129.com.coralogixapis.views.v1.services.GetViewFolderRequest\x1a:.com.coralogixapis.views.v1.services.GetViewFolderResponse\"\x81\x02\x9aA\xa7\x01\n" +
 	"\x19Folders for views service\x12\x17Get View Folder service\x1a\x12Create view folderJ]\n" +
 	"\x03200\x12V\"T\n" +
-	"\x10application/json\x12@{\"id\":\"0cd4ed54-9b59-4eef-b329-151a167e2304\",\"name\":\"My Folder\"}\x82\xd3\xe4\x93\x02CZ\x17\x12\x15/v1/view_folders/{id}b\x06folder\x12 /data-exploration/saved-views/v1\x12\x87\x03\n" +
-	"\x10CreateViewFolder\x12<.com.coralogixapis.views.v1.services.CreateViewFolderRequest\x1a=.com.coralogixapis.views.v1.services.CreateViewFolderResponse\"\xf5\x01\x9aA\xaa\x01\n" +
+	"\x10application/json\x12@{\"id\":\"0cd4ed54-9b59-4eef-b329-151a167e2304\",\"name\":\"My Folder\"}\x82\xd3\xe4\x93\x02PZ\x17\x12\x15/v1/view_folders/{id}b\x06folder\x12-/data-exploration/saved-views/v1/folders/{id}\x12\x92\x03\n" +
+	"\x10CreateViewFolder\x12<.com.coralogixapis.views.v1.services.CreateViewFolderRequest\x1a=.com.coralogixapis.views.v1.services.CreateViewFolderResponse\"\x80\x02\x9aA\xaa\x01\n" +
 	"\x19Folders for views service\x12\x1aCreate View Folder service\x1a\x12Create view folderJ]\n" +
 	"\x03200\x12V\"T\n" +
-	"\x10application/json\x12@{\"id\":\"0cd4ed54-9b59-4eef-b329-151a167e2304\",\"name\":\"My Folder\"}\x82\xd3\xe4\x93\x02A:\x01*Z\x12\"\x10/v1/view_foldersb\x06folder\" /data-exploration/saved-views/v1\x12\xaa\x02\n" +
-	"\x10DeleteViewFolder\x12<.com.coralogixapis.views.v1.services.DeleteViewFolderRequest\x1a=.com.coralogixapis.views.v1.services.DeleteViewFolderResponse\"\x98\x01\x9aAT\n" +
-	"\x19Folders for views service\x12\x1aDelete View Folder service\x1a\x1bDeletes a view folder by ID\x82\xd3\xe4\x93\x02;Z\x17*\x15/v1/view_folders/{id}* /data-exploration/saved-views/v1\x12\xaa\x03\n" +
-	"\x11ReplaceViewFolder\x12=.com.coralogixapis.views.v1.services.ReplaceViewFolderRequest\x1a>.com.coralogixapis.views.v1.services.ReplaceViewFolderResponse\"\x95\x02\x9aA\xb9\x01\n" +
+	"\x10application/json\x12@{\"id\":\"0cd4ed54-9b59-4eef-b329-151a167e2304\",\"name\":\"My Folder\"}\x82\xd3\xe4\x93\x02L:\x01*Z\x15:\x01*\"\x10/v1/view_foldersb\x06folder\"(/data-exploration/saved-views/v1/folders\x12\xb7\x02\n" +
+	"\x10DeleteViewFolder\x12<.com.coralogixapis.views.v1.services.DeleteViewFolderRequest\x1a=.com.coralogixapis.views.v1.services.DeleteViewFolderResponse\"\xa5\x01\x9aAT\n" +
+	"\x19Folders for views service\x12\x1aDelete View Folder service\x1a\x1bDeletes a view folder by ID\x82\xd3\xe4\x93\x02HZ\x17*\x15/v1/view_folders/{id}*-/data-exploration/saved-views/v1/folders/{id}\x12\xba\x03\n" +
+	"\x11ReplaceViewFolder\x12=.com.coralogixapis.views.v1.services.ReplaceViewFolderRequest\x1a>.com.coralogixapis.views.v1.services.ReplaceViewFolderResponse\"\xa5\x02\x9aA\xb9\x01\n" +
 	"\x19Folders for views service\x12\x1bReplace View Folder service\x1a Replaces an existing view folderJ]\n" +
 	"\x03200\x12V\"T\n" +
-	"\x10application/json\x12@{\"id\":\"0cd4ed54-9b59-4eef-b329-151a167e2304\",\"name\":\"My Folder\"}\x82\xd3\xe4\x93\x02R:\x06folderZ\x1e\x1a\x1c/v1/view_folders/{folder.id}b\x06folder\x1a /data-exploration/saved-views/v1\x1a?\x9aA<\n" +
+	"\x10application/json\x12@{\"id\":\"0cd4ed54-9b59-4eef-b329-151a167e2304\",\"name\":\"My Folder\"}\x82\xd3\xe4\x93\x02b:\x06folderZ&:\x06folder\x1a\x1c/v1/view_folders/{folder.id}b\x06folder\x1a(/data-exploration/saved-views/v1/folders\x1a?\x9aA<\n" +
 	"\x19Folders for views service\x12\x1fCreate and manage view folders.b\x06proto3"
 
 var (
