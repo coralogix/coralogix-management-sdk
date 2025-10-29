@@ -16,7 +16,7 @@ service ViewsFoldersService {
 
   rpc ListViewFolders(ListViewFoldersRequest) returns (ListViewFoldersResponse) {
     option (google.api.http) = {
-      get: "/data-exploration/saved-views/v1"
+      get: "/data-exploration/saved-views/v1/folders"
       additional_bindings: {get: "/v1/view_folders"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -37,7 +37,7 @@ service ViewsFoldersService {
 
   rpc GetViewFolder(GetViewFolderRequest) returns (GetViewFolderResponse) {
     option (google.api.http) = {
-      get: "/data-exploration/saved-views/v1"
+      get: "/data-exploration/saved-views/v1/folders/{id}"
       response_body: "folder"
       additional_bindings: {get: "/v1/view_folders/{id}"}
     };
@@ -59,10 +59,13 @@ service ViewsFoldersService {
 
   rpc CreateViewFolder(CreateViewFolderRequest) returns (CreateViewFolderResponse) {
     option (google.api.http) = {
-      post: "/data-exploration/saved-views/v1"
+      post: "/data-exploration/saved-views/v1/folders"
       body: "*"
       response_body: "folder"
-      additional_bindings: {post: "/v1/view_folders"}
+      additional_bindings: {
+        post: "/v1/view_folders"
+        body: "*"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Folders for views service"]
@@ -82,7 +85,7 @@ service ViewsFoldersService {
 
   rpc DeleteViewFolder(DeleteViewFolderRequest) returns (DeleteViewFolderResponse) {
     option (google.api.http) = {
-      delete: "/data-exploration/saved-views/v1"
+      delete: "/data-exploration/saved-views/v1/folders/{id}"
       additional_bindings: {delete: "/v1/view_folders/{id}"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -94,10 +97,13 @@ service ViewsFoldersService {
 
   rpc ReplaceViewFolder(ReplaceViewFolderRequest) returns (ReplaceViewFolderResponse) {
     option (google.api.http) = {
-      put: "/data-exploration/saved-views/v1"
+      put: "/data-exploration/saved-views/v1/folders"
       body: "folder"
       response_body: "folder"
-      additional_bindings: {put: "/v1/view_folders/{folder.id}"}
+      additional_bindings: {
+        put: "/v1/view_folders/{folder.id}"
+        body: "folder"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Folders for views service"]
