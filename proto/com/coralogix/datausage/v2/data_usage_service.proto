@@ -374,6 +374,7 @@ message GetLogsCountRequest {
   // Example: (application1 OR application2) AND (subsystem1 OR subsystem2)
   // Match occurs on full match
   optional ScopesFilter filters = 3;
+  optional bool subsystem_aggregation = 4;
 }
 
 message LogsCount {
@@ -392,6 +393,7 @@ message LogsCount {
   uint64 logs_count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "100" }];
   Severity severity = 3;
   Priority priority = 4;
+  optional string subsystem_name = 5;
 }
 
 message GetLogsCountResponse {
