@@ -45,6 +45,7 @@ mod tests {
                     application: vec!["myapp".into()],
                     subsystem: vec!["myapp".into()],
                 }),
+                None,
             )
             .await
             .unwrap();
