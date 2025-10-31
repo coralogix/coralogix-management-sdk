@@ -36,6 +36,7 @@ import (
 	webhooks "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/outgoing_webhooks_service"
 	presets "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/presets_service"
 	saml "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/saml_configuration_service"
+	targets "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/target_service"
 	groups "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/team_permissions_management_service"
 	views "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/views_service"
 	//slos "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/slo_service"
@@ -73,9 +74,10 @@ type ClientSet struct {
 	presets              *presets.PresetsServiceAPIService
 	saml                 *saml.SAMLConfigurationServiceAPIService
 	//slos             *slos.SLOServiceAPIService
-	webhooks     *webhooks.OutgoingWebhooksServiceAPIService
-	views        *views.ViewsServiceAPIService
-	viewsFolders *viewsfolders.FoldersForViewsServiceAPIService
+	webhooks          *webhooks.OutgoingWebhooksServiceAPIService
+	views             *views.ViewsServiceAPIService
+	viewsFolders      *viewsfolders.FoldersForViewsServiceAPIService
+	archiveLogsTarget *targets.TargetServiceAPIService
 }
 
 // Actions returns the ActionsServiceAPIService client.
@@ -178,6 +180,11 @@ func (c *ClientSet) ViewsFolders() *viewsfolders.FoldersForViewsServiceAPIServic
 	return c.viewsFolders
 }
 
+// ArchiveLogsTarget returns the TargetServiceAPIService client.
+func (c *ClientSet) ArchiveLogsTarget() *targets.TargetServiceAPIService {
+	return c.archiveLogsTarget
+}
+
 // NewClientSet builds a ClientSet from CallPropertiesCreator.
 func NewClientSet(c CallPropertiesCreator) *ClientSet {
 	return &ClientSet{
@@ -198,9 +205,10 @@ func NewClientSet(c CallPropertiesCreator) *ClientSet {
 		presets:              NewPresetsClient(c),
 		saml:                 NewSAMLClient(c),
 		//slos:             NewSLOsClient(c),
-		webhooks:     NewWebhooksClient(c),
-		views:        NewViewsClient(c),
-		viewsFolders: NewViewsFoldersClient(c),
+		webhooks:          NewWebhooksClient(c),
+		views:             NewViewsClient(c),
+		viewsFolders:      NewViewsFoldersClient(c),
+		archiveLogsTarget: NewArchiveLogsTargetClient(c),
 	}
 }
 
@@ -402,6 +410,16 @@ func NewViewsFoldersClient(c CallPropertiesCreator) *viewsfolders.FoldersForView
 		cfg.AddDefaultHeader(k, v)
 	}
 	return viewsfolders.NewAPIClient(cfg).FoldersForViewsServiceAPI
+}
+
+// NewArchiveLogsTargetClient builds a new TargetServiceAPIService from CallPropertiesCreator.
+func NewArchiveLogsTargetClient(c CallPropertiesCreator) *targets.TargetServiceAPIService {
+	cfg := targets.NewConfiguration()
+	cfg.Servers = targets.ServerConfigurations{{URL: c.URL()}}
+	for k, v := range c.Headers() {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return targets.NewAPIClient(cfg).TargetServiceAPI
 }
 
 // RegionFromEnv reads the Coralogix region from the environment variable.
