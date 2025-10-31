@@ -80,3 +80,8 @@ func Code(err error) int {
 	}
 	return 0
 }
+
+// IsNotFound checks if the error represents a 404 Not Found response.
+func IsNotFound(err error) bool {
+	return Code(err) == http.StatusNotFound
+}
