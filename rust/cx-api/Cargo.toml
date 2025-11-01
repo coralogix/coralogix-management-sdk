@@ -90,5 +90,5 @@ tonic = { workspace = true }
 large_enum_variant = "allow"
 
 [build-dependencies]
-prost-wkt-build = "0.6"
+prost-wkt-build = "0.7"
 tonic-build = { version = "0.12", features = ["prost"] }
