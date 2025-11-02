@@ -27,6 +27,7 @@ import (
 	dashboardfolders "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/dashboard_folders_service"
 	dashboards "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/dashboard_service"
 	enrichments "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/enrichments_service"
+	events2metrics "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/events2metrics_service"
 	extensiondeployments "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/extension_deployment_service"
 	extensions "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/extension_service"
 	viewsfolders "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/folders_for_views_service"
@@ -67,6 +68,7 @@ type ClientSet struct {
 	dashboardFolders     *dashboardfolders.DashboardFoldersServiceAPIService
 	enrichments          *enrichments.EnrichmentsServiceAPIService
 	extensions           *extensions.ExtensionServiceAPIService
+	events2metrics       *events2metrics.Events2MetricsServiceAPIService
 	extensionDeployments *extensiondeployments.ExtensionDeploymentServiceAPIService
 	groups               *groups.TeamPermissionsManagementServiceAPIService
 	integrations         *integrations.IntegrationServiceAPIService
@@ -123,6 +125,11 @@ func (c *ClientSet) DashboardFolders() *dashboardfolders.DashboardFoldersService
 // Enrichments returns the EnrichmentsServiceAPIService client.
 func (c *ClientSet) Enrichments() *enrichments.EnrichmentsServiceAPIService {
 	return c.enrichments
+}
+
+// Events2Metrics returns the Events2MetricsServiceAPIService client.
+func (c *ClientSet) Events2Metrics() *events2metrics.Events2MetricsServiceAPIService {
+	return c.events2metrics
 }
 
 // Extensions returns the ExtensionServiceAPIService client.
@@ -197,6 +204,7 @@ func NewClientSet(c CallPropertiesCreator) *ClientSet {
 		dashboards:           NewDashboardClient(c),
 		dashboardFolders:     NewDashboardFoldersClient(c),
 		enrichments:          NewEnrichmentsClient(c),
+		events2metrics:       NewEvents2MetricsClient(c),
 		extensions:           NewExtensionsClient(c),
 		extensionDeployments: NewExtensionDeploymentsClient(c),
 		groups:               NewGroupsClient(c),
@@ -300,6 +308,16 @@ func NewEnrichmentsClient(c CallPropertiesCreator) *enrichments.EnrichmentsServi
 		cfg.AddDefaultHeader(k, v)
 	}
 	return enrichments.NewAPIClient(cfg).EnrichmentsServiceAPI
+}
+
+// NewEvents2MetricsClient builds a new Events2MetricsServiceAPIService from CallPropertiesCreator.
+func NewEvents2MetricsClient(c CallPropertiesCreator) *events2metrics.Events2MetricsServiceAPIService {
+	cfg := events2metrics.NewConfiguration()
+	cfg.Servers = events2metrics.ServerConfigurations{{URL: c.URL()}}
+	for k, v := range c.Headers() {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return events2metrics.NewAPIClient(cfg).Events2MetricsServiceAPI
 }
 
 // NewExtensionsClient builds a new ExtensionServiceAPIService from CallPropertiesCreator.
