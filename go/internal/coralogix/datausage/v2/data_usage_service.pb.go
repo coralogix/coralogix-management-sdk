@@ -487,10 +487,11 @@ type GetLogsCountRequest struct {
 	Resolution *durationpb.Duration `protobuf:"bytes,2,opt,name=resolution,proto3" json:"resolution,omitempty"`
 	// Example: (application1 OR application2) AND (subsystem1 OR subsystem2)
 	// Match occurs on full match
-	Filters              *ScopesFilter `protobuf:"bytes,3,opt,name=filters,proto3,oneof" json:"filters,omitempty"`
-	SubsystemAggregation *bool         `protobuf:"varint,4,opt,name=subsystem_aggregation,json=subsystemAggregation,proto3,oneof" json:"subsystem_aggregation,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	Filters                *ScopesFilter `protobuf:"bytes,3,opt,name=filters,proto3,oneof" json:"filters,omitempty"`
+	SubsystemAggregation   *bool         `protobuf:"varint,4,opt,name=subsystem_aggregation,json=subsystemAggregation,proto3,oneof" json:"subsystem_aggregation,omitempty"`
+	ApplicationAggregation *bool         `protobuf:"varint,5,opt,name=application_aggregation,json=applicationAggregation,proto3,oneof" json:"application_aggregation,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *GetLogsCountRequest) Reset() {
@@ -551,15 +552,23 @@ func (x *GetLogsCountRequest) GetSubsystemAggregation() bool {
 	return false
 }
 
+func (x *GetLogsCountRequest) GetApplicationAggregation() bool {
+	if x != nil && x.ApplicationAggregation != nil {
+		return *x.ApplicationAggregation
+	}
+	return false
+}
+
 type LogsCount struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-	LogsCount     uint64                 `protobuf:"varint,2,opt,name=logs_count,json=logsCount,proto3" json:"logs_count,omitempty"`
-	Severity      Severity               `protobuf:"varint,3,opt,name=severity,proto3,enum=com.coralogix.datausage.v2.Severity" json:"severity,omitempty"`
-	Priority      Priority               `protobuf:"varint,4,opt,name=priority,proto3,enum=com.coralogix.datausage.v2.Priority" json:"priority,omitempty"`
-	SubsystemName *string                `protobuf:"bytes,5,opt,name=subsystem_name,json=subsystemName,proto3,oneof" json:"subsystem_name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Timestamp       *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	LogsCount       uint64                 `protobuf:"varint,2,opt,name=logs_count,json=logsCount,proto3" json:"logs_count,omitempty"`
+	Severity        Severity               `protobuf:"varint,3,opt,name=severity,proto3,enum=com.coralogix.datausage.v2.Severity" json:"severity,omitempty"`
+	Priority        Priority               `protobuf:"varint,4,opt,name=priority,proto3,enum=com.coralogix.datausage.v2.Priority" json:"priority,omitempty"`
+	SubsystemName   *string                `protobuf:"bytes,5,opt,name=subsystem_name,json=subsystemName,proto3,oneof" json:"subsystem_name,omitempty"`
+	ApplicationName *string                `protobuf:"bytes,6,opt,name=application_name,json=applicationName,proto3,oneof" json:"application_name,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *LogsCount) Reset() {
@@ -623,6 +632,13 @@ func (x *LogsCount) GetPriority() Priority {
 func (x *LogsCount) GetSubsystemName() string {
 	if x != nil && x.SubsystemName != nil {
 		return *x.SubsystemName
+	}
+	return ""
+}
+
+func (x *LogsCount) GetApplicationName() string {
+	if x != nil && x.ApplicationName != nil {
+		return *x.ApplicationName
 	}
 	return ""
 }
@@ -1467,7 +1483,7 @@ const file_com_coralogix_datausage_v2_data_usage_service_proto_rawDesc = "" +
 	"\vspans_count\x18\x01 \x03(\v2&.com.coralogix.datausage.v2.SpansCountR\n" +
 	"spansCount:\xd2\x01\x9aA\xce\x01\n" +
 	"N*\x18Get Spans Count Response22This data structure is used to return spans count.*|\n" +
-	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/\"\x92\x04\n" +
+	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/\"\xec\x04\n" +
 	"\x13GetLogsCountRequest\x12D\n" +
 	"\n" +
 	"date_range\x18\x01 \x01(\v2%.com.coralogix.datausage.v2.DateRangeR\tdateRange\x129\n" +
@@ -1475,23 +1491,27 @@ const file_com_coralogix_datausage_v2_data_usage_service_proto_rawDesc = "" +
 	"resolution\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\n" +
 	"resolution\x12G\n" +
 	"\afilters\x18\x03 \x01(\v2(.com.coralogix.datausage.v2.ScopesFilterH\x00R\afilters\x88\x01\x01\x128\n" +
-	"\x15subsystem_aggregation\x18\x04 \x01(\bH\x01R\x14subsystemAggregation\x88\x01\x01:\xd0\x01\x9aA\xcc\x01\n" +
+	"\x15subsystem_aggregation\x18\x04 \x01(\bH\x01R\x14subsystemAggregation\x88\x01\x01\x12<\n" +
+	"\x17application_aggregation\x18\x05 \x01(\bH\x02R\x16applicationAggregation\x88\x01\x01:\xd0\x01\x9aA\xcc\x01\n" +
 	"L*\x16Get Logs Count Request22This data structure is used to request logs count.*|\n" +
 	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/B\n" +
 	"\n" +
 	"\b_filtersB\x18\n" +
-	"\x16_subsystem_aggregation\"\xf2\x03\n" +
+	"\x16_subsystem_aggregationB\x1a\n" +
+	"\x18_application_aggregation\"\xb7\x04\n" +
 	"\tLogsCount\x128\n" +
 	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12'\n" +
 	"\n" +
 	"logs_count\x18\x02 \x01(\x04B\b\x9aA\x05J\x03100R\tlogsCount\x12@\n" +
 	"\bseverity\x18\x03 \x01(\x0e2$.com.coralogix.datausage.v2.SeverityR\bseverity\x12@\n" +
 	"\bpriority\x18\x04 \x01(\x0e2$.com.coralogix.datausage.v2.PriorityR\bpriority\x12*\n" +
-	"\x0esubsystem_name\x18\x05 \x01(\tH\x00R\rsubsystemName\x88\x01\x01:\xbe\x01\x9aA\xba\x01\n" +
+	"\x0esubsystem_name\x18\x05 \x01(\tH\x00R\rsubsystemName\x88\x01\x01\x12.\n" +
+	"\x10application_name\x18\x06 \x01(\tH\x01R\x0fapplicationName\x88\x01\x01:\xbe\x01\x9aA\xba\x01\n" +
 	":*\n" +
 	"Logs Count2,This data structure represents a logs count.*|\n" +
 	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/B\x11\n" +
-	"\x0f_subsystem_name\"\xaf\x02\n" +
+	"\x0f_subsystem_nameB\x13\n" +
+	"\x11_application_name\"\xaf\x02\n" +
 	"\x14GetLogsCountResponse\x12D\n" +
 	"\n" +
 	"logs_count\x18\x01 \x03(\v2%.com.coralogix.datausage.v2.LogsCountR\tlogsCount:\xd0\x01\x9aA\xcc\x01\n" +
