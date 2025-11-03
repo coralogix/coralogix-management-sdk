@@ -3,11 +3,10 @@ syntax = "proto3";
 package com.coralogix.quota.v1;
 
 import "google/protobuf/wrappers.proto";
-
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message TogglePolicyResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Toggle Policy Response"
       description: "This data structue is obtained when toggling a policy by its ID."
@@ -21,6 +20,6 @@ message TogglePolicyResponse {
       description: "Find out more about quota management."
     }
   };
-  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"id\"" }];
-  google.protobuf.BoolValue enabled = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"id\""}];
+  google.protobuf.BoolValue enabled = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "true"}];
 }
