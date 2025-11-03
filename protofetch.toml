@@ -162,7 +162,7 @@ allow_policies = [
 
 [cx-api-quota]
 url = 'github.com/coralogix/cx-api-quota'
-revision = "v0.0.13"
+revision = "v0.0.14"
 allow_policies = [
     "src/com/coralogix/quota/v1/placement.proto",
     "src/com/coralogix/quota/v1/archive_retention.proto",

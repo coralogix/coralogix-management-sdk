@@ -2,25 +2,21 @@ syntax = "proto3";
 
 package com.coralogix.quota.v1;
 
-import "google/protobuf/wrappers.proto";
-import "com/coralogix/quota/v1/enums.proto";
-import "com/coralogix/quota/v1/rule.proto";
 import "com/coralogix/quota/v1/archive_retention.proto";
+import "com/coralogix/quota/v1/enums.proto";
 import "com/coralogix/quota/v1/log_rules.proto";
+import "com/coralogix/quota/v1/rule.proto";
 import "com/coralogix/quota/v1/span_rules.proto";
-
-
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 // In an atomic operation delete all existing log policies and create the provided list by order
 message AtomicOverwriteLogPoliciesRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Atomic Overwrite Log Policies Request"
       description: "In an atomic operation delete all existing log policies and create the provided list by order."
-      required: [
-        "policies"
-      ]
+      required: ["policies"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
@@ -32,13 +28,11 @@ message AtomicOverwriteLogPoliciesRequest {
 
 // In an atomic operation delete all existing span policies and create the provided list by order
 message AtomicOverwriteSpanPoliciesRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Atomic Overwrite Span Policies Request"
       description: "In an atomic operation delete all existing span policies and create the provided list by order."
-      required: [
-        "policies"
-      ]
+      required: ["policies"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
@@ -49,11 +43,11 @@ message AtomicOverwriteSpanPoliciesRequest {
 }
 
 message CreateSpanPolicyRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Create Span Policy Request"
       description: "This data structue is used to create a new span policy."
-      required : [
+      required: [
         "policy",
         "span_rules"
       ]
@@ -68,11 +62,11 @@ message CreateSpanPolicyRequest {
 }
 
 message CreateLogPolicyRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Create Log Policy Request"
       description: "This data structue is used to create a new log policy."
-      required : [
+      required: [
         "policy",
         "log_rules"
       ]
@@ -87,11 +81,11 @@ message CreateLogPolicyRequest {
 }
 
 message CreateGenericPolicyRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Create Generic Policy Request"
       description: "This data structue is used to create a new policy."
-      required : [
+      required: [
         "name",
         "description",
         "priority"
@@ -102,8 +96,8 @@ message CreateGenericPolicyRequest {
       description: "Find out more about quota management."
     }
   };
-  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"My Policy\"" }];
-  google.protobuf.StringValue description = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"My Policy Description\"" }];
+  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"My Policy\""}];
+  google.protobuf.StringValue description = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"My Policy Description\""}];
   Priority priority = 3;
   optional Rule application_rule = 4;
   optional Rule subsystem_rule = 5;

@@ -2,13 +2,12 @@ syntax = "proto3";
 
 package com.coralogix.quota.v1;
 
-import "google/protobuf/wrappers.proto";
 import "com/coralogix/quota/v1/enums.proto";
-
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message TagRule {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Tag Rule"
       description: "Tag rule for a policy."
@@ -23,7 +22,7 @@ message TagRule {
       description: "Find out more about quota management."
     }
   };
-  RuleTypeId rule_type_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"rule_type_id\"" }];
-  google.protobuf.StringValue tag_name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"tag_name\"" }];
-  google.protobuf.StringValue tag_value = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"tag_value\"" }];
+  RuleTypeId rule_type_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"rule_type_id\""}];
+  google.protobuf.StringValue tag_name = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"tag_name\""}];
+  google.protobuf.StringValue tag_value = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"tag_value\""}];
 }

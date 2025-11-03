@@ -3,17 +3,14 @@ syntax = "proto3";
 package com.coralogix.quota.v1;
 
 import "com/coralogix/quota/v1/create_policy_request.proto";
-
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message AtomicBatchCreatePolicyRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Atomic Batch Create Policy Request"
       description: "This data structure is used to create multiple policies atomically."
-      required: [
-        "policy_requests"
-      ]
+      required: ["policy_requests"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"

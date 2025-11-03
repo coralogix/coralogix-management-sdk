@@ -24,17 +24,17 @@ import "com/coralogix/quota/v1/update_policy_request.proto";
 import "com/coralogix/quota/v1/update_policy_response.proto";
 import "com/coralogixapis/common/v1/audit_log.proto";
 import "google/api/annotations.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 service PoliciesService {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Policies Service"
     description: "View and manage your TCO policies"
   };
 
   rpc GetPolicy(GetPolicyRequest) returns (GetPolicyResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get Policy";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -52,13 +52,13 @@ service PoliciesService {
     };
     option (google.api.http) = {
       get: "/dataplans/policies/v1/{id}"
-      additional_bindings: { get: "/v1/policies/{id}" }
+      additional_bindings: {get: "/v1/policies/{id}"}
     };
   }
 
   rpc CreatePolicy(CreatePolicyRequest) returns (CreatePolicyResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Create Policy";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -77,13 +77,16 @@ service PoliciesService {
     option (google.api.http) = {
       post: "/dataplans/policies/v1"
       body: "*"
-      additional_bindings: { post: "/v1/policies" body: "*" }
+      additional_bindings: {
+        post: "/v1/policies"
+        body: "*"
+      }
     };
   }
 
   rpc UpdatePolicy(UpdatePolicyRequest) returns (UpdatePolicyResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Update Policy";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -102,13 +105,16 @@ service PoliciesService {
     option (google.api.http) = {
       put: "/dataplans/policies/v1"
       body: "*"
-      additional_bindings: { put: "/v1/policies" body: "*" }
+      additional_bindings: {
+        put: "/v1/policies"
+        body: "*"
+      }
     };
   }
 
   rpc GetCompanyPolicies(GetCompanyPoliciesRequest) returns (GetCompanyPoliciesResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get Company Policies";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -126,13 +132,13 @@ service PoliciesService {
     };
     option (google.api.http) = {
       get: "/dataplans/policies/v1"
-      additional_bindings: { get: "/v1/policies" }
+      additional_bindings: {get: "/v1/policies"}
     };
   }
 
   rpc DeletePolicy(DeletePolicyRequest) returns (DeletePolicyResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Delete Policy";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -150,13 +156,13 @@ service PoliciesService {
     };
     option (google.api.http) = {
       delete: "/dataplans/policies/v1/{id}"
-      additional_bindings: { delete: "/v1/policies/{id}" }
+      additional_bindings: {delete: "/v1/policies/{id}"}
     };
   }
 
   rpc ReorderPolicies(ReorderPoliciesRequest) returns (ReorderPoliciesResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Reorder Policies";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -175,13 +181,16 @@ service PoliciesService {
     option (google.api.http) = {
       post: "/dataplans/policies/v1/reorder"
       body: "*"
-      additional_bindings: { post: "/v1/policies:reorder" body: "*" }
+      additional_bindings: {
+        post: "/v1/policies:reorder"
+        body: "*"
+      }
     };
   }
 
   rpc BulkTestLogPolicies(BulkTestLogPoliciesRequest) returns (BulkTestLogPoliciesResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Bulk Test Log Policies";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -200,13 +209,16 @@ service PoliciesService {
     option (google.api.http) = {
       post: "/dataplans/policies/v1/bulkTestLog"
       body: "*"
-      additional_bindings: { post: "/v1/policies:bulkTestLog" body: "*" }
+      additional_bindings: {
+        post: "/v1/policies:bulkTestLog"
+        body: "*"
+      }
     };
   }
 
   rpc TogglePolicy(TogglePolicyRequest) returns (TogglePolicyResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Toggle Policy";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -225,13 +237,16 @@ service PoliciesService {
     option (google.api.http) = {
       post: "/dataplans/policies/v1/toggle"
       body: "*"
-      additional_bindings: { post: "/v1/policies:toggle" body: "*" }
+      additional_bindings: {
+        post: "/v1/policies:toggle"
+        body: "*"
+      }
     };
   }
 
   rpc AtomicBatchCreatePolicy(AtomicBatchCreatePolicyRequest) returns (AtomicBatchCreatePolicyResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Bulk Create Policy";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -250,13 +265,16 @@ service PoliciesService {
     option (google.api.http) = {
       post: "/dataplans/policies/v1/bulkCreate"
       body: "*"
-      additional_bindings: { post: "/v1/policies:bulkCreate" body: "*" }
+      additional_bindings: {
+        post: "/v1/policies:bulkCreate"
+        body: "*"
+      }
     };
   }
 
   rpc AtomicOverwriteLogPolicies(AtomicOverwriteLogPoliciesRequest) returns (AtomicOverwriteLogPoliciesResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Deletes all existing log policies and creates the newly provided one atomically";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -275,13 +293,16 @@ service PoliciesService {
     option (google.api.http) = {
       post: "/dataplans/policies/v1/atomicOverwriteLogPolicies"
       body: "*"
-      additional_bindings: { post: "/v1/policies:atomicOverwriteLogPolicies" body: "*" }
+      additional_bindings: {
+        post: "/v1/policies:atomicOverwriteLogPolicies"
+        body: "*"
+      }
     };
   }
 
   rpc AtomicOverwriteSpanPolicies(AtomicOverwriteSpanPoliciesRequest) returns (AtomicOverwriteSpanPoliciesResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Deletes all existing span policies and creates the newly provided one atomically";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -300,7 +321,10 @@ service PoliciesService {
     option (google.api.http) = {
       post: "/dataplans/policies/v1/atomicOverwriteSpanPolicies"
       body: "*"
-      additional_bindings: { post: "/v1/policies:atomicOverwriteSpanPolicies" body: "*" }
+      additional_bindings: {
+        post: "/v1/policies:atomicOverwriteSpanPolicies"
+        body: "*"
+      }
     };
   }
 }
