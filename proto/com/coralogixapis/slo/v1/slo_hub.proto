@@ -3,6 +3,8 @@ package com.coralogixapis.slo.v1;
 
 import "com/coralogixapis/slo/v1/slo.proto";
 
+
+
 enum SloStatus {
   SLO_STATUS_UNSPECIFIED = 0;
   SLO_STATUS_OK = 1;
@@ -39,7 +41,7 @@ message SloError {
 }
 
 enum ErrorType {
-  ERROR_TYPE_UNSPECIFIED = 0;
+  ERROR_TYPE_UNSPECIFIED = 0; 
   GENERAL = 1;
   CARDINALITY_LIMIT_EXCEEDED = 2;
 }
@@ -59,17 +61,13 @@ message GroupValue {
 }
 
 message RequestBasedPermutationData {
-  uint32 good_events = 1 [deprecated = true];
-  uint32 bad_events = 2 [deprecated = true];
-  int64 good_events_v2 = 3;
-  int64 bad_events_v2 = 4;
+  uint32 good_events = 1;
+  uint32 bad_events = 2;
 }
 
 message WindowBasedPermutationData {
-  uint32 good_windows = 1 [deprecated = true];
-  uint32 bad_windows = 2 [deprecated = true];
-  int64 good_windows_v2 = 3;
-  int64 bad_windows_v2 = 4;
+  uint32 good_windows = 1;
+  uint32 bad_windows = 2;
 }
 
 message SloPermutationData {

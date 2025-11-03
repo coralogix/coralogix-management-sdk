@@ -12,7 +12,8 @@ message Metric {
       required: ["query"]
     }
   };
-  string query = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"sum(rate(http_requests_total{status=\\\"200\\\"}[5m]))\""}];
+  string query = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"sum(rate(http_requests_total{status=\\\"200\\\"}[5m]))\"" }];
+
 }
 
 enum ComparisonOperator {
@@ -35,20 +36,13 @@ enum MissingDataStrategy {
   MISSING_DATA_STRATEGY_BAD = 2;
 }
 
-enum SloType {
-  SLO_TYPE_REQUEST = 0;
-  SLO_TYPE_WINDOW = 1;
-}
 
 message RequestBasedMetricSli {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "RequestBasedMetricSli"
       description: "Definition of a request-based SLI based on metrics"
-      required: [
-        "good_events",
-        "total_events"
-      ]
+      required: ["good_events", "total_events"]
     }
   };
   Metric good_events = 1;
@@ -60,19 +54,15 @@ message WindowBasedMetricSli {
     json_schema: {
       title: "WindowBasedMetricSli"
       description: "Definition of a window-based SLI based on metrics"
-      required: [
-        "query",
-        "window",
-        "comparison_operator",
-        "threshold"
-      ]
+      required: ["query", "window", "comparison_operator", "threshold"]
     }
   };
   Metric query = 1;
   WindowSloWindow window = 2;
   ComparisonOperator comparison_operator = 3;
-  float threshold = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "0.95"}];
+  float threshold = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "0.95" }];
   MissingDataStrategy missing_data_strategy = 5;
+
 }
 
 enum SloTimeFrame {
@@ -91,7 +81,7 @@ message Revision {
       required: []
     }
   };
-  int32 revision = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "1"}];
+  int32 revision = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "1" }];
   google.protobuf.Timestamp update_time = 2;
 }
 
@@ -106,37 +96,33 @@ message Grouping {
   repeated string labels = 1;
 }
 
-message Slo {
+message Slo{
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Slo"
       description: "Definition of an SLO"
-      required: [
-        "name",
-        "target_threshold_percentage",
-        "window",
-        "sli"
-      ]
+      required: ["name", "target_threshold_percentage", "window", "sli"]
     }
   };
-  optional string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"b11919d5-ef85-4bb1-8655-02640dbe94d9\""}];
-  string name = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"Example Slo Name\""}];
-  optional string description = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"A brief description of my SLO\""}];
-  optional string creator = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"test@domain.com\""}];
+  optional string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"b11919d5-ef85-4bb1-8655-02640dbe94d9\"" }];
+  string name = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"Example Slo Name\"" }];
+  optional string description = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"A brief description of my SLO\"" }];
+  optional string creator = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"test@domain.com\"" }];
   map<string, string> labels = 5;
   optional Revision revision = 6;
   optional Grouping grouping = 7;
   google.protobuf.Timestamp create_time = 8;
   google.protobuf.Timestamp update_time = 9;
-  float target_threshold_percentage = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "99.999"}];
+  float target_threshold_percentage = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "99.999" }];
   oneof window {
     SloTimeFrame slo_time_frame = 11;
-  }
+  };
   oneof sli {
     RequestBasedMetricSli request_based_metric_sli = 12;
     WindowBasedMetricSli window_based_metric_sli = 13;
-  }
-  optional SloType type = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "SLO_TYPE_REQUEST"}];
+  };
+  optional string type = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"request\"" }];
+
 }
 
 enum SloConstantFilterField {
@@ -155,8 +141,7 @@ message SloFilterField {
   };
   oneof field {
     SloConstantFilterField const_filter = 1;
-    string label_name = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"environment\""}];
-    bool slo_type = 3;
+    string label_name = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"environment\"" }];
   }
 }
 
@@ -168,18 +153,7 @@ message IsFilterPredicate {
       required: []
     }
   };
-  oneof values {
-    StringValues string_values = 1;
-    TypeValues type_values = 2;
-  }
-}
-
-message StringValues {
-  repeated string values = 1;
-}
-
-message TypeValues {
-  repeated SloType values = 1;
+  repeated string is = 1;
 }
 
 message SloFilterPredicate {
@@ -200,12 +174,20 @@ message SloFilter {
     json_schema: {
       title: "SloFilter"
       description: "A filter for SLOs, consisting of a field and a predicate"
-      required: [
-        "field",
-        "predicate"
-      ]
+      required: ["field", "predicate"]
     }
   };
   SloFilterField field = 1;
   SloFilterPredicate predicate = 2;
+}
+
+message SloFilters {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "SloFilters"
+      description: "A collection of filters for SLOs"
+      required: []
+    }
+  };
+  repeated SloFilter filters = 1;
 }
