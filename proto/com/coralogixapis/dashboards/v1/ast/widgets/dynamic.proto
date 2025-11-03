@@ -792,6 +792,8 @@ message Dynamic {
         description: "Optional number indicating the max value for gradient color axis. Automatically calculated from data if not provided."
         example: "1000"
       }];
+
+      HeatmapTooltip tooltip = 13 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Tooltip settings for the widget"}];
     }
 
     enum HeatmapColorPreset {
@@ -804,6 +806,14 @@ message Dynamic {
       HEATMAP_COLOR_PRESET_GREEN_REVERSED = 6;
       HEATMAP_COLOR_PRESET_RED_REVERSED = 7;
       HEATMAP_COLOR_PRESET_THRESHOLD_REVERSED = 8;
+    }
+
+    message HeatmapTooltip {
+      google.protobuf.StringValue message_template = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Custom template for the heatmap tooltip"
+        example: '{ "value": "value = {{_count}}" }'
+      }];
+      repeated v1.common.ObservationField labels = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Labels to display on the tooltip, should reference fields used in x-axis or y-axis"}];
     }
 
     message TimeSeriesTooltip {
