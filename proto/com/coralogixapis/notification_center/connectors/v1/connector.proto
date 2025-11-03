@@ -47,7 +47,6 @@ message Connector {
   // Configuration override templates for specific entity types, values from connector_configs will be used if not overridden
   repeated EntityTypeConfigOverrides config_overrides = 11;
   ConnectorConfig connector_config = 12;
-  Diagnostics diagnostics = 13;
 }
 
 message ConnectorInternal {
@@ -64,7 +63,6 @@ message ConnectorInternal {
   // Configuration override templates for specific entity types, values from connector_configs will be used if not overridden
   repeated EntityTypeConfigOverrides config_overrides = 9;
   ConnectorConfig connector_config = 10;
-  Diagnostics diagnostics = 11;
 }
 
 message EntityTypeConfigOverrides {
@@ -121,25 +119,4 @@ message ConnectorTypeSummary {
   };
   ConnectorType type = 1;
   uint32 count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"5\""}];
-}
-
-message Diagnostics {
-  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Connector Diagnostics"
-      description: "Allows to configure rules for data written into 'notification.deliveries' dataset"
-      required: []
-    }
-    external_docs: {
-      url: "https://coralogix.com/docs/user-guides/data-layer/datasets/"
-      description: "Find out more about datasets"
-    }
-  };
-  Delivery delivery = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Allows to configure what notification data should be written into a dataset."}];
-
-  enum Delivery {
-    DELIVERY_UNSPECIFIED = 0;
-    DISABLED = 1;
-    ERRORS_ONLY = 2;
-  }
 }
