@@ -3207,4 +3207,26 @@ enum Permission {
     (hidden) = true,
     (is_team_level) = true
   ];
+  PERMISSION_SYSTEM_DATASETS_READ_ACCESS_POLICY = 293 [
+    (expression) = "system-datasets:ReadAccessPolicy",
+    (action) = ACTION_READ_ACCESS_POLICY,
+    (resource) = RESOURCE_SYSTEM_DATASETS,
+    (permission_group) = PERMISSION_GROUP_DATAENGINE,
+    (description) = "Read access policy for a specific dataset.",
+    (doc_link) = "",
+    (explanation) = "Read access policy for a specific dataset.",
+    (hidden) = true,
+    (is_team_level) = true
+  ];
+  PERMISSION_SYSTEM_DATASETS_UPDATE_ACCESS_POLICY = 294 [
+    (expression) = "system-datasets:UpdateAccessPolicy",
+    (action) = ACTION_UPDATE_ACCESS_POLICY,
+    (resource) = RESOURCE_SYSTEM_DATASETS,
+    (permission_group) = PERMISSION_GROUP_DATAENGINE,
+    (description) = "Update access policy for a specific dataset.",
+    (doc_link) = "",
+    (explanation) = "Update access policy for a specific dataset.",
+    (hidden) = true,
+    (is_team_level) = true
+  ];
 }

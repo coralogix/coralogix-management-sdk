@@ -308,7 +308,7 @@ func (x *MessageConfigField) GetTemplate() string {
 
 type NotificationRouter struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            *string                `protobuf:"bytes,1,opt,name=id,proto3,oneof" json:"id,omitempty"`
 	NotifyOn      *NotifyOn              `protobuf:"varint,2,opt,name=notify_on,json=notifyOn,proto3,enum=com.coralogixapis.alerts.v3.NotifyOn,oneof" json:"notify_on,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -345,8 +345,8 @@ func (*NotificationRouter) Descriptor() ([]byte, []int) {
 }
 
 func (x *NotificationRouter) GetId() string {
-	if x != nil {
-		return x.Id
+	if x != nil && x.Id != nil {
+		return *x.Id
 	}
 	return ""
 }
@@ -394,11 +394,12 @@ const file_com_coralogixapis_alerts_v3_alert_def_type_definition_notification_de
 	"field_name\x18\x01 \x01(\tB7\x9aA42#The name of the configuration fieldJ\r\"description\"R\tfieldName\x12d\n" +
 	"\btemplate\x18\x02 \x01(\tBH\x9aAE2(The template for the configuration fieldJ\x12\"template_example\"\xa2\x02\x04teraR\btemplate:c\x9aA`\n" +
 	"^*\x14Message config field2.Configuration field for a notification message\xd2\x01\n" +
-	"field_name\xd2\x01\btemplate\"\x87\x03\n" +
-	"\x12NotificationRouter\x12g\n" +
-	"\x02id\x18\x01 \x01(\tBW\x9aAT2!The ID of the notification routerJ&\"123e4567-e89b-12d3-a456-426614174000\"\xa2\x02\x06UUIDv4R\x02id\x12\xaf\x01\n" +
-	"\tnotify_on\x18\x02 \x01(\x0e2%.com.coralogixapis.alerts.v3.NotifyOnBf\x9aAc29The condition under which the notification should be sentJ&\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"H\x00R\bnotifyOn\x88\x01\x01:H\x9aAE\n" +
-	"C*\x13Notification router2'Configuration for routing notifications\xd2\x01\x02idB\f\n" +
+	"field_name\xd2\x01\btemplate\"\x8e\x03\n" +
+	"\x12NotificationRouter\x12l\n" +
+	"\x02id\x18\x01 \x01(\tBW\x9aAT2!The ID of the notification routerJ&\"123e4567-e89b-12d3-a456-426614174000\"\xa2\x02\x06UUIDv4H\x00R\x02id\x88\x01\x01\x12\xaf\x01\n" +
+	"\tnotify_on\x18\x02 \x01(\x0e2%.com.coralogixapis.alerts.v3.NotifyOnBf\x9aAc29The condition under which the notification should be sentJ&\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"H\x01R\bnotifyOn\x88\x01\x01:C\x9aA@\n" +
+	">*\x13Notification router2'Configuration for routing notificationsB\x05\n" +
+	"\x03_idB\f\n" +
 	"\n" +
 	"_notify_onb\x06proto3"
 
