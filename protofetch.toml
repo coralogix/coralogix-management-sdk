@@ -283,7 +283,7 @@ revision = "v0.3.5"
 
 [cx-api-data-usage]
 url = 'github.com/coralogix/cx-api-data-usage'
-revision = "v0.3.26"
+revision = "v0.3.27"
 allow_policies = [
     "src/com/coralogix/datausage/v1/common.proto",
     "src/com/coralogix/datausage/v2/data_usage.proto",
