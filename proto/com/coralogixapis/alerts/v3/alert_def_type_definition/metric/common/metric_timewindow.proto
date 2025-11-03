@@ -7,9 +7,7 @@ import "protoc-gen-openapiv3/options/annotations.proto";
 
 message MetricTimeWindow {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Metric time window"
-    }
+    json_schema: {title: "Metric time window"}
   };
   oneof type {
     MetricTimeWindowValue metric_time_window_specific_value = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {

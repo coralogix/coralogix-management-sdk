@@ -84,7 +84,7 @@ message IDPParameters {
     string metadata_content = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"<?xml version= ...\""}];
   }
   optional uint32 team_entity_id = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "1234567"}];
-  repeated string group_names = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "[\"group1\"]"}];
+  repeated string group_names = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"group1\""}];
 }
 
 message SetIDPParametersRequest {

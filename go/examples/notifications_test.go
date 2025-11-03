@@ -768,9 +768,7 @@ func CreateAlertWithRouter() *cxsdk.AlertDefProperties {
 		IncidentsSettings: nil,
 		PhantomMode:       &wrapperspb.BoolValue{Value: false},
 		NotificationGroup: &cxsdk.AlertDefNotificationGroup{
-			Router: &cxsdk.NotificationRouter{
-				Id: "router_default",
-			},
+			Router:      &cxsdk.NotificationRouter{},
 			GroupByKeys: []*wrapperspb.StringValue{},
 			Webhooks: []*cxsdk.AlertDefWebhooksSettings{
 				{

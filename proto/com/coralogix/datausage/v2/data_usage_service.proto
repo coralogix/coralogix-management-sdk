@@ -375,6 +375,7 @@ message GetLogsCountRequest {
   // Match occurs on full match
   optional ScopesFilter filters = 3;
   optional bool subsystem_aggregation = 4;
+  optional bool application_aggregation = 5;
 }
 
 message LogsCount {
@@ -394,6 +395,7 @@ message LogsCount {
   Severity severity = 3;
   Priority priority = 4;
   optional string subsystem_name = 5;
+  optional string application_name = 6;
 }
 
 message GetLogsCountResponse {

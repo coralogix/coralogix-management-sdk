@@ -6,9 +6,7 @@ import "protoc-gen-openapiv3/options/annotations.proto";
 
 message TracingTimeWindow {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Tracing time window"
-    }
+    json_schema: {title: "Tracing time window"}
   };
   oneof type {
     TracingTimeWindowValue tracing_time_window_value = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
