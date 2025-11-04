@@ -15,7 +15,7 @@ allow_policies = [
 
 [cx-api-alerts]
 url = 'github.com/coralogix/cx-api-alerts'
-revision = "v0.5.35"
+revision = "v0.5.36"
 allow_policies = [
     "src/com/coralogixapis/alerts/v3/alert_def.proto",
     "src/com/coralogixapis/alerts/v3/alert_def_notification_group.proto",
@@ -162,7 +162,7 @@ allow_policies = [
 
 [cx-api-quota]
 url = 'github.com/coralogix/cx-api-quota'
-revision = "v0.0.14"
+revision = "v0.0.15"
 allow_policies = [
     "src/com/coralogix/quota/v1/placement.proto",
     "src/com/coralogix/quota/v1/archive_retention.proto",
@@ -196,11 +196,12 @@ allow_policies = [
     "src/com/coralogix/quota/v1/toggle_policy_response.proto",
     "src/com/coralogix/quota/v1/update_policy_request.proto",
     "src/com/coralogix/quota/v1/update_policy_response.proto",
+    "src/com/coralogix/quota/v1/tco_priority_setting.proto",
 ]
 
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
-revision = "v2.7.42"
+revision = "v2.7.43"
 allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/annotation.proto",
     "src/com/coralogixapis/dashboards/v1/ast/dashboard.proto",
@@ -360,7 +361,7 @@ allow_policies = [
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
-revision = "v0.1.137"
+revision = "v0.1.138"
 allow_policies = [
     "src/com/coralogix/permissions/models/v1/permission_definitions.proto",
     "src/com/coralogix/permissions/v1/actions_resources.proto",

@@ -54,8 +54,7 @@ message TracingThresholdCondition {
       title: "Trace-based alert threshold condition"
       required: [
         "span_amount",
-        "time_window",
-        "condition_type"
+        "time_window"
       ]
     }
   };

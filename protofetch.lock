@@ -15,8 +15,8 @@ commit_hash = "11bae4e2cc0149c82f9271a33f2be44ddda34e61"
 [[dependencies]]
 name = "cx-api-alerts"
 url = "github.com/coralogix/cx-api-alerts"
-revision = "v0.5.35"
-commit_hash = "a1000d9d8b62680977271bd61b4606826b6b11b2"
+revision = "v0.5.36"
+commit_hash = "e0d082fdc27a689ad10f49526b2580b8f3921700"
 
 [[dependencies]]
 name = "cx-api-apm"
@@ -39,8 +39,8 @@ commit_hash = "5b3ac4ca2376cc60f987bf14918a63b92a7f0b2f"
 [[dependencies]]
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
-revision = "v2.7.42"
-commit_hash = "6ae0f6b390b2e3684761d4a464cc5e73e09cf92a"
+revision = "v2.7.43"
+commit_hash = "0da7c507de8ec840c33788d21f85c188df2352f0"
 
 [[dependencies]]
 name = "cx-api-data-usage"
@@ -75,9 +75,8 @@ commit_hash = "b960466df912ba67e7157e2f016af02eb6c9f669"
 [[dependencies]]
 name = "cx-api-lmd-model"
 url = "github.com/coralogix/cx-api-lmd-model"
-protocol = "ssh"
-revision = "v0.0.8"
-commit_hash = "c3519ef689aca1a640f985e7b339394028c261f4"
+branch = "master"
+commit_hash = "fa71ff99fdcdeaf13b525f65ad2b2afa9a70abcb"
 
 [[dependencies]]
 name = "cx-api-logs2metrics"
@@ -112,14 +111,14 @@ commit_hash = "fdf323b639fb777bf27be26a7a04f161f2e2f134"
 [[dependencies]]
 name = "cx-api-permissions"
 url = "github.com/coralogix/cx-api-permissions"
-revision = "v0.1.137"
-commit_hash = "0c2507b1ce24ccbfc810238fb275c7c394ff109c"
+revision = "v0.1.138"
+commit_hash = "18cc5088dbe10eb81de993c7dec6e2a676bbf3ac"
 
 [[dependencies]]
 name = "cx-api-quota"
 url = "github.com/coralogix/cx-api-quota"
-revision = "v0.0.14"
-commit_hash = "0fe7ca6e9173e637b9ccd60054375b16963a360e"
+revision = "v0.0.15"
+commit_hash = "3c6853af2fd7660f6b74971832f2446d97d2b955"
 
 [[dependencies]]
 name = "cx-api-scopes"

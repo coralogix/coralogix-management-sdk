@@ -62,8 +62,7 @@ message LogsThresholdCondition {
       description: "LogsThresholdCondition is a message that defines the condition for log-based threshold alerts."
       required: [
         "threshold",
-        "time_window",
-        "condition_type"
+        "time_window"
       ]
     }
   };

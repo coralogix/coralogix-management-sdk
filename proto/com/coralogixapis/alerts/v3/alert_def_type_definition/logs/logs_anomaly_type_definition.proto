@@ -59,8 +59,7 @@ message LogsAnomalyCondition {
       description: "Defines conditions for detecting log anomalies"
       required: [
         "minimum_threshold",
-        "time_window",
-        "condition_type"
+        "time_window"
       ]
     }
   };

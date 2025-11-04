@@ -18,6 +18,7 @@ message Annotation {
 
   Source source = 4;
   WidgetScope scope = 6;
+  AnnotationColor color = 7;
 
   message Source {
     oneof value {
@@ -224,5 +225,18 @@ message Annotation {
   enum AnnotationOrientation {
     ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED = 0;
     ANNOTATION_ORIENTATION_HORIZONTAL = 1;
+  }
+
+  enum AnnotationColor {
+    ANNOTATION_COLOR_UNSPECIFIED = 0;
+    ANNOTATION_COLOR_DEFAULT = 1;
+    ANNOTATION_COLOR_GREEN = 2;
+    ANNOTATION_COLOR_CYAN = 3;
+    ANNOTATION_COLOR_BLUE = 4;
+    ANNOTATION_COLOR_PURPLE = 5;
+    ANNOTATION_COLOR_MAGENTA = 6;
+    ANNOTATION_COLOR_RED = 7;
+    ANNOTATION_COLOR_ORANGE = 8;
+    ANNOTATION_COLOR_YELLOW = 9;
   }
 }

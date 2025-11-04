@@ -84,8 +84,7 @@ message LogsRatioCondition {
       description: "Defines conditions for ratio-based alerts"
       required: [
         "threshold",
-        "time_window",
-        "condition_type"
+        "time_window"
       ]
     }
   };

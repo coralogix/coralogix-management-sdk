@@ -173,12 +173,14 @@ impl DataUsageClient {
     /// * `resolution` - The resolution to get the log count for.
     /// * `filters` - The filters to apply.
     /// * `subsystem_aggregation` - Whether to aggregate subsystems.
+    /// * `application_aggregation` - Whether to aggregate applications.
     pub async fn get_logs_count(
         &self,
         date_range: Option<DateRange>,
         resolution: Option<Duration>,
         filters: Option<ScopesFilter>,
         subsystem_aggregation: Option<bool>,
+        application_aggregation: Option<bool>,
     ) -> Result<Streaming<GetLogsCountResponse>> {
         Ok(self
             .service_client
@@ -190,6 +192,7 @@ impl DataUsageClient {
                     resolution: resolution.map(|r| r.try_into().unwrap()),
                     filters,
                     subsystem_aggregation,
+                    application_aggregation,
                 },
                 &self.metadata_map,
             ))
