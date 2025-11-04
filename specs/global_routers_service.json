@@ -72,61 +72,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "Global Router",
-                "description": "Defines a set of pre-configured routing rules for directing notifications",
+                "title": "Replace Global Router Request",
+                "description": "Request which updates an existing global router",
                 "type": "object",
                 "properties": {
-                  "createTime": {
-                    "type": "string",
-                    "format": "date-time"
-                  },
-                  "description": {
-                    "type": "string"
-                  },
-                  "entityLabelMatcher": {
-                    "type": "object",
-                    "additionalProperties": {
-                      "type": "string"
-                    }
-                  },
-                  "entityLabels": {
-                    "type": "object",
-                    "additionalProperties": {
-                      "type": "string"
-                    }
-                  },
-                  "entityType": {
-                    "$ref": "#/components/schemas/notification_center.EntityType"
-                  },
-                  "fallback": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/RoutingTarget"
-                    }
-                  },
-                  "id": {
-                    "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
-                    "type": "string"
-                  },
-                  "name": {
-                    "example": "My Router",
-                    "type": "string"
-                  },
-                  "rules": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/RoutingRule"
-                    }
-                  },
-                  "updateTime": {
-                    "type": "string",
-                    "format": "date-time"
+                  "router": {
+                    "$ref": "#/components/schemas/GlobalRouter"
                   }
                 },
-                "required": [
-                  "entityType",
-                  "name"
-                ],
                 "additionalProperties": false
               }
             }
@@ -159,61 +112,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "Global Router",
-                "description": "Defines a set of pre-configured routing rules for directing notifications",
+                "title": "Create Global Router Request",
+                "description": "Request to create a global router",
                 "type": "object",
                 "properties": {
-                  "createTime": {
-                    "type": "string",
-                    "format": "date-time"
-                  },
-                  "description": {
-                    "type": "string"
-                  },
-                  "entityLabelMatcher": {
-                    "type": "object",
-                    "additionalProperties": {
-                      "type": "string"
-                    }
-                  },
-                  "entityLabels": {
-                    "type": "object",
-                    "additionalProperties": {
-                      "type": "string"
-                    }
-                  },
-                  "entityType": {
-                    "$ref": "#/components/schemas/notification_center.EntityType"
-                  },
-                  "fallback": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/RoutingTarget"
-                    }
-                  },
-                  "id": {
-                    "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
-                    "type": "string"
-                  },
-                  "name": {
-                    "example": "My Router",
-                    "type": "string"
-                  },
-                  "rules": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/RoutingRule"
-                    }
-                  },
-                  "updateTime": {
-                    "type": "string",
-                    "format": "date-time"
+                  "router": {
+                    "$ref": "#/components/schemas/GlobalRouter"
                   }
                 },
-                "required": [
-                  "entityType",
-                  "name"
-                ],
                 "additionalProperties": false
               }
             }

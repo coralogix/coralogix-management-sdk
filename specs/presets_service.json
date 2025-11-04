@@ -20,55 +20,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "Preset",
-                "description": "Set of preconfigured templates for notification content rendering",
+                "title": "Replace Custom Preset Request",
+                "description": "Request to replace an existing custom preset",
                 "type": "object",
                 "properties": {
-                  "configOverrides": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/ConfigOverrides"
-                    }
-                  },
-                  "connectorType": {
-                    "$ref": "#/components/schemas/ConnectorType"
-                  },
-                  "createTime": {
-                    "type": "string",
-                    "format": "date-time"
-                  },
-                  "description": {
-                    "example": "Custom preset for alerts",
-                    "type": "string"
-                  },
-                  "entityType": {
-                    "$ref": "#/components/schemas/notification_center.EntityType"
-                  },
-                  "id": {
-                    "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
-                    "type": "string"
-                  },
-                  "name": {
-                    "example": "My Preset",
-                    "type": "string"
-                  },
-                  "parentId": {
-                    "example": "preset_system_slack_alerts_basic",
-                    "type": "string"
-                  },
-                  "presetType": {
-                    "$ref": "#/components/schemas/PresetType"
-                  },
-                  "updateTime": {
-                    "type": "string",
-                    "format": "date-time"
+                  "preset": {
+                    "$ref": "#/components/schemas/Preset"
                   }
                 },
-                "required": [
-                  "entityType",
-                  "configOverrides",
-                  "name"
-                ],
                 "additionalProperties": false
               }
             }
@@ -101,55 +60,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "Preset",
-                "description": "Set of preconfigured templates for notification content rendering",
+                "title": "Create Custom Preset Request",
+                "description": "Request to create a new custom preset",
                 "type": "object",
                 "properties": {
-                  "configOverrides": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/ConfigOverrides"
-                    }
-                  },
-                  "connectorType": {
-                    "$ref": "#/components/schemas/ConnectorType"
-                  },
-                  "createTime": {
-                    "type": "string",
-                    "format": "date-time"
-                  },
-                  "description": {
-                    "example": "Custom preset for alerts",
-                    "type": "string"
-                  },
-                  "entityType": {
-                    "$ref": "#/components/schemas/notification_center.EntityType"
-                  },
-                  "id": {
-                    "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
-                    "type": "string"
-                  },
-                  "name": {
-                    "example": "My Preset",
-                    "type": "string"
-                  },
-                  "parentId": {
-                    "example": "preset_system_slack_alerts_basic",
-                    "type": "string"
-                  },
-                  "presetType": {
-                    "$ref": "#/components/schemas/PresetType"
-                  },
-                  "updateTime": {
-                    "type": "string",
-                    "format": "date-time"
+                  "preset": {
+                    "$ref": "#/components/schemas/Preset"
                   }
                 },
-                "required": [
-                  "entityType",
-                  "configOverrides",
-                  "name"
-                ],
                 "additionalProperties": false
               }
             }
@@ -554,7 +472,8 @@
           "SLACK",
           "GENERIC_HTTPS",
           "PAGERDUTY",
-          "IBM_EVENT_NOTIFICATIONS"
+          "IBM_EVENT_NOTIFICATIONS",
+          "SERVICE_NOW"
         ]
       },
       "CreateCustomPresetResponse": {

@@ -20,58 +20,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "Connector",
-                "description": "A connector configuration for sending notifications",
+                "title": "Replace Connector Request",
+                "description": "Request to replace an existing connector",
                 "type": "object",
                 "properties": {
-                  "configOverrides": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/EntityTypeConfigOverrides"
-                    }
-                  },
-                  "connectorConfig": {
-                    "$ref": "#/components/schemas/ConnectorConfig"
-                  },
-                  "createTime": {
-                    "type": "string",
-                    "format": "date-time"
-                  },
-                  "description": {
-                    "example": "Connector for team notifications",
-                    "type": "string",
-                    "maxLength": 5000
-                  },
-                  "diagnostics": {
-                    "$ref": "#/components/schemas/Diagnostics"
-                  },
-                  "id": {
-                    "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
-                    "type": "string"
-                  },
-                  "name": {
-                    "example": "My Slack Connector",
-                    "type": "string",
-                    "maxLength": 200
-                  },
-                  "teamId": {
-                    "example": "12345",
-                    "type": "integer",
-                    "format": "int64"
-                  },
-                  "type": {
-                    "$ref": "#/components/schemas/ConnectorType"
-                  },
-                  "updateTime": {
-                    "type": "string",
-                    "format": "date-time"
+                  "connector": {
+                    "$ref": "#/components/schemas/Connector"
                   }
                 },
-                "required": [
-                  "type",
-                  "name",
-                  "connectorConfigs"
-                ],
                 "additionalProperties": false
               }
             }
@@ -147,58 +103,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "Connector",
-                "description": "A connector configuration for sending notifications",
+                "title": "Create Connector Request",
+                "description": "Request to create a new connector",
                 "type": "object",
                 "properties": {
-                  "configOverrides": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/EntityTypeConfigOverrides"
-                    }
-                  },
-                  "connectorConfig": {
-                    "$ref": "#/components/schemas/ConnectorConfig"
-                  },
-                  "createTime": {
-                    "type": "string",
-                    "format": "date-time"
-                  },
-                  "description": {
-                    "example": "Connector for team notifications",
-                    "type": "string",
-                    "maxLength": 5000
-                  },
-                  "diagnostics": {
-                    "$ref": "#/components/schemas/Diagnostics"
-                  },
-                  "id": {
-                    "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
-                    "type": "string"
-                  },
-                  "name": {
-                    "example": "My Slack Connector",
-                    "type": "string",
-                    "maxLength": 200
-                  },
-                  "teamId": {
-                    "example": "12345",
-                    "type": "integer",
-                    "format": "int64"
-                  },
-                  "type": {
-                    "$ref": "#/components/schemas/ConnectorType"
-                  },
-                  "updateTime": {
-                    "type": "string",
-                    "format": "date-time"
+                  "connector": {
+                    "$ref": "#/components/schemas/Connector"
                   }
                 },
-                "required": [
-                  "type",
-                  "name",
-                  "connectorConfigs"
-                ],
                 "additionalProperties": false
               }
             }
@@ -639,7 +551,8 @@
           "SLACK",
           "GENERIC_HTTPS",
           "PAGERDUTY",
-          "IBM_EVENT_NOTIFICATIONS"
+          "IBM_EVENT_NOTIFICATIONS",
+          "SERVICE_NOW"
         ]
       },
       "ConnectorTypeSummary": {

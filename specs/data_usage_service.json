@@ -70,6 +70,9 @@
               "items": {
                 "oneOf": [
                   {
+                    "$ref": "#/components/schemas/DimensionPriority"
+                  },
+                  {
                     "$ref": "#/components/schemas/DimensionPillar"
                   },
                   {
@@ -80,9 +83,6 @@
                   },
                   {
                     "$ref": "#/components/schemas/DimensionSeverity"
-                  },
-                  {
-                    "$ref": "#/components/schemas/DimensionPriority"
                   }
                 ]
               }
@@ -260,10 +260,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestRange"
+                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestDateRange"
                   },
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestDateRange"
+                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestRange"
                   }
                 ]
               }

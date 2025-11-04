@@ -86,10 +86,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/E2MCreateParamsLogsQuery"
+                    "$ref": "#/components/schemas/E2MCreateParamsSpansQuery"
                   },
                   {
-                    "$ref": "#/components/schemas/E2MCreateParamsSpansQuery"
+                    "$ref": "#/components/schemas/E2MCreateParamsLogsQuery"
                   }
                 ]
               }
@@ -703,13 +703,13 @@
       "E2MExecutionResponse": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/E2MExecutionResponseDeleted"
-          },
-          {
             "$ref": "#/components/schemas/E2MExecutionResponseCreated"
           },
           {
             "$ref": "#/components/schemas/E2MExecutionResponseReplaced"
+          },
+          {
+            "$ref": "#/components/schemas/E2MExecutionResponseDeleted"
           }
         ]
       },
@@ -1245,10 +1245,10 @@
       "v2.Aggregation": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/V2AggregationHistogram"
+            "$ref": "#/components/schemas/V2AggregationSamples"
           },
           {
-            "$ref": "#/components/schemas/V2AggregationSamples"
+            "$ref": "#/components/schemas/V2AggregationHistogram"
           }
         ]
       },

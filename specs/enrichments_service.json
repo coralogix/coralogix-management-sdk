@@ -420,16 +420,16 @@
       "EnrichmentType": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/EnrichmentTypeAws"
-          },
-          {
-            "$ref": "#/components/schemas/EnrichmentTypeCustomEnrichment"
-          },
-          {
             "$ref": "#/components/schemas/EnrichmentTypeGeoIp"
           },
           {
             "$ref": "#/components/schemas/EnrichmentTypeSuspiciousIp"
+          },
+          {
+            "$ref": "#/components/schemas/EnrichmentTypeAws"
+          },
+          {
+            "$ref": "#/components/schemas/EnrichmentTypeCustomEnrichment"
           }
         ]
       },

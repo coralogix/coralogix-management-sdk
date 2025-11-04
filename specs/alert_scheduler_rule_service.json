@@ -174,10 +174,10 @@
             "schema": {
               "oneOf": [
                 {
-                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds"
+                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds"
                 },
                 {
-                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds"
+                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds"
                 }
               ]
             },

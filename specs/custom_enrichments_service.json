@@ -109,10 +109,10 @@
               "items": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/SearchClauseName"
+                    "$ref": "#/components/schemas/SearchClauseId"
                   },
                   {
-                    "$ref": "#/components/schemas/SearchClauseId"
+                    "$ref": "#/components/schemas/SearchClauseName"
                   }
                 ]
               }

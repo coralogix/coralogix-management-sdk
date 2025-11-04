@@ -843,28 +843,19 @@
       "AlertDefProperties": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
+            "$ref": "#/components/schemas/AlertDefPropertiesFlow"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesMetricAnomaly"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesSloThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsThreshold"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
@@ -873,13 +864,22 @@
             "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesFlow"
+            "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesSloThreshold"
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
           }
         ]
       },
@@ -4251,10 +4251,10 @@
       "v3.IntegrationType": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/V3IntegrationTypeRecipients"
+            "$ref": "#/components/schemas/V3IntegrationTypeIntegrationId"
           },
           {
-            "$ref": "#/components/schemas/V3IntegrationTypeIntegrationId"
+            "$ref": "#/components/schemas/V3IntegrationTypeRecipients"
           }
         ]
       },

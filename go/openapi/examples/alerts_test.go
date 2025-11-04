@@ -12,22 +12,38 @@ import (
 	scheduler "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/alert_scheduler_rule_service"
 )
 
+<<<<<<< HEAD
 // CreateTracingImmediateAlert returns a reusable OpenAPI alert definition payload
 func CreateTracingImmediateAlert() *alerts.AlertDefPropertiesTracingImmediate {
+=======
+// CreateAlert returns a reusable OpenAPI alert definition payload
+func CreateAlert() *alerts.AlertDefPropertiesLogsThreshold {
+>>>>>>> f4b38b87 (Remove more required fields from alerts spec)
 	name := "Standard alert example"
 	startHour := int32(8)
 	startMinute := int32(30)
 	endHour := int32(20)
 	endMinute := int32(30)
+<<<<<<< HEAD
 	latencyThresholdMs := "30"
 	// applicationName := "nginx"
 	// subsystemName := "subsystem-name"
 	return &alerts.AlertDefPropertiesTracingImmediate{
+=======
+	threshold := float64(10)
+	applicationName := "nginx"
+	subsystemName := "subsystem-name"
+	return &alerts.AlertDefPropertiesLogsThreshold{
+>>>>>>> f4b38b87 (Remove more required fields from alerts spec)
 		Name:        &name,
 		Description: alerts.PtrString("Standard alert example from OpenAPI SDK"),
 		Enabled:     alerts.PtrBool(true),
 		Priority:    alerts.ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P1.Ptr(),
+<<<<<<< HEAD
 		Type:        alerts.ALERTDEFTYPE_ALERT_DEF_TYPE_TRACING_IMMEDIATE.Ptr(),
+=======
+		Type:        alerts.ALERTDEFTYPE_ALERT_DEF_TYPE_LOGS_THRESHOLD.Ptr(),
+>>>>>>> f4b38b87 (Remove more required fields from alerts spec)
 		EntityLabels: &map[string]string{
 			"alert_type":        "security",
 			"security_severity": "high",
@@ -56,12 +72,51 @@ func CreateTracingImmediateAlert() *alerts.AlertDefPropertiesTracingImmediate {
 			StartTime: &alerts.TimeOfDay{Hours: &startHour, Minutes: &startMinute},
 			EndTime:   &alerts.TimeOfDay{Hours: &endHour, Minutes: &endMinute},
 		},
+<<<<<<< HEAD
 		TracingImmediate: &alerts.TracingImmediateType{
 			TracingFilter: &alerts.TracingFilter{
 				SimpleFilter: &alerts.TracingSimpleFilter{
 					LatencyThresholdMs: &latencyThresholdMs,
 				},
 			},
+=======
+		LogsThreshold: &alerts.LogsThresholdType{
+			Rules: []alerts.LogsThresholdRule{
+				{
+					Override: &alerts.AlertDefOverride{
+						Priority: alerts.ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P1.Ptr(),
+					},
+					Condition: &alerts.LogsThresholdCondition{
+						ConditionType: alerts.LOGSTHRESHOLDCONDITIONTYPE_LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED.Ptr(),
+						Threshold:     &threshold,
+						TimeWindow: &alerts.LogsTimeWindow{
+							LogsTimeWindowSpecificValue: alerts.LOGSTIMEWINDOWVALUE_LOGS_TIME_WINDOW_VALUE_MINUTES_10.Ptr(),
+						},
+					},
+				},
+			},
+			LogsFilter: &alerts.V3LogsFilter{
+				SimpleFilter: &alerts.LogsSimpleFilter{
+					LuceneQuery: alerts.PtrString("remote_addr_enriched:/.*/"),
+					LabelFilters: &alerts.LabelFilters{
+						ApplicationName: []alerts.LabelFilterType{
+							{Value: &applicationName, Operation: alerts.LOGFILTEROPERATIONTYPE_LOG_FILTER_OPERATION_TYPE_INCLUDES.Ptr()},
+						},
+						SubsystemName: []alerts.LabelFilterType{
+							{Value: &subsystemName, Operation: alerts.LOGFILTEROPERATIONTYPE_LOG_FILTER_OPERATION_TYPE_STARTS_WITH.Ptr()},
+						},
+						Severities: []alerts.LogSeverity{
+							alerts.LOGSEVERITY_LOG_SEVERITY_WARNING,
+							alerts.LOGSEVERITY_LOG_SEVERITY_ERROR,
+						},
+					},
+				},
+			},
+		},
+		GroupByKeys: []string{
+			"coralogix.metadata.sdkId",
+			"EventType",
+>>>>>>> f4b38b87 (Remove more required fields from alerts spec)
 		},
 	}
 }
@@ -277,10 +332,15 @@ func TestTracingImmediateAlerts(t *testing.T) {
 	client := cxsdk.NewAlertsClient(cpc)
 	ctx := context.Background()
 
+<<<<<<< HEAD
 	createReq := alerts.CreateAlertDefinitionRequest{
 		AlertDefProperties: &alerts.AlertDefProperties{
 			AlertDefPropertiesTracingImmediate: CreateTracingImmediateAlert(),
 		},
+=======
+	createReq := alerts.AlertDefsServiceCreateAlertDefRequest{
+		AlertDefPropertiesLogsThreshold: CreateAlert(),
+>>>>>>> f4b38b87 (Remove more required fields from alerts spec)
 	}
 	created, httpResp, err := client.
 		AlertDefsServiceCreateAlertDef(ctx).
@@ -299,6 +359,7 @@ func TestTracingImmediateAlerts(t *testing.T) {
 	updateReq := alerts.ReplaceAlertDefinitionRequest{
 		Id: created.AlertDef.Id,
 		AlertDefProperties: &alerts.AlertDefProperties{
+<<<<<<< HEAD
 			AlertDefPropertiesTracingImmediate: &alerts.AlertDefPropertiesTracingImmediate{
 				Name:             created.AlertDef.AlertDefProperties.AlertDefPropertiesTracingImmediate.Name,
 				Description:      &newDesc,
@@ -309,6 +370,18 @@ func TestTracingImmediateAlerts(t *testing.T) {
 				GroupByKeys:      created.AlertDef.AlertDefProperties.AlertDefPropertiesTracingImmediate.GroupByKeys,
 				PhantomMode:      created.AlertDef.AlertDefProperties.AlertDefPropertiesTracingImmediate.PhantomMode,
 				TracingImmediate: created.AlertDef.AlertDefProperties.AlertDefPropertiesTracingImmediate.TracingImmediate,
+=======
+			AlertDefPropertiesLogsThreshold: &alerts.AlertDefPropertiesLogsThreshold{
+				Name:          created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsThreshold.Name,
+				Description:   &newDesc,
+				Enabled:       created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsThreshold.Enabled,
+				Priority:      created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsThreshold.Priority,
+				Type:          created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsThreshold.Type,
+				EntityLabels:  created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsThreshold.EntityLabels,
+				GroupByKeys:   created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsThreshold.GroupByKeys,
+				PhantomMode:   created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsThreshold.PhantomMode,
+				LogsThreshold: created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsThreshold.LogsThreshold,
+>>>>>>> f4b38b87 (Remove more required fields from alerts spec)
 			},
 		},
 	}

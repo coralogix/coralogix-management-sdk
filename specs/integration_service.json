@@ -1343,6 +1343,12 @@
       "FieldInformation": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/FieldInformationSingle"
+          },
+          {
+            "$ref": "#/components/schemas/FieldInformationMultiText"
+          },
+          {
             "$ref": "#/components/schemas/FieldInformationMultipleSelection"
           },
           {
@@ -1353,12 +1359,6 @@
           },
           {
             "$ref": "#/components/schemas/FieldInformationSingleNumber"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationSingle"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationMultiText"
           }
         ]
       },
@@ -2199,6 +2199,9 @@
       "IntegrationRevision": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/IntegrationRevisionCloudFormation"
+          },
+          {
             "$ref": "#/components/schemas/IntegrationRevisionManagedService"
           },
           {
@@ -2212,9 +2215,6 @@
           },
           {
             "$ref": "#/components/schemas/IntegrationRevisionTerraform"
-          },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionCloudFormation"
           }
         ]
       },
@@ -3423,9 +3423,6 @@
       "v1.IntegrationType": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/V1IntegrationTypeCloudformation"
-          },
-          {
             "$ref": "#/components/schemas/V1IntegrationTypeArm"
           },
           {
@@ -3442,6 +3439,9 @@
           },
           {
             "$ref": "#/components/schemas/V1IntegrationTypeUntracked"
+          },
+          {
+            "$ref": "#/components/schemas/V1IntegrationTypeCloudformation"
           }
         ]
       },

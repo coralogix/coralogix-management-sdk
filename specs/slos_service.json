@@ -145,10 +145,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
+                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
                   },
                   {
-                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
+                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
                   }
                 ]
               }
@@ -214,10 +214,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
+                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
                   },
                   {
-                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
+                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
                   }
                 ]
               }
@@ -274,10 +274,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
+                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
                   },
                   {
-                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
+                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
                   }
                 ]
               }
@@ -485,13 +485,13 @@
               "items": {
                 "oneOf": [
                   {
+                    "$ref": "#/components/schemas/SloExecutionRequestCreateSloRequest"
+                  },
+                  {
                     "$ref": "#/components/schemas/SloExecutionRequestReplaceSloRequest"
                   },
                   {
                     "$ref": "#/components/schemas/SloExecutionRequestDeleteSloRequest"
-                  },
-                  {
-                    "$ref": "#/components/schemas/SloExecutionRequestCreateSloRequest"
                   }
                 ]
               }
@@ -1136,13 +1136,13 @@
       "SloExecutionResponse": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SloExecutionResponseDeleteSloResponse"
-          },
-          {
             "$ref": "#/components/schemas/SloExecutionResponseCreateSloResponse"
           },
           {
             "$ref": "#/components/schemas/SloExecutionResponseReplaceSloResponse"
+          },
+          {
+            "$ref": "#/components/schemas/SloExecutionResponseDeleteSloResponse"
           }
         ]
       },

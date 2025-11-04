@@ -930,6 +930,7 @@ components:
       - $ref: "#/components/schemas/AlertDefPropertiesLogsImmediate"
       - $ref: "#/components/schemas/AlertDefPropertiesTracingImmediate"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsThreshold"
+<<<<<<< HEAD
       - $ref: "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesTracingThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsAnomaly"
@@ -938,6 +939,16 @@ components:
       - $ref: "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesMetricThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesFlow"
+=======
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesMetricThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesTracingThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesFlow"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsNewValue"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsAnomaly"
+      - $ref: "#/components/schemas/AlertDefPropertiesMetricAnomaly"
+>>>>>>> f4b38b87 (Remove more required fields from alerts spec)
       - $ref: "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
       - $ref: "#/components/schemas/AlertDefPropertiesSloThreshold"
     AlertDefPropertiesFlow:
@@ -5379,8 +5390,8 @@ components:
       type: object
     MetricMissingValues:
       oneOf:
-      - $ref: "#/components/schemas/MetricMissingValuesReplaceWithZero"
       - $ref: "#/components/schemas/MetricMissingValuesMinNonNullValuesPct"
+      - $ref: "#/components/schemas/MetricMissingValuesReplaceWithZero"
     MetricMissingValuesMinNonNullValuesPct:
       additionalProperties: false
       description: Configuration for handling missing values in metric threshold alerts.
@@ -6526,6 +6537,7 @@ components:
           type: string
       title: Replace alert definition request
       type: object
+<<<<<<< HEAD
     Create_alert_definition_request:
       additionalProperties: false
       description: A request to create a new alert definition
@@ -6533,6 +6545,23 @@ components:
         alertDefProperties:
           $ref: "#/components/schemas/AlertDefProperties"
       title: Create alert definition request
+=======
+    AlertDefsService_CreateAlertDef_request:
+      oneOf:
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsImmediate"
+      - $ref: "#/components/schemas/AlertDefPropertiesTracingImmediate"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesTracingThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
+      - $ref: "#/components/schemas/AlertDefPropertiesMetricThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesFlow"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsNewValue"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsAnomaly"
+      - $ref: "#/components/schemas/AlertDefPropertiesSloThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesMetricAnomaly"
+>>>>>>> f4b38b87 (Remove more required fields from alerts spec)
       type: object
     Bulk_replace_alert_definitions_request:
       additionalProperties: false

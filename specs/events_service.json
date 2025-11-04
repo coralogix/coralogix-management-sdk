@@ -642,10 +642,10 @@
       "CxEventSingleOrMultiple": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/CxEventSingleOrMultipleMultipleEvents"
+            "$ref": "#/components/schemas/CxEventSingleOrMultipleSingleEvent"
           },
           {
-            "$ref": "#/components/schemas/CxEventSingleOrMultipleSingleEvent"
+            "$ref": "#/components/schemas/CxEventSingleOrMultipleMultipleEvents"
           }
         ]
       },
