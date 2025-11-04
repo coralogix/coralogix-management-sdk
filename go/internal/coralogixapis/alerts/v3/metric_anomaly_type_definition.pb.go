@@ -225,15 +225,15 @@ const file_com_coralogixapis_alerts_v3_alert_def_type_definition_metric_metric_a
 	"ALearn more about metric-based anomaly alerts in our documentation\x12ahttps://coralogix.com/docs/user-guides/alerting/create-an-alert/metrics/anomaly-detection-alerts/\"\xf9\x01\n" +
 	"\x11MetricAnomalyRule\x12\x83\x01\n" +
 	"\tcondition\x18\x01 \x01(\v23.com.coralogixapis.alerts.v3.MetricAnomalyConditionB0\x9aA-2+The condition for the metric anomaly alert.R\tcondition:^\x9aA[\n" +
-	"Y*\x19Metric-based anomaly rule20A rule for metric-based anomaly detection alerts\xd2\x01\tcondition\"\xee\x06\n" +
+	"Y*\x19Metric-based anomaly rule20A rule for metric-based anomaly detection alerts\xd2\x01\tcondition\"\xdd\x06\n" +
 	"\x16MetricAnomalyCondition\x12r\n" +
 	"\tthreshold\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueB6\x9aA32+The threshold value for the alert conditionJ\x0410.0R\tthreshold\x12\x99\x01\n" +
 	"\ffor_over_pct\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueBY\x9aAV2PThe percentage of the metric that must exceed the threshold to trigger the alertJ\x0220R\n" +
 	"forOverPct\x12|\n" +
 	"\vof_the_last\x18\x03 \x01(\v2-.com.coralogixapis.alerts.v3.MetricTimeWindowB-\x9aA*2(The time window for the alert condition.R\tofTheLast\x12\x9c\x01\n" +
 	"\x17min_non_null_values_pct\x18\x04 \x01(\v2\x1c.google.protobuf.UInt32ValueBH\x9aAE2?The percentage of non-null values required to trigger the alertJ\x0210R\x13minNonNullValuesPct\x12\xba\x01\n" +
-	"\x0econdition_type\x18\x05 \x01(\x0e27.com.coralogixapis.alerts.v3.MetricAnomalyConditionTypeBZ\x9aAW2$The type of condition for the alert.J/\"METRIC_ANOMALY_CONDITION_TYPE_LESS_THAN_USUAL\"R\rconditionType:j\x9aAg\n" +
-	"e*\x1eMetric-based anomaly condition\xd2\x01\tthreshold\xd2\x01\x17min_non_null_values_pct\xd2\x01\vof_the_last\xd2\x01\x0econdition_typeb\x06proto3"
+	"\x0econdition_type\x18\x05 \x01(\x0e27.com.coralogixapis.alerts.v3.MetricAnomalyConditionTypeBZ\x9aAW2$The type of condition for the alert.J/\"METRIC_ANOMALY_CONDITION_TYPE_LESS_THAN_USUAL\"R\rconditionType:Y\x9aAV\n" +
+	"T*\x1eMetric-based anomaly condition\xd2\x01\tthreshold\xd2\x01\x17min_non_null_values_pct\xd2\x01\vof_the_lastb\x06proto3"
 
 var (
 	file_com_coralogixapis_alerts_v3_alert_def_type_definition_metric_metric_anomaly_type_definition_proto_rawDescOnce sync.Once

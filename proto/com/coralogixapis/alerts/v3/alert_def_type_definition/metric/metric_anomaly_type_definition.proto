@@ -56,8 +56,7 @@ message MetricAnomalyCondition {
       required: [
         "threshold",
         "min_non_null_values_pct",
-        "of_the_last",
-        "condition_type"
+        "of_the_last"
       ]
     }
   };

@@ -64,8 +64,7 @@ message MetricThresholdCondition {
       required: [
         "threshold",
         "for_over_pct",
-        "of_the_last",
-        "condition_type"
+        "of_the_last"
       ]
     }
   };

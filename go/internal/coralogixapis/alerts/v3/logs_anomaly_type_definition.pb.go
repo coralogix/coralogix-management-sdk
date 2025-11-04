@@ -219,13 +219,13 @@ const file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_logs_anoma
 	"9Learn more about logs anomaly alerts in our documentation\x12^https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/anomaly-detection-alerts/\"\xe5\x01\n" +
 	"\x0fLogsAnomalyRule\x12{\n" +
 	"\tcondition\x18\x01 \x01(\v21.com.coralogixapis.alerts.v3.LogsAnomalyConditionB*\x9aA'2%The condition for the threshold alertR\tcondition:U\x9aAR\n" +
-	"P*\x16Log-based anomaly rule2*Defines a rule for detecting log anomalies\xd2\x01\tcondition\"\xe1\x04\n" +
+	"P*\x16Log-based anomaly rule2*Defines a rule for detecting log anomalies\xd2\x01\tcondition\"\xcd\x04\n" +
 	"\x14LogsAnomalyCondition\x12\x81\x01\n" +
 	"\x11minimum_threshold\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueB6\x9aA32+The threshold value for the alert conditionJ\x0410.0R\x10minimumThreshold\x12z\n" +
 	"\vtime_window\x18\x02 \x01(\v2+.com.coralogixapis.alerts.v3.LogsTimeWindowB,\x9aA)2'The time window for the alert conditionR\n" +
 	"timeWindow\x12\xbe\x01\n" +
-	"\x0econdition_type\x18\x03 \x01(\x0e25.com.coralogixapis.alerts.v3.LogsAnomalyConditionTypeB`\x9aA]2#The type of condition for the alertJ6\"LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED\"R\rconditionType:\x87\x01\x9aA\x83\x01\n" +
-	"\x80\x01*\x1bLog-based anomaly condition2.Defines conditions for detecting log anomalies\xd2\x01\x11minimum_threshold\xd2\x01\vtime_window\xd2\x01\x0econdition_typeb\x06proto3"
+	"\x0econdition_type\x18\x03 \x01(\x0e25.com.coralogixapis.alerts.v3.LogsAnomalyConditionTypeB`\x9aA]2#The type of condition for the alertJ6\"LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED\"R\rconditionType:t\x9aAq\n" +
+	"o*\x1bLog-based anomaly condition2.Defines conditions for detecting log anomalies\xd2\x01\x11minimum_threshold\xd2\x01\vtime_windowb\x06proto3"
 
 var (
 	file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_logs_anomaly_type_definition_proto_rawDescOnce sync.Once

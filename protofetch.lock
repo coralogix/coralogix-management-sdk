@@ -15,8 +15,8 @@ commit_hash = "11bae4e2cc0149c82f9271a33f2be44ddda34e61"
 [[dependencies]]
 name = "cx-api-alerts"
 url = "github.com/coralogix/cx-api-alerts"
-revision = "v0.5.35"
-commit_hash = "a1000d9d8b62680977271bd61b4606826b6b11b2"
+revision = "v0.5.36"
+commit_hash = "e0d082fdc27a689ad10f49526b2580b8f3921700"
 
 [[dependencies]]
 name = "cx-api-apm"
