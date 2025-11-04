@@ -71,6 +71,76 @@ func (Annotation_AnnotationOrientation) EnumDescriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDescGZIP(), []int{0, 0}
 }
 
+type Annotation_AnnotationColor int32
+
+const (
+	Annotation_ANNOTATION_COLOR_UNSPECIFIED Annotation_AnnotationColor = 0
+	Annotation_ANNOTATION_COLOR_DEFAULT     Annotation_AnnotationColor = 1
+	Annotation_ANNOTATION_COLOR_GREEN       Annotation_AnnotationColor = 2
+	Annotation_ANNOTATION_COLOR_CYAN        Annotation_AnnotationColor = 3
+	Annotation_ANNOTATION_COLOR_BLUE        Annotation_AnnotationColor = 4
+	Annotation_ANNOTATION_COLOR_PURPLE      Annotation_AnnotationColor = 5
+	Annotation_ANNOTATION_COLOR_MAGENTA     Annotation_AnnotationColor = 6
+	Annotation_ANNOTATION_COLOR_RED         Annotation_AnnotationColor = 7
+	Annotation_ANNOTATION_COLOR_ORANGE      Annotation_AnnotationColor = 8
+	Annotation_ANNOTATION_COLOR_YELLOW      Annotation_AnnotationColor = 9
+)
+
+// Enum value maps for Annotation_AnnotationColor.
+var (
+	Annotation_AnnotationColor_name = map[int32]string{
+		0: "ANNOTATION_COLOR_UNSPECIFIED",
+		1: "ANNOTATION_COLOR_DEFAULT",
+		2: "ANNOTATION_COLOR_GREEN",
+		3: "ANNOTATION_COLOR_CYAN",
+		4: "ANNOTATION_COLOR_BLUE",
+		5: "ANNOTATION_COLOR_PURPLE",
+		6: "ANNOTATION_COLOR_MAGENTA",
+		7: "ANNOTATION_COLOR_RED",
+		8: "ANNOTATION_COLOR_ORANGE",
+		9: "ANNOTATION_COLOR_YELLOW",
+	}
+	Annotation_AnnotationColor_value = map[string]int32{
+		"ANNOTATION_COLOR_UNSPECIFIED": 0,
+		"ANNOTATION_COLOR_DEFAULT":     1,
+		"ANNOTATION_COLOR_GREEN":       2,
+		"ANNOTATION_COLOR_CYAN":        3,
+		"ANNOTATION_COLOR_BLUE":        4,
+		"ANNOTATION_COLOR_PURPLE":      5,
+		"ANNOTATION_COLOR_MAGENTA":     6,
+		"ANNOTATION_COLOR_RED":         7,
+		"ANNOTATION_COLOR_ORANGE":      8,
+		"ANNOTATION_COLOR_YELLOW":      9,
+	}
+)
+
+func (x Annotation_AnnotationColor) Enum() *Annotation_AnnotationColor {
+	p := new(Annotation_AnnotationColor)
+	*p = x
+	return p
+}
+
+func (x Annotation_AnnotationColor) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Annotation_AnnotationColor) Descriptor() protoreflect.EnumDescriptor {
+	return file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_enumTypes[1].Descriptor()
+}
+
+func (Annotation_AnnotationColor) Type() protoreflect.EnumType {
+	return &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_enumTypes[1]
+}
+
+func (x Annotation_AnnotationColor) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Annotation_AnnotationColor.Descriptor instead.
+func (Annotation_AnnotationColor) EnumDescriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDescGZIP(), []int{0, 1}
+}
+
 type Annotation_EventRecurrenceSource_Weekday int32
 
 const (
@@ -119,11 +189,11 @@ func (x Annotation_EventRecurrenceSource_Weekday) String() string {
 }
 
 func (Annotation_EventRecurrenceSource_Weekday) Descriptor() protoreflect.EnumDescriptor {
-	return file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_enumTypes[1].Descriptor()
+	return file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_enumTypes[2].Descriptor()
 }
 
 func (Annotation_EventRecurrenceSource_Weekday) Type() protoreflect.EnumType {
-	return &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_enumTypes[1]
+	return &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_enumTypes[2]
 }
 
 func (x Annotation_EventRecurrenceSource_Weekday) Number() protoreflect.EnumNumber {
@@ -138,12 +208,13 @@ func (Annotation_EventRecurrenceSource_Weekday) EnumDescriptor() ([]byte, []int)
 type Annotation struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Annotation unique identifier
-	Id            *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description   *wrapperspb.StringValue `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	Enabled       *wrapperspb.BoolValue   `protobuf:"bytes,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	Source        *Annotation_Source      `protobuf:"bytes,4,opt,name=source,proto3" json:"source,omitempty"`
-	Scope         *Annotation_WidgetScope `protobuf:"bytes,6,opt,name=scope,proto3" json:"scope,omitempty"`
+	Id            *wrapperspb.StringValue    `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          *wrapperspb.StringValue    `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Description   *wrapperspb.StringValue    `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	Enabled       *wrapperspb.BoolValue      `protobuf:"bytes,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Source        *Annotation_Source         `protobuf:"bytes,4,opt,name=source,proto3" json:"source,omitempty"`
+	Scope         *Annotation_WidgetScope    `protobuf:"bytes,6,opt,name=scope,proto3" json:"scope,omitempty"`
+	Color         Annotation_AnnotationColor `protobuf:"varint,7,opt,name=color,proto3,enum=com.coralogixapis.dashboards.v1.ast.annotations.Annotation_AnnotationColor" json:"color,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -218,6 +289,13 @@ func (x *Annotation) GetScope() *Annotation_WidgetScope {
 		return x.Scope
 	}
 	return nil
+}
+
+func (x *Annotation) GetColor() Annotation_AnnotationColor {
+	if x != nil {
+		return x.Color
+	}
+	return Annotation_ANNOTATION_COLOR_UNSPECIFIED
 }
 
 type Annotation_Source struct {
@@ -2308,7 +2386,7 @@ var File_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto protor
 
 const file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDesc = "" +
 	"\n" +
-	"@com/coralogixapis/dashboards/v1/ast/annotations/annotation.proto\x12/com.coralogixapis.dashboards.v1.ast.annotations\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a;com/coralogixapis/dashboards/v1/common/data_mode_type.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xc4E\n" +
+	"@com/coralogixapis/dashboards/v1/ast/annotations/annotation.proto\x12/com.coralogixapis.dashboards.v1.ast.annotations\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a;com/coralogixapis/dashboards/v1/common/data_mode_type.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xdcH\n" +
 	"\n" +
 	"Annotation\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x120\n" +
@@ -2316,7 +2394,8 @@ const file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawD
 	"\vdescription\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueR\vdescription\x124\n" +
 	"\aenabled\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\aenabled\x12Z\n" +
 	"\x06source\x18\x04 \x01(\v2B.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SourceR\x06source\x12]\n" +
-	"\x05scope\x18\x06 \x01(\v2G.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.WidgetScopeR\x05scope\x1a\x88\x05\n" +
+	"\x05scope\x18\x06 \x01(\v2G.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.WidgetScopeR\x05scope\x12a\n" +
+	"\x05color\x18\a \x01(\x0e2K.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.AnnotationColorR\x05color\x1a\x88\x05\n" +
 	"\x06Source\x12e\n" +
 	"\ametrics\x18\x01 \x01(\v2I.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSourceH\x00R\ametrics\x12\\\n" +
 	"\x04logs\x18\x02 \x01(\v2F.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSourceH\x00R\x04logs\x12_\n" +
@@ -2460,7 +2539,18 @@ const file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawD
 	"\x05value\"o\n" +
 	"\x15AnnotationOrientation\x12/\n" +
 	"+ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\x10\x00\x12%\n" +
-	"!ANNOTATION_ORIENTATION_HORIZONTAL\x10\x01b\x06proto3"
+	"!ANNOTATION_ORIENTATION_HORIZONTAL\x10\x01\"\xb2\x02\n" +
+	"\x0fAnnotationColor\x12 \n" +
+	"\x1cANNOTATION_COLOR_UNSPECIFIED\x10\x00\x12\x1c\n" +
+	"\x18ANNOTATION_COLOR_DEFAULT\x10\x01\x12\x1a\n" +
+	"\x16ANNOTATION_COLOR_GREEN\x10\x02\x12\x19\n" +
+	"\x15ANNOTATION_COLOR_CYAN\x10\x03\x12\x19\n" +
+	"\x15ANNOTATION_COLOR_BLUE\x10\x04\x12\x1b\n" +
+	"\x17ANNOTATION_COLOR_PURPLE\x10\x05\x12\x1c\n" +
+	"\x18ANNOTATION_COLOR_MAGENTA\x10\x06\x12\x18\n" +
+	"\x14ANNOTATION_COLOR_RED\x10\a\x12\x1b\n" +
+	"\x17ANNOTATION_COLOR_ORANGE\x10\b\x12\x1b\n" +
+	"\x17ANNOTATION_COLOR_YELLOW\x10\tb\x06proto3"
 
 var (
 	file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDescOnce sync.Once
@@ -2474,145 +2564,147 @@ func file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDe
 	return file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDescData
 }
 
-var file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
 var file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_goTypes = []any{
 	(Annotation_AnnotationOrientation)(0),                      // 0: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.AnnotationOrientation
-	(Annotation_EventRecurrenceSource_Weekday)(0),              // 1: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Weekday
-	(*Annotation)(nil),                                         // 2: com.coralogixapis.dashboards.v1.ast.annotations.Annotation
-	(*Annotation_Source)(nil),                                  // 3: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source
-	(*Annotation_MetricsSource)(nil),                           // 4: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource
-	(*Annotation_LogsSource)(nil),                              // 5: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource
-	(*Annotation_SpansSource)(nil),                             // 6: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource
-	(*Annotation_DataprimeSource)(nil),                         // 7: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource
-	(*Annotation_ManualSource)(nil),                            // 8: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource
-	(*Annotation_EventRecurrenceSource)(nil),                   // 9: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource
-	(*Annotation_WidgetScope)(nil),                             // 10: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.WidgetScope
-	(*Annotation_MetricsSource_Strategy)(nil),                  // 11: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.Strategy
-	(*Annotation_MetricsSource_StartTimeMetric)(nil),           // 12: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.StartTimeMetric
-	(*Annotation_LogsSource_Strategy)(nil),                     // 13: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy
-	(*Annotation_LogsSource_Strategy_Instant)(nil),             // 14: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Instant
-	(*Annotation_LogsSource_Strategy_Range)(nil),               // 15: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range
-	(*Annotation_LogsSource_Strategy_Duration)(nil),            // 16: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration
-	(*Annotation_SpansSource_Strategy)(nil),                    // 17: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy
-	(*Annotation_SpansSource_Strategy_Instant)(nil),            // 18: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Instant
-	(*Annotation_SpansSource_Strategy_Range)(nil),              // 19: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range
-	(*Annotation_SpansSource_Strategy_Duration)(nil),           // 20: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration
-	(*Annotation_DataprimeSource_Strategy)(nil),                // 21: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy
-	(*Annotation_DataprimeSource_Strategy_Instant)(nil),        // 22: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Instant
-	(*Annotation_DataprimeSource_Strategy_Range)(nil),          // 23: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Range
-	(*Annotation_DataprimeSource_Strategy_Duration)(nil),       // 24: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Duration
-	(*Annotation_ManualSource_Strategy)(nil),                   // 25: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy
-	(*Annotation_ManualSource_Strategy_Instant)(nil),           // 26: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Instant
-	(*Annotation_ManualSource_Strategy_Range)(nil),             // 27: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Range
-	(*Annotation_EventRecurrenceSource_Recurrence)(nil),        // 28: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Recurrence
-	(*Annotation_EventRecurrenceSource_WeeklyRecurrence)(nil),  // 29: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.WeeklyRecurrence
-	(*Annotation_EventRecurrenceSource_Strategy)(nil),          // 30: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy
-	(*Annotation_EventRecurrenceSource_Strategy_Instant)(nil),  // 31: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy.Instant
-	(*Annotation_EventRecurrenceSource_Strategy_Duration)(nil), // 32: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy.Duration
-	(*Annotation_WidgetScope_AllWidgets)(nil),                  // 33: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.WidgetScope.AllWidgets
-	(*Annotation_WidgetScope_SpecificWidgets)(nil),             // 34: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.WidgetScope.SpecificWidgets
-	(*wrapperspb.StringValue)(nil),                             // 35: google.protobuf.StringValue
-	(*wrapperspb.BoolValue)(nil),                               // 36: google.protobuf.BoolValue
-	(*common.PromQlQuery)(nil),                                 // 37: com.coralogixapis.dashboards.v1.common.PromQlQuery
-	(*common.LuceneQuery)(nil),                                 // 38: com.coralogixapis.dashboards.v1.common.LuceneQuery
-	(*common.ObservationField)(nil),                            // 39: com.coralogixapis.dashboards.v1.common.ObservationField
-	(common.DataModeType)(0),                                   // 40: com.coralogixapis.dashboards.v1.common.DataModeType
-	(*common.DataprimeQuery)(nil),                              // 41: com.coralogixapis.dashboards.v1.common.DataprimeQuery
-	(common1.Unit)(0),                                          // 42: com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
-	(*wrapperspb.DoubleValue)(nil),                             // 43: google.protobuf.DoubleValue
-	(*wrapperspb.Int32Value)(nil),                              // 44: google.protobuf.Int32Value
-	(*durationpb.Duration)(nil),                                // 45: google.protobuf.Duration
+	(Annotation_AnnotationColor)(0),                            // 1: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.AnnotationColor
+	(Annotation_EventRecurrenceSource_Weekday)(0),              // 2: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Weekday
+	(*Annotation)(nil),                                         // 3: com.coralogixapis.dashboards.v1.ast.annotations.Annotation
+	(*Annotation_Source)(nil),                                  // 4: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source
+	(*Annotation_MetricsSource)(nil),                           // 5: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource
+	(*Annotation_LogsSource)(nil),                              // 6: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource
+	(*Annotation_SpansSource)(nil),                             // 7: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource
+	(*Annotation_DataprimeSource)(nil),                         // 8: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource
+	(*Annotation_ManualSource)(nil),                            // 9: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource
+	(*Annotation_EventRecurrenceSource)(nil),                   // 10: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource
+	(*Annotation_WidgetScope)(nil),                             // 11: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.WidgetScope
+	(*Annotation_MetricsSource_Strategy)(nil),                  // 12: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.Strategy
+	(*Annotation_MetricsSource_StartTimeMetric)(nil),           // 13: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.StartTimeMetric
+	(*Annotation_LogsSource_Strategy)(nil),                     // 14: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy
+	(*Annotation_LogsSource_Strategy_Instant)(nil),             // 15: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Instant
+	(*Annotation_LogsSource_Strategy_Range)(nil),               // 16: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range
+	(*Annotation_LogsSource_Strategy_Duration)(nil),            // 17: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration
+	(*Annotation_SpansSource_Strategy)(nil),                    // 18: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy
+	(*Annotation_SpansSource_Strategy_Instant)(nil),            // 19: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Instant
+	(*Annotation_SpansSource_Strategy_Range)(nil),              // 20: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range
+	(*Annotation_SpansSource_Strategy_Duration)(nil),           // 21: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration
+	(*Annotation_DataprimeSource_Strategy)(nil),                // 22: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy
+	(*Annotation_DataprimeSource_Strategy_Instant)(nil),        // 23: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Instant
+	(*Annotation_DataprimeSource_Strategy_Range)(nil),          // 24: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Range
+	(*Annotation_DataprimeSource_Strategy_Duration)(nil),       // 25: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Duration
+	(*Annotation_ManualSource_Strategy)(nil),                   // 26: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy
+	(*Annotation_ManualSource_Strategy_Instant)(nil),           // 27: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Instant
+	(*Annotation_ManualSource_Strategy_Range)(nil),             // 28: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Range
+	(*Annotation_EventRecurrenceSource_Recurrence)(nil),        // 29: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Recurrence
+	(*Annotation_EventRecurrenceSource_WeeklyRecurrence)(nil),  // 30: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.WeeklyRecurrence
+	(*Annotation_EventRecurrenceSource_Strategy)(nil),          // 31: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy
+	(*Annotation_EventRecurrenceSource_Strategy_Instant)(nil),  // 32: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy.Instant
+	(*Annotation_EventRecurrenceSource_Strategy_Duration)(nil), // 33: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy.Duration
+	(*Annotation_WidgetScope_AllWidgets)(nil),                  // 34: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.WidgetScope.AllWidgets
+	(*Annotation_WidgetScope_SpecificWidgets)(nil),             // 35: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.WidgetScope.SpecificWidgets
+	(*wrapperspb.StringValue)(nil),                             // 36: google.protobuf.StringValue
+	(*wrapperspb.BoolValue)(nil),                               // 37: google.protobuf.BoolValue
+	(*common.PromQlQuery)(nil),                                 // 38: com.coralogixapis.dashboards.v1.common.PromQlQuery
+	(*common.LuceneQuery)(nil),                                 // 39: com.coralogixapis.dashboards.v1.common.LuceneQuery
+	(*common.ObservationField)(nil),                            // 40: com.coralogixapis.dashboards.v1.common.ObservationField
+	(common.DataModeType)(0),                                   // 41: com.coralogixapis.dashboards.v1.common.DataModeType
+	(*common.DataprimeQuery)(nil),                              // 42: com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	(common1.Unit)(0),                                          // 43: com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
+	(*wrapperspb.DoubleValue)(nil),                             // 44: google.protobuf.DoubleValue
+	(*wrapperspb.Int32Value)(nil),                              // 45: google.protobuf.Int32Value
+	(*durationpb.Duration)(nil),                                // 46: google.protobuf.Duration
 }
 var file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_depIdxs = []int32{
-	35, // 0: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.id:type_name -> google.protobuf.StringValue
-	35, // 1: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.name:type_name -> google.protobuf.StringValue
-	35, // 2: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.description:type_name -> google.protobuf.StringValue
-	36, // 3: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.enabled:type_name -> google.protobuf.BoolValue
-	3,  // 4: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.source:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source
-	10, // 5: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.scope:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.WidgetScope
-	4,  // 6: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source.metrics:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource
-	5,  // 7: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source.logs:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource
-	6,  // 8: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source.spans:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource
-	7,  // 9: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source.dataprime:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource
-	8,  // 10: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source.manual:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource
-	9,  // 11: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source.event_recurrence:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource
-	37, // 12: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.promql_query:type_name -> com.coralogixapis.dashboards.v1.common.PromQlQuery
-	11, // 13: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.strategy:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.Strategy
-	35, // 14: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.message_template:type_name -> google.protobuf.StringValue
-	35, // 15: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.labels:type_name -> google.protobuf.StringValue
-	0,  // 16: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.orientation:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.AnnotationOrientation
-	38, // 17: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.lucene_query:type_name -> com.coralogixapis.dashboards.v1.common.LuceneQuery
-	13, // 18: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.strategy:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy
-	35, // 19: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.message_template:type_name -> google.protobuf.StringValue
-	39, // 20: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.label_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	40, // 21: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.common.DataModeType
-	38, // 22: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.lucene_query:type_name -> com.coralogixapis.dashboards.v1.common.LuceneQuery
-	17, // 23: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.strategy:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy
-	35, // 24: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.message_template:type_name -> google.protobuf.StringValue
-	39, // 25: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.label_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	40, // 26: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.common.DataModeType
-	41, // 27: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.query:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
-	21, // 28: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.strategy:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy
-	35, // 29: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.message_template:type_name -> google.protobuf.StringValue
-	40, // 30: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.common.DataModeType
-	39, // 31: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.label_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	0,  // 32: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.orientation:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.AnnotationOrientation
-	25, // 33: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.strategy:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy
-	35, // 34: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.message_template:type_name -> google.protobuf.StringValue
-	0,  // 35: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.orientation:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.AnnotationOrientation
-	28, // 36: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.recurrence:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Recurrence
-	30, // 37: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.strategy:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy
-	35, // 38: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.message_template:type_name -> google.protobuf.StringValue
-	33, // 39: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.WidgetScope.all_widgets:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.WidgetScope.AllWidgets
-	34, // 40: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.WidgetScope.specific_widgets:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.WidgetScope.SpecificWidgets
-	12, // 41: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.Strategy.start_time_metric:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.StartTimeMetric
-	14, // 42: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.instant:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Instant
-	15, // 43: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.range:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range
-	16, // 44: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.duration:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration
-	39, // 45: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Instant.timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	39, // 46: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	39, // 47: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range.end_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	39, // 48: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	39, // 49: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration.duration_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	18, // 50: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.instant:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Instant
-	19, // 51: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.range:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range
-	20, // 52: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.duration:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration
-	39, // 53: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Instant.timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	39, // 54: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	39, // 55: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range.end_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	39, // 56: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	39, // 57: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration.duration_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	22, // 58: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.instant:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Instant
-	23, // 59: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.range:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Range
-	24, // 60: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.duration:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Duration
-	39, // 61: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Instant.timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	39, // 62: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Range.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	39, // 63: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Range.end_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	39, // 64: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Duration.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	39, // 65: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Duration.duration_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	26, // 66: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.instant:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Instant
-	27, // 67: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.range:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Range
-	42, // 68: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Instant.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
-	43, // 69: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Instant.value:type_name -> google.protobuf.DoubleValue
-	35, // 70: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Instant.custom_unit:type_name -> google.protobuf.StringValue
-	42, // 71: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Range.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
-	43, // 72: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Range.start_value:type_name -> google.protobuf.DoubleValue
-	43, // 73: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Range.end_value:type_name -> google.protobuf.DoubleValue
-	35, // 74: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Range.custom_unit:type_name -> google.protobuf.StringValue
-	29, // 75: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Recurrence.weekly:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.WeeklyRecurrence
-	1,  // 76: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.WeeklyRecurrence.days_of_week:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Weekday
-	31, // 77: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy.instant:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy.Instant
-	32, // 78: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy.duration:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy.Duration
-	44, // 79: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy.Instant.start_time_hour:type_name -> google.protobuf.Int32Value
-	44, // 80: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy.Duration.start_time_hour:type_name -> google.protobuf.Int32Value
-	45, // 81: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy.Duration.duration:type_name -> google.protobuf.Duration
-	35, // 82: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.WidgetScope.SpecificWidgets.widget_ids:type_name -> google.protobuf.StringValue
-	83, // [83:83] is the sub-list for method output_type
-	83, // [83:83] is the sub-list for method input_type
-	83, // [83:83] is the sub-list for extension type_name
-	83, // [83:83] is the sub-list for extension extendee
-	0,  // [0:83] is the sub-list for field type_name
+	36, // 0: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.id:type_name -> google.protobuf.StringValue
+	36, // 1: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.name:type_name -> google.protobuf.StringValue
+	36, // 2: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.description:type_name -> google.protobuf.StringValue
+	37, // 3: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.enabled:type_name -> google.protobuf.BoolValue
+	4,  // 4: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.source:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source
+	11, // 5: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.scope:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.WidgetScope
+	1,  // 6: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.color:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.AnnotationColor
+	5,  // 7: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source.metrics:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource
+	6,  // 8: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source.logs:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource
+	7,  // 9: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source.spans:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource
+	8,  // 10: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source.dataprime:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource
+	9,  // 11: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source.manual:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource
+	10, // 12: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source.event_recurrence:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource
+	38, // 13: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.promql_query:type_name -> com.coralogixapis.dashboards.v1.common.PromQlQuery
+	12, // 14: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.strategy:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.Strategy
+	36, // 15: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.message_template:type_name -> google.protobuf.StringValue
+	36, // 16: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.labels:type_name -> google.protobuf.StringValue
+	0,  // 17: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.orientation:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.AnnotationOrientation
+	39, // 18: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.lucene_query:type_name -> com.coralogixapis.dashboards.v1.common.LuceneQuery
+	14, // 19: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.strategy:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy
+	36, // 20: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.message_template:type_name -> google.protobuf.StringValue
+	40, // 21: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.label_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	41, // 22: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.common.DataModeType
+	39, // 23: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.lucene_query:type_name -> com.coralogixapis.dashboards.v1.common.LuceneQuery
+	18, // 24: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.strategy:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy
+	36, // 25: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.message_template:type_name -> google.protobuf.StringValue
+	40, // 26: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.label_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	41, // 27: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.common.DataModeType
+	42, // 28: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.query:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	22, // 29: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.strategy:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy
+	36, // 30: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.message_template:type_name -> google.protobuf.StringValue
+	41, // 31: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.common.DataModeType
+	40, // 32: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.label_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	0,  // 33: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.orientation:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.AnnotationOrientation
+	26, // 34: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.strategy:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy
+	36, // 35: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.message_template:type_name -> google.protobuf.StringValue
+	0,  // 36: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.orientation:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.AnnotationOrientation
+	29, // 37: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.recurrence:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Recurrence
+	31, // 38: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.strategy:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy
+	36, // 39: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.message_template:type_name -> google.protobuf.StringValue
+	34, // 40: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.WidgetScope.all_widgets:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.WidgetScope.AllWidgets
+	35, // 41: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.WidgetScope.specific_widgets:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.WidgetScope.SpecificWidgets
+	13, // 42: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.Strategy.start_time_metric:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.StartTimeMetric
+	15, // 43: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.instant:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Instant
+	16, // 44: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.range:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range
+	17, // 45: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.duration:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration
+	40, // 46: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Instant.timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	40, // 47: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	40, // 48: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range.end_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	40, // 49: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	40, // 50: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration.duration_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	19, // 51: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.instant:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Instant
+	20, // 52: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.range:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range
+	21, // 53: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.duration:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration
+	40, // 54: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Instant.timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	40, // 55: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	40, // 56: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range.end_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	40, // 57: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	40, // 58: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration.duration_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	23, // 59: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.instant:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Instant
+	24, // 60: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.range:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Range
+	25, // 61: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.duration:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Duration
+	40, // 62: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Instant.timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	40, // 63: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Range.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	40, // 64: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Range.end_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	40, // 65: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Duration.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	40, // 66: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Duration.duration_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	27, // 67: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.instant:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Instant
+	28, // 68: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.range:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Range
+	43, // 69: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Instant.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
+	44, // 70: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Instant.value:type_name -> google.protobuf.DoubleValue
+	36, // 71: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Instant.custom_unit:type_name -> google.protobuf.StringValue
+	43, // 72: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Range.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
+	44, // 73: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Range.start_value:type_name -> google.protobuf.DoubleValue
+	44, // 74: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Range.end_value:type_name -> google.protobuf.DoubleValue
+	36, // 75: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.ManualSource.Strategy.Range.custom_unit:type_name -> google.protobuf.StringValue
+	30, // 76: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Recurrence.weekly:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.WeeklyRecurrence
+	2,  // 77: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.WeeklyRecurrence.days_of_week:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Weekday
+	32, // 78: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy.instant:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy.Instant
+	33, // 79: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy.duration:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy.Duration
+	45, // 80: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy.Instant.start_time_hour:type_name -> google.protobuf.Int32Value
+	45, // 81: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy.Duration.start_time_hour:type_name -> google.protobuf.Int32Value
+	46, // 82: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.EventRecurrenceSource.Strategy.Duration.duration:type_name -> google.protobuf.Duration
+	36, // 83: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.WidgetScope.SpecificWidgets.widget_ids:type_name -> google.protobuf.StringValue
+	84, // [84:84] is the sub-list for method output_type
+	84, // [84:84] is the sub-list for method input_type
+	84, // [84:84] is the sub-list for extension type_name
+	84, // [84:84] is the sub-list for extension extendee
+	0,  // [0:84] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_init() }
@@ -2666,7 +2758,7 @@ func file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_init(
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDesc), len(file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      3,
 			NumMessages:   33,
 			NumExtensions: 0,
 			NumServices:   0,
