@@ -10,6 +10,7 @@ import (
 )
 
 func TestE2MsLogsQuery(t *testing.T) {
+	t.Skip("The API does not return the discriminating field for aggregations, and therefore we cannot deserialize the payload into any of the variants.")
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
 		cxsdk.APIKeyFromEnv(),
