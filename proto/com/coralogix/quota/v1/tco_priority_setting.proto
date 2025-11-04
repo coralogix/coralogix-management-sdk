@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package com.coralogix.quota.v1;
+
+import "com/coralogix/quota/v1/enums.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message PolicySettings {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Policy Settings"
+      description: "Policy settings for both logs and spans for a company."
+    }
+  };
+  LogsPolicySettings logs_policy_settings = 1;
+  SpansPolicySettings spans_policy_settings = 2;
+}
+
+message ReplacePolicySettingsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Replace Policy Settings Request"
+      description: "This data structure is used to replace default policy priority settings for logs and/or spans. Server-generated fields (created_at, updated_at) will be ignored if provided."
+    }
+  };
+  LogsPolicySettings logs_policy_settings = 1;
+  SpansPolicySettings spans_policy_settings = 2;
+}
+
+message ReplacePolicySettingsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Replace Policy Settings Response"
+      description: "This data structure is returned when replacing policy settings. It contains the complete resource including server-generated fields."
+    }
+  };
+  LogsPolicySettings logs_policy_settings = 2;
+  SpansPolicySettings spans_policy_settings = 1;
+}
+
+message GetPolicySettingsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Policy Priority Settings Response"
+      description: "This data structure is returned when getting policy priority settings."
+    }
+  };
+  LogsPolicySettings logs_policy_settings = 1;
+  SpansPolicySettings spans_policy_settings = 2;
+}
+
+message GetPolicySettingsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Policy Priority Settings Request"
+      description: "This data structure is used to get policy priority settings."
+    }
+  };
+}
+
+message LogsPolicySettings {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Logs Source Policy"
+      description: "This data structure is used to define the default priority for logs policies."
+    }
+  };
+  Priority default_priority = 1;
+}
+
+message SpansPolicySettings {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Spans Source Policy"
+      description: "This data structure is used to define the default priority for spans policies."
+    }
+  };
+  Priority default_priority = 1;
+}

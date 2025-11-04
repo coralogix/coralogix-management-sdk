@@ -30,6 +30,8 @@ const (
 	PoliciesService_AtomicBatchCreatePolicy_FullMethodName     = "/com.coralogix.quota.v1.PoliciesService/AtomicBatchCreatePolicy"
 	PoliciesService_AtomicOverwriteLogPolicies_FullMethodName  = "/com.coralogix.quota.v1.PoliciesService/AtomicOverwriteLogPolicies"
 	PoliciesService_AtomicOverwriteSpanPolicies_FullMethodName = "/com.coralogix.quota.v1.PoliciesService/AtomicOverwriteSpanPolicies"
+	PoliciesService_ReplacePolicySettings_FullMethodName       = "/com.coralogix.quota.v1.PoliciesService/ReplacePolicySettings"
+	PoliciesService_GetPolicySettings_FullMethodName           = "/com.coralogix.quota.v1.PoliciesService/GetPolicySettings"
 )
 
 // PoliciesServiceClient is the client API for PoliciesService service.
@@ -47,6 +49,8 @@ type PoliciesServiceClient interface {
 	AtomicBatchCreatePolicy(ctx context.Context, in *AtomicBatchCreatePolicyRequest, opts ...grpc.CallOption) (*AtomicBatchCreatePolicyResponse, error)
 	AtomicOverwriteLogPolicies(ctx context.Context, in *AtomicOverwriteLogPoliciesRequest, opts ...grpc.CallOption) (*AtomicOverwriteLogPoliciesResponse, error)
 	AtomicOverwriteSpanPolicies(ctx context.Context, in *AtomicOverwriteSpanPoliciesRequest, opts ...grpc.CallOption) (*AtomicOverwriteSpanPoliciesResponse, error)
+	ReplacePolicySettings(ctx context.Context, in *ReplacePolicySettingsRequest, opts ...grpc.CallOption) (*ReplacePolicySettingsResponse, error)
+	GetPolicySettings(ctx context.Context, in *GetPolicySettingsRequest, opts ...grpc.CallOption) (*GetPolicySettingsResponse, error)
 }
 
 type policiesServiceClient struct {
@@ -167,6 +171,26 @@ func (c *policiesServiceClient) AtomicOverwriteSpanPolicies(ctx context.Context,
 	return out, nil
 }
 
+func (c *policiesServiceClient) ReplacePolicySettings(ctx context.Context, in *ReplacePolicySettingsRequest, opts ...grpc.CallOption) (*ReplacePolicySettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReplacePolicySettingsResponse)
+	err := c.cc.Invoke(ctx, PoliciesService_ReplacePolicySettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *policiesServiceClient) GetPolicySettings(ctx context.Context, in *GetPolicySettingsRequest, opts ...grpc.CallOption) (*GetPolicySettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPolicySettingsResponse)
+	err := c.cc.Invoke(ctx, PoliciesService_GetPolicySettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PoliciesServiceServer is the server API for PoliciesService service.
 // All implementations must embed UnimplementedPoliciesServiceServer
 // for forward compatibility.
@@ -182,6 +206,8 @@ type PoliciesServiceServer interface {
 	AtomicBatchCreatePolicy(context.Context, *AtomicBatchCreatePolicyRequest) (*AtomicBatchCreatePolicyResponse, error)
 	AtomicOverwriteLogPolicies(context.Context, *AtomicOverwriteLogPoliciesRequest) (*AtomicOverwriteLogPoliciesResponse, error)
 	AtomicOverwriteSpanPolicies(context.Context, *AtomicOverwriteSpanPoliciesRequest) (*AtomicOverwriteSpanPoliciesResponse, error)
+	ReplacePolicySettings(context.Context, *ReplacePolicySettingsRequest) (*ReplacePolicySettingsResponse, error)
+	GetPolicySettings(context.Context, *GetPolicySettingsRequest) (*GetPolicySettingsResponse, error)
 	mustEmbedUnimplementedPoliciesServiceServer()
 }
 
@@ -224,6 +250,12 @@ func (UnimplementedPoliciesServiceServer) AtomicOverwriteLogPolicies(context.Con
 }
 func (UnimplementedPoliciesServiceServer) AtomicOverwriteSpanPolicies(context.Context, *AtomicOverwriteSpanPoliciesRequest) (*AtomicOverwriteSpanPoliciesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AtomicOverwriteSpanPolicies not implemented")
+}
+func (UnimplementedPoliciesServiceServer) ReplacePolicySettings(context.Context, *ReplacePolicySettingsRequest) (*ReplacePolicySettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReplacePolicySettings not implemented")
+}
+func (UnimplementedPoliciesServiceServer) GetPolicySettings(context.Context, *GetPolicySettingsRequest) (*GetPolicySettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPolicySettings not implemented")
 }
 func (UnimplementedPoliciesServiceServer) mustEmbedUnimplementedPoliciesServiceServer() {}
 func (UnimplementedPoliciesServiceServer) testEmbeddedByValue()                         {}
@@ -444,6 +476,42 @@ func _PoliciesService_AtomicOverwriteSpanPolicies_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PoliciesService_ReplacePolicySettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReplacePolicySettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PoliciesServiceServer).ReplacePolicySettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PoliciesService_ReplacePolicySettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PoliciesServiceServer).ReplacePolicySettings(ctx, req.(*ReplacePolicySettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PoliciesService_GetPolicySettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPolicySettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PoliciesServiceServer).GetPolicySettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PoliciesService_GetPolicySettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PoliciesServiceServer).GetPolicySettings(ctx, req.(*GetPolicySettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PoliciesService_ServiceDesc is the grpc.ServiceDesc for PoliciesService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -494,6 +562,14 @@ var PoliciesService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AtomicOverwriteSpanPolicies",
 			Handler:    _PoliciesService_AtomicOverwriteSpanPolicies_Handler,
+		},
+		{
+			MethodName: "ReplacePolicySettings",
+			Handler:    _PoliciesService_ReplacePolicySettings_Handler,
+		},
+		{
+			MethodName: "GetPolicySettings",
+			Handler:    _PoliciesService_GetPolicySettings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

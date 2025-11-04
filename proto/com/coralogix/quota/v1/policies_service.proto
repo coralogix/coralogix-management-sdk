@@ -18,6 +18,7 @@ import "com/coralogix/quota/v1/get_policy_request.proto";
 import "com/coralogix/quota/v1/get_policy_response.proto";
 import "com/coralogix/quota/v1/reorder_policies_request.proto";
 import "com/coralogix/quota/v1/reorder_policies_response.proto";
+import "com/coralogix/quota/v1/tco_priority_setting.proto";
 import "com/coralogix/quota/v1/toggle_policy_request.proto";
 import "com/coralogix/quota/v1/toggle_policy_response.proto";
 import "com/coralogix/quota/v1/update_policy_request.proto";
@@ -72,7 +73,7 @@ service PoliciesService {
         value: {description: "Internal server error"}
       }
       tags: ["Policies Service"]
-      summary: "Get Policy by ID"
+      summary: "Create Policy"
     };
     option (google.api.http) = {
       post: "/dataplans/policies/v1"
@@ -325,6 +326,58 @@ service PoliciesService {
         post: "/v1/policies:atomicOverwriteSpanPolicies"
         body: "*"
       }
+    };
+  }
+
+  rpc ReplacePolicySettings(ReplacePolicySettingsRequest) returns (ReplacePolicySettingsResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Replace Policy Settings";
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Policies Service"]
+      summary: "Replace Policy Settings"
+    };
+    option (google.api.http) = {
+      post: "/dataplans/policies/v1/replacePolicySettings"
+      body: "*"
+      additional_bindings: {
+        post: "/v1/policies:replacePolicySettings"
+        body: "*"
+      }
+    };
+  }
+
+  rpc GetPolicySettings(GetPolicySettingsRequest) returns (GetPolicySettingsResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get Policy Priority Settings";
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Policies Service"]
+      summary: "Get Policy Priority Settings"
+    };
+    option (google.api.http) = {
+      get: "/dataplans/policies/v1/getPolicyPrioritySettings"
+      additional_bindings: {get: "/v1/policies:getPolicyPrioritySettings"}
     };
   }
 }
