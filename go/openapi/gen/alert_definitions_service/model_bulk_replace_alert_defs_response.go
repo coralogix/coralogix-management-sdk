@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the BulkReplaceAlertDefsResponse type satisfies the MappedNullable interface at compile time
@@ -21,24 +19,18 @@ var _ MappedNullable = &BulkReplaceAlertDefsResponse{}
 
 // BulkReplaceAlertDefsResponse A response that contains the results of the bulk replace operation
 type BulkReplaceAlertDefsResponse struct {
-	AlertDefs []AlertDef `json:"alertDefs"`
-	FailedToReplaceAlertDefs []FailedToReplaceAlertDef `json:"failedToReplaceAlertDefs"`
-	NotFoundIds []string `json:"notFoundIds"`
-	SkippedIds []string `json:"skippedIds"`
+	AlertDefs []AlertDef `json:"alertDefs,omitempty"`
+	FailedToReplaceAlertDefs []FailedToReplaceAlertDef `json:"failedToReplaceAlertDefs,omitempty"`
+	NotFoundIds []string `json:"notFoundIds,omitempty"`
+	SkippedIds []string `json:"skippedIds,omitempty"`
 }
-
-type _BulkReplaceAlertDefsResponse BulkReplaceAlertDefsResponse
 
 // NewBulkReplaceAlertDefsResponse instantiates a new BulkReplaceAlertDefsResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBulkReplaceAlertDefsResponse(alertDefs []AlertDef, failedToReplaceAlertDefs []FailedToReplaceAlertDef, notFoundIds []string, skippedIds []string) *BulkReplaceAlertDefsResponse {
+func NewBulkReplaceAlertDefsResponse() *BulkReplaceAlertDefsResponse {
 	this := BulkReplaceAlertDefsResponse{}
-	this.AlertDefs = alertDefs
-	this.FailedToReplaceAlertDefs = failedToReplaceAlertDefs
-	this.NotFoundIds = notFoundIds
-	this.SkippedIds = skippedIds
 	return &this
 }
 
@@ -50,98 +42,130 @@ func NewBulkReplaceAlertDefsResponseWithDefaults() *BulkReplaceAlertDefsResponse
 	return &this
 }
 
-// GetAlertDefs returns the AlertDefs field value
+// GetAlertDefs returns the AlertDefs field value if set, zero value otherwise.
 func (o *BulkReplaceAlertDefsResponse) GetAlertDefs() []AlertDef {
-	if o == nil {
+	if o == nil || IsNil(o.AlertDefs) {
 		var ret []AlertDef
 		return ret
 	}
-
 	return o.AlertDefs
 }
 
-// GetAlertDefsOk returns a tuple with the AlertDefs field value
+// GetAlertDefsOk returns a tuple with the AlertDefs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkReplaceAlertDefsResponse) GetAlertDefsOk() ([]AlertDef, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.AlertDefs) {
 		return nil, false
 	}
 	return o.AlertDefs, true
 }
 
-// SetAlertDefs sets field value
+// HasAlertDefs returns a boolean if a field has been set.
+func (o *BulkReplaceAlertDefsResponse) HasAlertDefs() bool {
+	if o != nil && !IsNil(o.AlertDefs) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlertDefs gets a reference to the given []AlertDef and assigns it to the AlertDefs field.
 func (o *BulkReplaceAlertDefsResponse) SetAlertDefs(v []AlertDef) {
 	o.AlertDefs = v
 }
 
-// GetFailedToReplaceAlertDefs returns the FailedToReplaceAlertDefs field value
+// GetFailedToReplaceAlertDefs returns the FailedToReplaceAlertDefs field value if set, zero value otherwise.
 func (o *BulkReplaceAlertDefsResponse) GetFailedToReplaceAlertDefs() []FailedToReplaceAlertDef {
-	if o == nil {
+	if o == nil || IsNil(o.FailedToReplaceAlertDefs) {
 		var ret []FailedToReplaceAlertDef
 		return ret
 	}
-
 	return o.FailedToReplaceAlertDefs
 }
 
-// GetFailedToReplaceAlertDefsOk returns a tuple with the FailedToReplaceAlertDefs field value
+// GetFailedToReplaceAlertDefsOk returns a tuple with the FailedToReplaceAlertDefs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkReplaceAlertDefsResponse) GetFailedToReplaceAlertDefsOk() ([]FailedToReplaceAlertDef, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.FailedToReplaceAlertDefs) {
 		return nil, false
 	}
 	return o.FailedToReplaceAlertDefs, true
 }
 
-// SetFailedToReplaceAlertDefs sets field value
+// HasFailedToReplaceAlertDefs returns a boolean if a field has been set.
+func (o *BulkReplaceAlertDefsResponse) HasFailedToReplaceAlertDefs() bool {
+	if o != nil && !IsNil(o.FailedToReplaceAlertDefs) {
+		return true
+	}
+
+	return false
+}
+
+// SetFailedToReplaceAlertDefs gets a reference to the given []FailedToReplaceAlertDef and assigns it to the FailedToReplaceAlertDefs field.
 func (o *BulkReplaceAlertDefsResponse) SetFailedToReplaceAlertDefs(v []FailedToReplaceAlertDef) {
 	o.FailedToReplaceAlertDefs = v
 }
 
-// GetNotFoundIds returns the NotFoundIds field value
+// GetNotFoundIds returns the NotFoundIds field value if set, zero value otherwise.
 func (o *BulkReplaceAlertDefsResponse) GetNotFoundIds() []string {
-	if o == nil {
+	if o == nil || IsNil(o.NotFoundIds) {
 		var ret []string
 		return ret
 	}
-
 	return o.NotFoundIds
 }
 
-// GetNotFoundIdsOk returns a tuple with the NotFoundIds field value
+// GetNotFoundIdsOk returns a tuple with the NotFoundIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkReplaceAlertDefsResponse) GetNotFoundIdsOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.NotFoundIds) {
 		return nil, false
 	}
 	return o.NotFoundIds, true
 }
 
-// SetNotFoundIds sets field value
+// HasNotFoundIds returns a boolean if a field has been set.
+func (o *BulkReplaceAlertDefsResponse) HasNotFoundIds() bool {
+	if o != nil && !IsNil(o.NotFoundIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotFoundIds gets a reference to the given []string and assigns it to the NotFoundIds field.
 func (o *BulkReplaceAlertDefsResponse) SetNotFoundIds(v []string) {
 	o.NotFoundIds = v
 }
 
-// GetSkippedIds returns the SkippedIds field value
+// GetSkippedIds returns the SkippedIds field value if set, zero value otherwise.
 func (o *BulkReplaceAlertDefsResponse) GetSkippedIds() []string {
-	if o == nil {
+	if o == nil || IsNil(o.SkippedIds) {
 		var ret []string
 		return ret
 	}
-
 	return o.SkippedIds
 }
 
-// GetSkippedIdsOk returns a tuple with the SkippedIds field value
+// GetSkippedIdsOk returns a tuple with the SkippedIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkReplaceAlertDefsResponse) GetSkippedIdsOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SkippedIds) {
 		return nil, false
 	}
 	return o.SkippedIds, true
 }
 
-// SetSkippedIds sets field value
+// HasSkippedIds returns a boolean if a field has been set.
+func (o *BulkReplaceAlertDefsResponse) HasSkippedIds() bool {
+	if o != nil && !IsNil(o.SkippedIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetSkippedIds gets a reference to the given []string and assigns it to the SkippedIds field.
 func (o *BulkReplaceAlertDefsResponse) SetSkippedIds(v []string) {
 	o.SkippedIds = v
 }
@@ -156,51 +180,19 @@ func (o BulkReplaceAlertDefsResponse) MarshalJSON() ([]byte, error) {
 
 func (o BulkReplaceAlertDefsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["alertDefs"] = o.AlertDefs
-	toSerialize["failedToReplaceAlertDefs"] = o.FailedToReplaceAlertDefs
-	toSerialize["notFoundIds"] = o.NotFoundIds
-	toSerialize["skippedIds"] = o.SkippedIds
+	if !IsNil(o.AlertDefs) {
+		toSerialize["alertDefs"] = o.AlertDefs
+	}
+	if !IsNil(o.FailedToReplaceAlertDefs) {
+		toSerialize["failedToReplaceAlertDefs"] = o.FailedToReplaceAlertDefs
+	}
+	if !IsNil(o.NotFoundIds) {
+		toSerialize["notFoundIds"] = o.NotFoundIds
+	}
+	if !IsNil(o.SkippedIds) {
+		toSerialize["skippedIds"] = o.SkippedIds
+	}
 	return toSerialize, nil
-}
-
-func (o *BulkReplaceAlertDefsResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"alertDefs",
-		"failedToReplaceAlertDefs",
-		"notFoundIds",
-		"skippedIds",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varBulkReplaceAlertDefsResponse := _BulkReplaceAlertDefsResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBulkReplaceAlertDefsResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = BulkReplaceAlertDefsResponse(varBulkReplaceAlertDefsResponse)
-
-	return err
 }
 
 type NullableBulkReplaceAlertDefsResponse struct {

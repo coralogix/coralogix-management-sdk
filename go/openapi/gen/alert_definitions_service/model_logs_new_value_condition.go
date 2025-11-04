@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the LogsNewValueCondition type satisfies the MappedNullable interface at compile time
@@ -22,20 +20,16 @@ var _ MappedNullable = &LogsNewValueCondition{}
 // LogsNewValueCondition Defines conditions for detecting new values in logs
 type LogsNewValueCondition struct {
 	// The keypath to track for new values
-	KeypathToTrack string `json:"keypathToTrack"`
-	TimeWindow LogsNewValueTimeWindow `json:"timeWindow"`
+	KeypathToTrack *string `json:"keypathToTrack,omitempty"`
+	TimeWindow *LogsNewValueTimeWindow `json:"timeWindow,omitempty"`
 }
-
-type _LogsNewValueCondition LogsNewValueCondition
 
 // NewLogsNewValueCondition instantiates a new LogsNewValueCondition object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogsNewValueCondition(keypathToTrack string, timeWindow LogsNewValueTimeWindow) *LogsNewValueCondition {
+func NewLogsNewValueCondition() *LogsNewValueCondition {
 	this := LogsNewValueCondition{}
-	this.KeypathToTrack = keypathToTrack
-	this.TimeWindow = timeWindow
 	return &this
 }
 
@@ -47,52 +41,68 @@ func NewLogsNewValueConditionWithDefaults() *LogsNewValueCondition {
 	return &this
 }
 
-// GetKeypathToTrack returns the KeypathToTrack field value
+// GetKeypathToTrack returns the KeypathToTrack field value if set, zero value otherwise.
 func (o *LogsNewValueCondition) GetKeypathToTrack() string {
-	if o == nil {
+	if o == nil || IsNil(o.KeypathToTrack) {
 		var ret string
 		return ret
 	}
-
-	return o.KeypathToTrack
+	return *o.KeypathToTrack
 }
 
-// GetKeypathToTrackOk returns a tuple with the KeypathToTrack field value
+// GetKeypathToTrackOk returns a tuple with the KeypathToTrack field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsNewValueCondition) GetKeypathToTrackOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.KeypathToTrack) {
 		return nil, false
 	}
-	return &o.KeypathToTrack, true
+	return o.KeypathToTrack, true
 }
 
-// SetKeypathToTrack sets field value
+// HasKeypathToTrack returns a boolean if a field has been set.
+func (o *LogsNewValueCondition) HasKeypathToTrack() bool {
+	if o != nil && !IsNil(o.KeypathToTrack) {
+		return true
+	}
+
+	return false
+}
+
+// SetKeypathToTrack gets a reference to the given string and assigns it to the KeypathToTrack field.
 func (o *LogsNewValueCondition) SetKeypathToTrack(v string) {
-	o.KeypathToTrack = v
+	o.KeypathToTrack = &v
 }
 
-// GetTimeWindow returns the TimeWindow field value
+// GetTimeWindow returns the TimeWindow field value if set, zero value otherwise.
 func (o *LogsNewValueCondition) GetTimeWindow() LogsNewValueTimeWindow {
-	if o == nil {
+	if o == nil || IsNil(o.TimeWindow) {
 		var ret LogsNewValueTimeWindow
 		return ret
 	}
-
-	return o.TimeWindow
+	return *o.TimeWindow
 }
 
-// GetTimeWindowOk returns a tuple with the TimeWindow field value
+// GetTimeWindowOk returns a tuple with the TimeWindow field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsNewValueCondition) GetTimeWindowOk() (*LogsNewValueTimeWindow, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.TimeWindow) {
 		return nil, false
 	}
-	return &o.TimeWindow, true
+	return o.TimeWindow, true
 }
 
-// SetTimeWindow sets field value
+// HasTimeWindow returns a boolean if a field has been set.
+func (o *LogsNewValueCondition) HasTimeWindow() bool {
+	if o != nil && !IsNil(o.TimeWindow) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeWindow gets a reference to the given LogsNewValueTimeWindow and assigns it to the TimeWindow field.
 func (o *LogsNewValueCondition) SetTimeWindow(v LogsNewValueTimeWindow) {
-	o.TimeWindow = v
+	o.TimeWindow = &v
 }
 
 func (o LogsNewValueCondition) MarshalJSON() ([]byte, error) {
@@ -105,47 +115,13 @@ func (o LogsNewValueCondition) MarshalJSON() ([]byte, error) {
 
 func (o LogsNewValueCondition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["keypathToTrack"] = o.KeypathToTrack
-	toSerialize["timeWindow"] = o.TimeWindow
+	if !IsNil(o.KeypathToTrack) {
+		toSerialize["keypathToTrack"] = o.KeypathToTrack
+	}
+	if !IsNil(o.TimeWindow) {
+		toSerialize["timeWindow"] = o.TimeWindow
+	}
 	return toSerialize, nil
-}
-
-func (o *LogsNewValueCondition) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"keypathToTrack",
-		"timeWindow",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varLogsNewValueCondition := _LogsNewValueCondition{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLogsNewValueCondition)
-
-	if err != nil {
-		return err
-	}
-
-	*o = LogsNewValueCondition(varLogsNewValueCondition)
-
-	return err
 }
 
 type NullableLogsNewValueCondition struct {

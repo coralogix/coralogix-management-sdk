@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the FlowStages type satisfies the MappedNullable interface at compile time
@@ -22,20 +20,16 @@ var _ MappedNullable = &FlowStages{}
 // FlowStages Defines stages in a flow alert
 type FlowStages struct {
 	FlowStagesGroups *FlowStagesGroups `json:"flowStagesGroups,omitempty"`
-	TimeframeMs string `json:"timeframeMs"`
-	TimeframeType TimeframeType `json:"timeframeType"`
+	TimeframeMs *string `json:"timeframeMs,omitempty"`
+	TimeframeType *TimeframeType `json:"timeframeType,omitempty"`
 }
-
-type _FlowStages FlowStages
 
 // NewFlowStages instantiates a new FlowStages object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFlowStages(timeframeMs string, timeframeType TimeframeType) *FlowStages {
+func NewFlowStages() *FlowStages {
 	this := FlowStages{}
-	this.TimeframeMs = timeframeMs
-	this.TimeframeType = timeframeType
 	return &this
 }
 
@@ -79,52 +73,68 @@ func (o *FlowStages) SetFlowStagesGroups(v FlowStagesGroups) {
 	o.FlowStagesGroups = &v
 }
 
-// GetTimeframeMs returns the TimeframeMs field value
+// GetTimeframeMs returns the TimeframeMs field value if set, zero value otherwise.
 func (o *FlowStages) GetTimeframeMs() string {
-	if o == nil {
+	if o == nil || IsNil(o.TimeframeMs) {
 		var ret string
 		return ret
 	}
-
-	return o.TimeframeMs
+	return *o.TimeframeMs
 }
 
-// GetTimeframeMsOk returns a tuple with the TimeframeMs field value
+// GetTimeframeMsOk returns a tuple with the TimeframeMs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FlowStages) GetTimeframeMsOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.TimeframeMs) {
 		return nil, false
 	}
-	return &o.TimeframeMs, true
+	return o.TimeframeMs, true
 }
 
-// SetTimeframeMs sets field value
+// HasTimeframeMs returns a boolean if a field has been set.
+func (o *FlowStages) HasTimeframeMs() bool {
+	if o != nil && !IsNil(o.TimeframeMs) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeframeMs gets a reference to the given string and assigns it to the TimeframeMs field.
 func (o *FlowStages) SetTimeframeMs(v string) {
-	o.TimeframeMs = v
+	o.TimeframeMs = &v
 }
 
-// GetTimeframeType returns the TimeframeType field value
+// GetTimeframeType returns the TimeframeType field value if set, zero value otherwise.
 func (o *FlowStages) GetTimeframeType() TimeframeType {
-	if o == nil {
+	if o == nil || IsNil(o.TimeframeType) {
 		var ret TimeframeType
 		return ret
 	}
-
-	return o.TimeframeType
+	return *o.TimeframeType
 }
 
-// GetTimeframeTypeOk returns a tuple with the TimeframeType field value
+// GetTimeframeTypeOk returns a tuple with the TimeframeType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FlowStages) GetTimeframeTypeOk() (*TimeframeType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.TimeframeType) {
 		return nil, false
 	}
-	return &o.TimeframeType, true
+	return o.TimeframeType, true
 }
 
-// SetTimeframeType sets field value
+// HasTimeframeType returns a boolean if a field has been set.
+func (o *FlowStages) HasTimeframeType() bool {
+	if o != nil && !IsNil(o.TimeframeType) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeframeType gets a reference to the given TimeframeType and assigns it to the TimeframeType field.
 func (o *FlowStages) SetTimeframeType(v TimeframeType) {
-	o.TimeframeType = v
+	o.TimeframeType = &v
 }
 
 func (o FlowStages) MarshalJSON() ([]byte, error) {
@@ -140,47 +150,13 @@ func (o FlowStages) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FlowStagesGroups) {
 		toSerialize["flowStagesGroups"] = o.FlowStagesGroups
 	}
-	toSerialize["timeframeMs"] = o.TimeframeMs
-	toSerialize["timeframeType"] = o.TimeframeType
+	if !IsNil(o.TimeframeMs) {
+		toSerialize["timeframeMs"] = o.TimeframeMs
+	}
+	if !IsNil(o.TimeframeType) {
+		toSerialize["timeframeType"] = o.TimeframeType
+	}
 	return toSerialize, nil
-}
-
-func (o *FlowStages) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"timeframeMs",
-		"timeframeType",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varFlowStages := _FlowStages{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFlowStages)
-
-	if err != nil {
-		return err
-	}
-
-	*o = FlowStages(varFlowStages)
-
-	return err
 }
 
 type NullableFlowStages struct {

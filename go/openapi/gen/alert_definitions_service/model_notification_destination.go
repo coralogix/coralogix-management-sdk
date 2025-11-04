@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the NotificationDestination type satisfies the MappedNullable interface at compile time
@@ -22,7 +20,7 @@ var _ MappedNullable = &NotificationDestination{}
 // NotificationDestination Configuration for where and how alert notifications should be sent
 type NotificationDestination struct {
 	// The connector ID used to send notifications
-	ConnectorId string `json:"connectorId"`
+	ConnectorId *string `json:"connectorId,omitempty"`
 	NotifyOn *NotifyOn `json:"notifyOn,omitempty"`
 	// Optional preset ID for the notification destination
 	PresetId *string `json:"presetId,omitempty"`
@@ -30,15 +28,12 @@ type NotificationDestination struct {
 	TriggeredRoutingOverrides *NotificationRouting `json:"triggeredRoutingOverrides,omitempty"`
 }
 
-type _NotificationDestination NotificationDestination
-
 // NewNotificationDestination instantiates a new NotificationDestination object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNotificationDestination(connectorId string) *NotificationDestination {
+func NewNotificationDestination() *NotificationDestination {
 	this := NotificationDestination{}
-	this.ConnectorId = connectorId
 	return &this
 }
 
@@ -50,28 +45,36 @@ func NewNotificationDestinationWithDefaults() *NotificationDestination {
 	return &this
 }
 
-// GetConnectorId returns the ConnectorId field value
+// GetConnectorId returns the ConnectorId field value if set, zero value otherwise.
 func (o *NotificationDestination) GetConnectorId() string {
-	if o == nil {
+	if o == nil || IsNil(o.ConnectorId) {
 		var ret string
 		return ret
 	}
-
-	return o.ConnectorId
+	return *o.ConnectorId
 }
 
-// GetConnectorIdOk returns a tuple with the ConnectorId field value
+// GetConnectorIdOk returns a tuple with the ConnectorId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NotificationDestination) GetConnectorIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ConnectorId) {
 		return nil, false
 	}
-	return &o.ConnectorId, true
+	return o.ConnectorId, true
 }
 
-// SetConnectorId sets field value
+// HasConnectorId returns a boolean if a field has been set.
+func (o *NotificationDestination) HasConnectorId() bool {
+	if o != nil && !IsNil(o.ConnectorId) {
+		return true
+	}
+
+	return false
+}
+
+// SetConnectorId gets a reference to the given string and assigns it to the ConnectorId field.
 func (o *NotificationDestination) SetConnectorId(v string) {
-	o.ConnectorId = v
+	o.ConnectorId = &v
 }
 
 // GetNotifyOn returns the NotifyOn field value if set, zero value otherwise.
@@ -212,7 +215,9 @@ func (o NotificationDestination) MarshalJSON() ([]byte, error) {
 
 func (o NotificationDestination) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["connectorId"] = o.ConnectorId
+	if !IsNil(o.ConnectorId) {
+		toSerialize["connectorId"] = o.ConnectorId
+	}
 	if !IsNil(o.NotifyOn) {
 		toSerialize["notifyOn"] = o.NotifyOn
 	}
@@ -226,43 +231,6 @@ func (o NotificationDestination) ToMap() (map[string]interface{}, error) {
 		toSerialize["triggeredRoutingOverrides"] = o.TriggeredRoutingOverrides
 	}
 	return toSerialize, nil
-}
-
-func (o *NotificationDestination) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"connectorId",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varNotificationDestination := _NotificationDestination{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varNotificationDestination)
-
-	if err != nil {
-		return err
-	}
-
-	*o = NotificationDestination(varNotificationDestination)
-
-	return err
 }
 
 type NullableNotificationDestination struct {

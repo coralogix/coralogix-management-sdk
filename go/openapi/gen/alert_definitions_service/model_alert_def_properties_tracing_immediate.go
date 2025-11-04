@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the AlertDefPropertiesTracingImmediate type satisfies the MappedNullable interface at compile time
@@ -33,27 +31,22 @@ type AlertDefPropertiesTracingImmediate struct {
 	GroupByKeys []string `json:"groupByKeys,omitempty"`
 	IncidentsSettings *AlertDefIncidentSettings `json:"incidentsSettings,omitempty"`
 	// The name of the alert definition
-	Name string `json:"name"`
+	Name *string `json:"name,omitempty"`
 	NotificationGroup *AlertDefNotificationGroup `json:"notificationGroup,omitempty"`
 	NotificationGroupExcess []AlertDefNotificationGroup `json:"notificationGroupExcess,omitempty"`
 	// Whether the alert is in phantom mode (creating incidents or not)
 	PhantomMode *bool `json:"phantomMode,omitempty"`
-	Priority AlertDefPriority `json:"priority"`
+	Priority *AlertDefPriority `json:"priority,omitempty"`
 	TracingImmediate *TracingImmediateType `json:"tracingImmediate,omitempty"`
-	Type AlertDefType `json:"type"`
+	Type *AlertDefType `json:"type,omitempty"`
 }
-
-type _AlertDefPropertiesTracingImmediate AlertDefPropertiesTracingImmediate
 
 // NewAlertDefPropertiesTracingImmediate instantiates a new AlertDefPropertiesTracingImmediate object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDefPropertiesTracingImmediate(name string, priority AlertDefPriority, type_ AlertDefType) *AlertDefPropertiesTracingImmediate {
+func NewAlertDefPropertiesTracingImmediate() *AlertDefPropertiesTracingImmediate {
 	this := AlertDefPropertiesTracingImmediate{}
-	this.Name = name
-	this.Priority = priority
-	this.Type = type_
 	return &this
 }
 
@@ -289,28 +282,36 @@ func (o *AlertDefPropertiesTracingImmediate) SetIncidentsSettings(v AlertDefInci
 	o.IncidentsSettings = &v
 }
 
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *AlertDefPropertiesTracingImmediate) GetName() string {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertDefPropertiesTracingImmediate) GetNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *AlertDefPropertiesTracingImmediate) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *AlertDefPropertiesTracingImmediate) SetName(v string) {
-	o.Name = v
+	o.Name = &v
 }
 
 // GetNotificationGroup returns the NotificationGroup field value if set, zero value otherwise.
@@ -409,28 +410,36 @@ func (o *AlertDefPropertiesTracingImmediate) SetPhantomMode(v bool) {
 	o.PhantomMode = &v
 }
 
-// GetPriority returns the Priority field value
+// GetPriority returns the Priority field value if set, zero value otherwise.
 func (o *AlertDefPropertiesTracingImmediate) GetPriority() AlertDefPriority {
-	if o == nil {
+	if o == nil || IsNil(o.Priority) {
 		var ret AlertDefPriority
 		return ret
 	}
-
-	return o.Priority
+	return *o.Priority
 }
 
-// GetPriorityOk returns a tuple with the Priority field value
+// GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertDefPropertiesTracingImmediate) GetPriorityOk() (*AlertDefPriority, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Priority) {
 		return nil, false
 	}
-	return &o.Priority, true
+	return o.Priority, true
 }
 
-// SetPriority sets field value
+// HasPriority returns a boolean if a field has been set.
+func (o *AlertDefPropertiesTracingImmediate) HasPriority() bool {
+	if o != nil && !IsNil(o.Priority) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriority gets a reference to the given AlertDefPriority and assigns it to the Priority field.
 func (o *AlertDefPropertiesTracingImmediate) SetPriority(v AlertDefPriority) {
-	o.Priority = v
+	o.Priority = &v
 }
 
 // GetTracingImmediate returns the TracingImmediate field value if set, zero value otherwise.
@@ -465,28 +474,36 @@ func (o *AlertDefPropertiesTracingImmediate) SetTracingImmediate(v TracingImmedi
 	o.TracingImmediate = &v
 }
 
-// GetType returns the Type field value
+// GetType returns the Type field value if set, zero value otherwise.
 func (o *AlertDefPropertiesTracingImmediate) GetType() AlertDefType {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret AlertDefType
 		return ret
 	}
-
-	return o.Type
+	return *o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertDefPropertiesTracingImmediate) GetTypeOk() (*AlertDefType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
-	return &o.Type, true
+	return o.Type, true
 }
 
-// SetType sets field value
+// HasType returns a boolean if a field has been set.
+func (o *AlertDefPropertiesTracingImmediate) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given AlertDefType and assigns it to the Type field.
 func (o *AlertDefPropertiesTracingImmediate) SetType(v AlertDefType) {
-	o.Type = v
+	o.Type = &v
 }
 
 func (o AlertDefPropertiesTracingImmediate) MarshalJSON() ([]byte, error) {
@@ -520,7 +537,9 @@ func (o AlertDefPropertiesTracingImmediate) ToMap() (map[string]interface{}, err
 	if !IsNil(o.IncidentsSettings) {
 		toSerialize["incidentsSettings"] = o.IncidentsSettings
 	}
-	toSerialize["name"] = o.Name
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	if !IsNil(o.NotificationGroup) {
 		toSerialize["notificationGroup"] = o.NotificationGroup
 	}
@@ -530,51 +549,16 @@ func (o AlertDefPropertiesTracingImmediate) ToMap() (map[string]interface{}, err
 	if !IsNil(o.PhantomMode) {
 		toSerialize["phantomMode"] = o.PhantomMode
 	}
-	toSerialize["priority"] = o.Priority
+	if !IsNil(o.Priority) {
+		toSerialize["priority"] = o.Priority
+	}
 	if !IsNil(o.TracingImmediate) {
 		toSerialize["tracingImmediate"] = o.TracingImmediate
 	}
-	toSerialize["type"] = o.Type
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
 	return toSerialize, nil
-}
-
-func (o *AlertDefPropertiesTracingImmediate) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"name",
-		"priority",
-		"type",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varAlertDefPropertiesTracingImmediate := _AlertDefPropertiesTracingImmediate{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAlertDefPropertiesTracingImmediate)
-
-	if err != nil {
-		return err
-	}
-
-	*o = AlertDefPropertiesTracingImmediate(varAlertDefPropertiesTracingImmediate)
-
-	return err
 }
 
 type NullableAlertDefPropertiesTracingImmediate struct {

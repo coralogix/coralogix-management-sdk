@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ListAlertDefsResponse type satisfies the MappedNullable interface at compile time
@@ -21,19 +19,16 @@ var _ MappedNullable = &ListAlertDefsResponse{}
 
 // ListAlertDefsResponse A response that contains a list of alert definitions
 type ListAlertDefsResponse struct {
-	AlertDefs []AlertDef `json:"alertDefs"`
+	AlertDefs []AlertDef `json:"alertDefs,omitempty"`
 	Pagination *AlertsV3PaginationResponse `json:"pagination,omitempty"`
 }
-
-type _ListAlertDefsResponse ListAlertDefsResponse
 
 // NewListAlertDefsResponse instantiates a new ListAlertDefsResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListAlertDefsResponse(alertDefs []AlertDef) *ListAlertDefsResponse {
+func NewListAlertDefsResponse() *ListAlertDefsResponse {
 	this := ListAlertDefsResponse{}
-	this.AlertDefs = alertDefs
 	return &this
 }
 
@@ -45,26 +40,34 @@ func NewListAlertDefsResponseWithDefaults() *ListAlertDefsResponse {
 	return &this
 }
 
-// GetAlertDefs returns the AlertDefs field value
+// GetAlertDefs returns the AlertDefs field value if set, zero value otherwise.
 func (o *ListAlertDefsResponse) GetAlertDefs() []AlertDef {
-	if o == nil {
+	if o == nil || IsNil(o.AlertDefs) {
 		var ret []AlertDef
 		return ret
 	}
-
 	return o.AlertDefs
 }
 
-// GetAlertDefsOk returns a tuple with the AlertDefs field value
+// GetAlertDefsOk returns a tuple with the AlertDefs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ListAlertDefsResponse) GetAlertDefsOk() ([]AlertDef, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.AlertDefs) {
 		return nil, false
 	}
 	return o.AlertDefs, true
 }
 
-// SetAlertDefs sets field value
+// HasAlertDefs returns a boolean if a field has been set.
+func (o *ListAlertDefsResponse) HasAlertDefs() bool {
+	if o != nil && !IsNil(o.AlertDefs) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlertDefs gets a reference to the given []AlertDef and assigns it to the AlertDefs field.
 func (o *ListAlertDefsResponse) SetAlertDefs(v []AlertDef) {
 	o.AlertDefs = v
 }
@@ -111,48 +114,13 @@ func (o ListAlertDefsResponse) MarshalJSON() ([]byte, error) {
 
 func (o ListAlertDefsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["alertDefs"] = o.AlertDefs
+	if !IsNil(o.AlertDefs) {
+		toSerialize["alertDefs"] = o.AlertDefs
+	}
 	if !IsNil(o.Pagination) {
 		toSerialize["pagination"] = o.Pagination
 	}
 	return toSerialize, nil
-}
-
-func (o *ListAlertDefsResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"alertDefs",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varListAlertDefsResponse := _ListAlertDefsResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListAlertDefsResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ListAlertDefsResponse(varListAlertDefsResponse)
-
-	return err
 }
 
 type NullableListAlertDefsResponse struct {

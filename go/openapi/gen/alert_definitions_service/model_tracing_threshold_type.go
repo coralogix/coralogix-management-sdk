@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the TracingThresholdType type satisfies the MappedNullable interface at compile time
@@ -22,20 +20,16 @@ var _ MappedNullable = &TracingThresholdType{}
 // TracingThresholdType Configuration for alerts based on trace count thresholds
 type TracingThresholdType struct {
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
-	Rules []TracingThresholdRule `json:"rules"`
-	TracingFilter TracingFilter `json:"tracingFilter"`
+	Rules []TracingThresholdRule `json:"rules,omitempty"`
+	TracingFilter *TracingFilter `json:"tracingFilter,omitempty"`
 }
-
-type _TracingThresholdType TracingThresholdType
 
 // NewTracingThresholdType instantiates a new TracingThresholdType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTracingThresholdType(rules []TracingThresholdRule, tracingFilter TracingFilter) *TracingThresholdType {
+func NewTracingThresholdType() *TracingThresholdType {
 	this := TracingThresholdType{}
-	this.Rules = rules
-	this.TracingFilter = tracingFilter
 	return &this
 }
 
@@ -79,52 +73,68 @@ func (o *TracingThresholdType) SetNotificationPayloadFilter(v []string) {
 	o.NotificationPayloadFilter = v
 }
 
-// GetRules returns the Rules field value
+// GetRules returns the Rules field value if set, zero value otherwise.
 func (o *TracingThresholdType) GetRules() []TracingThresholdRule {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		var ret []TracingThresholdRule
 		return ret
 	}
-
 	return o.Rules
 }
 
-// GetRulesOk returns a tuple with the Rules field value
+// GetRulesOk returns a tuple with the Rules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TracingThresholdType) GetRulesOk() ([]TracingThresholdRule, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		return nil, false
 	}
 	return o.Rules, true
 }
 
-// SetRules sets field value
+// HasRules returns a boolean if a field has been set.
+func (o *TracingThresholdType) HasRules() bool {
+	if o != nil && !IsNil(o.Rules) {
+		return true
+	}
+
+	return false
+}
+
+// SetRules gets a reference to the given []TracingThresholdRule and assigns it to the Rules field.
 func (o *TracingThresholdType) SetRules(v []TracingThresholdRule) {
 	o.Rules = v
 }
 
-// GetTracingFilter returns the TracingFilter field value
+// GetTracingFilter returns the TracingFilter field value if set, zero value otherwise.
 func (o *TracingThresholdType) GetTracingFilter() TracingFilter {
-	if o == nil {
+	if o == nil || IsNil(o.TracingFilter) {
 		var ret TracingFilter
 		return ret
 	}
-
-	return o.TracingFilter
+	return *o.TracingFilter
 }
 
-// GetTracingFilterOk returns a tuple with the TracingFilter field value
+// GetTracingFilterOk returns a tuple with the TracingFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TracingThresholdType) GetTracingFilterOk() (*TracingFilter, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.TracingFilter) {
 		return nil, false
 	}
-	return &o.TracingFilter, true
+	return o.TracingFilter, true
 }
 
-// SetTracingFilter sets field value
+// HasTracingFilter returns a boolean if a field has been set.
+func (o *TracingThresholdType) HasTracingFilter() bool {
+	if o != nil && !IsNil(o.TracingFilter) {
+		return true
+	}
+
+	return false
+}
+
+// SetTracingFilter gets a reference to the given TracingFilter and assigns it to the TracingFilter field.
 func (o *TracingThresholdType) SetTracingFilter(v TracingFilter) {
-	o.TracingFilter = v
+	o.TracingFilter = &v
 }
 
 func (o TracingThresholdType) MarshalJSON() ([]byte, error) {
@@ -140,47 +150,13 @@ func (o TracingThresholdType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NotificationPayloadFilter) {
 		toSerialize["notificationPayloadFilter"] = o.NotificationPayloadFilter
 	}
-	toSerialize["rules"] = o.Rules
-	toSerialize["tracingFilter"] = o.TracingFilter
+	if !IsNil(o.Rules) {
+		toSerialize["rules"] = o.Rules
+	}
+	if !IsNil(o.TracingFilter) {
+		toSerialize["tracingFilter"] = o.TracingFilter
+	}
 	return toSerialize, nil
-}
-
-func (o *TracingThresholdType) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"rules",
-		"tracingFilter",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varTracingThresholdType := _TracingThresholdType{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTracingThresholdType)
-
-	if err != nil {
-		return err
-	}
-
-	*o = TracingThresholdType(varTracingThresholdType)
-
-	return err
 }
 
 type NullableTracingThresholdType struct {

@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ReplaceAlertDefResponse type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &ReplaceAlertDefResponse{}
 
 // ReplaceAlertDefResponse A response that contains the updated alert definition
 type ReplaceAlertDefResponse struct {
-	AlertDef AlertDef `json:"alertDef"`
+	AlertDef *AlertDef `json:"alertDef,omitempty"`
 }
-
-type _ReplaceAlertDefResponse ReplaceAlertDefResponse
 
 // NewReplaceAlertDefResponse instantiates a new ReplaceAlertDefResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReplaceAlertDefResponse(alertDef AlertDef) *ReplaceAlertDefResponse {
+func NewReplaceAlertDefResponse() *ReplaceAlertDefResponse {
 	this := ReplaceAlertDefResponse{}
-	this.AlertDef = alertDef
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewReplaceAlertDefResponseWithDefaults() *ReplaceAlertDefResponse {
 	return &this
 }
 
-// GetAlertDef returns the AlertDef field value
+// GetAlertDef returns the AlertDef field value if set, zero value otherwise.
 func (o *ReplaceAlertDefResponse) GetAlertDef() AlertDef {
-	if o == nil {
+	if o == nil || IsNil(o.AlertDef) {
 		var ret AlertDef
 		return ret
 	}
-
-	return o.AlertDef
+	return *o.AlertDef
 }
 
-// GetAlertDefOk returns a tuple with the AlertDef field value
+// GetAlertDefOk returns a tuple with the AlertDef field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ReplaceAlertDefResponse) GetAlertDefOk() (*AlertDef, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.AlertDef) {
 		return nil, false
 	}
-	return &o.AlertDef, true
+	return o.AlertDef, true
 }
 
-// SetAlertDef sets field value
+// HasAlertDef returns a boolean if a field has been set.
+func (o *ReplaceAlertDefResponse) HasAlertDef() bool {
+	if o != nil && !IsNil(o.AlertDef) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlertDef gets a reference to the given AlertDef and assigns it to the AlertDef field.
 func (o *ReplaceAlertDefResponse) SetAlertDef(v AlertDef) {
-	o.AlertDef = v
+	o.AlertDef = &v
 }
 
 func (o ReplaceAlertDefResponse) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o ReplaceAlertDefResponse) MarshalJSON() ([]byte, error) {
 
 func (o ReplaceAlertDefResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["alertDef"] = o.AlertDef
+	if !IsNil(o.AlertDef) {
+		toSerialize["alertDef"] = o.AlertDef
+	}
 	return toSerialize, nil
-}
-
-func (o *ReplaceAlertDefResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"alertDef",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varReplaceAlertDefResponse := _ReplaceAlertDefResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReplaceAlertDefResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ReplaceAlertDefResponse(varReplaceAlertDefResponse)
-
-	return err
 }
 
 type NullableReplaceAlertDefResponse struct {

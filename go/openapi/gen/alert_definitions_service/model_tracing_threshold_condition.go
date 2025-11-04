@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the TracingThresholdCondition type satisfies the MappedNullable interface at compile time
@@ -21,23 +19,18 @@ var _ MappedNullable = &TracingThresholdCondition{}
 
 // TracingThresholdCondition struct for TracingThresholdCondition
 type TracingThresholdCondition struct {
-	ConditionType TracingThresholdConditionType `json:"conditionType"`
+	ConditionType *TracingThresholdConditionType `json:"conditionType,omitempty"`
 	// The threshold value for the alert condition
-	SpanAmount float64 `json:"spanAmount"`
-	TimeWindow TracingTimeWindow `json:"timeWindow"`
+	SpanAmount *float64 `json:"spanAmount,omitempty"`
+	TimeWindow *TracingTimeWindow `json:"timeWindow,omitempty"`
 }
-
-type _TracingThresholdCondition TracingThresholdCondition
 
 // NewTracingThresholdCondition instantiates a new TracingThresholdCondition object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTracingThresholdCondition(conditionType TracingThresholdConditionType, spanAmount float64, timeWindow TracingTimeWindow) *TracingThresholdCondition {
+func NewTracingThresholdCondition() *TracingThresholdCondition {
 	this := TracingThresholdCondition{}
-	this.ConditionType = conditionType
-	this.SpanAmount = spanAmount
-	this.TimeWindow = timeWindow
 	return &this
 }
 
@@ -49,76 +42,100 @@ func NewTracingThresholdConditionWithDefaults() *TracingThresholdCondition {
 	return &this
 }
 
-// GetConditionType returns the ConditionType field value
+// GetConditionType returns the ConditionType field value if set, zero value otherwise.
 func (o *TracingThresholdCondition) GetConditionType() TracingThresholdConditionType {
-	if o == nil {
+	if o == nil || IsNil(o.ConditionType) {
 		var ret TracingThresholdConditionType
 		return ret
 	}
-
-	return o.ConditionType
+	return *o.ConditionType
 }
 
-// GetConditionTypeOk returns a tuple with the ConditionType field value
+// GetConditionTypeOk returns a tuple with the ConditionType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TracingThresholdCondition) GetConditionTypeOk() (*TracingThresholdConditionType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ConditionType) {
 		return nil, false
 	}
-	return &o.ConditionType, true
+	return o.ConditionType, true
 }
 
-// SetConditionType sets field value
+// HasConditionType returns a boolean if a field has been set.
+func (o *TracingThresholdCondition) HasConditionType() bool {
+	if o != nil && !IsNil(o.ConditionType) {
+		return true
+	}
+
+	return false
+}
+
+// SetConditionType gets a reference to the given TracingThresholdConditionType and assigns it to the ConditionType field.
 func (o *TracingThresholdCondition) SetConditionType(v TracingThresholdConditionType) {
-	o.ConditionType = v
+	o.ConditionType = &v
 }
 
-// GetSpanAmount returns the SpanAmount field value
+// GetSpanAmount returns the SpanAmount field value if set, zero value otherwise.
 func (o *TracingThresholdCondition) GetSpanAmount() float64 {
-	if o == nil {
+	if o == nil || IsNil(o.SpanAmount) {
 		var ret float64
 		return ret
 	}
-
-	return o.SpanAmount
+	return *o.SpanAmount
 }
 
-// GetSpanAmountOk returns a tuple with the SpanAmount field value
+// GetSpanAmountOk returns a tuple with the SpanAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TracingThresholdCondition) GetSpanAmountOk() (*float64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SpanAmount) {
 		return nil, false
 	}
-	return &o.SpanAmount, true
+	return o.SpanAmount, true
 }
 
-// SetSpanAmount sets field value
+// HasSpanAmount returns a boolean if a field has been set.
+func (o *TracingThresholdCondition) HasSpanAmount() bool {
+	if o != nil && !IsNil(o.SpanAmount) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpanAmount gets a reference to the given float64 and assigns it to the SpanAmount field.
 func (o *TracingThresholdCondition) SetSpanAmount(v float64) {
-	o.SpanAmount = v
+	o.SpanAmount = &v
 }
 
-// GetTimeWindow returns the TimeWindow field value
+// GetTimeWindow returns the TimeWindow field value if set, zero value otherwise.
 func (o *TracingThresholdCondition) GetTimeWindow() TracingTimeWindow {
-	if o == nil {
+	if o == nil || IsNil(o.TimeWindow) {
 		var ret TracingTimeWindow
 		return ret
 	}
-
-	return o.TimeWindow
+	return *o.TimeWindow
 }
 
-// GetTimeWindowOk returns a tuple with the TimeWindow field value
+// GetTimeWindowOk returns a tuple with the TimeWindow field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TracingThresholdCondition) GetTimeWindowOk() (*TracingTimeWindow, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.TimeWindow) {
 		return nil, false
 	}
-	return &o.TimeWindow, true
+	return o.TimeWindow, true
 }
 
-// SetTimeWindow sets field value
+// HasTimeWindow returns a boolean if a field has been set.
+func (o *TracingThresholdCondition) HasTimeWindow() bool {
+	if o != nil && !IsNil(o.TimeWindow) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeWindow gets a reference to the given TracingTimeWindow and assigns it to the TimeWindow field.
 func (o *TracingThresholdCondition) SetTimeWindow(v TracingTimeWindow) {
-	o.TimeWindow = v
+	o.TimeWindow = &v
 }
 
 func (o TracingThresholdCondition) MarshalJSON() ([]byte, error) {
@@ -131,49 +148,16 @@ func (o TracingThresholdCondition) MarshalJSON() ([]byte, error) {
 
 func (o TracingThresholdCondition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["conditionType"] = o.ConditionType
-	toSerialize["spanAmount"] = o.SpanAmount
-	toSerialize["timeWindow"] = o.TimeWindow
+	if !IsNil(o.ConditionType) {
+		toSerialize["conditionType"] = o.ConditionType
+	}
+	if !IsNil(o.SpanAmount) {
+		toSerialize["spanAmount"] = o.SpanAmount
+	}
+	if !IsNil(o.TimeWindow) {
+		toSerialize["timeWindow"] = o.TimeWindow
+	}
 	return toSerialize, nil
-}
-
-func (o *TracingThresholdCondition) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"conditionType",
-		"spanAmount",
-		"timeWindow",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varTracingThresholdCondition := _TracingThresholdCondition{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTracingThresholdCondition)
-
-	if err != nil {
-		return err
-	}
-
-	*o = TracingThresholdCondition(varTracingThresholdCondition)
-
-	return err
 }
 
 type NullableTracingThresholdCondition struct {

@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the LogsAnomalyType type satisfies the MappedNullable interface at compile time
@@ -26,18 +24,15 @@ type LogsAnomalyType struct {
 	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
 	LogsFilter *V3LogsFilter `json:"logsFilter,omitempty"`
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
-	Rules []LogsAnomalyRule `json:"rules"`
+	Rules []LogsAnomalyRule `json:"rules,omitempty"`
 }
-
-type _LogsAnomalyType LogsAnomalyType
 
 // NewLogsAnomalyType instantiates a new LogsAnomalyType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogsAnomalyType(rules []LogsAnomalyRule) *LogsAnomalyType {
+func NewLogsAnomalyType() *LogsAnomalyType {
 	this := LogsAnomalyType{}
-	this.Rules = rules
 	return &this
 }
 
@@ -177,26 +172,34 @@ func (o *LogsAnomalyType) SetNotificationPayloadFilter(v []string) {
 	o.NotificationPayloadFilter = v
 }
 
-// GetRules returns the Rules field value
+// GetRules returns the Rules field value if set, zero value otherwise.
 func (o *LogsAnomalyType) GetRules() []LogsAnomalyRule {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		var ret []LogsAnomalyRule
 		return ret
 	}
-
 	return o.Rules
 }
 
-// GetRulesOk returns a tuple with the Rules field value
+// GetRulesOk returns a tuple with the Rules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsAnomalyType) GetRulesOk() ([]LogsAnomalyRule, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		return nil, false
 	}
 	return o.Rules, true
 }
 
-// SetRules sets field value
+// HasRules returns a boolean if a field has been set.
+func (o *LogsAnomalyType) HasRules() bool {
+	if o != nil && !IsNil(o.Rules) {
+		return true
+	}
+
+	return false
+}
+
+// SetRules gets a reference to the given []LogsAnomalyRule and assigns it to the Rules field.
 func (o *LogsAnomalyType) SetRules(v []LogsAnomalyRule) {
 	o.Rules = v
 }
@@ -223,45 +226,10 @@ func (o LogsAnomalyType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NotificationPayloadFilter) {
 		toSerialize["notificationPayloadFilter"] = o.NotificationPayloadFilter
 	}
-	toSerialize["rules"] = o.Rules
+	if !IsNil(o.Rules) {
+		toSerialize["rules"] = o.Rules
+	}
 	return toSerialize, nil
-}
-
-func (o *LogsAnomalyType) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"rules",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varLogsAnomalyType := _LogsAnomalyType{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLogsAnomalyType)
-
-	if err != nil {
-		return err
-	}
-
-	*o = LogsAnomalyType(varLogsAnomalyType)
-
-	return err
 }
 
 type NullableLogsAnomalyType struct {

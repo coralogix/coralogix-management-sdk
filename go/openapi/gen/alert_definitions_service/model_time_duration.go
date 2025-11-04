@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the TimeDuration type satisfies the MappedNullable interface at compile time
@@ -22,20 +20,16 @@ var _ MappedNullable = &TimeDuration{}
 // TimeDuration Configuration for time duration
 type TimeDuration struct {
 	// The duration value
-	Duration string `json:"duration"`
-	Unit DurationUnit `json:"unit"`
+	Duration *string `json:"duration,omitempty"`
+	Unit *DurationUnit `json:"unit,omitempty"`
 }
-
-type _TimeDuration TimeDuration
 
 // NewTimeDuration instantiates a new TimeDuration object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTimeDuration(duration string, unit DurationUnit) *TimeDuration {
+func NewTimeDuration() *TimeDuration {
 	this := TimeDuration{}
-	this.Duration = duration
-	this.Unit = unit
 	return &this
 }
 
@@ -47,52 +41,68 @@ func NewTimeDurationWithDefaults() *TimeDuration {
 	return &this
 }
 
-// GetDuration returns the Duration field value
+// GetDuration returns the Duration field value if set, zero value otherwise.
 func (o *TimeDuration) GetDuration() string {
-	if o == nil {
+	if o == nil || IsNil(o.Duration) {
 		var ret string
 		return ret
 	}
-
-	return o.Duration
+	return *o.Duration
 }
 
-// GetDurationOk returns a tuple with the Duration field value
+// GetDurationOk returns a tuple with the Duration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TimeDuration) GetDurationOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Duration) {
 		return nil, false
 	}
-	return &o.Duration, true
+	return o.Duration, true
 }
 
-// SetDuration sets field value
+// HasDuration returns a boolean if a field has been set.
+func (o *TimeDuration) HasDuration() bool {
+	if o != nil && !IsNil(o.Duration) {
+		return true
+	}
+
+	return false
+}
+
+// SetDuration gets a reference to the given string and assigns it to the Duration field.
 func (o *TimeDuration) SetDuration(v string) {
-	o.Duration = v
+	o.Duration = &v
 }
 
-// GetUnit returns the Unit field value
+// GetUnit returns the Unit field value if set, zero value otherwise.
 func (o *TimeDuration) GetUnit() DurationUnit {
-	if o == nil {
+	if o == nil || IsNil(o.Unit) {
 		var ret DurationUnit
 		return ret
 	}
-
-	return o.Unit
+	return *o.Unit
 }
 
-// GetUnitOk returns a tuple with the Unit field value
+// GetUnitOk returns a tuple with the Unit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TimeDuration) GetUnitOk() (*DurationUnit, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Unit) {
 		return nil, false
 	}
-	return &o.Unit, true
+	return o.Unit, true
 }
 
-// SetUnit sets field value
+// HasUnit returns a boolean if a field has been set.
+func (o *TimeDuration) HasUnit() bool {
+	if o != nil && !IsNil(o.Unit) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnit gets a reference to the given DurationUnit and assigns it to the Unit field.
 func (o *TimeDuration) SetUnit(v DurationUnit) {
-	o.Unit = v
+	o.Unit = &v
 }
 
 func (o TimeDuration) MarshalJSON() ([]byte, error) {
@@ -105,47 +115,13 @@ func (o TimeDuration) MarshalJSON() ([]byte, error) {
 
 func (o TimeDuration) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["duration"] = o.Duration
-	toSerialize["unit"] = o.Unit
+	if !IsNil(o.Duration) {
+		toSerialize["duration"] = o.Duration
+	}
+	if !IsNil(o.Unit) {
+		toSerialize["unit"] = o.Unit
+	}
 	return toSerialize, nil
-}
-
-func (o *TimeDuration) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"duration",
-		"unit",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varTimeDuration := _TimeDuration{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTimeDuration)
-
-	if err != nil {
-		return err
-	}
-
-	*o = TimeDuration(varTimeDuration)
-
-	return err
 }
 
 type NullableTimeDuration struct {

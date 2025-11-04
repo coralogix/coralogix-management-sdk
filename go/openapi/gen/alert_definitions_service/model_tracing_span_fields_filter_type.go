@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the TracingSpanFieldsFilterType type satisfies the MappedNullable interface at compile time
@@ -21,21 +19,17 @@ var _ MappedNullable = &TracingSpanFieldsFilterType{}
 
 // TracingSpanFieldsFilterType A filter for span fields in trace entries
 type TracingSpanFieldsFilterType struct {
-	FilterType TracingFilterType `json:"filterType"`
+	FilterType *TracingFilterType `json:"filterType,omitempty"`
 	// The key of the span field to filter by
-	Key string `json:"key" validate:"regexp=^\\\\w+\\\\.\\\\w+$"`
+	Key *string `json:"key,omitempty" validate:"regexp=^\\\\w+\\\\.\\\\w+$"`
 }
-
-type _TracingSpanFieldsFilterType TracingSpanFieldsFilterType
 
 // NewTracingSpanFieldsFilterType instantiates a new TracingSpanFieldsFilterType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTracingSpanFieldsFilterType(filterType TracingFilterType, key string) *TracingSpanFieldsFilterType {
+func NewTracingSpanFieldsFilterType() *TracingSpanFieldsFilterType {
 	this := TracingSpanFieldsFilterType{}
-	this.FilterType = filterType
-	this.Key = key
 	return &this
 }
 
@@ -47,52 +41,68 @@ func NewTracingSpanFieldsFilterTypeWithDefaults() *TracingSpanFieldsFilterType {
 	return &this
 }
 
-// GetFilterType returns the FilterType field value
+// GetFilterType returns the FilterType field value if set, zero value otherwise.
 func (o *TracingSpanFieldsFilterType) GetFilterType() TracingFilterType {
-	if o == nil {
+	if o == nil || IsNil(o.FilterType) {
 		var ret TracingFilterType
 		return ret
 	}
-
-	return o.FilterType
+	return *o.FilterType
 }
 
-// GetFilterTypeOk returns a tuple with the FilterType field value
+// GetFilterTypeOk returns a tuple with the FilterType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TracingSpanFieldsFilterType) GetFilterTypeOk() (*TracingFilterType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.FilterType) {
 		return nil, false
 	}
-	return &o.FilterType, true
+	return o.FilterType, true
 }
 
-// SetFilterType sets field value
+// HasFilterType returns a boolean if a field has been set.
+func (o *TracingSpanFieldsFilterType) HasFilterType() bool {
+	if o != nil && !IsNil(o.FilterType) {
+		return true
+	}
+
+	return false
+}
+
+// SetFilterType gets a reference to the given TracingFilterType and assigns it to the FilterType field.
 func (o *TracingSpanFieldsFilterType) SetFilterType(v TracingFilterType) {
-	o.FilterType = v
+	o.FilterType = &v
 }
 
-// GetKey returns the Key field value
+// GetKey returns the Key field value if set, zero value otherwise.
 func (o *TracingSpanFieldsFilterType) GetKey() string {
-	if o == nil {
+	if o == nil || IsNil(o.Key) {
 		var ret string
 		return ret
 	}
-
-	return o.Key
+	return *o.Key
 }
 
-// GetKeyOk returns a tuple with the Key field value
+// GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TracingSpanFieldsFilterType) GetKeyOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Key) {
 		return nil, false
 	}
-	return &o.Key, true
+	return o.Key, true
 }
 
-// SetKey sets field value
+// HasKey returns a boolean if a field has been set.
+func (o *TracingSpanFieldsFilterType) HasKey() bool {
+	if o != nil && !IsNil(o.Key) {
+		return true
+	}
+
+	return false
+}
+
+// SetKey gets a reference to the given string and assigns it to the Key field.
 func (o *TracingSpanFieldsFilterType) SetKey(v string) {
-	o.Key = v
+	o.Key = &v
 }
 
 func (o TracingSpanFieldsFilterType) MarshalJSON() ([]byte, error) {
@@ -105,47 +115,13 @@ func (o TracingSpanFieldsFilterType) MarshalJSON() ([]byte, error) {
 
 func (o TracingSpanFieldsFilterType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["filterType"] = o.FilterType
-	toSerialize["key"] = o.Key
+	if !IsNil(o.FilterType) {
+		toSerialize["filterType"] = o.FilterType
+	}
+	if !IsNil(o.Key) {
+		toSerialize["key"] = o.Key
+	}
 	return toSerialize, nil
-}
-
-func (o *TracingSpanFieldsFilterType) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"filterType",
-		"key",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varTracingSpanFieldsFilterType := _TracingSpanFieldsFilterType{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTracingSpanFieldsFilterType)
-
-	if err != nil {
-		return err
-	}
-
-	*o = TracingSpanFieldsFilterType(varTracingSpanFieldsFilterType)
-
-	return err
 }
 
 type NullableTracingSpanFieldsFilterType struct {

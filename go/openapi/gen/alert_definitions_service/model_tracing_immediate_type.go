@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the TracingImmediateType type satisfies the MappedNullable interface at compile time
@@ -22,18 +20,15 @@ var _ MappedNullable = &TracingImmediateType{}
 // TracingImmediateType Configuration for immediate alerts triggered on trace entries
 type TracingImmediateType struct {
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
-	TracingFilter TracingFilter `json:"tracingFilter"`
+	TracingFilter *TracingFilter `json:"tracingFilter,omitempty"`
 }
-
-type _TracingImmediateType TracingImmediateType
 
 // NewTracingImmediateType instantiates a new TracingImmediateType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTracingImmediateType(tracingFilter TracingFilter) *TracingImmediateType {
+func NewTracingImmediateType() *TracingImmediateType {
 	this := TracingImmediateType{}
-	this.TracingFilter = tracingFilter
 	return &this
 }
 
@@ -77,28 +72,36 @@ func (o *TracingImmediateType) SetNotificationPayloadFilter(v []string) {
 	o.NotificationPayloadFilter = v
 }
 
-// GetTracingFilter returns the TracingFilter field value
+// GetTracingFilter returns the TracingFilter field value if set, zero value otherwise.
 func (o *TracingImmediateType) GetTracingFilter() TracingFilter {
-	if o == nil {
+	if o == nil || IsNil(o.TracingFilter) {
 		var ret TracingFilter
 		return ret
 	}
-
-	return o.TracingFilter
+	return *o.TracingFilter
 }
 
-// GetTracingFilterOk returns a tuple with the TracingFilter field value
+// GetTracingFilterOk returns a tuple with the TracingFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TracingImmediateType) GetTracingFilterOk() (*TracingFilter, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.TracingFilter) {
 		return nil, false
 	}
-	return &o.TracingFilter, true
+	return o.TracingFilter, true
 }
 
-// SetTracingFilter sets field value
+// HasTracingFilter returns a boolean if a field has been set.
+func (o *TracingImmediateType) HasTracingFilter() bool {
+	if o != nil && !IsNil(o.TracingFilter) {
+		return true
+	}
+
+	return false
+}
+
+// SetTracingFilter gets a reference to the given TracingFilter and assigns it to the TracingFilter field.
 func (o *TracingImmediateType) SetTracingFilter(v TracingFilter) {
-	o.TracingFilter = v
+	o.TracingFilter = &v
 }
 
 func (o TracingImmediateType) MarshalJSON() ([]byte, error) {
@@ -114,45 +117,10 @@ func (o TracingImmediateType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NotificationPayloadFilter) {
 		toSerialize["notificationPayloadFilter"] = o.NotificationPayloadFilter
 	}
-	toSerialize["tracingFilter"] = o.TracingFilter
+	if !IsNil(o.TracingFilter) {
+		toSerialize["tracingFilter"] = o.TracingFilter
+	}
 	return toSerialize, nil
-}
-
-func (o *TracingImmediateType) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"tracingFilter",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varTracingImmediateType := _TracingImmediateType{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTracingImmediateType)
-
-	if err != nil {
-		return err
-	}
-
-	*o = TracingImmediateType(varTracingImmediateType)
-
-	return err
 }
 
 type NullableTracingImmediateType struct {

@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the V3SourceOverrides type satisfies the MappedNullable interface at compile time
@@ -21,23 +19,18 @@ var _ MappedNullable = &V3SourceOverrides{}
 
 // V3SourceOverrides struct for V3SourceOverrides
 type V3SourceOverrides struct {
-	ConnectorConfigFields []V3ConnectorConfigField `json:"connectorConfigFields"`
-	MessageConfigFields []V3MessageConfigField `json:"messageConfigFields"`
+	ConnectorConfigFields []V3ConnectorConfigField `json:"connectorConfigFields,omitempty"`
+	MessageConfigFields []V3MessageConfigField `json:"messageConfigFields,omitempty"`
 	// the payload type for the notification
-	PayloadType string `json:"payloadType"`
+	PayloadType *string `json:"payloadType,omitempty"`
 }
-
-type _V3SourceOverrides V3SourceOverrides
 
 // NewV3SourceOverrides instantiates a new V3SourceOverrides object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV3SourceOverrides(connectorConfigFields []V3ConnectorConfigField, messageConfigFields []V3MessageConfigField, payloadType string) *V3SourceOverrides {
+func NewV3SourceOverrides() *V3SourceOverrides {
 	this := V3SourceOverrides{}
-	this.ConnectorConfigFields = connectorConfigFields
-	this.MessageConfigFields = messageConfigFields
-	this.PayloadType = payloadType
 	return &this
 }
 
@@ -49,76 +42,100 @@ func NewV3SourceOverridesWithDefaults() *V3SourceOverrides {
 	return &this
 }
 
-// GetConnectorConfigFields returns the ConnectorConfigFields field value
+// GetConnectorConfigFields returns the ConnectorConfigFields field value if set, zero value otherwise.
 func (o *V3SourceOverrides) GetConnectorConfigFields() []V3ConnectorConfigField {
-	if o == nil {
+	if o == nil || IsNil(o.ConnectorConfigFields) {
 		var ret []V3ConnectorConfigField
 		return ret
 	}
-
 	return o.ConnectorConfigFields
 }
 
-// GetConnectorConfigFieldsOk returns a tuple with the ConnectorConfigFields field value
+// GetConnectorConfigFieldsOk returns a tuple with the ConnectorConfigFields field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V3SourceOverrides) GetConnectorConfigFieldsOk() ([]V3ConnectorConfigField, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ConnectorConfigFields) {
 		return nil, false
 	}
 	return o.ConnectorConfigFields, true
 }
 
-// SetConnectorConfigFields sets field value
+// HasConnectorConfigFields returns a boolean if a field has been set.
+func (o *V3SourceOverrides) HasConnectorConfigFields() bool {
+	if o != nil && !IsNil(o.ConnectorConfigFields) {
+		return true
+	}
+
+	return false
+}
+
+// SetConnectorConfigFields gets a reference to the given []V3ConnectorConfigField and assigns it to the ConnectorConfigFields field.
 func (o *V3SourceOverrides) SetConnectorConfigFields(v []V3ConnectorConfigField) {
 	o.ConnectorConfigFields = v
 }
 
-// GetMessageConfigFields returns the MessageConfigFields field value
+// GetMessageConfigFields returns the MessageConfigFields field value if set, zero value otherwise.
 func (o *V3SourceOverrides) GetMessageConfigFields() []V3MessageConfigField {
-	if o == nil {
+	if o == nil || IsNil(o.MessageConfigFields) {
 		var ret []V3MessageConfigField
 		return ret
 	}
-
 	return o.MessageConfigFields
 }
 
-// GetMessageConfigFieldsOk returns a tuple with the MessageConfigFields field value
+// GetMessageConfigFieldsOk returns a tuple with the MessageConfigFields field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V3SourceOverrides) GetMessageConfigFieldsOk() ([]V3MessageConfigField, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.MessageConfigFields) {
 		return nil, false
 	}
 	return o.MessageConfigFields, true
 }
 
-// SetMessageConfigFields sets field value
+// HasMessageConfigFields returns a boolean if a field has been set.
+func (o *V3SourceOverrides) HasMessageConfigFields() bool {
+	if o != nil && !IsNil(o.MessageConfigFields) {
+		return true
+	}
+
+	return false
+}
+
+// SetMessageConfigFields gets a reference to the given []V3MessageConfigField and assigns it to the MessageConfigFields field.
 func (o *V3SourceOverrides) SetMessageConfigFields(v []V3MessageConfigField) {
 	o.MessageConfigFields = v
 }
 
-// GetPayloadType returns the PayloadType field value
+// GetPayloadType returns the PayloadType field value if set, zero value otherwise.
 func (o *V3SourceOverrides) GetPayloadType() string {
-	if o == nil {
+	if o == nil || IsNil(o.PayloadType) {
 		var ret string
 		return ret
 	}
-
-	return o.PayloadType
+	return *o.PayloadType
 }
 
-// GetPayloadTypeOk returns a tuple with the PayloadType field value
+// GetPayloadTypeOk returns a tuple with the PayloadType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V3SourceOverrides) GetPayloadTypeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.PayloadType) {
 		return nil, false
 	}
-	return &o.PayloadType, true
+	return o.PayloadType, true
 }
 
-// SetPayloadType sets field value
+// HasPayloadType returns a boolean if a field has been set.
+func (o *V3SourceOverrides) HasPayloadType() bool {
+	if o != nil && !IsNil(o.PayloadType) {
+		return true
+	}
+
+	return false
+}
+
+// SetPayloadType gets a reference to the given string and assigns it to the PayloadType field.
 func (o *V3SourceOverrides) SetPayloadType(v string) {
-	o.PayloadType = v
+	o.PayloadType = &v
 }
 
 func (o V3SourceOverrides) MarshalJSON() ([]byte, error) {
@@ -131,49 +148,16 @@ func (o V3SourceOverrides) MarshalJSON() ([]byte, error) {
 
 func (o V3SourceOverrides) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["connectorConfigFields"] = o.ConnectorConfigFields
-	toSerialize["messageConfigFields"] = o.MessageConfigFields
-	toSerialize["payloadType"] = o.PayloadType
+	if !IsNil(o.ConnectorConfigFields) {
+		toSerialize["connectorConfigFields"] = o.ConnectorConfigFields
+	}
+	if !IsNil(o.MessageConfigFields) {
+		toSerialize["messageConfigFields"] = o.MessageConfigFields
+	}
+	if !IsNil(o.PayloadType) {
+		toSerialize["payloadType"] = o.PayloadType
+	}
 	return toSerialize, nil
-}
-
-func (o *V3SourceOverrides) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"connectorConfigFields",
-		"messageConfigFields",
-		"payloadType",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varV3SourceOverrides := _V3SourceOverrides{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varV3SourceOverrides)
-
-	if err != nil {
-		return err
-	}
-
-	*o = V3SourceOverrides(varV3SourceOverrides)
-
-	return err
 }
 
 type NullableV3SourceOverrides struct {

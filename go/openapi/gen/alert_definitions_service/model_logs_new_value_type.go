@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the LogsNewValueType type satisfies the MappedNullable interface at compile time
@@ -23,18 +21,15 @@ var _ MappedNullable = &LogsNewValueType{}
 type LogsNewValueType struct {
 	LogsFilter *V3LogsFilter `json:"logsFilter,omitempty"`
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
-	Rules []LogsNewValueRule `json:"rules"`
+	Rules []LogsNewValueRule `json:"rules,omitempty"`
 }
-
-type _LogsNewValueType LogsNewValueType
 
 // NewLogsNewValueType instantiates a new LogsNewValueType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogsNewValueType(rules []LogsNewValueRule) *LogsNewValueType {
+func NewLogsNewValueType() *LogsNewValueType {
 	this := LogsNewValueType{}
-	this.Rules = rules
 	return &this
 }
 
@@ -110,26 +105,34 @@ func (o *LogsNewValueType) SetNotificationPayloadFilter(v []string) {
 	o.NotificationPayloadFilter = v
 }
 
-// GetRules returns the Rules field value
+// GetRules returns the Rules field value if set, zero value otherwise.
 func (o *LogsNewValueType) GetRules() []LogsNewValueRule {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		var ret []LogsNewValueRule
 		return ret
 	}
-
 	return o.Rules
 }
 
-// GetRulesOk returns a tuple with the Rules field value
+// GetRulesOk returns a tuple with the Rules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsNewValueType) GetRulesOk() ([]LogsNewValueRule, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		return nil, false
 	}
 	return o.Rules, true
 }
 
-// SetRules sets field value
+// HasRules returns a boolean if a field has been set.
+func (o *LogsNewValueType) HasRules() bool {
+	if o != nil && !IsNil(o.Rules) {
+		return true
+	}
+
+	return false
+}
+
+// SetRules gets a reference to the given []LogsNewValueRule and assigns it to the Rules field.
 func (o *LogsNewValueType) SetRules(v []LogsNewValueRule) {
 	o.Rules = v
 }
@@ -150,45 +153,10 @@ func (o LogsNewValueType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NotificationPayloadFilter) {
 		toSerialize["notificationPayloadFilter"] = o.NotificationPayloadFilter
 	}
-	toSerialize["rules"] = o.Rules
+	if !IsNil(o.Rules) {
+		toSerialize["rules"] = o.Rules
+	}
 	return toSerialize, nil
-}
-
-func (o *LogsNewValueType) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"rules",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varLogsNewValueType := _LogsNewValueType{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLogsNewValueType)
-
-	if err != nil {
-		return err
-	}
-
-	*o = LogsNewValueType(varLogsNewValueType)
-
-	return err
 }
 
 type NullableLogsNewValueType struct {

@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the MetricThresholdCondition type satisfies the MappedNullable interface at compile time
@@ -23,23 +21,18 @@ var _ MappedNullable = &MetricThresholdCondition{}
 type MetricThresholdCondition struct {
 	ConditionType *MetricThresholdConditionType `json:"conditionType,omitempty"`
 	// The percentage of values that must exceed the threshold to trigger the alert
-	ForOverPct int64 `json:"forOverPct"`
-	OfTheLast MetricTimeWindow `json:"ofTheLast"`
+	ForOverPct *int64 `json:"forOverPct,omitempty"`
+	OfTheLast *MetricTimeWindow `json:"ofTheLast,omitempty"`
 	// The threshold value for the alert condition
-	Threshold float64 `json:"threshold"`
+	Threshold *float64 `json:"threshold,omitempty"`
 }
-
-type _MetricThresholdCondition MetricThresholdCondition
 
 // NewMetricThresholdCondition instantiates a new MetricThresholdCondition object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetricThresholdCondition(forOverPct int64, ofTheLast MetricTimeWindow, threshold float64) *MetricThresholdCondition {
+func NewMetricThresholdCondition() *MetricThresholdCondition {
 	this := MetricThresholdCondition{}
-	this.ForOverPct = forOverPct
-	this.OfTheLast = ofTheLast
-	this.Threshold = threshold
 	return &this
 }
 
@@ -83,76 +76,100 @@ func (o *MetricThresholdCondition) SetConditionType(v MetricThresholdConditionTy
 	o.ConditionType = &v
 }
 
-// GetForOverPct returns the ForOverPct field value
+// GetForOverPct returns the ForOverPct field value if set, zero value otherwise.
 func (o *MetricThresholdCondition) GetForOverPct() int64 {
-	if o == nil {
+	if o == nil || IsNil(o.ForOverPct) {
 		var ret int64
 		return ret
 	}
-
-	return o.ForOverPct
+	return *o.ForOverPct
 }
 
-// GetForOverPctOk returns a tuple with the ForOverPct field value
+// GetForOverPctOk returns a tuple with the ForOverPct field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricThresholdCondition) GetForOverPctOk() (*int64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ForOverPct) {
 		return nil, false
 	}
-	return &o.ForOverPct, true
+	return o.ForOverPct, true
 }
 
-// SetForOverPct sets field value
+// HasForOverPct returns a boolean if a field has been set.
+func (o *MetricThresholdCondition) HasForOverPct() bool {
+	if o != nil && !IsNil(o.ForOverPct) {
+		return true
+	}
+
+	return false
+}
+
+// SetForOverPct gets a reference to the given int64 and assigns it to the ForOverPct field.
 func (o *MetricThresholdCondition) SetForOverPct(v int64) {
-	o.ForOverPct = v
+	o.ForOverPct = &v
 }
 
-// GetOfTheLast returns the OfTheLast field value
+// GetOfTheLast returns the OfTheLast field value if set, zero value otherwise.
 func (o *MetricThresholdCondition) GetOfTheLast() MetricTimeWindow {
-	if o == nil {
+	if o == nil || IsNil(o.OfTheLast) {
 		var ret MetricTimeWindow
 		return ret
 	}
-
-	return o.OfTheLast
+	return *o.OfTheLast
 }
 
-// GetOfTheLastOk returns a tuple with the OfTheLast field value
+// GetOfTheLastOk returns a tuple with the OfTheLast field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricThresholdCondition) GetOfTheLastOk() (*MetricTimeWindow, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.OfTheLast) {
 		return nil, false
 	}
-	return &o.OfTheLast, true
+	return o.OfTheLast, true
 }
 
-// SetOfTheLast sets field value
+// HasOfTheLast returns a boolean if a field has been set.
+func (o *MetricThresholdCondition) HasOfTheLast() bool {
+	if o != nil && !IsNil(o.OfTheLast) {
+		return true
+	}
+
+	return false
+}
+
+// SetOfTheLast gets a reference to the given MetricTimeWindow and assigns it to the OfTheLast field.
 func (o *MetricThresholdCondition) SetOfTheLast(v MetricTimeWindow) {
-	o.OfTheLast = v
+	o.OfTheLast = &v
 }
 
-// GetThreshold returns the Threshold field value
+// GetThreshold returns the Threshold field value if set, zero value otherwise.
 func (o *MetricThresholdCondition) GetThreshold() float64 {
-	if o == nil {
+	if o == nil || IsNil(o.Threshold) {
 		var ret float64
 		return ret
 	}
-
-	return o.Threshold
+	return *o.Threshold
 }
 
-// GetThresholdOk returns a tuple with the Threshold field value
+// GetThresholdOk returns a tuple with the Threshold field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricThresholdCondition) GetThresholdOk() (*float64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Threshold) {
 		return nil, false
 	}
-	return &o.Threshold, true
+	return o.Threshold, true
 }
 
-// SetThreshold sets field value
+// HasThreshold returns a boolean if a field has been set.
+func (o *MetricThresholdCondition) HasThreshold() bool {
+	if o != nil && !IsNil(o.Threshold) {
+		return true
+	}
+
+	return false
+}
+
+// SetThreshold gets a reference to the given float64 and assigns it to the Threshold field.
 func (o *MetricThresholdCondition) SetThreshold(v float64) {
-	o.Threshold = v
+	o.Threshold = &v
 }
 
 func (o MetricThresholdCondition) MarshalJSON() ([]byte, error) {
@@ -168,49 +185,16 @@ func (o MetricThresholdCondition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConditionType) {
 		toSerialize["conditionType"] = o.ConditionType
 	}
-	toSerialize["forOverPct"] = o.ForOverPct
-	toSerialize["ofTheLast"] = o.OfTheLast
-	toSerialize["threshold"] = o.Threshold
+	if !IsNil(o.ForOverPct) {
+		toSerialize["forOverPct"] = o.ForOverPct
+	}
+	if !IsNil(o.OfTheLast) {
+		toSerialize["ofTheLast"] = o.OfTheLast
+	}
+	if !IsNil(o.Threshold) {
+		toSerialize["threshold"] = o.Threshold
+	}
 	return toSerialize, nil
-}
-
-func (o *MetricThresholdCondition) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"forOverPct",
-		"ofTheLast",
-		"threshold",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varMetricThresholdCondition := _MetricThresholdCondition{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMetricThresholdCondition)
-
-	if err != nil {
-		return err
-	}
-
-	*o = MetricThresholdCondition(varMetricThresholdCondition)
-
-	return err
 }
 
 type NullableMetricThresholdCondition struct {

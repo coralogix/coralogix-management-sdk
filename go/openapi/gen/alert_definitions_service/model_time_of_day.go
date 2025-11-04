@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the TimeOfDay type satisfies the MappedNullable interface at compile time
@@ -21,20 +19,16 @@ var _ MappedNullable = &TimeOfDay{}
 
 // TimeOfDay Represents a specific time in a 24-hour format
 type TimeOfDay struct {
-	Hours int32 `json:"hours"`
-	Minutes int32 `json:"minutes"`
+	Hours *int32 `json:"hours,omitempty"`
+	Minutes *int32 `json:"minutes,omitempty"`
 }
-
-type _TimeOfDay TimeOfDay
 
 // NewTimeOfDay instantiates a new TimeOfDay object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTimeOfDay(hours int32, minutes int32) *TimeOfDay {
+func NewTimeOfDay() *TimeOfDay {
 	this := TimeOfDay{}
-	this.Hours = hours
-	this.Minutes = minutes
 	return &this
 }
 
@@ -46,52 +40,68 @@ func NewTimeOfDayWithDefaults() *TimeOfDay {
 	return &this
 }
 
-// GetHours returns the Hours field value
+// GetHours returns the Hours field value if set, zero value otherwise.
 func (o *TimeOfDay) GetHours() int32 {
-	if o == nil {
+	if o == nil || IsNil(o.Hours) {
 		var ret int32
 		return ret
 	}
-
-	return o.Hours
+	return *o.Hours
 }
 
-// GetHoursOk returns a tuple with the Hours field value
+// GetHoursOk returns a tuple with the Hours field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TimeOfDay) GetHoursOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Hours) {
 		return nil, false
 	}
-	return &o.Hours, true
+	return o.Hours, true
 }
 
-// SetHours sets field value
+// HasHours returns a boolean if a field has been set.
+func (o *TimeOfDay) HasHours() bool {
+	if o != nil && !IsNil(o.Hours) {
+		return true
+	}
+
+	return false
+}
+
+// SetHours gets a reference to the given int32 and assigns it to the Hours field.
 func (o *TimeOfDay) SetHours(v int32) {
-	o.Hours = v
+	o.Hours = &v
 }
 
-// GetMinutes returns the Minutes field value
+// GetMinutes returns the Minutes field value if set, zero value otherwise.
 func (o *TimeOfDay) GetMinutes() int32 {
-	if o == nil {
+	if o == nil || IsNil(o.Minutes) {
 		var ret int32
 		return ret
 	}
-
-	return o.Minutes
+	return *o.Minutes
 }
 
-// GetMinutesOk returns a tuple with the Minutes field value
+// GetMinutesOk returns a tuple with the Minutes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TimeOfDay) GetMinutesOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Minutes) {
 		return nil, false
 	}
-	return &o.Minutes, true
+	return o.Minutes, true
 }
 
-// SetMinutes sets field value
+// HasMinutes returns a boolean if a field has been set.
+func (o *TimeOfDay) HasMinutes() bool {
+	if o != nil && !IsNil(o.Minutes) {
+		return true
+	}
+
+	return false
+}
+
+// SetMinutes gets a reference to the given int32 and assigns it to the Minutes field.
 func (o *TimeOfDay) SetMinutes(v int32) {
-	o.Minutes = v
+	o.Minutes = &v
 }
 
 func (o TimeOfDay) MarshalJSON() ([]byte, error) {
@@ -104,47 +114,13 @@ func (o TimeOfDay) MarshalJSON() ([]byte, error) {
 
 func (o TimeOfDay) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["hours"] = o.Hours
-	toSerialize["minutes"] = o.Minutes
+	if !IsNil(o.Hours) {
+		toSerialize["hours"] = o.Hours
+	}
+	if !IsNil(o.Minutes) {
+		toSerialize["minutes"] = o.Minutes
+	}
 	return toSerialize, nil
-}
-
-func (o *TimeOfDay) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"hours",
-		"minutes",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varTimeOfDay := _TimeOfDay{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTimeOfDay)
-
-	if err != nil {
-		return err
-	}
-
-	*o = TimeOfDay(varTimeOfDay)
-
-	return err
 }
 
 type NullableTimeOfDay struct {

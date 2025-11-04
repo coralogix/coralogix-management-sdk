@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the LogsUniqueCountRule type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &LogsUniqueCountRule{}
 
 // LogsUniqueCountRule Defines the rule for detecting unique counts in logs
 type LogsUniqueCountRule struct {
-	Condition LogsUniqueCountCondition `json:"condition"`
+	Condition *LogsUniqueCountCondition `json:"condition,omitempty"`
 }
-
-type _LogsUniqueCountRule LogsUniqueCountRule
 
 // NewLogsUniqueCountRule instantiates a new LogsUniqueCountRule object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogsUniqueCountRule(condition LogsUniqueCountCondition) *LogsUniqueCountRule {
+func NewLogsUniqueCountRule() *LogsUniqueCountRule {
 	this := LogsUniqueCountRule{}
-	this.Condition = condition
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewLogsUniqueCountRuleWithDefaults() *LogsUniqueCountRule {
 	return &this
 }
 
-// GetCondition returns the Condition field value
+// GetCondition returns the Condition field value if set, zero value otherwise.
 func (o *LogsUniqueCountRule) GetCondition() LogsUniqueCountCondition {
-	if o == nil {
+	if o == nil || IsNil(o.Condition) {
 		var ret LogsUniqueCountCondition
 		return ret
 	}
-
-	return o.Condition
+	return *o.Condition
 }
 
-// GetConditionOk returns a tuple with the Condition field value
+// GetConditionOk returns a tuple with the Condition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsUniqueCountRule) GetConditionOk() (*LogsUniqueCountCondition, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Condition) {
 		return nil, false
 	}
-	return &o.Condition, true
+	return o.Condition, true
 }
 
-// SetCondition sets field value
+// HasCondition returns a boolean if a field has been set.
+func (o *LogsUniqueCountRule) HasCondition() bool {
+	if o != nil && !IsNil(o.Condition) {
+		return true
+	}
+
+	return false
+}
+
+// SetCondition gets a reference to the given LogsUniqueCountCondition and assigns it to the Condition field.
 func (o *LogsUniqueCountRule) SetCondition(v LogsUniqueCountCondition) {
-	o.Condition = v
+	o.Condition = &v
 }
 
 func (o LogsUniqueCountRule) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o LogsUniqueCountRule) MarshalJSON() ([]byte, error) {
 
 func (o LogsUniqueCountRule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["condition"] = o.Condition
+	if !IsNil(o.Condition) {
+		toSerialize["condition"] = o.Condition
+	}
 	return toSerialize, nil
-}
-
-func (o *LogsUniqueCountRule) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"condition",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varLogsUniqueCountRule := _LogsUniqueCountRule{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLogsUniqueCountRule)
-
-	if err != nil {
-		return err
-	}
-
-	*o = LogsUniqueCountRule(varLogsUniqueCountRule)
-
-	return err
 }
 
 type NullableLogsUniqueCountRule struct {

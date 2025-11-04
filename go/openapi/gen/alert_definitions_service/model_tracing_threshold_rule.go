@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the TracingThresholdRule type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &TracingThresholdRule{}
 
 // TracingThresholdRule A rule for trace-based threshold alerts
 type TracingThresholdRule struct {
-	Condition TracingThresholdCondition `json:"condition"`
+	Condition *TracingThresholdCondition `json:"condition,omitempty"`
 }
-
-type _TracingThresholdRule TracingThresholdRule
 
 // NewTracingThresholdRule instantiates a new TracingThresholdRule object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTracingThresholdRule(condition TracingThresholdCondition) *TracingThresholdRule {
+func NewTracingThresholdRule() *TracingThresholdRule {
 	this := TracingThresholdRule{}
-	this.Condition = condition
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewTracingThresholdRuleWithDefaults() *TracingThresholdRule {
 	return &this
 }
 
-// GetCondition returns the Condition field value
+// GetCondition returns the Condition field value if set, zero value otherwise.
 func (o *TracingThresholdRule) GetCondition() TracingThresholdCondition {
-	if o == nil {
+	if o == nil || IsNil(o.Condition) {
 		var ret TracingThresholdCondition
 		return ret
 	}
-
-	return o.Condition
+	return *o.Condition
 }
 
-// GetConditionOk returns a tuple with the Condition field value
+// GetConditionOk returns a tuple with the Condition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TracingThresholdRule) GetConditionOk() (*TracingThresholdCondition, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Condition) {
 		return nil, false
 	}
-	return &o.Condition, true
+	return o.Condition, true
 }
 
-// SetCondition sets field value
+// HasCondition returns a boolean if a field has been set.
+func (o *TracingThresholdRule) HasCondition() bool {
+	if o != nil && !IsNil(o.Condition) {
+		return true
+	}
+
+	return false
+}
+
+// SetCondition gets a reference to the given TracingThresholdCondition and assigns it to the Condition field.
 func (o *TracingThresholdRule) SetCondition(v TracingThresholdCondition) {
-	o.Condition = v
+	o.Condition = &v
 }
 
 func (o TracingThresholdRule) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o TracingThresholdRule) MarshalJSON() ([]byte, error) {
 
 func (o TracingThresholdRule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["condition"] = o.Condition
+	if !IsNil(o.Condition) {
+		toSerialize["condition"] = o.Condition
+	}
 	return toSerialize, nil
-}
-
-func (o *TracingThresholdRule) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"condition",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varTracingThresholdRule := _TracingThresholdRule{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTracingThresholdRule)
-
-	if err != nil {
-		return err
-	}
-
-	*o = TracingThresholdRule(varTracingThresholdRule)
-
-	return err
 }
 
 type NullableTracingThresholdRule struct {

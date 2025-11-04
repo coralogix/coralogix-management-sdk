@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the AlertDefinitionOrderByList type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &AlertDefinitionOrderByList{}
 
 // AlertDefinitionOrderByList List of fields to order alert definitions by
 type AlertDefinitionOrderByList struct {
-	OrderBys []AlertDefinitionOrderBy `json:"orderBys"`
+	OrderBys []AlertDefinitionOrderBy `json:"orderBys,omitempty"`
 }
-
-type _AlertDefinitionOrderByList AlertDefinitionOrderByList
 
 // NewAlertDefinitionOrderByList instantiates a new AlertDefinitionOrderByList object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDefinitionOrderByList(orderBys []AlertDefinitionOrderBy) *AlertDefinitionOrderByList {
+func NewAlertDefinitionOrderByList() *AlertDefinitionOrderByList {
 	this := AlertDefinitionOrderByList{}
-	this.OrderBys = orderBys
 	return &this
 }
 
@@ -44,26 +39,34 @@ func NewAlertDefinitionOrderByListWithDefaults() *AlertDefinitionOrderByList {
 	return &this
 }
 
-// GetOrderBys returns the OrderBys field value
+// GetOrderBys returns the OrderBys field value if set, zero value otherwise.
 func (o *AlertDefinitionOrderByList) GetOrderBys() []AlertDefinitionOrderBy {
-	if o == nil {
+	if o == nil || IsNil(o.OrderBys) {
 		var ret []AlertDefinitionOrderBy
 		return ret
 	}
-
 	return o.OrderBys
 }
 
-// GetOrderBysOk returns a tuple with the OrderBys field value
+// GetOrderBysOk returns a tuple with the OrderBys field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertDefinitionOrderByList) GetOrderBysOk() ([]AlertDefinitionOrderBy, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.OrderBys) {
 		return nil, false
 	}
 	return o.OrderBys, true
 }
 
-// SetOrderBys sets field value
+// HasOrderBys returns a boolean if a field has been set.
+func (o *AlertDefinitionOrderByList) HasOrderBys() bool {
+	if o != nil && !IsNil(o.OrderBys) {
+		return true
+	}
+
+	return false
+}
+
+// SetOrderBys gets a reference to the given []AlertDefinitionOrderBy and assigns it to the OrderBys field.
 func (o *AlertDefinitionOrderByList) SetOrderBys(v []AlertDefinitionOrderBy) {
 	o.OrderBys = v
 }
@@ -78,45 +81,10 @@ func (o AlertDefinitionOrderByList) MarshalJSON() ([]byte, error) {
 
 func (o AlertDefinitionOrderByList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["orderBys"] = o.OrderBys
+	if !IsNil(o.OrderBys) {
+		toSerialize["orderBys"] = o.OrderBys
+	}
 	return toSerialize, nil
-}
-
-func (o *AlertDefinitionOrderByList) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"orderBys",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varAlertDefinitionOrderByList := _AlertDefinitionOrderByList{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAlertDefinitionOrderByList)
-
-	if err != nil {
-		return err
-	}
-
-	*o = AlertDefinitionOrderByList(varAlertDefinitionOrderByList)
-
-	return err
 }
 
 type NullableAlertDefinitionOrderByList struct {

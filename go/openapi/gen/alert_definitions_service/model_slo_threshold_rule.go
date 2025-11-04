@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the SloThresholdRule type satisfies the MappedNullable interface at compile time
@@ -21,20 +19,16 @@ var _ MappedNullable = &SloThresholdRule{}
 
 // SloThresholdRule SLO threshold rule definition
 type SloThresholdRule struct {
-	Condition SloThresholdCondition `json:"condition"`
-	Override AlertDefOverride `json:"override"`
+	Condition *SloThresholdCondition `json:"condition,omitempty"`
+	Override *AlertDefOverride `json:"override,omitempty"`
 }
-
-type _SloThresholdRule SloThresholdRule
 
 // NewSloThresholdRule instantiates a new SloThresholdRule object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSloThresholdRule(condition SloThresholdCondition, override AlertDefOverride) *SloThresholdRule {
+func NewSloThresholdRule() *SloThresholdRule {
 	this := SloThresholdRule{}
-	this.Condition = condition
-	this.Override = override
 	return &this
 }
 
@@ -46,52 +40,68 @@ func NewSloThresholdRuleWithDefaults() *SloThresholdRule {
 	return &this
 }
 
-// GetCondition returns the Condition field value
+// GetCondition returns the Condition field value if set, zero value otherwise.
 func (o *SloThresholdRule) GetCondition() SloThresholdCondition {
-	if o == nil {
+	if o == nil || IsNil(o.Condition) {
 		var ret SloThresholdCondition
 		return ret
 	}
-
-	return o.Condition
+	return *o.Condition
 }
 
-// GetConditionOk returns a tuple with the Condition field value
+// GetConditionOk returns a tuple with the Condition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SloThresholdRule) GetConditionOk() (*SloThresholdCondition, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Condition) {
 		return nil, false
 	}
-	return &o.Condition, true
+	return o.Condition, true
 }
 
-// SetCondition sets field value
+// HasCondition returns a boolean if a field has been set.
+func (o *SloThresholdRule) HasCondition() bool {
+	if o != nil && !IsNil(o.Condition) {
+		return true
+	}
+
+	return false
+}
+
+// SetCondition gets a reference to the given SloThresholdCondition and assigns it to the Condition field.
 func (o *SloThresholdRule) SetCondition(v SloThresholdCondition) {
-	o.Condition = v
+	o.Condition = &v
 }
 
-// GetOverride returns the Override field value
+// GetOverride returns the Override field value if set, zero value otherwise.
 func (o *SloThresholdRule) GetOverride() AlertDefOverride {
-	if o == nil {
+	if o == nil || IsNil(o.Override) {
 		var ret AlertDefOverride
 		return ret
 	}
-
-	return o.Override
+	return *o.Override
 }
 
-// GetOverrideOk returns a tuple with the Override field value
+// GetOverrideOk returns a tuple with the Override field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SloThresholdRule) GetOverrideOk() (*AlertDefOverride, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Override) {
 		return nil, false
 	}
-	return &o.Override, true
+	return o.Override, true
 }
 
-// SetOverride sets field value
+// HasOverride returns a boolean if a field has been set.
+func (o *SloThresholdRule) HasOverride() bool {
+	if o != nil && !IsNil(o.Override) {
+		return true
+	}
+
+	return false
+}
+
+// SetOverride gets a reference to the given AlertDefOverride and assigns it to the Override field.
 func (o *SloThresholdRule) SetOverride(v AlertDefOverride) {
-	o.Override = v
+	o.Override = &v
 }
 
 func (o SloThresholdRule) MarshalJSON() ([]byte, error) {
@@ -104,47 +114,13 @@ func (o SloThresholdRule) MarshalJSON() ([]byte, error) {
 
 func (o SloThresholdRule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["condition"] = o.Condition
-	toSerialize["override"] = o.Override
+	if !IsNil(o.Condition) {
+		toSerialize["condition"] = o.Condition
+	}
+	if !IsNil(o.Override) {
+		toSerialize["override"] = o.Override
+	}
 	return toSerialize, nil
-}
-
-func (o *SloThresholdRule) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"condition",
-		"override",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varSloThresholdRule := _SloThresholdRule{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSloThresholdRule)
-
-	if err != nil {
-		return err
-	}
-
-	*o = SloThresholdRule(varSloThresholdRule)
-
-	return err
 }
 
 type NullableSloThresholdRule struct {

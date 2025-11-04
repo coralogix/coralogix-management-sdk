@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the MetricAnomalyType type satisfies the MappedNullable interface at compile time
@@ -24,20 +22,16 @@ type MetricAnomalyType struct {
 	AnomalyAlertSettings *AnomalyAlertSettings `json:"anomalyAlertSettings,omitempty"`
 	// The delay in milliseconds before evaluating the alert condition
 	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
-	MetricFilter MetricFilter `json:"metricFilter"`
-	Rules []MetricAnomalyRule `json:"rules"`
+	MetricFilter *MetricFilter `json:"metricFilter,omitempty"`
+	Rules []MetricAnomalyRule `json:"rules,omitempty"`
 }
-
-type _MetricAnomalyType MetricAnomalyType
 
 // NewMetricAnomalyType instantiates a new MetricAnomalyType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetricAnomalyType(metricFilter MetricFilter, rules []MetricAnomalyRule) *MetricAnomalyType {
+func NewMetricAnomalyType() *MetricAnomalyType {
 	this := MetricAnomalyType{}
-	this.MetricFilter = metricFilter
-	this.Rules = rules
 	return &this
 }
 
@@ -113,50 +107,66 @@ func (o *MetricAnomalyType) SetEvaluationDelayMs(v int32) {
 	o.EvaluationDelayMs = &v
 }
 
-// GetMetricFilter returns the MetricFilter field value
+// GetMetricFilter returns the MetricFilter field value if set, zero value otherwise.
 func (o *MetricAnomalyType) GetMetricFilter() MetricFilter {
-	if o == nil {
+	if o == nil || IsNil(o.MetricFilter) {
 		var ret MetricFilter
 		return ret
 	}
-
-	return o.MetricFilter
+	return *o.MetricFilter
 }
 
-// GetMetricFilterOk returns a tuple with the MetricFilter field value
+// GetMetricFilterOk returns a tuple with the MetricFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricAnomalyType) GetMetricFilterOk() (*MetricFilter, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.MetricFilter) {
 		return nil, false
 	}
-	return &o.MetricFilter, true
+	return o.MetricFilter, true
 }
 
-// SetMetricFilter sets field value
+// HasMetricFilter returns a boolean if a field has been set.
+func (o *MetricAnomalyType) HasMetricFilter() bool {
+	if o != nil && !IsNil(o.MetricFilter) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetricFilter gets a reference to the given MetricFilter and assigns it to the MetricFilter field.
 func (o *MetricAnomalyType) SetMetricFilter(v MetricFilter) {
-	o.MetricFilter = v
+	o.MetricFilter = &v
 }
 
-// GetRules returns the Rules field value
+// GetRules returns the Rules field value if set, zero value otherwise.
 func (o *MetricAnomalyType) GetRules() []MetricAnomalyRule {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		var ret []MetricAnomalyRule
 		return ret
 	}
-
 	return o.Rules
 }
 
-// GetRulesOk returns a tuple with the Rules field value
+// GetRulesOk returns a tuple with the Rules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricAnomalyType) GetRulesOk() ([]MetricAnomalyRule, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		return nil, false
 	}
 	return o.Rules, true
 }
 
-// SetRules sets field value
+// HasRules returns a boolean if a field has been set.
+func (o *MetricAnomalyType) HasRules() bool {
+	if o != nil && !IsNil(o.Rules) {
+		return true
+	}
+
+	return false
+}
+
+// SetRules gets a reference to the given []MetricAnomalyRule and assigns it to the Rules field.
 func (o *MetricAnomalyType) SetRules(v []MetricAnomalyRule) {
 	o.Rules = v
 }
@@ -177,47 +187,13 @@ func (o MetricAnomalyType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EvaluationDelayMs) {
 		toSerialize["evaluationDelayMs"] = o.EvaluationDelayMs
 	}
-	toSerialize["metricFilter"] = o.MetricFilter
-	toSerialize["rules"] = o.Rules
+	if !IsNil(o.MetricFilter) {
+		toSerialize["metricFilter"] = o.MetricFilter
+	}
+	if !IsNil(o.Rules) {
+		toSerialize["rules"] = o.Rules
+	}
 	return toSerialize, nil
-}
-
-func (o *MetricAnomalyType) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"metricFilter",
-		"rules",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varMetricAnomalyType := _MetricAnomalyType{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMetricAnomalyType)
-
-	if err != nil {
-		return err
-	}
-
-	*o = MetricAnomalyType(varMetricAnomalyType)
-
-	return err
 }
 
 type NullableMetricAnomalyType struct {

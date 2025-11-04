@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the MetricAnomalyCondition type satisfies the MappedNullable interface at compile time
@@ -25,23 +23,18 @@ type MetricAnomalyCondition struct {
 	// The percentage of the metric that must exceed the threshold to trigger the alert
 	ForOverPct *int64 `json:"forOverPct,omitempty"`
 	// The percentage of non-null values required to trigger the alert
-	MinNonNullValuesPct int64 `json:"minNonNullValuesPct"`
-	OfTheLast MetricTimeWindow `json:"ofTheLast"`
+	MinNonNullValuesPct *int64 `json:"minNonNullValuesPct,omitempty"`
+	OfTheLast *MetricTimeWindow `json:"ofTheLast,omitempty"`
 	// The threshold value for the alert condition
-	Threshold float64 `json:"threshold"`
+	Threshold *float64 `json:"threshold,omitempty"`
 }
-
-type _MetricAnomalyCondition MetricAnomalyCondition
 
 // NewMetricAnomalyCondition instantiates a new MetricAnomalyCondition object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetricAnomalyCondition(minNonNullValuesPct int64, ofTheLast MetricTimeWindow, threshold float64) *MetricAnomalyCondition {
+func NewMetricAnomalyCondition() *MetricAnomalyCondition {
 	this := MetricAnomalyCondition{}
-	this.MinNonNullValuesPct = minNonNullValuesPct
-	this.OfTheLast = ofTheLast
-	this.Threshold = threshold
 	return &this
 }
 
@@ -117,76 +110,100 @@ func (o *MetricAnomalyCondition) SetForOverPct(v int64) {
 	o.ForOverPct = &v
 }
 
-// GetMinNonNullValuesPct returns the MinNonNullValuesPct field value
+// GetMinNonNullValuesPct returns the MinNonNullValuesPct field value if set, zero value otherwise.
 func (o *MetricAnomalyCondition) GetMinNonNullValuesPct() int64 {
-	if o == nil {
+	if o == nil || IsNil(o.MinNonNullValuesPct) {
 		var ret int64
 		return ret
 	}
-
-	return o.MinNonNullValuesPct
+	return *o.MinNonNullValuesPct
 }
 
-// GetMinNonNullValuesPctOk returns a tuple with the MinNonNullValuesPct field value
+// GetMinNonNullValuesPctOk returns a tuple with the MinNonNullValuesPct field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricAnomalyCondition) GetMinNonNullValuesPctOk() (*int64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.MinNonNullValuesPct) {
 		return nil, false
 	}
-	return &o.MinNonNullValuesPct, true
+	return o.MinNonNullValuesPct, true
 }
 
-// SetMinNonNullValuesPct sets field value
+// HasMinNonNullValuesPct returns a boolean if a field has been set.
+func (o *MetricAnomalyCondition) HasMinNonNullValuesPct() bool {
+	if o != nil && !IsNil(o.MinNonNullValuesPct) {
+		return true
+	}
+
+	return false
+}
+
+// SetMinNonNullValuesPct gets a reference to the given int64 and assigns it to the MinNonNullValuesPct field.
 func (o *MetricAnomalyCondition) SetMinNonNullValuesPct(v int64) {
-	o.MinNonNullValuesPct = v
+	o.MinNonNullValuesPct = &v
 }
 
-// GetOfTheLast returns the OfTheLast field value
+// GetOfTheLast returns the OfTheLast field value if set, zero value otherwise.
 func (o *MetricAnomalyCondition) GetOfTheLast() MetricTimeWindow {
-	if o == nil {
+	if o == nil || IsNil(o.OfTheLast) {
 		var ret MetricTimeWindow
 		return ret
 	}
-
-	return o.OfTheLast
+	return *o.OfTheLast
 }
 
-// GetOfTheLastOk returns a tuple with the OfTheLast field value
+// GetOfTheLastOk returns a tuple with the OfTheLast field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricAnomalyCondition) GetOfTheLastOk() (*MetricTimeWindow, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.OfTheLast) {
 		return nil, false
 	}
-	return &o.OfTheLast, true
+	return o.OfTheLast, true
 }
 
-// SetOfTheLast sets field value
+// HasOfTheLast returns a boolean if a field has been set.
+func (o *MetricAnomalyCondition) HasOfTheLast() bool {
+	if o != nil && !IsNil(o.OfTheLast) {
+		return true
+	}
+
+	return false
+}
+
+// SetOfTheLast gets a reference to the given MetricTimeWindow and assigns it to the OfTheLast field.
 func (o *MetricAnomalyCondition) SetOfTheLast(v MetricTimeWindow) {
-	o.OfTheLast = v
+	o.OfTheLast = &v
 }
 
-// GetThreshold returns the Threshold field value
+// GetThreshold returns the Threshold field value if set, zero value otherwise.
 func (o *MetricAnomalyCondition) GetThreshold() float64 {
-	if o == nil {
+	if o == nil || IsNil(o.Threshold) {
 		var ret float64
 		return ret
 	}
-
-	return o.Threshold
+	return *o.Threshold
 }
 
-// GetThresholdOk returns a tuple with the Threshold field value
+// GetThresholdOk returns a tuple with the Threshold field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricAnomalyCondition) GetThresholdOk() (*float64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Threshold) {
 		return nil, false
 	}
-	return &o.Threshold, true
+	return o.Threshold, true
 }
 
-// SetThreshold sets field value
+// HasThreshold returns a boolean if a field has been set.
+func (o *MetricAnomalyCondition) HasThreshold() bool {
+	if o != nil && !IsNil(o.Threshold) {
+		return true
+	}
+
+	return false
+}
+
+// SetThreshold gets a reference to the given float64 and assigns it to the Threshold field.
 func (o *MetricAnomalyCondition) SetThreshold(v float64) {
-	o.Threshold = v
+	o.Threshold = &v
 }
 
 func (o MetricAnomalyCondition) MarshalJSON() ([]byte, error) {
@@ -205,49 +222,16 @@ func (o MetricAnomalyCondition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ForOverPct) {
 		toSerialize["forOverPct"] = o.ForOverPct
 	}
-	toSerialize["minNonNullValuesPct"] = o.MinNonNullValuesPct
-	toSerialize["ofTheLast"] = o.OfTheLast
-	toSerialize["threshold"] = o.Threshold
+	if !IsNil(o.MinNonNullValuesPct) {
+		toSerialize["minNonNullValuesPct"] = o.MinNonNullValuesPct
+	}
+	if !IsNil(o.OfTheLast) {
+		toSerialize["ofTheLast"] = o.OfTheLast
+	}
+	if !IsNil(o.Threshold) {
+		toSerialize["threshold"] = o.Threshold
+	}
 	return toSerialize, nil
-}
-
-func (o *MetricAnomalyCondition) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"minNonNullValuesPct",
-		"ofTheLast",
-		"threshold",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varMetricAnomalyCondition := _MetricAnomalyCondition{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMetricAnomalyCondition)
-
-	if err != nil {
-		return err
-	}
-
-	*o = MetricAnomalyCondition(varMetricAnomalyCondition)
-
-	return err
 }
 
 type NullableMetricAnomalyCondition struct {

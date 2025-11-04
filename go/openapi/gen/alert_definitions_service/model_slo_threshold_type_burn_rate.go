@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the SloThresholdTypeBurnRate type satisfies the MappedNullable interface at compile time
@@ -22,18 +20,15 @@ var _ MappedNullable = &SloThresholdTypeBurnRate{}
 // SloThresholdTypeBurnRate SLO threshold type definition
 type SloThresholdTypeBurnRate struct {
 	BurnRate *BurnRateThreshold `json:"burnRate,omitempty"`
-	SloDefinition V3SloDefinition `json:"sloDefinition"`
+	SloDefinition *V3SloDefinition `json:"sloDefinition,omitempty"`
 }
-
-type _SloThresholdTypeBurnRate SloThresholdTypeBurnRate
 
 // NewSloThresholdTypeBurnRate instantiates a new SloThresholdTypeBurnRate object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSloThresholdTypeBurnRate(sloDefinition V3SloDefinition) *SloThresholdTypeBurnRate {
+func NewSloThresholdTypeBurnRate() *SloThresholdTypeBurnRate {
 	this := SloThresholdTypeBurnRate{}
-	this.SloDefinition = sloDefinition
 	return &this
 }
 
@@ -77,28 +72,36 @@ func (o *SloThresholdTypeBurnRate) SetBurnRate(v BurnRateThreshold) {
 	o.BurnRate = &v
 }
 
-// GetSloDefinition returns the SloDefinition field value
+// GetSloDefinition returns the SloDefinition field value if set, zero value otherwise.
 func (o *SloThresholdTypeBurnRate) GetSloDefinition() V3SloDefinition {
-	if o == nil {
+	if o == nil || IsNil(o.SloDefinition) {
 		var ret V3SloDefinition
 		return ret
 	}
-
-	return o.SloDefinition
+	return *o.SloDefinition
 }
 
-// GetSloDefinitionOk returns a tuple with the SloDefinition field value
+// GetSloDefinitionOk returns a tuple with the SloDefinition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SloThresholdTypeBurnRate) GetSloDefinitionOk() (*V3SloDefinition, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SloDefinition) {
 		return nil, false
 	}
-	return &o.SloDefinition, true
+	return o.SloDefinition, true
 }
 
-// SetSloDefinition sets field value
+// HasSloDefinition returns a boolean if a field has been set.
+func (o *SloThresholdTypeBurnRate) HasSloDefinition() bool {
+	if o != nil && !IsNil(o.SloDefinition) {
+		return true
+	}
+
+	return false
+}
+
+// SetSloDefinition gets a reference to the given V3SloDefinition and assigns it to the SloDefinition field.
 func (o *SloThresholdTypeBurnRate) SetSloDefinition(v V3SloDefinition) {
-	o.SloDefinition = v
+	o.SloDefinition = &v
 }
 
 func (o SloThresholdTypeBurnRate) MarshalJSON() ([]byte, error) {
@@ -114,45 +117,10 @@ func (o SloThresholdTypeBurnRate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BurnRate) {
 		toSerialize["burnRate"] = o.BurnRate
 	}
-	toSerialize["sloDefinition"] = o.SloDefinition
+	if !IsNil(o.SloDefinition) {
+		toSerialize["sloDefinition"] = o.SloDefinition
+	}
 	return toSerialize, nil
-}
-
-func (o *SloThresholdTypeBurnRate) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"sloDefinition",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varSloThresholdTypeBurnRate := _SloThresholdTypeBurnRate{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSloThresholdTypeBurnRate)
-
-	if err != nil {
-		return err
-	}
-
-	*o = SloThresholdTypeBurnRate(varSloThresholdTypeBurnRate)
-
-	return err
 }
 
 type NullableSloThresholdTypeBurnRate struct {

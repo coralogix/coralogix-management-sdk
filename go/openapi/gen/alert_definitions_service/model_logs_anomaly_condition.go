@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the LogsAnomalyCondition type satisfies the MappedNullable interface at compile time
@@ -23,20 +21,16 @@ var _ MappedNullable = &LogsAnomalyCondition{}
 type LogsAnomalyCondition struct {
 	ConditionType *LogsAnomalyConditionType `json:"conditionType,omitempty"`
 	// The threshold value for the alert condition
-	MinimumThreshold float64 `json:"minimumThreshold"`
-	TimeWindow LogsTimeWindow `json:"timeWindow"`
+	MinimumThreshold *float64 `json:"minimumThreshold,omitempty"`
+	TimeWindow *LogsTimeWindow `json:"timeWindow,omitempty"`
 }
-
-type _LogsAnomalyCondition LogsAnomalyCondition
 
 // NewLogsAnomalyCondition instantiates a new LogsAnomalyCondition object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogsAnomalyCondition(minimumThreshold float64, timeWindow LogsTimeWindow) *LogsAnomalyCondition {
+func NewLogsAnomalyCondition() *LogsAnomalyCondition {
 	this := LogsAnomalyCondition{}
-	this.MinimumThreshold = minimumThreshold
-	this.TimeWindow = timeWindow
 	return &this
 }
 
@@ -80,52 +74,68 @@ func (o *LogsAnomalyCondition) SetConditionType(v LogsAnomalyConditionType) {
 	o.ConditionType = &v
 }
 
-// GetMinimumThreshold returns the MinimumThreshold field value
+// GetMinimumThreshold returns the MinimumThreshold field value if set, zero value otherwise.
 func (o *LogsAnomalyCondition) GetMinimumThreshold() float64 {
-	if o == nil {
+	if o == nil || IsNil(o.MinimumThreshold) {
 		var ret float64
 		return ret
 	}
-
-	return o.MinimumThreshold
+	return *o.MinimumThreshold
 }
 
-// GetMinimumThresholdOk returns a tuple with the MinimumThreshold field value
+// GetMinimumThresholdOk returns a tuple with the MinimumThreshold field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsAnomalyCondition) GetMinimumThresholdOk() (*float64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.MinimumThreshold) {
 		return nil, false
 	}
-	return &o.MinimumThreshold, true
+	return o.MinimumThreshold, true
 }
 
-// SetMinimumThreshold sets field value
+// HasMinimumThreshold returns a boolean if a field has been set.
+func (o *LogsAnomalyCondition) HasMinimumThreshold() bool {
+	if o != nil && !IsNil(o.MinimumThreshold) {
+		return true
+	}
+
+	return false
+}
+
+// SetMinimumThreshold gets a reference to the given float64 and assigns it to the MinimumThreshold field.
 func (o *LogsAnomalyCondition) SetMinimumThreshold(v float64) {
-	o.MinimumThreshold = v
+	o.MinimumThreshold = &v
 }
 
-// GetTimeWindow returns the TimeWindow field value
+// GetTimeWindow returns the TimeWindow field value if set, zero value otherwise.
 func (o *LogsAnomalyCondition) GetTimeWindow() LogsTimeWindow {
-	if o == nil {
+	if o == nil || IsNil(o.TimeWindow) {
 		var ret LogsTimeWindow
 		return ret
 	}
-
-	return o.TimeWindow
+	return *o.TimeWindow
 }
 
-// GetTimeWindowOk returns a tuple with the TimeWindow field value
+// GetTimeWindowOk returns a tuple with the TimeWindow field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsAnomalyCondition) GetTimeWindowOk() (*LogsTimeWindow, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.TimeWindow) {
 		return nil, false
 	}
-	return &o.TimeWindow, true
+	return o.TimeWindow, true
 }
 
-// SetTimeWindow sets field value
+// HasTimeWindow returns a boolean if a field has been set.
+func (o *LogsAnomalyCondition) HasTimeWindow() bool {
+	if o != nil && !IsNil(o.TimeWindow) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeWindow gets a reference to the given LogsTimeWindow and assigns it to the TimeWindow field.
 func (o *LogsAnomalyCondition) SetTimeWindow(v LogsTimeWindow) {
-	o.TimeWindow = v
+	o.TimeWindow = &v
 }
 
 func (o LogsAnomalyCondition) MarshalJSON() ([]byte, error) {
@@ -141,47 +151,13 @@ func (o LogsAnomalyCondition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConditionType) {
 		toSerialize["conditionType"] = o.ConditionType
 	}
-	toSerialize["minimumThreshold"] = o.MinimumThreshold
-	toSerialize["timeWindow"] = o.TimeWindow
+	if !IsNil(o.MinimumThreshold) {
+		toSerialize["minimumThreshold"] = o.MinimumThreshold
+	}
+	if !IsNil(o.TimeWindow) {
+		toSerialize["timeWindow"] = o.TimeWindow
+	}
 	return toSerialize, nil
-}
-
-func (o *LogsAnomalyCondition) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"minimumThreshold",
-		"timeWindow",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varLogsAnomalyCondition := _LogsAnomalyCondition{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLogsAnomalyCondition)
-
-	if err != nil {
-		return err
-	}
-
-	*o = LogsAnomalyCondition(varLogsAnomalyCondition)
-
-	return err
 }
 
 type NullableLogsAnomalyCondition struct {

@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Recipients type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &Recipients{}
 
 // Recipients List of email recipients for alert notifications
 type Recipients struct {
-	Emails []string `json:"emails"`
+	Emails []string `json:"emails,omitempty"`
 }
-
-type _Recipients Recipients
 
 // NewRecipients instantiates a new Recipients object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRecipients(emails []string) *Recipients {
+func NewRecipients() *Recipients {
 	this := Recipients{}
-	this.Emails = emails
 	return &this
 }
 
@@ -44,26 +39,34 @@ func NewRecipientsWithDefaults() *Recipients {
 	return &this
 }
 
-// GetEmails returns the Emails field value
+// GetEmails returns the Emails field value if set, zero value otherwise.
 func (o *Recipients) GetEmails() []string {
-	if o == nil {
+	if o == nil || IsNil(o.Emails) {
 		var ret []string
 		return ret
 	}
-
 	return o.Emails
 }
 
-// GetEmailsOk returns a tuple with the Emails field value
+// GetEmailsOk returns a tuple with the Emails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Recipients) GetEmailsOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Emails) {
 		return nil, false
 	}
 	return o.Emails, true
 }
 
-// SetEmails sets field value
+// HasEmails returns a boolean if a field has been set.
+func (o *Recipients) HasEmails() bool {
+	if o != nil && !IsNil(o.Emails) {
+		return true
+	}
+
+	return false
+}
+
+// SetEmails gets a reference to the given []string and assigns it to the Emails field.
 func (o *Recipients) SetEmails(v []string) {
 	o.Emails = v
 }
@@ -78,45 +81,10 @@ func (o Recipients) MarshalJSON() ([]byte, error) {
 
 func (o Recipients) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["emails"] = o.Emails
+	if !IsNil(o.Emails) {
+		toSerialize["emails"] = o.Emails
+	}
 	return toSerialize, nil
-}
-
-func (o *Recipients) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"emails",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varRecipients := _Recipients{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRecipients)
-
-	if err != nil {
-		return err
-	}
-
-	*o = Recipients(varRecipients)
-
-	return err
 }
 
 type NullableRecipients struct {

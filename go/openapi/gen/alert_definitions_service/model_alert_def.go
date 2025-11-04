@@ -13,8 +13,6 @@ package alert_definitions_service
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the AlertDef type satisfies the MappedNullable interface at compile time
@@ -22,13 +20,13 @@ var _ MappedNullable = &AlertDef{}
 
 // AlertDef This data structure represents an alert definition
 type AlertDef struct {
-	AlertDefProperties AlertDefProperties `json:"alertDefProperties"`
+	AlertDefProperties *AlertDefProperties `json:"alertDefProperties,omitempty"`
 	// The old alert ID
-	AlertVersionId string `json:"alertVersionId"`
+	AlertVersionId *string `json:"alertVersionId,omitempty"`
 	// The time when the alert definition was created
 	CreatedTime *time.Time `json:"createdTime,omitempty"`
 	// The alert definition's persistent ID
-	Id string `json:"id"`
+	Id *string `json:"id,omitempty"`
 	// The last time the alert definition was triggered
 	LastTriggeredTime *time.Time `json:"lastTriggeredTime,omitempty"`
 	Status *AlertDefStatus `json:"status,omitempty"`
@@ -36,17 +34,12 @@ type AlertDef struct {
 	UpdatedTime *time.Time `json:"updatedTime,omitempty"`
 }
 
-type _AlertDef AlertDef
-
 // NewAlertDef instantiates a new AlertDef object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDef(alertDefProperties AlertDefProperties, alertVersionId string, id string) *AlertDef {
+func NewAlertDef() *AlertDef {
 	this := AlertDef{}
-	this.AlertDefProperties = alertDefProperties
-	this.AlertVersionId = alertVersionId
-	this.Id = id
 	return &this
 }
 
@@ -58,52 +51,68 @@ func NewAlertDefWithDefaults() *AlertDef {
 	return &this
 }
 
-// GetAlertDefProperties returns the AlertDefProperties field value
+// GetAlertDefProperties returns the AlertDefProperties field value if set, zero value otherwise.
 func (o *AlertDef) GetAlertDefProperties() AlertDefProperties {
-	if o == nil {
+	if o == nil || IsNil(o.AlertDefProperties) {
 		var ret AlertDefProperties
 		return ret
 	}
-
-	return o.AlertDefProperties
+	return *o.AlertDefProperties
 }
 
-// GetAlertDefPropertiesOk returns a tuple with the AlertDefProperties field value
+// GetAlertDefPropertiesOk returns a tuple with the AlertDefProperties field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertDef) GetAlertDefPropertiesOk() (*AlertDefProperties, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.AlertDefProperties) {
 		return nil, false
 	}
-	return &o.AlertDefProperties, true
+	return o.AlertDefProperties, true
 }
 
-// SetAlertDefProperties sets field value
+// HasAlertDefProperties returns a boolean if a field has been set.
+func (o *AlertDef) HasAlertDefProperties() bool {
+	if o != nil && !IsNil(o.AlertDefProperties) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlertDefProperties gets a reference to the given AlertDefProperties and assigns it to the AlertDefProperties field.
 func (o *AlertDef) SetAlertDefProperties(v AlertDefProperties) {
-	o.AlertDefProperties = v
+	o.AlertDefProperties = &v
 }
 
-// GetAlertVersionId returns the AlertVersionId field value
+// GetAlertVersionId returns the AlertVersionId field value if set, zero value otherwise.
 func (o *AlertDef) GetAlertVersionId() string {
-	if o == nil {
+	if o == nil || IsNil(o.AlertVersionId) {
 		var ret string
 		return ret
 	}
-
-	return o.AlertVersionId
+	return *o.AlertVersionId
 }
 
-// GetAlertVersionIdOk returns a tuple with the AlertVersionId field value
+// GetAlertVersionIdOk returns a tuple with the AlertVersionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertDef) GetAlertVersionIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.AlertVersionId) {
 		return nil, false
 	}
-	return &o.AlertVersionId, true
+	return o.AlertVersionId, true
 }
 
-// SetAlertVersionId sets field value
+// HasAlertVersionId returns a boolean if a field has been set.
+func (o *AlertDef) HasAlertVersionId() bool {
+	if o != nil && !IsNil(o.AlertVersionId) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlertVersionId gets a reference to the given string and assigns it to the AlertVersionId field.
 func (o *AlertDef) SetAlertVersionId(v string) {
-	o.AlertVersionId = v
+	o.AlertVersionId = &v
 }
 
 // GetCreatedTime returns the CreatedTime field value if set, zero value otherwise.
@@ -138,28 +147,36 @@ func (o *AlertDef) SetCreatedTime(v time.Time) {
 	o.CreatedTime = &v
 }
 
-// GetId returns the Id field value
+// GetId returns the Id field value if set, zero value otherwise.
 func (o *AlertDef) GetId() string {
-	if o == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
-
-	return o.Id
+	return *o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertDef) GetIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
-	return &o.Id, true
+	return o.Id, true
 }
 
-// SetId sets field value
+// HasId returns a boolean if a field has been set.
+func (o *AlertDef) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
 func (o *AlertDef) SetId(v string) {
-	o.Id = v
+	o.Id = &v
 }
 
 // GetLastTriggeredTime returns the LastTriggeredTime field value if set, zero value otherwise.
@@ -268,12 +285,18 @@ func (o AlertDef) MarshalJSON() ([]byte, error) {
 
 func (o AlertDef) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["alertDefProperties"] = o.AlertDefProperties
-	toSerialize["alertVersionId"] = o.AlertVersionId
+	if !IsNil(o.AlertDefProperties) {
+		toSerialize["alertDefProperties"] = o.AlertDefProperties
+	}
+	if !IsNil(o.AlertVersionId) {
+		toSerialize["alertVersionId"] = o.AlertVersionId
+	}
 	if !IsNil(o.CreatedTime) {
 		toSerialize["createdTime"] = o.CreatedTime
 	}
-	toSerialize["id"] = o.Id
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
 	if !IsNil(o.LastTriggeredTime) {
 		toSerialize["lastTriggeredTime"] = o.LastTriggeredTime
 	}
@@ -284,45 +307,6 @@ func (o AlertDef) ToMap() (map[string]interface{}, error) {
 		toSerialize["updatedTime"] = o.UpdatedTime
 	}
 	return toSerialize, nil
-}
-
-func (o *AlertDef) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"alertDefProperties",
-		"alertVersionId",
-		"id",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varAlertDef := _AlertDef{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAlertDef)
-
-	if err != nil {
-		return err
-	}
-
-	*o = AlertDef(varAlertDef)
-
-	return err
 }
 
 type NullableAlertDef struct {

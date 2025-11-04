@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the MetricFilter type satisfies the MappedNullable interface at compile time
@@ -22,18 +20,15 @@ var _ MappedNullable = &MetricFilter{}
 // MetricFilter struct for MetricFilter
 type MetricFilter struct {
 	// A PromQL filter for metrics
-	Promql string `json:"promql"`
+	Promql *string `json:"promql,omitempty"`
 }
-
-type _MetricFilter MetricFilter
 
 // NewMetricFilter instantiates a new MetricFilter object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetricFilter(promql string) *MetricFilter {
+func NewMetricFilter() *MetricFilter {
 	this := MetricFilter{}
-	this.Promql = promql
 	return &this
 }
 
@@ -45,28 +40,36 @@ func NewMetricFilterWithDefaults() *MetricFilter {
 	return &this
 }
 
-// GetPromql returns the Promql field value
+// GetPromql returns the Promql field value if set, zero value otherwise.
 func (o *MetricFilter) GetPromql() string {
-	if o == nil {
+	if o == nil || IsNil(o.Promql) {
 		var ret string
 		return ret
 	}
-
-	return o.Promql
+	return *o.Promql
 }
 
-// GetPromqlOk returns a tuple with the Promql field value
+// GetPromqlOk returns a tuple with the Promql field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricFilter) GetPromqlOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Promql) {
 		return nil, false
 	}
-	return &o.Promql, true
+	return o.Promql, true
 }
 
-// SetPromql sets field value
+// HasPromql returns a boolean if a field has been set.
+func (o *MetricFilter) HasPromql() bool {
+	if o != nil && !IsNil(o.Promql) {
+		return true
+	}
+
+	return false
+}
+
+// SetPromql gets a reference to the given string and assigns it to the Promql field.
 func (o *MetricFilter) SetPromql(v string) {
-	o.Promql = v
+	o.Promql = &v
 }
 
 func (o MetricFilter) MarshalJSON() ([]byte, error) {
@@ -79,45 +82,10 @@ func (o MetricFilter) MarshalJSON() ([]byte, error) {
 
 func (o MetricFilter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["promql"] = o.Promql
+	if !IsNil(o.Promql) {
+		toSerialize["promql"] = o.Promql
+	}
 	return toSerialize, nil
-}
-
-func (o *MetricFilter) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"promql",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varMetricFilter := _MetricFilter{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMetricFilter)
-
-	if err != nil {
-		return err
-	}
-
-	*o = MetricFilter(varMetricFilter)
-
-	return err
 }
 
 type NullableMetricFilter struct {

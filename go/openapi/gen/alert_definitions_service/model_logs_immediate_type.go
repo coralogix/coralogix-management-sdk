@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the LogsImmediateType type satisfies the MappedNullable interface at compile time
@@ -21,19 +19,16 @@ var _ MappedNullable = &LogsImmediateType{}
 
 // LogsImmediateType Configuration for immediate alerts triggered on log entries matching specific filters.
 type LogsImmediateType struct {
-	LogsFilter V3LogsFilter `json:"logsFilter"`
+	LogsFilter *V3LogsFilter `json:"logsFilter,omitempty"`
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
 }
-
-type _LogsImmediateType LogsImmediateType
 
 // NewLogsImmediateType instantiates a new LogsImmediateType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogsImmediateType(logsFilter V3LogsFilter) *LogsImmediateType {
+func NewLogsImmediateType() *LogsImmediateType {
 	this := LogsImmediateType{}
-	this.LogsFilter = logsFilter
 	return &this
 }
 
@@ -45,28 +40,36 @@ func NewLogsImmediateTypeWithDefaults() *LogsImmediateType {
 	return &this
 }
 
-// GetLogsFilter returns the LogsFilter field value
+// GetLogsFilter returns the LogsFilter field value if set, zero value otherwise.
 func (o *LogsImmediateType) GetLogsFilter() V3LogsFilter {
-	if o == nil {
+	if o == nil || IsNil(o.LogsFilter) {
 		var ret V3LogsFilter
 		return ret
 	}
-
-	return o.LogsFilter
+	return *o.LogsFilter
 }
 
-// GetLogsFilterOk returns a tuple with the LogsFilter field value
+// GetLogsFilterOk returns a tuple with the LogsFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsImmediateType) GetLogsFilterOk() (*V3LogsFilter, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.LogsFilter) {
 		return nil, false
 	}
-	return &o.LogsFilter, true
+	return o.LogsFilter, true
 }
 
-// SetLogsFilter sets field value
+// HasLogsFilter returns a boolean if a field has been set.
+func (o *LogsImmediateType) HasLogsFilter() bool {
+	if o != nil && !IsNil(o.LogsFilter) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogsFilter gets a reference to the given V3LogsFilter and assigns it to the LogsFilter field.
 func (o *LogsImmediateType) SetLogsFilter(v V3LogsFilter) {
-	o.LogsFilter = v
+	o.LogsFilter = &v
 }
 
 // GetNotificationPayloadFilter returns the NotificationPayloadFilter field value if set, zero value otherwise.
@@ -111,48 +114,13 @@ func (o LogsImmediateType) MarshalJSON() ([]byte, error) {
 
 func (o LogsImmediateType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["logsFilter"] = o.LogsFilter
+	if !IsNil(o.LogsFilter) {
+		toSerialize["logsFilter"] = o.LogsFilter
+	}
 	if !IsNil(o.NotificationPayloadFilter) {
 		toSerialize["notificationPayloadFilter"] = o.NotificationPayloadFilter
 	}
 	return toSerialize, nil
-}
-
-func (o *LogsImmediateType) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"logsFilter",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varLogsImmediateType := _LogsImmediateType{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLogsImmediateType)
-
-	if err != nil {
-		return err
-	}
-
-	*o = LogsImmediateType(varLogsImmediateType)
-
-	return err
 }
 
 type NullableLogsImmediateType struct {

@@ -85,17 +85,10 @@
                       "fieldName": {
                         "$ref": "#/components/schemas/AlertDefOrderByFields"
                       }
-                    },
-                    "required": [
-                      "fieldName",
-                      "direction"
-                    ]
+                    }
                   }
                 }
-              },
-              "required": [
-                "orderBys"
-              ]
+              }
             },
             "style": "form"
           }
@@ -132,20 +125,6 @@
         },
         "x-coralogixPermissions": [
           "alerts:ReadConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3?query_filter=SOME_OBJECT_VALUE&pagination=SOME_OBJECT_VALUE&order_bys=SOME_OBJECT_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3\"\n\nquerystring = {\"query_filter\":\"SOME_OBJECT_VALUE\",\"pagination\":\"SOME_OBJECT_VALUE\",\"order_bys\":\"SOME_OBJECT_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3?query_filter=SOME_OBJECT_VALUE&pagination=SOME_OBJECT_VALUE&order_bys=SOME_OBJECT_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       },
       "put": {
@@ -175,10 +154,6 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "alertDefProperties",
-                  "id"
-                ],
                 "additionalProperties": false
               }
             }
@@ -216,20 +191,6 @@
         },
         "x-coralogixPermissions": [
           "alerts:UpdateConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"alertDefProperties\":{\"activeOn\":{\"dayOfWeek\":[\"DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED\"],\"endTime\":{\"hours\":14,\"minutes\":30},\"startTime\":{\"hours\":14,\"minutes\":30}},\"deleted\":false,\"description\":\"Alert description\",\"enabled\":true,\"entityLabels\":{\"key\":\"value\"},\"flow\":{\"enforceSuppression\":true,\"stages\":[{\"flowStagesGroups\":{\"groups\":[{\"alertDefs\":[{\"id\":\"123e4567-e89b-12d3-a456-426614174000\",\"not\":true}],\"alertsOp\":\"ALERTS_OP_AND_OR_UNSPECIFIED\",\"nextOp\":\"NEXT_OP_AND_OR_UNSPECIFIED\"}]},\"timeframeMs\":\"string\",\"timeframeType\":\"TIMEFRAME_TYPE_UNSPECIFIED\"}]},\"groupByKeys\":[[\"key1\",\"key2\"]],\"incidentsSettings\":{\"minutes\":30,\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"},\"name\":\"My Alert\",\"notificationGroup\":{\"destinations\":[{\"connectorId\":\"connector_id_example\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\",\"presetId\":\"preset_id_example\",\"resolvedRouteOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}},\"triggeredRoutingOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}}}],\"groupByKeys\":[[\"key1\",\"key2\"]],\"router\":{\"id\":\"123e4567-e89b-12d3-a456-426614174000\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"},\"webhooks\":[{\"integration\":{\"integrationId\":123},\"minutes\":15,\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"}]},\"notificationGroupExcess\":[{\"destinations\":[{\"connectorId\":\"connector_id_example\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\",\"presetId\":\"preset_id_example\",\"resolvedRouteOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}},\"triggeredRoutingOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}}}],\"groupByKeys\":[[\"key1\",\"key2\"]],\"router\":{\"id\":\"123e4567-e89b-12d3-a456-426614174000\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"},\"webhooks\":[{\"integration\":{\"integrationId\":123},\"minutes\":15,\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"}]}],\"phantomMode\":false,\"priority\":\"ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED\",\"type\":\"ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED\"},\"id\":\"123e4567-e89b-12d3-a456-426614174000\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3\"\n\npayload = {\n    \"alertDefProperties\": {\n        \"activeOn\": {\n            \"dayOfWeek\": [\"DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED\"],\n            \"endTime\": {\n                \"hours\": 14,\n                \"minutes\": 30\n            },\n            \"startTime\": {\n                \"hours\": 14,\n                \"minutes\": 30\n            }\n        },\n        \"deleted\": False,\n        \"description\": \"Alert description\",\n        \"enabled\": True,\n        \"entityLabels\": {\"key\": \"value\"},\n        \"flow\": {\n            \"enforceSuppression\": True,\n            \"stages\": [\n                {\n                    \"flowStagesGroups\": {\"groups\": [\n                            {\n                                \"alertDefs\": [\n                                    {\n                                        \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n                                        \"not\": True\n                                    }\n                                ],\n                                \"alertsOp\": \"ALERTS_OP_AND_OR_UNSPECIFIED\",\n                                \"nextOp\": \"NEXT_OP_AND_OR_UNSPECIFIED\"\n                            }\n                        ]},\n                    \"timeframeMs\": \"string\",\n                    \"timeframeType\": \"TIMEFRAME_TYPE_UNSPECIFIED\"\n                }\n            ]\n        },\n        \"groupByKeys\": [[\"key1\", \"key2\"]],\n        \"incidentsSettings\": {\n            \"minutes\": 30,\n            \"notifyOn\": \"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"\n        },\n        \"name\": \"My Alert\",\n        \"notificationGroup\": {\n            \"destinations\": [\n                {\n                    \"connectorId\": \"connector_id_example\",\n                    \"notifyOn\": \"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\",\n                    \"presetId\": \"preset_id_example\",\n                    \"resolvedRouteOverrides\": {\"configOverrides\": {\n                            \"connectorConfigFields\": [\n                                {\n                                    \"fieldName\": \"description\",\n                                    \"template\": \"template_example\"\n                                }\n                            ],\n                            \"messageConfigFields\": [\n                                {\n                                    \"fieldName\": \"description\",\n                                    \"template\": \"template_example\"\n                                }\n                            ],\n                            \"payloadType\": \"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"\n                        }},\n                    \"triggeredRoutingOverrides\": {\"configOverrides\": {\n                            \"connectorConfigFields\": [\n                                {\n                                    \"fieldName\": \"description\",\n                                    \"template\": \"template_example\"\n                                }\n                            ],\n                            \"messageConfigFields\": [\n                                {\n                                    \"fieldName\": \"description\",\n                                    \"template\": \"template_example\"\n                                }\n                            ],\n                            \"payloadType\": \"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"\n                        }}\n                }\n            ],\n            \"groupByKeys\": [[\"key1\", \"key2\"]],\n            \"router\": {\n                \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n                \"notifyOn\": \"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"\n            },\n            \"webhooks\": [\n                {\n                    \"integration\": {\"integrationId\": 123},\n                    \"minutes\": 15,\n                    \"notifyOn\": \"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"\n                }\n            ]\n        },\n        \"notificationGroupExcess\": [\n            {\n                \"destinations\": [\n                    {\n                        \"connectorId\": \"connector_id_example\",\n                        \"notifyOn\": \"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\",\n                        \"presetId\": \"preset_id_example\",\n                        \"resolvedRouteOverrides\": {\"configOverrides\": {\n                                \"connectorConfigFields\": [\n                                    {\n                                        \"fieldName\": \"description\",\n                                        \"template\": \"template_example\"\n                                    }\n                                ],\n                                \"messageConfigFields\": [\n                                    {\n                                        \"fieldName\": \"description\",\n                                        \"template\": \"template_example\"\n                                    }\n                                ],\n                                \"payloadType\": \"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"\n                            }},\n                        \"triggeredRoutingOverrides\": {\"configOverrides\": {\n                                \"connectorConfigFields\": [\n                                    {\n                                        \"fieldName\": \"description\",\n                                        \"template\": \"template_example\"\n                                    }\n                                ],\n                                \"messageConfigFields\": [\n                                    {\n                                        \"fieldName\": \"description\",\n                                        \"template\": \"template_example\"\n                                    }\n                                ],\n                                \"payloadType\": \"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"\n                            }}\n                    }\n                ],\n                \"groupByKeys\": [[\"key1\", \"key2\"]],\n                \"router\": {\n                    \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n                    \"notifyOn\": \"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"\n                },\n                \"webhooks\": [\n                    {\n                        \"integration\": {\"integrationId\": 123},\n                        \"minutes\": 15,\n                        \"notifyOn\": \"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"\n                    }\n                ]\n            }\n        ],\n        \"phantomMode\": False,\n        \"priority\": \"ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED\",\n        \"type\": \"ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED\"\n    },\n    \"id\": \"123e4567-e89b-12d3-a456-426614174000\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3 \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"alertDefProperties\":{\"activeOn\":{\"dayOfWeek\":[\"DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED\"],\"endTime\":{\"hours\":14,\"minutes\":30},\"startTime\":{\"hours\":14,\"minutes\":30}},\"deleted\":false,\"description\":\"Alert description\",\"enabled\":true,\"entityLabels\":{\"key\":\"value\"},\"flow\":{\"enforceSuppression\":true,\"stages\":[{\"flowStagesGroups\":{\"groups\":[{\"alertDefs\":[{\"id\":\"123e4567-e89b-12d3-a456-426614174000\",\"not\":true}],\"alertsOp\":\"ALERTS_OP_AND_OR_UNSPECIFIED\",\"nextOp\":\"NEXT_OP_AND_OR_UNSPECIFIED\"}]},\"timeframeMs\":\"string\",\"timeframeType\":\"TIMEFRAME_TYPE_UNSPECIFIED\"}]},\"groupByKeys\":[[\"key1\",\"key2\"]],\"incidentsSettings\":{\"minutes\":30,\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"},\"name\":\"My Alert\",\"notificationGroup\":{\"destinations\":[{\"connectorId\":\"connector_id_example\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\",\"presetId\":\"preset_id_example\",\"resolvedRouteOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}},\"triggeredRoutingOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}}}],\"groupByKeys\":[[\"key1\",\"key2\"]],\"router\":{\"id\":\"123e4567-e89b-12d3-a456-426614174000\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"},\"webhooks\":[{\"integration\":{\"integrationId\":123},\"minutes\":15,\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"}]},\"notificationGroupExcess\":[{\"destinations\":[{\"connectorId\":\"connector_id_example\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\",\"presetId\":\"preset_id_example\",\"resolvedRouteOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}},\"triggeredRoutingOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}}}],\"groupByKeys\":[[\"key1\",\"key2\"]],\"router\":{\"id\":\"123e4567-e89b-12d3-a456-426614174000\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"},\"webhooks\":[{\"integration\":{\"integrationId\":123},\"minutes\":15,\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"}]}],\"phantomMode\":false,\"priority\":\"ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED\",\"type\":\"ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED\"},\"id\":\"123e4567-e89b-12d3-a456-426614174000\"}'"
-          }
         ]
       },
       "post": {
@@ -249,43 +210,43 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AlertDefPropertiesFlow"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
+                    "$ref": "#/components/schemas/AlertDefPropertiesLogsThreshold"
                   },
                   {
                     "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
                   },
                   {
-                    "$ref": "#/components/schemas/AlertDefPropertiesLogsThreshold"
+                    "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
+                  },
+                  {
+                    "$ref": "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
+                  },
+                  {
+                    "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
                   },
                   {
                     "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
                   },
                   {
-                    "$ref": "#/components/schemas/AlertDefPropertiesMetricAnomaly"
+                    "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
+                  },
+                  {
+                    "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
+                  },
+                  {
+                    "$ref": "#/components/schemas/AlertDefPropertiesFlow"
+                  },
+                  {
+                    "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
+                  },
+                  {
+                    "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
                   },
                   {
                     "$ref": "#/components/schemas/AlertDefPropertiesSloThreshold"
                   },
                   {
-                    "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
+                    "$ref": "#/components/schemas/AlertDefPropertiesMetricAnomaly"
                   }
                 ]
               }
@@ -324,20 +285,6 @@
         },
         "x-coralogixPermissions": [
           "alerts:UpdateConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"activeOn\":{\"dayOfWeek\":[\"DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED\"],\"endTime\":{\"hours\":14,\"minutes\":30},\"startTime\":{\"hours\":14,\"minutes\":30}},\"deleted\":false,\"description\":\"Alert description\",\"enabled\":true,\"entityLabels\":{\"key\":\"value\"},\"groupByKeys\":[[\"key1\",\"key2\"]],\"incidentsSettings\":{\"minutes\":30,\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"},\"logsNewValue\":{\"logsFilter\":{\"simpleFilter\":{\"labelFilters\":{\"applicationName\":[{\"operation\":\"LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED\",\"value\":\"my-app\"}],\"severities\":[\"LOG_SEVERITY_VERBOSE_UNSPECIFIED\"],\"subsystemName\":[{\"operation\":\"LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED\",\"value\":\"my-app\"}]},\"luceneQuery\":\"string\"}},\"notificationPayloadFilter\":[[\"obj.field\"]],\"rules\":[{\"condition\":{\"keypathToTrack\":\"metadata.field\",\"timeWindow\":{\"logsNewValueTimeWindowSpecificValue\":\"LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED\"}}}]},\"name\":\"My Alert\",\"notificationGroup\":{\"destinations\":[{\"connectorId\":\"connector_id_example\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\",\"presetId\":\"preset_id_example\",\"resolvedRouteOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}},\"triggeredRoutingOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}}}],\"groupByKeys\":[[\"key1\",\"key2\"]],\"router\":{\"id\":\"123e4567-e89b-12d3-a456-426614174000\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"},\"webhooks\":[{\"integration\":{\"integrationId\":123},\"minutes\":15,\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"}]},\"notificationGroupExcess\":[{\"destinations\":[{\"connectorId\":\"connector_id_example\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\",\"presetId\":\"preset_id_example\",\"resolvedRouteOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}},\"triggeredRoutingOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}}}],\"groupByKeys\":[[\"key1\",\"key2\"]],\"router\":{\"id\":\"123e4567-e89b-12d3-a456-426614174000\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"},\"webhooks\":[{\"integration\":{\"integrationId\":123},\"minutes\":15,\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"}]}],\"phantomMode\":false,\"priority\":\"ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED\",\"type\":\"ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3\"\n\npayload = {\n    \"activeOn\": {\n        \"dayOfWeek\": [\"DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED\"],\n        \"endTime\": {\n            \"hours\": 14,\n            \"minutes\": 30\n        },\n        \"startTime\": {\n            \"hours\": 14,\n            \"minutes\": 30\n        }\n    },\n    \"deleted\": False,\n    \"description\": \"Alert description\",\n    \"enabled\": True,\n    \"entityLabels\": {\"key\": \"value\"},\n    \"groupByKeys\": [[\"key1\", \"key2\"]],\n    \"incidentsSettings\": {\n        \"minutes\": 30,\n        \"notifyOn\": \"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"\n    },\n    \"logsNewValue\": {\n        \"logsFilter\": {\"simpleFilter\": {\n                \"labelFilters\": {\n                    \"applicationName\": [\n                        {\n                            \"operation\": \"LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED\",\n                            \"value\": \"my-app\"\n                        }\n                    ],\n                    \"severities\": [\"LOG_SEVERITY_VERBOSE_UNSPECIFIED\"],\n                    \"subsystemName\": [\n                        {\n                            \"operation\": \"LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED\",\n                            \"value\": \"my-app\"\n                        }\n                    ]\n                },\n                \"luceneQuery\": \"string\"\n            }},\n        \"notificationPayloadFilter\": [[\"obj.field\"]],\n        \"rules\": [{\"condition\": {\n                    \"keypathToTrack\": \"metadata.field\",\n                    \"timeWindow\": {\"logsNewValueTimeWindowSpecificValue\": \"LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED\"}\n                }}]\n    },\n    \"name\": \"My Alert\",\n    \"notificationGroup\": {\n        \"destinations\": [\n            {\n                \"connectorId\": \"connector_id_example\",\n                \"notifyOn\": \"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\",\n                \"presetId\": \"preset_id_example\",\n                \"resolvedRouteOverrides\": {\"configOverrides\": {\n                        \"connectorConfigFields\": [\n                            {\n                                \"fieldName\": \"description\",\n                                \"template\": \"template_example\"\n                            }\n                        ],\n                        \"messageConfigFields\": [\n                            {\n                                \"fieldName\": \"description\",\n                                \"template\": \"template_example\"\n                            }\n                        ],\n                        \"payloadType\": \"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"\n                    }},\n                \"triggeredRoutingOverrides\": {\"configOverrides\": {\n                        \"connectorConfigFields\": [\n                            {\n                                \"fieldName\": \"description\",\n                                \"template\": \"template_example\"\n                            }\n                        ],\n                        \"messageConfigFields\": [\n                            {\n                                \"fieldName\": \"description\",\n                                \"template\": \"template_example\"\n                            }\n                        ],\n                        \"payloadType\": \"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"\n                    }}\n            }\n        ],\n        \"groupByKeys\": [[\"key1\", \"key2\"]],\n        \"router\": {\n            \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n            \"notifyOn\": \"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"\n        },\n        \"webhooks\": [\n            {\n                \"integration\": {\"integrationId\": 123},\n                \"minutes\": 15,\n                \"notifyOn\": \"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"\n            }\n        ]\n    },\n    \"notificationGroupExcess\": [\n        {\n            \"destinations\": [\n                {\n                    \"connectorId\": \"connector_id_example\",\n                    \"notifyOn\": \"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\",\n                    \"presetId\": \"preset_id_example\",\n                    \"resolvedRouteOverrides\": {\"configOverrides\": {\n                            \"connectorConfigFields\": [\n                                {\n                                    \"fieldName\": \"description\",\n                                    \"template\": \"template_example\"\n                                }\n                            ],\n                            \"messageConfigFields\": [\n                                {\n                                    \"fieldName\": \"description\",\n                                    \"template\": \"template_example\"\n                                }\n                            ],\n                            \"payloadType\": \"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"\n                        }},\n                    \"triggeredRoutingOverrides\": {\"configOverrides\": {\n                            \"connectorConfigFields\": [\n                                {\n                                    \"fieldName\": \"description\",\n                                    \"template\": \"template_example\"\n                                }\n                            ],\n                            \"messageConfigFields\": [\n                                {\n                                    \"fieldName\": \"description\",\n                                    \"template\": \"template_example\"\n                                }\n                            ],\n                            \"payloadType\": \"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"\n                        }}\n                }\n            ],\n            \"groupByKeys\": [[\"key1\", \"key2\"]],\n            \"router\": {\n                \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n                \"notifyOn\": \"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"\n            },\n            \"webhooks\": [\n                {\n                    \"integration\": {\"integrationId\": 123},\n                    \"minutes\": 15,\n                    \"notifyOn\": \"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"\n                }\n            ]\n        }\n    ],\n    \"phantomMode\": False,\n    \"priority\": \"ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED\",\n    \"type\": \"ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3 \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"activeOn\":{\"dayOfWeek\":[\"DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED\"],\"endTime\":{\"hours\":14,\"minutes\":30},\"startTime\":{\"hours\":14,\"minutes\":30}},\"deleted\":false,\"description\":\"Alert description\",\"enabled\":true,\"entityLabels\":{\"key\":\"value\"},\"groupByKeys\":[[\"key1\",\"key2\"]],\"incidentsSettings\":{\"minutes\":30,\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"},\"logsNewValue\":{\"logsFilter\":{\"simpleFilter\":{\"labelFilters\":{\"applicationName\":[{\"operation\":\"LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED\",\"value\":\"my-app\"}],\"severities\":[\"LOG_SEVERITY_VERBOSE_UNSPECIFIED\"],\"subsystemName\":[{\"operation\":\"LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED\",\"value\":\"my-app\"}]},\"luceneQuery\":\"string\"}},\"notificationPayloadFilter\":[[\"obj.field\"]],\"rules\":[{\"condition\":{\"keypathToTrack\":\"metadata.field\",\"timeWindow\":{\"logsNewValueTimeWindowSpecificValue\":\"LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED\"}}}]},\"name\":\"My Alert\",\"notificationGroup\":{\"destinations\":[{\"connectorId\":\"connector_id_example\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\",\"presetId\":\"preset_id_example\",\"resolvedRouteOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}},\"triggeredRoutingOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}}}],\"groupByKeys\":[[\"key1\",\"key2\"]],\"router\":{\"id\":\"123e4567-e89b-12d3-a456-426614174000\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"},\"webhooks\":[{\"integration\":{\"integrationId\":123},\"minutes\":15,\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"}]},\"notificationGroupExcess\":[{\"destinations\":[{\"connectorId\":\"connector_id_example\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\",\"presetId\":\"preset_id_example\",\"resolvedRouteOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}},\"triggeredRoutingOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}}}],\"groupByKeys\":[[\"key1\",\"key2\"]],\"router\":{\"id\":\"123e4567-e89b-12d3-a456-426614174000\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"},\"webhooks\":[{\"integration\":{\"integrationId\":123},\"minutes\":15,\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"}]}],\"phantomMode\":false,\"priority\":\"ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED\",\"type\":\"ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED\"}'"
-          }
         ]
       }
     },
@@ -397,20 +344,6 @@
         },
         "x-coralogixPermissions": [
           "alerts:ReadConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/alert-version-id/123e4567-e89b-12d3-a456-426614174000';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/alert-version-id/123e4567-e89b-12d3-a456-426614174000\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/alert-version-id/123e4567-e89b-12d3-a456-426614174000 \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       }
     },
@@ -440,9 +373,6 @@
                     }
                   }
                 },
-                "required": [
-                  "alertDefsToReplace"
-                ],
                 "additionalProperties": false
               }
             }
@@ -480,20 +410,6 @@
         },
         "x-coralogixPermissions": [
           "alerts:UpdateConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/bulk';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"alertDefsToReplace\":[{\"alertDefProperties\":{\"activeOn\":{\"dayOfWeek\":[\"DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED\"],\"endTime\":{\"hours\":14,\"minutes\":30},\"startTime\":{\"hours\":14,\"minutes\":30}},\"deleted\":false,\"description\":\"Alert description\",\"enabled\":true,\"entityLabels\":{\"key\":\"value\"},\"flow\":{\"enforceSuppression\":true,\"stages\":[{\"flowStagesGroups\":{\"groups\":[{\"alertDefs\":[{\"id\":\"123e4567-e89b-12d3-a456-426614174000\",\"not\":true}],\"alertsOp\":\"ALERTS_OP_AND_OR_UNSPECIFIED\",\"nextOp\":\"NEXT_OP_AND_OR_UNSPECIFIED\"}]},\"timeframeMs\":\"string\",\"timeframeType\":\"TIMEFRAME_TYPE_UNSPECIFIED\"}]},\"groupByKeys\":[[\"key1\",\"key2\"]],\"incidentsSettings\":{\"minutes\":30,\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"},\"name\":\"My Alert\",\"notificationGroup\":{\"destinations\":[{\"connectorId\":\"connector_id_example\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\",\"presetId\":\"preset_id_example\",\"resolvedRouteOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}},\"triggeredRoutingOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}}}],\"groupByKeys\":[[\"key1\",\"key2\"]],\"router\":{\"id\":\"123e4567-e89b-12d3-a456-426614174000\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"},\"webhooks\":[{\"integration\":{\"integrationId\":123},\"minutes\":15,\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"}]},\"notificationGroupExcess\":[{\"destinations\":[{\"connectorId\":\"connector_id_example\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\",\"presetId\":\"preset_id_example\",\"resolvedRouteOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}},\"triggeredRoutingOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}}}],\"groupByKeys\":[[\"key1\",\"key2\"]],\"router\":{\"id\":\"123e4567-e89b-12d3-a456-426614174000\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"},\"webhooks\":[{\"integration\":{\"integrationId\":123},\"minutes\":15,\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"}]}],\"phantomMode\":false,\"priority\":\"ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED\",\"type\":\"ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED\"},\"id\":\"123e4567-e89b-12d3-a456-426614174000\"}]}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/bulk\"\n\npayload = {\"alertDefsToReplace\": [\n        {\n            \"alertDefProperties\": {\n                \"activeOn\": {\n                    \"dayOfWeek\": [\"DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED\"],\n                    \"endTime\": {\n                        \"hours\": 14,\n                        \"minutes\": 30\n                    },\n                    \"startTime\": {\n                        \"hours\": 14,\n                        \"minutes\": 30\n                    }\n                },\n                \"deleted\": False,\n                \"description\": \"Alert description\",\n                \"enabled\": True,\n                \"entityLabels\": {\"key\": \"value\"},\n                \"flow\": {\n                    \"enforceSuppression\": True,\n                    \"stages\": [\n                        {\n                            \"flowStagesGroups\": {\"groups\": [\n                                    {\n                                        \"alertDefs\": [\n                                            {\n                                                \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n                                                \"not\": True\n                                            }\n                                        ],\n                                        \"alertsOp\": \"ALERTS_OP_AND_OR_UNSPECIFIED\",\n                                        \"nextOp\": \"NEXT_OP_AND_OR_UNSPECIFIED\"\n                                    }\n                                ]},\n                            \"timeframeMs\": \"string\",\n                            \"timeframeType\": \"TIMEFRAME_TYPE_UNSPECIFIED\"\n                        }\n                    ]\n                },\n                \"groupByKeys\": [[\"key1\", \"key2\"]],\n                \"incidentsSettings\": {\n                    \"minutes\": 30,\n                    \"notifyOn\": \"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"\n                },\n                \"name\": \"My Alert\",\n                \"notificationGroup\": {\n                    \"destinations\": [\n                        {\n                            \"connectorId\": \"connector_id_example\",\n                            \"notifyOn\": \"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\",\n                            \"presetId\": \"preset_id_example\",\n                            \"resolvedRouteOverrides\": {\"configOverrides\": {\n                                    \"connectorConfigFields\": [\n                                        {\n                                            \"fieldName\": \"description\",\n                                            \"template\": \"template_example\"\n                                        }\n                                    ],\n                                    \"messageConfigFields\": [\n                                        {\n                                            \"fieldName\": \"description\",\n                                            \"template\": \"template_example\"\n                                        }\n                                    ],\n                                    \"payloadType\": \"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"\n                                }},\n                            \"triggeredRoutingOverrides\": {\"configOverrides\": {\n                                    \"connectorConfigFields\": [\n                                        {\n                                            \"fieldName\": \"description\",\n                                            \"template\": \"template_example\"\n                                        }\n                                    ],\n                                    \"messageConfigFields\": [\n                                        {\n                                            \"fieldName\": \"description\",\n                                            \"template\": \"template_example\"\n                                        }\n                                    ],\n                                    \"payloadType\": \"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"\n                                }}\n                        }\n                    ],\n                    \"groupByKeys\": [[\"key1\", \"key2\"]],\n                    \"router\": {\n                        \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n                        \"notifyOn\": \"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"\n                    },\n                    \"webhooks\": [\n                        {\n                            \"integration\": {\"integrationId\": 123},\n                            \"minutes\": 15,\n                            \"notifyOn\": \"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"\n                        }\n                    ]\n                },\n                \"notificationGroupExcess\": [\n                    {\n                        \"destinations\": [\n                            {\n                                \"connectorId\": \"connector_id_example\",\n                                \"notifyOn\": \"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\",\n                                \"presetId\": \"preset_id_example\",\n                                \"resolvedRouteOverrides\": {\"configOverrides\": {\n                                        \"connectorConfigFields\": [\n                                            {\n                                                \"fieldName\": \"description\",\n                                                \"template\": \"template_example\"\n                                            }\n                                        ],\n                                        \"messageConfigFields\": [\n                                            {\n                                                \"fieldName\": \"description\",\n                                                \"template\": \"template_example\"\n                                            }\n                                        ],\n                                        \"payloadType\": \"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"\n                                    }},\n                                \"triggeredRoutingOverrides\": {\"configOverrides\": {\n                                        \"connectorConfigFields\": [\n                                            {\n                                                \"fieldName\": \"description\",\n                                                \"template\": \"template_example\"\n                                            }\n                                        ],\n                                        \"messageConfigFields\": [\n                                            {\n                                                \"fieldName\": \"description\",\n                                                \"template\": \"template_example\"\n                                            }\n                                        ],\n                                        \"payloadType\": \"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"\n                                    }}\n                            }\n                        ],\n                        \"groupByKeys\": [[\"key1\", \"key2\"]],\n                        \"router\": {\n                            \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n                            \"notifyOn\": \"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"\n                        },\n                        \"webhooks\": [\n                            {\n                                \"integration\": {\"integrationId\": 123},\n                                \"minutes\": 15,\n                                \"notifyOn\": \"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"\n                            }\n                        ]\n                    }\n                ],\n                \"phantomMode\": False,\n                \"priority\": \"ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED\",\n                \"type\": \"ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED\"\n            },\n            \"id\": \"123e4567-e89b-12d3-a456-426614174000\"\n        }\n    ]}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/bulk \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"alertDefsToReplace\":[{\"alertDefProperties\":{\"activeOn\":{\"dayOfWeek\":[\"DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED\"],\"endTime\":{\"hours\":14,\"minutes\":30},\"startTime\":{\"hours\":14,\"minutes\":30}},\"deleted\":false,\"description\":\"Alert description\",\"enabled\":true,\"entityLabels\":{\"key\":\"value\"},\"flow\":{\"enforceSuppression\":true,\"stages\":[{\"flowStagesGroups\":{\"groups\":[{\"alertDefs\":[{\"id\":\"123e4567-e89b-12d3-a456-426614174000\",\"not\":true}],\"alertsOp\":\"ALERTS_OP_AND_OR_UNSPECIFIED\",\"nextOp\":\"NEXT_OP_AND_OR_UNSPECIFIED\"}]},\"timeframeMs\":\"string\",\"timeframeType\":\"TIMEFRAME_TYPE_UNSPECIFIED\"}]},\"groupByKeys\":[[\"key1\",\"key2\"]],\"incidentsSettings\":{\"minutes\":30,\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"},\"name\":\"My Alert\",\"notificationGroup\":{\"destinations\":[{\"connectorId\":\"connector_id_example\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\",\"presetId\":\"preset_id_example\",\"resolvedRouteOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}},\"triggeredRoutingOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}}}],\"groupByKeys\":[[\"key1\",\"key2\"]],\"router\":{\"id\":\"123e4567-e89b-12d3-a456-426614174000\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"},\"webhooks\":[{\"integration\":{\"integrationId\":123},\"minutes\":15,\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"}]},\"notificationGroupExcess\":[{\"destinations\":[{\"connectorId\":\"connector_id_example\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\",\"presetId\":\"preset_id_example\",\"resolvedRouteOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}},\"triggeredRoutingOverrides\":{\"configOverrides\":{\"connectorConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"messageConfigFields\":[{\"fieldName\":\"description\",\"template\":\"template_example\"}],\"payloadType\":\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"}}}],\"groupByKeys\":[[\"key1\",\"key2\"]],\"router\":{\"id\":\"123e4567-e89b-12d3-a456-426614174000\",\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"},\"webhooks\":[{\"integration\":{\"integrationId\":123},\"minutes\":15,\"notifyOn\":\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"}]}],\"phantomMode\":false,\"priority\":\"ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED\",\"type\":\"ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED\"},\"id\":\"123e4567-e89b-12d3-a456-426614174000\"}]}'"
-          }
         ]
       }
     },
@@ -540,20 +456,6 @@
         },
         "x-coralogixPermissions": [
           "alerts:ReadConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/download';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/download\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/download \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       }
     },
@@ -623,20 +525,6 @@
         },
         "x-coralogixPermissions": [
           "alerts:ReadConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/filter-option-counts?query_filter=SOME_OBJECT_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/filter-option-counts\"\n\nquerystring = {\"query_filter\":\"SOME_OBJECT_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/filter-option-counts?query_filter=SOME_OBJECT_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       }
     },
@@ -696,20 +584,6 @@
         },
         "x-coralogixPermissions": [
           "alerts:ReadConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/123e4567-e89b-12d3-a456-426614174000';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/123e4567-e89b-12d3-a456-426614174000\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/123e4567-e89b-12d3-a456-426614174000 \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       },
       "delete": {
@@ -766,20 +640,6 @@
         },
         "x-coralogixPermissions": [
           "alerts:UpdateConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/123e4567-e89b-12d3-a456-426614174000';\n\nlet options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/123e4567-e89b-12d3-a456-426614174000\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/123e4567-e89b-12d3-a456-426614174000 \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       }
     },
@@ -849,20 +709,6 @@
         },
         "x-coralogixPermissions": [
           "alerts:UpdateConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/123e4567-e89b-12d3-a456-426614174000:setActive?active=true';\n\nlet options = {method: 'POST', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/123e4567-e89b-12d3-a456-426614174000:setActive\"\n\nquerystring = {\"active\":\"true\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"POST\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url 'https://api.coralogix.com/mgmt/openapi/alerts/alerts-general/v3/123e4567-e89b-12d3-a456-426614174000:setActive?active=true' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       }
     }
@@ -889,12 +735,7 @@
           "startTime": {
             "$ref": "#/components/schemas/TimeOfDay"
           }
-        },
-        "required": [
-          "dayOfWeek",
-          "startTime",
-          "endTime"
-        ]
+        }
       },
       "AlertDef": {
         "externalDocs": {
@@ -938,12 +779,7 @@
             "type": "string",
             "format": "date-time"
           }
-        },
-        "required": [
-          "alertDefProperties",
-          "id",
-          "alertVersionId"
-        ]
+        }
       },
       "AlertDefIncidentSettings": {
         "externalDocs": {
@@ -1041,28 +877,7 @@
       "AlertDefProperties": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesFlow"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesMetricAnomaly"
-          },
-          {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesSloThreshold"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
@@ -1074,10 +889,31 @@
             "$ref": "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
           },
           {
+            "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesFlow"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
+          },
+          {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesMetricAnomaly"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesSloThreshold"
           }
         ]
       },
@@ -1160,11 +996,6 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "required": [
-          "name",
-          "priority",
-          "type"
-        ],
         "additionalProperties": false
       },
       "AlertDefPropertiesLogsAnomaly": {
@@ -1246,11 +1077,6 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "required": [
-          "name",
-          "priority",
-          "type"
-        ],
         "additionalProperties": false
       },
       "AlertDefPropertiesLogsImmediate": {
@@ -1332,11 +1158,6 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "required": [
-          "name",
-          "priority",
-          "type"
-        ],
         "additionalProperties": false
       },
       "AlertDefPropertiesLogsNewValue": {
@@ -1418,11 +1239,6 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "required": [
-          "name",
-          "priority",
-          "type"
-        ],
         "additionalProperties": false
       },
       "AlertDefPropertiesLogsRatioThreshold": {
@@ -1504,11 +1320,6 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "required": [
-          "name",
-          "priority",
-          "type"
-        ],
         "additionalProperties": false
       },
       "AlertDefPropertiesLogsThreshold": {
@@ -1590,11 +1401,6 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "required": [
-          "name",
-          "priority",
-          "type"
-        ],
         "additionalProperties": false
       },
       "AlertDefPropertiesLogsTimeRelativeThreshold": {
@@ -1676,11 +1482,6 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "required": [
-          "name",
-          "priority",
-          "type"
-        ],
         "additionalProperties": false
       },
       "AlertDefPropertiesLogsUniqueCount": {
@@ -1762,11 +1563,6 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "required": [
-          "name",
-          "priority",
-          "type"
-        ],
         "additionalProperties": false
       },
       "AlertDefPropertiesMetricAnomaly": {
@@ -1848,11 +1644,6 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "required": [
-          "name",
-          "priority",
-          "type"
-        ],
         "additionalProperties": false
       },
       "AlertDefPropertiesMetricThreshold": {
@@ -1934,11 +1725,6 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "required": [
-          "name",
-          "priority",
-          "type"
-        ],
         "additionalProperties": false
       },
       "AlertDefPropertiesSloThreshold": {
@@ -2020,11 +1806,6 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "required": [
-          "name",
-          "priority",
-          "type"
-        ],
         "additionalProperties": false
       },
       "AlertDefPropertiesTracingImmediate": {
@@ -2106,11 +1887,6 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "required": [
-          "name",
-          "priority",
-          "type"
-        ],
         "additionalProperties": false
       },
       "AlertDefPropertiesTracingThreshold": {
@@ -2192,11 +1968,6 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "required": [
-          "name",
-          "priority",
-          "type"
-        ],
         "additionalProperties": false
       },
       "AlertDefStatus": {
@@ -2224,11 +1995,7 @@
             "description": "The alert definition ID",
             "type": "string"
           }
-        },
-        "required": [
-          "id",
-          "alertDefProperties"
-        ]
+        }
       },
       "AlertDefType": {
         "type": "string",
@@ -2268,10 +2035,7 @@
           "notifyOn": {
             "$ref": "#/components/schemas/NotifyOn"
           }
-        },
-        "required": [
-          "integration"
-        ]
+        }
       },
       "AlertsOp": {
         "type": "string",
@@ -2335,13 +2099,7 @@
               "type": "string"
             }
           }
-        },
-        "required": [
-          "alertDefs",
-          "notFoundIds",
-          "failedToReplaceAlertDefs",
-          "skippedIds"
-        ]
+        }
       },
       "BurnRateThreshold": {
         "oneOf": [
@@ -2371,9 +2129,6 @@
             }
           }
         },
-        "required": [
-          "rules"
-        ],
         "additionalProperties": false
       },
       "BurnRateThresholdSingle": {
@@ -2394,9 +2149,6 @@
             "$ref": "#/components/schemas/BurnRateTypeSingle"
           }
         },
-        "required": [
-          "rules"
-        ],
         "additionalProperties": false
       },
       "BurnRateTypeDual": {
@@ -2410,10 +2162,7 @@
           "timeDuration": {
             "$ref": "#/components/schemas/TimeDuration"
           }
-        },
-        "required": [
-          "timeDuration"
-        ]
+        }
       },
       "BurnRateTypeSingle": {
         "externalDocs": {
@@ -2426,10 +2175,7 @@
           "timeDuration": {
             "$ref": "#/components/schemas/TimeDuration"
           }
-        },
-        "required": [
-          "timeDuration"
-        ]
+        }
       },
       "ColorsByAggregation": {
         "type": "object",
@@ -2469,10 +2215,7 @@
           "alertDef": {
             "$ref": "#/components/schemas/AlertDef"
           }
-        },
-        "required": [
-          "alertDef"
-        ]
+        }
       },
       "DayOfWeek": {
         "type": "string",
@@ -2508,10 +2251,7 @@
             "type": "string",
             "format": "byte"
           }
-        },
-        "required": [
-          "content"
-        ]
+        }
       },
       "DurationUnit": {
         "type": "string",
@@ -2581,10 +2321,7 @@
               "$ref": "#/components/schemas/SloThresholdRule"
             }
           }
-        },
-        "required": [
-          "rules"
-        ]
+        }
       },
       "FailedToReplaceAlertDef": {
         "externalDocs": {
@@ -2599,10 +2336,7 @@
             "description": "The alert definition ID",
             "type": "string"
           }
-        },
-        "required": [
-          "id"
-        ]
+        }
       },
       "FieldGroup": {
         "type": "object",
@@ -2762,11 +2496,7 @@
           "timeframeType": {
             "$ref": "#/components/schemas/TimeframeType"
           }
-        },
-        "required": [
-          "timeframeMs",
-          "timeframeType"
-        ]
+        }
       },
       "FlowStagesGroup": {
         "externalDocs": {
@@ -2788,12 +2518,7 @@
           "nextOp": {
             "$ref": "#/components/schemas/NextOp"
           }
-        },
-        "required": [
-          "alertDefs",
-          "nextOp",
-          "alertsOp"
-        ]
+        }
       },
       "FlowStagesGroups": {
         "externalDocs": {
@@ -2809,10 +2534,7 @@
               "$ref": "#/components/schemas/FlowStagesGroup"
             }
           }
-        },
-        "required": [
-          "groups"
-        ]
+        }
       },
       "FlowStagesGroupsAlertDefs": {
         "externalDocs": {
@@ -2832,10 +2554,7 @@
             "description": "Whether to negate the alert definition or not.",
             "type": "boolean"
           }
-        },
-        "required": [
-          "id"
-        ]
+        }
       },
       "FlowType": {
         "externalDocs": {
@@ -2855,10 +2574,7 @@
               "$ref": "#/components/schemas/FlowStages"
             }
           }
-        },
-        "required": [
-          "stages"
-        ]
+        }
       },
       "GetAlertDefByVersionIdResponse": {
         "externalDocs": {
@@ -2871,10 +2587,7 @@
           "alertDef": {
             "$ref": "#/components/schemas/AlertDef"
           }
-        },
-        "required": [
-          "alertDef"
-        ]
+        }
       },
       "GetAlertDefResponse": {
         "externalDocs": {
@@ -2887,10 +2600,7 @@
           "alertDef": {
             "$ref": "#/components/schemas/AlertDef"
           }
-        },
-        "required": [
-          "alertDef"
-        ]
+        }
       },
       "LabelFilterType": {
         "externalDocs": {
@@ -2908,11 +2618,7 @@
             "description": "The value of the label to filter by",
             "type": "string"
           }
-        },
-        "required": [
-          "value",
-          "operation"
-        ]
+        }
       },
       "LabelFilters": {
         "externalDocs": {
@@ -2959,10 +2665,7 @@
           "pagination": {
             "$ref": "#/components/schemas/alerts.v3.PaginationResponse"
           }
-        },
-        "required": [
-          "alertDefs"
-        ]
+        }
       },
       "LogFilterOperationType": {
         "type": "string",
@@ -3004,11 +2707,7 @@
           "timeWindow": {
             "$ref": "#/components/schemas/LogsTimeWindow"
           }
-        },
-        "required": [
-          "minimumThreshold",
-          "timeWindow"
-        ]
+        }
       },
       "LogsAnomalyConditionType": {
         "type": "string",
@@ -3027,10 +2726,7 @@
           "condition": {
             "$ref": "#/components/schemas/LogsAnomalyCondition"
           }
-        },
-        "required": [
-          "condition"
-        ]
+        }
       },
       "LogsAnomalyType": {
         "externalDocs": {
@@ -3070,10 +2766,7 @@
               "$ref": "#/components/schemas/LogsAnomalyRule"
             }
           }
-        },
-        "required": [
-          "rules"
-        ]
+        }
       },
       "LogsImmediateType": {
         "externalDocs": {
@@ -3097,10 +2790,7 @@
               "pattern": "^[a-zA-Z0-9_.]+$"
             }
           }
-        },
-        "required": [
-          "logsFilter"
-        ]
+        }
       },
       "LogsNewValueCondition": {
         "externalDocs": {
@@ -3118,11 +2808,7 @@
           "timeWindow": {
             "$ref": "#/components/schemas/LogsNewValueTimeWindow"
           }
-        },
-        "required": [
-          "keypathToTrack",
-          "timeWindow"
-        ]
+        }
       },
       "LogsNewValueRule": {
         "externalDocs": {
@@ -3135,10 +2821,7 @@
           "condition": {
             "$ref": "#/components/schemas/LogsNewValueCondition"
           }
-        },
-        "required": [
-          "condition"
-        ]
+        }
       },
       "LogsNewValueTimeWindow": {
         "externalDocs": {
@@ -3194,10 +2877,7 @@
               "$ref": "#/components/schemas/LogsNewValueRule"
             }
           }
-        },
-        "required": [
-          "rules"
-        ]
+        }
       },
       "LogsRatioCondition": {
         "externalDocs": {
@@ -3220,11 +2900,7 @@
           "timeWindow": {
             "$ref": "#/components/schemas/LogsRatioTimeWindow"
           }
-        },
-        "required": [
-          "threshold",
-          "timeWindow"
-        ]
+        }
       },
       "LogsRatioConditionType": {
         "type": "string",
@@ -3255,11 +2931,7 @@
           "override": {
             "$ref": "#/components/schemas/AlertDefOverride"
           }
-        },
-        "required": [
-          "condition",
-          "override"
-        ]
+        }
       },
       "LogsRatioThresholdType": {
         "externalDocs": {
@@ -3319,12 +2991,7 @@
           "undetectedValuesManagement": {
             "$ref": "#/components/schemas/v3.UndetectedValuesManagement"
           }
-        },
-        "required": [
-          "numerator",
-          "denominator",
-          "rules"
-        ]
+        }
       },
       "LogsRatioTimeWindow": {
         "externalDocs": {
@@ -3393,11 +3060,7 @@
           "timeWindow": {
             "$ref": "#/components/schemas/LogsTimeWindow"
           }
-        },
-        "required": [
-          "threshold",
-          "timeWindow"
-        ]
+        }
       },
       "LogsThresholdConditionType": {
         "type": "string",
@@ -3420,11 +3083,7 @@
           "override": {
             "$ref": "#/components/schemas/AlertDefOverride"
           }
-        },
-        "required": [
-          "condition",
-          "override"
-        ]
+        }
       },
       "LogsThresholdType": {
         "externalDocs": {
@@ -3464,10 +3123,7 @@
           "undetectedValuesManagement": {
             "$ref": "#/components/schemas/v3.UndetectedValuesManagement"
           }
-        },
-        "required": [
-          "rules"
-        ]
+        }
       },
       "LogsTimeRelativeComparedTo": {
         "type": "string",
@@ -3499,11 +3155,7 @@
             "type": "number",
             "format": "double"
           }
-        },
-        "required": [
-          "threshold",
-          "comparedTo"
-        ]
+        }
       },
       "LogsTimeRelativeConditionType": {
         "type": "string",
@@ -3526,11 +3178,7 @@
           "override": {
             "$ref": "#/components/schemas/AlertDefOverride"
           }
-        },
-        "required": [
-          "condition",
-          "override"
-        ]
+        }
       },
       "LogsTimeRelativeThresholdType": {
         "externalDocs": {
@@ -3574,10 +3222,7 @@
           "undetectedValuesManagement": {
             "$ref": "#/components/schemas/v3.UndetectedValuesManagement"
           }
-        },
-        "required": [
-          "rules"
-        ]
+        }
       },
       "LogsTimeWindow": {
         "externalDocs": {
@@ -3626,11 +3271,7 @@
           "timeWindow": {
             "$ref": "#/components/schemas/LogsUniqueValueTimeWindow"
           }
-        },
-        "required": [
-          "maxUniqueCount",
-          "timeWindow"
-        ]
+        }
       },
       "LogsUniqueCountRule": {
         "externalDocs": {
@@ -3643,10 +3284,7 @@
           "condition": {
             "$ref": "#/components/schemas/LogsUniqueCountCondition"
           }
-        },
-        "required": [
-          "condition"
-        ]
+        }
       },
       "LogsUniqueCountType": {
         "externalDocs": {
@@ -3688,11 +3326,7 @@
             "description": "The keypath in the logs to be used for unique count",
             "type": "string"
           }
-        },
-        "required": [
-          "rules",
-          "uniqueCountKeypath"
-        ]
+        }
       },
       "LogsUniqueValueTimeWindow": {
         "externalDocs": {
@@ -3756,12 +3390,7 @@
             "type": "number",
             "format": "double"
           }
-        },
-        "required": [
-          "threshold",
-          "minNonNullValuesPct",
-          "ofTheLast"
-        ]
+        }
       },
       "MetricAnomalyConditionType": {
         "type": "string",
@@ -3781,10 +3410,7 @@
           "condition": {
             "$ref": "#/components/schemas/MetricAnomalyCondition"
           }
-        },
-        "required": [
-          "condition"
-        ]
+        }
       },
       "MetricAnomalyType": {
         "externalDocs": {
@@ -3813,11 +3439,7 @@
               "$ref": "#/components/schemas/MetricAnomalyRule"
             }
           }
-        },
-        "required": [
-          "metricFilter",
-          "rules"
-        ]
+        }
       },
       "MetricFilter": {
         "externalDocs": {
@@ -3831,18 +3453,15 @@
             "description": "A PromQL filter for metrics",
             "type": "string"
           }
-        },
-        "required": [
-          "promql"
-        ]
+        }
       },
       "MetricMissingValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/MetricMissingValuesReplaceWithZero"
+            "$ref": "#/components/schemas/MetricMissingValuesMinNonNullValuesPct"
           },
           {
-            "$ref": "#/components/schemas/MetricMissingValuesMinNonNullValuesPct"
+            "$ref": "#/components/schemas/MetricMissingValuesReplaceWithZero"
           }
         ]
       },
@@ -3908,12 +3527,7 @@
             "pattern": "^\\d+(\\.\\d+)?$",
             "format": "double"
           }
-        },
-        "required": [
-          "threshold",
-          "forOverPct",
-          "ofTheLast"
-        ]
+        }
       },
       "MetricThresholdConditionType": {
         "type": "string",
@@ -3938,11 +3552,7 @@
           "override": {
             "$ref": "#/components/schemas/AlertDefOverride"
           }
-        },
-        "required": [
-          "condition",
-          "override"
-        ]
+        }
       },
       "MetricThresholdType": {
         "externalDocs": {
@@ -3974,12 +3584,7 @@
           "undetectedValuesManagement": {
             "$ref": "#/components/schemas/v3.UndetectedValuesManagement"
           }
-        },
-        "required": [
-          "metricFilter",
-          "rules",
-          "missingValues"
-        ]
+        }
       },
       "MetricTimeWindow": {
         "oneOf": [
@@ -4086,10 +3691,7 @@
           "triggeredRoutingOverrides": {
             "$ref": "#/components/schemas/NotificationRouting"
           }
-        },
-        "required": [
-          "connectorId"
-        ]
+        }
       },
       "NotificationRouter": {
         "externalDocs": {
@@ -4107,10 +3709,7 @@
           "notifyOn": {
             "$ref": "#/components/schemas/NotifyOn"
           }
-        },
-        "required": [
-          "id"
-        ]
+        }
       },
       "NotificationRouting": {
         "externalDocs": {
@@ -4168,10 +3767,7 @@
               "type": "string"
             }
           }
-        },
-        "required": [
-          "emails"
-        ]
+        }
       },
       "ReplaceAlertDefResponse": {
         "externalDocs": {
@@ -4184,10 +3780,7 @@
           "alertDef": {
             "$ref": "#/components/schemas/AlertDef"
           }
-        },
-        "required": [
-          "alertDef"
-        ]
+        }
       },
       "SloThresholdCondition": {
         "externalDocs": {
@@ -4201,10 +3794,7 @@
             "type": "number",
             "format": "double"
           }
-        },
-        "required": [
-          "threshold"
-        ]
+        }
       },
       "SloThresholdRule": {
         "externalDocs": {
@@ -4220,11 +3810,7 @@
           "override": {
             "$ref": "#/components/schemas/AlertDefOverride"
           }
-        },
-        "required": [
-          "condition",
-          "override"
-        ]
+        }
       },
       "SloThresholdType": {
         "oneOf": [
@@ -4251,9 +3837,6 @@
             "$ref": "#/components/schemas/v3.SloDefinition"
           }
         },
-        "required": [
-          "sloDefinition"
-        ],
         "additionalProperties": false
       },
       "SloThresholdTypeErrorBudget": {
@@ -4271,9 +3854,6 @@
             "$ref": "#/components/schemas/v3.SloDefinition"
           }
         },
-        "required": [
-          "sloDefinition"
-        ],
         "additionalProperties": false
       },
       "StatusCount": {
@@ -4312,11 +3892,7 @@
           "unit": {
             "$ref": "#/components/schemas/DurationUnit"
           }
-        },
-        "required": [
-          "duration",
-          "unit"
-        ]
+        }
       },
       "TimeOfDay": {
         "externalDocs": {
@@ -4336,11 +3912,7 @@
             "type": "integer",
             "format": "int32"
           }
-        },
-        "required": [
-          "hours",
-          "minutes"
-        ]
+        }
       },
       "TimeframeType": {
         "type": "string",
@@ -4360,10 +3932,7 @@
           "simpleFilter": {
             "$ref": "#/components/schemas/TracingSimpleFilter"
           }
-        },
-        "required": [
-          "filterType"
-        ]
+        }
       },
       "TracingFilterOperationType": {
         "type": "string",
@@ -4397,11 +3966,7 @@
               "type": "string"
             }
           }
-        },
-        "required": [
-          "values",
-          "operation"
-        ]
+        }
       },
       "TracingImmediateType": {
         "externalDocs": {
@@ -4426,10 +3991,7 @@
           "tracingFilter": {
             "$ref": "#/components/schemas/TracingFilter"
           }
-        },
-        "required": [
-          "tracingFilter"
-        ]
+        }
       },
       "TracingLabelFilters": {
         "externalDocs": {
@@ -4489,10 +4051,7 @@
           "tracingLabelFilters": {
             "$ref": "#/components/schemas/TracingLabelFilters"
           }
-        },
-        "required": [
-          "latencyThresholdMs"
-        ]
+        }
       },
       "TracingSpanFieldsFilterType": {
         "externalDocs": {
@@ -4511,11 +4070,7 @@
             "type": "string",
             "pattern": "^\\w+\\.\\w+$"
           }
-        },
-        "required": [
-          "key",
-          "filterType"
-        ]
+        }
       },
       "TracingThresholdCondition": {
         "externalDocs": {
@@ -4537,12 +4092,7 @@
           "timeWindow": {
             "$ref": "#/components/schemas/TracingTimeWindow"
           }
-        },
-        "required": [
-          "spanAmount",
-          "timeWindow",
-          "conditionType"
-        ]
+        }
       },
       "TracingThresholdConditionType": {
         "type": "string",
@@ -4561,10 +4111,7 @@
           "condition": {
             "$ref": "#/components/schemas/TracingThresholdCondition"
           }
-        },
-        "required": [
-          "condition"
-        ]
+        }
       },
       "TracingThresholdType": {
         "externalDocs": {
@@ -4595,11 +4142,7 @@
           "tracingFilter": {
             "$ref": "#/components/schemas/TracingFilter"
           }
-        },
-        "required": [
-          "tracingFilter",
-          "rules"
-        ]
+        }
       },
       "TracingTimeWindow": {
         "externalDocs": {
@@ -4747,11 +4290,7 @@
             "description": "The template for the configuration field",
             "type": "string"
           }
-        },
-        "required": [
-          "fieldName",
-          "template"
-        ]
+        }
       },
       "v3.FilterOperator": {
         "type": "string",
@@ -4801,11 +4340,7 @@
             "description": "The template for the configuration field",
             "type": "string"
           }
-        },
-        "required": [
-          "fieldName",
-          "template"
-        ]
+        }
       },
       "v3.SetActiveResponse": {
         "externalDocs": {
@@ -4828,10 +4363,7 @@
             "description": "The SLO ID",
             "type": "string"
           }
-        },
-        "required": [
-          "sloId"
-        ]
+        }
       },
       "v3.SourceOverrides": {
         "externalDocs": {
@@ -4857,12 +4389,7 @@
             "description": "the payload type for the notification",
             "type": "string"
           }
-        },
-        "required": [
-          "payloadType",
-          "messageConfigFields",
-          "connectorConfigFields"
-        ]
+        }
       },
       "v3.UndetectedValuesManagement": {
         "externalDocs": {
@@ -4880,10 +4407,7 @@
             "description": "Should trigger the alert when undetected values are detected",
             "type": "boolean"
           }
-        },
-        "required": [
-          "autoRetireRatio"
-        ]
+        }
       }
     },
     "securitySchemes": {

@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the LogsAnomalyRule type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &LogsAnomalyRule{}
 
 // LogsAnomalyRule Defines a rule for detecting log anomalies
 type LogsAnomalyRule struct {
-	Condition LogsAnomalyCondition `json:"condition"`
+	Condition *LogsAnomalyCondition `json:"condition,omitempty"`
 }
-
-type _LogsAnomalyRule LogsAnomalyRule
 
 // NewLogsAnomalyRule instantiates a new LogsAnomalyRule object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogsAnomalyRule(condition LogsAnomalyCondition) *LogsAnomalyRule {
+func NewLogsAnomalyRule() *LogsAnomalyRule {
 	this := LogsAnomalyRule{}
-	this.Condition = condition
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewLogsAnomalyRuleWithDefaults() *LogsAnomalyRule {
 	return &this
 }
 
-// GetCondition returns the Condition field value
+// GetCondition returns the Condition field value if set, zero value otherwise.
 func (o *LogsAnomalyRule) GetCondition() LogsAnomalyCondition {
-	if o == nil {
+	if o == nil || IsNil(o.Condition) {
 		var ret LogsAnomalyCondition
 		return ret
 	}
-
-	return o.Condition
+	return *o.Condition
 }
 
-// GetConditionOk returns a tuple with the Condition field value
+// GetConditionOk returns a tuple with the Condition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsAnomalyRule) GetConditionOk() (*LogsAnomalyCondition, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Condition) {
 		return nil, false
 	}
-	return &o.Condition, true
+	return o.Condition, true
 }
 
-// SetCondition sets field value
+// HasCondition returns a boolean if a field has been set.
+func (o *LogsAnomalyRule) HasCondition() bool {
+	if o != nil && !IsNil(o.Condition) {
+		return true
+	}
+
+	return false
+}
+
+// SetCondition gets a reference to the given LogsAnomalyCondition and assigns it to the Condition field.
 func (o *LogsAnomalyRule) SetCondition(v LogsAnomalyCondition) {
-	o.Condition = v
+	o.Condition = &v
 }
 
 func (o LogsAnomalyRule) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o LogsAnomalyRule) MarshalJSON() ([]byte, error) {
 
 func (o LogsAnomalyRule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["condition"] = o.Condition
+	if !IsNil(o.Condition) {
+		toSerialize["condition"] = o.Condition
+	}
 	return toSerialize, nil
-}
-
-func (o *LogsAnomalyRule) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"condition",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varLogsAnomalyRule := _LogsAnomalyRule{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLogsAnomalyRule)
-
-	if err != nil {
-		return err
-	}
-
-	*o = LogsAnomalyRule(varLogsAnomalyRule)
-
-	return err
 }
 
 type NullableLogsAnomalyRule struct {

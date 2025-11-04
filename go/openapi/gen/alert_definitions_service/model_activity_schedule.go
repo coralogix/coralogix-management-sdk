@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ActivitySchedule type satisfies the MappedNullable interface at compile time
@@ -21,22 +19,17 @@ var _ MappedNullable = &ActivitySchedule{}
 
 // ActivitySchedule Defines when an alert should be active based on days of the week and time windows
 type ActivitySchedule struct {
-	DayOfWeek []DayOfWeek `json:"dayOfWeek"`
-	EndTime TimeOfDay `json:"endTime"`
-	StartTime TimeOfDay `json:"startTime"`
+	DayOfWeek []DayOfWeek `json:"dayOfWeek,omitempty"`
+	EndTime *TimeOfDay `json:"endTime,omitempty"`
+	StartTime *TimeOfDay `json:"startTime,omitempty"`
 }
-
-type _ActivitySchedule ActivitySchedule
 
 // NewActivitySchedule instantiates a new ActivitySchedule object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewActivitySchedule(dayOfWeek []DayOfWeek, endTime TimeOfDay, startTime TimeOfDay) *ActivitySchedule {
+func NewActivitySchedule() *ActivitySchedule {
 	this := ActivitySchedule{}
-	this.DayOfWeek = dayOfWeek
-	this.EndTime = endTime
-	this.StartTime = startTime
 	return &this
 }
 
@@ -48,76 +41,100 @@ func NewActivityScheduleWithDefaults() *ActivitySchedule {
 	return &this
 }
 
-// GetDayOfWeek returns the DayOfWeek field value
+// GetDayOfWeek returns the DayOfWeek field value if set, zero value otherwise.
 func (o *ActivitySchedule) GetDayOfWeek() []DayOfWeek {
-	if o == nil {
+	if o == nil || IsNil(o.DayOfWeek) {
 		var ret []DayOfWeek
 		return ret
 	}
-
 	return o.DayOfWeek
 }
 
-// GetDayOfWeekOk returns a tuple with the DayOfWeek field value
+// GetDayOfWeekOk returns a tuple with the DayOfWeek field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ActivitySchedule) GetDayOfWeekOk() ([]DayOfWeek, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.DayOfWeek) {
 		return nil, false
 	}
 	return o.DayOfWeek, true
 }
 
-// SetDayOfWeek sets field value
+// HasDayOfWeek returns a boolean if a field has been set.
+func (o *ActivitySchedule) HasDayOfWeek() bool {
+	if o != nil && !IsNil(o.DayOfWeek) {
+		return true
+	}
+
+	return false
+}
+
+// SetDayOfWeek gets a reference to the given []DayOfWeek and assigns it to the DayOfWeek field.
 func (o *ActivitySchedule) SetDayOfWeek(v []DayOfWeek) {
 	o.DayOfWeek = v
 }
 
-// GetEndTime returns the EndTime field value
+// GetEndTime returns the EndTime field value if set, zero value otherwise.
 func (o *ActivitySchedule) GetEndTime() TimeOfDay {
-	if o == nil {
+	if o == nil || IsNil(o.EndTime) {
 		var ret TimeOfDay
 		return ret
 	}
-
-	return o.EndTime
+	return *o.EndTime
 }
 
-// GetEndTimeOk returns a tuple with the EndTime field value
+// GetEndTimeOk returns a tuple with the EndTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ActivitySchedule) GetEndTimeOk() (*TimeOfDay, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.EndTime) {
 		return nil, false
 	}
-	return &o.EndTime, true
+	return o.EndTime, true
 }
 
-// SetEndTime sets field value
+// HasEndTime returns a boolean if a field has been set.
+func (o *ActivitySchedule) HasEndTime() bool {
+	if o != nil && !IsNil(o.EndTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetEndTime gets a reference to the given TimeOfDay and assigns it to the EndTime field.
 func (o *ActivitySchedule) SetEndTime(v TimeOfDay) {
-	o.EndTime = v
+	o.EndTime = &v
 }
 
-// GetStartTime returns the StartTime field value
+// GetStartTime returns the StartTime field value if set, zero value otherwise.
 func (o *ActivitySchedule) GetStartTime() TimeOfDay {
-	if o == nil {
+	if o == nil || IsNil(o.StartTime) {
 		var ret TimeOfDay
 		return ret
 	}
-
-	return o.StartTime
+	return *o.StartTime
 }
 
-// GetStartTimeOk returns a tuple with the StartTime field value
+// GetStartTimeOk returns a tuple with the StartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ActivitySchedule) GetStartTimeOk() (*TimeOfDay, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.StartTime) {
 		return nil, false
 	}
-	return &o.StartTime, true
+	return o.StartTime, true
 }
 
-// SetStartTime sets field value
+// HasStartTime returns a boolean if a field has been set.
+func (o *ActivitySchedule) HasStartTime() bool {
+	if o != nil && !IsNil(o.StartTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetStartTime gets a reference to the given TimeOfDay and assigns it to the StartTime field.
 func (o *ActivitySchedule) SetStartTime(v TimeOfDay) {
-	o.StartTime = v
+	o.StartTime = &v
 }
 
 func (o ActivitySchedule) MarshalJSON() ([]byte, error) {
@@ -130,49 +147,16 @@ func (o ActivitySchedule) MarshalJSON() ([]byte, error) {
 
 func (o ActivitySchedule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["dayOfWeek"] = o.DayOfWeek
-	toSerialize["endTime"] = o.EndTime
-	toSerialize["startTime"] = o.StartTime
+	if !IsNil(o.DayOfWeek) {
+		toSerialize["dayOfWeek"] = o.DayOfWeek
+	}
+	if !IsNil(o.EndTime) {
+		toSerialize["endTime"] = o.EndTime
+	}
+	if !IsNil(o.StartTime) {
+		toSerialize["startTime"] = o.StartTime
+	}
 	return toSerialize, nil
-}
-
-func (o *ActivitySchedule) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"dayOfWeek",
-		"endTime",
-		"startTime",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varActivitySchedule := _ActivitySchedule{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varActivitySchedule)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ActivitySchedule(varActivitySchedule)
-
-	return err
 }
 
 type NullableActivitySchedule struct {

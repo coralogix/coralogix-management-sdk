@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the LogsRatioThresholdType type satisfies the MappedNullable interface at compile time
@@ -21,7 +19,7 @@ var _ MappedNullable = &LogsRatioThresholdType{}
 
 // LogsRatioThresholdType Configuration for alerts based on the ratio between two log queries
 type LogsRatioThresholdType struct {
-	Denominator V3LogsFilter `json:"denominator"`
+	Denominator *V3LogsFilter `json:"denominator,omitempty"`
 	// The alias for the denominator filter, used for display purposes
 	DenominatorAlias *string `json:"denominatorAlias,omitempty"`
 	// The delay in milliseconds before evaluating the alert condition
@@ -30,24 +28,19 @@ type LogsRatioThresholdType struct {
 	// The configuration for ignoring infinity values in the ratio
 	IgnoreInfinity *bool `json:"ignoreInfinity,omitempty"`
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
-	Numerator V3LogsFilter `json:"numerator"`
+	Numerator *V3LogsFilter `json:"numerator,omitempty"`
 	// The alias for the numerator filter, used for display purposes
 	NumeratorAlias *string `json:"numeratorAlias,omitempty"`
-	Rules []LogsRatioRules `json:"rules"`
+	Rules []LogsRatioRules `json:"rules,omitempty"`
 	UndetectedValuesManagement *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
 }
-
-type _LogsRatioThresholdType LogsRatioThresholdType
 
 // NewLogsRatioThresholdType instantiates a new LogsRatioThresholdType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogsRatioThresholdType(denominator V3LogsFilter, numerator V3LogsFilter, rules []LogsRatioRules) *LogsRatioThresholdType {
+func NewLogsRatioThresholdType() *LogsRatioThresholdType {
 	this := LogsRatioThresholdType{}
-	this.Denominator = denominator
-	this.Numerator = numerator
-	this.Rules = rules
 	return &this
 }
 
@@ -59,28 +52,36 @@ func NewLogsRatioThresholdTypeWithDefaults() *LogsRatioThresholdType {
 	return &this
 }
 
-// GetDenominator returns the Denominator field value
+// GetDenominator returns the Denominator field value if set, zero value otherwise.
 func (o *LogsRatioThresholdType) GetDenominator() V3LogsFilter {
-	if o == nil {
+	if o == nil || IsNil(o.Denominator) {
 		var ret V3LogsFilter
 		return ret
 	}
-
-	return o.Denominator
+	return *o.Denominator
 }
 
-// GetDenominatorOk returns a tuple with the Denominator field value
+// GetDenominatorOk returns a tuple with the Denominator field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsRatioThresholdType) GetDenominatorOk() (*V3LogsFilter, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Denominator) {
 		return nil, false
 	}
-	return &o.Denominator, true
+	return o.Denominator, true
 }
 
-// SetDenominator sets field value
+// HasDenominator returns a boolean if a field has been set.
+func (o *LogsRatioThresholdType) HasDenominator() bool {
+	if o != nil && !IsNil(o.Denominator) {
+		return true
+	}
+
+	return false
+}
+
+// SetDenominator gets a reference to the given V3LogsFilter and assigns it to the Denominator field.
 func (o *LogsRatioThresholdType) SetDenominator(v V3LogsFilter) {
-	o.Denominator = v
+	o.Denominator = &v
 }
 
 // GetDenominatorAlias returns the DenominatorAlias field value if set, zero value otherwise.
@@ -243,28 +244,36 @@ func (o *LogsRatioThresholdType) SetNotificationPayloadFilter(v []string) {
 	o.NotificationPayloadFilter = v
 }
 
-// GetNumerator returns the Numerator field value
+// GetNumerator returns the Numerator field value if set, zero value otherwise.
 func (o *LogsRatioThresholdType) GetNumerator() V3LogsFilter {
-	if o == nil {
+	if o == nil || IsNil(o.Numerator) {
 		var ret V3LogsFilter
 		return ret
 	}
-
-	return o.Numerator
+	return *o.Numerator
 }
 
-// GetNumeratorOk returns a tuple with the Numerator field value
+// GetNumeratorOk returns a tuple with the Numerator field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsRatioThresholdType) GetNumeratorOk() (*V3LogsFilter, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Numerator) {
 		return nil, false
 	}
-	return &o.Numerator, true
+	return o.Numerator, true
 }
 
-// SetNumerator sets field value
+// HasNumerator returns a boolean if a field has been set.
+func (o *LogsRatioThresholdType) HasNumerator() bool {
+	if o != nil && !IsNil(o.Numerator) {
+		return true
+	}
+
+	return false
+}
+
+// SetNumerator gets a reference to the given V3LogsFilter and assigns it to the Numerator field.
 func (o *LogsRatioThresholdType) SetNumerator(v V3LogsFilter) {
-	o.Numerator = v
+	o.Numerator = &v
 }
 
 // GetNumeratorAlias returns the NumeratorAlias field value if set, zero value otherwise.
@@ -299,26 +308,34 @@ func (o *LogsRatioThresholdType) SetNumeratorAlias(v string) {
 	o.NumeratorAlias = &v
 }
 
-// GetRules returns the Rules field value
+// GetRules returns the Rules field value if set, zero value otherwise.
 func (o *LogsRatioThresholdType) GetRules() []LogsRatioRules {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		var ret []LogsRatioRules
 		return ret
 	}
-
 	return o.Rules
 }
 
-// GetRulesOk returns a tuple with the Rules field value
+// GetRulesOk returns a tuple with the Rules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsRatioThresholdType) GetRulesOk() ([]LogsRatioRules, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		return nil, false
 	}
 	return o.Rules, true
 }
 
-// SetRules sets field value
+// HasRules returns a boolean if a field has been set.
+func (o *LogsRatioThresholdType) HasRules() bool {
+	if o != nil && !IsNil(o.Rules) {
+		return true
+	}
+
+	return false
+}
+
+// SetRules gets a reference to the given []LogsRatioRules and assigns it to the Rules field.
 func (o *LogsRatioThresholdType) SetRules(v []LogsRatioRules) {
 	o.Rules = v
 }
@@ -365,7 +382,9 @@ func (o LogsRatioThresholdType) MarshalJSON() ([]byte, error) {
 
 func (o LogsRatioThresholdType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["denominator"] = o.Denominator
+	if !IsNil(o.Denominator) {
+		toSerialize["denominator"] = o.Denominator
+	}
 	if !IsNil(o.DenominatorAlias) {
 		toSerialize["denominatorAlias"] = o.DenominatorAlias
 	}
@@ -381,54 +400,19 @@ func (o LogsRatioThresholdType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NotificationPayloadFilter) {
 		toSerialize["notificationPayloadFilter"] = o.NotificationPayloadFilter
 	}
-	toSerialize["numerator"] = o.Numerator
+	if !IsNil(o.Numerator) {
+		toSerialize["numerator"] = o.Numerator
+	}
 	if !IsNil(o.NumeratorAlias) {
 		toSerialize["numeratorAlias"] = o.NumeratorAlias
 	}
-	toSerialize["rules"] = o.Rules
+	if !IsNil(o.Rules) {
+		toSerialize["rules"] = o.Rules
+	}
 	if !IsNil(o.UndetectedValuesManagement) {
 		toSerialize["undetectedValuesManagement"] = o.UndetectedValuesManagement
 	}
 	return toSerialize, nil
-}
-
-func (o *LogsRatioThresholdType) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"denominator",
-		"numerator",
-		"rules",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varLogsRatioThresholdType := _LogsRatioThresholdType{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLogsRatioThresholdType)
-
-	if err != nil {
-		return err
-	}
-
-	*o = LogsRatioThresholdType(varLogsRatioThresholdType)
-
-	return err
 }
 
 type NullableLogsRatioThresholdType struct {

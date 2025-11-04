@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ErrorBudgetThreshold type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &ErrorBudgetThreshold{}
 
 // ErrorBudgetThreshold Error budget threshold definition
 type ErrorBudgetThreshold struct {
-	Rules []SloThresholdRule `json:"rules"`
+	Rules []SloThresholdRule `json:"rules,omitempty"`
 }
-
-type _ErrorBudgetThreshold ErrorBudgetThreshold
 
 // NewErrorBudgetThreshold instantiates a new ErrorBudgetThreshold object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewErrorBudgetThreshold(rules []SloThresholdRule) *ErrorBudgetThreshold {
+func NewErrorBudgetThreshold() *ErrorBudgetThreshold {
 	this := ErrorBudgetThreshold{}
-	this.Rules = rules
 	return &this
 }
 
@@ -44,26 +39,34 @@ func NewErrorBudgetThresholdWithDefaults() *ErrorBudgetThreshold {
 	return &this
 }
 
-// GetRules returns the Rules field value
+// GetRules returns the Rules field value if set, zero value otherwise.
 func (o *ErrorBudgetThreshold) GetRules() []SloThresholdRule {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		var ret []SloThresholdRule
 		return ret
 	}
-
 	return o.Rules
 }
 
-// GetRulesOk returns a tuple with the Rules field value
+// GetRulesOk returns a tuple with the Rules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ErrorBudgetThreshold) GetRulesOk() ([]SloThresholdRule, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		return nil, false
 	}
 	return o.Rules, true
 }
 
-// SetRules sets field value
+// HasRules returns a boolean if a field has been set.
+func (o *ErrorBudgetThreshold) HasRules() bool {
+	if o != nil && !IsNil(o.Rules) {
+		return true
+	}
+
+	return false
+}
+
+// SetRules gets a reference to the given []SloThresholdRule and assigns it to the Rules field.
 func (o *ErrorBudgetThreshold) SetRules(v []SloThresholdRule) {
 	o.Rules = v
 }
@@ -78,45 +81,10 @@ func (o ErrorBudgetThreshold) MarshalJSON() ([]byte, error) {
 
 func (o ErrorBudgetThreshold) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["rules"] = o.Rules
+	if !IsNil(o.Rules) {
+		toSerialize["rules"] = o.Rules
+	}
 	return toSerialize, nil
-}
-
-func (o *ErrorBudgetThreshold) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"rules",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varErrorBudgetThreshold := _ErrorBudgetThreshold{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varErrorBudgetThreshold)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ErrorBudgetThreshold(varErrorBudgetThreshold)
-
-	return err
 }
 
 type NullableErrorBudgetThreshold struct {

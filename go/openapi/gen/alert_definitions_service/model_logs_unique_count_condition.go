@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the LogsUniqueCountCondition type satisfies the MappedNullable interface at compile time
@@ -22,20 +20,16 @@ var _ MappedNullable = &LogsUniqueCountCondition{}
 // LogsUniqueCountCondition Defines conditions for unique count alerts
 type LogsUniqueCountCondition struct {
 	// The maximum unique count
-	MaxUniqueCount string `json:"maxUniqueCount"`
-	TimeWindow LogsUniqueValueTimeWindow `json:"timeWindow"`
+	MaxUniqueCount *string `json:"maxUniqueCount,omitempty"`
+	TimeWindow *LogsUniqueValueTimeWindow `json:"timeWindow,omitempty"`
 }
-
-type _LogsUniqueCountCondition LogsUniqueCountCondition
 
 // NewLogsUniqueCountCondition instantiates a new LogsUniqueCountCondition object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogsUniqueCountCondition(maxUniqueCount string, timeWindow LogsUniqueValueTimeWindow) *LogsUniqueCountCondition {
+func NewLogsUniqueCountCondition() *LogsUniqueCountCondition {
 	this := LogsUniqueCountCondition{}
-	this.MaxUniqueCount = maxUniqueCount
-	this.TimeWindow = timeWindow
 	return &this
 }
 
@@ -47,52 +41,68 @@ func NewLogsUniqueCountConditionWithDefaults() *LogsUniqueCountCondition {
 	return &this
 }
 
-// GetMaxUniqueCount returns the MaxUniqueCount field value
+// GetMaxUniqueCount returns the MaxUniqueCount field value if set, zero value otherwise.
 func (o *LogsUniqueCountCondition) GetMaxUniqueCount() string {
-	if o == nil {
+	if o == nil || IsNil(o.MaxUniqueCount) {
 		var ret string
 		return ret
 	}
-
-	return o.MaxUniqueCount
+	return *o.MaxUniqueCount
 }
 
-// GetMaxUniqueCountOk returns a tuple with the MaxUniqueCount field value
+// GetMaxUniqueCountOk returns a tuple with the MaxUniqueCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsUniqueCountCondition) GetMaxUniqueCountOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.MaxUniqueCount) {
 		return nil, false
 	}
-	return &o.MaxUniqueCount, true
+	return o.MaxUniqueCount, true
 }
 
-// SetMaxUniqueCount sets field value
+// HasMaxUniqueCount returns a boolean if a field has been set.
+func (o *LogsUniqueCountCondition) HasMaxUniqueCount() bool {
+	if o != nil && !IsNil(o.MaxUniqueCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxUniqueCount gets a reference to the given string and assigns it to the MaxUniqueCount field.
 func (o *LogsUniqueCountCondition) SetMaxUniqueCount(v string) {
-	o.MaxUniqueCount = v
+	o.MaxUniqueCount = &v
 }
 
-// GetTimeWindow returns the TimeWindow field value
+// GetTimeWindow returns the TimeWindow field value if set, zero value otherwise.
 func (o *LogsUniqueCountCondition) GetTimeWindow() LogsUniqueValueTimeWindow {
-	if o == nil {
+	if o == nil || IsNil(o.TimeWindow) {
 		var ret LogsUniqueValueTimeWindow
 		return ret
 	}
-
-	return o.TimeWindow
+	return *o.TimeWindow
 }
 
-// GetTimeWindowOk returns a tuple with the TimeWindow field value
+// GetTimeWindowOk returns a tuple with the TimeWindow field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsUniqueCountCondition) GetTimeWindowOk() (*LogsUniqueValueTimeWindow, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.TimeWindow) {
 		return nil, false
 	}
-	return &o.TimeWindow, true
+	return o.TimeWindow, true
 }
 
-// SetTimeWindow sets field value
+// HasTimeWindow returns a boolean if a field has been set.
+func (o *LogsUniqueCountCondition) HasTimeWindow() bool {
+	if o != nil && !IsNil(o.TimeWindow) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeWindow gets a reference to the given LogsUniqueValueTimeWindow and assigns it to the TimeWindow field.
 func (o *LogsUniqueCountCondition) SetTimeWindow(v LogsUniqueValueTimeWindow) {
-	o.TimeWindow = v
+	o.TimeWindow = &v
 }
 
 func (o LogsUniqueCountCondition) MarshalJSON() ([]byte, error) {
@@ -105,47 +115,13 @@ func (o LogsUniqueCountCondition) MarshalJSON() ([]byte, error) {
 
 func (o LogsUniqueCountCondition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["maxUniqueCount"] = o.MaxUniqueCount
-	toSerialize["timeWindow"] = o.TimeWindow
+	if !IsNil(o.MaxUniqueCount) {
+		toSerialize["maxUniqueCount"] = o.MaxUniqueCount
+	}
+	if !IsNil(o.TimeWindow) {
+		toSerialize["timeWindow"] = o.TimeWindow
+	}
 	return toSerialize, nil
-}
-
-func (o *LogsUniqueCountCondition) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"maxUniqueCount",
-		"timeWindow",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varLogsUniqueCountCondition := _LogsUniqueCountCondition{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLogsUniqueCountCondition)
-
-	if err != nil {
-		return err
-	}
-
-	*o = LogsUniqueCountCondition(varLogsUniqueCountCondition)
-
-	return err
 }
 
 type NullableLogsUniqueCountCondition struct {

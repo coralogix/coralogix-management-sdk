@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the MetricThresholdType type satisfies the MappedNullable interface at compile time
@@ -23,23 +21,18 @@ var _ MappedNullable = &MetricThresholdType{}
 type MetricThresholdType struct {
 	// The delay in milliseconds before evaluating the alert condition
 	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
-	MetricFilter MetricFilter `json:"metricFilter"`
-	MissingValues MetricMissingValues `json:"missingValues"`
-	Rules []MetricThresholdRule `json:"rules"`
+	MetricFilter *MetricFilter `json:"metricFilter,omitempty"`
+	MissingValues *MetricMissingValues `json:"missingValues,omitempty"`
+	Rules []MetricThresholdRule `json:"rules,omitempty"`
 	UndetectedValuesManagement *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
 }
-
-type _MetricThresholdType MetricThresholdType
 
 // NewMetricThresholdType instantiates a new MetricThresholdType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetricThresholdType(metricFilter MetricFilter, missingValues MetricMissingValues, rules []MetricThresholdRule) *MetricThresholdType {
+func NewMetricThresholdType() *MetricThresholdType {
 	this := MetricThresholdType{}
-	this.MetricFilter = metricFilter
-	this.MissingValues = missingValues
-	this.Rules = rules
 	return &this
 }
 
@@ -83,74 +76,98 @@ func (o *MetricThresholdType) SetEvaluationDelayMs(v int32) {
 	o.EvaluationDelayMs = &v
 }
 
-// GetMetricFilter returns the MetricFilter field value
+// GetMetricFilter returns the MetricFilter field value if set, zero value otherwise.
 func (o *MetricThresholdType) GetMetricFilter() MetricFilter {
-	if o == nil {
+	if o == nil || IsNil(o.MetricFilter) {
 		var ret MetricFilter
 		return ret
 	}
-
-	return o.MetricFilter
+	return *o.MetricFilter
 }
 
-// GetMetricFilterOk returns a tuple with the MetricFilter field value
+// GetMetricFilterOk returns a tuple with the MetricFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricThresholdType) GetMetricFilterOk() (*MetricFilter, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.MetricFilter) {
 		return nil, false
 	}
-	return &o.MetricFilter, true
+	return o.MetricFilter, true
 }
 
-// SetMetricFilter sets field value
+// HasMetricFilter returns a boolean if a field has been set.
+func (o *MetricThresholdType) HasMetricFilter() bool {
+	if o != nil && !IsNil(o.MetricFilter) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetricFilter gets a reference to the given MetricFilter and assigns it to the MetricFilter field.
 func (o *MetricThresholdType) SetMetricFilter(v MetricFilter) {
-	o.MetricFilter = v
+	o.MetricFilter = &v
 }
 
-// GetMissingValues returns the MissingValues field value
+// GetMissingValues returns the MissingValues field value if set, zero value otherwise.
 func (o *MetricThresholdType) GetMissingValues() MetricMissingValues {
-	if o == nil {
+	if o == nil || IsNil(o.MissingValues) {
 		var ret MetricMissingValues
 		return ret
 	}
-
-	return o.MissingValues
+	return *o.MissingValues
 }
 
-// GetMissingValuesOk returns a tuple with the MissingValues field value
+// GetMissingValuesOk returns a tuple with the MissingValues field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricThresholdType) GetMissingValuesOk() (*MetricMissingValues, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.MissingValues) {
 		return nil, false
 	}
-	return &o.MissingValues, true
+	return o.MissingValues, true
 }
 
-// SetMissingValues sets field value
+// HasMissingValues returns a boolean if a field has been set.
+func (o *MetricThresholdType) HasMissingValues() bool {
+	if o != nil && !IsNil(o.MissingValues) {
+		return true
+	}
+
+	return false
+}
+
+// SetMissingValues gets a reference to the given MetricMissingValues and assigns it to the MissingValues field.
 func (o *MetricThresholdType) SetMissingValues(v MetricMissingValues) {
-	o.MissingValues = v
+	o.MissingValues = &v
 }
 
-// GetRules returns the Rules field value
+// GetRules returns the Rules field value if set, zero value otherwise.
 func (o *MetricThresholdType) GetRules() []MetricThresholdRule {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		var ret []MetricThresholdRule
 		return ret
 	}
-
 	return o.Rules
 }
 
-// GetRulesOk returns a tuple with the Rules field value
+// GetRulesOk returns a tuple with the Rules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricThresholdType) GetRulesOk() ([]MetricThresholdRule, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		return nil, false
 	}
 	return o.Rules, true
 }
 
-// SetRules sets field value
+// HasRules returns a boolean if a field has been set.
+func (o *MetricThresholdType) HasRules() bool {
+	if o != nil && !IsNil(o.Rules) {
+		return true
+	}
+
+	return false
+}
+
+// SetRules gets a reference to the given []MetricThresholdRule and assigns it to the Rules field.
 func (o *MetricThresholdType) SetRules(v []MetricThresholdRule) {
 	o.Rules = v
 }
@@ -200,52 +217,19 @@ func (o MetricThresholdType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EvaluationDelayMs) {
 		toSerialize["evaluationDelayMs"] = o.EvaluationDelayMs
 	}
-	toSerialize["metricFilter"] = o.MetricFilter
-	toSerialize["missingValues"] = o.MissingValues
-	toSerialize["rules"] = o.Rules
+	if !IsNil(o.MetricFilter) {
+		toSerialize["metricFilter"] = o.MetricFilter
+	}
+	if !IsNil(o.MissingValues) {
+		toSerialize["missingValues"] = o.MissingValues
+	}
+	if !IsNil(o.Rules) {
+		toSerialize["rules"] = o.Rules
+	}
 	if !IsNil(o.UndetectedValuesManagement) {
 		toSerialize["undetectedValuesManagement"] = o.UndetectedValuesManagement
 	}
 	return toSerialize, nil
-}
-
-func (o *MetricThresholdType) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"metricFilter",
-		"missingValues",
-		"rules",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varMetricThresholdType := _MetricThresholdType{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMetricThresholdType)
-
-	if err != nil {
-		return err
-	}
-
-	*o = MetricThresholdType(varMetricThresholdType)
-
-	return err
 }
 
 type NullableMetricThresholdType struct {

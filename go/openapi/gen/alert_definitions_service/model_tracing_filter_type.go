@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the TracingFilterType type satisfies the MappedNullable interface at compile time
@@ -21,20 +19,16 @@ var _ MappedNullable = &TracingFilterType{}
 
 // TracingFilterType Filter type for trace entries
 type TracingFilterType struct {
-	Operation TracingFilterOperationType `json:"operation"`
-	Values []string `json:"values"`
+	Operation *TracingFilterOperationType `json:"operation,omitempty"`
+	Values []string `json:"values,omitempty"`
 }
-
-type _TracingFilterType TracingFilterType
 
 // NewTracingFilterType instantiates a new TracingFilterType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTracingFilterType(operation TracingFilterOperationType, values []string) *TracingFilterType {
+func NewTracingFilterType() *TracingFilterType {
 	this := TracingFilterType{}
-	this.Operation = operation
-	this.Values = values
 	return &this
 }
 
@@ -46,50 +40,66 @@ func NewTracingFilterTypeWithDefaults() *TracingFilterType {
 	return &this
 }
 
-// GetOperation returns the Operation field value
+// GetOperation returns the Operation field value if set, zero value otherwise.
 func (o *TracingFilterType) GetOperation() TracingFilterOperationType {
-	if o == nil {
+	if o == nil || IsNil(o.Operation) {
 		var ret TracingFilterOperationType
 		return ret
 	}
-
-	return o.Operation
+	return *o.Operation
 }
 
-// GetOperationOk returns a tuple with the Operation field value
+// GetOperationOk returns a tuple with the Operation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TracingFilterType) GetOperationOk() (*TracingFilterOperationType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Operation) {
 		return nil, false
 	}
-	return &o.Operation, true
+	return o.Operation, true
 }
 
-// SetOperation sets field value
+// HasOperation returns a boolean if a field has been set.
+func (o *TracingFilterType) HasOperation() bool {
+	if o != nil && !IsNil(o.Operation) {
+		return true
+	}
+
+	return false
+}
+
+// SetOperation gets a reference to the given TracingFilterOperationType and assigns it to the Operation field.
 func (o *TracingFilterType) SetOperation(v TracingFilterOperationType) {
-	o.Operation = v
+	o.Operation = &v
 }
 
-// GetValues returns the Values field value
+// GetValues returns the Values field value if set, zero value otherwise.
 func (o *TracingFilterType) GetValues() []string {
-	if o == nil {
+	if o == nil || IsNil(o.Values) {
 		var ret []string
 		return ret
 	}
-
 	return o.Values
 }
 
-// GetValuesOk returns a tuple with the Values field value
+// GetValuesOk returns a tuple with the Values field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TracingFilterType) GetValuesOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Values) {
 		return nil, false
 	}
 	return o.Values, true
 }
 
-// SetValues sets field value
+// HasValues returns a boolean if a field has been set.
+func (o *TracingFilterType) HasValues() bool {
+	if o != nil && !IsNil(o.Values) {
+		return true
+	}
+
+	return false
+}
+
+// SetValues gets a reference to the given []string and assigns it to the Values field.
 func (o *TracingFilterType) SetValues(v []string) {
 	o.Values = v
 }
@@ -104,47 +114,13 @@ func (o TracingFilterType) MarshalJSON() ([]byte, error) {
 
 func (o TracingFilterType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["operation"] = o.Operation
-	toSerialize["values"] = o.Values
+	if !IsNil(o.Operation) {
+		toSerialize["operation"] = o.Operation
+	}
+	if !IsNil(o.Values) {
+		toSerialize["values"] = o.Values
+	}
 	return toSerialize, nil
-}
-
-func (o *TracingFilterType) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"operation",
-		"values",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varTracingFilterType := _TracingFilterType{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTracingFilterType)
-
-	if err != nil {
-		return err
-	}
-
-	*o = TracingFilterType(varTracingFilterType)
-
-	return err
 }
 
 type NullableTracingFilterType struct {

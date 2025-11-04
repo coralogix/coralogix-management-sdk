@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the TracingSimpleFilter type satisfies the MappedNullable interface at compile time
@@ -22,19 +20,16 @@ var _ MappedNullable = &TracingSimpleFilter{}
 // TracingSimpleFilter Basic filter configuration using a latency threshold and label filters
 type TracingSimpleFilter struct {
 	// The latency threshold to filter traces in milliseconds
-	LatencyThresholdMs string `json:"latencyThresholdMs" validate:"regexp=^\\\\d+$"`
+	LatencyThresholdMs *string `json:"latencyThresholdMs,omitempty" validate:"regexp=^\\\\d+$"`
 	TracingLabelFilters *TracingLabelFilters `json:"tracingLabelFilters,omitempty"`
 }
-
-type _TracingSimpleFilter TracingSimpleFilter
 
 // NewTracingSimpleFilter instantiates a new TracingSimpleFilter object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTracingSimpleFilter(latencyThresholdMs string) *TracingSimpleFilter {
+func NewTracingSimpleFilter() *TracingSimpleFilter {
 	this := TracingSimpleFilter{}
-	this.LatencyThresholdMs = latencyThresholdMs
 	return &this
 }
 
@@ -46,28 +41,36 @@ func NewTracingSimpleFilterWithDefaults() *TracingSimpleFilter {
 	return &this
 }
 
-// GetLatencyThresholdMs returns the LatencyThresholdMs field value
+// GetLatencyThresholdMs returns the LatencyThresholdMs field value if set, zero value otherwise.
 func (o *TracingSimpleFilter) GetLatencyThresholdMs() string {
-	if o == nil {
+	if o == nil || IsNil(o.LatencyThresholdMs) {
 		var ret string
 		return ret
 	}
-
-	return o.LatencyThresholdMs
+	return *o.LatencyThresholdMs
 }
 
-// GetLatencyThresholdMsOk returns a tuple with the LatencyThresholdMs field value
+// GetLatencyThresholdMsOk returns a tuple with the LatencyThresholdMs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TracingSimpleFilter) GetLatencyThresholdMsOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.LatencyThresholdMs) {
 		return nil, false
 	}
-	return &o.LatencyThresholdMs, true
+	return o.LatencyThresholdMs, true
 }
 
-// SetLatencyThresholdMs sets field value
+// HasLatencyThresholdMs returns a boolean if a field has been set.
+func (o *TracingSimpleFilter) HasLatencyThresholdMs() bool {
+	if o != nil && !IsNil(o.LatencyThresholdMs) {
+		return true
+	}
+
+	return false
+}
+
+// SetLatencyThresholdMs gets a reference to the given string and assigns it to the LatencyThresholdMs field.
 func (o *TracingSimpleFilter) SetLatencyThresholdMs(v string) {
-	o.LatencyThresholdMs = v
+	o.LatencyThresholdMs = &v
 }
 
 // GetTracingLabelFilters returns the TracingLabelFilters field value if set, zero value otherwise.
@@ -112,48 +115,13 @@ func (o TracingSimpleFilter) MarshalJSON() ([]byte, error) {
 
 func (o TracingSimpleFilter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["latencyThresholdMs"] = o.LatencyThresholdMs
+	if !IsNil(o.LatencyThresholdMs) {
+		toSerialize["latencyThresholdMs"] = o.LatencyThresholdMs
+	}
 	if !IsNil(o.TracingLabelFilters) {
 		toSerialize["tracingLabelFilters"] = o.TracingLabelFilters
 	}
 	return toSerialize, nil
-}
-
-func (o *TracingSimpleFilter) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"latencyThresholdMs",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varTracingSimpleFilter := _TracingSimpleFilter{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTracingSimpleFilter)
-
-	if err != nil {
-		return err
-	}
-
-	*o = TracingSimpleFilter(varTracingSimpleFilter)
-
-	return err
 }
 
 type NullableTracingSimpleFilter struct {

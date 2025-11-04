@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the V3SloDefinition type satisfies the MappedNullable interface at compile time
@@ -22,18 +20,15 @@ var _ MappedNullable = &V3SloDefinition{}
 // V3SloDefinition Configuration for SLO definition
 type V3SloDefinition struct {
 	// The SLO ID
-	SloId string `json:"sloId"`
+	SloId *string `json:"sloId,omitempty"`
 }
-
-type _V3SloDefinition V3SloDefinition
 
 // NewV3SloDefinition instantiates a new V3SloDefinition object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV3SloDefinition(sloId string) *V3SloDefinition {
+func NewV3SloDefinition() *V3SloDefinition {
 	this := V3SloDefinition{}
-	this.SloId = sloId
 	return &this
 }
 
@@ -45,28 +40,36 @@ func NewV3SloDefinitionWithDefaults() *V3SloDefinition {
 	return &this
 }
 
-// GetSloId returns the SloId field value
+// GetSloId returns the SloId field value if set, zero value otherwise.
 func (o *V3SloDefinition) GetSloId() string {
-	if o == nil {
+	if o == nil || IsNil(o.SloId) {
 		var ret string
 		return ret
 	}
-
-	return o.SloId
+	return *o.SloId
 }
 
-// GetSloIdOk returns a tuple with the SloId field value
+// GetSloIdOk returns a tuple with the SloId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V3SloDefinition) GetSloIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SloId) {
 		return nil, false
 	}
-	return &o.SloId, true
+	return o.SloId, true
 }
 
-// SetSloId sets field value
+// HasSloId returns a boolean if a field has been set.
+func (o *V3SloDefinition) HasSloId() bool {
+	if o != nil && !IsNil(o.SloId) {
+		return true
+	}
+
+	return false
+}
+
+// SetSloId gets a reference to the given string and assigns it to the SloId field.
 func (o *V3SloDefinition) SetSloId(v string) {
-	o.SloId = v
+	o.SloId = &v
 }
 
 func (o V3SloDefinition) MarshalJSON() ([]byte, error) {
@@ -79,45 +82,10 @@ func (o V3SloDefinition) MarshalJSON() ([]byte, error) {
 
 func (o V3SloDefinition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["sloId"] = o.SloId
+	if !IsNil(o.SloId) {
+		toSerialize["sloId"] = o.SloId
+	}
 	return toSerialize, nil
-}
-
-func (o *V3SloDefinition) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"sloId",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varV3SloDefinition := _V3SloDefinition{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varV3SloDefinition)
-
-	if err != nil {
-		return err
-	}
-
-	*o = V3SloDefinition(varV3SloDefinition)
-
-	return err
 }
 
 type NullableV3SloDefinition struct {

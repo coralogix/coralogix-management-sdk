@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the LogsNewValueRule type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &LogsNewValueRule{}
 
 // LogsNewValueRule Defines the condition for detecting new values in logs
 type LogsNewValueRule struct {
-	Condition LogsNewValueCondition `json:"condition"`
+	Condition *LogsNewValueCondition `json:"condition,omitempty"`
 }
-
-type _LogsNewValueRule LogsNewValueRule
 
 // NewLogsNewValueRule instantiates a new LogsNewValueRule object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogsNewValueRule(condition LogsNewValueCondition) *LogsNewValueRule {
+func NewLogsNewValueRule() *LogsNewValueRule {
 	this := LogsNewValueRule{}
-	this.Condition = condition
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewLogsNewValueRuleWithDefaults() *LogsNewValueRule {
 	return &this
 }
 
-// GetCondition returns the Condition field value
+// GetCondition returns the Condition field value if set, zero value otherwise.
 func (o *LogsNewValueRule) GetCondition() LogsNewValueCondition {
-	if o == nil {
+	if o == nil || IsNil(o.Condition) {
 		var ret LogsNewValueCondition
 		return ret
 	}
-
-	return o.Condition
+	return *o.Condition
 }
 
-// GetConditionOk returns a tuple with the Condition field value
+// GetConditionOk returns a tuple with the Condition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsNewValueRule) GetConditionOk() (*LogsNewValueCondition, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Condition) {
 		return nil, false
 	}
-	return &o.Condition, true
+	return o.Condition, true
 }
 
-// SetCondition sets field value
+// HasCondition returns a boolean if a field has been set.
+func (o *LogsNewValueRule) HasCondition() bool {
+	if o != nil && !IsNil(o.Condition) {
+		return true
+	}
+
+	return false
+}
+
+// SetCondition gets a reference to the given LogsNewValueCondition and assigns it to the Condition field.
 func (o *LogsNewValueRule) SetCondition(v LogsNewValueCondition) {
-	o.Condition = v
+	o.Condition = &v
 }
 
 func (o LogsNewValueRule) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o LogsNewValueRule) MarshalJSON() ([]byte, error) {
 
 func (o LogsNewValueRule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["condition"] = o.Condition
+	if !IsNil(o.Condition) {
+		toSerialize["condition"] = o.Condition
+	}
 	return toSerialize, nil
-}
-
-func (o *LogsNewValueRule) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"condition",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varLogsNewValueRule := _LogsNewValueRule{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLogsNewValueRule)
-
-	if err != nil {
-		return err
-	}
-
-	*o = LogsNewValueRule(varLogsNewValueRule)
-
-	return err
 }
 
 type NullableLogsNewValueRule struct {

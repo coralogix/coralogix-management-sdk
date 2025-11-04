@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the AlertDefPropertiesLogsRatioThreshold type satisfies the MappedNullable interface at compile time
@@ -34,26 +32,21 @@ type AlertDefPropertiesLogsRatioThreshold struct {
 	IncidentsSettings *AlertDefIncidentSettings `json:"incidentsSettings,omitempty"`
 	LogsRatioThreshold *LogsRatioThresholdType `json:"logsRatioThreshold,omitempty"`
 	// The name of the alert definition
-	Name string `json:"name"`
+	Name *string `json:"name,omitempty"`
 	NotificationGroup *AlertDefNotificationGroup `json:"notificationGroup,omitempty"`
 	NotificationGroupExcess []AlertDefNotificationGroup `json:"notificationGroupExcess,omitempty"`
 	// Whether the alert is in phantom mode (creating incidents or not)
 	PhantomMode *bool `json:"phantomMode,omitempty"`
-	Priority AlertDefPriority `json:"priority"`
-	Type AlertDefType `json:"type"`
+	Priority *AlertDefPriority `json:"priority,omitempty"`
+	Type *AlertDefType `json:"type,omitempty"`
 }
-
-type _AlertDefPropertiesLogsRatioThreshold AlertDefPropertiesLogsRatioThreshold
 
 // NewAlertDefPropertiesLogsRatioThreshold instantiates a new AlertDefPropertiesLogsRatioThreshold object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDefPropertiesLogsRatioThreshold(name string, priority AlertDefPriority, type_ AlertDefType) *AlertDefPropertiesLogsRatioThreshold {
+func NewAlertDefPropertiesLogsRatioThreshold() *AlertDefPropertiesLogsRatioThreshold {
 	this := AlertDefPropertiesLogsRatioThreshold{}
-	this.Name = name
-	this.Priority = priority
-	this.Type = type_
 	return &this
 }
 
@@ -321,28 +314,36 @@ func (o *AlertDefPropertiesLogsRatioThreshold) SetLogsRatioThreshold(v LogsRatio
 	o.LogsRatioThreshold = &v
 }
 
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *AlertDefPropertiesLogsRatioThreshold) GetName() string {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertDefPropertiesLogsRatioThreshold) GetNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *AlertDefPropertiesLogsRatioThreshold) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *AlertDefPropertiesLogsRatioThreshold) SetName(v string) {
-	o.Name = v
+	o.Name = &v
 }
 
 // GetNotificationGroup returns the NotificationGroup field value if set, zero value otherwise.
@@ -441,52 +442,68 @@ func (o *AlertDefPropertiesLogsRatioThreshold) SetPhantomMode(v bool) {
 	o.PhantomMode = &v
 }
 
-// GetPriority returns the Priority field value
+// GetPriority returns the Priority field value if set, zero value otherwise.
 func (o *AlertDefPropertiesLogsRatioThreshold) GetPriority() AlertDefPriority {
-	if o == nil {
+	if o == nil || IsNil(o.Priority) {
 		var ret AlertDefPriority
 		return ret
 	}
-
-	return o.Priority
+	return *o.Priority
 }
 
-// GetPriorityOk returns a tuple with the Priority field value
+// GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertDefPropertiesLogsRatioThreshold) GetPriorityOk() (*AlertDefPriority, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Priority) {
 		return nil, false
 	}
-	return &o.Priority, true
+	return o.Priority, true
 }
 
-// SetPriority sets field value
+// HasPriority returns a boolean if a field has been set.
+func (o *AlertDefPropertiesLogsRatioThreshold) HasPriority() bool {
+	if o != nil && !IsNil(o.Priority) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriority gets a reference to the given AlertDefPriority and assigns it to the Priority field.
 func (o *AlertDefPropertiesLogsRatioThreshold) SetPriority(v AlertDefPriority) {
-	o.Priority = v
+	o.Priority = &v
 }
 
-// GetType returns the Type field value
+// GetType returns the Type field value if set, zero value otherwise.
 func (o *AlertDefPropertiesLogsRatioThreshold) GetType() AlertDefType {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret AlertDefType
 		return ret
 	}
-
-	return o.Type
+	return *o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertDefPropertiesLogsRatioThreshold) GetTypeOk() (*AlertDefType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
-	return &o.Type, true
+	return o.Type, true
 }
 
-// SetType sets field value
+// HasType returns a boolean if a field has been set.
+func (o *AlertDefPropertiesLogsRatioThreshold) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given AlertDefType and assigns it to the Type field.
 func (o *AlertDefPropertiesLogsRatioThreshold) SetType(v AlertDefType) {
-	o.Type = v
+	o.Type = &v
 }
 
 func (o AlertDefPropertiesLogsRatioThreshold) MarshalJSON() ([]byte, error) {
@@ -523,7 +540,9 @@ func (o AlertDefPropertiesLogsRatioThreshold) ToMap() (map[string]interface{}, e
 	if !IsNil(o.LogsRatioThreshold) {
 		toSerialize["logsRatioThreshold"] = o.LogsRatioThreshold
 	}
-	toSerialize["name"] = o.Name
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	if !IsNil(o.NotificationGroup) {
 		toSerialize["notificationGroup"] = o.NotificationGroup
 	}
@@ -533,48 +552,13 @@ func (o AlertDefPropertiesLogsRatioThreshold) ToMap() (map[string]interface{}, e
 	if !IsNil(o.PhantomMode) {
 		toSerialize["phantomMode"] = o.PhantomMode
 	}
-	toSerialize["priority"] = o.Priority
-	toSerialize["type"] = o.Type
+	if !IsNil(o.Priority) {
+		toSerialize["priority"] = o.Priority
+	}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
 	return toSerialize, nil
-}
-
-func (o *AlertDefPropertiesLogsRatioThreshold) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"name",
-		"priority",
-		"type",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varAlertDefPropertiesLogsRatioThreshold := _AlertDefPropertiesLogsRatioThreshold{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAlertDefPropertiesLogsRatioThreshold)
-
-	if err != nil {
-		return err
-	}
-
-	*o = AlertDefPropertiesLogsRatioThreshold(varAlertDefPropertiesLogsRatioThreshold)
-
-	return err
 }
 
 type NullableAlertDefPropertiesLogsRatioThreshold struct {

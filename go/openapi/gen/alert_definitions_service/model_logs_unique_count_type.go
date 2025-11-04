@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the LogsUniqueCountType type satisfies the MappedNullable interface at compile time
@@ -25,21 +23,17 @@ type LogsUniqueCountType struct {
 	// The maximum unique count per group by key
 	MaxUniqueCountPerGroupByKey *string `json:"maxUniqueCountPerGroupByKey,omitempty"`
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
-	Rules []LogsUniqueCountRule `json:"rules"`
+	Rules []LogsUniqueCountRule `json:"rules,omitempty"`
 	// The keypath in the logs to be used for unique count
-	UniqueCountKeypath string `json:"uniqueCountKeypath"`
+	UniqueCountKeypath *string `json:"uniqueCountKeypath,omitempty"`
 }
-
-type _LogsUniqueCountType LogsUniqueCountType
 
 // NewLogsUniqueCountType instantiates a new LogsUniqueCountType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogsUniqueCountType(rules []LogsUniqueCountRule, uniqueCountKeypath string) *LogsUniqueCountType {
+func NewLogsUniqueCountType() *LogsUniqueCountType {
 	this := LogsUniqueCountType{}
-	this.Rules = rules
-	this.UniqueCountKeypath = uniqueCountKeypath
 	return &this
 }
 
@@ -147,52 +141,68 @@ func (o *LogsUniqueCountType) SetNotificationPayloadFilter(v []string) {
 	o.NotificationPayloadFilter = v
 }
 
-// GetRules returns the Rules field value
+// GetRules returns the Rules field value if set, zero value otherwise.
 func (o *LogsUniqueCountType) GetRules() []LogsUniqueCountRule {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		var ret []LogsUniqueCountRule
 		return ret
 	}
-
 	return o.Rules
 }
 
-// GetRulesOk returns a tuple with the Rules field value
+// GetRulesOk returns a tuple with the Rules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsUniqueCountType) GetRulesOk() ([]LogsUniqueCountRule, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		return nil, false
 	}
 	return o.Rules, true
 }
 
-// SetRules sets field value
+// HasRules returns a boolean if a field has been set.
+func (o *LogsUniqueCountType) HasRules() bool {
+	if o != nil && !IsNil(o.Rules) {
+		return true
+	}
+
+	return false
+}
+
+// SetRules gets a reference to the given []LogsUniqueCountRule and assigns it to the Rules field.
 func (o *LogsUniqueCountType) SetRules(v []LogsUniqueCountRule) {
 	o.Rules = v
 }
 
-// GetUniqueCountKeypath returns the UniqueCountKeypath field value
+// GetUniqueCountKeypath returns the UniqueCountKeypath field value if set, zero value otherwise.
 func (o *LogsUniqueCountType) GetUniqueCountKeypath() string {
-	if o == nil {
+	if o == nil || IsNil(o.UniqueCountKeypath) {
 		var ret string
 		return ret
 	}
-
-	return o.UniqueCountKeypath
+	return *o.UniqueCountKeypath
 }
 
-// GetUniqueCountKeypathOk returns a tuple with the UniqueCountKeypath field value
+// GetUniqueCountKeypathOk returns a tuple with the UniqueCountKeypath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsUniqueCountType) GetUniqueCountKeypathOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.UniqueCountKeypath) {
 		return nil, false
 	}
-	return &o.UniqueCountKeypath, true
+	return o.UniqueCountKeypath, true
 }
 
-// SetUniqueCountKeypath sets field value
+// HasUniqueCountKeypath returns a boolean if a field has been set.
+func (o *LogsUniqueCountType) HasUniqueCountKeypath() bool {
+	if o != nil && !IsNil(o.UniqueCountKeypath) {
+		return true
+	}
+
+	return false
+}
+
+// SetUniqueCountKeypath gets a reference to the given string and assigns it to the UniqueCountKeypath field.
 func (o *LogsUniqueCountType) SetUniqueCountKeypath(v string) {
-	o.UniqueCountKeypath = v
+	o.UniqueCountKeypath = &v
 }
 
 func (o LogsUniqueCountType) MarshalJSON() ([]byte, error) {
@@ -214,47 +224,13 @@ func (o LogsUniqueCountType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NotificationPayloadFilter) {
 		toSerialize["notificationPayloadFilter"] = o.NotificationPayloadFilter
 	}
-	toSerialize["rules"] = o.Rules
-	toSerialize["uniqueCountKeypath"] = o.UniqueCountKeypath
+	if !IsNil(o.Rules) {
+		toSerialize["rules"] = o.Rules
+	}
+	if !IsNil(o.UniqueCountKeypath) {
+		toSerialize["uniqueCountKeypath"] = o.UniqueCountKeypath
+	}
 	return toSerialize, nil
-}
-
-func (o *LogsUniqueCountType) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"rules",
-		"uniqueCountKeypath",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varLogsUniqueCountType := _LogsUniqueCountType{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLogsUniqueCountType)
-
-	if err != nil {
-		return err
-	}
-
-	*o = LogsUniqueCountType(varLogsUniqueCountType)
-
-	return err
 }
 
 type NullableLogsUniqueCountType struct {

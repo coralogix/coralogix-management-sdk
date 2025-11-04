@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the SloThresholdCondition type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &SloThresholdCondition{}
 
 // SloThresholdCondition Condition for the SLO threshold rule
 type SloThresholdCondition struct {
-	Threshold float64 `json:"threshold"`
+	Threshold *float64 `json:"threshold,omitempty"`
 }
-
-type _SloThresholdCondition SloThresholdCondition
 
 // NewSloThresholdCondition instantiates a new SloThresholdCondition object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSloThresholdCondition(threshold float64) *SloThresholdCondition {
+func NewSloThresholdCondition() *SloThresholdCondition {
 	this := SloThresholdCondition{}
-	this.Threshold = threshold
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewSloThresholdConditionWithDefaults() *SloThresholdCondition {
 	return &this
 }
 
-// GetThreshold returns the Threshold field value
+// GetThreshold returns the Threshold field value if set, zero value otherwise.
 func (o *SloThresholdCondition) GetThreshold() float64 {
-	if o == nil {
+	if o == nil || IsNil(o.Threshold) {
 		var ret float64
 		return ret
 	}
-
-	return o.Threshold
+	return *o.Threshold
 }
 
-// GetThresholdOk returns a tuple with the Threshold field value
+// GetThresholdOk returns a tuple with the Threshold field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SloThresholdCondition) GetThresholdOk() (*float64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Threshold) {
 		return nil, false
 	}
-	return &o.Threshold, true
+	return o.Threshold, true
 }
 
-// SetThreshold sets field value
+// HasThreshold returns a boolean if a field has been set.
+func (o *SloThresholdCondition) HasThreshold() bool {
+	if o != nil && !IsNil(o.Threshold) {
+		return true
+	}
+
+	return false
+}
+
+// SetThreshold gets a reference to the given float64 and assigns it to the Threshold field.
 func (o *SloThresholdCondition) SetThreshold(v float64) {
-	o.Threshold = v
+	o.Threshold = &v
 }
 
 func (o SloThresholdCondition) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o SloThresholdCondition) MarshalJSON() ([]byte, error) {
 
 func (o SloThresholdCondition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["threshold"] = o.Threshold
+	if !IsNil(o.Threshold) {
+		toSerialize["threshold"] = o.Threshold
+	}
 	return toSerialize, nil
-}
-
-func (o *SloThresholdCondition) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"threshold",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varSloThresholdCondition := _SloThresholdCondition{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSloThresholdCondition)
-
-	if err != nil {
-		return err
-	}
-
-	*o = SloThresholdCondition(varSloThresholdCondition)
-
-	return err
 }
 
 type NullableSloThresholdCondition struct {

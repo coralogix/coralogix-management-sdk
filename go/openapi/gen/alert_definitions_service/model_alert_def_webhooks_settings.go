@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the AlertDefWebhooksSettings type satisfies the MappedNullable interface at compile time
@@ -21,21 +19,18 @@ var _ MappedNullable = &AlertDefWebhooksSettings{}
 
 // AlertDefWebhooksSettings Configuration for webhook notifications for an alert
 type AlertDefWebhooksSettings struct {
-	Integration V3IntegrationType `json:"integration"`
+	Integration *V3IntegrationType `json:"integration,omitempty"`
 	// The time in minutes before the alert can be retriggered
 	Minutes *int64 `json:"minutes,omitempty"`
 	NotifyOn *NotifyOn `json:"notifyOn,omitempty"`
 }
 
-type _AlertDefWebhooksSettings AlertDefWebhooksSettings
-
 // NewAlertDefWebhooksSettings instantiates a new AlertDefWebhooksSettings object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDefWebhooksSettings(integration V3IntegrationType) *AlertDefWebhooksSettings {
+func NewAlertDefWebhooksSettings() *AlertDefWebhooksSettings {
 	this := AlertDefWebhooksSettings{}
-	this.Integration = integration
 	return &this
 }
 
@@ -47,28 +42,36 @@ func NewAlertDefWebhooksSettingsWithDefaults() *AlertDefWebhooksSettings {
 	return &this
 }
 
-// GetIntegration returns the Integration field value
+// GetIntegration returns the Integration field value if set, zero value otherwise.
 func (o *AlertDefWebhooksSettings) GetIntegration() V3IntegrationType {
-	if o == nil {
+	if o == nil || IsNil(o.Integration) {
 		var ret V3IntegrationType
 		return ret
 	}
-
-	return o.Integration
+	return *o.Integration
 }
 
-// GetIntegrationOk returns a tuple with the Integration field value
+// GetIntegrationOk returns a tuple with the Integration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertDefWebhooksSettings) GetIntegrationOk() (*V3IntegrationType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Integration) {
 		return nil, false
 	}
-	return &o.Integration, true
+	return o.Integration, true
 }
 
-// SetIntegration sets field value
+// HasIntegration returns a boolean if a field has been set.
+func (o *AlertDefWebhooksSettings) HasIntegration() bool {
+	if o != nil && !IsNil(o.Integration) {
+		return true
+	}
+
+	return false
+}
+
+// SetIntegration gets a reference to the given V3IntegrationType and assigns it to the Integration field.
 func (o *AlertDefWebhooksSettings) SetIntegration(v V3IntegrationType) {
-	o.Integration = v
+	o.Integration = &v
 }
 
 // GetMinutes returns the Minutes field value if set, zero value otherwise.
@@ -145,7 +148,9 @@ func (o AlertDefWebhooksSettings) MarshalJSON() ([]byte, error) {
 
 func (o AlertDefWebhooksSettings) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["integration"] = o.Integration
+	if !IsNil(o.Integration) {
+		toSerialize["integration"] = o.Integration
+	}
 	if !IsNil(o.Minutes) {
 		toSerialize["minutes"] = o.Minutes
 	}
@@ -153,43 +158,6 @@ func (o AlertDefWebhooksSettings) ToMap() (map[string]interface{}, error) {
 		toSerialize["notifyOn"] = o.NotifyOn
 	}
 	return toSerialize, nil
-}
-
-func (o *AlertDefWebhooksSettings) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"integration",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varAlertDefWebhooksSettings := _AlertDefWebhooksSettings{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAlertDefWebhooksSettings)
-
-	if err != nil {
-		return err
-	}
-
-	*o = AlertDefWebhooksSettings(varAlertDefWebhooksSettings)
-
-	return err
 }
 
 type NullableAlertDefWebhooksSettings struct {

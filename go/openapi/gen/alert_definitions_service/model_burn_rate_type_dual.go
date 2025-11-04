@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the BurnRateTypeDual type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &BurnRateTypeDual{}
 
 // BurnRateTypeDual Burn rate type dual definition
 type BurnRateTypeDual struct {
-	TimeDuration TimeDuration `json:"timeDuration"`
+	TimeDuration *TimeDuration `json:"timeDuration,omitempty"`
 }
-
-type _BurnRateTypeDual BurnRateTypeDual
 
 // NewBurnRateTypeDual instantiates a new BurnRateTypeDual object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBurnRateTypeDual(timeDuration TimeDuration) *BurnRateTypeDual {
+func NewBurnRateTypeDual() *BurnRateTypeDual {
 	this := BurnRateTypeDual{}
-	this.TimeDuration = timeDuration
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewBurnRateTypeDualWithDefaults() *BurnRateTypeDual {
 	return &this
 }
 
-// GetTimeDuration returns the TimeDuration field value
+// GetTimeDuration returns the TimeDuration field value if set, zero value otherwise.
 func (o *BurnRateTypeDual) GetTimeDuration() TimeDuration {
-	if o == nil {
+	if o == nil || IsNil(o.TimeDuration) {
 		var ret TimeDuration
 		return ret
 	}
-
-	return o.TimeDuration
+	return *o.TimeDuration
 }
 
-// GetTimeDurationOk returns a tuple with the TimeDuration field value
+// GetTimeDurationOk returns a tuple with the TimeDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BurnRateTypeDual) GetTimeDurationOk() (*TimeDuration, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.TimeDuration) {
 		return nil, false
 	}
-	return &o.TimeDuration, true
+	return o.TimeDuration, true
 }
 
-// SetTimeDuration sets field value
+// HasTimeDuration returns a boolean if a field has been set.
+func (o *BurnRateTypeDual) HasTimeDuration() bool {
+	if o != nil && !IsNil(o.TimeDuration) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeDuration gets a reference to the given TimeDuration and assigns it to the TimeDuration field.
 func (o *BurnRateTypeDual) SetTimeDuration(v TimeDuration) {
-	o.TimeDuration = v
+	o.TimeDuration = &v
 }
 
 func (o BurnRateTypeDual) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o BurnRateTypeDual) MarshalJSON() ([]byte, error) {
 
 func (o BurnRateTypeDual) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["timeDuration"] = o.TimeDuration
+	if !IsNil(o.TimeDuration) {
+		toSerialize["timeDuration"] = o.TimeDuration
+	}
 	return toSerialize, nil
-}
-
-func (o *BurnRateTypeDual) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"timeDuration",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varBurnRateTypeDual := _BurnRateTypeDual{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBurnRateTypeDual)
-
-	if err != nil {
-		return err
-	}
-
-	*o = BurnRateTypeDual(varBurnRateTypeDual)
-
-	return err
 }
 
 type NullableBurnRateTypeDual struct {

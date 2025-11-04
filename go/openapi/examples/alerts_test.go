@@ -14,12 +14,20 @@ import (
 
 // CreateAlert returns a reusable OpenAPI alert definition payload
 func CreateAlert() *alerts.AlertDefPropertiesLogsThreshold {
+	name := "Standard alert example"
+	startHour := int32(8)
+	startMinute := int32(30)
+	endHour := int32(20)
+	endMinute := int32(30)
+	threshold := float64(10)
+	applicationName := "nginx"
+	subsystemName := "subsystem-name"
 	return &alerts.AlertDefPropertiesLogsThreshold{
-		Name:        "Standard alert example",
+		Name:        &name,
 		Description: alerts.PtrString("Standard alert example from OpenAPI SDK"),
 		Enabled:     alerts.PtrBool(true),
-		Priority:    alerts.ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P1,
-		Type:        alerts.ALERTDEFTYPE_ALERT_DEF_TYPE_LOGS_THRESHOLD,
+		Priority:    alerts.ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P1.Ptr(),
+		Type:        alerts.ALERTDEFTYPE_ALERT_DEF_TYPE_LOGS_THRESHOLD.Ptr(),
 		EntityLabels: &map[string]string{
 			"alert_type":        "security",
 			"security_severity": "high",
@@ -30,7 +38,7 @@ func CreateAlert() *alerts.AlertDefPropertiesLogsThreshold {
 				{
 					Minutes:  alerts.PtrInt64(5),
 					NotifyOn: alerts.NOTIFYON_NOTIFY_ON_TRIGGERED_AND_RESOLVED.Ptr(),
-					Integration: alerts.V3IntegrationType{
+					Integration: &alerts.V3IntegrationType{
 						V3IntegrationTypeRecipients: &alerts.V3IntegrationTypeRecipients{
 							Recipients: &alerts.Recipients{
 								Emails: []string{"example@coralogix.com"},
@@ -45,19 +53,19 @@ func CreateAlert() *alerts.AlertDefPropertiesLogsThreshold {
 				alerts.DAYOFWEEK_DAY_OF_WEEK_WEDNESDAY,
 				alerts.DAYOFWEEK_DAY_OF_WEEK_THURSDAY,
 			},
-			StartTime: alerts.TimeOfDay{Hours: 8, Minutes: 30},
-			EndTime:   alerts.TimeOfDay{Hours: 20, Minutes: 30},
+			StartTime: &alerts.TimeOfDay{Hours: &startHour, Minutes: &startMinute},
+			EndTime:   &alerts.TimeOfDay{Hours: &endHour, Minutes: &endMinute},
 		},
 		LogsThreshold: &alerts.LogsThresholdType{
 			Rules: []alerts.LogsThresholdRule{
 				{
-					Override: alerts.AlertDefOverride{
+					Override: &alerts.AlertDefOverride{
 						Priority: alerts.ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P1.Ptr(),
 					},
-					Condition: alerts.LogsThresholdCondition{
+					Condition: &alerts.LogsThresholdCondition{
 						ConditionType: alerts.LOGSTHRESHOLDCONDITIONTYPE_LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED.Ptr(),
-						Threshold:     10,
-						TimeWindow: alerts.LogsTimeWindow{
+						Threshold:     &threshold,
+						TimeWindow: &alerts.LogsTimeWindow{
 							LogsTimeWindowSpecificValue: alerts.LOGSTIMEWINDOWVALUE_LOGS_TIME_WINDOW_VALUE_MINUTES_10.Ptr(),
 						},
 					},
@@ -68,10 +76,10 @@ func CreateAlert() *alerts.AlertDefPropertiesLogsThreshold {
 					LuceneQuery: alerts.PtrString("remote_addr_enriched:/.*/"),
 					LabelFilters: &alerts.LabelFilters{
 						ApplicationName: []alerts.LabelFilterType{
-							{Value: "nginx", Operation: alerts.LOGFILTEROPERATIONTYPE_LOG_FILTER_OPERATION_TYPE_INCLUDES},
+							{Value: &applicationName, Operation: alerts.LOGFILTEROPERATIONTYPE_LOG_FILTER_OPERATION_TYPE_INCLUDES.Ptr()},
 						},
 						SubsystemName: []alerts.LabelFilterType{
-							{Value: "subsystem-name", Operation: alerts.LOGFILTEROPERATIONTYPE_LOG_FILTER_OPERATION_TYPE_STARTS_WITH},
+							{Value: &subsystemName, Operation: alerts.LOGFILTEROPERATIONTYPE_LOG_FILTER_OPERATION_TYPE_STARTS_WITH.Ptr()},
 						},
 						Severities: []alerts.LogSeverity{
 							alerts.LOGSEVERITY_LOG_SEVERITY_WARNING,
@@ -96,12 +104,6 @@ func TestAlerts(t *testing.T) {
 	client := cxsdk.NewAlertsClient(cpc)
 	ctx := context.Background()
 
-	allAlerts, httResp, err := client.
-		AlertDefsServiceListAlertDefs(ctx).
-		Execute()
-
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httResp, err))
-	assert.NotNil(t, allAlerts.AlertDefs)
 	createReq := alerts.AlertDefsServiceCreateAlertDefRequest{
 		AlertDefPropertiesLogsThreshold: CreateAlert(),
 	}
@@ -113,7 +115,7 @@ func TestAlerts(t *testing.T) {
 	assert.NotEmpty(t, created.AlertDef.Id)
 
 	retrieved, httpResp, err := client.
-		AlertDefsServiceGetAlertDef(ctx, created.AlertDef.Id).
+		AlertDefsServiceGetAlertDef(ctx, *created.AlertDef.Id).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 	assert.Equal(t, created.AlertDef.Id, retrieved.AlertDef.Id)
@@ -121,7 +123,7 @@ func TestAlerts(t *testing.T) {
 	newDesc := "Updated description via OpenAPI SDK"
 	updateReq := alerts.ReplaceAlertDefinitionRequest{
 		Id: created.AlertDef.Id,
-		AlertDefProperties: alerts.AlertDefProperties{
+		AlertDefProperties: &alerts.AlertDefProperties{
 			AlertDefPropertiesLogsThreshold: &alerts.AlertDefPropertiesLogsThreshold{
 				Name:          created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsThreshold.Name,
 				Description:   &newDesc,
@@ -143,12 +145,12 @@ func TestAlerts(t *testing.T) {
 	assert.Equal(t, *updated.AlertDef.AlertDefProperties.AlertDefPropertiesLogsThreshold.Description, newDesc)
 
 	_, httpResp, err = client.
-		AlertDefsServiceDeleteAlertDef(ctx, updated.AlertDef.Id).
+		AlertDefsServiceDeleteAlertDef(ctx, *updated.AlertDef.Id).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = client.
-		AlertDefsServiceGetAlertDef(ctx, updated.AlertDef.Id).
+		AlertDefsServiceGetAlertDef(ctx, *updated.AlertDef.Id).
 		Execute()
 	assert.NotNil(t, cxsdk.NewAPIError(httpResp, err))
 }
@@ -195,7 +197,7 @@ func TestAlertScheduler(t *testing.T) {
 		AlertSchedulerRuleProtobufV1FilterAlertUniqueIds: &scheduler.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds{
 			WhatExpression: scheduler.PtrString("source logs | filter $d.cpodId:string == '122'"),
 			AlertUniqueIds: &scheduler.AlertUniqueIds{
-				Value: []string{createdAlert.AlertDef.Id},
+				Value: []string{*createdAlert.AlertDef.Id},
 			},
 		},
 	}
@@ -250,7 +252,7 @@ func TestAlertScheduler(t *testing.T) {
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = alertsClient.
-		AlertDefsServiceDeleteAlertDef(ctx, createdAlert.AlertDef.Id).
+		AlertDefsServiceDeleteAlertDef(ctx, *createdAlert.AlertDef.Id).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 }

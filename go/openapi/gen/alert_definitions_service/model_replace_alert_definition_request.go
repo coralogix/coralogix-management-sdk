@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ReplaceAlertDefinitionRequest type satisfies the MappedNullable interface at compile time
@@ -21,21 +19,17 @@ var _ MappedNullable = &ReplaceAlertDefinitionRequest{}
 
 // ReplaceAlertDefinitionRequest A request to replace an existing alert definition
 type ReplaceAlertDefinitionRequest struct {
-	AlertDefProperties AlertDefProperties `json:"alertDefProperties"`
+	AlertDefProperties *AlertDefProperties `json:"alertDefProperties,omitempty"`
 	// Alert definition ID
-	Id string `json:"id"`
+	Id *string `json:"id,omitempty"`
 }
-
-type _ReplaceAlertDefinitionRequest ReplaceAlertDefinitionRequest
 
 // NewReplaceAlertDefinitionRequest instantiates a new ReplaceAlertDefinitionRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReplaceAlertDefinitionRequest(alertDefProperties AlertDefProperties, id string) *ReplaceAlertDefinitionRequest {
+func NewReplaceAlertDefinitionRequest() *ReplaceAlertDefinitionRequest {
 	this := ReplaceAlertDefinitionRequest{}
-	this.AlertDefProperties = alertDefProperties
-	this.Id = id
 	return &this
 }
 
@@ -47,52 +41,68 @@ func NewReplaceAlertDefinitionRequestWithDefaults() *ReplaceAlertDefinitionReque
 	return &this
 }
 
-// GetAlertDefProperties returns the AlertDefProperties field value
+// GetAlertDefProperties returns the AlertDefProperties field value if set, zero value otherwise.
 func (o *ReplaceAlertDefinitionRequest) GetAlertDefProperties() AlertDefProperties {
-	if o == nil {
+	if o == nil || IsNil(o.AlertDefProperties) {
 		var ret AlertDefProperties
 		return ret
 	}
-
-	return o.AlertDefProperties
+	return *o.AlertDefProperties
 }
 
-// GetAlertDefPropertiesOk returns a tuple with the AlertDefProperties field value
+// GetAlertDefPropertiesOk returns a tuple with the AlertDefProperties field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ReplaceAlertDefinitionRequest) GetAlertDefPropertiesOk() (*AlertDefProperties, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.AlertDefProperties) {
 		return nil, false
 	}
-	return &o.AlertDefProperties, true
+	return o.AlertDefProperties, true
 }
 
-// SetAlertDefProperties sets field value
+// HasAlertDefProperties returns a boolean if a field has been set.
+func (o *ReplaceAlertDefinitionRequest) HasAlertDefProperties() bool {
+	if o != nil && !IsNil(o.AlertDefProperties) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlertDefProperties gets a reference to the given AlertDefProperties and assigns it to the AlertDefProperties field.
 func (o *ReplaceAlertDefinitionRequest) SetAlertDefProperties(v AlertDefProperties) {
-	o.AlertDefProperties = v
+	o.AlertDefProperties = &v
 }
 
-// GetId returns the Id field value
+// GetId returns the Id field value if set, zero value otherwise.
 func (o *ReplaceAlertDefinitionRequest) GetId() string {
-	if o == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
-
-	return o.Id
+	return *o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ReplaceAlertDefinitionRequest) GetIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
-	return &o.Id, true
+	return o.Id, true
 }
 
-// SetId sets field value
+// HasId returns a boolean if a field has been set.
+func (o *ReplaceAlertDefinitionRequest) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
 func (o *ReplaceAlertDefinitionRequest) SetId(v string) {
-	o.Id = v
+	o.Id = &v
 }
 
 func (o ReplaceAlertDefinitionRequest) MarshalJSON() ([]byte, error) {
@@ -105,47 +115,13 @@ func (o ReplaceAlertDefinitionRequest) MarshalJSON() ([]byte, error) {
 
 func (o ReplaceAlertDefinitionRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["alertDefProperties"] = o.AlertDefProperties
-	toSerialize["id"] = o.Id
+	if !IsNil(o.AlertDefProperties) {
+		toSerialize["alertDefProperties"] = o.AlertDefProperties
+	}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
 	return toSerialize, nil
-}
-
-func (o *ReplaceAlertDefinitionRequest) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"alertDefProperties",
-		"id",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varReplaceAlertDefinitionRequest := _ReplaceAlertDefinitionRequest{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReplaceAlertDefinitionRequest)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ReplaceAlertDefinitionRequest(varReplaceAlertDefinitionRequest)
-
-	return err
 }
 
 type NullableReplaceAlertDefinitionRequest struct {

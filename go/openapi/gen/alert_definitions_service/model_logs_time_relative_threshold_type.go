@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the LogsTimeRelativeThresholdType type satisfies the MappedNullable interface at compile time
@@ -27,19 +25,16 @@ type LogsTimeRelativeThresholdType struct {
 	IgnoreInfinity *bool `json:"ignoreInfinity,omitempty"`
 	LogsFilter *V3LogsFilter `json:"logsFilter,omitempty"`
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
-	Rules []LogsTimeRelativeRule `json:"rules"`
+	Rules []LogsTimeRelativeRule `json:"rules,omitempty"`
 	UndetectedValuesManagement *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
 }
-
-type _LogsTimeRelativeThresholdType LogsTimeRelativeThresholdType
 
 // NewLogsTimeRelativeThresholdType instantiates a new LogsTimeRelativeThresholdType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogsTimeRelativeThresholdType(rules []LogsTimeRelativeRule) *LogsTimeRelativeThresholdType {
+func NewLogsTimeRelativeThresholdType() *LogsTimeRelativeThresholdType {
 	this := LogsTimeRelativeThresholdType{}
-	this.Rules = rules
 	return &this
 }
 
@@ -179,26 +174,34 @@ func (o *LogsTimeRelativeThresholdType) SetNotificationPayloadFilter(v []string)
 	o.NotificationPayloadFilter = v
 }
 
-// GetRules returns the Rules field value
+// GetRules returns the Rules field value if set, zero value otherwise.
 func (o *LogsTimeRelativeThresholdType) GetRules() []LogsTimeRelativeRule {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		var ret []LogsTimeRelativeRule
 		return ret
 	}
-
 	return o.Rules
 }
 
-// GetRulesOk returns a tuple with the Rules field value
+// GetRulesOk returns a tuple with the Rules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsTimeRelativeThresholdType) GetRulesOk() ([]LogsTimeRelativeRule, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		return nil, false
 	}
 	return o.Rules, true
 }
 
-// SetRules sets field value
+// HasRules returns a boolean if a field has been set.
+func (o *LogsTimeRelativeThresholdType) HasRules() bool {
+	if o != nil && !IsNil(o.Rules) {
+		return true
+	}
+
+	return false
+}
+
+// SetRules gets a reference to the given []LogsTimeRelativeRule and assigns it to the Rules field.
 func (o *LogsTimeRelativeThresholdType) SetRules(v []LogsTimeRelativeRule) {
 	o.Rules = v
 }
@@ -257,48 +260,13 @@ func (o LogsTimeRelativeThresholdType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NotificationPayloadFilter) {
 		toSerialize["notificationPayloadFilter"] = o.NotificationPayloadFilter
 	}
-	toSerialize["rules"] = o.Rules
+	if !IsNil(o.Rules) {
+		toSerialize["rules"] = o.Rules
+	}
 	if !IsNil(o.UndetectedValuesManagement) {
 		toSerialize["undetectedValuesManagement"] = o.UndetectedValuesManagement
 	}
 	return toSerialize, nil
-}
-
-func (o *LogsTimeRelativeThresholdType) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"rules",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varLogsTimeRelativeThresholdType := _LogsTimeRelativeThresholdType{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLogsTimeRelativeThresholdType)
-
-	if err != nil {
-		return err
-	}
-
-	*o = LogsTimeRelativeThresholdType(varLogsTimeRelativeThresholdType)
-
-	return err
 }
 
 type NullableLogsTimeRelativeThresholdType struct {

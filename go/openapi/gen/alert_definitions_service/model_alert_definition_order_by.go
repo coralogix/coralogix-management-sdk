@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the AlertDefinitionOrderBy type satisfies the MappedNullable interface at compile time
@@ -21,20 +19,16 @@ var _ MappedNullable = &AlertDefinitionOrderBy{}
 
 // AlertDefinitionOrderBy A data structure that specifies the field and direction for ordering alert definitions
 type AlertDefinitionOrderBy struct {
-	Direction AlertDefOrderByDirection `json:"direction"`
-	FieldName AlertDefOrderByFields `json:"fieldName"`
+	Direction *AlertDefOrderByDirection `json:"direction,omitempty"`
+	FieldName *AlertDefOrderByFields `json:"fieldName,omitempty"`
 }
-
-type _AlertDefinitionOrderBy AlertDefinitionOrderBy
 
 // NewAlertDefinitionOrderBy instantiates a new AlertDefinitionOrderBy object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDefinitionOrderBy(direction AlertDefOrderByDirection, fieldName AlertDefOrderByFields) *AlertDefinitionOrderBy {
+func NewAlertDefinitionOrderBy() *AlertDefinitionOrderBy {
 	this := AlertDefinitionOrderBy{}
-	this.Direction = direction
-	this.FieldName = fieldName
 	return &this
 }
 
@@ -46,52 +40,68 @@ func NewAlertDefinitionOrderByWithDefaults() *AlertDefinitionOrderBy {
 	return &this
 }
 
-// GetDirection returns the Direction field value
+// GetDirection returns the Direction field value if set, zero value otherwise.
 func (o *AlertDefinitionOrderBy) GetDirection() AlertDefOrderByDirection {
-	if o == nil {
+	if o == nil || IsNil(o.Direction) {
 		var ret AlertDefOrderByDirection
 		return ret
 	}
-
-	return o.Direction
+	return *o.Direction
 }
 
-// GetDirectionOk returns a tuple with the Direction field value
+// GetDirectionOk returns a tuple with the Direction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertDefinitionOrderBy) GetDirectionOk() (*AlertDefOrderByDirection, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Direction) {
 		return nil, false
 	}
-	return &o.Direction, true
+	return o.Direction, true
 }
 
-// SetDirection sets field value
+// HasDirection returns a boolean if a field has been set.
+func (o *AlertDefinitionOrderBy) HasDirection() bool {
+	if o != nil && !IsNil(o.Direction) {
+		return true
+	}
+
+	return false
+}
+
+// SetDirection gets a reference to the given AlertDefOrderByDirection and assigns it to the Direction field.
 func (o *AlertDefinitionOrderBy) SetDirection(v AlertDefOrderByDirection) {
-	o.Direction = v
+	o.Direction = &v
 }
 
-// GetFieldName returns the FieldName field value
+// GetFieldName returns the FieldName field value if set, zero value otherwise.
 func (o *AlertDefinitionOrderBy) GetFieldName() AlertDefOrderByFields {
-	if o == nil {
+	if o == nil || IsNil(o.FieldName) {
 		var ret AlertDefOrderByFields
 		return ret
 	}
-
-	return o.FieldName
+	return *o.FieldName
 }
 
-// GetFieldNameOk returns a tuple with the FieldName field value
+// GetFieldNameOk returns a tuple with the FieldName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertDefinitionOrderBy) GetFieldNameOk() (*AlertDefOrderByFields, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.FieldName) {
 		return nil, false
 	}
-	return &o.FieldName, true
+	return o.FieldName, true
 }
 
-// SetFieldName sets field value
+// HasFieldName returns a boolean if a field has been set.
+func (o *AlertDefinitionOrderBy) HasFieldName() bool {
+	if o != nil && !IsNil(o.FieldName) {
+		return true
+	}
+
+	return false
+}
+
+// SetFieldName gets a reference to the given AlertDefOrderByFields and assigns it to the FieldName field.
 func (o *AlertDefinitionOrderBy) SetFieldName(v AlertDefOrderByFields) {
-	o.FieldName = v
+	o.FieldName = &v
 }
 
 func (o AlertDefinitionOrderBy) MarshalJSON() ([]byte, error) {
@@ -104,47 +114,13 @@ func (o AlertDefinitionOrderBy) MarshalJSON() ([]byte, error) {
 
 func (o AlertDefinitionOrderBy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["direction"] = o.Direction
-	toSerialize["fieldName"] = o.FieldName
+	if !IsNil(o.Direction) {
+		toSerialize["direction"] = o.Direction
+	}
+	if !IsNil(o.FieldName) {
+		toSerialize["fieldName"] = o.FieldName
+	}
 	return toSerialize, nil
-}
-
-func (o *AlertDefinitionOrderBy) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"direction",
-		"fieldName",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varAlertDefinitionOrderBy := _AlertDefinitionOrderBy{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAlertDefinitionOrderBy)
-
-	if err != nil {
-		return err
-	}
-
-	*o = AlertDefinitionOrderBy(varAlertDefinitionOrderBy)
-
-	return err
 }
 
 type NullableAlertDefinitionOrderBy struct {

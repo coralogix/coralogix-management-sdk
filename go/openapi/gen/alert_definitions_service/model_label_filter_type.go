@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the LabelFilterType type satisfies the MappedNullable interface at compile time
@@ -21,21 +19,17 @@ var _ MappedNullable = &LabelFilterType{}
 
 // LabelFilterType Label filter type for log entries
 type LabelFilterType struct {
-	Operation LogFilterOperationType `json:"operation"`
+	Operation *LogFilterOperationType `json:"operation,omitempty"`
 	// The value of the label to filter by
-	Value string `json:"value"`
+	Value *string `json:"value,omitempty"`
 }
-
-type _LabelFilterType LabelFilterType
 
 // NewLabelFilterType instantiates a new LabelFilterType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLabelFilterType(operation LogFilterOperationType, value string) *LabelFilterType {
+func NewLabelFilterType() *LabelFilterType {
 	this := LabelFilterType{}
-	this.Operation = operation
-	this.Value = value
 	return &this
 }
 
@@ -47,52 +41,68 @@ func NewLabelFilterTypeWithDefaults() *LabelFilterType {
 	return &this
 }
 
-// GetOperation returns the Operation field value
+// GetOperation returns the Operation field value if set, zero value otherwise.
 func (o *LabelFilterType) GetOperation() LogFilterOperationType {
-	if o == nil {
+	if o == nil || IsNil(o.Operation) {
 		var ret LogFilterOperationType
 		return ret
 	}
-
-	return o.Operation
+	return *o.Operation
 }
 
-// GetOperationOk returns a tuple with the Operation field value
+// GetOperationOk returns a tuple with the Operation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LabelFilterType) GetOperationOk() (*LogFilterOperationType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Operation) {
 		return nil, false
 	}
-	return &o.Operation, true
+	return o.Operation, true
 }
 
-// SetOperation sets field value
+// HasOperation returns a boolean if a field has been set.
+func (o *LabelFilterType) HasOperation() bool {
+	if o != nil && !IsNil(o.Operation) {
+		return true
+	}
+
+	return false
+}
+
+// SetOperation gets a reference to the given LogFilterOperationType and assigns it to the Operation field.
 func (o *LabelFilterType) SetOperation(v LogFilterOperationType) {
-	o.Operation = v
+	o.Operation = &v
 }
 
-// GetValue returns the Value field value
+// GetValue returns the Value field value if set, zero value otherwise.
 func (o *LabelFilterType) GetValue() string {
-	if o == nil {
+	if o == nil || IsNil(o.Value) {
 		var ret string
 		return ret
 	}
-
-	return o.Value
+	return *o.Value
 }
 
-// GetValueOk returns a tuple with the Value field value
+// GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LabelFilterType) GetValueOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Value) {
 		return nil, false
 	}
-	return &o.Value, true
+	return o.Value, true
 }
 
-// SetValue sets field value
+// HasValue returns a boolean if a field has been set.
+func (o *LabelFilterType) HasValue() bool {
+	if o != nil && !IsNil(o.Value) {
+		return true
+	}
+
+	return false
+}
+
+// SetValue gets a reference to the given string and assigns it to the Value field.
 func (o *LabelFilterType) SetValue(v string) {
-	o.Value = v
+	o.Value = &v
 }
 
 func (o LabelFilterType) MarshalJSON() ([]byte, error) {
@@ -105,47 +115,13 @@ func (o LabelFilterType) MarshalJSON() ([]byte, error) {
 
 func (o LabelFilterType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["operation"] = o.Operation
-	toSerialize["value"] = o.Value
+	if !IsNil(o.Operation) {
+		toSerialize["operation"] = o.Operation
+	}
+	if !IsNil(o.Value) {
+		toSerialize["value"] = o.Value
+	}
 	return toSerialize, nil
-}
-
-func (o *LabelFilterType) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"operation",
-		"value",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varLabelFilterType := _LabelFilterType{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLabelFilterType)
-
-	if err != nil {
-		return err
-	}
-
-	*o = LabelFilterType(varLabelFilterType)
-
-	return err
 }
 
 type NullableLabelFilterType struct {

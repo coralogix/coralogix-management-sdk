@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the FlowStagesGroup type satisfies the MappedNullable interface at compile time
@@ -21,22 +19,17 @@ var _ MappedNullable = &FlowStagesGroup{}
 
 // FlowStagesGroup Defines a group of stages in a flow alert
 type FlowStagesGroup struct {
-	AlertDefs []FlowStagesGroupsAlertDefs `json:"alertDefs"`
-	AlertsOp AlertsOp `json:"alertsOp"`
-	NextOp NextOp `json:"nextOp"`
+	AlertDefs []FlowStagesGroupsAlertDefs `json:"alertDefs,omitempty"`
+	AlertsOp *AlertsOp `json:"alertsOp,omitempty"`
+	NextOp *NextOp `json:"nextOp,omitempty"`
 }
-
-type _FlowStagesGroup FlowStagesGroup
 
 // NewFlowStagesGroup instantiates a new FlowStagesGroup object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFlowStagesGroup(alertDefs []FlowStagesGroupsAlertDefs, alertsOp AlertsOp, nextOp NextOp) *FlowStagesGroup {
+func NewFlowStagesGroup() *FlowStagesGroup {
 	this := FlowStagesGroup{}
-	this.AlertDefs = alertDefs
-	this.AlertsOp = alertsOp
-	this.NextOp = nextOp
 	return &this
 }
 
@@ -48,76 +41,100 @@ func NewFlowStagesGroupWithDefaults() *FlowStagesGroup {
 	return &this
 }
 
-// GetAlertDefs returns the AlertDefs field value
+// GetAlertDefs returns the AlertDefs field value if set, zero value otherwise.
 func (o *FlowStagesGroup) GetAlertDefs() []FlowStagesGroupsAlertDefs {
-	if o == nil {
+	if o == nil || IsNil(o.AlertDefs) {
 		var ret []FlowStagesGroupsAlertDefs
 		return ret
 	}
-
 	return o.AlertDefs
 }
 
-// GetAlertDefsOk returns a tuple with the AlertDefs field value
+// GetAlertDefsOk returns a tuple with the AlertDefs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FlowStagesGroup) GetAlertDefsOk() ([]FlowStagesGroupsAlertDefs, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.AlertDefs) {
 		return nil, false
 	}
 	return o.AlertDefs, true
 }
 
-// SetAlertDefs sets field value
+// HasAlertDefs returns a boolean if a field has been set.
+func (o *FlowStagesGroup) HasAlertDefs() bool {
+	if o != nil && !IsNil(o.AlertDefs) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlertDefs gets a reference to the given []FlowStagesGroupsAlertDefs and assigns it to the AlertDefs field.
 func (o *FlowStagesGroup) SetAlertDefs(v []FlowStagesGroupsAlertDefs) {
 	o.AlertDefs = v
 }
 
-// GetAlertsOp returns the AlertsOp field value
+// GetAlertsOp returns the AlertsOp field value if set, zero value otherwise.
 func (o *FlowStagesGroup) GetAlertsOp() AlertsOp {
-	if o == nil {
+	if o == nil || IsNil(o.AlertsOp) {
 		var ret AlertsOp
 		return ret
 	}
-
-	return o.AlertsOp
+	return *o.AlertsOp
 }
 
-// GetAlertsOpOk returns a tuple with the AlertsOp field value
+// GetAlertsOpOk returns a tuple with the AlertsOp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FlowStagesGroup) GetAlertsOpOk() (*AlertsOp, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.AlertsOp) {
 		return nil, false
 	}
-	return &o.AlertsOp, true
+	return o.AlertsOp, true
 }
 
-// SetAlertsOp sets field value
+// HasAlertsOp returns a boolean if a field has been set.
+func (o *FlowStagesGroup) HasAlertsOp() bool {
+	if o != nil && !IsNil(o.AlertsOp) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlertsOp gets a reference to the given AlertsOp and assigns it to the AlertsOp field.
 func (o *FlowStagesGroup) SetAlertsOp(v AlertsOp) {
-	o.AlertsOp = v
+	o.AlertsOp = &v
 }
 
-// GetNextOp returns the NextOp field value
+// GetNextOp returns the NextOp field value if set, zero value otherwise.
 func (o *FlowStagesGroup) GetNextOp() NextOp {
-	if o == nil {
+	if o == nil || IsNil(o.NextOp) {
 		var ret NextOp
 		return ret
 	}
-
-	return o.NextOp
+	return *o.NextOp
 }
 
-// GetNextOpOk returns a tuple with the NextOp field value
+// GetNextOpOk returns a tuple with the NextOp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FlowStagesGroup) GetNextOpOk() (*NextOp, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.NextOp) {
 		return nil, false
 	}
-	return &o.NextOp, true
+	return o.NextOp, true
 }
 
-// SetNextOp sets field value
+// HasNextOp returns a boolean if a field has been set.
+func (o *FlowStagesGroup) HasNextOp() bool {
+	if o != nil && !IsNil(o.NextOp) {
+		return true
+	}
+
+	return false
+}
+
+// SetNextOp gets a reference to the given NextOp and assigns it to the NextOp field.
 func (o *FlowStagesGroup) SetNextOp(v NextOp) {
-	o.NextOp = v
+	o.NextOp = &v
 }
 
 func (o FlowStagesGroup) MarshalJSON() ([]byte, error) {
@@ -130,49 +147,16 @@ func (o FlowStagesGroup) MarshalJSON() ([]byte, error) {
 
 func (o FlowStagesGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["alertDefs"] = o.AlertDefs
-	toSerialize["alertsOp"] = o.AlertsOp
-	toSerialize["nextOp"] = o.NextOp
+	if !IsNil(o.AlertDefs) {
+		toSerialize["alertDefs"] = o.AlertDefs
+	}
+	if !IsNil(o.AlertsOp) {
+		toSerialize["alertsOp"] = o.AlertsOp
+	}
+	if !IsNil(o.NextOp) {
+		toSerialize["nextOp"] = o.NextOp
+	}
 	return toSerialize, nil
-}
-
-func (o *FlowStagesGroup) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"alertDefs",
-		"alertsOp",
-		"nextOp",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varFlowStagesGroup := _FlowStagesGroup{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFlowStagesGroup)
-
-	if err != nil {
-		return err
-	}
-
-	*o = FlowStagesGroup(varFlowStagesGroup)
-
-	return err
 }
 
 type NullableFlowStagesGroup struct {

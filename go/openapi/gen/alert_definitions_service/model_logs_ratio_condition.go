@@ -12,8 +12,6 @@ package alert_definitions_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the LogsRatioCondition type satisfies the MappedNullable interface at compile time
@@ -23,20 +21,16 @@ var _ MappedNullable = &LogsRatioCondition{}
 type LogsRatioCondition struct {
 	ConditionType *LogsRatioConditionType `json:"conditionType,omitempty"`
 	// The threshold value for the alert condition
-	Threshold float64 `json:"threshold"`
-	TimeWindow LogsRatioTimeWindow `json:"timeWindow"`
+	Threshold *float64 `json:"threshold,omitempty"`
+	TimeWindow *LogsRatioTimeWindow `json:"timeWindow,omitempty"`
 }
-
-type _LogsRatioCondition LogsRatioCondition
 
 // NewLogsRatioCondition instantiates a new LogsRatioCondition object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogsRatioCondition(threshold float64, timeWindow LogsRatioTimeWindow) *LogsRatioCondition {
+func NewLogsRatioCondition() *LogsRatioCondition {
 	this := LogsRatioCondition{}
-	this.Threshold = threshold
-	this.TimeWindow = timeWindow
 	return &this
 }
 
@@ -80,52 +74,68 @@ func (o *LogsRatioCondition) SetConditionType(v LogsRatioConditionType) {
 	o.ConditionType = &v
 }
 
-// GetThreshold returns the Threshold field value
+// GetThreshold returns the Threshold field value if set, zero value otherwise.
 func (o *LogsRatioCondition) GetThreshold() float64 {
-	if o == nil {
+	if o == nil || IsNil(o.Threshold) {
 		var ret float64
 		return ret
 	}
-
-	return o.Threshold
+	return *o.Threshold
 }
 
-// GetThresholdOk returns a tuple with the Threshold field value
+// GetThresholdOk returns a tuple with the Threshold field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsRatioCondition) GetThresholdOk() (*float64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Threshold) {
 		return nil, false
 	}
-	return &o.Threshold, true
+	return o.Threshold, true
 }
 
-// SetThreshold sets field value
+// HasThreshold returns a boolean if a field has been set.
+func (o *LogsRatioCondition) HasThreshold() bool {
+	if o != nil && !IsNil(o.Threshold) {
+		return true
+	}
+
+	return false
+}
+
+// SetThreshold gets a reference to the given float64 and assigns it to the Threshold field.
 func (o *LogsRatioCondition) SetThreshold(v float64) {
-	o.Threshold = v
+	o.Threshold = &v
 }
 
-// GetTimeWindow returns the TimeWindow field value
+// GetTimeWindow returns the TimeWindow field value if set, zero value otherwise.
 func (o *LogsRatioCondition) GetTimeWindow() LogsRatioTimeWindow {
-	if o == nil {
+	if o == nil || IsNil(o.TimeWindow) {
 		var ret LogsRatioTimeWindow
 		return ret
 	}
-
-	return o.TimeWindow
+	return *o.TimeWindow
 }
 
-// GetTimeWindowOk returns a tuple with the TimeWindow field value
+// GetTimeWindowOk returns a tuple with the TimeWindow field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsRatioCondition) GetTimeWindowOk() (*LogsRatioTimeWindow, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.TimeWindow) {
 		return nil, false
 	}
-	return &o.TimeWindow, true
+	return o.TimeWindow, true
 }
 
-// SetTimeWindow sets field value
+// HasTimeWindow returns a boolean if a field has been set.
+func (o *LogsRatioCondition) HasTimeWindow() bool {
+	if o != nil && !IsNil(o.TimeWindow) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeWindow gets a reference to the given LogsRatioTimeWindow and assigns it to the TimeWindow field.
 func (o *LogsRatioCondition) SetTimeWindow(v LogsRatioTimeWindow) {
-	o.TimeWindow = v
+	o.TimeWindow = &v
 }
 
 func (o LogsRatioCondition) MarshalJSON() ([]byte, error) {
@@ -141,47 +151,13 @@ func (o LogsRatioCondition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConditionType) {
 		toSerialize["conditionType"] = o.ConditionType
 	}
-	toSerialize["threshold"] = o.Threshold
-	toSerialize["timeWindow"] = o.TimeWindow
+	if !IsNil(o.Threshold) {
+		toSerialize["threshold"] = o.Threshold
+	}
+	if !IsNil(o.TimeWindow) {
+		toSerialize["timeWindow"] = o.TimeWindow
+	}
 	return toSerialize, nil
-}
-
-func (o *LogsRatioCondition) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"threshold",
-		"timeWindow",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varLogsRatioCondition := _LogsRatioCondition{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLogsRatioCondition)
-
-	if err != nil {
-		return err
-	}
-
-	*o = LogsRatioCondition(varLogsRatioCondition)
-
-	return err
 }
 
 type NullableLogsRatioCondition struct {
