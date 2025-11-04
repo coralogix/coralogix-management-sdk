@@ -38,10 +38,12 @@ import (
 	presets "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/presets_service"
 	customroles "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/role_management_service"
 	scopes "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/scopes_service"
+
+	// slo (no plural) is the legacy service. slos (plural) is the new one.
+	slos "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/slos_service"
 	targets "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/target_service"
 	groups "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/team_permissions_management_service"
 	views "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/views_service"
-	//slos "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/slo_service"
 )
 
 const (
@@ -77,11 +79,11 @@ type ClientSet struct {
 	globalRouters        *globalrouters.GlobalRoutersServiceAPIService
 	presets              *presets.PresetsServiceAPIService
 	scopes               *scopes.ScopesServiceAPIService
-	//slos             *slos.SLOServiceAPIService
-	webhooks          *webhooks.OutgoingWebhooksServiceAPIService
-	views             *views.ViewsServiceAPIService
-	viewsFolders      *viewsfolders.FoldersForViewsServiceAPIService
-	archiveLogsTarget *targets.TargetServiceAPIService
+	slos                 *slos.SlosServiceAPIService
+	webhooks             *webhooks.OutgoingWebhooksServiceAPIService
+	views                *views.ViewsServiceAPIService
+	viewsFolders         *viewsfolders.FoldersForViewsServiceAPIService
+	archiveLogsTarget    *targets.TargetServiceAPIService
 }
 
 // Actions returns the ActionsServiceAPIService client.
@@ -170,9 +172,9 @@ func (c *ClientSet) Presets() *presets.PresetsServiceAPIService {
 }
 
 // SLOs returns the SlosServiceAPIService client.
-//func (c *ClientSet) SLOs() *slos.SLOServiceAPIService {
-//	return c.slos
-//}
+func (c *ClientSet) SLOs() *slos.SlosServiceAPIService {
+	return c.slos
+}
 
 // Scopes returns the ScopesServiceAPIService client.
 func (c *ClientSet) Scopes() *scopes.ScopesServiceAPIService {
@@ -220,11 +222,11 @@ func NewClientSet(c CallPropertiesCreator) *ClientSet {
 		globalRouters:        NewGlobalRoutersClient(c),
 		presets:              NewPresetsClient(c),
 		scopes:               NewScopesClient(c),
-		//slos:             NewSLOsClient(c),
-		webhooks:          NewWebhooksClient(c),
-		views:             NewViewsClient(c),
-		viewsFolders:      NewViewsFoldersClient(c),
-		archiveLogsTarget: NewArchiveLogsTargetClient(c),
+		slos:                 NewSLOsClient(c),
+		webhooks:             NewWebhooksClient(c),
+		views:                NewViewsClient(c),
+		viewsFolders:         NewViewsFoldersClient(c),
+		archiveLogsTarget:    NewArchiveLogsTargetClient(c),
 	}
 }
 
@@ -409,14 +411,14 @@ func NewScopesClient(c CallPropertiesCreator) *scopes.ScopesServiceAPIService {
 }
 
 // NewSLOsClient builds a new SlosServiceAPIService from CallPropertiesCreator.
-//func NewSLOsClient(c CallPropertiesCreator) *slos.SLOServiceAPIService {
-//	cfg := slos.NewConfiguration()
-//	cfg.Servers = slos.ServerConfigurations{{URL: c.URL()}}
-//	for k, v := range c.Headers() {
-//		cfg.AddDefaultHeader(k, v)
-//	}
-//	return slos.NewAPIClient(cfg).SLOServiceAPI
-//}
+func NewSLOsClient(c CallPropertiesCreator) *slos.SlosServiceAPIService {
+	cfg := slos.NewConfiguration()
+	cfg.Servers = slos.ServerConfigurations{{URL: c.URL()}}
+	for k, v := range c.Headers() {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return slos.NewAPIClient(cfg).SlosServiceAPI
+}
 
 // NewWebhooksClient builds a new OutgoingWebhooksServiceAPIService from CallPropertiesCreator.
 func NewWebhooksClient(c CallPropertiesCreator) *webhooks.OutgoingWebhooksServiceAPIService {
