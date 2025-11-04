@@ -360,7 +360,7 @@ allow_policies = [
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
-revision = "v0.1.137"
+revision = "v0.1.138"
 allow_policies = [
     "src/com/coralogix/permissions/models/v1/permission_definitions.proto",
     "src/com/coralogix/permissions/v1/actions_resources.proto",
