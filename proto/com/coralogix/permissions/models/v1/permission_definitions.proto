@@ -2906,10 +2906,10 @@ enum Permission {
     (action) = ACTION_READ_ALL,
     (resource) = RESOURCE_ACCESS_POLICIES,
     (permission_group) = PERMISSION_GROUP_AAA,
-    (description) = "View any access policy.",
-    (doc_link) = "",
+    (description) = "View All Access Policies",
+    (doc_link) = "https://coralogix.com/docs/user-guides/account-management/access-control/pbac/#safety-net-avoid-forgotten-resources",
     (explanation) = "Vew any access policy.",
-    (hidden) = true,
+    (hidden) = false,
     (is_team_level) = true,
     (is_org_level) = true
   ];
@@ -2918,10 +2918,10 @@ enum Permission {
     (action) = ACTION_UPDATE_ALL,
     (resource) = RESOURCE_ACCESS_POLICIES,
     (permission_group) = PERMISSION_GROUP_AAA,
-    (description) = "Update any access policy.",
-    (doc_link) = "",
-    (explanation) = "Update any access policy.",
-    (hidden) = true,
+    (description) = "Manage All Access Policies",
+    (doc_link) = "https://coralogix.com/docs/user-guides/account-management/access-control/pbac/#safety-net-avoid-forgotten-resources",
+    (explanation) = "",
+    (hidden) = false,
     (is_team_level) = true,
     (is_org_level) = true
   ];
@@ -2966,66 +2966,66 @@ enum Permission {
     (action) = ACTION_READ_ACCESS_POLICY,
     (resource) = RESOURCE_DATA_INGEST_API_KEYS,
     (permission_group) = PERMISSION_GROUP_AAA,
-    (description) = "Read access policy for send your data API keys.",
-    (doc_link) = "",
+    (description) = "View Send-Your-Data API Key Access Policies",
+    (doc_link) = "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/#access-policies-for-api-keys",
     (explanation) = "",
     (is_team_level) = true,
-    (hidden) = true
+    (hidden) = false
   ];
   PERMISSION_DATA_INGEST_API_KEYS_UPDATE_ACCESS_POLICY = 271 [
     (expression) = "data-ingest-api-keys:UpdateAccessPolicy",
     (action) = ACTION_UPDATE_ACCESS_POLICY,
     (resource) = RESOURCE_DATA_INGEST_API_KEYS,
     (permission_group) = PERMISSION_GROUP_AAA,
-    (description) = "Update access policy for send your data API keys.",
-    (doc_link) = "",
+    (description) = "Create, Modify, and Delete Send-Your-Data API Key Access Policies",
+    (doc_link) = "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/#access-policies-for-api-keys",
     (explanation) = "",
     (is_team_level) = true,
-    (hidden) = true
+    (hidden) = false
   ];
   PERMISSION_TEAM_CUSTOM_API_KEYS_READ_ACCESS_POLICY = 272 [
     (expression) = "team-custom-api-keys:ReadAccessPolicy",
     (action) = ACTION_READ_ACCESS_POLICY,
     (resource) = RESOURCE_TEAM_CUSTOM_API_KEYS,
     (permission_group) = PERMISSION_GROUP_AAA,
-    (description) = "Read access policy for team level API keys.",
-    (doc_link) = "",
+    (description) = "View Team Level API Key Access Policies",
+    (doc_link) = "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/#access-policies-for-api-keys",
     (explanation) = "",
     (is_team_level) = true,
-    (hidden) = true
+    (hidden) = false
   ];
   PERMISSION_TEAM_CUSTOM_API_KEYS_UPDATE_ACCESS_POLICY = 273 [
     (expression) = "team-custom-api-keys:UpdateAccessPolicy",
     (action) = ACTION_UPDATE_ACCESS_POLICY,
     (resource) = RESOURCE_TEAM_CUSTOM_API_KEYS,
     (permission_group) = PERMISSION_GROUP_AAA,
-    (description) = "Update access policy for team level API keys.",
-    (doc_link) = "",
+    (description) = "Update Team Level API Key Access Policies",
+    (doc_link) = "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/#access-policies-for-api-keys",
     (explanation) = "",
     (is_team_level) = true,
-    (hidden) = true
+    (hidden) = false
   ];
   PERMISSION_TEAM_DASHBOARDS_READ_ACCESS_POLICY = 274 [
     (expression) = "team-dashboards:ReadAccessPolicy",
     (action) = ACTION_READ_ACCESS_POLICY,
     (resource) = RESOURCE_TEAM_DASHBOARDS,
     (permission_group) = PERMISSION_GROUP_DASHBOARDS,
-    (description) = "Read access policy for send your data API keys.",
-    (doc_link) = "",
+    (description) = "View Public Custom Dashboard Access Policies",
+    (doc_link) = "https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/manage-dashboard-settings/#access-policies",
     (explanation) = "",
     (is_team_level) = true,
-    (hidden) = true
+    (hidden) = false
   ];
   PERMISSION_TEAM_DASHBOARDS_UPDATE_ACCESS_POLICY = 275 [
     (expression) = "team-dashboards:UpdateAccessPolicy",
     (action) = ACTION_UPDATE_ACCESS_POLICY,
     (resource) = RESOURCE_TEAM_DASHBOARDS,
     (permission_group) = PERMISSION_GROUP_DASHBOARDS,
-    (description) = "Update access policy for send your data API keys.",
-    (doc_link) = "",
+    (description) = "Manage Public Custom Dashboard Access Policies",
+    (doc_link) = "https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/manage-dashboard-settings/#access-policies",
     (explanation) = "",
     (is_team_level) = true,
-    (hidden) = true
+    (hidden) = false
   ];
   PERMISSION_TEAM_DATASETS_APPEND_DATA = 276 [
     (expression) = "team-datasets:AppendData",

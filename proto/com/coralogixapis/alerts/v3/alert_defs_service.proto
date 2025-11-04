@@ -92,7 +92,7 @@ service AlertDefsService {
     option (com.coralogixapis.common.v1.audit_log_description).description = "create alert definition";
     option (google.api.http) = {
       post: "/alerts/alerts-general/v3"
-      body: "alert_def_properties"
+      body: "*"
       additional_bindings: {post: "/v3/alert-defs"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {

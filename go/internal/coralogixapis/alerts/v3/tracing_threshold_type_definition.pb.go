@@ -200,14 +200,14 @@ const file_com_coralogixapis_alerts_v3_alert_def_type_definition_tracing_tracing
 	"8Learn more about trace-based alerts in our documentation\x12Vhttps://coralogix.com/docs/user-guides/alerting/create-an-alert/traces/tracing-alerts/\"\xec\x01\n" +
 	"\x14TracingThresholdRule\x12\x81\x01\n" +
 	"\tcondition\x18\x01 \x01(\v26.com.coralogixapis.alerts.v3.TracingThresholdConditionB+\x9aA(2&The condition for the threshold alert.R\tcondition:P\x9aAM\n" +
-	"K*\x14Trace Threshold Rule2'A rule for trace-based threshold alerts\xd2\x01\tcondition\"\xbf\x04\n" +
+	"K*\x14Trace Threshold Rule2'A rule for trace-based threshold alerts\xd2\x01\tcondition\"\xae\x04\n" +
 	"\x19TracingThresholdCondition\x12}\n" +
 	"\vspan_amount\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueB>\x9aA;2+The threshold value for the alert conditionJ\x03100\x8a\x01\x06^\\d+?$R\n" +
 	"spanAmount\x12}\n" +
 	"\vtime_window\x18\x02 \x01(\v2..com.coralogixapis.alerts.v3.TracingTimeWindowB,\x9aA)2'The time window for the alert conditionR\n" +
 	"timeWindow\x12\xc8\x01\n" +
-	"\x0econdition_type\x18\x03 \x01(\x0e2:.com.coralogixapis.alerts.v3.TracingThresholdConditionTypeBe\x9aAb2#The type of condition for the alertJ;\"TRACING_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED\"R\rconditionType:Y\x9aAV\n" +
-	"T*%Trace-based alert threshold condition\xd2\x01\vspan_amount\xd2\x01\vtime_window\xd2\x01\x0econdition_typeb\x06proto3"
+	"\x0econdition_type\x18\x03 \x01(\x0e2:.com.coralogixapis.alerts.v3.TracingThresholdConditionTypeBe\x9aAb2#The type of condition for the alertJ;\"TRACING_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED\"R\rconditionType:H\x9aAE\n" +
+	"C*%Trace-based alert threshold condition\xd2\x01\vspan_amount\xd2\x01\vtime_windowb\x06proto3"
 
 var (
 	file_com_coralogixapis_alerts_v3_alert_def_type_definition_tracing_tracing_threshold_type_definition_proto_rawDescOnce sync.Once

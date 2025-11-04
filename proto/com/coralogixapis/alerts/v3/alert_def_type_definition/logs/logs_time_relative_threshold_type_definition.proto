@@ -66,8 +66,7 @@ message LogsTimeRelativeCondition {
       description: "Defines conditions for time-relative comparison alerts"
       required: [
         "threshold",
-        "compared_to",
-        "condition_type"
+        "compared_to"
       ]
     }
   };
