@@ -125,10 +125,7 @@ message IpAccess {
     json_schema: {
       title: "IP Access"
       description: "Represents a single IP access entry."
-      required: [
-        "ip_range",
-        "enabled"
-      ]
+      required: ["ip_range"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/account-settings/ip-access-control/"

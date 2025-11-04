@@ -568,12 +568,12 @@ var File_com_coralogixapis_aaa_v1_ip_access_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_aaa_v1_ip_access_proto_rawDesc = "" +
 	"\n" +
-	"(com/coralogixapis/aaa/v1/ip_access.proto\x12\x18com.coralogixapis.aaa.v1\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xe5\x03\n" +
+	"(com/coralogixapis/aaa/v1/ip_access.proto\x12\x18com.coralogixapis.aaa.v1\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xdb\x03\n" +
 	"\bIpAccess\x12K\n" +
 	"\x04name\x18\x01 \x01(\tB7\x9aA42 The name of the IP access entry.J\x10\"Office Network\"R\x04name\x12P\n" +
 	"\bip_range\x18\x02 \x01(\tB5\x9aA22\x1eThe IP range in CIDR notation.J\x10\"192.168.0.1/24\"R\aipRange\x12M\n" +
-	"\aenabled\x18\x03 \x01(\bB3\x9aA02(Whether this IP access entry is enabled.J\x04trueR\aenabled:\xea\x01\x9aA\xe6\x01\n" +
-	"F*\tIP Access2$Represents a single IP access entry.\xd2\x01\bip_range\xd2\x01\aenabled*\x9b\x01\n" +
+	"\aenabled\x18\x03 \x01(\bB3\x9aA02(Whether this IP access entry is enabled.J\x04trueR\aenabled:\xe0\x01\x9aA\xdc\x01\n" +
+	"<*\tIP Access2$Represents a single IP access entry.\xd2\x01\bip_range*\x9b\x01\n" +
 	":Find out more about IP access control in our documentation\x12]https://coralogix.com/docs/user-guides/account-management/account-settings/ip-access-control/\"\x9f\x06\n" +
 	"\x17CompanyIpAccessSettings\x12\x98\x01\n" +
 	"\x02id\x18\x01 \x01(\tB\x87\x01\x9aA\x83\x012YThe unique identifier for the company IP access settings. This is typically a company ID.J&\"d662a2f1-21c3-493c-8f8a-595d3ab05ef3\"R\x02id\x12\xa9\x01\n" +
