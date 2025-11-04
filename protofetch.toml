@@ -162,7 +162,7 @@ allow_policies = [
 
 [cx-api-quota]
 url = 'github.com/coralogix/cx-api-quota'
-revision = "v0.0.14"
+revision = "v0.0.15"
 allow_policies = [
     "src/com/coralogix/quota/v1/placement.proto",
     "src/com/coralogix/quota/v1/archive_retention.proto",
@@ -196,6 +196,7 @@ allow_policies = [
     "src/com/coralogix/quota/v1/toggle_policy_response.proto",
     "src/com/coralogix/quota/v1/update_policy_request.proto",
     "src/com/coralogix/quota/v1/update_policy_response.proto",
+    "src/com/coralogix/quota/v1/tco_priority_setting.proto",
 ]
 
 [cx-api-dashboards]
