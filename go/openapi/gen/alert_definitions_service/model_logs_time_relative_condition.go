@@ -22,7 +22,7 @@ var _ MappedNullable = &LogsTimeRelativeCondition{}
 // LogsTimeRelativeCondition Defines conditions for time-relative comparison alerts
 type LogsTimeRelativeCondition struct {
 	ComparedTo LogsTimeRelativeComparedTo `json:"comparedTo"`
-	ConditionType LogsTimeRelativeConditionType `json:"conditionType"`
+	ConditionType *LogsTimeRelativeConditionType `json:"conditionType,omitempty"`
 	// The threshold value for the alert condition.
 	Threshold float64 `json:"threshold"`
 }
@@ -33,10 +33,9 @@ type _LogsTimeRelativeCondition LogsTimeRelativeCondition
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogsTimeRelativeCondition(comparedTo LogsTimeRelativeComparedTo, conditionType LogsTimeRelativeConditionType, threshold float64) *LogsTimeRelativeCondition {
+func NewLogsTimeRelativeCondition(comparedTo LogsTimeRelativeComparedTo, threshold float64) *LogsTimeRelativeCondition {
 	this := LogsTimeRelativeCondition{}
 	this.ComparedTo = comparedTo
-	this.ConditionType = conditionType
 	this.Threshold = threshold
 	return &this
 }
@@ -73,28 +72,36 @@ func (o *LogsTimeRelativeCondition) SetComparedTo(v LogsTimeRelativeComparedTo) 
 	o.ComparedTo = v
 }
 
-// GetConditionType returns the ConditionType field value
+// GetConditionType returns the ConditionType field value if set, zero value otherwise.
 func (o *LogsTimeRelativeCondition) GetConditionType() LogsTimeRelativeConditionType {
-	if o == nil {
+	if o == nil || IsNil(o.ConditionType) {
 		var ret LogsTimeRelativeConditionType
 		return ret
 	}
-
-	return o.ConditionType
+	return *o.ConditionType
 }
 
-// GetConditionTypeOk returns a tuple with the ConditionType field value
+// GetConditionTypeOk returns a tuple with the ConditionType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsTimeRelativeCondition) GetConditionTypeOk() (*LogsTimeRelativeConditionType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ConditionType) {
 		return nil, false
 	}
-	return &o.ConditionType, true
+	return o.ConditionType, true
 }
 
-// SetConditionType sets field value
+// HasConditionType returns a boolean if a field has been set.
+func (o *LogsTimeRelativeCondition) HasConditionType() bool {
+	if o != nil && !IsNil(o.ConditionType) {
+		return true
+	}
+
+	return false
+}
+
+// SetConditionType gets a reference to the given LogsTimeRelativeConditionType and assigns it to the ConditionType field.
 func (o *LogsTimeRelativeCondition) SetConditionType(v LogsTimeRelativeConditionType) {
-	o.ConditionType = v
+	o.ConditionType = &v
 }
 
 // GetThreshold returns the Threshold field value
@@ -132,7 +139,9 @@ func (o LogsTimeRelativeCondition) MarshalJSON() ([]byte, error) {
 func (o LogsTimeRelativeCondition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["comparedTo"] = o.ComparedTo
-	toSerialize["conditionType"] = o.ConditionType
+	if !IsNil(o.ConditionType) {
+		toSerialize["conditionType"] = o.ConditionType
+	}
 	toSerialize["threshold"] = o.Threshold
 	return toSerialize, nil
 }
@@ -143,7 +152,6 @@ func (o *LogsTimeRelativeCondition) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"comparedTo",
-		"conditionType",
 		"threshold",
 	}
 

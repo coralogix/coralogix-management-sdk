@@ -21,7 +21,7 @@ var _ MappedNullable = &LogsAnomalyCondition{}
 
 // LogsAnomalyCondition Defines conditions for detecting log anomalies
 type LogsAnomalyCondition struct {
-	ConditionType LogsAnomalyConditionType `json:"conditionType"`
+	ConditionType *LogsAnomalyConditionType `json:"conditionType,omitempty"`
 	// The threshold value for the alert condition
 	MinimumThreshold float64 `json:"minimumThreshold"`
 	TimeWindow LogsTimeWindow `json:"timeWindow"`
@@ -33,9 +33,8 @@ type _LogsAnomalyCondition LogsAnomalyCondition
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogsAnomalyCondition(conditionType LogsAnomalyConditionType, minimumThreshold float64, timeWindow LogsTimeWindow) *LogsAnomalyCondition {
+func NewLogsAnomalyCondition(minimumThreshold float64, timeWindow LogsTimeWindow) *LogsAnomalyCondition {
 	this := LogsAnomalyCondition{}
-	this.ConditionType = conditionType
 	this.MinimumThreshold = minimumThreshold
 	this.TimeWindow = timeWindow
 	return &this
@@ -49,28 +48,36 @@ func NewLogsAnomalyConditionWithDefaults() *LogsAnomalyCondition {
 	return &this
 }
 
-// GetConditionType returns the ConditionType field value
+// GetConditionType returns the ConditionType field value if set, zero value otherwise.
 func (o *LogsAnomalyCondition) GetConditionType() LogsAnomalyConditionType {
-	if o == nil {
+	if o == nil || IsNil(o.ConditionType) {
 		var ret LogsAnomalyConditionType
 		return ret
 	}
-
-	return o.ConditionType
+	return *o.ConditionType
 }
 
-// GetConditionTypeOk returns a tuple with the ConditionType field value
+// GetConditionTypeOk returns a tuple with the ConditionType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsAnomalyCondition) GetConditionTypeOk() (*LogsAnomalyConditionType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ConditionType) {
 		return nil, false
 	}
-	return &o.ConditionType, true
+	return o.ConditionType, true
 }
 
-// SetConditionType sets field value
+// HasConditionType returns a boolean if a field has been set.
+func (o *LogsAnomalyCondition) HasConditionType() bool {
+	if o != nil && !IsNil(o.ConditionType) {
+		return true
+	}
+
+	return false
+}
+
+// SetConditionType gets a reference to the given LogsAnomalyConditionType and assigns it to the ConditionType field.
 func (o *LogsAnomalyCondition) SetConditionType(v LogsAnomalyConditionType) {
-	o.ConditionType = v
+	o.ConditionType = &v
 }
 
 // GetMinimumThreshold returns the MinimumThreshold field value
@@ -131,7 +138,9 @@ func (o LogsAnomalyCondition) MarshalJSON() ([]byte, error) {
 
 func (o LogsAnomalyCondition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["conditionType"] = o.ConditionType
+	if !IsNil(o.ConditionType) {
+		toSerialize["conditionType"] = o.ConditionType
+	}
 	toSerialize["minimumThreshold"] = o.MinimumThreshold
 	toSerialize["timeWindow"] = o.TimeWindow
 	return toSerialize, nil
@@ -142,7 +151,6 @@ func (o *LogsAnomalyCondition) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"conditionType",
 		"minimumThreshold",
 		"timeWindow",
 	}

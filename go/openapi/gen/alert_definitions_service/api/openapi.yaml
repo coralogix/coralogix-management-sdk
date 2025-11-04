@@ -5753,7 +5753,6 @@ components:
         timeWindow:
           $ref: "#/components/schemas/LogsTimeWindow"
       required:
-      - conditionType
       - minimumThreshold
       - timeWindow
       title: Log-based anomaly condition
@@ -5909,7 +5908,6 @@ components:
         timeWindow:
           $ref: "#/components/schemas/LogsRatioTimeWindow"
       required:
-      - conditionType
       - threshold
       - timeWindow
       title: Log-based ratio condition
@@ -6038,7 +6036,6 @@ components:
         timeWindow:
           $ref: "#/components/schemas/LogsTimeWindow"
       required:
-      - conditionType
       - threshold
       - timeWindow
       title: Logs Threshold Condition
@@ -6119,7 +6116,6 @@ components:
           type: number
       required:
       - comparedTo
-      - conditionType
       - threshold
       title: Log-based time-relative condition
       type: object
@@ -6313,7 +6309,6 @@ components:
           format: double
           type: number
       required:
-      - conditionType
       - minNonNullValuesPct
       - ofTheLast
       - threshold
@@ -6425,7 +6420,6 @@ components:
           pattern: ^\d+(\.\d+)?$
           type: number
       required:
-      - conditionType
       - forOverPct
       - ofTheLast
       - threshold

@@ -3007,8 +3007,7 @@
         },
         "required": [
           "minimumThreshold",
-          "timeWindow",
-          "conditionType"
+          "timeWindow"
         ]
       },
       "LogsAnomalyConditionType": {
@@ -3224,8 +3223,7 @@
         },
         "required": [
           "threshold",
-          "timeWindow",
-          "conditionType"
+          "timeWindow"
         ]
       },
       "LogsRatioConditionType": {
@@ -3398,8 +3396,7 @@
         },
         "required": [
           "threshold",
-          "timeWindow",
-          "conditionType"
+          "timeWindow"
         ]
       },
       "LogsThresholdConditionType": {
@@ -3505,8 +3502,7 @@
         },
         "required": [
           "threshold",
-          "comparedTo",
-          "conditionType"
+          "comparedTo"
         ]
       },
       "LogsTimeRelativeConditionType": {
@@ -3764,8 +3760,7 @@
         "required": [
           "threshold",
           "minNonNullValuesPct",
-          "ofTheLast",
-          "conditionType"
+          "ofTheLast"
         ]
       },
       "MetricAnomalyConditionType": {
@@ -3917,8 +3912,7 @@
         "required": [
           "threshold",
           "forOverPct",
-          "ofTheLast",
-          "conditionType"
+          "ofTheLast"
         ]
       },
       "MetricThresholdConditionType": {

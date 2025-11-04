@@ -21,7 +21,7 @@ var _ MappedNullable = &MetricThresholdCondition{}
 
 // MetricThresholdCondition Defines conditions for metric threshold alerts
 type MetricThresholdCondition struct {
-	ConditionType MetricThresholdConditionType `json:"conditionType"`
+	ConditionType *MetricThresholdConditionType `json:"conditionType,omitempty"`
 	// The percentage of values that must exceed the threshold to trigger the alert
 	ForOverPct int64 `json:"forOverPct"`
 	OfTheLast MetricTimeWindow `json:"ofTheLast"`
@@ -35,9 +35,8 @@ type _MetricThresholdCondition MetricThresholdCondition
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetricThresholdCondition(conditionType MetricThresholdConditionType, forOverPct int64, ofTheLast MetricTimeWindow, threshold float64) *MetricThresholdCondition {
+func NewMetricThresholdCondition(forOverPct int64, ofTheLast MetricTimeWindow, threshold float64) *MetricThresholdCondition {
 	this := MetricThresholdCondition{}
-	this.ConditionType = conditionType
 	this.ForOverPct = forOverPct
 	this.OfTheLast = ofTheLast
 	this.Threshold = threshold
@@ -52,28 +51,36 @@ func NewMetricThresholdConditionWithDefaults() *MetricThresholdCondition {
 	return &this
 }
 
-// GetConditionType returns the ConditionType field value
+// GetConditionType returns the ConditionType field value if set, zero value otherwise.
 func (o *MetricThresholdCondition) GetConditionType() MetricThresholdConditionType {
-	if o == nil {
+	if o == nil || IsNil(o.ConditionType) {
 		var ret MetricThresholdConditionType
 		return ret
 	}
-
-	return o.ConditionType
+	return *o.ConditionType
 }
 
-// GetConditionTypeOk returns a tuple with the ConditionType field value
+// GetConditionTypeOk returns a tuple with the ConditionType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricThresholdCondition) GetConditionTypeOk() (*MetricThresholdConditionType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ConditionType) {
 		return nil, false
 	}
-	return &o.ConditionType, true
+	return o.ConditionType, true
 }
 
-// SetConditionType sets field value
+// HasConditionType returns a boolean if a field has been set.
+func (o *MetricThresholdCondition) HasConditionType() bool {
+	if o != nil && !IsNil(o.ConditionType) {
+		return true
+	}
+
+	return false
+}
+
+// SetConditionType gets a reference to the given MetricThresholdConditionType and assigns it to the ConditionType field.
 func (o *MetricThresholdCondition) SetConditionType(v MetricThresholdConditionType) {
-	o.ConditionType = v
+	o.ConditionType = &v
 }
 
 // GetForOverPct returns the ForOverPct field value
@@ -158,7 +165,9 @@ func (o MetricThresholdCondition) MarshalJSON() ([]byte, error) {
 
 func (o MetricThresholdCondition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["conditionType"] = o.ConditionType
+	if !IsNil(o.ConditionType) {
+		toSerialize["conditionType"] = o.ConditionType
+	}
 	toSerialize["forOverPct"] = o.ForOverPct
 	toSerialize["ofTheLast"] = o.OfTheLast
 	toSerialize["threshold"] = o.Threshold
@@ -170,7 +179,6 @@ func (o *MetricThresholdCondition) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"conditionType",
 		"forOverPct",
 		"ofTheLast",
 		"threshold",

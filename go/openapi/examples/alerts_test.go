@@ -55,7 +55,7 @@ func CreateAlert() *alerts.AlertDefPropertiesLogsThreshold {
 						Priority: alerts.ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P1.Ptr(),
 					},
 					Condition: alerts.LogsThresholdCondition{
-						ConditionType: alerts.LOGSTHRESHOLDCONDITIONTYPE_LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED,
+						ConditionType: alerts.LOGSTHRESHOLDCONDITIONTYPE_LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED.Ptr(),
 						Threshold:     10,
 						TimeWindow: alerts.LogsTimeWindow{
 							LogsTimeWindowSpecificValue: alerts.LOGSTIMEWINDOWVALUE_LOGS_TIME_WINDOW_VALUE_MINUTES_10.Ptr(),
@@ -96,6 +96,12 @@ func TestAlerts(t *testing.T) {
 	client := cxsdk.NewAlertsClient(cpc)
 	ctx := context.Background()
 
+	allAlerts, httResp, err := client.
+		AlertDefsServiceListAlertDefs(ctx).
+		Execute()
+
+	assertNilAndPrintError(t, cxsdk.NewAPIError(httResp, err))
+	assert.NotNil(t, allAlerts.AlertDefs)
 	createReq := alerts.AlertDefsServiceCreateAlertDefRequest{
 		AlertDefPropertiesLogsThreshold: CreateAlert(),
 	}

@@ -21,7 +21,7 @@ var _ MappedNullable = &LogsThresholdCondition{}
 
 // LogsThresholdCondition LogsThresholdCondition is a message that defines the condition for log-based threshold alerts.
 type LogsThresholdCondition struct {
-	ConditionType LogsThresholdConditionType `json:"conditionType"`
+	ConditionType *LogsThresholdConditionType `json:"conditionType,omitempty"`
 	// The threshold value for the alert condition
 	Threshold float64 `json:"threshold"`
 	TimeWindow LogsTimeWindow `json:"timeWindow"`
@@ -33,9 +33,8 @@ type _LogsThresholdCondition LogsThresholdCondition
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogsThresholdCondition(conditionType LogsThresholdConditionType, threshold float64, timeWindow LogsTimeWindow) *LogsThresholdCondition {
+func NewLogsThresholdCondition(threshold float64, timeWindow LogsTimeWindow) *LogsThresholdCondition {
 	this := LogsThresholdCondition{}
-	this.ConditionType = conditionType
 	this.Threshold = threshold
 	this.TimeWindow = timeWindow
 	return &this
@@ -49,28 +48,36 @@ func NewLogsThresholdConditionWithDefaults() *LogsThresholdCondition {
 	return &this
 }
 
-// GetConditionType returns the ConditionType field value
+// GetConditionType returns the ConditionType field value if set, zero value otherwise.
 func (o *LogsThresholdCondition) GetConditionType() LogsThresholdConditionType {
-	if o == nil {
+	if o == nil || IsNil(o.ConditionType) {
 		var ret LogsThresholdConditionType
 		return ret
 	}
-
-	return o.ConditionType
+	return *o.ConditionType
 }
 
-// GetConditionTypeOk returns a tuple with the ConditionType field value
+// GetConditionTypeOk returns a tuple with the ConditionType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogsThresholdCondition) GetConditionTypeOk() (*LogsThresholdConditionType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ConditionType) {
 		return nil, false
 	}
-	return &o.ConditionType, true
+	return o.ConditionType, true
 }
 
-// SetConditionType sets field value
+// HasConditionType returns a boolean if a field has been set.
+func (o *LogsThresholdCondition) HasConditionType() bool {
+	if o != nil && !IsNil(o.ConditionType) {
+		return true
+	}
+
+	return false
+}
+
+// SetConditionType gets a reference to the given LogsThresholdConditionType and assigns it to the ConditionType field.
 func (o *LogsThresholdCondition) SetConditionType(v LogsThresholdConditionType) {
-	o.ConditionType = v
+	o.ConditionType = &v
 }
 
 // GetThreshold returns the Threshold field value
@@ -131,7 +138,9 @@ func (o LogsThresholdCondition) MarshalJSON() ([]byte, error) {
 
 func (o LogsThresholdCondition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["conditionType"] = o.ConditionType
+	if !IsNil(o.ConditionType) {
+		toSerialize["conditionType"] = o.ConditionType
+	}
 	toSerialize["threshold"] = o.Threshold
 	toSerialize["timeWindow"] = o.TimeWindow
 	return toSerialize, nil
@@ -142,7 +151,6 @@ func (o *LogsThresholdCondition) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"conditionType",
 		"threshold",
 		"timeWindow",
 	}
