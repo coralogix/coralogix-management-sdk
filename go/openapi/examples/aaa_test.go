@@ -27,6 +27,7 @@ import (
 	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
 	apikeys "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/api_keys_service"
 	ipaccess "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/ip_access_service"
+	customroles "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/role_management_service"
 	saml "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/saml_configuration_service"
 	groups "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/team_permissions_management_service"
 )
@@ -216,6 +217,67 @@ func TestGroups(t *testing.T) {
 
 	_, httpResp, err = client.
 		TeamPermissionsMgmtServiceDeleteTeamGroup(ctx, *groupID).
+		Execute()
+	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+}
+
+func TestCustomRoles(t *testing.T) {
+	cpc := cxsdk.NewSDKCallPropertiesCreator(
+		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		cxsdk.APIKeyFromEnv(),
+	)
+
+	client := cxsdk.NewCustomRolesClient(cpc)
+	ctx := context.Background()
+
+	teamID, err := strconv.ParseInt(os.Getenv("TEAM_ID"), 10, 64)
+	assertNilAndPrintError(t, err)
+
+	createReq := customroles.RoleManagementServiceCreateRoleRequest{
+		CreateRoleRequestParentRoleName: &customroles.CreateRoleRequestParentRoleName{
+			Name:           customroles.PtrString("custom-role-sample"),
+			Description:    customroles.PtrString("This is a sample custom role"),
+			ParentRoleName: customroles.PtrString("Standard User"),
+			Permissions: []string{
+				"team-actions:UpdateConfig",
+				"TEAM-CUSTOM-API-KEYS:READCONFIG",
+			},
+			TeamId: &teamID,
+		},
+	}
+
+	created, httpResp, err := client.
+		RoleManagementServiceCreateRole(ctx).
+		RoleManagementServiceCreateRoleRequest(createReq).
+		Execute()
+	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	roleID := created.Id
+
+	newDesc := "Updated description"
+	updateReq := customroles.RoleManagementServiceUpdateRoleRequest{
+		NewDescription: &newDesc,
+	}
+
+	_, httpResp, err = client.
+		RoleManagementServiceUpdateRole(ctx, *roleID).
+		RoleManagementServiceUpdateRoleRequest(updateReq).
+		Execute()
+	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+
+	getResp, httpResp, err := client.
+		RoleManagementServiceGetCustomRole(ctx, *roleID).
+		Execute()
+	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	assert.Equal(t, newDesc, getResp.Role.GetDescription())
+
+	listResp, httpResp, err := client.RoleManagementServiceListCustomRoles(ctx).
+		TeamId(teamID).
+		Execute()
+	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	assert.GreaterOrEqual(t, len(listResp.Roles), 1)
+
+	_, httpResp, err = client.
+		RoleManagementServiceDeleteRole(ctx, *roleID).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 }

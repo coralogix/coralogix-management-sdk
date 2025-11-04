@@ -36,6 +36,7 @@ import (
 	ipaccess "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/ip_access_service"
 	webhooks "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/outgoing_webhooks_service"
 	presets "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/presets_service"
+	customroles "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/role_management_service"
 	saml "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/saml_configuration_service"
 	targets "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/target_service"
 	groups "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/team_permissions_management_service"
@@ -64,6 +65,7 @@ type ClientSet struct {
 	apiKeys              *apikeys.APIKeysServiceAPIService
 	connectors           *connectors.ConnectorsServiceAPIService
 	ipAccess             *ipaccess.IPAccessServiceAPIService
+	customRoles          *customroles.RoleManagementServiceAPIService
 	dashboards           *dashboards.DashboardServiceAPIService
 	dashboardFolders     *dashboardfolders.DashboardFoldersServiceAPIService
 	enrichments          *enrichments.EnrichmentsServiceAPIService
@@ -130,6 +132,11 @@ func (c *ClientSet) Enrichments() *enrichments.EnrichmentsServiceAPIService {
 // Events2Metrics returns the Events2MetricsServiceAPIService client.
 func (c *ClientSet) Events2Metrics() *events2metrics.Events2MetricsServiceAPIService {
 	return c.events2metrics
+}
+
+// CustomRoles returns the RoleManagementServiceAPIService client.
+func (c *ClientSet) CustomRoles() *customroles.RoleManagementServiceAPIService {
+	return c.customRoles
 }
 
 // Extensions returns the ExtensionServiceAPIService client.
@@ -201,6 +208,7 @@ func NewClientSet(c CallPropertiesCreator) *ClientSet {
 		apiKeys:              NewAPIKeysClient(c),
 		ipAccess:             NewIPAccessClient(c),
 		connectors:           NewConnectorsClient(c),
+		customRoles:          NewCustomRolesClient(c),
 		dashboards:           NewDashboardClient(c),
 		dashboardFolders:     NewDashboardFoldersClient(c),
 		enrichments:          NewEnrichmentsClient(c),
@@ -278,6 +286,16 @@ func NewConnectorsClient(c CallPropertiesCreator) *connectors.ConnectorsServiceA
 		cfg.AddDefaultHeader(k, v)
 	}
 	return connectors.NewAPIClient(cfg).ConnectorsServiceAPI
+}
+
+// NewCustomRolesClient builds a new RoleManagementServiceAPIService from CallPropertiesCreator.
+func NewCustomRolesClient(c CallPropertiesCreator) *customroles.RoleManagementServiceAPIService {
+	cfg := customroles.NewConfiguration()
+	cfg.Servers = customroles.ServerConfigurations{{URL: c.URL()}}
+	for k, v := range c.Headers() {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return customroles.NewAPIClient(cfg).RoleManagementServiceAPI
 }
 
 // NewDashboardClient builds a new DashboardServiceAPIService from CallPropertiesCreator.
