@@ -22,13 +22,13 @@ import (
 	"testing"
 	"time"
 
+	scopes "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/scopes_service"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
 	apikeys "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/api_keys_service"
 	ipaccess "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/ip_access_service"
 	customroles "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/role_management_service"
-	saml "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/saml_configuration_service"
 	groups "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/team_permissions_management_service"
 )
 
@@ -159,7 +159,6 @@ func TestIpAccess(t *testing.T) {
 }
 
 func TestGroups(t *testing.T) {
-	t.Skip("Skipping Groups test due to query param issue")
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
 		cxsdk.APIKeyFromEnv(),
@@ -282,41 +281,77 @@ func TestCustomRoles(t *testing.T) {
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
-func TestSamlConfigurationRetrieval(t *testing.T) {
-	t.Skip("Skipping SAML Configuration test")
+func TestScopes(t *testing.T) {
+	ctx := context.Background()
+
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
 		cxsdk.APIKeyFromEnv(),
 	)
-	client := cxsdk.NewSAMLClient(cpc)
+	client := cxsdk.NewScopesClient(cpc)
 
-	teamIdStr := os.Getenv("TEAM_ID")
-	teamId, err := strconv.ParseInt(teamIdStr, 10, 64)
-	assertNilAndPrintError(t, err)
-
-	ctx := context.Background()
-
-	spParams, httpResp, err := client.
-		SamlConfigurationServiceGetSPParameters(ctx).
-		TeamId(teamId).
-		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotNil(t, spParams)
-
-	config, httpResp, err := client.
-		SamlConfigurationServiceGetConfiguration(ctx).
-		TeamId(teamId).
-		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotNil(t, config)
-
-	setReq := saml.SetActiveRequest{
-		TeamId:   teamId,
-		IsActive: false,
+	description := "Data Access Rule intended for testing"
+	defaultExpr := "<v1>true"
+	createReq := scopes.CreateScopeRequest{
+		DisplayName:       "Test Data Access Rule",
+		Description:       &description,
+		DefaultExpression: &defaultExpr,
+		Filters: []scopes.ScopesV1Filter{
+			{
+				EntityType: scopes.V1ENTITYTYPE_ENTITY_TYPE_LOGS.Ptr(),
+				Expression: scopes.PtrString("<v1> foo == 'bar'"),
+			},
+		},
 	}
-	_, httpResp, err = client.
-		SamlConfigurationServiceSetActive(ctx).
-		SetActiveRequest(setReq).
+
+	created, httpResp, err := client.
+		ScopesServiceCreateScope(ctx).
+		CreateScopeRequest(createReq).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+
+	scopeID := created.Scope.Id
+
+	newDisplayName := "Updated Test Data Access Rule"
+	updateReq := scopes.UpdateScopeRequest{
+		Id:                *scopeID,
+		DisplayName:       newDisplayName,
+		DefaultExpression: *created.Scope.DefaultExpression,
+		Filters:           created.Scope.Filters,
+	}
+
+	updated, httpResp, err := client.
+		ScopesServiceUpdateScope(ctx).
+		UpdateScopeRequest(updateReq).
+		Execute()
+	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	assert.NotNil(t, updated)
+
+	getResp, httpResp, err := client.
+		ScopesServiceGetTeamScopesByIds(ctx).
+		Ids([]string{*scopeID}).
+		Execute()
+	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	assert.Greater(t, len(getResp.Scopes), 0)
+	assert.Equal(t, newDisplayName, *getResp.Scopes[0].DisplayName)
+
+	listResp, httpResp, err := client.
+		ScopesServiceGetTeamScopes(ctx).
+		Execute()
+	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	assert.GreaterOrEqual(t, len(listResp.Scopes), 1)
+
+	_, httpResp, err = client.
+		ScopesServiceDeleteScope(ctx, *scopeID).
+		Execute()
+	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+
+	listAfterDelete, httpResp, err := client.
+		ScopesServiceGetTeamScopes(ctx).
+		Execute()
+	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+
+	for _, s := range listAfterDelete.Scopes {
+		assert.NotEqual(t, scopeID, s.Id)
+	}
 }

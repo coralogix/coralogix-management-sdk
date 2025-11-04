@@ -37,7 +37,7 @@ import (
 	webhooks "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/outgoing_webhooks_service"
 	presets "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/presets_service"
 	customroles "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/role_management_service"
-	saml "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/saml_configuration_service"
+	scopes "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/scopes_service"
 	targets "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/target_service"
 	groups "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/team_permissions_management_service"
 	views "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/views_service"
@@ -76,7 +76,7 @@ type ClientSet struct {
 	integrations         *integrations.IntegrationServiceAPIService
 	globalRouters        *globalrouters.GlobalRoutersServiceAPIService
 	presets              *presets.PresetsServiceAPIService
-	saml                 *saml.SAMLConfigurationServiceAPIService
+	scopes               *scopes.ScopesServiceAPIService
 	//slos             *slos.SLOServiceAPIService
 	webhooks          *webhooks.OutgoingWebhooksServiceAPIService
 	views             *views.ViewsServiceAPIService
@@ -174,9 +174,9 @@ func (c *ClientSet) Presets() *presets.PresetsServiceAPIService {
 //	return c.slos
 //}
 
-// SAML returns the SAMLConfigurationServiceAPIService client.
-func (c *ClientSet) SAML() *saml.SAMLConfigurationServiceAPIService {
-	return c.saml
+// Scopes returns the ScopesServiceAPIService client.
+func (c *ClientSet) Scopes() *scopes.ScopesServiceAPIService {
+	return c.scopes
 }
 
 // Webhooks returns the OutgoingWebhooksServiceAPIService client.
@@ -219,7 +219,7 @@ func NewClientSet(c CallPropertiesCreator) *ClientSet {
 		integrations:         NewIntegrationsClient(c),
 		globalRouters:        NewGlobalRoutersClient(c),
 		presets:              NewPresetsClient(c),
-		saml:                 NewSAMLClient(c),
+		scopes:               NewScopesClient(c),
 		//slos:             NewSLOsClient(c),
 		webhooks:          NewWebhooksClient(c),
 		views:             NewViewsClient(c),
@@ -398,14 +398,14 @@ func NewPresetsClient(c CallPropertiesCreator) *presets.PresetsServiceAPIService
 	return presets.NewAPIClient(cfg).PresetsServiceAPI
 }
 
-// NewSAMLClient builds a new SAMLConfigurationServiceAPIService from CallPropertiesCreator.
-func NewSAMLClient(c CallPropertiesCreator) *saml.SAMLConfigurationServiceAPIService {
-	cfg := saml.NewConfiguration()
-	cfg.Servers = saml.ServerConfigurations{{URL: c.URL()}}
+// NewScopesClient builds a new ScopesServiceAPIService from CallPropertiesCreator.
+func NewScopesClient(c CallPropertiesCreator) *scopes.ScopesServiceAPIService {
+	cfg := scopes.NewConfiguration()
+	cfg.Servers = scopes.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
 	}
-	return saml.NewAPIClient(cfg).SAMLConfigurationServiceAPI
+	return scopes.NewAPIClient(cfg).ScopesServiceAPI
 }
 
 // NewSLOsClient builds a new SlosServiceAPIService from CallPropertiesCreator.
