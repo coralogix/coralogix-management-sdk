@@ -97,7 +97,7 @@ mod tests {
                 fields: vec![
                     ConnectorConfigField {
                         field_name: "url".into(),
-                        value: "https://httpbun.org/post".into(),
+                        value: "https://httpbin.org/post".into(),
                     },
                     ConnectorConfigField {
                         field_name: "method".into(),
@@ -115,6 +115,7 @@ mod tests {
                     template: "{\"priority\": \"{{alertDef.priority}}\"}".into(),
                 }],
             }],
+            diagnostics: None,
         }
     }
 
@@ -150,6 +151,7 @@ mod tests {
                     template: "{{alertDef.priority}}".into(),
                 }],
             }],
+            diagnostics: None,
         }
     }
 
@@ -175,6 +177,7 @@ mod tests {
                     template: "integration_{{alertDef.priority}}".into(),
                 }],
             }],
+            diagnostics: None,
         }
     }
 
@@ -927,7 +930,7 @@ mod tests {
                         }),
                     }],
                     router: Some(NotificationRouter {
-                        id: "router_default".into(),
+                        id: Some("router_default".into()),
                         notify_on: Some(NotifyOn::TriggeredAndResolved.into()),
                     }),
                 }),
