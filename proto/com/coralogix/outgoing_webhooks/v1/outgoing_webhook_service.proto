@@ -85,7 +85,7 @@ service OutgoingWebhooksService {
   rpc ListOutgoingWebhooks(ListOutgoingWebhooksRequest) returns (ListOutgoingWebhooksResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get outgoing webhooks";
     option (google.api.http) = {
-      get: "/integrations/webhooks/v1"
+      get: "/integrations/webhooks/v1:listByType"
       additional_bindings: {get: "/v1/outgoing-webhooks"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -149,7 +149,7 @@ service OutgoingWebhooksService {
   rpc ListAllOutgoingWebhooks(ListAllOutgoingWebhooksRequest) returns (ListAllOutgoingWebhooksResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get all outgoing webhooks";
     option (google.api.http) = {
-      get: "/integrations/webhooks/v1/all"
+      get: "/integrations/webhooks/v1"
       additional_bindings: {get: "/v1/outgoing-webhooks/all"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {

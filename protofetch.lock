@@ -63,8 +63,8 @@ commit_hash = "a4300cbd86d05f2dddec00fc88c38f230eaf295a"
 [[dependencies]]
 name = "cx-api-extensions"
 url = "github.com/coralogix/cx-api-extensions"
-revision = "v1.0.14"
-commit_hash = "f1fdb55dd15800d9da3b26faaa0e4b21ba0d008c"
+revision = "v1.0.15"
+commit_hash = "8e1d67d2bbcf091a44fbb3db5b0eef2c1d4bfc3b"
 
 [[dependencies]]
 name = "cx-api-incidents"
