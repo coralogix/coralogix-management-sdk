@@ -133,11 +133,11 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceBulkReplaceAlertDefs
 type ApiAlertDefsServiceCreateAlertDefRequest struct {
 	ctx context.Context
 	ApiService *AlertDefinitionsServiceAPIService
-	alertDefsServiceCreateAlertDefRequest *AlertDefsServiceCreateAlertDefRequest
+	createAlertDefinitionRequest *CreateAlertDefinitionRequest
 }
 
-func (r ApiAlertDefsServiceCreateAlertDefRequest) AlertDefsServiceCreateAlertDefRequest(alertDefsServiceCreateAlertDefRequest AlertDefsServiceCreateAlertDefRequest) ApiAlertDefsServiceCreateAlertDefRequest {
-	r.alertDefsServiceCreateAlertDefRequest = &alertDefsServiceCreateAlertDefRequest
+func (r ApiAlertDefsServiceCreateAlertDefRequest) CreateAlertDefinitionRequest(createAlertDefinitionRequest CreateAlertDefinitionRequest) ApiAlertDefsServiceCreateAlertDefRequest {
+	r.createAlertDefinitionRequest = &createAlertDefinitionRequest
 	return r
 }
 
@@ -199,7 +199,7 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceCreateAlertDefExecut
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.alertDefsServiceCreateAlertDefRequest
+	localVarPostBody = r.createAlertDefinitionRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

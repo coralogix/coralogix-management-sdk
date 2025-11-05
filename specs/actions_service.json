@@ -45,21 +45,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v2/actions';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v2/actions\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/v2/actions \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       },
       "put": {
         "tags": [
@@ -115,21 +101,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v2/actions';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"action\":{\"applicationNames\":[\"string\"],\"createdBy\":\"string\",\"id\":\"string\",\"isHidden\":true,\"isPrivate\":true,\"name\":\"string\",\"sourceType\":\"SOURCE_TYPE_UNSPECIFIED\",\"subsystemNames\":[\"string\"],\"url\":\"string\"}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v2/actions\"\n\npayload = {\"action\": {\n        \"applicationNames\": [\"string\"],\n        \"createdBy\": \"string\",\n        \"id\": \"string\",\n        \"isHidden\": True,\n        \"isPrivate\": True,\n        \"name\": \"string\",\n        \"sourceType\": \"SOURCE_TYPE_UNSPECIFIED\",\n        \"subsystemNames\": [\"string\"],\n        \"url\": \"string\"\n    }}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/v2/actions \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"action\":{\"applicationNames\":[\"string\"],\"createdBy\":\"string\",\"id\":\"string\",\"isHidden\":true,\"isPrivate\":true,\"name\":\"string\",\"sourceType\":\"SOURCE_TYPE_UNSPECIFIED\",\"subsystemNames\":[\"string\"],\"url\":\"string\"}}'"
-          }
-        ]
+        }
       },
       "post": {
         "tags": [
@@ -206,21 +178,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v2/actions';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"applicationNames\":[\"string\"],\"isPrivate\":true,\"name\":\"string\",\"sourceType\":\"SOURCE_TYPE_UNSPECIFIED\",\"subsystemNames\":[\"string\"],\"url\":\"string\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v2/actions\"\n\npayload = {\n    \"applicationNames\": [\"string\"],\n    \"isPrivate\": True,\n    \"name\": \"string\",\n    \"sourceType\": \"SOURCE_TYPE_UNSPECIFIED\",\n    \"subsystemNames\": [\"string\"],\n    \"url\": \"string\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/v2/actions \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"applicationNames\":[\"string\"],\"isPrivate\":true,\"name\":\"string\",\"sourceType\":\"SOURCE_TYPE_UNSPECIFIED\",\"subsystemNames\":[\"string\"],\"url\":\"string\"}'"
-          }
-        ]
+        }
       }
     },
     "/v2/actions/actions:atomicBatchExecute": {
@@ -281,21 +239,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v2/actions/actions:atomicBatchExecute';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"requests\":[{\"delete\":{\"id\":\"string\"}}]}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v2/actions/actions:atomicBatchExecute\"\n\npayload = {\"requests\": [{\"delete\": {\"id\": \"string\"}}]}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/v2/actions/actions:atomicBatchExecute \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"requests\":[{\"delete\":{\"id\":\"string\"}}]}'"
-          }
-        ]
+        }
       }
     },
     "/v2/actions/actions:order": {
@@ -364,21 +308,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v2/actions/actions:order';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"privateActionsOrder\":{\"property1\":0,\"property2\":0},\"sharedActionsOrder\":{\"property1\":0,\"property2\":0}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v2/actions/actions:order\"\n\npayload = {\n    \"privateActionsOrder\": {\n        \"property1\": 0,\n        \"property2\": 0\n    },\n    \"sharedActionsOrder\": {\n        \"property1\": 0,\n        \"property2\": 0\n    }\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/v2/actions/actions:order \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"privateActionsOrder\":{\"property1\":0,\"property2\":0},\"sharedActionsOrder\":{\"property1\":0,\"property2\":0}}'"
-          }
-        ]
+        }
       }
     },
     "/v2/actions/{id}": {
@@ -432,21 +362,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v2/actions/%7Bid%7D';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v2/actions/%7Bid%7D\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/v2/actions/%7Bid%7D \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       },
       "delete": {
         "tags": [
@@ -498,21 +414,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v2/actions/%7Bid%7D';\n\nlet options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v2/actions/%7Bid%7D\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url https://api.coralogix.com/mgmt/openapi/v2/actions/%7Bid%7D \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     }
   },
@@ -521,13 +423,13 @@
       "ActionExecutionRequest": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ActionExecutionRequestDelete"
-          },
-          {
             "$ref": "#/components/schemas/ActionExecutionRequestCreate"
           },
           {
             "$ref": "#/components/schemas/ActionExecutionRequestReplace"
+          },
+          {
+            "$ref": "#/components/schemas/ActionExecutionRequestDelete"
           }
         ]
       },

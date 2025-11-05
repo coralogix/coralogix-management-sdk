@@ -479,6 +479,8 @@ func (r ApiAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleRequest) Execute() 
 /*
 AlertSchedulerRuleServiceGetBulkAlertSchedulerRule Get multiple alert scheduler rules
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleRequest
 */

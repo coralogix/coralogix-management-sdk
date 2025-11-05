@@ -13,8 +13,6 @@ package alert_events_service
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the AlertEvent type satisfies the MappedNullable interface at compile time
@@ -22,38 +20,25 @@ var _ MappedNullable = &AlertEvent{}
 
 // AlertEvent struct for AlertEvent
 type AlertEvent struct {
-	ActivityAnalysis ActivityAnalysis `json:"activityAnalysis"`
-	AlertId string `json:"alertId"`
-	GroupLabels map[string]string `json:"groupLabels"`
-	IncidentCorrelationKey string `json:"incidentCorrelationKey"`
-	Payload map[string]interface{} `json:"payload"`
-	PayloadType string `json:"payloadType"`
-	PermutationId string `json:"permutationId"`
-	PermutationLabels map[string]string `json:"permutationLabels"`
-	PreGroupingEventId string `json:"preGroupingEventId"`
-	Status AlertStatus `json:"status"`
-	Timestamp time.Time `json:"timestamp"`
+	ActivityAnalysis *ActivityAnalysis `json:"activityAnalysis,omitempty"`
+	AlertId *string `json:"alertId,omitempty"`
+	GroupLabels *map[string]string `json:"groupLabels,omitempty"`
+	IncidentCorrelationKey *string `json:"incidentCorrelationKey,omitempty"`
+	Payload map[string]interface{} `json:"payload,omitempty"`
+	PayloadType *string `json:"payloadType,omitempty"`
+	PermutationId *string `json:"permutationId,omitempty"`
+	PermutationLabels *map[string]string `json:"permutationLabels,omitempty"`
+	PreGroupingEventId *string `json:"preGroupingEventId,omitempty"`
+	Status *AlertStatus `json:"status,omitempty"`
+	Timestamp *time.Time `json:"timestamp,omitempty"`
 }
-
-type _AlertEvent AlertEvent
 
 // NewAlertEvent instantiates a new AlertEvent object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertEvent(activityAnalysis ActivityAnalysis, alertId string, groupLabels map[string]string, incidentCorrelationKey string, payload map[string]interface{}, payloadType string, permutationId string, permutationLabels map[string]string, preGroupingEventId string, status AlertStatus, timestamp time.Time) *AlertEvent {
+func NewAlertEvent() *AlertEvent {
 	this := AlertEvent{}
-	this.ActivityAnalysis = activityAnalysis
-	this.AlertId = alertId
-	this.GroupLabels = groupLabels
-	this.IncidentCorrelationKey = incidentCorrelationKey
-	this.Payload = payload
-	this.PayloadType = payloadType
-	this.PermutationId = permutationId
-	this.PermutationLabels = permutationLabels
-	this.PreGroupingEventId = preGroupingEventId
-	this.Status = status
-	this.Timestamp = timestamp
 	return &this
 }
 
@@ -65,268 +50,356 @@ func NewAlertEventWithDefaults() *AlertEvent {
 	return &this
 }
 
-// GetActivityAnalysis returns the ActivityAnalysis field value
+// GetActivityAnalysis returns the ActivityAnalysis field value if set, zero value otherwise.
 func (o *AlertEvent) GetActivityAnalysis() ActivityAnalysis {
-	if o == nil {
+	if o == nil || IsNil(o.ActivityAnalysis) {
 		var ret ActivityAnalysis
 		return ret
 	}
-
-	return o.ActivityAnalysis
+	return *o.ActivityAnalysis
 }
 
-// GetActivityAnalysisOk returns a tuple with the ActivityAnalysis field value
+// GetActivityAnalysisOk returns a tuple with the ActivityAnalysis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertEvent) GetActivityAnalysisOk() (*ActivityAnalysis, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ActivityAnalysis) {
 		return nil, false
 	}
-	return &o.ActivityAnalysis, true
+	return o.ActivityAnalysis, true
 }
 
-// SetActivityAnalysis sets field value
+// HasActivityAnalysis returns a boolean if a field has been set.
+func (o *AlertEvent) HasActivityAnalysis() bool {
+	if o != nil && !IsNil(o.ActivityAnalysis) {
+		return true
+	}
+
+	return false
+}
+
+// SetActivityAnalysis gets a reference to the given ActivityAnalysis and assigns it to the ActivityAnalysis field.
 func (o *AlertEvent) SetActivityAnalysis(v ActivityAnalysis) {
-	o.ActivityAnalysis = v
+	o.ActivityAnalysis = &v
 }
 
-// GetAlertId returns the AlertId field value
+// GetAlertId returns the AlertId field value if set, zero value otherwise.
 func (o *AlertEvent) GetAlertId() string {
-	if o == nil {
+	if o == nil || IsNil(o.AlertId) {
 		var ret string
 		return ret
 	}
-
-	return o.AlertId
+	return *o.AlertId
 }
 
-// GetAlertIdOk returns a tuple with the AlertId field value
+// GetAlertIdOk returns a tuple with the AlertId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertEvent) GetAlertIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.AlertId) {
 		return nil, false
 	}
-	return &o.AlertId, true
+	return o.AlertId, true
 }
 
-// SetAlertId sets field value
+// HasAlertId returns a boolean if a field has been set.
+func (o *AlertEvent) HasAlertId() bool {
+	if o != nil && !IsNil(o.AlertId) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlertId gets a reference to the given string and assigns it to the AlertId field.
 func (o *AlertEvent) SetAlertId(v string) {
-	o.AlertId = v
+	o.AlertId = &v
 }
 
-// GetGroupLabels returns the GroupLabels field value
+// GetGroupLabels returns the GroupLabels field value if set, zero value otherwise.
 func (o *AlertEvent) GetGroupLabels() map[string]string {
-	if o == nil {
+	if o == nil || IsNil(o.GroupLabels) {
 		var ret map[string]string
 		return ret
 	}
-
-	return o.GroupLabels
+	return *o.GroupLabels
 }
 
-// GetGroupLabelsOk returns a tuple with the GroupLabels field value
+// GetGroupLabelsOk returns a tuple with the GroupLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertEvent) GetGroupLabelsOk() (*map[string]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.GroupLabels) {
 		return nil, false
 	}
-	return &o.GroupLabels, true
+	return o.GroupLabels, true
 }
 
-// SetGroupLabels sets field value
+// HasGroupLabels returns a boolean if a field has been set.
+func (o *AlertEvent) HasGroupLabels() bool {
+	if o != nil && !IsNil(o.GroupLabels) {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupLabels gets a reference to the given map[string]string and assigns it to the GroupLabels field.
 func (o *AlertEvent) SetGroupLabels(v map[string]string) {
-	o.GroupLabels = v
+	o.GroupLabels = &v
 }
 
-// GetIncidentCorrelationKey returns the IncidentCorrelationKey field value
+// GetIncidentCorrelationKey returns the IncidentCorrelationKey field value if set, zero value otherwise.
 func (o *AlertEvent) GetIncidentCorrelationKey() string {
-	if o == nil {
+	if o == nil || IsNil(o.IncidentCorrelationKey) {
 		var ret string
 		return ret
 	}
-
-	return o.IncidentCorrelationKey
+	return *o.IncidentCorrelationKey
 }
 
-// GetIncidentCorrelationKeyOk returns a tuple with the IncidentCorrelationKey field value
+// GetIncidentCorrelationKeyOk returns a tuple with the IncidentCorrelationKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertEvent) GetIncidentCorrelationKeyOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.IncidentCorrelationKey) {
 		return nil, false
 	}
-	return &o.IncidentCorrelationKey, true
+	return o.IncidentCorrelationKey, true
 }
 
-// SetIncidentCorrelationKey sets field value
+// HasIncidentCorrelationKey returns a boolean if a field has been set.
+func (o *AlertEvent) HasIncidentCorrelationKey() bool {
+	if o != nil && !IsNil(o.IncidentCorrelationKey) {
+		return true
+	}
+
+	return false
+}
+
+// SetIncidentCorrelationKey gets a reference to the given string and assigns it to the IncidentCorrelationKey field.
 func (o *AlertEvent) SetIncidentCorrelationKey(v string) {
-	o.IncidentCorrelationKey = v
+	o.IncidentCorrelationKey = &v
 }
 
-// GetPayload returns the Payload field value
+// GetPayload returns the Payload field value if set, zero value otherwise.
 func (o *AlertEvent) GetPayload() map[string]interface{} {
-	if o == nil {
+	if o == nil || IsNil(o.Payload) {
 		var ret map[string]interface{}
 		return ret
 	}
-
 	return o.Payload
 }
 
-// GetPayloadOk returns a tuple with the Payload field value
+// GetPayloadOk returns a tuple with the Payload field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertEvent) GetPayloadOk() (map[string]interface{}, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Payload) {
 		return map[string]interface{}{}, false
 	}
 	return o.Payload, true
 }
 
-// SetPayload sets field value
+// HasPayload returns a boolean if a field has been set.
+func (o *AlertEvent) HasPayload() bool {
+	if o != nil && !IsNil(o.Payload) {
+		return true
+	}
+
+	return false
+}
+
+// SetPayload gets a reference to the given map[string]interface{} and assigns it to the Payload field.
 func (o *AlertEvent) SetPayload(v map[string]interface{}) {
 	o.Payload = v
 }
 
-// GetPayloadType returns the PayloadType field value
+// GetPayloadType returns the PayloadType field value if set, zero value otherwise.
 func (o *AlertEvent) GetPayloadType() string {
-	if o == nil {
+	if o == nil || IsNil(o.PayloadType) {
 		var ret string
 		return ret
 	}
-
-	return o.PayloadType
+	return *o.PayloadType
 }
 
-// GetPayloadTypeOk returns a tuple with the PayloadType field value
+// GetPayloadTypeOk returns a tuple with the PayloadType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertEvent) GetPayloadTypeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.PayloadType) {
 		return nil, false
 	}
-	return &o.PayloadType, true
+	return o.PayloadType, true
 }
 
-// SetPayloadType sets field value
+// HasPayloadType returns a boolean if a field has been set.
+func (o *AlertEvent) HasPayloadType() bool {
+	if o != nil && !IsNil(o.PayloadType) {
+		return true
+	}
+
+	return false
+}
+
+// SetPayloadType gets a reference to the given string and assigns it to the PayloadType field.
 func (o *AlertEvent) SetPayloadType(v string) {
-	o.PayloadType = v
+	o.PayloadType = &v
 }
 
-// GetPermutationId returns the PermutationId field value
+// GetPermutationId returns the PermutationId field value if set, zero value otherwise.
 func (o *AlertEvent) GetPermutationId() string {
-	if o == nil {
+	if o == nil || IsNil(o.PermutationId) {
 		var ret string
 		return ret
 	}
-
-	return o.PermutationId
+	return *o.PermutationId
 }
 
-// GetPermutationIdOk returns a tuple with the PermutationId field value
+// GetPermutationIdOk returns a tuple with the PermutationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertEvent) GetPermutationIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.PermutationId) {
 		return nil, false
 	}
-	return &o.PermutationId, true
+	return o.PermutationId, true
 }
 
-// SetPermutationId sets field value
+// HasPermutationId returns a boolean if a field has been set.
+func (o *AlertEvent) HasPermutationId() bool {
+	if o != nil && !IsNil(o.PermutationId) {
+		return true
+	}
+
+	return false
+}
+
+// SetPermutationId gets a reference to the given string and assigns it to the PermutationId field.
 func (o *AlertEvent) SetPermutationId(v string) {
-	o.PermutationId = v
+	o.PermutationId = &v
 }
 
-// GetPermutationLabels returns the PermutationLabels field value
+// GetPermutationLabels returns the PermutationLabels field value if set, zero value otherwise.
 func (o *AlertEvent) GetPermutationLabels() map[string]string {
-	if o == nil {
+	if o == nil || IsNil(o.PermutationLabels) {
 		var ret map[string]string
 		return ret
 	}
-
-	return o.PermutationLabels
+	return *o.PermutationLabels
 }
 
-// GetPermutationLabelsOk returns a tuple with the PermutationLabels field value
+// GetPermutationLabelsOk returns a tuple with the PermutationLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertEvent) GetPermutationLabelsOk() (*map[string]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.PermutationLabels) {
 		return nil, false
 	}
-	return &o.PermutationLabels, true
+	return o.PermutationLabels, true
 }
 
-// SetPermutationLabels sets field value
+// HasPermutationLabels returns a boolean if a field has been set.
+func (o *AlertEvent) HasPermutationLabels() bool {
+	if o != nil && !IsNil(o.PermutationLabels) {
+		return true
+	}
+
+	return false
+}
+
+// SetPermutationLabels gets a reference to the given map[string]string and assigns it to the PermutationLabels field.
 func (o *AlertEvent) SetPermutationLabels(v map[string]string) {
-	o.PermutationLabels = v
+	o.PermutationLabels = &v
 }
 
-// GetPreGroupingEventId returns the PreGroupingEventId field value
+// GetPreGroupingEventId returns the PreGroupingEventId field value if set, zero value otherwise.
 func (o *AlertEvent) GetPreGroupingEventId() string {
-	if o == nil {
+	if o == nil || IsNil(o.PreGroupingEventId) {
 		var ret string
 		return ret
 	}
-
-	return o.PreGroupingEventId
+	return *o.PreGroupingEventId
 }
 
-// GetPreGroupingEventIdOk returns a tuple with the PreGroupingEventId field value
+// GetPreGroupingEventIdOk returns a tuple with the PreGroupingEventId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertEvent) GetPreGroupingEventIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.PreGroupingEventId) {
 		return nil, false
 	}
-	return &o.PreGroupingEventId, true
+	return o.PreGroupingEventId, true
 }
 
-// SetPreGroupingEventId sets field value
+// HasPreGroupingEventId returns a boolean if a field has been set.
+func (o *AlertEvent) HasPreGroupingEventId() bool {
+	if o != nil && !IsNil(o.PreGroupingEventId) {
+		return true
+	}
+
+	return false
+}
+
+// SetPreGroupingEventId gets a reference to the given string and assigns it to the PreGroupingEventId field.
 func (o *AlertEvent) SetPreGroupingEventId(v string) {
-	o.PreGroupingEventId = v
+	o.PreGroupingEventId = &v
 }
 
-// GetStatus returns the Status field value
+// GetStatus returns the Status field value if set, zero value otherwise.
 func (o *AlertEvent) GetStatus() AlertStatus {
-	if o == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret AlertStatus
 		return ret
 	}
-
-	return o.Status
+	return *o.Status
 }
 
-// GetStatusOk returns a tuple with the Status field value
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertEvent) GetStatusOk() (*AlertStatus, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
-	return &o.Status, true
+	return o.Status, true
 }
 
-// SetStatus sets field value
+// HasStatus returns a boolean if a field has been set.
+func (o *AlertEvent) HasStatus() bool {
+	if o != nil && !IsNil(o.Status) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given AlertStatus and assigns it to the Status field.
 func (o *AlertEvent) SetStatus(v AlertStatus) {
-	o.Status = v
+	o.Status = &v
 }
 
-// GetTimestamp returns the Timestamp field value
+// GetTimestamp returns the Timestamp field value if set, zero value otherwise.
 func (o *AlertEvent) GetTimestamp() time.Time {
-	if o == nil {
+	if o == nil || IsNil(o.Timestamp) {
 		var ret time.Time
 		return ret
 	}
-
-	return o.Timestamp
+	return *o.Timestamp
 }
 
-// GetTimestampOk returns a tuple with the Timestamp field value
+// GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertEvent) GetTimestampOk() (*time.Time, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Timestamp) {
 		return nil, false
 	}
-	return &o.Timestamp, true
+	return o.Timestamp, true
 }
 
-// SetTimestamp sets field value
+// HasTimestamp returns a boolean if a field has been set.
+func (o *AlertEvent) HasTimestamp() bool {
+	if o != nil && !IsNil(o.Timestamp) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimestamp gets a reference to the given time.Time and assigns it to the Timestamp field.
 func (o *AlertEvent) SetTimestamp(v time.Time) {
-	o.Timestamp = v
+	o.Timestamp = &v
 }
 
 func (o AlertEvent) MarshalJSON() ([]byte, error) {
@@ -339,65 +412,40 @@ func (o AlertEvent) MarshalJSON() ([]byte, error) {
 
 func (o AlertEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["activityAnalysis"] = o.ActivityAnalysis
-	toSerialize["alertId"] = o.AlertId
-	toSerialize["groupLabels"] = o.GroupLabels
-	toSerialize["incidentCorrelationKey"] = o.IncidentCorrelationKey
-	toSerialize["payload"] = o.Payload
-	toSerialize["payloadType"] = o.PayloadType
-	toSerialize["permutationId"] = o.PermutationId
-	toSerialize["permutationLabels"] = o.PermutationLabels
-	toSerialize["preGroupingEventId"] = o.PreGroupingEventId
-	toSerialize["status"] = o.Status
-	toSerialize["timestamp"] = o.Timestamp
+	if !IsNil(o.ActivityAnalysis) {
+		toSerialize["activityAnalysis"] = o.ActivityAnalysis
+	}
+	if !IsNil(o.AlertId) {
+		toSerialize["alertId"] = o.AlertId
+	}
+	if !IsNil(o.GroupLabels) {
+		toSerialize["groupLabels"] = o.GroupLabels
+	}
+	if !IsNil(o.IncidentCorrelationKey) {
+		toSerialize["incidentCorrelationKey"] = o.IncidentCorrelationKey
+	}
+	if !IsNil(o.Payload) {
+		toSerialize["payload"] = o.Payload
+	}
+	if !IsNil(o.PayloadType) {
+		toSerialize["payloadType"] = o.PayloadType
+	}
+	if !IsNil(o.PermutationId) {
+		toSerialize["permutationId"] = o.PermutationId
+	}
+	if !IsNil(o.PermutationLabels) {
+		toSerialize["permutationLabels"] = o.PermutationLabels
+	}
+	if !IsNil(o.PreGroupingEventId) {
+		toSerialize["preGroupingEventId"] = o.PreGroupingEventId
+	}
+	if !IsNil(o.Status) {
+		toSerialize["status"] = o.Status
+	}
+	if !IsNil(o.Timestamp) {
+		toSerialize["timestamp"] = o.Timestamp
+	}
 	return toSerialize, nil
-}
-
-func (o *AlertEvent) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"activityAnalysis",
-		"alertId",
-		"groupLabels",
-		"incidentCorrelationKey",
-		"payload",
-		"payloadType",
-		"permutationId",
-		"permutationLabels",
-		"preGroupingEventId",
-		"status",
-		"timestamp",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varAlertEvent := _AlertEvent{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAlertEvent)
-
-	if err != nil {
-		return err
-	}
-
-	*o = AlertEvent(varAlertEvent)
-
-	return err
 }
 
 type NullableAlertEvent struct {

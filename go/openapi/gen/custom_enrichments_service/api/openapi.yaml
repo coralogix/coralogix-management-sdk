@@ -5,7 +5,7 @@ info:
 servers:
 - url: /
 paths:
-  /v1/custom_enrichment:
+  /enrichment-rules/custom-enrichment-rules/v1:
     get:
       description: No description available
       externalDocs:
@@ -21,103 +21,6 @@ paths:
       summary: Get Custom Enrichments
       tags:
       - Custom Enrichments Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment \
-            --header 'Authorization: Bearer <API_KEY>'
-    post:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: CustomEnrichmentService_CreateCustomEnrichment
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Create_Custom_Enrichment_Request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateCustomEnrichmentResponse"
-          description: ""
-      summary: Create Custom Enrichments
-      tags:
-      - Custom Enrichments Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment';
-
-          let options = {
-            method: 'POST',
-            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"description":"custom_enrichment_description","file":{"extension":"csv","name":"file_name","size":100,"textual":"row1,row2 value1,value2"},"name":"custom_enrichment_name"}'
-          };
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment"
-
-          payload = {
-              "description": "custom_enrichment_description",
-              "file": {
-                  "extension": "csv",
-                  "name": "file_name",
-                  "size": 100,
-                  "textual": "row1,row2 value1,value2"
-              },
-              "name": "custom_enrichment_name"
-          }
-          headers = {
-              "Authorization": "Bearer <API_KEY>",
-              "content-type": "application/json"
-          }
-
-          response = requests.request("POST", url, json=payload, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request POST \
-            --url https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment \
-            --header 'Authorization: Bearer <API_KEY>' \
-            --header 'content-type: application/json' \
-            --data '{"description":"custom_enrichment_description","file":{"extension":"csv","name":"file_name","size":100,"textual":"row1,row2 value1,value2"},"name":"custom_enrichment_name"}'
     put:
       description: No description available
       externalDocs:
@@ -138,56 +41,7 @@ paths:
       summary: Update Custom Enrichment
       tags:
       - Custom Enrichments Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment';
-
-          let options = {
-            method: 'PUT',
-            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"customEnrichmentId":1,"description":"custom_enrichment_description","file":{"extension":"csv","name":"file_name","size":100,"textual":"row1,row2 value1,value2"},"name":"custom_enrichment_name"}'
-          };
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment"
-
-          payload = {
-              "customEnrichmentId": 1,
-              "description": "custom_enrichment_description",
-              "file": {
-                  "extension": "csv",
-                  "name": "file_name",
-                  "size": 100,
-                  "textual": "row1,row2 value1,value2"
-              },
-              "name": "custom_enrichment_name"
-          }
-          headers = {
-              "Authorization": "Bearer <API_KEY>",
-              "content-type": "application/json"
-          }
-
-          response = requests.request("PUT", url, json=payload, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request PUT \
-            --url https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment \
-            --header 'Authorization: Bearer <API_KEY>' \
-            --header 'content-type: application/json' \
-            --data '{"customEnrichmentId":1,"description":"custom_enrichment_description","file":{"extension":"csv","name":"file_name","size":100,"textual":"row1,row2 value1,value2"},"name":"custom_enrichment_name"}'
-  /v1/custom_enrichment/search:
+  /enrichment-rules/custom-enrichment-rules/v1/search:
     post:
       description: No description available
       externalDocs:
@@ -213,38 +67,7 @@ paths:
       summary: Search Custom Enrichment Data
       tags:
       - Custom Enrichments Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment/search?search_clauses=SOME_ARRAY_VALUE';
-
-          let options = {method: 'POST', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment/search"
-
-          querystring = {"search_clauses":"SOME_ARRAY_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("POST", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request POST \
-            --url 'https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment/search?search_clauses=SOME_ARRAY_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
-  /v1/custom_enrichment/{custom_enrichment_id}:
+  /enrichment-rules/custom-enrichment-rules/v1/{custom_enrichment_id}:
     delete:
       description: No description available
       externalDocs:
@@ -270,36 +93,7 @@ paths:
       summary: Delete Custom Enrichments
       tags:
       - Custom Enrichments Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment/1';
-
-          let options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment/1"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("DELETE", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request DELETE \
-            --url https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment/1 \
-            --header 'Authorization: Bearer <API_KEY>'
-  /v1/custom_enrichment/{id}:
+  /enrichment-rules/custom-enrichment-rules/v1/{id}:
     get:
       description: No description available
       externalDocs:
@@ -325,35 +119,46 @@ paths:
       summary: Get Custom Enrichment
       tags:
       - Custom Enrichments Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment/1';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment/1"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment/1 \
-            --header 'Authorization: Bearer <API_KEY>'
+  /v1/custom_enrichment:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: CustomEnrichmentService_CreateCustomEnrichment
+      parameters:
+      - explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          example: custom_enrichment_name
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: description
+        required: false
+        schema:
+          example: custom_enrichment_description
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: file
+        required: false
+        schema:
+          $ref: "#/components/schemas/CustomEnrichmentService_CreateCustomEnrichment_file_parameter"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateCustomEnrichmentResponse"
+          description: ""
+      summary: Create Custom Enrichments
+      tags:
+      - Custom Enrichments Service
 components:
   schemas:
     ColorsByAggregation:
@@ -430,10 +235,20 @@ components:
       type: object
     CustomEnrichmentData:
       oneOf:
-      - $ref: "#/components/schemas/CustomEnrichmentDataTextual"
       - $ref: "#/components/schemas/CustomEnrichmentDataBinary"
+      - $ref: "#/components/schemas/CustomEnrichmentDataTextual"
     CustomEnrichmentDataBinary:
       additionalProperties: false
+      example:
+        binary: binary
+        definition:
+          fileName: fileName
+          isQueryOnly: true
+          fileSize: 0
+          name: name
+          description: description
+          id: 6
+          version: 1
       properties:
         binary:
           format: byte
@@ -443,16 +258,6 @@ components:
       type: object
     CustomEnrichmentDataTextual:
       additionalProperties: false
-      example:
-        definition:
-          fileName: fileName
-          isQueryOnly: true
-          fileSize: 0
-          name: name
-          description: description
-          id: 6
-          version: 1
-        textual: textual
       properties:
         definition:
           $ref: "#/components/schemas/CustomEnrichment"
@@ -674,7 +479,8 @@ components:
     SearchCustomEnrichmentDataResponse:
       example:
         customEnrichmentsData:
-        - definition:
+        - binary: binary
+          definition:
             fileName: fileName
             isQueryOnly: true
             fileSize: 0
@@ -682,8 +488,8 @@ components:
             description: description
             id: 6
             version: 1
-          textual: textual
-        - definition:
+        - binary: binary
+          definition:
             fileName: fileName
             isQueryOnly: true
             fileSize: 0
@@ -691,7 +497,6 @@ components:
             description: description
             id: 6
             version: 1
-          textual: textual
       properties:
         customEnrichmentsData:
           items:
@@ -769,28 +574,14 @@ components:
       - name
       title: Update Custom Enrichment Request
       type: object
-    Create_Custom_Enrichment_Request:
-      additionalProperties: false
-      description: This request data structure is used to create a custom enrichment
-      properties:
-        description:
-          example: custom_enrichment_description
-          type: string
-        file:
-          $ref: "#/components/schemas/File"
-        name:
-          example: custom_enrichment_name
-          type: string
-      required:
-      - description
-      - file
-      - name
-      title: Create Custom Enrichment Request
-      type: object
     CustomEnrichmentService_SearchCustomEnrichmentData_search_clauses_parameter_inner:
       oneOf:
-      - $ref: "#/components/schemas/SearchClauseId"
       - $ref: "#/components/schemas/SearchClauseName"
+      - $ref: "#/components/schemas/SearchClauseId"
+    CustomEnrichmentService_CreateCustomEnrichment_file_parameter:
+      oneOf:
+      - $ref: "#/components/schemas/FileTextual"
+      - $ref: "#/components/schemas/FileBinary"
   securitySchemes:
     apiKeyAuth:
       description: API key authentication

@@ -68,7 +68,7 @@ func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceCreateViewFolderEx
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/view_folders"
+	localVarPath := localBasePath + "/data-exploration/saved-views/v1/folders"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -172,7 +172,7 @@ func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceDeleteViewFolderEx
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/view_folders/{id}"
+	localVarPath := localBasePath + "/data-exploration/saved-views/v1/folders/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -281,7 +281,7 @@ func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceGetViewFolderExecu
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/view_folders/{id}"
+	localVarPath := localBasePath + "/data-exploration/saved-views/v1/folders/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -387,7 +387,7 @@ func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceListViewFoldersExe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/view_folders"
+	localVarPath := localBasePath + "/data-exploration/saved-views/v1/folders"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -450,7 +450,6 @@ func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceListViewFoldersExe
 type ApiViewsFoldersServiceReplaceViewFolderRequest struct {
 	ctx context.Context
 	ApiService *FoldersForViewsServiceAPIService
-	folderId string
 	viewFolder1 *ViewFolder1
 }
 
@@ -469,14 +468,12 @@ ViewsFoldersServiceReplaceViewFolder Replace View Folder service
 Replaces an existing view folder
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param folderId
  @return ApiViewsFoldersServiceReplaceViewFolderRequest
 */
-func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceReplaceViewFolder(ctx context.Context, folderId string) ApiViewsFoldersServiceReplaceViewFolderRequest {
+func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceReplaceViewFolder(ctx context.Context) ApiViewsFoldersServiceReplaceViewFolderRequest {
 	return ApiViewsFoldersServiceReplaceViewFolderRequest{
 		ApiService: a,
 		ctx: ctx,
-		folderId: folderId,
 	}
 }
 
@@ -495,18 +492,11 @@ func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceReplaceViewFolderE
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/view_folders/{folder.id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"folder.id"+"}", url.PathEscape(parameterValueToString(r.folderId, "folderId")), -1)
+	localVarPath := localBasePath + "/data-exploration/saved-views/v1/folders"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.folderId) < 36 {
-		return localVarReturnValue, nil, reportError("folderId must have at least 36 elements")
-	}
-	if strlen(r.folderId) > 36 {
-		return localVarReturnValue, nil, reportError("folderId must have less than 36 elements")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

@@ -572,10 +572,10 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceGetConnectorExecute(r Api
 type ApiConnectorsServiceGetConnectorTypeSummariesRequest struct {
 	ctx context.Context
 	ApiService *ConnectorsServiceAPIService
-	supportedByEntityType *string
+	supportedByEntityType *NotificationCenterEntityType
 }
 
-func (r ApiConnectorsServiceGetConnectorTypeSummariesRequest) SupportedByEntityType(supportedByEntityType string) ApiConnectorsServiceGetConnectorTypeSummariesRequest {
+func (r ApiConnectorsServiceGetConnectorTypeSummariesRequest) SupportedByEntityType(supportedByEntityType NotificationCenterEntityType) ApiConnectorsServiceGetConnectorTypeSummariesRequest {
 	r.supportedByEntityType = &supportedByEntityType
 	return r
 }
@@ -680,16 +680,16 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceGetConnectorTypeSummaries
 type ApiConnectorsServiceListConnectorSummariesRequest struct {
 	ctx context.Context
 	ApiService *ConnectorsServiceAPIService
-	connectorType *string
-	supportedByEntityType *string
+	connectorType *ConnectorType
+	supportedByEntityType *NotificationCenterEntityType
 }
 
-func (r ApiConnectorsServiceListConnectorSummariesRequest) ConnectorType(connectorType string) ApiConnectorsServiceListConnectorSummariesRequest {
+func (r ApiConnectorsServiceListConnectorSummariesRequest) ConnectorType(connectorType ConnectorType) ApiConnectorsServiceListConnectorSummariesRequest {
 	r.connectorType = &connectorType
 	return r
 }
 
-func (r ApiConnectorsServiceListConnectorSummariesRequest) SupportedByEntityType(supportedByEntityType string) ApiConnectorsServiceListConnectorSummariesRequest {
+func (r ApiConnectorsServiceListConnectorSummariesRequest) SupportedByEntityType(supportedByEntityType NotificationCenterEntityType) ApiConnectorsServiceListConnectorSummariesRequest {
 	r.supportedByEntityType = &supportedByEntityType
 	return r
 }
@@ -797,16 +797,16 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceListConnectorSummariesExe
 type ApiConnectorsServiceListConnectorsRequest struct {
 	ctx context.Context
 	ApiService *ConnectorsServiceAPIService
-	connectorType *string
-	supportedByEntityType *string
+	connectorType *ConnectorType
+	supportedByEntityType *NotificationCenterEntityType
 }
 
-func (r ApiConnectorsServiceListConnectorsRequest) ConnectorType(connectorType string) ApiConnectorsServiceListConnectorsRequest {
+func (r ApiConnectorsServiceListConnectorsRequest) ConnectorType(connectorType ConnectorType) ApiConnectorsServiceListConnectorsRequest {
 	r.connectorType = &connectorType
 	return r
 }
 
-func (r ApiConnectorsServiceListConnectorsRequest) SupportedByEntityType(supportedByEntityType string) ApiConnectorsServiceListConnectorsRequest {
+func (r ApiConnectorsServiceListConnectorsRequest) SupportedByEntityType(supportedByEntityType NotificationCenterEntityType) ApiConnectorsServiceListConnectorsRequest {
 	r.supportedByEntityType = &supportedByEntityType
 	return r
 }

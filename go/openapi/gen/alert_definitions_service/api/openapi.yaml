@@ -66,7 +66,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AlertDefsService_CreateAlertDef_request"
+              $ref: "#/components/schemas/Create_alert_definition_request"
       responses:
         "200":
           content:
@@ -437,28 +437,12 @@ components:
         updatedTime: 2023-10-01T12:00:00Z
         lastTriggeredTime: 2023-10-01T12:00:00Z
         alertDefProperties:
-          logsTimeRelativeThreshold:
+          entityLabels:
+            key: value
+          logsImmediate:
             notificationPayloadFilter:
             - "[\"obj.field\"]"
             - "[\"obj.field\"]"
-            ignoreInfinity: true
-            undetectedValuesManagement:
-              triggerUndetectedValues: true
-              autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-            evaluationDelayMs: 60000
-            rules:
-            - condition:
-                comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                threshold: 0.8008281904610115
-              override:
-                priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-            - condition:
-                comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                threshold: 0.8008281904610115
-              override:
-                priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             logsFilter:
               simpleFilter:
                 labelFilters:
@@ -476,8 +460,6 @@ components:
                   - LOG_SEVERITY_VERBOSE_UNSPECIFIED
                   - LOG_SEVERITY_VERBOSE_UNSPECIFIED
                 luceneQuery: luceneQuery
-          entityLabels:
-            key: value
           phantomMode: false
           notificationGroupExcess:
           - router:
@@ -487,11 +469,17 @@ components:
             - minutes: 15
               notifyOn: null
               integration:
-                integrationId: 123
+                recipients:
+                  emails:
+                  - "[\"mail@gmail.com\"]"
+                  - "[\"mail@gmail.com\"]"
             - minutes: 15
               notifyOn: null
               integration:
-                integrationId: 123
+                recipients:
+                  emails:
+                  - "[\"mail@gmail.com\"]"
+                  - "[\"mail@gmail.com\"]"
             destinations:
             - resolvedRouteOverrides:
                 configOverrides:
@@ -565,11 +553,17 @@ components:
             - minutes: 15
               notifyOn: null
               integration:
-                integrationId: 123
+                recipients:
+                  emails:
+                  - "[\"mail@gmail.com\"]"
+                  - "[\"mail@gmail.com\"]"
             - minutes: 15
               notifyOn: null
               integration:
-                integrationId: 123
+                recipients:
+                  emails:
+                  - "[\"mail@gmail.com\"]"
+                  - "[\"mail@gmail.com\"]"
             destinations:
             - resolvedRouteOverrides:
                 configOverrides:
@@ -637,7 +631,7 @@ components:
             - "[\"key1\",\"key2\"]"
             - "[\"key1\",\"key2\"]"
           description: Alert description
-          priority: null
+          priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
           type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
           activeOn:
             dayOfWeek:
@@ -658,11 +652,17 @@ components:
             - minutes: 15
               notifyOn: null
               integration:
-                integrationId: 123
+                recipients:
+                  emails:
+                  - "[\"mail@gmail.com\"]"
+                  - "[\"mail@gmail.com\"]"
             - minutes: 15
               notifyOn: null
               integration:
-                integrationId: 123
+                recipients:
+                  emails:
+                  - "[\"mail@gmail.com\"]"
+                  - "[\"mail@gmail.com\"]"
             destinations:
             - resolvedRouteOverrides:
                 configOverrides:
@@ -798,11 +798,17 @@ components:
         - minutes: 15
           notifyOn: null
           integration:
-            integrationId: 123
+            recipients:
+              emails:
+              - "[\"mail@gmail.com\"]"
+              - "[\"mail@gmail.com\"]"
         - minutes: 15
           notifyOn: null
           integration:
-            integrationId: 123
+            recipients:
+              emails:
+              - "[\"mail@gmail.com\"]"
+              - "[\"mail@gmail.com\"]"
         destinations:
         - resolvedRouteOverrides:
             configOverrides:
@@ -904,8 +910,6 @@ components:
       - ALERT_DEF_ORDER_BY_FIELDS_ENABLED
       type: string
     AlertDefOverride:
-      example:
-        priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -923,19 +927,19 @@ components:
       type: string
     AlertDefProperties:
       oneOf:
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesMetricThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesTracingThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsAnomaly"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsNewValue"
-      - $ref: "#/components/schemas/AlertDefPropertiesSloThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsImmediate"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesFlow"
-      - $ref: "#/components/schemas/AlertDefPropertiesMetricAnomaly"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
       - $ref: "#/components/schemas/AlertDefPropertiesTracingImmediate"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesTracingThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsAnomaly"
+      - $ref: "#/components/schemas/AlertDefPropertiesMetricAnomaly"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsNewValue"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesMetricThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesFlow"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
+      - $ref: "#/components/schemas/AlertDefPropertiesSloThreshold"
     AlertDefPropertiesFlow:
       additionalProperties: false
       description: User-configurable properties of an alert definition
@@ -1057,6 +1061,307 @@ components:
     AlertDefPropertiesLogsImmediate:
       additionalProperties: false
       description: User-configurable properties of an alert definition
+      example:
+        entityLabels:
+          key: value
+        logsImmediate:
+          notificationPayloadFilter:
+          - "[\"obj.field\"]"
+          - "[\"obj.field\"]"
+          logsFilter:
+            simpleFilter:
+              labelFilters:
+                subsystemName:
+                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  value: my-app
+                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  value: my-app
+                applicationName:
+                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  value: my-app
+                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  value: my-app
+                severities:
+                - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+              luceneQuery: luceneQuery
+        phantomMode: false
+        notificationGroupExcess:
+        - router:
+            notifyOn: null
+            id: 123e4567-e89b-12d3-a456-426614174000
+          webhooks:
+          - minutes: 15
+            notifyOn: null
+            integration:
+              recipients:
+                emails:
+                - "[\"mail@gmail.com\"]"
+                - "[\"mail@gmail.com\"]"
+          - minutes: 15
+            notifyOn: null
+            integration:
+              recipients:
+                emails:
+                - "[\"mail@gmail.com\"]"
+                - "[\"mail@gmail.com\"]"
+          destinations:
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          groupByKeys:
+          - "[\"key1\",\"key2\"]"
+          - "[\"key1\",\"key2\"]"
+        - router:
+            notifyOn: null
+            id: 123e4567-e89b-12d3-a456-426614174000
+          webhooks:
+          - minutes: 15
+            notifyOn: null
+            integration:
+              recipients:
+                emails:
+                - "[\"mail@gmail.com\"]"
+                - "[\"mail@gmail.com\"]"
+          - minutes: 15
+            notifyOn: null
+            integration:
+              recipients:
+                emails:
+                - "[\"mail@gmail.com\"]"
+                - "[\"mail@gmail.com\"]"
+          destinations:
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          groupByKeys:
+          - "[\"key1\",\"key2\"]"
+          - "[\"key1\",\"key2\"]"
+        description: Alert description
+        priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+        type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
+        activeOn:
+          dayOfWeek:
+          - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+          - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+          startTime:
+            hours: 14
+            minutes: 30
+          endTime:
+            hours: 14
+            minutes: 30
+        enabled: true
+        notificationGroup:
+          router:
+            notifyOn: null
+            id: 123e4567-e89b-12d3-a456-426614174000
+          webhooks:
+          - minutes: 15
+            notifyOn: null
+            integration:
+              recipients:
+                emails:
+                - "[\"mail@gmail.com\"]"
+                - "[\"mail@gmail.com\"]"
+          - minutes: 15
+            notifyOn: null
+            integration:
+              recipients:
+                emails:
+                - "[\"mail@gmail.com\"]"
+                - "[\"mail@gmail.com\"]"
+          destinations:
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          groupByKeys:
+          - "[\"key1\",\"key2\"]"
+          - "[\"key1\",\"key2\"]"
+        deleted: false
+        incidentsSettings:
+          minutes: 30
+          notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+        name: My Alert
+        groupByKeys:
+        - "[\"key1\",\"key2\"]"
+        - "[\"key1\",\"key2\"]"
       externalDocs:
         url: ""
       properties:
@@ -1293,307 +1598,6 @@ components:
     AlertDefPropertiesLogsTimeRelativeThreshold:
       additionalProperties: false
       description: User-configurable properties of an alert definition
-      example:
-        logsTimeRelativeThreshold:
-          notificationPayloadFilter:
-          - "[\"obj.field\"]"
-          - "[\"obj.field\"]"
-          ignoreInfinity: true
-          undetectedValuesManagement:
-            triggerUndetectedValues: true
-            autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-          evaluationDelayMs: 60000
-          rules:
-          - condition:
-              comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-              conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-              threshold: 0.8008281904610115
-            override:
-              priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-          - condition:
-              comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-              conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-              threshold: 0.8008281904610115
-            override:
-              priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-          logsFilter:
-            simpleFilter:
-              labelFilters:
-                subsystemName:
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                applicationName:
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                severities:
-                - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-              luceneQuery: luceneQuery
-        entityLabels:
-          key: value
-        phantomMode: false
-        notificationGroupExcess:
-        - router:
-            notifyOn: null
-            id: 123e4567-e89b-12d3-a456-426614174000
-          webhooks:
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          destinations:
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          groupByKeys:
-          - "[\"key1\",\"key2\"]"
-          - "[\"key1\",\"key2\"]"
-        - router:
-            notifyOn: null
-            id: 123e4567-e89b-12d3-a456-426614174000
-          webhooks:
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          destinations:
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          groupByKeys:
-          - "[\"key1\",\"key2\"]"
-          - "[\"key1\",\"key2\"]"
-        description: Alert description
-        priority: null
-        type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
-        activeOn:
-          dayOfWeek:
-          - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
-          - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
-          startTime:
-            hours: 14
-            minutes: 30
-          endTime:
-            hours: 14
-            minutes: 30
-        enabled: true
-        notificationGroup:
-          router:
-            notifyOn: null
-            id: 123e4567-e89b-12d3-a456-426614174000
-          webhooks:
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          destinations:
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          groupByKeys:
-          - "[\"key1\",\"key2\"]"
-          - "[\"key1\",\"key2\"]"
-        deleted: false
-        incidentsSettings:
-          minutes: 30
-          notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
-        name: My Alert
-        groupByKeys:
-        - "[\"key1\",\"key2\"]"
-        - "[\"key1\",\"key2\"]"
       externalDocs:
         url: ""
       properties:
@@ -2046,7 +2050,10 @@ components:
         minutes: 15
         notifyOn: null
         integration:
-          integrationId: 123
+          recipients:
+            emails:
+            - "[\"mail@gmail.com\"]"
+            - "[\"mail@gmail.com\"]"
       externalDocs:
         url: ""
       properties:
@@ -2094,28 +2101,12 @@ components:
         - updatedTime: 2023-10-01T12:00:00Z
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
-            logsTimeRelativeThreshold:
+            entityLabels:
+              key: value
+            logsImmediate:
               notificationPayloadFilter:
               - "[\"obj.field\"]"
               - "[\"obj.field\"]"
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              rules:
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
               logsFilter:
                 simpleFilter:
                   labelFilters:
@@ -2133,8 +2124,6 @@ components:
                     - LOG_SEVERITY_VERBOSE_UNSPECIFIED
                     - LOG_SEVERITY_VERBOSE_UNSPECIFIED
                   luceneQuery: luceneQuery
-            entityLabels:
-              key: value
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -2144,11 +2133,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -2222,11 +2217,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -2294,7 +2295,7 @@ components:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
             description: Alert description
-            priority: null
+            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -2315,11 +2316,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -2401,28 +2408,12 @@ components:
         - updatedTime: 2023-10-01T12:00:00Z
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
-            logsTimeRelativeThreshold:
+            entityLabels:
+              key: value
+            logsImmediate:
               notificationPayloadFilter:
               - "[\"obj.field\"]"
               - "[\"obj.field\"]"
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              rules:
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
               logsFilter:
                 simpleFilter:
                   labelFilters:
@@ -2440,8 +2431,6 @@ components:
                     - LOG_SEVERITY_VERBOSE_UNSPECIFIED
                     - LOG_SEVERITY_VERBOSE_UNSPECIFIED
                   luceneQuery: luceneQuery
-            entityLabels:
-              key: value
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -2451,11 +2440,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -2529,11 +2524,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -2601,7 +2602,7 @@ components:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
             description: Alert description
-            priority: null
+            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -2622,11 +2623,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -2806,28 +2813,12 @@ components:
           updatedTime: 2023-10-01T12:00:00Z
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
-            logsTimeRelativeThreshold:
+            entityLabels:
+              key: value
+            logsImmediate:
               notificationPayloadFilter:
               - "[\"obj.field\"]"
               - "[\"obj.field\"]"
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              rules:
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
               logsFilter:
                 simpleFilter:
                   labelFilters:
@@ -2845,8 +2836,6 @@ components:
                     - LOG_SEVERITY_VERBOSE_UNSPECIFIED
                     - LOG_SEVERITY_VERBOSE_UNSPECIFIED
                   luceneQuery: luceneQuery
-            entityLabels:
-              key: value
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -2856,11 +2845,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -2934,11 +2929,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -3006,7 +3007,7 @@ components:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
             description: Alert description
-            priority: null
+            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -3027,11 +3028,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -3449,28 +3456,12 @@ components:
           updatedTime: 2023-10-01T12:00:00Z
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
-            logsTimeRelativeThreshold:
+            entityLabels:
+              key: value
+            logsImmediate:
               notificationPayloadFilter:
               - "[\"obj.field\"]"
               - "[\"obj.field\"]"
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              rules:
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
               logsFilter:
                 simpleFilter:
                   labelFilters:
@@ -3488,8 +3479,6 @@ components:
                     - LOG_SEVERITY_VERBOSE_UNSPECIFIED
                     - LOG_SEVERITY_VERBOSE_UNSPECIFIED
                   luceneQuery: luceneQuery
-            entityLabels:
-              key: value
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -3499,11 +3488,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -3577,11 +3572,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -3649,7 +3650,7 @@ components:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
             description: Alert description
-            priority: null
+            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -3670,11 +3671,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -3767,28 +3774,12 @@ components:
           updatedTime: 2023-10-01T12:00:00Z
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
-            logsTimeRelativeThreshold:
+            entityLabels:
+              key: value
+            logsImmediate:
               notificationPayloadFilter:
               - "[\"obj.field\"]"
               - "[\"obj.field\"]"
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              rules:
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
               logsFilter:
                 simpleFilter:
                   labelFilters:
@@ -3806,8 +3797,6 @@ components:
                     - LOG_SEVERITY_VERBOSE_UNSPECIFIED
                     - LOG_SEVERITY_VERBOSE_UNSPECIFIED
                   luceneQuery: luceneQuery
-            entityLabels:
-              key: value
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -3817,11 +3806,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -3895,11 +3890,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -3967,7 +3968,7 @@ components:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
             description: Alert description
-            priority: null
+            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -3988,11 +3989,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -4131,34 +4138,18 @@ components:
       description: A response that contains a list of alert definitions
       example:
         pagination:
-          totalSize: 6
+          totalSize: 0
           nextPageToken: nextPageToken
         alertDefs:
         - updatedTime: 2023-10-01T12:00:00Z
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
-            logsTimeRelativeThreshold:
+            entityLabels:
+              key: value
+            logsImmediate:
               notificationPayloadFilter:
               - "[\"obj.field\"]"
               - "[\"obj.field\"]"
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              rules:
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
               logsFilter:
                 simpleFilter:
                   labelFilters:
@@ -4176,8 +4167,6 @@ components:
                     - LOG_SEVERITY_VERBOSE_UNSPECIFIED
                     - LOG_SEVERITY_VERBOSE_UNSPECIFIED
                   luceneQuery: luceneQuery
-            entityLabels:
-              key: value
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -4187,11 +4176,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -4265,11 +4260,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -4337,7 +4338,7 @@ components:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
             description: Alert description
-            priority: null
+            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -4358,11 +4359,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -4444,28 +4451,12 @@ components:
         - updatedTime: 2023-10-01T12:00:00Z
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
-            logsTimeRelativeThreshold:
+            entityLabels:
+              key: value
+            logsImmediate:
               notificationPayloadFilter:
               - "[\"obj.field\"]"
               - "[\"obj.field\"]"
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              rules:
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
               logsFilter:
                 simpleFilter:
                   labelFilters:
@@ -4483,8 +4474,6 @@ components:
                     - LOG_SEVERITY_VERBOSE_UNSPECIFIED
                     - LOG_SEVERITY_VERBOSE_UNSPECIFIED
                   luceneQuery: luceneQuery
-            entityLabels:
-              key: value
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -4494,11 +4483,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -4572,11 +4567,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -4644,7 +4645,7 @@ components:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
             description: Alert description
-            priority: null
+            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -4665,11 +4666,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -4835,6 +4842,27 @@ components:
     LogsImmediateType:
       description: Configuration for immediate alerts triggered on log entries matching
         specific filters.
+      example:
+        notificationPayloadFilter:
+        - "[\"obj.field\"]"
+        - "[\"obj.field\"]"
+        logsFilter:
+          simpleFilter:
+            labelFilters:
+              subsystemName:
+              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                value: my-app
+              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                value: my-app
+              applicationName:
+              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                value: my-app
+              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                value: my-app
+              severities:
+              - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+              - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+            luceneQuery: luceneQuery
       externalDocs:
         description: Learn more about logs immediate alerts in our documentation
         url: https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/immediate-notifications/
@@ -5115,10 +5143,6 @@ components:
       type: string
     LogsTimeRelativeCondition:
       description: Defines conditions for time-relative comparison alerts
-      example:
-        comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-        conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-        threshold: 0.8008281904610115
       externalDocs:
         url: ""
       properties:
@@ -5140,13 +5164,6 @@ components:
     LogsTimeRelativeRule:
       description: LogsTimeRelativeRule is a message that defines a rule for log-based
         time-relative alerts
-      example:
-        condition:
-          comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-          conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-          threshold: 0.8008281904610115
-        override:
-          priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -5159,45 +5176,6 @@ components:
     LogsTimeRelativeThresholdType:
       description: Configuration for alerts that are triggered when a fixed ratio
         reaches a set threshold compared to a past time frame.
-      example:
-        notificationPayloadFilter:
-        - "[\"obj.field\"]"
-        - "[\"obj.field\"]"
-        ignoreInfinity: true
-        undetectedValuesManagement:
-          triggerUndetectedValues: true
-          autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-        evaluationDelayMs: 60000
-        rules:
-        - condition:
-            comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-            conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-            threshold: 0.8008281904610115
-          override:
-            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-        - condition:
-            comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-            conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-            threshold: 0.8008281904610115
-          override:
-            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-        logsFilter:
-          simpleFilter:
-            labelFilters:
-              subsystemName:
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              applicationName:
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              severities:
-              - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-              - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-            luceneQuery: luceneQuery
       externalDocs:
         description: "Learn more about log-based, time-relative alerts in our documentation"
         url: https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/time-relative-alerts/
@@ -5662,6 +5640,10 @@ components:
       type: object
     Recipients:
       description: List of email recipients for alert notifications
+      example:
+        emails:
+        - "[\"mail@gmail.com\"]"
+        - "[\"mail@gmail.com\"]"
       externalDocs:
         url: ""
       properties:
@@ -5680,28 +5662,12 @@ components:
           updatedTime: 2023-10-01T12:00:00Z
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
-            logsTimeRelativeThreshold:
+            entityLabels:
+              key: value
+            logsImmediate:
               notificationPayloadFilter:
               - "[\"obj.field\"]"
               - "[\"obj.field\"]"
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              rules:
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
               logsFilter:
                 simpleFilter:
                   labelFilters:
@@ -5719,8 +5685,6 @@ components:
                     - LOG_SEVERITY_VERBOSE_UNSPECIFIED
                     - LOG_SEVERITY_VERBOSE_UNSPECIFIED
                   luceneQuery: luceneQuery
-            entityLabels:
-              key: value
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -5730,11 +5694,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -5808,11 +5778,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -5880,7 +5856,7 @@ components:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
             description: Alert description
-            priority: null
+            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -5901,11 +5877,17 @@ components:
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               - minutes: 15
                 notifyOn: null
                 integration:
-                  integrationId: 123
+                  recipients:
+                    emails:
+                    - "[\"mail@gmail.com\"]"
+                    - "[\"mail@gmail.com\"]"
               destinations:
               - resolvedRouteOverrides:
                   configOverrides:
@@ -6289,8 +6271,6 @@ components:
     V3IntegrationTypeIntegrationId:
       additionalProperties: false
       description: Defines the type of integration to use for notifications
-      example:
-        integrationId: 123
       externalDocs:
         url: ""
       properties:
@@ -6304,6 +6284,11 @@ components:
     V3IntegrationTypeRecipients:
       additionalProperties: false
       description: Defines the type of integration to use for notifications
+      example:
+        recipients:
+          emails:
+          - "[\"mail@gmail.com\"]"
+          - "[\"mail@gmail.com\"]"
       externalDocs:
         url: ""
       properties:
@@ -6313,7 +6298,7 @@ components:
       type: object
     alerts.v3.PaginationResponse:
       example:
-        totalSize: 6
+        totalSize: 0
         nextPageToken: nextPageToken
       properties:
         nextPageToken:
@@ -6374,8 +6359,8 @@ components:
       type: string
     v3.IntegrationType:
       oneOf:
-      - $ref: "#/components/schemas/V3IntegrationTypeIntegrationId"
       - $ref: "#/components/schemas/V3IntegrationTypeRecipients"
+      - $ref: "#/components/schemas/V3IntegrationTypeIntegrationId"
     v3.LogsFilter:
       description: Filter configuration for log-based alerts
       example:
@@ -6471,9 +6456,6 @@ components:
       type: object
     v3.UndetectedValuesManagement:
       description: Configuration for handling undetected values in alerts
-      example:
-        triggerUndetectedValues: true
-        autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -6544,21 +6526,13 @@ components:
           type: string
       title: Replace alert definition request
       type: object
-    AlertDefsService_CreateAlertDef_request:
-      oneOf:
-      - $ref: "#/components/schemas/AlertDefPropertiesMetricThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesMetricAnomaly"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsNewValue"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsImmediate"
-      - $ref: "#/components/schemas/AlertDefPropertiesTracingImmediate"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
-      - $ref: "#/components/schemas/AlertDefPropertiesSloThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsAnomaly"
-      - $ref: "#/components/schemas/AlertDefPropertiesTracingThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesFlow"
+    Create_alert_definition_request:
+      additionalProperties: false
+      description: A request to create a new alert definition
+      properties:
+        alertDefProperties:
+          $ref: "#/components/schemas/AlertDefProperties"
+      title: Create alert definition request
       type: object
     Bulk_replace_alert_definitions_request:
       additionalProperties: false

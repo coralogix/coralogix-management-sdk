@@ -70,20 +70,6 @@
         },
         "x-coralogixPermissions": [
           "extensions:UpdateConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/testing';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"cleanupAfterTest\":true,\"extensionData\":{\"binaries\":[{\"data\":\"string\",\"type\":\"KIBANA_INDEX_PATTERN\"}],\"changelog\":[{\"descriptionMd\":\"string\",\"version\":\"string\"}],\"darkModeImage\":\"string\",\"deprecation\":{\"reason\":\"string\",\"replacementExtensions\":[\"string\"]},\"description\":\"Integration with AWS CloudWatch for monitoring and logging\",\"excerpt\":\"Monitor AWS resources and analyze logs with CloudWatch integration\",\"id\":\"076f4188-05e0-4ed3-afeb-653ad182ccb7\",\"image\":\"string\",\"integrationDetails\":[{\"link\":\"string\",\"name\":\"string\"}],\"integrations\":[\"string\"],\"isHidden\":true,\"items\":[{\"binaries\":[{\"data\":\"string\",\"fileName\":\"string\",\"type\":\"PREVIEW_IMAGE\"}],\"data\":{},\"description\":\"Less than 60% cocoa\",\"internalId\":0,\"isMandatory\":true,\"name\":\"Low cocoa content\",\"permissionResource\":\"UNKNOWN\",\"stableId\":\"string\",\"targetDomain\":\"ACTION\",\"uniqueId\":\"string\"}],\"keywords\":[\"string\"],\"labels\":[\"string\"],\"name\":\"AWS CloudWatch Extension\",\"version\":\"v1.0.13\"}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/testing\"\n\npayload = {\n    \"cleanupAfterTest\": True,\n    \"extensionData\": {\n        \"binaries\": [\n            {\n                \"data\": \"string\",\n                \"type\": \"KIBANA_INDEX_PATTERN\"\n            }\n        ],\n        \"changelog\": [\n            {\n                \"descriptionMd\": \"string\",\n                \"version\": \"string\"\n            }\n        ],\n        \"darkModeImage\": \"string\",\n        \"deprecation\": {\n            \"reason\": \"string\",\n            \"replacementExtensions\": [\"string\"]\n        },\n        \"description\": \"Integration with AWS CloudWatch for monitoring and logging\",\n        \"excerpt\": \"Monitor AWS resources and analyze logs with CloudWatch integration\",\n        \"id\": \"076f4188-05e0-4ed3-afeb-653ad182ccb7\",\n        \"image\": \"string\",\n        \"integrationDetails\": [\n            {\n                \"link\": \"string\",\n                \"name\": \"string\"\n            }\n        ],\n        \"integrations\": [\"string\"],\n        \"isHidden\": True,\n        \"items\": [\n            {\n                \"binaries\": [\n                    {\n                        \"data\": \"string\",\n                        \"fileName\": \"string\",\n                        \"type\": \"PREVIEW_IMAGE\"\n                    }\n                ],\n                \"data\": {},\n                \"description\": \"Less than 60% cocoa\",\n                \"internalId\": 0,\n                \"isMandatory\": True,\n                \"name\": \"Low cocoa content\",\n                \"permissionResource\": \"UNKNOWN\",\n                \"stableId\": \"string\",\n                \"targetDomain\": \"ACTION\",\n                \"uniqueId\": \"string\"\n            }\n        ],\n        \"keywords\": [\"string\"],\n        \"labels\": [\"string\"],\n        \"name\": \"AWS CloudWatch Extension\",\n        \"version\": \"v1.0.13\"\n    }\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/testing \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"cleanupAfterTest\":true,\"extensionData\":{\"binaries\":[{\"data\":\"string\",\"type\":\"KIBANA_INDEX_PATTERN\"}],\"changelog\":[{\"descriptionMd\":\"string\",\"version\":\"string\"}],\"darkModeImage\":\"string\",\"deprecation\":{\"reason\":\"string\",\"replacementExtensions\":[\"string\"]},\"description\":\"Integration with AWS CloudWatch for monitoring and logging\",\"excerpt\":\"Monitor AWS resources and analyze logs with CloudWatch integration\",\"id\":\"076f4188-05e0-4ed3-afeb-653ad182ccb7\",\"image\":\"string\",\"integrationDetails\":[{\"link\":\"string\",\"name\":\"string\"}],\"integrations\":[\"string\"],\"isHidden\":true,\"items\":[{\"binaries\":[{\"data\":\"string\",\"fileName\":\"string\",\"type\":\"PREVIEW_IMAGE\"}],\"data\":{},\"description\":\"Less than 60% cocoa\",\"internalId\":0,\"isMandatory\":true,\"name\":\"Low cocoa content\",\"permissionResource\":\"UNKNOWN\",\"stableId\":\"string\",\"targetDomain\":\"ACTION\",\"uniqueId\":\"string\"}],\"keywords\":[\"string\"],\"labels\":[\"string\"],\"name\":\"AWS CloudWatch Extension\",\"version\":\"v1.0.13\"}}'"
-          }
         ]
       },
       "delete": {
@@ -147,20 +133,6 @@
         },
         "x-coralogixPermissions": [
           "extensions:UpdateConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/testing';\n\nlet options = {\n  method: 'DELETE',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"id\":\"string\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/testing\"\n\npayload = {\"id\": \"string\"}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"DELETE\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/testing \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"id\":\"string\"}'"
-          }
         ]
       }
     },
@@ -226,20 +198,6 @@
         },
         "x-coralogixPermissions": [
           "extensions:UpdateConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/testing/initialize';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"extensionData\":{\"binaries\":[{\"data\":\"string\",\"type\":\"KIBANA_INDEX_PATTERN\"}],\"changelog\":[{\"descriptionMd\":\"string\",\"version\":\"string\"}],\"darkModeImage\":\"string\",\"deprecation\":{\"reason\":\"string\",\"replacementExtensions\":[\"string\"]},\"description\":\"Integration with AWS CloudWatch for monitoring and logging\",\"excerpt\":\"Monitor AWS resources and analyze logs with CloudWatch integration\",\"id\":\"076f4188-05e0-4ed3-afeb-653ad182ccb7\",\"image\":\"string\",\"integrationDetails\":[{\"link\":\"string\",\"name\":\"string\"}],\"integrations\":[\"string\"],\"isHidden\":true,\"items\":[{\"binaries\":[{\"data\":\"string\",\"fileName\":\"string\",\"type\":\"PREVIEW_IMAGE\"}],\"data\":{},\"description\":\"Less than 60% cocoa\",\"internalId\":0,\"isMandatory\":true,\"name\":\"Low cocoa content\",\"permissionResource\":\"UNKNOWN\",\"stableId\":\"string\",\"targetDomain\":\"ACTION\",\"uniqueId\":\"string\"}],\"keywords\":[\"string\"],\"labels\":[\"string\"],\"name\":\"AWS CloudWatch Extension\",\"version\":\"v1.0.13\"}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/testing/initialize\"\n\npayload = {\"extensionData\": {\n        \"binaries\": [\n            {\n                \"data\": \"string\",\n                \"type\": \"KIBANA_INDEX_PATTERN\"\n            }\n        ],\n        \"changelog\": [\n            {\n                \"descriptionMd\": \"string\",\n                \"version\": \"string\"\n            }\n        ],\n        \"darkModeImage\": \"string\",\n        \"deprecation\": {\n            \"reason\": \"string\",\n            \"replacementExtensions\": [\"string\"]\n        },\n        \"description\": \"Integration with AWS CloudWatch for monitoring and logging\",\n        \"excerpt\": \"Monitor AWS resources and analyze logs with CloudWatch integration\",\n        \"id\": \"076f4188-05e0-4ed3-afeb-653ad182ccb7\",\n        \"image\": \"string\",\n        \"integrationDetails\": [\n            {\n                \"link\": \"string\",\n                \"name\": \"string\"\n            }\n        ],\n        \"integrations\": [\"string\"],\n        \"isHidden\": True,\n        \"items\": [\n            {\n                \"binaries\": [\n                    {\n                        \"data\": \"string\",\n                        \"fileName\": \"string\",\n                        \"type\": \"PREVIEW_IMAGE\"\n                    }\n                ],\n                \"data\": {},\n                \"description\": \"Less than 60% cocoa\",\n                \"internalId\": 0,\n                \"isMandatory\": True,\n                \"name\": \"Low cocoa content\",\n                \"permissionResource\": \"UNKNOWN\",\n                \"stableId\": \"string\",\n                \"targetDomain\": \"ACTION\",\n                \"uniqueId\": \"string\"\n            }\n        ],\n        \"keywords\": [\"string\"],\n        \"labels\": [\"string\"],\n        \"name\": \"AWS CloudWatch Extension\",\n        \"version\": \"v1.0.13\"\n    }}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/testing/initialize \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"extensionData\":{\"binaries\":[{\"data\":\"string\",\"type\":\"KIBANA_INDEX_PATTERN\"}],\"changelog\":[{\"descriptionMd\":\"string\",\"version\":\"string\"}],\"darkModeImage\":\"string\",\"deprecation\":{\"reason\":\"string\",\"replacementExtensions\":[\"string\"]},\"description\":\"Integration with AWS CloudWatch for monitoring and logging\",\"excerpt\":\"Monitor AWS resources and analyze logs with CloudWatch integration\",\"id\":\"076f4188-05e0-4ed3-afeb-653ad182ccb7\",\"image\":\"string\",\"integrationDetails\":[{\"link\":\"string\",\"name\":\"string\"}],\"integrations\":[\"string\"],\"isHidden\":true,\"items\":[{\"binaries\":[{\"data\":\"string\",\"fileName\":\"string\",\"type\":\"PREVIEW_IMAGE\"}],\"data\":{},\"description\":\"Less than 60% cocoa\",\"internalId\":0,\"isMandatory\":true,\"name\":\"Low cocoa content\",\"permissionResource\":\"UNKNOWN\",\"stableId\":\"string\",\"targetDomain\":\"ACTION\",\"uniqueId\":\"string\"}],\"keywords\":[\"string\"],\"labels\":[\"string\"],\"name\":\"AWS CloudWatch Extension\",\"version\":\"v1.0.13\"}}'"
-          }
         ]
       }
     }

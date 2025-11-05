@@ -126,21 +126,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v3/events?filter=SOME_OBJECT_VALUE&order_bys=SOME_ARRAY_VALUE&pagination=SOME_OBJECT_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v3/events\"\n\nquerystring = {\"filter\":\"SOME_OBJECT_VALUE\",\"order_bys\":\"SOME_ARRAY_VALUE\",\"pagination\":\"SOME_OBJECT_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/v3/events?filter=SOME_OBJECT_VALUE&order_bys=SOME_ARRAY_VALUE&pagination=SOME_OBJECT_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/v3/events/events:batchGet": {
@@ -245,21 +231,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v3/events/events:batchGet?ids=SOME_ARRAY_VALUE&order_bys=SOME_ARRAY_VALUE&pagination=SOME_OBJECT_VALUE&filter=SOME_OBJECT_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v3/events/events:batchGet\"\n\nquerystring = {\"ids\":\"SOME_ARRAY_VALUE\",\"order_bys\":\"SOME_ARRAY_VALUE\",\"pagination\":\"SOME_OBJECT_VALUE\",\"filter\":\"SOME_OBJECT_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/v3/events/events:batchGet?ids=SOME_ARRAY_VALUE&order_bys=SOME_ARRAY_VALUE&pagination=SOME_OBJECT_VALUE&filter=SOME_OBJECT_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/v3/events/{id}": {
@@ -352,21 +324,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v3/events/test?order_bys=SOME_ARRAY_VALUE&pagination=SOME_OBJECT_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v3/events/test\"\n\nquerystring = {\"order_bys\":\"SOME_ARRAY_VALUE\",\"pagination\":\"SOME_OBJECT_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/v3/events/test?order_bys=SOME_ARRAY_VALUE&pagination=SOME_OBJECT_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/v3/events:count": {
@@ -452,21 +410,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v3/events:count?filter=SOME_OBJECT_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v3/events:count\"\n\nquerystring = {\"filter\":\"SOME_OBJECT_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/v3/events:count?filter=SOME_OBJECT_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/v3/events:statistics": {
@@ -552,21 +496,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v3/events:statistics?filter=SOME_OBJECT_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v3/events:statistics\"\n\nquerystring = {\"filter\":\"SOME_OBJECT_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/v3/events:statistics?filter=SOME_OBJECT_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     }
   },
@@ -712,10 +642,10 @@
       "CxEventSingleOrMultiple": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/CxEventSingleOrMultipleSingleEvent"
+            "$ref": "#/components/schemas/CxEventSingleOrMultipleMultipleEvents"
           },
           {
-            "$ref": "#/components/schemas/CxEventSingleOrMultipleMultipleEvents"
+            "$ref": "#/components/schemas/CxEventSingleOrMultipleSingleEvent"
           }
         ]
       },

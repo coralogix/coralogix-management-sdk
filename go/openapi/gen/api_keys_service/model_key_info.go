@@ -22,7 +22,7 @@ var _ MappedNullable = &KeyInfo{}
 // KeyInfo This data structure represents the information associated with an API key.
 type KeyInfo struct {
 	Active bool `json:"active"`
-	Hashed bool `json:"hashed"`
+	Hashed *bool `json:"hashed,omitempty"`
 	Id string `json:"id"`
 	KeyPermissions KeyInfoKeyPermissions `json:"keyPermissions"`
 	Name string `json:"name"`
@@ -36,10 +36,9 @@ type _KeyInfo KeyInfo
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewKeyInfo(active bool, hashed bool, id string, keyPermissions KeyInfoKeyPermissions, name string, owner Owner) *KeyInfo {
+func NewKeyInfo(active bool, id string, keyPermissions KeyInfoKeyPermissions, name string, owner Owner) *KeyInfo {
 	this := KeyInfo{}
 	this.Active = active
-	this.Hashed = hashed
 	this.Id = id
 	this.KeyPermissions = keyPermissions
 	this.Name = name
@@ -79,28 +78,36 @@ func (o *KeyInfo) SetActive(v bool) {
 	o.Active = v
 }
 
-// GetHashed returns the Hashed field value
+// GetHashed returns the Hashed field value if set, zero value otherwise.
 func (o *KeyInfo) GetHashed() bool {
-	if o == nil {
+	if o == nil || IsNil(o.Hashed) {
 		var ret bool
 		return ret
 	}
-
-	return o.Hashed
+	return *o.Hashed
 }
 
-// GetHashedOk returns a tuple with the Hashed field value
+// GetHashedOk returns a tuple with the Hashed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KeyInfo) GetHashedOk() (*bool, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Hashed) {
 		return nil, false
 	}
-	return &o.Hashed, true
+	return o.Hashed, true
 }
 
-// SetHashed sets field value
+// HasHashed returns a boolean if a field has been set.
+func (o *KeyInfo) HasHashed() bool {
+	if o != nil && !IsNil(o.Hashed) {
+		return true
+	}
+
+	return false
+}
+
+// SetHashed gets a reference to the given bool and assigns it to the Hashed field.
 func (o *KeyInfo) SetHashed(v bool) {
-	o.Hashed = v
+	o.Hashed = &v
 }
 
 // GetId returns the Id field value
@@ -242,7 +249,9 @@ func (o KeyInfo) MarshalJSON() ([]byte, error) {
 func (o KeyInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["active"] = o.Active
-	toSerialize["hashed"] = o.Hashed
+	if !IsNil(o.Hashed) {
+		toSerialize["hashed"] = o.Hashed
+	}
 	toSerialize["id"] = o.Id
 	toSerialize["keyPermissions"] = o.KeyPermissions
 	toSerialize["name"] = o.Name
@@ -259,7 +268,6 @@ func (o *KeyInfo) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"active",
-		"hashed",
 		"id",
 		"keyPermissions",
 		"name",

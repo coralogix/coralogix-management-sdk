@@ -26,6 +26,7 @@ type Connector struct {
 	ConnectorConfig *ConnectorConfig `json:"connectorConfig,omitempty"`
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	Description *string `json:"description,omitempty"`
+	Diagnostics *Diagnostics `json:"diagnostics,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Name string `json:"name"`
 	TeamId *int64 `json:"teamId,omitempty"`
@@ -180,6 +181,38 @@ func (o *Connector) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *Connector) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetDiagnostics returns the Diagnostics field value if set, zero value otherwise.
+func (o *Connector) GetDiagnostics() Diagnostics {
+	if o == nil || IsNil(o.Diagnostics) {
+		var ret Diagnostics
+		return ret
+	}
+	return *o.Diagnostics
+}
+
+// GetDiagnosticsOk returns a tuple with the Diagnostics field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Connector) GetDiagnosticsOk() (*Diagnostics, bool) {
+	if o == nil || IsNil(o.Diagnostics) {
+		return nil, false
+	}
+	return o.Diagnostics, true
+}
+
+// HasDiagnostics returns a boolean if a field has been set.
+func (o *Connector) HasDiagnostics() bool {
+	if o != nil && !IsNil(o.Diagnostics) {
+		return true
+	}
+
+	return false
+}
+
+// SetDiagnostics gets a reference to the given Diagnostics and assigns it to the Diagnostics field.
+func (o *Connector) SetDiagnostics(v Diagnostics) {
+	o.Diagnostics = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -347,6 +380,9 @@ func (o Connector) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.Diagnostics) {
+		toSerialize["diagnostics"] = o.Diagnostics
 	}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id

@@ -17,21 +17,7 @@ paths:
         name: type
         required: false
         schema:
-          enum:
-          - UNKNOWN
-          - GENERIC
-          - SLACK
-          - PAGERDUTY
-          - SEND_LOG
-          - EMAIL_GROUP
-          - MICROSOFT_TEAMS
-          - JIRA
-          - OPSGENIE
-          - DEMISTO
-          - AWS_EVENT_BRIDGE
-          - IBM_EVENT_NOTIFICATIONS
-          - MS_TEAMS_WORKFLOW
-          type: string
+          $ref: "#/components/schemas/WebhookType"
         style: form
       responses:
         "200":
@@ -57,37 +43,6 @@ paths:
       - Outgoing webhooks service
       x-coralogixPermissions:
       - outbound-webhooks:ReadConfig
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1?type=SOME_STRING_VALUE';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1"
-
-          querystring = {"type":"SOME_STRING_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1?type=SOME_STRING_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
     post:
       description: No description available
       externalDocs:
@@ -122,53 +77,6 @@ paths:
       - Outgoing webhooks service
       x-coralogixPermissions:
       - outbound-webhooks:UpdateConfig
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1';
-
-          let options = {
-            method: 'POST',
-            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"data":{"demisto":{"payload":{"key":"value"},"uuid":"d838cd7b-087b-40c6-bc33-80997020f5d0"},"name":"my_webhook","type":"UNKNOWN","url":"slack.webhook.com"}}'
-          };
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1"
-
-          payload = {"data": {
-                  "demisto": {
-                      "payload": {"key": "value"},
-                      "uuid": "d838cd7b-087b-40c6-bc33-80997020f5d0"
-                  },
-                  "name": "my_webhook",
-                  "type": "UNKNOWN",
-                  "url": "slack.webhook.com"
-              }}
-          headers = {
-              "Authorization": "Bearer <API_KEY>",
-              "content-type": "application/json"
-          }
-
-          response = requests.request("POST", url, json=payload, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request POST \
-            --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1 \
-            --header 'Authorization: Bearer <API_KEY>' \
-            --header 'content-type: application/json' \
-            --data '{"data":{"demisto":{"payload":{"key":"value"},"uuid":"d838cd7b-087b-40c6-bc33-80997020f5d0"},"name":"my_webhook","type":"UNKNOWN","url":"slack.webhook.com"}}'
     put:
       description: No description available
       externalDocs:
@@ -203,56 +111,6 @@ paths:
       - Outgoing webhooks service
       x-coralogixPermissions:
       - outbound-webhooks:UpdateConfig
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1';
-
-          let options = {
-            method: 'PUT',
-            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"data":{"demisto":{"payload":{"key":"value"},"uuid":"d838cd7b-087b-40c6-bc33-80997020f5d0"},"name":"my_webhook","type":"UNKNOWN","url":"slack.webhook.com"},"id":"example_id"}'
-          };
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1"
-
-          payload = {
-              "data": {
-                  "demisto": {
-                      "payload": {"key": "value"},
-                      "uuid": "d838cd7b-087b-40c6-bc33-80997020f5d0"
-                  },
-                  "name": "my_webhook",
-                  "type": "UNKNOWN",
-                  "url": "slack.webhook.com"
-              },
-              "id": "example_id"
-          }
-          headers = {
-              "Authorization": "Bearer <API_KEY>",
-              "content-type": "application/json"
-          }
-
-          response = requests.request("PUT", url, json=payload, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request PUT \
-            --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1 \
-            --header 'Authorization: Bearer <API_KEY>' \
-            --header 'content-type: application/json' \
-            --data '{"data":{"demisto":{"payload":{"key":"value"},"uuid":"d838cd7b-087b-40c6-bc33-80997020f5d0"},"name":"my_webhook","type":"UNKNOWN","url":"slack.webhook.com"},"id":"example_id"}'
   /integrations/webhooks/v1/all:
     get:
       description: No description available
@@ -283,35 +141,6 @@ paths:
       - Outgoing webhooks service
       x-coralogixPermissions:
       - outbound-webhooks:ReadConfig
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/all';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/all"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/all \
-            --header 'Authorization: Bearer <API_KEY>'
   /integrations/webhooks/v1/summary:
     get:
       description: No description available
@@ -342,35 +171,6 @@ paths:
       - Outgoing webhooks service
       x-coralogixPermissions:
       - outbound-webhooks:ReadSummary
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/summary';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/summary"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/summary \
-            --header 'Authorization: Bearer <API_KEY>'
   /integrations/webhooks/v1/test:
     post:
       description: No description available
@@ -406,53 +206,6 @@ paths:
       - Outgoing webhooks service
       x-coralogixPermissions:
       - outbound-webhooks:ReadConfig
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/test';
-
-          let options = {
-            method: 'POST',
-            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"data":{"demisto":{"payload":{"key":"value"},"uuid":"d838cd7b-087b-40c6-bc33-80997020f5d0"},"name":"my_webhook","type":"UNKNOWN","url":"slack.webhook.com"}}'
-          };
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/test"
-
-          payload = {"data": {
-                  "demisto": {
-                      "payload": {"key": "value"},
-                      "uuid": "d838cd7b-087b-40c6-bc33-80997020f5d0"
-                  },
-                  "name": "my_webhook",
-                  "type": "UNKNOWN",
-                  "url": "slack.webhook.com"
-              }}
-          headers = {
-              "Authorization": "Bearer <API_KEY>",
-              "content-type": "application/json"
-          }
-
-          response = requests.request("POST", url, json=payload, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request POST \
-            --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/test \
-            --header 'Authorization: Bearer <API_KEY>' \
-            --header 'content-type: application/json' \
-            --data '{"data":{"demisto":{"payload":{"key":"value"},"uuid":"d838cd7b-087b-40c6-bc33-80997020f5d0"},"name":"my_webhook","type":"UNKNOWN","url":"slack.webhook.com"}}'
   /integrations/webhooks/v1/test-existing:
     post:
       description: No description available
@@ -488,45 +241,6 @@ paths:
       - Outgoing webhooks service
       x-coralogixPermissions:
       - outbound-webhooks:ReadConfig
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/test-existing';
-
-          let options = {
-            method: 'POST',
-            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"id":"example_id"}'
-          };
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/test-existing"
-
-          payload = {"id": "example_id"}
-          headers = {
-              "Authorization": "Bearer <API_KEY>",
-              "content-type": "application/json"
-          }
-
-          response = requests.request("POST", url, json=payload, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request POST \
-            --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/test-existing \
-            --header 'Authorization: Bearer <API_KEY>' \
-            --header 'content-type: application/json' \
-            --data '{"id":"example_id"}'
   /integrations/webhooks/v1/types:
     get:
       description: No description available
@@ -557,35 +271,6 @@ paths:
       - Outgoing webhooks service
       x-coralogixPermissions:
       - outbound-webhooks:ReadConfig
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/types';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/types"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/types \
-            --header 'Authorization: Bearer <API_KEY>'
   /integrations/webhooks/v1/types/{type}:
     get:
       description: No description available
@@ -598,21 +283,7 @@ paths:
         name: type
         required: true
         schema:
-          enum:
-          - UNKNOWN
-          - GENERIC
-          - SLACK
-          - PAGERDUTY
-          - SEND_LOG
-          - EMAIL_GROUP
-          - MICROSOFT_TEAMS
-          - JIRA
-          - OPSGENIE
-          - DEMISTO
-          - AWS_EVENT_BRIDGE
-          - IBM_EVENT_NOTIFICATIONS
-          - MS_TEAMS_WORKFLOW
-          type: string
+          $ref: "#/components/schemas/WebhookType"
         style: simple
       responses:
         "200":
@@ -638,35 +309,6 @@ paths:
       - Outgoing webhooks service
       x-coralogixPermissions:
       - outbound-webhooks:ReadConfig
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/types/%7Btype%7D';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/types/%7Btype%7D"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/types/%7Btype%7D \
-            --header 'Authorization: Bearer <API_KEY>'
   /integrations/webhooks/v1/{id}:
     delete:
       description: No description available
@@ -706,35 +348,6 @@ paths:
       - Outgoing webhooks service
       x-coralogixPermissions:
       - outbound-webhooks:UpdateConfig
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/example_id';
-
-          let options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/example_id"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("DELETE", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request DELETE \
-            --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/example_id \
-            --header 'Authorization: Bearer <API_KEY>'
     get:
       description: No description available
       externalDocs:
@@ -772,35 +385,6 @@ paths:
       - Outgoing webhooks service
       x-coralogixPermissions:
       - outbound-webhooks:ReadConfig
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/%7Bid%7D';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/%7Bid%7D"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/%7Bid%7D \
-            --header 'Authorization: Bearer <API_KEY>'
 components:
   schemas:
     Attachment:
@@ -1023,10 +607,9 @@ components:
           name: my_webhook
           externalId: 123456
           id: webhook_id
+          pagerDuty:
+            serviceKey: pager_duty_service_key
           type: UNKNOWN
-          sendLog:
-            payload: "{\"key\":\"value\"}"
-            uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
           url: slack.webhook.com
           updatedAt: 2000-01-23T04:56:07.000+00:00
       externalDocs:
@@ -1250,18 +833,18 @@ components:
       type: object
     OutgoingWebhook:
       oneOf:
-      - $ref: "#/components/schemas/OutgoingWebhookSendLog"
-      - $ref: "#/components/schemas/OutgoingWebhookJira"
-      - $ref: "#/components/schemas/OutgoingWebhookDemisto"
-      - $ref: "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
-      - $ref: "#/components/schemas/OutgoingWebhookEmailGroup"
+      - $ref: "#/components/schemas/OutgoingWebhookPagerDuty"
       - $ref: "#/components/schemas/OutgoingWebhookMicrosoftTeams"
+      - $ref: "#/components/schemas/OutgoingWebhookJira"
       - $ref: "#/components/schemas/OutgoingWebhookOpsgenie"
+      - $ref: "#/components/schemas/OutgoingWebhookSendLog"
+      - $ref: "#/components/schemas/OutgoingWebhookEmailGroup"
+      - $ref: "#/components/schemas/OutgoingWebhookDemisto"
       - $ref: "#/components/schemas/OutgoingWebhookAwsEventBridge"
       - $ref: "#/components/schemas/OutgoingWebhookIbmEventNotifications"
+      - $ref: "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
       - $ref: "#/components/schemas/OutgoingWebhookGenericWebhook"
       - $ref: "#/components/schemas/OutgoingWebhookSlack"
-      - $ref: "#/components/schemas/OutgoingWebhookPagerDuty"
     OutgoingWebhookAwsEventBridge:
       additionalProperties: false
       externalDocs:
@@ -1502,18 +1085,18 @@ components:
       type: object
     OutgoingWebhookInputData:
       oneOf:
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataDemisto"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataGenericWebhook"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataSlack"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataGenericWebhook"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataSendLog"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataJira"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataOpsgenie"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataSendLog"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataDemisto"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
     OutgoingWebhookInputDataAwsEventBridge:
       additionalProperties: false
       externalDocs:
@@ -1930,6 +1513,16 @@ components:
       type: object
     OutgoingWebhookPagerDuty:
       additionalProperties: false
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        name: my_webhook
+        externalId: 123456
+        id: webhook_id
+        pagerDuty:
+          serviceKey: pager_duty_service_key
+        type: UNKNOWN
+        url: slack.webhook.com
+        updatedAt: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
       properties:
@@ -1966,17 +1559,6 @@ components:
       type: object
     OutgoingWebhookSendLog:
       additionalProperties: false
-      example:
-        createdAt: 2000-01-23T04:56:07.000+00:00
-        name: my_webhook
-        externalId: 123456
-        id: webhook_id
-        type: UNKNOWN
-        sendLog:
-          payload: "{\"key\":\"value\"}"
-          uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
-        url: slack.webhook.com
-        updatedAt: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
       properties:
@@ -2108,6 +1690,8 @@ components:
       title: Outgoing webhook type
       type: object
     PagerDutyConfig:
+      example:
+        serviceKey: pager_duty_service_key
       externalDocs:
         url: ""
       properties:
@@ -2119,9 +1703,6 @@ components:
       title: PagerDuty configuration
       type: object
     SendLogConfig:
-      example:
-        payload: "{\"key\":\"value\"}"
-        uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
       externalDocs:
         url: ""
       properties:
@@ -2152,13 +1733,9 @@ components:
       type: object
     TestOutgoingWebhookResponse:
       oneOf:
-      - $ref: "#/components/schemas/TestOutgoingWebhookResponseFailure"
       - $ref: "#/components/schemas/TestOutgoingWebhookResponseSuccess"
+      - $ref: "#/components/schemas/TestOutgoingWebhookResponseFailure"
     TestOutgoingWebhookResponse.Failure:
-      example:
-        displayMessage: example_display_message
-        errorMessage: example_error_message
-        statusCode: 400
       externalDocs:
         url: ""
       properties:
@@ -2184,11 +1761,6 @@ components:
       type: object
     TestOutgoingWebhookResponseFailure:
       additionalProperties: false
-      example:
-        failure:
-          displayMessage: example_display_message
-          errorMessage: example_error_message
-          statusCode: 400
       externalDocs:
         url: ""
       properties:
@@ -2198,6 +1770,8 @@ components:
       type: object
     TestOutgoingWebhookResponseSuccess:
       additionalProperties: false
+      example:
+        success: "{}"
       externalDocs:
         url: ""
       properties:

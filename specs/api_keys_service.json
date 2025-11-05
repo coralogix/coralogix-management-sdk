@@ -42,8 +42,7 @@
                 "required": [
                   "name",
                   "owner",
-                  "keyPermissions",
-                  "hashed"
+                  "keyPermissions"
                 ],
                 "additionalProperties": false
               }
@@ -79,21 +78,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"hashed\":true,\"keyPermissions\":{\"permissions\":[[\"read_logs\"]],\"presets\":[[\"my_preset\"]]},\"name\":\"my_api_key\",\"owner\":{\"userId\":\"string\"}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3\"\n\npayload = {\n    \"hashed\": True,\n    \"keyPermissions\": {\n        \"permissions\": [[\"read_logs\"]],\n        \"presets\": [[\"my_preset\"]]\n    },\n    \"name\": \"my_api_key\",\n    \"owner\": {\"userId\": \"string\"}\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3 \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"hashed\":true,\"keyPermissions\":{\"permissions\":[[\"read_logs\"]],\"presets\":[[\"my_preset\"]]},\"name\":\"my_api_key\",\"owner\":{\"userId\":\"string\"}}'"
-          }
-        ]
+        }
       }
     },
     "/aaa/api-keys/v3/send_data": {
@@ -136,21 +121,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/send_data';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/send_data\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/send_data \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/aaa/api-keys/v3/{key_id}": {
@@ -205,21 +176,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/my_key_id';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/my_key_id\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/my_key_id \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       },
       "put": {
         "tags": [
@@ -303,21 +260,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/my_key_id';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"isActive\":true,\"newName\":\"my_new_name\",\"permissions\":{\"permissions\":[\"string\"]},\"presets\":{\"presets\":[\"string\"]}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/my_key_id\"\n\npayload = {\n    \"isActive\": True,\n    \"newName\": \"my_new_name\",\n    \"permissions\": {\"permissions\": [\"string\"]},\n    \"presets\": {\"presets\": [\"string\"]}\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/my_key_id \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"isActive\":true,\"newName\":\"my_new_name\",\"permissions\":{\"permissions\":[\"string\"]},\"presets\":{\"presets\":[\"string\"]}}'"
-          }
-        ]
+        }
       },
       "delete": {
         "tags": [
@@ -369,21 +312,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/%7Bkey_id%7D';\n\nlet options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/%7Bkey_id%7D\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/%7Bkey_id%7D \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     }
   },
@@ -428,18 +357,14 @@
           "permissions": {
             "type": "array",
             "items": {
-              "example": [
-                "read_logs"
-              ],
+              "example": "read_logs",
               "type": "string"
             }
           },
           "presets": {
             "type": "array",
             "items": {
-              "example": [
-                "my_preset"
-              ],
+              "example": "my_preset",
               "type": "string"
             }
           }
@@ -643,7 +568,6 @@
           "name",
           "owner",
           "active",
-          "hashed",
           "keyPermissions"
         ]
       },
@@ -745,9 +669,7 @@
           "permissions": {
             "type": "array",
             "items": {
-              "example": [
-                "read_logs"
-              ],
+              "example": "read_logs",
               "type": "string"
             }
           }

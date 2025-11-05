@@ -207,48 +207,15 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "Create alert definition request",
+                "description": "A request to create a new alert definition",
                 "type": "object",
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AlertDefPropertiesLogsThreshold"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AlertDefPropertiesMetricAnomaly"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AlertDefPropertiesSloThreshold"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AlertDefPropertiesFlow"
+                "properties": {
+                  "alertDefProperties": {
+                    "$ref": "#/components/schemas/AlertDefProperties"
                   }
-                ]
+                },
+                "additionalProperties": false
               }
             }
           }
@@ -876,10 +843,16 @@
       "AlertDefProperties": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
+            "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
@@ -888,31 +861,25 @@
             "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
           },
           {
+            "$ref": "#/components/schemas/AlertDefPropertiesMetricAnomaly"
+          },
+          {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesSloThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesFlow"
+            "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesMetricAnomaly"
+            "$ref": "#/components/schemas/AlertDefPropertiesFlow"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsThreshold"
+            "$ref": "#/components/schemas/AlertDefPropertiesSloThreshold"
           }
         ]
       },
@@ -4284,10 +4251,10 @@
       "v3.IntegrationType": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/V3IntegrationTypeIntegrationId"
+            "$ref": "#/components/schemas/V3IntegrationTypeRecipients"
           },
           {
-            "$ref": "#/components/schemas/V3IntegrationTypeRecipients"
+            "$ref": "#/components/schemas/V3IntegrationTypeIntegrationId"
           }
         ]
       },

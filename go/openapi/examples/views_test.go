@@ -109,10 +109,11 @@ func TestViewsFolders(t *testing.T) {
 
 	updatedName := fmt.Sprintf("GoTestViewFolderUpdated-%s", uuid.NewString())
 	updateReq := viewsfolders.ViewFolder1{
+		Id:   created.Id,
 		Name: updatedName,
 	}
 	_, httpResp, err = client.
-		ViewsFoldersServiceReplaceViewFolder(context.Background(), *created.Id).
+		ViewsFoldersServiceReplaceViewFolder(context.Background()).
 		ViewFolder1(updateReq).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))

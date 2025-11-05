@@ -22,7 +22,7 @@ var _ MappedNullable = &IpAccess{}
 // IpAccess Represents a single IP access entry.
 type IpAccess struct {
 	// Whether this IP access entry is enabled.
-	Enabled bool `json:"enabled"`
+	Enabled *bool `json:"enabled,omitempty"`
 	// The IP range in CIDR notation.
 	IpRange string `json:"ipRange"`
 	// The name of the IP access entry.
@@ -35,9 +35,8 @@ type _IpAccess IpAccess
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIpAccess(enabled bool, ipRange string) *IpAccess {
+func NewIpAccess(ipRange string) *IpAccess {
 	this := IpAccess{}
-	this.Enabled = enabled
 	this.IpRange = ipRange
 	return &this
 }
@@ -50,28 +49,36 @@ func NewIpAccessWithDefaults() *IpAccess {
 	return &this
 }
 
-// GetEnabled returns the Enabled field value
+// GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *IpAccess) GetEnabled() bool {
-	if o == nil {
+	if o == nil || IsNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
-
-	return o.Enabled
+	return *o.Enabled
 }
 
-// GetEnabledOk returns a tuple with the Enabled field value
+// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IpAccess) GetEnabledOk() (*bool, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
-	return &o.Enabled, true
+	return o.Enabled, true
 }
 
-// SetEnabled sets field value
+// HasEnabled returns a boolean if a field has been set.
+func (o *IpAccess) HasEnabled() bool {
+	if o != nil && !IsNil(o.Enabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
 func (o *IpAccess) SetEnabled(v bool) {
-	o.Enabled = v
+	o.Enabled = &v
 }
 
 // GetIpRange returns the IpRange field value
@@ -140,7 +147,9 @@ func (o IpAccess) MarshalJSON() ([]byte, error) {
 
 func (o IpAccess) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["enabled"] = o.Enabled
+	if !IsNil(o.Enabled) {
+		toSerialize["enabled"] = o.Enabled
+	}
 	toSerialize["ipRange"] = o.IpRange
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
@@ -153,7 +162,6 @@ func (o *IpAccess) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"enabled",
 		"ipRange",
 	}
 

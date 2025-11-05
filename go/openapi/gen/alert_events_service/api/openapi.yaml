@@ -54,37 +54,6 @@ paths:
       - Alert events service
       x-coralogixPermissions:
       - alerts:ReadConfig
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/v3/alert-event-stats?ids=SOME_ARRAY_VALUE&order_bys=SOME_ARRAY_VALUE';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/v3/alert-event-stats"
-
-          querystring = {"ids":"SOME_ARRAY_VALUE","order_bys":"SOME_ARRAY_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/v3/alert-event-stats?ids=SOME_ARRAY_VALUE&order_bys=SOME_ARRAY_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
   /v3/alert-event/{id}:
     get:
       description: No description available
@@ -139,37 +108,6 @@ paths:
       - Alert events service
       x-coralogixPermissions:
       - alerts:ReadConfig
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/v3/alert-event/%7Bid%7D?order_bys=SOME_ARRAY_VALUE&pagination=SOME_OBJECT_VALUE';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/v3/alert-event/%7Bid%7D"
-
-          querystring = {"order_bys":"SOME_ARRAY_VALUE","pagination":"SOME_OBJECT_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/v3/alert-event/%7Bid%7D?order_bys=SOME_ARRAY_VALUE&pagination=SOME_OBJECT_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
 components:
   schemas:
     ActivityAnalysis:
@@ -189,9 +127,6 @@ components:
           type: array
         status:
           $ref: "#/components/schemas/ActivityAnalysisStatus"
-      required:
-      - rules
-      - status
       title: Activity analysis data structure
       type: object
     ActivityAnalysisStats:
@@ -266,18 +201,6 @@ components:
         timestamp:
           format: date-time
           type: string
-      required:
-      - activityAnalysis
-      - alertId
-      - groupLabels
-      - incidentCorrelationKey
-      - payload
-      - payloadType
-      - permutationId
-      - permutationLabels
-      - preGroupingEventId
-      - status
-      - timestamp
       title: Alert event
       type: object
     AlertEventMultiplePermutation:

@@ -5,7 +5,7 @@ info:
 servers:
 - url: /
 paths:
-  /v1/views:
+  /data-exploration/saved-views/v1:
     get:
       description: Lists all company public views
       externalDocs:
@@ -21,35 +21,6 @@ paths:
       summary: List views service
       tags:
       - Views service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/v1/views';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/v1/views"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url https://api.coralogix.com/mgmt/openapi/v1/views \
-            --header 'Authorization: Bearer <API_KEY>'
     post:
       description: Creates a new view
       externalDocs:
@@ -70,64 +41,7 @@ paths:
       summary: Create a view service
       tags:
       - Views service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/v1/views';
-
-          let options = {
-            method: 'POST',
-            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"filters":{"filters":[{"name":"applicationName","selectedValues":{"demo":true,"cs-rest-test1":true}}]},"folderId":"3dc02998-0b50-4ea8-b68a-4779d716fa1f","name":"Logs view","searchQuery":{"query":"string"},"timeSelection":{"quickSelection":{"caption":"Last Hour","seconds":3600}},"viewType":"VIEW_TYPE_UNSPECIFIED"}'
-          };
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/v1/views"
-
-          payload = {
-              "filters": {"filters": [
-                      {
-                          "name": "applicationName",
-                          "selectedValues": {
-                              "demo": True,
-                              "cs-rest-test1": True
-                          }
-                      }
-                  ]},
-              "folderId": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
-              "name": "Logs view",
-              "searchQuery": {"query": "string"},
-              "timeSelection": {"quickSelection": {
-                      "caption": "Last Hour",
-                      "seconds": 3600
-                  }},
-              "viewType": "VIEW_TYPE_UNSPECIFIED"
-          }
-          headers = {
-              "Authorization": "Bearer <API_KEY>",
-              "content-type": "application/json"
-          }
-
-          response = requests.request("POST", url, json=payload, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request POST \
-            --url https://api.coralogix.com/mgmt/openapi/v1/views \
-            --header 'Authorization: Bearer <API_KEY>' \
-            --header 'content-type: application/json' \
-            --data '{"filters":{"filters":[{"name":"applicationName","selectedValues":{"demo":true,"cs-rest-test1":true}}]},"folderId":"3dc02998-0b50-4ea8-b68a-4779d716fa1f","name":"Logs view","searchQuery":{"query":"string"},"timeSelection":{"quickSelection":{"caption":"Last Hour","seconds":3600}},"viewType":"VIEW_TYPE_UNSPECIFIED"}'
-  /v1/views/{id}:
+  /data-exploration/saved-views/v1/{id}:
     delete:
       description: Deletes a view by ID
       externalDocs:
@@ -154,35 +68,6 @@ paths:
       summary: Delete view service
       tags:
       - Views service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/v1/views/52';
-
-          let options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/v1/views/52"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("DELETE", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request DELETE \
-            --url https://api.coralogix.com/mgmt/openapi/v1/views/52 \
-            --header 'Authorization: Bearer <API_KEY>'
     get:
       description: Gets a view by ID
       externalDocs:
@@ -209,36 +94,7 @@ paths:
       summary: Get view service
       tags:
       - Views service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/v1/views/52';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/v1/views/52"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url https://api.coralogix.com/mgmt/openapi/v1/views/52 \
-            --header 'Authorization: Bearer <API_KEY>'
-  /v1/views/{view.id}:
+  /data-exploration/saved-views/v1/{view.id}:
     put:
       description: Replaces an existing view
       externalDocs:
@@ -270,64 +126,6 @@ paths:
       summary: Replace a view service
       tags:
       - Views service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/v1/views/52';
-
-          let options = {
-            method: 'PUT',
-            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"filters":{"filters":[{"name":"applicationName","selectedValues":{"demo":true,"cs-rest-test1":true}}]},"folderId":"3dc02998-0b50-4ea8-b68a-4779d716fa1f","isCompactMode":true,"name":"Logs view","searchQuery":{"query":"string"},"timeSelection":{"quickSelection":{"caption":"Last Hour","seconds":3600}},"viewType":"VIEW_TYPE_UNSPECIFIED"}'
-          };
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/v1/views/52"
-
-          payload = {
-              "filters": {"filters": [
-                      {
-                          "name": "applicationName",
-                          "selectedValues": {
-                              "demo": True,
-                              "cs-rest-test1": True
-                          }
-                      }
-                  ]},
-              "folderId": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
-              "isCompactMode": True,
-              "name": "Logs view",
-              "searchQuery": {"query": "string"},
-              "timeSelection": {"quickSelection": {
-                      "caption": "Last Hour",
-                      "seconds": 3600
-                  }},
-              "viewType": "VIEW_TYPE_UNSPECIFIED"
-          }
-          headers = {
-              "Authorization": "Bearer <API_KEY>",
-              "content-type": "application/json"
-          }
-
-          response = requests.request("PUT", url, json=payload, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request PUT \
-            --url https://api.coralogix.com/mgmt/openapi/v1/views/52 \
-            --header 'Authorization: Bearer <API_KEY>' \
-            --header 'content-type: application/json' \
-            --data '{"filters":{"filters":[{"name":"applicationName","selectedValues":{"demo":true,"cs-rest-test1":true}}]},"folderId":"3dc02998-0b50-4ea8-b68a-4779d716fa1f","isCompactMode":true,"name":"Logs view","searchQuery":{"query":"string"},"timeSelection":{"quickSelection":{"caption":"Last Hour","seconds":3600}},"viewType":"VIEW_TYPE_UNSPECIFIED"}'
 components:
   schemas:
     ColorsByAggregation:
@@ -432,6 +230,7 @@ components:
         - isCompactMode: true
           searchQuery:
             query: query
+            syntaxType: SYNTAX_TYPE_UNSPECIFIED
           name: Logs view
           viewType: VIEW_TYPE_UNSPECIFIED
           filters:
@@ -453,6 +252,7 @@ components:
         - isCompactMode: true
           searchQuery:
             query: query
+            syntaxType: SYNTAX_TYPE_UNSPECIFIED
           name: Logs view
           viewType: VIEW_TYPE_UNSPECIFIED
           filters:
@@ -510,12 +310,15 @@ components:
     SearchQuery:
       example:
         query: query
+        syntaxType: SYNTAX_TYPE_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
         query:
           minLength: 1
           type: string
+        syntaxType:
+          $ref: "#/components/schemas/SyntaxType"
       required:
       - query
       title: SearchQuery
@@ -537,6 +340,12 @@ components:
             $ref: "#/components/schemas/views.v1.Filter"
           type: array
       type: object
+    SyntaxType:
+      enum:
+      - SYNTAX_TYPE_UNSPECIFIED
+      - SYNTAX_TYPE_LUCENE
+      - SYNTAX_TYPE_DATAPRIME
+      type: string
     TimeSelection:
       oneOf:
       - $ref: "#/components/schemas/TimeSelectionQuickSelection"
@@ -563,6 +372,7 @@ components:
         isCompactMode: true
         searchQuery:
           query: query
+          syntaxType: SYNTAX_TYPE_UNSPECIFIED
         name: Logs view
         viewType: VIEW_TYPE_UNSPECIFIED
         filters:
@@ -681,6 +491,7 @@ components:
       example:
         searchQuery:
           query: query
+          syntaxType: SYNTAX_TYPE_UNSPECIFIED
         name: Logs view
         viewType: VIEW_TYPE_UNSPECIFIED
         filters:

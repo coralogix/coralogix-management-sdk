@@ -78,12 +78,12 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*EnrichmentsServiceAPI* | [**EnrichmentServiceAddEnrichments**](docs/EnrichmentsServiceAPI.md#enrichmentserviceaddenrichments) | **Post** /enrichments | Add Enrichments
-*EnrichmentsServiceAPI* | [**EnrichmentServiceAtomicOverwriteEnrichments**](docs/EnrichmentsServiceAPI.md#enrichmentserviceatomicoverwriteenrichments) | **Patch** /enrichments:atomicOverwrite | Atomic Overwrite Enrichments
-*EnrichmentsServiceAPI* | [**EnrichmentServiceGetCompanyEnrichmentSettings**](docs/EnrichmentsServiceAPI.md#enrichmentservicegetcompanyenrichmentsettings) | **Get** /enrichments/settings | Get Company Enrichment Settings
-*EnrichmentsServiceAPI* | [**EnrichmentServiceGetEnrichmentLimit**](docs/EnrichmentsServiceAPI.md#enrichmentservicegetenrichmentlimit) | **Get** /enrichments/limit | Get Enrichment Limit
-*EnrichmentsServiceAPI* | [**EnrichmentServiceGetEnrichments**](docs/EnrichmentsServiceAPI.md#enrichmentservicegetenrichments) | **Get** /enrichments | Get Enrichments
-*EnrichmentsServiceAPI* | [**EnrichmentServiceRemoveEnrichments**](docs/EnrichmentsServiceAPI.md#enrichmentserviceremoveenrichments) | **Delete** /enrichments | Delete Enrichments
+*EnrichmentsServiceAPI* | [**EnrichmentServiceAddEnrichments**](docs/EnrichmentsServiceAPI.md#enrichmentserviceaddenrichments) | **Post** /enrichment-rules/enrichment-rules/v1 | Add Enrichments
+*EnrichmentsServiceAPI* | [**EnrichmentServiceAtomicOverwriteEnrichments**](docs/EnrichmentsServiceAPI.md#enrichmentserviceatomicoverwriteenrichments) | **Put** /enrichment-rules/enrichment-rules/v1 | Atomic Overwrite Enrichments
+*EnrichmentsServiceAPI* | [**EnrichmentServiceGetCompanyEnrichmentSettings**](docs/EnrichmentsServiceAPI.md#enrichmentservicegetcompanyenrichmentsettings) | **Get** /enrichment-rules/enrichment-rules/v1/settings | Get Company Enrichment Settings
+*EnrichmentsServiceAPI* | [**EnrichmentServiceGetEnrichmentLimit**](docs/EnrichmentsServiceAPI.md#enrichmentservicegetenrichmentlimit) | **Get** /enrichment-rules/enrichment-rules/v1/limit | Get Enrichment Limit
+*EnrichmentsServiceAPI* | [**EnrichmentServiceGetEnrichments**](docs/EnrichmentsServiceAPI.md#enrichmentservicegetenrichments) | **Get** /enrichment-rules/enrichment-rules/v1 | Get Enrichments
+*EnrichmentsServiceAPI* | [**EnrichmentServiceRemoveEnrichments**](docs/EnrichmentsServiceAPI.md#enrichmentserviceremoveenrichments) | **Delete** /enrichment-rules/enrichment-rules/v1 | Delete Enrichments
 
 
 ## Documentation For Models

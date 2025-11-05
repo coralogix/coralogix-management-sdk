@@ -25,6 +25,7 @@ const (
 	V2RANGE_RANGE_LAST_30_DAYS V2Range = "RANGE_LAST_30_DAYS"
 	V2RANGE_RANGE_LAST_90_DAYS V2Range = "RANGE_LAST_90_DAYS"
 	V2RANGE_RANGE_LAST_WEEK V2Range = "RANGE_LAST_WEEK"
+	V2RANGE_RANGE_LAST_YEAR V2Range = "RANGE_LAST_YEAR"
 )
 
 // All allowed values of V2Range enum
@@ -34,6 +35,7 @@ var AllowedV2RangeEnumValues = []V2Range{
 	"RANGE_LAST_30_DAYS",
 	"RANGE_LAST_90_DAYS",
 	"RANGE_LAST_WEEK",
+	"RANGE_LAST_YEAR",
 }
 
 func (v *V2Range) UnmarshalJSON(src []byte) error {

@@ -600,6 +600,8 @@ type ApiDataUsageServiceGetLogsCountRequest struct {
 	dateRange *DateRange
 	resolution *string
 	filters *ScopesFilter
+	subsystemAggregation *bool
+	applicationAggregation *bool
 }
 
 func (r ApiDataUsageServiceGetLogsCountRequest) DateRange(dateRange DateRange) ApiDataUsageServiceGetLogsCountRequest {
@@ -614,6 +616,16 @@ func (r ApiDataUsageServiceGetLogsCountRequest) Resolution(resolution string) Ap
 
 func (r ApiDataUsageServiceGetLogsCountRequest) Filters(filters ScopesFilter) ApiDataUsageServiceGetLogsCountRequest {
 	r.filters = &filters
+	return r
+}
+
+func (r ApiDataUsageServiceGetLogsCountRequest) SubsystemAggregation(subsystemAggregation bool) ApiDataUsageServiceGetLogsCountRequest {
+	r.subsystemAggregation = &subsystemAggregation
+	return r
+}
+
+func (r ApiDataUsageServiceGetLogsCountRequest) ApplicationAggregation(applicationAggregation bool) ApiDataUsageServiceGetLogsCountRequest {
+	r.applicationAggregation = &applicationAggregation
 	return r
 }
 
@@ -665,6 +677,12 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetLogsCountExecute(r ApiDa
 	}
 	if r.filters != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filters", r.filters, "form", "")
+	}
+	if r.subsystemAggregation != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "subsystem_aggregation", r.subsystemAggregation, "form", "")
+	}
+	if r.applicationAggregation != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "application_aggregation", r.applicationAggregation, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

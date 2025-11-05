@@ -13,9 +13,11 @@ model_action_definition_custom_action.go
 model_action_definition_go_to_dashboard_action.go
 model_all_option.go
 model_annotation.go
+model_annotation_color.go
 model_annotation_orientation.go
 model_annotation_source.go
 model_annotation_source_dataprime.go
+model_annotation_source_event_recurrence.go
 model_annotation_source_logs.go
 model_annotation_source_manual.go
 model_annotation_source_metrics.go
@@ -97,7 +99,12 @@ model_equals_selection.go
 model_equals_selection_all.go
 model_equals_selection_list.go
 model_equals_selection_list_selection.go
+model_event_recurrence_source.go
+model_event_recurrence_source_strategy.go
+model_event_recurrence_source_strategy_duration.go
+model_event_recurrence_source_strategy_instant.go
 model_events_v3_filter_matcher.go
+model_field_data_type.go
 model_field_group.go
 model_filter_equals.go
 model_filter_logs_filter.go
@@ -132,6 +139,9 @@ model_get_dashboard_by_slug_response.go
 model_get_dashboard_catalog_response.go
 model_get_dashboard_response.go
 model_go_to_dashboard_template_action.go
+model_heatmap.go
+model_heatmap_color_preset.go
+model_heatmap_tooltip.go
 model_hexagon.go
 model_hexagon_bins.go
 model_hexagon_dataprime_query.go
@@ -258,6 +268,11 @@ model_pie_chart_stack_definition.go
 model_pin_dashboard_request_data_structure.go
 model_prom_ql_query.go
 model_prom_ql_query_type.go
+model_property.go
+model_property_definition.go
+model_property_definition_alignment.go
+model_property_definition_thresholds.go
+model_property_thresholds.go
 model_query_definition.go
 model_query_logs_query.go
 model_query_logs_query_type.go
@@ -309,6 +324,7 @@ model_query_spans_query_type.go
 model_query_spans_query_type_field_name.go
 model_query_spans_query_type_field_value.go
 model_query_text.go
+model_recurrence.go
 model_regex_value.go
 model_repetitive_var.go
 model_replace_dashboard_request_data_structure.go
@@ -316,6 +332,10 @@ model_replace_default_dashboard_request_data_structure.go
 model_row.go
 model_row_appearance.go
 model_row_style.go
+model_rule_scope.go
+model_rule_scope_field.go
+model_rule_scope_field_type.go
+model_rule_scope_regex.go
 model_scale_type.go
 model_section.go
 model_section_color.go
@@ -352,6 +372,8 @@ model_string_value_label.go
 model_sum.go
 model_table.go
 model_table_column.go
+model_table_rule.go
+model_text_alignment.go
 model_textbox_default_interval_value.go
 model_textbox_default_lucene_value.go
 model_textbox_default_numeric_value.go
@@ -414,6 +436,7 @@ model_vertical_bars.go
 model_visualization.go
 model_visualization_bar_value_display.go
 model_visualization_gauge.go
+model_visualization_heatmap.go
 model_visualization_hexagon_bins.go
 model_visualization_horizontal_bars.go
 model_visualization_pie_chart.go
@@ -424,6 +447,8 @@ model_visualization_table.go
 model_visualization_time_series_bars.go
 model_visualization_time_series_lines.go
 model_visualization_vertical_bars.go
+model_weekday.go
+model_weekly_recurrence.go
 model_widget.go
 model_widget_appearance.go
 model_widget_definition.go

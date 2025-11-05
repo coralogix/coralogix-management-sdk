@@ -21,22 +21,7 @@
             "in": "query",
             "name": "type",
             "schema": {
-              "type": "string",
-              "enum": [
-                "UNKNOWN",
-                "GENERIC",
-                "SLACK",
-                "PAGERDUTY",
-                "SEND_LOG",
-                "EMAIL_GROUP",
-                "MICROSOFT_TEAMS",
-                "JIRA",
-                "OPSGENIE",
-                "DEMISTO",
-                "AWS_EVENT_BRIDGE",
-                "IBM_EVENT_NOTIFICATIONS",
-                "MS_TEAMS_WORKFLOW"
-              ]
+              "$ref": "#/components/schemas/WebhookType"
             },
             "style": "form"
           }
@@ -73,20 +58,6 @@
         },
         "x-coralogixPermissions": [
           "outbound-webhooks:ReadConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1?type=SOME_STRING_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1\"\n\nquerystring = {\"type\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1?type=SOME_STRING_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       },
       "put": {
@@ -155,20 +126,6 @@
         },
         "x-coralogixPermissions": [
           "outbound-webhooks:UpdateConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"data\":{\"demisto\":{\"payload\":{\"key\":\"value\"},\"uuid\":\"d838cd7b-087b-40c6-bc33-80997020f5d0\"},\"name\":\"my_webhook\",\"type\":\"UNKNOWN\",\"url\":\"slack.webhook.com\"},\"id\":\"example_id\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1\"\n\npayload = {\n    \"data\": {\n        \"demisto\": {\n            \"payload\": {\"key\": \"value\"},\n            \"uuid\": \"d838cd7b-087b-40c6-bc33-80997020f5d0\"\n        },\n        \"name\": \"my_webhook\",\n        \"type\": \"UNKNOWN\",\n        \"url\": \"slack.webhook.com\"\n    },\n    \"id\": \"example_id\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1 \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"data\":{\"demisto\":{\"payload\":{\"key\":\"value\"},\"uuid\":\"d838cd7b-087b-40c6-bc33-80997020f5d0\"},\"name\":\"my_webhook\",\"type\":\"UNKNOWN\",\"url\":\"slack.webhook.com\"},\"id\":\"example_id\"}'"
-          }
         ]
       },
       "post": {
@@ -232,20 +189,6 @@
         },
         "x-coralogixPermissions": [
           "outbound-webhooks:UpdateConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"data\":{\"demisto\":{\"payload\":{\"key\":\"value\"},\"uuid\":\"d838cd7b-087b-40c6-bc33-80997020f5d0\"},\"name\":\"my_webhook\",\"type\":\"UNKNOWN\",\"url\":\"slack.webhook.com\"}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1\"\n\npayload = {\"data\": {\n        \"demisto\": {\n            \"payload\": {\"key\": \"value\"},\n            \"uuid\": \"d838cd7b-087b-40c6-bc33-80997020f5d0\"\n        },\n        \"name\": \"my_webhook\",\n        \"type\": \"UNKNOWN\",\n        \"url\": \"slack.webhook.com\"\n    }}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1 \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"data\":{\"demisto\":{\"payload\":{\"key\":\"value\"},\"uuid\":\"d838cd7b-087b-40c6-bc33-80997020f5d0\"},\"name\":\"my_webhook\",\"type\":\"UNKNOWN\",\"url\":\"slack.webhook.com\"}}'"
-          }
         ]
       }
     },
@@ -292,20 +235,6 @@
         },
         "x-coralogixPermissions": [
           "outbound-webhooks:ReadConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/all';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/all\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/all \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       }
     },
@@ -352,20 +281,6 @@
         },
         "x-coralogixPermissions": [
           "outbound-webhooks:ReadSummary"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/summary';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/summary\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/summary \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       }
     },
@@ -431,20 +346,6 @@
         },
         "x-coralogixPermissions": [
           "outbound-webhooks:ReadConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/test';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"data\":{\"demisto\":{\"payload\":{\"key\":\"value\"},\"uuid\":\"d838cd7b-087b-40c6-bc33-80997020f5d0\"},\"name\":\"my_webhook\",\"type\":\"UNKNOWN\",\"url\":\"slack.webhook.com\"}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/test\"\n\npayload = {\"data\": {\n        \"demisto\": {\n            \"payload\": {\"key\": \"value\"},\n            \"uuid\": \"d838cd7b-087b-40c6-bc33-80997020f5d0\"\n        },\n        \"name\": \"my_webhook\",\n        \"type\": \"UNKNOWN\",\n        \"url\": \"slack.webhook.com\"\n    }}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/test \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"data\":{\"demisto\":{\"payload\":{\"key\":\"value\"},\"uuid\":\"d838cd7b-087b-40c6-bc33-80997020f5d0\"},\"name\":\"my_webhook\",\"type\":\"UNKNOWN\",\"url\":\"slack.webhook.com\"}}'"
-          }
         ]
       }
     },
@@ -511,20 +412,6 @@
         },
         "x-coralogixPermissions": [
           "outbound-webhooks:ReadConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/test-existing';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"id\":\"example_id\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/test-existing\"\n\npayload = {\"id\": \"example_id\"}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/test-existing \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"id\":\"example_id\"}'"
-          }
         ]
       }
     },
@@ -571,20 +458,6 @@
         },
         "x-coralogixPermissions": [
           "outbound-webhooks:ReadConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/types';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/types\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/types \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       }
     },
@@ -605,22 +478,7 @@
             "name": "type",
             "required": true,
             "schema": {
-              "type": "string",
-              "enum": [
-                "UNKNOWN",
-                "GENERIC",
-                "SLACK",
-                "PAGERDUTY",
-                "SEND_LOG",
-                "EMAIL_GROUP",
-                "MICROSOFT_TEAMS",
-                "JIRA",
-                "OPSGENIE",
-                "DEMISTO",
-                "AWS_EVENT_BRIDGE",
-                "IBM_EVENT_NOTIFICATIONS",
-                "MS_TEAMS_WORKFLOW"
-              ]
+              "$ref": "#/components/schemas/WebhookType"
             },
             "style": "simple"
           }
@@ -657,20 +515,6 @@
         },
         "x-coralogixPermissions": [
           "outbound-webhooks:ReadConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/types/%7Btype%7D';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/types/%7Btype%7D\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/types/%7Btype%7D \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       }
     },
@@ -728,20 +572,6 @@
         },
         "x-coralogixPermissions": [
           "outbound-webhooks:ReadConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/%7Bid%7D';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/%7Bid%7D\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/%7Bid%7D \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       },
       "delete": {
@@ -798,20 +628,6 @@
         },
         "x-coralogixPermissions": [
           "outbound-webhooks:UpdateConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/example_id';\n\nlet options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/example_id\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/example_id \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       }
     }
@@ -1359,25 +1175,25 @@
       "OutgoingWebhook": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/OutgoingWebhookSendLog"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookJira"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookDemisto"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookEmailGroup"
+            "$ref": "#/components/schemas/OutgoingWebhookPagerDuty"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookMicrosoftTeams"
           },
           {
+            "$ref": "#/components/schemas/OutgoingWebhookJira"
+          },
+          {
             "$ref": "#/components/schemas/OutgoingWebhookOpsgenie"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookSendLog"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookEmailGroup"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookDemisto"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookAwsEventBridge"
@@ -1386,13 +1202,13 @@
             "$ref": "#/components/schemas/OutgoingWebhookIbmEventNotifications"
           },
           {
+            "$ref": "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
+          },
+          {
             "$ref": "#/components/schemas/OutgoingWebhookGenericWebhook"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookSlack"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookPagerDuty"
           }
         ]
       },
@@ -1703,25 +1519,25 @@
       "OutgoingWebhookInputData": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataDemisto"
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataSlack"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataGenericWebhook"
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataSlack"
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataGenericWebhook"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataSendLog"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
@@ -1733,10 +1549,10 @@
             "$ref": "#/components/schemas/OutgoingWebhookInputDataOpsgenie"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataDemisto"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataSendLog"
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
           }
         ]
       },
@@ -2553,10 +2369,10 @@
       "TestOutgoingWebhookResponse": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TestOutgoingWebhookResponseFailure"
+            "$ref": "#/components/schemas/TestOutgoingWebhookResponseSuccess"
           },
           {
-            "$ref": "#/components/schemas/TestOutgoingWebhookResponseSuccess"
+            "$ref": "#/components/schemas/TestOutgoingWebhookResponseFailure"
           }
         ]
       },

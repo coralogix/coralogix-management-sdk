@@ -353,16 +353,16 @@ func (a *PresetsServiceAPIService) PresetsServiceDeleteCustomPresetExecute(r Api
 type ApiPresetsServiceGetDefaultPresetSummaryRequest struct {
 	ctx context.Context
 	ApiService *PresetsServiceAPIService
-	connectorType *string
-	entityType *string
+	connectorType *ConnectorType
+	entityType *NotificationCenterEntityType
 }
 
-func (r ApiPresetsServiceGetDefaultPresetSummaryRequest) ConnectorType(connectorType string) ApiPresetsServiceGetDefaultPresetSummaryRequest {
+func (r ApiPresetsServiceGetDefaultPresetSummaryRequest) ConnectorType(connectorType ConnectorType) ApiPresetsServiceGetDefaultPresetSummaryRequest {
 	r.connectorType = &connectorType
 	return r
 }
 
-func (r ApiPresetsServiceGetDefaultPresetSummaryRequest) EntityType(entityType string) ApiPresetsServiceGetDefaultPresetSummaryRequest {
+func (r ApiPresetsServiceGetDefaultPresetSummaryRequest) EntityType(entityType NotificationCenterEntityType) ApiPresetsServiceGetDefaultPresetSummaryRequest {
 	r.entityType = &entityType
 	return r
 }
@@ -573,16 +573,16 @@ func (a *PresetsServiceAPIService) PresetsServiceGetPresetExecute(r ApiPresetsSe
 type ApiPresetsServiceGetSystemDefaultPresetSummaryRequest struct {
 	ctx context.Context
 	ApiService *PresetsServiceAPIService
-	connectorType *string
-	entityType *string
+	connectorType *ConnectorType
+	entityType *NotificationCenterEntityType
 }
 
-func (r ApiPresetsServiceGetSystemDefaultPresetSummaryRequest) ConnectorType(connectorType string) ApiPresetsServiceGetSystemDefaultPresetSummaryRequest {
+func (r ApiPresetsServiceGetSystemDefaultPresetSummaryRequest) ConnectorType(connectorType ConnectorType) ApiPresetsServiceGetSystemDefaultPresetSummaryRequest {
 	r.connectorType = &connectorType
 	return r
 }
 
-func (r ApiPresetsServiceGetSystemDefaultPresetSummaryRequest) EntityType(entityType string) ApiPresetsServiceGetSystemDefaultPresetSummaryRequest {
+func (r ApiPresetsServiceGetSystemDefaultPresetSummaryRequest) EntityType(entityType NotificationCenterEntityType) ApiPresetsServiceGetSystemDefaultPresetSummaryRequest {
 	r.entityType = &entityType
 	return r
 }
@@ -690,16 +690,16 @@ func (a *PresetsServiceAPIService) PresetsServiceGetSystemDefaultPresetSummaryEx
 type ApiPresetsServiceListPresetSummariesRequest struct {
 	ctx context.Context
 	ApiService *PresetsServiceAPIService
-	connectorType *string
-	entityType *string
+	connectorType *ConnectorType
+	entityType *NotificationCenterEntityType
 }
 
-func (r ApiPresetsServiceListPresetSummariesRequest) ConnectorType(connectorType string) ApiPresetsServiceListPresetSummariesRequest {
+func (r ApiPresetsServiceListPresetSummariesRequest) ConnectorType(connectorType ConnectorType) ApiPresetsServiceListPresetSummariesRequest {
 	r.connectorType = &connectorType
 	return r
 }
 
-func (r ApiPresetsServiceListPresetSummariesRequest) EntityType(entityType string) ApiPresetsServiceListPresetSummariesRequest {
+func (r ApiPresetsServiceListPresetSummariesRequest) EntityType(entityType NotificationCenterEntityType) ApiPresetsServiceListPresetSummariesRequest {
 	r.entityType = &entityType
 	return r
 }

@@ -12,8 +12,6 @@ package enrichments_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the RemoveEnrichmentsResponse type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &RemoveEnrichmentsResponse{}
 
 // RemoveEnrichmentsResponse Response data structure for enrichments deletion
 type RemoveEnrichmentsResponse struct {
-	RemainingEnrichments []Enrichment `json:"remainingEnrichments"`
+	RemainingEnrichments []Enrichment `json:"remainingEnrichments,omitempty"`
 }
-
-type _RemoveEnrichmentsResponse RemoveEnrichmentsResponse
 
 // NewRemoveEnrichmentsResponse instantiates a new RemoveEnrichmentsResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRemoveEnrichmentsResponse(remainingEnrichments []Enrichment) *RemoveEnrichmentsResponse {
+func NewRemoveEnrichmentsResponse() *RemoveEnrichmentsResponse {
 	this := RemoveEnrichmentsResponse{}
-	this.RemainingEnrichments = remainingEnrichments
 	return &this
 }
 
@@ -44,26 +39,34 @@ func NewRemoveEnrichmentsResponseWithDefaults() *RemoveEnrichmentsResponse {
 	return &this
 }
 
-// GetRemainingEnrichments returns the RemainingEnrichments field value
+// GetRemainingEnrichments returns the RemainingEnrichments field value if set, zero value otherwise.
 func (o *RemoveEnrichmentsResponse) GetRemainingEnrichments() []Enrichment {
-	if o == nil {
+	if o == nil || IsNil(o.RemainingEnrichments) {
 		var ret []Enrichment
 		return ret
 	}
-
 	return o.RemainingEnrichments
 }
 
-// GetRemainingEnrichmentsOk returns a tuple with the RemainingEnrichments field value
+// GetRemainingEnrichmentsOk returns a tuple with the RemainingEnrichments field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RemoveEnrichmentsResponse) GetRemainingEnrichmentsOk() ([]Enrichment, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.RemainingEnrichments) {
 		return nil, false
 	}
 	return o.RemainingEnrichments, true
 }
 
-// SetRemainingEnrichments sets field value
+// HasRemainingEnrichments returns a boolean if a field has been set.
+func (o *RemoveEnrichmentsResponse) HasRemainingEnrichments() bool {
+	if o != nil && !IsNil(o.RemainingEnrichments) {
+		return true
+	}
+
+	return false
+}
+
+// SetRemainingEnrichments gets a reference to the given []Enrichment and assigns it to the RemainingEnrichments field.
 func (o *RemoveEnrichmentsResponse) SetRemainingEnrichments(v []Enrichment) {
 	o.RemainingEnrichments = v
 }
@@ -78,45 +81,10 @@ func (o RemoveEnrichmentsResponse) MarshalJSON() ([]byte, error) {
 
 func (o RemoveEnrichmentsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["remainingEnrichments"] = o.RemainingEnrichments
+	if !IsNil(o.RemainingEnrichments) {
+		toSerialize["remainingEnrichments"] = o.RemainingEnrichments
+	}
 	return toSerialize, nil
-}
-
-func (o *RemoveEnrichmentsResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"remainingEnrichments",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varRemoveEnrichmentsResponse := _RemoveEnrichmentsResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRemoveEnrichmentsResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = RemoveEnrichmentsResponse(varRemoveEnrichmentsResponse)
-
-	return err
 }
 
 type NullableRemoveEnrichmentsResponse struct {

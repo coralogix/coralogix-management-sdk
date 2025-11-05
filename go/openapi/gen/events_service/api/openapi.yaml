@@ -57,37 +57,6 @@ paths:
       summary: List Events
       tags:
       - Events Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/v3/events?filter=SOME_OBJECT_VALUE&order_bys=SOME_ARRAY_VALUE&pagination=SOME_OBJECT_VALUE';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/v3/events"
-
-          querystring = {"filter":"SOME_OBJECT_VALUE","order_bys":"SOME_ARRAY_VALUE","pagination":"SOME_OBJECT_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/v3/events?filter=SOME_OBJECT_VALUE&order_bys=SOME_ARRAY_VALUE&pagination=SOME_OBJECT_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
   /v3/events/events:batchGet:
     get:
       description: No description available
@@ -149,37 +118,6 @@ paths:
       summary: Batch Get Event
       tags:
       - Events Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/v3/events/events:batchGet?ids=SOME_ARRAY_VALUE&order_bys=SOME_ARRAY_VALUE&pagination=SOME_OBJECT_VALUE&filter=SOME_OBJECT_VALUE';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/v3/events/events:batchGet"
-
-          querystring = {"ids":"SOME_ARRAY_VALUE","order_bys":"SOME_ARRAY_VALUE","pagination":"SOME_OBJECT_VALUE","filter":"SOME_OBJECT_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/v3/events/events:batchGet?ids=SOME_ARRAY_VALUE&order_bys=SOME_ARRAY_VALUE&pagination=SOME_OBJECT_VALUE&filter=SOME_OBJECT_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
   /v3/events/{id}:
     get:
       description: No description available
@@ -233,37 +171,6 @@ paths:
       summary: Get Event
       tags:
       - Events Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/v3/events/test?order_bys=SOME_ARRAY_VALUE&pagination=SOME_OBJECT_VALUE';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/v3/events/test"
-
-          querystring = {"order_bys":"SOME_ARRAY_VALUE","pagination":"SOME_OBJECT_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/v3/events/test?order_bys=SOME_ARRAY_VALUE&pagination=SOME_OBJECT_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
   /v3/events:count:
     get:
       description: No description available
@@ -300,37 +207,6 @@ paths:
       summary: List Events Count
       tags:
       - Events Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/v3/events:count?filter=SOME_OBJECT_VALUE';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/v3/events:count"
-
-          querystring = {"filter":"SOME_OBJECT_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/v3/events:count?filter=SOME_OBJECT_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
   /v3/events:statistics:
     get:
       description: No description available
@@ -367,37 +243,6 @@ paths:
       summary: Get Events Statistics
       tags:
       - Events Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/v3/events:statistics?filter=SOME_OBJECT_VALUE';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/v3/events:statistics"
-
-          querystring = {"filter":"SOME_OBJECT_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/v3/events:statistics?filter=SOME_OBJECT_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
 components:
   schemas:
     BatchGetEventResponse:
@@ -410,19 +255,32 @@ components:
           nextPageToken: test
         events:
           key:
-            singleEvent:
-              cxEventType: test_type
-              companyId: 1
-              cxEventKey: test
-              cxEventMetadata:
-                test: test
-              cxEventPayload:
-                test: test
-              cxEventPayloadType: test_payload_type
-              cxEventDedupKey: test_dedup_key
-              cxEventLabels:
-                test: test
-              cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+            multipleEvents:
+              events:
+              - cxEventType: test_type
+                companyId: 1
+                cxEventKey: test
+                cxEventMetadata:
+                  test: test
+                cxEventPayload:
+                  test: test
+                cxEventPayloadType: test_payload_type
+                cxEventDedupKey: test_dedup_key
+                cxEventLabels:
+                  test: test
+                cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+              - cxEventType: test_type
+                companyId: 1
+                cxEventKey: test
+                cxEventMetadata:
+                  test: test
+                cxEventPayload:
+                  test: test
+                cxEventPayloadType: test_payload_type
+                cxEventDedupKey: test_dedup_key
+                cxEventLabels:
+                  test: test
+                cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         events:
           additionalProperties:
@@ -519,6 +377,32 @@ components:
       type: object
     CxEventArray:
       description: This data structure represents an array of events
+      example:
+        events:
+        - cxEventType: test_type
+          companyId: 1
+          cxEventKey: test
+          cxEventMetadata:
+            test: test
+          cxEventPayload:
+            test: test
+          cxEventPayloadType: test_payload_type
+          cxEventDedupKey: test_dedup_key
+          cxEventLabels:
+            test: test
+          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+        - cxEventType: test_type
+          companyId: 1
+          cxEventKey: test
+          cxEventMetadata:
+            test: test
+          cxEventPayload:
+            test: test
+          cxEventPayloadType: test_payload_type
+          cxEventDedupKey: test_dedup_key
+          cxEventLabels:
+            test: test
+          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about events
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
@@ -533,11 +417,38 @@ components:
       type: object
     CxEventSingleOrMultiple:
       oneOf:
-      - $ref: "#/components/schemas/CxEventSingleOrMultipleSingleEvent"
       - $ref: "#/components/schemas/CxEventSingleOrMultipleMultipleEvents"
+      - $ref: "#/components/schemas/CxEventSingleOrMultipleSingleEvent"
     CxEventSingleOrMultipleMultipleEvents:
       additionalProperties: false
       description: This data structure represents a single or multiple events
+      example:
+        multipleEvents:
+          events:
+          - cxEventType: test_type
+            companyId: 1
+            cxEventKey: test
+            cxEventMetadata:
+              test: test
+            cxEventPayload:
+              test: test
+            cxEventPayloadType: test_payload_type
+            cxEventDedupKey: test_dedup_key
+            cxEventLabels:
+              test: test
+            cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+          - cxEventType: test_type
+            companyId: 1
+            cxEventKey: test
+            cxEventMetadata:
+              test: test
+            cxEventPayload:
+              test: test
+            cxEventPayloadType: test_payload_type
+            cxEventDedupKey: test_dedup_key
+            cxEventLabels:
+              test: test
+            cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
       properties:
@@ -550,20 +461,6 @@ components:
     CxEventSingleOrMultipleSingleEvent:
       additionalProperties: false
       description: This data structure represents a single or multiple events
-      example:
-        singleEvent:
-          cxEventType: test_type
-          companyId: 1
-          cxEventKey: test
-          cxEventMetadata:
-            test: test
-          cxEventPayload:
-            test: test
-          cxEventPayloadType: test_payload_type
-          cxEventDedupKey: test_dedup_key
-          cxEventLabels:
-            test: test
-          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
       properties:
@@ -648,19 +545,32 @@ components:
           totalSize: 10
           nextPageToken: test
         event:
-          singleEvent:
-            cxEventType: test_type
-            companyId: 1
-            cxEventKey: test
-            cxEventMetadata:
-              test: test
-            cxEventPayload:
-              test: test
-            cxEventPayloadType: test_payload_type
-            cxEventDedupKey: test_dedup_key
-            cxEventLabels:
-              test: test
-            cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+          multipleEvents:
+            events:
+            - cxEventType: test_type
+              companyId: 1
+              cxEventKey: test
+              cxEventMetadata:
+                test: test
+              cxEventPayload:
+                test: test
+              cxEventPayloadType: test_payload_type
+              cxEventDedupKey: test_dedup_key
+              cxEventLabels:
+                test: test
+              cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+            - cxEventType: test_type
+              companyId: 1
+              cxEventKey: test
+              cxEventMetadata:
+                test: test
+              cxEventPayload:
+                test: test
+              cxEventPayloadType: test_payload_type
+              cxEventDedupKey: test_dedup_key
+              cxEventLabels:
+                test: test
+              cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         event:
           $ref: "#/components/schemas/CxEventSingleOrMultiple"

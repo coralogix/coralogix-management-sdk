@@ -277,12 +277,14 @@ func TestTracingImmediateAlerts(t *testing.T) {
 	client := cxsdk.NewAlertsClient(cpc)
 	ctx := context.Background()
 
-	createReq := alerts.AlertDefsServiceCreateAlertDefRequest{
-		AlertDefPropertiesTracingImmediate: CreateTracingImmediateAlert(),
+	createReq := alerts.CreateAlertDefinitionRequest{
+		AlertDefProperties: &alerts.AlertDefProperties{
+			AlertDefPropertiesTracingImmediate: CreateTracingImmediateAlert(),
+		},
 	}
 	created, httpResp, err := client.
 		AlertDefsServiceCreateAlertDef(ctx).
-		AlertDefsServiceCreateAlertDefRequest(createReq).
+		CreateAlertDefinitionRequest(createReq).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 	assert.NotEmpty(t, created.AlertDef.Id)
@@ -336,12 +338,14 @@ func TestLogsRatioAlerts(t *testing.T) {
 	client := cxsdk.NewAlertsClient(cpc)
 	ctx := context.Background()
 
-	createReq := alerts.AlertDefsServiceCreateAlertDefRequest{
-		AlertDefPropertiesLogsRatioThreshold: CreateLogsRatioAlert(),
+	createReq := alerts.CreateAlertDefinitionRequest{
+		AlertDefProperties: &alerts.AlertDefProperties{
+			AlertDefPropertiesLogsRatioThreshold: CreateLogsRatioAlert(),
+		},
 	}
 	created, httpResp, err := client.
 		AlertDefsServiceCreateAlertDef(ctx).
-		AlertDefsServiceCreateAlertDefRequest(createReq).
+		CreateAlertDefinitionRequest(createReq).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 	assert.NotEmpty(t, created.AlertDef.Id)
@@ -395,12 +399,14 @@ func TestTracingThresholdAlerts(t *testing.T) {
 	client := cxsdk.NewAlertsClient(cpc)
 	ctx := context.Background()
 
-	createReq := alerts.AlertDefsServiceCreateAlertDefRequest{
-		AlertDefPropertiesTracingThreshold: CreateTracingThresholdAlert(),
+	createReq := alerts.CreateAlertDefinitionRequest{
+		AlertDefProperties: &alerts.AlertDefProperties{
+			AlertDefPropertiesTracingThreshold: CreateTracingThresholdAlert(),
+		},
 	}
 	created, httpResp, err := client.
 		AlertDefsServiceCreateAlertDef(ctx).
-		AlertDefsServiceCreateAlertDefRequest(createReq).
+		CreateAlertDefinitionRequest(createReq).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 	assert.NotEmpty(t, created.AlertDef.Id)
@@ -455,23 +461,27 @@ func TestFlowAlerts(t *testing.T) {
 	ctx := context.Background()
 
 	// First create a tracing threshold alert to be used in the flow
-	tracingAlertReq := alerts.AlertDefsServiceCreateAlertDefRequest{
-		AlertDefPropertiesTracingThreshold: CreateTracingThresholdAlert(),
+	tracingAlertReq := alerts.CreateAlertDefinitionRequest{
+		AlertDefProperties: &alerts.AlertDefProperties{
+			AlertDefPropertiesTracingThreshold: CreateTracingThresholdAlert(),
+		},
 	}
 	tracingAlert, httpResp, err := client.
 		AlertDefsServiceCreateAlertDef(ctx).
-		AlertDefsServiceCreateAlertDefRequest(tracingAlertReq).
+		CreateAlertDefinitionRequest(tracingAlertReq).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 	assert.NotEmpty(t, tracingAlert.AlertDef.Id)
 
 	// Now create the flow alert using the created tracing alert
-	flowAlertReq := alerts.AlertDefsServiceCreateAlertDefRequest{
-		AlertDefPropertiesFlow: CreateFlowAlert(*tracingAlert.AlertDef.Id),
+	flowAlertReq := alerts.CreateAlertDefinitionRequest{
+		AlertDefProperties: &alerts.AlertDefProperties{
+			AlertDefPropertiesFlow: CreateFlowAlert(*tracingAlert.AlertDef.Id),
+		},
 	}
 	flowAlert, httpResp, err := client.
 		AlertDefsServiceCreateAlertDef(ctx).
-		AlertDefsServiceCreateAlertDefRequest(flowAlertReq).
+		CreateAlertDefinitionRequest(flowAlertReq).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 	assert.NotEmpty(t, flowAlert.AlertDef.Id)
@@ -532,13 +542,15 @@ func TestAlertScheduler(t *testing.T) {
 	ctx := context.Background()
 
 	alertsClient := cxsdk.NewAlertsClient(cpc)
-	createAlertReq := alerts.AlertDefsServiceCreateAlertDefRequest{
-		AlertDefPropertiesTracingImmediate: CreateTracingImmediateAlert(),
+	createAlertReq := alerts.CreateAlertDefinitionRequest{
+		AlertDefProperties: &alerts.AlertDefProperties{
+			AlertDefPropertiesTracingImmediate: CreateTracingImmediateAlert(),
+		},
 	}
 
 	createdAlert, httpResp, err := alertsClient.
 		AlertDefsServiceCreateAlertDef(ctx).
-		AlertDefsServiceCreateAlertDefRequest(createAlertReq).
+		CreateAlertDefinitionRequest(createAlertReq).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 	assert.NotEmpty(t, createdAlert.AlertDef.Id)

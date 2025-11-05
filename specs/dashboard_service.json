@@ -48,20 +48,6 @@
         },
         "x-coralogixPermissions": [
           "team-dashboards:Read"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/dashboards/dashboards/v1/catalog';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/dashboards/dashboards/v1/catalog\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/dashboards/dashboards/v1/catalog \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       }
     },
@@ -119,20 +105,6 @@
         },
         "x-coralogixPermissions": [
           "team-dashboards:Read"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/dashboards/by-slug/%7Bslug%7D';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/dashboards/by-slug/%7Bslug%7D\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/dashboards/by-slug/%7Bslug%7D \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       }
     },
@@ -206,20 +178,6 @@
         },
         "x-coralogixPermissions": [
           "team-dashboards:Update"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"dashboard\":{\"actions\":[{\"dataSource\":\"ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED\",\"definition\":{\"customAction\":{\"url\":\"string\"}},\"id\":\"string\",\"name\":\"string\",\"shouldOpenInNewWindow\":true,\"widgetId\":\"string\"}],\"annotations\":[{\"description\":\"string\",\"enabled\":true,\"id\":\"string\",\"name\":\"string\",\"scope\":{\"allWidgets\":{}},\"source\":{\"metrics\":{\"labels\":[\"string\"],\"messageTemplate\":\"string\",\"orientation\":\"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\"promqlQuery\":{\"value\":\"string\"},\"strategy\":{\"startTimeMetric\":{}}}}}],\"description\":\"Sample description\",\"filters\":[{\"collapsed\":true,\"displayName\":\"string\",\"enabled\":true,\"source\":{\"logs\":{\"field\":\"string\",\"observationField\":{\"keypath\":[\"string\"],\"scope\":\"DATASET_SCOPE_UNSPECIFIED\"},\"operator\":{\"equals\":{\"selection\":{\"all\":{}}}}}}}],\"folderPath\":{\"segments\":[\"string\"]},\"id\":\"GZLHSeqelCbD3I7HbIDtL\",\"layout\":{\"sections\":[{\"id\":{\"value\":\"string\"},\"options\":{\"custom\":{\"collapsed\":false,\"color\":{\"predefined\":\"SECTION_PREDEFINED_COLOR_UNSPECIFIED\"},\"description\":{\"value\":\"Section with important statistics\"},\"name\":{\"value\":\"Main stats section\"},\"repetitiveVar\":{\"name\":\"pod_name\"}}},\"rows\":[{\"appearance\":{\"height\":{\"value\":16}},\"id\":{\"value\":\"string\"},\"widgets\":[{\"appearance\":{\"width\":0},\"createdAt\":\"2019-08-24T14:15:22Z\",\"definition\":{\"markdown\":{\"markdownText\":{\"value\":\"# This is a markdown example\"},\"tooltipText\":{\"value\":\"This is a description in a tooltip\"}}},\"description\":{\"value\":\"Average delay of application\"},\"id\":{\"value\":\"string\"},\"title\":{\"value\":\"Gauge\"},\"updatedAt\":\"2019-08-24T14:15:22Z\"}]}]}]},\"name\":\"Example Name\",\"relativeTimeFrame\":\"string\",\"slugName\":\"system-health-monitoring\",\"twoMinutes\":{},\"variables\":[{\"definition\":{\"constant\":{\"value\":\"string\"}},\"description\":\"string\",\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_UNSPECIFIED\",\"name\":\"string\"}],\"variablesV2\":[{\"description\":\"string\",\"displayFullRow\":true,\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED\",\"name\":\"string\",\"source\":{\"query\":{\"allOption\":{\"includeAll\":true,\"label\":\"string\"},\"logsQuery\":{\"type\":{\"fieldValue\":{\"observationField\":{\"keypath\":[\"string\"],\"scope\":\"DATASET_SCOPE_UNSPECIFIED\"}}}},\"refreshStrategy\":\"REFRESH_STRATEGY_UNSPECIFIED\",\"valueDisplayOptions\":{\"labelRegex\":\"string\",\"valueRegex\":\"string\"},\"valuesOrderDirection\":\"ORDER_DIRECTION_UNSPECIFIED\"}},\"value\":{\"multiString\":{\"all\":{}}}}]},\"isLocked\":true,\"requestId\":\"string\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards\"\n\npayload = {\n    \"dashboard\": {\n        \"actions\": [\n            {\n                \"dataSource\": \"ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED\",\n                \"definition\": {\"customAction\": {\"url\": \"string\"}},\n                \"id\": \"string\",\n                \"name\": \"string\",\n                \"shouldOpenInNewWindow\": True,\n                \"widgetId\": \"string\"\n            }\n        ],\n        \"annotations\": [\n            {\n                \"description\": \"string\",\n                \"enabled\": True,\n                \"id\": \"string\",\n                \"name\": \"string\",\n                \"scope\": {\"allWidgets\": {}},\n                \"source\": {\"metrics\": {\n                        \"labels\": [\"string\"],\n                        \"messageTemplate\": \"string\",\n                        \"orientation\": \"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\n                        \"promqlQuery\": {\"value\": \"string\"},\n                        \"strategy\": {\"startTimeMetric\": {}}\n                    }}\n            }\n        ],\n        \"description\": \"Sample description\",\n        \"filters\": [\n            {\n                \"collapsed\": True,\n                \"displayName\": \"string\",\n                \"enabled\": True,\n                \"source\": {\"logs\": {\n                        \"field\": \"string\",\n                        \"observationField\": {\n                            \"keypath\": [\"string\"],\n                            \"scope\": \"DATASET_SCOPE_UNSPECIFIED\"\n                        },\n                        \"operator\": {\"equals\": {\"selection\": {\"all\": {}}}}\n                    }}\n            }\n        ],\n        \"folderPath\": {\"segments\": [\"string\"]},\n        \"id\": \"GZLHSeqelCbD3I7HbIDtL\",\n        \"layout\": {\"sections\": [\n                {\n                    \"id\": {\"value\": \"string\"},\n                    \"options\": {\"custom\": {\n                            \"collapsed\": False,\n                            \"color\": {\"predefined\": \"SECTION_PREDEFINED_COLOR_UNSPECIFIED\"},\n                            \"description\": {\"value\": \"Section with important statistics\"},\n                            \"name\": {\"value\": \"Main stats section\"},\n                            \"repetitiveVar\": {\"name\": \"pod_name\"}\n                        }},\n                    \"rows\": [\n                        {\n                            \"appearance\": {\"height\": {\"value\": 16}},\n                            \"id\": {\"value\": \"string\"},\n                            \"widgets\": [\n                                {\n                                    \"appearance\": {\"width\": 0},\n                                    \"createdAt\": \"2019-08-24T14:15:22Z\",\n                                    \"definition\": {\"markdown\": {\n                                            \"markdownText\": {\"value\": \"# This is a markdown example\"},\n                                            \"tooltipText\": {\"value\": \"This is a description in a tooltip\"}\n                                        }},\n                                    \"description\": {\"value\": \"Average delay of application\"},\n                                    \"id\": {\"value\": \"string\"},\n                                    \"title\": {\"value\": \"Gauge\"},\n                                    \"updatedAt\": \"2019-08-24T14:15:22Z\"\n                                }\n                            ]\n                        }\n                    ]\n                }\n            ]},\n        \"name\": \"Example Name\",\n        \"relativeTimeFrame\": \"string\",\n        \"slugName\": \"system-health-monitoring\",\n        \"twoMinutes\": {},\n        \"variables\": [\n            {\n                \"definition\": {\"constant\": {\"value\": \"string\"}},\n                \"description\": \"string\",\n                \"displayName\": \"string\",\n                \"displayType\": \"VARIABLE_DISPLAY_TYPE_UNSPECIFIED\",\n                \"name\": \"string\"\n            }\n        ],\n        \"variablesV2\": [\n            {\n                \"description\": \"string\",\n                \"displayFullRow\": True,\n                \"displayName\": \"string\",\n                \"displayType\": \"VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED\",\n                \"name\": \"string\",\n                \"source\": {\"query\": {\n                        \"allOption\": {\n                            \"includeAll\": True,\n                            \"label\": \"string\"\n                        },\n                        \"logsQuery\": {\"type\": {\"fieldValue\": {\"observationField\": {\n                                        \"keypath\": [\"string\"],\n                                        \"scope\": \"DATASET_SCOPE_UNSPECIFIED\"\n                                    }}}},\n                        \"refreshStrategy\": \"REFRESH_STRATEGY_UNSPECIFIED\",\n                        \"valueDisplayOptions\": {\n                            \"labelRegex\": \"string\",\n                            \"valueRegex\": \"string\"\n                        },\n                        \"valuesOrderDirection\": \"ORDER_DIRECTION_UNSPECIFIED\"\n                    }},\n                \"value\": {\"multiString\": {\"all\": {}}}\n            }\n        ]\n    },\n    \"isLocked\": True,\n    \"requestId\": \"string\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"dashboard\":{\"actions\":[{\"dataSource\":\"ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED\",\"definition\":{\"customAction\":{\"url\":\"string\"}},\"id\":\"string\",\"name\":\"string\",\"shouldOpenInNewWindow\":true,\"widgetId\":\"string\"}],\"annotations\":[{\"description\":\"string\",\"enabled\":true,\"id\":\"string\",\"name\":\"string\",\"scope\":{\"allWidgets\":{}},\"source\":{\"metrics\":{\"labels\":[\"string\"],\"messageTemplate\":\"string\",\"orientation\":\"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\"promqlQuery\":{\"value\":\"string\"},\"strategy\":{\"startTimeMetric\":{}}}}}],\"description\":\"Sample description\",\"filters\":[{\"collapsed\":true,\"displayName\":\"string\",\"enabled\":true,\"source\":{\"logs\":{\"field\":\"string\",\"observationField\":{\"keypath\":[\"string\"],\"scope\":\"DATASET_SCOPE_UNSPECIFIED\"},\"operator\":{\"equals\":{\"selection\":{\"all\":{}}}}}}}],\"folderPath\":{\"segments\":[\"string\"]},\"id\":\"GZLHSeqelCbD3I7HbIDtL\",\"layout\":{\"sections\":[{\"id\":{\"value\":\"string\"},\"options\":{\"custom\":{\"collapsed\":false,\"color\":{\"predefined\":\"SECTION_PREDEFINED_COLOR_UNSPECIFIED\"},\"description\":{\"value\":\"Section with important statistics\"},\"name\":{\"value\":\"Main stats section\"},\"repetitiveVar\":{\"name\":\"pod_name\"}}},\"rows\":[{\"appearance\":{\"height\":{\"value\":16}},\"id\":{\"value\":\"string\"},\"widgets\":[{\"appearance\":{\"width\":0},\"createdAt\":\"2019-08-24T14:15:22Z\",\"definition\":{\"markdown\":{\"markdownText\":{\"value\":\"# This is a markdown example\"},\"tooltipText\":{\"value\":\"This is a description in a tooltip\"}}},\"description\":{\"value\":\"Average delay of application\"},\"id\":{\"value\":\"string\"},\"title\":{\"value\":\"Gauge\"},\"updatedAt\":\"2019-08-24T14:15:22Z\"}]}]}]},\"name\":\"Example Name\",\"relativeTimeFrame\":\"string\",\"slugName\":\"system-health-monitoring\",\"twoMinutes\":{},\"variables\":[{\"definition\":{\"constant\":{\"value\":\"string\"}},\"description\":\"string\",\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_UNSPECIFIED\",\"name\":\"string\"}],\"variablesV2\":[{\"description\":\"string\",\"displayFullRow\":true,\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED\",\"name\":\"string\",\"source\":{\"query\":{\"allOption\":{\"includeAll\":true,\"label\":\"string\"},\"logsQuery\":{\"type\":{\"fieldValue\":{\"observationField\":{\"keypath\":[\"string\"],\"scope\":\"DATASET_SCOPE_UNSPECIFIED\"}}}},\"refreshStrategy\":\"REFRESH_STRATEGY_UNSPECIFIED\",\"valueDisplayOptions\":{\"labelRegex\":\"string\",\"valueRegex\":\"string\"},\"valuesOrderDirection\":\"ORDER_DIRECTION_UNSPECIFIED\"}},\"value\":{\"multiString\":{\"all\":{}}}}]},\"isLocked\":true,\"requestId\":\"string\"}'"
-          }
         ]
       },
       "post": {
@@ -291,20 +249,6 @@
         },
         "x-coralogixPermissions": [
           "team-dashboards:Update"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"dashboard\":{\"actions\":[{\"dataSource\":\"ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED\",\"definition\":{\"customAction\":{\"url\":\"string\"}},\"id\":\"string\",\"name\":\"string\",\"shouldOpenInNewWindow\":true,\"widgetId\":\"string\"}],\"annotations\":[{\"description\":\"string\",\"enabled\":true,\"id\":\"string\",\"name\":\"string\",\"scope\":{\"allWidgets\":{}},\"source\":{\"metrics\":{\"labels\":[\"string\"],\"messageTemplate\":\"string\",\"orientation\":\"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\"promqlQuery\":{\"value\":\"string\"},\"strategy\":{\"startTimeMetric\":{}}}}}],\"description\":\"Sample description\",\"filters\":[{\"collapsed\":true,\"displayName\":\"string\",\"enabled\":true,\"source\":{\"logs\":{\"field\":\"string\",\"observationField\":{\"keypath\":[\"string\"],\"scope\":\"DATASET_SCOPE_UNSPECIFIED\"},\"operator\":{\"equals\":{\"selection\":{\"all\":{}}}}}}}],\"folderPath\":{\"segments\":[\"string\"]},\"id\":\"GZLHSeqelCbD3I7HbIDtL\",\"layout\":{\"sections\":[{\"id\":{\"value\":\"string\"},\"options\":{\"custom\":{\"collapsed\":false,\"color\":{\"predefined\":\"SECTION_PREDEFINED_COLOR_UNSPECIFIED\"},\"description\":{\"value\":\"Section with important statistics\"},\"name\":{\"value\":\"Main stats section\"},\"repetitiveVar\":{\"name\":\"pod_name\"}}},\"rows\":[{\"appearance\":{\"height\":{\"value\":16}},\"id\":{\"value\":\"string\"},\"widgets\":[{\"appearance\":{\"width\":0},\"createdAt\":\"2019-08-24T14:15:22Z\",\"definition\":{\"markdown\":{\"markdownText\":{\"value\":\"# This is a markdown example\"},\"tooltipText\":{\"value\":\"This is a description in a tooltip\"}}},\"description\":{\"value\":\"Average delay of application\"},\"id\":{\"value\":\"string\"},\"title\":{\"value\":\"Gauge\"},\"updatedAt\":\"2019-08-24T14:15:22Z\"}]}]}]},\"name\":\"Example Name\",\"relativeTimeFrame\":\"string\",\"slugName\":\"system-health-monitoring\",\"twoMinutes\":{},\"variables\":[{\"definition\":{\"constant\":{\"value\":\"string\"}},\"description\":\"string\",\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_UNSPECIFIED\",\"name\":\"string\"}],\"variablesV2\":[{\"description\":\"string\",\"displayFullRow\":true,\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED\",\"name\":\"string\",\"source\":{\"query\":{\"allOption\":{\"includeAll\":true,\"label\":\"string\"},\"logsQuery\":{\"type\":{\"fieldValue\":{\"observationField\":{\"keypath\":[\"string\"],\"scope\":\"DATASET_SCOPE_UNSPECIFIED\"}}}},\"refreshStrategy\":\"REFRESH_STRATEGY_UNSPECIFIED\",\"valueDisplayOptions\":{\"labelRegex\":\"string\",\"valueRegex\":\"string\"},\"valuesOrderDirection\":\"ORDER_DIRECTION_UNSPECIFIED\"}},\"value\":{\"multiString\":{\"all\":{}}}}]},\"isLocked\":true,\"requestId\":\"string\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards\"\n\npayload = {\n    \"dashboard\": {\n        \"actions\": [\n            {\n                \"dataSource\": \"ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED\",\n                \"definition\": {\"customAction\": {\"url\": \"string\"}},\n                \"id\": \"string\",\n                \"name\": \"string\",\n                \"shouldOpenInNewWindow\": True,\n                \"widgetId\": \"string\"\n            }\n        ],\n        \"annotations\": [\n            {\n                \"description\": \"string\",\n                \"enabled\": True,\n                \"id\": \"string\",\n                \"name\": \"string\",\n                \"scope\": {\"allWidgets\": {}},\n                \"source\": {\"metrics\": {\n                        \"labels\": [\"string\"],\n                        \"messageTemplate\": \"string\",\n                        \"orientation\": \"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\n                        \"promqlQuery\": {\"value\": \"string\"},\n                        \"strategy\": {\"startTimeMetric\": {}}\n                    }}\n            }\n        ],\n        \"description\": \"Sample description\",\n        \"filters\": [\n            {\n                \"collapsed\": True,\n                \"displayName\": \"string\",\n                \"enabled\": True,\n                \"source\": {\"logs\": {\n                        \"field\": \"string\",\n                        \"observationField\": {\n                            \"keypath\": [\"string\"],\n                            \"scope\": \"DATASET_SCOPE_UNSPECIFIED\"\n                        },\n                        \"operator\": {\"equals\": {\"selection\": {\"all\": {}}}}\n                    }}\n            }\n        ],\n        \"folderPath\": {\"segments\": [\"string\"]},\n        \"id\": \"GZLHSeqelCbD3I7HbIDtL\",\n        \"layout\": {\"sections\": [\n                {\n                    \"id\": {\"value\": \"string\"},\n                    \"options\": {\"custom\": {\n                            \"collapsed\": False,\n                            \"color\": {\"predefined\": \"SECTION_PREDEFINED_COLOR_UNSPECIFIED\"},\n                            \"description\": {\"value\": \"Section with important statistics\"},\n                            \"name\": {\"value\": \"Main stats section\"},\n                            \"repetitiveVar\": {\"name\": \"pod_name\"}\n                        }},\n                    \"rows\": [\n                        {\n                            \"appearance\": {\"height\": {\"value\": 16}},\n                            \"id\": {\"value\": \"string\"},\n                            \"widgets\": [\n                                {\n                                    \"appearance\": {\"width\": 0},\n                                    \"createdAt\": \"2019-08-24T14:15:22Z\",\n                                    \"definition\": {\"markdown\": {\n                                            \"markdownText\": {\"value\": \"# This is a markdown example\"},\n                                            \"tooltipText\": {\"value\": \"This is a description in a tooltip\"}\n                                        }},\n                                    \"description\": {\"value\": \"Average delay of application\"},\n                                    \"id\": {\"value\": \"string\"},\n                                    \"title\": {\"value\": \"Gauge\"},\n                                    \"updatedAt\": \"2019-08-24T14:15:22Z\"\n                                }\n                            ]\n                        }\n                    ]\n                }\n            ]},\n        \"name\": \"Example Name\",\n        \"relativeTimeFrame\": \"string\",\n        \"slugName\": \"system-health-monitoring\",\n        \"twoMinutes\": {},\n        \"variables\": [\n            {\n                \"definition\": {\"constant\": {\"value\": \"string\"}},\n                \"description\": \"string\",\n                \"displayName\": \"string\",\n                \"displayType\": \"VARIABLE_DISPLAY_TYPE_UNSPECIFIED\",\n                \"name\": \"string\"\n            }\n        ],\n        \"variablesV2\": [\n            {\n                \"description\": \"string\",\n                \"displayFullRow\": True,\n                \"displayName\": \"string\",\n                \"displayType\": \"VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED\",\n                \"name\": \"string\",\n                \"source\": {\"query\": {\n                        \"allOption\": {\n                            \"includeAll\": True,\n                            \"label\": \"string\"\n                        },\n                        \"logsQuery\": {\"type\": {\"fieldValue\": {\"observationField\": {\n                                        \"keypath\": [\"string\"],\n                                        \"scope\": \"DATASET_SCOPE_UNSPECIFIED\"\n                                    }}}},\n                        \"refreshStrategy\": \"REFRESH_STRATEGY_UNSPECIFIED\",\n                        \"valueDisplayOptions\": {\n                            \"labelRegex\": \"string\",\n                            \"valueRegex\": \"string\"\n                        },\n                        \"valuesOrderDirection\": \"ORDER_DIRECTION_UNSPECIFIED\"\n                    }},\n                \"value\": {\"multiString\": {\"all\": {}}}\n            }\n        ]\n    },\n    \"isLocked\": True,\n    \"requestId\": \"string\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"dashboard\":{\"actions\":[{\"dataSource\":\"ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED\",\"definition\":{\"customAction\":{\"url\":\"string\"}},\"id\":\"string\",\"name\":\"string\",\"shouldOpenInNewWindow\":true,\"widgetId\":\"string\"}],\"annotations\":[{\"description\":\"string\",\"enabled\":true,\"id\":\"string\",\"name\":\"string\",\"scope\":{\"allWidgets\":{}},\"source\":{\"metrics\":{\"labels\":[\"string\"],\"messageTemplate\":\"string\",\"orientation\":\"ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED\",\"promqlQuery\":{\"value\":\"string\"},\"strategy\":{\"startTimeMetric\":{}}}}}],\"description\":\"Sample description\",\"filters\":[{\"collapsed\":true,\"displayName\":\"string\",\"enabled\":true,\"source\":{\"logs\":{\"field\":\"string\",\"observationField\":{\"keypath\":[\"string\"],\"scope\":\"DATASET_SCOPE_UNSPECIFIED\"},\"operator\":{\"equals\":{\"selection\":{\"all\":{}}}}}}}],\"folderPath\":{\"segments\":[\"string\"]},\"id\":\"GZLHSeqelCbD3I7HbIDtL\",\"layout\":{\"sections\":[{\"id\":{\"value\":\"string\"},\"options\":{\"custom\":{\"collapsed\":false,\"color\":{\"predefined\":\"SECTION_PREDEFINED_COLOR_UNSPECIFIED\"},\"description\":{\"value\":\"Section with important statistics\"},\"name\":{\"value\":\"Main stats section\"},\"repetitiveVar\":{\"name\":\"pod_name\"}}},\"rows\":[{\"appearance\":{\"height\":{\"value\":16}},\"id\":{\"value\":\"string\"},\"widgets\":[{\"appearance\":{\"width\":0},\"createdAt\":\"2019-08-24T14:15:22Z\",\"definition\":{\"markdown\":{\"markdownText\":{\"value\":\"# This is a markdown example\"},\"tooltipText\":{\"value\":\"This is a description in a tooltip\"}}},\"description\":{\"value\":\"Average delay of application\"},\"id\":{\"value\":\"string\"},\"title\":{\"value\":\"Gauge\"},\"updatedAt\":\"2019-08-24T14:15:22Z\"}]}]}]},\"name\":\"Example Name\",\"relativeTimeFrame\":\"string\",\"slugName\":\"system-health-monitoring\",\"twoMinutes\":{},\"variables\":[{\"definition\":{\"constant\":{\"value\":\"string\"}},\"description\":\"string\",\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_UNSPECIFIED\",\"name\":\"string\"}],\"variablesV2\":[{\"description\":\"string\",\"displayFullRow\":true,\"displayName\":\"string\",\"displayType\":\"VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED\",\"name\":\"string\",\"source\":{\"query\":{\"allOption\":{\"includeAll\":true,\"label\":\"string\"},\"logsQuery\":{\"type\":{\"fieldValue\":{\"observationField\":{\"keypath\":[\"string\"],\"scope\":\"DATASET_SCOPE_UNSPECIFIED\"}}}},\"refreshStrategy\":\"REFRESH_STRATEGY_UNSPECIFIED\",\"valueDisplayOptions\":{\"labelRegex\":\"string\",\"valueRegex\":\"string\"},\"valuesOrderDirection\":\"ORDER_DIRECTION_UNSPECIFIED\"}},\"value\":{\"multiString\":{\"all\":{}}}}]},\"isLocked\":true,\"requestId\":\"string\"}'"
-          }
         ]
       }
     },
@@ -362,20 +306,6 @@
         },
         "x-coralogixPermissions": [
           "team-dashboards:Read"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards/%7Bdashboard_id%7D';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards/%7Bdashboard_id%7D\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards/%7Bdashboard_id%7D \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       },
       "delete": {
@@ -439,20 +369,6 @@
         },
         "x-coralogixPermissions": [
           "team-dashboards:Update"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards/%7Bdashboard_id%7D?request_id=SOME_STRING_VALUE';\n\nlet options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards/%7Bdashboard_id%7D\"\n\nquerystring = {\"request_id\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url 'https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards/%7Bdashboard_id%7D?request_id=SOME_STRING_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       }
     },
@@ -531,20 +447,6 @@
         },
         "x-coralogixPermissions": [
           "team-dashboards:Update"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards/%7Bdashboard_id%7D/default';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"requestId\":\"string\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards/%7Bdashboard_id%7D/default\"\n\npayload = {\"requestId\": \"string\"}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards/%7Bdashboard_id%7D/default \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"requestId\":\"string\"}'"
-          }
         ]
       }
     },
@@ -626,20 +528,6 @@
         },
         "x-coralogixPermissions": [
           "team-dashboards:Update"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards/%7Bdashboard_id%7D/folder';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"folderId\":\"string\",\"requestId\":\"string\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards/%7Bdashboard_id%7D/folder\"\n\npayload = {\n    \"folderId\": \"string\",\n    \"requestId\": \"string\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards/%7Bdashboard_id%7D/folder \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"folderId\":\"string\",\"requestId\":\"string\"}'"
-          }
         ]
       }
     },
@@ -718,20 +606,6 @@
         },
         "x-coralogixPermissions": [
           "team-dashboards:Read"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards/%7Bdashboard_id%7D:pin';\n\nlet options = {\n  method: 'PATCH',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"requestId\":\"string\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards/%7Bdashboard_id%7D:pin\"\n\npayload = {\"requestId\": \"string\"}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PATCH\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request PATCH \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards/%7Bdashboard_id%7D:pin \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"requestId\":\"string\"}'"
-          }
         ]
       }
     },
@@ -810,20 +684,6 @@
         },
         "x-coralogixPermissions": [
           "team-dashboards:Read"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards/%7Bdashboard_id%7D:unpin';\n\nlet options = {\n  method: 'PATCH',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"requestId\":\"string\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards/%7Bdashboard_id%7D:unpin\"\n\npayload = {\"requestId\": \"string\"}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PATCH\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request PATCH \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/dashboards/dashboards/%7Bdashboard_id%7D:unpin \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"requestId\":\"string\"}'"
-          }
         ]
       }
     }
@@ -888,6 +748,9 @@
       "Annotation": {
         "type": "object",
         "properties": {
+          "color": {
+            "$ref": "#/components/schemas/AnnotationColor"
+          },
           "description": {
             "type": "string"
           },
@@ -911,9 +774,6 @@
       "Annotation.Source": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AnnotationSourceMetrics"
-          },
-          {
             "$ref": "#/components/schemas/AnnotationSourceLogs"
           },
           {
@@ -924,7 +784,28 @@
           },
           {
             "$ref": "#/components/schemas/AnnotationSourceManual"
+          },
+          {
+            "$ref": "#/components/schemas/AnnotationSourceEventRecurrence"
+          },
+          {
+            "$ref": "#/components/schemas/AnnotationSourceMetrics"
           }
+        ]
+      },
+      "AnnotationColor": {
+        "type": "string",
+        "enum": [
+          "ANNOTATION_COLOR_UNSPECIFIED",
+          "ANNOTATION_COLOR_DEFAULT",
+          "ANNOTATION_COLOR_GREEN",
+          "ANNOTATION_COLOR_CYAN",
+          "ANNOTATION_COLOR_BLUE",
+          "ANNOTATION_COLOR_PURPLE",
+          "ANNOTATION_COLOR_MAGENTA",
+          "ANNOTATION_COLOR_RED",
+          "ANNOTATION_COLOR_ORANGE",
+          "ANNOTATION_COLOR_YELLOW"
         ]
       },
       "AnnotationOrientation": {
@@ -939,6 +820,15 @@
         "properties": {
           "dataprime": {
             "$ref": "#/components/schemas/DataprimeSource"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AnnotationSourceEventRecurrence": {
+        "type": "object",
+        "properties": {
+          "eventRecurrence": {
+            "$ref": "#/components/schemas/EventRecurrenceSource"
           }
         },
         "additionalProperties": false
@@ -1455,19 +1345,25 @@
       "Dashboard": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/DashboardOffFolderIdAbsoluteTimeFrame"
+          },
+          {
+            "$ref": "#/components/schemas/DashboardOffFolderPathAbsoluteTimeFrame"
+          },
+          {
+            "$ref": "#/components/schemas/DashboardTwoMinutesFolderPathAbsoluteTimeFrame"
+          },
+          {
             "$ref": "#/components/schemas/DashboardTwoMinutesFolderPathRelativeTimeFrame"
           },
           {
             "$ref": "#/components/schemas/DashboardFiveMinutesFolderIdRelativeTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardFiveMinutesFolderPathRelativeTimeFrame"
+            "$ref": "#/components/schemas/DashboardFiveMinutesFolderPathAbsoluteTimeFrame"
           },
           {
             "$ref": "#/components/schemas/DashboardOffFolderIdRelativeTimeFrame"
-          },
-          {
-            "$ref": "#/components/schemas/DashboardOffFolderPathAbsoluteTimeFrame"
           },
           {
             "$ref": "#/components/schemas/DashboardOffFolderPathRelativeTimeFrame"
@@ -1476,19 +1372,13 @@
             "$ref": "#/components/schemas/DashboardTwoMinutesFolderIdAbsoluteTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardTwoMinutesFolderPathAbsoluteTimeFrame"
+            "$ref": "#/components/schemas/DashboardTwoMinutesFolderIdRelativeTimeFrame"
           },
           {
             "$ref": "#/components/schemas/DashboardFiveMinutesFolderIdAbsoluteTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardFiveMinutesFolderPathAbsoluteTimeFrame"
-          },
-          {
-            "$ref": "#/components/schemas/DashboardOffFolderIdAbsoluteTimeFrame"
-          },
-          {
-            "$ref": "#/components/schemas/DashboardTwoMinutesFolderIdRelativeTimeFrame"
+            "$ref": "#/components/schemas/DashboardFiveMinutesFolderPathRelativeTimeFrame"
           }
         ]
       },
@@ -2653,16 +2543,16 @@
       "DataTable.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DataTableQuerySpans"
-          },
-          {
-            "$ref": "#/components/schemas/DataTableQueryMetrics"
-          },
-          {
             "$ref": "#/components/schemas/DataTableQueryDataprime"
           },
           {
             "$ref": "#/components/schemas/DataTableQueryLogs"
+          },
+          {
+            "$ref": "#/components/schemas/DataTableQuerySpans"
+          },
+          {
+            "$ref": "#/components/schemas/DataTableQueryMetrics"
           }
         ]
       },
@@ -2780,13 +2670,13 @@
       "DataprimeSource.Strategy": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/DataprimeSourceStrategyInstant"
+          },
+          {
             "$ref": "#/components/schemas/DataprimeSourceStrategyRange"
           },
           {
             "$ref": "#/components/schemas/DataprimeSourceStrategyDuration"
-          },
-          {
-            "$ref": "#/components/schemas/DataprimeSourceStrategyInstant"
           }
         ]
       },
@@ -2894,16 +2784,16 @@
       "Dynamic.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DynamicQueryMetrics"
-          },
-          {
-            "$ref": "#/components/schemas/DynamicQueryDataprime"
-          },
-          {
             "$ref": "#/components/schemas/DynamicQueryLogs"
           },
           {
             "$ref": "#/components/schemas/DynamicQuerySpans"
+          },
+          {
+            "$ref": "#/components/schemas/DynamicQueryMetrics"
+          },
+          {
+            "$ref": "#/components/schemas/DynamicQueryDataprime"
           }
         ]
       },
@@ -3006,6 +2896,84 @@
         },
         "additionalProperties": false
       },
+      "EventRecurrenceSource": {
+        "type": "object",
+        "properties": {
+          "messageTemplate": {
+            "type": "string"
+          },
+          "recurrence": {
+            "$ref": "#/components/schemas/Recurrence"
+          },
+          "strategy": {
+            "$ref": "#/components/schemas/EventRecurrenceSource.Strategy"
+          }
+        }
+      },
+      "EventRecurrenceSource.Strategy": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/EventRecurrenceSourceStrategyInstant"
+          },
+          {
+            "$ref": "#/components/schemas/EventRecurrenceSourceStrategyDuration"
+          }
+        ]
+      },
+      "EventRecurrenceSource.Strategy.Duration": {
+        "type": "object",
+        "properties": {
+          "duration": {
+            "type": "string"
+          },
+          "startTimeHour": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "EventRecurrenceSource.Strategy.Instant": {
+        "type": "object",
+        "properties": {
+          "startTimeHour": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "EventRecurrenceSourceStrategyDuration": {
+        "type": "object",
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/EventRecurrenceSource.Strategy.Duration"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EventRecurrenceSourceStrategyInstant": {
+        "type": "object",
+        "properties": {
+          "instant": {
+            "$ref": "#/components/schemas/EventRecurrenceSource.Strategy.Instant"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FieldDataType": {
+        "type": "string",
+        "enum": [
+          "FIELD_DATA_TYPE_UNSPECIFIED",
+          "FIELD_DATA_TYPE_NUMBER",
+          "FIELD_DATA_TYPE_STRING",
+          "FIELD_DATA_TYPE_BOOLEAN",
+          "FIELD_DATA_TYPE_TIMESTAMP",
+          "FIELD_DATA_TYPE_OBJECT",
+          "FIELD_DATA_TYPE_ARRAY",
+          "FIELD_DATA_TYPE_REGEX",
+          "FIELD_DATA_TYPE_UNION",
+          "FIELD_DATA_TYPE_ENUM"
+        ]
+      },
       "FieldGroup": {
         "type": "object",
         "properties": {
@@ -3076,13 +3044,13 @@
       "Filter.Source": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/FilterSourceMetrics"
+          },
+          {
             "$ref": "#/components/schemas/FilterSourceLogs"
           },
           {
             "$ref": "#/components/schemas/FilterSourceSpans"
-          },
-          {
-            "$ref": "#/components/schemas/FilterSourceMetrics"
           }
         ]
       },
@@ -3609,6 +3577,104 @@
         "properties": {
           "dashboardId": {
             "description": "Reference to specific dashboard",
+            "type": "string"
+          }
+        }
+      },
+      "Heatmap": {
+        "type": "object",
+        "properties": {
+          "allowAbbreviation": {
+            "example": false,
+            "description": "Whether to render numeric value without abbreviation",
+            "type": "boolean"
+          },
+          "colorAxisMax": {
+            "example": 1000,
+            "description": "Optional number indicating the max value for gradient color axis. Automatically calculated from data if not provided.",
+            "type": "number",
+            "format": "float"
+          },
+          "colorAxisMin": {
+            "example": -1000,
+            "description": "Optional number indicating the lowest value for gradient color axis. Automatically calculated from data if not provided.",
+            "type": "number",
+            "format": "float"
+          },
+          "customUnit": {
+            "example": {
+              "value": "rpm"
+            },
+            "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
+            "type": "string"
+          },
+          "decimalPrecision": {
+            "example": 4,
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "type": "integer",
+            "format": "int32"
+          },
+          "preset": {
+            "$ref": "#/components/schemas/HeatmapColorPreset"
+          },
+          "scaleType": {
+            "$ref": "#/components/schemas/ScaleType"
+          },
+          "showNumbers": {
+            "description": "Whether to render numeric values inside the heatmap tiles",
+            "type": "boolean"
+          },
+          "tooltip": {
+            "$ref": "#/components/schemas/HeatmapTooltip"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/common.Unit"
+          },
+          "valueField": {
+            "$ref": "#/components/schemas/ObservationField"
+          },
+          "xAxisFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObservationField"
+            }
+          },
+          "yAxisFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObservationField"
+            }
+          }
+        }
+      },
+      "HeatmapColorPreset": {
+        "type": "string",
+        "enum": [
+          "HEATMAP_COLOR_PRESET_UNSPECIFIED",
+          "HEATMAP_COLOR_PRESET_BLUE",
+          "HEATMAP_COLOR_PRESET_GREEN",
+          "HEATMAP_COLOR_PRESET_RED",
+          "HEATMAP_COLOR_PRESET_THRESHOLD",
+          "HEATMAP_COLOR_PRESET_BLUE_REVERSED",
+          "HEATMAP_COLOR_PRESET_GREEN_REVERSED",
+          "HEATMAP_COLOR_PRESET_RED_REVERSED",
+          "HEATMAP_COLOR_PRESET_THRESHOLD_REVERSED"
+        ]
+      },
+      "HeatmapTooltip": {
+        "type": "object",
+        "properties": {
+          "labels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObservationField"
+            }
+          },
+          "messageTemplate": {
+            "example": {
+              "value": "value = {{_count}}"
+            },
+            "description": "Custom template for the heatmap tooltip",
             "type": "string"
           }
         }
@@ -4728,6 +4794,9 @@
       "LogsAggregation": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/LogsAggregationMin"
+          },
+          {
             "$ref": "#/components/schemas/LogsAggregationMax"
           },
           {
@@ -4744,9 +4813,6 @@
           },
           {
             "$ref": "#/components/schemas/LogsAggregationAverage"
-          },
-          {
-            "$ref": "#/components/schemas/LogsAggregationMin"
           }
         ]
       },
@@ -4897,13 +4963,13 @@
       "LogsSource.Strategy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/LogsSourceStrategyDuration"
-          },
-          {
             "$ref": "#/components/schemas/LogsSourceStrategyInstant"
           },
           {
             "$ref": "#/components/schemas/LogsSourceStrategyRange"
+          },
+          {
+            "$ref": "#/components/schemas/LogsSourceStrategyDuration"
           }
         ]
       },
@@ -5266,13 +5332,13 @@
       "MultiSelect.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/MultiSelectQueryLogsQuery"
-          },
-          {
             "$ref": "#/components/schemas/MultiSelectQueryMetricsQuery"
           },
           {
             "$ref": "#/components/schemas/MultiSelectQuerySpansQuery"
+          },
+          {
+            "$ref": "#/components/schemas/MultiSelectQueryLogsQuery"
           }
         ]
       },
@@ -5841,6 +5907,67 @@
           }
         }
       },
+      "Property": {
+        "type": "object",
+        "properties": {
+          "definition": {
+            "$ref": "#/components/schemas/PropertyDefinition"
+          },
+          "id": {
+            "$ref": "#/components/schemas/UUID"
+          }
+        }
+      },
+      "PropertyDefinition": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PropertyDefinitionThresholds"
+          },
+          {
+            "$ref": "#/components/schemas/PropertyDefinitionAlignment"
+          }
+        ]
+      },
+      "PropertyDefinitionAlignment": {
+        "type": "object",
+        "properties": {
+          "alignment": {
+            "$ref": "#/components/schemas/TextAlignment"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PropertyDefinitionThresholds": {
+        "type": "object",
+        "properties": {
+          "thresholds": {
+            "$ref": "#/components/schemas/PropertyThresholds"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PropertyThresholds": {
+        "type": "object",
+        "properties": {
+          "max": {
+            "type": "number",
+            "format": "double"
+          },
+          "min": {
+            "type": "number",
+            "format": "double"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ThresholdType"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/common.Threshold"
+            }
+          }
+        }
+      },
       "Query.LogsQuery": {
         "type": "object",
         "properties": {
@@ -5955,13 +6082,13 @@
       "Query.MetricsQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QueryMetricsQueryTypeMetricName"
-          },
-          {
             "$ref": "#/components/schemas/QueryMetricsQueryTypeLabelName"
           },
           {
             "$ref": "#/components/schemas/QueryMetricsQueryTypeLabelValue"
+          },
+          {
+            "$ref": "#/components/schemas/QueryMetricsQueryTypeMetricName"
           }
         ]
       },
@@ -6240,10 +6367,10 @@
       "QuerySource.LogsQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QuerySourceLogsQueryTypeFieldValue"
+            "$ref": "#/components/schemas/QuerySourceLogsQueryTypeFieldName"
           },
           {
-            "$ref": "#/components/schemas/QuerySourceLogsQueryTypeFieldName"
+            "$ref": "#/components/schemas/QuerySourceLogsQueryTypeFieldValue"
           }
         ]
       },
@@ -6304,10 +6431,10 @@
       "QuerySource.MetricsQuery.Operator": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QuerySourceMetricsQueryOperatorEquals"
+            "$ref": "#/components/schemas/QuerySourceMetricsQueryOperatorNotEquals"
           },
           {
-            "$ref": "#/components/schemas/QuerySourceMetricsQueryOperatorNotEquals"
+            "$ref": "#/components/schemas/QuerySourceMetricsQueryOperatorEquals"
           }
         ]
       },
@@ -6397,10 +6524,10 @@
       "QuerySource.SpansQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QuerySourceSpansQueryTypeFieldValue"
+            "$ref": "#/components/schemas/QuerySourceSpansQueryTypeFieldName"
           },
           {
-            "$ref": "#/components/schemas/QuerySourceSpansQueryTypeFieldName"
+            "$ref": "#/components/schemas/QuerySourceSpansQueryTypeFieldValue"
           }
         ]
       },
@@ -6551,6 +6678,14 @@
           }
         }
       },
+      "Recurrence": {
+        "type": "object",
+        "properties": {
+          "weekly": {
+            "$ref": "#/components/schemas/WeeklyRecurrence"
+          }
+        }
+      },
       "RegexValue": {
         "type": "object",
         "properties": {
@@ -6627,6 +6762,46 @@
           "ROW_STYLE_JSON",
           "ROW_STYLE_LIST"
         ]
+      },
+      "RuleScope": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/RuleScopeFieldType"
+          },
+          {
+            "$ref": "#/components/schemas/RuleScopeField"
+          },
+          {
+            "$ref": "#/components/schemas/RuleScopeRegex"
+          }
+        ]
+      },
+      "RuleScopeField": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "$ref": "#/components/schemas/ObservationField"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RuleScopeFieldType": {
+        "type": "object",
+        "properties": {
+          "fieldType": {
+            "$ref": "#/components/schemas/FieldDataType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RuleScopeRegex": {
+        "type": "object",
+        "properties": {
+          "regex": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
       },
       "ScaleType": {
         "type": "string",
@@ -6838,10 +7013,10 @@
       "SpansAggregation": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SpansAggregationMetricAggregation"
+            "$ref": "#/components/schemas/SpansAggregationDimensionAggregation"
           },
           {
-            "$ref": "#/components/schemas/SpansAggregationDimensionAggregation"
+            "$ref": "#/components/schemas/SpansAggregationMetricAggregation"
           }
         ]
       },
@@ -7151,6 +7326,12 @@
             "items": {
               "$ref": "#/components/schemas/Table.Column"
             }
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Table.Rule"
+            }
           }
         }
       },
@@ -7161,6 +7342,38 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         }
+      },
+      "Table.Rule": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "$ref": "#/components/schemas/UUID"
+          },
+          "name": {
+            "type": "string"
+          },
+          "properties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Property"
+            }
+          },
+          "ruleScope": {
+            "$ref": "#/components/schemas/RuleScope"
+          }
+        }
+      },
+      "TextAlignment": {
+        "type": "string",
+        "enum": [
+          "TEXT_ALIGNMENT_UNSPECIFIED",
+          "TEXT_ALIGNMENT_LEFT",
+          "TEXT_ALIGNMENT_CENTER",
+          "TEXT_ALIGNMENT_RIGHT"
+        ]
       },
       "TextboxDefaultIntervalValue": {
         "type": "object",
@@ -7220,15 +7433,6 @@
       "TextboxDefaultValue": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TextboxDefaultValueDefaultLuceneValue"
-          },
-          {
-            "$ref": "#/components/schemas/TextboxDefaultValueDefaultRegexValue"
-          },
-          {
-            "$ref": "#/components/schemas/TextboxDefaultValueDefaultIntervalValue"
-          },
-          {
             "$ref": "#/components/schemas/TextboxDefaultValueSingleString"
           },
           {
@@ -7239,6 +7443,15 @@
           },
           {
             "$ref": "#/components/schemas/TextboxDefaultValueDefaultNumericValue"
+          },
+          {
+            "$ref": "#/components/schemas/TextboxDefaultValueDefaultLuceneValue"
+          },
+          {
+            "$ref": "#/components/schemas/TextboxDefaultValueDefaultRegexValue"
+          },
+          {
+            "$ref": "#/components/schemas/TextboxDefaultValueDefaultIntervalValue"
           }
         ]
       },
@@ -7715,29 +7928,29 @@
       "VariableSourceV2": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/VariableSourceV2Static"
+          },
+          {
             "$ref": "#/components/schemas/VariableSourceV2Query"
           },
           {
             "$ref": "#/components/schemas/VariableSourceV2Textbox"
-          },
-          {
-            "$ref": "#/components/schemas/VariableSourceV2Static"
           }
         ]
       },
       "VariableSourceV2.QuerySource": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/VariableSourceV2QuerySourceLogsQuery"
-          },
-          {
-            "$ref": "#/components/schemas/VariableSourceV2QuerySourceMetricsQuery"
-          },
-          {
             "$ref": "#/components/schemas/VariableSourceV2QuerySourceSpansQuery"
           },
           {
             "$ref": "#/components/schemas/VariableSourceV2QuerySourceDataprimeQuery"
+          },
+          {
+            "$ref": "#/components/schemas/VariableSourceV2QuerySourceLogsQuery"
+          },
+          {
+            "$ref": "#/components/schemas/VariableSourceV2QuerySourceMetricsQuery"
           }
         ]
       },
@@ -7900,15 +8113,6 @@
       "VariableValueV2": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/VariableValueV2MultiString"
-          },
-          {
-            "$ref": "#/components/schemas/VariableValueV2SingleString"
-          },
-          {
-            "$ref": "#/components/schemas/VariableValueV2SingleNumeric"
-          },
-          {
             "$ref": "#/components/schemas/VariableValueV2Regex"
           },
           {
@@ -7916,6 +8120,15 @@
           },
           {
             "$ref": "#/components/schemas/VariableValueV2Interval"
+          },
+          {
+            "$ref": "#/components/schemas/VariableValueV2MultiString"
+          },
+          {
+            "$ref": "#/components/schemas/VariableValueV2SingleString"
+          },
+          {
+            "$ref": "#/components/schemas/VariableValueV2SingleNumeric"
           }
         ]
       },
@@ -8086,16 +8299,7 @@
       "Visualization": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/VisualizationTimeSeriesLines"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationStat"
-          },
-          {
             "$ref": "#/components/schemas/VisualizationGauge"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationHexagonBins"
           },
           {
             "$ref": "#/components/schemas/VisualizationPieChart"
@@ -8104,13 +8308,25 @@
             "$ref": "#/components/schemas/VisualizationHorizontalBars"
           },
           {
-            "$ref": "#/components/schemas/VisualizationVerticalBars"
-          },
-          {
             "$ref": "#/components/schemas/VisualizationTable"
           },
           {
+            "$ref": "#/components/schemas/VisualizationTimeSeriesLines"
+          },
+          {
             "$ref": "#/components/schemas/VisualizationTimeSeriesBars"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationHexagonBins"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationVerticalBars"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationHeatmap"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationStat"
           }
         ]
       },
@@ -8335,6 +8551,15 @@
         },
         "additionalProperties": false
       },
+      "VisualizationHeatmap": {
+        "type": "object",
+        "properties": {
+          "heatmap": {
+            "$ref": "#/components/schemas/Heatmap"
+          }
+        },
+        "additionalProperties": false
+      },
       "VisualizationHexagonBins": {
         "type": "object",
         "properties": {
@@ -8407,6 +8632,30 @@
         },
         "additionalProperties": false
       },
+      "Weekday": {
+        "type": "string",
+        "enum": [
+          "WEEKDAY_UNSPECIFIED",
+          "WEEKDAY_MONDAY",
+          "WEEKDAY_TUESDAY",
+          "WEEKDAY_WEDNESDAY",
+          "WEEKDAY_THURSDAY",
+          "WEEKDAY_FRIDAY",
+          "WEEKDAY_SATURDAY",
+          "WEEKDAY_SUNDAY"
+        ]
+      },
+      "WeeklyRecurrence": {
+        "type": "object",
+        "properties": {
+          "daysOfWeek": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Weekday"
+            }
+          }
+        }
+      },
       "Widget": {
         "externalDocs": {
           "description": "Find out more about creating dashboard widgets in our documentation.",
@@ -8461,31 +8710,31 @@
       "Widget.Definition": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/WidgetDefinitionMarkdown"
-          },
-          {
-            "$ref": "#/components/schemas/WidgetDefinitionHexagon"
-          },
-          {
-            "$ref": "#/components/schemas/WidgetDefinitionDynamic"
-          },
-          {
-            "$ref": "#/components/schemas/WidgetDefinitionDataTable"
-          },
-          {
             "$ref": "#/components/schemas/WidgetDefinitionBarChart"
           },
           {
             "$ref": "#/components/schemas/WidgetDefinitionHorizontalBarChart"
           },
           {
-            "$ref": "#/components/schemas/WidgetDefinitionLineChart"
+            "$ref": "#/components/schemas/WidgetDefinitionMarkdown"
+          },
+          {
+            "$ref": "#/components/schemas/WidgetDefinitionHexagon"
+          },
+          {
+            "$ref": "#/components/schemas/WidgetDefinitionDataTable"
           },
           {
             "$ref": "#/components/schemas/WidgetDefinitionGauge"
           },
           {
             "$ref": "#/components/schemas/WidgetDefinitionPieChart"
+          },
+          {
+            "$ref": "#/components/schemas/WidgetDefinitionDynamic"
+          },
+          {
+            "$ref": "#/components/schemas/WidgetDefinitionLineChart"
           }
         ]
       },

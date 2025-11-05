@@ -80,20 +80,6 @@
         },
         "x-coralogixPermissions": [
           "alerts:ReadConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v3/alert-event-stats?ids=SOME_ARRAY_VALUE&order_bys=SOME_ARRAY_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v3/alert-event-stats\"\n\nquerystring = {\"ids\":\"SOME_ARRAY_VALUE\",\"order_bys\":\"SOME_ARRAY_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/v3/alert-event-stats?ids=SOME_ARRAY_VALUE&order_bys=SOME_ARRAY_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       }
     },
@@ -187,20 +173,6 @@
         },
         "x-coralogixPermissions": [
           "alerts:ReadConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v3/alert-event/%7Bid%7D?order_bys=SOME_ARRAY_VALUE&pagination=SOME_OBJECT_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v3/alert-event/%7Bid%7D\"\n\nquerystring = {\"order_bys\":\"SOME_ARRAY_VALUE\",\"pagination\":\"SOME_OBJECT_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/v3/alert-event/%7Bid%7D?order_bys=SOME_ARRAY_VALUE&pagination=SOME_OBJECT_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       }
     }
@@ -224,11 +196,7 @@
           "status": {
             "$ref": "#/components/schemas/ActivityAnalysisStatus"
           }
-        },
-        "required": [
-          "rules",
-          "status"
-        ]
+        }
       },
       "ActivityAnalysisStats": {
         "externalDocs": {
@@ -303,20 +271,7 @@
             "type": "string",
             "format": "date-time"
           }
-        },
-        "required": [
-          "permutationLabels",
-          "groupLabels",
-          "timestamp",
-          "alertId",
-          "status",
-          "preGroupingEventId",
-          "payload",
-          "payloadType",
-          "permutationId",
-          "incidentCorrelationKey",
-          "activityAnalysis"
-        ]
+        }
       },
       "AlertEventMultiplePermutation": {
         "type": "object",

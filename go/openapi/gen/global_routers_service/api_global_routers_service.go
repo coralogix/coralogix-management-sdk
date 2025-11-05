@@ -456,11 +456,11 @@ func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceGetGlobalRouterExec
 type ApiGlobalRoutersServiceListGlobalRoutersRequest struct {
 	ctx context.Context
 	ApiService *GlobalRoutersServiceAPIService
-	entityType *string
+	entityType *NotificationCenterEntityType
 	sourceEntityLabels *map[string]GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue
 }
 
-func (r ApiGlobalRoutersServiceListGlobalRoutersRequest) EntityType(entityType string) ApiGlobalRoutersServiceListGlobalRoutersRequest {
+func (r ApiGlobalRoutersServiceListGlobalRoutersRequest) EntityType(entityType NotificationCenterEntityType) ApiGlobalRoutersServiceListGlobalRoutersRequest {
 	r.entityType = &entityType
 	return r
 }

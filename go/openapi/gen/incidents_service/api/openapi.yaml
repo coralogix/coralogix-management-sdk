@@ -63,37 +63,6 @@ paths:
       - Incidents service
       x-coralogixPermissions:
       - incidents:read
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1?filter=SOME_OBJECT_VALUE&pagination=SOME_OBJECT_VALUE&order_bys=SOME_ARRAY_VALUE';
-
-          let options = {method: 'POST', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1"
-
-          querystring = {"filter":"SOME_OBJECT_VALUE","pagination":"SOME_OBJECT_VALUE","order_bys":"SOME_ARRAY_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("POST", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request POST \
-            --url 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1?filter=SOME_OBJECT_VALUE&pagination=SOME_OBJECT_VALUE&order_bys=SOME_ARRAY_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
   /incidents/incidents/v1/acknowledge:
     post:
       description: |-
@@ -140,37 +109,6 @@ paths:
       - Incidents service
       x-coralogixPermissions:
       - incidents:acknowledge
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/acknowledge?incident_ids=SOME_ARRAY_VALUE';
-
-          let options = {method: 'POST', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/acknowledge"
-
-          querystring = {"incident_ids":"SOME_ARRAY_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("POST", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request POST \
-            --url 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/acknowledge?incident_ids=SOME_ARRAY_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
   /incidents/incidents/v1/aggregations:
     get:
       description: |-
@@ -229,37 +167,6 @@ paths:
       - Incidents service
       x-coralogixPermissions:
       - incidents:read
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/aggregations?filter=SOME_OBJECT_VALUE&group_bys=SOME_ARRAY_VALUE&pagination=SOME_OBJECT_VALUE';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/aggregations"
-
-          querystring = {"filter":"SOME_OBJECT_VALUE","group_bys":"SOME_ARRAY_VALUE","pagination":"SOME_OBJECT_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/aggregations?filter=SOME_OBJECT_VALUE&group_bys=SOME_ARRAY_VALUE&pagination=SOME_OBJECT_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
   /incidents/incidents/v1/batch:
     get:
       description: |-
@@ -304,37 +211,6 @@ paths:
       - Incidents service
       x-coralogixPermissions:
       - incidents:read
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/batch?ids=SOME_ARRAY_VALUE';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/batch"
-
-          querystring = {"ids":"SOME_ARRAY_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/batch?ids=SOME_ARRAY_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
   /incidents/incidents/v1/by-user:
     delete:
       description: |-
@@ -381,37 +257,6 @@ paths:
       - Incidents service
       x-coralogixPermissions:
       - incidents:assign
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/by-user?incident_ids=SOME_ARRAY_VALUE';
-
-          let options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/by-user"
-
-          querystring = {"incident_ids":"SOME_ARRAY_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("DELETE", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request DELETE \
-            --url 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/by-user?incident_ids=SOME_ARRAY_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
     post:
       description: |-
         Assign one or more incidents to a specific user.
@@ -464,37 +309,6 @@ paths:
       - Incidents service
       x-coralogixPermissions:
       - incidents:assign
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/by-user?incident_ids=SOME_ARRAY_VALUE&assigned_to=SOME_OBJECT_VALUE';
-
-          let options = {method: 'POST', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/by-user"
-
-          querystring = {"incident_ids":"SOME_ARRAY_VALUE","assigned_to":"SOME_OBJECT_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("POST", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request POST \
-            --url 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/by-user?incident_ids=SOME_ARRAY_VALUE&assigned_to=SOME_OBJECT_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
   /incidents/incidents/v1/close:
     post:
       description: No description available
@@ -537,37 +351,6 @@ paths:
       - Incidents service
       x-coralogixPermissions:
       - incidents:close
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/close?incident_ids=SOME_ARRAY_VALUE';
-
-          let options = {method: 'POST', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/close"
-
-          querystring = {"incident_ids":"SOME_ARRAY_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("POST", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request POST \
-            --url 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/close?incident_ids=SOME_ARRAY_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
   /incidents/incidents/v1/events:
     get:
       description: |-
@@ -624,37 +407,6 @@ paths:
       - Incidents service
       x-coralogixPermissions:
       - incidents:read
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/events?filter=SOME_OBJECT_VALUE&pagination=SOME_OBJECT_VALUE&order_by=SOME_OBJECT_VALUE';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/events"
-
-          querystring = {"filter":"SOME_OBJECT_VALUE","pagination":"SOME_OBJECT_VALUE","order_by":"SOME_OBJECT_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/events?filter=SOME_OBJECT_VALUE&pagination=SOME_OBJECT_VALUE&order_by=SOME_OBJECT_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
   /incidents/incidents/v1/events/count:
     get:
       description: |-
@@ -697,37 +449,6 @@ paths:
       - Incidents service
       x-coralogixPermissions:
       - incidents:read
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/events/count?filter=SOME_OBJECT_VALUE';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/events/count"
-
-          querystring = {"filter":"SOME_OBJECT_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/events/count?filter=SOME_OBJECT_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
   /incidents/incidents/v1/events/filter-values:
     get:
       description: No description available
@@ -766,37 +487,6 @@ paths:
       - Incidents service
       x-coralogixPermissions:
       - incidents:read
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/events/filter-values?filter=SOME_OBJECT_VALUE';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/events/filter-values"
-
-          querystring = {"filter":"SOME_OBJECT_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/events/filter-values?filter=SOME_OBJECT_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
   /incidents/incidents/v1/events/{event_id}:
     get:
       description: |-
@@ -841,35 +531,6 @@ paths:
       - Incidents service
       x-coralogixPermissions:
       - incidents:read
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/events/event_id_1';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/events/event_id_1"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/events/event_id_1 \
-            --header 'Authorization: Bearer <API_KEY>'
   /incidents/incidents/v1/events/{event_id}/acknowledge:
     post:
       description: |-
@@ -914,35 +575,6 @@ paths:
       - Incidents service
       x-coralogixPermissions:
       - incidents:acknowledge
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/events/event_id_1/acknowledge';
-
-          let options = {method: 'POST', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/events/event_id_1/acknowledge"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("POST", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request POST \
-            --url https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/events/event_id_1/acknowledge \
-            --header 'Authorization: Bearer <API_KEY>'
   /incidents/incidents/v1/events/{event_id}/resolve:
     post:
       description: |-
@@ -987,35 +619,6 @@ paths:
       - Incidents service
       x-coralogixPermissions:
       - incidents:close
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/events/event_id_1/resolve';
-
-          let options = {method: 'POST', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/events/event_id_1/resolve"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("POST", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request POST \
-            --url https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/events/event_id_1/resolve \
-            --header 'Authorization: Bearer <API_KEY>'
   /incidents/incidents/v1/filter-values:
     post:
       description: No description available
@@ -1054,37 +657,6 @@ paths:
       - Incidents service
       x-coralogixPermissions:
       - incidents:read
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/filter-values?filter=SOME_OBJECT_VALUE';
-
-          let options = {method: 'POST', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/filter-values"
-
-          querystring = {"filter":"SOME_OBJECT_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("POST", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request POST \
-            --url 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/filter-values?filter=SOME_OBJECT_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
   /incidents/incidents/v1/resolve:
     post:
       description: |-
@@ -1131,37 +703,6 @@ paths:
       - Incidents service
       x-coralogixPermissions:
       - incidents:close
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/resolve?incident_ids=SOME_ARRAY_VALUE';
-
-          let options = {method: 'POST', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/resolve"
-
-          querystring = {"incident_ids":"SOME_ARRAY_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("POST", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request POST \
-            --url 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/resolve?incident_ids=SOME_ARRAY_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
   /incidents/incidents/v1/{id}:
     get:
       description: |-
@@ -1205,35 +746,6 @@ paths:
       - Incidents service
       x-coralogixPermissions:
       - incidents:read
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/incident_id';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/incident_id"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/incident_id \
-            --header 'Authorization: Bearer <API_KEY>'
   /incidents/incidents/v1/{incident_id}/events:
     get:
       description: |-
@@ -1278,35 +790,6 @@ paths:
       - Incidents service
       x-coralogixPermissions:
       - incidents:read
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/incident_id/events';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/incident_id/events"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url https://api.coralogix.com/mgmt/openapi/incidents/incidents/v1/incident_id/events \
-            --header 'Authorization: Bearer <API_KEY>'
 components:
   schemas:
     AcknowledgeIncidentByEventIdResponse:
@@ -1342,22 +825,20 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
@@ -1404,22 +885,20 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
@@ -1453,22 +932,20 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
@@ -1517,22 +994,20 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
@@ -1566,22 +1041,20 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
@@ -1674,22 +1147,20 @@ components:
             state: INCIDENT_STATE_UNSPECIFIED
             closedAt: 2024-01-01T00:00:00Z
             events:
-            - snoozeIndicator:
-                durationMinutes: 0
-                startTime: 2000-01-23T04:56:07.000+00:00
-                userId: userId
-              operationalEvent:
+            - operationalEvent:
                 systemName: systemName
               id: incident_event_id
+              close:
+                closedBy:
+                  userId: user_id
               originatorType: ORIGINATOR_TYPE_UNSPECIFIED
               incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            - snoozeIndicator:
-                durationMinutes: 0
-                startTime: 2000-01-23T04:56:07.000+00:00
-                userId: userId
-              operationalEvent:
+            - operationalEvent:
                 systemName: systemName
               id: incident_event_id
+              close:
+                closedBy:
+                  userId: user_id
               originatorType: ORIGINATOR_TYPE_UNSPECIFIED
               incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
             isMuted: false
@@ -1746,22 +1217,20 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
@@ -1795,22 +1264,20 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
@@ -2081,22 +1548,20 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
@@ -2114,22 +1579,20 @@ components:
       description: Response containing all events associated with the requested incident
       example:
         incidentEvents:
-        - snoozeIndicator:
-            durationMinutes: 0
-            startTime: 2000-01-23T04:56:07.000+00:00
-            userId: userId
-          operationalEvent:
+        - operationalEvent:
             systemName: systemName
           id: incident_event_id
+          close:
+            closedBy:
+              userId: user_id
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-        - snoozeIndicator:
-            durationMinutes: 0
-            startTime: 2000-01-23T04:56:07.000+00:00
-            userId: userId
-          operationalEvent:
+        - operationalEvent:
             systemName: systemName
           id: incident_event_id
+          close:
+            closedBy:
+              userId: user_id
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
       externalDocs:
@@ -2174,22 +1637,20 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
@@ -2244,7 +1705,7 @@ components:
       additionalProperties: false
       example:
         incidentField:
-          severity: null
+          subsystemName: subsystemName
       properties:
         incidentField:
           $ref: "#/components/schemas/IncidentFieldOneOf"
@@ -2280,22 +1741,20 @@ components:
         state: INCIDENT_STATE_UNSPECIFIED
         closedAt: 2024-01-01T00:00:00Z
         events:
-        - snoozeIndicator:
-            durationMinutes: 0
-            startTime: 2000-01-23T04:56:07.000+00:00
-            userId: userId
-          operationalEvent:
+        - operationalEvent:
             systemName: systemName
           id: incident_event_id
+          close:
+            closedBy:
+              userId: user_id
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-        - snoozeIndicator:
-            durationMinutes: 0
-            startTime: 2000-01-23T04:56:07.000+00:00
-            userId: userId
-          operationalEvent:
+        - operationalEvent:
             systemName: systemName
           id: incident_event_id
+          close:
+            closedBy:
+              userId: user_id
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
         isMuted: false
@@ -2377,9 +1836,9 @@ components:
       example:
         groupBysValue:
         - incidentField:
-            severity: null
+            subsystemName: subsystemName
         - incidentField:
-            severity: null
+            subsystemName: subsystemName
         aggAssignmentsCount:
         - count: 10
           assignedTo:
@@ -2496,14 +1955,14 @@ components:
       type: object
     IncidentEvent:
       oneOf:
-      - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventAssignmentOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventUnassignOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventCloseOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventAssignmentOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventUnassignOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
       - $ref: "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
@@ -2634,6 +2093,9 @@ components:
       title: Incident event
       type: object
     IncidentEventClose:
+      example:
+        closedBy:
+          userId: user_id
       properties:
         closedBy:
           $ref: "#/components/schemas/UserDetails"
@@ -2665,6 +2127,15 @@ components:
       type: object
     IncidentEventCloseOperationalEvent:
       additionalProperties: false
+      example:
+        operationalEvent:
+          systemName: systemName
+        id: incident_event_id
+        close:
+          closedBy:
+            userId: user_id
+        originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+        incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -2691,13 +2162,12 @@ components:
     IncidentEventExtended:
       example:
         incidentEvent:
-          snoozeIndicator:
-            durationMinutes: 0
-            startTime: 2000-01-23T04:56:07.000+00:00
-            userId: userId
           operationalEvent:
             systemName: systemName
           id: incident_event_id
+          close:
+            closedBy:
+              userId: user_id
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
         cxEventKey: cxEventKey
@@ -2802,10 +2272,6 @@ components:
           type: string
       type: object
     IncidentEventSnoozeIndicator:
-      example:
-        durationMinutes: 0
-        startTime: 2000-01-23T04:56:07.000+00:00
-        userId: userId
       externalDocs:
         url: ""
       properties:
@@ -2846,16 +2312,6 @@ components:
       type: object
     IncidentEventSnoozeIndicatorOperationalEvent:
       additionalProperties: false
-      example:
-        snoozeIndicator:
-          durationMinutes: 0
-          startTime: 2000-01-23T04:56:07.000+00:00
-          userId: userId
-        operationalEvent:
-          systemName: systemName
-        id: incident_event_id
-        originatorType: ORIGINATOR_TYPE_UNSPECIFIED
-        incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -3009,17 +2465,17 @@ components:
       type: object
     IncidentFieldOneOf:
       oneOf:
-      - $ref: "#/components/schemas/IncidentFieldOneOfSeverity"
-      - $ref: "#/components/schemas/IncidentFieldOneOfCreatedAt"
-      - $ref: "#/components/schemas/IncidentFieldOneOfState"
-      - $ref: "#/components/schemas/IncidentFieldOneOfApplicationName"
-      - $ref: "#/components/schemas/IncidentFieldOneOfName"
-      - $ref: "#/components/schemas/IncidentFieldOneOfClosedAt"
-      - $ref: "#/components/schemas/IncidentFieldOneOfStatus"
-      - $ref: "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
       - $ref: "#/components/schemas/IncidentFieldOneOfSubsystemName"
-      - $ref: "#/components/schemas/IncidentFieldOneOfDuration"
       - $ref: "#/components/schemas/IncidentFieldOneOfId"
+      - $ref: "#/components/schemas/IncidentFieldOneOfSeverity"
+      - $ref: "#/components/schemas/IncidentFieldOneOfClosedAt"
+      - $ref: "#/components/schemas/IncidentFieldOneOfState"
+      - $ref: "#/components/schemas/IncidentFieldOneOfStatus"
+      - $ref: "#/components/schemas/IncidentFieldOneOfApplicationName"
+      - $ref: "#/components/schemas/IncidentFieldOneOfDuration"
+      - $ref: "#/components/schemas/IncidentFieldOneOfName"
+      - $ref: "#/components/schemas/IncidentFieldOneOfCreatedAt"
+      - $ref: "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
     IncidentFieldOneOfApplicationName:
       additionalProperties: false
       properties:
@@ -3067,8 +2523,6 @@ components:
       type: object
     IncidentFieldOneOfSeverity:
       additionalProperties: false
-      example:
-        severity: null
       properties:
         severity:
           $ref: "#/components/schemas/IncidentSeverity"
@@ -3087,6 +2541,8 @@ components:
       type: object
     IncidentFieldOneOfSubsystemName:
       additionalProperties: false
+      example:
+        subsystemName: subsystemName
       properties:
         subsystemName:
           type: string
@@ -3375,9 +2831,9 @@ components:
         incidentAggs:
         - groupBysValue:
           - incidentField:
-              severity: null
+              subsystemName: subsystemName
           - incidentField:
-              severity: null
+              subsystemName: subsystemName
           aggAssignmentsCount:
           - count: 10
             assignedTo:
@@ -3418,9 +2874,9 @@ components:
           lastStateUpdateTime: 2000-01-23T04:56:07.000+00:00
         - groupBysValue:
           - incidentField:
-              severity: null
+              subsystemName: subsystemName
           - incidentField:
-              severity: null
+              subsystemName: subsystemName
           aggAssignmentsCount:
           - count: 10
             assignedTo:
@@ -3537,13 +2993,12 @@ components:
           nextPageToken: next_page_token
         items:
         - incidentEvent:
-            snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
             operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           cxEventKey: cxEventKey
@@ -3567,13 +3022,12 @@ components:
             incidentStatus: INCIDENT_STATUS_UNSPECIFIED
           cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
         - incidentEvent:
-            snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
             operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           cxEventKey: cxEventKey
@@ -3665,22 +3119,20 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
@@ -3714,22 +3166,20 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
@@ -3796,22 +3246,20 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
@@ -3858,22 +3306,20 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
@@ -3907,22 +3353,20 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
@@ -3971,22 +3415,20 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
@@ -4020,22 +3462,20 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            operationalEvent:
+          - operationalEvent:
               systemName: systemName
             id: incident_event_id
+            close:
+              closedBy:
+                userId: user_id
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false

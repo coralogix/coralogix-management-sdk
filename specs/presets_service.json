@@ -85,21 +85,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets/custom';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"configOverrides\":[{\"conditionType\":{\"matchEntityType\":{}},\"messageConfig\":{\"fields\":[{\"fieldName\":\"title\",\"template\":\"{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}\"}]},\"payloadType\":\"string\"}],\"connectorType\":\"CONNECTOR_TYPE_UNSPECIFIED\",\"createTime\":\"2019-08-24T14:15:22Z\",\"description\":\"Custom preset for alerts\",\"entityType\":\"ENTITY_TYPE_UNSPECIFIED\",\"id\":\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\",\"name\":\"My Preset\",\"parentId\":\"preset_system_slack_alerts_basic\",\"presetType\":\"PRESET_TYPE_UNSPECIFIED\",\"updateTime\":\"2019-08-24T14:15:22Z\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets/custom\"\n\npayload = {\n    \"configOverrides\": [\n        {\n            \"conditionType\": {\"matchEntityType\": {}},\n            \"messageConfig\": {\"fields\": [\n                    {\n                        \"fieldName\": \"title\",\n                        \"template\": \"{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}\"\n                    }\n                ]},\n            \"payloadType\": \"string\"\n        }\n    ],\n    \"connectorType\": \"CONNECTOR_TYPE_UNSPECIFIED\",\n    \"createTime\": \"2019-08-24T14:15:22Z\",\n    \"description\": \"Custom preset for alerts\",\n    \"entityType\": \"ENTITY_TYPE_UNSPECIFIED\",\n    \"id\": \"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\",\n    \"name\": \"My Preset\",\n    \"parentId\": \"preset_system_slack_alerts_basic\",\n    \"presetType\": \"PRESET_TYPE_UNSPECIFIED\",\n    \"updateTime\": \"2019-08-24T14:15:22Z\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets/custom \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"configOverrides\":[{\"conditionType\":{\"matchEntityType\":{}},\"messageConfig\":{\"fields\":[{\"fieldName\":\"title\",\"template\":\"{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}\"}]},\"payloadType\":\"string\"}],\"connectorType\":\"CONNECTOR_TYPE_UNSPECIFIED\",\"createTime\":\"2019-08-24T14:15:22Z\",\"description\":\"Custom preset for alerts\",\"entityType\":\"ENTITY_TYPE_UNSPECIFIED\",\"id\":\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\",\"name\":\"My Preset\",\"parentId\":\"preset_system_slack_alerts_basic\",\"presetType\":\"PRESET_TYPE_UNSPECIFIED\",\"updateTime\":\"2019-08-24T14:15:22Z\"}'"
-          }
-        ]
+        }
       },
       "post": {
         "tags": [
@@ -180,21 +166,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets/custom';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"configOverrides\":[{\"conditionType\":{\"matchEntityType\":{}},\"messageConfig\":{\"fields\":[{\"fieldName\":\"title\",\"template\":\"{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}\"}]},\"payloadType\":\"string\"}],\"connectorType\":\"CONNECTOR_TYPE_UNSPECIFIED\",\"createTime\":\"2019-08-24T14:15:22Z\",\"description\":\"Custom preset for alerts\",\"entityType\":\"ENTITY_TYPE_UNSPECIFIED\",\"id\":\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\",\"name\":\"My Preset\",\"parentId\":\"preset_system_slack_alerts_basic\",\"presetType\":\"PRESET_TYPE_UNSPECIFIED\",\"updateTime\":\"2019-08-24T14:15:22Z\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets/custom\"\n\npayload = {\n    \"configOverrides\": [\n        {\n            \"conditionType\": {\"matchEntityType\": {}},\n            \"messageConfig\": {\"fields\": [\n                    {\n                        \"fieldName\": \"title\",\n                        \"template\": \"{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}\"\n                    }\n                ]},\n            \"payloadType\": \"string\"\n        }\n    ],\n    \"connectorType\": \"CONNECTOR_TYPE_UNSPECIFIED\",\n    \"createTime\": \"2019-08-24T14:15:22Z\",\n    \"description\": \"Custom preset for alerts\",\n    \"entityType\": \"ENTITY_TYPE_UNSPECIFIED\",\n    \"id\": \"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\",\n    \"name\": \"My Preset\",\n    \"parentId\": \"preset_system_slack_alerts_basic\",\n    \"presetType\": \"PRESET_TYPE_UNSPECIFIED\",\n    \"updateTime\": \"2019-08-24T14:15:22Z\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets/custom \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"configOverrides\":[{\"conditionType\":{\"matchEntityType\":{}},\"messageConfig\":{\"fields\":[{\"fieldName\":\"title\",\"template\":\"{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}\"}]},\"payloadType\":\"string\"}],\"connectorType\":\"CONNECTOR_TYPE_UNSPECIFIED\",\"createTime\":\"2019-08-24T14:15:22Z\",\"description\":\"Custom preset for alerts\",\"entityType\":\"ENTITY_TYPE_UNSPECIFIED\",\"id\":\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\",\"name\":\"My Preset\",\"parentId\":\"preset_system_slack_alerts_basic\",\"presetType\":\"PRESET_TYPE_UNSPECIFIED\",\"updateTime\":\"2019-08-24T14:15:22Z\"}'"
-          }
-        ]
+        }
       }
     },
     "/notifications/notification-center/v1/presets/custom/{id}": {
@@ -230,21 +202,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets/custom/%7Bid%7D';\n\nlet options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets/custom/%7Bid%7D\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets/custom/%7Bid%7D \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/notifications/notification-center/v1/presets/custom/{id}:defaultSet": {
@@ -280,21 +238,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets/custom/%7Bid%7D:defaultSet';\n\nlet options = {method: 'POST', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets/custom/%7Bid%7D:defaultSet\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"POST\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets/custom/%7Bid%7D:defaultSet \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/notifications/notification-center/v1/presets/{id}": {
@@ -330,21 +274,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets/%7Bid%7D';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets/%7Bid%7D\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets/%7Bid%7D \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/notifications/notification-center/v1/presets/{id}:defaultSet": {
@@ -380,21 +310,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets/%7Bid%7D:defaultSet';\n\nlet options = {method: 'POST', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets/%7Bid%7D:defaultSet\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"POST\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets/%7Bid%7D:defaultSet \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/notifications/notification-center/v1/presets:batchGet": {
@@ -432,21 +348,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:batchGet?preset_ids=SOME_ARRAY_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:batchGet\"\n\nquerystring = {\"preset_ids\":\"SOME_ARRAY_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:batchGet?preset_ids=SOME_ARRAY_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/notifications/notification-center/v1/presets:defaultSummaryGet": {
@@ -465,14 +367,7 @@
             "in": "query",
             "name": "connector_type",
             "schema": {
-              "type": "string",
-              "enum": [
-                "CONNECTOR_TYPE_UNSPECIFIED",
-                "SLACK",
-                "GENERIC_HTTPS",
-                "PAGERDUTY",
-                "IBM_EVENT_NOTIFICATIONS"
-              ]
+              "$ref": "#/components/schemas/ConnectorType"
             },
             "style": "form"
           },
@@ -480,13 +375,7 @@
             "in": "query",
             "name": "entity_type",
             "schema": {
-              "type": "string",
-              "enum": [
-                "ENTITY_TYPE_UNSPECIFIED",
-                "ALERTS",
-                "TEST_NOTIFICATIONS",
-                "CASES"
-              ]
+              "$ref": "#/components/schemas/notification_center.EntityType"
             },
             "style": "form"
           }
@@ -502,21 +391,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:defaultSummaryGet?connector_type=SOME_STRING_VALUE&entity_type=SOME_STRING_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:defaultSummaryGet\"\n\nquerystring = {\"connector_type\":\"SOME_STRING_VALUE\",\"entity_type\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:defaultSummaryGet?connector_type=SOME_STRING_VALUE&entity_type=SOME_STRING_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/notifications/notification-center/v1/presets:summariesList": {
@@ -535,14 +410,7 @@
             "in": "query",
             "name": "connector_type",
             "schema": {
-              "type": "string",
-              "enum": [
-                "CONNECTOR_TYPE_UNSPECIFIED",
-                "SLACK",
-                "GENERIC_HTTPS",
-                "PAGERDUTY",
-                "IBM_EVENT_NOTIFICATIONS"
-              ]
+              "$ref": "#/components/schemas/ConnectorType"
             },
             "style": "form"
           },
@@ -550,13 +418,7 @@
             "in": "query",
             "name": "entity_type",
             "schema": {
-              "type": "string",
-              "enum": [
-                "ENTITY_TYPE_UNSPECIFIED",
-                "ALERTS",
-                "TEST_NOTIFICATIONS",
-                "CASES"
-              ]
+              "$ref": "#/components/schemas/notification_center.EntityType"
             },
             "style": "form"
           }
@@ -572,21 +434,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:summariesList?connector_type=SOME_STRING_VALUE&entity_type=SOME_STRING_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:summariesList\"\n\nquerystring = {\"connector_type\":\"SOME_STRING_VALUE\",\"entity_type\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:summariesList?connector_type=SOME_STRING_VALUE&entity_type=SOME_STRING_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/notifications/notification-center/v1/presets:systemDefaultSummaryGet": {
@@ -605,14 +453,7 @@
             "in": "query",
             "name": "connector_type",
             "schema": {
-              "type": "string",
-              "enum": [
-                "CONNECTOR_TYPE_UNSPECIFIED",
-                "SLACK",
-                "GENERIC_HTTPS",
-                "PAGERDUTY",
-                "IBM_EVENT_NOTIFICATIONS"
-              ]
+              "$ref": "#/components/schemas/ConnectorType"
             },
             "style": "form"
           },
@@ -620,13 +461,7 @@
             "in": "query",
             "name": "entity_type",
             "schema": {
-              "type": "string",
-              "enum": [
-                "ENTITY_TYPE_UNSPECIFIED",
-                "ALERTS",
-                "TEST_NOTIFICATIONS",
-                "CASES"
-              ]
+              "$ref": "#/components/schemas/notification_center.EntityType"
             },
             "style": "form"
           }
@@ -642,21 +477,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:systemDefaultSummaryGet?connector_type=SOME_STRING_VALUE&entity_type=SOME_STRING_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:systemDefaultSummaryGet\"\n\nquerystring = {\"connector_type\":\"SOME_STRING_VALUE\",\"entity_type\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/presets:systemDefaultSummaryGet?connector_type=SOME_STRING_VALUE&entity_type=SOME_STRING_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     }
   },

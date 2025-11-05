@@ -21,6 +21,8 @@ var _ MappedNullable = &ViewFolder1{}
 
 // ViewFolder1 View folder.
 type ViewFolder1 struct {
+	// Unique identifier for folders
+	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
 	// Folder name
 	Name string `json:"name"`
 }
@@ -43,6 +45,38 @@ func NewViewFolder1(name string) *ViewFolder1 {
 func NewViewFolder1WithDefaults() *ViewFolder1 {
 	this := ViewFolder1{}
 	return &this
+}
+
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *ViewFolder1) GetId() string {
+	if o == nil || IsNil(o.Id) {
+		var ret string
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ViewFolder1) GetIdOk() (*string, bool) {
+	if o == nil || IsNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *ViewFolder1) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *ViewFolder1) SetId(v string) {
+	o.Id = &v
 }
 
 // GetName returns the Name field value
@@ -79,6 +113,9 @@ func (o ViewFolder1) MarshalJSON() ([]byte, error) {
 
 func (o ViewFolder1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
 	toSerialize["name"] = o.Name
 	return toSerialize, nil
 }

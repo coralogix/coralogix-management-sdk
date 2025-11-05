@@ -27,11 +27,23 @@ type CustomEnrichmentsServiceAPIService service
 type ApiCustomEnrichmentServiceCreateCustomEnrichmentRequest struct {
 	ctx context.Context
 	ApiService *CustomEnrichmentsServiceAPIService
-	createCustomEnrichmentRequest *CreateCustomEnrichmentRequest
+	name *string
+	description *string
+	file *CustomEnrichmentServiceCreateCustomEnrichmentFileParameter
 }
 
-func (r ApiCustomEnrichmentServiceCreateCustomEnrichmentRequest) CreateCustomEnrichmentRequest(createCustomEnrichmentRequest CreateCustomEnrichmentRequest) ApiCustomEnrichmentServiceCreateCustomEnrichmentRequest {
-	r.createCustomEnrichmentRequest = &createCustomEnrichmentRequest
+func (r ApiCustomEnrichmentServiceCreateCustomEnrichmentRequest) Name(name string) ApiCustomEnrichmentServiceCreateCustomEnrichmentRequest {
+	r.name = &name
+	return r
+}
+
+func (r ApiCustomEnrichmentServiceCreateCustomEnrichmentRequest) Description(description string) ApiCustomEnrichmentServiceCreateCustomEnrichmentRequest {
+	r.description = &description
+	return r
+}
+
+func (r ApiCustomEnrichmentServiceCreateCustomEnrichmentRequest) File(file CustomEnrichmentServiceCreateCustomEnrichmentFileParameter) ApiCustomEnrichmentServiceCreateCustomEnrichmentRequest {
+	r.file = &file
 	return r
 }
 
@@ -75,8 +87,17 @@ func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceCreateCustom
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.name != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "form", "")
+	}
+	if r.description != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "description", r.description, "form", "")
+	}
+	if r.file != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "file", r.file, "form", "")
+	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -92,8 +113,6 @@ func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceCreateCustom
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.createCustomEnrichmentRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -173,7 +192,7 @@ func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceDeleteCustom
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/custom_enrichment/{custom_enrichment_id}"
+	localVarPath := localBasePath + "/enrichment-rules/custom-enrichment-rules/v1/{custom_enrichment_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"custom_enrichment_id"+"}", url.PathEscape(parameterValueToString(r.customEnrichmentId, "customEnrichmentId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -276,7 +295,7 @@ func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceGetCustomEnr
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/custom_enrichment/{id}"
+	localVarPath := localBasePath + "/enrichment-rules/custom-enrichment-rules/v1/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -376,7 +395,7 @@ func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceGetCustomEnr
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/custom_enrichment"
+	localVarPath := localBasePath + "/enrichment-rules/custom-enrichment-rules/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -481,7 +500,7 @@ func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceSearchCustom
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/custom_enrichment/search"
+	localVarPath := localBasePath + "/enrichment-rules/custom-enrichment-rules/v1/search"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -597,7 +616,7 @@ func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceUpdateCustom
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/custom_enrichment"
+	localVarPath := localBasePath + "/enrichment-rules/custom-enrichment-rules/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

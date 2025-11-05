@@ -21,35 +21,6 @@ paths:
       summary: List Entity Types
       tags:
       - Entities service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/entity-types';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/entity-types"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/entity-types \
-            --header 'Authorization: Bearer <API_KEY>'
   /notifications/notification-center/v1/entity-types/{entity_type}/entity-subtypes:
     get:
       description: No description available
@@ -62,12 +33,7 @@ paths:
         name: entity_type
         required: true
         schema:
-          enum:
-          - ENTITY_TYPE_UNSPECIFIED
-          - ALERTS
-          - TEST_NOTIFICATIONS
-          - CASES
-          type: string
+          $ref: "#/components/schemas/notification_center.EntityType"
         style: simple
       responses:
         "200":
@@ -79,35 +45,6 @@ paths:
       summary: List Entity Subtypes
       tags:
       - Entities service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/entity-types/%7Bentity_type%7D/entity-subtypes';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/entity-types/%7Bentity_type%7D/entity-subtypes"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/entity-types/%7Bentity_type%7D/entity-subtypes \
-            --header 'Authorization: Bearer <API_KEY>'
 components:
   schemas:
     ColorsByAggregation:

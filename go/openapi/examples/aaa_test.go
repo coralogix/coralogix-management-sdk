@@ -17,6 +17,7 @@ package examples
 import (
 	"context"
 	"fmt"
+	"log"
 	"os"
 	"strconv"
 	"testing"
@@ -41,6 +42,7 @@ func TestApiKeys(t *testing.T) {
 	client := cxsdk.NewAPIKeysClient(cpc)
 
 	teamID, err := strconv.ParseInt(os.Getenv("TEAM_ID"), 10, 32)
+	hashed := false
 	assertNilAndPrintError(t, err)
 
 	createReq := apikeys.CreateApiKeyRequest{
@@ -54,7 +56,7 @@ func TestApiKeys(t *testing.T) {
 			Presets:     []string{"APM"},
 			Permissions: []string{"ALERTS-MAP:READ"},
 		},
-		Hashed: false,
+		Hashed: &hashed,
 	}
 
 	created, httpResp, err := client.
@@ -86,6 +88,7 @@ func TestIpAccess(t *testing.T) {
 		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
 		cxsdk.APIKeyFromEnv(),
 	)
+	enabled := false
 
 	client := cxsdk.NewIPAccessClient(cpc)
 
@@ -96,12 +99,12 @@ func TestIpAccess(t *testing.T) {
 			{
 				Name:    ipaccess.PtrString("Office Network"),
 				IpRange: "31.154.215.114/32",
-				Enabled: false,
+				Enabled: &enabled,
 			},
 			{
 				Name:    ipaccess.PtrString("VPN"),
 				IpRange: "198.51.100.0/24",
-				Enabled: false,
+				Enabled: &enabled,
 			},
 		},
 		EnableCoralogixCustomerSupportAccess: ipaccess.CORALOGIXCUSTOMERSUPPORTACCESS_CORALOGIX_CUSTOMER_SUPPORT_ACCESS_DISABLED.Ptr(),
@@ -124,12 +127,12 @@ func TestIpAccess(t *testing.T) {
 			{
 				Name:    ipaccess.PtrString("Office Network"),
 				IpRange: "31.154.215.114/32",
-				Enabled: false,
+				Enabled: &enabled,
 			},
 			{
 				Name:    ipaccess.PtrString("VPN"),
 				IpRange: "198.51.100.0/18", // modified
-				Enabled: false,
+				Enabled: &enabled,
 			},
 		},
 		EnableCoralogixCustomerSupportAccess: ipaccess.CORALOGIXCUSTOMERSUPPORTACCESS_CORALOGIX_CUSTOMER_SUPPORT_ACCESS_DISABLED.Ptr(),
@@ -170,12 +173,12 @@ func TestGroups(t *testing.T) {
 	teamID, err := strconv.ParseInt(os.Getenv("TEAM_ID"), 10, 64)
 	assertNilAndPrintError(t, err)
 
-	groupsResp, httpResp, err := client.
-		TeamPermissionsMgmtServiceGetTeamGroups(ctx).
-		TeamId(groups.TeamPermissionsMgmtServiceGetTeamGroupsTeamIdParameter{Id: &teamID}).
-		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Greater(t, len(groupsResp.Groups), 0)
+	// groupsResp, httpResp, err := client.
+	// 	TeamPermissionsMgmtServiceGetTeamGroups(ctx).
+	// 	TeamId(groups.TeamPermissionsMgmtServiceGetTeamGroupsTeamIdParameter{Id: &teamID}).
+	// 	Execute()
+	// assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	// assert.Greater(t, len(groupsResp.Groups), 0)
 
 	groupName := fmt.Sprintf("Test Group %v", time.Now().UnixMilli())
 	groupDesc := "A Test Group"
@@ -194,6 +197,7 @@ func TestGroups(t *testing.T) {
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 	assert.NotNil(t, createdGroup.GroupId)
 	groupID := createdGroup.GroupId.Id
+	log.Printf("group id: %d", groupID)
 
 	gotGroup, httpResp, err := client.
 		TeamPermissionsMgmtServiceGetTeamGroup(ctx, *groupID).

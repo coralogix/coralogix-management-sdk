@@ -20,6 +20,7 @@ var _ MappedNullable = &Table{}
 // Table struct for Table
 type Table struct {
 	Columns []TableColumn `json:"columns,omitempty"`
+	Rules []TableRule `json:"rules,omitempty"`
 }
 
 // NewTable instantiates a new Table object
@@ -71,6 +72,38 @@ func (o *Table) SetColumns(v []TableColumn) {
 	o.Columns = v
 }
 
+// GetRules returns the Rules field value if set, zero value otherwise.
+func (o *Table) GetRules() []TableRule {
+	if o == nil || IsNil(o.Rules) {
+		var ret []TableRule
+		return ret
+	}
+	return o.Rules
+}
+
+// GetRulesOk returns a tuple with the Rules field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Table) GetRulesOk() ([]TableRule, bool) {
+	if o == nil || IsNil(o.Rules) {
+		return nil, false
+	}
+	return o.Rules, true
+}
+
+// HasRules returns a boolean if a field has been set.
+func (o *Table) HasRules() bool {
+	if o != nil && !IsNil(o.Rules) {
+		return true
+	}
+
+	return false
+}
+
+// SetRules gets a reference to the given []TableRule and assigns it to the Rules field.
+func (o *Table) SetRules(v []TableRule) {
+	o.Rules = v
+}
+
 func (o Table) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -83,6 +116,9 @@ func (o Table) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Columns) {
 		toSerialize["columns"] = o.Columns
+	}
+	if !IsNil(o.Rules) {
+		toSerialize["rules"] = o.Rules
 	}
 	return toSerialize, nil
 }

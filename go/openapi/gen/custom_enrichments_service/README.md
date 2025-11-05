@@ -79,11 +79,11 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *CustomEnrichmentsServiceAPI* | [**CustomEnrichmentServiceCreateCustomEnrichment**](docs/CustomEnrichmentsServiceAPI.md#customenrichmentservicecreatecustomenrichment) | **Post** /v1/custom_enrichment | Create Custom Enrichments
-*CustomEnrichmentsServiceAPI* | [**CustomEnrichmentServiceDeleteCustomEnrichment**](docs/CustomEnrichmentsServiceAPI.md#customenrichmentservicedeletecustomenrichment) | **Delete** /v1/custom_enrichment/{custom_enrichment_id} | Delete Custom Enrichments
-*CustomEnrichmentsServiceAPI* | [**CustomEnrichmentServiceGetCustomEnrichment**](docs/CustomEnrichmentsServiceAPI.md#customenrichmentservicegetcustomenrichment) | **Get** /v1/custom_enrichment/{id} | Get Custom Enrichment
-*CustomEnrichmentsServiceAPI* | [**CustomEnrichmentServiceGetCustomEnrichments**](docs/CustomEnrichmentsServiceAPI.md#customenrichmentservicegetcustomenrichments) | **Get** /v1/custom_enrichment | Get Custom Enrichments
-*CustomEnrichmentsServiceAPI* | [**CustomEnrichmentServiceSearchCustomEnrichmentData**](docs/CustomEnrichmentsServiceAPI.md#customenrichmentservicesearchcustomenrichmentdata) | **Post** /v1/custom_enrichment/search | Search Custom Enrichment Data
-*CustomEnrichmentsServiceAPI* | [**CustomEnrichmentServiceUpdateCustomEnrichment**](docs/CustomEnrichmentsServiceAPI.md#customenrichmentserviceupdatecustomenrichment) | **Put** /v1/custom_enrichment | Update Custom Enrichment
+*CustomEnrichmentsServiceAPI* | [**CustomEnrichmentServiceDeleteCustomEnrichment**](docs/CustomEnrichmentsServiceAPI.md#customenrichmentservicedeletecustomenrichment) | **Delete** /enrichment-rules/custom-enrichment-rules/v1/{custom_enrichment_id} | Delete Custom Enrichments
+*CustomEnrichmentsServiceAPI* | [**CustomEnrichmentServiceGetCustomEnrichment**](docs/CustomEnrichmentsServiceAPI.md#customenrichmentservicegetcustomenrichment) | **Get** /enrichment-rules/custom-enrichment-rules/v1/{id} | Get Custom Enrichment
+*CustomEnrichmentsServiceAPI* | [**CustomEnrichmentServiceGetCustomEnrichments**](docs/CustomEnrichmentsServiceAPI.md#customenrichmentservicegetcustomenrichments) | **Get** /enrichment-rules/custom-enrichment-rules/v1 | Get Custom Enrichments
+*CustomEnrichmentsServiceAPI* | [**CustomEnrichmentServiceSearchCustomEnrichmentData**](docs/CustomEnrichmentsServiceAPI.md#customenrichmentservicesearchcustomenrichmentdata) | **Post** /enrichment-rules/custom-enrichment-rules/v1/search | Search Custom Enrichment Data
+*CustomEnrichmentsServiceAPI* | [**CustomEnrichmentServiceUpdateCustomEnrichment**](docs/CustomEnrichmentsServiceAPI.md#customenrichmentserviceupdatecustomenrichment) | **Put** /enrichment-rules/custom-enrichment-rules/v1 | Update Custom Enrichment
 
 
 ## Documentation For Models
@@ -92,12 +92,12 @@ Class | Method | HTTP request | Description
  - [ColorsByGroupBy](docs/ColorsByGroupBy.md)
  - [ColorsByStack](docs/ColorsByStack.md)
  - [CommonGroup](docs/CommonGroup.md)
- - [CreateCustomEnrichmentRequest](docs/CreateCustomEnrichmentRequest.md)
  - [CreateCustomEnrichmentResponse](docs/CreateCustomEnrichmentResponse.md)
  - [CustomEnrichment](docs/CustomEnrichment.md)
  - [CustomEnrichmentData](docs/CustomEnrichmentData.md)
  - [CustomEnrichmentDataBinary](docs/CustomEnrichmentDataBinary.md)
  - [CustomEnrichmentDataTextual](docs/CustomEnrichmentDataTextual.md)
+ - [CustomEnrichmentServiceCreateCustomEnrichmentFileParameter](docs/CustomEnrichmentServiceCreateCustomEnrichmentFileParameter.md)
  - [CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner](docs/CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner.md)
  - [DeleteCustomEnrichmentResponse](docs/DeleteCustomEnrichmentResponse.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)

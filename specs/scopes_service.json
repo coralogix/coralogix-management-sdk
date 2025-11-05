@@ -59,21 +59,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1?ids=SOME_ARRAY_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1\"\n\nquerystring = {\"ids\":\"SOME_ARRAY_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1?ids=SOME_ARRAY_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       },
       "put": {
         "tags": [
@@ -156,21 +142,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"defaultExpression\":\"<v1>true\",\"description\":\"The best scope\",\"displayName\":\"my-scope\",\"filters\":[{\"entityType\":\"ENTITY_TYPE_UNSPECIFIED\",\"expression\":\"<v1>true\"}],\"id\":\"60c82be2-413f-4b8e-8201-7f5c51e2ef2b\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1\"\n\npayload = {\n    \"defaultExpression\": \"<v1>true\",\n    \"description\": \"The best scope\",\n    \"displayName\": \"my-scope\",\n    \"filters\": [\n        {\n            \"entityType\": \"ENTITY_TYPE_UNSPECIFIED\",\n            \"expression\": \"<v1>true\"\n        }\n    ],\n    \"id\": \"60c82be2-413f-4b8e-8201-7f5c51e2ef2b\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1 \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"defaultExpression\":\"<v1>true\",\"description\":\"The best scope\",\"displayName\":\"my-scope\",\"filters\":[{\"entityType\":\"ENTITY_TYPE_UNSPECIFIED\",\"expression\":\"<v1>true\"}],\"id\":\"60c82be2-413f-4b8e-8201-7f5c51e2ef2b\"}'"
-          }
-        ]
+        }
       },
       "post": {
         "tags": [
@@ -247,21 +219,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"defaultExpression\":\"<v1>true\",\"description\":\"The best scope\",\"displayName\":\"my-scope\",\"filters\":[{\"entityType\":\"ENTITY_TYPE_UNSPECIFIED\",\"expression\":\"<v1>true\"}]}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1\"\n\npayload = {\n    \"defaultExpression\": \"<v1>true\",\n    \"description\": \"The best scope\",\n    \"displayName\": \"my-scope\",\n    \"filters\": [\n        {\n            \"entityType\": \"ENTITY_TYPE_UNSPECIFIED\",\n            \"expression\": \"<v1>true\"\n        }\n    ]\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1 \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"defaultExpression\":\"<v1>true\",\"description\":\"The best scope\",\"displayName\":\"my-scope\",\"filters\":[{\"entityType\":\"ENTITY_TYPE_UNSPECIFIED\",\"expression\":\"<v1>true\"}]}'"
-          }
-        ]
+        }
       }
     },
     "/aaa/team-scopes/v1/list": {
@@ -304,21 +262,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1/list';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1/list\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1/list \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/aaa/team-scopes/v1/{id}": {
@@ -373,21 +317,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1/60c82be2-413f-4b8e-8201-7f5c51e2ef2b';\n\nlet options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1/60c82be2-413f-4b8e-8201-7f5c51e2ef2b\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1/60c82be2-413f-4b8e-8201-7f5c51e2ef2b \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     }
   },

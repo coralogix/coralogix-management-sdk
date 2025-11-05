@@ -119,21 +119,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2?date_range=SOME_OBJECT_VALUE&resolution=SOME_STRING_VALUE&aggregate=SOME_ARRAY_VALUE&dimension_filters=SOME_ARRAY_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2\"\n\nquerystring = {\"date_range\":\"SOME_OBJECT_VALUE\",\"resolution\":\"SOME_STRING_VALUE\",\"aggregate\":\"SOME_ARRAY_VALUE\",\"dimension_filters\":\"SOME_ARRAY_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2?date_range=SOME_OBJECT_VALUE&resolution=SOME_STRING_VALUE&aggregate=SOME_ARRAY_VALUE&dimension_filters=SOME_ARRAY_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/dataplans/data-usage/v2/daily:evaluation-tokens": {
@@ -193,21 +179,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/daily:evaluation-tokens';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"range\":\"RANGE_UNSPECIFIED\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/daily:evaluation-tokens\"\n\npayload = {\"range\": \"RANGE_UNSPECIFIED\"}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/daily:evaluation-tokens \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"range\":\"RANGE_UNSPECIFIED\"}'"
-          }
-        ]
+        }
       }
     },
     "/dataplans/data-usage/v2/daily:processed-gbs": {
@@ -228,10 +200,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestDateRange"
+                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestRange"
                   },
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestRange"
+                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestDateRange"
                   }
                 ]
               }
@@ -267,21 +239,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/daily:processed-gbs';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"dateRange\":{\"fromDate\":\"2021-01-01T00:00:00.000Z\",\"toDate\":\"2021-01-01T00:00:00.000Z\"}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/daily:processed-gbs\"\n\npayload = {\"dateRange\": {\n        \"fromDate\": \"2021-01-01T00:00:00.000Z\",\n        \"toDate\": \"2021-01-01T00:00:00.000Z\"\n    }}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/daily:processed-gbs \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"dateRange\":{\"fromDate\":\"2021-01-01T00:00:00.000Z\",\"toDate\":\"2021-01-01T00:00:00.000Z\"}}'"
-          }
-        ]
+        }
       }
     },
     "/dataplans/data-usage/v2/daily:units": {
@@ -341,21 +299,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/daily:units';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"range\":\"RANGE_UNSPECIFIED\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/daily:units\"\n\npayload = {\"range\": \"RANGE_UNSPECIFIED\"}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/daily:units \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"range\":\"RANGE_UNSPECIFIED\"}'"
-          }
-        ]
+        }
       }
     },
     "/dataplans/data-usage/v2/export-status": {
@@ -398,21 +342,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/export-status';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/export-status\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/export-status \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       },
       "post": {
         "tags": [
@@ -471,21 +401,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/export-status';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"enabled\":true}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/export-status\"\n\npayload = {\"enabled\": True}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/export-status \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"enabled\":true}'"
-          }
-        ]
+        }
       }
     },
     "/dataplans/data-usage/v2/logs:count": {
@@ -563,6 +479,22 @@
               }
             },
             "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "subsystem_aggregation",
+            "schema": {
+              "type": "boolean"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "application_aggregation",
+            "schema": {
+              "type": "boolean"
+            },
+            "style": "form"
           }
         ],
         "responses": {
@@ -594,21 +526,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/logs:count?date_range=SOME_OBJECT_VALUE&resolution=SOME_STRING_VALUE&filters=SOME_OBJECT_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/logs:count\"\n\nquerystring = {\"date_range\":\"SOME_OBJECT_VALUE\",\"resolution\":\"SOME_STRING_VALUE\",\"filters\":\"SOME_OBJECT_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/logs:count?date_range=SOME_OBJECT_VALUE&resolution=SOME_STRING_VALUE&filters=SOME_OBJECT_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/dataplans/data-usage/v2/spans:count": {
@@ -717,21 +635,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/spans:count?date_range=SOME_OBJECT_VALUE&resolution=SOME_STRING_VALUE&filters=SOME_OBJECT_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/spans:count\"\n\nquerystring = {\"date_range\":\"SOME_OBJECT_VALUE\",\"resolution\":\"SOME_STRING_VALUE\",\"filters\":\"SOME_OBJECT_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/dataplans/data-usage/v2/spans:count?date_range=SOME_OBJECT_VALUE&resolution=SOME_STRING_VALUE&filters=SOME_OBJECT_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     }
   },
@@ -919,9 +823,6 @@
       "Dimension": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DimensionSeverity"
-          },
-          {
             "$ref": "#/components/schemas/DimensionPriority"
           },
           {
@@ -932,6 +833,9 @@
           },
           {
             "$ref": "#/components/schemas/DimensionTier"
+          },
+          {
+            "$ref": "#/components/schemas/DimensionSeverity"
           }
         ]
       },
@@ -1259,6 +1163,9 @@
         "description": "This data structure represents a logs count.",
         "type": "object",
         "properties": {
+          "applicationName": {
+            "type": "string"
+          },
           "logsCount": {
             "example": 100,
             "type": "string",
@@ -1269,6 +1176,9 @@
           },
           "severity": {
             "$ref": "#/components/schemas/datausage.v2.Severity"
+          },
+          "subsystemName": {
+            "type": "string"
           },
           "timestamp": {
             "type": "string",
@@ -1455,7 +1365,8 @@
           "RANGE_CURRENT_MONTH",
           "RANGE_LAST_30_DAYS",
           "RANGE_LAST_90_DAYS",
-          "RANGE_LAST_WEEK"
+          "RANGE_LAST_WEEK",
+          "RANGE_LAST_YEAR"
         ]
       },
       "v2.TcoTier": {

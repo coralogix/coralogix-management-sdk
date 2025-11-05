@@ -22,6 +22,7 @@ var _ MappedNullable = &SearchQuery{}
 // SearchQuery struct for SearchQuery
 type SearchQuery struct {
 	Query string `json:"query"`
+	SyntaxType *SyntaxType `json:"syntaxType,omitempty"`
 }
 
 type _SearchQuery SearchQuery
@@ -68,6 +69,38 @@ func (o *SearchQuery) SetQuery(v string) {
 	o.Query = v
 }
 
+// GetSyntaxType returns the SyntaxType field value if set, zero value otherwise.
+func (o *SearchQuery) GetSyntaxType() SyntaxType {
+	if o == nil || IsNil(o.SyntaxType) {
+		var ret SyntaxType
+		return ret
+	}
+	return *o.SyntaxType
+}
+
+// GetSyntaxTypeOk returns a tuple with the SyntaxType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SearchQuery) GetSyntaxTypeOk() (*SyntaxType, bool) {
+	if o == nil || IsNil(o.SyntaxType) {
+		return nil, false
+	}
+	return o.SyntaxType, true
+}
+
+// HasSyntaxType returns a boolean if a field has been set.
+func (o *SearchQuery) HasSyntaxType() bool {
+	if o != nil && !IsNil(o.SyntaxType) {
+		return true
+	}
+
+	return false
+}
+
+// SetSyntaxType gets a reference to the given SyntaxType and assigns it to the SyntaxType field.
+func (o *SearchQuery) SetSyntaxType(v SyntaxType) {
+	o.SyntaxType = &v
+}
+
 func (o SearchQuery) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -79,6 +112,9 @@ func (o SearchQuery) MarshalJSON() ([]byte, error) {
 func (o SearchQuery) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["query"] = o.Query
+	if !IsNil(o.SyntaxType) {
+		toSerialize["syntaxType"] = o.SyntaxType
+	}
 	return toSerialize, nil
 }
 

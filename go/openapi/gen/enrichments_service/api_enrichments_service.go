@@ -68,7 +68,7 @@ func (a *EnrichmentsServiceAPIService) EnrichmentServiceAddEnrichmentsExecute(r 
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/enrichments"
+	localVarPath := localBasePath + "/enrichment-rules/enrichment-rules/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -164,7 +164,7 @@ func (a *EnrichmentsServiceAPIService) EnrichmentServiceAtomicOverwriteEnrichmen
 //  @return AtomicOverwriteEnrichmentsResponse
 func (a *EnrichmentsServiceAPIService) EnrichmentServiceAtomicOverwriteEnrichmentsExecute(r ApiEnrichmentServiceAtomicOverwriteEnrichmentsRequest) (*AtomicOverwriteEnrichmentsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
+		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  *AtomicOverwriteEnrichmentsResponse
@@ -175,7 +175,7 @@ func (a *EnrichmentsServiceAPIService) EnrichmentServiceAtomicOverwriteEnrichmen
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/enrichments:atomicOverwrite"
+	localVarPath := localBasePath + "/enrichment-rules/enrichment-rules/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -276,7 +276,7 @@ func (a *EnrichmentsServiceAPIService) EnrichmentServiceGetCompanyEnrichmentSett
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/enrichments/settings"
+	localVarPath := localBasePath + "/enrichment-rules/enrichment-rules/v1/settings"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -375,7 +375,7 @@ func (a *EnrichmentsServiceAPIService) EnrichmentServiceGetEnrichmentLimitExecut
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/enrichments/limit"
+	localVarPath := localBasePath + "/enrichment-rules/enrichment-rules/v1/limit"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -474,7 +474,7 @@ func (a *EnrichmentsServiceAPIService) EnrichmentServiceGetEnrichmentsExecute(r 
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/enrichments"
+	localVarPath := localBasePath + "/enrichment-rules/enrichment-rules/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -579,7 +579,7 @@ func (a *EnrichmentsServiceAPIService) EnrichmentServiceRemoveEnrichmentsExecute
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/enrichments"
+	localVarPath := localBasePath + "/enrichment-rules/enrichment-rules/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

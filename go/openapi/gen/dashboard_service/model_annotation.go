@@ -19,6 +19,7 @@ var _ MappedNullable = &Annotation{}
 
 // Annotation struct for Annotation
 type Annotation struct {
+	Color *AnnotationColor `json:"color,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Enabled *bool `json:"enabled,omitempty"`
 	Id *string `json:"id,omitempty"`
@@ -42,6 +43,38 @@ func NewAnnotation() *Annotation {
 func NewAnnotationWithDefaults() *Annotation {
 	this := Annotation{}
 	return &this
+}
+
+// GetColor returns the Color field value if set, zero value otherwise.
+func (o *Annotation) GetColor() AnnotationColor {
+	if o == nil || IsNil(o.Color) {
+		var ret AnnotationColor
+		return ret
+	}
+	return *o.Color
+}
+
+// GetColorOk returns a tuple with the Color field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Annotation) GetColorOk() (*AnnotationColor, bool) {
+	if o == nil || IsNil(o.Color) {
+		return nil, false
+	}
+	return o.Color, true
+}
+
+// HasColor returns a boolean if a field has been set.
+func (o *Annotation) HasColor() bool {
+	if o != nil && !IsNil(o.Color) {
+		return true
+	}
+
+	return false
+}
+
+// SetColor gets a reference to the given AnnotationColor and assigns it to the Color field.
+func (o *Annotation) SetColor(v AnnotationColor) {
+	o.Color = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -246,6 +279,9 @@ func (o Annotation) MarshalJSON() ([]byte, error) {
 
 func (o Annotation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Color) {
+		toSerialize["color"] = o.Color
+	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}

@@ -19,6 +19,7 @@ import (
 // AnnotationSource - struct for AnnotationSource
 type AnnotationSource struct {
 	AnnotationSourceDataprime *AnnotationSourceDataprime
+	AnnotationSourceEventRecurrence *AnnotationSourceEventRecurrence
 	AnnotationSourceLogs *AnnotationSourceLogs
 	AnnotationSourceManual *AnnotationSourceManual
 	AnnotationSourceMetrics *AnnotationSourceMetrics
@@ -29,6 +30,13 @@ type AnnotationSource struct {
 func AnnotationSourceDataprimeAsAnnotationSource(v *AnnotationSourceDataprime) AnnotationSource {
 	return AnnotationSource{
 		AnnotationSourceDataprime: v,
+	}
+}
+
+// AnnotationSourceEventRecurrenceAsAnnotationSource is a convenience function that returns AnnotationSourceEventRecurrence wrapped in AnnotationSource
+func AnnotationSourceEventRecurrenceAsAnnotationSource(v *AnnotationSourceEventRecurrence) AnnotationSource {
+	return AnnotationSource{
+		AnnotationSourceEventRecurrence: v,
 	}
 }
 
@@ -80,6 +88,23 @@ func (dst *AnnotationSource) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.AnnotationSourceDataprime = nil
+	}
+
+	// try to unmarshal data into AnnotationSourceEventRecurrence
+	err = newStrictDecoder(data).Decode(&dst.AnnotationSourceEventRecurrence)
+	if err == nil {
+		jsonAnnotationSourceEventRecurrence, _ := json.Marshal(dst.AnnotationSourceEventRecurrence)
+		if string(jsonAnnotationSourceEventRecurrence) == "{}" { // empty struct
+			dst.AnnotationSourceEventRecurrence = nil
+		} else {
+			if err = validator.Validate(dst.AnnotationSourceEventRecurrence); err != nil {
+				dst.AnnotationSourceEventRecurrence = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.AnnotationSourceEventRecurrence = nil
 	}
 
 	// try to unmarshal data into AnnotationSourceLogs
@@ -153,6 +178,7 @@ func (dst *AnnotationSource) UnmarshalJSON(data []byte) error {
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.AnnotationSourceDataprime = nil
+		dst.AnnotationSourceEventRecurrence = nil
 		dst.AnnotationSourceLogs = nil
 		dst.AnnotationSourceManual = nil
 		dst.AnnotationSourceMetrics = nil
@@ -170,6 +196,10 @@ func (dst *AnnotationSource) UnmarshalJSON(data []byte) error {
 func (src AnnotationSource) MarshalJSON() ([]byte, error) {
 	if src.AnnotationSourceDataprime != nil {
 		return json.Marshal(&src.AnnotationSourceDataprime)
+	}
+
+	if src.AnnotationSourceEventRecurrence != nil {
+		return json.Marshal(&src.AnnotationSourceEventRecurrence)
 	}
 
 	if src.AnnotationSourceLogs != nil {
@@ -200,6 +230,10 @@ func (obj *AnnotationSource) GetActualInstance() (interface{}) {
 		return obj.AnnotationSourceDataprime
 	}
 
+	if obj.AnnotationSourceEventRecurrence != nil {
+		return obj.AnnotationSourceEventRecurrence
+	}
+
 	if obj.AnnotationSourceLogs != nil {
 		return obj.AnnotationSourceLogs
 	}
@@ -224,6 +258,10 @@ func (obj *AnnotationSource) GetActualInstance() (interface{}) {
 func (obj AnnotationSource) GetActualInstanceValue() (interface{}) {
 	if obj.AnnotationSourceDataprime != nil {
 		return *obj.AnnotationSourceDataprime
+	}
+
+	if obj.AnnotationSourceEventRecurrence != nil {
+		return *obj.AnnotationSourceEventRecurrence
 	}
 
 	if obj.AnnotationSourceLogs != nil {

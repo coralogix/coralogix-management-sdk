@@ -339,7 +339,7 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceGetOutgoingWe
 type ApiOutgoingWebhooksServiceGetOutgoingWebhookTypeDetailsRequest struct {
 	ctx context.Context
 	ApiService *OutgoingWebhooksServiceAPIService
-	type_ string
+	type_ WebhookType
 }
 
 func (r ApiOutgoingWebhooksServiceGetOutgoingWebhookTypeDetailsRequest) Execute() (*GetOutgoingWebhookTypeDetailsResponse, *http.Response, error) {
@@ -355,7 +355,7 @@ No description available
  @param type_
  @return ApiOutgoingWebhooksServiceGetOutgoingWebhookTypeDetailsRequest
 */
-func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceGetOutgoingWebhookTypeDetails(ctx context.Context, type_ string) ApiOutgoingWebhooksServiceGetOutgoingWebhookTypeDetailsRequest {
+func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceGetOutgoingWebhookTypeDetails(ctx context.Context, type_ WebhookType) ApiOutgoingWebhooksServiceGetOutgoingWebhookTypeDetailsRequest {
 	return ApiOutgoingWebhooksServiceGetOutgoingWebhookTypeDetailsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -739,10 +739,10 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutgoingW
 type ApiOutgoingWebhooksServiceListOutgoingWebhooksRequest struct {
 	ctx context.Context
 	ApiService *OutgoingWebhooksServiceAPIService
-	type_ *string
+	type_ *WebhookType
 }
 
-func (r ApiOutgoingWebhooksServiceListOutgoingWebhooksRequest) Type_(type_ string) ApiOutgoingWebhooksServiceListOutgoingWebhooksRequest {
+func (r ApiOutgoingWebhooksServiceListOutgoingWebhooksRequest) Type_(type_ WebhookType) ApiOutgoingWebhooksServiceListOutgoingWebhooksRequest {
 	r.type_ = &type_
 	return r
 }

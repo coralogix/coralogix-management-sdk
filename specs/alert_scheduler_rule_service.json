@@ -65,21 +65,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"alertSchedulerRule\":{\"createdAt\":\"string\",\"description\":\"string\",\"enabled\":true,\"filter\":{\"alertMetaLabels\":{\"value\":[{\"id\":\"string\",\"key\":\"string\",\"value\":\"string\"}]},\"whatExpression\":\"string\"},\"id\":\"string\",\"metaLabels\":[{\"id\":\"string\",\"key\":\"string\",\"value\":\"string\"}],\"name\":\"string\",\"schedule\":{\"oneTime\":{\"timeframe\":{\"endTime\":\"string\",\"startTime\":\"string\",\"timezone\":\"string\"}},\"scheduleOperation\":\"SCHEDULE_OPERATION_UNSPECIFIED\"},\"uniqueIdentifier\":\"string\",\"updatedAt\":\"string\"}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules\"\n\npayload = {\"alertSchedulerRule\": {\n        \"createdAt\": \"string\",\n        \"description\": \"string\",\n        \"enabled\": True,\n        \"filter\": {\n            \"alertMetaLabels\": {\"value\": [\n                    {\n                        \"id\": \"string\",\n                        \"key\": \"string\",\n                        \"value\": \"string\"\n                    }\n                ]},\n            \"whatExpression\": \"string\"\n        },\n        \"id\": \"string\",\n        \"metaLabels\": [\n            {\n                \"id\": \"string\",\n                \"key\": \"string\",\n                \"value\": \"string\"\n            }\n        ],\n        \"name\": \"string\",\n        \"schedule\": {\n            \"oneTime\": {\"timeframe\": {\n                    \"endTime\": \"string\",\n                    \"startTime\": \"string\",\n                    \"timezone\": \"string\"\n                }},\n            \"scheduleOperation\": \"SCHEDULE_OPERATION_UNSPECIFIED\"\n        },\n        \"uniqueIdentifier\": \"string\",\n        \"updatedAt\": \"string\"\n    }}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"alertSchedulerRule\":{\"createdAt\":\"string\",\"description\":\"string\",\"enabled\":true,\"filter\":{\"alertMetaLabels\":{\"value\":[{\"id\":\"string\",\"key\":\"string\",\"value\":\"string\"}]},\"whatExpression\":\"string\"},\"id\":\"string\",\"metaLabels\":[{\"id\":\"string\",\"key\":\"string\",\"value\":\"string\"}],\"name\":\"string\",\"schedule\":{\"oneTime\":{\"timeframe\":{\"endTime\":\"string\",\"startTime\":\"string\",\"timezone\":\"string\"}},\"scheduleOperation\":\"SCHEDULE_OPERATION_UNSPECIFIED\"},\"uniqueIdentifier\":\"string\",\"updatedAt\":\"string\"}}'"
-          }
-        ]
+        }
       },
       "post": {
         "tags": [
@@ -140,21 +126,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"alertSchedulerRule\":{\"createdAt\":\"string\",\"description\":\"string\",\"enabled\":true,\"filter\":{\"alertMetaLabels\":{\"value\":[{\"id\":\"string\",\"key\":\"string\",\"value\":\"string\"}]},\"whatExpression\":\"string\"},\"id\":\"string\",\"metaLabels\":[{\"id\":\"string\",\"key\":\"string\",\"value\":\"string\"}],\"name\":\"string\",\"schedule\":{\"oneTime\":{\"timeframe\":{\"endTime\":\"string\",\"startTime\":\"string\",\"timezone\":\"string\"}},\"scheduleOperation\":\"SCHEDULE_OPERATION_UNSPECIFIED\"},\"uniqueIdentifier\":\"string\",\"updatedAt\":\"string\"}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules\"\n\npayload = {\"alertSchedulerRule\": {\n        \"createdAt\": \"string\",\n        \"description\": \"string\",\n        \"enabled\": True,\n        \"filter\": {\n            \"alertMetaLabels\": {\"value\": [\n                    {\n                        \"id\": \"string\",\n                        \"key\": \"string\",\n                        \"value\": \"string\"\n                    }\n                ]},\n            \"whatExpression\": \"string\"\n        },\n        \"id\": \"string\",\n        \"metaLabels\": [\n            {\n                \"id\": \"string\",\n                \"key\": \"string\",\n                \"value\": \"string\"\n            }\n        ],\n        \"name\": \"string\",\n        \"schedule\": {\n            \"oneTime\": {\"timeframe\": {\n                    \"endTime\": \"string\",\n                    \"startTime\": \"string\",\n                    \"timezone\": \"string\"\n                }},\n            \"scheduleOperation\": \"SCHEDULE_OPERATION_UNSPECIFIED\"\n        },\n        \"uniqueIdentifier\": \"string\",\n        \"updatedAt\": \"string\"\n    }}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"alertSchedulerRule\":{\"createdAt\":\"string\",\"description\":\"string\",\"enabled\":true,\"filter\":{\"alertMetaLabels\":{\"value\":[{\"id\":\"string\",\"key\":\"string\",\"value\":\"string\"}]},\"whatExpression\":\"string\"},\"id\":\"string\",\"metaLabels\":[{\"id\":\"string\",\"key\":\"string\",\"value\":\"string\"}],\"name\":\"string\",\"schedule\":{\"oneTime\":{\"timeframe\":{\"endTime\":\"string\",\"startTime\":\"string\",\"timezone\":\"string\"}},\"scheduleOperation\":\"SCHEDULE_OPERATION_UNSPECIFIED\"},\"uniqueIdentifier\":\"string\",\"updatedAt\":\"string\"}}'"
-          }
-        ]
+        }
       }
     },
     "/v1/alert-scheduler-rules/bulk": {
@@ -163,6 +135,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Get multiple alert scheduler rules",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -201,10 +174,10 @@
             "schema": {
               "oneOf": [
                 {
-                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds"
+                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds"
                 },
                 {
-                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds"
+                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds"
                 }
               ]
             },
@@ -312,21 +285,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules/bulk';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"updateAlertSchedulerRuleRequests\":[{\"alertSchedulerRule\":{\"createdAt\":\"string\",\"description\":\"string\",\"enabled\":true,\"filter\":{\"alertMetaLabels\":{\"value\":[{\"id\":\"string\",\"key\":\"string\",\"value\":\"string\"}]},\"whatExpression\":\"string\"},\"id\":\"string\",\"metaLabels\":[{\"id\":\"string\",\"key\":\"string\",\"value\":\"string\"}],\"name\":\"string\",\"schedule\":{\"oneTime\":{\"timeframe\":{\"endTime\":\"string\",\"startTime\":\"string\",\"timezone\":\"string\"}},\"scheduleOperation\":\"SCHEDULE_OPERATION_UNSPECIFIED\"},\"uniqueIdentifier\":\"string\",\"updatedAt\":\"string\"}}]}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules/bulk\"\n\npayload = {\"updateAlertSchedulerRuleRequests\": [{\"alertSchedulerRule\": {\n                \"createdAt\": \"string\",\n                \"description\": \"string\",\n                \"enabled\": True,\n                \"filter\": {\n                    \"alertMetaLabels\": {\"value\": [\n                            {\n                                \"id\": \"string\",\n                                \"key\": \"string\",\n                                \"value\": \"string\"\n                            }\n                        ]},\n                    \"whatExpression\": \"string\"\n                },\n                \"id\": \"string\",\n                \"metaLabels\": [\n                    {\n                        \"id\": \"string\",\n                        \"key\": \"string\",\n                        \"value\": \"string\"\n                    }\n                ],\n                \"name\": \"string\",\n                \"schedule\": {\n                    \"oneTime\": {\"timeframe\": {\n                            \"endTime\": \"string\",\n                            \"startTime\": \"string\",\n                            \"timezone\": \"string\"\n                        }},\n                    \"scheduleOperation\": \"SCHEDULE_OPERATION_UNSPECIFIED\"\n                },\n                \"uniqueIdentifier\": \"string\",\n                \"updatedAt\": \"string\"\n            }}]}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules/bulk \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"updateAlertSchedulerRuleRequests\":[{\"alertSchedulerRule\":{\"createdAt\":\"string\",\"description\":\"string\",\"enabled\":true,\"filter\":{\"alertMetaLabels\":{\"value\":[{\"id\":\"string\",\"key\":\"string\",\"value\":\"string\"}]},\"whatExpression\":\"string\"},\"id\":\"string\",\"metaLabels\":[{\"id\":\"string\",\"key\":\"string\",\"value\":\"string\"}],\"name\":\"string\",\"schedule\":{\"oneTime\":{\"timeframe\":{\"endTime\":\"string\",\"startTime\":\"string\",\"timezone\":\"string\"}},\"scheduleOperation\":\"SCHEDULE_OPERATION_UNSPECIFIED\"},\"uniqueIdentifier\":\"string\",\"updatedAt\":\"string\"}}]}'"
-          }
-        ]
+        }
       },
       "post": {
         "tags": [
@@ -390,21 +349,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules/bulk';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"createAlertSchedulerRuleRequests\":[{\"alertSchedulerRule\":{\"createdAt\":\"string\",\"description\":\"string\",\"enabled\":true,\"filter\":{\"alertMetaLabels\":{\"value\":[{\"id\":\"string\",\"key\":\"string\",\"value\":\"string\"}]},\"whatExpression\":\"string\"},\"id\":\"string\",\"metaLabels\":[{\"id\":\"string\",\"key\":\"string\",\"value\":\"string\"}],\"name\":\"string\",\"schedule\":{\"oneTime\":{\"timeframe\":{\"endTime\":\"string\",\"startTime\":\"string\",\"timezone\":\"string\"}},\"scheduleOperation\":\"SCHEDULE_OPERATION_UNSPECIFIED\"},\"uniqueIdentifier\":\"string\",\"updatedAt\":\"string\"}}]}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules/bulk\"\n\npayload = {\"createAlertSchedulerRuleRequests\": [{\"alertSchedulerRule\": {\n                \"createdAt\": \"string\",\n                \"description\": \"string\",\n                \"enabled\": True,\n                \"filter\": {\n                    \"alertMetaLabels\": {\"value\": [\n                            {\n                                \"id\": \"string\",\n                                \"key\": \"string\",\n                                \"value\": \"string\"\n                            }\n                        ]},\n                    \"whatExpression\": \"string\"\n                },\n                \"id\": \"string\",\n                \"metaLabels\": [\n                    {\n                        \"id\": \"string\",\n                        \"key\": \"string\",\n                        \"value\": \"string\"\n                    }\n                ],\n                \"name\": \"string\",\n                \"schedule\": {\n                    \"oneTime\": {\"timeframe\": {\n                            \"endTime\": \"string\",\n                            \"startTime\": \"string\",\n                            \"timezone\": \"string\"\n                        }},\n                    \"scheduleOperation\": \"SCHEDULE_OPERATION_UNSPECIFIED\"\n                },\n                \"uniqueIdentifier\": \"string\",\n                \"updatedAt\": \"string\"\n            }}]}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules/bulk \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"createAlertSchedulerRuleRequests\":[{\"alertSchedulerRule\":{\"createdAt\":\"string\",\"description\":\"string\",\"enabled\":true,\"filter\":{\"alertMetaLabels\":{\"value\":[{\"id\":\"string\",\"key\":\"string\",\"value\":\"string\"}]},\"whatExpression\":\"string\"},\"id\":\"string\",\"metaLabels\":[{\"id\":\"string\",\"key\":\"string\",\"value\":\"string\"}],\"name\":\"string\",\"schedule\":{\"oneTime\":{\"timeframe\":{\"endTime\":\"string\",\"startTime\":\"string\",\"timezone\":\"string\"}},\"scheduleOperation\":\"SCHEDULE_OPERATION_UNSPECIFIED\"},\"uniqueIdentifier\":\"string\",\"updatedAt\":\"string\"}}]}'"
-          }
-        ]
+        }
       }
     },
     "/v1/alert-scheduler-rules/{alert_scheduler_rule_id}": {
@@ -458,21 +403,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules/%7Balert_scheduler_rule_id%7D';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules/%7Balert_scheduler_rule_id%7D\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules/%7Balert_scheduler_rule_id%7D \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       },
       "delete": {
         "tags": [
@@ -524,21 +455,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules/%7Balert_scheduler_rule_id%7D';\n\nlet options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules/%7Balert_scheduler_rule_id%7D\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/alert-scheduler-rules/%7Balert_scheduler_rule_id%7D \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     }
   },
@@ -969,13 +886,13 @@
       "Recurring.Dynamic": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/RecurringDynamicWeekly"
-          },
-          {
             "$ref": "#/components/schemas/RecurringDynamicMonthly"
           },
           {
             "$ref": "#/components/schemas/RecurringDynamicDaily"
+          },
+          {
+            "$ref": "#/components/schemas/RecurringDynamicWeekly"
           }
         ]
       },

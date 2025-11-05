@@ -27,21 +27,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/entity-types';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/entity-types\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/entity-types \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/notifications/notification-center/v1/entity-types/{entity_type}/entity-subtypes": {
@@ -61,13 +47,7 @@
             "name": "entity_type",
             "required": true,
             "schema": {
-              "type": "string",
-              "enum": [
-                "ENTITY_TYPE_UNSPECIFIED",
-                "ALERTS",
-                "TEST_NOTIFICATIONS",
-                "CASES"
-              ]
+              "$ref": "#/components/schemas/notification_center.EntityType"
             },
             "style": "simple"
           }
@@ -83,21 +63,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/entity-types/%7Bentity_type%7D/entity-subtypes';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/entity-types/%7Bentity_type%7D/entity-subtypes\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/entity-types/%7Bentity_type%7D/entity-subtypes \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     }
   },

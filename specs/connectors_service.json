@@ -42,6 +42,9 @@
                     "type": "string",
                     "maxLength": 5000
                   },
+                  "diagnostics": {
+                    "$ref": "#/components/schemas/Diagnostics"
+                  },
                   "id": {
                     "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
                     "type": "string"
@@ -85,21 +88,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connector';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"configOverrides\":[{\"entityType\":\"ENTITY_TYPE_UNSPECIFIED\",\"fields\":[{\"fieldName\":\"string\",\"template\":\"string\"}]}],\"connectorConfig\":{\"fields\":[{\"fieldName\":\"string\",\"value\":\"string\"}]},\"createTime\":\"2019-08-24T14:15:22Z\",\"description\":\"Connector for team notifications\",\"id\":\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\",\"name\":\"My Slack Connector\",\"teamId\":\"12345\",\"type\":\"CONNECTOR_TYPE_UNSPECIFIED\",\"updateTime\":\"2019-08-24T14:15:22Z\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connector\"\n\npayload = {\n    \"configOverrides\": [\n        {\n            \"entityType\": \"ENTITY_TYPE_UNSPECIFIED\",\n            \"fields\": [\n                {\n                    \"fieldName\": \"string\",\n                    \"template\": \"string\"\n                }\n            ]\n        }\n    ],\n    \"connectorConfig\": {\"fields\": [\n            {\n                \"fieldName\": \"string\",\n                \"value\": \"string\"\n            }\n        ]},\n    \"createTime\": \"2019-08-24T14:15:22Z\",\n    \"description\": \"Connector for team notifications\",\n    \"id\": \"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\",\n    \"name\": \"My Slack Connector\",\n    \"teamId\": \"12345\",\n    \"type\": \"CONNECTOR_TYPE_UNSPECIFIED\",\n    \"updateTime\": \"2019-08-24T14:15:22Z\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connector \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"configOverrides\":[{\"entityType\":\"ENTITY_TYPE_UNSPECIFIED\",\"fields\":[{\"fieldName\":\"string\",\"template\":\"string\"}]}],\"connectorConfig\":{\"fields\":[{\"fieldName\":\"string\",\"value\":\"string\"}]},\"createTime\":\"2019-08-24T14:15:22Z\",\"description\":\"Connector for team notifications\",\"id\":\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\",\"name\":\"My Slack Connector\",\"teamId\":\"12345\",\"type\":\"CONNECTOR_TYPE_UNSPECIFIED\",\"updateTime\":\"2019-08-24T14:15:22Z\"}'"
-          }
-        ]
+        }
       }
     },
     "/notifications/notification-center/v1/connectors": {
@@ -118,14 +107,7 @@
             "in": "query",
             "name": "connector_type",
             "schema": {
-              "type": "string",
-              "enum": [
-                "CONNECTOR_TYPE_UNSPECIFIED",
-                "SLACK",
-                "GENERIC_HTTPS",
-                "PAGERDUTY",
-                "IBM_EVENT_NOTIFICATIONS"
-              ]
+              "$ref": "#/components/schemas/ConnectorType"
             },
             "style": "form"
           },
@@ -133,13 +115,7 @@
             "in": "query",
             "name": "supported_by_entity_type",
             "schema": {
-              "type": "string",
-              "enum": [
-                "ENTITY_TYPE_UNSPECIFIED",
-                "ALERTS",
-                "TEST_NOTIFICATIONS",
-                "CASES"
-              ]
+              "$ref": "#/components/schemas/notification_center.EntityType"
             },
             "style": "form"
           }
@@ -155,21 +131,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors?connector_type=SOME_STRING_VALUE&supported_by_entity_type=SOME_STRING_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors\"\n\nquerystring = {\"connector_type\":\"SOME_STRING_VALUE\",\"supported_by_entity_type\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors?connector_type=SOME_STRING_VALUE&supported_by_entity_type=SOME_STRING_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       },
       "post": {
         "tags": [
@@ -206,6 +168,9 @@
                     "example": "Connector for team notifications",
                     "type": "string",
                     "maxLength": 5000
+                  },
+                  "diagnostics": {
+                    "$ref": "#/components/schemas/Diagnostics"
                   },
                   "id": {
                     "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
@@ -250,21 +215,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"configOverrides\":[{\"entityType\":\"ENTITY_TYPE_UNSPECIFIED\",\"fields\":[{\"fieldName\":\"string\",\"template\":\"string\"}]}],\"connectorConfig\":{\"fields\":[{\"fieldName\":\"string\",\"value\":\"string\"}]},\"createTime\":\"2019-08-24T14:15:22Z\",\"description\":\"Connector for team notifications\",\"id\":\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\",\"name\":\"My Slack Connector\",\"teamId\":\"12345\",\"type\":\"CONNECTOR_TYPE_UNSPECIFIED\",\"updateTime\":\"2019-08-24T14:15:22Z\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors\"\n\npayload = {\n    \"configOverrides\": [\n        {\n            \"entityType\": \"ENTITY_TYPE_UNSPECIFIED\",\n            \"fields\": [\n                {\n                    \"fieldName\": \"string\",\n                    \"template\": \"string\"\n                }\n            ]\n        }\n    ],\n    \"connectorConfig\": {\"fields\": [\n            {\n                \"fieldName\": \"string\",\n                \"value\": \"string\"\n            }\n        ]},\n    \"createTime\": \"2019-08-24T14:15:22Z\",\n    \"description\": \"Connector for team notifications\",\n    \"id\": \"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\",\n    \"name\": \"My Slack Connector\",\n    \"teamId\": \"12345\",\n    \"type\": \"CONNECTOR_TYPE_UNSPECIFIED\",\n    \"updateTime\": \"2019-08-24T14:15:22Z\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"configOverrides\":[{\"entityType\":\"ENTITY_TYPE_UNSPECIFIED\",\"fields\":[{\"fieldName\":\"string\",\"template\":\"string\"}]}],\"connectorConfig\":{\"fields\":[{\"fieldName\":\"string\",\"value\":\"string\"}]},\"createTime\":\"2019-08-24T14:15:22Z\",\"description\":\"Connector for team notifications\",\"id\":\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\",\"name\":\"My Slack Connector\",\"teamId\":\"12345\",\"type\":\"CONNECTOR_TYPE_UNSPECIFIED\",\"updateTime\":\"2019-08-24T14:15:22Z\"}'"
-          }
-        ]
+        }
       }
     },
     "/notifications/notification-center/v1/connectors/{id}": {
@@ -300,21 +251,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors/%7Bid%7D';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors/%7Bid%7D\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors/%7Bid%7D \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       },
       "delete": {
         "tags": [
@@ -348,21 +285,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors/%7Bid%7D';\n\nlet options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors/%7Bid%7D\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors/%7Bid%7D \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/notifications/notification-center/v1/connectors:batchGet": {
@@ -404,21 +327,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:batchGet?connector_ids=SOME_ARRAY_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:batchGet\"\n\nquerystring = {\"connector_ids\":\"SOME_ARRAY_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:batchGet?connector_ids=SOME_ARRAY_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/notifications/notification-center/v1/connectors:batchGetSummaries": {
@@ -456,21 +365,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:batchGetSummaries?connector_ids=SOME_ARRAY_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:batchGetSummaries\"\n\nquerystring = {\"connector_ids\":\"SOME_ARRAY_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:batchGetSummaries?connector_ids=SOME_ARRAY_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/notifications/notification-center/v1/connectors:getTypeSummaries": {
@@ -489,13 +384,7 @@
             "in": "query",
             "name": "supported_by_entity_type",
             "schema": {
-              "type": "string",
-              "enum": [
-                "ENTITY_TYPE_UNSPECIFIED",
-                "ALERTS",
-                "TEST_NOTIFICATIONS",
-                "CASES"
-              ]
+              "$ref": "#/components/schemas/notification_center.EntityType"
             },
             "style": "form"
           }
@@ -511,21 +400,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:getTypeSummaries?supported_by_entity_type=SOME_STRING_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:getTypeSummaries\"\n\nquerystring = {\"supported_by_entity_type\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:getTypeSummaries?supported_by_entity_type=SOME_STRING_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/notifications/notification-center/v1/connectors:listSummaries": {
@@ -544,14 +419,7 @@
             "in": "query",
             "name": "connector_type",
             "schema": {
-              "type": "string",
-              "enum": [
-                "CONNECTOR_TYPE_UNSPECIFIED",
-                "SLACK",
-                "GENERIC_HTTPS",
-                "PAGERDUTY",
-                "IBM_EVENT_NOTIFICATIONS"
-              ]
+              "$ref": "#/components/schemas/ConnectorType"
             },
             "style": "form"
           },
@@ -559,13 +427,7 @@
             "in": "query",
             "name": "supported_by_entity_type",
             "schema": {
-              "type": "string",
-              "enum": [
-                "ENTITY_TYPE_UNSPECIFIED",
-                "ALERTS",
-                "TEST_NOTIFICATIONS",
-                "CASES"
-              ]
+              "$ref": "#/components/schemas/notification_center.EntityType"
             },
             "style": "form"
           }
@@ -581,21 +443,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:listSummaries?connector_type=SOME_STRING_VALUE&supported_by_entity_type=SOME_STRING_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:listSummaries\"\n\nquerystring = {\"connector_type\":\"SOME_STRING_VALUE\",\"supported_by_entity_type\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:listSummaries?connector_type=SOME_STRING_VALUE&supported_by_entity_type=SOME_STRING_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     }
   },
@@ -706,6 +554,9 @@
             "example": "Connector for team notifications",
             "type": "string",
             "maxLength": 5000
+          },
+          "diagnostics": {
+            "$ref": "#/components/schemas/Diagnostics"
           },
           "id": {
             "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
@@ -826,6 +677,28 @@
       },
       "DeleteConnectorResponse": {
         "type": "object"
+      },
+      "Delivery": {
+        "type": "string",
+        "enum": [
+          "DELIVERY_UNSPECIFIED",
+          "DISABLED",
+          "ERRORS_ONLY"
+        ]
+      },
+      "Diagnostics": {
+        "externalDocs": {
+          "description": "Find out more about datasets",
+          "url": "https://coralogix.com/docs/user-guides/data-layer/datasets/"
+        },
+        "title": "Connector Diagnostics",
+        "description": "Allows to configure rules for data written into 'notification.deliveries' dataset",
+        "type": "object",
+        "properties": {
+          "delivery": {
+            "$ref": "#/components/schemas/Delivery"
+          }
+        }
       },
       "EntityTypeConfigOverrides": {
         "type": "object",

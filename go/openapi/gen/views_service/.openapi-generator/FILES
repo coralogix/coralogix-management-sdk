@@ -23,6 +23,7 @@ model_multiple_values.go
 model_quick_time_selection.go
 model_search_query.go
 model_selected_filters.go
+model_syntax_type.go
 model_time_selection.go
 model_time_selection_custom_selection.go
 model_time_selection_quick_selection.go

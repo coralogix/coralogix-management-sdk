@@ -5,7 +5,7 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/v1/custom_enrichment": {
+    "/enrichment-rules/custom-enrichment-rules/v1": {
       "get": {
         "tags": [
           "Custom Enrichments Service"
@@ -27,21 +27,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       },
       "put": {
         "tags": [
@@ -100,91 +86,10 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"customEnrichmentId\":1,\"description\":\"custom_enrichment_description\",\"file\":{\"extension\":\"csv\",\"name\":\"file_name\",\"size\":100,\"textual\":\"row1,row2 value1,value2\"},\"name\":\"custom_enrichment_name\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment\"\n\npayload = {\n    \"customEnrichmentId\": 1,\n    \"description\": \"custom_enrichment_description\",\n    \"file\": {\n        \"extension\": \"csv\",\n        \"name\": \"file_name\",\n        \"size\": 100,\n        \"textual\": \"row1,row2 value1,value2\"\n    },\n    \"name\": \"custom_enrichment_name\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"customEnrichmentId\":1,\"description\":\"custom_enrichment_description\",\"file\":{\"extension\":\"csv\",\"name\":\"file_name\",\"size\":100,\"textual\":\"row1,row2 value1,value2\"},\"name\":\"custom_enrichment_name\"}'"
-          }
-        ]
-      },
-      "post": {
-        "tags": [
-          "Custom Enrichments Service"
-        ],
-        "summary": "Create Custom Enrichments",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "CustomEnrichmentService_CreateCustomEnrichment",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "title": "Create Custom Enrichment Request",
-                "description": "This request data structure is used to create a custom enrichment",
-                "type": "object",
-                "properties": {
-                  "description": {
-                    "example": "custom_enrichment_description",
-                    "type": "string"
-                  },
-                  "file": {
-                    "$ref": "#/components/schemas/File"
-                  },
-                  "name": {
-                    "example": "custom_enrichment_name",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "name",
-                  "description",
-                  "file"
-                ],
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateCustomEnrichmentResponse"
-                }
-              }
-            }
-          }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"description\":\"custom_enrichment_description\",\"file\":{\"extension\":\"csv\",\"name\":\"file_name\",\"size\":100,\"textual\":\"row1,row2 value1,value2\"},\"name\":\"custom_enrichment_name\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment\"\n\npayload = {\n    \"description\": \"custom_enrichment_description\",\n    \"file\": {\n        \"extension\": \"csv\",\n        \"name\": \"file_name\",\n        \"size\": 100,\n        \"textual\": \"row1,row2 value1,value2\"\n    },\n    \"name\": \"custom_enrichment_name\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"description\":\"custom_enrichment_description\",\"file\":{\"extension\":\"csv\",\"name\":\"file_name\",\"size\":100,\"textual\":\"row1,row2 value1,value2\"},\"name\":\"custom_enrichment_name\"}'"
-          }
-        ]
+        }
       }
     },
-    "/v1/custom_enrichment/search": {
+    "/enrichment-rules/custom-enrichment-rules/v1/search": {
       "post": {
         "tags": [
           "Custom Enrichments Service"
@@ -204,10 +109,10 @@
               "items": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/SearchClauseId"
+                    "$ref": "#/components/schemas/SearchClauseName"
                   },
                   {
-                    "$ref": "#/components/schemas/SearchClauseName"
+                    "$ref": "#/components/schemas/SearchClauseId"
                   }
                 ]
               }
@@ -226,24 +131,10 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment/search?search_clauses=SOME_ARRAY_VALUE';\n\nlet options = {method: 'POST', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment/search\"\n\nquerystring = {\"search_clauses\":\"SOME_ARRAY_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"POST\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url 'https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment/search?search_clauses=SOME_ARRAY_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
-    "/v1/custom_enrichment/{custom_enrichment_id}": {
+    "/enrichment-rules/custom-enrichment-rules/v1/{custom_enrichment_id}": {
       "delete": {
         "tags": [
           "Custom Enrichments Service"
@@ -278,24 +169,10 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment/1';\n\nlet options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment/1\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment/1 \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
-    "/v1/custom_enrichment/{id}": {
+    "/enrichment-rules/custom-enrichment-rules/v1/{id}": {
       "get": {
         "tags": [
           "Custom Enrichments Service"
@@ -330,21 +207,67 @@
               }
             }
           }
+        }
+      }
+    },
+    "/v1/custom_enrichment": {
+      "post": {
+        "tags": [
+          "Custom Enrichments Service"
+        ],
+        "summary": "Create Custom Enrichments",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
         },
-        "x-codeSamples": [
+        "operationId": "CustomEnrichmentService_CreateCustomEnrichment",
+        "parameters": [
           {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment/1';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+            "in": "query",
+            "name": "name",
+            "schema": {
+              "example": "custom_enrichment_name",
+              "type": "string"
+            },
+            "style": "form"
           },
           {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment/1\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
+            "in": "query",
+            "name": "description",
+            "schema": {
+              "example": "custom_enrichment_description",
+              "type": "string"
+            },
+            "style": "form"
           },
           {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/custom_enrichment/1 \\\n  --header 'Authorization: Bearer <API_KEY>'"
+            "in": "query",
+            "name": "file",
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/FileTextual"
+                },
+                {
+                  "$ref": "#/components/schemas/FileBinary"
+                }
+              ]
+            },
+            "style": "form"
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCustomEnrichmentResponse"
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -430,10 +353,10 @@
       "CustomEnrichmentData": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/CustomEnrichmentDataTextual"
+            "$ref": "#/components/schemas/CustomEnrichmentDataBinary"
           },
           {
-            "$ref": "#/components/schemas/CustomEnrichmentDataBinary"
+            "$ref": "#/components/schemas/CustomEnrichmentDataTextual"
           }
         ]
       },

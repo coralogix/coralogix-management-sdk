@@ -20,6 +20,8 @@ model_connector_summary.go
 model_connector_type.go
 model_connector_type_summary.go
 model_create_connector_response.go
+model_delivery.go
+model_diagnostics.go
 model_entity_type_config_overrides.go
 model_events_v3_filter_matcher.go
 model_field_group.go

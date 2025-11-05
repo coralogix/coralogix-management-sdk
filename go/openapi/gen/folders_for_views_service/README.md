@@ -78,11 +78,11 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*FoldersForViewsServiceAPI* | [**ViewsFoldersServiceCreateViewFolder**](docs/FoldersForViewsServiceAPI.md#viewsfoldersservicecreateviewfolder) | **Post** /v1/view_folders | Create View Folder service
-*FoldersForViewsServiceAPI* | [**ViewsFoldersServiceDeleteViewFolder**](docs/FoldersForViewsServiceAPI.md#viewsfoldersservicedeleteviewfolder) | **Delete** /v1/view_folders/{id} | Delete View Folder service
-*FoldersForViewsServiceAPI* | [**ViewsFoldersServiceGetViewFolder**](docs/FoldersForViewsServiceAPI.md#viewsfoldersservicegetviewfolder) | **Get** /v1/view_folders/{id} | Get View Folder service
-*FoldersForViewsServiceAPI* | [**ViewsFoldersServiceListViewFolders**](docs/FoldersForViewsServiceAPI.md#viewsfoldersservicelistviewfolders) | **Get** /v1/view_folders | List view folders service
-*FoldersForViewsServiceAPI* | [**ViewsFoldersServiceReplaceViewFolder**](docs/FoldersForViewsServiceAPI.md#viewsfoldersservicereplaceviewfolder) | **Put** /v1/view_folders/{folder.id} | Replace View Folder service
+*FoldersForViewsServiceAPI* | [**ViewsFoldersServiceCreateViewFolder**](docs/FoldersForViewsServiceAPI.md#viewsfoldersservicecreateviewfolder) | **Post** /data-exploration/saved-views/v1/folders | Create View Folder service
+*FoldersForViewsServiceAPI* | [**ViewsFoldersServiceDeleteViewFolder**](docs/FoldersForViewsServiceAPI.md#viewsfoldersservicedeleteviewfolder) | **Delete** /data-exploration/saved-views/v1/folders/{id} | Delete View Folder service
+*FoldersForViewsServiceAPI* | [**ViewsFoldersServiceGetViewFolder**](docs/FoldersForViewsServiceAPI.md#viewsfoldersservicegetviewfolder) | **Get** /data-exploration/saved-views/v1/folders/{id} | Get View Folder service
+*FoldersForViewsServiceAPI* | [**ViewsFoldersServiceListViewFolders**](docs/FoldersForViewsServiceAPI.md#viewsfoldersservicelistviewfolders) | **Get** /data-exploration/saved-views/v1/folders | List view folders service
+*FoldersForViewsServiceAPI* | [**ViewsFoldersServiceReplaceViewFolder**](docs/FoldersForViewsServiceAPI.md#viewsfoldersservicereplaceviewfolder) | **Put** /data-exploration/saved-views/v1/folders | Replace View Folder service
 
 
 ## Documentation For Models

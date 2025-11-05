@@ -40,48 +40,6 @@ paths:
       - Extension service
       x-coralogixPermissions:
       - extensions:ReadConfig
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/all';
-
-          let options = {
-            method: 'POST',
-            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"filter":{"integrations":["string"]},"includeHiddenExtensions":true}'
-          };
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/all"
-
-          payload = {
-              "filter": {"integrations": ["string"]},
-              "includeHiddenExtensions": True
-          }
-          headers = {
-              "Authorization": "Bearer <API_KEY>",
-              "content-type": "application/json"
-          }
-
-          response = requests.request("POST", url, json=payload, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request POST \
-            --url https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/all \
-            --header 'Authorization: Bearer <API_KEY>' \
-            --header 'content-type: application/json' \
-            --data '{"filter":{"integrations":["string"]},"includeHiddenExtensions":true}'
   /integrations/extensions/v1/{id}:
     get:
       description: No description available
@@ -134,37 +92,6 @@ paths:
       - Extension service
       x-coralogixPermissions:
       - extensions:ReadConfig
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/%7Bid%7D?include_dashboard_binaries=SOME_BOOLEAN_VALUE&include_testing_revision=SOME_BOOLEAN_VALUE';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/%7Bid%7D"
-
-          querystring = {"include_dashboard_binaries":"SOME_BOOLEAN_VALUE","include_testing_revision":"SOME_BOOLEAN_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/%7Bid%7D?include_dashboard_binaries=SOME_BOOLEAN_VALUE&include_testing_revision=SOME_BOOLEAN_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
 components:
   schemas:
     ChangelogEntry:

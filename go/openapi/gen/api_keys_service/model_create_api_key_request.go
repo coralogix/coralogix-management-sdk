@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateApiKeyRequest{}
 
 // CreateApiKeyRequest This data structure is used to create an API key.
 type CreateApiKeyRequest struct {
-	Hashed bool `json:"hashed"`
+	Hashed *bool `json:"hashed,omitempty"`
 	KeyPermissions CreateApiKeyRequestKeyPermissions `json:"keyPermissions"`
 	Name string `json:"name"`
 	Owner Owner `json:"owner"`
@@ -33,9 +33,8 @@ type _CreateApiKeyRequest CreateApiKeyRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApiKeyRequest(hashed bool, keyPermissions CreateApiKeyRequestKeyPermissions, name string, owner Owner) *CreateApiKeyRequest {
+func NewCreateApiKeyRequest(keyPermissions CreateApiKeyRequestKeyPermissions, name string, owner Owner) *CreateApiKeyRequest {
 	this := CreateApiKeyRequest{}
-	this.Hashed = hashed
 	this.KeyPermissions = keyPermissions
 	this.Name = name
 	this.Owner = owner
@@ -50,28 +49,36 @@ func NewCreateApiKeyRequestWithDefaults() *CreateApiKeyRequest {
 	return &this
 }
 
-// GetHashed returns the Hashed field value
+// GetHashed returns the Hashed field value if set, zero value otherwise.
 func (o *CreateApiKeyRequest) GetHashed() bool {
-	if o == nil {
+	if o == nil || IsNil(o.Hashed) {
 		var ret bool
 		return ret
 	}
-
-	return o.Hashed
+	return *o.Hashed
 }
 
-// GetHashedOk returns a tuple with the Hashed field value
+// GetHashedOk returns a tuple with the Hashed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateApiKeyRequest) GetHashedOk() (*bool, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Hashed) {
 		return nil, false
 	}
-	return &o.Hashed, true
+	return o.Hashed, true
 }
 
-// SetHashed sets field value
+// HasHashed returns a boolean if a field has been set.
+func (o *CreateApiKeyRequest) HasHashed() bool {
+	if o != nil && !IsNil(o.Hashed) {
+		return true
+	}
+
+	return false
+}
+
+// SetHashed gets a reference to the given bool and assigns it to the Hashed field.
 func (o *CreateApiKeyRequest) SetHashed(v bool) {
-	o.Hashed = v
+	o.Hashed = &v
 }
 
 // GetKeyPermissions returns the KeyPermissions field value
@@ -156,7 +163,9 @@ func (o CreateApiKeyRequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateApiKeyRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["hashed"] = o.Hashed
+	if !IsNil(o.Hashed) {
+		toSerialize["hashed"] = o.Hashed
+	}
 	toSerialize["keyPermissions"] = o.KeyPermissions
 	toSerialize["name"] = o.Name
 	toSerialize["owner"] = o.Owner
@@ -168,7 +177,6 @@ func (o *CreateApiKeyRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"hashed",
 		"keyPermissions",
 		"name",
 		"owner",

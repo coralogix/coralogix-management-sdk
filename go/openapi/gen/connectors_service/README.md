@@ -104,6 +104,8 @@ Class | Method | HTTP request | Description
  - [ConnectorType](docs/ConnectorType.md)
  - [ConnectorTypeSummary](docs/ConnectorTypeSummary.md)
  - [CreateConnectorResponse](docs/CreateConnectorResponse.md)
+ - [Delivery](docs/Delivery.md)
+ - [Diagnostics](docs/Diagnostics.md)
  - [EntityTypeConfigOverrides](docs/EntityTypeConfigOverrides.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FieldGroup](docs/FieldGroup.md)

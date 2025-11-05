@@ -12,8 +12,6 @@ package alert_events_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ActivityAnalysis type satisfies the MappedNullable interface at compile time
@@ -21,20 +19,16 @@ var _ MappedNullable = &ActivityAnalysis{}
 
 // ActivityAnalysis Configuration for alert activity analysis, containing rules and status.
 type ActivityAnalysis struct {
-	Rules []string `json:"rules"`
-	Status ActivityAnalysisStatus `json:"status"`
+	Rules []string `json:"rules,omitempty"`
+	Status *ActivityAnalysisStatus `json:"status,omitempty"`
 }
-
-type _ActivityAnalysis ActivityAnalysis
 
 // NewActivityAnalysis instantiates a new ActivityAnalysis object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewActivityAnalysis(rules []string, status ActivityAnalysisStatus) *ActivityAnalysis {
+func NewActivityAnalysis() *ActivityAnalysis {
 	this := ActivityAnalysis{}
-	this.Rules = rules
-	this.Status = status
 	return &this
 }
 
@@ -46,52 +40,68 @@ func NewActivityAnalysisWithDefaults() *ActivityAnalysis {
 	return &this
 }
 
-// GetRules returns the Rules field value
+// GetRules returns the Rules field value if set, zero value otherwise.
 func (o *ActivityAnalysis) GetRules() []string {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		var ret []string
 		return ret
 	}
-
 	return o.Rules
 }
 
-// GetRulesOk returns a tuple with the Rules field value
+// GetRulesOk returns a tuple with the Rules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ActivityAnalysis) GetRulesOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		return nil, false
 	}
 	return o.Rules, true
 }
 
-// SetRules sets field value
+// HasRules returns a boolean if a field has been set.
+func (o *ActivityAnalysis) HasRules() bool {
+	if o != nil && !IsNil(o.Rules) {
+		return true
+	}
+
+	return false
+}
+
+// SetRules gets a reference to the given []string and assigns it to the Rules field.
 func (o *ActivityAnalysis) SetRules(v []string) {
 	o.Rules = v
 }
 
-// GetStatus returns the Status field value
+// GetStatus returns the Status field value if set, zero value otherwise.
 func (o *ActivityAnalysis) GetStatus() ActivityAnalysisStatus {
-	if o == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret ActivityAnalysisStatus
 		return ret
 	}
-
-	return o.Status
+	return *o.Status
 }
 
-// GetStatusOk returns a tuple with the Status field value
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ActivityAnalysis) GetStatusOk() (*ActivityAnalysisStatus, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
-	return &o.Status, true
+	return o.Status, true
 }
 
-// SetStatus sets field value
+// HasStatus returns a boolean if a field has been set.
+func (o *ActivityAnalysis) HasStatus() bool {
+	if o != nil && !IsNil(o.Status) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given ActivityAnalysisStatus and assigns it to the Status field.
 func (o *ActivityAnalysis) SetStatus(v ActivityAnalysisStatus) {
-	o.Status = v
+	o.Status = &v
 }
 
 func (o ActivityAnalysis) MarshalJSON() ([]byte, error) {
@@ -104,47 +114,13 @@ func (o ActivityAnalysis) MarshalJSON() ([]byte, error) {
 
 func (o ActivityAnalysis) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["rules"] = o.Rules
-	toSerialize["status"] = o.Status
+	if !IsNil(o.Rules) {
+		toSerialize["rules"] = o.Rules
+	}
+	if !IsNil(o.Status) {
+		toSerialize["status"] = o.Status
+	}
 	return toSerialize, nil
-}
-
-func (o *ActivityAnalysis) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"rules",
-		"status",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varActivityAnalysis := _ActivityAnalysis{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varActivityAnalysis)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ActivityAnalysis(varActivityAnalysis)
-
-	return err
 }
 
 type NullableActivityAnalysis struct {

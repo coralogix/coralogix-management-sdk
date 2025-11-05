@@ -20,9 +20,11 @@ var _ MappedNullable = &LogsCount{}
 
 // LogsCount This data structure represents a logs count.
 type LogsCount struct {
+	ApplicationName *string `json:"applicationName,omitempty"`
 	LogsCount *string `json:"logsCount,omitempty"`
 	Priority *V2Priority `json:"priority,omitempty"`
 	Severity *DatausageV2Severity `json:"severity,omitempty"`
+	SubsystemName *string `json:"subsystemName,omitempty"`
 	Timestamp *time.Time `json:"timestamp,omitempty"`
 }
 
@@ -41,6 +43,38 @@ func NewLogsCount() *LogsCount {
 func NewLogsCountWithDefaults() *LogsCount {
 	this := LogsCount{}
 	return &this
+}
+
+// GetApplicationName returns the ApplicationName field value if set, zero value otherwise.
+func (o *LogsCount) GetApplicationName() string {
+	if o == nil || IsNil(o.ApplicationName) {
+		var ret string
+		return ret
+	}
+	return *o.ApplicationName
+}
+
+// GetApplicationNameOk returns a tuple with the ApplicationName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LogsCount) GetApplicationNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ApplicationName) {
+		return nil, false
+	}
+	return o.ApplicationName, true
+}
+
+// HasApplicationName returns a boolean if a field has been set.
+func (o *LogsCount) HasApplicationName() bool {
+	if o != nil && !IsNil(o.ApplicationName) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationName gets a reference to the given string and assigns it to the ApplicationName field.
+func (o *LogsCount) SetApplicationName(v string) {
+	o.ApplicationName = &v
 }
 
 // GetLogsCount returns the LogsCount field value if set, zero value otherwise.
@@ -139,6 +173,38 @@ func (o *LogsCount) SetSeverity(v DatausageV2Severity) {
 	o.Severity = &v
 }
 
+// GetSubsystemName returns the SubsystemName field value if set, zero value otherwise.
+func (o *LogsCount) GetSubsystemName() string {
+	if o == nil || IsNil(o.SubsystemName) {
+		var ret string
+		return ret
+	}
+	return *o.SubsystemName
+}
+
+// GetSubsystemNameOk returns a tuple with the SubsystemName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LogsCount) GetSubsystemNameOk() (*string, bool) {
+	if o == nil || IsNil(o.SubsystemName) {
+		return nil, false
+	}
+	return o.SubsystemName, true
+}
+
+// HasSubsystemName returns a boolean if a field has been set.
+func (o *LogsCount) HasSubsystemName() bool {
+	if o != nil && !IsNil(o.SubsystemName) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubsystemName gets a reference to the given string and assigns it to the SubsystemName field.
+func (o *LogsCount) SetSubsystemName(v string) {
+	o.SubsystemName = &v
+}
+
 // GetTimestamp returns the Timestamp field value if set, zero value otherwise.
 func (o *LogsCount) GetTimestamp() time.Time {
 	if o == nil || IsNil(o.Timestamp) {
@@ -181,6 +247,9 @@ func (o LogsCount) MarshalJSON() ([]byte, error) {
 
 func (o LogsCount) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ApplicationName) {
+		toSerialize["applicationName"] = o.ApplicationName
+	}
 	if !IsNil(o.LogsCount) {
 		toSerialize["logsCount"] = o.LogsCount
 	}
@@ -189,6 +258,9 @@ func (o LogsCount) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Severity) {
 		toSerialize["severity"] = o.Severity
+	}
+	if !IsNil(o.SubsystemName) {
+		toSerialize["subsystemName"] = o.SubsystemName
 	}
 	if !IsNil(o.Timestamp) {
 		toSerialize["timestamp"] = o.Timestamp

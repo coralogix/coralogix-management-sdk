@@ -42,37 +42,6 @@ paths:
       summary: List Custom Roles
       tags:
       - Role Management Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles?team_id=SOME_INTEGER_VALUE';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles"
-
-          querystring = {"team_id":"SOME_INTEGER_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles?team_id=SOME_INTEGER_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
     put:
       description: No description available
       externalDocs:
@@ -113,51 +82,6 @@ paths:
       summary: Create Role
       tags:
       - Role Management Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles';
-
-          let options = {
-            method: 'PUT',
-            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"description":"string","name":"string","parentRoleName":"string","permissions":["string"],"teamId":0}'
-          };
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles"
-
-          payload = {
-              "description": "string",
-              "name": "string",
-              "parentRoleName": "string",
-              "permissions": ["string"],
-              "teamId": 0
-          }
-          headers = {
-              "Authorization": "Bearer <API_KEY>",
-              "content-type": "application/json"
-          }
-
-          response = requests.request("PUT", url, json=payload, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request PUT \
-            --url https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles \
-            --header 'Authorization: Bearer <API_KEY>' \
-            --header 'content-type: application/json' \
-            --data '{"description":"string","name":"string","parentRoleName":"string","permissions":["string"],"teamId":0}'
   /aaa/team-roles/v1/custom-roles/{role_id}:
     delete:
       description: No description available
@@ -203,35 +127,6 @@ paths:
       summary: Delete Role
       tags:
       - Role Management Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles/%7Brole_id%7D';
-
-          let options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles/%7Brole_id%7D"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("DELETE", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request DELETE \
-            --url https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles/%7Brole_id%7D \
-            --header 'Authorization: Bearer <API_KEY>'
     get:
       description: No description available
       externalDocs:
@@ -272,35 +167,6 @@ paths:
       summary: Get Custom Role
       tags:
       - Role Management Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles/%7Brole_id%7D';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles/%7Brole_id%7D"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles/%7Brole_id%7D \
-            --header 'Authorization: Bearer <API_KEY>'
     post:
       description: No description available
       externalDocs:
@@ -346,49 +212,6 @@ paths:
       summary: Update Role
       tags:
       - Role Management Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles/%7Brole_id%7D';
-
-          let options = {
-            method: 'POST',
-            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"newDescription":"string","newName":"string","newPermissions":{"permissions":["string"]}}'
-          };
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles/%7Brole_id%7D"
-
-          payload = {
-              "newDescription": "string",
-              "newName": "string",
-              "newPermissions": {"permissions": ["string"]}
-          }
-          headers = {
-              "Authorization": "Bearer <API_KEY>",
-              "content-type": "application/json"
-          }
-
-          response = requests.request("POST", url, json=payload, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request POST \
-            --url https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles/%7Brole_id%7D \
-            --header 'Authorization: Bearer <API_KEY>' \
-            --header 'content-type: application/json' \
-            --data '{"newDescription":"string","newName":"string","newPermissions":{"permissions":["string"]}}'
   /aaa/team-roles/v1/system-roles:
     get:
       description: No description available
@@ -417,35 +240,6 @@ paths:
       summary: List System Roles
       tags:
       - Role Management Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/system-roles';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/system-roles"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/system-roles \
-            --header 'Authorization: Bearer <API_KEY>'
 components:
   schemas:
     ColorsByAggregation:
@@ -728,8 +522,8 @@ components:
       type: string
     RoleManagementService_CreateRole_request:
       oneOf:
-      - $ref: "#/components/schemas/CreateRoleRequestParentRoleName"
       - $ref: "#/components/schemas/CreateRoleRequestParentRoleId"
+      - $ref: "#/components/schemas/CreateRoleRequestParentRoleName"
       type: object
     RoleManagementService_UpdateRole_request:
       additionalProperties: false

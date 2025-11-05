@@ -26,70 +26,6 @@ paths:
       summary: Replace a Connector
       tags:
       - Connectors service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connector';
-
-          let options = {
-            method: 'PUT',
-            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"configOverrides":[{"entityType":"ENTITY_TYPE_UNSPECIFIED","fields":[{"fieldName":"string","template":"string"}]}],"connectorConfig":{"fields":[{"fieldName":"string","value":"string"}]},"createTime":"2019-08-24T14:15:22Z","description":"Connector for team notifications","id":"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9","name":"My Slack Connector","teamId":"12345","type":"CONNECTOR_TYPE_UNSPECIFIED","updateTime":"2019-08-24T14:15:22Z"}'
-          };
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connector"
-
-          payload = {
-              "configOverrides": [
-                  {
-                      "entityType": "ENTITY_TYPE_UNSPECIFIED",
-                      "fields": [
-                          {
-                              "fieldName": "string",
-                              "template": "string"
-                          }
-                      ]
-                  }
-              ],
-              "connectorConfig": {"fields": [
-                      {
-                          "fieldName": "string",
-                          "value": "string"
-                      }
-                  ]},
-              "createTime": "2019-08-24T14:15:22Z",
-              "description": "Connector for team notifications",
-              "id": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
-              "name": "My Slack Connector",
-              "teamId": "12345",
-              "type": "CONNECTOR_TYPE_UNSPECIFIED",
-              "updateTime": "2019-08-24T14:15:22Z"
-          }
-          headers = {
-              "Authorization": "Bearer <API_KEY>",
-              "content-type": "application/json"
-          }
-
-          response = requests.request("PUT", url, json=payload, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request PUT \
-            --url https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connector \
-            --header 'Authorization: Bearer <API_KEY>' \
-            --header 'content-type: application/json' \
-            --data '{"configOverrides":[{"entityType":"ENTITY_TYPE_UNSPECIFIED","fields":[{"fieldName":"string","template":"string"}]}],"connectorConfig":{"fields":[{"fieldName":"string","value":"string"}]},"createTime":"2019-08-24T14:15:22Z","description":"Connector for team notifications","id":"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9","name":"My Slack Connector","teamId":"12345","type":"CONNECTOR_TYPE_UNSPECIFIED","updateTime":"2019-08-24T14:15:22Z"}'
   /notifications/notification-center/v1/connectors:
     get:
       description: No description available
@@ -102,25 +38,14 @@ paths:
         name: connector_type
         required: false
         schema:
-          enum:
-          - CONNECTOR_TYPE_UNSPECIFIED
-          - SLACK
-          - GENERIC_HTTPS
-          - PAGERDUTY
-          - IBM_EVENT_NOTIFICATIONS
-          type: string
+          $ref: "#/components/schemas/ConnectorType"
         style: form
       - explode: true
         in: query
         name: supported_by_entity_type
         required: false
         schema:
-          enum:
-          - ENTITY_TYPE_UNSPECIFIED
-          - ALERTS
-          - TEST_NOTIFICATIONS
-          - CASES
-          type: string
+          $ref: "#/components/schemas/notification_center.EntityType"
         style: form
       responses:
         "200":
@@ -132,37 +57,6 @@ paths:
       summary: List Connectors
       tags:
       - Connectors service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors?connector_type=SOME_STRING_VALUE&supported_by_entity_type=SOME_STRING_VALUE';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors"
-
-          querystring = {"connector_type":"SOME_STRING_VALUE","supported_by_entity_type":"SOME_STRING_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors?connector_type=SOME_STRING_VALUE&supported_by_entity_type=SOME_STRING_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
     post:
       description: No description available
       externalDocs:
@@ -183,70 +77,6 @@ paths:
       summary: Create a Connector
       tags:
       - Connectors service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors';
-
-          let options = {
-            method: 'POST',
-            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"configOverrides":[{"entityType":"ENTITY_TYPE_UNSPECIFIED","fields":[{"fieldName":"string","template":"string"}]}],"connectorConfig":{"fields":[{"fieldName":"string","value":"string"}]},"createTime":"2019-08-24T14:15:22Z","description":"Connector for team notifications","id":"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9","name":"My Slack Connector","teamId":"12345","type":"CONNECTOR_TYPE_UNSPECIFIED","updateTime":"2019-08-24T14:15:22Z"}'
-          };
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors"
-
-          payload = {
-              "configOverrides": [
-                  {
-                      "entityType": "ENTITY_TYPE_UNSPECIFIED",
-                      "fields": [
-                          {
-                              "fieldName": "string",
-                              "template": "string"
-                          }
-                      ]
-                  }
-              ],
-              "connectorConfig": {"fields": [
-                      {
-                          "fieldName": "string",
-                          "value": "string"
-                      }
-                  ]},
-              "createTime": "2019-08-24T14:15:22Z",
-              "description": "Connector for team notifications",
-              "id": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
-              "name": "My Slack Connector",
-              "teamId": "12345",
-              "type": "CONNECTOR_TYPE_UNSPECIFIED",
-              "updateTime": "2019-08-24T14:15:22Z"
-          }
-          headers = {
-              "Authorization": "Bearer <API_KEY>",
-              "content-type": "application/json"
-          }
-
-          response = requests.request("POST", url, json=payload, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request POST \
-            --url https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors \
-            --header 'Authorization: Bearer <API_KEY>' \
-            --header 'content-type: application/json' \
-            --data '{"configOverrides":[{"entityType":"ENTITY_TYPE_UNSPECIFIED","fields":[{"fieldName":"string","template":"string"}]}],"connectorConfig":{"fields":[{"fieldName":"string","value":"string"}]},"createTime":"2019-08-24T14:15:22Z","description":"Connector for team notifications","id":"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9","name":"My Slack Connector","teamId":"12345","type":"CONNECTOR_TYPE_UNSPECIFIED","updateTime":"2019-08-24T14:15:22Z"}'
   /notifications/notification-center/v1/connectors/{id}:
     delete:
       description: No description available
@@ -271,35 +101,6 @@ paths:
       summary: Delete a Connector
       tags:
       - Connectors service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors/%7Bid%7D';
-
-          let options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors/%7Bid%7D"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("DELETE", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request DELETE \
-            --url https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors/%7Bid%7D \
-            --header 'Authorization: Bearer <API_KEY>'
     get:
       description: No description available
       externalDocs:
@@ -323,35 +124,6 @@ paths:
       summary: Get a Connector
       tags:
       - Connectors service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors/%7Bid%7D';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors/%7Bid%7D"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors/%7Bid%7D \
-            --header 'Authorization: Bearer <API_KEY>'
   /notifications/notification-center/v1/connectors:batchGet:
     get:
       description: No description available
@@ -379,37 +151,6 @@ paths:
       summary: Batch Get Connectors
       tags:
       - Connectors service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:batchGet?connector_ids=SOME_ARRAY_VALUE';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:batchGet"
-
-          querystring = {"connector_ids":"SOME_ARRAY_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:batchGet?connector_ids=SOME_ARRAY_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
   /notifications/notification-center/v1/connectors:batchGetSummaries:
     get:
       description: No description available
@@ -436,37 +177,6 @@ paths:
       summary: Batch Get Connectors Summaries
       tags:
       - Connectors service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:batchGetSummaries?connector_ids=SOME_ARRAY_VALUE';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:batchGetSummaries"
-
-          querystring = {"connector_ids":"SOME_ARRAY_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:batchGetSummaries?connector_ids=SOME_ARRAY_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
   /notifications/notification-center/v1/connectors:getTypeSummaries:
     get:
       description: No description available
@@ -479,12 +189,7 @@ paths:
         name: supported_by_entity_type
         required: false
         schema:
-          enum:
-          - ENTITY_TYPE_UNSPECIFIED
-          - ALERTS
-          - TEST_NOTIFICATIONS
-          - CASES
-          type: string
+          $ref: "#/components/schemas/notification_center.EntityType"
         style: form
       responses:
         "200":
@@ -496,37 +201,6 @@ paths:
       summary: Get Connector Type Summaries
       tags:
       - Connectors service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:getTypeSummaries?supported_by_entity_type=SOME_STRING_VALUE';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:getTypeSummaries"
-
-          querystring = {"supported_by_entity_type":"SOME_STRING_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:getTypeSummaries?supported_by_entity_type=SOME_STRING_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
   /notifications/notification-center/v1/connectors:listSummaries:
     get:
       description: No description available
@@ -539,25 +213,14 @@ paths:
         name: connector_type
         required: false
         schema:
-          enum:
-          - CONNECTOR_TYPE_UNSPECIFIED
-          - SLACK
-          - GENERIC_HTTPS
-          - PAGERDUTY
-          - IBM_EVENT_NOTIFICATIONS
-          type: string
+          $ref: "#/components/schemas/ConnectorType"
         style: form
       - explode: true
         in: query
         name: supported_by_entity_type
         required: false
         schema:
-          enum:
-          - ENTITY_TYPE_UNSPECIFIED
-          - ALERTS
-          - TEST_NOTIFICATIONS
-          - CASES
-          type: string
+          $ref: "#/components/schemas/notification_center.EntityType"
         style: form
       responses:
         "200":
@@ -569,37 +232,6 @@ paths:
       summary: List Connector Summaries
       tags:
       - Connectors service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:listSummaries?connector_type=SOME_STRING_VALUE&supported_by_entity_type=SOME_STRING_VALUE';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:listSummaries"
-
-          querystring = {"connector_type":"SOME_STRING_VALUE","supported_by_entity_type":"SOME_STRING_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/notifications/notification-center/v1/connectors:listSummaries?connector_type=SOME_STRING_VALUE&supported_by_entity_type=SOME_STRING_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
 components:
   schemas:
     BatchGetConnectorSummariesResponse:
@@ -641,6 +273,8 @@ components:
         - "[\"connector-id-3\"]"
         connectors:
           key:
+            diagnostics:
+              delivery: DELIVERY_UNSPECIFIED
             configOverrides:
             - entityType: ENTITY_TYPE_UNSPECIFIED
               fields:
@@ -703,6 +337,8 @@ components:
     Connector:
       description: A connector configuration for sending notifications
       example:
+        diagnostics:
+          delivery: DELIVERY_UNSPECIFIED
         configOverrides:
         - entityType: ENTITY_TYPE_UNSPECIFIED
           fields:
@@ -746,6 +382,8 @@ components:
           example: Connector for team notifications
           maxLength: 5000
           type: string
+        diagnostics:
+          $ref: "#/components/schemas/Diagnostics"
         id:
           example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           type: string
@@ -843,6 +481,8 @@ components:
       description: Response containing the created connector
       example:
         connector:
+          diagnostics:
+            delivery: DELIVERY_UNSPECIFIED
           configOverrides:
           - entityType: ENTITY_TYPE_UNSPECIFIED
             fields:
@@ -878,6 +518,25 @@ components:
       title: Create Connector Response
       type: object
     DeleteConnectorResponse:
+      type: object
+    Delivery:
+      enum:
+      - DELIVERY_UNSPECIFIED
+      - DISABLED
+      - ERRORS_ONLY
+      type: string
+    Diagnostics:
+      description: Allows to configure rules for data written into 'notification.deliveries'
+        dataset
+      example:
+        delivery: DELIVERY_UNSPECIFIED
+      externalDocs:
+        description: Find out more about datasets
+        url: https://coralogix.com/docs/user-guides/data-layer/datasets/
+      properties:
+        delivery:
+          $ref: "#/components/schemas/Delivery"
+      title: Connector Diagnostics
       type: object
     EntityTypeConfigOverrides:
       example:
@@ -957,6 +616,8 @@ components:
       description: Response containing the requested connector
       example:
         connector:
+          diagnostics:
+            delivery: DELIVERY_UNSPECIFIED
           configOverrides:
           - entityType: ENTITY_TYPE_UNSPECIFIED
             fields:
@@ -1041,7 +702,9 @@ components:
       description: Response containing a list of connectors
       example:
         connectors:
-        - configOverrides:
+        - diagnostics:
+            delivery: DELIVERY_UNSPECIFIED
+          configOverrides:
           - entityType: ENTITY_TYPE_UNSPECIFIED
             fields:
             - template: template
@@ -1067,7 +730,9 @@ components:
           updateTime: 2000-01-23T04:56:07.000+00:00
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           type: CONNECTOR_TYPE_UNSPECIFIED
-        - configOverrides:
+        - diagnostics:
+            delivery: DELIVERY_UNSPECIFIED
+          configOverrides:
           - entityType: ENTITY_TYPE_UNSPECIFIED
             fields:
             - template: template
@@ -1116,6 +781,8 @@ components:
       description: Response containing the updated connector
       example:
         connector:
+          diagnostics:
+            delivery: DELIVERY_UNSPECIFIED
           configOverrides:
           - entityType: ENTITY_TYPE_UNSPECIFIED
             fields:
@@ -1216,6 +883,8 @@ components:
           example: Connector for team notifications
           maxLength: 5000
           type: string
+        diagnostics:
+          $ref: "#/components/schemas/Diagnostics"
         id:
           example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           type: string

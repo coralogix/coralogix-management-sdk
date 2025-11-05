@@ -36,7 +36,6 @@ model_alert_def_type.go
 model_alert_def_webhooks_settings.go
 model_alert_definition_order_by.go
 model_alert_definition_order_by_list.go
-model_alert_defs_service_create_alert_def_request.go
 model_alert_defs_service_list_alert_defs_pagination_parameter.go
 model_alerts_op.go
 model_alerts_v3_pagination_response.go
@@ -53,6 +52,7 @@ model_colors_by_group_by.go
 model_colors_by_stack.go
 model_common_group.go
 model_create_alert_def_response.go
+model_create_alert_definition_request.go
 model_day_of_week.go
 model_download_alerts_response.go
 model_duration_unit.go

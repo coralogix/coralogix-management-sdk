@@ -78,11 +78,11 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ViewsServiceAPI* | [**ViewsServiceCreateView**](docs/ViewsServiceAPI.md#viewsservicecreateview) | **Post** /v1/views | Create a view service
-*ViewsServiceAPI* | [**ViewsServiceDeleteView**](docs/ViewsServiceAPI.md#viewsservicedeleteview) | **Delete** /v1/views/{id} | Delete view service
-*ViewsServiceAPI* | [**ViewsServiceGetView**](docs/ViewsServiceAPI.md#viewsservicegetview) | **Get** /v1/views/{id} | Get view service
-*ViewsServiceAPI* | [**ViewsServiceListViews**](docs/ViewsServiceAPI.md#viewsservicelistviews) | **Get** /v1/views | List views service
-*ViewsServiceAPI* | [**ViewsServiceReplaceView**](docs/ViewsServiceAPI.md#viewsservicereplaceview) | **Put** /v1/views/{view.id} | Replace a view service
+*ViewsServiceAPI* | [**ViewsServiceCreateView**](docs/ViewsServiceAPI.md#viewsservicecreateview) | **Post** /data-exploration/saved-views/v1 | Create a view service
+*ViewsServiceAPI* | [**ViewsServiceDeleteView**](docs/ViewsServiceAPI.md#viewsservicedeleteview) | **Delete** /data-exploration/saved-views/v1/{id} | Delete view service
+*ViewsServiceAPI* | [**ViewsServiceGetView**](docs/ViewsServiceAPI.md#viewsservicegetview) | **Get** /data-exploration/saved-views/v1/{id} | Get view service
+*ViewsServiceAPI* | [**ViewsServiceListViews**](docs/ViewsServiceAPI.md#viewsservicelistviews) | **Get** /data-exploration/saved-views/v1 | List views service
+*ViewsServiceAPI* | [**ViewsServiceReplaceView**](docs/ViewsServiceAPI.md#viewsservicereplaceview) | **Put** /data-exploration/saved-views/v1/{view.id} | Replace a view service
 
 
 ## Documentation For Models
@@ -103,6 +103,7 @@ Class | Method | HTTP request | Description
  - [QuickTimeSelection](docs/QuickTimeSelection.md)
  - [SearchQuery](docs/SearchQuery.md)
  - [SelectedFilters](docs/SelectedFilters.md)
+ - [SyntaxType](docs/SyntaxType.md)
  - [TimeSelection](docs/TimeSelection.md)
  - [TimeSelectionCustomSelection](docs/TimeSelectionCustomSelection.md)
  - [TimeSelectionQuickSelection](docs/TimeSelectionQuickSelection.md)

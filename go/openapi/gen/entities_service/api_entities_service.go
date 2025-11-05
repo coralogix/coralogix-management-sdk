@@ -26,7 +26,7 @@ type EntitiesServiceAPIService service
 type ApiEntitiesServiceListEntitySubTypesRequest struct {
 	ctx context.Context
 	ApiService *EntitiesServiceAPIService
-	entityType string
+	entityType NotificationCenterEntityType
 }
 
 func (r ApiEntitiesServiceListEntitySubTypesRequest) Execute() (*ListEntitySubTypesResponse, *http.Response, error) {
@@ -42,7 +42,7 @@ No description available
  @param entityType
  @return ApiEntitiesServiceListEntitySubTypesRequest
 */
-func (a *EntitiesServiceAPIService) EntitiesServiceListEntitySubTypes(ctx context.Context, entityType string) ApiEntitiesServiceListEntitySubTypesRequest {
+func (a *EntitiesServiceAPIService) EntitiesServiceListEntitySubTypes(ctx context.Context, entityType NotificationCenterEntityType) ApiEntitiesServiceListEntitySubTypesRequest {
 	return ApiEntitiesServiceListEntitySubTypesRequest{
 		ApiService: a,
 		ctx: ctx,

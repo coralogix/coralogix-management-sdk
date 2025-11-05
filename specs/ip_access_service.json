@@ -56,21 +56,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-sec-ip-access/v1?id=SOME_STRING_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-sec-ip-access/v1\"\n\nquerystring = {\"id\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/aaa/team-sec-ip-access/v1?id=SOME_STRING_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       },
       "put": {
         "tags": [
@@ -94,7 +80,7 @@
                     "$ref": "#/components/schemas/CoralogixCustomerSupportAccess"
                   },
                   "id": {
-                    "example": 405,
+                    "example": "d662a2f1-21c3-493c-8f8a-595d3ab05ef3",
                     "type": "string"
                   },
                   "ipAccess": {
@@ -138,21 +124,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-sec-ip-access/v1';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"enableCoralogixCustomerSupportAccess\":\"CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED\",\"id\":405,\"ipAccess\":[{\"enabled\":true,\"ipRange\":\"192.168.0.1/24\",\"name\":\"Office Network\"}]}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-sec-ip-access/v1\"\n\npayload = {\n    \"enableCoralogixCustomerSupportAccess\": \"CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED\",\n    \"id\": 405,\n    \"ipAccess\": [\n        {\n            \"enabled\": True,\n            \"ipRange\": \"192.168.0.1/24\",\n            \"name\": \"Office Network\"\n        }\n    ]\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/team-sec-ip-access/v1 \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"enableCoralogixCustomerSupportAccess\":\"CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED\",\"id\":405,\"ipAccess\":[{\"enabled\":true,\"ipRange\":\"192.168.0.1/24\",\"name\":\"Office Network\"}]}'"
-          }
-        ]
+        }
       },
       "post": {
         "tags": [
@@ -216,21 +188,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-sec-ip-access/v1';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"enableCoralogixCustomerSupportAccess\":\"CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED\",\"ipAccess\":[{\"enabled\":true,\"ipRange\":\"192.168.0.1/24\",\"name\":\"Office Network\"}]}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-sec-ip-access/v1\"\n\npayload = {\n    \"enableCoralogixCustomerSupportAccess\": \"CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED\",\n    \"ipAccess\": [\n        {\n            \"enabled\": True,\n            \"ipRange\": \"192.168.0.1/24\",\n            \"name\": \"Office Network\"\n        }\n    ]\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/team-sec-ip-access/v1 \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"enableCoralogixCustomerSupportAccess\":\"CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED\",\"ipAccess\":[{\"enabled\":true,\"ipRange\":\"192.168.0.1/24\",\"name\":\"Office Network\"}]}'"
-          }
-        ]
+        }
       },
       "delete": {
         "tags": [
@@ -247,7 +205,7 @@
             "in": "query",
             "name": "id",
             "schema": {
-              "example": 405,
+              "example": "d662a2f1-21c3-493c-8f8a-595d3ab05ef3",
               "type": "string"
             },
             "style": "form"
@@ -282,21 +240,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-sec-ip-access/v1?id=405';\n\nlet options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-sec-ip-access/v1\"\n\nquerystring = {\"id\":\"405\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url 'https://api.coralogix.com/mgmt/openapi/aaa/team-sec-ip-access/v1?id=405' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     }
   },
@@ -341,12 +285,12 @@
             "$ref": "#/components/schemas/CoralogixCustomerSupportAccess"
           },
           "id": {
-            "example": 405,
+            "example": "d662a2f1-21c3-493c-8f8a-595d3ab05ef3",
             "description": "The unique identifier for the company IP access settings. This is typically a company ID.",
             "type": "string"
           },
           "ipAccess": {
-            "example": 405,
+            "example": "d662a2f1-21c3-493c-8f8a-595d3ab05ef3",
             "description": "The list of IP access entries.",
             "type": "object",
             "additionalProperties": {
@@ -510,8 +454,7 @@
           }
         },
         "required": [
-          "ipRange",
-          "enabled"
+          "ipRange"
         ]
       },
       "MultipleValues": {

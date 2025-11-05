@@ -61,21 +61,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1?team_id=SOME_OBJECT_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1\"\n\nquerystring = {\"team_id\":\"SOME_OBJECT_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1?team_id=SOME_OBJECT_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       },
       "put": {
         "tags": [
@@ -157,21 +143,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"description\":\"string\",\"externalId\":\"string\",\"groupId\":{\"id\":0},\"groupType\":\"GROUP_TYPE_UNSPECIFIED\",\"name\":\"string\",\"nextGenScopeId\":\"string\",\"roleUpdates\":{\"roleIds\":[{\"id\":0}]},\"scopeFilters\":{\"applications\":[{\"filterType\":\"FILTER_TYPE_UNSPECIFIED\",\"term\":\"string\"}],\"subsystems\":[{\"filterType\":\"FILTER_TYPE_UNSPECIFIED\",\"term\":\"string\"}]},\"userUpdates\":{\"userIds\":[{\"id\":\"string\"}]}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1\"\n\npayload = {\n    \"description\": \"string\",\n    \"externalId\": \"string\",\n    \"groupId\": {\"id\": 0},\n    \"groupType\": \"GROUP_TYPE_UNSPECIFIED\",\n    \"name\": \"string\",\n    \"nextGenScopeId\": \"string\",\n    \"roleUpdates\": {\"roleIds\": [{\"id\": 0}]},\n    \"scopeFilters\": {\n        \"applications\": [\n            {\n                \"filterType\": \"FILTER_TYPE_UNSPECIFIED\",\n                \"term\": \"string\"\n            }\n        ],\n        \"subsystems\": [\n            {\n                \"filterType\": \"FILTER_TYPE_UNSPECIFIED\",\n                \"term\": \"string\"\n            }\n        ]\n    },\n    \"userUpdates\": {\"userIds\": [{\"id\": \"string\"}]}\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1 \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"description\":\"string\",\"externalId\":\"string\",\"groupId\":{\"id\":0},\"groupType\":\"GROUP_TYPE_UNSPECIFIED\",\"name\":\"string\",\"nextGenScopeId\":\"string\",\"roleUpdates\":{\"roleIds\":[{\"id\":0}]},\"scopeFilters\":{\"applications\":[{\"filterType\":\"FILTER_TYPE_UNSPECIFIED\",\"term\":\"string\"}],\"subsystems\":[{\"filterType\":\"FILTER_TYPE_UNSPECIFIED\",\"term\":\"string\"}]},\"userUpdates\":{\"userIds\":[{\"id\":\"string\"}]}}'"
-          }
-        ]
+        }
       },
       "post": {
         "tags": [
@@ -259,21 +231,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"description\":\"string\",\"externalId\":\"string\",\"groupType\":\"GROUP_TYPE_UNSPECIFIED\",\"name\":\"string\",\"nextGenScopeId\":\"string\",\"roleIds\":[{\"id\":0}],\"scopeFilters\":{\"applications\":[{\"filterType\":\"FILTER_TYPE_UNSPECIFIED\",\"term\":\"string\"}],\"subsystems\":[{\"filterType\":\"FILTER_TYPE_UNSPECIFIED\",\"term\":\"string\"}]},\"teamId\":{\"id\":0},\"userIds\":[{\"id\":\"string\"}]}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1\"\n\npayload = {\n    \"description\": \"string\",\n    \"externalId\": \"string\",\n    \"groupType\": \"GROUP_TYPE_UNSPECIFIED\",\n    \"name\": \"string\",\n    \"nextGenScopeId\": \"string\",\n    \"roleIds\": [{\"id\": 0}],\n    \"scopeFilters\": {\n        \"applications\": [\n            {\n                \"filterType\": \"FILTER_TYPE_UNSPECIFIED\",\n                \"term\": \"string\"\n            }\n        ],\n        \"subsystems\": [\n            {\n                \"filterType\": \"FILTER_TYPE_UNSPECIFIED\",\n                \"term\": \"string\"\n            }\n        ]\n    },\n    \"teamId\": {\"id\": 0},\n    \"userIds\": [{\"id\": \"string\"}]\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1 \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"description\":\"string\",\"externalId\":\"string\",\"groupType\":\"GROUP_TYPE_UNSPECIFIED\",\"name\":\"string\",\"nextGenScopeId\":\"string\",\"roleIds\":[{\"id\":0}],\"scopeFilters\":{\"applications\":[{\"filterType\":\"FILTER_TYPE_UNSPECIFIED\",\"term\":\"string\"}],\"subsystems\":[{\"filterType\":\"FILTER_TYPE_UNSPECIFIED\",\"term\":\"string\"}]},\"teamId\":{\"id\":0},\"userIds\":[{\"id\":\"string\"}]}'"
-          }
-        ]
+        }
       }
     },
     "/aaa/team-groups/v1/users": {
@@ -339,21 +297,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/users';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"addUsersToGroup\":[{\"groupId\":{\"id\":0},\"userIds\":[{\"id\":\"string\"}]}],\"teamId\":{\"id\":0}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/users\"\n\npayload = {\n    \"addUsersToGroup\": [\n        {\n            \"groupId\": {\"id\": 0},\n            \"userIds\": [{\"id\": \"string\"}]\n        }\n    ],\n    \"teamId\": {\"id\": 0}\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/users \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"addUsersToGroup\":[{\"groupId\":{\"id\":0},\"userIds\":[{\"id\":\"string\"}]}],\"teamId\":{\"id\":0}}'"
-          }
-        ]
+        }
       },
       "delete": {
         "tags": [
@@ -434,21 +378,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/users?team_id=SOME_OBJECT_VALUE&remove_users_from_group=SOME_ARRAY_VALUE';\n\nlet options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/users\"\n\nquerystring = {\"team_id\":\"SOME_OBJECT_VALUE\",\"remove_users_from_group\":\"SOME_ARRAY_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url 'https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/users?team_id=SOME_OBJECT_VALUE&remove_users_from_group=SOME_ARRAY_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/aaa/team-groups/v1/{group_id.id}": {
@@ -503,21 +433,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/%7Bgroup_id.id%7D';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/%7Bgroup_id.id%7D\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/%7Bgroup_id.id%7D \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       },
       "delete": {
         "tags": [
@@ -570,21 +486,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/%7Bgroup_id.id%7D';\n\nlet options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/%7Bgroup_id.id%7D\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/%7Bgroup_id.id%7D \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/aaa/team-groups/v1/{group_id.id}/users": {
@@ -656,21 +558,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/%7Bgroup_id.id%7D/users?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/%7Bgroup_id.id%7D/users\"\n\nquerystring = {\"page_size\":\"SOME_INTEGER_VALUE\",\"page_token\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/%7Bgroup_id.id%7D/users?page_size=SOME_INTEGER_VALUE&page_token=SOME_STRING_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       },
       "post": {
         "tags": [
@@ -743,21 +631,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/%7Bgroup_id.id%7D/users';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"userIds\":[{\"id\":\"string\"}]}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/%7Bgroup_id.id%7D/users\"\n\npayload = {\"userIds\": [{\"id\": \"string\"}]}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/%7Bgroup_id.id%7D/users \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"userIds\":[{\"id\":\"string\"}]}'"
-          }
-        ]
+        }
       },
       "delete": {
         "tags": [
@@ -826,21 +700,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/%7Bgroup_id.id%7D/users?user_ids=SOME_ARRAY_VALUE';\n\nlet options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/%7Bgroup_id.id%7D/users\"\n\nquerystring = {\"user_ids\":\"SOME_ARRAY_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url 'https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/%7Bgroup_id.id%7D/users?user_ids=SOME_ARRAY_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/aaa/team-groups/v1/{name}": {
@@ -894,21 +754,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/%7Bname%7D';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/%7Bname%7D\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/team-groups/v1/%7Bname%7D \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       }
     },
     "/v1/teams/groups/{group_id.id}/scope": {
@@ -963,21 +809,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/teams/groups/%7Bgroup_id.id%7D/scope';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/teams/groups/%7Bgroup_id.id%7D/scope\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/teams/groups/%7Bgroup_id.id%7D/scope \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
-        ]
+        }
       },
       "post": {
         "tags": [
@@ -1047,21 +879,7 @@
               "application/json": {}
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v1/teams/groups/%7Bgroup_id.id%7D/scope';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"scopeFilters\":{\"applications\":[{\"filterType\":\"FILTER_TYPE_UNSPECIFIED\",\"term\":\"string\"}],\"subsystems\":[{\"filterType\":\"FILTER_TYPE_UNSPECIFIED\",\"term\":\"string\"}]}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v1/teams/groups/%7Bgroup_id.id%7D/scope\"\n\npayload = {\"scopeFilters\": {\n        \"applications\": [\n            {\n                \"filterType\": \"FILTER_TYPE_UNSPECIFIED\",\n                \"term\": \"string\"\n            }\n        ],\n        \"subsystems\": [\n            {\n                \"filterType\": \"FILTER_TYPE_UNSPECIFIED\",\n                \"term\": \"string\"\n            }\n        ]\n    }}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/v1/teams/groups/%7Bgroup_id.id%7D/scope \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"scopeFilters\":{\"applications\":[{\"filterType\":\"FILTER_TYPE_UNSPECIFIED\",\"term\":\"string\"}],\"subsystems\":[{\"filterType\":\"FILTER_TYPE_UNSPECIFIED\",\"term\":\"string\"}]}}'"
-          }
-        ]
+        }
       }
     }
   },

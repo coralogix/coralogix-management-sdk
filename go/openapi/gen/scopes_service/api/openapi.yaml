@@ -44,37 +44,6 @@ paths:
       summary: Get Team Scopes By Ids
       tags:
       - Scopes Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1?ids=SOME_ARRAY_VALUE';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1"
-
-          querystring = {"ids":"SOME_ARRAY_VALUE"}
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers, params=querystring)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url 'https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1?ids=SOME_ARRAY_VALUE' \
-            --header 'Authorization: Bearer <API_KEY>'
     post:
       description: No description available
       externalDocs:
@@ -107,55 +76,6 @@ paths:
       summary: Create Scope
       tags:
       - Scopes Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1';
-
-          let options = {
-            method: 'POST',
-            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"defaultExpression":"<v1>true","description":"The best scope","displayName":"my-scope","filters":[{"entityType":"ENTITY_TYPE_UNSPECIFIED","expression":"<v1>true"}]}'
-          };
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1"
-
-          payload = {
-              "defaultExpression": "<v1>true",
-              "description": "The best scope",
-              "displayName": "my-scope",
-              "filters": [
-                  {
-                      "entityType": "ENTITY_TYPE_UNSPECIFIED",
-                      "expression": "<v1>true"
-                  }
-              ]
-          }
-          headers = {
-              "Authorization": "Bearer <API_KEY>",
-              "content-type": "application/json"
-          }
-
-          response = requests.request("POST", url, json=payload, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request POST \
-            --url https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1 \
-            --header 'Authorization: Bearer <API_KEY>' \
-            --header 'content-type: application/json' \
-            --data '{"defaultExpression":"<v1>true","description":"The best scope","displayName":"my-scope","filters":[{"entityType":"ENTITY_TYPE_UNSPECIFIED","expression":"<v1>true"}]}'
     put:
       description: No description available
       externalDocs:
@@ -188,56 +108,6 @@ paths:
       summary: Update Scope
       tags:
       - Scopes Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1';
-
-          let options = {
-            method: 'PUT',
-            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-            body: '{"defaultExpression":"<v1>true","description":"The best scope","displayName":"my-scope","filters":[{"entityType":"ENTITY_TYPE_UNSPECIFIED","expression":"<v1>true"}],"id":"60c82be2-413f-4b8e-8201-7f5c51e2ef2b"}'
-          };
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1"
-
-          payload = {
-              "defaultExpression": "<v1>true",
-              "description": "The best scope",
-              "displayName": "my-scope",
-              "filters": [
-                  {
-                      "entityType": "ENTITY_TYPE_UNSPECIFIED",
-                      "expression": "<v1>true"
-                  }
-              ],
-              "id": "60c82be2-413f-4b8e-8201-7f5c51e2ef2b"
-          }
-          headers = {
-              "Authorization": "Bearer <API_KEY>",
-              "content-type": "application/json"
-          }
-
-          response = requests.request("PUT", url, json=payload, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request PUT \
-            --url https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1 \
-            --header 'Authorization: Bearer <API_KEY>' \
-            --header 'content-type: application/json' \
-            --data '{"defaultExpression":"<v1>true","description":"The best scope","displayName":"my-scope","filters":[{"entityType":"ENTITY_TYPE_UNSPECIFIED","expression":"<v1>true"}],"id":"60c82be2-413f-4b8e-8201-7f5c51e2ef2b"}'
   /aaa/team-scopes/v1/list:
     get:
       description: No description available
@@ -266,35 +136,6 @@ paths:
       summary: Get Team Scopes
       tags:
       - Scopes Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1/list';
-
-          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1/list"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("GET", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request GET \
-            --url https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1/list \
-            --header 'Authorization: Bearer <API_KEY>'
   /aaa/team-scopes/v1/{id}:
     delete:
       description: No description available
@@ -332,35 +173,6 @@ paths:
       summary: Delete Scope
       tags:
       - Scopes Service
-      x-codeSamples:
-      - lang: Node
-        source: |-
-          const fetch = require('node-fetch');
-
-          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1/60c82be2-413f-4b8e-8201-7f5c51e2ef2b';
-
-          let options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};
-
-          fetch(url, options)
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.error('error:' + err));
-      - lang: Python
-        source: |-
-          import requests
-
-          url = "https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1/60c82be2-413f-4b8e-8201-7f5c51e2ef2b"
-
-          headers = {"Authorization": "Bearer <API_KEY>"}
-
-          response = requests.request("DELETE", url, headers=headers)
-
-          print(response.text)
-      - lang: Shell
-        source: |-
-          curl --request DELETE \
-            --url https://api.coralogix.com/mgmt/openapi/aaa/team-scopes/v1/60c82be2-413f-4b8e-8201-7f5c51e2ef2b \
-            --header 'Authorization: Bearer <API_KEY>'
 components:
   schemas:
     ColorsByAggregation:

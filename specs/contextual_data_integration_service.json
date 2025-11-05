@@ -58,20 +58,6 @@
         },
         "x-coralogixPermissions": [
           "contextual-data:ReadConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1?include_testing_integrations=SOME_BOOLEAN_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1\"\n\nquerystring = {\"include_testing_integrations\":\"SOME_BOOLEAN_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1?include_testing_integrations=SOME_BOOLEAN_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       },
       "put": {
@@ -139,20 +125,6 @@
         },
         "x-coralogixPermissions": [
           "contextual-data:UpdateConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"integrationId\":\"string\",\"metadata\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"apiKey\":{\"id\":\"string\",\"value\":\"string\"},\"key\":\"string\"}]},\"version\":\"string\"}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1\"\n\npayload = {\n    \"integrationId\": \"string\",\n    \"metadata\": {\n        \"integrationKey\": \"string\",\n        \"integrationParameters\": {\"parameters\": [\n                {\n                    \"apiKey\": {\n                        \"id\": \"string\",\n                        \"value\": \"string\"\n                    },\n                    \"key\": \"string\"\n                }\n            ]},\n        \"version\": \"string\"\n    }\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1 \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"integrationId\":\"string\",\"metadata\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"apiKey\":{\"id\":\"string\",\"value\":\"string\"},\"key\":\"string\"}]},\"version\":\"string\"}}'"
-          }
         ]
       },
       "post": {
@@ -216,20 +188,6 @@
         },
         "x-coralogixPermissions": [
           "contextual-data:UpdateConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"metadata\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"apiKey\":{\"id\":\"string\",\"value\":\"string\"},\"key\":\"string\"}]},\"version\":\"string\"}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1\"\n\npayload = {\"metadata\": {\n        \"integrationKey\": \"string\",\n        \"integrationParameters\": {\"parameters\": [\n                {\n                    \"apiKey\": {\n                        \"id\": \"string\",\n                        \"value\": \"string\"\n                    },\n                    \"key\": \"string\"\n                }\n            ]},\n        \"version\": \"string\"\n    }}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1 \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"metadata\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"apiKey\":{\"id\":\"string\",\"value\":\"string\"},\"key\":\"string\"}]},\"version\":\"string\"}}'"
-          }
         ]
       }
     },
@@ -295,20 +253,6 @@
         },
         "x-coralogixPermissions": [
           "contextual-data:ReadConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/definition/%7Bid%7D?include_testing_integrations=SOME_BOOLEAN_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/definition/%7Bid%7D\"\n\nquerystring = {\"include_testing_integrations\":\"SOME_BOOLEAN_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/definition/%7Bid%7D?include_testing_integrations=SOME_BOOLEAN_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       }
     },
@@ -377,20 +321,6 @@
         },
         "x-coralogixPermissions": [
           "contextual-data:UpdateConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/test';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"integrationData\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"apiKey\":{\"id\":\"string\",\"value\":\"string\"},\"key\":\"string\"}]},\"version\":\"string\"},\"integrationId\":\"string\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/test\"\n\npayload = {\n    \"integrationData\": {\n        \"integrationKey\": \"string\",\n        \"integrationParameters\": {\"parameters\": [\n                {\n                    \"apiKey\": {\n                        \"id\": \"string\",\n                        \"value\": \"string\"\n                    },\n                    \"key\": \"string\"\n                }\n            ]},\n        \"version\": \"string\"\n    },\n    \"integrationId\": \"string\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/test \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"integrationData\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"apiKey\":{\"id\":\"string\",\"value\":\"string\"},\"key\":\"string\"}]},\"version\":\"string\"},\"integrationId\":\"string\"}'"
-          }
         ]
       }
     },
@@ -457,20 +387,6 @@
         },
         "x-coralogixPermissions": [
           "contextual-data:ReadConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/076f4188-05e0-4ed3-afeb-653ad182ccb7?include_testing_revisions=SOME_BOOLEAN_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/076f4188-05e0-4ed3-afeb-653ad182ccb7\"\n\nquerystring = {\"include_testing_revisions\":\"SOME_BOOLEAN_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/076f4188-05e0-4ed3-afeb-653ad182ccb7?include_testing_revisions=SOME_BOOLEAN_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       }
     },
@@ -529,20 +445,6 @@
         },
         "x-coralogixPermissions": [
           "contextual-data:UpdateConfig"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Node",
-            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/076f4188-05e0-4ed3-afeb-653ad182ccb7';\n\nlet options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/076f4188-05e0-4ed3-afeb-653ad182ccb7\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/076f4188-05e0-4ed3-afeb-653ad182ccb7 \\\n  --header 'Authorization: Bearer <API_KEY>'"
-          }
         ]
       }
     }
@@ -1045,9 +947,6 @@
       "FieldInformation": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FieldInformationMultiText"
-          },
-          {
             "$ref": "#/components/schemas/FieldInformationMultipleSelection"
           },
           {
@@ -1061,6 +960,9 @@
           },
           {
             "$ref": "#/components/schemas/FieldInformationSingle"
+          },
+          {
+            "$ref": "#/components/schemas/FieldInformationMultiText"
           }
         ]
       },
@@ -1839,12 +1741,6 @@
       "IntegrationRevision": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IntegrationRevisionTerraform"
-          },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionCloudFormation"
-          },
-          {
             "$ref": "#/components/schemas/IntegrationRevisionManagedService"
           },
           {
@@ -1855,6 +1751,12 @@
           },
           {
             "$ref": "#/components/schemas/IntegrationRevisionRum"
+          },
+          {
+            "$ref": "#/components/schemas/IntegrationRevisionTerraform"
+          },
+          {
+            "$ref": "#/components/schemas/IntegrationRevisionCloudFormation"
           }
         ]
       },
@@ -2268,6 +2170,12 @@
       "Parameter": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/ParameterBooleanValue"
+          },
+          {
+            "$ref": "#/components/schemas/ParameterStringList"
+          },
+          {
             "$ref": "#/components/schemas/ParameterApiKey"
           },
           {
@@ -2278,12 +2186,6 @@
           },
           {
             "$ref": "#/components/schemas/ParameterStringValue"
-          },
-          {
-            "$ref": "#/components/schemas/ParameterBooleanValue"
-          },
-          {
-            "$ref": "#/components/schemas/ParameterStringList"
           }
         ]
       },
@@ -2960,12 +2862,6 @@
       "v1.IntegrationType": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/V1IntegrationTypeManaged"
-          },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeUntracked"
-          },
-          {
             "$ref": "#/components/schemas/V1IntegrationTypeCloudformation"
           },
           {
@@ -2979,6 +2875,12 @@
           },
           {
             "$ref": "#/components/schemas/V1IntegrationTypeGenericWebhook"
+          },
+          {
+            "$ref": "#/components/schemas/V1IntegrationTypeManaged"
+          },
+          {
+            "$ref": "#/components/schemas/V1IntegrationTypeUntracked"
           }
         ]
       },
