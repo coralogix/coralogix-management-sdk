@@ -4,7 +4,7 @@ package com.coralogixapis.metrics_rule_manager.v1;
 
 
 import "google/protobuf/empty.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 import "google/api/annotations.proto";
 
 
@@ -14,7 +14,7 @@ import "google/api/annotations.proto";
  * with the same evaluation time.
  */
 message InRuleGroup {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
         json_schema: {
           title: "In Rule Group"
           description: "A group of recording rules."
@@ -43,7 +43,7 @@ message InRuleGroup {
 }
 
 message InRule {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
         json_schema: {
           title: "In Rule"
           description: "A rule within a group that defines a recording rule expression."
@@ -93,7 +93,7 @@ message DeleteRuleGroup {
 
 /** A listing of rule groups. */
 message RuleGroupListing {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
         json_schema: {
           title: "Rule Group Listing"
           description: "A listing of rule groups."
@@ -109,7 +109,7 @@ message RuleGroupListing {
 
 /** A matcher specifying a group to fetch. */
 message FetchRuleGroup {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
         json_schema: {
           title: "Fetch Rule Group"
           description: "A matcher specifying a group to fetch."
@@ -125,7 +125,7 @@ message FetchRuleGroup {
 
 /** Result of a rule group fetch operation. */
 message FetchRuleGroupResult {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
         json_schema: {
           title: "Fetch Rule Group Result"
           description: "Result of a rule group fetch operation."
@@ -157,7 +157,7 @@ service RuleGroups {
 }
 
 message CreateRuleGroupSet {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
         json_schema: {
           title: "Create Rule Group Set"
           description: "A set of rule groups to create."
@@ -173,7 +173,7 @@ message CreateRuleGroupSet {
 }
 
 message CreateRuleGroupSetResult {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
         json_schema: {
           title: "Create Rule Group Set Result"
           description: "Result of creating a rule group set."
@@ -188,7 +188,7 @@ message CreateRuleGroupSetResult {
 }
 
 message UpdateRuleGroupSet {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
         json_schema: {
           title: "Update Rule Group Set"
           description: "A set of rule groups to update."
@@ -205,7 +205,7 @@ message UpdateRuleGroupSet {
 }
 
 message RuleGroupSetListing {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
         json_schema: {
           title: "Rule Group Set Listing"
           description: "A listing of rule group sets."
@@ -220,7 +220,7 @@ message RuleGroupSetListing {
 }
 
 message FetchRuleGroupSet {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
         json_schema: {
           title: "Fetch Rule Group Set"
           description: "A matcher specifying a rule group set to fetch."
@@ -235,7 +235,7 @@ message FetchRuleGroupSet {
 }
 
 message DeleteRuleGroupSet {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
         json_schema: {
           title: "Delete Rule Group Set"
           description: "A matcher specifying a rule group set to delete."
@@ -250,7 +250,7 @@ message DeleteRuleGroupSet {
 }
 
 message OutRuleGroupSet {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
         json_schema: {
           title: "Out Rule Group Set"
           description: "An output set of rule groups."
@@ -267,12 +267,12 @@ message OutRuleGroupSet {
 }
 
 service RuleGroupSets {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Recording Rules Service"
     description: "A service to manage recording rules."
   };
     rpc Create(CreateRuleGroupSet) returns (CreateRuleGroupSetResult) {
-        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+        option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
           responses: {
             key: "400"
             value: {description: "Bad Request"}
@@ -294,7 +294,7 @@ service RuleGroupSets {
         };
     }
     rpc Update(UpdateRuleGroupSet) returns (google.protobuf.Empty) {
-        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+        option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
           responses: {
             key: "400"
             value: {description: "Bad Request"}
@@ -316,7 +316,7 @@ service RuleGroupSets {
         };
     }
     rpc List(google.protobuf.Empty) returns (RuleGroupSetListing) {
-        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+        option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
           responses: {
             key: "400"
             value: {description: "Bad Request"}
@@ -337,7 +337,7 @@ service RuleGroupSets {
         };
     }
     rpc Fetch(FetchRuleGroupSet) returns (OutRuleGroupSet) {
-        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+        option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
           responses: {
             key: "400"
             value: {description: "Bad Request"}
@@ -358,7 +358,7 @@ service RuleGroupSets {
         };
     }
     rpc Delete(DeleteRuleGroupSet) returns (google.protobuf.Empty) {
-        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+        option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
           responses: {
             key: "400"
             value: {description: "Bad Request"}
