@@ -35,6 +35,7 @@ import (
 	integrations "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/integration_service"
 	ipaccess "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/ip_access_service"
 	webhooks "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/outgoing_webhooks_service"
+	tcopolicies "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/policies_service"
 	presets "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/presets_service"
 	customroles "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/role_management_service"
 	scopes "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/scopes_service"
@@ -80,6 +81,7 @@ type ClientSet struct {
 	presets              *presets.PresetsServiceAPIService
 	scopes               *scopes.ScopesServiceAPIService
 	slos                 *slos.SlosServiceAPIService
+	tcoPolicies          *tcopolicies.PoliciesServiceAPIService
 	webhooks             *webhooks.OutgoingWebhooksServiceAPIService
 	views                *views.ViewsServiceAPIService
 	viewsFolders         *viewsfolders.FoldersForViewsServiceAPIService
@@ -176,6 +178,11 @@ func (c *ClientSet) SLOs() *slos.SlosServiceAPIService {
 	return c.slos
 }
 
+// TCOPolicies returns the PoliciesServiceAPIService client.
+func (c *ClientSet) TCOPolicies() *tcopolicies.PoliciesServiceAPIService {
+	return c.tcoPolicies
+}
+
 // Scopes returns the ScopesServiceAPIService client.
 func (c *ClientSet) Scopes() *scopes.ScopesServiceAPIService {
 	return c.scopes
@@ -223,6 +230,7 @@ func NewClientSet(c CallPropertiesCreator) *ClientSet {
 		presets:              NewPresetsClient(c),
 		scopes:               NewScopesClient(c),
 		slos:                 NewSLOsClient(c),
+		tcoPolicies:          NewTCOPoliciesClient(c),
 		webhooks:             NewWebhooksClient(c),
 		views:                NewViewsClient(c),
 		viewsFolders:         NewViewsFoldersClient(c),
@@ -418,6 +426,16 @@ func NewSLOsClient(c CallPropertiesCreator) *slos.SlosServiceAPIService {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return slos.NewAPIClient(cfg).SlosServiceAPI
+}
+
+// NewTCOPoliciesClient builds a new PoliciesServiceAPIService from CallPropertiesCreator.
+func NewTCOPoliciesClient(c CallPropertiesCreator) *tcopolicies.PoliciesServiceAPIService {
+	cfg := tcopolicies.NewConfiguration()
+	cfg.Servers = tcopolicies.ServerConfigurations{{URL: c.URL()}}
+	for k, v := range c.Headers() {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return tcopolicies.NewAPIClient(cfg).PoliciesServiceAPI
 }
 
 // NewWebhooksClient builds a new OutgoingWebhooksServiceAPIService from CallPropertiesCreator.

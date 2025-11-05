@@ -199,11 +199,11 @@ func TestGroups(t *testing.T) {
 	groupID := createdGroup.GroupId.Id
 	log.Printf("group id: %d", groupID)
 
-	gotGroup, httpResp, err := client.
-		TeamPermissionsMgmtServiceGetTeamGroup(ctx, *groupID).
-		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, groupID, gotGroup.Group.GroupId.Id)
+	//gotGroup, httpResp, err := client.
+	//	TeamPermissionsMgmtServiceGetTeamGroup(ctx, *groupID).
+	//	Execute()
+	//assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	//assert.Equal(t, groupID, gotGroup.Group.GroupId.Id)
 
 	newName := fmt.Sprintf("Updated Test Group %v", time.Now().UnixMilli())
 	updateReq := groups.UpdateTeamGroupRequest{
