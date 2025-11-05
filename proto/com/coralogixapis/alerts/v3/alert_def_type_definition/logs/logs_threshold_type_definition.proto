@@ -15,7 +15,6 @@ message LogsThresholdType {
     json_schema: {
       title: "Log-based threshold alert type"
       description: "Configuration for alerts triggered when log counts exceed or fall below specified thresholds"
-      required: ["rules"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/threshold-alerts/"
@@ -32,7 +31,7 @@ message LogsThresholdType {
   repeated google.protobuf.StringValue notification_payload_filter = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "[\"obj.field\"]"
     description: "The filter to specify which fields to include in the notification payload"
-    pattern: "^[a-zA-Z0-9_.]+$"
+
     min_items: 0
   }];
   google.protobuf.Int32Value evaluation_delay_ms = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
@@ -45,10 +44,6 @@ message LogsThresholdRule {
     json_schema: {
       title: "Logs Threshold Rule"
       description: "LogsThresholdRule is a message that defines a rule for log-based threshold alerts."
-      required: [
-        "condition",
-        "override"
-      ]
     }
   };
   LogsThresholdCondition condition = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The condition for the threshold alert"}];
@@ -60,16 +55,11 @@ message LogsThresholdCondition {
     json_schema: {
       title: "Logs Threshold Condition"
       description: "LogsThresholdCondition is a message that defines the condition for log-based threshold alerts."
-      required: [
-        "threshold",
-        "time_window"
-      ]
     }
   };
   google.protobuf.DoubleValue threshold = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "100.0"
     description: "The threshold value for the alert condition"
-    pattern: "^\\d+(\\.\\d+)?$"
   }];
   LogsTimeWindow time_window = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The time window for the alert condition"}];
   LogsThresholdConditionType condition_type = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {

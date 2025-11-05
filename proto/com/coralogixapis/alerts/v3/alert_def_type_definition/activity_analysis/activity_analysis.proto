@@ -9,10 +9,6 @@ message ActivityAnalysis {
     json_schema: {
       title: "Activity analysis data structure"
       description: "Configuration for alert activity analysis, containing rules and status."
-      required: [
-        "rules",
-        "status"
-      ]
     }
   };
   repeated string rules = 1;

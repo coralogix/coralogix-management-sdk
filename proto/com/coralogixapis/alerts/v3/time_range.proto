@@ -10,10 +10,6 @@ message TimeRange {
     json_schema: {
       title: "Time range"
       description: "Represents a time range with start and end timestamps"
-      required: [
-        "start_time",
-        "end_time"
-      ]
     }
   };
   google.protobuf.Timestamp start_time = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Start time of the range"}];

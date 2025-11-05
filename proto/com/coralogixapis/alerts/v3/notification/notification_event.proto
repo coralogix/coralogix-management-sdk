@@ -15,18 +15,7 @@ import "protoc-gen-openapiv3/options/annotations.proto";
 
 message AlertNotificationEvent {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Alert notification event"
-      required: [
-        "timestamp",
-        "id",
-        "status",
-        "attachments",
-        "groups",
-        "grouping_key",
-        "highest_priority"
-      ]
-    }
+    json_schema: {title: "Alert notification event"}
   };
   google.protobuf.Timestamp timestamp = 1;
   // Alert event ID
@@ -43,12 +32,6 @@ message Group {
     json_schema: {
       title: "Alert notification group"
       description: "A group of related alerts with the same status"
-      required: [
-        "status",
-        "suppressed",
-        "priority",
-        "key_values"
-      ]
     }
   };
   AlertStatus status = 1;
@@ -66,10 +49,7 @@ message Group {
 
 message Attachments {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Alert notification attachments"
-      required: ["logExample"]
-    }
+    json_schema: {title: "Alert notification attachments"}
   };
   google.protobuf.StringValue logExample = 1;
 }

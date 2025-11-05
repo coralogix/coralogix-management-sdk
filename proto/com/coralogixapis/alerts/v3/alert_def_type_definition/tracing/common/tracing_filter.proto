@@ -10,7 +10,6 @@ message TracingFilter {
     json_schema: {
       title: "Tracing filter"
       description: "Filter configuration for tracing-based alerts"
-      required: ["filter_type"]
     }
   };
   oneof filter_type {
@@ -22,14 +21,12 @@ message TracingSimpleFilter {
     json_schema: {
       title: "Simple tracing filter"
       description: "Basic filter configuration using a latency threshold and label filters"
-      required: ["latency_threshold_ms"]
     }
   };
   TracingLabelFilters tracing_label_filters = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Trace label filters"}];
   google.protobuf.UInt64Value latency_threshold_ms = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The latency threshold to filter traces in milliseconds"
     example: "1000"
-    pattern: "^\\d+$"
   }];
 }
 
@@ -66,16 +63,11 @@ message TracingSpanFieldsFilterType {
     json_schema: {
       title: "Tracing span fields filter type"
       description: "A filter for span fields in trace entries"
-      required: [
-        "key",
-        "filter_type"
-      ]
     }
   };
   google.protobuf.StringValue key = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The key of the span field to filter by"
     example: "\"span.field.key\""
-    pattern: "^\\w+\\.\\w+$"
   }];
   TracingFilterType filter_type = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The FilterType to filter by."}];
 }
@@ -85,10 +77,6 @@ message TracingFilterType {
     json_schema: {
       title: "Tracing filter type"
       description: "Filter type for trace entries"
-      required: [
-        "values",
-        "operation"
-      ]
     }
   };
   repeated google.protobuf.StringValue values = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {

@@ -10,7 +10,6 @@ message NotificationDestination {
     json_schema: {
       title: "Notification destination configuration"
       description: "Configuration for where and how alert notifications should be sent"
-      required: ["connector_id"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/alerting/configure-notifications/destinations/"
@@ -42,14 +41,7 @@ message NotificationRouting {
 
 message SourceOverrides {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Source overrides"
-      required: [
-        "payload_type",
-        "message_config_fields",
-        "connector_config_fields"
-      ]
-    }
+    json_schema: {title: "Source overrides"}
   };
   string payload_type = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "the payload type for the notification"
@@ -61,13 +53,7 @@ message SourceOverrides {
 
 message ConnectorConfigField {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Connector config field"
-      required: [
-        "field_name",
-        "template"
-      ]
-    }
+    json_schema: {title: "Connector config field"}
   };
   string field_name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The name of the configuration field"
@@ -85,10 +71,6 @@ message MessageConfigField {
     json_schema: {
       title: "Message config field"
       description: "Configuration field for a notification message"
-      required: [
-        "field_name",
-        "template"
-      ]
     }
   };
   string field_name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {

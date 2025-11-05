@@ -10,7 +10,6 @@ message FlowType {
     json_schema: {
       title: "Flow alert type"
       description: "Configuration for flow-based alerts with multiple stages"
-      required: ["stages"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/flow-alerts/"
@@ -29,10 +28,6 @@ message FlowStages {
     json_schema: {
       title: "Flow stages"
       description: "Defines stages in a flow alert"
-      required: [
-        "timeframe_ms",
-        "timeframe_type"
-      ]
     }
   };
   oneof flow_stages {
@@ -50,7 +45,6 @@ message FlowStagesGroups {
     json_schema: {
       title: "Flow stage groups"
       description: "Groups of stages in a flow alert"
-      required: ["groups"]
     }
   };
   repeated FlowStagesGroup groups = 1;
@@ -61,11 +55,6 @@ message FlowStagesGroup {
     json_schema: {
       title: "Flow stage group"
       description: "Defines a group of stages in a flow alert"
-      required: [
-        "alert_defs",
-        "next_op",
-        "alerts_op"
-      ]
     }
   };
   repeated FlowStagesGroupsAlertDefs alert_defs = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
@@ -87,7 +76,6 @@ message FlowStagesGroupsAlertDefs {
     json_schema: {
       title: "Flow stage group alert definitions"
       description: "Alert definitions for a flow stage group"
-      required: ["id"]
     }
   };
   google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {

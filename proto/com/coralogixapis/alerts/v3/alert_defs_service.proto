@@ -385,7 +385,6 @@ message GetAlertDefRequest {
     json_schema: {
       title: "Get alert definition request"
       description: "A request to retrieve an alert definition by ID"
-      required: ["id"]
     }
   };
   // Alert definition ID
@@ -401,7 +400,6 @@ message GetAlertDefByVersionIdRequest {
     json_schema: {
       title: "Get alert definition by version ID request"
       description: "A request to retrieve an alert definition by version ID"
-      required: ["alert_version_id"]
     }
   };
   google.protobuf.StringValue alert_version_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
@@ -416,7 +414,6 @@ message GetAlertDefResponse {
     json_schema: {
       title: "Get alert definition response"
       description: "A response containing the requested alert definition"
-      required: ["alert_def"]
     }
   };
   AlertDef alert_def = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The requested alert definition"}];
@@ -427,7 +424,6 @@ message GetAlertDefByVersionIdResponse {
     json_schema: {
       title: "Get alert definition by version ID response"
       description: "A response that contains an alert definition for the requested version"
-      required: ["alert_def"]
     }
   };
   AlertDef alert_def = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The requested alert definition"}];
@@ -438,7 +434,6 @@ message ListAlertDefsResponse {
     json_schema: {
       title: "List alert definitions response"
       description: "A response that contains a list of alert definitions"
-      required: ["alert_defs"]
     }
   };
   repeated AlertDef alert_defs = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
@@ -480,7 +475,6 @@ message DownloadAlertsResponse {
     json_schema: {
       title: "Download alerts response"
       description: "A response containing the downloaded alert data"
-      required: ["content"]
     }
   };
   bytes content = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
@@ -495,7 +489,6 @@ message BatchGetAlertDefRequest {
     json_schema: {
       title: "Batch get alert definitions request"
       description: "A request to retrieve multiple alert definitions by their IDs"
-      required: ["ids"]
     }
   };
   repeated google.protobuf.StringValue ids = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
@@ -509,10 +502,6 @@ message BatchGetAlertDefResponse {
     json_schema: {
       title: "Batch get alert definitions response"
       description: "A response that contains the requested alert definitions and not-found alert IDs"
-      required: [
-        "alert_defs",
-        "not_found_ids"
-      ]
     }
   };
   map<string, AlertDef> alert_defs = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
@@ -527,7 +516,6 @@ message DeleteAlertDefRequest {
     json_schema: {
       title: "Delete alert definition request"
       description: "A request to delete an alert definition by ID"
-      required: ["id"]
     }
   };
   // Alert definition ID
@@ -551,10 +539,6 @@ message ReplaceAlertDefRequest {
     json_schema: {
       title: "Replace alert definition request"
       description: "A request to replace an existing alert definition"
-      required: [
-        "alert_def_properties",
-        "id"
-      ]
     }
   };
   AlertDefProperties alert_def_properties = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The properties of the alert definition"}];
@@ -570,7 +554,6 @@ message ReplaceAlertDefResponse {
     json_schema: {
       title: "Replace alert definition response"
       description: "A response that contains the updated alert definition"
-      required: ["alert_def"]
     }
   };
   AlertDef alert_def = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The updated alert definition"}];
@@ -581,7 +564,6 @@ message CreateAlertDefRequest {
     json_schema: {
       title: "Create alert definition request"
       description: "A request to create a new alert definition"
-      required: ["alert_def_properties"]
     }
   };
   AlertDefProperties alert_def_properties = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The properties of the alert definition"}];
@@ -592,7 +574,6 @@ message CreateAlertDefResponse {
     json_schema: {
       title: "Create alert definition response"
       description: "A response that contains the newly created alert definition"
-      required: ["alert_def"]
     }
   };
   AlertDef alert_def = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The newly created alert definition"}];
@@ -639,10 +620,6 @@ message SetActiveRequest {
     json_schema: {
       title: "Enable/disable alert request"
       description: "A request to enable or disable an alert"
-      required: [
-        "id",
-        "active"
-      ]
     }
   };
   // Alert definition ID
@@ -671,10 +648,6 @@ message AlertDefToReplace {
     json_schema: {
       title: "Alert definition to replace"
       description: "An alert definition along with its ID for replacement"
-      required: [
-        "id",
-        "alert_def_properties"
-      ]
     }
   };
   google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
@@ -690,7 +663,6 @@ message BulkReplaceAlertDefsRequest {
     json_schema: {
       title: "Bulk replace alert definitions request"
       description: "A request to bulk replace multiple alert definitions"
-      required: ["alert_defs_to_replace"]
     }
   };
   repeated AlertDefToReplace alert_defs_to_replace = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of alert definitions to replace"}];
@@ -701,12 +673,6 @@ message BulkReplaceAlertDefsResponse {
     json_schema: {
       title: "Bulk replace alert definitions response"
       description: "A response that contains the results of the bulk replace operation"
-      required: [
-        "alert_defs",
-        "not_found_ids",
-        "failed_to_replace_alert_defs",
-        "skipped_ids"
-      ]
     }
   };
   repeated AlertDef alert_defs = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of successfully replaced alert definitions"}];
@@ -726,7 +692,6 @@ message FailedToReplaceAlertDef {
     json_schema: {
       title: "Failed to replace alert definition"
       description: "An alert definition id that failed to be replaced"
-      required: ["id"]
     }
   };
   google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {

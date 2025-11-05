@@ -10,7 +10,6 @@ message SloDefinition {
     json_schema: {
       title: "SLO Definition"
       description: "Configuration for SLO definition"
-      required: ["slo_id"]
     }
   };
   google.protobuf.StringValue slo_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {

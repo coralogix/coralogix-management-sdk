@@ -14,7 +14,6 @@ message LogsAnomalyType {
     json_schema: {
       title: "Log-based anomaly alert type"
       description: "Configuration for alerts triggered by anomalous log patterns"
-      required: ["rules"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/anomaly-detection-alerts/"
@@ -30,7 +29,7 @@ message LogsAnomalyType {
   repeated google.protobuf.StringValue notification_payload_filter = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The filter to specify which fields to include in the notification payload"
     example: "[\"obj.field\"]"
-    pattern: "^[a-zA-Z0-9_.]+$"
+
     min_items: 0
   }];
   google.protobuf.Int32Value evaluation_delay_ms = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
@@ -46,7 +45,6 @@ message LogsAnomalyRule {
     json_schema: {
       title: "Log-based anomaly rule"
       description: "Defines a rule for detecting log anomalies"
-      required: ["condition"]
     }
   };
   LogsAnomalyCondition condition = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The condition for the threshold alert"}];
@@ -57,10 +55,6 @@ message LogsAnomalyCondition {
     json_schema: {
       title: "Log-based anomaly condition"
       description: "Defines conditions for detecting log anomalies"
-      required: [
-        "minimum_threshold",
-        "time_window"
-      ]
     }
   };
   google.protobuf.DoubleValue minimum_threshold = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {

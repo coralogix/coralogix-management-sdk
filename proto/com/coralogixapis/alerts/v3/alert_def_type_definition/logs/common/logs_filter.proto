@@ -45,10 +45,6 @@ message LabelFilterType {
     json_schema: {
       title: "Label filter type"
       description: "Label filter type for log entries"
-      required: [
-        "value",
-        "operation"
-      ]
     }
   };
   google.protobuf.StringValue value = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {

@@ -16,11 +16,6 @@ message LogsRatioThresholdType {
     json_schema: {
       title: "Log-based ratio threshold alert type"
       description: "Configuration for alerts based on the ratio between two log queries"
-      required: [
-        "numerator",
-        "denominator",
-        "rules"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/ratio-alerts/"
@@ -44,7 +39,7 @@ message LogsRatioThresholdType {
   }];
   repeated google.protobuf.StringValue notification_payload_filter = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "[\"obj.field\"]"
-    pattern: "^[a-zA-Z0-9_.]+$"
+
     min_items: 0
   }];
   LogsRatioGroupByFor group_by_for = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
@@ -67,10 +62,6 @@ message LogsRatioRules {
     json_schema: {
       title: "Log-based ratio rules"
       description: "Defines the rules for log-based ratio alerts"
-      required: [
-        "condition",
-        "override"
-      ]
     }
   };
   LogsRatioCondition condition = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The condition for the ratio alert"}];
@@ -82,16 +73,11 @@ message LogsRatioCondition {
     json_schema: {
       title: "Log-based ratio condition"
       description: "Defines conditions for ratio-based alerts"
-      required: [
-        "threshold",
-        "time_window"
-      ]
     }
   };
   google.protobuf.DoubleValue threshold = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "10.0"
     description: "The threshold value for the alert condition"
-    pattern: "^\\d+(\\.\\d+)?$"
   }];
   LogsRatioTimeWindow time_window = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "10"
