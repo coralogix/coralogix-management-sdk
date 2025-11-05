@@ -1357,7 +1357,7 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\tregion_id\x18\x02 \x01(\tB\f\x9aA\tJ\a\"eu-gb\"R\bregionId\x12'\n" +
 	"\x04name\x18\x03 \x01(\tB\x13\x9aA\x10J\x0e\"example-name\"R\x04name\x12\x83\x01\n" +
 	"\x03crn\x18\x04 \x01(\tBq\x9aAnJl\"crn:v1:staging:public:logs:eu-gb:a/436fa6f7760f46eba99e22f099c33cb8:5a8b249b-3915-49e7-ad43-030f585d84c5::\"R\x03crn\x12\"\n" +
-	"\ais_used\x18\x05 \x01(\bB\t\x9aA\x06J\x04trueR\x06isUsed2\xa6,\n" +
+	"\ais_used\x18\x05 \x01(\bB\t\x9aA\x06J\x04trueR\x06isUsed2\xad,\n" +
 	"\x17OutgoingWebhooksService\x12\xdc\x03\n" +
 	"\x18ListOutgoingWebhookTypes\x12C.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhookTypesRequest\x1aD.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhookTypesResponse\"\xb4\x02\x9aA\xca\x01\n" +
 	"\x19Outgoing webhooks service\x12\x1aGet outgoing webhook typesJ\x14\n" +
@@ -1380,8 +1380,8 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x15Internal server errorj<\n" +
 	"\x16x-coralogixPermissions\x12\"2 \n" +
 	"\x1e\x1a\x1coutbound-webhooks:ReadConfigʸ\x02\x1b\n" +
-	"\x19Get outgoing webhook type\x82\xd3\xe4\x93\x02NZ$\x12\"/v1/outgoing-webhooks/types/{type}\x12&/integrations/webhooks/v1/types/{type}\x12\xbb\x03\n" +
-	"\x14ListOutgoingWebhooks\x12?.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhooksRequest\x1a@.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhooksResponse\"\x9f\x02\x9aA\xc6\x01\n" +
+	"\x19Get outgoing webhook type\x82\xd3\xe4\x93\x02NZ$\x12\"/v1/outgoing-webhooks/types/{type}\x12&/integrations/webhooks/v1/types/{type}\x12\xc6\x03\n" +
+	"\x14ListOutgoingWebhooks\x12?.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhooksRequest\x1a@.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhooksResponse\"\xaa\x02\x9aA\xc6\x01\n" +
 	"\x19Outgoing webhooks service\x12\x16List outgoing webhooksJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1391,7 +1391,7 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x15Internal server errorj<\n" +
 	"\x16x-coralogixPermissions\x12\"2 \n" +
 	"\x1e\x1a\x1coutbound-webhooks:ReadConfigʸ\x02\x17\n" +
-	"\x15Get outgoing webhooks\x82\xd3\xe4\x93\x024Z\x17\x12\x15/v1/outgoing-webhooks\x12\x19/integrations/webhooks/v1\x12\xf2\x03\n" +
+	"\x15Get outgoing webhooks\x82\xd3\xe4\x93\x02?Z\x17\x12\x15/v1/outgoing-webhooks\x12$/integrations/webhooks/v1:listByType\x12\xf2\x03\n" +
 	"\x1bListOutboundWebhooksSummary\x12F.com.coralogix.outgoing_webhooks.v1.ListOutboundWebhooksSummaryRequest\x1aG.com.coralogix.outgoing_webhooks.v1.ListOutboundWebhooksSummaryResponse\"\xc1\x02\x9aA\xcf\x01\n" +
 	"\x19Outgoing webhooks service\x12\x1eList outbound webhooks summaryJ\x14\n" +
 	"\x03400\x12\r\n" +
@@ -1402,8 +1402,8 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x15Internal server errorj=\n" +
 	"\x16x-coralogixPermissions\x12#2!\n" +
 	"\x1f\x1a\x1doutbound-webhooks:ReadSummaryʸ\x02 \n" +
-	"\x1eGet outgoing webhook summaries\x82\xd3\xe4\x93\x02DZ\x1f\x12\x1d/v1/outgoing-webhooks/summary\x12!/integrations/webhooks/v1/summary\x12\xd4\x03\n" +
-	"\x17ListAllOutgoingWebhooks\x12B.com.coralogix.outgoing_webhooks.v1.ListAllOutgoingWebhooksRequest\x1aC.com.coralogix.outgoing_webhooks.v1.ListAllOutgoingWebhooksResponse\"\xaf\x02\x9aA\xca\x01\n" +
+	"\x1eGet outgoing webhook summaries\x82\xd3\xe4\x93\x02DZ\x1f\x12\x1d/v1/outgoing-webhooks/summary\x12!/integrations/webhooks/v1/summary\x12\xd0\x03\n" +
+	"\x17ListAllOutgoingWebhooks\x12B.com.coralogix.outgoing_webhooks.v1.ListAllOutgoingWebhooksRequest\x1aC.com.coralogix.outgoing_webhooks.v1.ListAllOutgoingWebhooksResponse\"\xab\x02\x9aA\xca\x01\n" +
 	"\x19Outgoing webhooks service\x12\x1aList all outgoing webhooksJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1413,7 +1413,7 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x15Internal server errorj<\n" +
 	"\x16x-coralogixPermissions\x12\"2 \n" +
 	"\x1e\x1a\x1coutbound-webhooks:ReadConfigʸ\x02\x1b\n" +
-	"\x19Get all outgoing webhooks\x82\xd3\xe4\x93\x02<Z\x1b\x12\x19/v1/outgoing-webhooks/all\x12\x1d/integrations/webhooks/v1/all\x12\xbc\x03\n" +
+	"\x19Get all outgoing webhooks\x82\xd3\xe4\x93\x028Z\x1b\x12\x19/v1/outgoing-webhooks/all\x12\x19/integrations/webhooks/v1\x12\xbc\x03\n" +
 	"\x12GetOutgoingWebhook\x12=.com.coralogix.outgoing_webhooks.v1.GetOutgoingWebhookRequest\x1a>.com.coralogix.outgoing_webhooks.v1.GetOutgoingWebhookResponse\"\xa6\x02\x9aA\xc4\x01\n" +
 	"\x19Outgoing webhooks service\x12\x14Get outgoing webhookJ\x14\n" +
 	"\x03400\x12\r\n" +
