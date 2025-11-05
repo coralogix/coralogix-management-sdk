@@ -29,6 +29,7 @@ const (
 	ConnectorType_GENERIC_HTTPS              ConnectorType = 2
 	ConnectorType_PAGERDUTY                  ConnectorType = 3
 	ConnectorType_IBM_EVENT_NOTIFICATIONS    ConnectorType = 5
+	ConnectorType_SERVICE_NOW                ConnectorType = 6
 )
 
 // Enum value maps for ConnectorType.
@@ -39,6 +40,7 @@ var (
 		2: "GENERIC_HTTPS",
 		3: "PAGERDUTY",
 		5: "IBM_EVENT_NOTIFICATIONS",
+		6: "SERVICE_NOW",
 	}
 	ConnectorType_value = map[string]int32{
 		"CONNECTOR_TYPE_UNSPECIFIED": 0,
@@ -46,6 +48,7 @@ var (
 		"GENERIC_HTTPS":              2,
 		"PAGERDUTY":                  3,
 		"IBM_EVENT_NOTIFICATIONS":    5,
+		"SERVICE_NOW":                6,
 	}
 )
 
@@ -132,13 +135,14 @@ var File_com_coralogixapis_notification_center_common_common_proto protoreflect.
 
 const file_com_coralogixapis_notification_center_common_common_proto_rawDesc = "" +
 	"\n" +
-	"9com/coralogixapis/notification_center/common/common.proto\x12%com.coralogixapis.notification_center*\x84\x01\n" +
+	"9com/coralogixapis/notification_center/common/common.proto\x12%com.coralogixapis.notification_center*\x95\x01\n" +
 	"\rConnectorType\x12\x1e\n" +
 	"\x1aCONNECTOR_TYPE_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05SLACK\x10\x01\x12\x11\n" +
 	"\rGENERIC_HTTPS\x10\x02\x12\r\n" +
 	"\tPAGERDUTY\x10\x03\x12\x1b\n" +
-	"\x17IBM_EVENT_NOTIFICATIONS\x10\x05\"\x04\b\x04\x10\x04*\x03AWS*X\n" +
+	"\x17IBM_EVENT_NOTIFICATIONS\x10\x05\x12\x0f\n" +
+	"\vSERVICE_NOW\x10\x06\"\x04\b\x04\x10\x04*\x03AWS*X\n" +
 	"\n" +
 	"EntityType\x12\x1b\n" +
 	"\x17ENTITY_TYPE_UNSPECIFIED\x10\x00\x12\n" +
