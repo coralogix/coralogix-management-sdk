@@ -181,6 +181,7 @@ const (
 	Resource_RESOURCE_TEAM_SCHEMA_MANAGER             Resource = 151
 	Resource_RESOURCE_CASE_CONFIG                     Resource = 152
 	Resource_RESOURCE_CASE                            Resource = 153
+	Resource_RESOURCE_PROFILES_DATA_INGRESS_OLD       Resource = 154
 )
 
 // Enum value maps for Resource.
@@ -340,6 +341,7 @@ var (
 		151: "RESOURCE_TEAM_SCHEMA_MANAGER",
 		152: "RESOURCE_CASE_CONFIG",
 		153: "RESOURCE_CASE",
+		154: "RESOURCE_PROFILES_DATA_INGRESS_OLD",
 	}
 	Resource_value = map[string]int32{
 		"RESOURCE_UNSPECIFIED":                     0,
@@ -496,6 +498,7 @@ var (
 		"RESOURCE_TEAM_SCHEMA_MANAGER":             151,
 		"RESOURCE_CASE_CONFIG":                     152,
 		"RESOURCE_CASE":                            153,
+		"RESOURCE_PROFILES_DATA_INGRESS_OLD":       154,
 	}
 )
 
@@ -777,7 +780,7 @@ var File_com_coralogix_permissions_v1_actions_resources_proto protoreflect.FileD
 
 const file_com_coralogix_permissions_v1_actions_resources_proto_rawDesc = "" +
 	"\n" +
-	"4com/coralogix/permissions/v1/actions_resources.proto\x12\x1ccom.coralogix.permissions.v1\x1a google/protobuf/descriptor.proto*\xe7?\n" +
+	"4com/coralogix/permissions/v1/actions_resources.proto\x12\x1ccom.coralogix.permissions.v1\x1a google/protobuf/descriptor.proto*\xab@\n" +
 	"\bResource\x12\x18\n" +
 	"\x14RESOURCE_UNSPECIFIED\x10\x00\x12%\n" +
 	"\x12RESOURCE_CORALOGIX\x10\x01\x1a\r\x92\x82\x19\tcoralogix\x12\x1f\n" +
@@ -944,7 +947,8 @@ const file_com_coralogix_permissions_v1_actions_resources_proto_rawDesc = "" +
 	"\x16RESOURCE_TEAM_DATASETS\x10\x96\x01\x1a\x11\x92\x82\x19\rteam-datasets\x12:\n" +
 	"\x1cRESOURCE_TEAM_SCHEMA_MANAGER\x10\x97\x01\x1a\x17\x92\x82\x19\x13team-schema-manager\x12*\n" +
 	"\x14RESOURCE_CASE_CONFIG\x10\x98\x01\x1a\x0f\x92\x82\x19\vcase-config\x12\x1c\n" +
-	"\rRESOURCE_CASE\x10\x99\x01\x1a\b\x92\x82\x19\x04case*\xec\x13\n" +
+	"\rRESOURCE_CASE\x10\x99\x01\x1a\b\x92\x82\x19\x04case\x12B\n" +
+	"\"RESOURCE_PROFILES_DATA_INGRESS_OLD\x10\x9a\x01\x1a\x19\x92\x82\x19\x15profiles-data-ingress*\xec\x13\n" +
 	"\x06Action\x12\x16\n" +
 	"\x12ACTION_UNSPECIFIED\x10\x00\x12\x1b\n" +
 	"\fACTION_ADMIN\x10\x01\x1a\t\x92\x82\x19\x05admin\x12\x1f\n" +

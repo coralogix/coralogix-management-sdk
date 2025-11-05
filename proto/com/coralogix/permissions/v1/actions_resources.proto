@@ -179,6 +179,7 @@ enum Resource {
   RESOURCE_TEAM_SCHEMA_MANAGER = 151 [(name) = "team-schema-manager"];
   RESOURCE_CASE_CONFIG = 152 [(name) = "case-config"];
   RESOURCE_CASE = 153 [(name) = "case"];
+  RESOURCE_PROFILES_DATA_INGRESS_OLD = 154 [(name) = "profiles-data-ingress"];
 }
 
 enum Action {

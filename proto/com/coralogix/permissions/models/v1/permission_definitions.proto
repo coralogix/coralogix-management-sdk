@@ -1,3 +1,4 @@
+// clang-format off
 syntax = "proto3";
 
 package com.coralogix.permissions.models.v1;
@@ -2680,7 +2681,7 @@ enum Permission {
   PERMISSION_PROFILES_DATA_INGRESS_SEND_DATA_OLD = 243 [
     (expression) = "profiles-data-ingress:SendData",
     (action) = ACTION_SENDDATA,
-    (resource) = RESOURCE_PROFILES_DATA_INGRESS,
+    (resource) = RESOURCE_PROFILES_DATA_INGRESS_OLD,
     (permission_group) = PERMISSION_GROUP_PROFILES,
     (description) = "Send Profiles",
     (doc_link) = "",
@@ -2909,7 +2910,6 @@ enum Permission {
     (description) = "View All Access Policies",
     (doc_link) = "https://coralogix.com/docs/user-guides/account-management/access-control/pbac/#safety-net-avoid-forgotten-resources",
     (explanation) = "Vew any access policy.",
-    (hidden) = false,
     (is_team_level) = true,
     (is_org_level) = true
   ];
@@ -2921,7 +2921,6 @@ enum Permission {
     (description) = "Manage All Access Policies",
     (doc_link) = "https://coralogix.com/docs/user-guides/account-management/access-control/pbac/#safety-net-avoid-forgotten-resources",
     (explanation) = "",
-    (hidden) = false,
     (is_team_level) = true,
     (is_org_level) = true
   ];
@@ -2933,7 +2932,6 @@ enum Permission {
     (description) = "Follow logs through each stage of your pipeline in real time.",
     (doc_link) = "",
     (explanation) = "Inspect the exact rules applied to each log.",
-    (hidden) = false,
     (is_team_level) = true,
     (is_org_level) = true
   ];
@@ -2943,7 +2941,7 @@ enum Permission {
     (resource) = RESOURCE_TEAM_API_KEYS,
     (permission_group) = PERMISSION_GROUP_AAA,
     (description) = "View access policy for a specific resource type.",
-    (doc_link) = "",
+    (doc_link) = "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/#access-policies-for-api-keys",
     (explanation) = "View access policy for a specific resource type.",
     (hidden) = true,
     (is_team_level) = true,
@@ -2955,7 +2953,7 @@ enum Permission {
     (resource) = RESOURCE_TEAM_API_KEYS,
     (permission_group) = PERMISSION_GROUP_AAA,
     (description) = "Update access policy for a specific resource type.",
-    (doc_link) = "",
+    (doc_link) = "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/#access-policies-for-api-keys",
     (explanation) = "Update access policy for a specific resource type.",
     (hidden) = true,
     (is_team_level) = true,
@@ -2969,8 +2967,7 @@ enum Permission {
     (description) = "View Send-Your-Data API Key Access Policies",
     (doc_link) = "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/#access-policies-for-api-keys",
     (explanation) = "",
-    (is_team_level) = true,
-    (hidden) = false
+    (is_team_level) = true
   ];
   PERMISSION_DATA_INGEST_API_KEYS_UPDATE_ACCESS_POLICY = 271 [
     (expression) = "data-ingest-api-keys:UpdateAccessPolicy",
@@ -2980,8 +2977,7 @@ enum Permission {
     (description) = "Create, Modify, and Delete Send-Your-Data API Key Access Policies",
     (doc_link) = "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/#access-policies-for-api-keys",
     (explanation) = "",
-    (is_team_level) = true,
-    (hidden) = false
+    (is_team_level) = true
   ];
   PERMISSION_TEAM_CUSTOM_API_KEYS_READ_ACCESS_POLICY = 272 [
     (expression) = "team-custom-api-keys:ReadAccessPolicy",
@@ -2991,8 +2987,7 @@ enum Permission {
     (description) = "View Team Level API Key Access Policies",
     (doc_link) = "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/#access-policies-for-api-keys",
     (explanation) = "",
-    (is_team_level) = true,
-    (hidden) = false
+    (is_team_level) = true
   ];
   PERMISSION_TEAM_CUSTOM_API_KEYS_UPDATE_ACCESS_POLICY = 273 [
     (expression) = "team-custom-api-keys:UpdateAccessPolicy",
@@ -3002,8 +2997,7 @@ enum Permission {
     (description) = "Update Team Level API Key Access Policies",
     (doc_link) = "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/#access-policies-for-api-keys",
     (explanation) = "",
-    (is_team_level) = true,
-    (hidden) = false
+    (is_team_level) = true
   ];
   PERMISSION_TEAM_DASHBOARDS_READ_ACCESS_POLICY = 274 [
     (expression) = "team-dashboards:ReadAccessPolicy",
@@ -3013,8 +3007,7 @@ enum Permission {
     (description) = "View Public Custom Dashboard Access Policies",
     (doc_link) = "https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/manage-dashboard-settings/#access-policies",
     (explanation) = "",
-    (is_team_level) = true,
-    (hidden) = false
+    (is_team_level) = true
   ];
   PERMISSION_TEAM_DASHBOARDS_UPDATE_ACCESS_POLICY = 275 [
     (expression) = "team-dashboards:UpdateAccessPolicy",
@@ -3024,17 +3017,16 @@ enum Permission {
     (description) = "Manage Public Custom Dashboard Access Policies",
     (doc_link) = "https://coralogix.com/docs/user-guides/custom-dashboards/tutorials/manage-dashboard-settings/#access-policies",
     (explanation) = "",
-    (is_team_level) = true,
-    (hidden) = false
+    (is_team_level) = true
   ];
   PERMISSION_TEAM_DATASETS_APPEND_DATA = 276 [
     (expression) = "team-datasets:AppendData",
     (action) = ACTION_APPEND_DATA,
     (resource) = RESOURCE_TEAM_DATASETS,
     (permission_group) = PERMISSION_GROUP_DATAENGINE,
-    (description) = "Add new data to datasets.",
+    (description) = "Add new data to datasets",
     (doc_link) = "",
-    (explanation) = "Add new data to datasets.",
+    (explanation) = "Allows users to add new data to datasets",
     (is_team_level) = true
   ];
   PERMISSION_TEAM_DATASETS_OVERWRITE_DATA = 277 [
@@ -3042,9 +3034,9 @@ enum Permission {
     (action) = ACTION_OVERWRITE_DATA,
     (resource) = RESOURCE_TEAM_DATASETS,
     (permission_group) = PERMISSION_GROUP_DATAENGINE,
-    (description) = "Replace existing dataset content.",
+    (description) = "Replace existing dataset content",
     (doc_link) = "",
-    (explanation) = "Replace existing dataset content.",
+    (explanation) = "Allows users to replace existing dataset content",
     (is_team_level) = true
   ];
   PERMISSION_TEAM_DATASETS_READ_ACCESS_POLICY = 278 [
@@ -3052,20 +3044,19 @@ enum Permission {
     (action) = ACTION_READ_ACCESS_POLICY,
     (resource) = RESOURCE_TEAM_DATASETS,
     (permission_group) = PERMISSION_GROUP_DATAENGINE,
-    (description) = "Read access policy for send your data API keys.",
+    (description) = "Allow user to read access policy for a specific datasets",
     (doc_link) = "",
-    (explanation) = "",
-    (is_team_level) = true,
-    (hidden) = true
+    (explanation) = "Allow user to read access policy for a specific datasets",
+    (is_team_level) = true
   ];
   PERMISSION_TEAM_DATASETS_READ_DATA = 279 [
     (expression) = "team-datasets:ReadData",
     (action) = ACTION_READDATA,
     (resource) = RESOURCE_TEAM_DATASETS,
     (permission_group) = PERMISSION_GROUP_DATAENGINE,
-    (description) = "Read data from datasets.",
+    (description) = "Read data from datasets",
     (doc_link) = "",
-    (explanation) = "Read data from datasets.",
+    (explanation) = "Allows users to read data from datasets",
     (is_team_level) = true
   ];
   PERMISSION_TEAM_DATASETS_UPDATE_ACCESS_POLICY = 280 [
@@ -3073,11 +3064,10 @@ enum Permission {
     (action) = ACTION_UPDATE_ACCESS_POLICY,
     (resource) = RESOURCE_TEAM_DATASETS,
     (permission_group) = PERMISSION_GROUP_DATAENGINE,
-    (description) = "Update access policy for send your data API keys.",
+    (description) = "Allow user to update access policy for a specific datasets",
     (doc_link) = "",
-    (explanation) = "",
-    (is_team_level) = true,
-    (hidden) = true
+    (explanation) = "Allow user to update access policy for a specific datasets",
+    (is_team_level) = true
   ];
   PERMISSION_TEAM_ROLES_READ_SUMMARY = 281 [
     (expression) = "team-roles:ReadSummary",
@@ -3104,9 +3094,9 @@ enum Permission {
     (action) = ACTION_MANAGE,
     (resource) = RESOURCE_TEAM_SCHEMA_MANAGER,
     (permission_group) = PERMISSION_GROUP_SCHEMA,
-    (description) = "Manage schema fields.",
+    (description) = "Manage schema fields",
     (doc_link) = "",
-    (explanation) = "Allows users to edit, reserve, or map schema fields as needed.",
+    (explanation) = "Allows users to edit, reserve, or map schema fields as needed",
     (is_team_level) = true
   ];
   PERMISSION_TEAM_SCHEMA_MANAGER_READ_CONFIG = 284 [
@@ -3114,9 +3104,9 @@ enum Permission {
     (action) = ACTION_READ_CONFIG,
     (resource) = RESOURCE_TEAM_SCHEMA_MANAGER,
     (permission_group) = PERMISSION_GROUP_SCHEMA,
-    (description) = "View schema information and statistics.",
+    (description) = "View schema information and statistics",
     (doc_link) = "",
-    (explanation) = "Allows users to see field names, types, cardinality, popularity, and other schema-level metrics.",
+    (explanation) = "Allows users to see field names, types, cardinality, popularity, and other schema-level metrics",
     (is_team_level) = true
   ];
   PERMISSION_CASE_CONFIG_READ = 285 [
@@ -3124,9 +3114,9 @@ enum Permission {
     (action) = ACTION_READ,
     (resource) = RESOURCE_CASE_CONFIG,
     (permission_group) = PERMISSION_GROUP_CASE,
-    (description) = "Allow user to see company level case configuration.",
+    (description) = "Allow user to see company level case configuration",
     (doc_link) = "",
-    (explanation) = "Allow user to see company level case configuration.",
+    (explanation) = "Allow user to see Supression window and Snooze period settings",
     (hidden) = true,
     (is_team_level) = true
   ];
@@ -3135,9 +3125,9 @@ enum Permission {
     (action) = ACTION_UPDATE,
     (resource) = RESOURCE_CASE_CONFIG,
     (permission_group) = PERMISSION_GROUP_CASE,
-    (description) = "Allow user to modify company level case configuration.",
+    (description) = "Allow user to modify company level case configuration",
     (doc_link) = "",
-    (explanation) = "Allow user to modify company level case configuration.",
+    (explanation) = "Allow user to modify Supression window and Snooze period settings",
     (hidden) = true,
     (is_team_level) = true
   ];
@@ -3146,9 +3136,9 @@ enum Permission {
     (action) = ACTION_ACKNOWLEDGE,
     (resource) = RESOURCE_CASE,
     (permission_group) = PERMISSION_GROUP_CASE,
-    (description) = "Allow user to acknowledge a case.",
+    (description) = "Allow user to acknowledge a case",
     (doc_link) = "",
-    (explanation) = "Allow user to acknowledge a case.",
+    (explanation) = "Allow user to acknowledge a case",
     (hidden) = true,
     (is_team_level) = true
   ];
@@ -3157,9 +3147,9 @@ enum Permission {
     (action) = ACTION_ASSIGN,
     (resource) = RESOURCE_CASE,
     (permission_group) = PERMISSION_GROUP_CASE,
-    (description) = "Allow user to assign a case to themself or to someone else.",
+    (description) = "Allow user to assign a case to themself or to someone else",
     (doc_link) = "",
-    (explanation) = "Allow user to assign a case to themself or to someone else.",
+    (explanation) = "Allow user to assign a case to themself or to someone else",
     (hidden) = true,
     (is_team_level) = true
   ];
@@ -3168,9 +3158,9 @@ enum Permission {
     (action) = ACTION_CLOSE,
     (resource) = RESOURCE_CASE,
     (permission_group) = PERMISSION_GROUP_CASE,
-    (description) = "Allow user to close a case.",
+    (description) = "Allow user to close a case",
     (doc_link) = "",
-    (explanation) = "Allow user to close a case.",
+    (explanation) = "Allow user to close a case",
     (hidden) = true,
     (is_team_level) = true
   ];
@@ -3179,9 +3169,9 @@ enum Permission {
     (action) = ACTION_COMMENT,
     (resource) = RESOURCE_CASE,
     (permission_group) = PERMISSION_GROUP_CASE,
-    (description) = "Allow user to comment on a case.",
+    (description) = "Allow user to comment on a case",
     (doc_link) = "",
-    (explanation) = "Allow user to comment on a case.",
+    (explanation) = "Allow user to comment on a case",
     (hidden) = true,
     (is_team_level) = true
   ];
@@ -3190,9 +3180,9 @@ enum Permission {
     (action) = ACTION_READ,
     (resource) = RESOURCE_CASE,
     (permission_group) = PERMISSION_GROUP_CASE,
-    (description) = "Allow user to see the list of cases and individual cases.",
+    (description) = "Allow user to see the list of cases and individual cases",
     (doc_link) = "",
-    (explanation) = "Allow user to see the list of cases and individual cases.",
+    (explanation) = "Allow user to see the list of cases and individual cases",
     (hidden) = true,
     (is_team_level) = true
   ];
@@ -3201,9 +3191,9 @@ enum Permission {
     (action) = ACTION_UPDATE,
     (resource) = RESOURCE_CASE,
     (permission_group) = PERMISSION_GROUP_CASE,
-    (description) = "Allow user to update case.",
+    (description) = "Allow user to update case",
     (doc_link) = "",
-    (explanation) = "Allow user to update case.",
+    (explanation) = "Allow user to update case",
     (hidden) = true,
     (is_team_level) = true
   ];
@@ -3212,10 +3202,9 @@ enum Permission {
     (action) = ACTION_READ_ACCESS_POLICY,
     (resource) = RESOURCE_SYSTEM_DATASETS,
     (permission_group) = PERMISSION_GROUP_DATAENGINE,
-    (description) = "Read access policy for a specific dataset.",
+    (description) = "Allow user to read access policy for a specific datasets",
     (doc_link) = "",
-    (explanation) = "Read access policy for a specific dataset.",
-    (hidden) = true,
+    (explanation) = "Allow user to read access policy for a specific datasets",
     (is_team_level) = true
   ];
   PERMISSION_SYSTEM_DATASETS_UPDATE_ACCESS_POLICY = 294 [
@@ -3223,10 +3212,39 @@ enum Permission {
     (action) = ACTION_UPDATE_ACCESS_POLICY,
     (resource) = RESOURCE_SYSTEM_DATASETS,
     (permission_group) = PERMISSION_GROUP_DATAENGINE,
-    (description) = "Update access policy for a specific dataset.",
+    (description) = "Allow user to update access policy for a specific datasets",
     (doc_link) = "",
-    (explanation) = "Update access policy for a specific dataset.",
-    (hidden) = true,
+    (explanation) = "Allow user to update access policy for a specific datasets",
+    (is_team_level) = true
+  ];
+  PERMISSION_SYSTEM_DATASETS_APPEND_DATA = 295 [
+    (expression) = "system-datasets:AppendData",
+    (action) = ACTION_APPEND_DATA,
+    (resource) = RESOURCE_SYSTEM_DATASETS,
+    (permission_group) = PERMISSION_GROUP_DATAENGINE,
+    (description) = "Add new data to datasets",
+    (doc_link) = "",
+    (explanation) = "Allows users to add new data to datasets",
+    (is_team_level) = true
+  ];
+  PERMISSION_SYSTEM_DATASETS_OVERWRITE_DATA = 296 [
+    (expression) = "system-datasets:OverwriteData",
+    (action) = ACTION_OVERWRITE_DATA,
+    (resource) = RESOURCE_SYSTEM_DATASETS,
+    (permission_group) = PERMISSION_GROUP_DATAENGINE,
+    (description) = "Replace existing dataset content",
+    (doc_link) = "",
+    (explanation) = "Allows users to replace existing dataset content",
+    (is_team_level) = true
+  ];
+  PERMISSION_SYSTEM_DATASETS_READ_DATA = 297 [
+    (expression) = "system-datasets:ReadData",
+    (action) = ACTION_READDATA,
+    (resource) = RESOURCE_SYSTEM_DATASETS,
+    (permission_group) = PERMISSION_GROUP_DATAENGINE,
+    (description) = "Read data from datasets",
+    (doc_link) = "",
+    (explanation) = "Allows users to read data from datasets",
     (is_team_level) = true
   ];
 }
