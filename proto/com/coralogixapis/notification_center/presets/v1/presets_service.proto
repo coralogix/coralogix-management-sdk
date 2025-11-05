@@ -23,8 +23,11 @@ service PresetsService {
   rpc CreateCustomPreset(CreateCustomPresetRequest) returns (CreateCustomPresetResponse) {
     option (google.api.http) = {
       post: "/notifications/notification-center/v1/presets/custom"
-      body: "preset"
-      additional_bindings: {post: "/v1/notification-center/presets/custom"}
+      body: "*"
+      additional_bindings: {
+        post: "/v1/notification-center/presets/custom"
+        body: "preset"
+      }
     };
 
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -36,8 +39,11 @@ service PresetsService {
   rpc ReplaceCustomPreset(ReplaceCustomPresetRequest) returns (ReplaceCustomPresetResponse) {
     option (google.api.http) = {
       put: "/notifications/notification-center/v1/presets/custom"
-      body: "preset"
-      additional_bindings: {put: "/v1/notification-center/presets/custom"}
+      body: "*"
+      additional_bindings: {
+        put: "/v1/notification-center/presets/custom"
+        body: "preset"
+      }
     };
 
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {

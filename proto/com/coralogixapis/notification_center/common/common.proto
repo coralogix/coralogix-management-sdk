@@ -13,6 +13,7 @@ enum ConnectorType {
   GENERIC_HTTPS = 2;
   PAGERDUTY = 3;
   IBM_EVENT_NOTIFICATIONS = 5;
+  SERVICE_NOW = 6;
 }
 
 enum EntityType {

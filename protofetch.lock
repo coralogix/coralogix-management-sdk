@@ -75,9 +75,8 @@ commit_hash = "b960466df912ba67e7157e2f016af02eb6c9f669"
 [[dependencies]]
 name = "cx-api-lmd-model"
 url = "github.com/coralogix/cx-api-lmd-model"
-protocol = "ssh"
-revision = "v0.0.8"
-commit_hash = "c3519ef689aca1a640f985e7b339394028c261f4"
+branch = "master"
+commit_hash = "fa71ff99fdcdeaf13b525f65ad2b2afa9a70abcb"
 
 [[dependencies]]
 name = "cx-api-logs2metrics"
@@ -100,8 +99,8 @@ commit_hash = "8d44865d90ceb7a5b8b0ad23b3681a1bc45c4459"
 [[dependencies]]
 name = "cx-api-notification-center"
 url = "github.com/coralogix/cx-api-notification-center"
-revision = "v1.4.0"
-commit_hash = "01ce6cc89d3de0468d52c987df6e09d240690f89"
+revision = "v1.4.1"
+commit_hash = "c1f07210f91e8ae51d438cbdcd00b76a834321ad"
 
 [[dependencies]]
 name = "cx-api-organisations"

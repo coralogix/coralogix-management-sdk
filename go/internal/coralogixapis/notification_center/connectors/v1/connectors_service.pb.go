@@ -937,12 +937,12 @@ const file_com_coralogixapis_notification_center_connectors_v1_connectors_servic
 	"!GetConnectorTypeSummariesResponse\x12\x83\x01\n" +
 	"\x18connector_type_summaries\x18\x01 \x03(\v2I.com.coralogixapis.notification_center.connectors.v1.ConnectorTypeSummaryR\x16connectorTypeSummaries:\xdc\x01\x9aA\xd8\x01\n" +
 	"Y*%Get Connector Type Summaries Response20Response containing summaries of connector types*{\n" +
-	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/2\xaa\x1a\n" +
-	"\x11ConnectorsService\x12\xc3\x02\n" +
-	"\x0fCreateConnector\x12K.com.coralogixapis.notification_center.connectors.v1.CreateConnectorRequest\x1aL.com.coralogixapis.notification_center.connectors.v1.CreateConnectorResponse\"\x94\x01\x9aA(\n" +
-	"\x12Connectors service\x12\x12Create a Connector\x82\xd3\xe4\x93\x02c:\tconnectorZ$\"\"/v1/notification-center/connectors\"0/notifications/notification-center/v1/connectors\x12\xc5\x02\n" +
-	"\x10ReplaceConnector\x12L.com.coralogixapis.notification_center.connectors.v1.ReplaceConnectorRequest\x1aM.com.coralogixapis.notification_center.connectors.v1.ReplaceConnectorResponse\"\x93\x01\x9aA)\n" +
-	"\x12Connectors service\x12\x13Replace a Connector\x82\xd3\xe4\x93\x02a:\tconnectorZ#\x1a!/v1/notification-center/connector\x1a//notifications/notification-center/v1/connector\x12\xc2\x02\n" +
+	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/2\xb0\x1a\n" +
+	"\x11ConnectorsService\x12\xc6\x02\n" +
+	"\x0fCreateConnector\x12K.com.coralogixapis.notification_center.connectors.v1.CreateConnectorRequest\x1aL.com.coralogixapis.notification_center.connectors.v1.CreateConnectorResponse\"\x97\x01\x9aA(\n" +
+	"\x12Connectors service\x12\x12Create a Connector\x82\xd3\xe4\x93\x02f:\x01*Z/:\tconnector\"\"/v1/notification-center/connectors\"0/notifications/notification-center/v1/connectors\x12\xc8\x02\n" +
+	"\x10ReplaceConnector\x12L.com.coralogixapis.notification_center.connectors.v1.ReplaceConnectorRequest\x1aM.com.coralogixapis.notification_center.connectors.v1.ReplaceConnectorResponse\"\x96\x01\x9aA)\n" +
+	"\x12Connectors service\x12\x13Replace a Connector\x82\xd3\xe4\x93\x02d:\x01*Z.:\tconnector\x1a!/v1/notification-center/connector\x1a//notifications/notification-center/v1/connector\x12\xc2\x02\n" +
 	"\x0fDeleteConnector\x12K.com.coralogixapis.notification_center.connectors.v1.DeleteConnectorRequest\x1aL.com.coralogixapis.notification_center.connectors.v1.DeleteConnectorResponse\"\x93\x01\x9aA(\n" +
 	"\x12Connectors service\x12\x12Delete a Connector\x82\xd3\xe4\x93\x02bZ)*'/v1/notification-center/connectors/{id}*5/notifications/notification-center/v1/connectors/{id}\x12\xb6\x02\n" +
 	"\fGetConnector\x12H.com.coralogixapis.notification_center.connectors.v1.GetConnectorRequest\x1aI.com.coralogixapis.notification_center.connectors.v1.GetConnectorResponse\"\x90\x01\x9aA%\n" +

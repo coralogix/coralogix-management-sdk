@@ -991,12 +991,12 @@ const file_com_coralogixapis_notification_center_presets_v1_presets_service_prot
 	"\x89\x01*)Get System Default Preset Summary Request2\\Returns the preset summary for the system default preset (i.e., not a user-selected default)*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/J\x04\b\x02\x10\x03R\x16deprecated_entity_type\"\x8f\x01\n" +
 	"%GetSystemDefaultPresetSummaryResponse\x12f\n" +
-	"\x0epreset_summary\x18\x01 \x01(\v2?.com.coralogixapis.notification_center.presets.v1.PresetSummaryR\rpresetSummary2\x85\x1d\n" +
-	"\x0ePresetsService\x12\xca\x02\n" +
-	"\x12CreateCustomPreset\x12K.com.coralogixapis.notification_center.presets.v1.CreateCustomPresetRequest\x1aL.com.coralogixapis.notification_center.presets.v1.CreateCustomPresetResponse\"\x98\x01\x9aA'\n" +
-	"\x0fPresets service\x12\x14Create Custom Preset\x82\xd3\xe4\x93\x02h:\x06presetZ(\"&/v1/notification-center/presets/custom\"4/notifications/notification-center/v1/presets/custom\x12\xce\x02\n" +
-	"\x13ReplaceCustomPreset\x12L.com.coralogixapis.notification_center.presets.v1.ReplaceCustomPresetRequest\x1aM.com.coralogixapis.notification_center.presets.v1.ReplaceCustomPresetResponse\"\x99\x01\x9aA(\n" +
-	"\x0fPresets service\x12\x15Replace Custom Preset\x82\xd3\xe4\x93\x02h:\x06presetZ(\x1a&/v1/notification-center/presets/custom\x1a4/notifications/notification-center/v1/presets/custom\x12\xcc\x02\n" +
+	"\x0epreset_summary\x18\x01 \x01(\v2?.com.coralogixapis.notification_center.presets.v1.PresetSummaryR\rpresetSummary2\x8b\x1d\n" +
+	"\x0ePresetsService\x12\xcd\x02\n" +
+	"\x12CreateCustomPreset\x12K.com.coralogixapis.notification_center.presets.v1.CreateCustomPresetRequest\x1aL.com.coralogixapis.notification_center.presets.v1.CreateCustomPresetResponse\"\x9b\x01\x9aA'\n" +
+	"\x0fPresets service\x12\x14Create Custom Preset\x82\xd3\xe4\x93\x02k:\x01*Z0:\x06preset\"&/v1/notification-center/presets/custom\"4/notifications/notification-center/v1/presets/custom\x12\xd1\x02\n" +
+	"\x13ReplaceCustomPreset\x12L.com.coralogixapis.notification_center.presets.v1.ReplaceCustomPresetRequest\x1aM.com.coralogixapis.notification_center.presets.v1.ReplaceCustomPresetResponse\"\x9c\x01\x9aA(\n" +
+	"\x0fPresets service\x12\x15Replace Custom Preset\x82\xd3\xe4\x93\x02k:\x01*Z0:\x06preset\x1a&/v1/notification-center/presets/custom\x1a4/notifications/notification-center/v1/presets/custom\x12\xcc\x02\n" +
 	"\x12DeleteCustomPreset\x12K.com.coralogixapis.notification_center.presets.v1.DeleteCustomPresetRequest\x1aL.com.coralogixapis.notification_center.presets.v1.DeleteCustomPresetResponse\"\x9a\x01\x9aA'\n" +
 	"\x0fPresets service\x12\x14Delete Custom Preset\x82\xd3\xe4\x93\x02jZ-*+/v1/notification-center/presets/custom/{id}*9/notifications/notification-center/v1/presets/custom/{id}\x12\x80\x03\n" +
 	"\x18SetCustomPresetAsDefault\x12Q.com.coralogixapis.notification_center.presets.v1.SetCustomPresetAsDefaultRequest\x1aR.com.coralogixapis.notification_center.presets.v1.SetCustomPresetAsDefaultResponse\"\xbc\x01\x9aA/\n" +

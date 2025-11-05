@@ -25,8 +25,11 @@ service GlobalRoutersService {
   rpc CreateGlobalRouter(CreateGlobalRouterRequest) returns (CreateGlobalRouterResponse) {
     option (google.api.http) = {
       post: "/notifications/notification-center/v1/routers"
-      body: "router"
-      additional_bindings: {post: "/v1/notification-center/routers"}
+      body: "*"
+      additional_bindings: {
+        post: "/v1/notification-center/routers"
+        body: "router"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Global routers service"]
@@ -37,8 +40,11 @@ service GlobalRoutersService {
   rpc ReplaceGlobalRouter(ReplaceGlobalRouterRequest) returns (ReplaceGlobalRouterResponse) {
     option (google.api.http) = {
       put: "/notifications/notification-center/v1/routers"
-      body: "router"
-      additional_bindings: {put: "/v1/notification-center/routers"}
+      body: "*"
+      additional_bindings: {
+        put: "/v1/notification-center/routers"
+        body: "router"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Global routers service"]

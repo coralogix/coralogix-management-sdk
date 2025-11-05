@@ -821,12 +821,12 @@ const file_com_coralogixapis_notification_center_routers_v1_global_routers_servi
 	"\"ValidateEntityLabelMatcherResponse\x12j\n" +
 	"\x06result\x18\x01 \x01(\v2R.com.coralogixapis.notification_center.routers.v1.ValidateEntityLabelMatcherResultR\x06result:\xf4\x01\x9aA\xf0\x01\n" +
 	"q*&Validate Entity Label Matcher Response2GResponse which contains whether the given entity label matcher is valid*{\n" +
-	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/2\xa0\x16\n" +
-	"\x14GlobalRoutersService\x12\xc3\x02\n" +
-	"\x12CreateGlobalRouter\x12K.com.coralogixapis.notification_center.routers.v1.CreateGlobalRouterRequest\x1aL.com.coralogixapis.notification_center.routers.v1.CreateGlobalRouterResponse\"\x91\x01\x9aA.\n" +
-	"\x16Global routers service\x12\x14Create Global Router\x82\xd3\xe4\x93\x02Z:\x06routerZ!\"\x1f/v1/notification-center/routers\"-/notifications/notification-center/v1/routers\x12\xc7\x02\n" +
-	"\x13ReplaceGlobalRouter\x12L.com.coralogixapis.notification_center.routers.v1.ReplaceGlobalRouterRequest\x1aM.com.coralogixapis.notification_center.routers.v1.ReplaceGlobalRouterResponse\"\x92\x01\x9aA/\n" +
-	"\x16Global routers service\x12\x15Replace Global Router\x82\xd3\xe4\x93\x02Z:\x06routerZ!\x1a\x1f/v1/notification-center/routers\x1a-/notifications/notification-center/v1/routers\x12\xcc\x01\n" +
+	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/2\xa6\x16\n" +
+	"\x14GlobalRoutersService\x12\xc6\x02\n" +
+	"\x12CreateGlobalRouter\x12K.com.coralogixapis.notification_center.routers.v1.CreateGlobalRouterRequest\x1aL.com.coralogixapis.notification_center.routers.v1.CreateGlobalRouterResponse\"\x94\x01\x9aA.\n" +
+	"\x16Global routers service\x12\x14Create Global Router\x82\xd3\xe4\x93\x02]:\x01*Z):\x06router\"\x1f/v1/notification-center/routers\"-/notifications/notification-center/v1/routers\x12\xca\x02\n" +
+	"\x13ReplaceGlobalRouter\x12L.com.coralogixapis.notification_center.routers.v1.ReplaceGlobalRouterRequest\x1aM.com.coralogixapis.notification_center.routers.v1.ReplaceGlobalRouterResponse\"\x95\x01\x9aA/\n" +
+	"\x16Global routers service\x12\x15Replace Global Router\x82\xd3\xe4\x93\x02]:\x01*Z):\x06router\x1a\x1f/v1/notification-center/routers\x1a-/notifications/notification-center/v1/routers\x12\xcc\x01\n" +
 	"\x1bCreateOrReplaceGlobalRouter\x12T.com.coralogixapis.notification_center.routers.v1.CreateOrReplaceGlobalRouterRequest\x1aU.com.coralogixapis.notification_center.routers.v1.CreateOrReplaceGlobalRouterResponse\"\x00\x12\xc5\x02\n" +
 	"\x12DeleteGlobalRouter\x12K.com.coralogixapis.notification_center.routers.v1.DeleteGlobalRouterRequest\x1aL.com.coralogixapis.notification_center.routers.v1.DeleteGlobalRouterResponse\"\x93\x01\x9aA.\n" +
 	"\x16Global routers service\x12\x14Delete Global Router\x82\xd3\xe4\x93\x02\\Z&*$/v1/notification-center/routers/{id}*2/notifications/notification-center/v1/routers/{id}\x12\xb9\x02\n" +

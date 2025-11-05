@@ -24,8 +24,11 @@ service ConnectorsService {
   rpc CreateConnector(CreateConnectorRequest) returns (CreateConnectorResponse) {
     option (google.api.http) = {
       post: "/notifications/notification-center/v1/connectors"
-      body: "connector"
-      additional_bindings: {post: "/v1/notification-center/connectors"}
+      body: "*"
+      additional_bindings: {
+        post: "/v1/notification-center/connectors"
+        body: "connector"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Connectors service"]
@@ -36,8 +39,11 @@ service ConnectorsService {
   rpc ReplaceConnector(ReplaceConnectorRequest) returns (ReplaceConnectorResponse) {
     option (google.api.http) = {
       put: "/notifications/notification-center/v1/connector"
-      body: "connector"
-      additional_bindings: {put: "/v1/notification-center/connector"}
+      body: "*"
+      additional_bindings: {
+        put: "/v1/notification-center/connector"
+        body: "connector"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Connectors service"]
