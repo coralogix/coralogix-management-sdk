@@ -32,10 +32,6 @@ message AlertDefNameFilter {
     json_schema: {
       title: "AlertDef Name Filter"
       description: "Filter by alert definition names"
-      required: [
-        "name",
-        "matcher"
-      ]
     }
   };
   repeated google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The name(s) of the alert definition - multiple values are OR'd together"}];
@@ -47,10 +43,6 @@ message AlertDefPriorityFilter {
     json_schema: {
       title: "AlertDef Priority Filter"
       description: "Filter by alert definition priorities"
-      required: [
-        "priority",
-        "matcher"
-      ]
     }
   };
   repeated AlertDefPriority priority = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The priority(ies) of the alert definition - multiple values are OR'd together"}];
@@ -62,10 +54,6 @@ message AlertDefEntityLabelsFilter {
     json_schema: {
       title: "AlertDef Entity Labels Filter"
       description: "Filter by alert definition entity labels"
-      required: [
-        "entity_labels",
-        "values_operator"
-      ]
     }
   };
   map<string, string> entity_labels = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
@@ -80,7 +68,6 @@ message AlertDefModifiedTimeFilter {
     json_schema: {
       title: "AlertDef Modified Time Filter"
       description: "Filter by alert definition modification times"
-      required: ["modified_at_range"]
     }
   };
   TimeRange modified_at_range = 1;
@@ -91,7 +78,6 @@ message AlertDefLastTriggeredTimeFilter {
     json_schema: {
       title: "AlertDef Last Triggered Time Filter"
       description: "Filter by alert definition last triggered times"
-      required: ["last_triggered_at_range"]
     }
   };
   TimeRange last_triggered_at_range = 1;
@@ -102,10 +88,6 @@ message AlertDefTypeFilter {
     json_schema: {
       title: "AlertDef Type Filter"
       description: "Filter by alert definition types"
-      required: [
-        "type",
-        "matcher"
-      ]
     }
   };
   repeated AlertDefType type = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The alert type(s) - multiple values are OR'd together"}];
@@ -117,7 +99,6 @@ message AlertDefEnabledFilter {
     json_schema: {
       title: "AlertDef Enabled Filter"
       description: "Filter by alert definition enabled status"
-      required: ["enabled"]
     }
   };
   google.protobuf.BoolValue enabled = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Whether to filter for enabled (true) or disabled (false) alerts"}];
@@ -140,10 +121,6 @@ message AlertDefSloSpecificFilter {
     json_schema: {
       title: "AlertDef SLO Specific Filter"
       description: "Filter SLO-based alerts by SLO-specific fields"
-      required: [
-        "slo_id",
-        "matcher"
-      ]
     }
   };
   repeated google.protobuf.StringValue slo_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
@@ -171,10 +148,6 @@ message AlertDefStatusFilter {
     json_schema: {
       title: "AlertDef Status Filter"
       description: "Filter by alert definition status"
-      required: [
-        "status",
-        "matcher"
-      ]
     }
   };
   repeated AlertDefStatus status = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The status(es) of the alert definition - multiple values are OR'd together"}];

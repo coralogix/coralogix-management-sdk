@@ -19,10 +19,6 @@ message Priority {
     json_schema: {
       title: "Alert definition priority"
       description: "Defines the priority of an alert definition"
-      required: [
-        "value",
-        "name"
-      ]
     }
   };
   AlertDefPriority value = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {

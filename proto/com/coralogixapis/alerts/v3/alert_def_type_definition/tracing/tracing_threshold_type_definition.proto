@@ -13,10 +13,6 @@ message TracingThresholdType {
     json_schema: {
       title: "Trace-based threshold alert type"
       description: "Configuration for alerts based on trace count thresholds"
-      required: [
-        "tracing_filter",
-        "rules"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/traces/tracing-alerts/"
@@ -32,7 +28,7 @@ message TracingThresholdType {
   repeated google.protobuf.StringValue notification_payload_filter = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Notification payload field filter"
     example: "[\"obj.field\"]"
-    pattern: "^[a-zA-Z0-9_.]+$"
+
     min_items: 0
   }];
 }
@@ -42,7 +38,6 @@ message TracingThresholdRule {
     json_schema: {
       title: "Trace Threshold Rule"
       description: "A rule for trace-based threshold alerts"
-      required: ["condition"]
     }
   };
   TracingThresholdCondition condition = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The condition for the threshold alert."}];
@@ -50,18 +45,11 @@ message TracingThresholdRule {
 
 message TracingThresholdCondition {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Trace-based alert threshold condition"
-      required: [
-        "span_amount",
-        "time_window"
-      ]
-    }
+    json_schema: {title: "Trace-based alert threshold condition"}
   };
   google.protobuf.DoubleValue span_amount = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "100"
     description: "The threshold value for the alert condition"
-    pattern: "^\\d+?$"
   }];
   TracingTimeWindow time_window = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The time window for the alert condition"}];
   TracingThresholdConditionType condition_type = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {

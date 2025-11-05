@@ -13,7 +13,6 @@ message SloThresholdType {
     json_schema: {
       title: "SLO Threshold Type"
       description: "SLO threshold type definition"
-      required: ["slo_definition"]
     }
   };
   SloDefinition slo_definition = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "SLO definition"}];
@@ -28,7 +27,6 @@ message ErrorBudgetThreshold {
     json_schema: {
       title: "Error Budget Threshold"
       description: "Error budget threshold definition"
-      required: ["rules"]
     }
   };
   repeated SloThresholdRule rules = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
@@ -43,10 +41,6 @@ message SloThresholdRule {
     json_schema: {
       title: "SLO Threshold Rule"
       description: "SLO threshold rule definition"
-      required: [
-        "condition",
-        "override"
-      ]
     }
   };
   SloThresholdCondition condition = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Condition for the SLO threshold rule"}];
@@ -58,7 +52,6 @@ message SloThresholdCondition {
     json_schema: {
       title: "SLO Threshold Condition"
       description: "Condition for the SLO threshold rule"
-      required: ["threshold"]
     }
   };
   google.protobuf.DoubleValue threshold = 1;
@@ -69,7 +62,6 @@ message BurnRateThreshold {
     json_schema: {
       title: "Burn Rate Threshold"
       description: "Burn rate threshold definition"
-      required: ["rules"]
     }
   };
   repeated SloThresholdRule rules = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
@@ -88,7 +80,6 @@ message BurnRateTypeSingle {
     json_schema: {
       title: "Burn Rate Type Single"
       description: "Burn rate type single definition"
-      required: ["time_duration"]
     }
   };
   TimeDuration time_duration = 1;
@@ -99,7 +90,6 @@ message BurnRateTypeDual {
     json_schema: {
       title: "Burn Rate Type Dual"
       description: "Burn rate type dual definition"
-      required: ["time_duration"]
     }
   };
   TimeDuration time_duration = 1;

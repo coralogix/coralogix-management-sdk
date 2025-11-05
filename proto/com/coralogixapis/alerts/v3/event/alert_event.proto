@@ -10,22 +10,7 @@ import "protoc-gen-openapiv3/options/annotations.proto";
 
 message AlertEvent {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Alert event"
-      required: [
-        "permutation_labels",
-        "group_labels",
-        "timestamp",
-        "alert_id",
-        "status",
-        "pre_grouping_event_id",
-        "payload",
-        "payload_type",
-        "permutation_id",
-        "incident_correlation_key",
-        "activity_analysis"
-      ]
-    }
+    json_schema: {title: "Alert event"}
   };
   map<string, string> permutation_labels = 1;
   map<string, string> group_labels = 2;

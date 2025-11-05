@@ -16,11 +16,6 @@ message MetricThresholdType {
     json_schema: {
       title: "Metric-based threshold alert type"
       description: "Configuration for alerts based on metric threshold violations"
-      required: [
-        "metric_filter",
-        "rules",
-        "missing_values"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/metrics/threshold-alerts/"
@@ -46,10 +41,6 @@ message MetricThresholdRule {
     json_schema: {
       title: "Metric Threshold Rule"
       description: "Defines a rule for metric-based threshold alerts"
-      required: [
-        "condition",
-        "override"
-      ]
     }
   };
   MetricThresholdCondition condition = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The condition for the metric threshold alert"}];
@@ -61,22 +52,15 @@ message MetricThresholdCondition {
     json_schema: {
       title: "Metric Threshold Condition"
       description: "Defines conditions for metric threshold alerts"
-      required: [
-        "threshold",
-        "for_over_pct",
-        "of_the_last"
-      ]
     }
   };
   google.protobuf.DoubleValue threshold = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "100.0"
     description: "The threshold value for the alert condition"
-    pattern: "^\\d+(\\.\\d+)?$"
   }];
   google.protobuf.UInt32Value for_over_pct = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The percentage of values that must exceed the threshold to trigger the alert"
     example: "80"
-    pattern: "^(100|[1-9]?\\d)$"
   }];
   MetricTimeWindow of_the_last = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The time window for the alert condition"}];
   MetricThresholdConditionType condition_type = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {

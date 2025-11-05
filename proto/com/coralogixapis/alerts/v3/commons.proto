@@ -16,10 +16,6 @@ message TimeDuration {
     json_schema: {
       title: "Time duration"
       description: "Configuration for time duration"
-      required: [
-        "duration",
-        "unit"
-      ]
     }
   };
   google.protobuf.UInt64Value duration = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
@@ -62,7 +58,6 @@ message OrderByList {
     json_schema: {
       title: "Order by list"
       description: "List of fields to order by"
-      required: ["order_bys"]
     }
   };
   repeated OrderBy order_bys = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
@@ -76,10 +71,6 @@ message OrderBy {
     json_schema: {
       title: "Order by"
       description: "A data structure that specifies the field and direction for ordering query results"
-      required: [
-        "field_name",
-        "direction"
-      ]
     }
   };
   OrderByFields field_name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {

@@ -32,11 +32,6 @@ message AlertDef {
     json_schema: {
       title: "Alert definition"
       description: "This data structure represents an alert definition"
-      required: [
-        "alert_def_properties",
-        "id",
-        "alert_version_id"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/"
@@ -77,11 +72,6 @@ message AlertDefProperties {
     json_schema: {
       title: "Alert definition properties"
       description: "User-configurable properties of an alert definition"
-      required: [
-        "name",
-        "priority",
-        "type"
-      ]
     }
   };
   google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {

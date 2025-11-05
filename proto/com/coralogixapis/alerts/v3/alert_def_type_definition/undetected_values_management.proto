@@ -10,7 +10,6 @@ message UndetectedValuesManagement {
     json_schema: {
       title: "Undetected value management"
       description: "Configuration for handling undetected values in alerts"
-      required: ["auto_retire_ratio"]
     }
   };
   google.protobuf.BoolValue trigger_undetected_values = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {

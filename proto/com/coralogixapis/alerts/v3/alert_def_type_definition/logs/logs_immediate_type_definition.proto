@@ -11,7 +11,6 @@ message LogsImmediateType {
     json_schema: {
       title: "Logs immediate alert type"
       description: "Configuration for immediate alerts triggered on log entries matching specific filters."
-      required: ["logs_filter"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/immediate-notifications/"
@@ -21,7 +20,7 @@ message LogsImmediateType {
   LogsFilter logs_filter = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The filter to match log entries for immediate alerts."}];
   repeated google.protobuf.StringValue notification_payload_filter = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "[\"obj.field\"]"
-    pattern: "^[a-zA-Z0-9_.]+$"
+
     min_items: 0
   }];
 }

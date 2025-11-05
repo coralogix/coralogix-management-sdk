@@ -12,7 +12,6 @@ message LogsNewValueType {
     json_schema: {
       title: "Log-based new value alert type"
       description: "Configuration for alerts triggered by new values appearing in logs"
-      required: ["rules"]
     }
   };
   LogsFilter logs_filter = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The filter to match log entries for the alert."}];
@@ -24,7 +23,7 @@ message LogsNewValueType {
   repeated google.protobuf.StringValue notification_payload_filter = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The filter to specify which fields to include in the notification payload."
     example: "[\"obj.field\"]"
-    pattern: "^[a-zA-Z0-9_.]+$"
+
     min_items: 0
   }];
 }
@@ -33,7 +32,6 @@ message LogsNewValueRule {
     json_schema: {
       title: "Log-based new value rule"
       description: "Defines the condition for detecting new values in logs"
-      required: ["condition"]
     }
   };
   LogsNewValueCondition condition = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The condition for detecting new values in logs."}];
@@ -43,10 +41,6 @@ message LogsNewValueCondition {
     json_schema: {
       title: "Log-based new value condition"
       description: "Defines conditions for detecting new values in logs"
-      required: [
-        "keypath_to_track",
-        "time_window"
-      ]
     }
   };
   google.protobuf.StringValue keypath_to_track = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {

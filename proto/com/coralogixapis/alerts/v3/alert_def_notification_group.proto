@@ -30,7 +30,7 @@ message AlertDefNotificationGroup {
   repeated google.protobuf.StringValue group_by_keys = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The keys to group the alerts by"
     example: "[\"key1\", \"key2\"]"
-    pattern: "^[a-zA-Z0-9_.]+$"
+
     min_items: 0
   }];
   repeated AlertDefWebhooksSettings webhooks = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
@@ -46,7 +46,6 @@ message AlertDefWebhooksSettings {
     json_schema: {
       title: "Alert definition webhook settings"
       description: "Configuration for webhook notifications for an alert"
-      required: ["integration"]
     }
   };
   oneof retriggering_period {
@@ -83,7 +82,6 @@ message Recipients {
     json_schema: {
       title: "Recipients"
       description: "List of email recipients for alert notifications"
-      required: ["emails"]
     }
   };
   repeated google.protobuf.StringValue emails = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {

@@ -14,10 +14,6 @@ message MetricAnomalyType {
     json_schema: {
       title: "Metric-based anomaly alert type"
       description: "Configuration for alerts triggered by anomalous metric patterns"
-      required: [
-        "metric_filter",
-        "rules"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/metrics/anomaly-detection-alerts/"
@@ -43,7 +39,6 @@ message MetricAnomalyRule {
     json_schema: {
       title: "Metric-based anomaly rule"
       description: "A rule for metric-based anomaly detection alerts"
-      required: ["condition"]
     }
   };
   MetricAnomalyCondition condition = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The condition for the metric anomaly alert."}];
@@ -51,14 +46,7 @@ message MetricAnomalyRule {
 
 message MetricAnomalyCondition {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Metric-based anomaly condition"
-      required: [
-        "threshold",
-        "min_non_null_values_pct",
-        "of_the_last"
-      ]
-    }
+    json_schema: {title: "Metric-based anomaly condition"}
   };
   google.protobuf.DoubleValue threshold = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "10.0"
