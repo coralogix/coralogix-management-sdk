@@ -24,8 +24,6 @@ import (
 )
 
 func TestSlos(t *testing.T) {
-	t.Skip("Unstable Test")
-
 	region, err := cxsdk.CoralogixRegionFromEnv()
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
