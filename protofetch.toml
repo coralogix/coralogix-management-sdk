@@ -401,7 +401,7 @@ revision = "v0.0.8"
 
 [cx-api-metrics-rule-manager]
 url = "github.com/coralogix/cx-api-metrics-rule-manager"
-revision = "v0.0.5"
+revision = "v0.0.6"
 allow_policies = ["src/com/coralogixapis/metrics_rule_manager/v1/groups.proto"]
 
 [cx-api-notification-center]

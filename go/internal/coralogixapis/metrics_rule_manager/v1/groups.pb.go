@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -874,14 +874,14 @@ var File_com_coralogixapis_metrics_rule_manager_v1_groups_proto protoreflect.Fil
 
 const file_com_coralogixapis_metrics_rule_manager_v1_groups_proto_rawDesc = "" +
 	"\n" +
-	"6com/coralogixapis/metrics_rule_manager/v1/groups.proto\x12)com.coralogixapis.metrics_rule_manager.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\xba\x03\n" +
+	"6com/coralogixapis/metrics_rule_manager/v1/groups.proto\x12)com.coralogixapis.metrics_rule_manager.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\xba\x03\n" +
 	"\vInRuleGroup\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1f\n" +
 	"\binterval\x18\x02 \x01(\rH\x00R\binterval\x88\x01\x01\x12\x19\n" +
 	"\x05limit\x18\x03 \x01(\x04H\x01R\x05limit\x88\x01\x01\x12G\n" +
 	"\x05rules\x18\x04 \x03(\v21.com.coralogixapis.metrics_rule_manager.v1.InRuleR\x05rules\x12\x1d\n" +
 	"\aversion\x18\x05 \x01(\rH\x02R\aversion\x88\x01\x01\x12\x13\n" +
-	"\x02id\x18\x06 \x01(\tH\x03R\x02id\x88\x01\x01:\xb3\x01\x92A\xaf\x01\n" +
+	"\x02id\x18\x06 \x01(\tH\x03R\x02id\x88\x01\x01:\xb3\x01\x9aA\xaf\x01\n" +
 	",*\rIn Rule Group2\x1bA group of recording rules.*\x7f\n" +
 	"#Find out more about recording rules\x12Xhttps://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/B\v\n" +
 	"\t_intervalB\b\n" +
@@ -895,7 +895,7 @@ const file_com_coralogixapis_metrics_rule_manager_v1_groups_proto_rawDesc = "" +
 	"\x06labels\x18\x03 \x03(\v2=.com.coralogixapis.metrics_rule_manager.v1.InRule.LabelsEntryR\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xd1\x01\x92A\xcd\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xd1\x01\x9aA\xcd\x01\n" +
 	"J*\aIn Rule2?A rule within a group that defines a recording rule expression.*\x7f\n" +
 	"#Find out more about recording rules\x12Xhttps://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/\"\xa1\x02\n" +
 	"\fOutRuleGroup\x12\x12\n" +
@@ -923,51 +923,51 @@ const file_com_coralogixapis_metrics_rule_manager_v1_groups_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"\xa5\x02\n" +
 	"\x10RuleGroupListing\x12X\n" +
 	"\vrule_groups\x18\x01 \x03(\v27.com.coralogixapis.metrics_rule_manager.v1.OutRuleGroupR\n" +
-	"ruleGroups:\xb6\x01\x92A\xb2\x01\n" +
+	"ruleGroups:\xb6\x01\x9aA\xb2\x01\n" +
 	"/*\x12Rule Group Listing2\x19A listing of rule groups.*\x7f\n" +
 	"#Find out more about recording rules\x12Xhttps://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/\"\xe8\x01\n" +
 	"\x0eFetchRuleGroup\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name:\xc1\x01\x92A\xbd\x01\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name:\xc1\x01\x9aA\xbd\x01\n" +
 	":*\x10Fetch Rule Group2&A matcher specifying a group to fetch.*\x7f\n" +
 	"#Find out more about recording rules\x12Xhttps://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/\"\xba\x02\n" +
 	"\x14FetchRuleGroupResult\x12V\n" +
 	"\n" +
-	"rule_group\x18\x01 \x01(\v27.com.coralogixapis.metrics_rule_manager.v1.OutRuleGroupR\truleGroup:\xc9\x01\x92A\xc5\x01\n" +
+	"rule_group\x18\x01 \x01(\v27.com.coralogixapis.metrics_rule_manager.v1.OutRuleGroupR\truleGroup:\xc9\x01\x9aA\xc5\x01\n" +
 	"B*\x17Fetch Rule Group Result2'Result of a rule group fetch operation.*\x7f\n" +
 	"#Find out more about recording rules\x12Xhttps://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/\"\xc8\x02\n" +
 	"\x12CreateRuleGroupSet\x12N\n" +
 	"\x06groups\x18\x01 \x03(\v26.com.coralogixapis.metrics_rule_manager.v1.InRuleGroupR\x06groups\x12\x17\n" +
-	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01:\xbf\x01\x92A\xbb\x01\n" +
+	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x88\x01\x01:\xbf\x01\x9aA\xbb\x01\n" +
 	"8*\x15Create Rule Group Set2\x1fA set of rule groups to create.*\x7f\n" +
 	"#Find out more about recording rules\x12Xhttps://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/B\a\n" +
 	"\x05_name\"\xf8\x01\n" +
 	"\x18CreateRuleGroupSetResult\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id:\xcb\x01\x92A\xc7\x01\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id:\xcb\x01\x9aA\xc7\x01\n" +
 	"D*\x1cCreate Rule Group Set Result2$Result of creating a rule group set.*\x7f\n" +
 	"#Find out more about recording rules\x12Xhttps://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/\"\xd8\x02\n" +
 	"\x12UpdateRuleGroupSet\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12N\n" +
 	"\x06groups\x18\x02 \x03(\v26.com.coralogixapis.metrics_rule_manager.v1.InRuleGroupR\x06groups\x12\x17\n" +
-	"\x04name\x18\x03 \x01(\tH\x00R\x04name\x88\x01\x01:\xbf\x01\x92A\xbb\x01\n" +
+	"\x04name\x18\x03 \x01(\tH\x00R\x04name\x88\x01\x01:\xbf\x01\x9aA\xbb\x01\n" +
 	"8*\x15Update Rule Group Set2\x1fA set of rule groups to update.*\x7f\n" +
 	"#Find out more about recording rules\x12Xhttps://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/B\a\n" +
 	"\x05_name\"\xa6\x02\n" +
 	"\x13RuleGroupSetListing\x12N\n" +
-	"\x04sets\x18\x01 \x03(\v2:.com.coralogixapis.metrics_rule_manager.v1.OutRuleGroupSetR\x04sets:\xbe\x01\x92A\xba\x01\n" +
+	"\x04sets\x18\x01 \x03(\v2:.com.coralogixapis.metrics_rule_manager.v1.OutRuleGroupSetR\x04sets:\xbe\x01\x9aA\xba\x01\n" +
 	"7*\x16Rule Group Set Listing2\x1dA listing of rule group sets.*\x7f\n" +
 	"#Find out more about recording rules\x12Xhttps://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/\"\xf4\x01\n" +
 	"\x11FetchRuleGroupSet\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id:\xce\x01\x92A\xca\x01\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id:\xce\x01\x9aA\xca\x01\n" +
 	"G*\x14Fetch Rule Group Set2/A matcher specifying a rule group set to fetch.*\x7f\n" +
 	"#Find out more about recording rules\x12Xhttps://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/\"\xf7\x01\n" +
 	"\x12DeleteRuleGroupSet\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id:\xd0\x01\x92A\xcc\x01\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id:\xd0\x01\x9aA\xcc\x01\n" +
 	"I*\x15Delete Rule Group Set20A matcher specifying a rule group set to delete.*\x7f\n" +
 	"#Find out more about recording rules\x12Xhttps://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/\"\xc3\x02\n" +
 	"\x0fOutRuleGroupSet\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12O\n" +
 	"\x06groups\x18\x02 \x03(\v27.com.coralogixapis.metrics_rule_manager.v1.OutRuleGroupR\x06groups\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name:\xba\x01\x92A\xb6\x01\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name:\xba\x01\x9aA\xb6\x01\n" +
 	"3*\x12Out Rule Group Set2\x1dAn output set of rule groups.*\x7f\n" +
 	"#Find out more about recording rules\x12Xhttps://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/2\xad\x03\n" +
 	"\n" +
@@ -977,7 +977,7 @@ const file_com_coralogixapis_metrics_rule_manager_v1_groups_proto_rawDesc = "" +
 	"\x04List\x12\x16.google.protobuf.Empty\x1a;.com.coralogixapis.metrics_rule_manager.v1.RuleGroupListing\"\x00\x12\x85\x01\n" +
 	"\x05Fetch\x129.com.coralogixapis.metrics_rule_manager.v1.FetchRuleGroup\x1a?.com.coralogixapis.metrics_rule_manager.v1.FetchRuleGroupResult\"\x002\xe3\v\n" +
 	"\rRuleGroupSets\x12\xb7\x02\n" +
-	"\x06Create\x12=.com.coralogixapis.metrics_rule_manager.v1.CreateRuleGroupSet\x1aC.com.coralogixapis.metrics_rule_manager.v1.CreateRuleGroupSetResult\"\xa8\x01\x92A\x86\x01\n" +
+	"\x06Create\x12=.com.coralogixapis.metrics_rule_manager.v1.CreateRuleGroupSet\x1aC.com.coralogixapis.metrics_rule_manager.v1.CreateRuleGroupSetResult\"\xa8\x01\x9aA\x86\x01\n" +
 	"\x17Recording Rules Service\x12\x16Create Recording RulesJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -985,7 +985,7 @@ const file_com_coralogixapis_metrics_rule_manager_v1_groups_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/rule-group-sets\x12\x8f\x02\n" +
-	"\x06Update\x12=.com.coralogixapis.metrics_rule_manager.v1.UpdateRuleGroupSet\x1a\x16.google.protobuf.Empty\"\xad\x01\x92A\x86\x01\n" +
+	"\x06Update\x12=.com.coralogixapis.metrics_rule_manager.v1.UpdateRuleGroupSet\x1a\x16.google.protobuf.Empty\"\xad\x01\x9aA\x86\x01\n" +
 	"\x17Recording Rules Service\x12\x16Update Recording RulesJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -993,7 +993,7 @@ const file_com_coralogixapis_metrics_rule_manager_v1_groups_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1d:\x01*\x1a\x18/v1/rule-group-sets/{id}\x12\x84\x02\n" +
-	"\x04List\x12\x16.google.protobuf.Empty\x1a>.com.coralogixapis.metrics_rule_manager.v1.RuleGroupSetListing\"\xa3\x01\x92A\x84\x01\n" +
+	"\x04List\x12\x16.google.protobuf.Empty\x1a>.com.coralogixapis.metrics_rule_manager.v1.RuleGroupSetListing\"\xa3\x01\x9aA\x84\x01\n" +
 	"\x17Recording Rules Service\x12\x14List Recording RulesJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1001,7 +1001,7 @@ const file_com_coralogixapis_metrics_rule_manager_v1_groups_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x15\x12\x13/v1/rule-group-sets\x12\xab\x02\n" +
-	"\x05Fetch\x12<.com.coralogixapis.metrics_rule_manager.v1.FetchRuleGroupSet\x1a:.com.coralogixapis.metrics_rule_manager.v1.OutRuleGroupSet\"\xa7\x01\x92A\x83\x01\n" +
+	"\x05Fetch\x12<.com.coralogixapis.metrics_rule_manager.v1.FetchRuleGroupSet\x1a:.com.coralogixapis.metrics_rule_manager.v1.OutRuleGroupSet\"\xa7\x01\x9aA\x83\x01\n" +
 	"\x17Recording Rules Service\x12\x13Get Recording RulesJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1009,14 +1009,14 @@ const file_com_coralogixapis_metrics_rule_manager_v1_groups_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1a\x12\x18/v1/rule-group-sets/{id}\x12\x8c\x02\n" +
-	"\x06Delete\x12=.com.coralogixapis.metrics_rule_manager.v1.DeleteRuleGroupSet\x1a\x16.google.protobuf.Empty\"\xaa\x01\x92A\x86\x01\n" +
+	"\x06Delete\x12=.com.coralogixapis.metrics_rule_manager.v1.DeleteRuleGroupSet\x1a\x16.google.protobuf.Empty\"\xaa\x01\x9aA\x86\x01\n" +
 	"\x17Recording Rules Service\x12\x16Delete Recording RulesJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1a*\x18/v1/rule-group-sets/{id}\x1aB\x92A?\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1a*\x18/v1/rule-group-sets/{id}\x1aB\x9aA?\n" +
 	"\x17Recording Rules Service\x12$A service to manage recording rules.b\x06proto3"
 
 var (
