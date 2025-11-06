@@ -306,7 +306,7 @@ var File_com_coralogixapis_notification_center_presets_v1_preset_proto protorefl
 
 const file_com_coralogixapis_notification_center_presets_v1_preset_proto_rawDesc = "" +
 	"\n" +
-	"=com/coralogixapis/notification_center/presets/v1/preset.proto\x120com.coralogixapis.notification_center.presets.v1\x1a9com/coralogixapis/notification_center/common/common.proto\x1aCcom/coralogixapis/notification_center/common/config_overrides.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x8a\t\n" +
+	"=com/coralogixapis/notification_center/presets/v1/preset.proto\x120com.coralogixapis.notification_center.presets.v1\x1a9com/coralogixapis/notification_center/common/common.proto\x1aCcom/coralogixapis/notification_center/common/config_overrides.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xe2\b\n" +
 	"\x06Preset\x12@\n" +
 	"\x02id\x18\x01 \x01(\tB+\x9aA(J&\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"H\x00R\x02id\x88\x01\x01\x12[\n" +
 	"\x0econnector_type\x18\x04 \x01(\x0e24.com.coralogixapis.notification_center.ConnectorTypeR\rconnectorType\x12a\n" +
@@ -323,8 +323,8 @@ const file_com_coralogixapis_notification_center_presets_v1_preset_proto_rawDesc
 	"\ventity_type\x18\f \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x9aA\n" +
 	"J\b\"ALERTS\"R\n" +
 	"entityType\x12I\n" +
-	"\tparent_id\x18\r \x01(\tB'\x9aA$J\"\"preset_system_slack_alerts_basic\"H\x04R\bparentId\x88\x01\x01:\xf6\x01\x9aA\xf2\x01\n" +
-	"s*\x06Preset2ASet of preconfigured templates for notification content rendering\xd2\x01\ventity_type\xd2\x01\x10config_overrides\xd2\x01\x04name*{\n" +
+	"\tparent_id\x18\r \x01(\tB'\x9aA$J\"\"preset_system_slack_alerts_basic\"H\x04R\bparentId\x88\x01\x01:\xce\x01\x9aA\xca\x01\n" +
+	"K*\x06Preset2ASet of preconfigured templates for notification content rendering*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/B\x05\n" +
 	"\x03_idB\x0e\n" +
 	"\f_create_timeB\x0e\n" +

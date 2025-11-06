@@ -17,11 +17,6 @@ message Preset {
     json_schema: {
       title: "Preset"
       description: "Set of preconfigured templates for notification content rendering"
-      required: [
-        "entity_type",
-        "config_overrides",
-        "name"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -53,7 +48,6 @@ message PresetSummary {
     json_schema: {
       title: "Preset Summary"
       description: "Provides a concise overview of a preset"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"

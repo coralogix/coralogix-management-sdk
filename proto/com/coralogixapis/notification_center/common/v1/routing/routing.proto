@@ -20,10 +20,6 @@ message RoutingRule {
     json_schema: {
       title: "Routing Rule"
       description: "Defines routing rule for notifications"
-      required: [
-        "condition",
-        "targets"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -52,7 +48,6 @@ message RoutingTarget {
     json_schema: {
       title: "Routing Target"
       description: "Defines routing target for notifications"
-      required: ["connector_id"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"

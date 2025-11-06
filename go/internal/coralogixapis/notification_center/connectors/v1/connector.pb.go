@@ -609,7 +609,7 @@ var File_com_coralogixapis_notification_center_connectors_v1_connector_proto pro
 
 const file_com_coralogixapis_notification_center_connectors_v1_connector_proto_rawDesc = "" +
 	"\n" +
-	"Ccom/coralogixapis/notification_center/connectors/v1/connector.proto\x123com.coralogixapis.notification_center.connectors.v1\x1a9com/coralogixapis/notification_center/common/common.proto\x1aCcom/coralogixapis/notification_center/common/v1/config_fields.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xf5\b\n" +
+	"Ccom/coralogixapis/notification_center/connectors/v1/connector.proto\x123com.coralogixapis.notification_center.connectors.v1\x1a9com/coralogixapis/notification_center/common/common.proto\x1aCcom/coralogixapis/notification_center/common/v1/config_fields.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xd3\b\n" +
 	"\tConnector\x12@\n" +
 	"\x02id\x18\x01 \x01(\tB+\x9aA(J&\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"H\x00R\x02id\x88\x01\x01\x12H\n" +
 	"\x04type\x18\x03 \x01(\x0e24.com.coralogixapis.notification_center.ConnectorTypeR\x04type\x12*\n" +
@@ -622,8 +622,8 @@ const file_com_coralogixapis_notification_center_connectors_v1_connector_proto_r
 	"updateTime\x88\x01\x01\x12y\n" +
 	"\x10config_overrides\x18\v \x03(\v2N.com.coralogixapis.notification_center.connectors.v1.EntityTypeConfigOverridesR\x0fconfigOverrides\x12o\n" +
 	"\x10connector_config\x18\f \x01(\v2D.com.coralogixapis.notification_center.connectors.v1.ConnectorConfigR\x0fconnectorConfig\x12b\n" +
-	"\vdiagnostics\x18\r \x01(\v2@.com.coralogixapis.notification_center.connectors.v1.DiagnosticsR\vdiagnostics:\xe5\x01\x9aA\xe1\x01\n" +
-	"b*\tConnector23A connector configuration for sending notifications\xd2\x01\x04type\xd2\x01\x04name\xd2\x01\x11connector_configs*{\n" +
+	"\vdiagnostics\x18\r \x01(\v2@.com.coralogixapis.notification_center.connectors.v1.DiagnosticsR\vdiagnostics:\xc3\x01\x9aA\xbf\x01\n" +
+	"@*\tConnector23A connector configuration for sending notifications*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/B\x05\n" +
 	"\x03_idB\n" +
 	"\n" +

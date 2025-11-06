@@ -50,7 +50,6 @@ message ListEntityTypesRequest {
     json_schema: {
       title: "List Entity Types"
       description: "Request to list entity types supported by Notification Center"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -71,7 +70,6 @@ message ListEntitySubTypesRequest {
     json_schema: {
       title: "List Entity Sub Types"
       description: "Request to list entity subtypes by entity type supported by Notification Center"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"

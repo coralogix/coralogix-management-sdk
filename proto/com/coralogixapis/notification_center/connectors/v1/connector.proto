@@ -17,11 +17,6 @@ message Connector {
     json_schema: {
       title: "Connector"
       description: "A connector configuration for sending notifications"
-      required: [
-        "type",
-        "name",
-        "connector_configs"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -97,7 +92,6 @@ message ConnectorConfig {
     json_schema: {
       title: "Connector Config"
       description: "Configuration for a specific output schema of a connector"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -112,7 +106,6 @@ message ConnectorTypeSummary {
     json_schema: {
       title: "Connector Type Summary"
       description: "Summary information about a connector type"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -128,7 +121,6 @@ message Diagnostics {
     json_schema: {
       title: "Connector Diagnostics"
       description: "Allows to configure rules for data written into 'notification.deliveries' dataset"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-layer/datasets/"
