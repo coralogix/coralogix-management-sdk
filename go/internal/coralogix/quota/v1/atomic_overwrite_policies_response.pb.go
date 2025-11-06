@@ -114,14 +114,14 @@ var File_com_coralogix_quota_v1_atomic_overwrite_policies_response_proto protore
 
 const file_com_coralogix_quota_v1_atomic_overwrite_policies_response_proto_rawDesc = "" +
 	"\n" +
-	"?com/coralogix/quota/v1/atomic_overwrite_policies_response.proto\x12\x16com.coralogix.quota.v1\x1a3com/coralogix/quota/v1/create_policy_response.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x97\x03\n" +
+	"?com/coralogix/quota/v1/atomic_overwrite_policies_response.proto\x12\x16com.coralogix.quota.v1\x1a3com/coralogix/quota/v1/create_policy_response.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x83\x03\n" +
 	"\"AtomicOverwriteLogPoliciesResponse\x12W\n" +
-	"\x10create_responses\x18\x01 \x03(\v2,.com.coralogix.quota.v1.CreatePolicyResponseR\x0fcreateResponses:\x97\x02\x9aA\x93\x02\n" +
-	"\x85\x01*&Atomic Overwrite Log Policies Response2HThis data structue is obtained when overwriting log policies atomically.\xd2\x01\x10create_responses*\x88\x01\n" +
-	"%Find out more about quota management.\x12_https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/\"\x9a\x03\n" +
+	"\x10create_responses\x18\x01 \x03(\v2,.com.coralogix.quota.v1.CreatePolicyResponseR\x0fcreateResponses:\x83\x02\x9aA\xff\x01\n" +
+	"r*&Atomic Overwrite Log Policies Response2HThis data structue is obtained when overwriting log policies atomically.*\x88\x01\n" +
+	"%Find out more about quota management.\x12_https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/\"\x86\x03\n" +
 	"#AtomicOverwriteSpanPoliciesResponse\x12W\n" +
-	"\x10create_responses\x18\x01 \x03(\v2,.com.coralogix.quota.v1.CreatePolicyResponseR\x0fcreateResponses:\x99\x02\x9aA\x95\x02\n" +
-	"\x87\x01*'Atomic Overwrite Span Policies Response2IThis data structue is obtained when overwriting span policies atomically.\xd2\x01\x10create_responses*\x88\x01\n" +
+	"\x10create_responses\x18\x01 \x03(\v2,.com.coralogix.quota.v1.CreatePolicyResponseR\x0fcreateResponses:\x85\x02\x9aA\x81\x02\n" +
+	"t*'Atomic Overwrite Span Policies Response2IThis data structue is obtained when overwriting span policies atomically.*\x88\x01\n" +
 	"%Find out more about quota management.\x12_https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/b\x06proto3"
 
 var (
