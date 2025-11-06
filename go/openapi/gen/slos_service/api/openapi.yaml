@@ -337,14 +337,56 @@ components:
       description: Response containing the results of batch executed SLO operations.
       example:
         matchingResponses:
-        - deleteSloResponse:
-            effectedSloAlertIds:
-            - effectedSloAlertIds
-            - effectedSloAlertIds
-        - deleteSloResponse:
-            effectedSloAlertIds:
-            - effectedSloAlertIds
-            - effectedSloAlertIds
+        - createSloResponse:
+            slo:
+              creator: test@domain.com
+              requestBasedMetricSli:
+                goodEvents:
+                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                totalEvents:
+                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+              description: A brief description of my SLO
+              sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
+              updateTime: 2000-01-23T04:56:07.000+00:00
+              type: request
+              grouping:
+                labels:
+                - labels
+                - labels
+              labels:
+                key: labels
+              revision:
+                updateTime: 2000-01-23T04:56:07.000+00:00
+                revision: 1
+              createTime: 2000-01-23T04:56:07.000+00:00
+              name: Example Slo Name
+              id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+              targetThresholdPercentage: 99.999
+        - createSloResponse:
+            slo:
+              creator: test@domain.com
+              requestBasedMetricSli:
+                goodEvents:
+                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                totalEvents:
+                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+              description: A brief description of my SLO
+              sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
+              updateTime: 2000-01-23T04:56:07.000+00:00
+              type: request
+              grouping:
+                labels:
+                - labels
+                - labels
+              labels:
+                key: labels
+              revision:
+                updateTime: 2000-01-23T04:56:07.000+00:00
+                revision: 1
+              createTime: 2000-01-23T04:56:07.000+00:00
+              name: Example Slo Name
+              id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+              targetThresholdPercentage: 99.999
         status:
           details:
             key: details
@@ -935,12 +977,38 @@ components:
       type: object
     SloExecutionResponse:
       oneOf:
-      - $ref: "#/components/schemas/SloExecutionResponseDeleteSloResponse"
       - $ref: "#/components/schemas/SloExecutionResponseCreateSloResponse"
       - $ref: "#/components/schemas/SloExecutionResponseReplaceSloResponse"
+      - $ref: "#/components/schemas/SloExecutionResponseDeleteSloResponse"
     SloExecutionResponseCreateSloResponse:
       additionalProperties: false
       description: Response for an executed SLO operation.
+      example:
+        createSloResponse:
+          slo:
+            creator: test@domain.com
+            requestBasedMetricSli:
+              goodEvents:
+                query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+              totalEvents:
+                query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+            description: A brief description of my SLO
+            sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
+            updateTime: 2000-01-23T04:56:07.000+00:00
+            type: request
+            grouping:
+              labels:
+              - labels
+              - labels
+            labels:
+              key: labels
+            revision:
+              updateTime: 2000-01-23T04:56:07.000+00:00
+              revision: 1
+            createTime: 2000-01-23T04:56:07.000+00:00
+            name: Example Slo Name
+            id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+            targetThresholdPercentage: 99.999
       externalDocs:
         url: ""
       properties:
@@ -951,11 +1019,6 @@ components:
     SloExecutionResponseDeleteSloResponse:
       additionalProperties: false
       description: Response for an executed SLO operation.
-      example:
-        deleteSloResponse:
-          effectedSloAlertIds:
-          - effectedSloAlertIds
-          - effectedSloAlertIds
       externalDocs:
         url: ""
       properties:
@@ -1263,19 +1326,19 @@ components:
       type: object
     SlosService_ReplaceSlo_request:
       oneOf:
-      - $ref: "#/components/schemas/SloRequestBasedMetricSli"
       - $ref: "#/components/schemas/SloWindowBasedMetricSli"
+      - $ref: "#/components/schemas/SloRequestBasedMetricSli"
       type: object
     SlosService_CreateSlo_request:
       oneOf:
-      - $ref: "#/components/schemas/SloWindowBasedMetricSli"
       - $ref: "#/components/schemas/SloRequestBasedMetricSli"
+      - $ref: "#/components/schemas/SloWindowBasedMetricSli"
       type: object
     SlosService_BatchExecuteSlo_requests_parameter_inner:
       oneOf:
+      - $ref: "#/components/schemas/SloExecutionRequestCreateSloRequest"
       - $ref: "#/components/schemas/SloExecutionRequestReplaceSloRequest"
       - $ref: "#/components/schemas/SloExecutionRequestDeleteSloRequest"
-      - $ref: "#/components/schemas/SloExecutionRequestCreateSloRequest"
   securitySchemes:
     apiKeyAuth:
       description: API key authentication

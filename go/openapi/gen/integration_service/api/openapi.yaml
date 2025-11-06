@@ -578,6 +578,37 @@ components:
       title: CloudFormation stack
       type: object
     CloudFormationTemplate:
+      example:
+        postInstallationSteps:
+          key: postInstallationSteps
+        parameters:
+          key: parameters
+        commands:
+        - tooltipText: tooltipText
+          name: name
+          description: description
+          language: UNKNOWN
+          links:
+          - text: text
+            key: key
+            url: url
+          - text: text
+            key: key
+            url: url
+          command: command
+        - tooltipText: tooltipText
+          name: name
+          description: description
+          language: UNKNOWN
+          links:
+          - text: text
+            key: key
+            url: url
+          - text: text
+            key: key
+            url: url
+          command: command
+        templateUrl: templateUrl
       externalDocs:
         url: ""
       properties:
@@ -622,6 +653,19 @@ components:
           $ref: "#/components/schemas/ColorsByStack"
       type: object
     CommandInformation:
+      example:
+        tooltipText: tooltipText
+        name: name
+        description: description
+        language: UNKNOWN
+        links:
+        - text: text
+          key: key
+          url: url
+        - text: text
+          key: key
+          url: url
+        command: command
       externalDocs:
         url: ""
       properties:
@@ -1050,12 +1094,12 @@ components:
       type: object
     FieldInformation:
       oneOf:
+      - $ref: "#/components/schemas/FieldInformationSingle"
+      - $ref: "#/components/schemas/FieldInformationMultiText"
       - $ref: "#/components/schemas/FieldInformationMultipleSelection"
       - $ref: "#/components/schemas/FieldInformationSingleBoolean"
       - $ref: "#/components/schemas/FieldInformationSelection"
       - $ref: "#/components/schemas/FieldInformationSingleNumber"
-      - $ref: "#/components/schemas/FieldInformationSingle"
-      - $ref: "#/components/schemas/FieldInformationMultiText"
     FieldInformationMultiText:
       additionalProperties: false
       externalDocs:
@@ -1097,31 +1141,6 @@ components:
       type: object
     FieldInformationMultipleSelection:
       additionalProperties: false
-      example:
-        visible: true
-        groupId: groupId
-        tooltip: tooltip
-        type: API_KEY
-        upgradeNotice: upgradeNotice
-        predefined: true
-        required: true
-        templateParamName: templateParamName
-        readonly: true
-        documentationReference: documentationReference
-        name: name
-        placeholder: placeholder
-        applicableIf:
-          values:
-          - fieldName: fieldName
-            valuePattern: valuePattern
-          - fieldName: fieldName
-            valuePattern: valuePattern
-          type: UNKNOWN
-        allowedPattern: allowedPattern
-        multipleSelection:
-          options:
-          - options
-          - options
       externalDocs:
         url: ""
       properties:
@@ -1200,6 +1219,29 @@ components:
       type: object
     FieldInformationSingle:
       additionalProperties: false
+      example:
+        visible: true
+        groupId: groupId
+        tooltip: tooltip
+        type: API_KEY
+        upgradeNotice: upgradeNotice
+        predefined: true
+        required: true
+        templateParamName: templateParamName
+        single:
+          defaultValue: defaultValue
+        readonly: true
+        documentationReference: documentationReference
+        name: name
+        placeholder: placeholder
+        applicableIf:
+          values:
+          - fieldName: fieldName
+            valuePattern: valuePattern
+          - fieldName: fieldName
+            valuePattern: valuePattern
+          type: UNKNOWN
+        allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -1415,17 +1457,47 @@ components:
         integrationDefinition:
           featureFlag: featureFlag
           integrationType:
-            cloudformation: "{}"
+            arm: "{}"
           revisions:
           - revisionDeploymentSupported: true
             featureFlag: featureFlag
             upgradeInstructionsMd: upgradeInstructionsMd
+            cloudFormation:
+              postInstallationSteps:
+                key: postInstallationSteps
+              parameters:
+                key: parameters
+              commands:
+              - tooltipText: tooltipText
+                name: name
+                description: description
+                language: UNKNOWN
+                links:
+                - text: text
+                  key: key
+                  url: url
+                - text: text
+                  key: key
+                  url: url
+                command: command
+              - tooltipText: tooltipText
+                name: name
+                description: description
+                language: UNKNOWN
+                links:
+                - text: text
+                  key: key
+                  url: url
+                - text: text
+                  key: key
+                  url: url
+                command: command
+              templateUrl: templateUrl
             groups:
             - name: name
               id: id
             - name: name
               id: id
-            managedService: "{}"
             id: id
             fields:
             - visible: true
@@ -1436,6 +1508,8 @@ components:
               predefined: true
               required: true
               templateParamName: templateParamName
+              single:
+                defaultValue: defaultValue
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -1448,10 +1522,6 @@ components:
                   valuePattern: valuePattern
                 type: UNKNOWN
               allowedPattern: allowedPattern
-              multipleSelection:
-                options:
-                - options
-                - options
             - visible: true
               groupId: groupId
               tooltip: tooltip
@@ -1460,6 +1530,8 @@ components:
               predefined: true
               required: true
               templateParamName: templateParamName
+              single:
+                defaultValue: defaultValue
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -1472,19 +1544,45 @@ components:
                   valuePattern: valuePattern
                 type: UNKNOWN
               allowedPattern: allowedPattern
-              multipleSelection:
-                options:
-                - options
-                - options
           - revisionDeploymentSupported: true
             featureFlag: featureFlag
             upgradeInstructionsMd: upgradeInstructionsMd
+            cloudFormation:
+              postInstallationSteps:
+                key: postInstallationSteps
+              parameters:
+                key: parameters
+              commands:
+              - tooltipText: tooltipText
+                name: name
+                description: description
+                language: UNKNOWN
+                links:
+                - text: text
+                  key: key
+                  url: url
+                - text: text
+                  key: key
+                  url: url
+                command: command
+              - tooltipText: tooltipText
+                name: name
+                description: description
+                language: UNKNOWN
+                links:
+                - text: text
+                  key: key
+                  url: url
+                - text: text
+                  key: key
+                  url: url
+                command: command
+              templateUrl: templateUrl
             groups:
             - name: name
               id: id
             - name: name
               id: id
-            managedService: "{}"
             id: id
             fields:
             - visible: true
@@ -1495,6 +1593,8 @@ components:
               predefined: true
               required: true
               templateParamName: templateParamName
+              single:
+                defaultValue: defaultValue
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -1507,10 +1607,6 @@ components:
                   valuePattern: valuePattern
                 type: UNKNOWN
               allowedPattern: allowedPattern
-              multipleSelection:
-                options:
-                - options
-                - options
             - visible: true
               groupId: groupId
               tooltip: tooltip
@@ -1519,6 +1615,8 @@ components:
               predefined: true
               required: true
               templateParamName: templateParamName
+              single:
+                defaultValue: defaultValue
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -1531,10 +1629,6 @@ components:
                   valuePattern: valuePattern
                 type: UNKNOWN
               allowedPattern: allowedPattern
-              multipleSelection:
-                options:
-                - options
-                - options
           key: key
       externalDocs:
         url: ""
@@ -2335,7 +2429,7 @@ components:
           integration:
             featureFlag: featureFlag
             integrationType:
-              cloudformation: "{}"
+              arm: "{}"
             versions:
             - versions
             - versions
@@ -2369,7 +2463,7 @@ components:
         - integration:
             featureFlag: featureFlag
             integrationType:
-              cloudformation: "{}"
+              arm: "{}"
             versions:
             - versions
             - versions
@@ -2390,7 +2484,7 @@ components:
         - integration:
             featureFlag: featureFlag
             integrationType:
-              cloudformation: "{}"
+              arm: "{}"
             versions:
             - versions
             - versions
@@ -2422,7 +2516,7 @@ components:
         integration:
           featureFlag: featureFlag
           integrationType:
-            cloudformation: "{}"
+            arm: "{}"
           versions:
           - versions
           - versions
@@ -2553,7 +2647,7 @@ components:
       example:
         featureFlag: featureFlag
         integrationType:
-          cloudformation: "{}"
+          arm: "{}"
         versions:
         - versions
         - versions
@@ -2597,17 +2691,47 @@ components:
       example:
         featureFlag: featureFlag
         integrationType:
-          cloudformation: "{}"
+          arm: "{}"
         revisions:
         - revisionDeploymentSupported: true
           featureFlag: featureFlag
           upgradeInstructionsMd: upgradeInstructionsMd
+          cloudFormation:
+            postInstallationSteps:
+              key: postInstallationSteps
+            parameters:
+              key: parameters
+            commands:
+            - tooltipText: tooltipText
+              name: name
+              description: description
+              language: UNKNOWN
+              links:
+              - text: text
+                key: key
+                url: url
+              - text: text
+                key: key
+                url: url
+              command: command
+            - tooltipText: tooltipText
+              name: name
+              description: description
+              language: UNKNOWN
+              links:
+              - text: text
+                key: key
+                url: url
+              - text: text
+                key: key
+                url: url
+              command: command
+            templateUrl: templateUrl
           groups:
           - name: name
             id: id
           - name: name
             id: id
-          managedService: "{}"
           id: id
           fields:
           - visible: true
@@ -2618,6 +2742,8 @@ components:
             predefined: true
             required: true
             templateParamName: templateParamName
+            single:
+              defaultValue: defaultValue
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -2630,10 +2756,6 @@ components:
                 valuePattern: valuePattern
               type: UNKNOWN
             allowedPattern: allowedPattern
-            multipleSelection:
-              options:
-              - options
-              - options
           - visible: true
             groupId: groupId
             tooltip: tooltip
@@ -2642,6 +2764,8 @@ components:
             predefined: true
             required: true
             templateParamName: templateParamName
+            single:
+              defaultValue: defaultValue
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -2654,19 +2778,45 @@ components:
                 valuePattern: valuePattern
               type: UNKNOWN
             allowedPattern: allowedPattern
-            multipleSelection:
-              options:
-              - options
-              - options
         - revisionDeploymentSupported: true
           featureFlag: featureFlag
           upgradeInstructionsMd: upgradeInstructionsMd
+          cloudFormation:
+            postInstallationSteps:
+              key: postInstallationSteps
+            parameters:
+              key: parameters
+            commands:
+            - tooltipText: tooltipText
+              name: name
+              description: description
+              language: UNKNOWN
+              links:
+              - text: text
+                key: key
+                url: url
+              - text: text
+                key: key
+                url: url
+              command: command
+            - tooltipText: tooltipText
+              name: name
+              description: description
+              language: UNKNOWN
+              links:
+              - text: text
+                key: key
+                url: url
+              - text: text
+                key: key
+                url: url
+              command: command
+            templateUrl: templateUrl
           groups:
           - name: name
             id: id
           - name: name
             id: id
-          managedService: "{}"
           id: id
           fields:
           - visible: true
@@ -2677,6 +2827,8 @@ components:
             predefined: true
             required: true
             templateParamName: templateParamName
+            single:
+              defaultValue: defaultValue
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -2689,10 +2841,6 @@ components:
                 valuePattern: valuePattern
               type: UNKNOWN
             allowedPattern: allowedPattern
-            multipleSelection:
-              options:
-              - options
-              - options
           - visible: true
             groupId: groupId
             tooltip: tooltip
@@ -2701,6 +2849,8 @@ components:
             predefined: true
             required: true
             templateParamName: templateParamName
+            single:
+              defaultValue: defaultValue
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -2713,10 +2863,6 @@ components:
                 valuePattern: valuePattern
               type: UNKNOWN
             allowedPattern: allowedPattern
-            multipleSelection:
-              options:
-              - options
-              - options
         key: key
       externalDocs:
         url: ""
@@ -3566,7 +3712,7 @@ components:
         integration:
           featureFlag: featureFlag
           integrationType:
-            cloudformation: "{}"
+            arm: "{}"
           versions:
           - versions
           - versions
@@ -3642,12 +3788,12 @@ components:
       type: object
     IntegrationRevision:
       oneOf:
+      - $ref: "#/components/schemas/IntegrationRevisionCloudFormation"
       - $ref: "#/components/schemas/IntegrationRevisionManagedService"
       - $ref: "#/components/schemas/IntegrationRevisionHelmChart"
       - $ref: "#/components/schemas/IntegrationRevisionAzureArmTemplate"
       - $ref: "#/components/schemas/IntegrationRevisionRum"
       - $ref: "#/components/schemas/IntegrationRevisionTerraform"
-      - $ref: "#/components/schemas/IntegrationRevisionCloudFormation"
     IntegrationRevision.Group:
       example:
         name: name
@@ -3699,6 +3845,92 @@ components:
     IntegrationRevisionCloudFormation:
       additionalProperties: false
       description: This data structure represents an integration revision.
+      example:
+        revisionDeploymentSupported: true
+        featureFlag: featureFlag
+        upgradeInstructionsMd: upgradeInstructionsMd
+        cloudFormation:
+          postInstallationSteps:
+            key: postInstallationSteps
+          parameters:
+            key: parameters
+          commands:
+          - tooltipText: tooltipText
+            name: name
+            description: description
+            language: UNKNOWN
+            links:
+            - text: text
+              key: key
+              url: url
+            - text: text
+              key: key
+              url: url
+            command: command
+          - tooltipText: tooltipText
+            name: name
+            description: description
+            language: UNKNOWN
+            links:
+            - text: text
+              key: key
+              url: url
+            - text: text
+              key: key
+              url: url
+            command: command
+          templateUrl: templateUrl
+        groups:
+        - name: name
+          id: id
+        - name: name
+          id: id
+        id: id
+        fields:
+        - visible: true
+          groupId: groupId
+          tooltip: tooltip
+          type: API_KEY
+          upgradeNotice: upgradeNotice
+          predefined: true
+          required: true
+          templateParamName: templateParamName
+          single:
+            defaultValue: defaultValue
+          readonly: true
+          documentationReference: documentationReference
+          name: name
+          placeholder: placeholder
+          applicableIf:
+            values:
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            type: UNKNOWN
+          allowedPattern: allowedPattern
+        - visible: true
+          groupId: groupId
+          tooltip: tooltip
+          type: API_KEY
+          upgradeNotice: upgradeNotice
+          predefined: true
+          required: true
+          templateParamName: templateParamName
+          single:
+            defaultValue: defaultValue
+          readonly: true
+          documentationReference: documentationReference
+          name: name
+          placeholder: placeholder
+          applicableIf:
+            values:
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            type: UNKNOWN
+          allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -3751,66 +3983,6 @@ components:
     IntegrationRevisionManagedService:
       additionalProperties: false
       description: This data structure represents an integration revision.
-      example:
-        revisionDeploymentSupported: true
-        featureFlag: featureFlag
-        upgradeInstructionsMd: upgradeInstructionsMd
-        groups:
-        - name: name
-          id: id
-        - name: name
-          id: id
-        managedService: "{}"
-        id: id
-        fields:
-        - visible: true
-          groupId: groupId
-          tooltip: tooltip
-          type: API_KEY
-          upgradeNotice: upgradeNotice
-          predefined: true
-          required: true
-          templateParamName: templateParamName
-          readonly: true
-          documentationReference: documentationReference
-          name: name
-          placeholder: placeholder
-          applicableIf:
-            values:
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            type: UNKNOWN
-          allowedPattern: allowedPattern
-          multipleSelection:
-            options:
-            - options
-            - options
-        - visible: true
-          groupId: groupId
-          tooltip: tooltip
-          type: API_KEY
-          upgradeNotice: upgradeNotice
-          predefined: true
-          required: true
-          templateParamName: templateParamName
-          readonly: true
-          documentationReference: documentationReference
-          name: name
-          placeholder: placeholder
-          applicableIf:
-            values:
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            type: UNKNOWN
-          allowedPattern: allowedPattern
-          multipleSelection:
-            options:
-            - options
-            - options
       externalDocs:
         url: ""
       properties:
@@ -3923,6 +4095,10 @@ components:
       - JAVASCRIPT
       type: string
     Link:
+      example:
+        text: text
+        key: key
+        url: url
       externalDocs:
         url: ""
       properties:
@@ -4013,10 +4189,6 @@ components:
       title: Managed service
       type: object
     MultipleSelectionValue:
-      example:
-        options:
-        - options
-        - options
       externalDocs:
         url: ""
       properties:
@@ -4363,6 +4535,8 @@ components:
       title: Single boolean value
       type: object
     SingleValue:
+      example:
+        defaultValue: defaultValue
       externalDocs:
         url: ""
       properties:
@@ -4499,6 +4673,8 @@ components:
     V1IntegrationTypeArm:
       additionalProperties: false
       description: This data structure represents an integration type.
+      example:
+        arm: "{}"
       externalDocs:
         url: ""
       properties:
@@ -4513,8 +4689,6 @@ components:
     V1IntegrationTypeCloudformation:
       additionalProperties: false
       description: This data structure represents an integration type.
-      example:
-        cloudformation: "{}"
       externalDocs:
         url: ""
       properties:
@@ -5033,13 +5207,13 @@ components:
       type: object
     v1.IntegrationType:
       oneOf:
-      - $ref: "#/components/schemas/V1IntegrationTypeCloudformation"
       - $ref: "#/components/schemas/V1IntegrationTypeArm"
       - $ref: "#/components/schemas/V1IntegrationTypePushBasedContextualData"
       - $ref: "#/components/schemas/V1IntegrationTypeContextualData"
       - $ref: "#/components/schemas/V1IntegrationTypeGenericWebhook"
       - $ref: "#/components/schemas/V1IntegrationTypeManaged"
       - $ref: "#/components/schemas/V1IntegrationTypeUntracked"
+      - $ref: "#/components/schemas/V1IntegrationTypeCloudformation"
     v3.FilterOperator:
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED

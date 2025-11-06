@@ -1199,8 +1199,8 @@ components:
       type: object
     AlertSchedulerRuleService_GetBulkAlertSchedulerRule_alert_scheduler_rules_ids_parameter:
       oneOf:
-      - $ref: "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds"
       - $ref: "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds"
+      - $ref: "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds"
     Update_bulk_alert_scheduler_rule_request_data_structure:
       additionalProperties: false
       description: This is a request sent to update multiple alert scheduler rules

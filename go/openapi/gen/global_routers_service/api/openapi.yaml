@@ -47,7 +47,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Global_Router"
+              $ref: "#/components/schemas/Create_Global_Router_Request"
       responses:
         "200":
           content:
@@ -67,7 +67,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Global_Router"
+              $ref: "#/components/schemas/Replace_Global_Router_Request"
       responses:
         "200":
           content:
@@ -794,46 +794,21 @@ components:
             type: string
           type: array
       type: object
-    Global_Router:
+    Replace_Global_Router_Request:
       additionalProperties: false
-      description: Defines a set of pre-configured routing rules for directing notifications
+      description: Request which updates an existing global router
       properties:
-        createTime:
-          format: date-time
-          type: string
-        description:
-          type: string
-        entityLabelMatcher:
-          additionalProperties:
-            type: string
-          type: object
-        entityLabels:
-          additionalProperties:
-            type: string
-          type: object
-        entityType:
-          $ref: "#/components/schemas/notification_center.EntityType"
-        fallback:
-          items:
-            $ref: "#/components/schemas/RoutingTarget"
-          type: array
-        id:
-          example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-          type: string
-        name:
-          example: My Router
-          type: string
-        rules:
-          items:
-            $ref: "#/components/schemas/RoutingRule"
-          type: array
-        updateTime:
-          format: date-time
-          type: string
-      required:
-      - entityType
-      - name
-      title: Global Router
+        router:
+          $ref: "#/components/schemas/GlobalRouter"
+      title: Replace Global Router Request
+      type: object
+    Create_Global_Router_Request:
+      additionalProperties: false
+      description: Request to create a global router
+      properties:
+        router:
+          $ref: "#/components/schemas/GlobalRouter"
+      title: Create Global Router Request
       type: object
   securitySchemes:
     apiKeyAuth:

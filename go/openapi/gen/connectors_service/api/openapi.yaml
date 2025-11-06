@@ -15,7 +15,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Connector_1"
+              $ref: "#/components/schemas/Replace_Connector_Request"
       responses:
         "200":
           content:
@@ -66,7 +66,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Connector_1"
+              $ref: "#/components/schemas/Create_Connector_Request"
       responses:
         "200":
           content:
@@ -459,6 +459,7 @@ components:
       - GENERIC_HTTPS
       - PAGERDUTY
       - IBM_EVENT_NOTIFICATIONS
+      - SERVICE_NOW
       type: string
     ConnectorTypeSummary:
       description: Summary information about a connector type
@@ -866,46 +867,21 @@ components:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
-    Connector_1:
+    Replace_Connector_Request:
       additionalProperties: false
-      description: A connector configuration for sending notifications
+      description: Request to replace an existing connector
       properties:
-        configOverrides:
-          items:
-            $ref: "#/components/schemas/EntityTypeConfigOverrides"
-          type: array
-        connectorConfig:
-          $ref: "#/components/schemas/ConnectorConfig"
-        createTime:
-          format: date-time
-          type: string
-        description:
-          example: Connector for team notifications
-          maxLength: 5000
-          type: string
-        diagnostics:
-          $ref: "#/components/schemas/Diagnostics"
-        id:
-          example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-          type: string
-        name:
-          example: My Slack Connector
-          maxLength: 200
-          type: string
-        teamId:
-          example: 12345
-          format: int64
-          type: integer
-        type:
-          $ref: "#/components/schemas/ConnectorType"
-        updateTime:
-          format: date-time
-          type: string
-      required:
-      - connectorConfigs
-      - name
-      - type
-      title: Connector
+        connector:
+          $ref: "#/components/schemas/Connector"
+      title: Replace Connector Request
+      type: object
+    Create_Connector_Request:
+      additionalProperties: false
+      description: Request to create a new connector
+      properties:
+        connector:
+          $ref: "#/components/schemas/Connector"
+      title: Create Connector Request
       type: object
   securitySchemes:
     apiKeyAuth:

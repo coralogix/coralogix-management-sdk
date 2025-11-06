@@ -259,11 +259,11 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceBatchGetConnectorsExecute
 type ApiConnectorsServiceCreateConnectorRequest struct {
 	ctx context.Context
 	ApiService *ConnectorsServiceAPIService
-	connector1 *Connector1
+	createConnectorRequest *CreateConnectorRequest
 }
 
-func (r ApiConnectorsServiceCreateConnectorRequest) Connector1(connector1 Connector1) ApiConnectorsServiceCreateConnectorRequest {
-	r.connector1 = &connector1
+func (r ApiConnectorsServiceCreateConnectorRequest) CreateConnectorRequest(createConnectorRequest CreateConnectorRequest) ApiConnectorsServiceCreateConnectorRequest {
+	r.createConnectorRequest = &createConnectorRequest
 	return r
 }
 
@@ -325,7 +325,7 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceCreateConnectorExecute(r 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.connector1
+	localVarPostBody = r.createConnectorRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -914,11 +914,11 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceListConnectorsExecute(r A
 type ApiConnectorsServiceReplaceConnectorRequest struct {
 	ctx context.Context
 	ApiService *ConnectorsServiceAPIService
-	connector1 *Connector1
+	replaceConnectorRequest *ReplaceConnectorRequest
 }
 
-func (r ApiConnectorsServiceReplaceConnectorRequest) Connector1(connector1 Connector1) ApiConnectorsServiceReplaceConnectorRequest {
-	r.connector1 = &connector1
+func (r ApiConnectorsServiceReplaceConnectorRequest) ReplaceConnectorRequest(replaceConnectorRequest ReplaceConnectorRequest) ApiConnectorsServiceReplaceConnectorRequest {
+	r.replaceConnectorRequest = &replaceConnectorRequest
 	return r
 }
 
@@ -980,7 +980,7 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceReplaceConnectorExecute(r
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.connector1
+	localVarPostBody = r.replaceConnectorRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -12,6 +12,7 @@ model_colors_by_aggregation.go
 model_colors_by_group_by.go
 model_colors_by_stack.go
 model_common_group.go
+model_create_global_router_request.go
 model_create_global_router_response.go
 model_events_v3_filter_matcher.go
 model_field_group.go
@@ -25,6 +26,7 @@ model_global_routers_service_list_global_routers_source_entity_labels_parameter_
 model_list_global_routers_response.go
 model_multiple_values.go
 model_notification_center_entity_type.go
+model_replace_global_router_request.go
 model_replace_global_router_response.go
 model_routing_rule.go
 model_routing_target.go

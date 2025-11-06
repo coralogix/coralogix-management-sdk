@@ -99,6 +99,7 @@ Class | Method | HTTP request | Description
  - [CommonGroup](docs/CommonGroup.md)
  - [ConfigOverrides](docs/ConfigOverrides.md)
  - [ConnectorType](docs/ConnectorType.md)
+ - [CreateCustomPresetRequest](docs/CreateCustomPresetRequest.md)
  - [CreateCustomPresetResponse](docs/CreateCustomPresetResponse.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FieldGroup](docs/FieldGroup.md)
@@ -119,9 +120,9 @@ Class | Method | HTTP request | Description
  - [NotificationCenterEntityType](docs/NotificationCenterEntityType.md)
  - [NotificationCenterMessageConfigField](docs/NotificationCenterMessageConfigField.md)
  - [Preset](docs/Preset.md)
- - [Preset1](docs/Preset1.md)
  - [PresetSummary](docs/PresetSummary.md)
  - [PresetType](docs/PresetType.md)
+ - [ReplaceCustomPresetRequest](docs/ReplaceCustomPresetRequest.md)
  - [ReplaceCustomPresetResponse](docs/ReplaceCustomPresetResponse.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
 

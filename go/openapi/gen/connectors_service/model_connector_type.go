@@ -25,6 +25,7 @@ const (
 	CONNECTORTYPE_GENERIC_HTTPS ConnectorType = "GENERIC_HTTPS"
 	CONNECTORTYPE_PAGERDUTY ConnectorType = "PAGERDUTY"
 	CONNECTORTYPE_IBM_EVENT_NOTIFICATIONS ConnectorType = "IBM_EVENT_NOTIFICATIONS"
+	CONNECTORTYPE_SERVICE_NOW ConnectorType = "SERVICE_NOW"
 )
 
 // All allowed values of ConnectorType enum
@@ -34,6 +35,7 @@ var AllowedConnectorTypeEnumValues = []ConnectorType{
 	"GENERIC_HTTPS",
 	"PAGERDUTY",
 	"IBM_EVENT_NOTIFICATIONS",
+	"SERVICE_NOW",
 }
 
 func (v *ConnectorType) UnmarshalJSON(src []byte) error {

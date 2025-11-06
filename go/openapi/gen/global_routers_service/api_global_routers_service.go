@@ -143,11 +143,11 @@ func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceBatchGetGlobalRoute
 type ApiGlobalRoutersServiceCreateGlobalRouterRequest struct {
 	ctx context.Context
 	ApiService *GlobalRoutersServiceAPIService
-	globalRouter *GlobalRouter
+	createGlobalRouterRequest *CreateGlobalRouterRequest
 }
 
-func (r ApiGlobalRoutersServiceCreateGlobalRouterRequest) GlobalRouter(globalRouter GlobalRouter) ApiGlobalRoutersServiceCreateGlobalRouterRequest {
-	r.globalRouter = &globalRouter
+func (r ApiGlobalRoutersServiceCreateGlobalRouterRequest) CreateGlobalRouterRequest(createGlobalRouterRequest CreateGlobalRouterRequest) ApiGlobalRoutersServiceCreateGlobalRouterRequest {
+	r.createGlobalRouterRequest = &createGlobalRouterRequest
 	return r
 }
 
@@ -209,7 +209,7 @@ func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceCreateGlobalRouterE
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.globalRouter
+	localVarPostBody = r.createGlobalRouterRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -573,11 +573,11 @@ func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceListGlobalRoutersEx
 type ApiGlobalRoutersServiceReplaceGlobalRouterRequest struct {
 	ctx context.Context
 	ApiService *GlobalRoutersServiceAPIService
-	globalRouter *GlobalRouter
+	replaceGlobalRouterRequest *ReplaceGlobalRouterRequest
 }
 
-func (r ApiGlobalRoutersServiceReplaceGlobalRouterRequest) GlobalRouter(globalRouter GlobalRouter) ApiGlobalRoutersServiceReplaceGlobalRouterRequest {
-	r.globalRouter = &globalRouter
+func (r ApiGlobalRoutersServiceReplaceGlobalRouterRequest) ReplaceGlobalRouterRequest(replaceGlobalRouterRequest ReplaceGlobalRouterRequest) ApiGlobalRoutersServiceReplaceGlobalRouterRequest {
+	r.replaceGlobalRouterRequest = &replaceGlobalRouterRequest
 	return r
 }
 
@@ -639,7 +639,7 @@ func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceReplaceGlobalRouter
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.globalRouter
+	localVarPostBody = r.replaceGlobalRouterRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

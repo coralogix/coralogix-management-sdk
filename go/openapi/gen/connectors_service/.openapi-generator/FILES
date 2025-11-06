@@ -14,11 +14,11 @@ model_colors_by_group_by.go
 model_colors_by_stack.go
 model_common_group.go
 model_connector.go
-model_connector_1.go
 model_connector_config.go
 model_connector_summary.go
 model_connector_type.go
 model_connector_type_summary.go
+model_create_connector_request.go
 model_create_connector_response.go
 model_delivery.go
 model_diagnostics.go
@@ -36,6 +36,7 @@ model_list_connectors_response.go
 model_multiple_values.go
 model_notification_center_connector_config_field.go
 model_notification_center_entity_type.go
+model_replace_connector_request.go
 model_replace_connector_response.go
 model_templated_connector_config_field.go
 model_v3_filter_operator.go

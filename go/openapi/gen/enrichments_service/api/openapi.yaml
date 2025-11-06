@@ -126,8 +126,8 @@ components:
       example:
         enrichments:
         - enrichmentType:
-            aws:
-              resourceType: ec2
+            geoIp:
+              withAsn: true
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -135,8 +135,8 @@ components:
           enrichedFieldName: "1"
           id: 1
         - enrichmentType:
-            aws:
-              resourceType: ec2
+            geoIp:
+              withAsn: true
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -159,8 +159,8 @@ components:
       example:
         enrichments:
         - enrichmentType:
-            aws:
-              resourceType: ec2
+            geoIp:
+              withAsn: true
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -168,8 +168,8 @@ components:
           enrichedFieldName: "1"
           id: 1
         - enrichmentType:
-            aws:
-              resourceType: ec2
+            geoIp:
+              withAsn: true
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -183,8 +183,6 @@ components:
           type: array
       type: object
     AwsType:
-      example:
-        resourceType: ec2
       properties:
         resourceType:
           example: ec2
@@ -247,8 +245,8 @@ components:
       description: This data structure represents an enrichment
       example:
         enrichmentType:
-          aws:
-            resourceType: ec2
+          geoIp:
+            withAsn: true
         selectedColumns:
         - "[\"city\",\"population\"]"
         - "[\"city\",\"population\"]"
@@ -317,15 +315,12 @@ components:
       type: object
     EnrichmentType:
       oneOf:
-      - $ref: "#/components/schemas/EnrichmentTypeAws"
-      - $ref: "#/components/schemas/EnrichmentTypeCustomEnrichment"
       - $ref: "#/components/schemas/EnrichmentTypeGeoIp"
       - $ref: "#/components/schemas/EnrichmentTypeSuspiciousIp"
+      - $ref: "#/components/schemas/EnrichmentTypeAws"
+      - $ref: "#/components/schemas/EnrichmentTypeCustomEnrichment"
     EnrichmentTypeAws:
       additionalProperties: false
-      example:
-        aws:
-          resourceType: ec2
       properties:
         aws:
           $ref: "#/components/schemas/AwsType"
@@ -338,6 +333,9 @@ components:
       type: object
     EnrichmentTypeGeoIp:
       additionalProperties: false
+      example:
+        geoIp:
+          withAsn: true
       properties:
         geoIp:
           $ref: "#/components/schemas/GeoIpType"
@@ -407,6 +405,8 @@ components:
       title: Filters
       type: object
     GeoIpType:
+      example:
+        withAsn: true
       properties:
         withAsn:
           type: boolean
@@ -451,8 +451,8 @@ components:
       example:
         enrichments:
         - enrichmentType:
-            aws:
-              resourceType: ec2
+            geoIp:
+              withAsn: true
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -460,8 +460,8 @@ components:
           enrichedFieldName: "1"
           id: 1
         - enrichmentType:
-            aws:
-              resourceType: ec2
+            geoIp:
+              withAsn: true
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -494,8 +494,8 @@ components:
       example:
         remainingEnrichments:
         - enrichmentType:
-            aws:
-              resourceType: ec2
+            geoIp:
+              withAsn: true
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -503,8 +503,8 @@ components:
           enrichedFieldName: "1"
           id: 1
         - enrichmentType:
-            aws:
-              resourceType: ec2
+            geoIp:
+              withAsn: true
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"

@@ -1160,11 +1160,11 @@ components:
       type: object
     DataUsageService_GetDataUsage_dimension_filters_parameter_inner:
       oneOf:
+      - $ref: "#/components/schemas/DimensionPriority"
       - $ref: "#/components/schemas/DimensionPillar"
       - $ref: "#/components/schemas/DimensionGenericDimension"
       - $ref: "#/components/schemas/DimensionTier"
       - $ref: "#/components/schemas/DimensionSeverity"
-      - $ref: "#/components/schemas/DimensionPriority"
     DataUsageService_GetDailyUsageEvaluationTokens_request:
       oneOf:
       - $ref: "#/components/schemas/GetDailyUsageEvaluationTokensRequestRange"
@@ -1177,8 +1177,8 @@ components:
       type: object
     DataUsageService_GetDailyUsageUnits_request:
       oneOf:
-      - $ref: "#/components/schemas/GetDailyUsageUnitsRequestRange"
       - $ref: "#/components/schemas/GetDailyUsageUnitsRequestDateRange"
+      - $ref: "#/components/schemas/GetDailyUsageUnitsRequestRange"
       type: object
     Update_Data_Usage_Metrics_Export_Status_Request:
       additionalProperties: false

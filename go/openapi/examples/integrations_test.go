@@ -125,6 +125,9 @@ func TestWebhooks(t *testing.T) {
 
 	client := cxsdk.NewWebhooksClient(cpc)
 
+	_, httpResp, err := client.OutgoingWebhooksServiceListAllOutgoingWebhooks(context.Background()).Execute()
+	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+
 	tests := []struct {
 		name string
 		data webhooks.OutgoingWebhookInputData

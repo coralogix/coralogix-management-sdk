@@ -203,10 +203,122 @@ components:
     AtomicBatchExecuteE2MResponse:
       example:
         matchingResponses:
-        - deleted:
-            id: id
-        - deleted:
-            id: id
+        - created:
+            e2m:
+              isInternal: true
+              metricFields:
+              - sourceField: log_obj.numeric_field
+                targetBaseMetricName: alias_field_name
+                aggregations:
+                - targetMetricName: alias_field_name_agg_func
+                  aggType: AGG_TYPE_UNSPECIFIED
+                  enabled: true
+                  samples:
+                    sampleType: SAMPLE_TYPE_UNSPECIFIED
+                - targetMetricName: alias_field_name_agg_func
+                  aggType: AGG_TYPE_UNSPECIFIED
+                  enabled: true
+                  samples:
+                    sampleType: SAMPLE_TYPE_UNSPECIFIED
+              - sourceField: log_obj.numeric_field
+                targetBaseMetricName: alias_field_name
+                aggregations:
+                - targetMetricName: alias_field_name_agg_func
+                  aggType: AGG_TYPE_UNSPECIFIED
+                  enabled: true
+                  samples:
+                    sampleType: SAMPLE_TYPE_UNSPECIFIED
+                - targetMetricName: alias_field_name_agg_func
+                  aggType: AGG_TYPE_UNSPECIFIED
+                  enabled: true
+                  samples:
+                    sampleType: SAMPLE_TYPE_UNSPECIFIED
+              createTime: 2022-06-30T12:30:00Z'
+              metricLabels:
+              - sourceField: log_obj.string_value
+                targetLabel: alias_label_name
+              - sourceField: log_obj.string_value
+                targetLabel: alias_label_name
+              name: Service_catalog_latency
+              spansQuery:
+                applicationnameFilters:
+                - myApp
+                - myApp
+                lucene: applicationName:myApp
+                serviceFilters:
+                - myService
+                - myService
+                actionFilters:
+                - myAction
+                - myAction
+                subsystemnameFilters:
+                - mySubsystem
+                - mySubsystem
+              description: avg and max the latency of catalog service
+              updateTime: 2022-06-30T12:30:00Z'
+              id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+              permutations:
+                limit: 30000
+                hasExceededLimit: true
+              type: E2M_TYPE_UNSPECIFIED
+        - created:
+            e2m:
+              isInternal: true
+              metricFields:
+              - sourceField: log_obj.numeric_field
+                targetBaseMetricName: alias_field_name
+                aggregations:
+                - targetMetricName: alias_field_name_agg_func
+                  aggType: AGG_TYPE_UNSPECIFIED
+                  enabled: true
+                  samples:
+                    sampleType: SAMPLE_TYPE_UNSPECIFIED
+                - targetMetricName: alias_field_name_agg_func
+                  aggType: AGG_TYPE_UNSPECIFIED
+                  enabled: true
+                  samples:
+                    sampleType: SAMPLE_TYPE_UNSPECIFIED
+              - sourceField: log_obj.numeric_field
+                targetBaseMetricName: alias_field_name
+                aggregations:
+                - targetMetricName: alias_field_name_agg_func
+                  aggType: AGG_TYPE_UNSPECIFIED
+                  enabled: true
+                  samples:
+                    sampleType: SAMPLE_TYPE_UNSPECIFIED
+                - targetMetricName: alias_field_name_agg_func
+                  aggType: AGG_TYPE_UNSPECIFIED
+                  enabled: true
+                  samples:
+                    sampleType: SAMPLE_TYPE_UNSPECIFIED
+              createTime: 2022-06-30T12:30:00Z'
+              metricLabels:
+              - sourceField: log_obj.string_value
+                targetLabel: alias_label_name
+              - sourceField: log_obj.string_value
+                targetLabel: alias_label_name
+              name: Service_catalog_latency
+              spansQuery:
+                applicationnameFilters:
+                - myApp
+                - myApp
+                lucene: applicationName:myApp
+                serviceFilters:
+                - myService
+                - myService
+                actionFilters:
+                - myAction
+                - myAction
+                subsystemnameFilters:
+                - mySubsystem
+                - mySubsystem
+              description: avg and max the latency of catalog service
+              updateTime: 2022-06-30T12:30:00Z'
+              id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+              permutations:
+                limit: 30000
+                hasExceededLimit: true
+              type: E2M_TYPE_UNSPECIFIED
       properties:
         matchingResponses:
           items:
@@ -251,37 +363,29 @@ components:
           - sourceField: log_obj.numeric_field
             targetBaseMetricName: alias_field_name
             aggregations:
-            - histogram:
-                buckets:
-                - 2
-                - 2
-              targetMetricName: alias_field_name_agg_func
+            - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
               enabled: true
-            - histogram:
-                buckets:
-                - 2
-                - 2
-              targetMetricName: alias_field_name_agg_func
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
               enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
           - sourceField: log_obj.numeric_field
             targetBaseMetricName: alias_field_name
             aggregations:
-            - histogram:
-                buckets:
-                - 2
-                - 2
-              targetMetricName: alias_field_name_agg_func
+            - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
               enabled: true
-            - histogram:
-                buckets:
-                - 2
-                - 2
-              targetMetricName: alias_field_name_agg_func
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
               enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
           createTime: 2022-06-30T12:30:00Z'
           metricLabels:
           - sourceField: log_obj.string_value
@@ -349,10 +453,6 @@ components:
       - $ref: "#/components/schemas/E2MLogsQuery"
     E2MAggHistogram:
       description: This data structure represents the e2m aggregate histogram
-      example:
-        buckets:
-        - 2
-        - 2
       externalDocs:
         description: Find out more about events2metrics
         url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
@@ -367,6 +467,8 @@ components:
       type: object
     E2MAggSamples:
       description: This data structure represents the e2m aggregate samples
+      example:
+        sampleType: SAMPLE_TYPE_UNSPECIFIED
       externalDocs:
         description: Find out more about events2metrics
         url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
@@ -470,20 +572,76 @@ components:
       type: object
     E2MExecutionResponse:
       oneOf:
-      - $ref: "#/components/schemas/E2MExecutionResponseDeleted"
       - $ref: "#/components/schemas/E2MExecutionResponseCreated"
       - $ref: "#/components/schemas/E2MExecutionResponseReplaced"
+      - $ref: "#/components/schemas/E2MExecutionResponseDeleted"
     E2MExecutionResponseCreated:
       additionalProperties: false
+      example:
+        created:
+          e2m:
+            isInternal: true
+            metricFields:
+            - sourceField: log_obj.numeric_field
+              targetBaseMetricName: alias_field_name
+              aggregations:
+              - targetMetricName: alias_field_name_agg_func
+                aggType: AGG_TYPE_UNSPECIFIED
+                enabled: true
+                samples:
+                  sampleType: SAMPLE_TYPE_UNSPECIFIED
+              - targetMetricName: alias_field_name_agg_func
+                aggType: AGG_TYPE_UNSPECIFIED
+                enabled: true
+                samples:
+                  sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - sourceField: log_obj.numeric_field
+              targetBaseMetricName: alias_field_name
+              aggregations:
+              - targetMetricName: alias_field_name_agg_func
+                aggType: AGG_TYPE_UNSPECIFIED
+                enabled: true
+                samples:
+                  sampleType: SAMPLE_TYPE_UNSPECIFIED
+              - targetMetricName: alias_field_name_agg_func
+                aggType: AGG_TYPE_UNSPECIFIED
+                enabled: true
+                samples:
+                  sampleType: SAMPLE_TYPE_UNSPECIFIED
+            createTime: 2022-06-30T12:30:00Z'
+            metricLabels:
+            - sourceField: log_obj.string_value
+              targetLabel: alias_label_name
+            - sourceField: log_obj.string_value
+              targetLabel: alias_label_name
+            name: Service_catalog_latency
+            spansQuery:
+              applicationnameFilters:
+              - myApp
+              - myApp
+              lucene: applicationName:myApp
+              serviceFilters:
+              - myService
+              - myService
+              actionFilters:
+              - myAction
+              - myAction
+              subsystemnameFilters:
+              - mySubsystem
+              - mySubsystem
+            description: avg and max the latency of catalog service
+            updateTime: 2022-06-30T12:30:00Z'
+            id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+            permutations:
+              limit: 30000
+              hasExceededLimit: true
+            type: E2M_TYPE_UNSPECIFIED
       properties:
         created:
           $ref: "#/components/schemas/CreateE2MResponse"
       type: object
     E2MExecutionResponseDeleted:
       additionalProperties: false
-      example:
-        deleted:
-          id: id
       properties:
         deleted:
           $ref: "#/components/schemas/DeleteE2MResponse"
@@ -570,37 +728,29 @@ components:
         - sourceField: log_obj.numeric_field
           targetBaseMetricName: alias_field_name
           aggregations:
-          - histogram:
-              buckets:
-              - 2
-              - 2
-            targetMetricName: alias_field_name_agg_func
+          - targetMetricName: alias_field_name_agg_func
             aggType: AGG_TYPE_UNSPECIFIED
             enabled: true
-          - histogram:
-              buckets:
-              - 2
-              - 2
-            targetMetricName: alias_field_name_agg_func
+            samples:
+              sampleType: SAMPLE_TYPE_UNSPECIFIED
+          - targetMetricName: alias_field_name_agg_func
             aggType: AGG_TYPE_UNSPECIFIED
             enabled: true
+            samples:
+              sampleType: SAMPLE_TYPE_UNSPECIFIED
         - sourceField: log_obj.numeric_field
           targetBaseMetricName: alias_field_name
           aggregations:
-          - histogram:
-              buckets:
-              - 2
-              - 2
-            targetMetricName: alias_field_name_agg_func
+          - targetMetricName: alias_field_name_agg_func
             aggType: AGG_TYPE_UNSPECIFIED
             enabled: true
-          - histogram:
-              buckets:
-              - 2
-              - 2
-            targetMetricName: alias_field_name_agg_func
+            samples:
+              sampleType: SAMPLE_TYPE_UNSPECIFIED
+          - targetMetricName: alias_field_name_agg_func
             aggType: AGG_TYPE_UNSPECIFIED
             enabled: true
+            samples:
+              sampleType: SAMPLE_TYPE_UNSPECIFIED
         createTime: 2022-06-30T12:30:00Z'
         metricLabels:
         - sourceField: log_obj.string_value
@@ -746,37 +896,29 @@ components:
           - sourceField: log_obj.numeric_field
             targetBaseMetricName: alias_field_name
             aggregations:
-            - histogram:
-                buckets:
-                - 2
-                - 2
-              targetMetricName: alias_field_name_agg_func
+            - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
               enabled: true
-            - histogram:
-                buckets:
-                - 2
-                - 2
-              targetMetricName: alias_field_name_agg_func
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
               enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
           - sourceField: log_obj.numeric_field
             targetBaseMetricName: alias_field_name
             aggregations:
-            - histogram:
-                buckets:
-                - 2
-                - 2
-              targetMetricName: alias_field_name_agg_func
+            - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
               enabled: true
-            - histogram:
-                buckets:
-                - 2
-                - 2
-              targetMetricName: alias_field_name_agg_func
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
               enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
           createTime: 2022-06-30T12:30:00Z'
           metricLabels:
           - sourceField: log_obj.string_value
@@ -869,37 +1011,29 @@ components:
           - sourceField: log_obj.numeric_field
             targetBaseMetricName: alias_field_name
             aggregations:
-            - histogram:
-                buckets:
-                - 2
-                - 2
-              targetMetricName: alias_field_name_agg_func
+            - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
               enabled: true
-            - histogram:
-                buckets:
-                - 2
-                - 2
-              targetMetricName: alias_field_name_agg_func
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
               enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
           - sourceField: log_obj.numeric_field
             targetBaseMetricName: alias_field_name
             aggregations:
-            - histogram:
-                buckets:
-                - 2
-                - 2
-              targetMetricName: alias_field_name_agg_func
+            - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
               enabled: true
-            - histogram:
-                buckets:
-                - 2
-                - 2
-              targetMetricName: alias_field_name_agg_func
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
               enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
           createTime: 2022-06-30T12:30:00Z'
           metricLabels:
           - sourceField: log_obj.string_value
@@ -933,37 +1067,29 @@ components:
           - sourceField: log_obj.numeric_field
             targetBaseMetricName: alias_field_name
             aggregations:
-            - histogram:
-                buckets:
-                - 2
-                - 2
-              targetMetricName: alias_field_name_agg_func
+            - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
               enabled: true
-            - histogram:
-                buckets:
-                - 2
-                - 2
-              targetMetricName: alias_field_name_agg_func
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
               enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
           - sourceField: log_obj.numeric_field
             targetBaseMetricName: alias_field_name
             aggregations:
-            - histogram:
-                buckets:
-                - 2
-                - 2
-              targetMetricName: alias_field_name_agg_func
+            - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
               enabled: true
-            - histogram:
-                buckets:
-                - 2
-                - 2
-              targetMetricName: alias_field_name_agg_func
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
               enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
           createTime: 2022-06-30T12:30:00Z'
           metricLabels:
           - sourceField: log_obj.string_value
@@ -1070,37 +1196,29 @@ components:
           - sourceField: log_obj.numeric_field
             targetBaseMetricName: alias_field_name
             aggregations:
-            - histogram:
-                buckets:
-                - 2
-                - 2
-              targetMetricName: alias_field_name_agg_func
+            - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
               enabled: true
-            - histogram:
-                buckets:
-                - 2
-                - 2
-              targetMetricName: alias_field_name_agg_func
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
               enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
           - sourceField: log_obj.numeric_field
             targetBaseMetricName: alias_field_name
             aggregations:
-            - histogram:
-                buckets:
-                - 2
-                - 2
-              targetMetricName: alias_field_name_agg_func
+            - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
               enabled: true
-            - histogram:
-                buckets:
-                - 2
-                - 2
-              targetMetricName: alias_field_name_agg_func
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
               enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
           createTime: 2022-06-30T12:30:00Z'
           metricLabels:
           - sourceField: log_obj.string_value
@@ -1148,14 +1266,6 @@ components:
     V2AggregationHistogram:
       additionalProperties: false
       description: This data structure represents an aggregation
-      example:
-        histogram:
-          buckets:
-          - 2
-          - 2
-        targetMetricName: alias_field_name_agg_func
-        aggType: AGG_TYPE_UNSPECIFIED
-        enabled: true
       externalDocs:
         description: Find out more about events2metrics
         url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
@@ -1174,6 +1284,12 @@ components:
     V2AggregationSamples:
       additionalProperties: false
       description: This data structure represents an aggregation
+      example:
+        targetMetricName: alias_field_name_agg_func
+        aggType: AGG_TYPE_UNSPECIFIED
+        enabled: true
+        samples:
+          sampleType: SAMPLE_TYPE_UNSPECIFIED
       externalDocs:
         description: Find out more about events2metrics
         url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
@@ -1218,8 +1334,8 @@ components:
       type: string
     v2.Aggregation:
       oneOf:
-      - $ref: "#/components/schemas/V2AggregationHistogram"
       - $ref: "#/components/schemas/V2AggregationSamples"
+      - $ref: "#/components/schemas/V2AggregationHistogram"
     v2.LogsQuery:
       description: This data structure represents a query for logs.
       externalDocs:
@@ -1254,20 +1370,16 @@ components:
         sourceField: log_obj.numeric_field
         targetBaseMetricName: alias_field_name
         aggregations:
-        - histogram:
-            buckets:
-            - 2
-            - 2
-          targetMetricName: alias_field_name_agg_func
+        - targetMetricName: alias_field_name_agg_func
           aggType: AGG_TYPE_UNSPECIFIED
           enabled: true
-        - histogram:
-            buckets:
-            - 2
-            - 2
-          targetMetricName: alias_field_name_agg_func
+          samples:
+            sampleType: SAMPLE_TYPE_UNSPECIFIED
+        - targetMetricName: alias_field_name_agg_func
           aggType: AGG_TYPE_UNSPECIFIED
           enabled: true
+          samples:
+            sampleType: SAMPLE_TYPE_UNSPECIFIED
       externalDocs:
         description: Find out more about events2metrics
         url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
@@ -1346,8 +1458,8 @@ components:
       type: object
     Events2MetricService_CreateE2M_request:
       oneOf:
-      - $ref: "#/components/schemas/E2MCreateParamsLogsQuery"
       - $ref: "#/components/schemas/E2MCreateParamsSpansQuery"
+      - $ref: "#/components/schemas/E2MCreateParamsLogsQuery"
       type: object
     Events2MetricService_AtomicBatchExecuteE2M_request:
       additionalProperties: false

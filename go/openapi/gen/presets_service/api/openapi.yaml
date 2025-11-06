@@ -15,7 +15,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Preset_1"
+              $ref: "#/components/schemas/Create_Custom_Preset_Request"
       responses:
         "200":
           content:
@@ -35,7 +35,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Preset_1"
+              $ref: "#/components/schemas/Replace_Custom_Preset_Request"
       responses:
         "200":
           content:
@@ -357,6 +357,7 @@ components:
       - GENERIC_HTTPS
       - PAGERDUTY
       - IBM_EVENT_NOTIFICATIONS
+      - SERVICE_NOW
       type: string
     CreateCustomPresetResponse:
       description: Response containing the created custom preset
@@ -812,43 +813,21 @@ components:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
-    Preset_1:
+    Replace_Custom_Preset_Request:
       additionalProperties: false
-      description: Set of preconfigured templates for notification content rendering
+      description: Request to replace an existing custom preset
       properties:
-        configOverrides:
-          items:
-            $ref: "#/components/schemas/ConfigOverrides"
-          type: array
-        connectorType:
-          $ref: "#/components/schemas/ConnectorType"
-        createTime:
-          format: date-time
-          type: string
-        description:
-          example: Custom preset for alerts
-          type: string
-        entityType:
-          $ref: "#/components/schemas/notification_center.EntityType"
-        id:
-          example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-          type: string
-        name:
-          example: My Preset
-          type: string
-        parentId:
-          example: preset_system_slack_alerts_basic
-          type: string
-        presetType:
-          $ref: "#/components/schemas/PresetType"
-        updateTime:
-          format: date-time
-          type: string
-      required:
-      - configOverrides
-      - entityType
-      - name
-      title: Preset
+        preset:
+          $ref: "#/components/schemas/Preset"
+      title: Replace Custom Preset Request
+      type: object
+    Create_Custom_Preset_Request:
+      additionalProperties: false
+      description: Request to create a new custom preset
+      properties:
+        preset:
+          $ref: "#/components/schemas/Preset"
+      title: Create Custom Preset Request
       type: object
   securitySchemes:
     apiKeyAuth:

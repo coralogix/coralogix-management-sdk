@@ -255,32 +255,19 @@ components:
           nextPageToken: test
         events:
           key:
-            multipleEvents:
-              events:
-              - cxEventType: test_type
-                companyId: 1
-                cxEventKey: test
-                cxEventMetadata:
-                  test: test
-                cxEventPayload:
-                  test: test
-                cxEventPayloadType: test_payload_type
-                cxEventDedupKey: test_dedup_key
-                cxEventLabels:
-                  test: test
-                cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
-              - cxEventType: test_type
-                companyId: 1
-                cxEventKey: test
-                cxEventMetadata:
-                  test: test
-                cxEventPayload:
-                  test: test
-                cxEventPayloadType: test_payload_type
-                cxEventDedupKey: test_dedup_key
-                cxEventLabels:
-                  test: test
-                cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+            singleEvent:
+              cxEventType: test_type
+              companyId: 1
+              cxEventKey: test
+              cxEventMetadata:
+                test: test
+              cxEventPayload:
+                test: test
+              cxEventPayloadType: test_payload_type
+              cxEventDedupKey: test_dedup_key
+              cxEventLabels:
+                test: test
+              cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         events:
           additionalProperties:
@@ -377,32 +364,6 @@ components:
       type: object
     CxEventArray:
       description: This data structure represents an array of events
-      example:
-        events:
-        - cxEventType: test_type
-          companyId: 1
-          cxEventKey: test
-          cxEventMetadata:
-            test: test
-          cxEventPayload:
-            test: test
-          cxEventPayloadType: test_payload_type
-          cxEventDedupKey: test_dedup_key
-          cxEventLabels:
-            test: test
-          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
-        - cxEventType: test_type
-          companyId: 1
-          cxEventKey: test
-          cxEventMetadata:
-            test: test
-          cxEventPayload:
-            test: test
-          cxEventPayloadType: test_payload_type
-          cxEventDedupKey: test_dedup_key
-          cxEventLabels:
-            test: test
-          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about events
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
@@ -417,38 +378,11 @@ components:
       type: object
     CxEventSingleOrMultiple:
       oneOf:
-      - $ref: "#/components/schemas/CxEventSingleOrMultipleMultipleEvents"
       - $ref: "#/components/schemas/CxEventSingleOrMultipleSingleEvent"
+      - $ref: "#/components/schemas/CxEventSingleOrMultipleMultipleEvents"
     CxEventSingleOrMultipleMultipleEvents:
       additionalProperties: false
       description: This data structure represents a single or multiple events
-      example:
-        multipleEvents:
-          events:
-          - cxEventType: test_type
-            companyId: 1
-            cxEventKey: test
-            cxEventMetadata:
-              test: test
-            cxEventPayload:
-              test: test
-            cxEventPayloadType: test_payload_type
-            cxEventDedupKey: test_dedup_key
-            cxEventLabels:
-              test: test
-            cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
-          - cxEventType: test_type
-            companyId: 1
-            cxEventKey: test
-            cxEventMetadata:
-              test: test
-            cxEventPayload:
-              test: test
-            cxEventPayloadType: test_payload_type
-            cxEventDedupKey: test_dedup_key
-            cxEventLabels:
-              test: test
-            cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
       properties:
@@ -461,6 +395,20 @@ components:
     CxEventSingleOrMultipleSingleEvent:
       additionalProperties: false
       description: This data structure represents a single or multiple events
+      example:
+        singleEvent:
+          cxEventType: test_type
+          companyId: 1
+          cxEventKey: test
+          cxEventMetadata:
+            test: test
+          cxEventPayload:
+            test: test
+          cxEventPayloadType: test_payload_type
+          cxEventDedupKey: test_dedup_key
+          cxEventLabels:
+            test: test
+          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
       properties:
@@ -545,32 +493,19 @@ components:
           totalSize: 10
           nextPageToken: test
         event:
-          multipleEvents:
-            events:
-            - cxEventType: test_type
-              companyId: 1
-              cxEventKey: test
-              cxEventMetadata:
-                test: test
-              cxEventPayload:
-                test: test
-              cxEventPayloadType: test_payload_type
-              cxEventDedupKey: test_dedup_key
-              cxEventLabels:
-                test: test
-              cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
-            - cxEventType: test_type
-              companyId: 1
-              cxEventKey: test
-              cxEventMetadata:
-                test: test
-              cxEventPayload:
-                test: test
-              cxEventPayloadType: test_payload_type
-              cxEventDedupKey: test_dedup_key
-              cxEventLabels:
-                test: test
-              cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+          singleEvent:
+            cxEventType: test_type
+            companyId: 1
+            cxEventKey: test
+            cxEventMetadata:
+              test: test
+            cxEventPayload:
+              test: test
+            cxEventPayloadType: test_payload_type
+            cxEventDedupKey: test_dedup_key
+            cxEventLabels:
+              test: test
+            cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         event:
           $ref: "#/components/schemas/CxEventSingleOrMultiple"

@@ -143,11 +143,11 @@ func (a *PresetsServiceAPIService) PresetsServiceBatchGetPresetsExecute(r ApiPre
 type ApiPresetsServiceCreateCustomPresetRequest struct {
 	ctx context.Context
 	ApiService *PresetsServiceAPIService
-	preset1 *Preset1
+	createCustomPresetRequest *CreateCustomPresetRequest
 }
 
-func (r ApiPresetsServiceCreateCustomPresetRequest) Preset1(preset1 Preset1) ApiPresetsServiceCreateCustomPresetRequest {
-	r.preset1 = &preset1
+func (r ApiPresetsServiceCreateCustomPresetRequest) CreateCustomPresetRequest(createCustomPresetRequest CreateCustomPresetRequest) ApiPresetsServiceCreateCustomPresetRequest {
+	r.createCustomPresetRequest = &createCustomPresetRequest
 	return r
 }
 
@@ -209,7 +209,7 @@ func (a *PresetsServiceAPIService) PresetsServiceCreateCustomPresetExecute(r Api
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.preset1
+	localVarPostBody = r.createCustomPresetRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -807,11 +807,11 @@ func (a *PresetsServiceAPIService) PresetsServiceListPresetSummariesExecute(r Ap
 type ApiPresetsServiceReplaceCustomPresetRequest struct {
 	ctx context.Context
 	ApiService *PresetsServiceAPIService
-	preset1 *Preset1
+	replaceCustomPresetRequest *ReplaceCustomPresetRequest
 }
 
-func (r ApiPresetsServiceReplaceCustomPresetRequest) Preset1(preset1 Preset1) ApiPresetsServiceReplaceCustomPresetRequest {
-	r.preset1 = &preset1
+func (r ApiPresetsServiceReplaceCustomPresetRequest) ReplaceCustomPresetRequest(replaceCustomPresetRequest ReplaceCustomPresetRequest) ApiPresetsServiceReplaceCustomPresetRequest {
+	r.replaceCustomPresetRequest = &replaceCustomPresetRequest
 	return r
 }
 
@@ -873,7 +873,7 @@ func (a *PresetsServiceAPIService) PresetsServiceReplaceCustomPresetExecute(r Ap
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.preset1
+	localVarPostBody = r.replaceCustomPresetRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

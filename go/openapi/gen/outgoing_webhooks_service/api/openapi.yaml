@@ -10,21 +10,13 @@ paths:
       description: No description available
       externalDocs:
         url: ""
-      operationId: OutgoingWebhooksService_ListOutgoingWebhooks
-      parameters:
-      - explode: true
-        in: query
-        name: type
-        required: false
-        schema:
-          $ref: "#/components/schemas/WebhookType"
-        style: form
+      operationId: OutgoingWebhooksService_ListAllOutgoingWebhooks
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListOutgoingWebhooksResponse"
+                $ref: "#/components/schemas/ListAllOutgoingWebhooksResponse"
           description: ""
         "400":
           content:
@@ -38,7 +30,7 @@ paths:
           content:
             application/json: {}
           description: Internal server error
-      summary: List outgoing webhooks
+      summary: List all outgoing webhooks
       tags:
       - Outgoing webhooks service
       x-coralogixPermissions:
@@ -111,36 +103,6 @@ paths:
       - Outgoing webhooks service
       x-coralogixPermissions:
       - outbound-webhooks:UpdateConfig
-  /integrations/webhooks/v1/all:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: OutgoingWebhooksService_ListAllOutgoingWebhooks
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListAllOutgoingWebhooksResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: List all outgoing webhooks
-      tags:
-      - Outgoing webhooks service
-      x-coralogixPermissions:
-      - outbound-webhooks:ReadConfig
   /integrations/webhooks/v1/summary:
     get:
       description: No description available
@@ -385,6 +347,44 @@ paths:
       - Outgoing webhooks service
       x-coralogixPermissions:
       - outbound-webhooks:ReadConfig
+  /integrations/webhooks/v1:listByType:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_ListOutgoingWebhooks
+      parameters:
+      - explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          $ref: "#/components/schemas/WebhookType"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOutgoingWebhooksResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List outgoing webhooks
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadConfig
 components:
   schemas:
     Attachment:
@@ -504,6 +504,10 @@ components:
       - DATA_USAGE
       type: string
     EmailGroupConfig:
+      example:
+        emailAddresses:
+        - "[\"example@coralogix.com\"]"
+        - "[\"example@coralogix.com\"]"
       externalDocs:
         url: ""
       properties:
@@ -604,11 +608,13 @@ components:
       example:
         webhook:
           createdAt: 2000-01-23T04:56:07.000+00:00
+          emailGroup:
+            emailAddresses:
+            - "[\"example@coralogix.com\"]"
+            - "[\"example@coralogix.com\"]"
           name: my_webhook
           externalId: 123456
           id: webhook_id
-          pagerDuty:
-            serviceKey: pager_duty_service_key
           type: UNKNOWN
           url: slack.webhook.com
           updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -833,18 +839,18 @@ components:
       type: object
     OutgoingWebhook:
       oneOf:
-      - $ref: "#/components/schemas/OutgoingWebhookPagerDuty"
+      - $ref: "#/components/schemas/OutgoingWebhookEmailGroup"
       - $ref: "#/components/schemas/OutgoingWebhookMicrosoftTeams"
+      - $ref: "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
+      - $ref: "#/components/schemas/OutgoingWebhookSendLog"
       - $ref: "#/components/schemas/OutgoingWebhookJira"
       - $ref: "#/components/schemas/OutgoingWebhookOpsgenie"
-      - $ref: "#/components/schemas/OutgoingWebhookSendLog"
-      - $ref: "#/components/schemas/OutgoingWebhookEmailGroup"
       - $ref: "#/components/schemas/OutgoingWebhookDemisto"
       - $ref: "#/components/schemas/OutgoingWebhookAwsEventBridge"
       - $ref: "#/components/schemas/OutgoingWebhookIbmEventNotifications"
-      - $ref: "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
       - $ref: "#/components/schemas/OutgoingWebhookGenericWebhook"
       - $ref: "#/components/schemas/OutgoingWebhookSlack"
+      - $ref: "#/components/schemas/OutgoingWebhookPagerDuty"
     OutgoingWebhookAwsEventBridge:
       additionalProperties: false
       externalDocs:
@@ -936,6 +942,18 @@ components:
       type: object
     OutgoingWebhookEmailGroup:
       additionalProperties: false
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        emailGroup:
+          emailAddresses:
+          - "[\"example@coralogix.com\"]"
+          - "[\"example@coralogix.com\"]"
+        name: my_webhook
+        externalId: 123456
+        id: webhook_id
+        type: UNKNOWN
+        url: slack.webhook.com
+        updatedAt: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
       properties:
@@ -1086,17 +1104,17 @@ components:
     OutgoingWebhookInputData:
       oneOf:
       - $ref: "#/components/schemas/OutgoingWebhookInputDataSlack"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataJira"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataDemisto"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataGenericWebhook"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataSendLog"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataJira"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataOpsgenie"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataDemisto"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
     OutgoingWebhookInputDataAwsEventBridge:
       additionalProperties: false
       externalDocs:
@@ -1513,16 +1531,6 @@ components:
       type: object
     OutgoingWebhookPagerDuty:
       additionalProperties: false
-      example:
-        createdAt: 2000-01-23T04:56:07.000+00:00
-        name: my_webhook
-        externalId: 123456
-        id: webhook_id
-        pagerDuty:
-          serviceKey: pager_duty_service_key
-        type: UNKNOWN
-        url: slack.webhook.com
-        updatedAt: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
       properties:
@@ -1690,8 +1698,6 @@ components:
       title: Outgoing webhook type
       type: object
     PagerDutyConfig:
-      example:
-        serviceKey: pager_duty_service_key
       externalDocs:
         url: ""
       properties:

@@ -42,7 +42,7 @@ func TestHttpsConnector(t *testing.T) {
 
 	created, httpResp, err := client.
 		ConnectorsServiceCreateConnector(context.Background()).
-		Connector1(*connector).
+		CreateConnectorRequest(*connector).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 
@@ -69,7 +69,7 @@ func TestSlackConnector(t *testing.T) {
 
 	client := cxsdk.NewConnectorsClient(cpc)
 
-	connector := connectors.Connector1{
+	connector := connectors.Connector{
 		Name:        "TestSlackConnector",
 		Type:        "SLACK",
 		Description: connectors.PtrString("This is the slack connector to use for Notification Center testing."),
@@ -93,9 +93,13 @@ func TestSlackConnector(t *testing.T) {
 		},
 	}
 
+	createConnectorRequest := connectors.CreateConnectorRequest{
+		Connector: &connector,
+	}
+
 	created, httpResp, err := client.
 		ConnectorsServiceCreateConnector(context.Background()).
-		Connector1(connector).
+		CreateConnectorRequest(createConnectorRequest).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 
@@ -122,7 +126,7 @@ func TestPagerdutyConnector(t *testing.T) {
 
 	client := cxsdk.NewConnectorsClient(cpc)
 
-	connector := connectors.Connector1{
+	connector := connectors.Connector{
 		Name:        "TestPagerdutyConnector",
 		Type:        "PAGERDUTY",
 		Description: connectors.PtrString("This is the PagerDuty connector to use for Notification Center testing."),
@@ -144,9 +148,13 @@ func TestPagerdutyConnector(t *testing.T) {
 		},
 	}
 
+	createConnectorRequest := connectors.CreateConnectorRequest{
+		Connector: &connector,
+	}
+
 	created, httpResp, err := client.
 		ConnectorsServiceCreateConnector(context.Background()).
-		Connector1(connector).
+		CreateConnectorRequest(createConnectorRequest).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 
@@ -175,11 +183,11 @@ func TestHttpsPreset(t *testing.T) {
 
 	name := fmt.Sprintf("TestGoHttpsPreset-%v", uuid.NewString())
 
-	preset := getHttpsPreset(name)
+	createPresetRequest := getHttpsPreset(name)
 
 	created, httpResp, err := client.
 		PresetsServiceCreateCustomPreset(context.Background()).
-		Preset1(*preset).
+		CreateCustomPresetRequest(*createPresetRequest).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 
@@ -222,7 +230,7 @@ func TestSlackPreset(t *testing.T) {
 
 	name := fmt.Sprintf("TestGoSlackPreset-%v", uuid.NewString())
 
-	preset := presets.Preset1{
+	preset := presets.Preset{
 		Name:          name,
 		Description:   presets.PtrString("This is the preset to use for Notification Center testing."),
 		PresetType:    presets.PRESETTYPE_CUSTOM.Ptr(),
@@ -254,9 +262,13 @@ func TestSlackPreset(t *testing.T) {
 		},
 	}
 
+	createPresetRequest := presets.CreateCustomPresetRequest{
+		Preset: &preset,
+	}
+
 	created, httpResp, err := client.
 		PresetsServiceCreateCustomPreset(context.Background()).
-		Preset1(preset).
+		CreateCustomPresetRequest(createPresetRequest).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 
@@ -299,7 +311,7 @@ func TestPagerdutyPreset(t *testing.T) {
 
 	name := fmt.Sprintf("TestPagerDutyPreset-%v", uuid.NewString())
 
-	preset := presets.Preset1{
+	preset := presets.Preset{
 		Name:          name,
 		Description:   presets.PtrString("This is the preset to use for Notification Center testing."),
 		PresetType:    presets.PRESETTYPE_CUSTOM.Ptr(),
@@ -327,9 +339,13 @@ func TestPagerdutyPreset(t *testing.T) {
 		},
 	}
 
+	createPresetRequest := presets.CreateCustomPresetRequest{
+		Preset: &preset,
+	}
+
 	created, httpResp, err := client.
 		PresetsServiceCreateCustomPreset(context.Background()).
-		Preset1(preset).
+		CreateCustomPresetRequest(createPresetRequest).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 
@@ -379,19 +395,19 @@ func TestGlobalRouter(t *testing.T) {
 	//assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 
 	routerId := "router_default"
-	connector := getHttpsConnector(fmt.Sprintf("TestConnector-%v", uuid.NewString()))
-	preset := getHttpsPreset(fmt.Sprintf("TestGoHttpsPreset-%v", uuid.NewString()))
+	createConnectorRequest := getHttpsConnector(fmt.Sprintf("TestConnector-%v", uuid.NewString()))
+	createPresetRequest := getHttpsPreset(fmt.Sprintf("TestGoHttpsPreset-%v", uuid.NewString()))
 
 	createdConnector, httpResp, err := connectorsClient.
 		ConnectorsServiceCreateConnector(context.Background()).
-		Connector1(*connector).
+		CreateConnectorRequest(*createConnectorRequest).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 	connectorId := createdConnector.Connector.Id
 
 	createdPreset, httpResp, err := presetsClient.
 		PresetsServiceCreateCustomPreset(context.Background()).
-		Preset1(*preset).
+		CreateCustomPresetRequest(*createPresetRequest).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 	presetId := createdPreset.Preset.Id
@@ -414,9 +430,12 @@ func TestGlobalRouter(t *testing.T) {
 			},
 		},
 	}
+	replaceRouterRequest := globalrouters.ReplaceGlobalRouterRequest{
+		Router: &router,
+	}
 	replacedRouter, httpResp, err := routersClient.
 		GlobalRoutersServiceReplaceGlobalRouter(context.Background()).
-		GlobalRouter(router).
+		ReplaceGlobalRouterRequest(replaceRouterRequest).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 
@@ -443,58 +462,63 @@ func TestGlobalRouter(t *testing.T) {
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
-func getHttpsConnector(name string) *connectors.Connector1 {
-	return &connectors.Connector1{
-		Name:        name,
-		Type:        connectors.CONNECTORTYPE_GENERIC_HTTPS,
-		Description: connectors.PtrString("This is the connector to use for Notification Center testing."),
-		ConnectorConfig: &connectors.ConnectorConfig{
-			Fields: []connectors.NotificationCenterConnectorConfigField{
-				{FieldName: connectors.PtrString("url"), Value: connectors.PtrString("https://httpbun.org/post")},
-				{FieldName: connectors.PtrString("method"), Value: connectors.PtrString("post")},
+func getHttpsConnector(name string) *connectors.CreateConnectorRequest {
+	return &connectors.CreateConnectorRequest{
+		Connector: &connectors.Connector{
+			Name:        name,
+			Type:        connectors.CONNECTORTYPE_GENERIC_HTTPS,
+			Description: connectors.PtrString("This is the connector to use for Notification Center testing."),
+			ConnectorConfig: &connectors.ConnectorConfig{
+				Fields: []connectors.NotificationCenterConnectorConfigField{
+					{FieldName: connectors.PtrString("url"), Value: connectors.PtrString("https://httpbun.org/post")},
+					{FieldName: connectors.PtrString("method"), Value: connectors.PtrString("post")},
+				},
 			},
-		},
-		ConfigOverrides: []connectors.EntityTypeConfigOverrides{
-			{
-				EntityType: connectors.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
-				Fields: []connectors.TemplatedConnectorConfigField{
-					{
-						FieldName: connectors.PtrString("additionalBodyFields"),
-						Template:  connectors.PtrString("{\"priority\": \"{{alertDef.priority}}\"}"),
+			ConfigOverrides: []connectors.EntityTypeConfigOverrides{
+				{
+					EntityType: connectors.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
+					Fields: []connectors.TemplatedConnectorConfigField{
+						{
+							FieldName: connectors.PtrString("additionalBodyFields"),
+							Template:  connectors.PtrString("{\"priority\": \"{{alertDef.priority}}\"}"),
+						},
 					},
 				},
 			},
 		},
 	}
+
 }
 
-func getHttpsPreset(name string) *presets.Preset1 {
-	return &presets.Preset1{
-		Name:          name,
-		Description:   presets.PtrString("This is the preset to use for Notification Center testing."),
-		PresetType:    presets.PRESETTYPE_CUSTOM.Ptr(),
-		EntityType:    "ALERTS",
-		ParentId:      presets.PtrString("preset_system_generic_https_alerts_empty"),
-		ConnectorType: presets.CONNECTORTYPE_GENERIC_HTTPS.Ptr(),
-		ConfigOverrides: []presets.ConfigOverrides{
-			{
-				PayloadType: presets.PtrString("generic_https_default"),
-				MessageConfig: &presets.MessageConfig{
-					Fields: []presets.NotificationCenterMessageConfigField{
-						{
-							FieldName: "headers",
-							Template:  "{}",
-						},
-						{
-							FieldName: "body",
-							Template:  "{ \"groupingKey\": \"{{alert.groupingKey}}\", \"status\": \"{{alert.status}}\", \"groups\": \"{{alert.groups}}\" }",
+func getHttpsPreset(name string) *presets.CreateCustomPresetRequest {
+	return &presets.CreateCustomPresetRequest{
+		Preset: &presets.Preset{
+			Name:          name,
+			Description:   presets.PtrString("This is the preset to use for Notification Center testing."),
+			PresetType:    presets.PRESETTYPE_CUSTOM.Ptr(),
+			EntityType:    "ALERTS",
+			ParentId:      presets.PtrString("preset_system_generic_https_alerts_empty"),
+			ConnectorType: presets.CONNECTORTYPE_GENERIC_HTTPS.Ptr(),
+			ConfigOverrides: []presets.ConfigOverrides{
+				{
+					PayloadType: presets.PtrString("generic_https_default"),
+					MessageConfig: &presets.MessageConfig{
+						Fields: []presets.NotificationCenterMessageConfigField{
+							{
+								FieldName: "headers",
+								Template:  "{}",
+							},
+							{
+								FieldName: "body",
+								Template:  "{ \"groupingKey\": \"{{alert.groupingKey}}\", \"status\": \"{{alert.status}}\", \"groups\": \"{{alert.groups}}\" }",
+							},
 						},
 					},
-				},
-				ConditionType: &presets.NotificationCenterConditionType{
-					NotificationCenterConditionTypeMatchEntityTypeAndSubType: &presets.NotificationCenterConditionTypeMatchEntityTypeAndSubType{
-						MatchEntityTypeAndSubType: &presets.MatchEntityTypeAndSubTypeCondition{
-							EntitySubType: presets.PtrString("logsImmediateResolved"),
+					ConditionType: &presets.NotificationCenterConditionType{
+						NotificationCenterConditionTypeMatchEntityTypeAndSubType: &presets.NotificationCenterConditionTypeMatchEntityTypeAndSubType{
+							MatchEntityTypeAndSubType: &presets.MatchEntityTypeAndSubTypeCondition{
+								EntitySubType: presets.PtrString("logsImmediateResolved"),
+							},
 						},
 					},
 				},

@@ -478,7 +478,7 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListAllOutgoi
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/webhooks/v1/all"
+	localVarPath := localBasePath + "/integrations/webhooks/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -781,7 +781,7 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutgoingW
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/webhooks/v1"
+	localVarPath := localBasePath + "/integrations/webhooks/v1:listByType"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
