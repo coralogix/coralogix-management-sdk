@@ -10,7 +10,6 @@ message AtomicOverwriteLogPoliciesResponse {
     json_schema: {
       title: "Atomic Overwrite Log Policies Response"
       description: "This data structue is obtained when overwriting log policies atomically."
-      required: ["create_responses"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
@@ -25,7 +24,6 @@ message AtomicOverwriteSpanPoliciesResponse {
     json_schema: {
       title: "Atomic Overwrite Span Policies Response"
       description: "This data structue is obtained when overwriting span policies atomically."
-      required: ["create_responses"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
