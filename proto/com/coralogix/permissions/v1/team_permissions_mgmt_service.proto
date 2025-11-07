@@ -324,7 +324,6 @@ message GetTeamGroupRequest {
     json_schema: {
       title: "GetTeamGroupRequest"
       description: "Request to retrieve a specific team group by its unique identifier. Used to fetch details about group membership, roles, and scope settings."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -341,7 +340,6 @@ message GetTeamGroupResponse {
     json_schema: {
       title: "GetTeamGroupResponse"
       description: "Response containing the complete details of a requested team group, including its members, assigned roles, and scope configuration."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -357,7 +355,6 @@ message GetTeamGroupByNameRequest {
     json_schema: {
       title: "GetTeamGroupByNameRequest"
       description: "Request to retrieve a team group using its name within the authenticated team's context. Alternative to lookup by ID."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -372,7 +369,6 @@ message GetTeamGroupByNameResponse {
     json_schema: {
       title: "GetTeamGroupByNameResponse"
       description: "Response containing the complete details of a team group that matches the requested name, including its members, roles, and scope settings."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -388,7 +384,6 @@ message GetTeamGroupsRequest {
     json_schema: {
       title: "GetTeamGroupsRequest"
       description: "Request to retrieve all groups associated with a specific team. If team_id is not provided, fetches groups for the authenticated team."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -407,7 +402,6 @@ message GetTeamGroupsResponse {
     json_schema: {
       title: "GetTeamGroupsResponse"
       description: "Response containing a list of all team groups and their complete details, including members, roles, and scope configurations."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -424,7 +418,6 @@ message CreateTeamGroupRequest {
     json_schema: {
       title: "CreateTeamGroupRequest"
       description: "Request to create a new team group with specified name, description, roles, users, and optional scope filters. Can be associated with a specific team or the authenticated team."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -458,7 +451,6 @@ message CreateTeamGroupResponse {
     json_schema: {
       title: "CreateTeamGroupResponse"
       description: "Response containing the unique identifier of the newly created team group."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -475,7 +467,6 @@ message UpdateTeamGroupRequest {
     json_schema: {
       title: "UpdateTeamGroupRequest"
       description: "Request to modify an existing team group's details, including its name, description, roles, users, and scope settings."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -488,7 +479,6 @@ message UpdateTeamGroupRequest {
       json_schema: {
         title: "RoleUpdates"
         description: "This data structure represents the information associated with an API key."
-        required: []
       }
       external_docs: {
         url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -504,7 +494,6 @@ message UpdateTeamGroupRequest {
       json_schema: {
         title: "UserUpdates"
         description: "This data structure represents the information associated with an API key."
-        required: []
       }
       external_docs: {
         url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -540,7 +529,6 @@ message UpdateTeamGroupResponse {
     json_schema: {
       title: "UpdateTeamGroupResponse"
       description: "Response confirming the successful update of a team group's configuration."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -555,7 +543,6 @@ message DeleteTeamGroupRequest {
     json_schema: {
       title: "DeleteTeamGroupRequest"
       description: "Request to remove a team group and all its associated role and user assignments using its unique identifier."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -572,7 +559,6 @@ message DeleteTeamGroupResponse {
     json_schema: {
       title: "DeleteTeamGroupResponse"
       description: "Response confirming the successful deletion of a team group and its associated configurations."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -587,7 +573,6 @@ message GetGroupUsersRequest {
     json_schema: {
       title: "GetGroupUsersRequest"
       description: "Request to retrieve all users assigned to a specific team group identified by its unique ID."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -608,7 +593,6 @@ message GetGroupUsersResponse {
     json_schema: {
       title: "GetGroupUsersResponse"
       description: "Response containing the list of all users currently assigned to the requested team group."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -620,7 +604,6 @@ message GetGroupUsersResponse {
       json_schema: {
         title: "NoMorePages"
         description: "This data structure represents the information associated with an API key."
-        required: []
       }
       external_docs: {
         url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -633,7 +616,6 @@ message GetGroupUsersResponse {
       json_schema: {
         title: "NextPageToken"
         description: "This data structure represents the information associated with an API key."
-        required: []
       }
       external_docs: {
         url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -655,7 +637,6 @@ message AddUsersToTeamGroupRequest {
     json_schema: {
       title: "AddUsersToTeamGroupRequest"
       description: "Request to assign additional users to an existing team group, granting them the group's roles and scope permissions."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -674,7 +655,6 @@ message AddUsersToTeamGroupResponse {
     json_schema: {
       title: "AddUsersToTeamGroupResponse"
       description: "Response confirming the successful addition of users to the specified team group."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -692,7 +672,6 @@ message AddUsersToTeamGroupsRequest {
     json_schema: {
       title: "AddUsersToTeamGroupsRequest"
       description: "Bulk request to assign users to multiple team groups simultaneously, efficiently managing group memberships at scale."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -704,7 +683,6 @@ message AddUsersToTeamGroupsRequest {
       json_schema: {
         title: "AddUsersToTeamGroup"
         description: "This data structure represents the information associated with an API key."
-        required: []
       }
       external_docs: {
         url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -725,7 +703,6 @@ message AddUsersToTeamGroupsResponse {
     json_schema: {
       title: "AddUsersToTeamGroupsResponse"
       description: "Response confirming the successful bulk addition of users to multiple team groups."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -740,7 +717,6 @@ message RemoveUsersFromTeamGroupRequest {
     json_schema: {
       title: "RemoveUsersFromTeamGroupRequest"
       description: "Request to remove specified users from a team group, revoking their access to the group's roles and scope permissions."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -758,7 +734,6 @@ message RemoveUsersFromTeamGroupResponse {
     json_schema: {
       title: "RemoveUsersFromTeamGroupResponse"
       description: "Response confirming the successful removal of users from the specified team group."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -774,7 +749,6 @@ message RemoveUsersFromTeamGroupsRequest {
     json_schema: {
       title: "RemoveUsersFromTeamGroupsRequest"
       description: "Bulk request to remove users from multiple team groups simultaneously, efficiently managing group membership revocations at scale."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -787,7 +761,6 @@ message RemoveUsersFromTeamGroupsRequest {
       json_schema: {
         title: "RemoveUsersFromTeamGroup"
         description: "This data structure represents the information associated with an API key."
-        required: []
       }
       external_docs: {
         url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -809,7 +782,6 @@ message RemoveUsersFromTeamGroupsResponse {
     json_schema: {
       title: "RemoveUsersFromTeamGroupsResponse"
       description: "Response confirming the successful bulk removal of users from multiple team groups."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -824,7 +796,6 @@ message SetTeamGroupScopeRequest {
     json_schema: {
       title: "SetTeamGroupScopeRequest"
       description: "Request message for setting scope filters (subsystems and applications) for a team group to control access permissions"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -843,7 +814,6 @@ message SetTeamGroupScopeResponse {
     json_schema: {
       title: "SetTeamGroupScopeResponse"
       description: "Response message containing the ID of the newly created or updated scope for a team group"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -860,7 +830,6 @@ message GetTeamGroupScopeRequest {
     json_schema: {
       title: "GetTeamGroupScopeRequest"
       description: "Request message for retrieving the current scope configuration for a specific team group"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -877,7 +846,6 @@ message GetTeamGroupScopeResponse {
     json_schema: {
       title: "GetTeamGroupScopeResponse"
       description: "Response message containing the optional scope configuration (filters for subsystems and applications) for a team group"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"

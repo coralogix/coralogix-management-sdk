@@ -139,10 +139,6 @@ message KeyInfo {
       json_schema: {
         title: "Key Permissions"
         description: "This data structure represents the permissions on an API key."
-        required: [
-          "presets",
-          "permissions"
-        ]
       }
       external_docs: {
         url: "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
@@ -157,13 +153,6 @@ message KeyInfo {
     json_schema: {
       title: "Key Info"
       description: "This data structure represents the information associated with an API key."
-      required: [
-        "id",
-        "name",
-        "owner",
-        "active",
-        "key_permissions"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
@@ -185,10 +174,6 @@ message PresetInfo {
     json_schema: {
       title: "Preset Info"
       description: "This data structure represents a preset set of permissions on an API key."
-      required: [
-        "name",
-        "permissions"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
@@ -204,7 +189,6 @@ message UpdateApiKeyRequest {
     json_schema: {
       title: "Update Api Key Request"
       description: "This data structure is used to update an API key."
-      required: ["key_id"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
@@ -217,7 +201,6 @@ message UpdateApiKeyRequest {
       json_schema: {
         title: "Presets"
         description: "This data structure represents a set of permissions presets on an API key."
-        required: ["presets"]
       }
       external_docs: {
         url: "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
@@ -232,7 +215,6 @@ message UpdateApiKeyRequest {
       json_schema: {
         title: "Permissions"
         description: "This data structure represents a set of permissions on an API key."
-        required: ["permissions"]
       }
       external_docs: {
         url: "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
@@ -256,7 +238,6 @@ message DeleteApiKeyRequest {
     json_schema: {
       title: "Delete Api Key Request"
       description: "This data structure is used to delete an API key."
-      required: ["key_id"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
@@ -273,11 +254,6 @@ message CreateApiKeyRequest {
     json_schema: {
       title: "Create Api Key Request"
       description: "This data structure is used to create an API key."
-      required: [
-        "name",
-        "owner",
-        "key_permissions"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
@@ -290,10 +266,6 @@ message CreateApiKeyRequest {
       json_schema: {
         title: "Key Permissions"
         description: "This data structure allows to specify loose permissions and permission presets for an API key."
-        required: [
-          "presets",
-          "permissions"
-        ]
       }
       external_docs: {
         url: "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
@@ -315,11 +287,6 @@ message CreateApiKeyResponse {
     json_schema: {
       title: "Create Api Key Response"
       description: "This data structure is the response obtained when creating an API key."
-      required: [
-        "key_id",
-        "name",
-        "value"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
@@ -337,7 +304,6 @@ message GetApiKeyRequest {
     json_schema: {
       title: "Get Api Key Request"
       description: "This data structure is used to retrieve an API key."
-      required: ["key_id"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
@@ -353,7 +319,6 @@ message GetApiKeyResponse {
     json_schema: {
       title: "Get Api Key Response"
       description: "This data structure is the response obtained when retrieving an API key."
-      required: ["key_info"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
@@ -371,7 +336,6 @@ message GetSendDataApiKeysResponse {
     json_schema: {
       title: "Get Api Key Response"
       description: "This data structure is the response obtained when retrieving an API key."
-      required: ["key_info"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"

@@ -33,7 +33,6 @@ message TeamGroupId {
     json_schema: {
       title: "TeamGroupId"
       description: "This data structure represents the information associated with a team group."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
