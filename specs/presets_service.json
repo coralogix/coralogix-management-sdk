@@ -717,12 +717,7 @@
             "type": "string",
             "format": "date-time"
           }
-        },
-        "required": [
-          "entityType",
-          "configOverrides",
-          "name"
-        ]
+        }
       },
       "PresetSummary": {
         "externalDocs": {
@@ -859,11 +854,7 @@
             "example": "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}",
             "type": "string"
           }
-        },
-        "required": [
-          "fieldName",
-          "template"
-        ]
+        }
       },
       "v3.FilterOperator": {
         "type": "string",

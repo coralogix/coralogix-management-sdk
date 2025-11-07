@@ -12,8 +12,6 @@ package integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the GetIntegrationDetailsResponse type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &GetIntegrationDetailsResponse{}
 
 // GetIntegrationDetailsResponse struct for GetIntegrationDetailsResponse
 type GetIntegrationDetailsResponse struct {
-	IntegrationDetail IntegrationDetails `json:"integrationDetail"`
+	IntegrationDetail *IntegrationDetails `json:"integrationDetail,omitempty"`
 }
-
-type _GetIntegrationDetailsResponse GetIntegrationDetailsResponse
 
 // NewGetIntegrationDetailsResponse instantiates a new GetIntegrationDetailsResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIntegrationDetailsResponse(integrationDetail IntegrationDetails) *GetIntegrationDetailsResponse {
+func NewGetIntegrationDetailsResponse() *GetIntegrationDetailsResponse {
 	this := GetIntegrationDetailsResponse{}
-	this.IntegrationDetail = integrationDetail
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewGetIntegrationDetailsResponseWithDefaults() *GetIntegrationDetailsRespon
 	return &this
 }
 
-// GetIntegrationDetail returns the IntegrationDetail field value
+// GetIntegrationDetail returns the IntegrationDetail field value if set, zero value otherwise.
 func (o *GetIntegrationDetailsResponse) GetIntegrationDetail() IntegrationDetails {
-	if o == nil {
+	if o == nil || IsNil(o.IntegrationDetail) {
 		var ret IntegrationDetails
 		return ret
 	}
-
-	return o.IntegrationDetail
+	return *o.IntegrationDetail
 }
 
-// GetIntegrationDetailOk returns a tuple with the IntegrationDetail field value
+// GetIntegrationDetailOk returns a tuple with the IntegrationDetail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetIntegrationDetailsResponse) GetIntegrationDetailOk() (*IntegrationDetails, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.IntegrationDetail) {
 		return nil, false
 	}
-	return &o.IntegrationDetail, true
+	return o.IntegrationDetail, true
 }
 
-// SetIntegrationDetail sets field value
+// HasIntegrationDetail returns a boolean if a field has been set.
+func (o *GetIntegrationDetailsResponse) HasIntegrationDetail() bool {
+	if o != nil && !IsNil(o.IntegrationDetail) {
+		return true
+	}
+
+	return false
+}
+
+// SetIntegrationDetail gets a reference to the given IntegrationDetails and assigns it to the IntegrationDetail field.
 func (o *GetIntegrationDetailsResponse) SetIntegrationDetail(v IntegrationDetails) {
-	o.IntegrationDetail = v
+	o.IntegrationDetail = &v
 }
 
 func (o GetIntegrationDetailsResponse) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o GetIntegrationDetailsResponse) MarshalJSON() ([]byte, error) {
 
 func (o GetIntegrationDetailsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["integrationDetail"] = o.IntegrationDetail
+	if !IsNil(o.IntegrationDetail) {
+		toSerialize["integrationDetail"] = o.IntegrationDetail
+	}
 	return toSerialize, nil
-}
-
-func (o *GetIntegrationDetailsResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"integrationDetail",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varGetIntegrationDetailsResponse := _GetIntegrationDetailsResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetIntegrationDetailsResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = GetIntegrationDetailsResponse(varGetIntegrationDetailsResponse)
-
-	return err
 }
 
 type NullableGetIntegrationDetailsResponse struct {

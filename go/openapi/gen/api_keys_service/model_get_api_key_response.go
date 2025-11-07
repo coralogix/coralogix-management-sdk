@@ -12,8 +12,6 @@ package api_keys_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the GetApiKeyResponse type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &GetApiKeyResponse{}
 
 // GetApiKeyResponse This data structure is the response obtained when retrieving an API key.
 type GetApiKeyResponse struct {
-	KeyInfo KeyInfo `json:"keyInfo"`
+	KeyInfo *KeyInfo `json:"keyInfo,omitempty"`
 }
-
-type _GetApiKeyResponse GetApiKeyResponse
 
 // NewGetApiKeyResponse instantiates a new GetApiKeyResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetApiKeyResponse(keyInfo KeyInfo) *GetApiKeyResponse {
+func NewGetApiKeyResponse() *GetApiKeyResponse {
 	this := GetApiKeyResponse{}
-	this.KeyInfo = keyInfo
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewGetApiKeyResponseWithDefaults() *GetApiKeyResponse {
 	return &this
 }
 
-// GetKeyInfo returns the KeyInfo field value
+// GetKeyInfo returns the KeyInfo field value if set, zero value otherwise.
 func (o *GetApiKeyResponse) GetKeyInfo() KeyInfo {
-	if o == nil {
+	if o == nil || IsNil(o.KeyInfo) {
 		var ret KeyInfo
 		return ret
 	}
-
-	return o.KeyInfo
+	return *o.KeyInfo
 }
 
-// GetKeyInfoOk returns a tuple with the KeyInfo field value
+// GetKeyInfoOk returns a tuple with the KeyInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetApiKeyResponse) GetKeyInfoOk() (*KeyInfo, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.KeyInfo) {
 		return nil, false
 	}
-	return &o.KeyInfo, true
+	return o.KeyInfo, true
 }
 
-// SetKeyInfo sets field value
+// HasKeyInfo returns a boolean if a field has been set.
+func (o *GetApiKeyResponse) HasKeyInfo() bool {
+	if o != nil && !IsNil(o.KeyInfo) {
+		return true
+	}
+
+	return false
+}
+
+// SetKeyInfo gets a reference to the given KeyInfo and assigns it to the KeyInfo field.
 func (o *GetApiKeyResponse) SetKeyInfo(v KeyInfo) {
-	o.KeyInfo = v
+	o.KeyInfo = &v
 }
 
 func (o GetApiKeyResponse) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o GetApiKeyResponse) MarshalJSON() ([]byte, error) {
 
 func (o GetApiKeyResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["keyInfo"] = o.KeyInfo
+	if !IsNil(o.KeyInfo) {
+		toSerialize["keyInfo"] = o.KeyInfo
+	}
 	return toSerialize, nil
-}
-
-func (o *GetApiKeyResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"keyInfo",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varGetApiKeyResponse := _GetApiKeyResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetApiKeyResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = GetApiKeyResponse(varGetApiKeyResponse)
-
-	return err
 }
 
 type NullableGetApiKeyResponse struct {

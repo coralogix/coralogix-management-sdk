@@ -12,8 +12,6 @@ package extension_deployment_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the DeployedExtension type satisfies the MappedNullable interface at compile time
@@ -22,25 +20,19 @@ var _ MappedNullable = &DeployedExtension{}
 // DeployedExtension struct for DeployedExtension
 type DeployedExtension struct {
 	Applications []string `json:"applications,omitempty"`
-	Id string `json:"id"`
-	ItemIds []string `json:"itemIds"`
+	Id *string `json:"id,omitempty"`
+	ItemIds []string `json:"itemIds,omitempty"`
 	Subsystems []string `json:"subsystems,omitempty"`
-	Summary DeployedExtensionSummary `json:"summary"`
-	Version string `json:"version"`
+	Summary *DeployedExtensionSummary `json:"summary,omitempty"`
+	Version *string `json:"version,omitempty"`
 }
-
-type _DeployedExtension DeployedExtension
 
 // NewDeployedExtension instantiates a new DeployedExtension object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeployedExtension(id string, itemIds []string, summary DeployedExtensionSummary, version string) *DeployedExtension {
+func NewDeployedExtension() *DeployedExtension {
 	this := DeployedExtension{}
-	this.Id = id
-	this.ItemIds = itemIds
-	this.Summary = summary
-	this.Version = version
 	return &this
 }
 
@@ -84,50 +76,66 @@ func (o *DeployedExtension) SetApplications(v []string) {
 	o.Applications = v
 }
 
-// GetId returns the Id field value
+// GetId returns the Id field value if set, zero value otherwise.
 func (o *DeployedExtension) GetId() string {
-	if o == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
-
-	return o.Id
+	return *o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DeployedExtension) GetIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
-	return &o.Id, true
+	return o.Id, true
 }
 
-// SetId sets field value
+// HasId returns a boolean if a field has been set.
+func (o *DeployedExtension) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
 func (o *DeployedExtension) SetId(v string) {
-	o.Id = v
+	o.Id = &v
 }
 
-// GetItemIds returns the ItemIds field value
+// GetItemIds returns the ItemIds field value if set, zero value otherwise.
 func (o *DeployedExtension) GetItemIds() []string {
-	if o == nil {
+	if o == nil || IsNil(o.ItemIds) {
 		var ret []string
 		return ret
 	}
-
 	return o.ItemIds
 }
 
-// GetItemIdsOk returns a tuple with the ItemIds field value
+// GetItemIdsOk returns a tuple with the ItemIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DeployedExtension) GetItemIdsOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ItemIds) {
 		return nil, false
 	}
 	return o.ItemIds, true
 }
 
-// SetItemIds sets field value
+// HasItemIds returns a boolean if a field has been set.
+func (o *DeployedExtension) HasItemIds() bool {
+	if o != nil && !IsNil(o.ItemIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetItemIds gets a reference to the given []string and assigns it to the ItemIds field.
 func (o *DeployedExtension) SetItemIds(v []string) {
 	o.ItemIds = v
 }
@@ -164,52 +172,68 @@ func (o *DeployedExtension) SetSubsystems(v []string) {
 	o.Subsystems = v
 }
 
-// GetSummary returns the Summary field value
+// GetSummary returns the Summary field value if set, zero value otherwise.
 func (o *DeployedExtension) GetSummary() DeployedExtensionSummary {
-	if o == nil {
+	if o == nil || IsNil(o.Summary) {
 		var ret DeployedExtensionSummary
 		return ret
 	}
-
-	return o.Summary
+	return *o.Summary
 }
 
-// GetSummaryOk returns a tuple with the Summary field value
+// GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DeployedExtension) GetSummaryOk() (*DeployedExtensionSummary, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Summary) {
 		return nil, false
 	}
-	return &o.Summary, true
+	return o.Summary, true
 }
 
-// SetSummary sets field value
+// HasSummary returns a boolean if a field has been set.
+func (o *DeployedExtension) HasSummary() bool {
+	if o != nil && !IsNil(o.Summary) {
+		return true
+	}
+
+	return false
+}
+
+// SetSummary gets a reference to the given DeployedExtensionSummary and assigns it to the Summary field.
 func (o *DeployedExtension) SetSummary(v DeployedExtensionSummary) {
-	o.Summary = v
+	o.Summary = &v
 }
 
-// GetVersion returns the Version field value
+// GetVersion returns the Version field value if set, zero value otherwise.
 func (o *DeployedExtension) GetVersion() string {
-	if o == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
-
-	return o.Version
+	return *o.Version
 }
 
-// GetVersionOk returns a tuple with the Version field value
+// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DeployedExtension) GetVersionOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
-	return &o.Version, true
+	return o.Version, true
 }
 
-// SetVersion sets field value
+// HasVersion returns a boolean if a field has been set.
+func (o *DeployedExtension) HasVersion() bool {
+	if o != nil && !IsNil(o.Version) {
+		return true
+	}
+
+	return false
+}
+
+// SetVersion gets a reference to the given string and assigns it to the Version field.
 func (o *DeployedExtension) SetVersion(v string) {
-	o.Version = v
+	o.Version = &v
 }
 
 func (o DeployedExtension) MarshalJSON() ([]byte, error) {
@@ -225,54 +249,22 @@ func (o DeployedExtension) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Applications) {
 		toSerialize["applications"] = o.Applications
 	}
-	toSerialize["id"] = o.Id
-	toSerialize["itemIds"] = o.ItemIds
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.ItemIds) {
+		toSerialize["itemIds"] = o.ItemIds
+	}
 	if !IsNil(o.Subsystems) {
 		toSerialize["subsystems"] = o.Subsystems
 	}
-	toSerialize["summary"] = o.Summary
-	toSerialize["version"] = o.Version
+	if !IsNil(o.Summary) {
+		toSerialize["summary"] = o.Summary
+	}
+	if !IsNil(o.Version) {
+		toSerialize["version"] = o.Version
+	}
 	return toSerialize, nil
-}
-
-func (o *DeployedExtension) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"id",
-		"itemIds",
-		"summary",
-		"version",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varDeployedExtension := _DeployedExtension{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDeployedExtension)
-
-	if err != nil {
-		return err
-	}
-
-	*o = DeployedExtension(varDeployedExtension)
-
-	return err
 }
 
 type NullableDeployedExtension struct {

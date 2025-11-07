@@ -12,8 +12,6 @@ package contextual_data_integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the TestContextualDataIntegrationRequest type satisfies the MappedNullable interface at compile time
@@ -21,19 +19,16 @@ var _ MappedNullable = &TestContextualDataIntegrationRequest{}
 
 // TestContextualDataIntegrationRequest struct for TestContextualDataIntegrationRequest
 type TestContextualDataIntegrationRequest struct {
-	IntegrationData IntegrationMetadata `json:"integrationData"`
+	IntegrationData *IntegrationMetadata `json:"integrationData,omitempty"`
 	IntegrationId *string `json:"integrationId,omitempty"`
 }
-
-type _TestContextualDataIntegrationRequest TestContextualDataIntegrationRequest
 
 // NewTestContextualDataIntegrationRequest instantiates a new TestContextualDataIntegrationRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTestContextualDataIntegrationRequest(integrationData IntegrationMetadata) *TestContextualDataIntegrationRequest {
+func NewTestContextualDataIntegrationRequest() *TestContextualDataIntegrationRequest {
 	this := TestContextualDataIntegrationRequest{}
-	this.IntegrationData = integrationData
 	return &this
 }
 
@@ -45,28 +40,36 @@ func NewTestContextualDataIntegrationRequestWithDefaults() *TestContextualDataIn
 	return &this
 }
 
-// GetIntegrationData returns the IntegrationData field value
+// GetIntegrationData returns the IntegrationData field value if set, zero value otherwise.
 func (o *TestContextualDataIntegrationRequest) GetIntegrationData() IntegrationMetadata {
-	if o == nil {
+	if o == nil || IsNil(o.IntegrationData) {
 		var ret IntegrationMetadata
 		return ret
 	}
-
-	return o.IntegrationData
+	return *o.IntegrationData
 }
 
-// GetIntegrationDataOk returns a tuple with the IntegrationData field value
+// GetIntegrationDataOk returns a tuple with the IntegrationData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TestContextualDataIntegrationRequest) GetIntegrationDataOk() (*IntegrationMetadata, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.IntegrationData) {
 		return nil, false
 	}
-	return &o.IntegrationData, true
+	return o.IntegrationData, true
 }
 
-// SetIntegrationData sets field value
+// HasIntegrationData returns a boolean if a field has been set.
+func (o *TestContextualDataIntegrationRequest) HasIntegrationData() bool {
+	if o != nil && !IsNil(o.IntegrationData) {
+		return true
+	}
+
+	return false
+}
+
+// SetIntegrationData gets a reference to the given IntegrationMetadata and assigns it to the IntegrationData field.
 func (o *TestContextualDataIntegrationRequest) SetIntegrationData(v IntegrationMetadata) {
-	o.IntegrationData = v
+	o.IntegrationData = &v
 }
 
 // GetIntegrationId returns the IntegrationId field value if set, zero value otherwise.
@@ -111,48 +114,13 @@ func (o TestContextualDataIntegrationRequest) MarshalJSON() ([]byte, error) {
 
 func (o TestContextualDataIntegrationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["integrationData"] = o.IntegrationData
+	if !IsNil(o.IntegrationData) {
+		toSerialize["integrationData"] = o.IntegrationData
+	}
 	if !IsNil(o.IntegrationId) {
 		toSerialize["integrationId"] = o.IntegrationId
 	}
 	return toSerialize, nil
-}
-
-func (o *TestContextualDataIntegrationRequest) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"integrationData",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varTestContextualDataIntegrationRequest := _TestContextualDataIntegrationRequest{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTestContextualDataIntegrationRequest)
-
-	if err != nil {
-		return err
-	}
-
-	*o = TestContextualDataIntegrationRequest(varTestContextualDataIntegrationRequest)
-
-	return err
 }
 
 type NullableTestContextualDataIntegrationRequest struct {

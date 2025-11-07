@@ -13,8 +13,6 @@ package connectors_service
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Connector type satisfies the MappedNullable interface at compile time
@@ -28,22 +26,18 @@ type Connector struct {
 	Description *string `json:"description,omitempty"`
 	Diagnostics *Diagnostics `json:"diagnostics,omitempty"`
 	Id *string `json:"id,omitempty"`
-	Name string `json:"name"`
+	Name *string `json:"name,omitempty"`
 	TeamId *int64 `json:"teamId,omitempty"`
-	Type ConnectorType `json:"type"`
+	Type *ConnectorType `json:"type,omitempty"`
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 }
-
-type _Connector Connector
 
 // NewConnector instantiates a new Connector object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConnector(name string, type_ ConnectorType) *Connector {
+func NewConnector() *Connector {
 	this := Connector{}
-	this.Name = name
-	this.Type = type_
 	return &this
 }
 
@@ -247,28 +241,36 @@ func (o *Connector) SetId(v string) {
 	o.Id = &v
 }
 
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *Connector) GetName() string {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Connector) GetNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *Connector) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *Connector) SetName(v string) {
-	o.Name = v
+	o.Name = &v
 }
 
 // GetTeamId returns the TeamId field value if set, zero value otherwise.
@@ -303,28 +305,36 @@ func (o *Connector) SetTeamId(v int64) {
 	o.TeamId = &v
 }
 
-// GetType returns the Type field value
+// GetType returns the Type field value if set, zero value otherwise.
 func (o *Connector) GetType() ConnectorType {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret ConnectorType
 		return ret
 	}
-
-	return o.Type
+	return *o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Connector) GetTypeOk() (*ConnectorType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
-	return &o.Type, true
+	return o.Type, true
 }
 
-// SetType sets field value
+// HasType returns a boolean if a field has been set.
+func (o *Connector) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given ConnectorType and assigns it to the Type field.
 func (o *Connector) SetType(v ConnectorType) {
-	o.Type = v
+	o.Type = &v
 }
 
 // GetUpdateTime returns the UpdateTime field value if set, zero value otherwise.
@@ -387,53 +397,19 @@ func (o Connector) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	toSerialize["name"] = o.Name
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	if !IsNil(o.TeamId) {
 		toSerialize["teamId"] = o.TeamId
 	}
-	toSerialize["type"] = o.Type
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
 	if !IsNil(o.UpdateTime) {
 		toSerialize["updateTime"] = o.UpdateTime
 	}
 	return toSerialize, nil
-}
-
-func (o *Connector) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"name",
-		"type",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varConnector := _Connector{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConnector)
-
-	if err != nil {
-		return err
-	}
-
-	*o = Connector(varConnector)
-
-	return err
 }
 
 type NullableConnector struct {

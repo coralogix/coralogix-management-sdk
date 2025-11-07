@@ -12,8 +12,6 @@ package extension_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the GetAllExtensionsResponseRevision type satisfies the MappedNullable interface at compile time
@@ -25,20 +23,16 @@ type GetAllExtensionsResponseRevision struct {
 	Excerpt *string `json:"excerpt,omitempty"`
 	IntegrationDetails []IntegrationDetail `json:"integrationDetails,omitempty"`
 	Labels []string `json:"labels,omitempty"`
-	Summary RevisionSummary `json:"summary"`
-	Version string `json:"version"`
+	Summary *RevisionSummary `json:"summary,omitempty"`
+	Version *string `json:"version,omitempty"`
 }
-
-type _GetAllExtensionsResponseRevision GetAllExtensionsResponseRevision
 
 // NewGetAllExtensionsResponseRevision instantiates a new GetAllExtensionsResponseRevision object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetAllExtensionsResponseRevision(summary RevisionSummary, version string) *GetAllExtensionsResponseRevision {
+func NewGetAllExtensionsResponseRevision() *GetAllExtensionsResponseRevision {
 	this := GetAllExtensionsResponseRevision{}
-	this.Summary = summary
-	this.Version = version
 	return &this
 }
 
@@ -178,52 +172,68 @@ func (o *GetAllExtensionsResponseRevision) SetLabels(v []string) {
 	o.Labels = v
 }
 
-// GetSummary returns the Summary field value
+// GetSummary returns the Summary field value if set, zero value otherwise.
 func (o *GetAllExtensionsResponseRevision) GetSummary() RevisionSummary {
-	if o == nil {
+	if o == nil || IsNil(o.Summary) {
 		var ret RevisionSummary
 		return ret
 	}
-
-	return o.Summary
+	return *o.Summary
 }
 
-// GetSummaryOk returns a tuple with the Summary field value
+// GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetAllExtensionsResponseRevision) GetSummaryOk() (*RevisionSummary, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Summary) {
 		return nil, false
 	}
-	return &o.Summary, true
+	return o.Summary, true
 }
 
-// SetSummary sets field value
+// HasSummary returns a boolean if a field has been set.
+func (o *GetAllExtensionsResponseRevision) HasSummary() bool {
+	if o != nil && !IsNil(o.Summary) {
+		return true
+	}
+
+	return false
+}
+
+// SetSummary gets a reference to the given RevisionSummary and assigns it to the Summary field.
 func (o *GetAllExtensionsResponseRevision) SetSummary(v RevisionSummary) {
-	o.Summary = v
+	o.Summary = &v
 }
 
-// GetVersion returns the Version field value
+// GetVersion returns the Version field value if set, zero value otherwise.
 func (o *GetAllExtensionsResponseRevision) GetVersion() string {
-	if o == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
-
-	return o.Version
+	return *o.Version
 }
 
-// GetVersionOk returns a tuple with the Version field value
+// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetAllExtensionsResponseRevision) GetVersionOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
-	return &o.Version, true
+	return o.Version, true
 }
 
-// SetVersion sets field value
+// HasVersion returns a boolean if a field has been set.
+func (o *GetAllExtensionsResponseRevision) HasVersion() bool {
+	if o != nil && !IsNil(o.Version) {
+		return true
+	}
+
+	return false
+}
+
+// SetVersion gets a reference to the given string and assigns it to the Version field.
 func (o *GetAllExtensionsResponseRevision) SetVersion(v string) {
-	o.Version = v
+	o.Version = &v
 }
 
 func (o GetAllExtensionsResponseRevision) MarshalJSON() ([]byte, error) {
@@ -248,47 +258,13 @@ func (o GetAllExtensionsResponseRevision) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Labels) {
 		toSerialize["labels"] = o.Labels
 	}
-	toSerialize["summary"] = o.Summary
-	toSerialize["version"] = o.Version
+	if !IsNil(o.Summary) {
+		toSerialize["summary"] = o.Summary
+	}
+	if !IsNil(o.Version) {
+		toSerialize["version"] = o.Version
+	}
 	return toSerialize, nil
-}
-
-func (o *GetAllExtensionsResponseRevision) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"summary",
-		"version",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varGetAllExtensionsResponseRevision := _GetAllExtensionsResponseRevision{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetAllExtensionsResponseRevision)
-
-	if err != nil {
-		return err
-	}
-
-	*o = GetAllExtensionsResponseRevision(varGetAllExtensionsResponseRevision)
-
-	return err
 }
 
 type NullableGetAllExtensionsResponseRevision struct {

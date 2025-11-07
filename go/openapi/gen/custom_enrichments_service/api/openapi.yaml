@@ -235,20 +235,10 @@ components:
       type: object
     CustomEnrichmentData:
       oneOf:
-      - $ref: "#/components/schemas/CustomEnrichmentDataBinary"
       - $ref: "#/components/schemas/CustomEnrichmentDataTextual"
+      - $ref: "#/components/schemas/CustomEnrichmentDataBinary"
     CustomEnrichmentDataBinary:
       additionalProperties: false
-      example:
-        binary: binary
-        definition:
-          fileName: fileName
-          isQueryOnly: true
-          fileSize: 0
-          name: name
-          description: description
-          id: 6
-          version: 1
       properties:
         binary:
           format: byte
@@ -258,6 +248,16 @@ components:
       type: object
     CustomEnrichmentDataTextual:
       additionalProperties: false
+      example:
+        definition:
+          fileName: fileName
+          isQueryOnly: true
+          fileSize: 0
+          name: name
+          description: description
+          id: 6
+          version: 1
+        textual: textual
       properties:
         definition:
           $ref: "#/components/schemas/CustomEnrichment"
@@ -479,8 +479,7 @@ components:
     SearchCustomEnrichmentDataResponse:
       example:
         customEnrichmentsData:
-        - binary: binary
-          definition:
+        - definition:
             fileName: fileName
             isQueryOnly: true
             fileSize: 0
@@ -488,8 +487,8 @@ components:
             description: description
             id: 6
             version: 1
-        - binary: binary
-          definition:
+          textual: textual
+        - definition:
             fileName: fileName
             isQueryOnly: true
             fileSize: 0
@@ -497,6 +496,7 @@ components:
             description: description
             id: 6
             version: 1
+          textual: textual
       properties:
         customEnrichmentsData:
           items:

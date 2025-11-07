@@ -12,8 +12,6 @@ package api_keys_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the CreateApiKeyRequestKeyPermissions type satisfies the MappedNullable interface at compile time
@@ -21,20 +19,16 @@ var _ MappedNullable = &CreateApiKeyRequestKeyPermissions{}
 
 // CreateApiKeyRequestKeyPermissions This data structure allows to specify loose permissions and permission presets for an API key.
 type CreateApiKeyRequestKeyPermissions struct {
-	Permissions []string `json:"permissions"`
-	Presets []string `json:"presets"`
+	Permissions []string `json:"permissions,omitempty"`
+	Presets []string `json:"presets,omitempty"`
 }
-
-type _CreateApiKeyRequestKeyPermissions CreateApiKeyRequestKeyPermissions
 
 // NewCreateApiKeyRequestKeyPermissions instantiates a new CreateApiKeyRequestKeyPermissions object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApiKeyRequestKeyPermissions(permissions []string, presets []string) *CreateApiKeyRequestKeyPermissions {
+func NewCreateApiKeyRequestKeyPermissions() *CreateApiKeyRequestKeyPermissions {
 	this := CreateApiKeyRequestKeyPermissions{}
-	this.Permissions = permissions
-	this.Presets = presets
 	return &this
 }
 
@@ -46,50 +40,66 @@ func NewCreateApiKeyRequestKeyPermissionsWithDefaults() *CreateApiKeyRequestKeyP
 	return &this
 }
 
-// GetPermissions returns the Permissions field value
+// GetPermissions returns the Permissions field value if set, zero value otherwise.
 func (o *CreateApiKeyRequestKeyPermissions) GetPermissions() []string {
-	if o == nil {
+	if o == nil || IsNil(o.Permissions) {
 		var ret []string
 		return ret
 	}
-
 	return o.Permissions
 }
 
-// GetPermissionsOk returns a tuple with the Permissions field value
+// GetPermissionsOk returns a tuple with the Permissions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateApiKeyRequestKeyPermissions) GetPermissionsOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Permissions) {
 		return nil, false
 	}
 	return o.Permissions, true
 }
 
-// SetPermissions sets field value
+// HasPermissions returns a boolean if a field has been set.
+func (o *CreateApiKeyRequestKeyPermissions) HasPermissions() bool {
+	if o != nil && !IsNil(o.Permissions) {
+		return true
+	}
+
+	return false
+}
+
+// SetPermissions gets a reference to the given []string and assigns it to the Permissions field.
 func (o *CreateApiKeyRequestKeyPermissions) SetPermissions(v []string) {
 	o.Permissions = v
 }
 
-// GetPresets returns the Presets field value
+// GetPresets returns the Presets field value if set, zero value otherwise.
 func (o *CreateApiKeyRequestKeyPermissions) GetPresets() []string {
-	if o == nil {
+	if o == nil || IsNil(o.Presets) {
 		var ret []string
 		return ret
 	}
-
 	return o.Presets
 }
 
-// GetPresetsOk returns a tuple with the Presets field value
+// GetPresetsOk returns a tuple with the Presets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateApiKeyRequestKeyPermissions) GetPresetsOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Presets) {
 		return nil, false
 	}
 	return o.Presets, true
 }
 
-// SetPresets sets field value
+// HasPresets returns a boolean if a field has been set.
+func (o *CreateApiKeyRequestKeyPermissions) HasPresets() bool {
+	if o != nil && !IsNil(o.Presets) {
+		return true
+	}
+
+	return false
+}
+
+// SetPresets gets a reference to the given []string and assigns it to the Presets field.
 func (o *CreateApiKeyRequestKeyPermissions) SetPresets(v []string) {
 	o.Presets = v
 }
@@ -104,47 +114,13 @@ func (o CreateApiKeyRequestKeyPermissions) MarshalJSON() ([]byte, error) {
 
 func (o CreateApiKeyRequestKeyPermissions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["permissions"] = o.Permissions
-	toSerialize["presets"] = o.Presets
+	if !IsNil(o.Permissions) {
+		toSerialize["permissions"] = o.Permissions
+	}
+	if !IsNil(o.Presets) {
+		toSerialize["presets"] = o.Presets
+	}
 	return toSerialize, nil
-}
-
-func (o *CreateApiKeyRequestKeyPermissions) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"permissions",
-		"presets",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varCreateApiKeyRequestKeyPermissions := _CreateApiKeyRequestKeyPermissions{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApiKeyRequestKeyPermissions)
-
-	if err != nil {
-		return err
-	}
-
-	*o = CreateApiKeyRequestKeyPermissions(varCreateApiKeyRequestKeyPermissions)
-
-	return err
 }
 
 type NullableCreateApiKeyRequestKeyPermissions struct {

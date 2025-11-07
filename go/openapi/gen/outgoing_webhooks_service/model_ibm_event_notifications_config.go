@@ -12,8 +12,6 @@ package outgoing_webhooks_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the IbmEventNotificationsConfig type satisfies the MappedNullable interface at compile time
@@ -21,24 +19,19 @@ var _ MappedNullable = &IbmEventNotificationsConfig{}
 
 // IbmEventNotificationsConfig struct for IbmEventNotificationsConfig
 type IbmEventNotificationsConfig struct {
-	EndpointType EndpointType `json:"endpointType"`
-	EventNotificationsInstanceId string `json:"eventNotificationsInstanceId"`
-	RegionId string `json:"regionId"`
+	EndpointType *EndpointType `json:"endpointType,omitempty"`
+	EventNotificationsInstanceId *string `json:"eventNotificationsInstanceId,omitempty"`
+	RegionId *string `json:"regionId,omitempty"`
 	SourceId *string `json:"sourceId,omitempty"`
 	SourceName *string `json:"sourceName,omitempty"`
 }
-
-type _IbmEventNotificationsConfig IbmEventNotificationsConfig
 
 // NewIbmEventNotificationsConfig instantiates a new IbmEventNotificationsConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIbmEventNotificationsConfig(endpointType EndpointType, eventNotificationsInstanceId string, regionId string) *IbmEventNotificationsConfig {
+func NewIbmEventNotificationsConfig() *IbmEventNotificationsConfig {
 	this := IbmEventNotificationsConfig{}
-	this.EndpointType = endpointType
-	this.EventNotificationsInstanceId = eventNotificationsInstanceId
-	this.RegionId = regionId
 	return &this
 }
 
@@ -50,76 +43,100 @@ func NewIbmEventNotificationsConfigWithDefaults() *IbmEventNotificationsConfig {
 	return &this
 }
 
-// GetEndpointType returns the EndpointType field value
+// GetEndpointType returns the EndpointType field value if set, zero value otherwise.
 func (o *IbmEventNotificationsConfig) GetEndpointType() EndpointType {
-	if o == nil {
+	if o == nil || IsNil(o.EndpointType) {
 		var ret EndpointType
 		return ret
 	}
-
-	return o.EndpointType
+	return *o.EndpointType
 }
 
-// GetEndpointTypeOk returns a tuple with the EndpointType field value
+// GetEndpointTypeOk returns a tuple with the EndpointType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IbmEventNotificationsConfig) GetEndpointTypeOk() (*EndpointType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.EndpointType) {
 		return nil, false
 	}
-	return &o.EndpointType, true
+	return o.EndpointType, true
 }
 
-// SetEndpointType sets field value
+// HasEndpointType returns a boolean if a field has been set.
+func (o *IbmEventNotificationsConfig) HasEndpointType() bool {
+	if o != nil && !IsNil(o.EndpointType) {
+		return true
+	}
+
+	return false
+}
+
+// SetEndpointType gets a reference to the given EndpointType and assigns it to the EndpointType field.
 func (o *IbmEventNotificationsConfig) SetEndpointType(v EndpointType) {
-	o.EndpointType = v
+	o.EndpointType = &v
 }
 
-// GetEventNotificationsInstanceId returns the EventNotificationsInstanceId field value
+// GetEventNotificationsInstanceId returns the EventNotificationsInstanceId field value if set, zero value otherwise.
 func (o *IbmEventNotificationsConfig) GetEventNotificationsInstanceId() string {
-	if o == nil {
+	if o == nil || IsNil(o.EventNotificationsInstanceId) {
 		var ret string
 		return ret
 	}
-
-	return o.EventNotificationsInstanceId
+	return *o.EventNotificationsInstanceId
 }
 
-// GetEventNotificationsInstanceIdOk returns a tuple with the EventNotificationsInstanceId field value
+// GetEventNotificationsInstanceIdOk returns a tuple with the EventNotificationsInstanceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IbmEventNotificationsConfig) GetEventNotificationsInstanceIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.EventNotificationsInstanceId) {
 		return nil, false
 	}
-	return &o.EventNotificationsInstanceId, true
+	return o.EventNotificationsInstanceId, true
 }
 
-// SetEventNotificationsInstanceId sets field value
+// HasEventNotificationsInstanceId returns a boolean if a field has been set.
+func (o *IbmEventNotificationsConfig) HasEventNotificationsInstanceId() bool {
+	if o != nil && !IsNil(o.EventNotificationsInstanceId) {
+		return true
+	}
+
+	return false
+}
+
+// SetEventNotificationsInstanceId gets a reference to the given string and assigns it to the EventNotificationsInstanceId field.
 func (o *IbmEventNotificationsConfig) SetEventNotificationsInstanceId(v string) {
-	o.EventNotificationsInstanceId = v
+	o.EventNotificationsInstanceId = &v
 }
 
-// GetRegionId returns the RegionId field value
+// GetRegionId returns the RegionId field value if set, zero value otherwise.
 func (o *IbmEventNotificationsConfig) GetRegionId() string {
-	if o == nil {
+	if o == nil || IsNil(o.RegionId) {
 		var ret string
 		return ret
 	}
-
-	return o.RegionId
+	return *o.RegionId
 }
 
-// GetRegionIdOk returns a tuple with the RegionId field value
+// GetRegionIdOk returns a tuple with the RegionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IbmEventNotificationsConfig) GetRegionIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.RegionId) {
 		return nil, false
 	}
-	return &o.RegionId, true
+	return o.RegionId, true
 }
 
-// SetRegionId sets field value
+// HasRegionId returns a boolean if a field has been set.
+func (o *IbmEventNotificationsConfig) HasRegionId() bool {
+	if o != nil && !IsNil(o.RegionId) {
+		return true
+	}
+
+	return false
+}
+
+// SetRegionId gets a reference to the given string and assigns it to the RegionId field.
 func (o *IbmEventNotificationsConfig) SetRegionId(v string) {
-	o.RegionId = v
+	o.RegionId = &v
 }
 
 // GetSourceId returns the SourceId field value if set, zero value otherwise.
@@ -196,9 +213,15 @@ func (o IbmEventNotificationsConfig) MarshalJSON() ([]byte, error) {
 
 func (o IbmEventNotificationsConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["endpointType"] = o.EndpointType
-	toSerialize["eventNotificationsInstanceId"] = o.EventNotificationsInstanceId
-	toSerialize["regionId"] = o.RegionId
+	if !IsNil(o.EndpointType) {
+		toSerialize["endpointType"] = o.EndpointType
+	}
+	if !IsNil(o.EventNotificationsInstanceId) {
+		toSerialize["eventNotificationsInstanceId"] = o.EventNotificationsInstanceId
+	}
+	if !IsNil(o.RegionId) {
+		toSerialize["regionId"] = o.RegionId
+	}
 	if !IsNil(o.SourceId) {
 		toSerialize["sourceId"] = o.SourceId
 	}
@@ -206,45 +229,6 @@ func (o IbmEventNotificationsConfig) ToMap() (map[string]interface{}, error) {
 		toSerialize["sourceName"] = o.SourceName
 	}
 	return toSerialize, nil
-}
-
-func (o *IbmEventNotificationsConfig) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"endpointType",
-		"eventNotificationsInstanceId",
-		"regionId",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varIbmEventNotificationsConfig := _IbmEventNotificationsConfig{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varIbmEventNotificationsConfig)
-
-	if err != nil {
-		return err
-	}
-
-	*o = IbmEventNotificationsConfig(varIbmEventNotificationsConfig)
-
-	return err
 }
 
 type NullableIbmEventNotificationsConfig struct {

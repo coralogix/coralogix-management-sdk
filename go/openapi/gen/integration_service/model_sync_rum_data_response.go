@@ -13,8 +13,6 @@ package integration_service
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the SyncRumDataResponse type satisfies the MappedNullable interface at compile time
@@ -23,18 +21,15 @@ var _ MappedNullable = &SyncRumDataResponse{}
 // SyncRumDataResponse struct for SyncRumDataResponse
 type SyncRumDataResponse struct {
 	SyncExecuted *bool `json:"syncExecuted,omitempty"`
-	SyncedAt time.Time `json:"syncedAt"`
+	SyncedAt *time.Time `json:"syncedAt,omitempty"`
 }
-
-type _SyncRumDataResponse SyncRumDataResponse
 
 // NewSyncRumDataResponse instantiates a new SyncRumDataResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSyncRumDataResponse(syncedAt time.Time) *SyncRumDataResponse {
+func NewSyncRumDataResponse() *SyncRumDataResponse {
 	this := SyncRumDataResponse{}
-	this.SyncedAt = syncedAt
 	return &this
 }
 
@@ -78,28 +73,36 @@ func (o *SyncRumDataResponse) SetSyncExecuted(v bool) {
 	o.SyncExecuted = &v
 }
 
-// GetSyncedAt returns the SyncedAt field value
+// GetSyncedAt returns the SyncedAt field value if set, zero value otherwise.
 func (o *SyncRumDataResponse) GetSyncedAt() time.Time {
-	if o == nil {
+	if o == nil || IsNil(o.SyncedAt) {
 		var ret time.Time
 		return ret
 	}
-
-	return o.SyncedAt
+	return *o.SyncedAt
 }
 
-// GetSyncedAtOk returns a tuple with the SyncedAt field value
+// GetSyncedAtOk returns a tuple with the SyncedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SyncRumDataResponse) GetSyncedAtOk() (*time.Time, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SyncedAt) {
 		return nil, false
 	}
-	return &o.SyncedAt, true
+	return o.SyncedAt, true
 }
 
-// SetSyncedAt sets field value
+// HasSyncedAt returns a boolean if a field has been set.
+func (o *SyncRumDataResponse) HasSyncedAt() bool {
+	if o != nil && !IsNil(o.SyncedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetSyncedAt gets a reference to the given time.Time and assigns it to the SyncedAt field.
 func (o *SyncRumDataResponse) SetSyncedAt(v time.Time) {
-	o.SyncedAt = v
+	o.SyncedAt = &v
 }
 
 func (o SyncRumDataResponse) MarshalJSON() ([]byte, error) {
@@ -115,45 +118,10 @@ func (o SyncRumDataResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SyncExecuted) {
 		toSerialize["syncExecuted"] = o.SyncExecuted
 	}
-	toSerialize["syncedAt"] = o.SyncedAt
+	if !IsNil(o.SyncedAt) {
+		toSerialize["syncedAt"] = o.SyncedAt
+	}
 	return toSerialize, nil
-}
-
-func (o *SyncRumDataResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"syncedAt",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varSyncRumDataResponse := _SyncRumDataResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSyncRumDataResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = SyncRumDataResponse(varSyncRumDataResponse)
-
-	return err
 }
 
 type NullableSyncRumDataResponse struct {

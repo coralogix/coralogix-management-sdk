@@ -510,9 +510,6 @@ components:
         updateTime:
           format: date-time
           type: string
-      required:
-      - entityType
-      - name
       title: Global Router
       type: object
     ListGlobalRoutersResponse:
@@ -730,9 +727,6 @@ components:
           items:
             $ref: "#/components/schemas/RoutingTarget"
           type: array
-      required:
-      - condition
-      - targets
       title: Routing Rule
       type: object
     RoutingTarget:
@@ -754,8 +748,6 @@ components:
           type: object
         presetId:
           type: string
-      required:
-      - connectorId
       title: Routing Target
       type: object
     common.Group:

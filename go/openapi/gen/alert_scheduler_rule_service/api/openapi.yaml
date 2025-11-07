@@ -860,9 +860,9 @@ components:
       - $ref: "#/components/schemas/RecurringDynamic"
     Recurring.Dynamic:
       oneOf:
-      - $ref: "#/components/schemas/RecurringDynamicMonthly"
       - $ref: "#/components/schemas/RecurringDynamicDaily"
       - $ref: "#/components/schemas/RecurringDynamicWeekly"
+      - $ref: "#/components/schemas/RecurringDynamicMonthly"
     RecurringAlways:
       additionalProperties: false
       properties:

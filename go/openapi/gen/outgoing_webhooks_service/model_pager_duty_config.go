@@ -12,8 +12,6 @@ package outgoing_webhooks_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the PagerDutyConfig type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &PagerDutyConfig{}
 
 // PagerDutyConfig struct for PagerDutyConfig
 type PagerDutyConfig struct {
-	ServiceKey string `json:"serviceKey"`
+	ServiceKey *string `json:"serviceKey,omitempty"`
 }
-
-type _PagerDutyConfig PagerDutyConfig
 
 // NewPagerDutyConfig instantiates a new PagerDutyConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPagerDutyConfig(serviceKey string) *PagerDutyConfig {
+func NewPagerDutyConfig() *PagerDutyConfig {
 	this := PagerDutyConfig{}
-	this.ServiceKey = serviceKey
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewPagerDutyConfigWithDefaults() *PagerDutyConfig {
 	return &this
 }
 
-// GetServiceKey returns the ServiceKey field value
+// GetServiceKey returns the ServiceKey field value if set, zero value otherwise.
 func (o *PagerDutyConfig) GetServiceKey() string {
-	if o == nil {
+	if o == nil || IsNil(o.ServiceKey) {
 		var ret string
 		return ret
 	}
-
-	return o.ServiceKey
+	return *o.ServiceKey
 }
 
-// GetServiceKeyOk returns a tuple with the ServiceKey field value
+// GetServiceKeyOk returns a tuple with the ServiceKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PagerDutyConfig) GetServiceKeyOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ServiceKey) {
 		return nil, false
 	}
-	return &o.ServiceKey, true
+	return o.ServiceKey, true
 }
 
-// SetServiceKey sets field value
+// HasServiceKey returns a boolean if a field has been set.
+func (o *PagerDutyConfig) HasServiceKey() bool {
+	if o != nil && !IsNil(o.ServiceKey) {
+		return true
+	}
+
+	return false
+}
+
+// SetServiceKey gets a reference to the given string and assigns it to the ServiceKey field.
 func (o *PagerDutyConfig) SetServiceKey(v string) {
-	o.ServiceKey = v
+	o.ServiceKey = &v
 }
 
 func (o PagerDutyConfig) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o PagerDutyConfig) MarshalJSON() ([]byte, error) {
 
 func (o PagerDutyConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["serviceKey"] = o.ServiceKey
+	if !IsNil(o.ServiceKey) {
+		toSerialize["serviceKey"] = o.ServiceKey
+	}
 	return toSerialize, nil
-}
-
-func (o *PagerDutyConfig) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"serviceKey",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varPagerDutyConfig := _PagerDutyConfig{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPagerDutyConfig)
-
-	if err != nil {
-		return err
-	}
-
-	*o = PagerDutyConfig(varPagerDutyConfig)
-
-	return err
 }
 
 type NullablePagerDutyConfig struct {

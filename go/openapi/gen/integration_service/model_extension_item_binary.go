@@ -12,8 +12,6 @@ package integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ExtensionItemBinary type satisfies the MappedNullable interface at compile time
@@ -21,22 +19,17 @@ var _ MappedNullable = &ExtensionItemBinary{}
 
 // ExtensionItemBinary struct for ExtensionItemBinary
 type ExtensionItemBinary struct {
-	Data string `json:"data"`
-	FileName string `json:"fileName"`
-	Type ExtensionItemBinaryBinaryType `json:"type"`
+	Data *string `json:"data,omitempty"`
+	FileName *string `json:"fileName,omitempty"`
+	Type *ExtensionItemBinaryBinaryType `json:"type,omitempty"`
 }
-
-type _ExtensionItemBinary ExtensionItemBinary
 
 // NewExtensionItemBinary instantiates a new ExtensionItemBinary object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewExtensionItemBinary(data string, fileName string, type_ ExtensionItemBinaryBinaryType) *ExtensionItemBinary {
+func NewExtensionItemBinary() *ExtensionItemBinary {
 	this := ExtensionItemBinary{}
-	this.Data = data
-	this.FileName = fileName
-	this.Type = type_
 	return &this
 }
 
@@ -48,76 +41,100 @@ func NewExtensionItemBinaryWithDefaults() *ExtensionItemBinary {
 	return &this
 }
 
-// GetData returns the Data field value
+// GetData returns the Data field value if set, zero value otherwise.
 func (o *ExtensionItemBinary) GetData() string {
-	if o == nil {
+	if o == nil || IsNil(o.Data) {
 		var ret string
 		return ret
 	}
-
-	return o.Data
+	return *o.Data
 }
 
-// GetDataOk returns a tuple with the Data field value
+// GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExtensionItemBinary) GetDataOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
-	return &o.Data, true
+	return o.Data, true
 }
 
-// SetData sets field value
+// HasData returns a boolean if a field has been set.
+func (o *ExtensionItemBinary) HasData() bool {
+	if o != nil && !IsNil(o.Data) {
+		return true
+	}
+
+	return false
+}
+
+// SetData gets a reference to the given string and assigns it to the Data field.
 func (o *ExtensionItemBinary) SetData(v string) {
-	o.Data = v
+	o.Data = &v
 }
 
-// GetFileName returns the FileName field value
+// GetFileName returns the FileName field value if set, zero value otherwise.
 func (o *ExtensionItemBinary) GetFileName() string {
-	if o == nil {
+	if o == nil || IsNil(o.FileName) {
 		var ret string
 		return ret
 	}
-
-	return o.FileName
+	return *o.FileName
 }
 
-// GetFileNameOk returns a tuple with the FileName field value
+// GetFileNameOk returns a tuple with the FileName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExtensionItemBinary) GetFileNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.FileName) {
 		return nil, false
 	}
-	return &o.FileName, true
+	return o.FileName, true
 }
 
-// SetFileName sets field value
+// HasFileName returns a boolean if a field has been set.
+func (o *ExtensionItemBinary) HasFileName() bool {
+	if o != nil && !IsNil(o.FileName) {
+		return true
+	}
+
+	return false
+}
+
+// SetFileName gets a reference to the given string and assigns it to the FileName field.
 func (o *ExtensionItemBinary) SetFileName(v string) {
-	o.FileName = v
+	o.FileName = &v
 }
 
-// GetType returns the Type field value
+// GetType returns the Type field value if set, zero value otherwise.
 func (o *ExtensionItemBinary) GetType() ExtensionItemBinaryBinaryType {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret ExtensionItemBinaryBinaryType
 		return ret
 	}
-
-	return o.Type
+	return *o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExtensionItemBinary) GetTypeOk() (*ExtensionItemBinaryBinaryType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
-	return &o.Type, true
+	return o.Type, true
 }
 
-// SetType sets field value
+// HasType returns a boolean if a field has been set.
+func (o *ExtensionItemBinary) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given ExtensionItemBinaryBinaryType and assigns it to the Type field.
 func (o *ExtensionItemBinary) SetType(v ExtensionItemBinaryBinaryType) {
-	o.Type = v
+	o.Type = &v
 }
 
 func (o ExtensionItemBinary) MarshalJSON() ([]byte, error) {
@@ -130,49 +147,16 @@ func (o ExtensionItemBinary) MarshalJSON() ([]byte, error) {
 
 func (o ExtensionItemBinary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["data"] = o.Data
-	toSerialize["fileName"] = o.FileName
-	toSerialize["type"] = o.Type
+	if !IsNil(o.Data) {
+		toSerialize["data"] = o.Data
+	}
+	if !IsNil(o.FileName) {
+		toSerialize["fileName"] = o.FileName
+	}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
 	return toSerialize, nil
-}
-
-func (o *ExtensionItemBinary) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"data",
-		"fileName",
-		"type",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varExtensionItemBinary := _ExtensionItemBinary{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varExtensionItemBinary)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ExtensionItemBinary(varExtensionItemBinary)
-
-	return err
 }
 
 type NullableExtensionItemBinary struct {

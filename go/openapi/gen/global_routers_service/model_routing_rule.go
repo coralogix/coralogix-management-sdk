@@ -12,8 +12,6 @@ package global_routers_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the RoutingRule type satisfies the MappedNullable interface at compile time
@@ -21,23 +19,19 @@ var _ MappedNullable = &RoutingRule{}
 
 // RoutingRule Defines routing rule for notifications
 type RoutingRule struct {
-	Condition string `json:"condition"`
+	Condition *string `json:"condition,omitempty"`
 	CustomDetails *map[string]string `json:"customDetails,omitempty"`
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
 	Name *string `json:"name,omitempty"`
-	Targets []RoutingTarget `json:"targets"`
+	Targets []RoutingTarget `json:"targets,omitempty"`
 }
-
-type _RoutingRule RoutingRule
 
 // NewRoutingRule instantiates a new RoutingRule object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRoutingRule(condition string, targets []RoutingTarget) *RoutingRule {
+func NewRoutingRule() *RoutingRule {
 	this := RoutingRule{}
-	this.Condition = condition
-	this.Targets = targets
 	return &this
 }
 
@@ -49,28 +43,36 @@ func NewRoutingRuleWithDefaults() *RoutingRule {
 	return &this
 }
 
-// GetCondition returns the Condition field value
+// GetCondition returns the Condition field value if set, zero value otherwise.
 func (o *RoutingRule) GetCondition() string {
-	if o == nil {
+	if o == nil || IsNil(o.Condition) {
 		var ret string
 		return ret
 	}
-
-	return o.Condition
+	return *o.Condition
 }
 
-// GetConditionOk returns a tuple with the Condition field value
+// GetConditionOk returns a tuple with the Condition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoutingRule) GetConditionOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Condition) {
 		return nil, false
 	}
-	return &o.Condition, true
+	return o.Condition, true
 }
 
-// SetCondition sets field value
+// HasCondition returns a boolean if a field has been set.
+func (o *RoutingRule) HasCondition() bool {
+	if o != nil && !IsNil(o.Condition) {
+		return true
+	}
+
+	return false
+}
+
+// SetCondition gets a reference to the given string and assigns it to the Condition field.
 func (o *RoutingRule) SetCondition(v string) {
-	o.Condition = v
+	o.Condition = &v
 }
 
 // GetCustomDetails returns the CustomDetails field value if set, zero value otherwise.
@@ -169,26 +171,34 @@ func (o *RoutingRule) SetName(v string) {
 	o.Name = &v
 }
 
-// GetTargets returns the Targets field value
+// GetTargets returns the Targets field value if set, zero value otherwise.
 func (o *RoutingRule) GetTargets() []RoutingTarget {
-	if o == nil {
+	if o == nil || IsNil(o.Targets) {
 		var ret []RoutingTarget
 		return ret
 	}
-
 	return o.Targets
 }
 
-// GetTargetsOk returns a tuple with the Targets field value
+// GetTargetsOk returns a tuple with the Targets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoutingRule) GetTargetsOk() ([]RoutingTarget, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Targets) {
 		return nil, false
 	}
 	return o.Targets, true
 }
 
-// SetTargets sets field value
+// HasTargets returns a boolean if a field has been set.
+func (o *RoutingRule) HasTargets() bool {
+	if o != nil && !IsNil(o.Targets) {
+		return true
+	}
+
+	return false
+}
+
+// SetTargets gets a reference to the given []RoutingTarget and assigns it to the Targets field.
 func (o *RoutingRule) SetTargets(v []RoutingTarget) {
 	o.Targets = v
 }
@@ -203,7 +213,9 @@ func (o RoutingRule) MarshalJSON() ([]byte, error) {
 
 func (o RoutingRule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["condition"] = o.Condition
+	if !IsNil(o.Condition) {
+		toSerialize["condition"] = o.Condition
+	}
 	if !IsNil(o.CustomDetails) {
 		toSerialize["customDetails"] = o.CustomDetails
 	}
@@ -213,46 +225,10 @@ func (o RoutingRule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	toSerialize["targets"] = o.Targets
+	if !IsNil(o.Targets) {
+		toSerialize["targets"] = o.Targets
+	}
 	return toSerialize, nil
-}
-
-func (o *RoutingRule) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"condition",
-		"targets",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varRoutingRule := _RoutingRule{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRoutingRule)
-
-	if err != nil {
-		return err
-	}
-
-	*o = RoutingRule(varRoutingRule)
-
-	return err
 }
 
 type NullableRoutingRule struct {

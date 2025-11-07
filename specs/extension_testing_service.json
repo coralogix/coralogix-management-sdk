@@ -30,9 +30,6 @@
                     "$ref": "#/components/schemas/ExtensionData"
                   }
                 },
-                "required": [
-                  "extensionData"
-                ],
                 "additionalProperties": false
               }
             }
@@ -93,9 +90,6 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "id"
-                ],
                 "additionalProperties": false
               }
             }
@@ -158,9 +152,6 @@
                     "$ref": "#/components/schemas/ExtensionData"
                   }
                 },
-                "required": [
-                  "extensionData"
-                ],
                 "additionalProperties": false
               }
             }
@@ -217,11 +208,7 @@
           "version": {
             "type": "string"
           }
-        },
-        "required": [
-          "version",
-          "descriptionMd"
-        ]
+        }
       },
       "CleanupTestingRevisionResponse": {
         "externalDocs": {
@@ -273,10 +260,7 @@
               "type": "string"
             }
           }
-        },
-        "required": [
-          "reason"
-        ]
+        }
       },
       "ExtensionBinary": {
         "externalDocs": {
@@ -291,11 +275,7 @@
           "type": {
             "$ref": "#/components/schemas/ExtensionBinary.BinaryType"
           }
-        },
-        "required": [
-          "type",
-          "data"
-        ]
+        }
       },
       "ExtensionBinary.BinaryType": {
         "type": "string",
@@ -385,13 +365,7 @@
             "example": "v1.0.13",
             "type": "string"
           }
-        },
-        "required": [
-          "id",
-          "name",
-          "image",
-          "version"
-        ]
+        }
       },
       "ExtensionItemBinary": {
         "externalDocs": {
@@ -409,12 +383,7 @@
           "type": {
             "$ref": "#/components/schemas/ExtensionItemBinary.BinaryType"
           }
-        },
-        "required": [
-          "type",
-          "data",
-          "fileName"
-        ]
+        }
       },
       "ExtensionItemBinary.BinaryType": {
         "type": "string",
@@ -469,12 +438,7 @@
           "uniqueId": {
             "type": "string"
           }
-        },
-        "required": [
-          "name",
-          "targetDomain",
-          "data"
-        ]
+        }
       },
       "FieldGroup": {
         "type": "object",
@@ -583,11 +547,7 @@
           "name": {
             "type": "string"
           }
-        },
-        "required": [
-          "name",
-          "link"
-        ]
+        }
       },
       "MultipleValues": {
         "type": "object",

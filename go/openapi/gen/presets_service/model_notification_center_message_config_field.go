@@ -12,8 +12,6 @@ package presets_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the NotificationCenterMessageConfigField type satisfies the MappedNullable interface at compile time
@@ -21,20 +19,16 @@ var _ MappedNullable = &NotificationCenterMessageConfigField{}
 
 // NotificationCenterMessageConfigField Message config field provides a way to define a template that can be used to render the notification content
 type NotificationCenterMessageConfigField struct {
-	FieldName string `json:"fieldName"`
-	Template string `json:"template"`
+	FieldName *string `json:"fieldName,omitempty"`
+	Template *string `json:"template,omitempty"`
 }
-
-type _NotificationCenterMessageConfigField NotificationCenterMessageConfigField
 
 // NewNotificationCenterMessageConfigField instantiates a new NotificationCenterMessageConfigField object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNotificationCenterMessageConfigField(fieldName string, template string) *NotificationCenterMessageConfigField {
+func NewNotificationCenterMessageConfigField() *NotificationCenterMessageConfigField {
 	this := NotificationCenterMessageConfigField{}
-	this.FieldName = fieldName
-	this.Template = template
 	return &this
 }
 
@@ -46,52 +40,68 @@ func NewNotificationCenterMessageConfigFieldWithDefaults() *NotificationCenterMe
 	return &this
 }
 
-// GetFieldName returns the FieldName field value
+// GetFieldName returns the FieldName field value if set, zero value otherwise.
 func (o *NotificationCenterMessageConfigField) GetFieldName() string {
-	if o == nil {
+	if o == nil || IsNil(o.FieldName) {
 		var ret string
 		return ret
 	}
-
-	return o.FieldName
+	return *o.FieldName
 }
 
-// GetFieldNameOk returns a tuple with the FieldName field value
+// GetFieldNameOk returns a tuple with the FieldName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NotificationCenterMessageConfigField) GetFieldNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.FieldName) {
 		return nil, false
 	}
-	return &o.FieldName, true
+	return o.FieldName, true
 }
 
-// SetFieldName sets field value
+// HasFieldName returns a boolean if a field has been set.
+func (o *NotificationCenterMessageConfigField) HasFieldName() bool {
+	if o != nil && !IsNil(o.FieldName) {
+		return true
+	}
+
+	return false
+}
+
+// SetFieldName gets a reference to the given string and assigns it to the FieldName field.
 func (o *NotificationCenterMessageConfigField) SetFieldName(v string) {
-	o.FieldName = v
+	o.FieldName = &v
 }
 
-// GetTemplate returns the Template field value
+// GetTemplate returns the Template field value if set, zero value otherwise.
 func (o *NotificationCenterMessageConfigField) GetTemplate() string {
-	if o == nil {
+	if o == nil || IsNil(o.Template) {
 		var ret string
 		return ret
 	}
-
-	return o.Template
+	return *o.Template
 }
 
-// GetTemplateOk returns a tuple with the Template field value
+// GetTemplateOk returns a tuple with the Template field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NotificationCenterMessageConfigField) GetTemplateOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Template) {
 		return nil, false
 	}
-	return &o.Template, true
+	return o.Template, true
 }
 
-// SetTemplate sets field value
+// HasTemplate returns a boolean if a field has been set.
+func (o *NotificationCenterMessageConfigField) HasTemplate() bool {
+	if o != nil && !IsNil(o.Template) {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplate gets a reference to the given string and assigns it to the Template field.
 func (o *NotificationCenterMessageConfigField) SetTemplate(v string) {
-	o.Template = v
+	o.Template = &v
 }
 
 func (o NotificationCenterMessageConfigField) MarshalJSON() ([]byte, error) {
@@ -104,47 +114,13 @@ func (o NotificationCenterMessageConfigField) MarshalJSON() ([]byte, error) {
 
 func (o NotificationCenterMessageConfigField) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["fieldName"] = o.FieldName
-	toSerialize["template"] = o.Template
+	if !IsNil(o.FieldName) {
+		toSerialize["fieldName"] = o.FieldName
+	}
+	if !IsNil(o.Template) {
+		toSerialize["template"] = o.Template
+	}
 	return toSerialize, nil
-}
-
-func (o *NotificationCenterMessageConfigField) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"fieldName",
-		"template",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varNotificationCenterMessageConfigField := _NotificationCenterMessageConfigField{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varNotificationCenterMessageConfigField)
-
-	if err != nil {
-		return err
-	}
-
-	*o = NotificationCenterMessageConfigField(varNotificationCenterMessageConfigField)
-
-	return err
 }
 
 type NullableNotificationCenterMessageConfigField struct {

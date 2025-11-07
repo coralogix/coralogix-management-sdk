@@ -395,8 +395,6 @@ components:
           type: boolean
         type:
           $ref: "#/components/schemas/AttachmentType"
-      required:
-      - type
       title: Slack attachment configuration
       type: object
     AttachmentType:
@@ -424,12 +422,6 @@ components:
         source:
           example: source
           type: string
-      required:
-      - detail
-      - detailType
-      - eventBusArn
-      - roleName
-      - source
       title: AWS EventBridge configuration
       type: object
     ColorsByAggregation:
@@ -459,8 +451,6 @@ components:
         id:
           example: example_id
           type: string
-      required:
-      - id
       title: Create outgoing webhook response
       type: object
     DeleteOutgoingWebhookResponse:
@@ -478,9 +468,6 @@ components:
         uuid:
           example: d838cd7b-087b-40c6-bc33-80997020f5d0
           type: string
-      required:
-      - payload
-      - uuid
       title: Demisto configuration
       type: object
     Digest:
@@ -491,8 +478,6 @@ components:
           type: boolean
         type:
           $ref: "#/components/schemas/DigestType"
-      required:
-      - type
       title: Slack digest configuration
       type: object
     DigestType:
@@ -504,10 +489,6 @@ components:
       - DATA_USAGE
       type: string
     EmailGroupConfig:
-      example:
-        emailAddresses:
-        - "[\"example@coralogix.com\"]"
-        - "[\"example@coralogix.com\"]"
       externalDocs:
         url: ""
       properties:
@@ -582,6 +563,12 @@ components:
       title: Filters
       type: object
     GenericWebhookConfig:
+      example:
+        headers:
+          Content-Type: application/json
+        method: UNKNOWN
+        payload: "{\"key\":\"value\"}"
+        uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
       externalDocs:
         url: ""
       properties:
@@ -599,19 +586,18 @@ components:
         uuid:
           example: d838cd7b-087b-40c6-bc33-80997020f5d0
           type: string
-      required:
-      - method
-      - uuid
       title: Generic webhook configuration
       type: object
     GetOutgoingWebhookResponse:
       example:
         webhook:
           createdAt: 2000-01-23T04:56:07.000+00:00
-          emailGroup:
-            emailAddresses:
-            - "[\"example@coralogix.com\"]"
-            - "[\"example@coralogix.com\"]"
+          genericWebhook:
+            headers:
+              Content-Type: application/json
+            method: UNKNOWN
+            payload: "{\"key\":\"value\"}"
+            uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
           name: my_webhook
           externalId: 123456
           id: webhook_id
@@ -623,8 +609,6 @@ components:
       properties:
         webhook:
           $ref: "#/components/schemas/OutgoingWebhook"
-      required:
-      - webhook
       title: Get outgoing webhook response
       type: object
     GetOutgoingWebhookTypeDetailsResponse:
@@ -637,8 +621,6 @@ components:
       properties:
         details:
           $ref: "#/components/schemas/OutgoingWebhookDetails"
-      required:
-      - details
       title: Get outgoing webhook type details response
       type: object
     IbmEventNotificationsConfig:
@@ -655,10 +637,6 @@ components:
           type: string
         sourceName:
           type: string
-      required:
-      - endpointType
-      - eventNotificationsInstanceId
-      - regionId
       title: IBM event notification configuration
       type: object
     JiraConfig:
@@ -674,10 +652,6 @@ components:
         projectKey:
           example: jira_project_key
           type: string
-      required:
-      - apiToken
-      - email
-      - projectKey
       title: Jira configuration
       type: object
     ListAllOutgoingWebhooksResponse:
@@ -829,28 +803,22 @@ components:
         updatedAt:
           format: date-time
           type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
       title: Outbound webhook summary
       type: object
     OutgoingWebhook:
       oneOf:
-      - $ref: "#/components/schemas/OutgoingWebhookEmailGroup"
+      - $ref: "#/components/schemas/OutgoingWebhookGenericWebhook"
+      - $ref: "#/components/schemas/OutgoingWebhookPagerDuty"
       - $ref: "#/components/schemas/OutgoingWebhookMicrosoftTeams"
-      - $ref: "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
-      - $ref: "#/components/schemas/OutgoingWebhookSendLog"
-      - $ref: "#/components/schemas/OutgoingWebhookJira"
       - $ref: "#/components/schemas/OutgoingWebhookOpsgenie"
       - $ref: "#/components/schemas/OutgoingWebhookDemisto"
-      - $ref: "#/components/schemas/OutgoingWebhookAwsEventBridge"
       - $ref: "#/components/schemas/OutgoingWebhookIbmEventNotifications"
-      - $ref: "#/components/schemas/OutgoingWebhookGenericWebhook"
       - $ref: "#/components/schemas/OutgoingWebhookSlack"
-      - $ref: "#/components/schemas/OutgoingWebhookPagerDuty"
+      - $ref: "#/components/schemas/OutgoingWebhookSendLog"
+      - $ref: "#/components/schemas/OutgoingWebhookEmailGroup"
+      - $ref: "#/components/schemas/OutgoingWebhookJira"
+      - $ref: "#/components/schemas/OutgoingWebhookAwsEventBridge"
+      - $ref: "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
     OutgoingWebhookAwsEventBridge:
       additionalProperties: false
       externalDocs:
@@ -879,12 +847,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
       title: Outgoing webhook
       type: object
     OutgoingWebhookDemisto:
@@ -915,12 +877,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
       title: Outgoing webhook
       type: object
     OutgoingWebhookDetails:
@@ -935,25 +891,10 @@ components:
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
-      required:
-      - label
-      - type
       title: Outgoing webhook details
       type: object
     OutgoingWebhookEmailGroup:
       additionalProperties: false
-      example:
-        createdAt: 2000-01-23T04:56:07.000+00:00
-        emailGroup:
-          emailAddresses:
-          - "[\"example@coralogix.com\"]"
-          - "[\"example@coralogix.com\"]"
-        name: my_webhook
-        externalId: 123456
-        id: webhook_id
-        type: UNKNOWN
-        url: slack.webhook.com
-        updatedAt: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
       properties:
@@ -980,12 +921,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
       title: Outgoing webhook
       type: object
     OutgoingWebhookExtendedSummary:
@@ -1021,16 +956,24 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
       title: Outgoing webhook extended summary
       type: object
     OutgoingWebhookGenericWebhook:
       additionalProperties: false
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        genericWebhook:
+          headers:
+            Content-Type: application/json
+          method: UNKNOWN
+          payload: "{\"key\":\"value\"}"
+          uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
+        name: my_webhook
+        externalId: 123456
+        id: webhook_id
+        type: UNKNOWN
+        url: slack.webhook.com
+        updatedAt: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
       properties:
@@ -1057,12 +1000,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
       title: Outgoing webhook
       type: object
     OutgoingWebhookIbmEventNotifications:
@@ -1093,28 +1030,22 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
       title: Outgoing webhook
       type: object
     OutgoingWebhookInputData:
       oneOf:
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataSlack"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataJira"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataDemisto"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataGenericWebhook"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataSendLog"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataOpsgenie"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataDemisto"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataSlack"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
     OutgoingWebhookInputDataAwsEventBridge:
       additionalProperties: false
       externalDocs:
@@ -1130,10 +1061,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - config
-      - name
-      - type
       title: Outgoing webhook input data
       type: object
     OutgoingWebhookInputDataDemisto:
@@ -1151,10 +1078,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - config
-      - name
-      - type
       title: Outgoing webhook input data
       type: object
     OutgoingWebhookInputDataEmailGroup:
@@ -1172,10 +1095,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - config
-      - name
-      - type
       title: Outgoing webhook input data
       type: object
     OutgoingWebhookInputDataGenericWebhook:
@@ -1193,10 +1112,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - config
-      - name
-      - type
       title: Outgoing webhook input data
       type: object
     OutgoingWebhookInputDataIbmEventNotifications:
@@ -1214,10 +1129,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - config
-      - name
-      - type
       title: Outgoing webhook input data
       type: object
     OutgoingWebhookInputDataJira:
@@ -1235,10 +1146,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - config
-      - name
-      - type
       title: Outgoing webhook input data
       type: object
     OutgoingWebhookInputDataMicrosoftTeams:
@@ -1259,10 +1166,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - config
-      - name
-      - type
       title: Outgoing webhook input data
       type: object
     OutgoingWebhookInputDataMsTeamsWorkflow:
@@ -1283,10 +1186,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - config
-      - name
-      - type
       title: Outgoing webhook input data
       type: object
     OutgoingWebhookInputDataOpsgenie:
@@ -1307,10 +1206,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - config
-      - name
-      - type
       title: Outgoing webhook input data
       type: object
     OutgoingWebhookInputDataPagerDuty:
@@ -1328,10 +1223,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - config
-      - name
-      - type
       title: Outgoing webhook input data
       type: object
     OutgoingWebhookInputDataSendLog:
@@ -1349,10 +1240,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - config
-      - name
-      - type
       title: Outgoing webhook input data
       type: object
     OutgoingWebhookInputDataSlack:
@@ -1370,10 +1257,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - config
-      - name
-      - type
       title: Outgoing webhook input data
       type: object
     OutgoingWebhookJira:
@@ -1404,12 +1287,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
       title: Outgoing webhook
       type: object
     OutgoingWebhookMicrosoftTeams:
@@ -1443,12 +1320,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
       title: Outgoing webhook
       type: object
     OutgoingWebhookMsTeamsWorkflow:
@@ -1482,12 +1353,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
       title: Outgoing webhook
       type: object
     OutgoingWebhookOpsgenie:
@@ -1521,12 +1386,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
       title: Outgoing webhook
       type: object
     OutgoingWebhookPagerDuty:
@@ -1557,12 +1416,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
       title: Outgoing webhook
       type: object
     OutgoingWebhookSendLog:
@@ -1593,12 +1446,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
       title: Outgoing webhook
       type: object
     OutgoingWebhookSlack:
@@ -1629,12 +1476,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
-      - type
       title: Outgoing webhook
       type: object
     OutgoingWebhookSummary:
@@ -1667,11 +1508,6 @@ components:
         url:
           example: slack.webhook.com
           type: string
-      required:
-      - createdAt
-      - externalId
-      - id
-      - name
       title: Outgoing webhook summary
       type: object
     OutgoingWebhookType:
@@ -1691,10 +1527,6 @@ components:
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
-      required:
-      - count
-      - label
-      - type
       title: Outgoing webhook type
       type: object
     PagerDutyConfig:
@@ -1704,8 +1536,6 @@ components:
         serviceKey:
           example: pager_duty_service_key
           type: string
-      required:
-      - serviceKey
       title: PagerDuty configuration
       type: object
     SendLogConfig:
@@ -1718,9 +1548,6 @@ components:
         uuid:
           example: d838cd7b-087b-40c6-bc33-80997020f5d0
           type: string
-      required:
-      - payload
-      - uuid
       title: Send log configuration
       type: object
     SlackConfig:
@@ -1755,9 +1582,6 @@ components:
           example: 400
           format: int64
           type: integer
-      required:
-      - displayMessage
-      - errorMessage
       title: Test outgoing webhook failure
       type: object
     TestOutgoingWebhookResponse.Success:
@@ -1839,9 +1663,6 @@ components:
         id:
           example: example_id
           type: string
-      required:
-      - data
-      - id
       title: Update outgoing webhook request
       type: object
     Create_outgoing_webhook_request:
@@ -1849,8 +1670,6 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/OutgoingWebhookInputData"
-      required:
-      - data
       title: Create outgoing webhook request
       type: object
     Test_outgoing_webhook_request:
@@ -1858,8 +1677,6 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/OutgoingWebhookInputData"
-      required:
-      - data
       title: Test outgoing webhook request
       type: object
     Test_existing_outgoing_webhook_request:
@@ -1868,8 +1685,6 @@ components:
         id:
           example: example_id
           type: string
-      required:
-      - id
       title: Test existing outgoing webhook request
       type: object
   securitySchemes:

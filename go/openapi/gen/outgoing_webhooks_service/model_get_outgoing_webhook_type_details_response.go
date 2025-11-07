@@ -12,8 +12,6 @@ package outgoing_webhooks_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the GetOutgoingWebhookTypeDetailsResponse type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &GetOutgoingWebhookTypeDetailsResponse{}
 
 // GetOutgoingWebhookTypeDetailsResponse struct for GetOutgoingWebhookTypeDetailsResponse
 type GetOutgoingWebhookTypeDetailsResponse struct {
-	Details OutgoingWebhookDetails `json:"details"`
+	Details *OutgoingWebhookDetails `json:"details,omitempty"`
 }
-
-type _GetOutgoingWebhookTypeDetailsResponse GetOutgoingWebhookTypeDetailsResponse
 
 // NewGetOutgoingWebhookTypeDetailsResponse instantiates a new GetOutgoingWebhookTypeDetailsResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetOutgoingWebhookTypeDetailsResponse(details OutgoingWebhookDetails) *GetOutgoingWebhookTypeDetailsResponse {
+func NewGetOutgoingWebhookTypeDetailsResponse() *GetOutgoingWebhookTypeDetailsResponse {
 	this := GetOutgoingWebhookTypeDetailsResponse{}
-	this.Details = details
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewGetOutgoingWebhookTypeDetailsResponseWithDefaults() *GetOutgoingWebhookT
 	return &this
 }
 
-// GetDetails returns the Details field value
+// GetDetails returns the Details field value if set, zero value otherwise.
 func (o *GetOutgoingWebhookTypeDetailsResponse) GetDetails() OutgoingWebhookDetails {
-	if o == nil {
+	if o == nil || IsNil(o.Details) {
 		var ret OutgoingWebhookDetails
 		return ret
 	}
-
-	return o.Details
+	return *o.Details
 }
 
-// GetDetailsOk returns a tuple with the Details field value
+// GetDetailsOk returns a tuple with the Details field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetOutgoingWebhookTypeDetailsResponse) GetDetailsOk() (*OutgoingWebhookDetails, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Details) {
 		return nil, false
 	}
-	return &o.Details, true
+	return o.Details, true
 }
 
-// SetDetails sets field value
+// HasDetails returns a boolean if a field has been set.
+func (o *GetOutgoingWebhookTypeDetailsResponse) HasDetails() bool {
+	if o != nil && !IsNil(o.Details) {
+		return true
+	}
+
+	return false
+}
+
+// SetDetails gets a reference to the given OutgoingWebhookDetails and assigns it to the Details field.
 func (o *GetOutgoingWebhookTypeDetailsResponse) SetDetails(v OutgoingWebhookDetails) {
-	o.Details = v
+	o.Details = &v
 }
 
 func (o GetOutgoingWebhookTypeDetailsResponse) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o GetOutgoingWebhookTypeDetailsResponse) MarshalJSON() ([]byte, error) {
 
 func (o GetOutgoingWebhookTypeDetailsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["details"] = o.Details
+	if !IsNil(o.Details) {
+		toSerialize["details"] = o.Details
+	}
 	return toSerialize, nil
-}
-
-func (o *GetOutgoingWebhookTypeDetailsResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"details",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varGetOutgoingWebhookTypeDetailsResponse := _GetOutgoingWebhookTypeDetailsResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetOutgoingWebhookTypeDetailsResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = GetOutgoingWebhookTypeDetailsResponse(varGetOutgoingWebhookTypeDetailsResponse)
-
-	return err
 }
 
 type NullableGetOutgoingWebhookTypeDetailsResponse struct {

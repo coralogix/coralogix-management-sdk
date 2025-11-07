@@ -12,8 +12,6 @@ package extension_testing_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ExtensionItemData type satisfies the MappedNullable interface at compile time
@@ -22,28 +20,23 @@ var _ MappedNullable = &ExtensionItemData{}
 // ExtensionItemData struct for ExtensionItemData
 type ExtensionItemData struct {
 	Binaries []ExtensionItemBinary `json:"binaries,omitempty"`
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 	Description *string `json:"description,omitempty"`
 	InternalId *int32 `json:"internalId,omitempty"`
 	IsMandatory *bool `json:"isMandatory,omitempty"`
-	Name string `json:"name"`
+	Name *string `json:"name,omitempty"`
 	PermissionResource *PermissionResource `json:"permissionResource,omitempty"`
 	StableId *string `json:"stableId,omitempty"`
-	TargetDomain TargetDomain `json:"targetDomain"`
+	TargetDomain *TargetDomain `json:"targetDomain,omitempty"`
 	UniqueId *string `json:"uniqueId,omitempty"`
 }
-
-type _ExtensionItemData ExtensionItemData
 
 // NewExtensionItemData instantiates a new ExtensionItemData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewExtensionItemData(data map[string]interface{}, name string, targetDomain TargetDomain) *ExtensionItemData {
+func NewExtensionItemData() *ExtensionItemData {
 	this := ExtensionItemData{}
-	this.Data = data
-	this.Name = name
-	this.TargetDomain = targetDomain
 	return &this
 }
 
@@ -87,26 +80,34 @@ func (o *ExtensionItemData) SetBinaries(v []ExtensionItemBinary) {
 	o.Binaries = v
 }
 
-// GetData returns the Data field value
+// GetData returns the Data field value if set, zero value otherwise.
 func (o *ExtensionItemData) GetData() map[string]interface{} {
-	if o == nil {
+	if o == nil || IsNil(o.Data) {
 		var ret map[string]interface{}
 		return ret
 	}
-
 	return o.Data
 }
 
-// GetDataOk returns a tuple with the Data field value
+// GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExtensionItemData) GetDataOk() (map[string]interface{}, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Data) {
 		return map[string]interface{}{}, false
 	}
 	return o.Data, true
 }
 
-// SetData sets field value
+// HasData returns a boolean if a field has been set.
+func (o *ExtensionItemData) HasData() bool {
+	if o != nil && !IsNil(o.Data) {
+		return true
+	}
+
+	return false
+}
+
+// SetData gets a reference to the given map[string]interface{} and assigns it to the Data field.
 func (o *ExtensionItemData) SetData(v map[string]interface{}) {
 	o.Data = v
 }
@@ -207,28 +208,36 @@ func (o *ExtensionItemData) SetIsMandatory(v bool) {
 	o.IsMandatory = &v
 }
 
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *ExtensionItemData) GetName() string {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExtensionItemData) GetNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *ExtensionItemData) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *ExtensionItemData) SetName(v string) {
-	o.Name = v
+	o.Name = &v
 }
 
 // GetPermissionResource returns the PermissionResource field value if set, zero value otherwise.
@@ -295,28 +304,36 @@ func (o *ExtensionItemData) SetStableId(v string) {
 	o.StableId = &v
 }
 
-// GetTargetDomain returns the TargetDomain field value
+// GetTargetDomain returns the TargetDomain field value if set, zero value otherwise.
 func (o *ExtensionItemData) GetTargetDomain() TargetDomain {
-	if o == nil {
+	if o == nil || IsNil(o.TargetDomain) {
 		var ret TargetDomain
 		return ret
 	}
-
-	return o.TargetDomain
+	return *o.TargetDomain
 }
 
-// GetTargetDomainOk returns a tuple with the TargetDomain field value
+// GetTargetDomainOk returns a tuple with the TargetDomain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExtensionItemData) GetTargetDomainOk() (*TargetDomain, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.TargetDomain) {
 		return nil, false
 	}
-	return &o.TargetDomain, true
+	return o.TargetDomain, true
 }
 
-// SetTargetDomain sets field value
+// HasTargetDomain returns a boolean if a field has been set.
+func (o *ExtensionItemData) HasTargetDomain() bool {
+	if o != nil && !IsNil(o.TargetDomain) {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetDomain gets a reference to the given TargetDomain and assigns it to the TargetDomain field.
 func (o *ExtensionItemData) SetTargetDomain(v TargetDomain) {
-	o.TargetDomain = v
+	o.TargetDomain = &v
 }
 
 // GetUniqueId returns the UniqueId field value if set, zero value otherwise.
@@ -364,7 +381,9 @@ func (o ExtensionItemData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Binaries) {
 		toSerialize["binaries"] = o.Binaries
 	}
-	toSerialize["data"] = o.Data
+	if !IsNil(o.Data) {
+		toSerialize["data"] = o.Data
+	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -374,57 +393,22 @@ func (o ExtensionItemData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsMandatory) {
 		toSerialize["isMandatory"] = o.IsMandatory
 	}
-	toSerialize["name"] = o.Name
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	if !IsNil(o.PermissionResource) {
 		toSerialize["permissionResource"] = o.PermissionResource
 	}
 	if !IsNil(o.StableId) {
 		toSerialize["stableId"] = o.StableId
 	}
-	toSerialize["targetDomain"] = o.TargetDomain
+	if !IsNil(o.TargetDomain) {
+		toSerialize["targetDomain"] = o.TargetDomain
+	}
 	if !IsNil(o.UniqueId) {
 		toSerialize["uniqueId"] = o.UniqueId
 	}
 	return toSerialize, nil
-}
-
-func (o *ExtensionItemData) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"data",
-		"name",
-		"targetDomain",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varExtensionItemData := _ExtensionItemData{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varExtensionItemData)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ExtensionItemData(varExtensionItemData)
-
-	return err
 }
 
 type NullableExtensionItemData struct {

@@ -12,8 +12,6 @@ package contextual_data_integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ExtensionBinary type satisfies the MappedNullable interface at compile time
@@ -21,20 +19,16 @@ var _ MappedNullable = &ExtensionBinary{}
 
 // ExtensionBinary struct for ExtensionBinary
 type ExtensionBinary struct {
-	Data string `json:"data"`
-	Type ExtensionBinaryBinaryType `json:"type"`
+	Data *string `json:"data,omitempty"`
+	Type *ExtensionBinaryBinaryType `json:"type,omitempty"`
 }
-
-type _ExtensionBinary ExtensionBinary
 
 // NewExtensionBinary instantiates a new ExtensionBinary object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewExtensionBinary(data string, type_ ExtensionBinaryBinaryType) *ExtensionBinary {
+func NewExtensionBinary() *ExtensionBinary {
 	this := ExtensionBinary{}
-	this.Data = data
-	this.Type = type_
 	return &this
 }
 
@@ -46,52 +40,68 @@ func NewExtensionBinaryWithDefaults() *ExtensionBinary {
 	return &this
 }
 
-// GetData returns the Data field value
+// GetData returns the Data field value if set, zero value otherwise.
 func (o *ExtensionBinary) GetData() string {
-	if o == nil {
+	if o == nil || IsNil(o.Data) {
 		var ret string
 		return ret
 	}
-
-	return o.Data
+	return *o.Data
 }
 
-// GetDataOk returns a tuple with the Data field value
+// GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExtensionBinary) GetDataOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
-	return &o.Data, true
+	return o.Data, true
 }
 
-// SetData sets field value
+// HasData returns a boolean if a field has been set.
+func (o *ExtensionBinary) HasData() bool {
+	if o != nil && !IsNil(o.Data) {
+		return true
+	}
+
+	return false
+}
+
+// SetData gets a reference to the given string and assigns it to the Data field.
 func (o *ExtensionBinary) SetData(v string) {
-	o.Data = v
+	o.Data = &v
 }
 
-// GetType returns the Type field value
+// GetType returns the Type field value if set, zero value otherwise.
 func (o *ExtensionBinary) GetType() ExtensionBinaryBinaryType {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret ExtensionBinaryBinaryType
 		return ret
 	}
-
-	return o.Type
+	return *o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExtensionBinary) GetTypeOk() (*ExtensionBinaryBinaryType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
-	return &o.Type, true
+	return o.Type, true
 }
 
-// SetType sets field value
+// HasType returns a boolean if a field has been set.
+func (o *ExtensionBinary) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given ExtensionBinaryBinaryType and assigns it to the Type field.
 func (o *ExtensionBinary) SetType(v ExtensionBinaryBinaryType) {
-	o.Type = v
+	o.Type = &v
 }
 
 func (o ExtensionBinary) MarshalJSON() ([]byte, error) {
@@ -104,47 +114,13 @@ func (o ExtensionBinary) MarshalJSON() ([]byte, error) {
 
 func (o ExtensionBinary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["data"] = o.Data
-	toSerialize["type"] = o.Type
+	if !IsNil(o.Data) {
+		toSerialize["data"] = o.Data
+	}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
 	return toSerialize, nil
-}
-
-func (o *ExtensionBinary) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"data",
-		"type",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varExtensionBinary := _ExtensionBinary{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varExtensionBinary)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ExtensionBinary(varExtensionBinary)
-
-	return err
 }
 
 type NullableExtensionBinary struct {

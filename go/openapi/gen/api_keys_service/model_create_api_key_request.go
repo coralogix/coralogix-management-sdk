@@ -12,8 +12,6 @@ package api_keys_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the CreateApiKeyRequest type satisfies the MappedNullable interface at compile time
@@ -22,22 +20,17 @@ var _ MappedNullable = &CreateApiKeyRequest{}
 // CreateApiKeyRequest This data structure is used to create an API key.
 type CreateApiKeyRequest struct {
 	Hashed *bool `json:"hashed,omitempty"`
-	KeyPermissions CreateApiKeyRequestKeyPermissions `json:"keyPermissions"`
-	Name string `json:"name"`
-	Owner Owner `json:"owner"`
+	KeyPermissions *CreateApiKeyRequestKeyPermissions `json:"keyPermissions,omitempty"`
+	Name *string `json:"name,omitempty"`
+	Owner *Owner `json:"owner,omitempty"`
 }
-
-type _CreateApiKeyRequest CreateApiKeyRequest
 
 // NewCreateApiKeyRequest instantiates a new CreateApiKeyRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateApiKeyRequest(keyPermissions CreateApiKeyRequestKeyPermissions, name string, owner Owner) *CreateApiKeyRequest {
+func NewCreateApiKeyRequest() *CreateApiKeyRequest {
 	this := CreateApiKeyRequest{}
-	this.KeyPermissions = keyPermissions
-	this.Name = name
-	this.Owner = owner
 	return &this
 }
 
@@ -81,76 +74,100 @@ func (o *CreateApiKeyRequest) SetHashed(v bool) {
 	o.Hashed = &v
 }
 
-// GetKeyPermissions returns the KeyPermissions field value
+// GetKeyPermissions returns the KeyPermissions field value if set, zero value otherwise.
 func (o *CreateApiKeyRequest) GetKeyPermissions() CreateApiKeyRequestKeyPermissions {
-	if o == nil {
+	if o == nil || IsNil(o.KeyPermissions) {
 		var ret CreateApiKeyRequestKeyPermissions
 		return ret
 	}
-
-	return o.KeyPermissions
+	return *o.KeyPermissions
 }
 
-// GetKeyPermissionsOk returns a tuple with the KeyPermissions field value
+// GetKeyPermissionsOk returns a tuple with the KeyPermissions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateApiKeyRequest) GetKeyPermissionsOk() (*CreateApiKeyRequestKeyPermissions, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.KeyPermissions) {
 		return nil, false
 	}
-	return &o.KeyPermissions, true
+	return o.KeyPermissions, true
 }
 
-// SetKeyPermissions sets field value
+// HasKeyPermissions returns a boolean if a field has been set.
+func (o *CreateApiKeyRequest) HasKeyPermissions() bool {
+	if o != nil && !IsNil(o.KeyPermissions) {
+		return true
+	}
+
+	return false
+}
+
+// SetKeyPermissions gets a reference to the given CreateApiKeyRequestKeyPermissions and assigns it to the KeyPermissions field.
 func (o *CreateApiKeyRequest) SetKeyPermissions(v CreateApiKeyRequestKeyPermissions) {
-	o.KeyPermissions = v
+	o.KeyPermissions = &v
 }
 
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *CreateApiKeyRequest) GetName() string {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateApiKeyRequest) GetNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *CreateApiKeyRequest) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *CreateApiKeyRequest) SetName(v string) {
-	o.Name = v
+	o.Name = &v
 }
 
-// GetOwner returns the Owner field value
+// GetOwner returns the Owner field value if set, zero value otherwise.
 func (o *CreateApiKeyRequest) GetOwner() Owner {
-	if o == nil {
+	if o == nil || IsNil(o.Owner) {
 		var ret Owner
 		return ret
 	}
-
-	return o.Owner
+	return *o.Owner
 }
 
-// GetOwnerOk returns a tuple with the Owner field value
+// GetOwnerOk returns a tuple with the Owner field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateApiKeyRequest) GetOwnerOk() (*Owner, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Owner) {
 		return nil, false
 	}
-	return &o.Owner, true
+	return o.Owner, true
 }
 
-// SetOwner sets field value
+// HasOwner returns a boolean if a field has been set.
+func (o *CreateApiKeyRequest) HasOwner() bool {
+	if o != nil && !IsNil(o.Owner) {
+		return true
+	}
+
+	return false
+}
+
+// SetOwner gets a reference to the given Owner and assigns it to the Owner field.
 func (o *CreateApiKeyRequest) SetOwner(v Owner) {
-	o.Owner = v
+	o.Owner = &v
 }
 
 func (o CreateApiKeyRequest) MarshalJSON() ([]byte, error) {
@@ -166,49 +183,16 @@ func (o CreateApiKeyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Hashed) {
 		toSerialize["hashed"] = o.Hashed
 	}
-	toSerialize["keyPermissions"] = o.KeyPermissions
-	toSerialize["name"] = o.Name
-	toSerialize["owner"] = o.Owner
+	if !IsNil(o.KeyPermissions) {
+		toSerialize["keyPermissions"] = o.KeyPermissions
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Owner) {
+		toSerialize["owner"] = o.Owner
+	}
 	return toSerialize, nil
-}
-
-func (o *CreateApiKeyRequest) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"keyPermissions",
-		"name",
-		"owner",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varCreateApiKeyRequest := _CreateApiKeyRequest{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateApiKeyRequest)
-
-	if err != nil {
-		return err
-	}
-
-	*o = CreateApiKeyRequest(varCreateApiKeyRequest)
-
-	return err
 }
 
 type NullableCreateApiKeyRequest struct {

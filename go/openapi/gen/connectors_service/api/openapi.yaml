@@ -400,10 +400,6 @@ components:
         updateTime:
           format: date-time
           type: string
-      required:
-      - connectorConfigs
-      - name
-      - type
       title: Connector
       type: object
     ConnectorConfig:

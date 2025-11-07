@@ -491,12 +491,7 @@
             "type": "string",
             "format": "date-time"
           }
-        },
-        "required": [
-          "type",
-          "name",
-          "connectorConfigs"
-        ]
+        }
       },
       "ConnectorConfig": {
         "externalDocs": {

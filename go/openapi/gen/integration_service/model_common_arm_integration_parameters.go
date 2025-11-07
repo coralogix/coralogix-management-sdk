@@ -12,8 +12,6 @@ package integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the CommonARMIntegrationParameters type satisfies the MappedNullable interface at compile time
@@ -21,22 +19,17 @@ var _ MappedNullable = &CommonARMIntegrationParameters{}
 
 // CommonARMIntegrationParameters struct for CommonARMIntegrationParameters
 type CommonARMIntegrationParameters struct {
-	ApiKey string `json:"apiKey"`
-	CgxDomain string `json:"cgxDomain"`
-	LogsUrl string `json:"logsUrl"`
+	ApiKey *string `json:"apiKey,omitempty"`
+	CgxDomain *string `json:"cgxDomain,omitempty"`
+	LogsUrl *string `json:"logsUrl,omitempty"`
 }
-
-type _CommonARMIntegrationParameters CommonARMIntegrationParameters
 
 // NewCommonARMIntegrationParameters instantiates a new CommonARMIntegrationParameters object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCommonARMIntegrationParameters(apiKey string, cgxDomain string, logsUrl string) *CommonARMIntegrationParameters {
+func NewCommonARMIntegrationParameters() *CommonARMIntegrationParameters {
 	this := CommonARMIntegrationParameters{}
-	this.ApiKey = apiKey
-	this.CgxDomain = cgxDomain
-	this.LogsUrl = logsUrl
 	return &this
 }
 
@@ -48,76 +41,100 @@ func NewCommonARMIntegrationParametersWithDefaults() *CommonARMIntegrationParame
 	return &this
 }
 
-// GetApiKey returns the ApiKey field value
+// GetApiKey returns the ApiKey field value if set, zero value otherwise.
 func (o *CommonARMIntegrationParameters) GetApiKey() string {
-	if o == nil {
+	if o == nil || IsNil(o.ApiKey) {
 		var ret string
 		return ret
 	}
-
-	return o.ApiKey
+	return *o.ApiKey
 }
 
-// GetApiKeyOk returns a tuple with the ApiKey field value
+// GetApiKeyOk returns a tuple with the ApiKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CommonARMIntegrationParameters) GetApiKeyOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ApiKey) {
 		return nil, false
 	}
-	return &o.ApiKey, true
+	return o.ApiKey, true
 }
 
-// SetApiKey sets field value
+// HasApiKey returns a boolean if a field has been set.
+func (o *CommonARMIntegrationParameters) HasApiKey() bool {
+	if o != nil && !IsNil(o.ApiKey) {
+		return true
+	}
+
+	return false
+}
+
+// SetApiKey gets a reference to the given string and assigns it to the ApiKey field.
 func (o *CommonARMIntegrationParameters) SetApiKey(v string) {
-	o.ApiKey = v
+	o.ApiKey = &v
 }
 
-// GetCgxDomain returns the CgxDomain field value
+// GetCgxDomain returns the CgxDomain field value if set, zero value otherwise.
 func (o *CommonARMIntegrationParameters) GetCgxDomain() string {
-	if o == nil {
+	if o == nil || IsNil(o.CgxDomain) {
 		var ret string
 		return ret
 	}
-
-	return o.CgxDomain
+	return *o.CgxDomain
 }
 
-// GetCgxDomainOk returns a tuple with the CgxDomain field value
+// GetCgxDomainOk returns a tuple with the CgxDomain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CommonARMIntegrationParameters) GetCgxDomainOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.CgxDomain) {
 		return nil, false
 	}
-	return &o.CgxDomain, true
+	return o.CgxDomain, true
 }
 
-// SetCgxDomain sets field value
+// HasCgxDomain returns a boolean if a field has been set.
+func (o *CommonARMIntegrationParameters) HasCgxDomain() bool {
+	if o != nil && !IsNil(o.CgxDomain) {
+		return true
+	}
+
+	return false
+}
+
+// SetCgxDomain gets a reference to the given string and assigns it to the CgxDomain field.
 func (o *CommonARMIntegrationParameters) SetCgxDomain(v string) {
-	o.CgxDomain = v
+	o.CgxDomain = &v
 }
 
-// GetLogsUrl returns the LogsUrl field value
+// GetLogsUrl returns the LogsUrl field value if set, zero value otherwise.
 func (o *CommonARMIntegrationParameters) GetLogsUrl() string {
-	if o == nil {
+	if o == nil || IsNil(o.LogsUrl) {
 		var ret string
 		return ret
 	}
-
-	return o.LogsUrl
+	return *o.LogsUrl
 }
 
-// GetLogsUrlOk returns a tuple with the LogsUrl field value
+// GetLogsUrlOk returns a tuple with the LogsUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CommonARMIntegrationParameters) GetLogsUrlOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.LogsUrl) {
 		return nil, false
 	}
-	return &o.LogsUrl, true
+	return o.LogsUrl, true
 }
 
-// SetLogsUrl sets field value
+// HasLogsUrl returns a boolean if a field has been set.
+func (o *CommonARMIntegrationParameters) HasLogsUrl() bool {
+	if o != nil && !IsNil(o.LogsUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogsUrl gets a reference to the given string and assigns it to the LogsUrl field.
 func (o *CommonARMIntegrationParameters) SetLogsUrl(v string) {
-	o.LogsUrl = v
+	o.LogsUrl = &v
 }
 
 func (o CommonARMIntegrationParameters) MarshalJSON() ([]byte, error) {
@@ -130,49 +147,16 @@ func (o CommonARMIntegrationParameters) MarshalJSON() ([]byte, error) {
 
 func (o CommonARMIntegrationParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["apiKey"] = o.ApiKey
-	toSerialize["cgxDomain"] = o.CgxDomain
-	toSerialize["logsUrl"] = o.LogsUrl
+	if !IsNil(o.ApiKey) {
+		toSerialize["apiKey"] = o.ApiKey
+	}
+	if !IsNil(o.CgxDomain) {
+		toSerialize["cgxDomain"] = o.CgxDomain
+	}
+	if !IsNil(o.LogsUrl) {
+		toSerialize["logsUrl"] = o.LogsUrl
+	}
 	return toSerialize, nil
-}
-
-func (o *CommonARMIntegrationParameters) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"apiKey",
-		"cgxDomain",
-		"logsUrl",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varCommonARMIntegrationParameters := _CommonARMIntegrationParameters{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCommonARMIntegrationParameters)
-
-	if err != nil {
-		return err
-	}
-
-	*o = CommonARMIntegrationParameters(varCommonARMIntegrationParameters)
-
-	return err
 }
 
 type NullableCommonARMIntegrationParameters struct {

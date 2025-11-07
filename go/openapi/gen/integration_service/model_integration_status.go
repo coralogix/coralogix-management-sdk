@@ -12,8 +12,6 @@ package integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the IntegrationStatus type satisfies the MappedNullable interface at compile time
@@ -21,20 +19,17 @@ var _ MappedNullable = &IntegrationStatus{}
 
 // IntegrationStatus This data structure represents an integration status.
 type IntegrationStatus struct {
-	ConnectionStatus ConnectionStatus `json:"connectionStatus"`
+	ConnectionStatus *ConnectionStatus `json:"connectionStatus,omitempty"`
 	Details *map[string]string `json:"details,omitempty"`
 	Messages []string `json:"messages,omitempty"`
 }
-
-type _IntegrationStatus IntegrationStatus
 
 // NewIntegrationStatus instantiates a new IntegrationStatus object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntegrationStatus(connectionStatus ConnectionStatus) *IntegrationStatus {
+func NewIntegrationStatus() *IntegrationStatus {
 	this := IntegrationStatus{}
-	this.ConnectionStatus = connectionStatus
 	return &this
 }
 
@@ -46,28 +41,36 @@ func NewIntegrationStatusWithDefaults() *IntegrationStatus {
 	return &this
 }
 
-// GetConnectionStatus returns the ConnectionStatus field value
+// GetConnectionStatus returns the ConnectionStatus field value if set, zero value otherwise.
 func (o *IntegrationStatus) GetConnectionStatus() ConnectionStatus {
-	if o == nil {
+	if o == nil || IsNil(o.ConnectionStatus) {
 		var ret ConnectionStatus
 		return ret
 	}
-
-	return o.ConnectionStatus
+	return *o.ConnectionStatus
 }
 
-// GetConnectionStatusOk returns a tuple with the ConnectionStatus field value
+// GetConnectionStatusOk returns a tuple with the ConnectionStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IntegrationStatus) GetConnectionStatusOk() (*ConnectionStatus, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ConnectionStatus) {
 		return nil, false
 	}
-	return &o.ConnectionStatus, true
+	return o.ConnectionStatus, true
 }
 
-// SetConnectionStatus sets field value
+// HasConnectionStatus returns a boolean if a field has been set.
+func (o *IntegrationStatus) HasConnectionStatus() bool {
+	if o != nil && !IsNil(o.ConnectionStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetConnectionStatus gets a reference to the given ConnectionStatus and assigns it to the ConnectionStatus field.
 func (o *IntegrationStatus) SetConnectionStatus(v ConnectionStatus) {
-	o.ConnectionStatus = v
+	o.ConnectionStatus = &v
 }
 
 // GetDetails returns the Details field value if set, zero value otherwise.
@@ -144,7 +147,9 @@ func (o IntegrationStatus) MarshalJSON() ([]byte, error) {
 
 func (o IntegrationStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["connectionStatus"] = o.ConnectionStatus
+	if !IsNil(o.ConnectionStatus) {
+		toSerialize["connectionStatus"] = o.ConnectionStatus
+	}
 	if !IsNil(o.Details) {
 		toSerialize["details"] = o.Details
 	}
@@ -152,43 +157,6 @@ func (o IntegrationStatus) ToMap() (map[string]interface{}, error) {
 		toSerialize["messages"] = o.Messages
 	}
 	return toSerialize, nil
-}
-
-func (o *IntegrationStatus) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"connectionStatus",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varIntegrationStatus := _IntegrationStatus{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varIntegrationStatus)
-
-	if err != nil {
-		return err
-	}
-
-	*o = IntegrationStatus(varIntegrationStatus)
-
-	return err
 }
 
 type NullableIntegrationStatus struct {

@@ -476,11 +476,7 @@
             "type": "string",
             "format": "date-time"
           }
-        },
-        "required": [
-          "entityType",
-          "name"
-        ]
+        }
       },
       "ListGlobalRoutersResponse": {
         "externalDocs": {
@@ -558,11 +554,7 @@
               "$ref": "#/components/schemas/RoutingTarget"
             }
           }
-        },
-        "required": [
-          "condition",
-          "targets"
-        ]
+        }
       },
       "RoutingTarget": {
         "externalDocs": {
@@ -585,10 +577,7 @@
           "presetId": {
             "type": "string"
           }
-        },
-        "required": [
-          "connectorId"
-        ]
+        }
       },
       "common.Group": {
         "type": "object",

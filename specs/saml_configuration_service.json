@@ -32,10 +32,6 @@
                     "format": "int64"
                   }
                 },
-                "required": [
-                  "teamId",
-                  "isActive"
-                ],
                 "additionalProperties": false
               }
             }
@@ -154,10 +150,6 @@
                     "format": "int64"
                   }
                 },
-                "required": [
-                  "teamId",
-                  "params"
-                ],
                 "additionalProperties": false
               }
             }
@@ -389,12 +381,7 @@
             "type": "integer",
             "format": "int64"
           }
-        },
-        "required": [
-          "teamId",
-          "spParameters",
-          "idpParameters"
-        ]
+        }
       },
       "GetSPParametersResponse": {
         "externalDocs": {
@@ -408,10 +395,7 @@
           "params": {
             "$ref": "#/components/schemas/SPParameters"
           }
-        },
-        "required": [
-          "params"
-        ]
+        }
       },
       "IDPDetails": {
         "type": "object",
@@ -464,12 +448,6 @@
             "format": "int64"
           }
         },
-        "required": [
-          "active",
-          "metadata",
-          "teamEntityId",
-          "groupNames"
-        ],
         "additionalProperties": false
       },
       "IDPParametersMetadataUrl": {
@@ -502,12 +480,6 @@
             "format": "int64"
           }
         },
-        "required": [
-          "active",
-          "metadata",
-          "teamEntityId",
-          "groupNames"
-        ],
         "additionalProperties": false
       },
       "MultipleValues": {
@@ -553,14 +525,7 @@
             "example": "certificate",
             "type": "string"
           }
-        },
-        "required": [
-          "metadataUrl",
-          "signingCertPem",
-          "nameIdFormat",
-          "assertionConsumerServiceUrl",
-          "binding"
-        ]
+        }
       },
       "SetIDPParametersResponse": {
         "type": "object"

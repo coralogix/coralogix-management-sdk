@@ -12,8 +12,6 @@ package outgoing_webhooks_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the OutgoingWebhookInputDataEmailGroup type satisfies the MappedNullable interface at compile time
@@ -22,21 +20,17 @@ var _ MappedNullable = &OutgoingWebhookInputDataEmailGroup{}
 // OutgoingWebhookInputDataEmailGroup struct for OutgoingWebhookInputDataEmailGroup
 type OutgoingWebhookInputDataEmailGroup struct {
 	EmailGroup *EmailGroupConfig `json:"emailGroup,omitempty"`
-	Name string `json:"name"`
-	Type WebhookType `json:"type"`
+	Name *string `json:"name,omitempty"`
+	Type *WebhookType `json:"type,omitempty"`
 	Url *string `json:"url,omitempty"`
 }
-
-type _OutgoingWebhookInputDataEmailGroup OutgoingWebhookInputDataEmailGroup
 
 // NewOutgoingWebhookInputDataEmailGroup instantiates a new OutgoingWebhookInputDataEmailGroup object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOutgoingWebhookInputDataEmailGroup(name string, type_ WebhookType) *OutgoingWebhookInputDataEmailGroup {
+func NewOutgoingWebhookInputDataEmailGroup() *OutgoingWebhookInputDataEmailGroup {
 	this := OutgoingWebhookInputDataEmailGroup{}
-	this.Name = name
-	this.Type = type_
 	return &this
 }
 
@@ -80,52 +74,68 @@ func (o *OutgoingWebhookInputDataEmailGroup) SetEmailGroup(v EmailGroupConfig) {
 	o.EmailGroup = &v
 }
 
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *OutgoingWebhookInputDataEmailGroup) GetName() string {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookInputDataEmailGroup) GetNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *OutgoingWebhookInputDataEmailGroup) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *OutgoingWebhookInputDataEmailGroup) SetName(v string) {
-	o.Name = v
+	o.Name = &v
 }
 
-// GetType returns the Type field value
+// GetType returns the Type field value if set, zero value otherwise.
 func (o *OutgoingWebhookInputDataEmailGroup) GetType() WebhookType {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret WebhookType
 		return ret
 	}
-
-	return o.Type
+	return *o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookInputDataEmailGroup) GetTypeOk() (*WebhookType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
-	return &o.Type, true
+	return o.Type, true
 }
 
-// SetType sets field value
+// HasType returns a boolean if a field has been set.
+func (o *OutgoingWebhookInputDataEmailGroup) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given WebhookType and assigns it to the Type field.
 func (o *OutgoingWebhookInputDataEmailGroup) SetType(v WebhookType) {
-	o.Type = v
+	o.Type = &v
 }
 
 // GetUrl returns the Url field value if set, zero value otherwise.
@@ -173,50 +183,16 @@ func (o OutgoingWebhookInputDataEmailGroup) ToMap() (map[string]interface{}, err
 	if !IsNil(o.EmailGroup) {
 		toSerialize["emailGroup"] = o.EmailGroup
 	}
-	toSerialize["name"] = o.Name
-	toSerialize["type"] = o.Type
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
 	return toSerialize, nil
-}
-
-func (o *OutgoingWebhookInputDataEmailGroup) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"name",
-		"type",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varOutgoingWebhookInputDataEmailGroup := _OutgoingWebhookInputDataEmailGroup{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOutgoingWebhookInputDataEmailGroup)
-
-	if err != nil {
-		return err
-	}
-
-	*o = OutgoingWebhookInputDataEmailGroup(varOutgoingWebhookInputDataEmailGroup)
-
-	return err
 }
 
 type NullableOutgoingWebhookInputDataEmailGroup struct {

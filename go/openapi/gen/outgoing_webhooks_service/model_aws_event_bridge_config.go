@@ -12,8 +12,6 @@ package outgoing_webhooks_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the AwsEventBridgeConfig type satisfies the MappedNullable interface at compile time
@@ -21,26 +19,19 @@ var _ MappedNullable = &AwsEventBridgeConfig{}
 
 // AwsEventBridgeConfig struct for AwsEventBridgeConfig
 type AwsEventBridgeConfig struct {
-	Detail string `json:"detail"`
-	DetailType string `json:"detailType"`
-	EventBusArn string `json:"eventBusArn"`
-	RoleName string `json:"roleName"`
-	Source string `json:"source"`
+	Detail *string `json:"detail,omitempty"`
+	DetailType *string `json:"detailType,omitempty"`
+	EventBusArn *string `json:"eventBusArn,omitempty"`
+	RoleName *string `json:"roleName,omitempty"`
+	Source *string `json:"source,omitempty"`
 }
-
-type _AwsEventBridgeConfig AwsEventBridgeConfig
 
 // NewAwsEventBridgeConfig instantiates a new AwsEventBridgeConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAwsEventBridgeConfig(detail string, detailType string, eventBusArn string, roleName string, source string) *AwsEventBridgeConfig {
+func NewAwsEventBridgeConfig() *AwsEventBridgeConfig {
 	this := AwsEventBridgeConfig{}
-	this.Detail = detail
-	this.DetailType = detailType
-	this.EventBusArn = eventBusArn
-	this.RoleName = roleName
-	this.Source = source
 	return &this
 }
 
@@ -52,124 +43,164 @@ func NewAwsEventBridgeConfigWithDefaults() *AwsEventBridgeConfig {
 	return &this
 }
 
-// GetDetail returns the Detail field value
+// GetDetail returns the Detail field value if set, zero value otherwise.
 func (o *AwsEventBridgeConfig) GetDetail() string {
-	if o == nil {
+	if o == nil || IsNil(o.Detail) {
 		var ret string
 		return ret
 	}
-
-	return o.Detail
+	return *o.Detail
 }
 
-// GetDetailOk returns a tuple with the Detail field value
+// GetDetailOk returns a tuple with the Detail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AwsEventBridgeConfig) GetDetailOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Detail) {
 		return nil, false
 	}
-	return &o.Detail, true
+	return o.Detail, true
 }
 
-// SetDetail sets field value
+// HasDetail returns a boolean if a field has been set.
+func (o *AwsEventBridgeConfig) HasDetail() bool {
+	if o != nil && !IsNil(o.Detail) {
+		return true
+	}
+
+	return false
+}
+
+// SetDetail gets a reference to the given string and assigns it to the Detail field.
 func (o *AwsEventBridgeConfig) SetDetail(v string) {
-	o.Detail = v
+	o.Detail = &v
 }
 
-// GetDetailType returns the DetailType field value
+// GetDetailType returns the DetailType field value if set, zero value otherwise.
 func (o *AwsEventBridgeConfig) GetDetailType() string {
-	if o == nil {
+	if o == nil || IsNil(o.DetailType) {
 		var ret string
 		return ret
 	}
-
-	return o.DetailType
+	return *o.DetailType
 }
 
-// GetDetailTypeOk returns a tuple with the DetailType field value
+// GetDetailTypeOk returns a tuple with the DetailType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AwsEventBridgeConfig) GetDetailTypeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.DetailType) {
 		return nil, false
 	}
-	return &o.DetailType, true
+	return o.DetailType, true
 }
 
-// SetDetailType sets field value
+// HasDetailType returns a boolean if a field has been set.
+func (o *AwsEventBridgeConfig) HasDetailType() bool {
+	if o != nil && !IsNil(o.DetailType) {
+		return true
+	}
+
+	return false
+}
+
+// SetDetailType gets a reference to the given string and assigns it to the DetailType field.
 func (o *AwsEventBridgeConfig) SetDetailType(v string) {
-	o.DetailType = v
+	o.DetailType = &v
 }
 
-// GetEventBusArn returns the EventBusArn field value
+// GetEventBusArn returns the EventBusArn field value if set, zero value otherwise.
 func (o *AwsEventBridgeConfig) GetEventBusArn() string {
-	if o == nil {
+	if o == nil || IsNil(o.EventBusArn) {
 		var ret string
 		return ret
 	}
-
-	return o.EventBusArn
+	return *o.EventBusArn
 }
 
-// GetEventBusArnOk returns a tuple with the EventBusArn field value
+// GetEventBusArnOk returns a tuple with the EventBusArn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AwsEventBridgeConfig) GetEventBusArnOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.EventBusArn) {
 		return nil, false
 	}
-	return &o.EventBusArn, true
+	return o.EventBusArn, true
 }
 
-// SetEventBusArn sets field value
+// HasEventBusArn returns a boolean if a field has been set.
+func (o *AwsEventBridgeConfig) HasEventBusArn() bool {
+	if o != nil && !IsNil(o.EventBusArn) {
+		return true
+	}
+
+	return false
+}
+
+// SetEventBusArn gets a reference to the given string and assigns it to the EventBusArn field.
 func (o *AwsEventBridgeConfig) SetEventBusArn(v string) {
-	o.EventBusArn = v
+	o.EventBusArn = &v
 }
 
-// GetRoleName returns the RoleName field value
+// GetRoleName returns the RoleName field value if set, zero value otherwise.
 func (o *AwsEventBridgeConfig) GetRoleName() string {
-	if o == nil {
+	if o == nil || IsNil(o.RoleName) {
 		var ret string
 		return ret
 	}
-
-	return o.RoleName
+	return *o.RoleName
 }
 
-// GetRoleNameOk returns a tuple with the RoleName field value
+// GetRoleNameOk returns a tuple with the RoleName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AwsEventBridgeConfig) GetRoleNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.RoleName) {
 		return nil, false
 	}
-	return &o.RoleName, true
+	return o.RoleName, true
 }
 
-// SetRoleName sets field value
+// HasRoleName returns a boolean if a field has been set.
+func (o *AwsEventBridgeConfig) HasRoleName() bool {
+	if o != nil && !IsNil(o.RoleName) {
+		return true
+	}
+
+	return false
+}
+
+// SetRoleName gets a reference to the given string and assigns it to the RoleName field.
 func (o *AwsEventBridgeConfig) SetRoleName(v string) {
-	o.RoleName = v
+	o.RoleName = &v
 }
 
-// GetSource returns the Source field value
+// GetSource returns the Source field value if set, zero value otherwise.
 func (o *AwsEventBridgeConfig) GetSource() string {
-	if o == nil {
+	if o == nil || IsNil(o.Source) {
 		var ret string
 		return ret
 	}
-
-	return o.Source
+	return *o.Source
 }
 
-// GetSourceOk returns a tuple with the Source field value
+// GetSourceOk returns a tuple with the Source field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AwsEventBridgeConfig) GetSourceOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Source) {
 		return nil, false
 	}
-	return &o.Source, true
+	return o.Source, true
 }
 
-// SetSource sets field value
+// HasSource returns a boolean if a field has been set.
+func (o *AwsEventBridgeConfig) HasSource() bool {
+	if o != nil && !IsNil(o.Source) {
+		return true
+	}
+
+	return false
+}
+
+// SetSource gets a reference to the given string and assigns it to the Source field.
 func (o *AwsEventBridgeConfig) SetSource(v string) {
-	o.Source = v
+	o.Source = &v
 }
 
 func (o AwsEventBridgeConfig) MarshalJSON() ([]byte, error) {
@@ -182,53 +213,22 @@ func (o AwsEventBridgeConfig) MarshalJSON() ([]byte, error) {
 
 func (o AwsEventBridgeConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["detail"] = o.Detail
-	toSerialize["detailType"] = o.DetailType
-	toSerialize["eventBusArn"] = o.EventBusArn
-	toSerialize["roleName"] = o.RoleName
-	toSerialize["source"] = o.Source
+	if !IsNil(o.Detail) {
+		toSerialize["detail"] = o.Detail
+	}
+	if !IsNil(o.DetailType) {
+		toSerialize["detailType"] = o.DetailType
+	}
+	if !IsNil(o.EventBusArn) {
+		toSerialize["eventBusArn"] = o.EventBusArn
+	}
+	if !IsNil(o.RoleName) {
+		toSerialize["roleName"] = o.RoleName
+	}
+	if !IsNil(o.Source) {
+		toSerialize["source"] = o.Source
+	}
 	return toSerialize, nil
-}
-
-func (o *AwsEventBridgeConfig) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"detail",
-		"detailType",
-		"eventBusArn",
-		"roleName",
-		"source",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varAwsEventBridgeConfig := _AwsEventBridgeConfig{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAwsEventBridgeConfig)
-
-	if err != nil {
-		return err
-	}
-
-	*o = AwsEventBridgeConfig(varAwsEventBridgeConfig)
-
-	return err
 }
 
 type NullableAwsEventBridgeConfig struct {

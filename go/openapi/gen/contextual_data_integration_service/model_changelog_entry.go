@@ -12,8 +12,6 @@ package contextual_data_integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ChangelogEntry type satisfies the MappedNullable interface at compile time
@@ -21,20 +19,16 @@ var _ MappedNullable = &ChangelogEntry{}
 
 // ChangelogEntry struct for ChangelogEntry
 type ChangelogEntry struct {
-	DescriptionMd string `json:"descriptionMd"`
-	Version string `json:"version"`
+	DescriptionMd *string `json:"descriptionMd,omitempty"`
+	Version *string `json:"version,omitempty"`
 }
-
-type _ChangelogEntry ChangelogEntry
 
 // NewChangelogEntry instantiates a new ChangelogEntry object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewChangelogEntry(descriptionMd string, version string) *ChangelogEntry {
+func NewChangelogEntry() *ChangelogEntry {
 	this := ChangelogEntry{}
-	this.DescriptionMd = descriptionMd
-	this.Version = version
 	return &this
 }
 
@@ -46,52 +40,68 @@ func NewChangelogEntryWithDefaults() *ChangelogEntry {
 	return &this
 }
 
-// GetDescriptionMd returns the DescriptionMd field value
+// GetDescriptionMd returns the DescriptionMd field value if set, zero value otherwise.
 func (o *ChangelogEntry) GetDescriptionMd() string {
-	if o == nil {
+	if o == nil || IsNil(o.DescriptionMd) {
 		var ret string
 		return ret
 	}
-
-	return o.DescriptionMd
+	return *o.DescriptionMd
 }
 
-// GetDescriptionMdOk returns a tuple with the DescriptionMd field value
+// GetDescriptionMdOk returns a tuple with the DescriptionMd field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ChangelogEntry) GetDescriptionMdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.DescriptionMd) {
 		return nil, false
 	}
-	return &o.DescriptionMd, true
+	return o.DescriptionMd, true
 }
 
-// SetDescriptionMd sets field value
+// HasDescriptionMd returns a boolean if a field has been set.
+func (o *ChangelogEntry) HasDescriptionMd() bool {
+	if o != nil && !IsNil(o.DescriptionMd) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescriptionMd gets a reference to the given string and assigns it to the DescriptionMd field.
 func (o *ChangelogEntry) SetDescriptionMd(v string) {
-	o.DescriptionMd = v
+	o.DescriptionMd = &v
 }
 
-// GetVersion returns the Version field value
+// GetVersion returns the Version field value if set, zero value otherwise.
 func (o *ChangelogEntry) GetVersion() string {
-	if o == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
-
-	return o.Version
+	return *o.Version
 }
 
-// GetVersionOk returns a tuple with the Version field value
+// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ChangelogEntry) GetVersionOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
-	return &o.Version, true
+	return o.Version, true
 }
 
-// SetVersion sets field value
+// HasVersion returns a boolean if a field has been set.
+func (o *ChangelogEntry) HasVersion() bool {
+	if o != nil && !IsNil(o.Version) {
+		return true
+	}
+
+	return false
+}
+
+// SetVersion gets a reference to the given string and assigns it to the Version field.
 func (o *ChangelogEntry) SetVersion(v string) {
-	o.Version = v
+	o.Version = &v
 }
 
 func (o ChangelogEntry) MarshalJSON() ([]byte, error) {
@@ -104,47 +114,13 @@ func (o ChangelogEntry) MarshalJSON() ([]byte, error) {
 
 func (o ChangelogEntry) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["descriptionMd"] = o.DescriptionMd
-	toSerialize["version"] = o.Version
+	if !IsNil(o.DescriptionMd) {
+		toSerialize["descriptionMd"] = o.DescriptionMd
+	}
+	if !IsNil(o.Version) {
+		toSerialize["version"] = o.Version
+	}
 	return toSerialize, nil
-}
-
-func (o *ChangelogEntry) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"descriptionMd",
-		"version",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varChangelogEntry := _ChangelogEntry{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varChangelogEntry)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ChangelogEntry(varChangelogEntry)
-
-	return err
 }
 
 type NullableChangelogEntry struct {

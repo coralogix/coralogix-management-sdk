@@ -12,8 +12,6 @@ package extension_testing_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the IntegrationDetail type satisfies the MappedNullable interface at compile time
@@ -21,20 +19,16 @@ var _ MappedNullable = &IntegrationDetail{}
 
 // IntegrationDetail struct for IntegrationDetail
 type IntegrationDetail struct {
-	Link string `json:"link"`
-	Name string `json:"name"`
+	Link *string `json:"link,omitempty"`
+	Name *string `json:"name,omitempty"`
 }
-
-type _IntegrationDetail IntegrationDetail
 
 // NewIntegrationDetail instantiates a new IntegrationDetail object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntegrationDetail(link string, name string) *IntegrationDetail {
+func NewIntegrationDetail() *IntegrationDetail {
 	this := IntegrationDetail{}
-	this.Link = link
-	this.Name = name
 	return &this
 }
 
@@ -46,52 +40,68 @@ func NewIntegrationDetailWithDefaults() *IntegrationDetail {
 	return &this
 }
 
-// GetLink returns the Link field value
+// GetLink returns the Link field value if set, zero value otherwise.
 func (o *IntegrationDetail) GetLink() string {
-	if o == nil {
+	if o == nil || IsNil(o.Link) {
 		var ret string
 		return ret
 	}
-
-	return o.Link
+	return *o.Link
 }
 
-// GetLinkOk returns a tuple with the Link field value
+// GetLinkOk returns a tuple with the Link field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IntegrationDetail) GetLinkOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Link) {
 		return nil, false
 	}
-	return &o.Link, true
+	return o.Link, true
 }
 
-// SetLink sets field value
+// HasLink returns a boolean if a field has been set.
+func (o *IntegrationDetail) HasLink() bool {
+	if o != nil && !IsNil(o.Link) {
+		return true
+	}
+
+	return false
+}
+
+// SetLink gets a reference to the given string and assigns it to the Link field.
 func (o *IntegrationDetail) SetLink(v string) {
-	o.Link = v
+	o.Link = &v
 }
 
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *IntegrationDetail) GetName() string {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IntegrationDetail) GetNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *IntegrationDetail) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *IntegrationDetail) SetName(v string) {
-	o.Name = v
+	o.Name = &v
 }
 
 func (o IntegrationDetail) MarshalJSON() ([]byte, error) {
@@ -104,47 +114,13 @@ func (o IntegrationDetail) MarshalJSON() ([]byte, error) {
 
 func (o IntegrationDetail) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["link"] = o.Link
-	toSerialize["name"] = o.Name
+	if !IsNil(o.Link) {
+		toSerialize["link"] = o.Link
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	return toSerialize, nil
-}
-
-func (o *IntegrationDetail) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"link",
-		"name",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varIntegrationDetail := _IntegrationDetail{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varIntegrationDetail)
-
-	if err != nil {
-		return err
-	}
-
-	*o = IntegrationDetail(varIntegrationDetail)
-
-	return err
 }
 
 type NullableIntegrationDetail struct {

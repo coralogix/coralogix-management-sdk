@@ -12,8 +12,6 @@ package extension_deployment_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the DeployExtensionResponse type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &DeployExtensionResponse{}
 
 // DeployExtensionResponse struct for DeployExtensionResponse
 type DeployExtensionResponse struct {
-	ExtensionDeployment ExtensionDeployment `json:"extensionDeployment"`
+	ExtensionDeployment *ExtensionDeployment `json:"extensionDeployment,omitempty"`
 }
-
-type _DeployExtensionResponse DeployExtensionResponse
 
 // NewDeployExtensionResponse instantiates a new DeployExtensionResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeployExtensionResponse(extensionDeployment ExtensionDeployment) *DeployExtensionResponse {
+func NewDeployExtensionResponse() *DeployExtensionResponse {
 	this := DeployExtensionResponse{}
-	this.ExtensionDeployment = extensionDeployment
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewDeployExtensionResponseWithDefaults() *DeployExtensionResponse {
 	return &this
 }
 
-// GetExtensionDeployment returns the ExtensionDeployment field value
+// GetExtensionDeployment returns the ExtensionDeployment field value if set, zero value otherwise.
 func (o *DeployExtensionResponse) GetExtensionDeployment() ExtensionDeployment {
-	if o == nil {
+	if o == nil || IsNil(o.ExtensionDeployment) {
 		var ret ExtensionDeployment
 		return ret
 	}
-
-	return o.ExtensionDeployment
+	return *o.ExtensionDeployment
 }
 
-// GetExtensionDeploymentOk returns a tuple with the ExtensionDeployment field value
+// GetExtensionDeploymentOk returns a tuple with the ExtensionDeployment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DeployExtensionResponse) GetExtensionDeploymentOk() (*ExtensionDeployment, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ExtensionDeployment) {
 		return nil, false
 	}
-	return &o.ExtensionDeployment, true
+	return o.ExtensionDeployment, true
 }
 
-// SetExtensionDeployment sets field value
+// HasExtensionDeployment returns a boolean if a field has been set.
+func (o *DeployExtensionResponse) HasExtensionDeployment() bool {
+	if o != nil && !IsNil(o.ExtensionDeployment) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtensionDeployment gets a reference to the given ExtensionDeployment and assigns it to the ExtensionDeployment field.
 func (o *DeployExtensionResponse) SetExtensionDeployment(v ExtensionDeployment) {
-	o.ExtensionDeployment = v
+	o.ExtensionDeployment = &v
 }
 
 func (o DeployExtensionResponse) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o DeployExtensionResponse) MarshalJSON() ([]byte, error) {
 
 func (o DeployExtensionResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["extensionDeployment"] = o.ExtensionDeployment
+	if !IsNil(o.ExtensionDeployment) {
+		toSerialize["extensionDeployment"] = o.ExtensionDeployment
+	}
 	return toSerialize, nil
-}
-
-func (o *DeployExtensionResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"extensionDeployment",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varDeployExtensionResponse := _DeployExtensionResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDeployExtensionResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = DeployExtensionResponse(varDeployExtensionResponse)
-
-	return err
 }
 
 type NullableDeployExtensionResponse struct {

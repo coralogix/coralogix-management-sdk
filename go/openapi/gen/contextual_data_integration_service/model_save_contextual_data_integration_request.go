@@ -12,8 +12,6 @@ package contextual_data_integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the SaveContextualDataIntegrationRequest type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &SaveContextualDataIntegrationRequest{}
 
 // SaveContextualDataIntegrationRequest struct for SaveContextualDataIntegrationRequest
 type SaveContextualDataIntegrationRequest struct {
-	Metadata IntegrationMetadata `json:"metadata"`
+	Metadata *IntegrationMetadata `json:"metadata,omitempty"`
 }
-
-type _SaveContextualDataIntegrationRequest SaveContextualDataIntegrationRequest
 
 // NewSaveContextualDataIntegrationRequest instantiates a new SaveContextualDataIntegrationRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSaveContextualDataIntegrationRequest(metadata IntegrationMetadata) *SaveContextualDataIntegrationRequest {
+func NewSaveContextualDataIntegrationRequest() *SaveContextualDataIntegrationRequest {
 	this := SaveContextualDataIntegrationRequest{}
-	this.Metadata = metadata
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewSaveContextualDataIntegrationRequestWithDefaults() *SaveContextualDataIn
 	return &this
 }
 
-// GetMetadata returns the Metadata field value
+// GetMetadata returns the Metadata field value if set, zero value otherwise.
 func (o *SaveContextualDataIntegrationRequest) GetMetadata() IntegrationMetadata {
-	if o == nil {
+	if o == nil || IsNil(o.Metadata) {
 		var ret IntegrationMetadata
 		return ret
 	}
-
-	return o.Metadata
+	return *o.Metadata
 }
 
-// GetMetadataOk returns a tuple with the Metadata field value
+// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SaveContextualDataIntegrationRequest) GetMetadataOk() (*IntegrationMetadata, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Metadata) {
 		return nil, false
 	}
-	return &o.Metadata, true
+	return o.Metadata, true
 }
 
-// SetMetadata sets field value
+// HasMetadata returns a boolean if a field has been set.
+func (o *SaveContextualDataIntegrationRequest) HasMetadata() bool {
+	if o != nil && !IsNil(o.Metadata) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadata gets a reference to the given IntegrationMetadata and assigns it to the Metadata field.
 func (o *SaveContextualDataIntegrationRequest) SetMetadata(v IntegrationMetadata) {
-	o.Metadata = v
+	o.Metadata = &v
 }
 
 func (o SaveContextualDataIntegrationRequest) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o SaveContextualDataIntegrationRequest) MarshalJSON() ([]byte, error) {
 
 func (o SaveContextualDataIntegrationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["metadata"] = o.Metadata
+	if !IsNil(o.Metadata) {
+		toSerialize["metadata"] = o.Metadata
+	}
 	return toSerialize, nil
-}
-
-func (o *SaveContextualDataIntegrationRequest) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"metadata",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varSaveContextualDataIntegrationRequest := _SaveContextualDataIntegrationRequest{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSaveContextualDataIntegrationRequest)
-
-	if err != nil {
-		return err
-	}
-
-	*o = SaveContextualDataIntegrationRequest(varSaveContextualDataIntegrationRequest)
-
-	return err
 }
 
 type NullableSaveContextualDataIntegrationRequest struct {

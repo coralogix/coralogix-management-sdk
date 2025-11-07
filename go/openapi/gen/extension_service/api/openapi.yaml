@@ -105,9 +105,6 @@ components:
           type: string
         version:
           type: string
-      required:
-      - descriptionMd
-      - version
       title: Changelog entry
       type: object
     ColorsByAggregation:
@@ -143,8 +140,6 @@ components:
           items:
             type: string
           type: array
-      required:
-      - reason
       title: Deprecation
       type: object
     ExtensionBinary:
@@ -158,9 +153,6 @@ components:
           type: string
         type:
           $ref: "#/components/schemas/ExtensionBinary.BinaryType"
-      required:
-      - data
-      - type
       title: Extension binary
       type: object
     ExtensionBinary.BinaryType:
@@ -213,12 +205,6 @@ components:
           $ref: "#/components/schemas/TargetDomain"
         uniqueId:
           type: string
-      required:
-      - data
-      - id
-      - name
-      - permissionResource
-      - targetDomain
       title: Extension item
       type: object
     ExtensionItemBinary:
@@ -235,10 +221,6 @@ components:
           type: string
         type:
           $ref: "#/components/schemas/ExtensionItemBinary.BinaryType"
-      required:
-      - data
-      - fileName
-      - type
       title: Extension item binary
       type: object
     ExtensionItemBinary.BinaryType:
@@ -369,8 +351,6 @@ components:
           type: array
         version:
           type: string
-      required:
-      - version
       title: Extension revision
       type: object
     FieldGroup:
@@ -679,10 +659,6 @@ components:
           items:
             $ref: "#/components/schemas/GetAllExtensionsResponse.Revision"
           type: array
-      required:
-      - id
-      - image
-      - name
       title: Extension
       type: object
     GetAllExtensionsResponse.Revision:
@@ -730,9 +706,6 @@ components:
           $ref: "#/components/schemas/RevisionSummary"
         version:
           type: string
-      required:
-      - summary
-      - version
       title: Revision
       type: object
     IntegrationDetail:
@@ -746,9 +719,6 @@ components:
           type: string
         name:
           type: string
-      required:
-      - link
-      - name
       title: Integration detail
       type: object
     ItemCounts:
@@ -846,8 +816,6 @@ components:
           type: boolean
         itemCounts:
           $ref: "#/components/schemas/ItemCounts"
-      required:
-      - itemCounts
       title: Revision summary
       type: object
     TargetDomain:
@@ -1289,10 +1257,6 @@ components:
           items:
             $ref: "#/components/schemas/ExtensionRevision"
           type: array
-      required:
-      - id
-      - image
-      - name
       title: Extension metadata
       type: object
     v3.FilterOperator:

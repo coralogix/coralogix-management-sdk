@@ -12,8 +12,6 @@ package outgoing_webhooks_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the CreateOutgoingWebhookResponse type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &CreateOutgoingWebhookResponse{}
 
 // CreateOutgoingWebhookResponse struct for CreateOutgoingWebhookResponse
 type CreateOutgoingWebhookResponse struct {
-	Id string `json:"id"`
+	Id *string `json:"id,omitempty"`
 }
-
-type _CreateOutgoingWebhookResponse CreateOutgoingWebhookResponse
 
 // NewCreateOutgoingWebhookResponse instantiates a new CreateOutgoingWebhookResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateOutgoingWebhookResponse(id string) *CreateOutgoingWebhookResponse {
+func NewCreateOutgoingWebhookResponse() *CreateOutgoingWebhookResponse {
 	this := CreateOutgoingWebhookResponse{}
-	this.Id = id
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewCreateOutgoingWebhookResponseWithDefaults() *CreateOutgoingWebhookRespon
 	return &this
 }
 
-// GetId returns the Id field value
+// GetId returns the Id field value if set, zero value otherwise.
 func (o *CreateOutgoingWebhookResponse) GetId() string {
-	if o == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
-
-	return o.Id
+	return *o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateOutgoingWebhookResponse) GetIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
-	return &o.Id, true
+	return o.Id, true
 }
 
-// SetId sets field value
+// HasId returns a boolean if a field has been set.
+func (o *CreateOutgoingWebhookResponse) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
 func (o *CreateOutgoingWebhookResponse) SetId(v string) {
-	o.Id = v
+	o.Id = &v
 }
 
 func (o CreateOutgoingWebhookResponse) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o CreateOutgoingWebhookResponse) MarshalJSON() ([]byte, error) {
 
 func (o CreateOutgoingWebhookResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
 	return toSerialize, nil
-}
-
-func (o *CreateOutgoingWebhookResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"id",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varCreateOutgoingWebhookResponse := _CreateOutgoingWebhookResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateOutgoingWebhookResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = CreateOutgoingWebhookResponse(varCreateOutgoingWebhookResponse)
-
-	return err
 }
 
 type NullableCreateOutgoingWebhookResponse struct {

@@ -659,10 +659,6 @@ components:
         updateTime:
           format: date-time
           type: string
-      required:
-      - configOverrides
-      - entityType
-      - name
       title: Preset
       type: object
     PresetSummary:
@@ -803,9 +799,6 @@ components:
         template:
           example: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
           type: string
-      required:
-      - fieldName
-      - template
       title: Message Config Field
       type: object
     v3.FilterOperator:

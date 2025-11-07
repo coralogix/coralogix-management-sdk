@@ -12,8 +12,6 @@ package extension_deployment_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the RevertDeploymentOfExtensionRequest type satisfies the MappedNullable interface at compile time
@@ -21,19 +19,16 @@ var _ MappedNullable = &RevertDeploymentOfExtensionRequest{}
 
 // RevertDeploymentOfExtensionRequest struct for RevertDeploymentOfExtensionRequest
 type RevertDeploymentOfExtensionRequest struct {
-	Id string `json:"id"`
+	Id *string `json:"id,omitempty"`
 	KeptExtensionItems []string `json:"keptExtensionItems,omitempty"`
 }
-
-type _RevertDeploymentOfExtensionRequest RevertDeploymentOfExtensionRequest
 
 // NewRevertDeploymentOfExtensionRequest instantiates a new RevertDeploymentOfExtensionRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRevertDeploymentOfExtensionRequest(id string) *RevertDeploymentOfExtensionRequest {
+func NewRevertDeploymentOfExtensionRequest() *RevertDeploymentOfExtensionRequest {
 	this := RevertDeploymentOfExtensionRequest{}
-	this.Id = id
 	return &this
 }
 
@@ -45,28 +40,36 @@ func NewRevertDeploymentOfExtensionRequestWithDefaults() *RevertDeploymentOfExte
 	return &this
 }
 
-// GetId returns the Id field value
+// GetId returns the Id field value if set, zero value otherwise.
 func (o *RevertDeploymentOfExtensionRequest) GetId() string {
-	if o == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
-
-	return o.Id
+	return *o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RevertDeploymentOfExtensionRequest) GetIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
-	return &o.Id, true
+	return o.Id, true
 }
 
-// SetId sets field value
+// HasId returns a boolean if a field has been set.
+func (o *RevertDeploymentOfExtensionRequest) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
 func (o *RevertDeploymentOfExtensionRequest) SetId(v string) {
-	o.Id = v
+	o.Id = &v
 }
 
 // GetKeptExtensionItems returns the KeptExtensionItems field value if set, zero value otherwise.
@@ -111,48 +114,13 @@ func (o RevertDeploymentOfExtensionRequest) MarshalJSON() ([]byte, error) {
 
 func (o RevertDeploymentOfExtensionRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
 	if !IsNil(o.KeptExtensionItems) {
 		toSerialize["keptExtensionItems"] = o.KeptExtensionItems
 	}
 	return toSerialize, nil
-}
-
-func (o *RevertDeploymentOfExtensionRequest) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"id",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varRevertDeploymentOfExtensionRequest := _RevertDeploymentOfExtensionRequest{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRevertDeploymentOfExtensionRequest)
-
-	if err != nil {
-		return err
-	}
-
-	*o = RevertDeploymentOfExtensionRequest(varRevertDeploymentOfExtensionRequest)
-
-	return err
 }
 
 type NullableRevertDeploymentOfExtensionRequest struct {

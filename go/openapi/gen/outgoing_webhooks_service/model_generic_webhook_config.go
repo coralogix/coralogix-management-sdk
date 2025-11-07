@@ -12,8 +12,6 @@ package outgoing_webhooks_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the GenericWebhookConfig type satisfies the MappedNullable interface at compile time
@@ -22,21 +20,17 @@ var _ MappedNullable = &GenericWebhookConfig{}
 // GenericWebhookConfig struct for GenericWebhookConfig
 type GenericWebhookConfig struct {
 	Headers *map[string]string `json:"headers,omitempty"`
-	Method MethodType `json:"method"`
+	Method *MethodType `json:"method,omitempty"`
 	Payload *string `json:"payload,omitempty"`
-	Uuid string `json:"uuid"`
+	Uuid *string `json:"uuid,omitempty"`
 }
-
-type _GenericWebhookConfig GenericWebhookConfig
 
 // NewGenericWebhookConfig instantiates a new GenericWebhookConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGenericWebhookConfig(method MethodType, uuid string) *GenericWebhookConfig {
+func NewGenericWebhookConfig() *GenericWebhookConfig {
 	this := GenericWebhookConfig{}
-	this.Method = method
-	this.Uuid = uuid
 	return &this
 }
 
@@ -80,28 +74,36 @@ func (o *GenericWebhookConfig) SetHeaders(v map[string]string) {
 	o.Headers = &v
 }
 
-// GetMethod returns the Method field value
+// GetMethod returns the Method field value if set, zero value otherwise.
 func (o *GenericWebhookConfig) GetMethod() MethodType {
-	if o == nil {
+	if o == nil || IsNil(o.Method) {
 		var ret MethodType
 		return ret
 	}
-
-	return o.Method
+	return *o.Method
 }
 
-// GetMethodOk returns a tuple with the Method field value
+// GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GenericWebhookConfig) GetMethodOk() (*MethodType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Method) {
 		return nil, false
 	}
-	return &o.Method, true
+	return o.Method, true
 }
 
-// SetMethod sets field value
+// HasMethod returns a boolean if a field has been set.
+func (o *GenericWebhookConfig) HasMethod() bool {
+	if o != nil && !IsNil(o.Method) {
+		return true
+	}
+
+	return false
+}
+
+// SetMethod gets a reference to the given MethodType and assigns it to the Method field.
 func (o *GenericWebhookConfig) SetMethod(v MethodType) {
-	o.Method = v
+	o.Method = &v
 }
 
 // GetPayload returns the Payload field value if set, zero value otherwise.
@@ -136,28 +138,36 @@ func (o *GenericWebhookConfig) SetPayload(v string) {
 	o.Payload = &v
 }
 
-// GetUuid returns the Uuid field value
+// GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *GenericWebhookConfig) GetUuid() string {
-	if o == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
-
-	return o.Uuid
+	return *o.Uuid
 }
 
-// GetUuidOk returns a tuple with the Uuid field value
+// GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GenericWebhookConfig) GetUuidOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
-	return &o.Uuid, true
+	return o.Uuid, true
 }
 
-// SetUuid sets field value
+// HasUuid returns a boolean if a field has been set.
+func (o *GenericWebhookConfig) HasUuid() bool {
+	if o != nil && !IsNil(o.Uuid) {
+		return true
+	}
+
+	return false
+}
+
+// SetUuid gets a reference to the given string and assigns it to the Uuid field.
 func (o *GenericWebhookConfig) SetUuid(v string) {
-	o.Uuid = v
+	o.Uuid = &v
 }
 
 func (o GenericWebhookConfig) MarshalJSON() ([]byte, error) {
@@ -173,50 +183,16 @@ func (o GenericWebhookConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Headers) {
 		toSerialize["headers"] = o.Headers
 	}
-	toSerialize["method"] = o.Method
+	if !IsNil(o.Method) {
+		toSerialize["method"] = o.Method
+	}
 	if !IsNil(o.Payload) {
 		toSerialize["payload"] = o.Payload
 	}
-	toSerialize["uuid"] = o.Uuid
+	if !IsNil(o.Uuid) {
+		toSerialize["uuid"] = o.Uuid
+	}
 	return toSerialize, nil
-}
-
-func (o *GenericWebhookConfig) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"method",
-		"uuid",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varGenericWebhookConfig := _GenericWebhookConfig{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGenericWebhookConfig)
-
-	if err != nil {
-		return err
-	}
-
-	*o = GenericWebhookConfig(varGenericWebhookConfig)
-
-	return err
 }
 
 type NullableGenericWebhookConfig struct {

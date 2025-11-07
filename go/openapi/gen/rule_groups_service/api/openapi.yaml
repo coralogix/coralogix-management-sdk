@@ -1,0 +1,1297 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /parsing-rules/rule-groups/v1:
+    delete:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: RuleGroupsService_BulkDeleteRuleGroup
+      parameters:
+      - explode: true
+        in: query
+        name: group_ids
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BulkDeleteRuleGroupResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Bulk Delete Rule Group
+      tags:
+      - Rule Groups Service
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: RuleGroupsService_ListRuleGroups
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListRuleGroupsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List Rule Groups
+      tags:
+      - Rule Groups Service
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: RuleGroupsService_CreateRuleGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RuleGroupsService_CreateRuleGroup_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateRuleGroupResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Create Rule Group
+      tags:
+      - Rule Groups Service
+  /parsing-rules/rule-groups/v1/limits:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: RuleGroupsService_GetCompanyUsageLimits
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetCompanyUsageLimitsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Company Usage Limits
+      tags:
+      - Rule Groups Service
+  /parsing-rules/rule-groups/v1/mapping:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: RuleGroupsService_GetRuleGroupModelMapping
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RuleGroupsService_GetRuleGroupModelMapping_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetRuleGroupModelMappingResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Rule Group Model Mapping
+      tags:
+      - Rule Groups Service
+  /parsing-rules/rule-groups/v1/{group_id}:
+    delete:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: RuleGroupsService_DeleteRuleGroup
+      parameters:
+      - explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteRuleGroupResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Delete Rule Group
+      tags:
+      - Rule Groups Service
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: RuleGroupsService_GetRuleGroup
+      parameters:
+      - explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetRuleGroupResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Rule Group
+      tags:
+      - Rule Groups Service
+    put:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: RuleGroupsService_UpdateRuleGroup
+      parameters:
+      - explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RuleGroupsService_CreateRuleGroup_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateRuleGroupResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Update Rule Group
+      tags:
+      - Rule Groups Service
+components:
+  schemas:
+    AllowParameters:
+      properties:
+        keepBlockedLogs:
+          type: boolean
+        rule:
+          type: string
+      type: object
+    ApplicationNameConstraint:
+      example:
+        value: value
+      properties:
+        value:
+          type: string
+      type: object
+    BlockParameters:
+      properties:
+        keepBlockedLogs:
+          type: boolean
+        rule:
+          type: string
+      type: object
+    BulkDeleteRuleGroupResponse:
+      type: object
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
+    Counts:
+      example:
+        parsingThemes: 6
+        groups: 0
+        rules: 1
+      properties:
+        groups:
+          format: int32
+          type: integer
+        parsingThemes:
+          format: int32
+          type: integer
+        rules:
+          format: int32
+          type: integer
+      type: object
+    CreateRuleGroupRequest.CreateRuleSubgroup:
+      properties:
+        enabled:
+          type: boolean
+        order:
+          format: int64
+          type: integer
+        rules:
+          items:
+            $ref: "#/components/schemas/CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule"
+          type: array
+      type: object
+    CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule:
+      properties:
+        description:
+          type: string
+        enabled:
+          type: boolean
+        name:
+          type: string
+        order:
+          format: int64
+          type: integer
+        parameters:
+          $ref: "#/components/schemas/RuleParameters"
+        sourceField:
+          type: string
+      type: object
+    CreateRuleGroupResponse:
+      example:
+        ruleGroup:
+          ruleSubgroups:
+          - rules:
+            - sourceField: sourceField
+              name: name
+              description: description
+              id: id
+              parameters:
+                jsonExtractParameters:
+                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                  rule: rule
+                  destinationFieldText: destinationFieldText
+              enabled: true
+              order: 1
+            - sourceField: sourceField
+              name: name
+              description: description
+              id: id
+              parameters:
+                jsonExtractParameters:
+                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                  rule: rule
+                  destinationFieldText: destinationFieldText
+              enabled: true
+              order: 1
+            id: id
+            enabled: true
+            order: 6
+          - rules:
+            - sourceField: sourceField
+              name: name
+              description: description
+              id: id
+              parameters:
+                jsonExtractParameters:
+                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                  rule: rule
+                  destinationFieldText: destinationFieldText
+              enabled: true
+              order: 1
+            - sourceField: sourceField
+              name: name
+              description: description
+              id: id
+              parameters:
+                jsonExtractParameters:
+                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                  rule: rule
+                  destinationFieldText: destinationFieldText
+              enabled: true
+              order: 1
+            id: id
+            enabled: true
+            order: 6
+          creator: creator
+          hidden: true
+          ruleMatchers:
+          - applicationName:
+              value: value
+          - applicationName:
+              value: value
+          name: name
+          description: description
+          id: id
+          enabled: true
+          order: 0
+      properties:
+        ruleGroup:
+          $ref: "#/components/schemas/RuleGroup"
+      type: object
+    DeleteRuleGroupResponse:
+      type: object
+    DestinationField:
+      enum:
+      - DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+      - DESTINATION_FIELD_CLASSNAME
+      - DESTINATION_FIELD_METHODNAME
+      - DESTINATION_FIELD_THREADID
+      - DESTINATION_FIELD_SEVERITY
+      - DESTINATION_FIELD_TEXT
+      type: string
+    ExtractParameters:
+      properties:
+        rule:
+          type: string
+      type: object
+    ExtractTimestampParameters:
+      properties:
+        format:
+          type: string
+        standard:
+          $ref: "#/components/schemas/FormatStandard"
+      type: object
+    FieldGroup:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    FormatStandard:
+      enum:
+      - FORMAT_STANDARD_STRFTIME_OR_UNSPECIFIED
+      - FORMAT_STANDARD_JAVASDF
+      - FORMAT_STANDARD_GOLANG
+      - FORMAT_STANDARD_SECONDSTS
+      - FORMAT_STANDARD_MILLITS
+      - FORMAT_STANDARD_MICROTS
+      - FORMAT_STANDARD_NANOTS
+      type: string
+    GetCompanyUsageLimitsResponse:
+      example:
+        companyId: companyId
+        usage:
+          parsingThemes: 6
+          groups: 0
+          rules: 1
+        limits:
+          parsingThemes: 6
+          groups: 0
+          rules: 1
+      properties:
+        companyId:
+          type: string
+        limits:
+          $ref: "#/components/schemas/Counts"
+        usage:
+          $ref: "#/components/schemas/Counts"
+      type: object
+    GetRuleGroupModelMappingRequest.CreateRuleSubgroup:
+      properties:
+        enabled:
+          type: boolean
+        order:
+          format: int64
+          type: integer
+        rules:
+          items:
+            $ref: "#/components/schemas/GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule"
+          type: array
+      type: object
+    GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule:
+      properties:
+        description:
+          type: string
+        enabled:
+          type: boolean
+        name:
+          type: string
+        order:
+          format: int64
+          type: integer
+        parameters:
+          $ref: "#/components/schemas/RuleParameters"
+        sourceField:
+          type: string
+      type: object
+    GetRuleGroupModelMappingResponse:
+      example:
+        ruleDefinition: "{}"
+      properties:
+        ruleDefinition:
+          type: object
+      type: object
+    GetRuleGroupResponse:
+      example:
+        ruleGroup:
+          ruleSubgroups:
+          - rules:
+            - sourceField: sourceField
+              name: name
+              description: description
+              id: id
+              parameters:
+                jsonExtractParameters:
+                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                  rule: rule
+                  destinationFieldText: destinationFieldText
+              enabled: true
+              order: 1
+            - sourceField: sourceField
+              name: name
+              description: description
+              id: id
+              parameters:
+                jsonExtractParameters:
+                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                  rule: rule
+                  destinationFieldText: destinationFieldText
+              enabled: true
+              order: 1
+            id: id
+            enabled: true
+            order: 6
+          - rules:
+            - sourceField: sourceField
+              name: name
+              description: description
+              id: id
+              parameters:
+                jsonExtractParameters:
+                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                  rule: rule
+                  destinationFieldText: destinationFieldText
+              enabled: true
+              order: 1
+            - sourceField: sourceField
+              name: name
+              description: description
+              id: id
+              parameters:
+                jsonExtractParameters:
+                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                  rule: rule
+                  destinationFieldText: destinationFieldText
+              enabled: true
+              order: 1
+            id: id
+            enabled: true
+            order: 6
+          creator: creator
+          hidden: true
+          ruleMatchers:
+          - applicationName:
+              value: value
+          - applicationName:
+              value: value
+          name: name
+          description: description
+          id: id
+          enabled: true
+          order: 0
+      properties:
+        ruleGroup:
+          $ref: "#/components/schemas/RuleGroup"
+      type: object
+    JsonExtractParameters:
+      example:
+        destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+        rule: rule
+        destinationFieldText: destinationFieldText
+      properties:
+        destinationFieldText:
+          type: string
+        destinationFieldType:
+          $ref: "#/components/schemas/DestinationField"
+        rule:
+          type: string
+      type: object
+    JsonParseParameters:
+      properties:
+        deleteSource:
+          type: boolean
+        destinationField:
+          type: string
+        escapedValue:
+          type: boolean
+        overrideDest:
+          type: boolean
+      type: object
+    JsonStringifyParameters:
+      properties:
+        deleteSource:
+          type: boolean
+        destinationField:
+          type: string
+      type: object
+    ListRuleGroupsResponse:
+      example:
+        ruleGroups:
+        - ruleSubgroups:
+          - rules:
+            - sourceField: sourceField
+              name: name
+              description: description
+              id: id
+              parameters:
+                jsonExtractParameters:
+                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                  rule: rule
+                  destinationFieldText: destinationFieldText
+              enabled: true
+              order: 1
+            - sourceField: sourceField
+              name: name
+              description: description
+              id: id
+              parameters:
+                jsonExtractParameters:
+                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                  rule: rule
+                  destinationFieldText: destinationFieldText
+              enabled: true
+              order: 1
+            id: id
+            enabled: true
+            order: 6
+          - rules:
+            - sourceField: sourceField
+              name: name
+              description: description
+              id: id
+              parameters:
+                jsonExtractParameters:
+                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                  rule: rule
+                  destinationFieldText: destinationFieldText
+              enabled: true
+              order: 1
+            - sourceField: sourceField
+              name: name
+              description: description
+              id: id
+              parameters:
+                jsonExtractParameters:
+                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                  rule: rule
+                  destinationFieldText: destinationFieldText
+              enabled: true
+              order: 1
+            id: id
+            enabled: true
+            order: 6
+          creator: creator
+          hidden: true
+          ruleMatchers:
+          - applicationName:
+              value: value
+          - applicationName:
+              value: value
+          name: name
+          description: description
+          id: id
+          enabled: true
+          order: 0
+        - ruleSubgroups:
+          - rules:
+            - sourceField: sourceField
+              name: name
+              description: description
+              id: id
+              parameters:
+                jsonExtractParameters:
+                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                  rule: rule
+                  destinationFieldText: destinationFieldText
+              enabled: true
+              order: 1
+            - sourceField: sourceField
+              name: name
+              description: description
+              id: id
+              parameters:
+                jsonExtractParameters:
+                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                  rule: rule
+                  destinationFieldText: destinationFieldText
+              enabled: true
+              order: 1
+            id: id
+            enabled: true
+            order: 6
+          - rules:
+            - sourceField: sourceField
+              name: name
+              description: description
+              id: id
+              parameters:
+                jsonExtractParameters:
+                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                  rule: rule
+                  destinationFieldText: destinationFieldText
+              enabled: true
+              order: 1
+            - sourceField: sourceField
+              name: name
+              description: description
+              id: id
+              parameters:
+                jsonExtractParameters:
+                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                  rule: rule
+                  destinationFieldText: destinationFieldText
+              enabled: true
+              order: 1
+            id: id
+            enabled: true
+            order: 6
+          creator: creator
+          hidden: true
+          ruleMatchers:
+          - applicationName:
+              value: value
+          - applicationName:
+              value: value
+          name: name
+          description: description
+          id: id
+          enabled: true
+          order: 0
+      properties:
+        ruleGroups:
+          items:
+            $ref: "#/components/schemas/RuleGroup"
+          type: array
+      type: object
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    ParseParameters:
+      properties:
+        destinationField:
+          type: string
+        rule:
+          type: string
+      type: object
+    RemoveFieldsParameters:
+      properties:
+        fields:
+          items:
+            type: string
+          type: array
+      type: object
+    ReplaceParameters:
+      properties:
+        destinationField:
+          type: string
+        replaceNewVal:
+          type: string
+        rule:
+          type: string
+      type: object
+    RuleGroup:
+      example:
+        ruleSubgroups:
+        - rules:
+          - sourceField: sourceField
+            name: name
+            description: description
+            id: id
+            parameters:
+              jsonExtractParameters:
+                destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                rule: rule
+                destinationFieldText: destinationFieldText
+            enabled: true
+            order: 1
+          - sourceField: sourceField
+            name: name
+            description: description
+            id: id
+            parameters:
+              jsonExtractParameters:
+                destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                rule: rule
+                destinationFieldText: destinationFieldText
+            enabled: true
+            order: 1
+          id: id
+          enabled: true
+          order: 6
+        - rules:
+          - sourceField: sourceField
+            name: name
+            description: description
+            id: id
+            parameters:
+              jsonExtractParameters:
+                destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                rule: rule
+                destinationFieldText: destinationFieldText
+            enabled: true
+            order: 1
+          - sourceField: sourceField
+            name: name
+            description: description
+            id: id
+            parameters:
+              jsonExtractParameters:
+                destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                rule: rule
+                destinationFieldText: destinationFieldText
+            enabled: true
+            order: 1
+          id: id
+          enabled: true
+          order: 6
+        creator: creator
+        hidden: true
+        ruleMatchers:
+        - applicationName:
+            value: value
+        - applicationName:
+            value: value
+        name: name
+        description: description
+        id: id
+        enabled: true
+        order: 0
+      properties:
+        creator:
+          type: string
+        description:
+          type: string
+        enabled:
+          type: boolean
+        hidden:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        order:
+          format: int64
+          type: integer
+        ruleMatchers:
+          items:
+            $ref: "#/components/schemas/RuleMatcher"
+          type: array
+        ruleSubgroups:
+          items:
+            $ref: "#/components/schemas/RuleSubgroup"
+          type: array
+      type: object
+    RuleMatcher:
+      oneOf:
+      - $ref: "#/components/schemas/RuleMatcherApplicationName"
+      - $ref: "#/components/schemas/RuleMatcherSubsystemName"
+      - $ref: "#/components/schemas/RuleMatcherSeverity"
+    RuleMatcherApplicationName:
+      additionalProperties: false
+      example:
+        applicationName:
+          value: value
+      properties:
+        applicationName:
+          $ref: "#/components/schemas/ApplicationNameConstraint"
+      type: object
+    RuleMatcherSeverity:
+      additionalProperties: false
+      properties:
+        severity:
+          $ref: "#/components/schemas/SeverityConstraint"
+      type: object
+    RuleMatcherSubsystemName:
+      additionalProperties: false
+      properties:
+        subsystemName:
+          $ref: "#/components/schemas/SubsystemNameConstraint"
+      type: object
+    RuleParameters:
+      oneOf:
+      - $ref: "#/components/schemas/RuleParametersJsonExtractParameters"
+      - $ref: "#/components/schemas/RuleParametersParseParameters"
+      - $ref: "#/components/schemas/RuleParametersAllowParameters"
+      - $ref: "#/components/schemas/RuleParametersBlockParameters"
+      - $ref: "#/components/schemas/RuleParametersExtractTimestampParameters"
+      - $ref: "#/components/schemas/RuleParametersRemoveFieldsParameters"
+      - $ref: "#/components/schemas/RuleParametersJsonStringifyParameters"
+      - $ref: "#/components/schemas/RuleParametersExtractParameters"
+      - $ref: "#/components/schemas/RuleParametersReplaceParameters"
+      - $ref: "#/components/schemas/RuleParametersJsonParseParameters"
+    RuleParametersAllowParameters:
+      additionalProperties: false
+      properties:
+        allowParameters:
+          $ref: "#/components/schemas/AllowParameters"
+      type: object
+    RuleParametersBlockParameters:
+      additionalProperties: false
+      properties:
+        blockParameters:
+          $ref: "#/components/schemas/BlockParameters"
+      type: object
+    RuleParametersExtractParameters:
+      additionalProperties: false
+      properties:
+        extractParameters:
+          $ref: "#/components/schemas/ExtractParameters"
+      type: object
+    RuleParametersExtractTimestampParameters:
+      additionalProperties: false
+      properties:
+        extractTimestampParameters:
+          $ref: "#/components/schemas/ExtractTimestampParameters"
+      type: object
+    RuleParametersJsonExtractParameters:
+      additionalProperties: false
+      example:
+        jsonExtractParameters:
+          destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+          rule: rule
+          destinationFieldText: destinationFieldText
+      properties:
+        jsonExtractParameters:
+          $ref: "#/components/schemas/JsonExtractParameters"
+      type: object
+    RuleParametersJsonParseParameters:
+      additionalProperties: false
+      properties:
+        jsonParseParameters:
+          $ref: "#/components/schemas/JsonParseParameters"
+      type: object
+    RuleParametersJsonStringifyParameters:
+      additionalProperties: false
+      properties:
+        jsonStringifyParameters:
+          $ref: "#/components/schemas/JsonStringifyParameters"
+      type: object
+    RuleParametersParseParameters:
+      additionalProperties: false
+      properties:
+        parseParameters:
+          $ref: "#/components/schemas/ParseParameters"
+      type: object
+    RuleParametersRemoveFieldsParameters:
+      additionalProperties: false
+      properties:
+        removeFieldsParameters:
+          $ref: "#/components/schemas/RemoveFieldsParameters"
+      type: object
+    RuleParametersReplaceParameters:
+      additionalProperties: false
+      properties:
+        replaceParameters:
+          $ref: "#/components/schemas/ReplaceParameters"
+      type: object
+    RuleSubgroup:
+      example:
+        rules:
+        - sourceField: sourceField
+          name: name
+          description: description
+          id: id
+          parameters:
+            jsonExtractParameters:
+              destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+              rule: rule
+              destinationFieldText: destinationFieldText
+          enabled: true
+          order: 1
+        - sourceField: sourceField
+          name: name
+          description: description
+          id: id
+          parameters:
+            jsonExtractParameters:
+              destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+              rule: rule
+              destinationFieldText: destinationFieldText
+          enabled: true
+          order: 1
+        id: id
+        enabled: true
+        order: 6
+      properties:
+        enabled:
+          type: boolean
+        id:
+          type: string
+        order:
+          format: int64
+          type: integer
+        rules:
+          items:
+            $ref: "#/components/schemas/rules.v1.Rule"
+          type: array
+      type: object
+    SeverityConstraint:
+      properties:
+        value:
+          $ref: "#/components/schemas/Value"
+      type: object
+    SubsystemNameConstraint:
+      properties:
+        value:
+          type: string
+      type: object
+    UpdateRuleGroupResponse:
+      example:
+        ruleGroup:
+          ruleSubgroups:
+          - rules:
+            - sourceField: sourceField
+              name: name
+              description: description
+              id: id
+              parameters:
+                jsonExtractParameters:
+                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                  rule: rule
+                  destinationFieldText: destinationFieldText
+              enabled: true
+              order: 1
+            - sourceField: sourceField
+              name: name
+              description: description
+              id: id
+              parameters:
+                jsonExtractParameters:
+                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                  rule: rule
+                  destinationFieldText: destinationFieldText
+              enabled: true
+              order: 1
+            id: id
+            enabled: true
+            order: 6
+          - rules:
+            - sourceField: sourceField
+              name: name
+              description: description
+              id: id
+              parameters:
+                jsonExtractParameters:
+                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                  rule: rule
+                  destinationFieldText: destinationFieldText
+              enabled: true
+              order: 1
+            - sourceField: sourceField
+              name: name
+              description: description
+              id: id
+              parameters:
+                jsonExtractParameters:
+                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                  rule: rule
+                  destinationFieldText: destinationFieldText
+              enabled: true
+              order: 1
+            id: id
+            enabled: true
+            order: 6
+          creator: creator
+          hidden: true
+          ruleMatchers:
+          - applicationName:
+              value: value
+          - applicationName:
+              value: value
+          name: name
+          description: description
+          id: id
+          enabled: true
+          order: 0
+      properties:
+        ruleGroup:
+          $ref: "#/components/schemas/RuleGroup"
+      type: object
+    Value:
+      enum:
+      - VALUE_DEBUG_OR_UNSPECIFIED
+      - VALUE_VERBOSE
+      - VALUE_INFO
+      - VALUE_WARNING
+      - VALUE_ERROR
+      - VALUE_CRITICAL
+      type: string
+    common.Group:
+      properties:
+        field:
+          $ref: "#/components/schemas/FieldGroup"
+        groups:
+          items:
+            $ref: "#/components/schemas/common.Group"
+          type: array
+        value:
+          format: double
+          type: number
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    rules.v1.Rule:
+      example:
+        sourceField: sourceField
+        name: name
+        description: description
+        id: id
+        parameters:
+          jsonExtractParameters:
+            destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+            rule: rule
+            destinationFieldText: destinationFieldText
+        enabled: true
+        order: 1
+      properties:
+        description:
+          type: string
+        enabled:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        order:
+          format: int64
+          type: integer
+        parameters:
+          $ref: "#/components/schemas/RuleParameters"
+        sourceField:
+          type: string
+      type: object
+    rules.v1.TeamId:
+      properties:
+        id:
+          format: int64
+          type: integer
+      type: object
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    RuleGroupsService_CreateRuleGroup_request:
+      additionalProperties: false
+      properties:
+        creator:
+          type: string
+        description:
+          type: string
+        enabled:
+          type: boolean
+        hidden:
+          type: boolean
+        name:
+          type: string
+        order:
+          format: int64
+          type: integer
+        ruleMatchers:
+          items:
+            $ref: "#/components/schemas/RuleMatcher"
+          type: array
+        ruleSubgroups:
+          items:
+            $ref: "#/components/schemas/CreateRuleGroupRequest.CreateRuleSubgroup"
+          type: array
+        teamId:
+          $ref: "#/components/schemas/rules.v1.TeamId"
+      type: object
+    RuleGroupsService_GetRuleGroupModelMapping_request:
+      additionalProperties: false
+      properties:
+        creator:
+          type: string
+        description:
+          type: string
+        enabled:
+          type: boolean
+        hidden:
+          type: boolean
+        name:
+          type: string
+        order:
+          format: int64
+          type: integer
+        ruleMatchers:
+          items:
+            $ref: "#/components/schemas/RuleMatcher"
+          type: array
+        ruleSubgroups:
+          items:
+            $ref: "#/components/schemas/GetRuleGroupModelMappingRequest.CreateRuleSubgroup"
+          type: array
+      type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

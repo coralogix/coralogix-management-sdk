@@ -52,7 +52,7 @@ func TestExtensions(t *testing.T) {
 	for _, deployed := range deployedResp.DeployedExtensions {
 		if deployed.GetId() == extensionID {
 			undeployReq := extdeploy.RevertDeploymentOfExtensionRequest{
-				Id: deployed.GetId(),
+				Id: extensions.PtrString(deployed.GetId()),
 			}
 			_, httpResp, err := deployClient.
 				ExtensionDeploymentServiceUndeployExtension(ctx).
@@ -83,15 +83,15 @@ func TestExtensions(t *testing.T) {
 	assert.NotEmpty(t, itemIDs, "expected items for version 0.0.2")
 
 	deployReq := extdeploy.ExtensionDeployment{
-		Id:      extensionID,
-		Version: "0.0.2",
+		Id:      &extensionID,
+		Version: extensions.PtrString("0.0.2"),
 		ItemIds: itemIDs,
 	}
 
 	deployResp, httpResp, err := deployClient.
 		ExtensionDeploymentServiceDeployExtension(ctx).
-		Id(deployReq.Id).
-		Version(deployReq.Version).
+		Id(*deployReq.Id).
+		Version(*deployReq.Version).
 		ItemIds(deployReq.ItemIds).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))

@@ -258,10 +258,6 @@ components:
         teamId:
           format: int64
           type: integer
-      required:
-      - idpParameters
-      - spParameters
-      - teamId
       title: Get Configuration Response
       type: object
     GetSPParametersResponse:
@@ -280,8 +276,6 @@ components:
       properties:
         params:
           $ref: "#/components/schemas/SPParameters"
-      required:
-      - params
       title: Get SP Parameters Response
       type: object
     IDPDetails:
@@ -321,11 +315,6 @@ components:
           example: 1234567
           format: int64
           type: integer
-      required:
-      - active
-      - groupNames
-      - metadata
-      - teamEntityId
       title: IDP Parameters
       type: object
     IDPParametersMetadataUrl:
@@ -358,11 +347,6 @@ components:
           example: 1234567
           format: int64
           type: integer
-      required:
-      - active
-      - groupNames
-      - metadata
-      - teamEntityId
       title: IDP Parameters
       type: object
     MultipleValues:
@@ -402,12 +386,6 @@ components:
         signingCertPem:
           example: certificate
           type: string
-      required:
-      - assertionConsumerServiceUrl
-      - binding
-      - metadataUrl
-      - nameIdFormat
-      - signingCertPem
       title: Service Provider Parameters
       type: object
     SetIDPParametersResponse:
@@ -446,9 +424,6 @@ components:
         teamId:
           format: int64
           type: integer
-      required:
-      - isActive
-      - teamId
       title: Set Active Request
       type: object
     Set_IDP_Parameters_Request:
@@ -461,9 +436,6 @@ components:
         teamId:
           format: int64
           type: integer
-      required:
-      - params
-      - teamId
       title: Set IDP Parameters Request
       type: object
   securitySchemes:

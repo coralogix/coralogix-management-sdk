@@ -45,14 +45,15 @@ func TestApiKeys(t *testing.T) {
 	hashed := false
 	assertNilAndPrintError(t, err)
 
+	name := "My APM KEY"
 	createReq := apikeys.CreateApiKeyRequest{
-		Name: "My APM KEY",
-		Owner: apikeys.Owner{
+		Name: &name,
+		Owner: &apikeys.Owner{
 			OwnerTeamId: &apikeys.OwnerTeamId{
 				TeamId: &teamID,
 			},
 		},
-		KeyPermissions: apikeys.CreateApiKeyRequestKeyPermissions{
+		KeyPermissions: &apikeys.CreateApiKeyRequestKeyPermissions{
 			Presets:     []string{"APM"},
 			Permissions: []string{"ALERTS-MAP:READ"},
 		},
@@ -70,16 +71,16 @@ func TestApiKeys(t *testing.T) {
 		NewName: &newName,
 	}
 	_, httpResp, err = client.
-		ApiKeysServiceUpdateApiKey(context.Background(), created.KeyId).
+		ApiKeysServiceUpdateApiKey(context.Background(), *created.KeyId).
 		UpdateApiKeyRequest(updateReq).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 
-	updated, httpResp, err := client.ApiKeysServiceGetApiKey(context.Background(), created.KeyId).Execute()
+	updated, httpResp, err := client.ApiKeysServiceGetApiKey(context.Background(), *created.KeyId).Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 	assert.Equal(t, newName, updated.KeyInfo.Name)
 
-	_, httpResp, err = client.ApiKeysServiceDeleteApiKey(context.Background(), created.KeyId).Execute()
+	_, httpResp, err = client.ApiKeysServiceDeleteApiKey(context.Background(), *created.KeyId).Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
@@ -92,18 +93,20 @@ func TestIpAccess(t *testing.T) {
 
 	client := cxsdk.NewIPAccessClient(cpc)
 
+	ipRange1 := "31.154.215.114/32"
+	ipRange2 := "198.51.100.0/24"
 	// replace without ID, so it will create a new settings in case it doesn't exist
 	// if it exists, it will replace the existing settings
 	createReq := ipaccess.ReplaceCompanyIPAccessSettingsRequest{
 		IpAccess: []ipaccess.IpAccess{
 			{
 				Name:    ipaccess.PtrString("Office Network"),
-				IpRange: "31.154.215.114/32",
+				IpRange: &ipRange1,
 				Enabled: &enabled,
 			},
 			{
 				Name:    ipaccess.PtrString("VPN"),
-				IpRange: "198.51.100.0/24",
+				IpRange: &ipRange2,
 				Enabled: &enabled,
 			},
 		},
@@ -126,12 +129,12 @@ func TestIpAccess(t *testing.T) {
 		IpAccess: []ipaccess.IpAccess{
 			{
 				Name:    ipaccess.PtrString("Office Network"),
-				IpRange: "31.154.215.114/32",
+				IpRange: ipaccess.PtrString("31.154.215.114/32"),
 				Enabled: &enabled,
 			},
 			{
 				Name:    ipaccess.PtrString("VPN"),
-				IpRange: "198.51.100.0/18", // modified
+				IpRange: ipaccess.PtrString("198.51.100.0/18"), // modified
 				Enabled: &enabled,
 			},
 		},

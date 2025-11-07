@@ -12,8 +12,6 @@ package outgoing_webhooks_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the OutgoingWebhookInputDataSlack type satisfies the MappedNullable interface at compile time
@@ -21,22 +19,18 @@ var _ MappedNullable = &OutgoingWebhookInputDataSlack{}
 
 // OutgoingWebhookInputDataSlack struct for OutgoingWebhookInputDataSlack
 type OutgoingWebhookInputDataSlack struct {
-	Name string `json:"name"`
+	Name *string `json:"name,omitempty"`
 	Slack *SlackConfig `json:"slack,omitempty"`
-	Type WebhookType `json:"type"`
+	Type *WebhookType `json:"type,omitempty"`
 	Url *string `json:"url,omitempty"`
 }
-
-type _OutgoingWebhookInputDataSlack OutgoingWebhookInputDataSlack
 
 // NewOutgoingWebhookInputDataSlack instantiates a new OutgoingWebhookInputDataSlack object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOutgoingWebhookInputDataSlack(name string, type_ WebhookType) *OutgoingWebhookInputDataSlack {
+func NewOutgoingWebhookInputDataSlack() *OutgoingWebhookInputDataSlack {
 	this := OutgoingWebhookInputDataSlack{}
-	this.Name = name
-	this.Type = type_
 	return &this
 }
 
@@ -48,28 +42,36 @@ func NewOutgoingWebhookInputDataSlackWithDefaults() *OutgoingWebhookInputDataSla
 	return &this
 }
 
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *OutgoingWebhookInputDataSlack) GetName() string {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookInputDataSlack) GetNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *OutgoingWebhookInputDataSlack) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *OutgoingWebhookInputDataSlack) SetName(v string) {
-	o.Name = v
+	o.Name = &v
 }
 
 // GetSlack returns the Slack field value if set, zero value otherwise.
@@ -104,28 +106,36 @@ func (o *OutgoingWebhookInputDataSlack) SetSlack(v SlackConfig) {
 	o.Slack = &v
 }
 
-// GetType returns the Type field value
+// GetType returns the Type field value if set, zero value otherwise.
 func (o *OutgoingWebhookInputDataSlack) GetType() WebhookType {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret WebhookType
 		return ret
 	}
-
-	return o.Type
+	return *o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookInputDataSlack) GetTypeOk() (*WebhookType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
-	return &o.Type, true
+	return o.Type, true
 }
 
-// SetType sets field value
+// HasType returns a boolean if a field has been set.
+func (o *OutgoingWebhookInputDataSlack) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given WebhookType and assigns it to the Type field.
 func (o *OutgoingWebhookInputDataSlack) SetType(v WebhookType) {
-	o.Type = v
+	o.Type = &v
 }
 
 // GetUrl returns the Url field value if set, zero value otherwise.
@@ -170,53 +180,19 @@ func (o OutgoingWebhookInputDataSlack) MarshalJSON() ([]byte, error) {
 
 func (o OutgoingWebhookInputDataSlack) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	if !IsNil(o.Slack) {
 		toSerialize["slack"] = o.Slack
 	}
-	toSerialize["type"] = o.Type
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
 	return toSerialize, nil
-}
-
-func (o *OutgoingWebhookInputDataSlack) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"name",
-		"type",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varOutgoingWebhookInputDataSlack := _OutgoingWebhookInputDataSlack{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOutgoingWebhookInputDataSlack)
-
-	if err != nil {
-		return err
-	}
-
-	*o = OutgoingWebhookInputDataSlack(varOutgoingWebhookInputDataSlack)
-
-	return err
 }
 
 type NullableOutgoingWebhookInputDataSlack struct {

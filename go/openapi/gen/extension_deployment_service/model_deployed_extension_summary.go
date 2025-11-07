@@ -12,8 +12,6 @@ package extension_deployment_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the DeployedExtensionSummary type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &DeployedExtensionSummary{}
 
 // DeployedExtensionSummary struct for DeployedExtensionSummary
 type DeployedExtensionSummary struct {
-	DeployedItemCounts ItemCounts `json:"deployedItemCounts"`
+	DeployedItemCounts *ItemCounts `json:"deployedItemCounts,omitempty"`
 }
-
-type _DeployedExtensionSummary DeployedExtensionSummary
 
 // NewDeployedExtensionSummary instantiates a new DeployedExtensionSummary object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeployedExtensionSummary(deployedItemCounts ItemCounts) *DeployedExtensionSummary {
+func NewDeployedExtensionSummary() *DeployedExtensionSummary {
 	this := DeployedExtensionSummary{}
-	this.DeployedItemCounts = deployedItemCounts
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewDeployedExtensionSummaryWithDefaults() *DeployedExtensionSummary {
 	return &this
 }
 
-// GetDeployedItemCounts returns the DeployedItemCounts field value
+// GetDeployedItemCounts returns the DeployedItemCounts field value if set, zero value otherwise.
 func (o *DeployedExtensionSummary) GetDeployedItemCounts() ItemCounts {
-	if o == nil {
+	if o == nil || IsNil(o.DeployedItemCounts) {
 		var ret ItemCounts
 		return ret
 	}
-
-	return o.DeployedItemCounts
+	return *o.DeployedItemCounts
 }
 
-// GetDeployedItemCountsOk returns a tuple with the DeployedItemCounts field value
+// GetDeployedItemCountsOk returns a tuple with the DeployedItemCounts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DeployedExtensionSummary) GetDeployedItemCountsOk() (*ItemCounts, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.DeployedItemCounts) {
 		return nil, false
 	}
-	return &o.DeployedItemCounts, true
+	return o.DeployedItemCounts, true
 }
 
-// SetDeployedItemCounts sets field value
+// HasDeployedItemCounts returns a boolean if a field has been set.
+func (o *DeployedExtensionSummary) HasDeployedItemCounts() bool {
+	if o != nil && !IsNil(o.DeployedItemCounts) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeployedItemCounts gets a reference to the given ItemCounts and assigns it to the DeployedItemCounts field.
 func (o *DeployedExtensionSummary) SetDeployedItemCounts(v ItemCounts) {
-	o.DeployedItemCounts = v
+	o.DeployedItemCounts = &v
 }
 
 func (o DeployedExtensionSummary) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o DeployedExtensionSummary) MarshalJSON() ([]byte, error) {
 
 func (o DeployedExtensionSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["deployedItemCounts"] = o.DeployedItemCounts
+	if !IsNil(o.DeployedItemCounts) {
+		toSerialize["deployedItemCounts"] = o.DeployedItemCounts
+	}
 	return toSerialize, nil
-}
-
-func (o *DeployedExtensionSummary) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"deployedItemCounts",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varDeployedExtensionSummary := _DeployedExtensionSummary{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDeployedExtensionSummary)
-
-	if err != nil {
-		return err
-	}
-
-	*o = DeployedExtensionSummary(varDeployedExtensionSummary)
-
-	return err
 }
 
 type NullableDeployedExtensionSummary struct {

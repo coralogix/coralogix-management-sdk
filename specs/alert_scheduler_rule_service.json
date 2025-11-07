@@ -886,13 +886,13 @@
       "Recurring.Dynamic": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/RecurringDynamicMonthly"
-          },
-          {
             "$ref": "#/components/schemas/RecurringDynamicDaily"
           },
           {
             "$ref": "#/components/schemas/RecurringDynamicWeekly"
+          },
+          {
+            "$ref": "#/components/schemas/RecurringDynamicMonthly"
           }
         ]
       },

@@ -12,8 +12,6 @@ package api_keys_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the KeyInfoKeyPermissions type satisfies the MappedNullable interface at compile time
@@ -21,20 +19,16 @@ var _ MappedNullable = &KeyInfoKeyPermissions{}
 
 // KeyInfoKeyPermissions This data structure represents the permissions on an API key.
 type KeyInfoKeyPermissions struct {
-	Permissions []string `json:"permissions"`
-	Presets []PresetInfo `json:"presets"`
+	Permissions []string `json:"permissions,omitempty"`
+	Presets []PresetInfo `json:"presets,omitempty"`
 }
-
-type _KeyInfoKeyPermissions KeyInfoKeyPermissions
 
 // NewKeyInfoKeyPermissions instantiates a new KeyInfoKeyPermissions object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewKeyInfoKeyPermissions(permissions []string, presets []PresetInfo) *KeyInfoKeyPermissions {
+func NewKeyInfoKeyPermissions() *KeyInfoKeyPermissions {
 	this := KeyInfoKeyPermissions{}
-	this.Permissions = permissions
-	this.Presets = presets
 	return &this
 }
 
@@ -46,50 +40,66 @@ func NewKeyInfoKeyPermissionsWithDefaults() *KeyInfoKeyPermissions {
 	return &this
 }
 
-// GetPermissions returns the Permissions field value
+// GetPermissions returns the Permissions field value if set, zero value otherwise.
 func (o *KeyInfoKeyPermissions) GetPermissions() []string {
-	if o == nil {
+	if o == nil || IsNil(o.Permissions) {
 		var ret []string
 		return ret
 	}
-
 	return o.Permissions
 }
 
-// GetPermissionsOk returns a tuple with the Permissions field value
+// GetPermissionsOk returns a tuple with the Permissions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KeyInfoKeyPermissions) GetPermissionsOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Permissions) {
 		return nil, false
 	}
 	return o.Permissions, true
 }
 
-// SetPermissions sets field value
+// HasPermissions returns a boolean if a field has been set.
+func (o *KeyInfoKeyPermissions) HasPermissions() bool {
+	if o != nil && !IsNil(o.Permissions) {
+		return true
+	}
+
+	return false
+}
+
+// SetPermissions gets a reference to the given []string and assigns it to the Permissions field.
 func (o *KeyInfoKeyPermissions) SetPermissions(v []string) {
 	o.Permissions = v
 }
 
-// GetPresets returns the Presets field value
+// GetPresets returns the Presets field value if set, zero value otherwise.
 func (o *KeyInfoKeyPermissions) GetPresets() []PresetInfo {
-	if o == nil {
+	if o == nil || IsNil(o.Presets) {
 		var ret []PresetInfo
 		return ret
 	}
-
 	return o.Presets
 }
 
-// GetPresetsOk returns a tuple with the Presets field value
+// GetPresetsOk returns a tuple with the Presets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KeyInfoKeyPermissions) GetPresetsOk() ([]PresetInfo, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Presets) {
 		return nil, false
 	}
 	return o.Presets, true
 }
 
-// SetPresets sets field value
+// HasPresets returns a boolean if a field has been set.
+func (o *KeyInfoKeyPermissions) HasPresets() bool {
+	if o != nil && !IsNil(o.Presets) {
+		return true
+	}
+
+	return false
+}
+
+// SetPresets gets a reference to the given []PresetInfo and assigns it to the Presets field.
 func (o *KeyInfoKeyPermissions) SetPresets(v []PresetInfo) {
 	o.Presets = v
 }
@@ -104,47 +114,13 @@ func (o KeyInfoKeyPermissions) MarshalJSON() ([]byte, error) {
 
 func (o KeyInfoKeyPermissions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["permissions"] = o.Permissions
-	toSerialize["presets"] = o.Presets
+	if !IsNil(o.Permissions) {
+		toSerialize["permissions"] = o.Permissions
+	}
+	if !IsNil(o.Presets) {
+		toSerialize["presets"] = o.Presets
+	}
 	return toSerialize, nil
-}
-
-func (o *KeyInfoKeyPermissions) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"permissions",
-		"presets",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varKeyInfoKeyPermissions := _KeyInfoKeyPermissions{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varKeyInfoKeyPermissions)
-
-	if err != nil {
-		return err
-	}
-
-	*o = KeyInfoKeyPermissions(varKeyInfoKeyPermissions)
-
-	return err
 }
 
 type NullableKeyInfoKeyPermissions struct {

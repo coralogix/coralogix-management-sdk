@@ -512,6 +512,9 @@ components:
   schemas:
     ARMStack:
       description: This data structure represents an Azure Resource Manager stack.
+      example:
+        resourceGroupName: resourceGroupName
+        subscriptionId: subscriptionId
       externalDocs:
         description: Find out more about the Azure Resource Manager (ARM) integration
           in our documentation
@@ -559,9 +562,6 @@ components:
           type: string
         version:
           type: string
-      required:
-      - descriptionMd
-      - version
       title: Changelog entry
       type: object
     CloudFormationStack:
@@ -723,13 +723,15 @@ components:
             details:
               key: details
           id: id
+          arm:
+            resourceGroupName: resourceGroupName
+            subscriptionId: subscriptionId
           parameters:
-          - booleanValue: true
+          - sensitiveData: "{}"
             key: key
-          - booleanValue: true
+          - sensitiveData: "{}"
             key: key
           isTesting: true
-          empty: "{}"
         - lastUpdated: 2000-01-23T04:56:07.000+00:00
           definitionVersion: definitionVersion
           integrationStatus:
@@ -740,13 +742,15 @@ components:
             details:
               key: details
           id: id
+          arm:
+            resourceGroupName: resourceGroupName
+            subscriptionId: subscriptionId
           parameters:
-          - booleanValue: true
+          - sensitiveData: "{}"
             key: key
-          - booleanValue: true
+          - sensitiveData: "{}"
             key: key
           isTesting: true
-          empty: "{}"
       externalDocs:
         url: ""
       properties:
@@ -771,9 +775,9 @@ components:
             key: details
         id: id
         parameters:
-        - booleanValue: true
+        - sensitiveData: "{}"
           key: key
-        - booleanValue: true
+        - sensitiveData: "{}"
           key: key
       externalDocs:
         url: ""
@@ -807,8 +811,6 @@ components:
           items:
             type: string
           type: array
-      required:
-      - reason
       title: Deprecation
       type: object
     ExtensionBinary:
@@ -822,9 +824,6 @@ components:
           type: string
         type:
           $ref: "#/components/schemas/ExtensionBinary.BinaryType"
-      required:
-      - data
-      - type
       title: Extension binary
       type: object
     ExtensionBinary.BinaryType:
@@ -877,12 +876,6 @@ components:
           $ref: "#/components/schemas/TargetDomain"
         uniqueId:
           type: string
-      required:
-      - data
-      - id
-      - name
-      - permissionResource
-      - targetDomain
       title: Extension item
       type: object
     ExtensionItemBinary:
@@ -899,10 +892,6 @@ components:
           type: string
         type:
           $ref: "#/components/schemas/ExtensionItemBinary.BinaryType"
-      required:
-      - data
-      - fileName
-      - type
       title: Extension item binary
       type: object
     ExtensionItemBinary.BinaryType:
@@ -1033,8 +1022,6 @@ components:
           type: array
         version:
           type: string
-      required:
-      - version
       title: Extension revision
       type: object
     ExternalUrl:
@@ -1062,8 +1049,6 @@ components:
           items:
             $ref: "#/components/schemas/FieldCondition.FieldValue"
           type: array
-      required:
-      - type
       title: Field condition
       type: object
     FieldCondition.ConditionType:
@@ -1094,14 +1079,42 @@ components:
       type: object
     FieldInformation:
       oneOf:
-      - $ref: "#/components/schemas/FieldInformationSingle"
       - $ref: "#/components/schemas/FieldInformationMultiText"
       - $ref: "#/components/schemas/FieldInformationMultipleSelection"
       - $ref: "#/components/schemas/FieldInformationSingleBoolean"
       - $ref: "#/components/schemas/FieldInformationSelection"
       - $ref: "#/components/schemas/FieldInformationSingleNumber"
+      - $ref: "#/components/schemas/FieldInformationSingle"
     FieldInformationMultiText:
       additionalProperties: false
+      example:
+        visible: true
+        groupId: groupId
+        tooltip: tooltip
+        multiText:
+          options:
+          - options
+          - options
+          defaultValues:
+          - defaultValues
+          - defaultValues
+        type: API_KEY
+        upgradeNotice: upgradeNotice
+        predefined: true
+        required: true
+        templateParamName: templateParamName
+        readonly: true
+        documentationReference: documentationReference
+        name: name
+        placeholder: placeholder
+        applicableIf:
+          values:
+          - fieldName: fieldName
+            valuePattern: valuePattern
+          - fieldName: fieldName
+            valuePattern: valuePattern
+          type: UNKNOWN
+        allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -1135,8 +1148,6 @@ components:
           type: string
         visible:
           type: boolean
-      required:
-      - type
       title: Field information
       type: object
     FieldInformationMultipleSelection:
@@ -1174,8 +1185,6 @@ components:
           type: string
         visible:
           type: boolean
-      required:
-      - type
       title: Field information
       type: object
     FieldInformationSelection:
@@ -1213,35 +1222,10 @@ components:
           type: string
         visible:
           type: boolean
-      required:
-      - type
       title: Field information
       type: object
     FieldInformationSingle:
       additionalProperties: false
-      example:
-        visible: true
-        groupId: groupId
-        tooltip: tooltip
-        type: API_KEY
-        upgradeNotice: upgradeNotice
-        predefined: true
-        required: true
-        templateParamName: templateParamName
-        single:
-          defaultValue: defaultValue
-        readonly: true
-        documentationReference: documentationReference
-        name: name
-        placeholder: placeholder
-        applicableIf:
-          values:
-          - fieldName: fieldName
-            valuePattern: valuePattern
-          - fieldName: fieldName
-            valuePattern: valuePattern
-          type: UNKNOWN
-        allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -1275,8 +1259,6 @@ components:
           type: string
         visible:
           type: boolean
-      required:
-      - type
       title: Field information
       type: object
     FieldInformationSingleBoolean:
@@ -1314,8 +1296,6 @@ components:
           type: string
         visible:
           type: boolean
-      required:
-      - type
       title: Field information
       type: object
     FieldInformationSingleNumber:
@@ -1353,8 +1333,6 @@ components:
           type: string
         visible:
           type: boolean
-      required:
-      - type
       title: Field information
       type: object
     FilterPathAndValues:
@@ -1438,17 +1416,15 @@ components:
               key: details
           id: id
           parameters:
-          - booleanValue: true
+          - sensitiveData: "{}"
             key: key
-          - booleanValue: true
+          - sensitiveData: "{}"
             key: key
       externalDocs:
         url: ""
       properties:
         integration:
           $ref: "#/components/schemas/DeployedIntegrationInformation"
-      required:
-      - integration
       title: Get deployed integration response
       type: object
     GetIntegrationDefinitionResponse:
@@ -1457,7 +1433,7 @@ components:
         integrationDefinition:
           featureFlag: featureFlag
           integrationType:
-            arm: "{}"
+            cloudformation: "{}"
           revisions:
           - revisionDeploymentSupported: true
             featureFlag: featureFlag
@@ -1503,13 +1479,18 @@ components:
             - visible: true
               groupId: groupId
               tooltip: tooltip
+              multiText:
+                options:
+                - options
+                - options
+                defaultValues:
+                - defaultValues
+                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
               required: true
               templateParamName: templateParamName
-              single:
-                defaultValue: defaultValue
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -1525,13 +1506,18 @@ components:
             - visible: true
               groupId: groupId
               tooltip: tooltip
+              multiText:
+                options:
+                - options
+                - options
+                defaultValues:
+                - defaultValues
+                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
               required: true
               templateParamName: templateParamName
-              single:
-                defaultValue: defaultValue
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -1588,13 +1574,18 @@ components:
             - visible: true
               groupId: groupId
               tooltip: tooltip
+              multiText:
+                options:
+                - options
+                - options
+                defaultValues:
+                - defaultValues
+                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
               required: true
               templateParamName: templateParamName
-              single:
-                defaultValue: defaultValue
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -1610,13 +1601,18 @@ components:
             - visible: true
               groupId: groupId
               tooltip: tooltip
+              multiText:
+                options:
+                - options
+                - options
+                defaultValues:
+                - defaultValues
+                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
               required: true
               templateParamName: templateParamName
-              single:
-                defaultValue: defaultValue
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -1635,8 +1631,6 @@ components:
       properties:
         integrationDefinition:
           $ref: "#/components/schemas/IntegrationDefinition"
-      required:
-      - integrationDefinition
       title: Get integration definition response
       type: object
     GetIntegrationDetailsResponse:
@@ -1654,13 +1648,15 @@ components:
                 details:
                   key: details
               id: id
+              arm:
+                resourceGroupName: resourceGroupName
+                subscriptionId: subscriptionId
               parameters:
-              - booleanValue: true
+              - sensitiveData: "{}"
                 key: key
-              - booleanValue: true
+              - sensitiveData: "{}"
                 key: key
               isTesting: true
-              empty: "{}"
             - lastUpdated: 2000-01-23T04:56:07.000+00:00
               definitionVersion: definitionVersion
               integrationStatus:
@@ -1671,13 +1667,15 @@ components:
                 details:
                   key: details
               id: id
+              arm:
+                resourceGroupName: resourceGroupName
+                subscriptionId: subscriptionId
               parameters:
-              - booleanValue: true
+              - sensitiveData: "{}"
                 key: key
-              - booleanValue: true
+              - sensitiveData: "{}"
                 key: key
               isTesting: true
-              empty: "{}"
           extensions:
           - image: image
             darkModeImage: darkModeImage
@@ -2429,7 +2427,7 @@ components:
           integration:
             featureFlag: featureFlag
             integrationType:
-              arm: "{}"
+              cloudformation: "{}"
             versions:
             - versions
             - versions
@@ -2452,8 +2450,6 @@ components:
       properties:
         integrationDetail:
           $ref: "#/components/schemas/IntegrationDetails"
-      required:
-      - integrationDetail
       title: Get integration details response
       type: object
     GetIntegrationsResponse:
@@ -2463,7 +2459,7 @@ components:
         - integration:
             featureFlag: featureFlag
             integrationType:
-              arm: "{}"
+              cloudformation: "{}"
             versions:
             - versions
             - versions
@@ -2484,7 +2480,7 @@ components:
         - integration:
             featureFlag: featureFlag
             integrationType:
-              arm: "{}"
+              cloudformation: "{}"
             versions:
             - versions
             - versions
@@ -2516,7 +2512,7 @@ components:
         integration:
           featureFlag: featureFlag
           integrationType:
-            arm: "{}"
+            cloudformation: "{}"
           versions:
           - versions
           - versions
@@ -2550,8 +2546,6 @@ components:
           type: boolean
         upgradeAvailable:
           type: boolean
-      required:
-      - integrations
       title: Integration with counts
       type: object
     GetManagedIntegrationStatusResponse:
@@ -2571,9 +2565,6 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/IntegrationStatus"
-      required:
-      - integrationId
-      - status
       title: Get managed integration status response
       type: object
     GetRumApplicationVersionDataResponse:
@@ -2600,8 +2591,6 @@ components:
       properties:
         versionData:
           $ref: "#/components/schemas/RumVersionData"
-      required:
-      - versionData
       title: Get RUM application version data response
       type: object
     GetTemplateResponse:
@@ -2647,7 +2636,7 @@ components:
       example:
         featureFlag: featureFlag
         integrationType:
-          arm: "{}"
+          cloudformation: "{}"
         versions:
         - versions
         - versions
@@ -2691,7 +2680,7 @@ components:
       example:
         featureFlag: featureFlag
         integrationType:
-          arm: "{}"
+          cloudformation: "{}"
         revisions:
         - revisionDeploymentSupported: true
           featureFlag: featureFlag
@@ -2737,13 +2726,18 @@ components:
           - visible: true
             groupId: groupId
             tooltip: tooltip
+            multiText:
+              options:
+              - options
+              - options
+              defaultValues:
+              - defaultValues
+              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
             required: true
             templateParamName: templateParamName
-            single:
-              defaultValue: defaultValue
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -2759,13 +2753,18 @@ components:
           - visible: true
             groupId: groupId
             tooltip: tooltip
+            multiText:
+              options:
+              - options
+              - options
+              defaultValues:
+              - defaultValues
+              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
             required: true
             templateParamName: templateParamName
-            single:
-              defaultValue: defaultValue
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -2822,13 +2821,18 @@ components:
           - visible: true
             groupId: groupId
             tooltip: tooltip
+            multiText:
+              options:
+              - options
+              - options
+              defaultValues:
+              - defaultValues
+              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
             required: true
             templateParamName: templateParamName
-            single:
-              defaultValue: defaultValue
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -2844,13 +2848,18 @@ components:
           - visible: true
             groupId: groupId
             tooltip: tooltip
+            multiText:
+              options:
+              - options
+              - options
+              defaultValues:
+              - defaultValues
+              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
             required: true
             templateParamName: templateParamName
-            single:
-              defaultValue: defaultValue
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -2890,9 +2899,6 @@ components:
           type: string
         name:
           type: string
-      required:
-      - link
-      - name
       title: Integration detail
       type: object
     IntegrationDetails:
@@ -2937,13 +2943,15 @@ components:
               details:
                 key: details
             id: id
+            arm:
+              resourceGroupName: resourceGroupName
+              subscriptionId: subscriptionId
             parameters:
-            - booleanValue: true
+            - sensitiveData: "{}"
               key: key
-            - booleanValue: true
+            - sensitiveData: "{}"
               key: key
             isTesting: true
-            empty: "{}"
           - lastUpdated: 2000-01-23T04:56:07.000+00:00
             definitionVersion: definitionVersion
             integrationStatus:
@@ -2954,13 +2962,15 @@ components:
               details:
                 key: details
             id: id
+            arm:
+              resourceGroupName: resourceGroupName
+              subscriptionId: subscriptionId
             parameters:
-            - booleanValue: true
+            - sensitiveData: "{}"
               key: key
-            - booleanValue: true
+            - sensitiveData: "{}"
               key: key
             isTesting: true
-            empty: "{}"
         extensions:
         - image: image
           darkModeImage: darkModeImage
@@ -3712,7 +3722,7 @@ components:
         integration:
           featureFlag: featureFlag
           integrationType:
-            arm: "{}"
+            cloudformation: "{}"
           versions:
           - versions
           - versions
@@ -3890,13 +3900,18 @@ components:
         - visible: true
           groupId: groupId
           tooltip: tooltip
+          multiText:
+            options:
+            - options
+            - options
+            defaultValues:
+            - defaultValues
+            - defaultValues
           type: API_KEY
           upgradeNotice: upgradeNotice
           predefined: true
           required: true
           templateParamName: templateParamName
-          single:
-            defaultValue: defaultValue
           readonly: true
           documentationReference: documentationReference
           name: name
@@ -3912,13 +3927,18 @@ components:
         - visible: true
           groupId: groupId
           tooltip: tooltip
+          multiText:
+            options:
+            - options
+            - options
+            defaultValues:
+            - defaultValues
+            - defaultValues
           type: API_KEY
           upgradeNotice: upgradeNotice
           predefined: true
           required: true
           templateParamName: templateParamName
-          single:
-            defaultValue: defaultValue
           readonly: true
           documentationReference: documentationReference
           name: name
@@ -4084,8 +4104,6 @@ components:
           items:
             type: string
           type: array
-      required:
-      - connectionStatus
       title: Integration status
       type: object
     Language:
@@ -4122,11 +4140,16 @@ components:
           items:
             type: string
           type: array
-      required:
-      - integrationKeys
       title: List managed integration keys response
       type: object
     ListTextValue:
+      example:
+        options:
+        - options
+        - options
+        defaultValues:
+        - defaultValues
+        - defaultValues
       externalDocs:
         url: ""
       properties:
@@ -4178,8 +4201,6 @@ components:
       properties:
         variant:
           $ref: "#/components/schemas/Variant"
-      required:
-      - variant
       title: Managed
       type: object
     ManagedService:
@@ -4216,12 +4237,12 @@ components:
       type: object
     Parameter:
       oneOf:
+      - $ref: "#/components/schemas/ParameterSensitiveData"
+      - $ref: "#/components/schemas/ParameterStringValue"
       - $ref: "#/components/schemas/ParameterBooleanValue"
       - $ref: "#/components/schemas/ParameterStringList"
       - $ref: "#/components/schemas/ParameterApiKey"
       - $ref: "#/components/schemas/ParameterNumericValue"
-      - $ref: "#/components/schemas/ParameterSensitiveData"
-      - $ref: "#/components/schemas/ParameterStringValue"
     ParameterApiKey:
       additionalProperties: false
       externalDocs:
@@ -4235,9 +4256,6 @@ components:
       type: object
     ParameterBooleanValue:
       additionalProperties: false
-      example:
-        booleanValue: true
-        key: key
       externalDocs:
         url: ""
       properties:
@@ -4261,6 +4279,9 @@ components:
       type: object
     ParameterSensitiveData:
       additionalProperties: false
+      example:
+        sensitiveData: "{}"
+        key: key
       externalDocs:
         url: ""
       properties:
@@ -4321,11 +4342,31 @@ components:
       type: object
     RegisteredInstance:
       oneOf:
+      - $ref: "#/components/schemas/RegisteredInstanceArm"
       - $ref: "#/components/schemas/RegisteredInstanceEmpty"
       - $ref: "#/components/schemas/RegisteredInstanceCloudformation"
-      - $ref: "#/components/schemas/RegisteredInstanceArm"
     RegisteredInstanceArm:
       additionalProperties: false
+      example:
+        lastUpdated: 2000-01-23T04:56:07.000+00:00
+        definitionVersion: definitionVersion
+        integrationStatus:
+          connectionStatus: PENDING
+          messages:
+          - messages
+          - messages
+          details:
+            key: details
+        id: id
+        arm:
+          resourceGroupName: resourceGroupName
+          subscriptionId: subscriptionId
+        parameters:
+        - sensitiveData: "{}"
+          key: key
+        - sensitiveData: "{}"
+          key: key
+        isTesting: true
       externalDocs:
         url: ""
       properties:
@@ -4374,24 +4415,6 @@ components:
       type: object
     RegisteredInstanceEmpty:
       additionalProperties: false
-      example:
-        lastUpdated: 2000-01-23T04:56:07.000+00:00
-        definitionVersion: definitionVersion
-        integrationStatus:
-          connectionStatus: PENDING
-          messages:
-          - messages
-          - messages
-          details:
-            key: details
-        id: id
-        parameters:
-        - booleanValue: true
-          key: key
-        - booleanValue: true
-          key: key
-        isTesting: true
-        empty: "{}"
       externalDocs:
         url: ""
       properties:
@@ -4505,8 +4528,6 @@ components:
       properties:
         integrationId:
           type: string
-      required:
-      - integrationId
       title: Save integration response
       type: object
     SelectionValue:
@@ -4535,8 +4556,6 @@ components:
       title: Single boolean value
       type: object
     SingleValue:
-      example:
-        defaultValue: defaultValue
       externalDocs:
         url: ""
       properties:
@@ -4580,8 +4599,6 @@ components:
         syncedAt:
           format: date-time
           type: string
-      required:
-      - syncedAt
       title: Sync RUM data response
       type: object
     TargetDomain:
@@ -4618,8 +4635,6 @@ components:
       properties:
         result:
           $ref: "#/components/schemas/TestIntegrationResult"
-      required:
-      - result
       title: Test integration response
       type: object
     TestIntegrationResult:
@@ -4673,8 +4688,6 @@ components:
     V1IntegrationTypeArm:
       additionalProperties: false
       description: This data structure represents an integration type.
-      example:
-        arm: "{}"
       externalDocs:
         url: ""
       properties:
@@ -4689,6 +4702,8 @@ components:
     V1IntegrationTypeCloudformation:
       additionalProperties: false
       description: This data structure represents an integration type.
+      example:
+        cloudformation: "{}"
       externalDocs:
         url: ""
       properties:
@@ -5199,21 +5214,17 @@ components:
           items:
             $ref: "#/components/schemas/ExtensionRevision"
           type: array
-      required:
-      - id
-      - image
-      - name
       title: Extension metadata
       type: object
     v1.IntegrationType:
       oneOf:
+      - $ref: "#/components/schemas/V1IntegrationTypeCloudformation"
       - $ref: "#/components/schemas/V1IntegrationTypeArm"
       - $ref: "#/components/schemas/V1IntegrationTypePushBasedContextualData"
       - $ref: "#/components/schemas/V1IntegrationTypeContextualData"
       - $ref: "#/components/schemas/V1IntegrationTypeGenericWebhook"
       - $ref: "#/components/schemas/V1IntegrationTypeManaged"
       - $ref: "#/components/schemas/V1IntegrationTypeUntracked"
-      - $ref: "#/components/schemas/V1IntegrationTypeCloudformation"
     v3.FilterOperator:
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
@@ -5227,9 +5238,6 @@ components:
           type: string
         metadata:
           $ref: "#/components/schemas/IntegrationMetadata"
-      required:
-      - id
-      - metadata
       title: Update integration request
       type: object
     Save_integration_request:
@@ -5237,8 +5245,6 @@ components:
       properties:
         metadata:
           $ref: "#/components/schemas/IntegrationMetadata"
-      required:
-      - metadata
       title: Save integration request
       type: object
     Test_integration_request:
@@ -5248,8 +5254,6 @@ components:
           $ref: "#/components/schemas/IntegrationMetadata"
         integrationId:
           type: string
-      required:
-      - integrationData
       title: Test integration request
       type: object
     Sync_RUM_data_request:
@@ -5269,10 +5273,6 @@ components:
           type: string
         logsUrl:
           type: string
-      required:
-      - apiKey
-      - cgxDomain
-      - logsUrl
       title: Common ARM integration parameters
       type: object
   securitySchemes:

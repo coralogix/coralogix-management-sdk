@@ -12,8 +12,6 @@ package contextual_data_integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the TestContextualDataIntegrationResponse type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &TestContextualDataIntegrationResponse{}
 
 // TestContextualDataIntegrationResponse struct for TestContextualDataIntegrationResponse
 type TestContextualDataIntegrationResponse struct {
-	Result TestIntegrationResult `json:"result"`
+	Result *TestIntegrationResult `json:"result,omitempty"`
 }
-
-type _TestContextualDataIntegrationResponse TestContextualDataIntegrationResponse
 
 // NewTestContextualDataIntegrationResponse instantiates a new TestContextualDataIntegrationResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTestContextualDataIntegrationResponse(result TestIntegrationResult) *TestContextualDataIntegrationResponse {
+func NewTestContextualDataIntegrationResponse() *TestContextualDataIntegrationResponse {
 	this := TestContextualDataIntegrationResponse{}
-	this.Result = result
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewTestContextualDataIntegrationResponseWithDefaults() *TestContextualDataI
 	return &this
 }
 
-// GetResult returns the Result field value
+// GetResult returns the Result field value if set, zero value otherwise.
 func (o *TestContextualDataIntegrationResponse) GetResult() TestIntegrationResult {
-	if o == nil {
+	if o == nil || IsNil(o.Result) {
 		var ret TestIntegrationResult
 		return ret
 	}
-
-	return o.Result
+	return *o.Result
 }
 
-// GetResultOk returns a tuple with the Result field value
+// GetResultOk returns a tuple with the Result field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TestContextualDataIntegrationResponse) GetResultOk() (*TestIntegrationResult, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Result) {
 		return nil, false
 	}
-	return &o.Result, true
+	return o.Result, true
 }
 
-// SetResult sets field value
+// HasResult returns a boolean if a field has been set.
+func (o *TestContextualDataIntegrationResponse) HasResult() bool {
+	if o != nil && !IsNil(o.Result) {
+		return true
+	}
+
+	return false
+}
+
+// SetResult gets a reference to the given TestIntegrationResult and assigns it to the Result field.
 func (o *TestContextualDataIntegrationResponse) SetResult(v TestIntegrationResult) {
-	o.Result = v
+	o.Result = &v
 }
 
 func (o TestContextualDataIntegrationResponse) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o TestContextualDataIntegrationResponse) MarshalJSON() ([]byte, error) {
 
 func (o TestContextualDataIntegrationResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["result"] = o.Result
+	if !IsNil(o.Result) {
+		toSerialize["result"] = o.Result
+	}
 	return toSerialize, nil
-}
-
-func (o *TestContextualDataIntegrationResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"result",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varTestContextualDataIntegrationResponse := _TestContextualDataIntegrationResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTestContextualDataIntegrationResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = TestContextualDataIntegrationResponse(varTestContextualDataIntegrationResponse)
-
-	return err
 }
 
 type NullableTestContextualDataIntegrationResponse struct {

@@ -12,8 +12,6 @@ package integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the GetRumApplicationVersionDataResponse type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &GetRumApplicationVersionDataResponse{}
 
 // GetRumApplicationVersionDataResponse struct for GetRumApplicationVersionDataResponse
 type GetRumApplicationVersionDataResponse struct {
-	VersionData RumVersionData `json:"versionData"`
+	VersionData *RumVersionData `json:"versionData,omitempty"`
 }
-
-type _GetRumApplicationVersionDataResponse GetRumApplicationVersionDataResponse
 
 // NewGetRumApplicationVersionDataResponse instantiates a new GetRumApplicationVersionDataResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetRumApplicationVersionDataResponse(versionData RumVersionData) *GetRumApplicationVersionDataResponse {
+func NewGetRumApplicationVersionDataResponse() *GetRumApplicationVersionDataResponse {
 	this := GetRumApplicationVersionDataResponse{}
-	this.VersionData = versionData
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewGetRumApplicationVersionDataResponseWithDefaults() *GetRumApplicationVer
 	return &this
 }
 
-// GetVersionData returns the VersionData field value
+// GetVersionData returns the VersionData field value if set, zero value otherwise.
 func (o *GetRumApplicationVersionDataResponse) GetVersionData() RumVersionData {
-	if o == nil {
+	if o == nil || IsNil(o.VersionData) {
 		var ret RumVersionData
 		return ret
 	}
-
-	return o.VersionData
+	return *o.VersionData
 }
 
-// GetVersionDataOk returns a tuple with the VersionData field value
+// GetVersionDataOk returns a tuple with the VersionData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetRumApplicationVersionDataResponse) GetVersionDataOk() (*RumVersionData, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.VersionData) {
 		return nil, false
 	}
-	return &o.VersionData, true
+	return o.VersionData, true
 }
 
-// SetVersionData sets field value
+// HasVersionData returns a boolean if a field has been set.
+func (o *GetRumApplicationVersionDataResponse) HasVersionData() bool {
+	if o != nil && !IsNil(o.VersionData) {
+		return true
+	}
+
+	return false
+}
+
+// SetVersionData gets a reference to the given RumVersionData and assigns it to the VersionData field.
 func (o *GetRumApplicationVersionDataResponse) SetVersionData(v RumVersionData) {
-	o.VersionData = v
+	o.VersionData = &v
 }
 
 func (o GetRumApplicationVersionDataResponse) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o GetRumApplicationVersionDataResponse) MarshalJSON() ([]byte, error) {
 
 func (o GetRumApplicationVersionDataResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["versionData"] = o.VersionData
+	if !IsNil(o.VersionData) {
+		toSerialize["versionData"] = o.VersionData
+	}
 	return toSerialize, nil
-}
-
-func (o *GetRumApplicationVersionDataResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"versionData",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varGetRumApplicationVersionDataResponse := _GetRumApplicationVersionDataResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetRumApplicationVersionDataResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = GetRumApplicationVersionDataResponse(varGetRumApplicationVersionDataResponse)
-
-	return err
 }
 
 type NullableGetRumApplicationVersionDataResponse struct {

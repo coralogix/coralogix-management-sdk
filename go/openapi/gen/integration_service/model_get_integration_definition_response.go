@@ -12,8 +12,6 @@ package integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the GetIntegrationDefinitionResponse type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &GetIntegrationDefinitionResponse{}
 
 // GetIntegrationDefinitionResponse This data structure represents a list of outgoing webhook types.
 type GetIntegrationDefinitionResponse struct {
-	IntegrationDefinition IntegrationDefinition `json:"integrationDefinition"`
+	IntegrationDefinition *IntegrationDefinition `json:"integrationDefinition,omitempty"`
 }
-
-type _GetIntegrationDefinitionResponse GetIntegrationDefinitionResponse
 
 // NewGetIntegrationDefinitionResponse instantiates a new GetIntegrationDefinitionResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIntegrationDefinitionResponse(integrationDefinition IntegrationDefinition) *GetIntegrationDefinitionResponse {
+func NewGetIntegrationDefinitionResponse() *GetIntegrationDefinitionResponse {
 	this := GetIntegrationDefinitionResponse{}
-	this.IntegrationDefinition = integrationDefinition
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewGetIntegrationDefinitionResponseWithDefaults() *GetIntegrationDefinition
 	return &this
 }
 
-// GetIntegrationDefinition returns the IntegrationDefinition field value
+// GetIntegrationDefinition returns the IntegrationDefinition field value if set, zero value otherwise.
 func (o *GetIntegrationDefinitionResponse) GetIntegrationDefinition() IntegrationDefinition {
-	if o == nil {
+	if o == nil || IsNil(o.IntegrationDefinition) {
 		var ret IntegrationDefinition
 		return ret
 	}
-
-	return o.IntegrationDefinition
+	return *o.IntegrationDefinition
 }
 
-// GetIntegrationDefinitionOk returns a tuple with the IntegrationDefinition field value
+// GetIntegrationDefinitionOk returns a tuple with the IntegrationDefinition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetIntegrationDefinitionResponse) GetIntegrationDefinitionOk() (*IntegrationDefinition, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.IntegrationDefinition) {
 		return nil, false
 	}
-	return &o.IntegrationDefinition, true
+	return o.IntegrationDefinition, true
 }
 
-// SetIntegrationDefinition sets field value
+// HasIntegrationDefinition returns a boolean if a field has been set.
+func (o *GetIntegrationDefinitionResponse) HasIntegrationDefinition() bool {
+	if o != nil && !IsNil(o.IntegrationDefinition) {
+		return true
+	}
+
+	return false
+}
+
+// SetIntegrationDefinition gets a reference to the given IntegrationDefinition and assigns it to the IntegrationDefinition field.
 func (o *GetIntegrationDefinitionResponse) SetIntegrationDefinition(v IntegrationDefinition) {
-	o.IntegrationDefinition = v
+	o.IntegrationDefinition = &v
 }
 
 func (o GetIntegrationDefinitionResponse) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o GetIntegrationDefinitionResponse) MarshalJSON() ([]byte, error) {
 
 func (o GetIntegrationDefinitionResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["integrationDefinition"] = o.IntegrationDefinition
+	if !IsNil(o.IntegrationDefinition) {
+		toSerialize["integrationDefinition"] = o.IntegrationDefinition
+	}
 	return toSerialize, nil
-}
-
-func (o *GetIntegrationDefinitionResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"integrationDefinition",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varGetIntegrationDefinitionResponse := _GetIntegrationDefinitionResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetIntegrationDefinitionResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = GetIntegrationDefinitionResponse(varGetIntegrationDefinitionResponse)
-
-	return err
 }
 
 type NullableGetIntegrationDefinitionResponse struct {

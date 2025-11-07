@@ -12,8 +12,6 @@ package extension_testing_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the InitializeTestingRevisionRequest type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &InitializeTestingRevisionRequest{}
 
 // InitializeTestingRevisionRequest struct for InitializeTestingRevisionRequest
 type InitializeTestingRevisionRequest struct {
-	ExtensionData ExtensionData `json:"extensionData"`
+	ExtensionData *ExtensionData `json:"extensionData,omitempty"`
 }
-
-type _InitializeTestingRevisionRequest InitializeTestingRevisionRequest
 
 // NewInitializeTestingRevisionRequest instantiates a new InitializeTestingRevisionRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInitializeTestingRevisionRequest(extensionData ExtensionData) *InitializeTestingRevisionRequest {
+func NewInitializeTestingRevisionRequest() *InitializeTestingRevisionRequest {
 	this := InitializeTestingRevisionRequest{}
-	this.ExtensionData = extensionData
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewInitializeTestingRevisionRequestWithDefaults() *InitializeTestingRevisio
 	return &this
 }
 
-// GetExtensionData returns the ExtensionData field value
+// GetExtensionData returns the ExtensionData field value if set, zero value otherwise.
 func (o *InitializeTestingRevisionRequest) GetExtensionData() ExtensionData {
-	if o == nil {
+	if o == nil || IsNil(o.ExtensionData) {
 		var ret ExtensionData
 		return ret
 	}
-
-	return o.ExtensionData
+	return *o.ExtensionData
 }
 
-// GetExtensionDataOk returns a tuple with the ExtensionData field value
+// GetExtensionDataOk returns a tuple with the ExtensionData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InitializeTestingRevisionRequest) GetExtensionDataOk() (*ExtensionData, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ExtensionData) {
 		return nil, false
 	}
-	return &o.ExtensionData, true
+	return o.ExtensionData, true
 }
 
-// SetExtensionData sets field value
+// HasExtensionData returns a boolean if a field has been set.
+func (o *InitializeTestingRevisionRequest) HasExtensionData() bool {
+	if o != nil && !IsNil(o.ExtensionData) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtensionData gets a reference to the given ExtensionData and assigns it to the ExtensionData field.
 func (o *InitializeTestingRevisionRequest) SetExtensionData(v ExtensionData) {
-	o.ExtensionData = v
+	o.ExtensionData = &v
 }
 
 func (o InitializeTestingRevisionRequest) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o InitializeTestingRevisionRequest) MarshalJSON() ([]byte, error) {
 
 func (o InitializeTestingRevisionRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["extensionData"] = o.ExtensionData
+	if !IsNil(o.ExtensionData) {
+		toSerialize["extensionData"] = o.ExtensionData
+	}
 	return toSerialize, nil
-}
-
-func (o *InitializeTestingRevisionRequest) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"extensionData",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varInitializeTestingRevisionRequest := _InitializeTestingRevisionRequest{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInitializeTestingRevisionRequest)
-
-	if err != nil {
-		return err
-	}
-
-	*o = InitializeTestingRevisionRequest(varInitializeTestingRevisionRequest)
-
-	return err
 }
 
 type NullableInitializeTestingRevisionRequest struct {

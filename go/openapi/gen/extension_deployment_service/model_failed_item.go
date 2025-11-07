@@ -12,8 +12,6 @@ package extension_deployment_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the FailedItem type satisfies the MappedNullable interface at compile time
@@ -21,22 +19,17 @@ var _ MappedNullable = &FailedItem{}
 
 // FailedItem struct for FailedItem
 type FailedItem struct {
-	ItemId string `json:"itemId"`
-	Reason string `json:"reason"`
-	RemoteId string `json:"remoteId"`
+	ItemId *string `json:"itemId,omitempty"`
+	Reason *string `json:"reason,omitempty"`
+	RemoteId *string `json:"remoteId,omitempty"`
 }
-
-type _FailedItem FailedItem
 
 // NewFailedItem instantiates a new FailedItem object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFailedItem(itemId string, reason string, remoteId string) *FailedItem {
+func NewFailedItem() *FailedItem {
 	this := FailedItem{}
-	this.ItemId = itemId
-	this.Reason = reason
-	this.RemoteId = remoteId
 	return &this
 }
 
@@ -48,76 +41,100 @@ func NewFailedItemWithDefaults() *FailedItem {
 	return &this
 }
 
-// GetItemId returns the ItemId field value
+// GetItemId returns the ItemId field value if set, zero value otherwise.
 func (o *FailedItem) GetItemId() string {
-	if o == nil {
+	if o == nil || IsNil(o.ItemId) {
 		var ret string
 		return ret
 	}
-
-	return o.ItemId
+	return *o.ItemId
 }
 
-// GetItemIdOk returns a tuple with the ItemId field value
+// GetItemIdOk returns a tuple with the ItemId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FailedItem) GetItemIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ItemId) {
 		return nil, false
 	}
-	return &o.ItemId, true
+	return o.ItemId, true
 }
 
-// SetItemId sets field value
+// HasItemId returns a boolean if a field has been set.
+func (o *FailedItem) HasItemId() bool {
+	if o != nil && !IsNil(o.ItemId) {
+		return true
+	}
+
+	return false
+}
+
+// SetItemId gets a reference to the given string and assigns it to the ItemId field.
 func (o *FailedItem) SetItemId(v string) {
-	o.ItemId = v
+	o.ItemId = &v
 }
 
-// GetReason returns the Reason field value
+// GetReason returns the Reason field value if set, zero value otherwise.
 func (o *FailedItem) GetReason() string {
-	if o == nil {
+	if o == nil || IsNil(o.Reason) {
 		var ret string
 		return ret
 	}
-
-	return o.Reason
+	return *o.Reason
 }
 
-// GetReasonOk returns a tuple with the Reason field value
+// GetReasonOk returns a tuple with the Reason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FailedItem) GetReasonOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Reason) {
 		return nil, false
 	}
-	return &o.Reason, true
+	return o.Reason, true
 }
 
-// SetReason sets field value
+// HasReason returns a boolean if a field has been set.
+func (o *FailedItem) HasReason() bool {
+	if o != nil && !IsNil(o.Reason) {
+		return true
+	}
+
+	return false
+}
+
+// SetReason gets a reference to the given string and assigns it to the Reason field.
 func (o *FailedItem) SetReason(v string) {
-	o.Reason = v
+	o.Reason = &v
 }
 
-// GetRemoteId returns the RemoteId field value
+// GetRemoteId returns the RemoteId field value if set, zero value otherwise.
 func (o *FailedItem) GetRemoteId() string {
-	if o == nil {
+	if o == nil || IsNil(o.RemoteId) {
 		var ret string
 		return ret
 	}
-
-	return o.RemoteId
+	return *o.RemoteId
 }
 
-// GetRemoteIdOk returns a tuple with the RemoteId field value
+// GetRemoteIdOk returns a tuple with the RemoteId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FailedItem) GetRemoteIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.RemoteId) {
 		return nil, false
 	}
-	return &o.RemoteId, true
+	return o.RemoteId, true
 }
 
-// SetRemoteId sets field value
+// HasRemoteId returns a boolean if a field has been set.
+func (o *FailedItem) HasRemoteId() bool {
+	if o != nil && !IsNil(o.RemoteId) {
+		return true
+	}
+
+	return false
+}
+
+// SetRemoteId gets a reference to the given string and assigns it to the RemoteId field.
 func (o *FailedItem) SetRemoteId(v string) {
-	o.RemoteId = v
+	o.RemoteId = &v
 }
 
 func (o FailedItem) MarshalJSON() ([]byte, error) {
@@ -130,49 +147,16 @@ func (o FailedItem) MarshalJSON() ([]byte, error) {
 
 func (o FailedItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["itemId"] = o.ItemId
-	toSerialize["reason"] = o.Reason
-	toSerialize["remoteId"] = o.RemoteId
+	if !IsNil(o.ItemId) {
+		toSerialize["itemId"] = o.ItemId
+	}
+	if !IsNil(o.Reason) {
+		toSerialize["reason"] = o.Reason
+	}
+	if !IsNil(o.RemoteId) {
+		toSerialize["remoteId"] = o.RemoteId
+	}
 	return toSerialize, nil
-}
-
-func (o *FailedItem) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"itemId",
-		"reason",
-		"remoteId",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varFailedItem := _FailedItem{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFailedItem)
-
-	if err != nil {
-		return err
-	}
-
-	*o = FailedItem(varFailedItem)
-
-	return err
 }
 
 type NullableFailedItem struct {

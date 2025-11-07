@@ -160,11 +160,7 @@
           "version": {
             "type": "string"
           }
-        },
-        "required": [
-          "version",
-          "descriptionMd"
-        ]
+        }
       },
       "ColorsByAggregation": {
         "type": "object",
@@ -209,10 +205,7 @@
               "type": "string"
             }
           }
-        },
-        "required": [
-          "reason"
-        ]
+        }
       },
       "ExtensionBinary": {
         "externalDocs": {
@@ -227,11 +220,7 @@
           "type": {
             "$ref": "#/components/schemas/ExtensionBinary.BinaryType"
           }
-        },
-        "required": [
-          "type",
-          "data"
-        ]
+        }
       },
       "ExtensionBinary.BinaryType": {
         "type": "string",
@@ -282,14 +271,7 @@
           "uniqueId": {
             "type": "string"
           }
-        },
-        "required": [
-          "id",
-          "name",
-          "targetDomain",
-          "data",
-          "permissionResource"
-        ]
+        }
       },
       "ExtensionItemBinary": {
         "externalDocs": {
@@ -307,12 +289,7 @@
           "type": {
             "$ref": "#/components/schemas/ExtensionItemBinary.BinaryType"
           }
-        },
-        "required": [
-          "type",
-          "data",
-          "fileName"
-        ]
+        }
       },
       "ExtensionItemBinary.BinaryType": {
         "type": "string",
@@ -373,10 +350,7 @@
           "version": {
             "type": "string"
           }
-        },
-        "required": [
-          "version"
-        ]
+        }
       },
       "FieldGroup": {
         "type": "object",
@@ -540,12 +514,7 @@
               "$ref": "#/components/schemas/GetAllExtensionsResponse.Revision"
             }
           }
-        },
-        "required": [
-          "id",
-          "name",
-          "image"
-        ]
+        }
       },
       "GetAllExtensionsResponse.Revision": {
         "externalDocs": {
@@ -578,11 +547,7 @@
           "version": {
             "type": "string"
           }
-        },
-        "required": [
-          "version",
-          "summary"
-        ]
+        }
       },
       "IntegrationDetail": {
         "externalDocs": {
@@ -597,11 +562,7 @@
           "name": {
             "type": "string"
           }
-        },
-        "required": [
-          "name",
-          "link"
-        ]
+        }
       },
       "ItemCounts": {
         "externalDocs": {
@@ -699,10 +660,7 @@
           "itemCounts": {
             "$ref": "#/components/schemas/ItemCounts"
           }
-        },
-        "required": [
-          "itemCounts"
-        ]
+        }
       },
       "TargetDomain": {
         "type": "string",
@@ -800,12 +758,7 @@
               "$ref": "#/components/schemas/ExtensionRevision"
             }
           }
-        },
-        "required": [
-          "id",
-          "name",
-          "image"
-        ]
+        }
       },
       "v3.FilterOperator": {
         "type": "string",

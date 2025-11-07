@@ -144,12 +144,7 @@
                 "version": {
                   "type": "string"
                 }
-              },
-              "required": [
-                "id",
-                "version",
-                "itemIds"
-              ]
+              }
             },
             "style": "form"
           }
@@ -282,12 +277,7 @@
                 "version": {
                   "type": "string"
                 }
-              },
-              "required": [
-                "id",
-                "version",
-                "itemIds"
-              ]
+              }
             },
             "style": "form"
           }
@@ -353,9 +343,6 @@
                     }
                   }
                 },
-                "required": [
-                  "id"
-                ],
                 "additionalProperties": false
               }
             }
@@ -436,10 +423,7 @@
           "extensionDeployment": {
             "$ref": "#/components/schemas/ExtensionDeployment"
           }
-        },
-        "required": [
-          "extensionDeployment"
-        ]
+        }
       },
       "DeployedExtension": {
         "externalDocs": {
@@ -475,13 +459,7 @@
           "version": {
             "type": "string"
           }
-        },
-        "required": [
-          "id",
-          "version",
-          "summary",
-          "itemIds"
-        ]
+        }
       },
       "DeployedExtensionSummary": {
         "externalDocs": {
@@ -493,10 +471,7 @@
           "deployedItemCounts": {
             "$ref": "#/components/schemas/ItemCounts"
           }
-        },
-        "required": [
-          "deployedItemCounts"
-        ]
+        }
       },
       "ExtensionDeployment": {
         "externalDocs": {
@@ -529,12 +504,7 @@
           "version": {
             "type": "string"
           }
-        },
-        "required": [
-          "id",
-          "version",
-          "itemIds"
-        ]
+        }
       },
       "FailedItem": {
         "externalDocs": {
@@ -552,12 +522,7 @@
           "remoteId": {
             "type": "string"
           }
-        },
-        "required": [
-          "itemId",
-          "remoteId",
-          "reason"
-        ]
+        }
       },
       "FieldGroup": {
         "type": "object",
@@ -752,10 +717,7 @@
           "extensionDeployment": {
             "$ref": "#/components/schemas/ExtensionDeployment"
           }
-        },
-        "required": [
-          "extensionDeployment"
-        ]
+        }
       },
       "common.Group": {
         "type": "object",

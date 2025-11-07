@@ -375,8 +375,8 @@ components:
         sizeGb: 0.8008282
         units: 6.0274563
         dimensions:
-        - priority: PRIORITY_UNSPECIFIED
-        - priority: PRIORITY_UNSPECIFIED
+        - severity: SEVERITY_UNSPECIFIED
+        - severity: SEVERITY_UNSPECIFIED
         timestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about data usage.
@@ -538,11 +538,11 @@ components:
       type: object
     Dimension:
       oneOf:
+      - $ref: "#/components/schemas/DimensionSeverity"
       - $ref: "#/components/schemas/DimensionPriority"
       - $ref: "#/components/schemas/DimensionPillar"
       - $ref: "#/components/schemas/DimensionGenericDimension"
       - $ref: "#/components/schemas/DimensionTier"
-      - $ref: "#/components/schemas/DimensionSeverity"
     DimensionGenericDimension:
       additionalProperties: false
       properties:
@@ -557,14 +557,14 @@ components:
       type: object
     DimensionPriority:
       additionalProperties: false
-      example:
-        priority: PRIORITY_UNSPECIFIED
       properties:
         priority:
           $ref: "#/components/schemas/v2.Priority"
       type: object
     DimensionSeverity:
       additionalProperties: false
+      example:
+        severity: SEVERITY_UNSPECIFIED
       properties:
         severity:
           $ref: "#/components/schemas/datausage.v2.Severity"
@@ -866,14 +866,14 @@ components:
         - sizeGb: 0.8008282
           units: 6.0274563
           dimensions:
-          - priority: PRIORITY_UNSPECIFIED
-          - priority: PRIORITY_UNSPECIFIED
+          - severity: SEVERITY_UNSPECIFIED
+          - severity: SEVERITY_UNSPECIFIED
           timestamp: 2000-01-23T04:56:07.000+00:00
         - sizeGb: 0.8008282
           units: 6.0274563
           dimensions:
-          - priority: PRIORITY_UNSPECIFIED
-          - priority: PRIORITY_UNSPECIFIED
+          - severity: SEVERITY_UNSPECIFIED
+          - severity: SEVERITY_UNSPECIFIED
           timestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about data usage.
@@ -1160,11 +1160,11 @@ components:
       type: object
     DataUsageService_GetDataUsage_dimension_filters_parameter_inner:
       oneOf:
-      - $ref: "#/components/schemas/DimensionPriority"
       - $ref: "#/components/schemas/DimensionPillar"
       - $ref: "#/components/schemas/DimensionGenericDimension"
       - $ref: "#/components/schemas/DimensionTier"
       - $ref: "#/components/schemas/DimensionSeverity"
+      - $ref: "#/components/schemas/DimensionPriority"
     DataUsageService_GetDailyUsageEvaluationTokens_request:
       oneOf:
       - $ref: "#/components/schemas/GetDailyUsageEvaluationTokensRequestRange"
@@ -1177,8 +1177,8 @@ components:
       type: object
     DataUsageService_GetDailyUsageUnits_request:
       oneOf:
-      - $ref: "#/components/schemas/GetDailyUsageUnitsRequestDateRange"
       - $ref: "#/components/schemas/GetDailyUsageUnitsRequestRange"
+      - $ref: "#/components/schemas/GetDailyUsageUnitsRequestDateRange"
       type: object
     Update_Data_Usage_Metrics_Export_Status_Request:
       additionalProperties: false

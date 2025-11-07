@@ -12,8 +12,6 @@ package saml_configuration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the IDPParametersMetadataUrl type satisfies the MappedNullable interface at compile time
@@ -21,23 +19,18 @@ var _ MappedNullable = &IDPParametersMetadataUrl{}
 
 // IDPParametersMetadataUrl This data structure represents a set of SAML identity provider parameters
 type IDPParametersMetadataUrl struct {
-	Active bool `json:"active"`
-	GroupNames []string `json:"groupNames"`
+	Active *bool `json:"active,omitempty"`
+	GroupNames []string `json:"groupNames,omitempty"`
 	MetadataUrl *string `json:"metadataUrl,omitempty"`
-	TeamEntityId int64 `json:"teamEntityId"`
+	TeamEntityId *int64 `json:"teamEntityId,omitempty"`
 }
-
-type _IDPParametersMetadataUrl IDPParametersMetadataUrl
 
 // NewIDPParametersMetadataUrl instantiates a new IDPParametersMetadataUrl object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIDPParametersMetadataUrl(active bool, groupNames []string, teamEntityId int64) *IDPParametersMetadataUrl {
+func NewIDPParametersMetadataUrl() *IDPParametersMetadataUrl {
 	this := IDPParametersMetadataUrl{}
-	this.Active = active
-	this.GroupNames = groupNames
-	this.TeamEntityId = teamEntityId
 	return &this
 }
 
@@ -49,50 +42,66 @@ func NewIDPParametersMetadataUrlWithDefaults() *IDPParametersMetadataUrl {
 	return &this
 }
 
-// GetActive returns the Active field value
+// GetActive returns the Active field value if set, zero value otherwise.
 func (o *IDPParametersMetadataUrl) GetActive() bool {
-	if o == nil {
+	if o == nil || IsNil(o.Active) {
 		var ret bool
 		return ret
 	}
-
-	return o.Active
+	return *o.Active
 }
 
-// GetActiveOk returns a tuple with the Active field value
+// GetActiveOk returns a tuple with the Active field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IDPParametersMetadataUrl) GetActiveOk() (*bool, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Active) {
 		return nil, false
 	}
-	return &o.Active, true
+	return o.Active, true
 }
 
-// SetActive sets field value
+// HasActive returns a boolean if a field has been set.
+func (o *IDPParametersMetadataUrl) HasActive() bool {
+	if o != nil && !IsNil(o.Active) {
+		return true
+	}
+
+	return false
+}
+
+// SetActive gets a reference to the given bool and assigns it to the Active field.
 func (o *IDPParametersMetadataUrl) SetActive(v bool) {
-	o.Active = v
+	o.Active = &v
 }
 
-// GetGroupNames returns the GroupNames field value
+// GetGroupNames returns the GroupNames field value if set, zero value otherwise.
 func (o *IDPParametersMetadataUrl) GetGroupNames() []string {
-	if o == nil {
+	if o == nil || IsNil(o.GroupNames) {
 		var ret []string
 		return ret
 	}
-
 	return o.GroupNames
 }
 
-// GetGroupNamesOk returns a tuple with the GroupNames field value
+// GetGroupNamesOk returns a tuple with the GroupNames field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IDPParametersMetadataUrl) GetGroupNamesOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.GroupNames) {
 		return nil, false
 	}
 	return o.GroupNames, true
 }
 
-// SetGroupNames sets field value
+// HasGroupNames returns a boolean if a field has been set.
+func (o *IDPParametersMetadataUrl) HasGroupNames() bool {
+	if o != nil && !IsNil(o.GroupNames) {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupNames gets a reference to the given []string and assigns it to the GroupNames field.
 func (o *IDPParametersMetadataUrl) SetGroupNames(v []string) {
 	o.GroupNames = v
 }
@@ -129,28 +138,36 @@ func (o *IDPParametersMetadataUrl) SetMetadataUrl(v string) {
 	o.MetadataUrl = &v
 }
 
-// GetTeamEntityId returns the TeamEntityId field value
+// GetTeamEntityId returns the TeamEntityId field value if set, zero value otherwise.
 func (o *IDPParametersMetadataUrl) GetTeamEntityId() int64 {
-	if o == nil {
+	if o == nil || IsNil(o.TeamEntityId) {
 		var ret int64
 		return ret
 	}
-
-	return o.TeamEntityId
+	return *o.TeamEntityId
 }
 
-// GetTeamEntityIdOk returns a tuple with the TeamEntityId field value
+// GetTeamEntityIdOk returns a tuple with the TeamEntityId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IDPParametersMetadataUrl) GetTeamEntityIdOk() (*int64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.TeamEntityId) {
 		return nil, false
 	}
-	return &o.TeamEntityId, true
+	return o.TeamEntityId, true
 }
 
-// SetTeamEntityId sets field value
+// HasTeamEntityId returns a boolean if a field has been set.
+func (o *IDPParametersMetadataUrl) HasTeamEntityId() bool {
+	if o != nil && !IsNil(o.TeamEntityId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTeamEntityId gets a reference to the given int64 and assigns it to the TeamEntityId field.
 func (o *IDPParametersMetadataUrl) SetTeamEntityId(v int64) {
-	o.TeamEntityId = v
+	o.TeamEntityId = &v
 }
 
 func (o IDPParametersMetadataUrl) MarshalJSON() ([]byte, error) {
@@ -163,52 +180,19 @@ func (o IDPParametersMetadataUrl) MarshalJSON() ([]byte, error) {
 
 func (o IDPParametersMetadataUrl) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["active"] = o.Active
-	toSerialize["groupNames"] = o.GroupNames
+	if !IsNil(o.Active) {
+		toSerialize["active"] = o.Active
+	}
+	if !IsNil(o.GroupNames) {
+		toSerialize["groupNames"] = o.GroupNames
+	}
 	if !IsNil(o.MetadataUrl) {
 		toSerialize["metadataUrl"] = o.MetadataUrl
 	}
-	toSerialize["teamEntityId"] = o.TeamEntityId
+	if !IsNil(o.TeamEntityId) {
+		toSerialize["teamEntityId"] = o.TeamEntityId
+	}
 	return toSerialize, nil
-}
-
-func (o *IDPParametersMetadataUrl) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"active",
-		"groupNames",
-		"teamEntityId",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varIDPParametersMetadataUrl := _IDPParametersMetadataUrl{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varIDPParametersMetadataUrl)
-
-	if err != nil {
-		return err
-	}
-
-	*o = IDPParametersMetadataUrl(varIDPParametersMetadataUrl)
-
-	return err
 }
 
 type NullableIDPParametersMetadataUrl struct {

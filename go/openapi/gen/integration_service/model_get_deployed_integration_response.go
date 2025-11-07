@@ -12,8 +12,6 @@ package integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the GetDeployedIntegrationResponse type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &GetDeployedIntegrationResponse{}
 
 // GetDeployedIntegrationResponse struct for GetDeployedIntegrationResponse
 type GetDeployedIntegrationResponse struct {
-	Integration DeployedIntegrationInformation `json:"integration"`
+	Integration *DeployedIntegrationInformation `json:"integration,omitempty"`
 }
-
-type _GetDeployedIntegrationResponse GetDeployedIntegrationResponse
 
 // NewGetDeployedIntegrationResponse instantiates a new GetDeployedIntegrationResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetDeployedIntegrationResponse(integration DeployedIntegrationInformation) *GetDeployedIntegrationResponse {
+func NewGetDeployedIntegrationResponse() *GetDeployedIntegrationResponse {
 	this := GetDeployedIntegrationResponse{}
-	this.Integration = integration
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewGetDeployedIntegrationResponseWithDefaults() *GetDeployedIntegrationResp
 	return &this
 }
 
-// GetIntegration returns the Integration field value
+// GetIntegration returns the Integration field value if set, zero value otherwise.
 func (o *GetDeployedIntegrationResponse) GetIntegration() DeployedIntegrationInformation {
-	if o == nil {
+	if o == nil || IsNil(o.Integration) {
 		var ret DeployedIntegrationInformation
 		return ret
 	}
-
-	return o.Integration
+	return *o.Integration
 }
 
-// GetIntegrationOk returns a tuple with the Integration field value
+// GetIntegrationOk returns a tuple with the Integration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetDeployedIntegrationResponse) GetIntegrationOk() (*DeployedIntegrationInformation, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Integration) {
 		return nil, false
 	}
-	return &o.Integration, true
+	return o.Integration, true
 }
 
-// SetIntegration sets field value
+// HasIntegration returns a boolean if a field has been set.
+func (o *GetDeployedIntegrationResponse) HasIntegration() bool {
+	if o != nil && !IsNil(o.Integration) {
+		return true
+	}
+
+	return false
+}
+
+// SetIntegration gets a reference to the given DeployedIntegrationInformation and assigns it to the Integration field.
 func (o *GetDeployedIntegrationResponse) SetIntegration(v DeployedIntegrationInformation) {
-	o.Integration = v
+	o.Integration = &v
 }
 
 func (o GetDeployedIntegrationResponse) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o GetDeployedIntegrationResponse) MarshalJSON() ([]byte, error) {
 
 func (o GetDeployedIntegrationResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["integration"] = o.Integration
+	if !IsNil(o.Integration) {
+		toSerialize["integration"] = o.Integration
+	}
 	return toSerialize, nil
-}
-
-func (o *GetDeployedIntegrationResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"integration",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varGetDeployedIntegrationResponse := _GetDeployedIntegrationResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetDeployedIntegrationResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = GetDeployedIntegrationResponse(varGetDeployedIntegrationResponse)
-
-	return err
 }
 
 type NullableGetDeployedIntegrationResponse struct {

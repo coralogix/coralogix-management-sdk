@@ -13,8 +13,6 @@ package presets_service
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Preset type satisfies the MappedNullable interface at compile time
@@ -22,29 +20,24 @@ var _ MappedNullable = &Preset{}
 
 // Preset Set of preconfigured templates for notification content rendering
 type Preset struct {
-	ConfigOverrides []ConfigOverrides `json:"configOverrides"`
+	ConfigOverrides []ConfigOverrides `json:"configOverrides,omitempty"`
 	ConnectorType *ConnectorType `json:"connectorType,omitempty"`
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	Description *string `json:"description,omitempty"`
-	EntityType NotificationCenterEntityType `json:"entityType"`
+	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
 	Id *string `json:"id,omitempty"`
-	Name string `json:"name"`
+	Name *string `json:"name,omitempty"`
 	ParentId *string `json:"parentId,omitempty"`
 	PresetType *PresetType `json:"presetType,omitempty"`
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 }
 
-type _Preset Preset
-
 // NewPreset instantiates a new Preset object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPreset(configOverrides []ConfigOverrides, entityType NotificationCenterEntityType, name string) *Preset {
+func NewPreset() *Preset {
 	this := Preset{}
-	this.ConfigOverrides = configOverrides
-	this.EntityType = entityType
-	this.Name = name
 	return &this
 }
 
@@ -56,26 +49,34 @@ func NewPresetWithDefaults() *Preset {
 	return &this
 }
 
-// GetConfigOverrides returns the ConfigOverrides field value
+// GetConfigOverrides returns the ConfigOverrides field value if set, zero value otherwise.
 func (o *Preset) GetConfigOverrides() []ConfigOverrides {
-	if o == nil {
+	if o == nil || IsNil(o.ConfigOverrides) {
 		var ret []ConfigOverrides
 		return ret
 	}
-
 	return o.ConfigOverrides
 }
 
-// GetConfigOverridesOk returns a tuple with the ConfigOverrides field value
+// GetConfigOverridesOk returns a tuple with the ConfigOverrides field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Preset) GetConfigOverridesOk() ([]ConfigOverrides, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ConfigOverrides) {
 		return nil, false
 	}
 	return o.ConfigOverrides, true
 }
 
-// SetConfigOverrides sets field value
+// HasConfigOverrides returns a boolean if a field has been set.
+func (o *Preset) HasConfigOverrides() bool {
+	if o != nil && !IsNil(o.ConfigOverrides) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigOverrides gets a reference to the given []ConfigOverrides and assigns it to the ConfigOverrides field.
 func (o *Preset) SetConfigOverrides(v []ConfigOverrides) {
 	o.ConfigOverrides = v
 }
@@ -176,28 +177,36 @@ func (o *Preset) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetEntityType returns the EntityType field value
+// GetEntityType returns the EntityType field value if set, zero value otherwise.
 func (o *Preset) GetEntityType() NotificationCenterEntityType {
-	if o == nil {
+	if o == nil || IsNil(o.EntityType) {
 		var ret NotificationCenterEntityType
 		return ret
 	}
-
-	return o.EntityType
+	return *o.EntityType
 }
 
-// GetEntityTypeOk returns a tuple with the EntityType field value
+// GetEntityTypeOk returns a tuple with the EntityType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Preset) GetEntityTypeOk() (*NotificationCenterEntityType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.EntityType) {
 		return nil, false
 	}
-	return &o.EntityType, true
+	return o.EntityType, true
 }
 
-// SetEntityType sets field value
+// HasEntityType returns a boolean if a field has been set.
+func (o *Preset) HasEntityType() bool {
+	if o != nil && !IsNil(o.EntityType) {
+		return true
+	}
+
+	return false
+}
+
+// SetEntityType gets a reference to the given NotificationCenterEntityType and assigns it to the EntityType field.
 func (o *Preset) SetEntityType(v NotificationCenterEntityType) {
-	o.EntityType = v
+	o.EntityType = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -232,28 +241,36 @@ func (o *Preset) SetId(v string) {
 	o.Id = &v
 }
 
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *Preset) GetName() string {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Preset) GetNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *Preset) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *Preset) SetName(v string) {
-	o.Name = v
+	o.Name = &v
 }
 
 // GetParentId returns the ParentId field value if set, zero value otherwise.
@@ -362,7 +379,9 @@ func (o Preset) MarshalJSON() ([]byte, error) {
 
 func (o Preset) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["configOverrides"] = o.ConfigOverrides
+	if !IsNil(o.ConfigOverrides) {
+		toSerialize["configOverrides"] = o.ConfigOverrides
+	}
 	if !IsNil(o.ConnectorType) {
 		toSerialize["connectorType"] = o.ConnectorType
 	}
@@ -372,11 +391,15 @@ func (o Preset) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	toSerialize["entityType"] = o.EntityType
+	if !IsNil(o.EntityType) {
+		toSerialize["entityType"] = o.EntityType
+	}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	toSerialize["name"] = o.Name
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	if !IsNil(o.ParentId) {
 		toSerialize["parentId"] = o.ParentId
 	}
@@ -387,45 +410,6 @@ func (o Preset) ToMap() (map[string]interface{}, error) {
 		toSerialize["updateTime"] = o.UpdateTime
 	}
 	return toSerialize, nil
-}
-
-func (o *Preset) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"configOverrides",
-		"entityType",
-		"name",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varPreset := _Preset{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPreset)
-
-	if err != nil {
-		return err
-	}
-
-	*o = Preset(varPreset)
-
-	return err
 }
 
 type NullablePreset struct {

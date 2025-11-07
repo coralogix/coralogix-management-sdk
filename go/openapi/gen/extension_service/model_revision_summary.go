@@ -12,8 +12,6 @@ package extension_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the RevisionSummary type satisfies the MappedNullable interface at compile time
@@ -22,18 +20,15 @@ var _ MappedNullable = &RevisionSummary{}
 // RevisionSummary struct for RevisionSummary
 type RevisionSummary struct {
 	IsNew *bool `json:"isNew,omitempty"`
-	ItemCounts ItemCounts `json:"itemCounts"`
+	ItemCounts *ItemCounts `json:"itemCounts,omitempty"`
 }
-
-type _RevisionSummary RevisionSummary
 
 // NewRevisionSummary instantiates a new RevisionSummary object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRevisionSummary(itemCounts ItemCounts) *RevisionSummary {
+func NewRevisionSummary() *RevisionSummary {
 	this := RevisionSummary{}
-	this.ItemCounts = itemCounts
 	return &this
 }
 
@@ -77,28 +72,36 @@ func (o *RevisionSummary) SetIsNew(v bool) {
 	o.IsNew = &v
 }
 
-// GetItemCounts returns the ItemCounts field value
+// GetItemCounts returns the ItemCounts field value if set, zero value otherwise.
 func (o *RevisionSummary) GetItemCounts() ItemCounts {
-	if o == nil {
+	if o == nil || IsNil(o.ItemCounts) {
 		var ret ItemCounts
 		return ret
 	}
-
-	return o.ItemCounts
+	return *o.ItemCounts
 }
 
-// GetItemCountsOk returns a tuple with the ItemCounts field value
+// GetItemCountsOk returns a tuple with the ItemCounts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RevisionSummary) GetItemCountsOk() (*ItemCounts, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ItemCounts) {
 		return nil, false
 	}
-	return &o.ItemCounts, true
+	return o.ItemCounts, true
 }
 
-// SetItemCounts sets field value
+// HasItemCounts returns a boolean if a field has been set.
+func (o *RevisionSummary) HasItemCounts() bool {
+	if o != nil && !IsNil(o.ItemCounts) {
+		return true
+	}
+
+	return false
+}
+
+// SetItemCounts gets a reference to the given ItemCounts and assigns it to the ItemCounts field.
 func (o *RevisionSummary) SetItemCounts(v ItemCounts) {
-	o.ItemCounts = v
+	o.ItemCounts = &v
 }
 
 func (o RevisionSummary) MarshalJSON() ([]byte, error) {
@@ -114,45 +117,10 @@ func (o RevisionSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsNew) {
 		toSerialize["isNew"] = o.IsNew
 	}
-	toSerialize["itemCounts"] = o.ItemCounts
+	if !IsNil(o.ItemCounts) {
+		toSerialize["itemCounts"] = o.ItemCounts
+	}
 	return toSerialize, nil
-}
-
-func (o *RevisionSummary) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"itemCounts",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varRevisionSummary := _RevisionSummary{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRevisionSummary)
-
-	if err != nil {
-		return err
-	}
-
-	*o = RevisionSummary(varRevisionSummary)
-
-	return err
 }
 
 type NullableRevisionSummary struct {

@@ -12,8 +12,6 @@ package contextual_data_integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the GetContextualDataIntegrationDetailsResponse type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &GetContextualDataIntegrationDetailsResponse{}
 
 // GetContextualDataIntegrationDetailsResponse struct for GetContextualDataIntegrationDetailsResponse
 type GetContextualDataIntegrationDetailsResponse struct {
-	IntegrationDetail IntegrationDetails `json:"integrationDetail"`
+	IntegrationDetail *IntegrationDetails `json:"integrationDetail,omitempty"`
 }
-
-type _GetContextualDataIntegrationDetailsResponse GetContextualDataIntegrationDetailsResponse
 
 // NewGetContextualDataIntegrationDetailsResponse instantiates a new GetContextualDataIntegrationDetailsResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetContextualDataIntegrationDetailsResponse(integrationDetail IntegrationDetails) *GetContextualDataIntegrationDetailsResponse {
+func NewGetContextualDataIntegrationDetailsResponse() *GetContextualDataIntegrationDetailsResponse {
 	this := GetContextualDataIntegrationDetailsResponse{}
-	this.IntegrationDetail = integrationDetail
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewGetContextualDataIntegrationDetailsResponseWithDefaults() *GetContextual
 	return &this
 }
 
-// GetIntegrationDetail returns the IntegrationDetail field value
+// GetIntegrationDetail returns the IntegrationDetail field value if set, zero value otherwise.
 func (o *GetContextualDataIntegrationDetailsResponse) GetIntegrationDetail() IntegrationDetails {
-	if o == nil {
+	if o == nil || IsNil(o.IntegrationDetail) {
 		var ret IntegrationDetails
 		return ret
 	}
-
-	return o.IntegrationDetail
+	return *o.IntegrationDetail
 }
 
-// GetIntegrationDetailOk returns a tuple with the IntegrationDetail field value
+// GetIntegrationDetailOk returns a tuple with the IntegrationDetail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetContextualDataIntegrationDetailsResponse) GetIntegrationDetailOk() (*IntegrationDetails, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.IntegrationDetail) {
 		return nil, false
 	}
-	return &o.IntegrationDetail, true
+	return o.IntegrationDetail, true
 }
 
-// SetIntegrationDetail sets field value
+// HasIntegrationDetail returns a boolean if a field has been set.
+func (o *GetContextualDataIntegrationDetailsResponse) HasIntegrationDetail() bool {
+	if o != nil && !IsNil(o.IntegrationDetail) {
+		return true
+	}
+
+	return false
+}
+
+// SetIntegrationDetail gets a reference to the given IntegrationDetails and assigns it to the IntegrationDetail field.
 func (o *GetContextualDataIntegrationDetailsResponse) SetIntegrationDetail(v IntegrationDetails) {
-	o.IntegrationDetail = v
+	o.IntegrationDetail = &v
 }
 
 func (o GetContextualDataIntegrationDetailsResponse) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o GetContextualDataIntegrationDetailsResponse) MarshalJSON() ([]byte, erro
 
 func (o GetContextualDataIntegrationDetailsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["integrationDetail"] = o.IntegrationDetail
+	if !IsNil(o.IntegrationDetail) {
+		toSerialize["integrationDetail"] = o.IntegrationDetail
+	}
 	return toSerialize, nil
-}
-
-func (o *GetContextualDataIntegrationDetailsResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"integrationDetail",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varGetContextualDataIntegrationDetailsResponse := _GetContextualDataIntegrationDetailsResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetContextualDataIntegrationDetailsResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = GetContextualDataIntegrationDetailsResponse(varGetContextualDataIntegrationDetailsResponse)
-
-	return err
 }
 
 type NullableGetContextualDataIntegrationDetailsResponse struct {

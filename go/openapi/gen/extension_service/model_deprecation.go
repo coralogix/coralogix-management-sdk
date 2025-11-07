@@ -12,8 +12,6 @@ package extension_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Deprecation type satisfies the MappedNullable interface at compile time
@@ -21,19 +19,16 @@ var _ MappedNullable = &Deprecation{}
 
 // Deprecation struct for Deprecation
 type Deprecation struct {
-	Reason string `json:"reason"`
+	Reason *string `json:"reason,omitempty"`
 	ReplacementExtensions []string `json:"replacementExtensions,omitempty"`
 }
-
-type _Deprecation Deprecation
 
 // NewDeprecation instantiates a new Deprecation object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeprecation(reason string) *Deprecation {
+func NewDeprecation() *Deprecation {
 	this := Deprecation{}
-	this.Reason = reason
 	return &this
 }
 
@@ -45,28 +40,36 @@ func NewDeprecationWithDefaults() *Deprecation {
 	return &this
 }
 
-// GetReason returns the Reason field value
+// GetReason returns the Reason field value if set, zero value otherwise.
 func (o *Deprecation) GetReason() string {
-	if o == nil {
+	if o == nil || IsNil(o.Reason) {
 		var ret string
 		return ret
 	}
-
-	return o.Reason
+	return *o.Reason
 }
 
-// GetReasonOk returns a tuple with the Reason field value
+// GetReasonOk returns a tuple with the Reason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Deprecation) GetReasonOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Reason) {
 		return nil, false
 	}
-	return &o.Reason, true
+	return o.Reason, true
 }
 
-// SetReason sets field value
+// HasReason returns a boolean if a field has been set.
+func (o *Deprecation) HasReason() bool {
+	if o != nil && !IsNil(o.Reason) {
+		return true
+	}
+
+	return false
+}
+
+// SetReason gets a reference to the given string and assigns it to the Reason field.
 func (o *Deprecation) SetReason(v string) {
-	o.Reason = v
+	o.Reason = &v
 }
 
 // GetReplacementExtensions returns the ReplacementExtensions field value if set, zero value otherwise.
@@ -111,48 +114,13 @@ func (o Deprecation) MarshalJSON() ([]byte, error) {
 
 func (o Deprecation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["reason"] = o.Reason
+	if !IsNil(o.Reason) {
+		toSerialize["reason"] = o.Reason
+	}
 	if !IsNil(o.ReplacementExtensions) {
 		toSerialize["replacementExtensions"] = o.ReplacementExtensions
 	}
 	return toSerialize, nil
-}
-
-func (o *Deprecation) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"reason",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varDeprecation := _Deprecation{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDeprecation)
-
-	if err != nil {
-		return err
-	}
-
-	*o = Deprecation(varDeprecation)
-
-	return err
 }
 
 type NullableDeprecation struct {

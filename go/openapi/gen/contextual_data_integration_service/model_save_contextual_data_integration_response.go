@@ -12,8 +12,6 @@ package contextual_data_integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the SaveContextualDataIntegrationResponse type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &SaveContextualDataIntegrationResponse{}
 
 // SaveContextualDataIntegrationResponse struct for SaveContextualDataIntegrationResponse
 type SaveContextualDataIntegrationResponse struct {
-	IntegrationId string `json:"integrationId"`
+	IntegrationId *string `json:"integrationId,omitempty"`
 }
-
-type _SaveContextualDataIntegrationResponse SaveContextualDataIntegrationResponse
 
 // NewSaveContextualDataIntegrationResponse instantiates a new SaveContextualDataIntegrationResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSaveContextualDataIntegrationResponse(integrationId string) *SaveContextualDataIntegrationResponse {
+func NewSaveContextualDataIntegrationResponse() *SaveContextualDataIntegrationResponse {
 	this := SaveContextualDataIntegrationResponse{}
-	this.IntegrationId = integrationId
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewSaveContextualDataIntegrationResponseWithDefaults() *SaveContextualDataI
 	return &this
 }
 
-// GetIntegrationId returns the IntegrationId field value
+// GetIntegrationId returns the IntegrationId field value if set, zero value otherwise.
 func (o *SaveContextualDataIntegrationResponse) GetIntegrationId() string {
-	if o == nil {
+	if o == nil || IsNil(o.IntegrationId) {
 		var ret string
 		return ret
 	}
-
-	return o.IntegrationId
+	return *o.IntegrationId
 }
 
-// GetIntegrationIdOk returns a tuple with the IntegrationId field value
+// GetIntegrationIdOk returns a tuple with the IntegrationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SaveContextualDataIntegrationResponse) GetIntegrationIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.IntegrationId) {
 		return nil, false
 	}
-	return &o.IntegrationId, true
+	return o.IntegrationId, true
 }
 
-// SetIntegrationId sets field value
+// HasIntegrationId returns a boolean if a field has been set.
+func (o *SaveContextualDataIntegrationResponse) HasIntegrationId() bool {
+	if o != nil && !IsNil(o.IntegrationId) {
+		return true
+	}
+
+	return false
+}
+
+// SetIntegrationId gets a reference to the given string and assigns it to the IntegrationId field.
 func (o *SaveContextualDataIntegrationResponse) SetIntegrationId(v string) {
-	o.IntegrationId = v
+	o.IntegrationId = &v
 }
 
 func (o SaveContextualDataIntegrationResponse) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o SaveContextualDataIntegrationResponse) MarshalJSON() ([]byte, error) {
 
 func (o SaveContextualDataIntegrationResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["integrationId"] = o.IntegrationId
+	if !IsNil(o.IntegrationId) {
+		toSerialize["integrationId"] = o.IntegrationId
+	}
 	return toSerialize, nil
-}
-
-func (o *SaveContextualDataIntegrationResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"integrationId",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varSaveContextualDataIntegrationResponse := _SaveContextualDataIntegrationResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSaveContextualDataIntegrationResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = SaveContextualDataIntegrationResponse(varSaveContextualDataIntegrationResponse)
-
-	return err
 }
 
 type NullableSaveContextualDataIntegrationResponse struct {

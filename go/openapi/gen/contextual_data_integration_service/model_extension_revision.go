@@ -12,8 +12,6 @@ package contextual_data_integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ExtensionRevision type satisfies the MappedNullable interface at compile time
@@ -29,18 +27,15 @@ type ExtensionRevision struct {
 	Items []ExtensionItem `json:"items,omitempty"`
 	Labels []string `json:"labels,omitempty"`
 	PermissionDeniedItems []ExtensionItem `json:"permissionDeniedItems,omitempty"`
-	Version string `json:"version"`
+	Version *string `json:"version,omitempty"`
 }
-
-type _ExtensionRevision ExtensionRevision
 
 // NewExtensionRevision instantiates a new ExtensionRevision object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewExtensionRevision(version string) *ExtensionRevision {
+func NewExtensionRevision() *ExtensionRevision {
 	this := ExtensionRevision{}
-	this.Version = version
 	return &this
 }
 
@@ -308,28 +303,36 @@ func (o *ExtensionRevision) SetPermissionDeniedItems(v []ExtensionItem) {
 	o.PermissionDeniedItems = v
 }
 
-// GetVersion returns the Version field value
+// GetVersion returns the Version field value if set, zero value otherwise.
 func (o *ExtensionRevision) GetVersion() string {
-	if o == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
-
-	return o.Version
+	return *o.Version
 }
 
-// GetVersionOk returns a tuple with the Version field value
+// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExtensionRevision) GetVersionOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
-	return &o.Version, true
+	return o.Version, true
 }
 
-// SetVersion sets field value
+// HasVersion returns a boolean if a field has been set.
+func (o *ExtensionRevision) HasVersion() bool {
+	if o != nil && !IsNil(o.Version) {
+		return true
+	}
+
+	return false
+}
+
+// SetVersion gets a reference to the given string and assigns it to the Version field.
 func (o *ExtensionRevision) SetVersion(v string) {
-	o.Version = v
+	o.Version = &v
 }
 
 func (o ExtensionRevision) MarshalJSON() ([]byte, error) {
@@ -366,45 +369,10 @@ func (o ExtensionRevision) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PermissionDeniedItems) {
 		toSerialize["permissionDeniedItems"] = o.PermissionDeniedItems
 	}
-	toSerialize["version"] = o.Version
+	if !IsNil(o.Version) {
+		toSerialize["version"] = o.Version
+	}
 	return toSerialize, nil
-}
-
-func (o *ExtensionRevision) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"version",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varExtensionRevision := _ExtensionRevision{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varExtensionRevision)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ExtensionRevision(varExtensionRevision)
-
-	return err
 }
 
 type NullableExtensionRevision struct {

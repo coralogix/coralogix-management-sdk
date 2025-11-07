@@ -690,50 +690,41 @@ components:
             groupByKeys:
             - "[\"key1\",\"key2\"]"
             - "[\"key1\",\"key2\"]"
+          logsNewValue:
+            notificationPayloadFilter:
+            - "[\"obj.field\"]"
+            - "[\"obj.field\"]"
+            rules:
+            - condition:
+                timeWindow:
+                  logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+                keypathToTrack: metadata.field
+            - condition:
+                timeWindow:
+                  logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+                keypathToTrack: metadata.field
+            logsFilter:
+              simpleFilter:
+                labelFilters:
+                  subsystemName:
+                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    value: my-app
+                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    value: my-app
+                  applicationName:
+                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    value: my-app
+                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    value: my-app
+                  severities:
+                  - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                luceneQuery: luceneQuery
           deleted: false
           incidentsSettings:
             minutes: 30
             notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
           name: My Alert
-          flow:
-            enforceSuppression: true
-            stages:
-            - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-              flowStagesGroups:
-                groups:
-                - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                  alertDefs:
-                  - not: true
-                    id: 123e4567-e89b-12d3-a456-426614174000
-                  - not: true
-                    id: 123e4567-e89b-12d3-a456-426614174000
-                  nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                  alertDefs:
-                  - not: true
-                    id: 123e4567-e89b-12d3-a456-426614174000
-                  - not: true
-                    id: 123e4567-e89b-12d3-a456-426614174000
-                  nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-              timeframeMs: timeframeMs
-            - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-              flowStagesGroups:
-                groups:
-                - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                  alertDefs:
-                  - not: true
-                    id: 123e4567-e89b-12d3-a456-426614174000
-                  - not: true
-                    id: 123e4567-e89b-12d3-a456-426614174000
-                  nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                  alertDefs:
-                  - not: true
-                    id: 123e4567-e89b-12d3-a456-426614174000
-                  - not: true
-                    id: 123e4567-e89b-12d3-a456-426614174000
-                  nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-              timeframeMs: timeframeMs
           groupByKeys:
           - "[\"key1\",\"key2\"]"
           - "[\"key1\",\"key2\"]"
@@ -921,20 +912,197 @@ components:
       type: string
     AlertDefProperties:
       oneOf:
-      - $ref: "#/components/schemas/AlertDefPropertiesFlow"
-      - $ref: "#/components/schemas/AlertDefPropertiesMetricAnomaly"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsNewValue"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
       - $ref: "#/components/schemas/AlertDefPropertiesSloThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesMetricThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesTracingThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsAnomaly"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsNewValue"
+      - $ref: "#/components/schemas/AlertDefPropertiesFlow"
+      - $ref: "#/components/schemas/AlertDefPropertiesMetricAnomaly"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsImmediate"
       - $ref: "#/components/schemas/AlertDefPropertiesTracingImmediate"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesMetricThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsAnomaly"
     AlertDefPropertiesFlow:
+      additionalProperties: false
+      description: User-configurable properties of an alert definition
+      externalDocs:
+        url: ""
+      properties:
+        activeOn:
+          $ref: "#/components/schemas/ActivitySchedule"
+        deleted:
+          description: Whether the alert has been marked as deleted
+          example: false
+          type: boolean
+        description:
+          description: A detailed description of what the alert monitors and when
+            it triggers
+          example: Alert description
+          type: string
+        enabled:
+          description: Whether the alert is currently active and monitoring
+          example: true
+          type: boolean
+        entityLabels:
+          additionalProperties:
+            type: string
+          description: Labels used to identify and categorize the alert entity
+          example:
+            key: value
+          type: object
+        flow:
+          $ref: "#/components/schemas/FlowType"
+        groupByKeys:
+          items:
+            description: Keys used to group and aggregate alert data
+            example: "[\"key1\",\"key2\"]"
+            type: string
+          type: array
+        incidentsSettings:
+          $ref: "#/components/schemas/AlertDefIncidentSettings"
+        name:
+          description: The name of the alert definition
+          example: My Alert
+          type: string
+        notificationGroup:
+          $ref: "#/components/schemas/AlertDefNotificationGroup"
+        notificationGroupExcess:
+          items:
+            $ref: "#/components/schemas/AlertDefNotificationGroup"
+          type: array
+        phantomMode:
+          description: Whether the alert is in phantom mode (creating incidents or
+            not)
+          example: false
+          type: boolean
+        priority:
+          $ref: "#/components/schemas/AlertDefPriority"
+        type:
+          $ref: "#/components/schemas/AlertDefType"
+      title: Alert definition properties
+      type: object
+    AlertDefPropertiesLogsAnomaly:
+      additionalProperties: false
+      description: User-configurable properties of an alert definition
+      externalDocs:
+        url: ""
+      properties:
+        activeOn:
+          $ref: "#/components/schemas/ActivitySchedule"
+        deleted:
+          description: Whether the alert has been marked as deleted
+          example: false
+          type: boolean
+        description:
+          description: A detailed description of what the alert monitors and when
+            it triggers
+          example: Alert description
+          type: string
+        enabled:
+          description: Whether the alert is currently active and monitoring
+          example: true
+          type: boolean
+        entityLabels:
+          additionalProperties:
+            type: string
+          description: Labels used to identify and categorize the alert entity
+          example:
+            key: value
+          type: object
+        groupByKeys:
+          items:
+            description: Keys used to group and aggregate alert data
+            example: "[\"key1\",\"key2\"]"
+            type: string
+          type: array
+        incidentsSettings:
+          $ref: "#/components/schemas/AlertDefIncidentSettings"
+        logsAnomaly:
+          $ref: "#/components/schemas/LogsAnomalyType"
+        name:
+          description: The name of the alert definition
+          example: My Alert
+          type: string
+        notificationGroup:
+          $ref: "#/components/schemas/AlertDefNotificationGroup"
+        notificationGroupExcess:
+          items:
+            $ref: "#/components/schemas/AlertDefNotificationGroup"
+          type: array
+        phantomMode:
+          description: Whether the alert is in phantom mode (creating incidents or
+            not)
+          example: false
+          type: boolean
+        priority:
+          $ref: "#/components/schemas/AlertDefPriority"
+        type:
+          $ref: "#/components/schemas/AlertDefType"
+      title: Alert definition properties
+      type: object
+    AlertDefPropertiesLogsImmediate:
+      additionalProperties: false
+      description: User-configurable properties of an alert definition
+      externalDocs:
+        url: ""
+      properties:
+        activeOn:
+          $ref: "#/components/schemas/ActivitySchedule"
+        deleted:
+          description: Whether the alert has been marked as deleted
+          example: false
+          type: boolean
+        description:
+          description: A detailed description of what the alert monitors and when
+            it triggers
+          example: Alert description
+          type: string
+        enabled:
+          description: Whether the alert is currently active and monitoring
+          example: true
+          type: boolean
+        entityLabels:
+          additionalProperties:
+            type: string
+          description: Labels used to identify and categorize the alert entity
+          example:
+            key: value
+          type: object
+        groupByKeys:
+          items:
+            description: Keys used to group and aggregate alert data
+            example: "[\"key1\",\"key2\"]"
+            type: string
+          type: array
+        incidentsSettings:
+          $ref: "#/components/schemas/AlertDefIncidentSettings"
+        logsImmediate:
+          $ref: "#/components/schemas/LogsImmediateType"
+        name:
+          description: The name of the alert definition
+          example: My Alert
+          type: string
+        notificationGroup:
+          $ref: "#/components/schemas/AlertDefNotificationGroup"
+        notificationGroupExcess:
+          items:
+            $ref: "#/components/schemas/AlertDefNotificationGroup"
+          type: array
+        phantomMode:
+          description: Whether the alert is in phantom mode (creating incidents or
+            not)
+          example: false
+          type: boolean
+        priority:
+          $ref: "#/components/schemas/AlertDefPriority"
+        type:
+          $ref: "#/components/schemas/AlertDefType"
+      title: Alert definition properties
+      type: object
+    AlertDefPropertiesLogsNewValue:
       additionalProperties: false
       description: User-configurable properties of an alert definition
       example:
@@ -1191,230 +1359,44 @@ components:
           groupByKeys:
           - "[\"key1\",\"key2\"]"
           - "[\"key1\",\"key2\"]"
+        logsNewValue:
+          notificationPayloadFilter:
+          - "[\"obj.field\"]"
+          - "[\"obj.field\"]"
+          rules:
+          - condition:
+              timeWindow:
+                logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+              keypathToTrack: metadata.field
+          - condition:
+              timeWindow:
+                logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+              keypathToTrack: metadata.field
+          logsFilter:
+            simpleFilter:
+              labelFilters:
+                subsystemName:
+                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  value: my-app
+                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  value: my-app
+                applicationName:
+                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  value: my-app
+                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  value: my-app
+                severities:
+                - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+              luceneQuery: luceneQuery
         deleted: false
         incidentsSettings:
           minutes: 30
           notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
         name: My Alert
-        flow:
-          enforceSuppression: true
-          stages:
-          - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-            flowStagesGroups:
-              groups:
-              - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                alertDefs:
-                - not: true
-                  id: 123e4567-e89b-12d3-a456-426614174000
-                - not: true
-                  id: 123e4567-e89b-12d3-a456-426614174000
-                nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-              - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                alertDefs:
-                - not: true
-                  id: 123e4567-e89b-12d3-a456-426614174000
-                - not: true
-                  id: 123e4567-e89b-12d3-a456-426614174000
-                nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-            timeframeMs: timeframeMs
-          - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-            flowStagesGroups:
-              groups:
-              - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                alertDefs:
-                - not: true
-                  id: 123e4567-e89b-12d3-a456-426614174000
-                - not: true
-                  id: 123e4567-e89b-12d3-a456-426614174000
-                nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-              - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                alertDefs:
-                - not: true
-                  id: 123e4567-e89b-12d3-a456-426614174000
-                - not: true
-                  id: 123e4567-e89b-12d3-a456-426614174000
-                nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-            timeframeMs: timeframeMs
         groupByKeys:
         - "[\"key1\",\"key2\"]"
         - "[\"key1\",\"key2\"]"
-      externalDocs:
-        url: ""
-      properties:
-        activeOn:
-          $ref: "#/components/schemas/ActivitySchedule"
-        deleted:
-          description: Whether the alert has been marked as deleted
-          example: false
-          type: boolean
-        description:
-          description: A detailed description of what the alert monitors and when
-            it triggers
-          example: Alert description
-          type: string
-        enabled:
-          description: Whether the alert is currently active and monitoring
-          example: true
-          type: boolean
-        entityLabels:
-          additionalProperties:
-            type: string
-          description: Labels used to identify and categorize the alert entity
-          example:
-            key: value
-          type: object
-        flow:
-          $ref: "#/components/schemas/FlowType"
-        groupByKeys:
-          items:
-            description: Keys used to group and aggregate alert data
-            example: "[\"key1\",\"key2\"]"
-            type: string
-          type: array
-        incidentsSettings:
-          $ref: "#/components/schemas/AlertDefIncidentSettings"
-        name:
-          description: The name of the alert definition
-          example: My Alert
-          type: string
-        notificationGroup:
-          $ref: "#/components/schemas/AlertDefNotificationGroup"
-        notificationGroupExcess:
-          items:
-            $ref: "#/components/schemas/AlertDefNotificationGroup"
-          type: array
-        phantomMode:
-          description: Whether the alert is in phantom mode (creating incidents or
-            not)
-          example: false
-          type: boolean
-        priority:
-          $ref: "#/components/schemas/AlertDefPriority"
-        type:
-          $ref: "#/components/schemas/AlertDefType"
-      title: Alert definition properties
-      type: object
-    AlertDefPropertiesLogsAnomaly:
-      additionalProperties: false
-      description: User-configurable properties of an alert definition
-      externalDocs:
-        url: ""
-      properties:
-        activeOn:
-          $ref: "#/components/schemas/ActivitySchedule"
-        deleted:
-          description: Whether the alert has been marked as deleted
-          example: false
-          type: boolean
-        description:
-          description: A detailed description of what the alert monitors and when
-            it triggers
-          example: Alert description
-          type: string
-        enabled:
-          description: Whether the alert is currently active and monitoring
-          example: true
-          type: boolean
-        entityLabels:
-          additionalProperties:
-            type: string
-          description: Labels used to identify and categorize the alert entity
-          example:
-            key: value
-          type: object
-        groupByKeys:
-          items:
-            description: Keys used to group and aggregate alert data
-            example: "[\"key1\",\"key2\"]"
-            type: string
-          type: array
-        incidentsSettings:
-          $ref: "#/components/schemas/AlertDefIncidentSettings"
-        logsAnomaly:
-          $ref: "#/components/schemas/LogsAnomalyType"
-        name:
-          description: The name of the alert definition
-          example: My Alert
-          type: string
-        notificationGroup:
-          $ref: "#/components/schemas/AlertDefNotificationGroup"
-        notificationGroupExcess:
-          items:
-            $ref: "#/components/schemas/AlertDefNotificationGroup"
-          type: array
-        phantomMode:
-          description: Whether the alert is in phantom mode (creating incidents or
-            not)
-          example: false
-          type: boolean
-        priority:
-          $ref: "#/components/schemas/AlertDefPriority"
-        type:
-          $ref: "#/components/schemas/AlertDefType"
-      title: Alert definition properties
-      type: object
-    AlertDefPropertiesLogsImmediate:
-      additionalProperties: false
-      description: User-configurable properties of an alert definition
-      externalDocs:
-        url: ""
-      properties:
-        activeOn:
-          $ref: "#/components/schemas/ActivitySchedule"
-        deleted:
-          description: Whether the alert has been marked as deleted
-          example: false
-          type: boolean
-        description:
-          description: A detailed description of what the alert monitors and when
-            it triggers
-          example: Alert description
-          type: string
-        enabled:
-          description: Whether the alert is currently active and monitoring
-          example: true
-          type: boolean
-        entityLabels:
-          additionalProperties:
-            type: string
-          description: Labels used to identify and categorize the alert entity
-          example:
-            key: value
-          type: object
-        groupByKeys:
-          items:
-            description: Keys used to group and aggregate alert data
-            example: "[\"key1\",\"key2\"]"
-            type: string
-          type: array
-        incidentsSettings:
-          $ref: "#/components/schemas/AlertDefIncidentSettings"
-        logsImmediate:
-          $ref: "#/components/schemas/LogsImmediateType"
-        name:
-          description: The name of the alert definition
-          example: My Alert
-          type: string
-        notificationGroup:
-          $ref: "#/components/schemas/AlertDefNotificationGroup"
-        notificationGroupExcess:
-          items:
-            $ref: "#/components/schemas/AlertDefNotificationGroup"
-          type: array
-        phantomMode:
-          description: Whether the alert is in phantom mode (creating incidents or
-            not)
-          example: false
-          type: boolean
-        priority:
-          $ref: "#/components/schemas/AlertDefPriority"
-        type:
-          $ref: "#/components/schemas/AlertDefType"
-      title: Alert definition properties
-      type: object
-    AlertDefPropertiesLogsNewValue:
-      additionalProperties: false
-      description: User-configurable properties of an alert definition
       externalDocs:
         url: ""
       properties:
@@ -2345,50 +2327,41 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
+            logsNewValue:
+              notificationPayloadFilter:
+              - "[\"obj.field\"]"
+              - "[\"obj.field\"]"
+              rules:
+              - condition:
+                  timeWindow:
+                    logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+                  keypathToTrack: metadata.field
+              - condition:
+                  timeWindow:
+                    logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+                  keypathToTrack: metadata.field
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             deleted: false
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
-            flow:
-              enforceSuppression: true
-              stages:
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
             groupByKeys:
             - "[\"key1\",\"key2\"]"
             - "[\"key1\",\"key2\"]"
@@ -2652,50 +2625,41 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
+            logsNewValue:
+              notificationPayloadFilter:
+              - "[\"obj.field\"]"
+              - "[\"obj.field\"]"
+              rules:
+              - condition:
+                  timeWindow:
+                    logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+                  keypathToTrack: metadata.field
+              - condition:
+                  timeWindow:
+                    logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+                  keypathToTrack: metadata.field
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             deleted: false
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
-            flow:
-              enforceSuppression: true
-              stages:
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
             groupByKeys:
             - "[\"key1\",\"key2\"]"
             - "[\"key1\",\"key2\"]"
@@ -3057,50 +3021,41 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
+            logsNewValue:
+              notificationPayloadFilter:
+              - "[\"obj.field\"]"
+              - "[\"obj.field\"]"
+              rules:
+              - condition:
+                  timeWindow:
+                    logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+                  keypathToTrack: metadata.field
+              - condition:
+                  timeWindow:
+                    logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+                  keypathToTrack: metadata.field
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             deleted: false
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
-            flow:
-              enforceSuppression: true
-              stages:
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
             groupByKeys:
             - "[\"key1\",\"key2\"]"
             - "[\"key1\",\"key2\"]"
@@ -3372,25 +3327,6 @@ components:
       type: object
     FlowStages:
       description: Defines stages in a flow alert
-      example:
-        timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-        flowStagesGroups:
-          groups:
-          - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-            alertDefs:
-            - not: true
-              id: 123e4567-e89b-12d3-a456-426614174000
-            - not: true
-              id: 123e4567-e89b-12d3-a456-426614174000
-            nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-          - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-            alertDefs:
-            - not: true
-              id: 123e4567-e89b-12d3-a456-426614174000
-            - not: true
-              id: 123e4567-e89b-12d3-a456-426614174000
-            nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-        timeframeMs: timeframeMs
       externalDocs:
         url: ""
       properties:
@@ -3405,14 +3341,6 @@ components:
       type: object
     FlowStagesGroup:
       description: Defines a group of stages in a flow alert
-      example:
-        alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-        alertDefs:
-        - not: true
-          id: 123e4567-e89b-12d3-a456-426614174000
-        - not: true
-          id: 123e4567-e89b-12d3-a456-426614174000
-        nextOp: NEXT_OP_AND_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -3428,22 +3356,6 @@ components:
       type: object
     FlowStagesGroups:
       description: Groups of stages in a flow alert
-      example:
-        groups:
-        - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-          alertDefs:
-          - not: true
-            id: 123e4567-e89b-12d3-a456-426614174000
-          - not: true
-            id: 123e4567-e89b-12d3-a456-426614174000
-          nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-        - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-          alertDefs:
-          - not: true
-            id: 123e4567-e89b-12d3-a456-426614174000
-          - not: true
-            id: 123e4567-e89b-12d3-a456-426614174000
-          nextOp: NEXT_OP_AND_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -3455,9 +3367,6 @@ components:
       type: object
     FlowStagesGroupsAlertDefs:
       description: Alert definitions for a flow stage group
-      example:
-        not: true
-        id: 123e4567-e89b-12d3-a456-426614174000
       externalDocs:
         url: ""
       properties:
@@ -3473,45 +3382,6 @@ components:
       type: object
     FlowType:
       description: Configuration for flow-based alerts with multiple stages
-      example:
-        enforceSuppression: true
-        stages:
-        - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-          flowStagesGroups:
-            groups:
-            - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-              alertDefs:
-              - not: true
-                id: 123e4567-e89b-12d3-a456-426614174000
-              - not: true
-                id: 123e4567-e89b-12d3-a456-426614174000
-              nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-            - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-              alertDefs:
-              - not: true
-                id: 123e4567-e89b-12d3-a456-426614174000
-              - not: true
-                id: 123e4567-e89b-12d3-a456-426614174000
-              nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-          timeframeMs: timeframeMs
-        - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-          flowStagesGroups:
-            groups:
-            - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-              alertDefs:
-              - not: true
-                id: 123e4567-e89b-12d3-a456-426614174000
-              - not: true
-                id: 123e4567-e89b-12d3-a456-426614174000
-              nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-            - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-              alertDefs:
-              - not: true
-                id: 123e4567-e89b-12d3-a456-426614174000
-              - not: true
-                id: 123e4567-e89b-12d3-a456-426614174000
-              nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-          timeframeMs: timeframeMs
       externalDocs:
         description: Learn more about flow alerts in our documentation
         url: https://coralogix.com/docs/user-guides/alerting/create-an-alert/flow-alerts/
@@ -3785,50 +3655,41 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
+            logsNewValue:
+              notificationPayloadFilter:
+              - "[\"obj.field\"]"
+              - "[\"obj.field\"]"
+              rules:
+              - condition:
+                  timeWindow:
+                    logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+                  keypathToTrack: metadata.field
+              - condition:
+                  timeWindow:
+                    logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+                  keypathToTrack: metadata.field
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             deleted: false
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
-            flow:
-              enforceSuppression: true
-              stages:
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
             groupByKeys:
             - "[\"key1\",\"key2\"]"
             - "[\"key1\",\"key2\"]"
@@ -4103,50 +3964,41 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
+            logsNewValue:
+              notificationPayloadFilter:
+              - "[\"obj.field\"]"
+              - "[\"obj.field\"]"
+              rules:
+              - condition:
+                  timeWindow:
+                    logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+                  keypathToTrack: metadata.field
+              - condition:
+                  timeWindow:
+                    logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+                  keypathToTrack: metadata.field
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             deleted: false
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
-            flow:
-              enforceSuppression: true
-              stages:
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
             groupByKeys:
             - "[\"key1\",\"key2\"]"
             - "[\"key1\",\"key2\"]"
@@ -4163,6 +4015,9 @@ components:
       type: object
     LabelFilterType:
       description: Label filter type for log entries
+      example:
+        operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+        value: my-app
       externalDocs:
         url: ""
       properties:
@@ -4176,6 +4031,20 @@ components:
       type: object
     LabelFilters:
       description: "Filters for application name, subsystem name, and log severities"
+      example:
+        subsystemName:
+        - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+          value: my-app
+        - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+          value: my-app
+        applicationName:
+        - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+          value: my-app
+        - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+          value: my-app
+        severities:
+        - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+        - LOG_SEVERITY_VERBOSE_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -4456,50 +4325,41 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
+            logsNewValue:
+              notificationPayloadFilter:
+              - "[\"obj.field\"]"
+              - "[\"obj.field\"]"
+              rules:
+              - condition:
+                  timeWindow:
+                    logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+                  keypathToTrack: metadata.field
+              - condition:
+                  timeWindow:
+                    logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+                  keypathToTrack: metadata.field
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             deleted: false
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
-            flow:
-              enforceSuppression: true
-              stages:
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
             groupByKeys:
             - "[\"key1\",\"key2\"]"
             - "[\"key1\",\"key2\"]"
@@ -4763,50 +4623,41 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
+            logsNewValue:
+              notificationPayloadFilter:
+              - "[\"obj.field\"]"
+              - "[\"obj.field\"]"
+              rules:
+              - condition:
+                  timeWindow:
+                    logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+                  keypathToTrack: metadata.field
+              - condition:
+                  timeWindow:
+                    logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+                  keypathToTrack: metadata.field
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             deleted: false
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
-            flow:
-              enforceSuppression: true
-              stages:
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
             groupByKeys:
             - "[\"key1\",\"key2\"]"
             - "[\"key1\",\"key2\"]"
@@ -4916,6 +4767,10 @@ components:
       type: object
     LogsNewValueCondition:
       description: Defines conditions for detecting new values in logs
+      example:
+        timeWindow:
+          logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+        keypathToTrack: metadata.field
       externalDocs:
         url: ""
       properties:
@@ -4929,6 +4784,11 @@ components:
       type: object
     LogsNewValueRule:
       description: Defines the condition for detecting new values in logs
+      example:
+        condition:
+          timeWindow:
+            logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+          keypathToTrack: metadata.field
       externalDocs:
         url: ""
       properties:
@@ -4938,6 +4798,8 @@ components:
       type: object
     LogsNewValueTimeWindow:
       description: Time window configuration for log-based new value alerts
+      example:
+        logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -4958,6 +4820,36 @@ components:
       type: string
     LogsNewValueType:
       description: Configuration for alerts triggered by new values appearing in logs
+      example:
+        notificationPayloadFilter:
+        - "[\"obj.field\"]"
+        - "[\"obj.field\"]"
+        rules:
+        - condition:
+            timeWindow:
+              logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+            keypathToTrack: metadata.field
+        - condition:
+            timeWindow:
+              logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+            keypathToTrack: metadata.field
+        logsFilter:
+          simpleFilter:
+            labelFilters:
+              subsystemName:
+              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                value: my-app
+              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                value: my-app
+              applicationName:
+              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                value: my-app
+              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                value: my-app
+              severities:
+              - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+              - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+            luceneQuery: luceneQuery
       externalDocs:
         url: ""
       properties:
@@ -5082,6 +4974,22 @@ components:
       type: string
     LogsSimpleFilter:
       description: Basic filter configuration using a Lucene query and label filters
+      example:
+        labelFilters:
+          subsystemName:
+          - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+            value: my-app
+          - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+            value: my-app
+          applicationName:
+          - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+            value: my-app
+          - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+            value: my-app
+          severities:
+          - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+          - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+        luceneQuery: luceneQuery
       externalDocs:
         url: ""
       properties:
@@ -5494,8 +5402,8 @@ components:
       type: object
     MetricTimeWindow:
       oneOf:
-      - $ref: "#/components/schemas/MetricTimeWindowMetricTimeWindowSpecificValue"
       - $ref: "#/components/schemas/MetricTimeWindowMetricTimeWindowDynamicDuration"
+      - $ref: "#/components/schemas/MetricTimeWindowMetricTimeWindowSpecificValue"
     MetricTimeWindowMetricTimeWindowDynamicDuration:
       additionalProperties: false
       externalDocs:
@@ -5933,50 +5841,41 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
+            logsNewValue:
+              notificationPayloadFilter:
+              - "[\"obj.field\"]"
+              - "[\"obj.field\"]"
+              rules:
+              - condition:
+                  timeWindow:
+                    logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+                  keypathToTrack: metadata.field
+              - condition:
+                  timeWindow:
+                    logsNewValueTimeWindowSpecificValue: LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED
+                  keypathToTrack: metadata.field
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             deleted: false
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
-            flow:
-              enforceSuppression: true
-              stages:
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
             groupByKeys:
             - "[\"key1\",\"key2\"]"
             - "[\"key1\",\"key2\"]"
@@ -6378,6 +6277,23 @@ components:
       - $ref: "#/components/schemas/V3IntegrationTypeRecipients"
     v3.LogsFilter:
       description: Filter configuration for log-based alerts
+      example:
+        simpleFilter:
+          labelFilters:
+            subsystemName:
+            - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+              value: my-app
+            - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+              value: my-app
+            applicationName:
+            - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+              value: my-app
+            - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+              value: my-app
+            severities:
+            - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+            - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+          luceneQuery: luceneQuery
       externalDocs:
         url: ""
       properties:

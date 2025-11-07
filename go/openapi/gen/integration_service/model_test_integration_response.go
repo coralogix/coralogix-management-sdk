@@ -12,8 +12,6 @@ package integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the TestIntegrationResponse type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &TestIntegrationResponse{}
 
 // TestIntegrationResponse struct for TestIntegrationResponse
 type TestIntegrationResponse struct {
-	Result TestIntegrationResult `json:"result"`
+	Result *TestIntegrationResult `json:"result,omitempty"`
 }
-
-type _TestIntegrationResponse TestIntegrationResponse
 
 // NewTestIntegrationResponse instantiates a new TestIntegrationResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTestIntegrationResponse(result TestIntegrationResult) *TestIntegrationResponse {
+func NewTestIntegrationResponse() *TestIntegrationResponse {
 	this := TestIntegrationResponse{}
-	this.Result = result
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewTestIntegrationResponseWithDefaults() *TestIntegrationResponse {
 	return &this
 }
 
-// GetResult returns the Result field value
+// GetResult returns the Result field value if set, zero value otherwise.
 func (o *TestIntegrationResponse) GetResult() TestIntegrationResult {
-	if o == nil {
+	if o == nil || IsNil(o.Result) {
 		var ret TestIntegrationResult
 		return ret
 	}
-
-	return o.Result
+	return *o.Result
 }
 
-// GetResultOk returns a tuple with the Result field value
+// GetResultOk returns a tuple with the Result field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TestIntegrationResponse) GetResultOk() (*TestIntegrationResult, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Result) {
 		return nil, false
 	}
-	return &o.Result, true
+	return o.Result, true
 }
 
-// SetResult sets field value
+// HasResult returns a boolean if a field has been set.
+func (o *TestIntegrationResponse) HasResult() bool {
+	if o != nil && !IsNil(o.Result) {
+		return true
+	}
+
+	return false
+}
+
+// SetResult gets a reference to the given TestIntegrationResult and assigns it to the Result field.
 func (o *TestIntegrationResponse) SetResult(v TestIntegrationResult) {
-	o.Result = v
+	o.Result = &v
 }
 
 func (o TestIntegrationResponse) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o TestIntegrationResponse) MarshalJSON() ([]byte, error) {
 
 func (o TestIntegrationResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["result"] = o.Result
+	if !IsNil(o.Result) {
+		toSerialize["result"] = o.Result
+	}
 	return toSerialize, nil
-}
-
-func (o *TestIntegrationResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"result",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varTestIntegrationResponse := _TestIntegrationResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTestIntegrationResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = TestIntegrationResponse(varTestIntegrationResponse)
-
-	return err
 }
 
 type NullableTestIntegrationResponse struct {

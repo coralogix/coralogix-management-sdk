@@ -12,8 +12,6 @@ package saml_configuration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the GetConfigurationResponse type satisfies the MappedNullable interface at compile time
@@ -22,22 +20,17 @@ var _ MappedNullable = &GetConfigurationResponse{}
 // GetConfigurationResponse This data structure is obtained as a response to a request to retrieve the configuration of a SAML service provider and identity provider
 type GetConfigurationResponse struct {
 	IdpDetails *IDPDetails `json:"idpDetails,omitempty"`
-	IdpParameters IDPParameters `json:"idpParameters"`
-	SpParameters SPParameters `json:"spParameters"`
-	TeamId int64 `json:"teamId"`
+	IdpParameters *IDPParameters `json:"idpParameters,omitempty"`
+	SpParameters *SPParameters `json:"spParameters,omitempty"`
+	TeamId *int64 `json:"teamId,omitempty"`
 }
-
-type _GetConfigurationResponse GetConfigurationResponse
 
 // NewGetConfigurationResponse instantiates a new GetConfigurationResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetConfigurationResponse(idpParameters IDPParameters, spParameters SPParameters, teamId int64) *GetConfigurationResponse {
+func NewGetConfigurationResponse() *GetConfigurationResponse {
 	this := GetConfigurationResponse{}
-	this.IdpParameters = idpParameters
-	this.SpParameters = spParameters
-	this.TeamId = teamId
 	return &this
 }
 
@@ -81,76 +74,100 @@ func (o *GetConfigurationResponse) SetIdpDetails(v IDPDetails) {
 	o.IdpDetails = &v
 }
 
-// GetIdpParameters returns the IdpParameters field value
+// GetIdpParameters returns the IdpParameters field value if set, zero value otherwise.
 func (o *GetConfigurationResponse) GetIdpParameters() IDPParameters {
-	if o == nil {
+	if o == nil || IsNil(o.IdpParameters) {
 		var ret IDPParameters
 		return ret
 	}
-
-	return o.IdpParameters
+	return *o.IdpParameters
 }
 
-// GetIdpParametersOk returns a tuple with the IdpParameters field value
+// GetIdpParametersOk returns a tuple with the IdpParameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetConfigurationResponse) GetIdpParametersOk() (*IDPParameters, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.IdpParameters) {
 		return nil, false
 	}
-	return &o.IdpParameters, true
+	return o.IdpParameters, true
 }
 
-// SetIdpParameters sets field value
+// HasIdpParameters returns a boolean if a field has been set.
+func (o *GetConfigurationResponse) HasIdpParameters() bool {
+	if o != nil && !IsNil(o.IdpParameters) {
+		return true
+	}
+
+	return false
+}
+
+// SetIdpParameters gets a reference to the given IDPParameters and assigns it to the IdpParameters field.
 func (o *GetConfigurationResponse) SetIdpParameters(v IDPParameters) {
-	o.IdpParameters = v
+	o.IdpParameters = &v
 }
 
-// GetSpParameters returns the SpParameters field value
+// GetSpParameters returns the SpParameters field value if set, zero value otherwise.
 func (o *GetConfigurationResponse) GetSpParameters() SPParameters {
-	if o == nil {
+	if o == nil || IsNil(o.SpParameters) {
 		var ret SPParameters
 		return ret
 	}
-
-	return o.SpParameters
+	return *o.SpParameters
 }
 
-// GetSpParametersOk returns a tuple with the SpParameters field value
+// GetSpParametersOk returns a tuple with the SpParameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetConfigurationResponse) GetSpParametersOk() (*SPParameters, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SpParameters) {
 		return nil, false
 	}
-	return &o.SpParameters, true
+	return o.SpParameters, true
 }
 
-// SetSpParameters sets field value
+// HasSpParameters returns a boolean if a field has been set.
+func (o *GetConfigurationResponse) HasSpParameters() bool {
+	if o != nil && !IsNil(o.SpParameters) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpParameters gets a reference to the given SPParameters and assigns it to the SpParameters field.
 func (o *GetConfigurationResponse) SetSpParameters(v SPParameters) {
-	o.SpParameters = v
+	o.SpParameters = &v
 }
 
-// GetTeamId returns the TeamId field value
+// GetTeamId returns the TeamId field value if set, zero value otherwise.
 func (o *GetConfigurationResponse) GetTeamId() int64 {
-	if o == nil {
+	if o == nil || IsNil(o.TeamId) {
 		var ret int64
 		return ret
 	}
-
-	return o.TeamId
+	return *o.TeamId
 }
 
-// GetTeamIdOk returns a tuple with the TeamId field value
+// GetTeamIdOk returns a tuple with the TeamId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetConfigurationResponse) GetTeamIdOk() (*int64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.TeamId) {
 		return nil, false
 	}
-	return &o.TeamId, true
+	return o.TeamId, true
 }
 
-// SetTeamId sets field value
+// HasTeamId returns a boolean if a field has been set.
+func (o *GetConfigurationResponse) HasTeamId() bool {
+	if o != nil && !IsNil(o.TeamId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTeamId gets a reference to the given int64 and assigns it to the TeamId field.
 func (o *GetConfigurationResponse) SetTeamId(v int64) {
-	o.TeamId = v
+	o.TeamId = &v
 }
 
 func (o GetConfigurationResponse) MarshalJSON() ([]byte, error) {
@@ -166,49 +183,16 @@ func (o GetConfigurationResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IdpDetails) {
 		toSerialize["idpDetails"] = o.IdpDetails
 	}
-	toSerialize["idpParameters"] = o.IdpParameters
-	toSerialize["spParameters"] = o.SpParameters
-	toSerialize["teamId"] = o.TeamId
+	if !IsNil(o.IdpParameters) {
+		toSerialize["idpParameters"] = o.IdpParameters
+	}
+	if !IsNil(o.SpParameters) {
+		toSerialize["spParameters"] = o.SpParameters
+	}
+	if !IsNil(o.TeamId) {
+		toSerialize["teamId"] = o.TeamId
+	}
 	return toSerialize, nil
-}
-
-func (o *GetConfigurationResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"idpParameters",
-		"spParameters",
-		"teamId",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varGetConfigurationResponse := _GetConfigurationResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetConfigurationResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = GetConfigurationResponse(varGetConfigurationResponse)
-
-	return err
 }
 
 type NullableGetConfigurationResponse struct {

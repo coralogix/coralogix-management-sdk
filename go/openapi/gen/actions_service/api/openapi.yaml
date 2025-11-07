@@ -238,9 +238,9 @@ components:
   schemas:
     ActionExecutionRequest:
       oneOf:
-      - $ref: "#/components/schemas/ActionExecutionRequestCreate"
       - $ref: "#/components/schemas/ActionExecutionRequestReplace"
       - $ref: "#/components/schemas/ActionExecutionRequestDelete"
+      - $ref: "#/components/schemas/ActionExecutionRequestCreate"
     ActionExecutionRequestCreate:
       additionalProperties: false
       properties:

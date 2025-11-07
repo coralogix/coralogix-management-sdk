@@ -12,8 +12,6 @@ package saml_configuration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the SetActiveRequest type satisfies the MappedNullable interface at compile time
@@ -21,20 +19,16 @@ var _ MappedNullable = &SetActiveRequest{}
 
 // SetActiveRequest This data structure is used to activate or deactivate a SAML identity provider
 type SetActiveRequest struct {
-	IsActive bool `json:"isActive"`
-	TeamId int64 `json:"teamId"`
+	IsActive *bool `json:"isActive,omitempty"`
+	TeamId *int64 `json:"teamId,omitempty"`
 }
-
-type _SetActiveRequest SetActiveRequest
 
 // NewSetActiveRequest instantiates a new SetActiveRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSetActiveRequest(isActive bool, teamId int64) *SetActiveRequest {
+func NewSetActiveRequest() *SetActiveRequest {
 	this := SetActiveRequest{}
-	this.IsActive = isActive
-	this.TeamId = teamId
 	return &this
 }
 
@@ -46,52 +40,68 @@ func NewSetActiveRequestWithDefaults() *SetActiveRequest {
 	return &this
 }
 
-// GetIsActive returns the IsActive field value
+// GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *SetActiveRequest) GetIsActive() bool {
-	if o == nil {
+	if o == nil || IsNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
-
-	return o.IsActive
+	return *o.IsActive
 }
 
-// GetIsActiveOk returns a tuple with the IsActive field value
+// GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SetActiveRequest) GetIsActiveOk() (*bool, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.IsActive) {
 		return nil, false
 	}
-	return &o.IsActive, true
+	return o.IsActive, true
 }
 
-// SetIsActive sets field value
+// HasIsActive returns a boolean if a field has been set.
+func (o *SetActiveRequest) HasIsActive() bool {
+	if o != nil && !IsNil(o.IsActive) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsActive gets a reference to the given bool and assigns it to the IsActive field.
 func (o *SetActiveRequest) SetIsActive(v bool) {
-	o.IsActive = v
+	o.IsActive = &v
 }
 
-// GetTeamId returns the TeamId field value
+// GetTeamId returns the TeamId field value if set, zero value otherwise.
 func (o *SetActiveRequest) GetTeamId() int64 {
-	if o == nil {
+	if o == nil || IsNil(o.TeamId) {
 		var ret int64
 		return ret
 	}
-
-	return o.TeamId
+	return *o.TeamId
 }
 
-// GetTeamIdOk returns a tuple with the TeamId field value
+// GetTeamIdOk returns a tuple with the TeamId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SetActiveRequest) GetTeamIdOk() (*int64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.TeamId) {
 		return nil, false
 	}
-	return &o.TeamId, true
+	return o.TeamId, true
 }
 
-// SetTeamId sets field value
+// HasTeamId returns a boolean if a field has been set.
+func (o *SetActiveRequest) HasTeamId() bool {
+	if o != nil && !IsNil(o.TeamId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTeamId gets a reference to the given int64 and assigns it to the TeamId field.
 func (o *SetActiveRequest) SetTeamId(v int64) {
-	o.TeamId = v
+	o.TeamId = &v
 }
 
 func (o SetActiveRequest) MarshalJSON() ([]byte, error) {
@@ -104,47 +114,13 @@ func (o SetActiveRequest) MarshalJSON() ([]byte, error) {
 
 func (o SetActiveRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["isActive"] = o.IsActive
-	toSerialize["teamId"] = o.TeamId
+	if !IsNil(o.IsActive) {
+		toSerialize["isActive"] = o.IsActive
+	}
+	if !IsNil(o.TeamId) {
+		toSerialize["teamId"] = o.TeamId
+	}
 	return toSerialize, nil
-}
-
-func (o *SetActiveRequest) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"isActive",
-		"teamId",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varSetActiveRequest := _SetActiveRequest{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSetActiveRequest)
-
-	if err != nil {
-		return err
-	}
-
-	*o = SetActiveRequest(varSetActiveRequest)
-
-	return err
 }
 
 type NullableSetActiveRequest struct {

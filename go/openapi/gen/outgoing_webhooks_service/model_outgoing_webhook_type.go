@@ -12,8 +12,6 @@ package outgoing_webhooks_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the OutgoingWebhookType type satisfies the MappedNullable interface at compile time
@@ -21,22 +19,17 @@ var _ MappedNullable = &OutgoingWebhookType{}
 
 // OutgoingWebhookType struct for OutgoingWebhookType
 type OutgoingWebhookType struct {
-	Count int64 `json:"count"`
-	Label string `json:"label"`
-	Type WebhookType `json:"type"`
+	Count *int64 `json:"count,omitempty"`
+	Label *string `json:"label,omitempty"`
+	Type *WebhookType `json:"type,omitempty"`
 }
-
-type _OutgoingWebhookType OutgoingWebhookType
 
 // NewOutgoingWebhookType instantiates a new OutgoingWebhookType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOutgoingWebhookType(count int64, label string, type_ WebhookType) *OutgoingWebhookType {
+func NewOutgoingWebhookType() *OutgoingWebhookType {
 	this := OutgoingWebhookType{}
-	this.Count = count
-	this.Label = label
-	this.Type = type_
 	return &this
 }
 
@@ -48,76 +41,100 @@ func NewOutgoingWebhookTypeWithDefaults() *OutgoingWebhookType {
 	return &this
 }
 
-// GetCount returns the Count field value
+// GetCount returns the Count field value if set, zero value otherwise.
 func (o *OutgoingWebhookType) GetCount() int64 {
-	if o == nil {
+	if o == nil || IsNil(o.Count) {
 		var ret int64
 		return ret
 	}
-
-	return o.Count
+	return *o.Count
 }
 
-// GetCountOk returns a tuple with the Count field value
+// GetCountOk returns a tuple with the Count field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookType) GetCountOk() (*int64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Count) {
 		return nil, false
 	}
-	return &o.Count, true
+	return o.Count, true
 }
 
-// SetCount sets field value
+// HasCount returns a boolean if a field has been set.
+func (o *OutgoingWebhookType) HasCount() bool {
+	if o != nil && !IsNil(o.Count) {
+		return true
+	}
+
+	return false
+}
+
+// SetCount gets a reference to the given int64 and assigns it to the Count field.
 func (o *OutgoingWebhookType) SetCount(v int64) {
-	o.Count = v
+	o.Count = &v
 }
 
-// GetLabel returns the Label field value
+// GetLabel returns the Label field value if set, zero value otherwise.
 func (o *OutgoingWebhookType) GetLabel() string {
-	if o == nil {
+	if o == nil || IsNil(o.Label) {
 		var ret string
 		return ret
 	}
-
-	return o.Label
+	return *o.Label
 }
 
-// GetLabelOk returns a tuple with the Label field value
+// GetLabelOk returns a tuple with the Label field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookType) GetLabelOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Label) {
 		return nil, false
 	}
-	return &o.Label, true
+	return o.Label, true
 }
 
-// SetLabel sets field value
+// HasLabel returns a boolean if a field has been set.
+func (o *OutgoingWebhookType) HasLabel() bool {
+	if o != nil && !IsNil(o.Label) {
+		return true
+	}
+
+	return false
+}
+
+// SetLabel gets a reference to the given string and assigns it to the Label field.
 func (o *OutgoingWebhookType) SetLabel(v string) {
-	o.Label = v
+	o.Label = &v
 }
 
-// GetType returns the Type field value
+// GetType returns the Type field value if set, zero value otherwise.
 func (o *OutgoingWebhookType) GetType() WebhookType {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret WebhookType
 		return ret
 	}
-
-	return o.Type
+	return *o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookType) GetTypeOk() (*WebhookType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
-	return &o.Type, true
+	return o.Type, true
 }
 
-// SetType sets field value
+// HasType returns a boolean if a field has been set.
+func (o *OutgoingWebhookType) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given WebhookType and assigns it to the Type field.
 func (o *OutgoingWebhookType) SetType(v WebhookType) {
-	o.Type = v
+	o.Type = &v
 }
 
 func (o OutgoingWebhookType) MarshalJSON() ([]byte, error) {
@@ -130,49 +147,16 @@ func (o OutgoingWebhookType) MarshalJSON() ([]byte, error) {
 
 func (o OutgoingWebhookType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["count"] = o.Count
-	toSerialize["label"] = o.Label
-	toSerialize["type"] = o.Type
+	if !IsNil(o.Count) {
+		toSerialize["count"] = o.Count
+	}
+	if !IsNil(o.Label) {
+		toSerialize["label"] = o.Label
+	}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
 	return toSerialize, nil
-}
-
-func (o *OutgoingWebhookType) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"count",
-		"label",
-		"type",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varOutgoingWebhookType := _OutgoingWebhookType{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOutgoingWebhookType)
-
-	if err != nil {
-		return err
-	}
-
-	*o = OutgoingWebhookType(varOutgoingWebhookType)
-
-	return err
 }
 
 type NullableOutgoingWebhookType struct {

@@ -12,8 +12,6 @@ package saml_configuration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the SPParameters type satisfies the MappedNullable interface at compile time
@@ -21,26 +19,19 @@ var _ MappedNullable = &SPParameters{}
 
 // SPParameters This data structure represents the parameters of a SAML service provider
 type SPParameters struct {
-	AssertionConsumerServiceUrl string `json:"assertionConsumerServiceUrl"`
-	Binding string `json:"binding"`
-	MetadataUrl string `json:"metadataUrl"`
-	NameIdFormat string `json:"nameIdFormat"`
-	SigningCertPem string `json:"signingCertPem"`
+	AssertionConsumerServiceUrl *string `json:"assertionConsumerServiceUrl,omitempty"`
+	Binding *string `json:"binding,omitempty"`
+	MetadataUrl *string `json:"metadataUrl,omitempty"`
+	NameIdFormat *string `json:"nameIdFormat,omitempty"`
+	SigningCertPem *string `json:"signingCertPem,omitempty"`
 }
-
-type _SPParameters SPParameters
 
 // NewSPParameters instantiates a new SPParameters object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSPParameters(assertionConsumerServiceUrl string, binding string, metadataUrl string, nameIdFormat string, signingCertPem string) *SPParameters {
+func NewSPParameters() *SPParameters {
 	this := SPParameters{}
-	this.AssertionConsumerServiceUrl = assertionConsumerServiceUrl
-	this.Binding = binding
-	this.MetadataUrl = metadataUrl
-	this.NameIdFormat = nameIdFormat
-	this.SigningCertPem = signingCertPem
 	return &this
 }
 
@@ -52,124 +43,164 @@ func NewSPParametersWithDefaults() *SPParameters {
 	return &this
 }
 
-// GetAssertionConsumerServiceUrl returns the AssertionConsumerServiceUrl field value
+// GetAssertionConsumerServiceUrl returns the AssertionConsumerServiceUrl field value if set, zero value otherwise.
 func (o *SPParameters) GetAssertionConsumerServiceUrl() string {
-	if o == nil {
+	if o == nil || IsNil(o.AssertionConsumerServiceUrl) {
 		var ret string
 		return ret
 	}
-
-	return o.AssertionConsumerServiceUrl
+	return *o.AssertionConsumerServiceUrl
 }
 
-// GetAssertionConsumerServiceUrlOk returns a tuple with the AssertionConsumerServiceUrl field value
+// GetAssertionConsumerServiceUrlOk returns a tuple with the AssertionConsumerServiceUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SPParameters) GetAssertionConsumerServiceUrlOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.AssertionConsumerServiceUrl) {
 		return nil, false
 	}
-	return &o.AssertionConsumerServiceUrl, true
+	return o.AssertionConsumerServiceUrl, true
 }
 
-// SetAssertionConsumerServiceUrl sets field value
+// HasAssertionConsumerServiceUrl returns a boolean if a field has been set.
+func (o *SPParameters) HasAssertionConsumerServiceUrl() bool {
+	if o != nil && !IsNil(o.AssertionConsumerServiceUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssertionConsumerServiceUrl gets a reference to the given string and assigns it to the AssertionConsumerServiceUrl field.
 func (o *SPParameters) SetAssertionConsumerServiceUrl(v string) {
-	o.AssertionConsumerServiceUrl = v
+	o.AssertionConsumerServiceUrl = &v
 }
 
-// GetBinding returns the Binding field value
+// GetBinding returns the Binding field value if set, zero value otherwise.
 func (o *SPParameters) GetBinding() string {
-	if o == nil {
+	if o == nil || IsNil(o.Binding) {
 		var ret string
 		return ret
 	}
-
-	return o.Binding
+	return *o.Binding
 }
 
-// GetBindingOk returns a tuple with the Binding field value
+// GetBindingOk returns a tuple with the Binding field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SPParameters) GetBindingOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Binding) {
 		return nil, false
 	}
-	return &o.Binding, true
+	return o.Binding, true
 }
 
-// SetBinding sets field value
+// HasBinding returns a boolean if a field has been set.
+func (o *SPParameters) HasBinding() bool {
+	if o != nil && !IsNil(o.Binding) {
+		return true
+	}
+
+	return false
+}
+
+// SetBinding gets a reference to the given string and assigns it to the Binding field.
 func (o *SPParameters) SetBinding(v string) {
-	o.Binding = v
+	o.Binding = &v
 }
 
-// GetMetadataUrl returns the MetadataUrl field value
+// GetMetadataUrl returns the MetadataUrl field value if set, zero value otherwise.
 func (o *SPParameters) GetMetadataUrl() string {
-	if o == nil {
+	if o == nil || IsNil(o.MetadataUrl) {
 		var ret string
 		return ret
 	}
-
-	return o.MetadataUrl
+	return *o.MetadataUrl
 }
 
-// GetMetadataUrlOk returns a tuple with the MetadataUrl field value
+// GetMetadataUrlOk returns a tuple with the MetadataUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SPParameters) GetMetadataUrlOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.MetadataUrl) {
 		return nil, false
 	}
-	return &o.MetadataUrl, true
+	return o.MetadataUrl, true
 }
 
-// SetMetadataUrl sets field value
+// HasMetadataUrl returns a boolean if a field has been set.
+func (o *SPParameters) HasMetadataUrl() bool {
+	if o != nil && !IsNil(o.MetadataUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadataUrl gets a reference to the given string and assigns it to the MetadataUrl field.
 func (o *SPParameters) SetMetadataUrl(v string) {
-	o.MetadataUrl = v
+	o.MetadataUrl = &v
 }
 
-// GetNameIdFormat returns the NameIdFormat field value
+// GetNameIdFormat returns the NameIdFormat field value if set, zero value otherwise.
 func (o *SPParameters) GetNameIdFormat() string {
-	if o == nil {
+	if o == nil || IsNil(o.NameIdFormat) {
 		var ret string
 		return ret
 	}
-
-	return o.NameIdFormat
+	return *o.NameIdFormat
 }
 
-// GetNameIdFormatOk returns a tuple with the NameIdFormat field value
+// GetNameIdFormatOk returns a tuple with the NameIdFormat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SPParameters) GetNameIdFormatOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.NameIdFormat) {
 		return nil, false
 	}
-	return &o.NameIdFormat, true
+	return o.NameIdFormat, true
 }
 
-// SetNameIdFormat sets field value
+// HasNameIdFormat returns a boolean if a field has been set.
+func (o *SPParameters) HasNameIdFormat() bool {
+	if o != nil && !IsNil(o.NameIdFormat) {
+		return true
+	}
+
+	return false
+}
+
+// SetNameIdFormat gets a reference to the given string and assigns it to the NameIdFormat field.
 func (o *SPParameters) SetNameIdFormat(v string) {
-	o.NameIdFormat = v
+	o.NameIdFormat = &v
 }
 
-// GetSigningCertPem returns the SigningCertPem field value
+// GetSigningCertPem returns the SigningCertPem field value if set, zero value otherwise.
 func (o *SPParameters) GetSigningCertPem() string {
-	if o == nil {
+	if o == nil || IsNil(o.SigningCertPem) {
 		var ret string
 		return ret
 	}
-
-	return o.SigningCertPem
+	return *o.SigningCertPem
 }
 
-// GetSigningCertPemOk returns a tuple with the SigningCertPem field value
+// GetSigningCertPemOk returns a tuple with the SigningCertPem field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SPParameters) GetSigningCertPemOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SigningCertPem) {
 		return nil, false
 	}
-	return &o.SigningCertPem, true
+	return o.SigningCertPem, true
 }
 
-// SetSigningCertPem sets field value
+// HasSigningCertPem returns a boolean if a field has been set.
+func (o *SPParameters) HasSigningCertPem() bool {
+	if o != nil && !IsNil(o.SigningCertPem) {
+		return true
+	}
+
+	return false
+}
+
+// SetSigningCertPem gets a reference to the given string and assigns it to the SigningCertPem field.
 func (o *SPParameters) SetSigningCertPem(v string) {
-	o.SigningCertPem = v
+	o.SigningCertPem = &v
 }
 
 func (o SPParameters) MarshalJSON() ([]byte, error) {
@@ -182,53 +213,22 @@ func (o SPParameters) MarshalJSON() ([]byte, error) {
 
 func (o SPParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["assertionConsumerServiceUrl"] = o.AssertionConsumerServiceUrl
-	toSerialize["binding"] = o.Binding
-	toSerialize["metadataUrl"] = o.MetadataUrl
-	toSerialize["nameIdFormat"] = o.NameIdFormat
-	toSerialize["signingCertPem"] = o.SigningCertPem
+	if !IsNil(o.AssertionConsumerServiceUrl) {
+		toSerialize["assertionConsumerServiceUrl"] = o.AssertionConsumerServiceUrl
+	}
+	if !IsNil(o.Binding) {
+		toSerialize["binding"] = o.Binding
+	}
+	if !IsNil(o.MetadataUrl) {
+		toSerialize["metadataUrl"] = o.MetadataUrl
+	}
+	if !IsNil(o.NameIdFormat) {
+		toSerialize["nameIdFormat"] = o.NameIdFormat
+	}
+	if !IsNil(o.SigningCertPem) {
+		toSerialize["signingCertPem"] = o.SigningCertPem
+	}
 	return toSerialize, nil
-}
-
-func (o *SPParameters) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"assertionConsumerServiceUrl",
-		"binding",
-		"metadataUrl",
-		"nameIdFormat",
-		"signingCertPem",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varSPParameters := _SPParameters{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSPParameters)
-
-	if err != nil {
-		return err
-	}
-
-	*o = SPParameters(varSPParameters)
-
-	return err
 }
 
 type NullableSPParameters struct {

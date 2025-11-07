@@ -306,8 +306,6 @@ components:
           description: The name of the IP access entry.
           example: Office Network
           type: string
-      required:
-      - ipRange
       title: IP Access
       type: object
     MultipleValues:

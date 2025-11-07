@@ -12,8 +12,6 @@ package saml_configuration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the GetSPParametersResponse type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &GetSPParametersResponse{}
 
 // GetSPParametersResponse This data structure is obtained as a response to a request to retrieve the parameters of a SAML service provider
 type GetSPParametersResponse struct {
-	Params SPParameters `json:"params"`
+	Params *SPParameters `json:"params,omitempty"`
 }
-
-type _GetSPParametersResponse GetSPParametersResponse
 
 // NewGetSPParametersResponse instantiates a new GetSPParametersResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetSPParametersResponse(params SPParameters) *GetSPParametersResponse {
+func NewGetSPParametersResponse() *GetSPParametersResponse {
 	this := GetSPParametersResponse{}
-	this.Params = params
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewGetSPParametersResponseWithDefaults() *GetSPParametersResponse {
 	return &this
 }
 
-// GetParams returns the Params field value
+// GetParams returns the Params field value if set, zero value otherwise.
 func (o *GetSPParametersResponse) GetParams() SPParameters {
-	if o == nil {
+	if o == nil || IsNil(o.Params) {
 		var ret SPParameters
 		return ret
 	}
-
-	return o.Params
+	return *o.Params
 }
 
-// GetParamsOk returns a tuple with the Params field value
+// GetParamsOk returns a tuple with the Params field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetSPParametersResponse) GetParamsOk() (*SPParameters, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Params) {
 		return nil, false
 	}
-	return &o.Params, true
+	return o.Params, true
 }
 
-// SetParams sets field value
+// HasParams returns a boolean if a field has been set.
+func (o *GetSPParametersResponse) HasParams() bool {
+	if o != nil && !IsNil(o.Params) {
+		return true
+	}
+
+	return false
+}
+
+// SetParams gets a reference to the given SPParameters and assigns it to the Params field.
 func (o *GetSPParametersResponse) SetParams(v SPParameters) {
-	o.Params = v
+	o.Params = &v
 }
 
 func (o GetSPParametersResponse) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o GetSPParametersResponse) MarshalJSON() ([]byte, error) {
 
 func (o GetSPParametersResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["params"] = o.Params
+	if !IsNil(o.Params) {
+		toSerialize["params"] = o.Params
+	}
 	return toSerialize, nil
-}
-
-func (o *GetSPParametersResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"params",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varGetSPParametersResponse := _GetSPParametersResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetSPParametersResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = GetSPParametersResponse(varGetSPParametersResponse)
-
-	return err
 }
 
 type NullableGetSPParametersResponse struct {

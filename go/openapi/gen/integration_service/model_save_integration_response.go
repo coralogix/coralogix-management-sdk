@@ -12,8 +12,6 @@ package integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the SaveIntegrationResponse type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &SaveIntegrationResponse{}
 
 // SaveIntegrationResponse struct for SaveIntegrationResponse
 type SaveIntegrationResponse struct {
-	IntegrationId string `json:"integrationId"`
+	IntegrationId *string `json:"integrationId,omitempty"`
 }
-
-type _SaveIntegrationResponse SaveIntegrationResponse
 
 // NewSaveIntegrationResponse instantiates a new SaveIntegrationResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSaveIntegrationResponse(integrationId string) *SaveIntegrationResponse {
+func NewSaveIntegrationResponse() *SaveIntegrationResponse {
 	this := SaveIntegrationResponse{}
-	this.IntegrationId = integrationId
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewSaveIntegrationResponseWithDefaults() *SaveIntegrationResponse {
 	return &this
 }
 
-// GetIntegrationId returns the IntegrationId field value
+// GetIntegrationId returns the IntegrationId field value if set, zero value otherwise.
 func (o *SaveIntegrationResponse) GetIntegrationId() string {
-	if o == nil {
+	if o == nil || IsNil(o.IntegrationId) {
 		var ret string
 		return ret
 	}
-
-	return o.IntegrationId
+	return *o.IntegrationId
 }
 
-// GetIntegrationIdOk returns a tuple with the IntegrationId field value
+// GetIntegrationIdOk returns a tuple with the IntegrationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SaveIntegrationResponse) GetIntegrationIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.IntegrationId) {
 		return nil, false
 	}
-	return &o.IntegrationId, true
+	return o.IntegrationId, true
 }
 
-// SetIntegrationId sets field value
+// HasIntegrationId returns a boolean if a field has been set.
+func (o *SaveIntegrationResponse) HasIntegrationId() bool {
+	if o != nil && !IsNil(o.IntegrationId) {
+		return true
+	}
+
+	return false
+}
+
+// SetIntegrationId gets a reference to the given string and assigns it to the IntegrationId field.
 func (o *SaveIntegrationResponse) SetIntegrationId(v string) {
-	o.IntegrationId = v
+	o.IntegrationId = &v
 }
 
 func (o SaveIntegrationResponse) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o SaveIntegrationResponse) MarshalJSON() ([]byte, error) {
 
 func (o SaveIntegrationResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["integrationId"] = o.IntegrationId
+	if !IsNil(o.IntegrationId) {
+		toSerialize["integrationId"] = o.IntegrationId
+	}
 	return toSerialize, nil
-}
-
-func (o *SaveIntegrationResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"integrationId",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varSaveIntegrationResponse := _SaveIntegrationResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSaveIntegrationResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = SaveIntegrationResponse(varSaveIntegrationResponse)
-
-	return err
 }
 
 type NullableSaveIntegrationResponse struct {

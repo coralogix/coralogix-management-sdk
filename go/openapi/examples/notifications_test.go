@@ -70,8 +70,8 @@ func TestSlackConnector(t *testing.T) {
 	client := cxsdk.NewConnectorsClient(cpc)
 
 	connector := connectors.Connector{
-		Name:        "TestSlackConnector",
-		Type:        "SLACK",
+		Name:        connectors.PtrString("TestSlackConnector"),
+		Type:        connectors.CONNECTORTYPE_SLACK.Ptr(),
 		Description: connectors.PtrString("This is the slack connector to use for Notification Center testing."),
 		ConnectorConfig: &connectors.ConnectorConfig{
 			Fields: []connectors.NotificationCenterConnectorConfigField{
@@ -127,8 +127,8 @@ func TestPagerdutyConnector(t *testing.T) {
 	client := cxsdk.NewConnectorsClient(cpc)
 
 	connector := connectors.Connector{
-		Name:        "TestPagerdutyConnector",
-		Type:        "PAGERDUTY",
+		Name:        connectors.PtrString("TestPagerdutyConnector"),
+		Type:        connectors.CONNECTORTYPE_PAGERDUTY.Ptr(),
 		Description: connectors.PtrString("This is the PagerDuty connector to use for Notification Center testing."),
 		ConnectorConfig: &connectors.ConnectorConfig{
 			Fields: []connectors.NotificationCenterConnectorConfigField{
@@ -231,10 +231,10 @@ func TestSlackPreset(t *testing.T) {
 	name := fmt.Sprintf("TestGoSlackPreset-%v", uuid.NewString())
 
 	preset := presets.Preset{
-		Name:          name,
+		Name:          &name,
 		Description:   presets.PtrString("This is the preset to use for Notification Center testing."),
 		PresetType:    presets.PRESETTYPE_CUSTOM.Ptr(),
-		EntityType:    "ALERTS",
+		EntityType:    presets.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
 		ParentId:      presets.PtrString("preset_system_slack_alerts_basic"),
 		ConnectorType: presets.CONNECTORTYPE_SLACK.Ptr(),
 		ConfigOverrides: []presets.ConfigOverrides{
@@ -249,12 +249,12 @@ func TestSlackPreset(t *testing.T) {
 				MessageConfig: &presets.MessageConfig{
 					Fields: []presets.NotificationCenterMessageConfigField{
 						{
-							FieldName: "title",
-							Template:  "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}",
+							FieldName: presets.PtrString("title"),
+							Template:  presets.PtrString("{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"),
 						},
 						{
-							FieldName: "description",
-							Template:  "{{alert.timestamp |  date(format=\"%Y-%m-%d %H:%M\")}}\nWe've detected a log that matches the query.",
+							FieldName: presets.PtrString("description"),
+							Template:  presets.PtrString("{{alert.timestamp |  date(format=\"%Y-%m-%d %H:%M\")}}\nWe've detected a log that matches the query."),
 						},
 					},
 				},
@@ -312,10 +312,10 @@ func TestPagerdutyPreset(t *testing.T) {
 	name := fmt.Sprintf("TestPagerDutyPreset-%v", uuid.NewString())
 
 	preset := presets.Preset{
-		Name:          name,
+		Name:          &name,
 		Description:   presets.PtrString("This is the preset to use for Notification Center testing."),
 		PresetType:    presets.PRESETTYPE_CUSTOM.Ptr(),
-		EntityType:    presets.NOTIFICATIONCENTERENTITYTYPE_ALERTS,
+		EntityType:    presets.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
 		ParentId:      presets.PtrString("preset_system_pagerduty_alerts_basic"),
 		ConnectorType: presets.CONNECTORTYPE_PAGERDUTY.Ptr(),
 		ConfigOverrides: []presets.ConfigOverrides{
@@ -330,8 +330,8 @@ func TestPagerdutyPreset(t *testing.T) {
 				MessageConfig: &presets.MessageConfig{
 					Fields: []presets.NotificationCenterMessageConfigField{
 						{
-							FieldName: "summary",
-							Template:  "{{ alertDef.name }}",
+							FieldName: presets.PtrString("summary"),
+							Template:  presets.PtrString("{{ alertDef.name }}"),
 						},
 					},
 				},
@@ -414,16 +414,16 @@ func TestGlobalRouter(t *testing.T) {
 
 	router := globalrouters.GlobalRouter{
 		Id:          &routerId,
-		Name:        "global router",
-		EntityType:  globalrouters.NOTIFICATIONCENTERENTITYTYPE_ALERTS,
+		Name:        globalrouters.PtrString("global router"),
+		EntityType:  globalrouters.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
 		Description: globalrouters.PtrString("global router example"),
 		Rules: []globalrouters.RoutingRule{
 			{
 				Name:      globalrouters.PtrString("TestRoutingRule"),
-				Condition: "alertDef.priority == \"P1\"",
+				Condition: globalrouters.PtrString("alertDef.priority == \"P1\""),
 				Targets: []globalrouters.RoutingTarget{
 					{
-						ConnectorId: *connectorId,
+						ConnectorId: connectorId,
 						PresetId:    presetId,
 					},
 				},
@@ -465,8 +465,8 @@ func TestGlobalRouter(t *testing.T) {
 func getHttpsConnector(name string) *connectors.CreateConnectorRequest {
 	return &connectors.CreateConnectorRequest{
 		Connector: &connectors.Connector{
-			Name:        name,
-			Type:        connectors.CONNECTORTYPE_GENERIC_HTTPS,
+			Name:        &name,
+			Type:        connectors.CONNECTORTYPE_GENERIC_HTTPS.Ptr(),
 			Description: connectors.PtrString("This is the connector to use for Notification Center testing."),
 			ConnectorConfig: &connectors.ConnectorConfig{
 				Fields: []connectors.NotificationCenterConnectorConfigField{
@@ -493,10 +493,10 @@ func getHttpsConnector(name string) *connectors.CreateConnectorRequest {
 func getHttpsPreset(name string) *presets.CreateCustomPresetRequest {
 	return &presets.CreateCustomPresetRequest{
 		Preset: &presets.Preset{
-			Name:          name,
+			Name:          &name,
 			Description:   presets.PtrString("This is the preset to use for Notification Center testing."),
 			PresetType:    presets.PRESETTYPE_CUSTOM.Ptr(),
-			EntityType:    "ALERTS",
+			EntityType:    presets.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
 			ParentId:      presets.PtrString("preset_system_generic_https_alerts_empty"),
 			ConnectorType: presets.CONNECTORTYPE_GENERIC_HTTPS.Ptr(),
 			ConfigOverrides: []presets.ConfigOverrides{
@@ -505,12 +505,12 @@ func getHttpsPreset(name string) *presets.CreateCustomPresetRequest {
 					MessageConfig: &presets.MessageConfig{
 						Fields: []presets.NotificationCenterMessageConfigField{
 							{
-								FieldName: "headers",
-								Template:  "{}",
+								FieldName: presets.PtrString("headers"),
+								Template:  presets.PtrString("{}"),
 							},
 							{
-								FieldName: "body",
-								Template:  "{ \"groupingKey\": \"{{alert.groupingKey}}\", \"status\": \"{{alert.status}}\", \"groups\": \"{{alert.groups}}\" }",
+								FieldName: presets.PtrString("body"),
+								Template:  presets.PtrString("{ \"groupingKey\": \"{{alert.groupingKey}}\", \"status\": \"{{alert.status}}\", \"groups\": \"{{alert.groups}}\" }"),
 							},
 						},
 					},

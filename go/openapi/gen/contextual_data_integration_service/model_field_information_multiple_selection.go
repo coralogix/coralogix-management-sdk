@@ -12,8 +12,6 @@ package contextual_data_integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the FieldInformationMultipleSelection type satisfies the MappedNullable interface at compile time
@@ -33,20 +31,17 @@ type FieldInformationMultipleSelection struct {
 	Required *bool `json:"required,omitempty"`
 	TemplateParamName *string `json:"templateParamName,omitempty"`
 	Tooltip *string `json:"tooltip,omitempty"`
-	Type InputType `json:"type"`
+	Type *InputType `json:"type,omitempty"`
 	UpgradeNotice *string `json:"upgradeNotice,omitempty"`
 	Visible *bool `json:"visible,omitempty"`
 }
-
-type _FieldInformationMultipleSelection FieldInformationMultipleSelection
 
 // NewFieldInformationMultipleSelection instantiates a new FieldInformationMultipleSelection object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFieldInformationMultipleSelection(type_ InputType) *FieldInformationMultipleSelection {
+func NewFieldInformationMultipleSelection() *FieldInformationMultipleSelection {
 	this := FieldInformationMultipleSelection{}
-	this.Type = type_
 	return &this
 }
 
@@ -442,28 +437,36 @@ func (o *FieldInformationMultipleSelection) SetTooltip(v string) {
 	o.Tooltip = &v
 }
 
-// GetType returns the Type field value
+// GetType returns the Type field value if set, zero value otherwise.
 func (o *FieldInformationMultipleSelection) GetType() InputType {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret InputType
 		return ret
 	}
-
-	return o.Type
+	return *o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FieldInformationMultipleSelection) GetTypeOk() (*InputType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
-	return &o.Type, true
+	return o.Type, true
 }
 
-// SetType sets field value
+// HasType returns a boolean if a field has been set.
+func (o *FieldInformationMultipleSelection) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given InputType and assigns it to the Type field.
 func (o *FieldInformationMultipleSelection) SetType(v InputType) {
-	o.Type = v
+	o.Type = &v
 }
 
 // GetUpgradeNotice returns the UpgradeNotice field value if set, zero value otherwise.
@@ -576,7 +579,9 @@ func (o FieldInformationMultipleSelection) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Tooltip) {
 		toSerialize["tooltip"] = o.Tooltip
 	}
-	toSerialize["type"] = o.Type
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
 	if !IsNil(o.UpgradeNotice) {
 		toSerialize["upgradeNotice"] = o.UpgradeNotice
 	}
@@ -584,43 +589,6 @@ func (o FieldInformationMultipleSelection) ToMap() (map[string]interface{}, erro
 		toSerialize["visible"] = o.Visible
 	}
 	return toSerialize, nil
-}
-
-func (o *FieldInformationMultipleSelection) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"type",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varFieldInformationMultipleSelection := _FieldInformationMultipleSelection{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFieldInformationMultipleSelection)
-
-	if err != nil {
-		return err
-	}
-
-	*o = FieldInformationMultipleSelection(varFieldInformationMultipleSelection)
-
-	return err
 }
 
 type NullableFieldInformationMultipleSelection struct {

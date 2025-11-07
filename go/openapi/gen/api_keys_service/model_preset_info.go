@@ -12,8 +12,6 @@ package api_keys_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the PresetInfo type satisfies the MappedNullable interface at compile time
@@ -21,20 +19,16 @@ var _ MappedNullable = &PresetInfo{}
 
 // PresetInfo This data structure represents a preset set of permissions on an API key.
 type PresetInfo struct {
-	Name string `json:"name"`
-	Permissions []string `json:"permissions"`
+	Name *string `json:"name,omitempty"`
+	Permissions []string `json:"permissions,omitempty"`
 }
-
-type _PresetInfo PresetInfo
 
 // NewPresetInfo instantiates a new PresetInfo object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPresetInfo(name string, permissions []string) *PresetInfo {
+func NewPresetInfo() *PresetInfo {
 	this := PresetInfo{}
-	this.Name = name
-	this.Permissions = permissions
 	return &this
 }
 
@@ -46,50 +40,66 @@ func NewPresetInfoWithDefaults() *PresetInfo {
 	return &this
 }
 
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *PresetInfo) GetName() string {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PresetInfo) GetNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *PresetInfo) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *PresetInfo) SetName(v string) {
-	o.Name = v
+	o.Name = &v
 }
 
-// GetPermissions returns the Permissions field value
+// GetPermissions returns the Permissions field value if set, zero value otherwise.
 func (o *PresetInfo) GetPermissions() []string {
-	if o == nil {
+	if o == nil || IsNil(o.Permissions) {
 		var ret []string
 		return ret
 	}
-
 	return o.Permissions
 }
 
-// GetPermissionsOk returns a tuple with the Permissions field value
+// GetPermissionsOk returns a tuple with the Permissions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PresetInfo) GetPermissionsOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Permissions) {
 		return nil, false
 	}
 	return o.Permissions, true
 }
 
-// SetPermissions sets field value
+// HasPermissions returns a boolean if a field has been set.
+func (o *PresetInfo) HasPermissions() bool {
+	if o != nil && !IsNil(o.Permissions) {
+		return true
+	}
+
+	return false
+}
+
+// SetPermissions gets a reference to the given []string and assigns it to the Permissions field.
 func (o *PresetInfo) SetPermissions(v []string) {
 	o.Permissions = v
 }
@@ -104,47 +114,13 @@ func (o PresetInfo) MarshalJSON() ([]byte, error) {
 
 func (o PresetInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
-	toSerialize["permissions"] = o.Permissions
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Permissions) {
+		toSerialize["permissions"] = o.Permissions
+	}
 	return toSerialize, nil
-}
-
-func (o *PresetInfo) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"name",
-		"permissions",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varPresetInfo := _PresetInfo{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPresetInfo)
-
-	if err != nil {
-		return err
-	}
-
-	*o = PresetInfo(varPresetInfo)
-
-	return err
 }
 
 type NullablePresetInfo struct {

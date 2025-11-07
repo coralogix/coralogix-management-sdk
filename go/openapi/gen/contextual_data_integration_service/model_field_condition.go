@@ -12,8 +12,6 @@ package contextual_data_integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the FieldCondition type satisfies the MappedNullable interface at compile time
@@ -21,19 +19,16 @@ var _ MappedNullable = &FieldCondition{}
 
 // FieldCondition struct for FieldCondition
 type FieldCondition struct {
-	Type FieldConditionConditionType `json:"type"`
+	Type *FieldConditionConditionType `json:"type,omitempty"`
 	Values []FieldConditionFieldValue `json:"values,omitempty"`
 }
-
-type _FieldCondition FieldCondition
 
 // NewFieldCondition instantiates a new FieldCondition object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFieldCondition(type_ FieldConditionConditionType) *FieldCondition {
+func NewFieldCondition() *FieldCondition {
 	this := FieldCondition{}
-	this.Type = type_
 	return &this
 }
 
@@ -45,28 +40,36 @@ func NewFieldConditionWithDefaults() *FieldCondition {
 	return &this
 }
 
-// GetType returns the Type field value
+// GetType returns the Type field value if set, zero value otherwise.
 func (o *FieldCondition) GetType() FieldConditionConditionType {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret FieldConditionConditionType
 		return ret
 	}
-
-	return o.Type
+	return *o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FieldCondition) GetTypeOk() (*FieldConditionConditionType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
-	return &o.Type, true
+	return o.Type, true
 }
 
-// SetType sets field value
+// HasType returns a boolean if a field has been set.
+func (o *FieldCondition) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given FieldConditionConditionType and assigns it to the Type field.
 func (o *FieldCondition) SetType(v FieldConditionConditionType) {
-	o.Type = v
+	o.Type = &v
 }
 
 // GetValues returns the Values field value if set, zero value otherwise.
@@ -111,48 +114,13 @@ func (o FieldCondition) MarshalJSON() ([]byte, error) {
 
 func (o FieldCondition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["type"] = o.Type
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
 	return toSerialize, nil
-}
-
-func (o *FieldCondition) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"type",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varFieldCondition := _FieldCondition{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFieldCondition)
-
-	if err != nil {
-		return err
-	}
-
-	*o = FieldCondition(varFieldCondition)
-
-	return err
 }
 
 type NullableFieldCondition struct {

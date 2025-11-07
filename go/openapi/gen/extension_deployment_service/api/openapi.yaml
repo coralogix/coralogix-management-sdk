@@ -264,8 +264,6 @@ components:
       properties:
         extensionDeployment:
           $ref: "#/components/schemas/ExtensionDeployment"
-      required:
-      - extensionDeployment
       title: Deploy extension response
       type: object
     DeployedExtension:
@@ -314,11 +312,6 @@ components:
           $ref: "#/components/schemas/DeployedExtensionSummary"
         version:
           type: string
-      required:
-      - id
-      - itemIds
-      - summary
-      - version
       title: Deployed extension
       type: object
     DeployedExtensionSummary:
@@ -339,8 +332,6 @@ components:
       properties:
         deployedItemCounts:
           $ref: "#/components/schemas/ItemCounts"
-      required:
-      - deployedItemCounts
       title: Deployed extension summary
       type: object
     ExtensionDeployment:
@@ -375,10 +366,6 @@ components:
           type: array
         version:
           type: string
-      required:
-      - id
-      - itemIds
-      - version
       title: Extension deployment
       type: object
     FailedItem:
@@ -395,10 +382,6 @@ components:
           type: string
         remoteId:
           type: string
-      required:
-      - itemId
-      - reason
-      - remoteId
       title: Failed item
       type: object
     FieldGroup:
@@ -624,8 +607,6 @@ components:
       properties:
         extensionDeployment:
           $ref: "#/components/schemas/ExtensionDeployment"
-      required:
-      - extensionDeployment
       title: Update extension response
       type: object
     common.Group:
@@ -670,10 +651,6 @@ components:
           type: array
         version:
           type: string
-      required:
-      - id
-      - itemIds
-      - version
       title: Extension deployment
       type: object
     Revert_deployment_of_extension_request:
@@ -685,8 +662,6 @@ components:
           items:
             type: string
           type: array
-      required:
-      - id
       title: Revert deployment of extension request
       type: object
   securitySchemes:

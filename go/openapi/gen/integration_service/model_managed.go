@@ -12,8 +12,6 @@ package integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Managed type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &Managed{}
 
 // Managed This data structure represents a managed integration.
 type Managed struct {
-	Variant Variant `json:"variant"`
+	Variant *Variant `json:"variant,omitempty"`
 }
-
-type _Managed Managed
 
 // NewManaged instantiates a new Managed object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewManaged(variant Variant) *Managed {
+func NewManaged() *Managed {
 	this := Managed{}
-	this.Variant = variant
 	return &this
 }
 
@@ -44,28 +39,36 @@ func NewManagedWithDefaults() *Managed {
 	return &this
 }
 
-// GetVariant returns the Variant field value
+// GetVariant returns the Variant field value if set, zero value otherwise.
 func (o *Managed) GetVariant() Variant {
-	if o == nil {
+	if o == nil || IsNil(o.Variant) {
 		var ret Variant
 		return ret
 	}
-
-	return o.Variant
+	return *o.Variant
 }
 
-// GetVariantOk returns a tuple with the Variant field value
+// GetVariantOk returns a tuple with the Variant field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Managed) GetVariantOk() (*Variant, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Variant) {
 		return nil, false
 	}
-	return &o.Variant, true
+	return o.Variant, true
 }
 
-// SetVariant sets field value
+// HasVariant returns a boolean if a field has been set.
+func (o *Managed) HasVariant() bool {
+	if o != nil && !IsNil(o.Variant) {
+		return true
+	}
+
+	return false
+}
+
+// SetVariant gets a reference to the given Variant and assigns it to the Variant field.
 func (o *Managed) SetVariant(v Variant) {
-	o.Variant = v
+	o.Variant = &v
 }
 
 func (o Managed) MarshalJSON() ([]byte, error) {
@@ -78,45 +81,10 @@ func (o Managed) MarshalJSON() ([]byte, error) {
 
 func (o Managed) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["variant"] = o.Variant
+	if !IsNil(o.Variant) {
+		toSerialize["variant"] = o.Variant
+	}
 	return toSerialize, nil
-}
-
-func (o *Managed) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"variant",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varManaged := _Managed{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varManaged)
-
-	if err != nil {
-		return err
-	}
-
-	*o = Managed(varManaged)
-
-	return err
 }
 
 type NullableManaged struct {

@@ -83,10 +83,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/UpdatePolicyRequestSpanRules"
+                    "$ref": "#/components/schemas/UpdatePolicyRequestLogRules"
                   },
                   {
-                    "$ref": "#/components/schemas/UpdatePolicyRequestLogRules"
+                    "$ref": "#/components/schemas/UpdatePolicyRequestSpanRules"
                   }
                 ]
               }
@@ -844,10 +844,7 @@
               "$ref": "#/components/schemas/CreatePolicyResponse"
             }
           }
-        },
-        "required": [
-          "createResponses"
-        ]
+        }
       },
       "AtomicOverwriteSpanPoliciesResponse": {
         "externalDocs": {
@@ -864,10 +861,7 @@
               "$ref": "#/components/schemas/CreatePolicyResponse"
             }
           }
-        },
-        "required": [
-          "createResponses"
-        ]
+        }
       },
       "BulkTestLogPoliciesResponse": {
         "externalDocs": {
@@ -1343,10 +1337,10 @@
       "Placement": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/PlacementFirst"
+            "$ref": "#/components/schemas/PlacementLast"
           },
           {
-            "$ref": "#/components/schemas/PlacementLast"
+            "$ref": "#/components/schemas/PlacementFirst"
           }
         ]
       },
@@ -1371,10 +1365,10 @@
       "Policy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/PolicySpanRules"
+            "$ref": "#/components/schemas/PolicyLogRules"
           },
           {
-            "$ref": "#/components/schemas/PolicyLogRules"
+            "$ref": "#/components/schemas/PolicySpanRules"
           }
         ]
       },

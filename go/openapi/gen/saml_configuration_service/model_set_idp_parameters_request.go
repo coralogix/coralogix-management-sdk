@@ -12,8 +12,6 @@ package saml_configuration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the SetIDPParametersRequest type satisfies the MappedNullable interface at compile time
@@ -21,20 +19,16 @@ var _ MappedNullable = &SetIDPParametersRequest{}
 
 // SetIDPParametersRequest This data structure is used to set the parameters of a SAML identity provider
 type SetIDPParametersRequest struct {
-	Params IDPParameters `json:"params"`
-	TeamId int64 `json:"teamId"`
+	Params *IDPParameters `json:"params,omitempty"`
+	TeamId *int64 `json:"teamId,omitempty"`
 }
-
-type _SetIDPParametersRequest SetIDPParametersRequest
 
 // NewSetIDPParametersRequest instantiates a new SetIDPParametersRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSetIDPParametersRequest(params IDPParameters, teamId int64) *SetIDPParametersRequest {
+func NewSetIDPParametersRequest() *SetIDPParametersRequest {
 	this := SetIDPParametersRequest{}
-	this.Params = params
-	this.TeamId = teamId
 	return &this
 }
 
@@ -46,52 +40,68 @@ func NewSetIDPParametersRequestWithDefaults() *SetIDPParametersRequest {
 	return &this
 }
 
-// GetParams returns the Params field value
+// GetParams returns the Params field value if set, zero value otherwise.
 func (o *SetIDPParametersRequest) GetParams() IDPParameters {
-	if o == nil {
+	if o == nil || IsNil(o.Params) {
 		var ret IDPParameters
 		return ret
 	}
-
-	return o.Params
+	return *o.Params
 }
 
-// GetParamsOk returns a tuple with the Params field value
+// GetParamsOk returns a tuple with the Params field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SetIDPParametersRequest) GetParamsOk() (*IDPParameters, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Params) {
 		return nil, false
 	}
-	return &o.Params, true
+	return o.Params, true
 }
 
-// SetParams sets field value
+// HasParams returns a boolean if a field has been set.
+func (o *SetIDPParametersRequest) HasParams() bool {
+	if o != nil && !IsNil(o.Params) {
+		return true
+	}
+
+	return false
+}
+
+// SetParams gets a reference to the given IDPParameters and assigns it to the Params field.
 func (o *SetIDPParametersRequest) SetParams(v IDPParameters) {
-	o.Params = v
+	o.Params = &v
 }
 
-// GetTeamId returns the TeamId field value
+// GetTeamId returns the TeamId field value if set, zero value otherwise.
 func (o *SetIDPParametersRequest) GetTeamId() int64 {
-	if o == nil {
+	if o == nil || IsNil(o.TeamId) {
 		var ret int64
 		return ret
 	}
-
-	return o.TeamId
+	return *o.TeamId
 }
 
-// GetTeamIdOk returns a tuple with the TeamId field value
+// GetTeamIdOk returns a tuple with the TeamId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SetIDPParametersRequest) GetTeamIdOk() (*int64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.TeamId) {
 		return nil, false
 	}
-	return &o.TeamId, true
+	return o.TeamId, true
 }
 
-// SetTeamId sets field value
+// HasTeamId returns a boolean if a field has been set.
+func (o *SetIDPParametersRequest) HasTeamId() bool {
+	if o != nil && !IsNil(o.TeamId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTeamId gets a reference to the given int64 and assigns it to the TeamId field.
 func (o *SetIDPParametersRequest) SetTeamId(v int64) {
-	o.TeamId = v
+	o.TeamId = &v
 }
 
 func (o SetIDPParametersRequest) MarshalJSON() ([]byte, error) {
@@ -104,47 +114,13 @@ func (o SetIDPParametersRequest) MarshalJSON() ([]byte, error) {
 
 func (o SetIDPParametersRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["params"] = o.Params
-	toSerialize["teamId"] = o.TeamId
+	if !IsNil(o.Params) {
+		toSerialize["params"] = o.Params
+	}
+	if !IsNil(o.TeamId) {
+		toSerialize["teamId"] = o.TeamId
+	}
 	return toSerialize, nil
-}
-
-func (o *SetIDPParametersRequest) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"params",
-		"teamId",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varSetIDPParametersRequest := _SetIDPParametersRequest{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSetIDPParametersRequest)
-
-	if err != nil {
-		return err
-	}
-
-	*o = SetIDPParametersRequest(varSetIDPParametersRequest)
-
-	return err
 }
 
 type NullableSetIDPParametersRequest struct {

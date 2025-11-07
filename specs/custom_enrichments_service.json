@@ -353,10 +353,10 @@
       "CustomEnrichmentData": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/CustomEnrichmentDataBinary"
+            "$ref": "#/components/schemas/CustomEnrichmentDataTextual"
           },
           {
-            "$ref": "#/components/schemas/CustomEnrichmentDataTextual"
+            "$ref": "#/components/schemas/CustomEnrichmentDataBinary"
           }
         ]
       },

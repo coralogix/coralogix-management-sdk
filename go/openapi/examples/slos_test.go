@@ -33,7 +33,7 @@ func TestSLOs(t *testing.T) {
 	client := cxsdk.NewClientSet(cpc).SLOs()
 
 	sloName := "example_slo_" + uuid.NewString()
-	createReq := slos.SlosServiceCreateSloRequest{
+	createReq := slos.SlosServiceReplaceSloRequest{
 		SloRequestBasedMetricSli: &slos.SloRequestBasedMetricSli{
 			Name:                      sloName,
 			Description:               slos.PtrString("example slo created via openapi sdk"),
@@ -51,10 +51,7 @@ func TestSLOs(t *testing.T) {
 		},
 	}
 
-	createResp, httpResp, err := client.
-		SlosServiceCreateSlo(ctx).
-		SlosServiceCreateSloRequest(createReq).
-		Execute()
+	createResp, httpResp, err := client.SlosServiceCreateSlo(ctx).SlosServiceReplaceSloRequest(createReq).Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 
 	sloID := createResp.GetSlo().SloRequestBasedMetricSli.GetId()

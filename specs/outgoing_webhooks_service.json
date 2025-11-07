@@ -75,10 +75,6 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "id",
-                  "data"
-                ],
                 "additionalProperties": false
               }
             }
@@ -139,9 +135,6 @@
                     "$ref": "#/components/schemas/OutgoingWebhookInputData"
                   }
                 },
-                "required": [
-                  "data"
-                ],
                 "additionalProperties": false
               }
             }
@@ -250,9 +243,6 @@
                     "$ref": "#/components/schemas/OutgoingWebhookInputData"
                   }
                 },
-                "required": [
-                  "data"
-                ],
                 "additionalProperties": false
               }
             }
@@ -316,9 +306,6 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "id"
-                ],
                 "additionalProperties": false
               }
             }
@@ -647,10 +634,7 @@
           "type": {
             "$ref": "#/components/schemas/AttachmentType"
           }
-        },
-        "required": [
-          "type"
-        ]
+        }
       },
       "AttachmentType": {
         "type": "string",
@@ -689,14 +673,7 @@
             "example": "source",
             "type": "string"
           }
-        },
-        "required": [
-          "eventBusArn",
-          "detail",
-          "detailType",
-          "source",
-          "roleName"
-        ]
+        }
       },
       "ColorsByAggregation": {
         "type": "object",
@@ -736,10 +713,7 @@
             "example": "example_id",
             "type": "string"
           }
-        },
-        "required": [
-          "id"
-        ]
+        }
       },
       "DeleteOutgoingWebhookResponse": {
         "externalDocs": {
@@ -765,11 +739,7 @@
             "example": "d838cd7b-087b-40c6-bc33-80997020f5d0",
             "type": "string"
           }
-        },
-        "required": [
-          "uuid",
-          "payload"
-        ]
+        }
       },
       "Digest": {
         "externalDocs": {
@@ -784,10 +754,7 @@
           "type": {
             "$ref": "#/components/schemas/DigestType"
           }
-        },
-        "required": [
-          "type"
-        ]
+        }
       },
       "DigestType": {
         "type": "string",
@@ -940,11 +907,7 @@
             "example": "d838cd7b-087b-40c6-bc33-80997020f5d0",
             "type": "string"
           }
-        },
-        "required": [
-          "uuid",
-          "method"
-        ]
+        }
       },
       "GetOutgoingWebhookResponse": {
         "externalDocs": {
@@ -956,10 +919,7 @@
           "webhook": {
             "$ref": "#/components/schemas/OutgoingWebhook"
           }
-        },
-        "required": [
-          "webhook"
-        ]
+        }
       },
       "GetOutgoingWebhookTypeDetailsResponse": {
         "externalDocs": {
@@ -971,10 +931,7 @@
           "details": {
             "$ref": "#/components/schemas/OutgoingWebhookDetails"
           }
-        },
-        "required": [
-          "details"
-        ]
+        }
       },
       "IbmEventNotificationsConfig": {
         "externalDocs": {
@@ -998,12 +955,7 @@
           "sourceName": {
             "type": "string"
           }
-        },
-        "required": [
-          "eventNotificationsInstanceId",
-          "regionId",
-          "endpointType"
-        ]
+        }
       },
       "JiraConfig": {
         "externalDocs": {
@@ -1024,12 +976,7 @@
             "example": "jira_project_key",
             "type": "string"
           }
-        },
-        "required": [
-          "apiToken",
-          "email",
-          "projectKey"
-        ]
+        }
       },
       "ListAllOutgoingWebhooksResponse": {
         "externalDocs": {
@@ -1163,31 +1110,18 @@
             "type": "string",
             "format": "date-time"
           }
-        },
-        "required": [
-          "id",
-          "name",
-          "createdAt",
-          "externalId",
-          "type"
-        ]
+        }
       },
       "OutgoingWebhook": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/OutgoingWebhookEmailGroup"
+            "$ref": "#/components/schemas/OutgoingWebhookGenericWebhook"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookPagerDuty"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookMicrosoftTeams"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookSendLog"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookJira"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookOpsgenie"
@@ -1196,19 +1130,25 @@
             "$ref": "#/components/schemas/OutgoingWebhookDemisto"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookAwsEventBridge"
-          },
-          {
             "$ref": "#/components/schemas/OutgoingWebhookIbmEventNotifications"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookGenericWebhook"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookSlack"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookPagerDuty"
+            "$ref": "#/components/schemas/OutgoingWebhookSendLog"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookEmailGroup"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookJira"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookAwsEventBridge"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
           }
         ]
       },
@@ -1251,13 +1191,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "id",
-          "type",
-          "name",
-          "createdAt",
-          "externalId"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookDemisto": {
@@ -1299,13 +1232,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "id",
-          "type",
-          "name",
-          "createdAt",
-          "externalId"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookDetails": {
@@ -1322,11 +1248,7 @@
           "type": {
             "$ref": "#/components/schemas/WebhookType"
           }
-        },
-        "required": [
-          "label",
-          "type"
-        ]
+        }
       },
       "OutgoingWebhookEmailGroup": {
         "externalDocs": {
@@ -1367,13 +1289,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "id",
-          "type",
-          "name",
-          "createdAt",
-          "externalId"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookExtendedSummary": {
@@ -1411,14 +1326,7 @@
             "example": "slack.webhook.com",
             "type": "string"
           }
-        },
-        "required": [
-          "id",
-          "name",
-          "createdAt",
-          "externalId",
-          "type"
-        ]
+        }
       },
       "OutgoingWebhookGenericWebhook": {
         "externalDocs": {
@@ -1459,13 +1367,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "id",
-          "type",
-          "name",
-          "createdAt",
-          "externalId"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookIbmEventNotifications": {
@@ -1507,31 +1408,15 @@
             "type": "string"
           }
         },
-        "required": [
-          "id",
-          "type",
-          "name",
-          "createdAt",
-          "externalId"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookInputData": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataSlack"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataJira"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataDemisto"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
@@ -1540,19 +1425,28 @@
             "$ref": "#/components/schemas/OutgoingWebhookInputDataGenericWebhook"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
-          },
-          {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataSendLog"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataOpsgenie"
           },
           {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataDemisto"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
+          },
+          {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataSlack"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
           }
         ]
       },
@@ -1578,11 +1472,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "name",
-          "config",
-          "type"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookInputDataDemisto": {
@@ -1607,11 +1496,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "name",
-          "config",
-          "type"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookInputDataEmailGroup": {
@@ -1636,11 +1520,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "name",
-          "config",
-          "type"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookInputDataGenericWebhook": {
@@ -1665,11 +1544,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "name",
-          "config",
-          "type"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookInputDataIbmEventNotifications": {
@@ -1694,11 +1568,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "name",
-          "config",
-          "type"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookInputDataJira": {
@@ -1723,11 +1592,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "name",
-          "config",
-          "type"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookInputDataMicrosoftTeams": {
@@ -1752,11 +1616,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "name",
-          "config",
-          "type"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookInputDataMsTeamsWorkflow": {
@@ -1781,11 +1640,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "name",
-          "config",
-          "type"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookInputDataOpsgenie": {
@@ -1810,11 +1664,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "name",
-          "config",
-          "type"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookInputDataPagerDuty": {
@@ -1839,11 +1688,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "name",
-          "config",
-          "type"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookInputDataSendLog": {
@@ -1868,11 +1712,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "name",
-          "config",
-          "type"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookInputDataSlack": {
@@ -1897,11 +1736,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "name",
-          "config",
-          "type"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookJira": {
@@ -1943,13 +1777,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "id",
-          "type",
-          "name",
-          "createdAt",
-          "externalId"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookMicrosoftTeams": {
@@ -1991,13 +1818,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "id",
-          "type",
-          "name",
-          "createdAt",
-          "externalId"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookMsTeamsWorkflow": {
@@ -2039,13 +1859,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "id",
-          "type",
-          "name",
-          "createdAt",
-          "externalId"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookOpsgenie": {
@@ -2087,13 +1900,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "id",
-          "type",
-          "name",
-          "createdAt",
-          "externalId"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookPagerDuty": {
@@ -2135,13 +1941,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "id",
-          "type",
-          "name",
-          "createdAt",
-          "externalId"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookSendLog": {
@@ -2183,13 +1982,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "id",
-          "type",
-          "name",
-          "createdAt",
-          "externalId"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookSlack": {
@@ -2231,13 +2023,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "id",
-          "type",
-          "name",
-          "createdAt",
-          "externalId"
-        ],
         "additionalProperties": false
       },
       "OutgoingWebhookSummary": {
@@ -2272,13 +2057,7 @@
             "example": "slack.webhook.com",
             "type": "string"
           }
-        },
-        "required": [
-          "id",
-          "name",
-          "createdAt",
-          "externalId"
-        ]
+        }
       },
       "OutgoingWebhookType": {
         "externalDocs": {
@@ -2299,12 +2078,7 @@
           "type": {
             "$ref": "#/components/schemas/WebhookType"
           }
-        },
-        "required": [
-          "label",
-          "count",
-          "type"
-        ]
+        }
       },
       "PagerDutyConfig": {
         "externalDocs": {
@@ -2317,10 +2091,7 @@
             "example": "pager_duty_service_key",
             "type": "string"
           }
-        },
-        "required": [
-          "serviceKey"
-        ]
+        }
       },
       "SendLogConfig": {
         "externalDocs": {
@@ -2339,11 +2110,7 @@
             "example": "d838cd7b-087b-40c6-bc33-80997020f5d0",
             "type": "string"
           }
-        },
-        "required": [
-          "uuid",
-          "payload"
-        ]
+        }
       },
       "SlackConfig": {
         "externalDocs": {
@@ -2396,11 +2163,7 @@
             "type": "integer",
             "format": "int64"
           }
-        },
-        "required": [
-          "errorMessage",
-          "displayMessage"
-        ]
+        }
       },
       "TestOutgoingWebhookResponse.Success": {
         "externalDocs": {

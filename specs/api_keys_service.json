@@ -39,11 +39,6 @@
                     "$ref": "#/components/schemas/Owner"
                   }
                 },
-                "required": [
-                  "name",
-                  "owner",
-                  "keyPermissions"
-                ],
                 "additionalProperties": false
               }
             }
@@ -223,9 +218,6 @@
                     "$ref": "#/components/schemas/Presets"
                   }
                 },
-                "required": [
-                  "keyId"
-                ],
                 "additionalProperties": false
               }
             }
@@ -368,11 +360,7 @@
               "type": "string"
             }
           }
-        },
-        "required": [
-          "presets",
-          "permissions"
-        ]
+        }
       },
       "CreateApiKeyResponse": {
         "externalDocs": {
@@ -395,12 +383,7 @@
             "example": "my_api_key_value",
             "type": "string"
           }
-        },
-        "required": [
-          "keyId",
-          "name",
-          "value"
-        ]
+        }
       },
       "DeleteApiKeyResponse": {
         "type": "object"
@@ -504,10 +487,7 @@
           "keyInfo": {
             "$ref": "#/components/schemas/KeyInfo"
           }
-        },
-        "required": [
-          "keyInfo"
-        ]
+        }
       },
       "GetSendDataApiKeysResponse": {
         "externalDocs": {
@@ -524,10 +504,7 @@
               "$ref": "#/components/schemas/KeyInfo"
             }
           }
-        },
-        "required": [
-          "keyInfo"
-        ]
+        }
       },
       "KeyInfo": {
         "externalDocs": {
@@ -562,14 +539,7 @@
           "value": {
             "type": "string"
           }
-        },
-        "required": [
-          "id",
-          "name",
-          "owner",
-          "active",
-          "keyPermissions"
-        ]
+        }
       },
       "KeyInfo.KeyPermissions": {
         "externalDocs": {
@@ -592,11 +562,7 @@
               "$ref": "#/components/schemas/PresetInfo"
             }
           }
-        },
-        "required": [
-          "presets",
-          "permissions"
-        ]
+        }
       },
       "MultipleValues": {
         "type": "object",
@@ -673,11 +639,7 @@
               "type": "string"
             }
           }
-        },
-        "required": [
-          "name",
-          "permissions"
-        ]
+        }
       },
       "Presets": {
         "externalDocs": {
@@ -694,10 +656,7 @@
               "type": "string"
             }
           }
-        },
-        "required": [
-          "presets"
-        ]
+        }
       },
       "UpdateApiKeyRequest.Permissions": {
         "externalDocs": {
@@ -714,10 +673,7 @@
               "type": "string"
             }
           }
-        },
-        "required": [
-          "permissions"
-        ]
+        }
       },
       "UpdateApiKeyResponse": {
         "type": "object"

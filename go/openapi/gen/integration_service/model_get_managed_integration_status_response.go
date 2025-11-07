@@ -12,8 +12,6 @@ package integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the GetManagedIntegrationStatusResponse type satisfies the MappedNullable interface at compile time
@@ -21,20 +19,16 @@ var _ MappedNullable = &GetManagedIntegrationStatusResponse{}
 
 // GetManagedIntegrationStatusResponse struct for GetManagedIntegrationStatusResponse
 type GetManagedIntegrationStatusResponse struct {
-	IntegrationId string `json:"integrationId"`
-	Status IntegrationStatus `json:"status"`
+	IntegrationId *string `json:"integrationId,omitempty"`
+	Status *IntegrationStatus `json:"status,omitempty"`
 }
-
-type _GetManagedIntegrationStatusResponse GetManagedIntegrationStatusResponse
 
 // NewGetManagedIntegrationStatusResponse instantiates a new GetManagedIntegrationStatusResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetManagedIntegrationStatusResponse(integrationId string, status IntegrationStatus) *GetManagedIntegrationStatusResponse {
+func NewGetManagedIntegrationStatusResponse() *GetManagedIntegrationStatusResponse {
 	this := GetManagedIntegrationStatusResponse{}
-	this.IntegrationId = integrationId
-	this.Status = status
 	return &this
 }
 
@@ -46,52 +40,68 @@ func NewGetManagedIntegrationStatusResponseWithDefaults() *GetManagedIntegration
 	return &this
 }
 
-// GetIntegrationId returns the IntegrationId field value
+// GetIntegrationId returns the IntegrationId field value if set, zero value otherwise.
 func (o *GetManagedIntegrationStatusResponse) GetIntegrationId() string {
-	if o == nil {
+	if o == nil || IsNil(o.IntegrationId) {
 		var ret string
 		return ret
 	}
-
-	return o.IntegrationId
+	return *o.IntegrationId
 }
 
-// GetIntegrationIdOk returns a tuple with the IntegrationId field value
+// GetIntegrationIdOk returns a tuple with the IntegrationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetManagedIntegrationStatusResponse) GetIntegrationIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.IntegrationId) {
 		return nil, false
 	}
-	return &o.IntegrationId, true
+	return o.IntegrationId, true
 }
 
-// SetIntegrationId sets field value
+// HasIntegrationId returns a boolean if a field has been set.
+func (o *GetManagedIntegrationStatusResponse) HasIntegrationId() bool {
+	if o != nil && !IsNil(o.IntegrationId) {
+		return true
+	}
+
+	return false
+}
+
+// SetIntegrationId gets a reference to the given string and assigns it to the IntegrationId field.
 func (o *GetManagedIntegrationStatusResponse) SetIntegrationId(v string) {
-	o.IntegrationId = v
+	o.IntegrationId = &v
 }
 
-// GetStatus returns the Status field value
+// GetStatus returns the Status field value if set, zero value otherwise.
 func (o *GetManagedIntegrationStatusResponse) GetStatus() IntegrationStatus {
-	if o == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret IntegrationStatus
 		return ret
 	}
-
-	return o.Status
+	return *o.Status
 }
 
-// GetStatusOk returns a tuple with the Status field value
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetManagedIntegrationStatusResponse) GetStatusOk() (*IntegrationStatus, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
-	return &o.Status, true
+	return o.Status, true
 }
 
-// SetStatus sets field value
+// HasStatus returns a boolean if a field has been set.
+func (o *GetManagedIntegrationStatusResponse) HasStatus() bool {
+	if o != nil && !IsNil(o.Status) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given IntegrationStatus and assigns it to the Status field.
 func (o *GetManagedIntegrationStatusResponse) SetStatus(v IntegrationStatus) {
-	o.Status = v
+	o.Status = &v
 }
 
 func (o GetManagedIntegrationStatusResponse) MarshalJSON() ([]byte, error) {
@@ -104,47 +114,13 @@ func (o GetManagedIntegrationStatusResponse) MarshalJSON() ([]byte, error) {
 
 func (o GetManagedIntegrationStatusResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["integrationId"] = o.IntegrationId
-	toSerialize["status"] = o.Status
+	if !IsNil(o.IntegrationId) {
+		toSerialize["integrationId"] = o.IntegrationId
+	}
+	if !IsNil(o.Status) {
+		toSerialize["status"] = o.Status
+	}
 	return toSerialize, nil
-}
-
-func (o *GetManagedIntegrationStatusResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"integrationId",
-		"status",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varGetManagedIntegrationStatusResponse := _GetManagedIntegrationStatusResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetManagedIntegrationStatusResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = GetManagedIntegrationStatusResponse(varGetManagedIntegrationStatusResponse)
-
-	return err
 }
 
 type NullableGetManagedIntegrationStatusResponse struct {

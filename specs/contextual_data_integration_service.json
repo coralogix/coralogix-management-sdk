@@ -84,10 +84,6 @@
                     "$ref": "#/components/schemas/IntegrationMetadata"
                   }
                 },
-                "required": [
-                  "integrationId",
-                  "metadata"
-                ],
                 "additionalProperties": false
               }
             }
@@ -148,9 +144,6 @@
                     "$ref": "#/components/schemas/IntegrationMetadata"
                   }
                 },
-                "required": [
-                  "metadata"
-                ],
                 "additionalProperties": false
               }
             }
@@ -281,9 +274,6 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "integrationData"
-                ],
                 "additionalProperties": false
               }
             }
@@ -517,11 +507,7 @@
           "version": {
             "type": "string"
           }
-        },
-        "required": [
-          "version",
-          "descriptionMd"
-        ]
+        }
       },
       "CloudFormationStack": {
         "externalDocs": {
@@ -708,10 +694,7 @@
               "type": "string"
             }
           }
-        },
-        "required": [
-          "reason"
-        ]
+        }
       },
       "ExtensionBinary": {
         "externalDocs": {
@@ -726,11 +709,7 @@
           "type": {
             "$ref": "#/components/schemas/ExtensionBinary.BinaryType"
           }
-        },
-        "required": [
-          "type",
-          "data"
-        ]
+        }
       },
       "ExtensionBinary.BinaryType": {
         "type": "string",
@@ -781,14 +760,7 @@
           "uniqueId": {
             "type": "string"
           }
-        },
-        "required": [
-          "id",
-          "name",
-          "targetDomain",
-          "data",
-          "permissionResource"
-        ]
+        }
       },
       "ExtensionItemBinary": {
         "externalDocs": {
@@ -806,12 +778,7 @@
           "type": {
             "$ref": "#/components/schemas/ExtensionItemBinary.BinaryType"
           }
-        },
-        "required": [
-          "type",
-          "data",
-          "fileName"
-        ]
+        }
       },
       "ExtensionItemBinary.BinaryType": {
         "type": "string",
@@ -872,10 +839,7 @@
           "version": {
             "type": "string"
           }
-        },
-        "required": [
-          "version"
-        ]
+        }
       },
       "ExternalUrl": {
         "externalDocs": {
@@ -905,10 +869,7 @@
               "$ref": "#/components/schemas/FieldCondition.FieldValue"
             }
           }
-        },
-        "required": [
-          "type"
-        ]
+        }
       },
       "FieldCondition.ConditionType": {
         "type": "string",
@@ -947,9 +908,6 @@
       "FieldInformation": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FieldInformationSingle"
-          },
-          {
             "$ref": "#/components/schemas/FieldInformationMultiText"
           },
           {
@@ -963,6 +921,9 @@
           },
           {
             "$ref": "#/components/schemas/FieldInformationSingleNumber"
+          },
+          {
+            "$ref": "#/components/schemas/FieldInformationSingle"
           }
         ]
       },
@@ -1019,9 +980,6 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "type"
-        ],
         "additionalProperties": false
       },
       "FieldInformationMultipleSelection": {
@@ -1077,9 +1035,6 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "type"
-        ],
         "additionalProperties": false
       },
       "FieldInformationSelection": {
@@ -1135,9 +1090,6 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "type"
-        ],
         "additionalProperties": false
       },
       "FieldInformationSingle": {
@@ -1193,9 +1145,6 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "type"
-        ],
         "additionalProperties": false
       },
       "FieldInformationSingleBoolean": {
@@ -1251,9 +1200,6 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "type"
-        ],
         "additionalProperties": false
       },
       "FieldInformationSingleNumber": {
@@ -1309,9 +1255,6 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "type"
-        ],
         "additionalProperties": false
       },
       "FilterPathAndValues": {
@@ -1423,10 +1366,7 @@
           "integrationDefinition": {
             "$ref": "#/components/schemas/IntegrationDefinition"
           }
-        },
-        "required": [
-          "integrationDefinition"
-        ]
+        }
       },
       "GetContextualDataIntegrationDetailsResponse": {
         "externalDocs": {
@@ -1438,10 +1378,7 @@
           "integrationDetail": {
             "$ref": "#/components/schemas/IntegrationDetails"
           }
-        },
-        "required": [
-          "integrationDetail"
-        ]
+        }
       },
       "GetContextualDataIntegrationsResponse": {
         "externalDocs": {
@@ -1484,11 +1421,7 @@
           "upgradeAvailable": {
             "type": "boolean"
           }
-        },
-        "required": [
-          "integration",
-          "amountIntegrations"
-        ]
+        }
       },
       "HelmChart": {
         "externalDocs": {
@@ -1608,11 +1541,7 @@
           "name": {
             "type": "string"
           }
-        },
-        "required": [
-          "name",
-          "link"
-        ]
+        }
       },
       "IntegrationDetails": {
         "oneOf": [
@@ -2039,10 +1968,7 @@
               "type": "string"
             }
           }
-        },
-        "required": [
-          "connectionStatus"
-        ]
+        }
       },
       "Language": {
         "type": "string",
@@ -2117,10 +2043,7 @@
           "variant": {
             "$ref": "#/components/schemas/Variant"
           }
-        },
-        "required": [
-          "variant"
-        ]
+        }
       },
       "ManagedService": {
         "externalDocs": {
@@ -2170,6 +2093,12 @@
       "Parameter": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/ParameterSensitiveData"
+          },
+          {
+            "$ref": "#/components/schemas/ParameterStringValue"
+          },
+          {
             "$ref": "#/components/schemas/ParameterBooleanValue"
           },
           {
@@ -2180,12 +2109,6 @@
           },
           {
             "$ref": "#/components/schemas/ParameterNumericValue"
-          },
-          {
-            "$ref": "#/components/schemas/ParameterSensitiveData"
-          },
-          {
-            "$ref": "#/components/schemas/ParameterStringValue"
           }
         ]
       },
@@ -2317,13 +2240,13 @@
       "RegisteredInstance": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/RegisteredInstanceArm"
+          },
+          {
             "$ref": "#/components/schemas/RegisteredInstanceEmpty"
           },
           {
             "$ref": "#/components/schemas/RegisteredInstanceCloudformation"
-          },
-          {
-            "$ref": "#/components/schemas/RegisteredInstanceArm"
           }
         ]
       },
@@ -2479,10 +2402,7 @@
           "integrationId": {
             "type": "string"
           }
-        },
-        "required": [
-          "integrationId"
-        ]
+        }
       },
       "SelectionValue": {
         "externalDocs": {
@@ -2590,10 +2510,7 @@
           "result": {
             "$ref": "#/components/schemas/TestIntegrationResult"
           }
-        },
-        "required": [
-          "result"
-        ]
+        }
       },
       "TestIntegrationResult": {
         "oneOf": [
@@ -2852,15 +2769,13 @@
               "$ref": "#/components/schemas/ExtensionRevision"
             }
           }
-        },
-        "required": [
-          "id",
-          "name",
-          "image"
-        ]
+        }
       },
       "v1.IntegrationType": {
         "oneOf": [
+          {
+            "$ref": "#/components/schemas/V1IntegrationTypeCloudformation"
+          },
           {
             "$ref": "#/components/schemas/V1IntegrationTypeArm"
           },
@@ -2878,9 +2793,6 @@
           },
           {
             "$ref": "#/components/schemas/V1IntegrationTypeUntracked"
-          },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeCloudformation"
           }
         ]
       },

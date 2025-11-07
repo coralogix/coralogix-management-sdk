@@ -12,8 +12,6 @@ package api_keys_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Presets type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &Presets{}
 
 // Presets This data structure represents a set of permissions presets on an API key.
 type Presets struct {
-	Presets []string `json:"presets"`
+	Presets []string `json:"presets,omitempty"`
 }
-
-type _Presets Presets
 
 // NewPresets instantiates a new Presets object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPresets(presets []string) *Presets {
+func NewPresets() *Presets {
 	this := Presets{}
-	this.Presets = presets
 	return &this
 }
 
@@ -44,26 +39,34 @@ func NewPresetsWithDefaults() *Presets {
 	return &this
 }
 
-// GetPresets returns the Presets field value
+// GetPresets returns the Presets field value if set, zero value otherwise.
 func (o *Presets) GetPresets() []string {
-	if o == nil {
+	if o == nil || IsNil(o.Presets) {
 		var ret []string
 		return ret
 	}
-
 	return o.Presets
 }
 
-// GetPresetsOk returns a tuple with the Presets field value
+// GetPresetsOk returns a tuple with the Presets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Presets) GetPresetsOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Presets) {
 		return nil, false
 	}
 	return o.Presets, true
 }
 
-// SetPresets sets field value
+// HasPresets returns a boolean if a field has been set.
+func (o *Presets) HasPresets() bool {
+	if o != nil && !IsNil(o.Presets) {
+		return true
+	}
+
+	return false
+}
+
+// SetPresets gets a reference to the given []string and assigns it to the Presets field.
 func (o *Presets) SetPresets(v []string) {
 	o.Presets = v
 }
@@ -78,45 +81,10 @@ func (o Presets) MarshalJSON() ([]byte, error) {
 
 func (o Presets) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["presets"] = o.Presets
+	if !IsNil(o.Presets) {
+		toSerialize["presets"] = o.Presets
+	}
 	return toSerialize, nil
-}
-
-func (o *Presets) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"presets",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varPresets := _Presets{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPresets)
-
-	if err != nil {
-		return err
-	}
-
-	*o = Presets(varPresets)
-
-	return err
 }
 
 type NullablePresets struct {

@@ -12,8 +12,6 @@ package extension_testing_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ExtensionData type satisfies the MappedNullable interface at compile time
@@ -27,30 +25,24 @@ type ExtensionData struct {
 	Deprecation *Deprecation `json:"deprecation,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Excerpt *string `json:"excerpt,omitempty"`
-	Id string `json:"id"`
-	Image string `json:"image"`
+	Id *string `json:"id,omitempty"`
+	Image *string `json:"image,omitempty"`
 	IntegrationDetails []IntegrationDetail `json:"integrationDetails,omitempty"`
 	Integrations []string `json:"integrations,omitempty"`
 	IsHidden *bool `json:"isHidden,omitempty"`
 	Items []ExtensionItemData `json:"items,omitempty"`
 	Keywords []string `json:"keywords,omitempty"`
 	Labels []string `json:"labels,omitempty"`
-	Name string `json:"name"`
-	Version string `json:"version"`
+	Name *string `json:"name,omitempty"`
+	Version *string `json:"version,omitempty"`
 }
-
-type _ExtensionData ExtensionData
 
 // NewExtensionData instantiates a new ExtensionData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewExtensionData(id string, image string, name string, version string) *ExtensionData {
+func NewExtensionData() *ExtensionData {
 	this := ExtensionData{}
-	this.Id = id
-	this.Image = image
-	this.Name = name
-	this.Version = version
 	return &this
 }
 
@@ -254,52 +246,68 @@ func (o *ExtensionData) SetExcerpt(v string) {
 	o.Excerpt = &v
 }
 
-// GetId returns the Id field value
+// GetId returns the Id field value if set, zero value otherwise.
 func (o *ExtensionData) GetId() string {
-	if o == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
-
-	return o.Id
+	return *o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExtensionData) GetIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
-	return &o.Id, true
+	return o.Id, true
 }
 
-// SetId sets field value
+// HasId returns a boolean if a field has been set.
+func (o *ExtensionData) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
 func (o *ExtensionData) SetId(v string) {
-	o.Id = v
+	o.Id = &v
 }
 
-// GetImage returns the Image field value
+// GetImage returns the Image field value if set, zero value otherwise.
 func (o *ExtensionData) GetImage() string {
-	if o == nil {
+	if o == nil || IsNil(o.Image) {
 		var ret string
 		return ret
 	}
-
-	return o.Image
+	return *o.Image
 }
 
-// GetImageOk returns a tuple with the Image field value
+// GetImageOk returns a tuple with the Image field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExtensionData) GetImageOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Image) {
 		return nil, false
 	}
-	return &o.Image, true
+	return o.Image, true
 }
 
-// SetImage sets field value
+// HasImage returns a boolean if a field has been set.
+func (o *ExtensionData) HasImage() bool {
+	if o != nil && !IsNil(o.Image) {
+		return true
+	}
+
+	return false
+}
+
+// SetImage gets a reference to the given string and assigns it to the Image field.
 func (o *ExtensionData) SetImage(v string) {
-	o.Image = v
+	o.Image = &v
 }
 
 // GetIntegrationDetails returns the IntegrationDetails field value if set, zero value otherwise.
@@ -494,52 +502,68 @@ func (o *ExtensionData) SetLabels(v []string) {
 	o.Labels = v
 }
 
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *ExtensionData) GetName() string {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExtensionData) GetNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *ExtensionData) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *ExtensionData) SetName(v string) {
-	o.Name = v
+	o.Name = &v
 }
 
-// GetVersion returns the Version field value
+// GetVersion returns the Version field value if set, zero value otherwise.
 func (o *ExtensionData) GetVersion() string {
-	if o == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
-
-	return o.Version
+	return *o.Version
 }
 
-// GetVersionOk returns a tuple with the Version field value
+// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExtensionData) GetVersionOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
-	return &o.Version, true
+	return o.Version, true
 }
 
-// SetVersion sets field value
+// HasVersion returns a boolean if a field has been set.
+func (o *ExtensionData) HasVersion() bool {
+	if o != nil && !IsNil(o.Version) {
+		return true
+	}
+
+	return false
+}
+
+// SetVersion gets a reference to the given string and assigns it to the Version field.
 func (o *ExtensionData) SetVersion(v string) {
-	o.Version = v
+	o.Version = &v
 }
 
 func (o ExtensionData) MarshalJSON() ([]byte, error) {
@@ -570,8 +594,12 @@ func (o ExtensionData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Excerpt) {
 		toSerialize["excerpt"] = o.Excerpt
 	}
-	toSerialize["id"] = o.Id
-	toSerialize["image"] = o.Image
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.Image) {
+		toSerialize["image"] = o.Image
+	}
 	if !IsNil(o.IntegrationDetails) {
 		toSerialize["integrationDetails"] = o.IntegrationDetails
 	}
@@ -590,49 +618,13 @@ func (o ExtensionData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Labels) {
 		toSerialize["labels"] = o.Labels
 	}
-	toSerialize["name"] = o.Name
-	toSerialize["version"] = o.Version
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Version) {
+		toSerialize["version"] = o.Version
+	}
 	return toSerialize, nil
-}
-
-func (o *ExtensionData) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"id",
-		"image",
-		"name",
-		"version",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varExtensionData := _ExtensionData{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varExtensionData)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ExtensionData(varExtensionData)
-
-	return err
 }
 
 type NullableExtensionData struct {

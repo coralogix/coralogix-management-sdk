@@ -13,8 +13,6 @@ package global_routers_service
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the GlobalRouter type satisfies the MappedNullable interface at compile time
@@ -26,24 +24,20 @@ type GlobalRouter struct {
 	Description *string `json:"description,omitempty"`
 	EntityLabelMatcher *map[string]string `json:"entityLabelMatcher,omitempty"`
 	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
-	EntityType NotificationCenterEntityType `json:"entityType"`
+	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
 	Fallback []RoutingTarget `json:"fallback,omitempty"`
 	Id *string `json:"id,omitempty"`
-	Name string `json:"name"`
+	Name *string `json:"name,omitempty"`
 	Rules []RoutingRule `json:"rules,omitempty"`
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 }
-
-type _GlobalRouter GlobalRouter
 
 // NewGlobalRouter instantiates a new GlobalRouter object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGlobalRouter(entityType NotificationCenterEntityType, name string) *GlobalRouter {
+func NewGlobalRouter() *GlobalRouter {
 	this := GlobalRouter{}
-	this.EntityType = entityType
-	this.Name = name
 	return &this
 }
 
@@ -183,28 +177,36 @@ func (o *GlobalRouter) SetEntityLabels(v map[string]string) {
 	o.EntityLabels = &v
 }
 
-// GetEntityType returns the EntityType field value
+// GetEntityType returns the EntityType field value if set, zero value otherwise.
 func (o *GlobalRouter) GetEntityType() NotificationCenterEntityType {
-	if o == nil {
+	if o == nil || IsNil(o.EntityType) {
 		var ret NotificationCenterEntityType
 		return ret
 	}
-
-	return o.EntityType
+	return *o.EntityType
 }
 
-// GetEntityTypeOk returns a tuple with the EntityType field value
+// GetEntityTypeOk returns a tuple with the EntityType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GlobalRouter) GetEntityTypeOk() (*NotificationCenterEntityType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.EntityType) {
 		return nil, false
 	}
-	return &o.EntityType, true
+	return o.EntityType, true
 }
 
-// SetEntityType sets field value
+// HasEntityType returns a boolean if a field has been set.
+func (o *GlobalRouter) HasEntityType() bool {
+	if o != nil && !IsNil(o.EntityType) {
+		return true
+	}
+
+	return false
+}
+
+// SetEntityType gets a reference to the given NotificationCenterEntityType and assigns it to the EntityType field.
 func (o *GlobalRouter) SetEntityType(v NotificationCenterEntityType) {
-	o.EntityType = v
+	o.EntityType = &v
 }
 
 // GetFallback returns the Fallback field value if set, zero value otherwise.
@@ -271,28 +273,36 @@ func (o *GlobalRouter) SetId(v string) {
 	o.Id = &v
 }
 
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *GlobalRouter) GetName() string {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GlobalRouter) GetNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *GlobalRouter) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *GlobalRouter) SetName(v string) {
-	o.Name = v
+	o.Name = &v
 }
 
 // GetRules returns the Rules field value if set, zero value otherwise.
@@ -381,14 +391,18 @@ func (o GlobalRouter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EntityLabels) {
 		toSerialize["entityLabels"] = o.EntityLabels
 	}
-	toSerialize["entityType"] = o.EntityType
+	if !IsNil(o.EntityType) {
+		toSerialize["entityType"] = o.EntityType
+	}
 	if !IsNil(o.Fallback) {
 		toSerialize["fallback"] = o.Fallback
 	}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	toSerialize["name"] = o.Name
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	if !IsNil(o.Rules) {
 		toSerialize["rules"] = o.Rules
 	}
@@ -396,44 +410,6 @@ func (o GlobalRouter) ToMap() (map[string]interface{}, error) {
 		toSerialize["updateTime"] = o.UpdateTime
 	}
 	return toSerialize, nil
-}
-
-func (o *GlobalRouter) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"entityType",
-		"name",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varGlobalRouter := _GlobalRouter{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGlobalRouter)
-
-	if err != nil {
-		return err
-	}
-
-	*o = GlobalRouter(varGlobalRouter)
-
-	return err
 }
 
 type NullableGlobalRouter struct {

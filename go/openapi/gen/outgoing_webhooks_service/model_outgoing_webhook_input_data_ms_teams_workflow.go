@@ -12,8 +12,6 @@ package outgoing_webhooks_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the OutgoingWebhookInputDataMsTeamsWorkflow type satisfies the MappedNullable interface at compile time
@@ -22,21 +20,17 @@ var _ MappedNullable = &OutgoingWebhookInputDataMsTeamsWorkflow{}
 // OutgoingWebhookInputDataMsTeamsWorkflow struct for OutgoingWebhookInputDataMsTeamsWorkflow
 type OutgoingWebhookInputDataMsTeamsWorkflow struct {
 	MsTeamsWorkflow map[string]interface{} `json:"msTeamsWorkflow,omitempty"`
-	Name string `json:"name"`
-	Type WebhookType `json:"type"`
+	Name *string `json:"name,omitempty"`
+	Type *WebhookType `json:"type,omitempty"`
 	Url *string `json:"url,omitempty"`
 }
-
-type _OutgoingWebhookInputDataMsTeamsWorkflow OutgoingWebhookInputDataMsTeamsWorkflow
 
 // NewOutgoingWebhookInputDataMsTeamsWorkflow instantiates a new OutgoingWebhookInputDataMsTeamsWorkflow object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOutgoingWebhookInputDataMsTeamsWorkflow(name string, type_ WebhookType) *OutgoingWebhookInputDataMsTeamsWorkflow {
+func NewOutgoingWebhookInputDataMsTeamsWorkflow() *OutgoingWebhookInputDataMsTeamsWorkflow {
 	this := OutgoingWebhookInputDataMsTeamsWorkflow{}
-	this.Name = name
-	this.Type = type_
 	return &this
 }
 
@@ -80,52 +74,68 @@ func (o *OutgoingWebhookInputDataMsTeamsWorkflow) SetMsTeamsWorkflow(v map[strin
 	o.MsTeamsWorkflow = v
 }
 
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *OutgoingWebhookInputDataMsTeamsWorkflow) GetName() string {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookInputDataMsTeamsWorkflow) GetNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *OutgoingWebhookInputDataMsTeamsWorkflow) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *OutgoingWebhookInputDataMsTeamsWorkflow) SetName(v string) {
-	o.Name = v
+	o.Name = &v
 }
 
-// GetType returns the Type field value
+// GetType returns the Type field value if set, zero value otherwise.
 func (o *OutgoingWebhookInputDataMsTeamsWorkflow) GetType() WebhookType {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret WebhookType
 		return ret
 	}
-
-	return o.Type
+	return *o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookInputDataMsTeamsWorkflow) GetTypeOk() (*WebhookType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
-	return &o.Type, true
+	return o.Type, true
 }
 
-// SetType sets field value
+// HasType returns a boolean if a field has been set.
+func (o *OutgoingWebhookInputDataMsTeamsWorkflow) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given WebhookType and assigns it to the Type field.
 func (o *OutgoingWebhookInputDataMsTeamsWorkflow) SetType(v WebhookType) {
-	o.Type = v
+	o.Type = &v
 }
 
 // GetUrl returns the Url field value if set, zero value otherwise.
@@ -173,50 +183,16 @@ func (o OutgoingWebhookInputDataMsTeamsWorkflow) ToMap() (map[string]interface{}
 	if !IsNil(o.MsTeamsWorkflow) {
 		toSerialize["msTeamsWorkflow"] = o.MsTeamsWorkflow
 	}
-	toSerialize["name"] = o.Name
-	toSerialize["type"] = o.Type
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
 	return toSerialize, nil
-}
-
-func (o *OutgoingWebhookInputDataMsTeamsWorkflow) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"name",
-		"type",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varOutgoingWebhookInputDataMsTeamsWorkflow := _OutgoingWebhookInputDataMsTeamsWorkflow{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOutgoingWebhookInputDataMsTeamsWorkflow)
-
-	if err != nil {
-		return err
-	}
-
-	*o = OutgoingWebhookInputDataMsTeamsWorkflow(varOutgoingWebhookInputDataMsTeamsWorkflow)
-
-	return err
 }
 
 type NullableOutgoingWebhookInputDataMsTeamsWorkflow struct {

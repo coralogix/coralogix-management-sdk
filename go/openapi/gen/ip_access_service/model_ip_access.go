@@ -12,8 +12,6 @@ package ip_access_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the IpAccess type satisfies the MappedNullable interface at compile time
@@ -24,20 +22,17 @@ type IpAccess struct {
 	// Whether this IP access entry is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
 	// The IP range in CIDR notation.
-	IpRange string `json:"ipRange"`
+	IpRange *string `json:"ipRange,omitempty"`
 	// The name of the IP access entry.
 	Name *string `json:"name,omitempty"`
 }
-
-type _IpAccess IpAccess
 
 // NewIpAccess instantiates a new IpAccess object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIpAccess(ipRange string) *IpAccess {
+func NewIpAccess() *IpAccess {
 	this := IpAccess{}
-	this.IpRange = ipRange
 	return &this
 }
 
@@ -81,28 +76,36 @@ func (o *IpAccess) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
-// GetIpRange returns the IpRange field value
+// GetIpRange returns the IpRange field value if set, zero value otherwise.
 func (o *IpAccess) GetIpRange() string {
-	if o == nil {
+	if o == nil || IsNil(o.IpRange) {
 		var ret string
 		return ret
 	}
-
-	return o.IpRange
+	return *o.IpRange
 }
 
-// GetIpRangeOk returns a tuple with the IpRange field value
+// GetIpRangeOk returns a tuple with the IpRange field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IpAccess) GetIpRangeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.IpRange) {
 		return nil, false
 	}
-	return &o.IpRange, true
+	return o.IpRange, true
 }
 
-// SetIpRange sets field value
+// HasIpRange returns a boolean if a field has been set.
+func (o *IpAccess) HasIpRange() bool {
+	if o != nil && !IsNil(o.IpRange) {
+		return true
+	}
+
+	return false
+}
+
+// SetIpRange gets a reference to the given string and assigns it to the IpRange field.
 func (o *IpAccess) SetIpRange(v string) {
-	o.IpRange = v
+	o.IpRange = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -150,48 +153,13 @@ func (o IpAccess) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	toSerialize["ipRange"] = o.IpRange
+	if !IsNil(o.IpRange) {
+		toSerialize["ipRange"] = o.IpRange
+	}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
 	return toSerialize, nil
-}
-
-func (o *IpAccess) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"ipRange",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varIpAccess := _IpAccess{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varIpAccess)
-
-	if err != nil {
-		return err
-	}
-
-	*o = IpAccess(varIpAccess)
-
-	return err
 }
 
 type NullableIpAccess struct {

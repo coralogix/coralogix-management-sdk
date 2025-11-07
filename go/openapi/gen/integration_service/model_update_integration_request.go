@@ -12,8 +12,6 @@ package integration_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the UpdateIntegrationRequest type satisfies the MappedNullable interface at compile time
@@ -21,20 +19,16 @@ var _ MappedNullable = &UpdateIntegrationRequest{}
 
 // UpdateIntegrationRequest This data structure represents a list of outgoing webhook types.
 type UpdateIntegrationRequest struct {
-	Id string `json:"id"`
-	Metadata IntegrationMetadata `json:"metadata"`
+	Id *string `json:"id,omitempty"`
+	Metadata *IntegrationMetadata `json:"metadata,omitempty"`
 }
-
-type _UpdateIntegrationRequest UpdateIntegrationRequest
 
 // NewUpdateIntegrationRequest instantiates a new UpdateIntegrationRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateIntegrationRequest(id string, metadata IntegrationMetadata) *UpdateIntegrationRequest {
+func NewUpdateIntegrationRequest() *UpdateIntegrationRequest {
 	this := UpdateIntegrationRequest{}
-	this.Id = id
-	this.Metadata = metadata
 	return &this
 }
 
@@ -46,52 +40,68 @@ func NewUpdateIntegrationRequestWithDefaults() *UpdateIntegrationRequest {
 	return &this
 }
 
-// GetId returns the Id field value
+// GetId returns the Id field value if set, zero value otherwise.
 func (o *UpdateIntegrationRequest) GetId() string {
-	if o == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
-
-	return o.Id
+	return *o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateIntegrationRequest) GetIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
-	return &o.Id, true
+	return o.Id, true
 }
 
-// SetId sets field value
+// HasId returns a boolean if a field has been set.
+func (o *UpdateIntegrationRequest) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
 func (o *UpdateIntegrationRequest) SetId(v string) {
-	o.Id = v
+	o.Id = &v
 }
 
-// GetMetadata returns the Metadata field value
+// GetMetadata returns the Metadata field value if set, zero value otherwise.
 func (o *UpdateIntegrationRequest) GetMetadata() IntegrationMetadata {
-	if o == nil {
+	if o == nil || IsNil(o.Metadata) {
 		var ret IntegrationMetadata
 		return ret
 	}
-
-	return o.Metadata
+	return *o.Metadata
 }
 
-// GetMetadataOk returns a tuple with the Metadata field value
+// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateIntegrationRequest) GetMetadataOk() (*IntegrationMetadata, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Metadata) {
 		return nil, false
 	}
-	return &o.Metadata, true
+	return o.Metadata, true
 }
 
-// SetMetadata sets field value
+// HasMetadata returns a boolean if a field has been set.
+func (o *UpdateIntegrationRequest) HasMetadata() bool {
+	if o != nil && !IsNil(o.Metadata) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadata gets a reference to the given IntegrationMetadata and assigns it to the Metadata field.
 func (o *UpdateIntegrationRequest) SetMetadata(v IntegrationMetadata) {
-	o.Metadata = v
+	o.Metadata = &v
 }
 
 func (o UpdateIntegrationRequest) MarshalJSON() ([]byte, error) {
@@ -104,47 +114,13 @@ func (o UpdateIntegrationRequest) MarshalJSON() ([]byte, error) {
 
 func (o UpdateIntegrationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
-	toSerialize["metadata"] = o.Metadata
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.Metadata) {
+		toSerialize["metadata"] = o.Metadata
+	}
 	return toSerialize, nil
-}
-
-func (o *UpdateIntegrationRequest) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"id",
-		"metadata",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varUpdateIntegrationRequest := _UpdateIntegrationRequest{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateIntegrationRequest)
-
-	if err != nil {
-		return err
-	}
-
-	*o = UpdateIntegrationRequest(varUpdateIntegrationRequest)
-
-	return err
 }
 
 type NullableUpdateIntegrationRequest struct {

@@ -12,8 +12,6 @@ package outgoing_webhooks_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the OutgoingWebhookDetails type satisfies the MappedNullable interface at compile time
@@ -21,20 +19,16 @@ var _ MappedNullable = &OutgoingWebhookDetails{}
 
 // OutgoingWebhookDetails struct for OutgoingWebhookDetails
 type OutgoingWebhookDetails struct {
-	Label string `json:"label"`
-	Type WebhookType `json:"type"`
+	Label *string `json:"label,omitempty"`
+	Type *WebhookType `json:"type,omitempty"`
 }
-
-type _OutgoingWebhookDetails OutgoingWebhookDetails
 
 // NewOutgoingWebhookDetails instantiates a new OutgoingWebhookDetails object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOutgoingWebhookDetails(label string, type_ WebhookType) *OutgoingWebhookDetails {
+func NewOutgoingWebhookDetails() *OutgoingWebhookDetails {
 	this := OutgoingWebhookDetails{}
-	this.Label = label
-	this.Type = type_
 	return &this
 }
 
@@ -46,52 +40,68 @@ func NewOutgoingWebhookDetailsWithDefaults() *OutgoingWebhookDetails {
 	return &this
 }
 
-// GetLabel returns the Label field value
+// GetLabel returns the Label field value if set, zero value otherwise.
 func (o *OutgoingWebhookDetails) GetLabel() string {
-	if o == nil {
+	if o == nil || IsNil(o.Label) {
 		var ret string
 		return ret
 	}
-
-	return o.Label
+	return *o.Label
 }
 
-// GetLabelOk returns a tuple with the Label field value
+// GetLabelOk returns a tuple with the Label field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookDetails) GetLabelOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Label) {
 		return nil, false
 	}
-	return &o.Label, true
+	return o.Label, true
 }
 
-// SetLabel sets field value
+// HasLabel returns a boolean if a field has been set.
+func (o *OutgoingWebhookDetails) HasLabel() bool {
+	if o != nil && !IsNil(o.Label) {
+		return true
+	}
+
+	return false
+}
+
+// SetLabel gets a reference to the given string and assigns it to the Label field.
 func (o *OutgoingWebhookDetails) SetLabel(v string) {
-	o.Label = v
+	o.Label = &v
 }
 
-// GetType returns the Type field value
+// GetType returns the Type field value if set, zero value otherwise.
 func (o *OutgoingWebhookDetails) GetType() WebhookType {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret WebhookType
 		return ret
 	}
-
-	return o.Type
+	return *o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookDetails) GetTypeOk() (*WebhookType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
-	return &o.Type, true
+	return o.Type, true
 }
 
-// SetType sets field value
+// HasType returns a boolean if a field has been set.
+func (o *OutgoingWebhookDetails) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given WebhookType and assigns it to the Type field.
 func (o *OutgoingWebhookDetails) SetType(v WebhookType) {
-	o.Type = v
+	o.Type = &v
 }
 
 func (o OutgoingWebhookDetails) MarshalJSON() ([]byte, error) {
@@ -104,47 +114,13 @@ func (o OutgoingWebhookDetails) MarshalJSON() ([]byte, error) {
 
 func (o OutgoingWebhookDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["label"] = o.Label
-	toSerialize["type"] = o.Type
+	if !IsNil(o.Label) {
+		toSerialize["label"] = o.Label
+	}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
 	return toSerialize, nil
-}
-
-func (o *OutgoingWebhookDetails) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"label",
-		"type",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varOutgoingWebhookDetails := _OutgoingWebhookDetails{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOutgoingWebhookDetails)
-
-	if err != nil {
-		return err
-	}
-
-	*o = OutgoingWebhookDetails(varOutgoingWebhookDetails)
-
-	return err
 }
 
 type NullableOutgoingWebhookDetails struct {

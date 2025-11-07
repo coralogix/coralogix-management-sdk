@@ -12,8 +12,6 @@ package policies_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the AtomicOverwriteLogPoliciesResponse type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &AtomicOverwriteLogPoliciesResponse{}
 
 // AtomicOverwriteLogPoliciesResponse This data structue is obtained when overwriting log policies atomically.
 type AtomicOverwriteLogPoliciesResponse struct {
-	CreateResponses []CreatePolicyResponse `json:"createResponses"`
+	CreateResponses []CreatePolicyResponse `json:"createResponses,omitempty"`
 }
-
-type _AtomicOverwriteLogPoliciesResponse AtomicOverwriteLogPoliciesResponse
 
 // NewAtomicOverwriteLogPoliciesResponse instantiates a new AtomicOverwriteLogPoliciesResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAtomicOverwriteLogPoliciesResponse(createResponses []CreatePolicyResponse) *AtomicOverwriteLogPoliciesResponse {
+func NewAtomicOverwriteLogPoliciesResponse() *AtomicOverwriteLogPoliciesResponse {
 	this := AtomicOverwriteLogPoliciesResponse{}
-	this.CreateResponses = createResponses
 	return &this
 }
 
@@ -44,26 +39,34 @@ func NewAtomicOverwriteLogPoliciesResponseWithDefaults() *AtomicOverwriteLogPoli
 	return &this
 }
 
-// GetCreateResponses returns the CreateResponses field value
+// GetCreateResponses returns the CreateResponses field value if set, zero value otherwise.
 func (o *AtomicOverwriteLogPoliciesResponse) GetCreateResponses() []CreatePolicyResponse {
-	if o == nil {
+	if o == nil || IsNil(o.CreateResponses) {
 		var ret []CreatePolicyResponse
 		return ret
 	}
-
 	return o.CreateResponses
 }
 
-// GetCreateResponsesOk returns a tuple with the CreateResponses field value
+// GetCreateResponsesOk returns a tuple with the CreateResponses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AtomicOverwriteLogPoliciesResponse) GetCreateResponsesOk() ([]CreatePolicyResponse, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.CreateResponses) {
 		return nil, false
 	}
 	return o.CreateResponses, true
 }
 
-// SetCreateResponses sets field value
+// HasCreateResponses returns a boolean if a field has been set.
+func (o *AtomicOverwriteLogPoliciesResponse) HasCreateResponses() bool {
+	if o != nil && !IsNil(o.CreateResponses) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreateResponses gets a reference to the given []CreatePolicyResponse and assigns it to the CreateResponses field.
 func (o *AtomicOverwriteLogPoliciesResponse) SetCreateResponses(v []CreatePolicyResponse) {
 	o.CreateResponses = v
 }
@@ -78,45 +81,10 @@ func (o AtomicOverwriteLogPoliciesResponse) MarshalJSON() ([]byte, error) {
 
 func (o AtomicOverwriteLogPoliciesResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["createResponses"] = o.CreateResponses
+	if !IsNil(o.CreateResponses) {
+		toSerialize["createResponses"] = o.CreateResponses
+	}
 	return toSerialize, nil
-}
-
-func (o *AtomicOverwriteLogPoliciesResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"createResponses",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varAtomicOverwriteLogPoliciesResponse := _AtomicOverwriteLogPoliciesResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAtomicOverwriteLogPoliciesResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = AtomicOverwriteLogPoliciesResponse(varAtomicOverwriteLogPoliciesResponse)
-
-	return err
 }
 
 type NullableAtomicOverwriteLogPoliciesResponse struct {
