@@ -8,7 +8,7 @@ package v1
 
 import (
 	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/common/v1"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -1195,7 +1195,7 @@ var File_com_coralogix_rules_v1_rule_groups_service_proto protoreflect.FileDescr
 
 const file_com_coralogix_rules_v1_rule_groups_service_proto_rawDesc = "" +
 	"\n" +
-	"0com/coralogix/rules/v1/rule_groups_service.proto\x12\x16com.coralogix.rules.v1\x1a!com/coralogix/rules/v1/rule.proto\x1a'com/coralogix/rules/v1/rule_group.proto\x1a)com/coralogix/rules/v1/rule_matcher.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"0\n" +
+	"0com/coralogix/rules/v1/rule_groups_service.proto\x12\x16com.coralogix.rules.v1\x1a!com/coralogix/rules/v1/rule.proto\x1a'com/coralogix/rules/v1/rule_group.proto\x1a)com/coralogix/rules/v1/rule_matcher.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"0\n" +
 	"\x13GetRuleGroupRequest\x12\x19\n" +
 	"\bgroup_id\x18\x01 \x01(\tR\agroupId\"\x17\n" +
 	"\x15ListRuleGroupsRequest\"\\\n" +
@@ -1281,7 +1281,7 @@ const file_com_coralogix_rules_v1_rule_groups_service_proto_rawDesc = "" +
 	"\x06groups\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06groups\x121\n" +
 	"\x05rules\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\x05rules2\xee\x16\n" +
 	"\x11RuleGroupsService\x12\xce\x02\n" +
-	"\fGetRuleGroup\x12+.com.coralogix.rules.v1.GetRuleGroupRequest\x1a,.com.coralogix.rules.v1.GetRuleGroupResponse\"\xe2\x01\x92Az\n" +
+	"\fGetRuleGroup\x12+.com.coralogix.rules.v1.GetRuleGroupRequest\x1a,.com.coralogix.rules.v1.GetRuleGroupResponse\"\xe2\x01\x9aAz\n" +
 	"\x13Rule Groups Service\x12\x0eGet Rule GroupJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1290,7 +1290,7 @@ const file_com_coralogix_rules_v1_rule_groups_service_proto_rawDesc = "" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorʸ\x02\x10\n" +
 	"\x0eget rule group\x82\xd3\xe4\x93\x02KZ\x1f\x12\x1d/api/v1/rulegroups/{group_id}\x12(/parsing-rules/rule-groups/v1/{group_id}\x12\xc5\x02\n" +
-	"\x0eListRuleGroups\x12-.com.coralogix.rules.v1.ListRuleGroupsRequest\x1a..com.coralogix.rules.v1.ListRuleGroupsResponse\"\xd3\x01\x92A|\n" +
+	"\x0eListRuleGroups\x12-.com.coralogix.rules.v1.ListRuleGroupsRequest\x1a..com.coralogix.rules.v1.ListRuleGroupsResponse\"\xd3\x01\x9aA|\n" +
 	"\x13Rule Groups Service\x12\x10List Rule GroupsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1299,7 +1299,7 @@ const file_com_coralogix_rules_v1_rule_groups_service_proto_rawDesc = "" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorʸ\x02\x15\n" +
 	"\x13get all rule groups\x82\xd3\xe4\x93\x025Z\x14\x12\x12/api/v1/rulegroups\x12\x1d/parsing-rules/rule-groups/v1\x12\xca\x02\n" +
-	"\x0fCreateRuleGroup\x12..com.coralogix.rules.v1.CreateRuleGroupRequest\x1a/.com.coralogix.rules.v1.CreateRuleGroupResponse\"\xd5\x01\x92A}\n" +
+	"\x0fCreateRuleGroup\x12..com.coralogix.rules.v1.CreateRuleGroupRequest\x1a/.com.coralogix.rules.v1.CreateRuleGroupResponse\"\xd5\x01\x9aA}\n" +
 	"\x13Rule Groups Service\x12\x11Create Rule GroupJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1308,7 +1308,7 @@ const file_com_coralogix_rules_v1_rule_groups_service_proto_rawDesc = "" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorʸ\x02\x13\n" +
 	"\x11create rule group\x82\xd3\xe4\x93\x028:\x01*Z\x14\"\x12/api/v1/rulegroups\"\x1d/parsing-rules/rule-groups/v1\x12\xe9\x02\n" +
-	"\x0fUpdateRuleGroup\x12..com.coralogix.rules.v1.UpdateRuleGroupRequest\x1a/.com.coralogix.rules.v1.UpdateRuleGroupResponse\"\xf4\x01\x92A}\n" +
+	"\x0fUpdateRuleGroup\x12..com.coralogix.rules.v1.UpdateRuleGroupRequest\x1a/.com.coralogix.rules.v1.UpdateRuleGroupResponse\"\xf4\x01\x9aA}\n" +
 	"\x13Rule Groups Service\x12\x11Update Rule GroupJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1318,7 +1318,7 @@ const file_com_coralogix_rules_v1_rule_groups_service_proto_rawDesc = "" +
 	"\x15Internal server errorʸ\x02\x13\n" +
 	"\x11update rule group\x82\xd3\xe4\x93\x02W:\n" +
 	"rule_groupZ\x1f\x1a\x1d/api/v1/rulegroups/{group_id}\x1a(/parsing-rules/rule-groups/v1/{group_id}\x12\xdd\x02\n" +
-	"\x0fDeleteRuleGroup\x12..com.coralogix.rules.v1.DeleteRuleGroupRequest\x1a/.com.coralogix.rules.v1.DeleteRuleGroupResponse\"\xe8\x01\x92A}\n" +
+	"\x0fDeleteRuleGroup\x12..com.coralogix.rules.v1.DeleteRuleGroupRequest\x1a/.com.coralogix.rules.v1.DeleteRuleGroupResponse\"\xe8\x01\x9aA}\n" +
 	"\x13Rule Groups Service\x12\x11Delete Rule GroupJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1327,7 +1327,7 @@ const file_com_coralogix_rules_v1_rule_groups_service_proto_rawDesc = "" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorʸ\x02\x13\n" +
 	"\x11delete rule group\x82\xd3\xe4\x93\x02KZ\x1f*\x1d/api/v1/rulegroups/{group_id}*(/parsing-rules/rule-groups/v1/{group_id}\x12\xdf\x02\n" +
-	"\x13BulkDeleteRuleGroup\x122.com.coralogix.rules.v1.BulkDeleteRuleGroupRequest\x1a3.com.coralogix.rules.v1.BulkDeleteRuleGroupResponse\"\xde\x01\x92A\x82\x01\n" +
+	"\x13BulkDeleteRuleGroup\x122.com.coralogix.rules.v1.BulkDeleteRuleGroupRequest\x1a3.com.coralogix.rules.v1.BulkDeleteRuleGroupResponse\"\xde\x01\x9aA\x82\x01\n" +
 	"\x13Rule Groups Service\x12\x16Bulk Delete Rule GroupJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1336,7 +1336,7 @@ const file_com_coralogix_rules_v1_rule_groups_service_proto_rawDesc = "" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorʸ\x02\x19\n" +
 	"\x17bulk delete rule groups\x82\xd3\xe4\x93\x025Z\x14*\x12/api/v1/rulegroups*\x1d/parsing-rules/rule-groups/v1\x12\xff\x02\n" +
-	"\x18GetRuleGroupModelMapping\x127.com.coralogix.rules.v1.GetRuleGroupModelMappingRequest\x1a8.com.coralogix.rules.v1.GetRuleGroupModelMappingResponse\"\xef\x01\x92A\x88\x01\n" +
+	"\x18GetRuleGroupModelMapping\x127.com.coralogix.rules.v1.GetRuleGroupModelMappingRequest\x1a8.com.coralogix.rules.v1.GetRuleGroupModelMappingResponse\"\xef\x01\x9aA\x88\x01\n" +
 	"\x13Rule Groups Service\x12\x1cGet Rule Group Model MappingJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1345,7 +1345,7 @@ const file_com_coralogix_rules_v1_rule_groups_service_proto_rawDesc = "" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorʸ\x02\x12\n" +
 	"\x10get rule mapping\x82\xd3\xe4\x93\x02G:\x01*Z\x1b\"\x19/api/v1/rulegroup-mapping\"%/parsing-rules/rule-groups/v1/mapping\x12\x86\x03\n" +
-	"\x15GetCompanyUsageLimits\x124.com.coralogix.rules.v1.GetCompanyUsageLimitsRequest\x1a5.com.coralogix.rules.v1.GetCompanyUsageLimitsResponse\"\xff\x01\x92A\x84\x01\n" +
+	"\x15GetCompanyUsageLimits\x124.com.coralogix.rules.v1.GetCompanyUsageLimitsRequest\x1a5.com.coralogix.rules.v1.GetCompanyUsageLimitsResponse\"\xff\x01\x9aA\x84\x01\n" +
 	"\x13Rule Groups Service\x12\x18Get Company Usage LimitsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1353,7 +1353,7 @@ const file_com_coralogix_rules_v1_rule_groups_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorʸ\x02\x1f\n" +
-	"\x1dget company usage with limits\x82\xd3\xe4\x93\x02N:\x01*Z#\"!/api/v1/rulegroups/company-limits\"$/parsing-rules/rule-groups/v1/limits\x1a:\x92A7\n" +
+	"\x1dget company usage with limits\x82\xd3\xe4\x93\x02N:\x01*Z#\"!/api/v1/rulegroups/company-limits\"$/parsing-rules/rule-groups/v1/limits\x1a:\x9aA7\n" +
 	"\x13Rule Groups Service\x12 A service to manage rule groups.b\x06proto3"
 
 var (

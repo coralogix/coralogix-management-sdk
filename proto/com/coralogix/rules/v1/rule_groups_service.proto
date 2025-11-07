@@ -10,17 +10,17 @@ import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/wrappers.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 service RuleGroupsService {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Rule Groups Service"
     description: "A service to manage rule groups."
   };
 
   rpc GetRuleGroup(GetRuleGroupRequest) returns (GetRuleGroupResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "get rule group";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -43,7 +43,7 @@ service RuleGroupsService {
   }
   rpc ListRuleGroups(ListRuleGroupsRequest) returns (ListRuleGroupsResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "get all rule groups";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -66,7 +66,7 @@ service RuleGroupsService {
   }
   rpc CreateRuleGroup(CreateRuleGroupRequest) returns (CreateRuleGroupResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "create rule group";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -90,7 +90,7 @@ service RuleGroupsService {
   }
   rpc UpdateRuleGroup(UpdateRuleGroupRequest) returns (UpdateRuleGroupResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "update rule group";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -118,7 +118,7 @@ service RuleGroupsService {
       delete: "/parsing-rules/rule-groups/v1/{group_id}"
       additional_bindings: {delete: "/api/v1/rulegroups/{group_id}"}
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -138,7 +138,7 @@ service RuleGroupsService {
 
   rpc BulkDeleteRuleGroup(BulkDeleteRuleGroupRequest) returns (BulkDeleteRuleGroupResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "bulk delete rule groups";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -162,7 +162,7 @@ service RuleGroupsService {
 
   rpc GetRuleGroupModelMapping(GetRuleGroupModelMappingRequest) returns (GetRuleGroupModelMappingResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "get rule mapping";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -187,7 +187,7 @@ service RuleGroupsService {
 
   rpc GetCompanyUsageLimits(GetCompanyUsageLimitsRequest) returns (GetCompanyUsageLimitsResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "get company usage with limits";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}

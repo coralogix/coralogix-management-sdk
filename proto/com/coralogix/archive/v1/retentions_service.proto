@@ -105,7 +105,7 @@ message GetRetentionsEnabledResponse {
 
 service RetentionsService {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
-    name: "Retensions Service"
+    name: "Retentions Service"
     description: "View and manage retentions"
   };
   rpc GetRetentions(GetRetentionsRequest) returns (GetRetentionsResponse) {
