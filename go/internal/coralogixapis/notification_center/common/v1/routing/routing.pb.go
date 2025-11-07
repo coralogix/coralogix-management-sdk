@@ -236,7 +236,7 @@ var File_com_coralogixapis_notification_center_common_v1_routing_routing_proto p
 
 const file_com_coralogixapis_notification_center_common_v1_routing_routing_proto_rawDesc = "" +
 	"\n" +
-	"Ecom/coralogixapis/notification_center/common/v1/routing/routing.proto\x12-com.coralogixapis.notification_center.routing\x1a9com/coralogixapis/notification_center/common/common.proto\x1aCcom/coralogixapis/notification_center/common/v1/config_fields.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xc9\x05\n" +
+	"Ecom/coralogixapis/notification_center/common/v1/routing/routing.proto\x12-com.coralogixapis.notification_center.routing\x1a9com/coralogixapis/notification_center/common/common.proto\x1aCcom/coralogixapis/notification_center/common/v1/config_fields.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xb3\x05\n" +
 	"\vRoutingRule\x12>\n" +
 	"\tcondition\x18\x01 \x01(\tB \x9aA\x1dJ\x1b\"alertDef.priority == 'P3'\"R\tcondition\x12V\n" +
 	"\atargets\x18\x02 \x03(\v2<.com.coralogixapis.notification_center.routing.RoutingTargetR\atargets\x12t\n" +
@@ -247,19 +247,19 @@ const file_com_coralogixapis_notification_center_common_v1_routing_routing_proto
 	"entityType\x88\x01\x01\x1a@\n" +
 	"\x12CustomDetailsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xcf\x01\x9aA\xcb\x01\n" +
-	"L*\fRouting Rule2&Defines routing rule for notifications\xd2\x01\tcondition\xd2\x01\atargets*{\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xb9\x01\x9aA\xb5\x01\n" +
+	"6*\fRouting Rule2&Defines routing rule for notifications*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/B\a\n" +
 	"\x05_nameB\x0e\n" +
-	"\f_entity_type\"\xf3\x04\n" +
+	"\f_entity_type\"\xe4\x04\n" +
 	"\rRoutingTarget\x12v\n" +
 	"\x0ecustom_details\x18\x04 \x03(\v2O.com.coralogixapis.notification_center.routing.RoutingTarget.CustomDetailsEntryR\rcustomDetails\x12!\n" +
 	"\fconnector_id\x18\a \x01(\tR\vconnectorId\x12 \n" +
 	"\tpreset_id\x18\b \x01(\tH\x00R\bpresetId\x88\x01\x01\x1a@\n" +
 	"\x12CustomDetailsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xcc\x01\x9aA\xc8\x01\n" +
-	"I*\x0eRouting Target2(Defines routing target for notifications\xd2\x01\fconnector_id*{\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xbd\x01\x9aA\xb9\x01\n" +
+	":*\x0eRouting Target2(Defines routing target for notifications*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/B\f\n" +
 	"\n" +
 	"_preset_idJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03J\x04\b\x03\x10\x04J\x04\b\x05\x10\x06J\x04\b\x06\x10\aR\x17deprecated_connector_idR\x14deprecated_preset_idR\x10config_overridesR\x14connector_identifierR\x11preset_identifier\"\xcb\x02\n" +

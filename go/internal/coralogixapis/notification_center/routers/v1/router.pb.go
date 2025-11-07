@@ -316,7 +316,7 @@ var File_com_coralogixapis_notification_center_routers_v1_router_proto protorefl
 
 const file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDesc = "" +
 	"\n" +
-	"=com/coralogixapis/notification_center/routers/v1/router.proto\x120com.coralogixapis.notification_center.routers.v1\x1a9com/coralogixapis/notification_center/common/common.proto\x1aEcom/coralogixapis/notification_center/common/v1/routing/routing.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xa7\n" +
+	"=com/coralogixapis/notification_center/routers/v1/router.proto\x120com.coralogixapis.notification_center.routers.v1\x1a9com/coralogixapis/notification_center/common/common.proto\x1aEcom/coralogixapis/notification_center/common/v1/routing/routing.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x92\n" +
 	"\n" +
 	"\fGlobalRouter\x12@\n" +
 	"\x02id\x18\x01 \x01(\tB+\x9aA(J&\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"H\x00R\x02id\x88\x01\x01\x12$\n" +
@@ -338,8 +338,8 @@ const file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDesc
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aE\n" +
 	"\x17EntityLabelMatcherEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xf2\x01\x9aA\xee\x01\n" +
-	"o*\rGlobal Router2IDefines a set of pre-configured routing rules for directing notifications\xd2\x01\ventity_type\xd2\x01\x04name*{\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xdd\x01\x9aA\xd9\x01\n" +
+	"Z*\rGlobal Router2IDefines a set of pre-configured routing rules for directing notifications*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/B\x05\n" +
 	"\x03_idB\x0e\n" +
 	"\f_create_timeB\x0e\n" +

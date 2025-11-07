@@ -26,10 +26,6 @@ message MessageConfigField {
     json_schema: {
       title: "Message Config Field"
       description: "Message config field provides a way to define a template that can be used to render the notification content"
-      required: [
-        "field_name",
-        "template"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"

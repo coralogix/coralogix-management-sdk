@@ -149,7 +149,6 @@ message CreateCustomPresetRequest {
     json_schema: {
       title: "Create Custom Preset Request"
       description: "Request to create a new custom preset"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -164,7 +163,6 @@ message CreateCustomPresetResponse {
     json_schema: {
       title: "Create Custom Preset Response"
       description: "Response containing the created custom preset"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -179,7 +177,6 @@ message ReplaceCustomPresetRequest {
     json_schema: {
       title: "Replace Custom Preset Request"
       description: "Request to replace an existing custom preset"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -194,7 +191,6 @@ message ReplaceCustomPresetResponse {
     json_schema: {
       title: "Replace Custom Preset Response"
       description: "Response containing the updated custom preset"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -209,7 +205,6 @@ message DeleteCustomPresetRequest {
     json_schema: {
       title: "Delete Custom Preset Request"
       description: "Request to delete a custom preset"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -242,7 +237,6 @@ message SetPresetAsDefaultRequest {
     json_schema: {
       title: "Set Preset As Default Request"
       description: "Request to set custom or system preset as default"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -286,7 +280,6 @@ message BatchGetPresetsRequest {
     json_schema: {
       title: "Batch Get Presets Request"
       description: "Request to get multiple presets by their ids"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -301,7 +294,6 @@ message BatchGetPresetsResponse {
     json_schema: {
       title: "Batch Get Presets Response"
       description: "Response containing the requested presets and any IDs not found"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -332,7 +324,6 @@ message GetSystemDefaultPresetSummaryRequest {
     json_schema: {
       title: "Get System Default Preset Summary Request"
       description: "Returns the preset summary for the system default preset (i.e., not a user-selected default)"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"

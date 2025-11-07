@@ -140,7 +140,6 @@ message CreateConnectorRequest {
     json_schema: {
       title: "Create Connector Request"
       description: "Request to create a new connector"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -154,7 +153,6 @@ message CreateConnectorResponse {
     json_schema: {
       title: "Create Connector Response"
       description: "Response containing the created connector"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -169,7 +167,6 @@ message ReplaceConnectorRequest {
     json_schema: {
       title: "Replace Connector Request"
       description: "Request to replace an existing connector"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -184,7 +181,6 @@ message ReplaceConnectorResponse {
     json_schema: {
       title: "Replace Connector Response"
       description: "Response containing the updated connector"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -202,7 +198,6 @@ message DeleteConnectorRequest {
     json_schema: {
       title: "Delete Connector Request"
       description: "Request to delete a connector"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -222,7 +217,6 @@ message GetConnectorRequest {
     json_schema: {
       title: "Get Connector Request"
       description: "Request to retrieve a connector"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -238,7 +232,6 @@ message GetConnectorResponse {
     json_schema: {
       title: "Get Connector Response"
       description: "Response containing the requested connector"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -256,7 +249,6 @@ message ListConnectorsRequest {
     json_schema: {
       title: "List Connectors Request"
       description: "Request to list connectors with optional filtering"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -272,7 +264,6 @@ message ListConnectorsResponse {
     json_schema: {
       title: "List Connectors Response"
       description: "Response containing a list of connectors"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -290,7 +281,6 @@ message BatchGetConnectorsRequest {
     json_schema: {
       title: "Batch Get Connectors Request"
       description: "Request to retrieve multiple connectors by their IDs"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -305,7 +295,6 @@ message BatchGetConnectorsResponse {
     json_schema: {
       title: "Batch Get Connectors Response"
       description: "Response containing the requested connectors and any IDs not found"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -324,7 +313,6 @@ message BatchGetConnectorSummariesRequest {
     json_schema: {
       title: "Batch Get Connector Summaries Request"
       description: "Request to retrieve multiple connector summaries by their IDs"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -338,7 +326,6 @@ message BatchGetConnectorSummariesResponse {
     json_schema: {
       title: "Batch Get Connector Summaries Response"
       description: "Response containing the requested connector summaries and any IDs not found"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -357,7 +344,6 @@ message ListConnectorSummariesRequest {
     json_schema: {
       title: "List Connector Summaries Request"
       description: "Request to list summaries of connectors with optional filtering"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -372,7 +358,6 @@ message ListConnectorSummariesResponse {
     json_schema: {
       title: "List Connector Summaries Response"
       description: "Response containing summaries of connectors"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -387,7 +372,6 @@ message GetConnectorTypeSummariesRequest {
     json_schema: {
       title: "Get Connector Type Summaries Request"
       description: "Request to retrieve summaries of connector types"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -403,7 +387,6 @@ message GetConnectorTypeSummariesResponse {
     json_schema: {
       title: "Get Connector Type Summaries Response"
       description: "Response containing summaries of connector types"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"

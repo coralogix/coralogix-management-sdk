@@ -406,7 +406,7 @@ allow_policies = ["src/com/coralogixapis/metrics_rule_manager/v1/groups.proto"]
 
 [cx-api-notification-center]
 url = 'github.com/coralogix/cx-api-notification-center'
-revision = "v1.4.1"
+revision = "v1.4.2"
 allow_policies = [
     "src/com/coralogixapis/notification_center/common/common.proto",
     "src/com/coralogixapis/notification_center/common/config_overrides.proto",

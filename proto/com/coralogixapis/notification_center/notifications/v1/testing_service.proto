@@ -88,7 +88,6 @@ message TestConnectorConfigRequest {
     json_schema: {
       title: "Test Connector Config Request"
       description: "Request to test a connector configuration"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -202,7 +201,6 @@ message TestRoutingConditionValidRequest {
     json_schema: {
       title: "Test Routing Condition Valid Request"
       description: "Request to check that provided routing condition is valid"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -217,7 +215,6 @@ message TestRoutingConditionValidResponse {
     json_schema: {
       title: "Test Routing Condition Valid Response"
       description: "Response which specifies condition evaluation result or error"
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"

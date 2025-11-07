@@ -19,10 +19,6 @@ message GlobalRouter {
     json_schema: {
       title: "Global Router"
       description: "Defines a set of pre-configured routing rules for directing notifications"
-      required: [
-        "entity_type",
-        "name"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
