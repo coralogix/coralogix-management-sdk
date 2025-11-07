@@ -1,11 +1,11 @@
 syntax = "proto3";
 package com.coralogixapis.slo.v1;
-
-import "com/coralogixapis/slo/v1/slo.proto";
-import "com/coralogixapis/slo/v1/slo_alert.proto";
 import "google/api/annotations.proto";
+import "com/coralogixapis/slo/v1/slo.proto";
 import "google/rpc/code.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
+import "com/coralogixapis/slo/v1/slo_alert.proto";
+
 
 message ResponseStatus {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
@@ -17,7 +17,7 @@ message ResponseStatus {
   };
   google.rpc.Code status_code = 1;
   optional string message = 2;
-  map<string, string> details = 3;
+  map<string,string> details = 3;
 }
 
 message ReplaceSloAlertsValidationsRequest {
@@ -141,7 +141,7 @@ message ListSlosRequest {
       required: []
     }
   };
-  repeated SloFilter filters = 1;
+  SloFilters filters = 1;
 }
 
 message ListSlosResponse {
@@ -231,6 +231,8 @@ message BatchExecuteSloResponse {
   ResponseStatus status = 2;
 }
 
+
+
 message GetZeroStateRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
@@ -240,6 +242,8 @@ message GetZeroStateRequest {
     }
   };
 }
+
+
 
 message GetZeroStateResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
@@ -277,9 +281,8 @@ service SlosService {
     };
 
     option (google.api.http) = {
-      post: "/slo/slo/v1"
+      post: "/v1/slo/slos"
       body: "slo"
-      additional_bindings: {post: "/v1/slo/slos"}
     };
   }
 
@@ -302,9 +305,8 @@ service SlosService {
     };
 
     option (google.api.http) = {
-      put: "/slo/slo/v1"
+      put: "/v1/slo/slos"
       body: "slo"
-      additional_bindings: {put: "/v1/slo/slos"}
     };
   }
 
@@ -327,9 +329,8 @@ service SlosService {
     };
 
     option (google.api.http) = {
-      post: "/slo/slo/v1/validate"
+      post: "/v1/slo/slos/validate"
       body: "slo"
-      additional_bindings: {post: "/v1/slo/slos/validate"}
     };
   }
 
@@ -352,8 +353,7 @@ service SlosService {
     };
 
     option (google.api.http) = {
-      delete: "/slo/slo/v1/{id}"
-      additional_bindings: {delete: "/v1/slo/slos/{id}"}
+      delete: "/v1/slo/slos/{id}"
     };
   }
 
@@ -376,8 +376,7 @@ service SlosService {
     };
 
     option (google.api.http) = {
-      get: "/slo/slo/v1/{id}"
-      additional_bindings: {get: "/v1/slo/slos/{id}"}
+      get: "/v1/slo/slos/{id}"
     };
   }
 
@@ -400,8 +399,7 @@ service SlosService {
     };
 
     option (google.api.http) = {
-      get: "/slo/slo/v1"
-      additional_bindings: {get: "/v1/slo/slos"}
+      get: "/v1/slo/slos"
     };
   }
 
@@ -424,8 +422,7 @@ service SlosService {
     };
 
     option (google.api.http) = {
-      get: "/slo/slo/v1/zeroState"
-      additional_bindings: {get: "/v1/slo/slos/zeroState"}
+      get: "/v1/slo/slos/zeroState"
     };
   }
 
@@ -448,8 +445,7 @@ service SlosService {
     };
 
     option (google.api.http) = {
-      get: "/slo/slo/v1/batch"
-      additional_bindings: {get: "/v1/slo/slos:batchGet"}
+      get: "/v1/slo/slos:batchGet"
     };
   }
 
@@ -471,9 +467,11 @@ service SlosService {
       summary: "Batch Execute Slo"
     };
 
+
     option (google.api.http) = {
-      post: "/slo/slo/v1/batch"
-      additional_bindings: {post: "/v1/slo/slos:batchExecute"}
+      post: "/v1/slo/slos:batchExecute"
     };
   }
+
+
 }

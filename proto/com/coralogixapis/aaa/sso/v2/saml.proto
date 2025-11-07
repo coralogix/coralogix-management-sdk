@@ -10,7 +10,6 @@ message GetSPParametersRequest {
     json_schema: {
       title: "Get SP Parameters Request"
       description: "This data structure is used to retrieve the parameters of a SAML service provider"
-      required: ["team_id"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
@@ -26,13 +25,6 @@ message SPParameters {
     json_schema: {
       title: "Service Provider Parameters"
       description: "This data structure represents the parameters of a SAML service provider"
-      required: [
-        "metadata_url",
-        "signing_cert_pem",
-        "name_id_format",
-        "assertion_consumer_service_url",
-        "binding"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
@@ -51,7 +43,6 @@ message GetSPParametersResponse {
     json_schema: {
       title: "Get SP Parameters Response"
       description: "This data structure is obtained as a response to a request to retrieve the parameters of a SAML service provider"
-      required: ["params"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
@@ -66,12 +57,6 @@ message IDPParameters {
     json_schema: {
       title: "IDP Parameters"
       description: "This data structure represents a set of SAML identity provider parameters"
-      required: [
-        "active",
-        "metadata",
-        "team_entity_id",
-        "group_names"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
@@ -92,10 +77,6 @@ message SetIDPParametersRequest {
     json_schema: {
       title: "Set IDP Parameters Request"
       description: "This data structure is used to set the parameters of a SAML identity provider"
-      required: [
-        "team_id",
-        "params"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
@@ -113,10 +94,6 @@ message SetActiveRequest {
     json_schema: {
       title: "Set Active Request"
       description: "This data structure is used to activate or deactivate a SAML identity provider"
-      required: [
-        "team_id",
-        "is_active"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
@@ -134,7 +111,6 @@ message GetConfigurationRequest {
     json_schema: {
       title: "Get Configuration Request"
       description: "This data structure is used to retrieve the configuration of a SAML service provider and identity provider"
-      required: ["team_id"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
@@ -153,11 +129,6 @@ message GetConfigurationResponse {
     json_schema: {
       title: "Get Configuration Response"
       description: "This data structure is obtained as a response to a request to retrieve the configuration of a SAML service provider and identity provider"
-      required: [
-        "team_id",
-        "sp_parameters",
-        "idp_parameters"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
