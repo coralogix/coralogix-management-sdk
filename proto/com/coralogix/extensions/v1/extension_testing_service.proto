@@ -129,48 +129,33 @@ service ExtensionTestingService {
 
 message InitializeTestingRevisionRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Initialize testing revision request"
-      required: ["extension_data"]
-    }
+    json_schema: {title: "Initialize testing revision request"}
   };
   ExtensionData extension_data = 1;
 }
 
 message InitializeTestingRevisionResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Initialize testing revision response"
-      required: []
-    }
+    json_schema: {title: "Initialize testing revision response"}
   };
 }
 
 message CleanupTestingRevisionRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Cleanup testing revision request"
-      required: ["id"]
-    }
+    json_schema: {title: "Cleanup testing revision request"}
   };
   google.protobuf.StringValue id = 1;
 }
 
 message CleanupTestingRevisionResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Cleanup testing revision response"
-      required: []
-    }
+    json_schema: {title: "Cleanup testing revision response"}
   };
 }
 
 message TestExtensionRevisionRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Test extension revision request"
-      required: ["extension_data"]
-    }
+    json_schema: {title: "Test extension revision request"}
   };
   ExtensionData extension_data = 1;
   google.protobuf.BoolValue cleanup_after_test = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "false"}];
@@ -178,9 +163,6 @@ message TestExtensionRevisionRequest {
 
 message TestExtensionRevisionResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Test extension revision response"
-      required: []
-    }
+    json_schema: {title: "Test extension revision response"}
   };
 }

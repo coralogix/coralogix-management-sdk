@@ -3954,19 +3954,19 @@ const file_com_coralogix_integrations_v1_integration_proto_rawDesc = "" +
 	"L*\tARM stack2?This data structure represents an Azure Resource Manager stack.*\xb3\x01\n" +
 	"UFind out more about the Azure Resource Manager (ARM) integration in our documentation\x12Zhttps://coralogix.com/docs/integrations/azure/azure-resource-manager-integration-packages/\"u\n" +
 	"\fNoDeployment:e\x9aAb\n" +
-	"`*\rNo deployment2OThis data structure represents an integration that does not require deployment.\"\xb5\x03\n" +
+	"`*\rNo deployment2OThis data structure represents an integration that does not require deployment.\"\xa1\x03\n" +
 	"\x11IntegrationStatus\x12\\\n" +
 	"\x11connection_status\x18\x01 \x01(\x0e2/.com.coralogix.integrations.v1.ConnectionStatusR\x10connectionStatus\x12W\n" +
 	"\adetails\x18\x03 \x03(\v2=.com.coralogix.integrations.v1.IntegrationStatus.DetailsEntryR\adetails\x128\n" +
 	"\bmessages\x18\x04 \x03(\v2\x1c.google.protobuf.StringValueR\bmessages\x1a:\n" +
 	"\fDetailsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:d\x9aAa\n" +
-	"_*\x12Integration status25This data structure represents an integration status.\xd2\x01\x11connection_statusJ\x04\b\x02\x10\x03R\amessage\"\xc7\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:P\x9aAM\n" +
+	"K*\x12Integration status25This data structure represents an integration status.J\x04\b\x02\x10\x03R\amessage\"\xc7\x01\n" +
 	"\x0eIntegrationDoc\x120\n" +
 	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x04name\x120\n" +
 	"\x04link\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04link:Q\x9aAN\n" +
-	"L*\x0fIntegration doc29This data structure represents integration documentation.\"\x95\r\n" +
+	"L*\x0fIntegration doc29This data structure represents integration documentation.\"\x8b\r\n" +
 	"\x0fIntegrationType\x12R\n" +
 	"\amanaged\x18\x01 \x01(\v26.com.coralogix.integrations.v1.IntegrationType.ManagedH\x00R\amanaged\x12X\n" +
 	"\tuntracked\x18\x02 \x01(\v28.com.coralogix.integrations.v1.IntegrationType.UntrackedH\x00R\tuntracked\x12g\n" +
@@ -3974,7 +3974,7 @@ const file_com_coralogix_integrations_v1_integration_proto_rawDesc = "" +
 	"\x03arm\x18\x04 \x01(\v27.com.coralogix.integrations.v1.IntegrationType.AzureArmH\x00R\x03arm\x12\x85\x01\n" +
 	"\x1apush_based_contextual_data\x18\x05 \x01(\v2F.com.coralogix.integrations.v1.IntegrationType.PushBasedContextualDataH\x00R\x17pushBasedContextualData\x12h\n" +
 	"\x0fcontextual_data\x18\x06 \x01(\v2=.com.coralogix.integrations.v1.IntegrationType.ContextualDataH\x00R\x0econtextualData\x12h\n" +
-	"\x0fgeneric_webhook\x18\a \x01(\v2=.com.coralogix.integrations.v1.IntegrationType.GenericWebhookH\x00R\x0egenericWebhook\x1a\xec\x01\n" +
+	"\x0fgeneric_webhook\x18\a \x01(\v2=.com.coralogix.integrations.v1.IntegrationType.GenericWebhookH\x00R\x0egenericWebhook\x1a\xe2\x01\n" +
 	"\aManaged\x12X\n" +
 	"\avariant\x18\x02 \x01(\x0e2>.com.coralogix.integrations.v1.IntegrationType.Managed.VariantR\avariant\"6\n" +
 	"\aVariant\x12\v\n" +
@@ -3982,8 +3982,8 @@ const file_com_coralogix_integrations_v1_integration_proto_rawDesc = "" +
 	"\x03GCP\x10\x01\x12\t\n" +
 	"\x05OAUTH\x10\x02\x12\n" +
 	"\n" +
-	"\x06CUSTOM\x10\x03:O\x9aAL\n" +
-	"J*\aManaged25This data structure represents a managed integration.\xd2\x01\avariant\x1aW\n" +
+	"\x06CUSTOM\x10\x03:E\x9aAB\n" +
+	"@*\aManaged25This data structure represents a managed integration.\x1aW\n" +
 	"\tUntracked:J\x9aAG\n" +
 	"E*\tUntracked28This data structure represents an untracked integration.\x1ae\n" +
 	"\x0eCloudformation:S\x9aAP\n" +
@@ -4061,7 +4061,7 @@ const file_com_coralogix_integrations_v1_integration_proto_rawDesc = "" +
 	"\x10integration_type\x18\x02 \x01(\v2..com.coralogix.integrations.v1.IntegrationTypeR\x0fintegrationType\x12P\n" +
 	"\trevisions\x18\x03 \x03(\v22.com.coralogix.integrations.v1.IntegrationRevisionR\trevisions\x12?\n" +
 	"\ffeature_flag\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueR\vfeatureFlag:]\x9aAZ\n" +
-	"X*\x16Integration definition2>This data structure represents a definition of an integration.\"\xbf:\n" +
+	"X*\x16Integration definition2>This data structure represents a definition of an integration.\"\xb1:\n" +
 	"\x13IntegrationRevision\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x12[\n" +
 	"\x06fields\x18\x03 \x03(\v2C.com.coralogix.integrations.v1.IntegrationRevision.FieldInformationR\x06fields\x12P\n" +
@@ -4133,7 +4133,7 @@ const file_com_coralogix_integrations_v1_integration_proto_rawDesc = "" +
 	"\aoptions\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueR\aoptions\x12F\n" +
 	"\rdefault_value\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueH\x00R\fdefaultValue\x88\x01\x01:\x16\x9aA\x13\n" +
 	"\x11*\x0fSelection valueB\x10\n" +
-	"\x0e_default_value\x1a\x8f\x03\n" +
+	"\x0e_default_value\x1a\x88\x03\n" +
 	"\x0eFieldCondition\x12c\n" +
 	"\x04type\x18\x01 \x01(\x0e2O.com.coralogix.integrations.v1.IntegrationRevision.FieldCondition.ConditionTypeR\x04type\x12d\n" +
 	"\x06values\x18\x02 \x03(\v2L.com.coralogix.integrations.v1.IntegrationRevision.FieldCondition.FieldValueR\x06values\x1ad\n" +
@@ -4146,12 +4146,12 @@ const file_com_coralogix_integrations_v1_integration_proto_rawDesc = "" +
 	"\rConditionType\x12\v\n" +
 	"\aUNKNOWN\x10\x00\x12\x06\n" +
 	"\x02OR\x10\x01\x12\a\n" +
-	"\x03AND\x10\x02:\x1d\x9aA\x1a\n" +
-	"\x18*\x0fField condition\xd2\x01\x04type\x1au\n" +
+	"\x03AND\x10\x02:\x16\x9aA\x13\n" +
+	"\x11*\x0fField condition\x1au\n" +
 	"\x05Group\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x120\n" +
 	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04name:\f\x9aA\t\n" +
-	"\a*\x05Group\x1a\x87\x0e\n" +
+	"\a*\x05Group\x1a\x80\x0e\n" +
 	"\x10FieldInformation\x12X\n" +
 	"\x06single\x18e \x01(\v2>.com.coralogix.integrations.v1.IntegrationRevision.SingleValueH\x00R\x06single\x12a\n" +
 	"\n" +
@@ -4176,8 +4176,8 @@ const file_com_coralogix_integrations_v1_integration_proto_rawDesc = "" +
 	"\bgroup_id\x18\v \x01(\v2\x1c.google.protobuf.StringValueH\x04R\agroupId\x88\x01\x01\x12H\n" +
 	"\x0eupgrade_notice\x18\f \x01(\v2\x1c.google.protobuf.StringValueH\x05R\rupgradeNotice\x88\x01\x01\x12J\n" +
 	"\x0fallowed_pattern\x18\r \x01(\v2\x1c.google.protobuf.StringValueH\x06R\x0eallowedPattern\x88\x01\x01\x12Z\n" +
-	"\x17documentation_reference\x18\x0e \x01(\v2\x1c.google.protobuf.StringValueH\aR\x16documentationReference\x88\x01\x01:\x1f\x9aA\x1c\n" +
-	"\x1a*\x11Field information\xd2\x01\x04typeB\a\n" +
+	"\x17documentation_reference\x18\x0e \x01(\v2\x1c.google.protobuf.StringValueH\aR\x16documentationReference\x88\x01\x01:\x18\x9aA\x15\n" +
+	"\x13*\x11Field informationB\a\n" +
 	"\x05valueB\n" +
 	"\n" +
 	"\b_tooltipB\x0e\n" +

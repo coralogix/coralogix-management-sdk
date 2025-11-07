@@ -31,13 +31,7 @@ message GenericWebhookConfig {
   }
 
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Generic webhook configuration"
-      required: [
-        "uuid",
-        "method"
-      ]
-    }
+    json_schema: {title: "Generic webhook configuration"}
   };
 
   google.protobuf.StringValue uuid = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"d838cd7b-087b-40c6-bc33-80997020f5d0\""}];
@@ -48,10 +42,7 @@ message GenericWebhookConfig {
 
 message SlackConfig {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Slack configuration"
-      required: []
-    }
+    json_schema: {title: "Slack configuration"}
   };
   enum DigestType {
     UNKNOWN = 0;
@@ -69,10 +60,7 @@ message SlackConfig {
 
   message Digest {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Slack digest configuration"
-        required: ["type"]
-      }
+      json_schema: {title: "Slack digest configuration"}
     };
     DigestType type = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "1"}];
     google.protobuf.BoolValue is_active = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "false"}];
@@ -80,10 +68,7 @@ message SlackConfig {
 
   message Attachment {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Slack attachment configuration"
-        required: ["type"]
-      }
+      json_schema: {title: "Slack attachment configuration"}
     };
     AttachmentType type = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "1"}];
     google.protobuf.BoolValue is_active = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "false"}];
@@ -95,23 +80,14 @@ message SlackConfig {
 
 message PagerDutyConfig {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "PagerDuty configuration"
-      required: ["service_key"]
-    }
+    json_schema: {title: "PagerDuty configuration"}
   };
   google.protobuf.StringValue service_key = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"pager_duty_service_key\""}];
 }
 
 message SendLogConfig {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Send log configuration"
-      required: [
-        "uuid",
-        "payload"
-      ]
-    }
+    json_schema: {title: "Send log configuration"}
   };
   google.protobuf.StringValue uuid = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"d838cd7b-087b-40c6-bc33-80997020f5d0\""}];
   google.protobuf.StringValue payload = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "{\"key\": \"value\"}"}];
@@ -119,42 +95,26 @@ message SendLogConfig {
 
 message EmailGroupConfig {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Email group configuration"
-      required: []
-    }
+    json_schema: {title: "Email group configuration"}
   };
   repeated google.protobuf.StringValue email_addresses = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "[\"example@coralogix.com\"]"}];
 }
 
 message MicrosoftTeamsConfig {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Microsoft Teams configuration"
-      required: []
-    }
+    json_schema: {title: "Microsoft Teams configuration"}
   };
 }
 
 message MSTeamsWorkflowConfig {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Microsoft Teams workflow configuration"
-      required: []
-    }
+    json_schema: {title: "Microsoft Teams workflow configuration"}
   };
 }
 
 message JiraConfig {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Jira configuration"
-      required: [
-        "api_token",
-        "email",
-        "project_key"
-      ]
-    }
+    json_schema: {title: "Jira configuration"}
   };
   google.protobuf.StringValue api_token = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"jira_api_token\""}];
   google.protobuf.StringValue email = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"jira_email\""}];
@@ -163,22 +123,13 @@ message JiraConfig {
 
 message OpsgenieConfig {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Opsgenie configuration"
-      required: []
-    }
+    json_schema: {title: "Opsgenie configuration"}
   };
 }
 
 message DemistoConfig {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Demisto configuration"
-      required: [
-        "uuid",
-        "payload"
-      ]
-    }
+    json_schema: {title: "Demisto configuration"}
   };
   google.protobuf.StringValue uuid = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"d838cd7b-087b-40c6-bc33-80997020f5d0\""}];
   google.protobuf.StringValue payload = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "{\"key\": \"value\"}"}];
@@ -186,16 +137,7 @@ message DemistoConfig {
 
 message AwsEventBridgeConfig {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "AWS EventBridge configuration"
-      required: [
-        "event_bus_arn",
-        "detail",
-        "detail_type",
-        "source",
-        "role_name"
-      ]
-    }
+    json_schema: {title: "AWS EventBridge configuration"}
   };
   reserved 5;
   reserved "region"; // Region was deprecated, as it could be inferred from the event bus arn.
@@ -214,14 +156,7 @@ message IbmEventNotificationsConfig {
   }
 
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "IBM event notification configuration"
-      required: [
-        "event_notifications_instance_id",
-        "region_id",
-        "endpoint_type"
-      ]
-    }
+    json_schema: {title: "IBM event notification configuration"}
   };
 
   google.protobuf.StringValue event_notifications_instance_id = 1;
@@ -233,16 +168,7 @@ message IbmEventNotificationsConfig {
 
 message OutgoingWebhook {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Outgoing webhook"
-      required: [
-        "id",
-        "type",
-        "name",
-        "created_at",
-        "external_id"
-      ]
-    }
+    json_schema: {title: "Outgoing webhook"}
   };
   google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"webhook_id\""}];
   WebhookType type = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "1"}];
@@ -269,14 +195,7 @@ message OutgoingWebhook {
 
 message OutgoingWebhookInputData {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Outgoing webhook input data"
-      required: [
-        "name",
-        "config",
-        "type"
-      ]
-    }
+    json_schema: {title: "Outgoing webhook input data"}
   };
   WebhookType type = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "1"}];
   google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"my_webhook\""}];
@@ -299,15 +218,7 @@ message OutgoingWebhookInputData {
 
 message OutgoingWebhookSummary {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Outgoing webhook summary"
-      required: [
-        "id",
-        "name",
-        "created_at",
-        "external_id"
-      ]
-    }
+    json_schema: {title: "Outgoing webhook summary"}
   };
   google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"webhook_id\""}];
   google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"my_webhook\""}];
@@ -319,16 +230,7 @@ message OutgoingWebhookSummary {
 
 message OutgoingWebhookExtendedSummary {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Outgoing webhook extended summary"
-      required: [
-        "id",
-        "name",
-        "created_at",
-        "external_id",
-        "type"
-      ]
-    }
+    json_schema: {title: "Outgoing webhook extended summary"}
   };
   google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"webhook_id\""}];
   WebhookType type = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "1"}];
@@ -341,13 +243,7 @@ message OutgoingWebhookExtendedSummary {
 
 message OutgoingWebhookDetails {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Outgoing webhook details"
-      required: [
-        "label",
-        "type"
-      ]
-    }
+    json_schema: {title: "Outgoing webhook details"}
   };
   WebhookType type = 1;
   google.protobuf.StringValue label = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"example_label\""}];
@@ -355,16 +251,7 @@ message OutgoingWebhookDetails {
 
 message OutboundWebhookSummary {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Outbound webhook summary"
-      required: [
-        "id",
-        "name",
-        "created_at",
-        "external_id",
-        "type"
-      ]
-    }
+    json_schema: {title: "Outbound webhook summary"}
   };
   google.protobuf.StringValue id = 1;
   WebhookType type = 2;

@@ -278,22 +278,22 @@ var File_com_coralogix_extensions_v1_extension_testing_service_proto protoreflec
 
 const file_com_coralogix_extensions_v1_extension_testing_service_proto_rawDesc = "" +
 	"\n" +
-	";com/coralogix/extensions/v1/extension_testing_service.proto\x12\x1bcom.coralogix.extensions.v1\x1a+com/coralogix/extensions/v1/extension.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xb2\x01\n" +
+	";com/coralogix/extensions/v1/extension_testing_service.proto\x12\x1bcom.coralogix.extensions.v1\x1a+com/coralogix/extensions/v1/extension.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xa1\x01\n" +
 	" InitializeTestingRevisionRequest\x12Q\n" +
-	"\x0eextension_data\x18\x01 \x01(\v2*.com.coralogix.extensions.v1.ExtensionDataR\rextensionData:;\x9aA8\n" +
-	"6*#Initialize testing revision request\xd2\x01\x0eextension_data\"P\n" +
+	"\x0eextension_data\x18\x01 \x01(\v2*.com.coralogix.extensions.v1.ExtensionDataR\rextensionData:*\x9aA'\n" +
+	"%*#Initialize testing revision request\"P\n" +
 	"!InitializeTestingRevisionResponse:+\x9aA(\n" +
-	"&*$Initialize testing revision response\"{\n" +
+	"&*$Initialize testing revision response\"v\n" +
 	"\x1dCleanupTestingRevisionRequest\x12,\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id:,\x9aA)\n" +
-	"'* Cleanup testing revision request\xd2\x01\x02id\"J\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id:'\x9aA$\n" +
+	"\"* Cleanup testing revision request\"J\n" +
 	"\x1eCleanupTestingRevisionResponse:(\x9aA%\n" +
-	"#*!Cleanup testing revision response\"\x80\x02\n" +
+	"#*!Cleanup testing revision response\"\xef\x01\n" +
 	"\x1cTestExtensionRevisionRequest\x12Q\n" +
 	"\x0eextension_data\x18\x01 \x01(\v2*.com.coralogix.extensions.v1.ExtensionDataR\rextensionData\x12T\n" +
 	"\x12cleanup_after_test\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueB\n" +
-	"\x9aA\a:\x05falseR\x10cleanupAfterTest:7\x9aA4\n" +
-	"2*\x1fTest extension revision request\xd2\x01\x0eextension_data\"H\n" +
+	"\x9aA\a:\x05falseR\x10cleanupAfterTest:&\x9aA#\n" +
+	"!*\x1fTest extension revision request\"H\n" +
 	"\x1dTestExtensionRevisionResponse:'\x9aA$\n" +
 	"\"* Test extension revision response2\xa3\f\n" +
 	"\x17ExtensionTestingService\x12\xe9\x03\n" +

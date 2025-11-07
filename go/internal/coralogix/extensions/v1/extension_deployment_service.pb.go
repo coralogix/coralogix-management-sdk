@@ -736,12 +736,12 @@ const file_com_coralogix_extensions_v1_extension_deployment_service_proto_rawDes
 	"\n" +
 	">com/coralogix/extensions/v1/extension_deployment_service.proto\x12\x1bcom.coralogix.extensions.v1\x1a+com/coralogix/extensions/v1/extension.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"F\n" +
 	"\x1cGetDeployedExtensionsRequest:&\x9aA#\n" +
-	"!*\x1fGet deployed extensions request\"\x81\a\n" +
+	"!*\x1fGet deployed extensions request\"\xc6\x06\n" +
 	"\x1dGetDeployedExtensionsResponse\x12\x86\x01\n" +
-	"\x13deployed_extensions\x18\x01 \x03(\v2L.com.coralogix.extensions.v1.GetDeployedExtensionsResponse.DeployedExtensionB\a\x9aA\x04:\x02[]R\x12deployedExtensions\x1a\xaf\x01\n" +
+	"\x13deployed_extensions\x18\x01 \x03(\v2L.com.coralogix.extensions.v1.GetDeployedExtensionsResponse.DeployedExtensionB\a\x9aA\x04:\x02[]R\x12deployedExtensions\x1a\x98\x01\n" +
 	"\x18DeployedExtensionSummary\x12Y\n" +
-	"\x14deployed_item_counts\x18\x01 \x01(\v2'.com.coralogix.extensions.v1.ItemCountsR\x12deployedItemCounts:8\x9aA5\n" +
-	"3*\x1aDeployed extension summary\xd2\x01\x14deployed_item_counts\x1a\xfb\x03\n" +
+	"\x14deployed_item_counts\x18\x01 \x01(\v2'.com.coralogix.extensions.v1.ItemCountsR\x12deployedItemCounts:!\x9aA\x1e\n" +
+	"\x1c*\x1aDeployed extension summary\x1a\xd7\x03\n" +
 	"\x11DeployedExtension\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x126\n" +
 	"\aversion\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\aversion\x12I\n" +
@@ -750,9 +750,9 @@ const file_com_coralogix_extensions_v1_extension_deployment_service_proto_rawDes
 	"subsystems\x18\x04 \x03(\v2\x1c.google.protobuf.StringValueB\a\x9aA\x04:\x02[]R\n" +
 	"subsystems\x12@\n" +
 	"\bitem_ids\x18\x05 \x03(\v2\x1c.google.protobuf.StringValueB\a\x9aA\x04:\x02[]R\aitemIds\x12m\n" +
-	"\asummary\x18\x06 \x01(\v2S.com.coralogix.extensions.v1.GetDeployedExtensionsResponse.DeployedExtensionSummaryR\asummary:=\x9aA:\n" +
-	"8*\x12Deployed extension\xd2\x01\x02id\xd2\x01\aversion\xd2\x01\asummary\xd2\x01\bitem_ids:'\x9aA$\n" +
-	"\"* Get deployed extensions response\"\x86\x03\n" +
+	"\asummary\x18\x06 \x01(\v2S.com.coralogix.extensions.v1.GetDeployedExtensionsResponse.DeployedExtensionSummaryR\asummary:\x19\x9aA\x16\n" +
+	"\x14*\x12Deployed extension:'\x9aA$\n" +
+	"\"* Get deployed extensions response\"\xec\x02\n" +
 	"\x13ExtensionDeployment\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x126\n" +
 	"\aversion\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\aversion\x12@\n" +
@@ -760,8 +760,8 @@ const file_com_coralogix_extensions_v1_extension_deployment_service_proto_rawDes
 	"\fapplications\x18\x04 \x03(\v2\x1c.google.protobuf.StringValueB\a\x9aA\x04:\x02[]R\fapplications\x12E\n" +
 	"\n" +
 	"subsystems\x18\x05 \x03(\v2\x1c.google.protobuf.StringValueB\a\x9aA\x04:\x02[]R\n" +
-	"subsystems:5\x9aA2\n" +
-	"0*\x14Extension deployment\xd2\x01\x02id\xd2\x01\aversion\xd2\x01\bitem_ids\"\x90\x04\n" +
+	"subsystems:\x1b\x9aA\x18\n" +
+	"\x16*\x14Extension deployment\"\xf6\x03\n" +
 	"\x16DeployExtensionRequest\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x126\n" +
 	"\aversion\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\aversion\x12@\n" +
@@ -770,12 +770,12 @@ const file_com_coralogix_extensions_v1_extension_deployment_service_proto_rawDes
 	"\n" +
 	"subsystems\x18\x05 \x03(\v2\x1c.google.protobuf.StringValueB\a\x9aA\x04:\x02[]R\n" +
 	"subsystems\x12h\n" +
-	"\x14extension_deployment\x18\x06 \x01(\v20.com.coralogix.extensions.v1.ExtensionDeploymentH\x00R\x13extensionDeployment\x88\x01\x01:9\x9aA6\n" +
-	"4*\x18Deploy extension request\xd2\x01\x02id\xd2\x01\aversion\xd2\x01\bitem_idsB\x17\n" +
-	"\x15_extension_deployment\"\xb7\x01\n" +
+	"\x14extension_deployment\x18\x06 \x01(\v20.com.coralogix.extensions.v1.ExtensionDeploymentH\x00R\x13extensionDeployment\x88\x01\x01:\x1f\x9aA\x1c\n" +
+	"\x1a*\x18Deploy extension requestB\x17\n" +
+	"\x15_extension_deployment\"\xa0\x01\n" +
 	"\x17DeployExtensionResponse\x12c\n" +
-	"\x14extension_deployment\x18\x01 \x01(\v20.com.coralogix.extensions.v1.ExtensionDeploymentR\x13extensionDeployment:7\x9aA4\n" +
-	"2*\x19Deploy extension response\xd2\x01\x14extension_deployment\"\x90\x04\n" +
+	"\x14extension_deployment\x18\x01 \x01(\v20.com.coralogix.extensions.v1.ExtensionDeploymentR\x13extensionDeployment: \x9aA\x1d\n" +
+	"\x1b*\x19Deploy extension response\"\xf6\x03\n" +
 	"\x16UpdateExtensionRequest\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x126\n" +
 	"\aversion\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\aversion\x12@\n" +
@@ -784,25 +784,25 @@ const file_com_coralogix_extensions_v1_extension_deployment_service_proto_rawDes
 	"\n" +
 	"subsystems\x18\x05 \x03(\v2\x1c.google.protobuf.StringValueB\a\x9aA\x04:\x02[]R\n" +
 	"subsystems\x12h\n" +
-	"\x14extension_deployment\x18\x06 \x01(\v20.com.coralogix.extensions.v1.ExtensionDeploymentH\x00R\x13extensionDeployment\x88\x01\x01:9\x9aA6\n" +
-	"4*\x18Update extension request\xd2\x01\x02id\xd2\x01\aversion\xd2\x01\bitem_idsB\x17\n" +
-	"\x15_extension_deployment\"\xb7\x01\n" +
+	"\x14extension_deployment\x18\x06 \x01(\v20.com.coralogix.extensions.v1.ExtensionDeploymentH\x00R\x13extensionDeployment\x88\x01\x01:\x1f\x9aA\x1c\n" +
+	"\x1a*\x18Update extension requestB\x17\n" +
+	"\x15_extension_deployment\"\xa0\x01\n" +
 	"\x17UpdateExtensionResponse\x12c\n" +
-	"\x14extension_deployment\x18\x01 \x01(\v20.com.coralogix.extensions.v1.ExtensionDeploymentR\x13extensionDeployment:7\x9aA4\n" +
-	"2*\x19Update extension response\xd2\x01\x14extension_deployment\"\xd5\x01\n" +
+	"\x14extension_deployment\x18\x01 \x01(\v20.com.coralogix.extensions.v1.ExtensionDeploymentR\x13extensionDeployment: \x9aA\x1d\n" +
+	"\x1b*\x19Update extension response\"\xd0\x01\n" +
 	"\x18UndeployExtensionRequest\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x12W\n" +
-	"\x14kept_extension_items\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueB\a\x9aA\x04:\x02[]R\x12keptExtensionItems:2\x9aA/\n" +
-	"-*&Revert deployment of extension request\xd2\x01\x02id\"\xa7\x04\n" +
+	"\x14kept_extension_items\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueB\a\x9aA\x04:\x02[]R\x12keptExtensionItems:-\x9aA*\n" +
+	"(*&Revert deployment of extension request\"\x88\x04\n" +
 	"\x19UndeployExtensionResponse\x12m\n" +
 	"\ffailed_items\x18\x01 \x03(\v2A.com.coralogix.extensions.v1.UndeployExtensionResponse.FailedItemB\a\x9aA\x04:\x02[]R\vfailedItems\x12h\n" +
-	"\x14extension_deployment\x18\x02 \x01(\v20.com.coralogix.extensions.v1.ExtensionDeploymentH\x00R\x13extensionDeployment\x88\x01\x01\x1a\xe7\x01\n" +
+	"\x14extension_deployment\x18\x02 \x01(\v20.com.coralogix.extensions.v1.ExtensionDeploymentH\x00R\x13extensionDeployment\x88\x01\x01\x1a\xc8\x01\n" +
 	"\n" +
 	"FailedItem\x125\n" +
 	"\aitem_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x06itemId\x129\n" +
 	"\tremote_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\bremoteId\x124\n" +
-	"\x06reason\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\x06reason:1\x9aA.\n" +
-	",*\vFailed item\xd2\x01\aitem_id\xd2\x01\tremote_id\xd2\x01\x06reason:.\x9aA+\n" +
+	"\x06reason\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\x06reason:\x12\x9aA\x0f\n" +
+	"\r*\vFailed item:.\x9aA+\n" +
 	")*'Revert deployment of extension responseB\x17\n" +
 	"\x15_extension_deployment2\xc5\x0f\n" +
 	"\x1aExtensionDeploymentService\x12\xc6\x03\n" +

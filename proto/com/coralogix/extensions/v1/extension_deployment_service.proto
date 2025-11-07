@@ -154,40 +154,23 @@ service ExtensionDeploymentService {
 
 message GetDeployedExtensionsRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Get deployed extensions request"
-      required: []
-    }
+    json_schema: {title: "Get deployed extensions request"}
   };
 }
 
 message GetDeployedExtensionsResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Get deployed extensions response"
-      required: []
-    }
+    json_schema: {title: "Get deployed extensions response"}
   };
   message DeployedExtensionSummary {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Deployed extension summary"
-        required: ["deployed_item_counts"]
-      }
+      json_schema: {title: "Deployed extension summary"}
     };
     ItemCounts deployed_item_counts = 1;
   }
   message DeployedExtension {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Deployed extension"
-        required: [
-          "id",
-          "version",
-          "summary",
-          "item_ids"
-        ]
-      }
+      json_schema: {title: "Deployed extension"}
     };
     google.protobuf.StringValue id = 1;
     google.protobuf.StringValue version = 2;
@@ -202,14 +185,7 @@ message GetDeployedExtensionsResponse {
 
 message ExtensionDeployment {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Extension deployment"
-      required: [
-        "id",
-        "version",
-        "item_ids"
-      ]
-    }
+    json_schema: {title: "Extension deployment"}
   };
   google.protobuf.StringValue id = 1;
   google.protobuf.StringValue version = 2;
@@ -220,14 +196,7 @@ message ExtensionDeployment {
 
 message DeployExtensionRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Deploy extension request"
-      required: [
-        "id",
-        "version",
-        "item_ids"
-      ]
-    }
+    json_schema: {title: "Deploy extension request"}
   };
   google.protobuf.StringValue id = 1;
   google.protobuf.StringValue version = 2;
@@ -239,24 +208,14 @@ message DeployExtensionRequest {
 
 message DeployExtensionResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Deploy extension response"
-      required: ["extension_deployment"]
-    }
+    json_schema: {title: "Deploy extension response"}
   };
   ExtensionDeployment extension_deployment = 1;
 }
 
 message UpdateExtensionRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Update extension request"
-      required: [
-        "id",
-        "version",
-        "item_ids"
-      ]
-    }
+    json_schema: {title: "Update extension request"}
   };
   google.protobuf.StringValue id = 1;
   google.protobuf.StringValue version = 2;
@@ -268,20 +227,14 @@ message UpdateExtensionRequest {
 
 message UpdateExtensionResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Update extension response"
-      required: ["extension_deployment"]
-    }
+    json_schema: {title: "Update extension response"}
   };
   ExtensionDeployment extension_deployment = 1;
 }
 
 message UndeployExtensionRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Revert deployment of extension request"
-      required: ["id"]
-    }
+    json_schema: {title: "Revert deployment of extension request"}
   };
   google.protobuf.StringValue id = 1;
   repeated google.protobuf.StringValue kept_extension_items = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "[]"}];
@@ -289,21 +242,11 @@ message UndeployExtensionRequest {
 
 message UndeployExtensionResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Revert deployment of extension response"
-      required: []
-    }
+    json_schema: {title: "Revert deployment of extension response"}
   };
   message FailedItem {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Failed item"
-        required: [
-          "item_id",
-          "remote_id",
-          "reason"
-        ]
-      }
+      json_schema: {title: "Failed item"}
     };
     google.protobuf.StringValue item_id = 1;
     google.protobuf.StringValue remote_id = 2;
