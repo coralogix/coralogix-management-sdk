@@ -12,7 +12,6 @@ message CloudFormationStack {
     json_schema: {
       title: "CloudFormation stack"
       description: "This data structure represents a CloudFormation stack."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/integrations/aws/aws-cloudformation-logs/"
@@ -28,7 +27,6 @@ message ARMStack {
     json_schema: {
       title: "ARM stack"
       description: "This data structure represents an Azure Resource Manager stack."
-      required: []
     }
     external_docs: {
       url: "https://coralogix.com/docs/integrations/azure/azure-resource-manager-integration-packages/"
@@ -44,7 +42,6 @@ message NoDeployment {
     json_schema: {
       title: "No deployment"
       description: "This data structure represents an integration that does not require deployment."
-      required: []
     }
   };
 }
@@ -61,7 +58,6 @@ message IntegrationStatus {
     json_schema: {
       title: "Integration status"
       description: "This data structure represents an integration status."
-      required: ["connection_status"]
     }
   };
   reserved 2;
@@ -76,7 +72,6 @@ message IntegrationDoc {
     json_schema: {
       title: "Integration doc"
       description: "This data structure represents integration documentation."
-      required: []
     }
   };
   google.protobuf.StringValue name = 1;
@@ -88,7 +83,6 @@ message IntegrationType {
     json_schema: {
       title: "Integration type"
       description: "This data structure represents an integration type."
-      required: []
     }
   };
   message Managed {
@@ -96,7 +90,6 @@ message IntegrationType {
       json_schema: {
         title: "Managed"
         description: "This data structure represents a managed integration."
-        required: ["variant"]
       }
     };
     enum Variant {
@@ -113,7 +106,6 @@ message IntegrationType {
       json_schema: {
         title: "Untracked"
         description: "This data structure represents an untracked integration."
-        required: []
       }
     };
   }
@@ -122,7 +114,6 @@ message IntegrationType {
       json_schema: {
         title: "CloudFormation"
         description: "This data structure represents a CloudFormation integration."
-        required: []
       }
     };
   }
@@ -131,7 +122,6 @@ message IntegrationType {
       json_schema: {
         title: "Azure ARM"
         description: "This data structure represents an Azure ARM integration."
-        required: []
       }
     };
   }
@@ -143,7 +133,6 @@ message IntegrationType {
       json_schema: {
         title: "Push based contextual data"
         description: "This data structure represents a push based contextual data integration."
-        required: []
       }
     };
   }
@@ -152,7 +141,6 @@ message IntegrationType {
       json_schema: {
         title: "Contextual data"
         description: "This data structure represents a contextual data integration."
-        required: []
       }
     };
   }
@@ -161,7 +149,6 @@ message IntegrationType {
       json_schema: {
         title: "Generic webhook"
         description: "This data structure represents a generic webhook integration."
-        required: []
       }
     };
   }
@@ -182,7 +169,6 @@ message Integration {
     json_schema: {
       title: "Integration"
       description: "This data structure represents an integration"
-      required: []
     }
   };
   google.protobuf.StringValue id = 1; // short_name in the integrations.integration_definitions
@@ -198,30 +184,21 @@ message Integration {
 
 message RevisionRef {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Revision reference"
-      required: []
-    }
+    json_schema: {title: "Revision reference"}
   };
   string version = 1; //integration revision version
   string description_md = 2;
 }
 message LocalChangelog {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Local changelog"
-      required: []
-    }
+    json_schema: {title: "Local changelog"}
   };
   repeated RevisionRef changes = 1;
 }
 
 message ExternalUrl {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "External URL"
-      required: []
-    }
+    json_schema: {title: "External URL"}
   };
   string url = 1;
 }
@@ -231,7 +208,6 @@ message IntegrationDetails {
     json_schema: {
       title: "Integration details"
       description: "This data structure represents a set of integration details."
-      required: []
     }
   };
   reserved 2, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113;
@@ -239,17 +215,11 @@ message IntegrationDetails {
 
   message DefaultIntegrationDetails {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Default integration details"
-        required: []
-      }
+      json_schema: {title: "Default integration details"}
     };
     message RegisteredInstance {
       option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-          title: "Registered instance"
-          required: []
-        }
+        json_schema: {title: "Registered instance"}
       };
       reserved 5, 6;
       reserved "status", "status_message";
@@ -286,7 +256,6 @@ message IntegrationDefinition {
     json_schema: {
       title: "Integration definition"
       description: "This data structure represents a definition of an integration."
-      required: []
     }
   };
   google.protobuf.StringValue key = 1; // short_name in the integrations.integration_definitions
@@ -300,15 +269,11 @@ message IntegrationRevision {
     json_schema: {
       title: "Integration revision"
       description: "This data structure represents an integration revision."
-      required: []
     }
   };
   message CloudFormationTemplate {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "CloudFormation template"
-        required: []
-      }
+      json_schema: {title: "CloudFormation template"}
     };
     google.protobuf.StringValue template_url = 1;
     map<string, string> parameters = 2;
@@ -321,7 +286,6 @@ message IntegrationRevision {
       json_schema: {
         title: "Managed service"
         description: "This data structure represents a managed service."
-        required: []
       }
     };
   }
@@ -331,7 +295,6 @@ message IntegrationRevision {
       json_schema: {
         title: "Helm chart"
         description: "This data structure represents a Helm chart."
-        required: []
       }
     };
     optional google.protobuf.StringValue template = 1;
@@ -344,7 +307,6 @@ message IntegrationRevision {
       json_schema: {
         title: "Terraform"
         description: "This data structure represents a Terraform integration."
-        required: []
       }
     };
     repeated ConfigurationBlock configuration_blocks = 1;
@@ -355,7 +317,6 @@ message IntegrationRevision {
       json_schema: {
         title: "RUM"
         description: "This data structure represents a RUM integration."
-        required: []
       }
     };
     repeated CommandInformation browser_sdk_commands = 1;
@@ -367,7 +328,6 @@ message IntegrationRevision {
       json_schema: {
         title: "Azure ARM template"
         description: "This data structure represents an azure ARM template."
-        required: []
       }
     };
     google.protobuf.StringValue template_url = 1;
@@ -388,10 +348,7 @@ message IntegrationRevision {
 
   message ListTextValue {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "List text value"
-        required: []
-      }
+      json_schema: {title: "List text value"}
     };
     reserved 1, 3;
     reserved "values", "preselected_key";
@@ -401,50 +358,35 @@ message IntegrationRevision {
 
   message SingleValue {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Single value"
-        required: []
-      }
+      json_schema: {title: "Single value"}
     };
     optional google.protobuf.StringValue default_value = 1;
   }
 
   message SingleBooleanValue {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Single boolean value"
-        required: []
-      }
+      json_schema: {title: "Single boolean value"}
     };
     optional google.protobuf.BoolValue default_value = 1;
   }
 
   message SingleNumericValue {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Single numeric value"
-        required: []
-      }
+      json_schema: {title: "Single numeric value"}
     };
     optional google.protobuf.DoubleValue default_value = 1;
   }
 
   message MultipleSelectionValue {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Multiple selection value"
-        required: []
-      }
+      json_schema: {title: "Multiple selection value"}
     };
     repeated google.protobuf.StringValue options = 1;
   }
 
   message SelectionValue {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Selection value"
-        required: []
-      }
+      json_schema: {title: "Selection value"}
     };
     repeated google.protobuf.StringValue options = 1;
     optional google.protobuf.StringValue default_value = 2;
@@ -452,10 +394,7 @@ message IntegrationRevision {
 
   message FieldCondition {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Field condition"
-        required: ["type"]
-      }
+      json_schema: {title: "Field condition"}
     };
     enum ConditionType {
       UNKNOWN = 0;
@@ -464,10 +403,7 @@ message IntegrationRevision {
     }
     message FieldValue {
       option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-          title: "Field value"
-          required: []
-        }
+        json_schema: {title: "Field value"}
       };
       string field_name = 1;
       string value_pattern = 2;
@@ -479,10 +415,7 @@ message IntegrationRevision {
 
   message Group {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Group"
-        required: []
-      }
+      json_schema: {title: "Group"}
     };
     google.protobuf.StringValue id = 1;
     google.protobuf.StringValue name = 2;
@@ -490,10 +423,7 @@ message IntegrationRevision {
 
   message FieldInformation {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Field information"
-        required: ["type"]
-      }
+      json_schema: {title: "Field information"}
     };
     oneof value {
       SingleValue single = 101;
@@ -522,10 +452,7 @@ message IntegrationRevision {
 
   message CommandInformation {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Command information"
-        required: []
-      }
+      json_schema: {title: "Command information"}
     };
     enum Language {
       UNKNOWN = 0;
@@ -534,10 +461,7 @@ message IntegrationRevision {
     }
     message Link {
       option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-          title: "Link"
-          required: []
-        }
+        json_schema: {title: "Link"}
       };
       string key = 1;
       string text = 2;
@@ -553,10 +477,7 @@ message IntegrationRevision {
 
   message ConfigurationBlock {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Configuration block"
-        required: []
-      }
+      json_schema: {title: "Configuration block"}
     };
     google.protobuf.StringValue name = 1;
     google.protobuf.StringValue value = 2;
@@ -565,10 +486,7 @@ message IntegrationRevision {
 
   message IntegrationGuide {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Integration guide"
-        required: []
-      }
+      json_schema: {title: "Integration guide"}
     };
     google.protobuf.StringValue introduction = 1;
     optional google.protobuf.StringValue installation_requirements = 2;
@@ -592,27 +510,18 @@ message IntegrationRevision {
 
 message Parameter {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Parameter"
-      required: []
-    }
+    json_schema: {title: "Parameter"}
   };
   message StringList {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "String list"
-        required: []
-      }
+      json_schema: {title: "String list"}
     };
     repeated google.protobuf.StringValue values = 1;
   }
 
   message ApiKeyData {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "API key data"
-        required: []
-      }
+      json_schema: {title: "API key data"}
     };
     google.protobuf.StringValue id = 1;
     optional google.protobuf.StringValue value = 2;
@@ -620,10 +529,7 @@ message Parameter {
 
   message SensitiveDataPlaceholder {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Sensitive data placeholder"
-        required: []
-      }
+      json_schema: {title: "Sensitive data placeholder"}
     };
   }
 
@@ -640,10 +546,7 @@ message Parameter {
 
 message GenericIntegrationParameters {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Generic integration parameters"
-      required: []
-    }
+    json_schema: {title: "Generic integration parameters"}
   };
   repeated Parameter parameters = 1;
 }
@@ -653,7 +556,6 @@ message IntegrationMetadata {
     json_schema: {
       title: "Integration metadata"
       description: "This data structure represents the metadata of an integration."
-      required: []
     }
   };
   reserved 1, 2, 3, 5, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 114;
@@ -669,25 +571,16 @@ message IntegrationMetadata {
 
 message TestIntegrationResult {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Test integration result"
-      required: []
-    }
+    json_schema: {title: "Test integration result"}
   };
   message Success {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Success"
-        required: []
-      }
+      json_schema: {title: "Success"}
     };
   }
   message Failure {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Failure"
-        required: []
-      }
+      json_schema: {title: "Failure"}
     };
     google.protobuf.StringValue error_message = 1;
   }
@@ -700,37 +593,25 @@ message TestIntegrationResult {
 
 message RumVersionData {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "RUM version data"
-      required: []
-    }
+    json_schema: {title: "RUM version data"}
   };
   message SourceMapMetadata {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Source map metadata"
-        required: []
-      }
+      json_schema: {title: "Source map metadata"}
     };
     google.protobuf.Timestamp created_at = 1;
     google.protobuf.BoolValue is_uploaded_successful = 2;
   }
   message LogMetadata {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Log metadata"
-        required: []
-      }
+      json_schema: {title: "Log metadata"}
     };
     google.protobuf.Timestamp first_occurrence = 1;
     google.protobuf.Timestamp last_occurrence = 2;
   }
   message Version {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Version"
-        required: []
-      }
+      json_schema: {title: "Version"}
     };
     google.protobuf.StringValue version = 1;
     LogMetadata log_metadata = 2;
@@ -743,10 +624,7 @@ message RumVersionData {
 
 message DeployedIntegrationInformation {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Deployed integration information"
-      required: []
-    }
+    json_schema: {title: "Deployed integration information"}
   };
   google.protobuf.StringValue id = 1;
   google.protobuf.StringValue definition_key = 2;

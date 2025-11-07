@@ -1274,24 +1274,24 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\n" +
 	"Acom/coralogix/outgoing_webhooks/v1/outgoing_webhook_service.proto\x12\"com.coralogix.outgoing_webhooks.v1\x1a9com/coralogix/outgoing_webhooks/v1/outgoing_webhook.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"M\n" +
 	"\x1fListOutgoingWebhookTypesRequest:*\x9aA'\n" +
-	"%*#List outgoing webhook types request\"\xdd\x03\n" +
+	"%*#List outgoing webhook types request\"\xc6\x03\n" +
 	" ListOutgoingWebhookTypesResponse\x12t\n" +
-	"\bwebhooks\x18\x01 \x03(\v2X.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhookTypesResponse.OutgoingWebhookTypeR\bwebhooks\x1a\x95\x02\n" +
+	"\bwebhooks\x18\x01 \x03(\v2X.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhookTypesResponse.OutgoingWebhookTypeR\bwebhooks\x1a\xfe\x01\n" +
 	"\x13OutgoingWebhookType\x12C\n" +
 	"\x04type\x18\x01 \x01(\x0e2/.com.coralogix.outgoing_webhooks.v1.WebhookTypeR\x04type\x12H\n" +
 	"\x05label\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x14\x9aA\x11J\x0f\"example_label\"R\x05label\x12:\n" +
-	"\x05count\x18\x03 \x01(\v2\x1c.google.protobuf.UInt32ValueB\x06\x9aA\x03J\x013R\x05count:3\x9aA0\n" +
-	".*\x15Outgoing webhook type\xd2\x01\x05label\xd2\x01\x05count\xd2\x01\x04type:+\x9aA(\n" +
-	"&*$List outgoing webhook types response\"\xa4\x01\n" +
+	"\x05count\x18\x03 \x01(\v2\x1c.google.protobuf.UInt32ValueB\x06\x9aA\x03J\x013R\x05count:\x1c\x9aA\x19\n" +
+	"\x17*\x15Outgoing webhook type:+\x9aA(\n" +
+	"&*$List outgoing webhook types response\"\x9d\x01\n" +
 	"$GetOutgoingWebhookTypeDetailsRequest\x12C\n" +
-	"\x04type\x18\x01 \x01(\x0e2/.com.coralogix.outgoing_webhooks.v1.WebhookTypeR\x04type:7\x9aA4\n" +
-	"2*)Get outgoing webhook type details request\xd2\x01\x04type\"\xba\x01\n" +
+	"\x04type\x18\x01 \x01(\x0e2/.com.coralogix.outgoing_webhooks.v1.WebhookTypeR\x04type:0\x9aA-\n" +
+	"+*)Get outgoing webhook type details request\"\xb0\x01\n" +
 	"%GetOutgoingWebhookTypeDetailsResponse\x12T\n" +
-	"\adetails\x18\x01 \x01(\v2:.com.coralogix.outgoing_webhooks.v1.OutgoingWebhookDetailsR\adetails:;\x9aA8\n" +
-	"6**Get outgoing webhook type details response\xd2\x01\adetails\"\x90\x01\n" +
+	"\adetails\x18\x01 \x01(\v2:.com.coralogix.outgoing_webhooks.v1.OutgoingWebhookDetailsR\adetails:1\x9aA.\n" +
+	",**Get outgoing webhook type details response\"\x89\x01\n" +
 	"\x1bListOutgoingWebhooksRequest\x12C\n" +
-	"\x04type\x18\x01 \x01(\x0e2/.com.coralogix.outgoing_webhooks.v1.WebhookTypeR\x04type:,\x9aA)\n" +
-	"'*\x1eList outgoing webhooks request\xd2\x01\x04type\"\x9e\x01\n" +
+	"\x04type\x18\x01 \x01(\x0e2/.com.coralogix.outgoing_webhooks.v1.WebhookTypeR\x04type:%\x9aA\"\n" +
+	" *\x1eList outgoing webhooks request\"\x9e\x01\n" +
 	"\x1cListOutgoingWebhooksResponse\x12V\n" +
 	"\bdeployed\x18\x01 \x03(\v2:.com.coralogix.outgoing_webhooks.v1.OutgoingWebhookSummaryR\bdeployed:&\x9aA#\n" +
 	"!*\x1fList outgoing webhooks response\"K\n" +
@@ -1304,47 +1304,47 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"(*&List outbound webhooks summary request\"\xcf\x01\n" +
 	"#ListOutboundWebhooksSummaryResponse\x12x\n" +
 	"\x1aoutbound_webhook_summaries\x18\x01 \x03(\v2:.com.coralogix.outgoing_webhooks.v1.OutboundWebhookSummaryR\x18outboundWebhookSummaries:.\x9aA+\n" +
-	")*'List outbound webhooks summary response\"s\n" +
+	")*'List outbound webhooks summary response\"n\n" +
 	"\x19GetOutgoingWebhookRequest\x12,\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id:(\x9aA%\n" +
-	"#*\x1cGet outgoing webhook request\xd2\x01\x02id\"\x9b\x01\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id:#\x9aA \n" +
+	"\x1e*\x1cGet outgoing webhook request\"\x91\x01\n" +
 	"\x1aGetOutgoingWebhookResponse\x12M\n" +
-	"\awebhook\x18\x01 \x01(\v23.com.coralogix.outgoing_webhooks.v1.OutgoingWebhookR\awebhook:.\x9aA+\n" +
-	")*\x1dGet outgoing webhook response\xd2\x01\awebhook\"\x9f\x01\n" +
+	"\awebhook\x18\x01 \x01(\v23.com.coralogix.outgoing_webhooks.v1.OutgoingWebhookR\awebhook:$\x9aA!\n" +
+	"\x1f*\x1dGet outgoing webhook response\"\x98\x01\n" +
 	"\x1cCreateOutgoingWebhookRequest\x12P\n" +
-	"\x04data\x18\x01 \x01(\v2<.com.coralogix.outgoing_webhooks.v1.OutgoingWebhookInputDataR\x04data:-\x9aA*\n" +
-	"(*\x1fCreate outgoing webhook request\xd2\x01\x04data\"\x8e\x01\n" +
+	"\x04data\x18\x01 \x01(\v2<.com.coralogix.outgoing_webhooks.v1.OutgoingWebhookInputDataR\x04data:&\x9aA#\n" +
+	"!*\x1fCreate outgoing webhook request\"\x89\x01\n" +
 	"\x1dCreateOutgoingWebhookResponse\x12?\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"example_id\"R\x02id:,\x9aA)\n" +
-	"'* Create outgoing webhook response\xd2\x01\x02id\"\xc7\x01\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"example_id\"R\x02id:'\x9aA$\n" +
+	"\"* Create outgoing webhook response\"\xbb\x01\n" +
 	"\x1cUpdateOutgoingWebhookRequest\x12!\n" +
 	"\x02id\x18\x01 \x01(\tB\x11\x9aA\x0eJ\f\"example_id\"R\x02id\x12P\n" +
-	"\x04data\x18\x02 \x01(\v2<.com.coralogix.outgoing_webhooks.v1.OutgoingWebhookInputDataR\x04data:2\x9aA/\n" +
-	"-*\x1fUpdate outgoing webhook request\xd2\x01\x02id\xd2\x01\x04data\"H\n" +
+	"\x04data\x18\x02 \x01(\v2<.com.coralogix.outgoing_webhooks.v1.OutgoingWebhookInputDataR\x04data:&\x9aA#\n" +
+	"!*\x1fUpdate outgoing webhook request\"H\n" +
 	"\x1dUpdateOutgoingWebhookResponse:'\x9aA$\n" +
-	"\"* Update outgoing webhook response\"\x8c\x01\n" +
+	"\"* Update outgoing webhook response\"\x87\x01\n" +
 	"\x1cDeleteOutgoingWebhookRequest\x12?\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"example_id\"R\x02id:+\x9aA(\n" +
-	"&*\x1fDelete outgoing webhook request\xd2\x01\x02id\"H\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"example_id\"R\x02id:&\x9aA#\n" +
+	"!*\x1fDelete outgoing webhook request\"H\n" +
 	"\x1dDeleteOutgoingWebhookResponse:'\x9aA$\n" +
-	"\"* Delete outgoing webhook response\"\x9b\x01\n" +
+	"\"* Delete outgoing webhook response\"\x94\x01\n" +
 	"\x1aTestOutgoingWebhookRequest\x12P\n" +
-	"\x04data\x18\x01 \x01(\v2<.com.coralogix.outgoing_webhooks.v1.OutgoingWebhookInputDataR\x04data:+\x9aA(\n" +
-	"&*\x1dTest outgoing webhook request\xd2\x01\x04data\"\x99\x01\n" +
+	"\x04data\x18\x01 \x01(\v2<.com.coralogix.outgoing_webhooks.v1.OutgoingWebhookInputDataR\x04data:$\x9aA!\n" +
+	"\x1f*\x1dTest outgoing webhook request\"\x94\x01\n" +
 	"\"TestExistingOutgoingWebhookRequest\x12?\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"example_id\"R\x02id:2\x9aA/\n" +
-	"-*&Test existing outgoing webhook request\xd2\x01\x02id\"\xc3\x05\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"example_id\"R\x02id:-\x9aA*\n" +
+	"(*&Test existing outgoing webhook request\"\xa1\x05\n" +
 	"\x1bTestOutgoingWebhookResponse\x12c\n" +
 	"\asuccess\x18\x01 \x01(\v2G.com.coralogix.outgoing_webhooks.v1.TestOutgoingWebhookResponse.SuccessH\x00R\asuccess\x12c\n" +
 	"\afailure\x18\x02 \x01(\v2G.com.coralogix.outgoing_webhooks.v1.TestOutgoingWebhookResponse.FailureH\x00R\afailure\x1a/\n" +
 	"\aSuccess:$\x9aA!\n" +
-	"\x1f*\x1dTest outgoing webhook success\x1a\xf7\x02\n" +
+	"\x1f*\x1dTest outgoing webhook success\x1a\xd5\x02\n" +
 	"\aFailure\x12_\n" +
 	"\rerror_message\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1c\x9aA\x19J\x17\"example_error_message\"R\ferrorMessage\x12e\n" +
 	"\x0fdisplay_message\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1e\x9aA\x1bJ\x19\"example_display_message\"R\x0edisplayMessage\x12L\n" +
 	"\vstatus_code\x18\x03 \x01(\v2\x1c.google.protobuf.UInt32ValueB\b\x9aA\x05J\x03400H\x00R\n" +
-	"statusCode\x88\x01\x01:F\x9aAC\n" +
-	"A*\x1dTest outgoing webhook failure\xd2\x01\rerror_message\xd2\x01\x0fdisplay_messageB\x0e\n" +
+	"statusCode\x88\x01\x01:$\x9aA!\n" +
+	"\x1f*\x1dTest outgoing webhook failureB\x0e\n" +
 	"\f_status_code:%\x9aA\"\n" +
 	" *\x1eTest outgoing webhook responseB\b\n" +
 	"\x06result\"+\n" +

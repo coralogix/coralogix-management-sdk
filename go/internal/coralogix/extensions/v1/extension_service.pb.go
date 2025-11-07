@@ -529,25 +529,26 @@ const file_com_coralogix_extensions_v1_extension_service_proto_rawDesc = "" +
 	"\x06Filter\x12+\n" +
 	"\fintegrations\x18\x01 \x03(\tB\a\x9aA\x04:\x02[]R\fintegrations:X\x9aAU\n" +
 	"S*6A filter structure for a request to get all extensions2\x19Filter by integration ids:A\x9aA>\n" +
-	"<*\x1aGet all extensions request2\x1eRequest to list all extensions\"\xd1\v\n" +
+	"<*\x1aGet all extensions request2\x1eRequest to list all extensions\"\x9b\v\n" +
 	"\x18GetAllExtensionsResponse\x12h\n" +
 	"\n" +
 	"extensions\x18\x01 \x03(\v2?.com.coralogix.extensions.v1.GetAllExtensionsResponse.ExtensionB\a\x9aA\x04:\x02[]R\n" +
-	"extensions\x1a\xc1\x01\n" +
+	"extensions\x1a\xb3\x01\n" +
 	"\x0fRevisionSummary\x12H\n" +
 	"\vitem_counts\x18\x01 \x01(\v2'.com.coralogix.extensions.v1.ItemCountsR\n" +
 	"itemCounts\x12=\n" +
 	"\x06is_new\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueB\n" +
-	"\x9aA\a:\x05falseR\x05isNew:%\x9aA\"\n" +
-	" *\x10Revision summary\xd2\x01\vitem_counts\x1a\xe9\x03\n" +
+	"\x9aA\a:\x05falseR\x05isNew:\x17\x9aA\x14\n" +
+	"\x12*\x10Revision summary\x1a\xd5\x03\n" +
 	"\bRevision\x126\n" +
 	"\aversion\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\aversion\x12>\n" +
 	"\vdescription\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\vdescription\x126\n" +
 	"\aexcerpt\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\aexcerpt\x12=\n" +
 	"\x06labels\x18\x04 \x03(\v2\x1c.google.protobuf.StringValueB\a\x9aA\x04:\x02[]R\x06labels\x12h\n" +
 	"\x13integration_details\x18\x05 \x03(\v2..com.coralogix.extensions.v1.IntegrationDetailB\a\x9aA\x04:\x02[]R\x12integrationDetails\x12_\n" +
-	"\asummary\x18\x06 \x01(\v2E.com.coralogix.extensions.v1.GetAllExtensionsResponse.RevisionSummaryR\asummary:#\x9aA \n" +
-	"\x1e*\bRevision\xd2\x01\aversion\xd2\x01\asummary\x1a\xd5\x04\n" +
+	"\asummary\x18\x06 \x01(\v2E.com.coralogix.extensions.v1.GetAllExtensionsResponse.RevisionSummaryR\asummary:\x0f\x9aA\f\n" +
+	"\n" +
+	"*\bRevision\x1a\xc1\x04\n" +
 	"\tExtension\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x120\n" +
 	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04name\x122\n" +
@@ -558,16 +559,16 @@ const file_com_coralogix_extensions_v1_extension_service_proto_rawDesc = "" +
 	"\x9aA\a:\x05falseR\bisHidden\x12+\n" +
 	"\fintegrations\x18\a \x03(\tB\a\x9aA\x04:\x02[]R\fintegrations\x12#\n" +
 	"\bkeywords\x18\b \x03(\tB\a\x9aA\x04:\x02[]R\bkeywords\x12J\n" +
-	"\vdeprecation\x18\t \x01(\v2(.com.coralogix.extensions.v1.DeprecationR\vdeprecation:$\x9aA!\n" +
-	"\x1f*\tExtension\xd2\x01\x02id\xd2\x01\x04name\xd2\x01\x05image:C\x9aA@\n" +
-	">*\x1bGet all extensions response2\x1fResponse to list all extensions\"\xae\x02\n" +
+	"\vdeprecation\x18\t \x01(\v2(.com.coralogix.extensions.v1.DeprecationR\vdeprecation:\x10\x9aA\r\n" +
+	"\v*\tExtension:C\x9aA@\n" +
+	">*\x1bGet all extensions response2\x1fResponse to list all extensions\"\xa9\x02\n" +
 	"\x13GetExtensionRequest\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x12d\n" +
 	"\x1ainclude_dashboard_binaries\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueB\n" +
 	"\x9aA\a:\x05falseR\x18includeDashboardBinaries\x12`\n" +
 	"\x18include_testing_revision\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueB\n" +
-	"\x9aA\a:\x05falseR\x16includeTestingRevision:!\x9aA\x1e\n" +
-	"\x1c*\x15Get extension request\xd2\x01\x02id\"{\n" +
+	"\x9aA\a:\x05falseR\x16includeTestingRevision:\x1c\x9aA\x19\n" +
+	"\x17*\x15Get extension request\"{\n" +
 	"\x14GetExtensionResponse\x12D\n" +
 	"\textension\x18\x01 \x01(\v2&.com.coralogix.extensions.v1.ExtensionR\textension:\x1d\x9aA\x1a\n" +
 	"\x18*\x16Get extension response2\xfd\a\n" +

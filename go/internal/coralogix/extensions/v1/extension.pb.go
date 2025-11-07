@@ -1305,7 +1305,7 @@ var File_com_coralogix_extensions_v1_extension_proto protoreflect.FileDescriptor
 
 const file_com_coralogix_extensions_v1_extension_proto_rawDesc = "" +
 	"\n" +
-	"+com/coralogix/extensions/v1/extension.proto\x12\x1bcom.coralogix.extensions.v1\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xa8\x03\n" +
+	"+com/coralogix/extensions/v1/extension.proto\x12\x1bcom.coralogix.extensions.v1\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x8e\x03\n" +
 	"\x13ExtensionItemBinary\x12O\n" +
 	"\x04type\x18\x01 \x01(\x0e2;.com.coralogix.extensions.v1.ExtensionItemBinary.BinaryTypeR\x04type\x120\n" +
 	"\x04data\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04data\x129\n" +
@@ -1316,8 +1316,8 @@ const file_com_coralogix_extensions_v1_extension_proto_rawDesc = "" +
 	"\x1bKIBANA_DASHBOARD_DEFINITION\x10\x01\x12 \n" +
 	"\x1cGRAFANA_DASHBOARD_DEFINITION\x10\x02\x12\x12\n" +
 	"\x0eENRICHMENT_CSV\x10\x03\x12\"\n" +
-	"\x1eCX_CUSTOM_DASHBOARD_DEFINITION\x10\x04:6\x9aA3\n" +
-	"1*\x15Extension item binary\xd2\x01\x04type\xd2\x01\x04data\xd2\x01\tfile_name\"\xc6\t\n" +
+	"\x1eCX_CUSTOM_DASHBOARD_DEFINITION\x10\x04:\x1c\x9aA\x19\n" +
+	"\x17*\x15Extension item binary\"\x8d\t\n" +
 	"\rExtensionItem\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x120\n" +
 	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04name\x12>\n" +
@@ -1350,8 +1350,8 @@ const file_com_coralogix_extensions_v1_extension_proto_rawDesc = "" +
 	"\x13CX_CUSTOM_DASHBOARD\x10\v\x12\x16\n" +
 	"\x12METRICS_RULE_GROUP\x10\f\x12\x1a\n" +
 	"\x16SPAN_EVENTS_TO_METRICS\x10\r\x12\x1a\n" +
-	"\x16LOGS_EVENTS_TO_METRICS\x10\x0e:N\x9aAK\n" +
-	"I*\x0eExtension item\xd2\x01\x02id\xd2\x01\x04name\xd2\x01\rtarget_domain\xd2\x01\x04data\xd2\x01\x13permission_resourceJ\x04\b\b\x10\tR\vinternal_id\"\x99\x06\n" +
+	"\x16LOGS_EVENTS_TO_METRICS\x10\x0e:\x15\x9aA\x12\n" +
+	"\x10*\x0eExtension itemJ\x04\b\b\x10\tR\vinternal_id\"\x99\x06\n" +
 	"\n" +
 	"ItemCounts\x12>\n" +
 	"\aactions\x18\x01 \x01(\v2\x1c.google.protobuf.UInt32ValueB\x06\x9aA\x03:\x010R\aactions\x12<\n" +
@@ -1366,26 +1366,26 @@ const file_com_coralogix_extensions_v1_extension_proto_rawDesc = "" +
 	"\vsaved_views\x18\n" +
 	" \x01(\v2\x1c.google.protobuf.UInt32ValueB\x06\x9aA\x03:\x010R\n" +
 	"savedViews:\x12\x9aA\x0f\n" +
-	"\r*\vItem counts\"\xa0\x01\n" +
+	"\r*\vItem counts\"\x92\x01\n" +
 	"\x11IntegrationDetail\x120\n" +
 	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x04name\x120\n" +
-	"\x04link\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04link:'\x9aA$\n" +
-	"\"*\x12Integration detail\xd2\x01\x04name\xd2\x01\x04link\"\xdf\x01\n" +
+	"\x04link\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04link:\x19\x9aA\x16\n" +
+	"\x14*\x12Integration detail\"\xd1\x01\n" +
 	"\x0fExtensionBinary\x12K\n" +
 	"\x04type\x18\x01 \x01(\x0e27.com.coralogix.extensions.v1.ExtensionBinary.BinaryTypeR\x04type\x120\n" +
 	"\x04data\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04data\"&\n" +
 	"\n" +
 	"BinaryType\x12\x18\n" +
-	"\x14KIBANA_INDEX_PATTERN\x10\x00:%\x9aA\"\n" +
-	" *\x10Extension binary\xd2\x01\x04type\xd2\x01\x04data\"\xc0\x01\n" +
+	"\x14KIBANA_INDEX_PATTERN\x10\x00:\x17\x9aA\x14\n" +
+	"\x12*\x10Extension binary\"\xa5\x01\n" +
 	"\x0eChangelogEntry\x126\n" +
 	"\aversion\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\aversion\x12C\n" +
-	"\x0edescription_md\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\rdescriptionMd:1\x9aA.\n" +
-	",*\x0fChangelog entry\xd2\x01\aversion\xd2\x01\x0edescription_md\"\xbe\x01\n" +
+	"\x0edescription_md\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\rdescriptionMd:\x16\x9aA\x13\n" +
+	"\x11*\x0fChangelog entry\"\xb5\x01\n" +
 	"\vDeprecation\x124\n" +
 	"\x06reason\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x06reason\x12\\\n" +
-	"\x16replacement_extensions\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueB\a\x9aA\x04:\x02[]R\x15replacementExtensions:\x1b\x9aA\x18\n" +
-	"\x16*\vDeprecation\xd2\x01\x06reason\"\xe3\x05\n" +
+	"\x16replacement_extensions\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueB\a\x9aA\x04:\x02[]R\x15replacementExtensions:\x12\x9aA\x0f\n" +
+	"\r*\vDeprecation\"\xd9\x05\n" +
 	"\x11ExtensionRevision\x126\n" +
 	"\aversion\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\aversion\x12>\n" +
 	"\vdescription\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\vdescription\x126\n" +
@@ -1397,8 +1397,8 @@ const file_com_coralogix_extensions_v1_extension_proto_rawDesc = "" +
 	"\x17permission_denied_items\x18\b \x03(\v2*.com.coralogix.extensions.v1.ExtensionItemB\a\x9aA\x04:\x02[]R\x15permissionDeniedItems\x12E\n" +
 	"\n" +
 	"is_testing\x18\t \x01(\v2\x1a.google.protobuf.BoolValueB\n" +
-	"\x9aA\a:\x05falseR\tisTesting:#\x9aA \n" +
-	"\x1e*\x12Extension revision\xd2\x01\aversion\"\xb9\x06\n" +
+	"\x9aA\a:\x05falseR\tisTesting:\x19\x9aA\x16\n" +
+	"\x14*\x12Extension revision\"\xa5\x06\n" +
 	"\tExtension\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x120\n" +
 	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04name\x122\n" +
@@ -1412,8 +1412,8 @@ const file_com_coralogix_extensions_v1_extension_proto_rawDesc = "" +
 	"\x1bpermission_denied_revisions\x18\t \x03(\v2..com.coralogix.extensions.v1.ExtensionRevisionB\a\x9aA\x04:\x02[]R\x19permissionDeniedRevisions\x12R\n" +
 	"\tchangelog\x18\n" +
 	" \x03(\v2+.com.coralogix.extensions.v1.ChangelogEntryB\a\x9aA\x04:\x02[]R\tchangelog\x12J\n" +
-	"\vdeprecation\x18\v \x01(\v2(.com.coralogix.extensions.v1.DeprecationR\vdeprecation:-\x9aA*\n" +
-	"(*\x12Extension metadata\xd2\x01\x02id\xd2\x01\x04name\xd2\x01\x05image\"\xfd\n" +
+	"\vdeprecation\x18\v \x01(\v2(.com.coralogix.extensions.v1.DeprecationR\vdeprecation:\x19\x9aA\x16\n" +
+	"\x14*\x12Extension metadata\"\xdf\n" +
 	"\n" +
 	"\rExtensionData\x12Y\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB+\x9aA(J&\"076f4188-05e0-4ed3-afeb-653ad182ccb7\"R\x02id\x12Q\n" +
@@ -1433,8 +1433,8 @@ const file_com_coralogix_extensions_v1_extension_proto_rawDesc = "" +
 	"\fintegrations\x18\r \x03(\tB\a\x9aA\x04:\x02[]R\fintegrations\x12A\n" +
 	"\bkeywords\x18\x0e \x03(\v2\x1c.google.protobuf.StringValueB\a\x9aA\x04:\x02[]R\bkeywords\x12R\n" +
 	"\tchangelog\x18\x0f \x03(\v2+.com.coralogix.extensions.v1.ChangelogEntryB\a\x9aA\x04:\x02[]R\tchangelog\x12J\n" +
-	"\vdeprecation\x18\x10 \x01(\v2(.com.coralogix.extensions.v1.DeprecationR\vdeprecation:T\x9aAQ\n" +
-	"O*\x0eExtension data2\x1fExtension details for ingestion\xd2\x01\x02id\xd2\x01\x04name\xd2\x01\x05image\xd2\x01\aversion\"\xc0\x06\n" +
+	"\vdeprecation\x18\x10 \x01(\v2(.com.coralogix.extensions.v1.DeprecationR\vdeprecation:6\x9aA3\n" +
+	"1*\x0eExtension data2\x1fExtension details for ingestion\"\xa2\x06\n" +
 	"\x11ExtensionItemData\x12J\n" +
 	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x18\x9aA\x15J\x13\"Low cocoa content\"R\x04name\x12Z\n" +
 	"\vdescription\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1a\x9aA\x17J\x15\"Less than 60% cocoa\"R\vdescription\x12N\n" +
@@ -1448,8 +1448,8 @@ const file_com_coralogix_extensions_v1_extension_proto_rawDesc = "" +
 	"\tunique_id\x18\b \x01(\v2\x1c.google.protobuf.StringValueR\buniqueId\x12n\n" +
 	"\x13permission_resource\x18\t \x01(\x0e2=.com.coralogix.extensions.v1.ExtensionItem.PermissionResourceR\x12permissionResource\x129\n" +
 	"\tstable_id\x18\n" +
-	" \x01(\v2\x1c.google.protobuf.StringValueR\bstableId:8\x9aA5\n" +
-	"3*\x13Extension item data\xd2\x01\x04name\xd2\x01\rtarget_domain\xd2\x01\x04data*\xf1\x01\n" +
+	" \x01(\v2\x1c.google.protobuf.StringValueR\bstableId:\x1a\x9aA\x17\n" +
+	"\x15*\x13Extension item data*\xf1\x01\n" +
 	"\fTargetDomain\x12\n" +
 	"\n" +
 	"\x06ACTION\x10\x00\x12\t\n" +

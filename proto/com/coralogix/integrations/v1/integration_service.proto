@@ -457,30 +457,21 @@ message ListManagedIntegrationKeysRequest {}
 
 message ListManagedIntegrationKeysResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "List managed integration keys response"
-      required: ["integration_keys"]
-    }
+    json_schema: {title: "List managed integration keys response"}
   };
   repeated google.protobuf.StringValue integration_keys = 1;
 }
 
 message GetDeployedIntegrationRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Get deployed integration request"
-      required: ["integration_id"]
-    }
+    json_schema: {title: "Get deployed integration request"}
   };
   google.protobuf.StringValue integration_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"aws-sqs\""}];
 }
 
 message GetDeployedIntegrationResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Get deployed integration response"
-      required: ["integration"]
-    }
+    json_schema: {title: "Get deployed integration response"}
   };
   DeployedIntegrationInformation integration = 1;
 }
@@ -490,10 +481,6 @@ message UpdateIntegrationRequest {
     json_schema: {
       title: "Update integration request"
       description: "This data structure represents a list of outgoing webhook types."
-      required: [
-        "id",
-        "metadata"
-      ]
     }
   };
   google.protobuf.StringValue id = 1; // This is the integration ID generated at creation time
@@ -507,7 +494,6 @@ message GetIntegrationDefinitionRequest {
     json_schema: {
       title: "Get integration definition request"
       description: "This data structure represents a list of outgoing webhook types."
-      required: ["id"]
     }
   };
   google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"aws-sqs\""}];
@@ -519,7 +505,6 @@ message GetIntegrationDefinitionResponse {
     json_schema: {
       title: "Get integration definition response"
       description: "This data structure represents a list of outgoing webhook types."
-      required: ["integration_definition"]
     }
   };
   IntegrationDefinition integration_definition = 1;
@@ -527,10 +512,7 @@ message GetIntegrationDefinitionResponse {
 
 message GetIntegrationsRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Get integrations request"
-      required: []
-    }
+    json_schema: {title: "Get integrations request"}
   };
   google.protobuf.BoolValue include_testing_revision = 1;
 }
@@ -540,15 +522,11 @@ message GetIntegrationsResponse {
     json_schema: {
       title: "Get integrations response"
       description: "This data structure represents a list of outgoing webhook types."
-      required: []
     }
   };
   message IntegrationWithCounts {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Integration with counts"
-        required: ["integrations"]
-      }
+      json_schema: {title: "Integration with counts"}
     };
     Integration integration = 1;
     google.protobuf.UInt32Value amount_integrations = 2;
@@ -562,10 +540,7 @@ message GetIntegrationsResponse {
 
 message GetIntegrationDetailsRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Get integration details request"
-      required: ["id"]
-    }
+    json_schema: {title: "Get integration details request"}
   };
   google.protobuf.StringValue id = 1;
   google.protobuf.BoolValue include_testing_revision = 2;
@@ -573,33 +548,21 @@ message GetIntegrationDetailsRequest {
 
 message GetIntegrationDetailsResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Get integration details response"
-      required: ["integration_detail"]
-    }
+    json_schema: {title: "Get integration details response"}
   };
   IntegrationDetails integration_detail = 1;
 }
 
 message GetManagedIntegrationStatusRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Get managed integration status request"
-      required: ["integration_id"]
-    }
+    json_schema: {title: "Get managed integration status request"}
   };
   string integration_id = 1;
 }
 
 message GetManagedIntegrationStatusResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Get managed integration status response"
-      required: [
-        "integration_id",
-        "status"
-      ]
-    }
+    json_schema: {title: "Get managed integration status response"}
   };
   string integration_id = 1;
   IntegrationStatus status = 3;
@@ -607,30 +570,21 @@ message GetManagedIntegrationStatusResponse {
 
 message SaveIntegrationRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Save integration request"
-      required: ["metadata"]
-    }
+    json_schema: {title: "Save integration request"}
   };
   IntegrationMetadata metadata = 1;
 }
 
 message SaveIntegrationResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Save integration response"
-      required: ["integration_id"]
-    }
+    json_schema: {title: "Save integration response"}
   };
   google.protobuf.StringValue integration_id = 1;
 }
 
 message DeleteIntegrationRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Delete integration request"
-      required: ["integration_id"]
-    }
+    json_schema: {title: "Delete integration request"}
   };
   google.protobuf.StringValue integration_id = 1;
 }
@@ -639,22 +593,12 @@ message DeleteIntegrationResponse {}
 
 message GetTemplateRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Get template request"
-      required: ["integration_id"]
-    }
+    json_schema: {title: "Get template request"}
   };
 
   message CommonARMParams {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Common ARM integration parameters"
-        required: [
-          "logs_url",
-          "api_key",
-          "cgx_domain"
-        ]
-      }
+      json_schema: {title: "Common ARM integration parameters"}
     };
     google.protobuf.StringValue logs_url = 1;
     google.protobuf.StringValue api_key = 2;
@@ -672,40 +616,28 @@ message GetTemplateRequest {
 
 message GetTemplateResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Get template response"
-      required: []
-    }
+    json_schema: {title: "Get template response"}
   };
   google.protobuf.StringValue template_url = 1;
 }
 
 message GetRumApplicationVersionDataRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Get RUM application version data request"
-      required: ["application_name"]
-    }
+    json_schema: {title: "Get RUM application version data request"}
   };
   google.protobuf.StringValue application_name = 1;
 }
 
 message GetRumApplicationVersionDataResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Get RUM application version data response"
-      required: ["version_data"]
-    }
+    json_schema: {title: "Get RUM application version data response"}
   };
   RumVersionData version_data = 1;
 }
 
 message SyncRumDataRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Sync RUM data request"
-      required: []
-    }
+    json_schema: {title: "Sync RUM data request"}
   }; // If false, sync may be skipped if performed recently.
   // The time between syncs is controlled by configuration.
   google.protobuf.BoolValue force = 1;
@@ -713,10 +645,7 @@ message SyncRumDataRequest {
 
 message SyncRumDataResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Sync RUM data response"
-      required: ["synced_at"]
-    }
+    json_schema: {title: "Sync RUM data response"}
   };
   reserved 3;
   reserved "deployed_instances";
@@ -727,10 +656,7 @@ message SyncRumDataResponse {
 
 message TestIntegrationRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Test integration request"
-      required: ["integration_data"]
-    }
+    json_schema: {title: "Test integration request"}
   };
   IntegrationMetadata integration_data = 1;
   google.protobuf.StringValue integration_id = 2;
@@ -738,10 +664,7 @@ message TestIntegrationRequest {
 
 message TestIntegrationResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Test integration response"
-      required: ["result"]
-    }
+    json_schema: {title: "Test integration response"}
   };
   TestIntegrationResult result = 1;
 }

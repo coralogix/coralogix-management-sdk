@@ -94,7 +94,6 @@ message GetAllExtensionsRequest {
     json_schema: {
       title: "Get all extensions request"
       description: "Request to list all extensions"
-      required: []
     }
   };
 
@@ -103,7 +102,6 @@ message GetAllExtensionsRequest {
       json_schema: {
         title: "A filter structure for a request to get all extensions"
         description: "Filter by integration ids"
-        required: []
       }
     };
     repeated string integrations = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "[]"}];
@@ -117,16 +115,12 @@ message GetAllExtensionsResponse {
     json_schema: {
       title: "Get all extensions response"
       description: "Response to list all extensions"
-      required: []
     }
   };
 
   message RevisionSummary {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Revision summary"
-        required: ["item_counts"]
-      }
+      json_schema: {title: "Revision summary"}
     };
     ItemCounts item_counts = 1;
     google.protobuf.BoolValue is_new = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "false"}];
@@ -134,13 +128,7 @@ message GetAllExtensionsResponse {
 
   message Revision {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Revision"
-        required: [
-          "version",
-          "summary"
-        ]
-      }
+      json_schema: {title: "Revision"}
     };
     google.protobuf.StringValue version = 1;
     google.protobuf.StringValue description = 2;
@@ -152,14 +140,7 @@ message GetAllExtensionsResponse {
 
   message Extension {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Extension"
-        required: [
-          "id",
-          "name",
-          "image"
-        ]
-      }
+      json_schema: {title: "Extension"}
     };
     google.protobuf.StringValue id = 1;
     google.protobuf.StringValue name = 2;
@@ -177,10 +158,7 @@ message GetAllExtensionsResponse {
 
 message GetExtensionRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Get extension request"
-      required: ["id"]
-    }
+    json_schema: {title: "Get extension request"}
   };
   google.protobuf.StringValue id = 1;
   // On the frontend, we don't need the dashboard binaries.
@@ -192,10 +170,7 @@ message GetExtensionRequest {
 
 message GetExtensionResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Get extension response"
-      required: []
-    }
+    json_schema: {title: "Get extension response"}
   };
   Extension extension = 1;
 }

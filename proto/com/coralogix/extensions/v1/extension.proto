@@ -33,14 +33,7 @@ message ExtensionItemBinary {
   }
 
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Extension item binary"
-      required: [
-        "type",
-        "data",
-        "file_name"
-      ]
-    }
+    json_schema: {title: "Extension item binary"}
   };
   BinaryType type = 1;
   google.protobuf.StringValue data = 2;
@@ -69,16 +62,7 @@ message ExtensionItem {
   }
 
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Extension item"
-      required: [
-        "id",
-        "name",
-        "target_domain",
-        "data",
-        "permission_resource"
-      ]
-    }
+    json_schema: {title: "Extension item"}
   };
   google.protobuf.StringValue id = 1;
   google.protobuf.StringValue name = 2;
@@ -95,10 +79,7 @@ message ExtensionItem {
 
 message ItemCounts {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Item counts"
-      required: []
-    }
+    json_schema: {title: "Item counts"}
   };
   google.protobuf.UInt32Value actions = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "0"}];
   google.protobuf.UInt32Value alerts = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "0"}];
@@ -114,13 +95,7 @@ message ItemCounts {
 
 message IntegrationDetail {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Integration detail"
-      required: [
-        "name",
-        "link"
-      ]
-    }
+    json_schema: {title: "Integration detail"}
   };
   google.protobuf.StringValue name = 1;
   google.protobuf.StringValue link = 2;
@@ -132,13 +107,7 @@ message ExtensionBinary {
   }
 
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Extension binary"
-      required: [
-        "type",
-        "data"
-      ]
-    }
+    json_schema: {title: "Extension binary"}
   };
   BinaryType type = 1;
   google.protobuf.StringValue data = 2;
@@ -146,13 +115,7 @@ message ExtensionBinary {
 
 message ChangelogEntry {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Changelog entry"
-      required: [
-        "version",
-        "description_md"
-      ]
-    }
+    json_schema: {title: "Changelog entry"}
   };
   google.protobuf.StringValue version = 1;
   google.protobuf.StringValue description_md = 2;
@@ -160,10 +123,7 @@ message ChangelogEntry {
 
 message Deprecation {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Deprecation"
-      required: ["reason"]
-    }
+    json_schema: {title: "Deprecation"}
   };
   google.protobuf.StringValue reason = 1;
   repeated google.protobuf.StringValue replacement_extensions = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "[]"}];
@@ -171,10 +131,7 @@ message Deprecation {
 
 message ExtensionRevision {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Extension revision"
-      required: ["version"]
-    }
+    json_schema: {title: "Extension revision"}
   };
   google.protobuf.StringValue version = 1;
   google.protobuf.StringValue description = 2;
@@ -189,14 +146,7 @@ message ExtensionRevision {
 
 message Extension {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Extension metadata"
-      required: [
-        "id",
-        "name",
-        "image"
-      ]
-    }
+    json_schema: {title: "Extension metadata"}
   };
   google.protobuf.StringValue id = 1;
   google.protobuf.StringValue name = 2;
@@ -217,12 +167,6 @@ message ExtensionData {
     json_schema: {
       title: "Extension data"
       description: "Extension details for ingestion"
-      required: [
-        "id",
-        "name",
-        "image",
-        "version"
-      ]
     }
   };
   google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
@@ -245,14 +189,7 @@ message ExtensionData {
 
 message ExtensionItemData {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Extension item data"
-      required: [
-        "name",
-        "target_domain",
-        "data"
-      ]
-    }
+    json_schema: {title: "Extension item data"}
   };
   google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"Low cocoa content\""}];
   google.protobuf.StringValue description = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"Less than 60% cocoa\""}];

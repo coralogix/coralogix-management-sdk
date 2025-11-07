@@ -254,31 +254,19 @@ service ContextualDataIntegrationService {
 
 message GetContextualDataIntegrationsRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Get contextual data integrations request"
-      required: []
-    }
+    json_schema: {title: "Get contextual data integrations request"}
   };
   google.protobuf.BoolValue include_testing_integrations = 1;
 }
 
 message GetContextualDataIntegrationsResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Get contextual data integrations response"
-      required: []
-    }
+    json_schema: {title: "Get contextual data integrations response"}
   };
 
   message IntegrationWithCounts {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {
-        title: "Integration with counts"
-        required: [
-          "integration",
-          "amount_integrations"
-        ]
-      }
+      json_schema: {title: "Integration with counts"}
     };
 
     Integration integration = 1;
@@ -293,10 +281,7 @@ message GetContextualDataIntegrationsResponse {
 
 message GetContextualDataIntegrationDefinitionRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Get contextual data integration definition request"
-      required: ["id"]
-    }
+    json_schema: {title: "Get contextual data integration definition request"}
   };
   google.protobuf.StringValue id = 1;
   google.protobuf.BoolValue include_testing_integrations = 2;
@@ -304,20 +289,14 @@ message GetContextualDataIntegrationDefinitionRequest {
 
 message GetContextualDataIntegrationDefinitionResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Get contextual data integration definition response"
-      required: ["integration_definition"]
-    }
+    json_schema: {title: "Get contextual data integration definition response"}
   };
   IntegrationDefinition integration_definition = 1;
 }
 
 message GetContextualDataIntegrationDetailsRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Get contextual data integration details request"
-      required: ["id"]
-    }
+    json_schema: {title: "Get contextual data integration details request"}
   };
   google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
   google.protobuf.BoolValue include_testing_revisions = 2;
@@ -325,23 +304,14 @@ message GetContextualDataIntegrationDetailsRequest {
 
 message GetContextualDataIntegrationDetailsResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Get contextual data integration details response"
-      required: ["integration_detail"]
-    }
+    json_schema: {title: "Get contextual data integration details response"}
   };
   IntegrationDetails integration_detail = 1;
 }
 
 message UpdateContextualDataIntegrationRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Update contextual data integration request"
-      required: [
-        "integration_id",
-        "metadata"
-      ]
-    }
+    json_schema: {title: "Update contextual data integration request"}
   };
   google.protobuf.StringValue integration_id = 1;
   IntegrationMetadata metadata = 2;
@@ -349,19 +319,13 @@ message UpdateContextualDataIntegrationRequest {
 
 message UpdateContextualDataIntegrationResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Update contextual data integration response"
-      required: []
-    }
+    json_schema: {title: "Update contextual data integration response"}
   };
 }
 
 message TestContextualDataIntegrationRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Test contextual data integration request"
-      required: ["integration_data"]
-    }
+    json_schema: {title: "Test contextual data integration request"}
   };
   IntegrationMetadata integration_data = 1;
   google.protobuf.StringValue integration_id = 2;
@@ -369,49 +333,34 @@ message TestContextualDataIntegrationRequest {
 
 message TestContextualDataIntegrationResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Test contextual data integration response"
-      required: ["result"]
-    }
+    json_schema: {title: "Test contextual data integration response"}
   };
   TestIntegrationResult result = 1;
 }
 
 message SaveContextualDataIntegrationRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Save contextual data integration request"
-      required: ["metadata"]
-    }
+    json_schema: {title: "Save contextual data integration request"}
   };
   IntegrationMetadata metadata = 1;
 }
 
 message SaveContextualDataIntegrationResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Save contextual data integration response"
-      required: ["integration_id"]
-    }
+    json_schema: {title: "Save contextual data integration response"}
   };
   google.protobuf.StringValue integration_id = 1;
 }
 
 message DeleteContextualDataIntegrationRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Delete contextual data integration request"
-      required: ["integration_id"]
-    }
+    json_schema: {title: "Delete contextual data integration request"}
   };
   google.protobuf.StringValue integration_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
 }
 
 message DeleteContextualDataIntegrationResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-    json_schema: {
-      title: "Delete contextual data integration response"
-      required: []
-    }
+    json_schema: {title: "Delete contextual data integration response"}
   };
 }

@@ -741,53 +741,53 @@ const file_com_coralogix_integrations_v1_contextual_data_integration_service_pro
 	"Gcom/coralogix/integrations/v1/contextual_data_integration_service.proto\x12\x1dcom.coralogix.integrations.v1\x1a/com/coralogix/integrations/v1/integration.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xb5\x01\n" +
 	"$GetContextualDataIntegrationsRequest\x12\\\n" +
 	"\x1cinclude_testing_integrations\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x1aincludeTestingIntegrations:/\x9aA,\n" +
-	"**(Get contextual data integrations request\"\x86\x05\n" +
+	"**(Get contextual data integrations request\"\xe2\x04\n" +
 	"%GetContextualDataIntegrationsResponse\x12~\n" +
-	"\fintegrations\x18\x01 \x03(\v2Z.com.coralogix.integrations.v1.GetContextualDataIntegrationsResponse.IntegrationWithCountsR\fintegrations\x1a\xaa\x03\n" +
+	"\fintegrations\x18\x01 \x03(\v2Z.com.coralogix.integrations.v1.GetContextualDataIntegrationsResponse.IntegrationWithCountsR\fintegrations\x1a\x86\x03\n" +
 	"\x15IntegrationWithCounts\x12L\n" +
 	"\vintegration\x18\x01 \x01(\v2*.com.coralogix.integrations.v1.IntegrationR\vintegration\x12M\n" +
 	"\x13amount_integrations\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueR\x12amountIntegrations\x124\n" +
 	"\x06errors\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueR\x06errors\x12G\n" +
 	"\x11upgrade_available\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\x10upgradeAvailable\x121\n" +
-	"\x06is_new\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueR\x05isNew:B\x9aA?\n" +
-	"=*\x17Integration with counts\xd2\x01\vintegration\xd2\x01\x13amount_integrations:0\x9aA-\n" +
-	"+*)Get contextual data integrations response\"\xfb\x01\n" +
+	"\x06is_new\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueR\x05isNew:\x1e\x9aA\x1b\n" +
+	"\x19*\x17Integration with counts:0\x9aA-\n" +
+	"+*)Get contextual data integrations response\"\xf6\x01\n" +
 	"-GetContextualDataIntegrationDefinitionRequest\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x12\\\n" +
-	"\x1cinclude_testing_integrations\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x1aincludeTestingIntegrations:>\x9aA;\n" +
-	"9*2Get contextual data integration definition request\xd2\x01\x02id\"\xf2\x01\n" +
+	"\x1cinclude_testing_integrations\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x1aincludeTestingIntegrations:9\x9aA6\n" +
+	"4*2Get contextual data integration definition request\"\xd9\x01\n" +
 	".GetContextualDataIntegrationDefinitionResponse\x12k\n" +
-	"\x16integration_definition\x18\x01 \x01(\v24.com.coralogix.integrations.v1.IntegrationDefinitionR\x15integrationDefinition:S\x9aAP\n" +
-	"N*3Get contextual data integration definition response\xd2\x01\x16integration_definition\"\x9c\x02\n" +
+	"\x16integration_definition\x18\x01 \x01(\v24.com.coralogix.integrations.v1.IntegrationDefinitionR\x15integrationDefinition::\x9aA7\n" +
+	"5*3Get contextual data integration definition response\"\x97\x02\n" +
 	"*GetContextualDataIntegrationDetailsRequest\x12Y\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB+\x9aA(J&\"076f4188-05e0-4ed3-afeb-653ad182ccb7\"R\x02id\x12V\n" +
-	"\x19include_testing_revisions\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x17includeTestingRevisions:;\x9aA8\n" +
-	"6*/Get contextual data integration details request\xd2\x01\x02id\"\xdd\x01\n" +
+	"\x19include_testing_revisions\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x17includeTestingRevisions:6\x9aA3\n" +
+	"1*/Get contextual data integration details request\"\xc8\x01\n" +
 	"+GetContextualDataIntegrationDetailsResponse\x12`\n" +
-	"\x12integration_detail\x18\x01 \x01(\v21.com.coralogix.integrations.v1.IntegrationDetailsR\x11integrationDetail:L\x9aAI\n" +
-	"G*0Get contextual data integration details response\xd2\x01\x12integration_detail\"\x8c\x02\n" +
+	"\x12integration_detail\x18\x01 \x01(\v21.com.coralogix.integrations.v1.IntegrationDetailsR\x11integrationDetail:7\x9aA4\n" +
+	"2*0Get contextual data integration details response\"\xf0\x01\n" +
 	"&UpdateContextualDataIntegrationRequest\x12C\n" +
 	"\x0eintegration_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\rintegrationId\x12N\n" +
-	"\bmetadata\x18\x02 \x01(\v22.com.coralogix.integrations.v1.IntegrationMetadataR\bmetadata:M\x9aAJ\n" +
-	"H**Update contextual data integration request\xd2\x01\x0eintegration_id\xd2\x01\bmetadata\"]\n" +
+	"\bmetadata\x18\x02 \x01(\v22.com.coralogix.integrations.v1.IntegrationMetadataR\bmetadata:1\x9aA.\n" +
+	",**Update contextual data integration request\"]\n" +
 	"'UpdateContextualDataIntegrationResponse:2\x9aA/\n" +
-	"-*+Update contextual data integration response\"\x8e\x02\n" +
+	"-*+Update contextual data integration response\"\xfb\x01\n" +
 	"$TestContextualDataIntegrationRequest\x12]\n" +
 	"\x10integration_data\x18\x01 \x01(\v22.com.coralogix.integrations.v1.IntegrationMetadataR\x0fintegrationData\x12C\n" +
-	"\x0eintegration_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\rintegrationId:B\x9aA?\n" +
-	"=*(Test contextual data integration request\xd2\x01\x10integration_data\"\xb0\x01\n" +
+	"\x0eintegration_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\rintegrationId:/\x9aA,\n" +
+	"**(Test contextual data integration request\"\xa7\x01\n" +
 	"%TestContextualDataIntegrationResponse\x12L\n" +
-	"\x06result\x18\x01 \x01(\v24.com.coralogix.integrations.v1.TestIntegrationResultR\x06result:9\x9aA6\n" +
-	"4*)Test contextual data integration response\xd2\x01\x06result\"\xb2\x01\n" +
+	"\x06result\x18\x01 \x01(\v24.com.coralogix.integrations.v1.TestIntegrationResultR\x06result:0\x9aA-\n" +
+	"+*)Test contextual data integration response\"\xa7\x01\n" +
 	"$SaveContextualDataIntegrationRequest\x12N\n" +
-	"\bmetadata\x18\x01 \x01(\v22.com.coralogix.integrations.v1.IntegrationMetadataR\bmetadata::\x9aA7\n" +
-	"5*(Save contextual data integration request\xd2\x01\bmetadata\"\xaf\x01\n" +
+	"\bmetadata\x18\x01 \x01(\v22.com.coralogix.integrations.v1.IntegrationMetadataR\bmetadata:/\x9aA,\n" +
+	"**(Save contextual data integration request\"\x9e\x01\n" +
 	"%SaveContextualDataIntegrationResponse\x12C\n" +
-	"\x0eintegration_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\rintegrationId:A\x9aA>\n" +
-	"<*)Save contextual data integration response\xd2\x01\x0eintegration_id\"\xde\x01\n" +
+	"\x0eintegration_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\rintegrationId:0\x9aA-\n" +
+	"+*)Save contextual data integration response\"\xcd\x01\n" +
 	"&DeleteContextualDataIntegrationRequest\x12p\n" +
-	"\x0eintegration_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB+\x9aA(J&\"076f4188-05e0-4ed3-afeb-653ad182ccb7\"R\rintegrationId:B\x9aA?\n" +
-	"=**Delete contextual data integration request\xd2\x01\x0eintegration_id\"]\n" +
+	"\x0eintegration_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB+\x9aA(J&\"076f4188-05e0-4ed3-afeb-653ad182ccb7\"R\rintegrationId:1\x9aA.\n" +
+	",**Delete contextual data integration request\"]\n" +
 	"'DeleteContextualDataIntegrationResponse:2\x9aA/\n" +
 	"-*+Delete contextual data integration response2\xea\x1e\n" +
 	" ContextualDataIntegrationService\x12\x8e\x04\n" +
