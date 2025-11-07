@@ -2,20 +2,15 @@ syntax = "proto3";
 
 package com.coralogix.metrics.metrics_configurator;
 
+import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
-import "google/api/annotations.proto";
-
 
 message RetentionPolicy {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Retenion Policy"
       description: "This data structure represents the retention policy for a tenant."
-      required: [
-        "resolution",
-        "retention_days"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
@@ -31,10 +26,6 @@ message S3Config {
     json_schema: {
       title: "S3 Configuration"
       description: "This data structure represents the S3 configuration for a tenant."
-      required: [
-        "bucket",
-        "region"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
@@ -57,11 +48,6 @@ message IbmConfigV2 {
     json_schema: {
       title: "IBM Bucket Configuration"
       description: "This data structure is used to configure an IBM bucket."
-      required: [
-        "endpoint",
-        "crn",
-        "service_crn"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
@@ -93,10 +79,6 @@ message ConfigureTenantRequest {
     json_schema: {
       title: "Configure Tenant Request"
       description: "This data structure is used to configure a tenant."
-      required: [
-        "retention_policy",
-        "storage_config"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
@@ -116,10 +98,6 @@ message UpdateRequest {
     json_schema: {
       title: "Update Tenant Request"
       description: "This data structure is used to update the configuration of a tenant."
-      required: [
-        "retention_days",
-        "storage_config"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
@@ -147,7 +125,6 @@ message ValidateBucketRequest {
     json_schema: {
       title: "Bucket Validation Request"
       description: "This data structure is used to validate a bucket."
-      required: ["storage_config"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
@@ -165,11 +142,6 @@ message RetentionPolicyRequest {
     json_schema: {
       title: "Retenion Policy Request"
       description: "This data structure is used to set the retention policy for a tenant."
-      required: [
-        "raw_resolution",
-        "five_minutes_resolution",
-        "one_hour_resolution"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
@@ -243,12 +215,42 @@ service MetricsConfiguratorPublicService {
       body: "*"
       additional_bindings: {post: "/v1/metrics-archive"}
     };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Metrics Data Archive Service"]
+    };
   }
   rpc Update(UpdateRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       put: "/metrics/data-setup/v1"
       body: "*"
       additional_bindings: {put: "/v1/metrics-archive"}
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Metrics Data Archive Service"]
     };
   }
   rpc ValidateBucket(ValidateBucketRequest) returns (google.protobuf.Empty) {
@@ -257,11 +259,41 @@ service MetricsConfiguratorPublicService {
       body: "*"
       additional_bindings: {post: "/v1/metrics-archive:validate"}
     };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Metrics Data Archive Service"]
+    };
   }
   rpc GetTenantConfig(google.protobuf.Empty) returns (GetTenantConfigResponseV2) {
     option (google.api.http) = {
       get: "/metrics/data-setup/v1"
       additional_bindings: {get: "/v1/metrics-archive"}
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Metrics Data Archive Service"]
     };
   }
   rpc EnableArchive(google.protobuf.Empty) returns (google.protobuf.Empty) {
@@ -269,11 +301,41 @@ service MetricsConfiguratorPublicService {
       post: "/metrics/data-setup/v1/enable"
       additional_bindings: {post: "/v1/metrics-archive:enable"}
     };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Metrics Data Archive Service"]
+    };
   }
   rpc DisableArchive(google.protobuf.Empty) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       post: "/metrics/data-setup/v1/disable"
       additional_bindings: {post: "/v1/metrics-archive:disable"}
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Metrics Data Archive Service"]
     };
   }
 }

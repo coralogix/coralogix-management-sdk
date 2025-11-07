@@ -1328,31 +1328,30 @@ var File_com_coralogix_metrics_metrics_configurator_proto protoreflect.FileDescr
 
 const file_com_coralogix_metrics_metrics_configurator_proto_rawDesc = "" +
 	"\n" +
-	"0com/coralogix/metrics/metrics-configurator.proto\x12*com.coralogix.metrics.metrics_configurator\x1a\x1bgoogle/protobuf/empty.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\xfc\x02\n" +
+	"0com/coralogix/metrics/metrics-configurator.proto\x12*com.coralogix.metrics.metrics_configurator\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xde\x02\n" +
 	"\x0fRetentionPolicy\x12'\n" +
 	"\n" +
 	"resolution\x18\x01 \x01(\x05B\a\x9aA\x04J\x0212R\n" +
 	"resolution\x12.\n" +
-	"\x0eretention_days\x18\x02 \x01(\x05B\a\x9aA\x04J\x0230R\rretentionDays:\x8f\x02\x9aA\x8b\x02\n" +
-	"r*\x0fRetenion Policy2AThis data structure represents the retention policy for a tenant.\xd2\x01\n" +
-	"resolution\xd2\x01\x0eretention_days*\x94\x01\n" +
-	"-Find out more about metrics cost optimization\x12chttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/\"\xc1\x02\n" +
+	"\x0eretention_days\x18\x02 \x01(\x05B\a\x9aA\x04J\x0230R\rretentionDays:\xf1\x01\x9aA\xed\x01\n" +
+	"T*\x0fRetenion Policy2AThis data structure represents the retention policy for a tenant.*\x94\x01\n" +
+	"-Find out more about metrics cost optimization\x12chttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/\"\xaf\x02\n" +
 	"\bS3Config\x12\x16\n" +
 	"\x06bucket\x18\x01 \x01(\tR\x06bucket\x12\x16\n" +
-	"\x06region\x18\x02 \x01(\tR\x06region:\x84\x02\x9aA\x80\x02\n" +
-	"g*\x10S3 Configuration2AThis data structure represents the S3 configuration for a tenant.\xd2\x01\x06bucket\xd2\x01\x06region*\x94\x01\n" +
+	"\x06region\x18\x02 \x01(\tR\x06region:\xf2\x01\x9aA\xee\x01\n" +
+	"U*\x10S3 Configuration2AThis data structure represents the S3 configuration for a tenant.*\x94\x01\n" +
 	"-Find out more about metrics cost optimization\x12chttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/\"i\n" +
 	"\tIbmConfig\x12\x16\n" +
 	"\x06bucket\x18\x01 \x01(\tR\x06bucket\x12\x16\n" +
 	"\x06region\x18\x02 \x01(\tR\x06region\x12\x1a\n" +
 	"\bendpoint\x18\x03 \x01(\tR\bendpoint\x12\x10\n" +
-	"\x03crn\x18\x04 \x01(\tR\x03crn\"\xb3\x05\n" +
+	"\x03crn\x18\x04 \x01(\tR\x03crn\"\x94\x05\n" +
 	"\vIbmConfigV2\x12S\n" +
 	"\bendpoint\x18\x03 \x01(\tB7\x9aA4J2\"s3.us-south.cloud-object-storage.appdomain.cloud\"R\bendpoint\x12\x95\x01\n" +
 	"\x03crn\x18\x04 \x01(\tB\x82\x01\x9aA\x7fJ}\"crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::\"R\x03crn\x12\xa4\x01\n" +
 	"\vservice_crn\x18\x05 \x01(\tB\x82\x01\x9aA\x7fJ}\"crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::\"R\n" +
-	"serviceCrn:\x8f\x02\x9aA\x8b\x02\n" +
-	"r*\x18IBM Bucket Configuration27This data structure is used to configure an IBM bucket.\xd2\x01\bendpoint\xd2\x01\x03crn\xd2\x01\vservice_crn*\x94\x01\n" +
+	"serviceCrn:\xf0\x01\x9aA\xec\x01\n" +
+	"S*\x18IBM Bucket Configuration27This data structure is used to configure an IBM bucket.*\x94\x01\n" +
 	"-Find out more about metrics cost optimization\x12chttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/\"\xf7\x02\n" +
 	"\x0eTenantConfigV2\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\rR\btenantId\x12m\n" +
@@ -1361,19 +1360,19 @@ const file_com_coralogix_metrics_metrics_configurator_proto_rawDesc = "" +
 	"\x02s3\x18\x06 \x01(\v24.com.coralogix.metrics.metrics_configurator.S3ConfigH\x00R\x02s3\x12\x16\n" +
 	"\x06prefix\x18\a \x01(\tR\x06prefix\x12\x1a\n" +
 	"\bdisabled\x18\t \x01(\bR\bdisabledB\x10\n" +
-	"\x0estorage_config\"\xc0\x04\n" +
+	"\x0estorage_config\"\x9c\x04\n" +
 	"\x16ConfigureTenantRequest\x12m\n" +
 	"\x10retention_policy\x18\x01 \x01(\v2B.com.coralogix.metrics.metrics_configurator.RetentionPolicyRequestR\x0fretentionPolicy\x12K\n" +
 	"\x03ibm\x18\x02 \x01(\v27.com.coralogix.metrics.metrics_configurator.IbmConfigV2H\x00R\x03ibm\x12F\n" +
-	"\x02s3\x18\x03 \x01(\v24.com.coralogix.metrics.metrics_configurator.S3ConfigH\x00R\x02s3:\x8f\x02\x9aA\x8b\x02\n" +
-	"r*\x18Configure Tenant Request22This data structure is used to configure a tenant.\xd2\x01\x10retention_policy\xd2\x01\x0estorage_config*\x94\x01\n" +
+	"\x02s3\x18\x03 \x01(\v24.com.coralogix.metrics.metrics_configurator.S3ConfigH\x00R\x02s3:\xeb\x01\x9aA\xe7\x01\n" +
+	"N*\x18Configure Tenant Request22This data structure is used to configure a tenant.*\x94\x01\n" +
 	"-Find out more about metrics cost optimization\x12chttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/B\x10\n" +
-	"\x0estorage_config\"\x94\x04\n" +
+	"\x0estorage_config\"\xf2\x03\n" +
 	"\rUpdateRequest\x12*\n" +
 	"\x0eretention_days\x18\x01 \x01(\rH\x01R\rretentionDays\x88\x01\x01\x12K\n" +
 	"\x03ibm\x18\x02 \x01(\v27.com.coralogix.metrics.metrics_configurator.IbmConfigV2H\x00R\x03ibm\x12F\n" +
-	"\x02s3\x18\x03 \x01(\v24.com.coralogix.metrics.metrics_configurator.S3ConfigH\x00R\x02s3:\x9c\x02\x9aA\x98\x02\n" +
-	"\x7f*\x15Update Tenant Request2DThis data structure is used to update the configuration of a tenant.\xd2\x01\x0eretention_days\xd2\x01\x0estorage_config*\x94\x01\n" +
+	"\x02s3\x18\x03 \x01(\v24.com.coralogix.metrics.metrics_configurator.S3ConfigH\x00R\x02s3:\xfa\x01\x9aA\xf6\x01\n" +
+	"]*\x15Update Tenant Request2DThis data structure is used to update the configuration of a tenant.*\x94\x01\n" +
 	"-Find out more about metrics cost optimization\x12chttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/B\x10\n" +
 	"\x0estorage_configB\x11\n" +
 	"\x0f_retention_days\"\x9a\x02\n" +
@@ -1383,18 +1382,18 @@ const file_com_coralogix_metrics_metrics_configurator_proto_rawDesc = "" +
 	"\x03ibm\x18\x03 \x01(\v27.com.coralogix.metrics.metrics_configurator.IbmConfigV2H\x00R\x03ibm\x12F\n" +
 	"\x02s3\x18\x04 \x01(\v24.com.coralogix.metrics.metrics_configurator.S3ConfigH\x00R\x02s3B\x10\n" +
 	"\x0estorage_configB\x11\n" +
-	"\x0f_retention_days\"\xbd\x03\n" +
+	"\x0f_retention_days\"\xac\x03\n" +
 	"\x15ValidateBucketRequest\x12K\n" +
 	"\x03ibm\x18\x01 \x01(\v27.com.coralogix.metrics.metrics_configurator.IbmConfigV2H\x00R\x03ibm\x12F\n" +
-	"\x02s3\x18\x02 \x01(\v24.com.coralogix.metrics.metrics_configurator.S3ConfigH\x00R\x02s3:\xfc\x01\x9aA\xf8\x01\n" +
-	"_*\x19Bucket Validation Request21This data structure is used to validate a bucket.\xd2\x01\x0estorage_config*\x94\x01\n" +
+	"\x02s3\x18\x02 \x01(\v24.com.coralogix.metrics.metrics_configurator.S3ConfigH\x00R\x02s3:\xeb\x01\x9aA\xe7\x01\n" +
+	"N*\x19Bucket Validation Request21This data structure is used to validate a bucket.*\x94\x01\n" +
 	"-Find out more about metrics cost optimization\x12chttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/B\x10\n" +
-	"\x0estorage_config\"\x81\x04\n" +
+	"\x0estorage_config\"\xbf\x03\n" +
 	"\x16RetentionPolicyRequest\x12-\n" +
 	"\x0eraw_resolution\x18\x01 \x01(\rB\x06\x9aA\x03J\x011R\rrawResolution\x12>\n" +
 	"\x17five_minutes_resolution\x18\x02 \x01(\rB\x06\x9aA\x03J\x012R\x15fiveMinutesResolution\x126\n" +
-	"\x13one_hour_resolution\x18\x03 \x01(\rB\x06\x9aA\x03J\x013R\x11oneHourResolution:\xbf\x02\x9aA\xbb\x02\n" +
-	"\xa1\x01*\x17Retenion Policy Request2EThis data structure is used to set the retention policy for a tenant.\xd2\x01\x0eraw_resolution\xd2\x01\x17five_minutes_resolution\xd2\x01\x13one_hour_resolution*\x94\x01\n" +
+	"\x13one_hour_resolution\x18\x03 \x01(\rB\x06\x9aA\x03J\x013R\x11oneHourResolution:\xfd\x01\x9aA\xf9\x01\n" +
+	"`*\x17Retenion Policy Request2EThis data structure is used to set the retention policy for a tenant.*\x94\x01\n" +
 	"-Find out more about metrics cost optimization\x12chttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/\"\xd2\x03\n" +
 	"\fTenantConfig\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\rR\btenantId\x12#\n" +
@@ -1424,14 +1423,56 @@ const file_com_coralogix_metrics_metrics_configurator_proto_rawDesc = "" +
 	"\ttenant_id\x18\x01 \x01(\rR\btenantId\"\x1c\n" +
 	"\x1aListHotStoreConfigsRequest\"s\n" +
 	"\x1bListHotStoreConfigsResponse\x12T\n" +
-	"\aconfigs\x18\x01 \x03(\v2:.com.coralogix.metrics.metrics_configurator.HotStoreConfigR\aconfigs2\xa2\t\n" +
-	" MetricsConfiguratorPublicService\x12\xa7\x01\n" +
-	"\x0fConfigureTenant\x12B.com.coralogix.metrics.metrics_configurator.ConfigureTenantRequest\x1a\x16.google.protobuf.Empty\"8\x82\xd3\xe4\x93\x022:\x01*Z\x15\"\x13/v1/metrics-archive\"\x16/metrics/data-setup/v1\x12\x95\x01\n" +
-	"\x06Update\x129.com.coralogix.metrics.metrics_configurator.UpdateRequest\x1a\x16.google.protobuf.Empty\"8\x82\xd3\xe4\x93\x022:\x01*Z\x15\x1a\x13/v1/metrics-archive\x1a\x16/metrics/data-setup/v1\x12\xb7\x01\n" +
-	"\x0eValidateBucket\x12A.com.coralogix.metrics.metrics_configurator.ValidateBucketRequest\x1a\x16.google.protobuf.Empty\"J\x82\xd3\xe4\x93\x02D:\x01*Z\x1e\"\x1c/v1/metrics-archive:validate\"\x1f/metrics/data-setup/v1/validate\x12\xa7\x01\n" +
-	"\x0fGetTenantConfig\x12\x16.google.protobuf.Empty\x1aE.com.coralogix.metrics.metrics_configurator.GetTenantConfigResponseV2\"5\x82\xd3\xe4\x93\x02/Z\x15\x12\x13/v1/metrics-archive\x12\x16/metrics/data-setup/v1\x12\x84\x01\n" +
-	"\rEnableArchive\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\"C\x82\xd3\xe4\x93\x02=Z\x1c\"\x1a/v1/metrics-archive:enable\"\x1d/metrics/data-setup/v1/enable\x12\x87\x01\n" +
-	"\x0eDisableArchive\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\"E\x82\xd3\xe4\x93\x02?Z\x1d\"\x1b/v1/metrics-archive:disable\"\x1e/metrics/data-setup/v1/disable\x1a\xc6\x01\x9aA\xc2\x01\n" +
+	"\aconfigs\x18\x01 \x03(\v2:.com.coralogix.metrics.metrics_configurator.HotStoreConfigR\aconfigs2\xec\x0e\n" +
+	" MetricsConfiguratorPublicService\x12\x9e\x02\n" +
+	"\x0fConfigureTenant\x12B.com.coralogix.metrics.metrics_configurator.ConfigureTenantRequest\x1a\x16.google.protobuf.Empty\"\xae\x01\x9aAs\n" +
+	"\x1cMetrics Data Archive ServiceJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x022:\x01*Z\x15\"\x13/v1/metrics-archive\"\x16/metrics/data-setup/v1\x12\x8c\x02\n" +
+	"\x06Update\x129.com.coralogix.metrics.metrics_configurator.UpdateRequest\x1a\x16.google.protobuf.Empty\"\xae\x01\x9aAs\n" +
+	"\x1cMetrics Data Archive ServiceJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x022:\x01*Z\x15\x1a\x13/v1/metrics-archive\x1a\x16/metrics/data-setup/v1\x12\xae\x02\n" +
+	"\x0eValidateBucket\x12A.com.coralogix.metrics.metrics_configurator.ValidateBucketRequest\x1a\x16.google.protobuf.Empty\"\xc0\x01\x9aAs\n" +
+	"\x1cMetrics Data Archive ServiceJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02D:\x01*Z\x1e\"\x1c/v1/metrics-archive:validate\"\x1f/metrics/data-setup/v1/validate\x12\x9e\x02\n" +
+	"\x0fGetTenantConfig\x12\x16.google.protobuf.Empty\x1aE.com.coralogix.metrics.metrics_configurator.GetTenantConfigResponseV2\"\xab\x01\x9aAs\n" +
+	"\x1cMetrics Data Archive ServiceJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02/Z\x15\x12\x13/v1/metrics-archive\x12\x16/metrics/data-setup/v1\x12\xfb\x01\n" +
+	"\rEnableArchive\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\"\xb9\x01\x9aAs\n" +
+	"\x1cMetrics Data Archive ServiceJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02=Z\x1c\"\x1a/v1/metrics-archive:enable\"\x1d/metrics/data-setup/v1/enable\x12\xfe\x01\n" +
+	"\x0eDisableArchive\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\"\xbb\x01\x9aAs\n" +
+	"\x1cMetrics Data Archive ServiceJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02?Z\x1d\"\x1b/v1/metrics-archive:disable\"\x1e/metrics/data-setup/v1/disable\x1a\xc6\x01\x9aA\xc2\x01\n" +
 	"\x1cMetrics Data Archive Service\x121View and manage your storage targets for metrics.\x1ao\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/2\xe0\x05\n" +
 	"\x1aMetricsConfiguratorService\x12\x9c\x01\n" +

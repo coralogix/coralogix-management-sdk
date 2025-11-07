@@ -27,8 +27,8 @@ commit_hash = "d5ca27144eb59fe46e9a8c69616866f9a9e964ee"
 [[dependencies]]
 name = "cx-api-archive"
 url = "github.com/coralogix/cx-api-archive"
-revision = "v0.0.151"
-commit_hash = "5b7f46ca1d6b102623c3ffddf2687445333537d7"
+revision = "v0.0.157"
+commit_hash = "34b6c609438cff8453f26cf0c10293aafb1f2eed"
 
 [[dependencies]]
 name = "cx-api-common"
@@ -75,8 +75,9 @@ commit_hash = "b960466df912ba67e7157e2f016af02eb6c9f669"
 [[dependencies]]
 name = "cx-api-lmd-model"
 url = "github.com/coralogix/cx-api-lmd-model"
-branch = "master"
-commit_hash = "fa71ff99fdcdeaf13b525f65ad2b2afa9a70abcb"
+protocol = "ssh"
+revision = "v0.0.8"
+commit_hash = "c3519ef689aca1a640f985e7b339394028c261f4"
 
 [[dependencies]]
 name = "cx-api-logs2metrics"
@@ -87,8 +88,8 @@ commit_hash = "5921c0e9bea453e15a75845dcfffc29cd5a1950b"
 [[dependencies]]
 name = "cx-api-metrics-configurator"
 url = "github.com/coralogix/cx-api-metrics-configurator"
-revision = "v0.0.8"
-commit_hash = "e403cfc9c89159e6a9a22d5c9120e0c4855f6deb"
+revision = "v0.0.9"
+commit_hash = "62ce096fa5eff10f78e1d3b6c8ea769d113147ee"
 
 [[dependencies]]
 name = "cx-api-metrics-rule-manager"
@@ -129,8 +130,8 @@ commit_hash = "df7dcc92af138b1abc032b32d7f6fa703e2b17db"
 [[dependencies]]
 name = "cx-api-slo"
 url = "github.com/coralogix/cx-api-slo"
-revision = "v0.0.36"
-commit_hash = "730f97d08ecadd65746530299273370167b9a294"
+revision = "v0.0.40"
+commit_hash = "90b70064bc7698757409dbd72fefb8ce82b244c8"
 
 [[dependencies]]
 name = "cx-api-views"
