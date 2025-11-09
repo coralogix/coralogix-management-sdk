@@ -17,7 +17,6 @@ package examples
 import (
 	"context"
 	"fmt"
-	"log"
 	"os"
 	"strconv"
 	"testing"
@@ -78,7 +77,7 @@ func TestApiKeys(t *testing.T) {
 
 	updated, httpResp, err := client.ApiKeysServiceGetApiKey(context.Background(), *created.KeyId).Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, newName, updated.KeyInfo.Name)
+	assert.Equal(t, newName, *updated.KeyInfo.Name)
 
 	_, httpResp, err = client.ApiKeysServiceDeleteApiKey(context.Background(), *created.KeyId).Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
@@ -151,7 +150,7 @@ func TestIpAccess(t *testing.T) {
 	for _, ipAccess := range *replaceRes.Settings.IpAccess {
 		if ipAccess.Name != nil && *ipAccess.Name == "VPN" {
 			found = true
-			assert.Equal(t, ipAccess.IpRange, "198.51.100.0/18")
+			assert.Equal(t, *ipAccess.IpRange, "198.51.100.0/18")
 		}
 	}
 	if !found {
@@ -200,7 +199,6 @@ func TestGroups(t *testing.T) {
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 	assert.NotNil(t, createdGroup.GroupId)
 	groupID := createdGroup.GroupId.Id
-	log.Printf("group id: %d", groupID)
 
 	//gotGroup, httpResp, err := client.
 	//	TeamPermissionsMgmtServiceGetTeamGroup(ctx, *groupID).

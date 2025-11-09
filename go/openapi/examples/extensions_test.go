@@ -97,5 +97,5 @@ func TestExtensions(t *testing.T) {
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 	assert.NotNil(t, deployResp, "deployment response should not be nil")
 
-	fmt.Printf("Deployed extension %s version %s successfully\n", extensionID, deployReq.Version)
+	fmt.Printf("Deployed extension %s version %s successfully\n", extensionID, *deployReq.Version)
 }

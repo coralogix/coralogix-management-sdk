@@ -53,7 +53,7 @@ func TestHttpsConnector(t *testing.T) {
 		ConnectorsServiceGetConnector(context.Background(), *connectorID).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, name, got.Connector.Name)
+	assert.Equal(t, name, *got.Connector.Name)
 
 	_, httpResp, err = client.
 		ConnectorsServiceDeleteConnector(context.Background(), *connectorID).
@@ -110,7 +110,7 @@ func TestSlackConnector(t *testing.T) {
 		ConnectorsServiceGetConnector(context.Background(), *connectorID).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, "TestSlackConnector", got.Connector.Name)
+	assert.Equal(t, "TestSlackConnector", *got.Connector.Name)
 
 	_, httpResp, err = client.
 		ConnectorsServiceDeleteConnector(context.Background(), *connectorID).
@@ -165,7 +165,7 @@ func TestPagerdutyConnector(t *testing.T) {
 		ConnectorsServiceGetConnector(context.Background(), *connectorID).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, "TestPagerdutyConnector", got.Connector.Name)
+	assert.Equal(t, "TestPagerdutyConnector", *got.Connector.Name)
 
 	_, httpResp, err = client.
 		ConnectorsServiceDeleteConnector(context.Background(), *connectorID).
@@ -198,7 +198,7 @@ func TestHttpsPreset(t *testing.T) {
 		PresetsServiceGetPreset(context.Background(), *presetID).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, name, got.Preset.Name)
+	assert.Equal(t, name, *got.Preset.Name)
 
 	_, httpResp, err = client.
 		PresetsServiceSetPresetAsDefault(context.Background(), *presetID).
@@ -279,7 +279,7 @@ func TestSlackPreset(t *testing.T) {
 		PresetsServiceGetPreset(context.Background(), *presetID).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, name, got.Preset.Name)
+	assert.Equal(t, name, *got.Preset.Name)
 
 	_, httpResp, err = client.
 		PresetsServiceSetPresetAsDefault(context.Background(), *presetID).
@@ -356,7 +356,7 @@ func TestPagerdutyPreset(t *testing.T) {
 		PresetsServiceGetPreset(context.Background(), *presetID).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, name, got.Preset.Name)
+	assert.Equal(t, name, *got.Preset.Name)
 
 	_, httpResp, err = client.
 		PresetsServiceSetPresetAsDefault(context.Background(), *presetID).
