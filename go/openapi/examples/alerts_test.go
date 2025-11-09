@@ -10,6 +10,7 @@ import (
 	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
 	alerts "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/alert_definitions_service"
 	scheduler "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/alert_scheduler_rule_service"
+	slos "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/slos_service"
 )
 
 // CreateTracingImmediateAlert returns a reusable OpenAPI alert definition payload
@@ -533,6 +534,87 @@ func TestFlowAlerts(t *testing.T) {
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
+func TestSloAlerts(t *testing.T) {
+	ctx := context.Background()
+	cpc := cxsdk.NewSDKCallPropertiesCreator(
+		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		cxsdk.APIKeyFromEnv(),
+	)
+
+	sloClient := cxsdk.NewClientSet(cpc).SLOs()
+	sloPayload := getRequestBasedSlo("example_slo_for_alert")
+
+	createSloReq := slos.SlosServiceReplaceSloRequest{
+		SloRequestBasedMetricSli: sloPayload,
+	}
+	sloResp, httpResp, err := sloClient.
+		SlosServiceCreateSlo(ctx).
+		SlosServiceReplaceSloRequest(createSloReq).
+		Execute()
+	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	sloID := sloResp.GetSlo().SloRequestBasedMetricSli.GetId()
+	assert.NotEmpty(t, sloID)
+
+	alertsClient := cxsdk.NewAlertsClient(cpc)
+	createAlertReq := alerts.CreateAlertDefinitionRequest{
+		AlertDefProperties: &alerts.AlertDefProperties{
+			AlertDefPropertiesSloThreshold: CreateBurnRateSloAlert(sloID),
+		},
+	}
+
+	created, httpResp, err := alertsClient.
+		AlertDefsServiceCreateAlertDef(ctx).
+		CreateAlertDefinitionRequest(createAlertReq).
+		Execute()
+	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	assert.NotEmpty(t, created.AlertDef.Id)
+
+	retrieved, httpResp, err := alertsClient.
+		AlertDefsServiceGetAlertDef(ctx, *created.AlertDef.Id).
+		Execute()
+	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	assert.Equal(t, created.AlertDef.Id, retrieved.AlertDef.Id)
+
+	newDesc := "Updated SLO alert description via OpenAPI SDK"
+	updateReq := alerts.ReplaceAlertDefinitionRequest{
+		Id: created.AlertDef.Id,
+		AlertDefProperties: &alerts.AlertDefProperties{
+			AlertDefPropertiesSloThreshold: &alerts.AlertDefPropertiesSloThreshold{
+				Name:         created.AlertDef.AlertDefProperties.AlertDefPropertiesSloThreshold.Name,
+				Description:  &newDesc,
+				Enabled:      created.AlertDef.AlertDefProperties.AlertDefPropertiesSloThreshold.Enabled,
+				Priority:     created.AlertDef.AlertDefProperties.AlertDefPropertiesSloThreshold.Priority,
+				Type:         created.AlertDef.AlertDefProperties.AlertDefPropertiesSloThreshold.Type,
+				EntityLabels: created.AlertDef.AlertDefProperties.AlertDefPropertiesSloThreshold.EntityLabels,
+				GroupByKeys:  created.AlertDef.AlertDefProperties.AlertDefPropertiesSloThreshold.GroupByKeys,
+				PhantomMode:  created.AlertDef.AlertDefProperties.AlertDefPropertiesSloThreshold.PhantomMode,
+				SloThreshold: created.AlertDef.AlertDefProperties.AlertDefPropertiesSloThreshold.SloThreshold,
+			},
+		},
+	}
+	updated, httpResp, err := alertsClient.
+		AlertDefsServiceReplaceAlertDef(ctx).
+		ReplaceAlertDefinitionRequest(updateReq).
+		Execute()
+	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	assert.Equal(t, *updated.AlertDef.AlertDefProperties.AlertDefPropertiesSloThreshold.Description, newDesc)
+
+	_, httpResp, err = alertsClient.
+		AlertDefsServiceDeleteAlertDef(ctx, *updated.AlertDef.Id).
+		Execute()
+	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+
+	_, httpResp, err = alertsClient.
+		AlertDefsServiceGetAlertDef(ctx, *updated.AlertDef.Id).
+		Execute()
+	assert.NotNil(t, cxsdk.NewAPIError(httpResp, err))
+
+	_, httpResp, err = sloClient.
+		SlosServiceDeleteSlo(ctx, sloID).
+		Execute()
+	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+}
+
 func TestAlertScheduler(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
@@ -635,4 +717,69 @@ func TestAlertScheduler(t *testing.T) {
 		AlertDefsServiceDeleteAlertDef(ctx, *createdAlert.AlertDef.Id).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+}
+
+// CreateSloAlert returns a reusable Burn Rate SLO alert definition payload
+func CreateBurnRateSloAlert(sloID string) *alerts.AlertDefPropertiesSloThreshold {
+	return &alerts.AlertDefPropertiesSloThreshold{
+		Name:        slos.PtrString("SLO Burn Rate Alert Example"),
+		Description: alerts.PtrString("SLO burn rate alert created via OpenAPI SDK"),
+		Enabled:     alerts.PtrBool(true),
+		Priority:    alerts.ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P1.Ptr(),
+		Type:        alerts.ALERTDEFTYPE_ALERT_DEF_TYPE_SLO_THRESHOLD.Ptr(),
+		EntityLabels: &map[string]string{
+			"alert_type": "slo",
+		},
+		PhantomMode: alerts.PtrBool(false),
+		NotificationGroup: &alerts.AlertDefNotificationGroup{
+			Webhooks: []alerts.AlertDefWebhooksSettings{
+				{
+					Minutes:  alerts.PtrInt64(5),
+					NotifyOn: alerts.NOTIFYON_NOTIFY_ON_TRIGGERED_AND_RESOLVED.Ptr(),
+					Integration: &alerts.V3IntegrationType{
+						V3IntegrationTypeRecipients: &alerts.V3IntegrationTypeRecipients{
+							Recipients: &alerts.Recipients{
+								Emails: []string{"example@coralogix.com"},
+							},
+						},
+					},
+				},
+			},
+		},
+		ActiveOn: &alerts.ActivitySchedule{
+			DayOfWeek: []alerts.DayOfWeek{
+				alerts.DAYOFWEEK_DAY_OF_WEEK_WEDNESDAY,
+				alerts.DAYOFWEEK_DAY_OF_WEEK_THURSDAY,
+			},
+			StartTime: &alerts.TimeOfDay{Hours: slos.PtrInt32(8), Minutes: slos.PtrInt32(32)},
+			EndTime:   &alerts.TimeOfDay{Hours: slos.PtrInt32(20), Minutes: slos.PtrInt32(30)},
+		},
+		SloThreshold: &alerts.SloThresholdType{
+			SloThresholdTypeBurnRate: &alerts.SloThresholdTypeBurnRate{
+				SloDefinition: &alerts.V3SloDefinition{
+					SloId: &sloID,
+				},
+				BurnRate: &alerts.BurnRateThreshold{
+					BurnRateThresholdSingle: &alerts.BurnRateThresholdSingle{
+						Rules: []alerts.SloThresholdRule{
+							{
+								Condition: &alerts.SloThresholdCondition{
+									Threshold: slos.PtrFloat64(1),
+								},
+								Override: &alerts.AlertDefOverride{
+									Priority: alerts.ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P1.Ptr(),
+								},
+							},
+						},
+						Single: &alerts.BurnRateTypeSingle{
+							TimeDuration: &alerts.TimeDuration{
+								Duration: slos.PtrString("1"),
+								Unit:     alerts.DURATIONUNIT_DURATION_UNIT_HOURS.Ptr(),
+							},
+						},
+					},
+				},
+			},
+		},
+	}
 }

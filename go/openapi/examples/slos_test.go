@@ -18,10 +18,11 @@ import (
 	"context"
 	"testing"
 
-	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
-	slos "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/slos_service"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
+
+	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
+	slos "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/slos_service"
 )
 
 func TestSLOs(t *testing.T) {
@@ -33,24 +34,10 @@ func TestSLOs(t *testing.T) {
 	client := cxsdk.NewClientSet(cpc).SLOs()
 
 	sloName := "example_slo_" + uuid.NewString()
+	sloPayload := getRequestBasedSlo(sloName)
 	createReq := slos.SlosServiceReplaceSloRequest{
-		SloRequestBasedMetricSli: &slos.SloRequestBasedMetricSli{
-			Name:                      sloName,
-			Description:               slos.PtrString("example slo created via openapi sdk"),
-			TargetThresholdPercentage: 30,
-			RequestBasedMetricSli: &slos.RequestBasedMetricSli{
-				GoodEvents: slos.Metric{
-					Query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)",
-				},
-				TotalEvents: slos.Metric{
-					Query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)",
-				},
-			},
-			SloTimeFrame: slos.SLOTIMEFRAME_SLO_TIME_FRAME_7_DAYS.Ptr(),
-			Labels:       &map[string]string{"label1": "value1"},
-		},
+		SloRequestBasedMetricSli: sloPayload,
 	}
-
 	createResp, httpResp, err := client.SlosServiceCreateSlo(ctx).SlosServiceReplaceSloRequest(createReq).Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 
@@ -61,24 +48,13 @@ func TestSLOs(t *testing.T) {
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
 	require.Equal(t, sloName, getResp.GetSlo().SloRequestBasedMetricSli.GetName())
 
-	updatedName := sloName + "_updated"
+	updatedName := "updated_example_slo_" + uuid.NewString()
+	updatePayload := sloPayload
+	updatePayload.Id = &sloID
+	updatePayload.Name = updatedName
+
 	updateReq := slos.SlosServiceReplaceSloRequest{
-		SloRequestBasedMetricSli: &slos.SloRequestBasedMetricSli{
-			Id:                        &sloID,
-			Name:                      updatedName,
-			Description:               slos.PtrString("example slo created via openapi sdk"),
-			TargetThresholdPercentage: 30,
-			RequestBasedMetricSli: &slos.RequestBasedMetricSli{
-				GoodEvents: slos.Metric{
-					Query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)",
-				},
-				TotalEvents: slos.Metric{
-					Query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)",
-				},
-			},
-			SloTimeFrame: slos.SLOTIMEFRAME_SLO_TIME_FRAME_7_DAYS.Ptr(),
-			Labels:       &map[string]string{"label1": "value1"},
-		},
+		SloRequestBasedMetricSli: updatePayload,
 	}
 
 	updateResp, httpResp, err := client.
@@ -106,4 +82,25 @@ func TestSLOs(t *testing.T) {
 		SlosServiceDeleteSlo(ctx, sloID).
 		Execute()
 	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+}
+
+func getRequestBasedSlo(name string) *slos.SloRequestBasedMetricSli {
+	desc := "example SLO created via OpenAPI SDK"
+	target := float32(30.0)
+
+	return &slos.SloRequestBasedMetricSli{
+		Name:                      name,
+		Description:               slos.PtrString(desc),
+		TargetThresholdPercentage: target,
+		RequestBasedMetricSli: &slos.RequestBasedMetricSli{
+			GoodEvents: slos.Metric{
+				Query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)",
+			},
+			TotalEvents: slos.Metric{
+				Query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)",
+			},
+		},
+		SloTimeFrame: slos.SLOTIMEFRAME_SLO_TIME_FRAME_7_DAYS.Ptr(),
+		Labels:       &map[string]string{"label1": "value1"},
+	}
 }
