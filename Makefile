@@ -23,6 +23,9 @@ release:
 test:
 	cd ./go; make test TESTARGS=${TESTARGS}
 
+test-openapi:
+	cd ./go; make test-openapi TESTARGS=${TESTARGS}
+
 proto-renew:
 	protofetch clear-cache
 	protofetch clean

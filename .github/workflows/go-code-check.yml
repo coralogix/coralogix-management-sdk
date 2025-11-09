@@ -1,4 +1,6 @@
 name: "[Go SDK] Code Check"
+permissions:
+  contents: read
 
 env:
   PROTOC_VERSION: "32.1"
@@ -54,9 +56,9 @@ jobs:
       - name: Run Examples
         env:
           AWS_TEST_ROLE: ${{ secrets.AWS_TEST_ROLE }}
-          CORALOGIX_TEAM_API_KEY: ${{ secrets.CORALOGIX_TEAM_API_KEY }} 
-          CORALOGIX_USER_API_KEY: ${{ secrets.CORALOGIX_USER_API_KEY }} 
-          CORALOGIX_REGION: ${{ secrets.CORALOGIX_REGION }} 
+          CORALOGIX_TEAM_API_KEY: ${{ secrets.CORALOGIX_TEAM_API_KEY }}
+          CORALOGIX_USER_API_KEY: ${{ secrets.CORALOGIX_USER_API_KEY }}
+          CORALOGIX_REGION: ${{ secrets.CORALOGIX_REGION }}
           TEAM_ID: ${{ secrets.TEAM_ID }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
           METRICS_BUCKET: ${{ secrets.METRICS_BUCKET }}
@@ -67,3 +69,30 @@ jobs:
           go install google.golang.org/protobuf/cmd/protoc-gen-go
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
           make test
+  run_openapi_examples:
+    name: "[Go SDK - Linux] Run OpenAPI Examples"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+      - uses: arduino/setup-protoc@v3
+        with:
+          version: ${{env.PROTOC_VERSION}}
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.GRPC_GATEWAY_DEPLOY_KEY }}
+      - name: Run OpenAPI Examples
+        env:
+          AWS_TEST_ROLE: ${{ secrets.AWS_TEST_ROLE }}
+          CORALOGIX_API_KEY: ${{ secrets.CORALOGIX_TEAM_API_KEY }}
+          CORALOGIX_REGION: ${{ secrets.CORALOGIX_REGION }}
+          TEAM_ID: ${{ secrets.TEAM_ID }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          METRICS_BUCKET: ${{ secrets.METRICS_BUCKET }}
+          LOGS_BUCKET: ${{ secrets.LOGS_BUCKET }}
+          GOPRIVATE: ${{ secrets.GOPRIVATE }}
+        run: |
+          git config --global url."git@github.com:".insteadOf "https://github.com/"
+          go install google.golang.org/protobuf/cmd/protoc-gen-go
+          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+          make test-openapi

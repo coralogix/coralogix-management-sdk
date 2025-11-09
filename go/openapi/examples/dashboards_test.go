@@ -29,7 +29,7 @@ import (
 )
 
 func TestDashboards(t *testing.T) {
-	t.Skip("Failing due to data matches more than one schema")
+	t.Skip("Skipping because it's failing due to data matches more than one schema")
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
 		cxsdk.APIKeyFromEnv(),

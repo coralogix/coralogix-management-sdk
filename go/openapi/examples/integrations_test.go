@@ -36,11 +36,11 @@ func TestIntegration(t *testing.T) {
 	client := cxsdk.NewIntegrationsClient(cpc)
 	awsRegion := os.Getenv("AWS_REGION")
 	if awsRegion == "" {
-		t.Fatalf("env AWS_REGION not set")
+		t.Fatalf("AWS_REGION environment variable is not set")
 	}
 	role := os.Getenv("AWS_TEST_ROLE")
 	if role == "" {
-		t.Fatalf("env AWS_TEST_ROLE not set")
+		t.Fatalf("AWS_TEST_ROLE environment variable is not set")
 	}
 
 	name := "aws-metrics-collector"

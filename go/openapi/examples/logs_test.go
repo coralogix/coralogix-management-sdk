@@ -15,7 +15,7 @@ func TestArchiveLogs(t *testing.T) {
 	logsBucket := os.Getenv("LOGS_BUCKET")
 	awsRegion := os.Getenv("AWS_REGION")
 	if logsBucket == "" || awsRegion == "" {
-		t.Fatalf("LOGS_BUCKET or AWS_REGION environment variable is not set")
+		t.Fatalf("LOGS_BUCKET or AWS_REGION environment variable are not set")
 	}
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
