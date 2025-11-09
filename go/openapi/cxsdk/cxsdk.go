@@ -34,6 +34,7 @@ import (
 	globalrouters "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/global_routers_service"
 	integrations "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/integration_service"
 	ipaccess "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/ip_access_service"
+	archivemetrics "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/metrics_data_archive_service"
 	webhooks "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/outgoing_webhooks_service"
 	tcopolicies "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/policies_service"
 	presets "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/presets_service"
@@ -66,6 +67,7 @@ type ClientSet struct {
 	alerts               *alerts.AlertDefinitionsServiceAPIService
 	alertScheduler       *alertscheduler.AlertSchedulerRuleServiceAPIService
 	apiKeys              *apikeys.APIKeysServiceAPIService
+	archiveMetrics       *archivemetrics.MetricsDataArchiveServiceAPIService
 	connectors           *connectors.ConnectorsServiceAPIService
 	ipAccess             *ipaccess.IPAccessServiceAPIService
 	customRoles          *customroles.RoleManagementServiceAPIService
@@ -101,6 +103,11 @@ func (c *ClientSet) Alerts() *alerts.AlertDefinitionsServiceAPIService {
 // AlertScheduler returns the AlertSchedulerRuleServiceAPIService client.
 func (c *ClientSet) AlertScheduler() *alertscheduler.AlertSchedulerRuleServiceAPIService {
 	return c.alertScheduler
+}
+
+// ArchiveMetrics returns the MetricsDataArchiveServiceAPIService client.
+func (c *ClientSet) ArchiveMetrics() *archivemetrics.MetricsDataArchiveServiceAPIService {
+	return c.archiveMetrics
 }
 
 // APIKeys returns the APIKeysServiceAPIService client.
@@ -215,6 +222,7 @@ func NewClientSet(c CallPropertiesCreator) *ClientSet {
 		alerts:               NewAlertsClient(c),
 		alertScheduler:       NewAlertSchedulerClient(c),
 		apiKeys:              NewAPIKeysClient(c),
+		archiveMetrics:       NewArchiveMetricsClient(c),
 		ipAccess:             NewIPAccessClient(c),
 		connectors:           NewConnectorsClient(c),
 		customRoles:          NewCustomRolesClient(c),
@@ -276,6 +284,16 @@ func NewAPIKeysClient(c CallPropertiesCreator) *apikeys.APIKeysServiceAPIService
 		cfg.AddDefaultHeader(k, v)
 	}
 	return apikeys.NewAPIClient(cfg).APIKeysServiceAPI
+}
+
+// NewArchiveMetricsClient builds a new MetricsDataArchiveServiceAPIService from CallPropertiesCreator.
+func NewArchiveMetricsClient(c CallPropertiesCreator) *archivemetrics.MetricsDataArchiveServiceAPIService {
+	cfg := archivemetrics.NewConfiguration()
+	cfg.Servers = archivemetrics.ServerConfigurations{{URL: c.URL()}}
+	for k, v := range c.Headers() {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return archivemetrics.NewAPIClient(cfg).MetricsDataArchiveServiceAPI
 }
 
 // NewIPAccessClient builds a new IPAccessServiceAPIService from CallPropertiesCreator.
