@@ -42,6 +42,7 @@ import (
 	scopes "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/scopes_service"
 
 	// slo (no plural) is the legacy service. slos (plural) is the new one.
+	recordingrules "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/recording_rules_service"
 	slos "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/slos_service"
 	targets "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/target_service"
 	groups "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/team_permissions_management_service"
@@ -83,6 +84,7 @@ type ClientSet struct {
 	presets              *presets.PresetsServiceAPIService
 	scopes               *scopes.ScopesServiceAPIService
 	slos                 *slos.SlosServiceAPIService
+	recordingRules       *recordingrules.RecordingRulesServiceAPIService
 	tcoPolicies          *tcopolicies.PoliciesServiceAPIService
 	webhooks             *webhooks.OutgoingWebhooksServiceAPIService
 	views                *views.ViewsServiceAPIService
@@ -185,6 +187,11 @@ func (c *ClientSet) SLOs() *slos.SlosServiceAPIService {
 	return c.slos
 }
 
+// RecordingRules returns the RecordingRulesServiceAPIService client.
+func (c *ClientSet) RecordingRules() *recordingrules.RecordingRulesServiceAPIService {
+	return c.recordingRules
+}
+
 // TCOPolicies returns the PoliciesServiceAPIService client.
 func (c *ClientSet) TCOPolicies() *tcopolicies.PoliciesServiceAPIService {
 	return c.tcoPolicies
@@ -238,6 +245,7 @@ func NewClientSet(c CallPropertiesCreator) *ClientSet {
 		presets:              NewPresetsClient(c),
 		scopes:               NewScopesClient(c),
 		slos:                 NewSLOsClient(c),
+		recordingRules:       NewRecordingRulesClient(c),
 		tcoPolicies:          NewTCOPoliciesClient(c),
 		webhooks:             NewWebhooksClient(c),
 		views:                NewViewsClient(c),
@@ -444,6 +452,16 @@ func NewSLOsClient(c CallPropertiesCreator) *slos.SlosServiceAPIService {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return slos.NewAPIClient(cfg).SlosServiceAPI
+}
+
+// NewRecordingRulesClient builds a new RecordingRulesServiceAPIService from CallPropertiesCreator.
+func NewRecordingRulesClient(c CallPropertiesCreator) *recordingrules.RecordingRulesServiceAPIService {
+	cfg := recordingrules.NewConfiguration()
+	cfg.Servers = recordingrules.ServerConfigurations{{URL: c.URL()}}
+	for k, v := range c.Headers() {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return recordingrules.NewAPIClient(cfg).RecordingRulesServiceAPI
 }
 
 // NewTCOPoliciesClient builds a new PoliciesServiceAPIService from CallPropertiesCreator.

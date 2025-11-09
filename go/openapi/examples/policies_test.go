@@ -30,7 +30,7 @@ func TestPolicies(t *testing.T) {
 		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
 		cxsdk.APIKeyFromEnv(),
 	)
-	client := cxsdk.NewClientSet(cpc).TCOPolicies()
+	client := cxsdk.NewTCOPoliciesClient(cpc)
 
 	policyName := "Example tco_policy from SDK" + uuid.NewString()
 	createReq := tcopolicies.PoliciesServiceCreatePolicyRequest{
