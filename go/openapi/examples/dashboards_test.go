@@ -21,7 +21,7 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 
 	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
 	dashboardfolders "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/dashboard_folders_service"
@@ -44,7 +44,7 @@ func TestDashboards(t *testing.T) {
 
 	var dashboard dashboards.Dashboard
 	err = json.Unmarshal(data, &dashboard)
-	assertNilAndPrintError(t, err)
+	require.NoError(t, err)
 
 	req := dashboards.CreateDashboardRequestDataStructure{
 		Dashboard: dashboard,
@@ -53,8 +53,8 @@ func TestDashboards(t *testing.T) {
 		DashboardsServiceCreateDashboard(context.Background()).
 		CreateDashboardRequestDataStructure(req).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotNil(t, created.DashboardId)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, created.DashboardId)
 
 	dashboardID := *created.DashboardId
 
@@ -62,18 +62,18 @@ func TestDashboards(t *testing.T) {
 		DashboardsServicePinDashboard(context.Background(), dashboardID).
 		PinDashboardRequestDataStructure(dashboards.PinDashboardRequestDataStructure{}).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = client.
 		DashboardsServiceUnpinDashboard(context.Background(), dashboardID).
 		UnpinDashboardRequestDataStructure(dashboards.UnpinDashboardRequestDataStructure{}).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	catalog, httpResp, err := client.
 		DashboardCatalogServiceGetDashboardCatalog(context.Background()).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	found := false
 	for _, v := range catalog.Items {
@@ -82,12 +82,12 @@ func TestDashboards(t *testing.T) {
 			break
 		}
 	}
-	assert.True(t, found)
+	require.True(t, found)
 
 	_, httpResp, err = client.
 		DashboardsServiceDeleteDashboard(context.Background(), dashboardID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 func TestDashboardFolders(t *testing.T) {
@@ -110,7 +110,7 @@ func TestDashboardFolders(t *testing.T) {
 		DashboardFoldersServiceCreateDashboardFolder(context.Background()).
 		CreateDashboardFolderRequestDataStructure(createReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	replaceReq := dashboardfolders.ReplaceDashboardFolderRequestDataStructure{
 		Folder: &dashboardfolders.DashboardFolder{
@@ -122,21 +122,21 @@ func TestDashboardFolders(t *testing.T) {
 		DashboardFoldersServiceReplaceDashboardFolder(context.Background()).
 		ReplaceDashboardFolderRequestDataStructure(replaceReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	getResp, httpResp, err := client.
 		DashboardFoldersServiceGetDashboardFolder(context.Background(), id).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, "updated "+id, getResp.Folder.GetName())
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, "updated "+id, getResp.Folder.GetName())
 
 	_, httpResp, err = client.
 		DashboardFoldersServiceListDashboardFolders(context.Background()).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = client.
 		DashboardFoldersServiceDeleteDashboardFolder(context.Background(), id).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }

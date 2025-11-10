@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 
 	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
 	extdeploy "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/extension_deployment_service"
@@ -32,8 +32,8 @@ func TestExtensions(t *testing.T) {
 		ExtensionServiceGetAllExtensions(ctx).
 		GetAllExtensionsRequest(getAllReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotEmpty(t, allResp.Extensions)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotEmpty(t, allResp.Extensions)
 
 	var extensionID string
 	for _, e := range allResp.Extensions {
@@ -42,12 +42,12 @@ func TestExtensions(t *testing.T) {
 			break
 		}
 	}
-	assert.NotEmpty(t, extensionID, "expected 'Kubernetes Observability' extension to exist")
+	require.NotEmpty(t, extensionID, "expected 'Kubernetes Observability' extension to exist")
 
 	deployedResp, httpResp, err := deployClient.
 		ExtensionDeploymentServiceGetDeployedExtensions(ctx).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	for _, deployed := range deployedResp.DeployedExtensions {
 		if deployed.GetId() == extensionID {
@@ -58,7 +58,7 @@ func TestExtensions(t *testing.T) {
 				ExtensionDeploymentServiceUndeployExtension(ctx).
 				RevertDeploymentOfExtensionRequest(undeployReq).
 				Execute()
-			assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+			require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 			break
 		}
 	}
@@ -66,8 +66,8 @@ func TestExtensions(t *testing.T) {
 	extDetails, httpResp, err := extensionsClient.
 		ExtensionServiceGetExtension(ctx, extensionID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, extensionID, extDetails.GetId())
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, extensionID, extDetails.GetId())
 
 	var itemIDs []string
 	for _, rev := range extDetails.Revisions {
@@ -80,7 +80,7 @@ func TestExtensions(t *testing.T) {
 			break
 		}
 	}
-	assert.NotEmpty(t, itemIDs, "expected items for version 0.0.2")
+	require.NotEmpty(t, itemIDs, "expected items for version 0.0.2")
 
 	deployReq := extdeploy.ExtensionDeployment{
 		Id:      &extensionID,
@@ -94,8 +94,8 @@ func TestExtensions(t *testing.T) {
 		Version(*deployReq.Version).
 		ItemIds(deployReq.ItemIds).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotNil(t, deployResp, "deployment response should not be nil")
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, deployResp, "deployment response should not be nil")
 
 	fmt.Printf("Deployed extension %s version %s successfully\n", extensionID, *deployReq.Version)
 }

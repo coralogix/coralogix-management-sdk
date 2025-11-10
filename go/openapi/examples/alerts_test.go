@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 
 	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
 	alerts "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/alert_definitions_service"
@@ -287,14 +287,14 @@ func TestTracingImmediateAlerts(t *testing.T) {
 		AlertDefsServiceCreateAlertDef(ctx).
 		CreateAlertDefinitionRequest(createReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotEmpty(t, created.AlertDef.Id)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotEmpty(t, created.AlertDef.Id)
 
 	retrieved, httpResp, err := client.
 		AlertDefsServiceGetAlertDef(ctx, *created.AlertDef.Id).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, created.AlertDef.Id, retrieved.AlertDef.Id)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, created.AlertDef.Id, retrieved.AlertDef.Id)
 
 	newDesc := "Updated description via OpenAPI SDK"
 	updateReq := alerts.ReplaceAlertDefinitionRequest{
@@ -317,18 +317,18 @@ func TestTracingImmediateAlerts(t *testing.T) {
 		AlertDefsServiceReplaceAlertDef(ctx).
 		ReplaceAlertDefinitionRequest(updateReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, *updated.AlertDef.AlertDefProperties.AlertDefPropertiesTracingImmediate.Description, newDesc)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, *updated.AlertDef.AlertDefProperties.AlertDefPropertiesTracingImmediate.Description, newDesc)
 
 	_, httpResp, err = client.
 		AlertDefsServiceDeleteAlertDef(ctx, *updated.AlertDef.Id).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = client.
 		AlertDefsServiceGetAlertDef(ctx, *updated.AlertDef.Id).
 		Execute()
-	assert.NotNil(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 func TestLogsRatioAlerts(t *testing.T) {
@@ -348,14 +348,14 @@ func TestLogsRatioAlerts(t *testing.T) {
 		AlertDefsServiceCreateAlertDef(ctx).
 		CreateAlertDefinitionRequest(createReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotEmpty(t, created.AlertDef.Id)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotEmpty(t, created.AlertDef.Id)
 
 	retrieved, httpResp, err := client.
 		AlertDefsServiceGetAlertDef(ctx, *created.AlertDef.Id).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, created.AlertDef.Id, retrieved.AlertDef.Id)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, created.AlertDef.Id, retrieved.AlertDef.Id)
 
 	newDesc := "Updated description via OpenAPI SDK"
 	updateReq := alerts.ReplaceAlertDefinitionRequest{
@@ -378,18 +378,18 @@ func TestLogsRatioAlerts(t *testing.T) {
 		AlertDefsServiceReplaceAlertDef(ctx).
 		ReplaceAlertDefinitionRequest(updateReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, *updated.AlertDef.AlertDefProperties.AlertDefPropertiesLogsRatioThreshold.Description, newDesc)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, *updated.AlertDef.AlertDefProperties.AlertDefPropertiesLogsRatioThreshold.Description, newDesc)
 
 	_, httpResp, err = client.
 		AlertDefsServiceDeleteAlertDef(ctx, *updated.AlertDef.Id).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = client.
 		AlertDefsServiceGetAlertDef(ctx, *updated.AlertDef.Id).
 		Execute()
-	assert.NotNil(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 func TestTracingThresholdAlerts(t *testing.T) {
@@ -409,14 +409,14 @@ func TestTracingThresholdAlerts(t *testing.T) {
 		AlertDefsServiceCreateAlertDef(ctx).
 		CreateAlertDefinitionRequest(createReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotEmpty(t, created.AlertDef.Id)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotEmpty(t, created.AlertDef.Id)
 
 	retrieved, httpResp, err := client.
 		AlertDefsServiceGetAlertDef(ctx, *created.AlertDef.Id).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, created.AlertDef.Id, retrieved.AlertDef.Id)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, created.AlertDef.Id, retrieved.AlertDef.Id)
 
 	newDesc := "Updated description via OpenAPI SDK"
 	updateReq := alerts.ReplaceAlertDefinitionRequest{
@@ -439,18 +439,18 @@ func TestTracingThresholdAlerts(t *testing.T) {
 		AlertDefsServiceReplaceAlertDef(ctx).
 		ReplaceAlertDefinitionRequest(updateReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, *updated.AlertDef.AlertDefProperties.AlertDefPropertiesTracingThreshold.Description, newDesc)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, *updated.AlertDef.AlertDefProperties.AlertDefPropertiesTracingThreshold.Description, newDesc)
 
 	_, httpResp, err = client.
 		AlertDefsServiceDeleteAlertDef(ctx, *updated.AlertDef.Id).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = client.
 		AlertDefsServiceGetAlertDef(ctx, *updated.AlertDef.Id).
 		Execute()
-	assert.NotNil(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 func TestFlowAlerts(t *testing.T) {
@@ -471,8 +471,8 @@ func TestFlowAlerts(t *testing.T) {
 		AlertDefsServiceCreateAlertDef(ctx).
 		CreateAlertDefinitionRequest(tracingAlertReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotEmpty(t, tracingAlert.AlertDef.Id)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotEmpty(t, tracingAlert.AlertDef.Id)
 
 	// Now create the flow alert using the created tracing alert
 	flowAlertReq := alerts.CreateAlertDefinitionRequest{
@@ -484,14 +484,14 @@ func TestFlowAlerts(t *testing.T) {
 		AlertDefsServiceCreateAlertDef(ctx).
 		CreateAlertDefinitionRequest(flowAlertReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotEmpty(t, flowAlert.AlertDef.Id)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotEmpty(t, flowAlert.AlertDef.Id)
 
 	retrieved, httpResp, err := client.
 		AlertDefsServiceGetAlertDef(ctx, *flowAlert.AlertDef.Id).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, flowAlert.AlertDef.Id, retrieved.AlertDef.Id)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, flowAlert.AlertDef.Id, retrieved.AlertDef.Id)
 
 	newDesc := "Updated description via OpenAPI SDK"
 	updateReq := alerts.ReplaceAlertDefinitionRequest{
@@ -514,24 +514,24 @@ func TestFlowAlerts(t *testing.T) {
 		AlertDefsServiceReplaceAlertDef(ctx).
 		ReplaceAlertDefinitionRequest(updateReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, *updated.AlertDef.AlertDefProperties.AlertDefPropertiesFlow.Description, newDesc)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, *updated.AlertDef.AlertDefProperties.AlertDefPropertiesFlow.Description, newDesc)
 
 	_, httpResp, err = client.
 		AlertDefsServiceDeleteAlertDef(ctx, *updated.AlertDef.Id).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = client.
 		AlertDefsServiceGetAlertDef(ctx, *updated.AlertDef.Id).
 		Execute()
-	assert.NotNil(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, cxsdk.NewAPIError(httpResp, err))
 
 	// Clean up the tracing alert
 	_, httpResp, err = client.
 		AlertDefsServiceDeleteAlertDef(ctx, *tracingAlert.AlertDef.Id).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 func TestSloAlerts(t *testing.T) {
@@ -551,9 +551,9 @@ func TestSloAlerts(t *testing.T) {
 		SlosServiceCreateSlo(ctx).
 		SlosServiceReplaceSloRequest(createSloReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	sloID := sloResp.GetSlo().SloRequestBasedMetricSli.GetId()
-	assert.NotEmpty(t, sloID)
+	require.NotEmpty(t, sloID)
 
 	alertsClient := cxsdk.NewAlertsClient(cpc)
 	createAlertReq := alerts.CreateAlertDefinitionRequest{
@@ -566,14 +566,14 @@ func TestSloAlerts(t *testing.T) {
 		AlertDefsServiceCreateAlertDef(ctx).
 		CreateAlertDefinitionRequest(createAlertReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotEmpty(t, created.AlertDef.Id)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotEmpty(t, created.AlertDef.Id)
 
 	retrieved, httpResp, err := alertsClient.
 		AlertDefsServiceGetAlertDef(ctx, *created.AlertDef.Id).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, created.AlertDef.Id, retrieved.AlertDef.Id)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, created.AlertDef.Id, retrieved.AlertDef.Id)
 
 	newDesc := "Updated SLO alert description via OpenAPI SDK"
 	updateReq := alerts.ReplaceAlertDefinitionRequest{
@@ -596,23 +596,23 @@ func TestSloAlerts(t *testing.T) {
 		AlertDefsServiceReplaceAlertDef(ctx).
 		ReplaceAlertDefinitionRequest(updateReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, *updated.AlertDef.AlertDefProperties.AlertDefPropertiesSloThreshold.Description, newDesc)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, *updated.AlertDef.AlertDefProperties.AlertDefPropertiesSloThreshold.Description, newDesc)
 
 	_, httpResp, err = alertsClient.
 		AlertDefsServiceDeleteAlertDef(ctx, *updated.AlertDef.Id).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = alertsClient.
 		AlertDefsServiceGetAlertDef(ctx, *updated.AlertDef.Id).
 		Execute()
-	assert.NotNil(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = sloClient.
 		SlosServiceDeleteSlo(ctx, sloID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 func TestAlertScheduler(t *testing.T) {
@@ -634,8 +634,8 @@ func TestAlertScheduler(t *testing.T) {
 		AlertDefsServiceCreateAlertDef(ctx).
 		CreateAlertDefinitionRequest(createAlertReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotEmpty(t, createdAlert.AlertDef.Id)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotEmpty(t, createdAlert.AlertDef.Id)
 
 	schedulerClient := cxsdk.NewAlertSchedulerClient(cpc)
 
@@ -678,8 +678,8 @@ func TestAlertScheduler(t *testing.T) {
 		AlertSchedulerRuleServiceCreateAlertSchedulerRule(ctx).
 		CreateAlertSchedulerRuleRequestDataStructure(*createReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotNil(t, createResp.AlertSchedulerRule.UniqueIdentifier)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, createResp.AlertSchedulerRule.UniqueIdentifier)
 
 	ruleID := *createResp.AlertSchedulerRule.UniqueIdentifier
 
@@ -699,24 +699,24 @@ func TestAlertScheduler(t *testing.T) {
 		AlertSchedulerRuleServiceUpdateAlertSchedulerRule(ctx).
 		UpdateAlertSchedulerRuleRequestDataStructure(updateReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, updatedName, *updateResp.AlertSchedulerRule.Name)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, updatedName, *updateResp.AlertSchedulerRule.Name)
 
 	getResp, httpResp, err := schedulerClient.
 		AlertSchedulerRuleServiceGetAlertSchedulerRule(ctx, ruleID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, updatedName, *getResp.AlertSchedulerRule.Name)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, updatedName, *getResp.AlertSchedulerRule.Name)
 
 	_, httpResp, err = schedulerClient.
 		AlertSchedulerRuleServiceDeleteAlertSchedulerRule(ctx, ruleID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = alertsClient.
 		AlertDefsServiceDeleteAlertDef(ctx, *createdAlert.AlertDef.Id).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 // CreateSloAlert returns a reusable Burn Rate SLO alert definition payload

@@ -39,13 +39,13 @@ func TestSLOs(t *testing.T) {
 		SloRequestBasedMetricSli: sloPayload,
 	}
 	createResp, httpResp, err := client.SlosServiceCreateSlo(ctx).SlosServiceReplaceSloRequest(createReq).Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	sloID := createResp.GetSlo().SloRequestBasedMetricSli.GetId()
 	getResp, httpResp, err := client.
 		SlosServiceGetSlo(ctx, sloID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.Equal(t, sloName, getResp.GetSlo().SloRequestBasedMetricSli.GetName())
 
 	updatedName := "updated_example_slo_" + uuid.NewString()
@@ -61,13 +61,13 @@ func TestSLOs(t *testing.T) {
 		SlosServiceReplaceSlo(ctx).
 		SlosServiceReplaceSloRequest(updateReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.Equal(t, updatedName, updateResp.GetSlo().SloRequestBasedMetricSli.GetName())
 
 	listResp, httpResp, err := client.
 		SlosServiceListSlos(ctx).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	found := false
 	for _, s := range listResp.GetSlos() {
@@ -81,7 +81,7 @@ func TestSLOs(t *testing.T) {
 	_, httpResp, err = client.
 		SlosServiceDeleteSlo(ctx, sloID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 func getRequestBasedSlo(name string) *slos.SloRequestBasedMetricSli {

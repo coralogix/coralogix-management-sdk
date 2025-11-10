@@ -19,7 +19,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 
 	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
 	metrics "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/metrics_data_archive_service"
@@ -54,7 +54,7 @@ func TestArchiveMetrics(t *testing.T) {
 		MetricsConfiguratorPublicServiceConfigureTenant(ctx).
 		MetricsConfiguratorPublicServiceConfigureTenantRequest(configureReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	validateReq := metrics.MetricsConfiguratorPublicServiceValidateBucketRequest{
 		ValidateBucketRequestS3: &metrics.ValidateBucketRequestS3{
@@ -65,7 +65,7 @@ func TestArchiveMetrics(t *testing.T) {
 		MetricsConfiguratorPublicServiceValidateBucket(ctx).
 		MetricsConfiguratorPublicServiceValidateBucketRequest(validateReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	retentionDays := int64(30)
 	updateReq := metrics.MetricsConfiguratorPublicServiceUpdateRequest{
@@ -79,17 +79,17 @@ func TestArchiveMetrics(t *testing.T) {
 		MetricsConfiguratorPublicServiceUpdate(ctx).
 		MetricsConfiguratorPublicServiceUpdateRequest(updateReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	getResp, httpResp, err := client.
 		MetricsConfiguratorPublicServiceGetTenantConfig(ctx).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotNil(t, getResp)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, getResp)
 
 	if getResp != nil && getResp.TenantConfig != nil && getResp.TenantConfig.TenantConfigV2S3 != nil {
-		assert.Equal(t, metricsBucket, *getResp.TenantConfig.TenantConfigV2S3.S3.Bucket)
-		assert.Equal(t, awsRegion, *getResp.TenantConfig.TenantConfigV2S3.S3.Region)
+		require.Equal(t, metricsBucket, *getResp.TenantConfig.TenantConfigV2S3.S3.Bucket)
+		require.Equal(t, awsRegion, *getResp.TenantConfig.TenantConfigV2S3.S3.Region)
 	} else {
 		t.Fatalf("expected S3 tenant config, got nil")
 	}
@@ -97,10 +97,10 @@ func TestArchiveMetrics(t *testing.T) {
 	_, httpResp, err = client.
 		MetricsConfiguratorPublicServiceEnableArchive(ctx).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = client.
 		MetricsConfiguratorPublicServiceDisableArchive(ctx).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }

@@ -22,13 +22,13 @@ import (
 	"testing"
 	"time"
 
-	scopes "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/scopes_service"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 
 	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
 	apikeys "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/api_keys_service"
 	ipaccess "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/ip_access_service"
 	customroles "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/role_management_service"
+	scopes "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/scopes_service"
 	groups "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/team_permissions_management_service"
 )
 
@@ -45,7 +45,7 @@ func TestApiKeys(t *testing.T) {
 		t.Fatal("TEAM_ID environment variable is not set")
 	}
 	teamID, err := strconv.ParseInt(teamIDEnv, 10, 64)
-	assertNilAndPrintError(t, err)
+	require.NoError(t, err)
 
 	name := "My APM KEY"
 	createReq := apikeys.CreateApiKeyRequest{
@@ -66,7 +66,7 @@ func TestApiKeys(t *testing.T) {
 		ApiKeysServiceCreateApiKey(context.Background()).
 		CreateApiKeyRequest(createReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	newName := "new-name"
 	updateReq := apikeys.UpdateApiKeyRequest{
@@ -76,14 +76,14 @@ func TestApiKeys(t *testing.T) {
 		ApiKeysServiceUpdateApiKey(context.Background(), *created.KeyId).
 		UpdateApiKeyRequest(updateReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	updated, httpResp, err := client.ApiKeysServiceGetApiKey(context.Background(), *created.KeyId).Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, newName, *updated.KeyInfo.Name)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, newName, *updated.KeyInfo.Name)
 
 	_, httpResp, err = client.ApiKeysServiceDeleteApiKey(context.Background(), *created.KeyId).Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 func TestIpAccess(t *testing.T) {
@@ -119,13 +119,13 @@ func TestIpAccess(t *testing.T) {
 		IpAccessServiceReplaceCompanyIpAccessSettings(context.Background()).
 		ReplaceCompanyIPAccessSettingsRequest(createReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	getRes, httpResp, err := client.
 		IpAccessServiceGetCompanyIpAccessSettings(context.Background()).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, createRes.Settings.Id, getRes.Settings.Id)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, createRes.Settings.Id, getRes.Settings.Id)
 
 	updateReq := ipaccess.ReplaceCompanyIPAccessSettingsRequest{
 		IpAccess: []ipaccess.IpAccess{
@@ -147,13 +147,13 @@ func TestIpAccess(t *testing.T) {
 		IpAccessServiceReplaceCompanyIpAccessSettings(context.Background()).
 		ReplaceCompanyIPAccessSettingsRequest(updateReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	found := false
 	for _, ipAccess := range *replaceRes.Settings.IpAccess {
 		if ipAccess.Name != nil && *ipAccess.Name == "VPN" {
 			found = true
-			assert.Equal(t, *ipAccess.IpRange, "198.51.100.0/18")
+			require.Equal(t, *ipAccess.IpRange, "198.51.100.0/18")
 		}
 	}
 	if !found {
@@ -163,7 +163,7 @@ func TestIpAccess(t *testing.T) {
 	_, httpResp, err = client.
 		IpAccessServiceDeleteCompanyIpAccessSettings(context.Background()).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 func TestGroups(t *testing.T) {
@@ -180,14 +180,14 @@ func TestGroups(t *testing.T) {
 		t.Fatal("TEAM_ID environment variable is not set")
 	}
 	teamID, err := strconv.ParseInt(teamIDEnv, 10, 64)
-	assertNilAndPrintError(t, err)
+	require.NoError(t, err)
 
 	// groupsResp, httpResp, err := client.
 	// 	TeamPermissionsMgmtServiceGetTeamGroups(ctx).
 	// 	TeamId(groups.TeamPermissionsMgmtServiceGetTeamGroupsTeamIdParameter{Id: &teamID}).
 	// 	Execute()
-	// assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	// assert.Greater(t, len(groupsResp.Groups), 0)
+	// require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	// require.Greater(t, len(groupsResp.Groups), 0)
 
 	groupName := fmt.Sprintf("Test Group %v", time.Now().UnixMilli())
 	groupDesc := "A Test Group"
@@ -203,15 +203,15 @@ func TestGroups(t *testing.T) {
 		TeamPermissionsMgmtServiceCreateTeamGroup(ctx).
 		CreateTeamGroupRequest(createReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotNil(t, createdGroup.GroupId)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, createdGroup.GroupId)
 	groupID := createdGroup.GroupId.Id
 
 	//gotGroup, httpResp, err := client.
 	//	TeamPermissionsMgmtServiceGetTeamGroup(ctx, *groupID).
 	//	Execute()
-	//assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	//assert.Equal(t, groupID, gotGroup.Group.GroupId.Id)
+	//require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	//require.Equal(t, groupID, gotGroup.Group.GroupId.Id)
 
 	newName := fmt.Sprintf("Updated Test Group %v", time.Now().UnixMilli())
 	updateReq := groups.UpdateTeamGroupRequest{
@@ -224,12 +224,12 @@ func TestGroups(t *testing.T) {
 		TeamPermissionsMgmtServiceUpdateTeamGroup(ctx).
 		UpdateTeamGroupRequest(updateReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = client.
 		TeamPermissionsMgmtServiceDeleteTeamGroup(ctx, *groupID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 func TestCustomRoles(t *testing.T) {
@@ -246,7 +246,7 @@ func TestCustomRoles(t *testing.T) {
 		t.Fatal("TEAM_ID environment variable is not set")
 	}
 	teamID, err := strconv.ParseInt(teamIDEnv, 10, 64)
-	assertNilAndPrintError(t, err)
+	require.NoError(t, err)
 
 	createReq := customroles.RoleManagementServiceCreateRoleRequest{
 		CreateRoleRequestParentRoleName: &customroles.CreateRoleRequestParentRoleName{
@@ -265,7 +265,7 @@ func TestCustomRoles(t *testing.T) {
 		RoleManagementServiceCreateRole(ctx).
 		RoleManagementServiceCreateRoleRequest(createReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	roleID := created.Id
 
 	newDesc := "Updated description"
@@ -277,24 +277,24 @@ func TestCustomRoles(t *testing.T) {
 		RoleManagementServiceUpdateRole(ctx, *roleID).
 		RoleManagementServiceUpdateRoleRequest(updateReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	getResp, httpResp, err := client.
 		RoleManagementServiceGetCustomRole(ctx, *roleID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, newDesc, getResp.Role.GetDescription())
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, newDesc, getResp.Role.GetDescription())
 
 	listResp, httpResp, err := client.RoleManagementServiceListCustomRoles(ctx).
 		TeamId(teamID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.GreaterOrEqual(t, len(listResp.Roles), 1)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.GreaterOrEqual(t, len(listResp.Roles), 1)
 
 	_, httpResp, err = client.
 		RoleManagementServiceDeleteRole(ctx, *roleID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 func TestScopes(t *testing.T) {
@@ -324,7 +324,7 @@ func TestScopes(t *testing.T) {
 		ScopesServiceCreateScope(ctx).
 		CreateScopeRequest(createReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	scopeID := created.Scope.Id
 
@@ -340,35 +340,35 @@ func TestScopes(t *testing.T) {
 		ScopesServiceUpdateScope(ctx).
 		UpdateScopeRequest(updateReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotNil(t, updated)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, updated)
 
 	getResp, httpResp, err := client.
 		ScopesServiceGetTeamScopesByIds(ctx).
 		Ids([]string{*scopeID}).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Greater(t, len(getResp.Scopes), 0)
-	assert.Equal(t, newDisplayName, *getResp.Scopes[0].DisplayName)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Greater(t, len(getResp.Scopes), 0)
+	require.Equal(t, newDisplayName, *getResp.Scopes[0].DisplayName)
 
 	listResp, httpResp, err := client.
 		ScopesServiceGetTeamScopes(ctx).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.GreaterOrEqual(t, len(listResp.Scopes), 1)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.GreaterOrEqual(t, len(listResp.Scopes), 1)
 
 	_, httpResp, err = client.
 		ScopesServiceDeleteScope(ctx, *scopeID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	// Skipping because of required `scopes` fields not returned in the list response
 	//listAfterDelete, httpResp, err := client.
 	//	ScopesServiceGetTeamScopes(ctx).
 	//	Execute()
-	//assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	//require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	//
 	//for _, s := range listAfterDelete.Scopes {
-	//	assert.NotEqual(t, scopeID, s.Id)
+	//	require.NotEqual(t, scopeID, s.Id)
 	//}
 }

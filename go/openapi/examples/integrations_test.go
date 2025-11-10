@@ -20,11 +20,12 @@ import (
 	"os"
 	"testing"
 
+	"github.com/google/uuid"
+	"github.com/stretchr/testify/require"
+
 	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
 	integrations "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/integration_service"
 	webhooks "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/outgoing_webhooks_service"
-	"github.com/google/uuid"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestIntegration(t *testing.T) {
@@ -95,7 +96,7 @@ func TestIntegration(t *testing.T) {
 
 	_, httpResp, err := client.IntegrationServiceTestIntegration(context.Background()).
 		TestIntegrationRequest(testReq).Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	saveReq := integrations.SaveIntegrationRequest{
 		Metadata: &integrations.IntegrationMetadata{
@@ -109,12 +110,12 @@ func TestIntegration(t *testing.T) {
 
 	createResp, httpResp, err := client.IntegrationServiceSaveIntegration(context.Background()).
 		SaveIntegrationRequest(saveReq).Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = client.
 		IntegrationServiceDeleteIntegration(context.Background(), *createResp.IntegrationId).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 func TestWebhooks(t *testing.T) {
@@ -126,7 +127,7 @@ func TestWebhooks(t *testing.T) {
 	client := cxsdk.NewWebhooksClient(cpc)
 
 	_, httpResp, err := client.OutgoingWebhooksServiceListAllOutgoingWebhooks(context.Background()).Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	tests := []struct {
 		name string
@@ -281,8 +282,8 @@ func TestWebhooks(t *testing.T) {
 				OutgoingWebhooksServiceCreateOutgoingWebhook(context.Background()).
 				CreateOutgoingWebhookRequest(req).
 				Execute()
-			assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-			assert.NotEmpty(t, createResp.GetId())
+			require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+			require.NotEmpty(t, createResp.GetId())
 
 			id := createResp.GetId()
 			newName := fmt.Sprintf("%s-updated", tt.name)
@@ -319,17 +320,17 @@ func TestWebhooks(t *testing.T) {
 				OutgoingWebhooksServiceUpdateOutgoingWebhook(context.Background()).
 				UpdateOutgoingWebhookRequest(updateReq).
 				Execute()
-			assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+			require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 			_, httpResp, err = client.
 				OutgoingWebhooksServiceGetOutgoingWebhook(context.Background(), id).
 				Execute()
-			assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+			require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 			_, httpResp, err = client.
 				OutgoingWebhooksServiceDeleteOutgoingWebhook(context.Background(), id).
 				Execute()
-			assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+			require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 		})
 	}
 }

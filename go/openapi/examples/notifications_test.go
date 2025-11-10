@@ -19,12 +19,12 @@ import (
 	"fmt"
 	"testing"
 
-	globalrouters "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/global_routers_service"
 	"github.com/google/uuid"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 
 	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
 	connectors "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/connectors_service"
+	globalrouters "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/global_routers_service"
 	presets "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/presets_service"
 )
 
@@ -44,21 +44,21 @@ func TestHttpsConnector(t *testing.T) {
 		ConnectorsServiceCreateConnector(context.Background()).
 		CreateConnectorRequest(*connector).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	connectorID := created.Connector.Id
-	assert.NotNil(t, connectorID)
+	require.NotNil(t, connectorID)
 
 	got, httpResp, err := client.
 		ConnectorsServiceGetConnector(context.Background(), *connectorID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, name, *got.Connector.Name)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, name, *got.Connector.Name)
 
 	_, httpResp, err = client.
 		ConnectorsServiceDeleteConnector(context.Background(), *connectorID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 func TestSlackConnector(t *testing.T) {
@@ -101,21 +101,21 @@ func TestSlackConnector(t *testing.T) {
 		ConnectorsServiceCreateConnector(context.Background()).
 		CreateConnectorRequest(createConnectorRequest).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	connectorID := created.Connector.Id
-	assert.NotNil(t, connectorID)
+	require.NotNil(t, connectorID)
 
 	got, httpResp, err := client.
 		ConnectorsServiceGetConnector(context.Background(), *connectorID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, "TestSlackConnector", *got.Connector.Name)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, "TestSlackConnector", *got.Connector.Name)
 
 	_, httpResp, err = client.
 		ConnectorsServiceDeleteConnector(context.Background(), *connectorID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 func TestPagerdutyConnector(t *testing.T) {
@@ -156,21 +156,21 @@ func TestPagerdutyConnector(t *testing.T) {
 		ConnectorsServiceCreateConnector(context.Background()).
 		CreateConnectorRequest(createConnectorRequest).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	connectorID := created.Connector.Id
-	assert.NotNil(t, connectorID)
+	require.NotNil(t, connectorID)
 
 	got, httpResp, err := client.
 		ConnectorsServiceGetConnector(context.Background(), *connectorID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, "TestPagerdutyConnector", *got.Connector.Name)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, "TestPagerdutyConnector", *got.Connector.Name)
 
 	_, httpResp, err = client.
 		ConnectorsServiceDeleteConnector(context.Background(), *connectorID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 func TestHttpsPreset(t *testing.T) {
@@ -189,35 +189,35 @@ func TestHttpsPreset(t *testing.T) {
 		PresetsServiceCreateCustomPreset(context.Background()).
 		CreateCustomPresetRequest(*createPresetRequest).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	presetID := created.Preset.Id
-	assert.NotNil(t, presetID)
+	require.NotNil(t, presetID)
 
 	got, httpResp, err := client.
 		PresetsServiceGetPreset(context.Background(), *presetID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, name, *got.Preset.Name)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, name, *got.Preset.Name)
 
 	_, httpResp, err = client.
 		PresetsServiceSetPresetAsDefault(context.Background(), *presetID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	defaultPreset, httpResp, err := client.
 		PresetsServiceGetDefaultPresetSummary(context.Background()).
 		EntityType("ALERTS").
 		ConnectorType("GENERIC_HTTPS").
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotNil(t, defaultPreset)
-	assert.Equal(t, name, *defaultPreset.PresetSummary.Name)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, defaultPreset)
+	require.Equal(t, name, *defaultPreset.PresetSummary.Name)
 
 	_, httpResp, err = client.
 		PresetsServiceDeleteCustomPreset(context.Background(), *presetID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 func TestSlackPreset(t *testing.T) {
@@ -270,35 +270,35 @@ func TestSlackPreset(t *testing.T) {
 		PresetsServiceCreateCustomPreset(context.Background()).
 		CreateCustomPresetRequest(createPresetRequest).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	presetID := created.Preset.Id
-	assert.NotNil(t, presetID)
+	require.NotNil(t, presetID)
 
 	got, httpResp, err := client.
 		PresetsServiceGetPreset(context.Background(), *presetID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, name, *got.Preset.Name)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, name, *got.Preset.Name)
 
 	_, httpResp, err = client.
 		PresetsServiceSetPresetAsDefault(context.Background(), *presetID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	defaultPreset, httpResp, err := client.
 		PresetsServiceGetDefaultPresetSummary(context.Background()).
 		ConnectorType("SLACK").
 		EntityType("ALERTS").
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotNil(t, defaultPreset)
-	assert.Equal(t, name, *defaultPreset.PresetSummary.Name)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, defaultPreset)
+	require.Equal(t, name, *defaultPreset.PresetSummary.Name)
 
 	_, httpResp, err = client.
 		PresetsServiceDeleteCustomPreset(context.Background(), *presetID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 func TestPagerdutyPreset(t *testing.T) {
@@ -347,35 +347,35 @@ func TestPagerdutyPreset(t *testing.T) {
 		PresetsServiceCreateCustomPreset(context.Background()).
 		CreateCustomPresetRequest(createPresetRequest).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	presetID := created.Preset.Id
-	assert.NotNil(t, presetID)
+	require.NotNil(t, presetID)
 
 	got, httpResp, err := client.
 		PresetsServiceGetPreset(context.Background(), *presetID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, name, *got.Preset.Name)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, name, *got.Preset.Name)
 
 	_, httpResp, err = client.
 		PresetsServiceSetPresetAsDefault(context.Background(), *presetID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	defaultPreset, httpResp, err := client.
 		PresetsServiceGetDefaultPresetSummary(context.Background()).
 		ConnectorType("PAGERDUTY").
 		EntityType("ALERTS").
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotNil(t, defaultPreset)
-	assert.Equal(t, name, *defaultPreset.PresetSummary.Name)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, defaultPreset)
+	require.Equal(t, name, *defaultPreset.PresetSummary.Name)
 
 	_, httpResp, err = client.
 		PresetsServiceDeleteCustomPreset(context.Background(), *presetID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 // TODO: Add Alert with routing
@@ -392,7 +392,7 @@ func TestGlobalRouter(t *testing.T) {
 	//_, _, err := routersClient.
 	//	GlobalRoutersServiceListGlobalRouters(context.Background()).EntityType("ALERTS").
 	//	Execute()
-	//assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	//require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	routerId := "router_default"
 	createConnectorRequest := getHttpsConnector(fmt.Sprintf("TestConnector-%v", uuid.NewString()))
@@ -402,14 +402,14 @@ func TestGlobalRouter(t *testing.T) {
 		ConnectorsServiceCreateConnector(context.Background()).
 		CreateConnectorRequest(*createConnectorRequest).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	connectorId := createdConnector.Connector.Id
 
 	createdPreset, httpResp, err := presetsClient.
 		PresetsServiceCreateCustomPreset(context.Background()).
 		CreateCustomPresetRequest(*createPresetRequest).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	presetId := createdPreset.Preset.Id
 
 	router := globalrouters.GlobalRouter{
@@ -437,29 +437,29 @@ func TestGlobalRouter(t *testing.T) {
 		GlobalRoutersServiceReplaceGlobalRouter(context.Background()).
 		ReplaceGlobalRouterRequest(replaceRouterRequest).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	//gotRouter, _, err := routersClient.
 	//	GlobalRoutersServiceGetGlobalRouter(context.Background(), *replacedRouter.Router.Id).
 	//	Execute()
-	//assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	//require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	//
-	//assert.Equal(t, "global router", gotRouter.Router.Name)
+	//require.Equal(t, "global router", gotRouter.Router.Name)
 
 	_, httpResp, err = routersClient.
 		GlobalRoutersServiceDeleteGlobalRouter(context.Background(), *replacedRouter.Router.Id).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = connectorsClient.
 		ConnectorsServiceDeleteConnector(context.Background(), *connectorId).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = presetsClient.
 		PresetsServiceDeleteCustomPreset(context.Background(), *presetId).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 func getHttpsConnector(name string) *connectors.CreateConnectorRequest {

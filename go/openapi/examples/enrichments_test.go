@@ -18,7 +18,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 
 	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
 	enrichments "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/enrichments_service"
@@ -53,8 +53,8 @@ func TestEnrichmentsGeoIp(t *testing.T) {
 		EnrichmentServiceAddEnrichments(context.Background()).
 		EnrichmentsCreationRequest(req).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotEmpty(t, addResp.GetEnrichments())
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotEmpty(t, addResp.GetEnrichments())
 
 	ids := make([]int64, 0, len(addResp.GetEnrichments()))
 	for _, e := range addResp.GetEnrichments() {
@@ -65,7 +65,7 @@ func TestEnrichmentsGeoIp(t *testing.T) {
 		EnrichmentServiceRemoveEnrichments(context.Background()).
 		EnrichmentIds(ids).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 func TestEnrichmentsAws(t *testing.T) {
@@ -91,8 +91,8 @@ func TestEnrichmentsAws(t *testing.T) {
 		EnrichmentServiceAddEnrichments(context.Background()).
 		EnrichmentsCreationRequest(req).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotEmpty(t, addResp.GetEnrichments())
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotEmpty(t, addResp.GetEnrichments())
 
 	ids := make([]int64, 0, len(addResp.GetEnrichments()))
 	for _, e := range addResp.GetEnrichments() {
@@ -103,7 +103,7 @@ func TestEnrichmentsAws(t *testing.T) {
 		EnrichmentServiceRemoveEnrichments(context.Background()).
 		EnrichmentIds(ids).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 func TestEnrichmentsCustom(t *testing.T) {
@@ -127,8 +127,8 @@ func TestEnrichmentsCustom(t *testing.T) {
 		EnrichmentServiceAddEnrichments(context.Background()).
 		EnrichmentsCreationRequest(req).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotEmpty(t, addResp.GetEnrichments())
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotEmpty(t, addResp.GetEnrichments())
 
 	ids := make([]int64, 0, len(addResp.GetEnrichments()))
 	for _, e := range addResp.GetEnrichments() {
@@ -139,7 +139,7 @@ func TestEnrichmentsCustom(t *testing.T) {
 		EnrichmentServiceRemoveEnrichments(context.Background()).
 		EnrichmentIds(ids).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
 func TestEnrichmentsSuspiciousIp(t *testing.T) {
@@ -161,8 +161,8 @@ func TestEnrichmentsSuspiciousIp(t *testing.T) {
 		EnrichmentServiceAddEnrichments(context.Background()).
 		EnrichmentsCreationRequest(req).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotEmpty(t, addResp.GetEnrichments())
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotEmpty(t, addResp.GetEnrichments())
 
 	ids := make([]int64, 0, len(addResp.GetEnrichments()))
 	for _, e := range addResp.GetEnrichments() {
@@ -173,5 +173,5 @@ func TestEnrichmentsSuspiciousIp(t *testing.T) {
 		EnrichmentServiceRemoveEnrichments(context.Background()).
 		EnrichmentIds(ids).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }

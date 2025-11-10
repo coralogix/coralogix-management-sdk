@@ -4,9 +4,10 @@ import (
 	"context"
 	"testing"
 
+	"github.com/stretchr/testify/require"
+
 	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
 	"github.com/coralogix/coralogix-management-sdk/go/openapi/gen/events2metrics_service"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestE2MsLogsQuery(t *testing.T) {
@@ -75,7 +76,7 @@ func TestE2MsLogsQuery(t *testing.T) {
 		Events2MetricServiceCreateE2M(context.Background()).
 		Events2MetricServiceCreateE2MRequest(createReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotNil(t, created.E2m.E2MLogsQuery.Id)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, created.E2m.E2MLogsQuery.Id)
 
 }

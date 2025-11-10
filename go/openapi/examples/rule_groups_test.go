@@ -18,7 +18,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 
 	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
 	rulegroups "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/rule_groups_service"
@@ -43,17 +43,17 @@ func TestRuleGroups(t *testing.T) {
 		RuleGroupsServiceCreateRuleGroup(ctx).
 		RuleGroupsServiceCreateRuleGroupRequest(createReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotNil(t, createResp)
-	assert.NotEmpty(t, createResp.RuleGroup)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, createResp)
+	require.NotEmpty(t, createResp.RuleGroup)
 
 	groupID := createResp.RuleGroup.Id
 
 	listResp, httpResp, err := client.
 		RuleGroupsServiceListRuleGroups(ctx).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotNil(t, listResp)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, listResp)
 	found := false
 	for _, g := range listResp.RuleGroups {
 		if g.Id != nil && *g.Id == *groupID {
@@ -61,14 +61,14 @@ func TestRuleGroups(t *testing.T) {
 			break
 		}
 	}
-	assert.True(t, found, "created group not found in list")
+	require.True(t, found, "created group not found in list")
 
 	getResp, httpResp, err := client.
 		RuleGroupsServiceGetRuleGroup(ctx, *groupID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotNil(t, getResp)
-	assert.Equal(t, groupName, *getResp.RuleGroup.Name)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, getResp)
+	require.Equal(t, groupName, *getResp.RuleGroup.Name)
 
 	updatedDesc := "rule-group updated via OpenAPI test"
 	updateReq := rulegroups.RuleGroupsServiceCreateRuleGroupRequest{
@@ -81,20 +81,20 @@ func TestRuleGroups(t *testing.T) {
 		RuleGroupsServiceUpdateRuleGroup(ctx, *groupID).
 		RuleGroupsServiceCreateRuleGroupRequest(updateReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotNil(t, updateResp)
-	assert.Equal(t, groupID, updateResp.RuleGroup.Id)
-	assert.Equal(t, updatedDesc, *updateResp.RuleGroup.Description)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, updateResp)
+	require.Equal(t, groupID, updateResp.RuleGroup.Id)
+	require.Equal(t, updatedDesc, *updateResp.RuleGroup.Description)
 
 	_, httpResp, err = client.
 		RuleGroupsServiceDeleteRuleGroup(ctx, *groupID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = client.
 		RuleGroupsServiceGetRuleGroup(ctx, *groupID).
 		Execute()
-	assert.Error(t, err, "expected error after deleting rule group")
+	require.Error(t, err, "expected error after deleting rule group")
 }
 
 func getSubgroups() []rulegroups.CreateRuleGroupRequestCreateRuleSubgroup {

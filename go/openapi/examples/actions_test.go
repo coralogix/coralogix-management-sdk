@@ -20,7 +20,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 
 	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
 	actions "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/actions_service"
@@ -51,8 +51,8 @@ func TestActions(t *testing.T) {
 		ActionsServiceCreateAction(context.Background()).
 		ActionsServiceCreateActionRequest(createReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotNil(t, created.Action.Id)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, created.Action.Id)
 
 	newName := "updated action " + strconv.FormatInt(time.Now().UnixMilli(), 10)
 	newURL := "https://www.bing.com/search?q={{$p.selected_value}}"
@@ -75,16 +75,16 @@ func TestActions(t *testing.T) {
 		ActionsServiceReplaceAction(context.Background()).
 		ActionsServiceReplaceActionRequest(replaceReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	updated, httpResp, err := client.
 		ActionsServiceGetAction(context.Background(), *created.Action.Id).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Equal(t, newURL, *updated.Action.Url)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, newURL, *updated.Action.Url)
 
 	_, httpResp, err = client.
 		ActionsServiceDeleteAction(context.Background(), *created.Action.Id).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }

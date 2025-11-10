@@ -20,7 +20,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 
 	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
 	recordingrules "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/recording_rules_service"
@@ -79,8 +79,8 @@ func TestRecordingRuleGroups(t *testing.T) {
 		RuleGroupSetsCreate(ctx).
 		CreateRuleGroupSet(req).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.NotNil(t, created.Id)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, created.Id)
 
 	updatedName := setName + "-updated"
 	updateReq := recordingrules.UpdateRuleGroupSet{
@@ -104,19 +104,19 @@ func TestRecordingRuleGroups(t *testing.T) {
 		RuleGroupSetsUpdate(ctx, *created.Id).
 		UpdateRuleGroupSet(updateReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	got, httpResp, err := client.
 		RuleGroupSetsFetch(ctx, *created.Id).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
-	assert.Len(t, got.Groups, 1)
-	assert.Equal(t, updatedName, *got.Name)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Len(t, got.Groups, 1)
+	require.Equal(t, updatedName, *got.Name)
 
 	list, httpResp, err := client.
 		RuleGroupSetsList(ctx).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	found := false
 	for _, s := range list.Sets {
@@ -125,10 +125,10 @@ func TestRecordingRuleGroups(t *testing.T) {
 			break
 		}
 	}
-	assert.True(t, found)
+	require.True(t, found)
 
 	_, httpResp, err = client.
 		RuleGroupSetsDelete(ctx, *created.Id).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }

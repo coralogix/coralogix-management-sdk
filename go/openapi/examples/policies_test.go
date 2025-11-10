@@ -18,8 +18,9 @@ import (
 	"context"
 	"testing"
 
-	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
 	tcopolicies "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/policies_service"
+
+	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
 )
@@ -61,14 +62,14 @@ func TestPolicies(t *testing.T) {
 		PoliciesServiceCreatePolicy(ctx).
 		PoliciesServiceCreatePolicyRequest(createReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	policyID := createResp.GetPolicy().PolicyLogRules.Id
 
 	getResp, _, err := client.
 		PoliciesServiceGetPolicy(ctx, policyID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.Equal(t, policyName, getResp.GetPolicy().PolicyLogRules.Name)
 
 	updatedName := "Updated Example tco_policy from SDK" + uuid.NewString()
@@ -100,14 +101,14 @@ func TestPolicies(t *testing.T) {
 		PoliciesServiceUpdatePolicy(ctx).
 		PoliciesServiceUpdatePolicyRequest(updateReq).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.Equal(t, updatedName, updateResp.GetPolicy().PolicyLogRules.Name)
 
 	listResp, _, err := client.
 		PoliciesServiceGetCompanyPolicies(ctx).
 		SourceType(tcopolicies.V1SOURCETYPE_SOURCE_TYPE_LOGS).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	found := false
 	for _, policy := range listResp.GetPolicies() {
 		if policy.PolicyLogRules != nil && policy.PolicyLogRules.Id == policyID {
@@ -120,5 +121,5 @@ func TestPolicies(t *testing.T) {
 	_, httpResp, err = client.
 		PoliciesServiceDeletePolicy(ctx, policyID).
 		Execute()
-	assertNilAndPrintError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
