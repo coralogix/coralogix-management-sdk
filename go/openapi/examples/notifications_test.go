@@ -388,34 +388,25 @@ func TestGlobalRouter(t *testing.T) {
 	routersClient := cxsdk.NewGlobalRoutersClient(cpc)
 	connectorsClient := cxsdk.NewConnectorsClient(cpc)
 	presetsClient := cxsdk.NewPresetsClient(cpc)
-
-	//_, _, err := routersClient.
-	//	GlobalRoutersServiceListGlobalRouters(context.Background()).EntityType("ALERTS").
-	//	Execute()
-	//require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-
-	routerId := "router_default"
-	createConnectorRequest := getHttpsConnector(fmt.Sprintf("TestConnector-%v", uuid.NewString()))
-	createPresetRequest := getHttpsPreset(fmt.Sprintf("TestGoHttpsPreset-%v", uuid.NewString()))
-
 	createdConnector, httpResp, err := connectorsClient.
 		ConnectorsServiceCreateConnector(context.Background()).
-		CreateConnectorRequest(*createConnectorRequest).
+		CreateConnectorRequest(*getHttpsConnector(fmt.Sprintf("TestConnector-%v", uuid.NewString()))).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	connectorId := createdConnector.Connector.Id
 
 	createdPreset, httpResp, err := presetsClient.
 		PresetsServiceCreateCustomPreset(context.Background()).
-		CreateCustomPresetRequest(*createPresetRequest).
+		CreateCustomPresetRequest(*getHttpsPreset(fmt.Sprintf("TestGoHttpsPreset-%v", uuid.NewString()))).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	presetId := createdPreset.Preset.Id
 
 	router := globalrouters.GlobalRouter{
-		Id:          &routerId,
-		Name:        globalrouters.PtrString("global router"),
-		EntityType:  globalrouters.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
+		Name: globalrouters.PtrString("global router" + uuid.NewString()),
+		EntityLabelMatcher: &map[string]string{
+			"routing.group": uuid.NewString(),
+		},
 		Description: globalrouters.PtrString("global router example"),
 		Rules: []globalrouters.RoutingRule{
 			{
@@ -430,21 +421,41 @@ func TestGlobalRouter(t *testing.T) {
 			},
 		},
 	}
-	replaceRouterRequest := globalrouters.ReplaceGlobalRouterRequest{
-		Router: &router,
-	}
+
+	createRouterRequest := globalrouters.CreateGlobalRouterRequest{Router: &router}
+	createdRouter, httpResp, err := routersClient.
+		GlobalRoutersServiceCreateGlobalRouter(context.Background()).
+		CreateGlobalRouterRequest(createRouterRequest).
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+
+	router.Id = createdRouter.Router.Id
+	router.Name = globalrouters.PtrString("global router updated" + uuid.NewString())
+	replaceRouterRequest := globalrouters.ReplaceGlobalRouterRequest{Router: &router}
 	replacedRouter, httpResp, err := routersClient.
 		GlobalRoutersServiceReplaceGlobalRouter(context.Background()).
 		ReplaceGlobalRouterRequest(replaceRouterRequest).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
-	//gotRouter, _, err := routersClient.
-	//	GlobalRoutersServiceGetGlobalRouter(context.Background(), *replacedRouter.Router.Id).
-	//	Execute()
-	//require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	//
-	//require.Equal(t, "global router", gotRouter.Router.Name)
+	got, httpResp, err := routersClient.
+		GlobalRoutersServiceGetGlobalRouter(context.Background(), *replacedRouter.Router.Id).
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, got.Router.Name, replaceRouterRequest.Router.Name)
+
+	list, httpResp, err := routersClient.
+		GlobalRoutersServiceListGlobalRouters(context.Background()).
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	found := false
+	for _, r := range list.Routers {
+		if *r.Id == *replacedRouter.Router.Id {
+			found = true
+			break
+		}
+	}
+	require.True(t, found, "created router not found in list")
 
 	_, httpResp, err = routersClient.
 		GlobalRoutersServiceDeleteGlobalRouter(context.Background(), *replacedRouter.Router.Id).
