@@ -1,0 +1,708 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/enrichment-rules/custom-enrichment-rules/v1": {
+      "get": {
+        "tags": [
+          "Custom Enrichments Service"
+        ],
+        "summary": "Get Custom Enrichments",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CustomEnrichmentService_GetCustomEnrichments",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCustomEnrichmentsResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Custom Enrichments Service"
+        ],
+        "summary": "Update Custom Enrichment",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CustomEnrichmentService_UpdateCustomEnrichment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Update Custom Enrichment Request",
+                "description": "This request data structure is used to update a custom enrichment",
+                "type": "object",
+                "properties": {
+                  "customEnrichmentId": {
+                    "example": 1,
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "description": {
+                    "example": "custom_enrichment_description",
+                    "type": "string"
+                  },
+                  "file": {
+                    "$ref": "#/components/schemas/File"
+                  },
+                  "name": {
+                    "example": "custom_enrichment_name",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "customEnrichmentId",
+                  "name",
+                  "description",
+                  "file"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateCustomEnrichmentResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enrichment-rules/custom-enrichment-rules/v1/search": {
+      "post": {
+        "tags": [
+          "Custom Enrichments Service"
+        ],
+        "summary": "Search Custom Enrichment Data",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CustomEnrichmentService_SearchCustomEnrichmentData",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "search_clauses",
+            "schema": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/SearchClauseName"
+                  },
+                  {
+                    "$ref": "#/components/schemas/SearchClauseId"
+                  }
+                ]
+              }
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchCustomEnrichmentDataResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enrichment-rules/custom-enrichment-rules/v1/{custom_enrichment_id}": {
+      "delete": {
+        "tags": [
+          "Custom Enrichments Service"
+        ],
+        "summary": "Delete Custom Enrichments",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CustomEnrichmentService_DeleteCustomEnrichment",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "custom_enrichment_id",
+            "required": true,
+            "schema": {
+              "example": 1,
+              "type": "integer",
+              "format": "int64"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteCustomEnrichmentResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enrichment-rules/custom-enrichment-rules/v1/{id}": {
+      "get": {
+        "tags": [
+          "Custom Enrichments Service"
+        ],
+        "summary": "Get Custom Enrichment",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CustomEnrichmentService_GetCustomEnrichment",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": 1,
+              "type": "integer",
+              "format": "int64"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCustomEnrichmentResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/custom_enrichment": {
+      "post": {
+        "tags": [
+          "Custom Enrichments Service"
+        ],
+        "summary": "Create Custom Enrichments",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CustomEnrichmentService_CreateCustomEnrichment",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "name",
+            "schema": {
+              "example": "custom_enrichment_name",
+              "type": "string"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "description",
+            "schema": {
+              "example": "custom_enrichment_description",
+              "type": "string"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "file",
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/FileTextual"
+                },
+                {
+                  "$ref": "#/components/schemas/FileBinary"
+                }
+              ]
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCustomEnrichmentResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ColorsByAggregation": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/ColorsByAggregation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByGroupBy": {
+        "type": "object",
+        "properties": {
+          "groupBy": {
+            "$ref": "#/components/schemas/ColorsByGroupBy"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByStack": {
+        "type": "object",
+        "properties": {
+          "stack": {
+            "$ref": "#/components/schemas/ColorsByStack"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateCustomEnrichmentResponse": {
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        },
+        "title": "Create Custom Enrichment Response",
+        "description": "This response data structure is obtained when a custom enrichment is created",
+        "type": "object",
+        "properties": {
+          "customEnrichment": {
+            "$ref": "#/components/schemas/CustomEnrichment"
+          },
+          "message": {
+            "example": "Custom enrichment created successfully",
+            "type": "string"
+          }
+        },
+        "required": [
+          "customEnrichment"
+        ]
+      },
+      "CustomEnrichment": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "fileSize": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "isQueryOnly": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "CustomEnrichmentData": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/CustomEnrichmentDataTextual"
+          },
+          {
+            "$ref": "#/components/schemas/CustomEnrichmentDataBinary"
+          }
+        ]
+      },
+      "CustomEnrichmentDataBinary": {
+        "type": "object",
+        "properties": {
+          "binary": {
+            "type": "string",
+            "format": "byte"
+          },
+          "definition": {
+            "$ref": "#/components/schemas/CustomEnrichment"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomEnrichmentDataTextual": {
+        "type": "object",
+        "properties": {
+          "definition": {
+            "$ref": "#/components/schemas/CustomEnrichment"
+          },
+          "textual": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeleteCustomEnrichmentResponse": {
+        "type": "object",
+        "properties": {
+          "customEnrichmentId": {
+            "example": 1,
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "example": "Custom enrichment deleted successfully",
+            "type": "string"
+          }
+        }
+      },
+      "FieldGroup": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "File": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/FileBinary"
+          },
+          {
+            "$ref": "#/components/schemas/FileTextual"
+          }
+        ]
+      },
+      "FileBinary": {
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        },
+        "title": "File",
+        "description": "This data structure represents a file",
+        "type": "object",
+        "properties": {
+          "binary": {
+            "example": "0xFABB32",
+            "type": "string",
+            "format": "byte"
+          },
+          "extension": {
+            "example": "csv",
+            "type": "string"
+          },
+          "name": {
+            "example": "file_name",
+            "type": "string"
+          },
+          "size": {
+            "example": 100,
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FileTextual": {
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        },
+        "title": "File",
+        "description": "This data structure represents a file",
+        "type": "object",
+        "properties": {
+          "extension": {
+            "example": "csv",
+            "type": "string"
+          },
+          "name": {
+            "example": "file_name",
+            "type": "string"
+          },
+          "size": {
+            "example": 100,
+            "type": "integer",
+            "format": "int64"
+          },
+          "textual": {
+            "example": "row1,row2 value1,value2",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FilterPathAndValues": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+          },
+          {
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+          }
+        ]
+      },
+      "FilterPathAndValuesFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "FilterPathAndValuesMultipleValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            }
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GetCustomEnrichmentResponse": {
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        },
+        "title": "Get Custom Enrichment Response",
+        "description": "This response data structure is obtained when a custom enrichment is retrieved",
+        "type": "object",
+        "properties": {
+          "customEnrichment": {
+            "$ref": "#/components/schemas/CustomEnrichment"
+          }
+        },
+        "required": [
+          "customEnrichment"
+        ]
+      },
+      "GetCustomEnrichmentsResponse": {
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        },
+        "title": "Get Custom Enrichments Response",
+        "description": "This response data structure is obtained when all custom enrichments are retrieved",
+        "type": "object",
+        "properties": {
+          "customEnrichments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomEnrichment"
+            }
+          }
+        },
+        "required": [
+          "customEnrichments"
+        ]
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "SearchClauseId": {
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        },
+        "title": "Search Clause",
+        "description": "This data structure represents a search clause",
+        "type": "object",
+        "properties": {
+          "id": {
+            "example": 1,
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "searchBy"
+        ],
+        "additionalProperties": false
+      },
+      "SearchClauseName": {
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        },
+        "title": "Search Clause",
+        "description": "This data structure represents a search clause",
+        "type": "object",
+        "properties": {
+          "name": {
+            "example": "custom_enrichment_name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "searchBy"
+        ],
+        "additionalProperties": false
+      },
+      "SearchCustomEnrichmentDataResponse": {
+        "type": "object",
+        "properties": {
+          "customEnrichmentsData": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomEnrichmentData"
+            }
+          }
+        }
+      },
+      "UpdateCustomEnrichmentResponse": {
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        },
+        "title": "Update Custom Enrichment Response",
+        "description": "This response data structure is obtained when a custom enrichment is updated",
+        "type": "object",
+        "properties": {
+          "customEnrichment": {
+            "$ref": "#/components/schemas/CustomEnrichment"
+          },
+          "message": {
+            "example": "Custom enrichment updated successfully",
+            "type": "string"
+          }
+        },
+        "required": [
+          "customEnrichment"
+        ]
+      },
+      "common.Group": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "$ref": "#/components/schemas/FieldGroup"
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/common.Group"
+            }
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v3.FilterOperator": {
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}

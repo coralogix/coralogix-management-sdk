@@ -7,7 +7,6 @@ servers:
 paths:
   /enrichment-rules/custom-enrichment-rules/v1:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: CustomEnrichmentService_GetCustomEnrichments
@@ -22,7 +21,6 @@ paths:
       tags:
       - Custom Enrichments Service
     put:
-      description: No description available
       externalDocs:
         url: ""
       operationId: CustomEnrichmentService_UpdateCustomEnrichment
@@ -43,7 +41,6 @@ paths:
       - Custom Enrichments Service
   /enrichment-rules/custom-enrichment-rules/v1/search:
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: CustomEnrichmentService_SearchCustomEnrichmentData
@@ -69,7 +66,6 @@ paths:
       - Custom Enrichments Service
   /enrichment-rules/custom-enrichment-rules/v1/{custom_enrichment_id}:
     delete:
-      description: No description available
       externalDocs:
         url: ""
       operationId: CustomEnrichmentService_DeleteCustomEnrichment
@@ -95,7 +91,6 @@ paths:
       - Custom Enrichments Service
   /enrichment-rules/custom-enrichment-rules/v1/{id}:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: CustomEnrichmentService_GetCustomEnrichment
@@ -121,7 +116,6 @@ paths:
       - Custom Enrichments Service
   /v1/custom_enrichment:
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: CustomEnrichmentService_CreateCustomEnrichment
@@ -286,8 +280,8 @@ components:
       type: object
     File:
       oneOf:
-      - $ref: "#/components/schemas/FileTextual"
       - $ref: "#/components/schemas/FileBinary"
+      - $ref: "#/components/schemas/FileTextual"
     FileBinary:
       additionalProperties: false
       description: This data structure represents a file
@@ -336,8 +330,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       additionalProperties: false
       description: This data structure represents a filter path and values
@@ -576,15 +570,9 @@ components:
       type: object
     CustomEnrichmentService_SearchCustomEnrichmentData_search_clauses_parameter_inner:
       oneOf:
-      - $ref: "#/components/schemas/SearchClauseId"
       - $ref: "#/components/schemas/SearchClauseName"
+      - $ref: "#/components/schemas/SearchClauseId"
     CustomEnrichmentService_CreateCustomEnrichment_file_parameter:
       oneOf:
       - $ref: "#/components/schemas/FileTextual"
       - $ref: "#/components/schemas/FileBinary"
-  securitySchemes:
-    apiKeyAuth:
-      description: API key authentication
-      in: header
-      name: Authorization
-      type: apiKey

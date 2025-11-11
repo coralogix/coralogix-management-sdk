@@ -121,7 +121,6 @@ Class | Method | HTTP request | Description
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
  - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
- - [GetFilterValuesResponse](docs/GetFilterValuesResponse.md)
  - [GetIncidentByEventIdResponse](docs/GetIncidentByEventIdResponse.md)
  - [GetIncidentEventsResponse](docs/GetIncidentEventsResponse.md)
  - [GetIncidentResponse](docs/GetIncidentResponse.md)
@@ -188,7 +187,10 @@ Class | Method | HTTP request | Description
  - [IncidentStatusWithCount](docs/IncidentStatusWithCount.md)
  - [IncidentsServiceListIncidentAggregationsGroupBysParameterInner](docs/IncidentsServiceListIncidentAggregationsGroupBysParameterInner.md)
  - [IncidentsServiceListIncidentsOrderBysParameterInner](docs/IncidentsServiceListIncidentsOrderBysParameterInner.md)
+ - [IncidentsV1GetFilterValuesResponse](docs/IncidentsV1GetFilterValuesResponse.md)
  - [IncidentsV1MetaLabel](docs/IncidentsV1MetaLabel.md)
+ - [IncidentsV1PaginationResponse](docs/IncidentsV1PaginationResponse.md)
+ - [IncidentsV1UserDetails](docs/IncidentsV1UserDetails.md)
  - [ListIncidentAggregationsResponse](docs/ListIncidentAggregationsResponse.md)
  - [ListIncidentEventsFilterValuesResponse](docs/ListIncidentEventsFilterValuesResponse.md)
  - [ListIncidentEventsOrderByRequest](docs/ListIncidentEventsOrderByRequest.md)
@@ -208,34 +210,12 @@ Class | Method | HTTP request | Description
  - [V1OrderByContextualLabel](docs/V1OrderByContextualLabel.md)
  - [V1OrderByDirection](docs/V1OrderByDirection.md)
  - [V1OrderByIncidentField](docs/V1OrderByIncidentField.md)
- - [V1PaginationResponse](docs/V1PaginationResponse.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
 
 
 ## Documentation For Authorization
 
-
-Authentication schemes defined for the API:
-### apiKeyAuth
-
-- **Type**: API key
-- **API key parameter name**: Authorization
-- **Location**: HTTP header
-
-Note, each API key must be added to a map of `map[string]APIKey` where the key is: apiKeyAuth and passed in as the auth context for each request.
-
-Example
-
-```go
-auth := context.WithValue(
-		context.Background(),
-		incidents_service.ContextAPIKeys,
-		map[string]incidents_service.APIKey{
-			"apiKeyAuth": {Key: "API_KEY_STRING"},
-		},
-	)
-r, err := client.Service.Operation(auth, args)
-```
+Endpoints do not require authorization.
 
 
 ## Documentation for Utility Methods

@@ -1,0 +1,669 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/stuff/things/v1": {
+      "get": {
+        "tags": [
+          "Things Service"
+        ],
+        "summary": "List Things",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ThingService_ListThings",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "example": "logs.id=100",
+              "type": "string"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "page_size",
+            "schema": {
+              "example": 100,
+              "type": "integer",
+              "format": "int32"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "schema": {
+              "example": 100,
+              "type": "integer",
+              "format": "int32"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "page_token",
+            "schema": {
+              "example": "asdf1234",
+              "type": "string"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListThingsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Things Service"
+        ],
+        "summary": "Create Thing",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ThingService_CreateThing",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Create Thing Request",
+                "description": "The data structure to create a thing",
+                "type": "object",
+                "properties": {
+                  "thing": {
+                    "$ref": "#/components/schemas/Thing"
+                  }
+                },
+                "required": [
+                  "thing"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateThingResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-bumblebee": [
+          {
+            "action": [
+              "create"
+            ],
+            "guard": "status==201 && exists($.body.id)",
+            "name": "resource_management",
+            "reachable": [
+              "ThingService_ListThings",
+              "ThingService_GetThing",
+              "ThingService_ReplaceThing",
+              "ThingService_DeleteThing"
+            ],
+            "root": true
+          }
+        ]
+      }
+    },
+    "/stuff/things/v1/{id}": {
+      "get": {
+        "tags": [
+          "Things Service"
+        ],
+        "summary": "Get Thing",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ThingService_GetThing",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": "43B9880C-A880-418F-91DF-8463063A30ED",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetThingResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-bumblebee": [
+          {
+            "action": [
+              "create"
+            ],
+            "guard": "status==201 && exists($.body.id)",
+            "name": "resource_management",
+            "reachable": [
+              "ThingService_ListThings",
+              "ThingService_GetThing",
+              "ThingService_ReplaceThing",
+              "ThingService_DeleteThing"
+            ],
+            "root": true
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Things Service"
+        ],
+        "summary": "Delete Thing",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ThingService_DeleteThing",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": "43B9880C-A880-418F-91DF-8463063A30ED",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteThingResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-bumblebee": [
+          {
+            "action": [
+              "create"
+            ],
+            "guard": "status==201 && exists($.body.id)",
+            "name": "resource_management",
+            "reachable": [
+              "ThingService_ListThings"
+            ],
+            "root": true
+          }
+        ]
+      }
+    },
+    "/stuff/things/v1/{thing.id}": {
+      "put": {
+        "tags": [
+          "Things Service"
+        ],
+        "summary": "Replace Thing",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ThingService_ReplaceThing",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "thing.id",
+            "required": true,
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Replace Thing Request",
+                "description": "The data structure to replace a thing",
+                "type": "object",
+                "properties": {
+                  "thing": {
+                    "type": "object",
+                    "properties": {
+                      "createdAt": {
+                        "example": "2021-01-01T00:00:00Z",
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "name": {
+                        "example": "A Thing's Name",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "thing"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplaceThingResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-bumblebee": [
+          {
+            "action": [
+              "create"
+            ],
+            "guard": "status==201 && exists($.body.id)",
+            "name": "resource_management",
+            "reachable": [
+              "ThingService_ListThings",
+              "ThingService_GetThing",
+              "ThingService_ReplaceThing",
+              "ThingService_DeleteThing"
+            ],
+            "root": true
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ColorsByAggregation": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/ColorsByAggregation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByGroupBy": {
+        "type": "object",
+        "properties": {
+          "groupBy": {
+            "$ref": "#/components/schemas/ColorsByGroupBy"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByStack": {
+        "type": "object",
+        "properties": {
+          "stack": {
+            "$ref": "#/components/schemas/ColorsByStack"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateThingResponse": {
+        "externalDocs": {
+          "description": "Find out more.",
+          "url": "https://coralogix.com/docs/user-guides/"
+        },
+        "title": "Create Thing Response",
+        "description": "The data structure response from creating a thing",
+        "type": "object",
+        "properties": {
+          "thing": {
+            "$ref": "#/components/schemas/Thing"
+          }
+        },
+        "required": [
+          "thing"
+        ]
+      },
+      "DeleteThingResponse": {
+        "externalDocs": {
+          "description": "Find out more.",
+          "url": "https://coralogix.com/docs/user-guides/"
+        },
+        "title": "Delete Thing Response",
+        "description": "Empty response if the request succeeded.",
+        "type": "object"
+      },
+      "FieldGroup": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "FilterPathAndValues": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+          },
+          {
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+          }
+        ]
+      },
+      "FilterPathAndValuesFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "FilterPathAndValuesMultipleValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            }
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GetThingResponse": {
+        "externalDocs": {
+          "description": "Find out more.",
+          "url": "https://coralogix.com/docs/user-guides/"
+        },
+        "title": "Get Thing Response",
+        "description": "The data structure response from getting a thing",
+        "type": "object",
+        "properties": {
+          "thing": {
+            "$ref": "#/components/schemas/Thing"
+          }
+        },
+        "required": [
+          "thing"
+        ]
+      },
+      "ListThingsResponse": {
+        "externalDocs": {
+          "description": "Find out more.",
+          "url": "https://coralogix.com/docs/user-guides/"
+        },
+        "title": "List Things Response",
+        "description": "Paginated response for listing things. Defaults to retrieving all things (probably a bad idea).",
+        "type": "object",
+        "properties": {
+          "nextPageToken": {
+            "type": "string"
+          },
+          "things": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Thing"
+            }
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ReplaceThingResponse": {
+        "externalDocs": {
+          "description": "Find out more.",
+          "url": "https://coralogix.com/docs/user-guides/"
+        },
+        "title": "Replace Thing Response",
+        "description": "The data structure response from replacing a thing",
+        "type": "object",
+        "properties": {
+          "thing": {
+            "$ref": "#/components/schemas/Thing"
+          }
+        },
+        "required": [
+          "thing"
+        ]
+      },
+      "Thing": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "example": "2021-01-01T00:00:00Z",
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "example": "123e4567-e89b-12d3-a456-426614174000",
+            "type": "string"
+          },
+          "name": {
+            "example": "A Thing's Name",
+            "type": "string"
+          }
+        }
+      },
+      "common.Group": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "$ref": "#/components/schemas/FieldGroup"
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/common.Group"
+            }
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v3.FilterOperator": {
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}

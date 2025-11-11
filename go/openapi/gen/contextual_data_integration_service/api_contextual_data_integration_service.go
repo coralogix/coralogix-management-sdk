@@ -36,8 +36,6 @@ func (r ApiContextualDataIntegrationServiceDeleteContextualDataIntegrationReques
 /*
 ContextualDataIntegrationServiceDeleteContextualDataIntegration Delete contextual data integration
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param integrationId
  @return ApiContextualDataIntegrationServiceDeleteContextualDataIntegrationRequest
@@ -144,8 +142,6 @@ func (r ApiContextualDataIntegrationServiceGetContextualDataIntegrationDefinitio
 
 /*
 ContextualDataIntegrationServiceGetContextualDataIntegrationDefinition Get contextual data integration definition
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -257,8 +253,6 @@ func (r ApiContextualDataIntegrationServiceGetContextualDataIntegrationDetailsRe
 /*
 ContextualDataIntegrationServiceGetContextualDataIntegrationDetails Get contextual data integration details
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiContextualDataIntegrationServiceGetContextualDataIntegrationDetailsRequest
@@ -368,8 +362,6 @@ func (r ApiContextualDataIntegrationServiceGetContextualDataIntegrationsRequest)
 /*
 ContextualDataIntegrationServiceGetContextualDataIntegrations Get all contextual data integrations accessible
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiContextualDataIntegrationServiceGetContextualDataIntegrationsRequest
 */
@@ -476,8 +468,6 @@ func (r ApiContextualDataIntegrationServiceSaveContextualDataIntegrationRequest)
 /*
 ContextualDataIntegrationServiceSaveContextualDataIntegration Save contextual data integration
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiContextualDataIntegrationServiceSaveContextualDataIntegrationRequest
 */
@@ -583,8 +573,6 @@ func (r ApiContextualDataIntegrationServiceTestContextualDataIntegrationRequest)
 /*
 ContextualDataIntegrationServiceTestContextualDataIntegration Test contextual data integration
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiContextualDataIntegrationServiceTestContextualDataIntegrationRequest
 */
@@ -689,8 +677,6 @@ func (r ApiContextualDataIntegrationServiceUpdateContextualDataIntegrationReques
 
 /*
 ContextualDataIntegrationServiceUpdateContextualDataIntegration Update contextual data integration
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiContextualDataIntegrationServiceUpdateContextualDataIntegrationRequest

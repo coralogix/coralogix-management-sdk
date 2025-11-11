@@ -7,7 +7,6 @@ servers:
 paths:
   /logs/data-setup/v2:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: S3TargetService_GetTarget
@@ -34,7 +33,6 @@ paths:
       tags:
       - Target Service
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: S3TargetService_SetTarget
@@ -117,8 +115,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       additionalProperties: false
       description: This data structure represents a filter path and values
@@ -343,9 +341,3 @@ components:
       - targetSpec
       title: Set Target Response
       type: object
-  securitySchemes:
-    apiKeyAuth:
-      description: API key authentication
-      in: header
-      name: Authorization
-      type: apiKey

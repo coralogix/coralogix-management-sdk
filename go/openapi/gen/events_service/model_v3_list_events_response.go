@@ -16,37 +16,37 @@ import (
 	"fmt"
 )
 
-// checks if the ListEventsResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ListEventsResponse{}
+// checks if the V3ListEventsResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V3ListEventsResponse{}
 
-// ListEventsResponse This data structure represents a response to list events
-type ListEventsResponse struct {
+// V3ListEventsResponse This data structure represents a response to list events
+type V3ListEventsResponse struct {
 	Events []CxEvent `json:"events"`
 	Pagination *EventsV3PaginationResponse `json:"pagination,omitempty"`
 }
 
-type _ListEventsResponse ListEventsResponse
+type _V3ListEventsResponse V3ListEventsResponse
 
-// NewListEventsResponse instantiates a new ListEventsResponse object
+// NewV3ListEventsResponse instantiates a new V3ListEventsResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListEventsResponse(events []CxEvent) *ListEventsResponse {
-	this := ListEventsResponse{}
+func NewV3ListEventsResponse(events []CxEvent) *V3ListEventsResponse {
+	this := V3ListEventsResponse{}
 	this.Events = events
 	return &this
 }
 
-// NewListEventsResponseWithDefaults instantiates a new ListEventsResponse object
+// NewV3ListEventsResponseWithDefaults instantiates a new V3ListEventsResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewListEventsResponseWithDefaults() *ListEventsResponse {
-	this := ListEventsResponse{}
+func NewV3ListEventsResponseWithDefaults() *V3ListEventsResponse {
+	this := V3ListEventsResponse{}
 	return &this
 }
 
 // GetEvents returns the Events field value
-func (o *ListEventsResponse) GetEvents() []CxEvent {
+func (o *V3ListEventsResponse) GetEvents() []CxEvent {
 	if o == nil {
 		var ret []CxEvent
 		return ret
@@ -57,7 +57,7 @@ func (o *ListEventsResponse) GetEvents() []CxEvent {
 
 // GetEventsOk returns a tuple with the Events field value
 // and a boolean to check if the value has been set.
-func (o *ListEventsResponse) GetEventsOk() ([]CxEvent, bool) {
+func (o *V3ListEventsResponse) GetEventsOk() ([]CxEvent, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -65,12 +65,12 @@ func (o *ListEventsResponse) GetEventsOk() ([]CxEvent, bool) {
 }
 
 // SetEvents sets field value
-func (o *ListEventsResponse) SetEvents(v []CxEvent) {
+func (o *V3ListEventsResponse) SetEvents(v []CxEvent) {
 	o.Events = v
 }
 
 // GetPagination returns the Pagination field value if set, zero value otherwise.
-func (o *ListEventsResponse) GetPagination() EventsV3PaginationResponse {
+func (o *V3ListEventsResponse) GetPagination() EventsV3PaginationResponse {
 	if o == nil || IsNil(o.Pagination) {
 		var ret EventsV3PaginationResponse
 		return ret
@@ -80,7 +80,7 @@ func (o *ListEventsResponse) GetPagination() EventsV3PaginationResponse {
 
 // GetPaginationOk returns a tuple with the Pagination field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListEventsResponse) GetPaginationOk() (*EventsV3PaginationResponse, bool) {
+func (o *V3ListEventsResponse) GetPaginationOk() (*EventsV3PaginationResponse, bool) {
 	if o == nil || IsNil(o.Pagination) {
 		return nil, false
 	}
@@ -88,7 +88,7 @@ func (o *ListEventsResponse) GetPaginationOk() (*EventsV3PaginationResponse, boo
 }
 
 // HasPagination returns a boolean if a field has been set.
-func (o *ListEventsResponse) HasPagination() bool {
+func (o *V3ListEventsResponse) HasPagination() bool {
 	if o != nil && !IsNil(o.Pagination) {
 		return true
 	}
@@ -97,11 +97,11 @@ func (o *ListEventsResponse) HasPagination() bool {
 }
 
 // SetPagination gets a reference to the given EventsV3PaginationResponse and assigns it to the Pagination field.
-func (o *ListEventsResponse) SetPagination(v EventsV3PaginationResponse) {
+func (o *V3ListEventsResponse) SetPagination(v EventsV3PaginationResponse) {
 	o.Pagination = &v
 }
 
-func (o ListEventsResponse) MarshalJSON() ([]byte, error) {
+func (o V3ListEventsResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -109,7 +109,7 @@ func (o ListEventsResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ListEventsResponse) ToMap() (map[string]interface{}, error) {
+func (o V3ListEventsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["events"] = o.Events
 	if !IsNil(o.Pagination) {
@@ -118,7 +118,7 @@ func (o ListEventsResponse) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *ListEventsResponse) UnmarshalJSON(data []byte) (err error) {
+func (o *V3ListEventsResponse) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -140,53 +140,53 @@ func (o *ListEventsResponse) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varListEventsResponse := _ListEventsResponse{}
+	varV3ListEventsResponse := _V3ListEventsResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListEventsResponse)
+	err = decoder.Decode(&varV3ListEventsResponse)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ListEventsResponse(varListEventsResponse)
+	*o = V3ListEventsResponse(varV3ListEventsResponse)
 
 	return err
 }
 
-type NullableListEventsResponse struct {
-	value *ListEventsResponse
+type NullableV3ListEventsResponse struct {
+	value *V3ListEventsResponse
 	isSet bool
 }
 
-func (v NullableListEventsResponse) Get() *ListEventsResponse {
+func (v NullableV3ListEventsResponse) Get() *V3ListEventsResponse {
 	return v.value
 }
 
-func (v *NullableListEventsResponse) Set(val *ListEventsResponse) {
+func (v *NullableV3ListEventsResponse) Set(val *V3ListEventsResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableListEventsResponse) IsSet() bool {
+func (v NullableV3ListEventsResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableListEventsResponse) Unset() {
+func (v *NullableV3ListEventsResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableListEventsResponse(val *ListEventsResponse) *NullableListEventsResponse {
-	return &NullableListEventsResponse{value: val, isSet: true}
+func NewNullableV3ListEventsResponse(val *V3ListEventsResponse) *NullableV3ListEventsResponse {
+	return &NullableV3ListEventsResponse{value: val, isSet: true}
 }
 
-func (v NullableListEventsResponse) MarshalJSON() ([]byte, error) {
+func (v NullableV3ListEventsResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableListEventsResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableV3ListEventsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -22,7 +22,7 @@ var _ MappedNullable = &ListIncidentEventsResponse{}
 // ListIncidentEventsResponse A response containing a list of incident events and pagination information
 type ListIncidentEventsResponse struct {
 	Items []IncidentEventExtended `json:"items"`
-	Pagination *V1PaginationResponse `json:"pagination,omitempty"`
+	Pagination *IncidentsV1PaginationResponse `json:"pagination,omitempty"`
 }
 
 type _ListIncidentEventsResponse ListIncidentEventsResponse
@@ -70,9 +70,9 @@ func (o *ListIncidentEventsResponse) SetItems(v []IncidentEventExtended) {
 }
 
 // GetPagination returns the Pagination field value if set, zero value otherwise.
-func (o *ListIncidentEventsResponse) GetPagination() V1PaginationResponse {
+func (o *ListIncidentEventsResponse) GetPagination() IncidentsV1PaginationResponse {
 	if o == nil || IsNil(o.Pagination) {
-		var ret V1PaginationResponse
+		var ret IncidentsV1PaginationResponse
 		return ret
 	}
 	return *o.Pagination
@@ -80,7 +80,7 @@ func (o *ListIncidentEventsResponse) GetPagination() V1PaginationResponse {
 
 // GetPaginationOk returns a tuple with the Pagination field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListIncidentEventsResponse) GetPaginationOk() (*V1PaginationResponse, bool) {
+func (o *ListIncidentEventsResponse) GetPaginationOk() (*IncidentsV1PaginationResponse, bool) {
 	if o == nil || IsNil(o.Pagination) {
 		return nil, false
 	}
@@ -96,8 +96,8 @@ func (o *ListIncidentEventsResponse) HasPagination() bool {
 	return false
 }
 
-// SetPagination gets a reference to the given V1PaginationResponse and assigns it to the Pagination field.
-func (o *ListIncidentEventsResponse) SetPagination(v V1PaginationResponse) {
+// SetPagination gets a reference to the given IncidentsV1PaginationResponse and assigns it to the Pagination field.
+func (o *ListIncidentEventsResponse) SetPagination(v IncidentsV1PaginationResponse) {
 	o.Pagination = &v
 }
 

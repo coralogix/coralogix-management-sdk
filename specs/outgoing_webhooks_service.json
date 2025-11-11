@@ -1,0 +1,2249 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/integrations/webhooks/v1": {
+      "get": {
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "summary": "List all outgoing webhooks",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_ListAllOutgoingWebhooks",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListAllOutgoingWebhooksResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "outbound-webhooks:ReadConfig"
+        ]
+      },
+      "put": {
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "summary": "Update an outgoing webhook",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_UpdateOutgoingWebhook",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Update outgoing webhook request",
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/OutgoingWebhookInputData"
+                  },
+                  "id": {
+                    "example": "example_id",
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateOutgoingWebhookResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "outbound-webhooks:UpdateConfig"
+        ]
+      },
+      "post": {
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "summary": "Create an outgoing webhook",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_CreateOutgoingWebhook",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Create outgoing webhook request",
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/OutgoingWebhookInputData"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOutgoingWebhookResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "outbound-webhooks:UpdateConfig"
+        ]
+      }
+    },
+    "/integrations/webhooks/v1/summary": {
+      "get": {
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "summary": "List outbound webhooks summary",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_ListOutboundWebhooksSummary",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOutboundWebhooksSummaryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "outbound-webhooks:ReadSummary"
+        ]
+      }
+    },
+    "/integrations/webhooks/v1/test": {
+      "post": {
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "summary": "Test an outgoing webhook",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_TestOutgoingWebhook",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Test outgoing webhook request",
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/OutgoingWebhookInputData"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestOutgoingWebhookResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "outbound-webhooks:ReadConfig"
+        ]
+      }
+    },
+    "/integrations/webhooks/v1/test-existing": {
+      "post": {
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "summary": "Test an existing outgoing webhook",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_TestExistingOutgoingWebhook",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Test existing outgoing webhook request",
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "example": "example_id",
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestOutgoingWebhookResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "outbound-webhooks:ReadConfig"
+        ]
+      }
+    },
+    "/integrations/webhooks/v1/types": {
+      "get": {
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "summary": "Get outgoing webhook types",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_ListOutgoingWebhookTypes",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOutgoingWebhookTypesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "outbound-webhooks:ReadConfig"
+        ]
+      }
+    },
+    "/integrations/webhooks/v1/types/{type}": {
+      "get": {
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "summary": "Get outgoing webhook type details",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_GetOutgoingWebhookTypeDetails",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "type",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/WebhookType"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOutgoingWebhookTypeDetailsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "outbound-webhooks:ReadConfig"
+        ]
+      }
+    },
+    "/integrations/webhooks/v1/{id}": {
+      "get": {
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "summary": "Get outgoing webhook",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_GetOutgoingWebhook",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOutgoingWebhookResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "outbound-webhooks:ReadConfig"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "summary": "Delete an outgoing webhook",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_DeleteOutgoingWebhook",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": "example_id",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteOutgoingWebhookResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "outbound-webhooks:UpdateConfig"
+        ]
+      }
+    },
+    "/integrations/webhooks/v1:listByType": {
+      "get": {
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "summary": "List outgoing webhooks",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_ListOutgoingWebhooks",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "type",
+            "schema": {
+              "$ref": "#/components/schemas/WebhookType"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOutgoingWebhooksResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "outbound-webhooks:ReadConfig"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Attachment": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Slack attachment configuration",
+        "type": "object",
+        "properties": {
+          "isActive": {
+            "type": "boolean"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AttachmentType"
+          }
+        }
+      },
+      "AttachmentType": {
+        "type": "string",
+        "enum": [
+          "EMPTY",
+          "METRIC_SNAPSHOT",
+          "LOGS"
+        ]
+      },
+      "AwsEventBridgeConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "AWS EventBridge configuration",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "example": {
+              "key": "value"
+            },
+            "type": "string"
+          },
+          "detailType": {
+            "example": "detail_type",
+            "type": "string"
+          },
+          "eventBusArn": {
+            "example": "arn:aws:events:us-east-1:123456789012:event-bus/default",
+            "type": "string"
+          },
+          "roleName": {
+            "example": "role_name",
+            "type": "string"
+          },
+          "source": {
+            "example": "source",
+            "type": "string"
+          }
+        }
+      },
+      "ColorsByAggregation": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/ColorsByAggregation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByGroupBy": {
+        "type": "object",
+        "properties": {
+          "groupBy": {
+            "$ref": "#/components/schemas/ColorsByGroupBy"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByStack": {
+        "type": "object",
+        "properties": {
+          "stack": {
+            "$ref": "#/components/schemas/ColorsByStack"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateOutgoingWebhookResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Create outgoing webhook response",
+        "type": "object",
+        "properties": {
+          "id": {
+            "example": "example_id",
+            "type": "string"
+          }
+        }
+      },
+      "DeleteOutgoingWebhookResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Delete outgoing webhook response",
+        "type": "object"
+      },
+      "DemistoConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Demisto configuration",
+        "type": "object",
+        "properties": {
+          "payload": {
+            "example": {
+              "key": "value"
+            },
+            "type": "string"
+          },
+          "uuid": {
+            "example": "d838cd7b-087b-40c6-bc33-80997020f5d0",
+            "type": "string"
+          }
+        }
+      },
+      "Digest": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Slack digest configuration",
+        "type": "object",
+        "properties": {
+          "isActive": {
+            "type": "boolean"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DigestType"
+          }
+        }
+      },
+      "DigestType": {
+        "type": "string",
+        "enum": [
+          "UNKNOWN",
+          "ERROR_AND_CRITICAL_LOGS",
+          "FLOW_ANOMALIES",
+          "SPIKE_ANOMALIES",
+          "DATA_USAGE"
+        ]
+      },
+      "EmailGroupConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Email group configuration",
+        "type": "object",
+        "properties": {
+          "emailAddresses": {
+            "type": "array",
+            "items": {
+              "example": [
+                "example@coralogix.com"
+              ],
+              "type": "string"
+            }
+          }
+        }
+      },
+      "EndpointType": {
+        "type": "string",
+        "enum": [
+          "ENDPOINT_TYPE_DEFAULT_OR_PUBLIC",
+          "ENDPOINT_TYPE_PRIVATE"
+        ]
+      },
+      "FieldGroup": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "FilterPathAndValues": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+          },
+          {
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+          }
+        ]
+      },
+      "FilterPathAndValuesFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "FilterPathAndValuesMultipleValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            }
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GenericWebhookConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Generic webhook configuration",
+        "type": "object",
+        "properties": {
+          "headers": {
+            "example": {
+              "Content-Type": "application/json"
+            },
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "method": {
+            "$ref": "#/components/schemas/MethodType"
+          },
+          "payload": {
+            "example": {
+              "key": "value"
+            },
+            "type": "string"
+          },
+          "uuid": {
+            "example": "d838cd7b-087b-40c6-bc33-80997020f5d0",
+            "type": "string"
+          }
+        }
+      },
+      "GetOutgoingWebhookResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Get outgoing webhook response",
+        "type": "object",
+        "properties": {
+          "webhook": {
+            "$ref": "#/components/schemas/OutgoingWebhook"
+          }
+        }
+      },
+      "GetOutgoingWebhookTypeDetailsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Get outgoing webhook type details response",
+        "type": "object",
+        "properties": {
+          "details": {
+            "$ref": "#/components/schemas/OutgoingWebhookDetails"
+          }
+        }
+      },
+      "IbmEventNotificationsConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "IBM event notification configuration",
+        "type": "object",
+        "properties": {
+          "endpointType": {
+            "$ref": "#/components/schemas/EndpointType"
+          },
+          "eventNotificationsInstanceId": {
+            "type": "string"
+          },
+          "regionId": {
+            "type": "string"
+          },
+          "sourceId": {
+            "type": "string"
+          },
+          "sourceName": {
+            "type": "string"
+          }
+        }
+      },
+      "JiraConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Jira configuration",
+        "type": "object",
+        "properties": {
+          "apiToken": {
+            "example": "jira_api_token",
+            "type": "string"
+          },
+          "email": {
+            "example": "jira_email",
+            "type": "string"
+          },
+          "projectKey": {
+            "example": "jira_project_key",
+            "type": "string"
+          }
+        }
+      },
+      "ListAllOutgoingWebhooksResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "List all outgoing webhooks response",
+        "type": "object",
+        "properties": {
+          "deployed": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OutgoingWebhookExtendedSummary"
+            }
+          }
+        }
+      },
+      "ListOutboundWebhooksSummaryResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "List outbound webhooks summary response",
+        "type": "object",
+        "properties": {
+          "outboundWebhookSummaries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OutboundWebhookSummary"
+            }
+          }
+        }
+      },
+      "ListOutgoingWebhookTypesResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "List outgoing webhook types response",
+        "type": "object",
+        "properties": {
+          "webhooks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OutgoingWebhookType"
+            }
+          }
+        }
+      },
+      "ListOutgoingWebhooksResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "List outgoing webhooks response",
+        "type": "object",
+        "properties": {
+          "deployed": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OutgoingWebhookSummary"
+            }
+          }
+        }
+      },
+      "MSTeamsWorkflowConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Microsoft Teams workflow configuration",
+        "type": "object"
+      },
+      "MethodType": {
+        "type": "string",
+        "enum": [
+          "UNKNOWN",
+          "GET",
+          "POST",
+          "PUT"
+        ]
+      },
+      "MicrosoftTeamsConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Microsoft Teams configuration",
+        "type": "object"
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "OpsgenieConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Opsgenie configuration",
+        "type": "object"
+      },
+      "OutboundWebhookSummary": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outbound webhook summary",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "OutgoingWebhook": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookMicrosoftTeams"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookDemisto"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookAwsEventBridge"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookIbmEventNotifications"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookGenericWebhook"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookEmailGroup"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookJira"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookOpsgenie"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookSlack"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookPagerDuty"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookSendLog"
+          }
+        ]
+      },
+      "OutgoingWebhookAwsEventBridge": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "awsEventBridge": {
+            "$ref": "#/components/schemas/AwsEventBridgeConfig"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookDemisto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "demisto": {
+            "$ref": "#/components/schemas/DemistoConfig"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookDetails": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook details",
+        "type": "object",
+        "properties": {
+          "label": {
+            "example": "example_label",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          }
+        }
+      },
+      "OutgoingWebhookEmailGroup": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "emailGroup": {
+            "$ref": "#/components/schemas/EmailGroupConfig"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookExtendedSummary": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook extended summary",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        }
+      },
+      "OutgoingWebhookGenericWebhook": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "genericWebhook": {
+            "$ref": "#/components/schemas/GenericWebhookConfig"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookIbmEventNotifications": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "ibmEventNotifications": {
+            "$ref": "#/components/schemas/IbmEventNotificationsConfig"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputData": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataGenericWebhook"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataSlack"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataSendLog"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataJira"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataOpsgenie"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataDemisto"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
+          }
+        ]
+      },
+      "OutgoingWebhookInputDataAwsEventBridge": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "awsEventBridge": {
+            "$ref": "#/components/schemas/AwsEventBridgeConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataDemisto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "demisto": {
+            "$ref": "#/components/schemas/DemistoConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataEmailGroup": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "emailGroup": {
+            "$ref": "#/components/schemas/EmailGroupConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataGenericWebhook": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "genericWebhook": {
+            "$ref": "#/components/schemas/GenericWebhookConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataIbmEventNotifications": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "ibmEventNotifications": {
+            "$ref": "#/components/schemas/IbmEventNotificationsConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataJira": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "jira": {
+            "$ref": "#/components/schemas/JiraConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataMicrosoftTeams": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "microsoftTeams": {
+            "$ref": "#/components/schemas/MicrosoftTeamsConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataMsTeamsWorkflow": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "msTeamsWorkflow": {
+            "$ref": "#/components/schemas/MSTeamsWorkflowConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataOpsgenie": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "opsgenie": {
+            "$ref": "#/components/schemas/OpsgenieConfig"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataPagerDuty": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "pagerDuty": {
+            "$ref": "#/components/schemas/PagerDutyConfig"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataSendLog": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "sendLog": {
+            "$ref": "#/components/schemas/SendLogConfig"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookInputDataSlack": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook input data",
+        "type": "object",
+        "properties": {
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "slack": {
+            "$ref": "#/components/schemas/SlackConfig"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookJira": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "jira": {
+            "$ref": "#/components/schemas/JiraConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookMicrosoftTeams": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "microsoftTeams": {
+            "$ref": "#/components/schemas/MicrosoftTeamsConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookMsTeamsWorkflow": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "msTeamsWorkflow": {
+            "$ref": "#/components/schemas/MSTeamsWorkflowConfig"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookOpsgenie": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "opsgenie": {
+            "$ref": "#/components/schemas/OpsgenieConfig"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookPagerDuty": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "pagerDuty": {
+            "$ref": "#/components/schemas/PagerDutyConfig"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookSendLog": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "sendLog": {
+            "$ref": "#/components/schemas/SendLogConfig"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookSlack": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "slack": {
+            "$ref": "#/components/schemas/SlackConfig"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutgoingWebhookSummary": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook summary",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "example": 123456,
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "example": "webhook_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_webhook",
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "example": "slack.webhook.com",
+            "type": "string"
+          }
+        }
+      },
+      "OutgoingWebhookType": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Outgoing webhook type",
+        "type": "object",
+        "properties": {
+          "count": {
+            "example": 3,
+            "type": "integer",
+            "format": "int64"
+          },
+          "label": {
+            "example": "example_label",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WebhookType"
+          }
+        }
+      },
+      "PagerDutyConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "PagerDuty configuration",
+        "type": "object",
+        "properties": {
+          "serviceKey": {
+            "example": "pager_duty_service_key",
+            "type": "string"
+          }
+        }
+      },
+      "SendLogConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Send log configuration",
+        "type": "object",
+        "properties": {
+          "payload": {
+            "example": {
+              "key": "value"
+            },
+            "type": "string"
+          },
+          "uuid": {
+            "example": "d838cd7b-087b-40c6-bc33-80997020f5d0",
+            "type": "string"
+          }
+        }
+      },
+      "SlackConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Slack configuration",
+        "type": "object",
+        "properties": {
+          "attachments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Attachment"
+            }
+          },
+          "digests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Digest"
+            }
+          }
+        }
+      },
+      "TestOutgoingWebhookResponse": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/TestOutgoingWebhookResponseSuccess"
+          },
+          {
+            "$ref": "#/components/schemas/TestOutgoingWebhookResponseFailure"
+          }
+        ]
+      },
+      "TestOutgoingWebhookResponse.Failure": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Test outgoing webhook failure",
+        "type": "object",
+        "properties": {
+          "displayMessage": {
+            "example": "example_display_message",
+            "type": "string"
+          },
+          "errorMessage": {
+            "example": "example_error_message",
+            "type": "string"
+          },
+          "statusCode": {
+            "example": 400,
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "TestOutgoingWebhookResponse.Success": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Test outgoing webhook success",
+        "type": "object"
+      },
+      "TestOutgoingWebhookResponseFailure": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Test outgoing webhook response",
+        "type": "object",
+        "properties": {
+          "failure": {
+            "$ref": "#/components/schemas/TestOutgoingWebhookResponse.Failure"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TestOutgoingWebhookResponseSuccess": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Test outgoing webhook response",
+        "type": "object",
+        "properties": {
+          "success": {
+            "$ref": "#/components/schemas/TestOutgoingWebhookResponse.Success"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateOutgoingWebhookResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Update outgoing webhook response",
+        "type": "object"
+      },
+      "WebhookType": {
+        "type": "string",
+        "enum": [
+          "UNKNOWN",
+          "GENERIC",
+          "SLACK",
+          "PAGERDUTY",
+          "SEND_LOG",
+          "EMAIL_GROUP",
+          "MICROSOFT_TEAMS",
+          "JIRA",
+          "OPSGENIE",
+          "DEMISTO",
+          "AWS_EVENT_BRIDGE",
+          "IBM_EVENT_NOTIFICATIONS",
+          "MS_TEAMS_WORKFLOW"
+        ]
+      },
+      "common.Group": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "$ref": "#/components/schemas/FieldGroup"
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/common.Group"
+            }
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v3.FilterOperator": {
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}

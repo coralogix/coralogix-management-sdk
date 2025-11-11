@@ -41,8 +41,6 @@ func (r ApiDataUsageServiceGetDailyUsageEvaluationTokensRequest) Execute() (*Get
 /*
 DataUsageServiceGetDailyUsageEvaluationTokens Get Daily Usage Evaluation Tokens
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDataUsageServiceGetDailyUsageEvaluationTokensRequest
 */
@@ -148,8 +146,6 @@ func (r ApiDataUsageServiceGetDailyUsageProcessedGbsRequest) Execute() (*GetDail
 /*
 DataUsageServiceGetDailyUsageProcessedGbs Get Daily Usage Processed GBs
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDataUsageServiceGetDailyUsageProcessedGbsRequest
 */
@@ -254,8 +250,6 @@ func (r ApiDataUsageServiceGetDailyUsageUnitsRequest) Execute() (*GetDailyUsageU
 
 /*
 DataUsageServiceGetDailyUsageUnits Get Daily Usage Units
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDataUsageServiceGetDailyUsageUnitsRequest
@@ -379,8 +373,6 @@ func (r ApiDataUsageServiceGetDataUsageRequest) Execute() (*GetDataUsageResponse
 
 /*
 DataUsageServiceGetDataUsage Get Data Usage
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDataUsageServiceGetDataUsageRequest
@@ -506,8 +498,6 @@ func (r ApiDataUsageServiceGetDataUsageMetricsExportStatusRequest) Execute() (*G
 
 /*
 DataUsageServiceGetDataUsageMetricsExportStatus Get Data Usage Metrics Export Status
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDataUsageServiceGetDataUsageMetricsExportStatusRequest
@@ -635,8 +625,6 @@ func (r ApiDataUsageServiceGetLogsCountRequest) Execute() (*GetLogsCountResponse
 
 /*
 DataUsageServiceGetLogsCount Get Logs Count
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDataUsageServiceGetLogsCountRequest
@@ -768,8 +756,6 @@ func (r ApiDataUsageServiceGetSpansCountRequest) Execute() (*GetSpansCountRespon
 /*
 DataUsageServiceGetSpansCount Get Spans Count
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDataUsageServiceGetSpansCountRequest
 */
@@ -881,8 +867,6 @@ func (r ApiDataUsageServiceUpdateDataUsageMetricsExportStatusRequest) Execute() 
 
 /*
 DataUsageServiceUpdateDataUsageMetricsExportStatus Update Data Usage Metrics Export Status
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDataUsageServiceUpdateDataUsageMetricsExportStatusRequest

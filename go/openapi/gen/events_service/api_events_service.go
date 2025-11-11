@@ -60,8 +60,6 @@ func (r ApiEventsServiceBatchGetEventRequest) Execute() (*BatchGetEventResponse,
 /*
 EventsServiceBatchGetEvent Batch Get Event
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEventsServiceBatchGetEventRequest
 */
@@ -193,14 +191,12 @@ func (r ApiEventsServiceGetEventRequest) Pagination(pagination EventsServiceList
 	return r
 }
 
-func (r ApiEventsServiceGetEventRequest) Execute() (*GetEventResponse, *http.Response, error) {
+func (r ApiEventsServiceGetEventRequest) Execute() (*V3GetEventResponse, *http.Response, error) {
 	return r.ApiService.EventsServiceGetEventExecute(r)
 }
 
 /*
 EventsServiceGetEvent Get Event
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -215,13 +211,13 @@ func (a *EventsServiceAPIService) EventsServiceGetEvent(ctx context.Context, id 
 }
 
 // Execute executes the request
-//  @return GetEventResponse
-func (a *EventsServiceAPIService) EventsServiceGetEventExecute(r ApiEventsServiceGetEventRequest) (*GetEventResponse, *http.Response, error) {
+//  @return V3GetEventResponse
+func (a *EventsServiceAPIService) EventsServiceGetEventExecute(r ApiEventsServiceGetEventRequest) (*V3GetEventResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetEventResponse
+		localVarReturnValue  *V3GetEventResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsServiceAPIService.EventsServiceGetEvent")
@@ -321,8 +317,6 @@ func (r ApiEventsServiceGetEventsStatisticsRequest) Execute() (*GetEventsStatist
 
 /*
 EventsServiceGetEventsStatistics Get Events Statistics
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEventsServiceGetEventsStatisticsRequest
@@ -435,14 +429,12 @@ func (r ApiEventsServiceListEventsRequest) Pagination(pagination EventsServiceLi
 	return r
 }
 
-func (r ApiEventsServiceListEventsRequest) Execute() (*ListEventsResponse, *http.Response, error) {
+func (r ApiEventsServiceListEventsRequest) Execute() (*V3ListEventsResponse, *http.Response, error) {
 	return r.ApiService.EventsServiceListEventsExecute(r)
 }
 
 /*
 EventsServiceListEvents List Events
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEventsServiceListEventsRequest
@@ -455,13 +447,13 @@ func (a *EventsServiceAPIService) EventsServiceListEvents(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return ListEventsResponse
-func (a *EventsServiceAPIService) EventsServiceListEventsExecute(r ApiEventsServiceListEventsRequest) (*ListEventsResponse, *http.Response, error) {
+//  @return V3ListEventsResponse
+func (a *EventsServiceAPIService) EventsServiceListEventsExecute(r ApiEventsServiceListEventsRequest) (*V3ListEventsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ListEventsResponse
+		localVarReturnValue  *V3ListEventsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsServiceAPIService.EventsServiceListEvents")
@@ -563,8 +555,6 @@ func (r ApiEventsServiceListEventsCountRequest) Execute() (*ListEventsCountRespo
 
 /*
 EventsServiceListEventsCount List Events Count
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEventsServiceListEventsCountRequest

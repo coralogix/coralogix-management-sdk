@@ -7,11 +7,7 @@ servers:
 paths:
   /dashboards/dashboards/v1/catalog:
     get:
-      description: |-
-        Get a list of all dashboards accessible.
-
-        Requires the following permissions:
-        - `team-dashboards:Read`
+      description: Get a list of all dashboards accessible.
       externalDocs:
         url: ""
       operationId: DashboardCatalogService_GetDashboardCatalog
@@ -41,7 +37,6 @@ paths:
       - team-dashboards:Read
   /v1/dashboards/by-slug/{slug}:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: DashboardsService_GetDashboardBySlug
@@ -79,7 +74,6 @@ paths:
       - team-dashboards:Read
   /v1/dashboards/dashboards:
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: DashboardsService_CreateDashboard
@@ -113,7 +107,6 @@ paths:
       x-coralogixPermissions:
       - team-dashboards:Update
     put:
-      description: No description available
       externalDocs:
         url: ""
       operationId: DashboardsService_ReplaceDashboard
@@ -148,7 +141,6 @@ paths:
       - team-dashboards:Update
   /v1/dashboards/dashboards/{dashboard_id}:
     delete:
-      description: No description available
       externalDocs:
         url: ""
       operationId: DashboardsService_DeleteDashboard
@@ -192,7 +184,6 @@ paths:
       x-coralogixPermissions:
       - team-dashboards:Update
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: DashboardsService_GetDashboard
@@ -230,7 +221,6 @@ paths:
       - team-dashboards:Read
   /v1/dashboards/dashboards/{dashboard_id}/default:
     put:
-      description: No description available
       externalDocs:
         url: ""
       operationId: DashboardsService_ReplaceDefaultDashboard
@@ -273,7 +263,6 @@ paths:
       - team-dashboards:Update
   /v1/dashboards/dashboards/{dashboard_id}/folder:
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: DashboardsService_AssignDashboardFolder
@@ -316,7 +305,6 @@ paths:
       - team-dashboards:Update
   /v1/dashboards/dashboards/{dashboard_id}:pin:
     patch:
-      description: No description available
       externalDocs:
         url: ""
       operationId: DashboardsService_PinDashboard
@@ -359,7 +347,6 @@ paths:
       - team-dashboards:Read
   /v1/dashboards/dashboards/{dashboard_id}:unpin:
     patch:
-      description: No description available
       externalDocs:
         url: ""
       operationId: DashboardsService_UnpinDashboard
@@ -452,13 +439,15 @@ components:
         description: description
         id: id
         source:
-          manual:
-            orientation: ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED
+          eventRecurrence:
+            recurrence:
+              weekly:
+                daysOfWeek:
+                - WEEKDAY_UNSPECIFIED
+                - WEEKDAY_UNSPECIFIED
             strategy:
               instant:
-                unit: UNIT_UNSPECIFIED
-                customUnit: customUnit
-                value: 0.8008281904610115
+                startTimeHour: 0
             messageTemplate: messageTemplate
         enabled: true
       properties:
@@ -479,12 +468,12 @@ components:
       type: object
     Annotation.Source:
       oneOf:
-      - $ref: "#/components/schemas/AnnotationSourceManual"
       - $ref: "#/components/schemas/AnnotationSourceEventRecurrence"
       - $ref: "#/components/schemas/AnnotationSourceMetrics"
       - $ref: "#/components/schemas/AnnotationSourceLogs"
       - $ref: "#/components/schemas/AnnotationSourceSpans"
       - $ref: "#/components/schemas/AnnotationSourceDataprime"
+      - $ref: "#/components/schemas/AnnotationSourceManual"
     AnnotationColor:
       enum:
       - ANNOTATION_COLOR_UNSPECIFIED
@@ -511,6 +500,17 @@ components:
       type: object
     AnnotationSourceEventRecurrence:
       additionalProperties: false
+      example:
+        eventRecurrence:
+          recurrence:
+            weekly:
+              daysOfWeek:
+              - WEEKDAY_UNSPECIFIED
+              - WEEKDAY_UNSPECIFIED
+          strategy:
+            instant:
+              startTimeHour: 0
+          messageTemplate: messageTemplate
       properties:
         eventRecurrence:
           $ref: "#/components/schemas/EventRecurrenceSource"
@@ -523,15 +523,6 @@ components:
       type: object
     AnnotationSourceManual:
       additionalProperties: false
-      example:
-        manual:
-          orientation: ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED
-          strategy:
-            instant:
-              unit: UNIT_UNSPECIFIED
-              customUnit: customUnit
-              value: 0.8008281904610115
-          messageTemplate: messageTemplate
       properties:
         manual:
           $ref: "#/components/schemas/ManualSource"
@@ -723,10 +714,10 @@ components:
       type: object
     BarChart.Query:
       oneOf:
+      - $ref: "#/components/schemas/BarChartQueryMetrics"
       - $ref: "#/components/schemas/BarChartQueryDataprime"
       - $ref: "#/components/schemas/BarChartQueryLogs"
       - $ref: "#/components/schemas/BarChartQuerySpans"
-      - $ref: "#/components/schemas/BarChartQueryMetrics"
     BarChart.SpansQuery:
       description: A spans variant of the query
       externalDocs:
@@ -792,9 +783,9 @@ components:
       type: object
     ColorsBy:
       oneOf:
+      - $ref: "#/components/schemas/ColorsByAggregation"
       - $ref: "#/components/schemas/ColorsByStack"
       - $ref: "#/components/schemas/ColorsByGroupBy"
-      - $ref: "#/components/schemas/ColorsByAggregation"
     ColorsByAggregation:
       additionalProperties: false
       properties:
@@ -814,15 +805,13 @@ components:
           $ref: "#/components/schemas/ColorsByStack"
       type: object
     Constant:
+      example:
+        value: value
       properties:
         value:
           type: string
       type: object
     ConstantListSource:
-      example:
-        values:
-        - values
-        - values
       properties:
         values:
           items:
@@ -881,18 +870,18 @@ components:
       type: object
     Dashboard:
       oneOf:
-      - $ref: "#/components/schemas/DashboardFiveMinutesFolderIdRelativeTimeFrame"
-      - $ref: "#/components/schemas/DashboardOffFolderIdAbsoluteTimeFrame"
-      - $ref: "#/components/schemas/DashboardOffFolderIdRelativeTimeFrame"
-      - $ref: "#/components/schemas/DashboardTwoMinutesFolderPathRelativeTimeFrame"
-      - $ref: "#/components/schemas/DashboardFiveMinutesFolderIdAbsoluteTimeFrame"
-      - $ref: "#/components/schemas/DashboardFiveMinutesFolderPathAbsoluteTimeFrame"
-      - $ref: "#/components/schemas/DashboardFiveMinutesFolderPathRelativeTimeFrame"
       - $ref: "#/components/schemas/DashboardOffFolderPathAbsoluteTimeFrame"
       - $ref: "#/components/schemas/DashboardOffFolderPathRelativeTimeFrame"
-      - $ref: "#/components/schemas/DashboardTwoMinutesFolderIdAbsoluteTimeFrame"
       - $ref: "#/components/schemas/DashboardTwoMinutesFolderIdRelativeTimeFrame"
       - $ref: "#/components/schemas/DashboardTwoMinutesFolderPathAbsoluteTimeFrame"
+      - $ref: "#/components/schemas/DashboardFiveMinutesFolderIdAbsoluteTimeFrame"
+      - $ref: "#/components/schemas/DashboardOffFolderIdRelativeTimeFrame"
+      - $ref: "#/components/schemas/DashboardTwoMinutesFolderIdAbsoluteTimeFrame"
+      - $ref: "#/components/schemas/DashboardTwoMinutesFolderPathRelativeTimeFrame"
+      - $ref: "#/components/schemas/DashboardFiveMinutesFolderIdRelativeTimeFrame"
+      - $ref: "#/components/schemas/DashboardFiveMinutesFolderPathAbsoluteTimeFrame"
+      - $ref: "#/components/schemas/DashboardFiveMinutesFolderPathRelativeTimeFrame"
+      - $ref: "#/components/schemas/DashboardOffFolderIdAbsoluteTimeFrame"
     DashboardAction:
       description: Public actions that are always available within specific dashboard's
         context.
@@ -1040,472 +1029,6 @@ components:
       additionalProperties: false
       description: Dashboard represents the structure and configuration of a Coralogix
         Custom Dashboard.
-      example:
-        variables:
-        - displayType: VARIABLE_DISPLAY_TYPE_UNSPECIFIED
-          displayName: displayName
-          name: name
-          description: description
-          definition:
-            multiSelect:
-              valuesOrderDirection: null
-              selection:
-                all: "{}"
-              selectionOptions:
-                selectionType: SELECTION_TYPE_UNSPECIFIED
-              source:
-                constantList:
-                  values:
-                  - values
-                  - values
-              selected:
-              - selected
-              - selected
-        - displayType: VARIABLE_DISPLAY_TYPE_UNSPECIFIED
-          displayName: displayName
-          name: name
-          description: description
-          definition:
-            multiSelect:
-              valuesOrderDirection: null
-              selection:
-                all: "{}"
-              selectionOptions:
-                selectionType: SELECTION_TYPE_UNSPECIFIED
-              source:
-                constantList:
-                  values:
-                  - values
-                  - values
-              selected:
-              - selected
-              - selected
-        annotations:
-        - color: ANNOTATION_COLOR_UNSPECIFIED
-          scope:
-            allWidgets: "{}"
-          name: name
-          description: description
-          id: id
-          source:
-            manual:
-              orientation: ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED
-              strategy:
-                instant:
-                  unit: UNIT_UNSPECIFIED
-                  customUnit: customUnit
-                  value: 0.8008281904610115
-              messageTemplate: messageTemplate
-          enabled: true
-        - color: ANNOTATION_COLOR_UNSPECIFIED
-          scope:
-            allWidgets: "{}"
-          name: name
-          description: description
-          id: id
-          source:
-            manual:
-              orientation: ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED
-              strategy:
-                instant:
-                  unit: UNIT_UNSPECIFIED
-                  customUnit: customUnit
-                  value: 0.8008281904610115
-              messageTemplate: messageTemplate
-          enabled: true
-        description: Sample description
-        slugName: system-health-monitoring
-        filters:
-        - collapsed: true
-          displayName: displayName
-          source:
-            logs:
-              observationField:
-                keypath:
-                - keypath
-                - keypath
-                scope: DATASET_SCOPE_UNSPECIFIED
-              field: field
-              operator:
-                equals:
-                  selection:
-                    all: "{}"
-          enabled: true
-        - collapsed: true
-          displayName: displayName
-          source:
-            logs:
-              observationField:
-                keypath:
-                - keypath
-                - keypath
-                scope: DATASET_SCOPE_UNSPECIFIED
-              field: field
-              operator:
-                equals:
-                  selection:
-                    all: "{}"
-          enabled: true
-        folderId:
-          value: value
-        layout:
-          sections:
-          - options:
-              internal: "{}"
-            id:
-              value: value
-            rows:
-            - appearance:
-                height: 6
-              id:
-                value: value
-              widgets:
-              - createdAt: 2000-01-23T04:56:07.000+00:00
-                appearance:
-                  width: 1
-                description: "{\"value\":\"Average delay of application\"}"
-                definition:
-                  dataTable:
-                    resultsPerPage: 10
-                    rowStyle: ROW_STYLE_UNSPECIFIED
-                    columns:
-                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      width: 5
-                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      width: 5
-                    query:
-                      dataprime:
-                        dataprimeQuery:
-                          text: text
-                        filters:
-                        - null
-                        - null
-                        timeFrame:
-                          absoluteTimeFrame:
-                            from: 2000-01-23T04:56:07.000+00:00
-                            to: 2000-01-23T04:56:07.000+00:00
-                    orderBy:
-                      field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      orderDirection: ORDER_DIRECTION_UNSPECIFIED
-                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
-                id:
-                  value: value
-                title: "{\"value\":\"Gauge\"}"
-                updatedAt: 2000-01-23T04:56:07.000+00:00
-              - createdAt: 2000-01-23T04:56:07.000+00:00
-                appearance:
-                  width: 1
-                description: "{\"value\":\"Average delay of application\"}"
-                definition:
-                  dataTable:
-                    resultsPerPage: 10
-                    rowStyle: ROW_STYLE_UNSPECIFIED
-                    columns:
-                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      width: 5
-                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      width: 5
-                    query:
-                      dataprime:
-                        dataprimeQuery:
-                          text: text
-                        filters:
-                        - null
-                        - null
-                        timeFrame:
-                          absoluteTimeFrame:
-                            from: 2000-01-23T04:56:07.000+00:00
-                            to: 2000-01-23T04:56:07.000+00:00
-                    orderBy:
-                      field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      orderDirection: ORDER_DIRECTION_UNSPECIFIED
-                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
-                id:
-                  value: value
-                title: "{\"value\":\"Gauge\"}"
-                updatedAt: 2000-01-23T04:56:07.000+00:00
-            - appearance:
-                height: 6
-              id:
-                value: value
-              widgets:
-              - createdAt: 2000-01-23T04:56:07.000+00:00
-                appearance:
-                  width: 1
-                description: "{\"value\":\"Average delay of application\"}"
-                definition:
-                  dataTable:
-                    resultsPerPage: 10
-                    rowStyle: ROW_STYLE_UNSPECIFIED
-                    columns:
-                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      width: 5
-                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      width: 5
-                    query:
-                      dataprime:
-                        dataprimeQuery:
-                          text: text
-                        filters:
-                        - null
-                        - null
-                        timeFrame:
-                          absoluteTimeFrame:
-                            from: 2000-01-23T04:56:07.000+00:00
-                            to: 2000-01-23T04:56:07.000+00:00
-                    orderBy:
-                      field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      orderDirection: ORDER_DIRECTION_UNSPECIFIED
-                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
-                id:
-                  value: value
-                title: "{\"value\":\"Gauge\"}"
-                updatedAt: 2000-01-23T04:56:07.000+00:00
-              - createdAt: 2000-01-23T04:56:07.000+00:00
-                appearance:
-                  width: 1
-                description: "{\"value\":\"Average delay of application\"}"
-                definition:
-                  dataTable:
-                    resultsPerPage: 10
-                    rowStyle: ROW_STYLE_UNSPECIFIED
-                    columns:
-                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      width: 5
-                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      width: 5
-                    query:
-                      dataprime:
-                        dataprimeQuery:
-                          text: text
-                        filters:
-                        - null
-                        - null
-                        timeFrame:
-                          absoluteTimeFrame:
-                            from: 2000-01-23T04:56:07.000+00:00
-                            to: 2000-01-23T04:56:07.000+00:00
-                    orderBy:
-                      field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      orderDirection: ORDER_DIRECTION_UNSPECIFIED
-                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
-                id:
-                  value: value
-                title: "{\"value\":\"Gauge\"}"
-                updatedAt: 2000-01-23T04:56:07.000+00:00
-          - options:
-              internal: "{}"
-            id:
-              value: value
-            rows:
-            - appearance:
-                height: 6
-              id:
-                value: value
-              widgets:
-              - createdAt: 2000-01-23T04:56:07.000+00:00
-                appearance:
-                  width: 1
-                description: "{\"value\":\"Average delay of application\"}"
-                definition:
-                  dataTable:
-                    resultsPerPage: 10
-                    rowStyle: ROW_STYLE_UNSPECIFIED
-                    columns:
-                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      width: 5
-                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      width: 5
-                    query:
-                      dataprime:
-                        dataprimeQuery:
-                          text: text
-                        filters:
-                        - null
-                        - null
-                        timeFrame:
-                          absoluteTimeFrame:
-                            from: 2000-01-23T04:56:07.000+00:00
-                            to: 2000-01-23T04:56:07.000+00:00
-                    orderBy:
-                      field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      orderDirection: ORDER_DIRECTION_UNSPECIFIED
-                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
-                id:
-                  value: value
-                title: "{\"value\":\"Gauge\"}"
-                updatedAt: 2000-01-23T04:56:07.000+00:00
-              - createdAt: 2000-01-23T04:56:07.000+00:00
-                appearance:
-                  width: 1
-                description: "{\"value\":\"Average delay of application\"}"
-                definition:
-                  dataTable:
-                    resultsPerPage: 10
-                    rowStyle: ROW_STYLE_UNSPECIFIED
-                    columns:
-                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      width: 5
-                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      width: 5
-                    query:
-                      dataprime:
-                        dataprimeQuery:
-                          text: text
-                        filters:
-                        - null
-                        - null
-                        timeFrame:
-                          absoluteTimeFrame:
-                            from: 2000-01-23T04:56:07.000+00:00
-                            to: 2000-01-23T04:56:07.000+00:00
-                    orderBy:
-                      field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      orderDirection: ORDER_DIRECTION_UNSPECIFIED
-                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
-                id:
-                  value: value
-                title: "{\"value\":\"Gauge\"}"
-                updatedAt: 2000-01-23T04:56:07.000+00:00
-            - appearance:
-                height: 6
-              id:
-                value: value
-              widgets:
-              - createdAt: 2000-01-23T04:56:07.000+00:00
-                appearance:
-                  width: 1
-                description: "{\"value\":\"Average delay of application\"}"
-                definition:
-                  dataTable:
-                    resultsPerPage: 10
-                    rowStyle: ROW_STYLE_UNSPECIFIED
-                    columns:
-                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      width: 5
-                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      width: 5
-                    query:
-                      dataprime:
-                        dataprimeQuery:
-                          text: text
-                        filters:
-                        - null
-                        - null
-                        timeFrame:
-                          absoluteTimeFrame:
-                            from: 2000-01-23T04:56:07.000+00:00
-                            to: 2000-01-23T04:56:07.000+00:00
-                    orderBy:
-                      field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      orderDirection: ORDER_DIRECTION_UNSPECIFIED
-                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
-                id:
-                  value: value
-                title: "{\"value\":\"Gauge\"}"
-                updatedAt: 2000-01-23T04:56:07.000+00:00
-              - createdAt: 2000-01-23T04:56:07.000+00:00
-                appearance:
-                  width: 1
-                description: "{\"value\":\"Average delay of application\"}"
-                definition:
-                  dataTable:
-                    resultsPerPage: 10
-                    rowStyle: ROW_STYLE_UNSPECIFIED
-                    columns:
-                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      width: 5
-                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      width: 5
-                    query:
-                      dataprime:
-                        dataprimeQuery:
-                          text: text
-                        filters:
-                        - null
-                        - null
-                        timeFrame:
-                          absoluteTimeFrame:
-                            from: 2000-01-23T04:56:07.000+00:00
-                            to: 2000-01-23T04:56:07.000+00:00
-                    orderBy:
-                      field: "{\"value\":\"coralogix.metadata.applicationName\"}"
-                      orderDirection: ORDER_DIRECTION_UNSPECIFIED
-                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
-                id:
-                  value: value
-                title: "{\"value\":\"Gauge\"}"
-                updatedAt: 2000-01-23T04:56:07.000+00:00
-        name: Example Name
-        id: GZLHSeqelCbD3I7HbIDtL
-        actions:
-        - widgetId: widgetId
-          name: name
-          shouldOpenInNewWindow: true
-          definition:
-            customAction:
-              url: url
-          id: id
-          dataSource: ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED
-        - widgetId: widgetId
-          name: name
-          shouldOpenInNewWindow: true
-          definition:
-            customAction:
-              url: url
-          id: id
-          dataSource: ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED
-        fiveMinutes: "{}"
-        relativeTimeFrame: relativeTimeFrame
-        variablesV2:
-        - displayType: VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED
-          displayName: displayName
-          name: name
-          description: description
-          displayFullRow: true
-          source:
-            query:
-              valuesOrderDirection: null
-              valueDisplayOptions:
-                labelRegex: labelRegex
-                valueRegex: valueRegex
-              logsQuery:
-                type:
-                  fieldName:
-                    logRegex: logRegex
-              allOption:
-                includeAll: true
-                label: label
-              refreshStrategy: REFRESH_STRATEGY_UNSPECIFIED
-          value:
-            lucene:
-              value:
-                label: label
-                value: value
-        - displayType: VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED
-          displayName: displayName
-          name: name
-          description: description
-          displayFullRow: true
-          source:
-            query:
-              valuesOrderDirection: null
-              valueDisplayOptions:
-                labelRegex: labelRegex
-                valueRegex: valueRegex
-              logsQuery:
-                type:
-                  fieldName:
-                    logRegex: logRegex
-              allOption:
-                includeAll: true
-                label: label
-              refreshStrategy: REFRESH_STRATEGY_UNSPECIFIED
-          value:
-            lucene:
-              value:
-                label: label
-                value: value
       externalDocs:
         description: Learn more about Custom Dashboards in our documentation.
         url: https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
@@ -1815,6 +1338,454 @@ components:
       additionalProperties: false
       description: Dashboard represents the structure and configuration of a Coralogix
         Custom Dashboard.
+      example:
+        variables:
+        - displayType: VARIABLE_DISPLAY_TYPE_UNSPECIFIED
+          displayName: displayName
+          name: name
+          description: description
+          definition:
+            constant:
+              value: value
+        - displayType: VARIABLE_DISPLAY_TYPE_UNSPECIFIED
+          displayName: displayName
+          name: name
+          description: description
+          definition:
+            constant:
+              value: value
+        absoluteTimeFrame:
+          from: 2000-01-23T04:56:07.000+00:00
+          to: 2000-01-23T04:56:07.000+00:00
+        annotations:
+        - color: ANNOTATION_COLOR_UNSPECIFIED
+          scope:
+            allWidgets: "{}"
+          name: name
+          description: description
+          id: id
+          source:
+            eventRecurrence:
+              recurrence:
+                weekly:
+                  daysOfWeek:
+                  - WEEKDAY_UNSPECIFIED
+                  - WEEKDAY_UNSPECIFIED
+              strategy:
+                instant:
+                  startTimeHour: 0
+              messageTemplate: messageTemplate
+          enabled: true
+        - color: ANNOTATION_COLOR_UNSPECIFIED
+          scope:
+            allWidgets: "{}"
+          name: name
+          description: description
+          id: id
+          source:
+            eventRecurrence:
+              recurrence:
+                weekly:
+                  daysOfWeek:
+                  - WEEKDAY_UNSPECIFIED
+                  - WEEKDAY_UNSPECIFIED
+              strategy:
+                instant:
+                  startTimeHour: 0
+              messageTemplate: messageTemplate
+          enabled: true
+        description: Sample description
+        slugName: system-health-monitoring
+        filters:
+        - collapsed: true
+          displayName: displayName
+          source:
+            logs:
+              observationField:
+                keypath:
+                - keypath
+                - keypath
+                scope: DATASET_SCOPE_UNSPECIFIED
+              field: field
+              operator:
+                equals:
+                  selection:
+                    all: "{}"
+          enabled: true
+        - collapsed: true
+          displayName: displayName
+          source:
+            logs:
+              observationField:
+                keypath:
+                - keypath
+                - keypath
+                scope: DATASET_SCOPE_UNSPECIFIED
+              field: field
+              operator:
+                equals:
+                  selection:
+                    all: "{}"
+          enabled: true
+        "off": "{}"
+        folderPath:
+          segments:
+          - segments
+          - segments
+        layout:
+          sections:
+          - options:
+              internal: "{}"
+            id:
+              value: value
+            rows:
+            - appearance:
+                height: 6
+              id:
+                value: value
+              widgets:
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                appearance:
+                  width: 1
+                description: "{\"value\":\"Average delay of application\"}"
+                definition:
+                  dataTable:
+                    resultsPerPage: 10
+                    rowStyle: ROW_STYLE_UNSPECIFIED
+                    columns:
+                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      width: 5
+                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      width: 5
+                    query:
+                      dataprime:
+                        dataprimeQuery:
+                          text: text
+                        filters:
+                        - null
+                        - null
+                        timeFrame:
+                          absoluteTimeFrame:
+                            from: 2000-01-23T04:56:07.000+00:00
+                            to: 2000-01-23T04:56:07.000+00:00
+                    orderBy:
+                      field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      orderDirection: ORDER_DIRECTION_UNSPECIFIED
+                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                id:
+                  value: value
+                title: "{\"value\":\"Gauge\"}"
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                appearance:
+                  width: 1
+                description: "{\"value\":\"Average delay of application\"}"
+                definition:
+                  dataTable:
+                    resultsPerPage: 10
+                    rowStyle: ROW_STYLE_UNSPECIFIED
+                    columns:
+                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      width: 5
+                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      width: 5
+                    query:
+                      dataprime:
+                        dataprimeQuery:
+                          text: text
+                        filters:
+                        - null
+                        - null
+                        timeFrame:
+                          absoluteTimeFrame:
+                            from: 2000-01-23T04:56:07.000+00:00
+                            to: 2000-01-23T04:56:07.000+00:00
+                    orderBy:
+                      field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      orderDirection: ORDER_DIRECTION_UNSPECIFIED
+                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                id:
+                  value: value
+                title: "{\"value\":\"Gauge\"}"
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+            - appearance:
+                height: 6
+              id:
+                value: value
+              widgets:
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                appearance:
+                  width: 1
+                description: "{\"value\":\"Average delay of application\"}"
+                definition:
+                  dataTable:
+                    resultsPerPage: 10
+                    rowStyle: ROW_STYLE_UNSPECIFIED
+                    columns:
+                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      width: 5
+                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      width: 5
+                    query:
+                      dataprime:
+                        dataprimeQuery:
+                          text: text
+                        filters:
+                        - null
+                        - null
+                        timeFrame:
+                          absoluteTimeFrame:
+                            from: 2000-01-23T04:56:07.000+00:00
+                            to: 2000-01-23T04:56:07.000+00:00
+                    orderBy:
+                      field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      orderDirection: ORDER_DIRECTION_UNSPECIFIED
+                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                id:
+                  value: value
+                title: "{\"value\":\"Gauge\"}"
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                appearance:
+                  width: 1
+                description: "{\"value\":\"Average delay of application\"}"
+                definition:
+                  dataTable:
+                    resultsPerPage: 10
+                    rowStyle: ROW_STYLE_UNSPECIFIED
+                    columns:
+                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      width: 5
+                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      width: 5
+                    query:
+                      dataprime:
+                        dataprimeQuery:
+                          text: text
+                        filters:
+                        - null
+                        - null
+                        timeFrame:
+                          absoluteTimeFrame:
+                            from: 2000-01-23T04:56:07.000+00:00
+                            to: 2000-01-23T04:56:07.000+00:00
+                    orderBy:
+                      field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      orderDirection: ORDER_DIRECTION_UNSPECIFIED
+                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                id:
+                  value: value
+                title: "{\"value\":\"Gauge\"}"
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+          - options:
+              internal: "{}"
+            id:
+              value: value
+            rows:
+            - appearance:
+                height: 6
+              id:
+                value: value
+              widgets:
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                appearance:
+                  width: 1
+                description: "{\"value\":\"Average delay of application\"}"
+                definition:
+                  dataTable:
+                    resultsPerPage: 10
+                    rowStyle: ROW_STYLE_UNSPECIFIED
+                    columns:
+                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      width: 5
+                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      width: 5
+                    query:
+                      dataprime:
+                        dataprimeQuery:
+                          text: text
+                        filters:
+                        - null
+                        - null
+                        timeFrame:
+                          absoluteTimeFrame:
+                            from: 2000-01-23T04:56:07.000+00:00
+                            to: 2000-01-23T04:56:07.000+00:00
+                    orderBy:
+                      field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      orderDirection: ORDER_DIRECTION_UNSPECIFIED
+                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                id:
+                  value: value
+                title: "{\"value\":\"Gauge\"}"
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                appearance:
+                  width: 1
+                description: "{\"value\":\"Average delay of application\"}"
+                definition:
+                  dataTable:
+                    resultsPerPage: 10
+                    rowStyle: ROW_STYLE_UNSPECIFIED
+                    columns:
+                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      width: 5
+                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      width: 5
+                    query:
+                      dataprime:
+                        dataprimeQuery:
+                          text: text
+                        filters:
+                        - null
+                        - null
+                        timeFrame:
+                          absoluteTimeFrame:
+                            from: 2000-01-23T04:56:07.000+00:00
+                            to: 2000-01-23T04:56:07.000+00:00
+                    orderBy:
+                      field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      orderDirection: ORDER_DIRECTION_UNSPECIFIED
+                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                id:
+                  value: value
+                title: "{\"value\":\"Gauge\"}"
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+            - appearance:
+                height: 6
+              id:
+                value: value
+              widgets:
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                appearance:
+                  width: 1
+                description: "{\"value\":\"Average delay of application\"}"
+                definition:
+                  dataTable:
+                    resultsPerPage: 10
+                    rowStyle: ROW_STYLE_UNSPECIFIED
+                    columns:
+                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      width: 5
+                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      width: 5
+                    query:
+                      dataprime:
+                        dataprimeQuery:
+                          text: text
+                        filters:
+                        - null
+                        - null
+                        timeFrame:
+                          absoluteTimeFrame:
+                            from: 2000-01-23T04:56:07.000+00:00
+                            to: 2000-01-23T04:56:07.000+00:00
+                    orderBy:
+                      field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      orderDirection: ORDER_DIRECTION_UNSPECIFIED
+                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                id:
+                  value: value
+                title: "{\"value\":\"Gauge\"}"
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                appearance:
+                  width: 1
+                description: "{\"value\":\"Average delay of application\"}"
+                definition:
+                  dataTable:
+                    resultsPerPage: 10
+                    rowStyle: ROW_STYLE_UNSPECIFIED
+                    columns:
+                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      width: 5
+                    - field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      width: 5
+                    query:
+                      dataprime:
+                        dataprimeQuery:
+                          text: text
+                        filters:
+                        - null
+                        - null
+                        timeFrame:
+                          absoluteTimeFrame:
+                            from: 2000-01-23T04:56:07.000+00:00
+                            to: 2000-01-23T04:56:07.000+00:00
+                    orderBy:
+                      field: "{\"value\":\"coralogix.metadata.applicationName\"}"
+                      orderDirection: ORDER_DIRECTION_UNSPECIFIED
+                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                id:
+                  value: value
+                title: "{\"value\":\"Gauge\"}"
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+        name: Example Name
+        id: GZLHSeqelCbD3I7HbIDtL
+        actions:
+        - widgetId: widgetId
+          name: name
+          shouldOpenInNewWindow: true
+          definition:
+            customAction:
+              url: url
+          id: id
+          dataSource: ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED
+        - widgetId: widgetId
+          name: name
+          shouldOpenInNewWindow: true
+          definition:
+            customAction:
+              url: url
+          id: id
+          dataSource: ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED
+        variablesV2:
+        - displayType: VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED
+          displayName: displayName
+          name: name
+          description: description
+          displayFullRow: true
+          source:
+            static:
+              valuesOrderDirection: null
+              values:
+              - isDefault: true
+                label: label
+                value: value
+              - isDefault: true
+                label: label
+                value: value
+              allOption:
+                includeAll: true
+                label: label
+          value:
+            singleNumeric:
+              value:
+                label: label
+                value: 5.637377
+        - displayType: VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED
+          displayName: displayName
+          name: name
+          description: description
+          displayFullRow: true
+          source:
+            static:
+              valuesOrderDirection: null
+              values:
+              - isDefault: true
+                label: label
+                value: value
+              - isDefault: true
+                label: label
+                value: value
+              allOption:
+                includeAll: true
+                label: label
+          value:
+            singleNumeric:
+              value:
+                label: label
+                value: 5.637377
       externalDocs:
         description: Learn more about Custom Dashboards in our documentation.
         url: https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
@@ -2377,9 +2348,9 @@ components:
       type: object
     DataprimeSource.Strategy:
       oneOf:
+      - $ref: "#/components/schemas/DataprimeSourceStrategyDuration"
       - $ref: "#/components/schemas/DataprimeSourceStrategyInstant"
       - $ref: "#/components/schemas/DataprimeSourceStrategyRange"
-      - $ref: "#/components/schemas/DataprimeSourceStrategyDuration"
     DataprimeSource.Strategy.Duration:
       properties:
         durationField:
@@ -2452,10 +2423,10 @@ components:
       type: string
     Dynamic.Query:
       oneOf:
+      - $ref: "#/components/schemas/DynamicQueryDataprime"
       - $ref: "#/components/schemas/DynamicQueryLogs"
       - $ref: "#/components/schemas/DynamicQuerySpans"
       - $ref: "#/components/schemas/DynamicQueryMetrics"
-      - $ref: "#/components/schemas/DynamicQueryDataprime"
     DynamicQueryDataprime:
       additionalProperties: false
       properties:
@@ -2530,6 +2501,16 @@ components:
       title: Selection
       type: object
     EventRecurrenceSource:
+      example:
+        recurrence:
+          weekly:
+            daysOfWeek:
+            - WEEKDAY_UNSPECIFIED
+            - WEEKDAY_UNSPECIFIED
+        strategy:
+          instant:
+            startTimeHour: 0
+        messageTemplate: messageTemplate
       properties:
         messageTemplate:
           type: string
@@ -2540,8 +2521,8 @@ components:
       type: object
     EventRecurrenceSource.Strategy:
       oneOf:
-      - $ref: "#/components/schemas/EventRecurrenceSourceStrategyDuration"
       - $ref: "#/components/schemas/EventRecurrenceSourceStrategyInstant"
+      - $ref: "#/components/schemas/EventRecurrenceSourceStrategyDuration"
     EventRecurrenceSource.Strategy.Duration:
       properties:
         duration:
@@ -2551,6 +2532,8 @@ components:
           type: integer
       type: object
     EventRecurrenceSource.Strategy.Instant:
+      example:
+        startTimeHour: 0
       properties:
         startTimeHour:
           format: int32
@@ -2564,6 +2547,9 @@ components:
       type: object
     EventRecurrenceSourceStrategyInstant:
       additionalProperties: false
+      example:
+        instant:
+          startTimeHour: 0
       properties:
         instant:
           $ref: "#/components/schemas/EventRecurrenceSource.Strategy.Instant"
@@ -2669,8 +2655,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       additionalProperties: false
       description: This data structure represents a filter path and values
@@ -2761,6 +2747,10 @@ components:
       title: Filters
       type: object
     FolderPath:
+      example:
+        segments:
+        - segments
+        - segments
       properties:
         segments:
           items:
@@ -2960,39 +2950,18 @@ components:
             name: name
             description: description
             definition:
-              multiSelect:
-                valuesOrderDirection: null
-                selection:
-                  all: "{}"
-                selectionOptions:
-                  selectionType: SELECTION_TYPE_UNSPECIFIED
-                source:
-                  constantList:
-                    values:
-                    - values
-                    - values
-                selected:
-                - selected
-                - selected
+              constant:
+                value: value
           - displayType: VARIABLE_DISPLAY_TYPE_UNSPECIFIED
             displayName: displayName
             name: name
             description: description
             definition:
-              multiSelect:
-                valuesOrderDirection: null
-                selection:
-                  all: "{}"
-                selectionOptions:
-                  selectionType: SELECTION_TYPE_UNSPECIFIED
-                source:
-                  constantList:
-                    values:
-                    - values
-                    - values
-                selected:
-                - selected
-                - selected
+              constant:
+                value: value
+          absoluteTimeFrame:
+            from: 2000-01-23T04:56:07.000+00:00
+            to: 2000-01-23T04:56:07.000+00:00
           annotations:
           - color: ANNOTATION_COLOR_UNSPECIFIED
             scope:
@@ -3001,13 +2970,15 @@ components:
             description: description
             id: id
             source:
-              manual:
-                orientation: ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED
+              eventRecurrence:
+                recurrence:
+                  weekly:
+                    daysOfWeek:
+                    - WEEKDAY_UNSPECIFIED
+                    - WEEKDAY_UNSPECIFIED
                 strategy:
                   instant:
-                    unit: UNIT_UNSPECIFIED
-                    customUnit: customUnit
-                    value: 0.8008281904610115
+                    startTimeHour: 0
                 messageTemplate: messageTemplate
             enabled: true
           - color: ANNOTATION_COLOR_UNSPECIFIED
@@ -3017,13 +2988,15 @@ components:
             description: description
             id: id
             source:
-              manual:
-                orientation: ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED
+              eventRecurrence:
+                recurrence:
+                  weekly:
+                    daysOfWeek:
+                    - WEEKDAY_UNSPECIFIED
+                    - WEEKDAY_UNSPECIFIED
                 strategy:
                   instant:
-                    unit: UNIT_UNSPECIFIED
-                    customUnit: customUnit
-                    value: 0.8008281904610115
+                    startTimeHour: 0
                 messageTemplate: messageTemplate
             enabled: true
           description: Sample description
@@ -3059,8 +3032,11 @@ components:
                     selection:
                       all: "{}"
             enabled: true
-          folderId:
-            value: value
+          "off": "{}"
+          folderPath:
+            segments:
+            - segments
+            - segments
           layout:
             sections:
             - options:
@@ -3368,8 +3344,6 @@ components:
                 url: url
             id: id
             dataSource: ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED
-          fiveMinutes: "{}"
-          relativeTimeFrame: relativeTimeFrame
           variablesV2:
           - displayType: VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED
             displayName: displayName
@@ -3377,48 +3351,46 @@ components:
             description: description
             displayFullRow: true
             source:
-              query:
+              static:
                 valuesOrderDirection: null
-                valueDisplayOptions:
-                  labelRegex: labelRegex
-                  valueRegex: valueRegex
-                logsQuery:
-                  type:
-                    fieldName:
-                      logRegex: logRegex
+                values:
+                - isDefault: true
+                  label: label
+                  value: value
+                - isDefault: true
+                  label: label
+                  value: value
                 allOption:
                   includeAll: true
                   label: label
-                refreshStrategy: REFRESH_STRATEGY_UNSPECIFIED
             value:
-              lucene:
+              singleNumeric:
                 value:
                   label: label
-                  value: value
+                  value: 5.637377
           - displayType: VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED
             displayName: displayName
             name: name
             description: description
             displayFullRow: true
             source:
-              query:
+              static:
                 valuesOrderDirection: null
-                valueDisplayOptions:
-                  labelRegex: labelRegex
-                  valueRegex: valueRegex
-                logsQuery:
-                  type:
-                    fieldName:
-                      logRegex: logRegex
+                values:
+                - isDefault: true
+                  label: label
+                  value: value
+                - isDefault: true
+                  label: label
+                  value: value
                 allOption:
                   includeAll: true
                   label: label
-                refreshStrategy: REFRESH_STRATEGY_UNSPECIFIED
             value:
-              lucene:
+              singleNumeric:
                 value:
                   label: label
-                  value: value
+                  value: 5.637377
         updatedAt: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about Dashboards in our documentation.
@@ -3514,39 +3486,18 @@ components:
             name: name
             description: description
             definition:
-              multiSelect:
-                valuesOrderDirection: null
-                selection:
-                  all: "{}"
-                selectionOptions:
-                  selectionType: SELECTION_TYPE_UNSPECIFIED
-                source:
-                  constantList:
-                    values:
-                    - values
-                    - values
-                selected:
-                - selected
-                - selected
+              constant:
+                value: value
           - displayType: VARIABLE_DISPLAY_TYPE_UNSPECIFIED
             displayName: displayName
             name: name
             description: description
             definition:
-              multiSelect:
-                valuesOrderDirection: null
-                selection:
-                  all: "{}"
-                selectionOptions:
-                  selectionType: SELECTION_TYPE_UNSPECIFIED
-                source:
-                  constantList:
-                    values:
-                    - values
-                    - values
-                selected:
-                - selected
-                - selected
+              constant:
+                value: value
+          absoluteTimeFrame:
+            from: 2000-01-23T04:56:07.000+00:00
+            to: 2000-01-23T04:56:07.000+00:00
           annotations:
           - color: ANNOTATION_COLOR_UNSPECIFIED
             scope:
@@ -3555,13 +3506,15 @@ components:
             description: description
             id: id
             source:
-              manual:
-                orientation: ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED
+              eventRecurrence:
+                recurrence:
+                  weekly:
+                    daysOfWeek:
+                    - WEEKDAY_UNSPECIFIED
+                    - WEEKDAY_UNSPECIFIED
                 strategy:
                   instant:
-                    unit: UNIT_UNSPECIFIED
-                    customUnit: customUnit
-                    value: 0.8008281904610115
+                    startTimeHour: 0
                 messageTemplate: messageTemplate
             enabled: true
           - color: ANNOTATION_COLOR_UNSPECIFIED
@@ -3571,13 +3524,15 @@ components:
             description: description
             id: id
             source:
-              manual:
-                orientation: ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED
+              eventRecurrence:
+                recurrence:
+                  weekly:
+                    daysOfWeek:
+                    - WEEKDAY_UNSPECIFIED
+                    - WEEKDAY_UNSPECIFIED
                 strategy:
                   instant:
-                    unit: UNIT_UNSPECIFIED
-                    customUnit: customUnit
-                    value: 0.8008281904610115
+                    startTimeHour: 0
                 messageTemplate: messageTemplate
             enabled: true
           description: Sample description
@@ -3613,8 +3568,11 @@ components:
                     selection:
                       all: "{}"
             enabled: true
-          folderId:
-            value: value
+          "off": "{}"
+          folderPath:
+            segments:
+            - segments
+            - segments
           layout:
             sections:
             - options:
@@ -3922,8 +3880,6 @@ components:
                 url: url
             id: id
             dataSource: ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED
-          fiveMinutes: "{}"
-          relativeTimeFrame: relativeTimeFrame
           variablesV2:
           - displayType: VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED
             displayName: displayName
@@ -3931,48 +3887,46 @@ components:
             description: description
             displayFullRow: true
             source:
-              query:
+              static:
                 valuesOrderDirection: null
-                valueDisplayOptions:
-                  labelRegex: labelRegex
-                  valueRegex: valueRegex
-                logsQuery:
-                  type:
-                    fieldName:
-                      logRegex: logRegex
+                values:
+                - isDefault: true
+                  label: label
+                  value: value
+                - isDefault: true
+                  label: label
+                  value: value
                 allOption:
                   includeAll: true
                   label: label
-                refreshStrategy: REFRESH_STRATEGY_UNSPECIFIED
             value:
-              lucene:
+              singleNumeric:
                 value:
                   label: label
-                  value: value
+                  value: 5.637377
           - displayType: VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED
             displayName: displayName
             name: name
             description: description
             displayFullRow: true
             source:
-              query:
+              static:
                 valuesOrderDirection: null
-                valueDisplayOptions:
-                  labelRegex: labelRegex
-                  valueRegex: valueRegex
-                logsQuery:
-                  type:
-                    fieldName:
-                      logRegex: logRegex
+                values:
+                - isDefault: true
+                  label: label
+                  value: value
+                - isDefault: true
+                  label: label
+                  value: value
                 allOption:
                   includeAll: true
                   label: label
-                refreshStrategy: REFRESH_STRATEGY_UNSPECIFIED
             value:
-              lucene:
+              singleNumeric:
                 value:
                   label: label
-                  value: value
+                  value: 5.637377
         updatedAt: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about Dashboards in our documentation.
@@ -4191,10 +4145,10 @@ components:
       type: object
     Hexagon.Query:
       oneOf:
-      - $ref: "#/components/schemas/HexagonQuerySpans"
-      - $ref: "#/components/schemas/HexagonQueryDataprime"
       - $ref: "#/components/schemas/HexagonQueryMetrics"
       - $ref: "#/components/schemas/HexagonQueryLogs"
+      - $ref: "#/components/schemas/HexagonQuerySpans"
+      - $ref: "#/components/schemas/HexagonQueryDataprime"
     Hexagon.SpansQuery:
       description: A spans variant of the query
       externalDocs:
@@ -5044,10 +4998,10 @@ components:
       type: object
     LineChart.Query:
       oneOf:
-      - $ref: "#/components/schemas/LineChartQuerySpans"
-      - $ref: "#/components/schemas/LineChartQueryDataprime"
       - $ref: "#/components/schemas/LineChartQueryLogs"
       - $ref: "#/components/schemas/LineChartQueryMetrics"
+      - $ref: "#/components/schemas/LineChartQuerySpans"
+      - $ref: "#/components/schemas/LineChartQueryDataprime"
     LineChart.Resolution:
       properties:
         bucketsPresented:
@@ -5144,13 +5098,13 @@ components:
       type: object
     LogsAggregation:
       oneOf:
+      - $ref: "#/components/schemas/LogsAggregationCountDistinct"
       - $ref: "#/components/schemas/LogsAggregationSum"
       - $ref: "#/components/schemas/LogsAggregationAverage"
       - $ref: "#/components/schemas/LogsAggregationMin"
       - $ref: "#/components/schemas/LogsAggregationMax"
       - $ref: "#/components/schemas/LogsAggregationPercentile"
       - $ref: "#/components/schemas/LogsAggregationCount"
-      - $ref: "#/components/schemas/LogsAggregationCountDistinct"
     LogsAggregationAverage:
       additionalProperties: false
       properties:
@@ -5294,23 +5248,11 @@ components:
           type: string
       type: object
     LuceneQueryValue:
-      example:
-        value:
-          label: label
-          value: value
       properties:
         value:
           $ref: "#/components/schemas/StringValueLabel"
       type: object
     ManualSource:
-      example:
-        orientation: ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED
-        strategy:
-          instant:
-            unit: UNIT_UNSPECIFIED
-            customUnit: customUnit
-            value: 0.8008281904610115
-        messageTemplate: messageTemplate
       properties:
         messageTemplate:
           type: string
@@ -5324,10 +5266,6 @@ components:
       - $ref: "#/components/schemas/ManualSourceStrategyInstant"
       - $ref: "#/components/schemas/ManualSourceStrategyRange"
     ManualSource.Strategy.Instant:
-      example:
-        unit: UNIT_UNSPECIFIED
-        customUnit: customUnit
-        value: 0.8008281904610115
       properties:
         customUnit:
           type: string
@@ -5352,11 +5290,6 @@ components:
       type: object
     ManualSourceStrategyInstant:
       additionalProperties: false
-      example:
-        instant:
-          unit: UNIT_UNSPECIFIED
-          customUnit: customUnit
-          value: 0.8008281904610115
       properties:
         instant:
           $ref: "#/components/schemas/ManualSource.Strategy.Instant"
@@ -5493,20 +5426,6 @@ components:
           $ref: "#/components/schemas/ObservationField"
       type: object
     MultiSelect:
-      example:
-        valuesOrderDirection: null
-        selection:
-          all: "{}"
-        selectionOptions:
-          selectionType: SELECTION_TYPE_UNSPECIFIED
-        source:
-          constantList:
-            values:
-            - values
-            - values
-        selected:
-        - selected
-        - selected
       properties:
         selected:
           items:
@@ -5524,9 +5443,9 @@ components:
       type: object
     MultiSelect.Query:
       oneOf:
-      - $ref: "#/components/schemas/MultiSelectQuerySpansQuery"
       - $ref: "#/components/schemas/MultiSelectQueryLogsQuery"
       - $ref: "#/components/schemas/MultiSelectQueryMetricsQuery"
+      - $ref: "#/components/schemas/MultiSelectQuerySpansQuery"
     MultiSelect.QuerySource:
       properties:
         query:
@@ -5561,11 +5480,11 @@ components:
       type: object
     MultiSelect.Source:
       oneOf:
+      - $ref: "#/components/schemas/MultiSelectSourceLogsPath"
+      - $ref: "#/components/schemas/MultiSelectSourceMetricLabel"
       - $ref: "#/components/schemas/MultiSelectSourceConstantList"
       - $ref: "#/components/schemas/MultiSelectSourceSpanField"
       - $ref: "#/components/schemas/MultiSelectSourceQuery"
-      - $ref: "#/components/schemas/MultiSelectSourceLogsPath"
-      - $ref: "#/components/schemas/MultiSelectSourceMetricLabel"
     MultiSelect.ValueDisplayOptions:
       properties:
         labelRegex:
@@ -5593,8 +5512,6 @@ components:
       type: object
     MultiSelectSelectionAll:
       additionalProperties: false
-      example:
-        all: "{}"
       properties:
         all:
           type: object
@@ -5607,11 +5524,6 @@ components:
       type: object
     MultiSelectSourceConstantList:
       additionalProperties: false
-      example:
-        constantList:
-          values:
-          - values
-          - values
       properties:
         constantList:
           $ref: "#/components/schemas/ConstantListSource"
@@ -5688,6 +5600,9 @@ components:
       title: ListSelection
       type: object
     NumericValueLabel:
+      example:
+        label: label
+        value: 5.637377
       properties:
         label:
           type: string
@@ -5822,10 +5737,10 @@ components:
       type: object
     PieChart.Query:
       oneOf:
-      - $ref: "#/components/schemas/PieChartQueryLogs"
       - $ref: "#/components/schemas/PieChartQuerySpans"
       - $ref: "#/components/schemas/PieChartQueryMetrics"
       - $ref: "#/components/schemas/PieChartQueryDataprime"
+      - $ref: "#/components/schemas/PieChartQueryLogs"
     PieChart.SpansQuery:
       description: A spans variant of the query
       externalDocs:
@@ -6191,10 +6106,6 @@ components:
           $ref: "#/components/schemas/DataprimeQuery.Type"
       type: object
     QuerySource.LogsQuery:
-      example:
-        type:
-          fieldName:
-            logRegex: logRegex
       properties:
         type:
           $ref: "#/components/schemas/QuerySource.LogsQuery.Type"
@@ -6204,8 +6115,6 @@ components:
       - $ref: "#/components/schemas/QuerySourceLogsQueryTypeFieldName"
       - $ref: "#/components/schemas/QuerySourceLogsQueryTypeFieldValue"
     QuerySource.LogsQuery.Type.FieldName:
-      example:
-        logRegex: logRegex
       properties:
         logRegex:
           type: string
@@ -6261,9 +6170,9 @@ components:
       - $ref: "#/components/schemas/QuerySourceMetricsQueryStringOrVariableVariableName"
     QuerySource.MetricsQuery.Type:
       oneOf:
-      - $ref: "#/components/schemas/QuerySourceMetricsQueryTypeMetricName"
       - $ref: "#/components/schemas/QuerySourceMetricsQueryTypeLabelName"
       - $ref: "#/components/schemas/QuerySourceMetricsQueryTypeLabelValue"
+      - $ref: "#/components/schemas/QuerySourceMetricsQueryTypeMetricName"
     QuerySource.MetricsQuery.Type.LabelName:
       properties:
         metricRegex:
@@ -6308,9 +6217,6 @@ components:
       type: object
     QuerySourceLogsQueryTypeFieldName:
       additionalProperties: false
-      example:
-        fieldName:
-          logRegex: logRegex
       properties:
         fieldName:
           $ref: "#/components/schemas/QuerySource.LogsQuery.Type.FieldName"
@@ -6395,6 +6301,11 @@ components:
           $ref: "#/components/schemas/common.DataprimeQuery"
       type: object
     Recurrence:
+      example:
+        weekly:
+          daysOfWeek:
+          - WEEKDAY_UNSPECIFIED
+          - WEEKDAY_UNSPECIFIED
       properties:
         weekly:
           $ref: "#/components/schemas/WeeklyRecurrence"
@@ -6529,9 +6440,9 @@ components:
       type: string
     RuleScope:
       oneOf:
+      - $ref: "#/components/schemas/RuleScopeField"
       - $ref: "#/components/schemas/RuleScopeRegex"
       - $ref: "#/components/schemas/RuleScopeFieldType"
-      - $ref: "#/components/schemas/RuleScopeField"
     RuleScopeField:
       additionalProperties: false
       properties:
@@ -6765,9 +6676,9 @@ components:
       type: string
     SpanField:
       oneOf:
-      - $ref: "#/components/schemas/SpanFieldProcessTagField"
       - $ref: "#/components/schemas/SpanFieldMetadataField"
       - $ref: "#/components/schemas/SpanFieldTagField"
+      - $ref: "#/components/schemas/SpanFieldProcessTagField"
     SpanFieldMetadataField:
       additionalProperties: false
       properties:
@@ -6908,9 +6819,9 @@ components:
       type: object
     SpansSource.Strategy:
       oneOf:
-      - $ref: "#/components/schemas/SpansSourceStrategyRange"
       - $ref: "#/components/schemas/SpansSourceStrategyDuration"
       - $ref: "#/components/schemas/SpansSourceStrategyInstant"
+      - $ref: "#/components/schemas/SpansSourceStrategyRange"
     SpansSource.Strategy.Duration:
       properties:
         durationField:
@@ -7012,6 +6923,18 @@ components:
           $ref: "#/components/schemas/ObservationField"
       type: object
     StaticSource:
+      example:
+        valuesOrderDirection: null
+        values:
+        - isDefault: true
+          label: label
+          value: value
+        - isDefault: true
+          label: label
+          value: value
+        allOption:
+          includeAll: true
+          label: label
       properties:
         allOption:
           $ref: "#/components/schemas/AllOption"
@@ -7023,9 +6946,6 @@ components:
           $ref: "#/components/schemas/OrderDirection"
       type: object
     StringValueLabel:
-      example:
-        label: label
-        value: value
       properties:
         label:
           type: string
@@ -7400,6 +7320,10 @@ components:
       title: Unpin dashboard response data structure
       type: object
     ValueLabel:
+      example:
+        isDefault: true
+        label: label
+        value: value
       properties:
         isDefault:
           type: boolean
@@ -7415,20 +7339,8 @@ components:
         name: name
         description: description
         definition:
-          multiSelect:
-            valuesOrderDirection: null
-            selection:
-              all: "{}"
-            selectionOptions:
-              selectionType: SELECTION_TYPE_UNSPECIFIED
-            source:
-              constantList:
-                values:
-                - values
-                - values
-            selected:
-            - selected
-            - selected
+          constant:
+            value: value
       properties:
         definition:
           $ref: "#/components/schemas/Variable.Definition"
@@ -7443,31 +7355,19 @@ components:
       type: object
     Variable.Definition:
       oneOf:
-      - $ref: "#/components/schemas/VariableDefinitionMultiSelect"
       - $ref: "#/components/schemas/VariableDefinitionConstant"
+      - $ref: "#/components/schemas/VariableDefinitionMultiSelect"
     VariableDefinitionConstant:
       additionalProperties: false
+      example:
+        constant:
+          value: value
       properties:
         constant:
           $ref: "#/components/schemas/Constant"
       type: object
     VariableDefinitionMultiSelect:
       additionalProperties: false
-      example:
-        multiSelect:
-          valuesOrderDirection: null
-          selection:
-            all: "{}"
-          selectionOptions:
-            selectionType: SELECTION_TYPE_UNSPECIFIED
-          source:
-            constantList:
-              values:
-              - values
-              - values
-          selected:
-          - selected
-          - selected
       properties:
         multiSelect:
           $ref: "#/components/schemas/MultiSelect"
@@ -7487,23 +7387,21 @@ components:
       - VARIABLE_DISPLAY_TYPE_V2_NOTHING
       type: string
     VariableSelectionOptions:
-      example:
-        selectionType: SELECTION_TYPE_UNSPECIFIED
       properties:
         selectionType:
           $ref: "#/components/schemas/SelectionType"
       type: object
     VariableSourceV2:
       oneOf:
+      - $ref: "#/components/schemas/VariableSourceV2Static"
       - $ref: "#/components/schemas/VariableSourceV2Query"
       - $ref: "#/components/schemas/VariableSourceV2Textbox"
-      - $ref: "#/components/schemas/VariableSourceV2Static"
     VariableSourceV2.QuerySource:
       oneOf:
-      - $ref: "#/components/schemas/VariableSourceV2QuerySourceLogsQuery"
-      - $ref: "#/components/schemas/VariableSourceV2QuerySourceMetricsQuery"
       - $ref: "#/components/schemas/VariableSourceV2QuerySourceSpansQuery"
       - $ref: "#/components/schemas/VariableSourceV2QuerySourceDataprimeQuery"
+      - $ref: "#/components/schemas/VariableSourceV2QuerySourceLogsQuery"
+      - $ref: "#/components/schemas/VariableSourceV2QuerySourceMetricsQuery"
     VariableSourceV2.RefreshStrategy:
       enum:
       - REFRESH_STRATEGY_UNSPECIFIED
@@ -7511,9 +7409,6 @@ components:
       - REFRESH_STRATEGY_ON_TIME_FRAME_CHANGE
       type: string
     VariableSourceV2.ValueDisplayOptions:
-      example:
-        labelRegex: labelRegex
-        valueRegex: valueRegex
       properties:
         labelRegex:
           type: string
@@ -7522,20 +7417,6 @@ components:
       type: object
     VariableSourceV2Query:
       additionalProperties: false
-      example:
-        query:
-          valuesOrderDirection: null
-          valueDisplayOptions:
-            labelRegex: labelRegex
-            valueRegex: valueRegex
-          logsQuery:
-            type:
-              fieldName:
-                logRegex: logRegex
-          allOption:
-            includeAll: true
-            label: label
-          refreshStrategy: REFRESH_STRATEGY_UNSPECIFIED
       properties:
         query:
           $ref: "#/components/schemas/VariableSourceV2.QuerySource"
@@ -7556,19 +7437,6 @@ components:
       type: object
     VariableSourceV2QuerySourceLogsQuery:
       additionalProperties: false
-      example:
-        valuesOrderDirection: null
-        valueDisplayOptions:
-          labelRegex: labelRegex
-          valueRegex: valueRegex
-        logsQuery:
-          type:
-            fieldName:
-              logRegex: logRegex
-        allOption:
-          includeAll: true
-          label: label
-        refreshStrategy: REFRESH_STRATEGY_UNSPECIFIED
       properties:
         allOption:
           $ref: "#/components/schemas/AllOption"
@@ -7611,6 +7479,19 @@ components:
       type: object
     VariableSourceV2Static:
       additionalProperties: false
+      example:
+        static:
+          valuesOrderDirection: null
+          values:
+          - isDefault: true
+            label: label
+            value: value
+          - isDefault: true
+            label: label
+            value: value
+          allOption:
+            includeAll: true
+            label: label
       properties:
         static:
           $ref: "#/components/schemas/StaticSource"
@@ -7629,24 +7510,23 @@ components:
         description: description
         displayFullRow: true
         source:
-          query:
+          static:
             valuesOrderDirection: null
-            valueDisplayOptions:
-              labelRegex: labelRegex
-              valueRegex: valueRegex
-            logsQuery:
-              type:
-                fieldName:
-                  logRegex: logRegex
+            values:
+            - isDefault: true
+              label: label
+              value: value
+            - isDefault: true
+              label: label
+              value: value
             allOption:
               includeAll: true
               label: label
-            refreshStrategy: REFRESH_STRATEGY_UNSPECIFIED
         value:
-          lucene:
+          singleNumeric:
             value:
               label: label
-              value: value
+              value: 5.637377
       properties:
         description:
           type: string
@@ -7665,13 +7545,17 @@ components:
       type: object
     VariableValueV2:
       oneOf:
+      - $ref: "#/components/schemas/VariableValueV2SingleNumeric"
+      - $ref: "#/components/schemas/VariableValueV2Regex"
       - $ref: "#/components/schemas/VariableValueV2Lucene"
       - $ref: "#/components/schemas/VariableValueV2Interval"
       - $ref: "#/components/schemas/VariableValueV2MultiString"
       - $ref: "#/components/schemas/VariableValueV2SingleString"
-      - $ref: "#/components/schemas/VariableValueV2SingleNumeric"
-      - $ref: "#/components/schemas/VariableValueV2Regex"
     VariableValueV2.SingleNumericValue:
+      example:
+        value:
+          label: label
+          value: 5.637377
       properties:
         value:
           $ref: "#/components/schemas/NumericValueLabel"
@@ -7684,11 +7568,6 @@ components:
       type: object
     VariableValueV2Lucene:
       additionalProperties: false
-      example:
-        lucene:
-          value:
-            label: label
-            value: value
       properties:
         lucene:
           $ref: "#/components/schemas/LuceneQueryValue"
@@ -7707,6 +7586,11 @@ components:
       type: object
     VariableValueV2SingleNumeric:
       additionalProperties: false
+      example:
+        singleNumeric:
+          value:
+            label: label
+            value: 5.637377
       properties:
         singleNumeric:
           $ref: "#/components/schemas/VariableValueV2.SingleNumericValue"
@@ -7793,16 +7677,16 @@ components:
       type: object
     Visualization:
       oneOf:
-      - $ref: "#/components/schemas/VisualizationStat"
-      - $ref: "#/components/schemas/VisualizationHexagonBins"
-      - $ref: "#/components/schemas/VisualizationHorizontalBars"
-      - $ref: "#/components/schemas/VisualizationHeatmap"
-      - $ref: "#/components/schemas/VisualizationTimeSeriesBars"
       - $ref: "#/components/schemas/VisualizationGauge"
       - $ref: "#/components/schemas/VisualizationPieChart"
-      - $ref: "#/components/schemas/VisualizationVerticalBars"
       - $ref: "#/components/schemas/VisualizationTable"
+      - $ref: "#/components/schemas/VisualizationHexagonBins"
+      - $ref: "#/components/schemas/VisualizationHorizontalBars"
+      - $ref: "#/components/schemas/VisualizationVerticalBars"
+      - $ref: "#/components/schemas/VisualizationHeatmap"
       - $ref: "#/components/schemas/VisualizationTimeSeriesLines"
+      - $ref: "#/components/schemas/VisualizationTimeSeriesBars"
+      - $ref: "#/components/schemas/VisualizationStat"
     Visualization.BarValueDisplay:
       enum:
       - BAR_VALUE_DISPLAY_UNSPECIFIED
@@ -8035,6 +7919,10 @@ components:
       - WEEKDAY_SUNDAY
       type: string
     WeeklyRecurrence:
+      example:
+        daysOfWeek:
+        - WEEKDAY_UNSPECIFIED
+        - WEEKDAY_UNSPECIFIED
       properties:
         daysOfWeek:
           items:
@@ -8113,14 +8001,14 @@ components:
     Widget.Definition:
       oneOf:
       - $ref: "#/components/schemas/WidgetDefinitionDataTable"
-      - $ref: "#/components/schemas/WidgetDefinitionPieChart"
-      - $ref: "#/components/schemas/WidgetDefinitionHexagon"
-      - $ref: "#/components/schemas/WidgetDefinitionLineChart"
       - $ref: "#/components/schemas/WidgetDefinitionGauge"
       - $ref: "#/components/schemas/WidgetDefinitionBarChart"
       - $ref: "#/components/schemas/WidgetDefinitionHorizontalBarChart"
-      - $ref: "#/components/schemas/WidgetDefinitionMarkdown"
+      - $ref: "#/components/schemas/WidgetDefinitionHexagon"
       - $ref: "#/components/schemas/WidgetDefinitionDynamic"
+      - $ref: "#/components/schemas/WidgetDefinitionLineChart"
+      - $ref: "#/components/schemas/WidgetDefinitionPieChart"
+      - $ref: "#/components/schemas/WidgetDefinitionMarkdown"
     WidgetDefinitionBarChart:
       additionalProperties: false
       properties:
@@ -8219,8 +8107,8 @@ components:
       type: object
     XAxis:
       oneOf:
-      - $ref: "#/components/schemas/XAxisTime"
       - $ref: "#/components/schemas/XAxisValue"
+      - $ref: "#/components/schemas/XAxisTime"
     XAxisByTime:
       properties:
         bucketsPresented:
@@ -8622,9 +8510,3 @@ components:
       - requestId
       title: Unpin dashboard request data structure
       type: object
-  securitySchemes:
-    apiKeyAuth:
-      description: API key authentication
-      in: header
-      name: Authorization
-      type: apiKey

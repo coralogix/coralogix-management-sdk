@@ -40,8 +40,6 @@ func (r ApiMetricsConfiguratorPublicServiceConfigureTenantRequest) Execute() (ma
 /*
 MetricsConfiguratorPublicServiceConfigureTenant ConfigureTenant
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiMetricsConfiguratorPublicServiceConfigureTenantRequest
 */
@@ -141,8 +139,6 @@ func (r ApiMetricsConfiguratorPublicServiceDisableArchiveRequest) Execute() (map
 /*
 MetricsConfiguratorPublicServiceDisableArchive DisableArchive
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiMetricsConfiguratorPublicServiceDisableArchiveRequest
 */
@@ -240,8 +236,6 @@ func (r ApiMetricsConfiguratorPublicServiceEnableArchiveRequest) Execute() (map[
 /*
 MetricsConfiguratorPublicServiceEnableArchive EnableArchive
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiMetricsConfiguratorPublicServiceEnableArchiveRequest
 */
@@ -338,8 +332,6 @@ func (r ApiMetricsConfiguratorPublicServiceGetTenantConfigRequest) Execute() (*G
 
 /*
 MetricsConfiguratorPublicServiceGetTenantConfig GetTenantConfig
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiMetricsConfiguratorPublicServiceGetTenantConfigRequest
@@ -443,8 +435,6 @@ func (r ApiMetricsConfiguratorPublicServiceUpdateRequest) Execute() (map[string]
 
 /*
 MetricsConfiguratorPublicServiceUpdate Update
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiMetricsConfiguratorPublicServiceUpdateRequest
@@ -550,8 +540,6 @@ func (r ApiMetricsConfiguratorPublicServiceValidateBucketRequest) Execute() (map
 
 /*
 MetricsConfiguratorPublicServiceValidateBucket ValidateBucket
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiMetricsConfiguratorPublicServiceValidateBucketRequest

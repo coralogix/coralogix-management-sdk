@@ -1,0 +1,4355 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/alerts/alerts-general/v3": {
+      "get": {
+        "tags": [
+          "Alert definitions service"
+        ],
+        "summary": "Get a list of all accessible alert definitions",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertDefsService_ListAlertDefs",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "query_filter",
+            "schema": {
+              "externalDocs": {
+                "url": ""
+              },
+              "title": "AlertDef query filter",
+              "description": "Filter configuration for alert defs",
+              "type": "object",
+              "properties": {
+                "enabledFilter": {},
+                "entityLabelsFilter": {},
+                "lastTriggeredTimeRangeFilter": {},
+                "modifiedTimeRangeFilter": {},
+                "nameFilter": {},
+                "priorityFilter": {},
+                "statusFilter": {},
+                "typeFilter": {},
+                "typeSpecificFilter": {}
+              }
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "pagination",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "pageSize": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "pageToken": {
+                  "type": "string"
+                }
+              }
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "order_bys",
+            "schema": {
+              "externalDocs": {
+                "url": ""
+              },
+              "title": "Alert definition order by list",
+              "description": "List of fields to order alert definitions by",
+              "type": "object",
+              "properties": {
+                "orderBys": {
+                  "type": "array",
+                  "items": {
+                    "externalDocs": {
+                      "url": ""
+                    },
+                    "title": "Alert definition order by",
+                    "description": "A data structure that specifies the field and direction for ordering alert definitions",
+                    "type": "object",
+                    "properties": {
+                      "direction": {
+                        "$ref": "#/components/schemas/AlertDefOrderByDirection"
+                      },
+                      "fieldName": {
+                        "$ref": "#/components/schemas/AlertDefOrderByFields"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListAlertDefsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "alerts:ReadConfig"
+        ]
+      },
+      "put": {
+        "tags": [
+          "Alert definitions service"
+        ],
+        "summary": "Replace an alert definition",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertDefsService_ReplaceAlertDef",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Replace alert definition request",
+                "description": "A request to replace an existing alert definition",
+                "type": "object",
+                "properties": {
+                  "alertDefProperties": {
+                    "$ref": "#/components/schemas/AlertDefProperties"
+                  },
+                  "id": {
+                    "example": "123e4567-e89b-12d3-a456-426614174000",
+                    "description": "Alert definition ID",
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplaceAlertDefResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "alerts:UpdateConfig"
+        ]
+      },
+      "post": {
+        "tags": [
+          "Alert definitions service"
+        ],
+        "summary": "Create an alert",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertDefsService_CreateAlertDef",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Create alert definition request",
+                "description": "A request to create a new alert definition",
+                "type": "object",
+                "properties": {
+                  "alertDefProperties": {
+                    "$ref": "#/components/schemas/AlertDefProperties"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAlertDefResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "alerts:UpdateConfig"
+        ]
+      }
+    },
+    "/alerts/alerts-general/v3/alert-version-id/{alert_version_id}": {
+      "get": {
+        "tags": [
+          "Alert definitions service"
+        ],
+        "summary": "Get alert definition by alert version ID",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertDefsService_GetAlertDefByVersionId",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "alert_version_id",
+            "required": true,
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "description": "Alert version ID",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAlertDefByVersionIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "alerts:ReadConfig"
+        ]
+      }
+    },
+    "/alerts/alerts-general/v3/bulk": {
+      "put": {
+        "tags": [
+          "Alert definitions service"
+        ],
+        "summary": "Bulk replace alert definitions",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertDefsService_BulkReplaceAlertDefs",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Bulk replace alert definitions request",
+                "description": "A request to bulk replace multiple alert definitions",
+                "type": "object",
+                "properties": {
+                  "alertDefsToReplace": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/AlertDefToReplace"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkReplaceAlertDefsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "alerts:UpdateConfig"
+        ]
+      }
+    },
+    "/alerts/alerts-general/v3/download": {
+      "get": {
+        "tags": [
+          "Alert definitions service"
+        ],
+        "summary": "Download alerts",
+        "description": "Download a list of all accessible alert definitions in base64-encoded byte format.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertDefsService_DownloadAlerts",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DownloadAlertsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "alerts:ReadConfig"
+        ]
+      }
+    },
+    "/alerts/alerts-general/v3/filter-option-counts": {
+      "get": {
+        "tags": [
+          "Alert definitions service"
+        ],
+        "summary": "Get counts for filter options",
+        "description": "Returns counts for different filter options based on the provided filters",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertDefsService_FilterOptionCounts",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "query_filter",
+            "schema": {
+              "externalDocs": {
+                "url": ""
+              },
+              "title": "Filter option counts filter",
+              "description": "Filter configuration for counting filter options",
+              "type": "object",
+              "properties": {
+                "enabledFilter": {},
+                "entityLabelsFilter": {},
+                "nameFilter": {},
+                "priorityFilter": {},
+                "statusFilter": {},
+                "typeFilter": {}
+              }
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FilterOptionCountsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "alerts:ReadConfig"
+        ]
+      }
+    },
+    "/alerts/alerts-general/v3/{id}": {
+      "get": {
+        "tags": [
+          "Alert definitions service"
+        ],
+        "summary": "Get alert definition by ID",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertDefsService_GetAlertDef",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "description": "Alert definition ID",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAlertDefResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "alerts:ReadConfig"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Alert definitions service"
+        ],
+        "summary": "DeleteAlertDef",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertDefsService_DeleteAlertDef",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteAlertDefResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "alerts:UpdateConfig"
+        ]
+      }
+    },
+    "/alerts/alerts-general/v3/{id}:setActive": {
+      "post": {
+        "tags": [
+          "Alert definitions service"
+        ],
+        "summary": "Disable or enable an alert",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertDefsService_SetActive",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "description": "The alert definition ID",
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "in": "query",
+            "name": "active",
+            "schema": {
+              "example": true,
+              "description": "Whether to enable or disable the alert definition",
+              "type": "boolean"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v3.SetActiveResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "alerts:UpdateConfig"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ActivitySchedule": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert activity schedule",
+        "description": "Defines when an alert should be active based on days of the week and time windows",
+        "type": "object",
+        "properties": {
+          "dayOfWeek": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DayOfWeek"
+            }
+          },
+          "endTime": {
+            "$ref": "#/components/schemas/TimeOfDay"
+          },
+          "startTime": {
+            "$ref": "#/components/schemas/TimeOfDay"
+          }
+        }
+      },
+      "AlertDef": {
+        "externalDocs": {
+          "description": "Find out more about alerts in our documentation",
+          "url": "https://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/"
+        },
+        "title": "Alert definition",
+        "description": "This data structure represents an alert definition",
+        "type": "object",
+        "properties": {
+          "alertDefProperties": {
+            "$ref": "#/components/schemas/AlertDefProperties"
+          },
+          "alertVersionId": {
+            "description": "The old alert ID",
+            "type": "string"
+          },
+          "createdTime": {
+            "example": "2023-10-01T12:00:00Z",
+            "description": "The time when the alert definition was created",
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "example": "123e4567-e89b-12d3-a456-426614174000",
+            "description": "The alert definition's persistent ID",
+            "type": "string"
+          },
+          "lastTriggeredTime": {
+            "example": "2023-10-01T12:00:00Z",
+            "description": "The last time the alert definition was triggered",
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "$ref": "#/components/schemas/AlertDefStatus"
+          },
+          "updatedTime": {
+            "example": "2023-10-01T12:00:00Z",
+            "description": "The time when the alert definition was last updated",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AlertDefIncidentSettings": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert definition incident settings",
+        "type": "object",
+        "properties": {
+          "minutes": {
+            "example": 30,
+            "description": "The time in minutes before the alert can be retriggered",
+            "type": "integer",
+            "format": "int64"
+          },
+          "notifyOn": {
+            "$ref": "#/components/schemas/NotifyOn"
+          }
+        }
+      },
+      "AlertDefNotificationGroup": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert definition notification group",
+        "type": "object",
+        "properties": {
+          "destinations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NotificationDestination"
+            }
+          },
+          "groupByKeys": {
+            "type": "array",
+            "items": {
+              "example": [
+                "key1",
+                "key2"
+              ],
+              "description": "The keys to group the alerts by",
+              "type": "string"
+            }
+          },
+          "router": {
+            "$ref": "#/components/schemas/NotificationRouter"
+          },
+          "webhooks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefWebhooksSettings"
+            }
+          }
+        }
+      },
+      "AlertDefOrderByDirection": {
+        "type": "string",
+        "enum": [
+          "ALERT_DEF_ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED",
+          "ALERT_DEF_ORDER_BY_DIRECTION_DESC"
+        ]
+      },
+      "AlertDefOrderByFields": {
+        "type": "string",
+        "enum": [
+          "ALERT_DEF_ORDER_BY_FIELDS_UNSPECIFIED",
+          "ALERT_DEF_ORDER_BY_FIELDS_PRIORITY",
+          "ALERT_DEF_ORDER_BY_FIELDS_LAST_TRIGGERED_TIME",
+          "ALERT_DEF_ORDER_BY_FIELDS_UPDATED_TIME",
+          "ALERT_DEF_ORDER_BY_FIELDS_ENABLED"
+        ]
+      },
+      "AlertDefOverride": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert definition priority update",
+        "type": "object",
+        "properties": {
+          "priority": {
+            "$ref": "#/components/schemas/AlertDefPriority"
+          }
+        }
+      },
+      "AlertDefPriority": {
+        "type": "string",
+        "enum": [
+          "ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED",
+          "ALERT_DEF_PRIORITY_P4",
+          "ALERT_DEF_PRIORITY_P3",
+          "ALERT_DEF_PRIORITY_P2",
+          "ALERT_DEF_PRIORITY_P1"
+        ]
+      },
+      "AlertDefProperties": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesMetricAnomaly"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesFlow"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesSloThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
+          }
+        ]
+      },
+      "AlertDefPropertiesFlow": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert definition properties",
+        "description": "User-configurable properties of an alert definition",
+        "type": "object",
+        "properties": {
+          "activeOn": {
+            "$ref": "#/components/schemas/ActivitySchedule"
+          },
+          "deleted": {
+            "example": false,
+            "description": "Whether the alert has been marked as deleted",
+            "type": "boolean"
+          },
+          "description": {
+            "example": "Alert description",
+            "description": "A detailed description of what the alert monitors and when it triggers",
+            "type": "string"
+          },
+          "enabled": {
+            "example": true,
+            "description": "Whether the alert is currently active and monitoring",
+            "type": "boolean"
+          },
+          "entityLabels": {
+            "example": {
+              "key": "value"
+            },
+            "description": "Labels used to identify and categorize the alert entity",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "flow": {
+            "$ref": "#/components/schemas/FlowType"
+          },
+          "groupByKeys": {
+            "type": "array",
+            "items": {
+              "example": [
+                "key1",
+                "key2"
+              ],
+              "description": "Keys used to group and aggregate alert data",
+              "type": "string"
+            }
+          },
+          "incidentsSettings": {
+            "$ref": "#/components/schemas/AlertDefIncidentSettings"
+          },
+          "name": {
+            "example": "My Alert",
+            "description": "The name of the alert definition",
+            "type": "string"
+          },
+          "notificationGroup": {
+            "$ref": "#/components/schemas/AlertDefNotificationGroup"
+          },
+          "notificationGroupExcess": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefNotificationGroup"
+            }
+          },
+          "phantomMode": {
+            "example": false,
+            "description": "Whether the alert is in phantom mode (creating incidents or not)",
+            "type": "boolean"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/AlertDefPriority"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AlertDefType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AlertDefPropertiesLogsAnomaly": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert definition properties",
+        "description": "User-configurable properties of an alert definition",
+        "type": "object",
+        "properties": {
+          "activeOn": {
+            "$ref": "#/components/schemas/ActivitySchedule"
+          },
+          "deleted": {
+            "example": false,
+            "description": "Whether the alert has been marked as deleted",
+            "type": "boolean"
+          },
+          "description": {
+            "example": "Alert description",
+            "description": "A detailed description of what the alert monitors and when it triggers",
+            "type": "string"
+          },
+          "enabled": {
+            "example": true,
+            "description": "Whether the alert is currently active and monitoring",
+            "type": "boolean"
+          },
+          "entityLabels": {
+            "example": {
+              "key": "value"
+            },
+            "description": "Labels used to identify and categorize the alert entity",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "groupByKeys": {
+            "type": "array",
+            "items": {
+              "example": [
+                "key1",
+                "key2"
+              ],
+              "description": "Keys used to group and aggregate alert data",
+              "type": "string"
+            }
+          },
+          "incidentsSettings": {
+            "$ref": "#/components/schemas/AlertDefIncidentSettings"
+          },
+          "logsAnomaly": {
+            "$ref": "#/components/schemas/LogsAnomalyType"
+          },
+          "name": {
+            "example": "My Alert",
+            "description": "The name of the alert definition",
+            "type": "string"
+          },
+          "notificationGroup": {
+            "$ref": "#/components/schemas/AlertDefNotificationGroup"
+          },
+          "notificationGroupExcess": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefNotificationGroup"
+            }
+          },
+          "phantomMode": {
+            "example": false,
+            "description": "Whether the alert is in phantom mode (creating incidents or not)",
+            "type": "boolean"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/AlertDefPriority"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AlertDefType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AlertDefPropertiesLogsImmediate": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert definition properties",
+        "description": "User-configurable properties of an alert definition",
+        "type": "object",
+        "properties": {
+          "activeOn": {
+            "$ref": "#/components/schemas/ActivitySchedule"
+          },
+          "deleted": {
+            "example": false,
+            "description": "Whether the alert has been marked as deleted",
+            "type": "boolean"
+          },
+          "description": {
+            "example": "Alert description",
+            "description": "A detailed description of what the alert monitors and when it triggers",
+            "type": "string"
+          },
+          "enabled": {
+            "example": true,
+            "description": "Whether the alert is currently active and monitoring",
+            "type": "boolean"
+          },
+          "entityLabels": {
+            "example": {
+              "key": "value"
+            },
+            "description": "Labels used to identify and categorize the alert entity",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "groupByKeys": {
+            "type": "array",
+            "items": {
+              "example": [
+                "key1",
+                "key2"
+              ],
+              "description": "Keys used to group and aggregate alert data",
+              "type": "string"
+            }
+          },
+          "incidentsSettings": {
+            "$ref": "#/components/schemas/AlertDefIncidentSettings"
+          },
+          "logsImmediate": {
+            "$ref": "#/components/schemas/LogsImmediateType"
+          },
+          "name": {
+            "example": "My Alert",
+            "description": "The name of the alert definition",
+            "type": "string"
+          },
+          "notificationGroup": {
+            "$ref": "#/components/schemas/AlertDefNotificationGroup"
+          },
+          "notificationGroupExcess": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefNotificationGroup"
+            }
+          },
+          "phantomMode": {
+            "example": false,
+            "description": "Whether the alert is in phantom mode (creating incidents or not)",
+            "type": "boolean"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/AlertDefPriority"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AlertDefType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AlertDefPropertiesLogsNewValue": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert definition properties",
+        "description": "User-configurable properties of an alert definition",
+        "type": "object",
+        "properties": {
+          "activeOn": {
+            "$ref": "#/components/schemas/ActivitySchedule"
+          },
+          "deleted": {
+            "example": false,
+            "description": "Whether the alert has been marked as deleted",
+            "type": "boolean"
+          },
+          "description": {
+            "example": "Alert description",
+            "description": "A detailed description of what the alert monitors and when it triggers",
+            "type": "string"
+          },
+          "enabled": {
+            "example": true,
+            "description": "Whether the alert is currently active and monitoring",
+            "type": "boolean"
+          },
+          "entityLabels": {
+            "example": {
+              "key": "value"
+            },
+            "description": "Labels used to identify and categorize the alert entity",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "groupByKeys": {
+            "type": "array",
+            "items": {
+              "example": [
+                "key1",
+                "key2"
+              ],
+              "description": "Keys used to group and aggregate alert data",
+              "type": "string"
+            }
+          },
+          "incidentsSettings": {
+            "$ref": "#/components/schemas/AlertDefIncidentSettings"
+          },
+          "logsNewValue": {
+            "$ref": "#/components/schemas/LogsNewValueType"
+          },
+          "name": {
+            "example": "My Alert",
+            "description": "The name of the alert definition",
+            "type": "string"
+          },
+          "notificationGroup": {
+            "$ref": "#/components/schemas/AlertDefNotificationGroup"
+          },
+          "notificationGroupExcess": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefNotificationGroup"
+            }
+          },
+          "phantomMode": {
+            "example": false,
+            "description": "Whether the alert is in phantom mode (creating incidents or not)",
+            "type": "boolean"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/AlertDefPriority"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AlertDefType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AlertDefPropertiesLogsRatioThreshold": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert definition properties",
+        "description": "User-configurable properties of an alert definition",
+        "type": "object",
+        "properties": {
+          "activeOn": {
+            "$ref": "#/components/schemas/ActivitySchedule"
+          },
+          "deleted": {
+            "example": false,
+            "description": "Whether the alert has been marked as deleted",
+            "type": "boolean"
+          },
+          "description": {
+            "example": "Alert description",
+            "description": "A detailed description of what the alert monitors and when it triggers",
+            "type": "string"
+          },
+          "enabled": {
+            "example": true,
+            "description": "Whether the alert is currently active and monitoring",
+            "type": "boolean"
+          },
+          "entityLabels": {
+            "example": {
+              "key": "value"
+            },
+            "description": "Labels used to identify and categorize the alert entity",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "groupByKeys": {
+            "type": "array",
+            "items": {
+              "example": [
+                "key1",
+                "key2"
+              ],
+              "description": "Keys used to group and aggregate alert data",
+              "type": "string"
+            }
+          },
+          "incidentsSettings": {
+            "$ref": "#/components/schemas/AlertDefIncidentSettings"
+          },
+          "logsRatioThreshold": {
+            "$ref": "#/components/schemas/LogsRatioThresholdType"
+          },
+          "name": {
+            "example": "My Alert",
+            "description": "The name of the alert definition",
+            "type": "string"
+          },
+          "notificationGroup": {
+            "$ref": "#/components/schemas/AlertDefNotificationGroup"
+          },
+          "notificationGroupExcess": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefNotificationGroup"
+            }
+          },
+          "phantomMode": {
+            "example": false,
+            "description": "Whether the alert is in phantom mode (creating incidents or not)",
+            "type": "boolean"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/AlertDefPriority"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AlertDefType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AlertDefPropertiesLogsThreshold": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert definition properties",
+        "description": "User-configurable properties of an alert definition",
+        "type": "object",
+        "properties": {
+          "activeOn": {
+            "$ref": "#/components/schemas/ActivitySchedule"
+          },
+          "deleted": {
+            "example": false,
+            "description": "Whether the alert has been marked as deleted",
+            "type": "boolean"
+          },
+          "description": {
+            "example": "Alert description",
+            "description": "A detailed description of what the alert monitors and when it triggers",
+            "type": "string"
+          },
+          "enabled": {
+            "example": true,
+            "description": "Whether the alert is currently active and monitoring",
+            "type": "boolean"
+          },
+          "entityLabels": {
+            "example": {
+              "key": "value"
+            },
+            "description": "Labels used to identify and categorize the alert entity",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "groupByKeys": {
+            "type": "array",
+            "items": {
+              "example": [
+                "key1",
+                "key2"
+              ],
+              "description": "Keys used to group and aggregate alert data",
+              "type": "string"
+            }
+          },
+          "incidentsSettings": {
+            "$ref": "#/components/schemas/AlertDefIncidentSettings"
+          },
+          "logsThreshold": {
+            "$ref": "#/components/schemas/LogsThresholdType"
+          },
+          "name": {
+            "example": "My Alert",
+            "description": "The name of the alert definition",
+            "type": "string"
+          },
+          "notificationGroup": {
+            "$ref": "#/components/schemas/AlertDefNotificationGroup"
+          },
+          "notificationGroupExcess": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefNotificationGroup"
+            }
+          },
+          "phantomMode": {
+            "example": false,
+            "description": "Whether the alert is in phantom mode (creating incidents or not)",
+            "type": "boolean"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/AlertDefPriority"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AlertDefType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AlertDefPropertiesLogsTimeRelativeThreshold": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert definition properties",
+        "description": "User-configurable properties of an alert definition",
+        "type": "object",
+        "properties": {
+          "activeOn": {
+            "$ref": "#/components/schemas/ActivitySchedule"
+          },
+          "deleted": {
+            "example": false,
+            "description": "Whether the alert has been marked as deleted",
+            "type": "boolean"
+          },
+          "description": {
+            "example": "Alert description",
+            "description": "A detailed description of what the alert monitors and when it triggers",
+            "type": "string"
+          },
+          "enabled": {
+            "example": true,
+            "description": "Whether the alert is currently active and monitoring",
+            "type": "boolean"
+          },
+          "entityLabels": {
+            "example": {
+              "key": "value"
+            },
+            "description": "Labels used to identify and categorize the alert entity",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "groupByKeys": {
+            "type": "array",
+            "items": {
+              "example": [
+                "key1",
+                "key2"
+              ],
+              "description": "Keys used to group and aggregate alert data",
+              "type": "string"
+            }
+          },
+          "incidentsSettings": {
+            "$ref": "#/components/schemas/AlertDefIncidentSettings"
+          },
+          "logsTimeRelativeThreshold": {
+            "$ref": "#/components/schemas/LogsTimeRelativeThresholdType"
+          },
+          "name": {
+            "example": "My Alert",
+            "description": "The name of the alert definition",
+            "type": "string"
+          },
+          "notificationGroup": {
+            "$ref": "#/components/schemas/AlertDefNotificationGroup"
+          },
+          "notificationGroupExcess": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefNotificationGroup"
+            }
+          },
+          "phantomMode": {
+            "example": false,
+            "description": "Whether the alert is in phantom mode (creating incidents or not)",
+            "type": "boolean"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/AlertDefPriority"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AlertDefType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AlertDefPropertiesLogsUniqueCount": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert definition properties",
+        "description": "User-configurable properties of an alert definition",
+        "type": "object",
+        "properties": {
+          "activeOn": {
+            "$ref": "#/components/schemas/ActivitySchedule"
+          },
+          "deleted": {
+            "example": false,
+            "description": "Whether the alert has been marked as deleted",
+            "type": "boolean"
+          },
+          "description": {
+            "example": "Alert description",
+            "description": "A detailed description of what the alert monitors and when it triggers",
+            "type": "string"
+          },
+          "enabled": {
+            "example": true,
+            "description": "Whether the alert is currently active and monitoring",
+            "type": "boolean"
+          },
+          "entityLabels": {
+            "example": {
+              "key": "value"
+            },
+            "description": "Labels used to identify and categorize the alert entity",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "groupByKeys": {
+            "type": "array",
+            "items": {
+              "example": [
+                "key1",
+                "key2"
+              ],
+              "description": "Keys used to group and aggregate alert data",
+              "type": "string"
+            }
+          },
+          "incidentsSettings": {
+            "$ref": "#/components/schemas/AlertDefIncidentSettings"
+          },
+          "logsUniqueCount": {
+            "$ref": "#/components/schemas/LogsUniqueCountType"
+          },
+          "name": {
+            "example": "My Alert",
+            "description": "The name of the alert definition",
+            "type": "string"
+          },
+          "notificationGroup": {
+            "$ref": "#/components/schemas/AlertDefNotificationGroup"
+          },
+          "notificationGroupExcess": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefNotificationGroup"
+            }
+          },
+          "phantomMode": {
+            "example": false,
+            "description": "Whether the alert is in phantom mode (creating incidents or not)",
+            "type": "boolean"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/AlertDefPriority"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AlertDefType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AlertDefPropertiesMetricAnomaly": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert definition properties",
+        "description": "User-configurable properties of an alert definition",
+        "type": "object",
+        "properties": {
+          "activeOn": {
+            "$ref": "#/components/schemas/ActivitySchedule"
+          },
+          "deleted": {
+            "example": false,
+            "description": "Whether the alert has been marked as deleted",
+            "type": "boolean"
+          },
+          "description": {
+            "example": "Alert description",
+            "description": "A detailed description of what the alert monitors and when it triggers",
+            "type": "string"
+          },
+          "enabled": {
+            "example": true,
+            "description": "Whether the alert is currently active and monitoring",
+            "type": "boolean"
+          },
+          "entityLabels": {
+            "example": {
+              "key": "value"
+            },
+            "description": "Labels used to identify and categorize the alert entity",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "groupByKeys": {
+            "type": "array",
+            "items": {
+              "example": [
+                "key1",
+                "key2"
+              ],
+              "description": "Keys used to group and aggregate alert data",
+              "type": "string"
+            }
+          },
+          "incidentsSettings": {
+            "$ref": "#/components/schemas/AlertDefIncidentSettings"
+          },
+          "metricAnomaly": {
+            "$ref": "#/components/schemas/MetricAnomalyType"
+          },
+          "name": {
+            "example": "My Alert",
+            "description": "The name of the alert definition",
+            "type": "string"
+          },
+          "notificationGroup": {
+            "$ref": "#/components/schemas/AlertDefNotificationGroup"
+          },
+          "notificationGroupExcess": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefNotificationGroup"
+            }
+          },
+          "phantomMode": {
+            "example": false,
+            "description": "Whether the alert is in phantom mode (creating incidents or not)",
+            "type": "boolean"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/AlertDefPriority"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AlertDefType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AlertDefPropertiesMetricThreshold": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert definition properties",
+        "description": "User-configurable properties of an alert definition",
+        "type": "object",
+        "properties": {
+          "activeOn": {
+            "$ref": "#/components/schemas/ActivitySchedule"
+          },
+          "deleted": {
+            "example": false,
+            "description": "Whether the alert has been marked as deleted",
+            "type": "boolean"
+          },
+          "description": {
+            "example": "Alert description",
+            "description": "A detailed description of what the alert monitors and when it triggers",
+            "type": "string"
+          },
+          "enabled": {
+            "example": true,
+            "description": "Whether the alert is currently active and monitoring",
+            "type": "boolean"
+          },
+          "entityLabels": {
+            "example": {
+              "key": "value"
+            },
+            "description": "Labels used to identify and categorize the alert entity",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "groupByKeys": {
+            "type": "array",
+            "items": {
+              "example": [
+                "key1",
+                "key2"
+              ],
+              "description": "Keys used to group and aggregate alert data",
+              "type": "string"
+            }
+          },
+          "incidentsSettings": {
+            "$ref": "#/components/schemas/AlertDefIncidentSettings"
+          },
+          "metricThreshold": {
+            "$ref": "#/components/schemas/MetricThresholdType"
+          },
+          "name": {
+            "example": "My Alert",
+            "description": "The name of the alert definition",
+            "type": "string"
+          },
+          "notificationGroup": {
+            "$ref": "#/components/schemas/AlertDefNotificationGroup"
+          },
+          "notificationGroupExcess": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefNotificationGroup"
+            }
+          },
+          "phantomMode": {
+            "example": false,
+            "description": "Whether the alert is in phantom mode (creating incidents or not)",
+            "type": "boolean"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/AlertDefPriority"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AlertDefType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AlertDefPropertiesSloThreshold": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert definition properties",
+        "description": "User-configurable properties of an alert definition",
+        "type": "object",
+        "properties": {
+          "activeOn": {
+            "$ref": "#/components/schemas/ActivitySchedule"
+          },
+          "deleted": {
+            "example": false,
+            "description": "Whether the alert has been marked as deleted",
+            "type": "boolean"
+          },
+          "description": {
+            "example": "Alert description",
+            "description": "A detailed description of what the alert monitors and when it triggers",
+            "type": "string"
+          },
+          "enabled": {
+            "example": true,
+            "description": "Whether the alert is currently active and monitoring",
+            "type": "boolean"
+          },
+          "entityLabels": {
+            "example": {
+              "key": "value"
+            },
+            "description": "Labels used to identify and categorize the alert entity",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "groupByKeys": {
+            "type": "array",
+            "items": {
+              "example": [
+                "key1",
+                "key2"
+              ],
+              "description": "Keys used to group and aggregate alert data",
+              "type": "string"
+            }
+          },
+          "incidentsSettings": {
+            "$ref": "#/components/schemas/AlertDefIncidentSettings"
+          },
+          "name": {
+            "example": "My Alert",
+            "description": "The name of the alert definition",
+            "type": "string"
+          },
+          "notificationGroup": {
+            "$ref": "#/components/schemas/AlertDefNotificationGroup"
+          },
+          "notificationGroupExcess": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefNotificationGroup"
+            }
+          },
+          "phantomMode": {
+            "example": false,
+            "description": "Whether the alert is in phantom mode (creating incidents or not)",
+            "type": "boolean"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/AlertDefPriority"
+          },
+          "sloThreshold": {
+            "$ref": "#/components/schemas/SloThresholdType"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AlertDefType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AlertDefPropertiesTracingImmediate": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert definition properties",
+        "description": "User-configurable properties of an alert definition",
+        "type": "object",
+        "properties": {
+          "activeOn": {
+            "$ref": "#/components/schemas/ActivitySchedule"
+          },
+          "deleted": {
+            "example": false,
+            "description": "Whether the alert has been marked as deleted",
+            "type": "boolean"
+          },
+          "description": {
+            "example": "Alert description",
+            "description": "A detailed description of what the alert monitors and when it triggers",
+            "type": "string"
+          },
+          "enabled": {
+            "example": true,
+            "description": "Whether the alert is currently active and monitoring",
+            "type": "boolean"
+          },
+          "entityLabels": {
+            "example": {
+              "key": "value"
+            },
+            "description": "Labels used to identify and categorize the alert entity",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "groupByKeys": {
+            "type": "array",
+            "items": {
+              "example": [
+                "key1",
+                "key2"
+              ],
+              "description": "Keys used to group and aggregate alert data",
+              "type": "string"
+            }
+          },
+          "incidentsSettings": {
+            "$ref": "#/components/schemas/AlertDefIncidentSettings"
+          },
+          "name": {
+            "example": "My Alert",
+            "description": "The name of the alert definition",
+            "type": "string"
+          },
+          "notificationGroup": {
+            "$ref": "#/components/schemas/AlertDefNotificationGroup"
+          },
+          "notificationGroupExcess": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefNotificationGroup"
+            }
+          },
+          "phantomMode": {
+            "example": false,
+            "description": "Whether the alert is in phantom mode (creating incidents or not)",
+            "type": "boolean"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/AlertDefPriority"
+          },
+          "tracingImmediate": {
+            "$ref": "#/components/schemas/TracingImmediateType"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AlertDefType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AlertDefPropertiesTracingThreshold": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert definition properties",
+        "description": "User-configurable properties of an alert definition",
+        "type": "object",
+        "properties": {
+          "activeOn": {
+            "$ref": "#/components/schemas/ActivitySchedule"
+          },
+          "deleted": {
+            "example": false,
+            "description": "Whether the alert has been marked as deleted",
+            "type": "boolean"
+          },
+          "description": {
+            "example": "Alert description",
+            "description": "A detailed description of what the alert monitors and when it triggers",
+            "type": "string"
+          },
+          "enabled": {
+            "example": true,
+            "description": "Whether the alert is currently active and monitoring",
+            "type": "boolean"
+          },
+          "entityLabels": {
+            "example": {
+              "key": "value"
+            },
+            "description": "Labels used to identify and categorize the alert entity",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "groupByKeys": {
+            "type": "array",
+            "items": {
+              "example": [
+                "key1",
+                "key2"
+              ],
+              "description": "Keys used to group and aggregate alert data",
+              "type": "string"
+            }
+          },
+          "incidentsSettings": {
+            "$ref": "#/components/schemas/AlertDefIncidentSettings"
+          },
+          "name": {
+            "example": "My Alert",
+            "description": "The name of the alert definition",
+            "type": "string"
+          },
+          "notificationGroup": {
+            "$ref": "#/components/schemas/AlertDefNotificationGroup"
+          },
+          "notificationGroupExcess": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefNotificationGroup"
+            }
+          },
+          "phantomMode": {
+            "example": false,
+            "description": "Whether the alert is in phantom mode (creating incidents or not)",
+            "type": "boolean"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/AlertDefPriority"
+          },
+          "tracingThreshold": {
+            "$ref": "#/components/schemas/TracingThresholdType"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AlertDefType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AlertDefStatus": {
+        "type": "string",
+        "enum": [
+          "ALERT_DEF_STATUS_UNSPECIFIED",
+          "ALERT_DEF_STATUS_ALERTING",
+          "ALERT_DEF_STATUS_OK",
+          "ALERT_DEF_STATUS_NO_DATA"
+        ]
+      },
+      "AlertDefToReplace": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert definition to replace",
+        "description": "An alert definition along with its ID for replacement",
+        "type": "object",
+        "properties": {
+          "alertDefProperties": {
+            "$ref": "#/components/schemas/AlertDefProperties"
+          },
+          "id": {
+            "example": "123e4567-e89b-12d3-a456-426614174000",
+            "description": "The alert definition ID",
+            "type": "string"
+          }
+        }
+      },
+      "AlertDefType": {
+        "type": "string",
+        "enum": [
+          "ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED",
+          "ALERT_DEF_TYPE_LOGS_THRESHOLD",
+          "ALERT_DEF_TYPE_LOGS_ANOMALY",
+          "ALERT_DEF_TYPE_LOGS_RATIO_THRESHOLD",
+          "ALERT_DEF_TYPE_LOGS_NEW_VALUE",
+          "ALERT_DEF_TYPE_LOGS_UNIQUE_COUNT",
+          "ALERT_DEF_TYPE_LOGS_TIME_RELATIVE_THRESHOLD",
+          "ALERT_DEF_TYPE_METRIC_THRESHOLD",
+          "ALERT_DEF_TYPE_METRIC_ANOMALY",
+          "ALERT_DEF_TYPE_TRACING_IMMEDIATE",
+          "ALERT_DEF_TYPE_TRACING_THRESHOLD",
+          "ALERT_DEF_TYPE_FLOW",
+          "ALERT_DEF_TYPE_SLO_THRESHOLD"
+        ]
+      },
+      "AlertDefWebhooksSettings": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert definition webhook settings",
+        "description": "Configuration for webhook notifications for an alert",
+        "type": "object",
+        "properties": {
+          "integration": {
+            "$ref": "#/components/schemas/v3.IntegrationType"
+          },
+          "minutes": {
+            "example": 15,
+            "description": "The time in minutes before the alert can be retriggered",
+            "type": "integer",
+            "format": "int64"
+          },
+          "notifyOn": {
+            "$ref": "#/components/schemas/NotifyOn"
+          }
+        }
+      },
+      "AlertsOp": {
+        "type": "string",
+        "enum": [
+          "ALERTS_OP_AND_OR_UNSPECIFIED",
+          "ALERTS_OP_OR"
+        ]
+      },
+      "AnomalyAlertSettings": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Anomaly alert settings",
+        "description": "Common settings for anomaly-based alerts.",
+        "type": "object",
+        "properties": {
+          "percentageOfDeviation": {
+            "description": "The percentage of deviation from the baseline for triggering the alert.",
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "BulkReplaceAlertDefsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Bulk replace alert definitions response",
+        "description": "A response that contains the results of the bulk replace operation",
+        "type": "object",
+        "properties": {
+          "alertDefs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDef"
+            }
+          },
+          "failedToReplaceAlertDefs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FailedToReplaceAlertDef"
+            }
+          },
+          "notFoundIds": {
+            "type": "array",
+            "items": {
+              "example": [
+                "123e4567-e89b-12d3-a456-426614174000"
+              ],
+              "description": "List of alert definition IDs that were not found",
+              "type": "string"
+            }
+          },
+          "skippedIds": {
+            "type": "array",
+            "items": {
+              "example": [
+                "123e4567-e89b-12d3-a456-426614174000"
+              ],
+              "description": "List of alert definition IDs that were skipped (no changes detected)",
+              "type": "string"
+            }
+          }
+        }
+      },
+      "BurnRateThreshold": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/BurnRateThresholdDual"
+          },
+          {
+            "$ref": "#/components/schemas/BurnRateThresholdSingle"
+          }
+        ]
+      },
+      "BurnRateThresholdDual": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Burn Rate Threshold",
+        "description": "Burn rate threshold definition",
+        "type": "object",
+        "properties": {
+          "dual": {
+            "$ref": "#/components/schemas/BurnRateTypeDual"
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SloThresholdRule"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "BurnRateThresholdSingle": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Burn Rate Threshold",
+        "description": "Burn rate threshold definition",
+        "type": "object",
+        "properties": {
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SloThresholdRule"
+            }
+          },
+          "single": {
+            "$ref": "#/components/schemas/BurnRateTypeSingle"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BurnRateTypeDual": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Burn Rate Type Dual",
+        "description": "Burn rate type dual definition",
+        "type": "object",
+        "properties": {
+          "timeDuration": {
+            "$ref": "#/components/schemas/TimeDuration"
+          }
+        }
+      },
+      "BurnRateTypeSingle": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Burn Rate Type Single",
+        "description": "Burn rate type single definition",
+        "type": "object",
+        "properties": {
+          "timeDuration": {
+            "$ref": "#/components/schemas/TimeDuration"
+          }
+        }
+      },
+      "ColorsByAggregation": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/ColorsByAggregation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByGroupBy": {
+        "type": "object",
+        "properties": {
+          "groupBy": {
+            "$ref": "#/components/schemas/ColorsByGroupBy"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByStack": {
+        "type": "object",
+        "properties": {
+          "stack": {
+            "$ref": "#/components/schemas/ColorsByStack"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateAlertDefResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Create alert definition response",
+        "description": "A response that contains the newly created alert definition",
+        "type": "object",
+        "properties": {
+          "alertDef": {
+            "$ref": "#/components/schemas/AlertDef"
+          }
+        }
+      },
+      "DayOfWeek": {
+        "type": "string",
+        "enum": [
+          "DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED",
+          "DAY_OF_WEEK_TUESDAY",
+          "DAY_OF_WEEK_WEDNESDAY",
+          "DAY_OF_WEEK_THURSDAY",
+          "DAY_OF_WEEK_FRIDAY",
+          "DAY_OF_WEEK_SATURDAY",
+          "DAY_OF_WEEK_SUNDAY"
+        ]
+      },
+      "DeleteAlertDefResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Delete alert definition response",
+        "description": "A response to the deletion of an alert definition",
+        "type": "object"
+      },
+      "DownloadAlertsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Download alerts response",
+        "description": "A response containing the downloaded alert data",
+        "type": "object",
+        "properties": {
+          "content": {
+            "example": "SGVsbG8gV29ybGQ=",
+            "description": "Base64-encoded binary data of the alert definitions",
+            "type": "string",
+            "format": "byte"
+          }
+        }
+      },
+      "DurationUnit": {
+        "type": "string",
+        "enum": [
+          "DURATION_UNIT_UNSPECIFIED",
+          "DURATION_UNIT_HOURS"
+        ]
+      },
+      "EnabledCount": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Enabled count",
+        "description": "Count for a specific alert enabled status",
+        "type": "object",
+        "properties": {
+          "count": {
+            "example": 25,
+            "description": "The count for this enabled status",
+            "type": "integer",
+            "format": "int64"
+          },
+          "enabled": {
+            "example": true,
+            "description": "Whether the alert is enabled (true) or disabled (false)",
+            "type": "boolean"
+          }
+        }
+      },
+      "EntityLabelCount": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Entity label count",
+        "description": "Count for a specific entity label value",
+        "type": "object",
+        "properties": {
+          "count": {
+            "example": 28,
+            "description": "The count for this entity label value",
+            "type": "integer",
+            "format": "int64"
+          },
+          "labelKey": {
+            "example": "environment",
+            "description": "The entity label key",
+            "type": "string"
+          },
+          "labelValue": {
+            "example": "production",
+            "description": "The entity label value",
+            "type": "string"
+          }
+        }
+      },
+      "ErrorBudgetThreshold": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Error Budget Threshold",
+        "description": "Error budget threshold definition",
+        "type": "object",
+        "properties": {
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SloThresholdRule"
+            }
+          }
+        }
+      },
+      "FailedToReplaceAlertDef": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Failed to replace alert definition",
+        "description": "An alert definition id that failed to be replaced",
+        "type": "object",
+        "properties": {
+          "id": {
+            "example": "123e4567-e89b-12d3-a456-426614174000",
+            "description": "The alert definition ID",
+            "type": "string"
+          }
+        }
+      },
+      "FieldGroup": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "FilterOptionCounts": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filter option counts",
+        "description": "Counts for different filter options",
+        "type": "object",
+        "properties": {
+          "enabledCounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EnabledCount"
+            }
+          },
+          "entityLabelCounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityLabelCount"
+            }
+          },
+          "priorityCounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PriorityCount"
+            }
+          },
+          "statusCounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StatusCount"
+            }
+          },
+          "typeCounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TypeCount"
+            }
+          }
+        }
+      },
+      "FilterOptionCountsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filter option counts response",
+        "description": "Response containing counts for different filter options",
+        "type": "object",
+        "properties": {
+          "counts": {
+            "$ref": "#/components/schemas/FilterOptionCounts"
+          }
+        }
+      },
+      "FilterPathAndValues": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+          },
+          {
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+          }
+        ]
+      },
+      "FilterPathAndValuesFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "FilterPathAndValuesMultipleValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            }
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "FlowStages": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Flow stages",
+        "description": "Defines stages in a flow alert",
+        "type": "object",
+        "properties": {
+          "flowStagesGroups": {
+            "$ref": "#/components/schemas/FlowStagesGroups"
+          },
+          "timeframeMs": {
+            "type": "string",
+            "format": "int64"
+          },
+          "timeframeType": {
+            "$ref": "#/components/schemas/TimeframeType"
+          }
+        }
+      },
+      "FlowStagesGroup": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Flow stage group",
+        "description": "Defines a group of stages in a flow alert",
+        "type": "object",
+        "properties": {
+          "alertDefs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FlowStagesGroupsAlertDefs"
+            }
+          },
+          "alertsOp": {
+            "$ref": "#/components/schemas/AlertsOp"
+          },
+          "nextOp": {
+            "$ref": "#/components/schemas/NextOp"
+          }
+        }
+      },
+      "FlowStagesGroups": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Flow stage groups",
+        "description": "Groups of stages in a flow alert",
+        "type": "object",
+        "properties": {
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FlowStagesGroup"
+            }
+          }
+        }
+      },
+      "FlowStagesGroupsAlertDefs": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Flow stage group alert definitions",
+        "description": "Alert definitions for a flow stage group",
+        "type": "object",
+        "properties": {
+          "id": {
+            "example": "123e4567-e89b-12d3-a456-426614174000",
+            "description": "The alert definition ID",
+            "type": "string"
+          },
+          "not": {
+            "example": true,
+            "description": "Whether to negate the alert definition or not.",
+            "type": "boolean"
+          }
+        }
+      },
+      "FlowType": {
+        "externalDocs": {
+          "description": "Learn more about flow alerts in our documentation",
+          "url": "https://coralogix.com/docs/user-guides/alerting/create-an-alert/flow-alerts/"
+        },
+        "title": "Flow alert type",
+        "description": "Configuration for flow-based alerts with multiple stages",
+        "type": "object",
+        "properties": {
+          "enforceSuppression": {
+            "type": "boolean"
+          },
+          "stages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FlowStages"
+            }
+          }
+        }
+      },
+      "GetAlertDefByVersionIdResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Get alert definition by version ID response",
+        "description": "A response that contains an alert definition for the requested version",
+        "type": "object",
+        "properties": {
+          "alertDef": {
+            "$ref": "#/components/schemas/AlertDef"
+          }
+        }
+      },
+      "GetAlertDefResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Get alert definition response",
+        "description": "A response containing the requested alert definition",
+        "type": "object",
+        "properties": {
+          "alertDef": {
+            "$ref": "#/components/schemas/AlertDef"
+          }
+        }
+      },
+      "LabelFilterType": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Label filter type",
+        "description": "Label filter type for log entries",
+        "type": "object",
+        "properties": {
+          "operation": {
+            "$ref": "#/components/schemas/LogFilterOperationType"
+          },
+          "value": {
+            "example": "my-app",
+            "description": "The value of the label to filter by",
+            "type": "string"
+          }
+        }
+      },
+      "LabelFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Label filters",
+        "description": "Filters for application name, subsystem name, and log severities",
+        "type": "object",
+        "properties": {
+          "applicationName": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LabelFilterType"
+            }
+          },
+          "severities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LogSeverity"
+            }
+          },
+          "subsystemName": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LabelFilterType"
+            }
+          }
+        }
+      },
+      "ListAlertDefsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "List alert definitions response",
+        "description": "A response that contains a list of alert definitions",
+        "type": "object",
+        "properties": {
+          "alertDefs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDef"
+            }
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/alerts.v3.PaginationResponse"
+          }
+        }
+      },
+      "LogFilterOperationType": {
+        "type": "string",
+        "enum": [
+          "LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED",
+          "LOG_FILTER_OPERATION_TYPE_INCLUDES",
+          "LOG_FILTER_OPERATION_TYPE_ENDS_WITH",
+          "LOG_FILTER_OPERATION_TYPE_STARTS_WITH"
+        ]
+      },
+      "LogSeverity": {
+        "type": "string",
+        "enum": [
+          "LOG_SEVERITY_VERBOSE_UNSPECIFIED",
+          "LOG_SEVERITY_DEBUG",
+          "LOG_SEVERITY_INFO",
+          "LOG_SEVERITY_WARNING",
+          "LOG_SEVERITY_ERROR",
+          "LOG_SEVERITY_CRITICAL"
+        ]
+      },
+      "LogsAnomalyCondition": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Log-based anomaly condition",
+        "description": "Defines conditions for detecting log anomalies",
+        "type": "object",
+        "properties": {
+          "conditionType": {
+            "$ref": "#/components/schemas/LogsAnomalyConditionType"
+          },
+          "minimumThreshold": {
+            "example": 10,
+            "description": "The threshold value for the alert condition",
+            "type": "number",
+            "format": "double"
+          },
+          "timeWindow": {
+            "$ref": "#/components/schemas/LogsTimeWindow"
+          }
+        }
+      },
+      "LogsAnomalyConditionType": {
+        "type": "string",
+        "enum": [
+          "LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED"
+        ]
+      },
+      "LogsAnomalyRule": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Log-based anomaly rule",
+        "description": "Defines a rule for detecting log anomalies",
+        "type": "object",
+        "properties": {
+          "condition": {
+            "$ref": "#/components/schemas/LogsAnomalyCondition"
+          }
+        }
+      },
+      "LogsAnomalyType": {
+        "externalDocs": {
+          "description": "Learn more about logs anomaly alerts in our documentation",
+          "url": "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/anomaly-detection-alerts/"
+        },
+        "title": "Log-based anomaly alert type",
+        "description": "Configuration for alerts triggered by anomalous log patterns",
+        "type": "object",
+        "properties": {
+          "anomalyAlertSettings": {
+            "$ref": "#/components/schemas/AnomalyAlertSettings"
+          },
+          "evaluationDelayMs": {
+            "example": 60000,
+            "description": "The delay in milliseconds before evaluating the alert condition",
+            "type": "integer",
+            "format": "int32"
+          },
+          "logsFilter": {
+            "$ref": "#/components/schemas/v3.LogsFilter"
+          },
+          "notificationPayloadFilter": {
+            "type": "array",
+            "items": {
+              "example": [
+                "obj.field"
+              ],
+              "description": "The filter to specify which fields to include in the notification payload",
+              "type": "string"
+            }
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LogsAnomalyRule"
+            }
+          }
+        }
+      },
+      "LogsImmediateType": {
+        "externalDocs": {
+          "description": "Learn more about logs immediate alerts in our documentation",
+          "url": "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/immediate-notifications/"
+        },
+        "title": "Logs immediate alert type",
+        "description": "Configuration for immediate alerts triggered on log entries matching specific filters.",
+        "type": "object",
+        "properties": {
+          "logsFilter": {
+            "$ref": "#/components/schemas/v3.LogsFilter"
+          },
+          "notificationPayloadFilter": {
+            "type": "array",
+            "items": {
+              "example": [
+                "obj.field"
+              ],
+              "type": "string"
+            }
+          }
+        }
+      },
+      "LogsNewValueCondition": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Log-based new value condition",
+        "description": "Defines conditions for detecting new values in logs",
+        "type": "object",
+        "properties": {
+          "keypathToTrack": {
+            "example": "metadata.field",
+            "description": "The keypath to track for new values",
+            "type": "string"
+          },
+          "timeWindow": {
+            "$ref": "#/components/schemas/LogsNewValueTimeWindow"
+          }
+        }
+      },
+      "LogsNewValueRule": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Log-based new value rule",
+        "description": "Defines the condition for detecting new values in logs",
+        "type": "object",
+        "properties": {
+          "condition": {
+            "$ref": "#/components/schemas/LogsNewValueCondition"
+          }
+        }
+      },
+      "LogsNewValueTimeWindow": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Log-based new value alert time window",
+        "description": "Time window configuration for log-based new value alerts",
+        "type": "object",
+        "properties": {
+          "logsNewValueTimeWindowSpecificValue": {
+            "$ref": "#/components/schemas/LogsNewValueTimeWindowValue"
+          }
+        }
+      },
+      "LogsNewValueTimeWindowValue": {
+        "type": "string",
+        "enum": [
+          "LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED",
+          "LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_24",
+          "LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_48",
+          "LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_72",
+          "LOGS_NEW_VALUE_TIME_WINDOW_VALUE_WEEK_1",
+          "LOGS_NEW_VALUE_TIME_WINDOW_VALUE_MONTH_1",
+          "LOGS_NEW_VALUE_TIME_WINDOW_VALUE_MONTHS_2",
+          "LOGS_NEW_VALUE_TIME_WINDOW_VALUE_MONTHS_3"
+        ]
+      },
+      "LogsNewValueType": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Log-based new value alert type",
+        "description": "Configuration for alerts triggered by new values appearing in logs",
+        "type": "object",
+        "properties": {
+          "logsFilter": {
+            "$ref": "#/components/schemas/v3.LogsFilter"
+          },
+          "notificationPayloadFilter": {
+            "type": "array",
+            "items": {
+              "example": [
+                "obj.field"
+              ],
+              "description": "The filter to specify which fields to include in the notification payload.",
+              "type": "string"
+            }
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LogsNewValueRule"
+            }
+          }
+        }
+      },
+      "LogsRatioCondition": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Log-based ratio condition",
+        "description": "Defines conditions for ratio-based alerts",
+        "type": "object",
+        "properties": {
+          "conditionType": {
+            "$ref": "#/components/schemas/LogsRatioConditionType"
+          },
+          "threshold": {
+            "example": 10,
+            "description": "The threshold value for the alert condition",
+            "type": "number",
+            "format": "double"
+          },
+          "timeWindow": {
+            "$ref": "#/components/schemas/LogsRatioTimeWindow"
+          }
+        }
+      },
+      "LogsRatioConditionType": {
+        "type": "string",
+        "enum": [
+          "LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED",
+          "LOGS_RATIO_CONDITION_TYPE_LESS_THAN"
+        ]
+      },
+      "LogsRatioGroupByFor": {
+        "type": "string",
+        "enum": [
+          "LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED",
+          "LOGS_RATIO_GROUP_BY_FOR_NUMERATOR_ONLY",
+          "LOGS_RATIO_GROUP_BY_FOR_DENUMERATOR_ONLY"
+        ]
+      },
+      "LogsRatioRules": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Log-based ratio rules",
+        "description": "Defines the rules for log-based ratio alerts",
+        "type": "object",
+        "properties": {
+          "condition": {
+            "$ref": "#/components/schemas/LogsRatioCondition"
+          },
+          "override": {
+            "$ref": "#/components/schemas/AlertDefOverride"
+          }
+        }
+      },
+      "LogsRatioThresholdType": {
+        "externalDocs": {
+          "description": "Learn more about logs ratio alerts in our documentation",
+          "url": "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/ratio-alerts/"
+        },
+        "title": "Log-based ratio threshold alert type",
+        "description": "Configuration for alerts based on the ratio between two log queries",
+        "type": "object",
+        "properties": {
+          "denominator": {
+            "$ref": "#/components/schemas/v3.LogsFilter"
+          },
+          "denominatorAlias": {
+            "example": "denominator_alias",
+            "description": "The alias for the denominator filter, used for display purposes",
+            "type": "string"
+          },
+          "evaluationDelayMs": {
+            "example": 60000,
+            "description": "The delay in milliseconds before evaluating the alert condition",
+            "type": "integer",
+            "format": "int32"
+          },
+          "groupByFor": {
+            "$ref": "#/components/schemas/LogsRatioGroupByFor"
+          },
+          "ignoreInfinity": {
+            "example": true,
+            "description": "The configuration for ignoring infinity values in the ratio",
+            "type": "boolean"
+          },
+          "notificationPayloadFilter": {
+            "type": "array",
+            "items": {
+              "example": [
+                "obj.field"
+              ],
+              "type": "string"
+            }
+          },
+          "numerator": {
+            "$ref": "#/components/schemas/v3.LogsFilter"
+          },
+          "numeratorAlias": {
+            "example": "numerator_alias",
+            "description": "The alias for the numerator filter, used for display purposes",
+            "type": "string"
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LogsRatioRules"
+            }
+          },
+          "undetectedValuesManagement": {
+            "$ref": "#/components/schemas/v3.UndetectedValuesManagement"
+          }
+        }
+      },
+      "LogsRatioTimeWindow": {
+        "externalDocs": {
+          "description": "Learn more about log-based ratio alerts in our documentation",
+          "url": "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/ratio-alerts/"
+        },
+        "title": "Logs ratio time window",
+        "description": "Time window configuration for ratio alerts",
+        "type": "object",
+        "properties": {
+          "logsRatioTimeWindowSpecificValue": {
+            "$ref": "#/components/schemas/LogsRatioTimeWindowValue"
+          }
+        }
+      },
+      "LogsRatioTimeWindowValue": {
+        "type": "string",
+        "enum": [
+          "LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED",
+          "LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_10",
+          "LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_15",
+          "LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_30",
+          "LOGS_RATIO_TIME_WINDOW_VALUE_HOUR_1",
+          "LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_2",
+          "LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_4",
+          "LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_6",
+          "LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_12",
+          "LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_24",
+          "LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_36"
+        ]
+      },
+      "LogsSimpleFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Simple log filter",
+        "description": "Basic filter configuration using a Lucene query and label filters",
+        "type": "object",
+        "properties": {
+          "labelFilters": {
+            "$ref": "#/components/schemas/LabelFilters"
+          },
+          "luceneQuery": {
+            "type": "string"
+          }
+        }
+      },
+      "LogsThresholdCondition": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Logs Threshold Condition",
+        "description": "LogsThresholdCondition is a message that defines the condition for log-based threshold alerts.",
+        "type": "object",
+        "properties": {
+          "conditionType": {
+            "$ref": "#/components/schemas/LogsThresholdConditionType"
+          },
+          "threshold": {
+            "example": 100,
+            "description": "The threshold value for the alert condition",
+            "type": "number",
+            "format": "double"
+          },
+          "timeWindow": {
+            "$ref": "#/components/schemas/LogsTimeWindow"
+          }
+        }
+      },
+      "LogsThresholdConditionType": {
+        "type": "string",
+        "enum": [
+          "LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED",
+          "LOGS_THRESHOLD_CONDITION_TYPE_LESS_THAN"
+        ]
+      },
+      "LogsThresholdRule": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Logs Threshold Rule",
+        "description": "LogsThresholdRule is a message that defines a rule for log-based threshold alerts.",
+        "type": "object",
+        "properties": {
+          "condition": {
+            "$ref": "#/components/schemas/LogsThresholdCondition"
+          },
+          "override": {
+            "$ref": "#/components/schemas/AlertDefOverride"
+          }
+        }
+      },
+      "LogsThresholdType": {
+        "externalDocs": {
+          "description": "Learn more about log-based threshold alerts in our documentation",
+          "url": "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/threshold-alerts/"
+        },
+        "title": "Log-based threshold alert type",
+        "description": "Configuration for alerts triggered when log counts exceed or fall below specified thresholds",
+        "type": "object",
+        "properties": {
+          "evaluationDelayMs": {
+            "example": 60000,
+            "description": "The delay in milliseconds before evaluating the alert condition",
+            "type": "integer",
+            "format": "int32"
+          },
+          "logsFilter": {
+            "$ref": "#/components/schemas/v3.LogsFilter"
+          },
+          "notificationPayloadFilter": {
+            "type": "array",
+            "items": {
+              "example": [
+                "obj.field"
+              ],
+              "description": "The filter to specify which fields to include in the notification payload",
+              "type": "string"
+            }
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LogsThresholdRule"
+            }
+          },
+          "undetectedValuesManagement": {
+            "$ref": "#/components/schemas/v3.UndetectedValuesManagement"
+          }
+        }
+      },
+      "LogsTimeRelativeComparedTo": {
+        "type": "string",
+        "enum": [
+          "LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED",
+          "LOGS_TIME_RELATIVE_COMPARED_TO_SAME_HOUR_YESTERDAY",
+          "LOGS_TIME_RELATIVE_COMPARED_TO_SAME_HOUR_LAST_WEEK",
+          "LOGS_TIME_RELATIVE_COMPARED_TO_YESTERDAY",
+          "LOGS_TIME_RELATIVE_COMPARED_TO_SAME_DAY_LAST_WEEK",
+          "LOGS_TIME_RELATIVE_COMPARED_TO_SAME_DAY_LAST_MONTH"
+        ]
+      },
+      "LogsTimeRelativeCondition": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Log-based time-relative condition",
+        "description": "Defines conditions for time-relative comparison alerts",
+        "type": "object",
+        "properties": {
+          "comparedTo": {
+            "$ref": "#/components/schemas/LogsTimeRelativeComparedTo"
+          },
+          "conditionType": {
+            "$ref": "#/components/schemas/LogsTimeRelativeConditionType"
+          },
+          "threshold": {
+            "description": "The threshold value for the alert condition.",
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "LogsTimeRelativeConditionType": {
+        "type": "string",
+        "enum": [
+          "LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED",
+          "LOGS_TIME_RELATIVE_CONDITION_TYPE_LESS_THAN"
+        ]
+      },
+      "LogsTimeRelativeRule": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Logs Time Relative Rule",
+        "description": "LogsTimeRelativeRule is a message that defines a rule for log-based time-relative alerts",
+        "type": "object",
+        "properties": {
+          "condition": {
+            "$ref": "#/components/schemas/LogsTimeRelativeCondition"
+          },
+          "override": {
+            "$ref": "#/components/schemas/AlertDefOverride"
+          }
+        }
+      },
+      "LogsTimeRelativeThresholdType": {
+        "externalDocs": {
+          "description": "Learn more about log-based, time-relative alerts in our documentation",
+          "url": "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/time-relative-alerts/"
+        },
+        "title": "Log-based time-relative threshold alert type",
+        "description": "Configuration for alerts that are triggered when a fixed ratio reaches a set threshold compared to a past time frame.",
+        "type": "object",
+        "properties": {
+          "evaluationDelayMs": {
+            "example": 60000,
+            "description": "The delay in milliseconds before evaluating the alert condition",
+            "type": "integer",
+            "format": "int32"
+          },
+          "ignoreInfinity": {
+            "example": true,
+            "description": "Ignore infinity values in the alert",
+            "type": "boolean"
+          },
+          "logsFilter": {
+            "$ref": "#/components/schemas/v3.LogsFilter"
+          },
+          "notificationPayloadFilter": {
+            "type": "array",
+            "items": {
+              "example": [
+                "obj.field"
+              ],
+              "type": "string"
+            }
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LogsTimeRelativeRule"
+            }
+          },
+          "undetectedValuesManagement": {
+            "$ref": "#/components/schemas/v3.UndetectedValuesManagement"
+          }
+        }
+      },
+      "LogsTimeWindow": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Log-based alert time window",
+        "description": "Time window configuration for log-based alerts",
+        "type": "object",
+        "properties": {
+          "logsTimeWindowSpecificValue": {
+            "$ref": "#/components/schemas/LogsTimeWindowValue"
+          }
+        }
+      },
+      "LogsTimeWindowValue": {
+        "type": "string",
+        "enum": [
+          "LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED",
+          "LOGS_TIME_WINDOW_VALUE_MINUTES_10",
+          "LOGS_TIME_WINDOW_VALUE_MINUTES_20",
+          "LOGS_TIME_WINDOW_VALUE_MINUTES_15",
+          "LOGS_TIME_WINDOW_VALUE_MINUTES_30",
+          "LOGS_TIME_WINDOW_VALUE_HOUR_1",
+          "LOGS_TIME_WINDOW_VALUE_HOURS_2",
+          "LOGS_TIME_WINDOW_VALUE_HOURS_4",
+          "LOGS_TIME_WINDOW_VALUE_HOURS_6",
+          "LOGS_TIME_WINDOW_VALUE_HOURS_12",
+          "LOGS_TIME_WINDOW_VALUE_HOURS_24",
+          "LOGS_TIME_WINDOW_VALUE_HOURS_36"
+        ]
+      },
+      "LogsUniqueCountCondition": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Logs unique count condition",
+        "description": "Defines conditions for unique count alerts",
+        "type": "object",
+        "properties": {
+          "maxUniqueCount": {
+            "example": 100,
+            "description": "The maximum unique count",
+            "type": "string",
+            "format": "int64"
+          },
+          "timeWindow": {
+            "$ref": "#/components/schemas/LogsUniqueValueTimeWindow"
+          }
+        }
+      },
+      "LogsUniqueCountRule": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Log-based unique count rule",
+        "description": "Defines the rule for detecting unique counts in logs",
+        "type": "object",
+        "properties": {
+          "condition": {
+            "$ref": "#/components/schemas/LogsUniqueCountCondition"
+          }
+        }
+      },
+      "LogsUniqueCountType": {
+        "externalDocs": {
+          "description": "Learn more about log-based, unique count alerts in our documentation",
+          "url": "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/unique-count-alerts/"
+        },
+        "title": "Log-based unique count alert type",
+        "description": "Configuration for alerts based on unique value counts in logs",
+        "type": "object",
+        "properties": {
+          "logsFilter": {
+            "$ref": "#/components/schemas/v3.LogsFilter"
+          },
+          "maxUniqueCountPerGroupByKey": {
+            "example": 100,
+            "description": "The maximum unique count per group by key",
+            "type": "string",
+            "format": "int64"
+          },
+          "notificationPayloadFilter": {
+            "type": "array",
+            "items": {
+              "example": [
+                "obj.field"
+              ],
+              "description": "The filter to specify which fields to include in the notification payload",
+              "type": "string"
+            }
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LogsUniqueCountRule"
+            }
+          },
+          "uniqueCountKeypath": {
+            "example": "obj.field",
+            "description": "The keypath in the logs to be used for unique count",
+            "type": "string"
+          }
+        }
+      },
+      "LogsUniqueValueTimeWindow": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Log-based unique value alert time window",
+        "description": "Time window configuration for log-based unique value alerts",
+        "type": "object",
+        "properties": {
+          "logsUniqueValueTimeWindowSpecificValue": {
+            "$ref": "#/components/schemas/LogsUniqueValueTimeWindowValue"
+          }
+        }
+      },
+      "LogsUniqueValueTimeWindowValue": {
+        "type": "string",
+        "enum": [
+          "LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTE_1_OR_UNSPECIFIED",
+          "LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_5",
+          "LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_10",
+          "LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_15",
+          "LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_20",
+          "LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_30",
+          "LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_1",
+          "LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_2",
+          "LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_4",
+          "LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_6",
+          "LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_12",
+          "LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_24",
+          "LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_36"
+        ]
+      },
+      "MetricAnomalyCondition": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Metric-based anomaly condition",
+        "type": "object",
+        "properties": {
+          "conditionType": {
+            "$ref": "#/components/schemas/MetricAnomalyConditionType"
+          },
+          "forOverPct": {
+            "example": 20,
+            "description": "The percentage of the metric that must exceed the threshold to trigger the alert",
+            "type": "integer",
+            "format": "int64"
+          },
+          "minNonNullValuesPct": {
+            "example": 10,
+            "description": "The percentage of non-null values required to trigger the alert",
+            "type": "integer",
+            "format": "int64"
+          },
+          "ofTheLast": {
+            "$ref": "#/components/schemas/MetricTimeWindow"
+          },
+          "threshold": {
+            "example": 10,
+            "description": "The threshold value for the alert condition",
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "MetricAnomalyConditionType": {
+        "type": "string",
+        "enum": [
+          "METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED",
+          "METRIC_ANOMALY_CONDITION_TYPE_LESS_THAN_USUAL"
+        ]
+      },
+      "MetricAnomalyRule": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Metric-based anomaly rule",
+        "description": "A rule for metric-based anomaly detection alerts",
+        "type": "object",
+        "properties": {
+          "condition": {
+            "$ref": "#/components/schemas/MetricAnomalyCondition"
+          }
+        }
+      },
+      "MetricAnomalyType": {
+        "externalDocs": {
+          "description": "Learn more about metric-based anomaly alerts in our documentation",
+          "url": "https://coralogix.com/docs/user-guides/alerting/create-an-alert/metrics/anomaly-detection-alerts/"
+        },
+        "title": "Metric-based anomaly alert type",
+        "description": "Configuration for alerts triggered by anomalous metric patterns",
+        "type": "object",
+        "properties": {
+          "anomalyAlertSettings": {
+            "$ref": "#/components/schemas/AnomalyAlertSettings"
+          },
+          "evaluationDelayMs": {
+            "example": 60000,
+            "description": "The delay in milliseconds before evaluating the alert condition",
+            "type": "integer",
+            "format": "int32"
+          },
+          "metricFilter": {
+            "$ref": "#/components/schemas/MetricFilter"
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricAnomalyRule"
+            }
+          }
+        }
+      },
+      "MetricFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Metric filter configuration in alerts",
+        "type": "object",
+        "properties": {
+          "promql": {
+            "example": "avg_over_time(metric_name[5m]) > 10",
+            "description": "A PromQL filter for metrics",
+            "type": "string"
+          }
+        }
+      },
+      "MetricMissingValues": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/MetricMissingValuesReplaceWithZero"
+          },
+          {
+            "$ref": "#/components/schemas/MetricMissingValuesMinNonNullValuesPct"
+          }
+        ]
+      },
+      "MetricMissingValuesMinNonNullValuesPct": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Metric Missing Values Configuration",
+        "description": "Configuration for handling missing values in metric threshold alerts.",
+        "type": "object",
+        "properties": {
+          "minNonNullValuesPct": {
+            "example": 80,
+            "description": "If set, specifies the minimum percentage of non-null values required for the alert to be triggered",
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MetricMissingValuesReplaceWithZero": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Metric Missing Values Configuration",
+        "description": "Configuration for handling missing values in metric threshold alerts.",
+        "type": "object",
+        "properties": {
+          "replaceWithZero": {
+            "example": true,
+            "description": "If set to true, missing values will be replaced with zero",
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MetricThresholdCondition": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Metric Threshold Condition",
+        "description": "Defines conditions for metric threshold alerts",
+        "type": "object",
+        "properties": {
+          "conditionType": {
+            "$ref": "#/components/schemas/MetricThresholdConditionType"
+          },
+          "forOverPct": {
+            "example": 80,
+            "description": "The percentage of values that must exceed the threshold to trigger the alert",
+            "type": "integer",
+            "format": "int64"
+          },
+          "ofTheLast": {
+            "$ref": "#/components/schemas/MetricTimeWindow"
+          },
+          "threshold": {
+            "example": 100,
+            "description": "The threshold value for the alert condition",
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "MetricThresholdConditionType": {
+        "type": "string",
+        "enum": [
+          "METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED",
+          "METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN",
+          "METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_EQUALS",
+          "METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN_OR_EQUALS"
+        ]
+      },
+      "MetricThresholdRule": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Metric Threshold Rule",
+        "description": "Defines a rule for metric-based threshold alerts",
+        "type": "object",
+        "properties": {
+          "condition": {
+            "$ref": "#/components/schemas/MetricThresholdCondition"
+          },
+          "override": {
+            "$ref": "#/components/schemas/AlertDefOverride"
+          }
+        }
+      },
+      "MetricThresholdType": {
+        "externalDocs": {
+          "description": "Learn more about metric-based threshold alerts in our documentation",
+          "url": "https://coralogix.com/docs/user-guides/alerting/create-an-alert/metrics/threshold-alerts/"
+        },
+        "title": "Metric-based threshold alert type",
+        "description": "Configuration for alerts based on metric threshold violations",
+        "type": "object",
+        "properties": {
+          "evaluationDelayMs": {
+            "example": 60000,
+            "description": "The delay in milliseconds before evaluating the alert condition",
+            "type": "integer",
+            "format": "int32"
+          },
+          "metricFilter": {
+            "$ref": "#/components/schemas/MetricFilter"
+          },
+          "missingValues": {
+            "$ref": "#/components/schemas/MetricMissingValues"
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricThresholdRule"
+            }
+          },
+          "undetectedValuesManagement": {
+            "$ref": "#/components/schemas/v3.UndetectedValuesManagement"
+          }
+        }
+      },
+      "MetricTimeWindow": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/MetricTimeWindowMetricTimeWindowDynamicDuration"
+          },
+          {
+            "$ref": "#/components/schemas/MetricTimeWindowMetricTimeWindowSpecificValue"
+          }
+        ]
+      },
+      "MetricTimeWindowMetricTimeWindowDynamicDuration": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Metric time window",
+        "type": "object",
+        "properties": {
+          "metricTimeWindowDynamicDuration": {
+            "example": "1h30m",
+            "description": "The time window as a dynamic value",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MetricTimeWindowMetricTimeWindowSpecificValue": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Metric time window",
+        "type": "object",
+        "properties": {
+          "metricTimeWindowSpecificValue": {
+            "$ref": "#/components/schemas/MetricTimeWindowValue"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MetricTimeWindowValue": {
+        "type": "string",
+        "enum": [
+          "METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED",
+          "METRIC_TIME_WINDOW_VALUE_MINUTES_5",
+          "METRIC_TIME_WINDOW_VALUE_MINUTES_10",
+          "METRIC_TIME_WINDOW_VALUE_MINUTES_15",
+          "METRIC_TIME_WINDOW_VALUE_MINUTES_20",
+          "METRIC_TIME_WINDOW_VALUE_MINUTES_30",
+          "METRIC_TIME_WINDOW_VALUE_HOUR_1",
+          "METRIC_TIME_WINDOW_VALUE_HOURS_2",
+          "METRIC_TIME_WINDOW_VALUE_HOURS_4",
+          "METRIC_TIME_WINDOW_VALUE_HOURS_6",
+          "METRIC_TIME_WINDOW_VALUE_HOURS_12",
+          "METRIC_TIME_WINDOW_VALUE_HOURS_24",
+          "METRIC_TIME_WINDOW_VALUE_HOURS_36"
+        ]
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "NextOp": {
+        "type": "string",
+        "enum": [
+          "NEXT_OP_AND_OR_UNSPECIFIED",
+          "NEXT_OP_OR"
+        ]
+      },
+      "NotificationDestination": {
+        "externalDocs": {
+          "description": "Learn more about alert notification destinations in our documentation",
+          "url": "https://coralogix.com/docs/user-guides/alerting/configure-notifications/destinations/"
+        },
+        "title": "Notification destination configuration",
+        "description": "Configuration for where and how alert notifications should be sent",
+        "type": "object",
+        "properties": {
+          "connectorId": {
+            "example": "connector_id_example",
+            "description": "The connector ID used to send notifications",
+            "type": "string"
+          },
+          "notifyOn": {
+            "$ref": "#/components/schemas/NotifyOn"
+          },
+          "presetId": {
+            "example": "preset_id_example",
+            "description": "Optional preset ID for the notification destination",
+            "type": "string"
+          },
+          "resolvedRouteOverrides": {
+            "$ref": "#/components/schemas/NotificationRouting"
+          },
+          "triggeredRoutingOverrides": {
+            "$ref": "#/components/schemas/NotificationRouting"
+          }
+        }
+      },
+      "NotificationRouter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Notification router",
+        "description": "Configuration for routing notifications",
+        "type": "object",
+        "properties": {
+          "id": {
+            "example": "123e4567-e89b-12d3-a456-426614174000",
+            "description": "The ID of the notification router",
+            "type": "string"
+          },
+          "notifyOn": {
+            "$ref": "#/components/schemas/NotifyOn"
+          }
+        }
+      },
+      "NotificationRouting": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Notification routing",
+        "type": "object",
+        "properties": {
+          "configOverrides": {
+            "$ref": "#/components/schemas/v3.SourceOverrides"
+          }
+        }
+      },
+      "NotifyOn": {
+        "type": "string",
+        "enum": [
+          "NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED",
+          "NOTIFY_ON_TRIGGERED_AND_RESOLVED"
+        ]
+      },
+      "PriorityCount": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Priority count",
+        "description": "Count for a specific alert priority",
+        "type": "object",
+        "properties": {
+          "count": {
+            "example": 15,
+            "description": "The count for this alert priority",
+            "type": "integer",
+            "format": "int64"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/AlertDefPriority"
+          }
+        }
+      },
+      "Recipients": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Recipients",
+        "description": "List of email recipients for alert notifications",
+        "type": "object",
+        "properties": {
+          "emails": {
+            "type": "array",
+            "items": {
+              "example": [
+                "mail@gmail.com"
+              ],
+              "description": "The list of email recipients for alert notifications",
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ReplaceAlertDefResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Replace alert definition response",
+        "description": "A response that contains the updated alert definition",
+        "type": "object",
+        "properties": {
+          "alertDef": {
+            "$ref": "#/components/schemas/AlertDef"
+          }
+        }
+      },
+      "SloThresholdCondition": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SLO Threshold Condition",
+        "description": "Condition for the SLO threshold rule",
+        "type": "object",
+        "properties": {
+          "threshold": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "SloThresholdRule": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SLO Threshold Rule",
+        "description": "SLO threshold rule definition",
+        "type": "object",
+        "properties": {
+          "condition": {
+            "$ref": "#/components/schemas/SloThresholdCondition"
+          },
+          "override": {
+            "$ref": "#/components/schemas/AlertDefOverride"
+          }
+        }
+      },
+      "SloThresholdType": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/SloThresholdTypeErrorBudget"
+          },
+          {
+            "$ref": "#/components/schemas/SloThresholdTypeBurnRate"
+          }
+        ]
+      },
+      "SloThresholdTypeBurnRate": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SLO Threshold Type",
+        "description": "SLO threshold type definition",
+        "type": "object",
+        "properties": {
+          "burnRate": {
+            "$ref": "#/components/schemas/BurnRateThreshold"
+          },
+          "sloDefinition": {
+            "$ref": "#/components/schemas/v3.SloDefinition"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SloThresholdTypeErrorBudget": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SLO Threshold Type",
+        "description": "SLO threshold type definition",
+        "type": "object",
+        "properties": {
+          "errorBudget": {
+            "$ref": "#/components/schemas/ErrorBudgetThreshold"
+          },
+          "sloDefinition": {
+            "$ref": "#/components/schemas/v3.SloDefinition"
+          }
+        },
+        "additionalProperties": false
+      },
+      "StatusCount": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Status count",
+        "description": "Count for a specific alert status",
+        "type": "object",
+        "properties": {
+          "count": {
+            "example": 15,
+            "description": "The count for this alert status",
+            "type": "integer",
+            "format": "int64"
+          },
+          "status": {
+            "$ref": "#/components/schemas/AlertDefStatus"
+          }
+        }
+      },
+      "TimeDuration": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Time duration",
+        "description": "Configuration for time duration",
+        "type": "object",
+        "properties": {
+          "duration": {
+            "example": 60,
+            "description": "The duration value",
+            "type": "string",
+            "format": "uint64"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/DurationUnit"
+          }
+        }
+      },
+      "TimeOfDay": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Time of day",
+        "description": "Represents a specific time in a 24-hour format",
+        "type": "object",
+        "properties": {
+          "hours": {
+            "example": 14,
+            "type": "integer",
+            "format": "int32"
+          },
+          "minutes": {
+            "example": 30,
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "TimeframeType": {
+        "type": "string",
+        "enum": [
+          "TIMEFRAME_TYPE_UNSPECIFIED",
+          "TIMEFRAME_TYPE_UP_TO"
+        ]
+      },
+      "TracingFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Tracing filter",
+        "description": "Filter configuration for tracing-based alerts",
+        "type": "object",
+        "properties": {
+          "simpleFilter": {
+            "$ref": "#/components/schemas/TracingSimpleFilter"
+          }
+        }
+      },
+      "TracingFilterOperationType": {
+        "type": "string",
+        "enum": [
+          "TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED",
+          "TRACING_FILTER_OPERATION_TYPE_INCLUDES",
+          "TRACING_FILTER_OPERATION_TYPE_ENDS_WITH",
+          "TRACING_FILTER_OPERATION_TYPE_STARTS_WITH",
+          "TRACING_FILTER_OPERATION_TYPE_IS_NOT"
+        ]
+      },
+      "TracingFilterType": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Tracing filter type",
+        "description": "Filter type for trace entries",
+        "type": "object",
+        "properties": {
+          "operation": {
+            "$ref": "#/components/schemas/TracingFilterOperationType"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "example": [
+                "value1",
+                "value2"
+              ],
+              "description": "The values of the label to filter by",
+              "type": "string"
+            }
+          }
+        }
+      },
+      "TracingImmediateType": {
+        "externalDocs": {
+          "description": "Learn more about trace-based alerts in our documentation.",
+          "url": "https://coralogix.com/docs/user-guides/alerting/create-an-alert/traces/tracing-alerts/"
+        },
+        "title": "Trace-based immediate alert type",
+        "description": "Configuration for immediate alerts triggered on trace entries",
+        "type": "object",
+        "properties": {
+          "notificationPayloadFilter": {
+            "type": "array",
+            "items": {
+              "example": [
+                "obj.field"
+              ],
+              "description": "Notification payload field filter",
+              "type": "string"
+            }
+          },
+          "tracingFilter": {
+            "$ref": "#/components/schemas/TracingFilter"
+          }
+        }
+      },
+      "TracingLabelFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Tracing label filters",
+        "description": "Filters for application name, subsystem name, service name, operation name and span fields",
+        "type": "object",
+        "properties": {
+          "applicationName": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TracingFilterType"
+            }
+          },
+          "operationName": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TracingFilterType"
+            }
+          },
+          "serviceName": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TracingFilterType"
+            }
+          },
+          "spanFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TracingSpanFieldsFilterType"
+            }
+          },
+          "subsystemName": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TracingFilterType"
+            }
+          }
+        }
+      },
+      "TracingSimpleFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Simple tracing filter",
+        "description": "Basic filter configuration using a latency threshold and label filters",
+        "type": "object",
+        "properties": {
+          "latencyThresholdMs": {
+            "example": 1000,
+            "description": "The latency threshold to filter traces in milliseconds",
+            "type": "string",
+            "format": "uint64"
+          },
+          "tracingLabelFilters": {
+            "$ref": "#/components/schemas/TracingLabelFilters"
+          }
+        }
+      },
+      "TracingSpanFieldsFilterType": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Tracing span fields filter type",
+        "description": "A filter for span fields in trace entries",
+        "type": "object",
+        "properties": {
+          "filterType": {
+            "$ref": "#/components/schemas/TracingFilterType"
+          },
+          "key": {
+            "example": "span.field.key",
+            "description": "The key of the span field to filter by",
+            "type": "string"
+          }
+        }
+      },
+      "TracingThresholdCondition": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Trace-based alert threshold condition",
+        "type": "object",
+        "properties": {
+          "conditionType": {
+            "$ref": "#/components/schemas/TracingThresholdConditionType"
+          },
+          "spanAmount": {
+            "example": 100,
+            "description": "The threshold value for the alert condition",
+            "type": "number",
+            "format": "double"
+          },
+          "timeWindow": {
+            "$ref": "#/components/schemas/TracingTimeWindow"
+          }
+        }
+      },
+      "TracingThresholdConditionType": {
+        "type": "string",
+        "enum": [
+          "TRACING_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED"
+        ]
+      },
+      "TracingThresholdRule": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Trace Threshold Rule",
+        "description": "A rule for trace-based threshold alerts",
+        "type": "object",
+        "properties": {
+          "condition": {
+            "$ref": "#/components/schemas/TracingThresholdCondition"
+          }
+        }
+      },
+      "TracingThresholdType": {
+        "externalDocs": {
+          "description": "Learn more about trace-based alerts in our documentation",
+          "url": "https://coralogix.com/docs/user-guides/alerting/create-an-alert/traces/tracing-alerts/"
+        },
+        "title": "Trace-based threshold alert type",
+        "description": "Configuration for alerts based on trace count thresholds",
+        "type": "object",
+        "properties": {
+          "notificationPayloadFilter": {
+            "type": "array",
+            "items": {
+              "example": [
+                "obj.field"
+              ],
+              "description": "Notification payload field filter",
+              "type": "string"
+            }
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TracingThresholdRule"
+            }
+          },
+          "tracingFilter": {
+            "$ref": "#/components/schemas/TracingFilter"
+          }
+        }
+      },
+      "TracingTimeWindow": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Tracing time window",
+        "type": "object",
+        "properties": {
+          "tracingTimeWindowValue": {
+            "$ref": "#/components/schemas/TracingTimeWindowValue"
+          }
+        }
+      },
+      "TracingTimeWindowValue": {
+        "type": "string",
+        "enum": [
+          "TRACING_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED",
+          "TRACING_TIME_WINDOW_VALUE_MINUTES_10",
+          "TRACING_TIME_WINDOW_VALUE_MINUTES_15",
+          "TRACING_TIME_WINDOW_VALUE_MINUTES_20",
+          "TRACING_TIME_WINDOW_VALUE_MINUTES_30",
+          "TRACING_TIME_WINDOW_VALUE_HOUR_1",
+          "TRACING_TIME_WINDOW_VALUE_HOURS_2",
+          "TRACING_TIME_WINDOW_VALUE_HOURS_4",
+          "TRACING_TIME_WINDOW_VALUE_HOURS_6",
+          "TRACING_TIME_WINDOW_VALUE_HOURS_12",
+          "TRACING_TIME_WINDOW_VALUE_HOURS_24",
+          "TRACING_TIME_WINDOW_VALUE_HOURS_36"
+        ]
+      },
+      "TypeCount": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Type count",
+        "description": "Count for a specific alert type",
+        "type": "object",
+        "properties": {
+          "count": {
+            "example": 42,
+            "description": "The count for this alert type",
+            "type": "integer",
+            "format": "int64"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AlertDefType"
+          }
+        }
+      },
+      "V3IntegrationTypeIntegrationId": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration type",
+        "description": "Defines the type of integration to use for notifications",
+        "type": "object",
+        "properties": {
+          "integrationId": {
+            "example": 123,
+            "description": "The integration ID for the notification",
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "V3IntegrationTypeRecipients": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration type",
+        "description": "Defines the type of integration to use for notifications",
+        "type": "object",
+        "properties": {
+          "recipients": {
+            "$ref": "#/components/schemas/Recipients"
+          }
+        },
+        "additionalProperties": false
+      },
+      "alerts.v3.PaginationResponse": {
+        "type": "object",
+        "properties": {
+          "nextPageToken": {
+            "type": "string"
+          },
+          "totalSize": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "common.Group": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "$ref": "#/components/schemas/FieldGroup"
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/common.Group"
+            }
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v3.AutoRetireTimeframe": {
+        "type": "string",
+        "enum": [
+          "AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED",
+          "AUTO_RETIRE_TIMEFRAME_MINUTES_5",
+          "AUTO_RETIRE_TIMEFRAME_MINUTES_10",
+          "AUTO_RETIRE_TIMEFRAME_HOUR_1",
+          "AUTO_RETIRE_TIMEFRAME_HOURS_2",
+          "AUTO_RETIRE_TIMEFRAME_HOURS_6",
+          "AUTO_RETIRE_TIMEFRAME_HOURS_12",
+          "AUTO_RETIRE_TIMEFRAME_HOURS_24"
+        ]
+      },
+      "v3.ConnectorConfigField": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Connector config field",
+        "type": "object",
+        "properties": {
+          "fieldName": {
+            "example": "description",
+            "description": "The name of the configuration field",
+            "type": "string"
+          },
+          "template": {
+            "example": "template_example",
+            "description": "The template for the configuration field",
+            "type": "string"
+          }
+        }
+      },
+      "v3.FilterOperator": {
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      },
+      "v3.IntegrationType": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/V3IntegrationTypeIntegrationId"
+          },
+          {
+            "$ref": "#/components/schemas/V3IntegrationTypeRecipients"
+          }
+        ]
+      },
+      "v3.LogsFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Log filter",
+        "description": "Filter configuration for log-based alerts",
+        "type": "object",
+        "properties": {
+          "simpleFilter": {
+            "$ref": "#/components/schemas/LogsSimpleFilter"
+          }
+        }
+      },
+      "v3.MessageConfigField": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Message config field",
+        "description": "Configuration field for a notification message",
+        "type": "object",
+        "properties": {
+          "fieldName": {
+            "example": "description",
+            "description": "The name of the configuration field",
+            "type": "string"
+          },
+          "template": {
+            "example": "template_example",
+            "description": "The template for the configuration field",
+            "type": "string"
+          }
+        }
+      },
+      "v3.SetActiveResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Set active response",
+        "description": "Response after enabling or disabling an alert definition",
+        "type": "object"
+      },
+      "v3.SloDefinition": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SLO Definition",
+        "description": "Configuration for SLO definition",
+        "type": "object",
+        "properties": {
+          "sloId": {
+            "example": "123e4567-e89b-12d3-a456-426614174000",
+            "description": "The SLO ID",
+            "type": "string"
+          }
+        }
+      },
+      "v3.SourceOverrides": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Source overrides",
+        "type": "object",
+        "properties": {
+          "connectorConfigFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/v3.ConnectorConfigField"
+            }
+          },
+          "messageConfigFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/v3.MessageConfigField"
+            }
+          },
+          "payloadType": {
+            "example": "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default",
+            "description": "the payload type for the notification",
+            "type": "string"
+          }
+        }
+      },
+      "v3.UndetectedValuesManagement": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Undetected value management",
+        "description": "Configuration for handling undetected values in alerts",
+        "type": "object",
+        "properties": {
+          "autoRetireTimeframe": {
+            "$ref": "#/components/schemas/v3.AutoRetireTimeframe"
+          },
+          "triggerUndetectedValues": {
+            "example": true,
+            "description": "Should trigger the alert when undetected values are detected",
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}

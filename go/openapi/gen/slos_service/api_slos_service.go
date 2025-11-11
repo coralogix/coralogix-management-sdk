@@ -42,8 +42,6 @@ func (r ApiSlosServiceBatchExecuteSloRequest) Execute() (*BatchExecuteSloRespons
 /*
 SlosServiceBatchExecuteSlo Batch Execute Slo
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceBatchExecuteSloRequest
 */
@@ -157,8 +155,6 @@ func (r ApiSlosServiceBatchGetSlosRequest) Execute() (*BatchGetSlosResponse, *ht
 
 /*
 SlosServiceBatchGetSlos Batch Get Slo
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceBatchGetSlosRequest
@@ -280,8 +276,6 @@ func (r ApiSlosServiceCreateSloRequest) Execute() (*CreateSloResponse, *http.Res
 /*
 SlosServiceCreateSlo Create Slo
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceCreateSloRequest
 */
@@ -385,8 +379,6 @@ func (r ApiSlosServiceDeleteSloRequest) Execute() (*DeleteSloResponse, *http.Res
 /*
 SlosServiceDeleteSlo Delete Slo
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiSlosServiceDeleteSloRequest
@@ -488,8 +480,6 @@ func (r ApiSlosServiceGetSloRequest) Execute() (*GetSloResponse, *http.Response,
 /*
 SlosServiceGetSlo Get Slo
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiSlosServiceGetSloRequest
@@ -589,8 +579,6 @@ func (r ApiSlosServiceGetZeroStateRequest) Execute() (*GetZeroStateResponse, *ht
 
 /*
 SlosServiceGetZeroState Get Slo Zero State
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceGetZeroStateRequest
@@ -694,8 +682,6 @@ func (r ApiSlosServiceListSlosRequest) Execute() (*ListSlosResponse, *http.Respo
 
 /*
 SlosServiceListSlos List Slos
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceListSlosRequest
@@ -809,8 +795,6 @@ func (r ApiSlosServiceReplaceSloRequest) Execute() (*ReplaceSloResponse, *http.R
 /*
 SlosServiceReplaceSlo Replace Slo
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceReplaceSloRequest
 */
@@ -904,11 +888,11 @@ func (a *SlosServiceAPIService) SlosServiceReplaceSloExecute(r ApiSlosServiceRep
 type ApiSlosServiceValidateReplaceSloAlertsRequest struct {
 	ctx context.Context
 	ApiService *SlosServiceAPIService
-	slosServiceValidateReplaceSloAlertsRequest *SlosServiceValidateReplaceSloAlertsRequest
+	slosServiceReplaceSloRequest *SlosServiceReplaceSloRequest
 }
 
-func (r ApiSlosServiceValidateReplaceSloAlertsRequest) SlosServiceValidateReplaceSloAlertsRequest(slosServiceValidateReplaceSloAlertsRequest SlosServiceValidateReplaceSloAlertsRequest) ApiSlosServiceValidateReplaceSloAlertsRequest {
-	r.slosServiceValidateReplaceSloAlertsRequest = &slosServiceValidateReplaceSloAlertsRequest
+func (r ApiSlosServiceValidateReplaceSloAlertsRequest) SlosServiceReplaceSloRequest(slosServiceReplaceSloRequest SlosServiceReplaceSloRequest) ApiSlosServiceValidateReplaceSloAlertsRequest {
+	r.slosServiceReplaceSloRequest = &slosServiceReplaceSloRequest
 	return r
 }
 
@@ -918,8 +902,6 @@ func (r ApiSlosServiceValidateReplaceSloAlertsRequest) Execute() (*ReplaceSloAle
 
 /*
 SlosServiceValidateReplaceSloAlerts Replace Slo Pre-Validate Alerts
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceValidateReplaceSloAlertsRequest
@@ -970,7 +952,7 @@ func (a *SlosServiceAPIService) SlosServiceValidateReplaceSloAlertsExecute(r Api
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.slosServiceValidateReplaceSloAlertsRequest
+	localVarPostBody = r.slosServiceReplaceSloRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

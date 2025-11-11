@@ -58,7 +58,6 @@ model_slo_time_frame.go
 model_slo_window_based_metric_sli.go
 model_slos_service_batch_execute_slo_requests_parameter_inner.go
 model_slos_service_replace_slo_request.go
-model_slos_service_validate_replace_slo_alerts_request.go
 model_v1_grouping.go
 model_v1_revision.go
 model_v3_filter_operator.go

@@ -7,7 +7,6 @@ servers:
 paths:
   /events2metrics/events2metrics/v2:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: Events2MetricService_ListE2M
@@ -22,7 +21,6 @@ paths:
       tags:
       - Events2Metrics Service
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: Events2MetricService_CreateE2M
@@ -42,7 +40,6 @@ paths:
       tags:
       - Events2Metrics Service
     put:
-      description: No description available
       externalDocs:
         url: ""
       operationId: Events2MetricService_ReplaceE2M
@@ -63,7 +60,6 @@ paths:
       - Events2Metrics Service
   /events2metrics/events2metrics/v2/batch:
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: Events2MetricService_AtomicBatchExecuteE2M
@@ -84,7 +80,6 @@ paths:
       - Events2Metrics Service
   /events2metrics/events2metrics/v2/labels:cardinality:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: Events2MetricService_ListLabelsCardinality
@@ -124,7 +119,6 @@ paths:
       - Events2Metrics Service
   /events2metrics/events2metrics/v2/limits:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: Events2MetricService_GetLimits
@@ -140,7 +134,6 @@ paths:
       - Events2Metrics Service
   /events2metrics/events2metrics/v2/{id}:
     delete:
-      description: No description available
       externalDocs:
         url: ""
       operationId: Events2MetricService_DeleteE2M
@@ -164,7 +157,6 @@ paths:
       tags:
       - Events2Metrics Service
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: Events2MetricService_GetE2M
@@ -203,118 +195,10 @@ components:
     AtomicBatchExecuteE2MResponse:
       example:
         matchingResponses:
-        - created:
-            e2m:
-              isInternal: true
-              metricFields:
-              - sourceField: log_obj.numeric_field
-                targetBaseMetricName: alias_field_name
-                aggregations:
-                - targetMetricName: alias_field_name_agg_func
-                  aggType: AGG_TYPE_UNSPECIFIED
-                  enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
-                - targetMetricName: alias_field_name_agg_func
-                  aggType: AGG_TYPE_UNSPECIFIED
-                  enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
-              - sourceField: log_obj.numeric_field
-                targetBaseMetricName: alias_field_name
-                aggregations:
-                - targetMetricName: alias_field_name_agg_func
-                  aggType: AGG_TYPE_UNSPECIFIED
-                  enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
-                - targetMetricName: alias_field_name_agg_func
-                  aggType: AGG_TYPE_UNSPECIFIED
-                  enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
-              createTime: 2022-06-30T12:30:00Z'
-              logsQuery:
-                severityFilters:
-                - SEVERITY_UNSPECIFIED
-                - SEVERITY_UNSPECIFIED
-                applicationnameFilters:
-                - app_name
-                - app_name
-                lucene: "log_obj.numeric_field: [50 TO 100]"
-                alias: new_query
-                subsystemnameFilters:
-                - sub_name
-                - sub_name
-              metricLabels:
-              - sourceField: log_obj.string_value
-                targetLabel: alias_label_name
-              - sourceField: log_obj.string_value
-                targetLabel: alias_label_name
-              name: Service_catalog_latency
-              description: avg and max the latency of catalog service
-              updateTime: 2022-06-30T12:30:00Z'
-              id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
-              permutations:
-                limit: 30000
-                hasExceededLimit: true
-              type: E2M_TYPE_UNSPECIFIED
-        - created:
-            e2m:
-              isInternal: true
-              metricFields:
-              - sourceField: log_obj.numeric_field
-                targetBaseMetricName: alias_field_name
-                aggregations:
-                - targetMetricName: alias_field_name_agg_func
-                  aggType: AGG_TYPE_UNSPECIFIED
-                  enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
-                - targetMetricName: alias_field_name_agg_func
-                  aggType: AGG_TYPE_UNSPECIFIED
-                  enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
-              - sourceField: log_obj.numeric_field
-                targetBaseMetricName: alias_field_name
-                aggregations:
-                - targetMetricName: alias_field_name_agg_func
-                  aggType: AGG_TYPE_UNSPECIFIED
-                  enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
-                - targetMetricName: alias_field_name_agg_func
-                  aggType: AGG_TYPE_UNSPECIFIED
-                  enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
-              createTime: 2022-06-30T12:30:00Z'
-              logsQuery:
-                severityFilters:
-                - SEVERITY_UNSPECIFIED
-                - SEVERITY_UNSPECIFIED
-                applicationnameFilters:
-                - app_name
-                - app_name
-                lucene: "log_obj.numeric_field: [50 TO 100]"
-                alias: new_query
-                subsystemnameFilters:
-                - sub_name
-                - sub_name
-              metricLabels:
-              - sourceField: log_obj.string_value
-                targetLabel: alias_label_name
-              - sourceField: log_obj.string_value
-                targetLabel: alias_label_name
-              name: Service_catalog_latency
-              description: avg and max the latency of catalog service
-              updateTime: 2022-06-30T12:30:00Z'
-              id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
-              permutations:
-                limit: 30000
-                hasExceededLimit: true
-              type: E2M_TYPE_UNSPECIFIED
+        - deleted:
+            id: id
+        - deleted:
+            id: id
       properties:
         matchingResponses:
           items:
@@ -383,24 +267,26 @@ components:
               samples:
                 sampleType: SAMPLE_TYPE_UNSPECIFIED
           createTime: 2022-06-30T12:30:00Z'
-          logsQuery:
-            severityFilters:
-            - SEVERITY_UNSPECIFIED
-            - SEVERITY_UNSPECIFIED
-            applicationnameFilters:
-            - app_name
-            - app_name
-            lucene: "log_obj.numeric_field: [50 TO 100]"
-            alias: new_query
-            subsystemnameFilters:
-            - sub_name
-            - sub_name
           metricLabels:
           - sourceField: log_obj.string_value
             targetLabel: alias_label_name
           - sourceField: log_obj.string_value
             targetLabel: alias_label_name
           name: Service_catalog_latency
+          spansQuery:
+            applicationnameFilters:
+            - myApp
+            - myApp
+            lucene: applicationName:myApp
+            serviceFilters:
+            - myService
+            - myService
+            actionFilters:
+            - myAction
+            - myAction
+            subsystemnameFilters:
+            - mySubsystem
+            - mySubsystem
           description: avg and max the latency of catalog service
           updateTime: 2022-06-30T12:30:00Z'
           id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
@@ -443,8 +329,8 @@ components:
       type: object
     E2M:
       oneOf:
-      - $ref: "#/components/schemas/E2MLogsQuery"
       - $ref: "#/components/schemas/E2MSpansQuery"
+      - $ref: "#/components/schemas/E2MLogsQuery"
     E2MAggHistogram:
       description: This data structure represents the e2m aggregate histogram
       externalDocs:
@@ -566,74 +452,20 @@ components:
       type: object
     E2MExecutionResponse:
       oneOf:
+      - $ref: "#/components/schemas/E2MExecutionResponseDeleted"
       - $ref: "#/components/schemas/E2MExecutionResponseCreated"
       - $ref: "#/components/schemas/E2MExecutionResponseReplaced"
-      - $ref: "#/components/schemas/E2MExecutionResponseDeleted"
     E2MExecutionResponseCreated:
       additionalProperties: false
-      example:
-        created:
-          e2m:
-            isInternal: true
-            metricFields:
-            - sourceField: log_obj.numeric_field
-              targetBaseMetricName: alias_field_name
-              aggregations:
-              - targetMetricName: alias_field_name_agg_func
-                aggType: AGG_TYPE_UNSPECIFIED
-                enabled: true
-                samples:
-                  sampleType: SAMPLE_TYPE_UNSPECIFIED
-              - targetMetricName: alias_field_name_agg_func
-                aggType: AGG_TYPE_UNSPECIFIED
-                enabled: true
-                samples:
-                  sampleType: SAMPLE_TYPE_UNSPECIFIED
-            - sourceField: log_obj.numeric_field
-              targetBaseMetricName: alias_field_name
-              aggregations:
-              - targetMetricName: alias_field_name_agg_func
-                aggType: AGG_TYPE_UNSPECIFIED
-                enabled: true
-                samples:
-                  sampleType: SAMPLE_TYPE_UNSPECIFIED
-              - targetMetricName: alias_field_name_agg_func
-                aggType: AGG_TYPE_UNSPECIFIED
-                enabled: true
-                samples:
-                  sampleType: SAMPLE_TYPE_UNSPECIFIED
-            createTime: 2022-06-30T12:30:00Z'
-            logsQuery:
-              severityFilters:
-              - SEVERITY_UNSPECIFIED
-              - SEVERITY_UNSPECIFIED
-              applicationnameFilters:
-              - app_name
-              - app_name
-              lucene: "log_obj.numeric_field: [50 TO 100]"
-              alias: new_query
-              subsystemnameFilters:
-              - sub_name
-              - sub_name
-            metricLabels:
-            - sourceField: log_obj.string_value
-              targetLabel: alias_label_name
-            - sourceField: log_obj.string_value
-              targetLabel: alias_label_name
-            name: Service_catalog_latency
-            description: avg and max the latency of catalog service
-            updateTime: 2022-06-30T12:30:00Z'
-            id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
-            permutations:
-              limit: 30000
-              hasExceededLimit: true
-            type: E2M_TYPE_UNSPECIFIED
       properties:
         created:
           $ref: "#/components/schemas/CreateE2MResponse"
       type: object
     E2MExecutionResponseDeleted:
       additionalProperties: false
+      example:
+        deleted:
+          id: id
       properties:
         deleted:
           $ref: "#/components/schemas/DeleteE2MResponse"
@@ -647,61 +479,6 @@ components:
     E2MLogsQuery:
       additionalProperties: false
       description: This data structure represents an Event to Metrics (E2M) object.
-      example:
-        isInternal: true
-        metricFields:
-        - sourceField: log_obj.numeric_field
-          targetBaseMetricName: alias_field_name
-          aggregations:
-          - targetMetricName: alias_field_name_agg_func
-            aggType: AGG_TYPE_UNSPECIFIED
-            enabled: true
-            samples:
-              sampleType: SAMPLE_TYPE_UNSPECIFIED
-          - targetMetricName: alias_field_name_agg_func
-            aggType: AGG_TYPE_UNSPECIFIED
-            enabled: true
-            samples:
-              sampleType: SAMPLE_TYPE_UNSPECIFIED
-        - sourceField: log_obj.numeric_field
-          targetBaseMetricName: alias_field_name
-          aggregations:
-          - targetMetricName: alias_field_name_agg_func
-            aggType: AGG_TYPE_UNSPECIFIED
-            enabled: true
-            samples:
-              sampleType: SAMPLE_TYPE_UNSPECIFIED
-          - targetMetricName: alias_field_name_agg_func
-            aggType: AGG_TYPE_UNSPECIFIED
-            enabled: true
-            samples:
-              sampleType: SAMPLE_TYPE_UNSPECIFIED
-        createTime: 2022-06-30T12:30:00Z'
-        logsQuery:
-          severityFilters:
-          - SEVERITY_UNSPECIFIED
-          - SEVERITY_UNSPECIFIED
-          applicationnameFilters:
-          - app_name
-          - app_name
-          lucene: "log_obj.numeric_field: [50 TO 100]"
-          alias: new_query
-          subsystemnameFilters:
-          - sub_name
-          - sub_name
-        metricLabels:
-        - sourceField: log_obj.string_value
-          targetLabel: alias_label_name
-        - sourceField: log_obj.string_value
-          targetLabel: alias_label_name
-        name: Service_catalog_latency
-        description: avg and max the latency of catalog service
-        updateTime: 2022-06-30T12:30:00Z'
-        id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
-        permutations:
-          limit: 30000
-          hasExceededLimit: true
-        type: E2M_TYPE_UNSPECIFIED
       externalDocs:
         description: Find out more about events2metrics
         url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
@@ -769,6 +546,63 @@ components:
     E2MSpansQuery:
       additionalProperties: false
       description: This data structure represents an Event to Metrics (E2M) object.
+      example:
+        isInternal: true
+        metricFields:
+        - sourceField: log_obj.numeric_field
+          targetBaseMetricName: alias_field_name
+          aggregations:
+          - targetMetricName: alias_field_name_agg_func
+            aggType: AGG_TYPE_UNSPECIFIED
+            enabled: true
+            samples:
+              sampleType: SAMPLE_TYPE_UNSPECIFIED
+          - targetMetricName: alias_field_name_agg_func
+            aggType: AGG_TYPE_UNSPECIFIED
+            enabled: true
+            samples:
+              sampleType: SAMPLE_TYPE_UNSPECIFIED
+        - sourceField: log_obj.numeric_field
+          targetBaseMetricName: alias_field_name
+          aggregations:
+          - targetMetricName: alias_field_name_agg_func
+            aggType: AGG_TYPE_UNSPECIFIED
+            enabled: true
+            samples:
+              sampleType: SAMPLE_TYPE_UNSPECIFIED
+          - targetMetricName: alias_field_name_agg_func
+            aggType: AGG_TYPE_UNSPECIFIED
+            enabled: true
+            samples:
+              sampleType: SAMPLE_TYPE_UNSPECIFIED
+        createTime: 2022-06-30T12:30:00Z'
+        metricLabels:
+        - sourceField: log_obj.string_value
+          targetLabel: alias_label_name
+        - sourceField: log_obj.string_value
+          targetLabel: alias_label_name
+        name: Service_catalog_latency
+        spansQuery:
+          applicationnameFilters:
+          - myApp
+          - myApp
+          lucene: applicationName:myApp
+          serviceFilters:
+          - myService
+          - myService
+          actionFilters:
+          - myAction
+          - myAction
+          subsystemnameFilters:
+          - mySubsystem
+          - mySubsystem
+        description: avg and max the latency of catalog service
+        updateTime: 2022-06-30T12:30:00Z'
+        id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+        permutations:
+          limit: 30000
+          hasExceededLimit: true
+        type: E2M_TYPE_UNSPECIFIED
       externalDocs:
         description: Find out more about events2metrics
         url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
@@ -827,8 +661,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       additionalProperties: false
       description: This data structure represents a filter path and values
@@ -910,24 +744,26 @@ components:
               samples:
                 sampleType: SAMPLE_TYPE_UNSPECIFIED
           createTime: 2022-06-30T12:30:00Z'
-          logsQuery:
-            severityFilters:
-            - SEVERITY_UNSPECIFIED
-            - SEVERITY_UNSPECIFIED
-            applicationnameFilters:
-            - app_name
-            - app_name
-            lucene: "log_obj.numeric_field: [50 TO 100]"
-            alias: new_query
-            subsystemnameFilters:
-            - sub_name
-            - sub_name
           metricLabels:
           - sourceField: log_obj.string_value
             targetLabel: alias_label_name
           - sourceField: log_obj.string_value
             targetLabel: alias_label_name
           name: Service_catalog_latency
+          spansQuery:
+            applicationnameFilters:
+            - myApp
+            - myApp
+            lucene: applicationName:myApp
+            serviceFilters:
+            - myService
+            - myService
+            actionFilters:
+            - myAction
+            - myAction
+            subsystemnameFilters:
+            - mySubsystem
+            - mySubsystem
           description: avg and max the latency of catalog service
           updateTime: 2022-06-30T12:30:00Z'
           id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
@@ -1023,24 +859,26 @@ components:
               samples:
                 sampleType: SAMPLE_TYPE_UNSPECIFIED
           createTime: 2022-06-30T12:30:00Z'
-          logsQuery:
-            severityFilters:
-            - SEVERITY_UNSPECIFIED
-            - SEVERITY_UNSPECIFIED
-            applicationnameFilters:
-            - app_name
-            - app_name
-            lucene: "log_obj.numeric_field: [50 TO 100]"
-            alias: new_query
-            subsystemnameFilters:
-            - sub_name
-            - sub_name
           metricLabels:
           - sourceField: log_obj.string_value
             targetLabel: alias_label_name
           - sourceField: log_obj.string_value
             targetLabel: alias_label_name
           name: Service_catalog_latency
+          spansQuery:
+            applicationnameFilters:
+            - myApp
+            - myApp
+            lucene: applicationName:myApp
+            serviceFilters:
+            - myService
+            - myService
+            actionFilters:
+            - myAction
+            - myAction
+            subsystemnameFilters:
+            - mySubsystem
+            - mySubsystem
           description: avg and max the latency of catalog service
           updateTime: 2022-06-30T12:30:00Z'
           id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
@@ -1077,24 +915,26 @@ components:
               samples:
                 sampleType: SAMPLE_TYPE_UNSPECIFIED
           createTime: 2022-06-30T12:30:00Z'
-          logsQuery:
-            severityFilters:
-            - SEVERITY_UNSPECIFIED
-            - SEVERITY_UNSPECIFIED
-            applicationnameFilters:
-            - app_name
-            - app_name
-            lucene: "log_obj.numeric_field: [50 TO 100]"
-            alias: new_query
-            subsystemnameFilters:
-            - sub_name
-            - sub_name
           metricLabels:
           - sourceField: log_obj.string_value
             targetLabel: alias_label_name
           - sourceField: log_obj.string_value
             targetLabel: alias_label_name
           name: Service_catalog_latency
+          spansQuery:
+            applicationnameFilters:
+            - myApp
+            - myApp
+            lucene: applicationName:myApp
+            serviceFilters:
+            - myService
+            - myService
+            actionFilters:
+            - myAction
+            - myAction
+            subsystemnameFilters:
+            - mySubsystem
+            - mySubsystem
           description: avg and max the latency of catalog service
           updateTime: 2022-06-30T12:30:00Z'
           id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
@@ -1204,24 +1044,26 @@ components:
               samples:
                 sampleType: SAMPLE_TYPE_UNSPECIFIED
           createTime: 2022-06-30T12:30:00Z'
-          logsQuery:
-            severityFilters:
-            - SEVERITY_UNSPECIFIED
-            - SEVERITY_UNSPECIFIED
-            applicationnameFilters:
-            - app_name
-            - app_name
-            lucene: "log_obj.numeric_field: [50 TO 100]"
-            alias: new_query
-            subsystemnameFilters:
-            - sub_name
-            - sub_name
           metricLabels:
           - sourceField: log_obj.string_value
             targetLabel: alias_label_name
           - sourceField: log_obj.string_value
             targetLabel: alias_label_name
           name: Service_catalog_latency
+          spansQuery:
+            applicationnameFilters:
+            - myApp
+            - myApp
+            lucene: applicationName:myApp
+            serviceFilters:
+            - myService
+            - myService
+            actionFilters:
+            - myAction
+            - myAction
+            subsystemnameFilters:
+            - mySubsystem
+            - mySubsystem
           description: avg and max the latency of catalog service
           updateTime: 2022-06-30T12:30:00Z'
           id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
@@ -1320,18 +1162,6 @@ components:
       - $ref: "#/components/schemas/V2AggregationHistogram"
     v2.LogsQuery:
       description: This data structure represents a query for logs.
-      example:
-        severityFilters:
-        - SEVERITY_UNSPECIFIED
-        - SEVERITY_UNSPECIFIED
-        applicationnameFilters:
-        - app_name
-        - app_name
-        lucene: "log_obj.numeric_field: [50 TO 100]"
-        alias: new_query
-        subsystemnameFilters:
-        - sub_name
-        - sub_name
       externalDocs:
         description: Find out more about events2metrics
         url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
@@ -1397,6 +1227,20 @@ components:
       type: object
     v2.SpansQuery:
       description: This data structure represents a query for spans.
+      example:
+        applicationnameFilters:
+        - myApp
+        - myApp
+        lucene: applicationName:myApp
+        serviceFilters:
+        - myService
+        - myService
+        actionFilters:
+        - myAction
+        - myAction
+        subsystemnameFilters:
+        - mySubsystem
+        - mySubsystem
       externalDocs:
         description: Find out more about events2metrics
         url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
@@ -1433,13 +1277,13 @@ components:
       type: string
     Events2MetricService_ReplaceE2M_request:
       oneOf:
-      - $ref: "#/components/schemas/E2MLogsQuery"
       - $ref: "#/components/schemas/E2MSpansQuery"
+      - $ref: "#/components/schemas/E2MLogsQuery"
       type: object
     Events2MetricService_CreateE2M_request:
       oneOf:
-      - $ref: "#/components/schemas/E2MCreateParamsLogsQuery"
       - $ref: "#/components/schemas/E2MCreateParamsSpansQuery"
+      - $ref: "#/components/schemas/E2MCreateParamsLogsQuery"
       type: object
     Events2MetricService_AtomicBatchExecuteE2M_request:
       additionalProperties: false
@@ -1526,9 +1370,3 @@ components:
       - targetLabel
       title: Metric Label
       type: object
-  securitySchemes:
-    apiKeyAuth:
-      description: API key authentication
-      in: header
-      name: Authorization
-      type: apiKey

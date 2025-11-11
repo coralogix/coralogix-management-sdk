@@ -1,0 +1,1185 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v1/alert-scheduler-rules": {
+      "put": {
+        "tags": [
+          "Alert Scheduler Rule service"
+        ],
+        "summary": "Update an alert scheduler rule",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertSchedulerRuleService_UpdateAlertSchedulerRule",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Update alert scheduler rule request data structure",
+                "description": "This is a request sent to update an alert scheduler rule",
+                "type": "object",
+                "properties": {
+                  "alertSchedulerRule": {
+                    "$ref": "#/components/schemas/AlertSchedulerRule"
+                  }
+                },
+                "required": [
+                  "alertSchedulerRule"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateAlertSchedulerRuleResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Alert Scheduler Rule service"
+        ],
+        "summary": "Create an alert scheduler rule",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertSchedulerRuleService_CreateAlertSchedulerRule",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Create alert scheduler rule request data structure",
+                "description": "This is a request sent to create an alert scheduler rule",
+                "type": "object",
+                "properties": {
+                  "alertSchedulerRule": {
+                    "$ref": "#/components/schemas/AlertSchedulerRule"
+                  }
+                },
+                "required": [
+                  "alertSchedulerRule"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAlertSchedulerRuleResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v1/alert-scheduler-rules/bulk": {
+      "get": {
+        "tags": [
+          "Alert Scheduler Rule service"
+        ],
+        "summary": "Get multiple alert scheduler rules",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertSchedulerRuleService_GetBulkAlertSchedulerRule",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "active_timeframe",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "endTime": {
+                  "type": "string"
+                },
+                "startTime": {
+                  "type": "string"
+                },
+                "timezone": {
+                  "type": "string"
+                }
+              }
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "enabled",
+            "schema": {
+              "type": "boolean"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "alert_scheduler_rules_ids",
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds"
+                },
+                {
+                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds"
+                }
+              ]
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "next_page_token",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBulkAlertSchedulerRuleResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Alert Scheduler Rule service"
+        ],
+        "summary": "Update multiple alert scheduler rules",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertSchedulerRuleService_UpdateBulkAlertSchedulerRule",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Update bulk alert scheduler rule request data structure",
+                "description": "This is a request sent to update multiple alert scheduler rules",
+                "type": "object",
+                "properties": {
+                  "updateAlertSchedulerRuleRequests": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/UpdateAlertSchedulerRuleRequest"
+                    }
+                  }
+                },
+                "required": [
+                  "updateAlertSchedulerRuleRequests"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBulkAlertSchedulerRuleResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Alert Scheduler Rule service"
+        ],
+        "summary": "Create multiple alert scheduler rules",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertSchedulerRuleService_CreateBulkAlertSchedulerRule",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Create bulk alert scheduler rule request data structure",
+                "description": "This is a request sent to create multiple alert scheduler rules",
+                "type": "object",
+                "properties": {
+                  "createAlertSchedulerRuleRequests": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CreateAlertSchedulerRuleRequest"
+                    }
+                  }
+                },
+                "required": [
+                  "createAlertSchedulerRuleRequests"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateBulkAlertSchedulerRuleResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v1/alert-scheduler-rules/{alert_scheduler_rule_id}": {
+      "get": {
+        "tags": [
+          "Alert Scheduler Rule service"
+        ],
+        "summary": "Get an alert scheduler rule",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertSchedulerRuleService_GetAlertSchedulerRule",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "alert_scheduler_rule_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAlertSchedulerRuleResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Alert Scheduler Rule service"
+        ],
+        "summary": "Delete an alert scheduler rule",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertSchedulerRuleService_DeleteAlertSchedulerRule",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "alert_scheduler_rule_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteAlertSchedulerRuleResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ActiveTimeframe": {
+        "type": "object",
+        "properties": {
+          "endTime": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          }
+        }
+      },
+      "AlertSchedulerRule": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "filter": {
+            "$ref": "#/components/schemas/alert_scheduler_rule_protobuf.v1.Filter"
+          },
+          "id": {
+            "type": "string"
+          },
+          "metaLabels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/meta_labels_protobuf.v1.MetaLabel"
+            }
+          },
+          "name": {
+            "type": "string"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/Schedule"
+          },
+          "uniqueIdentifier": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        }
+      },
+      "AlertSchedulerRuleIds": {
+        "type": "object",
+        "properties": {
+          "alertSchedulerRuleIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "AlertSchedulerRuleProtobufV1FilterAlertMetaLabels": {
+        "type": "object",
+        "properties": {
+          "alertMetaLabels": {
+            "$ref": "#/components/schemas/MetaLabels"
+          },
+          "whatExpression": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AlertSchedulerRuleProtobufV1FilterAlertUniqueIds": {
+        "type": "object",
+        "properties": {
+          "alertUniqueIds": {
+            "$ref": "#/components/schemas/AlertUniqueIds"
+          },
+          "whatExpression": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AlertSchedulerRuleVersionIds": {
+        "type": "object",
+        "properties": {
+          "alertSchedulerRuleVersionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "AlertSchedulerRuleWithActiveTimeframe": {
+        "type": "object",
+        "properties": {
+          "alertSchedulerRule": {
+            "$ref": "#/components/schemas/AlertSchedulerRule"
+          },
+          "nextActiveTimeframes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActiveTimeframe"
+            }
+          }
+        }
+      },
+      "AlertUniqueIds": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Always": {
+        "type": "object"
+      },
+      "ColorsByAggregation": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/ColorsByAggregation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByGroupBy": {
+        "type": "object",
+        "properties": {
+          "groupBy": {
+            "$ref": "#/components/schemas/ColorsByGroupBy"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByStack": {
+        "type": "object",
+        "properties": {
+          "stack": {
+            "$ref": "#/components/schemas/ColorsByStack"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateAlertSchedulerRuleRequest": {
+        "externalDocs": {
+          "description": "Find out more about alert scheduler rules in our documentation.",
+          "url": "https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/"
+        },
+        "title": "Create alert scheduler rule request data structure",
+        "description": "This is a request sent to create an alert scheduler rule",
+        "type": "object",
+        "properties": {
+          "alertSchedulerRule": {
+            "$ref": "#/components/schemas/AlertSchedulerRule"
+          }
+        },
+        "required": [
+          "alertSchedulerRule"
+        ]
+      },
+      "CreateAlertSchedulerRuleResponse": {
+        "externalDocs": {
+          "description": "Find out more about alert scheduler rules in our documentation.",
+          "url": "https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/"
+        },
+        "title": "Create alert scheduler rule response data structure",
+        "description": "This is a response sent after creating an alert scheduler rule",
+        "type": "object",
+        "properties": {
+          "alertSchedulerRule": {
+            "$ref": "#/components/schemas/AlertSchedulerRule"
+          }
+        },
+        "required": [
+          "alertSchedulerRule"
+        ]
+      },
+      "CreateBulkAlertSchedulerRuleResponse": {
+        "externalDocs": {
+          "description": "Find out more about alert scheduler rules in our documentation.",
+          "url": "https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/"
+        },
+        "title": "Create bulk alert scheduler rule response data structure",
+        "description": "This is a response sent after creating multiple alert scheduler rules",
+        "type": "object",
+        "properties": {
+          "createSuppressionResponses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateAlertSchedulerRuleResponse"
+            }
+          }
+        },
+        "required": [
+          "createSuppressionResponses"
+        ]
+      },
+      "Daily": {
+        "type": "object"
+      },
+      "DeleteAlertSchedulerRuleResponse": {
+        "type": "object"
+      },
+      "DurationFrequency": {
+        "type": "string",
+        "enum": [
+          "DURATION_FREQUENCY_UNSPECIFIED",
+          "DURATION_FREQUENCY_MINUTE",
+          "DURATION_FREQUENCY_HOUR",
+          "DURATION_FREQUENCY_DAY"
+        ]
+      },
+      "FieldGroup": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "FilterByAlertSchedulerRuleIdsAlertSchedulerIds": {
+        "type": "object",
+        "properties": {
+          "alertSchedulerIds": {
+            "$ref": "#/components/schemas/AlertSchedulerRuleIds"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds": {
+        "type": "object",
+        "properties": {
+          "alertSchedulerVersionIds": {
+            "$ref": "#/components/schemas/AlertSchedulerRuleVersionIds"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FilterPathAndValues": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+          },
+          {
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+          }
+        ]
+      },
+      "FilterPathAndValuesFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "FilterPathAndValuesMultipleValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            }
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GetAlertSchedulerRuleResponse": {
+        "externalDocs": {
+          "description": "Find out more about alert scheduler rules in our documentation.",
+          "url": "https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/"
+        },
+        "title": "Get alert scheduler rule response data structure",
+        "description": "This is a response sent to get an alert scheduler rule",
+        "type": "object",
+        "properties": {
+          "alertSchedulerRule": {
+            "$ref": "#/components/schemas/AlertSchedulerRule"
+          }
+        },
+        "required": [
+          "alertSchedulerRule"
+        ]
+      },
+      "GetBulkAlertSchedulerRuleResponse": {
+        "externalDocs": {
+          "description": "Find out more about alert scheduler rules in our documentation.",
+          "url": "https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/"
+        },
+        "title": "Get bulk alert scheduler rule response data structure",
+        "description": "This is a response sent after getting multiple alert scheduler rules",
+        "type": "object",
+        "properties": {
+          "alertSchedulerRules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertSchedulerRuleWithActiveTimeframe"
+            }
+          },
+          "nextPageToken": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "alertSchedulerRules"
+        ]
+      },
+      "MetaLabels": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/meta_labels_protobuf.v1.MetaLabel"
+            }
+          }
+        }
+      },
+      "Monthly": {
+        "type": "object",
+        "properties": {
+          "daysOfMonth": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "OneTime": {
+        "type": "object",
+        "properties": {
+          "timeframe": {
+            "$ref": "#/components/schemas/Timeframe"
+          }
+        }
+      },
+      "Recurring": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/RecurringDynamic"
+          },
+          {
+            "$ref": "#/components/schemas/RecurringAlways"
+          }
+        ]
+      },
+      "Recurring.Dynamic": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/RecurringDynamicDaily"
+          },
+          {
+            "$ref": "#/components/schemas/RecurringDynamicWeekly"
+          },
+          {
+            "$ref": "#/components/schemas/RecurringDynamicMonthly"
+          }
+        ]
+      },
+      "RecurringAlways": {
+        "type": "object",
+        "properties": {
+          "always": {
+            "$ref": "#/components/schemas/Always"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RecurringDynamic": {
+        "type": "object",
+        "properties": {
+          "dynamic": {
+            "$ref": "#/components/schemas/Recurring.Dynamic"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RecurringDynamicDaily": {
+        "type": "object",
+        "properties": {
+          "daily": {
+            "$ref": "#/components/schemas/Daily"
+          },
+          "repeatEvery": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "terminationDate": {
+            "type": "string"
+          },
+          "timeframe": {
+            "$ref": "#/components/schemas/Timeframe"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RecurringDynamicMonthly": {
+        "type": "object",
+        "properties": {
+          "monthly": {
+            "$ref": "#/components/schemas/Monthly"
+          },
+          "repeatEvery": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "terminationDate": {
+            "type": "string"
+          },
+          "timeframe": {
+            "$ref": "#/components/schemas/Timeframe"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RecurringDynamicWeekly": {
+        "type": "object",
+        "properties": {
+          "repeatEvery": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "terminationDate": {
+            "type": "string"
+          },
+          "timeframe": {
+            "$ref": "#/components/schemas/Timeframe"
+          },
+          "weekly": {
+            "$ref": "#/components/schemas/Weekly"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Schedule": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ScheduleOneTime"
+          },
+          {
+            "$ref": "#/components/schemas/ScheduleRecurring"
+          }
+        ]
+      },
+      "ScheduleOneTime": {
+        "type": "object",
+        "properties": {
+          "oneTime": {
+            "$ref": "#/components/schemas/OneTime"
+          },
+          "scheduleOperation": {
+            "$ref": "#/components/schemas/ScheduleOperation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScheduleOperation": {
+        "type": "string",
+        "enum": [
+          "SCHEDULE_OPERATION_UNSPECIFIED",
+          "SCHEDULE_OPERATION_MUTE",
+          "SCHEDULE_OPERATION_ACTIVATE"
+        ]
+      },
+      "ScheduleRecurring": {
+        "type": "object",
+        "properties": {
+          "recurring": {
+            "$ref": "#/components/schemas/Recurring"
+          },
+          "scheduleOperation": {
+            "$ref": "#/components/schemas/ScheduleOperation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Timeframe": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/TimeframeEndTime"
+          },
+          {
+            "$ref": "#/components/schemas/TimeframeDuration"
+          }
+        ]
+      },
+      "TimeframeDuration": {
+        "type": "object",
+        "properties": {
+          "duration": {
+            "$ref": "#/components/schemas/v1.Duration"
+          },
+          "startTime": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TimeframeEndTime": {
+        "type": "object",
+        "properties": {
+          "endTime": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateAlertSchedulerRuleRequest": {
+        "externalDocs": {
+          "description": "Find out more about alert scheduler rules in our documentation.",
+          "url": "https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/"
+        },
+        "title": "Update alert scheduler rule request data structure",
+        "description": "This is a request sent to update an alert scheduler rule",
+        "type": "object",
+        "properties": {
+          "alertSchedulerRule": {
+            "$ref": "#/components/schemas/AlertSchedulerRule"
+          }
+        },
+        "required": [
+          "alertSchedulerRule"
+        ]
+      },
+      "UpdateAlertSchedulerRuleResponse": {
+        "externalDocs": {
+          "description": "Find out more about alert scheduler rules in our documentation.",
+          "url": "https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/"
+        },
+        "title": "Create alert scheduler rule response data structure",
+        "description": "This is a response sent after creating an alert scheduler rule",
+        "type": "object",
+        "properties": {
+          "alertSchedulerRule": {
+            "$ref": "#/components/schemas/AlertSchedulerRule"
+          }
+        },
+        "required": [
+          "alertSchedulerRule"
+        ]
+      },
+      "UpdateBulkAlertSchedulerRuleResponse": {
+        "externalDocs": {
+          "description": "Find out more about alert scheduler rules in our documentation.",
+          "url": "https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/"
+        },
+        "title": "Update bulk alert scheduler rule response data structure",
+        "description": "This is a response sent after updating multiple alert scheduler rules",
+        "type": "object",
+        "properties": {
+          "updateSuppressionResponses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateAlertSchedulerRuleResponse"
+            }
+          }
+        },
+        "required": [
+          "updateSuppressionResponses"
+        ]
+      },
+      "Weekly": {
+        "type": "object",
+        "properties": {
+          "daysOfWeek": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        }
+      },
+      "alert_scheduler_rule_protobuf.v1.Filter": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertMetaLabels"
+          },
+          {
+            "$ref": "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertUniqueIds"
+          }
+        ]
+      },
+      "common.Group": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "$ref": "#/components/schemas/FieldGroup"
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/common.Group"
+            }
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "meta_labels_protobuf.v1.MetaLabel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "v1.Duration": {
+        "type": "object",
+        "properties": {
+          "forOver": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "frequency": {
+            "$ref": "#/components/schemas/DurationFrequency"
+          }
+        }
+      },
+      "v3.FilterOperator": {
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}
