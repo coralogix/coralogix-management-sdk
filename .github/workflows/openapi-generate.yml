@@ -1,0 +1,4 @@
+name: openapi-generate.yml
+on:
+
+jobs:
