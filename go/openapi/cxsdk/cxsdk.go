@@ -38,6 +38,7 @@ import (
 	webhooks "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/outgoing_webhooks_service"
 	tcopolicies "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/policies_service"
 	presets "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/presets_service"
+	archiveretention "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/retentions_service"
 	customroles "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/role_management_service"
 	scopes "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/scopes_service"
 
@@ -71,6 +72,7 @@ type ClientSet struct {
 	apiKeys              *apikeys.APIKeysServiceAPIService
 	archiveLogs          *targets.TargetServiceAPIService
 	archiveMetrics       *archivemetrics.MetricsDataArchiveServiceAPIService
+	archiveRetentions    *archiveretention.RetentionsServiceAPIService
 	connectors           *connectors.ConnectorsServiceAPIService
 	ipAccess             *ipaccess.IPAccessServiceAPIService
 	customRoles          *customroles.RoleManagementServiceAPIService
@@ -117,6 +119,11 @@ func (c *ClientSet) ArchiveLogs() *targets.TargetServiceAPIService {
 // ArchiveMetrics returns the MetricsDataArchiveServiceAPIService client.
 func (c *ClientSet) ArchiveMetrics() *archivemetrics.MetricsDataArchiveServiceAPIService {
 	return c.archiveMetrics
+}
+
+// ArchiveRetentions returns the RetentionsServiceAPIService client.
+func (c *ClientSet) ArchiveRetentions() *archiveretention.RetentionsServiceAPIService {
+	return c.archiveRetentions
 }
 
 // APIKeys returns the APIKeysServiceAPIService client.
@@ -238,6 +245,7 @@ func NewClientSet(c CallPropertiesCreator) *ClientSet {
 		apiKeys:              NewAPIKeysClient(c),
 		archiveMetrics:       NewArchiveMetricsClient(c),
 		archiveLogs:          NewArchiveLogsClient(c),
+		archiveRetentions:    NewArchiveRetentionsClient(c),
 		ipAccess:             NewIPAccessClient(c),
 		connectors:           NewConnectorsClient(c),
 		customRoles:          NewCustomRolesClient(c),
@@ -530,6 +538,16 @@ func NewArchiveLogsClient(c CallPropertiesCreator) *targets.TargetServiceAPIServ
 		cfg.AddDefaultHeader(k, v)
 	}
 	return targets.NewAPIClient(cfg).TargetServiceAPI
+}
+
+// NewArchiveRetentionsClient builds a new RetentionsServiceAPIService from CallPropertiesCreator.
+func NewArchiveRetentionsClient(c CallPropertiesCreator) *archiveretention.RetentionsServiceAPIService {
+	cfg := archiveretention.NewConfiguration()
+	cfg.Servers = archiveretention.ServerConfigurations{{URL: c.URL()}}
+	for k, v := range c.Headers() {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return archiveretention.NewAPIClient(cfg).RetentionsServiceAPI
 }
 
 // RegionFromEnv reads the Coralogix region from the environment variable.
