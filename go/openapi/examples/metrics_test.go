@@ -26,7 +26,6 @@ import (
 )
 
 func TestArchiveMetrics(t *testing.T) {
-	t.Skip("Not available in OpenAPI yet")
 	metricsBucket := os.Getenv("METRICS_BUCKET")
 	awsRegion := os.Getenv("AWS_REGION")
 	if metricsBucket == "" || awsRegion == "" {

@@ -69,6 +69,7 @@ type ClientSet struct {
 	alerts               *alerts.AlertDefinitionsServiceAPIService
 	alertScheduler       *alertscheduler.AlertSchedulerRuleServiceAPIService
 	apiKeys              *apikeys.APIKeysServiceAPIService
+	archiveLogs          *targets.TargetServiceAPIService
 	archiveMetrics       *archivemetrics.MetricsDataArchiveServiceAPIService
 	connectors           *connectors.ConnectorsServiceAPIService
 	ipAccess             *ipaccess.IPAccessServiceAPIService
@@ -91,7 +92,6 @@ type ClientSet struct {
 	webhooks             *webhooks.OutgoingWebhooksServiceAPIService
 	views                *views.ViewsServiceAPIService
 	viewsFolders         *viewsfolders.FoldersForViewsServiceAPIService
-	archiveLogsTarget    *targets.TargetServiceAPIService
 }
 
 // Actions returns the ActionsServiceAPIService client.
@@ -107,6 +107,11 @@ func (c *ClientSet) Alerts() *alerts.AlertDefinitionsServiceAPIService {
 // AlertScheduler returns the AlertSchedulerRuleServiceAPIService client.
 func (c *ClientSet) AlertScheduler() *alertscheduler.AlertSchedulerRuleServiceAPIService {
 	return c.alertScheduler
+}
+
+// ArchiveLogs returns the TargetServiceAPIService client.
+func (c *ClientSet) ArchiveLogs() *targets.TargetServiceAPIService {
+	return c.archiveLogs
 }
 
 // ArchiveMetrics returns the MetricsDataArchiveServiceAPIService client.
@@ -224,11 +229,6 @@ func (c *ClientSet) ViewsFolders() *viewsfolders.FoldersForViewsServiceAPIServic
 	return c.viewsFolders
 }
 
-// ArchiveLogsTarget returns the TargetServiceAPIService client.
-func (c *ClientSet) ArchiveLogsTarget() *targets.TargetServiceAPIService {
-	return c.archiveLogsTarget
-}
-
 // NewClientSet builds a ClientSet from CallPropertiesCreator.
 func NewClientSet(c CallPropertiesCreator) *ClientSet {
 	return &ClientSet{
@@ -237,6 +237,7 @@ func NewClientSet(c CallPropertiesCreator) *ClientSet {
 		alertScheduler:       NewAlertSchedulerClient(c),
 		apiKeys:              NewAPIKeysClient(c),
 		archiveMetrics:       NewArchiveMetricsClient(c),
+		archiveLogs:          NewArchiveLogsClient(c),
 		ipAccess:             NewIPAccessClient(c),
 		connectors:           NewConnectorsClient(c),
 		customRoles:          NewCustomRolesClient(c),
@@ -258,7 +259,6 @@ func NewClientSet(c CallPropertiesCreator) *ClientSet {
 		webhooks:             NewWebhooksClient(c),
 		views:                NewViewsClient(c),
 		viewsFolders:         NewViewsFoldersClient(c),
-		archiveLogsTarget:    NewArchiveLogsTargetClient(c),
 	}
 }
 
@@ -522,8 +522,8 @@ func NewViewsFoldersClient(c CallPropertiesCreator) *viewsfolders.FoldersForView
 	return viewsfolders.NewAPIClient(cfg).FoldersForViewsServiceAPI
 }
 
-// NewArchiveLogsTargetClient builds a new TargetServiceAPIService from CallPropertiesCreator.
-func NewArchiveLogsTargetClient(c CallPropertiesCreator) *targets.TargetServiceAPIService {
+// NewArchiveLogsClient builds a new TargetServiceAPIService from CallPropertiesCreator.
+func NewArchiveLogsClient(c CallPropertiesCreator) *targets.TargetServiceAPIService {
 	cfg := targets.NewConfiguration()
 	cfg.Servers = targets.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {

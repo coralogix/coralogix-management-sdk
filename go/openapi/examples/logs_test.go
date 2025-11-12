@@ -35,7 +35,7 @@ func TestArchiveLogs(t *testing.T) {
 		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
 		cxsdk.APIKeyFromEnv(),
 	)
-	client := cxsdk.NewArchiveLogsTargetClient(cpc)
+	client := cxsdk.NewArchiveLogsClient(cpc)
 
 	setTargetReq := targets.SetTargetResponse{
 		S3: &targets.S3TargetSpec{
