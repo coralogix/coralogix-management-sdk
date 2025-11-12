@@ -29,7 +29,6 @@ import (
 )
 
 func TestDashboards(t *testing.T) {
-	t.Skip("Skipping because it's failing due to data matches more than one schema")
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
 		cxsdk.APIKeyFromEnv(),
@@ -42,12 +41,17 @@ func TestDashboards(t *testing.T) {
 		t.Fatalf("failed to read dashboard.json: %v", err)
 	}
 
-	var dashboard dashboards.Dashboard
+	// We use specific dashboard type here because the client can't determine
+	// the type automatically when unmarshaling from JSON.
+	// Exact error: data matches more than one schema in oneOf(Dashboard).
+	var dashboard dashboards.DashboardOffFolderIdRelativeTimeFrame
 	err = json.Unmarshal(data, &dashboard)
 	require.NoError(t, err)
 
 	req := dashboards.CreateDashboardRequestDataStructure{
-		Dashboard: dashboard,
+		Dashboard: dashboards.Dashboard{
+			DashboardOffFolderIdRelativeTimeFrame: &dashboard,
+		},
 	}
 	created, httpResp, err := client.
 		DashboardsServiceCreateDashboard(context.Background()).
