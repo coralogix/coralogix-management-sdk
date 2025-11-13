@@ -43,9 +43,6 @@ message AlertDefPriorityFilter {
     json_schema: {
       title: "AlertDef Priority Filter"
       description: "Filter by alert definition priorities"
-      required: [
-        "matcher"
-      ]
     }
   };
   repeated AlertDefPriority priority = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The priority(ies) of the alert definition - multiple values are OR'd together"}];
@@ -91,9 +88,6 @@ message AlertDefTypeFilter {
     json_schema: {
       title: "AlertDef Type Filter"
       description: "Filter by alert definition types"
-      required: [
-        "matcher"
-      ]
     }
   };
   repeated AlertDefType type = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The alert type(s) - multiple values are OR'd together"}];

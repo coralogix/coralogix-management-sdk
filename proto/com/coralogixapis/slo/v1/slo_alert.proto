@@ -1,8 +1,8 @@
 syntax = "proto3";
 package com.coralogixapis.slo.v1;
-import "google/protobuf/wrappers.proto";
-import "google/protobuf/duration.proto";
 
+import "google/protobuf/duration.proto";
+import "google/protobuf/wrappers.proto";
 
 enum SloMetricThresholdConditionType {
   METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED = 0;
@@ -46,7 +46,6 @@ message ErrorBudgetMetricType {
   SloMetricFilter metric_filter = 1;
 }
 
-
 message BurnRateAlertTypeDual {
   google.protobuf.Duration long_window = 1;
   google.protobuf.Duration short_window = 2;
@@ -62,7 +61,7 @@ message BurnRateAlertDefinition {
   oneof burn_rate {
     BurnRateAlertTypeDual dual = 2;
     BurnRateAlertTypeSingle single = 3;
-  };
+  }
 }
 
 message SloDefinition {
@@ -76,7 +75,7 @@ message MoreThanConditionOperator {}
 message MoreThanOrEqualsConditionOperator {}
 
 message LessThanConditionOperator {
-    UndetectedValuesManagement undetected_values_management = 1;
+  UndetectedValuesManagement undetected_values_management = 1;
 }
 
 message LessThanOrEqualsConditionOperator {
