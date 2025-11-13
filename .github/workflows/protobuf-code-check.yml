@@ -18,7 +18,7 @@ on:
 env:
   CARGO_TERM_COLOR: always
   RUST_BACKTRACE: full
-  PROTOC_VERSION: "32.1"
+  PROTOC_VERSION: "33.x"
 
 jobs:
     protobuf_lint_and_build:

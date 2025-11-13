@@ -1,7 +1,7 @@
 name: "[Protofetch] Update Releases to Latest"
 
 env:
-  PROTOC_VERSION: "32.1"
+  PROTOC_VERSION: "33.x"
 
 
 on:
