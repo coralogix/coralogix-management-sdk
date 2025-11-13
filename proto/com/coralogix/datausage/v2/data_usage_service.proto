@@ -3,11 +3,11 @@ syntax = "proto3";
 package com.coralogix.datausage.v2;
 
 import "com/coralogix/datausage/v2/data_usage.proto";
+import "google/api/annotations.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
-import "google/api/annotations.proto";
 
 service DataUsageService {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
@@ -39,9 +39,7 @@ service DataUsageService {
     };
     option (google.api.http) = {
       get: "/dataplans/data-usage/v2/spans:count"
-      additional_bindings: {
-        get: "/v2/datausage/spanscount"
-      }
+      additional_bindings: {get: "/v2/datausage/spanscount"}
     };
   }
   rpc GetLogsCount(GetLogsCountRequest) returns (stream GetLogsCountResponse) {
@@ -63,9 +61,7 @@ service DataUsageService {
     };
     option (google.api.http) = {
       get: "/dataplans/data-usage/v2/logs:count"
-      additional_bindings: {
-        get: "/v2/datausage/logscount"
-      }
+      additional_bindings: {get: "/v2/datausage/logscount"}
     };
   }
   rpc GetDataUsageMetricsExportStatus(GetDataUsageMetricsExportStatusRequest) returns (GetDataUsageMetricsExportStatusResponse) {
@@ -87,9 +83,7 @@ service DataUsageService {
     };
     option (google.api.http) = {
       get: "/dataplans/data-usage/v2/export-status"
-      additional_bindings: {
-        get: "/v2/datausage/exportstatus"
-      }
+      additional_bindings: {get: "/v2/datausage/exportstatus"}
     };
   }
   rpc UpdateDataUsageMetricsExportStatus(UpdateDataUsageMetricsExportStatusRequest) returns (UpdateDataUsageMetricsExportStatusResponse) {
@@ -112,9 +106,7 @@ service DataUsageService {
     option (google.api.http) = {
       post: "/dataplans/data-usage/v2/export-status"
       body: "*"
-      additional_bindings: {
-        post: "/v2/datausage/exportstatus"
-      }
+      additional_bindings: {post: "/v2/datausage/exportstatus"}
     };
   }
   rpc GetDataUsage(GetDataUsageRequest) returns (stream GetDataUsageResponse) {
@@ -137,9 +129,7 @@ service DataUsageService {
 
     option (google.api.http) = {
       get: "/dataplans/data-usage/v2"
-      additional_bindings: {
-        get: "/v2/datausage"
-      }
+      additional_bindings: {get: "/v2/datausage"}
     };
   }
 
@@ -164,9 +154,7 @@ service DataUsageService {
     option (google.api.http) = {
       post: "/dataplans/data-usage/v2/daily:units"
       body: "*"
-      additional_bindings: {
-        post: "/v2/datausage/daily/units"
-      }
+      additional_bindings: {post: "/v2/datausage/daily/units"}
     };
   }
 
@@ -191,9 +179,7 @@ service DataUsageService {
     option (google.api.http) = {
       post: "/dataplans/data-usage/v2/daily:processed-gbs"
       body: "*"
-      additional_bindings: {
-        post: "/v2/datausage/daily/processed_gbs"
-      }
+      additional_bindings: {post: "/v2/datausage/daily/processed_gbs"}
     };
   }
 
@@ -218,9 +204,7 @@ service DataUsageService {
     option (google.api.http) = {
       post: "/dataplans/data-usage/v2/daily:evaluation-tokens"
       body: "*"
-      additional_bindings: {
-        post: "/v2/datausage/daily/evaluation_tokens"
-      }
+      additional_bindings: {post: "/v2/datausage/daily/evaluation_tokens"}
     };
   }
 }
@@ -271,9 +255,9 @@ message GetTeamDetailedDataUsageResponse {
       required: []
     }
   };
-  google.protobuf.Timestamp timestamp = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"2021-01-01T00:00:00Z\"" }];
-  google.protobuf.FloatValue size_gb = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "2.50" }];
-  google.protobuf.FloatValue units = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "5.00" }];
+  google.protobuf.Timestamp timestamp = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"2021-01-01T00:00:00Z\""}];
+  google.protobuf.FloatValue size_gb = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "2.50"}];
+  google.protobuf.FloatValue units = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "5.00"}];
   repeated Dimension dimensions = 4;
 }
 
@@ -312,8 +296,8 @@ message ScopesFilter {
       description: "Find out more about data usage."
     }
   };
-  repeated string application = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"application1\"" }];
-  repeated string subsystem = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"subsystem1\"" }];
+  repeated string application = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"application1\""}];
+  repeated string subsystem = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"subsystem1\""}];
 }
 
 message SpansCount {
@@ -328,15 +312,14 @@ message SpansCount {
       description: "Find out more about data usage."
     }
   };
-  google.protobuf.Timestamp timestamp = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"2021-01-01T00:00:00Z\"" }];
-  google.protobuf.Int64Value success_span_count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "100" }];
-  google.protobuf.Int64Value error_span_count = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "10" }];
-  google.protobuf.Int64Value low_success_span_count = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "50" }];
-  google.protobuf.Int64Value low_error_span_count = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "5" }];
-  google.protobuf.Int64Value medium_success_span_count = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "200" }];
-  google.protobuf.Int64Value medium_error_span_count = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "20" }];
+  google.protobuf.Timestamp timestamp = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"2021-01-01T00:00:00Z\""}];
+  google.protobuf.Int64Value success_span_count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "100"}];
+  google.protobuf.Int64Value error_span_count = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "10"}];
+  google.protobuf.Int64Value low_success_span_count = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "50"}];
+  google.protobuf.Int64Value low_error_span_count = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "5"}];
+  google.protobuf.Int64Value medium_success_span_count = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "200"}];
+  google.protobuf.Int64Value medium_error_span_count = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "20"}];
 }
-
 
 message GetSpansCountResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
@@ -391,7 +374,7 @@ message LogsCount {
     }
   };
   google.protobuf.Timestamp timestamp = 1;
-  uint64 logs_count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "100" }];
+  uint64 logs_count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "100"}];
   Severity severity = 3;
   Priority priority = 4;
   optional string subsystem_name = 5;
@@ -428,7 +411,7 @@ message GetDataUsageMetricsExportStatusResponse {
     }
   };
   reserved 2;
-  bool enabled = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
+  bool enabled = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "true"}];
 }
 
 message UpdateDataUsageMetricsExportStatusRequest {
@@ -444,7 +427,7 @@ message UpdateDataUsageMetricsExportStatusRequest {
     }
   };
   reserved 1;
-  bool enabled = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
+  bool enabled = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "true"}];
 }
 
 message UpdateDataUsageMetricsExportStatusResponse {
@@ -459,7 +442,7 @@ message UpdateDataUsageMetricsExportStatusResponse {
       description: "Find out more about data usage."
     }
   };
-  bool enabled = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
+  bool enabled = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "true"}];
 }
 
 message GetDataUsageRequest {
@@ -495,7 +478,6 @@ message GetDataUsageRequest {
   repeated Dimension dimension_filters = 4;
 }
 
-
 message DataUsageEntry {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
@@ -529,7 +511,6 @@ message GetDataUsageResponse {
   repeated DataUsageEntry entries = 1;
 }
 
-
 message GetDailyUsageUnitsRequest {
   oneof request_time {
     Range range = 1;
@@ -541,7 +522,6 @@ message GetDailyUsageUnitsResponse {
   repeated DetailedDailyUnits units = 1;
 }
 
-
 message GetDailyUsageProcessedGbsRequest {
   oneof request_time {
     Range range = 1;
@@ -552,7 +532,6 @@ message GetDailyUsageProcessedGbsRequest {
 message GetDailyUsageProcessedGbsResponse {
   repeated DetailedDailyProcessedGbs gbs = 1;
 }
-
 
 message GetDailyUsageEvaluationTokensRequest {
   oneof request_time {

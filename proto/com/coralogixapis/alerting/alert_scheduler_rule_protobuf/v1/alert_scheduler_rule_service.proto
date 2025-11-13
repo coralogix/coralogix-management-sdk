@@ -7,9 +7,6 @@ import "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_schedu
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
 
-
-
-
 service AlertSchedulerRuleService {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Alert Scheduler Rule service"
@@ -17,9 +14,7 @@ service AlertSchedulerRuleService {
   };
 
   rpc GetAlertSchedulerRule(GetAlertSchedulerRuleRequest) returns (GetAlertSchedulerRuleResponse) {
-    option (google.api.http) = {
-      get: "/v1/alert-scheduler-rules/{alert_scheduler_rule_id}"
-    };
+    option (google.api.http) = {get: "/v1/alert-scheduler-rules/{alert_scheduler_rule_id}"};
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
@@ -84,9 +79,7 @@ service AlertSchedulerRuleService {
     };
   }
   rpc DeleteAlertSchedulerRule(DeleteAlertSchedulerRuleRequest) returns (DeleteAlertSchedulerRuleResponse) {
-    option (google.api.http) = {
-      delete: "/v1/alert-scheduler-rules/{alert_scheduler_rule_id}"
-    };
+    option (google.api.http) = {delete: "/v1/alert-scheduler-rules/{alert_scheduler_rule_id}"};
 
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -107,9 +100,7 @@ service AlertSchedulerRuleService {
   }
 
   rpc GetBulkAlertSchedulerRule(GetBulkAlertSchedulerRuleRequest) returns (GetBulkAlertSchedulerRuleResponse) {
-    option (google.api.http) = {
-      get: "/v1/alert-scheduler-rules/bulk"
-    };
+    option (google.api.http) = {get: "/v1/alert-scheduler-rules/bulk"};
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
@@ -173,5 +164,4 @@ service AlertSchedulerRuleService {
       summary: "Update multiple alert scheduler rules"
     };
   }
-
 }

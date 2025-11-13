@@ -1,0 +1,355 @@
+syntax = "proto3";
+
+package com.coralogixapis.cases.v1;
+
+import "com/coralogixapis/cases/v1/team_config.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
+
+service TeamConfigService {
+  rpc CreateTeamConfig(CreateTeamConfigRequest) returns (CreateTeamConfigResponse) {
+    option (google.api.http) = {
+      post: "/cases/cases/team-configs/v1/configs"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Team Config service"]
+      summary: "Create a team configuration"
+      description: "Create a new team configuration with an optional display name and settings."
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "403"
+        value: {description: "Forbidden"}
+      }
+      responses: {
+        key: "409"
+        value: {description: "Conflict"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case-config:Update"}
+          }
+        }
+      }
+    };
+  }
+
+  rpc GetTeamConfig(GetTeamConfigRequest) returns (GetTeamConfigResponse) {
+    option (google.api.http) = {get: "/cases/cases/team-configs/v1/configs/{id}"};
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Team Config service"]
+      summary: "Get a team configuration"
+      description: "Retrieve a single team configuration by its identifier."
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "403"
+        value: {description: "Forbidden"}
+      }
+      responses: {
+        key: "404"
+        value: {description: "Team config not found"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case-config:Read"}
+          }
+        }
+      }
+    };
+  }
+
+  rpc UpdateTeamConfig(UpdateTeamConfigRequest) returns (UpdateTeamConfigResponse) {
+    option (google.api.http) = {
+      patch: "/cases/cases/team-configs/v1/configs/{id}"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Team Config service"]
+      summary: "Update a team configuration"
+      description: "Update the display name and/or settings of an existing team configuration."
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "403"
+        value: {description: "Forbidden"}
+      }
+      responses: {
+        key: "404"
+        value: {description: "Team config not found"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case-config:Update"}
+          }
+        }
+      }
+    };
+  }
+
+  rpc DeleteTeamConfig(DeleteTeamConfigRequest) returns (DeleteTeamConfigResponse) {
+    option (google.api.http) = {delete: "/cases/cases/team-configs/v1/configs/{id}"};
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Team Config service"]
+      summary: "Delete a team configuration"
+      description: "Delete a team configuration by its identifier."
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "403"
+        value: {description: "Forbidden"}
+      }
+      responses: {
+        key: "404"
+        value: {description: "Team config not found"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case-config:Update"}
+          }
+        }
+      }
+    };
+  }
+
+  rpc GetActiveTeamConfig(GetActiveTeamConfigRequest) returns (GetActiveTeamConfigResponse) {
+    option (google.api.http) = {get: "/cases/cases/team-configs/v1/configs/active"};
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Team Config service"]
+      summary: "Get the active team configuration"
+      description: "Retrieve the currently active team configuration (after any org- or user-level precedence resolution)."
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "403"
+        value: {description: "Forbidden"}
+      }
+      responses: {
+        key: "404"
+        value: {description: "Active team config not found"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case-config:Read"}
+          }
+        }
+      }
+    };
+  }
+
+  rpc GetSystemDefaults(GetSystemDefaultsRequest) returns (GetSystemDefaultsResponse) {
+    option (google.api.http) = {get: "/cases/cases/team-configs/v1/configs/system-defaults"};
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Team Config service"]
+      summary: "Get system default team configuration settings"
+      description: "Retrieve the platform-wide default settings for team configurations."
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "403"
+        value: {description: "Forbidden"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case-config:Read"}
+          }
+        }
+      }
+    };
+  }
+}
+
+message CreateTeamConfigRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Create team config request"
+      required: ["settings"]
+    }
+  };
+  optional string name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Optional display name for the team configuration"
+    example: "\"Primary Team Config\""
+  }];
+  TeamConfigSettings settings = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Configuration settings"}];
+}
+
+message CreateTeamConfigResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Create team config response"
+      required: ["team_config"]
+    }
+  };
+  TeamConfig team_config = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The created team configuration"}];
+}
+
+message GetTeamConfigRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Get team config request"
+      required: ["id"]
+    }
+  };
+  string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "ID of the team configuration"
+    example: "\"8c0c02a3-3c1c-4d56-9a2d-9f6ab6a4b321\""
+  }];
+}
+
+message GetTeamConfigResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Get team config response"
+      required: ["team_config"]
+    }
+  };
+  TeamConfig team_config = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The requested team configuration"}];
+}
+
+message UpdateTeamConfigRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Update team config request"
+      required: ["id"]
+    }
+  };
+  string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "ID of the team configuration to update"
+    example: "\"8c0c02a3-3c1c-4d56-9a2d-9f6ab6a4b321\""
+  }];
+  optional string name = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "New display name for the team configuration"
+    example: "\"SRE Team Config\""
+  }];
+  optional TeamConfigSettings settings = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "New configuration settings to apply"}];
+}
+
+message UpdateTeamConfigResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Update team config response"
+      required: ["team_config"]
+    }
+  };
+  TeamConfig team_config = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The updated team configuration"}];
+}
+
+message DeleteTeamConfigRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Delete team config request"
+      required: ["id"]
+    }
+  };
+  string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "ID of the team configuration to delete"
+    example: "\"8c0c02a3-3c1c-4d56-9a2d-9f6ab6a4b321\""
+  }];
+}
+
+message DeleteTeamConfigResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Delete team config response"
+      description: "Empty response; success indicated by HTTP status"
+    }
+  };
+  // Empty response
+}
+
+message GetActiveTeamConfigRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {title: "Get active team config request"}
+  };
+}
+
+message GetActiveTeamConfigResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Get active team config response"
+      required: ["team_config"]
+    }
+  };
+  TeamConfig team_config = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The active team configuration"}];
+}
+
+message GetSystemDefaultsRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {title: "Get system defaults request"}
+  };
+}
+
+message GetSystemDefaultsResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Get system defaults response"
+      required: ["settings"]
+    }
+  };
+  TeamConfigSettings settings = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "System-wide default settings for team configurations"}];
+}

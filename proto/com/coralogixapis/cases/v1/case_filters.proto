@@ -1,0 +1,111 @@
+syntax = "proto3";
+
+package com.coralogixapis.cases.v1;
+
+import "com/coralogixapis/cases/v1/case.proto";
+import "google/protobuf/timestamp.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
+
+message CaseFilters {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Case filters"
+      description: "Filters applied when querying cases, including states, priorities, categories, groupings, and labels."
+    }
+  };
+
+  repeated CaseState states = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "List of case states to filter on"
+    example: "[\"CASE_STATE_ACTIVE\", \"CASE_STATE_RESOLVED\"]"
+  }];
+
+  repeated CasePriority priorities = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "List of case priorities to filter on"
+    example: "[\"CASE_PRIORITY_P1\", \"CASE_PRIORITY_P2\"]"
+  }];
+
+  repeated CaseCategory categories = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "List of case categories to filter on"
+    example: "[\"CASE_CATEGORY_SECURITY\", \"CASE_CATEGORY_AVAILABILITY\"]"
+  }];
+
+  repeated FilterGroup groupings = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Grouping-based filters (e.g., service, subsystem)"
+    example: "[{\\\"key\\\": \\\"service\\\", \\\"values\\\": [\\\"payments\\\", \\\"auth\\\"]}]"
+  }];
+
+  repeated FilterGroup labels = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Label-based filters applied to cases"
+    example: "[{\\\"key\\\": \\\"team\\\", \\\"values\\\": [\\\"backend\\\"]}]"
+  }];
+
+  optional string text_search = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Test search query applied to case titles"
+    example: "\"Vulnerability\""
+  }];
+  optional DateRangeFilter date_range = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Date range filter applied to case active time"
+    example: "{\\\"from\\\": \\\"2025-09-01T00:00:00Z\\\", \\\"to\\\": \\\"2025-09-22T23:59:59Z\\\"}"
+  }];
+  repeated CaseStatus statuses = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "List of case statuses to filter on"
+    example: "[\"ACKNOWLEDGED\"]"
+  }];
+  repeated AssigneeOption assignees = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "List of case assignees to filter on"
+    example: "[\"UNASSIGNED\"]"
+  }];
+}
+
+message FilterGroup {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Filter group"
+      description: "A filter group containing a key and its possible values."
+      required: [
+        "key",
+        "values"
+      ]
+    }
+  };
+
+  string key = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Key of the filter group (e.g., service, environment)"
+    example: "\"service\""
+  }];
+
+  repeated string values = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Values associated with the filter group key"
+    example: "\"payments\""
+  }];
+}
+
+message DateRangeFilter {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Date Range Filter"
+      description: "A filter defining a date range with 'from' and 'to' timestamps."
+      required: [
+        "from",
+        "to"
+      ]
+    }
+  };
+  google.protobuf.Timestamp from = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Timestamp marking the start of the date range"
+    example: "\"2025-09-22T10:30:00Z\""
+  }];
+  google.protobuf.Timestamp to = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Timestamp marking the end of the date range"
+    example: "\"2025-09-22T10:30:00Z\""
+  }];
+}
+
+message AssigneeOption {
+  message Unassigned {}
+
+  oneof value {
+    string assignee = 1;
+    Unassigned unassigned = 2;
+  }
+}

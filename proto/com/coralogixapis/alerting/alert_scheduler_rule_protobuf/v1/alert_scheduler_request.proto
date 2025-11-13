@@ -1,7 +1,8 @@
 syntax = "proto3";
 package com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1;
-import "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule.proto";
+
 import "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/active_timeframe.proto";
+import "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
 
 message GetAlertSchedulerRuleRequest {
@@ -9,9 +10,7 @@ message GetAlertSchedulerRuleRequest {
     json_schema: {
       title: "Get alert scheduler rule request data structure"
       description: "This is a request sent to get an alert scheduler rule"
-      required: [
-        "alert_scheduler_rule_id"
-      ]
+      required: ["alert_scheduler_rule_id"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/"
@@ -26,9 +25,7 @@ message CreateAlertSchedulerRuleRequest {
     json_schema: {
       title: "Create alert scheduler rule request data structure"
       description: "This is a request sent to create an alert scheduler rule"
-      required: [
-        "alert_scheduler_rule"
-      ]
+      required: ["alert_scheduler_rule"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/"
@@ -43,9 +40,7 @@ message UpdateAlertSchedulerRuleRequest {
     json_schema: {
       title: "Update alert scheduler rule request data structure"
       description: "This is a request sent to update an alert scheduler rule"
-      required: [
-        "alert_scheduler_rule"
-      ]
+      required: ["alert_scheduler_rule"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/"
@@ -60,9 +55,7 @@ message DeleteAlertSchedulerRuleRequest {
     json_schema: {
       title: "Update alert scheduler rule request data structure"
       description: "This is a request sent to update an alert scheduler rule"
-      required: [
-        "alert_scheduler_rule"
-      ]
+      required: ["alert_scheduler_rule"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/"
@@ -109,9 +102,7 @@ message CreateBulkAlertSchedulerRuleRequest {
     json_schema: {
       title: "Create bulk alert scheduler rule request data structure"
       description: "This is a request sent to create multiple alert scheduler rules"
-      required: [
-        "create_alert_scheduler_rule_requests"
-      ]
+      required: ["create_alert_scheduler_rule_requests"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/"
@@ -126,9 +117,7 @@ message UpdateBulkAlertSchedulerRuleRequest {
     json_schema: {
       title: "Update bulk alert scheduler rule request data structure"
       description: "This is a request sent to update multiple alert scheduler rules"
-      required: [
-        "update_alert_scheduler_rule_requests"
-      ]
+      required: ["update_alert_scheduler_rule_requests"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/"
@@ -143,9 +132,7 @@ message DeleteBulkAlertSchedulerRuleRequest {
     json_schema: {
       title: "Delete bulk alert scheduler rule request data structure"
       description: "This is a request sent to delete multiple alert scheduler rules"
-      required: [
-        "delete_alert_scheduler_rule_requests"
-      ]
+      required: ["delete_alert_scheduler_rule_requests"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/"

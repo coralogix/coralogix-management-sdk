@@ -1,0 +1,772 @@
+syntax = "proto3";
+
+package com.coralogixapis.cases.v1;
+
+import "com/coralogixapis/cases/v1/case.proto";
+import "com/coralogixapis/cases/v1/case_filters.proto";
+import "com/coralogixapis/cases/v1/pagination.proto";
+import "com/coralogixapis/common/v1/audit_log.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
+
+service CasesService {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
+    name: "Cases service"
+    description: "Manage cases throughout their lifecycle. Create, view, assign, acknowledge, resolve, and close cases to streamline investigations and follow-ups."
+    external_docs: {
+      description: "Learn more about Cases in our documentation"
+      url: "https://coralogix.com/docs/user-guides/cases/"
+    }
+  };
+
+  rpc GetCase(GetCaseRequest) returns (GetCaseResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get case";
+    option (google.api.http) = {get: "/cases/cases/v1/{id}"};
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Cases service"]
+      summary: "Get case by ID"
+      description: "Retrieve detailed information about a single case by its unique identifier."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case:Read"}
+          }
+        }
+      }
+    };
+  }
+
+  rpc ListCases(ListCasesRequest) returns (ListCasesResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "List cases";
+    option (google.api.http) = {
+      post: "/cases/cases/v1"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Cases service"]
+      summary: "List cases with filters"
+      description: "List cases using filters, pagination and custom ordering."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case:Read"}
+          }
+        }
+      }
+    };
+  }
+
+  rpc UpdateCase(UpdateCaseRequest) returns (UpdateCaseResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Update case";
+    option (google.api.http) = {
+      patch: "/cases/cases/v1/{id}"
+      body: "patch"
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Cases service"]
+      summary: "Update case fields"
+      description: "Apply a partial update (patch) to a case."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case:Update"}
+          }
+        }
+      }
+    };
+  }
+
+  rpc SetPriorityOverride(SetPriorityOverrideRequest) returns (SetPriorityOverrideResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Set case priority override";
+    option (google.api.http) = {
+      post: "/cases/cases/v1/{id}:setPriorityOverride"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Cases service"]
+      summary: "Set priority override"
+      description: "Override a case's computed priority with a specific value."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case:Update"}
+          }
+        }
+      }
+    };
+  }
+
+  rpc UnsetPriorityOverride(UnsetPriorityOverrideRequest) returns (UnsetPriorityOverrideResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Unset case priority override";
+    option (google.api.http) = {post: "/cases/cases/v1/{id}:unsetPriorityOverride"};
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Cases service"]
+      summary: "Remove priority override"
+      description: "Remove a previously set priority override for a case."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case:Update"}
+          }
+        }
+      }
+    };
+  }
+
+  rpc AssignCase(AssignCaseRequest) returns (AssignCaseResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Assign case";
+    option (google.api.http) = {
+      post: "/cases/cases/v1/{id}:assign"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Cases service"]
+      summary: "Assign a case to a user"
+      description: "Assign a case to a specific user."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case:Assign"}
+          }
+        }
+      }
+    };
+  }
+
+  rpc UnassignCase(UnassignCaseRequest) returns (UnassignCaseResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Unassign case";
+    option (google.api.http) = {post: "/cases/cases/v1/{id}:unassign"};
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Cases service"]
+      summary: "Remove case assignment"
+      description: "Remove the current assignee from a case."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case:Assign"}
+          }
+        }
+      }
+    };
+  }
+
+  rpc AcknowledgeCase(AcknowledgeCaseRequest) returns (AcknowledgeCaseResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Acknowledge case";
+    option (google.api.http) = {
+      post: "/cases/cases/v1/{id}:acknowledge"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Cases service"]
+      summary: "Acknowledge a case"
+      description: "Mark the case as acknowledged by a user."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case:Acknowledge"}
+          }
+        }
+      }
+    };
+  }
+
+  rpc CloseCase(CloseCaseRequest) returns (CloseCaseResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Close case";
+    option (google.api.http) = {post: "/cases/cases/v1/{id}:close"};
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Cases service"]
+      summary: "Close a case"
+      description: "Close a case that no longer requires action."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case:Close"}
+          }
+        }
+      }
+    };
+  }
+
+  rpc ResolveCase(ResolveCaseRequest) returns (ResolveCaseResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Resolve case";
+    option (google.api.http) = {post: "/cases/cases/v1/{id}:resolve"};
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Cases service"]
+      summary: "Resolve a case"
+      description: "Mark a case as resolved."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case:Close"}
+          }
+        }
+      }
+    };
+  }
+
+  rpc GetFilterValues(GetFilterValuesRequest) returns (GetFilterValuesResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get case filter values";
+    option (google.api.http) = {
+      post: "/cases/cases/v1:get-filter-values"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Cases service"]
+      summary: "Get available filter values"
+      description: "Retrieve available filter and aggregation values for cases."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case:Read"}
+          }
+        }
+      }
+    };
+  }
+}
+
+message GetCaseRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Get case request"
+      required: ["id"]
+    }
+  };
+  string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    example: "\"3f166e9f-3c88-4af2-b52e-138f339dab3e\""
+    description: "Unique ID of the case"
+  }];
+}
+message GetCaseResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Get case response"
+      description: "Response containing the requested case"
+      required: ["case"]
+    }
+  };
+  Case case = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The requested case"}];
+}
+
+message ListCasesRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "List cases request"
+      description: "Request to list cases with filtering and pagination"
+    }
+  };
+  message CaseOrderBy {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+      json_schema: {
+        title: "Case ordering specification"
+        description: "Defines how cases should be sorted in the response. By default, cases are sorted by creation time and id in descending order. With this field, one can specify the primary sorting field and direction."
+      }
+    };
+    enum CaseOrderByDirection {
+      CASE_ORDER_BY_DIRECTION_UNSPECIFIED = 0;
+      CASE_ORDER_BY_DIRECTION_ASCENDING = 1;
+      CASE_ORDER_BY_DIRECTION_DESCENDING = 2;
+    }
+    enum CaseOrderByField {
+      CASE_ORDER_BY_FIELD_UNSPECIFIED = 0;
+      CASE_ORDER_BY_FIELD_PRIORITY = 1;
+      CASE_ORDER_BY_FIELD_STATUS = 2;
+      CASE_ORDER_BY_FIELD_STATE = 3;
+      CASE_ORDER_BY_FIELD_UPDATED_AT = 4;
+      CASE_ORDER_BY_FIELD_CATEGORY = 5;
+    }
+    CaseOrderByField field = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+      description: "Field by which primary sorting will be performed."
+      example: "\"CASE_ORDER_BY_FIELD_PRIORITY\""
+    }];
+    CaseOrderByDirection direction = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+      description: "Order of sorting by field."
+      example: "\"CASE_ORDER_BY_DIRECTION_DESCENDING\""
+    }];
+  }
+
+  CaseFilters filters = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filters to apply when listing cases"}];
+  PaginationRequest pagination = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Pagination parameters"}];
+  CaseOrderBy order_by = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Sorting parameters to control the order of returned cases. Supports single-field sorting only. Example: sort by priority in descending order to show highest priority cases first."
+    example: "{\"field\": \"CASE_ORDER_BY_FIELD_PRIORITY\", \"direction\": \"CASE_ORDER_BY_DIRECTION_DESCENDING\"}"
+  }];
+}
+message ListCasesResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "List cases response"
+      description: "Response containing a list of cases and pagination information"
+      required: [
+        "cases",
+        "pagination"
+      ]
+    }
+  };
+  repeated Case cases = 1;
+  PaginationResponse pagination = 2;
+}
+
+message UpdateCaseRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Update case request"
+      description: "Request to update (patch) a case"
+      required: [
+        "id",
+        "patch"
+      ]
+    }
+  };
+  message CasePatch {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+      json_schema: {
+        title: "Case patch"
+        description: "Partial set of fields to update on the case"
+      }
+    };
+    optional string title = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+      description: "New case title"
+      example: "\"Database connection investigation\""
+    }];
+    optional string description = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+      description: "New case description"
+      example: "\"Investigate intermittent connection drops\""
+    }];
+  }
+  string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "ID of the case to update"
+    example: "\"3f166e9f-3c88-4af2-b52e-138f339dab3e\""
+  }];
+  CasePatch patch = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Patch payload with fields to update"}];
+}
+message UpdateCaseResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Update case response"
+      description: "Response containing the updated case"
+      required: ["case"]
+    }
+  };
+  Case case = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Updated case"}];
+}
+
+message SetPriorityOverrideRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Set priority override request"
+      required: [
+        "id",
+        "priority"
+      ]
+    }
+  };
+  string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "ID of the case"
+    example: "\"3f166e9f-3c88-4af2-b52e-138f339dab3e\""
+  }];
+  CasePriority priority = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Priority value to override with"
+    example: "\"CASE_PRIORITY_HIGH\""
+  }];
+}
+message SetPriorityOverrideResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Set priority override response"
+      required: ["case"]
+    }
+  };
+  Case case = 1;
+}
+
+message UnsetPriorityOverrideRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Unset priority override request"
+      required: ["id"]
+    }
+  };
+  string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "ID of the case"
+    example: "\"3f166e9f-3c88-4af2-b52e-138f339dab3e\""
+  }];
+}
+message UnsetPriorityOverrideResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Unset priority override response"
+      required: ["case"]
+    }
+  };
+  Case case = 1;
+}
+
+message AssignCaseRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Assign case request"
+      required: [
+        "id",
+        "assignee"
+      ]
+    }
+  };
+  string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "ID of the case to assign"
+    example: "\"3f166e9f-3c88-4af2-b52e-138f339dab3e\""
+  }];
+  UserDetails assignee = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "User to assign the case to"
+    example: "{\"user_id\": \"user_123\"}"
+  }];
+}
+message AssignCaseResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Assign case response"
+      required: ["case"]
+    }
+  };
+  Case case = 1;
+}
+
+message UnassignCaseRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Unassign case request"
+      required: ["id"]
+    }
+  };
+  string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "ID of the case to unassign"
+    example: "\"3f166e9f-3c88-4af2-b52e-138f339dab3e\""
+  }];
+}
+message UnassignCaseResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Unassign case response"
+      required: ["case"]
+    }
+  };
+  Case case = 1;
+}
+
+message AcknowledgeCaseRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Acknowledge case request"
+      required: [
+        "id",
+        "actor"
+      ]
+    }
+  };
+  string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "ID of the case to acknowledge"
+    example: "\"3f166e9f-3c88-4af2-b52e-138f339dab3e\""
+  }];
+  UserDetails actor = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "User performing the acknowledgment"
+    example: "{\"user_id\": \"e07db42e-eb1c-4c14-ab68-e4d245ae63a5\"}"
+  }];
+}
+message AcknowledgeCaseResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Acknowledge case response"
+      required: ["case"]
+    }
+  };
+  Case case = 1;
+}
+
+message CloseCaseRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Close case request"
+      required: ["id"]
+    }
+  };
+  string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "ID of the case to close"
+    example: "\"3f166e9f-3c88-4af2-b52e-138f339dab3e\""
+  }];
+  optional string reason = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Reason to resolve"
+    example: "\"This case is not applicable.\""
+  }];
+}
+
+message CloseCaseResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Close case response"
+      required: ["case"]
+    }
+  };
+  Case case = 1;
+}
+
+message ResolveCaseRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Resolve case request"
+      required: ["id"]
+    }
+  };
+  string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "ID of the case to resolve"
+    example: "\"3f166e9f-3c88-4af2-b52e-138f339dab3e\""
+  }];
+  optional string reason = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Reason to resolve"
+    example: "\"This case is not applicable.\""
+  }];
+}
+
+message ResolveCaseResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Resolve case response"
+      required: ["case"]
+    }
+  };
+  Case case = 1;
+}
+
+message GetFilterValuesRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {title: "Get case filter values request"}
+  };
+  CaseFilters filters = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filters to apply when computing available values"}];
+}
+
+message GetFilterValuesResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Get case filter values response"
+      description: "Aggregated counts for building filters in the UI"
+    }
+  };
+  message StateAggregation {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+      json_schema: {title: "State aggregation"}
+    };
+    CaseState state = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Case state"}];
+    uint32 count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+      description: "Number of cases in this state"
+      example: "42"
+    }];
+  }
+  message PriorityAggregation {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+      json_schema: {title: "Priority aggregation"}
+    };
+    CasePriority priority = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Case priority"}];
+    uint32 count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+      description: "Number of cases with this priority"
+      example: "17"
+    }];
+  }
+  message CategoryAggregation {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+      json_schema: {title: "Category aggregation"}
+    };
+    CaseCategory category = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Case category"}];
+    uint32 count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+      description: "Number of cases in this category"
+      example: "13"
+    }];
+  }
+  message FilterGroupAggregation {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+      json_schema: {title: "Filter group aggregation"}
+    };
+    message ValueCount {
+      option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+        json_schema: {title: "Filter value count"}
+      };
+      string value = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Filter value"
+        example: "\"service:payments\""
+      }];
+      uint32 count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Count of cases for this value"
+        example: "8"
+      }];
+    }
+    string key = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+      description: "Filter group key"
+      example: "\"service\""
+    }];
+    repeated ValueCount value_counts = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Aggregations per value"}];
+  }
+  message StatusAggregation {
+    CaseStatus status = 1;
+    uint32 count = 2;
+  }
+
+  message AssigneeAggregation {
+    message AssigneeCount {
+      string assignee = 1;
+      uint32 count = 2;
+    }
+
+    uint32 unassigned_count = 1;
+    repeated AssigneeCount assigned_counts = 2;
+  }
+
+  repeated StateAggregation state_aggregations = 1;
+  repeated PriorityAggregation priority_aggregations = 2;
+  repeated CategoryAggregation category_aggregations = 3;
+  repeated FilterGroupAggregation grouping_aggregations = 4;
+  repeated FilterGroupAggregation label_aggregations = 5;
+  repeated StatusAggregation status_aggregations = 6;
+  AssigneeAggregation assignee_aggregations = 7;
+}

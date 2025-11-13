@@ -2,268 +2,265 @@ syntax = "proto3";
 
 package com.coralogixapis.metrics_rule_manager.v1;
 
-
+import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
-import "google/api/annotations.proto";
-
-
 
 /**
- * A group of recording rules. Rules within a group are run sequentially at a regular interval, 
+ * A group of recording rules. Rules within a group are run sequentially at a regular interval,
  * with the same evaluation time.
  */
 message InRuleGroup {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-          title: "In Rule Group"
-          description: "A group of recording rules."
-          required: []
-        }
-        external_docs: {
-          url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
-          description: "Find out more about recording rules"
-        }
-    };
-    // Name of the group.
-    string name = 1; 
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "In Rule Group"
+      description: "A group of recording rules."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+      description: "Find out more about recording rules"
+    }
+  };
+  // Name of the group.
+  string name = 1;
 
-    // How often rules in the group are evaluated.
-    optional uint32 interval = 2; // optional, default = 60 secs
+  // How often rules in the group are evaluated.
+  optional uint32 interval = 2; // optional, default = 60 secs
 
-    // Limits the number of series a rule can produce.
-    optional uint64 limit = 3; // optional, 0 is no limit, default = 0
+  // Limits the number of series a rule can produce.
+  optional uint64 limit = 3; // optional, 0 is no limit, default = 0
 
-    // Rules of the group.
-    repeated InRule rules = 4; 
+  // Rules of the group.
+  repeated InRule rules = 4;
 
-    optional uint32 version = 5;
+  optional uint32 version = 5;
 
-    optional string id = 6;
+  optional string id = 6;
 }
 
 message InRule {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-          title: "In Rule"
-          description: "A rule within a group that defines a recording rule expression."
-          required: []
-        }
-        external_docs: {
-          url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
-          description: "Find out more about recording rules"
-        }
-    };
-    // The name of the time series to output to. Must be a valid metric name.
-    string record = 1;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "In Rule"
+      description: "A rule within a group that defines a recording rule expression."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+      description: "Find out more about recording rules"
+    }
+  };
+  // The name of the time series to output to. Must be a valid metric name.
+  string record = 1;
 
-    /**
-     * The PromQL expression to evaluate. Every evaluation cycle this is
-     * evaluated at the current time, and the result recorded as a new set of
-     * time series with the metric name as given by 'record'.
-     */
-    string expr = 2;
+  /**
+   * The PromQL expression to evaluate. Every evaluation cycle this is
+   * evaluated at the current time, and the result recorded as a new set of
+   * time series with the metric name as given by 'record'.
+   */
+  string expr = 2;
 
-    // Labels to add or overwrite before storing the result.
-    map<string, string> labels = 3;
+  // Labels to add or overwrite before storing the result.
+  map<string, string> labels = 3;
 }
 
 message OutRuleGroup {
-    string name = 1; 
-    optional uint32 interval = 2; 
-    optional uint64 limit = 3; 
-    repeated OutRule rules = 4; 
-    optional uint64 last_eval_at = 5;
-    uint32 version = 6;
-    string id = 7;
+  string name = 1;
+  optional uint32 interval = 2;
+  optional uint64 limit = 3;
+  repeated OutRule rules = 4;
+  optional uint64 last_eval_at = 5;
+  uint32 version = 6;
+  string id = 7;
 }
 
 message OutRule {
-    string record = 1;
-    string expr = 2;
-    map<string, string> labels = 3;
-    optional uint64 last_eval_duration_ms = 4;
+  string record = 1;
+  string expr = 2;
+  map<string, string> labels = 3;
+  optional uint64 last_eval_duration_ms = 4;
 }
 
 /** A matcher specifying a group to delete. */
 message DeleteRuleGroup {
-    // Name of the group.
-    string name = 1;
+  // Name of the group.
+  string name = 1;
 }
 
 /** A listing of rule groups. */
 message RuleGroupListing {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-          title: "Rule Group Listing"
-          description: "A listing of rule groups."
-          required: []
-        }
-        external_docs: {
-          url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
-          description: "Find out more about recording rules"
-        }
-    };
-    repeated OutRuleGroup rule_groups = 1;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Rule Group Listing"
+      description: "A listing of rule groups."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+      description: "Find out more about recording rules"
+    }
+  };
+  repeated OutRuleGroup rule_groups = 1;
 }
 
 /** A matcher specifying a group to fetch. */
 message FetchRuleGroup {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-          title: "Fetch Rule Group"
-          description: "A matcher specifying a group to fetch."
-          required: []
-        }
-        external_docs: {
-          url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
-          description: "Find out more about recording rules"
-        }
-    };
-    string name = 1;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Fetch Rule Group"
+      description: "A matcher specifying a group to fetch."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+      description: "Find out more about recording rules"
+    }
+  };
+  string name = 1;
 }
 
 /** Result of a rule group fetch operation. */
 message FetchRuleGroupResult {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-          title: "Fetch Rule Group Result"
-          description: "Result of a rule group fetch operation."
-          required: []
-        }
-        external_docs: {
-          url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
-          description: "Find out more about recording rules"
-        }
-    };
-    OutRuleGroup rule_group = 1; // optional, empty if not found
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Fetch Rule Group Result"
+      description: "Result of a rule group fetch operation."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+      description: "Find out more about recording rules"
+    }
+  };
+  OutRuleGroup rule_group = 1; // optional, empty if not found
 }
 
 /**
  * CRUD operations on recording rule groups.
  */
 service RuleGroups {
-    // Creates or updates a rule group.
-    rpc Save(InRuleGroup) returns (google.protobuf.Empty) {}
+  // Creates or updates a rule group.
+  rpc Save(InRuleGroup) returns (google.protobuf.Empty) {}
 
-    // Deletes a rule group matching the given input.
-    rpc Delete(DeleteRuleGroup) returns (google.protobuf.Empty) {}
+  // Deletes a rule group matching the given input.
+  rpc Delete(DeleteRuleGroup) returns (google.protobuf.Empty) {}
 
-    // Lists all the rule groups.
-    rpc List(google.protobuf.Empty) returns (RuleGroupListing) {}
-    
-    // Fetches a rule group matching a given input.
-    rpc Fetch(FetchRuleGroup) returns (FetchRuleGroupResult) {}
+  // Lists all the rule groups.
+  rpc List(google.protobuf.Empty) returns (RuleGroupListing) {}
+
+  // Fetches a rule group matching a given input.
+  rpc Fetch(FetchRuleGroup) returns (FetchRuleGroupResult) {}
 }
 
 message CreateRuleGroupSet {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-          title: "Create Rule Group Set"
-          description: "A set of rule groups to create."
-          required: []
-        }
-        external_docs: {
-          url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
-          description: "Find out more about recording rules"
-        }
-    };
-    repeated InRuleGroup groups = 1;
-    optional string name = 2;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Create Rule Group Set"
+      description: "A set of rule groups to create."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+      description: "Find out more about recording rules"
+    }
+  };
+  repeated InRuleGroup groups = 1;
+  optional string name = 2;
 }
 
 message CreateRuleGroupSetResult {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-          title: "Create Rule Group Set Result"
-          description: "Result of creating a rule group set."
-          required: []
-        }
-        external_docs: {
-          url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
-          description: "Find out more about recording rules"
-        }
-    };
-    string id = 1;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Create Rule Group Set Result"
+      description: "Result of creating a rule group set."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+      description: "Find out more about recording rules"
+    }
+  };
+  string id = 1;
 }
 
 message UpdateRuleGroupSet {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-          title: "Update Rule Group Set"
-          description: "A set of rule groups to update."
-          required: []
-        }
-        external_docs: {
-          url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
-          description: "Find out more about recording rules"
-        }
-    };
-    string id = 1;
-    repeated InRuleGroup groups = 2;
-    optional string name = 3;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Update Rule Group Set"
+      description: "A set of rule groups to update."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+      description: "Find out more about recording rules"
+    }
+  };
+  string id = 1;
+  repeated InRuleGroup groups = 2;
+  optional string name = 3;
 }
 
 message RuleGroupSetListing {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-          title: "Rule Group Set Listing"
-          description: "A listing of rule group sets."
-          required: []
-        }
-        external_docs: {
-          url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
-          description: "Find out more about recording rules"
-        }
-    };
-    repeated OutRuleGroupSet sets = 1;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Rule Group Set Listing"
+      description: "A listing of rule group sets."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+      description: "Find out more about recording rules"
+    }
+  };
+  repeated OutRuleGroupSet sets = 1;
 }
 
 message FetchRuleGroupSet {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-          title: "Fetch Rule Group Set"
-          description: "A matcher specifying a rule group set to fetch."
-          required: []
-        }
-        external_docs: {
-          url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
-          description: "Find out more about recording rules"
-        }
-    };
-    string id = 1;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Fetch Rule Group Set"
+      description: "A matcher specifying a rule group set to fetch."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+      description: "Find out more about recording rules"
+    }
+  };
+  string id = 1;
 }
 
 message DeleteRuleGroupSet {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-          title: "Delete Rule Group Set"
-          description: "A matcher specifying a rule group set to delete."
-          required: []
-        }
-        external_docs: {
-          url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
-          description: "Find out more about recording rules"
-        }
-    };
-    string id = 1;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Delete Rule Group Set"
+      description: "A matcher specifying a rule group set to delete."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+      description: "Find out more about recording rules"
+    }
+  };
+  string id = 1;
 }
 
 message OutRuleGroupSet {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-          title: "Out Rule Group Set"
-          description: "An output set of rule groups."
-          required: []
-        }
-        external_docs: {
-          url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
-          description: "Find out more about recording rules"
-        }
-    };
-    string id = 1;
-    repeated OutRuleGroup groups = 2;
-    string name = 3;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Out Rule Group Set"
+      description: "An output set of rule groups."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+      description: "Find out more about recording rules"
+    }
+  };
+  string id = 1;
+  repeated OutRuleGroup groups = 2;
+  string name = 3;
 }
 
 service RuleGroupSets {
@@ -271,111 +268,105 @@ service RuleGroupSets {
     name: "Recording Rules Service"
     description: "A service to manage recording rules."
   };
-    rpc Create(CreateRuleGroupSet) returns (CreateRuleGroupSetResult) {
-        option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
-          responses: {
-            key: "400"
-            value: {description: "Bad Request"}
-          }
-          responses: {
-            key: "401"
-            value: {description: "Unauthorized request"}
-          }
-          responses: {
-            key: "500"
-            value: {description: "Internal server error"}
-          }
-          tags: ["Recording Rules Service"]
-          summary: "Create Recording Rules"
-        };
-        option (google.api.http) = {
-            post: "/v1/rule-group-sets"
-            body: "*"
-        };
-    }
-    rpc Update(UpdateRuleGroupSet) returns (google.protobuf.Empty) {
-        option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
-          responses: {
-            key: "400"
-            value: {description: "Bad Request"}
-          }
-          responses: {
-            key: "401"
-            value: {description: "Unauthorized request"}
-          }
-          responses: {
-            key: "500"
-            value: {description: "Internal server error"}
-          }
-          tags: ["Recording Rules Service"]
-          summary: "Update Recording Rules"
-        };
-        option (google.api.http) = {
-            put: "/v1/rule-group-sets/{id}"
-            body: "*"
-        };
-    }
-    rpc List(google.protobuf.Empty) returns (RuleGroupSetListing) {
-        option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
-          responses: {
-            key: "400"
-            value: {description: "Bad Request"}
-          }
-          responses: {
-            key: "401"
-            value: {description: "Unauthorized request"}
-          }
-          responses: {
-            key: "500"
-            value: {description: "Internal server error"}
-          }
-          tags: ["Recording Rules Service"]
-          summary: "List Recording Rules"
-        };
-        option (google.api.http) = {
-            get: "/v1/rule-group-sets"
-        };
-    }
-    rpc Fetch(FetchRuleGroupSet) returns (OutRuleGroupSet) {
-        option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
-          responses: {
-            key: "400"
-            value: {description: "Bad Request"}
-          }
-          responses: {
-            key: "401"
-            value: {description: "Unauthorized request"}
-          }
-          responses: {
-            key: "500"
-            value: {description: "Internal server error"}
-          }
-          tags: ["Recording Rules Service"]
-          summary: "Get Recording Rules"
-        };
-        option (google.api.http) = {
-            get: "/v1/rule-group-sets/{id}"
-        };
-    }
-    rpc Delete(DeleteRuleGroupSet) returns (google.protobuf.Empty) {
-        option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
-          responses: {
-            key: "400"
-            value: {description: "Bad Request"}
-          }
-          responses: {
-            key: "401"
-            value: {description: "Unauthorized request"}
-          }
-          responses: {
-            key: "500"
-            value: {description: "Internal server error"}
-          }
-          tags: ["Recording Rules Service"]
-          summary: "Delete Recording Rules"
-        };
-        option (google.api.http) = {
-            delete: "/v1/rule-group-sets/{id}"
-        };
-    }
+  rpc Create(CreateRuleGroupSet) returns (CreateRuleGroupSetResult) {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Recording Rules Service"]
+      summary: "Create Recording Rules"
+    };
+    option (google.api.http) = {
+      post: "/v1/rule-group-sets"
+      body: "*"
+    };
+  }
+  rpc Update(UpdateRuleGroupSet) returns (google.protobuf.Empty) {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Recording Rules Service"]
+      summary: "Update Recording Rules"
+    };
+    option (google.api.http) = {
+      put: "/v1/rule-group-sets/{id}"
+      body: "*"
+    };
+  }
+  rpc List(google.protobuf.Empty) returns (RuleGroupSetListing) {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Recording Rules Service"]
+      summary: "List Recording Rules"
+    };
+    option (google.api.http) = {get: "/v1/rule-group-sets"};
+  }
+  rpc Fetch(FetchRuleGroupSet) returns (OutRuleGroupSet) {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Recording Rules Service"]
+      summary: "Get Recording Rules"
+    };
+    option (google.api.http) = {get: "/v1/rule-group-sets/{id}"};
+  }
+  rpc Delete(DeleteRuleGroupSet) returns (google.protobuf.Empty) {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Recording Rules Service"]
+      summary: "Delete Recording Rules"
+    };
+    option (google.api.http) = {delete: "/v1/rule-group-sets/{id}"};
+  }
 }

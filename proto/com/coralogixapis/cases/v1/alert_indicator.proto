@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+package com.coralogixapis.cases.v1;
+
+import "com/coralogixapis/cases/v1/key_value.proto";
+import "google/protobuf/timestamp.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
+
+message AlertIndicator {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Alert indicator"
+      description: "Metadata describing a triggered alert instance and its lifecycle relative to a case."
+      required: [
+        "alert_id",
+        "alert_version_id",
+        "priority",
+        "grouping_type",
+        "groupings",
+        "state",
+        "trigger_time"
+      ]
+    }
+  };
+
+  string alert_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The unique alert ID (stable across versions)."
+    example: "\"f56645c5-9cd4-4b9f-961f-4f852d8835a0\""
+  }];
+
+  string alert_version_id = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Specific version ID of the alert definition that triggered."
+    example: "\"1eae3615-79e7-4b54-88e0-6a77def653bf\""
+  }];
+
+  AlertPriority priority = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Priority of the alert at trigger time."
+    example: "\"ALERT_PRIORITY_P2\""
+  }];
+
+  AlertGroupingType grouping_type = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "How this indicator relates to other alerts (composite/combination/none)."
+    example: "\"GROUPING_TYPE_COMPOSITE_ALERT\""
+  }];
+
+  repeated KeyValue groupings = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Key/value grouping dimensions used by the alert (e.g., service, cluster)."
+    example: "{\\\"key\\\": \\\"service\\\", \\\"value\\\": \\\"payments\\\"}"
+  }];
+
+  AlertIndicatorState state = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Current lifecycle state of the indicator."
+    example: "\"ALERT_INDICATOR_STATE_TRIGGERED\""
+  }];
+
+  google.protobuf.Timestamp trigger_time = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Timestamp when the alert triggered."
+    example: "\"2025-09-22T10:30:00Z\""
+  }];
+
+  optional google.protobuf.Timestamp resolve_time = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "When present, timestamp when the alert resolved."
+    example: "\"2025-09-22T11:05:00Z\""
+  }];
+}
+
+enum AlertGroupingType {
+  GROUPING_TYPE_UNSPECIFIED = 0;
+  GROUPING_TYPE_COMPOSITE_ALERT = 1; // Multi-condition alert with composite logic
+  GROUPING_TYPE_COMBINATION_ALERT = 2; // Multiple alerts combined by correlation
+  GROUPING_TYPE_NONE = 3; // No grouping; single alert instance
+}
+
+enum AlertPriority {
+  ALERT_PRIORITY_UNSPECIFIED = 0;
+  ALERT_PRIORITY_P1 = 1;
+  ALERT_PRIORITY_P2 = 2;
+  ALERT_PRIORITY_P3 = 3;
+  ALERT_PRIORITY_P4 = 4;
+  ALERT_PRIORITY_P5 = 5;
+}
+
+enum AlertIndicatorState {
+  ALERT_INDICATOR_STATE_UNSPECIFIED = 0;
+  ALERT_INDICATOR_STATE_TRIGGERED = 1;
+  ALERT_INDICATOR_STATE_RESOLVED = 2;
+}

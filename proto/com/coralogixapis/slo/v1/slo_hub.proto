@@ -3,8 +3,6 @@ package com.coralogixapis.slo.v1;
 
 import "com/coralogixapis/slo/v1/slo.proto";
 
-
-
 enum SloStatus {
   SLO_STATUS_UNSPECIFIED = 0;
   SLO_STATUS_OK = 1;
@@ -41,7 +39,7 @@ message SloError {
 }
 
 enum ErrorType {
-  ERROR_TYPE_UNSPECIFIED = 0; 
+  ERROR_TYPE_UNSPECIFIED = 0;
   GENERAL = 1;
   CARDINALITY_LIMIT_EXCEEDED = 2;
 }

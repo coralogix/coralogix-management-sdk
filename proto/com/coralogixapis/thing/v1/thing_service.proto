@@ -1,0 +1,483 @@
+syntax = "proto3";
+
+package com.coralogixapis.thing.v1;
+
+import "com/coralogixapis/common/v1/audit_log.proto";
+import "com/coralogixapis/thing/v1/thing.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
+
+// ThingService is the service for managing things.
+service ThingService {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
+    name: "Things Service"
+    description: "ThingService provides the API for managing things."
+  };
+
+  // RPC for creating a thing.
+  rpc CreateThing(CreateThingRequest) returns (CreateThingResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "create thing";
+    option (google.api.http) = {
+      post: "/stuff/things/v1"
+      body: "*"
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Things Service"]
+      summary: "Create Thing"
+      extensions: {
+        key: "x-bumblebee"
+        value: {
+          list_value: {
+            values: {
+              struct_value: {
+                fields: {
+                  key: "name"
+                  value: {string_value: "resource_management"}
+                }
+                fields: {
+                  key: "root"
+                  value: {bool_value: true}
+                }
+                fields: {
+                  key: "action"
+                  value: {
+                    list_value: {
+                      values: {string_value: "create"}
+                    }
+                  }
+                }
+                fields: {
+                  key: "guard"
+                  value: {string_value: "status==201 && exists($.body.id)"}
+                }
+                fields: {
+                  key: "reachable"
+                  value: {
+                    list_value: {
+                      values: {string_value: "ThingService_ListThings"}
+                      values: {string_value: "ThingService_GetThing"}
+                      values: {string_value: "ThingService_ReplaceThing"}
+                      values: {string_value: "ThingService_DeleteThing"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    };
+  }
+
+  // RPC for replacing a thing.
+  rpc ReplaceThing(ReplaceThingRequest) returns (ReplaceThingResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "replace thing";
+    option (google.api.http) = {
+      put: "/stuff/things/v1/{thing.id}"
+      body: "*"
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Things Service"]
+      summary: "Replace Thing"
+      extensions: {
+        key: "x-bumblebee"
+        value: {
+          list_value: {
+            values: {
+              struct_value: {
+                fields: {
+                  key: "name"
+                  value: {string_value: "resource_management"}
+                }
+                fields: {
+                  key: "root"
+                  value: {bool_value: true}
+                }
+                fields: {
+                  key: "action"
+                  value: {
+                    list_value: {
+                      values: {string_value: "create"}
+                    }
+                  }
+                }
+                fields: {
+                  key: "guard"
+                  value: {string_value: "status==201 && exists($.body.id)"}
+                }
+                fields: {
+                  key: "reachable"
+                  value: {
+                    list_value: {
+                      values: {string_value: "ThingService_ListThings"}
+                      values: {string_value: "ThingService_GetThing"}
+                      values: {string_value: "ThingService_ReplaceThing"}
+                      values: {string_value: "ThingService_DeleteThing"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    };
+  }
+
+  // RPC for getting a thing.
+  rpc GetThing(GetThingRequest) returns (GetThingResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "get thing";
+    option (google.api.http) = {get: "/stuff/things/v1/{id}"};
+
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Things Service"]
+      summary: "Get Thing"
+      extensions: {
+        key: "x-bumblebee"
+        value: {
+          list_value: {
+            values: {
+              struct_value: {
+                fields: {
+                  key: "name"
+                  value: {string_value: "resource_management"}
+                }
+                fields: {
+                  key: "root"
+                  value: {bool_value: true}
+                }
+                fields: {
+                  key: "action"
+                  value: {
+                    list_value: {
+                      values: {string_value: "create"}
+                    }
+                  }
+                }
+                fields: {
+                  key: "guard"
+                  value: {string_value: "status==201 && exists($.body.id)"}
+                }
+                fields: {
+                  key: "reachable"
+                  value: {
+                    list_value: {
+                      values: {string_value: "ThingService_ListThings"}
+                      values: {string_value: "ThingService_GetThing"}
+                      values: {string_value: "ThingService_ReplaceThing"}
+                      values: {string_value: "ThingService_DeleteThing"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    };
+  }
+
+  // RPC for deleting a thing.
+  rpc DeleteThing(DeleteThingRequest) returns (DeleteThingResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "delete thing";
+    option (google.api.http) = {delete: "/stuff/things/v1/{id}"};
+
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Things Service"]
+      summary: "Delete Thing"
+      extensions: {
+        key: "x-bumblebee"
+        value: {
+          list_value: {
+            values: {
+              struct_value: {
+                fields: {
+                  key: "name"
+                  value: {string_value: "resource_management"}
+                }
+                fields: {
+                  key: "root"
+                  value: {bool_value: true}
+                }
+                fields: {
+                  key: "action"
+                  value: {
+                    list_value: {
+                      values: {string_value: "create"}
+                    }
+                  }
+                }
+                fields: {
+                  key: "guard"
+                  value: {string_value: "status==201 && exists($.body.id)"}
+                }
+                fields: {
+                  key: "reachable"
+                  value: {
+                    list_value: {
+                      values: {string_value: "ThingService_ListThings"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    };
+  }
+
+  // RPC for listing things with pagination.
+  rpc ListThings(ListThingsRequest) returns (ListThingsResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "list things";
+    option (google.api.http) = {get: "/stuff/things/v1"};
+
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Things Service"]
+      summary: "List Things"
+    };
+  }
+}
+
+// CreateThingRequest is the request for the CreateThing RPC.
+message CreateThingRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Create Thing Request"
+      description: "The data structure to create a thing"
+      required: ["thing"]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/"
+      description: "Find out more."
+    }
+  };
+  //  The thing to create.
+  Thing thing = 1;
+}
+
+// CreateThingResponse is the response for the CreateThing RPC.
+message CreateThingResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Create Thing Response"
+      description: "The data structure response from creating a thing"
+      required: ["thing"]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/"
+      description: "Find out more."
+    }
+  };
+  // The created thing.
+  Thing thing = 1;
+}
+
+// ListThingsRequest is the request for the ListThings RPC.
+message ListThingsRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "List Things Request"
+      description: "Paginated request for listing things. Defaults to retrieving all things (probably a bad idea)."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/"
+      description: "Find out more."
+    }
+  };
+  // The filter in the form of a DSL
+  optional string filter = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"logs.id=100\""}];
+
+  // The page size.
+  optional int32 page_size = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "100"}];
+
+  // The skip count.
+  optional int32 skip = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "100"}];
+
+  // The page token.
+  optional string page_token = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"asdf1234\""}];
+}
+
+// ListThingsResponse is the response for the ListThings RPC.
+message ListThingsResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "List Things Response"
+      description: "Paginated response for listing things. Defaults to retrieving all things (probably a bad idea)."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/"
+      description: "Find out more."
+    }
+  };
+  // The list of things.
+  repeated Thing things = 1;
+
+  // The total number of things.
+  int32 total_count = 2;
+
+  // The next page token.
+  optional string next_page_token = 3;
+}
+
+// ReplaceThingRequest is the request for the ReplaceThing RPC.
+message ReplaceThingRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Replace Thing Request"
+      description: "The data structure to replace a thing"
+      required: ["thing"]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/"
+      description: "Find out more."
+    }
+  };
+  //  The thing to replace.
+  Thing thing = 1;
+}
+
+// ReplaceThingResponse is the response for the ReplaceThing RPC.
+message ReplaceThingResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Replace Thing Response"
+      description: "The data structure response from replacing a thing"
+      required: ["thing"]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/"
+      description: "Find out more."
+    }
+  };
+  // The replaced thing.
+  Thing thing = 1;
+}
+
+// DeleteThingRequest is the request for the DeleteThing RPC.
+message DeleteThingRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Delete Thing Request"
+      description: "The data structure to replace a thing with nothing"
+      required: ["id"]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/"
+      description: "Find out more."
+    }
+  };
+  string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"43B9880C-A880-418F-91DF-8463063A30ED\""}];
+}
+
+// DeleteThingResponse is the response for the DeleteThing RPC.
+message DeleteThingResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Delete Thing Response"
+      description: "Empty response if the request succeeded."
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/"
+      description: "Find out more."
+    }
+  };
+}
+
+// GetThingRequest is the request for the GetThing RPC.
+message GetThingRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Get Thing Request"
+      description: "The data structure to get a thing"
+      required: ["id"]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/"
+      description: "Find out more."
+    }
+  };
+  // The id of the thing to get.
+  string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"43B9880C-A880-418F-91DF-8463063A30ED\""}];
+}
+
+// GetThingResponse is the response for the GetThing RPC.
+message GetThingResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Get Thing Response"
+      description: "The data structure response from getting a thing"
+      required: ["thing"]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/"
+      description: "Find out more."
+    }
+  };
+  // The thing.
+  Thing thing = 1;
+}

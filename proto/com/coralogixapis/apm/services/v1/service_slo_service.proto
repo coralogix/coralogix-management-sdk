@@ -8,7 +8,6 @@ import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
 
-
 message GetServiceSloRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
@@ -207,9 +206,7 @@ service ServiceSloService {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get Service SLO";
     option (google.api.http) = {
       get: "/apm/apm-slo/v1/{id}"
-      additional_bindings: {
-        get: "/v1/service_slos/{id}"
-      }
+      additional_bindings: {get: "/v1/service_slos/{id}"}
     };
   }
 
@@ -234,9 +231,7 @@ service ServiceSloService {
     option (google.api.http) = {
       post: "/apm/apm-slo/v1"
       body: "*"
-      additional_bindings: {
-        post: "/v1/service_slos"
-      }
+      additional_bindings: {post: "/v1/service_slos"}
     };
   }
 
@@ -261,9 +256,7 @@ service ServiceSloService {
     option (google.api.http) = {
       put: "/apm/apm-slo/v1"
       body: "*"
-      additional_bindings: {
-        put: "/v1/service_slos"
-      }
+      additional_bindings: {put: "/v1/service_slos"}
     };
   }
 
@@ -271,9 +264,7 @@ service ServiceSloService {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Delete Service SLO";
     option (google.api.http) = {
       delete: "/apm/apm-slo/v1/{id}"
-      additional_bindings: {
-        delete: "/v1/service_slos/{id}"
-      }
+      additional_bindings: {delete: "/v1/service_slos/{id}"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -297,9 +288,7 @@ service ServiceSloService {
     option (com.coralogixapis.common.v1.audit_log_description).description = "List Service SLOs";
     option (google.api.http) = {
       get: "/apm/apm-slo/v1"
-      additional_bindings: {
-        get: "/v1/service_slos/all"
-      }
+      additional_bindings: {get: "/v1/service_slos/all"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -323,9 +312,7 @@ service ServiceSloService {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Batch get Service SLOs";
     option (google.api.http) = {
       get: "/apm/apm-slo/v1/batch"
-      additional_bindings: {
-        get: "/v1/service_slos"
-      }
+      additional_bindings: {get: "/v1/service_slos"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {

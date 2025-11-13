@@ -1,0 +1,328 @@
+syntax = "proto3";
+
+package com.coralogixapis.cases.v1;
+
+import "com/coralogixapis/cases/v1/case_event.proto";
+import "com/coralogixapis/common/v1/audit_log.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
+
+service CaseEventsService {
+  rpc ListEvents(ListEventsRequest) returns (ListEventsResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "List case events";
+    option (google.api.http) = {get: "/cases/cases/v1/events/{case_id}"};
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "403"
+        value: {description: "Forbidden"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Case Events service"]
+      summary: "List events for a case"
+      description: "Retrieve all events associated with a specific case."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case:Read"}
+          }
+        }
+      }
+    };
+  }
+
+  rpc GetEvent(GetEventRequest) returns (GetEventResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get case event by ID";
+    option (google.api.http) = {get: "/cases/cases/v1/events/{event_id}"};
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "403"
+        value: {description: "Forbidden"}
+      }
+      responses: {
+        key: "404"
+        value: {description: "Event not found"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Case Events service"]
+      summary: "Get an event by ID"
+      description: "Retrieve a single event by its unique identifier."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case:Read"}
+          }
+        }
+      }
+    };
+  }
+
+  rpc CreateComment(CreateCommentRequest) returns (CreateCommentResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Create comment event";
+    option (google.api.http) = {
+      post: "/cases/cases/v1/events/comment/{case_id}"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "403"
+        value: {description: "Forbidden"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Case Events service"]
+      summary: "Create a comment event"
+      description: "Create a new comment event for a case."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case:Comment"}
+          }
+        }
+      }
+    };
+  }
+
+  rpc UpdateComment(UpdateCommentRequest) returns (UpdateCommentResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Update comment event";
+    option (google.api.http) = {
+      patch: "/cases/cases/v1/events/comment/{event_id}"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "403"
+        value: {description: "Forbidden"}
+      }
+      responses: {
+        key: "404"
+        value: {description: "Event not found"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Case Events service"]
+      summary: "Update a comment event"
+      description: "Modify the content of an existing comment event."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case:Comment"}
+          }
+        }
+      }
+    };
+  }
+
+  rpc DeleteComment(DeleteCommentRequest) returns (DeleteCommentResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Delete comment event";
+    option (google.api.http) = {delete: "/cases/cases/v1/events/comment/{event_id}"};
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "403"
+        value: {description: "Forbidden"}
+      }
+      responses: {
+        key: "404"
+        value: {description: "Event not found"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Case Events service"]
+      summary: "Delete a comment event"
+      description: "Delete an existing comment event from a case."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "case:Comment"}
+          }
+        }
+      }
+    };
+  }
+}
+
+message ListEventsRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "List events request"
+      required: ["case_id"]
+    }
+  };
+  string case_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "ID of the case"
+    example: "\"3f166e9f-3c88-4af2-b52e-138f339dab3e\""
+  }];
+}
+
+message ListEventsResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "List events response"
+      required: ["events"]
+    }
+  };
+  repeated CaseEvent events = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Events for the case"}];
+}
+
+message GetEventRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Get event request"
+      required: ["event_id"]
+    }
+  };
+  string event_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "ID of the event to fetch"
+    example: "\"f56645c5-9cd4-4b9f-961f-4f852d8835a0\""
+  }];
+}
+
+message GetEventResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Get event response"
+      required: ["event"]
+    }
+  };
+  CaseEvent event = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The requested event"}];
+}
+
+message CreateCommentRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Create comment event request"
+      required: [
+        "case_id",
+        "text"
+      ]
+    }
+  };
+  string case_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "ID of the case to add the event to"
+    example: "\"3f166e9f-3c88-4af2-b52e-138f339dab3e\""
+  }];
+  string text = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Comment text to update"
+    example: "\"This is updated text\""
+  }];
+}
+
+message CreateCommentResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Create comment event response"
+      required: ["event"]
+    }
+  };
+  CaseEvent event = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The created event"}];
+}
+
+message UpdateCommentRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Update comment event request"
+      required: [
+        "event_id",
+        "text"
+      ]
+    }
+  };
+  string event_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "ID of the comment event to update"
+    example: "\"f56645c5-9cd4-4b9f-961f-4f852d8835a0\""
+  }];
+  string text = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Comment text to update"
+    example: "\"This is updated text\""
+  }];
+}
+
+message UpdateCommentResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Update comment event response"
+      required: ["event"]
+    }
+  };
+  CaseEvent event = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Updated comment event"}];
+}
+
+message DeleteCommentRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Delete comment request"
+      required: ["id"]
+    }
+  };
+  string event_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "ID of the comment event to delete"
+    example: "\"f56645c5-9cd4-4b9f-961f-4f852d8835a0\""
+  }];
+}
+
+message DeleteCommentResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Delete comment response"
+      description: "Empty response; success indicated by HTTP status"
+    }
+  };
+  // Empty response - success indicated by lack of error
+}

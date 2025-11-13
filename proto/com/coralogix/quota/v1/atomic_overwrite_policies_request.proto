@@ -102,5 +102,4 @@ message CreateGenericPolicyRequest {
   optional Rule application_rule = 4;
   optional Rule subsystem_rule = 5;
   optional ArchiveRetention archive_retention = 6;
-  bool disabled = 7;
 }
