@@ -360,7 +360,9 @@ message Dynamic {
     }
 
     message Stat {
-      v1.common.ObservationField value_field = 1;
+      v1.common.ObservationField value_field = 1 [deprecated = true];
+
+      repeated v1.common.ObservationField value_fields = 15;
 
       repeated v1.common.ObservationField category_fields = 2;
 
@@ -408,7 +410,9 @@ message Dynamic {
     }
 
     message Gauge {
-      v1.common.ObservationField value_field = 1;
+      v1.common.ObservationField value_field = 1 [deprecated = true];
+
+      repeated v1.common.ObservationField value_fields = 16;
 
       repeated v1.common.ObservationField category_fields = 2;
 
