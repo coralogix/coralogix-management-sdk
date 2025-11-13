@@ -199,14 +199,75 @@ message Dynamic {
         oneof value {
           PropertyThresholds thresholds = 1;
           common.TextAlignment alignment = 2;
+          PropertyUnits units = 3;
+          google.protobuf.StringValue regex_extract = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+            description: "Value of Regex Extract property, a regex string"
+            example: '{ "value": "gr[ae]y" }'
+          }];
+          PropertyLinks link = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Link property (see PropertyLinks for full reference)"}];
         }
       }
 
       message PropertyThresholds {
-        repeated common.Threshold values = 1;
-        common.ThresholdType type = 2;
-        optional google.protobuf.DoubleValue min = 3;
-        optional google.protobuf.DoubleValue max = 4;
+        repeated common.Threshold values = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of thresholds"}];
+        common.ThresholdType type = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "Type of the threshold, can be relative or absolute"
+          example: "1"
+        }];
+        optional google.protobuf.DoubleValue min = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "A minimum value used in relative thresholds to calculate the threshold levels"
+          example: '{ "value": 0 }'
+        }];
+        optional google.protobuf.DoubleValue max = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "A maximum value used in relative thresholds to calculate the threshold levels"
+          example: '{ "value": 5000 }'
+        }];
+      }
+    }
+
+    message PropertyUnits {
+      google.protobuf.DoubleValue min = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "A minimum value used in percentage type unit (UNIT_PERCENT) for calculating displayed value"
+        example: '{ "value": 0 }'
+      }];
+      google.protobuf.DoubleValue max = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "A maximum value used in percentage type unit (UNIT_PERCENT) for calculating displayed value"
+        example: '{ "value": 10000 }'
+      }];
+      common.Unit unit = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Unit of the query results - one from a predefined list, or custom"
+        example: "3"
+      }];
+      google.protobuf.StringValue custom_unit = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Custom unit (requires to set unit field as 'custom' to take effect)"
+        example: '{ "value": "rpm" }'
+      }];
+      google.protobuf.Int32Value decimal_precision = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the decimal precision of the numeric values, within range 0-15"
+        example: '{ "value": 4 }'
+      }];
+      google.protobuf.BoolValue allow_abbreviation = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to render numeric value with abbreviation"
+        example: "false"
+      }];
+    }
+
+    message PropertyLinks {
+      repeated LinkAction actions = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Collection of link actions"}];
+
+      message LinkAction {
+        UUID id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "Unique id of the link action"
+          example: '{ "value": "63aed974-510b-00be-bd19-c92daf56bdef" }'
+        }];
+        google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "Name of the link action"
+          example: '{ "value": "My custom link" }'
+        }];
+        google.protobuf.StringValue url = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "Static URL that may contain variables using {{variable_name}} syntax"
+          example: '{ "value": "https://coralogix.com/#/dashboards/{{$p.dashboardId}}?severity={{severity}}" }'
+        }];
       }
     }
 
@@ -266,7 +327,7 @@ message Dynamic {
       }];
 
       google.protobuf.BoolValue allow_abbreviation = 17 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-        description: "Whether to render numeric value without abbreviation"
+        description: "Whether to render numeric value with abbreviation"
         example: "false"
       }];
 
@@ -335,7 +396,7 @@ message Dynamic {
       }];
 
       google.protobuf.BoolValue allow_abbreviation = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-        description: "Whether to render numeric value without abbreviation"
+        description: "Whether to render numeric value with abbreviation"
         example: "false"
       }];
 
@@ -400,7 +461,7 @@ message Dynamic {
       }];
 
       google.protobuf.BoolValue allow_abbreviation = 12 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-        description: "Whether to render numeric value without abbreviation"
+        description: "Whether to render numeric value with abbreviation"
         example: "false"
       }];
 
@@ -450,7 +511,7 @@ message Dynamic {
       }];
 
       google.protobuf.BoolValue allow_abbreviation = 12 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-        description: "Whether to render numeric value without abbreviation"
+        description: "Whether to render numeric value with abbreviation"
         example: "false"
       }];
 
@@ -506,7 +567,7 @@ message Dynamic {
       }];
 
       google.protobuf.BoolValue allow_abbreviation = 12 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-        description: "Whether to render numeric value without abbreviation"
+        description: "Whether to render numeric value with abbreviation"
         example: "false"
       }];
     }
@@ -568,7 +629,7 @@ message Dynamic {
       }];
 
       google.protobuf.BoolValue allow_abbreviation = 15 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-        description: "Whether to render numeric value without abbreviation"
+        description: "Whether to render numeric value with abbreviation"
         example: "false"
       }];
 
@@ -642,7 +703,7 @@ message Dynamic {
       }];
 
       google.protobuf.BoolValue allow_abbreviation = 15 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-        description: "Whether to render numeric value without abbreviation"
+        description: "Whether to render numeric value with abbreviation"
         example: "false"
       }];
 
@@ -725,7 +786,7 @@ message Dynamic {
       }];
 
       google.protobuf.BoolValue allow_abbreviation = 15 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-        description: "Whether to render numeric value without abbreviation"
+        description: "Whether to render numeric value with abbreviation"
         example: "false"
       }];
 
@@ -768,7 +829,7 @@ message Dynamic {
       }
 
       google.protobuf.BoolValue allow_abbreviation = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-        description: "Whether to render numeric value without abbreviation"
+        description: "Whether to render numeric value with abbreviation"
         example: "false"
       }];
 

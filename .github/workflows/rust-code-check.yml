@@ -12,7 +12,7 @@ on:
 env:
   CARGO_TERM_COLOR: always
   RUST_BACKTRACE: full
-  PROTOC_VERSION: "32.1"
+  PROTOC_VERSION: "33.x"
 
 jobs:
   examples_linux:

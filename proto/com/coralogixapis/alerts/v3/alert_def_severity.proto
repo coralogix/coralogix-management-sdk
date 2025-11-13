@@ -11,9 +11,6 @@ message AlertDefSeverity {
     json_schema: {
       title: "Alert definition severity"
       description: "Defines the severity level and priority of an alert"
-      required: [
-        "severity",
-      ]
     }
   };
   google.protobuf.Int32Value severity = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "3"}];
