@@ -32,11 +32,6 @@ message Group {
     json_schema: {
       title: "Alert notification group"
       description: "A group of related alerts with the same status"
-      required: [
-        "status",
-        "suppressed",
-        "key_values"
-      ]
     }
   };
   AlertStatus status = 1;
