@@ -1,0 +1,704 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/metrics/data-setup/v1": {
+      "get": {
+        "tags": [
+          "Metrics Data Archive Service"
+        ],
+        "summary": "GetTenantConfig",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "MetricsConfiguratorPublicService_GetTenantConfig",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTenantConfigResponseV2"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Metrics Data Archive Service"
+        ],
+        "summary": "Update",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "MetricsConfiguratorPublicService_Update",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/UpdateRequestS3"
+                  },
+                  {
+                    "$ref": "#/components/schemas/UpdateRequestIbm"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Metrics Data Archive Service"
+        ],
+        "summary": "ConfigureTenant",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "MetricsConfiguratorPublicService_ConfigureTenant",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ConfigureTenantRequestIbm"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ConfigureTenantRequestS3"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/metrics/data-setup/v1/disable": {
+      "post": {
+        "tags": [
+          "Metrics Data Archive Service"
+        ],
+        "summary": "DisableArchive",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "MetricsConfiguratorPublicService_DisableArchive",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/metrics/data-setup/v1/enable": {
+      "post": {
+        "tags": [
+          "Metrics Data Archive Service"
+        ],
+        "summary": "EnableArchive",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "MetricsConfiguratorPublicService_EnableArchive",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/metrics/data-setup/v1/validate": {
+      "post": {
+        "tags": [
+          "Metrics Data Archive Service"
+        ],
+        "summary": "ValidateBucket",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "MetricsConfiguratorPublicService_ValidateBucket",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ValidateBucketRequestIbm"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ValidateBucketRequestS3"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ColorsByAggregation": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/ColorsByAggregation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByGroupBy": {
+        "type": "object",
+        "properties": {
+          "groupBy": {
+            "$ref": "#/components/schemas/ColorsByGroupBy"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByStack": {
+        "type": "object",
+        "properties": {
+          "stack": {
+            "$ref": "#/components/schemas/ColorsByStack"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConfigureTenantRequestIbm": {
+        "externalDocs": {
+          "description": "Find out more about metrics cost optimization",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+        },
+        "title": "Configure Tenant Request",
+        "description": "This data structure is used to configure a tenant.",
+        "type": "object",
+        "properties": {
+          "ibm": {
+            "$ref": "#/components/schemas/IbmConfigV2"
+          },
+          "retentionPolicy": {
+            "$ref": "#/components/schemas/RetentionPolicyRequest"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConfigureTenantRequestS3": {
+        "externalDocs": {
+          "description": "Find out more about metrics cost optimization",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+        },
+        "title": "Configure Tenant Request",
+        "description": "This data structure is used to configure a tenant.",
+        "type": "object",
+        "properties": {
+          "retentionPolicy": {
+            "$ref": "#/components/schemas/RetentionPolicyRequest"
+          },
+          "s3": {
+            "$ref": "#/components/schemas/S3Config"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FieldGroup": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "FilterPathAndValues": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+          },
+          {
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+          }
+        ]
+      },
+      "FilterPathAndValuesFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "FilterPathAndValuesMultipleValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            }
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GetTenantConfigResponseV2": {
+        "type": "object",
+        "properties": {
+          "tenantConfig": {
+            "$ref": "#/components/schemas/TenantConfigV2"
+          }
+        }
+      },
+      "IbmConfigV2": {
+        "externalDocs": {
+          "description": "Find out more about metrics cost optimization",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+        },
+        "title": "IBM Bucket Configuration",
+        "description": "This data structure is used to configure an IBM bucket.",
+        "type": "object",
+        "properties": {
+          "crn": {
+            "example": "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::",
+            "type": "string"
+          },
+          "endpoint": {
+            "example": "s3.us-south.cloud-object-storage.appdomain.cloud",
+            "type": "string"
+          },
+          "serviceCrn": {
+            "example": "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::",
+            "type": "string"
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "RetentionPolicyRequest": {
+        "externalDocs": {
+          "description": "Find out more about metrics cost optimization",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+        },
+        "title": "Retenion Policy Request",
+        "description": "This data structure is used to set the retention policy for a tenant.",
+        "type": "object",
+        "properties": {
+          "fiveMinutesResolution": {
+            "example": 2,
+            "type": "integer",
+            "format": "int64"
+          },
+          "oneHourResolution": {
+            "example": 3,
+            "type": "integer",
+            "format": "int64"
+          },
+          "rawResolution": {
+            "example": 1,
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "S3Config": {
+        "externalDocs": {
+          "description": "Find out more about metrics cost optimization",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+        },
+        "title": "S3 Configuration",
+        "description": "This data structure represents the S3 configuration for a tenant.",
+        "type": "object",
+        "properties": {
+          "bucket": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          }
+        }
+      },
+      "TenantConfigV2": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/TenantConfigV2Ibm"
+          },
+          {
+            "$ref": "#/components/schemas/TenantConfigV2S3"
+          }
+        ]
+      },
+      "TenantConfigV2Ibm": {
+        "type": "object",
+        "properties": {
+          "disabled": {
+            "type": "boolean"
+          },
+          "ibm": {
+            "$ref": "#/components/schemas/IbmConfigV2"
+          },
+          "prefix": {
+            "type": "string"
+          },
+          "retentionPolicy": {
+            "$ref": "#/components/schemas/RetentionPolicyRequest"
+          },
+          "tenantId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TenantConfigV2S3": {
+        "type": "object",
+        "properties": {
+          "disabled": {
+            "type": "boolean"
+          },
+          "prefix": {
+            "type": "string"
+          },
+          "retentionPolicy": {
+            "$ref": "#/components/schemas/RetentionPolicyRequest"
+          },
+          "s3": {
+            "$ref": "#/components/schemas/S3Config"
+          },
+          "tenantId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateRequestIbm": {
+        "externalDocs": {
+          "description": "Find out more about metrics cost optimization",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+        },
+        "title": "Update Tenant Request",
+        "description": "This data structure is used to update the configuration of a tenant.",
+        "type": "object",
+        "properties": {
+          "ibm": {
+            "$ref": "#/components/schemas/IbmConfigV2"
+          },
+          "retentionDays": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateRequestS3": {
+        "externalDocs": {
+          "description": "Find out more about metrics cost optimization",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+        },
+        "title": "Update Tenant Request",
+        "description": "This data structure is used to update the configuration of a tenant.",
+        "type": "object",
+        "properties": {
+          "retentionDays": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "s3": {
+            "$ref": "#/components/schemas/S3Config"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ValidateBucketRequestIbm": {
+        "externalDocs": {
+          "description": "Find out more about metrics cost optimization",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+        },
+        "title": "Bucket Validation Request",
+        "description": "This data structure is used to validate a bucket.",
+        "type": "object",
+        "properties": {
+          "ibm": {
+            "$ref": "#/components/schemas/IbmConfigV2"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ValidateBucketRequestS3": {
+        "externalDocs": {
+          "description": "Find out more about metrics cost optimization",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+        },
+        "title": "Bucket Validation Request",
+        "description": "This data structure is used to validate a bucket.",
+        "type": "object",
+        "properties": {
+          "s3": {
+            "$ref": "#/components/schemas/S3Config"
+          }
+        },
+        "additionalProperties": false
+      },
+      "common.Group": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "$ref": "#/components/schemas/FieldGroup"
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/common.Group"
+            }
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v3.FilterOperator": {
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}

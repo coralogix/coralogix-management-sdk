@@ -1,0 +1,542 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/dashboards/dashboards/v1/folders": {
+      "get": {
+        "tags": [
+          "Dashboard folders service"
+        ],
+        "summary": "List dashboard folders",
+        "description": "List all dashboard folders accessible.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "DashboardFoldersService_ListDashboardFolders",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListDashboardFoldersResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "team-dashboards:Read"
+        ]
+      },
+      "put": {
+        "tags": [
+          "Dashboard folders service"
+        ],
+        "summary": "Replace a dashboard folder",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "DashboardFoldersService_ReplaceDashboardFolder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Replace dashboard folder request data structure",
+                "type": "object",
+                "properties": {
+                  "folder": {
+                    "$ref": "#/components/schemas/DashboardFolder"
+                  },
+                  "requestId": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplaceDashboardFolderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "team-dashboards:Update"
+        ]
+      },
+      "post": {
+        "tags": [
+          "Dashboard folders service"
+        ],
+        "summary": "Create a dashboard folder",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "DashboardFoldersService_CreateDashboardFolder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Create dashboard folder request data structure",
+                "type": "object",
+                "properties": {
+                  "folder": {
+                    "$ref": "#/components/schemas/DashboardFolder"
+                  },
+                  "requestId": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDashboardFolderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "team-dashboards:Update"
+        ]
+      }
+    },
+    "/dashboards/dashboards/v1/folders/{folder_id}": {
+      "get": {
+        "tags": [
+          "Dashboard folders service"
+        ],
+        "summary": "Get a dashboard folder",
+        "description": "Returns a dashboard folder data.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "DashboardFoldersService_GetDashboardFolder",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "folder_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "in": "query",
+            "name": "request_id",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDashboardFolderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "team-dashboards:Read"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Dashboard folders service"
+        ],
+        "summary": "Delete a dashboard folder",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "DashboardFoldersService_DeleteDashboardFolder",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "folder_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "in": "query",
+            "name": "request_id",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteDashboardFolderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "team-dashboards:Update"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ColorsByAggregation": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/ColorsByAggregation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByGroupBy": {
+        "type": "object",
+        "properties": {
+          "groupBy": {
+            "$ref": "#/components/schemas/ColorsByGroupBy"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColorsByStack": {
+        "type": "object",
+        "properties": {
+          "stack": {
+            "$ref": "#/components/schemas/ColorsByStack"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateDashboardFolderResponse": {
+        "externalDocs": {
+          "description": "Find out more Dashboards in our documentation.",
+          "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+        },
+        "title": "Create dashboard folder response data structure",
+        "type": "object",
+        "properties": {
+          "folderId": {
+            "type": "string"
+          }
+        }
+      },
+      "DashboardFolder": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "parentId": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteDashboardFolderResponse": {
+        "externalDocs": {
+          "description": "Find out more Dashboards in our documentation.",
+          "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+        },
+        "title": "Delete dashboard folder response data structure",
+        "type": "object"
+      },
+      "FieldGroup": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "FilterPathAndValues": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+          },
+          {
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+          }
+        ]
+      },
+      "FilterPathAndValuesFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "FilterPathAndValuesMultipleValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values"
+        ],
+        "additionalProperties": false
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            }
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GetDashboardFolderResponse": {
+        "externalDocs": {
+          "description": "Find out more Dashboards in our documentation.",
+          "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+        },
+        "title": "Get dashboard folder response data structure",
+        "type": "object",
+        "properties": {
+          "folder": {
+            "$ref": "#/components/schemas/DashboardFolder"
+          }
+        }
+      },
+      "ListDashboardFoldersResponse": {
+        "externalDocs": {
+          "description": "Find out more Dashboards in our documentation.",
+          "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+        },
+        "title": "List dashboard folders response data structure",
+        "type": "object",
+        "properties": {
+          "folder": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DashboardFolder"
+            }
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ReplaceDashboardFolderResponse": {
+        "externalDocs": {
+          "description": "Find out more Dashboards in our documentation.",
+          "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+        },
+        "title": "Replace dashboard folder response data structure",
+        "type": "object"
+      },
+      "common.Group": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "$ref": "#/components/schemas/FieldGroup"
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/common.Group"
+            }
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v3.FilterOperator": {
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}

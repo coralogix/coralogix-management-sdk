@@ -48,7 +48,10 @@ release:
 	GOOS=windows GOARCH=amd64 go build -o out/${BINARY}_${VERSION}_windows_amd64.dll
 
 test: build
-	go test ${BUILD_ARGS} -v ${TESTARGS} -cover -timeout=120s -parallel=4 ./... 
+	go test ${BUILD_ARGS} -v ${TESTARGS} -cover -timeout=120s -parallel=4 ./examples/...
+
+test-openapi: build
+	go test ${BUILD_ARGS} -v ${TESTARGS} -cover -timeout=120s -parallel=4 ./openapi/examples/...
 
 generate:
 	go generate

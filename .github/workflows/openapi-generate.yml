@@ -1,0 +1,61 @@
+name: Generate OpenAPI Clients
+
+on:
+  pull_request:
+    paths:
+      - 'openapi.yaml'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate-openapi:
+    name: Split & Generate Clients
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install Node.js (for redocly CLI)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Redocly CLI
+        run: npm install -g @redocly/cli@latest
+
+      - name: Run OpenAPI Split Tool
+        run: |
+          chmod +x ./tools/openapi-split/split_specs.sh
+          ./tools/openapi-split/split_specs.sh
+
+      - name: Generate Go Client
+        run: |
+          chmod +x ./go/scripts/generate_openapi.sh
+          ./go/scripts/generate_openapi.sh
+
+      - name: Commit and push generated files
+        if: ${{ success() }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add specs go/openapi/gen
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: update split specs and generated Go OpenAPI client"
+            git push
+          fi

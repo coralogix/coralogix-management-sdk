@@ -1,0 +1,599 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /aaa/api-keys/v3:
+    post:
+      externalDocs:
+        url: ""
+      operationId: ApiKeysService_CreateApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Create_Api_Key_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateApiKeyResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Create API Key
+      tags:
+      - API Keys Service
+  /aaa/api-keys/v3/send_data:
+    get:
+      externalDocs:
+        url: ""
+      operationId: ApiKeysService_GetSendDataApiKeys
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetSendDataApiKeysResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get "Send Data" API Keys
+      tags:
+      - API Keys Service
+  /aaa/api-keys/v3/{key_id}:
+    delete:
+      externalDocs:
+        url: ""
+      operationId: ApiKeysService_DeleteApiKey
+      parameters:
+      - explode: false
+        in: path
+        name: key_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteApiKeyResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Delete API Key
+      tags:
+      - API Keys Service
+    get:
+      externalDocs:
+        url: ""
+      operationId: ApiKeysService_GetApiKey
+      parameters:
+      - explode: false
+        in: path
+        name: key_id
+        required: true
+        schema:
+          example: my_key_id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetApiKeyResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get API Key
+      tags:
+      - API Keys Service
+    put:
+      externalDocs:
+        url: ""
+      operationId: ApiKeysService_UpdateApiKey
+      parameters:
+      - explode: false
+        in: path
+        name: key_id
+        required: true
+        schema:
+          example: my_key_id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Update_Api_Key_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateApiKeyResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Update API Key
+      tags:
+      - API Keys Service
+components:
+  schemas:
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
+    CreateApiKeyRequest.KeyPermissions:
+      description: This data structure allows to specify loose permissions and permission
+        presets for an API key.
+      externalDocs:
+        description: Find out more about api keys
+        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
+      properties:
+        permissions:
+          items:
+            example: read_logs
+            type: string
+          type: array
+        presets:
+          items:
+            example: my_preset
+            type: string
+          type: array
+      title: Key Permissions
+      type: object
+    CreateApiKeyResponse:
+      description: This data structure is the response obtained when creating an API
+        key.
+      example:
+        name: my_api_key
+        keyId: my_key_id
+        value: my_api_key_value
+      externalDocs:
+        description: Find out more about api keys
+        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
+      properties:
+        keyId:
+          example: my_key_id
+          type: string
+        name:
+          example: my_api_key
+          type: string
+        value:
+          example: my_api_key_value
+          type: string
+      title: Create Api Key Response
+      type: object
+    DeleteApiKeyResponse:
+      type: object
+    FieldGroup:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    GetApiKeyResponse:
+      description: This data structure is the response obtained when retrieving an
+        API key.
+      example:
+        keyInfo:
+          owner:
+            userId: userId
+          name: my_api_key
+          active: true
+          hashed: true
+          id: id
+          keyPermissions:
+            presets:
+            - permissions:
+              - read_logs
+              - read_logs
+              name: my_preset
+            - permissions:
+              - read_logs
+              - read_logs
+              name: my_preset
+            permissions:
+            - permissions
+            - permissions
+          value: value
+      externalDocs:
+        description: Find out more about api keys
+        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
+      properties:
+        keyInfo:
+          $ref: "#/components/schemas/KeyInfo"
+      title: Get Api Key Response
+      type: object
+    GetSendDataApiKeysResponse:
+      description: This data structure is the response obtained when retrieving an
+        API key.
+      example:
+        keys:
+        - owner:
+            userId: userId
+          name: my_api_key
+          active: true
+          hashed: true
+          id: id
+          keyPermissions:
+            presets:
+            - permissions:
+              - read_logs
+              - read_logs
+              name: my_preset
+            - permissions:
+              - read_logs
+              - read_logs
+              name: my_preset
+            permissions:
+            - permissions
+            - permissions
+          value: value
+        - owner:
+            userId: userId
+          name: my_api_key
+          active: true
+          hashed: true
+          id: id
+          keyPermissions:
+            presets:
+            - permissions:
+              - read_logs
+              - read_logs
+              name: my_preset
+            - permissions:
+              - read_logs
+              - read_logs
+              name: my_preset
+            permissions:
+            - permissions
+            - permissions
+          value: value
+      externalDocs:
+        description: Find out more about api keys
+        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
+      properties:
+        keys:
+          items:
+            $ref: "#/components/schemas/KeyInfo"
+          type: array
+      title: Get Api Key Response
+      type: object
+    KeyInfo:
+      description: This data structure represents the information associated with
+        an API key.
+      example:
+        owner:
+          userId: userId
+        name: my_api_key
+        active: true
+        hashed: true
+        id: id
+        keyPermissions:
+          presets:
+          - permissions:
+            - read_logs
+            - read_logs
+            name: my_preset
+          - permissions:
+            - read_logs
+            - read_logs
+            name: my_preset
+          permissions:
+          - permissions
+          - permissions
+        value: value
+      externalDocs:
+        description: Find out more about api keys
+        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
+      properties:
+        active:
+          example: true
+          type: boolean
+        hashed:
+          example: true
+          type: boolean
+        id:
+          type: string
+        keyPermissions:
+          $ref: "#/components/schemas/KeyInfo.KeyPermissions"
+        name:
+          example: my_api_key
+          type: string
+        owner:
+          $ref: "#/components/schemas/Owner"
+        value:
+          type: string
+      title: Key Info
+      type: object
+    KeyInfo.KeyPermissions:
+      description: This data structure represents the permissions on an API key.
+      example:
+        presets:
+        - permissions:
+          - read_logs
+          - read_logs
+          name: my_preset
+        - permissions:
+          - read_logs
+          - read_logs
+          name: my_preset
+        permissions:
+        - permissions
+        - permissions
+      externalDocs:
+        description: Find out more about api keys
+        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
+      properties:
+        permissions:
+          items:
+            type: string
+          type: array
+        presets:
+          items:
+            $ref: "#/components/schemas/PresetInfo"
+          type: array
+      title: Key Permissions
+      type: object
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    Owner:
+      oneOf:
+      - $ref: "#/components/schemas/OwnerUserId"
+      - $ref: "#/components/schemas/OwnerTeamId"
+      - $ref: "#/components/schemas/OwnerOrganisationId"
+    OwnerOrganisationId:
+      additionalProperties: false
+      properties:
+        organisationId:
+          type: string
+      type: object
+    OwnerTeamId:
+      additionalProperties: false
+      properties:
+        teamId:
+          format: int64
+          type: integer
+      type: object
+    OwnerUserId:
+      additionalProperties: false
+      example:
+        userId: userId
+      properties:
+        userId:
+          type: string
+      type: object
+    PresetInfo:
+      description: This data structure represents a preset set of permissions on an
+        API key.
+      example:
+        permissions:
+        - read_logs
+        - read_logs
+        name: my_preset
+      externalDocs:
+        description: Find out more about api keys
+        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
+      properties:
+        name:
+          example: my_preset
+          type: string
+        permissions:
+          items:
+            example: read_logs
+            type: string
+          type: array
+      title: Preset Info
+      type: object
+    Presets:
+      description: This data structure represents a set of permissions presets on
+        an API key.
+      externalDocs:
+        description: Find out more about api keys
+        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
+      properties:
+        presets:
+          items:
+            type: string
+          type: array
+      title: Presets
+      type: object
+    UpdateApiKeyRequest.Permissions:
+      description: This data structure represents a set of permissions on an API key.
+      externalDocs:
+        description: Find out more about api keys
+        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
+      properties:
+        permissions:
+          items:
+            type: string
+          type: array
+      title: Permissions
+      type: object
+    UpdateApiKeyResponse:
+      type: object
+    common.Group:
+      properties:
+        field:
+          $ref: "#/components/schemas/FieldGroup"
+        groups:
+          items:
+            $ref: "#/components/schemas/common.Group"
+          type: array
+        value:
+          format: double
+          type: number
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    Create_Api_Key_Request:
+      additionalProperties: false
+      description: This data structure is used to create an API key.
+      properties:
+        hashed:
+          example: true
+          type: boolean
+        keyPermissions:
+          $ref: "#/components/schemas/CreateApiKeyRequest.KeyPermissions"
+        name:
+          example: my_api_key
+          type: string
+        owner:
+          $ref: "#/components/schemas/Owner"
+      title: Create Api Key Request
+      type: object
+    Update_Api_Key_Request:
+      additionalProperties: false
+      description: This data structure is used to update an API key.
+      properties:
+        isActive:
+          example: true
+          type: boolean
+        newName:
+          example: my_new_name
+          type: string
+        permissions:
+          $ref: "#/components/schemas/UpdateApiKeyRequest.Permissions"
+        presets:
+          $ref: "#/components/schemas/Presets"
+      title: Update Api Key Request
+      type: object

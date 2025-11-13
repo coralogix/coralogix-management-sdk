@@ -1,0 +1,301 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /data-exploration/saved-views/v1/folders:
+    get:
+      description: List view's folders
+      externalDocs:
+        url: ""
+      operationId: ViewsFoldersService_ListViewFolders
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListViewFoldersResponse"
+          description: ""
+      summary: List view folders service
+      tags:
+      - Folders for views service
+    post:
+      description: Create view folder
+      externalDocs:
+        url: ""
+      operationId: ViewsFoldersService_CreateViewFolder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateViewFolderRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ViewFolder"
+          description: ""
+      summary: Create View Folder service
+      tags:
+      - Folders for views service
+    put:
+      description: Replaces an existing view folder
+      externalDocs:
+        url: ""
+      operationId: ViewsFoldersService_ReplaceViewFolder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ViewFolder_1"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ViewFolder"
+          description: ""
+      summary: Replace View Folder service
+      tags:
+      - Folders for views service
+  /data-exploration/saved-views/v1/folders/{id}:
+    delete:
+      description: Deletes a view folder by ID
+      externalDocs:
+        url: ""
+      operationId: ViewsFoldersService_DeleteViewFolder
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          description: Unique identifier for folders
+          example: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
+          maxLength: 36
+          minLength: 36
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteViewFolderResponse"
+          description: ""
+      summary: Delete View Folder service
+      tags:
+      - Folders for views service
+    get:
+      description: Create view folder
+      externalDocs:
+        url: ""
+      operationId: ViewsFoldersService_GetViewFolder
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          description: Unique identifier for folders
+          example: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
+          maxLength: 36
+          minLength: 36
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ViewFolder"
+          description: ""
+      summary: Get View Folder service
+      tags:
+      - Folders for views service
+components:
+  schemas:
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
+    DeleteViewFolderResponse:
+      type: object
+    FieldGroup:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    ListViewFoldersResponse:
+      example:
+        folders:
+        - name: My Folder
+          id: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
+        - name: My Folder
+          id: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
+      properties:
+        folders:
+          items:
+            $ref: "#/components/schemas/ViewFolder"
+          type: array
+      type: object
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    ViewFolder:
+      description: View folder.
+      example:
+        name: My Folder
+        id: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
+      externalDocs:
+        url: ""
+      properties:
+        id:
+          description: Unique identifier for folders
+          example: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
+          maxLength: 36
+          minLength: 36
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          type: string
+        name:
+          description: Folder name
+          example: My Folder
+          minLength: 1
+          type: string
+      required:
+      - name
+      title: ViewFolder
+      type: object
+    common.Group:
+      properties:
+        field:
+          $ref: "#/components/schemas/FieldGroup"
+        groups:
+          items:
+            $ref: "#/components/schemas/common.Group"
+          type: array
+        value:
+          format: double
+          type: number
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    ViewFolder_1:
+      additionalProperties: false
+      description: View folder.
+      properties:
+        id:
+          description: Unique identifier for folders
+          example: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
+          maxLength: 36
+          minLength: 36
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          type: string
+        name:
+          description: Folder name
+          example: My Folder
+          minLength: 1
+          type: string
+      required:
+      - name
+      title: ViewFolder
+      type: object
+    CreateViewFolderRequest:
+      additionalProperties: false
+      description: Create view folder.
+      example:
+        name: My Folder
+      properties:
+        name:
+          description: Folder name
+          example: My Folder
+          minLength: 1
+          type: string
+      title: CreateViewFolderRequest
+      type: object

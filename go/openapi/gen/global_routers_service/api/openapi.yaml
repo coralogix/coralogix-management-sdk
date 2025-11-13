@@ -1,0 +1,798 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /notifications/notification-center/v1/routers:
+    get:
+      externalDocs:
+        url: ""
+      operationId: GlobalRoutersService_ListGlobalRouters
+      parameters:
+      - explode: true
+        in: query
+        name: entity_type
+        required: false
+        schema:
+          $ref: "#/components/schemas/notification_center.EntityType"
+        style: form
+      - explode: true
+        in: query
+        name: source_entity_labels
+        required: false
+        schema:
+          additionalProperties:
+            $ref: "#/components/schemas/GlobalRoutersService_ListGlobalRouters_source_entity_labels_parameter_value"
+          type: object
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListGlobalRoutersResponse"
+          description: ""
+      summary: List Global Routers
+      tags:
+      - Global routers service
+    post:
+      externalDocs:
+        url: ""
+      operationId: GlobalRoutersService_CreateGlobalRouter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Create_Global_Router_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateGlobalRouterResponse"
+          description: ""
+      summary: Create Global Router
+      tags:
+      - Global routers service
+    put:
+      externalDocs:
+        url: ""
+      operationId: GlobalRoutersService_ReplaceGlobalRouter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Replace_Global_Router_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReplaceGlobalRouterResponse"
+          description: ""
+      summary: Replace Global Router
+      tags:
+      - Global routers service
+  /notifications/notification-center/v1/routers/{id}:
+    delete:
+      externalDocs:
+        url: ""
+      operationId: GlobalRoutersService_DeleteGlobalRouter
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteGlobalRouterResponse"
+          description: ""
+      summary: Delete Global Router
+      tags:
+      - Global routers service
+    get:
+      externalDocs:
+        url: ""
+      operationId: GlobalRoutersService_GetGlobalRouter
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetGlobalRouterResponse"
+          description: ""
+      summary: Get Global Router
+      tags:
+      - Global routers service
+  /notifications/notification-center/v1/routers:batchGetSummaries:
+    get:
+      externalDocs:
+        url: ""
+      operationId: GlobalRoutersService_BatchGetGlobalRouters
+      parameters:
+      - explode: true
+        in: query
+        name: global_router_ids
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchGetGlobalRoutersResponse"
+          description: ""
+      summary: Batch Get Global Routers
+      tags:
+      - Global routers service
+components:
+  schemas:
+    BatchGetGlobalRoutersResponse:
+      description: Response containing requested global routers and missing global
+        routers ids
+      example:
+        notFoundIds:
+        - "[\"global-router-id-3\"]"
+        - "[\"global-router-id-3\"]"
+        routers:
+          key:
+            entityLabels:
+              key: entityLabels
+            createTime: 2000-01-23T04:56:07.000+00:00
+            entityType: ENTITY_TYPE_UNSPECIFIED
+            name: My Router
+            description: description
+            entityLabelMatcher:
+              key: entityLabelMatcher
+            rules:
+            - condition: alertDef.priority == 'P3'
+              entityType: null
+              name: name
+              customDetails:
+                key: customDetails
+              targets:
+              - connectorId: connectorId
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+              - connectorId: connectorId
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+            - condition: alertDef.priority == 'P3'
+              entityType: null
+              name: name
+              customDetails:
+                key: customDetails
+              targets:
+              - connectorId: connectorId
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+              - connectorId: connectorId
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+            updateTime: 2000-01-23T04:56:07.000+00:00
+            id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+            fallback:
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        notFoundIds:
+          items:
+            example: "[\"global-router-id-3\"]"
+            type: string
+          type: array
+        routers:
+          additionalProperties:
+            $ref: "#/components/schemas/GlobalRouter"
+          type: object
+      title: Batch Get Global Routers Response
+      type: object
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
+    CreateGlobalRouterResponse:
+      description: Response which contains a created global router
+      example:
+        router:
+          entityLabels:
+            key: entityLabels
+          createTime: 2000-01-23T04:56:07.000+00:00
+          entityType: ENTITY_TYPE_UNSPECIFIED
+          name: My Router
+          description: description
+          entityLabelMatcher:
+            key: entityLabelMatcher
+          rules:
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          fallback:
+          - connectorId: connectorId
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            customDetails:
+              key: customDetails
+            presetId: presetId
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        router:
+          $ref: "#/components/schemas/GlobalRouter"
+      title: Create Global Router Response
+      type: object
+    DeleteGlobalRouterResponse:
+      type: object
+    FieldGroup:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    GetGlobalRouterResponse:
+      description: Response containing a requested global router
+      example:
+        router:
+          entityLabels:
+            key: entityLabels
+          createTime: 2000-01-23T04:56:07.000+00:00
+          entityType: ENTITY_TYPE_UNSPECIFIED
+          name: My Router
+          description: description
+          entityLabelMatcher:
+            key: entityLabelMatcher
+          rules:
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          fallback:
+          - connectorId: connectorId
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            customDetails:
+              key: customDetails
+            presetId: presetId
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        router:
+          $ref: "#/components/schemas/GlobalRouter"
+      title: Get Global Router Response
+      type: object
+    GlobalRouter:
+      description: Defines a set of pre-configured routing rules for directing notifications
+      example:
+        entityLabels:
+          key: entityLabels
+        createTime: 2000-01-23T04:56:07.000+00:00
+        entityType: ENTITY_TYPE_UNSPECIFIED
+        name: My Router
+        description: description
+        entityLabelMatcher:
+          key: entityLabelMatcher
+        rules:
+        - condition: alertDef.priority == 'P3'
+          entityType: null
+          name: name
+          customDetails:
+            key: customDetails
+          targets:
+          - connectorId: connectorId
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            customDetails:
+              key: customDetails
+            presetId: presetId
+        - condition: alertDef.priority == 'P3'
+          entityType: null
+          name: name
+          customDetails:
+            key: customDetails
+          targets:
+          - connectorId: connectorId
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            customDetails:
+              key: customDetails
+            presetId: presetId
+        updateTime: 2000-01-23T04:56:07.000+00:00
+        id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+        fallback:
+        - connectorId: connectorId
+          customDetails:
+            key: customDetails
+          presetId: presetId
+        - connectorId: connectorId
+          customDetails:
+            key: customDetails
+          presetId: presetId
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        createTime:
+          format: date-time
+          type: string
+        description:
+          type: string
+        entityLabelMatcher:
+          additionalProperties:
+            type: string
+          type: object
+        entityLabels:
+          additionalProperties:
+            type: string
+          type: object
+        entityType:
+          $ref: "#/components/schemas/notification_center.EntityType"
+        fallback:
+          items:
+            $ref: "#/components/schemas/RoutingTarget"
+          type: array
+        id:
+          example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          type: string
+        name:
+          example: My Router
+          type: string
+        rules:
+          items:
+            $ref: "#/components/schemas/RoutingRule"
+          type: array
+        updateTime:
+          format: date-time
+          type: string
+      title: Global Router
+      type: object
+    ListGlobalRoutersResponse:
+      description: Response containing requested global routers
+      example:
+        routers:
+        - entityLabels:
+            key: entityLabels
+          createTime: 2000-01-23T04:56:07.000+00:00
+          entityType: ENTITY_TYPE_UNSPECIFIED
+          name: My Router
+          description: description
+          entityLabelMatcher:
+            key: entityLabelMatcher
+          rules:
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          fallback:
+          - connectorId: connectorId
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            customDetails:
+              key: customDetails
+            presetId: presetId
+        - entityLabels:
+            key: entityLabels
+          createTime: 2000-01-23T04:56:07.000+00:00
+          entityType: ENTITY_TYPE_UNSPECIFIED
+          name: My Router
+          description: description
+          entityLabelMatcher:
+            key: entityLabelMatcher
+          rules:
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          fallback:
+          - connectorId: connectorId
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            customDetails:
+              key: customDetails
+            presetId: presetId
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        routers:
+          items:
+            $ref: "#/components/schemas/GlobalRouter"
+          type: array
+      title: List Global Routers Response
+      type: object
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    ReplaceGlobalRouterResponse:
+      description: Response which contains an updated global router
+      example:
+        router:
+          entityLabels:
+            key: entityLabels
+          createTime: 2000-01-23T04:56:07.000+00:00
+          entityType: ENTITY_TYPE_UNSPECIFIED
+          name: My Router
+          description: description
+          entityLabelMatcher:
+            key: entityLabelMatcher
+          rules:
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          fallback:
+          - connectorId: connectorId
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            customDetails:
+              key: customDetails
+            presetId: presetId
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        router:
+          $ref: "#/components/schemas/GlobalRouter"
+      title: Replace Global Router Response
+      type: object
+    RoutingRule:
+      description: Defines routing rule for notifications
+      example:
+        condition: alertDef.priority == 'P3'
+        entityType: null
+        name: name
+        customDetails:
+          key: customDetails
+        targets:
+        - connectorId: connectorId
+          customDetails:
+            key: customDetails
+          presetId: presetId
+        - connectorId: connectorId
+          customDetails:
+            key: customDetails
+          presetId: presetId
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        condition:
+          example: alertDef.priority == 'P3'
+          type: string
+        customDetails:
+          additionalProperties:
+            type: string
+          type: object
+        entityType:
+          $ref: "#/components/schemas/notification_center.EntityType"
+        name:
+          type: string
+        targets:
+          items:
+            $ref: "#/components/schemas/RoutingTarget"
+          type: array
+      title: Routing Rule
+      type: object
+    RoutingTarget:
+      description: Defines routing target for notifications
+      example:
+        connectorId: connectorId
+        customDetails:
+          key: customDetails
+        presetId: presetId
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        connectorId:
+          type: string
+        customDetails:
+          additionalProperties:
+            type: string
+          type: object
+        presetId:
+          type: string
+      title: Routing Target
+      type: object
+    common.Group:
+      properties:
+        field:
+          $ref: "#/components/schemas/FieldGroup"
+        groups:
+          items:
+            $ref: "#/components/schemas/common.Group"
+          type: array
+        value:
+          format: double
+          type: number
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    notification_center.EntityType:
+      enum:
+      - ENTITY_TYPE_UNSPECIFIED
+      - ALERTS
+      - TEST_NOTIFICATIONS
+      - CASES
+      type: string
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    GlobalRoutersService_ListGlobalRouters_source_entity_labels_parameter_value:
+      properties:
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    Replace_Global_Router_Request:
+      additionalProperties: false
+      description: Request which updates an existing global router
+      properties:
+        router:
+          $ref: "#/components/schemas/GlobalRouter"
+      title: Replace Global Router Request
+      type: object
+    Create_Global_Router_Request:
+      additionalProperties: false
+      description: Request to create a global router
+      properties:
+        router:
+          $ref: "#/components/schemas/GlobalRouter"
+      title: Create Global Router Request
+      type: object

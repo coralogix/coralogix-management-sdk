@@ -1,0 +1,578 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /enrichment-rules/custom-enrichment-rules/v1:
+    get:
+      externalDocs:
+        url: ""
+      operationId: CustomEnrichmentService_GetCustomEnrichments
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetCustomEnrichmentsResponse"
+          description: ""
+      summary: Get Custom Enrichments
+      tags:
+      - Custom Enrichments Service
+    put:
+      externalDocs:
+        url: ""
+      operationId: CustomEnrichmentService_UpdateCustomEnrichment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Update_Custom_Enrichment_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateCustomEnrichmentResponse"
+          description: ""
+      summary: Update Custom Enrichment
+      tags:
+      - Custom Enrichments Service
+  /enrichment-rules/custom-enrichment-rules/v1/search:
+    post:
+      externalDocs:
+        url: ""
+      operationId: CustomEnrichmentService_SearchCustomEnrichmentData
+      parameters:
+      - explode: true
+        in: query
+        name: search_clauses
+        required: false
+        schema:
+          items:
+            $ref: "#/components/schemas/CustomEnrichmentService_SearchCustomEnrichmentData_search_clauses_parameter_inner"
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchCustomEnrichmentDataResponse"
+          description: ""
+      summary: Search Custom Enrichment Data
+      tags:
+      - Custom Enrichments Service
+  /enrichment-rules/custom-enrichment-rules/v1/{custom_enrichment_id}:
+    delete:
+      externalDocs:
+        url: ""
+      operationId: CustomEnrichmentService_DeleteCustomEnrichment
+      parameters:
+      - explode: false
+        in: path
+        name: custom_enrichment_id
+        required: true
+        schema:
+          example: 1
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteCustomEnrichmentResponse"
+          description: ""
+      summary: Delete Custom Enrichments
+      tags:
+      - Custom Enrichments Service
+  /enrichment-rules/custom-enrichment-rules/v1/{id}:
+    get:
+      externalDocs:
+        url: ""
+      operationId: CustomEnrichmentService_GetCustomEnrichment
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 1
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetCustomEnrichmentResponse"
+          description: ""
+      summary: Get Custom Enrichment
+      tags:
+      - Custom Enrichments Service
+  /v1/custom_enrichment:
+    post:
+      externalDocs:
+        url: ""
+      operationId: CustomEnrichmentService_CreateCustomEnrichment
+      parameters:
+      - explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          example: custom_enrichment_name
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: description
+        required: false
+        schema:
+          example: custom_enrichment_description
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: file
+        required: false
+        schema:
+          $ref: "#/components/schemas/CustomEnrichmentService_CreateCustomEnrichment_file_parameter"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateCustomEnrichmentResponse"
+          description: ""
+      summary: Create Custom Enrichments
+      tags:
+      - Custom Enrichments Service
+components:
+  schemas:
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
+    CreateCustomEnrichmentResponse:
+      description: This response data structure is obtained when a custom enrichment
+        is created
+      example:
+        message: Custom enrichment created successfully
+        customEnrichment:
+          fileName: fileName
+          isQueryOnly: true
+          fileSize: 0
+          name: name
+          description: description
+          id: 6
+          version: 1
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        customEnrichment:
+          $ref: "#/components/schemas/CustomEnrichment"
+        message:
+          example: Custom enrichment created successfully
+          type: string
+      required:
+      - customEnrichment
+      title: Create Custom Enrichment Response
+      type: object
+    CustomEnrichment:
+      example:
+        fileName: fileName
+        isQueryOnly: true
+        fileSize: 0
+        name: name
+        description: description
+        id: 6
+        version: 1
+      properties:
+        description:
+          type: string
+        fileName:
+          type: string
+        fileSize:
+          format: int64
+          type: integer
+        id:
+          format: int64
+          type: integer
+        isQueryOnly:
+          type: boolean
+        name:
+          type: string
+        version:
+          format: int64
+          type: integer
+      type: object
+    CustomEnrichmentData:
+      oneOf:
+      - $ref: "#/components/schemas/CustomEnrichmentDataTextual"
+      - $ref: "#/components/schemas/CustomEnrichmentDataBinary"
+    CustomEnrichmentDataBinary:
+      additionalProperties: false
+      properties:
+        binary:
+          format: byte
+          type: string
+        definition:
+          $ref: "#/components/schemas/CustomEnrichment"
+      type: object
+    CustomEnrichmentDataTextual:
+      additionalProperties: false
+      example:
+        definition:
+          fileName: fileName
+          isQueryOnly: true
+          fileSize: 0
+          name: name
+          description: description
+          id: 6
+          version: 1
+        textual: textual
+      properties:
+        definition:
+          $ref: "#/components/schemas/CustomEnrichment"
+        textual:
+          type: string
+      type: object
+    DeleteCustomEnrichmentResponse:
+      example:
+        customEnrichmentId: 1
+        message: Custom enrichment deleted successfully
+      properties:
+        customEnrichmentId:
+          example: 1
+          format: int64
+          type: integer
+        message:
+          example: Custom enrichment deleted successfully
+          type: string
+      type: object
+    FieldGroup:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    File:
+      oneOf:
+      - $ref: "#/components/schemas/FileBinary"
+      - $ref: "#/components/schemas/FileTextual"
+    FileBinary:
+      additionalProperties: false
+      description: This data structure represents a file
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        binary:
+          example: !!binary |-
+            MHhGQUJCMzI=
+          format: byte
+          type: string
+        extension:
+          example: csv
+          type: string
+        name:
+          example: file_name
+          type: string
+        size:
+          example: 100
+          format: int64
+          type: integer
+      title: File
+      type: object
+    FileTextual:
+      additionalProperties: false
+      description: This data structure represents a file
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        extension:
+          example: csv
+          type: string
+        name:
+          example: file_name
+          type: string
+        size:
+          example: 100
+          format: int64
+          type: integer
+        textual:
+          example: "row1,row2 value1,value2"
+          type: string
+      title: File
+      type: object
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    GetCustomEnrichmentResponse:
+      description: This response data structure is obtained when a custom enrichment
+        is retrieved
+      example:
+        customEnrichment:
+          fileName: fileName
+          isQueryOnly: true
+          fileSize: 0
+          name: name
+          description: description
+          id: 6
+          version: 1
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        customEnrichment:
+          $ref: "#/components/schemas/CustomEnrichment"
+      required:
+      - customEnrichment
+      title: Get Custom Enrichment Response
+      type: object
+    GetCustomEnrichmentsResponse:
+      description: This response data structure is obtained when all custom enrichments
+        are retrieved
+      example:
+        customEnrichments:
+        - fileName: fileName
+          isQueryOnly: true
+          fileSize: 0
+          name: name
+          description: description
+          id: 6
+          version: 1
+        - fileName: fileName
+          isQueryOnly: true
+          fileSize: 0
+          name: name
+          description: description
+          id: 6
+          version: 1
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        customEnrichments:
+          items:
+            $ref: "#/components/schemas/CustomEnrichment"
+          type: array
+      required:
+      - customEnrichments
+      title: Get Custom Enrichments Response
+      type: object
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    SearchClauseId:
+      additionalProperties: false
+      description: This data structure represents a search clause
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        id:
+          example: 1
+          format: int64
+          type: integer
+      required:
+      - searchBy
+      title: Search Clause
+      type: object
+    SearchClauseName:
+      additionalProperties: false
+      description: This data structure represents a search clause
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        name:
+          example: custom_enrichment_name
+          type: string
+      required:
+      - searchBy
+      title: Search Clause
+      type: object
+    SearchCustomEnrichmentDataResponse:
+      example:
+        customEnrichmentsData:
+        - definition:
+            fileName: fileName
+            isQueryOnly: true
+            fileSize: 0
+            name: name
+            description: description
+            id: 6
+            version: 1
+          textual: textual
+        - definition:
+            fileName: fileName
+            isQueryOnly: true
+            fileSize: 0
+            name: name
+            description: description
+            id: 6
+            version: 1
+          textual: textual
+      properties:
+        customEnrichmentsData:
+          items:
+            $ref: "#/components/schemas/CustomEnrichmentData"
+          type: array
+      type: object
+    UpdateCustomEnrichmentResponse:
+      description: This response data structure is obtained when a custom enrichment
+        is updated
+      example:
+        message: Custom enrichment updated successfully
+        customEnrichment:
+          fileName: fileName
+          isQueryOnly: true
+          fileSize: 0
+          name: name
+          description: description
+          id: 6
+          version: 1
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        customEnrichment:
+          $ref: "#/components/schemas/CustomEnrichment"
+        message:
+          example: Custom enrichment updated successfully
+          type: string
+      required:
+      - customEnrichment
+      title: Update Custom Enrichment Response
+      type: object
+    common.Group:
+      properties:
+        field:
+          $ref: "#/components/schemas/FieldGroup"
+        groups:
+          items:
+            $ref: "#/components/schemas/common.Group"
+          type: array
+        value:
+          format: double
+          type: number
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    Update_Custom_Enrichment_Request:
+      additionalProperties: false
+      description: This request data structure is used to update a custom enrichment
+      properties:
+        customEnrichmentId:
+          example: 1
+          format: int64
+          type: integer
+        description:
+          example: custom_enrichment_description
+          type: string
+        file:
+          $ref: "#/components/schemas/File"
+        name:
+          example: custom_enrichment_name
+          type: string
+      required:
+      - customEnrichmentId
+      - description
+      - file
+      - name
+      title: Update Custom Enrichment Request
+      type: object
+    CustomEnrichmentService_SearchCustomEnrichmentData_search_clauses_parameter_inner:
+      oneOf:
+      - $ref: "#/components/schemas/SearchClauseName"
+      - $ref: "#/components/schemas/SearchClauseId"
+    CustomEnrichmentService_CreateCustomEnrichment_file_parameter:
+      oneOf:
+      - $ref: "#/components/schemas/FileTextual"
+      - $ref: "#/components/schemas/FileBinary"

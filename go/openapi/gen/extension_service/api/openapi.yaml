@@ -1,0 +1,1274 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /integrations/extensions/v1/all:
+    post:
+      externalDocs:
+        url: ""
+      operationId: ExtensionService_GetAllExtensions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Get_all_extensions_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAllExtensionsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get all extensions
+      tags:
+      - Extension service
+      x-coralogixPermissions:
+      - extensions:ReadConfig
+  /integrations/extensions/v1/{id}:
+    get:
+      externalDocs:
+        url: ""
+      operationId: ExtensionService_GetExtension
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: include_dashboard_binaries
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: include_testing_revision
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/v1.Extension"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get extension by ID
+      tags:
+      - Extension service
+      x-coralogixPermissions:
+      - extensions:ReadConfig
+components:
+  schemas:
+    ChangelogEntry:
+      example:
+        descriptionMd: descriptionMd
+        version: version
+      externalDocs:
+        url: ""
+      properties:
+        descriptionMd:
+          type: string
+        version:
+          type: string
+      title: Changelog entry
+      type: object
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
+    Deprecation:
+      example:
+        reason: reason
+        replacementExtensions:
+        - replacementExtensions
+        - replacementExtensions
+      externalDocs:
+        url: ""
+      properties:
+        reason:
+          type: string
+        replacementExtensions:
+          items:
+            type: string
+          type: array
+      title: Deprecation
+      type: object
+    ExtensionBinary:
+      example:
+        data: data
+        type: KIBANA_INDEX_PATTERN
+      externalDocs:
+        url: ""
+      properties:
+        data:
+          type: string
+        type:
+          $ref: "#/components/schemas/ExtensionBinary.BinaryType"
+      title: Extension binary
+      type: object
+    ExtensionBinary.BinaryType:
+      enum:
+      - KIBANA_INDEX_PATTERN
+      type: string
+    ExtensionItem:
+      example:
+        permissionResource: UNKNOWN
+        stableId: stableId
+        targetDomain: ACTION
+        data: "{}"
+        extendedInternalId: extendedInternalId
+        name: name
+        description: description
+        id: id
+        binaries:
+        - fileName: fileName
+          data: data
+          type: PREVIEW_IMAGE
+        - fileName: fileName
+          data: data
+          type: PREVIEW_IMAGE
+        isMandatory: true
+        uniqueId: uniqueId
+      externalDocs:
+        url: ""
+      properties:
+        binaries:
+          items:
+            $ref: "#/components/schemas/ExtensionItemBinary"
+          type: array
+        data:
+          type: object
+        description:
+          type: string
+        extendedInternalId:
+          type: string
+        id:
+          type: string
+        isMandatory:
+          type: boolean
+        name:
+          type: string
+        permissionResource:
+          $ref: "#/components/schemas/PermissionResource"
+        stableId:
+          type: string
+        targetDomain:
+          $ref: "#/components/schemas/TargetDomain"
+        uniqueId:
+          type: string
+      title: Extension item
+      type: object
+    ExtensionItemBinary:
+      example:
+        fileName: fileName
+        data: data
+        type: PREVIEW_IMAGE
+      externalDocs:
+        url: ""
+      properties:
+        data:
+          type: string
+        fileName:
+          type: string
+        type:
+          $ref: "#/components/schemas/ExtensionItemBinary.BinaryType"
+      title: Extension item binary
+      type: object
+    ExtensionItemBinary.BinaryType:
+      enum:
+      - PREVIEW_IMAGE
+      - KIBANA_DASHBOARD_DEFINITION
+      - GRAFANA_DASHBOARD_DEFINITION
+      - ENRICHMENT_CSV
+      - CX_CUSTOM_DASHBOARD_DEFINITION
+      type: string
+    ExtensionRevision:
+      example:
+        permissionDeniedItems:
+        - permissionResource: UNKNOWN
+          stableId: stableId
+          targetDomain: ACTION
+          data: "{}"
+          extendedInternalId: extendedInternalId
+          name: name
+          description: description
+          id: id
+          binaries:
+          - fileName: fileName
+            data: data
+            type: PREVIEW_IMAGE
+          - fileName: fileName
+            data: data
+            type: PREVIEW_IMAGE
+          isMandatory: true
+          uniqueId: uniqueId
+        - permissionResource: UNKNOWN
+          stableId: stableId
+          targetDomain: ACTION
+          data: "{}"
+          extendedInternalId: extendedInternalId
+          name: name
+          description: description
+          id: id
+          binaries:
+          - fileName: fileName
+            data: data
+            type: PREVIEW_IMAGE
+          - fileName: fileName
+            data: data
+            type: PREVIEW_IMAGE
+          isMandatory: true
+          uniqueId: uniqueId
+        description: description
+        excerpt: excerpt
+        binaries:
+        - data: data
+          type: KIBANA_INDEX_PATTERN
+        - data: data
+          type: KIBANA_INDEX_PATTERN
+        items:
+        - permissionResource: UNKNOWN
+          stableId: stableId
+          targetDomain: ACTION
+          data: "{}"
+          extendedInternalId: extendedInternalId
+          name: name
+          description: description
+          id: id
+          binaries:
+          - fileName: fileName
+            data: data
+            type: PREVIEW_IMAGE
+          - fileName: fileName
+            data: data
+            type: PREVIEW_IMAGE
+          isMandatory: true
+          uniqueId: uniqueId
+        - permissionResource: UNKNOWN
+          stableId: stableId
+          targetDomain: ACTION
+          data: "{}"
+          extendedInternalId: extendedInternalId
+          name: name
+          description: description
+          id: id
+          binaries:
+          - fileName: fileName
+            data: data
+            type: PREVIEW_IMAGE
+          - fileName: fileName
+            data: data
+            type: PREVIEW_IMAGE
+          isMandatory: true
+          uniqueId: uniqueId
+        version: version
+        integrationDetails:
+        - link: link
+          name: name
+        - link: link
+          name: name
+        isTesting: true
+        labels:
+        - labels
+        - labels
+      externalDocs:
+        url: ""
+      properties:
+        binaries:
+          items:
+            $ref: "#/components/schemas/ExtensionBinary"
+          type: array
+        description:
+          type: string
+        excerpt:
+          type: string
+        integrationDetails:
+          items:
+            $ref: "#/components/schemas/IntegrationDetail"
+          type: array
+        isTesting:
+          type: boolean
+        items:
+          items:
+            $ref: "#/components/schemas/ExtensionItem"
+          type: array
+        labels:
+          items:
+            type: string
+          type: array
+        permissionDeniedItems:
+          items:
+            $ref: "#/components/schemas/ExtensionItem"
+          type: array
+        version:
+          type: string
+      title: Extension revision
+      type: object
+    FieldGroup:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    GetAllExtensionsRequest.Filter:
+      description: Filter by integration ids
+      externalDocs:
+        url: ""
+      properties:
+        integrations:
+          items:
+            type: string
+          type: array
+      title: A filter structure for a request to get all extensions
+      type: object
+    GetAllExtensionsResponse:
+      description: Response to list all extensions
+      example:
+        extensions:
+        - image: image
+          darkModeImage: darkModeImage
+          keywords:
+          - keywords
+          - keywords
+          name: name
+          revisions:
+          - summary:
+              itemCounts:
+                alerts: 6
+                eventsToMetrics: 5
+                grafanaDashboards: 2
+                savedViews: 2
+                customDashboards: 1
+                kibanaDashboards: 7
+                actions: 0
+                metricsRuleGroup: 9
+                enrichments: 5
+                parsingRules: 3
+              isNew: true
+            description: description
+            excerpt: excerpt
+            version: version
+            integrationDetails:
+            - link: link
+              name: name
+            - link: link
+              name: name
+            labels:
+            - labels
+            - labels
+          - summary:
+              itemCounts:
+                alerts: 6
+                eventsToMetrics: 5
+                grafanaDashboards: 2
+                savedViews: 2
+                customDashboards: 1
+                kibanaDashboards: 7
+                actions: 0
+                metricsRuleGroup: 9
+                enrichments: 5
+                parsingRules: 3
+              isNew: true
+            description: description
+            excerpt: excerpt
+            version: version
+            integrationDetails:
+            - link: link
+              name: name
+            - link: link
+              name: name
+            labels:
+            - labels
+            - labels
+          id: id
+          deprecation:
+            reason: reason
+            replacementExtensions:
+            - replacementExtensions
+            - replacementExtensions
+          integrations:
+          - integrations
+          - integrations
+          isHidden: true
+        - image: image
+          darkModeImage: darkModeImage
+          keywords:
+          - keywords
+          - keywords
+          name: name
+          revisions:
+          - summary:
+              itemCounts:
+                alerts: 6
+                eventsToMetrics: 5
+                grafanaDashboards: 2
+                savedViews: 2
+                customDashboards: 1
+                kibanaDashboards: 7
+                actions: 0
+                metricsRuleGroup: 9
+                enrichments: 5
+                parsingRules: 3
+              isNew: true
+            description: description
+            excerpt: excerpt
+            version: version
+            integrationDetails:
+            - link: link
+              name: name
+            - link: link
+              name: name
+            labels:
+            - labels
+            - labels
+          - summary:
+              itemCounts:
+                alerts: 6
+                eventsToMetrics: 5
+                grafanaDashboards: 2
+                savedViews: 2
+                customDashboards: 1
+                kibanaDashboards: 7
+                actions: 0
+                metricsRuleGroup: 9
+                enrichments: 5
+                parsingRules: 3
+              isNew: true
+            description: description
+            excerpt: excerpt
+            version: version
+            integrationDetails:
+            - link: link
+              name: name
+            - link: link
+              name: name
+            labels:
+            - labels
+            - labels
+          id: id
+          deprecation:
+            reason: reason
+            replacementExtensions:
+            - replacementExtensions
+            - replacementExtensions
+          integrations:
+          - integrations
+          - integrations
+          isHidden: true
+      externalDocs:
+        url: ""
+      properties:
+        extensions:
+          items:
+            $ref: "#/components/schemas/GetAllExtensionsResponse.Extension"
+          type: array
+      title: Get all extensions response
+      type: object
+    GetAllExtensionsResponse.Extension:
+      example:
+        image: image
+        darkModeImage: darkModeImage
+        keywords:
+        - keywords
+        - keywords
+        name: name
+        revisions:
+        - summary:
+            itemCounts:
+              alerts: 6
+              eventsToMetrics: 5
+              grafanaDashboards: 2
+              savedViews: 2
+              customDashboards: 1
+              kibanaDashboards: 7
+              actions: 0
+              metricsRuleGroup: 9
+              enrichments: 5
+              parsingRules: 3
+            isNew: true
+          description: description
+          excerpt: excerpt
+          version: version
+          integrationDetails:
+          - link: link
+            name: name
+          - link: link
+            name: name
+          labels:
+          - labels
+          - labels
+        - summary:
+            itemCounts:
+              alerts: 6
+              eventsToMetrics: 5
+              grafanaDashboards: 2
+              savedViews: 2
+              customDashboards: 1
+              kibanaDashboards: 7
+              actions: 0
+              metricsRuleGroup: 9
+              enrichments: 5
+              parsingRules: 3
+            isNew: true
+          description: description
+          excerpt: excerpt
+          version: version
+          integrationDetails:
+          - link: link
+            name: name
+          - link: link
+            name: name
+          labels:
+          - labels
+          - labels
+        id: id
+        deprecation:
+          reason: reason
+          replacementExtensions:
+          - replacementExtensions
+          - replacementExtensions
+        integrations:
+        - integrations
+        - integrations
+        isHidden: true
+      externalDocs:
+        url: ""
+      properties:
+        darkModeImage:
+          type: string
+        deprecation:
+          $ref: "#/components/schemas/Deprecation"
+        id:
+          type: string
+        image:
+          type: string
+        integrations:
+          items:
+            type: string
+          type: array
+        isHidden:
+          type: boolean
+        keywords:
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        revisions:
+          items:
+            $ref: "#/components/schemas/GetAllExtensionsResponse.Revision"
+          type: array
+      title: Extension
+      type: object
+    GetAllExtensionsResponse.Revision:
+      example:
+        summary:
+          itemCounts:
+            alerts: 6
+            eventsToMetrics: 5
+            grafanaDashboards: 2
+            savedViews: 2
+            customDashboards: 1
+            kibanaDashboards: 7
+            actions: 0
+            metricsRuleGroup: 9
+            enrichments: 5
+            parsingRules: 3
+          isNew: true
+        description: description
+        excerpt: excerpt
+        version: version
+        integrationDetails:
+        - link: link
+          name: name
+        - link: link
+          name: name
+        labels:
+        - labels
+        - labels
+      externalDocs:
+        url: ""
+      properties:
+        description:
+          type: string
+        excerpt:
+          type: string
+        integrationDetails:
+          items:
+            $ref: "#/components/schemas/IntegrationDetail"
+          type: array
+        labels:
+          items:
+            type: string
+          type: array
+        summary:
+          $ref: "#/components/schemas/RevisionSummary"
+        version:
+          type: string
+      title: Revision
+      type: object
+    IntegrationDetail:
+      example:
+        link: link
+        name: name
+      externalDocs:
+        url: ""
+      properties:
+        link:
+          type: string
+        name:
+          type: string
+      title: Integration detail
+      type: object
+    ItemCounts:
+      example:
+        alerts: 6
+        eventsToMetrics: 5
+        grafanaDashboards: 2
+        savedViews: 2
+        customDashboards: 1
+        kibanaDashboards: 7
+        actions: 0
+        metricsRuleGroup: 9
+        enrichments: 5
+        parsingRules: 3
+      externalDocs:
+        url: ""
+      properties:
+        actions:
+          format: int64
+          type: integer
+        alerts:
+          format: int64
+          type: integer
+        customDashboards:
+          format: int64
+          type: integer
+        enrichments:
+          format: int64
+          type: integer
+        eventsToMetrics:
+          format: int64
+          type: integer
+        grafanaDashboards:
+          format: int64
+          type: integer
+        kibanaDashboards:
+          format: int64
+          type: integer
+        metricsRuleGroup:
+          format: int64
+          type: integer
+        parsingRules:
+          format: int64
+          type: integer
+        savedViews:
+          format: int64
+          type: integer
+      title: Item counts
+      type: object
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    PermissionResource:
+      enum:
+      - UNKNOWN
+      - ACTION
+      - ALERT
+      - CUSTOM_ENRICHMENT
+      - GEO_ENRICHMENT
+      - SECURITY_ENRICHMENT
+      - RESOURCE_CLOUD_METADATA_ENRICHMENT
+      - GRAFANA_DASHBOARD
+      - KIBANA_DASHBOARD
+      - PARSING_RULE
+      - SAVED_VIEW
+      - CX_CUSTOM_DASHBOARD
+      - METRICS_RULE_GROUP
+      - SPAN_EVENTS_TO_METRICS
+      - LOGS_EVENTS_TO_METRICS
+      type: string
+    RevisionSummary:
+      example:
+        itemCounts:
+          alerts: 6
+          eventsToMetrics: 5
+          grafanaDashboards: 2
+          savedViews: 2
+          customDashboards: 1
+          kibanaDashboards: 7
+          actions: 0
+          metricsRuleGroup: 9
+          enrichments: 5
+          parsingRules: 3
+        isNew: true
+      externalDocs:
+        url: ""
+      properties:
+        isNew:
+          type: boolean
+        itemCounts:
+          $ref: "#/components/schemas/ItemCounts"
+      title: Revision summary
+      type: object
+    TargetDomain:
+      enum:
+      - ACTION
+      - ALERT
+      - ENRICHMENT
+      - GRAFANA_DASHBOARD
+      - KIBANA_DASHBOARD
+      - PARSING_RULE
+      - SAVED_VIEW
+      - CX_CUSTOM_DASHBOARD
+      - METRICS_RULE_GROUP
+      - EVENTS_TO_METRICS
+      - ALERT_V3
+      type: string
+    common.Group:
+      properties:
+        field:
+          $ref: "#/components/schemas/FieldGroup"
+        groups:
+          items:
+            $ref: "#/components/schemas/common.Group"
+          type: array
+        value:
+          format: double
+          type: number
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    v1.Extension:
+      example:
+        image: image
+        darkModeImage: darkModeImage
+        keywords:
+        - keywords
+        - keywords
+        permissionDeniedRevisions:
+        - permissionDeniedItems:
+          - permissionResource: UNKNOWN
+            stableId: stableId
+            targetDomain: ACTION
+            data: "{}"
+            extendedInternalId: extendedInternalId
+            name: name
+            description: description
+            id: id
+            binaries:
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            isMandatory: true
+            uniqueId: uniqueId
+          - permissionResource: UNKNOWN
+            stableId: stableId
+            targetDomain: ACTION
+            data: "{}"
+            extendedInternalId: extendedInternalId
+            name: name
+            description: description
+            id: id
+            binaries:
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            isMandatory: true
+            uniqueId: uniqueId
+          description: description
+          excerpt: excerpt
+          binaries:
+          - data: data
+            type: KIBANA_INDEX_PATTERN
+          - data: data
+            type: KIBANA_INDEX_PATTERN
+          items:
+          - permissionResource: UNKNOWN
+            stableId: stableId
+            targetDomain: ACTION
+            data: "{}"
+            extendedInternalId: extendedInternalId
+            name: name
+            description: description
+            id: id
+            binaries:
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            isMandatory: true
+            uniqueId: uniqueId
+          - permissionResource: UNKNOWN
+            stableId: stableId
+            targetDomain: ACTION
+            data: "{}"
+            extendedInternalId: extendedInternalId
+            name: name
+            description: description
+            id: id
+            binaries:
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            isMandatory: true
+            uniqueId: uniqueId
+          version: version
+          integrationDetails:
+          - link: link
+            name: name
+          - link: link
+            name: name
+          isTesting: true
+          labels:
+          - labels
+          - labels
+        - permissionDeniedItems:
+          - permissionResource: UNKNOWN
+            stableId: stableId
+            targetDomain: ACTION
+            data: "{}"
+            extendedInternalId: extendedInternalId
+            name: name
+            description: description
+            id: id
+            binaries:
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            isMandatory: true
+            uniqueId: uniqueId
+          - permissionResource: UNKNOWN
+            stableId: stableId
+            targetDomain: ACTION
+            data: "{}"
+            extendedInternalId: extendedInternalId
+            name: name
+            description: description
+            id: id
+            binaries:
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            isMandatory: true
+            uniqueId: uniqueId
+          description: description
+          excerpt: excerpt
+          binaries:
+          - data: data
+            type: KIBANA_INDEX_PATTERN
+          - data: data
+            type: KIBANA_INDEX_PATTERN
+          items:
+          - permissionResource: UNKNOWN
+            stableId: stableId
+            targetDomain: ACTION
+            data: "{}"
+            extendedInternalId: extendedInternalId
+            name: name
+            description: description
+            id: id
+            binaries:
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            isMandatory: true
+            uniqueId: uniqueId
+          - permissionResource: UNKNOWN
+            stableId: stableId
+            targetDomain: ACTION
+            data: "{}"
+            extendedInternalId: extendedInternalId
+            name: name
+            description: description
+            id: id
+            binaries:
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            isMandatory: true
+            uniqueId: uniqueId
+          version: version
+          integrationDetails:
+          - link: link
+            name: name
+          - link: link
+            name: name
+          isTesting: true
+          labels:
+          - labels
+          - labels
+        name: name
+        changelog:
+        - descriptionMd: descriptionMd
+          version: version
+        - descriptionMd: descriptionMd
+          version: version
+        revisions:
+        - permissionDeniedItems:
+          - permissionResource: UNKNOWN
+            stableId: stableId
+            targetDomain: ACTION
+            data: "{}"
+            extendedInternalId: extendedInternalId
+            name: name
+            description: description
+            id: id
+            binaries:
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            isMandatory: true
+            uniqueId: uniqueId
+          - permissionResource: UNKNOWN
+            stableId: stableId
+            targetDomain: ACTION
+            data: "{}"
+            extendedInternalId: extendedInternalId
+            name: name
+            description: description
+            id: id
+            binaries:
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            isMandatory: true
+            uniqueId: uniqueId
+          description: description
+          excerpt: excerpt
+          binaries:
+          - data: data
+            type: KIBANA_INDEX_PATTERN
+          - data: data
+            type: KIBANA_INDEX_PATTERN
+          items:
+          - permissionResource: UNKNOWN
+            stableId: stableId
+            targetDomain: ACTION
+            data: "{}"
+            extendedInternalId: extendedInternalId
+            name: name
+            description: description
+            id: id
+            binaries:
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            isMandatory: true
+            uniqueId: uniqueId
+          - permissionResource: UNKNOWN
+            stableId: stableId
+            targetDomain: ACTION
+            data: "{}"
+            extendedInternalId: extendedInternalId
+            name: name
+            description: description
+            id: id
+            binaries:
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            isMandatory: true
+            uniqueId: uniqueId
+          version: version
+          integrationDetails:
+          - link: link
+            name: name
+          - link: link
+            name: name
+          isTesting: true
+          labels:
+          - labels
+          - labels
+        - permissionDeniedItems:
+          - permissionResource: UNKNOWN
+            stableId: stableId
+            targetDomain: ACTION
+            data: "{}"
+            extendedInternalId: extendedInternalId
+            name: name
+            description: description
+            id: id
+            binaries:
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            isMandatory: true
+            uniqueId: uniqueId
+          - permissionResource: UNKNOWN
+            stableId: stableId
+            targetDomain: ACTION
+            data: "{}"
+            extendedInternalId: extendedInternalId
+            name: name
+            description: description
+            id: id
+            binaries:
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            isMandatory: true
+            uniqueId: uniqueId
+          description: description
+          excerpt: excerpt
+          binaries:
+          - data: data
+            type: KIBANA_INDEX_PATTERN
+          - data: data
+            type: KIBANA_INDEX_PATTERN
+          items:
+          - permissionResource: UNKNOWN
+            stableId: stableId
+            targetDomain: ACTION
+            data: "{}"
+            extendedInternalId: extendedInternalId
+            name: name
+            description: description
+            id: id
+            binaries:
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            isMandatory: true
+            uniqueId: uniqueId
+          - permissionResource: UNKNOWN
+            stableId: stableId
+            targetDomain: ACTION
+            data: "{}"
+            extendedInternalId: extendedInternalId
+            name: name
+            description: description
+            id: id
+            binaries:
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            - fileName: fileName
+              data: data
+              type: PREVIEW_IMAGE
+            isMandatory: true
+            uniqueId: uniqueId
+          version: version
+          integrationDetails:
+          - link: link
+            name: name
+          - link: link
+            name: name
+          isTesting: true
+          labels:
+          - labels
+          - labels
+        id: id
+        deprecation:
+          reason: reason
+          replacementExtensions:
+          - replacementExtensions
+          - replacementExtensions
+        integrations:
+        - integrations
+        - integrations
+        isHidden: true
+      externalDocs:
+        url: ""
+      properties:
+        changelog:
+          items:
+            $ref: "#/components/schemas/ChangelogEntry"
+          type: array
+        darkModeImage:
+          type: string
+        deprecation:
+          $ref: "#/components/schemas/Deprecation"
+        id:
+          type: string
+        image:
+          type: string
+        integrations:
+          items:
+            type: string
+          type: array
+        isHidden:
+          type: boolean
+        keywords:
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        permissionDeniedRevisions:
+          items:
+            $ref: "#/components/schemas/ExtensionRevision"
+          type: array
+        revisions:
+          items:
+            $ref: "#/components/schemas/ExtensionRevision"
+          type: array
+      title: Extension metadata
+      type: object
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    Get_all_extensions_request:
+      additionalProperties: false
+      description: Request to list all extensions
+      properties:
+        filter:
+          $ref: "#/components/schemas/GetAllExtensionsRequest.Filter"
+        includeHiddenExtensions:
+          type: boolean
+      title: Get all extensions request
+      type: object

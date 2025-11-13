@@ -72,6 +72,9 @@ message AlertDefProperties {
     json_schema: {
       title: "Alert definition properties"
       description: "User-configurable properties of an alert definition"
+      required: [
+        "name"
+      ]
     }
   };
   google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
