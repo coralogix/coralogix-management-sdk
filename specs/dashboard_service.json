@@ -11,7 +11,7 @@
           "Dashboard service"
         ],
         "summary": "Get dashboard catalog",
-        "description": "Get a list of all dashboards accessible.",
+        "description": "Get a list of all dashboards accessible.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -57,6 +57,7 @@
           "Dashboard service"
         ],
         "summary": "Get a dashboard by URL slug",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -113,6 +114,7 @@
           "Dashboard service"
         ],
         "summary": "Replace a dashboard",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -183,6 +185,7 @@
           "Dashboard service"
         ],
         "summary": "Create a new dashboard",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -255,6 +258,7 @@
           "Dashboard service"
         ],
         "summary": "Get a dashboard",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -309,6 +313,7 @@
           "Dashboard service"
         ],
         "summary": "Delete a dashboard",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -373,6 +378,7 @@
           "Dashboard service"
         ],
         "summary": "Replace the default dashboard",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -450,6 +456,7 @@
           "Dashboard service"
         ],
         "summary": "Assign a dashboard to a folder",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -530,6 +537,7 @@
           "Dashboard service"
         ],
         "summary": "Add dashboard to favorites",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -607,6 +615,7 @@
           "Dashboard service"
         ],
         "summary": "Remove dashboard from favorites",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -765,9 +774,6 @@
       "Annotation.Source": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AnnotationSourceEventRecurrence"
-          },
-          {
             "$ref": "#/components/schemas/AnnotationSourceMetrics"
           },
           {
@@ -781,6 +787,9 @@
           },
           {
             "$ref": "#/components/schemas/AnnotationSourceManual"
+          },
+          {
+            "$ref": "#/components/schemas/AnnotationSourceEventRecurrence"
           }
         ]
       },
@@ -1101,16 +1110,16 @@
       "BarChart.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/BarChartQueryMetrics"
-          },
-          {
-            "$ref": "#/components/schemas/BarChartQueryDataprime"
-          },
-          {
             "$ref": "#/components/schemas/BarChartQueryLogs"
           },
           {
             "$ref": "#/components/schemas/BarChartQuerySpans"
+          },
+          {
+            "$ref": "#/components/schemas/BarChartQueryMetrics"
+          },
+          {
+            "$ref": "#/components/schemas/BarChartQueryDataprime"
           }
         ]
       },
@@ -1210,13 +1219,13 @@
       "ColorsBy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ColorsByAggregation"
-          },
-          {
             "$ref": "#/components/schemas/ColorsByStack"
           },
           {
             "$ref": "#/components/schemas/ColorsByGroupBy"
+          },
+          {
+            "$ref": "#/components/schemas/ColorsByAggregation"
           }
         ]
       },
@@ -1336,19 +1345,13 @@
       "Dashboard": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DashboardOffFolderPathAbsoluteTimeFrame"
-          },
-          {
-            "$ref": "#/components/schemas/DashboardOffFolderPathRelativeTimeFrame"
-          },
-          {
             "$ref": "#/components/schemas/DashboardTwoMinutesFolderIdRelativeTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardTwoMinutesFolderPathAbsoluteTimeFrame"
+            "$ref": "#/components/schemas/DashboardFiveMinutesFolderIdRelativeTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardFiveMinutesFolderIdAbsoluteTimeFrame"
+            "$ref": "#/components/schemas/DashboardFiveMinutesFolderPathRelativeTimeFrame"
           },
           {
             "$ref": "#/components/schemas/DashboardOffFolderIdRelativeTimeFrame"
@@ -1357,19 +1360,25 @@
             "$ref": "#/components/schemas/DashboardTwoMinutesFolderIdAbsoluteTimeFrame"
           },
           {
+            "$ref": "#/components/schemas/DashboardTwoMinutesFolderPathAbsoluteTimeFrame"
+          },
+          {
             "$ref": "#/components/schemas/DashboardTwoMinutesFolderPathRelativeTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardFiveMinutesFolderIdRelativeTimeFrame"
+            "$ref": "#/components/schemas/DashboardFiveMinutesFolderIdAbsoluteTimeFrame"
           },
           {
             "$ref": "#/components/schemas/DashboardFiveMinutesFolderPathAbsoluteTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardFiveMinutesFolderPathRelativeTimeFrame"
+            "$ref": "#/components/schemas/DashboardOffFolderIdAbsoluteTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardOffFolderIdAbsoluteTimeFrame"
+            "$ref": "#/components/schemas/DashboardOffFolderPathAbsoluteTimeFrame"
+          },
+          {
+            "$ref": "#/components/schemas/DashboardOffFolderPathRelativeTimeFrame"
           }
         ]
       },
@@ -2534,9 +2543,6 @@
       "DataTable.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DataTableQueryDataprime"
-          },
-          {
             "$ref": "#/components/schemas/DataTableQueryLogs"
           },
           {
@@ -2544,6 +2550,9 @@
           },
           {
             "$ref": "#/components/schemas/DataTableQueryMetrics"
+          },
+          {
+            "$ref": "#/components/schemas/DataTableQueryDataprime"
           }
         ]
       },
@@ -2661,13 +2670,13 @@
       "DataprimeSource.Strategy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DataprimeSourceStrategyDuration"
-          },
-          {
             "$ref": "#/components/schemas/DataprimeSourceStrategyInstant"
           },
           {
             "$ref": "#/components/schemas/DataprimeSourceStrategyRange"
+          },
+          {
+            "$ref": "#/components/schemas/DataprimeSourceStrategyDuration"
           }
         ]
       },
@@ -2775,9 +2784,6 @@
       "Dynamic.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DynamicQueryDataprime"
-          },
-          {
             "$ref": "#/components/schemas/DynamicQueryLogs"
           },
           {
@@ -2785,6 +2791,9 @@
           },
           {
             "$ref": "#/components/schemas/DynamicQueryMetrics"
+          },
+          {
+            "$ref": "#/components/schemas/DynamicQueryDataprime"
           }
         ]
       },
@@ -3025,10 +3034,10 @@
       "Filter.Operator": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterOperatorEquals"
+            "$ref": "#/components/schemas/FilterOperatorNotEquals"
           },
           {
-            "$ref": "#/components/schemas/FilterOperatorNotEquals"
+            "$ref": "#/components/schemas/FilterOperatorEquals"
           }
         ]
       },
@@ -3303,9 +3312,6 @@
       "Gauge.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/GaugeQueryMetrics"
-          },
-          {
             "$ref": "#/components/schemas/GaugeQueryLogs"
           },
           {
@@ -3313,6 +3319,9 @@
           },
           {
             "$ref": "#/components/schemas/GaugeQueryDataprime"
+          },
+          {
+            "$ref": "#/components/schemas/GaugeQueryMetrics"
           }
         ]
       },
@@ -3577,7 +3586,7 @@
         "properties": {
           "allowAbbreviation": {
             "example": false,
-            "description": "Whether to render numeric value without abbreviation",
+            "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
           "colorAxisMax": {
@@ -3871,7 +3880,7 @@
         "properties": {
           "allowAbbreviation": {
             "example": false,
-            "description": "Whether to render numeric value without abbreviation",
+            "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
           "categoryFields": {
@@ -4178,6 +4187,9 @@
       "HorizontalBarChart.Query": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/HorizontalBarChartQueryDataprime"
+          },
+          {
             "$ref": "#/components/schemas/HorizontalBarChartQueryLogs"
           },
           {
@@ -4185,9 +4197,6 @@
           },
           {
             "$ref": "#/components/schemas/HorizontalBarChartQueryMetrics"
-          },
-          {
-            "$ref": "#/components/schemas/HorizontalBarChartQueryDataprime"
           }
         ]
       },
@@ -4317,7 +4326,7 @@
         "properties": {
           "allowAbbreviation": {
             "example": false,
-            "description": "Whether to render numeric value without abbreviation",
+            "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
           "categoryFields": {
@@ -4737,6 +4746,28 @@
         },
         "additionalProperties": false
       },
+      "LinkAction": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/UUID"
+          },
+          "name": {
+            "example": {
+              "value": "My custom link"
+            },
+            "description": "Name of the link action",
+            "type": "string"
+          },
+          "url": {
+            "example": {
+              "value": "https://coralogix.com/#/dashboards/{{$p.dashboardId}}?severity={{severity}}"
+            },
+            "description": "Static URL that may contain variables using {{variable_name}} syntax",
+            "type": "string"
+          }
+        }
+      },
       "ListValue": {
         "type": "object",
         "properties": {
@@ -5054,10 +5085,10 @@
       "ManualSource.Strategy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ManualSourceStrategyInstant"
+            "$ref": "#/components/schemas/ManualSourceStrategyRange"
           },
           {
-            "$ref": "#/components/schemas/ManualSourceStrategyRange"
+            "$ref": "#/components/schemas/ManualSourceStrategyInstant"
           }
         ]
       },
@@ -5323,13 +5354,13 @@
       "MultiSelect.Query": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/MultiSelectQuerySpansQuery"
+          },
+          {
             "$ref": "#/components/schemas/MultiSelectQueryLogsQuery"
           },
           {
             "$ref": "#/components/schemas/MultiSelectQueryMetricsQuery"
-          },
-          {
-            "$ref": "#/components/schemas/MultiSelectQuerySpansQuery"
           }
         ]
       },
@@ -5388,12 +5419,6 @@
       "MultiSelect.Source": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/MultiSelectSourceLogsPath"
-          },
-          {
-            "$ref": "#/components/schemas/MultiSelectSourceMetricLabel"
-          },
-          {
             "$ref": "#/components/schemas/MultiSelectSourceConstantList"
           },
           {
@@ -5401,6 +5426,12 @@
           },
           {
             "$ref": "#/components/schemas/MultiSelectSourceQuery"
+          },
+          {
+            "$ref": "#/components/schemas/MultiSelectSourceLogsPath"
+          },
+          {
+            "$ref": "#/components/schemas/MultiSelectSourceMetricLabel"
           }
         ]
       },
@@ -5508,10 +5539,10 @@
       "MultiStringValue": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/MultiStringValueList"
+            "$ref": "#/components/schemas/MultiStringValueAll"
           },
           {
-            "$ref": "#/components/schemas/MultiStringValueAll"
+            "$ref": "#/components/schemas/MultiStringValueList"
           }
         ]
       },
@@ -5764,6 +5795,9 @@
       "PieChart.Query": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/PieChartQueryLogs"
+          },
+          {
             "$ref": "#/components/schemas/PieChartQuerySpans"
           },
           {
@@ -5771,9 +5805,6 @@
           },
           {
             "$ref": "#/components/schemas/PieChartQueryDataprime"
-          },
-          {
-            "$ref": "#/components/schemas/PieChartQueryLogs"
           }
         ]
       },
@@ -5912,10 +5943,19 @@
       "PropertyDefinition": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/PropertyDefinitionLink"
+          },
+          {
             "$ref": "#/components/schemas/PropertyDefinitionThresholds"
           },
           {
             "$ref": "#/components/schemas/PropertyDefinitionAlignment"
+          },
+          {
+            "$ref": "#/components/schemas/PropertyDefinitionUnits"
+          },
+          {
+            "$ref": "#/components/schemas/PropertyDefinitionRegexExtract"
           }
         ]
       },
@@ -5924,6 +5964,28 @@
         "properties": {
           "alignment": {
             "$ref": "#/components/schemas/TextAlignment"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PropertyDefinitionLink": {
+        "type": "object",
+        "properties": {
+          "link": {
+            "$ref": "#/components/schemas/PropertyLinks"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PropertyDefinitionRegexExtract": {
+        "type": "object",
+        "properties": {
+          "regexExtract": {
+            "example": {
+              "value": "gr[ae]y"
+            },
+            "description": "Value of Regex Extract property, a regex string",
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -5937,14 +5999,42 @@
         },
         "additionalProperties": false
       },
+      "PropertyDefinitionUnits": {
+        "type": "object",
+        "properties": {
+          "units": {
+            "$ref": "#/components/schemas/PropertyUnits"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PropertyLinks": {
+        "type": "object",
+        "properties": {
+          "actions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LinkAction"
+            }
+          }
+        }
+      },
       "PropertyThresholds": {
         "type": "object",
         "properties": {
           "max": {
+            "example": {
+              "value": 5000
+            },
+            "description": "A maximum value used in relative thresholds to calculate the threshold levels",
             "type": "number",
             "format": "double"
           },
           "min": {
+            "example": {
+              "value": 0
+            },
+            "description": "A minimum value used in relative thresholds to calculate the threshold levels",
             "type": "number",
             "format": "double"
           },
@@ -5956,6 +6046,50 @@
             "items": {
               "$ref": "#/components/schemas/common.Threshold"
             }
+          }
+        }
+      },
+      "PropertyUnits": {
+        "type": "object",
+        "properties": {
+          "allowAbbreviation": {
+            "example": false,
+            "description": "Whether to render numeric value with abbreviation",
+            "type": "boolean"
+          },
+          "customUnit": {
+            "example": {
+              "value": "rpm"
+            },
+            "description": "Custom unit (requires to set unit field as 'custom' to take effect)",
+            "type": "string"
+          },
+          "decimalPrecision": {
+            "example": {
+              "value": 4
+            },
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "type": "integer",
+            "format": "int32"
+          },
+          "max": {
+            "example": {
+              "value": 10000
+            },
+            "description": "A maximum value used in percentage type unit (UNIT_PERCENT) for calculating displayed value",
+            "type": "number",
+            "format": "double"
+          },
+          "min": {
+            "example": {
+              "value": 0
+            },
+            "description": "A minimum value used in percentage type unit (UNIT_PERCENT) for calculating displayed value",
+            "type": "number",
+            "format": "double"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/common.Unit"
           }
         }
       },
@@ -6073,13 +6207,13 @@
       "Query.MetricsQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QueryMetricsQueryTypeMetricName"
-          },
-          {
             "$ref": "#/components/schemas/QueryMetricsQueryTypeLabelName"
           },
           {
             "$ref": "#/components/schemas/QueryMetricsQueryTypeLabelValue"
+          },
+          {
+            "$ref": "#/components/schemas/QueryMetricsQueryTypeMetricName"
           }
         ]
       },
@@ -6127,10 +6261,10 @@
       "Query.SpansQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QuerySpansQueryTypeFieldName"
+            "$ref": "#/components/schemas/QuerySpansQueryTypeFieldValue"
           },
           {
-            "$ref": "#/components/schemas/QuerySpansQueryTypeFieldValue"
+            "$ref": "#/components/schemas/QuerySpansQueryTypeFieldName"
           }
         ]
       },
@@ -6461,13 +6595,13 @@
       "QuerySource.MetricsQuery.Type": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/QuerySourceMetricsQueryTypeMetricName"
+          },
+          {
             "$ref": "#/components/schemas/QuerySourceMetricsQueryTypeLabelName"
           },
           {
             "$ref": "#/components/schemas/QuerySourceMetricsQueryTypeLabelValue"
-          },
-          {
-            "$ref": "#/components/schemas/QuerySourceMetricsQueryTypeMetricName"
           }
         ]
       },
@@ -7120,13 +7254,13 @@
       "SpansSource.Strategy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SpansSourceStrategyDuration"
-          },
-          {
             "$ref": "#/components/schemas/SpansSourceStrategyInstant"
           },
           {
             "$ref": "#/components/schemas/SpansSourceStrategyRange"
+          },
+          {
+            "$ref": "#/components/schemas/SpansSourceStrategyDuration"
           }
         ]
       },
@@ -7206,7 +7340,7 @@
         "properties": {
           "allowAbbreviation": {
             "example": false,
-            "description": "Whether to render numeric value without abbreviation",
+            "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
           "categoryFields": {
@@ -7267,6 +7401,12 @@
           },
           "valueField": {
             "$ref": "#/components/schemas/ObservationField"
+          },
+          "valueFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObservationField"
+            }
           }
         }
       },
@@ -7424,6 +7564,9 @@
       "TextboxDefaultValue": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/TextboxDefaultValueDefaultIntervalValue"
+          },
+          {
             "$ref": "#/components/schemas/TextboxDefaultValueSingleString"
           },
           {
@@ -7440,9 +7583,6 @@
           },
           {
             "$ref": "#/components/schemas/TextboxDefaultValueDefaultRegexValue"
-          },
-          {
-            "$ref": "#/components/schemas/TextboxDefaultValueDefaultIntervalValue"
           }
         ]
       },
@@ -7574,7 +7714,7 @@
         "properties": {
           "allowAbbreviation": {
             "example": false,
-            "description": "Whether to render numeric value without abbreviation",
+            "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
           "barValueDisplay": {
@@ -7669,7 +7809,7 @@
         "properties": {
           "allowAbbreviation": {
             "example": false,
-            "description": "Whether to render numeric value without abbreviation",
+            "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
           "categoryFields": {
@@ -7932,16 +8072,16 @@
       "VariableSourceV2.QuerySource": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/VariableSourceV2QuerySourceSpansQuery"
-          },
-          {
-            "$ref": "#/components/schemas/VariableSourceV2QuerySourceDataprimeQuery"
-          },
-          {
             "$ref": "#/components/schemas/VariableSourceV2QuerySourceLogsQuery"
           },
           {
             "$ref": "#/components/schemas/VariableSourceV2QuerySourceMetricsQuery"
+          },
+          {
+            "$ref": "#/components/schemas/VariableSourceV2QuerySourceSpansQuery"
+          },
+          {
+            "$ref": "#/components/schemas/VariableSourceV2QuerySourceDataprimeQuery"
           }
         ]
       },
@@ -8104,6 +8244,12 @@
       "VariableValueV2": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/VariableValueV2MultiString"
+          },
+          {
+            "$ref": "#/components/schemas/VariableValueV2SingleString"
+          },
+          {
             "$ref": "#/components/schemas/VariableValueV2SingleNumeric"
           },
           {
@@ -8114,12 +8260,6 @@
           },
           {
             "$ref": "#/components/schemas/VariableValueV2Interval"
-          },
-          {
-            "$ref": "#/components/schemas/VariableValueV2MultiString"
-          },
-          {
-            "$ref": "#/components/schemas/VariableValueV2SingleString"
           }
         ]
       },
@@ -8190,7 +8330,7 @@
         "properties": {
           "allowAbbreviation": {
             "example": false,
-            "description": "Whether to render numeric value without abbreviation",
+            "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
           "barValueDisplay": {
@@ -8290,34 +8430,34 @@
       "Visualization": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/VisualizationHeatmap"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationTable"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationTimeSeriesBars"
+          },
+          {
             "$ref": "#/components/schemas/VisualizationGauge"
           },
           {
             "$ref": "#/components/schemas/VisualizationPieChart"
           },
           {
-            "$ref": "#/components/schemas/VisualizationTable"
+            "$ref": "#/components/schemas/VisualizationVerticalBars"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationTimeSeriesLines"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationStat"
           },
           {
             "$ref": "#/components/schemas/VisualizationHexagonBins"
           },
           {
             "$ref": "#/components/schemas/VisualizationHorizontalBars"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationVerticalBars"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationHeatmap"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationTimeSeriesLines"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationTimeSeriesBars"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationStat"
           }
         ]
       },
@@ -8335,7 +8475,7 @@
         "properties": {
           "allowAbbreviation": {
             "example": false,
-            "description": "Whether to render numeric value without abbreviation",
+            "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
           "categoryFields": {
@@ -8403,6 +8543,12 @@
           },
           "valueField": {
             "$ref": "#/components/schemas/ObservationField"
+          },
+          "valueFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObservationField"
+            }
           }
         }
       },
@@ -8411,7 +8557,7 @@
         "properties": {
           "allowAbbreviation": {
             "example": false,
-            "description": "Whether to render numeric value without abbreviation",
+            "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
           "categoryFields": {
@@ -8701,19 +8847,22 @@
       "Widget.Definition": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/WidgetDefinitionMarkdown"
+          },
+          {
+            "$ref": "#/components/schemas/WidgetDefinitionHexagon"
+          },
+          {
             "$ref": "#/components/schemas/WidgetDefinitionDataTable"
           },
           {
             "$ref": "#/components/schemas/WidgetDefinitionGauge"
           },
           {
+            "$ref": "#/components/schemas/WidgetDefinitionPieChart"
+          },
+          {
             "$ref": "#/components/schemas/WidgetDefinitionBarChart"
-          },
-          {
-            "$ref": "#/components/schemas/WidgetDefinitionHorizontalBarChart"
-          },
-          {
-            "$ref": "#/components/schemas/WidgetDefinitionHexagon"
           },
           {
             "$ref": "#/components/schemas/WidgetDefinitionDynamic"
@@ -8722,10 +8871,7 @@
             "$ref": "#/components/schemas/WidgetDefinitionLineChart"
           },
           {
-            "$ref": "#/components/schemas/WidgetDefinitionPieChart"
-          },
-          {
-            "$ref": "#/components/schemas/WidgetDefinitionMarkdown"
+            "$ref": "#/components/schemas/WidgetDefinitionHorizontalBarChart"
           }
         ]
       },
@@ -9251,6 +9397,14 @@
           "DATA_MODE_TYPE_HIGH_UNSPECIFIED",
           "DATA_MODE_TYPE_ARCHIVE"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

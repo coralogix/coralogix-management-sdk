@@ -642,6 +642,14 @@
           "selectedValues"
         ]
       }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
+      }
     }
   }
 }

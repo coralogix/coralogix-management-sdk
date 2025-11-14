@@ -11,6 +11,7 @@
           "Role Management Service"
         ],
         "summary": "List Custom Roles",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -62,6 +63,7 @@
           "Role Management Service"
         ],
         "summary": "Create Role",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -133,6 +135,7 @@
           "Role Management Service"
         ],
         "summary": "Get Custom Role",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -191,6 +194,7 @@
           "Role Management Service"
         ],
         "summary": "Update Role",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -270,6 +274,7 @@
           "Role Management Service"
         ],
         "summary": "Delete Role",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -336,6 +341,7 @@
           "Role Management Service"
         ],
         "summary": "List System Roles",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -694,6 +700,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

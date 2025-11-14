@@ -7,6 +7,7 @@ servers:
 paths:
   /aaa/team-roles/v1/custom-roles:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RoleManagementService_ListCustomRoles
@@ -42,6 +43,7 @@ paths:
       tags:
       - Role Management Service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RoleManagementService_CreateRole
@@ -82,6 +84,7 @@ paths:
       - Role Management Service
   /aaa/team-roles/v1/custom-roles/{role_id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RoleManagementService_DeleteRole
@@ -125,6 +128,7 @@ paths:
       tags:
       - Role Management Service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RoleManagementService_GetCustomRole
@@ -164,6 +168,7 @@ paths:
       tags:
       - Role Management Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RoleManagementService_UpdateRole
@@ -209,6 +214,7 @@ paths:
       - Role Management Service
   /aaa/team-roles/v1/system-roles:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RoleManagementService_ListSystemRoles
@@ -529,3 +535,9 @@ components:
         newPermissions:
           $ref: "#/components/schemas/v2.Permissions"
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

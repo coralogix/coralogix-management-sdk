@@ -11,6 +11,7 @@
           "Scopes Service"
         ],
         "summary": "Get Team Scopes By Ids",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -65,6 +66,7 @@
           "Scopes Service"
         ],
         "summary": "Update Scope",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -147,6 +149,7 @@
           "Scopes Service"
         ],
         "summary": "Create Scope",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -225,6 +228,7 @@
           "Scopes Service"
         ],
         "summary": "Get Team Scopes",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -267,6 +271,7 @@
           "Scopes Service"
         ],
         "summary": "Delete Scope",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -598,6 +603,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

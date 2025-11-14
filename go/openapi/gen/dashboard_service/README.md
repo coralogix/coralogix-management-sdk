@@ -273,6 +273,7 @@ Class | Method | HTTP request | Description
  - [LineChartResolution](docs/LineChartResolution.md)
  - [LineChartSpansQuery](docs/LineChartSpansQuery.md)
  - [LineChartStackedLine](docs/LineChartStackedLine.md)
+ - [LinkAction](docs/LinkAction.md)
  - [ListValue](docs/ListValue.md)
  - [Logs](docs/Logs.md)
  - [LogsAggregation](docs/LogsAggregation.md)
@@ -356,8 +357,13 @@ Class | Method | HTTP request | Description
  - [Property](docs/Property.md)
  - [PropertyDefinition](docs/PropertyDefinition.md)
  - [PropertyDefinitionAlignment](docs/PropertyDefinitionAlignment.md)
+ - [PropertyDefinitionLink](docs/PropertyDefinitionLink.md)
+ - [PropertyDefinitionRegexExtract](docs/PropertyDefinitionRegexExtract.md)
  - [PropertyDefinitionThresholds](docs/PropertyDefinitionThresholds.md)
+ - [PropertyDefinitionUnits](docs/PropertyDefinitionUnits.md)
+ - [PropertyLinks](docs/PropertyLinks.md)
  - [PropertyThresholds](docs/PropertyThresholds.md)
+ - [PropertyUnits](docs/PropertyUnits.md)
  - [QueryDefinition](docs/QueryDefinition.md)
  - [QueryLogsQuery](docs/QueryLogsQuery.md)
  - [QueryLogsQueryType](docs/QueryLogsQueryType.md)
@@ -564,7 +570,28 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
-Endpoints do not require authorization.
+
+Authentication schemes defined for the API:
+### apiKeyAuth
+
+- **Type**: API key
+- **API key parameter name**: Authorization
+- **Location**: HTTP header
+
+Note, each API key must be added to a map of `map[string]APIKey` where the key is: apiKeyAuth and passed in as the auth context for each request.
+
+Example
+
+```go
+auth := context.WithValue(
+		context.Background(),
+		dashboard_service.ContextAPIKeys,
+		map[string]dashboard_service.APIKey{
+			"apiKeyAuth": {Key: "API_KEY_STRING"},
+		},
+	)
+r, err := client.Service.Operation(auth, args)
+```
 
 
 ## Documentation for Utility Methods

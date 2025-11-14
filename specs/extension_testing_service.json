@@ -11,6 +11,7 @@
           "Extension testing service"
         ],
         "summary": "Test extension revision",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -73,6 +74,7 @@
           "Extension testing service"
         ],
         "summary": "Cleanup testing extension",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -134,6 +136,7 @@
           "Extension testing service"
         ],
         "summary": "Initialize testing revision",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -634,6 +637,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

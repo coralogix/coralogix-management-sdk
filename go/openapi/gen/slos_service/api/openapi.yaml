@@ -7,6 +7,7 @@ servers:
 paths:
   /v1/slo/slos:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_ListSlos
@@ -41,6 +42,7 @@ paths:
       tags:
       - Slos Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_CreateSlo
@@ -81,6 +83,7 @@ paths:
       tags:
       - Slos Service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_ReplaceSlo
@@ -122,6 +125,7 @@ paths:
       - Slos Service
   /v1/slo/slos/validate:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_ValidateReplaceSloAlerts
@@ -154,6 +158,7 @@ paths:
       - Slos Service
   /v1/slo/slos/zeroState:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_GetZeroState
@@ -181,6 +186,7 @@ paths:
       - Slos Service
   /v1/slo/slos/{id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_DeleteSlo
@@ -215,6 +221,7 @@ paths:
       tags:
       - Slos Service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_GetSlo
@@ -250,6 +257,7 @@ paths:
       - Slos Service
   /v1/slo/slos:batchExecute:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_BatchExecuteSlo
@@ -287,6 +295,7 @@ paths:
       - Slos Service
   /v1/slo/slos:batchGet:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_BatchGetSlos
@@ -328,7 +337,10 @@ components:
       description: Response containing the results of batch executed SLO operations.
       example:
         matchingResponses:
-        - createSloResponse:
+        - replaceSloResponse:
+            effectedSloAlertIds:
+            - effectedSloAlertIds
+            - effectedSloAlertIds
             slo:
               creator: test@domain.com
               requestBasedMetricSli:
@@ -353,7 +365,10 @@ components:
               name: Example Slo Name
               id: b11919d5-ef85-4bb1-8655-02640dbe94d9
               targetThresholdPercentage: 99.999
-        - createSloResponse:
+        - replaceSloResponse:
+            effectedSloAlertIds:
+            - effectedSloAlertIds
+            - effectedSloAlertIds
             slo:
               creator: test@domain.com
               requestBasedMetricSli:
@@ -968,14 +983,37 @@ components:
       type: object
     SloExecutionResponse:
       oneOf:
-      - $ref: "#/components/schemas/SloExecutionResponseCreateSloResponse"
       - $ref: "#/components/schemas/SloExecutionResponseReplaceSloResponse"
       - $ref: "#/components/schemas/SloExecutionResponseDeleteSloResponse"
+      - $ref: "#/components/schemas/SloExecutionResponseCreateSloResponse"
     SloExecutionResponseCreateSloResponse:
       additionalProperties: false
       description: Response for an executed SLO operation.
-      example:
+      externalDocs:
+        url: ""
+      properties:
         createSloResponse:
+          $ref: "#/components/schemas/CreateSloResponse"
+      title: SloExecutionResponse
+      type: object
+    SloExecutionResponseDeleteSloResponse:
+      additionalProperties: false
+      description: Response for an executed SLO operation.
+      externalDocs:
+        url: ""
+      properties:
+        deleteSloResponse:
+          $ref: "#/components/schemas/DeleteSloResponse"
+      title: SloExecutionResponse
+      type: object
+    SloExecutionResponseReplaceSloResponse:
+      additionalProperties: false
+      description: Response for an executed SLO operation.
+      example:
+        replaceSloResponse:
+          effectedSloAlertIds:
+          - effectedSloAlertIds
+          - effectedSloAlertIds
           slo:
             creator: test@domain.com
             requestBasedMetricSli:
@@ -1000,26 +1038,6 @@ components:
             name: Example Slo Name
             id: b11919d5-ef85-4bb1-8655-02640dbe94d9
             targetThresholdPercentage: 99.999
-      externalDocs:
-        url: ""
-      properties:
-        createSloResponse:
-          $ref: "#/components/schemas/CreateSloResponse"
-      title: SloExecutionResponse
-      type: object
-    SloExecutionResponseDeleteSloResponse:
-      additionalProperties: false
-      description: Response for an executed SLO operation.
-      externalDocs:
-        url: ""
-      properties:
-        deleteSloResponse:
-          $ref: "#/components/schemas/DeleteSloResponse"
-      title: SloExecutionResponse
-      type: object
-    SloExecutionResponseReplaceSloResponse:
-      additionalProperties: false
-      description: Response for an executed SLO operation.
       externalDocs:
         url: ""
       properties:
@@ -1325,3 +1343,9 @@ components:
       - $ref: "#/components/schemas/SloExecutionRequestCreateSloRequest"
       - $ref: "#/components/schemas/SloExecutionRequestReplaceSloRequest"
       - $ref: "#/components/schemas/SloExecutionRequestDeleteSloRequest"
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

@@ -11,6 +11,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Update an alert scheduler rule",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -71,6 +72,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Create an alert scheduler rule",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -133,6 +135,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Get multiple alert scheduler rules",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -171,10 +174,10 @@
             "schema": {
               "oneOf": [
                 {
-                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds"
+                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds"
                 },
                 {
-                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds"
+                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds"
                 }
               ]
             },
@@ -225,6 +228,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Update multiple alert scheduler rules",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -288,6 +292,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Create multiple alert scheduler rules",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -353,6 +358,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Get an alert scheduler rule",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -404,6 +410,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Delete an alert scheduler rule",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -869,10 +876,10 @@
       "Recurring": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/RecurringDynamic"
+            "$ref": "#/components/schemas/RecurringAlways"
           },
           {
-            "$ref": "#/components/schemas/RecurringAlways"
+            "$ref": "#/components/schemas/RecurringDynamic"
           }
         ]
       },
@@ -1115,10 +1122,10 @@
       "alert_scheduler_rule_protobuf.v1.Filter": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertMetaLabels"
+            "$ref": "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertUniqueIds"
           },
           {
-            "$ref": "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertUniqueIds"
+            "$ref": "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertMetaLabels"
           }
         ]
       },
@@ -1179,6 +1186,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

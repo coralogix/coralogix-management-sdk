@@ -19,7 +19,7 @@ var _ MappedNullable = &Stat{}
 
 // Stat struct for Stat
 type Stat struct {
-	// Whether to render numeric value without abbreviation
+	// Whether to render numeric value with abbreviation
 	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
 	// Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)
@@ -39,6 +39,7 @@ type Stat struct {
 	Thresholds []CommonThreshold `json:"thresholds,omitempty"`
 	Unit *CommonUnit `json:"unit,omitempty"`
 	ValueField *ObservationField `json:"valueField,omitempty"`
+	ValueFields []ObservationField `json:"valueFields,omitempty"`
 }
 
 // NewStat instantiates a new Stat object
@@ -506,6 +507,38 @@ func (o *Stat) SetValueField(v ObservationField) {
 	o.ValueField = &v
 }
 
+// GetValueFields returns the ValueFields field value if set, zero value otherwise.
+func (o *Stat) GetValueFields() []ObservationField {
+	if o == nil || IsNil(o.ValueFields) {
+		var ret []ObservationField
+		return ret
+	}
+	return o.ValueFields
+}
+
+// GetValueFieldsOk returns a tuple with the ValueFields field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Stat) GetValueFieldsOk() ([]ObservationField, bool) {
+	if o == nil || IsNil(o.ValueFields) {
+		return nil, false
+	}
+	return o.ValueFields, true
+}
+
+// HasValueFields returns a boolean if a field has been set.
+func (o *Stat) HasValueFields() bool {
+	if o != nil && !IsNil(o.ValueFields) {
+		return true
+	}
+
+	return false
+}
+
+// SetValueFields gets a reference to the given []ObservationField and assigns it to the ValueFields field.
+func (o *Stat) SetValueFields(v []ObservationField) {
+	o.ValueFields = v
+}
+
 func (o Stat) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -557,6 +590,9 @@ func (o Stat) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ValueField) {
 		toSerialize["valueField"] = o.ValueField
+	}
+	if !IsNil(o.ValueFields) {
+		toSerialize["valueFields"] = o.ValueFields
 	}
 	return toSerialize, nil
 }

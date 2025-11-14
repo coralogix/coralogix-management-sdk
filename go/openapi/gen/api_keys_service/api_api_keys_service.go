@@ -41,6 +41,8 @@ func (r ApiApiKeysServiceCreateApiKeyRequest) Execute() (*CreateApiKeyResponse, 
 /*
 ApiKeysServiceCreateApiKey Create API Key
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiApiKeysServiceCreateApiKeyRequest
 */
@@ -140,6 +142,8 @@ func (r ApiApiKeysServiceDeleteApiKeyRequest) Execute() (map[string]interface{},
 
 /*
 ApiKeysServiceDeleteApiKey Delete API Key
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param keyId
@@ -242,6 +246,8 @@ func (r ApiApiKeysServiceGetApiKeyRequest) Execute() (*GetApiKeyResponse, *http.
 /*
 ApiKeysServiceGetApiKey Get API Key
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param keyId
  @return ApiApiKeysServiceGetApiKeyRequest
@@ -341,6 +347,8 @@ func (r ApiApiKeysServiceGetSendDataApiKeysRequest) Execute() (*GetSendDataApiKe
 
 /*
 ApiKeysServiceGetSendDataApiKeys Get \"Send Data\" API Keys
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiApiKeysServiceGetSendDataApiKeysRequest
@@ -445,6 +453,8 @@ func (r ApiApiKeysServiceUpdateApiKeyRequest) Execute() (map[string]interface{},
 
 /*
 ApiKeysServiceUpdateApiKey Update API Key
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param keyId

@@ -7,6 +7,7 @@ servers:
 paths:
   /v2/actions:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ActionsService_ListActions
@@ -33,6 +34,7 @@ paths:
       tags:
       - Actions Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ActionsService_CreateAction
@@ -64,6 +66,7 @@ paths:
       tags:
       - Actions Service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ActionsService_ReplaceAction
@@ -96,6 +99,7 @@ paths:
       - Actions Service
   /v2/actions/actions:atomicBatchExecute:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ActionsService_AtomicBatchExecuteActions
@@ -128,6 +132,7 @@ paths:
       - Actions Service
   /v2/actions/actions:order:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ActionsService_OrderActions
@@ -160,6 +165,7 @@ paths:
       - Actions Service
   /v2/actions/{id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ActionsService_DeleteAction
@@ -194,6 +200,7 @@ paths:
       tags:
       - Actions Service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ActionsService_GetAction
@@ -231,9 +238,9 @@ components:
   schemas:
     ActionExecutionRequest:
       oneOf:
+      - $ref: "#/components/schemas/ActionExecutionRequestCreate"
       - $ref: "#/components/schemas/ActionExecutionRequestReplace"
       - $ref: "#/components/schemas/ActionExecutionRequestDelete"
-      - $ref: "#/components/schemas/ActionExecutionRequestCreate"
     ActionExecutionRequestCreate:
       additionalProperties: false
       properties:
@@ -658,3 +665,9 @@ components:
             type: integer
           type: object
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

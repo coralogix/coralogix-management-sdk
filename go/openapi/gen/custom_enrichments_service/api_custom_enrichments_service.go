@@ -54,6 +54,8 @@ func (r ApiCustomEnrichmentServiceCreateCustomEnrichmentRequest) Execute() (*Cre
 /*
 CustomEnrichmentServiceCreateCustomEnrichment Create Custom Enrichments
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCustomEnrichmentServiceCreateCustomEnrichmentRequest
 */
@@ -161,6 +163,8 @@ func (r ApiCustomEnrichmentServiceDeleteCustomEnrichmentRequest) Execute() (*Del
 /*
 CustomEnrichmentServiceDeleteCustomEnrichment Delete Custom Enrichments
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param customEnrichmentId
  @return ApiCustomEnrichmentServiceDeleteCustomEnrichmentRequest
@@ -262,6 +266,8 @@ func (r ApiCustomEnrichmentServiceGetCustomEnrichmentRequest) Execute() (*GetCus
 /*
 CustomEnrichmentServiceGetCustomEnrichment Get Custom Enrichment
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiCustomEnrichmentServiceGetCustomEnrichmentRequest
@@ -361,6 +367,8 @@ func (r ApiCustomEnrichmentServiceGetCustomEnrichmentsRequest) Execute() (*GetCu
 
 /*
 CustomEnrichmentServiceGetCustomEnrichments Get Custom Enrichments
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCustomEnrichmentServiceGetCustomEnrichmentsRequest
@@ -464,6 +472,8 @@ func (r ApiCustomEnrichmentServiceSearchCustomEnrichmentDataRequest) Execute() (
 
 /*
 CustomEnrichmentServiceSearchCustomEnrichmentData Search Custom Enrichment Data
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCustomEnrichmentServiceSearchCustomEnrichmentDataRequest
@@ -578,6 +588,8 @@ func (r ApiCustomEnrichmentServiceUpdateCustomEnrichmentRequest) Execute() (*Upd
 
 /*
 CustomEnrichmentServiceUpdateCustomEnrichment Update Custom Enrichment
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCustomEnrichmentServiceUpdateCustomEnrichmentRequest

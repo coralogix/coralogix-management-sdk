@@ -11,6 +11,7 @@
           "Global routers service"
         ],
         "summary": "List Global Routers",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -62,6 +63,7 @@
           "Global routers service"
         ],
         "summary": "Replace Global Router",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -101,6 +103,7 @@
           "Global routers service"
         ],
         "summary": "Create Global Router",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -142,6 +145,7 @@
           "Global routers service"
         ],
         "summary": "Get Global Router",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -175,6 +179,7 @@
           "Global routers service"
         ],
         "summary": "Delete Global Router",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -210,6 +215,7 @@
           "Global routers service"
         ],
         "summary": "Batch Get Global Routers",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -613,6 +619,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

@@ -11,6 +11,7 @@
           "Policies Service"
         ],
         "summary": "Get Company Policies",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -70,6 +71,7 @@
           "Policies Service"
         ],
         "summary": "Update Policy",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -81,10 +83,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/UpdatePolicyRequestLogRules"
+                    "$ref": "#/components/schemas/UpdatePolicyRequestSpanRules"
                   },
                   {
-                    "$ref": "#/components/schemas/UpdatePolicyRequestSpanRules"
+                    "$ref": "#/components/schemas/UpdatePolicyRequestLogRules"
                   }
                 ]
               }
@@ -127,6 +129,7 @@
           "Policies Service"
         ],
         "summary": "Create Policy",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -138,10 +141,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/CreatePolicyRequestLogRules"
+                    "$ref": "#/components/schemas/CreatePolicyRequestSpanRules"
                   },
                   {
-                    "$ref": "#/components/schemas/CreatePolicyRequestSpanRules"
+                    "$ref": "#/components/schemas/CreatePolicyRequestLogRules"
                   }
                 ]
               }
@@ -186,6 +189,7 @@
           "Policies Service"
         ],
         "summary": "Atomic Overwrite Log Policies",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -251,6 +255,7 @@
           "Policies Service"
         ],
         "summary": "Atomic Overwrite Span Policies",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -316,6 +321,7 @@
           "Policies Service"
         ],
         "summary": "Atomic Batch Create Policy",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -381,6 +387,7 @@
           "Policies Service"
         ],
         "summary": "Bulk Test Log Policies",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -446,6 +453,7 @@
           "Policies Service"
         ],
         "summary": "Get Policy Priority Settings",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -488,6 +496,7 @@
           "Policies Service"
         ],
         "summary": "Reorder Policies",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -557,6 +566,7 @@
           "Policies Service"
         ],
         "summary": "Replace Policy Settings",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -617,6 +627,7 @@
           "Policies Service"
         ],
         "summary": "Toggle Policies",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -685,6 +696,7 @@
           "Policies Service"
         ],
         "summary": "Get Policy by ID",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -737,6 +749,7 @@
           "Policies Service"
         ],
         "summary": "Delete Policy",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -915,6 +928,9 @@
           "description": {
             "example": "My Policy Description",
             "type": "string"
+          },
+          "disabled": {
+            "type": "boolean"
           },
           "name": {
             "example": "My Policy",
@@ -1324,10 +1340,10 @@
       "Placement": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/PlacementFirst"
+            "$ref": "#/components/schemas/PlacementLast"
           },
           {
-            "$ref": "#/components/schemas/PlacementLast"
+            "$ref": "#/components/schemas/PlacementFirst"
           }
         ]
       },
@@ -1380,7 +1396,7 @@
             "format": "int32"
           },
           "createdAt": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "type": "string"
           },
           "deleted": {
@@ -1418,7 +1434,7 @@
             "$ref": "#/components/schemas/quota.v1.Rule"
           },
           "updatedAt": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "type": "string"
           }
         },
@@ -1478,7 +1494,7 @@
             "format": "int32"
           },
           "createdAt": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "type": "string"
           },
           "deleted": {
@@ -1516,7 +1532,7 @@
             "$ref": "#/components/schemas/quota.v1.Rule"
           },
           "updatedAt": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "type": "string"
           }
         },
@@ -1854,6 +1870,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

@@ -11,6 +11,7 @@
           "Contextual data integration service"
         ],
         "summary": "Get all contextual data integrations accessible",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -64,6 +65,7 @@
           "Contextual data integration service"
         ],
         "summary": "Update contextual data integration",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -126,6 +128,7 @@
           "Contextual data integration service"
         ],
         "summary": "Save contextual data integration",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -187,6 +190,7 @@
           "Contextual data integration service"
         ],
         "summary": "Get contextual data integration definition",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -251,6 +255,7 @@
           "Contextual data integration service"
         ],
         "summary": "Test contextual data integration",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -315,6 +320,7 @@
           "Contextual data integration service"
         ],
         "summary": "Get contextual data integration details",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -380,6 +386,7 @@
           "Contextual data integration service"
         ],
         "summary": "Delete contextual data integration",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -901,15 +908,6 @@
       "FieldInformation": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FieldInformationSingleBoolean"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationSelection"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationSingleNumber"
-          },
-          {
             "$ref": "#/components/schemas/FieldInformationSingle"
           },
           {
@@ -917,6 +915,15 @@
           },
           {
             "$ref": "#/components/schemas/FieldInformationMultipleSelection"
+          },
+          {
+            "$ref": "#/components/schemas/FieldInformationSingleBoolean"
+          },
+          {
+            "$ref": "#/components/schemas/FieldInformationSelection"
+          },
+          {
+            "$ref": "#/components/schemas/FieldInformationSingleNumber"
           }
         ]
       },
@@ -1663,6 +1670,12 @@
       "IntegrationRevision": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/IntegrationRevisionRum"
+          },
+          {
+            "$ref": "#/components/schemas/IntegrationRevisionTerraform"
+          },
+          {
             "$ref": "#/components/schemas/IntegrationRevisionCloudFormation"
           },
           {
@@ -1673,12 +1686,6 @@
           },
           {
             "$ref": "#/components/schemas/IntegrationRevisionAzureArmTemplate"
-          },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionRum"
-          },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionTerraform"
           }
         ]
       },
@@ -2086,6 +2093,12 @@
       "Parameter": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/ParameterNumericValue"
+          },
+          {
+            "$ref": "#/components/schemas/ParameterSensitiveData"
+          },
+          {
             "$ref": "#/components/schemas/ParameterStringValue"
           },
           {
@@ -2096,12 +2109,6 @@
           },
           {
             "$ref": "#/components/schemas/ParameterApiKey"
-          },
-          {
-            "$ref": "#/components/schemas/ParameterNumericValue"
-          },
-          {
-            "$ref": "#/components/schemas/ParameterSensitiveData"
           }
         ]
       },
@@ -2767,6 +2774,15 @@
       "v1.IntegrationType": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/V1IntegrationTypePushBasedContextualData"
+          },
+          {
+            "$ref": "#/components/schemas/V1IntegrationTypeContextualData"
+          },
+          {
+            "$ref": "#/components/schemas/V1IntegrationTypeGenericWebhook"
+          },
+          {
             "$ref": "#/components/schemas/V1IntegrationTypeManaged"
           },
           {
@@ -2777,15 +2793,6 @@
           },
           {
             "$ref": "#/components/schemas/V1IntegrationTypeArm"
-          },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypePushBasedContextualData"
-          },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeContextualData"
-          },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeGenericWebhook"
           }
         ]
       },
@@ -2795,6 +2802,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

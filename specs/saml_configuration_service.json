@@ -11,6 +11,7 @@
           "SAML Configuration Service"
         ],
         "summary": "Activate/Deactivate SAML",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -74,6 +75,7 @@
           "SAML Configuration Service"
         ],
         "summary": "Get SAML Configuration",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -127,6 +129,7 @@
           "SAML Configuration Service"
         ],
         "summary": "Set IDP Parameters",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -190,6 +193,7 @@
           "SAML Configuration Service"
         ],
         "summary": "Get SP Parameters",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -407,10 +411,10 @@
       "IDPParameters": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IDPParametersMetadataUrl"
+            "$ref": "#/components/schemas/IDPParametersMetadataContent"
           },
           {
-            "$ref": "#/components/schemas/IDPParametersMetadataContent"
+            "$ref": "#/components/schemas/IDPParametersMetadataUrl"
           }
         ]
       },
@@ -560,6 +564,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

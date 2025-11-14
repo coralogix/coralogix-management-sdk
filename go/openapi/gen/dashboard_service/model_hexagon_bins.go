@@ -19,7 +19,7 @@ var _ MappedNullable = &HexagonBins{}
 
 // HexagonBins struct for HexagonBins
 type HexagonBins struct {
-	// Whether to render numeric value without abbreviation
+	// Whether to render numeric value with abbreviation
 	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
 	// Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)

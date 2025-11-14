@@ -19,7 +19,7 @@ var _ MappedNullable = &IncidentEventClose{}
 
 // IncidentEventClose struct for IncidentEventClose
 type IncidentEventClose struct {
-	ClosedBy *IncidentsV1UserDetails `json:"closedBy,omitempty"`
+	ClosedBy *UserDetails `json:"closedBy,omitempty"`
 }
 
 // NewIncidentEventClose instantiates a new IncidentEventClose object
@@ -40,9 +40,9 @@ func NewIncidentEventCloseWithDefaults() *IncidentEventClose {
 }
 
 // GetClosedBy returns the ClosedBy field value if set, zero value otherwise.
-func (o *IncidentEventClose) GetClosedBy() IncidentsV1UserDetails {
+func (o *IncidentEventClose) GetClosedBy() UserDetails {
 	if o == nil || IsNil(o.ClosedBy) {
-		var ret IncidentsV1UserDetails
+		var ret UserDetails
 		return ret
 	}
 	return *o.ClosedBy
@@ -50,7 +50,7 @@ func (o *IncidentEventClose) GetClosedBy() IncidentsV1UserDetails {
 
 // GetClosedByOk returns a tuple with the ClosedBy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentEventClose) GetClosedByOk() (*IncidentsV1UserDetails, bool) {
+func (o *IncidentEventClose) GetClosedByOk() (*UserDetails, bool) {
 	if o == nil || IsNil(o.ClosedBy) {
 		return nil, false
 	}
@@ -66,8 +66,8 @@ func (o *IncidentEventClose) HasClosedBy() bool {
 	return false
 }
 
-// SetClosedBy gets a reference to the given IncidentsV1UserDetails and assigns it to the ClosedBy field.
-func (o *IncidentEventClose) SetClosedBy(v IncidentsV1UserDetails) {
+// SetClosedBy gets a reference to the given UserDetails and assigns it to the ClosedBy field.
+func (o *IncidentEventClose) SetClosedBy(v UserDetails) {
 	o.ClosedBy = &v
 }
 

@@ -7,6 +7,7 @@ servers:
 paths:
   /parsing-rules/rule-groups/v1:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_BulkDeleteRuleGroup
@@ -43,6 +44,7 @@ paths:
       tags:
       - Rule Groups Service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_ListRuleGroups
@@ -69,6 +71,7 @@ paths:
       tags:
       - Rule Groups Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_CreateRuleGroup
@@ -101,6 +104,7 @@ paths:
       - Rule Groups Service
   /parsing-rules/rule-groups/v1/limits:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_GetCompanyUsageLimits
@@ -128,6 +132,7 @@ paths:
       - Rule Groups Service
   /parsing-rules/rule-groups/v1/mapping:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_GetRuleGroupModelMapping
@@ -160,6 +165,7 @@ paths:
       - Rule Groups Service
   /parsing-rules/rule-groups/v1/{group_id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_DeleteRuleGroup
@@ -194,6 +200,7 @@ paths:
       tags:
       - Rule Groups Service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_GetRuleGroup
@@ -228,6 +235,7 @@ paths:
       tags:
       - Rule Groups Service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_UpdateRuleGroup
@@ -276,6 +284,8 @@ components:
           type: string
       type: object
     ApplicationNameConstraint:
+      example:
+        value: value
       properties:
         value:
           type: string
@@ -361,8 +371,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -370,8 +382,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             id: id
@@ -383,8 +397,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -392,8 +408,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             id: id
@@ -402,10 +420,10 @@ components:
           creator: creator
           hidden: true
           ruleMatchers:
-          - severity:
-              value: VALUE_DEBUG_OR_UNSPECIFIED
-          - severity:
-              value: VALUE_DEBUG_OR_UNSPECIFIED
+          - applicationName:
+              value: value
+          - applicationName:
+              value: value
           name: name
           description: description
           id: id
@@ -427,8 +445,6 @@ components:
       - DESTINATION_FIELD_TEXT
       type: string
     ExtractParameters:
-      example:
-        rule: rule
       properties:
         rule:
           type: string
@@ -572,8 +588,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -581,8 +599,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             id: id
@@ -594,8 +614,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -603,8 +625,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             id: id
@@ -613,10 +637,10 @@ components:
           creator: creator
           hidden: true
           ruleMatchers:
-          - severity:
-              value: VALUE_DEBUG_OR_UNSPECIFIED
-          - severity:
-              value: VALUE_DEBUG_OR_UNSPECIFIED
+          - applicationName:
+              value: value
+          - applicationName:
+              value: value
           name: name
           description: description
           id: id
@@ -663,8 +687,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -672,8 +698,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             id: id
@@ -685,8 +713,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -694,8 +724,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             id: id
@@ -704,10 +736,10 @@ components:
           creator: creator
           hidden: true
           ruleMatchers:
-          - severity:
-              value: VALUE_DEBUG_OR_UNSPECIFIED
-          - severity:
-              value: VALUE_DEBUG_OR_UNSPECIFIED
+          - applicationName:
+              value: value
+          - applicationName:
+              value: value
           name: name
           description: description
           id: id
@@ -720,8 +752,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -729,8 +763,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             id: id
@@ -742,8 +778,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -751,8 +789,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             id: id
@@ -761,10 +801,10 @@ components:
           creator: creator
           hidden: true
           ruleMatchers:
-          - severity:
-              value: VALUE_DEBUG_OR_UNSPECIFIED
-          - severity:
-              value: VALUE_DEBUG_OR_UNSPECIFIED
+          - applicationName:
+              value: value
+          - applicationName:
+              value: value
           name: name
           description: description
           id: id
@@ -793,6 +833,10 @@ components:
           type: string
       type: object
     RemoveFieldsParameters:
+      example:
+        fields:
+        - fields
+        - fields
       properties:
         fields:
           items:
@@ -817,8 +861,10 @@ components:
             description: description
             id: id
             parameters:
-              extractParameters:
-                rule: rule
+              removeFieldsParameters:
+                fields:
+                - fields
+                - fields
             enabled: true
             order: 1
           - sourceField: sourceField
@@ -826,8 +872,10 @@ components:
             description: description
             id: id
             parameters:
-              extractParameters:
-                rule: rule
+              removeFieldsParameters:
+                fields:
+                - fields
+                - fields
             enabled: true
             order: 1
           id: id
@@ -839,8 +887,10 @@ components:
             description: description
             id: id
             parameters:
-              extractParameters:
-                rule: rule
+              removeFieldsParameters:
+                fields:
+                - fields
+                - fields
             enabled: true
             order: 1
           - sourceField: sourceField
@@ -848,8 +898,10 @@ components:
             description: description
             id: id
             parameters:
-              extractParameters:
-                rule: rule
+              removeFieldsParameters:
+                fields:
+                - fields
+                - fields
             enabled: true
             order: 1
           id: id
@@ -858,10 +910,10 @@ components:
         creator: creator
         hidden: true
         ruleMatchers:
-        - severity:
-            value: VALUE_DEBUG_OR_UNSPECIFIED
-        - severity:
-            value: VALUE_DEBUG_OR_UNSPECIFIED
+        - applicationName:
+            value: value
+        - applicationName:
+            value: value
         name: name
         description: description
         id: id
@@ -894,20 +946,20 @@ components:
       type: object
     RuleMatcher:
       oneOf:
-      - $ref: "#/components/schemas/RuleMatcherSeverity"
       - $ref: "#/components/schemas/RuleMatcherApplicationName"
       - $ref: "#/components/schemas/RuleMatcherSubsystemName"
+      - $ref: "#/components/schemas/RuleMatcherSeverity"
     RuleMatcherApplicationName:
       additionalProperties: false
+      example:
+        applicationName:
+          value: value
       properties:
         applicationName:
           $ref: "#/components/schemas/ApplicationNameConstraint"
       type: object
     RuleMatcherSeverity:
       additionalProperties: false
-      example:
-        severity:
-          value: VALUE_DEBUG_OR_UNSPECIFIED
       properties:
         severity:
           $ref: "#/components/schemas/SeverityConstraint"
@@ -920,16 +972,16 @@ components:
       type: object
     RuleParameters:
       oneOf:
-      - $ref: "#/components/schemas/RuleParametersExtractParameters"
-      - $ref: "#/components/schemas/RuleParametersReplaceParameters"
-      - $ref: "#/components/schemas/RuleParametersParseParameters"
-      - $ref: "#/components/schemas/RuleParametersJsonExtractParameters"
-      - $ref: "#/components/schemas/RuleParametersAllowParameters"
-      - $ref: "#/components/schemas/RuleParametersBlockParameters"
-      - $ref: "#/components/schemas/RuleParametersExtractTimestampParameters"
       - $ref: "#/components/schemas/RuleParametersRemoveFieldsParameters"
       - $ref: "#/components/schemas/RuleParametersJsonStringifyParameters"
       - $ref: "#/components/schemas/RuleParametersJsonParseParameters"
+      - $ref: "#/components/schemas/RuleParametersExtractParameters"
+      - $ref: "#/components/schemas/RuleParametersJsonExtractParameters"
+      - $ref: "#/components/schemas/RuleParametersReplaceParameters"
+      - $ref: "#/components/schemas/RuleParametersParseParameters"
+      - $ref: "#/components/schemas/RuleParametersExtractTimestampParameters"
+      - $ref: "#/components/schemas/RuleParametersAllowParameters"
+      - $ref: "#/components/schemas/RuleParametersBlockParameters"
     RuleParametersAllowParameters:
       additionalProperties: false
       properties:
@@ -944,9 +996,6 @@ components:
       type: object
     RuleParametersExtractParameters:
       additionalProperties: false
-      example:
-        extractParameters:
-          rule: rule
       properties:
         extractParameters:
           $ref: "#/components/schemas/ExtractParameters"
@@ -983,6 +1032,11 @@ components:
       type: object
     RuleParametersRemoveFieldsParameters:
       additionalProperties: false
+      example:
+        removeFieldsParameters:
+          fields:
+          - fields
+          - fields
       properties:
         removeFieldsParameters:
           $ref: "#/components/schemas/RemoveFieldsParameters"
@@ -1001,8 +1055,10 @@ components:
           description: description
           id: id
           parameters:
-            extractParameters:
-              rule: rule
+            removeFieldsParameters:
+              fields:
+              - fields
+              - fields
           enabled: true
           order: 1
         - sourceField: sourceField
@@ -1010,8 +1066,10 @@ components:
           description: description
           id: id
           parameters:
-            extractParameters:
-              rule: rule
+            removeFieldsParameters:
+              fields:
+              - fields
+              - fields
           enabled: true
           order: 1
         id: id
@@ -1031,8 +1089,6 @@ components:
           type: array
       type: object
     SeverityConstraint:
-      example:
-        value: VALUE_DEBUG_OR_UNSPECIFIED
       properties:
         value:
           $ref: "#/components/schemas/Value"
@@ -1052,8 +1108,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -1061,8 +1119,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             id: id
@@ -1074,8 +1134,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -1083,8 +1145,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             id: id
@@ -1093,10 +1157,10 @@ components:
           creator: creator
           hidden: true
           ruleMatchers:
-          - severity:
-              value: VALUE_DEBUG_OR_UNSPECIFIED
-          - severity:
-              value: VALUE_DEBUG_OR_UNSPECIFIED
+          - applicationName:
+              value: value
+          - applicationName:
+              value: value
           name: name
           description: description
           id: id
@@ -1139,8 +1203,10 @@ components:
         description: description
         id: id
         parameters:
-          extractParameters:
-            rule: rule
+          removeFieldsParameters:
+            fields:
+            - fields
+            - fields
         enabled: true
         order: 1
       properties:
@@ -1223,3 +1289,9 @@ components:
             $ref: "#/components/schemas/GetRuleGroupModelMappingRequest.CreateRuleSubgroup"
           type: array
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

@@ -11,6 +11,7 @@
           "Team Permissions Management Service"
         ],
         "summary": "Get Team Groups",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -67,6 +68,7 @@
           "Team Permissions Management Service"
         ],
         "summary": "Update Team Group",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -148,6 +150,7 @@
           "Team Permissions Management Service"
         ],
         "summary": "Create Team Group",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -237,6 +240,7 @@
           "Team Permissions Management Service"
         ],
         "summary": "Add Users To Team Groups",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -300,6 +304,7 @@
           "Team Permissions Management Service"
         ],
         "summary": "Remove Users From Team Groups",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -382,6 +387,7 @@
           "Team Permissions Management Service"
         ],
         "summary": "Get Team Group",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -434,6 +440,7 @@
           "Team Permissions Management Service"
         ],
         "summary": "Delete Team Group",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -488,6 +495,7 @@
           "Team Permissions Management Service"
         ],
         "summary": "Get Group Users",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -557,6 +565,7 @@
           "Team Permissions Management Service"
         ],
         "summary": "Add Users To Team Group",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -629,6 +638,7 @@
           "Team Permissions Management Service"
         ],
         "summary": "Remove Users From Team Group",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -699,6 +709,7 @@
           "Team Permissions Management Service"
         ],
         "summary": "Get Team Group By Name",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -752,6 +763,7 @@
           "Team Permissions Management Service"
         ],
         "summary": "Get Team Group Scope",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -804,6 +816,7 @@
           "Team Permissions Management Service"
         ],
         "summary": "Set Team Group Scope",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -1522,6 +1535,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

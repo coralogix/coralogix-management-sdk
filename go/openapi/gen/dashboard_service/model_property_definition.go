@@ -19,7 +19,10 @@ import (
 // PropertyDefinition - struct for PropertyDefinition
 type PropertyDefinition struct {
 	PropertyDefinitionAlignment *PropertyDefinitionAlignment
+	PropertyDefinitionLink *PropertyDefinitionLink
+	PropertyDefinitionRegexExtract *PropertyDefinitionRegexExtract
 	PropertyDefinitionThresholds *PropertyDefinitionThresholds
+	PropertyDefinitionUnits *PropertyDefinitionUnits
 }
 
 // PropertyDefinitionAlignmentAsPropertyDefinition is a convenience function that returns PropertyDefinitionAlignment wrapped in PropertyDefinition
@@ -29,10 +32,31 @@ func PropertyDefinitionAlignmentAsPropertyDefinition(v *PropertyDefinitionAlignm
 	}
 }
 
+// PropertyDefinitionLinkAsPropertyDefinition is a convenience function that returns PropertyDefinitionLink wrapped in PropertyDefinition
+func PropertyDefinitionLinkAsPropertyDefinition(v *PropertyDefinitionLink) PropertyDefinition {
+	return PropertyDefinition{
+		PropertyDefinitionLink: v,
+	}
+}
+
+// PropertyDefinitionRegexExtractAsPropertyDefinition is a convenience function that returns PropertyDefinitionRegexExtract wrapped in PropertyDefinition
+func PropertyDefinitionRegexExtractAsPropertyDefinition(v *PropertyDefinitionRegexExtract) PropertyDefinition {
+	return PropertyDefinition{
+		PropertyDefinitionRegexExtract: v,
+	}
+}
+
 // PropertyDefinitionThresholdsAsPropertyDefinition is a convenience function that returns PropertyDefinitionThresholds wrapped in PropertyDefinition
 func PropertyDefinitionThresholdsAsPropertyDefinition(v *PropertyDefinitionThresholds) PropertyDefinition {
 	return PropertyDefinition{
 		PropertyDefinitionThresholds: v,
+	}
+}
+
+// PropertyDefinitionUnitsAsPropertyDefinition is a convenience function that returns PropertyDefinitionUnits wrapped in PropertyDefinition
+func PropertyDefinitionUnitsAsPropertyDefinition(v *PropertyDefinitionUnits) PropertyDefinition {
+	return PropertyDefinition{
+		PropertyDefinitionUnits: v,
 	}
 }
 
@@ -58,6 +82,40 @@ func (dst *PropertyDefinition) UnmarshalJSON(data []byte) error {
 		dst.PropertyDefinitionAlignment = nil
 	}
 
+	// try to unmarshal data into PropertyDefinitionLink
+	err = newStrictDecoder(data).Decode(&dst.PropertyDefinitionLink)
+	if err == nil {
+		jsonPropertyDefinitionLink, _ := json.Marshal(dst.PropertyDefinitionLink)
+		if string(jsonPropertyDefinitionLink) == "{}" { // empty struct
+			dst.PropertyDefinitionLink = nil
+		} else {
+			if err = validator.Validate(dst.PropertyDefinitionLink); err != nil {
+				dst.PropertyDefinitionLink = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.PropertyDefinitionLink = nil
+	}
+
+	// try to unmarshal data into PropertyDefinitionRegexExtract
+	err = newStrictDecoder(data).Decode(&dst.PropertyDefinitionRegexExtract)
+	if err == nil {
+		jsonPropertyDefinitionRegexExtract, _ := json.Marshal(dst.PropertyDefinitionRegexExtract)
+		if string(jsonPropertyDefinitionRegexExtract) == "{}" { // empty struct
+			dst.PropertyDefinitionRegexExtract = nil
+		} else {
+			if err = validator.Validate(dst.PropertyDefinitionRegexExtract); err != nil {
+				dst.PropertyDefinitionRegexExtract = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.PropertyDefinitionRegexExtract = nil
+	}
+
 	// try to unmarshal data into PropertyDefinitionThresholds
 	err = newStrictDecoder(data).Decode(&dst.PropertyDefinitionThresholds)
 	if err == nil {
@@ -75,10 +133,30 @@ func (dst *PropertyDefinition) UnmarshalJSON(data []byte) error {
 		dst.PropertyDefinitionThresholds = nil
 	}
 
+	// try to unmarshal data into PropertyDefinitionUnits
+	err = newStrictDecoder(data).Decode(&dst.PropertyDefinitionUnits)
+	if err == nil {
+		jsonPropertyDefinitionUnits, _ := json.Marshal(dst.PropertyDefinitionUnits)
+		if string(jsonPropertyDefinitionUnits) == "{}" { // empty struct
+			dst.PropertyDefinitionUnits = nil
+		} else {
+			if err = validator.Validate(dst.PropertyDefinitionUnits); err != nil {
+				dst.PropertyDefinitionUnits = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.PropertyDefinitionUnits = nil
+	}
+
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.PropertyDefinitionAlignment = nil
+		dst.PropertyDefinitionLink = nil
+		dst.PropertyDefinitionRegexExtract = nil
 		dst.PropertyDefinitionThresholds = nil
+		dst.PropertyDefinitionUnits = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(PropertyDefinition)")
 	} else if match == 1 {
@@ -94,8 +172,20 @@ func (src PropertyDefinition) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.PropertyDefinitionAlignment)
 	}
 
+	if src.PropertyDefinitionLink != nil {
+		return json.Marshal(&src.PropertyDefinitionLink)
+	}
+
+	if src.PropertyDefinitionRegexExtract != nil {
+		return json.Marshal(&src.PropertyDefinitionRegexExtract)
+	}
+
 	if src.PropertyDefinitionThresholds != nil {
 		return json.Marshal(&src.PropertyDefinitionThresholds)
+	}
+
+	if src.PropertyDefinitionUnits != nil {
+		return json.Marshal(&src.PropertyDefinitionUnits)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -110,8 +200,20 @@ func (obj *PropertyDefinition) GetActualInstance() (interface{}) {
 		return obj.PropertyDefinitionAlignment
 	}
 
+	if obj.PropertyDefinitionLink != nil {
+		return obj.PropertyDefinitionLink
+	}
+
+	if obj.PropertyDefinitionRegexExtract != nil {
+		return obj.PropertyDefinitionRegexExtract
+	}
+
 	if obj.PropertyDefinitionThresholds != nil {
 		return obj.PropertyDefinitionThresholds
+	}
+
+	if obj.PropertyDefinitionUnits != nil {
+		return obj.PropertyDefinitionUnits
 	}
 
 	// all schemas are nil
@@ -124,8 +226,20 @@ func (obj PropertyDefinition) GetActualInstanceValue() (interface{}) {
 		return *obj.PropertyDefinitionAlignment
 	}
 
+	if obj.PropertyDefinitionLink != nil {
+		return *obj.PropertyDefinitionLink
+	}
+
+	if obj.PropertyDefinitionRegexExtract != nil {
+		return *obj.PropertyDefinitionRegexExtract
+	}
+
 	if obj.PropertyDefinitionThresholds != nil {
 		return *obj.PropertyDefinitionThresholds
+	}
+
+	if obj.PropertyDefinitionUnits != nil {
+		return *obj.PropertyDefinitionUnits
 	}
 
 	// all schemas are nil

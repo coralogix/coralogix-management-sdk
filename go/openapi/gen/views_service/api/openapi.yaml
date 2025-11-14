@@ -567,3 +567,9 @@ components:
       - timeSelection
       title: View
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

@@ -40,6 +40,8 @@ func (r ApiSamlConfigurationServiceGetConfigurationRequest) Execute() (*GetConfi
 /*
 SamlConfigurationServiceGetConfiguration Get SAML Configuration
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSamlConfigurationServiceGetConfigurationRequest
 */
@@ -145,6 +147,8 @@ func (r ApiSamlConfigurationServiceGetSPParametersRequest) Execute() (*GetSPPara
 
 /*
 SamlConfigurationServiceGetSPParameters Get SP Parameters
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSamlConfigurationServiceGetSPParametersRequest
@@ -252,6 +256,8 @@ func (r ApiSamlConfigurationServiceSetActiveRequest) Execute() (map[string]inter
 /*
 SamlConfigurationServiceSetActive Activate/Deactivate SAML
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSamlConfigurationServiceSetActiveRequest
 */
@@ -356,6 +362,8 @@ func (r ApiSamlConfigurationServiceSetIDPParametersRequest) Execute() (map[strin
 
 /*
 SamlConfigurationServiceSetIDPParameters Set IDP Parameters
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSamlConfigurationServiceSetIDPParametersRequest

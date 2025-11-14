@@ -22,7 +22,7 @@ var _ MappedNullable = &ListIncidentsResponse{}
 // ListIncidentsResponse Response containing a list of incidents and pagination information
 type ListIncidentsResponse struct {
 	Incidents []Incident `json:"incidents"`
-	Pagination IncidentsV1PaginationResponse `json:"pagination"`
+	Pagination V1PaginationResponse `json:"pagination"`
 }
 
 type _ListIncidentsResponse ListIncidentsResponse
@@ -31,7 +31,7 @@ type _ListIncidentsResponse ListIncidentsResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListIncidentsResponse(incidents []Incident, pagination IncidentsV1PaginationResponse) *ListIncidentsResponse {
+func NewListIncidentsResponse(incidents []Incident, pagination V1PaginationResponse) *ListIncidentsResponse {
 	this := ListIncidentsResponse{}
 	this.Incidents = incidents
 	this.Pagination = pagination
@@ -71,9 +71,9 @@ func (o *ListIncidentsResponse) SetIncidents(v []Incident) {
 }
 
 // GetPagination returns the Pagination field value
-func (o *ListIncidentsResponse) GetPagination() IncidentsV1PaginationResponse {
+func (o *ListIncidentsResponse) GetPagination() V1PaginationResponse {
 	if o == nil {
-		var ret IncidentsV1PaginationResponse
+		var ret V1PaginationResponse
 		return ret
 	}
 
@@ -82,7 +82,7 @@ func (o *ListIncidentsResponse) GetPagination() IncidentsV1PaginationResponse {
 
 // GetPaginationOk returns a tuple with the Pagination field value
 // and a boolean to check if the value has been set.
-func (o *ListIncidentsResponse) GetPaginationOk() (*IncidentsV1PaginationResponse, bool) {
+func (o *ListIncidentsResponse) GetPaginationOk() (*V1PaginationResponse, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,7 +90,7 @@ func (o *ListIncidentsResponse) GetPaginationOk() (*IncidentsV1PaginationRespons
 }
 
 // SetPagination sets field value
-func (o *ListIncidentsResponse) SetPagination(v IncidentsV1PaginationResponse) {
+func (o *ListIncidentsResponse) SetPagination(v V1PaginationResponse) {
 	o.Pagination = v
 }
 

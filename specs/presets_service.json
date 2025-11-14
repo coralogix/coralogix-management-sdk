@@ -11,6 +11,7 @@
           "Presets service"
         ],
         "summary": "Replace Custom Preset",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -50,6 +51,7 @@
           "Presets service"
         ],
         "summary": "Create Custom Preset",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -91,6 +93,7 @@
           "Presets service"
         ],
         "summary": "Delete Custom Preset",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -126,6 +129,7 @@
           "Presets service"
         ],
         "summary": "Set Custom Preset As Default",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -161,6 +165,7 @@
           "Presets service"
         ],
         "summary": "Get Preset",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -196,6 +201,7 @@
           "Presets service"
         ],
         "summary": "Set Preset As Default",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -231,6 +237,7 @@
           "Presets service"
         ],
         "summary": "Batch Get Presets",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -268,6 +275,7 @@
           "Presets service"
         ],
         "summary": "Get Default Preset Summary",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -310,6 +318,7 @@
           "Presets service"
         ],
         "summary": "List Preset Summaries",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -352,6 +361,7 @@
           "Presets service"
         ],
         "summary": "Get System Default Preset Summary",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -852,6 +862,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

@@ -11,6 +11,7 @@
           "Events Service"
         ],
         "summary": "List Events",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -102,7 +103,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/v3.ListEventsResponse"
+                  "$ref": "#/components/schemas/ListEventsResponse"
                 }
               }
             }
@@ -134,6 +135,7 @@
           "Events Service"
         ],
         "summary": "Batch Get Event",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -238,6 +240,7 @@
           "Events Service"
         ],
         "summary": "Get Event",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -298,7 +301,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/v3.GetEventResponse"
+                  "$ref": "#/components/schemas/GetEventResponse"
                 }
               }
             }
@@ -330,6 +333,7 @@
           "Events Service"
         ],
         "summary": "List Events Count",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -415,6 +419,7 @@
           "Events Service"
         ],
         "summary": "Get Events Statistics",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -777,6 +782,17 @@
           "pathAndValues"
         ]
       },
+      "GetEventResponse": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "$ref": "#/components/schemas/CxEventSingleOrMultiple"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/events.v3.PaginationResponse"
+          }
+        }
+      },
       "GetEventsStatisticsResponse": {
         "externalDocs": {
           "url": ""
@@ -823,6 +839,28 @@
         "required": [
           "count",
           "reachedLimit"
+        ]
+      },
+      "ListEventsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "ListEventsResponse",
+        "description": "This data structure represents a response to list events",
+        "type": "object",
+        "properties": {
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CxEvent"
+            }
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/events.v3.PaginationResponse"
+          }
+        },
+        "required": [
+          "events"
         ]
       },
       "MultipleValues": {
@@ -899,39 +937,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      },
-      "v3.GetEventResponse": {
-        "type": "object",
-        "properties": {
-          "event": {
-            "$ref": "#/components/schemas/CxEventSingleOrMultiple"
-          },
-          "pagination": {
-            "$ref": "#/components/schemas/events.v3.PaginationResponse"
-          }
-        }
-      },
-      "v3.ListEventsResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "ListEventsResponse",
-        "description": "This data structure represents a response to list events",
-        "type": "object",
-        "properties": {
-          "events": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CxEvent"
-            }
-          },
-          "pagination": {
-            "$ref": "#/components/schemas/events.v3.PaginationResponse"
-          }
-        },
-        "required": [
-          "events"
-        ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

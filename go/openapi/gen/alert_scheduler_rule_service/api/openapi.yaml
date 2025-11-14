@@ -7,6 +7,7 @@ servers:
 paths:
   /v1/alert-scheduler-rules:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertSchedulerRuleService_CreateAlertSchedulerRule
@@ -38,6 +39,7 @@ paths:
       tags:
       - Alert Scheduler Rule service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertSchedulerRuleService_UpdateAlertSchedulerRule
@@ -70,6 +72,7 @@ paths:
       - Alert Scheduler Rule service
   /v1/alert-scheduler-rules/bulk:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertSchedulerRuleService_GetBulkAlertSchedulerRule
@@ -125,6 +128,7 @@ paths:
       tags:
       - Alert Scheduler Rule service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertSchedulerRuleService_CreateBulkAlertSchedulerRule
@@ -156,6 +160,7 @@ paths:
       tags:
       - Alert Scheduler Rule service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertSchedulerRuleService_UpdateBulkAlertSchedulerRule
@@ -188,6 +193,7 @@ paths:
       - Alert Scheduler Rule service
   /v1/alert-scheduler-rules/{alert_scheduler_rule_id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertSchedulerRuleService_DeleteAlertSchedulerRule
@@ -222,6 +228,7 @@ paths:
       tags:
       - Alert Scheduler Rule service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertSchedulerRuleService_GetAlertSchedulerRule
@@ -273,14 +280,10 @@ components:
     AlertSchedulerRule:
       example:
         filter:
-          alertMetaLabels:
+          alertUniqueIds:
             value:
-            - id: id
-              value: value
-              key: key
-            - id: id
-              value: value
-              key: key
+            - value
+            - value
           whatExpression: whatExpression
         createdAt: createdAt
         schedule:
@@ -336,16 +339,6 @@ components:
       type: object
     AlertSchedulerRuleProtobufV1FilterAlertMetaLabels:
       additionalProperties: false
-      example:
-        alertMetaLabels:
-          value:
-          - id: id
-            value: value
-            key: key
-          - id: id
-            value: value
-            key: key
-        whatExpression: whatExpression
       properties:
         alertMetaLabels:
           $ref: "#/components/schemas/MetaLabels"
@@ -354,6 +347,12 @@ components:
       type: object
     AlertSchedulerRuleProtobufV1FilterAlertUniqueIds:
       additionalProperties: false
+      example:
+        alertUniqueIds:
+          value:
+          - value
+          - value
+        whatExpression: whatExpression
       properties:
         alertUniqueIds:
           $ref: "#/components/schemas/AlertUniqueIds"
@@ -378,14 +377,10 @@ components:
           endTime: endTime
         alertSchedulerRule:
           filter:
-            alertMetaLabels:
+            alertUniqueIds:
               value:
-              - id: id
-                value: value
-                key: key
-              - id: id
-                value: value
-                key: key
+              - value
+              - value
             whatExpression: whatExpression
           createdAt: createdAt
           schedule:
@@ -417,6 +412,10 @@ components:
           type: array
       type: object
     AlertUniqueIds:
+      example:
+        value:
+        - value
+        - value
       properties:
         value:
           items:
@@ -460,14 +459,10 @@ components:
       example:
         alertSchedulerRule:
           filter:
-            alertMetaLabels:
+            alertUniqueIds:
               value:
-              - id: id
-                value: value
-                key: key
-              - id: id
-                value: value
-                key: key
+              - value
+              - value
             whatExpression: whatExpression
           createdAt: createdAt
           schedule:
@@ -507,14 +502,10 @@ components:
         createSuppressionResponses:
         - alertSchedulerRule:
             filter:
-              alertMetaLabels:
+              alertUniqueIds:
                 value:
-                - id: id
-                  value: value
-                  key: key
-                - id: id
-                  value: value
-                  key: key
+                - value
+                - value
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
@@ -539,14 +530,10 @@ components:
             updatedAt: updatedAt
         - alertSchedulerRule:
             filter:
-              alertMetaLabels:
+              alertUniqueIds:
                 value:
-                - id: id
-                  value: value
-                  key: key
-                - id: id
-                  value: value
-                  key: key
+                - value
+                - value
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
@@ -667,14 +654,10 @@ components:
       example:
         alertSchedulerRule:
           filter:
-            alertMetaLabels:
+            alertUniqueIds:
               value:
-              - id: id
-                value: value
-                key: key
-              - id: id
-                value: value
-                key: key
+              - value
+              - value
             whatExpression: whatExpression
           createdAt: createdAt
           schedule:
@@ -722,14 +705,10 @@ components:
             endTime: endTime
           alertSchedulerRule:
             filter:
-              alertMetaLabels:
+              alertUniqueIds:
                 value:
-                - id: id
-                  value: value
-                  key: key
-                - id: id
-                  value: value
-                  key: key
+                - value
+                - value
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
@@ -761,14 +740,10 @@ components:
             endTime: endTime
           alertSchedulerRule:
             filter:
-              alertMetaLabels:
+              alertUniqueIds:
                 value:
-                - id: id
-                  value: value
-                  key: key
-                - id: id
-                  value: value
-                  key: key
+                - value
+                - value
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
@@ -806,14 +781,6 @@ components:
       title: Get bulk alert scheduler rule response data structure
       type: object
     MetaLabels:
-      example:
-        value:
-        - id: id
-          value: value
-          key: key
-        - id: id
-          value: value
-          key: key
       properties:
         value:
           items:
@@ -849,8 +816,8 @@ components:
       type: object
     Recurring:
       oneOf:
-      - $ref: "#/components/schemas/RecurringDynamic"
       - $ref: "#/components/schemas/RecurringAlways"
+      - $ref: "#/components/schemas/RecurringDynamic"
     Recurring.Dynamic:
       oneOf:
       - $ref: "#/components/schemas/RecurringDynamicDaily"
@@ -985,14 +952,10 @@ components:
       example:
         alertSchedulerRule:
           filter:
-            alertMetaLabels:
+            alertUniqueIds:
               value:
-              - id: id
-                value: value
-                key: key
-              - id: id
-                value: value
-                key: key
+              - value
+              - value
             whatExpression: whatExpression
           createdAt: createdAt
           schedule:
@@ -1032,14 +995,10 @@ components:
         updateSuppressionResponses:
         - alertSchedulerRule:
             filter:
-              alertMetaLabels:
+              alertUniqueIds:
                 value:
-                - id: id
-                  value: value
-                  key: key
-                - id: id
-                  value: value
-                  key: key
+                - value
+                - value
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
@@ -1064,14 +1023,10 @@ components:
             updatedAt: updatedAt
         - alertSchedulerRule:
             filter:
-              alertMetaLabels:
+              alertUniqueIds:
                 value:
-                - id: id
-                  value: value
-                  key: key
-                - id: id
-                  value: value
-                  key: key
+                - value
+                - value
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
@@ -1116,8 +1071,8 @@ components:
       type: object
     alert_scheduler_rule_protobuf.v1.Filter:
       oneOf:
-      - $ref: "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertMetaLabels"
       - $ref: "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertUniqueIds"
+      - $ref: "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertMetaLabels"
     common.Group:
       properties:
         field:
@@ -1192,8 +1147,8 @@ components:
       type: object
     AlertSchedulerRuleService_GetBulkAlertSchedulerRule_alert_scheduler_rules_ids_parameter:
       oneOf:
-      - $ref: "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds"
       - $ref: "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds"
+      - $ref: "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds"
     Update_bulk_alert_scheduler_rule_request_data_structure:
       additionalProperties: false
       description: This is a request sent to update multiple alert scheduler rules
@@ -1218,3 +1173,9 @@ components:
       - createAlertSchedulerRuleRequests
       title: Create bulk alert scheduler rule request data structure
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

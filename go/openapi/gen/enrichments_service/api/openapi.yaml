@@ -7,6 +7,7 @@ servers:
 paths:
   /enrichment-rules/enrichment-rules/v1:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: EnrichmentService_RemoveEnrichments
@@ -32,6 +33,7 @@ paths:
       tags:
       - Enrichments Service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: EnrichmentService_GetEnrichments
@@ -46,6 +48,7 @@ paths:
       tags:
       - Enrichments Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: EnrichmentService_AddEnrichments
@@ -65,6 +68,7 @@ paths:
       tags:
       - Enrichments Service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: EnrichmentService_AtomicOverwriteEnrichments
@@ -85,6 +89,7 @@ paths:
       - Enrichments Service
   /enrichment-rules/enrichment-rules/v1/limit:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: EnrichmentService_GetEnrichmentLimit
@@ -100,6 +105,7 @@ paths:
       - Enrichments Service
   /enrichment-rules/enrichment-rules/v1/settings:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: EnrichmentService_GetCompanyEnrichmentSettings
@@ -120,8 +126,8 @@ components:
       example:
         enrichments:
         - enrichmentType:
-            customEnrichment:
-              id: 1
+            geoIp:
+              withAsn: true
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -129,8 +135,8 @@ components:
           enrichedFieldName: "1"
           id: 1
         - enrichmentType:
-            customEnrichment:
-              id: 1
+            geoIp:
+              withAsn: true
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -153,8 +159,8 @@ components:
       example:
         enrichments:
         - enrichmentType:
-            customEnrichment:
-              id: 1
+            geoIp:
+              withAsn: true
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -162,8 +168,8 @@ components:
           enrichedFieldName: "1"
           id: 1
         - enrichmentType:
-            customEnrichment:
-              id: 1
+            geoIp:
+              withAsn: true
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -229,8 +235,6 @@ components:
           type: string
       type: object
     CustomEnrichmentType:
-      example:
-        id: 1
       properties:
         id:
           example: 1
@@ -241,8 +245,8 @@ components:
       description: This data structure represents an enrichment
       example:
         enrichmentType:
-          customEnrichment:
-            id: 1
+          geoIp:
+            withAsn: true
         selectedColumns:
         - "[\"city\",\"population\"]"
         - "[\"city\",\"population\"]"
@@ -311,10 +315,10 @@ components:
       type: object
     EnrichmentType:
       oneOf:
-      - $ref: "#/components/schemas/EnrichmentTypeCustomEnrichment"
       - $ref: "#/components/schemas/EnrichmentTypeGeoIp"
       - $ref: "#/components/schemas/EnrichmentTypeSuspiciousIp"
       - $ref: "#/components/schemas/EnrichmentTypeAws"
+      - $ref: "#/components/schemas/EnrichmentTypeCustomEnrichment"
     EnrichmentTypeAws:
       additionalProperties: false
       properties:
@@ -323,15 +327,15 @@ components:
       type: object
     EnrichmentTypeCustomEnrichment:
       additionalProperties: false
-      example:
-        customEnrichment:
-          id: 1
       properties:
         customEnrichment:
           $ref: "#/components/schemas/CustomEnrichmentType"
       type: object
     EnrichmentTypeGeoIp:
       additionalProperties: false
+      example:
+        geoIp:
+          withAsn: true
       properties:
         geoIp:
           $ref: "#/components/schemas/GeoIpType"
@@ -401,6 +405,8 @@ components:
       title: Filters
       type: object
     GeoIpType:
+      example:
+        withAsn: true
       properties:
         withAsn:
           type: boolean
@@ -445,8 +451,8 @@ components:
       example:
         enrichments:
         - enrichmentType:
-            customEnrichment:
-              id: 1
+            geoIp:
+              withAsn: true
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -454,8 +460,8 @@ components:
           enrichedFieldName: "1"
           id: 1
         - enrichmentType:
-            customEnrichment:
-              id: 1
+            geoIp:
+              withAsn: true
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -488,8 +494,8 @@ components:
       example:
         remainingEnrichments:
         - enrichmentType:
-            customEnrichment:
-              id: 1
+            geoIp:
+              withAsn: true
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -497,8 +503,8 @@ components:
           enrichedFieldName: "1"
           id: 1
         - enrichmentType:
-            customEnrichment:
-              id: 1
+            geoIp:
+              withAsn: true
           selectedColumns:
           - "[\"city\",\"population\"]"
           - "[\"city\",\"population\"]"
@@ -565,3 +571,9 @@ components:
       - requestEnrichments
       title: Enrichments Creation Request
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

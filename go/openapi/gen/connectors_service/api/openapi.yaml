@@ -7,6 +7,7 @@ servers:
 paths:
   /notifications/notification-center/v1/connector:
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ConnectorsService_ReplaceConnector
@@ -27,6 +28,7 @@ paths:
       - Connectors service
   /notifications/notification-center/v1/connectors:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ConnectorsService_ListConnectors
@@ -56,6 +58,7 @@ paths:
       tags:
       - Connectors service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ConnectorsService_CreateConnector
@@ -76,6 +79,7 @@ paths:
       - Connectors service
   /notifications/notification-center/v1/connectors/{id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ConnectorsService_DeleteConnector
@@ -98,6 +102,7 @@ paths:
       tags:
       - Connectors service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ConnectorsService_GetConnector
@@ -121,6 +126,7 @@ paths:
       - Connectors service
   /notifications/notification-center/v1/connectors:batchGet:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ConnectorsService_BatchGetConnectors
@@ -147,6 +153,7 @@ paths:
       - Connectors service
   /notifications/notification-center/v1/connectors:batchGetSummaries:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ConnectorsService_BatchGetConnectorSummaries
@@ -172,6 +179,7 @@ paths:
       - Connectors service
   /notifications/notification-center/v1/connectors:getTypeSummaries:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ConnectorsService_GetConnectorTypeSummaries
@@ -195,6 +203,7 @@ paths:
       - Connectors service
   /notifications/notification-center/v1/connectors:listSummaries:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ConnectorsService_ListConnectorSummaries
@@ -870,3 +879,9 @@ components:
           $ref: "#/components/schemas/Connector"
       title: Create Connector Request
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

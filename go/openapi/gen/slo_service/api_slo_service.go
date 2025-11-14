@@ -42,6 +42,8 @@ func (r ApiServiceSloServiceBatchGetServiceSlosRequest) Execute() (*BatchGetServ
 /*
 ServiceSloServiceBatchGetServiceSlos Batch Get Service SLOs
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiServiceSloServiceBatchGetServiceSlosRequest
 */
@@ -156,6 +158,8 @@ func (r ApiServiceSloServiceCreateServiceSloRequest) Execute() (*CreateServiceSl
 /*
 ServiceSloServiceCreateServiceSlo Create Service SLO
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiServiceSloServiceCreateServiceSloRequest
 */
@@ -255,6 +259,8 @@ func (r ApiServiceSloServiceDeleteServiceSloRequest) Execute() (map[string]inter
 
 /*
 ServiceSloServiceDeleteServiceSlo Delete Service SLO
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -356,6 +362,8 @@ func (r ApiServiceSloServiceGetServiceSloRequest) Execute() (*GetServiceSloRespo
 
 /*
 ServiceSloServiceGetServiceSlo Get Service SLO
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -468,6 +476,8 @@ func (r ApiServiceSloServiceListServiceSlosRequest) Execute() (*ListServiceSlosR
 
 /*
 ServiceSloServiceListServiceSlos List Service SLOs
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiServiceSloServiceListServiceSlosRequest
@@ -585,6 +595,8 @@ func (r ApiServiceSloServiceReplaceServiceSloRequest) Execute() (*ReplaceService
 
 /*
 ServiceSloServiceReplaceServiceSlo Replace Service SLO
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiServiceSloServiceReplaceServiceSloRequest

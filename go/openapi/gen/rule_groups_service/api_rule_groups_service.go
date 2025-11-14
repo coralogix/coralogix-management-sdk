@@ -42,6 +42,8 @@ func (r ApiRuleGroupsServiceBulkDeleteRuleGroupRequest) Execute() (map[string]in
 /*
 RuleGroupsServiceBulkDeleteRuleGroup Bulk Delete Rule Group
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRuleGroupsServiceBulkDeleteRuleGroupRequest
 */
@@ -156,6 +158,8 @@ func (r ApiRuleGroupsServiceCreateRuleGroupRequest) Execute() (*CreateRuleGroupR
 /*
 RuleGroupsServiceCreateRuleGroup Create Rule Group
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRuleGroupsServiceCreateRuleGroupRequest
 */
@@ -255,6 +259,8 @@ func (r ApiRuleGroupsServiceDeleteRuleGroupRequest) Execute() (map[string]interf
 
 /*
 RuleGroupsServiceDeleteRuleGroup Delete Rule Group
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param groupId
@@ -356,6 +362,8 @@ func (r ApiRuleGroupsServiceGetCompanyUsageLimitsRequest) Execute() (*GetCompany
 /*
 RuleGroupsServiceGetCompanyUsageLimits Get Company Usage Limits
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRuleGroupsServiceGetCompanyUsageLimitsRequest
 */
@@ -453,6 +461,8 @@ func (r ApiRuleGroupsServiceGetRuleGroupRequest) Execute() (*GetRuleGroupRespons
 
 /*
 RuleGroupsServiceGetRuleGroup Get Rule Group
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param groupId
@@ -560,6 +570,8 @@ func (r ApiRuleGroupsServiceGetRuleGroupModelMappingRequest) Execute() (*GetRule
 /*
 RuleGroupsServiceGetRuleGroupModelMapping Get Rule Group Model Mapping
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRuleGroupsServiceGetRuleGroupModelMappingRequest
 */
@@ -658,6 +670,8 @@ func (r ApiRuleGroupsServiceListRuleGroupsRequest) Execute() (*ListRuleGroupsRes
 
 /*
 RuleGroupsServiceListRuleGroups List Rule Groups
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRuleGroupsServiceListRuleGroupsRequest
@@ -762,6 +776,8 @@ func (r ApiRuleGroupsServiceUpdateRuleGroupRequest) Execute() (*UpdateRuleGroupR
 
 /*
 RuleGroupsServiceUpdateRuleGroup Update Rule Group
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param groupId

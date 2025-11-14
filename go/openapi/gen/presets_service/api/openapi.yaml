@@ -7,6 +7,7 @@ servers:
 paths:
   /notifications/notification-center/v1/presets/custom:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PresetsService_CreateCustomPreset
@@ -26,6 +27,7 @@ paths:
       tags:
       - Presets service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PresetsService_ReplaceCustomPreset
@@ -46,6 +48,7 @@ paths:
       - Presets service
   /notifications/notification-center/v1/presets/custom/{id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PresetsService_DeleteCustomPreset
@@ -69,6 +72,7 @@ paths:
       - Presets service
   /notifications/notification-center/v1/presets/custom/{id}:defaultSet:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PresetsService_SetCustomPresetAsDefault
@@ -92,6 +96,7 @@ paths:
       - Presets service
   /notifications/notification-center/v1/presets/{id}:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PresetsService_GetPreset
@@ -115,6 +120,7 @@ paths:
       - Presets service
   /notifications/notification-center/v1/presets/{id}:defaultSet:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PresetsService_SetPresetAsDefault
@@ -138,6 +144,7 @@ paths:
       - Presets service
   /notifications/notification-center/v1/presets:batchGet:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PresetsService_BatchGetPresets
@@ -163,6 +170,7 @@ paths:
       - Presets service
   /notifications/notification-center/v1/presets:defaultSummaryGet:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PresetsService_GetDefaultPresetSummary
@@ -193,6 +201,7 @@ paths:
       - Presets service
   /notifications/notification-center/v1/presets:summariesList:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PresetsService_ListPresetSummaries
@@ -223,6 +232,7 @@ paths:
       - Presets service
   /notifications/notification-center/v1/presets:systemDefaultSummaryGet:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PresetsService_GetSystemDefaultPresetSummary
@@ -812,3 +822,9 @@ components:
           $ref: "#/components/schemas/Preset"
       title: Create Custom Preset Request
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

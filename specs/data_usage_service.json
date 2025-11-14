@@ -11,6 +11,7 @@
           "Data Usage Service"
         ],
         "summary": "Get Data Usage",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -29,12 +30,12 @@
               "type": "object",
               "properties": {
                 "fromDate": {
-                  "example": "2021-01-01T00:00:00Z",
+                  "example": "2021-01-01T00:00:00.000Z",
                   "type": "string",
                   "format": "date-time"
                 },
                 "toDate": {
-                  "example": "2021-01-01T00:00:00Z",
+                  "example": "2021-01-01T00:00:00.000Z",
                   "type": "string",
                   "format": "date-time"
                 }
@@ -69,6 +70,12 @@
               "items": {
                 "oneOf": [
                   {
+                    "$ref": "#/components/schemas/DimensionPillar"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DimensionGenericDimension"
+                  },
+                  {
                     "$ref": "#/components/schemas/DimensionTier"
                   },
                   {
@@ -76,12 +83,6 @@
                   },
                   {
                     "$ref": "#/components/schemas/DimensionPriority"
-                  },
-                  {
-                    "$ref": "#/components/schemas/DimensionPillar"
-                  },
-                  {
-                    "$ref": "#/components/schemas/DimensionGenericDimension"
                   }
                 ]
               }
@@ -127,6 +128,7 @@
           "Data Usage Service"
         ],
         "summary": "Get Daily Usage Evaluation Tokens",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -186,6 +188,7 @@
           "Data Usage Service"
         ],
         "summary": "Get Daily Usage Processed GBs",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -245,6 +248,7 @@
           "Data Usage Service"
         ],
         "summary": "Get Daily Usage Units",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -304,6 +308,7 @@
           "Data Usage Service"
         ],
         "summary": "Get Data Usage Metrics Export Status",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -344,6 +349,7 @@
           "Data Usage Service"
         ],
         "summary": "Update Data Usage Metrics Export Status",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -404,6 +410,7 @@
           "Data Usage Service"
         ],
         "summary": "Get Logs Count",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -422,12 +429,12 @@
               "type": "object",
               "properties": {
                 "fromDate": {
-                  "example": "2021-01-01T00:00:00Z",
+                  "example": "2021-01-01T00:00:00.000Z",
                   "type": "string",
                   "format": "date-time"
                 },
                 "toDate": {
-                  "example": "2021-01-01T00:00:00Z",
+                  "example": "2021-01-01T00:00:00.000Z",
                   "type": "string",
                   "format": "date-time"
                 }
@@ -528,6 +535,7 @@
           "Data Usage Service"
         ],
         "summary": "Get Spans Count",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -546,12 +554,12 @@
               "type": "object",
               "properties": {
                 "fromDate": {
-                  "example": "2021-01-01T00:00:00Z",
+                  "example": "2021-01-01T00:00:00.000Z",
                   "type": "string",
                   "format": "date-time"
                 },
                 "toDate": {
-                  "example": "2021-01-01T00:00:00Z",
+                  "example": "2021-01-01T00:00:00.000Z",
                   "type": "string",
                   "format": "date-time"
                 }
@@ -1232,7 +1240,7 @@
             "format": "int64"
           },
           "timestamp": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "type": "string",
             "format": "date-time"
           }
@@ -1309,12 +1317,12 @@
         "type": "object",
         "properties": {
           "fromDate": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "type": "string",
             "format": "date-time"
           },
           "toDate": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "type": "string",
             "format": "date-time"
           }
@@ -1386,6 +1394,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

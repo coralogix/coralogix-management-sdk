@@ -42,6 +42,8 @@ func (r ApiScopesServiceCreateScopeRequest) Execute() (*CreateScopeResponse, *ht
 /*
 ScopesServiceCreateScope Create Scope
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiScopesServiceCreateScopeRequest
 */
@@ -142,6 +144,8 @@ func (r ApiScopesServiceDeleteScopeRequest) Execute() (map[string]interface{}, *
 /*
 ScopesServiceDeleteScope Delete Scope
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiScopesServiceDeleteScopeRequest
@@ -241,6 +245,8 @@ func (r ApiScopesServiceGetTeamScopesRequest) Execute() (*GetScopesResponse, *ht
 
 /*
 ScopesServiceGetTeamScopes Get Team Scopes
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiScopesServiceGetTeamScopesRequest
@@ -344,6 +350,8 @@ func (r ApiScopesServiceGetTeamScopesByIdsRequest) Execute() (*GetScopesResponse
 
 /*
 ScopesServiceGetTeamScopesByIds Get Team Scopes By Ids
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiScopesServiceGetTeamScopesByIdsRequest
@@ -458,6 +466,8 @@ func (r ApiScopesServiceUpdateScopeRequest) Execute() (*UpdateScopeResponse, *ht
 
 /*
 ScopesServiceUpdateScope Update Scope
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiScopesServiceUpdateScopeRequest

@@ -11,6 +11,7 @@
           "Connectors service"
         ],
         "summary": "Replace a Connector",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -52,6 +53,7 @@
           "Connectors service"
         ],
         "summary": "List Connectors",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -92,6 +94,7 @@
           "Connectors service"
         ],
         "summary": "Create a Connector",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -133,6 +136,7 @@
           "Connectors service"
         ],
         "summary": "Get a Connector",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -166,6 +170,7 @@
           "Connectors service"
         ],
         "summary": "Delete a Connector",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -201,6 +206,7 @@
           "Connectors service"
         ],
         "summary": "Batch Get Connectors",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -242,6 +248,7 @@
           "Connectors service"
         ],
         "summary": "Batch Get Connectors Summaries",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -279,6 +286,7 @@
           "Connectors service"
         ],
         "summary": "Get Connector Type Summaries",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -313,6 +321,7 @@
           "Connectors service"
         ],
         "summary": "List Connector Summaries",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -855,6 +864,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

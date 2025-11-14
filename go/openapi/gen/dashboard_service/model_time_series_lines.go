@@ -19,7 +19,7 @@ var _ MappedNullable = &TimeSeriesLines{}
 
 // TimeSeriesLines struct for TimeSeriesLines
 type TimeSeriesLines struct {
-	// Whether to render numeric value without abbreviation
+	// Whether to render numeric value with abbreviation
 	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
 	// Applied color scheme for this query, one of the predefined values

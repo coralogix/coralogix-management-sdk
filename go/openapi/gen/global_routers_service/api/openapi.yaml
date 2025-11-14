@@ -7,6 +7,7 @@ servers:
 paths:
   /notifications/notification-center/v1/routers:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: GlobalRoutersService_ListGlobalRouters
@@ -38,6 +39,7 @@ paths:
       tags:
       - Global routers service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: GlobalRoutersService_CreateGlobalRouter
@@ -57,6 +59,7 @@ paths:
       tags:
       - Global routers service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: GlobalRoutersService_ReplaceGlobalRouter
@@ -77,6 +80,7 @@ paths:
       - Global routers service
   /notifications/notification-center/v1/routers/{id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: GlobalRoutersService_DeleteGlobalRouter
@@ -99,6 +103,7 @@ paths:
       tags:
       - Global routers service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: GlobalRoutersService_GetGlobalRouter
@@ -122,6 +127,7 @@ paths:
       - Global routers service
   /notifications/notification-center/v1/routers:batchGetSummaries:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: GlobalRoutersService_BatchGetGlobalRouters
@@ -796,3 +802,9 @@ components:
           $ref: "#/components/schemas/GlobalRouter"
       title: Create Global Router Request
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

@@ -7,6 +7,7 @@ servers:
 paths:
   /metrics/data-setup/v1:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: MetricsConfiguratorPublicService_GetTenantConfig
@@ -33,6 +34,7 @@ paths:
       tags:
       - Metrics Data Archive Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: MetricsConfiguratorPublicService_ConfigureTenant
@@ -64,6 +66,7 @@ paths:
       tags:
       - Metrics Data Archive Service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: MetricsConfiguratorPublicService_Update
@@ -96,6 +99,7 @@ paths:
       - Metrics Data Archive Service
   /metrics/data-setup/v1/disable:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: MetricsConfiguratorPublicService_DisableArchive
@@ -123,6 +127,7 @@ paths:
       - Metrics Data Archive Service
   /metrics/data-setup/v1/enable:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: MetricsConfiguratorPublicService_EnableArchive
@@ -150,6 +155,7 @@ paths:
       - Metrics Data Archive Service
   /metrics/data-setup/v1/validate:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: MetricsConfiguratorPublicService_ValidateBucket
@@ -488,8 +494,8 @@ components:
       type: string
     MetricsConfiguratorPublicService_Update_request:
       oneOf:
-      - $ref: "#/components/schemas/UpdateRequestS3"
       - $ref: "#/components/schemas/UpdateRequestIbm"
+      - $ref: "#/components/schemas/UpdateRequestS3"
       type: object
     MetricsConfiguratorPublicService_ConfigureTenant_request:
       oneOf:
@@ -498,6 +504,12 @@ components:
       type: object
     MetricsConfiguratorPublicService_ValidateBucket_request:
       oneOf:
-      - $ref: "#/components/schemas/ValidateBucketRequestIbm"
       - $ref: "#/components/schemas/ValidateBucketRequestS3"
+      - $ref: "#/components/schemas/ValidateBucketRequestIbm"
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

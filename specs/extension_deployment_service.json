@@ -11,6 +11,7 @@
           "Extension deployment service"
         ],
         "summary": "Get deployed extensions",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -54,6 +55,7 @@
           "Extension deployment service"
         ],
         "summary": "Deploy extension",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -186,6 +188,7 @@
           "Extension deployment service"
         ],
         "summary": "Update extension",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -318,6 +321,7 @@
           "Extension deployment service"
         ],
         "summary": "Revert deployment of extension",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -746,6 +750,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

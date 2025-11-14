@@ -188,6 +188,7 @@ model_line_chart_query_spans.go
 model_line_chart_resolution.go
 model_line_chart_spans_query.go
 model_line_chart_stacked_line.go
+model_link_action.go
 model_list_value.go
 model_logs.go
 model_logs_aggregation.go
@@ -271,8 +272,13 @@ model_prom_ql_query_type.go
 model_property.go
 model_property_definition.go
 model_property_definition_alignment.go
+model_property_definition_link.go
+model_property_definition_regex_extract.go
 model_property_definition_thresholds.go
+model_property_definition_units.go
+model_property_links.go
 model_property_thresholds.go
+model_property_units.go
 model_query_definition.go
 model_query_logs_query.go
 model_query_logs_query_type.go

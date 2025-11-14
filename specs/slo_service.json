@@ -11,6 +11,7 @@
           "SLO Service"
         ],
         "summary": "List Service SLOs",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -91,6 +92,7 @@
           "SLO Service"
         ],
         "summary": "Replace Service SLO",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -151,6 +153,7 @@
           "SLO Service"
         ],
         "summary": "Create Service SLO",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -213,6 +216,7 @@
           "SLO Service"
         ],
         "summary": "Batch Get Service SLOs",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -272,6 +276,7 @@
           "SLO Service"
         ],
         "summary": "Get Service SLO",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -324,6 +329,7 @@
           "SLO Service"
         ],
         "summary": "Delete Service SLO",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -662,7 +668,7 @@
         "type": "object",
         "properties": {
           "createdAt": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "type": "string",
             "format": "date-time"
           },
@@ -730,7 +736,7 @@
         "type": "object",
         "properties": {
           "createdAt": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "type": "string",
             "format": "date-time"
           },
@@ -889,6 +895,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

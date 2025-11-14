@@ -11,6 +11,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "List all outgoing webhooks",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -54,6 +55,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Update an outgoing webhook",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -117,6 +119,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Create an outgoing webhook",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -178,6 +181,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "List outbound webhooks summary",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -223,6 +227,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Test an outgoing webhook",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -284,6 +289,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Test an existing outgoing webhook",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -346,6 +352,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Get outgoing webhook types",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -391,6 +398,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Get outgoing webhook type details",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -447,6 +455,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Get outgoing webhook",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -501,6 +510,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Delete an outgoing webhook",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -558,6 +568,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "List outgoing webhooks",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -1107,25 +1118,10 @@
             "$ref": "#/components/schemas/OutgoingWebhookMicrosoftTeams"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookDemisto"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookAwsEventBridge"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookIbmEventNotifications"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookGenericWebhook"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookEmailGroup"
-          },
-          {
             "$ref": "#/components/schemas/OutgoingWebhookJira"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookOpsgenie"
+            "$ref": "#/components/schemas/OutgoingWebhookAwsEventBridge"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
@@ -1134,10 +1130,25 @@
             "$ref": "#/components/schemas/OutgoingWebhookSlack"
           },
           {
+            "$ref": "#/components/schemas/OutgoingWebhookSendLog"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookOpsgenie"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookDemisto"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookIbmEventNotifications"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookGenericWebhook"
+          },
+          {
             "$ref": "#/components/schemas/OutgoingWebhookPagerDuty"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookSendLog"
+            "$ref": "#/components/schemas/OutgoingWebhookEmailGroup"
           }
         ]
       },
@@ -1405,34 +1416,34 @@
             "$ref": "#/components/schemas/OutgoingWebhookInputDataGenericWebhook"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataSlack"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
-          },
-          {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataSendLog"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
-          },
-          {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataJira"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataOpsgenie"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataDemisto"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataSlack"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
@@ -2243,6 +2254,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

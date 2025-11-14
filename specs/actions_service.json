@@ -11,6 +11,7 @@
           "Actions Service"
         ],
         "summary": "List Actions",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -51,6 +52,7 @@
           "Actions Service"
         ],
         "summary": "Replace Action",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -106,6 +108,7 @@
           "Actions Service"
         ],
         "summary": "Create Action",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -184,6 +187,7 @@
           "Actions Service"
         ],
         "summary": "Atomic Batch Execute Actions",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -244,6 +248,7 @@
           "Actions Service"
         ],
         "summary": "Order Actions",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -312,6 +317,7 @@
           "Actions Service"
         ],
         "summary": "Get Action",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -363,6 +369,7 @@
           "Actions Service"
         ],
         "summary": "Delete Action",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -416,13 +423,13 @@
       "ActionExecutionRequest": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/ActionExecutionRequestCreate"
+          },
+          {
             "$ref": "#/components/schemas/ActionExecutionRequestReplace"
           },
           {
             "$ref": "#/components/schemas/ActionExecutionRequestDelete"
-          },
-          {
-            "$ref": "#/components/schemas/ActionExecutionRequestCreate"
           }
         ]
       },
@@ -795,6 +802,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

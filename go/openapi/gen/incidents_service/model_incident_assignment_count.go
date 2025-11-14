@@ -21,7 +21,7 @@ var _ MappedNullable = &IncidentAssignmentCount{}
 
 // IncidentAssignmentCount struct for IncidentAssignmentCount
 type IncidentAssignmentCount struct {
-	AssignedTo IncidentsV1UserDetails `json:"assignedTo"`
+	AssignedTo UserDetails `json:"assignedTo"`
 	Count int64 `json:"count"`
 }
 
@@ -31,7 +31,7 @@ type _IncidentAssignmentCount IncidentAssignmentCount
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIncidentAssignmentCount(assignedTo IncidentsV1UserDetails, count int64) *IncidentAssignmentCount {
+func NewIncidentAssignmentCount(assignedTo UserDetails, count int64) *IncidentAssignmentCount {
 	this := IncidentAssignmentCount{}
 	this.AssignedTo = assignedTo
 	this.Count = count
@@ -47,9 +47,9 @@ func NewIncidentAssignmentCountWithDefaults() *IncidentAssignmentCount {
 }
 
 // GetAssignedTo returns the AssignedTo field value
-func (o *IncidentAssignmentCount) GetAssignedTo() IncidentsV1UserDetails {
+func (o *IncidentAssignmentCount) GetAssignedTo() UserDetails {
 	if o == nil {
-		var ret IncidentsV1UserDetails
+		var ret UserDetails
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *IncidentAssignmentCount) GetAssignedTo() IncidentsV1UserDetails {
 
 // GetAssignedToOk returns a tuple with the AssignedTo field value
 // and a boolean to check if the value has been set.
-func (o *IncidentAssignmentCount) GetAssignedToOk() (*IncidentsV1UserDetails, bool) {
+func (o *IncidentAssignmentCount) GetAssignedToOk() (*UserDetails, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *IncidentAssignmentCount) GetAssignedToOk() (*IncidentsV1UserDetails, bo
 }
 
 // SetAssignedTo sets field value
-func (o *IncidentAssignmentCount) SetAssignedTo(v IncidentsV1UserDetails) {
+func (o *IncidentAssignmentCount) SetAssignedTo(v UserDetails) {
 	o.AssignedTo = v
 }
 

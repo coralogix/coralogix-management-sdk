@@ -7,6 +7,7 @@ servers:
 paths:
   /integrations/extensions/v1/all:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ExtensionService_GetAllExtensions
@@ -41,6 +42,7 @@ paths:
       - extensions:ReadConfig
   /integrations/extensions/v1/{id}:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ExtensionService_GetExtension
@@ -1272,3 +1274,9 @@ components:
           type: boolean
       title: Get all extensions request
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

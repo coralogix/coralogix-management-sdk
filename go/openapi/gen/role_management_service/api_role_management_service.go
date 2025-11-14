@@ -41,6 +41,8 @@ func (r ApiRoleManagementServiceCreateRoleRequest) Execute() (*CreateRoleRespons
 /*
 RoleManagementServiceCreateRole Create Role
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRoleManagementServiceCreateRoleRequest
 */
@@ -140,6 +142,8 @@ func (r ApiRoleManagementServiceDeleteRoleRequest) Execute() (map[string]interfa
 
 /*
 RoleManagementServiceDeleteRole Delete Role
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param roleId
@@ -241,6 +245,8 @@ func (r ApiRoleManagementServiceGetCustomRoleRequest) Execute() (*GetCustomRoleR
 
 /*
 RoleManagementServiceGetCustomRole Get Custom Role
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param roleId
@@ -348,6 +354,8 @@ func (r ApiRoleManagementServiceListCustomRolesRequest) Execute() (*ListCustomRo
 /*
 RoleManagementServiceListCustomRoles List Custom Roles
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRoleManagementServiceListCustomRolesRequest
 */
@@ -447,6 +455,8 @@ func (r ApiRoleManagementServiceListSystemRolesRequest) Execute() (*ListSystemRo
 
 /*
 RoleManagementServiceListSystemRoles List System Roles
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRoleManagementServiceListSystemRolesRequest
@@ -551,6 +561,8 @@ func (r ApiRoleManagementServiceUpdateRoleRequest) Execute() (map[string]interfa
 
 /*
 RoleManagementServiceUpdateRole Update Role
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param roleId

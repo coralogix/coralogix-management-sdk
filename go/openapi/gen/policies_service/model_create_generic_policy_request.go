@@ -24,6 +24,7 @@ type CreateGenericPolicyRequest struct {
 	ApplicationRule *QuotaV1Rule `json:"applicationRule,omitempty"`
 	ArchiveRetention *ArchiveRetention `json:"archiveRetention,omitempty"`
 	Description string `json:"description"`
+	Disabled *bool `json:"disabled,omitempty"`
 	Name string `json:"name"`
 	Priority QuotaV1Priority `json:"priority"`
 	SubsystemRule *QuotaV1Rule `json:"subsystemRule,omitempty"`
@@ -139,6 +140,38 @@ func (o *CreateGenericPolicyRequest) SetDescription(v string) {
 	o.Description = v
 }
 
+// GetDisabled returns the Disabled field value if set, zero value otherwise.
+func (o *CreateGenericPolicyRequest) GetDisabled() bool {
+	if o == nil || IsNil(o.Disabled) {
+		var ret bool
+		return ret
+	}
+	return *o.Disabled
+}
+
+// GetDisabledOk returns a tuple with the Disabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateGenericPolicyRequest) GetDisabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.Disabled) {
+		return nil, false
+	}
+	return o.Disabled, true
+}
+
+// HasDisabled returns a boolean if a field has been set.
+func (o *CreateGenericPolicyRequest) HasDisabled() bool {
+	if o != nil && !IsNil(o.Disabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisabled gets a reference to the given bool and assigns it to the Disabled field.
+func (o *CreateGenericPolicyRequest) SetDisabled(v bool) {
+	o.Disabled = &v
+}
+
 // GetName returns the Name field value
 func (o *CreateGenericPolicyRequest) GetName() string {
 	if o == nil {
@@ -236,6 +269,9 @@ func (o CreateGenericPolicyRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["archiveRetention"] = o.ArchiveRetention
 	}
 	toSerialize["description"] = o.Description
+	if !IsNil(o.Disabled) {
+		toSerialize["disabled"] = o.Disabled
+	}
 	toSerialize["name"] = o.Name
 	toSerialize["priority"] = o.Priority
 	if !IsNil(o.SubsystemRule) {
