@@ -1,0 +1,1327 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /v1/slo/slos:
+    get:
+      externalDocs:
+        url: ""
+      operationId: SlosService_ListSlos
+      parameters:
+      - explode: true
+        in: query
+        name: filters
+        required: false
+        schema:
+          $ref: "#/components/schemas/SloFilters"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSlosResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List Slos
+      tags:
+      - Slos Service
+    post:
+      externalDocs:
+        url: ""
+      operationId: SlosService_CreateSlo
+      parameters:
+      - explode: true
+        in: query
+        name: silence_data_validations
+        required: false
+        schema:
+          deprecated: true
+          type: boolean
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SlosService_ReplaceSlo_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateSloResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Create Slo
+      tags:
+      - Slos Service
+    put:
+      externalDocs:
+        url: ""
+      operationId: SlosService_ReplaceSlo
+      parameters:
+      - explode: true
+        in: query
+        name: silence_data_validations
+        required: false
+        schema:
+          deprecated: true
+          type: boolean
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SlosService_ReplaceSlo_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReplaceSloResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Replace Slo
+      tags:
+      - Slos Service
+  /v1/slo/slos/validate:
+    post:
+      externalDocs:
+        url: ""
+      operationId: SlosService_ValidateReplaceSloAlerts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SlosService_ReplaceSlo_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReplaceSloAlertsValidationsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Replace Slo Pre-Validate Alerts
+      tags:
+      - Slos Service
+  /v1/slo/slos/zeroState:
+    get:
+      externalDocs:
+        url: ""
+      operationId: SlosService_GetZeroState
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetZeroStateResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Slo Zero State
+      tags:
+      - Slos Service
+  /v1/slo/slos/{id}:
+    delete:
+      externalDocs:
+        url: ""
+      operationId: SlosService_DeleteSlo
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteSloResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Delete Slo
+      tags:
+      - Slos Service
+    get:
+      externalDocs:
+        url: ""
+      operationId: SlosService_GetSlo
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetSloResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Slo
+      tags:
+      - Slos Service
+  /v1/slo/slos:batchExecute:
+    post:
+      externalDocs:
+        url: ""
+      operationId: SlosService_BatchExecuteSlo
+      parameters:
+      - explode: true
+        in: query
+        name: requests
+        required: false
+        schema:
+          items:
+            $ref: "#/components/schemas/SlosService_BatchExecuteSlo_requests_parameter_inner"
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchExecuteSloResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Batch Execute Slo
+      tags:
+      - Slos Service
+  /v1/slo/slos:batchGet:
+    get:
+      externalDocs:
+        url: ""
+      operationId: SlosService_BatchGetSlos
+      parameters:
+      - explode: true
+        in: query
+        name: ids
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchGetSlosResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Batch Get Slo
+      tags:
+      - Slos Service
+components:
+  schemas:
+    BatchExecuteSloResponse:
+      description: Response containing the results of batch executed SLO operations.
+      example:
+        matchingResponses:
+        - createSloResponse:
+            slo:
+              creator: test@domain.com
+              requestBasedMetricSli:
+                goodEvents:
+                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                totalEvents:
+                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+              description: A brief description of my SLO
+              sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
+              updateTime: 2000-01-23T04:56:07.000+00:00
+              type: request
+              grouping:
+                labels:
+                - labels
+                - labels
+              labels:
+                key: labels
+              revision:
+                updateTime: 2000-01-23T04:56:07.000+00:00
+                revision: 1
+              createTime: 2000-01-23T04:56:07.000+00:00
+              name: Example Slo Name
+              id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+              targetThresholdPercentage: 99.999
+        - createSloResponse:
+            slo:
+              creator: test@domain.com
+              requestBasedMetricSli:
+                goodEvents:
+                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                totalEvents:
+                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+              description: A brief description of my SLO
+              sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
+              updateTime: 2000-01-23T04:56:07.000+00:00
+              type: request
+              grouping:
+                labels:
+                - labels
+                - labels
+              labels:
+                key: labels
+              revision:
+                updateTime: 2000-01-23T04:56:07.000+00:00
+                revision: 1
+              createTime: 2000-01-23T04:56:07.000+00:00
+              name: Example Slo Name
+              id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+              targetThresholdPercentage: 99.999
+        status:
+          details:
+            key: details
+          message: message
+          statusCode: OK
+      externalDocs:
+        url: ""
+      properties:
+        matchingResponses:
+          items:
+            $ref: "#/components/schemas/SloExecutionResponse"
+          type: array
+        status:
+          $ref: "#/components/schemas/ResponseStatus"
+      required:
+      - matchingResponses
+      title: BatchExecuteSloResponse
+      type: object
+    BatchGetSlosResponse:
+      description: Response containing a batch of SLOs and any IDs not found.
+      example:
+        notFoundIds:
+        - notFoundIds
+        - notFoundIds
+        slos:
+        - creator: test@domain.com
+          requestBasedMetricSli:
+            goodEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+            totalEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+          description: A brief description of my SLO
+          sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          type: request
+          grouping:
+            labels:
+            - labels
+            - labels
+          labels:
+            key: labels
+          revision:
+            updateTime: 2000-01-23T04:56:07.000+00:00
+            revision: 1
+          createTime: 2000-01-23T04:56:07.000+00:00
+          name: Example Slo Name
+          id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+          targetThresholdPercentage: 99.999
+        - creator: test@domain.com
+          requestBasedMetricSli:
+            goodEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+            totalEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+          description: A brief description of my SLO
+          sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          type: request
+          grouping:
+            labels:
+            - labels
+            - labels
+          labels:
+            key: labels
+          revision:
+            updateTime: 2000-01-23T04:56:07.000+00:00
+            revision: 1
+          createTime: 2000-01-23T04:56:07.000+00:00
+          name: Example Slo Name
+          id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+          targetThresholdPercentage: 99.999
+      externalDocs:
+        url: ""
+      properties:
+        notFoundIds:
+          items:
+            type: string
+          type: array
+        slos:
+          items:
+            $ref: "#/components/schemas/Slo"
+          type: array
+      required:
+      - slos
+      title: BatchGetSlosResponse
+      type: object
+    Code:
+      enum:
+      - OK
+      - CANCELLED
+      - UNKNOWN
+      - INVALID_ARGUMENT
+      - DEADLINE_EXCEEDED
+      - NOT_FOUND
+      - ALREADY_EXISTS
+      - PERMISSION_DENIED
+      - UNAUTHENTICATED
+      - RESOURCE_EXHAUSTED
+      - FAILED_PRECONDITION
+      - ABORTED
+      - OUT_OF_RANGE
+      - UNIMPLEMENTED
+      - INTERNAL
+      - UNAVAILABLE
+      - DATA_LOSS
+      type: string
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
+    ComparisonOperator:
+      enum:
+      - COMPARISON_OPERATOR_UNSPECIFIED
+      - COMPARISON_OPERATOR_GREATER_THAN
+      - COMPARISON_OPERATOR_GREATER_THAN_OR_EQUALS
+      - COMPARISON_OPERATOR_LESS_THAN
+      - COMPARISON_OPERATOR_LESS_THAN_OR_EQUALS
+      type: string
+    CreateSloRequest:
+      description: Request to create a new SLO.
+      externalDocs:
+        url: ""
+      properties:
+        silenceDataValidations:
+          deprecated: true
+          type: boolean
+        slo:
+          $ref: "#/components/schemas/Slo"
+      required:
+      - slo
+      title: CreateSloRequest
+      type: object
+    CreateSloResponse:
+      description: Response after creating a new SLO.
+      example:
+        slo:
+          creator: test@domain.com
+          requestBasedMetricSli:
+            goodEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+            totalEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+          description: A brief description of my SLO
+          sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          type: request
+          grouping:
+            labels:
+            - labels
+            - labels
+          labels:
+            key: labels
+          revision:
+            updateTime: 2000-01-23T04:56:07.000+00:00
+            revision: 1
+          createTime: 2000-01-23T04:56:07.000+00:00
+          name: Example Slo Name
+          id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+          targetThresholdPercentage: 99.999
+      externalDocs:
+        url: ""
+      properties:
+        slo:
+          $ref: "#/components/schemas/Slo"
+      required:
+      - slo
+      title: CreateSloResponse
+      type: object
+    DeleteSloRequest:
+      description: Request to delete an existing SLO.
+      externalDocs:
+        url: ""
+      properties:
+        id:
+          type: string
+      required:
+      - id
+      title: DeleteSloRequest
+      type: object
+    DeleteSloResponse:
+      description: Response after deleting an existing SLO.
+      example:
+        effectedSloAlertIds:
+        - effectedSloAlertIds
+        - effectedSloAlertIds
+      externalDocs:
+        url: ""
+      properties:
+        effectedSloAlertIds:
+          items:
+            type: string
+          type: array
+      title: DeleteSloResponse
+      type: object
+    FieldGroup:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    GetSloResponse:
+      description: Response containing the details of a specific SLO.
+      example:
+        slo:
+          creator: test@domain.com
+          requestBasedMetricSli:
+            goodEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+            totalEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+          description: A brief description of my SLO
+          sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          type: request
+          grouping:
+            labels:
+            - labels
+            - labels
+          labels:
+            key: labels
+          revision:
+            updateTime: 2000-01-23T04:56:07.000+00:00
+            revision: 1
+          createTime: 2000-01-23T04:56:07.000+00:00
+          name: Example Slo Name
+          id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+          targetThresholdPercentage: 99.999
+      externalDocs:
+        url: ""
+      properties:
+        slo:
+          $ref: "#/components/schemas/Slo"
+      required:
+      - slo
+      title: GetSloResponse
+      type: object
+    GetZeroStateResponse:
+      description: Response with Zero State.
+      example:
+        zeroState: true
+      externalDocs:
+        url: ""
+      properties:
+        zeroState:
+          type: boolean
+      required:
+      - zeroState
+      title: GetZeroStateResponse
+      type: object
+    ListSlosResponse:
+      description: Response containing a list of SLOs.
+      example:
+        slos:
+        - creator: test@domain.com
+          requestBasedMetricSli:
+            goodEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+            totalEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+          description: A brief description of my SLO
+          sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          type: request
+          grouping:
+            labels:
+            - labels
+            - labels
+          labels:
+            key: labels
+          revision:
+            updateTime: 2000-01-23T04:56:07.000+00:00
+            revision: 1
+          createTime: 2000-01-23T04:56:07.000+00:00
+          name: Example Slo Name
+          id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+          targetThresholdPercentage: 99.999
+        - creator: test@domain.com
+          requestBasedMetricSli:
+            goodEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+            totalEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+          description: A brief description of my SLO
+          sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          type: request
+          grouping:
+            labels:
+            - labels
+            - labels
+          labels:
+            key: labels
+          revision:
+            updateTime: 2000-01-23T04:56:07.000+00:00
+            revision: 1
+          createTime: 2000-01-23T04:56:07.000+00:00
+          name: Example Slo Name
+          id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+          targetThresholdPercentage: 99.999
+      externalDocs:
+        url: ""
+      properties:
+        slos:
+          items:
+            $ref: "#/components/schemas/Slo"
+          type: array
+      required:
+      - slos
+      title: ListSlosResponse
+      type: object
+    Metric:
+      description: Definition of a metric used in SLOs
+      example:
+        query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+      externalDocs:
+        url: ""
+      properties:
+        query:
+          example: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+          type: string
+      required:
+      - query
+      title: Metric
+      type: object
+    MissingDataStrategy:
+      enum:
+      - MISSING_DATA_STRATEGY_UNCOUNTED
+      - MISSING_DATA_STRATEGY_GOOD
+      - MISSING_DATA_STRATEGY_BAD
+      type: string
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    ReplaceSloAlertsValidationsResponse:
+      description: Response with validated alerts before replacing an existing SLO.
+      example:
+        alertsValidationResult:
+        - errorMessage: errorMessage
+          name: name
+          id: id
+          alertVersionId: alertVersionId
+        - errorMessage: errorMessage
+          name: name
+          id: id
+          alertVersionId: alertVersionId
+      externalDocs:
+        url: ""
+      properties:
+        alertsValidationResult:
+          items:
+            $ref: "#/components/schemas/SloAlertValidityResult"
+          type: array
+      required:
+      - alertsValidationResult
+      title: ReplaceSloAlertsValidationsResponse
+      type: object
+    ReplaceSloRequest:
+      description: Request to replace an existing SLO.
+      externalDocs:
+        url: ""
+      properties:
+        silenceDataValidations:
+          deprecated: true
+          type: boolean
+        slo:
+          $ref: "#/components/schemas/Slo"
+      required:
+      - slo
+      title: ReplaceSloRequest
+      type: object
+    ReplaceSloResponse:
+      description: Response after replacing an existing SLO.
+      example:
+        effectedSloAlertIds:
+        - effectedSloAlertIds
+        - effectedSloAlertIds
+        slo:
+          creator: test@domain.com
+          requestBasedMetricSli:
+            goodEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+            totalEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+          description: A brief description of my SLO
+          sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          type: request
+          grouping:
+            labels:
+            - labels
+            - labels
+          labels:
+            key: labels
+          revision:
+            updateTime: 2000-01-23T04:56:07.000+00:00
+            revision: 1
+          createTime: 2000-01-23T04:56:07.000+00:00
+          name: Example Slo Name
+          id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+          targetThresholdPercentage: 99.999
+      externalDocs:
+        url: ""
+      properties:
+        effectedSloAlertIds:
+          items:
+            type: string
+          type: array
+        slo:
+          $ref: "#/components/schemas/Slo"
+      required:
+      - slo
+      title: ReplaceSloResponse
+      type: object
+    RequestBasedMetricSli:
+      description: Definition of a request-based SLI based on metrics
+      example:
+        goodEvents:
+          query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+        totalEvents:
+          query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+      externalDocs:
+        url: ""
+      properties:
+        goodEvents:
+          $ref: "#/components/schemas/Metric"
+        totalEvents:
+          $ref: "#/components/schemas/Metric"
+      required:
+      - goodEvents
+      - totalEvents
+      title: RequestBasedMetricSli
+      type: object
+    ResponseStatus:
+      description: "Status of the response, including error code and message."
+      example:
+        details:
+          key: details
+        message: message
+        statusCode: OK
+      externalDocs:
+        url: ""
+      properties:
+        details:
+          additionalProperties:
+            type: string
+          type: object
+        message:
+          type: string
+        statusCode:
+          $ref: "#/components/schemas/Code"
+      required:
+      - statusCode
+      title: ResponseStatus
+      type: object
+    Slo:
+      oneOf:
+      - $ref: "#/components/schemas/SloRequestBasedMetricSli"
+      - $ref: "#/components/schemas/SloWindowBasedMetricSli"
+    SloAlertValidityResult:
+      example:
+        errorMessage: errorMessage
+        name: name
+        id: id
+        alertVersionId: alertVersionId
+      properties:
+        alertVersionId:
+          type: string
+        errorMessage:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+      type: object
+    SloConstantFilterField:
+      enum:
+      - SLO_CONST_FILTER_FIELD_UNSPECIFIED
+      - SLO_CONST_FILTER_FIELD_USER_NAME
+      - SLO_CONST_FILTER_FIELD_SLO_NAME
+      type: string
+    SloExecutionRequestCreateSloRequest:
+      additionalProperties: false
+      description: Request for executing an SLO operation.
+      externalDocs:
+        url: ""
+      properties:
+        createSloRequest:
+          $ref: "#/components/schemas/CreateSloRequest"
+      required:
+      - request
+      title: SloExecutionRequest
+      type: object
+    SloExecutionRequestDeleteSloRequest:
+      additionalProperties: false
+      description: Request for executing an SLO operation.
+      externalDocs:
+        url: ""
+      properties:
+        deleteSloRequest:
+          $ref: "#/components/schemas/DeleteSloRequest"
+      required:
+      - request
+      title: SloExecutionRequest
+      type: object
+    SloExecutionRequestReplaceSloRequest:
+      additionalProperties: false
+      description: Request for executing an SLO operation.
+      externalDocs:
+        url: ""
+      properties:
+        replaceSloRequest:
+          $ref: "#/components/schemas/ReplaceSloRequest"
+      required:
+      - request
+      title: SloExecutionRequest
+      type: object
+    SloExecutionResponse:
+      oneOf:
+      - $ref: "#/components/schemas/SloExecutionResponseCreateSloResponse"
+      - $ref: "#/components/schemas/SloExecutionResponseReplaceSloResponse"
+      - $ref: "#/components/schemas/SloExecutionResponseDeleteSloResponse"
+    SloExecutionResponseCreateSloResponse:
+      additionalProperties: false
+      description: Response for an executed SLO operation.
+      example:
+        createSloResponse:
+          slo:
+            creator: test@domain.com
+            requestBasedMetricSli:
+              goodEvents:
+                query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+              totalEvents:
+                query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+            description: A brief description of my SLO
+            sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
+            updateTime: 2000-01-23T04:56:07.000+00:00
+            type: request
+            grouping:
+              labels:
+              - labels
+              - labels
+            labels:
+              key: labels
+            revision:
+              updateTime: 2000-01-23T04:56:07.000+00:00
+              revision: 1
+            createTime: 2000-01-23T04:56:07.000+00:00
+            name: Example Slo Name
+            id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+            targetThresholdPercentage: 99.999
+      externalDocs:
+        url: ""
+      properties:
+        createSloResponse:
+          $ref: "#/components/schemas/CreateSloResponse"
+      title: SloExecutionResponse
+      type: object
+    SloExecutionResponseDeleteSloResponse:
+      additionalProperties: false
+      description: Response for an executed SLO operation.
+      externalDocs:
+        url: ""
+      properties:
+        deleteSloResponse:
+          $ref: "#/components/schemas/DeleteSloResponse"
+      title: SloExecutionResponse
+      type: object
+    SloExecutionResponseReplaceSloResponse:
+      additionalProperties: false
+      description: Response for an executed SLO operation.
+      externalDocs:
+        url: ""
+      properties:
+        replaceSloResponse:
+          $ref: "#/components/schemas/ReplaceSloResponse"
+      title: SloExecutionResponse
+      type: object
+    SloFilterFieldConstFilter:
+      additionalProperties: false
+      description: Field used for filtering SLOs
+      externalDocs:
+        url: ""
+      properties:
+        constFilter:
+          $ref: "#/components/schemas/SloConstantFilterField"
+      title: SloFilterField
+      type: object
+    SloFilterFieldLabelName:
+      additionalProperties: false
+      description: Field used for filtering SLOs
+      externalDocs:
+        url: ""
+      properties:
+        labelName:
+          example: environment
+          type: string
+      title: SloFilterField
+      type: object
+    SloRequestBasedMetricSli:
+      additionalProperties: false
+      description: Definition of an SLO
+      example:
+        creator: test@domain.com
+        requestBasedMetricSli:
+          goodEvents:
+            query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+          totalEvents:
+            query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+        description: A brief description of my SLO
+        sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
+        updateTime: 2000-01-23T04:56:07.000+00:00
+        type: request
+        grouping:
+          labels:
+          - labels
+          - labels
+        labels:
+          key: labels
+        revision:
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          revision: 1
+        createTime: 2000-01-23T04:56:07.000+00:00
+        name: Example Slo Name
+        id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+        targetThresholdPercentage: 99.999
+      externalDocs:
+        url: ""
+      properties:
+        createTime:
+          format: date-time
+          type: string
+        creator:
+          example: test@domain.com
+          type: string
+        description:
+          example: A brief description of my SLO
+          type: string
+        grouping:
+          $ref: "#/components/schemas/v1.Grouping"
+        id:
+          example: b11919d5-ef85-4bb1-8655-02640dbe94d9
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          type: object
+        name:
+          example: Example Slo Name
+          type: string
+        requestBasedMetricSli:
+          $ref: "#/components/schemas/RequestBasedMetricSli"
+        revision:
+          $ref: "#/components/schemas/v1.Revision"
+        sloTimeFrame:
+          $ref: "#/components/schemas/SloTimeFrame"
+        targetThresholdPercentage:
+          example: 99.999
+          format: float
+          type: number
+        type:
+          example: request
+          type: string
+        updateTime:
+          format: date-time
+          type: string
+      required:
+      - name
+      - sli
+      - targetThresholdPercentage
+      - window
+      title: Slo
+      type: object
+    SloTimeFrame:
+      enum:
+      - SLO_TIME_FRAME_UNSPECIFIED
+      - SLO_TIME_FRAME_7_DAYS
+      - SLO_TIME_FRAME_14_DAYS
+      - SLO_TIME_FRAME_21_DAYS
+      - SLO_TIME_FRAME_28_DAYS
+      type: string
+    SloWindowBasedMetricSli:
+      additionalProperties: false
+      description: Definition of an SLO
+      externalDocs:
+        url: ""
+      properties:
+        createTime:
+          format: date-time
+          type: string
+        creator:
+          example: test@domain.com
+          type: string
+        description:
+          example: A brief description of my SLO
+          type: string
+        grouping:
+          $ref: "#/components/schemas/v1.Grouping"
+        id:
+          example: b11919d5-ef85-4bb1-8655-02640dbe94d9
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          type: object
+        name:
+          example: Example Slo Name
+          type: string
+        revision:
+          $ref: "#/components/schemas/v1.Revision"
+        sloTimeFrame:
+          $ref: "#/components/schemas/SloTimeFrame"
+        targetThresholdPercentage:
+          example: 99.999
+          format: float
+          type: number
+        type:
+          example: request
+          type: string
+        updateTime:
+          format: date-time
+          type: string
+        windowBasedMetricSli:
+          $ref: "#/components/schemas/WindowBasedMetricSli"
+      required:
+      - name
+      - sli
+      - targetThresholdPercentage
+      - window
+      title: Slo
+      type: object
+    WindowBasedMetricSli:
+      description: Definition of a window-based SLI based on metrics
+      externalDocs:
+        url: ""
+      properties:
+        comparisonOperator:
+          $ref: "#/components/schemas/ComparisonOperator"
+        missingDataStrategy:
+          $ref: "#/components/schemas/MissingDataStrategy"
+        query:
+          $ref: "#/components/schemas/Metric"
+        threshold:
+          example: 0.95
+          format: float
+          type: number
+        window:
+          $ref: "#/components/schemas/WindowSloWindow"
+      required:
+      - comparisonOperator
+      - query
+      - threshold
+      - window
+      title: WindowBasedMetricSli
+      type: object
+    WindowSloWindow:
+      enum:
+      - WINDOW_SLO_WINDOW_UNSPECIFIED
+      - WINDOW_SLO_WINDOW_1_MINUTE
+      - WINDOW_SLO_WINDOW_5_MINUTES
+      type: string
+    common.Group:
+      properties:
+        field:
+          $ref: "#/components/schemas/FieldGroup"
+        groups:
+          items:
+            $ref: "#/components/schemas/common.Group"
+          type: array
+        value:
+          format: double
+          type: number
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    v1.Grouping:
+      description: Definition of the SLO grouping fields
+      example:
+        labels:
+        - labels
+        - labels
+      externalDocs:
+        url: ""
+      properties:
+        labels:
+          items:
+            type: string
+          type: array
+      title: Grouping
+      type: object
+    v1.Revision:
+      description: "The revision of the slo, used to differentiate between different\
+        \ versions of the same SLO"
+      example:
+        updateTime: 2000-01-23T04:56:07.000+00:00
+        revision: 1
+      externalDocs:
+        url: ""
+      properties:
+        revision:
+          example: 1
+          format: int32
+          type: integer
+        updateTime:
+          format: date-time
+          type: string
+      title: Revision
+      type: object
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    SloFilter_field:
+      oneOf:
+      - $ref: "#/components/schemas/SloFilterFieldConstFilter"
+      - $ref: "#/components/schemas/SloFilterFieldLabelName"
+    IsFilterPredicate:
+      description: Predicate for SLO filters that checks if a field is equal to one
+        of multiple values
+      externalDocs:
+        url: ""
+      properties:
+        is:
+          items:
+            type: string
+          type: array
+      title: IsFilterPredicate
+      type: object
+    SloFilterPredicate:
+      description: Predicate used for filtering SLOs
+      externalDocs:
+        url: ""
+      properties:
+        is:
+          $ref: "#/components/schemas/IsFilterPredicate"
+      title: SloFilterPredicate
+      type: object
+    SloFilter:
+      description: "A filter for SLOs, consisting of a field and a predicate"
+      externalDocs:
+        url: ""
+      properties:
+        field:
+          $ref: "#/components/schemas/SloFilter_field"
+        predicate:
+          $ref: "#/components/schemas/SloFilterPredicate"
+      required:
+      - field
+      - predicate
+      title: SloFilter
+      type: object
+    SloFilters:
+      description: A collection of filters for SLOs
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          items:
+            $ref: "#/components/schemas/SloFilter"
+          type: array
+      title: SloFilters
+      type: object
+    SlosService_ReplaceSlo_request:
+      oneOf:
+      - $ref: "#/components/schemas/SloRequestBasedMetricSli"
+      - $ref: "#/components/schemas/SloWindowBasedMetricSli"
+      type: object
+    SlosService_BatchExecuteSlo_requests_parameter_inner:
+      oneOf:
+      - $ref: "#/components/schemas/SloExecutionRequestCreateSloRequest"
+      - $ref: "#/components/schemas/SloExecutionRequestReplaceSloRequest"
+      - $ref: "#/components/schemas/SloExecutionRequestDeleteSloRequest"

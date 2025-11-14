@@ -1,0 +1,341 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /dataengine/retention-tags/v1:
+    get:
+      externalDocs:
+        url: ""
+      operationId: RetentionsService_GetRetentions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetRetentionsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Retentions
+      tags:
+      - Retentions Service
+    post:
+      externalDocs:
+        url: ""
+      operationId: RetentionsService_UpdateRetentions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Update_Retentions_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateRetentionsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Update Retentions
+      tags:
+      - Retentions Service
+  /dataengine/retention-tags/v1/activate:
+    post:
+      externalDocs:
+        url: ""
+      operationId: RetentionsService_ActivateRetentions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActivateRetentionsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Activate Retentions
+      tags:
+      - Retentions Service
+  /dataengine/retention-tags/v1/enabled:
+    get:
+      externalDocs:
+        url: ""
+      operationId: RetentionsService_GetRetentionsEnabled
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetRetentionsEnabledResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Retentions Enabled
+      tags:
+      - Retentions Service
+components:
+  schemas:
+    ActivateRetentionsResponse:
+      description: This data structure is obtained after setting the active status
+        of retentions
+      example:
+        activateRetentions: true
+      externalDocs:
+        description: Find out more about archives
+        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
+      properties:
+        activateRetentions:
+          example: true
+          type: boolean
+      required:
+      - retentions
+      title: Activate Retentions Response
+      type: object
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
+    FieldGroup:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    GetRetentionsEnabledResponse:
+      description: This data structure is obtained when retrieving the active status
+        of retentions
+      example:
+        enableTags: true
+      externalDocs:
+        description: Find out more about archives
+        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
+      properties:
+        enableTags:
+          type: boolean
+      required:
+      - retentions
+      title: Get Retentions Enabled Response
+      type: object
+    GetRetentionsResponse:
+      example:
+        retentions:
+        - editable: true
+          name: name
+          id: id
+          order: 0
+        - editable: true
+          name: name
+          id: id
+          order: 0
+      properties:
+        retentions:
+          items:
+            $ref: "#/components/schemas/archive.v1.Retention"
+          type: array
+      type: object
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    RetentionUpdateElement:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      type: object
+    UpdateRetentionsResponse:
+      description: This data structure is obtained after updating retentions
+      example:
+        retentions:
+        - editable: true
+          name: name
+          id: id
+          order: 0
+        - editable: true
+          name: name
+          id: id
+          order: 0
+      externalDocs:
+        description: Find out more about archives
+        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
+      properties:
+        retentions:
+          items:
+            $ref: "#/components/schemas/archive.v1.Retention"
+          type: array
+      required:
+      - retentions
+      title: Update Retentions Response
+      type: object
+    archive.v1.Retention:
+      description: This data structure represents a retention
+      example:
+        editable: true
+        name: name
+        id: id
+        order: 0
+      externalDocs:
+        description: Find out more about archives
+        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
+      properties:
+        editable:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        order:
+          format: int32
+          type: integer
+      title: Retention
+      type: object
+    common.Group:
+      properties:
+        field:
+          $ref: "#/components/schemas/FieldGroup"
+        groups:
+          items:
+            $ref: "#/components/schemas/common.Group"
+          type: array
+        value:
+          format: double
+          type: number
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    Update_Retentions_Request:
+      additionalProperties: false
+      description: This data structure is used to update retentions
+      properties:
+        retentionUpdateElements:
+          items:
+            $ref: "#/components/schemas/RetentionUpdateElement"
+          type: array
+      required:
+      - retentionUpdateElements
+      title: Update Retentions Request
+      type: object

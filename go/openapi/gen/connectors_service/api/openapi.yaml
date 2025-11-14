@@ -1,0 +1,872 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /notifications/notification-center/v1/connector:
+    put:
+      externalDocs:
+        url: ""
+      operationId: ConnectorsService_ReplaceConnector
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Replace_Connector_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReplaceConnectorResponse"
+          description: ""
+      summary: Replace a Connector
+      tags:
+      - Connectors service
+  /notifications/notification-center/v1/connectors:
+    get:
+      externalDocs:
+        url: ""
+      operationId: ConnectorsService_ListConnectors
+      parameters:
+      - explode: true
+        in: query
+        name: connector_type
+        required: false
+        schema:
+          $ref: "#/components/schemas/ConnectorType"
+        style: form
+      - explode: true
+        in: query
+        name: supported_by_entity_type
+        required: false
+        schema:
+          $ref: "#/components/schemas/notification_center.EntityType"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListConnectorsResponse"
+          description: ""
+      summary: List Connectors
+      tags:
+      - Connectors service
+    post:
+      externalDocs:
+        url: ""
+      operationId: ConnectorsService_CreateConnector
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Create_Connector_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateConnectorResponse"
+          description: ""
+      summary: Create a Connector
+      tags:
+      - Connectors service
+  /notifications/notification-center/v1/connectors/{id}:
+    delete:
+      externalDocs:
+        url: ""
+      operationId: ConnectorsService_DeleteConnector
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteConnectorResponse"
+          description: ""
+      summary: Delete a Connector
+      tags:
+      - Connectors service
+    get:
+      externalDocs:
+        url: ""
+      operationId: ConnectorsService_GetConnector
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetConnectorResponse"
+          description: ""
+      summary: Get a Connector
+      tags:
+      - Connectors service
+  /notifications/notification-center/v1/connectors:batchGet:
+    get:
+      externalDocs:
+        url: ""
+      operationId: ConnectorsService_BatchGetConnectors
+      parameters:
+      - explode: true
+        in: query
+        name: connector_ids
+        required: false
+        schema:
+          items:
+            example: "[\"connector-id-1\",\"connector-id-2\"]"
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchGetConnectorsResponse"
+          description: ""
+      summary: Batch Get Connectors
+      tags:
+      - Connectors service
+  /notifications/notification-center/v1/connectors:batchGetSummaries:
+    get:
+      externalDocs:
+        url: ""
+      operationId: ConnectorsService_BatchGetConnectorSummaries
+      parameters:
+      - explode: true
+        in: query
+        name: connector_ids
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchGetConnectorSummariesResponse"
+          description: ""
+      summary: Batch Get Connectors Summaries
+      tags:
+      - Connectors service
+  /notifications/notification-center/v1/connectors:getTypeSummaries:
+    get:
+      externalDocs:
+        url: ""
+      operationId: ConnectorsService_GetConnectorTypeSummaries
+      parameters:
+      - explode: true
+        in: query
+        name: supported_by_entity_type
+        required: false
+        schema:
+          $ref: "#/components/schemas/notification_center.EntityType"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetConnectorTypeSummariesResponse"
+          description: ""
+      summary: Get Connector Type Summaries
+      tags:
+      - Connectors service
+  /notifications/notification-center/v1/connectors:listSummaries:
+    get:
+      externalDocs:
+        url: ""
+      operationId: ConnectorsService_ListConnectorSummaries
+      parameters:
+      - explode: true
+        in: query
+        name: connector_type
+        required: false
+        schema:
+          $ref: "#/components/schemas/ConnectorType"
+        style: form
+      - explode: true
+        in: query
+        name: supported_by_entity_type
+        required: false
+        schema:
+          $ref: "#/components/schemas/notification_center.EntityType"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListConnectorSummariesResponse"
+          description: ""
+      summary: List Connector Summaries
+      tags:
+      - Connectors service
+components:
+  schemas:
+    BatchGetConnectorSummariesResponse:
+      description: Response containing the requested connector summaries and any IDs
+        not found
+      example:
+        notFoundIds:
+        - "[\"connector-id-3\"]"
+        - "[\"connector-id-3\"]"
+        connectorSummaries:
+          key:
+            createTime: 2000-01-23T04:56:07.000+00:00
+            teamId: 0
+            name: name
+            description: description
+            updateTime: 2000-01-23T04:56:07.000+00:00
+            id: id
+            type: CONNECTOR_TYPE_UNSPECIFIED
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        connectorSummaries:
+          additionalProperties:
+            $ref: "#/components/schemas/ConnectorSummary"
+          type: object
+        notFoundIds:
+          items:
+            example: "[\"connector-id-3\"]"
+            type: string
+          type: array
+      title: Batch Get Connector Summaries Response
+      type: object
+    BatchGetConnectorsResponse:
+      description: Response containing the requested connectors and any IDs not found
+      example:
+        notFoundIds:
+        - "[\"connector-id-3\"]"
+        - "[\"connector-id-3\"]"
+        connectors:
+          key:
+            diagnostics:
+              delivery: DELIVERY_UNSPECIFIED
+            configOverrides:
+            - entityType: ENTITY_TYPE_UNSPECIFIED
+              fields:
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+            - entityType: ENTITY_TYPE_UNSPECIFIED
+              fields:
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+            createTime: 2000-01-23T04:56:07.000+00:00
+            teamId: 12345
+            connectorConfig:
+              fields:
+              - fieldName: fieldName
+                value: value
+              - fieldName: fieldName
+                value: value
+            name: My Slack Connector
+            description: Connector for team notifications
+            updateTime: 2000-01-23T04:56:07.000+00:00
+            id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+            type: CONNECTOR_TYPE_UNSPECIFIED
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        connectors:
+          additionalProperties:
+            $ref: "#/components/schemas/Connector"
+          type: object
+        notFoundIds:
+          items:
+            example: "[\"connector-id-3\"]"
+            type: string
+          type: array
+      title: Batch Get Connectors Response
+      type: object
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
+    Connector:
+      description: A connector configuration for sending notifications
+      example:
+        diagnostics:
+          delivery: DELIVERY_UNSPECIFIED
+        configOverrides:
+        - entityType: ENTITY_TYPE_UNSPECIFIED
+          fields:
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+        - entityType: ENTITY_TYPE_UNSPECIFIED
+          fields:
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+        createTime: 2000-01-23T04:56:07.000+00:00
+        teamId: 12345
+        connectorConfig:
+          fields:
+          - fieldName: fieldName
+            value: value
+          - fieldName: fieldName
+            value: value
+        name: My Slack Connector
+        description: Connector for team notifications
+        updateTime: 2000-01-23T04:56:07.000+00:00
+        id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+        type: CONNECTOR_TYPE_UNSPECIFIED
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        configOverrides:
+          items:
+            $ref: "#/components/schemas/EntityTypeConfigOverrides"
+          type: array
+        connectorConfig:
+          $ref: "#/components/schemas/ConnectorConfig"
+        createTime:
+          format: date-time
+          type: string
+        description:
+          example: Connector for team notifications
+          maxLength: 5000
+          type: string
+        diagnostics:
+          $ref: "#/components/schemas/Diagnostics"
+        id:
+          example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          type: string
+        name:
+          example: My Slack Connector
+          maxLength: 200
+          type: string
+        teamId:
+          example: 12345
+          format: int64
+          type: integer
+        type:
+          $ref: "#/components/schemas/ConnectorType"
+        updateTime:
+          format: date-time
+          type: string
+      title: Connector
+      type: object
+    ConnectorConfig:
+      description: Configuration for a specific output schema of a connector
+      example:
+        fields:
+        - fieldName: fieldName
+          value: value
+        - fieldName: fieldName
+          value: value
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        fields:
+          items:
+            $ref: "#/components/schemas/notification_center.ConnectorConfigField"
+          type: array
+      title: Connector Config
+      type: object
+    ConnectorSummary:
+      example:
+        createTime: 2000-01-23T04:56:07.000+00:00
+        teamId: 0
+        name: name
+        description: description
+        updateTime: 2000-01-23T04:56:07.000+00:00
+        id: id
+        type: CONNECTOR_TYPE_UNSPECIFIED
+      properties:
+        createTime:
+          format: date-time
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        teamId:
+          format: int64
+          type: integer
+        type:
+          $ref: "#/components/schemas/ConnectorType"
+        updateTime:
+          format: date-time
+          type: string
+      type: object
+    ConnectorType:
+      enum:
+      - CONNECTOR_TYPE_UNSPECIFIED
+      - SLACK
+      - GENERIC_HTTPS
+      - PAGERDUTY
+      - IBM_EVENT_NOTIFICATIONS
+      - SERVICE_NOW
+      type: string
+    ConnectorTypeSummary:
+      description: Summary information about a connector type
+      example:
+        count: 5
+        type: CONNECTOR_TYPE_UNSPECIFIED
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        count:
+          example: 5
+          format: int64
+          type: integer
+        type:
+          $ref: "#/components/schemas/ConnectorType"
+      title: Connector Type Summary
+      type: object
+    CreateConnectorResponse:
+      description: Response containing the created connector
+      example:
+        connector:
+          diagnostics:
+            delivery: DELIVERY_UNSPECIFIED
+          configOverrides:
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          createTime: 2000-01-23T04:56:07.000+00:00
+          teamId: 12345
+          connectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+          name: My Slack Connector
+          description: Connector for team notifications
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          type: CONNECTOR_TYPE_UNSPECIFIED
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        connector:
+          $ref: "#/components/schemas/Connector"
+      title: Create Connector Response
+      type: object
+    DeleteConnectorResponse:
+      type: object
+    Delivery:
+      enum:
+      - DELIVERY_UNSPECIFIED
+      - DISABLED
+      - ERRORS_ONLY
+      type: string
+    Diagnostics:
+      description: Allows to configure rules for data written into 'notification.deliveries'
+        dataset
+      example:
+        delivery: DELIVERY_UNSPECIFIED
+      externalDocs:
+        description: Find out more about datasets
+        url: https://coralogix.com/docs/user-guides/data-layer/datasets/
+      properties:
+        delivery:
+          $ref: "#/components/schemas/Delivery"
+      title: Connector Diagnostics
+      type: object
+    EntityTypeConfigOverrides:
+      example:
+        entityType: ENTITY_TYPE_UNSPECIFIED
+        fields:
+        - template: template
+          fieldName: fieldName
+        - template: template
+          fieldName: fieldName
+      properties:
+        entityType:
+          $ref: "#/components/schemas/notification_center.EntityType"
+        fields:
+          items:
+            $ref: "#/components/schemas/TemplatedConnectorConfigField"
+          type: array
+      type: object
+    FieldGroup:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    GetConnectorResponse:
+      description: Response containing the requested connector
+      example:
+        connector:
+          diagnostics:
+            delivery: DELIVERY_UNSPECIFIED
+          configOverrides:
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          createTime: 2000-01-23T04:56:07.000+00:00
+          teamId: 12345
+          connectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+          name: My Slack Connector
+          description: Connector for team notifications
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          type: CONNECTOR_TYPE_UNSPECIFIED
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        connector:
+          $ref: "#/components/schemas/Connector"
+      title: Get Connector Response
+      type: object
+    GetConnectorTypeSummariesResponse:
+      description: Response containing summaries of connector types
+      example:
+        connectorTypeSummaries:
+        - count: 5
+          type: CONNECTOR_TYPE_UNSPECIFIED
+        - count: 5
+          type: CONNECTOR_TYPE_UNSPECIFIED
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        connectorTypeSummaries:
+          items:
+            $ref: "#/components/schemas/ConnectorTypeSummary"
+          type: array
+      title: Get Connector Type Summaries Response
+      type: object
+    ListConnectorSummariesResponse:
+      description: Response containing summaries of connectors
+      example:
+        connectors:
+        - createTime: 2000-01-23T04:56:07.000+00:00
+          teamId: 0
+          name: name
+          description: description
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          id: id
+          type: CONNECTOR_TYPE_UNSPECIFIED
+        - createTime: 2000-01-23T04:56:07.000+00:00
+          teamId: 0
+          name: name
+          description: description
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          id: id
+          type: CONNECTOR_TYPE_UNSPECIFIED
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        connectors:
+          items:
+            $ref: "#/components/schemas/ConnectorSummary"
+          type: array
+      title: List Connector Summaries Response
+      type: object
+    ListConnectorsResponse:
+      description: Response containing a list of connectors
+      example:
+        connectors:
+        - diagnostics:
+            delivery: DELIVERY_UNSPECIFIED
+          configOverrides:
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          createTime: 2000-01-23T04:56:07.000+00:00
+          teamId: 12345
+          connectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+          name: My Slack Connector
+          description: Connector for team notifications
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          type: CONNECTOR_TYPE_UNSPECIFIED
+        - diagnostics:
+            delivery: DELIVERY_UNSPECIFIED
+          configOverrides:
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          createTime: 2000-01-23T04:56:07.000+00:00
+          teamId: 12345
+          connectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+          name: My Slack Connector
+          description: Connector for team notifications
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          type: CONNECTOR_TYPE_UNSPECIFIED
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        connectors:
+          items:
+            $ref: "#/components/schemas/Connector"
+          type: array
+      title: List Connectors Response
+      type: object
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    ReplaceConnectorResponse:
+      description: Response containing the updated connector
+      example:
+        connector:
+          diagnostics:
+            delivery: DELIVERY_UNSPECIFIED
+          configOverrides:
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          createTime: 2000-01-23T04:56:07.000+00:00
+          teamId: 12345
+          connectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+          name: My Slack Connector
+          description: Connector for team notifications
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          type: CONNECTOR_TYPE_UNSPECIFIED
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        connector:
+          $ref: "#/components/schemas/Connector"
+      title: Replace Connector Response
+      type: object
+    TemplatedConnectorConfigField:
+      example:
+        template: template
+        fieldName: fieldName
+      properties:
+        fieldName:
+          type: string
+        template:
+          type: string
+      type: object
+    common.Group:
+      properties:
+        field:
+          $ref: "#/components/schemas/FieldGroup"
+        groups:
+          items:
+            $ref: "#/components/schemas/common.Group"
+          type: array
+        value:
+          format: double
+          type: number
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    notification_center.ConnectorConfigField:
+      example:
+        fieldName: fieldName
+        value: value
+      properties:
+        fieldName:
+          type: string
+        value:
+          type: string
+      type: object
+    notification_center.EntityType:
+      enum:
+      - ENTITY_TYPE_UNSPECIFIED
+      - ALERTS
+      - TEST_NOTIFICATIONS
+      - CASES
+      type: string
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    Replace_Connector_Request:
+      additionalProperties: false
+      description: Request to replace an existing connector
+      properties:
+        connector:
+          $ref: "#/components/schemas/Connector"
+      title: Replace Connector Request
+      type: object
+    Create_Connector_Request:
+      additionalProperties: false
+      description: Request to create a new connector
+      properties:
+        connector:
+          $ref: "#/components/schemas/Connector"
+      title: Create Connector Request
+      type: object
