@@ -49,6 +49,7 @@ jobs:
 
       - name: Run OpenAPI Split Tool
         run: |
+          rm -Rf specs
           chmod +x ./tools/openapi-split/split_specs.sh
           ./tools/openapi-split/split_specs.sh
 
