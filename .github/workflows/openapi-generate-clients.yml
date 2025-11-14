@@ -28,7 +28,7 @@ jobs:
       - name: curl
         uses: sozo-design/curl@v1.0.2
         with:
-          args: ${{ inputs.specDownloadUrl }}
+          args: ${{ inputs.specDownloadUrl }} -o openapi.yaml
         if: ${{ inputs.specDownloadUrl }}
 
       - name: Set up Go
@@ -49,7 +49,7 @@ jobs:
           npm install -g @redocly/cli@latest
           npm install -g @openapitools/openapi-generator-cli
           openapi-generator-cli version
-          
+
       - name: Run OpenAPI Split Tool
         run: |
           rm -Rf specs
@@ -61,16 +61,8 @@ jobs:
           chmod +x ./go/scripts/generate_openapi.sh
           ./go/scripts/generate_openapi.sh
 
-      - name: Commit and push generated files
-        if: ${{ success() }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          git add specs go/openapi/gen
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-          else
-            git commit -m "chore: update split specs and generated Go OpenAPI client"
-            git push
-          fi
+      - uses: EndBug/add-and-commit@v9 # You can change this to use a specific version.
+        with:
+          author_name: "github-actions[bot]"
+          author_email: "github-actions[bot]@users.noreply.github.com"
+          message: "chore: update split specs and generated Go OpenAPI client"
