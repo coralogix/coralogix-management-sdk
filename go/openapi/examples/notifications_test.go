@@ -23,6 +23,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
+	alerts "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/alert_definitions_service"
 	connectors "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/connectors_service"
 	globalrouters "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/global_routers_service"
 	presets "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/presets_service"
@@ -378,7 +379,6 @@ func TestPagerdutyPreset(t *testing.T) {
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
-// TODO: Add Alert with routing
 func TestGlobalRouter(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
@@ -388,6 +388,8 @@ func TestGlobalRouter(t *testing.T) {
 	routersClient := cxsdk.NewGlobalRoutersClient(cpc)
 	connectorsClient := cxsdk.NewConnectorsClient(cpc)
 	presetsClient := cxsdk.NewPresetsClient(cpc)
+	alertsClient := cxsdk.NewAlertsClient(cpc)
+
 	createdConnector, httpResp, err := connectorsClient.
 		ConnectorsServiceCreateConnector(context.Background()).
 		CreateConnectorRequest(*getHttpsConnector(fmt.Sprintf("TestConnector-%v", uuid.NewString()))).
@@ -435,6 +437,23 @@ func TestGlobalRouter(t *testing.T) {
 	replacedRouter, httpResp, err := routersClient.
 		GlobalRoutersServiceReplaceGlobalRouter(context.Background()).
 		ReplaceGlobalRouterRequest(replaceRouterRequest).
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+
+	createAlertReq := alerts.CreateAlertDefinitionRequest{
+		AlertDefProperties: &alerts.AlertDefProperties{
+			AlertDefPropertiesLogsRatioThreshold: CreateLogsRatioAlert(),
+		},
+	}
+	createAlertReq.AlertDefProperties.
+		AlertDefPropertiesLogsRatioThreshold.
+		NotificationGroup.
+		Router = &alerts.NotificationRouter{
+		Id: replacedRouter.Router.Id,
+	}
+	_, httpResp, err = alertsClient.
+		AlertDefsServiceCreateAlertDef(context.Background()).
+		CreateAlertDefinitionRequest(createAlertReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
