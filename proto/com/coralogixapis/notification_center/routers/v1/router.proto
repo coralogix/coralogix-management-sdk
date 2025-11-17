@@ -39,7 +39,8 @@ message GlobalRouter {
   optional google.protobuf.Timestamp update_time = 9;
   map<string, string> entity_labels = 10;
   optional EntityType entity_type = 11 [deprecated = true];
-  map<string, string> entity_label_matcher = 13;
+  map<string, string> entity_label_matcher = 13 [deprecated = true];
+  RoutingLabels routing_labels = 14;
 }
 
 message ValidateEntityLabelMatcherResult {
@@ -52,4 +53,22 @@ message ValidateEntityLabelMatcherResult {
     Success success = 1;
     Failure failure = 2;
   }
+}
+
+message RoutingLabels {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Routing Labels"
+      description: "Allows to configure routing labels which are used for routers resolution"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/routing/introduction/#how-label-based-routers-work"
+      description: "Find out more how label based routers work"
+    }
+  };
+
+  optional string environment = 1;
+  optional string service = 2;
+  optional string team = 3;
 }
