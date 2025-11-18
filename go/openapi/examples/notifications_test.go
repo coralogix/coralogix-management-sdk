@@ -406,8 +406,10 @@ func TestGlobalRouter(t *testing.T) {
 
 	router := globalrouters.GlobalRouter{
 		Name: globalrouters.PtrString("global router" + uuid.NewString()),
-		EntityLabelMatcher: &map[string]string{
-			"routing.group": uuid.NewString(),
+		RoutingLabels: &globalrouters.RoutingLabels{
+			Environment: globalrouters.PtrString(uuid.NewString()),
+			Service:     globalrouters.PtrString(uuid.NewString()),
+			Team:        globalrouters.PtrString(uuid.NewString()),
 		},
 		Description: globalrouters.PtrString("global router example"),
 		Rules: []globalrouters.RoutingRule{

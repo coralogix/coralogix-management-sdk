@@ -35,10 +35,10 @@ func TestSLOs(t *testing.T) {
 
 	sloName := "example_slo_" + uuid.NewString()
 	sloPayload := getRequestBasedSlo(sloName)
-	createReq := slos.SlosServiceReplaceSloRequest{
+	createReq := slos.SlosServiceCreateSloRequest{
 		SloRequestBasedMetricSli: sloPayload,
 	}
-	createResp, httpResp, err := client.SlosServiceCreateSlo(ctx).SlosServiceReplaceSloRequest(createReq).Execute()
+	createResp, httpResp, err := client.SlosServiceCreateSlo(ctx).SlosServiceCreateSloRequest(createReq).Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	sloID := createResp.GetSlo().SloRequestBasedMetricSli.GetId()
