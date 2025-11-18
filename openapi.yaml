@@ -2177,6 +2177,1123 @@ paths:
       tags:
         - SLO Service
       description: No description available
+  /cases/cases/team-configs/v1/configs:
+    post:
+      description: >-
+        Create a new team configuration with an optional display name and
+        settings.
+
+
+        Requires the following permissions:
+
+        - `case-config:Update`
+      externalDocs:
+        url: ''
+      operationId: TeamConfigService_CreateTeamConfig
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                name:
+                  description: Optional display name for the team configuration
+                  example: Primary Team Config
+                  type: string
+                settings:
+                  $ref: '#/components/schemas/TeamConfigSettings'
+              required:
+                - settings
+              title: Create team config request
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTeamConfigResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '403':
+          content:
+            application/json: {}
+          description: Forbidden
+        '409':
+          content:
+            application/json: {}
+          description: Conflict
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Create a team configuration
+      tags:
+        - Team Config service
+      x-coralogixPermissions:
+        - case-config:Update
+  /cases/cases/team-configs/v1/configs/active:
+    get:
+      description: >-
+        Retrieve the currently active team configuration (after any org- or
+        user-level precedence resolution).
+
+
+        Requires the following permissions:
+
+        - `case-config:Read`
+      externalDocs:
+        url: ''
+      operationId: TeamConfigService_GetActiveTeamConfig
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetActiveTeamConfigResponse'
+          description: ''
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '403':
+          content:
+            application/json: {}
+          description: Forbidden
+        '404':
+          content:
+            application/json: {}
+          description: Active team config not found
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get the active team configuration
+      tags:
+        - Team Config service
+      x-coralogixPermissions:
+        - case-config:Read
+  /cases/cases/team-configs/v1/configs/system-defaults:
+    get:
+      description: |-
+        Retrieve the platform-wide default settings for team configurations.
+
+        Requires the following permissions:
+        - `case-config:Read`
+      externalDocs:
+        url: ''
+      operationId: TeamConfigService_GetSystemDefaults
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSystemDefaultsResponse'
+          description: ''
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '403':
+          content:
+            application/json: {}
+          description: Forbidden
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get system default team configuration settings
+      tags:
+        - Team Config service
+      x-coralogixPermissions:
+        - case-config:Read
+  /cases/cases/team-configs/v1/configs/{id}:
+    get:
+      description: |-
+        Retrieve a single team configuration by its identifier.
+
+        Requires the following permissions:
+        - `case-config:Read`
+      externalDocs:
+        url: ''
+      operationId: TeamConfigService_GetTeamConfig
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: ID of the team configuration
+            example: 8c0c02a3-3c1c-4d56-9a2d-9f6ab6a4b321
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTeamConfigResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '403':
+          content:
+            application/json: {}
+          description: Forbidden
+        '404':
+          content:
+            application/json: {}
+          description: Team config not found
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get a team configuration
+      tags:
+        - Team Config service
+      x-coralogixPermissions:
+        - case-config:Read
+    delete:
+      description: |-
+        Delete a team configuration by its identifier.
+
+        Requires the following permissions:
+        - `case-config:Update`
+      externalDocs:
+        url: ''
+      operationId: TeamConfigService_DeleteTeamConfig
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: ID of the team configuration to delete
+            example: 8c0c02a3-3c1c-4d56-9a2d-9f6ab6a4b321
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteTeamConfigResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '403':
+          content:
+            application/json: {}
+          description: Forbidden
+        '404':
+          content:
+            application/json: {}
+          description: Team config not found
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Delete a team configuration
+      tags:
+        - Team Config service
+      x-coralogixPermissions:
+        - case-config:Update
+    patch:
+      description: >-
+        Update the display name and/or settings of an existing team
+        configuration.
+
+
+        Requires the following permissions:
+
+        - `case-config:Update`
+      externalDocs:
+        url: ''
+      operationId: TeamConfigService_UpdateTeamConfig
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: ID of the team configuration to update
+            example: 8c0c02a3-3c1c-4d56-9a2d-9f6ab6a4b321
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                name:
+                  description: New display name for the team configuration
+                  example: SRE Team Config
+                  type: string
+                settings:
+                  $ref: '#/components/schemas/TeamConfigSettings'
+              required:
+                - id
+              title: Update team config request
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateTeamConfigResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '403':
+          content:
+            application/json: {}
+          description: Forbidden
+        '404':
+          content:
+            application/json: {}
+          description: Team config not found
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Update a team configuration
+      tags:
+        - Team Config service
+      x-coralogixPermissions:
+        - case-config:Update
+  /cases/cases/v1:
+    post:
+      description: |-
+        List cases using filters, pagination and custom ordering.
+
+        Requires the following permissions:
+        - `case:Read`
+      externalDocs:
+        url: ''
+      operationId: CasesService_ListCases
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              description: Request to list cases with filtering and pagination
+              properties:
+                filters:
+                  $ref: '#/components/schemas/CaseFilters'
+                orderBy:
+                  $ref: '#/components/schemas/CaseOrderBy'
+                pagination:
+                  $ref: '#/components/schemas/cases.v1.PaginationRequest'
+              title: List cases request
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCasesResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List cases with filters
+      tags:
+        - Cases service
+      x-coralogixPermissions:
+        - case:Read
+  /cases/cases/v1/events/comment/{case_id}:
+    post:
+      description: |-
+        Create a new comment event for a case.
+
+        Requires the following permissions:
+        - `case:Comment`
+      externalDocs:
+        url: ''
+      operationId: CaseEventsService_CreateComment
+      parameters:
+        - in: path
+          name: case_id
+          required: true
+          schema:
+            description: ID of the case to add the event to
+            example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                text:
+                  description: Comment text to update
+                  example: This is updated text
+                  type: string
+              required:
+                - caseId
+                - text
+              title: Create comment event request
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCommentResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '403':
+          content:
+            application/json: {}
+          description: Forbidden
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Create a comment event
+      tags:
+        - Case Events service
+      x-coralogixPermissions:
+        - case:Comment
+  /cases/cases/v1/events/comment/{event_id}:
+    delete:
+      description: |-
+        Delete an existing comment event from a case.
+
+        Requires the following permissions:
+        - `case:Comment`
+      externalDocs:
+        url: ''
+      operationId: CaseEventsService_DeleteComment
+      parameters:
+        - in: path
+          name: event_id
+          required: true
+          schema:
+            description: ID of the comment event to delete
+            example: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCommentResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '403':
+          content:
+            application/json: {}
+          description: Forbidden
+        '404':
+          content:
+            application/json: {}
+          description: Event not found
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Delete a comment event
+      tags:
+        - Case Events service
+      x-coralogixPermissions:
+        - case:Comment
+    patch:
+      description: |-
+        Modify the content of an existing comment event.
+
+        Requires the following permissions:
+        - `case:Comment`
+      externalDocs:
+        url: ''
+      operationId: CaseEventsService_UpdateComment
+      parameters:
+        - in: path
+          name: event_id
+          required: true
+          schema:
+            description: ID of the comment event to update
+            example: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                text:
+                  description: Comment text to update
+                  example: This is updated text
+                  type: string
+              required:
+                - eventId
+                - text
+              title: Update comment event request
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateCommentResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '403':
+          content:
+            application/json: {}
+          description: Forbidden
+        '404':
+          content:
+            application/json: {}
+          description: Event not found
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Update a comment event
+      tags:
+        - Case Events service
+      x-coralogixPermissions:
+        - case:Comment
+  /cases/cases/v1/events/{case_id}:
+    get:
+      description: |-
+        Retrieve all events associated with a specific case.
+
+        Requires the following permissions:
+        - `case:Read`
+      externalDocs:
+        url: ''
+      operationId: CaseEventsService_ListEvents
+      parameters:
+        - in: path
+          name: case_id
+          required: true
+          schema:
+            description: ID of the case
+            example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1.ListEventsResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '403':
+          content:
+            application/json: {}
+          description: Forbidden
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List events for a case
+      tags:
+        - Case Events service
+      x-coralogixPermissions:
+        - case:Read
+  /cases/cases/v1/events/{event_id}:
+    get:
+      description: |-
+        Retrieve a single event by its unique identifier.
+
+        Requires the following permissions:
+        - `case:Read`
+      externalDocs:
+        url: ''
+      operationId: CaseEventsService_GetEvent
+      parameters:
+        - in: path
+          name: event_id
+          required: true
+          schema:
+            description: ID of the event to fetch
+            example: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1.GetEventResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '403':
+          content:
+            application/json: {}
+          description: Forbidden
+        '404':
+          content:
+            application/json: {}
+          description: Event not found
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get an event by ID
+      tags:
+        - Case Events service
+      x-coralogixPermissions:
+        - case:Read
+  /cases/cases/v1/{id}:
+    get:
+      description: >-
+        Retrieve detailed information about a single case by its unique
+        identifier.
+
+
+        Requires the following permissions:
+
+        - `case:Read`
+      externalDocs:
+        url: ''
+      operationId: CasesService_GetCase
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: Unique ID of the case
+            example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCaseResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get case by ID
+      tags:
+        - Cases service
+      x-coralogixPermissions:
+        - case:Read
+    patch:
+      description: |-
+        Apply a partial update (patch) to a case.
+
+        Requires the following permissions:
+        - `case:Update`
+      externalDocs:
+        url: ''
+      operationId: CasesService_UpdateCase
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: ID of the case to update
+            example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              description: Partial set of fields to update on the case
+              properties:
+                description:
+                  description: New case description
+                  example: Investigate intermittent connection drops
+                  type: string
+                title:
+                  description: New case title
+                  example: Database connection investigation
+                  type: string
+              title: Case patch
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateCaseResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Update case fields
+      tags:
+        - Cases service
+      x-coralogixPermissions:
+        - case:Update
+  /cases/cases/v1/{id}:acknowledge:
+    post:
+      description: |-
+        Mark the case as acknowledged by a user.
+
+        Requires the following permissions:
+        - `case:Acknowledge`
+      externalDocs:
+        url: ''
+      operationId: CasesService_AcknowledgeCase
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: ID of the case to acknowledge
+            example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                actor:
+                  $ref: '#/components/schemas/cases.v1.UserDetails'
+              required:
+                - id
+                - actor
+              title: Acknowledge case request
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcknowledgeCaseResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Acknowledge a case
+      tags:
+        - Cases service
+      x-coralogixPermissions:
+        - case:Acknowledge
+  /cases/cases/v1/{id}:assign:
+    post:
+      description: |-
+        Assign a case to a specific user.
+
+        Requires the following permissions:
+        - `case:Assign`
+      externalDocs:
+        url: ''
+      operationId: CasesService_AssignCase
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: ID of the case to assign
+            example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                assignee:
+                  $ref: '#/components/schemas/cases.v1.UserDetails'
+              required:
+                - id
+                - assignee
+              title: Assign case request
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssignCaseResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Assign a case to a user
+      tags:
+        - Cases service
+      x-coralogixPermissions:
+        - case:Assign
+  /cases/cases/v1/{id}:close:
+    post:
+      description: |-
+        Close a case that no longer requires action.
+
+        Requires the following permissions:
+        - `case:Close`
+      externalDocs:
+        url: ''
+      operationId: CasesService_CloseCase
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: ID of the case to close
+            example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+            type: string
+        - in: query
+          name: reason
+          required: false
+          schema:
+            description: Reason to resolve
+            example: This case is not applicable.
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloseCaseResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Close a case
+      tags:
+        - Cases service
+      x-coralogixPermissions:
+        - case:Close
+  /cases/cases/v1/{id}:resolve:
+    post:
+      description: |-
+        Mark a case as resolved.
+
+        Requires the following permissions:
+        - `case:Close`
+      externalDocs:
+        url: ''
+      operationId: CasesService_ResolveCase
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: ID of the case to resolve
+            example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+            type: string
+        - in: query
+          name: reason
+          required: false
+          schema:
+            description: Reason to resolve
+            example: This case is not applicable.
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResolveCaseResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Resolve a case
+      tags:
+        - Cases service
+      x-coralogixPermissions:
+        - case:Close
+  /cases/cases/v1/{id}:setPriorityOverride:
+    post:
+      description: |-
+        Override a case's computed priority with a specific value.
+
+        Requires the following permissions:
+        - `case:Update`
+      externalDocs:
+        url: ''
+      operationId: CasesService_SetPriorityOverride
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: ID of the case
+            example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                priority:
+                  $ref: '#/components/schemas/CasePriority'
+              required:
+                - id
+                - priority
+              title: Set priority override request
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetPriorityOverrideResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Set priority override
+      tags:
+        - Cases service
+      x-coralogixPermissions:
+        - case:Update
+  /cases/cases/v1/{id}:unassign:
+    post:
+      description: |-
+        Remove the current assignee from a case.
+
+        Requires the following permissions:
+        - `case:Assign`
+      externalDocs:
+        url: ''
+      operationId: CasesService_UnassignCase
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: ID of the case to unassign
+            example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnassignCaseResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Remove case assignment
+      tags:
+        - Cases service
+      x-coralogixPermissions:
+        - case:Assign
+  /cases/cases/v1/{id}:unsetPriorityOverride:
+    post:
+      description: |-
+        Remove a previously set priority override for a case.
+
+        Requires the following permissions:
+        - `case:Update`
+      externalDocs:
+        url: ''
+      operationId: CasesService_UnsetPriorityOverride
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            description: ID of the case
+            example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsetPriorityOverrideResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Remove priority override
+      tags:
+        - Cases service
+      x-coralogixPermissions:
+        - case:Update
+  /cases/cases/v1:get-filter-values:
+    post:
+      description: |-
+        Retrieve available filter and aggregation values for cases.
+
+        Requires the following permissions:
+        - `case:Read`
+      externalDocs:
+        url: ''
+      operationId: CasesService_GetFilterValues
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                filters:
+                  $ref: '#/components/schemas/CaseFilters'
+              title: Get case filter values request
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cases.v1.GetFilterValuesResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get available filter values
+      tags:
+        - Cases service
+      x-coralogixPermissions:
+        - case:Read
   /dashboards/dashboards/v1/catalog:
     get:
       description: |-
@@ -2893,11 +4010,11 @@ paths:
           schema:
             items:
               oneOf:
-                - $ref: '#/components/schemas/DimensionPillar'
-                - $ref: '#/components/schemas/DimensionGenericDimension'
                 - $ref: '#/components/schemas/DimensionTier'
                 - $ref: '#/components/schemas/DimensionSeverity'
                 - $ref: '#/components/schemas/DimensionPriority'
+                - $ref: '#/components/schemas/DimensionPillar'
+                - $ref: '#/components/schemas/DimensionGenericDimension'
             type: array
       responses:
         '200':
@@ -3314,8 +4431,8 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: '#/components/schemas/UpdatePolicyRequestLogRules'
                 - $ref: '#/components/schemas/UpdatePolicyRequestSpanRules'
+                - $ref: '#/components/schemas/UpdatePolicyRequestLogRules'
               type: object
       responses:
         '200':
@@ -3852,8 +4969,8 @@ paths:
           schema:
             items:
               oneOf:
-                - $ref: '#/components/schemas/SearchClauseName'
                 - $ref: '#/components/schemas/SearchClauseId'
+                - $ref: '#/components/schemas/SearchClauseName'
             type: array
       responses:
         '200':
@@ -4079,8 +5196,8 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: '#/components/schemas/E2MSpansQuery'
                 - $ref: '#/components/schemas/E2MLogsQuery'
+                - $ref: '#/components/schemas/E2MSpansQuery'
               type: object
       responses:
         '200':
@@ -4102,8 +5219,8 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: '#/components/schemas/E2MCreateParamsLogsQuery'
                 - $ref: '#/components/schemas/E2MCreateParamsSpansQuery'
+                - $ref: '#/components/schemas/E2MCreateParamsLogsQuery'
               type: object
       responses:
         '200':
@@ -5306,7 +6423,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetFilterValuesResponse'
+                $ref: '#/components/schemas/incidents.v1.GetFilterValuesResponse'
           description: ''
         '400':
           content:
@@ -8612,6 +9729,267 @@ paths:
       tags:
         - Rule Groups Service
       description: No description available
+  /stuff/things/v1:
+    get:
+      externalDocs:
+        url: ''
+      operationId: ThingService_ListThings
+      parameters:
+        - in: query
+          name: filter
+          required: false
+          schema:
+            example: logs.id=100
+            type: string
+        - in: query
+          name: page_size
+          required: false
+          schema:
+            example: 100
+            format: int32
+            type: integer
+        - in: query
+          name: skip
+          required: false
+          schema:
+            example: 100
+            format: int32
+            type: integer
+        - in: query
+          name: page_token
+          required: false
+          schema:
+            example: asdf1234
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListThingsResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List Things
+      tags:
+        - Things Service
+      description: No description available
+    post:
+      externalDocs:
+        url: ''
+      operationId: ThingService_CreateThing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              description: The data structure to create a thing
+              properties:
+                thing:
+                  $ref: '#/components/schemas/Thing'
+              required:
+                - thing
+              title: Create Thing Request
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateThingResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Create Thing
+      tags:
+        - Things Service
+      x-bumblebee:
+        - action:
+            - create
+          guard: status==201 && exists($.body.id)
+          name: resource_management
+          reachable:
+            - ThingService_ListThings
+            - ThingService_GetThing
+            - ThingService_ReplaceThing
+            - ThingService_DeleteThing
+          root: true
+      description: No description available
+  /stuff/things/v1/{id}:
+    get:
+      externalDocs:
+        url: ''
+      operationId: ThingService_GetThing
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            example: 43B9880C-A880-418F-91DF-8463063A30ED
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetThingResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Thing
+      tags:
+        - Things Service
+      x-bumblebee:
+        - action:
+            - create
+          guard: status==201 && exists($.body.id)
+          name: resource_management
+          reachable:
+            - ThingService_ListThings
+            - ThingService_GetThing
+            - ThingService_ReplaceThing
+            - ThingService_DeleteThing
+          root: true
+      description: No description available
+    delete:
+      externalDocs:
+        url: ''
+      operationId: ThingService_DeleteThing
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            example: 43B9880C-A880-418F-91DF-8463063A30ED
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteThingResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Delete Thing
+      tags:
+        - Things Service
+      x-bumblebee:
+        - action:
+            - create
+          guard: status==201 && exists($.body.id)
+          name: resource_management
+          reachable:
+            - ThingService_ListThings
+          root: true
+      description: No description available
+  /stuff/things/v1/{thing.id}:
+    put:
+      externalDocs:
+        url: ''
+      operationId: ThingService_ReplaceThing
+      parameters:
+        - in: path
+          name: thing.id
+          required: true
+          schema:
+            example: 123e4567-e89b-12d3-a456-426614174000
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              description: The data structure to replace a thing
+              properties:
+                thing:
+                  properties:
+                    createdAt:
+                      example: '2021-01-01T00:00:00.000Z'
+                      format: date-time
+                      type: string
+                    name:
+                      example: A Thing's Name
+                      type: string
+                  type: object
+              required:
+                - thing
+              title: Replace Thing Request
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplaceThingResponse'
+          description: ''
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+        '401':
+          content:
+            application/json: {}
+          description: Unauthorized request
+        '500':
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Replace Thing
+      tags:
+        - Things Service
+      x-bumblebee:
+        - action:
+            - create
+          guard: status==201 && exists($.body.id)
+          name: resource_management
+          reachable:
+            - ThingService_ListThings
+            - ThingService_GetThing
+            - ThingService_ReplaceThing
+            - ThingService_DeleteThing
+          root: true
+      description: No description available
   /v1/alert-scheduler-rules:
     put:
       externalDocs:
@@ -8927,8 +10305,8 @@ paths:
           required: false
           schema:
             oneOf:
-              - $ref: '#/components/schemas/FileTextual'
               - $ref: '#/components/schemas/FileBinary'
+              - $ref: '#/components/schemas/FileTextual'
       responses:
         '200':
           content:
@@ -9627,8 +11005,8 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: '#/components/schemas/SloRequestBasedMetricSli'
                 - $ref: '#/components/schemas/SloWindowBasedMetricSli'
+                - $ref: '#/components/schemas/SloRequestBasedMetricSli'
               type: object
       responses:
         '200':
@@ -9669,8 +11047,8 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: '#/components/schemas/SloWindowBasedMetricSli'
                 - $ref: '#/components/schemas/SloRequestBasedMetricSli'
+                - $ref: '#/components/schemas/SloWindowBasedMetricSli'
               type: object
       responses:
         '200':
@@ -10422,7 +11800,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListEventsResponse'
+                $ref: '#/components/schemas/v3.ListEventsResponse'
           description: ''
         '400':
           content:
@@ -10550,7 +11928,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetEventResponse'
+                $ref: '#/components/schemas/v3.GetEventResponse'
           description: ''
         '400':
           content:
@@ -10701,6 +12079,31 @@ components:
           our documentation
         url: >-
           https://coralogix.com/docs/integrations/azure/azure-resource-manager-integration-packages/
+    AcknowledgeCaseRequest:
+      title: Acknowledge case request
+      required:
+        - id
+        - actor
+      type: object
+      properties:
+        actor:
+          $ref: '#/components/schemas/cases.v1.UserDetails'
+        id:
+          type: string
+          description: ID of the case to acknowledge
+          example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+      externalDocs:
+        url: ''
+    AcknowledgeCaseResponse:
+      title: Acknowledge case response
+      required:
+        - case
+      type: object
+      properties:
+        case:
+          $ref: '#/components/schemas/Case'
+      externalDocs:
+        url: ''
     AcknowledgeIncidentByEventIdRequest:
       title: Acknowledge incident by event id request
       required:
@@ -10804,9 +12207,9 @@ components:
       additionalProperties: false
     ActionExecutionResponse:
       oneOf:
+        - $ref: '#/components/schemas/ActionExecutionResponseCreate'
         - $ref: '#/components/schemas/ActionExecutionResponseReplace'
         - $ref: '#/components/schemas/ActionExecutionResponseDelete'
-        - $ref: '#/components/schemas/ActionExecutionResponseCreate'
     ActionExecutionResponseCreate:
       type: object
       properties:
@@ -10843,6 +12246,11 @@ components:
         description: Find out more about archives
         url: >-
           https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
+    ActivatedCaseEvent:
+      title: Activated case event
+      type: object
+      externalDocs:
+        url: ''
     ActiveTimeframe:
       type: object
       properties:
@@ -11242,19 +12650,19 @@ components:
         url: ''
     AlertDefProperties:
       oneOf:
-        - $ref: '#/components/schemas/AlertDefPropertiesLogsRatioThreshold'
-        - $ref: '#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold'
-        - $ref: '#/components/schemas/AlertDefPropertiesFlow'
-        - $ref: '#/components/schemas/AlertDefPropertiesLogsAnomaly'
-        - $ref: '#/components/schemas/AlertDefPropertiesLogsNewValue'
-        - $ref: '#/components/schemas/AlertDefPropertiesLogsUniqueCount'
-        - $ref: '#/components/schemas/AlertDefPropertiesSloThreshold'
-        - $ref: '#/components/schemas/AlertDefPropertiesLogsImmediate'
         - $ref: '#/components/schemas/AlertDefPropertiesTracingImmediate'
         - $ref: '#/components/schemas/AlertDefPropertiesLogsThreshold'
+        - $ref: '#/components/schemas/AlertDefPropertiesLogsRatioThreshold'
         - $ref: '#/components/schemas/AlertDefPropertiesMetricThreshold'
         - $ref: '#/components/schemas/AlertDefPropertiesTracingThreshold'
+        - $ref: '#/components/schemas/AlertDefPropertiesFlow'
+        - $ref: '#/components/schemas/AlertDefPropertiesLogsNewValue'
+        - $ref: '#/components/schemas/AlertDefPropertiesSloThreshold'
+        - $ref: '#/components/schemas/AlertDefPropertiesLogsImmediate'
+        - $ref: '#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold'
+        - $ref: '#/components/schemas/AlertDefPropertiesLogsAnomaly'
         - $ref: '#/components/schemas/AlertDefPropertiesMetricAnomaly'
+        - $ref: '#/components/schemas/AlertDefPropertiesLogsUniqueCount'
     AlertDefProperties.EntityLabelsEntry:
       type: object
       properties:
@@ -12274,6 +13682,64 @@ components:
           type: object
         payloadType:
           type: string
+    AlertGroupingType:
+      enum:
+        - GROUPING_TYPE_UNSPECIFIED
+        - GROUPING_TYPE_COMPOSITE_ALERT
+        - GROUPING_TYPE_COMBINATION_ALERT
+        - GROUPING_TYPE_NONE
+      type: string
+    AlertIndicator:
+      title: Alert indicator
+      required:
+        - alertId
+        - alertVersionId
+        - priority
+        - groupingType
+        - groupings
+        - state
+        - triggerTime
+      type: object
+      properties:
+        alertId:
+          type: string
+          description: The unique alert ID (stable across versions).
+          example: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+        alertVersionId:
+          type: string
+          description: Specific version ID of the alert definition that triggered.
+          example: 1eae3615-79e7-4b54-88e0-6a77def653bf
+        groupingType:
+          $ref: '#/components/schemas/AlertGroupingType'
+        groupings:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1.KeyValue'
+        priority:
+          $ref: '#/components/schemas/AlertPriority'
+        resolveTime:
+          type: string
+          description: When present, timestamp when the alert resolved.
+          format: date-time
+          example: '2025-09-22T11:05:00.000Z'
+        state:
+          $ref: '#/components/schemas/AlertIndicatorState'
+        triggerTime:
+          type: string
+          description: Timestamp when the alert triggered.
+          format: date-time
+          example: '2025-09-22T10:30:00.000Z'
+      description: >-
+        Metadata describing a triggered alert instance and its lifecycle
+        relative to a case.
+      externalDocs:
+        url: ''
+    AlertIndicatorState:
+      enum:
+        - ALERT_INDICATOR_STATE_UNSPECIFIED
+        - ALERT_INDICATOR_STATE_TRIGGERED
+        - ALERT_INDICATOR_STATE_RESOLVED
+      type: string
     AlertNotificationEvent:
       title: Alert notification event
       type: object
@@ -12297,6 +13763,15 @@ components:
           format: date-time
       externalDocs:
         url: ''
+    AlertPriority:
+      enum:
+        - ALERT_PRIORITY_UNSPECIFIED
+        - ALERT_PRIORITY_P1
+        - ALERT_PRIORITY_P2
+        - ALERT_PRIORITY_P3
+        - ALERT_PRIORITY_P4
+        - ALERT_PRIORITY_P5
+      type: string
     AlertSchedulerRule:
       type: object
       properties:
@@ -12575,8 +14050,8 @@ components:
           https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
     ArchiveTarget:
       oneOf:
-        - $ref: '#/components/schemas/ArchiveTargetS3'
         - $ref: '#/components/schemas/ArchiveTargetIbmCos'
+        - $ref: '#/components/schemas/ArchiveTargetS3'
     ArchiveTargetIbmCos:
       type: object
       properties:
@@ -12627,6 +14102,31 @@ components:
           items:
             $ref: '#/components/schemas/ObjectTag'
       additionalProperties: false
+    AssignCaseRequest:
+      title: Assign case request
+      required:
+        - id
+        - assignee
+      type: object
+      properties:
+        assignee:
+          $ref: '#/components/schemas/cases.v1.UserDetails'
+        id:
+          type: string
+          description: ID of the case to assign
+          example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+      externalDocs:
+        url: ''
+    AssignCaseResponse:
+      title: Assign case response
+      required:
+        - case
+      type: object
+      properties:
+        case:
+          $ref: '#/components/schemas/Case'
+      externalDocs:
+        url: ''
     AssignDashboardFolderRequest:
       title: Assign dashboard to folder request data structure
       required:
@@ -12663,7 +14163,7 @@ components:
       type: object
       properties:
         assignedTo:
-          $ref: '#/components/schemas/UserDetails'
+          $ref: '#/components/schemas/incidents.v1.UserDetails'
         incidentIds:
           type: array
           items:
@@ -12688,6 +14188,53 @@ components:
       description: Response containing the updated incidents after assignment
       externalDocs:
         url: ''
+    AssignedCaseEvent:
+      title: Assigned event
+      type: object
+      properties:
+        assigneeUserId:
+          type: string
+          description: New assignee user ID
+          example: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+        previousAssigneeUserId:
+          type: string
+          description: Previous assignee user ID (if any)
+      externalDocs:
+        url: ''
+    AssigneeAggregation:
+      type: object
+      properties:
+        assignedCounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssigneeCount'
+        unassignedCount:
+          type: integer
+          format: int64
+    AssigneeCount:
+      type: object
+      properties:
+        assignee:
+          type: string
+        count:
+          type: integer
+          format: int64
+    AssigneeOption:
+      oneOf:
+        - $ref: '#/components/schemas/AssigneeOptionUnassigned'
+        - $ref: '#/components/schemas/AssigneeOptionAssignee'
+    AssigneeOptionAssignee:
+      type: object
+      properties:
+        assignee:
+          type: string
+      additionalProperties: false
+    AssigneeOptionUnassigned:
+      type: object
+      properties:
+        unassigned:
+          $ref: '#/components/schemas/Unassigned'
+      additionalProperties: false
     AssigneeWithCount:
       title: Assignee with count
       required:
@@ -12712,9 +14259,9 @@ components:
       type: object
       properties:
         assignedBy:
-          $ref: '#/components/schemas/UserDetails'
+          $ref: '#/components/schemas/incidents.v1.UserDetails'
         assignedTo:
-          $ref: '#/components/schemas/UserDetails'
+          $ref: '#/components/schemas/incidents.v1.UserDetails'
       description: >-
         Details of the user who assigned the incident and the user to whom it
         was assigned
@@ -13695,6 +15242,360 @@ components:
       description: Burn rate type single definition
       externalDocs:
         url: ''
+    Case:
+      title: Case
+      required:
+        - id
+        - title
+        - state
+        - status
+        - priority
+        - category
+        - createTime
+      type: object
+      properties:
+        acknowledgeTime:
+          type: string
+          description: When the case was acknowledged
+          format: date-time
+        alertIndicators:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertIndicator'
+        assignee:
+          $ref: '#/components/schemas/cases.v1.UserDetails'
+        category:
+          $ref: '#/components/schemas/CaseCategory'
+        createTime:
+          type: string
+          description: When the case was created
+          format: date-time
+          example: '2025-09-22T10:30:00.000Z'
+        description:
+          type: string
+          description: Detailed description of the case
+          example: Investigating DB connection errors in prod
+        groupings:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1.KeyValue'
+        id:
+          type: string
+          description: Unique identifier of the case
+          example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+        labels:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1.KeyValue'
+        priority:
+          $ref: '#/components/schemas/CasePriority'
+        priorityDetails:
+          $ref: '#/components/schemas/PriorityDetails'
+        readableId:
+          type: string
+          description: >-
+            Readable identifier of the case, available only for the cases that
+            became Active
+          example: CASE-123
+        resolutionDetails:
+          $ref: '#/components/schemas/ResolutionDetails'
+        state:
+          $ref: '#/components/schemas/CaseState'
+        status:
+          $ref: '#/components/schemas/CaseStatus'
+        title:
+          type: string
+          description: Case title
+          example: Database outage investigation
+        updateTime:
+          type: string
+          description: When the case was last updated
+          format: date-time
+      description: Represents a case within the Cases service.
+      externalDocs:
+        url: ''
+    CaseCategory:
+      enum:
+        - CASE_CATEGORY_UNSPECIFIED
+        - CASE_CATEGORY_SECURITY
+        - CASE_CATEGORY_AVAILABILITY
+      type: string
+    CaseEvent:
+      title: Case event
+      required:
+        - eventId
+        - eventData
+        - actor
+        - createTime
+        - eventTime
+      type: object
+      properties:
+        actor:
+          $ref: '#/components/schemas/EventActor'
+        createTime:
+          type: string
+          description: Server-side insertion time
+          format: date-time
+          example: '2025-09-22T10:30:00.000Z'
+        eventData:
+          $ref: '#/components/schemas/CaseEventData'
+        eventId:
+          type: string
+          description: Unique identifier of the event
+          example: ef51d3d9-a301-496b-aa7d-9a6e519ba0d5
+        eventTime:
+          type: string
+          description: Logical occurrence time of the event
+          format: date-time
+          example: '2025-09-22T10:29:45.000Z'
+        updateTime:
+          type: string
+          description: If edited, last modification time of the event
+          format: date-time
+      description: Represents an immutable entry in a case's event timeline.
+      externalDocs:
+        url: ''
+    CaseEventData:
+      oneOf:
+        - $ref: '#/components/schemas/CaseEventDataAssigned'
+        - $ref: '#/components/schemas/CaseEventDataCreated'
+        - $ref: '#/components/schemas/CaseEventDataPriorityDetailsChanged'
+        - $ref: '#/components/schemas/CaseEventDataUnassigned'
+        - $ref: '#/components/schemas/CaseEventDataComment'
+        - $ref: '#/components/schemas/CaseEventDataActivated'
+        - $ref: '#/components/schemas/CaseEventDataStatusChanged'
+        - $ref: '#/components/schemas/CaseEventDataNotificationSent'
+        - $ref: '#/components/schemas/CaseEventDataNotificationFailed'
+        - $ref: '#/components/schemas/CaseEventDataResolved'
+    CaseEventDataActivated:
+      title: Case event data
+      type: object
+      properties:
+        activated:
+          $ref: '#/components/schemas/ActivatedCaseEvent'
+      additionalProperties: false
+      description: One-of wrapper for concrete case event types.
+      externalDocs:
+        url: ''
+    CaseEventDataAssigned:
+      title: Case event data
+      type: object
+      properties:
+        assigned:
+          $ref: '#/components/schemas/AssignedCaseEvent'
+      additionalProperties: false
+      description: One-of wrapper for concrete case event types.
+      externalDocs:
+        url: ''
+    CaseEventDataComment:
+      title: Case event data
+      type: object
+      properties:
+        comment:
+          $ref: '#/components/schemas/CommentCaseEvent'
+      additionalProperties: false
+      description: One-of wrapper for concrete case event types.
+      externalDocs:
+        url: ''
+    CaseEventDataCreated:
+      title: Case event data
+      type: object
+      properties:
+        created:
+          $ref: '#/components/schemas/CreatedCaseEvent'
+      additionalProperties: false
+      description: One-of wrapper for concrete case event types.
+      externalDocs:
+        url: ''
+    CaseEventDataNotificationFailed:
+      title: Case event data
+      type: object
+      properties:
+        notificationFailed:
+          $ref: '#/components/schemas/NotificationFailedCaseEvent'
+      additionalProperties: false
+      description: One-of wrapper for concrete case event types.
+      externalDocs:
+        url: ''
+    CaseEventDataNotificationSent:
+      title: Case event data
+      type: object
+      properties:
+        notificationSent:
+          $ref: '#/components/schemas/NotificationSentCaseEvent'
+      additionalProperties: false
+      description: One-of wrapper for concrete case event types.
+      externalDocs:
+        url: ''
+    CaseEventDataPriorityDetailsChanged:
+      title: Case event data
+      type: object
+      properties:
+        priorityDetailsChanged:
+          $ref: '#/components/schemas/PriorityDetailsChangedCaseEvent'
+      additionalProperties: false
+      description: One-of wrapper for concrete case event types.
+      externalDocs:
+        url: ''
+    CaseEventDataResolved:
+      title: Case event data
+      type: object
+      properties:
+        resolved:
+          $ref: '#/components/schemas/ResolvedCaseEvent'
+      additionalProperties: false
+      description: One-of wrapper for concrete case event types.
+      externalDocs:
+        url: ''
+    CaseEventDataStatusChanged:
+      title: Case event data
+      type: object
+      properties:
+        statusChanged:
+          $ref: '#/components/schemas/StatusChangedCaseEvent'
+      additionalProperties: false
+      description: One-of wrapper for concrete case event types.
+      externalDocs:
+        url: ''
+    CaseEventDataUnassigned:
+      title: Case event data
+      type: object
+      properties:
+        unassigned:
+          $ref: '#/components/schemas/UnassignedCaseEvent'
+      additionalProperties: false
+      description: One-of wrapper for concrete case event types.
+      externalDocs:
+        url: ''
+    CaseFilters:
+      title: Case filters
+      type: object
+      properties:
+        assignees:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssigneeOption'
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/CaseCategory'
+        dateRange:
+          $ref: '#/components/schemas/DateRangeFilter'
+        groupings:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterGroup'
+        labels:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterGroup'
+        priorities:
+          type: array
+          items:
+            $ref: '#/components/schemas/CasePriority'
+        states:
+          type: array
+          items:
+            $ref: '#/components/schemas/CaseState'
+        statuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/CaseStatus'
+        textSearch:
+          type: string
+          description: Test search query applied to case titles
+          example: Vulnerability
+      description: >-
+        Filters applied when querying cases, including states, priorities,
+        categories, groupings, and labels.
+      externalDocs:
+        url: ''
+    CaseOrderBy:
+      title: Case ordering specification
+      type: object
+      properties:
+        direction:
+          $ref: '#/components/schemas/CaseOrderByDirection'
+        field:
+          $ref: '#/components/schemas/CaseOrderByField'
+      description: >-
+        Defines how cases should be sorted in the response. By default, cases
+        are sorted by creation time and id in descending order. With this field,
+        one can specify the primary sorting field and direction.
+      externalDocs:
+        url: ''
+    CaseOrderByDirection:
+      enum:
+        - CASE_ORDER_BY_DIRECTION_UNSPECIFIED
+        - CASE_ORDER_BY_DIRECTION_ASCENDING
+        - CASE_ORDER_BY_DIRECTION_DESCENDING
+      type: string
+    CaseOrderByField:
+      enum:
+        - CASE_ORDER_BY_FIELD_UNSPECIFIED
+        - CASE_ORDER_BY_FIELD_PRIORITY
+        - CASE_ORDER_BY_FIELD_STATUS
+        - CASE_ORDER_BY_FIELD_STATE
+        - CASE_ORDER_BY_FIELD_UPDATED_AT
+        - CASE_ORDER_BY_FIELD_CATEGORY
+      type: string
+    CasePatch:
+      title: Case patch
+      type: object
+      properties:
+        description:
+          type: string
+          description: New case description
+          example: Investigate intermittent connection drops
+        title:
+          type: string
+          description: New case title
+          example: Database connection investigation
+      description: Partial set of fields to update on the case
+      externalDocs:
+        url: ''
+    CasePriority:
+      enum:
+        - CASE_PRIORITY_UNSPECIFIED
+        - CASE_PRIORITY_P1
+        - CASE_PRIORITY_P2
+        - CASE_PRIORITY_P3
+        - CASE_PRIORITY_P4
+        - CASE_PRIORITY_P5
+      type: string
+    CaseResolver:
+      enum:
+        - CASE_RESOLVER_UNSPECIFIED
+        - CASE_RESOLVER_SYSTEM
+        - CASE_RESOLVER_USER
+      type: string
+    CaseState:
+      enum:
+        - CASE_STATE_UNSPECIFIED
+        - CASE_STATE_CREATED
+        - CASE_STATE_ACTIVE
+        - CASE_STATE_RESOLVED
+      type: string
+    CaseStatus:
+      enum:
+        - CASE_STATUS_UNSPECIFIED
+        - CASE_STATUS_OPEN
+        - CASE_STATUS_ACKNOWLEDGED
+        - CASE_STATUS_CLOSED
+      type: string
+    CategoryAggregation:
+      title: Category aggregation
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/CaseCategory'
+        count:
+          type: integer
+          description: Number of cases in this category
+          format: int64
+          example: 13
+      externalDocs:
+        url: ''
     ChangelogEntry:
       title: Changelog entry
       type: object
@@ -13716,6 +15617,32 @@ components:
     CleanupTestingRevisionResponse:
       title: Cleanup testing revision response
       type: object
+      externalDocs:
+        url: ''
+    CloseCaseRequest:
+      title: Close case request
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the case to close
+          example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+        reason:
+          type: string
+          description: Reason to resolve
+          example: This case is not applicable.
+      externalDocs:
+        url: ''
+    CloseCaseResponse:
+      title: Close case response
+      required:
+        - case
+      type: object
+      properties:
+        case:
+          $ref: '#/components/schemas/Case'
       externalDocs:
         url: ''
     CloseIncidentsRequest:
@@ -13810,9 +15737,9 @@ components:
       type: string
     ColorsBy:
       oneOf:
+        - $ref: '#/components/schemas/ColorsByStack'
         - $ref: '#/components/schemas/ColorsByGroupBy'
         - $ref: '#/components/schemas/ColorsByAggregation'
-        - $ref: '#/components/schemas/ColorsByStack'
     ColorsByAggregation:
       type: object
       properties:
@@ -13849,6 +15776,16 @@ components:
           type: string
         tooltipText:
           type: string
+      externalDocs:
+        url: ''
+    CommentCaseEvent:
+      title: Comment event
+      type: object
+      properties:
+        unsafeText:
+          type: string
+          description: Comment text
+          example: Looking into DB timeouts
       externalDocs:
         url: ''
     CommonARMParams:
@@ -14408,6 +16345,33 @@ components:
         description: Find out more about alert scheduler rules in our documentation.
         url: >-
           https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/
+    CreateCommentRequest:
+      title: Create comment event request
+      required:
+        - caseId
+        - text
+      type: object
+      properties:
+        caseId:
+          type: string
+          description: ID of the case to add the event to
+          example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+        text:
+          type: string
+          description: Comment text to update
+          example: This is updated text
+      externalDocs:
+        url: ''
+    CreateCommentResponse:
+      title: Create comment event response
+      required:
+        - event
+      type: object
+      properties:
+        event:
+          $ref: '#/components/schemas/CaseEvent'
+      externalDocs:
+        url: ''
     CreateCompanyIpAccessSettingsRequest:
       title: Create company IP access settings request
       type: object
@@ -15013,6 +16977,30 @@ components:
         description: Find out more about quota management.
         url: >-
           https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
+    CreateTeamConfigRequest:
+      title: Create team config request
+      required:
+        - settings
+      type: object
+      properties:
+        name:
+          type: string
+          description: Optional display name for the team configuration
+          example: Primary Team Config
+        settings:
+          $ref: '#/components/schemas/TeamConfigSettings'
+      externalDocs:
+        url: ''
+    CreateTeamConfigResponse:
+      title: Create team config response
+      required:
+        - teamConfig
+      type: object
+      properties:
+        teamConfig:
+          $ref: '#/components/schemas/TeamConfig'
+      externalDocs:
+        url: ''
     CreateTeamGroupRequest:
       title: CreateTeamGroupRequest
       type: object
@@ -15077,6 +17065,30 @@ components:
       properties:
         teamId:
           $ref: '#/components/schemas/v2.TeamId'
+    CreateThingRequest:
+      title: Create Thing Request
+      required:
+        - thing
+      type: object
+      properties:
+        thing:
+          $ref: '#/components/schemas/Thing'
+      description: The data structure to create a thing
+      externalDocs:
+        description: Find out more.
+        url: https://coralogix.com/docs/user-guides/
+    CreateThingResponse:
+      title: Create Thing Response
+      required:
+        - thing
+      type: object
+      properties:
+        thing:
+          $ref: '#/components/schemas/Thing'
+      description: The data structure response from creating a thing
+      externalDocs:
+        description: Find out more.
+        url: https://coralogix.com/docs/user-guides/
     CreateViewFolderRequest:
       title: CreateViewFolderRequest
       type: object
@@ -15133,6 +17145,14 @@ components:
       properties:
         view:
           $ref: '#/components/schemas/View'
+    CreatedCaseEvent:
+      title: Created event
+      type: object
+      properties:
+        priority:
+          $ref: '#/components/schemas/CasePriority'
+      externalDocs:
+        url: ''
     Csv:
       type: object
       properties:
@@ -15329,8 +17349,8 @@ components:
           $ref: '#/components/schemas/FieldStatistics'
     CxEventSingleOrMultiple:
       oneOf:
-        - $ref: '#/components/schemas/CxEventSingleOrMultipleSingleEvent'
         - $ref: '#/components/schemas/CxEventSingleOrMultipleMultipleEvents'
+        - $ref: '#/components/schemas/CxEventSingleOrMultipleSingleEvent'
     CxEventSingleOrMultipleMultipleEvents:
       title: CxEventSingleOrMultiple
       required:
@@ -15359,18 +17379,18 @@ components:
       type: object
     Dashboard:
       oneOf:
+        - $ref: '#/components/schemas/DashboardTwoMinutesFolderPathAbsoluteTimeFrame'
         - $ref: '#/components/schemas/DashboardTwoMinutesFolderPathRelativeTimeFrame'
-        - $ref: '#/components/schemas/DashboardFiveMinutesFolderPathAbsoluteTimeFrame'
-        - $ref: '#/components/schemas/DashboardOffFolderPathAbsoluteTimeFrame'
         - $ref: '#/components/schemas/DashboardFiveMinutesFolderIdAbsoluteTimeFrame'
-        - $ref: '#/components/schemas/DashboardFiveMinutesFolderIdRelativeTimeFrame'
-        - $ref: '#/components/schemas/DashboardFiveMinutesFolderPathRelativeTimeFrame'
-        - $ref: '#/components/schemas/DashboardOffFolderIdAbsoluteTimeFrame'
         - $ref: '#/components/schemas/DashboardOffFolderIdRelativeTimeFrame'
-        - $ref: '#/components/schemas/DashboardOffFolderPathRelativeTimeFrame'
         - $ref: '#/components/schemas/DashboardTwoMinutesFolderIdAbsoluteTimeFrame'
         - $ref: '#/components/schemas/DashboardTwoMinutesFolderIdRelativeTimeFrame'
-        - $ref: '#/components/schemas/DashboardTwoMinutesFolderPathAbsoluteTimeFrame'
+        - $ref: '#/components/schemas/DashboardFiveMinutesFolderIdRelativeTimeFrame'
+        - $ref: '#/components/schemas/DashboardFiveMinutesFolderPathAbsoluteTimeFrame'
+        - $ref: '#/components/schemas/DashboardFiveMinutesFolderPathRelativeTimeFrame'
+        - $ref: '#/components/schemas/DashboardOffFolderIdAbsoluteTimeFrame'
+        - $ref: '#/components/schemas/DashboardOffFolderPathAbsoluteTimeFrame'
+        - $ref: '#/components/schemas/DashboardOffFolderPathRelativeTimeFrame'
     DashboardAction:
       title: Dashboard Action
       type: object
@@ -16368,12 +18388,19 @@ components:
         labels:
           type: array
           items:
-            $ref: '#/components/schemas/KeyValue'
+            $ref: '#/components/schemas/DataprimeResult.KeyValue'
         metadata:
           type: array
           items:
-            $ref: '#/components/schemas/KeyValue'
+            $ref: '#/components/schemas/DataprimeResult.KeyValue'
         userData:
+          type: string
+    DataprimeResult.KeyValue:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
           type: string
     DataprimeSource:
       type: object
@@ -16441,6 +18468,26 @@ components:
         - DATASET_SCOPE_LABEL
         - DATASET_SCOPE_METADATA
       type: string
+    DateRangeFilter:
+      title: Date Range Filter
+      required:
+        - from
+        - to
+      type: object
+      properties:
+        from:
+          type: string
+          description: Timestamp marking the start of the date range
+          format: date-time
+          example: '2025-09-22T10:30:00.000Z'
+        to:
+          type: string
+          description: Timestamp marking the end of the date range
+          format: date-time
+          example: '2025-09-22T10:30:00.000Z'
+      description: A filter defining a date range with 'from' and 'to' timestamps.
+      externalDocs:
+        url: ''
     DayOfWeek:
       enum:
         - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
@@ -16527,6 +18574,24 @@ components:
         description: Find out more about alert scheduler rules in our documentation.
         url: >-
           https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/
+    DeleteCommentRequest:
+      title: Delete comment request
+      required:
+        - id
+      type: object
+      properties:
+        eventId:
+          type: string
+          description: ID of the comment event to delete
+          example: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+      externalDocs:
+        url: ''
+    DeleteCommentResponse:
+      title: Delete comment response
+      type: object
+      description: Empty response; success indicated by HTTP status
+      externalDocs:
+        url: ''
     DeleteCompanyIpAccessSettingsRequest:
       title: Delete company IP access settings request
       type: object
@@ -16847,6 +18912,24 @@ components:
       description: Response after deleting an existing SLO.
       externalDocs:
         url: ''
+    DeleteTeamConfigRequest:
+      title: Delete team config request
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the team configuration to delete
+          example: 8c0c02a3-3c1c-4d56-9a2d-9f6ab6a4b321
+      externalDocs:
+        url: ''
+    DeleteTeamConfigResponse:
+      title: Delete team config response
+      type: object
+      description: Empty response; success indicated by HTTP status
+      externalDocs:
+        url: ''
     DeleteTeamGroupRequest:
       title: DeleteTeamGroupRequest
       type: object
@@ -16877,6 +18960,26 @@ components:
           $ref: '#/components/schemas/v2.TeamId'
     DeleteTeamResponse:
       type: object
+    DeleteThingRequest:
+      title: Delete Thing Request
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          example: 43B9880C-A880-418F-91DF-8463063A30ED
+      description: The data structure to replace a thing with nothing
+      externalDocs:
+        description: Find out more.
+        url: https://coralogix.com/docs/user-guides/
+    DeleteThingResponse:
+      title: Delete Thing Response
+      type: object
+      description: Empty response if the request succeeded.
+      externalDocs:
+        description: Find out more.
+        url: https://coralogix.com/docs/user-guides/
     DeleteViewFolderRequest:
       type: object
       properties:
@@ -17127,11 +19230,11 @@ components:
       type: string
     Dimension:
       oneOf:
+        - $ref: '#/components/schemas/DimensionPriority'
         - $ref: '#/components/schemas/DimensionPillar'
         - $ref: '#/components/schemas/DimensionGenericDimension'
         - $ref: '#/components/schemas/DimensionTier'
         - $ref: '#/components/schemas/DimensionSeverity'
-        - $ref: '#/components/schemas/DimensionPriority'
     DimensionAggregation:
       type: object
       properties:
@@ -17816,6 +19919,30 @@ components:
           $ref: '#/components/schemas/Token'
         evaluatorName:
           type: string
+    EventActor:
+      oneOf:
+        - $ref: '#/components/schemas/EventActorSystem'
+        - $ref: '#/components/schemas/EventActorUser'
+    EventActorSystem:
+      title: Event actor
+      type: object
+      properties:
+        system:
+          $ref: '#/components/schemas/SystemActor'
+      additionalProperties: false
+      description: Actor that initiated the event.
+      externalDocs:
+        url: ''
+    EventActorUser:
+      title: Event actor
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/UserActor'
+      additionalProperties: false
+      description: Actor that initiated the event.
+      externalDocs:
+        url: ''
     EventFlow:
       type: object
       properties:
@@ -17985,8 +20112,8 @@ components:
           example: eu-gb
     EventRatioLessThan:
       oneOf:
-        - $ref: '#/components/schemas/EventRatioLessThanNumeric'
         - $ref: '#/components/schemas/EventRatioLessThanSpecial'
+        - $ref: '#/components/schemas/EventRatioLessThanNumeric'
     EventRatioLessThanNumeric:
       type: object
       properties:
@@ -18857,12 +20984,12 @@ components:
           type: string
     FieldInformation:
       oneOf:
-        - $ref: '#/components/schemas/FieldInformationSingle'
         - $ref: '#/components/schemas/FieldInformationMultiText'
         - $ref: '#/components/schemas/FieldInformationMultipleSelection'
         - $ref: '#/components/schemas/FieldInformationSingleBoolean'
         - $ref: '#/components/schemas/FieldInformationSelection'
         - $ref: '#/components/schemas/FieldInformationSingleNumber'
+        - $ref: '#/components/schemas/FieldInformationSingle'
     FieldInformationMultiText:
       title: Field information
       type: object
@@ -19186,13 +21313,13 @@ components:
         url: ''
     Filter.Operator:
       oneOf:
-        - $ref: '#/components/schemas/FilterOperatorEquals'
         - $ref: '#/components/schemas/FilterOperatorNotEquals'
+        - $ref: '#/components/schemas/FilterOperatorEquals'
     Filter.Source:
       oneOf:
-        - $ref: '#/components/schemas/FilterSourceLogs'
         - $ref: '#/components/schemas/FilterSourceSpans'
         - $ref: '#/components/schemas/FilterSourceMetrics'
+        - $ref: '#/components/schemas/FilterSourceLogs'
     FilterByAlertSchedulerRuleIds:
       oneOf:
         - $ref: '#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds'
@@ -19210,6 +21337,40 @@ components:
         alertSchedulerVersionIds:
           $ref: '#/components/schemas/AlertSchedulerRuleVersionIds'
       additionalProperties: false
+    FilterGroup:
+      title: Filter group
+      required:
+        - key
+        - values
+      type: object
+      properties:
+        key:
+          type: string
+          description: Key of the filter group (e.g., service, environment)
+          example: service
+        values:
+          type: array
+          items:
+            type: string
+            description: Values associated with the filter group key
+            example: payments
+      description: A filter group containing a key and its possible values.
+      externalDocs:
+        url: ''
+    FilterGroupAggregation:
+      title: Filter group aggregation
+      type: object
+      properties:
+        key:
+          type: string
+          description: Filter group key
+          example: service
+        valueCounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueCount'
+      externalDocs:
+        url: ''
     FilterOperatorEquals:
       title: Operator
       type: object
@@ -19867,6 +22028,21 @@ components:
       properties:
         action:
           $ref: '#/components/schemas/v2.Action'
+    GetActiveTeamConfigRequest:
+      title: Get active team config request
+      type: object
+      externalDocs:
+        url: ''
+    GetActiveTeamConfigResponse:
+      title: Get active team config response
+      required:
+        - teamConfig
+      type: object
+      properties:
+        teamConfig:
+          $ref: '#/components/schemas/TeamConfig'
+      externalDocs:
+        url: ''
     GetAlertDefByVersionIdRequest:
       title: Get alert definition by version ID request
       type: object
@@ -20143,6 +22319,41 @@ components:
         description: Find out more about alert scheduler rules in our documentation.
         url: >-
           https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/
+    GetCaseRequest:
+      title: Get case request
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique ID of the case
+          example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+      externalDocs:
+        url: ''
+    GetCaseResponse:
+      title: Get case response
+      required:
+        - case
+      type: object
+      properties:
+        case:
+          $ref: '#/components/schemas/Case'
+      description: Response containing the requested case
+      externalDocs:
+        url: ''
+    GetCasesByAlertEventIdRequest:
+      type: object
+      properties:
+        alertEventId:
+          type: string
+    GetCasesByAlertEventIdResponse:
+      type: object
+      properties:
+        cases:
+          type: array
+          items:
+            $ref: '#/components/schemas/Case'
     GetCompanyDataSourcesInternalRequest:
       type: object
     GetCompanyDataSourcesInternalResponse:
@@ -20843,31 +23054,6 @@ components:
         description: Find out more about enrichments
         url: >-
           https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
-    GetEventRequest:
-      title: GetEventRequest
-      required:
-        - id
-      type: object
-      properties:
-        id:
-          type: string
-          example: test
-        orderBys:
-          type: array
-          items:
-            $ref: '#/components/schemas/events.v3.OrderBy'
-        pagination:
-          $ref: '#/components/schemas/events.v3.PaginationRequest'
-      description: This data structure represents a request to get an event
-      externalDocs:
-        url: ''
-    GetEventResponse:
-      type: object
-      properties:
-        event:
-          $ref: '#/components/schemas/CxEventSingleOrMultiple'
-        pagination:
-          $ref: '#/components/schemas/events.v3.PaginationResponse'
     GetEventsStatisticsRequest:
       title: GetEventsStatisticsRequest
       required:
@@ -20914,26 +23100,6 @@ components:
       properties:
         extension:
           $ref: '#/components/schemas/v1.Extension'
-      externalDocs:
-        url: ''
-    GetFilterValuesRequest:
-      title: Get filter values request
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/IncidentQueryFilter'
-      description: Request to get available filter values for incidents
-      externalDocs:
-        url: ''
-    GetFilterValuesResponse:
-      title: Get filter values response
-      required:
-        - filtersValues
-      type: object
-      properties:
-        filtersValues:
-          $ref: '#/components/schemas/IncidentQueryFiltersValues'
-      description: Response containing available filter values for incidents
       externalDocs:
         url: ''
     GetGlobalRouterRequest:
@@ -21863,6 +24029,21 @@ components:
       properties:
         presetSummary:
           $ref: '#/components/schemas/PresetSummary'
+    GetSystemDefaultsRequest:
+      title: Get system defaults request
+      type: object
+      externalDocs:
+        url: ''
+    GetSystemDefaultsResponse:
+      title: Get system defaults response
+      required:
+        - settings
+      type: object
+      properties:
+        settings:
+          $ref: '#/components/schemas/TeamConfigSettings'
+      externalDocs:
+        url: ''
     GetTargetRequest:
       type: object
     GetTargetResponse:
@@ -21878,6 +24059,28 @@ components:
         description: Find out more about archives
         url: >-
           https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
+    GetTeamConfigRequest:
+      title: Get team config request
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the team configuration
+          example: 8c0c02a3-3c1c-4d56-9a2d-9f6ab6a4b321
+      externalDocs:
+        url: ''
+    GetTeamConfigResponse:
+      title: Get team config response
+      required:
+        - teamConfig
+      type: object
+      properties:
+        teamConfig:
+          $ref: '#/components/schemas/TeamConfig'
+      externalDocs:
+        url: ''
     GetTeamDetailedDataUsageRequest:
       title: Get Team Detailed Data Usage Request
       type: object
@@ -22078,8 +24281,8 @@ components:
       type: object
     GetTemplateRequest:
       oneOf:
-        - $ref: '#/components/schemas/GetTemplateRequestEmpty'
         - $ref: '#/components/schemas/GetTemplateRequestCommonArmParams'
+        - $ref: '#/components/schemas/GetTemplateRequestEmpty'
     GetTemplateRequestCommonArmParams:
       title: Get template request
       type: object
@@ -22126,6 +24329,31 @@ components:
       properties:
         tenantConfig:
           $ref: '#/components/schemas/TenantConfigV2'
+    GetThingRequest:
+      title: Get Thing Request
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          example: 43B9880C-A880-418F-91DF-8463063A30ED
+      description: The data structure to get a thing
+      externalDocs:
+        description: Find out more.
+        url: https://coralogix.com/docs/user-guides/
+    GetThingResponse:
+      title: Get Thing Response
+      required:
+        - thing
+      type: object
+      properties:
+        thing:
+          $ref: '#/components/schemas/Thing'
+      description: The data structure response from getting a thing
+      externalDocs:
+        description: Find out more.
+        url: https://coralogix.com/docs/user-guides/
     GetViewFolderRequest:
       title: GetViewFolderRequest
       type: object
@@ -22243,8 +24471,8 @@ components:
           description: Reference to specific dashboard
     GroupBy:
       oneOf:
-        - $ref: '#/components/schemas/GroupByContextualLabel'
         - $ref: '#/components/schemas/GroupByIncidentField'
+        - $ref: '#/components/schemas/GroupByContextualLabel'
     GroupByContextualLabel:
       title: Incident group by
       required:
@@ -22274,8 +24502,8 @@ components:
         url: ''
     GroupByValues:
       oneOf:
-        - $ref: '#/components/schemas/GroupByValuesContextualLabels'
         - $ref: '#/components/schemas/GroupByValuesIncidentField'
+        - $ref: '#/components/schemas/GroupByValuesContextualLabels'
     GroupByValuesContextualLabels:
       type: object
       properties:
@@ -22814,10 +25042,10 @@ components:
         url: ''
     HorizontalBarChart.Query:
       oneOf:
-        - $ref: '#/components/schemas/HorizontalBarChartQueryLogs'
-        - $ref: '#/components/schemas/HorizontalBarChartQuerySpans'
         - $ref: '#/components/schemas/HorizontalBarChartQueryMetrics'
         - $ref: '#/components/schemas/HorizontalBarChartQueryDataprime'
+        - $ref: '#/components/schemas/HorizontalBarChartQueryLogs'
+        - $ref: '#/components/schemas/HorizontalBarChartQuerySpans'
     HorizontalBarChart.SpansQuery:
       title: SpansQuery
       type: object
@@ -22859,8 +25087,8 @@ components:
           description: Custom template name of an individual stack
     HorizontalBarChart.YAxisViewBy:
       oneOf:
-        - $ref: '#/components/schemas/HorizontalBarChartYAxisViewByCategory'
         - $ref: '#/components/schemas/HorizontalBarChartYAxisViewByValue'
+        - $ref: '#/components/schemas/HorizontalBarChartYAxisViewByCategory'
     HorizontalBarChartQueryDataprime:
       type: object
       properties:
@@ -23338,7 +25566,7 @@ components:
       type: object
       properties:
         assignedTo:
-          $ref: '#/components/schemas/UserDetails'
+          $ref: '#/components/schemas/incidents.v1.UserDetails'
         count:
           type: integer
           format: int64
@@ -23347,23 +25575,23 @@ components:
         url: ''
     IncidentEvent:
       oneOf:
-        - $ref: '#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent'
-        - $ref: '#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent'
-        - $ref: '#/components/schemas/IncidentEventAssignmentOperationalEvent'
-        - $ref: '#/components/schemas/IncidentEventUpsertStateAdministrativeEvent'
         - $ref: '#/components/schemas/IncidentEventUpsertStateOperationalEvent'
         - $ref: '#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent'
-        - $ref: '#/components/schemas/IncidentEventAcknowledgeOperationalEvent'
+        - $ref: '#/components/schemas/IncidentEventCloseAdministrativeEvent'
+        - $ref: '#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent'
         - $ref: '#/components/schemas/IncidentEventAssignmentAdministrativeEvent'
+        - $ref: '#/components/schemas/IncidentEventAcknowledgeOperationalEvent'
+        - $ref: '#/components/schemas/IncidentEventCloseOperationalEvent'
+        - $ref: '#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent'
+        - $ref: '#/components/schemas/IncidentEventAssignmentOperationalEvent'
         - $ref: '#/components/schemas/IncidentEventUnassignAdministrativeEvent'
         - $ref: '#/components/schemas/IncidentEventUnassignOperationalEvent'
-        - $ref: '#/components/schemas/IncidentEventCloseAdministrativeEvent'
-        - $ref: '#/components/schemas/IncidentEventCloseOperationalEvent'
+        - $ref: '#/components/schemas/IncidentEventUpsertStateAdministrativeEvent'
     IncidentEventAcknowledge:
       type: object
       properties:
         acknowledgedBy:
-          $ref: '#/components/schemas/UserDetails'
+          $ref: '#/components/schemas/incidents.v1.UserDetails'
     IncidentEventAcknowledgeAdministrativeEvent:
       title: Incident event
       required:
@@ -23488,7 +25716,7 @@ components:
       type: object
       properties:
         closedBy:
-          $ref: '#/components/schemas/UserDetails'
+          $ref: '#/components/schemas/incidents.v1.UserDetails'
     IncidentEventCloseAdministrativeEvent:
       title: Incident event
       required:
@@ -23845,15 +26073,15 @@ components:
     IncidentFieldOneOf:
       oneOf:
         - $ref: '#/components/schemas/IncidentFieldOneOfStatus'
+        - $ref: '#/components/schemas/IncidentFieldOneOfId'
+        - $ref: '#/components/schemas/IncidentFieldOneOfName'
+        - $ref: '#/components/schemas/IncidentFieldOneOfClosedAt'
+        - $ref: '#/components/schemas/IncidentFieldOneOfState'
         - $ref: '#/components/schemas/IncidentFieldOneOfLastStateUpdateTime'
         - $ref: '#/components/schemas/IncidentFieldOneOfApplicationName'
         - $ref: '#/components/schemas/IncidentFieldOneOfSubsystemName'
         - $ref: '#/components/schemas/IncidentFieldOneOfDuration'
-        - $ref: '#/components/schemas/IncidentFieldOneOfId'
-        - $ref: '#/components/schemas/IncidentFieldOneOfClosedAt'
-        - $ref: '#/components/schemas/IncidentFieldOneOfState'
         - $ref: '#/components/schemas/IncidentFieldOneOfSeverity'
-        - $ref: '#/components/schemas/IncidentFieldOneOfName'
         - $ref: '#/components/schemas/IncidentFieldOneOfCreatedAt'
     IncidentFieldOneOfApplicationName:
       type: object
@@ -24465,12 +26693,12 @@ components:
         url: ''
     IntegrationRevision:
       oneOf:
+        - $ref: '#/components/schemas/IntegrationRevisionRum'
+        - $ref: '#/components/schemas/IntegrationRevisionTerraform'
         - $ref: '#/components/schemas/IntegrationRevisionCloudFormation'
         - $ref: '#/components/schemas/IntegrationRevisionManagedService'
         - $ref: '#/components/schemas/IntegrationRevisionHelmChart'
         - $ref: '#/components/schemas/IntegrationRevisionAzureArmTemplate'
-        - $ref: '#/components/schemas/IntegrationRevisionRum'
-        - $ref: '#/components/schemas/IntegrationRevisionTerraform'
     IntegrationRevision.Group:
       title: Group
       type: object
@@ -24885,13 +27113,6 @@ components:
         description: Find out more about api keys
         url: >-
           https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
-    KeyValue:
-      type: object
-      properties:
-        key:
-          type: string
-        value:
-          type: string
     KeyValuesEntry:
       type: object
       properties:
@@ -25324,6 +27545,35 @@ components:
             $ref: '#/components/schemas/OutgoingWebhookExtendedSummary'
       externalDocs:
         url: ''
+    ListCasesRequest:
+      title: List cases request
+      type: object
+      properties:
+        filters:
+          $ref: '#/components/schemas/CaseFilters'
+        orderBy:
+          $ref: '#/components/schemas/CaseOrderBy'
+        pagination:
+          $ref: '#/components/schemas/cases.v1.PaginationRequest'
+      description: Request to list cases with filtering and pagination
+      externalDocs:
+        url: ''
+    ListCasesResponse:
+      title: List cases response
+      required:
+        - cases
+        - pagination
+      type: object
+      properties:
+        cases:
+          type: array
+          items:
+            $ref: '#/components/schemas/Case'
+        pagination:
+          $ref: '#/components/schemas/cases.v1.PaginationResponse'
+      description: Response containing a list of cases and pagination information
+      externalDocs:
+        url: ''
     ListConnectorSummariesRequest:
       title: List Connector Summaries Request
       type: object
@@ -25490,40 +27740,6 @@ components:
       description: This data structure represents a response to list events count
       externalDocs:
         url: ''
-    ListEventsRequest:
-      title: ListEventsRequest
-      required:
-        - filter
-        - orderBys
-        - pagination
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/EventsFilter'
-        orderBys:
-          type: array
-          items:
-            $ref: '#/components/schemas/events.v3.OrderBy'
-        pagination:
-          $ref: '#/components/schemas/events.v3.PaginationRequest'
-      description: This data structure represents a request to list events
-      externalDocs:
-        url: ''
-    ListEventsResponse:
-      title: ListEventsResponse
-      required:
-        - events
-      type: object
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/CxEvent'
-        pagination:
-          $ref: '#/components/schemas/events.v3.PaginationResponse'
-      description: This data structure represents a response to list events
-      externalDocs:
-        url: ''
     ListGlobalRoutersRequest:
       title: List Global Routers Request
       type: object
@@ -25581,7 +27797,7 @@ components:
           items:
             $ref: '#/components/schemas/GroupBy'
         pagination:
-          $ref: '#/components/schemas/v1.PaginationRequest'
+          $ref: '#/components/schemas/incidents.v1.PaginationRequest'
       description: >-
         Request to get aggregated incident data with filtering and grouping
         options
@@ -25599,7 +27815,7 @@ components:
           items:
             $ref: '#/components/schemas/IncidentAggregation'
         pagination:
-          $ref: '#/components/schemas/v1.PaginationResponse'
+          $ref: '#/components/schemas/incidents.v1.PaginationResponse'
       description: Response containing aggregated incident data and pagination information
       externalDocs:
         url: ''
@@ -25640,7 +27856,7 @@ components:
         orderBy:
           $ref: '#/components/schemas/ListIncidentEventRequestOrderBy'
         pagination:
-          $ref: '#/components/schemas/v1.PaginationRequest'
+          $ref: '#/components/schemas/incidents.v1.PaginationRequest'
       description: >-
         Request to list incident events with filtering, pagination and ordering
         options
@@ -25657,7 +27873,7 @@ components:
           items:
             $ref: '#/components/schemas/IncidentEventExtended'
         pagination:
-          $ref: '#/components/schemas/v1.PaginationResponse'
+          $ref: '#/components/schemas/incidents.v1.PaginationResponse'
       description: >-
         A response containing a list of incident events and pagination
         information
@@ -25701,7 +27917,7 @@ components:
           items:
             $ref: '#/components/schemas/v1.OrderBy'
         pagination:
-          $ref: '#/components/schemas/v1.PaginationRequest'
+          $ref: '#/components/schemas/incidents.v1.PaginationRequest'
       description: >-
         Request to list incidents with filtering, pagination and ordering
         options
@@ -25719,14 +27935,14 @@ components:
           items:
             $ref: '#/components/schemas/Incident'
         pagination:
-          $ref: '#/components/schemas/v1.PaginationResponse'
+          $ref: '#/components/schemas/incidents.v1.PaginationResponse'
       description: Response containing a list of incidents and pagination information
       externalDocs:
         url: ''
     ListLabelsCardinalityRequest:
       oneOf:
-        - $ref: '#/components/schemas/ListLabelsCardinalityRequestSpansQuery'
         - $ref: '#/components/schemas/ListLabelsCardinalityRequestLogsQuery'
+        - $ref: '#/components/schemas/ListLabelsCardinalityRequestSpansQuery'
     ListLabelsCardinalityRequestLogsQuery:
       type: object
       properties:
@@ -25948,6 +28164,49 @@ components:
             type: string
       externalDocs:
         url: ''
+    ListThingsRequest:
+      title: List Things Request
+      type: object
+      properties:
+        filter:
+          type: string
+          example: logs.id=100
+        pageSize:
+          type: integer
+          format: int32
+          example: 100
+        pageToken:
+          type: string
+          example: asdf1234
+        skip:
+          type: integer
+          format: int32
+          example: 100
+      description: >-
+        Paginated request for listing things. Defaults to retrieving all things
+        (probably a bad idea).
+      externalDocs:
+        description: Find out more.
+        url: https://coralogix.com/docs/user-guides/
+    ListThingsResponse:
+      title: List Things Response
+      type: object
+      properties:
+        nextPageToken:
+          type: string
+        things:
+          type: array
+          items:
+            $ref: '#/components/schemas/Thing'
+        totalCount:
+          type: integer
+          format: int32
+      description: >-
+        Paginated response for listing things. Defaults to retrieving all things
+        (probably a bad idea).
+      externalDocs:
+        description: Find out more.
+        url: https://coralogix.com/docs/user-guides/
     ListValue:
       type: object
       properties:
@@ -26092,13 +28351,13 @@ components:
         url: ''
     LogsAggregation:
       oneOf:
-        - $ref: '#/components/schemas/LogsAggregationPercentile'
-        - $ref: '#/components/schemas/LogsAggregationCount'
         - $ref: '#/components/schemas/LogsAggregationCountDistinct'
         - $ref: '#/components/schemas/LogsAggregationSum'
         - $ref: '#/components/schemas/LogsAggregationAverage'
         - $ref: '#/components/schemas/LogsAggregationMin'
         - $ref: '#/components/schemas/LogsAggregationMax'
+        - $ref: '#/components/schemas/LogsAggregationPercentile'
+        - $ref: '#/components/schemas/LogsAggregationCount'
     LogsAggregationAverage:
       type: object
       properties:
@@ -26491,9 +28750,9 @@ components:
           $ref: '#/components/schemas/LogsSource.Strategy'
     LogsSource.Strategy:
       oneOf:
+        - $ref: '#/components/schemas/LogsSourceStrategyInstant'
         - $ref: '#/components/schemas/LogsSourceStrategyRange'
         - $ref: '#/components/schemas/LogsSourceStrategyDuration'
-        - $ref: '#/components/schemas/LogsSourceStrategyInstant'
     LogsSource.Strategy.Duration:
       type: object
       properties:
@@ -27472,9 +29731,9 @@ components:
           $ref: '#/components/schemas/OrderDirection'
     MultiSelect.Query:
       oneOf:
-        - $ref: '#/components/schemas/MultiSelectQuerySpansQuery'
         - $ref: '#/components/schemas/MultiSelectQueryLogsQuery'
         - $ref: '#/components/schemas/MultiSelectQueryMetricsQuery'
+        - $ref: '#/components/schemas/MultiSelectQuerySpansQuery'
     MultiSelect.QuerySource:
       type: object
       properties:
@@ -27492,8 +29751,8 @@ components:
       type: string
     MultiSelect.Selection:
       oneOf:
-        - $ref: '#/components/schemas/MultiSelectSelectionList'
         - $ref: '#/components/schemas/MultiSelectSelectionAll'
+        - $ref: '#/components/schemas/MultiSelectSelectionList'
     MultiSelect.Selection.AllSelection:
       type: object
     MultiSelect.Selection.ListSelection:
@@ -27583,8 +29842,8 @@ components:
       additionalProperties: false
     MultiStringValue:
       oneOf:
-        - $ref: '#/components/schemas/MultiStringValueAll'
         - $ref: '#/components/schemas/MultiStringValueList'
+        - $ref: '#/components/schemas/MultiStringValueAll'
     MultiStringValueAll:
       type: object
       properties:
@@ -27718,6 +29977,26 @@ components:
         description: Learn more about alert notification destinations in our documentation
         url: >-
           https://coralogix.com/docs/user-guides/alerting/configure-notifications/destinations/
+    NotificationFailedCaseEvent:
+      title: Notification failed event
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message for the failed notification
+          example: 'Slack API: channel_not_found'
+      externalDocs:
+        url: ''
+    NotificationMetadata:
+      title: Notification metadata
+      type: object
+      properties:
+        token:
+          type: string
+          description: Notification token/reference
+          example: 4c8ba1ec-acee-4bc7-ad6c-d35476b58541
+      externalDocs:
+        url: ''
     NotificationRouter:
       title: Notification router
       type: object
@@ -27737,6 +30016,16 @@ components:
       properties:
         configOverrides:
           $ref: '#/components/schemas/v3.SourceOverrides'
+      externalDocs:
+        url: ''
+    NotificationSentCaseEvent:
+      title: Notification sent event
+      type: object
+      properties:
+        notifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/NotificationMetadata'
       externalDocs:
         url: ''
     NotifyOn:
@@ -27961,18 +30250,18 @@ components:
         url: ''
     OutgoingWebhook:
       oneOf:
+        - $ref: '#/components/schemas/OutgoingWebhookEmailGroup'
+        - $ref: '#/components/schemas/OutgoingWebhookMicrosoftTeams'
+        - $ref: '#/components/schemas/OutgoingWebhookIbmEventNotifications'
         - $ref: '#/components/schemas/OutgoingWebhookSlack'
         - $ref: '#/components/schemas/OutgoingWebhookPagerDuty'
         - $ref: '#/components/schemas/OutgoingWebhookSendLog'
-        - $ref: '#/components/schemas/OutgoingWebhookEmailGroup'
-        - $ref: '#/components/schemas/OutgoingWebhookMicrosoftTeams'
         - $ref: '#/components/schemas/OutgoingWebhookJira'
-        - $ref: '#/components/schemas/OutgoingWebhookIbmEventNotifications'
-        - $ref: '#/components/schemas/OutgoingWebhookMsTeamsWorkflow'
-        - $ref: '#/components/schemas/OutgoingWebhookGenericWebhook'
         - $ref: '#/components/schemas/OutgoingWebhookOpsgenie'
         - $ref: '#/components/schemas/OutgoingWebhookDemisto'
         - $ref: '#/components/schemas/OutgoingWebhookAwsEventBridge'
+        - $ref: '#/components/schemas/OutgoingWebhookMsTeamsWorkflow'
+        - $ref: '#/components/schemas/OutgoingWebhookGenericWebhook'
     OutgoingWebhookAwsEventBridge:
       title: Outgoing webhook
       type: object
@@ -28163,18 +30452,18 @@ components:
         url: ''
     OutgoingWebhookInputData:
       oneOf:
+        - $ref: '#/components/schemas/OutgoingWebhookInputDataAwsEventBridge'
+        - $ref: '#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications'
         - $ref: '#/components/schemas/OutgoingWebhookInputDataGenericWebhook'
-        - $ref: '#/components/schemas/OutgoingWebhookInputDataSlack'
         - $ref: '#/components/schemas/OutgoingWebhookInputDataSendLog'
         - $ref: '#/components/schemas/OutgoingWebhookInputDataEmailGroup'
         - $ref: '#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams'
-        - $ref: '#/components/schemas/OutgoingWebhookInputDataJira'
         - $ref: '#/components/schemas/OutgoingWebhookInputDataOpsgenie'
-        - $ref: '#/components/schemas/OutgoingWebhookInputDataDemisto'
-        - $ref: '#/components/schemas/OutgoingWebhookInputDataPagerDuty'
-        - $ref: '#/components/schemas/OutgoingWebhookInputDataAwsEventBridge'
-        - $ref: '#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications'
         - $ref: '#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow'
+        - $ref: '#/components/schemas/OutgoingWebhookInputDataSlack'
+        - $ref: '#/components/schemas/OutgoingWebhookInputDataPagerDuty'
+        - $ref: '#/components/schemas/OutgoingWebhookInputDataJira'
+        - $ref: '#/components/schemas/OutgoingWebhookInputDataDemisto'
     OutgoingWebhookInputDataAwsEventBridge:
       title: Outgoing webhook input data
       type: object
@@ -28686,12 +30975,12 @@ components:
           format: int32
     Parameter:
       oneOf:
-        - $ref: '#/components/schemas/ParameterNumericValue'
-        - $ref: '#/components/schemas/ParameterSensitiveData'
         - $ref: '#/components/schemas/ParameterStringValue'
         - $ref: '#/components/schemas/ParameterBooleanValue'
         - $ref: '#/components/schemas/ParameterStringList'
         - $ref: '#/components/schemas/ParameterApiKey'
+        - $ref: '#/components/schemas/ParameterNumericValue'
+        - $ref: '#/components/schemas/ParameterSensitiveData'
     ParameterApiKey:
       title: Parameter
       type: object
@@ -29672,6 +31961,19 @@ components:
           type: string
         value:
           $ref: '#/components/schemas/Preset'
+    PriorityAggregation:
+      title: Priority aggregation
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Number of cases with this priority
+          format: int64
+          example: 17
+        priority:
+          $ref: '#/components/schemas/CasePriority'
+      externalDocs:
+        url: ''
     PriorityCount:
       title: Priority count
       type: object
@@ -29684,6 +31986,27 @@ components:
         priority:
           $ref: '#/components/schemas/AlertDefPriority'
       description: Count for a specific alert priority
+      externalDocs:
+        url: ''
+    PriorityDetails:
+      title: Priority details
+      type: object
+      properties:
+        override:
+          $ref: '#/components/schemas/CasePriority'
+        system:
+          $ref: '#/components/schemas/CasePriority'
+      description: Priority details, including system computed and user override values.
+      externalDocs:
+        url: ''
+    PriorityDetailsChangedCaseEvent:
+      title: Priority details changed event
+      type: object
+      properties:
+        from:
+          $ref: '#/components/schemas/PriorityDetails'
+        to:
+          $ref: '#/components/schemas/PriorityDetails'
       externalDocs:
         url: ''
     PrivateActionsOrderEntry:
@@ -29721,11 +32044,11 @@ components:
           $ref: '#/components/schemas/UUID'
     PropertyDefinition:
       oneOf:
+        - $ref: '#/components/schemas/PropertyDefinitionThresholds'
         - $ref: '#/components/schemas/PropertyDefinitionAlignment'
         - $ref: '#/components/schemas/PropertyDefinitionUnits'
         - $ref: '#/components/schemas/PropertyDefinitionRegexExtract'
         - $ref: '#/components/schemas/PropertyDefinitionLink'
-        - $ref: '#/components/schemas/PropertyDefinitionThresholds'
     PropertyDefinitionAlignment:
       type: object
       properties:
@@ -29848,8 +32171,8 @@ components:
           $ref: '#/components/schemas/Query.LogsQuery.Type'
     Query.LogsQuery.Type:
       oneOf:
-        - $ref: '#/components/schemas/QueryLogsQueryTypeFieldName'
         - $ref: '#/components/schemas/QueryLogsQueryTypeFieldValue'
+        - $ref: '#/components/schemas/QueryLogsQueryTypeFieldName'
     Query.LogsQuery.Type.FieldName:
       type: object
       properties:
@@ -30171,9 +32494,9 @@ components:
             #/components/schemas/QuerySourceMetricsQueryStringOrVariableVariableName
     QuerySource.MetricsQuery.Type:
       oneOf:
-        - $ref: '#/components/schemas/QuerySourceMetricsQueryTypeMetricName'
         - $ref: '#/components/schemas/QuerySourceMetricsQueryTypeLabelName'
         - $ref: '#/components/schemas/QuerySourceMetricsQueryTypeLabelValue'
+        - $ref: '#/components/schemas/QuerySourceMetricsQueryTypeMetricName'
     QuerySource.MetricsQuery.Type.LabelName:
       type: object
       properties:
@@ -30367,8 +32690,8 @@ components:
           $ref: '#/components/schemas/WeeklyRecurrence'
     Recurring:
       oneOf:
-        - $ref: '#/components/schemas/RecurringAlways'
         - $ref: '#/components/schemas/RecurringDynamic'
+        - $ref: '#/components/schemas/RecurringAlways'
     Recurring.Dynamic:
       oneOf:
         - $ref: '#/components/schemas/RecurringDynamicDaily'
@@ -31070,6 +33393,30 @@ components:
       description: Response after replacing an existing SLO.
       externalDocs:
         url: ''
+    ReplaceThingRequest:
+      title: Replace Thing Request
+      required:
+        - thing
+      type: object
+      properties:
+        thing:
+          $ref: '#/components/schemas/Thing'
+      description: The data structure to replace a thing
+      externalDocs:
+        description: Find out more.
+        url: https://coralogix.com/docs/user-guides/
+    ReplaceThingResponse:
+      title: Replace Thing Response
+      required:
+        - thing
+      type: object
+      properties:
+        thing:
+          $ref: '#/components/schemas/Thing'
+      description: The data structure response from replacing a thing
+      externalDocs:
+        description: Find out more.
+        url: https://coralogix.com/docs/user-guides/
     ReplaceViewFolderRequest:
       type: object
       properties:
@@ -31113,6 +33460,46 @@ components:
         goodEvents:
           type: integer
           format: int64
+    ResolutionDetails:
+      title: Resolution details
+      type: object
+      properties:
+        resolveTime:
+          type: string
+          description: Timestamp when the case was resolved
+          format: date-time
+          example: '2025-09-22T11:15:00.000Z'
+        resolvedBy:
+          $ref: '#/components/schemas/CaseResolver'
+      description: Information about how and when a case was resolved.
+      externalDocs:
+        url: ''
+    ResolveCaseRequest:
+      title: Resolve case request
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the case to resolve
+          example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+        reason:
+          type: string
+          description: Reason to resolve
+          example: This case is not applicable.
+      externalDocs:
+        url: ''
+    ResolveCaseResponse:
+      title: Resolve case response
+      required:
+        - case
+      type: object
+      properties:
+        case:
+          $ref: '#/components/schemas/Case'
+      externalDocs:
+        url: ''
     ResolveIncidentByEventIdRequest:
       title: Resolve incidents request
       required:
@@ -31165,6 +33552,18 @@ components:
           items:
             $ref: '#/components/schemas/Incident'
       description: Response containing the updated incidents after resolution
+      externalDocs:
+        url: ''
+    ResolvedCaseEvent:
+      title: Resolved case event
+      type: object
+      properties:
+        from:
+          $ref: '#/components/schemas/CaseState'
+        reason:
+          type: string
+          description: Resolution reason
+          example: Case was not applicable.
       externalDocs:
         url: ''
     Resource:
@@ -31644,9 +34043,9 @@ components:
           https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/
     RuleMatcher:
       oneOf:
+        - $ref: '#/components/schemas/RuleMatcherSeverity'
         - $ref: '#/components/schemas/RuleMatcherApplicationName'
         - $ref: '#/components/schemas/RuleMatcherSubsystemName'
-        - $ref: '#/components/schemas/RuleMatcherSeverity'
     RuleMatcherApplicationName:
       type: object
       properties:
@@ -31669,13 +34068,13 @@ components:
       oneOf:
         - $ref: '#/components/schemas/RuleParametersExtractParameters'
         - $ref: '#/components/schemas/RuleParametersReplaceParameters'
-        - $ref: '#/components/schemas/RuleParametersParseParameters'
-        - $ref: '#/components/schemas/RuleParametersAllowParameters'
-        - $ref: '#/components/schemas/RuleParametersBlockParameters'
-        - $ref: '#/components/schemas/RuleParametersJsonExtractParameters'
         - $ref: '#/components/schemas/RuleParametersExtractTimestampParameters'
         - $ref: '#/components/schemas/RuleParametersRemoveFieldsParameters'
         - $ref: '#/components/schemas/RuleParametersJsonStringifyParameters'
+        - $ref: '#/components/schemas/RuleParametersJsonExtractParameters'
+        - $ref: '#/components/schemas/RuleParametersParseParameters'
+        - $ref: '#/components/schemas/RuleParametersAllowParameters'
+        - $ref: '#/components/schemas/RuleParametersBlockParameters'
         - $ref: '#/components/schemas/RuleParametersJsonParseParameters'
     RuleParametersAllowParameters:
       type: object
@@ -31739,9 +34138,9 @@ components:
       additionalProperties: false
     RuleScope:
       oneOf:
+        - $ref: '#/components/schemas/RuleScopeField'
         - $ref: '#/components/schemas/RuleScopeRegex'
         - $ref: '#/components/schemas/RuleScopeFieldType'
-        - $ref: '#/components/schemas/RuleScopeField'
     RuleScopeField:
       type: object
       properties:
@@ -32435,10 +34834,35 @@ components:
           https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
     SetPresetAsDefaultResponse:
       type: object
+    SetPriorityOverrideRequest:
+      title: Set priority override request
+      required:
+        - id
+        - priority
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the case
+          example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+        priority:
+          $ref: '#/components/schemas/CasePriority'
+      externalDocs:
+        url: ''
+    SetPriorityOverrideResponse:
+      title: Set priority override response
+      required:
+        - case
+      type: object
+      properties:
+        case:
+          $ref: '#/components/schemas/Case'
+      externalDocs:
+        url: ''
     SetTargetRequest:
       oneOf:
-        - $ref: '#/components/schemas/SetTargetRequestIbmCos'
         - $ref: '#/components/schemas/SetTargetRequestS3'
+        - $ref: '#/components/schemas/SetTargetRequestIbmCos'
     SetTargetRequestIbmCos:
       title: Set Target Response
       required:
@@ -32676,9 +35100,9 @@ components:
           format: date-time
     SloExecutionRequest:
       oneOf:
+        - $ref: '#/components/schemas/SloExecutionRequestCreateSloRequest'
         - $ref: '#/components/schemas/SloExecutionRequestReplaceSloRequest'
         - $ref: '#/components/schemas/SloExecutionRequestDeleteSloRequest'
-        - $ref: '#/components/schemas/SloExecutionRequestCreateSloRequest'
     SloExecutionRequestCreateSloRequest:
       title: SloExecutionRequest
       required:
@@ -33114,9 +35538,9 @@ components:
         url: ''
     SpanField:
       oneOf:
+        - $ref: '#/components/schemas/SpanFieldProcessTagField'
         - $ref: '#/components/schemas/SpanFieldMetadataField'
         - $ref: '#/components/schemas/SpanFieldTagField'
-        - $ref: '#/components/schemas/SpanFieldProcessTagField'
     SpanFieldMetadataField:
       type: object
       properties:
@@ -33322,9 +35746,9 @@ components:
           $ref: '#/components/schemas/SpansSource.Strategy'
     SpansSource.Strategy:
       oneOf:
+        - $ref: '#/components/schemas/SpansSourceStrategyDuration'
         - $ref: '#/components/schemas/SpansSourceStrategyInstant'
         - $ref: '#/components/schemas/SpansSourceStrategyRange'
-        - $ref: '#/components/schemas/SpansSourceStrategyDuration'
     SpansSource.Strategy.Duration:
       type: object
       properties:
@@ -33439,6 +35863,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ObservationField'
+    StateAggregation:
+      title: State aggregation
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Number of cases in this state
+          format: int64
+          example: 42
+        state:
+          $ref: '#/components/schemas/CaseState'
+      externalDocs:
+        url: ''
     StaticSource:
       type: object
       properties:
@@ -33462,6 +35899,24 @@ components:
             type: object
         message:
           type: string
+    StatusAggregation:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int64
+        status:
+          $ref: '#/components/schemas/CaseStatus'
+    StatusChangedCaseEvent:
+      title: Status changed event
+      type: object
+      properties:
+        newStatus:
+          $ref: '#/components/schemas/CaseStatus'
+        oldStatus:
+          $ref: '#/components/schemas/CaseStatus'
+      externalDocs:
+        url: ''
     StatusCount:
       title: Status count
       type: object
@@ -33532,6 +35987,12 @@ components:
         - SYNTAX_TYPE_LUCENE
         - SYNTAX_TYPE_DATAPRIME
       type: string
+    SystemActor:
+      title: System actor
+      type: object
+      description: Empty message indicating system-initiated action.
+      externalDocs:
+        url: ''
     Table:
       type: object
       properties:
@@ -33600,8 +36061,8 @@ components:
           type: string
     Target:
       oneOf:
-        - $ref: '#/components/schemas/TargetS3'
         - $ref: '#/components/schemas/TargetIbmCos'
+        - $ref: '#/components/schemas/TargetS3'
     TargetDomain:
       enum:
         - ACTION
@@ -33648,6 +36109,51 @@ components:
         description: Find out more about archives
         url: >-
           https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
+    TeamConfig:
+      title: Team configuration
+      type: object
+      properties:
+        createTime:
+          type: string
+          description: Timestamp when the team configuration was created
+          format: date-time
+          example: '2025-09-22T10:30:00.000Z'
+        id:
+          type: string
+          description: Unique identifier for the team configuration
+          example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+        name:
+          type: string
+          description: Human-readable name for the team configuration
+          example: Default Team Config
+        settings:
+          $ref: '#/components/schemas/TeamConfigSettings'
+        updateTime:
+          type: string
+          description: Timestamp when the team configuration was last updated
+          format: date-time
+      description: Team-level configuration entity for case management.
+      externalDocs:
+        url: ''
+    TeamConfigSettings:
+      title: Team configuration settings
+      type: object
+      properties:
+        manualResolutionSnoozePeriod:
+          type: string
+          description: Period after manual resolution during which new cases are snoozed.
+          example: 600s
+        suppressionPeriod:
+          type: string
+          description: >-
+            Default period during which duplicate or related cases are
+            suppressed.
+          example: 3600s
+      description: >-
+        Team-level configuration options for case management, including
+        suppression and snooze periods.
+      externalDocs:
+        url: ''
     TeamCount:
       type: object
       properties:
@@ -33964,8 +36470,8 @@ components:
         url: ''
     TestIntegrationResult:
       oneOf:
-        - $ref: '#/components/schemas/TestIntegrationResultFailure'
         - $ref: '#/components/schemas/TestIntegrationResultSuccess'
+        - $ref: '#/components/schemas/TestIntegrationResultFailure'
     TestIntegrationResult.Failure:
       title: Failure
       type: object
@@ -34319,6 +36825,19 @@ components:
       properties:
         defaultValue:
           $ref: '#/components/schemas/TextboxDefaultValue'
+    Thing:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+          example: '2021-01-01T00:00:00.000Z'
+        id:
+          type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+        name:
+          type: string
+          example: A Thing's Name
     ThresholdSymbol:
       enum:
         - THRESHOLD_SYMBOL_UNSPECIFIED
@@ -34937,6 +37456,28 @@ components:
       properties:
         value:
           type: string
+    UnassignCaseRequest:
+      title: Unassign case request
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the case to unassign
+          example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+      externalDocs:
+        url: ''
+    UnassignCaseResponse:
+      title: Unassign case response
+      required:
+        - case
+      type: object
+      properties:
+        case:
+          $ref: '#/components/schemas/Case'
+      externalDocs:
+        url: ''
     UnassignIncidentsRequest:
       title: Unassign incidents request
       required:
@@ -34965,6 +37506,17 @@ components:
           items:
             $ref: '#/components/schemas/Incident'
       description: Response containing the updated incidents after unassignment
+      externalDocs:
+        url: ''
+    Unassigned:
+      type: object
+    UnassignedCaseEvent:
+      title: Unassigned event
+      type: object
+      properties:
+        previousAssigneeUserId:
+          type: string
+          description: User ID that was unassigned
       externalDocs:
         url: ''
     UndeployExtensionRequest:
@@ -35015,6 +37567,28 @@ components:
         description: Find out more about Dashboards in our documentation.
         url: >-
           https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
+    UnsetPriorityOverrideRequest:
+      title: Unset priority override request
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the case
+          example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+      externalDocs:
+        url: ''
+    UnsetPriorityOverrideResponse:
+      title: Unset priority override response
+      required:
+        - case
+      type: object
+      properties:
+        case:
+          $ref: '#/components/schemas/Case'
+      externalDocs:
+        url: ''
     Untracked:
       title: Untracked
       type: object
@@ -35114,6 +37688,60 @@ components:
         description: Find out more about alert scheduler rules in our documentation.
         url: >-
           https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/
+    UpdateCaseRequest:
+      title: Update case request
+      required:
+        - id
+        - patch
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the case to update
+          example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+        patch:
+          $ref: '#/components/schemas/CasePatch'
+      description: Request to update (patch) a case
+      externalDocs:
+        url: ''
+    UpdateCaseResponse:
+      title: Update case response
+      required:
+        - case
+      type: object
+      properties:
+        case:
+          $ref: '#/components/schemas/Case'
+      description: Response containing the updated case
+      externalDocs:
+        url: ''
+    UpdateCommentRequest:
+      title: Update comment event request
+      required:
+        - eventId
+        - text
+      type: object
+      properties:
+        eventId:
+          type: string
+          description: ID of the comment event to update
+          example: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+        text:
+          type: string
+          description: Comment text to update
+          example: This is updated text
+      externalDocs:
+        url: ''
+    UpdateCommentResponse:
+      title: Update comment event response
+      required:
+        - event
+      type: object
+      properties:
+        event:
+          $ref: '#/components/schemas/CaseEvent'
+      externalDocs:
+        url: ''
     UpdateContextualDataIntegrationRequest:
       title: Update contextual data integration request
       type: object
@@ -35345,8 +37973,8 @@ components:
           https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
     UpdateRequest:
       oneOf:
-        - $ref: '#/components/schemas/UpdateRequestS3'
         - $ref: '#/components/schemas/UpdateRequestIbm'
+        - $ref: '#/components/schemas/UpdateRequestS3'
     UpdateRequestIbm:
       title: Update Tenant Request
       type: object
@@ -35493,6 +38121,34 @@ components:
         description: Find out more about scopes
         url: >-
           https://coralogix.com/docs/user-guides/account-management/user-management/scopes/
+    UpdateTeamConfigRequest:
+      title: Update team config request
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the team configuration to update
+          example: 8c0c02a3-3c1c-4d56-9a2d-9f6ab6a4b321
+        name:
+          type: string
+          description: New display name for the team configuration
+          example: SRE Team Config
+        settings:
+          $ref: '#/components/schemas/TeamConfigSettings'
+      externalDocs:
+        url: ''
+    UpdateTeamConfigResponse:
+      title: Update team config response
+      required:
+        - teamConfig
+      type: object
+      properties:
+        teamConfig:
+          $ref: '#/components/schemas/TeamConfig'
+      externalDocs:
+        url: ''
     UpdateTeamGroupRequest:
       title: UpdateTeamGroupRequest
       type: object
@@ -35680,15 +38336,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Measurement'
-    UserDetails:
-      title: User details
-      required:
-        - userId
+    UserActor:
+      title: User actor
       type: object
       properties:
-        userId:
+        id:
           type: string
-          example: user_id
+          description: User ID
+          example: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+      description: Information about the user who initiated the action.
       externalDocs:
         url: ''
     UserStatus:
@@ -36032,8 +38688,8 @@ components:
           https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
     ValidateEntityLabelMatcherResult:
       oneOf:
-        - $ref: '#/components/schemas/ValidateEntityLabelMatcherResultSuccess'
         - $ref: '#/components/schemas/ValidateEntityLabelMatcherResultFailure'
+        - $ref: '#/components/schemas/ValidateEntityLabelMatcherResultSuccess'
     ValidateEntityLabelMatcherResult.Failure:
       type: object
       properties:
@@ -36116,6 +38772,21 @@ components:
         - VALUE_ERROR
         - VALUE_CRITICAL
       type: string
+    ValueCount:
+      title: Filter value count
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Count of cases for this value
+          format: int64
+          example: 8
+        value:
+          type: string
+          description: Filter value
+          example: service:payments
+      externalDocs:
+        url: ''
     ValueLabel:
       type: object
       properties:
@@ -36140,8 +38811,8 @@ components:
           type: string
     Variable.Definition:
       oneOf:
-        - $ref: '#/components/schemas/VariableDefinitionMultiSelect'
         - $ref: '#/components/schemas/VariableDefinitionConstant'
+        - $ref: '#/components/schemas/VariableDefinitionMultiSelect'
     VariableDefinitionConstant:
       type: object
       properties:
@@ -36290,12 +38961,12 @@ components:
           $ref: '#/components/schemas/VariableValueV2'
     VariableValueV2:
       oneOf:
-        - $ref: '#/components/schemas/VariableValueV2SingleString'
         - $ref: '#/components/schemas/VariableValueV2SingleNumeric'
         - $ref: '#/components/schemas/VariableValueV2Regex'
         - $ref: '#/components/schemas/VariableValueV2Lucene'
         - $ref: '#/components/schemas/VariableValueV2Interval'
         - $ref: '#/components/schemas/VariableValueV2MultiString'
+        - $ref: '#/components/schemas/VariableValueV2SingleString'
     VariableValueV2.SingleNumericValue:
       type: object
       properties:
@@ -36492,16 +39163,16 @@ components:
       type: string
     Visualization:
       oneOf:
-        - $ref: '#/components/schemas/VisualizationHexagonBins'
         - $ref: '#/components/schemas/VisualizationHorizontalBars'
-        - $ref: '#/components/schemas/VisualizationTable'
-        - $ref: '#/components/schemas/VisualizationTimeSeriesLines'
-        - $ref: '#/components/schemas/VisualizationStat'
-        - $ref: '#/components/schemas/VisualizationPieChart'
         - $ref: '#/components/schemas/VisualizationVerticalBars'
         - $ref: '#/components/schemas/VisualizationHeatmap'
-        - $ref: '#/components/schemas/VisualizationTimeSeriesBars'
+        - $ref: '#/components/schemas/VisualizationTimeSeriesLines'
+        - $ref: '#/components/schemas/VisualizationStat'
         - $ref: '#/components/schemas/VisualizationGauge'
+        - $ref: '#/components/schemas/VisualizationHexagonBins'
+        - $ref: '#/components/schemas/VisualizationPieChart'
+        - $ref: '#/components/schemas/VisualizationTable'
+        - $ref: '#/components/schemas/VisualizationTimeSeriesBars'
     Visualization.BarValueDisplay:
       enum:
         - BAR_VALUE_DISPLAY_UNSPECIFIED
@@ -36826,15 +39497,15 @@ components:
           format: int32
     Widget.Definition:
       oneOf:
-        - $ref: '#/components/schemas/WidgetDefinitionGauge'
-        - $ref: '#/components/schemas/WidgetDefinitionHorizontalBarChart'
-        - $ref: '#/components/schemas/WidgetDefinitionHexagon'
         - $ref: '#/components/schemas/WidgetDefinitionLineChart'
-        - $ref: '#/components/schemas/WidgetDefinitionPieChart'
         - $ref: '#/components/schemas/WidgetDefinitionBarChart'
+        - $ref: '#/components/schemas/WidgetDefinitionHorizontalBarChart'
         - $ref: '#/components/schemas/WidgetDefinitionMarkdown'
         - $ref: '#/components/schemas/WidgetDefinitionDynamic'
         - $ref: '#/components/schemas/WidgetDefinitionDataTable'
+        - $ref: '#/components/schemas/WidgetDefinitionGauge'
+        - $ref: '#/components/schemas/WidgetDefinitionPieChart'
+        - $ref: '#/components/schemas/WidgetDefinitionHexagon'
     WidgetDefinitionBarChart:
       type: object
       properties:
@@ -36946,8 +39617,8 @@ components:
       type: string
     XAxis:
       oneOf:
-        - $ref: '#/components/schemas/XAxisValue'
         - $ref: '#/components/schemas/XAxisTime'
+        - $ref: '#/components/schemas/XAxisValue'
     XAxisByTime:
       type: object
       properties:
@@ -37053,6 +39724,99 @@ components:
         description: Find out more about archives
         url: >-
           https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
+    cases.v1.GetFilterValuesRequest:
+      title: Get case filter values request
+      type: object
+      properties:
+        filters:
+          $ref: '#/components/schemas/CaseFilters'
+      externalDocs:
+        url: ''
+    cases.v1.GetFilterValuesResponse:
+      title: Get case filter values response
+      type: object
+      properties:
+        assigneeAggregations:
+          $ref: '#/components/schemas/AssigneeAggregation'
+        categoryAggregations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CategoryAggregation'
+        groupingAggregations:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterGroupAggregation'
+        labelAggregations:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterGroupAggregation'
+        priorityAggregations:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriorityAggregation'
+        stateAggregations:
+          type: array
+          items:
+            $ref: '#/components/schemas/StateAggregation'
+        statusAggregations:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusAggregation'
+      description: Aggregated counts for building filters in the UI
+      externalDocs:
+        url: ''
+    cases.v1.PaginationRequest:
+      title: Pagination request
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items to return per page
+          format: int64
+          example: 10
+        pageToken:
+          type: string
+          description: Token for the next page of results
+          example: >-
+            MjAyNS0wOS0yM1QxMjoxMTo0MC43ODcwODVaLDY5YmIxYmFiLWE1NzAtNGU5Ny04MzE2LWFkYzQxYjk2Y2QyNA==
+        skip:
+          type: integer
+          description: Number of items to skip before starting to collect results
+          format: int64
+          example: 20
+      description: Pagination parameters for list requests.
+      externalDocs:
+        url: ''
+    cases.v1.PaginationResponse:
+      title: Pagination response
+      required:
+        - totalSize
+      type: object
+      properties:
+        nextPageToken:
+          type: string
+          description: Token for the next page of results
+          example: >-
+            MjAyNS0wOS0yM1QxMjoxMTo0MC43ODcwODVaLDY5YmIxYmFiLWE1NzAtNGU5Ny04MzE2LWFkYzQxYjk2Y2QyNA==
+        totalSize:
+          type: integer
+          description: Total number of items available
+          format: int64
+          example: 100
+      description: Pagination information for list responses.
+      externalDocs:
+        url: ''
+    cases.v1.UserDetails:
+      title: User details
+      type: object
+      properties:
+        userId:
+          type: string
+          description: Unique user identifier
+          example: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+      description: Minimal user identity information used in case assignments.
+      externalDocs:
+        url: ''
     common.Action:
       title: Action
       type: object
@@ -37284,6 +40048,26 @@ components:
         - VERSION_UNSPECIFIED
         - VERSION_V1
       type: string
+    incidents.v1.GetFilterValuesRequest:
+      title: Get filter values request
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/IncidentQueryFilter'
+      description: Request to get available filter values for incidents
+      externalDocs:
+        url: ''
+    incidents.v1.GetFilterValuesResponse:
+      title: Get filter values response
+      required:
+        - filtersValues
+      type: object
+      properties:
+        filtersValues:
+          $ref: '#/components/schemas/IncidentQueryFiltersValues'
+      description: Response containing available filter values for incidents
+      externalDocs:
+        url: ''
     incidents.v1.MetaLabel:
       title: Incident meta label
       type: object
@@ -37294,6 +40078,53 @@ components:
         value:
           type: string
           example: value
+      externalDocs:
+        url: ''
+    incidents.v1.PaginationRequest:
+      title: Pagination request
+      required:
+        - pageSize
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items to return per page
+          format: int64
+          example: 10
+        pageToken:
+          type: string
+          description: Token for the next page of results
+          example: next_page_token
+      description: Pagination parameters for list requests
+      externalDocs:
+        url: ''
+    incidents.v1.PaginationResponse:
+      title: Pagination response
+      required:
+        - totalSize
+      type: object
+      properties:
+        nextPageToken:
+          type: string
+          description: Token for the next page of results
+          example: next_page_token
+        totalSize:
+          type: integer
+          description: Total number of items available
+          format: int64
+          example: 100
+      description: Pagination information for list responses
+      externalDocs:
+        url: ''
+    incidents.v1.UserDetails:
+      title: User details
+      required:
+        - userId
+      type: object
+      properties:
+        userId:
+          type: string
+          example: user_id
       externalDocs:
         url: ''
     logs2metrics.v2.Severity:
@@ -37660,6 +40491,28 @@ components:
         value:
           type: number
           format: float
+    v1.GetEventRequest:
+      title: Get event request
+      required:
+        - eventId
+      type: object
+      properties:
+        eventId:
+          type: string
+          description: ID of the event to fetch
+          example: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+      externalDocs:
+        url: ''
+    v1.GetEventResponse:
+      title: Get event response
+      required:
+        - event
+      type: object
+      properties:
+        event:
+          $ref: '#/components/schemas/CaseEvent'
+      externalDocs:
+        url: ''
     v1.Grouping:
       title: Grouping
       type: object
@@ -37673,13 +40526,33 @@ components:
         url: ''
     v1.IntegrationType:
       oneOf:
-        - $ref: '#/components/schemas/V1IntegrationTypeContextualData'
         - $ref: '#/components/schemas/V1IntegrationTypeGenericWebhook'
         - $ref: '#/components/schemas/V1IntegrationTypeManaged'
         - $ref: '#/components/schemas/V1IntegrationTypeUntracked'
         - $ref: '#/components/schemas/V1IntegrationTypeCloudformation'
         - $ref: '#/components/schemas/V1IntegrationTypeArm'
         - $ref: '#/components/schemas/V1IntegrationTypePushBasedContextualData'
+        - $ref: '#/components/schemas/V1IntegrationTypeContextualData'
+    v1.KeyValue:
+      title: Key-value pair
+      required:
+        - key
+        - value
+      type: object
+      properties:
+        key:
+          type: string
+          description: Key of the pair (e.g., label or grouping name)
+          example: service
+        value:
+          type: string
+          description: Value associated with the key
+          example: payments
+      description: >-
+        Represents a simple key-value pair, often used for labels or groupings
+        in cases.
+      externalDocs:
+        url: ''
     v1.LabelValue:
       type: object
       properties:
@@ -37687,6 +40560,30 @@ components:
           type: string
         value:
           type: string
+    v1.ListEventsRequest:
+      title: List events request
+      required:
+        - caseId
+      type: object
+      properties:
+        caseId:
+          type: string
+          description: ID of the case
+          example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+      externalDocs:
+        url: ''
+    v1.ListEventsResponse:
+      title: List events response
+      required:
+        - events
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/CaseEvent'
+      externalDocs:
+        url: ''
     v1.OrderBy:
       oneOf:
         - $ref: '#/components/schemas/V1OrderByIncidentField'
@@ -37706,42 +40603,6 @@ components:
         - ORDER_BY_FIELDS_CREATED_TIME
         - ORDER_BY_FIELDS_CLOSED_TIME
       type: string
-    v1.PaginationRequest:
-      title: Pagination request
-      required:
-        - pageSize
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items to return per page
-          format: int64
-          example: 10
-        pageToken:
-          type: string
-          description: Token for the next page of results
-          example: next_page_token
-      description: Pagination parameters for list requests
-      externalDocs:
-        url: ''
-    v1.PaginationResponse:
-      title: Pagination response
-      required:
-        - totalSize
-      type: object
-      properties:
-        nextPageToken:
-          type: string
-          description: Token for the next page of results
-          example: next_page_token
-        totalSize:
-          type: integer
-          description: Total number of items available
-          format: int64
-          example: 100
-      description: Pagination information for list responses
-      externalDocs:
-        url: ''
     v1.Range:
       enum:
         - RANGE_UNSPECIFIED
@@ -38288,6 +41149,31 @@ components:
         - FILTER_OPERATOR_AND_OR_UNSPECIFIED
         - FILTER_OPERATOR_OR
       type: string
+    v3.GetEventRequest:
+      title: GetEventRequest
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          example: test
+        orderBys:
+          type: array
+          items:
+            $ref: '#/components/schemas/events.v3.OrderBy'
+        pagination:
+          $ref: '#/components/schemas/events.v3.PaginationRequest'
+      description: This data structure represents a request to get an event
+      externalDocs:
+        url: ''
+    v3.GetEventResponse:
+      type: object
+      properties:
+        event:
+          $ref: '#/components/schemas/CxEventSingleOrMultiple'
+        pagination:
+          $ref: '#/components/schemas/events.v3.PaginationResponse'
     v3.Group:
       oneOf:
         - $ref: '#/components/schemas/V3GroupLogsImmediate'
@@ -38299,6 +41185,40 @@ components:
       oneOf:
         - $ref: '#/components/schemas/V3IntegrationTypeIntegrationId'
         - $ref: '#/components/schemas/V3IntegrationTypeRecipients'
+    v3.ListEventsRequest:
+      title: ListEventsRequest
+      required:
+        - filter
+        - orderBys
+        - pagination
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/EventsFilter'
+        orderBys:
+          type: array
+          items:
+            $ref: '#/components/schemas/events.v3.OrderBy'
+        pagination:
+          $ref: '#/components/schemas/events.v3.PaginationRequest'
+      description: This data structure represents a request to list events
+      externalDocs:
+        url: ''
+    v3.ListEventsResponse:
+      title: ListEventsResponse
+      required:
+        - events
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/CxEvent'
+        pagination:
+          $ref: '#/components/schemas/events.v3.PaginationResponse'
+      description: This data structure represents a response to list events
+      externalDocs:
+        url: ''
     v3.LogsFilter:
       title: Log filter
       type: object
@@ -38829,117 +41749,12 @@ components:
       name: Authorization
       description: API key authentication
 tags:
-  - name: Views service
-    description: Create and manage views.
-    externalDocs:
-      url: ''
-  - name: Extension testing service
-    externalDocs:
-      description: Find out more about extensions in our documentation.
-      url: https://coralogix.com/docs/integrations/extensions/
-  - name: Enrichments Service
-    description: Manage your enrichments.
-    externalDocs:
-      url: ''
-  - name: Policies Service
-    description: View and manage your TCO policies
-    externalDocs:
-      url: ''
-  - name: Events Service
-    description: A service for querying events.
-    externalDocs:
-      description: Learn more about alerts in our documentation
-      url: https://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/
-  - name: Data Usage Service
-    description: A service to manage data usage metrics.
-    externalDocs:
-      url: ''
-  - name: Alert events service
-    description: >-
-      Get information regarding your alert events - instances of alerts being
-      triggered.
-    externalDocs:
-      description: Learn more about alert events and incidents in our documentation.
-      url: https://coralogix.com/docs/user-guides/alerting/incidents/
-  - name: SLO Service
-    description: Manage your SLOs.
-    externalDocs:
-      url: ''
-  - name: Connectors service
-    description: >-
-      View and manage your connectors - integration instances for notification
-      destinations
-    externalDocs:
-      description: Lean more about connectors in our documentation
-      url: >-
-        https://coralogix.com/docs/user-guides/notification-center/connectors/introduction/
-  - name: Role Management Service
-    description: Service for managing system and custom roles.
-    externalDocs:
-      url: ''
-  - name: SAML Configuration Service
-    description: Manage your SAML configuration
-    externalDocs:
-      url: ''
-  - name: Extension deployment service
-    description: A service that enables querying for extension deployment information.
-    externalDocs:
-      description: Find out more about extensions in our documentation.
-      url: https://coralogix.com/docs/integrations/extensions/
-  - name: Events2Metrics Service
-    description: Manage your events2metrics.
-    externalDocs:
-      url: ''
-  - name: Incidents service
-    description: >-
-      Handle all operations related to incident management within Coralogix.
-      Identify, manage, and resolve incidents efficiently through automated
-      workflows and team collaboration.
-    externalDocs:
-      description: Find out more about incident management in our documentation
-      url: https://coralogix.com/docs/user-guides/alerting/incidents/
-  - name: Contextual data integration service
-    description: Query for contextual data integration information.
-    externalDocs:
-      url: ''
-  - name: Rule Groups Service
-    description: A service to manage rule groups.
-    externalDocs:
-      url: ''
-  - name: Global routers service
-    description: >-
-      View and manage your global routers - entities that direct notifications
-      to configured destinations based on conditions
-    externalDocs:
-      description: Lean more about global routers in our documentation
-      url: >-
-        https://coralogix.com/docs/user-guides/notification-center/routing/introduction/
-  - name: API Keys Service
-    description: Manage your API Keys.
-    externalDocs:
-      url: ''
-  - name: Folders for views service
-    description: Create and manage view folders.
-    externalDocs:
-      url: ''
-  - name: Target Service
-    description: View and manage your storage targets for logs.
+  - name: Metrics Data Archive Service
+    description: View and manage your storage targets for metrics.
     externalDocs:
       description: Find out more about archives
       url: >-
         https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
-  - name: Custom Enrichments Service
-    description: Manage your enrichments.
-    externalDocs:
-      url: ''
-  - name: Retentions Service
-    description: View and manage retentions
-    externalDocs:
-      url: ''
-  - name: Alert Scheduler Rule service
-    description: Manage your alert scheduler rules.
-    externalDocs:
-      url: ''
   - name: Presets service
     description: >-
       View and manage your presets - pre-configured templates for notification
@@ -38954,56 +41769,30 @@ tags:
       settings.
     externalDocs:
       url: ''
-  - name: Recording Rules Service
-    description: A service to manage recording rules.
+  - name: Things Service
+    description: ThingService provides the API for managing things.
     externalDocs:
       url: ''
-  - name: Dashboard folders service
-    description: Manage your dashboard folders.
+  - name: Extension deployment service
+    description: A service that enables querying for extension deployment information.
     externalDocs:
-      url: ''
-  - name: Actions Service
-    description: A service for managing actions.
-    externalDocs:
-      url: ''
-  - name: Extension service
-    description: A service that enables querying for extension information.
-    externalDocs:
-      description: Learn more about extensions in our documentation.
+      description: Find out more about extensions in our documentation.
       url: https://coralogix.com/docs/integrations/extensions/
-  - name: Alert definitions service
-    description: >-
-      View and manage your alerts using alert definitions - data structures that
-      contain the configuration required to create an alert.
-    externalDocs:
-      description: Learn more about alerts in our documentation
-      url: https://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/
-  - name: Scopes Service
-    description: A service to manage scopes
+  - name: Contextual data integration service
+    description: Query for contextual data integration information.
     externalDocs:
       url: ''
-  - name: Metrics Data Archive Service
-    description: View and manage your storage targets for metrics.
-    externalDocs:
-      description: Find out more about archives
-      url: >-
-        https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
-  - name: Integration service
-    description: A service that enables querying for integration information.
-    externalDocs:
-      description: Find out more about integrations in our documentation.
-      url: https://coralogix.com/docs/integrations/getting-started/
   - name: Outgoing webhooks service
     externalDocs:
       description: Find out more about outbound webhooks in our documentation.
       url: >-
         https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/
-  - name: Slos Service
-    description: A service for managing Service Level Objectives (SLOs).
+  - name: Actions Service
+    description: A service for managing actions.
     externalDocs:
       url: ''
-  - name: Team Permissions Management Service
-    description: Manage Team Groups.
+  - name: Folders for views service
+    description: Create and manage view folders.
     externalDocs:
       url: ''
   - name: Entities service
@@ -39011,8 +41800,151 @@ tags:
     externalDocs:
       description: Lean more about the notification center in our documentation
       url: https://coralogix.com/docs/user-guides/notification-center/introduction/
+  - name: Role Management Service
+    description: Service for managing system and custom roles.
+    externalDocs:
+      url: ''
+  - name: SAML Configuration Service
+    description: Manage your SAML configuration
+    externalDocs:
+      url: ''
+  - name: Alert events service
+    description: >-
+      Get information regarding your alert events - instances of alerts being
+      triggered.
+    externalDocs:
+      description: Learn more about alert events and incidents in our documentation.
+      url: https://coralogix.com/docs/user-guides/alerting/incidents/
   - name: Dashboard service
     description: Get information about the Coralogix Dashboard catalog.
+    externalDocs:
+      url: ''
+  - name: Dashboard folders service
+    description: Manage your dashboard folders.
+    externalDocs:
+      url: ''
+  - name: Events Service
+    description: A service for querying events.
+    externalDocs:
+      description: Learn more about alerts in our documentation
+      url: https://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/
+  - name: Team Permissions Management Service
+    description: Manage Team Groups.
+    externalDocs:
+      url: ''
+  - name: Integration service
+    description: A service that enables querying for integration information.
+    externalDocs:
+      description: Find out more about integrations in our documentation.
+      url: https://coralogix.com/docs/integrations/getting-started/
+  - name: Enrichments Service
+    description: Manage your enrichments.
+    externalDocs:
+      url: ''
+  - name: Connectors service
+    description: >-
+      View and manage your connectors - integration instances for notification
+      destinations
+    externalDocs:
+      description: Lean more about connectors in our documentation
+      url: >-
+        https://coralogix.com/docs/user-guides/notification-center/connectors/introduction/
+  - name: Alert definitions service
+    description: >-
+      View and manage your alerts using alert definitions - data structures that
+      contain the configuration required to create an alert.
+    externalDocs:
+      description: Learn more about alerts in our documentation
+      url: https://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/
+  - name: Views service
+    description: Create and manage views.
+    externalDocs:
+      url: ''
+  - name: Data Usage Service
+    description: A service to manage data usage metrics.
+    externalDocs:
+      url: ''
+  - name: SLO Service
+    description: Manage your SLOs.
+    externalDocs:
+      url: ''
+  - name: Global routers service
+    description: >-
+      View and manage your global routers - entities that direct notifications
+      to configured destinations based on conditions
+    externalDocs:
+      description: Lean more about global routers in our documentation
+      url: >-
+        https://coralogix.com/docs/user-guides/notification-center/routing/introduction/
+  - name: Cases service
+    description: >-
+      Manage cases throughout their lifecycle. Create, view, assign,
+      acknowledge, resolve, and close cases to streamline investigations and
+      follow-ups.
+    externalDocs:
+      description: Learn more about Cases in our documentation
+      url: https://coralogix.com/docs/user-guides/cases/
+  - name: Recording Rules Service
+    description: A service to manage recording rules.
+    externalDocs:
+      url: ''
+  - name: Events2Metrics Service
+    description: Manage your events2metrics.
+    externalDocs:
+      url: ''
+  - name: Custom Enrichments Service
+    description: Manage your enrichments.
+    externalDocs:
+      url: ''
+  - name: Policies Service
+    description: View and manage your TCO policies
+    externalDocs:
+      url: ''
+  - name: Alert Scheduler Rule service
+    description: Manage your alert scheduler rules.
+    externalDocs:
+      url: ''
+  - name: API Keys Service
+    description: Manage your API Keys.
+    externalDocs:
+      url: ''
+  - name: Incidents service
+    description: >-
+      Handle all operations related to incident management within Coralogix.
+      Identify, manage, and resolve incidents efficiently through automated
+      workflows and team collaboration.
+    externalDocs:
+      description: Find out more about incident management in our documentation
+      url: https://coralogix.com/docs/user-guides/alerting/incidents/
+  - name: Retentions Service
+    description: View and manage retentions
+    externalDocs:
+      url: ''
+  - name: Extension testing service
+    externalDocs:
+      description: Find out more about extensions in our documentation.
+      url: https://coralogix.com/docs/integrations/extensions/
+  - name: Slos Service
+    description: A service for managing Service Level Objectives (SLOs).
+    externalDocs:
+      url: ''
+  - name: Scopes Service
+    description: A service to manage scopes
+    externalDocs:
+      url: ''
+  - name: Target Service
+    description: View and manage your storage targets for logs.
+    externalDocs:
+      description: Find out more about archives
+      url: >-
+        https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
+  - name: Extension service
+    description: A service that enables querying for extension information.
+    externalDocs:
+      description: Learn more about extensions in our documentation.
+      url: https://coralogix.com/docs/integrations/extensions/
+  - name: Rule Groups Service
+    description: A service to manage rule groups.
     externalDocs:
       url: ''
 servers:
