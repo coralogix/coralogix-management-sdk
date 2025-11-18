@@ -251,8 +251,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
       additionalProperties: false
       description: This data structure represents a filter path and values
@@ -306,7 +306,7 @@ components:
       example:
         keyInfo:
           owner:
-            organisationId: organisationId
+            userId: userId
           name: my_api_key
           active: true
           hashed: true
@@ -339,7 +339,7 @@ components:
       example:
         keys:
         - owner:
-            organisationId: organisationId
+            userId: userId
           name: my_api_key
           active: true
           hashed: true
@@ -359,7 +359,7 @@ components:
             - permissions
           value: value
         - owner:
-            organisationId: organisationId
+            userId: userId
           name: my_api_key
           active: true
           hashed: true
@@ -393,7 +393,7 @@ components:
         an API key.
       example:
         owner:
-          organisationId: organisationId
+          userId: userId
         name: my_api_key
         active: true
         hashed: true
@@ -475,13 +475,11 @@ components:
       type: object
     Owner:
       oneOf:
-      - $ref: "#/components/schemas/OwnerOrganisationId"
       - $ref: "#/components/schemas/OwnerUserId"
       - $ref: "#/components/schemas/OwnerTeamId"
+      - $ref: "#/components/schemas/OwnerOrganisationId"
     OwnerOrganisationId:
       additionalProperties: false
-      example:
-        organisationId: organisationId
       properties:
         organisationId:
           type: string
@@ -495,6 +493,8 @@ components:
       type: object
     OwnerUserId:
       additionalProperties: false
+      example:
+        userId: userId
       properties:
         userId:
           type: string

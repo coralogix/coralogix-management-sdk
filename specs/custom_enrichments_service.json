@@ -109,10 +109,10 @@
               "items": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/SearchClauseId"
+                    "$ref": "#/components/schemas/SearchClauseName"
                   },
                   {
-                    "$ref": "#/components/schemas/SearchClauseName"
+                    "$ref": "#/components/schemas/SearchClauseId"
                   }
                 ]
               }
@@ -482,10 +482,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },

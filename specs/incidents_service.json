@@ -396,10 +396,10 @@
               "items": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GroupByContextualLabel"
+                    "$ref": "#/components/schemas/GroupByIncidentField"
                   },
                   {
-                    "$ref": "#/components/schemas/GroupByIncidentField"
+                    "$ref": "#/components/schemas/GroupByContextualLabel"
                   }
                 ]
               }
@@ -1879,10 +1879,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -2058,10 +2058,10 @@
       "GroupByValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/GroupByValuesIncidentField"
+            "$ref": "#/components/schemas/GroupByValuesContextualLabels"
           },
           {
-            "$ref": "#/components/schemas/GroupByValuesContextualLabels"
+            "$ref": "#/components/schemas/GroupByValuesIncidentField"
           }
         ]
       },
@@ -2287,28 +2287,10 @@
       "IncidentEvent": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventUnassignOperationalEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventCloseOperationalEvent"
-          },
-          {
             "$ref": "#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent"
           },
           {
             "$ref": "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
           },
           {
             "$ref": "#/components/schemas/IncidentEventAssignmentOperationalEvent"
@@ -2320,7 +2302,25 @@
             "$ref": "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
           },
           {
+            "$ref": "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventUnassignOperationalEvent"
+          },
+          {
             "$ref": "#/components/schemas/IncidentEventCloseAdministrativeEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventCloseOperationalEvent"
           }
         ]
       },
@@ -2928,28 +2928,7 @@
       "IncidentFieldOneOf": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IncidentFieldOneOfId"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfName"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfClosedAt"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfState"
-          },
-          {
             "$ref": "#/components/schemas/IncidentFieldOneOfStatus"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfDuration"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfSeverity"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfCreatedAt"
           },
           {
             "$ref": "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
@@ -2959,6 +2938,27 @@
           },
           {
             "$ref": "#/components/schemas/IncidentFieldOneOfSubsystemName"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfDuration"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfId"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfClosedAt"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfState"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfSeverity"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfName"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfCreatedAt"
           }
         ]
       },

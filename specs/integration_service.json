@@ -1651,10 +1651,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -2114,12 +2114,6 @@
       "IntegrationRevision": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IntegrationRevisionRum"
-          },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionTerraform"
-          },
-          {
             "$ref": "#/components/schemas/IntegrationRevisionCloudFormation"
           },
           {
@@ -2130,6 +2124,12 @@
           },
           {
             "$ref": "#/components/schemas/IntegrationRevisionAzureArmTemplate"
+          },
+          {
+            "$ref": "#/components/schemas/IntegrationRevisionRum"
+          },
+          {
+            "$ref": "#/components/schemas/IntegrationRevisionTerraform"
           }
         ]
       },
@@ -3060,10 +3060,10 @@
       "TestIntegrationResult": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TestIntegrationResultSuccess"
+            "$ref": "#/components/schemas/TestIntegrationResultFailure"
           },
           {
-            "$ref": "#/components/schemas/TestIntegrationResultFailure"
+            "$ref": "#/components/schemas/TestIntegrationResultSuccess"
           }
         ]
       },
@@ -3315,9 +3315,6 @@
       "v1.IntegrationType": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/V1IntegrationTypePushBasedContextualData"
-          },
-          {
             "$ref": "#/components/schemas/V1IntegrationTypeContextualData"
           },
           {
@@ -3334,6 +3331,9 @@
           },
           {
             "$ref": "#/components/schemas/V1IntegrationTypeArm"
+          },
+          {
+            "$ref": "#/components/schemas/V1IntegrationTypePushBasedContextualData"
           }
         ]
       },

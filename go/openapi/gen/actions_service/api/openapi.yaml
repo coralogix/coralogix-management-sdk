@@ -261,13 +261,25 @@ components:
       type: object
     ActionExecutionResponse:
       oneOf:
-      - $ref: "#/components/schemas/ActionExecutionResponseCreate"
       - $ref: "#/components/schemas/ActionExecutionResponseReplace"
       - $ref: "#/components/schemas/ActionExecutionResponseDelete"
+      - $ref: "#/components/schemas/ActionExecutionResponseCreate"
     ActionExecutionResponseCreate:
       additionalProperties: false
-      example:
+      properties:
         create:
+          $ref: "#/components/schemas/CreateActionResponse"
+      type: object
+    ActionExecutionResponseDelete:
+      additionalProperties: false
+      properties:
+        delete:
+          type: object
+      type: object
+    ActionExecutionResponseReplace:
+      additionalProperties: false
+      example:
+        replace:
           action:
             createdBy: createdBy
             sourceType: SOURCE_TYPE_UNSPECIFIED
@@ -283,25 +295,13 @@ components:
             url: url
             isHidden: true
       properties:
-        create:
-          $ref: "#/components/schemas/CreateActionResponse"
-      type: object
-    ActionExecutionResponseDelete:
-      additionalProperties: false
-      properties:
-        delete:
-          type: object
-      type: object
-    ActionExecutionResponseReplace:
-      additionalProperties: false
-      properties:
         replace:
           $ref: "#/components/schemas/ReplaceActionResponse"
       type: object
     AtomicBatchExecuteActionsResponse:
       example:
         matchingResponses:
-        - create:
+        - replace:
             action:
               createdBy: createdBy
               sourceType: SOURCE_TYPE_UNSPECIFIED
@@ -316,7 +316,7 @@ components:
               isPrivate: true
               url: url
               isHidden: true
-        - create:
+        - replace:
             action:
               createdBy: createdBy
               sourceType: SOURCE_TYPE_UNSPECIFIED
@@ -410,8 +410,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
       additionalProperties: false
       description: This data structure represents a filter path and values

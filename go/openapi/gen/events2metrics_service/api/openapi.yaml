@@ -837,8 +837,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
       additionalProperties: false
       description: This data structure represents a filter path and values
@@ -1453,13 +1453,13 @@ components:
       type: string
     Events2MetricService_ReplaceE2M_request:
       oneOf:
-      - $ref: "#/components/schemas/E2MLogsQuery"
       - $ref: "#/components/schemas/E2MSpansQuery"
+      - $ref: "#/components/schemas/E2MLogsQuery"
       type: object
     Events2MetricService_CreateE2M_request:
       oneOf:
-      - $ref: "#/components/schemas/E2MCreateParamsSpansQuery"
       - $ref: "#/components/schemas/E2MCreateParamsLogsQuery"
+      - $ref: "#/components/schemas/E2MCreateParamsSpansQuery"
       type: object
     Events2MetricService_AtomicBatchExecuteE2M_request:
       additionalProperties: false

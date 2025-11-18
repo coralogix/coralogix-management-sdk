@@ -22,12 +22,14 @@ var _ MappedNullable = &GlobalRouter{}
 type GlobalRouter struct {
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	Description *string `json:"description,omitempty"`
+	// Deprecated
 	EntityLabelMatcher *map[string]string `json:"entityLabelMatcher,omitempty"`
 	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
 	Fallback []RoutingTarget `json:"fallback,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
+	RoutingLabels *RoutingLabels `json:"routingLabels,omitempty"`
 	Rules []RoutingRule `json:"rules,omitempty"`
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 }
@@ -114,6 +116,7 @@ func (o *GlobalRouter) SetDescription(v string) {
 }
 
 // GetEntityLabelMatcher returns the EntityLabelMatcher field value if set, zero value otherwise.
+// Deprecated
 func (o *GlobalRouter) GetEntityLabelMatcher() map[string]string {
 	if o == nil || IsNil(o.EntityLabelMatcher) {
 		var ret map[string]string
@@ -124,6 +127,7 @@ func (o *GlobalRouter) GetEntityLabelMatcher() map[string]string {
 
 // GetEntityLabelMatcherOk returns a tuple with the EntityLabelMatcher field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *GlobalRouter) GetEntityLabelMatcherOk() (*map[string]string, bool) {
 	if o == nil || IsNil(o.EntityLabelMatcher) {
 		return nil, false
@@ -141,6 +145,7 @@ func (o *GlobalRouter) HasEntityLabelMatcher() bool {
 }
 
 // SetEntityLabelMatcher gets a reference to the given map[string]string and assigns it to the EntityLabelMatcher field.
+// Deprecated
 func (o *GlobalRouter) SetEntityLabelMatcher(v map[string]string) {
 	o.EntityLabelMatcher = &v
 }
@@ -305,6 +310,38 @@ func (o *GlobalRouter) SetName(v string) {
 	o.Name = &v
 }
 
+// GetRoutingLabels returns the RoutingLabels field value if set, zero value otherwise.
+func (o *GlobalRouter) GetRoutingLabels() RoutingLabels {
+	if o == nil || IsNil(o.RoutingLabels) {
+		var ret RoutingLabels
+		return ret
+	}
+	return *o.RoutingLabels
+}
+
+// GetRoutingLabelsOk returns a tuple with the RoutingLabels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GlobalRouter) GetRoutingLabelsOk() (*RoutingLabels, bool) {
+	if o == nil || IsNil(o.RoutingLabels) {
+		return nil, false
+	}
+	return o.RoutingLabels, true
+}
+
+// HasRoutingLabels returns a boolean if a field has been set.
+func (o *GlobalRouter) HasRoutingLabels() bool {
+	if o != nil && !IsNil(o.RoutingLabels) {
+		return true
+	}
+
+	return false
+}
+
+// SetRoutingLabels gets a reference to the given RoutingLabels and assigns it to the RoutingLabels field.
+func (o *GlobalRouter) SetRoutingLabels(v RoutingLabels) {
+	o.RoutingLabels = &v
+}
+
 // GetRules returns the Rules field value if set, zero value otherwise.
 func (o *GlobalRouter) GetRules() []RoutingRule {
 	if o == nil || IsNil(o.Rules) {
@@ -402,6 +439,9 @@ func (o GlobalRouter) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.RoutingLabels) {
+		toSerialize["routingLabels"] = o.RoutingLabels
 	}
 	if !IsNil(o.Rules) {
 		toSerialize["rules"] = o.Rules

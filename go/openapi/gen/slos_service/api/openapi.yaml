@@ -59,7 +59,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SlosService_ReplaceSlo_request"
+              $ref: "#/components/schemas/SlosService_CreateSlo_request"
       responses:
         "200":
           content:
@@ -337,10 +337,7 @@ components:
       description: Response containing the results of batch executed SLO operations.
       example:
         matchingResponses:
-        - replaceSloResponse:
-            effectedSloAlertIds:
-            - effectedSloAlertIds
-            - effectedSloAlertIds
+        - createSloResponse:
             slo:
               creator: test@domain.com
               requestBasedMetricSli:
@@ -365,10 +362,7 @@ components:
               name: Example Slo Name
               id: b11919d5-ef85-4bb1-8655-02640dbe94d9
               targetThresholdPercentage: 99.999
-        - replaceSloResponse:
-            effectedSloAlertIds:
-            - effectedSloAlertIds
-            - effectedSloAlertIds
+        - createSloResponse:
             slo:
               creator: test@domain.com
               requestBasedMetricSli:
@@ -610,8 +604,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
       additionalProperties: false
       description: This data structure represents a filter path and values
@@ -983,37 +977,14 @@ components:
       type: object
     SloExecutionResponse:
       oneOf:
+      - $ref: "#/components/schemas/SloExecutionResponseCreateSloResponse"
       - $ref: "#/components/schemas/SloExecutionResponseReplaceSloResponse"
       - $ref: "#/components/schemas/SloExecutionResponseDeleteSloResponse"
-      - $ref: "#/components/schemas/SloExecutionResponseCreateSloResponse"
     SloExecutionResponseCreateSloResponse:
       additionalProperties: false
       description: Response for an executed SLO operation.
-      externalDocs:
-        url: ""
-      properties:
-        createSloResponse:
-          $ref: "#/components/schemas/CreateSloResponse"
-      title: SloExecutionResponse
-      type: object
-    SloExecutionResponseDeleteSloResponse:
-      additionalProperties: false
-      description: Response for an executed SLO operation.
-      externalDocs:
-        url: ""
-      properties:
-        deleteSloResponse:
-          $ref: "#/components/schemas/DeleteSloResponse"
-      title: SloExecutionResponse
-      type: object
-    SloExecutionResponseReplaceSloResponse:
-      additionalProperties: false
-      description: Response for an executed SLO operation.
       example:
-        replaceSloResponse:
-          effectedSloAlertIds:
-          - effectedSloAlertIds
-          - effectedSloAlertIds
+        createSloResponse:
           slo:
             creator: test@domain.com
             requestBasedMetricSli:
@@ -1038,6 +1009,26 @@ components:
             name: Example Slo Name
             id: b11919d5-ef85-4bb1-8655-02640dbe94d9
             targetThresholdPercentage: 99.999
+      externalDocs:
+        url: ""
+      properties:
+        createSloResponse:
+          $ref: "#/components/schemas/CreateSloResponse"
+      title: SloExecutionResponse
+      type: object
+    SloExecutionResponseDeleteSloResponse:
+      additionalProperties: false
+      description: Response for an executed SLO operation.
+      externalDocs:
+        url: ""
+      properties:
+        deleteSloResponse:
+          $ref: "#/components/schemas/DeleteSloResponse"
+      title: SloExecutionResponse
+      type: object
+    SloExecutionResponseReplaceSloResponse:
+      additionalProperties: false
+      description: Response for an executed SLO operation.
       externalDocs:
         url: ""
       properties:
@@ -1337,6 +1328,11 @@ components:
       oneOf:
       - $ref: "#/components/schemas/SloRequestBasedMetricSli"
       - $ref: "#/components/schemas/SloWindowBasedMetricSli"
+      type: object
+    SlosService_CreateSlo_request:
+      oneOf:
+      - $ref: "#/components/schemas/SloWindowBasedMetricSli"
+      - $ref: "#/components/schemas/SloRequestBasedMetricSli"
       type: object
     SlosService_BatchExecuteSlo_requests_parameter_inner:
       oneOf:

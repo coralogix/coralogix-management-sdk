@@ -174,10 +174,10 @@
             "schema": {
               "oneOf": [
                 {
-                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds"
+                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds"
                 },
                 {
-                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds"
+                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds"
                 }
               ]
             },
@@ -715,10 +715,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -1122,10 +1122,10 @@
       "alert_scheduler_rule_protobuf.v1.Filter": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertUniqueIds"
+            "$ref": "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertMetaLabels"
           },
           {
-            "$ref": "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertMetaLabels"
+            "$ref": "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertUniqueIds"
           }
         ]
       },

@@ -175,8 +175,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
       additionalProperties: false
       description: This data structure represents a filter path and values
@@ -241,7 +241,7 @@ components:
           groupNames:
           - group1
           - group1
-          metadataContent: <?xml version= ...
+          metadataUrl: https://<...>.okta.com/app/<...>/sso/saml/metadata
           teamEntityId: 1234567
           active: true
         teamId: 0
@@ -290,19 +290,12 @@ components:
       type: object
     IDPParameters:
       oneOf:
-      - $ref: "#/components/schemas/IDPParametersMetadataContent"
       - $ref: "#/components/schemas/IDPParametersMetadataUrl"
+      - $ref: "#/components/schemas/IDPParametersMetadataContent"
     IDPParametersMetadataContent:
       additionalProperties: false
       description: This data structure represents a set of SAML identity provider
         parameters
-      example:
-        groupNames:
-        - group1
-        - group1
-        metadataContent: <?xml version= ...
-        teamEntityId: 1234567
-        active: true
       externalDocs:
         description: Find out more about enrichments
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
@@ -328,6 +321,13 @@ components:
       additionalProperties: false
       description: This data structure represents a set of SAML identity provider
         parameters
+      example:
+        groupNames:
+        - group1
+        - group1
+        metadataUrl: https://<...>.okta.com/app/<...>/sso/saml/metadata
+        teamEntityId: 1234567
+        active: true
       externalDocs:
         description: Find out more about enrichments
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/

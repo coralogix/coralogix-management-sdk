@@ -109,6 +109,7 @@ Class | Method | HTTP request | Description
  - [NotificationCenterEntityType](docs/NotificationCenterEntityType.md)
  - [ReplaceGlobalRouterRequest](docs/ReplaceGlobalRouterRequest.md)
  - [ReplaceGlobalRouterResponse](docs/ReplaceGlobalRouterResponse.md)
+ - [RoutingLabels](docs/RoutingLabels.md)
  - [RoutingRule](docs/RoutingRule.md)
  - [RoutingTarget](docs/RoutingTarget.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)

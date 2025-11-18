@@ -268,10 +268,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/ValidateBucketRequestS3"
+                    "$ref": "#/components/schemas/ValidateBucketRequestIbm"
                   },
                   {
-                    "$ref": "#/components/schemas/ValidateBucketRequestIbm"
+                    "$ref": "#/components/schemas/ValidateBucketRequestS3"
                   }
                 ]
               }
@@ -390,10 +390,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },

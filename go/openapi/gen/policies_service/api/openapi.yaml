@@ -913,8 +913,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
       additionalProperties: false
       description: This data structure represents a filter path and values
@@ -1137,8 +1137,8 @@ components:
       type: object
     Placement:
       oneOf:
-      - $ref: "#/components/schemas/PlacementLast"
       - $ref: "#/components/schemas/PlacementFirst"
+      - $ref: "#/components/schemas/PlacementLast"
     PlacementFirst:
       additionalProperties: false
       properties:
@@ -1619,13 +1619,13 @@ components:
       type: string
     PoliciesService_UpdatePolicy_request:
       oneOf:
-      - $ref: "#/components/schemas/UpdatePolicyRequestSpanRules"
       - $ref: "#/components/schemas/UpdatePolicyRequestLogRules"
+      - $ref: "#/components/schemas/UpdatePolicyRequestSpanRules"
       type: object
     PoliciesService_CreatePolicy_request:
       oneOf:
-      - $ref: "#/components/schemas/CreatePolicyRequestSpanRules"
       - $ref: "#/components/schemas/CreatePolicyRequestLogRules"
+      - $ref: "#/components/schemas/CreatePolicyRequestSpanRules"
       type: object
     Atomic_Overwrite_Log_Policies_Request:
       additionalProperties: false

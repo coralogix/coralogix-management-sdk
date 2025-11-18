@@ -699,10 +699,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -1041,19 +1041,7 @@
       "RuleParameters": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/RuleParametersRemoveFieldsParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersJsonStringifyParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersJsonParseParameters"
-          },
-          {
             "$ref": "#/components/schemas/RuleParametersExtractParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersJsonExtractParameters"
           },
           {
             "$ref": "#/components/schemas/RuleParametersReplaceParameters"
@@ -1062,13 +1050,25 @@
             "$ref": "#/components/schemas/RuleParametersParseParameters"
           },
           {
-            "$ref": "#/components/schemas/RuleParametersExtractTimestampParameters"
-          },
-          {
             "$ref": "#/components/schemas/RuleParametersAllowParameters"
           },
           {
             "$ref": "#/components/schemas/RuleParametersBlockParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersJsonExtractParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersExtractTimestampParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersRemoveFieldsParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersJsonStringifyParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersJsonParseParameters"
           }
         ]
       },

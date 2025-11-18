@@ -141,6 +141,7 @@ Class | Method | HTTP request | Description
  - [SloTimeFrame](docs/SloTimeFrame.md)
  - [SloWindowBasedMetricSli](docs/SloWindowBasedMetricSli.md)
  - [SlosServiceBatchExecuteSloRequestsParameterInner](docs/SlosServiceBatchExecuteSloRequestsParameterInner.md)
+ - [SlosServiceCreateSloRequest](docs/SlosServiceCreateSloRequest.md)
  - [SlosServiceReplaceSloRequest](docs/SlosServiceReplaceSloRequest.md)
  - [V1Grouping](docs/V1Grouping.md)
  - [V1Revision](docs/V1Revision.md)

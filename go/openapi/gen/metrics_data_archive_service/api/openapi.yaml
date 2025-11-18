@@ -241,8 +241,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
       additionalProperties: false
       description: This data structure represents a filter path and values
@@ -504,8 +504,8 @@ components:
       type: object
     MetricsConfiguratorPublicService_ValidateBucket_request:
       oneOf:
-      - $ref: "#/components/schemas/ValidateBucketRequestS3"
       - $ref: "#/components/schemas/ValidateBucketRequestIbm"
+      - $ref: "#/components/schemas/ValidateBucketRequestS3"
       type: object
   securitySchemes:
     apiKeyAuth:

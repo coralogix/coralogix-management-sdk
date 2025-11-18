@@ -214,10 +214,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
+                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
                   },
                   {
-                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
+                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
                   }
                 ]
               }
@@ -778,10 +778,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -1136,13 +1136,13 @@
       "SloExecutionResponse": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/SloExecutionResponseCreateSloResponse"
+          },
+          {
             "$ref": "#/components/schemas/SloExecutionResponseReplaceSloResponse"
           },
           {
             "$ref": "#/components/schemas/SloExecutionResponseDeleteSloResponse"
-          },
-          {
-            "$ref": "#/components/schemas/SloExecutionResponseCreateSloResponse"
           }
         ]
       },

@@ -796,9 +796,9 @@ components:
       type: object
     ColorsBy:
       oneOf:
-      - $ref: "#/components/schemas/ColorsByStack"
       - $ref: "#/components/schemas/ColorsByGroupBy"
       - $ref: "#/components/schemas/ColorsByAggregation"
+      - $ref: "#/components/schemas/ColorsByStack"
     ColorsByAggregation:
       additionalProperties: false
       properties:
@@ -818,8 +818,6 @@ components:
           $ref: "#/components/schemas/ColorsByStack"
       type: object
     Constant:
-      example:
-        value: value
       properties:
         value:
           type: string
@@ -883,18 +881,18 @@ components:
       type: object
     Dashboard:
       oneOf:
-      - $ref: "#/components/schemas/DashboardTwoMinutesFolderIdRelativeTimeFrame"
+      - $ref: "#/components/schemas/DashboardTwoMinutesFolderPathRelativeTimeFrame"
+      - $ref: "#/components/schemas/DashboardFiveMinutesFolderPathAbsoluteTimeFrame"
+      - $ref: "#/components/schemas/DashboardOffFolderPathAbsoluteTimeFrame"
+      - $ref: "#/components/schemas/DashboardFiveMinutesFolderIdAbsoluteTimeFrame"
       - $ref: "#/components/schemas/DashboardFiveMinutesFolderIdRelativeTimeFrame"
       - $ref: "#/components/schemas/DashboardFiveMinutesFolderPathRelativeTimeFrame"
-      - $ref: "#/components/schemas/DashboardOffFolderIdRelativeTimeFrame"
-      - $ref: "#/components/schemas/DashboardTwoMinutesFolderIdAbsoluteTimeFrame"
-      - $ref: "#/components/schemas/DashboardTwoMinutesFolderPathAbsoluteTimeFrame"
-      - $ref: "#/components/schemas/DashboardTwoMinutesFolderPathRelativeTimeFrame"
-      - $ref: "#/components/schemas/DashboardFiveMinutesFolderIdAbsoluteTimeFrame"
-      - $ref: "#/components/schemas/DashboardFiveMinutesFolderPathAbsoluteTimeFrame"
       - $ref: "#/components/schemas/DashboardOffFolderIdAbsoluteTimeFrame"
-      - $ref: "#/components/schemas/DashboardOffFolderPathAbsoluteTimeFrame"
+      - $ref: "#/components/schemas/DashboardOffFolderIdRelativeTimeFrame"
       - $ref: "#/components/schemas/DashboardOffFolderPathRelativeTimeFrame"
+      - $ref: "#/components/schemas/DashboardTwoMinutesFolderIdAbsoluteTimeFrame"
+      - $ref: "#/components/schemas/DashboardTwoMinutesFolderIdRelativeTimeFrame"
+      - $ref: "#/components/schemas/DashboardTwoMinutesFolderPathAbsoluteTimeFrame"
     DashboardAction:
       description: Public actions that are always available within specific dashboard's
         context.
@@ -1527,300 +1525,6 @@ components:
       additionalProperties: false
       description: Dashboard represents the structure and configuration of a Coralogix
         Custom Dashboard.
-      example:
-        variables:
-        - displayType: VARIABLE_DISPLAY_TYPE_UNSPECIFIED
-          displayName: displayName
-          name: name
-          description: description
-          definition:
-            constant:
-              value: value
-        - displayType: VARIABLE_DISPLAY_TYPE_UNSPECIFIED
-          displayName: displayName
-          name: name
-          description: description
-          definition:
-            constant:
-              value: value
-        annotations:
-        - color: ANNOTATION_COLOR_UNSPECIFIED
-          scope:
-            allWidgets: "{}"
-          name: name
-          description: description
-          id: id
-          source:
-            metrics:
-              orientation: ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED
-              promqlQuery:
-                value: value
-              strategy:
-                startTimeMetric: "{}"
-              messageTemplate: messageTemplate
-              labels:
-              - labels
-              - labels
-          enabled: true
-        - color: ANNOTATION_COLOR_UNSPECIFIED
-          scope:
-            allWidgets: "{}"
-          name: name
-          description: description
-          id: id
-          source:
-            metrics:
-              orientation: ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED
-              promqlQuery:
-                value: value
-              strategy:
-                startTimeMetric: "{}"
-              messageTemplate: messageTemplate
-              labels:
-              - labels
-              - labels
-          enabled: true
-        description: Sample description
-        slugName: system-health-monitoring
-        filters:
-        - collapsed: true
-          displayName: displayName
-          source:
-            logs:
-              observationField:
-                keypath:
-                - keypath
-                - keypath
-                scope: DATASET_SCOPE_UNSPECIFIED
-              field: field
-              operator:
-                notEquals:
-                  selection:
-                    list:
-                      values:
-                      - values
-                      - values
-          enabled: true
-        - collapsed: true
-          displayName: displayName
-          source:
-            logs:
-              observationField:
-                keypath:
-                - keypath
-                - keypath
-                scope: DATASET_SCOPE_UNSPECIFIED
-              field: field
-              operator:
-                notEquals:
-                  selection:
-                    list:
-                      values:
-                      - values
-                      - values
-          enabled: true
-        folderId:
-          value: value
-        layout:
-          sections:
-          - options:
-              internal: "{}"
-            id:
-              value: value
-            rows:
-            - appearance:
-                height: 0
-              id:
-                value: value
-              widgets:
-              - createdAt: 2000-01-23T04:56:07.000+00:00
-                appearance:
-                  width: 6
-                description: "{\"value\":\"Average delay of application\"}"
-                definition:
-                  markdown:
-                    markdownText: "{\"value\":\"# This is a markdown example\"}"
-                    tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                      }"
-                id:
-                  value: value
-                title: "{\"value\":\"Gauge\"}"
-                updatedAt: 2000-01-23T04:56:07.000+00:00
-              - createdAt: 2000-01-23T04:56:07.000+00:00
-                appearance:
-                  width: 6
-                description: "{\"value\":\"Average delay of application\"}"
-                definition:
-                  markdown:
-                    markdownText: "{\"value\":\"# This is a markdown example\"}"
-                    tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                      }"
-                id:
-                  value: value
-                title: "{\"value\":\"Gauge\"}"
-                updatedAt: 2000-01-23T04:56:07.000+00:00
-            - appearance:
-                height: 0
-              id:
-                value: value
-              widgets:
-              - createdAt: 2000-01-23T04:56:07.000+00:00
-                appearance:
-                  width: 6
-                description: "{\"value\":\"Average delay of application\"}"
-                definition:
-                  markdown:
-                    markdownText: "{\"value\":\"# This is a markdown example\"}"
-                    tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                      }"
-                id:
-                  value: value
-                title: "{\"value\":\"Gauge\"}"
-                updatedAt: 2000-01-23T04:56:07.000+00:00
-              - createdAt: 2000-01-23T04:56:07.000+00:00
-                appearance:
-                  width: 6
-                description: "{\"value\":\"Average delay of application\"}"
-                definition:
-                  markdown:
-                    markdownText: "{\"value\":\"# This is a markdown example\"}"
-                    tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                      }"
-                id:
-                  value: value
-                title: "{\"value\":\"Gauge\"}"
-                updatedAt: 2000-01-23T04:56:07.000+00:00
-          - options:
-              internal: "{}"
-            id:
-              value: value
-            rows:
-            - appearance:
-                height: 0
-              id:
-                value: value
-              widgets:
-              - createdAt: 2000-01-23T04:56:07.000+00:00
-                appearance:
-                  width: 6
-                description: "{\"value\":\"Average delay of application\"}"
-                definition:
-                  markdown:
-                    markdownText: "{\"value\":\"# This is a markdown example\"}"
-                    tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                      }"
-                id:
-                  value: value
-                title: "{\"value\":\"Gauge\"}"
-                updatedAt: 2000-01-23T04:56:07.000+00:00
-              - createdAt: 2000-01-23T04:56:07.000+00:00
-                appearance:
-                  width: 6
-                description: "{\"value\":\"Average delay of application\"}"
-                definition:
-                  markdown:
-                    markdownText: "{\"value\":\"# This is a markdown example\"}"
-                    tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                      }"
-                id:
-                  value: value
-                title: "{\"value\":\"Gauge\"}"
-                updatedAt: 2000-01-23T04:56:07.000+00:00
-            - appearance:
-                height: 0
-              id:
-                value: value
-              widgets:
-              - createdAt: 2000-01-23T04:56:07.000+00:00
-                appearance:
-                  width: 6
-                description: "{\"value\":\"Average delay of application\"}"
-                definition:
-                  markdown:
-                    markdownText: "{\"value\":\"# This is a markdown example\"}"
-                    tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                      }"
-                id:
-                  value: value
-                title: "{\"value\":\"Gauge\"}"
-                updatedAt: 2000-01-23T04:56:07.000+00:00
-              - createdAt: 2000-01-23T04:56:07.000+00:00
-                appearance:
-                  width: 6
-                description: "{\"value\":\"Average delay of application\"}"
-                definition:
-                  markdown:
-                    markdownText: "{\"value\":\"# This is a markdown example\"}"
-                    tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                      }"
-                id:
-                  value: value
-                title: "{\"value\":\"Gauge\"}"
-                updatedAt: 2000-01-23T04:56:07.000+00:00
-        name: Example Name
-        twoMinutes: "{}"
-        id: GZLHSeqelCbD3I7HbIDtL
-        actions:
-        - widgetId: widgetId
-          name: name
-          shouldOpenInNewWindow: true
-          definition:
-            customAction:
-              url: url
-          id: id
-          dataSource: ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED
-        - widgetId: widgetId
-          name: name
-          shouldOpenInNewWindow: true
-          definition:
-            customAction:
-              url: url
-          id: id
-          dataSource: ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED
-        relativeTimeFrame: relativeTimeFrame
-        variablesV2:
-        - displayType: VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED
-          displayName: displayName
-          name: name
-          description: description
-          displayFullRow: true
-          source:
-            static:
-              valuesOrderDirection: ORDER_DIRECTION_UNSPECIFIED
-              values:
-              - isDefault: true
-                label: label
-                value: value
-              - isDefault: true
-                label: label
-                value: value
-              allOption:
-                includeAll: true
-                label: label
-          value:
-            multiString:
-              all: "{}"
-        - displayType: VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED
-          displayName: displayName
-          name: name
-          description: description
-          displayFullRow: true
-          source:
-            static:
-              valuesOrderDirection: ORDER_DIRECTION_UNSPECIFIED
-              values:
-              - isDefault: true
-                label: label
-                value: value
-              - isDefault: true
-                label: label
-                value: value
-              allOption:
-                includeAll: true
-                label: label
-          value:
-            multiString:
-              all: "{}"
       externalDocs:
         description: Learn more about Custom Dashboards in our documentation.
         url: https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
@@ -1939,6 +1643,678 @@ components:
       additionalProperties: false
       description: Dashboard represents the structure and configuration of a Coralogix
         Custom Dashboard.
+      example:
+        variables:
+        - displayType: VARIABLE_DISPLAY_TYPE_UNSPECIFIED
+          displayName: displayName
+          name: name
+          description: description
+          definition:
+            multiSelect:
+              valuesOrderDirection: ORDER_DIRECTION_UNSPECIFIED
+              selection:
+                list:
+                  values:
+                  - values
+                  - values
+                  labels:
+                  - labels
+                  - labels
+              selectionOptions:
+                selectionType: SELECTION_TYPE_UNSPECIFIED
+              source:
+                logsPath:
+                  observationField:
+                    keypath:
+                    - keypath
+                    - keypath
+                    scope: DATASET_SCOPE_UNSPECIFIED
+                  value: value
+              selected:
+              - selected
+              - selected
+        - displayType: VARIABLE_DISPLAY_TYPE_UNSPECIFIED
+          displayName: displayName
+          name: name
+          description: description
+          definition:
+            multiSelect:
+              valuesOrderDirection: ORDER_DIRECTION_UNSPECIFIED
+              selection:
+                list:
+                  values:
+                  - values
+                  - values
+                  labels:
+                  - labels
+                  - labels
+              selectionOptions:
+                selectionType: SELECTION_TYPE_UNSPECIFIED
+              source:
+                logsPath:
+                  observationField:
+                    keypath:
+                    - keypath
+                    - keypath
+                    scope: DATASET_SCOPE_UNSPECIFIED
+                  value: value
+              selected:
+              - selected
+              - selected
+        annotations:
+        - color: ANNOTATION_COLOR_UNSPECIFIED
+          scope:
+            allWidgets: "{}"
+          name: name
+          description: description
+          id: id
+          source:
+            metrics:
+              orientation: ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED
+              promqlQuery:
+                value: value
+              strategy:
+                startTimeMetric: "{}"
+              messageTemplate: messageTemplate
+              labels:
+              - labels
+              - labels
+          enabled: true
+        - color: ANNOTATION_COLOR_UNSPECIFIED
+          scope:
+            allWidgets: "{}"
+          name: name
+          description: description
+          id: id
+          source:
+            metrics:
+              orientation: ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED
+              promqlQuery:
+                value: value
+              strategy:
+                startTimeMetric: "{}"
+              messageTemplate: messageTemplate
+              labels:
+              - labels
+              - labels
+          enabled: true
+        description: Sample description
+        slugName: system-health-monitoring
+        filters:
+        - collapsed: true
+          displayName: displayName
+          source:
+            logs:
+              observationField:
+                keypath:
+                - keypath
+                - keypath
+                scope: DATASET_SCOPE_UNSPECIFIED
+              field: field
+              operator:
+                equals:
+                  selection:
+                    all: "{}"
+          enabled: true
+        - collapsed: true
+          displayName: displayName
+          source:
+            logs:
+              observationField:
+                keypath:
+                - keypath
+                - keypath
+                scope: DATASET_SCOPE_UNSPECIFIED
+              field: field
+              operator:
+                equals:
+                  selection:
+                    all: "{}"
+          enabled: true
+        folderPath:
+          segments:
+          - segments
+          - segments
+        layout:
+          sections:
+          - options:
+              internal: "{}"
+            id:
+              value: value
+            rows:
+            - appearance:
+                height: 0
+              id:
+                value: value
+              widgets:
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                appearance:
+                  width: 6
+                description: "{\"value\":\"Average delay of application\"}"
+                definition:
+                  gauge:
+                    showInnerArc: false
+                    max: 150000
+                    legend:
+                      columns:
+                      - LEGEND_COLUMN_UNSPECIFIED
+                      - LEGEND_COLUMN_UNSPECIFIED
+                      groupByQuery: true
+                      isVisible: true
+                      placement: LEGEND_PLACEMENT_UNSPECIFIED
+                    query:
+                      metrics:
+                        promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                        editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                        aggregation: AGGREGATION_UNSPECIFIED
+                        filters:
+                        - metric: metric
+                          label: label
+                          operator: null
+                        - metric: metric
+                          label: label
+                          operator: null
+                        promqlQuery:
+                          value: value
+                        timeFrame:
+                          absoluteTimeFrame:
+                            from: 2000-01-23T04:56:07.000+00:00
+                            to: 2000-01-23T04:56:07.000+00:00
+                    displaySeriesName: true
+                    customUnit: "{\"value\":\"kvs\"}"
+                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                    decimalPrecision: false
+                    thresholds:
+                    - color: color
+                      from: 1.4658129805029452
+                      label: label
+                    - color: color
+                      from: 1.4658129805029452
+                      label: label
+                    unit: UNIT_UNSPECIFIED
+                    min: 0
+                    thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                    decimal: 3
+                    showOuterArc: true
+                    legendBy: LEGEND_BY_UNSPECIFIED
+                    thresholdType: THRESHOLD_TYPE_UNSPECIFIED
+                id:
+                  value: value
+                title: "{\"value\":\"Gauge\"}"
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                appearance:
+                  width: 6
+                description: "{\"value\":\"Average delay of application\"}"
+                definition:
+                  gauge:
+                    showInnerArc: false
+                    max: 150000
+                    legend:
+                      columns:
+                      - LEGEND_COLUMN_UNSPECIFIED
+                      - LEGEND_COLUMN_UNSPECIFIED
+                      groupByQuery: true
+                      isVisible: true
+                      placement: LEGEND_PLACEMENT_UNSPECIFIED
+                    query:
+                      metrics:
+                        promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                        editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                        aggregation: AGGREGATION_UNSPECIFIED
+                        filters:
+                        - metric: metric
+                          label: label
+                          operator: null
+                        - metric: metric
+                          label: label
+                          operator: null
+                        promqlQuery:
+                          value: value
+                        timeFrame:
+                          absoluteTimeFrame:
+                            from: 2000-01-23T04:56:07.000+00:00
+                            to: 2000-01-23T04:56:07.000+00:00
+                    displaySeriesName: true
+                    customUnit: "{\"value\":\"kvs\"}"
+                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                    decimalPrecision: false
+                    thresholds:
+                    - color: color
+                      from: 1.4658129805029452
+                      label: label
+                    - color: color
+                      from: 1.4658129805029452
+                      label: label
+                    unit: UNIT_UNSPECIFIED
+                    min: 0
+                    thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                    decimal: 3
+                    showOuterArc: true
+                    legendBy: LEGEND_BY_UNSPECIFIED
+                    thresholdType: THRESHOLD_TYPE_UNSPECIFIED
+                id:
+                  value: value
+                title: "{\"value\":\"Gauge\"}"
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+            - appearance:
+                height: 0
+              id:
+                value: value
+              widgets:
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                appearance:
+                  width: 6
+                description: "{\"value\":\"Average delay of application\"}"
+                definition:
+                  gauge:
+                    showInnerArc: false
+                    max: 150000
+                    legend:
+                      columns:
+                      - LEGEND_COLUMN_UNSPECIFIED
+                      - LEGEND_COLUMN_UNSPECIFIED
+                      groupByQuery: true
+                      isVisible: true
+                      placement: LEGEND_PLACEMENT_UNSPECIFIED
+                    query:
+                      metrics:
+                        promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                        editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                        aggregation: AGGREGATION_UNSPECIFIED
+                        filters:
+                        - metric: metric
+                          label: label
+                          operator: null
+                        - metric: metric
+                          label: label
+                          operator: null
+                        promqlQuery:
+                          value: value
+                        timeFrame:
+                          absoluteTimeFrame:
+                            from: 2000-01-23T04:56:07.000+00:00
+                            to: 2000-01-23T04:56:07.000+00:00
+                    displaySeriesName: true
+                    customUnit: "{\"value\":\"kvs\"}"
+                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                    decimalPrecision: false
+                    thresholds:
+                    - color: color
+                      from: 1.4658129805029452
+                      label: label
+                    - color: color
+                      from: 1.4658129805029452
+                      label: label
+                    unit: UNIT_UNSPECIFIED
+                    min: 0
+                    thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                    decimal: 3
+                    showOuterArc: true
+                    legendBy: LEGEND_BY_UNSPECIFIED
+                    thresholdType: THRESHOLD_TYPE_UNSPECIFIED
+                id:
+                  value: value
+                title: "{\"value\":\"Gauge\"}"
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                appearance:
+                  width: 6
+                description: "{\"value\":\"Average delay of application\"}"
+                definition:
+                  gauge:
+                    showInnerArc: false
+                    max: 150000
+                    legend:
+                      columns:
+                      - LEGEND_COLUMN_UNSPECIFIED
+                      - LEGEND_COLUMN_UNSPECIFIED
+                      groupByQuery: true
+                      isVisible: true
+                      placement: LEGEND_PLACEMENT_UNSPECIFIED
+                    query:
+                      metrics:
+                        promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                        editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                        aggregation: AGGREGATION_UNSPECIFIED
+                        filters:
+                        - metric: metric
+                          label: label
+                          operator: null
+                        - metric: metric
+                          label: label
+                          operator: null
+                        promqlQuery:
+                          value: value
+                        timeFrame:
+                          absoluteTimeFrame:
+                            from: 2000-01-23T04:56:07.000+00:00
+                            to: 2000-01-23T04:56:07.000+00:00
+                    displaySeriesName: true
+                    customUnit: "{\"value\":\"kvs\"}"
+                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                    decimalPrecision: false
+                    thresholds:
+                    - color: color
+                      from: 1.4658129805029452
+                      label: label
+                    - color: color
+                      from: 1.4658129805029452
+                      label: label
+                    unit: UNIT_UNSPECIFIED
+                    min: 0
+                    thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                    decimal: 3
+                    showOuterArc: true
+                    legendBy: LEGEND_BY_UNSPECIFIED
+                    thresholdType: THRESHOLD_TYPE_UNSPECIFIED
+                id:
+                  value: value
+                title: "{\"value\":\"Gauge\"}"
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+          - options:
+              internal: "{}"
+            id:
+              value: value
+            rows:
+            - appearance:
+                height: 0
+              id:
+                value: value
+              widgets:
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                appearance:
+                  width: 6
+                description: "{\"value\":\"Average delay of application\"}"
+                definition:
+                  gauge:
+                    showInnerArc: false
+                    max: 150000
+                    legend:
+                      columns:
+                      - LEGEND_COLUMN_UNSPECIFIED
+                      - LEGEND_COLUMN_UNSPECIFIED
+                      groupByQuery: true
+                      isVisible: true
+                      placement: LEGEND_PLACEMENT_UNSPECIFIED
+                    query:
+                      metrics:
+                        promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                        editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                        aggregation: AGGREGATION_UNSPECIFIED
+                        filters:
+                        - metric: metric
+                          label: label
+                          operator: null
+                        - metric: metric
+                          label: label
+                          operator: null
+                        promqlQuery:
+                          value: value
+                        timeFrame:
+                          absoluteTimeFrame:
+                            from: 2000-01-23T04:56:07.000+00:00
+                            to: 2000-01-23T04:56:07.000+00:00
+                    displaySeriesName: true
+                    customUnit: "{\"value\":\"kvs\"}"
+                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                    decimalPrecision: false
+                    thresholds:
+                    - color: color
+                      from: 1.4658129805029452
+                      label: label
+                    - color: color
+                      from: 1.4658129805029452
+                      label: label
+                    unit: UNIT_UNSPECIFIED
+                    min: 0
+                    thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                    decimal: 3
+                    showOuterArc: true
+                    legendBy: LEGEND_BY_UNSPECIFIED
+                    thresholdType: THRESHOLD_TYPE_UNSPECIFIED
+                id:
+                  value: value
+                title: "{\"value\":\"Gauge\"}"
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                appearance:
+                  width: 6
+                description: "{\"value\":\"Average delay of application\"}"
+                definition:
+                  gauge:
+                    showInnerArc: false
+                    max: 150000
+                    legend:
+                      columns:
+                      - LEGEND_COLUMN_UNSPECIFIED
+                      - LEGEND_COLUMN_UNSPECIFIED
+                      groupByQuery: true
+                      isVisible: true
+                      placement: LEGEND_PLACEMENT_UNSPECIFIED
+                    query:
+                      metrics:
+                        promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                        editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                        aggregation: AGGREGATION_UNSPECIFIED
+                        filters:
+                        - metric: metric
+                          label: label
+                          operator: null
+                        - metric: metric
+                          label: label
+                          operator: null
+                        promqlQuery:
+                          value: value
+                        timeFrame:
+                          absoluteTimeFrame:
+                            from: 2000-01-23T04:56:07.000+00:00
+                            to: 2000-01-23T04:56:07.000+00:00
+                    displaySeriesName: true
+                    customUnit: "{\"value\":\"kvs\"}"
+                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                    decimalPrecision: false
+                    thresholds:
+                    - color: color
+                      from: 1.4658129805029452
+                      label: label
+                    - color: color
+                      from: 1.4658129805029452
+                      label: label
+                    unit: UNIT_UNSPECIFIED
+                    min: 0
+                    thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                    decimal: 3
+                    showOuterArc: true
+                    legendBy: LEGEND_BY_UNSPECIFIED
+                    thresholdType: THRESHOLD_TYPE_UNSPECIFIED
+                id:
+                  value: value
+                title: "{\"value\":\"Gauge\"}"
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+            - appearance:
+                height: 0
+              id:
+                value: value
+              widgets:
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                appearance:
+                  width: 6
+                description: "{\"value\":\"Average delay of application\"}"
+                definition:
+                  gauge:
+                    showInnerArc: false
+                    max: 150000
+                    legend:
+                      columns:
+                      - LEGEND_COLUMN_UNSPECIFIED
+                      - LEGEND_COLUMN_UNSPECIFIED
+                      groupByQuery: true
+                      isVisible: true
+                      placement: LEGEND_PLACEMENT_UNSPECIFIED
+                    query:
+                      metrics:
+                        promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                        editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                        aggregation: AGGREGATION_UNSPECIFIED
+                        filters:
+                        - metric: metric
+                          label: label
+                          operator: null
+                        - metric: metric
+                          label: label
+                          operator: null
+                        promqlQuery:
+                          value: value
+                        timeFrame:
+                          absoluteTimeFrame:
+                            from: 2000-01-23T04:56:07.000+00:00
+                            to: 2000-01-23T04:56:07.000+00:00
+                    displaySeriesName: true
+                    customUnit: "{\"value\":\"kvs\"}"
+                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                    decimalPrecision: false
+                    thresholds:
+                    - color: color
+                      from: 1.4658129805029452
+                      label: label
+                    - color: color
+                      from: 1.4658129805029452
+                      label: label
+                    unit: UNIT_UNSPECIFIED
+                    min: 0
+                    thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                    decimal: 3
+                    showOuterArc: true
+                    legendBy: LEGEND_BY_UNSPECIFIED
+                    thresholdType: THRESHOLD_TYPE_UNSPECIFIED
+                id:
+                  value: value
+                title: "{\"value\":\"Gauge\"}"
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                appearance:
+                  width: 6
+                description: "{\"value\":\"Average delay of application\"}"
+                definition:
+                  gauge:
+                    showInnerArc: false
+                    max: 150000
+                    legend:
+                      columns:
+                      - LEGEND_COLUMN_UNSPECIFIED
+                      - LEGEND_COLUMN_UNSPECIFIED
+                      groupByQuery: true
+                      isVisible: true
+                      placement: LEGEND_PLACEMENT_UNSPECIFIED
+                    query:
+                      metrics:
+                        promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                        editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                        aggregation: AGGREGATION_UNSPECIFIED
+                        filters:
+                        - metric: metric
+                          label: label
+                          operator: null
+                        - metric: metric
+                          label: label
+                          operator: null
+                        promqlQuery:
+                          value: value
+                        timeFrame:
+                          absoluteTimeFrame:
+                            from: 2000-01-23T04:56:07.000+00:00
+                            to: 2000-01-23T04:56:07.000+00:00
+                    displaySeriesName: true
+                    customUnit: "{\"value\":\"kvs\"}"
+                    dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                    decimalPrecision: false
+                    thresholds:
+                    - color: color
+                      from: 1.4658129805029452
+                      label: label
+                    - color: color
+                      from: 1.4658129805029452
+                      label: label
+                    unit: UNIT_UNSPECIFIED
+                    min: 0
+                    thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                    decimal: 3
+                    showOuterArc: true
+                    legendBy: LEGEND_BY_UNSPECIFIED
+                    thresholdType: THRESHOLD_TYPE_UNSPECIFIED
+                id:
+                  value: value
+                title: "{\"value\":\"Gauge\"}"
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+        name: Example Name
+        twoMinutes: "{}"
+        id: GZLHSeqelCbD3I7HbIDtL
+        actions:
+        - widgetId: widgetId
+          name: name
+          shouldOpenInNewWindow: true
+          definition:
+            customAction:
+              url: url
+          id: id
+          dataSource: ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED
+        - widgetId: widgetId
+          name: name
+          shouldOpenInNewWindow: true
+          definition:
+            customAction:
+              url: url
+          id: id
+          dataSource: ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED
+        relativeTimeFrame: relativeTimeFrame
+        variablesV2:
+        - displayType: VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED
+          displayName: displayName
+          name: name
+          description: description
+          displayFullRow: true
+          source:
+            static:
+              valuesOrderDirection: null
+              values:
+              - isDefault: true
+                label: label
+                value: value
+              - isDefault: true
+                label: label
+                value: value
+              allOption:
+                includeAll: true
+                label: label
+          value:
+            singleString:
+              value:
+                label: label
+                value: value
+        - displayType: VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED
+          displayName: displayName
+          name: name
+          description: description
+          displayFullRow: true
+          source:
+            static:
+              valuesOrderDirection: null
+              values:
+              - isDefault: true
+                label: label
+                value: value
+              - isDefault: true
+                label: label
+                value: value
+              allOption:
+                includeAll: true
+                label: label
+          value:
+            singleString:
+              value:
+                label: label
+                value: value
       externalDocs:
         description: Learn more about Custom Dashboards in our documentation.
         url: https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
@@ -2235,10 +2611,10 @@ components:
       type: string
     Dynamic.Query:
       oneOf:
-      - $ref: "#/components/schemas/DynamicQueryLogs"
-      - $ref: "#/components/schemas/DynamicQuerySpans"
       - $ref: "#/components/schemas/DynamicQueryMetrics"
       - $ref: "#/components/schemas/DynamicQueryDataprime"
+      - $ref: "#/components/schemas/DynamicQueryLogs"
+      - $ref: "#/components/schemas/DynamicQuerySpans"
     DynamicQueryDataprime:
       additionalProperties: false
       properties:
@@ -2289,6 +2665,8 @@ components:
     EqualsSelectionAll:
       additionalProperties: false
       description: This data structure defines the values for the equality comparison.
+      example:
+        all: "{}"
       externalDocs:
         url: ""
       properties:
@@ -2371,6 +2749,9 @@ components:
       type: object
     Filter.Equals:
       description: This data structure represents an equality comparison operation.
+      example:
+        selection:
+          all: "{}"
       externalDocs:
         url: ""
       properties:
@@ -2388,12 +2769,9 @@ components:
           scope: DATASET_SCOPE_UNSPECIFIED
         field: field
         operator:
-          notEquals:
+          equals:
             selection:
-              list:
-                values:
-                - values
-                - values
+              all: "{}"
       externalDocs:
         url: ""
       properties:
@@ -2408,12 +2786,6 @@ components:
       type: object
     Filter.NotEquals:
       description: This data structure represents a non-equality comparison operation.
-      example:
-        selection:
-          list:
-            values:
-            - values
-            - values
       externalDocs:
         url: ""
       properties:
@@ -2423,8 +2795,8 @@ components:
       type: object
     Filter.Operator:
       oneOf:
-      - $ref: "#/components/schemas/FilterOperatorNotEquals"
       - $ref: "#/components/schemas/FilterOperatorEquals"
+      - $ref: "#/components/schemas/FilterOperatorNotEquals"
     Filter.Source:
       oneOf:
       - $ref: "#/components/schemas/FilterSourceLogs"
@@ -2433,6 +2805,10 @@ components:
     FilterOperatorEquals:
       additionalProperties: false
       description: This data structure defines the comparison operation for the filter.
+      example:
+        equals:
+          selection:
+            all: "{}"
       externalDocs:
         url: ""
       properties:
@@ -2443,13 +2819,6 @@ components:
     FilterOperatorNotEquals:
       additionalProperties: false
       description: This data structure defines the comparison operation for the filter.
-      example:
-        notEquals:
-          selection:
-            list:
-              values:
-              - values
-              - values
       externalDocs:
         url: ""
       properties:
@@ -2459,8 +2828,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
       additionalProperties: false
       description: This data structure represents a filter path and values
@@ -2505,12 +2874,9 @@ components:
             scope: DATASET_SCOPE_UNSPECIFIED
           field: field
           operator:
-            notEquals:
+            equals:
               selection:
-                list:
-                  values:
-                  - values
-                  - values
+                all: "{}"
       externalDocs:
         url: ""
       properties:
@@ -2554,6 +2920,10 @@ components:
       title: Filters
       type: object
     FolderPath:
+      example:
+        segments:
+        - segments
+        - segments
       properties:
         segments:
           items:
@@ -2609,6 +2979,23 @@ components:
       type: object
     Gauge.MetricsQuery:
       description: A metrics variant of the query
+      example:
+        promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+        editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+        aggregation: AGGREGATION_UNSPECIFIED
+        filters:
+        - metric: metric
+          label: label
+          operator: null
+        - metric: metric
+          label: label
+          operator: null
+        promqlQuery:
+          value: value
+        timeFrame:
+          absoluteTimeFrame:
+            from: 2000-01-23T04:56:07.000+00:00
+            to: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
       properties:
@@ -2630,10 +3017,10 @@ components:
       type: object
     Gauge.Query:
       oneOf:
+      - $ref: "#/components/schemas/GaugeQueryMetrics"
       - $ref: "#/components/schemas/GaugeQueryLogs"
       - $ref: "#/components/schemas/GaugeQuerySpans"
       - $ref: "#/components/schemas/GaugeQueryDataprime"
-      - $ref: "#/components/schemas/GaugeQueryMetrics"
     Gauge.SpansQuery:
       description: A spans variant of the query
       externalDocs:
@@ -2663,6 +3050,10 @@ components:
       type: object
     Gauge.Threshold:
       description: Definition of a single gauge threshold
+      example:
+        color: color
+        from: 1.4658129805029452
+        label: label
       externalDocs:
         url: ""
       properties:
@@ -2723,6 +3114,24 @@ components:
       type: object
     GaugeQueryMetrics:
       additionalProperties: false
+      example:
+        metrics:
+          promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+          editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+          aggregation: AGGREGATION_UNSPECIFIED
+          filters:
+          - metric: metric
+            label: label
+            operator: null
+          - metric: metric
+            label: label
+            operator: null
+          promqlQuery:
+            value: value
+          timeFrame:
+            absoluteTimeFrame:
+              from: 2000-01-23T04:56:07.000+00:00
+              to: 2000-01-23T04:56:07.000+00:00
       properties:
         metrics:
           $ref: "#/components/schemas/Gauge.MetricsQuery"
@@ -2753,15 +3162,57 @@ components:
             name: name
             description: description
             definition:
-              constant:
-                value: value
+              multiSelect:
+                valuesOrderDirection: ORDER_DIRECTION_UNSPECIFIED
+                selection:
+                  list:
+                    values:
+                    - values
+                    - values
+                    labels:
+                    - labels
+                    - labels
+                selectionOptions:
+                  selectionType: SELECTION_TYPE_UNSPECIFIED
+                source:
+                  logsPath:
+                    observationField:
+                      keypath:
+                      - keypath
+                      - keypath
+                      scope: DATASET_SCOPE_UNSPECIFIED
+                    value: value
+                selected:
+                - selected
+                - selected
           - displayType: VARIABLE_DISPLAY_TYPE_UNSPECIFIED
             displayName: displayName
             name: name
             description: description
             definition:
-              constant:
-                value: value
+              multiSelect:
+                valuesOrderDirection: ORDER_DIRECTION_UNSPECIFIED
+                selection:
+                  list:
+                    values:
+                    - values
+                    - values
+                    labels:
+                    - labels
+                    - labels
+                selectionOptions:
+                  selectionType: SELECTION_TYPE_UNSPECIFIED
+                source:
+                  logsPath:
+                    observationField:
+                      keypath:
+                      - keypath
+                      - keypath
+                      scope: DATASET_SCOPE_UNSPECIFIED
+                    value: value
+                selected:
+                - selected
+                - selected
           annotations:
           - color: ANNOTATION_COLOR_UNSPECIFIED
             scope:
@@ -2813,12 +3264,9 @@ components:
                   scope: DATASET_SCOPE_UNSPECIFIED
                 field: field
                 operator:
-                  notEquals:
+                  equals:
                     selection:
-                      list:
-                        values:
-                        - values
-                        - values
+                      all: "{}"
             enabled: true
           - collapsed: true
             displayName: displayName
@@ -2831,15 +3279,14 @@ components:
                   scope: DATASET_SCOPE_UNSPECIFIED
                 field: field
                 operator:
-                  notEquals:
+                  equals:
                     selection:
-                      list:
-                        values:
-                        - values
-                        - values
+                      all: "{}"
             enabled: true
-          folderId:
-            value: value
+          folderPath:
+            segments:
+            - segments
+            - segments
           layout:
             sections:
             - options:
@@ -2857,10 +3304,52 @@ components:
                     width: 6
                   description: "{\"value\":\"Average delay of application\"}"
                   definition:
-                    markdown:
-                      markdownText: "{\"value\":\"# This is a markdown example\"}"
-                      tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                        }"
+                    gauge:
+                      showInnerArc: false
+                      max: 150000
+                      legend:
+                        columns:
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        groupByQuery: true
+                        isVisible: true
+                        placement: LEGEND_PLACEMENT_UNSPECIFIED
+                      query:
+                        metrics:
+                          promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                          editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                          aggregation: AGGREGATION_UNSPECIFIED
+                          filters:
+                          - metric: metric
+                            label: label
+                            operator: null
+                          - metric: metric
+                            label: label
+                            operator: null
+                          promqlQuery:
+                            value: value
+                          timeFrame:
+                            absoluteTimeFrame:
+                              from: 2000-01-23T04:56:07.000+00:00
+                              to: 2000-01-23T04:56:07.000+00:00
+                      displaySeriesName: true
+                      customUnit: "{\"value\":\"kvs\"}"
+                      dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                      decimalPrecision: false
+                      thresholds:
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      unit: UNIT_UNSPECIFIED
+                      min: 0
+                      thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                      decimal: 3
+                      showOuterArc: true
+                      legendBy: LEGEND_BY_UNSPECIFIED
+                      thresholdType: THRESHOLD_TYPE_UNSPECIFIED
                   id:
                     value: value
                   title: "{\"value\":\"Gauge\"}"
@@ -2870,10 +3359,52 @@ components:
                     width: 6
                   description: "{\"value\":\"Average delay of application\"}"
                   definition:
-                    markdown:
-                      markdownText: "{\"value\":\"# This is a markdown example\"}"
-                      tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                        }"
+                    gauge:
+                      showInnerArc: false
+                      max: 150000
+                      legend:
+                        columns:
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        groupByQuery: true
+                        isVisible: true
+                        placement: LEGEND_PLACEMENT_UNSPECIFIED
+                      query:
+                        metrics:
+                          promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                          editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                          aggregation: AGGREGATION_UNSPECIFIED
+                          filters:
+                          - metric: metric
+                            label: label
+                            operator: null
+                          - metric: metric
+                            label: label
+                            operator: null
+                          promqlQuery:
+                            value: value
+                          timeFrame:
+                            absoluteTimeFrame:
+                              from: 2000-01-23T04:56:07.000+00:00
+                              to: 2000-01-23T04:56:07.000+00:00
+                      displaySeriesName: true
+                      customUnit: "{\"value\":\"kvs\"}"
+                      dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                      decimalPrecision: false
+                      thresholds:
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      unit: UNIT_UNSPECIFIED
+                      min: 0
+                      thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                      decimal: 3
+                      showOuterArc: true
+                      legendBy: LEGEND_BY_UNSPECIFIED
+                      thresholdType: THRESHOLD_TYPE_UNSPECIFIED
                   id:
                     value: value
                   title: "{\"value\":\"Gauge\"}"
@@ -2888,10 +3419,52 @@ components:
                     width: 6
                   description: "{\"value\":\"Average delay of application\"}"
                   definition:
-                    markdown:
-                      markdownText: "{\"value\":\"# This is a markdown example\"}"
-                      tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                        }"
+                    gauge:
+                      showInnerArc: false
+                      max: 150000
+                      legend:
+                        columns:
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        groupByQuery: true
+                        isVisible: true
+                        placement: LEGEND_PLACEMENT_UNSPECIFIED
+                      query:
+                        metrics:
+                          promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                          editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                          aggregation: AGGREGATION_UNSPECIFIED
+                          filters:
+                          - metric: metric
+                            label: label
+                            operator: null
+                          - metric: metric
+                            label: label
+                            operator: null
+                          promqlQuery:
+                            value: value
+                          timeFrame:
+                            absoluteTimeFrame:
+                              from: 2000-01-23T04:56:07.000+00:00
+                              to: 2000-01-23T04:56:07.000+00:00
+                      displaySeriesName: true
+                      customUnit: "{\"value\":\"kvs\"}"
+                      dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                      decimalPrecision: false
+                      thresholds:
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      unit: UNIT_UNSPECIFIED
+                      min: 0
+                      thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                      decimal: 3
+                      showOuterArc: true
+                      legendBy: LEGEND_BY_UNSPECIFIED
+                      thresholdType: THRESHOLD_TYPE_UNSPECIFIED
                   id:
                     value: value
                   title: "{\"value\":\"Gauge\"}"
@@ -2901,10 +3474,52 @@ components:
                     width: 6
                   description: "{\"value\":\"Average delay of application\"}"
                   definition:
-                    markdown:
-                      markdownText: "{\"value\":\"# This is a markdown example\"}"
-                      tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                        }"
+                    gauge:
+                      showInnerArc: false
+                      max: 150000
+                      legend:
+                        columns:
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        groupByQuery: true
+                        isVisible: true
+                        placement: LEGEND_PLACEMENT_UNSPECIFIED
+                      query:
+                        metrics:
+                          promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                          editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                          aggregation: AGGREGATION_UNSPECIFIED
+                          filters:
+                          - metric: metric
+                            label: label
+                            operator: null
+                          - metric: metric
+                            label: label
+                            operator: null
+                          promqlQuery:
+                            value: value
+                          timeFrame:
+                            absoluteTimeFrame:
+                              from: 2000-01-23T04:56:07.000+00:00
+                              to: 2000-01-23T04:56:07.000+00:00
+                      displaySeriesName: true
+                      customUnit: "{\"value\":\"kvs\"}"
+                      dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                      decimalPrecision: false
+                      thresholds:
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      unit: UNIT_UNSPECIFIED
+                      min: 0
+                      thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                      decimal: 3
+                      showOuterArc: true
+                      legendBy: LEGEND_BY_UNSPECIFIED
+                      thresholdType: THRESHOLD_TYPE_UNSPECIFIED
                   id:
                     value: value
                   title: "{\"value\":\"Gauge\"}"
@@ -2924,10 +3539,52 @@ components:
                     width: 6
                   description: "{\"value\":\"Average delay of application\"}"
                   definition:
-                    markdown:
-                      markdownText: "{\"value\":\"# This is a markdown example\"}"
-                      tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                        }"
+                    gauge:
+                      showInnerArc: false
+                      max: 150000
+                      legend:
+                        columns:
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        groupByQuery: true
+                        isVisible: true
+                        placement: LEGEND_PLACEMENT_UNSPECIFIED
+                      query:
+                        metrics:
+                          promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                          editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                          aggregation: AGGREGATION_UNSPECIFIED
+                          filters:
+                          - metric: metric
+                            label: label
+                            operator: null
+                          - metric: metric
+                            label: label
+                            operator: null
+                          promqlQuery:
+                            value: value
+                          timeFrame:
+                            absoluteTimeFrame:
+                              from: 2000-01-23T04:56:07.000+00:00
+                              to: 2000-01-23T04:56:07.000+00:00
+                      displaySeriesName: true
+                      customUnit: "{\"value\":\"kvs\"}"
+                      dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                      decimalPrecision: false
+                      thresholds:
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      unit: UNIT_UNSPECIFIED
+                      min: 0
+                      thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                      decimal: 3
+                      showOuterArc: true
+                      legendBy: LEGEND_BY_UNSPECIFIED
+                      thresholdType: THRESHOLD_TYPE_UNSPECIFIED
                   id:
                     value: value
                   title: "{\"value\":\"Gauge\"}"
@@ -2937,10 +3594,52 @@ components:
                     width: 6
                   description: "{\"value\":\"Average delay of application\"}"
                   definition:
-                    markdown:
-                      markdownText: "{\"value\":\"# This is a markdown example\"}"
-                      tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                        }"
+                    gauge:
+                      showInnerArc: false
+                      max: 150000
+                      legend:
+                        columns:
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        groupByQuery: true
+                        isVisible: true
+                        placement: LEGEND_PLACEMENT_UNSPECIFIED
+                      query:
+                        metrics:
+                          promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                          editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                          aggregation: AGGREGATION_UNSPECIFIED
+                          filters:
+                          - metric: metric
+                            label: label
+                            operator: null
+                          - metric: metric
+                            label: label
+                            operator: null
+                          promqlQuery:
+                            value: value
+                          timeFrame:
+                            absoluteTimeFrame:
+                              from: 2000-01-23T04:56:07.000+00:00
+                              to: 2000-01-23T04:56:07.000+00:00
+                      displaySeriesName: true
+                      customUnit: "{\"value\":\"kvs\"}"
+                      dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                      decimalPrecision: false
+                      thresholds:
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      unit: UNIT_UNSPECIFIED
+                      min: 0
+                      thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                      decimal: 3
+                      showOuterArc: true
+                      legendBy: LEGEND_BY_UNSPECIFIED
+                      thresholdType: THRESHOLD_TYPE_UNSPECIFIED
                   id:
                     value: value
                   title: "{\"value\":\"Gauge\"}"
@@ -2955,10 +3654,52 @@ components:
                     width: 6
                   description: "{\"value\":\"Average delay of application\"}"
                   definition:
-                    markdown:
-                      markdownText: "{\"value\":\"# This is a markdown example\"}"
-                      tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                        }"
+                    gauge:
+                      showInnerArc: false
+                      max: 150000
+                      legend:
+                        columns:
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        groupByQuery: true
+                        isVisible: true
+                        placement: LEGEND_PLACEMENT_UNSPECIFIED
+                      query:
+                        metrics:
+                          promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                          editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                          aggregation: AGGREGATION_UNSPECIFIED
+                          filters:
+                          - metric: metric
+                            label: label
+                            operator: null
+                          - metric: metric
+                            label: label
+                            operator: null
+                          promqlQuery:
+                            value: value
+                          timeFrame:
+                            absoluteTimeFrame:
+                              from: 2000-01-23T04:56:07.000+00:00
+                              to: 2000-01-23T04:56:07.000+00:00
+                      displaySeriesName: true
+                      customUnit: "{\"value\":\"kvs\"}"
+                      dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                      decimalPrecision: false
+                      thresholds:
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      unit: UNIT_UNSPECIFIED
+                      min: 0
+                      thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                      decimal: 3
+                      showOuterArc: true
+                      legendBy: LEGEND_BY_UNSPECIFIED
+                      thresholdType: THRESHOLD_TYPE_UNSPECIFIED
                   id:
                     value: value
                   title: "{\"value\":\"Gauge\"}"
@@ -2968,10 +3709,52 @@ components:
                     width: 6
                   description: "{\"value\":\"Average delay of application\"}"
                   definition:
-                    markdown:
-                      markdownText: "{\"value\":\"# This is a markdown example\"}"
-                      tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                        }"
+                    gauge:
+                      showInnerArc: false
+                      max: 150000
+                      legend:
+                        columns:
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        groupByQuery: true
+                        isVisible: true
+                        placement: LEGEND_PLACEMENT_UNSPECIFIED
+                      query:
+                        metrics:
+                          promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                          editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                          aggregation: AGGREGATION_UNSPECIFIED
+                          filters:
+                          - metric: metric
+                            label: label
+                            operator: null
+                          - metric: metric
+                            label: label
+                            operator: null
+                          promqlQuery:
+                            value: value
+                          timeFrame:
+                            absoluteTimeFrame:
+                              from: 2000-01-23T04:56:07.000+00:00
+                              to: 2000-01-23T04:56:07.000+00:00
+                      displaySeriesName: true
+                      customUnit: "{\"value\":\"kvs\"}"
+                      dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                      decimalPrecision: false
+                      thresholds:
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      unit: UNIT_UNSPECIFIED
+                      min: 0
+                      thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                      decimal: 3
+                      showOuterArc: true
+                      legendBy: LEGEND_BY_UNSPECIFIED
+                      thresholdType: THRESHOLD_TYPE_UNSPECIFIED
                   id:
                     value: value
                   title: "{\"value\":\"Gauge\"}"
@@ -3005,7 +3788,7 @@ components:
             displayFullRow: true
             source:
               static:
-                valuesOrderDirection: ORDER_DIRECTION_UNSPECIFIED
+                valuesOrderDirection: null
                 values:
                 - isDefault: true
                   label: label
@@ -3017,8 +3800,10 @@ components:
                   includeAll: true
                   label: label
             value:
-              multiString:
-                all: "{}"
+              singleString:
+                value:
+                  label: label
+                  value: value
           - displayType: VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED
             displayName: displayName
             name: name
@@ -3026,7 +3811,7 @@ components:
             displayFullRow: true
             source:
               static:
-                valuesOrderDirection: ORDER_DIRECTION_UNSPECIFIED
+                valuesOrderDirection: null
                 values:
                 - isDefault: true
                   label: label
@@ -3038,8 +3823,10 @@ components:
                   includeAll: true
                   label: label
             value:
-              multiString:
-                all: "{}"
+              singleString:
+                value:
+                  label: label
+                  value: value
         updatedAt: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about Dashboards in our documentation.
@@ -3135,15 +3922,57 @@ components:
             name: name
             description: description
             definition:
-              constant:
-                value: value
+              multiSelect:
+                valuesOrderDirection: ORDER_DIRECTION_UNSPECIFIED
+                selection:
+                  list:
+                    values:
+                    - values
+                    - values
+                    labels:
+                    - labels
+                    - labels
+                selectionOptions:
+                  selectionType: SELECTION_TYPE_UNSPECIFIED
+                source:
+                  logsPath:
+                    observationField:
+                      keypath:
+                      - keypath
+                      - keypath
+                      scope: DATASET_SCOPE_UNSPECIFIED
+                    value: value
+                selected:
+                - selected
+                - selected
           - displayType: VARIABLE_DISPLAY_TYPE_UNSPECIFIED
             displayName: displayName
             name: name
             description: description
             definition:
-              constant:
-                value: value
+              multiSelect:
+                valuesOrderDirection: ORDER_DIRECTION_UNSPECIFIED
+                selection:
+                  list:
+                    values:
+                    - values
+                    - values
+                    labels:
+                    - labels
+                    - labels
+                selectionOptions:
+                  selectionType: SELECTION_TYPE_UNSPECIFIED
+                source:
+                  logsPath:
+                    observationField:
+                      keypath:
+                      - keypath
+                      - keypath
+                      scope: DATASET_SCOPE_UNSPECIFIED
+                    value: value
+                selected:
+                - selected
+                - selected
           annotations:
           - color: ANNOTATION_COLOR_UNSPECIFIED
             scope:
@@ -3195,12 +4024,9 @@ components:
                   scope: DATASET_SCOPE_UNSPECIFIED
                 field: field
                 operator:
-                  notEquals:
+                  equals:
                     selection:
-                      list:
-                        values:
-                        - values
-                        - values
+                      all: "{}"
             enabled: true
           - collapsed: true
             displayName: displayName
@@ -3213,15 +4039,14 @@ components:
                   scope: DATASET_SCOPE_UNSPECIFIED
                 field: field
                 operator:
-                  notEquals:
+                  equals:
                     selection:
-                      list:
-                        values:
-                        - values
-                        - values
+                      all: "{}"
             enabled: true
-          folderId:
-            value: value
+          folderPath:
+            segments:
+            - segments
+            - segments
           layout:
             sections:
             - options:
@@ -3239,10 +4064,52 @@ components:
                     width: 6
                   description: "{\"value\":\"Average delay of application\"}"
                   definition:
-                    markdown:
-                      markdownText: "{\"value\":\"# This is a markdown example\"}"
-                      tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                        }"
+                    gauge:
+                      showInnerArc: false
+                      max: 150000
+                      legend:
+                        columns:
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        groupByQuery: true
+                        isVisible: true
+                        placement: LEGEND_PLACEMENT_UNSPECIFIED
+                      query:
+                        metrics:
+                          promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                          editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                          aggregation: AGGREGATION_UNSPECIFIED
+                          filters:
+                          - metric: metric
+                            label: label
+                            operator: null
+                          - metric: metric
+                            label: label
+                            operator: null
+                          promqlQuery:
+                            value: value
+                          timeFrame:
+                            absoluteTimeFrame:
+                              from: 2000-01-23T04:56:07.000+00:00
+                              to: 2000-01-23T04:56:07.000+00:00
+                      displaySeriesName: true
+                      customUnit: "{\"value\":\"kvs\"}"
+                      dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                      decimalPrecision: false
+                      thresholds:
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      unit: UNIT_UNSPECIFIED
+                      min: 0
+                      thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                      decimal: 3
+                      showOuterArc: true
+                      legendBy: LEGEND_BY_UNSPECIFIED
+                      thresholdType: THRESHOLD_TYPE_UNSPECIFIED
                   id:
                     value: value
                   title: "{\"value\":\"Gauge\"}"
@@ -3252,10 +4119,52 @@ components:
                     width: 6
                   description: "{\"value\":\"Average delay of application\"}"
                   definition:
-                    markdown:
-                      markdownText: "{\"value\":\"# This is a markdown example\"}"
-                      tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                        }"
+                    gauge:
+                      showInnerArc: false
+                      max: 150000
+                      legend:
+                        columns:
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        groupByQuery: true
+                        isVisible: true
+                        placement: LEGEND_PLACEMENT_UNSPECIFIED
+                      query:
+                        metrics:
+                          promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                          editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                          aggregation: AGGREGATION_UNSPECIFIED
+                          filters:
+                          - metric: metric
+                            label: label
+                            operator: null
+                          - metric: metric
+                            label: label
+                            operator: null
+                          promqlQuery:
+                            value: value
+                          timeFrame:
+                            absoluteTimeFrame:
+                              from: 2000-01-23T04:56:07.000+00:00
+                              to: 2000-01-23T04:56:07.000+00:00
+                      displaySeriesName: true
+                      customUnit: "{\"value\":\"kvs\"}"
+                      dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                      decimalPrecision: false
+                      thresholds:
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      unit: UNIT_UNSPECIFIED
+                      min: 0
+                      thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                      decimal: 3
+                      showOuterArc: true
+                      legendBy: LEGEND_BY_UNSPECIFIED
+                      thresholdType: THRESHOLD_TYPE_UNSPECIFIED
                   id:
                     value: value
                   title: "{\"value\":\"Gauge\"}"
@@ -3270,10 +4179,52 @@ components:
                     width: 6
                   description: "{\"value\":\"Average delay of application\"}"
                   definition:
-                    markdown:
-                      markdownText: "{\"value\":\"# This is a markdown example\"}"
-                      tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                        }"
+                    gauge:
+                      showInnerArc: false
+                      max: 150000
+                      legend:
+                        columns:
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        groupByQuery: true
+                        isVisible: true
+                        placement: LEGEND_PLACEMENT_UNSPECIFIED
+                      query:
+                        metrics:
+                          promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                          editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                          aggregation: AGGREGATION_UNSPECIFIED
+                          filters:
+                          - metric: metric
+                            label: label
+                            operator: null
+                          - metric: metric
+                            label: label
+                            operator: null
+                          promqlQuery:
+                            value: value
+                          timeFrame:
+                            absoluteTimeFrame:
+                              from: 2000-01-23T04:56:07.000+00:00
+                              to: 2000-01-23T04:56:07.000+00:00
+                      displaySeriesName: true
+                      customUnit: "{\"value\":\"kvs\"}"
+                      dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                      decimalPrecision: false
+                      thresholds:
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      unit: UNIT_UNSPECIFIED
+                      min: 0
+                      thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                      decimal: 3
+                      showOuterArc: true
+                      legendBy: LEGEND_BY_UNSPECIFIED
+                      thresholdType: THRESHOLD_TYPE_UNSPECIFIED
                   id:
                     value: value
                   title: "{\"value\":\"Gauge\"}"
@@ -3283,10 +4234,52 @@ components:
                     width: 6
                   description: "{\"value\":\"Average delay of application\"}"
                   definition:
-                    markdown:
-                      markdownText: "{\"value\":\"# This is a markdown example\"}"
-                      tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                        }"
+                    gauge:
+                      showInnerArc: false
+                      max: 150000
+                      legend:
+                        columns:
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        groupByQuery: true
+                        isVisible: true
+                        placement: LEGEND_PLACEMENT_UNSPECIFIED
+                      query:
+                        metrics:
+                          promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                          editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                          aggregation: AGGREGATION_UNSPECIFIED
+                          filters:
+                          - metric: metric
+                            label: label
+                            operator: null
+                          - metric: metric
+                            label: label
+                            operator: null
+                          promqlQuery:
+                            value: value
+                          timeFrame:
+                            absoluteTimeFrame:
+                              from: 2000-01-23T04:56:07.000+00:00
+                              to: 2000-01-23T04:56:07.000+00:00
+                      displaySeriesName: true
+                      customUnit: "{\"value\":\"kvs\"}"
+                      dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                      decimalPrecision: false
+                      thresholds:
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      unit: UNIT_UNSPECIFIED
+                      min: 0
+                      thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                      decimal: 3
+                      showOuterArc: true
+                      legendBy: LEGEND_BY_UNSPECIFIED
+                      thresholdType: THRESHOLD_TYPE_UNSPECIFIED
                   id:
                     value: value
                   title: "{\"value\":\"Gauge\"}"
@@ -3306,10 +4299,52 @@ components:
                     width: 6
                   description: "{\"value\":\"Average delay of application\"}"
                   definition:
-                    markdown:
-                      markdownText: "{\"value\":\"# This is a markdown example\"}"
-                      tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                        }"
+                    gauge:
+                      showInnerArc: false
+                      max: 150000
+                      legend:
+                        columns:
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        groupByQuery: true
+                        isVisible: true
+                        placement: LEGEND_PLACEMENT_UNSPECIFIED
+                      query:
+                        metrics:
+                          promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                          editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                          aggregation: AGGREGATION_UNSPECIFIED
+                          filters:
+                          - metric: metric
+                            label: label
+                            operator: null
+                          - metric: metric
+                            label: label
+                            operator: null
+                          promqlQuery:
+                            value: value
+                          timeFrame:
+                            absoluteTimeFrame:
+                              from: 2000-01-23T04:56:07.000+00:00
+                              to: 2000-01-23T04:56:07.000+00:00
+                      displaySeriesName: true
+                      customUnit: "{\"value\":\"kvs\"}"
+                      dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                      decimalPrecision: false
+                      thresholds:
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      unit: UNIT_UNSPECIFIED
+                      min: 0
+                      thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                      decimal: 3
+                      showOuterArc: true
+                      legendBy: LEGEND_BY_UNSPECIFIED
+                      thresholdType: THRESHOLD_TYPE_UNSPECIFIED
                   id:
                     value: value
                   title: "{\"value\":\"Gauge\"}"
@@ -3319,10 +4354,52 @@ components:
                     width: 6
                   description: "{\"value\":\"Average delay of application\"}"
                   definition:
-                    markdown:
-                      markdownText: "{\"value\":\"# This is a markdown example\"}"
-                      tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                        }"
+                    gauge:
+                      showInnerArc: false
+                      max: 150000
+                      legend:
+                        columns:
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        groupByQuery: true
+                        isVisible: true
+                        placement: LEGEND_PLACEMENT_UNSPECIFIED
+                      query:
+                        metrics:
+                          promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                          editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                          aggregation: AGGREGATION_UNSPECIFIED
+                          filters:
+                          - metric: metric
+                            label: label
+                            operator: null
+                          - metric: metric
+                            label: label
+                            operator: null
+                          promqlQuery:
+                            value: value
+                          timeFrame:
+                            absoluteTimeFrame:
+                              from: 2000-01-23T04:56:07.000+00:00
+                              to: 2000-01-23T04:56:07.000+00:00
+                      displaySeriesName: true
+                      customUnit: "{\"value\":\"kvs\"}"
+                      dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                      decimalPrecision: false
+                      thresholds:
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      unit: UNIT_UNSPECIFIED
+                      min: 0
+                      thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                      decimal: 3
+                      showOuterArc: true
+                      legendBy: LEGEND_BY_UNSPECIFIED
+                      thresholdType: THRESHOLD_TYPE_UNSPECIFIED
                   id:
                     value: value
                   title: "{\"value\":\"Gauge\"}"
@@ -3337,10 +4414,52 @@ components:
                     width: 6
                   description: "{\"value\":\"Average delay of application\"}"
                   definition:
-                    markdown:
-                      markdownText: "{\"value\":\"# This is a markdown example\"}"
-                      tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                        }"
+                    gauge:
+                      showInnerArc: false
+                      max: 150000
+                      legend:
+                        columns:
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        groupByQuery: true
+                        isVisible: true
+                        placement: LEGEND_PLACEMENT_UNSPECIFIED
+                      query:
+                        metrics:
+                          promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                          editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                          aggregation: AGGREGATION_UNSPECIFIED
+                          filters:
+                          - metric: metric
+                            label: label
+                            operator: null
+                          - metric: metric
+                            label: label
+                            operator: null
+                          promqlQuery:
+                            value: value
+                          timeFrame:
+                            absoluteTimeFrame:
+                              from: 2000-01-23T04:56:07.000+00:00
+                              to: 2000-01-23T04:56:07.000+00:00
+                      displaySeriesName: true
+                      customUnit: "{\"value\":\"kvs\"}"
+                      dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                      decimalPrecision: false
+                      thresholds:
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      unit: UNIT_UNSPECIFIED
+                      min: 0
+                      thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                      decimal: 3
+                      showOuterArc: true
+                      legendBy: LEGEND_BY_UNSPECIFIED
+                      thresholdType: THRESHOLD_TYPE_UNSPECIFIED
                   id:
                     value: value
                   title: "{\"value\":\"Gauge\"}"
@@ -3350,10 +4469,52 @@ components:
                     width: 6
                   description: "{\"value\":\"Average delay of application\"}"
                   definition:
-                    markdown:
-                      markdownText: "{\"value\":\"# This is a markdown example\"}"
-                      tooltipText: "{\"value\":\"This is a description in a tooltip\"\
-                        }"
+                    gauge:
+                      showInnerArc: false
+                      max: 150000
+                      legend:
+                        columns:
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        - LEGEND_COLUMN_UNSPECIFIED
+                        groupByQuery: true
+                        isVisible: true
+                        placement: LEGEND_PLACEMENT_UNSPECIFIED
+                      query:
+                        metrics:
+                          promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                          editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                          aggregation: AGGREGATION_UNSPECIFIED
+                          filters:
+                          - metric: metric
+                            label: label
+                            operator: null
+                          - metric: metric
+                            label: label
+                            operator: null
+                          promqlQuery:
+                            value: value
+                          timeFrame:
+                            absoluteTimeFrame:
+                              from: 2000-01-23T04:56:07.000+00:00
+                              to: 2000-01-23T04:56:07.000+00:00
+                      displaySeriesName: true
+                      customUnit: "{\"value\":\"kvs\"}"
+                      dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                      decimalPrecision: false
+                      thresholds:
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      - color: color
+                        from: 1.4658129805029452
+                        label: label
+                      unit: UNIT_UNSPECIFIED
+                      min: 0
+                      thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                      decimal: 3
+                      showOuterArc: true
+                      legendBy: LEGEND_BY_UNSPECIFIED
+                      thresholdType: THRESHOLD_TYPE_UNSPECIFIED
                   id:
                     value: value
                   title: "{\"value\":\"Gauge\"}"
@@ -3387,7 +4548,7 @@ components:
             displayFullRow: true
             source:
               static:
-                valuesOrderDirection: ORDER_DIRECTION_UNSPECIFIED
+                valuesOrderDirection: null
                 values:
                 - isDefault: true
                   label: label
@@ -3399,8 +4560,10 @@ components:
                   includeAll: true
                   label: label
             value:
-              multiString:
-                all: "{}"
+              singleString:
+                value:
+                  label: label
+                  value: value
           - displayType: VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED
             displayName: displayName
             name: name
@@ -3408,7 +4571,7 @@ components:
             displayFullRow: true
             source:
               static:
-                valuesOrderDirection: ORDER_DIRECTION_UNSPECIFIED
+                valuesOrderDirection: null
                 values:
                 - isDefault: true
                   label: label
@@ -3420,8 +4583,10 @@ components:
                   includeAll: true
                   label: label
             value:
-              multiString:
-                all: "{}"
+              singleString:
+                value:
+                  label: label
+                  value: value
         updatedAt: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about Dashboards in our documentation.
@@ -3892,10 +5057,10 @@ components:
       type: object
     HorizontalBarChart.Query:
       oneOf:
-      - $ref: "#/components/schemas/HorizontalBarChartQueryDataprime"
       - $ref: "#/components/schemas/HorizontalBarChartQueryLogs"
       - $ref: "#/components/schemas/HorizontalBarChartQuerySpans"
       - $ref: "#/components/schemas/HorizontalBarChartQueryMetrics"
+      - $ref: "#/components/schemas/HorizontalBarChartQueryDataprime"
     HorizontalBarChart.SpansQuery:
       description: A spans variant of the query
       externalDocs:
@@ -4099,9 +5264,52 @@ components:
                 width: 6
               description: "{\"value\":\"Average delay of application\"}"
               definition:
-                markdown:
-                  markdownText: "{\"value\":\"# This is a markdown example\"}"
-                  tooltipText: "{\"value\":\"This is a description in a tooltip\"}"
+                gauge:
+                  showInnerArc: false
+                  max: 150000
+                  legend:
+                    columns:
+                    - LEGEND_COLUMN_UNSPECIFIED
+                    - LEGEND_COLUMN_UNSPECIFIED
+                    groupByQuery: true
+                    isVisible: true
+                    placement: LEGEND_PLACEMENT_UNSPECIFIED
+                  query:
+                    metrics:
+                      promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                      editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                      aggregation: AGGREGATION_UNSPECIFIED
+                      filters:
+                      - metric: metric
+                        label: label
+                        operator: null
+                      - metric: metric
+                        label: label
+                        operator: null
+                      promqlQuery:
+                        value: value
+                      timeFrame:
+                        absoluteTimeFrame:
+                          from: 2000-01-23T04:56:07.000+00:00
+                          to: 2000-01-23T04:56:07.000+00:00
+                  displaySeriesName: true
+                  customUnit: "{\"value\":\"kvs\"}"
+                  dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                  decimalPrecision: false
+                  thresholds:
+                  - color: color
+                    from: 1.4658129805029452
+                    label: label
+                  - color: color
+                    from: 1.4658129805029452
+                    label: label
+                  unit: UNIT_UNSPECIFIED
+                  min: 0
+                  thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                  decimal: 3
+                  showOuterArc: true
+                  legendBy: LEGEND_BY_UNSPECIFIED
+                  thresholdType: THRESHOLD_TYPE_UNSPECIFIED
               id:
                 value: value
               title: "{\"value\":\"Gauge\"}"
@@ -4111,9 +5319,52 @@ components:
                 width: 6
               description: "{\"value\":\"Average delay of application\"}"
               definition:
-                markdown:
-                  markdownText: "{\"value\":\"# This is a markdown example\"}"
-                  tooltipText: "{\"value\":\"This is a description in a tooltip\"}"
+                gauge:
+                  showInnerArc: false
+                  max: 150000
+                  legend:
+                    columns:
+                    - LEGEND_COLUMN_UNSPECIFIED
+                    - LEGEND_COLUMN_UNSPECIFIED
+                    groupByQuery: true
+                    isVisible: true
+                    placement: LEGEND_PLACEMENT_UNSPECIFIED
+                  query:
+                    metrics:
+                      promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                      editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                      aggregation: AGGREGATION_UNSPECIFIED
+                      filters:
+                      - metric: metric
+                        label: label
+                        operator: null
+                      - metric: metric
+                        label: label
+                        operator: null
+                      promqlQuery:
+                        value: value
+                      timeFrame:
+                        absoluteTimeFrame:
+                          from: 2000-01-23T04:56:07.000+00:00
+                          to: 2000-01-23T04:56:07.000+00:00
+                  displaySeriesName: true
+                  customUnit: "{\"value\":\"kvs\"}"
+                  dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                  decimalPrecision: false
+                  thresholds:
+                  - color: color
+                    from: 1.4658129805029452
+                    label: label
+                  - color: color
+                    from: 1.4658129805029452
+                    label: label
+                  unit: UNIT_UNSPECIFIED
+                  min: 0
+                  thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                  decimal: 3
+                  showOuterArc: true
+                  legendBy: LEGEND_BY_UNSPECIFIED
+                  thresholdType: THRESHOLD_TYPE_UNSPECIFIED
               id:
                 value: value
               title: "{\"value\":\"Gauge\"}"
@@ -4128,9 +5379,52 @@ components:
                 width: 6
               description: "{\"value\":\"Average delay of application\"}"
               definition:
-                markdown:
-                  markdownText: "{\"value\":\"# This is a markdown example\"}"
-                  tooltipText: "{\"value\":\"This is a description in a tooltip\"}"
+                gauge:
+                  showInnerArc: false
+                  max: 150000
+                  legend:
+                    columns:
+                    - LEGEND_COLUMN_UNSPECIFIED
+                    - LEGEND_COLUMN_UNSPECIFIED
+                    groupByQuery: true
+                    isVisible: true
+                    placement: LEGEND_PLACEMENT_UNSPECIFIED
+                  query:
+                    metrics:
+                      promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                      editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                      aggregation: AGGREGATION_UNSPECIFIED
+                      filters:
+                      - metric: metric
+                        label: label
+                        operator: null
+                      - metric: metric
+                        label: label
+                        operator: null
+                      promqlQuery:
+                        value: value
+                      timeFrame:
+                        absoluteTimeFrame:
+                          from: 2000-01-23T04:56:07.000+00:00
+                          to: 2000-01-23T04:56:07.000+00:00
+                  displaySeriesName: true
+                  customUnit: "{\"value\":\"kvs\"}"
+                  dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                  decimalPrecision: false
+                  thresholds:
+                  - color: color
+                    from: 1.4658129805029452
+                    label: label
+                  - color: color
+                    from: 1.4658129805029452
+                    label: label
+                  unit: UNIT_UNSPECIFIED
+                  min: 0
+                  thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                  decimal: 3
+                  showOuterArc: true
+                  legendBy: LEGEND_BY_UNSPECIFIED
+                  thresholdType: THRESHOLD_TYPE_UNSPECIFIED
               id:
                 value: value
               title: "{\"value\":\"Gauge\"}"
@@ -4140,9 +5434,52 @@ components:
                 width: 6
               description: "{\"value\":\"Average delay of application\"}"
               definition:
-                markdown:
-                  markdownText: "{\"value\":\"# This is a markdown example\"}"
-                  tooltipText: "{\"value\":\"This is a description in a tooltip\"}"
+                gauge:
+                  showInnerArc: false
+                  max: 150000
+                  legend:
+                    columns:
+                    - LEGEND_COLUMN_UNSPECIFIED
+                    - LEGEND_COLUMN_UNSPECIFIED
+                    groupByQuery: true
+                    isVisible: true
+                    placement: LEGEND_PLACEMENT_UNSPECIFIED
+                  query:
+                    metrics:
+                      promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                      editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                      aggregation: AGGREGATION_UNSPECIFIED
+                      filters:
+                      - metric: metric
+                        label: label
+                        operator: null
+                      - metric: metric
+                        label: label
+                        operator: null
+                      promqlQuery:
+                        value: value
+                      timeFrame:
+                        absoluteTimeFrame:
+                          from: 2000-01-23T04:56:07.000+00:00
+                          to: 2000-01-23T04:56:07.000+00:00
+                  displaySeriesName: true
+                  customUnit: "{\"value\":\"kvs\"}"
+                  dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                  decimalPrecision: false
+                  thresholds:
+                  - color: color
+                    from: 1.4658129805029452
+                    label: label
+                  - color: color
+                    from: 1.4658129805029452
+                    label: label
+                  unit: UNIT_UNSPECIFIED
+                  min: 0
+                  thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                  decimal: 3
+                  showOuterArc: true
+                  legendBy: LEGEND_BY_UNSPECIFIED
+                  thresholdType: THRESHOLD_TYPE_UNSPECIFIED
               id:
                 value: value
               title: "{\"value\":\"Gauge\"}"
@@ -4162,9 +5499,52 @@ components:
                 width: 6
               description: "{\"value\":\"Average delay of application\"}"
               definition:
-                markdown:
-                  markdownText: "{\"value\":\"# This is a markdown example\"}"
-                  tooltipText: "{\"value\":\"This is a description in a tooltip\"}"
+                gauge:
+                  showInnerArc: false
+                  max: 150000
+                  legend:
+                    columns:
+                    - LEGEND_COLUMN_UNSPECIFIED
+                    - LEGEND_COLUMN_UNSPECIFIED
+                    groupByQuery: true
+                    isVisible: true
+                    placement: LEGEND_PLACEMENT_UNSPECIFIED
+                  query:
+                    metrics:
+                      promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                      editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                      aggregation: AGGREGATION_UNSPECIFIED
+                      filters:
+                      - metric: metric
+                        label: label
+                        operator: null
+                      - metric: metric
+                        label: label
+                        operator: null
+                      promqlQuery:
+                        value: value
+                      timeFrame:
+                        absoluteTimeFrame:
+                          from: 2000-01-23T04:56:07.000+00:00
+                          to: 2000-01-23T04:56:07.000+00:00
+                  displaySeriesName: true
+                  customUnit: "{\"value\":\"kvs\"}"
+                  dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                  decimalPrecision: false
+                  thresholds:
+                  - color: color
+                    from: 1.4658129805029452
+                    label: label
+                  - color: color
+                    from: 1.4658129805029452
+                    label: label
+                  unit: UNIT_UNSPECIFIED
+                  min: 0
+                  thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                  decimal: 3
+                  showOuterArc: true
+                  legendBy: LEGEND_BY_UNSPECIFIED
+                  thresholdType: THRESHOLD_TYPE_UNSPECIFIED
               id:
                 value: value
               title: "{\"value\":\"Gauge\"}"
@@ -4174,9 +5554,52 @@ components:
                 width: 6
               description: "{\"value\":\"Average delay of application\"}"
               definition:
-                markdown:
-                  markdownText: "{\"value\":\"# This is a markdown example\"}"
-                  tooltipText: "{\"value\":\"This is a description in a tooltip\"}"
+                gauge:
+                  showInnerArc: false
+                  max: 150000
+                  legend:
+                    columns:
+                    - LEGEND_COLUMN_UNSPECIFIED
+                    - LEGEND_COLUMN_UNSPECIFIED
+                    groupByQuery: true
+                    isVisible: true
+                    placement: LEGEND_PLACEMENT_UNSPECIFIED
+                  query:
+                    metrics:
+                      promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                      editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                      aggregation: AGGREGATION_UNSPECIFIED
+                      filters:
+                      - metric: metric
+                        label: label
+                        operator: null
+                      - metric: metric
+                        label: label
+                        operator: null
+                      promqlQuery:
+                        value: value
+                      timeFrame:
+                        absoluteTimeFrame:
+                          from: 2000-01-23T04:56:07.000+00:00
+                          to: 2000-01-23T04:56:07.000+00:00
+                  displaySeriesName: true
+                  customUnit: "{\"value\":\"kvs\"}"
+                  dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                  decimalPrecision: false
+                  thresholds:
+                  - color: color
+                    from: 1.4658129805029452
+                    label: label
+                  - color: color
+                    from: 1.4658129805029452
+                    label: label
+                  unit: UNIT_UNSPECIFIED
+                  min: 0
+                  thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                  decimal: 3
+                  showOuterArc: true
+                  legendBy: LEGEND_BY_UNSPECIFIED
+                  thresholdType: THRESHOLD_TYPE_UNSPECIFIED
               id:
                 value: value
               title: "{\"value\":\"Gauge\"}"
@@ -4191,9 +5614,52 @@ components:
                 width: 6
               description: "{\"value\":\"Average delay of application\"}"
               definition:
-                markdown:
-                  markdownText: "{\"value\":\"# This is a markdown example\"}"
-                  tooltipText: "{\"value\":\"This is a description in a tooltip\"}"
+                gauge:
+                  showInnerArc: false
+                  max: 150000
+                  legend:
+                    columns:
+                    - LEGEND_COLUMN_UNSPECIFIED
+                    - LEGEND_COLUMN_UNSPECIFIED
+                    groupByQuery: true
+                    isVisible: true
+                    placement: LEGEND_PLACEMENT_UNSPECIFIED
+                  query:
+                    metrics:
+                      promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                      editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                      aggregation: AGGREGATION_UNSPECIFIED
+                      filters:
+                      - metric: metric
+                        label: label
+                        operator: null
+                      - metric: metric
+                        label: label
+                        operator: null
+                      promqlQuery:
+                        value: value
+                      timeFrame:
+                        absoluteTimeFrame:
+                          from: 2000-01-23T04:56:07.000+00:00
+                          to: 2000-01-23T04:56:07.000+00:00
+                  displaySeriesName: true
+                  customUnit: "{\"value\":\"kvs\"}"
+                  dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                  decimalPrecision: false
+                  thresholds:
+                  - color: color
+                    from: 1.4658129805029452
+                    label: label
+                  - color: color
+                    from: 1.4658129805029452
+                    label: label
+                  unit: UNIT_UNSPECIFIED
+                  min: 0
+                  thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                  decimal: 3
+                  showOuterArc: true
+                  legendBy: LEGEND_BY_UNSPECIFIED
+                  thresholdType: THRESHOLD_TYPE_UNSPECIFIED
               id:
                 value: value
               title: "{\"value\":\"Gauge\"}"
@@ -4203,9 +5669,52 @@ components:
                 width: 6
               description: "{\"value\":\"Average delay of application\"}"
               definition:
-                markdown:
-                  markdownText: "{\"value\":\"# This is a markdown example\"}"
-                  tooltipText: "{\"value\":\"This is a description in a tooltip\"}"
+                gauge:
+                  showInnerArc: false
+                  max: 150000
+                  legend:
+                    columns:
+                    - LEGEND_COLUMN_UNSPECIFIED
+                    - LEGEND_COLUMN_UNSPECIFIED
+                    groupByQuery: true
+                    isVisible: true
+                    placement: LEGEND_PLACEMENT_UNSPECIFIED
+                  query:
+                    metrics:
+                      promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                      editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                      aggregation: AGGREGATION_UNSPECIFIED
+                      filters:
+                      - metric: metric
+                        label: label
+                        operator: null
+                      - metric: metric
+                        label: label
+                        operator: null
+                      promqlQuery:
+                        value: value
+                      timeFrame:
+                        absoluteTimeFrame:
+                          from: 2000-01-23T04:56:07.000+00:00
+                          to: 2000-01-23T04:56:07.000+00:00
+                  displaySeriesName: true
+                  customUnit: "{\"value\":\"kvs\"}"
+                  dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                  decimalPrecision: false
+                  thresholds:
+                  - color: color
+                    from: 1.4658129805029452
+                    label: label
+                  - color: color
+                    from: 1.4658129805029452
+                    label: label
+                  unit: UNIT_UNSPECIFIED
+                  min: 0
+                  thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                  decimal: 3
+                  showOuterArc: true
+                  legendBy: LEGEND_BY_UNSPECIFIED
+                  thresholdType: THRESHOLD_TYPE_UNSPECIFIED
               id:
                 value: value
               title: "{\"value\":\"Gauge\"}"
@@ -4217,6 +5726,13 @@ components:
           type: array
       type: object
     Legend:
+      example:
+        columns:
+        - LEGEND_COLUMN_UNSPECIFIED
+        - LEGEND_COLUMN_UNSPECIFIED
+        groupByQuery: true
+        isVisible: true
+        placement: LEGEND_PLACEMENT_UNSPECIFIED
       properties:
         columns:
           items:
@@ -4448,13 +5964,13 @@ components:
       type: object
     LogsAggregation:
       oneOf:
+      - $ref: "#/components/schemas/LogsAggregationPercentile"
+      - $ref: "#/components/schemas/LogsAggregationCount"
       - $ref: "#/components/schemas/LogsAggregationCountDistinct"
       - $ref: "#/components/schemas/LogsAggregationSum"
       - $ref: "#/components/schemas/LogsAggregationAverage"
       - $ref: "#/components/schemas/LogsAggregationMin"
       - $ref: "#/components/schemas/LogsAggregationMax"
-      - $ref: "#/components/schemas/LogsAggregationPercentile"
-      - $ref: "#/components/schemas/LogsAggregationCount"
     LogsAggregationAverage:
       additionalProperties: false
       properties:
@@ -4498,6 +6014,13 @@ components:
           $ref: "#/components/schemas/Sum"
       type: object
     LogsPathSource:
+      example:
+        observationField:
+          keypath:
+          - keypath
+          - keypath
+          scope: DATASET_SCOPE_UNSPECIFIED
+        value: value
       properties:
         observationField:
           $ref: "#/components/schemas/ObservationField"
@@ -4552,9 +6075,9 @@ components:
       type: object
     LogsSource.Strategy:
       oneOf:
-      - $ref: "#/components/schemas/LogsSourceStrategyInstant"
       - $ref: "#/components/schemas/LogsSourceStrategyRange"
       - $ref: "#/components/schemas/LogsSourceStrategyDuration"
+      - $ref: "#/components/schemas/LogsSourceStrategyInstant"
     LogsSource.Strategy.Duration:
       properties:
         durationField:
@@ -4613,8 +6136,8 @@ components:
       type: object
     ManualSource.Strategy:
       oneOf:
-      - $ref: "#/components/schemas/ManualSourceStrategyRange"
       - $ref: "#/components/schemas/ManualSourceStrategyInstant"
+      - $ref: "#/components/schemas/ManualSourceStrategyRange"
     ManualSource.Strategy.Instant:
       properties:
         customUnit:
@@ -4651,9 +6174,6 @@ components:
           $ref: "#/components/schemas/ManualSource.Strategy.Range"
       type: object
     Markdown:
-      example:
-        markdownText: "{\"value\":\"# This is a markdown example\"}"
-        tooltipText: "{\"value\":\"This is a description in a tooltip\"}"
       properties:
         markdownText:
           description: Markdown text
@@ -4726,6 +6246,10 @@ components:
       type: object
     MetricsFilter:
       description: This data structure represents the filter criteria for metrics.
+      example:
+        metric: metric
+        label: label
+        operator: null
       externalDocs:
         url: ""
       properties:
@@ -4791,6 +6315,29 @@ components:
           $ref: "#/components/schemas/ObservationField"
       type: object
     MultiSelect:
+      example:
+        valuesOrderDirection: ORDER_DIRECTION_UNSPECIFIED
+        selection:
+          list:
+            values:
+            - values
+            - values
+            labels:
+            - labels
+            - labels
+        selectionOptions:
+          selectionType: SELECTION_TYPE_UNSPECIFIED
+        source:
+          logsPath:
+            observationField:
+              keypath:
+              - keypath
+              - keypath
+              scope: DATASET_SCOPE_UNSPECIFIED
+            value: value
+        selected:
+        - selected
+        - selected
       properties:
         selected:
           items:
@@ -4828,11 +6375,18 @@ components:
       type: string
     MultiSelect.Selection:
       oneOf:
-      - $ref: "#/components/schemas/MultiSelectSelectionAll"
       - $ref: "#/components/schemas/MultiSelectSelectionList"
+      - $ref: "#/components/schemas/MultiSelectSelectionAll"
     MultiSelect.Selection.AllSelection:
       type: object
     MultiSelect.Selection.ListSelection:
+      example:
+        values:
+        - values
+        - values
+        labels:
+        - labels
+        - labels
       properties:
         labels:
           items:
@@ -4845,11 +6399,11 @@ components:
       type: object
     MultiSelect.Source:
       oneOf:
+      - $ref: "#/components/schemas/MultiSelectSourceLogsPath"
+      - $ref: "#/components/schemas/MultiSelectSourceMetricLabel"
       - $ref: "#/components/schemas/MultiSelectSourceConstantList"
       - $ref: "#/components/schemas/MultiSelectSourceSpanField"
       - $ref: "#/components/schemas/MultiSelectSourceQuery"
-      - $ref: "#/components/schemas/MultiSelectSourceLogsPath"
-      - $ref: "#/components/schemas/MultiSelectSourceMetricLabel"
     MultiSelect.ValueDisplayOptions:
       properties:
         labelRegex:
@@ -4883,6 +6437,14 @@ components:
       type: object
     MultiSelectSelectionList:
       additionalProperties: false
+      example:
+        list:
+          values:
+          - values
+          - values
+          labels:
+          - labels
+          - labels
       properties:
         list:
           $ref: "#/components/schemas/MultiSelect.Selection.ListSelection"
@@ -4895,6 +6457,14 @@ components:
       type: object
     MultiSelectSourceLogsPath:
       additionalProperties: false
+      example:
+        logsPath:
+          observationField:
+            keypath:
+            - keypath
+            - keypath
+            scope: DATASET_SCOPE_UNSPECIFIED
+          value: value
       properties:
         logsPath:
           $ref: "#/components/schemas/LogsPathSource"
@@ -4923,8 +6493,6 @@ components:
       - $ref: "#/components/schemas/MultiStringValueList"
     MultiStringValueAll:
       additionalProperties: false
-      example:
-        all: "{}"
       properties:
         all:
           type: object
@@ -4946,11 +6514,6 @@ components:
       type: object
     NotEquals.Selection:
       description: This data structure defines the values for the non-equality comparison.
-      example:
-        list:
-          values:
-          - values
-          - values
       externalDocs:
         url: ""
       properties:
@@ -4961,10 +6524,6 @@ components:
     NotEquals.Selection.ListSelection:
       description: This data structure represents a selection from a list of specific
         values.
-      example:
-        values:
-        - values
-        - values
       externalDocs:
         url: ""
       properties:
@@ -5204,11 +6763,11 @@ components:
       type: object
     PropertyDefinition:
       oneOf:
-      - $ref: "#/components/schemas/PropertyDefinitionLink"
-      - $ref: "#/components/schemas/PropertyDefinitionThresholds"
       - $ref: "#/components/schemas/PropertyDefinitionAlignment"
       - $ref: "#/components/schemas/PropertyDefinitionUnits"
       - $ref: "#/components/schemas/PropertyDefinitionRegexExtract"
+      - $ref: "#/components/schemas/PropertyDefinitionLink"
+      - $ref: "#/components/schemas/PropertyDefinitionThresholds"
     PropertyDefinitionAlignment:
       additionalProperties: false
       properties:
@@ -5361,9 +6920,9 @@ components:
       - $ref: "#/components/schemas/QueryMetricsQueryStringOrVariableVariableName"
     Query.MetricsQuery.Type:
       oneOf:
+      - $ref: "#/components/schemas/QueryMetricsQueryTypeMetricName"
       - $ref: "#/components/schemas/QueryMetricsQueryTypeLabelName"
       - $ref: "#/components/schemas/QueryMetricsQueryTypeLabelValue"
-      - $ref: "#/components/schemas/QueryMetricsQueryTypeMetricName"
     Query.MetricsQuery.Type.LabelName:
       properties:
         metricRegex:
@@ -5392,8 +6951,8 @@ components:
       type: object
     Query.SpansQuery.Type:
       oneOf:
-      - $ref: "#/components/schemas/QuerySpansQueryTypeFieldValue"
       - $ref: "#/components/schemas/QuerySpansQueryTypeFieldName"
+      - $ref: "#/components/schemas/QuerySpansQueryTypeFieldValue"
     Query.SpansQuery.Type.FieldName:
       properties:
         spanRegex:
@@ -5780,9 +7339,52 @@ components:
             width: 6
           description: "{\"value\":\"Average delay of application\"}"
           definition:
-            markdown:
-              markdownText: "{\"value\":\"# This is a markdown example\"}"
-              tooltipText: "{\"value\":\"This is a description in a tooltip\"}"
+            gauge:
+              showInnerArc: false
+              max: 150000
+              legend:
+                columns:
+                - LEGEND_COLUMN_UNSPECIFIED
+                - LEGEND_COLUMN_UNSPECIFIED
+                groupByQuery: true
+                isVisible: true
+                placement: LEGEND_PLACEMENT_UNSPECIFIED
+              query:
+                metrics:
+                  promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                  editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                  aggregation: AGGREGATION_UNSPECIFIED
+                  filters:
+                  - metric: metric
+                    label: label
+                    operator: null
+                  - metric: metric
+                    label: label
+                    operator: null
+                  promqlQuery:
+                    value: value
+                  timeFrame:
+                    absoluteTimeFrame:
+                      from: 2000-01-23T04:56:07.000+00:00
+                      to: 2000-01-23T04:56:07.000+00:00
+              displaySeriesName: true
+              customUnit: "{\"value\":\"kvs\"}"
+              dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+              decimalPrecision: false
+              thresholds:
+              - color: color
+                from: 1.4658129805029452
+                label: label
+              - color: color
+                from: 1.4658129805029452
+                label: label
+              unit: UNIT_UNSPECIFIED
+              min: 0
+              thresholdBy: THRESHOLD_BY_UNSPECIFIED
+              decimal: 3
+              showOuterArc: true
+              legendBy: LEGEND_BY_UNSPECIFIED
+              thresholdType: THRESHOLD_TYPE_UNSPECIFIED
           id:
             value: value
           title: "{\"value\":\"Gauge\"}"
@@ -5792,9 +7394,52 @@ components:
             width: 6
           description: "{\"value\":\"Average delay of application\"}"
           definition:
-            markdown:
-              markdownText: "{\"value\":\"# This is a markdown example\"}"
-              tooltipText: "{\"value\":\"This is a description in a tooltip\"}"
+            gauge:
+              showInnerArc: false
+              max: 150000
+              legend:
+                columns:
+                - LEGEND_COLUMN_UNSPECIFIED
+                - LEGEND_COLUMN_UNSPECIFIED
+                groupByQuery: true
+                isVisible: true
+                placement: LEGEND_PLACEMENT_UNSPECIFIED
+              query:
+                metrics:
+                  promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                  editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                  aggregation: AGGREGATION_UNSPECIFIED
+                  filters:
+                  - metric: metric
+                    label: label
+                    operator: null
+                  - metric: metric
+                    label: label
+                    operator: null
+                  promqlQuery:
+                    value: value
+                  timeFrame:
+                    absoluteTimeFrame:
+                      from: 2000-01-23T04:56:07.000+00:00
+                      to: 2000-01-23T04:56:07.000+00:00
+              displaySeriesName: true
+              customUnit: "{\"value\":\"kvs\"}"
+              dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+              decimalPrecision: false
+              thresholds:
+              - color: color
+                from: 1.4658129805029452
+                label: label
+              - color: color
+                from: 1.4658129805029452
+                label: label
+              unit: UNIT_UNSPECIFIED
+              min: 0
+              thresholdBy: THRESHOLD_BY_UNSPECIFIED
+              decimal: 3
+              showOuterArc: true
+              legendBy: LEGEND_BY_UNSPECIFIED
+              thresholdType: THRESHOLD_TYPE_UNSPECIFIED
           id:
             value: value
           title: "{\"value\":\"Gauge\"}"
@@ -5830,9 +7475,9 @@ components:
       type: string
     RuleScope:
       oneOf:
-      - $ref: "#/components/schemas/RuleScopeField"
       - $ref: "#/components/schemas/RuleScopeRegex"
       - $ref: "#/components/schemas/RuleScopeFieldType"
+      - $ref: "#/components/schemas/RuleScopeField"
     RuleScopeField:
       additionalProperties: false
       properties:
@@ -5874,9 +7519,52 @@ components:
               width: 6
             description: "{\"value\":\"Average delay of application\"}"
             definition:
-              markdown:
-                markdownText: "{\"value\":\"# This is a markdown example\"}"
-                tooltipText: "{\"value\":\"This is a description in a tooltip\"}"
+              gauge:
+                showInnerArc: false
+                max: 150000
+                legend:
+                  columns:
+                  - LEGEND_COLUMN_UNSPECIFIED
+                  - LEGEND_COLUMN_UNSPECIFIED
+                  groupByQuery: true
+                  isVisible: true
+                  placement: LEGEND_PLACEMENT_UNSPECIFIED
+                query:
+                  metrics:
+                    promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                    editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                    aggregation: AGGREGATION_UNSPECIFIED
+                    filters:
+                    - metric: metric
+                      label: label
+                      operator: null
+                    - metric: metric
+                      label: label
+                      operator: null
+                    promqlQuery:
+                      value: value
+                    timeFrame:
+                      absoluteTimeFrame:
+                        from: 2000-01-23T04:56:07.000+00:00
+                        to: 2000-01-23T04:56:07.000+00:00
+                displaySeriesName: true
+                customUnit: "{\"value\":\"kvs\"}"
+                dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                decimalPrecision: false
+                thresholds:
+                - color: color
+                  from: 1.4658129805029452
+                  label: label
+                - color: color
+                  from: 1.4658129805029452
+                  label: label
+                unit: UNIT_UNSPECIFIED
+                min: 0
+                thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                decimal: 3
+                showOuterArc: true
+                legendBy: LEGEND_BY_UNSPECIFIED
+                thresholdType: THRESHOLD_TYPE_UNSPECIFIED
             id:
               value: value
             title: "{\"value\":\"Gauge\"}"
@@ -5886,9 +7574,52 @@ components:
               width: 6
             description: "{\"value\":\"Average delay of application\"}"
             definition:
-              markdown:
-                markdownText: "{\"value\":\"# This is a markdown example\"}"
-                tooltipText: "{\"value\":\"This is a description in a tooltip\"}"
+              gauge:
+                showInnerArc: false
+                max: 150000
+                legend:
+                  columns:
+                  - LEGEND_COLUMN_UNSPECIFIED
+                  - LEGEND_COLUMN_UNSPECIFIED
+                  groupByQuery: true
+                  isVisible: true
+                  placement: LEGEND_PLACEMENT_UNSPECIFIED
+                query:
+                  metrics:
+                    promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                    editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                    aggregation: AGGREGATION_UNSPECIFIED
+                    filters:
+                    - metric: metric
+                      label: label
+                      operator: null
+                    - metric: metric
+                      label: label
+                      operator: null
+                    promqlQuery:
+                      value: value
+                    timeFrame:
+                      absoluteTimeFrame:
+                        from: 2000-01-23T04:56:07.000+00:00
+                        to: 2000-01-23T04:56:07.000+00:00
+                displaySeriesName: true
+                customUnit: "{\"value\":\"kvs\"}"
+                dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                decimalPrecision: false
+                thresholds:
+                - color: color
+                  from: 1.4658129805029452
+                  label: label
+                - color: color
+                  from: 1.4658129805029452
+                  label: label
+                unit: UNIT_UNSPECIFIED
+                min: 0
+                thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                decimal: 3
+                showOuterArc: true
+                legendBy: LEGEND_BY_UNSPECIFIED
+                thresholdType: THRESHOLD_TYPE_UNSPECIFIED
             id:
               value: value
             title: "{\"value\":\"Gauge\"}"
@@ -5903,9 +7634,52 @@ components:
               width: 6
             description: "{\"value\":\"Average delay of application\"}"
             definition:
-              markdown:
-                markdownText: "{\"value\":\"# This is a markdown example\"}"
-                tooltipText: "{\"value\":\"This is a description in a tooltip\"}"
+              gauge:
+                showInnerArc: false
+                max: 150000
+                legend:
+                  columns:
+                  - LEGEND_COLUMN_UNSPECIFIED
+                  - LEGEND_COLUMN_UNSPECIFIED
+                  groupByQuery: true
+                  isVisible: true
+                  placement: LEGEND_PLACEMENT_UNSPECIFIED
+                query:
+                  metrics:
+                    promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                    editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                    aggregation: AGGREGATION_UNSPECIFIED
+                    filters:
+                    - metric: metric
+                      label: label
+                      operator: null
+                    - metric: metric
+                      label: label
+                      operator: null
+                    promqlQuery:
+                      value: value
+                    timeFrame:
+                      absoluteTimeFrame:
+                        from: 2000-01-23T04:56:07.000+00:00
+                        to: 2000-01-23T04:56:07.000+00:00
+                displaySeriesName: true
+                customUnit: "{\"value\":\"kvs\"}"
+                dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                decimalPrecision: false
+                thresholds:
+                - color: color
+                  from: 1.4658129805029452
+                  label: label
+                - color: color
+                  from: 1.4658129805029452
+                  label: label
+                unit: UNIT_UNSPECIFIED
+                min: 0
+                thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                decimal: 3
+                showOuterArc: true
+                legendBy: LEGEND_BY_UNSPECIFIED
+                thresholdType: THRESHOLD_TYPE_UNSPECIFIED
             id:
               value: value
             title: "{\"value\":\"Gauge\"}"
@@ -5915,9 +7689,52 @@ components:
               width: 6
             description: "{\"value\":\"Average delay of application\"}"
             definition:
-              markdown:
-                markdownText: "{\"value\":\"# This is a markdown example\"}"
-                tooltipText: "{\"value\":\"This is a description in a tooltip\"}"
+              gauge:
+                showInnerArc: false
+                max: 150000
+                legend:
+                  columns:
+                  - LEGEND_COLUMN_UNSPECIFIED
+                  - LEGEND_COLUMN_UNSPECIFIED
+                  groupByQuery: true
+                  isVisible: true
+                  placement: LEGEND_PLACEMENT_UNSPECIFIED
+                query:
+                  metrics:
+                    promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                    editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                    aggregation: AGGREGATION_UNSPECIFIED
+                    filters:
+                    - metric: metric
+                      label: label
+                      operator: null
+                    - metric: metric
+                      label: label
+                      operator: null
+                    promqlQuery:
+                      value: value
+                    timeFrame:
+                      absoluteTimeFrame:
+                        from: 2000-01-23T04:56:07.000+00:00
+                        to: 2000-01-23T04:56:07.000+00:00
+                displaySeriesName: true
+                customUnit: "{\"value\":\"kvs\"}"
+                dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+                decimalPrecision: false
+                thresholds:
+                - color: color
+                  from: 1.4658129805029452
+                  label: label
+                - color: color
+                  from: 1.4658129805029452
+                  label: label
+                unit: UNIT_UNSPECIFIED
+                min: 0
+                thresholdBy: THRESHOLD_BY_UNSPECIFIED
+                decimal: 3
+                showOuterArc: true
+                legendBy: LEGEND_BY_UNSPECIFIED
+                thresholdType: THRESHOLD_TYPE_UNSPECIFIED
             id:
               value: value
             title: "{\"value\":\"Gauge\"}"
@@ -5974,6 +7791,10 @@ components:
       - SELECTION_TYPE_SINGLE
       type: string
     SingleStringValue:
+      example:
+        value:
+          label: label
+          value: value
       properties:
         value:
           $ref: "#/components/schemas/StringValueLabel"
@@ -6238,7 +8059,7 @@ components:
       type: object
     StaticSource:
       example:
-        valuesOrderDirection: ORDER_DIRECTION_UNSPECIFIED
+        valuesOrderDirection: null
         values:
         - isDefault: true
           label: label
@@ -6260,6 +8081,9 @@ components:
           $ref: "#/components/schemas/OrderDirection"
       type: object
     StringValueLabel:
+      example:
+        label: label
+        value: value
       properties:
         label:
           type: string
@@ -6349,13 +8173,13 @@ components:
       type: object
     TextboxDefaultValue:
       oneOf:
+      - $ref: "#/components/schemas/TextboxDefaultValueDefaultLuceneValue"
+      - $ref: "#/components/schemas/TextboxDefaultValueDefaultRegexValue"
       - $ref: "#/components/schemas/TextboxDefaultValueDefaultIntervalValue"
       - $ref: "#/components/schemas/TextboxDefaultValueSingleString"
       - $ref: "#/components/schemas/TextboxDefaultValueSingleNumeric"
       - $ref: "#/components/schemas/TextboxDefaultValueDefaultStringValue"
       - $ref: "#/components/schemas/TextboxDefaultValueDefaultNumericValue"
-      - $ref: "#/components/schemas/TextboxDefaultValueDefaultLuceneValue"
-      - $ref: "#/components/schemas/TextboxDefaultValueDefaultRegexValue"
     TextboxDefaultValueDefaultIntervalValue:
       additionalProperties: false
       properties:
@@ -6413,6 +8237,9 @@ components:
       - THRESHOLD_TYPE_ABSOLUTE
       type: string
     TimeFrame:
+      example:
+        from: 2000-01-23T04:56:07.000+00:00
+        to: 2000-01-23T04:56:07.000+00:00
       properties:
         from:
           format: date-time
@@ -6427,6 +8254,10 @@ components:
       - $ref: "#/components/schemas/TimeFrameSelectRelativeTimeFrame"
     TimeFrameSelectAbsoluteTimeFrame:
       additionalProperties: false
+      example:
+        absoluteTimeFrame:
+          from: 2000-01-23T04:56:07.000+00:00
+          to: 2000-01-23T04:56:07.000+00:00
       properties:
         absoluteTimeFrame:
           $ref: "#/components/schemas/TimeFrame"
@@ -6646,8 +8477,29 @@ components:
         name: name
         description: description
         definition:
-          constant:
-            value: value
+          multiSelect:
+            valuesOrderDirection: ORDER_DIRECTION_UNSPECIFIED
+            selection:
+              list:
+                values:
+                - values
+                - values
+                labels:
+                - labels
+                - labels
+            selectionOptions:
+              selectionType: SELECTION_TYPE_UNSPECIFIED
+            source:
+              logsPath:
+                observationField:
+                  keypath:
+                  - keypath
+                  - keypath
+                  scope: DATASET_SCOPE_UNSPECIFIED
+                value: value
+            selected:
+            - selected
+            - selected
       properties:
         definition:
           $ref: "#/components/schemas/Variable.Definition"
@@ -6662,19 +8514,40 @@ components:
       type: object
     Variable.Definition:
       oneOf:
-      - $ref: "#/components/schemas/VariableDefinitionConstant"
       - $ref: "#/components/schemas/VariableDefinitionMultiSelect"
+      - $ref: "#/components/schemas/VariableDefinitionConstant"
     VariableDefinitionConstant:
       additionalProperties: false
-      example:
-        constant:
-          value: value
       properties:
         constant:
           $ref: "#/components/schemas/Constant"
       type: object
     VariableDefinitionMultiSelect:
       additionalProperties: false
+      example:
+        multiSelect:
+          valuesOrderDirection: ORDER_DIRECTION_UNSPECIFIED
+          selection:
+            list:
+              values:
+              - values
+              - values
+              labels:
+              - labels
+              - labels
+          selectionOptions:
+            selectionType: SELECTION_TYPE_UNSPECIFIED
+          source:
+            logsPath:
+              observationField:
+                keypath:
+                - keypath
+                - keypath
+                scope: DATASET_SCOPE_UNSPECIFIED
+              value: value
+          selected:
+          - selected
+          - selected
       properties:
         multiSelect:
           $ref: "#/components/schemas/MultiSelect"
@@ -6694,6 +8567,8 @@ components:
       - VARIABLE_DISPLAY_TYPE_V2_NOTHING
       type: string
     VariableSelectionOptions:
+      example:
+        selectionType: SELECTION_TYPE_UNSPECIFIED
       properties:
         selectionType:
           $ref: "#/components/schemas/SelectionType"
@@ -6788,7 +8663,7 @@ components:
       additionalProperties: false
       example:
         static:
-          valuesOrderDirection: ORDER_DIRECTION_UNSPECIFIED
+          valuesOrderDirection: null
           values:
           - isDefault: true
             label: label
@@ -6818,7 +8693,7 @@ components:
         displayFullRow: true
         source:
           static:
-            valuesOrderDirection: ORDER_DIRECTION_UNSPECIFIED
+            valuesOrderDirection: null
             values:
             - isDefault: true
               label: label
@@ -6830,8 +8705,10 @@ components:
               includeAll: true
               label: label
         value:
-          multiString:
-            all: "{}"
+          singleString:
+            value:
+              label: label
+              value: value
       properties:
         description:
           type: string
@@ -6850,12 +8727,12 @@ components:
       type: object
     VariableValueV2:
       oneOf:
-      - $ref: "#/components/schemas/VariableValueV2MultiString"
       - $ref: "#/components/schemas/VariableValueV2SingleString"
       - $ref: "#/components/schemas/VariableValueV2SingleNumeric"
       - $ref: "#/components/schemas/VariableValueV2Regex"
       - $ref: "#/components/schemas/VariableValueV2Lucene"
       - $ref: "#/components/schemas/VariableValueV2Interval"
+      - $ref: "#/components/schemas/VariableValueV2MultiString"
     VariableValueV2.SingleNumericValue:
       properties:
         value:
@@ -6875,9 +8752,6 @@ components:
       type: object
     VariableValueV2MultiString:
       additionalProperties: false
-      example:
-        multiString:
-          all: "{}"
       properties:
         multiString:
           $ref: "#/components/schemas/MultiStringValue"
@@ -6896,6 +8770,11 @@ components:
       type: object
     VariableValueV2SingleString:
       additionalProperties: false
+      example:
+        singleString:
+          value:
+            label: label
+            value: value
       properties:
         singleString:
           $ref: "#/components/schemas/SingleStringValue"
@@ -6976,16 +8855,16 @@ components:
       type: object
     Visualization:
       oneOf:
-      - $ref: "#/components/schemas/VisualizationHeatmap"
-      - $ref: "#/components/schemas/VisualizationTable"
-      - $ref: "#/components/schemas/VisualizationTimeSeriesBars"
-      - $ref: "#/components/schemas/VisualizationGauge"
-      - $ref: "#/components/schemas/VisualizationPieChart"
-      - $ref: "#/components/schemas/VisualizationVerticalBars"
-      - $ref: "#/components/schemas/VisualizationTimeSeriesLines"
-      - $ref: "#/components/schemas/VisualizationStat"
       - $ref: "#/components/schemas/VisualizationHexagonBins"
       - $ref: "#/components/schemas/VisualizationHorizontalBars"
+      - $ref: "#/components/schemas/VisualizationTable"
+      - $ref: "#/components/schemas/VisualizationTimeSeriesLines"
+      - $ref: "#/components/schemas/VisualizationStat"
+      - $ref: "#/components/schemas/VisualizationPieChart"
+      - $ref: "#/components/schemas/VisualizationVerticalBars"
+      - $ref: "#/components/schemas/VisualizationHeatmap"
+      - $ref: "#/components/schemas/VisualizationTimeSeriesBars"
+      - $ref: "#/components/schemas/VisualizationGauge"
     Visualization.BarValueDisplay:
       enum:
       - BAR_VALUE_DISPLAY_UNSPECIFIED
@@ -7236,9 +9115,52 @@ components:
           width: 6
         description: "{\"value\":\"Average delay of application\"}"
         definition:
-          markdown:
-            markdownText: "{\"value\":\"# This is a markdown example\"}"
-            tooltipText: "{\"value\":\"This is a description in a tooltip\"}"
+          gauge:
+            showInnerArc: false
+            max: 150000
+            legend:
+              columns:
+              - LEGEND_COLUMN_UNSPECIFIED
+              - LEGEND_COLUMN_UNSPECIFIED
+              groupByQuery: true
+              isVisible: true
+              placement: LEGEND_PLACEMENT_UNSPECIFIED
+            query:
+              metrics:
+                promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+                editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+                aggregation: AGGREGATION_UNSPECIFIED
+                filters:
+                - metric: metric
+                  label: label
+                  operator: null
+                - metric: metric
+                  label: label
+                  operator: null
+                promqlQuery:
+                  value: value
+                timeFrame:
+                  absoluteTimeFrame:
+                    from: 2000-01-23T04:56:07.000+00:00
+                    to: 2000-01-23T04:56:07.000+00:00
+            displaySeriesName: true
+            customUnit: "{\"value\":\"kvs\"}"
+            dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+            decimalPrecision: false
+            thresholds:
+            - color: color
+              from: 1.4658129805029452
+              label: label
+            - color: color
+              from: 1.4658129805029452
+              label: label
+            unit: UNIT_UNSPECIFIED
+            min: 0
+            thresholdBy: THRESHOLD_BY_UNSPECIFIED
+            decimal: 3
+            showOuterArc: true
+            legendBy: LEGEND_BY_UNSPECIFIED
+            thresholdType: THRESHOLD_TYPE_UNSPECIFIED
         id:
           value: value
         title: "{\"value\":\"Gauge\"}"
@@ -7279,15 +9201,15 @@ components:
       type: object
     Widget.Definition:
       oneOf:
-      - $ref: "#/components/schemas/WidgetDefinitionMarkdown"
-      - $ref: "#/components/schemas/WidgetDefinitionHexagon"
-      - $ref: "#/components/schemas/WidgetDefinitionDataTable"
       - $ref: "#/components/schemas/WidgetDefinitionGauge"
+      - $ref: "#/components/schemas/WidgetDefinitionHorizontalBarChart"
+      - $ref: "#/components/schemas/WidgetDefinitionHexagon"
+      - $ref: "#/components/schemas/WidgetDefinitionLineChart"
       - $ref: "#/components/schemas/WidgetDefinitionPieChart"
       - $ref: "#/components/schemas/WidgetDefinitionBarChart"
+      - $ref: "#/components/schemas/WidgetDefinitionMarkdown"
       - $ref: "#/components/schemas/WidgetDefinitionDynamic"
-      - $ref: "#/components/schemas/WidgetDefinitionLineChart"
-      - $ref: "#/components/schemas/WidgetDefinitionHorizontalBarChart"
+      - $ref: "#/components/schemas/WidgetDefinitionDataTable"
     WidgetDefinitionBarChart:
       additionalProperties: false
       properties:
@@ -7308,6 +9230,53 @@ components:
       type: object
     WidgetDefinitionGauge:
       additionalProperties: false
+      example:
+        gauge:
+          showInnerArc: false
+          max: 150000
+          legend:
+            columns:
+            - LEGEND_COLUMN_UNSPECIFIED
+            - LEGEND_COLUMN_UNSPECIFIED
+            groupByQuery: true
+            isVisible: true
+            placement: LEGEND_PLACEMENT_UNSPECIFIED
+          query:
+            metrics:
+              promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+              editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+              aggregation: AGGREGATION_UNSPECIFIED
+              filters:
+              - metric: metric
+                label: label
+                operator: null
+              - metric: metric
+                label: label
+                operator: null
+              promqlQuery:
+                value: value
+              timeFrame:
+                absoluteTimeFrame:
+                  from: 2000-01-23T04:56:07.000+00:00
+                  to: 2000-01-23T04:56:07.000+00:00
+          displaySeriesName: true
+          customUnit: "{\"value\":\"kvs\"}"
+          dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+          decimalPrecision: false
+          thresholds:
+          - color: color
+            from: 1.4658129805029452
+            label: label
+          - color: color
+            from: 1.4658129805029452
+            label: label
+          unit: UNIT_UNSPECIFIED
+          min: 0
+          thresholdBy: THRESHOLD_BY_UNSPECIFIED
+          decimal: 3
+          showOuterArc: true
+          legendBy: LEGEND_BY_UNSPECIFIED
+          thresholdType: THRESHOLD_TYPE_UNSPECIFIED
       properties:
         gauge:
           $ref: "#/components/schemas/widgets.Gauge"
@@ -7332,10 +9301,6 @@ components:
       type: object
     WidgetDefinitionMarkdown:
       additionalProperties: false
-      example:
-        markdown:
-          markdownText: "{\"value\":\"# This is a markdown example\"}"
-          tooltipText: "{\"value\":\"This is a description in a tooltip\"}"
       properties:
         markdown:
           $ref: "#/components/schemas/Markdown"
@@ -7490,12 +9455,9 @@ components:
               scope: DATASET_SCOPE_UNSPECIFIED
             field: field
             operator:
-              notEquals:
+              equals:
                 selection:
-                  list:
-                    values:
-                    - values
-                    - values
+                  all: "{}"
         enabled: true
       externalDocs:
         description: Discover how to filter and query data in Custom Dashboards by
@@ -7545,6 +9507,52 @@ components:
           $ref: "#/components/schemas/Visualization"
       type: object
     widgets.Gauge:
+      example:
+        showInnerArc: false
+        max: 150000
+        legend:
+          columns:
+          - LEGEND_COLUMN_UNSPECIFIED
+          - LEGEND_COLUMN_UNSPECIFIED
+          groupByQuery: true
+          isVisible: true
+          placement: LEGEND_PLACEMENT_UNSPECIFIED
+        query:
+          metrics:
+            promqlQueryType: PROM_QL_QUERY_TYPE_UNSPECIFIED
+            editorMode: METRICS_QUERY_EDITOR_MODE_UNSPECIFIED
+            aggregation: AGGREGATION_UNSPECIFIED
+            filters:
+            - metric: metric
+              label: label
+              operator: null
+            - metric: metric
+              label: label
+              operator: null
+            promqlQuery:
+              value: value
+            timeFrame:
+              absoluteTimeFrame:
+                from: 2000-01-23T04:56:07.000+00:00
+                to: 2000-01-23T04:56:07.000+00:00
+        displaySeriesName: true
+        customUnit: "{\"value\":\"kvs\"}"
+        dataModeType: DATA_MODE_TYPE_HIGH_UNSPECIFIED
+        decimalPrecision: false
+        thresholds:
+        - color: color
+          from: 1.4658129805029452
+          label: label
+        - color: color
+          from: 1.4658129805029452
+          label: label
+        unit: UNIT_UNSPECIFIED
+        min: 0
+        thresholdBy: THRESHOLD_BY_UNSPECIFIED
+        decimal: 3
+        showOuterArc: true
+        legendBy: LEGEND_BY_UNSPECIFIED
+        thresholdType: THRESHOLD_TYPE_UNSPECIFIED
       properties:
         customUnit:
           description: Custom unit (requires to have unit field set as 'custom' to

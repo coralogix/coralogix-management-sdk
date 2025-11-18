@@ -334,10 +334,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -438,6 +438,7 @@
             "type": "string"
           },
           "entityLabelMatcher": {
+            "deprecated": true,
             "type": "object",
             "additionalProperties": {
               "type": "string"
@@ -465,6 +466,9 @@
           "name": {
             "example": "My Router",
             "type": "string"
+          },
+          "routingLabels": {
+            "$ref": "#/components/schemas/RoutingLabels"
           },
           "rules": {
             "type": "array",
@@ -520,6 +524,26 @@
         "properties": {
           "router": {
             "$ref": "#/components/schemas/GlobalRouter"
+          }
+        }
+      },
+      "RoutingLabels": {
+        "externalDocs": {
+          "description": "Find out more how label based routers work",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/routing/introduction/#how-label-based-routers-work"
+        },
+        "title": "Routing Labels",
+        "description": "Allows to configure routing labels which are used for routers resolution",
+        "type": "object",
+        "properties": {
+          "environment": {
+            "type": "string"
+          },
+          "service": {
+            "type": "string"
+          },
+          "team": {
+            "type": "string"
           }
         }
       },

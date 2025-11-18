@@ -164,6 +164,10 @@ components:
           key:
             entityLabels:
               key: entityLabels
+            routingLabels:
+              environment: environment
+              service: service
+              team: team
             createTime: 2000-01-23T04:56:07.000+00:00
             entityType: ENTITY_TYPE_UNSPECIFIED
             name: My Router
@@ -249,6 +253,10 @@ components:
         router:
           entityLabels:
             key: entityLabels
+          routingLabels:
+            environment: environment
+            service: service
+            team: team
           createTime: 2000-01-23T04:56:07.000+00:00
           entityType: ENTITY_TYPE_UNSPECIFIED
           name: My Router
@@ -314,8 +322,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
       additionalProperties: false
       description: This data structure represents a filter path and values
@@ -369,6 +377,10 @@ components:
         router:
           entityLabels:
             key: entityLabels
+          routingLabels:
+            environment: environment
+            service: service
+            team: team
           createTime: 2000-01-23T04:56:07.000+00:00
           entityType: ENTITY_TYPE_UNSPECIFIED
           name: My Router
@@ -428,6 +440,10 @@ components:
       example:
         entityLabels:
           key: entityLabels
+        routingLabels:
+          environment: environment
+          service: service
+          team: team
         createTime: 2000-01-23T04:56:07.000+00:00
         entityType: ENTITY_TYPE_UNSPECIFIED
         name: My Router
@@ -486,6 +502,7 @@ components:
         entityLabelMatcher:
           additionalProperties:
             type: string
+          deprecated: true
           type: object
         entityLabels:
           additionalProperties:
@@ -503,6 +520,8 @@ components:
         name:
           example: My Router
           type: string
+        routingLabels:
+          $ref: "#/components/schemas/RoutingLabels"
         rules:
           items:
             $ref: "#/components/schemas/RoutingRule"
@@ -518,6 +537,10 @@ components:
         routers:
         - entityLabels:
             key: entityLabels
+          routingLabels:
+            environment: environment
+            service: service
+            team: team
           createTime: 2000-01-23T04:56:07.000+00:00
           entityType: ENTITY_TYPE_UNSPECIFIED
           name: My Router
@@ -566,6 +589,10 @@ components:
             presetId: presetId
         - entityLabels:
             key: entityLabels
+          routingLabels:
+            environment: environment
+            service: service
+            team: team
           createTime: 2000-01-23T04:56:07.000+00:00
           entityType: ENTITY_TYPE_UNSPECIFIED
           name: My Router
@@ -637,6 +664,10 @@ components:
         router:
           entityLabels:
             key: entityLabels
+          routingLabels:
+            environment: environment
+            service: service
+            team: team
           createTime: 2000-01-23T04:56:07.000+00:00
           entityType: ENTITY_TYPE_UNSPECIFIED
           name: My Router
@@ -690,6 +721,24 @@ components:
         router:
           $ref: "#/components/schemas/GlobalRouter"
       title: Replace Global Router Response
+      type: object
+    RoutingLabels:
+      description: Allows to configure routing labels which are used for routers resolution
+      example:
+        environment: environment
+        service: service
+        team: team
+      externalDocs:
+        description: Find out more how label based routers work
+        url: https://coralogix.com/docs/user-guides/notification-center/routing/introduction/#how-label-based-routers-work
+      properties:
+        environment:
+          type: string
+        service:
+          type: string
+        team:
+          type: string
+      title: Routing Labels
       type: object
     RoutingRule:
       description: Defines routing rule for notifications

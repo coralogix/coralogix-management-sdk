@@ -402,10 +402,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -581,13 +581,13 @@
       "Owner": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/OwnerOrganisationId"
-          },
-          {
             "$ref": "#/components/schemas/OwnerUserId"
           },
           {
             "$ref": "#/components/schemas/OwnerTeamId"
+          },
+          {
+            "$ref": "#/components/schemas/OwnerOrganisationId"
           }
         ]
       },

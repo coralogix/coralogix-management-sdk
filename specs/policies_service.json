@@ -83,10 +83,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/UpdatePolicyRequestSpanRules"
+                    "$ref": "#/components/schemas/UpdatePolicyRequestLogRules"
                   },
                   {
-                    "$ref": "#/components/schemas/UpdatePolicyRequestLogRules"
+                    "$ref": "#/components/schemas/UpdatePolicyRequestSpanRules"
                   }
                 ]
               }
@@ -141,10 +141,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/CreatePolicyRequestSpanRules"
+                    "$ref": "#/components/schemas/CreatePolicyRequestLogRules"
                   },
                   {
-                    "$ref": "#/components/schemas/CreatePolicyRequestLogRules"
+                    "$ref": "#/components/schemas/CreatePolicyRequestSpanRules"
                   }
                 ]
               }
@@ -1140,10 +1140,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -1340,10 +1340,10 @@
       "Placement": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/PlacementLast"
+            "$ref": "#/components/schemas/PlacementFirst"
           },
           {
-            "$ref": "#/components/schemas/PlacementFirst"
+            "$ref": "#/components/schemas/PlacementLast"
           }
         ]
       },
