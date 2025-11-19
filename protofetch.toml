@@ -477,7 +477,7 @@ allow_policies = [
 
 [cx-api-events]
 url = 'github.com/coralogix/cx-api-events'
-revision = "v0.1.6"
+revision = "v0.1.8"
 allow_policies = [
     "src/com/coralogixapis/events/v3/cx_event.proto",
     "src/com/coralogixapis/events/v3/event_order_by.proto",
