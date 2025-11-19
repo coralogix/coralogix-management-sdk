@@ -137,7 +137,7 @@ var File_com_coralogixapis_events_v3_cx_event_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_events_v3_cx_event_proto_rawDesc = "" +
 	"\n" +
-	"*com/coralogixapis/events/v3/cx_event.proto\x12\x1bcom.coralogixapis.events.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x9d\n" +
+	"*com/coralogixapis/events/v3/cx_event.proto\x12\x1bcom.coralogixapis.events.v3\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x9d\n" +
 	"\n" +
 	"\aCxEvent\x12K\n" +
 	"\fcx_event_key\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\v\x9aA\bJ\x06\"test\"R\n" +

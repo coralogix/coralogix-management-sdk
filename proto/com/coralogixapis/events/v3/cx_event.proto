@@ -2,11 +2,10 @@ syntax = "proto3";
 
 package com.coralogixapis.events.v3;
 
-import "google/protobuf/wrappers.proto";
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
-
 
 message CxEvent {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
@@ -28,13 +27,13 @@ message CxEvent {
       description: "Find out more about events"
     }
   };
-  google.protobuf.StringValue cx_event_key = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"test\"" }];
-  google.protobuf.StringValue cx_event_type = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"test_type\"" }];
-  map<string, string> cx_event_labels = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "{\"test\": \"test\"}" }];
-  google.protobuf.Int32Value company_id = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "1" }];
-  google.protobuf.Timestamp cx_event_timestamp = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "1714857600" }];
-  google.protobuf.StringValue cx_event_payload_type = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"test_payload_type\"" }];
-  google.protobuf.Struct cx_event_payload = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "{\"test\": \"test\"}" }];
-  google.protobuf.StringValue cx_event_dedup_key = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"test_dedup_key\"" }];
-  map<string, string> cx_event_metadata = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "{\"test\": \"test\"}" }];
+  google.protobuf.StringValue cx_event_key = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"test\""}];
+  google.protobuf.StringValue cx_event_type = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"test_type\""}];
+  map<string, string> cx_event_labels = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "{\"test\": \"test\"}"}];
+  google.protobuf.Int32Value company_id = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "1"}];
+  google.protobuf.Timestamp cx_event_timestamp = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "1714857600"}];
+  google.protobuf.StringValue cx_event_payload_type = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"test_payload_type\""}];
+  google.protobuf.Struct cx_event_payload = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "{\"test\": \"test\"}"}];
+  google.protobuf.StringValue cx_event_dedup_key = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"test_dedup_key\""}];
+  map<string, string> cx_event_metadata = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "{\"test\": \"test\"}"}];
 }
