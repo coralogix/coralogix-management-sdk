@@ -24,6 +24,7 @@ const (
 	EventsService_ListEvents_FullMethodName          = "/com.coralogixapis.events.v3.EventsService/ListEvents"
 	EventsService_ListEventsCount_FullMethodName     = "/com.coralogixapis.events.v3.EventsService/ListEventsCount"
 	EventsService_GetEventsStatistics_FullMethodName = "/com.coralogixapis.events.v3.EventsService/GetEventsStatistics"
+	EventsService_ListAlertEvents_FullMethodName     = "/com.coralogixapis.events.v3.EventsService/ListAlertEvents"
 )
 
 // EventsServiceClient is the client API for EventsService service.
@@ -35,6 +36,7 @@ type EventsServiceClient interface {
 	ListEvents(ctx context.Context, in *ListEventsRequest, opts ...grpc.CallOption) (*ListEventsResponse, error)
 	ListEventsCount(ctx context.Context, in *ListEventsCountRequest, opts ...grpc.CallOption) (*ListEventsCountResponse, error)
 	GetEventsStatistics(ctx context.Context, in *GetEventsStatisticsRequest, opts ...grpc.CallOption) (*GetEventsStatisticsResponse, error)
+	ListAlertEvents(ctx context.Context, in *ListAlertEventsRequest, opts ...grpc.CallOption) (*ListAlertEventsResponse, error)
 }
 
 type eventsServiceClient struct {
@@ -95,6 +97,16 @@ func (c *eventsServiceClient) GetEventsStatistics(ctx context.Context, in *GetEv
 	return out, nil
 }
 
+func (c *eventsServiceClient) ListAlertEvents(ctx context.Context, in *ListAlertEventsRequest, opts ...grpc.CallOption) (*ListAlertEventsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAlertEventsResponse)
+	err := c.cc.Invoke(ctx, EventsService_ListAlertEvents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EventsServiceServer is the server API for EventsService service.
 // All implementations must embed UnimplementedEventsServiceServer
 // for forward compatibility.
@@ -104,6 +116,7 @@ type EventsServiceServer interface {
 	ListEvents(context.Context, *ListEventsRequest) (*ListEventsResponse, error)
 	ListEventsCount(context.Context, *ListEventsCountRequest) (*ListEventsCountResponse, error)
 	GetEventsStatistics(context.Context, *GetEventsStatisticsRequest) (*GetEventsStatisticsResponse, error)
+	ListAlertEvents(context.Context, *ListAlertEventsRequest) (*ListAlertEventsResponse, error)
 	mustEmbedUnimplementedEventsServiceServer()
 }
 
@@ -128,6 +141,9 @@ func (UnimplementedEventsServiceServer) ListEventsCount(context.Context, *ListEv
 }
 func (UnimplementedEventsServiceServer) GetEventsStatistics(context.Context, *GetEventsStatisticsRequest) (*GetEventsStatisticsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetEventsStatistics not implemented")
+}
+func (UnimplementedEventsServiceServer) ListAlertEvents(context.Context, *ListAlertEventsRequest) (*ListAlertEventsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAlertEvents not implemented")
 }
 func (UnimplementedEventsServiceServer) mustEmbedUnimplementedEventsServiceServer() {}
 func (UnimplementedEventsServiceServer) testEmbeddedByValue()                       {}
@@ -240,6 +256,24 @@ func _EventsService_GetEventsStatistics_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EventsService_ListAlertEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAlertEventsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EventsServiceServer).ListAlertEvents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EventsService_ListAlertEvents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EventsServiceServer).ListAlertEvents(ctx, req.(*ListAlertEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EventsService_ServiceDesc is the grpc.ServiceDesc for EventsService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -266,6 +300,10 @@ var EventsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetEventsStatistics",
 			Handler:    _EventsService_GetEventsStatistics_Handler,
+		},
+		{
+			MethodName: "ListAlertEvents",
+			Handler:    _EventsService_ListAlertEvents_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

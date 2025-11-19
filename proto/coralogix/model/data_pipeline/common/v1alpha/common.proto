@@ -2,18 +2,6 @@ syntax = "proto3";
 
 package coralogix.model.data_pipeline.common.v1alpha;
 
-// -----------------------------------------------------------------------------
-// NOTE:
-// - The `json_name` for each enum value **must be lowerCamelCase** to match
-//   our parsing logic.
-//
-// - When adding a new `EntityType`, you must also synchronize it with the
-//   CX Catalog: https://cx-catalog.platform.coralogix.net/ui/entity-types
-//   so it will appear correctly under the relevant pillar.
-//
-// This keeps the proto definition and the CX Catalog aligned.
-// -----------------------------------------------------------------------------
-
 enum Pillar {
   PILLAR_UNSPECIFIED = 0;
   // JSON representation: "logs"

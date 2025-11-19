@@ -844,11 +844,139 @@ func (x *ListEventsCountResponse) GetReachedLimit() *wrapperspb.BoolValue {
 	return nil
 }
 
+type ListAlertEventsRequest struct {
+	state          protoimpl.MessageState    `protogen:"open.v1"`
+	AlertIds       []*wrapperspb.StringValue `protobuf:"bytes,1,rep,name=alert_ids,json=alertIds,proto3" json:"alert_ids,omitempty"`
+	TimestampRange *TimestampRange           `protobuf:"bytes,2,opt,name=timestamp_range,json=timestampRange,proto3" json:"timestamp_range,omitempty"`
+	CxEventLabels  map[string]string         `protobuf:"bytes,3,rep,name=cx_event_labels,json=cxEventLabels,proto3" json:"cx_event_labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	OrderBys       []*OrderBy                `protobuf:"bytes,4,rep,name=order_bys,json=orderBys,proto3" json:"order_bys,omitempty"`
+	Pagination     *PaginationRequest        `protobuf:"bytes,5,opt,name=pagination,proto3" json:"pagination,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ListAlertEventsRequest) Reset() {
+	*x = ListAlertEventsRequest{}
+	mi := &file_com_coralogixapis_events_v3_events_service_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAlertEventsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAlertEventsRequest) ProtoMessage() {}
+
+func (x *ListAlertEventsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_events_v3_events_service_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAlertEventsRequest.ProtoReflect.Descriptor instead.
+func (*ListAlertEventsRequest) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_events_v3_events_service_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *ListAlertEventsRequest) GetAlertIds() []*wrapperspb.StringValue {
+	if x != nil {
+		return x.AlertIds
+	}
+	return nil
+}
+
+func (x *ListAlertEventsRequest) GetTimestampRange() *TimestampRange {
+	if x != nil {
+		return x.TimestampRange
+	}
+	return nil
+}
+
+func (x *ListAlertEventsRequest) GetCxEventLabels() map[string]string {
+	if x != nil {
+		return x.CxEventLabels
+	}
+	return nil
+}
+
+func (x *ListAlertEventsRequest) GetOrderBys() []*OrderBy {
+	if x != nil {
+		return x.OrderBys
+	}
+	return nil
+}
+
+func (x *ListAlertEventsRequest) GetPagination() *PaginationRequest {
+	if x != nil {
+		return x.Pagination
+	}
+	return nil
+}
+
+type ListAlertEventsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Events        []*CxEvent             `protobuf:"bytes,1,rep,name=events,proto3" json:"events,omitempty"`
+	Pagination    *PaginationResponse    `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAlertEventsResponse) Reset() {
+	*x = ListAlertEventsResponse{}
+	mi := &file_com_coralogixapis_events_v3_events_service_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAlertEventsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAlertEventsResponse) ProtoMessage() {}
+
+func (x *ListAlertEventsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_events_v3_events_service_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAlertEventsResponse.ProtoReflect.Descriptor instead.
+func (*ListAlertEventsResponse) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_events_v3_events_service_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ListAlertEventsResponse) GetEvents() []*CxEvent {
+	if x != nil {
+		return x.Events
+	}
+	return nil
+}
+
+func (x *ListAlertEventsResponse) GetPagination() *PaginationResponse {
+	if x != nil {
+		return x.Pagination
+	}
+	return nil
+}
+
 var File_com_coralogixapis_events_v3_events_service_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_events_v3_events_service_proto_rawDesc = "" +
 	"\n" +
-	"0com/coralogixapis/events/v3/events_service.proto\x12\x1bcom.coralogixapis.events.v3\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a*com/coralogixapis/events/v3/cx_event.proto\x1a0com/coralogixapis/events/v3/event_order_by.proto\x1a5com/coralogixapis/events/v3/events_query_filter.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\"\x98\x02\n" +
+	"0com/coralogixapis/events/v3/events_service.proto\x12\x1bcom.coralogixapis.events.v3\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a*com/coralogixapis/events/v3/cx_event.proto\x1a0com/coralogixapis/events/v3/event_order_by.proto\x1a5com/coralogixapis/events/v3/events_query_filter.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x98\x02\n" +
 	"\fCxEventArray\x12<\n" +
 	"\x06events\x18\x01 \x03(\v2$.com.coralogixapis.events.v3.CxEventR\x06events:\xc9\x01\x9aA\xc5\x01\n" +
 	"J*\fCxEventArray21This data structure represents an array of events\xd2\x01\x06events*w\n" +
@@ -933,9 +1061,27 @@ const file_com_coralogixapis_events_v3_events_service_proto_rawDesc = "" +
 	"\x05count\x18\x01 \x01(\v2\x1c.google.protobuf.UInt64ValueB\a\x9aA\x04J\x0210R\x05count\x12K\n" +
 	"\rreached_limit\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueB\n" +
 	"\x9aA\aJ\x05falseR\freachedLimit:v\x9aAs\n" +
-	"q*\x17ListEventsCountResponse2>This data structure represents a response to list events count\xd2\x01\x05count\xd2\x01\rreached_limit2\xf6\f\n" +
-	"\rEventsService\x12\x83\x02\n" +
-	"\bGetEvent\x12,.com.coralogixapis.events.v3.GetEventRequest\x1a-.com.coralogixapis.events.v3.GetEventResponse\"\x99\x01\x9aAp\n" +
+	"q*\x17ListEventsCountResponse2>This data structure represents a response to list events count\xd2\x01\x05count\xd2\x01\rreached_limit\"\xaa\a\n" +
+	"\x16ListAlertEventsRequest\x12\x8f\x01\n" +
+	"\talert_ids\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueBT\x9aAQ2%Alert version IDs to filter events byJ([\"32144a8a-7ee0-4c16-a093-2bf1f9c12e1e\"]R\balertIds\x12\xc2\x01\n" +
+	"\x0ftimestamp_range\x18\x02 \x01(\v2+.com.coralogixapis.events.v3.TimestampRangeBl\x9aAi2\x1fTime range to search for eventsJF{\"from\": \"2025-10-30T13:11:58.422Z\", \"to\": \"2025-10-30T13:21:58.422Z\"}R\x0etimestampRange\x12\xed\x01\n" +
+	"\x0fcx_event_labels\x18\x03 \x03(\v2F.com.coralogixapis.events.v3.ListAlertEventsRequest.CxEventLabelsEntryB}\x9aAz2AOptional event labels to filter by (e.g., app, subsystem, region)J5{\\\"app\\\": \\\"some-app\\\", \\\"subsystem\\\": \\\"service-a\\\"}R\rcxEventLabels\x12A\n" +
+	"\torder_bys\x18\x04 \x03(\v2$.com.coralogixapis.events.v3.OrderByR\borderBys\x12N\n" +
+	"\n" +
+	"pagination\x18\x05 \x01(\v2..com.coralogixapis.events.v3.PaginationRequestR\n" +
+	"pagination\x1a@\n" +
+	"\x12CxEventLabelsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:t\x9aAq\n" +
+	"o*\x16ListAlertEventsRequest27Request to list events associated with specific alerts.\xd2\x01\talert_ids\xd2\x01\x0ftimestamp_range\"\x87\x02\n" +
+	"\x17ListAlertEventsResponse\x12<\n" +
+	"\x06events\x18\x01 \x03(\v2$.com.coralogixapis.events.v3.CxEventR\x06events\x12O\n" +
+	"\n" +
+	"pagination\x18\x02 \x01(\v2/.com.coralogixapis.events.v3.PaginationResponseR\n" +
+	"pagination:]\x9aAZ\n" +
+	"X*\x17ListAlertEventsResponse24Response containing events associated with the alert\xd2\x01\x06events2\xc9\x10\n" +
+	"\rEventsService\x12\x9d\x02\n" +
+	"\bGetEvent\x12,.com.coralogixapis.events.v3.GetEventRequest\x1a-.com.coralogixapis.events.v3.GetEventResponse\"\xb3\x01\x9aAp\n" +
 	"\x0eEvents Service\x12\tGet EventJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -943,8 +1089,8 @@ const file_com_coralogixapis_events_v3_events_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorʸ\x02\v\n" +
-	"\tget event\x82\xd3\xe4\x93\x02\x11\x12\x0f/v3/events/{id}\x12\xaa\x02\n" +
-	"\rBatchGetEvent\x121.com.coralogixapis.events.v3.BatchGetEventRequest\x1a2.com.coralogixapis.events.v3.BatchGetEventResponse\"\xb1\x01\x9aAv\n" +
+	"\tget event\x82\xd3\xe4\x93\x02+Z\x11\x12\x0f/v3/events/{id}\x12\x16/alerts/events/v3/{id}\x12\xc5\x02\n" +
+	"\rBatchGetEvent\x121.com.coralogixapis.events.v3.BatchGetEventRequest\x1a2.com.coralogixapis.events.v3.BatchGetEventResponse\"\xcc\x01\x9aAv\n" +
 	"\x0eEvents Service\x12\x0fBatch Get EventJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -952,9 +1098,9 @@ const file_com_coralogixapis_events_v3_events_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorʸ\x02\x12\n" +
-	"\x10batch get events\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v3/events/events:batchGet\x12\x8c\x02\n" +
+	"\x10batch get events\x82\xd3\xe4\x93\x027Z\x1c\x12\x1a/v3/events/events:batchGet\x12\x17/alerts/events/v3/batch\x12\xa1\x02\n" +
 	"\n" +
-	"ListEvents\x12..com.coralogixapis.events.v3.ListEventsRequest\x1a/.com.coralogixapis.events.v3.ListEventsResponse\"\x9c\x01\x9aAr\n" +
+	"ListEvents\x12..com.coralogixapis.events.v3.ListEventsRequest\x1a/.com.coralogixapis.events.v3.ListEventsResponse\"\xb1\x01\x9aAr\n" +
 	"\x0eEvents Service\x12\vList EventsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -962,9 +1108,9 @@ const file_com_coralogixapis_events_v3_events_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorʸ\x02\x11\n" +
-	"\x0fget events list\x82\xd3\xe4\x93\x02\f\x12\n" +
-	"/v3/events\x12\xad\x02\n" +
-	"\x0fListEventsCount\x123.com.coralogixapis.events.v3.ListEventsCountRequest\x1a4.com.coralogixapis.events.v3.ListEventsCountResponse\"\xae\x01\x9aAx\n" +
+	"\x0fget events list\x82\xd3\xe4\x93\x02!Z\f\x12\n" +
+	"/v3/events\x12\x11/alerts/events/v3\x12\xc8\x02\n" +
+	"\x0fListEventsCount\x123.com.coralogixapis.events.v3.ListEventsCountRequest\x1a4.com.coralogixapis.events.v3.ListEventsCountResponse\"\xc9\x01\x9aAx\n" +
 	"\x0eEvents Service\x12\x11List Events CountJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -972,8 +1118,8 @@ const file_com_coralogixapis_events_v3_events_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorʸ\x02\x17\n" +
-	"\x15get events list count\x82\xd3\xe4\x93\x02\x12\x12\x10/v3/events:count\x12\xc2\x02\n" +
-	"\x13GetEventsStatistics\x127.com.coralogixapis.events.v3.GetEventsStatisticsRequest\x1a8.com.coralogixapis.events.v3.GetEventsStatisticsResponse\"\xb7\x01\x9aA|\n" +
+	"\x15get events list count\x82\xd3\xe4\x93\x02-Z\x12\x12\x10/v3/events:count\x12\x17/alerts/events/v3/count\x12\xe2\x02\n" +
+	"\x13GetEventsStatistics\x127.com.coralogixapis.events.v3.GetEventsStatisticsRequest\x1a8.com.coralogixapis.events.v3.GetEventsStatisticsResponse\"\xd7\x01\x9aA|\n" +
 	"\x0eEvents Service\x12\x15Get Events StatisticsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -981,7 +1127,16 @@ const file_com_coralogixapis_events_v3_events_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorʸ\x02\x17\n" +
-	"\x15get events statistics\x82\xd3\xe4\x93\x02\x17\x12\x15/v3/events:statistics\x1a\xad\x01\x9aA\xa9\x01\n" +
+	"\x15get events statistics\x82\xd3\xe4\x93\x027Z\x17\x12\x15/v3/events:statistics\x12\x1c/alerts/events/v3/statistics\x12\xcb\x02\n" +
+	"\x0fListAlertEvents\x123.com.coralogixapis.events.v3.ListAlertEventsRequest\x1a4.com.coralogixapis.events.v3.ListAlertEventsResponse\"\xcc\x01\x9aAx\n" +
+	"\x0eEvents Service\x12\x11List Alert EventsJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server errorʸ\x02\x13\n" +
+	"\x11list alert events\x82\xd3\xe4\x93\x024Z \x12\x1e/alerts/events/v3/alert-events\x12\x10/v3/alert-events\x1a\xad\x01\x9aA\xa9\x01\n" +
 	"\x0eEvents Service\x12\x1eA service for querying events.\x1aw\n" +
 	",Learn more about alerts in our documentation\x12Ghttps://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/b\x06proto3"
 
@@ -997,7 +1152,7 @@ func file_com_coralogixapis_events_v3_events_service_proto_rawDescGZIP() []byte 
 	return file_com_coralogixapis_events_v3_events_service_proto_rawDescData
 }
 
-var file_com_coralogixapis_events_v3_events_service_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
+var file_com_coralogixapis_events_v3_events_service_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_com_coralogixapis_events_v3_events_service_proto_goTypes = []any{
 	(*CxEventArray)(nil),                // 0: com.coralogixapis.events.v3.CxEventArray
 	(*CxEventSingleOrMultiple)(nil),     // 1: com.coralogixapis.events.v3.CxEventSingleOrMultiple
@@ -1014,71 +1169,84 @@ var file_com_coralogixapis_events_v3_events_service_proto_goTypes = []any{
 	(*FieldStatistics)(nil),             // 12: com.coralogixapis.events.v3.FieldStatistics
 	(*ListEventsCountRequest)(nil),      // 13: com.coralogixapis.events.v3.ListEventsCountRequest
 	(*ListEventsCountResponse)(nil),     // 14: com.coralogixapis.events.v3.ListEventsCountResponse
-	nil,                                 // 15: com.coralogixapis.events.v3.BatchGetEventResponse.EventsEntry
-	nil,                                 // 16: com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventMetadataFieldStatisticsEntry
-	nil,                                 // 17: com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventLabelsFieldStatisticsEntry
-	nil,                                 // 18: com.coralogixapis.events.v3.FieldStatistics.FieldStatisticsEntry
-	(*CxEvent)(nil),                     // 19: com.coralogixapis.events.v3.CxEvent
-	(*wrapperspb.StringValue)(nil),      // 20: google.protobuf.StringValue
-	(*OrderBy)(nil),                     // 21: com.coralogixapis.events.v3.OrderBy
-	(*EventsQueryFilter)(nil),           // 22: com.coralogixapis.events.v3.EventsQueryFilter
-	(*wrapperspb.UInt32Value)(nil),      // 23: google.protobuf.UInt32Value
-	(*EventsFilter)(nil),                // 24: com.coralogixapis.events.v3.EventsFilter
-	(*wrapperspb.UInt64Value)(nil),      // 25: google.protobuf.UInt64Value
-	(*wrapperspb.BoolValue)(nil),        // 26: google.protobuf.BoolValue
-	(*wrapperspb.Int64Value)(nil),       // 27: google.protobuf.Int64Value
+	(*ListAlertEventsRequest)(nil),      // 15: com.coralogixapis.events.v3.ListAlertEventsRequest
+	(*ListAlertEventsResponse)(nil),     // 16: com.coralogixapis.events.v3.ListAlertEventsResponse
+	nil,                                 // 17: com.coralogixapis.events.v3.BatchGetEventResponse.EventsEntry
+	nil,                                 // 18: com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventMetadataFieldStatisticsEntry
+	nil,                                 // 19: com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventLabelsFieldStatisticsEntry
+	nil,                                 // 20: com.coralogixapis.events.v3.FieldStatistics.FieldStatisticsEntry
+	nil,                                 // 21: com.coralogixapis.events.v3.ListAlertEventsRequest.CxEventLabelsEntry
+	(*CxEvent)(nil),                     // 22: com.coralogixapis.events.v3.CxEvent
+	(*wrapperspb.StringValue)(nil),      // 23: google.protobuf.StringValue
+	(*OrderBy)(nil),                     // 24: com.coralogixapis.events.v3.OrderBy
+	(*EventsQueryFilter)(nil),           // 25: com.coralogixapis.events.v3.EventsQueryFilter
+	(*wrapperspb.UInt32Value)(nil),      // 26: google.protobuf.UInt32Value
+	(*EventsFilter)(nil),                // 27: com.coralogixapis.events.v3.EventsFilter
+	(*wrapperspb.UInt64Value)(nil),      // 28: google.protobuf.UInt64Value
+	(*wrapperspb.BoolValue)(nil),        // 29: google.protobuf.BoolValue
+	(*TimestampRange)(nil),              // 30: com.coralogixapis.events.v3.TimestampRange
+	(*wrapperspb.Int64Value)(nil),       // 31: google.protobuf.Int64Value
 }
 var file_com_coralogixapis_events_v3_events_service_proto_depIdxs = []int32{
-	19, // 0: com.coralogixapis.events.v3.CxEventArray.events:type_name -> com.coralogixapis.events.v3.CxEvent
-	19, // 1: com.coralogixapis.events.v3.CxEventSingleOrMultiple.single_event:type_name -> com.coralogixapis.events.v3.CxEvent
+	22, // 0: com.coralogixapis.events.v3.CxEventArray.events:type_name -> com.coralogixapis.events.v3.CxEvent
+	22, // 1: com.coralogixapis.events.v3.CxEventSingleOrMultiple.single_event:type_name -> com.coralogixapis.events.v3.CxEvent
 	0,  // 2: com.coralogixapis.events.v3.CxEventSingleOrMultiple.multiple_events:type_name -> com.coralogixapis.events.v3.CxEventArray
-	20, // 3: com.coralogixapis.events.v3.GetEventRequest.id:type_name -> google.protobuf.StringValue
-	21, // 4: com.coralogixapis.events.v3.GetEventRequest.order_bys:type_name -> com.coralogixapis.events.v3.OrderBy
+	23, // 3: com.coralogixapis.events.v3.GetEventRequest.id:type_name -> google.protobuf.StringValue
+	24, // 4: com.coralogixapis.events.v3.GetEventRequest.order_bys:type_name -> com.coralogixapis.events.v3.OrderBy
 	6,  // 5: com.coralogixapis.events.v3.GetEventRequest.pagination:type_name -> com.coralogixapis.events.v3.PaginationRequest
 	1,  // 6: com.coralogixapis.events.v3.GetEventResponse.event:type_name -> com.coralogixapis.events.v3.CxEventSingleOrMultiple
 	7,  // 7: com.coralogixapis.events.v3.GetEventResponse.pagination:type_name -> com.coralogixapis.events.v3.PaginationResponse
-	20, // 8: com.coralogixapis.events.v3.BatchGetEventRequest.ids:type_name -> google.protobuf.StringValue
-	21, // 9: com.coralogixapis.events.v3.BatchGetEventRequest.order_bys:type_name -> com.coralogixapis.events.v3.OrderBy
+	23, // 8: com.coralogixapis.events.v3.BatchGetEventRequest.ids:type_name -> google.protobuf.StringValue
+	24, // 9: com.coralogixapis.events.v3.BatchGetEventRequest.order_bys:type_name -> com.coralogixapis.events.v3.OrderBy
 	6,  // 10: com.coralogixapis.events.v3.BatchGetEventRequest.pagination:type_name -> com.coralogixapis.events.v3.PaginationRequest
-	22, // 11: com.coralogixapis.events.v3.BatchGetEventRequest.filter:type_name -> com.coralogixapis.events.v3.EventsQueryFilter
-	15, // 12: com.coralogixapis.events.v3.BatchGetEventResponse.events:type_name -> com.coralogixapis.events.v3.BatchGetEventResponse.EventsEntry
-	20, // 13: com.coralogixapis.events.v3.BatchGetEventResponse.not_found_ids:type_name -> google.protobuf.StringValue
+	25, // 11: com.coralogixapis.events.v3.BatchGetEventRequest.filter:type_name -> com.coralogixapis.events.v3.EventsQueryFilter
+	17, // 12: com.coralogixapis.events.v3.BatchGetEventResponse.events:type_name -> com.coralogixapis.events.v3.BatchGetEventResponse.EventsEntry
+	23, // 13: com.coralogixapis.events.v3.BatchGetEventResponse.not_found_ids:type_name -> google.protobuf.StringValue
 	7,  // 14: com.coralogixapis.events.v3.BatchGetEventResponse.pagination:type_name -> com.coralogixapis.events.v3.PaginationResponse
-	23, // 15: com.coralogixapis.events.v3.PaginationRequest.page_size:type_name -> google.protobuf.UInt32Value
-	20, // 16: com.coralogixapis.events.v3.PaginationRequest.page_token:type_name -> google.protobuf.StringValue
-	23, // 17: com.coralogixapis.events.v3.PaginationResponse.total_size:type_name -> google.protobuf.UInt32Value
-	20, // 18: com.coralogixapis.events.v3.PaginationResponse.next_page_token:type_name -> google.protobuf.StringValue
-	24, // 19: com.coralogixapis.events.v3.ListEventsRequest.filter:type_name -> com.coralogixapis.events.v3.EventsFilter
-	21, // 20: com.coralogixapis.events.v3.ListEventsRequest.order_bys:type_name -> com.coralogixapis.events.v3.OrderBy
+	26, // 15: com.coralogixapis.events.v3.PaginationRequest.page_size:type_name -> google.protobuf.UInt32Value
+	23, // 16: com.coralogixapis.events.v3.PaginationRequest.page_token:type_name -> google.protobuf.StringValue
+	26, // 17: com.coralogixapis.events.v3.PaginationResponse.total_size:type_name -> google.protobuf.UInt32Value
+	23, // 18: com.coralogixapis.events.v3.PaginationResponse.next_page_token:type_name -> google.protobuf.StringValue
+	27, // 19: com.coralogixapis.events.v3.ListEventsRequest.filter:type_name -> com.coralogixapis.events.v3.EventsFilter
+	24, // 20: com.coralogixapis.events.v3.ListEventsRequest.order_bys:type_name -> com.coralogixapis.events.v3.OrderBy
 	6,  // 21: com.coralogixapis.events.v3.ListEventsRequest.pagination:type_name -> com.coralogixapis.events.v3.PaginationRequest
-	19, // 22: com.coralogixapis.events.v3.ListEventsResponse.events:type_name -> com.coralogixapis.events.v3.CxEvent
+	22, // 22: com.coralogixapis.events.v3.ListEventsResponse.events:type_name -> com.coralogixapis.events.v3.CxEvent
 	7,  // 23: com.coralogixapis.events.v3.ListEventsResponse.pagination:type_name -> com.coralogixapis.events.v3.PaginationResponse
-	24, // 24: com.coralogixapis.events.v3.GetEventsStatisticsRequest.filter:type_name -> com.coralogixapis.events.v3.EventsFilter
-	16, // 25: com.coralogixapis.events.v3.GetEventsStatisticsResponse.cx_event_metadata_field_statistics:type_name -> com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventMetadataFieldStatisticsEntry
-	17, // 26: com.coralogixapis.events.v3.GetEventsStatisticsResponse.cx_event_labels_field_statistics:type_name -> com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventLabelsFieldStatisticsEntry
-	18, // 27: com.coralogixapis.events.v3.FieldStatistics.field_statistics:type_name -> com.coralogixapis.events.v3.FieldStatistics.FieldStatisticsEntry
-	24, // 28: com.coralogixapis.events.v3.ListEventsCountRequest.filter:type_name -> com.coralogixapis.events.v3.EventsFilter
-	25, // 29: com.coralogixapis.events.v3.ListEventsCountResponse.count:type_name -> google.protobuf.UInt64Value
-	26, // 30: com.coralogixapis.events.v3.ListEventsCountResponse.reached_limit:type_name -> google.protobuf.BoolValue
-	1,  // 31: com.coralogixapis.events.v3.BatchGetEventResponse.EventsEntry.value:type_name -> com.coralogixapis.events.v3.CxEventSingleOrMultiple
-	12, // 32: com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventMetadataFieldStatisticsEntry.value:type_name -> com.coralogixapis.events.v3.FieldStatistics
-	12, // 33: com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventLabelsFieldStatisticsEntry.value:type_name -> com.coralogixapis.events.v3.FieldStatistics
-	27, // 34: com.coralogixapis.events.v3.FieldStatistics.FieldStatisticsEntry.value:type_name -> google.protobuf.Int64Value
-	2,  // 35: com.coralogixapis.events.v3.EventsService.GetEvent:input_type -> com.coralogixapis.events.v3.GetEventRequest
-	4,  // 36: com.coralogixapis.events.v3.EventsService.BatchGetEvent:input_type -> com.coralogixapis.events.v3.BatchGetEventRequest
-	8,  // 37: com.coralogixapis.events.v3.EventsService.ListEvents:input_type -> com.coralogixapis.events.v3.ListEventsRequest
-	13, // 38: com.coralogixapis.events.v3.EventsService.ListEventsCount:input_type -> com.coralogixapis.events.v3.ListEventsCountRequest
-	10, // 39: com.coralogixapis.events.v3.EventsService.GetEventsStatistics:input_type -> com.coralogixapis.events.v3.GetEventsStatisticsRequest
-	3,  // 40: com.coralogixapis.events.v3.EventsService.GetEvent:output_type -> com.coralogixapis.events.v3.GetEventResponse
-	5,  // 41: com.coralogixapis.events.v3.EventsService.BatchGetEvent:output_type -> com.coralogixapis.events.v3.BatchGetEventResponse
-	9,  // 42: com.coralogixapis.events.v3.EventsService.ListEvents:output_type -> com.coralogixapis.events.v3.ListEventsResponse
-	14, // 43: com.coralogixapis.events.v3.EventsService.ListEventsCount:output_type -> com.coralogixapis.events.v3.ListEventsCountResponse
-	11, // 44: com.coralogixapis.events.v3.EventsService.GetEventsStatistics:output_type -> com.coralogixapis.events.v3.GetEventsStatisticsResponse
-	40, // [40:45] is the sub-list for method output_type
-	35, // [35:40] is the sub-list for method input_type
-	35, // [35:35] is the sub-list for extension type_name
-	35, // [35:35] is the sub-list for extension extendee
-	0,  // [0:35] is the sub-list for field type_name
+	27, // 24: com.coralogixapis.events.v3.GetEventsStatisticsRequest.filter:type_name -> com.coralogixapis.events.v3.EventsFilter
+	18, // 25: com.coralogixapis.events.v3.GetEventsStatisticsResponse.cx_event_metadata_field_statistics:type_name -> com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventMetadataFieldStatisticsEntry
+	19, // 26: com.coralogixapis.events.v3.GetEventsStatisticsResponse.cx_event_labels_field_statistics:type_name -> com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventLabelsFieldStatisticsEntry
+	20, // 27: com.coralogixapis.events.v3.FieldStatistics.field_statistics:type_name -> com.coralogixapis.events.v3.FieldStatistics.FieldStatisticsEntry
+	27, // 28: com.coralogixapis.events.v3.ListEventsCountRequest.filter:type_name -> com.coralogixapis.events.v3.EventsFilter
+	28, // 29: com.coralogixapis.events.v3.ListEventsCountResponse.count:type_name -> google.protobuf.UInt64Value
+	29, // 30: com.coralogixapis.events.v3.ListEventsCountResponse.reached_limit:type_name -> google.protobuf.BoolValue
+	23, // 31: com.coralogixapis.events.v3.ListAlertEventsRequest.alert_ids:type_name -> google.protobuf.StringValue
+	30, // 32: com.coralogixapis.events.v3.ListAlertEventsRequest.timestamp_range:type_name -> com.coralogixapis.events.v3.TimestampRange
+	21, // 33: com.coralogixapis.events.v3.ListAlertEventsRequest.cx_event_labels:type_name -> com.coralogixapis.events.v3.ListAlertEventsRequest.CxEventLabelsEntry
+	24, // 34: com.coralogixapis.events.v3.ListAlertEventsRequest.order_bys:type_name -> com.coralogixapis.events.v3.OrderBy
+	6,  // 35: com.coralogixapis.events.v3.ListAlertEventsRequest.pagination:type_name -> com.coralogixapis.events.v3.PaginationRequest
+	22, // 36: com.coralogixapis.events.v3.ListAlertEventsResponse.events:type_name -> com.coralogixapis.events.v3.CxEvent
+	7,  // 37: com.coralogixapis.events.v3.ListAlertEventsResponse.pagination:type_name -> com.coralogixapis.events.v3.PaginationResponse
+	1,  // 38: com.coralogixapis.events.v3.BatchGetEventResponse.EventsEntry.value:type_name -> com.coralogixapis.events.v3.CxEventSingleOrMultiple
+	12, // 39: com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventMetadataFieldStatisticsEntry.value:type_name -> com.coralogixapis.events.v3.FieldStatistics
+	12, // 40: com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventLabelsFieldStatisticsEntry.value:type_name -> com.coralogixapis.events.v3.FieldStatistics
+	31, // 41: com.coralogixapis.events.v3.FieldStatistics.FieldStatisticsEntry.value:type_name -> google.protobuf.Int64Value
+	2,  // 42: com.coralogixapis.events.v3.EventsService.GetEvent:input_type -> com.coralogixapis.events.v3.GetEventRequest
+	4,  // 43: com.coralogixapis.events.v3.EventsService.BatchGetEvent:input_type -> com.coralogixapis.events.v3.BatchGetEventRequest
+	8,  // 44: com.coralogixapis.events.v3.EventsService.ListEvents:input_type -> com.coralogixapis.events.v3.ListEventsRequest
+	13, // 45: com.coralogixapis.events.v3.EventsService.ListEventsCount:input_type -> com.coralogixapis.events.v3.ListEventsCountRequest
+	10, // 46: com.coralogixapis.events.v3.EventsService.GetEventsStatistics:input_type -> com.coralogixapis.events.v3.GetEventsStatisticsRequest
+	15, // 47: com.coralogixapis.events.v3.EventsService.ListAlertEvents:input_type -> com.coralogixapis.events.v3.ListAlertEventsRequest
+	3,  // 48: com.coralogixapis.events.v3.EventsService.GetEvent:output_type -> com.coralogixapis.events.v3.GetEventResponse
+	5,  // 49: com.coralogixapis.events.v3.EventsService.BatchGetEvent:output_type -> com.coralogixapis.events.v3.BatchGetEventResponse
+	9,  // 50: com.coralogixapis.events.v3.EventsService.ListEvents:output_type -> com.coralogixapis.events.v3.ListEventsResponse
+	14, // 51: com.coralogixapis.events.v3.EventsService.ListEventsCount:output_type -> com.coralogixapis.events.v3.ListEventsCountResponse
+	11, // 52: com.coralogixapis.events.v3.EventsService.GetEventsStatistics:output_type -> com.coralogixapis.events.v3.GetEventsStatisticsResponse
+	16, // 53: com.coralogixapis.events.v3.EventsService.ListAlertEvents:output_type -> com.coralogixapis.events.v3.ListAlertEventsResponse
+	48, // [48:54] is the sub-list for method output_type
+	42, // [42:48] is the sub-list for method input_type
+	42, // [42:42] is the sub-list for extension type_name
+	42, // [42:42] is the sub-list for extension extendee
+	0,  // [0:42] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_events_v3_events_service_proto_init() }
@@ -1099,7 +1267,7 @@ func file_com_coralogixapis_events_v3_events_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_events_v3_events_service_proto_rawDesc), len(file_com_coralogixapis_events_v3_events_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   19,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

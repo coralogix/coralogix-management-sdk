@@ -57,8 +57,8 @@ commit_hash = "034cf6a4b8108e8cb5e83933b299c41108c3cc0b"
 [[dependencies]]
 name = "cx-api-events"
 url = "github.com/coralogix/cx-api-events"
-revision = "v0.1.6"
-commit_hash = "a4300cbd86d05f2dddec00fc88c38f230eaf295a"
+revision = "v0.1.7"
+commit_hash = "0f850ea90ea5642de25db7b4b0b79750a24298fa"
 
 [[dependencies]]
 name = "cx-api-extensions"
@@ -75,8 +75,9 @@ commit_hash = "b960466df912ba67e7157e2f016af02eb6c9f669"
 [[dependencies]]
 name = "cx-api-lmd-model"
 url = "github.com/coralogix/cx-api-lmd-model"
-branch = "master"
-commit_hash = "fa71ff99fdcdeaf13b525f65ad2b2afa9a70abcb"
+protocol = "ssh"
+revision = "v0.0.8"
+commit_hash = "c3519ef689aca1a640f985e7b339394028c261f4"
 
 [[dependencies]]
 name = "cx-api-logs2metrics"
