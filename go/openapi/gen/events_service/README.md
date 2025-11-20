@@ -111,12 +111,12 @@ Class | Method | HTTP request | Description
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
  - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
- - [GetEventResponse](docs/GetEventResponse.md)
  - [GetEventsStatisticsResponse](docs/GetEventsStatisticsResponse.md)
  - [ListEventsCountResponse](docs/ListEventsCountResponse.md)
- - [ListEventsResponse](docs/ListEventsResponse.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
+ - [V3GetEventResponse](docs/V3GetEventResponse.md)
+ - [V3ListEventsResponse](docs/V3ListEventsResponse.md)
 
 
 ## Documentation For Authorization

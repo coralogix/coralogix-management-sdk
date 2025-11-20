@@ -70,12 +70,6 @@
               "items": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/DimensionPillar"
-                  },
-                  {
-                    "$ref": "#/components/schemas/DimensionGenericDimension"
-                  },
-                  {
                     "$ref": "#/components/schemas/DimensionTier"
                   },
                   {
@@ -83,6 +77,12 @@
                   },
                   {
                     "$ref": "#/components/schemas/DimensionPriority"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DimensionPillar"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DimensionGenericDimension"
                   }
                 ]
               }
@@ -823,6 +823,9 @@
       "Dimension": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/DimensionPriority"
+          },
+          {
             "$ref": "#/components/schemas/DimensionPillar"
           },
           {
@@ -833,9 +836,6 @@
           },
           {
             "$ref": "#/components/schemas/DimensionSeverity"
-          },
-          {
-            "$ref": "#/components/schemas/DimensionPriority"
           }
         ]
       },

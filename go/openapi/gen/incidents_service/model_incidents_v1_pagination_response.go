@@ -16,39 +16,39 @@ import (
 	"fmt"
 )
 
-// checks if the V1PaginationResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &V1PaginationResponse{}
+// checks if the IncidentsV1PaginationResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IncidentsV1PaginationResponse{}
 
-// V1PaginationResponse Pagination information for list responses
-type V1PaginationResponse struct {
+// IncidentsV1PaginationResponse Pagination information for list responses
+type IncidentsV1PaginationResponse struct {
 	// Token for the next page of results
 	NextPageToken *string `json:"nextPageToken,omitempty"`
 	// Total number of items available
 	TotalSize int64 `json:"totalSize"`
 }
 
-type _V1PaginationResponse V1PaginationResponse
+type _IncidentsV1PaginationResponse IncidentsV1PaginationResponse
 
-// NewV1PaginationResponse instantiates a new V1PaginationResponse object
+// NewIncidentsV1PaginationResponse instantiates a new IncidentsV1PaginationResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV1PaginationResponse(totalSize int64) *V1PaginationResponse {
-	this := V1PaginationResponse{}
+func NewIncidentsV1PaginationResponse(totalSize int64) *IncidentsV1PaginationResponse {
+	this := IncidentsV1PaginationResponse{}
 	this.TotalSize = totalSize
 	return &this
 }
 
-// NewV1PaginationResponseWithDefaults instantiates a new V1PaginationResponse object
+// NewIncidentsV1PaginationResponseWithDefaults instantiates a new IncidentsV1PaginationResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewV1PaginationResponseWithDefaults() *V1PaginationResponse {
-	this := V1PaginationResponse{}
+func NewIncidentsV1PaginationResponseWithDefaults() *IncidentsV1PaginationResponse {
+	this := IncidentsV1PaginationResponse{}
 	return &this
 }
 
 // GetNextPageToken returns the NextPageToken field value if set, zero value otherwise.
-func (o *V1PaginationResponse) GetNextPageToken() string {
+func (o *IncidentsV1PaginationResponse) GetNextPageToken() string {
 	if o == nil || IsNil(o.NextPageToken) {
 		var ret string
 		return ret
@@ -58,7 +58,7 @@ func (o *V1PaginationResponse) GetNextPageToken() string {
 
 // GetNextPageTokenOk returns a tuple with the NextPageToken field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V1PaginationResponse) GetNextPageTokenOk() (*string, bool) {
+func (o *IncidentsV1PaginationResponse) GetNextPageTokenOk() (*string, bool) {
 	if o == nil || IsNil(o.NextPageToken) {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *V1PaginationResponse) GetNextPageTokenOk() (*string, bool) {
 }
 
 // HasNextPageToken returns a boolean if a field has been set.
-func (o *V1PaginationResponse) HasNextPageToken() bool {
+func (o *IncidentsV1PaginationResponse) HasNextPageToken() bool {
 	if o != nil && !IsNil(o.NextPageToken) {
 		return true
 	}
@@ -75,12 +75,12 @@ func (o *V1PaginationResponse) HasNextPageToken() bool {
 }
 
 // SetNextPageToken gets a reference to the given string and assigns it to the NextPageToken field.
-func (o *V1PaginationResponse) SetNextPageToken(v string) {
+func (o *IncidentsV1PaginationResponse) SetNextPageToken(v string) {
 	o.NextPageToken = &v
 }
 
 // GetTotalSize returns the TotalSize field value
-func (o *V1PaginationResponse) GetTotalSize() int64 {
+func (o *IncidentsV1PaginationResponse) GetTotalSize() int64 {
 	if o == nil {
 		var ret int64
 		return ret
@@ -91,7 +91,7 @@ func (o *V1PaginationResponse) GetTotalSize() int64 {
 
 // GetTotalSizeOk returns a tuple with the TotalSize field value
 // and a boolean to check if the value has been set.
-func (o *V1PaginationResponse) GetTotalSizeOk() (*int64, bool) {
+func (o *IncidentsV1PaginationResponse) GetTotalSizeOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -99,11 +99,11 @@ func (o *V1PaginationResponse) GetTotalSizeOk() (*int64, bool) {
 }
 
 // SetTotalSize sets field value
-func (o *V1PaginationResponse) SetTotalSize(v int64) {
+func (o *IncidentsV1PaginationResponse) SetTotalSize(v int64) {
 	o.TotalSize = v
 }
 
-func (o V1PaginationResponse) MarshalJSON() ([]byte, error) {
+func (o IncidentsV1PaginationResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -111,7 +111,7 @@ func (o V1PaginationResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o V1PaginationResponse) ToMap() (map[string]interface{}, error) {
+func (o IncidentsV1PaginationResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.NextPageToken) {
 		toSerialize["nextPageToken"] = o.NextPageToken
@@ -120,7 +120,7 @@ func (o V1PaginationResponse) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *V1PaginationResponse) UnmarshalJSON(data []byte) (err error) {
+func (o *IncidentsV1PaginationResponse) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -142,53 +142,53 @@ func (o *V1PaginationResponse) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varV1PaginationResponse := _V1PaginationResponse{}
+	varIncidentsV1PaginationResponse := _IncidentsV1PaginationResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varV1PaginationResponse)
+	err = decoder.Decode(&varIncidentsV1PaginationResponse)
 
 	if err != nil {
 		return err
 	}
 
-	*o = V1PaginationResponse(varV1PaginationResponse)
+	*o = IncidentsV1PaginationResponse(varIncidentsV1PaginationResponse)
 
 	return err
 }
 
-type NullableV1PaginationResponse struct {
-	value *V1PaginationResponse
+type NullableIncidentsV1PaginationResponse struct {
+	value *IncidentsV1PaginationResponse
 	isSet bool
 }
 
-func (v NullableV1PaginationResponse) Get() *V1PaginationResponse {
+func (v NullableIncidentsV1PaginationResponse) Get() *IncidentsV1PaginationResponse {
 	return v.value
 }
 
-func (v *NullableV1PaginationResponse) Set(val *V1PaginationResponse) {
+func (v *NullableIncidentsV1PaginationResponse) Set(val *IncidentsV1PaginationResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableV1PaginationResponse) IsSet() bool {
+func (v NullableIncidentsV1PaginationResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableV1PaginationResponse) Unset() {
+func (v *NullableIncidentsV1PaginationResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableV1PaginationResponse(val *V1PaginationResponse) *NullableV1PaginationResponse {
-	return &NullableV1PaginationResponse{value: val, isSet: true}
+func NewNullableIncidentsV1PaginationResponse(val *IncidentsV1PaginationResponse) *NullableIncidentsV1PaginationResponse {
+	return &NullableIncidentsV1PaginationResponse{value: val, isSet: true}
 }
 
-func (v NullableV1PaginationResponse) MarshalJSON() ([]byte, error) {
+func (v NullableIncidentsV1PaginationResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableV1PaginationResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableIncidentsV1PaginationResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

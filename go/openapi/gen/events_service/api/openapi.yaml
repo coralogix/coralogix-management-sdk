@@ -40,7 +40,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListEventsResponse"
+                $ref: "#/components/schemas/v3.ListEventsResponse"
           description: ""
         "400":
           content:
@@ -154,7 +154,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GetEventResponse"
+                $ref: "#/components/schemas/v3.GetEventResponse"
           description: ""
         "400":
           content:
@@ -255,19 +255,32 @@ components:
           nextPageToken: test
         events:
           key:
-            singleEvent:
-              cxEventType: test_type
-              companyId: 1
-              cxEventKey: test
-              cxEventMetadata:
-                test: test
-              cxEventPayload:
-                test: test
-              cxEventPayloadType: test_payload_type
-              cxEventDedupKey: test_dedup_key
-              cxEventLabels:
-                test: test
-              cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+            multipleEvents:
+              events:
+              - cxEventType: test_type
+                companyId: 1
+                cxEventKey: test
+                cxEventMetadata:
+                  test: test
+                cxEventPayload:
+                  test: test
+                cxEventPayloadType: test_payload_type
+                cxEventDedupKey: test_dedup_key
+                cxEventLabels:
+                  test: test
+                cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+              - cxEventType: test_type
+                companyId: 1
+                cxEventKey: test
+                cxEventMetadata:
+                  test: test
+                cxEventPayload:
+                  test: test
+                cxEventPayloadType: test_payload_type
+                cxEventDedupKey: test_dedup_key
+                cxEventLabels:
+                  test: test
+                cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         events:
           additionalProperties:
@@ -364,6 +377,32 @@ components:
       type: object
     CxEventArray:
       description: This data structure represents an array of events
+      example:
+        events:
+        - cxEventType: test_type
+          companyId: 1
+          cxEventKey: test
+          cxEventMetadata:
+            test: test
+          cxEventPayload:
+            test: test
+          cxEventPayloadType: test_payload_type
+          cxEventDedupKey: test_dedup_key
+          cxEventLabels:
+            test: test
+          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+        - cxEventType: test_type
+          companyId: 1
+          cxEventKey: test
+          cxEventMetadata:
+            test: test
+          cxEventPayload:
+            test: test
+          cxEventPayloadType: test_payload_type
+          cxEventDedupKey: test_dedup_key
+          cxEventLabels:
+            test: test
+          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about events
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
@@ -378,11 +417,38 @@ components:
       type: object
     CxEventSingleOrMultiple:
       oneOf:
-      - $ref: "#/components/schemas/CxEventSingleOrMultipleSingleEvent"
       - $ref: "#/components/schemas/CxEventSingleOrMultipleMultipleEvents"
+      - $ref: "#/components/schemas/CxEventSingleOrMultipleSingleEvent"
     CxEventSingleOrMultipleMultipleEvents:
       additionalProperties: false
       description: This data structure represents a single or multiple events
+      example:
+        multipleEvents:
+          events:
+          - cxEventType: test_type
+            companyId: 1
+            cxEventKey: test
+            cxEventMetadata:
+              test: test
+            cxEventPayload:
+              test: test
+            cxEventPayloadType: test_payload_type
+            cxEventDedupKey: test_dedup_key
+            cxEventLabels:
+              test: test
+            cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+          - cxEventType: test_type
+            companyId: 1
+            cxEventKey: test
+            cxEventMetadata:
+              test: test
+            cxEventPayload:
+              test: test
+            cxEventPayloadType: test_payload_type
+            cxEventDedupKey: test_dedup_key
+            cxEventLabels:
+              test: test
+            cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
       properties:
@@ -395,20 +461,6 @@ components:
     CxEventSingleOrMultipleSingleEvent:
       additionalProperties: false
       description: This data structure represents a single or multiple events
-      example:
-        singleEvent:
-          cxEventType: test_type
-          companyId: 1
-          cxEventKey: test
-          cxEventMetadata:
-            test: test
-          cxEventPayload:
-            test: test
-          cxEventPayloadType: test_payload_type
-          cxEventDedupKey: test_dedup_key
-          cxEventLabels:
-            test: test
-          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
       properties:
@@ -487,31 +539,6 @@ components:
       - pathAndValues
       title: Filters
       type: object
-    GetEventResponse:
-      example:
-        pagination:
-          totalSize: 10
-          nextPageToken: test
-        event:
-          singleEvent:
-            cxEventType: test_type
-            companyId: 1
-            cxEventKey: test
-            cxEventMetadata:
-              test: test
-            cxEventPayload:
-              test: test
-            cxEventPayloadType: test_payload_type
-            cxEventDedupKey: test_dedup_key
-            cxEventLabels:
-              test: test
-            cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
-      properties:
-        event:
-          $ref: "#/components/schemas/CxEventSingleOrMultiple"
-        pagination:
-          $ref: "#/components/schemas/events.v3.PaginationResponse"
-      type: object
     GetEventsStatisticsResponse:
       description: This data structure represents a response to get events statistics
       example:
@@ -557,50 +584,6 @@ components:
       - count
       - reachedLimit
       title: ListEventsCountResponse
-      type: object
-    ListEventsResponse:
-      description: This data structure represents a response to list events
-      example:
-        pagination:
-          totalSize: 10
-          nextPageToken: test
-        events:
-        - cxEventType: test_type
-          companyId: 1
-          cxEventKey: test
-          cxEventMetadata:
-            test: test
-          cxEventPayload:
-            test: test
-          cxEventPayloadType: test_payload_type
-          cxEventDedupKey: test_dedup_key
-          cxEventLabels:
-            test: test
-          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
-        - cxEventType: test_type
-          companyId: 1
-          cxEventKey: test
-          cxEventMetadata:
-            test: test
-          cxEventPayload:
-            test: test
-          cxEventPayloadType: test_payload_type
-          cxEventDedupKey: test_dedup_key
-          cxEventLabels:
-            test: test
-          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
-      externalDocs:
-        url: ""
-      properties:
-        events:
-          items:
-            $ref: "#/components/schemas/CxEvent"
-          type: array
-        pagination:
-          $ref: "#/components/schemas/events.v3.PaginationResponse"
-      required:
-      - events
-      title: ListEventsResponse
       type: object
     MultipleValues:
       properties:
@@ -657,6 +640,88 @@ components:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
+    v3.GetEventResponse:
+      example:
+        pagination:
+          totalSize: 10
+          nextPageToken: test
+        event:
+          multipleEvents:
+            events:
+            - cxEventType: test_type
+              companyId: 1
+              cxEventKey: test
+              cxEventMetadata:
+                test: test
+              cxEventPayload:
+                test: test
+              cxEventPayloadType: test_payload_type
+              cxEventDedupKey: test_dedup_key
+              cxEventLabels:
+                test: test
+              cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+            - cxEventType: test_type
+              companyId: 1
+              cxEventKey: test
+              cxEventMetadata:
+                test: test
+              cxEventPayload:
+                test: test
+              cxEventPayloadType: test_payload_type
+              cxEventDedupKey: test_dedup_key
+              cxEventLabels:
+                test: test
+              cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        event:
+          $ref: "#/components/schemas/CxEventSingleOrMultiple"
+        pagination:
+          $ref: "#/components/schemas/events.v3.PaginationResponse"
+      type: object
+    v3.ListEventsResponse:
+      description: This data structure represents a response to list events
+      example:
+        pagination:
+          totalSize: 10
+          nextPageToken: test
+        events:
+        - cxEventType: test_type
+          companyId: 1
+          cxEventKey: test
+          cxEventMetadata:
+            test: test
+          cxEventPayload:
+            test: test
+          cxEventPayloadType: test_payload_type
+          cxEventDedupKey: test_dedup_key
+          cxEventLabels:
+            test: test
+          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+        - cxEventType: test_type
+          companyId: 1
+          cxEventKey: test
+          cxEventMetadata:
+            test: test
+          cxEventPayload:
+            test: test
+          cxEventPayloadType: test_payload_type
+          cxEventDedupKey: test_dedup_key
+          cxEventLabels:
+            test: test
+          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        events:
+          items:
+            $ref: "#/components/schemas/CxEvent"
+          type: array
+        pagination:
+          $ref: "#/components/schemas/events.v3.PaginationResponse"
+      required:
+      - events
+      title: ListEventsResponse
+      type: object
     EventsFilter:
       description: This data structure represents an events filter
       externalDocs:

@@ -133,7 +133,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SlosService_ReplaceSlo_request"
+              $ref: "#/components/schemas/SlosService_CreateSlo_request"
       responses:
         "200":
           content:
@@ -1326,13 +1326,13 @@ components:
       type: object
     SlosService_ReplaceSlo_request:
       oneOf:
-      - $ref: "#/components/schemas/SloRequestBasedMetricSli"
       - $ref: "#/components/schemas/SloWindowBasedMetricSli"
+      - $ref: "#/components/schemas/SloRequestBasedMetricSli"
       type: object
     SlosService_CreateSlo_request:
       oneOf:
-      - $ref: "#/components/schemas/SloWindowBasedMetricSli"
       - $ref: "#/components/schemas/SloRequestBasedMetricSli"
+      - $ref: "#/components/schemas/SloWindowBasedMetricSli"
       type: object
     SlosService_BatchExecuteSlo_requests_parameter_inner:
       oneOf:

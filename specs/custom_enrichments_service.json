@@ -109,10 +109,10 @@
               "items": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/SearchClauseName"
+                    "$ref": "#/components/schemas/SearchClauseId"
                   },
                   {
-                    "$ref": "#/components/schemas/SearchClauseId"
+                    "$ref": "#/components/schemas/SearchClauseName"
                   }
                 ]
               }
@@ -246,10 +246,10 @@
             "schema": {
               "oneOf": [
                 {
-                  "$ref": "#/components/schemas/FileTextual"
+                  "$ref": "#/components/schemas/FileBinary"
                 },
                 {
-                  "$ref": "#/components/schemas/FileBinary"
+                  "$ref": "#/components/schemas/FileTextual"
                 }
               ]
             },

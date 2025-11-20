@@ -623,7 +623,7 @@ func (r ApiIncidentsServiceGetFilterValuesRequest) Filter(filter IncidentQueryFi
 	return r
 }
 
-func (r ApiIncidentsServiceGetFilterValuesRequest) Execute() (*GetFilterValuesResponse, *http.Response, error) {
+func (r ApiIncidentsServiceGetFilterValuesRequest) Execute() (*IncidentsV1GetFilterValuesResponse, *http.Response, error) {
 	return r.ApiService.IncidentsServiceGetFilterValuesExecute(r)
 }
 
@@ -643,13 +643,13 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetFilterValues(ctx context
 }
 
 // Execute executes the request
-//  @return GetFilterValuesResponse
-func (a *IncidentsServiceAPIService) IncidentsServiceGetFilterValuesExecute(r ApiIncidentsServiceGetFilterValuesRequest) (*GetFilterValuesResponse, *http.Response, error) {
+//  @return IncidentsV1GetFilterValuesResponse
+func (a *IncidentsServiceAPIService) IncidentsServiceGetFilterValuesExecute(r ApiIncidentsServiceGetFilterValuesRequest) (*IncidentsV1GetFilterValuesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetFilterValuesResponse
+		localVarReturnValue  *IncidentsV1GetFilterValuesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IncidentsServiceAPIService.IncidentsServiceGetFilterValues")

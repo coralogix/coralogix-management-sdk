@@ -261,25 +261,13 @@ components:
       type: object
     ActionExecutionResponse:
       oneOf:
+      - $ref: "#/components/schemas/ActionExecutionResponseCreate"
       - $ref: "#/components/schemas/ActionExecutionResponseReplace"
       - $ref: "#/components/schemas/ActionExecutionResponseDelete"
-      - $ref: "#/components/schemas/ActionExecutionResponseCreate"
     ActionExecutionResponseCreate:
       additionalProperties: false
-      properties:
-        create:
-          $ref: "#/components/schemas/CreateActionResponse"
-      type: object
-    ActionExecutionResponseDelete:
-      additionalProperties: false
-      properties:
-        delete:
-          type: object
-      type: object
-    ActionExecutionResponseReplace:
-      additionalProperties: false
       example:
-        replace:
+        create:
           action:
             createdBy: createdBy
             sourceType: SOURCE_TYPE_UNSPECIFIED
@@ -295,13 +283,25 @@ components:
             url: url
             isHidden: true
       properties:
+        create:
+          $ref: "#/components/schemas/CreateActionResponse"
+      type: object
+    ActionExecutionResponseDelete:
+      additionalProperties: false
+      properties:
+        delete:
+          type: object
+      type: object
+    ActionExecutionResponseReplace:
+      additionalProperties: false
+      properties:
         replace:
           $ref: "#/components/schemas/ReplaceActionResponse"
       type: object
     AtomicBatchExecuteActionsResponse:
       example:
         matchingResponses:
-        - replace:
+        - create:
             action:
               createdBy: createdBy
               sourceType: SOURCE_TYPE_UNSPECIFIED
@@ -316,7 +316,7 @@ components:
               isPrivate: true
               url: url
               isHidden: true
-        - replace:
+        - create:
             action:
               createdBy: createdBy
               sourceType: SOURCE_TYPE_UNSPECIFIED

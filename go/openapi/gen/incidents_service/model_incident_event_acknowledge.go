@@ -19,7 +19,7 @@ var _ MappedNullable = &IncidentEventAcknowledge{}
 
 // IncidentEventAcknowledge struct for IncidentEventAcknowledge
 type IncidentEventAcknowledge struct {
-	AcknowledgedBy *UserDetails `json:"acknowledgedBy,omitempty"`
+	AcknowledgedBy *IncidentsV1UserDetails `json:"acknowledgedBy,omitempty"`
 }
 
 // NewIncidentEventAcknowledge instantiates a new IncidentEventAcknowledge object
@@ -40,9 +40,9 @@ func NewIncidentEventAcknowledgeWithDefaults() *IncidentEventAcknowledge {
 }
 
 // GetAcknowledgedBy returns the AcknowledgedBy field value if set, zero value otherwise.
-func (o *IncidentEventAcknowledge) GetAcknowledgedBy() UserDetails {
+func (o *IncidentEventAcknowledge) GetAcknowledgedBy() IncidentsV1UserDetails {
 	if o == nil || IsNil(o.AcknowledgedBy) {
-		var ret UserDetails
+		var ret IncidentsV1UserDetails
 		return ret
 	}
 	return *o.AcknowledgedBy
@@ -50,7 +50,7 @@ func (o *IncidentEventAcknowledge) GetAcknowledgedBy() UserDetails {
 
 // GetAcknowledgedByOk returns a tuple with the AcknowledgedBy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentEventAcknowledge) GetAcknowledgedByOk() (*UserDetails, bool) {
+func (o *IncidentEventAcknowledge) GetAcknowledgedByOk() (*IncidentsV1UserDetails, bool) {
 	if o == nil || IsNil(o.AcknowledgedBy) {
 		return nil, false
 	}
@@ -66,8 +66,8 @@ func (o *IncidentEventAcknowledge) HasAcknowledgedBy() bool {
 	return false
 }
 
-// SetAcknowledgedBy gets a reference to the given UserDetails and assigns it to the AcknowledgedBy field.
-func (o *IncidentEventAcknowledge) SetAcknowledgedBy(v UserDetails) {
+// SetAcknowledgedBy gets a reference to the given IncidentsV1UserDetails and assigns it to the AcknowledgedBy field.
+func (o *IncidentEventAcknowledge) SetAcknowledgedBy(v IncidentsV1UserDetails) {
 	o.AcknowledgedBy = &v
 }
 

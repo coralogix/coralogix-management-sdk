@@ -145,10 +145,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
+                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
                   },
                   {
-                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
+                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
                   }
                 ]
               }
@@ -214,10 +214,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
+                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
                   },
                   {
-                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
+                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
                   }
                 ]
               }

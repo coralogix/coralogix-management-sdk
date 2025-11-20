@@ -29,7 +29,6 @@ model_filter_path_and_values.go
 model_filter_path_and_values_filters.go
 model_filter_path_and_values_multiple_values.go
 model_filters.go
-model_get_filter_values_response.go
 model_get_incident_by_event_id_response.go
 model_get_incident_events_response.go
 model_get_incident_response.go
@@ -96,7 +95,10 @@ model_incident_status_count.go
 model_incident_status_with_count.go
 model_incidents_service_list_incident_aggregations_group_bys_parameter_inner.go
 model_incidents_service_list_incidents_order_bys_parameter_inner.go
+model_incidents_v1_get_filter_values_response.go
 model_incidents_v1_meta_label.go
+model_incidents_v1_pagination_response.go
+model_incidents_v1_user_details.go
 model_list_incident_aggregations_response.go
 model_list_incident_events_filter_values_response.go
 model_list_incident_events_order_by_request.go
@@ -116,7 +118,6 @@ model_v1_filter_operator.go
 model_v1_order_by_contextual_label.go
 model_v1_order_by_direction.go
 model_v1_order_by_incident_field.go
-model_v1_pagination_response.go
 model_v3_filter_operator.go
 response.go
 utils.go

@@ -463,13 +463,13 @@
       "ActionExecutionResponse": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/ActionExecutionResponseCreate"
+          },
+          {
             "$ref": "#/components/schemas/ActionExecutionResponseReplace"
           },
           {
             "$ref": "#/components/schemas/ActionExecutionResponseDelete"
-          },
-          {
-            "$ref": "#/components/schemas/ActionExecutionResponseCreate"
           }
         ]
       },

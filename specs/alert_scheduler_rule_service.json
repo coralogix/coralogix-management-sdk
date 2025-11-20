@@ -876,10 +876,10 @@
       "Recurring": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/RecurringAlways"
+            "$ref": "#/components/schemas/RecurringDynamic"
           },
           {
-            "$ref": "#/components/schemas/RecurringDynamic"
+            "$ref": "#/components/schemas/RecurringAlways"
           }
         ]
       },

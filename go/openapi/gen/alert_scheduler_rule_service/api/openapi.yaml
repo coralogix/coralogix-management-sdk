@@ -856,8 +856,8 @@ components:
       type: object
     Recurring:
       oneOf:
-      - $ref: "#/components/schemas/RecurringAlways"
       - $ref: "#/components/schemas/RecurringDynamic"
+      - $ref: "#/components/schemas/RecurringAlways"
     Recurring.Dynamic:
       oneOf:
       - $ref: "#/components/schemas/RecurringDynamicDaily"

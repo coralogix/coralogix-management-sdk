@@ -1619,8 +1619,8 @@ components:
       type: string
     PoliciesService_UpdatePolicy_request:
       oneOf:
-      - $ref: "#/components/schemas/UpdatePolicyRequestLogRules"
       - $ref: "#/components/schemas/UpdatePolicyRequestSpanRules"
+      - $ref: "#/components/schemas/UpdatePolicyRequestLogRules"
       type: object
     PoliciesService_CreatePolicy_request:
       oneOf:

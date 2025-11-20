@@ -31,11 +31,11 @@ model_filter_path_and_values.go
 model_filter_path_and_values_filters.go
 model_filter_path_and_values_multiple_values.go
 model_filters.go
-model_get_event_response.go
 model_get_events_statistics_response.go
 model_list_events_count_response.go
-model_list_events_response.go
 model_multiple_values.go
 model_v3_filter_operator.go
+model_v3_get_event_response.go
+model_v3_list_events_response.go
 response.go
 utils.go

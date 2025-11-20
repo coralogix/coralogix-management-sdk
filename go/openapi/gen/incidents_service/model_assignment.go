@@ -21,8 +21,8 @@ var _ MappedNullable = &Assignment{}
 
 // Assignment Details of the user who assigned the incident and the user to whom it was assigned
 type Assignment struct {
-	AssignedBy UserDetails `json:"assignedBy"`
-	AssignedTo UserDetails `json:"assignedTo"`
+	AssignedBy IncidentsV1UserDetails `json:"assignedBy"`
+	AssignedTo IncidentsV1UserDetails `json:"assignedTo"`
 }
 
 type _Assignment Assignment
@@ -31,7 +31,7 @@ type _Assignment Assignment
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAssignment(assignedBy UserDetails, assignedTo UserDetails) *Assignment {
+func NewAssignment(assignedBy IncidentsV1UserDetails, assignedTo IncidentsV1UserDetails) *Assignment {
 	this := Assignment{}
 	this.AssignedBy = assignedBy
 	this.AssignedTo = assignedTo
@@ -47,9 +47,9 @@ func NewAssignmentWithDefaults() *Assignment {
 }
 
 // GetAssignedBy returns the AssignedBy field value
-func (o *Assignment) GetAssignedBy() UserDetails {
+func (o *Assignment) GetAssignedBy() IncidentsV1UserDetails {
 	if o == nil {
-		var ret UserDetails
+		var ret IncidentsV1UserDetails
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *Assignment) GetAssignedBy() UserDetails {
 
 // GetAssignedByOk returns a tuple with the AssignedBy field value
 // and a boolean to check if the value has been set.
-func (o *Assignment) GetAssignedByOk() (*UserDetails, bool) {
+func (o *Assignment) GetAssignedByOk() (*IncidentsV1UserDetails, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,14 +66,14 @@ func (o *Assignment) GetAssignedByOk() (*UserDetails, bool) {
 }
 
 // SetAssignedBy sets field value
-func (o *Assignment) SetAssignedBy(v UserDetails) {
+func (o *Assignment) SetAssignedBy(v IncidentsV1UserDetails) {
 	o.AssignedBy = v
 }
 
 // GetAssignedTo returns the AssignedTo field value
-func (o *Assignment) GetAssignedTo() UserDetails {
+func (o *Assignment) GetAssignedTo() IncidentsV1UserDetails {
 	if o == nil {
-		var ret UserDetails
+		var ret IncidentsV1UserDetails
 		return ret
 	}
 
@@ -82,7 +82,7 @@ func (o *Assignment) GetAssignedTo() UserDetails {
 
 // GetAssignedToOk returns a tuple with the AssignedTo field value
 // and a boolean to check if the value has been set.
-func (o *Assignment) GetAssignedToOk() (*UserDetails, bool) {
+func (o *Assignment) GetAssignedToOk() (*IncidentsV1UserDetails, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,7 +90,7 @@ func (o *Assignment) GetAssignedToOk() (*UserDetails, bool) {
 }
 
 // SetAssignedTo sets field value
-func (o *Assignment) SetAssignedTo(v UserDetails) {
+func (o *Assignment) SetAssignedTo(v IncidentsV1UserDetails) {
 	o.AssignedTo = v
 }
 

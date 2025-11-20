@@ -14,34 +14,34 @@ import (
 	"encoding/json"
 )
 
-// checks if the GetEventResponse type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetEventResponse{}
+// checks if the V3GetEventResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V3GetEventResponse{}
 
-// GetEventResponse struct for GetEventResponse
-type GetEventResponse struct {
+// V3GetEventResponse struct for V3GetEventResponse
+type V3GetEventResponse struct {
 	Event *CxEventSingleOrMultiple `json:"event,omitempty"`
 	Pagination *EventsV3PaginationResponse `json:"pagination,omitempty"`
 }
 
-// NewGetEventResponse instantiates a new GetEventResponse object
+// NewV3GetEventResponse instantiates a new V3GetEventResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetEventResponse() *GetEventResponse {
-	this := GetEventResponse{}
+func NewV3GetEventResponse() *V3GetEventResponse {
+	this := V3GetEventResponse{}
 	return &this
 }
 
-// NewGetEventResponseWithDefaults instantiates a new GetEventResponse object
+// NewV3GetEventResponseWithDefaults instantiates a new V3GetEventResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetEventResponseWithDefaults() *GetEventResponse {
-	this := GetEventResponse{}
+func NewV3GetEventResponseWithDefaults() *V3GetEventResponse {
+	this := V3GetEventResponse{}
 	return &this
 }
 
 // GetEvent returns the Event field value if set, zero value otherwise.
-func (o *GetEventResponse) GetEvent() CxEventSingleOrMultiple {
+func (o *V3GetEventResponse) GetEvent() CxEventSingleOrMultiple {
 	if o == nil || IsNil(o.Event) {
 		var ret CxEventSingleOrMultiple
 		return ret
@@ -51,7 +51,7 @@ func (o *GetEventResponse) GetEvent() CxEventSingleOrMultiple {
 
 // GetEventOk returns a tuple with the Event field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetEventResponse) GetEventOk() (*CxEventSingleOrMultiple, bool) {
+func (o *V3GetEventResponse) GetEventOk() (*CxEventSingleOrMultiple, bool) {
 	if o == nil || IsNil(o.Event) {
 		return nil, false
 	}
@@ -59,7 +59,7 @@ func (o *GetEventResponse) GetEventOk() (*CxEventSingleOrMultiple, bool) {
 }
 
 // HasEvent returns a boolean if a field has been set.
-func (o *GetEventResponse) HasEvent() bool {
+func (o *V3GetEventResponse) HasEvent() bool {
 	if o != nil && !IsNil(o.Event) {
 		return true
 	}
@@ -68,12 +68,12 @@ func (o *GetEventResponse) HasEvent() bool {
 }
 
 // SetEvent gets a reference to the given CxEventSingleOrMultiple and assigns it to the Event field.
-func (o *GetEventResponse) SetEvent(v CxEventSingleOrMultiple) {
+func (o *V3GetEventResponse) SetEvent(v CxEventSingleOrMultiple) {
 	o.Event = &v
 }
 
 // GetPagination returns the Pagination field value if set, zero value otherwise.
-func (o *GetEventResponse) GetPagination() EventsV3PaginationResponse {
+func (o *V3GetEventResponse) GetPagination() EventsV3PaginationResponse {
 	if o == nil || IsNil(o.Pagination) {
 		var ret EventsV3PaginationResponse
 		return ret
@@ -83,7 +83,7 @@ func (o *GetEventResponse) GetPagination() EventsV3PaginationResponse {
 
 // GetPaginationOk returns a tuple with the Pagination field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetEventResponse) GetPaginationOk() (*EventsV3PaginationResponse, bool) {
+func (o *V3GetEventResponse) GetPaginationOk() (*EventsV3PaginationResponse, bool) {
 	if o == nil || IsNil(o.Pagination) {
 		return nil, false
 	}
@@ -91,7 +91,7 @@ func (o *GetEventResponse) GetPaginationOk() (*EventsV3PaginationResponse, bool)
 }
 
 // HasPagination returns a boolean if a field has been set.
-func (o *GetEventResponse) HasPagination() bool {
+func (o *V3GetEventResponse) HasPagination() bool {
 	if o != nil && !IsNil(o.Pagination) {
 		return true
 	}
@@ -100,11 +100,11 @@ func (o *GetEventResponse) HasPagination() bool {
 }
 
 // SetPagination gets a reference to the given EventsV3PaginationResponse and assigns it to the Pagination field.
-func (o *GetEventResponse) SetPagination(v EventsV3PaginationResponse) {
+func (o *V3GetEventResponse) SetPagination(v EventsV3PaginationResponse) {
 	o.Pagination = &v
 }
 
-func (o GetEventResponse) MarshalJSON() ([]byte, error) {
+func (o V3GetEventResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -112,7 +112,7 @@ func (o GetEventResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetEventResponse) ToMap() (map[string]interface{}, error) {
+func (o V3GetEventResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Event) {
 		toSerialize["event"] = o.Event
@@ -123,38 +123,38 @@ func (o GetEventResponse) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableGetEventResponse struct {
-	value *GetEventResponse
+type NullableV3GetEventResponse struct {
+	value *V3GetEventResponse
 	isSet bool
 }
 
-func (v NullableGetEventResponse) Get() *GetEventResponse {
+func (v NullableV3GetEventResponse) Get() *V3GetEventResponse {
 	return v.value
 }
 
-func (v *NullableGetEventResponse) Set(val *GetEventResponse) {
+func (v *NullableV3GetEventResponse) Set(val *V3GetEventResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetEventResponse) IsSet() bool {
+func (v NullableV3GetEventResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetEventResponse) Unset() {
+func (v *NullableV3GetEventResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetEventResponse(val *GetEventResponse) *NullableGetEventResponse {
-	return &NullableGetEventResponse{value: val, isSet: true}
+func NewNullableV3GetEventResponse(val *V3GetEventResponse) *NullableV3GetEventResponse {
+	return &NullableV3GetEventResponse{value: val, isSet: true}
 }
 
-func (v NullableGetEventResponse) MarshalJSON() ([]byte, error) {
+func (v NullableV3GetEventResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetEventResponse) UnmarshalJSON(src []byte) error {
+func (v *NullableV3GetEventResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -843,34 +843,13 @@
       "AlertDefProperties": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesFlow"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesSloThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
-          },
-          {
             "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
@@ -879,7 +858,28 @@
             "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
           },
           {
+            "$ref": "#/components/schemas/AlertDefPropertiesFlow"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesSloThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
+          },
+          {
             "$ref": "#/components/schemas/AlertDefPropertiesMetricAnomaly"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
           }
         ]
       },

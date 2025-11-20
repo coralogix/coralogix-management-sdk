@@ -638,7 +638,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GetFilterValuesResponse"
+                $ref: "#/components/schemas/incidents.v1.GetFilterValuesResponse"
           description: ""
         "400":
           content:
@@ -825,23 +825,25 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
@@ -887,23 +889,25 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
@@ -936,23 +940,25 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
@@ -1000,23 +1006,25 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
@@ -1049,23 +1057,25 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
@@ -1111,9 +1121,9 @@ components:
         url: ""
       properties:
         assignedBy:
-          $ref: "#/components/schemas/UserDetails"
+          $ref: "#/components/schemas/incidents.v1.UserDetails"
         assignedTo:
-          $ref: "#/components/schemas/UserDetails"
+          $ref: "#/components/schemas/incidents.v1.UserDetails"
       required:
       - assignedBy
       - assignedTo
@@ -1157,23 +1167,25 @@ components:
             state: INCIDENT_STATE_UNSPECIFIED
             closedAt: 2024-01-01T00:00:00Z
             events:
-            - snoozeIndicator:
-                durationMinutes: 0
-                startTime: 2000-01-23T04:56:07.000+00:00
-                userId: userId
+            - operationalEvent:
+                systemName: systemName
               id: incident_event_id
-              administrativeEvent:
-                userId: userId
               originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+              upsertState:
+                payload:
+                  cxEventKey: cxEventKey
+                stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+                isMuted: true
               incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            - snoozeIndicator:
-                durationMinutes: 0
-                startTime: 2000-01-23T04:56:07.000+00:00
-                userId: userId
+            - operationalEvent:
+                systemName: systemName
               id: incident_event_id
-              administrativeEvent:
-                userId: userId
               originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+              upsertState:
+                payload:
+                  cxEventKey: cxEventKey
+                stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+                isMuted: true
               incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
             isMuted: false
             status: INCIDENT_STATUS_UNSPECIFIED
@@ -1229,23 +1241,25 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
@@ -1278,23 +1292,25 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
@@ -1365,9 +1381,6 @@ components:
       title: Contextual label values with count
       type: object
     ContextualLabels:
-      example:
-        fieldName: field_name
-        fieldValue: field_value
       externalDocs:
         url: ""
       properties:
@@ -1477,63 +1490,6 @@ components:
       - pathAndValues
       title: Filters
       type: object
-    GetFilterValuesResponse:
-      description: Response containing available filter values for incidents
-      example:
-        filtersValues:
-          displayLabels:
-            key:
-              valuesWithCount:
-              - displayLabelValue: display_label_value
-                count: 10
-              - displayLabelValue: display_label_value
-                count: 10
-          assigneeWithCount:
-          - count: 10
-            assignee: assignee
-          - count: 10
-            assignee: assignee
-          metaLabelsOp: FILTER_OPERATOR_OR_OR_UNSPECIFIED
-          statusWithCount:
-          - count: 10
-            status: INCIDENT_STATUS_UNSPECIFIED
-          - count: 10
-            status: INCIDENT_STATUS_UNSPECIFIED
-          severityWithCount:
-          - severity: INCIDENT_SEVERITY_UNSPECIFIED
-            count: 10
-          - severity: INCIDENT_SEVERITY_UNSPECIFIED
-            count: 10
-          contextualLabels:
-            key:
-              valuesWithCount:
-              - contextualLabelValue: contextual_label_value
-                count: 10
-              - contextualLabelValue: contextual_label_value
-                count: 10
-          metaLabelsWithCount:
-          - metaLabel:
-              value: value
-              key: key
-            count: 10
-          - metaLabel:
-              value: value
-              key: key
-            count: 10
-          stateWithCount:
-          - count: 10
-            state: INCIDENT_STATE_UNSPECIFIED
-          - count: 10
-            state: INCIDENT_STATE_UNSPECIFIED
-      externalDocs:
-        url: ""
-      properties:
-        filtersValues:
-          $ref: "#/components/schemas/IncidentQueryFiltersValues"
-      required:
-      - filtersValues
-      title: Get filter values response
-      type: object
     GetIncidentByEventIdResponse:
       description: Response containing the requested incident
       example:
@@ -1567,23 +1523,25 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
@@ -1600,23 +1558,25 @@ components:
       description: Response containing all events associated with the requested incident
       example:
         incidentEvents:
-        - snoozeIndicator:
-            durationMinutes: 0
-            startTime: 2000-01-23T04:56:07.000+00:00
-            userId: userId
+        - operationalEvent:
+            systemName: systemName
           id: incident_event_id
-          administrativeEvent:
-            userId: userId
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+          upsertState:
+            payload:
+              cxEventKey: cxEventKey
+            stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+            isMuted: true
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-        - snoozeIndicator:
-            durationMinutes: 0
-            startTime: 2000-01-23T04:56:07.000+00:00
-            userId: userId
+        - operationalEvent:
+            systemName: systemName
           id: incident_event_id
-          administrativeEvent:
-            userId: userId
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+          upsertState:
+            payload:
+              cxEventKey: cxEventKey
+            stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+            isMuted: true
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
       externalDocs:
         url: ""
@@ -1660,23 +1620,25 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
@@ -1718,20 +1680,19 @@ components:
       type: object
     GroupByValues:
       oneOf:
-      - $ref: "#/components/schemas/GroupByValuesContextualLabels"
       - $ref: "#/components/schemas/GroupByValuesIncidentField"
+      - $ref: "#/components/schemas/GroupByValuesContextualLabels"
     GroupByValuesContextualLabels:
       additionalProperties: false
-      example:
-        contextualLabels:
-          fieldName: field_name
-          fieldValue: field_value
       properties:
         contextualLabels:
           $ref: "#/components/schemas/ContextualLabels"
       type: object
     GroupByValuesIncidentField:
       additionalProperties: false
+      example:
+        incidentField:
+          status: null
       properties:
         incidentField:
           $ref: "#/components/schemas/IncidentFieldOneOf"
@@ -1767,23 +1728,25 @@ components:
         state: INCIDENT_STATE_UNSPECIFIED
         closedAt: 2024-01-01T00:00:00Z
         events:
-        - snoozeIndicator:
-            durationMinutes: 0
-            startTime: 2000-01-23T04:56:07.000+00:00
-            userId: userId
+        - operationalEvent:
+            systemName: systemName
           id: incident_event_id
-          administrativeEvent:
-            userId: userId
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+          upsertState:
+            payload:
+              cxEventKey: cxEventKey
+            stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+            isMuted: true
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-        - snoozeIndicator:
-            durationMinutes: 0
-            startTime: 2000-01-23T04:56:07.000+00:00
-            userId: userId
+        - operationalEvent:
+            systemName: systemName
           id: incident_event_id
-          administrativeEvent:
-            userId: userId
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+          upsertState:
+            payload:
+              cxEventKey: cxEventKey
+            stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+            isMuted: true
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
         isMuted: false
         status: INCIDENT_STATUS_UNSPECIFIED
@@ -1863,12 +1826,10 @@ components:
     IncidentAggregation:
       example:
         groupBysValue:
-        - contextualLabels:
-            fieldName: field_name
-            fieldValue: field_value
-        - contextualLabels:
-            fieldName: field_name
-            fieldValue: field_value
+        - incidentField:
+            status: null
+        - incidentField:
+            status: null
         aggAssignmentsCount:
         - count: 10
           assignedTo:
@@ -1973,7 +1934,7 @@ components:
         url: ""
       properties:
         assignedTo:
-          $ref: "#/components/schemas/UserDetails"
+          $ref: "#/components/schemas/incidents.v1.UserDetails"
         count:
           example: 10
           format: int64
@@ -1985,22 +1946,22 @@ components:
       type: object
     IncidentEvent:
       oneOf:
-      - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventAssignmentOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
       - $ref: "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventCloseAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent"
       - $ref: "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventCloseOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventAssignmentOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
       - $ref: "#/components/schemas/IncidentEventUnassignOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventCloseAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventCloseOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
     IncidentEventAcknowledge:
       properties:
         acknowledgedBy:
-          $ref: "#/components/schemas/UserDetails"
+          $ref: "#/components/schemas/incidents.v1.UserDetails"
       type: object
     IncidentEventAcknowledgeAdministrativeEvent:
       additionalProperties: false
@@ -2125,7 +2086,7 @@ components:
     IncidentEventClose:
       properties:
         closedBy:
-          $ref: "#/components/schemas/UserDetails"
+          $ref: "#/components/schemas/incidents.v1.UserDetails"
       type: object
     IncidentEventCloseAdministrativeEvent:
       additionalProperties: false
@@ -2180,14 +2141,15 @@ components:
     IncidentEventExtended:
       example:
         incidentEvent:
-          snoozeIndicator:
-            durationMinutes: 0
-            startTime: 2000-01-23T04:56:07.000+00:00
-            userId: userId
+          operationalEvent:
+            systemName: systemName
           id: incident_event_id
-          administrativeEvent:
-            userId: userId
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+          upsertState:
+            payload:
+              cxEventKey: cxEventKey
+            stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+            isMuted: true
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
         cxEventKey: cxEventKey
         incidentEventExtendedMetadata:
@@ -2279,22 +2241,18 @@ components:
       - INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED
       type: string
     IncidentEventOriginatorAdministrative:
-      example:
-        userId: userId
       properties:
         userId:
           type: string
       type: object
     IncidentEventOriginatorOperational:
+      example:
+        systemName: systemName
       properties:
         systemName:
           type: string
       type: object
     IncidentEventSnoozeIndicator:
-      example:
-        durationMinutes: 0
-        startTime: 2000-01-23T04:56:07.000+00:00
-        userId: userId
       externalDocs:
         url: ""
       properties:
@@ -2310,16 +2268,6 @@ components:
       type: object
     IncidentEventSnoozeIndicatorAdministrativeEvent:
       additionalProperties: false
-      example:
-        snoozeIndicator:
-          durationMinutes: 0
-          startTime: 2000-01-23T04:56:07.000+00:00
-          userId: userId
-        id: incident_event_id
-        administrativeEvent:
-          userId: userId
-        originatorType: ORIGINATOR_TYPE_UNSPECIFIED
-        incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -2432,6 +2380,11 @@ components:
       title: Incident event
       type: object
     IncidentEventUpsertState:
+      example:
+        payload:
+          cxEventKey: cxEventKey
+        stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+        isMuted: true
       externalDocs:
         url: ""
       properties:
@@ -2473,6 +2426,17 @@ components:
       type: object
     IncidentEventUpsertStateOperationalEvent:
       additionalProperties: false
+      example:
+        operationalEvent:
+          systemName: systemName
+        id: incident_event_id
+        originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+        upsertState:
+          payload:
+            cxEventKey: cxEventKey
+          stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+          isMuted: true
+        incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -2499,15 +2463,15 @@ components:
     IncidentFieldOneOf:
       oneOf:
       - $ref: "#/components/schemas/IncidentFieldOneOfStatus"
+      - $ref: "#/components/schemas/IncidentFieldOneOfId"
+      - $ref: "#/components/schemas/IncidentFieldOneOfName"
+      - $ref: "#/components/schemas/IncidentFieldOneOfClosedAt"
+      - $ref: "#/components/schemas/IncidentFieldOneOfState"
       - $ref: "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
       - $ref: "#/components/schemas/IncidentFieldOneOfApplicationName"
       - $ref: "#/components/schemas/IncidentFieldOneOfSubsystemName"
       - $ref: "#/components/schemas/IncidentFieldOneOfDuration"
-      - $ref: "#/components/schemas/IncidentFieldOneOfId"
-      - $ref: "#/components/schemas/IncidentFieldOneOfClosedAt"
-      - $ref: "#/components/schemas/IncidentFieldOneOfState"
       - $ref: "#/components/schemas/IncidentFieldOneOfSeverity"
-      - $ref: "#/components/schemas/IncidentFieldOneOfName"
       - $ref: "#/components/schemas/IncidentFieldOneOfCreatedAt"
     IncidentFieldOneOfApplicationName:
       additionalProperties: false
@@ -2568,6 +2532,8 @@ components:
       type: object
     IncidentFieldOneOfStatus:
       additionalProperties: false
+      example:
+        status: null
       properties:
         status:
           $ref: "#/components/schemas/IncidentStatus"
@@ -2861,12 +2827,10 @@ components:
           nextPageToken: next_page_token
         incidentAggs:
         - groupBysValue:
-          - contextualLabels:
-              fieldName: field_name
-              fieldValue: field_value
-          - contextualLabels:
-              fieldName: field_name
-              fieldValue: field_value
+          - incidentField:
+              status: null
+          - incidentField:
+              status: null
           aggAssignmentsCount:
           - count: 10
             assignedTo:
@@ -2906,12 +2870,10 @@ components:
           firstCreatedAt: 2000-01-23T04:56:07.000+00:00
           lastStateUpdateTime: 2000-01-23T04:56:07.000+00:00
         - groupBysValue:
-          - contextualLabels:
-              fieldName: field_name
-              fieldValue: field_value
-          - contextualLabels:
-              fieldName: field_name
-              fieldValue: field_value
+          - incidentField:
+              status: null
+          - incidentField:
+              status: null
           aggAssignmentsCount:
           - count: 10
             assignedTo:
@@ -2958,7 +2920,7 @@ components:
             $ref: "#/components/schemas/IncidentAggregation"
           type: array
         pagination:
-          $ref: "#/components/schemas/v1.PaginationResponse"
+          $ref: "#/components/schemas/incidents.v1.PaginationResponse"
       required:
       - incidentAggs
       - pagination
@@ -3028,14 +2990,15 @@ components:
           nextPageToken: next_page_token
         items:
         - incidentEvent:
-            snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+            operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           cxEventKey: cxEventKey
           incidentEventExtendedMetadata:
@@ -3058,14 +3021,15 @@ components:
             incidentStatus: INCIDENT_STATUS_UNSPECIFIED
           cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
         - incidentEvent:
-            snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+            operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           cxEventKey: cxEventKey
           incidentEventExtendedMetadata:
@@ -3095,7 +3059,7 @@ components:
             $ref: "#/components/schemas/IncidentEventExtended"
           type: array
         pagination:
-          $ref: "#/components/schemas/v1.PaginationResponse"
+          $ref: "#/components/schemas/incidents.v1.PaginationResponse"
       required:
       - items
       title: List incident events response
@@ -3156,23 +3120,25 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
@@ -3205,23 +3171,25 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
@@ -3233,7 +3201,7 @@ components:
             $ref: "#/components/schemas/Incident"
           type: array
         pagination:
-          $ref: "#/components/schemas/v1.PaginationResponse"
+          $ref: "#/components/schemas/incidents.v1.PaginationResponse"
       required:
       - incidents
       - pagination
@@ -3287,23 +3255,25 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
@@ -3349,23 +3319,25 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
@@ -3398,23 +3370,25 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
@@ -3462,23 +3436,25 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
@@ -3511,23 +3487,25 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
+          - operationalEvent:
+              systemName: systemName
             id: incident_event_id
-            administrativeEvent:
-              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            upsertState:
+              payload:
+                cxEventKey: cxEventKey
+              stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+              isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
@@ -3543,6 +3521,8 @@ components:
       title: Unassign incidents response
       type: object
     UpsertIncidentStatePayload:
+      example:
+        cxEventKey: cxEventKey
       properties:
         cxEventKey:
           type: string
@@ -3553,19 +3533,6 @@ components:
       - UPSERT_INCIDENT_STATE_TYPE_TRIGGERED
       - UPSERT_INCIDENT_STATE_TYPE_RESOLVED
       type: string
-    UserDetails:
-      example:
-        userId: user_id
-      externalDocs:
-        url: ""
-      properties:
-        userId:
-          example: user_id
-          type: string
-      required:
-      - userId
-      title: User details
-      type: object
     V1OrderByContextualLabel:
       additionalProperties: false
       externalDocs:
@@ -3611,6 +3578,63 @@ components:
       - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
       - FILTER_MATCHER_REGEXP
       type: string
+    incidents.v1.GetFilterValuesResponse:
+      description: Response containing available filter values for incidents
+      example:
+        filtersValues:
+          displayLabels:
+            key:
+              valuesWithCount:
+              - displayLabelValue: display_label_value
+                count: 10
+              - displayLabelValue: display_label_value
+                count: 10
+          assigneeWithCount:
+          - count: 10
+            assignee: assignee
+          - count: 10
+            assignee: assignee
+          metaLabelsOp: FILTER_OPERATOR_OR_OR_UNSPECIFIED
+          statusWithCount:
+          - count: 10
+            status: INCIDENT_STATUS_UNSPECIFIED
+          - count: 10
+            status: INCIDENT_STATUS_UNSPECIFIED
+          severityWithCount:
+          - severity: INCIDENT_SEVERITY_UNSPECIFIED
+            count: 10
+          - severity: INCIDENT_SEVERITY_UNSPECIFIED
+            count: 10
+          contextualLabels:
+            key:
+              valuesWithCount:
+              - contextualLabelValue: contextual_label_value
+                count: 10
+              - contextualLabelValue: contextual_label_value
+                count: 10
+          metaLabelsWithCount:
+          - metaLabel:
+              value: value
+              key: key
+            count: 10
+          - metaLabel:
+              value: value
+              key: key
+            count: 10
+          stateWithCount:
+          - count: 10
+            state: INCIDENT_STATE_UNSPECIFIED
+          - count: 10
+            state: INCIDENT_STATE_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        filtersValues:
+          $ref: "#/components/schemas/IncidentQueryFiltersValues"
+      required:
+      - filtersValues
+      title: Get filter values response
+      type: object
     incidents.v1.MetaLabel:
       example:
         value: value
@@ -3626,18 +3650,7 @@ components:
           type: string
       title: Incident meta label
       type: object
-    v1.FilterOperator:
-      enum:
-      - FILTER_OPERATOR_OR_OR_UNSPECIFIED
-      - FILTER_OPERATOR_AND
-      type: string
-    v1.OrderByDirection:
-      enum:
-      - ORDER_BY_DIRECTION_UNSPECIFIED
-      - ORDER_BY_DIRECTION_ASC
-      - ORDER_BY_DIRECTION_DESC
-      type: string
-    v1.PaginationResponse:
+    incidents.v1.PaginationResponse:
       description: Pagination information for list responses
       example:
         totalSize: 100
@@ -3658,6 +3671,30 @@ components:
       - totalSize
       title: Pagination response
       type: object
+    incidents.v1.UserDetails:
+      example:
+        userId: user_id
+      externalDocs:
+        url: ""
+      properties:
+        userId:
+          example: user_id
+          type: string
+      required:
+      - userId
+      title: User details
+      type: object
+    v1.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_OR_OR_UNSPECIFIED
+      - FILTER_OPERATOR_AND
+      type: string
+    v1.OrderByDirection:
+      enum:
+      - ORDER_BY_DIRECTION_UNSPECIFIED
+      - ORDER_BY_DIRECTION_ASC
+      - ORDER_BY_DIRECTION_DESC
+      type: string
     v3.FilterOperator:
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED

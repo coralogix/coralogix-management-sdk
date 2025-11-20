@@ -904,11 +904,11 @@ func (a *SlosServiceAPIService) SlosServiceReplaceSloExecute(r ApiSlosServiceRep
 type ApiSlosServiceValidateReplaceSloAlertsRequest struct {
 	ctx context.Context
 	ApiService *SlosServiceAPIService
-	slosServiceReplaceSloRequest *SlosServiceReplaceSloRequest
+	slosServiceCreateSloRequest *SlosServiceCreateSloRequest
 }
 
-func (r ApiSlosServiceValidateReplaceSloAlertsRequest) SlosServiceReplaceSloRequest(slosServiceReplaceSloRequest SlosServiceReplaceSloRequest) ApiSlosServiceValidateReplaceSloAlertsRequest {
-	r.slosServiceReplaceSloRequest = &slosServiceReplaceSloRequest
+func (r ApiSlosServiceValidateReplaceSloAlertsRequest) SlosServiceCreateSloRequest(slosServiceCreateSloRequest SlosServiceCreateSloRequest) ApiSlosServiceValidateReplaceSloAlertsRequest {
+	r.slosServiceCreateSloRequest = &slosServiceCreateSloRequest
 	return r
 }
 
@@ -970,7 +970,7 @@ func (a *SlosServiceAPIService) SlosServiceValidateReplaceSloAlertsExecute(r Api
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.slosServiceReplaceSloRequest
+	localVarPostBody = r.slosServiceCreateSloRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

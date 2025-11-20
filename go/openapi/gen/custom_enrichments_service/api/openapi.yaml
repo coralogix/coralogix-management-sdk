@@ -576,12 +576,12 @@ components:
       type: object
     CustomEnrichmentService_SearchCustomEnrichmentData_search_clauses_parameter_inner:
       oneOf:
-      - $ref: "#/components/schemas/SearchClauseName"
       - $ref: "#/components/schemas/SearchClauseId"
+      - $ref: "#/components/schemas/SearchClauseName"
     CustomEnrichmentService_CreateCustomEnrichment_file_parameter:
       oneOf:
-      - $ref: "#/components/schemas/FileTextual"
       - $ref: "#/components/schemas/FileBinary"
+      - $ref: "#/components/schemas/FileTextual"
   securitySchemes:
     apiKeyAuth:
       description: API key authentication

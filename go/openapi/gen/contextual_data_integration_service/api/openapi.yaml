@@ -343,37 +343,6 @@ components:
       title: CloudFormation stack
       type: object
     CloudFormationTemplate:
-      example:
-        postInstallationSteps:
-          key: postInstallationSteps
-        parameters:
-          key: parameters
-        commands:
-        - tooltipText: tooltipText
-          name: name
-          description: description
-          language: UNKNOWN
-          links:
-          - text: text
-            key: key
-            url: url
-          - text: text
-            key: key
-            url: url
-          command: command
-        - tooltipText: tooltipText
-          name: name
-          description: description
-          language: UNKNOWN
-          links:
-          - text: text
-            key: key
-            url: url
-          - text: text
-            key: key
-            url: url
-          command: command
-        templateUrl: templateUrl
       externalDocs:
         url: ""
       properties:
@@ -489,9 +458,9 @@ components:
               key: details
           id: id
           parameters:
-          - numericValue: 0.8008281904610115
+          - stringValue: stringValue
             key: key
-          - numericValue: 0.8008281904610115
+          - stringValue: stringValue
             key: key
           isTesting: true
           empty: "{}"
@@ -506,9 +475,9 @@ components:
               key: details
           id: id
           parameters:
-          - numericValue: 0.8008281904610115
+          - stringValue: stringValue
             key: key
-          - numericValue: 0.8008281904610115
+          - stringValue: stringValue
             key: key
           isTesting: true
           empty: "{}"
@@ -809,14 +778,42 @@ components:
       type: object
     FieldInformation:
       oneOf:
-      - $ref: "#/components/schemas/FieldInformationSingle"
       - $ref: "#/components/schemas/FieldInformationMultiText"
       - $ref: "#/components/schemas/FieldInformationMultipleSelection"
       - $ref: "#/components/schemas/FieldInformationSingleBoolean"
       - $ref: "#/components/schemas/FieldInformationSelection"
       - $ref: "#/components/schemas/FieldInformationSingleNumber"
+      - $ref: "#/components/schemas/FieldInformationSingle"
     FieldInformationMultiText:
       additionalProperties: false
+      example:
+        visible: true
+        groupId: groupId
+        tooltip: tooltip
+        multiText:
+          options:
+          - options
+          - options
+          defaultValues:
+          - defaultValues
+          - defaultValues
+        type: API_KEY
+        upgradeNotice: upgradeNotice
+        predefined: true
+        required: true
+        templateParamName: templateParamName
+        readonly: true
+        documentationReference: documentationReference
+        name: name
+        placeholder: placeholder
+        applicableIf:
+          values:
+          - fieldName: fieldName
+            valuePattern: valuePattern
+          - fieldName: fieldName
+            valuePattern: valuePattern
+          type: UNKNOWN
+        allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -928,29 +925,6 @@ components:
       type: object
     FieldInformationSingle:
       additionalProperties: false
-      example:
-        visible: true
-        groupId: groupId
-        tooltip: tooltip
-        type: API_KEY
-        upgradeNotice: upgradeNotice
-        predefined: true
-        required: true
-        templateParamName: templateParamName
-        single:
-          defaultValue: defaultValue
-        readonly: true
-        documentationReference: documentationReference
-        name: name
-        placeholder: placeholder
-        applicableIf:
-          values:
-          - fieldName: fieldName
-            valuePattern: valuePattern
-          - fieldName: fieldName
-            valuePattern: valuePattern
-          type: UNKNOWN
-        allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -1132,59 +1106,84 @@ components:
         integrationDefinition:
           featureFlag: featureFlag
           integrationType:
-            contextualData: "{}"
+            genericWebhook: "{}"
           revisions:
           - revisionDeploymentSupported: true
             featureFlag: featureFlag
             upgradeInstructionsMd: upgradeInstructionsMd
-            cloudFormation:
-              postInstallationSteps:
-                key: postInstallationSteps
-              parameters:
-                key: parameters
-              commands:
-              - tooltipText: tooltipText
-                name: name
-                description: description
-                language: UNKNOWN
-                links:
-                - text: text
-                  key: key
-                  url: url
-                - text: text
-                  key: key
-                  url: url
-                command: command
-              - tooltipText: tooltipText
-                name: name
-                description: description
-                language: UNKNOWN
-                links:
-                - text: text
-                  key: key
-                  url: url
-                - text: text
-                  key: key
-                  url: url
-                command: command
-              templateUrl: templateUrl
             groups:
             - name: name
               id: id
             - name: name
               id: id
             id: id
+            rum:
+              browserSdkCommands:
+              - tooltipText: tooltipText
+                name: name
+                description: description
+                language: UNKNOWN
+                links:
+                - text: text
+                  key: key
+                  url: url
+                - text: text
+                  key: key
+                  url: url
+                command: command
+              - tooltipText: tooltipText
+                name: name
+                description: description
+                language: UNKNOWN
+                links:
+                - text: text
+                  key: key
+                  url: url
+                - text: text
+                  key: key
+                  url: url
+                command: command
+              sourceMapCommands:
+              - tooltipText: tooltipText
+                name: name
+                description: description
+                language: UNKNOWN
+                links:
+                - text: text
+                  key: key
+                  url: url
+                - text: text
+                  key: key
+                  url: url
+                command: command
+              - tooltipText: tooltipText
+                name: name
+                description: description
+                language: UNKNOWN
+                links:
+                - text: text
+                  key: key
+                  url: url
+                - text: text
+                  key: key
+                  url: url
+                command: command
             fields:
             - visible: true
               groupId: groupId
               tooltip: tooltip
+              multiText:
+                options:
+                - options
+                - options
+                defaultValues:
+                - defaultValues
+                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
               required: true
               templateParamName: templateParamName
-              single:
-                defaultValue: defaultValue
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -1200,13 +1199,18 @@ components:
             - visible: true
               groupId: groupId
               tooltip: tooltip
+              multiText:
+                options:
+                - options
+                - options
+                defaultValues:
+                - defaultValues
+                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
               required: true
               templateParamName: templateParamName
-              single:
-                defaultValue: defaultValue
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -1222,54 +1226,79 @@ components:
           - revisionDeploymentSupported: true
             featureFlag: featureFlag
             upgradeInstructionsMd: upgradeInstructionsMd
-            cloudFormation:
-              postInstallationSteps:
-                key: postInstallationSteps
-              parameters:
-                key: parameters
-              commands:
-              - tooltipText: tooltipText
-                name: name
-                description: description
-                language: UNKNOWN
-                links:
-                - text: text
-                  key: key
-                  url: url
-                - text: text
-                  key: key
-                  url: url
-                command: command
-              - tooltipText: tooltipText
-                name: name
-                description: description
-                language: UNKNOWN
-                links:
-                - text: text
-                  key: key
-                  url: url
-                - text: text
-                  key: key
-                  url: url
-                command: command
-              templateUrl: templateUrl
             groups:
             - name: name
               id: id
             - name: name
               id: id
             id: id
+            rum:
+              browserSdkCommands:
+              - tooltipText: tooltipText
+                name: name
+                description: description
+                language: UNKNOWN
+                links:
+                - text: text
+                  key: key
+                  url: url
+                - text: text
+                  key: key
+                  url: url
+                command: command
+              - tooltipText: tooltipText
+                name: name
+                description: description
+                language: UNKNOWN
+                links:
+                - text: text
+                  key: key
+                  url: url
+                - text: text
+                  key: key
+                  url: url
+                command: command
+              sourceMapCommands:
+              - tooltipText: tooltipText
+                name: name
+                description: description
+                language: UNKNOWN
+                links:
+                - text: text
+                  key: key
+                  url: url
+                - text: text
+                  key: key
+                  url: url
+                command: command
+              - tooltipText: tooltipText
+                name: name
+                description: description
+                language: UNKNOWN
+                links:
+                - text: text
+                  key: key
+                  url: url
+                - text: text
+                  key: key
+                  url: url
+                command: command
             fields:
             - visible: true
               groupId: groupId
               tooltip: tooltip
+              multiText:
+                options:
+                - options
+                - options
+                defaultValues:
+                - defaultValues
+                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
               required: true
               templateParamName: templateParamName
-              single:
-                defaultValue: defaultValue
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -1285,13 +1314,18 @@ components:
             - visible: true
               groupId: groupId
               tooltip: tooltip
+              multiText:
+                options:
+                - options
+                - options
+                defaultValues:
+                - defaultValues
+                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
               required: true
               templateParamName: templateParamName
-              single:
-                defaultValue: defaultValue
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -1328,9 +1362,9 @@ components:
                   key: details
               id: id
               parameters:
-              - numericValue: 0.8008281904610115
+              - stringValue: stringValue
                 key: key
-              - numericValue: 0.8008281904610115
+              - stringValue: stringValue
                 key: key
               isTesting: true
               empty: "{}"
@@ -1345,9 +1379,9 @@ components:
                   key: details
               id: id
               parameters:
-              - numericValue: 0.8008281904610115
+              - stringValue: stringValue
                 key: key
-              - numericValue: 0.8008281904610115
+              - stringValue: stringValue
                 key: key
               isTesting: true
               empty: "{}"
@@ -2102,7 +2136,7 @@ components:
           integration:
             featureFlag: featureFlag
             integrationType:
-              contextualData: "{}"
+              genericWebhook: "{}"
             versions:
             - versions
             - versions
@@ -2133,7 +2167,7 @@ components:
         - integration:
             featureFlag: featureFlag
             integrationType:
-              contextualData: "{}"
+              genericWebhook: "{}"
             versions:
             - versions
             - versions
@@ -2154,7 +2188,7 @@ components:
         - integration:
             featureFlag: featureFlag
             integrationType:
-              contextualData: "{}"
+              genericWebhook: "{}"
             versions:
             - versions
             - versions
@@ -2186,7 +2220,7 @@ components:
         integration:
           featureFlag: featureFlag
           integrationType:
-            contextualData: "{}"
+            genericWebhook: "{}"
           versions:
           - versions
           - versions
@@ -2255,7 +2289,7 @@ components:
       example:
         featureFlag: featureFlag
         integrationType:
-          contextualData: "{}"
+          genericWebhook: "{}"
         versions:
         - versions
         - versions
@@ -2299,59 +2333,84 @@ components:
       example:
         featureFlag: featureFlag
         integrationType:
-          contextualData: "{}"
+          genericWebhook: "{}"
         revisions:
         - revisionDeploymentSupported: true
           featureFlag: featureFlag
           upgradeInstructionsMd: upgradeInstructionsMd
-          cloudFormation:
-            postInstallationSteps:
-              key: postInstallationSteps
-            parameters:
-              key: parameters
-            commands:
-            - tooltipText: tooltipText
-              name: name
-              description: description
-              language: UNKNOWN
-              links:
-              - text: text
-                key: key
-                url: url
-              - text: text
-                key: key
-                url: url
-              command: command
-            - tooltipText: tooltipText
-              name: name
-              description: description
-              language: UNKNOWN
-              links:
-              - text: text
-                key: key
-                url: url
-              - text: text
-                key: key
-                url: url
-              command: command
-            templateUrl: templateUrl
           groups:
           - name: name
             id: id
           - name: name
             id: id
           id: id
+          rum:
+            browserSdkCommands:
+            - tooltipText: tooltipText
+              name: name
+              description: description
+              language: UNKNOWN
+              links:
+              - text: text
+                key: key
+                url: url
+              - text: text
+                key: key
+                url: url
+              command: command
+            - tooltipText: tooltipText
+              name: name
+              description: description
+              language: UNKNOWN
+              links:
+              - text: text
+                key: key
+                url: url
+              - text: text
+                key: key
+                url: url
+              command: command
+            sourceMapCommands:
+            - tooltipText: tooltipText
+              name: name
+              description: description
+              language: UNKNOWN
+              links:
+              - text: text
+                key: key
+                url: url
+              - text: text
+                key: key
+                url: url
+              command: command
+            - tooltipText: tooltipText
+              name: name
+              description: description
+              language: UNKNOWN
+              links:
+              - text: text
+                key: key
+                url: url
+              - text: text
+                key: key
+                url: url
+              command: command
           fields:
           - visible: true
             groupId: groupId
             tooltip: tooltip
+            multiText:
+              options:
+              - options
+              - options
+              defaultValues:
+              - defaultValues
+              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
             required: true
             templateParamName: templateParamName
-            single:
-              defaultValue: defaultValue
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -2367,13 +2426,18 @@ components:
           - visible: true
             groupId: groupId
             tooltip: tooltip
+            multiText:
+              options:
+              - options
+              - options
+              defaultValues:
+              - defaultValues
+              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
             required: true
             templateParamName: templateParamName
-            single:
-              defaultValue: defaultValue
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -2389,54 +2453,79 @@ components:
         - revisionDeploymentSupported: true
           featureFlag: featureFlag
           upgradeInstructionsMd: upgradeInstructionsMd
-          cloudFormation:
-            postInstallationSteps:
-              key: postInstallationSteps
-            parameters:
-              key: parameters
-            commands:
-            - tooltipText: tooltipText
-              name: name
-              description: description
-              language: UNKNOWN
-              links:
-              - text: text
-                key: key
-                url: url
-              - text: text
-                key: key
-                url: url
-              command: command
-            - tooltipText: tooltipText
-              name: name
-              description: description
-              language: UNKNOWN
-              links:
-              - text: text
-                key: key
-                url: url
-              - text: text
-                key: key
-                url: url
-              command: command
-            templateUrl: templateUrl
           groups:
           - name: name
             id: id
           - name: name
             id: id
           id: id
+          rum:
+            browserSdkCommands:
+            - tooltipText: tooltipText
+              name: name
+              description: description
+              language: UNKNOWN
+              links:
+              - text: text
+                key: key
+                url: url
+              - text: text
+                key: key
+                url: url
+              command: command
+            - tooltipText: tooltipText
+              name: name
+              description: description
+              language: UNKNOWN
+              links:
+              - text: text
+                key: key
+                url: url
+              - text: text
+                key: key
+                url: url
+              command: command
+            sourceMapCommands:
+            - tooltipText: tooltipText
+              name: name
+              description: description
+              language: UNKNOWN
+              links:
+              - text: text
+                key: key
+                url: url
+              - text: text
+                key: key
+                url: url
+              command: command
+            - tooltipText: tooltipText
+              name: name
+              description: description
+              language: UNKNOWN
+              links:
+              - text: text
+                key: key
+                url: url
+              - text: text
+                key: key
+                url: url
+              command: command
           fields:
           - visible: true
             groupId: groupId
             tooltip: tooltip
+            multiText:
+              options:
+              - options
+              - options
+              defaultValues:
+              - defaultValues
+              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
             required: true
             templateParamName: templateParamName
-            single:
-              defaultValue: defaultValue
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -2452,13 +2541,18 @@ components:
           - visible: true
             groupId: groupId
             tooltip: tooltip
+            multiText:
+              options:
+              - options
+              - options
+              defaultValues:
+              - defaultValues
+              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
             required: true
             templateParamName: templateParamName
-            single:
-              defaultValue: defaultValue
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -2543,9 +2637,9 @@ components:
                 key: details
             id: id
             parameters:
-            - numericValue: 0.8008281904610115
+            - stringValue: stringValue
               key: key
-            - numericValue: 0.8008281904610115
+            - stringValue: stringValue
               key: key
             isTesting: true
             empty: "{}"
@@ -2560,9 +2654,9 @@ components:
                 key: details
             id: id
             parameters:
-            - numericValue: 0.8008281904610115
+            - stringValue: stringValue
               key: key
-            - numericValue: 0.8008281904610115
+            - stringValue: stringValue
               key: key
             isTesting: true
             empty: "{}"
@@ -3317,7 +3411,7 @@ components:
         integration:
           featureFlag: featureFlag
           integrationType:
-            contextualData: "{}"
+            genericWebhook: "{}"
           versions:
           - versions
           - versions
@@ -3393,12 +3487,12 @@ components:
       type: object
     IntegrationRevision:
       oneOf:
+      - $ref: "#/components/schemas/IntegrationRevisionRum"
+      - $ref: "#/components/schemas/IntegrationRevisionTerraform"
       - $ref: "#/components/schemas/IntegrationRevisionCloudFormation"
       - $ref: "#/components/schemas/IntegrationRevisionManagedService"
       - $ref: "#/components/schemas/IntegrationRevisionHelmChart"
       - $ref: "#/components/schemas/IntegrationRevisionAzureArmTemplate"
-      - $ref: "#/components/schemas/IntegrationRevisionRum"
-      - $ref: "#/components/schemas/IntegrationRevisionTerraform"
     IntegrationRevision.Group:
       example:
         name: name
@@ -3450,92 +3544,6 @@ components:
     IntegrationRevisionCloudFormation:
       additionalProperties: false
       description: This data structure represents an integration revision.
-      example:
-        revisionDeploymentSupported: true
-        featureFlag: featureFlag
-        upgradeInstructionsMd: upgradeInstructionsMd
-        cloudFormation:
-          postInstallationSteps:
-            key: postInstallationSteps
-          parameters:
-            key: parameters
-          commands:
-          - tooltipText: tooltipText
-            name: name
-            description: description
-            language: UNKNOWN
-            links:
-            - text: text
-              key: key
-              url: url
-            - text: text
-              key: key
-              url: url
-            command: command
-          - tooltipText: tooltipText
-            name: name
-            description: description
-            language: UNKNOWN
-            links:
-            - text: text
-              key: key
-              url: url
-            - text: text
-              key: key
-              url: url
-            command: command
-          templateUrl: templateUrl
-        groups:
-        - name: name
-          id: id
-        - name: name
-          id: id
-        id: id
-        fields:
-        - visible: true
-          groupId: groupId
-          tooltip: tooltip
-          type: API_KEY
-          upgradeNotice: upgradeNotice
-          predefined: true
-          required: true
-          templateParamName: templateParamName
-          single:
-            defaultValue: defaultValue
-          readonly: true
-          documentationReference: documentationReference
-          name: name
-          placeholder: placeholder
-          applicableIf:
-            values:
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            type: UNKNOWN
-          allowedPattern: allowedPattern
-        - visible: true
-          groupId: groupId
-          tooltip: tooltip
-          type: API_KEY
-          upgradeNotice: upgradeNotice
-          predefined: true
-          required: true
-          templateParamName: templateParamName
-          single:
-            defaultValue: defaultValue
-          readonly: true
-          documentationReference: documentationReference
-          name: name
-          placeholder: placeholder
-          applicableIf:
-            values:
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            type: UNKNOWN
-          allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -3618,6 +3626,122 @@ components:
     IntegrationRevisionRum:
       additionalProperties: false
       description: This data structure represents an integration revision.
+      example:
+        revisionDeploymentSupported: true
+        featureFlag: featureFlag
+        upgradeInstructionsMd: upgradeInstructionsMd
+        groups:
+        - name: name
+          id: id
+        - name: name
+          id: id
+        id: id
+        rum:
+          browserSdkCommands:
+          - tooltipText: tooltipText
+            name: name
+            description: description
+            language: UNKNOWN
+            links:
+            - text: text
+              key: key
+              url: url
+            - text: text
+              key: key
+              url: url
+            command: command
+          - tooltipText: tooltipText
+            name: name
+            description: description
+            language: UNKNOWN
+            links:
+            - text: text
+              key: key
+              url: url
+            - text: text
+              key: key
+              url: url
+            command: command
+          sourceMapCommands:
+          - tooltipText: tooltipText
+            name: name
+            description: description
+            language: UNKNOWN
+            links:
+            - text: text
+              key: key
+              url: url
+            - text: text
+              key: key
+              url: url
+            command: command
+          - tooltipText: tooltipText
+            name: name
+            description: description
+            language: UNKNOWN
+            links:
+            - text: text
+              key: key
+              url: url
+            - text: text
+              key: key
+              url: url
+            command: command
+        fields:
+        - visible: true
+          groupId: groupId
+          tooltip: tooltip
+          multiText:
+            options:
+            - options
+            - options
+            defaultValues:
+            - defaultValues
+            - defaultValues
+          type: API_KEY
+          upgradeNotice: upgradeNotice
+          predefined: true
+          required: true
+          templateParamName: templateParamName
+          readonly: true
+          documentationReference: documentationReference
+          name: name
+          placeholder: placeholder
+          applicableIf:
+            values:
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            type: UNKNOWN
+          allowedPattern: allowedPattern
+        - visible: true
+          groupId: groupId
+          tooltip: tooltip
+          multiText:
+            options:
+            - options
+            - options
+            defaultValues:
+            - defaultValues
+            - defaultValues
+          type: API_KEY
+          upgradeNotice: upgradeNotice
+          predefined: true
+          required: true
+          templateParamName: templateParamName
+          readonly: true
+          documentationReference: documentationReference
+          name: name
+          placeholder: placeholder
+          applicableIf:
+            values:
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            type: UNKNOWN
+          allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -3714,6 +3838,13 @@ components:
       title: Link
       type: object
     ListTextValue:
+      example:
+        options:
+        - options
+        - options
+        defaultValues:
+        - defaultValues
+        - defaultValues
       externalDocs:
         url: ""
       properties:
@@ -3786,12 +3917,12 @@ components:
       type: object
     Parameter:
       oneOf:
-      - $ref: "#/components/schemas/ParameterNumericValue"
-      - $ref: "#/components/schemas/ParameterSensitiveData"
       - $ref: "#/components/schemas/ParameterStringValue"
       - $ref: "#/components/schemas/ParameterBooleanValue"
       - $ref: "#/components/schemas/ParameterStringList"
       - $ref: "#/components/schemas/ParameterApiKey"
+      - $ref: "#/components/schemas/ParameterNumericValue"
+      - $ref: "#/components/schemas/ParameterSensitiveData"
     ParameterApiKey:
       additionalProperties: false
       externalDocs:
@@ -3816,9 +3947,6 @@ components:
       type: object
     ParameterNumericValue:
       additionalProperties: false
-      example:
-        numericValue: 0.8008281904610115
-        key: key
       externalDocs:
         url: ""
       properties:
@@ -3856,6 +3984,9 @@ components:
       type: object
     ParameterStringValue:
       additionalProperties: false
+      example:
+        stringValue: stringValue
+        key: key
       externalDocs:
         url: ""
       properties:
@@ -3956,9 +4087,9 @@ components:
             key: details
         id: id
         parameters:
-        - numericValue: 0.8008281904610115
+        - stringValue: stringValue
           key: key
-        - numericValue: 0.8008281904610115
+        - stringValue: stringValue
           key: key
         isTesting: true
         empty: "{}"
@@ -4004,6 +4135,57 @@ components:
       type: object
     Rum:
       description: This data structure represents a RUM integration.
+      example:
+        browserSdkCommands:
+        - tooltipText: tooltipText
+          name: name
+          description: description
+          language: UNKNOWN
+          links:
+          - text: text
+            key: key
+            url: url
+          - text: text
+            key: key
+            url: url
+          command: command
+        - tooltipText: tooltipText
+          name: name
+          description: description
+          language: UNKNOWN
+          links:
+          - text: text
+            key: key
+            url: url
+          - text: text
+            key: key
+            url: url
+          command: command
+        sourceMapCommands:
+        - tooltipText: tooltipText
+          name: name
+          description: description
+          language: UNKNOWN
+          links:
+          - text: text
+            key: key
+            url: url
+          - text: text
+            key: key
+            url: url
+          command: command
+        - tooltipText: tooltipText
+          name: name
+          description: description
+          language: UNKNOWN
+          links:
+          - text: text
+            key: key
+            url: url
+          - text: text
+            key: key
+            url: url
+          command: command
       externalDocs:
         url: ""
       properties:
@@ -4053,8 +4235,6 @@ components:
       title: Single boolean value
       type: object
     SingleValue:
-      example:
-        defaultValue: defaultValue
       externalDocs:
         url: ""
       properties:
@@ -4100,8 +4280,7 @@ components:
     TestContextualDataIntegrationResponse:
       example:
         result:
-          failure:
-            errorMessage: errorMessage
+          success: "{}"
       externalDocs:
         url: ""
       properties:
@@ -4111,11 +4290,9 @@ components:
       type: object
     TestIntegrationResult:
       oneOf:
-      - $ref: "#/components/schemas/TestIntegrationResultFailure"
       - $ref: "#/components/schemas/TestIntegrationResultSuccess"
+      - $ref: "#/components/schemas/TestIntegrationResultFailure"
     TestIntegrationResult.Failure:
-      example:
-        errorMessage: errorMessage
       externalDocs:
         url: ""
       properties:
@@ -4130,9 +4307,6 @@ components:
       type: object
     TestIntegrationResultFailure:
       additionalProperties: false
-      example:
-        failure:
-          errorMessage: errorMessage
       externalDocs:
         url: ""
       properties:
@@ -4142,6 +4316,8 @@ components:
       type: object
     TestIntegrationResultSuccess:
       additionalProperties: false
+      example:
+        success: "{}"
       externalDocs:
         url: ""
       properties:
@@ -4194,8 +4370,6 @@ components:
     V1IntegrationTypeContextualData:
       additionalProperties: false
       description: This data structure represents an integration type.
-      example:
-        contextualData: "{}"
       externalDocs:
         url: ""
       properties:
@@ -4210,6 +4384,8 @@ components:
     V1IntegrationTypeGenericWebhook:
       additionalProperties: false
       description: This data structure represents an integration type.
+      example:
+        genericWebhook: "{}"
       externalDocs:
         url: ""
       properties:
@@ -4696,13 +4872,13 @@ components:
       type: object
     v1.IntegrationType:
       oneOf:
-      - $ref: "#/components/schemas/V1IntegrationTypeContextualData"
       - $ref: "#/components/schemas/V1IntegrationTypeGenericWebhook"
       - $ref: "#/components/schemas/V1IntegrationTypeManaged"
       - $ref: "#/components/schemas/V1IntegrationTypeUntracked"
       - $ref: "#/components/schemas/V1IntegrationTypeCloudformation"
       - $ref: "#/components/schemas/V1IntegrationTypeArm"
       - $ref: "#/components/schemas/V1IntegrationTypePushBasedContextualData"
+      - $ref: "#/components/schemas/V1IntegrationTypeContextualData"
     v3.FilterOperator:
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED

@@ -1001,13 +1001,13 @@
       "RuleMatcher": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/RuleMatcherSeverity"
+          },
+          {
             "$ref": "#/components/schemas/RuleMatcherApplicationName"
           },
           {
             "$ref": "#/components/schemas/RuleMatcherSubsystemName"
-          },
-          {
-            "$ref": "#/components/schemas/RuleMatcherSeverity"
           }
         ]
       },
@@ -1047,18 +1047,6 @@
             "$ref": "#/components/schemas/RuleParametersReplaceParameters"
           },
           {
-            "$ref": "#/components/schemas/RuleParametersParseParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersAllowParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersBlockParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersJsonExtractParameters"
-          },
-          {
             "$ref": "#/components/schemas/RuleParametersExtractTimestampParameters"
           },
           {
@@ -1066,6 +1054,18 @@
           },
           {
             "$ref": "#/components/schemas/RuleParametersJsonStringifyParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersJsonExtractParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersParseParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersAllowParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersBlockParameters"
           },
           {
             "$ref": "#/components/schemas/RuleParametersJsonParseParameters"

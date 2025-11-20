@@ -597,8 +597,65 @@ components:
             groupByKeys:
             - "[\"key1\",\"key2\"]"
             - "[\"key1\",\"key2\"]"
+          tracingImmediate:
+            notificationPayloadFilter:
+            - "[\"obj.field\"]"
+            - "[\"obj.field\"]"
+            tracingFilter:
+              simpleFilter:
+                tracingLabelFilters:
+                  operationName:
+                  - values:
+                    - "[\"value1\",\"value2\"]"
+                    - "[\"value1\",\"value2\"]"
+                    operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  - values:
+                    - "[\"value1\",\"value2\"]"
+                    - "[\"value1\",\"value2\"]"
+                    operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  spanFields:
+                  - filterType:
+                      values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    key: span.field.key
+                  - filterType:
+                      values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    key: span.field.key
+                  serviceName:
+                  - values:
+                    - "[\"value1\",\"value2\"]"
+                    - "[\"value1\",\"value2\"]"
+                    operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  - values:
+                    - "[\"value1\",\"value2\"]"
+                    - "[\"value1\",\"value2\"]"
+                    operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  subsystemName:
+                  - values:
+                    - "[\"value1\",\"value2\"]"
+                    - "[\"value1\",\"value2\"]"
+                    operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  - values:
+                    - "[\"value1\",\"value2\"]"
+                    - "[\"value1\",\"value2\"]"
+                    operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  applicationName:
+                  - values:
+                    - "[\"value1\",\"value2\"]"
+                    - "[\"value1\",\"value2\"]"
+                    operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  - values:
+                    - "[\"value1\",\"value2\"]"
+                    - "[\"value1\",\"value2\"]"
+                    operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                latencyThresholdMs: "1000"
           description: Alert description
-          priority: null
+          priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
           type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
           activeOn:
             dayOfWeek:
@@ -694,67 +751,6 @@ components:
           incidentsSettings:
             minutes: 30
             notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
-          logsRatioThreshold:
-            notificationPayloadFilter:
-            - "[\"obj.field\"]"
-            - "[\"obj.field\"]"
-            ignoreInfinity: true
-            undetectedValuesManagement:
-              triggerUndetectedValues: true
-              autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-            evaluationDelayMs: 60000
-            groupByFor: LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED
-            denominatorAlias: denominator_alias
-            rules:
-            - condition:
-                timeWindow:
-                  logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-                conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                threshold: 10
-              override:
-                priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-            - condition:
-                timeWindow:
-                  logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-                conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                threshold: 10
-              override:
-                priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-            numeratorAlias: numerator_alias
-            denominator:
-              simpleFilter:
-                labelFilters:
-                  subsystemName:
-                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    value: my-app
-                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    value: my-app
-                  applicationName:
-                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    value: my-app
-                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    value: my-app
-                  severities:
-                  - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                luceneQuery: luceneQuery
-            numerator:
-              simpleFilter:
-                labelFilters:
-                  subsystemName:
-                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    value: my-app
-                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    value: my-app
-                  applicationName:
-                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    value: my-app
-                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    value: my-app
-                  severities:
-                  - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                luceneQuery: luceneQuery
           name: My Alert
           groupByKeys:
           - "[\"key1\",\"key2\"]"
@@ -926,8 +922,6 @@ components:
       - ALERT_DEF_ORDER_BY_FIELDS_ENABLED
       type: string
     AlertDefOverride:
-      example:
-        priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -945,19 +939,19 @@ components:
       type: string
     AlertDefProperties:
       oneOf:
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesFlow"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsAnomaly"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsNewValue"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
-      - $ref: "#/components/schemas/AlertDefPropertiesSloThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsImmediate"
       - $ref: "#/components/schemas/AlertDefPropertiesTracingImmediate"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesMetricThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesTracingThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesFlow"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsNewValue"
+      - $ref: "#/components/schemas/AlertDefPropertiesSloThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsImmediate"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsAnomaly"
       - $ref: "#/components/schemas/AlertDefPropertiesMetricAnomaly"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
     AlertDefPropertiesFlow:
       additionalProperties: false
       description: User-configurable properties of an alert definition
@@ -1197,329 +1191,6 @@ components:
     AlertDefPropertiesLogsRatioThreshold:
       additionalProperties: false
       description: User-configurable properties of an alert definition
-      example:
-        entityLabels:
-          key: value
-        phantomMode: false
-        notificationGroupExcess:
-        - router:
-            notifyOn: null
-            id: 123e4567-e89b-12d3-a456-426614174000
-          webhooks:
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          destinations:
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          groupByKeys:
-          - "[\"key1\",\"key2\"]"
-          - "[\"key1\",\"key2\"]"
-        - router:
-            notifyOn: null
-            id: 123e4567-e89b-12d3-a456-426614174000
-          webhooks:
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          destinations:
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          groupByKeys:
-          - "[\"key1\",\"key2\"]"
-          - "[\"key1\",\"key2\"]"
-        description: Alert description
-        priority: null
-        type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
-        activeOn:
-          dayOfWeek:
-          - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
-          - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
-          startTime:
-            hours: 14
-            minutes: 30
-          endTime:
-            hours: 14
-            minutes: 30
-        enabled: true
-        notificationGroup:
-          router:
-            notifyOn: null
-            id: 123e4567-e89b-12d3-a456-426614174000
-          webhooks:
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          destinations:
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          groupByKeys:
-          - "[\"key1\",\"key2\"]"
-          - "[\"key1\",\"key2\"]"
-        deleted: false
-        incidentsSettings:
-          minutes: 30
-          notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
-        logsRatioThreshold:
-          notificationPayloadFilter:
-          - "[\"obj.field\"]"
-          - "[\"obj.field\"]"
-          ignoreInfinity: true
-          undetectedValuesManagement:
-            triggerUndetectedValues: true
-            autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-          evaluationDelayMs: 60000
-          groupByFor: LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED
-          denominatorAlias: denominator_alias
-          rules:
-          - condition:
-              timeWindow:
-                logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-              conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-              threshold: 10
-            override:
-              priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-          - condition:
-              timeWindow:
-                logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-              conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-              threshold: 10
-            override:
-              priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-          numeratorAlias: numerator_alias
-          denominator:
-            simpleFilter:
-              labelFilters:
-                subsystemName:
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                applicationName:
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                severities:
-                - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-              luceneQuery: luceneQuery
-          numerator:
-            simpleFilter:
-              labelFilters:
-                subsystemName:
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                applicationName:
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                severities:
-                - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-              luceneQuery: luceneQuery
-        name: My Alert
-        groupByKeys:
-        - "[\"key1\",\"key2\"]"
-        - "[\"key1\",\"key2\"]"
       externalDocs:
         url: ""
       properties:
@@ -1933,6 +1604,325 @@ components:
     AlertDefPropertiesTracingImmediate:
       additionalProperties: false
       description: User-configurable properties of an alert definition
+      example:
+        entityLabels:
+          key: value
+        phantomMode: false
+        notificationGroupExcess:
+        - router:
+            notifyOn: null
+            id: 123e4567-e89b-12d3-a456-426614174000
+          webhooks:
+          - minutes: 15
+            notifyOn: null
+            integration:
+              integrationId: 123
+          - minutes: 15
+            notifyOn: null
+            integration:
+              integrationId: 123
+          destinations:
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          groupByKeys:
+          - "[\"key1\",\"key2\"]"
+          - "[\"key1\",\"key2\"]"
+        - router:
+            notifyOn: null
+            id: 123e4567-e89b-12d3-a456-426614174000
+          webhooks:
+          - minutes: 15
+            notifyOn: null
+            integration:
+              integrationId: 123
+          - minutes: 15
+            notifyOn: null
+            integration:
+              integrationId: 123
+          destinations:
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          groupByKeys:
+          - "[\"key1\",\"key2\"]"
+          - "[\"key1\",\"key2\"]"
+        tracingImmediate:
+          notificationPayloadFilter:
+          - "[\"obj.field\"]"
+          - "[\"obj.field\"]"
+          tracingFilter:
+            simpleFilter:
+              tracingLabelFilters:
+                operationName:
+                - values:
+                  - "[\"value1\",\"value2\"]"
+                  - "[\"value1\",\"value2\"]"
+                  operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                - values:
+                  - "[\"value1\",\"value2\"]"
+                  - "[\"value1\",\"value2\"]"
+                  operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                spanFields:
+                - filterType:
+                    values:
+                    - "[\"value1\",\"value2\"]"
+                    - "[\"value1\",\"value2\"]"
+                    operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  key: span.field.key
+                - filterType:
+                    values:
+                    - "[\"value1\",\"value2\"]"
+                    - "[\"value1\",\"value2\"]"
+                    operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  key: span.field.key
+                serviceName:
+                - values:
+                  - "[\"value1\",\"value2\"]"
+                  - "[\"value1\",\"value2\"]"
+                  operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                - values:
+                  - "[\"value1\",\"value2\"]"
+                  - "[\"value1\",\"value2\"]"
+                  operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                subsystemName:
+                - values:
+                  - "[\"value1\",\"value2\"]"
+                  - "[\"value1\",\"value2\"]"
+                  operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                - values:
+                  - "[\"value1\",\"value2\"]"
+                  - "[\"value1\",\"value2\"]"
+                  operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                applicationName:
+                - values:
+                  - "[\"value1\",\"value2\"]"
+                  - "[\"value1\",\"value2\"]"
+                  operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                - values:
+                  - "[\"value1\",\"value2\"]"
+                  - "[\"value1\",\"value2\"]"
+                  operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+              latencyThresholdMs: "1000"
+        description: Alert description
+        priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+        type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
+        activeOn:
+          dayOfWeek:
+          - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+          - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+          startTime:
+            hours: 14
+            minutes: 30
+          endTime:
+            hours: 14
+            minutes: 30
+        enabled: true
+        notificationGroup:
+          router:
+            notifyOn: null
+            id: 123e4567-e89b-12d3-a456-426614174000
+          webhooks:
+          - minutes: 15
+            notifyOn: null
+            integration:
+              integrationId: 123
+          - minutes: 15
+            notifyOn: null
+            integration:
+              integrationId: 123
+          destinations:
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          groupByKeys:
+          - "[\"key1\",\"key2\"]"
+          - "[\"key1\",\"key2\"]"
+        deleted: false
+        incidentsSettings:
+          minutes: 30
+          notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+        name: My Alert
+        groupByKeys:
+        - "[\"key1\",\"key2\"]"
+        - "[\"key1\",\"key2\"]"
       externalDocs:
         url: ""
       properties:
@@ -2298,8 +2288,65 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
+            tracingImmediate:
+              notificationPayloadFilter:
+              - "[\"obj.field\"]"
+              - "[\"obj.field\"]"
+              tracingFilter:
+                simpleFilter:
+                  tracingLabelFilters:
+                    operationName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    spanFields:
+                    - filterType:
+                        values:
+                        - "[\"value1\",\"value2\"]"
+                        - "[\"value1\",\"value2\"]"
+                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      key: span.field.key
+                    - filterType:
+                        values:
+                        - "[\"value1\",\"value2\"]"
+                        - "[\"value1\",\"value2\"]"
+                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      key: span.field.key
+                    serviceName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    subsystemName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    applicationName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  latencyThresholdMs: "1000"
             description: Alert description
-            priority: null
+            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -2395,67 +2442,6 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
-            logsRatioThreshold:
-              notificationPayloadFilter:
-              - "[\"obj.field\"]"
-              - "[\"obj.field\"]"
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              groupByFor: LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED
-              denominatorAlias: denominator_alias
-              rules:
-              - condition:
-                  timeWindow:
-                    logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-                  conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 10
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  timeWindow:
-                    logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-                  conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 10
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              numeratorAlias: numerator_alias
-              denominator:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
-              numerator:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             name: My Alert
             groupByKeys:
             - "[\"key1\",\"key2\"]"
@@ -2627,8 +2613,65 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
+            tracingImmediate:
+              notificationPayloadFilter:
+              - "[\"obj.field\"]"
+              - "[\"obj.field\"]"
+              tracingFilter:
+                simpleFilter:
+                  tracingLabelFilters:
+                    operationName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    spanFields:
+                    - filterType:
+                        values:
+                        - "[\"value1\",\"value2\"]"
+                        - "[\"value1\",\"value2\"]"
+                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      key: span.field.key
+                    - filterType:
+                        values:
+                        - "[\"value1\",\"value2\"]"
+                        - "[\"value1\",\"value2\"]"
+                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      key: span.field.key
+                    serviceName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    subsystemName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    applicationName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  latencyThresholdMs: "1000"
             description: Alert description
-            priority: null
+            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -2724,67 +2767,6 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
-            logsRatioThreshold:
-              notificationPayloadFilter:
-              - "[\"obj.field\"]"
-              - "[\"obj.field\"]"
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              groupByFor: LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED
-              denominatorAlias: denominator_alias
-              rules:
-              - condition:
-                  timeWindow:
-                    logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-                  conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 10
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  timeWindow:
-                    logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-                  conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 10
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              numeratorAlias: numerator_alias
-              denominator:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
-              numerator:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             name: My Alert
             groupByKeys:
             - "[\"key1\",\"key2\"]"
@@ -3054,8 +3036,65 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
+            tracingImmediate:
+              notificationPayloadFilter:
+              - "[\"obj.field\"]"
+              - "[\"obj.field\"]"
+              tracingFilter:
+                simpleFilter:
+                  tracingLabelFilters:
+                    operationName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    spanFields:
+                    - filterType:
+                        values:
+                        - "[\"value1\",\"value2\"]"
+                        - "[\"value1\",\"value2\"]"
+                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      key: span.field.key
+                    - filterType:
+                        values:
+                        - "[\"value1\",\"value2\"]"
+                        - "[\"value1\",\"value2\"]"
+                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      key: span.field.key
+                    serviceName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    subsystemName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    applicationName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  latencyThresholdMs: "1000"
             description: Alert description
-            priority: null
+            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -3151,67 +3190,6 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
-            logsRatioThreshold:
-              notificationPayloadFilter:
-              - "[\"obj.field\"]"
-              - "[\"obj.field\"]"
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              groupByFor: LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED
-              denominatorAlias: denominator_alias
-              rules:
-              - condition:
-                  timeWindow:
-                    logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-                  conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 10
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  timeWindow:
-                    logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-                  conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 10
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              numeratorAlias: numerator_alias
-              denominator:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
-              numerator:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             name: My Alert
             groupByKeys:
             - "[\"key1\",\"key2\"]"
@@ -3719,8 +3697,65 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
+            tracingImmediate:
+              notificationPayloadFilter:
+              - "[\"obj.field\"]"
+              - "[\"obj.field\"]"
+              tracingFilter:
+                simpleFilter:
+                  tracingLabelFilters:
+                    operationName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    spanFields:
+                    - filterType:
+                        values:
+                        - "[\"value1\",\"value2\"]"
+                        - "[\"value1\",\"value2\"]"
+                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      key: span.field.key
+                    - filterType:
+                        values:
+                        - "[\"value1\",\"value2\"]"
+                        - "[\"value1\",\"value2\"]"
+                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      key: span.field.key
+                    serviceName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    subsystemName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    applicationName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  latencyThresholdMs: "1000"
             description: Alert description
-            priority: null
+            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -3816,67 +3851,6 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
-            logsRatioThreshold:
-              notificationPayloadFilter:
-              - "[\"obj.field\"]"
-              - "[\"obj.field\"]"
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              groupByFor: LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED
-              denominatorAlias: denominator_alias
-              rules:
-              - condition:
-                  timeWindow:
-                    logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-                  conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 10
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  timeWindow:
-                    logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-                  conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 10
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              numeratorAlias: numerator_alias
-              denominator:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
-              numerator:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             name: My Alert
             groupByKeys:
             - "[\"key1\",\"key2\"]"
@@ -4059,8 +4033,65 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
+            tracingImmediate:
+              notificationPayloadFilter:
+              - "[\"obj.field\"]"
+              - "[\"obj.field\"]"
+              tracingFilter:
+                simpleFilter:
+                  tracingLabelFilters:
+                    operationName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    spanFields:
+                    - filterType:
+                        values:
+                        - "[\"value1\",\"value2\"]"
+                        - "[\"value1\",\"value2\"]"
+                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      key: span.field.key
+                    - filterType:
+                        values:
+                        - "[\"value1\",\"value2\"]"
+                        - "[\"value1\",\"value2\"]"
+                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      key: span.field.key
+                    serviceName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    subsystemName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    applicationName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  latencyThresholdMs: "1000"
             description: Alert description
-            priority: null
+            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -4156,67 +4187,6 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
-            logsRatioThreshold:
-              notificationPayloadFilter:
-              - "[\"obj.field\"]"
-              - "[\"obj.field\"]"
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              groupByFor: LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED
-              denominatorAlias: denominator_alias
-              rules:
-              - condition:
-                  timeWindow:
-                    logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-                  conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 10
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  timeWindow:
-                    logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-                  conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 10
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              numeratorAlias: numerator_alias
-              denominator:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
-              numerator:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             name: My Alert
             groupByKeys:
             - "[\"key1\",\"key2\"]"
@@ -4234,9 +4204,6 @@ components:
       type: object
     LabelFilterType:
       description: Label filter type for log entries
-      example:
-        operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-        value: my-app
       externalDocs:
         url: ""
       properties:
@@ -4250,20 +4217,6 @@ components:
       type: object
     LabelFilters:
       description: "Filters for application name, subsystem name, and log severities"
-      example:
-        subsystemName:
-        - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          value: my-app
-        - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          value: my-app
-        applicationName:
-        - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          value: my-app
-        - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          value: my-app
-        severities:
-        - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-        - LOG_SEVERITY_VERBOSE_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -4451,8 +4404,65 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
+            tracingImmediate:
+              notificationPayloadFilter:
+              - "[\"obj.field\"]"
+              - "[\"obj.field\"]"
+              tracingFilter:
+                simpleFilter:
+                  tracingLabelFilters:
+                    operationName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    spanFields:
+                    - filterType:
+                        values:
+                        - "[\"value1\",\"value2\"]"
+                        - "[\"value1\",\"value2\"]"
+                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      key: span.field.key
+                    - filterType:
+                        values:
+                        - "[\"value1\",\"value2\"]"
+                        - "[\"value1\",\"value2\"]"
+                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      key: span.field.key
+                    serviceName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    subsystemName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    applicationName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  latencyThresholdMs: "1000"
             description: Alert description
-            priority: null
+            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -4548,67 +4558,6 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
-            logsRatioThreshold:
-              notificationPayloadFilter:
-              - "[\"obj.field\"]"
-              - "[\"obj.field\"]"
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              groupByFor: LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED
-              denominatorAlias: denominator_alias
-              rules:
-              - condition:
-                  timeWindow:
-                    logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-                  conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 10
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  timeWindow:
-                    logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-                  conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 10
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              numeratorAlias: numerator_alias
-              denominator:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
-              numerator:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             name: My Alert
             groupByKeys:
             - "[\"key1\",\"key2\"]"
@@ -4780,8 +4729,65 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
+            tracingImmediate:
+              notificationPayloadFilter:
+              - "[\"obj.field\"]"
+              - "[\"obj.field\"]"
+              tracingFilter:
+                simpleFilter:
+                  tracingLabelFilters:
+                    operationName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    spanFields:
+                    - filterType:
+                        values:
+                        - "[\"value1\",\"value2\"]"
+                        - "[\"value1\",\"value2\"]"
+                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      key: span.field.key
+                    - filterType:
+                        values:
+                        - "[\"value1\",\"value2\"]"
+                        - "[\"value1\",\"value2\"]"
+                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      key: span.field.key
+                    serviceName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    subsystemName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    applicationName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  latencyThresholdMs: "1000"
             description: Alert description
-            priority: null
+            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -4877,67 +4883,6 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
-            logsRatioThreshold:
-              notificationPayloadFilter:
-              - "[\"obj.field\"]"
-              - "[\"obj.field\"]"
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              groupByFor: LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED
-              denominatorAlias: denominator_alias
-              rules:
-              - condition:
-                  timeWindow:
-                    logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-                  conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 10
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  timeWindow:
-                    logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-                  conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 10
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              numeratorAlias: numerator_alias
-              denominator:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
-              numerator:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             name: My Alert
             groupByKeys:
             - "[\"key1\",\"key2\"]"
@@ -5110,11 +5055,6 @@ components:
       type: object
     LogsRatioCondition:
       description: Defines conditions for ratio-based alerts
-      example:
-        timeWindow:
-          logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-        conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-        threshold: 10
       externalDocs:
         url: ""
       properties:
@@ -5142,14 +5082,6 @@ components:
       type: string
     LogsRatioRules:
       description: Defines the rules for log-based ratio alerts
-      example:
-        condition:
-          timeWindow:
-            logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-          conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-          threshold: 10
-        override:
-          priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -5161,67 +5093,6 @@ components:
       type: object
     LogsRatioThresholdType:
       description: Configuration for alerts based on the ratio between two log queries
-      example:
-        notificationPayloadFilter:
-        - "[\"obj.field\"]"
-        - "[\"obj.field\"]"
-        ignoreInfinity: true
-        undetectedValuesManagement:
-          triggerUndetectedValues: true
-          autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-        evaluationDelayMs: 60000
-        groupByFor: LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED
-        denominatorAlias: denominator_alias
-        rules:
-        - condition:
-            timeWindow:
-              logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-            conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-            threshold: 10
-          override:
-            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-        - condition:
-            timeWindow:
-              logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-            conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-            threshold: 10
-          override:
-            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-        numeratorAlias: numerator_alias
-        denominator:
-          simpleFilter:
-            labelFilters:
-              subsystemName:
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              applicationName:
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              severities:
-              - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-              - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-            luceneQuery: luceneQuery
-        numerator:
-          simpleFilter:
-            labelFilters:
-              subsystemName:
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              applicationName:
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              severities:
-              - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-              - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-            luceneQuery: luceneQuery
       externalDocs:
         description: Learn more about logs ratio alerts in our documentation
         url: https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/ratio-alerts/
@@ -5264,8 +5135,6 @@ components:
       type: object
     LogsRatioTimeWindow:
       description: Time window configuration for ratio alerts
-      example:
-        logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
       externalDocs:
         description: Learn more about log-based ratio alerts in our documentation
         url: https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/ratio-alerts/
@@ -5290,22 +5159,6 @@ components:
       type: string
     LogsSimpleFilter:
       description: Basic filter configuration using a Lucene query and label filters
-      example:
-        labelFilters:
-          subsystemName:
-          - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            value: my-app
-          - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            value: my-app
-          applicationName:
-          - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            value: my-app
-          - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            value: my-app
-          severities:
-          - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-          - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-        luceneQuery: luceneQuery
       externalDocs:
         url: ""
       properties:
@@ -6064,8 +5917,65 @@ components:
               groupByKeys:
               - "[\"key1\",\"key2\"]"
               - "[\"key1\",\"key2\"]"
+            tracingImmediate:
+              notificationPayloadFilter:
+              - "[\"obj.field\"]"
+              - "[\"obj.field\"]"
+              tracingFilter:
+                simpleFilter:
+                  tracingLabelFilters:
+                    operationName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    spanFields:
+                    - filterType:
+                        values:
+                        - "[\"value1\",\"value2\"]"
+                        - "[\"value1\",\"value2\"]"
+                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      key: span.field.key
+                    - filterType:
+                        values:
+                        - "[\"value1\",\"value2\"]"
+                        - "[\"value1\",\"value2\"]"
+                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      key: span.field.key
+                    serviceName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    subsystemName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    applicationName:
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    - values:
+                      - "[\"value1\",\"value2\"]"
+                      - "[\"value1\",\"value2\"]"
+                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  latencyThresholdMs: "1000"
             description: Alert description
-            priority: null
+            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -6161,67 +6071,6 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
-            logsRatioThreshold:
-              notificationPayloadFilter:
-              - "[\"obj.field\"]"
-              - "[\"obj.field\"]"
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              groupByFor: LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED
-              denominatorAlias: denominator_alias
-              rules:
-              - condition:
-                  timeWindow:
-                    logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-                  conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 10
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  timeWindow:
-                    logsRatioTimeWindowSpecificValue: LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-                  conditionType: LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 10
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              numeratorAlias: numerator_alias
-              denominator:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
-              numerator:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             name: My Alert
             groupByKeys:
             - "[\"key1\",\"key2\"]"
@@ -6342,6 +6191,59 @@ components:
       type: string
     TracingFilter:
       description: Filter configuration for tracing-based alerts
+      example:
+        simpleFilter:
+          tracingLabelFilters:
+            operationName:
+            - values:
+              - "[\"value1\",\"value2\"]"
+              - "[\"value1\",\"value2\"]"
+              operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+            - values:
+              - "[\"value1\",\"value2\"]"
+              - "[\"value1\",\"value2\"]"
+              operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+            spanFields:
+            - filterType:
+                values:
+                - "[\"value1\",\"value2\"]"
+                - "[\"value1\",\"value2\"]"
+                operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+              key: span.field.key
+            - filterType:
+                values:
+                - "[\"value1\",\"value2\"]"
+                - "[\"value1\",\"value2\"]"
+                operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+              key: span.field.key
+            serviceName:
+            - values:
+              - "[\"value1\",\"value2\"]"
+              - "[\"value1\",\"value2\"]"
+              operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+            - values:
+              - "[\"value1\",\"value2\"]"
+              - "[\"value1\",\"value2\"]"
+              operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+            subsystemName:
+            - values:
+              - "[\"value1\",\"value2\"]"
+              - "[\"value1\",\"value2\"]"
+              operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+            - values:
+              - "[\"value1\",\"value2\"]"
+              - "[\"value1\",\"value2\"]"
+              operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+            applicationName:
+            - values:
+              - "[\"value1\",\"value2\"]"
+              - "[\"value1\",\"value2\"]"
+              operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+            - values:
+              - "[\"value1\",\"value2\"]"
+              - "[\"value1\",\"value2\"]"
+              operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+          latencyThresholdMs: "1000"
       externalDocs:
         url: ""
       properties:
@@ -6359,6 +6261,11 @@ components:
       type: string
     TracingFilterType:
       description: Filter type for trace entries
+      example:
+        values:
+        - "[\"value1\",\"value2\"]"
+        - "[\"value1\",\"value2\"]"
+        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -6374,6 +6281,63 @@ components:
       type: object
     TracingImmediateType:
       description: Configuration for immediate alerts triggered on trace entries
+      example:
+        notificationPayloadFilter:
+        - "[\"obj.field\"]"
+        - "[\"obj.field\"]"
+        tracingFilter:
+          simpleFilter:
+            tracingLabelFilters:
+              operationName:
+              - values:
+                - "[\"value1\",\"value2\"]"
+                - "[\"value1\",\"value2\"]"
+                operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+              - values:
+                - "[\"value1\",\"value2\"]"
+                - "[\"value1\",\"value2\"]"
+                operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+              spanFields:
+              - filterType:
+                  values:
+                  - "[\"value1\",\"value2\"]"
+                  - "[\"value1\",\"value2\"]"
+                  operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                key: span.field.key
+              - filterType:
+                  values:
+                  - "[\"value1\",\"value2\"]"
+                  - "[\"value1\",\"value2\"]"
+                  operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                key: span.field.key
+              serviceName:
+              - values:
+                - "[\"value1\",\"value2\"]"
+                - "[\"value1\",\"value2\"]"
+                operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+              - values:
+                - "[\"value1\",\"value2\"]"
+                - "[\"value1\",\"value2\"]"
+                operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+              subsystemName:
+              - values:
+                - "[\"value1\",\"value2\"]"
+                - "[\"value1\",\"value2\"]"
+                operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+              - values:
+                - "[\"value1\",\"value2\"]"
+                - "[\"value1\",\"value2\"]"
+                operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+              applicationName:
+              - values:
+                - "[\"value1\",\"value2\"]"
+                - "[\"value1\",\"value2\"]"
+                operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+              - values:
+                - "[\"value1\",\"value2\"]"
+                - "[\"value1\",\"value2\"]"
+                operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+            latencyThresholdMs: "1000"
       externalDocs:
         description: Learn more about trace-based alerts in our documentation.
         url: https://coralogix.com/docs/user-guides/alerting/create-an-alert/traces/tracing-alerts/
@@ -6391,6 +6355,56 @@ components:
     TracingLabelFilters:
       description: "Filters for application name, subsystem name, service name, operation\
         \ name and span fields"
+      example:
+        operationName:
+        - values:
+          - "[\"value1\",\"value2\"]"
+          - "[\"value1\",\"value2\"]"
+          operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+        - values:
+          - "[\"value1\",\"value2\"]"
+          - "[\"value1\",\"value2\"]"
+          operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+        spanFields:
+        - filterType:
+            values:
+            - "[\"value1\",\"value2\"]"
+            - "[\"value1\",\"value2\"]"
+            operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+          key: span.field.key
+        - filterType:
+            values:
+            - "[\"value1\",\"value2\"]"
+            - "[\"value1\",\"value2\"]"
+            operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+          key: span.field.key
+        serviceName:
+        - values:
+          - "[\"value1\",\"value2\"]"
+          - "[\"value1\",\"value2\"]"
+          operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+        - values:
+          - "[\"value1\",\"value2\"]"
+          - "[\"value1\",\"value2\"]"
+          operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+        subsystemName:
+        - values:
+          - "[\"value1\",\"value2\"]"
+          - "[\"value1\",\"value2\"]"
+          operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+        - values:
+          - "[\"value1\",\"value2\"]"
+          - "[\"value1\",\"value2\"]"
+          operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+        applicationName:
+        - values:
+          - "[\"value1\",\"value2\"]"
+          - "[\"value1\",\"value2\"]"
+          operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+        - values:
+          - "[\"value1\",\"value2\"]"
+          - "[\"value1\",\"value2\"]"
+          operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -6419,6 +6433,58 @@ components:
     TracingSimpleFilter:
       description: Basic filter configuration using a latency threshold and label
         filters
+      example:
+        tracingLabelFilters:
+          operationName:
+          - values:
+            - "[\"value1\",\"value2\"]"
+            - "[\"value1\",\"value2\"]"
+            operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+          - values:
+            - "[\"value1\",\"value2\"]"
+            - "[\"value1\",\"value2\"]"
+            operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+          spanFields:
+          - filterType:
+              values:
+              - "[\"value1\",\"value2\"]"
+              - "[\"value1\",\"value2\"]"
+              operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+            key: span.field.key
+          - filterType:
+              values:
+              - "[\"value1\",\"value2\"]"
+              - "[\"value1\",\"value2\"]"
+              operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+            key: span.field.key
+          serviceName:
+          - values:
+            - "[\"value1\",\"value2\"]"
+            - "[\"value1\",\"value2\"]"
+            operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+          - values:
+            - "[\"value1\",\"value2\"]"
+            - "[\"value1\",\"value2\"]"
+            operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+          subsystemName:
+          - values:
+            - "[\"value1\",\"value2\"]"
+            - "[\"value1\",\"value2\"]"
+            operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+          - values:
+            - "[\"value1\",\"value2\"]"
+            - "[\"value1\",\"value2\"]"
+            operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+          applicationName:
+          - values:
+            - "[\"value1\",\"value2\"]"
+            - "[\"value1\",\"value2\"]"
+            operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+          - values:
+            - "[\"value1\",\"value2\"]"
+            - "[\"value1\",\"value2\"]"
+            operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+        latencyThresholdMs: "1000"
       externalDocs:
         url: ""
       properties:
@@ -6433,6 +6499,13 @@ components:
       type: object
     TracingSpanFieldsFilterType:
       description: A filter for span fields in trace entries
+      example:
+        filterType:
+          values:
+          - "[\"value1\",\"value2\"]"
+          - "[\"value1\",\"value2\"]"
+          operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+        key: span.field.key
       externalDocs:
         url: ""
       properties:
@@ -6624,23 +6697,6 @@ components:
       - $ref: "#/components/schemas/V3IntegrationTypeRecipients"
     v3.LogsFilter:
       description: Filter configuration for log-based alerts
-      example:
-        simpleFilter:
-          labelFilters:
-            subsystemName:
-            - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              value: my-app
-            - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              value: my-app
-            applicationName:
-            - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              value: my-app
-            - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              value: my-app
-            severities:
-            - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-            - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-          luceneQuery: luceneQuery
       externalDocs:
         url: ""
       properties:
@@ -6717,9 +6773,6 @@ components:
       type: object
     v3.UndetectedValuesManagement:
       description: Configuration for handling undetected values in alerts
-      example:
-        triggerUndetectedValues: true
-        autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
