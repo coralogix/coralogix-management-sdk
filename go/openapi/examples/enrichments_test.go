@@ -25,8 +25,9 @@ import (
 )
 
 func TestEnrichmentsGeoIp(t *testing.T) {
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
 
@@ -70,8 +71,9 @@ func TestEnrichmentsGeoIp(t *testing.T) {
 
 func TestEnrichmentsAws(t *testing.T) {
 	t.Skip("Skipping AWS")
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
 
@@ -108,8 +110,9 @@ func TestEnrichmentsAws(t *testing.T) {
 
 func TestEnrichmentsCustom(t *testing.T) {
 	t.Skip("Skipping Custom")
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
 
@@ -143,8 +146,9 @@ func TestEnrichmentsCustom(t *testing.T) {
 }
 
 func TestEnrichmentsSuspiciousIp(t *testing.T) {
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
 

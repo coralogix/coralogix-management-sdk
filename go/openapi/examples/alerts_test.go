@@ -271,10 +271,12 @@ func CreateFlowAlert(alertId string) *alerts.AlertDefPropertiesFlow {
 }
 
 func TestTracingImmediateAlerts(t *testing.T) {
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
+
 	client := cxsdk.NewAlertsClient(cpc)
 	ctx := context.Background()
 
@@ -332,10 +334,12 @@ func TestTracingImmediateAlerts(t *testing.T) {
 }
 
 func TestLogsRatioAlerts(t *testing.T) {
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
+
 	client := cxsdk.NewAlertsClient(cpc)
 	ctx := context.Background()
 
@@ -393,10 +397,12 @@ func TestLogsRatioAlerts(t *testing.T) {
 }
 
 func TestTracingThresholdAlerts(t *testing.T) {
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
+
 	client := cxsdk.NewAlertsClient(cpc)
 	ctx := context.Background()
 
@@ -454,10 +460,12 @@ func TestTracingThresholdAlerts(t *testing.T) {
 }
 
 func TestFlowAlerts(t *testing.T) {
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
+
 	client := cxsdk.NewAlertsClient(cpc)
 	ctx := context.Background()
 
@@ -536,8 +544,9 @@ func TestFlowAlerts(t *testing.T) {
 
 func TestSloAlerts(t *testing.T) {
 	ctx := context.Background()
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
 
@@ -616,8 +625,9 @@ func TestSloAlerts(t *testing.T) {
 }
 
 func TestAlertScheduler(t *testing.T) {
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
 

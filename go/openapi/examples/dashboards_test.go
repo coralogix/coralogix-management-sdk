@@ -29,8 +29,9 @@ import (
 )
 
 func TestDashboards(t *testing.T) {
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
 
@@ -95,8 +96,9 @@ func TestDashboards(t *testing.T) {
 }
 
 func TestDashboardFolders(t *testing.T) {
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
 

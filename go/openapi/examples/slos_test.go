@@ -27,10 +27,12 @@ import (
 
 func TestSLOs(t *testing.T) {
 	ctx := context.Background()
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
+
 	client := cxsdk.NewClientSet(cpc).SLOs()
 
 	sloName := "example_slo_" + uuid.NewString()

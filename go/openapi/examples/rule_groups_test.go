@@ -25,10 +25,12 @@ import (
 )
 
 func TestRuleGroups(t *testing.T) {
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
+
 	client := cxsdk.NewRuleGroupsClient(cpc)
 	ctx := context.Background()
 

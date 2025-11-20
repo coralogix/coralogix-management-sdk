@@ -33,10 +33,12 @@ func TestArchiveMetrics(t *testing.T) {
 	}
 
 	ctx := context.Background()
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
+
 	client := cxsdk.NewArchiveMetricsClient(cpc)
 
 	s3Config := metrics.S3Config{

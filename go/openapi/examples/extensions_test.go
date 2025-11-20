@@ -14,10 +14,12 @@ import (
 
 func TestExtensions(t *testing.T) {
 	t.Skip("Unstable test")
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
+
 	ctx := context.Background()
 
 	extensionsClient := cxsdk.NewExtensionsClient(cpc)
