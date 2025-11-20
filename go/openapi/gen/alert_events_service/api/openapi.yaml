@@ -7,6 +7,7 @@ servers:
 paths:
   /v3/alert-event-stats:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertEventService_GetAlertEventsStats
@@ -55,6 +56,7 @@ paths:
       - alerts:ReadConfig
   /v3/alert-event/{id}:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertEventService_GetAlertEvent
@@ -284,8 +286,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
       additionalProperties: false
       description: This data structure represents a filter path and values
@@ -498,3 +500,9 @@ components:
         pageToken:
           type: string
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

@@ -7,6 +7,7 @@ servers:
 paths:
   /aaa/team-groups/v1:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: TeamPermissionsMgmtService_GetTeamGroups
@@ -41,6 +42,7 @@ paths:
       tags:
       - Team Permissions Management Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: TeamPermissionsMgmtService_CreateTeamGroup
@@ -72,6 +74,7 @@ paths:
       tags:
       - Team Permissions Management Service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: TeamPermissionsMgmtService_UpdateTeamGroup
@@ -104,6 +107,7 @@ paths:
       - Team Permissions Management Service
   /aaa/team-groups/v1/users:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: TeamPermissionsMgmtService_RemoveUsersFromTeamGroups
@@ -147,6 +151,7 @@ paths:
       tags:
       - Team Permissions Management Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: TeamPermissionsMgmtService_AddUsersToTeamGroups
@@ -179,6 +184,7 @@ paths:
       - Team Permissions Management Service
   /aaa/team-groups/v1/{group_id.id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: TeamPermissionsMgmtService_DeleteTeamGroup
@@ -214,6 +220,7 @@ paths:
       tags:
       - Team Permissions Management Service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: TeamPermissionsMgmtService_GetTeamGroup
@@ -250,6 +257,7 @@ paths:
       - Team Permissions Management Service
   /aaa/team-groups/v1/{group_id.id}/users:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: TeamPermissionsMgmtService_RemoveUsersFromTeamGroup
@@ -294,6 +302,7 @@ paths:
       tags:
       - Team Permissions Management Service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: TeamPermissionsMgmtService_GetGroupUsers
@@ -344,6 +353,7 @@ paths:
       tags:
       - Team Permissions Management Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: TeamPermissionsMgmtService_AddUsersToTeamGroup
@@ -385,6 +395,7 @@ paths:
       - Team Permissions Management Service
   /aaa/team-groups/v1/{name}:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: TeamPermissionsMgmtService_GetTeamGroupByName
@@ -420,6 +431,7 @@ paths:
       - Team Permissions Management Service
   /v1/teams/groups/{group_id.id}/scope:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: TeamPermissionsMgmtService_GetTeamGroupScope
@@ -455,6 +467,7 @@ paths:
       tags:
       - Team Permissions Management Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: TeamPermissionsMgmtService_SetTeamGroupScope
@@ -588,8 +601,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
       additionalProperties: false
       description: This data structure represents a filter path and values
@@ -1458,3 +1471,9 @@ components:
           $ref: "#/components/schemas/ScopeFilters"
       title: SetTeamGroupScopeRequest
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

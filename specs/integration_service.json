@@ -11,6 +11,7 @@
           "Integration service"
         ],
         "summary": "Get all integrations",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -66,6 +67,7 @@
           "Integration service"
         ],
         "summary": "Get integration definition",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -131,6 +133,7 @@
           "Integration service"
         ],
         "summary": "Get deployed integration",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -188,6 +191,7 @@
           "Integration service"
         ],
         "summary": "Delete integration",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -244,6 +248,7 @@
           "Integration service"
         ],
         "summary": "List managed integration keys",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -289,6 +294,7 @@
           "Integration service"
         ],
         "summary": "Get managed integration status",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -345,6 +351,7 @@
           "Integration service"
         ],
         "summary": "Update integration",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -408,6 +415,7 @@
           "Integration service"
         ],
         "summary": "Save integration registration metadata",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -469,6 +477,7 @@
           "Integration service"
         ],
         "summary": "Test integration",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -533,6 +542,7 @@
           "Integration service"
         ],
         "summary": "Get RUM integration versions data",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -588,6 +598,7 @@
           "Integration service"
         ],
         "summary": "Trigger sync of RUM integration data",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -649,6 +660,7 @@
           "Integration service"
         ],
         "summary": "Get integration template",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -735,6 +747,7 @@
           "Integration service"
         ],
         "summary": "Get integration details",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -1286,6 +1299,12 @@
       "FieldInformation": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/FieldInformationMultiText"
+          },
+          {
+            "$ref": "#/components/schemas/FieldInformationMultipleSelection"
+          },
+          {
             "$ref": "#/components/schemas/FieldInformationSingleBoolean"
           },
           {
@@ -1296,12 +1315,6 @@
           },
           {
             "$ref": "#/components/schemas/FieldInformationSingle"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationMultiText"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationMultipleSelection"
           }
         ]
       },
@@ -1638,10 +1651,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -2101,6 +2114,12 @@
       "IntegrationRevision": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/IntegrationRevisionRum"
+          },
+          {
+            "$ref": "#/components/schemas/IntegrationRevisionTerraform"
+          },
+          {
             "$ref": "#/components/schemas/IntegrationRevisionCloudFormation"
           },
           {
@@ -2111,12 +2130,6 @@
           },
           {
             "$ref": "#/components/schemas/IntegrationRevisionAzureArmTemplate"
-          },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionRum"
-          },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionTerraform"
           }
         ]
       },
@@ -3302,6 +3315,9 @@
       "v1.IntegrationType": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/V1IntegrationTypeGenericWebhook"
+          },
+          {
             "$ref": "#/components/schemas/V1IntegrationTypeManaged"
           },
           {
@@ -3318,9 +3334,6 @@
           },
           {
             "$ref": "#/components/schemas/V1IntegrationTypeContextualData"
-          },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeGenericWebhook"
           }
         ]
       },
@@ -3330,6 +3343,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

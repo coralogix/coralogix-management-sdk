@@ -36,6 +36,8 @@ func (r ApiEntitiesServiceListEntitySubTypesRequest) Execute() (*ListEntitySubTy
 /*
 EntitiesServiceListEntitySubTypes List Entity Subtypes
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param entityType
  @return ApiEntitiesServiceListEntitySubTypesRequest
@@ -135,6 +137,8 @@ func (r ApiEntitiesServiceListEntityTypesRequest) Execute() (*ListEntityTypesRes
 
 /*
 EntitiesServiceListEntityTypes List Entity Types
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEntitiesServiceListEntityTypesRequest

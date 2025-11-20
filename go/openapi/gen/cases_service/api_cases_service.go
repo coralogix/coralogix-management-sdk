@@ -44,6 +44,9 @@ CasesServiceAcknowledgeCase Acknowledge a case
 
 Mark the case as acknowledged by a user.
 
+Requires the following permissions:
+- `case:Acknowledge`
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiCasesServiceAcknowledgeCaseRequest
@@ -154,6 +157,9 @@ func (r ApiCasesServiceAssignCaseRequest) Execute() (*AssignCaseResponse, *http.
 CasesServiceAssignCase Assign a case to a user
 
 Assign a case to a specific user.
+
+Requires the following permissions:
+- `case:Assign`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -266,6 +272,9 @@ CasesServiceCloseCase Close a case
 
 Close a case that no longer requires action.
 
+Requires the following permissions:
+- `case:Close`
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiCasesServiceCloseCaseRequest
@@ -371,6 +380,9 @@ func (r ApiCasesServiceGetCaseRequest) Execute() (*GetCaseResponse, *http.Respon
 CasesServiceGetCase Get case by ID
 
 Retrieve detailed information about a single case by its unique identifier.
+
+Requires the following permissions:
+- `case:Read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -480,6 +492,9 @@ CasesServiceGetFilterValues Get available filter values
 
 Retrieve available filter and aggregation values for cases.
 
+Requires the following permissions:
+- `case:Read`
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCasesServiceGetFilterValuesRequest
 */
@@ -586,6 +601,9 @@ func (r ApiCasesServiceListCasesRequest) Execute() (*ListCasesResponse, *http.Re
 CasesServiceListCases List cases with filters
 
 List cases using filters, pagination and custom ordering.
+
+Requires the following permissions:
+- `case:Read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCasesServiceListCasesRequest
@@ -694,6 +712,9 @@ func (r ApiCasesServiceResolveCaseRequest) Execute() (*ResolveCaseResponse, *htt
 CasesServiceResolveCase Resolve a case
 
 Mark a case as resolved.
+
+Requires the following permissions:
+- `case:Close`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -807,6 +828,9 @@ CasesServiceSetPriorityOverride Set priority override
 
 Override a case's computed priority with a specific value.
 
+Requires the following permissions:
+- `case:Update`
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiCasesServiceSetPriorityOverrideRequest
@@ -912,6 +936,9 @@ CasesServiceUnassignCase Remove case assignment
 
 Remove the current assignee from a case.
 
+Requires the following permissions:
+- `case:Assign`
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiCasesServiceUnassignCaseRequest
@@ -1014,6 +1041,9 @@ func (r ApiCasesServiceUnsetPriorityOverrideRequest) Execute() (*UnsetPriorityOv
 CasesServiceUnsetPriorityOverride Remove priority override
 
 Remove a previously set priority override for a case.
+
+Requires the following permissions:
+- `case:Update`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -1123,6 +1153,9 @@ func (r ApiCasesServiceUpdateCaseRequest) Execute() (*UpdateCaseResponse, *http.
 CasesServiceUpdateCase Update case fields
 
 Apply a partial update (patch) to a case.
+
+Requires the following permissions:
+- `case:Update`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id

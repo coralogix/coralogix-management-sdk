@@ -11,6 +11,7 @@
           "Events2Metrics Service"
         ],
         "summary": "List E2Ms",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -33,6 +34,7 @@
           "Events2Metrics Service"
         ],
         "summary": "Replace an E2M",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -44,10 +46,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/E2MSpansQuery"
+                    "$ref": "#/components/schemas/E2MLogsQuery"
                   },
                   {
-                    "$ref": "#/components/schemas/E2MLogsQuery"
+                    "$ref": "#/components/schemas/E2MSpansQuery"
                   }
                 ]
               }
@@ -72,6 +74,7 @@
           "Events2Metrics Service"
         ],
         "summary": "Create a new E2M",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -113,6 +116,7 @@
           "Events2Metrics Service"
         ],
         "summary": "Atomic Batch Execute E2M",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -155,6 +159,7 @@
           "Events2Metrics Service"
         ],
         "summary": "List E2M Labels Cardinality",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -305,6 +310,7 @@
           "Events2Metrics Service"
         ],
         "summary": "Get E2M Limits",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -329,6 +335,7 @@
           "Events2Metrics Service"
         ],
         "summary": "Get an E2M",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -363,6 +370,7 @@
           "Events2Metrics Service"
         ],
         "summary": "Delete an E2M",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -695,13 +703,13 @@
       "E2MExecutionResponse": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/E2MExecutionResponseDeleted"
-          },
-          {
             "$ref": "#/components/schemas/E2MExecutionResponseCreated"
           },
           {
             "$ref": "#/components/schemas/E2MExecutionResponseReplaced"
+          },
+          {
+            "$ref": "#/components/schemas/E2MExecutionResponseDeleted"
           }
         ]
       },
@@ -903,10 +911,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -1363,6 +1371,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

@@ -1,0 +1,506 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /stuff/things/v1:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ThingService_ListThings
+      parameters:
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          example: logs.id=100
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          example: 100
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: skip
+        required: false
+        schema:
+          example: 100
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
+          example: asdf1234
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListThingsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List Things
+      tags:
+      - Things Service
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ThingService_CreateThing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Create_Thing_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateThingResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Create Thing
+      tags:
+      - Things Service
+      x-bumblebee:
+      - action:
+        - create
+        guard: status==201 && exists($.body.id)
+        name: resource_management
+        reachable:
+        - ThingService_ListThings
+        - ThingService_GetThing
+        - ThingService_ReplaceThing
+        - ThingService_DeleteThing
+        root: true
+  /stuff/things/v1/{id}:
+    delete:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ThingService_DeleteThing
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 43B9880C-A880-418F-91DF-8463063A30ED
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteThingResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Delete Thing
+      tags:
+      - Things Service
+      x-bumblebee:
+      - action:
+        - create
+        guard: status==201 && exists($.body.id)
+        name: resource_management
+        reachable:
+        - ThingService_ListThings
+        root: true
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ThingService_GetThing
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 43B9880C-A880-418F-91DF-8463063A30ED
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetThingResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Thing
+      tags:
+      - Things Service
+      x-bumblebee:
+      - action:
+        - create
+        guard: status==201 && exists($.body.id)
+        name: resource_management
+        reachable:
+        - ThingService_ListThings
+        - ThingService_GetThing
+        - ThingService_ReplaceThing
+        - ThingService_DeleteThing
+        root: true
+  /stuff/things/v1/{thing.id}:
+    put:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ThingService_ReplaceThing
+      parameters:
+      - explode: false
+        in: path
+        name: thing.id
+        required: true
+        schema:
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Replace_Thing_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReplaceThingResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Replace Thing
+      tags:
+      - Things Service
+      x-bumblebee:
+      - action:
+        - create
+        guard: status==201 && exists($.body.id)
+        name: resource_management
+        reachable:
+        - ThingService_ListThings
+        - ThingService_GetThing
+        - ThingService_ReplaceThing
+        - ThingService_DeleteThing
+        root: true
+components:
+  schemas:
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
+    CreateThingResponse:
+      description: The data structure response from creating a thing
+      example:
+        thing:
+          createdAt: 2021-01-01T00:00:00Z
+          name: A Thing's Name
+          id: 123e4567-e89b-12d3-a456-426614174000
+      externalDocs:
+        description: Find out more.
+        url: https://coralogix.com/docs/user-guides/
+      properties:
+        thing:
+          $ref: "#/components/schemas/Thing"
+      required:
+      - thing
+      title: Create Thing Response
+      type: object
+    DeleteThingResponse:
+      description: Empty response if the request succeeded.
+      externalDocs:
+        description: Find out more.
+        url: https://coralogix.com/docs/user-guides/
+      title: Delete Thing Response
+      type: object
+    FieldGroup:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    GetThingResponse:
+      description: The data structure response from getting a thing
+      example:
+        thing:
+          createdAt: 2021-01-01T00:00:00Z
+          name: A Thing's Name
+          id: 123e4567-e89b-12d3-a456-426614174000
+      externalDocs:
+        description: Find out more.
+        url: https://coralogix.com/docs/user-guides/
+      properties:
+        thing:
+          $ref: "#/components/schemas/Thing"
+      required:
+      - thing
+      title: Get Thing Response
+      type: object
+    ListThingsResponse:
+      description: Paginated response for listing things. Defaults to retrieving all
+        things (probably a bad idea).
+      example:
+        nextPageToken: nextPageToken
+        things:
+        - createdAt: 2021-01-01T00:00:00Z
+          name: A Thing's Name
+          id: 123e4567-e89b-12d3-a456-426614174000
+        - createdAt: 2021-01-01T00:00:00Z
+          name: A Thing's Name
+          id: 123e4567-e89b-12d3-a456-426614174000
+        totalCount: 0
+      externalDocs:
+        description: Find out more.
+        url: https://coralogix.com/docs/user-guides/
+      properties:
+        nextPageToken:
+          type: string
+        things:
+          items:
+            $ref: "#/components/schemas/Thing"
+          type: array
+        totalCount:
+          format: int32
+          type: integer
+      title: List Things Response
+      type: object
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    ReplaceThingResponse:
+      description: The data structure response from replacing a thing
+      example:
+        thing:
+          createdAt: 2021-01-01T00:00:00Z
+          name: A Thing's Name
+          id: 123e4567-e89b-12d3-a456-426614174000
+      externalDocs:
+        description: Find out more.
+        url: https://coralogix.com/docs/user-guides/
+      properties:
+        thing:
+          $ref: "#/components/schemas/Thing"
+      required:
+      - thing
+      title: Replace Thing Response
+      type: object
+    Thing:
+      example:
+        createdAt: 2021-01-01T00:00:00Z
+        name: A Thing's Name
+        id: 123e4567-e89b-12d3-a456-426614174000
+      properties:
+        createdAt:
+          example: 2021-01-01T00:00:00Z
+          format: date-time
+          type: string
+        id:
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+        name:
+          example: A Thing's Name
+          type: string
+      type: object
+    common.Group:
+      properties:
+        field:
+          $ref: "#/components/schemas/FieldGroup"
+        groups:
+          items:
+            $ref: "#/components/schemas/common.Group"
+          type: array
+        value:
+          format: double
+          type: number
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    Create_Thing_Request:
+      additionalProperties: false
+      description: The data structure to create a thing
+      properties:
+        thing:
+          $ref: "#/components/schemas/Thing"
+      required:
+      - thing
+      title: Create Thing Request
+      type: object
+    Replace_Thing_Request_thing:
+      properties:
+        createdAt:
+          example: 2021-01-01T00:00:00Z
+          format: date-time
+          type: string
+        name:
+          example: A Thing's Name
+          type: string
+      type: object
+    Replace_Thing_Request:
+      additionalProperties: false
+      description: The data structure to replace a thing
+      properties:
+        thing:
+          $ref: "#/components/schemas/Replace_Thing_Request_thing"
+      required:
+      - thing
+      title: Replace Thing Request
+      type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

@@ -11,6 +11,7 @@
           "Rule Groups Service"
         ],
         "summary": "List Rule Groups",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -51,6 +52,7 @@
           "Rule Groups Service"
         ],
         "summary": "Create Rule Group",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -137,6 +139,7 @@
           "Rule Groups Service"
         ],
         "summary": "Bulk Delete Rule Group",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -192,6 +195,7 @@
           "Rule Groups Service"
         ],
         "summary": "Get Company Usage Limits",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -234,6 +238,7 @@
           "Rule Groups Service"
         ],
         "summary": "Get Rule Group Model Mapping",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -319,6 +324,7 @@
           "Rule Groups Service"
         ],
         "summary": "Get Rule Group",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -370,6 +376,7 @@
           "Rule Groups Service"
         ],
         "summary": "Update Rule Group",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -467,6 +474,7 @@
           "Rule Groups Service"
         ],
         "summary": "Delete Rule Group",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -691,10 +699,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -1039,18 +1047,6 @@
             "$ref": "#/components/schemas/RuleParametersReplaceParameters"
           },
           {
-            "$ref": "#/components/schemas/RuleParametersParseParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersJsonExtractParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersAllowParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersBlockParameters"
-          },
-          {
             "$ref": "#/components/schemas/RuleParametersExtractTimestampParameters"
           },
           {
@@ -1058,6 +1054,18 @@
           },
           {
             "$ref": "#/components/schemas/RuleParametersJsonStringifyParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersJsonExtractParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersParseParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersAllowParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersBlockParameters"
           },
           {
             "$ref": "#/components/schemas/RuleParametersJsonParseParameters"
@@ -1277,6 +1285,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

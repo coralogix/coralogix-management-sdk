@@ -7,6 +7,7 @@ servers:
 paths:
   /v1/alert-scheduler-rules:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertSchedulerRuleService_CreateAlertSchedulerRule
@@ -38,6 +39,7 @@ paths:
       tags:
       - Alert Scheduler Rule service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertSchedulerRuleService_UpdateAlertSchedulerRule
@@ -70,6 +72,7 @@ paths:
       - Alert Scheduler Rule service
   /v1/alert-scheduler-rules/bulk:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertSchedulerRuleService_GetBulkAlertSchedulerRule
@@ -125,6 +128,7 @@ paths:
       tags:
       - Alert Scheduler Rule service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertSchedulerRuleService_CreateBulkAlertSchedulerRule
@@ -156,6 +160,7 @@ paths:
       tags:
       - Alert Scheduler Rule service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertSchedulerRuleService_UpdateBulkAlertSchedulerRule
@@ -188,6 +193,7 @@ paths:
       - Alert Scheduler Rule service
   /v1/alert-scheduler-rules/{alert_scheduler_rule_id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertSchedulerRuleService_DeleteAlertSchedulerRule
@@ -222,6 +228,7 @@ paths:
       tags:
       - Alert Scheduler Rule service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertSchedulerRuleService_GetAlertSchedulerRule
@@ -613,8 +620,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
       additionalProperties: false
       description: This data structure represents a filter path and values
@@ -1218,3 +1225,9 @@ components:
       - createAlertSchedulerRuleRequests
       title: Create bulk alert scheduler rule request data structure
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

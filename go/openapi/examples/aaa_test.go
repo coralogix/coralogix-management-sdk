@@ -33,8 +33,9 @@ import (
 )
 
 func TestApiKeys(t *testing.T) {
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
 
@@ -87,10 +88,12 @@ func TestApiKeys(t *testing.T) {
 }
 
 func TestIpAccess(t *testing.T) {
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
+
 	enabled := false
 
 	client := cxsdk.NewIPAccessClient(cpc)
@@ -167,8 +170,9 @@ func TestIpAccess(t *testing.T) {
 }
 
 func TestGroups(t *testing.T) {
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
 
@@ -233,8 +237,9 @@ func TestGroups(t *testing.T) {
 }
 
 func TestCustomRoles(t *testing.T) {
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
 
@@ -300,10 +305,12 @@ func TestCustomRoles(t *testing.T) {
 func TestScopes(t *testing.T) {
 	ctx := context.Background()
 
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
+
 	client := cxsdk.NewScopesClient(cpc)
 
 	description := "Data Access Rule intended for testing"

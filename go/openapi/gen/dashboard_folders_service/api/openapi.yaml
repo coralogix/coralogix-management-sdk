@@ -7,7 +7,11 @@ servers:
 paths:
   /dashboards/dashboards/v1/folders:
     get:
-      description: List all dashboard folders accessible.
+      description: |-
+        List all dashboard folders accessible.
+
+        Requires the following permissions:
+        - `team-dashboards:Read`
       externalDocs:
         url: ""
       operationId: DashboardFoldersService_ListDashboardFolders
@@ -36,6 +40,7 @@ paths:
       x-coralogixPermissions:
       - team-dashboards:Read
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: DashboardFoldersService_CreateDashboardFolder
@@ -69,6 +74,7 @@ paths:
       x-coralogixPermissions:
       - team-dashboards:Update
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: DashboardFoldersService_ReplaceDashboardFolder
@@ -103,6 +109,7 @@ paths:
       - team-dashboards:Update
   /dashboards/dashboards/v1/folders/{folder_id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: DashboardFoldersService_DeleteDashboardFolder
@@ -146,7 +153,11 @@ paths:
       x-coralogixPermissions:
       - team-dashboards:Update
     get:
-      description: Returns a dashboard folder data.
+      description: |-
+        Returns a dashboard folder data.
+
+        Requires the following permissions:
+        - `team-dashboards:Read`
       externalDocs:
         url: ""
       operationId: DashboardFoldersService_GetDashboardFolder
@@ -248,8 +259,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
       additionalProperties: false
       description: This data structure represents a filter path and values
@@ -385,3 +396,9 @@ components:
           type: string
       title: Create dashboard folder request data structure
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

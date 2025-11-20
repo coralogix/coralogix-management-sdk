@@ -30,8 +30,9 @@ import (
 )
 
 func TestHttpsConnector(t *testing.T) {
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
 
@@ -63,8 +64,9 @@ func TestHttpsConnector(t *testing.T) {
 }
 
 func TestSlackConnector(t *testing.T) {
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
 
@@ -120,8 +122,9 @@ func TestSlackConnector(t *testing.T) {
 }
 
 func TestPagerdutyConnector(t *testing.T) {
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
 
@@ -175,8 +178,9 @@ func TestPagerdutyConnector(t *testing.T) {
 }
 
 func TestHttpsPreset(t *testing.T) {
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
 
@@ -222,8 +226,9 @@ func TestHttpsPreset(t *testing.T) {
 }
 
 func TestSlackPreset(t *testing.T) {
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
 
@@ -303,8 +308,9 @@ func TestSlackPreset(t *testing.T) {
 }
 
 func TestPagerdutyPreset(t *testing.T) {
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
 
@@ -380,8 +386,9 @@ func TestPagerdutyPreset(t *testing.T) {
 }
 
 func TestGlobalRouter(t *testing.T) {
+	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		cxsdk.URLFromRegion(cxsdk.RegionFromEnv()),
+		region,
 		cxsdk.APIKeyFromEnv(),
 	)
 
@@ -406,8 +413,10 @@ func TestGlobalRouter(t *testing.T) {
 
 	router := globalrouters.GlobalRouter{
 		Name: globalrouters.PtrString("global router" + uuid.NewString()),
-		EntityLabelMatcher: &map[string]string{
-			"routing.group": uuid.NewString(),
+		RoutingLabels: &globalrouters.RoutingLabels{
+			Environment: globalrouters.PtrString(uuid.NewString()),
+			Service:     globalrouters.PtrString(uuid.NewString()),
+			Team:        globalrouters.PtrString(uuid.NewString()),
 		},
 		Description: globalrouters.PtrString("global router example"),
 		Rules: []globalrouters.RoutingRule{

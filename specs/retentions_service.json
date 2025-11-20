@@ -11,6 +11,7 @@
           "Retentions Service"
         ],
         "summary": "Get Retentions",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -51,6 +52,7 @@
           "Retentions Service"
         ],
         "summary": "Update Retentions",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -116,6 +118,7 @@
           "Retentions Service"
         ],
         "summary": "Activate Retentions",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -158,6 +161,7 @@
           "Retentions Service"
         ],
         "summary": "Get Retentions Enabled",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -256,10 +260,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -457,6 +461,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

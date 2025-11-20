@@ -109,6 +109,7 @@ Class | Method | HTTP request | Description
  - [NotificationCenterEntityType](docs/NotificationCenterEntityType.md)
  - [ReplaceGlobalRouterRequest](docs/ReplaceGlobalRouterRequest.md)
  - [ReplaceGlobalRouterResponse](docs/ReplaceGlobalRouterResponse.md)
+ - [RoutingLabels](docs/RoutingLabels.md)
  - [RoutingRule](docs/RoutingRule.md)
  - [RoutingTarget](docs/RoutingTarget.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
@@ -116,7 +117,28 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
-Endpoints do not require authorization.
+
+Authentication schemes defined for the API:
+### apiKeyAuth
+
+- **Type**: API key
+- **API key parameter name**: Authorization
+- **Location**: HTTP header
+
+Note, each API key must be added to a map of `map[string]APIKey` where the key is: apiKeyAuth and passed in as the auth context for each request.
+
+Example
+
+```go
+auth := context.WithValue(
+		context.Background(),
+		global_routers_service.ContextAPIKeys,
+		map[string]global_routers_service.APIKey{
+			"apiKeyAuth": {Key: "API_KEY_STRING"},
+		},
+	)
+r, err := client.Service.Operation(auth, args)
+```
 
 
 ## Documentation for Utility Methods

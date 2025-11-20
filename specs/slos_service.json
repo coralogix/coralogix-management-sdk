@@ -11,6 +11,7 @@
           "Slos Service"
         ],
         "summary": "List Slos",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -121,6 +122,7 @@
           "Slos Service"
         ],
         "summary": "Replace Slo",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -143,10 +145,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
+                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
                   },
                   {
-                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
+                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
                   }
                 ]
               }
@@ -189,6 +191,7 @@
           "Slos Service"
         ],
         "summary": "Create Slo",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -259,6 +262,7 @@
           "Slos Service"
         ],
         "summary": "Replace Slo Pre-Validate Alerts",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -318,6 +322,7 @@
           "Slos Service"
         ],
         "summary": "Get Slo Zero State",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -360,6 +365,7 @@
           "Slos Service"
         ],
         "summary": "Get Slo",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -411,6 +417,7 @@
           "Slos Service"
         ],
         "summary": "Delete Slo",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -464,6 +471,7 @@
           "Slos Service"
         ],
         "summary": "Batch Execute Slo",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -529,6 +537,7 @@
           "Slos Service"
         ],
         "summary": "Batch Get Slo",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -769,10 +778,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -1461,6 +1470,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

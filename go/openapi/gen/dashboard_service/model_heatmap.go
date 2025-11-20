@@ -19,7 +19,7 @@ var _ MappedNullable = &Heatmap{}
 
 // Heatmap struct for Heatmap
 type Heatmap struct {
-	// Whether to render numeric value without abbreviation
+	// Whether to render numeric value with abbreviation
 	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
 	// Optional number indicating the max value for gradient color axis. Automatically calculated from data if not provided.
 	ColorAxisMax *float32 `json:"colorAxisMax,omitempty"`

@@ -7,6 +7,7 @@ servers:
 paths:
   /dataplans/data-usage/v2:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: DataUsageService_GetDataUsage
@@ -67,6 +68,7 @@ paths:
       - Data Usage Service
   /dataplans/data-usage/v2/daily:evaluation-tokens:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: DataUsageService_GetDailyUsageEvaluationTokens
@@ -99,6 +101,7 @@ paths:
       - Data Usage Service
   /dataplans/data-usage/v2/daily:processed-gbs:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: DataUsageService_GetDailyUsageProcessedGbs
@@ -131,6 +134,7 @@ paths:
       - Data Usage Service
   /dataplans/data-usage/v2/daily:units:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: DataUsageService_GetDailyUsageUnits
@@ -163,6 +167,7 @@ paths:
       - Data Usage Service
   /dataplans/data-usage/v2/export-status:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: DataUsageService_GetDataUsageMetricsExportStatus
@@ -189,6 +194,7 @@ paths:
       tags:
       - Data Usage Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: DataUsageService_UpdateDataUsageMetricsExportStatus
@@ -221,6 +227,7 @@ paths:
       - Data Usage Service
   /dataplans/data-usage/v2/logs:count:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: DataUsageService_GetLogsCount
@@ -284,6 +291,7 @@ paths:
       - Data Usage Service
   /dataplans/data-usage/v2/spans:count:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: DataUsageService_GetSpansCount
@@ -367,8 +375,8 @@ components:
         sizeGb: 0.8008282
         units: 6.0274563
         dimensions:
-        - pillar: PILLAR_UNSPECIFIED
-        - pillar: PILLAR_UNSPECIFIED
+        - priority: PRIORITY_UNSPECIFIED
+        - priority: PRIORITY_UNSPECIFIED
         timestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about data usage.
@@ -530,11 +538,11 @@ components:
       type: object
     Dimension:
       oneOf:
+      - $ref: "#/components/schemas/DimensionPriority"
       - $ref: "#/components/schemas/DimensionPillar"
       - $ref: "#/components/schemas/DimensionGenericDimension"
       - $ref: "#/components/schemas/DimensionTier"
       - $ref: "#/components/schemas/DimensionSeverity"
-      - $ref: "#/components/schemas/DimensionPriority"
     DimensionGenericDimension:
       additionalProperties: false
       properties:
@@ -543,14 +551,14 @@ components:
       type: object
     DimensionPillar:
       additionalProperties: false
-      example:
-        pillar: PILLAR_UNSPECIFIED
       properties:
         pillar:
           $ref: "#/components/schemas/v2.Pillar"
       type: object
     DimensionPriority:
       additionalProperties: false
+      example:
+        priority: PRIORITY_UNSPECIFIED
       properties:
         priority:
           $ref: "#/components/schemas/v2.Priority"
@@ -587,8 +595,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
       additionalProperties: false
       description: This data structure represents a filter path and values
@@ -858,14 +866,14 @@ components:
         - sizeGb: 0.8008282
           units: 6.0274563
           dimensions:
-          - pillar: PILLAR_UNSPECIFIED
-          - pillar: PILLAR_UNSPECIFIED
+          - priority: PRIORITY_UNSPECIFIED
+          - priority: PRIORITY_UNSPECIFIED
           timestamp: 2000-01-23T04:56:07.000+00:00
         - sizeGb: 0.8008282
           units: 6.0274563
           dimensions:
-          - pillar: PILLAR_UNSPECIFIED
-          - pillar: PILLAR_UNSPECIFIED
+          - priority: PRIORITY_UNSPECIFIED
+          - priority: PRIORITY_UNSPECIFIED
           timestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about data usage.
@@ -1200,3 +1208,9 @@ components:
           type: array
       title: Scopes Filter
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

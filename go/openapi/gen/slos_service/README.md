@@ -141,6 +141,7 @@ Class | Method | HTTP request | Description
  - [SloTimeFrame](docs/SloTimeFrame.md)
  - [SloWindowBasedMetricSli](docs/SloWindowBasedMetricSli.md)
  - [SlosServiceBatchExecuteSloRequestsParameterInner](docs/SlosServiceBatchExecuteSloRequestsParameterInner.md)
+ - [SlosServiceCreateSloRequest](docs/SlosServiceCreateSloRequest.md)
  - [SlosServiceReplaceSloRequest](docs/SlosServiceReplaceSloRequest.md)
  - [V1Grouping](docs/V1Grouping.md)
  - [V1Revision](docs/V1Revision.md)
@@ -151,7 +152,28 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
-Endpoints do not require authorization.
+
+Authentication schemes defined for the API:
+### apiKeyAuth
+
+- **Type**: API key
+- **API key parameter name**: Authorization
+- **Location**: HTTP header
+
+Note, each API key must be added to a map of `map[string]APIKey` where the key is: apiKeyAuth and passed in as the auth context for each request.
+
+Example
+
+```go
+auth := context.WithValue(
+		context.Background(),
+		slos_service.ContextAPIKeys,
+		map[string]slos_service.APIKey{
+			"apiKeyAuth": {Key: "API_KEY_STRING"},
+		},
+	)
+r, err := client.Service.Operation(auth, args)
+```
 
 
 ## Documentation for Utility Methods

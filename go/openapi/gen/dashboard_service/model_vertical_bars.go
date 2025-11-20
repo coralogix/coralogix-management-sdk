@@ -19,7 +19,7 @@ var _ MappedNullable = &VerticalBars{}
 
 // VerticalBars struct for VerticalBars
 type VerticalBars struct {
-	// Whether to render numeric value without abbreviation
+	// Whether to render numeric value with abbreviation
 	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
 	BarValueDisplay *VisualizationBarValueDisplay `json:"barValueDisplay,omitempty"`
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`

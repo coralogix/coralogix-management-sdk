@@ -71,6 +71,8 @@ func (r ApiExtensionDeploymentServiceDeployExtensionRequest) Execute() (*DeployE
 /*
 ExtensionDeploymentServiceDeployExtension Deploy extension
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtensionDeploymentServiceDeployExtensionRequest
 */
@@ -210,6 +212,8 @@ func (r ApiExtensionDeploymentServiceGetDeployedExtensionsRequest) Execute() (*G
 /*
 ExtensionDeploymentServiceGetDeployedExtensions Get deployed extensions
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtensionDeploymentServiceGetDeployedExtensionsRequest
 */
@@ -312,6 +316,8 @@ func (r ApiExtensionDeploymentServiceUndeployExtensionRequest) Execute() (*Undep
 
 /*
 ExtensionDeploymentServiceUndeployExtension Revert deployment of extension
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtensionDeploymentServiceUndeployExtensionRequest
@@ -447,6 +453,8 @@ func (r ApiExtensionDeploymentServiceUpdateExtensionRequest) Execute() (*UpdateE
 
 /*
 ExtensionDeploymentServiceUpdateExtension Update extension
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtensionDeploymentServiceUpdateExtensionRequest

@@ -41,6 +41,8 @@ func (r ApiDashboardFoldersServiceCreateDashboardFolderRequest) Execute() (*Crea
 /*
 DashboardFoldersServiceCreateDashboardFolder Create a dashboard folder
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDashboardFoldersServiceCreateDashboardFolderRequest
 */
@@ -146,6 +148,8 @@ func (r ApiDashboardFoldersServiceDeleteDashboardFolderRequest) Execute() (map[s
 
 /*
 DashboardFoldersServiceDeleteDashboardFolder Delete a dashboard folder
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param folderId
@@ -259,6 +263,9 @@ DashboardFoldersServiceGetDashboardFolder Get a dashboard folder
 
 Returns a dashboard folder data.
 
+Requires the following permissions:
+- `team-dashboards:Read`
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param folderId
  @return ApiDashboardFoldersServiceGetDashboardFolderRequest
@@ -364,6 +371,9 @@ DashboardFoldersServiceListDashboardFolders List dashboard folders
 
 List all dashboard folders accessible.
 
+Requires the following permissions:
+- `team-dashboards:Read`
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDashboardFoldersServiceListDashboardFoldersRequest
 */
@@ -466,6 +476,8 @@ func (r ApiDashboardFoldersServiceReplaceDashboardFolderRequest) Execute() (map[
 
 /*
 DashboardFoldersServiceReplaceDashboardFolder Replace a dashboard folder
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDashboardFoldersServiceReplaceDashboardFolderRequest

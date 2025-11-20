@@ -7,7 +7,11 @@ servers:
 paths:
   /cases/cases/v1:
     post:
-      description: "List cases using filters, pagination and custom ordering."
+      description: |-
+        List cases using filters, pagination and custom ordering.
+
+        Requires the following permissions:
+        - `case:Read`
       externalDocs:
         url: ""
       operationId: CasesService_ListCases
@@ -42,8 +46,11 @@ paths:
       - case:Read
   /cases/cases/v1/{id}:
     get:
-      description: Retrieve detailed information about a single case by its unique
-        identifier.
+      description: |-
+        Retrieve detailed information about a single case by its unique identifier.
+
+        Requires the following permissions:
+        - `case:Read`
       externalDocs:
         url: ""
       operationId: CasesService_GetCase
@@ -82,7 +89,11 @@ paths:
       x-coralogixPermissions:
       - case:Read
     patch:
-      description: Apply a partial update (patch) to a case.
+      description: |-
+        Apply a partial update (patch) to a case.
+
+        Requires the following permissions:
+        - `case:Update`
       externalDocs:
         url: ""
       operationId: CasesService_UpdateCase
@@ -127,7 +138,11 @@ paths:
       - case:Update
   /cases/cases/v1/{id}:acknowledge:
     post:
-      description: Mark the case as acknowledged by a user.
+      description: |-
+        Mark the case as acknowledged by a user.
+
+        Requires the following permissions:
+        - `case:Acknowledge`
       externalDocs:
         url: ""
       operationId: CasesService_AcknowledgeCase
@@ -172,7 +187,11 @@ paths:
       - case:Acknowledge
   /cases/cases/v1/{id}:assign:
     post:
-      description: Assign a case to a specific user.
+      description: |-
+        Assign a case to a specific user.
+
+        Requires the following permissions:
+        - `case:Assign`
       externalDocs:
         url: ""
       operationId: CasesService_AssignCase
@@ -217,7 +236,11 @@ paths:
       - case:Assign
   /cases/cases/v1/{id}:close:
     post:
-      description: Close a case that no longer requires action.
+      description: |-
+        Close a case that no longer requires action.
+
+        Requires the following permissions:
+        - `case:Close`
       externalDocs:
         url: ""
       operationId: CasesService_CloseCase
@@ -266,7 +289,11 @@ paths:
       - case:Close
   /cases/cases/v1/{id}:resolve:
     post:
-      description: Mark a case as resolved.
+      description: |-
+        Mark a case as resolved.
+
+        Requires the following permissions:
+        - `case:Close`
       externalDocs:
         url: ""
       operationId: CasesService_ResolveCase
@@ -315,7 +342,11 @@ paths:
       - case:Close
   /cases/cases/v1/{id}:setPriorityOverride:
     post:
-      description: Override a case's computed priority with a specific value.
+      description: |-
+        Override a case's computed priority with a specific value.
+
+        Requires the following permissions:
+        - `case:Update`
       externalDocs:
         url: ""
       operationId: CasesService_SetPriorityOverride
@@ -360,7 +391,11 @@ paths:
       - case:Update
   /cases/cases/v1/{id}:unassign:
     post:
-      description: Remove the current assignee from a case.
+      description: |-
+        Remove the current assignee from a case.
+
+        Requires the following permissions:
+        - `case:Assign`
       externalDocs:
         url: ""
       operationId: CasesService_UnassignCase
@@ -400,7 +435,11 @@ paths:
       - case:Assign
   /cases/cases/v1/{id}:unsetPriorityOverride:
     post:
-      description: Remove a previously set priority override for a case.
+      description: |-
+        Remove a previously set priority override for a case.
+
+        Requires the following permissions:
+        - `case:Update`
       externalDocs:
         url: ""
       operationId: CasesService_UnsetPriorityOverride
@@ -440,7 +479,11 @@ paths:
       - case:Update
   /cases/cases/v1:get-filter-values:
     post:
-      description: Retrieve available filter and aggregation values for cases.
+      description: |-
+        Retrieve available filter and aggregation values for cases.
+
+        Requires the following permissions:
+        - `case:Read`
       externalDocs:
         url: ""
       operationId: CasesService_GetFilterValues
@@ -716,8 +759,8 @@ components:
       type: object
     AssigneeOption:
       oneOf:
-      - $ref: "#/components/schemas/AssigneeOptionAssignee"
       - $ref: "#/components/schemas/AssigneeOptionUnassigned"
+      - $ref: "#/components/schemas/AssigneeOptionAssignee"
     AssigneeOptionAssignee:
       additionalProperties: false
       properties:
@@ -1131,8 +1174,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
       additionalProperties: false
       description: This data structure represents a filter path and values
@@ -2060,3 +2103,9 @@ components:
           $ref: "#/components/schemas/CaseFilters"
       title: Get case filter values request
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

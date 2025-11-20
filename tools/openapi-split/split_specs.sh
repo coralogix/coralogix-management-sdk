@@ -27,11 +27,11 @@ echo "--------------------------------------------------------"
 for file in "$SPEC_DIR"/*; do
     if [ -f "$file" ]; then
         echo "--> Found file: $file"
-        npx @redocly/cli@latest bundle "$file" --output "$file" --remove-unused-components
-        echo "Placeholder: Running your command..."
+        npx @redocly/cli@latest bundle "$file" --output "$file" --remove-unused-components &
     fi
 done
 
 echo "--------------------------------------------------------"
+wait $(jobs -p)
 echo "Batch processing complete."
 mv specs "$REPO_ROOT"

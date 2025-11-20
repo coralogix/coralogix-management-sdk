@@ -41,6 +41,8 @@ func (r ApiAlertDefsServiceBulkReplaceAlertDefsRequest) Execute() (*BulkReplaceA
 /*
 AlertDefsServiceBulkReplaceAlertDefs Bulk replace alert definitions
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceBulkReplaceAlertDefsRequest
 */
@@ -146,6 +148,8 @@ func (r ApiAlertDefsServiceCreateAlertDefRequest) Execute() (*CreateAlertDefResp
 /*
 AlertDefsServiceCreateAlertDef Create an alert
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceCreateAlertDefRequest
 */
@@ -245,6 +249,8 @@ func (r ApiAlertDefsServiceDeleteAlertDefRequest) Execute() (map[string]interfac
 
 /*
 AlertDefsServiceDeleteAlertDef DeleteAlertDef
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -347,6 +353,9 @@ func (r ApiAlertDefsServiceDownloadAlertsRequest) Execute() (*DownloadAlertsResp
 AlertDefsServiceDownloadAlerts Download alerts
 
 Download a list of all accessible alert definitions in base64-encoded byte format.
+
+Requires the following permissions:
+- `alerts:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceDownloadAlertsRequest
@@ -453,6 +462,9 @@ AlertDefsServiceFilterOptionCounts Get counts for filter options
 
 Returns counts for different filter options based on the provided filters
 
+Requires the following permissions:
+- `alerts:ReadConfig`
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceFilterOptionCountsRequest
 */
@@ -554,6 +566,8 @@ func (r ApiAlertDefsServiceGetAlertDefRequest) Execute() (*GetAlertDefResponse, 
 /*
 AlertDefsServiceGetAlertDef Get alert definition by ID
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiAlertDefsServiceGetAlertDefRequest
@@ -654,6 +668,8 @@ func (r ApiAlertDefsServiceGetAlertDefByVersionIdRequest) Execute() (*GetAlertDe
 
 /*
 AlertDefsServiceGetAlertDefByVersionId Get alert definition by alert version ID
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param alertVersionId
@@ -773,6 +789,8 @@ func (r ApiAlertDefsServiceListAlertDefsRequest) Execute() (*ListAlertDefsRespon
 /*
 AlertDefsServiceListAlertDefs Get a list of all accessible alert definitions
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceListAlertDefsRequest
 */
@@ -885,6 +903,8 @@ func (r ApiAlertDefsServiceReplaceAlertDefRequest) Execute() (*ReplaceAlertDefRe
 /*
 AlertDefsServiceReplaceAlertDef Replace an alert definition
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceReplaceAlertDefRequest
 */
@@ -990,6 +1010,8 @@ func (r ApiAlertDefsServiceSetActiveRequest) Execute() (map[string]interface{}, 
 
 /*
 AlertDefsServiceSetActive Disable or enable an alert
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id

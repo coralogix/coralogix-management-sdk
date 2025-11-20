@@ -11,6 +11,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Update an alert scheduler rule",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -71,6 +72,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Create an alert scheduler rule",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -133,6 +135,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Get multiple alert scheduler rules",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -225,6 +228,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Update multiple alert scheduler rules",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -288,6 +292,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Create multiple alert scheduler rules",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -353,6 +358,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Get an alert scheduler rule",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -404,6 +410,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Delete an alert scheduler rule",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -708,10 +715,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -1179,6 +1186,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

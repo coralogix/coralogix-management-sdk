@@ -7,6 +7,7 @@ servers:
 paths:
   /aaa/api-keys/v3:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ApiKeysService_CreateApiKey
@@ -39,6 +40,7 @@ paths:
       - API Keys Service
   /aaa/api-keys/v3/send_data:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ApiKeysService_GetSendDataApiKeys
@@ -66,6 +68,7 @@ paths:
       - API Keys Service
   /aaa/api-keys/v3/{key_id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ApiKeysService_DeleteApiKey
@@ -100,6 +103,7 @@ paths:
       tags:
       - API Keys Service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ApiKeysService_GetApiKey
@@ -135,6 +139,7 @@ paths:
       tags:
       - API Keys Service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ApiKeysService_UpdateApiKey
@@ -246,8 +251,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
       additionalProperties: false
       description: This data structure represents a filter path and values
@@ -597,3 +602,9 @@ components:
           $ref: "#/components/schemas/Presets"
       title: Update Api Key Request
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

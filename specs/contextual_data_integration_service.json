@@ -11,6 +11,7 @@
           "Contextual data integration service"
         ],
         "summary": "Get all contextual data integrations accessible",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -64,6 +65,7 @@
           "Contextual data integration service"
         ],
         "summary": "Update contextual data integration",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -126,6 +128,7 @@
           "Contextual data integration service"
         ],
         "summary": "Save contextual data integration",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -187,6 +190,7 @@
           "Contextual data integration service"
         ],
         "summary": "Get contextual data integration definition",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -251,6 +255,7 @@
           "Contextual data integration service"
         ],
         "summary": "Test contextual data integration",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -315,6 +320,7 @@
           "Contextual data integration service"
         ],
         "summary": "Get contextual data integration details",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -380,6 +386,7 @@
           "Contextual data integration service"
         ],
         "summary": "Delete contextual data integration",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -901,6 +908,12 @@
       "FieldInformation": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/FieldInformationMultiText"
+          },
+          {
+            "$ref": "#/components/schemas/FieldInformationMultipleSelection"
+          },
+          {
             "$ref": "#/components/schemas/FieldInformationSingleBoolean"
           },
           {
@@ -911,12 +924,6 @@
           },
           {
             "$ref": "#/components/schemas/FieldInformationSingle"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationMultiText"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationMultipleSelection"
           }
         ]
       },
@@ -1253,10 +1260,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -1663,6 +1670,12 @@
       "IntegrationRevision": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/IntegrationRevisionRum"
+          },
+          {
+            "$ref": "#/components/schemas/IntegrationRevisionTerraform"
+          },
+          {
             "$ref": "#/components/schemas/IntegrationRevisionCloudFormation"
           },
           {
@@ -1673,12 +1686,6 @@
           },
           {
             "$ref": "#/components/schemas/IntegrationRevisionAzureArmTemplate"
-          },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionRum"
-          },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionTerraform"
           }
         ]
       },
@@ -2767,6 +2774,9 @@
       "v1.IntegrationType": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/V1IntegrationTypeGenericWebhook"
+          },
+          {
             "$ref": "#/components/schemas/V1IntegrationTypeManaged"
           },
           {
@@ -2783,9 +2793,6 @@
           },
           {
             "$ref": "#/components/schemas/V1IntegrationTypeContextualData"
-          },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeGenericWebhook"
           }
         ]
       },
@@ -2795,6 +2802,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

@@ -41,6 +41,8 @@ func (r ApiPoliciesServiceAtomicBatchCreatePolicyRequest) Execute() (*AtomicBatc
 /*
 PoliciesServiceAtomicBatchCreatePolicy Atomic Batch Create Policy
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPoliciesServiceAtomicBatchCreatePolicyRequest
 */
@@ -145,6 +147,8 @@ func (r ApiPoliciesServiceAtomicOverwriteLogPoliciesRequest) Execute() (*AtomicO
 
 /*
 PoliciesServiceAtomicOverwriteLogPolicies Atomic Overwrite Log Policies
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPoliciesServiceAtomicOverwriteLogPoliciesRequest
@@ -251,6 +255,8 @@ func (r ApiPoliciesServiceAtomicOverwriteSpanPoliciesRequest) Execute() (*Atomic
 /*
 PoliciesServiceAtomicOverwriteSpanPolicies Atomic Overwrite Span Policies
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPoliciesServiceAtomicOverwriteSpanPoliciesRequest
 */
@@ -355,6 +361,8 @@ func (r ApiPoliciesServiceBulkTestLogPoliciesRequest) Execute() (*BulkTestLogPol
 
 /*
 PoliciesServiceBulkTestLogPolicies Bulk Test Log Policies
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPoliciesServiceBulkTestLogPoliciesRequest
@@ -461,6 +469,8 @@ func (r ApiPoliciesServiceCreatePolicyRequest) Execute() (*CreatePolicyResponse,
 /*
 PoliciesServiceCreatePolicy Create Policy
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPoliciesServiceCreatePolicyRequest
 */
@@ -560,6 +570,8 @@ func (r ApiPoliciesServiceDeletePolicyRequest) Execute() (*DeletePolicyResponse,
 
 /*
 PoliciesServiceDeletePolicy Delete Policy
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -673,6 +685,8 @@ func (r ApiPoliciesServiceGetCompanyPoliciesRequest) Execute() (*GetCompanyPolic
 /*
 PoliciesServiceGetCompanyPolicies Get Company Policies
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPoliciesServiceGetCompanyPoliciesRequest
 */
@@ -777,6 +791,8 @@ func (r ApiPoliciesServiceGetPolicyRequest) Execute() (*GetPolicyResponse, *http
 /*
 PoliciesServiceGetPolicy Get Policy by ID
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiPoliciesServiceGetPolicyRequest
@@ -876,6 +892,8 @@ func (r ApiPoliciesServiceGetPolicySettingsRequest) Execute() (*GetPolicySetting
 
 /*
 PoliciesServiceGetPolicySettings Get Policy Priority Settings
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPoliciesServiceGetPolicySettingsRequest
@@ -979,6 +997,8 @@ func (r ApiPoliciesServiceReorderPoliciesRequest) Execute() (*ReorderPoliciesRes
 
 /*
 PoliciesServiceReorderPolicies Reorder Policies
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPoliciesServiceReorderPoliciesRequest
@@ -1085,6 +1105,8 @@ func (r ApiPoliciesServiceReplacePolicySettingsRequest) Execute() (*ReplacePolic
 /*
 PoliciesServiceReplacePolicySettings Replace Policy Settings
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPoliciesServiceReplacePolicySettingsRequest
 */
@@ -1190,6 +1212,8 @@ func (r ApiPoliciesServiceTogglePolicyRequest) Execute() (*TogglePolicyResponse,
 /*
 PoliciesServiceTogglePolicy Toggle Policies
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPoliciesServiceTogglePolicyRequest
 */
@@ -1294,6 +1318,8 @@ func (r ApiPoliciesServiceUpdatePolicyRequest) Execute() (*UpdatePolicyResponse,
 
 /*
 PoliciesServiceUpdatePolicy Update Policy
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPoliciesServiceUpdatePolicyRequest

@@ -11,6 +11,7 @@
           "Extension service"
         ],
         "summary": "Get all extensions",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -76,6 +77,7 @@
           "Extension service"
         ],
         "summary": "Get extension by ID",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -364,10 +366,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -764,6 +766,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

@@ -19,7 +19,7 @@ var _ MappedNullable = &HorizontalBars{}
 
 // HorizontalBars struct for HorizontalBars
 type HorizontalBars struct {
-	// Whether to render numeric value without abbreviation
+	// Whether to render numeric value with abbreviation
 	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
 	// Applied color scheme, one of the predefined values

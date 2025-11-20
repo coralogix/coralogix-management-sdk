@@ -15,7 +15,7 @@
 package cxsdk
 
 import (
-	"fmt"
+	"net/url"
 	"os"
 	"strings"
 
@@ -61,7 +61,7 @@ const (
 	sdkLanguageHeaderName      = "x-cx-sdk-language"
 	sdkGoVersionHeaderName     = "x-cx-go-version"
 	sdkCorrelationIDHeaderName = "x-cx-correlation-id"
-	vanillaSdkVersion          = "1.8.1"
+	vanillaSdkVersion          = "1.12.0"
 )
 
 // ClientSet provides access to all API clients.
@@ -561,30 +561,41 @@ func RegionFromEnv() string {
 }
 
 // URLFromRegion returns the Coralogix OpenAPI URL for the given region.
-func URLFromRegion(region string) string {
+func URLFromRegion(region string) (string, bool) {
+	valid := true
+	url := url.URL{
+		Scheme: "https",
+		Path:   "mgmt/openapi/3",
+	}
 	switch strings.ToLower(region) {
 	case "eu1":
-		return "https://api.coralogix.com/mgmt/openapi/latest"
+		url.Host = "api.eu1.coralogix.com"
 	case "eu2":
-		return "https://api.eu2.coralogix.com/mgmt/openapi/latest"
+		url.Host = "api.eu2.coralogix.com"
 	case "us1":
-		return "https://api.coralogix.us/mgmt/openapi/latest"
+		url.Host = "api.us1.coralogix.com"
 	case "us2":
-		return "https://api.cx498.coralogix.com/mgmt/openapi/latest"
+		url.Host = "api.us2.coralogix.com"
 	case "ap1":
-		return "https://api.coralogix.in/mgmt/openapi/latest"
+		url.Host = "api.ap1.coralogix.com"
 	case "ap2":
-		return "https://api.coralogixsg.com/mgmt/openapi/latest"
+		url.Host = "api.ap2.coralogix.com"
 	case "ap3":
-		return "https://api.ap3.coralogix.com/mgmt/openapi/latest"
+		url.Host = "api.ap3.coralogix.com"
 	default:
-		panic(fmt.Sprintf("Unknown Coralogix region: %s", region))
+		valid = false
 	}
+	return url.String(), valid
 }
 
 // URLFromDomain returns the Coralogix OpenAPI URL for the given custom domain.
 func URLFromDomain(domain string) string {
-	return fmt.Sprintf("https://api.%s/mgmt/openapi/latest", domain)
+	url := url.URL{
+		Scheme: "https",
+		Path:   "mgmt/openapi/3",
+		Host:   domain,
+	}
+	return url.String()
 }
 
 // APIKeyFromEnv reads the Coralogix API key from the environment variable.

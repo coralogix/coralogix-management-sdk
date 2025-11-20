@@ -11,6 +11,7 @@
           "API Keys Service"
         ],
         "summary": "Create API Key",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -81,6 +82,7 @@
           "API Keys Service"
         ],
         "summary": "Get \"Send Data\" API Keys",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -123,6 +125,7 @@
           "API Keys Service"
         ],
         "summary": "Get API Key",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -175,6 +178,7 @@
           "API Keys Service"
         ],
         "summary": "Update API Key",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -255,6 +259,7 @@
           "API Keys Service"
         ],
         "summary": "Delete API Key",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -397,10 +402,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -704,6 +709,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

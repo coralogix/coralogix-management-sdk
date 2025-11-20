@@ -7,6 +7,7 @@ servers:
 paths:
   /parsing-rules/rule-groups/v1:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_BulkDeleteRuleGroup
@@ -43,6 +44,7 @@ paths:
       tags:
       - Rule Groups Service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_ListRuleGroups
@@ -69,6 +71,7 @@ paths:
       tags:
       - Rule Groups Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_CreateRuleGroup
@@ -101,6 +104,7 @@ paths:
       - Rule Groups Service
   /parsing-rules/rule-groups/v1/limits:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_GetCompanyUsageLimits
@@ -128,6 +132,7 @@ paths:
       - Rule Groups Service
   /parsing-rules/rule-groups/v1/mapping:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_GetRuleGroupModelMapping
@@ -160,6 +165,7 @@ paths:
       - Rule Groups Service
   /parsing-rules/rule-groups/v1/{group_id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_DeleteRuleGroup
@@ -194,6 +200,7 @@ paths:
       tags:
       - Rule Groups Service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_GetRuleGroup
@@ -228,6 +235,7 @@ paths:
       tags:
       - Rule Groups Service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_UpdateRuleGroup
@@ -449,8 +457,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
       additionalProperties: false
       description: This data structure represents a filter path and values
@@ -922,13 +930,13 @@ components:
       oneOf:
       - $ref: "#/components/schemas/RuleParametersExtractParameters"
       - $ref: "#/components/schemas/RuleParametersReplaceParameters"
-      - $ref: "#/components/schemas/RuleParametersParseParameters"
-      - $ref: "#/components/schemas/RuleParametersJsonExtractParameters"
-      - $ref: "#/components/schemas/RuleParametersAllowParameters"
-      - $ref: "#/components/schemas/RuleParametersBlockParameters"
       - $ref: "#/components/schemas/RuleParametersExtractTimestampParameters"
       - $ref: "#/components/schemas/RuleParametersRemoveFieldsParameters"
       - $ref: "#/components/schemas/RuleParametersJsonStringifyParameters"
+      - $ref: "#/components/schemas/RuleParametersJsonExtractParameters"
+      - $ref: "#/components/schemas/RuleParametersParseParameters"
+      - $ref: "#/components/schemas/RuleParametersAllowParameters"
+      - $ref: "#/components/schemas/RuleParametersBlockParameters"
       - $ref: "#/components/schemas/RuleParametersJsonParseParameters"
     RuleParametersAllowParameters:
       additionalProperties: false
@@ -1223,3 +1231,9 @@ components:
             $ref: "#/components/schemas/GetRuleGroupModelMappingRequest.CreateRuleSubgroup"
           type: array
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

@@ -36,6 +36,8 @@ func (r ApiIntegrationServiceDeleteIntegrationRequest) Execute() (map[string]int
 /*
 IntegrationServiceDeleteIntegration Delete integration
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param integrationId
  @return ApiIntegrationServiceDeleteIntegrationRequest
@@ -136,6 +138,8 @@ func (r ApiIntegrationServiceGetDeployedIntegrationRequest) Execute() (*GetDeplo
 
 /*
 IntegrationServiceGetDeployedIntegration Get deployed integration
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param integrationId
@@ -243,6 +247,8 @@ func (r ApiIntegrationServiceGetIntegrationDefinitionRequest) Execute() (*GetInt
 
 /*
 IntegrationServiceGetIntegrationDefinition Get integration definition
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -354,6 +360,8 @@ func (r ApiIntegrationServiceGetIntegrationDetailsRequest) Execute() (*GetIntegr
 /*
 IntegrationServiceGetIntegrationDetails Get integration details
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiIntegrationServiceGetIntegrationDetailsRequest
@@ -463,6 +471,8 @@ func (r ApiIntegrationServiceGetIntegrationsRequest) Execute() (*GetIntegrations
 /*
 IntegrationServiceGetIntegrations Get all integrations
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIntegrationServiceGetIntegrationsRequest
 */
@@ -563,6 +573,8 @@ func (r ApiIntegrationServiceGetManagedIntegrationStatusRequest) Execute() (*Get
 
 /*
 IntegrationServiceGetManagedIntegrationStatus Get managed integration status
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param integrationId
@@ -669,6 +681,8 @@ func (r ApiIntegrationServiceGetRumApplicationVersionDataRequest) Execute() (*Ge
 
 /*
 IntegrationServiceGetRumApplicationVersionData Get RUM integration versions data
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIntegrationServiceGetRumApplicationVersionDataRequest
@@ -788,6 +802,8 @@ func (r ApiIntegrationServiceGetTemplateRequest) Execute() (*GetTemplateResponse
 /*
 IntegrationServiceGetTemplate Get integration template
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIntegrationServiceGetTemplateRequest
 */
@@ -894,6 +910,8 @@ func (r ApiIntegrationServiceListManagedIntegrationKeysRequest) Execute() (*List
 /*
 IntegrationServiceListManagedIntegrationKeys List managed integration keys
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIntegrationServiceListManagedIntegrationKeysRequest
 */
@@ -996,6 +1014,8 @@ func (r ApiIntegrationServiceSaveIntegrationRequest) Execute() (*SaveIntegration
 
 /*
 IntegrationServiceSaveIntegration Save integration registration metadata
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIntegrationServiceSaveIntegrationRequest
@@ -1102,6 +1122,8 @@ func (r ApiIntegrationServiceSyncRumDataRequest) Execute() (*SyncRumDataResponse
 /*
 IntegrationServiceSyncRumData Trigger sync of RUM integration data
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIntegrationServiceSyncRumDataRequest
 */
@@ -1207,6 +1229,8 @@ func (r ApiIntegrationServiceTestIntegrationRequest) Execute() (*TestIntegration
 /*
 IntegrationServiceTestIntegration Test integration
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIntegrationServiceTestIntegrationRequest
 */
@@ -1311,6 +1335,8 @@ func (r ApiIntegrationServiceUpdateIntegrationRequest) Execute() (map[string]int
 
 /*
 IntegrationServiceUpdateIntegration Update integration
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIntegrationServiceUpdateIntegrationRequest

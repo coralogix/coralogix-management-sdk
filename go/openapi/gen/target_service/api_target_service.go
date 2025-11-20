@@ -34,6 +34,8 @@ func (r ApiS3TargetServiceGetTargetRequest) Execute() (*S3TargetServiceGetTarget
 /*
 S3TargetServiceGetTarget Get target
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiS3TargetServiceGetTargetRequest
 */
@@ -136,6 +138,8 @@ func (r ApiS3TargetServiceSetTargetRequest) Execute() (*S3TargetServiceSetTarget
 
 /*
 S3TargetServiceSetTarget Set target
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiS3TargetServiceSetTargetRequest
