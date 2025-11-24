@@ -111,9 +111,15 @@ pub use cx_api::proto::com::coralogixapis::notification_center::{
         test_result,
         test_template_render_result,
     },
-    presets::v1::Preset,
-    presets::v1::PresetType,
-    routers::v1::GlobalRouter,
+    presets::v1::{
+        Preset,
+        PresetType,
+    },
+
+    routers::v1::{
+        GlobalRouter,
+        RoutingLabels,
+    },
     routing::{
         RoutingRule,
         RoutingTarget,

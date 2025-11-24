@@ -604,9 +604,8 @@ mod tests {
 
         let global_router = GlobalRouter {
             id: Some("router_default".into()),
-            entity_label_matcher: HashMap::new(),
+            routing_labels: None,
             name: "global router".to_string(),
-            entity_type: Some(EntityType::Alerts.into()),
             description: "global router example".to_string(),
             create_time: None,
             update_time: None,
@@ -623,6 +622,7 @@ mod tests {
             }],
             fallback: vec![],
             entity_labels: std::collections::HashMap::new(),
+            ..Default::default()
         };
 
         let create_or_replace_response = notifications_client
@@ -753,7 +753,7 @@ mod tests {
         let preset_id = create_preset_response.preset.unwrap().id.unwrap();
 
         let global_router = GlobalRouter {
-            entity_label_matcher: HashMap::new(),
+            routing_labels: None,
             id: Some("router_default".into()),
             name: "global router".to_string(),
             entity_type: None,
@@ -773,6 +773,7 @@ mod tests {
             }],
             fallback: vec![],
             entity_labels: std::collections::HashMap::new(),
+            ..Default::default()
         };
 
         notifications_client
