@@ -12,8 +12,8 @@ option go_package = "com/coralogixapis/notification_center/routers/v1";
 // The global router contains a pre-configured list of routing rules
 // and can be specified as a part of the notification request.
 message GlobalRouter {
-  reserved 2, 3, 12;
-  reserved "user_defined_id", "deprecated_entity_type", "evaluation_mode";
+  reserved 2, 3, 12, 13;
+  reserved "user_defined_id", "deprecated_entity_type", "evaluation_mode", "entity_label_matcher";
 
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
@@ -39,7 +39,6 @@ message GlobalRouter {
   optional google.protobuf.Timestamp update_time = 9;
   map<string, string> entity_labels = 10;
   optional EntityType entity_type = 11 [deprecated = true];
-  map<string, string> entity_label_matcher = 13 [deprecated = true];
   RoutingLabels routing_labels = 14;
 }
 
