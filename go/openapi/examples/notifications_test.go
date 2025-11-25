@@ -34,6 +34,7 @@ func TestHttpsConnector(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewConnectorsClient(cpc)
@@ -68,6 +69,7 @@ func TestSlackConnector(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewConnectorsClient(cpc)
@@ -126,6 +128,7 @@ func TestPagerdutyConnector(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewConnectorsClient(cpc)
@@ -182,6 +185,7 @@ func TestHttpsPreset(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewPresetsClient(cpc)
@@ -230,6 +234,7 @@ func TestSlackPreset(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewPresetsClient(cpc)
@@ -312,6 +317,7 @@ func TestPagerdutyPreset(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewPresetsClient(cpc)
@@ -390,6 +396,7 @@ func TestGlobalRouter(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	routersClient := cxsdk.NewGlobalRoutersClient(cpc)

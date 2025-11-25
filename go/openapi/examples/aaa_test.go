@@ -37,6 +37,7 @@ func TestApiKeys(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewAPIKeysClient(cpc)
@@ -92,6 +93,7 @@ func TestIpAccess(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	enabled := false
@@ -174,6 +176,7 @@ func TestGroups(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewGroupsClient(cpc)
@@ -241,6 +244,7 @@ func TestCustomRoles(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewCustomRolesClient(cpc)
@@ -309,6 +313,7 @@ func TestScopes(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewScopesClient(cpc)

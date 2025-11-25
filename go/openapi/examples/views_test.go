@@ -32,6 +32,7 @@ func TestViews(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewViewsClient(cpc)
@@ -88,6 +89,7 @@ func TestViewsFolders(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewViewsFoldersClient(cpc)

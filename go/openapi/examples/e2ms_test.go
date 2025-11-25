@@ -16,6 +16,7 @@ func TestE2MsLogsQuery(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewEvents2MetricsClient(cpc)

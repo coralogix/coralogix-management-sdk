@@ -33,6 +33,7 @@ func TestDashboards(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewDashboardClient(cpc)
@@ -100,6 +101,7 @@ func TestDashboardFolders(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewDashboardFoldersClient(cpc)

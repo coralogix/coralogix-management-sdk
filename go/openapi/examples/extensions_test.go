@@ -18,6 +18,7 @@ func TestExtensions(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	ctx := context.Background()

@@ -24,6 +24,7 @@ import (
 // CallPropertiesCreator provides configuration for building API clients.
 type CallPropertiesCreator interface {
 	URL() string
+	LogHTTP() bool
 	Headers() map[string]string
 }
 
@@ -31,6 +32,7 @@ type CallPropertiesCreator interface {
 type SDKCallPropertiesCreator struct {
 	apiKey  string
 	url     string
+	logHTTP bool
 	headers map[string]string
 }
 
@@ -39,16 +41,22 @@ func (c *SDKCallPropertiesCreator) URL() string {
 	return c.url
 }
 
+// LogHTTP indicates whether HTTP requests and responses should be logged.
+func (c *SDKCallPropertiesCreator) LogHTTP() bool {
+	return c.logHTTP
+}
+
 // Headers returns the headers to include in API calls.
 func (c *SDKCallPropertiesCreator) Headers() map[string]string {
 	return c.headers
 }
 
 // NewSDKCallPropertiesCreator creates a new CallPropertiesCreator with defaults.
-func NewSDKCallPropertiesCreator(url, apiKey string) *SDKCallPropertiesCreator {
+func NewSDKCallPropertiesCreator(url, apiKey string, logHTTP bool) *SDKCallPropertiesCreator {
 	return &SDKCallPropertiesCreator{
-		url:    url,
-		apiKey: apiKey,
+		url:     url,
+		apiKey:  apiKey,
+		logHTTP: logHTTP,
 		headers: map[string]string{
 			"Authorization":            fmt.Sprintf("Bearer %s", apiKey),
 			sdkVersionHeaderName:       vanillaSdkVersion,
@@ -60,10 +68,11 @@ func NewSDKCallPropertiesCreator(url, apiKey string) *SDKCallPropertiesCreator {
 }
 
 // NewSDKCallPropertiesCreatorTerraform creates a new CallPropertiesCreator, setting the Terraform version header.
-func NewSDKCallPropertiesCreatorTerraform(url, apiKey, version string) *SDKCallPropertiesCreator {
+func NewSDKCallPropertiesCreatorTerraform(url, apiKey, version string, logHTTP bool) *SDKCallPropertiesCreator {
 	return &SDKCallPropertiesCreator{
-		url:    url,
-		apiKey: apiKey,
+		url:     url,
+		apiKey:  apiKey,
+		logHTTP: logHTTP,
 		headers: map[string]string{
 			"Authorization":            fmt.Sprintf("Bearer %s", apiKey),
 			sdkVersionHeaderName:       "terraform-" + version,
@@ -75,10 +84,11 @@ func NewSDKCallPropertiesCreatorTerraform(url, apiKey, version string) *SDKCallP
 }
 
 // NewSDKCallPropertiesCreatorOperator creates a new CallPropertiesCreator, setting the Operator version header.
-func NewSDKCallPropertiesCreatorOperator(url, apiKey, version string) *SDKCallPropertiesCreator {
+func NewSDKCallPropertiesCreatorOperator(url, apiKey, version string, logHTTP bool) *SDKCallPropertiesCreator {
 	return &SDKCallPropertiesCreator{
-		url:    url,
-		apiKey: apiKey,
+		url:     url,
+		apiKey:  apiKey,
+		logHTTP: logHTTP,
 		headers: map[string]string{
 			"Authorization":            fmt.Sprintf("Bearer %s", apiKey),
 			sdkVersionHeaderName:       "cxo-" + version,

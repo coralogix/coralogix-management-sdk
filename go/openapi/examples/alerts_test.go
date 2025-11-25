@@ -275,6 +275,7 @@ func TestTracingImmediateAlerts(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewAlertsClient(cpc)
@@ -338,6 +339,7 @@ func TestLogsRatioAlerts(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewAlertsClient(cpc)
@@ -401,6 +403,7 @@ func TestTracingThresholdAlerts(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewAlertsClient(cpc)
@@ -464,6 +467,7 @@ func TestFlowAlerts(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewAlertsClient(cpc)
@@ -548,6 +552,7 @@ func TestSloAlerts(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	sloClient := cxsdk.NewClientSet(cpc).SLOs()
@@ -629,6 +634,7 @@ func TestAlertScheduler(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	ctx := context.Background()

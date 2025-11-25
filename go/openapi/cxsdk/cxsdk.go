@@ -15,6 +15,7 @@
 package cxsdk
 
 import (
+	"net/http"
 	"net/url"
 	"os"
 	"strings"
@@ -273,6 +274,11 @@ func NewClientSet(c CallPropertiesCreator) *ClientSet {
 // NewActionsClient builds a new ActionsServiceAPIService from CallPropertiesCreator.
 func NewActionsClient(c CallPropertiesCreator) *actions.ActionsServiceAPIService {
 	cfg := actions.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = actions.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -283,6 +289,12 @@ func NewActionsClient(c CallPropertiesCreator) *actions.ActionsServiceAPIService
 // NewAlertsClient builds a new AlertDefinitionsServiceAPIService from CallPropertiesCreator.
 func NewAlertsClient(c CallPropertiesCreator) *alerts.AlertDefinitionsServiceAPIService {
 	cfg := alerts.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
+
 	cfg.Servers = alerts.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -293,6 +305,11 @@ func NewAlertsClient(c CallPropertiesCreator) *alerts.AlertDefinitionsServiceAPI
 // NewAlertSchedulerClient builds a new AlertSchedulerRuleServiceAPIService from CallPropertiesCreator.
 func NewAlertSchedulerClient(c CallPropertiesCreator) *alertscheduler.AlertSchedulerRuleServiceAPIService {
 	cfg := alertscheduler.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = alertscheduler.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -303,6 +320,11 @@ func NewAlertSchedulerClient(c CallPropertiesCreator) *alertscheduler.AlertSched
 // NewAPIKeysClient builds a new APIKeysServiceAPIService from CallPropertiesCreator.
 func NewAPIKeysClient(c CallPropertiesCreator) *apikeys.APIKeysServiceAPIService {
 	cfg := apikeys.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = apikeys.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -313,6 +335,11 @@ func NewAPIKeysClient(c CallPropertiesCreator) *apikeys.APIKeysServiceAPIService
 // NewArchiveMetricsClient builds a new MetricsDataArchiveServiceAPIService from CallPropertiesCreator.
 func NewArchiveMetricsClient(c CallPropertiesCreator) *archivemetrics.MetricsDataArchiveServiceAPIService {
 	cfg := archivemetrics.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = archivemetrics.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -323,6 +350,11 @@ func NewArchiveMetricsClient(c CallPropertiesCreator) *archivemetrics.MetricsDat
 // NewIPAccessClient builds a new IPAccessServiceAPIService from CallPropertiesCreator.
 func NewIPAccessClient(c CallPropertiesCreator) *ipaccess.IPAccessServiceAPIService {
 	cfg := ipaccess.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = ipaccess.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -333,6 +365,11 @@ func NewIPAccessClient(c CallPropertiesCreator) *ipaccess.IPAccessServiceAPIServ
 // NewConnectorsClient builds a new ConnectorsServiceAPIService from CallPropertiesCreator.
 func NewConnectorsClient(c CallPropertiesCreator) *connectors.ConnectorsServiceAPIService {
 	cfg := connectors.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = connectors.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -343,6 +380,11 @@ func NewConnectorsClient(c CallPropertiesCreator) *connectors.ConnectorsServiceA
 // NewCustomRolesClient builds a new RoleManagementServiceAPIService from CallPropertiesCreator.
 func NewCustomRolesClient(c CallPropertiesCreator) *customroles.RoleManagementServiceAPIService {
 	cfg := customroles.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = customroles.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -353,6 +395,11 @@ func NewCustomRolesClient(c CallPropertiesCreator) *customroles.RoleManagementSe
 // NewDashboardClient builds a new DashboardServiceAPIService from CallPropertiesCreator.
 func NewDashboardClient(c CallPropertiesCreator) *dashboards.DashboardServiceAPIService {
 	cfg := dashboards.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = dashboards.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -363,6 +410,11 @@ func NewDashboardClient(c CallPropertiesCreator) *dashboards.DashboardServiceAPI
 // NewDashboardFoldersClient builds a new DashboardFoldersServiceAPIService from CallPropertiesCreator.
 func NewDashboardFoldersClient(c CallPropertiesCreator) *dashboardfolders.DashboardFoldersServiceAPIService {
 	cfg := dashboardfolders.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = dashboardfolders.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -373,6 +425,11 @@ func NewDashboardFoldersClient(c CallPropertiesCreator) *dashboardfolders.Dashbo
 // NewEnrichmentsClient builds a new EnrichmentsServiceAPIService from CallPropertiesCreator.
 func NewEnrichmentsClient(c CallPropertiesCreator) *enrichments.EnrichmentsServiceAPIService {
 	cfg := enrichments.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = enrichments.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -383,6 +440,11 @@ func NewEnrichmentsClient(c CallPropertiesCreator) *enrichments.EnrichmentsServi
 // NewEvents2MetricsClient builds a new Events2MetricsServiceAPIService from CallPropertiesCreator.
 func NewEvents2MetricsClient(c CallPropertiesCreator) *events2metrics.Events2MetricsServiceAPIService {
 	cfg := events2metrics.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = events2metrics.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -393,6 +455,11 @@ func NewEvents2MetricsClient(c CallPropertiesCreator) *events2metrics.Events2Met
 // NewExtensionsClient builds a new ExtensionServiceAPIService from CallPropertiesCreator.
 func NewExtensionsClient(c CallPropertiesCreator) *extensions.ExtensionServiceAPIService {
 	cfg := extensions.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = extensions.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -403,6 +470,11 @@ func NewExtensionsClient(c CallPropertiesCreator) *extensions.ExtensionServiceAP
 // NewExtensionDeploymentsClient builds a new ExtensionDeploymentServiceAPIService from CallPropertiesCreator.
 func NewExtensionDeploymentsClient(c CallPropertiesCreator) *extensiondeployments.ExtensionDeploymentServiceAPIService {
 	cfg := extensiondeployments.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = extensiondeployments.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -413,6 +485,11 @@ func NewExtensionDeploymentsClient(c CallPropertiesCreator) *extensiondeployment
 // NewGroupsClient builds a new TeamPermissionsManagementServiceAPIService from CallPropertiesCreator.
 func NewGroupsClient(c CallPropertiesCreator) *groups.TeamPermissionsManagementServiceAPIService {
 	cfg := groups.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = groups.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -423,6 +500,11 @@ func NewGroupsClient(c CallPropertiesCreator) *groups.TeamPermissionsManagementS
 // NewIntegrationsClient builds a new IntegrationServiceAPIService from CallPropertiesCreator.
 func NewIntegrationsClient(c CallPropertiesCreator) *integrations.IntegrationServiceAPIService {
 	cfg := integrations.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = integrations.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -433,6 +515,11 @@ func NewIntegrationsClient(c CallPropertiesCreator) *integrations.IntegrationSer
 // NewGlobalRoutersClient builds a new GlobalRoutersServiceAPIService from CallPropertiesCreator.
 func NewGlobalRoutersClient(c CallPropertiesCreator) *globalrouters.GlobalRoutersServiceAPIService {
 	cfg := globalrouters.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = globalrouters.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -443,6 +530,11 @@ func NewGlobalRoutersClient(c CallPropertiesCreator) *globalrouters.GlobalRouter
 // NewPresetsClient builds a new PresetsServiceAPIService from CallPropertiesCreator.
 func NewPresetsClient(c CallPropertiesCreator) *presets.PresetsServiceAPIService {
 	cfg := presets.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = presets.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -453,6 +545,11 @@ func NewPresetsClient(c CallPropertiesCreator) *presets.PresetsServiceAPIService
 // NewScopesClient builds a new ScopesServiceAPIService from CallPropertiesCreator.
 func NewScopesClient(c CallPropertiesCreator) *scopes.ScopesServiceAPIService {
 	cfg := scopes.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = scopes.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -463,6 +560,11 @@ func NewScopesClient(c CallPropertiesCreator) *scopes.ScopesServiceAPIService {
 // NewSLOsClient builds a new SlosServiceAPIService from CallPropertiesCreator.
 func NewSLOsClient(c CallPropertiesCreator) *slos.SlosServiceAPIService {
 	cfg := slos.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = slos.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -473,6 +575,11 @@ func NewSLOsClient(c CallPropertiesCreator) *slos.SlosServiceAPIService {
 // NewRecordingRulesClient builds a new RecordingRulesServiceAPIService from CallPropertiesCreator.
 func NewRecordingRulesClient(c CallPropertiesCreator) *recordingrules.RecordingRulesServiceAPIService {
 	cfg := recordingrules.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = recordingrules.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -483,6 +590,11 @@ func NewRecordingRulesClient(c CallPropertiesCreator) *recordingrules.RecordingR
 // NewRuleGroupsClient builds a new RuleGroupsServiceAPIService from CallPropertiesCreator.
 func NewRuleGroupsClient(c CallPropertiesCreator) *rulegroups.RuleGroupsServiceAPIService {
 	cfg := rulegroups.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = rulegroups.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -493,6 +605,11 @@ func NewRuleGroupsClient(c CallPropertiesCreator) *rulegroups.RuleGroupsServiceA
 // NewTCOPoliciesClient builds a new PoliciesServiceAPIService from CallPropertiesCreator.
 func NewTCOPoliciesClient(c CallPropertiesCreator) *tcopolicies.PoliciesServiceAPIService {
 	cfg := tcopolicies.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = tcopolicies.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -503,6 +620,11 @@ func NewTCOPoliciesClient(c CallPropertiesCreator) *tcopolicies.PoliciesServiceA
 // NewWebhooksClient builds a new OutgoingWebhooksServiceAPIService from CallPropertiesCreator.
 func NewWebhooksClient(c CallPropertiesCreator) *webhooks.OutgoingWebhooksServiceAPIService {
 	cfg := webhooks.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = webhooks.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -513,6 +635,11 @@ func NewWebhooksClient(c CallPropertiesCreator) *webhooks.OutgoingWebhooksServic
 // NewViewsClient builds a new ViewsServiceAPIService from CallPropertiesCreator.
 func NewViewsClient(c CallPropertiesCreator) *views.ViewsServiceAPIService {
 	cfg := views.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = views.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -523,6 +650,11 @@ func NewViewsClient(c CallPropertiesCreator) *views.ViewsServiceAPIService {
 // NewViewsFoldersClient builds a new FoldersForViewsServiceAPIService from CallPropertiesCreator.
 func NewViewsFoldersClient(c CallPropertiesCreator) *viewsfolders.FoldersForViewsServiceAPIService {
 	cfg := viewsfolders.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = viewsfolders.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -533,6 +665,11 @@ func NewViewsFoldersClient(c CallPropertiesCreator) *viewsfolders.FoldersForView
 // NewArchiveLogsClient builds a new TargetServiceAPIService from CallPropertiesCreator.
 func NewArchiveLogsClient(c CallPropertiesCreator) *targets.TargetServiceAPIService {
 	cfg := targets.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = targets.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)
@@ -543,6 +680,11 @@ func NewArchiveLogsClient(c CallPropertiesCreator) *targets.TargetServiceAPIServ
 // NewArchiveRetentionsClient builds a new RetentionsServiceAPIService from CallPropertiesCreator.
 func NewArchiveRetentionsClient(c CallPropertiesCreator) *archiveretention.RetentionsServiceAPIService {
 	cfg := archiveretention.NewConfiguration()
+	if c.LogHTTP() {
+		cfg.HTTPClient = &http.Client{
+			Transport: NewLoggingTransport(),
+		}
+	}
 	cfg.Servers = archiveretention.ServerConfigurations{{URL: c.URL()}}
 	for k, v := range c.Headers() {
 		cfg.AddDefaultHeader(k, v)

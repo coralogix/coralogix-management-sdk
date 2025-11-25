@@ -32,6 +32,7 @@ func TestRecordingRuleGroups(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewRecordingRulesClient(cpc)

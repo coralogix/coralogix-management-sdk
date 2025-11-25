@@ -29,6 +29,7 @@ func TestEnrichmentsGeoIp(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewEnrichmentsClient(cpc)
@@ -75,6 +76,7 @@ func TestEnrichmentsAws(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewEnrichmentsClient(cpc)
@@ -114,6 +116,7 @@ func TestEnrichmentsCustom(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewEnrichmentsClient(cpc)
@@ -150,6 +153,7 @@ func TestEnrichmentsSuspiciousIp(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewEnrichmentsClient(cpc)

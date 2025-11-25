@@ -31,6 +31,7 @@ func TestSLOs(t *testing.T) {
 	cpc := cxsdk.NewSDKCallPropertiesCreator(
 		region,
 		cxsdk.APIKeyFromEnv(),
+		true,
 	)
 
 	client := cxsdk.NewClientSet(cpc).SLOs()
