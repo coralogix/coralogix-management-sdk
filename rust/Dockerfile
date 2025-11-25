@@ -29,12 +29,12 @@ ADD . /app
 
 ADD $PB_REL/download/v25.1/protoc-25.1-linux-${ARCH}.zip /tmp
 RUN apt update && \
-    apt install -y unzip pkg-config libssl-dev curl
+    apt install -y unzip pkg-config libssl-dev curl && \ 
+    unzip /tmp/protoc-25.1-linux-${ARCH}.zip -d /usr
 
 WORKDIR /app/tools/release-management
 RUN cargo build --bin cleanup && mv target/debug/cleanup /app
 
 WORKDIR /app/rust/examples
-RUN unzip /tmp/protoc-25.1-linux-${ARCH}.zip -d /usr && \
-    curl -LsSf https://get.nexte.st/latest/linux | tar zxf - -C ${CARGO_HOME:-~/.cargo}/bin && \
+RUN curl -LsSf https://get.nexte.st/latest/linux | tar zxf - -C ${CARGO_HOME:-~/.cargo}/bin && \
     cargo build --tests
