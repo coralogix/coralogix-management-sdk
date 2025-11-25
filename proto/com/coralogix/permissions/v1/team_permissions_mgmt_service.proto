@@ -33,7 +33,7 @@ service TeamPermissionsMgmtService {
       summary: "Get Team Group"
     };
     option (google.api.http) = {
-      get: "/aaa/team-groups/v1/{group_id.id}"
+      get: "/aaa/team-groups/v1/id/{group_id.id}"
       additional_bindings: {get: "/v1/teams/groups/{group_id.id}"}
     };
   }
@@ -57,7 +57,7 @@ service TeamPermissionsMgmtService {
       summary: "Get Team Group By Name"
     };
     option (google.api.http) = {
-      get: "/aaa/team-groups/v1/{name}"
+      get: "/aaa/team-groups/v1/name/{name}"
       additional_bindings: {get: "/v1/teams/groups"}
     };
   }

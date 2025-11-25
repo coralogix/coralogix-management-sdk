@@ -1091,7 +1091,7 @@ var File_com_coralogixapis_slo_v1_slo_alert_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_slo_v1_slo_alert_proto_rawDesc = "" +
 	"\n" +
-	"(com/coralogixapis/slo/v1/slo_alert.proto\x12\x18com.coralogixapis.slo.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1egoogle/protobuf/duration.proto\"\xa5\x01\n" +
+	"(com/coralogixapis/slo/v1/slo_alert.proto\x12\x18com.coralogixapis.slo.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xa5\x01\n" +
 	"\x13SloMetricTimeWindow\x12\x85\x01\n" +
 	"%slo_metric_time_window_specific_value\x18\x01 \x01(\x0e22.com.coralogixapis.slo.v1.SloMetricTimeWindowValueH\x00R sloMetricTimeWindowSpecificValueB\x06\n" +
 	"\x04type\"Q\n" +

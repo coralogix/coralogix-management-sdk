@@ -130,6 +130,7 @@ type KeyInfo struct {
 	KeyPermissions *KeyInfo_KeyPermissions `protobuf:"bytes,5,opt,name=key_permissions,json=keyPermissions,proto3" json:"key_permissions,omitempty"`
 	Value          *string                 `protobuf:"bytes,6,opt,name=value,proto3,oneof" json:"value,omitempty"`
 	Id             string                  `protobuf:"bytes,7,opt,name=id,proto3" json:"id,omitempty"`
+	AccessPolicy   *string                 `protobuf:"bytes,8,opt,name=access_policy,json=accessPolicy,proto3,oneof" json:"access_policy,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -213,6 +214,13 @@ func (x *KeyInfo) GetId() string {
 	return ""
 }
 
+func (x *KeyInfo) GetAccessPolicy() string {
+	if x != nil && x.AccessPolicy != nil {
+		return *x.AccessPolicy
+	}
+	return ""
+}
+
 type PresetInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -272,6 +280,7 @@ type UpdateApiKeyRequest struct {
 	IsActive      *bool                            `protobuf:"varint,3,opt,name=is_active,json=isActive,proto3,oneof" json:"is_active,omitempty"`
 	Presets       *UpdateApiKeyRequest_Presets     `protobuf:"bytes,4,opt,name=presets,proto3,oneof" json:"presets,omitempty"`
 	Permissions   *UpdateApiKeyRequest_Permissions `protobuf:"bytes,5,opt,name=permissions,proto3,oneof" json:"permissions,omitempty"`
+	AccessPolicy  *string                          `protobuf:"bytes,6,opt,name=access_policy,json=accessPolicy,proto3,oneof" json:"access_policy,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -339,6 +348,13 @@ func (x *UpdateApiKeyRequest) GetPermissions() *UpdateApiKeyRequest_Permissions 
 		return x.Permissions
 	}
 	return nil
+}
+
+func (x *UpdateApiKeyRequest) GetAccessPolicy() string {
+	if x != nil && x.AccessPolicy != nil {
+		return *x.AccessPolicy
+	}
+	return ""
 }
 
 type UpdateApiKeyResponse struct {
@@ -463,6 +479,7 @@ type CreateApiKeyRequest struct {
 	Owner          *Owner                              `protobuf:"bytes,2,opt,name=owner,proto3" json:"owner,omitempty"`
 	KeyPermissions *CreateApiKeyRequest_KeyPermissions `protobuf:"bytes,3,opt,name=key_permissions,json=keyPermissions,proto3" json:"key_permissions,omitempty"`
 	Hashed         bool                                `protobuf:"varint,4,opt,name=hashed,proto3" json:"hashed,omitempty"`
+	AccessPolicy   *string                             `protobuf:"bytes,5,opt,name=access_policy,json=accessPolicy,proto3,oneof" json:"access_policy,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -523,6 +540,13 @@ func (x *CreateApiKeyRequest) GetHashed() bool {
 		return x.Hashed
 	}
 	return false
+}
+
+func (x *CreateApiKeyRequest) GetAccessPolicy() string {
+	if x != nil && x.AccessPolicy != nil {
+		return *x.AccessPolicy
+	}
+	return ""
 }
 
 type CreateApiKeyResponse struct {
@@ -954,7 +978,8 @@ const file_com_coralogixapis_aaa_apikeys_v3_api_keys_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\tH\x00R\x06userId\x12\x19\n" +
 	"\ateam_id\x18\x02 \x01(\rH\x00R\x06teamId\x12)\n" +
 	"\x0forganisation_id\x18\x03 \x01(\tH\x00R\x0eorganisationIdB\a\n" +
-	"\x05owner\"\xf0\x06\n" +
+	"\x05owner\"\xb3\n" +
+	"\n" +
 	"\aKeyInfo\x12%\n" +
 	"\x04name\x18\x01 \x01(\tB\x11\x9aA\x0eJ\f\"my_api_key\"R\x04name\x12O\n" +
 	"\x05owner\x18\x02 \x01(\v2'.com.coralogixapis.aaa.apikeys.v3.OwnerB\x10\x9aA\rJ\v\"a_user_id\"R\x05owner\x12!\n" +
@@ -962,7 +987,8 @@ const file_com_coralogixapis_aaa_apikeys_v3_api_keys_proto_rawDesc = "" +
 	"\x06hashed\x18\x04 \x01(\bB\t\x9aA\x06J\x04trueR\x06hashed\x12a\n" +
 	"\x0fkey_permissions\x18\x05 \x01(\v28.com.coralogixapis.aaa.apikeys.v3.KeyInfo.KeyPermissionsR\x0ekeyPermissions\x12\x19\n" +
 	"\x05value\x18\x06 \x01(\tH\x00R\x05value\x88\x01\x01\x12\x0e\n" +
-	"\x02id\x18\a \x01(\tR\x02id\x1a\xc1\x02\n" +
+	"\x02id\x18\a \x01(\tR\x02id\x12\xae\x03\n" +
+	"\raccess_policy\x18\b \x01(\tB\x83\x03\x9aA\xff\x022oJSON string representing the access policy for this API key. Defines granular permissions for users and groups.J\x8b\x02\"{\\\"version\\\":\\\"2025-01-01\\\",\\\"default\\\":{\\\"permissions\\\":{\\\"data-ingest-api-keys:ReadAccessPolicy\\\":\\\"grant\\\",\\\"data-ingest-api-keys:Manage\\\":\\\"deny\\\",\\\"data-ingest-api-keys:UpdateAccessPolicy\\\":\\\"deny\\\",\\\"data-ingest-api-keys:ReadConfig\\\":\\\"grant\\\"}},\\\"rules\\\":[]}\"H\x01R\faccessPolicy\x88\x01\x01\x1a\xc1\x02\n" +
 	"\x0eKeyPermissions\x12F\n" +
 	"\apresets\x18\x01 \x03(\v2,.com.coralogixapis.aaa.apikeys.v3.PresetInfoR\apresets\x12 \n" +
 	"\vpermissions\x18\x02 \x03(\tR\vpermissions:\xc4\x01\x9aA\xc0\x01\n" +
@@ -970,19 +996,21 @@ const file_com_coralogixapis_aaa_apikeys_v3_api_keys_proto_rawDesc = "" +
 	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/:\xca\x01\x9aA\xc6\x01\n" +
 	"V*\bKey Info2JThis data structure represents the information associated with an API key.*l\n" +
 	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/B\b\n" +
-	"\x06_value\"\xb5\x02\n" +
+	"\x06_valueB\x10\n" +
+	"\x0e_access_policy\"\xb5\x02\n" +
 	"\n" +
 	"PresetInfo\x12$\n" +
 	"\x04name\x18\x01 \x01(\tB\x10\x9aA\rJ\v\"my_preset\"R\x04name\x122\n" +
 	"\vpermissions\x18\x02 \x03(\tB\x10\x9aA\rJ\v\"read_logs\"R\vpermissions:\xcc\x01\x9aA\xc8\x01\n" +
 	"X*\vPreset Info2IThis data structure represents a preset set of permissions on an API key.*l\n" +
-	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/\"\xcc\b\n" +
+	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/\"\xc4\f\n" +
 	"\x13UpdateApiKeyRequest\x12'\n" +
 	"\x06key_id\x18\x01 \x01(\tB\x10\x9aA\rJ\v\"my_key_id\"R\x05keyId\x122\n" +
 	"\bnew_name\x18\x02 \x01(\tB\x12\x9aA\x0fJ\r\"my_new_name\"H\x00R\anewName\x88\x01\x01\x12+\n" +
 	"\tis_active\x18\x03 \x01(\bB\t\x9aA\x06J\x04trueH\x01R\bisActive\x88\x01\x01\x12\\\n" +
 	"\apresets\x18\x04 \x01(\v2=.com.coralogixapis.aaa.apikeys.v3.UpdateApiKeyRequest.PresetsH\x02R\apresets\x88\x01\x01\x12h\n" +
-	"\vpermissions\x18\x05 \x01(\v2A.com.coralogixapis.aaa.apikeys.v3.UpdateApiKeyRequest.PermissionsH\x03R\vpermissions\x88\x01\x01\x1a\xef\x01\n" +
+	"\vpermissions\x18\x05 \x01(\v2A.com.coralogixapis.aaa.apikeys.v3.UpdateApiKeyRequest.PermissionsH\x03R\vpermissions\x88\x01\x01\x12\xe3\x03\n" +
+	"\raccess_policy\x18\x06 \x01(\tB\xb8\x03\x9aA\xb4\x032\xa3\x01JSON string representing the access policy for this API key. Defines granular permissions for users and groups. To delete an existing policy, pass an empty string.J\x8b\x02\"{\\\"version\\\":\\\"2025-01-01\\\",\\\"default\\\":{\\\"permissions\\\":{\\\"data-ingest-api-keys:ReadAccessPolicy\\\":\\\"grant\\\",\\\"data-ingest-api-keys:Manage\\\":\\\"deny\\\",\\\"data-ingest-api-keys:UpdateAccessPolicy\\\":\\\"deny\\\",\\\"data-ingest-api-keys:ReadConfig\\\":\\\"grant\\\"}},\\\"rules\\\":[]}\"H\x04R\faccessPolicy\x88\x01\x01\x1a\xef\x01\n" +
 	"\aPresets\x12\x18\n" +
 	"\apresets\x18\x01 \x03(\tR\apresets:\xc9\x01\x9aA\xc5\x01\n" +
 	"U*\aPresets2JThis data structure represents a set of permissions presets on an API key.*l\n" +
@@ -998,25 +1026,28 @@ const file_com_coralogixapis_aaa_apikeys_v3_api_keys_proto_rawDesc = "" +
 	"_is_activeB\n" +
 	"\n" +
 	"\b_presetsB\x0e\n" +
-	"\f_permissions\"\x16\n" +
+	"\f_permissionsB\x10\n" +
+	"\x0e_access_policy\"\x16\n" +
 	"\x14UpdateApiKeyResponse\"\xee\x01\n" +
 	"\x13DeleteApiKeyRequest\x12\x15\n" +
 	"\x06key_id\x18\x01 \x01(\tR\x05keyId:\xbf\x01\x9aA\xbb\x01\n" +
 	"K*\x16Delete Api Key Request21This data structure is used to delete an API key.*l\n" +
 	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/\"\x16\n" +
-	"\x14DeleteApiKeyResponse\"\xaa\x06\n" +
+	"\x14DeleteApiKeyResponse\"\xed\t\n" +
 	"\x13CreateApiKeyRequest\x12%\n" +
 	"\x04name\x18\x01 \x01(\tB\x11\x9aA\x0eJ\f\"my_api_key\"R\x04name\x12=\n" +
 	"\x05owner\x18\x02 \x01(\v2'.com.coralogixapis.aaa.apikeys.v3.OwnerR\x05owner\x12m\n" +
 	"\x0fkey_permissions\x18\x03 \x01(\v2D.com.coralogixapis.aaa.apikeys.v3.CreateApiKeyRequest.KeyPermissionsR\x0ekeyPermissions\x12!\n" +
-	"\x06hashed\x18\x04 \x01(\bB\t\x9aA\x06J\x04trueR\x06hashed\x1a\xd8\x02\n" +
+	"\x06hashed\x18\x04 \x01(\bB\t\x9aA\x06J\x04trueR\x06hashed\x12\xae\x03\n" +
+	"\raccess_policy\x18\x05 \x01(\tB\x83\x03\x9aA\xff\x022oJSON string representing the access policy for this API key. Defines granular permissions for users and groups.J\x8b\x02\"{\\\"version\\\":\\\"2025-01-01\\\",\\\"default\\\":{\\\"permissions\\\":{\\\"data-ingest-api-keys:ReadAccessPolicy\\\":\\\"grant\\\",\\\"data-ingest-api-keys:Manage\\\":\\\"deny\\\",\\\"data-ingest-api-keys:UpdateAccessPolicy\\\":\\\"deny\\\",\\\"data-ingest-api-keys:ReadConfig\\\":\\\"grant\\\"}},\\\"rules\\\":[]}\"H\x00R\faccessPolicy\x88\x01\x01\x1a\xd8\x02\n" +
 	"\x0eKeyPermissions\x12*\n" +
 	"\apresets\x18\x01 \x03(\tB\x10\x9aA\rJ\v\"my_preset\"R\apresets\x122\n" +
 	"\vpermissions\x18\x02 \x03(\tB\x10\x9aA\rJ\v\"read_logs\"R\vpermissions:\xe5\x01\x9aA\xe1\x01\n" +
 	"q*\x0fKey Permissions2^This data structure allows to specify loose permissions and permission presets for an API key.*l\n" +
 	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/:\xbf\x01\x9aA\xbb\x01\n" +
 	"K*\x16Create Api Key Request21This data structure is used to create an API key.*l\n" +
-	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/\"\xed\x02\n" +
+	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/B\x10\n" +
+	"\x0e_access_policy\"\xed\x02\n" +
 	"\x14CreateApiKeyResponse\x12'\n" +
 	"\x06key_id\x18\x01 \x01(\tB\x10\x9aA\rJ\v\"my_key_id\"R\x05keyId\x12%\n" +
 	"\x04name\x18\x02 \x01(\tB\x11\x9aA\x0eJ\f\"my_api_key\"R\x04name\x12-\n" +
@@ -1150,6 +1181,7 @@ func file_com_coralogixapis_aaa_apikeys_v3_api_keys_proto_init() {
 	}
 	file_com_coralogixapis_aaa_apikeys_v3_api_keys_proto_msgTypes[1].OneofWrappers = []any{}
 	file_com_coralogixapis_aaa_apikeys_v3_api_keys_proto_msgTypes[3].OneofWrappers = []any{}
+	file_com_coralogixapis_aaa_apikeys_v3_api_keys_proto_msgTypes[7].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
