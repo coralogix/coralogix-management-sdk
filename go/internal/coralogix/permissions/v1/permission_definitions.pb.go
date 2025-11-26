@@ -69,6 +69,7 @@ const (
 	PermissionGroup_PERMISSION_GROUP_QUOTA_RULES               PermissionGroup = 39
 	PermissionGroup_PERMISSION_GROUP_DATAENGINE                PermissionGroup = 40
 	PermissionGroup_PERMISSION_GROUP_CASE                      PermissionGroup = 41
+	PermissionGroup_PERMISSION_GROUP_FLEET_MANAGEMENT          PermissionGroup = 42
 )
 
 // Enum value maps for PermissionGroup.
@@ -116,6 +117,7 @@ var (
 		39: "PERMISSION_GROUP_QUOTA_RULES",
 		40: "PERMISSION_GROUP_DATAENGINE",
 		41: "PERMISSION_GROUP_CASE",
+		42: "PERMISSION_GROUP_FLEET_MANAGEMENT",
 	}
 	PermissionGroup_value = map[string]int32{
 		"PERMISSION_GROUP_UNSPECIFIED":               0,
@@ -160,6 +162,7 @@ var (
 		"PERMISSION_GROUP_QUOTA_RULES":               39,
 		"PERMISSION_GROUP_DATAENGINE":                40,
 		"PERMISSION_GROUP_CASE":                      41,
+		"PERMISSION_GROUP_FLEET_MANAGEMENT":          42,
 	}
 )
 
@@ -500,6 +503,7 @@ const (
 	Permission_PERMISSION_SYSTEM_DATASETS_APPEND_DATA               Permission = 295
 	Permission_PERMISSION_SYSTEM_DATASETS_OVERWRITE_DATA            Permission = 296
 	Permission_PERMISSION_SYSTEM_DATASETS_READ_DATA                 Permission = 297
+	Permission_PERMISSION_REMOTE_CONFIGURATION_MANAGE               Permission = 298
 )
 
 // Enum value maps for Permission.
@@ -798,6 +802,7 @@ var (
 		295: "PERMISSION_SYSTEM_DATASETS_APPEND_DATA",
 		296: "PERMISSION_SYSTEM_DATASETS_OVERWRITE_DATA",
 		297: "PERMISSION_SYSTEM_DATASETS_READ_DATA",
+		298: "PERMISSION_REMOTE_CONFIGURATION_MANAGE",
 	}
 	Permission_value = map[string]int32{
 		"PERMISSION_UNSPECIFIED":                                      0,
@@ -1093,6 +1098,7 @@ var (
 		"PERMISSION_SYSTEM_DATASETS_APPEND_DATA":                      295,
 		"PERMISSION_SYSTEM_DATASETS_OVERWRITE_DATA":                   296,
 		"PERMISSION_SYSTEM_DATASETS_READ_DATA":                        297,
+		"PERMISSION_REMOTE_CONFIGURATION_MANAGE":                      298,
 	}
 )
 
@@ -1254,7 +1260,7 @@ var File_com_coralogix_permissions_models_v1_permission_definitions_proto protor
 
 const file_com_coralogix_permissions_models_v1_permission_definitions_proto_rawDesc = "" +
 	"\n" +
-	"@com/coralogix/permissions/models/v1/permission_definitions.proto\x12#com.coralogix.permissions.models.v1\x1a4com/coralogix/permissions/v1/actions_resources.proto\x1a google/protobuf/descriptor.proto*\x85\x19\n" +
+	"@com/coralogix/permissions/models/v1/permission_definitions.proto\x12#com.coralogix.permissions.models.v1\x1a4com/coralogix/permissions/v1/actions_resources.proto\x1a google/protobuf/descriptor.proto*\xea\x19\n" +
 	"\x0fPermissionGroup\x12 \n" +
 	"\x1cPERMISSION_GROUP_UNSPECIFIED\x10\x00\x12:\n" +
 	"\x14PERMISSION_GROUP_AAA\x10\x01\x1a \x92\x82\x19\x03aaa҂\x19\x03Aaa\xe2\x82\x19\x0eAdministration\x12?\n" +
@@ -1303,7 +1309,8 @@ const file_com_coralogix_permissions_models_v1_permission_definitions_proto_rawD
 	"\x1bPERMISSION_GROUP_DATAENGINE\x10(\x1a+\x92\x82\x19\n" +
 	"dataengine҂\x19\n" +
 	"Dataengine\xe2\x82\x19\vData Engine\x123\n" +
-	"\x15PERMISSION_GROUP_CASE\x10)\x1a\x18\x92\x82\x19\x04case҂\x19\x04Case\xe2\x82\x19\x04Case*\xea\x81\x04\n" +
+	"\x15PERMISSION_GROUP_CASE\x10)\x1a\x18\x92\x82\x19\x04case҂\x19\x04Case\xe2\x82\x19\x04Case\x12c\n" +
+	"!PERMISSION_GROUP_FLEET_MANAGEMENT\x10*\x1a<\x92\x82\x19\x10fleet-management҂\x19\x10Fleet Management\xe2\x82\x19\x10Fleet Management*\x80\x84\x04\n" +
 	"\n" +
 	"Permission\x12\x1a\n" +
 	"\x16PERMISSION_UNSPECIFIED\x10\x00\x12\xaa\x01\n" +
@@ -1652,7 +1659,9 @@ const file_com_coralogix_permissions_models_v1_permission_definitions_proto_rawD
 	"/PERMISSION_SYSTEM_DATASETS_UPDATE_ACCESS_POLICY\x10\xa6\x02\x1a\xb7\x01\xba\x82\x19\"system-datasets:UpdateAccessPolicy\xc0\x82\x197Ȃ\x19\x91\x01҂\x19:Allow user to update access policy for a specific datasets\u0602\x19(\xea\x82\x19\x00\xf2\x82\x19:Allow user to update access policy for a specific datasets\x88\x83\x19\x01\x12\xa8\x01\n" +
 	"&PERMISSION_SYSTEM_DATASETS_APPEND_DATA\x10\xa7\x02\x1a{\xba\x82\x19\x1asystem-datasets:AppendData\xc0\x82\x198Ȃ\x19\x91\x01҂\x19\x18Add new data to datasets\u0602\x19(\xea\x82\x19\x00\xf2\x82\x19(Allows users to add new data to datasets\x88\x83\x19\x01\x12\xbf\x01\n" +
 	")PERMISSION_SYSTEM_DATASETS_OVERWRITE_DATA\x10\xa8\x02\x1a\x8e\x01\xba\x82\x19\x1dsystem-datasets:OverwriteData\xc0\x82\x199Ȃ\x19\x91\x01҂\x19 Replace existing dataset content\u0602\x19(\xea\x82\x19\x00\xf2\x82\x190Allows users to replace existing dataset content\x88\x83\x19\x01\x12\xa2\x01\n" +
-	"$PERMISSION_SYSTEM_DATASETS_READ_DATA\x10\xa9\x02\x1aw\xba\x82\x19\x18system-datasets:ReadData\xc0\x82\x19\x10Ȃ\x19\x91\x01҂\x19\x17Read data from datasets\u0602\x19(\xea\x82\x19\x00\xf2\x82\x19'Allows users to read data from datasets\x88\x83\x19\x01\"\x04\b%\x10%\"\x04\b&\x10&\"\x04\b'\x10'\"\x04\b*\x10*\"\x06\b\xa9\x01\x10\xa9\x01:F\n" +
+	"$PERMISSION_SYSTEM_DATASETS_READ_DATA\x10\xa9\x02\x1aw\xba\x82\x19\x18system-datasets:ReadData\xc0\x82\x19\x10Ȃ\x19\x91\x01҂\x19\x17Read data from datasets\u0602\x19(\xea\x82\x19\x00\xf2\x82\x19'Allows users to read data from datasets\x88\x83\x19\x01\x12\x93\x02\n" +
+	"&PERMISSION_REMOTE_CONFIGURATION_MANAGE\x10\xaa\x02\x1a\xe5\x01\xba\x82\x19\x1bremote-configuration:Manage\xc0\x82\x19\n" +
+	"Ȃ\x19\x9b\x01҂\x19,Allow admins to manage remote configurations\u0602\x19*\xea\x82\x19Qhttps://coralogix.com/docs/user-guides/fleet-management/configuration-management/\xf2\x82\x19,Allow admins to manage remote configurations\x88\x83\x19\x01\"\x04\b%\x10%\"\x04\b&\x10&\"\x04\b'\x10'\"\x04\b*\x10*\"\x06\b\xa9\x01\x10\xa9\x01:F\n" +
 	"\n" +
 	"expression\x12!.google.protobuf.EnumValueOptions\x18\xa7\x90\x03 \x01(\tR\n" +
 	"expression\x88\x01\x01:d\n" +

@@ -167,6 +167,10 @@ message KeyInfo {
   KeyPermissions key_permissions = 5;
   optional string value = 6;
   string id = 7;
+  optional string access_policy = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    example: "\"{\\\"version\\\":\\\"2025-01-01\\\",\\\"default\\\":{\\\"permissions\\\":{\\\"data-ingest-api-keys:ReadAccessPolicy\\\":\\\"grant\\\",\\\"data-ingest-api-keys:Manage\\\":\\\"deny\\\",\\\"data-ingest-api-keys:UpdateAccessPolicy\\\":\\\"deny\\\",\\\"data-ingest-api-keys:ReadConfig\\\":\\\"grant\\\"}},\\\"rules\\\":[]}\""
+    description: "JSON string representing the access policy for this API key. Defines granular permissions for users and groups."
+  }];
 }
 
 message PresetInfo {
@@ -229,6 +233,10 @@ message UpdateApiKeyRequest {
   optional bool is_active = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "true"}];
   optional Presets presets = 4;
   optional Permissions permissions = 5;
+  optional string access_policy = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    example: "\"{\\\"version\\\":\\\"2025-01-01\\\",\\\"default\\\":{\\\"permissions\\\":{\\\"data-ingest-api-keys:ReadAccessPolicy\\\":\\\"grant\\\",\\\"data-ingest-api-keys:Manage\\\":\\\"deny\\\",\\\"data-ingest-api-keys:UpdateAccessPolicy\\\":\\\"deny\\\",\\\"data-ingest-api-keys:ReadConfig\\\":\\\"grant\\\"}},\\\"rules\\\":[]}\""
+    description: "JSON string representing the access policy for this API key. Defines granular permissions for users and groups. To delete an existing policy, pass an empty string."
+  }];
 }
 
 message UpdateApiKeyResponse {}
@@ -280,6 +288,10 @@ message CreateApiKeyRequest {
   Owner owner = 2;
   KeyPermissions key_permissions = 3;
   bool hashed = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "true"}];
+  optional string access_policy = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    example: "\"{\\\"version\\\":\\\"2025-01-01\\\",\\\"default\\\":{\\\"permissions\\\":{\\\"data-ingest-api-keys:ReadAccessPolicy\\\":\\\"grant\\\",\\\"data-ingest-api-keys:Manage\\\":\\\"deny\\\",\\\"data-ingest-api-keys:UpdateAccessPolicy\\\":\\\"deny\\\",\\\"data-ingest-api-keys:ReadConfig\\\":\\\"grant\\\"}},\\\"rules\\\":[]}\""
+    description: "JSON string representing the access policy for this API key. Defines granular permissions for users and groups."
+  }];
 }
 
 message CreateApiKeyResponse {
