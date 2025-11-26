@@ -180,6 +180,7 @@ enum Resource {
   RESOURCE_CASE_CONFIG = 152 [(name) = "case-config"];
   RESOURCE_CASE = 153 [(name) = "case"];
   RESOURCE_PROFILES_DATA_INGRESS_OLD = 154 [(name) = "profiles-data-ingress"];
+  RESOURCE_REMOTE_CONFIGURATION = 155 [(name) = "remote-configuration"];
 }
 
 enum Action {

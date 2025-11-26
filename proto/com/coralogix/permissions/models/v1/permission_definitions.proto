@@ -228,6 +228,11 @@ enum PermissionGroup {
     (description) = "Case",
     (display_name) = "Case"
   ];
+  PERMISSION_GROUP_FLEET_MANAGEMENT = 42 [
+    (com.coralogix.permissions.v1.name) = "fleet-management",
+    (description) = "Fleet Management",
+    (display_name) = "Fleet Management"
+  ];
 }
 
 enum Permission {
@@ -3245,6 +3250,16 @@ enum Permission {
     (description) = "Read data from datasets",
     (doc_link) = "",
     (explanation) = "Allows users to read data from datasets",
+    (is_team_level) = true
+  ];
+  PERMISSION_REMOTE_CONFIGURATION_MANAGE = 298 [
+    (expression) = "remote-configuration:Manage",
+    (action) = ACTION_MANAGE,
+    (resource) = RESOURCE_REMOTE_CONFIGURATION,
+    (permission_group) = PERMISSION_GROUP_FLEET_MANAGEMENT,
+    (description) = "Allow admins to manage remote configurations",
+    (doc_link) = "https://coralogix.com/docs/user-guides/fleet-management/configuration-management/",
+    (explanation) = "Allow admins to manage remote configurations",
     (is_team_level) = true
   ];
 }
