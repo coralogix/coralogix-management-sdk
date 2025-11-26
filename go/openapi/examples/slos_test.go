@@ -27,14 +27,8 @@ import (
 
 func TestSLOs(t *testing.T) {
 	ctx := context.Background()
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-		true,
-	)
-
-	client := cxsdk.NewClientSet(cpc).SLOs()
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	client := cxsdk.NewSLOsClient(cfg)
 
 	sloName := "example_slo_" + uuid.NewString()
 	sloPayload := getRequestBasedSlo(sloName)

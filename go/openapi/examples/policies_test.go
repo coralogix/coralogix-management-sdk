@@ -27,14 +27,8 @@ import (
 
 func TestPolicies(t *testing.T) {
 	ctx := context.Background()
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-		true,
-	)
-
-	client := cxsdk.NewTCOPoliciesClient(cpc)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	client := cxsdk.NewTCOPoliciesClient(cfg)
 
 	policyName := "Example tco_policy from SDK" + uuid.NewString()
 	createReq := tcopolicies.PoliciesServiceCreatePolicyRequest{

@@ -25,14 +25,9 @@ import (
 )
 
 func TestRuleGroups(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-		true,
-	)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	client := cxsdk.NewRuleGroupsClient(cfg)
 
-	client := cxsdk.NewRuleGroupsClient(cpc)
 	ctx := context.Background()
 
 	groupName := "block-rule"

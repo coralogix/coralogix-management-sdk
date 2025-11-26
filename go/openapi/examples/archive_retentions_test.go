@@ -25,14 +25,9 @@ import (
 )
 
 func TestArchiveRetentions(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-		true,
-	)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	client := cxsdk.NewArchiveRetentionsClient(cfg)
 
-	client := cxsdk.NewArchiveRetentionsClient(cpc)
 	ctx := context.Background()
 
 	getResp, httpResp, err := client.

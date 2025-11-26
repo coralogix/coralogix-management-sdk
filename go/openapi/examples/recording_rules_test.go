@@ -28,14 +28,8 @@ import (
 
 func TestRecordingRuleGroups(t *testing.T) {
 	ctx := context.Background()
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-		true,
-	)
-
-	client := cxsdk.NewRecordingRulesClient(cpc)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	client := cxsdk.NewRecordingRulesClient(cfg)
 
 	setName := fmt.Sprintf("TestRecordingRuleGroup-%d", time.Now().UnixMilli())
 

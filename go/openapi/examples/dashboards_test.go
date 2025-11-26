@@ -29,14 +29,8 @@ import (
 )
 
 func TestDashboards(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-		true,
-	)
-
-	client := cxsdk.NewDashboardClient(cpc)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	client := cxsdk.NewDashboardClient(cfg)
 
 	data, err := os.ReadFile("dashboard.json")
 	if err != nil {
@@ -97,14 +91,8 @@ func TestDashboards(t *testing.T) {
 }
 
 func TestDashboardFolders(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-		true,
-	)
-
-	client := cxsdk.NewDashboardFoldersClient(cpc)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	client := cxsdk.NewDashboardFoldersClient(cfg)
 
 	id := uuid.New().String()
 

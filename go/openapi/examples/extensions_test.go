@@ -14,17 +14,12 @@ import (
 
 func TestExtensions(t *testing.T) {
 	t.Skip("Unstable test")
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-		true,
-	)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	clientSet := cxsdk.NewClientSet(cfg)
+	extensionsClient := clientSet.Extensions()
+	deployClient := clientSet.ExtensionDeployments()
 
 	ctx := context.Background()
-
-	extensionsClient := cxsdk.NewExtensionsClient(cpc)
-	deployClient := cxsdk.NewExtensionDeploymentsClient(cpc)
 
 	includeHidden := true
 	getAllReq := extensions.GetAllExtensionsRequest{

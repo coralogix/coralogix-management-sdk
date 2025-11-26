@@ -33,7 +33,7 @@ func (t *LoggingTransport) RoundTrip(req *http.Request) (*http.Response, error) 
 	t.logger.Debug("SDK HTTP request",
 		slog.String("method", req.Method),
 		slog.String("url", req.URL.String()),
-		slog.Any("body", parseJSONOrRaw(reqBody)),
+		slog.Any("body", parseJSON(reqBody)),
 	)
 
 	resp, err := http.DefaultTransport.RoundTrip(req)
@@ -55,13 +55,13 @@ func (t *LoggingTransport) RoundTrip(req *http.Request) (*http.Response, error) 
 	t.logger.Debug("SDK HTTP response",
 		slog.String("method", req.Method),
 		slog.String("url", req.URL.String()),
-		slog.Any("body", parseJSONOrRaw(respBody)),
+		slog.Any("body", parseJSON(respBody)),
 	)
 
 	return resp, nil
 }
 
-func parseJSONOrRaw(raw []byte) any {
+func parseJSON(raw []byte) any {
 	if len(raw) == 0 {
 		return ""
 	}
