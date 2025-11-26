@@ -30,13 +30,8 @@ import (
 )
 
 func TestHttpsConnector(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
-
-	client := cxsdk.NewConnectorsClient(cpc)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewConnectorsClient(cfg)
 
 	name := fmt.Sprintf("TestConnector-%v", uuid.NewString())
 
@@ -64,13 +59,8 @@ func TestHttpsConnector(t *testing.T) {
 }
 
 func TestSlackConnector(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
-
-	client := cxsdk.NewConnectorsClient(cpc)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewConnectorsClient(cfg)
 
 	connector := connectors.Connector{
 		Name:        connectors.PtrString("TestSlackConnector"),
@@ -122,13 +112,8 @@ func TestSlackConnector(t *testing.T) {
 }
 
 func TestPagerdutyConnector(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
-
-	client := cxsdk.NewConnectorsClient(cpc)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewConnectorsClient(cfg)
 
 	connector := connectors.Connector{
 		Name:        connectors.PtrString("TestPagerdutyConnector"),
@@ -178,13 +163,8 @@ func TestPagerdutyConnector(t *testing.T) {
 }
 
 func TestHttpsPreset(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
-
-	client := cxsdk.NewPresetsClient(cpc)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewPresetsClient(cfg)
 
 	name := fmt.Sprintf("TestGoHttpsPreset-%v", uuid.NewString())
 
@@ -226,13 +206,8 @@ func TestHttpsPreset(t *testing.T) {
 }
 
 func TestSlackPreset(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
-
-	client := cxsdk.NewPresetsClient(cpc)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewPresetsClient(cfg)
 
 	name := fmt.Sprintf("TestGoSlackPreset-%v", uuid.NewString())
 
@@ -308,13 +283,8 @@ func TestSlackPreset(t *testing.T) {
 }
 
 func TestPagerdutyPreset(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
-
-	client := cxsdk.NewPresetsClient(cpc)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewPresetsClient(cfg)
 
 	name := fmt.Sprintf("TestPagerDutyPreset-%v", uuid.NewString())
 
@@ -386,16 +356,13 @@ func TestPagerdutyPreset(t *testing.T) {
 }
 
 func TestGlobalRouter(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	clientSet := cxsdk.NewClientSet(cfg)
 
-	routersClient := cxsdk.NewGlobalRoutersClient(cpc)
-	connectorsClient := cxsdk.NewConnectorsClient(cpc)
-	presetsClient := cxsdk.NewPresetsClient(cpc)
-	alertsClient := cxsdk.NewAlertsClient(cpc)
+	routersClient := clientSet.GlobalRouters()
+	connectorsClient := clientSet.Connectors()
+	presetsClient := clientSet.Presets()
+	alertsClient := clientSet.Alerts()
 
 	createdConnector, httpResp, err := connectorsClient.
 		ConnectorsServiceCreateConnector(context.Background()).

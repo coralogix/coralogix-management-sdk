@@ -28,13 +28,8 @@ import (
 )
 
 func TestViews(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
-
-	client := cxsdk.NewViewsClient(cpc)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewViewsClient(cfg)
 
 	createReq := views.ViewFolder{
 		Name: fmt.Sprintf("TestView-%v", uuid.NewString()),
@@ -84,13 +79,8 @@ func TestViews(t *testing.T) {
 }
 
 func TestViewsFolders(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
-
-	client := cxsdk.NewViewsFoldersClient(cpc)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewViewsFoldersClient(cfg)
 
 	before, httpResp, err := client.
 		ViewsFoldersServiceListViewFolders(context.Background()).

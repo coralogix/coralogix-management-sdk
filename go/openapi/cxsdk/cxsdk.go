@@ -15,10 +15,6 @@
 package cxsdk
 
 import (
-	"net/url"
-	"os"
-	"strings"
-
 	actions "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/actions_service"
 	alerts "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/alert_definitions_service"
 	alertscheduler "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/alert_scheduler_rule_service"
@@ -49,19 +45,6 @@ import (
 	targets "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/target_service"
 	groups "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/team_permissions_management_service"
 	views "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/views_service"
-)
-
-const (
-	envCoralogixRegion = "CORALOGIX_REGION"
-	envCoralogixAPIKey = "CORALOGIX_API_KEY"
-)
-
-const (
-	sdkVersionHeaderName       = "x-cx-sdk-version"
-	sdkLanguageHeaderName      = "x-cx-sdk-language"
-	sdkGoVersionHeaderName     = "x-cx-go-version"
-	sdkCorrelationIDHeaderName = "x-cx-correlation-id"
-	vanillaSdkVersion          = "1.12.0"
 )
 
 // ClientSet provides access to all API clients.
@@ -237,7 +220,7 @@ func (c *ClientSet) ViewsFolders() *viewsfolders.FoldersForViewsServiceAPIServic
 }
 
 // NewClientSet builds a ClientSet from CallPropertiesCreator.
-func NewClientSet(c CallPropertiesCreator) *ClientSet {
+func NewClientSet(c *Config) *ClientSet {
 	return &ClientSet{
 		actions:              NewActionsClient(c),
 		alerts:               NewAlertsClient(c),
@@ -271,339 +254,366 @@ func NewClientSet(c CallPropertiesCreator) *ClientSet {
 }
 
 // NewActionsClient builds a new ActionsServiceAPIService from CallPropertiesCreator.
-func NewActionsClient(c CallPropertiesCreator) *actions.ActionsServiceAPIService {
+func NewActionsClient(c *Config) *actions.ActionsServiceAPIService {
 	cfg := actions.NewConfiguration()
-	cfg.Servers = actions.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = actions.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return actions.NewAPIClient(cfg).ActionsServiceAPI
 }
 
 // NewAlertsClient builds a new AlertDefinitionsServiceAPIService from CallPropertiesCreator.
-func NewAlertsClient(c CallPropertiesCreator) *alerts.AlertDefinitionsServiceAPIService {
+func NewAlertsClient(c *Config) *alerts.AlertDefinitionsServiceAPIService {
 	cfg := alerts.NewConfiguration()
-	cfg.Servers = alerts.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+
+	cfg.Servers = alerts.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return alerts.NewAPIClient(cfg).AlertDefinitionsServiceAPI
 }
 
 // NewAlertSchedulerClient builds a new AlertSchedulerRuleServiceAPIService from CallPropertiesCreator.
-func NewAlertSchedulerClient(c CallPropertiesCreator) *alertscheduler.AlertSchedulerRuleServiceAPIService {
+func NewAlertSchedulerClient(c *Config) *alertscheduler.AlertSchedulerRuleServiceAPIService {
 	cfg := alertscheduler.NewConfiguration()
-	cfg.Servers = alertscheduler.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = alertscheduler.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return alertscheduler.NewAPIClient(cfg).AlertSchedulerRuleServiceAPI
 }
 
 // NewAPIKeysClient builds a new APIKeysServiceAPIService from CallPropertiesCreator.
-func NewAPIKeysClient(c CallPropertiesCreator) *apikeys.APIKeysServiceAPIService {
+func NewAPIKeysClient(c *Config) *apikeys.APIKeysServiceAPIService {
 	cfg := apikeys.NewConfiguration()
-	cfg.Servers = apikeys.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = apikeys.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return apikeys.NewAPIClient(cfg).APIKeysServiceAPI
 }
 
 // NewArchiveMetricsClient builds a new MetricsDataArchiveServiceAPIService from CallPropertiesCreator.
-func NewArchiveMetricsClient(c CallPropertiesCreator) *archivemetrics.MetricsDataArchiveServiceAPIService {
+func NewArchiveMetricsClient(c *Config) *archivemetrics.MetricsDataArchiveServiceAPIService {
 	cfg := archivemetrics.NewConfiguration()
-	cfg.Servers = archivemetrics.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = archivemetrics.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return archivemetrics.NewAPIClient(cfg).MetricsDataArchiveServiceAPI
 }
 
 // NewIPAccessClient builds a new IPAccessServiceAPIService from CallPropertiesCreator.
-func NewIPAccessClient(c CallPropertiesCreator) *ipaccess.IPAccessServiceAPIService {
+func NewIPAccessClient(c *Config) *ipaccess.IPAccessServiceAPIService {
 	cfg := ipaccess.NewConfiguration()
-	cfg.Servers = ipaccess.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = ipaccess.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return ipaccess.NewAPIClient(cfg).IPAccessServiceAPI
 }
 
 // NewConnectorsClient builds a new ConnectorsServiceAPIService from CallPropertiesCreator.
-func NewConnectorsClient(c CallPropertiesCreator) *connectors.ConnectorsServiceAPIService {
+func NewConnectorsClient(c *Config) *connectors.ConnectorsServiceAPIService {
 	cfg := connectors.NewConfiguration()
-	cfg.Servers = connectors.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = connectors.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return connectors.NewAPIClient(cfg).ConnectorsServiceAPI
 }
 
 // NewCustomRolesClient builds a new RoleManagementServiceAPIService from CallPropertiesCreator.
-func NewCustomRolesClient(c CallPropertiesCreator) *customroles.RoleManagementServiceAPIService {
+func NewCustomRolesClient(c *Config) *customroles.RoleManagementServiceAPIService {
 	cfg := customroles.NewConfiguration()
-	cfg.Servers = customroles.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = customroles.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return customroles.NewAPIClient(cfg).RoleManagementServiceAPI
 }
 
 // NewDashboardClient builds a new DashboardServiceAPIService from CallPropertiesCreator.
-func NewDashboardClient(c CallPropertiesCreator) *dashboards.DashboardServiceAPIService {
+func NewDashboardClient(c *Config) *dashboards.DashboardServiceAPIService {
 	cfg := dashboards.NewConfiguration()
-	cfg.Servers = dashboards.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = dashboards.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return dashboards.NewAPIClient(cfg).DashboardServiceAPI
 }
 
 // NewDashboardFoldersClient builds a new DashboardFoldersServiceAPIService from CallPropertiesCreator.
-func NewDashboardFoldersClient(c CallPropertiesCreator) *dashboardfolders.DashboardFoldersServiceAPIService {
+func NewDashboardFoldersClient(c *Config) *dashboardfolders.DashboardFoldersServiceAPIService {
 	cfg := dashboardfolders.NewConfiguration()
-	cfg.Servers = dashboardfolders.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = dashboardfolders.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return dashboardfolders.NewAPIClient(cfg).DashboardFoldersServiceAPI
 }
 
 // NewEnrichmentsClient builds a new EnrichmentsServiceAPIService from CallPropertiesCreator.
-func NewEnrichmentsClient(c CallPropertiesCreator) *enrichments.EnrichmentsServiceAPIService {
+func NewEnrichmentsClient(c *Config) *enrichments.EnrichmentsServiceAPIService {
 	cfg := enrichments.NewConfiguration()
-	cfg.Servers = enrichments.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = enrichments.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return enrichments.NewAPIClient(cfg).EnrichmentsServiceAPI
 }
 
 // NewEvents2MetricsClient builds a new Events2MetricsServiceAPIService from CallPropertiesCreator.
-func NewEvents2MetricsClient(c CallPropertiesCreator) *events2metrics.Events2MetricsServiceAPIService {
+func NewEvents2MetricsClient(c *Config) *events2metrics.Events2MetricsServiceAPIService {
 	cfg := events2metrics.NewConfiguration()
-	cfg.Servers = events2metrics.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = events2metrics.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return events2metrics.NewAPIClient(cfg).Events2MetricsServiceAPI
 }
 
 // NewExtensionsClient builds a new ExtensionServiceAPIService from CallPropertiesCreator.
-func NewExtensionsClient(c CallPropertiesCreator) *extensions.ExtensionServiceAPIService {
+func NewExtensionsClient(c *Config) *extensions.ExtensionServiceAPIService {
 	cfg := extensions.NewConfiguration()
-	cfg.Servers = extensions.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = extensions.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return extensions.NewAPIClient(cfg).ExtensionServiceAPI
 }
 
 // NewExtensionDeploymentsClient builds a new ExtensionDeploymentServiceAPIService from CallPropertiesCreator.
-func NewExtensionDeploymentsClient(c CallPropertiesCreator) *extensiondeployments.ExtensionDeploymentServiceAPIService {
+func NewExtensionDeploymentsClient(c *Config) *extensiondeployments.ExtensionDeploymentServiceAPIService {
 	cfg := extensiondeployments.NewConfiguration()
-	cfg.Servers = extensiondeployments.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = extensiondeployments.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return extensiondeployments.NewAPIClient(cfg).ExtensionDeploymentServiceAPI
 }
 
 // NewGroupsClient builds a new TeamPermissionsManagementServiceAPIService from CallPropertiesCreator.
-func NewGroupsClient(c CallPropertiesCreator) *groups.TeamPermissionsManagementServiceAPIService {
+func NewGroupsClient(c *Config) *groups.TeamPermissionsManagementServiceAPIService {
 	cfg := groups.NewConfiguration()
-	cfg.Servers = groups.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = groups.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return groups.NewAPIClient(cfg).TeamPermissionsManagementServiceAPI
 }
 
 // NewIntegrationsClient builds a new IntegrationServiceAPIService from CallPropertiesCreator.
-func NewIntegrationsClient(c CallPropertiesCreator) *integrations.IntegrationServiceAPIService {
+func NewIntegrationsClient(c *Config) *integrations.IntegrationServiceAPIService {
 	cfg := integrations.NewConfiguration()
-	cfg.Servers = integrations.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = integrations.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return integrations.NewAPIClient(cfg).IntegrationServiceAPI
 }
 
 // NewGlobalRoutersClient builds a new GlobalRoutersServiceAPIService from CallPropertiesCreator.
-func NewGlobalRoutersClient(c CallPropertiesCreator) *globalrouters.GlobalRoutersServiceAPIService {
+func NewGlobalRoutersClient(c *Config) *globalrouters.GlobalRoutersServiceAPIService {
 	cfg := globalrouters.NewConfiguration()
-	cfg.Servers = globalrouters.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = globalrouters.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return globalrouters.NewAPIClient(cfg).GlobalRoutersServiceAPI
 }
 
 // NewPresetsClient builds a new PresetsServiceAPIService from CallPropertiesCreator.
-func NewPresetsClient(c CallPropertiesCreator) *presets.PresetsServiceAPIService {
+func NewPresetsClient(c *Config) *presets.PresetsServiceAPIService {
 	cfg := presets.NewConfiguration()
-	cfg.Servers = presets.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = presets.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return presets.NewAPIClient(cfg).PresetsServiceAPI
 }
 
 // NewScopesClient builds a new ScopesServiceAPIService from CallPropertiesCreator.
-func NewScopesClient(c CallPropertiesCreator) *scopes.ScopesServiceAPIService {
+func NewScopesClient(c *Config) *scopes.ScopesServiceAPIService {
 	cfg := scopes.NewConfiguration()
-	cfg.Servers = scopes.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = scopes.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return scopes.NewAPIClient(cfg).ScopesServiceAPI
 }
 
 // NewSLOsClient builds a new SlosServiceAPIService from CallPropertiesCreator.
-func NewSLOsClient(c CallPropertiesCreator) *slos.SlosServiceAPIService {
+func NewSLOsClient(c *Config) *slos.SlosServiceAPIService {
 	cfg := slos.NewConfiguration()
-	cfg.Servers = slos.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = slos.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return slos.NewAPIClient(cfg).SlosServiceAPI
 }
 
 // NewRecordingRulesClient builds a new RecordingRulesServiceAPIService from CallPropertiesCreator.
-func NewRecordingRulesClient(c CallPropertiesCreator) *recordingrules.RecordingRulesServiceAPIService {
+func NewRecordingRulesClient(c *Config) *recordingrules.RecordingRulesServiceAPIService {
 	cfg := recordingrules.NewConfiguration()
-	cfg.Servers = recordingrules.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = recordingrules.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return recordingrules.NewAPIClient(cfg).RecordingRulesServiceAPI
 }
 
 // NewRuleGroupsClient builds a new RuleGroupsServiceAPIService from CallPropertiesCreator.
-func NewRuleGroupsClient(c CallPropertiesCreator) *rulegroups.RuleGroupsServiceAPIService {
+func NewRuleGroupsClient(c *Config) *rulegroups.RuleGroupsServiceAPIService {
 	cfg := rulegroups.NewConfiguration()
-	cfg.Servers = rulegroups.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = rulegroups.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return rulegroups.NewAPIClient(cfg).RuleGroupsServiceAPI
 }
 
 // NewTCOPoliciesClient builds a new PoliciesServiceAPIService from CallPropertiesCreator.
-func NewTCOPoliciesClient(c CallPropertiesCreator) *tcopolicies.PoliciesServiceAPIService {
+func NewTCOPoliciesClient(c *Config) *tcopolicies.PoliciesServiceAPIService {
 	cfg := tcopolicies.NewConfiguration()
-	cfg.Servers = tcopolicies.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = tcopolicies.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return tcopolicies.NewAPIClient(cfg).PoliciesServiceAPI
 }
 
 // NewWebhooksClient builds a new OutgoingWebhooksServiceAPIService from CallPropertiesCreator.
-func NewWebhooksClient(c CallPropertiesCreator) *webhooks.OutgoingWebhooksServiceAPIService {
+func NewWebhooksClient(c *Config) *webhooks.OutgoingWebhooksServiceAPIService {
 	cfg := webhooks.NewConfiguration()
-	cfg.Servers = webhooks.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = webhooks.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return webhooks.NewAPIClient(cfg).OutgoingWebhooksServiceAPI
 }
 
 // NewViewsClient builds a new ViewsServiceAPIService from CallPropertiesCreator.
-func NewViewsClient(c CallPropertiesCreator) *views.ViewsServiceAPIService {
+func NewViewsClient(c *Config) *views.ViewsServiceAPIService {
 	cfg := views.NewConfiguration()
-	cfg.Servers = views.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = views.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return views.NewAPIClient(cfg).ViewsServiceAPI
 }
 
 // NewViewsFoldersClient builds a new FoldersForViewsServiceAPIService from CallPropertiesCreator.
-func NewViewsFoldersClient(c CallPropertiesCreator) *viewsfolders.FoldersForViewsServiceAPIService {
+func NewViewsFoldersClient(c *Config) *viewsfolders.FoldersForViewsServiceAPIService {
 	cfg := viewsfolders.NewConfiguration()
-	cfg.Servers = viewsfolders.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = viewsfolders.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return viewsfolders.NewAPIClient(cfg).FoldersForViewsServiceAPI
 }
 
 // NewArchiveLogsClient builds a new TargetServiceAPIService from CallPropertiesCreator.
-func NewArchiveLogsClient(c CallPropertiesCreator) *targets.TargetServiceAPIService {
+func NewArchiveLogsClient(c *Config) *targets.TargetServiceAPIService {
 	cfg := targets.NewConfiguration()
-	cfg.Servers = targets.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = targets.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return targets.NewAPIClient(cfg).TargetServiceAPI
 }
 
 // NewArchiveRetentionsClient builds a new RetentionsServiceAPIService from CallPropertiesCreator.
-func NewArchiveRetentionsClient(c CallPropertiesCreator) *archiveretention.RetentionsServiceAPIService {
+func NewArchiveRetentionsClient(c *Config) *archiveretention.RetentionsServiceAPIService {
 	cfg := archiveretention.NewConfiguration()
-	cfg.Servers = archiveretention.ServerConfigurations{{URL: c.URL()}}
-	for k, v := range c.Headers() {
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = archiveretention.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.defaultHeaders {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return archiveretention.NewAPIClient(cfg).RetentionsServiceAPI
-}
-
-// RegionFromEnv reads the Coralogix region from the environment variable.
-func RegionFromEnv() string {
-	region, ok := os.LookupEnv(envCoralogixRegion)
-	if !ok {
-		panic("Environment variable CORALOGIX_REGION is not set")
-	}
-
-	return region
-}
-
-// URLFromRegion returns the Coralogix OpenAPI URL for the given region.
-func URLFromRegion(region string) (string, bool) {
-	valid := true
-	url := url.URL{
-		Scheme: "https",
-		Path:   "mgmt/openapi/3",
-	}
-	switch strings.ToLower(region) {
-	case "eu1":
-		url.Host = "api.eu1.coralogix.com"
-	case "eu2":
-		url.Host = "api.eu2.coralogix.com"
-	case "us1":
-		url.Host = "api.us1.coralogix.com"
-	case "us2":
-		url.Host = "api.us2.coralogix.com"
-	case "ap1":
-		url.Host = "api.ap1.coralogix.com"
-	case "ap2":
-		url.Host = "api.ap2.coralogix.com"
-	case "ap3":
-		url.Host = "api.ap3.coralogix.com"
-	default:
-		valid = false
-	}
-	return url.String(), valid
-}
-
-// URLFromDomain returns the Coralogix OpenAPI URL for the given custom domain.
-func URLFromDomain(domain string) string {
-	url := url.URL{
-		Scheme: "https",
-		Path:   "mgmt/openapi/3",
-		Host:   domain,
-	}
-	return url.String()
-}
-
-// APIKeyFromEnv reads the Coralogix API key from the environment variable.
-func APIKeyFromEnv() string {
-	apiKey, ok := os.LookupEnv(envCoralogixAPIKey)
-	if !ok {
-		panic("Environment variable CORALOGIX_API_KEY is not set")
-	}
-
-	return apiKey
 }

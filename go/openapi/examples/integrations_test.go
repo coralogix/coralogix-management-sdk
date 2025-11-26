@@ -29,13 +29,9 @@ import (
 )
 
 func TestIntegration(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewIntegrationsClient(cfg)
 
-	client := cxsdk.NewIntegrationsClient(cpc)
 	awsRegion := os.Getenv("AWS_REGION")
 	if awsRegion == "" {
 		t.Fatalf("AWS_REGION environment variable is not set")
@@ -120,13 +116,8 @@ func TestIntegration(t *testing.T) {
 }
 
 func TestWebhooks(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
-
-	client := cxsdk.NewWebhooksClient(cpc)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewWebhooksClient(cfg)
 
 	_, httpResp, err := client.OutgoingWebhooksServiceListAllOutgoingWebhooks(context.Background()).Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))

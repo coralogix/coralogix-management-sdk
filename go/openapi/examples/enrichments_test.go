@@ -25,13 +25,8 @@ import (
 )
 
 func TestEnrichmentsGeoIp(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
-
-	client := cxsdk.NewEnrichmentsClient(cpc)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewEnrichmentsClient(cfg)
 
 	enrichmentType := enrichments.EnrichmentType{
 		EnrichmentTypeGeoIp: &enrichments.EnrichmentTypeGeoIp{
@@ -71,13 +66,8 @@ func TestEnrichmentsGeoIp(t *testing.T) {
 
 func TestEnrichmentsAws(t *testing.T) {
 	t.Skip("Skipping AWS")
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
-
-	client := cxsdk.NewEnrichmentsClient(cpc)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewEnrichmentsClient(cfg)
 
 	enrichmentType := enrichments.EnrichmentType{
 		EnrichmentTypeAws: &enrichments.EnrichmentTypeAws{
@@ -110,13 +100,8 @@ func TestEnrichmentsAws(t *testing.T) {
 
 func TestEnrichmentsCustom(t *testing.T) {
 	t.Skip("Skipping Custom")
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
-
-	client := cxsdk.NewEnrichmentsClient(cpc)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewEnrichmentsClient(cfg)
 
 	enrichmentType := enrichments.EnrichmentType{
 		EnrichmentTypeCustomEnrichment: &enrichments.EnrichmentTypeCustomEnrichment{
@@ -146,13 +131,9 @@ func TestEnrichmentsCustom(t *testing.T) {
 }
 
 func TestEnrichmentsSuspiciousIp(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewEnrichmentsClient(cfg)
 
-	client := cxsdk.NewEnrichmentsClient(cpc)
 	enrichmentType := enrichments.EnrichmentType{
 		EnrichmentTypeSuspiciousIp: &enrichments.EnrichmentTypeSuspiciousIp{
 			SuspiciousIp: map[string]interface{}{},

@@ -12,13 +12,9 @@ import (
 
 func TestE2MsLogsQuery(t *testing.T) {
 	t.Skip("The API does not return the discriminating field for aggregations, and therefore we cannot deserialize the payload into any of the variants.")
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewEvents2MetricsClient(cfg)
 
-	client := cxsdk.NewEvents2MetricsClient(cpc)
 	description := "E2M Logs Query created by E2M logs query test"
 	luceneQuery := "remote_addr_enriched:/.*/"
 	geoLocationMetricName1 := "geo_point"

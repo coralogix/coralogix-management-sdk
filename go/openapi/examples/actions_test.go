@@ -27,13 +27,8 @@ import (
 )
 
 func TestActions(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
-
-	client := cxsdk.NewActionsClient(cpc)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewActionsClient(cfg)
 
 	name := "google search action " + strconv.FormatInt(time.Now().UnixMilli(), 10)
 	url := "https://www.google.com/search?q={{$p.selected_value}}"

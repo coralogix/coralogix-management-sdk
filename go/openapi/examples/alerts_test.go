@@ -271,13 +271,9 @@ func CreateFlowAlert(alertId string) *alerts.AlertDefPropertiesFlow {
 }
 
 func TestTracingImmediateAlerts(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewAlertsClient(cfg)
 
-	client := cxsdk.NewAlertsClient(cpc)
 	ctx := context.Background()
 
 	createReq := alerts.CreateAlertDefinitionRequest{
@@ -334,13 +330,9 @@ func TestTracingImmediateAlerts(t *testing.T) {
 }
 
 func TestLogsRatioAlerts(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewAlertsClient(cfg)
 
-	client := cxsdk.NewAlertsClient(cpc)
 	ctx := context.Background()
 
 	createReq := alerts.CreateAlertDefinitionRequest{
@@ -397,13 +389,9 @@ func TestLogsRatioAlerts(t *testing.T) {
 }
 
 func TestTracingThresholdAlerts(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewAlertsClient(cfg)
 
-	client := cxsdk.NewAlertsClient(cpc)
 	ctx := context.Background()
 
 	createReq := alerts.CreateAlertDefinitionRequest{
@@ -460,13 +448,9 @@ func TestTracingThresholdAlerts(t *testing.T) {
 }
 
 func TestFlowAlerts(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewAlertsClient(cfg)
 
-	client := cxsdk.NewAlertsClient(cpc)
 	ctx := context.Background()
 
 	// First create a tracing threshold alert to be used in the flow
@@ -543,14 +527,12 @@ func TestFlowAlerts(t *testing.T) {
 }
 
 func TestSloAlerts(t *testing.T) {
-	ctx := context.Background()
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	clientSet := cxsdk.NewClientSet(cfg)
 
-	sloClient := cxsdk.NewClientSet(cpc).SLOs()
+	ctx := context.Background()
+
+	sloClient := clientSet.SLOs()
 	sloPayload := getRequestBasedSlo("example_slo_for_alert")
 
 	createSloReq := slos.SlosServiceCreateSloRequest{
@@ -564,7 +546,7 @@ func TestSloAlerts(t *testing.T) {
 	sloID := sloResp.GetSlo().SloRequestBasedMetricSli.GetId()
 	require.NotEmpty(t, sloID)
 
-	alertsClient := cxsdk.NewAlertsClient(cpc)
+	alertsClient := clientSet.Alerts()
 	createAlertReq := alerts.CreateAlertDefinitionRequest{
 		AlertDefProperties: &alerts.AlertDefProperties{
 			AlertDefPropertiesSloThreshold: CreateBurnRateSloAlert(sloID),
@@ -625,15 +607,12 @@ func TestSloAlerts(t *testing.T) {
 }
 
 func TestAlertScheduler(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	clientSet := cxsdk.NewClientSet(cfg)
 
 	ctx := context.Background()
 
-	alertsClient := cxsdk.NewAlertsClient(cpc)
+	alertsClient := clientSet.Alerts()
 	createAlertReq := alerts.CreateAlertDefinitionRequest{
 		AlertDefProperties: &alerts.AlertDefProperties{
 			AlertDefPropertiesTracingImmediate: CreateTracingImmediateAlert(),
@@ -647,7 +626,7 @@ func TestAlertScheduler(t *testing.T) {
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.NotEmpty(t, createdAlert.AlertDef.Id)
 
-	schedulerClient := cxsdk.NewAlertSchedulerClient(cpc)
+	schedulerClient := clientSet.AlertScheduler()
 
 	name := "Scheduler Test " + time.Now().Format(time.RFC3339)
 	enabled := true

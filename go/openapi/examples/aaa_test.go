@@ -33,13 +33,8 @@ import (
 )
 
 func TestApiKeys(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
-
-	client := cxsdk.NewAPIKeysClient(cpc)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewAPIKeysClient(cfg)
 
 	teamIDEnv := os.Getenv("TEAM_ID")
 	if teamIDEnv == "" {
@@ -88,16 +83,10 @@ func TestApiKeys(t *testing.T) {
 }
 
 func TestIpAccess(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewIPAccessClient(cfg)
 
 	enabled := false
-
-	client := cxsdk.NewIPAccessClient(cpc)
-
 	ipRange1 := "31.154.215.114/32"
 	ipRange2 := "198.51.100.0/24"
 	// replace without ID, so it will create a new settings in case it doesn't exist
@@ -170,15 +159,10 @@ func TestIpAccess(t *testing.T) {
 }
 
 func TestGroups(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewGroupsClient(cfg)
 
-	client := cxsdk.NewGroupsClient(cpc)
 	ctx := context.Background()
-
 	teamIDEnv := os.Getenv("TEAM_ID")
 	if teamIDEnv == "" {
 		t.Fatal("TEAM_ID environment variable is not set")
@@ -237,15 +221,10 @@ func TestGroups(t *testing.T) {
 }
 
 func TestCustomRoles(t *testing.T) {
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewCustomRolesClient(cfg)
 
-	client := cxsdk.NewCustomRolesClient(cpc)
 	ctx := context.Background()
-
 	teamIDEnv := os.Getenv("TEAM_ID")
 	if teamIDEnv == "" {
 		t.Fatal("TEAM_ID environment variable is not set")
@@ -303,16 +282,10 @@ func TestCustomRoles(t *testing.T) {
 }
 
 func TestScopes(t *testing.T) {
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewScopesClient(cfg)
+
 	ctx := context.Background()
-
-	region, _ := cxsdk.URLFromRegion(cxsdk.RegionFromEnv())
-	cpc := cxsdk.NewSDKCallPropertiesCreator(
-		region,
-		cxsdk.APIKeyFromEnv(),
-	)
-
-	client := cxsdk.NewScopesClient(cpc)
-
 	description := "Data Access Rule intended for testing"
 	defaultExpr := "<v1>true"
 	createReq := scopes.CreateScopeRequest{
