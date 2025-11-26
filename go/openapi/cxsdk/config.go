@@ -16,6 +16,8 @@ package cxsdk
 
 import (
 	"fmt"
+	"log/slog"
+	"net/http"
 	gourl "net/url"
 	"os"
 	"runtime"
@@ -27,22 +29,22 @@ import (
 // Config holds the configuration for the Coralogix OpenAPI SDK.
 type Config struct {
 	url            string
-	logHTTP        bool
 	defaultHeaders map[string]string
+	httpClient     *http.Client
 }
 
 // ConfigBuilder is used to build a Config.
 type ConfigBuilder struct {
 	apiKey     string
 	url        string
-	logHTTP    bool
 	versionTag string
+	logger     *slog.Logger
 }
 
 // NewConfigBuilder creates a new ConfigBuilder with default vanilla SDK version tag.
 func NewConfigBuilder() *ConfigBuilder {
 	return &ConfigBuilder{
-		versionTag: vanillaSdkVersion,
+		versionTag: "sdk-" + vanillaSdkVersion,
 	}
 }
 
@@ -108,12 +110,6 @@ func (b *ConfigBuilder) WithURLEnv() *ConfigBuilder {
 	return b.WithURL(url)
 }
 
-// WithHTTPLogging enables HTTP logging for the ConfigBuilder.
-func (b *ConfigBuilder) WithHTTPLogging() *ConfigBuilder {
-	b.logHTTP = true
-	return b
-}
-
 // WithTerraformVersion sets the version tag to the Terraform provider version.
 func (b *ConfigBuilder) WithTerraformVersion(version string) *ConfigBuilder {
 	if version == "" {
@@ -132,6 +128,22 @@ func (b *ConfigBuilder) WithOperatorVersion(version string) *ConfigBuilder {
 	return b
 }
 
+// WithDefaultLogger sets a default JSON logger for the ConfigBuilder.
+func (b *ConfigBuilder) WithDefaultLogger() *ConfigBuilder {
+	b.logger = slog.New(
+		slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
+			Level: slog.LevelDebug,
+		}),
+	)
+	return b
+}
+
+// WithLogger sets a custom logger for the ConfigBuilder.
+func (b *ConfigBuilder) WithLogger(logger *slog.Logger) *ConfigBuilder {
+	b.logger = logger
+	return b
+}
+
 // Build builds the Config.
 func (b *ConfigBuilder) Build() *Config {
 	defaultHeaders := map[string]string{
@@ -142,10 +154,18 @@ func (b *ConfigBuilder) Build() *Config {
 		sdkCorrelationIDHeaderName: uuid.New().String(),
 	}
 
+	var httpClient *http.Client
+
+	if b.logger != nil {
+		httpClient = &http.Client{
+			Transport: NewLoggingTransport(b.logger),
+		}
+	}
+
 	return &Config{
 		url:            b.url,
-		logHTTP:        b.logHTTP,
 		defaultHeaders: defaultHeaders,
+		httpClient:     httpClient,
 	}
 }
 

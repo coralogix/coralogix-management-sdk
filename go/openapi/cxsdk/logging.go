@@ -6,7 +6,6 @@ import (
 	"io"
 	"log/slog"
 	"net/http"
-	"os"
 )
 
 // LoggingTransport logs HTTP requests and responses.
@@ -15,10 +14,7 @@ type LoggingTransport struct {
 }
 
 // NewLoggingTransport creates a new LoggingTransport.
-func NewLoggingTransport() *LoggingTransport {
-	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
-		Level: slog.LevelDebug,
-	}))
+func NewLoggingTransport(logger *slog.Logger) *LoggingTransport {
 	return &LoggingTransport{logger: logger}
 }
 

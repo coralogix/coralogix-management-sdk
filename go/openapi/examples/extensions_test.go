@@ -14,7 +14,7 @@ import (
 
 func TestExtensions(t *testing.T) {
 	t.Skip("Unstable test")
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	clientSet := cxsdk.NewClientSet(cfg)
 	extensionsClient := clientSet.Extensions()
 	deployClient := clientSet.ExtensionDeployments()

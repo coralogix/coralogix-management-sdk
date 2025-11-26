@@ -31,7 +31,7 @@ func TestArchiveLogs(t *testing.T) {
 	if logsBucket == "" || awsRegion == "" {
 		t.Fatalf("LOGS_BUCKET or AWS_REGION environment variable are not set")
 	}
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	client := cxsdk.NewArchiveLogsClient(cfg)
 
 	setTargetReq := targets.SetTargetResponse{

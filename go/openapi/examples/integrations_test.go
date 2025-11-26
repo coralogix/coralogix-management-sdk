@@ -29,7 +29,7 @@ import (
 )
 
 func TestIntegration(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	client := cxsdk.NewIntegrationsClient(cfg)
 
 	awsRegion := os.Getenv("AWS_REGION")
@@ -116,7 +116,7 @@ func TestIntegration(t *testing.T) {
 }
 
 func TestWebhooks(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	client := cxsdk.NewWebhooksClient(cfg)
 
 	_, httpResp, err := client.OutgoingWebhooksServiceListAllOutgoingWebhooks(context.Background()).Execute()

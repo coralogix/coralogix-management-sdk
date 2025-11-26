@@ -27,7 +27,7 @@ import (
 
 func TestSLOs(t *testing.T) {
 	ctx := context.Background()
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	client := cxsdk.NewSLOsClient(cfg)
 
 	sloName := "example_slo_" + uuid.NewString()

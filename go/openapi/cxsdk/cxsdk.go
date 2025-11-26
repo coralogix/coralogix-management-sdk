@@ -15,8 +15,6 @@
 package cxsdk
 
 import (
-	"net/http"
-
 	actions "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/actions_service"
 	alerts "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/alert_definitions_service"
 	alertscheduler "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/alert_scheduler_rule_service"
@@ -258,10 +256,8 @@ func NewClientSet(c *Config) *ClientSet {
 // NewActionsClient builds a new ActionsServiceAPIService from CallPropertiesCreator.
 func NewActionsClient(c *Config) *actions.ActionsServiceAPIService {
 	cfg := actions.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = actions.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -273,10 +269,8 @@ func NewActionsClient(c *Config) *actions.ActionsServiceAPIService {
 // NewAlertsClient builds a new AlertDefinitionsServiceAPIService from CallPropertiesCreator.
 func NewAlertsClient(c *Config) *alerts.AlertDefinitionsServiceAPIService {
 	cfg := alerts.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 
 	cfg.Servers = alerts.ServerConfigurations{{URL: c.url}}
@@ -289,10 +283,8 @@ func NewAlertsClient(c *Config) *alerts.AlertDefinitionsServiceAPIService {
 // NewAlertSchedulerClient builds a new AlertSchedulerRuleServiceAPIService from CallPropertiesCreator.
 func NewAlertSchedulerClient(c *Config) *alertscheduler.AlertSchedulerRuleServiceAPIService {
 	cfg := alertscheduler.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = alertscheduler.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -304,10 +296,8 @@ func NewAlertSchedulerClient(c *Config) *alertscheduler.AlertSchedulerRuleServic
 // NewAPIKeysClient builds a new APIKeysServiceAPIService from CallPropertiesCreator.
 func NewAPIKeysClient(c *Config) *apikeys.APIKeysServiceAPIService {
 	cfg := apikeys.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = apikeys.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -319,10 +309,8 @@ func NewAPIKeysClient(c *Config) *apikeys.APIKeysServiceAPIService {
 // NewArchiveMetricsClient builds a new MetricsDataArchiveServiceAPIService from CallPropertiesCreator.
 func NewArchiveMetricsClient(c *Config) *archivemetrics.MetricsDataArchiveServiceAPIService {
 	cfg := archivemetrics.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = archivemetrics.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -334,10 +322,8 @@ func NewArchiveMetricsClient(c *Config) *archivemetrics.MetricsDataArchiveServic
 // NewIPAccessClient builds a new IPAccessServiceAPIService from CallPropertiesCreator.
 func NewIPAccessClient(c *Config) *ipaccess.IPAccessServiceAPIService {
 	cfg := ipaccess.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = ipaccess.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -349,10 +335,8 @@ func NewIPAccessClient(c *Config) *ipaccess.IPAccessServiceAPIService {
 // NewConnectorsClient builds a new ConnectorsServiceAPIService from CallPropertiesCreator.
 func NewConnectorsClient(c *Config) *connectors.ConnectorsServiceAPIService {
 	cfg := connectors.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = connectors.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -364,10 +348,8 @@ func NewConnectorsClient(c *Config) *connectors.ConnectorsServiceAPIService {
 // NewCustomRolesClient builds a new RoleManagementServiceAPIService from CallPropertiesCreator.
 func NewCustomRolesClient(c *Config) *customroles.RoleManagementServiceAPIService {
 	cfg := customroles.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = customroles.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -379,10 +361,8 @@ func NewCustomRolesClient(c *Config) *customroles.RoleManagementServiceAPIServic
 // NewDashboardClient builds a new DashboardServiceAPIService from CallPropertiesCreator.
 func NewDashboardClient(c *Config) *dashboards.DashboardServiceAPIService {
 	cfg := dashboards.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = dashboards.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -394,10 +374,8 @@ func NewDashboardClient(c *Config) *dashboards.DashboardServiceAPIService {
 // NewDashboardFoldersClient builds a new DashboardFoldersServiceAPIService from CallPropertiesCreator.
 func NewDashboardFoldersClient(c *Config) *dashboardfolders.DashboardFoldersServiceAPIService {
 	cfg := dashboardfolders.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = dashboardfolders.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -409,10 +387,8 @@ func NewDashboardFoldersClient(c *Config) *dashboardfolders.DashboardFoldersServ
 // NewEnrichmentsClient builds a new EnrichmentsServiceAPIService from CallPropertiesCreator.
 func NewEnrichmentsClient(c *Config) *enrichments.EnrichmentsServiceAPIService {
 	cfg := enrichments.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = enrichments.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -424,10 +400,8 @@ func NewEnrichmentsClient(c *Config) *enrichments.EnrichmentsServiceAPIService {
 // NewEvents2MetricsClient builds a new Events2MetricsServiceAPIService from CallPropertiesCreator.
 func NewEvents2MetricsClient(c *Config) *events2metrics.Events2MetricsServiceAPIService {
 	cfg := events2metrics.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = events2metrics.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -439,10 +413,8 @@ func NewEvents2MetricsClient(c *Config) *events2metrics.Events2MetricsServiceAPI
 // NewExtensionsClient builds a new ExtensionServiceAPIService from CallPropertiesCreator.
 func NewExtensionsClient(c *Config) *extensions.ExtensionServiceAPIService {
 	cfg := extensions.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = extensions.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -454,10 +426,8 @@ func NewExtensionsClient(c *Config) *extensions.ExtensionServiceAPIService {
 // NewExtensionDeploymentsClient builds a new ExtensionDeploymentServiceAPIService from CallPropertiesCreator.
 func NewExtensionDeploymentsClient(c *Config) *extensiondeployments.ExtensionDeploymentServiceAPIService {
 	cfg := extensiondeployments.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = extensiondeployments.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -469,10 +439,8 @@ func NewExtensionDeploymentsClient(c *Config) *extensiondeployments.ExtensionDep
 // NewGroupsClient builds a new TeamPermissionsManagementServiceAPIService from CallPropertiesCreator.
 func NewGroupsClient(c *Config) *groups.TeamPermissionsManagementServiceAPIService {
 	cfg := groups.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = groups.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -484,10 +452,8 @@ func NewGroupsClient(c *Config) *groups.TeamPermissionsManagementServiceAPIServi
 // NewIntegrationsClient builds a new IntegrationServiceAPIService from CallPropertiesCreator.
 func NewIntegrationsClient(c *Config) *integrations.IntegrationServiceAPIService {
 	cfg := integrations.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = integrations.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -499,10 +465,8 @@ func NewIntegrationsClient(c *Config) *integrations.IntegrationServiceAPIService
 // NewGlobalRoutersClient builds a new GlobalRoutersServiceAPIService from CallPropertiesCreator.
 func NewGlobalRoutersClient(c *Config) *globalrouters.GlobalRoutersServiceAPIService {
 	cfg := globalrouters.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = globalrouters.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -514,10 +478,8 @@ func NewGlobalRoutersClient(c *Config) *globalrouters.GlobalRoutersServiceAPISer
 // NewPresetsClient builds a new PresetsServiceAPIService from CallPropertiesCreator.
 func NewPresetsClient(c *Config) *presets.PresetsServiceAPIService {
 	cfg := presets.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = presets.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -529,10 +491,8 @@ func NewPresetsClient(c *Config) *presets.PresetsServiceAPIService {
 // NewScopesClient builds a new ScopesServiceAPIService from CallPropertiesCreator.
 func NewScopesClient(c *Config) *scopes.ScopesServiceAPIService {
 	cfg := scopes.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = scopes.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -544,10 +504,8 @@ func NewScopesClient(c *Config) *scopes.ScopesServiceAPIService {
 // NewSLOsClient builds a new SlosServiceAPIService from CallPropertiesCreator.
 func NewSLOsClient(c *Config) *slos.SlosServiceAPIService {
 	cfg := slos.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = slos.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -559,10 +517,8 @@ func NewSLOsClient(c *Config) *slos.SlosServiceAPIService {
 // NewRecordingRulesClient builds a new RecordingRulesServiceAPIService from CallPropertiesCreator.
 func NewRecordingRulesClient(c *Config) *recordingrules.RecordingRulesServiceAPIService {
 	cfg := recordingrules.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = recordingrules.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -574,10 +530,8 @@ func NewRecordingRulesClient(c *Config) *recordingrules.RecordingRulesServiceAPI
 // NewRuleGroupsClient builds a new RuleGroupsServiceAPIService from CallPropertiesCreator.
 func NewRuleGroupsClient(c *Config) *rulegroups.RuleGroupsServiceAPIService {
 	cfg := rulegroups.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = rulegroups.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -589,10 +543,8 @@ func NewRuleGroupsClient(c *Config) *rulegroups.RuleGroupsServiceAPIService {
 // NewTCOPoliciesClient builds a new PoliciesServiceAPIService from CallPropertiesCreator.
 func NewTCOPoliciesClient(c *Config) *tcopolicies.PoliciesServiceAPIService {
 	cfg := tcopolicies.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = tcopolicies.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -604,10 +556,8 @@ func NewTCOPoliciesClient(c *Config) *tcopolicies.PoliciesServiceAPIService {
 // NewWebhooksClient builds a new OutgoingWebhooksServiceAPIService from CallPropertiesCreator.
 func NewWebhooksClient(c *Config) *webhooks.OutgoingWebhooksServiceAPIService {
 	cfg := webhooks.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = webhooks.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -619,10 +569,8 @@ func NewWebhooksClient(c *Config) *webhooks.OutgoingWebhooksServiceAPIService {
 // NewViewsClient builds a new ViewsServiceAPIService from CallPropertiesCreator.
 func NewViewsClient(c *Config) *views.ViewsServiceAPIService {
 	cfg := views.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = views.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -634,10 +582,8 @@ func NewViewsClient(c *Config) *views.ViewsServiceAPIService {
 // NewViewsFoldersClient builds a new FoldersForViewsServiceAPIService from CallPropertiesCreator.
 func NewViewsFoldersClient(c *Config) *viewsfolders.FoldersForViewsServiceAPIService {
 	cfg := viewsfolders.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = viewsfolders.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -649,10 +595,8 @@ func NewViewsFoldersClient(c *Config) *viewsfolders.FoldersForViewsServiceAPISer
 // NewArchiveLogsClient builds a new TargetServiceAPIService from CallPropertiesCreator.
 func NewArchiveLogsClient(c *Config) *targets.TargetServiceAPIService {
 	cfg := targets.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = targets.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {
@@ -664,10 +608,8 @@ func NewArchiveLogsClient(c *Config) *targets.TargetServiceAPIService {
 // NewArchiveRetentionsClient builds a new RetentionsServiceAPIService from CallPropertiesCreator.
 func NewArchiveRetentionsClient(c *Config) *archiveretention.RetentionsServiceAPIService {
 	cfg := archiveretention.NewConfiguration()
-	if c.logHTTP {
-		cfg.HTTPClient = &http.Client{
-			Transport: NewLoggingTransport(),
-		}
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = archiveretention.ServerConfigurations{{URL: c.url}}
 	for k, v := range c.defaultHeaders {

@@ -27,7 +27,7 @@ import (
 
 func TestPolicies(t *testing.T) {
 	ctx := context.Background()
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	client := cxsdk.NewTCOPoliciesClient(cfg)
 
 	policyName := "Example tco_policy from SDK" + uuid.NewString()

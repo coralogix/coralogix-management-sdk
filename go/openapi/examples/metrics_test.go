@@ -33,7 +33,7 @@ func TestArchiveMetrics(t *testing.T) {
 	}
 
 	ctx := context.Background()
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	client := cxsdk.NewArchiveMetricsClient(cfg)
 
 	s3Config := metrics.S3Config{

@@ -30,7 +30,7 @@ import (
 )
 
 func TestHttpsConnector(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	client := cxsdk.NewConnectorsClient(cfg)
 
 	name := fmt.Sprintf("TestConnector-%v", uuid.NewString())
@@ -59,7 +59,7 @@ func TestHttpsConnector(t *testing.T) {
 }
 
 func TestSlackConnector(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	client := cxsdk.NewConnectorsClient(cfg)
 
 	connector := connectors.Connector{
@@ -112,7 +112,7 @@ func TestSlackConnector(t *testing.T) {
 }
 
 func TestPagerdutyConnector(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	client := cxsdk.NewConnectorsClient(cfg)
 
 	connector := connectors.Connector{
@@ -163,7 +163,7 @@ func TestPagerdutyConnector(t *testing.T) {
 }
 
 func TestHttpsPreset(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	client := cxsdk.NewPresetsClient(cfg)
 
 	name := fmt.Sprintf("TestGoHttpsPreset-%v", uuid.NewString())
@@ -206,7 +206,7 @@ func TestHttpsPreset(t *testing.T) {
 }
 
 func TestSlackPreset(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	client := cxsdk.NewPresetsClient(cfg)
 
 	name := fmt.Sprintf("TestGoSlackPreset-%v", uuid.NewString())
@@ -283,7 +283,7 @@ func TestSlackPreset(t *testing.T) {
 }
 
 func TestPagerdutyPreset(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	client := cxsdk.NewPresetsClient(cfg)
 
 	name := fmt.Sprintf("TestPagerDutyPreset-%v", uuid.NewString())
@@ -356,7 +356,7 @@ func TestPagerdutyPreset(t *testing.T) {
 }
 
 func TestGlobalRouter(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	clientSet := cxsdk.NewClientSet(cfg)
 
 	routersClient := clientSet.GlobalRouters()

@@ -271,7 +271,7 @@ func CreateFlowAlert(alertId string) *alerts.AlertDefPropertiesFlow {
 }
 
 func TestTracingImmediateAlerts(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	client := cxsdk.NewAlertsClient(cfg)
 
 	ctx := context.Background()
@@ -330,7 +330,7 @@ func TestTracingImmediateAlerts(t *testing.T) {
 }
 
 func TestLogsRatioAlerts(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	client := cxsdk.NewAlertsClient(cfg)
 
 	ctx := context.Background()
@@ -389,7 +389,7 @@ func TestLogsRatioAlerts(t *testing.T) {
 }
 
 func TestTracingThresholdAlerts(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	client := cxsdk.NewAlertsClient(cfg)
 
 	ctx := context.Background()
@@ -448,7 +448,7 @@ func TestTracingThresholdAlerts(t *testing.T) {
 }
 
 func TestFlowAlerts(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	client := cxsdk.NewAlertsClient(cfg)
 
 	ctx := context.Background()
@@ -527,7 +527,7 @@ func TestFlowAlerts(t *testing.T) {
 }
 
 func TestSloAlerts(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	clientSet := cxsdk.NewClientSet(cfg)
 
 	ctx := context.Background()
@@ -607,7 +607,7 @@ func TestSloAlerts(t *testing.T) {
 }
 
 func TestAlertScheduler(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().WithHTTPLogging().Build()
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	clientSet := cxsdk.NewClientSet(cfg)
 
 	ctx := context.Background()
