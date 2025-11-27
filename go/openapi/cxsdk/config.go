@@ -128,6 +128,15 @@ func (b *ConfigBuilder) WithOperatorVersion(version string) *ConfigBuilder {
 	return b
 }
 
+// WithVersion sets a generic version tag passed from the caller.
+func (b *ConfigBuilder) WithVersion(version string) *ConfigBuilder {
+	if version == "" {
+		panic("version is empty")
+	}
+	b.versionTag = version
+	return b
+}
+
 // WithDefaultLogger sets a default JSON logger for the ConfigBuilder.
 func (b *ConfigBuilder) WithDefaultLogger() *ConfigBuilder {
 	b.logger = slog.New(
