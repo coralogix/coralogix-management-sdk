@@ -2,11 +2,27 @@ package cxsdk
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"io"
 	"log/slog"
 	"net/http"
 )
+
+type ctxHeadersKey struct{}
+
+func WithDynamicHeaders(ctx context.Context, headers map[string]string) context.Context {
+	return context.WithValue(ctx, ctxHeadersKey{}, headers)
+}
+
+func dynamicHeadersFromContext(ctx context.Context) map[string]string {
+	if v := ctx.Value(ctxHeadersKey{}); v != nil {
+		if h, ok := v.(map[string]string); ok {
+			return h
+		}
+	}
+	return nil
+}
 
 // LoggingTransport logs HTTP requests and responses.
 type LoggingTransport struct {
@@ -20,6 +36,12 @@ func NewLoggingTransport(logger *slog.Logger) *LoggingTransport {
 
 // RoundTrip implements the http.RoundTripper interface.
 func (t *LoggingTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+	if dh := dynamicHeadersFromContext(req.Context()); dh != nil {
+		for k, v := range dh {
+			req.Header.Set(k, v)
+		}
+	}
+
 	var reqBody []byte
 	if req.Body != nil {
 		reqBody, _ = io.ReadAll(req.Body)
