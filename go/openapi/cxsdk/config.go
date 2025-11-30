@@ -28,30 +28,47 @@ import (
 
 // Config holds the configuration for the Coralogix OpenAPI SDK.
 type Config struct {
-	url            string
-	defaultHeaders map[string]string
-	httpClient     *http.Client
+	url        string
+	headers    map[string]string
+	httpClient *http.Client
 }
 
 // ConfigBuilder is used to build a Config.
 type ConfigBuilder struct {
-	apiKey     string
-	url        string
-	versionTag string
-	logger     *slog.Logger
+	url     string
+	headers map[string]string
+	logger  *slog.Logger
 }
 
 // NewConfigBuilder creates a new ConfigBuilder with default vanilla SDK version tag.
 func NewConfigBuilder() *ConfigBuilder {
 	return &ConfigBuilder{
-		versionTag: "sdk-" + vanillaSdkVersion,
+		headers: map[string]string{
+			sdkVersionHeaderName:       "sdk-" + vanillaSdkVersion,
+			sdkLanguageHeaderName:      "go",
+			sdkGoVersionHeaderName:     runtime.Version(),
+			sdkCorrelationIDHeaderName: uuid.New().String(),
+		},
 	}
+}
+
+// WithHeader adds a custom header to the ConfigBuilder.
+func (b *ConfigBuilder) WithHeader(key, value string) *ConfigBuilder {
+	b.headers[key] = value
+	return b
+}
+
+// WithHeaders adds multiple custom headers to the ConfigBuilder.
+func (b *ConfigBuilder) WithHeaders(headers map[string]string) *ConfigBuilder {
+	for k, v := range headers {
+		b.WithHeader(k, v)
+	}
+	return b
 }
 
 // WithAPIKey sets the API key for the ConfigBuilder.
 func (b *ConfigBuilder) WithAPIKey(apiKey string) *ConfigBuilder {
-	b.apiKey = apiKey
-	return b
+	return b.WithHeader(authorizationHeaderName, fmt.Sprintf("Bearer %s", apiKey))
 }
 
 // WithAPIKeyEnv sets the API key from the CORALOGIX_API_KEY environment variable.
@@ -61,6 +78,30 @@ func (b *ConfigBuilder) WithAPIKeyEnv() *ConfigBuilder {
 		panic("Environment variable CORALOGIX_API_KEY is not set")
 	}
 	return b.WithAPIKey(apiKey)
+}
+
+// WithVersion sets a generic version tag passed from the caller.
+func (b *ConfigBuilder) WithVersion(version string) *ConfigBuilder {
+	if version == "" {
+		panic("version is empty")
+	}
+	return b.WithHeader(sdkVersionHeaderName, version)
+}
+
+// WithTerraformVersion sets the version tag to the Terraform provider version.
+func (b *ConfigBuilder) WithTerraformVersion(version string) *ConfigBuilder {
+	if version == "" {
+		panic("Terraform version is empty")
+	}
+	return b.WithVersion("terraform-" + version)
+}
+
+// WithOperatorVersion sets the version tag to the Operator version.
+func (b *ConfigBuilder) WithOperatorVersion(version string) *ConfigBuilder {
+	if version == "" {
+		panic("Operator version is empty")
+	}
+	return b.WithVersion("cxo-" + version)
 }
 
 // WithRegion sets the region for the ConfigBuilder.
@@ -97,6 +138,9 @@ func (b *ConfigBuilder) WithDomainEnv() *ConfigBuilder {
 
 // WithURL sets the URL for the ConfigBuilder.
 func (b *ConfigBuilder) WithURL(url string) *ConfigBuilder {
+	if url == "" {
+		panic("URL is empty")
+	}
 	b.url = url
 	return b
 }
@@ -108,33 +152,6 @@ func (b *ConfigBuilder) WithURLEnv() *ConfigBuilder {
 		panic("Environment variable CORALOGIX_URL is not set")
 	}
 	return b.WithURL(url)
-}
-
-// WithTerraformVersion sets the version tag to the Terraform provider version.
-func (b *ConfigBuilder) WithTerraformVersion(version string) *ConfigBuilder {
-	if version == "" {
-		panic("Terraform version is empty")
-	}
-	b.versionTag = "terraform-" + version
-	return b
-}
-
-// WithOperatorVersion sets the version tag to the Operator version.
-func (b *ConfigBuilder) WithOperatorVersion(version string) *ConfigBuilder {
-	if version == "" {
-		panic("Operator version is empty")
-	}
-	b.versionTag = "cxo-" + version
-	return b
-}
-
-// WithVersion sets a generic version tag passed from the caller.
-func (b *ConfigBuilder) WithVersion(version string) *ConfigBuilder {
-	if version == "" {
-		panic("version is empty")
-	}
-	b.versionTag = version
-	return b
 }
 
 // WithDefaultLogger sets a default JSON logger for the ConfigBuilder.
@@ -155,16 +172,7 @@ func (b *ConfigBuilder) WithLogger(logger *slog.Logger) *ConfigBuilder {
 
 // Build builds the Config.
 func (b *ConfigBuilder) Build() *Config {
-	defaultHeaders := map[string]string{
-		"Authorization":            fmt.Sprintf("Bearer %s", b.apiKey),
-		sdkVersionHeaderName:       b.versionTag,
-		sdkLanguageHeaderName:      "go",
-		sdkGoVersionHeaderName:     runtime.Version(),
-		sdkCorrelationIDHeaderName: uuid.New().String(),
-	}
-
 	var httpClient *http.Client
-
 	if b.logger != nil {
 		httpClient = &http.Client{
 			Transport: NewLoggingTransport(b.logger),
@@ -172,9 +180,9 @@ func (b *ConfigBuilder) Build() *Config {
 	}
 
 	return &Config{
-		url:            b.url,
-		defaultHeaders: defaultHeaders,
-		httpClient:     httpClient,
+		url:        b.url,
+		headers:    b.headers,
+		httpClient: httpClient,
 	}
 }
 

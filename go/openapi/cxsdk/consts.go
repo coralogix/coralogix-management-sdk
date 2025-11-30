@@ -20,6 +20,7 @@ const (
 	envCoralogixDomain = "CORALOGIX_DOMAIN"
 	envCoralogixURL    = "CORALOGIX_URL"
 
+	authorizationHeaderName    = "Authorization"
 	sdkVersionHeaderName       = "x-cx-sdk-version"
 	sdkLanguageHeaderName      = "x-cx-sdk-language"
 	sdkGoVersionHeaderName     = "x-cx-go-version"

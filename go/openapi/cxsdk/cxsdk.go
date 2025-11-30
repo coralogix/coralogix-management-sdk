@@ -260,7 +260,7 @@ func NewActionsClient(c *Config) *actions.ActionsServiceAPIService {
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = actions.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return actions.NewAPIClient(cfg).ActionsServiceAPI
@@ -274,7 +274,7 @@ func NewAlertsClient(c *Config) *alerts.AlertDefinitionsServiceAPIService {
 	}
 
 	cfg.Servers = alerts.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return alerts.NewAPIClient(cfg).AlertDefinitionsServiceAPI
@@ -287,7 +287,7 @@ func NewAlertSchedulerClient(c *Config) *alertscheduler.AlertSchedulerRuleServic
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = alertscheduler.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return alertscheduler.NewAPIClient(cfg).AlertSchedulerRuleServiceAPI
@@ -300,7 +300,7 @@ func NewAPIKeysClient(c *Config) *apikeys.APIKeysServiceAPIService {
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = apikeys.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return apikeys.NewAPIClient(cfg).APIKeysServiceAPI
@@ -313,7 +313,7 @@ func NewArchiveMetricsClient(c *Config) *archivemetrics.MetricsDataArchiveServic
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = archivemetrics.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return archivemetrics.NewAPIClient(cfg).MetricsDataArchiveServiceAPI
@@ -326,7 +326,7 @@ func NewIPAccessClient(c *Config) *ipaccess.IPAccessServiceAPIService {
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = ipaccess.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return ipaccess.NewAPIClient(cfg).IPAccessServiceAPI
@@ -339,7 +339,7 @@ func NewConnectorsClient(c *Config) *connectors.ConnectorsServiceAPIService {
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = connectors.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return connectors.NewAPIClient(cfg).ConnectorsServiceAPI
@@ -352,7 +352,7 @@ func NewCustomRolesClient(c *Config) *customroles.RoleManagementServiceAPIServic
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = customroles.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return customroles.NewAPIClient(cfg).RoleManagementServiceAPI
@@ -365,7 +365,7 @@ func NewDashboardClient(c *Config) *dashboards.DashboardServiceAPIService {
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = dashboards.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return dashboards.NewAPIClient(cfg).DashboardServiceAPI
@@ -378,7 +378,7 @@ func NewDashboardFoldersClient(c *Config) *dashboardfolders.DashboardFoldersServ
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = dashboardfolders.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return dashboardfolders.NewAPIClient(cfg).DashboardFoldersServiceAPI
@@ -391,7 +391,7 @@ func NewEnrichmentsClient(c *Config) *enrichments.EnrichmentsServiceAPIService {
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = enrichments.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return enrichments.NewAPIClient(cfg).EnrichmentsServiceAPI
@@ -404,7 +404,7 @@ func NewEvents2MetricsClient(c *Config) *events2metrics.Events2MetricsServiceAPI
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = events2metrics.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return events2metrics.NewAPIClient(cfg).Events2MetricsServiceAPI
@@ -417,7 +417,7 @@ func NewExtensionsClient(c *Config) *extensions.ExtensionServiceAPIService {
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = extensions.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return extensions.NewAPIClient(cfg).ExtensionServiceAPI
@@ -430,7 +430,7 @@ func NewExtensionDeploymentsClient(c *Config) *extensiondeployments.ExtensionDep
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = extensiondeployments.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return extensiondeployments.NewAPIClient(cfg).ExtensionDeploymentServiceAPI
@@ -443,7 +443,7 @@ func NewGroupsClient(c *Config) *groups.TeamPermissionsManagementServiceAPIServi
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = groups.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return groups.NewAPIClient(cfg).TeamPermissionsManagementServiceAPI
@@ -456,7 +456,7 @@ func NewIntegrationsClient(c *Config) *integrations.IntegrationServiceAPIService
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = integrations.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return integrations.NewAPIClient(cfg).IntegrationServiceAPI
@@ -469,7 +469,7 @@ func NewGlobalRoutersClient(c *Config) *globalrouters.GlobalRoutersServiceAPISer
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = globalrouters.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return globalrouters.NewAPIClient(cfg).GlobalRoutersServiceAPI
@@ -482,7 +482,7 @@ func NewPresetsClient(c *Config) *presets.PresetsServiceAPIService {
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = presets.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return presets.NewAPIClient(cfg).PresetsServiceAPI
@@ -495,7 +495,7 @@ func NewScopesClient(c *Config) *scopes.ScopesServiceAPIService {
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = scopes.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return scopes.NewAPIClient(cfg).ScopesServiceAPI
@@ -508,7 +508,7 @@ func NewSLOsClient(c *Config) *slos.SlosServiceAPIService {
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = slos.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return slos.NewAPIClient(cfg).SlosServiceAPI
@@ -521,7 +521,7 @@ func NewRecordingRulesClient(c *Config) *recordingrules.RecordingRulesServiceAPI
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = recordingrules.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return recordingrules.NewAPIClient(cfg).RecordingRulesServiceAPI
@@ -534,7 +534,7 @@ func NewRuleGroupsClient(c *Config) *rulegroups.RuleGroupsServiceAPIService {
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = rulegroups.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return rulegroups.NewAPIClient(cfg).RuleGroupsServiceAPI
@@ -547,7 +547,7 @@ func NewTCOPoliciesClient(c *Config) *tcopolicies.PoliciesServiceAPIService {
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = tcopolicies.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return tcopolicies.NewAPIClient(cfg).PoliciesServiceAPI
@@ -560,7 +560,7 @@ func NewWebhooksClient(c *Config) *webhooks.OutgoingWebhooksServiceAPIService {
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = webhooks.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return webhooks.NewAPIClient(cfg).OutgoingWebhooksServiceAPI
@@ -573,7 +573,7 @@ func NewViewsClient(c *Config) *views.ViewsServiceAPIService {
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = views.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return views.NewAPIClient(cfg).ViewsServiceAPI
@@ -586,7 +586,7 @@ func NewViewsFoldersClient(c *Config) *viewsfolders.FoldersForViewsServiceAPISer
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = viewsfolders.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return viewsfolders.NewAPIClient(cfg).FoldersForViewsServiceAPI
@@ -599,7 +599,7 @@ func NewArchiveLogsClient(c *Config) *targets.TargetServiceAPIService {
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = targets.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return targets.NewAPIClient(cfg).TargetServiceAPI
@@ -612,7 +612,7 @@ func NewArchiveRetentionsClient(c *Config) *archiveretention.RetentionsServiceAP
 		cfg.HTTPClient = c.httpClient
 	}
 	cfg.Servers = archiveretention.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.defaultHeaders {
+	for k, v := range c.headers {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return archiveretention.NewAPIClient(cfg).RetentionsServiceAPI
