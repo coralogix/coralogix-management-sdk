@@ -268,6 +268,7 @@ message Dynamic {
           description: "Static URL that may contain variables using {{variable_name}} syntax"
           example: '{ "value": "https://coralogix.com/#/dashboards/{{$p.dashboardId}}?severity={{severity}}" }'
         }];
+        google.protobuf.BoolValue should_open_in_new_window = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Defines if the link action should open in a new window or current window in the browser"}];
       }
     }
 

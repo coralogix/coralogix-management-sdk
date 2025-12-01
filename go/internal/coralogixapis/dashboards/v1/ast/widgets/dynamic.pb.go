@@ -3415,12 +3415,13 @@ func (x *Dynamic_Visualization_Table_PropertyThresholds) GetMax() *wrapperspb.Do
 }
 
 type Dynamic_Visualization_PropertyLinks_LinkAction struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	Id            *v1.UUID                `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Url           *wrapperspb.StringValue `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	Id                    *v1.UUID                `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                  *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Url                   *wrapperspb.StringValue `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`
+	ShouldOpenInNewWindow *wrapperspb.BoolValue   `protobuf:"bytes,4,opt,name=should_open_in_new_window,json=shouldOpenInNewWindow,proto3" json:"should_open_in_new_window,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *Dynamic_Visualization_PropertyLinks_LinkAction) Reset() {
@@ -3470,6 +3471,13 @@ func (x *Dynamic_Visualization_PropertyLinks_LinkAction) GetName() *wrapperspb.S
 func (x *Dynamic_Visualization_PropertyLinks_LinkAction) GetUrl() *wrapperspb.StringValue {
 	if x != nil {
 		return x.Url
+	}
+	return nil
+}
+
+func (x *Dynamic_Visualization_PropertyLinks_LinkAction) GetShouldOpenInNewWindow() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.ShouldOpenInNewWindow
 	}
 	return nil
 }
@@ -3554,7 +3562,7 @@ var File_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto protoreflect.
 
 const file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDesc = "" +
 	"\n" +
-	"9com/coralogixapis/dashboards/v1/ast/widgets/dynamic.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aBcom/coralogixapis/dashboards/v1/ast/widgets/common/colors_by.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1a?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/scale.proto\x1a@com/coralogixapis/dashboards/v1/ast/widgets/common/sort_by.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/text_alignment.proto\x1aCcom/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1aFcom/coralogixapis/dashboards/v1/common/metrics_series_limit_type.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a+com/coralogixapis/dashboards/v1/types.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x85\x81\x02\n" +
+	"9com/coralogixapis/dashboards/v1/ast/widgets/dynamic.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aBcom/coralogixapis/dashboards/v1/ast/widgets/common/colors_by.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1a?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/scale.proto\x1a@com/coralogixapis/dashboards/v1/ast/widgets/common/sort_by.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/text_alignment.proto\x1aCcom/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1aFcom/coralogixapis/dashboards/v1/common/metrics_series_limit_type.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a+com/coralogixapis/dashboards/v1/types.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xba\x82\x02\n" +
 	"\aDynamic\x12\x85\x01\n" +
 	"\x05query\x18\x01 \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.QueryB3\x9aA02.A query object describing how to retrieve dataR\x05query\x12\x90\x01\n" +
 	"\n" +
@@ -3592,7 +3600,7 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDesc = "
 	"\x0fdataprime_query\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataprimeQueryB\x19\x9aA\x162\x14Dataprime query textR\x0edataprimeQuery\x12{\n" +
 	"\x0edata_mode_type\x18\x02 \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeB\x13\x9aA\x102\x0eData mode typeR\fdataModeType:7\x9aA4\n" +
 	"2*\x0eDataprimeQuery2 A Dataprime variant of the queryB\a\n" +
-	"\x05value\x1a\xbb\xe0\x01\n" +
+	"\x05value\x1a\xf0\xe1\x01\n" +
 	"\rVisualization\x12`\n" +
 	"\x05table\x18\x01 \x01(\v2H.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TableH\x00R\x05table\x12\x80\x01\n" +
 	"\x11time_series_lines\x18\x02 \x01(\v2R.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLinesH\x00R\x0ftimeSeriesLines\x12}\n" +
@@ -3664,14 +3672,15 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDesc = "
 	"\vcustom_unit\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueB\\\x9aAY2CCustom unit (requires to set unit field as 'custom' to take effect)J\x12{ \"value\": \"rpm\" }R\n" +
 	"customUnit\x12\xaf\x01\n" +
 	"\x11decimal_precision\x18\x05 \x01(\v2\x1b.google.protobuf.Int32ValueBe\x9aAb2PNumber indicating the decimal precision of the numeric values, within range 0-15J\x0e{ \"value\": 4 }R\x10decimalPrecision\x12\x88\x01\n" +
-	"\x12allow_abbreviation\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueB=\x9aA:21Whether to render numeric value with abbreviationJ\x05falseR\x11allowAbbreviation\x1a\x90\x05\n" +
+	"\x12allow_abbreviation\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueB=\x9aA:21Whether to render numeric value with abbreviationJ\x05falseR\x11allowAbbreviation\x1a\xc5\x06\n" +
 	"\rPropertyLinks\x12\x96\x01\n" +
-	"\aactions\x18\x01 \x03(\v2[.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks.LinkActionB\x1f\x9aA\x1c2\x1aCollection of link actionsR\aactions\x1a\xe5\x03\n" +
+	"\aactions\x18\x01 \x03(\v2[.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks.LinkActionB\x1f\x9aA\x1c2\x1aCollection of link actionsR\aactions\x1a\x9a\x05\n" +
 	"\n" +
 	"LinkAction\x12\x8d\x01\n" +
 	"\x02id\x18\x01 \x01(\v2%.com.coralogixapis.dashboards.v1.UUIDBV\x9aAS2\x1cUnique id of the link actionJ3{ \"value\": \"63aed974-510b-00be-bd19-c92daf56bdef\" }R\x02id\x12m\n" +
 	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB;\x9aA82\x17Name of the link actionJ\x1d{ \"value\": \"My custom link\" }R\x04name\x12\xd7\x01\n" +
-	"\x03url\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\xa6\x01\x9aA\xa2\x012DStatic URL that may contain variables using {{variable_name}} syntaxJZ{ \"value\": \"https://coralogix.com/#/dashboards/{{$p.dashboardId}}?severity={{severity}}\" }R\x03url\x1a\xda\x14\n" +
+	"\x03url\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\xa6\x01\x9aA\xa2\x012DStatic URL that may contain variables using {{variable_name}} syntaxJZ{ \"value\": \"https://coralogix.com/#/dashboards/{{$p.dashboardId}}?severity={{severity}}\" }R\x03url\x12\xb2\x01\n" +
+	"\x19should_open_in_new_window\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueB\\\x9aAY2WDefines if the link action should open in a new window or current window in the browserR\x15shouldOpenInNewWindow\x1a\xda\x14\n" +
 	"\x0fTimeSeriesLines\x12_\n" +
 	"\x0etemporal_field\x18\x01 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldR\rtemporalField\x12[\n" +
 	"\fvalue_fields\x18\x02 \x03(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldR\vvalueFields\x12a\n" +
@@ -4244,16 +4253,17 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_depIdxs = []i
 	64,  // 217: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks.LinkAction.id:type_name -> com.coralogixapis.dashboards.v1.UUID
 	51,  // 218: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks.LinkAction.name:type_name -> google.protobuf.StringValue
 	51,  // 219: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks.LinkAction.url:type_name -> google.protobuf.StringValue
-	5,   // 220: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition.label_source:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelSource
-	53,  // 221: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition.is_visible:type_name -> google.protobuf.BoolValue
-	53,  // 222: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition.show_name:type_name -> google.protobuf.BoolValue
-	53,  // 223: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition.show_value:type_name -> google.protobuf.BoolValue
-	53,  // 224: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition.show_percentage:type_name -> google.protobuf.BoolValue
-	225, // [225:225] is the sub-list for method output_type
-	225, // [225:225] is the sub-list for method input_type
-	225, // [225:225] is the sub-list for extension type_name
-	225, // [225:225] is the sub-list for extension extendee
-	0,   // [0:225] is the sub-list for field type_name
+	53,  // 220: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks.LinkAction.should_open_in_new_window:type_name -> google.protobuf.BoolValue
+	5,   // 221: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition.label_source:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelSource
+	53,  // 222: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition.is_visible:type_name -> google.protobuf.BoolValue
+	53,  // 223: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition.show_name:type_name -> google.protobuf.BoolValue
+	53,  // 224: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition.show_value:type_name -> google.protobuf.BoolValue
+	53,  // 225: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition.show_percentage:type_name -> google.protobuf.BoolValue
+	226, // [226:226] is the sub-list for method output_type
+	226, // [226:226] is the sub-list for method input_type
+	226, // [226:226] is the sub-list for extension type_name
+	226, // [226:226] is the sub-list for extension extendee
+	0,   // [0:226] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_init() }
