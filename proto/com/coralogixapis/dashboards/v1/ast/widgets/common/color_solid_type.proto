@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.ast.widgets.common;
+
+enum ColorSolidType {
+  COLOR_SOLID_TYPE_UNSPECIFIED = 0;
+  COLOR_SOLID_TYPE_BLUE = 1;
+  COLOR_SOLID_TYPE_GREEN = 2;
+  COLOR_SOLID_TYPE_RED = 3;
+  COLOR_SOLID_TYPE_PURPLE = 4;
+}
