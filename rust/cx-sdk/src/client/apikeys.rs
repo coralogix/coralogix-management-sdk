@@ -108,6 +108,7 @@ impl ApiKeysClient {
                     presets,
                     permissions,
                 }),
+                access_policy: None,
             },
             &self.metadata_map,
         );
@@ -150,6 +151,7 @@ impl ApiKeysClient {
                 is_active,
                 presets: presets.map(|p| Presets { presets: p }),
                 permissions: permissions.map(|p| Permissions { permissions: p }),
+                access_policy: None,
             },
             &self.metadata_map,
         );
