@@ -43,4 +43,4 @@ bytes = "1.6"
 reqwest = { version = "0.12", features = ["json"] }
 cx-api = { version = "1.9.2", path = "cx-api" }
 uuid = { version = "1.10", features = ["v4", "fast-rng"] }
-tonic-types = "0.12"
+tonic-types = "0.14"
