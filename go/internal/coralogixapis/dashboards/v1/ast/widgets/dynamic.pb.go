@@ -106,73 +106,6 @@ func (Dynamic_Interpretation) EnumDescriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDescGZIP(), []int{0, 0}
 }
 
-type Dynamic_Visualization_HeatmapColorPreset int32
-
-const (
-	Dynamic_Visualization_HEATMAP_COLOR_PRESET_UNSPECIFIED        Dynamic_Visualization_HeatmapColorPreset = 0
-	Dynamic_Visualization_HEATMAP_COLOR_PRESET_BLUE               Dynamic_Visualization_HeatmapColorPreset = 1
-	Dynamic_Visualization_HEATMAP_COLOR_PRESET_GREEN              Dynamic_Visualization_HeatmapColorPreset = 2
-	Dynamic_Visualization_HEATMAP_COLOR_PRESET_RED                Dynamic_Visualization_HeatmapColorPreset = 3
-	Dynamic_Visualization_HEATMAP_COLOR_PRESET_THRESHOLD          Dynamic_Visualization_HeatmapColorPreset = 4
-	Dynamic_Visualization_HEATMAP_COLOR_PRESET_BLUE_REVERSED      Dynamic_Visualization_HeatmapColorPreset = 5
-	Dynamic_Visualization_HEATMAP_COLOR_PRESET_GREEN_REVERSED     Dynamic_Visualization_HeatmapColorPreset = 6
-	Dynamic_Visualization_HEATMAP_COLOR_PRESET_RED_REVERSED       Dynamic_Visualization_HeatmapColorPreset = 7
-	Dynamic_Visualization_HEATMAP_COLOR_PRESET_THRESHOLD_REVERSED Dynamic_Visualization_HeatmapColorPreset = 8
-)
-
-// Enum value maps for Dynamic_Visualization_HeatmapColorPreset.
-var (
-	Dynamic_Visualization_HeatmapColorPreset_name = map[int32]string{
-		0: "HEATMAP_COLOR_PRESET_UNSPECIFIED",
-		1: "HEATMAP_COLOR_PRESET_BLUE",
-		2: "HEATMAP_COLOR_PRESET_GREEN",
-		3: "HEATMAP_COLOR_PRESET_RED",
-		4: "HEATMAP_COLOR_PRESET_THRESHOLD",
-		5: "HEATMAP_COLOR_PRESET_BLUE_REVERSED",
-		6: "HEATMAP_COLOR_PRESET_GREEN_REVERSED",
-		7: "HEATMAP_COLOR_PRESET_RED_REVERSED",
-		8: "HEATMAP_COLOR_PRESET_THRESHOLD_REVERSED",
-	}
-	Dynamic_Visualization_HeatmapColorPreset_value = map[string]int32{
-		"HEATMAP_COLOR_PRESET_UNSPECIFIED":        0,
-		"HEATMAP_COLOR_PRESET_BLUE":               1,
-		"HEATMAP_COLOR_PRESET_GREEN":              2,
-		"HEATMAP_COLOR_PRESET_RED":                3,
-		"HEATMAP_COLOR_PRESET_THRESHOLD":          4,
-		"HEATMAP_COLOR_PRESET_BLUE_REVERSED":      5,
-		"HEATMAP_COLOR_PRESET_GREEN_REVERSED":     6,
-		"HEATMAP_COLOR_PRESET_RED_REVERSED":       7,
-		"HEATMAP_COLOR_PRESET_THRESHOLD_REVERSED": 8,
-	}
-)
-
-func (x Dynamic_Visualization_HeatmapColorPreset) Enum() *Dynamic_Visualization_HeatmapColorPreset {
-	p := new(Dynamic_Visualization_HeatmapColorPreset)
-	*p = x
-	return p
-}
-
-func (x Dynamic_Visualization_HeatmapColorPreset) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (Dynamic_Visualization_HeatmapColorPreset) Descriptor() protoreflect.EnumDescriptor {
-	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[1].Descriptor()
-}
-
-func (Dynamic_Visualization_HeatmapColorPreset) Type() protoreflect.EnumType {
-	return &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[1]
-}
-
-func (x Dynamic_Visualization_HeatmapColorPreset) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use Dynamic_Visualization_HeatmapColorPreset.Descriptor instead.
-func (Dynamic_Visualization_HeatmapColorPreset) EnumDescriptor() ([]byte, []int) {
-	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDescGZIP(), []int{0, 1, 0}
-}
-
 type Dynamic_Visualization_BarValueDisplay int32
 
 const (
@@ -209,11 +142,11 @@ func (x Dynamic_Visualization_BarValueDisplay) String() string {
 }
 
 func (Dynamic_Visualization_BarValueDisplay) Descriptor() protoreflect.EnumDescriptor {
-	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[2].Descriptor()
+	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[1].Descriptor()
 }
 
 func (Dynamic_Visualization_BarValueDisplay) Type() protoreflect.EnumType {
-	return &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[2]
+	return &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[1]
 }
 
 func (x Dynamic_Visualization_BarValueDisplay) Number() protoreflect.EnumNumber {
@@ -222,7 +155,7 @@ func (x Dynamic_Visualization_BarValueDisplay) Number() protoreflect.EnumNumber 
 
 // Deprecated: Use Dynamic_Visualization_BarValueDisplay.Descriptor instead.
 func (Dynamic_Visualization_BarValueDisplay) EnumDescriptor() ([]byte, []int) {
-	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDescGZIP(), []int{0, 1, 1}
+	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDescGZIP(), []int{0, 1, 0}
 }
 
 type Dynamic_Visualization_Table_FieldDataType int32
@@ -279,11 +212,11 @@ func (x Dynamic_Visualization_Table_FieldDataType) String() string {
 }
 
 func (Dynamic_Visualization_Table_FieldDataType) Descriptor() protoreflect.EnumDescriptor {
-	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[3].Descriptor()
+	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[2].Descriptor()
 }
 
 func (Dynamic_Visualization_Table_FieldDataType) Type() protoreflect.EnumType {
-	return &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[3]
+	return &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[2]
 }
 
 func (x Dynamic_Visualization_Table_FieldDataType) Number() protoreflect.EnumNumber {
@@ -328,11 +261,11 @@ func (x Dynamic_Visualization_TimeSeriesLines_StackedLine) String() string {
 }
 
 func (Dynamic_Visualization_TimeSeriesLines_StackedLine) Descriptor() protoreflect.EnumDescriptor {
-	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[4].Descriptor()
+	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[3].Descriptor()
 }
 
 func (Dynamic_Visualization_TimeSeriesLines_StackedLine) Type() protoreflect.EnumType {
-	return &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[4]
+	return &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[3]
 }
 
 func (x Dynamic_Visualization_TimeSeriesLines_StackedLine) Number() protoreflect.EnumNumber {
@@ -377,11 +310,11 @@ func (x Dynamic_Visualization_PieChart_LabelSource) String() string {
 }
 
 func (Dynamic_Visualization_PieChart_LabelSource) Descriptor() protoreflect.EnumDescriptor {
-	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[5].Descriptor()
+	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[4].Descriptor()
 }
 
 func (Dynamic_Visualization_PieChart_LabelSource) Type() protoreflect.EnumType {
-	return &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[5]
+	return &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[4]
 }
 
 func (x Dynamic_Visualization_PieChart_LabelSource) Number() protoreflect.EnumNumber {
@@ -426,11 +359,11 @@ func (x Dynamic_Visualization_HorizontalBars_YAxisViewBy) String() string {
 }
 
 func (Dynamic_Visualization_HorizontalBars_YAxisViewBy) Descriptor() protoreflect.EnumDescriptor {
-	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[6].Descriptor()
+	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[5].Descriptor()
 }
 
 func (Dynamic_Visualization_HorizontalBars_YAxisViewBy) Type() protoreflect.EnumType {
-	return &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[6]
+	return &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes[5]
 }
 
 func (x Dynamic_Visualization_HorizontalBars_YAxisViewBy) Number() protoreflect.EnumNumber {
@@ -638,6 +571,7 @@ type Dynamic_Visualization struct {
 	//	*Dynamic_Visualization_HorizontalBars_
 	//	*Dynamic_Visualization_VerticalBars_
 	//	*Dynamic_Visualization_Heatmap_
+	//	*Dynamic_Visualization_Geomap_
 	Value         isDynamic_Visualization_Value `protobuf_oneof:"value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -770,6 +704,15 @@ func (x *Dynamic_Visualization) GetHeatmap() *Dynamic_Visualization_Heatmap {
 	return nil
 }
 
+func (x *Dynamic_Visualization) GetGeomap() *Dynamic_Visualization_Geomap {
+	if x != nil {
+		if x, ok := x.Value.(*Dynamic_Visualization_Geomap_); ok {
+			return x.Geomap
+		}
+	}
+	return nil
+}
+
 type isDynamic_Visualization_Value interface {
 	isDynamic_Visualization_Value()
 }
@@ -814,6 +757,10 @@ type Dynamic_Visualization_Heatmap_ struct {
 	Heatmap *Dynamic_Visualization_Heatmap `protobuf:"bytes,10,opt,name=heatmap,proto3,oneof"`
 }
 
+type Dynamic_Visualization_Geomap_ struct {
+	Geomap *Dynamic_Visualization_Geomap `protobuf:"bytes,11,opt,name=geomap,proto3,oneof"`
+}
+
 func (*Dynamic_Visualization_Table_) isDynamic_Visualization_Value() {}
 
 func (*Dynamic_Visualization_TimeSeriesLines_) isDynamic_Visualization_Value() {}
@@ -833,6 +780,8 @@ func (*Dynamic_Visualization_HorizontalBars_) isDynamic_Visualization_Value() {}
 func (*Dynamic_Visualization_VerticalBars_) isDynamic_Visualization_Value() {}
 
 func (*Dynamic_Visualization_Heatmap_) isDynamic_Visualization_Value() {}
+
+func (*Dynamic_Visualization_Geomap_) isDynamic_Visualization_Value() {}
 
 type Dynamic_Query_Logs struct {
 	state         protoimpl.MessageState       `protogen:"open.v1"`
@@ -2768,13 +2717,13 @@ func (x *Dynamic_Visualization_Heatmap) GetColorConfig() isDynamic_Visualization
 	return nil
 }
 
-func (x *Dynamic_Visualization_Heatmap) GetPreset() Dynamic_Visualization_HeatmapColorPreset {
+func (x *Dynamic_Visualization_Heatmap) GetPreset() common1.ColorGradientType {
 	if x != nil {
 		if x, ok := x.ColorConfig.(*Dynamic_Visualization_Heatmap_Preset); ok {
 			return x.Preset
 		}
 	}
-	return Dynamic_Visualization_HEATMAP_COLOR_PRESET_UNSPECIFIED
+	return common1.ColorGradientType(0)
 }
 
 func (x *Dynamic_Visualization_Heatmap) GetAllowAbbreviation() *wrapperspb.BoolValue {
@@ -2831,7 +2780,7 @@ type isDynamic_Visualization_Heatmap_ColorConfig interface {
 }
 
 type Dynamic_Visualization_Heatmap_Preset struct {
-	Preset Dynamic_Visualization_HeatmapColorPreset `protobuf:"varint,6,opt,name=preset,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.Dynamic_Visualization_HeatmapColorPreset,oneof"`
+	Preset common1.ColorGradientType `protobuf:"varint,6,opt,name=preset,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.common.ColorGradientType,oneof"`
 }
 
 func (*Dynamic_Visualization_Heatmap_Preset) isDynamic_Visualization_Heatmap_ColorConfig() {}
@@ -2940,6 +2889,106 @@ func (x *Dynamic_Visualization_TimeSeriesTooltip) GetShowLabels() *wrapperspb.Bo
 	return nil
 }
 
+type Dynamic_Visualization_Geomap struct {
+	state             protoimpl.MessageState                          `protogen:"open.v1"`
+	Config            *Dynamic_Visualization_Geomap_GeomapFieldConfig `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
+	Aggregation       *Dynamic_Visualization_Geomap_GeomapAggregation `protobuf:"bytes,2,opt,name=aggregation,proto3" json:"aggregation,omitempty"`
+	Color             *Dynamic_Visualization_Geomap_GeomapColor       `protobuf:"bytes,3,opt,name=color,proto3" json:"color,omitempty"`
+	MinMax            *common1.MinMax                                 `protobuf:"bytes,4,opt,name=min_max,json=minMax,proto3" json:"min_max,omitempty"`
+	AllowAbbreviation *wrapperspb.BoolValue                           `protobuf:"bytes,7,opt,name=allow_abbreviation,json=allowAbbreviation,proto3" json:"allow_abbreviation,omitempty"`
+	Unit              common1.Unit                                    `protobuf:"varint,8,opt,name=unit,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.common.Unit" json:"unit,omitempty"`
+	CustomUnit        *wrapperspb.StringValue                         `protobuf:"bytes,9,opt,name=custom_unit,json=customUnit,proto3" json:"custom_unit,omitempty"`
+	DecimalPrecision  *wrapperspb.Int32Value                          `protobuf:"bytes,10,opt,name=decimal_precision,json=decimalPrecision,proto3" json:"decimal_precision,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *Dynamic_Visualization_Geomap) Reset() {
+	*x = Dynamic_Visualization_Geomap{}
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Dynamic_Visualization_Geomap) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Dynamic_Visualization_Geomap) ProtoMessage() {}
+
+func (x *Dynamic_Visualization_Geomap) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Dynamic_Visualization_Geomap.ProtoReflect.Descriptor instead.
+func (*Dynamic_Visualization_Geomap) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDescGZIP(), []int{0, 1, 14}
+}
+
+func (x *Dynamic_Visualization_Geomap) GetConfig() *Dynamic_Visualization_Geomap_GeomapFieldConfig {
+	if x != nil {
+		return x.Config
+	}
+	return nil
+}
+
+func (x *Dynamic_Visualization_Geomap) GetAggregation() *Dynamic_Visualization_Geomap_GeomapAggregation {
+	if x != nil {
+		return x.Aggregation
+	}
+	return nil
+}
+
+func (x *Dynamic_Visualization_Geomap) GetColor() *Dynamic_Visualization_Geomap_GeomapColor {
+	if x != nil {
+		return x.Color
+	}
+	return nil
+}
+
+func (x *Dynamic_Visualization_Geomap) GetMinMax() *common1.MinMax {
+	if x != nil {
+		return x.MinMax
+	}
+	return nil
+}
+
+func (x *Dynamic_Visualization_Geomap) GetAllowAbbreviation() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.AllowAbbreviation
+	}
+	return nil
+}
+
+func (x *Dynamic_Visualization_Geomap) GetUnit() common1.Unit {
+	if x != nil {
+		return x.Unit
+	}
+	return common1.Unit(0)
+}
+
+func (x *Dynamic_Visualization_Geomap) GetCustomUnit() *wrapperspb.StringValue {
+	if x != nil {
+		return x.CustomUnit
+	}
+	return nil
+}
+
+func (x *Dynamic_Visualization_Geomap) GetDecimalPrecision() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.DecimalPrecision
+	}
+	return nil
+}
+
 type Dynamic_Visualization_Table_Column struct {
 	state         protoimpl.MessageState   `protogen:"open.v1"`
 	Field         *common.ObservationField `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`
@@ -2949,7 +2998,7 @@ type Dynamic_Visualization_Table_Column struct {
 
 func (x *Dynamic_Visualization_Table_Column) Reset() {
 	*x = Dynamic_Visualization_Table_Column{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[21]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2961,7 +3010,7 @@ func (x *Dynamic_Visualization_Table_Column) String() string {
 func (*Dynamic_Visualization_Table_Column) ProtoMessage() {}
 
 func (x *Dynamic_Visualization_Table_Column) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[21]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2997,7 +3046,7 @@ type Dynamic_Visualization_Table_Rule struct {
 
 func (x *Dynamic_Visualization_Table_Rule) Reset() {
 	*x = Dynamic_Visualization_Table_Rule{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[22]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3009,7 +3058,7 @@ func (x *Dynamic_Visualization_Table_Rule) String() string {
 func (*Dynamic_Visualization_Table_Rule) ProtoMessage() {}
 
 func (x *Dynamic_Visualization_Table_Rule) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[22]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3074,7 +3123,7 @@ type Dynamic_Visualization_Table_RuleScope struct {
 
 func (x *Dynamic_Visualization_Table_RuleScope) Reset() {
 	*x = Dynamic_Visualization_Table_RuleScope{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[23]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3086,7 +3135,7 @@ func (x *Dynamic_Visualization_Table_RuleScope) String() string {
 func (*Dynamic_Visualization_Table_RuleScope) ProtoMessage() {}
 
 func (x *Dynamic_Visualization_Table_RuleScope) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[23]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3169,7 +3218,7 @@ type Dynamic_Visualization_Table_Property struct {
 
 func (x *Dynamic_Visualization_Table_Property) Reset() {
 	*x = Dynamic_Visualization_Table_Property{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[24]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3181,7 +3230,7 @@ func (x *Dynamic_Visualization_Table_Property) String() string {
 func (*Dynamic_Visualization_Table_Property) ProtoMessage() {}
 
 func (x *Dynamic_Visualization_Table_Property) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[24]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3227,7 +3276,7 @@ type Dynamic_Visualization_Table_PropertyDefinition struct {
 
 func (x *Dynamic_Visualization_Table_PropertyDefinition) Reset() {
 	*x = Dynamic_Visualization_Table_PropertyDefinition{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[25]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3239,7 +3288,7 @@ func (x *Dynamic_Visualization_Table_PropertyDefinition) String() string {
 func (*Dynamic_Visualization_Table_PropertyDefinition) ProtoMessage() {}
 
 func (x *Dynamic_Visualization_Table_PropertyDefinition) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[25]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3358,7 +3407,7 @@ type Dynamic_Visualization_Table_PropertyThresholds struct {
 
 func (x *Dynamic_Visualization_Table_PropertyThresholds) Reset() {
 	*x = Dynamic_Visualization_Table_PropertyThresholds{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[26]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3370,7 +3419,7 @@ func (x *Dynamic_Visualization_Table_PropertyThresholds) String() string {
 func (*Dynamic_Visualization_Table_PropertyThresholds) ProtoMessage() {}
 
 func (x *Dynamic_Visualization_Table_PropertyThresholds) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[26]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3426,7 +3475,7 @@ type Dynamic_Visualization_PropertyLinks_LinkAction struct {
 
 func (x *Dynamic_Visualization_PropertyLinks_LinkAction) Reset() {
 	*x = Dynamic_Visualization_PropertyLinks_LinkAction{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[27]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3438,7 +3487,7 @@ func (x *Dynamic_Visualization_PropertyLinks_LinkAction) String() string {
 func (*Dynamic_Visualization_PropertyLinks_LinkAction) ProtoMessage() {}
 
 func (x *Dynamic_Visualization_PropertyLinks_LinkAction) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[27]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3495,7 +3544,7 @@ type Dynamic_Visualization_PieChart_LabelDefinition struct {
 
 func (x *Dynamic_Visualization_PieChart_LabelDefinition) Reset() {
 	*x = Dynamic_Visualization_PieChart_LabelDefinition{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[28]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3507,7 +3556,7 @@ func (x *Dynamic_Visualization_PieChart_LabelDefinition) String() string {
 func (*Dynamic_Visualization_PieChart_LabelDefinition) ProtoMessage() {}
 
 func (x *Dynamic_Visualization_PieChart_LabelDefinition) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[28]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3558,11 +3607,490 @@ func (x *Dynamic_Visualization_PieChart_LabelDefinition) GetShowPercentage() *wr
 	return nil
 }
 
+type Dynamic_Visualization_Geomap_GeomapFieldConfig struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Value:
+	//
+	//	*Dynamic_Visualization_Geomap_GeomapFieldConfig_CoordinateConfig
+	//	*Dynamic_Visualization_Geomap_GeomapFieldConfig_AwsRegionConfig
+	Value         isDynamic_Visualization_Geomap_GeomapFieldConfig_Value `protobuf_oneof:"value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapFieldConfig) Reset() {
+	*x = Dynamic_Visualization_Geomap_GeomapFieldConfig{}
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapFieldConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Dynamic_Visualization_Geomap_GeomapFieldConfig) ProtoMessage() {}
+
+func (x *Dynamic_Visualization_Geomap_GeomapFieldConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Dynamic_Visualization_Geomap_GeomapFieldConfig.ProtoReflect.Descriptor instead.
+func (*Dynamic_Visualization_Geomap_GeomapFieldConfig) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDescGZIP(), []int{0, 1, 14, 0}
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapFieldConfig) GetValue() isDynamic_Visualization_Geomap_GeomapFieldConfig_Value {
+	if x != nil {
+		return x.Value
+	}
+	return nil
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapFieldConfig) GetCoordinateConfig() *Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapCoordinateConfig {
+	if x != nil {
+		if x, ok := x.Value.(*Dynamic_Visualization_Geomap_GeomapFieldConfig_CoordinateConfig); ok {
+			return x.CoordinateConfig
+		}
+	}
+	return nil
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapFieldConfig) GetAwsRegionConfig() *Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapAwsRegionConfig {
+	if x != nil {
+		if x, ok := x.Value.(*Dynamic_Visualization_Geomap_GeomapFieldConfig_AwsRegionConfig); ok {
+			return x.AwsRegionConfig
+		}
+	}
+	return nil
+}
+
+type isDynamic_Visualization_Geomap_GeomapFieldConfig_Value interface {
+	isDynamic_Visualization_Geomap_GeomapFieldConfig_Value()
+}
+
+type Dynamic_Visualization_Geomap_GeomapFieldConfig_CoordinateConfig struct {
+	CoordinateConfig *Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapCoordinateConfig `protobuf:"bytes,1,opt,name=coordinate_config,json=coordinateConfig,proto3,oneof"`
+}
+
+type Dynamic_Visualization_Geomap_GeomapFieldConfig_AwsRegionConfig struct {
+	AwsRegionConfig *Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapAwsRegionConfig `protobuf:"bytes,2,opt,name=aws_region_config,json=awsRegionConfig,proto3,oneof"`
+}
+
+func (*Dynamic_Visualization_Geomap_GeomapFieldConfig_CoordinateConfig) isDynamic_Visualization_Geomap_GeomapFieldConfig_Value() {
+}
+
+func (*Dynamic_Visualization_Geomap_GeomapFieldConfig_AwsRegionConfig) isDynamic_Visualization_Geomap_GeomapFieldConfig_Value() {
+}
+
+type Dynamic_Visualization_Geomap_GeomapAggregation struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Value:
+	//
+	//	*Dynamic_Visualization_Geomap_GeomapAggregation_Count
+	//	*Dynamic_Visualization_Geomap_GeomapAggregation_Sum
+	//	*Dynamic_Visualization_Geomap_GeomapAggregation_Min
+	//	*Dynamic_Visualization_Geomap_GeomapAggregation_Max
+	//	*Dynamic_Visualization_Geomap_GeomapAggregation_Avg
+	Value         isDynamic_Visualization_Geomap_GeomapAggregation_Value `protobuf_oneof:"value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapAggregation) Reset() {
+	*x = Dynamic_Visualization_Geomap_GeomapAggregation{}
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapAggregation) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Dynamic_Visualization_Geomap_GeomapAggregation) ProtoMessage() {}
+
+func (x *Dynamic_Visualization_Geomap_GeomapAggregation) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Dynamic_Visualization_Geomap_GeomapAggregation.ProtoReflect.Descriptor instead.
+func (*Dynamic_Visualization_Geomap_GeomapAggregation) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDescGZIP(), []int{0, 1, 14, 1}
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapAggregation) GetValue() isDynamic_Visualization_Geomap_GeomapAggregation_Value {
+	if x != nil {
+		return x.Value
+	}
+	return nil
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapAggregation) GetCount() *Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationSimple {
+	if x != nil {
+		if x, ok := x.Value.(*Dynamic_Visualization_Geomap_GeomapAggregation_Count); ok {
+			return x.Count
+		}
+	}
+	return nil
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapAggregation) GetSum() *Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationFieldBased {
+	if x != nil {
+		if x, ok := x.Value.(*Dynamic_Visualization_Geomap_GeomapAggregation_Sum); ok {
+			return x.Sum
+		}
+	}
+	return nil
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapAggregation) GetMin() *Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationFieldBased {
+	if x != nil {
+		if x, ok := x.Value.(*Dynamic_Visualization_Geomap_GeomapAggregation_Min); ok {
+			return x.Min
+		}
+	}
+	return nil
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapAggregation) GetMax() *Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationFieldBased {
+	if x != nil {
+		if x, ok := x.Value.(*Dynamic_Visualization_Geomap_GeomapAggregation_Max); ok {
+			return x.Max
+		}
+	}
+	return nil
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapAggregation) GetAvg() *Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationFieldBased {
+	if x != nil {
+		if x, ok := x.Value.(*Dynamic_Visualization_Geomap_GeomapAggregation_Avg); ok {
+			return x.Avg
+		}
+	}
+	return nil
+}
+
+type isDynamic_Visualization_Geomap_GeomapAggregation_Value interface {
+	isDynamic_Visualization_Geomap_GeomapAggregation_Value()
+}
+
+type Dynamic_Visualization_Geomap_GeomapAggregation_Count struct {
+	Count *Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationSimple `protobuf:"bytes,1,opt,name=count,proto3,oneof"`
+}
+
+type Dynamic_Visualization_Geomap_GeomapAggregation_Sum struct {
+	Sum *Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationFieldBased `protobuf:"bytes,2,opt,name=sum,proto3,oneof"`
+}
+
+type Dynamic_Visualization_Geomap_GeomapAggregation_Min struct {
+	Min *Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationFieldBased `protobuf:"bytes,3,opt,name=min,proto3,oneof"`
+}
+
+type Dynamic_Visualization_Geomap_GeomapAggregation_Max struct {
+	Max *Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationFieldBased `protobuf:"bytes,4,opt,name=max,proto3,oneof"`
+}
+
+type Dynamic_Visualization_Geomap_GeomapAggregation_Avg struct {
+	Avg *Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationFieldBased `protobuf:"bytes,5,opt,name=avg,proto3,oneof"`
+}
+
+func (*Dynamic_Visualization_Geomap_GeomapAggregation_Count) isDynamic_Visualization_Geomap_GeomapAggregation_Value() {
+}
+
+func (*Dynamic_Visualization_Geomap_GeomapAggregation_Sum) isDynamic_Visualization_Geomap_GeomapAggregation_Value() {
+}
+
+func (*Dynamic_Visualization_Geomap_GeomapAggregation_Min) isDynamic_Visualization_Geomap_GeomapAggregation_Value() {
+}
+
+func (*Dynamic_Visualization_Geomap_GeomapAggregation_Max) isDynamic_Visualization_Geomap_GeomapAggregation_Value() {
+}
+
+func (*Dynamic_Visualization_Geomap_GeomapAggregation_Avg) isDynamic_Visualization_Geomap_GeomapAggregation_Value() {
+}
+
+type Dynamic_Visualization_Geomap_GeomapColor struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Value:
+	//
+	//	*Dynamic_Visualization_Geomap_GeomapColor_Size
+	//	*Dynamic_Visualization_Geomap_GeomapColor_ColorRange
+	Value         isDynamic_Visualization_Geomap_GeomapColor_Value `protobuf_oneof:"value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapColor) Reset() {
+	*x = Dynamic_Visualization_Geomap_GeomapColor{}
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapColor) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Dynamic_Visualization_Geomap_GeomapColor) ProtoMessage() {}
+
+func (x *Dynamic_Visualization_Geomap_GeomapColor) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Dynamic_Visualization_Geomap_GeomapColor.ProtoReflect.Descriptor instead.
+func (*Dynamic_Visualization_Geomap_GeomapColor) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDescGZIP(), []int{0, 1, 14, 2}
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapColor) GetValue() isDynamic_Visualization_Geomap_GeomapColor_Value {
+	if x != nil {
+		return x.Value
+	}
+	return nil
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapColor) GetSize() common1.ColorSolidType {
+	if x != nil {
+		if x, ok := x.Value.(*Dynamic_Visualization_Geomap_GeomapColor_Size); ok {
+			return x.Size
+		}
+	}
+	return common1.ColorSolidType(0)
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapColor) GetColorRange() common1.ColorGradientType {
+	if x != nil {
+		if x, ok := x.Value.(*Dynamic_Visualization_Geomap_GeomapColor_ColorRange); ok {
+			return x.ColorRange
+		}
+	}
+	return common1.ColorGradientType(0)
+}
+
+type isDynamic_Visualization_Geomap_GeomapColor_Value interface {
+	isDynamic_Visualization_Geomap_GeomapColor_Value()
+}
+
+type Dynamic_Visualization_Geomap_GeomapColor_Size struct {
+	Size common1.ColorSolidType `protobuf:"varint,1,opt,name=size,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.common.ColorSolidType,oneof"`
+}
+
+type Dynamic_Visualization_Geomap_GeomapColor_ColorRange struct {
+	ColorRange common1.ColorGradientType `protobuf:"varint,2,opt,name=color_range,json=colorRange,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.common.ColorGradientType,oneof"`
+}
+
+func (*Dynamic_Visualization_Geomap_GeomapColor_Size) isDynamic_Visualization_Geomap_GeomapColor_Value() {
+}
+
+func (*Dynamic_Visualization_Geomap_GeomapColor_ColorRange) isDynamic_Visualization_Geomap_GeomapColor_Value() {
+}
+
+type Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapCoordinateConfig struct {
+	state          protoimpl.MessageState   `protogen:"open.v1"`
+	LatitudeField  *common.ObservationField `protobuf:"bytes,1,opt,name=latitude_field,json=latitudeField,proto3" json:"latitude_field,omitempty"`
+	LongitudeField *common.ObservationField `protobuf:"bytes,2,opt,name=longitude_field,json=longitudeField,proto3" json:"longitude_field,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapCoordinateConfig) Reset() {
+	*x = Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapCoordinateConfig{}
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapCoordinateConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapCoordinateConfig) ProtoMessage() {}
+
+func (x *Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapCoordinateConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapCoordinateConfig.ProtoReflect.Descriptor instead.
+func (*Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapCoordinateConfig) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDescGZIP(), []int{0, 1, 14, 0, 0}
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapCoordinateConfig) GetLatitudeField() *common.ObservationField {
+	if x != nil {
+		return x.LatitudeField
+	}
+	return nil
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapCoordinateConfig) GetLongitudeField() *common.ObservationField {
+	if x != nil {
+		return x.LongitudeField
+	}
+	return nil
+}
+
+type Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapAwsRegionConfig struct {
+	state          protoimpl.MessageState   `protogen:"open.v1"`
+	AwsRegionField *common.ObservationField `protobuf:"bytes,1,opt,name=aws_region_field,json=awsRegionField,proto3" json:"aws_region_field,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapAwsRegionConfig) Reset() {
+	*x = Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapAwsRegionConfig{}
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapAwsRegionConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapAwsRegionConfig) ProtoMessage() {}
+
+func (x *Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapAwsRegionConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapAwsRegionConfig.ProtoReflect.Descriptor instead.
+func (*Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapAwsRegionConfig) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDescGZIP(), []int{0, 1, 14, 0, 1}
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapAwsRegionConfig) GetAwsRegionField() *common.ObservationField {
+	if x != nil {
+		return x.AwsRegionField
+	}
+	return nil
+}
+
+type Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationSimple struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationSimple) Reset() {
+	*x = Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationSimple{}
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationSimple) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationSimple) ProtoMessage() {}
+
+func (x *Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationSimple) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationSimple.ProtoReflect.Descriptor instead.
+func (*Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationSimple) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDescGZIP(), []int{0, 1, 14, 1, 0}
+}
+
+type Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationFieldBased struct {
+	state         protoimpl.MessageState   `protogen:"open.v1"`
+	Field         *common.ObservationField `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationFieldBased) Reset() {
+	*x = Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationFieldBased{}
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationFieldBased) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationFieldBased) ProtoMessage() {}
+
+func (x *Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationFieldBased) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationFieldBased.ProtoReflect.Descriptor instead.
+func (*Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationFieldBased) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDescGZIP(), []int{0, 1, 14, 1, 1}
+}
+
+func (x *Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationFieldBased) GetField() *common.ObservationField {
+	if x != nil {
+		return x.Field
+	}
+	return nil
+}
+
 var File_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDesc = "" +
 	"\n" +
-	"9com/coralogixapis/dashboards/v1/ast/widgets/dynamic.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aBcom/coralogixapis/dashboards/v1/ast/widgets/common/colors_by.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1a?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/scale.proto\x1a@com/coralogixapis/dashboards/v1/ast/widgets/common/sort_by.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/text_alignment.proto\x1aCcom/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1aFcom/coralogixapis/dashboards/v1/common/metrics_series_limit_type.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a+com/coralogixapis/dashboards/v1/types.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xba\x82\x02\n" +
+	"9com/coralogixapis/dashboards/v1/ast/widgets/dynamic.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aLcom/coralogixapis/dashboards/v1/ast/widgets/common/color_gradient_type.proto\x1aIcom/coralogixapis/dashboards/v1/ast/widgets/common/color_solid_type.proto\x1aBcom/coralogixapis/dashboards/v1/ast/widgets/common/colors_by.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1a?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a@com/coralogixapis/dashboards/v1/ast/widgets/common/min_max.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/scale.proto\x1a@com/coralogixapis/dashboards/v1/ast/widgets/common/sort_by.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/text_alignment.proto\x1aCcom/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1aFcom/coralogixapis/dashboards/v1/common/metrics_series_limit_type.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a+com/coralogixapis/dashboards/v1/types.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x84\xa6\x02\n" +
 	"\aDynamic\x12\x85\x01\n" +
 	"\x05query\x18\x01 \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.QueryB3\x9aA02.A query object describing how to retrieve dataR\x05query\x12\x90\x01\n" +
 	"\n" +
@@ -3600,7 +4128,7 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDesc = "
 	"\x0fdataprime_query\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataprimeQueryB\x19\x9aA\x162\x14Dataprime query textR\x0edataprimeQuery\x12{\n" +
 	"\x0edata_mode_type\x18\x02 \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeB\x13\x9aA\x102\x0eData mode typeR\fdataModeType:7\x9aA4\n" +
 	"2*\x0eDataprimeQuery2 A Dataprime variant of the queryB\a\n" +
-	"\x05value\x1a\xf0\xe1\x01\n" +
+	"\x05value\x1a\xba\x85\x02\n" +
 	"\rVisualization\x12`\n" +
 	"\x05table\x18\x01 \x01(\v2H.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TableH\x00R\x05table\x12\x80\x01\n" +
 	"\x11time_series_lines\x18\x02 \x01(\v2R.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLinesH\x00R\x0ftimeSeriesLines\x12}\n" +
@@ -3612,7 +4140,8 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDesc = "
 	"\x0fhorizontal_bars\x18\b \x01(\v2Q.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBarsH\x00R\x0ehorizontalBars\x12v\n" +
 	"\rvertical_bars\x18\t \x01(\v2O.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBarsH\x00R\fverticalBars\x12f\n" +
 	"\aheatmap\x18\n" +
-	" \x01(\v2J.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HeatmapH\x00R\aheatmap\x1a\xd6\x15\n" +
+	" \x01(\v2J.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HeatmapH\x00R\aheatmap\x12c\n" +
+	"\x06geomap\x18\v \x01(\v2I.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.GeomapH\x00R\x06geomap\x1a\xd6\x15\n" +
 	"\x05Table\x12i\n" +
 	"\acolumns\x18\x01 \x03(\v2O.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.ColumnR\acolumns\x12c\n" +
 	"\x05rules\x18\x02 \x03(\v2M.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.RuleR\x05rules\x1aX\n" +
@@ -3891,7 +4420,7 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDesc = "
 	"y_axis_max\x18\x11 \x01(\v2\x1b.google.protobuf.FloatValueB6\x9aA32+Number indicating the upper band for y axisJ\x041000R\byAxisMax\x12q\n" +
 	"\x06legend\x18\x12 \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.common.LegendB\x1d\x9aA\x1a2\x18Widget's legend settingsR\x06legend\x12\x7f\n" +
 	"\asort_by\x18\x13 \x01(\x0e2>.com.coralogixapis.dashboards.v1.ast.widgets.common.SortByTypeB&\x9aA#2\x1eSort type, by name or by valueJ\x011R\x06sortBy\x12\xb1\x01\n" +
-	"\x13group_name_template\x18\x14 \x01(\v2\x1c.google.protobuf.StringValueBc\x9aA`27Custom template name for a group, can contain variablesJ%{ \"value\": \"Slice - {{ variable }}\" }R\x11groupNameTemplate\x1a\xe0\x0e\n" +
+	"\x13group_name_template\x18\x14 \x01(\v2\x1c.google.protobuf.StringValueBc\x9aA`27Custom template name for a group, can contain variablesJ%{ \"value\": \"Slice - {{ variable }}\" }R\x11groupNameTemplate\x1a\xd0\x0e\n" +
 	"\aHeatmap\x12Y\n" +
 	"\vvalue_field\x18\x01 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldR\n" +
 	"valueField\x12\\\n" +
@@ -3899,8 +4428,8 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDesc = "
 	"\ry_axis_fields\x18\x03 \x03(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldR\vyAxisFields\x12}\n" +
 	"\fshow_numbers\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueB>\x9aA;29Whether to render numeric values inside the heatmap tilesR\vshowNumbers\x12\x82\x01\n" +
 	"\n" +
-	"scale_type\x18\x05 \x01(\x0e2=.com.coralogixapis.dashboards.v1.ast.widgets.common.ScaleTypeB$\x9aA!2\x1fScale type - linear/logarithmicR\tscaleType\x12\x99\x01\n" +
-	"\x06preset\x18\x06 \x01(\x0e2U.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HeatmapColorPresetB(\x9aA%2#Color configuration for the heatmapH\x00R\x06preset\x12\x88\x01\n" +
+	"scale_type\x18\x05 \x01(\x0e2=.com.coralogixapis.dashboards.v1.ast.widgets.common.ScaleTypeB$\x9aA!2\x1fScale type - linear/logarithmicR\tscaleType\x12\x89\x01\n" +
+	"\x06preset\x18\x06 \x01(\x0e2E.com.coralogixapis.dashboards.v1.ast.widgets.common.ColorGradientTypeB(\x9aA%2#Color configuration for the heatmapH\x00R\x06preset\x12\x88\x01\n" +
 	"\x12allow_abbreviation\x18\a \x01(\v2\x1a.google.protobuf.BoolValueB=\x9aA:21Whether to render numeric value with abbreviationJ\x05falseR\x11allowAbbreviation\x12\x97\x01\n" +
 	"\x04unit\x18\b \x01(\x0e28.com.coralogixapis.dashboards.v1.ast.widgets.common.UnitBI\x9aAF2AUnit of the query results - one from a predefined list, or customJ\x013R\x04unit\x12\x9c\x01\n" +
 	"\vcustom_unit\x18\t \x01(\v2\x1c.google.protobuf.StringValueB]\x9aAZ2DCustom unit (requires to have unit field as 'custom' to take effect)J\x12{ \"value\": \"rpm\" }R\n" +
@@ -3917,17 +4446,42 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDesc = "
 	"\x11TimeSeriesTooltip\x12\xab\x01\n" +
 	"\x0fshow_all_series\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueBg\x9aAd2\\Type of the tooltip display, can be showing single series value or all series values at onceJ\x04trueR\rshowAllSeries\x12F\n" +
 	"\vshow_labels\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueB\t\x9aA\x06J\x04trueR\n" +
-	"showLabels\"\xe0\x02\n" +
-	"\x12HeatmapColorPreset\x12$\n" +
-	" HEATMAP_COLOR_PRESET_UNSPECIFIED\x10\x00\x12\x1d\n" +
-	"\x19HEATMAP_COLOR_PRESET_BLUE\x10\x01\x12\x1e\n" +
-	"\x1aHEATMAP_COLOR_PRESET_GREEN\x10\x02\x12\x1c\n" +
-	"\x18HEATMAP_COLOR_PRESET_RED\x10\x03\x12\"\n" +
-	"\x1eHEATMAP_COLOR_PRESET_THRESHOLD\x10\x04\x12&\n" +
-	"\"HEATMAP_COLOR_PRESET_BLUE_REVERSED\x10\x05\x12'\n" +
-	"#HEATMAP_COLOR_PRESET_GREEN_REVERSED\x10\x06\x12%\n" +
-	"!HEATMAP_COLOR_PRESET_RED_REVERSED\x10\a\x12+\n" +
-	"'HEATMAP_COLOR_PRESET_THRESHOLD_REVERSED\x10\b\"\x89\x01\n" +
+	"showLabels\x1a\xd5%\n" +
+	"\x06Geomap\x12\x96\x02\n" +
+	"\x06config\x18\x01 \x01(\v2[.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapFieldConfigB\xa0\x01\x9aA\x9c\x012\x99\x01Defines columns which provide required geographic information for the geomap from the query results. Affects location and grouping of the data displayed.R\x06config\x12\xa5\x02\n" +
+	"\vaggregation\x18\x02 \x01(\v2[.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapAggregationB\xa5\x01\x9aA\xa1\x012\x9e\x01Determines how data clusters on the geomap will display values. Default should always be set to count to simply provide number of nodes in cluster as a value.R\vaggregation\x12\xbd\x01\n" +
+	"\x05color\x18\x03 \x01(\v2U.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapColorBP\x9aAM2KColor options for the nodes on the geomap, affects cluster scaling as well.R\x05color\x12\xad\x01\n" +
+	"\amin_max\x18\x04 \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.common.MinMaxBX\x9aAU2SDefines min/max values range for the geomap, will affect color and cluster scaling.R\x06minMax\x12\x88\x01\n" +
+	"\x12allow_abbreviation\x18\a \x01(\v2\x1a.google.protobuf.BoolValueB=\x9aA:21Whether to render numeric value with abbreviationJ\x05falseR\x11allowAbbreviation\x12\x97\x01\n" +
+	"\x04unit\x18\b \x01(\x0e28.com.coralogixapis.dashboards.v1.ast.widgets.common.UnitBI\x9aAF2AUnit of the query results - one from a predefined list, or customJ\x013R\x04unit\x12\x9c\x01\n" +
+	"\vcustom_unit\x18\t \x01(\v2\x1c.google.protobuf.StringValueB]\x9aAZ2DCustom unit (requires to have unit field as 'custom' to take effect)J\x12{ \"value\": \"rpm\" }R\n" +
+	"customUnit\x12\xa2\x01\n" +
+	"\x11decimal_precision\x18\n" +
+	" \x01(\v2\x1b.google.protobuf.Int32ValueBX\x9aAU2PNumber indicating the decimal precision of the numeric values, within range 0-15J\x014R\x10decimalPrecision\x1a\xc1\t\n" +
+	"\x11GeomapFieldConfig\x12\x9a\x02\n" +
+	"\x11coordinate_config\x18\x01 \x01(\v2r.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapFieldConfig.GeomapCoordinateConfigBw\x9aAt2rDefault way to provide geographic information, by specifying latitude and longitude fields from the query results.H\x00R\x10coordinateConfig\x12\x8f\x02\n" +
+	"\x11aws_region_config\x18\x02 \x01(\v2q.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapFieldConfig.GeomapAwsRegionConfigBn\x9aAk2iAlternative way to provide geographic information, by specifying AWS region field from the query results.H\x00R\x0fawsRegionConfig\x1a\x8f\x03\n" +
+	"\x16GeomapCoordinateConfig\x12\xb6\x01\n" +
+	"\x0elatitude_field\x18\x01 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldBU\x9aAR2PData for this field should always return valid numeric coordinate (e.g. 45.756).R\rlatitudeField\x12\xbb\x01\n" +
+	"\x0flongitude_field\x18\x02 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldBX\x9aAU2SData for this field should always return valid numeric coordinate (e.g. -122.4194).R\x0elongitudeField\x1a\xe1\x01\n" +
+	"\x15GeomapAwsRegionConfig\x12\xc7\x01\n" +
+	"\x10aws_region_field\x18\x01 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldBc\x9aA`2^Data for this field should always return valid AWS region strings (e.g. us-east-1, us-west-2).R\x0eawsRegionFieldB\a\n" +
+	"\x05value\x1a\x92\f\n" +
+	"\x11GeomapAggregation\x12\xe9\x01\n" +
+	"\x05count\x18\x01 \x01(\v2s.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapAggregation.GeomapAggregationSimpleB\\\x9aAY2WOption that will make geomap clusters simply count the number of nodes in each cluster.H\x00R\x05count\x12\x9d\x02\n" +
+	"\x03sum\x18\x02 \x01(\v2w.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapAggregation.GeomapAggregationFieldBasedB\x8f\x01\x9aA\x8b\x012\x88\x01Option that will use selected field in data results, perform SUM aggregation on it across all nodes in a cluster and display that value.H\x00R\x03sum\x12\x9d\x02\n" +
+	"\x03min\x18\x03 \x01(\v2w.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapAggregation.GeomapAggregationFieldBasedB\x8f\x01\x9aA\x8b\x012\x88\x01Option that will use selected field in data results, perform MIN aggregation on it across all nodes in a cluster and display that value.H\x00R\x03min\x12\x9d\x02\n" +
+	"\x03max\x18\x04 \x01(\v2w.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapAggregation.GeomapAggregationFieldBasedB\x8f\x01\x9aA\x8b\x012\x88\x01Option that will use selected field in data results, perform MAX aggregation on it across all nodes in a cluster and display that value.H\x00R\x03max\x12\x9d\x02\n" +
+	"\x03avg\x18\x05 \x01(\v2w.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapAggregation.GeomapAggregationFieldBasedB\x8f\x01\x9aA\x8b\x012\x88\x01Option that will use selected field in data results, perform AVG aggregation on it across all nodes in a cluster and display that value.H\x00R\x03avg\x1a\x19\n" +
+	"\x17GeomapAggregationSimple\x1am\n" +
+	"\x1bGeomapAggregationFieldBased\x12N\n" +
+	"\x05field\x18\x01 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldR\x05fieldB\a\n" +
+	"\x05value\x1a\xcb\x03\n" +
+	"\vGeomapColor\x12\xc2\x01\n" +
+	"\x04size\x18\x01 \x01(\x0e2B.com.coralogixapis.dashboards.v1.ast.widgets.common.ColorSolidTypeBh\x9aAe2cGeomap clusters will scale according to data values and/or applied aggregation, using a solid colorH\x00R\x04size\x12\xed\x01\n" +
+	"\vcolor_range\x18\x02 \x01(\x0e2E.com.coralogixapis.dashboards.v1.ast.widgets.common.ColorGradientTypeB\x82\x01\x9aA\x7f2}Geomap clusters will have same size, but gradient color will be applied to distinguish data values and/or applied aggregationH\x00R\n" +
+	"colorRangeB\a\n" +
+	"\x05valueJ\x04\b\x05\x10\x06J\x04\b\x06\x10\a\"\x89\x01\n" +
 	"\x0fBarValueDisplay\x12!\n" +
 	"\x1dBAR_VALUE_DISPLAY_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15BAR_VALUE_DISPLAY_TOP\x10\x01\x12\x1c\n" +
@@ -3962,308 +4516,340 @@ func file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDescGZIP(
 	return file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDescData
 }
 
-var file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes = make([]protoimpl.EnumInfo, 7)
-var file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
+var file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
+var file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes = make([]protoimpl.MessageInfo, 37)
 var file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_goTypes = []any{
 	(Dynamic_Interpretation)(0),                            // 0: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Interpretation
-	(Dynamic_Visualization_HeatmapColorPreset)(0),          // 1: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HeatmapColorPreset
-	(Dynamic_Visualization_BarValueDisplay)(0),             // 2: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.BarValueDisplay
-	(Dynamic_Visualization_Table_FieldDataType)(0),         // 3: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.FieldDataType
-	(Dynamic_Visualization_TimeSeriesLines_StackedLine)(0), // 4: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.StackedLine
-	(Dynamic_Visualization_PieChart_LabelSource)(0),        // 5: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelSource
-	(Dynamic_Visualization_HorizontalBars_YAxisViewBy)(0),  // 6: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.YAxisViewBy
-	(*Dynamic)(nil),                                        // 7: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic
-	(*Dynamic_Query)(nil),                                  // 8: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query
-	(*Dynamic_Visualization)(nil),                          // 9: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization
-	(*Dynamic_Query_Logs)(nil),                             // 10: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Logs
-	(*Dynamic_Query_Spans)(nil),                            // 11: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Spans
-	(*Dynamic_Query_Metrics)(nil),                          // 12: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics
-	(*Dynamic_Query_Dataprime)(nil),                        // 13: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Dataprime
-	(*Dynamic_Visualization_Table)(nil),                    // 14: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table
-	(*Dynamic_Visualization_PropertyUnits)(nil),            // 15: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyUnits
-	(*Dynamic_Visualization_PropertyLinks)(nil),            // 16: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks
-	(*Dynamic_Visualization_TimeSeriesLines)(nil),          // 17: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines
-	(*Dynamic_Visualization_TimeSeriesBars)(nil),           // 18: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars
-	(*Dynamic_Visualization_Stat)(nil),                     // 19: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat
-	(*Dynamic_Visualization_Gauge)(nil),                    // 20: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge
-	(*Dynamic_Visualization_HexagonBins)(nil),              // 21: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins
-	(*Dynamic_Visualization_PieChart)(nil),                 // 22: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart
-	(*Dynamic_Visualization_HorizontalBars)(nil),           // 23: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars
-	(*Dynamic_Visualization_VerticalBars)(nil),             // 24: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars
-	(*Dynamic_Visualization_Heatmap)(nil),                  // 25: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap
-	(*Dynamic_Visualization_HeatmapTooltip)(nil),           // 26: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HeatmapTooltip
-	(*Dynamic_Visualization_TimeSeriesTooltip)(nil),        // 27: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesTooltip
-	(*Dynamic_Visualization_Table_Column)(nil),             // 28: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Column
-	(*Dynamic_Visualization_Table_Rule)(nil),               // 29: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Rule
-	(*Dynamic_Visualization_Table_RuleScope)(nil),          // 30: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.RuleScope
-	(*Dynamic_Visualization_Table_Property)(nil),           // 31: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Property
-	(*Dynamic_Visualization_Table_PropertyDefinition)(nil), // 32: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyDefinition
-	(*Dynamic_Visualization_Table_PropertyThresholds)(nil), // 33: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyThresholds
-	(*Dynamic_Visualization_PropertyLinks_LinkAction)(nil), // 34: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks.LinkAction
-	(*Dynamic_Visualization_PieChart_LabelDefinition)(nil), // 35: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition
-	(*common.TimeFrameSelect)(nil),                         // 36: com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	(*common.LuceneQuery)(nil),                             // 37: com.coralogixapis.dashboards.v1.common.LuceneQuery
-	(common1.DataModeType)(0),                              // 38: com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
-	(*filters.Filter_LogsFilter)(nil),                      // 39: com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilter
-	(*common.ObservationField)(nil),                        // 40: com.coralogixapis.dashboards.v1.common.ObservationField
-	(*common.LogsAggregation)(nil),                         // 41: com.coralogixapis.dashboards.v1.common.LogsAggregation
-	(*filters.Filter_SpansFilter)(nil),                     // 42: com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilter
-	(*common.SpanObservationField)(nil),                    // 43: com.coralogixapis.dashboards.v1.common.SpanObservationField
-	(*common.PromQlQuery)(nil),                             // 44: com.coralogixapis.dashboards.v1.common.PromQlQuery
-	(common.PromQLQueryType)(0),                            // 45: com.coralogixapis.dashboards.v1.common.PromQLQueryType
-	(common1.MetricsQueryEditorMode)(0),                    // 46: com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
-	(common.MetricsSeriesLimitType)(0),                     // 47: com.coralogixapis.dashboards.v1.common.MetricsSeriesLimitType
-	(*common.DataprimeQuery)(nil),                          // 48: com.coralogixapis.dashboards.v1.common.DataprimeQuery
-	(*wrapperspb.DoubleValue)(nil),                         // 49: google.protobuf.DoubleValue
-	(common1.Unit)(0),                                      // 50: com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
-	(*wrapperspb.StringValue)(nil),                         // 51: google.protobuf.StringValue
-	(*wrapperspb.Int32Value)(nil),                          // 52: google.protobuf.Int32Value
-	(*wrapperspb.BoolValue)(nil),                           // 53: google.protobuf.BoolValue
-	(*common1.Legend)(nil),                                 // 54: com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
-	(*wrapperspb.Int64Value)(nil),                          // 55: google.protobuf.Int64Value
-	(common1.ScaleType)(0),                                 // 56: com.coralogixapis.dashboards.v1.ast.widgets.common.ScaleType
-	(*wrapperspb.FloatValue)(nil),                          // 57: google.protobuf.FloatValue
-	(common1.SortByType)(0),                                // 58: com.coralogixapis.dashboards.v1.ast.widgets.common.SortByType
-	(common1.ThresholdType)(0),                             // 59: com.coralogixapis.dashboards.v1.ast.widgets.common.ThresholdType
-	(*common1.Threshold)(nil),                              // 60: com.coralogixapis.dashboards.v1.ast.widgets.common.Threshold
-	(common1.LegendBy)(0),                                  // 61: com.coralogixapis.dashboards.v1.ast.widgets.common.LegendBy
-	(common1.ThresholdBy)(0),                               // 62: com.coralogixapis.dashboards.v1.ast.widgets.common.ThresholdBy
-	(*common1.ColorsBy)(nil),                               // 63: com.coralogixapis.dashboards.v1.ast.widgets.common.ColorsBy
-	(*v1.UUID)(nil),                                        // 64: com.coralogixapis.dashboards.v1.UUID
-	(common1.TextAlignment)(0),                             // 65: com.coralogixapis.dashboards.v1.ast.widgets.common.TextAlignment
+	(Dynamic_Visualization_BarValueDisplay)(0),             // 1: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.BarValueDisplay
+	(Dynamic_Visualization_Table_FieldDataType)(0),         // 2: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.FieldDataType
+	(Dynamic_Visualization_TimeSeriesLines_StackedLine)(0), // 3: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.StackedLine
+	(Dynamic_Visualization_PieChart_LabelSource)(0),        // 4: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelSource
+	(Dynamic_Visualization_HorizontalBars_YAxisViewBy)(0),  // 5: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.YAxisViewBy
+	(*Dynamic)(nil),                                                                    // 6: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic
+	(*Dynamic_Query)(nil),                                                              // 7: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query
+	(*Dynamic_Visualization)(nil),                                                      // 8: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization
+	(*Dynamic_Query_Logs)(nil),                                                         // 9: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Logs
+	(*Dynamic_Query_Spans)(nil),                                                        // 10: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Spans
+	(*Dynamic_Query_Metrics)(nil),                                                      // 11: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics
+	(*Dynamic_Query_Dataprime)(nil),                                                    // 12: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Dataprime
+	(*Dynamic_Visualization_Table)(nil),                                                // 13: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table
+	(*Dynamic_Visualization_PropertyUnits)(nil),                                        // 14: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyUnits
+	(*Dynamic_Visualization_PropertyLinks)(nil),                                        // 15: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks
+	(*Dynamic_Visualization_TimeSeriesLines)(nil),                                      // 16: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines
+	(*Dynamic_Visualization_TimeSeriesBars)(nil),                                       // 17: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars
+	(*Dynamic_Visualization_Stat)(nil),                                                 // 18: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat
+	(*Dynamic_Visualization_Gauge)(nil),                                                // 19: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge
+	(*Dynamic_Visualization_HexagonBins)(nil),                                          // 20: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins
+	(*Dynamic_Visualization_PieChart)(nil),                                             // 21: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart
+	(*Dynamic_Visualization_HorizontalBars)(nil),                                       // 22: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars
+	(*Dynamic_Visualization_VerticalBars)(nil),                                         // 23: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars
+	(*Dynamic_Visualization_Heatmap)(nil),                                              // 24: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap
+	(*Dynamic_Visualization_HeatmapTooltip)(nil),                                       // 25: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HeatmapTooltip
+	(*Dynamic_Visualization_TimeSeriesTooltip)(nil),                                    // 26: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesTooltip
+	(*Dynamic_Visualization_Geomap)(nil),                                               // 27: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap
+	(*Dynamic_Visualization_Table_Column)(nil),                                         // 28: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Column
+	(*Dynamic_Visualization_Table_Rule)(nil),                                           // 29: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Rule
+	(*Dynamic_Visualization_Table_RuleScope)(nil),                                      // 30: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.RuleScope
+	(*Dynamic_Visualization_Table_Property)(nil),                                       // 31: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Property
+	(*Dynamic_Visualization_Table_PropertyDefinition)(nil),                             // 32: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyDefinition
+	(*Dynamic_Visualization_Table_PropertyThresholds)(nil),                             // 33: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyThresholds
+	(*Dynamic_Visualization_PropertyLinks_LinkAction)(nil),                             // 34: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks.LinkAction
+	(*Dynamic_Visualization_PieChart_LabelDefinition)(nil),                             // 35: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition
+	(*Dynamic_Visualization_Geomap_GeomapFieldConfig)(nil),                             // 36: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapFieldConfig
+	(*Dynamic_Visualization_Geomap_GeomapAggregation)(nil),                             // 37: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapAggregation
+	(*Dynamic_Visualization_Geomap_GeomapColor)(nil),                                   // 38: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapColor
+	(*Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapCoordinateConfig)(nil),      // 39: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapFieldConfig.GeomapCoordinateConfig
+	(*Dynamic_Visualization_Geomap_GeomapFieldConfig_GeomapAwsRegionConfig)(nil),       // 40: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapFieldConfig.GeomapAwsRegionConfig
+	(*Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationSimple)(nil),     // 41: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapAggregation.GeomapAggregationSimple
+	(*Dynamic_Visualization_Geomap_GeomapAggregation_GeomapAggregationFieldBased)(nil), // 42: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapAggregation.GeomapAggregationFieldBased
+	(*common.TimeFrameSelect)(nil),                                                     // 43: com.coralogixapis.dashboards.v1.common.TimeFrameSelect
+	(*common.LuceneQuery)(nil),                                                         // 44: com.coralogixapis.dashboards.v1.common.LuceneQuery
+	(common1.DataModeType)(0),                                                          // 45: com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
+	(*filters.Filter_LogsFilter)(nil),                                                  // 46: com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilter
+	(*common.ObservationField)(nil),                                                    // 47: com.coralogixapis.dashboards.v1.common.ObservationField
+	(*common.LogsAggregation)(nil),                                                     // 48: com.coralogixapis.dashboards.v1.common.LogsAggregation
+	(*filters.Filter_SpansFilter)(nil),                                                 // 49: com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilter
+	(*common.SpanObservationField)(nil),                                                // 50: com.coralogixapis.dashboards.v1.common.SpanObservationField
+	(*common.PromQlQuery)(nil),                                                         // 51: com.coralogixapis.dashboards.v1.common.PromQlQuery
+	(common.PromQLQueryType)(0),                                                        // 52: com.coralogixapis.dashboards.v1.common.PromQLQueryType
+	(common1.MetricsQueryEditorMode)(0),                                                // 53: com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
+	(common.MetricsSeriesLimitType)(0),                                                 // 54: com.coralogixapis.dashboards.v1.common.MetricsSeriesLimitType
+	(*common.DataprimeQuery)(nil),                                                      // 55: com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	(*wrapperspb.DoubleValue)(nil),                                                     // 56: google.protobuf.DoubleValue
+	(common1.Unit)(0),                                                                  // 57: com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
+	(*wrapperspb.StringValue)(nil),                                                     // 58: google.protobuf.StringValue
+	(*wrapperspb.Int32Value)(nil),                                                      // 59: google.protobuf.Int32Value
+	(*wrapperspb.BoolValue)(nil),                                                       // 60: google.protobuf.BoolValue
+	(*common1.Legend)(nil),                                                             // 61: com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
+	(*wrapperspb.Int64Value)(nil),                                                      // 62: google.protobuf.Int64Value
+	(common1.ScaleType)(0),                                                             // 63: com.coralogixapis.dashboards.v1.ast.widgets.common.ScaleType
+	(*wrapperspb.FloatValue)(nil),                                                      // 64: google.protobuf.FloatValue
+	(common1.SortByType)(0),                                                            // 65: com.coralogixapis.dashboards.v1.ast.widgets.common.SortByType
+	(common1.ThresholdType)(0),                                                         // 66: com.coralogixapis.dashboards.v1.ast.widgets.common.ThresholdType
+	(*common1.Threshold)(nil),                                                          // 67: com.coralogixapis.dashboards.v1.ast.widgets.common.Threshold
+	(common1.LegendBy)(0),                                                              // 68: com.coralogixapis.dashboards.v1.ast.widgets.common.LegendBy
+	(common1.ThresholdBy)(0),                                                           // 69: com.coralogixapis.dashboards.v1.ast.widgets.common.ThresholdBy
+	(*common1.ColorsBy)(nil),                                                           // 70: com.coralogixapis.dashboards.v1.ast.widgets.common.ColorsBy
+	(common1.ColorGradientType)(0),                                                     // 71: com.coralogixapis.dashboards.v1.ast.widgets.common.ColorGradientType
+	(*common1.MinMax)(nil),                                                             // 72: com.coralogixapis.dashboards.v1.ast.widgets.common.MinMax
+	(*v1.UUID)(nil),                                                                    // 73: com.coralogixapis.dashboards.v1.UUID
+	(common1.TextAlignment)(0),                                                         // 74: com.coralogixapis.dashboards.v1.ast.widgets.common.TextAlignment
+	(common1.ColorSolidType)(0),                                                        // 75: com.coralogixapis.dashboards.v1.ast.widgets.common.ColorSolidType
 }
 var file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_depIdxs = []int32{
-	8,   // 0: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query
-	36,  // 1: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
+	7,   // 0: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query
+	43,  // 1: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
 	0,   // 2: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.interpretation:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Interpretation
-	9,   // 3: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.visualization:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization
-	10,  // 4: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.logs:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Logs
-	11,  // 5: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.spans:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Spans
-	12,  // 6: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.metrics:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics
-	13,  // 7: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.dataprime:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Dataprime
-	14,  // 8: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.table:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table
-	17,  // 9: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.time_series_lines:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines
-	18,  // 10: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.time_series_bars:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars
-	19,  // 11: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.stat:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat
-	20,  // 12: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.gauge:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge
-	21,  // 13: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.hexagon_bins:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins
-	22,  // 14: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.pie_chart:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart
-	23,  // 15: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.horizontal_bars:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars
-	24,  // 16: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.vertical_bars:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars
-	25,  // 17: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.heatmap:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap
-	37,  // 18: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Logs.lucene_query:type_name -> com.coralogixapis.dashboards.v1.common.LuceneQuery
-	38,  // 19: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Logs.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
-	39,  // 20: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Logs.filters:type_name -> com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilter
-	40,  // 21: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Logs.group_by:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	41,  // 22: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Logs.aggregation:type_name -> com.coralogixapis.dashboards.v1.common.LogsAggregation
-	37,  // 23: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Spans.lucene_query:type_name -> com.coralogixapis.dashboards.v1.common.LuceneQuery
-	38,  // 24: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Spans.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
-	42,  // 25: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Spans.filters:type_name -> com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilter
-	43,  // 26: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Spans.group_by:type_name -> com.coralogixapis.dashboards.v1.common.SpanObservationField
-	41,  // 27: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Spans.aggregation:type_name -> com.coralogixapis.dashboards.v1.common.LogsAggregation
-	44,  // 28: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics.promql_query:type_name -> com.coralogixapis.dashboards.v1.common.PromQlQuery
-	45,  // 29: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics.promql_query_type:type_name -> com.coralogixapis.dashboards.v1.common.PromQLQueryType
-	46,  // 30: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics.editor_mode:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
-	47,  // 31: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics.series_limit_type:type_name -> com.coralogixapis.dashboards.v1.common.MetricsSeriesLimitType
-	48,  // 32: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Dataprime.dataprime_query:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
-	38,  // 33: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Dataprime.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
-	28,  // 34: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.columns:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Column
-	29,  // 35: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.rules:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Rule
-	49,  // 36: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyUnits.min:type_name -> google.protobuf.DoubleValue
-	49,  // 37: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyUnits.max:type_name -> google.protobuf.DoubleValue
-	50,  // 38: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyUnits.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
-	51,  // 39: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyUnits.custom_unit:type_name -> google.protobuf.StringValue
-	52,  // 40: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyUnits.decimal_precision:type_name -> google.protobuf.Int32Value
-	53,  // 41: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyUnits.allow_abbreviation:type_name -> google.protobuf.BoolValue
-	34,  // 42: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks.actions:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks.LinkAction
-	40,  // 43: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.temporal_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	40,  // 44: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.value_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	40,  // 45: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	54,  // 46: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.legend:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
-	27,  // 47: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.tooltip:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesTooltip
-	4,   // 48: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.stacked_line:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.StackedLine
-	53,  // 49: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.connect_nulls:type_name -> google.protobuf.BoolValue
-	51,  // 50: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.series_name_template:type_name -> google.protobuf.StringValue
-	55,  // 51: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.series_count_limit:type_name -> google.protobuf.Int64Value
-	50,  // 52: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
-	51,  // 53: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.custom_unit:type_name -> google.protobuf.StringValue
-	56,  // 54: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.scale_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ScaleType
-	51,  // 55: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.color_scheme:type_name -> google.protobuf.StringValue
-	53,  // 56: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.hash_colors:type_name -> google.protobuf.BoolValue
-	52,  // 57: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.decimal_precision:type_name -> google.protobuf.Int32Value
-	53,  // 58: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.allow_abbreviation:type_name -> google.protobuf.BoolValue
-	57,  // 59: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.y_axis_min:type_name -> google.protobuf.FloatValue
-	57,  // 60: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.y_axis_max:type_name -> google.protobuf.FloatValue
-	40,  // 61: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.temporal_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	40,  // 62: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.value_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	40,  // 63: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	54,  // 64: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.legend:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
-	27,  // 65: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.tooltip:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesTooltip
-	51,  // 66: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.series_name_template:type_name -> google.protobuf.StringValue
-	52,  // 67: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.max_slices_per_bar:type_name -> google.protobuf.Int32Value
-	50,  // 68: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
-	51,  // 69: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.custom_unit:type_name -> google.protobuf.StringValue
-	56,  // 70: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.scale_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ScaleType
-	51,  // 71: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.color_scheme:type_name -> google.protobuf.StringValue
-	53,  // 72: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.hash_colors:type_name -> google.protobuf.BoolValue
-	52,  // 73: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.decimal_precision:type_name -> google.protobuf.Int32Value
-	53,  // 74: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.allow_abbreviation:type_name -> google.protobuf.BoolValue
-	57,  // 75: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.y_axis_min:type_name -> google.protobuf.FloatValue
-	57,  // 76: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.y_axis_max:type_name -> google.protobuf.FloatValue
-	2,   // 77: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.bar_value_display:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.BarValueDisplay
-	58,  // 78: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.sort_by:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.SortByType
-	40,  // 79: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.value_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	40,  // 80: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.value_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	40,  // 81: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	49,  // 82: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.min:type_name -> google.protobuf.DoubleValue
-	49,  // 83: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.max:type_name -> google.protobuf.DoubleValue
-	50,  // 84: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
-	51,  // 85: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.custom_unit:type_name -> google.protobuf.StringValue
-	59,  // 86: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.threshold_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ThresholdType
-	60,  // 87: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.thresholds:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Threshold
-	54,  // 88: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.legend:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
-	61,  // 89: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.legend_by:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LegendBy
-	52,  // 90: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.decimal_precision:type_name -> google.protobuf.Int32Value
-	53,  // 91: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.allow_abbreviation:type_name -> google.protobuf.BoolValue
-	53,  // 92: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.display_series_name:type_name -> google.protobuf.BoolValue
-	62,  // 93: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.threshold_by:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ThresholdBy
-	40,  // 94: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.value_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	40,  // 95: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.value_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	40,  // 96: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	49,  // 97: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.min:type_name -> google.protobuf.DoubleValue
-	49,  // 98: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.max:type_name -> google.protobuf.DoubleValue
-	50,  // 99: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
-	51,  // 100: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.custom_unit:type_name -> google.protobuf.StringValue
-	59,  // 101: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.threshold_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ThresholdType
-	60,  // 102: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.thresholds:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Threshold
-	54,  // 103: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.legend:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
-	61,  // 104: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.legend_by:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LegendBy
-	52,  // 105: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.decimal_precision:type_name -> google.protobuf.Int32Value
-	53,  // 106: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.allow_abbreviation:type_name -> google.protobuf.BoolValue
-	53,  // 107: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.show_inner_arc:type_name -> google.protobuf.BoolValue
-	53,  // 108: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.show_outer_arc:type_name -> google.protobuf.BoolValue
-	53,  // 109: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.display_series_name:type_name -> google.protobuf.BoolValue
-	40,  // 110: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.value_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	40,  // 111: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	49,  // 112: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.min:type_name -> google.protobuf.DoubleValue
-	49,  // 113: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.max:type_name -> google.protobuf.DoubleValue
-	50,  // 114: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
-	51,  // 115: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.custom_unit:type_name -> google.protobuf.StringValue
-	59,  // 116: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.threshold_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ThresholdType
-	60,  // 117: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.thresholds:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Threshold
-	54,  // 118: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.legend:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
-	61,  // 119: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.legend_by:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LegendBy
-	52,  // 120: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.decimal_precision:type_name -> google.protobuf.Int32Value
-	53,  // 121: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.allow_abbreviation:type_name -> google.protobuf.BoolValue
-	40,  // 122: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.value_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	40,  // 123: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	40,  // 124: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.sub_category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	52,  // 125: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.max_slices_per_chart:type_name -> google.protobuf.Int32Value
-	52,  // 126: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.min_slice_percentage:type_name -> google.protobuf.Int32Value
-	52,  // 127: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.max_slices_per_stack:type_name -> google.protobuf.Int32Value
-	51,  // 128: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.stack_name_template:type_name -> google.protobuf.StringValue
-	35,  // 129: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.label_definition:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition
-	51,  // 130: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.group_name_template:type_name -> google.protobuf.StringValue
-	50,  // 131: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
-	51,  // 132: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.custom_unit:type_name -> google.protobuf.StringValue
-	51,  // 133: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.color_scheme:type_name -> google.protobuf.StringValue
-	53,  // 134: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.hash_colors:type_name -> google.protobuf.BoolValue
-	52,  // 135: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.decimal_precision:type_name -> google.protobuf.Int32Value
-	53,  // 136: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.allow_abbreviation:type_name -> google.protobuf.BoolValue
-	54,  // 137: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.legend:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
-	53,  // 138: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.show_total:type_name -> google.protobuf.BoolValue
-	40,  // 139: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.value_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	40,  // 140: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	40,  // 141: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.sub_category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	52,  // 142: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.max_bars_per_chart:type_name -> google.protobuf.Int32Value
-	52,  // 143: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.max_slices_per_bar:type_name -> google.protobuf.Int32Value
-	51,  // 144: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.stack_name_template:type_name -> google.protobuf.StringValue
-	56,  // 145: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.scale_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ScaleType
-	63,  // 146: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.colors_by:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ColorsBy
-	51,  // 147: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.color_scheme:type_name -> google.protobuf.StringValue
-	53,  // 148: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.hash_colors:type_name -> google.protobuf.BoolValue
-	50,  // 149: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
-	51,  // 150: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.custom_unit:type_name -> google.protobuf.StringValue
-	53,  // 151: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.display_on_bar:type_name -> google.protobuf.BoolValue
-	52,  // 152: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.decimal_precision:type_name -> google.protobuf.Int32Value
-	53,  // 153: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.allow_abbreviation:type_name -> google.protobuf.BoolValue
-	57,  // 154: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.y_axis_min:type_name -> google.protobuf.FloatValue
-	57,  // 155: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.y_axis_max:type_name -> google.protobuf.FloatValue
-	54,  // 156: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.legend:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
-	58,  // 157: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.sort_by:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.SortByType
-	51,  // 158: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.group_name_template:type_name -> google.protobuf.StringValue
-	6,   // 159: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.y_axis_view_by:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.YAxisViewBy
-	40,  // 160: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.value_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	40,  // 161: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	40,  // 162: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.sub_category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	52,  // 163: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.max_bars_per_chart:type_name -> google.protobuf.Int32Value
-	52,  // 164: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.max_slices_per_bar:type_name -> google.protobuf.Int32Value
-	51,  // 165: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.stack_name_template:type_name -> google.protobuf.StringValue
-	56,  // 166: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.scale_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ScaleType
-	63,  // 167: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.colors_by:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ColorsBy
-	51,  // 168: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.color_scheme:type_name -> google.protobuf.StringValue
-	53,  // 169: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.hash_colors:type_name -> google.protobuf.BoolValue
-	50,  // 170: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
-	51,  // 171: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.custom_unit:type_name -> google.protobuf.StringValue
-	2,   // 172: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.bar_value_display:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.BarValueDisplay
-	52,  // 173: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.decimal_precision:type_name -> google.protobuf.Int32Value
-	53,  // 174: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.allow_abbreviation:type_name -> google.protobuf.BoolValue
-	57,  // 175: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.y_axis_min:type_name -> google.protobuf.FloatValue
-	57,  // 176: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.y_axis_max:type_name -> google.protobuf.FloatValue
-	54,  // 177: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.legend:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
-	58,  // 178: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.sort_by:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.SortByType
-	51,  // 179: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.group_name_template:type_name -> google.protobuf.StringValue
-	40,  // 180: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.value_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	40,  // 181: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.x_axis_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	40,  // 182: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.y_axis_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	53,  // 183: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.show_numbers:type_name -> google.protobuf.BoolValue
-	56,  // 184: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.scale_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ScaleType
-	1,   // 185: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.preset:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HeatmapColorPreset
-	53,  // 186: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.allow_abbreviation:type_name -> google.protobuf.BoolValue
-	50,  // 187: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
-	51,  // 188: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.custom_unit:type_name -> google.protobuf.StringValue
-	52,  // 189: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.decimal_precision:type_name -> google.protobuf.Int32Value
-	57,  // 190: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.color_axis_min:type_name -> google.protobuf.FloatValue
-	57,  // 191: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.color_axis_max:type_name -> google.protobuf.FloatValue
-	26,  // 192: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.tooltip:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HeatmapTooltip
-	51,  // 193: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HeatmapTooltip.message_template:type_name -> google.protobuf.StringValue
-	40,  // 194: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HeatmapTooltip.labels:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	53,  // 195: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesTooltip.show_all_series:type_name -> google.protobuf.BoolValue
-	53,  // 196: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesTooltip.show_labels:type_name -> google.protobuf.BoolValue
-	40,  // 197: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Column.field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	64,  // 198: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Rule.id:type_name -> com.coralogixapis.dashboards.v1.UUID
-	51,  // 199: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Rule.name:type_name -> google.protobuf.StringValue
-	51,  // 200: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Rule.description:type_name -> google.protobuf.StringValue
-	30,  // 201: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Rule.rule_scope:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.RuleScope
-	31,  // 202: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Rule.properties:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Property
-	40,  // 203: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.RuleScope.field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	51,  // 204: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.RuleScope.regex:type_name -> google.protobuf.StringValue
-	3,   // 205: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.RuleScope.field_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.FieldDataType
-	64,  // 206: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Property.id:type_name -> com.coralogixapis.dashboards.v1.UUID
-	32,  // 207: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Property.definition:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyDefinition
-	33,  // 208: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyDefinition.thresholds:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyThresholds
-	65,  // 209: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyDefinition.alignment:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.TextAlignment
-	15,  // 210: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyDefinition.units:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyUnits
-	51,  // 211: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyDefinition.regex_extract:type_name -> google.protobuf.StringValue
-	16,  // 212: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyDefinition.link:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks
-	60,  // 213: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyThresholds.values:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Threshold
-	59,  // 214: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyThresholds.type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ThresholdType
-	49,  // 215: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyThresholds.min:type_name -> google.protobuf.DoubleValue
-	49,  // 216: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyThresholds.max:type_name -> google.protobuf.DoubleValue
-	64,  // 217: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks.LinkAction.id:type_name -> com.coralogixapis.dashboards.v1.UUID
-	51,  // 218: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks.LinkAction.name:type_name -> google.protobuf.StringValue
-	51,  // 219: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks.LinkAction.url:type_name -> google.protobuf.StringValue
-	53,  // 220: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks.LinkAction.should_open_in_new_window:type_name -> google.protobuf.BoolValue
-	5,   // 221: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition.label_source:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelSource
-	53,  // 222: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition.is_visible:type_name -> google.protobuf.BoolValue
-	53,  // 223: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition.show_name:type_name -> google.protobuf.BoolValue
-	53,  // 224: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition.show_value:type_name -> google.protobuf.BoolValue
-	53,  // 225: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition.show_percentage:type_name -> google.protobuf.BoolValue
-	226, // [226:226] is the sub-list for method output_type
-	226, // [226:226] is the sub-list for method input_type
-	226, // [226:226] is the sub-list for extension type_name
-	226, // [226:226] is the sub-list for extension extendee
-	0,   // [0:226] is the sub-list for field type_name
+	8,   // 3: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.visualization:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization
+	9,   // 4: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.logs:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Logs
+	10,  // 5: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.spans:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Spans
+	11,  // 6: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.metrics:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics
+	12,  // 7: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.dataprime:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Dataprime
+	13,  // 8: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.table:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table
+	16,  // 9: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.time_series_lines:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines
+	17,  // 10: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.time_series_bars:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars
+	18,  // 11: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.stat:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat
+	19,  // 12: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.gauge:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge
+	20,  // 13: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.hexagon_bins:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins
+	21,  // 14: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.pie_chart:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart
+	22,  // 15: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.horizontal_bars:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars
+	23,  // 16: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.vertical_bars:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars
+	24,  // 17: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.heatmap:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap
+	27,  // 18: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.geomap:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap
+	44,  // 19: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Logs.lucene_query:type_name -> com.coralogixapis.dashboards.v1.common.LuceneQuery
+	45,  // 20: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Logs.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
+	46,  // 21: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Logs.filters:type_name -> com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilter
+	47,  // 22: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Logs.group_by:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	48,  // 23: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Logs.aggregation:type_name -> com.coralogixapis.dashboards.v1.common.LogsAggregation
+	44,  // 24: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Spans.lucene_query:type_name -> com.coralogixapis.dashboards.v1.common.LuceneQuery
+	45,  // 25: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Spans.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
+	49,  // 26: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Spans.filters:type_name -> com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilter
+	50,  // 27: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Spans.group_by:type_name -> com.coralogixapis.dashboards.v1.common.SpanObservationField
+	48,  // 28: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Spans.aggregation:type_name -> com.coralogixapis.dashboards.v1.common.LogsAggregation
+	51,  // 29: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics.promql_query:type_name -> com.coralogixapis.dashboards.v1.common.PromQlQuery
+	52,  // 30: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics.promql_query_type:type_name -> com.coralogixapis.dashboards.v1.common.PromQLQueryType
+	53,  // 31: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics.editor_mode:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
+	54,  // 32: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics.series_limit_type:type_name -> com.coralogixapis.dashboards.v1.common.MetricsSeriesLimitType
+	55,  // 33: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Dataprime.dataprime_query:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	45,  // 34: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Dataprime.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
+	28,  // 35: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.columns:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Column
+	29,  // 36: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.rules:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Rule
+	56,  // 37: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyUnits.min:type_name -> google.protobuf.DoubleValue
+	56,  // 38: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyUnits.max:type_name -> google.protobuf.DoubleValue
+	57,  // 39: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyUnits.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
+	58,  // 40: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyUnits.custom_unit:type_name -> google.protobuf.StringValue
+	59,  // 41: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyUnits.decimal_precision:type_name -> google.protobuf.Int32Value
+	60,  // 42: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyUnits.allow_abbreviation:type_name -> google.protobuf.BoolValue
+	34,  // 43: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks.actions:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks.LinkAction
+	47,  // 44: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.temporal_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	47,  // 45: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.value_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	47,  // 46: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	61,  // 47: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.legend:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
+	26,  // 48: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.tooltip:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesTooltip
+	3,   // 49: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.stacked_line:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.StackedLine
+	60,  // 50: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.connect_nulls:type_name -> google.protobuf.BoolValue
+	58,  // 51: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.series_name_template:type_name -> google.protobuf.StringValue
+	62,  // 52: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.series_count_limit:type_name -> google.protobuf.Int64Value
+	57,  // 53: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
+	58,  // 54: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.custom_unit:type_name -> google.protobuf.StringValue
+	63,  // 55: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.scale_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ScaleType
+	58,  // 56: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.color_scheme:type_name -> google.protobuf.StringValue
+	60,  // 57: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.hash_colors:type_name -> google.protobuf.BoolValue
+	59,  // 58: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.decimal_precision:type_name -> google.protobuf.Int32Value
+	60,  // 59: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.allow_abbreviation:type_name -> google.protobuf.BoolValue
+	64,  // 60: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.y_axis_min:type_name -> google.protobuf.FloatValue
+	64,  // 61: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesLines.y_axis_max:type_name -> google.protobuf.FloatValue
+	47,  // 62: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.temporal_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	47,  // 63: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.value_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	47,  // 64: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	61,  // 65: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.legend:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
+	26,  // 66: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.tooltip:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesTooltip
+	58,  // 67: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.series_name_template:type_name -> google.protobuf.StringValue
+	59,  // 68: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.max_slices_per_bar:type_name -> google.protobuf.Int32Value
+	57,  // 69: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
+	58,  // 70: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.custom_unit:type_name -> google.protobuf.StringValue
+	63,  // 71: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.scale_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ScaleType
+	58,  // 72: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.color_scheme:type_name -> google.protobuf.StringValue
+	60,  // 73: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.hash_colors:type_name -> google.protobuf.BoolValue
+	59,  // 74: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.decimal_precision:type_name -> google.protobuf.Int32Value
+	60,  // 75: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.allow_abbreviation:type_name -> google.protobuf.BoolValue
+	64,  // 76: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.y_axis_min:type_name -> google.protobuf.FloatValue
+	64,  // 77: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.y_axis_max:type_name -> google.protobuf.FloatValue
+	1,   // 78: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.bar_value_display:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.BarValueDisplay
+	65,  // 79: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesBars.sort_by:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.SortByType
+	47,  // 80: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.value_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	47,  // 81: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.value_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	47,  // 82: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	56,  // 83: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.min:type_name -> google.protobuf.DoubleValue
+	56,  // 84: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.max:type_name -> google.protobuf.DoubleValue
+	57,  // 85: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
+	58,  // 86: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.custom_unit:type_name -> google.protobuf.StringValue
+	66,  // 87: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.threshold_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ThresholdType
+	67,  // 88: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.thresholds:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Threshold
+	61,  // 89: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.legend:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
+	68,  // 90: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.legend_by:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LegendBy
+	59,  // 91: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.decimal_precision:type_name -> google.protobuf.Int32Value
+	60,  // 92: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.allow_abbreviation:type_name -> google.protobuf.BoolValue
+	60,  // 93: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.display_series_name:type_name -> google.protobuf.BoolValue
+	69,  // 94: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Stat.threshold_by:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ThresholdBy
+	47,  // 95: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.value_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	47,  // 96: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.value_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	47,  // 97: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	56,  // 98: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.min:type_name -> google.protobuf.DoubleValue
+	56,  // 99: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.max:type_name -> google.protobuf.DoubleValue
+	57,  // 100: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
+	58,  // 101: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.custom_unit:type_name -> google.protobuf.StringValue
+	66,  // 102: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.threshold_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ThresholdType
+	67,  // 103: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.thresholds:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Threshold
+	61,  // 104: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.legend:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
+	68,  // 105: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.legend_by:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LegendBy
+	59,  // 106: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.decimal_precision:type_name -> google.protobuf.Int32Value
+	60,  // 107: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.allow_abbreviation:type_name -> google.protobuf.BoolValue
+	60,  // 108: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.show_inner_arc:type_name -> google.protobuf.BoolValue
+	60,  // 109: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.show_outer_arc:type_name -> google.protobuf.BoolValue
+	60,  // 110: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Gauge.display_series_name:type_name -> google.protobuf.BoolValue
+	47,  // 111: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.value_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	47,  // 112: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	56,  // 113: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.min:type_name -> google.protobuf.DoubleValue
+	56,  // 114: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.max:type_name -> google.protobuf.DoubleValue
+	57,  // 115: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
+	58,  // 116: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.custom_unit:type_name -> google.protobuf.StringValue
+	66,  // 117: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.threshold_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ThresholdType
+	67,  // 118: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.thresholds:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Threshold
+	61,  // 119: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.legend:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
+	68,  // 120: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.legend_by:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LegendBy
+	59,  // 121: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.decimal_precision:type_name -> google.protobuf.Int32Value
+	60,  // 122: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HexagonBins.allow_abbreviation:type_name -> google.protobuf.BoolValue
+	47,  // 123: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.value_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	47,  // 124: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	47,  // 125: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.sub_category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	59,  // 126: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.max_slices_per_chart:type_name -> google.protobuf.Int32Value
+	59,  // 127: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.min_slice_percentage:type_name -> google.protobuf.Int32Value
+	59,  // 128: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.max_slices_per_stack:type_name -> google.protobuf.Int32Value
+	58,  // 129: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.stack_name_template:type_name -> google.protobuf.StringValue
+	35,  // 130: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.label_definition:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition
+	58,  // 131: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.group_name_template:type_name -> google.protobuf.StringValue
+	57,  // 132: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
+	58,  // 133: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.custom_unit:type_name -> google.protobuf.StringValue
+	58,  // 134: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.color_scheme:type_name -> google.protobuf.StringValue
+	60,  // 135: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.hash_colors:type_name -> google.protobuf.BoolValue
+	59,  // 136: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.decimal_precision:type_name -> google.protobuf.Int32Value
+	60,  // 137: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.allow_abbreviation:type_name -> google.protobuf.BoolValue
+	61,  // 138: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.legend:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
+	60,  // 139: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.show_total:type_name -> google.protobuf.BoolValue
+	47,  // 140: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.value_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	47,  // 141: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	47,  // 142: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.sub_category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	59,  // 143: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.max_bars_per_chart:type_name -> google.protobuf.Int32Value
+	59,  // 144: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.max_slices_per_bar:type_name -> google.protobuf.Int32Value
+	58,  // 145: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.stack_name_template:type_name -> google.protobuf.StringValue
+	63,  // 146: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.scale_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ScaleType
+	70,  // 147: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.colors_by:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ColorsBy
+	58,  // 148: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.color_scheme:type_name -> google.protobuf.StringValue
+	60,  // 149: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.hash_colors:type_name -> google.protobuf.BoolValue
+	57,  // 150: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
+	58,  // 151: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.custom_unit:type_name -> google.protobuf.StringValue
+	60,  // 152: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.display_on_bar:type_name -> google.protobuf.BoolValue
+	59,  // 153: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.decimal_precision:type_name -> google.protobuf.Int32Value
+	60,  // 154: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.allow_abbreviation:type_name -> google.protobuf.BoolValue
+	64,  // 155: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.y_axis_min:type_name -> google.protobuf.FloatValue
+	64,  // 156: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.y_axis_max:type_name -> google.protobuf.FloatValue
+	61,  // 157: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.legend:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
+	65,  // 158: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.sort_by:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.SortByType
+	58,  // 159: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.group_name_template:type_name -> google.protobuf.StringValue
+	5,   // 160: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.y_axis_view_by:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HorizontalBars.YAxisViewBy
+	47,  // 161: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.value_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	47,  // 162: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	47,  // 163: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.sub_category_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	59,  // 164: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.max_bars_per_chart:type_name -> google.protobuf.Int32Value
+	59,  // 165: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.max_slices_per_bar:type_name -> google.protobuf.Int32Value
+	58,  // 166: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.stack_name_template:type_name -> google.protobuf.StringValue
+	63,  // 167: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.scale_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ScaleType
+	70,  // 168: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.colors_by:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ColorsBy
+	58,  // 169: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.color_scheme:type_name -> google.protobuf.StringValue
+	60,  // 170: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.hash_colors:type_name -> google.protobuf.BoolValue
+	57,  // 171: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
+	58,  // 172: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.custom_unit:type_name -> google.protobuf.StringValue
+	1,   // 173: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.bar_value_display:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.BarValueDisplay
+	59,  // 174: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.decimal_precision:type_name -> google.protobuf.Int32Value
+	60,  // 175: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.allow_abbreviation:type_name -> google.protobuf.BoolValue
+	64,  // 176: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.y_axis_min:type_name -> google.protobuf.FloatValue
+	64,  // 177: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.y_axis_max:type_name -> google.protobuf.FloatValue
+	61,  // 178: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.legend:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
+	65,  // 179: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.sort_by:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.SortByType
+	58,  // 180: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.VerticalBars.group_name_template:type_name -> google.protobuf.StringValue
+	47,  // 181: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.value_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	47,  // 182: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.x_axis_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	47,  // 183: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.y_axis_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	60,  // 184: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.show_numbers:type_name -> google.protobuf.BoolValue
+	63,  // 185: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.scale_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ScaleType
+	71,  // 186: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.preset:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ColorGradientType
+	60,  // 187: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.allow_abbreviation:type_name -> google.protobuf.BoolValue
+	57,  // 188: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
+	58,  // 189: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.custom_unit:type_name -> google.protobuf.StringValue
+	59,  // 190: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.decimal_precision:type_name -> google.protobuf.Int32Value
+	64,  // 191: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.color_axis_min:type_name -> google.protobuf.FloatValue
+	64,  // 192: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.color_axis_max:type_name -> google.protobuf.FloatValue
+	25,  // 193: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Heatmap.tooltip:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HeatmapTooltip
+	58,  // 194: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HeatmapTooltip.message_template:type_name -> google.protobuf.StringValue
+	47,  // 195: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.HeatmapTooltip.labels:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	60,  // 196: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesTooltip.show_all_series:type_name -> google.protobuf.BoolValue
+	60,  // 197: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.TimeSeriesTooltip.show_labels:type_name -> google.protobuf.BoolValue
+	36,  // 198: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.config:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapFieldConfig
+	37,  // 199: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.aggregation:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapAggregation
+	38,  // 200: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.color:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapColor
+	72,  // 201: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.min_max:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.MinMax
+	60,  // 202: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.allow_abbreviation:type_name -> google.protobuf.BoolValue
+	57,  // 203: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
+	58,  // 204: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.custom_unit:type_name -> google.protobuf.StringValue
+	59,  // 205: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.decimal_precision:type_name -> google.protobuf.Int32Value
+	47,  // 206: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Column.field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	73,  // 207: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Rule.id:type_name -> com.coralogixapis.dashboards.v1.UUID
+	58,  // 208: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Rule.name:type_name -> google.protobuf.StringValue
+	58,  // 209: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Rule.description:type_name -> google.protobuf.StringValue
+	30,  // 210: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Rule.rule_scope:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.RuleScope
+	31,  // 211: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Rule.properties:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Property
+	47,  // 212: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.RuleScope.field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	58,  // 213: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.RuleScope.regex:type_name -> google.protobuf.StringValue
+	2,   // 214: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.RuleScope.field_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.FieldDataType
+	73,  // 215: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Property.id:type_name -> com.coralogixapis.dashboards.v1.UUID
+	32,  // 216: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.Property.definition:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyDefinition
+	33,  // 217: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyDefinition.thresholds:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyThresholds
+	74,  // 218: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyDefinition.alignment:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.TextAlignment
+	14,  // 219: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyDefinition.units:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyUnits
+	58,  // 220: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyDefinition.regex_extract:type_name -> google.protobuf.StringValue
+	15,  // 221: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyDefinition.link:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks
+	67,  // 222: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyThresholds.values:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Threshold
+	66,  // 223: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyThresholds.type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ThresholdType
+	56,  // 224: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyThresholds.min:type_name -> google.protobuf.DoubleValue
+	56,  // 225: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Table.PropertyThresholds.max:type_name -> google.protobuf.DoubleValue
+	73,  // 226: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks.LinkAction.id:type_name -> com.coralogixapis.dashboards.v1.UUID
+	58,  // 227: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks.LinkAction.name:type_name -> google.protobuf.StringValue
+	58,  // 228: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks.LinkAction.url:type_name -> google.protobuf.StringValue
+	60,  // 229: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PropertyLinks.LinkAction.should_open_in_new_window:type_name -> google.protobuf.BoolValue
+	4,   // 230: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition.label_source:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelSource
+	60,  // 231: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition.is_visible:type_name -> google.protobuf.BoolValue
+	60,  // 232: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition.show_name:type_name -> google.protobuf.BoolValue
+	60,  // 233: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition.show_value:type_name -> google.protobuf.BoolValue
+	60,  // 234: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.PieChart.LabelDefinition.show_percentage:type_name -> google.protobuf.BoolValue
+	39,  // 235: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapFieldConfig.coordinate_config:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapFieldConfig.GeomapCoordinateConfig
+	40,  // 236: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapFieldConfig.aws_region_config:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapFieldConfig.GeomapAwsRegionConfig
+	41,  // 237: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapAggregation.count:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapAggregation.GeomapAggregationSimple
+	42,  // 238: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapAggregation.sum:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapAggregation.GeomapAggregationFieldBased
+	42,  // 239: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapAggregation.min:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapAggregation.GeomapAggregationFieldBased
+	42,  // 240: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapAggregation.max:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapAggregation.GeomapAggregationFieldBased
+	42,  // 241: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapAggregation.avg:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapAggregation.GeomapAggregationFieldBased
+	75,  // 242: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapColor.size:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ColorSolidType
+	71,  // 243: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapColor.color_range:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ColorGradientType
+	47,  // 244: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapFieldConfig.GeomapCoordinateConfig.latitude_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	47,  // 245: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapFieldConfig.GeomapCoordinateConfig.longitude_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	47,  // 246: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapFieldConfig.GeomapAwsRegionConfig.aws_region_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	47,  // 247: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Visualization.Geomap.GeomapAggregation.GeomapAggregationFieldBased.field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	248, // [248:248] is the sub-list for method output_type
+	248, // [248:248] is the sub-list for method input_type
+	248, // [248:248] is the sub-list for extension type_name
+	248, // [248:248] is the sub-list for extension extendee
+	0,   // [0:248] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_init() }
@@ -4288,30 +4874,46 @@ func file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_init() {
 		(*Dynamic_Visualization_HorizontalBars_)(nil),
 		(*Dynamic_Visualization_VerticalBars_)(nil),
 		(*Dynamic_Visualization_Heatmap_)(nil),
+		(*Dynamic_Visualization_Geomap_)(nil),
 	}
 	file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[18].OneofWrappers = []any{
 		(*Dynamic_Visualization_Heatmap_Preset)(nil),
 	}
-	file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[23].OneofWrappers = []any{
+	file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[24].OneofWrappers = []any{
 		(*Dynamic_Visualization_Table_RuleScope_Field)(nil),
 		(*Dynamic_Visualization_Table_RuleScope_Regex)(nil),
 		(*Dynamic_Visualization_Table_RuleScope_FieldType)(nil),
 	}
-	file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[25].OneofWrappers = []any{
+	file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[26].OneofWrappers = []any{
 		(*Dynamic_Visualization_Table_PropertyDefinition_Thresholds)(nil),
 		(*Dynamic_Visualization_Table_PropertyDefinition_Alignment)(nil),
 		(*Dynamic_Visualization_Table_PropertyDefinition_Units)(nil),
 		(*Dynamic_Visualization_Table_PropertyDefinition_RegexExtract)(nil),
 		(*Dynamic_Visualization_Table_PropertyDefinition_Link)(nil),
 	}
-	file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[26].OneofWrappers = []any{}
+	file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[27].OneofWrappers = []any{}
+	file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[30].OneofWrappers = []any{
+		(*Dynamic_Visualization_Geomap_GeomapFieldConfig_CoordinateConfig)(nil),
+		(*Dynamic_Visualization_Geomap_GeomapFieldConfig_AwsRegionConfig)(nil),
+	}
+	file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[31].OneofWrappers = []any{
+		(*Dynamic_Visualization_Geomap_GeomapAggregation_Count)(nil),
+		(*Dynamic_Visualization_Geomap_GeomapAggregation_Sum)(nil),
+		(*Dynamic_Visualization_Geomap_GeomapAggregation_Min)(nil),
+		(*Dynamic_Visualization_Geomap_GeomapAggregation_Max)(nil),
+		(*Dynamic_Visualization_Geomap_GeomapAggregation_Avg)(nil),
+	}
+	file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_msgTypes[32].OneofWrappers = []any{
+		(*Dynamic_Visualization_Geomap_GeomapColor_Size)(nil),
+		(*Dynamic_Visualization_Geomap_GeomapColor_ColorRange)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDesc), len(file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDesc)),
-			NumEnums:      7,
-			NumMessages:   29,
+			NumEnums:      6,
+			NumMessages:   37,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

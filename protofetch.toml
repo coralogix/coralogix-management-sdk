@@ -201,7 +201,7 @@ allow_policies = [
 
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
-revision = "v2.7.47"
+revision = "v2.7.48"
 allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/annotation.proto",
     "src/com/coralogixapis/dashboards/v1/ast/dashboard.proto",
@@ -214,6 +214,8 @@ allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/widgets/bar_chart.proto",
     "src/com/coralogixapis/dashboards/v1/ast/widgets/common/text_alignment.proto",
     "src/com/coralogixapis/dashboards/v1/ast/widgets/common/colors_by.proto",
+    "src/com/coralogixapis/dashboards/v1/ast/widgets/common/color_gradient_type.proto",
+    "src/com/coralogixapis/dashboards/v1/ast/widgets/common/color_solid_type.proto",
     "src/com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto",
     "src/com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto",
     "src/com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_aggregation_type.proto",
@@ -223,6 +225,7 @@ allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/widgets/common/sort_by.proto",
     "src/com/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto",
     "src/com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto",
+    "src/com/coralogixapis/dashboards/v1/ast/widgets/common/min_max.proto",
     "src/com/coralogixapis/dashboards/v1/ast/widgets/data_table.proto",
     "src/com/coralogixapis/dashboards/v1/ast/widgets/gauge.proto",
     "src/com/coralogixapis/dashboards/v1/ast/widgets/hexagon.proto",
