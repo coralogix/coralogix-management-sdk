@@ -39,8 +39,8 @@ commit_hash = "5b3ac4ca2376cc60f987bf14918a63b92a7f0b2f"
 [[dependencies]]
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
-revision = "v2.7.48"
-commit_hash = "f6f5e1a94aac505b39e98c3e87ad10c2083b9985"
+revision = "v2.7.50"
+commit_hash = "15b1eb64af7f28e2c3065275dc55d0e2bdd09ab3"
 
 [[dependencies]]
 name = "cx-api-data-usage"
@@ -75,9 +75,8 @@ commit_hash = "b960466df912ba67e7157e2f016af02eb6c9f669"
 [[dependencies]]
 name = "cx-api-lmd-model"
 url = "github.com/coralogix/cx-api-lmd-model"
-protocol = "ssh"
-revision = "v0.0.8"
-commit_hash = "c3519ef689aca1a640f985e7b339394028c261f4"
+branch = "master"
+commit_hash = "fa71ff99fdcdeaf13b525f65ad2b2afa9a70abcb"
 
 [[dependencies]]
 name = "cx-api-logs2metrics"
