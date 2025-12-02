@@ -33,6 +33,31 @@ message Dynamic {
 
   Visualization visualization = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Specifies how the query results should be visualized"}];
 
+  repeated QueryDefinition query_definitions = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Definitions of widget queries"}];
+
+  message QueryDefinition {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+      json_schema: {
+        title: "QueryDefinition"
+        description: "Query definition for dynamic widget"
+        required: [
+          "id",
+          "query"
+        ]
+      }
+    };
+
+    google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+      description: "Unique id of the query definition"
+      example: '{ "value": "73c65643-91d5-dba2-35cd-baa49dc65331" }'
+    }];
+    Query query = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Query object"}];
+    google.protobuf.StringValue name = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+      description: "Custom name of the query"
+      example: '{ "value": "Query A" }'
+    }];
+  }
+
   message Query {
     oneof value {
       Logs logs = 1;
@@ -830,7 +855,8 @@ message Dynamic {
       common.ScaleType scale_type = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Scale type - linear/logarithmic"}];
 
       oneof color_config {
-        common.ColorGradientType preset = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Color configuration for the heatmap"}];
+        HeatmapColorPreset preset = 6;
+        common.ColorGradientType color_range = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Color configuration for the heatmap"}];
       }
 
       google.protobuf.BoolValue allow_abbreviation = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
@@ -864,6 +890,19 @@ message Dynamic {
       }];
 
       HeatmapTooltip tooltip = 13 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Tooltip settings for the widget"}];
+    }
+
+    // Deprecated enum, will be removed in the future, use common.ColorGradientType instead
+    enum HeatmapColorPreset {
+      HEATMAP_COLOR_PRESET_UNSPECIFIED = 0;
+      HEATMAP_COLOR_PRESET_BLUE = 1;
+      HEATMAP_COLOR_PRESET_GREEN = 2;
+      HEATMAP_COLOR_PRESET_RED = 3;
+      HEATMAP_COLOR_PRESET_THRESHOLD = 4;
+      HEATMAP_COLOR_PRESET_BLUE_REVERSED = 5;
+      HEATMAP_COLOR_PRESET_GREEN_REVERSED = 6;
+      HEATMAP_COLOR_PRESET_RED_REVERSED = 7;
+      HEATMAP_COLOR_PRESET_THRESHOLD_REVERSED = 8;
     }
 
     message HeatmapTooltip {
