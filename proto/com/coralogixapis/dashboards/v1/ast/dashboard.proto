@@ -78,11 +78,9 @@ message Dashboard {
     }];
   }
 
-  // A polymorphic field for the dashboard's folder. Either a folder ID or a folder path is supported.
-  oneof folder {
-    UUID folder_id = 9;
-    FolderPath folder_path = 10;
-  }
+  // Either a folder ID or a folder path is supported.
+  UUID folder_id = 9;
+  FolderPath folder_path = 10;
 
   repeated v1.ast.annotations.Annotation annotations = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "A list of annotations that can be used within the dashboard's visualizations"}];
 

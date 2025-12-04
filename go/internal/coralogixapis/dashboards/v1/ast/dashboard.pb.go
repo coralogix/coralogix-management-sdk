@@ -54,13 +54,9 @@ type Dashboard struct {
 	//	*Dashboard_AbsoluteTimeFrame
 	//	*Dashboard_RelativeTimeFrame
 	TimeFrame isDashboard_TimeFrame `protobuf_oneof:"time_frame"`
-	// A polymorphic field for the dashboard's folder. Either a folder ID or a folder path is supported.
-	//
-	// Types that are valid to be assigned to Folder:
-	//
-	//	*Dashboard_FolderId
-	//	*Dashboard_FolderPath
-	Folder      isDashboard_Folder        `protobuf_oneof:"folder"`
+	// Either a folder ID or a folder path is supported.
+	FolderId    *v1.UUID                  `protobuf:"bytes,9,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	FolderPath  *FolderPath               `protobuf:"bytes,10,opt,name=folder_path,json=folderPath,proto3" json:"folder_path,omitempty"`
 	Annotations []*annotations.Annotation `protobuf:"bytes,11,rep,name=annotations,proto3" json:"annotations,omitempty"`
 	// The auto refresh interval for the dashboard.
 	//
@@ -181,27 +177,16 @@ func (x *Dashboard) GetRelativeTimeFrame() *durationpb.Duration {
 	return nil
 }
 
-func (x *Dashboard) GetFolder() isDashboard_Folder {
-	if x != nil {
-		return x.Folder
-	}
-	return nil
-}
-
 func (x *Dashboard) GetFolderId() *v1.UUID {
 	if x != nil {
-		if x, ok := x.Folder.(*Dashboard_FolderId); ok {
-			return x.FolderId
-		}
+		return x.FolderId
 	}
 	return nil
 }
 
 func (x *Dashboard) GetFolderPath() *FolderPath {
 	if x != nil {
-		if x, ok := x.Folder.(*Dashboard_FolderPath); ok {
-			return x.FolderPath
-		}
+		return x.FolderPath
 	}
 	return nil
 }
@@ -278,22 +263,6 @@ type Dashboard_RelativeTimeFrame struct {
 func (*Dashboard_AbsoluteTimeFrame) isDashboard_TimeFrame() {}
 
 func (*Dashboard_RelativeTimeFrame) isDashboard_TimeFrame() {}
-
-type isDashboard_Folder interface {
-	isDashboard_Folder()
-}
-
-type Dashboard_FolderId struct {
-	FolderId *v1.UUID `protobuf:"bytes,9,opt,name=folder_id,json=folderId,proto3,oneof"`
-}
-
-type Dashboard_FolderPath struct {
-	FolderPath *FolderPath `protobuf:"bytes,10,opt,name=folder_path,json=folderPath,proto3,oneof"`
-}
-
-func (*Dashboard_FolderId) isDashboard_Folder() {}
-
-func (*Dashboard_FolderPath) isDashboard_Folder() {}
 
 type isDashboard_AutoRefresh interface {
 	isDashboard_AutoRefresh()
@@ -429,7 +398,7 @@ var File_com_coralogixapis_dashboards_v1_ast_dashboard_proto protoreflect.FileDe
 
 const file_com_coralogixapis_dashboards_v1_ast_dashboard_proto_rawDesc = "" +
 	"\n" +
-	"3com/coralogixapis/dashboards/v1/ast/dashboard.proto\x12#com.coralogixapis.dashboards.v1.ast\x1a@com/coralogixapis/dashboards/v1/ast/annotations/annotation.proto\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1a5com/coralogixapis/dashboards/v1/ast/folder_path.proto\x1a0com/coralogixapis/dashboards/v1/ast/layout.proto\x1a<com/coralogixapis/dashboards/v1/ast/variables/variable.proto\x1a?com/coralogixapis/dashboards/v1/ast/variables_v2/variable.proto\x1a3com/coralogixapis/dashboards/v1/common/action.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a+com/coralogixapis/dashboards/v1/types.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xee\x14\n" +
+	"3com/coralogixapis/dashboards/v1/ast/dashboard.proto\x12#com.coralogixapis.dashboards.v1.ast\x1a@com/coralogixapis/dashboards/v1/ast/annotations/annotation.proto\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1a5com/coralogixapis/dashboards/v1/ast/folder_path.proto\x1a0com/coralogixapis/dashboards/v1/ast/layout.proto\x1a<com/coralogixapis/dashboards/v1/ast/variables/variable.proto\x1a?com/coralogixapis/dashboards/v1/ast/variables_v2/variable.proto\x1a3com/coralogixapis/dashboards/v1/common/action.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a+com/coralogixapis/dashboards/v1/types.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xe0\x14\n" +
 	"\tDashboard\x12p\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBB\x9aA?2$A unique identifier of the dashboardJ\x17\"GZLHSeqelCbD3I7HbIDtL\"R\x02id\x12h\n" +
 	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB6\x9aA32!The display name of the dashboardJ\x0e\"Example Name\"R\x04name\x12\x9f\x01\n" +
@@ -439,16 +408,16 @@ const file_com_coralogixapis_dashboards_v1_ast_dashboard_proto_rawDesc = "" +
 	"\fvariables_v2\x18\x10 \x03(\v2<.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableV2BR\x9aAO2MA list of variables that can be used within the dashboard for dynamic contentR\vvariablesV2\x12\x91\x01\n" +
 	"\afilters\x18\x06 \x03(\v23.com.coralogixapis.dashboards.v1.ast.filters.FilterBB\x9aA?2=A list of filters that can be applied to the dashboard's dataR\afilters\x12\xa3\x01\n" +
 	"\x13absolute_time_frame\x18\a \x01(\v21.com.coralogixapis.dashboards.v1.common.TimeFrameB>\x9aA;29Absolute time frame specifying a fixed start and end timeH\x00R\x11absoluteTimeFrame\x12\x91\x01\n" +
-	"\x13relative_time_frame\x18\b \x01(\v2\x19.google.protobuf.DurationBD\x9aAA2?Relative time frame specifying a duration from the current timeH\x00R\x11relativeTimeFrame\x12D\n" +
-	"\tfolder_id\x18\t \x01(\v2%.com.coralogixapis.dashboards.v1.UUIDH\x01R\bfolderId\x12R\n" +
+	"\x13relative_time_frame\x18\b \x01(\v2\x19.google.protobuf.DurationBD\x9aAA2?Relative time frame specifying a duration from the current timeH\x00R\x11relativeTimeFrame\x12B\n" +
+	"\tfolder_id\x18\t \x01(\v2%.com.coralogixapis.dashboards.v1.UUIDR\bfolderId\x12P\n" +
 	"\vfolder_path\x18\n" +
-	" \x01(\v2/.com.coralogixapis.dashboards.v1.ast.FolderPathH\x01R\n" +
+	" \x01(\v2/.com.coralogixapis.dashboards.v1.ast.FolderPathR\n" +
 	"folderPath\x12\xb0\x01\n" +
 	"\vannotations\x18\v \x03(\v2;.com.coralogixapis.dashboards.v1.ast.annotations.AnnotationBQ\x9aAN2LA list of annotations that can be used within the dashboard's visualizationsR\vannotations\x12Q\n" +
-	"\x03off\x18\f \x01(\v2=.com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshOffH\x02R\x03off\x12g\n" +
-	"\vtwo_minutes\x18\r \x01(\v2D.com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshTwoMinutesH\x02R\n" +
+	"\x03off\x18\f \x01(\v2=.com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshOffH\x01R\x03off\x12g\n" +
+	"\vtwo_minutes\x18\r \x01(\v2D.com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshTwoMinutesH\x01R\n" +
 	"twoMinutes\x12j\n" +
-	"\ffive_minutes\x18\x0e \x01(\v2E.com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshFiveMinutesH\x02R\vfiveMinutes\x12\x9e\x01\n" +
+	"\ffive_minutes\x18\x0e \x01(\v2E.com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshFiveMinutesH\x01R\vfiveMinutes\x12\x9e\x01\n" +
 	"\tslug_name\x18\x0f \x01(\v2\x1c.google.protobuf.StringValueBc\x9aA`2BA unique slug name serving as an alias for accessing the dashboardJ\x1a\"system-health-monitoring\"R\bslugName\x12\xa0\x01\n" +
 	"\aactions\x18\x11 \x03(\v27.com.coralogixapis.dashboards.v1.common.DashboardActionBM\x9aAJ2HA list of public actions that are available within the dashboard contextR\aactions\x1a\x10\n" +
 	"\x0eAutoRefreshOff\x1a\x17\n" +
@@ -457,8 +426,7 @@ const file_com_coralogixapis_dashboards_v1_ast_dashboard_proto_rawDesc = "" +
 	"r*\tDashboard2UDashboard represents the structure and configuration of a Coralogix Custom Dashboard.\xd2\x01\x04name\xd2\x01\x06layout*\x85\x01\n" +
 	"8Learn more about Custom Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/B\f\n" +
 	"\n" +
-	"time_frameB\b\n" +
-	"\x06folderB\x0e\n" +
+	"time_frameB\x0e\n" +
 	"\fauto_refreshb\x06proto3"
 
 var (
@@ -526,8 +494,6 @@ func file_com_coralogixapis_dashboards_v1_ast_dashboard_proto_init() {
 	file_com_coralogixapis_dashboards_v1_ast_dashboard_proto_msgTypes[0].OneofWrappers = []any{
 		(*Dashboard_AbsoluteTimeFrame)(nil),
 		(*Dashboard_RelativeTimeFrame)(nil),
-		(*Dashboard_FolderId)(nil),
-		(*Dashboard_FolderPath)(nil),
 		(*Dashboard_Off)(nil),
 		(*Dashboard_TwoMinutes)(nil),
 		(*Dashboard_FiveMinutes)(nil),
