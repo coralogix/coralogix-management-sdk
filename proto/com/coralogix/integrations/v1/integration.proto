@@ -569,6 +569,16 @@ message IntegrationMetadata {
   }
 }
 
+message Failure {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Failure"
+      required: []
+    }
+  };
+  google.protobuf.StringValue error_message = 1;
+}
+
 message TestIntegrationResult {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {title: "Test integration result"}
@@ -577,12 +587,6 @@ message TestIntegrationResult {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {title: "Success"}
     };
-  }
-  message Failure {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-      json_schema: {title: "Failure"}
-    };
-    google.protobuf.StringValue error_message = 1;
   }
 
   oneof result {

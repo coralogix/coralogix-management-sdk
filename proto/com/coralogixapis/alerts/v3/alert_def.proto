@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package com.coralogixapis.alerts.v3;
 
+import "com/coralogixapis/alerts/v3/alert_def_data_source.proto";
 import "com/coralogixapis/alerts/v3/alert_def_notification_group.proto";
 import "com/coralogixapis/alerts/v3/alert_def_priority.proto";
 import "com/coralogixapis/alerts/v3/alert_def_scheduling.proto";
@@ -138,4 +139,5 @@ message AlertDefProperties {
     example: "false"
     default: "false"
   }];
+  repeated AlertDefDataSource data_sources = 13 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The sources from which to sample logs"}];
 }
