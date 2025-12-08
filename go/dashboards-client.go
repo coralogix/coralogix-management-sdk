@@ -51,12 +51,6 @@ type PinDashboardRequest = services.PinDashboardRequest
 // UnpinDashboardRequest is a request to unpin a dashboard.
 type UnpinDashboardRequest = services.UnpinDashboardRequest
 
-// DashboardFolderPath is a dashboard folder path.
-type DashboardFolderPath = ast.Dashboard_FolderPath
-
-// DashboardFolderID is a dashboard folder id.
-type DashboardFolderID = ast.Dashboard_FolderId
-
 // FolderPath is a dashboard folder path.
 type FolderPath = ast.FolderPath
 

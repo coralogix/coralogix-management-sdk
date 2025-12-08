@@ -50,7 +50,7 @@ release:
 test: build
 	go test ${BUILD_ARGS} -v ${TESTARGS} -cover -timeout=120s -parallel=4 ./examples/...
 
-test-openapi: build
+test-openapi: 
 	go test ${BUILD_ARGS} -v ${TESTARGS} -cover -timeout=120s -parallel=4 ./openapi/examples/...
 
 generate:
