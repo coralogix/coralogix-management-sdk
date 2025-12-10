@@ -1637,12 +1637,56 @@ type IntegrationMetadata_IntegrationParameters struct {
 
 func (*IntegrationMetadata_IntegrationParameters) isIntegrationMetadata_SpecificData() {}
 
+type Failure struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	ErrorMessage  *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Failure) Reset() {
+	*x = Failure{}
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Failure) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Failure) ProtoMessage() {}
+
+func (x *Failure) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Failure.ProtoReflect.Descriptor instead.
+func (*Failure) Descriptor() ([]byte, []int) {
+	return file_com_coralogix_integrations_v1_integration_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *Failure) GetErrorMessage() *wrapperspb.StringValue {
+	if x != nil {
+		return x.ErrorMessage
+	}
+	return nil
+}
+
 type TestIntegrationResult struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Result:
 	//
 	//	*TestIntegrationResult_Success_
-	//	*TestIntegrationResult_Failure_
+	//	*TestIntegrationResult_Failure
 	Result        isTestIntegrationResult_Result `protobuf_oneof:"result"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1650,7 +1694,7 @@ type TestIntegrationResult struct {
 
 func (x *TestIntegrationResult) Reset() {
 	*x = TestIntegrationResult{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[16]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1662,7 +1706,7 @@ func (x *TestIntegrationResult) String() string {
 func (*TestIntegrationResult) ProtoMessage() {}
 
 func (x *TestIntegrationResult) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[16]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1675,7 +1719,7 @@ func (x *TestIntegrationResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TestIntegrationResult.ProtoReflect.Descriptor instead.
 func (*TestIntegrationResult) Descriptor() ([]byte, []int) {
-	return file_com_coralogix_integrations_v1_integration_proto_rawDescGZIP(), []int{16}
+	return file_com_coralogix_integrations_v1_integration_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *TestIntegrationResult) GetResult() isTestIntegrationResult_Result {
@@ -1694,9 +1738,9 @@ func (x *TestIntegrationResult) GetSuccess() *TestIntegrationResult_Success {
 	return nil
 }
 
-func (x *TestIntegrationResult) GetFailure() *TestIntegrationResult_Failure {
+func (x *TestIntegrationResult) GetFailure() *Failure {
 	if x != nil {
-		if x, ok := x.Result.(*TestIntegrationResult_Failure_); ok {
+		if x, ok := x.Result.(*TestIntegrationResult_Failure); ok {
 			return x.Failure
 		}
 	}
@@ -1711,13 +1755,13 @@ type TestIntegrationResult_Success_ struct {
 	Success *TestIntegrationResult_Success `protobuf:"bytes,1,opt,name=success,proto3,oneof"`
 }
 
-type TestIntegrationResult_Failure_ struct {
-	Failure *TestIntegrationResult_Failure `protobuf:"bytes,2,opt,name=failure,proto3,oneof"`
+type TestIntegrationResult_Failure struct {
+	Failure *Failure `protobuf:"bytes,2,opt,name=failure,proto3,oneof"`
 }
 
 func (*TestIntegrationResult_Success_) isTestIntegrationResult_Result() {}
 
-func (*TestIntegrationResult_Failure_) isTestIntegrationResult_Result() {}
+func (*TestIntegrationResult_Failure) isTestIntegrationResult_Result() {}
 
 type RumVersionData struct {
 	state         protoimpl.MessageState    `protogen:"open.v1"`
@@ -1729,7 +1773,7 @@ type RumVersionData struct {
 
 func (x *RumVersionData) Reset() {
 	*x = RumVersionData{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[17]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1741,7 +1785,7 @@ func (x *RumVersionData) String() string {
 func (*RumVersionData) ProtoMessage() {}
 
 func (x *RumVersionData) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[17]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1754,7 +1798,7 @@ func (x *RumVersionData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RumVersionData.ProtoReflect.Descriptor instead.
 func (*RumVersionData) Descriptor() ([]byte, []int) {
-	return file_com_coralogix_integrations_v1_integration_proto_rawDescGZIP(), []int{17}
+	return file_com_coralogix_integrations_v1_integration_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *RumVersionData) GetVersions() []*RumVersionData_Version {
@@ -1784,7 +1828,7 @@ type DeployedIntegrationInformation struct {
 
 func (x *DeployedIntegrationInformation) Reset() {
 	*x = DeployedIntegrationInformation{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[18]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1796,7 +1840,7 @@ func (x *DeployedIntegrationInformation) String() string {
 func (*DeployedIntegrationInformation) ProtoMessage() {}
 
 func (x *DeployedIntegrationInformation) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[18]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1809,7 +1853,7 @@ func (x *DeployedIntegrationInformation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeployedIntegrationInformation.ProtoReflect.Descriptor instead.
 func (*DeployedIntegrationInformation) Descriptor() ([]byte, []int) {
-	return file_com_coralogix_integrations_v1_integration_proto_rawDescGZIP(), []int{18}
+	return file_com_coralogix_integrations_v1_integration_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *DeployedIntegrationInformation) GetId() *wrapperspb.StringValue {
@@ -1856,7 +1900,7 @@ type IntegrationType_Managed struct {
 
 func (x *IntegrationType_Managed) Reset() {
 	*x = IntegrationType_Managed{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[20]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1868,7 +1912,7 @@ func (x *IntegrationType_Managed) String() string {
 func (*IntegrationType_Managed) ProtoMessage() {}
 
 func (x *IntegrationType_Managed) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[20]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1899,7 +1943,7 @@ type IntegrationType_Untracked struct {
 
 func (x *IntegrationType_Untracked) Reset() {
 	*x = IntegrationType_Untracked{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[21]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1911,7 +1955,7 @@ func (x *IntegrationType_Untracked) String() string {
 func (*IntegrationType_Untracked) ProtoMessage() {}
 
 func (x *IntegrationType_Untracked) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[21]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1935,7 +1979,7 @@ type IntegrationType_Cloudformation struct {
 
 func (x *IntegrationType_Cloudformation) Reset() {
 	*x = IntegrationType_Cloudformation{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[22]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1947,7 +1991,7 @@ func (x *IntegrationType_Cloudformation) String() string {
 func (*IntegrationType_Cloudformation) ProtoMessage() {}
 
 func (x *IntegrationType_Cloudformation) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[22]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1971,7 +2015,7 @@ type IntegrationType_AzureArm struct {
 
 func (x *IntegrationType_AzureArm) Reset() {
 	*x = IntegrationType_AzureArm{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[23]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1983,7 +2027,7 @@ func (x *IntegrationType_AzureArm) String() string {
 func (*IntegrationType_AzureArm) ProtoMessage() {}
 
 func (x *IntegrationType_AzureArm) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[23]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2010,7 +2054,7 @@ type IntegrationType_PushBasedContextualData struct {
 
 func (x *IntegrationType_PushBasedContextualData) Reset() {
 	*x = IntegrationType_PushBasedContextualData{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[24]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2022,7 +2066,7 @@ func (x *IntegrationType_PushBasedContextualData) String() string {
 func (*IntegrationType_PushBasedContextualData) ProtoMessage() {}
 
 func (x *IntegrationType_PushBasedContextualData) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[24]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2046,7 +2090,7 @@ type IntegrationType_ContextualData struct {
 
 func (x *IntegrationType_ContextualData) Reset() {
 	*x = IntegrationType_ContextualData{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[25]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2058,7 +2102,7 @@ func (x *IntegrationType_ContextualData) String() string {
 func (*IntegrationType_ContextualData) ProtoMessage() {}
 
 func (x *IntegrationType_ContextualData) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[25]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2082,7 +2126,7 @@ type IntegrationType_GenericWebhook struct {
 
 func (x *IntegrationType_GenericWebhook) Reset() {
 	*x = IntegrationType_GenericWebhook{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[26]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2094,7 +2138,7 @@ func (x *IntegrationType_GenericWebhook) String() string {
 func (*IntegrationType_GenericWebhook) ProtoMessage() {}
 
 func (x *IntegrationType_GenericWebhook) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[26]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2119,7 +2163,7 @@ type IntegrationDetails_DefaultIntegrationDetails struct {
 
 func (x *IntegrationDetails_DefaultIntegrationDetails) Reset() {
 	*x = IntegrationDetails_DefaultIntegrationDetails{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[27]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2131,7 +2175,7 @@ func (x *IntegrationDetails_DefaultIntegrationDetails) String() string {
 func (*IntegrationDetails_DefaultIntegrationDetails) ProtoMessage() {}
 
 func (x *IntegrationDetails_DefaultIntegrationDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[27]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2174,7 +2218,7 @@ type IntegrationDetails_DefaultIntegrationDetails_RegisteredInstance struct {
 
 func (x *IntegrationDetails_DefaultIntegrationDetails_RegisteredInstance) Reset() {
 	*x = IntegrationDetails_DefaultIntegrationDetails_RegisteredInstance{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[28]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2186,7 +2230,7 @@ func (x *IntegrationDetails_DefaultIntegrationDetails_RegisteredInstance) String
 func (*IntegrationDetails_DefaultIntegrationDetails_RegisteredInstance) ProtoMessage() {}
 
 func (x *IntegrationDetails_DefaultIntegrationDetails_RegisteredInstance) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[28]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2315,7 +2359,7 @@ type IntegrationRevision_CloudFormationTemplate struct {
 
 func (x *IntegrationRevision_CloudFormationTemplate) Reset() {
 	*x = IntegrationRevision_CloudFormationTemplate{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[29]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2327,7 +2371,7 @@ func (x *IntegrationRevision_CloudFormationTemplate) String() string {
 func (*IntegrationRevision_CloudFormationTemplate) ProtoMessage() {}
 
 func (x *IntegrationRevision_CloudFormationTemplate) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[29]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2379,7 +2423,7 @@ type IntegrationRevision_ManagedService struct {
 
 func (x *IntegrationRevision_ManagedService) Reset() {
 	*x = IntegrationRevision_ManagedService{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[30]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2391,7 +2435,7 @@ func (x *IntegrationRevision_ManagedService) String() string {
 func (*IntegrationRevision_ManagedService) ProtoMessage() {}
 
 func (x *IntegrationRevision_ManagedService) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[30]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2418,7 +2462,7 @@ type IntegrationRevision_HelmChart struct {
 
 func (x *IntegrationRevision_HelmChart) Reset() {
 	*x = IntegrationRevision_HelmChart{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[31]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2430,7 +2474,7 @@ func (x *IntegrationRevision_HelmChart) String() string {
 func (*IntegrationRevision_HelmChart) ProtoMessage() {}
 
 func (x *IntegrationRevision_HelmChart) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[31]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2476,7 +2520,7 @@ type IntegrationRevision_Terraform struct {
 
 func (x *IntegrationRevision_Terraform) Reset() {
 	*x = IntegrationRevision_Terraform{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[32]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2488,7 +2532,7 @@ func (x *IntegrationRevision_Terraform) String() string {
 func (*IntegrationRevision_Terraform) ProtoMessage() {}
 
 func (x *IntegrationRevision_Terraform) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[32]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2521,7 +2565,7 @@ type IntegrationRevision_Rum struct {
 
 func (x *IntegrationRevision_Rum) Reset() {
 	*x = IntegrationRevision_Rum{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[33]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2533,7 +2577,7 @@ func (x *IntegrationRevision_Rum) String() string {
 func (*IntegrationRevision_Rum) ProtoMessage() {}
 
 func (x *IntegrationRevision_Rum) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[33]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2572,7 +2616,7 @@ type IntegrationRevision_AzureArmTemplate struct {
 
 func (x *IntegrationRevision_AzureArmTemplate) Reset() {
 	*x = IntegrationRevision_AzureArmTemplate{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[34]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2584,7 +2628,7 @@ func (x *IntegrationRevision_AzureArmTemplate) String() string {
 func (*IntegrationRevision_AzureArmTemplate) ProtoMessage() {}
 
 func (x *IntegrationRevision_AzureArmTemplate) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[34]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2617,7 +2661,7 @@ type IntegrationRevision_ListTextValue struct {
 
 func (x *IntegrationRevision_ListTextValue) Reset() {
 	*x = IntegrationRevision_ListTextValue{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[35]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2629,7 +2673,7 @@ func (x *IntegrationRevision_ListTextValue) String() string {
 func (*IntegrationRevision_ListTextValue) ProtoMessage() {}
 
 func (x *IntegrationRevision_ListTextValue) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[35]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2668,7 +2712,7 @@ type IntegrationRevision_SingleValue struct {
 
 func (x *IntegrationRevision_SingleValue) Reset() {
 	*x = IntegrationRevision_SingleValue{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[36]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2680,7 +2724,7 @@ func (x *IntegrationRevision_SingleValue) String() string {
 func (*IntegrationRevision_SingleValue) ProtoMessage() {}
 
 func (x *IntegrationRevision_SingleValue) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[36]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2712,7 +2756,7 @@ type IntegrationRevision_SingleBooleanValue struct {
 
 func (x *IntegrationRevision_SingleBooleanValue) Reset() {
 	*x = IntegrationRevision_SingleBooleanValue{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[37]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2724,7 +2768,7 @@ func (x *IntegrationRevision_SingleBooleanValue) String() string {
 func (*IntegrationRevision_SingleBooleanValue) ProtoMessage() {}
 
 func (x *IntegrationRevision_SingleBooleanValue) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[37]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2756,7 +2800,7 @@ type IntegrationRevision_SingleNumericValue struct {
 
 func (x *IntegrationRevision_SingleNumericValue) Reset() {
 	*x = IntegrationRevision_SingleNumericValue{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[38]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2768,7 +2812,7 @@ func (x *IntegrationRevision_SingleNumericValue) String() string {
 func (*IntegrationRevision_SingleNumericValue) ProtoMessage() {}
 
 func (x *IntegrationRevision_SingleNumericValue) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[38]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2800,7 +2844,7 @@ type IntegrationRevision_MultipleSelectionValue struct {
 
 func (x *IntegrationRevision_MultipleSelectionValue) Reset() {
 	*x = IntegrationRevision_MultipleSelectionValue{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[39]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2812,7 +2856,7 @@ func (x *IntegrationRevision_MultipleSelectionValue) String() string {
 func (*IntegrationRevision_MultipleSelectionValue) ProtoMessage() {}
 
 func (x *IntegrationRevision_MultipleSelectionValue) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[39]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2845,7 +2889,7 @@ type IntegrationRevision_SelectionValue struct {
 
 func (x *IntegrationRevision_SelectionValue) Reset() {
 	*x = IntegrationRevision_SelectionValue{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[40]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2857,7 +2901,7 @@ func (x *IntegrationRevision_SelectionValue) String() string {
 func (*IntegrationRevision_SelectionValue) ProtoMessage() {}
 
 func (x *IntegrationRevision_SelectionValue) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[40]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2897,7 +2941,7 @@ type IntegrationRevision_FieldCondition struct {
 
 func (x *IntegrationRevision_FieldCondition) Reset() {
 	*x = IntegrationRevision_FieldCondition{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[41]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2909,7 +2953,7 @@ func (x *IntegrationRevision_FieldCondition) String() string {
 func (*IntegrationRevision_FieldCondition) ProtoMessage() {}
 
 func (x *IntegrationRevision_FieldCondition) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[41]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2949,7 +2993,7 @@ type IntegrationRevision_Group struct {
 
 func (x *IntegrationRevision_Group) Reset() {
 	*x = IntegrationRevision_Group{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[42]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2961,7 +3005,7 @@ func (x *IntegrationRevision_Group) String() string {
 func (*IntegrationRevision_Group) ProtoMessage() {}
 
 func (x *IntegrationRevision_Group) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[42]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3022,7 +3066,7 @@ type IntegrationRevision_FieldInformation struct {
 
 func (x *IntegrationRevision_FieldInformation) Reset() {
 	*x = IntegrationRevision_FieldInformation{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[43]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3034,7 +3078,7 @@ func (x *IntegrationRevision_FieldInformation) String() string {
 func (*IntegrationRevision_FieldInformation) ProtoMessage() {}
 
 func (x *IntegrationRevision_FieldInformation) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[43]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3268,7 +3312,7 @@ type IntegrationRevision_CommandInformation struct {
 
 func (x *IntegrationRevision_CommandInformation) Reset() {
 	*x = IntegrationRevision_CommandInformation{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[44]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3280,7 +3324,7 @@ func (x *IntegrationRevision_CommandInformation) String() string {
 func (*IntegrationRevision_CommandInformation) ProtoMessage() {}
 
 func (x *IntegrationRevision_CommandInformation) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[44]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3349,7 +3393,7 @@ type IntegrationRevision_ConfigurationBlock struct {
 
 func (x *IntegrationRevision_ConfigurationBlock) Reset() {
 	*x = IntegrationRevision_ConfigurationBlock{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[45]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3361,7 +3405,7 @@ func (x *IntegrationRevision_ConfigurationBlock) String() string {
 func (*IntegrationRevision_ConfigurationBlock) ProtoMessage() {}
 
 func (x *IntegrationRevision_ConfigurationBlock) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[45]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3408,7 +3452,7 @@ type IntegrationRevision_IntegrationGuide struct {
 
 func (x *IntegrationRevision_IntegrationGuide) Reset() {
 	*x = IntegrationRevision_IntegrationGuide{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[46]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3420,7 +3464,7 @@ func (x *IntegrationRevision_IntegrationGuide) String() string {
 func (*IntegrationRevision_IntegrationGuide) ProtoMessage() {}
 
 func (x *IntegrationRevision_IntegrationGuide) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[46]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3460,7 +3504,7 @@ type IntegrationRevision_FieldCondition_FieldValue struct {
 
 func (x *IntegrationRevision_FieldCondition_FieldValue) Reset() {
 	*x = IntegrationRevision_FieldCondition_FieldValue{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[49]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3472,7 +3516,7 @@ func (x *IntegrationRevision_FieldCondition_FieldValue) String() string {
 func (*IntegrationRevision_FieldCondition_FieldValue) ProtoMessage() {}
 
 func (x *IntegrationRevision_FieldCondition_FieldValue) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[49]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3513,7 +3557,7 @@ type IntegrationRevision_CommandInformation_Link struct {
 
 func (x *IntegrationRevision_CommandInformation_Link) Reset() {
 	*x = IntegrationRevision_CommandInformation_Link{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[50]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3525,7 +3569,7 @@ func (x *IntegrationRevision_CommandInformation_Link) String() string {
 func (*IntegrationRevision_CommandInformation_Link) ProtoMessage() {}
 
 func (x *IntegrationRevision_CommandInformation_Link) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[50]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3571,7 +3615,7 @@ type Parameter_StringList struct {
 
 func (x *Parameter_StringList) Reset() {
 	*x = Parameter_StringList{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[51]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3583,7 +3627,7 @@ func (x *Parameter_StringList) String() string {
 func (*Parameter_StringList) ProtoMessage() {}
 
 func (x *Parameter_StringList) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[51]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3616,7 +3660,7 @@ type Parameter_ApiKeyData struct {
 
 func (x *Parameter_ApiKeyData) Reset() {
 	*x = Parameter_ApiKeyData{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[52]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3628,7 +3672,7 @@ func (x *Parameter_ApiKeyData) String() string {
 func (*Parameter_ApiKeyData) ProtoMessage() {}
 
 func (x *Parameter_ApiKeyData) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[52]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3666,7 +3710,7 @@ type Parameter_SensitiveDataPlaceholder struct {
 
 func (x *Parameter_SensitiveDataPlaceholder) Reset() {
 	*x = Parameter_SensitiveDataPlaceholder{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[53]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3678,7 +3722,7 @@ func (x *Parameter_SensitiveDataPlaceholder) String() string {
 func (*Parameter_SensitiveDataPlaceholder) ProtoMessage() {}
 
 func (x *Parameter_SensitiveDataPlaceholder) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[53]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3702,7 +3746,7 @@ type TestIntegrationResult_Success struct {
 
 func (x *TestIntegrationResult_Success) Reset() {
 	*x = TestIntegrationResult_Success{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[54]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3714,7 +3758,7 @@ func (x *TestIntegrationResult_Success) String() string {
 func (*TestIntegrationResult_Success) ProtoMessage() {}
 
 func (x *TestIntegrationResult_Success) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[54]
+	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3727,51 +3771,7 @@ func (x *TestIntegrationResult_Success) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TestIntegrationResult_Success.ProtoReflect.Descriptor instead.
 func (*TestIntegrationResult_Success) Descriptor() ([]byte, []int) {
-	return file_com_coralogix_integrations_v1_integration_proto_rawDescGZIP(), []int{16, 0}
-}
-
-type TestIntegrationResult_Failure struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	ErrorMessage  *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *TestIntegrationResult_Failure) Reset() {
-	*x = TestIntegrationResult_Failure{}
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[55]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *TestIntegrationResult_Failure) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*TestIntegrationResult_Failure) ProtoMessage() {}
-
-func (x *TestIntegrationResult_Failure) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_integrations_v1_integration_proto_msgTypes[55]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use TestIntegrationResult_Failure.ProtoReflect.Descriptor instead.
-func (*TestIntegrationResult_Failure) Descriptor() ([]byte, []int) {
-	return file_com_coralogix_integrations_v1_integration_proto_rawDescGZIP(), []int{16, 1}
-}
-
-func (x *TestIntegrationResult_Failure) GetErrorMessage() *wrapperspb.StringValue {
-	if x != nil {
-		return x.ErrorMessage
-	}
-	return nil
+	return file_com_coralogix_integrations_v1_integration_proto_rawDescGZIP(), []int{17, 0}
 }
 
 type RumVersionData_SourceMapMetadata struct {
@@ -3809,7 +3809,7 @@ func (x *RumVersionData_SourceMapMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RumVersionData_SourceMapMetadata.ProtoReflect.Descriptor instead.
 func (*RumVersionData_SourceMapMetadata) Descriptor() ([]byte, []int) {
-	return file_com_coralogix_integrations_v1_integration_proto_rawDescGZIP(), []int{17, 0}
+	return file_com_coralogix_integrations_v1_integration_proto_rawDescGZIP(), []int{18, 0}
 }
 
 func (x *RumVersionData_SourceMapMetadata) GetCreatedAt() *timestamppb.Timestamp {
@@ -3861,7 +3861,7 @@ func (x *RumVersionData_LogMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RumVersionData_LogMetadata.ProtoReflect.Descriptor instead.
 func (*RumVersionData_LogMetadata) Descriptor() ([]byte, []int) {
-	return file_com_coralogix_integrations_v1_integration_proto_rawDescGZIP(), []int{17, 1}
+	return file_com_coralogix_integrations_v1_integration_proto_rawDescGZIP(), []int{18, 1}
 }
 
 func (x *RumVersionData_LogMetadata) GetFirstOccurrence() *timestamppb.Timestamp {
@@ -3914,7 +3914,7 @@ func (x *RumVersionData_Version) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RumVersionData_Version.ProtoReflect.Descriptor instead.
 func (*RumVersionData_Version) Descriptor() ([]byte, []int) {
-	return file_com_coralogix_integrations_v1_integration_proto_rawDescGZIP(), []int{17, 2}
+	return file_com_coralogix_integrations_v1_integration_proto_rawDescGZIP(), []int{18, 2}
 }
 
 func (x *RumVersionData_Version) GetVersion() *wrapperspb.StringValue {
@@ -4270,15 +4270,15 @@ const file_com_coralogix_integrations_v1_integration_proto_rawDesc = "" +
 	"api_key_idR\vapplicationR\vdeploy_nameR\tsubsystemR\n" +
 	"cloudtrailR\x04oktaR\n" +
 	"helm_chartR\x15gcp_metrics_collectorR\n" +
-	"cloudflareR\vstatus_feedR\x13status_page_trackerR\x14gcp_traces_collectorR\x17azure_metrics_collectorR\x03rumR\x16azure_resource_managerR\x11gc_logs_collectorR\x15google_workspace_siem\"\xee\x02\n" +
-	"\x15TestIntegrationResult\x12X\n" +
-	"\asuccess\x18\x01 \x01(\v2<.com.coralogix.integrations.v1.TestIntegrationResult.SuccessH\x00R\asuccess\x12X\n" +
-	"\afailure\x18\x02 \x01(\v2<.com.coralogix.integrations.v1.TestIntegrationResult.FailureH\x00R\afailure\x1a\x19\n" +
-	"\aSuccess:\x0e\x9aA\v\n" +
-	"\t*\aSuccess\x1a\\\n" +
+	"cloudflareR\vstatus_feedR\x13status_page_trackerR\x14gcp_traces_collectorR\x17azure_metrics_collectorR\x03rumR\x16azure_resource_managerR\x11gc_logs_collectorR\x15google_workspace_siem\"\\\n" +
 	"\aFailure\x12A\n" +
 	"\rerror_message\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\ferrorMessage:\x0e\x9aA\v\n" +
-	"\t*\aFailure:\x1e\x9aA\x1b\n" +
+	"\t*\aFailure\"\xfa\x01\n" +
+	"\x15TestIntegrationResult\x12X\n" +
+	"\asuccess\x18\x01 \x01(\v2<.com.coralogix.integrations.v1.TestIntegrationResult.SuccessH\x00R\asuccess\x12B\n" +
+	"\afailure\x18\x02 \x01(\v2&.com.coralogix.integrations.v1.FailureH\x00R\afailure\x1a\x19\n" +
+	"\aSuccess:\x0e\x9aA\v\n" +
+	"\t*\aSuccess:\x1e\x9aA\x1b\n" +
 	"\x19*\x17Test integration resultB\b\n" +
 	"\x06result\"\xc8\x06\n" +
 	"\x0eRumVersionData\x12Q\n" +
@@ -4351,46 +4351,46 @@ var file_com_coralogix_integrations_v1_integration_proto_goTypes = []any{
 	(*Parameter)(nil),                                     // 18: com.coralogix.integrations.v1.Parameter
 	(*GenericIntegrationParameters)(nil),                  // 19: com.coralogix.integrations.v1.GenericIntegrationParameters
 	(*IntegrationMetadata)(nil),                           // 20: com.coralogix.integrations.v1.IntegrationMetadata
-	(*TestIntegrationResult)(nil),                         // 21: com.coralogix.integrations.v1.TestIntegrationResult
-	(*RumVersionData)(nil),                                // 22: com.coralogix.integrations.v1.RumVersionData
-	(*DeployedIntegrationInformation)(nil),                // 23: com.coralogix.integrations.v1.DeployedIntegrationInformation
-	nil,                                                   // 24: com.coralogix.integrations.v1.IntegrationStatus.DetailsEntry
-	(*IntegrationType_Managed)(nil),                       // 25: com.coralogix.integrations.v1.IntegrationType.Managed
-	(*IntegrationType_Untracked)(nil),                     // 26: com.coralogix.integrations.v1.IntegrationType.Untracked
-	(*IntegrationType_Cloudformation)(nil),                // 27: com.coralogix.integrations.v1.IntegrationType.Cloudformation
-	(*IntegrationType_AzureArm)(nil),                      // 28: com.coralogix.integrations.v1.IntegrationType.AzureArm
-	(*IntegrationType_PushBasedContextualData)(nil),       // 29: com.coralogix.integrations.v1.IntegrationType.PushBasedContextualData
-	(*IntegrationType_ContextualData)(nil),                // 30: com.coralogix.integrations.v1.IntegrationType.ContextualData
-	(*IntegrationType_GenericWebhook)(nil),                // 31: com.coralogix.integrations.v1.IntegrationType.GenericWebhook
-	(*IntegrationDetails_DefaultIntegrationDetails)(nil),  // 32: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails
-	(*IntegrationDetails_DefaultIntegrationDetails_RegisteredInstance)(nil), // 33: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance
-	(*IntegrationRevision_CloudFormationTemplate)(nil),                      // 34: com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate
-	(*IntegrationRevision_ManagedService)(nil),                              // 35: com.coralogix.integrations.v1.IntegrationRevision.ManagedService
-	(*IntegrationRevision_HelmChart)(nil),                                   // 36: com.coralogix.integrations.v1.IntegrationRevision.HelmChart
-	(*IntegrationRevision_Terraform)(nil),                                   // 37: com.coralogix.integrations.v1.IntegrationRevision.Terraform
-	(*IntegrationRevision_Rum)(nil),                                         // 38: com.coralogix.integrations.v1.IntegrationRevision.Rum
-	(*IntegrationRevision_AzureArmTemplate)(nil),                            // 39: com.coralogix.integrations.v1.IntegrationRevision.AzureArmTemplate
-	(*IntegrationRevision_ListTextValue)(nil),                               // 40: com.coralogix.integrations.v1.IntegrationRevision.ListTextValue
-	(*IntegrationRevision_SingleValue)(nil),                                 // 41: com.coralogix.integrations.v1.IntegrationRevision.SingleValue
-	(*IntegrationRevision_SingleBooleanValue)(nil),                          // 42: com.coralogix.integrations.v1.IntegrationRevision.SingleBooleanValue
-	(*IntegrationRevision_SingleNumericValue)(nil),                          // 43: com.coralogix.integrations.v1.IntegrationRevision.SingleNumericValue
-	(*IntegrationRevision_MultipleSelectionValue)(nil),                      // 44: com.coralogix.integrations.v1.IntegrationRevision.MultipleSelectionValue
-	(*IntegrationRevision_SelectionValue)(nil),                              // 45: com.coralogix.integrations.v1.IntegrationRevision.SelectionValue
-	(*IntegrationRevision_FieldCondition)(nil),                              // 46: com.coralogix.integrations.v1.IntegrationRevision.FieldCondition
-	(*IntegrationRevision_Group)(nil),                                       // 47: com.coralogix.integrations.v1.IntegrationRevision.Group
-	(*IntegrationRevision_FieldInformation)(nil),                            // 48: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation
-	(*IntegrationRevision_CommandInformation)(nil),                          // 49: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation
-	(*IntegrationRevision_ConfigurationBlock)(nil),                          // 50: com.coralogix.integrations.v1.IntegrationRevision.ConfigurationBlock
-	(*IntegrationRevision_IntegrationGuide)(nil),                            // 51: com.coralogix.integrations.v1.IntegrationRevision.IntegrationGuide
-	nil, // 52: com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.ParametersEntry
-	nil, // 53: com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.PostInstallationStepsEntry
-	(*IntegrationRevision_FieldCondition_FieldValue)(nil), // 54: com.coralogix.integrations.v1.IntegrationRevision.FieldCondition.FieldValue
-	(*IntegrationRevision_CommandInformation_Link)(nil),   // 55: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.Link
-	(*Parameter_StringList)(nil),                          // 56: com.coralogix.integrations.v1.Parameter.StringList
-	(*Parameter_ApiKeyData)(nil),                          // 57: com.coralogix.integrations.v1.Parameter.ApiKeyData
-	(*Parameter_SensitiveDataPlaceholder)(nil),            // 58: com.coralogix.integrations.v1.Parameter.SensitiveDataPlaceholder
-	(*TestIntegrationResult_Success)(nil),                 // 59: com.coralogix.integrations.v1.TestIntegrationResult.Success
-	(*TestIntegrationResult_Failure)(nil),                 // 60: com.coralogix.integrations.v1.TestIntegrationResult.Failure
+	(*Failure)(nil),                                       // 21: com.coralogix.integrations.v1.Failure
+	(*TestIntegrationResult)(nil),                         // 22: com.coralogix.integrations.v1.TestIntegrationResult
+	(*RumVersionData)(nil),                                // 23: com.coralogix.integrations.v1.RumVersionData
+	(*DeployedIntegrationInformation)(nil),                // 24: com.coralogix.integrations.v1.DeployedIntegrationInformation
+	nil,                                                   // 25: com.coralogix.integrations.v1.IntegrationStatus.DetailsEntry
+	(*IntegrationType_Managed)(nil),                       // 26: com.coralogix.integrations.v1.IntegrationType.Managed
+	(*IntegrationType_Untracked)(nil),                     // 27: com.coralogix.integrations.v1.IntegrationType.Untracked
+	(*IntegrationType_Cloudformation)(nil),                // 28: com.coralogix.integrations.v1.IntegrationType.Cloudformation
+	(*IntegrationType_AzureArm)(nil),                      // 29: com.coralogix.integrations.v1.IntegrationType.AzureArm
+	(*IntegrationType_PushBasedContextualData)(nil),       // 30: com.coralogix.integrations.v1.IntegrationType.PushBasedContextualData
+	(*IntegrationType_ContextualData)(nil),                // 31: com.coralogix.integrations.v1.IntegrationType.ContextualData
+	(*IntegrationType_GenericWebhook)(nil),                // 32: com.coralogix.integrations.v1.IntegrationType.GenericWebhook
+	(*IntegrationDetails_DefaultIntegrationDetails)(nil),  // 33: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails
+	(*IntegrationDetails_DefaultIntegrationDetails_RegisteredInstance)(nil), // 34: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance
+	(*IntegrationRevision_CloudFormationTemplate)(nil),                      // 35: com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate
+	(*IntegrationRevision_ManagedService)(nil),                              // 36: com.coralogix.integrations.v1.IntegrationRevision.ManagedService
+	(*IntegrationRevision_HelmChart)(nil),                                   // 37: com.coralogix.integrations.v1.IntegrationRevision.HelmChart
+	(*IntegrationRevision_Terraform)(nil),                                   // 38: com.coralogix.integrations.v1.IntegrationRevision.Terraform
+	(*IntegrationRevision_Rum)(nil),                                         // 39: com.coralogix.integrations.v1.IntegrationRevision.Rum
+	(*IntegrationRevision_AzureArmTemplate)(nil),                            // 40: com.coralogix.integrations.v1.IntegrationRevision.AzureArmTemplate
+	(*IntegrationRevision_ListTextValue)(nil),                               // 41: com.coralogix.integrations.v1.IntegrationRevision.ListTextValue
+	(*IntegrationRevision_SingleValue)(nil),                                 // 42: com.coralogix.integrations.v1.IntegrationRevision.SingleValue
+	(*IntegrationRevision_SingleBooleanValue)(nil),                          // 43: com.coralogix.integrations.v1.IntegrationRevision.SingleBooleanValue
+	(*IntegrationRevision_SingleNumericValue)(nil),                          // 44: com.coralogix.integrations.v1.IntegrationRevision.SingleNumericValue
+	(*IntegrationRevision_MultipleSelectionValue)(nil),                      // 45: com.coralogix.integrations.v1.IntegrationRevision.MultipleSelectionValue
+	(*IntegrationRevision_SelectionValue)(nil),                              // 46: com.coralogix.integrations.v1.IntegrationRevision.SelectionValue
+	(*IntegrationRevision_FieldCondition)(nil),                              // 47: com.coralogix.integrations.v1.IntegrationRevision.FieldCondition
+	(*IntegrationRevision_Group)(nil),                                       // 48: com.coralogix.integrations.v1.IntegrationRevision.Group
+	(*IntegrationRevision_FieldInformation)(nil),                            // 49: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation
+	(*IntegrationRevision_CommandInformation)(nil),                          // 50: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation
+	(*IntegrationRevision_ConfigurationBlock)(nil),                          // 51: com.coralogix.integrations.v1.IntegrationRevision.ConfigurationBlock
+	(*IntegrationRevision_IntegrationGuide)(nil),                            // 52: com.coralogix.integrations.v1.IntegrationRevision.IntegrationGuide
+	nil, // 53: com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.ParametersEntry
+	nil, // 54: com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.PostInstallationStepsEntry
+	(*IntegrationRevision_FieldCondition_FieldValue)(nil), // 55: com.coralogix.integrations.v1.IntegrationRevision.FieldCondition.FieldValue
+	(*IntegrationRevision_CommandInformation_Link)(nil),   // 56: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.Link
+	(*Parameter_StringList)(nil),                          // 57: com.coralogix.integrations.v1.Parameter.StringList
+	(*Parameter_ApiKeyData)(nil),                          // 58: com.coralogix.integrations.v1.Parameter.ApiKeyData
+	(*Parameter_SensitiveDataPlaceholder)(nil),            // 59: com.coralogix.integrations.v1.Parameter.SensitiveDataPlaceholder
+	(*TestIntegrationResult_Success)(nil),                 // 60: com.coralogix.integrations.v1.TestIntegrationResult.Success
 	(*RumVersionData_SourceMapMetadata)(nil),              // 61: com.coralogix.integrations.v1.RumVersionData.SourceMapMetadata
 	(*RumVersionData_LogMetadata)(nil),                    // 62: com.coralogix.integrations.v1.RumVersionData.LogMetadata
 	(*RumVersionData_Version)(nil),                        // 63: com.coralogix.integrations.v1.RumVersionData.Version
@@ -4406,17 +4406,17 @@ var file_com_coralogix_integrations_v1_integration_proto_depIdxs = []int32{
 	64,  // 2: com.coralogix.integrations.v1.ARMStack.subscription_id:type_name -> google.protobuf.StringValue
 	64,  // 3: com.coralogix.integrations.v1.ARMStack.resource_group_name:type_name -> google.protobuf.StringValue
 	0,   // 4: com.coralogix.integrations.v1.IntegrationStatus.connection_status:type_name -> com.coralogix.integrations.v1.ConnectionStatus
-	24,  // 5: com.coralogix.integrations.v1.IntegrationStatus.details:type_name -> com.coralogix.integrations.v1.IntegrationStatus.DetailsEntry
+	25,  // 5: com.coralogix.integrations.v1.IntegrationStatus.details:type_name -> com.coralogix.integrations.v1.IntegrationStatus.DetailsEntry
 	64,  // 6: com.coralogix.integrations.v1.IntegrationStatus.messages:type_name -> google.protobuf.StringValue
 	64,  // 7: com.coralogix.integrations.v1.IntegrationDoc.name:type_name -> google.protobuf.StringValue
 	64,  // 8: com.coralogix.integrations.v1.IntegrationDoc.link:type_name -> google.protobuf.StringValue
-	25,  // 9: com.coralogix.integrations.v1.IntegrationType.managed:type_name -> com.coralogix.integrations.v1.IntegrationType.Managed
-	26,  // 10: com.coralogix.integrations.v1.IntegrationType.untracked:type_name -> com.coralogix.integrations.v1.IntegrationType.Untracked
-	27,  // 11: com.coralogix.integrations.v1.IntegrationType.cloudformation:type_name -> com.coralogix.integrations.v1.IntegrationType.Cloudformation
-	28,  // 12: com.coralogix.integrations.v1.IntegrationType.arm:type_name -> com.coralogix.integrations.v1.IntegrationType.AzureArm
-	29,  // 13: com.coralogix.integrations.v1.IntegrationType.push_based_contextual_data:type_name -> com.coralogix.integrations.v1.IntegrationType.PushBasedContextualData
-	30,  // 14: com.coralogix.integrations.v1.IntegrationType.contextual_data:type_name -> com.coralogix.integrations.v1.IntegrationType.ContextualData
-	31,  // 15: com.coralogix.integrations.v1.IntegrationType.generic_webhook:type_name -> com.coralogix.integrations.v1.IntegrationType.GenericWebhook
+	26,  // 9: com.coralogix.integrations.v1.IntegrationType.managed:type_name -> com.coralogix.integrations.v1.IntegrationType.Managed
+	27,  // 10: com.coralogix.integrations.v1.IntegrationType.untracked:type_name -> com.coralogix.integrations.v1.IntegrationType.Untracked
+	28,  // 11: com.coralogix.integrations.v1.IntegrationType.cloudformation:type_name -> com.coralogix.integrations.v1.IntegrationType.Cloudformation
+	29,  // 12: com.coralogix.integrations.v1.IntegrationType.arm:type_name -> com.coralogix.integrations.v1.IntegrationType.AzureArm
+	30,  // 13: com.coralogix.integrations.v1.IntegrationType.push_based_contextual_data:type_name -> com.coralogix.integrations.v1.IntegrationType.PushBasedContextualData
+	31,  // 14: com.coralogix.integrations.v1.IntegrationType.contextual_data:type_name -> com.coralogix.integrations.v1.IntegrationType.ContextualData
+	32,  // 15: com.coralogix.integrations.v1.IntegrationType.generic_webhook:type_name -> com.coralogix.integrations.v1.IntegrationType.GenericWebhook
 	64,  // 16: com.coralogix.integrations.v1.Integration.id:type_name -> google.protobuf.StringValue
 	64,  // 17: com.coralogix.integrations.v1.Integration.name:type_name -> google.protobuf.StringValue
 	64,  // 18: com.coralogix.integrations.v1.Integration.description:type_name -> google.protobuf.StringValue
@@ -4430,7 +4430,7 @@ var file_com_coralogix_integrations_v1_integration_proto_depIdxs = []int32{
 	11,  // 26: com.coralogix.integrations.v1.IntegrationDetails.integration:type_name -> com.coralogix.integrations.v1.Integration
 	65,  // 27: com.coralogix.integrations.v1.IntegrationDetails.extensions:type_name -> com.coralogix.extensions.v1.Extension
 	9,   // 28: com.coralogix.integrations.v1.IntegrationDetails.docs:type_name -> com.coralogix.integrations.v1.IntegrationDoc
-	32,  // 29: com.coralogix.integrations.v1.IntegrationDetails.default:type_name -> com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails
+	33,  // 29: com.coralogix.integrations.v1.IntegrationDetails.default:type_name -> com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails
 	13,  // 30: com.coralogix.integrations.v1.IntegrationDetails.local:type_name -> com.coralogix.integrations.v1.LocalChangelog
 	14,  // 31: com.coralogix.integrations.v1.IntegrationDetails.external:type_name -> com.coralogix.integrations.v1.ExternalUrl
 	64,  // 32: com.coralogix.integrations.v1.IntegrationDefinition.key:type_name -> google.protobuf.StringValue
@@ -4438,103 +4438,103 @@ var file_com_coralogix_integrations_v1_integration_proto_depIdxs = []int32{
 	17,  // 34: com.coralogix.integrations.v1.IntegrationDefinition.revisions:type_name -> com.coralogix.integrations.v1.IntegrationRevision
 	64,  // 35: com.coralogix.integrations.v1.IntegrationDefinition.feature_flag:type_name -> google.protobuf.StringValue
 	64,  // 36: com.coralogix.integrations.v1.IntegrationRevision.id:type_name -> google.protobuf.StringValue
-	48,  // 37: com.coralogix.integrations.v1.IntegrationRevision.fields:type_name -> com.coralogix.integrations.v1.IntegrationRevision.FieldInformation
-	47,  // 38: com.coralogix.integrations.v1.IntegrationRevision.groups:type_name -> com.coralogix.integrations.v1.IntegrationRevision.Group
-	34,  // 39: com.coralogix.integrations.v1.IntegrationRevision.cloud_formation:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate
-	35,  // 40: com.coralogix.integrations.v1.IntegrationRevision.managed_service:type_name -> com.coralogix.integrations.v1.IntegrationRevision.ManagedService
-	36,  // 41: com.coralogix.integrations.v1.IntegrationRevision.helm_chart:type_name -> com.coralogix.integrations.v1.IntegrationRevision.HelmChart
-	39,  // 42: com.coralogix.integrations.v1.IntegrationRevision.azure_arm_template:type_name -> com.coralogix.integrations.v1.IntegrationRevision.AzureArmTemplate
-	38,  // 43: com.coralogix.integrations.v1.IntegrationRevision.rum:type_name -> com.coralogix.integrations.v1.IntegrationRevision.Rum
-	37,  // 44: com.coralogix.integrations.v1.IntegrationRevision.terraform:type_name -> com.coralogix.integrations.v1.IntegrationRevision.Terraform
+	49,  // 37: com.coralogix.integrations.v1.IntegrationRevision.fields:type_name -> com.coralogix.integrations.v1.IntegrationRevision.FieldInformation
+	48,  // 38: com.coralogix.integrations.v1.IntegrationRevision.groups:type_name -> com.coralogix.integrations.v1.IntegrationRevision.Group
+	35,  // 39: com.coralogix.integrations.v1.IntegrationRevision.cloud_formation:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate
+	36,  // 40: com.coralogix.integrations.v1.IntegrationRevision.managed_service:type_name -> com.coralogix.integrations.v1.IntegrationRevision.ManagedService
+	37,  // 41: com.coralogix.integrations.v1.IntegrationRevision.helm_chart:type_name -> com.coralogix.integrations.v1.IntegrationRevision.HelmChart
+	40,  // 42: com.coralogix.integrations.v1.IntegrationRevision.azure_arm_template:type_name -> com.coralogix.integrations.v1.IntegrationRevision.AzureArmTemplate
+	39,  // 43: com.coralogix.integrations.v1.IntegrationRevision.rum:type_name -> com.coralogix.integrations.v1.IntegrationRevision.Rum
+	38,  // 44: com.coralogix.integrations.v1.IntegrationRevision.terraform:type_name -> com.coralogix.integrations.v1.IntegrationRevision.Terraform
 	64,  // 45: com.coralogix.integrations.v1.IntegrationRevision.feature_flag:type_name -> google.protobuf.StringValue
 	64,  // 46: com.coralogix.integrations.v1.Parameter.string_value:type_name -> google.protobuf.StringValue
 	66,  // 47: com.coralogix.integrations.v1.Parameter.boolean_value:type_name -> google.protobuf.BoolValue
-	56,  // 48: com.coralogix.integrations.v1.Parameter.string_list:type_name -> com.coralogix.integrations.v1.Parameter.StringList
-	57,  // 49: com.coralogix.integrations.v1.Parameter.api_key:type_name -> com.coralogix.integrations.v1.Parameter.ApiKeyData
+	57,  // 48: com.coralogix.integrations.v1.Parameter.string_list:type_name -> com.coralogix.integrations.v1.Parameter.StringList
+	58,  // 49: com.coralogix.integrations.v1.Parameter.api_key:type_name -> com.coralogix.integrations.v1.Parameter.ApiKeyData
 	67,  // 50: com.coralogix.integrations.v1.Parameter.numeric_value:type_name -> google.protobuf.DoubleValue
-	58,  // 51: com.coralogix.integrations.v1.Parameter.sensitive_data:type_name -> com.coralogix.integrations.v1.Parameter.SensitiveDataPlaceholder
+	59,  // 51: com.coralogix.integrations.v1.Parameter.sensitive_data:type_name -> com.coralogix.integrations.v1.Parameter.SensitiveDataPlaceholder
 	18,  // 52: com.coralogix.integrations.v1.GenericIntegrationParameters.parameters:type_name -> com.coralogix.integrations.v1.Parameter
 	64,  // 53: com.coralogix.integrations.v1.IntegrationMetadata.integration_key:type_name -> google.protobuf.StringValue
 	64,  // 54: com.coralogix.integrations.v1.IntegrationMetadata.version:type_name -> google.protobuf.StringValue
 	19,  // 55: com.coralogix.integrations.v1.IntegrationMetadata.integration_parameters:type_name -> com.coralogix.integrations.v1.GenericIntegrationParameters
-	59,  // 56: com.coralogix.integrations.v1.TestIntegrationResult.success:type_name -> com.coralogix.integrations.v1.TestIntegrationResult.Success
-	60,  // 57: com.coralogix.integrations.v1.TestIntegrationResult.failure:type_name -> com.coralogix.integrations.v1.TestIntegrationResult.Failure
-	63,  // 58: com.coralogix.integrations.v1.RumVersionData.versions:type_name -> com.coralogix.integrations.v1.RumVersionData.Version
-	68,  // 59: com.coralogix.integrations.v1.RumVersionData.synced_at:type_name -> google.protobuf.Timestamp
-	64,  // 60: com.coralogix.integrations.v1.DeployedIntegrationInformation.id:type_name -> google.protobuf.StringValue
-	64,  // 61: com.coralogix.integrations.v1.DeployedIntegrationInformation.definition_key:type_name -> google.protobuf.StringValue
-	64,  // 62: com.coralogix.integrations.v1.DeployedIntegrationInformation.definition_version:type_name -> google.protobuf.StringValue
-	18,  // 63: com.coralogix.integrations.v1.DeployedIntegrationInformation.parameters:type_name -> com.coralogix.integrations.v1.Parameter
-	8,   // 64: com.coralogix.integrations.v1.DeployedIntegrationInformation.integration_status:type_name -> com.coralogix.integrations.v1.IntegrationStatus
-	1,   // 65: com.coralogix.integrations.v1.IntegrationType.Managed.variant:type_name -> com.coralogix.integrations.v1.IntegrationType.Managed.Variant
-	33,  // 66: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.registered:type_name -> com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance
-	64,  // 67: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance.id:type_name -> google.protobuf.StringValue
-	64,  // 68: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance.definition_version:type_name -> google.protobuf.StringValue
-	68,  // 69: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance.last_updated:type_name -> google.protobuf.Timestamp
-	18,  // 70: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance.parameters:type_name -> com.coralogix.integrations.v1.Parameter
-	8,   // 71: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance.integration_status:type_name -> com.coralogix.integrations.v1.IntegrationStatus
-	7,   // 72: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance.empty:type_name -> com.coralogix.integrations.v1.NoDeployment
-	5,   // 73: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance.cloudformation:type_name -> com.coralogix.integrations.v1.CloudFormationStack
-	6,   // 74: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance.arm:type_name -> com.coralogix.integrations.v1.ARMStack
-	66,  // 75: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance.is_testing:type_name -> google.protobuf.BoolValue
-	64,  // 76: com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.template_url:type_name -> google.protobuf.StringValue
-	52,  // 77: com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.parameters:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.ParametersEntry
-	53,  // 78: com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.post_installation_steps:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.PostInstallationStepsEntry
-	49,  // 79: com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.commands:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation
-	64,  // 80: com.coralogix.integrations.v1.IntegrationRevision.HelmChart.template:type_name -> google.protobuf.StringValue
-	49,  // 81: com.coralogix.integrations.v1.IntegrationRevision.HelmChart.commands:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation
-	51,  // 82: com.coralogix.integrations.v1.IntegrationRevision.HelmChart.guide:type_name -> com.coralogix.integrations.v1.IntegrationRevision.IntegrationGuide
-	50,  // 83: com.coralogix.integrations.v1.IntegrationRevision.Terraform.configuration_blocks:type_name -> com.coralogix.integrations.v1.IntegrationRevision.ConfigurationBlock
-	49,  // 84: com.coralogix.integrations.v1.IntegrationRevision.Rum.browser_sdk_commands:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation
-	49,  // 85: com.coralogix.integrations.v1.IntegrationRevision.Rum.source_map_commands:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation
-	64,  // 86: com.coralogix.integrations.v1.IntegrationRevision.AzureArmTemplate.template_url:type_name -> google.protobuf.StringValue
-	64,  // 87: com.coralogix.integrations.v1.IntegrationRevision.ListTextValue.options:type_name -> google.protobuf.StringValue
-	64,  // 88: com.coralogix.integrations.v1.IntegrationRevision.ListTextValue.default_values:type_name -> google.protobuf.StringValue
-	64,  // 89: com.coralogix.integrations.v1.IntegrationRevision.SingleValue.default_value:type_name -> google.protobuf.StringValue
-	66,  // 90: com.coralogix.integrations.v1.IntegrationRevision.SingleBooleanValue.default_value:type_name -> google.protobuf.BoolValue
-	67,  // 91: com.coralogix.integrations.v1.IntegrationRevision.SingleNumericValue.default_value:type_name -> google.protobuf.DoubleValue
-	64,  // 92: com.coralogix.integrations.v1.IntegrationRevision.MultipleSelectionValue.options:type_name -> google.protobuf.StringValue
-	64,  // 93: com.coralogix.integrations.v1.IntegrationRevision.SelectionValue.options:type_name -> google.protobuf.StringValue
-	64,  // 94: com.coralogix.integrations.v1.IntegrationRevision.SelectionValue.default_value:type_name -> google.protobuf.StringValue
-	3,   // 95: com.coralogix.integrations.v1.IntegrationRevision.FieldCondition.type:type_name -> com.coralogix.integrations.v1.IntegrationRevision.FieldCondition.ConditionType
-	54,  // 96: com.coralogix.integrations.v1.IntegrationRevision.FieldCondition.values:type_name -> com.coralogix.integrations.v1.IntegrationRevision.FieldCondition.FieldValue
-	64,  // 97: com.coralogix.integrations.v1.IntegrationRevision.Group.id:type_name -> google.protobuf.StringValue
-	64,  // 98: com.coralogix.integrations.v1.IntegrationRevision.Group.name:type_name -> google.protobuf.StringValue
-	41,  // 99: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.single:type_name -> com.coralogix.integrations.v1.IntegrationRevision.SingleValue
-	40,  // 100: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.multi_text:type_name -> com.coralogix.integrations.v1.IntegrationRevision.ListTextValue
-	44,  // 101: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.multiple_selection:type_name -> com.coralogix.integrations.v1.IntegrationRevision.MultipleSelectionValue
-	42,  // 102: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.single_boolean:type_name -> com.coralogix.integrations.v1.IntegrationRevision.SingleBooleanValue
-	45,  // 103: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.selection:type_name -> com.coralogix.integrations.v1.IntegrationRevision.SelectionValue
-	43,  // 104: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.single_number:type_name -> com.coralogix.integrations.v1.IntegrationRevision.SingleNumericValue
-	2,   // 105: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.type:type_name -> com.coralogix.integrations.v1.IntegrationRevision.InputType
-	64,  // 106: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.name:type_name -> google.protobuf.StringValue
-	64,  // 107: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.tooltip:type_name -> google.protobuf.StringValue
-	64,  // 108: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.template_param_name:type_name -> google.protobuf.StringValue
-	64,  // 109: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.placeholder:type_name -> google.protobuf.StringValue
-	66,  // 110: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.required:type_name -> google.protobuf.BoolValue
-	66,  // 111: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.predefined:type_name -> google.protobuf.BoolValue
-	66,  // 112: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.visible:type_name -> google.protobuf.BoolValue
-	66,  // 113: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.readonly:type_name -> google.protobuf.BoolValue
-	46,  // 114: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.applicable_if:type_name -> com.coralogix.integrations.v1.IntegrationRevision.FieldCondition
-	64,  // 115: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.group_id:type_name -> google.protobuf.StringValue
-	64,  // 116: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.upgrade_notice:type_name -> google.protobuf.StringValue
-	64,  // 117: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.allowed_pattern:type_name -> google.protobuf.StringValue
-	64,  // 118: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.documentation_reference:type_name -> google.protobuf.StringValue
-	64,  // 119: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.name:type_name -> google.protobuf.StringValue
-	64,  // 120: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.command:type_name -> google.protobuf.StringValue
-	64,  // 121: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.description:type_name -> google.protobuf.StringValue
-	64,  // 122: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.tooltip_text:type_name -> google.protobuf.StringValue
-	4,   // 123: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.language:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.Language
-	55,  // 124: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.links:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.Link
-	64,  // 125: com.coralogix.integrations.v1.IntegrationRevision.ConfigurationBlock.name:type_name -> google.protobuf.StringValue
-	64,  // 126: com.coralogix.integrations.v1.IntegrationRevision.ConfigurationBlock.value:type_name -> google.protobuf.StringValue
-	64,  // 127: com.coralogix.integrations.v1.IntegrationRevision.ConfigurationBlock.description:type_name -> google.protobuf.StringValue
-	64,  // 128: com.coralogix.integrations.v1.IntegrationRevision.IntegrationGuide.introduction:type_name -> google.protobuf.StringValue
-	64,  // 129: com.coralogix.integrations.v1.IntegrationRevision.IntegrationGuide.installation_requirements:type_name -> google.protobuf.StringValue
-	64,  // 130: com.coralogix.integrations.v1.Parameter.StringList.values:type_name -> google.protobuf.StringValue
-	64,  // 131: com.coralogix.integrations.v1.Parameter.ApiKeyData.id:type_name -> google.protobuf.StringValue
-	64,  // 132: com.coralogix.integrations.v1.Parameter.ApiKeyData.value:type_name -> google.protobuf.StringValue
-	64,  // 133: com.coralogix.integrations.v1.TestIntegrationResult.Failure.error_message:type_name -> google.protobuf.StringValue
+	64,  // 56: com.coralogix.integrations.v1.Failure.error_message:type_name -> google.protobuf.StringValue
+	60,  // 57: com.coralogix.integrations.v1.TestIntegrationResult.success:type_name -> com.coralogix.integrations.v1.TestIntegrationResult.Success
+	21,  // 58: com.coralogix.integrations.v1.TestIntegrationResult.failure:type_name -> com.coralogix.integrations.v1.Failure
+	63,  // 59: com.coralogix.integrations.v1.RumVersionData.versions:type_name -> com.coralogix.integrations.v1.RumVersionData.Version
+	68,  // 60: com.coralogix.integrations.v1.RumVersionData.synced_at:type_name -> google.protobuf.Timestamp
+	64,  // 61: com.coralogix.integrations.v1.DeployedIntegrationInformation.id:type_name -> google.protobuf.StringValue
+	64,  // 62: com.coralogix.integrations.v1.DeployedIntegrationInformation.definition_key:type_name -> google.protobuf.StringValue
+	64,  // 63: com.coralogix.integrations.v1.DeployedIntegrationInformation.definition_version:type_name -> google.protobuf.StringValue
+	18,  // 64: com.coralogix.integrations.v1.DeployedIntegrationInformation.parameters:type_name -> com.coralogix.integrations.v1.Parameter
+	8,   // 65: com.coralogix.integrations.v1.DeployedIntegrationInformation.integration_status:type_name -> com.coralogix.integrations.v1.IntegrationStatus
+	1,   // 66: com.coralogix.integrations.v1.IntegrationType.Managed.variant:type_name -> com.coralogix.integrations.v1.IntegrationType.Managed.Variant
+	34,  // 67: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.registered:type_name -> com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance
+	64,  // 68: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance.id:type_name -> google.protobuf.StringValue
+	64,  // 69: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance.definition_version:type_name -> google.protobuf.StringValue
+	68,  // 70: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance.last_updated:type_name -> google.protobuf.Timestamp
+	18,  // 71: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance.parameters:type_name -> com.coralogix.integrations.v1.Parameter
+	8,   // 72: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance.integration_status:type_name -> com.coralogix.integrations.v1.IntegrationStatus
+	7,   // 73: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance.empty:type_name -> com.coralogix.integrations.v1.NoDeployment
+	5,   // 74: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance.cloudformation:type_name -> com.coralogix.integrations.v1.CloudFormationStack
+	6,   // 75: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance.arm:type_name -> com.coralogix.integrations.v1.ARMStack
+	66,  // 76: com.coralogix.integrations.v1.IntegrationDetails.DefaultIntegrationDetails.RegisteredInstance.is_testing:type_name -> google.protobuf.BoolValue
+	64,  // 77: com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.template_url:type_name -> google.protobuf.StringValue
+	53,  // 78: com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.parameters:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.ParametersEntry
+	54,  // 79: com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.post_installation_steps:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.PostInstallationStepsEntry
+	50,  // 80: com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.commands:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation
+	64,  // 81: com.coralogix.integrations.v1.IntegrationRevision.HelmChart.template:type_name -> google.protobuf.StringValue
+	50,  // 82: com.coralogix.integrations.v1.IntegrationRevision.HelmChart.commands:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation
+	52,  // 83: com.coralogix.integrations.v1.IntegrationRevision.HelmChart.guide:type_name -> com.coralogix.integrations.v1.IntegrationRevision.IntegrationGuide
+	51,  // 84: com.coralogix.integrations.v1.IntegrationRevision.Terraform.configuration_blocks:type_name -> com.coralogix.integrations.v1.IntegrationRevision.ConfigurationBlock
+	50,  // 85: com.coralogix.integrations.v1.IntegrationRevision.Rum.browser_sdk_commands:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation
+	50,  // 86: com.coralogix.integrations.v1.IntegrationRevision.Rum.source_map_commands:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation
+	64,  // 87: com.coralogix.integrations.v1.IntegrationRevision.AzureArmTemplate.template_url:type_name -> google.protobuf.StringValue
+	64,  // 88: com.coralogix.integrations.v1.IntegrationRevision.ListTextValue.options:type_name -> google.protobuf.StringValue
+	64,  // 89: com.coralogix.integrations.v1.IntegrationRevision.ListTextValue.default_values:type_name -> google.protobuf.StringValue
+	64,  // 90: com.coralogix.integrations.v1.IntegrationRevision.SingleValue.default_value:type_name -> google.protobuf.StringValue
+	66,  // 91: com.coralogix.integrations.v1.IntegrationRevision.SingleBooleanValue.default_value:type_name -> google.protobuf.BoolValue
+	67,  // 92: com.coralogix.integrations.v1.IntegrationRevision.SingleNumericValue.default_value:type_name -> google.protobuf.DoubleValue
+	64,  // 93: com.coralogix.integrations.v1.IntegrationRevision.MultipleSelectionValue.options:type_name -> google.protobuf.StringValue
+	64,  // 94: com.coralogix.integrations.v1.IntegrationRevision.SelectionValue.options:type_name -> google.protobuf.StringValue
+	64,  // 95: com.coralogix.integrations.v1.IntegrationRevision.SelectionValue.default_value:type_name -> google.protobuf.StringValue
+	3,   // 96: com.coralogix.integrations.v1.IntegrationRevision.FieldCondition.type:type_name -> com.coralogix.integrations.v1.IntegrationRevision.FieldCondition.ConditionType
+	55,  // 97: com.coralogix.integrations.v1.IntegrationRevision.FieldCondition.values:type_name -> com.coralogix.integrations.v1.IntegrationRevision.FieldCondition.FieldValue
+	64,  // 98: com.coralogix.integrations.v1.IntegrationRevision.Group.id:type_name -> google.protobuf.StringValue
+	64,  // 99: com.coralogix.integrations.v1.IntegrationRevision.Group.name:type_name -> google.protobuf.StringValue
+	42,  // 100: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.single:type_name -> com.coralogix.integrations.v1.IntegrationRevision.SingleValue
+	41,  // 101: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.multi_text:type_name -> com.coralogix.integrations.v1.IntegrationRevision.ListTextValue
+	45,  // 102: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.multiple_selection:type_name -> com.coralogix.integrations.v1.IntegrationRevision.MultipleSelectionValue
+	43,  // 103: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.single_boolean:type_name -> com.coralogix.integrations.v1.IntegrationRevision.SingleBooleanValue
+	46,  // 104: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.selection:type_name -> com.coralogix.integrations.v1.IntegrationRevision.SelectionValue
+	44,  // 105: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.single_number:type_name -> com.coralogix.integrations.v1.IntegrationRevision.SingleNumericValue
+	2,   // 106: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.type:type_name -> com.coralogix.integrations.v1.IntegrationRevision.InputType
+	64,  // 107: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.name:type_name -> google.protobuf.StringValue
+	64,  // 108: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.tooltip:type_name -> google.protobuf.StringValue
+	64,  // 109: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.template_param_name:type_name -> google.protobuf.StringValue
+	64,  // 110: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.placeholder:type_name -> google.protobuf.StringValue
+	66,  // 111: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.required:type_name -> google.protobuf.BoolValue
+	66,  // 112: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.predefined:type_name -> google.protobuf.BoolValue
+	66,  // 113: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.visible:type_name -> google.protobuf.BoolValue
+	66,  // 114: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.readonly:type_name -> google.protobuf.BoolValue
+	47,  // 115: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.applicable_if:type_name -> com.coralogix.integrations.v1.IntegrationRevision.FieldCondition
+	64,  // 116: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.group_id:type_name -> google.protobuf.StringValue
+	64,  // 117: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.upgrade_notice:type_name -> google.protobuf.StringValue
+	64,  // 118: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.allowed_pattern:type_name -> google.protobuf.StringValue
+	64,  // 119: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.documentation_reference:type_name -> google.protobuf.StringValue
+	64,  // 120: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.name:type_name -> google.protobuf.StringValue
+	64,  // 121: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.command:type_name -> google.protobuf.StringValue
+	64,  // 122: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.description:type_name -> google.protobuf.StringValue
+	64,  // 123: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.tooltip_text:type_name -> google.protobuf.StringValue
+	4,   // 124: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.language:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.Language
+	56,  // 125: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.links:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.Link
+	64,  // 126: com.coralogix.integrations.v1.IntegrationRevision.ConfigurationBlock.name:type_name -> google.protobuf.StringValue
+	64,  // 127: com.coralogix.integrations.v1.IntegrationRevision.ConfigurationBlock.value:type_name -> google.protobuf.StringValue
+	64,  // 128: com.coralogix.integrations.v1.IntegrationRevision.ConfigurationBlock.description:type_name -> google.protobuf.StringValue
+	64,  // 129: com.coralogix.integrations.v1.IntegrationRevision.IntegrationGuide.introduction:type_name -> google.protobuf.StringValue
+	64,  // 130: com.coralogix.integrations.v1.IntegrationRevision.IntegrationGuide.installation_requirements:type_name -> google.protobuf.StringValue
+	64,  // 131: com.coralogix.integrations.v1.Parameter.StringList.values:type_name -> google.protobuf.StringValue
+	64,  // 132: com.coralogix.integrations.v1.Parameter.ApiKeyData.id:type_name -> google.protobuf.StringValue
+	64,  // 133: com.coralogix.integrations.v1.Parameter.ApiKeyData.value:type_name -> google.protobuf.StringValue
 	68,  // 134: com.coralogix.integrations.v1.RumVersionData.SourceMapMetadata.created_at:type_name -> google.protobuf.Timestamp
 	66,  // 135: com.coralogix.integrations.v1.RumVersionData.SourceMapMetadata.is_uploaded_successful:type_name -> google.protobuf.BoolValue
 	68,  // 136: com.coralogix.integrations.v1.RumVersionData.LogMetadata.first_occurrence:type_name -> google.protobuf.Timestamp
@@ -4587,21 +4587,21 @@ func file_com_coralogix_integrations_v1_integration_proto_init() {
 	file_com_coralogix_integrations_v1_integration_proto_msgTypes[15].OneofWrappers = []any{
 		(*IntegrationMetadata_IntegrationParameters)(nil),
 	}
-	file_com_coralogix_integrations_v1_integration_proto_msgTypes[16].OneofWrappers = []any{
+	file_com_coralogix_integrations_v1_integration_proto_msgTypes[17].OneofWrappers = []any{
 		(*TestIntegrationResult_Success_)(nil),
-		(*TestIntegrationResult_Failure_)(nil),
+		(*TestIntegrationResult_Failure)(nil),
 	}
-	file_com_coralogix_integrations_v1_integration_proto_msgTypes[28].OneofWrappers = []any{
+	file_com_coralogix_integrations_v1_integration_proto_msgTypes[29].OneofWrappers = []any{
 		(*IntegrationDetails_DefaultIntegrationDetails_RegisteredInstance_Empty)(nil),
 		(*IntegrationDetails_DefaultIntegrationDetails_RegisteredInstance_Cloudformation)(nil),
 		(*IntegrationDetails_DefaultIntegrationDetails_RegisteredInstance_Arm)(nil),
 	}
-	file_com_coralogix_integrations_v1_integration_proto_msgTypes[31].OneofWrappers = []any{}
-	file_com_coralogix_integrations_v1_integration_proto_msgTypes[36].OneofWrappers = []any{}
+	file_com_coralogix_integrations_v1_integration_proto_msgTypes[32].OneofWrappers = []any{}
 	file_com_coralogix_integrations_v1_integration_proto_msgTypes[37].OneofWrappers = []any{}
 	file_com_coralogix_integrations_v1_integration_proto_msgTypes[38].OneofWrappers = []any{}
-	file_com_coralogix_integrations_v1_integration_proto_msgTypes[40].OneofWrappers = []any{}
-	file_com_coralogix_integrations_v1_integration_proto_msgTypes[43].OneofWrappers = []any{
+	file_com_coralogix_integrations_v1_integration_proto_msgTypes[39].OneofWrappers = []any{}
+	file_com_coralogix_integrations_v1_integration_proto_msgTypes[41].OneofWrappers = []any{}
+	file_com_coralogix_integrations_v1_integration_proto_msgTypes[44].OneofWrappers = []any{
 		(*IntegrationRevision_FieldInformation_Single)(nil),
 		(*IntegrationRevision_FieldInformation_MultiText)(nil),
 		(*IntegrationRevision_FieldInformation_MultipleSelection)(nil),
@@ -4609,9 +4609,9 @@ func file_com_coralogix_integrations_v1_integration_proto_init() {
 		(*IntegrationRevision_FieldInformation_Selection)(nil),
 		(*IntegrationRevision_FieldInformation_SingleNumber)(nil),
 	}
-	file_com_coralogix_integrations_v1_integration_proto_msgTypes[44].OneofWrappers = []any{}
-	file_com_coralogix_integrations_v1_integration_proto_msgTypes[46].OneofWrappers = []any{}
-	file_com_coralogix_integrations_v1_integration_proto_msgTypes[52].OneofWrappers = []any{}
+	file_com_coralogix_integrations_v1_integration_proto_msgTypes[45].OneofWrappers = []any{}
+	file_com_coralogix_integrations_v1_integration_proto_msgTypes[47].OneofWrappers = []any{}
+	file_com_coralogix_integrations_v1_integration_proto_msgTypes[53].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
