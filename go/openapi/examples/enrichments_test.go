@@ -105,13 +105,25 @@ func TestEnrichmentsCustom(t *testing.T) {
 	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	customEClient := cxsdk.NewCustomEnrichmentsClient(cfg)
 	name := fmt.Sprintf("test-%v", uuid.NewString())
-	data, _, err := customEClient.CustomEnrichmentServiceCreateCustomEnrichment(context.Background()).
+
+	ext := "csv"
+	contents := "local_id,instance_type\nfoo1,t2.micro\nfoo2,t2.micro\nfoo3,t2.micro\nbar1,m3.large\n"
+
+	data, httpResp, err := customEClient.
+		CustomEnrichmentServiceCreateCustomEnrichment(context.Background()).
 		Name(name).
 		Description(name).
-		File(custom_enrichments_service.FileTextualAsCustomEnrichmentServiceCreateCustomEnrichmentFileParameter()).
+		File(custom_enrichments_service.
+			CustomEnrichmentServiceCreateCustomEnrichmentFileParameter{
+			FileTextual: &custom_enrichments_service.FileTextual{
+				Extension: &ext,
+				Name:      &name,
+				Textual:   &contents,
+			},
+		}).
 		Execute()
 
-	require.Nil(t, err)
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	client := cxsdk.NewEnrichmentsClient(cfg)
 
@@ -141,6 +153,12 @@ func TestEnrichmentsCustom(t *testing.T) {
 		EnrichmentServiceRemoveEnrichments(context.Background()).
 		EnrichmentIds(ids).
 		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+
+	_, httpResp, err = customEClient.
+		CustomEnrichmentServiceDeleteCustomEnrichment(context.Background(), *data.CustomEnrichment.Id).
+		Execute()
+
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
