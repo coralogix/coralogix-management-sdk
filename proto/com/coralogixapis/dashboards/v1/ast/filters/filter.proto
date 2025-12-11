@@ -4,6 +4,7 @@ package com.coralogixapis.dashboards.v1.ast.filters;
 
 import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
 import "com/coralogixapis/dashboards/v1/common/span_field.proto";
+import "com/coralogixapis/dashboards/v1/types.proto";
 import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
 
@@ -26,6 +27,12 @@ message Filter {
   google.protobuf.BoolValue collapsed = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Indicates if the filter's UI representation should be collapsed or expanded."}];
 
   google.protobuf.StringValue display_name = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "A display name for the filter"}];
+
+  // A unique identifier
+  UUID id = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    example: '{ "value": "5995904f-7256-f096-9a16-37124e0f15cb"} '
+    description: "Filter's unique identifier"
+  }];
 
   message Source {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
