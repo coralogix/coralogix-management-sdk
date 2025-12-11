@@ -20,6 +20,7 @@ import (
 	alertscheduler "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/alert_scheduler_rule_service"
 	apikeys "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/api_keys_service"
 	connectors "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/connectors_service"
+	customEnrichments "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/custom_enrichments_service"
 	dashboardfolders "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/dashboard_folders_service"
 	dashboards "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/dashboard_service"
 	enrichments "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/enrichments_service"
@@ -62,6 +63,7 @@ type ClientSet struct {
 	dashboards           *dashboards.DashboardServiceAPIService
 	dashboardFolders     *dashboardfolders.DashboardFoldersServiceAPIService
 	enrichments          *enrichments.EnrichmentsServiceAPIService
+	customEnrichments    *customEnrichments.CustomEnrichmentsServiceAPIService
 	extensions           *extensions.ExtensionServiceAPIService
 	events2metrics       *events2metrics.Events2MetricsServiceAPIService
 	extensionDeployments *extensiondeployments.ExtensionDeploymentServiceAPIService
@@ -137,6 +139,11 @@ func (c *ClientSet) DashboardFolders() *dashboardfolders.DashboardFoldersService
 // Enrichments returns the EnrichmentsServiceAPIService client.
 func (c *ClientSet) Enrichments() *enrichments.EnrichmentsServiceAPIService {
 	return c.enrichments
+}
+
+// CustomEnrichments returns the CustomEnrichmentsServiceAPIService client.
+func (c *ClientSet) CustomEnrichments() *customEnrichments.CustomEnrichmentsServiceAPIService {
+	return c.customEnrichments
 }
 
 // Events2Metrics returns the Events2MetricsServiceAPIService client.
