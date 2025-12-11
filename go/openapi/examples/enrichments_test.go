@@ -16,11 +16,14 @@ package examples
 
 import (
 	"context"
+	"fmt"
 	"testing"
 
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
 
 	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
+	"github.com/coralogix/coralogix-management-sdk/go/openapi/gen/custom_enrichments_service"
 	enrichments "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/enrichments_service"
 )
 
@@ -99,13 +102,24 @@ func TestEnrichmentsAws(t *testing.T) {
 }
 
 func TestEnrichmentsCustom(t *testing.T) {
-	t.Skip("Skipping Custom")
 	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	customEClient := cxsdk.NewCustomEnrichmentsClient(cfg)
+	name := fmt.Sprintf("test-%v", uuid.NewString())
+	data, _, err := customEClient.CustomEnrichmentServiceCreateCustomEnrichment(context.Background()).
+		Name(name).
+		Description(name).
+		File(custom_enrichments_service.FileTextualAsCustomEnrichmentServiceCreateCustomEnrichmentFileParameter()).
+		Execute()
+
+	require.Nil(t, err)
+
 	client := cxsdk.NewEnrichmentsClient(cfg)
 
 	enrichmentType := enrichments.EnrichmentType{
 		EnrichmentTypeCustomEnrichment: &enrichments.EnrichmentTypeCustomEnrichment{
-			CustomEnrichment: &enrichments.CustomEnrichmentType{},
+			CustomEnrichment: &enrichments.CustomEnrichmentType{
+				Id: data.CustomEnrichment.Id,
+			},
 		},
 	}
 	model := enrichments.NewEnrichmentRequestModel(enrichmentType, "coralogix.metadata.sdkId")

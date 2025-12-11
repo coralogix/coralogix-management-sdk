@@ -242,6 +242,7 @@ func NewClientSet(c *Config) *ClientSet {
 		dashboards:           NewDashboardClient(c),
 		dashboardFolders:     NewDashboardFoldersClient(c),
 		enrichments:          NewEnrichmentsClient(c),
+		customEnrichments:    NewCustomEnrichmentsClient(c),
 		events2metrics:       NewEvents2MetricsClient(c),
 		extensions:           NewExtensionsClient(c),
 		extensionDeployments: NewExtensionDeploymentsClient(c),
@@ -402,6 +403,19 @@ func NewEnrichmentsClient(c *Config) *enrichments.EnrichmentsServiceAPIService {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return enrichments.NewAPIClient(cfg).EnrichmentsServiceAPI
+}
+
+// NewCustomEnrichmentsClient builds a new CustomEnrichmentsServiceAPIService from CallPropertiesCreator.
+func NewCustomEnrichmentsClient(c *Config) *customEnrichments.CustomEnrichmentsServiceAPIService {
+	cfg := customEnrichments.NewConfiguration()
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = customEnrichments.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.headers {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return customEnrichments.NewAPIClient(cfg).CustomEnrichmentsServiceAPI
 }
 
 // NewEvents2MetricsClient builds a new Events2MetricsServiceAPIService from CallPropertiesCreator.
