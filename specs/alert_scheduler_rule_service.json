@@ -148,12 +148,15 @@
               "type": "object",
               "properties": {
                 "endTime": {
+                  "example": "",
                   "type": "string"
                 },
                 "startTime": {
+                  "example": "",
                   "type": "string"
                 },
                 "timezone": {
+                  "example": "",
                   "type": "string"
                 }
               }
@@ -187,6 +190,7 @@
             "in": "query",
             "name": "next_page_token",
             "schema": {
+              "example": "",
               "type": "string"
             },
             "style": "form"
@@ -876,23 +880,23 @@
       "Recurring": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/RecurringDynamic"
+            "$ref": "#/components/schemas/RecurringAlways"
           },
           {
-            "$ref": "#/components/schemas/RecurringAlways"
+            "$ref": "#/components/schemas/RecurringDynamic"
           }
         ]
       },
       "Recurring.Dynamic": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/RecurringDynamicDaily"
-          },
-          {
             "$ref": "#/components/schemas/RecurringDynamicWeekly"
           },
           {
             "$ref": "#/components/schemas/RecurringDynamicMonthly"
+          },
+          {
+            "$ref": "#/components/schemas/RecurringDynamicDaily"
           }
         ]
       },

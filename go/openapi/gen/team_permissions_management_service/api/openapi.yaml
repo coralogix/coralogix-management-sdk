@@ -182,7 +182,7 @@ paths:
       summary: Add Users To Team Groups
       tags:
       - Team Permissions Management Service
-  /aaa/team-groups/v1/{group_id.id}:
+  /aaa/team-groups/v1/{id}:
     delete:
       description: No description available
       externalDocs:
@@ -191,7 +191,7 @@ paths:
       parameters:
       - explode: false
         in: path
-        name: group_id.id
+        name: id
         required: true
         schema:
           format: int64
@@ -227,7 +227,7 @@ paths:
       parameters:
       - explode: false
         in: path
-        name: group_id.id
+        name: id
         required: true
         schema:
           format: int64
@@ -255,7 +255,7 @@ paths:
       summary: Get Team Group
       tags:
       - Team Permissions Management Service
-  /aaa/team-groups/v1/{group_id.id}/users:
+  /aaa/team-groups/v1/{id}/users:
     delete:
       description: No description available
       externalDocs:
@@ -264,7 +264,7 @@ paths:
       parameters:
       - explode: false
         in: path
-        name: group_id.id
+        name: id
         required: true
         schema:
           format: int64
@@ -309,7 +309,7 @@ paths:
       parameters:
       - explode: false
         in: path
-        name: group_id.id
+        name: id
         required: true
         schema:
           format: int64
@@ -328,6 +328,7 @@ paths:
         name: page_token
         required: false
         schema:
+          example: ""
           type: string
         style: form
       responses:
@@ -360,7 +361,7 @@ paths:
       parameters:
       - explode: false
         in: path
-        name: group_id.id
+        name: id
         required: true
         schema:
           format: int64
@@ -429,7 +430,7 @@ paths:
       summary: Get Team Group By Name
       tags:
       - Team Permissions Management Service
-  /v1/teams/groups/{group_id.id}/scope:
+  /v1/teams/groups/{id}/scope:
     get:
       description: No description available
       externalDocs:
@@ -438,7 +439,7 @@ paths:
       parameters:
       - explode: false
         in: path
-        name: group_id.id
+        name: id
         required: true
         schema:
           format: int64
@@ -474,7 +475,7 @@ paths:
       parameters:
       - explode: false
         in: path
-        name: group_id.id
+        name: id
         required: true
         schema:
           format: int64
@@ -1448,6 +1449,7 @@ components:
     TeamPermissionsMgmtService_RemoveUsersFromTeamGroup_user_ids_parameter_inner:
       properties:
         id:
+          example: ""
           type: string
       type: object
     SetTeamGroupScopeRequest:

@@ -294,6 +294,7 @@ components:
           format: int64
           type: integer
         limit:
+          example: ""
           format: int64
           type: string
         name:
@@ -318,7 +319,7 @@ components:
       type: object
     OutRule:
       example:
-        lastEvalDurationMs: lastEvalDurationMs
+        lastEvalDurationMs: ""
         record: record
         expr: expr
         labels:
@@ -331,6 +332,7 @@ components:
             type: string
           type: object
         lastEvalDurationMs:
+          example: ""
           format: int64
           type: string
         record:
@@ -338,22 +340,22 @@ components:
       type: object
     OutRuleGroup:
       example:
-        limit: limit
+        limit: ""
         name: name
         interval: 0
         rules:
-        - lastEvalDurationMs: lastEvalDurationMs
+        - lastEvalDurationMs: ""
           record: record
           expr: expr
           labels:
             key: labels
-        - lastEvalDurationMs: lastEvalDurationMs
+        - lastEvalDurationMs: ""
           record: record
           expr: expr
           labels:
             key: labels
         id: id
-        lastEvalAt: lastEvalAt
+        lastEvalAt: ""
         version: 6
       properties:
         id:
@@ -362,9 +364,11 @@ components:
           format: int64
           type: integer
         lastEvalAt:
+          example: ""
           format: int64
           type: string
         limit:
+          example: ""
           format: int64
           type: string
         name:
@@ -382,39 +386,39 @@ components:
       example:
         name: name
         groups:
-        - limit: limit
+        - limit: ""
           name: name
           interval: 0
           rules:
-          - lastEvalDurationMs: lastEvalDurationMs
+          - lastEvalDurationMs: ""
             record: record
             expr: expr
             labels:
               key: labels
-          - lastEvalDurationMs: lastEvalDurationMs
+          - lastEvalDurationMs: ""
             record: record
             expr: expr
             labels:
               key: labels
           id: id
-          lastEvalAt: lastEvalAt
+          lastEvalAt: ""
           version: 6
-        - limit: limit
+        - limit: ""
           name: name
           interval: 0
           rules:
-          - lastEvalDurationMs: lastEvalDurationMs
+          - lastEvalDurationMs: ""
             record: record
             expr: expr
             labels:
               key: labels
-          - lastEvalDurationMs: lastEvalDurationMs
+          - lastEvalDurationMs: ""
             record: record
             expr: expr
             labels:
               key: labels
           id: id
-          lastEvalAt: lastEvalAt
+          lastEvalAt: ""
           version: 6
         id: id
       externalDocs:
@@ -437,76 +441,76 @@ components:
         sets:
         - name: name
           groups:
-          - limit: limit
+          - limit: ""
             name: name
             interval: 0
             rules:
-            - lastEvalDurationMs: lastEvalDurationMs
+            - lastEvalDurationMs: ""
               record: record
               expr: expr
               labels:
                 key: labels
-            - lastEvalDurationMs: lastEvalDurationMs
+            - lastEvalDurationMs: ""
               record: record
               expr: expr
               labels:
                 key: labels
             id: id
-            lastEvalAt: lastEvalAt
+            lastEvalAt: ""
             version: 6
-          - limit: limit
+          - limit: ""
             name: name
             interval: 0
             rules:
-            - lastEvalDurationMs: lastEvalDurationMs
+            - lastEvalDurationMs: ""
               record: record
               expr: expr
               labels:
                 key: labels
-            - lastEvalDurationMs: lastEvalDurationMs
+            - lastEvalDurationMs: ""
               record: record
               expr: expr
               labels:
                 key: labels
             id: id
-            lastEvalAt: lastEvalAt
+            lastEvalAt: ""
             version: 6
           id: id
         - name: name
           groups:
-          - limit: limit
+          - limit: ""
             name: name
             interval: 0
             rules:
-            - lastEvalDurationMs: lastEvalDurationMs
+            - lastEvalDurationMs: ""
               record: record
               expr: expr
               labels:
                 key: labels
-            - lastEvalDurationMs: lastEvalDurationMs
+            - lastEvalDurationMs: ""
               record: record
               expr: expr
               labels:
                 key: labels
             id: id
-            lastEvalAt: lastEvalAt
+            lastEvalAt: ""
             version: 6
-          - limit: limit
+          - limit: ""
             name: name
             interval: 0
             rules:
-            - lastEvalDurationMs: lastEvalDurationMs
+            - lastEvalDurationMs: ""
               record: record
               expr: expr
               labels:
                 key: labels
-            - lastEvalDurationMs: lastEvalDurationMs
+            - lastEvalDurationMs: ""
               record: record
               expr: expr
               labels:
                 key: labels
             id: id
-            lastEvalAt: lastEvalAt
+            lastEvalAt: ""
             version: 6
           id: id
       externalDocs:

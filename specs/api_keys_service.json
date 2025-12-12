@@ -581,13 +581,13 @@
       "Owner": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/OwnerOrganisationId"
+          },
+          {
             "$ref": "#/components/schemas/OwnerUserId"
           },
           {
             "$ref": "#/components/schemas/OwnerTeamId"
-          },
-          {
-            "$ref": "#/components/schemas/OwnerOrganisationId"
           }
         ]
       },

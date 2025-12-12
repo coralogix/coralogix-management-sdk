@@ -36,6 +36,7 @@
                   "values": {
                     "type": "array",
                     "items": {
+                      "example": "",
                       "type": "string"
                     }
                   }
@@ -227,6 +228,7 @@
             "schema": {
               "type": "array",
               "items": {
+                "example": "",
                 "type": "string"
               }
             },
@@ -260,11 +262,11 @@
         "type": "object",
         "properties": {
           "notFoundIds": {
+            "example": [
+              "global-router-id-3"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "global-router-id-3"
-              ],
               "type": "string"
             }
           },
@@ -436,13 +438,6 @@
           },
           "description": {
             "type": "string"
-          },
-          "entityLabelMatcher": {
-            "deprecated": true,
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
           },
           "entityLabels": {
             "type": "object",

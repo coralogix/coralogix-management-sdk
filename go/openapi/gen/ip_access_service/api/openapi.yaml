@@ -55,6 +55,7 @@ paths:
         schema:
           description: "The ID of the company IP access settings to get. If it's not\
             \ provided, the id will be derived from the authorization header."
+          example: ""
           type: string
         style: form
       responses:
@@ -167,7 +168,11 @@ components:
       description: This data structure represents the IP access settings for a company.
       example:
         enableCoralogixCustomerSupportAccess: CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED
-        ipAccess: d662a2f1-21c3-493c-8f8a-595d3ab05ef3
+        ipAccess:
+          key:
+            ipRange: 192.168.0.1/24
+            name: Office Network
+            enabled: true
         id: d662a2f1-21c3-493c-8f8a-595d3ab05ef3
       externalDocs:
         url: ""
@@ -183,7 +188,6 @@ components:
           additionalProperties:
             $ref: "#/components/schemas/IpAccess"
           description: The list of IP access entries.
-          example: d662a2f1-21c3-493c-8f8a-595d3ab05ef3
           type: object
       title: Company IP access settings
       type: object
@@ -199,7 +203,11 @@ components:
       example:
         settings:
           enableCoralogixCustomerSupportAccess: CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED
-          ipAccess: d662a2f1-21c3-493c-8f8a-595d3ab05ef3
+          ipAccess:
+            key:
+              ipRange: 192.168.0.1/24
+              name: Office Network
+              enabled: true
           id: d662a2f1-21c3-493c-8f8a-595d3ab05ef3
       externalDocs:
         url: ""
@@ -279,7 +287,11 @@ components:
       example:
         settings:
           enableCoralogixCustomerSupportAccess: CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED
-          ipAccess: d662a2f1-21c3-493c-8f8a-595d3ab05ef3
+          ipAccess:
+            key:
+              ipRange: 192.168.0.1/24
+              name: Office Network
+              enabled: true
           id: d662a2f1-21c3-493c-8f8a-595d3ab05ef3
       externalDocs:
         url: ""
@@ -290,6 +302,10 @@ components:
       type: object
     IpAccess:
       description: Represents a single IP access entry.
+      example:
+        ipRange: 192.168.0.1/24
+        name: Office Network
+        enabled: true
       externalDocs:
         description: Find out more about IP access control in our documentation
         url: https://coralogix.com/docs/user-guides/account-management/account-settings/ip-access-control/
@@ -323,7 +339,11 @@ components:
       example:
         settings:
           enableCoralogixCustomerSupportAccess: CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED
-          ipAccess: d662a2f1-21c3-493c-8f8a-595d3ab05ef3
+          ipAccess:
+            key:
+              ipRange: 192.168.0.1/24
+              name: Office Network
+              enabled: true
           id: d662a2f1-21c3-493c-8f8a-595d3ab05ef3
       externalDocs:
         url: ""

@@ -103,6 +103,7 @@ paths:
         name: next_page_token
         required: false
         schema:
+          example: ""
           type: string
         style: form
       responses:
@@ -856,13 +857,13 @@ components:
       type: object
     Recurring:
       oneOf:
-      - $ref: "#/components/schemas/RecurringDynamic"
       - $ref: "#/components/schemas/RecurringAlways"
+      - $ref: "#/components/schemas/RecurringDynamic"
     Recurring.Dynamic:
       oneOf:
-      - $ref: "#/components/schemas/RecurringDynamicDaily"
       - $ref: "#/components/schemas/RecurringDynamicWeekly"
       - $ref: "#/components/schemas/RecurringDynamicMonthly"
+      - $ref: "#/components/schemas/RecurringDynamicDaily"
     RecurringAlways:
       additionalProperties: false
       properties:
@@ -1191,10 +1192,13 @@ components:
     AlertSchedulerRuleService_GetBulkAlertSchedulerRule_active_timeframe_parameter:
       properties:
         endTime:
+          example: ""
           type: string
         startTime:
+          example: ""
           type: string
         timezone:
+          example: ""
           type: string
       type: object
     AlertSchedulerRuleService_GetBulkAlertSchedulerRule_alert_scheduler_rules_ids_parameter:

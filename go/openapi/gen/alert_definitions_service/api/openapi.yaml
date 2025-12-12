@@ -411,7 +411,7 @@ components:
       example:
         dayOfWeek:
         - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
-        - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+        - DAY_OF_WEEK_TUESDAY
         startTime:
           hours: 14
           minutes: 30
@@ -422,6 +422,9 @@ components:
         url: ""
       properties:
         dayOfWeek:
+          example:
+          - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+          - DAY_OF_WEEK_TUESDAY
           items:
             $ref: "#/components/schemas/DayOfWeek"
           type: array
@@ -438,7 +441,27 @@ components:
         lastTriggeredTime: 2023-10-01T12:00:00Z
         alertDefProperties:
           entityLabels:
-            key: value
+            key: entityLabels
+          logsImmediate:
+            notificationPayloadFilter:
+            - obj.field
+            logsFilter:
+              simpleFilter:
+                labelFilters:
+                  subsystemName:
+                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    value: my-app
+                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    value: my-app
+                  applicationName:
+                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    value: my-app
+                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    value: my-app
+                  severities:
+                  - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                luceneQuery: luceneQuery
           phantomMode: false
           notificationGroupExcess:
           - router:
@@ -517,8 +540,8 @@ components:
               notifyOn: null
               presetId: preset_id_example
             groupByKeys:
-            - "[\"key1\",\"key2\"]"
-            - "[\"key1\",\"key2\"]"
+            - key1
+            - key2
           - router:
               notifyOn: null
               id: 123e4567-e89b-12d3-a456-426614174000
@@ -595,72 +618,15 @@ components:
               notifyOn: null
               presetId: preset_id_example
             groupByKeys:
-            - "[\"key1\",\"key2\"]"
-            - "[\"key1\",\"key2\"]"
-          tracingImmediate:
-            notificationPayloadFilter:
-            - "[\"obj.field\"]"
-            - "[\"obj.field\"]"
-            tracingFilter:
-              simpleFilter:
-                tracingLabelFilters:
-                  operationName:
-                  - values:
-                    - "[\"value1\",\"value2\"]"
-                    - "[\"value1\",\"value2\"]"
-                    operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  - values:
-                    - "[\"value1\",\"value2\"]"
-                    - "[\"value1\",\"value2\"]"
-                    operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  spanFields:
-                  - filterType:
-                      values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    key: span.field.key
-                  - filterType:
-                      values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    key: span.field.key
-                  serviceName:
-                  - values:
-                    - "[\"value1\",\"value2\"]"
-                    - "[\"value1\",\"value2\"]"
-                    operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  - values:
-                    - "[\"value1\",\"value2\"]"
-                    - "[\"value1\",\"value2\"]"
-                    operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  subsystemName:
-                  - values:
-                    - "[\"value1\",\"value2\"]"
-                    - "[\"value1\",\"value2\"]"
-                    operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  - values:
-                    - "[\"value1\",\"value2\"]"
-                    - "[\"value1\",\"value2\"]"
-                    operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  applicationName:
-                  - values:
-                    - "[\"value1\",\"value2\"]"
-                    - "[\"value1\",\"value2\"]"
-                    operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  - values:
-                    - "[\"value1\",\"value2\"]"
-                    - "[\"value1\",\"value2\"]"
-                    operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                latencyThresholdMs: "1000"
+            - key1
+            - key2
           description: Alert description
           priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
           type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
           activeOn:
             dayOfWeek:
             - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
-            - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+            - DAY_OF_WEEK_TUESDAY
             startTime:
               hours: 14
               minutes: 30
@@ -745,16 +711,16 @@ components:
               notifyOn: null
               presetId: preset_id_example
             groupByKeys:
-            - "[\"key1\",\"key2\"]"
-            - "[\"key1\",\"key2\"]"
+            - key1
+            - key2
           deleted: false
           incidentsSettings:
             minutes: 30
             notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
           name: My Alert
           groupByKeys:
-          - "[\"key1\",\"key2\"]"
-          - "[\"key1\",\"key2\"]"
+          - key1
+          - key2
         createdTime: 2023-10-01T12:00:00Z
         id: 123e4567-e89b-12d3-a456-426614174000
         alertVersionId: alertVersionId
@@ -885,8 +851,8 @@ components:
           notifyOn: null
           presetId: preset_id_example
         groupByKeys:
-        - "[\"key1\",\"key2\"]"
-        - "[\"key1\",\"key2\"]"
+        - key1
+        - key2
       externalDocs:
         url: ""
       properties:
@@ -895,9 +861,11 @@ components:
             $ref: "#/components/schemas/NotificationDestination"
           type: array
         groupByKeys:
+          example:
+          - key1
+          - key2
           items:
             description: The keys to group the alerts by
-            example: "[\"key1\",\"key2\"]"
             type: string
           type: array
         router:
@@ -939,18 +907,18 @@ components:
       type: string
     AlertDefProperties:
       oneOf:
-      - $ref: "#/components/schemas/AlertDefPropertiesTracingImmediate"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesMetricThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesTracingThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesFlow"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsNewValue"
-      - $ref: "#/components/schemas/AlertDefPropertiesSloThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsImmediate"
+      - $ref: "#/components/schemas/AlertDefPropertiesTracingImmediate"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesMetricThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesFlow"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsAnomaly"
+      - $ref: "#/components/schemas/AlertDefPropertiesSloThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesTracingThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesMetricAnomaly"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsNewValue"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
     AlertDefPropertiesFlow:
       additionalProperties: false
@@ -977,15 +945,15 @@ components:
           additionalProperties:
             type: string
           description: Labels used to identify and categorize the alert entity
-          example:
-            key: value
           type: object
         flow:
           $ref: "#/components/schemas/FlowType"
         groupByKeys:
+          example:
+          - key1
+          - key2
           items:
             description: Keys used to group and aggregate alert data
-            example: "[\"key1\",\"key2\"]"
             type: string
           type: array
         incidentsSettings:
@@ -1036,13 +1004,13 @@ components:
           additionalProperties:
             type: string
           description: Labels used to identify and categorize the alert entity
-          example:
-            key: value
           type: object
         groupByKeys:
+          example:
+          - key1
+          - key2
           items:
             description: Keys used to group and aggregate alert data
-            example: "[\"key1\",\"key2\"]"
             type: string
           type: array
         incidentsSettings:
@@ -1073,540 +1041,29 @@ components:
     AlertDefPropertiesLogsImmediate:
       additionalProperties: false
       description: User-configurable properties of an alert definition
-      externalDocs:
-        url: ""
-      properties:
-        activeOn:
-          $ref: "#/components/schemas/ActivitySchedule"
-        deleted:
-          description: Whether the alert has been marked as deleted
-          example: false
-          type: boolean
-        description:
-          description: A detailed description of what the alert monitors and when
-            it triggers
-          example: Alert description
-          type: string
-        enabled:
-          description: Whether the alert is currently active and monitoring
-          example: true
-          type: boolean
-        entityLabels:
-          additionalProperties:
-            type: string
-          description: Labels used to identify and categorize the alert entity
-          example:
-            key: value
-          type: object
-        groupByKeys:
-          items:
-            description: Keys used to group and aggregate alert data
-            example: "[\"key1\",\"key2\"]"
-            type: string
-          type: array
-        incidentsSettings:
-          $ref: "#/components/schemas/AlertDefIncidentSettings"
-        logsImmediate:
-          $ref: "#/components/schemas/LogsImmediateType"
-        name:
-          description: The name of the alert definition
-          example: My Alert
-          type: string
-        notificationGroup:
-          $ref: "#/components/schemas/AlertDefNotificationGroup"
-        notificationGroupExcess:
-          items:
-            $ref: "#/components/schemas/AlertDefNotificationGroup"
-          type: array
-        phantomMode:
-          description: Whether the alert is in phantom mode (creating incidents or
-            not)
-          example: false
-          type: boolean
-        priority:
-          $ref: "#/components/schemas/AlertDefPriority"
-        type:
-          $ref: "#/components/schemas/AlertDefType"
-      title: Alert definition properties
-      type: object
-    AlertDefPropertiesLogsNewValue:
-      additionalProperties: false
-      description: User-configurable properties of an alert definition
-      externalDocs:
-        url: ""
-      properties:
-        activeOn:
-          $ref: "#/components/schemas/ActivitySchedule"
-        deleted:
-          description: Whether the alert has been marked as deleted
-          example: false
-          type: boolean
-        description:
-          description: A detailed description of what the alert monitors and when
-            it triggers
-          example: Alert description
-          type: string
-        enabled:
-          description: Whether the alert is currently active and monitoring
-          example: true
-          type: boolean
-        entityLabels:
-          additionalProperties:
-            type: string
-          description: Labels used to identify and categorize the alert entity
-          example:
-            key: value
-          type: object
-        groupByKeys:
-          items:
-            description: Keys used to group and aggregate alert data
-            example: "[\"key1\",\"key2\"]"
-            type: string
-          type: array
-        incidentsSettings:
-          $ref: "#/components/schemas/AlertDefIncidentSettings"
-        logsNewValue:
-          $ref: "#/components/schemas/LogsNewValueType"
-        name:
-          description: The name of the alert definition
-          example: My Alert
-          type: string
-        notificationGroup:
-          $ref: "#/components/schemas/AlertDefNotificationGroup"
-        notificationGroupExcess:
-          items:
-            $ref: "#/components/schemas/AlertDefNotificationGroup"
-          type: array
-        phantomMode:
-          description: Whether the alert is in phantom mode (creating incidents or
-            not)
-          example: false
-          type: boolean
-        priority:
-          $ref: "#/components/schemas/AlertDefPriority"
-        type:
-          $ref: "#/components/schemas/AlertDefType"
-      title: Alert definition properties
-      type: object
-    AlertDefPropertiesLogsRatioThreshold:
-      additionalProperties: false
-      description: User-configurable properties of an alert definition
-      externalDocs:
-        url: ""
-      properties:
-        activeOn:
-          $ref: "#/components/schemas/ActivitySchedule"
-        deleted:
-          description: Whether the alert has been marked as deleted
-          example: false
-          type: boolean
-        description:
-          description: A detailed description of what the alert monitors and when
-            it triggers
-          example: Alert description
-          type: string
-        enabled:
-          description: Whether the alert is currently active and monitoring
-          example: true
-          type: boolean
-        entityLabels:
-          additionalProperties:
-            type: string
-          description: Labels used to identify and categorize the alert entity
-          example:
-            key: value
-          type: object
-        groupByKeys:
-          items:
-            description: Keys used to group and aggregate alert data
-            example: "[\"key1\",\"key2\"]"
-            type: string
-          type: array
-        incidentsSettings:
-          $ref: "#/components/schemas/AlertDefIncidentSettings"
-        logsRatioThreshold:
-          $ref: "#/components/schemas/LogsRatioThresholdType"
-        name:
-          description: The name of the alert definition
-          example: My Alert
-          type: string
-        notificationGroup:
-          $ref: "#/components/schemas/AlertDefNotificationGroup"
-        notificationGroupExcess:
-          items:
-            $ref: "#/components/schemas/AlertDefNotificationGroup"
-          type: array
-        phantomMode:
-          description: Whether the alert is in phantom mode (creating incidents or
-            not)
-          example: false
-          type: boolean
-        priority:
-          $ref: "#/components/schemas/AlertDefPriority"
-        type:
-          $ref: "#/components/schemas/AlertDefType"
-      title: Alert definition properties
-      type: object
-    AlertDefPropertiesLogsThreshold:
-      additionalProperties: false
-      description: User-configurable properties of an alert definition
-      externalDocs:
-        url: ""
-      properties:
-        activeOn:
-          $ref: "#/components/schemas/ActivitySchedule"
-        deleted:
-          description: Whether the alert has been marked as deleted
-          example: false
-          type: boolean
-        description:
-          description: A detailed description of what the alert monitors and when
-            it triggers
-          example: Alert description
-          type: string
-        enabled:
-          description: Whether the alert is currently active and monitoring
-          example: true
-          type: boolean
-        entityLabels:
-          additionalProperties:
-            type: string
-          description: Labels used to identify and categorize the alert entity
-          example:
-            key: value
-          type: object
-        groupByKeys:
-          items:
-            description: Keys used to group and aggregate alert data
-            example: "[\"key1\",\"key2\"]"
-            type: string
-          type: array
-        incidentsSettings:
-          $ref: "#/components/schemas/AlertDefIncidentSettings"
-        logsThreshold:
-          $ref: "#/components/schemas/LogsThresholdType"
-        name:
-          description: The name of the alert definition
-          example: My Alert
-          type: string
-        notificationGroup:
-          $ref: "#/components/schemas/AlertDefNotificationGroup"
-        notificationGroupExcess:
-          items:
-            $ref: "#/components/schemas/AlertDefNotificationGroup"
-          type: array
-        phantomMode:
-          description: Whether the alert is in phantom mode (creating incidents or
-            not)
-          example: false
-          type: boolean
-        priority:
-          $ref: "#/components/schemas/AlertDefPriority"
-        type:
-          $ref: "#/components/schemas/AlertDefType"
-      title: Alert definition properties
-      type: object
-    AlertDefPropertiesLogsTimeRelativeThreshold:
-      additionalProperties: false
-      description: User-configurable properties of an alert definition
-      externalDocs:
-        url: ""
-      properties:
-        activeOn:
-          $ref: "#/components/schemas/ActivitySchedule"
-        deleted:
-          description: Whether the alert has been marked as deleted
-          example: false
-          type: boolean
-        description:
-          description: A detailed description of what the alert monitors and when
-            it triggers
-          example: Alert description
-          type: string
-        enabled:
-          description: Whether the alert is currently active and monitoring
-          example: true
-          type: boolean
-        entityLabels:
-          additionalProperties:
-            type: string
-          description: Labels used to identify and categorize the alert entity
-          example:
-            key: value
-          type: object
-        groupByKeys:
-          items:
-            description: Keys used to group and aggregate alert data
-            example: "[\"key1\",\"key2\"]"
-            type: string
-          type: array
-        incidentsSettings:
-          $ref: "#/components/schemas/AlertDefIncidentSettings"
-        logsTimeRelativeThreshold:
-          $ref: "#/components/schemas/LogsTimeRelativeThresholdType"
-        name:
-          description: The name of the alert definition
-          example: My Alert
-          type: string
-        notificationGroup:
-          $ref: "#/components/schemas/AlertDefNotificationGroup"
-        notificationGroupExcess:
-          items:
-            $ref: "#/components/schemas/AlertDefNotificationGroup"
-          type: array
-        phantomMode:
-          description: Whether the alert is in phantom mode (creating incidents or
-            not)
-          example: false
-          type: boolean
-        priority:
-          $ref: "#/components/schemas/AlertDefPriority"
-        type:
-          $ref: "#/components/schemas/AlertDefType"
-      title: Alert definition properties
-      type: object
-    AlertDefPropertiesLogsUniqueCount:
-      additionalProperties: false
-      description: User-configurable properties of an alert definition
-      externalDocs:
-        url: ""
-      properties:
-        activeOn:
-          $ref: "#/components/schemas/ActivitySchedule"
-        deleted:
-          description: Whether the alert has been marked as deleted
-          example: false
-          type: boolean
-        description:
-          description: A detailed description of what the alert monitors and when
-            it triggers
-          example: Alert description
-          type: string
-        enabled:
-          description: Whether the alert is currently active and monitoring
-          example: true
-          type: boolean
-        entityLabels:
-          additionalProperties:
-            type: string
-          description: Labels used to identify and categorize the alert entity
-          example:
-            key: value
-          type: object
-        groupByKeys:
-          items:
-            description: Keys used to group and aggregate alert data
-            example: "[\"key1\",\"key2\"]"
-            type: string
-          type: array
-        incidentsSettings:
-          $ref: "#/components/schemas/AlertDefIncidentSettings"
-        logsUniqueCount:
-          $ref: "#/components/schemas/LogsUniqueCountType"
-        name:
-          description: The name of the alert definition
-          example: My Alert
-          type: string
-        notificationGroup:
-          $ref: "#/components/schemas/AlertDefNotificationGroup"
-        notificationGroupExcess:
-          items:
-            $ref: "#/components/schemas/AlertDefNotificationGroup"
-          type: array
-        phantomMode:
-          description: Whether the alert is in phantom mode (creating incidents or
-            not)
-          example: false
-          type: boolean
-        priority:
-          $ref: "#/components/schemas/AlertDefPriority"
-        type:
-          $ref: "#/components/schemas/AlertDefType"
-      title: Alert definition properties
-      type: object
-    AlertDefPropertiesMetricAnomaly:
-      additionalProperties: false
-      description: User-configurable properties of an alert definition
-      externalDocs:
-        url: ""
-      properties:
-        activeOn:
-          $ref: "#/components/schemas/ActivitySchedule"
-        deleted:
-          description: Whether the alert has been marked as deleted
-          example: false
-          type: boolean
-        description:
-          description: A detailed description of what the alert monitors and when
-            it triggers
-          example: Alert description
-          type: string
-        enabled:
-          description: Whether the alert is currently active and monitoring
-          example: true
-          type: boolean
-        entityLabels:
-          additionalProperties:
-            type: string
-          description: Labels used to identify and categorize the alert entity
-          example:
-            key: value
-          type: object
-        groupByKeys:
-          items:
-            description: Keys used to group and aggregate alert data
-            example: "[\"key1\",\"key2\"]"
-            type: string
-          type: array
-        incidentsSettings:
-          $ref: "#/components/schemas/AlertDefIncidentSettings"
-        metricAnomaly:
-          $ref: "#/components/schemas/MetricAnomalyType"
-        name:
-          description: The name of the alert definition
-          example: My Alert
-          type: string
-        notificationGroup:
-          $ref: "#/components/schemas/AlertDefNotificationGroup"
-        notificationGroupExcess:
-          items:
-            $ref: "#/components/schemas/AlertDefNotificationGroup"
-          type: array
-        phantomMode:
-          description: Whether the alert is in phantom mode (creating incidents or
-            not)
-          example: false
-          type: boolean
-        priority:
-          $ref: "#/components/schemas/AlertDefPriority"
-        type:
-          $ref: "#/components/schemas/AlertDefType"
-      title: Alert definition properties
-      type: object
-    AlertDefPropertiesMetricThreshold:
-      additionalProperties: false
-      description: User-configurable properties of an alert definition
-      externalDocs:
-        url: ""
-      properties:
-        activeOn:
-          $ref: "#/components/schemas/ActivitySchedule"
-        deleted:
-          description: Whether the alert has been marked as deleted
-          example: false
-          type: boolean
-        description:
-          description: A detailed description of what the alert monitors and when
-            it triggers
-          example: Alert description
-          type: string
-        enabled:
-          description: Whether the alert is currently active and monitoring
-          example: true
-          type: boolean
-        entityLabels:
-          additionalProperties:
-            type: string
-          description: Labels used to identify and categorize the alert entity
-          example:
-            key: value
-          type: object
-        groupByKeys:
-          items:
-            description: Keys used to group and aggregate alert data
-            example: "[\"key1\",\"key2\"]"
-            type: string
-          type: array
-        incidentsSettings:
-          $ref: "#/components/schemas/AlertDefIncidentSettings"
-        metricThreshold:
-          $ref: "#/components/schemas/MetricThresholdType"
-        name:
-          description: The name of the alert definition
-          example: My Alert
-          type: string
-        notificationGroup:
-          $ref: "#/components/schemas/AlertDefNotificationGroup"
-        notificationGroupExcess:
-          items:
-            $ref: "#/components/schemas/AlertDefNotificationGroup"
-          type: array
-        phantomMode:
-          description: Whether the alert is in phantom mode (creating incidents or
-            not)
-          example: false
-          type: boolean
-        priority:
-          $ref: "#/components/schemas/AlertDefPriority"
-        type:
-          $ref: "#/components/schemas/AlertDefType"
-      title: Alert definition properties
-      type: object
-    AlertDefPropertiesSloThreshold:
-      additionalProperties: false
-      description: User-configurable properties of an alert definition
-      externalDocs:
-        url: ""
-      properties:
-        activeOn:
-          $ref: "#/components/schemas/ActivitySchedule"
-        deleted:
-          description: Whether the alert has been marked as deleted
-          example: false
-          type: boolean
-        description:
-          description: A detailed description of what the alert monitors and when
-            it triggers
-          example: Alert description
-          type: string
-        enabled:
-          description: Whether the alert is currently active and monitoring
-          example: true
-          type: boolean
-        entityLabels:
-          additionalProperties:
-            type: string
-          description: Labels used to identify and categorize the alert entity
-          example:
-            key: value
-          type: object
-        groupByKeys:
-          items:
-            description: Keys used to group and aggregate alert data
-            example: "[\"key1\",\"key2\"]"
-            type: string
-          type: array
-        incidentsSettings:
-          $ref: "#/components/schemas/AlertDefIncidentSettings"
-        name:
-          description: The name of the alert definition
-          example: My Alert
-          type: string
-        notificationGroup:
-          $ref: "#/components/schemas/AlertDefNotificationGroup"
-        notificationGroupExcess:
-          items:
-            $ref: "#/components/schemas/AlertDefNotificationGroup"
-          type: array
-        phantomMode:
-          description: Whether the alert is in phantom mode (creating incidents or
-            not)
-          example: false
-          type: boolean
-        priority:
-          $ref: "#/components/schemas/AlertDefPriority"
-        sloThreshold:
-          $ref: "#/components/schemas/SloThresholdType"
-        type:
-          $ref: "#/components/schemas/AlertDefType"
-      title: Alert definition properties
-      type: object
-    AlertDefPropertiesTracingImmediate:
-      additionalProperties: false
-      description: User-configurable properties of an alert definition
       example:
         entityLabels:
-          key: value
+          key: entityLabels
+        logsImmediate:
+          notificationPayloadFilter:
+          - obj.field
+          logsFilter:
+            simpleFilter:
+              labelFilters:
+                subsystemName:
+                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  value: my-app
+                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  value: my-app
+                applicationName:
+                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  value: my-app
+                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  value: my-app
+                severities:
+                - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+              luceneQuery: luceneQuery
         phantomMode: false
         notificationGroupExcess:
         - router:
@@ -1685,8 +1142,8 @@ components:
             notifyOn: null
             presetId: preset_id_example
           groupByKeys:
-          - "[\"key1\",\"key2\"]"
-          - "[\"key1\",\"key2\"]"
+          - key1
+          - key2
         - router:
             notifyOn: null
             id: 123e4567-e89b-12d3-a456-426614174000
@@ -1763,72 +1220,15 @@ components:
             notifyOn: null
             presetId: preset_id_example
           groupByKeys:
-          - "[\"key1\",\"key2\"]"
-          - "[\"key1\",\"key2\"]"
-        tracingImmediate:
-          notificationPayloadFilter:
-          - "[\"obj.field\"]"
-          - "[\"obj.field\"]"
-          tracingFilter:
-            simpleFilter:
-              tracingLabelFilters:
-                operationName:
-                - values:
-                  - "[\"value1\",\"value2\"]"
-                  - "[\"value1\",\"value2\"]"
-                  operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                - values:
-                  - "[\"value1\",\"value2\"]"
-                  - "[\"value1\",\"value2\"]"
-                  operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                spanFields:
-                - filterType:
-                    values:
-                    - "[\"value1\",\"value2\"]"
-                    - "[\"value1\",\"value2\"]"
-                    operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  key: span.field.key
-                - filterType:
-                    values:
-                    - "[\"value1\",\"value2\"]"
-                    - "[\"value1\",\"value2\"]"
-                    operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  key: span.field.key
-                serviceName:
-                - values:
-                  - "[\"value1\",\"value2\"]"
-                  - "[\"value1\",\"value2\"]"
-                  operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                - values:
-                  - "[\"value1\",\"value2\"]"
-                  - "[\"value1\",\"value2\"]"
-                  operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                subsystemName:
-                - values:
-                  - "[\"value1\",\"value2\"]"
-                  - "[\"value1\",\"value2\"]"
-                  operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                - values:
-                  - "[\"value1\",\"value2\"]"
-                  - "[\"value1\",\"value2\"]"
-                  operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                applicationName:
-                - values:
-                  - "[\"value1\",\"value2\"]"
-                  - "[\"value1\",\"value2\"]"
-                  operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                - values:
-                  - "[\"value1\",\"value2\"]"
-                  - "[\"value1\",\"value2\"]"
-                  operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              latencyThresholdMs: "1000"
+          - key1
+          - key2
         description: Alert description
         priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
         type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
         activeOn:
           dayOfWeek:
           - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
-          - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+          - DAY_OF_WEEK_TUESDAY
           startTime:
             hours: 14
             minutes: 30
@@ -1913,16 +1313,16 @@ components:
             notifyOn: null
             presetId: preset_id_example
           groupByKeys:
-          - "[\"key1\",\"key2\"]"
-          - "[\"key1\",\"key2\"]"
+          - key1
+          - key2
         deleted: false
         incidentsSettings:
           minutes: 30
           notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
         name: My Alert
         groupByKeys:
-        - "[\"key1\",\"key2\"]"
-        - "[\"key1\",\"key2\"]"
+        - key1
+        - key2
       externalDocs:
         url: ""
       properties:
@@ -1945,13 +1345,544 @@ components:
           additionalProperties:
             type: string
           description: Labels used to identify and categorize the alert entity
-          example:
-            key: value
           type: object
         groupByKeys:
+          example:
+          - key1
+          - key2
           items:
             description: Keys used to group and aggregate alert data
-            example: "[\"key1\",\"key2\"]"
+            type: string
+          type: array
+        incidentsSettings:
+          $ref: "#/components/schemas/AlertDefIncidentSettings"
+        logsImmediate:
+          $ref: "#/components/schemas/LogsImmediateType"
+        name:
+          description: The name of the alert definition
+          example: My Alert
+          type: string
+        notificationGroup:
+          $ref: "#/components/schemas/AlertDefNotificationGroup"
+        notificationGroupExcess:
+          items:
+            $ref: "#/components/schemas/AlertDefNotificationGroup"
+          type: array
+        phantomMode:
+          description: Whether the alert is in phantom mode (creating incidents or
+            not)
+          example: false
+          type: boolean
+        priority:
+          $ref: "#/components/schemas/AlertDefPriority"
+        type:
+          $ref: "#/components/schemas/AlertDefType"
+      title: Alert definition properties
+      type: object
+    AlertDefPropertiesLogsNewValue:
+      additionalProperties: false
+      description: User-configurable properties of an alert definition
+      externalDocs:
+        url: ""
+      properties:
+        activeOn:
+          $ref: "#/components/schemas/ActivitySchedule"
+        deleted:
+          description: Whether the alert has been marked as deleted
+          example: false
+          type: boolean
+        description:
+          description: A detailed description of what the alert monitors and when
+            it triggers
+          example: Alert description
+          type: string
+        enabled:
+          description: Whether the alert is currently active and monitoring
+          example: true
+          type: boolean
+        entityLabels:
+          additionalProperties:
+            type: string
+          description: Labels used to identify and categorize the alert entity
+          type: object
+        groupByKeys:
+          example:
+          - key1
+          - key2
+          items:
+            description: Keys used to group and aggregate alert data
+            type: string
+          type: array
+        incidentsSettings:
+          $ref: "#/components/schemas/AlertDefIncidentSettings"
+        logsNewValue:
+          $ref: "#/components/schemas/LogsNewValueType"
+        name:
+          description: The name of the alert definition
+          example: My Alert
+          type: string
+        notificationGroup:
+          $ref: "#/components/schemas/AlertDefNotificationGroup"
+        notificationGroupExcess:
+          items:
+            $ref: "#/components/schemas/AlertDefNotificationGroup"
+          type: array
+        phantomMode:
+          description: Whether the alert is in phantom mode (creating incidents or
+            not)
+          example: false
+          type: boolean
+        priority:
+          $ref: "#/components/schemas/AlertDefPriority"
+        type:
+          $ref: "#/components/schemas/AlertDefType"
+      title: Alert definition properties
+      type: object
+    AlertDefPropertiesLogsRatioThreshold:
+      additionalProperties: false
+      description: User-configurable properties of an alert definition
+      externalDocs:
+        url: ""
+      properties:
+        activeOn:
+          $ref: "#/components/schemas/ActivitySchedule"
+        deleted:
+          description: Whether the alert has been marked as deleted
+          example: false
+          type: boolean
+        description:
+          description: A detailed description of what the alert monitors and when
+            it triggers
+          example: Alert description
+          type: string
+        enabled:
+          description: Whether the alert is currently active and monitoring
+          example: true
+          type: boolean
+        entityLabels:
+          additionalProperties:
+            type: string
+          description: Labels used to identify and categorize the alert entity
+          type: object
+        groupByKeys:
+          example:
+          - key1
+          - key2
+          items:
+            description: Keys used to group and aggregate alert data
+            type: string
+          type: array
+        incidentsSettings:
+          $ref: "#/components/schemas/AlertDefIncidentSettings"
+        logsRatioThreshold:
+          $ref: "#/components/schemas/LogsRatioThresholdType"
+        name:
+          description: The name of the alert definition
+          example: My Alert
+          type: string
+        notificationGroup:
+          $ref: "#/components/schemas/AlertDefNotificationGroup"
+        notificationGroupExcess:
+          items:
+            $ref: "#/components/schemas/AlertDefNotificationGroup"
+          type: array
+        phantomMode:
+          description: Whether the alert is in phantom mode (creating incidents or
+            not)
+          example: false
+          type: boolean
+        priority:
+          $ref: "#/components/schemas/AlertDefPriority"
+        type:
+          $ref: "#/components/schemas/AlertDefType"
+      title: Alert definition properties
+      type: object
+    AlertDefPropertiesLogsThreshold:
+      additionalProperties: false
+      description: User-configurable properties of an alert definition
+      externalDocs:
+        url: ""
+      properties:
+        activeOn:
+          $ref: "#/components/schemas/ActivitySchedule"
+        deleted:
+          description: Whether the alert has been marked as deleted
+          example: false
+          type: boolean
+        description:
+          description: A detailed description of what the alert monitors and when
+            it triggers
+          example: Alert description
+          type: string
+        enabled:
+          description: Whether the alert is currently active and monitoring
+          example: true
+          type: boolean
+        entityLabels:
+          additionalProperties:
+            type: string
+          description: Labels used to identify and categorize the alert entity
+          type: object
+        groupByKeys:
+          example:
+          - key1
+          - key2
+          items:
+            description: Keys used to group and aggregate alert data
+            type: string
+          type: array
+        incidentsSettings:
+          $ref: "#/components/schemas/AlertDefIncidentSettings"
+        logsThreshold:
+          $ref: "#/components/schemas/LogsThresholdType"
+        name:
+          description: The name of the alert definition
+          example: My Alert
+          type: string
+        notificationGroup:
+          $ref: "#/components/schemas/AlertDefNotificationGroup"
+        notificationGroupExcess:
+          items:
+            $ref: "#/components/schemas/AlertDefNotificationGroup"
+          type: array
+        phantomMode:
+          description: Whether the alert is in phantom mode (creating incidents or
+            not)
+          example: false
+          type: boolean
+        priority:
+          $ref: "#/components/schemas/AlertDefPriority"
+        type:
+          $ref: "#/components/schemas/AlertDefType"
+      title: Alert definition properties
+      type: object
+    AlertDefPropertiesLogsTimeRelativeThreshold:
+      additionalProperties: false
+      description: User-configurable properties of an alert definition
+      externalDocs:
+        url: ""
+      properties:
+        activeOn:
+          $ref: "#/components/schemas/ActivitySchedule"
+        deleted:
+          description: Whether the alert has been marked as deleted
+          example: false
+          type: boolean
+        description:
+          description: A detailed description of what the alert monitors and when
+            it triggers
+          example: Alert description
+          type: string
+        enabled:
+          description: Whether the alert is currently active and monitoring
+          example: true
+          type: boolean
+        entityLabels:
+          additionalProperties:
+            type: string
+          description: Labels used to identify and categorize the alert entity
+          type: object
+        groupByKeys:
+          example:
+          - key1
+          - key2
+          items:
+            description: Keys used to group and aggregate alert data
+            type: string
+          type: array
+        incidentsSettings:
+          $ref: "#/components/schemas/AlertDefIncidentSettings"
+        logsTimeRelativeThreshold:
+          $ref: "#/components/schemas/LogsTimeRelativeThresholdType"
+        name:
+          description: The name of the alert definition
+          example: My Alert
+          type: string
+        notificationGroup:
+          $ref: "#/components/schemas/AlertDefNotificationGroup"
+        notificationGroupExcess:
+          items:
+            $ref: "#/components/schemas/AlertDefNotificationGroup"
+          type: array
+        phantomMode:
+          description: Whether the alert is in phantom mode (creating incidents or
+            not)
+          example: false
+          type: boolean
+        priority:
+          $ref: "#/components/schemas/AlertDefPriority"
+        type:
+          $ref: "#/components/schemas/AlertDefType"
+      title: Alert definition properties
+      type: object
+    AlertDefPropertiesLogsUniqueCount:
+      additionalProperties: false
+      description: User-configurable properties of an alert definition
+      externalDocs:
+        url: ""
+      properties:
+        activeOn:
+          $ref: "#/components/schemas/ActivitySchedule"
+        deleted:
+          description: Whether the alert has been marked as deleted
+          example: false
+          type: boolean
+        description:
+          description: A detailed description of what the alert monitors and when
+            it triggers
+          example: Alert description
+          type: string
+        enabled:
+          description: Whether the alert is currently active and monitoring
+          example: true
+          type: boolean
+        entityLabels:
+          additionalProperties:
+            type: string
+          description: Labels used to identify and categorize the alert entity
+          type: object
+        groupByKeys:
+          example:
+          - key1
+          - key2
+          items:
+            description: Keys used to group and aggregate alert data
+            type: string
+          type: array
+        incidentsSettings:
+          $ref: "#/components/schemas/AlertDefIncidentSettings"
+        logsUniqueCount:
+          $ref: "#/components/schemas/LogsUniqueCountType"
+        name:
+          description: The name of the alert definition
+          example: My Alert
+          type: string
+        notificationGroup:
+          $ref: "#/components/schemas/AlertDefNotificationGroup"
+        notificationGroupExcess:
+          items:
+            $ref: "#/components/schemas/AlertDefNotificationGroup"
+          type: array
+        phantomMode:
+          description: Whether the alert is in phantom mode (creating incidents or
+            not)
+          example: false
+          type: boolean
+        priority:
+          $ref: "#/components/schemas/AlertDefPriority"
+        type:
+          $ref: "#/components/schemas/AlertDefType"
+      title: Alert definition properties
+      type: object
+    AlertDefPropertiesMetricAnomaly:
+      additionalProperties: false
+      description: User-configurable properties of an alert definition
+      externalDocs:
+        url: ""
+      properties:
+        activeOn:
+          $ref: "#/components/schemas/ActivitySchedule"
+        deleted:
+          description: Whether the alert has been marked as deleted
+          example: false
+          type: boolean
+        description:
+          description: A detailed description of what the alert monitors and when
+            it triggers
+          example: Alert description
+          type: string
+        enabled:
+          description: Whether the alert is currently active and monitoring
+          example: true
+          type: boolean
+        entityLabels:
+          additionalProperties:
+            type: string
+          description: Labels used to identify and categorize the alert entity
+          type: object
+        groupByKeys:
+          example:
+          - key1
+          - key2
+          items:
+            description: Keys used to group and aggregate alert data
+            type: string
+          type: array
+        incidentsSettings:
+          $ref: "#/components/schemas/AlertDefIncidentSettings"
+        metricAnomaly:
+          $ref: "#/components/schemas/MetricAnomalyType"
+        name:
+          description: The name of the alert definition
+          example: My Alert
+          type: string
+        notificationGroup:
+          $ref: "#/components/schemas/AlertDefNotificationGroup"
+        notificationGroupExcess:
+          items:
+            $ref: "#/components/schemas/AlertDefNotificationGroup"
+          type: array
+        phantomMode:
+          description: Whether the alert is in phantom mode (creating incidents or
+            not)
+          example: false
+          type: boolean
+        priority:
+          $ref: "#/components/schemas/AlertDefPriority"
+        type:
+          $ref: "#/components/schemas/AlertDefType"
+      title: Alert definition properties
+      type: object
+    AlertDefPropertiesMetricThreshold:
+      additionalProperties: false
+      description: User-configurable properties of an alert definition
+      externalDocs:
+        url: ""
+      properties:
+        activeOn:
+          $ref: "#/components/schemas/ActivitySchedule"
+        deleted:
+          description: Whether the alert has been marked as deleted
+          example: false
+          type: boolean
+        description:
+          description: A detailed description of what the alert monitors and when
+            it triggers
+          example: Alert description
+          type: string
+        enabled:
+          description: Whether the alert is currently active and monitoring
+          example: true
+          type: boolean
+        entityLabels:
+          additionalProperties:
+            type: string
+          description: Labels used to identify and categorize the alert entity
+          type: object
+        groupByKeys:
+          example:
+          - key1
+          - key2
+          items:
+            description: Keys used to group and aggregate alert data
+            type: string
+          type: array
+        incidentsSettings:
+          $ref: "#/components/schemas/AlertDefIncidentSettings"
+        metricThreshold:
+          $ref: "#/components/schemas/MetricThresholdType"
+        name:
+          description: The name of the alert definition
+          example: My Alert
+          type: string
+        notificationGroup:
+          $ref: "#/components/schemas/AlertDefNotificationGroup"
+        notificationGroupExcess:
+          items:
+            $ref: "#/components/schemas/AlertDefNotificationGroup"
+          type: array
+        phantomMode:
+          description: Whether the alert is in phantom mode (creating incidents or
+            not)
+          example: false
+          type: boolean
+        priority:
+          $ref: "#/components/schemas/AlertDefPriority"
+        type:
+          $ref: "#/components/schemas/AlertDefType"
+      title: Alert definition properties
+      type: object
+    AlertDefPropertiesSloThreshold:
+      additionalProperties: false
+      description: User-configurable properties of an alert definition
+      externalDocs:
+        url: ""
+      properties:
+        activeOn:
+          $ref: "#/components/schemas/ActivitySchedule"
+        deleted:
+          description: Whether the alert has been marked as deleted
+          example: false
+          type: boolean
+        description:
+          description: A detailed description of what the alert monitors and when
+            it triggers
+          example: Alert description
+          type: string
+        enabled:
+          description: Whether the alert is currently active and monitoring
+          example: true
+          type: boolean
+        entityLabels:
+          additionalProperties:
+            type: string
+          description: Labels used to identify and categorize the alert entity
+          type: object
+        groupByKeys:
+          example:
+          - key1
+          - key2
+          items:
+            description: Keys used to group and aggregate alert data
+            type: string
+          type: array
+        incidentsSettings:
+          $ref: "#/components/schemas/AlertDefIncidentSettings"
+        name:
+          description: The name of the alert definition
+          example: My Alert
+          type: string
+        notificationGroup:
+          $ref: "#/components/schemas/AlertDefNotificationGroup"
+        notificationGroupExcess:
+          items:
+            $ref: "#/components/schemas/AlertDefNotificationGroup"
+          type: array
+        phantomMode:
+          description: Whether the alert is in phantom mode (creating incidents or
+            not)
+          example: false
+          type: boolean
+        priority:
+          $ref: "#/components/schemas/AlertDefPriority"
+        sloThreshold:
+          $ref: "#/components/schemas/SloThresholdType"
+        type:
+          $ref: "#/components/schemas/AlertDefType"
+      title: Alert definition properties
+      type: object
+    AlertDefPropertiesTracingImmediate:
+      additionalProperties: false
+      description: User-configurable properties of an alert definition
+      externalDocs:
+        url: ""
+      properties:
+        activeOn:
+          $ref: "#/components/schemas/ActivitySchedule"
+        deleted:
+          description: Whether the alert has been marked as deleted
+          example: false
+          type: boolean
+        description:
+          description: A detailed description of what the alert monitors and when
+            it triggers
+          example: Alert description
+          type: string
+        enabled:
+          description: Whether the alert is currently active and monitoring
+          example: true
+          type: boolean
+        entityLabels:
+          additionalProperties:
+            type: string
+          description: Labels used to identify and categorize the alert entity
+          type: object
+        groupByKeys:
+          example:
+          - key1
+          - key2
+          items:
+            description: Keys used to group and aggregate alert data
             type: string
           type: array
         incidentsSettings:
@@ -2004,13 +1935,13 @@ components:
           additionalProperties:
             type: string
           description: Labels used to identify and categorize the alert entity
-          example:
-            key: value
           type: object
         groupByKeys:
+          example:
+          - key1
+          - key2
           items:
             description: Keys used to group and aggregate alert data
-            example: "[\"key1\",\"key2\"]"
             type: string
           type: array
         incidentsSettings:
@@ -2116,11 +2047,9 @@ components:
       description: A response that contains the results of the bulk replace operation
       example:
         notFoundIds:
-        - "[\"123e4567-e89b-12d3-a456-426614174000\"]"
-        - "[\"123e4567-e89b-12d3-a456-426614174000\"]"
+        - 123e4567-e89b-12d3-a456-426614174000
         skippedIds:
-        - "[\"123e4567-e89b-12d3-a456-426614174000\"]"
-        - "[\"123e4567-e89b-12d3-a456-426614174000\"]"
+        - 123e4567-e89b-12d3-a456-426614174000
         failedToReplaceAlertDefs:
         - id: 123e4567-e89b-12d3-a456-426614174000
         - id: 123e4567-e89b-12d3-a456-426614174000
@@ -2129,7 +2058,27 @@ components:
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
             entityLabels:
-              key: value
+              key: entityLabels
+            logsImmediate:
+              notificationPayloadFilter:
+              - obj.field
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -2208,8 +2157,8 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
+              - key1
+              - key2
             - router:
                 notifyOn: null
                 id: 123e4567-e89b-12d3-a456-426614174000
@@ -2286,72 +2235,15 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
-            tracingImmediate:
-              notificationPayloadFilter:
-              - "[\"obj.field\"]"
-              - "[\"obj.field\"]"
-              tracingFilter:
-                simpleFilter:
-                  tracingLabelFilters:
-                    operationName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    spanFields:
-                    - filterType:
-                        values:
-                        - "[\"value1\",\"value2\"]"
-                        - "[\"value1\",\"value2\"]"
-                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      key: span.field.key
-                    - filterType:
-                        values:
-                        - "[\"value1\",\"value2\"]"
-                        - "[\"value1\",\"value2\"]"
-                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      key: span.field.key
-                    serviceName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    subsystemName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    applicationName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  latencyThresholdMs: "1000"
+              - key1
+              - key2
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
               - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
-              - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+              - DAY_OF_WEEK_TUESDAY
               startTime:
                 hours: 14
                 minutes: 30
@@ -2436,16 +2328,16 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
+              - key1
+              - key2
             deleted: false
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
             groupByKeys:
-            - "[\"key1\",\"key2\"]"
-            - "[\"key1\",\"key2\"]"
+            - key1
+            - key2
           createdTime: 2023-10-01T12:00:00Z
           id: 123e4567-e89b-12d3-a456-426614174000
           alertVersionId: alertVersionId
@@ -2454,7 +2346,27 @@ components:
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
             entityLabels:
-              key: value
+              key: entityLabels
+            logsImmediate:
+              notificationPayloadFilter:
+              - obj.field
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -2533,8 +2445,8 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
+              - key1
+              - key2
             - router:
                 notifyOn: null
                 id: 123e4567-e89b-12d3-a456-426614174000
@@ -2611,72 +2523,15 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
-            tracingImmediate:
-              notificationPayloadFilter:
-              - "[\"obj.field\"]"
-              - "[\"obj.field\"]"
-              tracingFilter:
-                simpleFilter:
-                  tracingLabelFilters:
-                    operationName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    spanFields:
-                    - filterType:
-                        values:
-                        - "[\"value1\",\"value2\"]"
-                        - "[\"value1\",\"value2\"]"
-                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      key: span.field.key
-                    - filterType:
-                        values:
-                        - "[\"value1\",\"value2\"]"
-                        - "[\"value1\",\"value2\"]"
-                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      key: span.field.key
-                    serviceName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    subsystemName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    applicationName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  latencyThresholdMs: "1000"
+              - key1
+              - key2
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
               - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
-              - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+              - DAY_OF_WEEK_TUESDAY
               startTime:
                 hours: 14
                 minutes: 30
@@ -2761,16 +2616,16 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
+              - key1
+              - key2
             deleted: false
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
             groupByKeys:
-            - "[\"key1\",\"key2\"]"
-            - "[\"key1\",\"key2\"]"
+            - key1
+            - key2
           createdTime: 2023-10-01T12:00:00Z
           id: 123e4567-e89b-12d3-a456-426614174000
           alertVersionId: alertVersionId
@@ -2787,16 +2642,18 @@ components:
             $ref: "#/components/schemas/FailedToReplaceAlertDef"
           type: array
         notFoundIds:
+          example:
+          - 123e4567-e89b-12d3-a456-426614174000
           items:
             description: List of alert definition IDs that were not found
-            example: "[\"123e4567-e89b-12d3-a456-426614174000\"]"
             type: string
           type: array
         skippedIds:
+          example:
+          - 123e4567-e89b-12d3-a456-426614174000
           items:
             description: List of alert definition IDs that were skipped (no changes
               detected)
-            example: "[\"123e4567-e89b-12d3-a456-426614174000\"]"
             type: string
           type: array
       title: Bulk replace alert definitions response
@@ -2877,7 +2734,27 @@ components:
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
             entityLabels:
-              key: value
+              key: entityLabels
+            logsImmediate:
+              notificationPayloadFilter:
+              - obj.field
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -2956,8 +2833,8 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
+              - key1
+              - key2
             - router:
                 notifyOn: null
                 id: 123e4567-e89b-12d3-a456-426614174000
@@ -3034,72 +2911,15 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
-            tracingImmediate:
-              notificationPayloadFilter:
-              - "[\"obj.field\"]"
-              - "[\"obj.field\"]"
-              tracingFilter:
-                simpleFilter:
-                  tracingLabelFilters:
-                    operationName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    spanFields:
-                    - filterType:
-                        values:
-                        - "[\"value1\",\"value2\"]"
-                        - "[\"value1\",\"value2\"]"
-                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      key: span.field.key
-                    - filterType:
-                        values:
-                        - "[\"value1\",\"value2\"]"
-                        - "[\"value1\",\"value2\"]"
-                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      key: span.field.key
-                    serviceName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    subsystemName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    applicationName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  latencyThresholdMs: "1000"
+              - key1
+              - key2
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
               - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
-              - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+              - DAY_OF_WEEK_TUESDAY
               startTime:
                 hours: 14
                 minutes: 30
@@ -3184,16 +3004,16 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
+              - key1
+              - key2
             deleted: false
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
             groupByKeys:
-            - "[\"key1\",\"key2\"]"
-            - "[\"key1\",\"key2\"]"
+            - key1
+            - key2
           createdTime: 2023-10-01T12:00:00Z
           id: 123e4567-e89b-12d3-a456-426614174000
           alertVersionId: alertVersionId
@@ -3538,7 +3358,27 @@ components:
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
             entityLabels:
-              key: value
+              key: entityLabels
+            logsImmediate:
+              notificationPayloadFilter:
+              - obj.field
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -3617,8 +3457,8 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
+              - key1
+              - key2
             - router:
                 notifyOn: null
                 id: 123e4567-e89b-12d3-a456-426614174000
@@ -3695,72 +3535,15 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
-            tracingImmediate:
-              notificationPayloadFilter:
-              - "[\"obj.field\"]"
-              - "[\"obj.field\"]"
-              tracingFilter:
-                simpleFilter:
-                  tracingLabelFilters:
-                    operationName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    spanFields:
-                    - filterType:
-                        values:
-                        - "[\"value1\",\"value2\"]"
-                        - "[\"value1\",\"value2\"]"
-                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      key: span.field.key
-                    - filterType:
-                        values:
-                        - "[\"value1\",\"value2\"]"
-                        - "[\"value1\",\"value2\"]"
-                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      key: span.field.key
-                    serviceName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    subsystemName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    applicationName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  latencyThresholdMs: "1000"
+              - key1
+              - key2
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
               - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
-              - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+              - DAY_OF_WEEK_TUESDAY
               startTime:
                 hours: 14
                 minutes: 30
@@ -3845,16 +3628,16 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
+              - key1
+              - key2
             deleted: false
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
             groupByKeys:
-            - "[\"key1\",\"key2\"]"
-            - "[\"key1\",\"key2\"]"
+            - key1
+            - key2
           createdTime: 2023-10-01T12:00:00Z
           id: 123e4567-e89b-12d3-a456-426614174000
           alertVersionId: alertVersionId
@@ -3874,7 +3657,27 @@ components:
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
             entityLabels:
-              key: value
+              key: entityLabels
+            logsImmediate:
+              notificationPayloadFilter:
+              - obj.field
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -3953,8 +3756,8 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
+              - key1
+              - key2
             - router:
                 notifyOn: null
                 id: 123e4567-e89b-12d3-a456-426614174000
@@ -4031,72 +3834,15 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
-            tracingImmediate:
-              notificationPayloadFilter:
-              - "[\"obj.field\"]"
-              - "[\"obj.field\"]"
-              tracingFilter:
-                simpleFilter:
-                  tracingLabelFilters:
-                    operationName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    spanFields:
-                    - filterType:
-                        values:
-                        - "[\"value1\",\"value2\"]"
-                        - "[\"value1\",\"value2\"]"
-                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      key: span.field.key
-                    - filterType:
-                        values:
-                        - "[\"value1\",\"value2\"]"
-                        - "[\"value1\",\"value2\"]"
-                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      key: span.field.key
-                    serviceName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    subsystemName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    applicationName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  latencyThresholdMs: "1000"
+              - key1
+              - key2
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
               - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
-              - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+              - DAY_OF_WEEK_TUESDAY
               startTime:
                 hours: 14
                 minutes: 30
@@ -4181,16 +3927,16 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
+              - key1
+              - key2
             deleted: false
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
             groupByKeys:
-            - "[\"key1\",\"key2\"]"
-            - "[\"key1\",\"key2\"]"
+            - key1
+            - key2
           createdTime: 2023-10-01T12:00:00Z
           id: 123e4567-e89b-12d3-a456-426614174000
           alertVersionId: alertVersionId
@@ -4204,6 +3950,9 @@ components:
       type: object
     LabelFilterType:
       description: Label filter type for log entries
+      example:
+        operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+        value: my-app
       externalDocs:
         url: ""
       properties:
@@ -4217,6 +3966,20 @@ components:
       type: object
     LabelFilters:
       description: "Filters for application name, subsystem name, and log severities"
+      example:
+        subsystemName:
+        - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+          value: my-app
+        - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+          value: my-app
+        applicationName:
+        - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+          value: my-app
+        - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+          value: my-app
+        severities:
+        - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+        - LOG_SEVERITY_VERBOSE_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -4245,7 +4008,27 @@ components:
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
             entityLabels:
-              key: value
+              key: entityLabels
+            logsImmediate:
+              notificationPayloadFilter:
+              - obj.field
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -4324,8 +4107,8 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
+              - key1
+              - key2
             - router:
                 notifyOn: null
                 id: 123e4567-e89b-12d3-a456-426614174000
@@ -4402,72 +4185,15 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
-            tracingImmediate:
-              notificationPayloadFilter:
-              - "[\"obj.field\"]"
-              - "[\"obj.field\"]"
-              tracingFilter:
-                simpleFilter:
-                  tracingLabelFilters:
-                    operationName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    spanFields:
-                    - filterType:
-                        values:
-                        - "[\"value1\",\"value2\"]"
-                        - "[\"value1\",\"value2\"]"
-                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      key: span.field.key
-                    - filterType:
-                        values:
-                        - "[\"value1\",\"value2\"]"
-                        - "[\"value1\",\"value2\"]"
-                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      key: span.field.key
-                    serviceName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    subsystemName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    applicationName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  latencyThresholdMs: "1000"
+              - key1
+              - key2
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
               - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
-              - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+              - DAY_OF_WEEK_TUESDAY
               startTime:
                 hours: 14
                 minutes: 30
@@ -4552,16 +4278,16 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
+              - key1
+              - key2
             deleted: false
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
             groupByKeys:
-            - "[\"key1\",\"key2\"]"
-            - "[\"key1\",\"key2\"]"
+            - key1
+            - key2
           createdTime: 2023-10-01T12:00:00Z
           id: 123e4567-e89b-12d3-a456-426614174000
           alertVersionId: alertVersionId
@@ -4570,7 +4296,27 @@ components:
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
             entityLabels:
-              key: value
+              key: entityLabels
+            logsImmediate:
+              notificationPayloadFilter:
+              - obj.field
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -4649,8 +4395,8 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
+              - key1
+              - key2
             - router:
                 notifyOn: null
                 id: 123e4567-e89b-12d3-a456-426614174000
@@ -4727,72 +4473,15 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
-            tracingImmediate:
-              notificationPayloadFilter:
-              - "[\"obj.field\"]"
-              - "[\"obj.field\"]"
-              tracingFilter:
-                simpleFilter:
-                  tracingLabelFilters:
-                    operationName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    spanFields:
-                    - filterType:
-                        values:
-                        - "[\"value1\",\"value2\"]"
-                        - "[\"value1\",\"value2\"]"
-                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      key: span.field.key
-                    - filterType:
-                        values:
-                        - "[\"value1\",\"value2\"]"
-                        - "[\"value1\",\"value2\"]"
-                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      key: span.field.key
-                    serviceName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    subsystemName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    applicationName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  latencyThresholdMs: "1000"
+              - key1
+              - key2
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
               - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
-              - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+              - DAY_OF_WEEK_TUESDAY
               startTime:
                 hours: 14
                 minutes: 30
@@ -4877,16 +4566,16 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
+              - key1
+              - key2
             deleted: false
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
             groupByKeys:
-            - "[\"key1\",\"key2\"]"
-            - "[\"key1\",\"key2\"]"
+            - key1
+            - key2
           createdTime: 2023-10-01T12:00:00Z
           id: 123e4567-e89b-12d3-a456-426614174000
           alertVersionId: alertVersionId
@@ -4963,10 +4652,11 @@ components:
         logsFilter:
           $ref: "#/components/schemas/v3.LogsFilter"
         notificationPayloadFilter:
+          example:
+          - obj.field
           items:
             description: The filter to specify which fields to include in the notification
               payload
-            example: "[\"obj.field\"]"
             type: string
           type: array
         rules:
@@ -4978,6 +4668,26 @@ components:
     LogsImmediateType:
       description: Configuration for immediate alerts triggered on log entries matching
         specific filters.
+      example:
+        notificationPayloadFilter:
+        - obj.field
+        logsFilter:
+          simpleFilter:
+            labelFilters:
+              subsystemName:
+              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                value: my-app
+              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                value: my-app
+              applicationName:
+              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                value: my-app
+              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                value: my-app
+              severities:
+              - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+              - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+            luceneQuery: luceneQuery
       externalDocs:
         description: Learn more about logs immediate alerts in our documentation
         url: https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/immediate-notifications/
@@ -4985,8 +4695,9 @@ components:
         logsFilter:
           $ref: "#/components/schemas/v3.LogsFilter"
         notificationPayloadFilter:
+          example:
+          - obj.field
           items:
-            example: "[\"obj.field\"]"
             type: string
           type: array
       title: Logs immediate alert type
@@ -5041,10 +4752,11 @@ components:
         logsFilter:
           $ref: "#/components/schemas/v3.LogsFilter"
         notificationPayloadFilter:
+          example:
+          - obj.field
           items:
             description: The filter to specify which fields to include in the notification
               payload.
-            example: "[\"obj.field\"]"
             type: string
           type: array
         rules:
@@ -5115,8 +4827,9 @@ components:
           example: true
           type: boolean
         notificationPayloadFilter:
+          example:
+          - obj.field
           items:
-            example: "[\"obj.field\"]"
             type: string
           type: array
         numerator:
@@ -5159,6 +4872,22 @@ components:
       type: string
     LogsSimpleFilter:
       description: Basic filter configuration using a Lucene query and label filters
+      example:
+        labelFilters:
+          subsystemName:
+          - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+            value: my-app
+          - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+            value: my-app
+          applicationName:
+          - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+            value: my-app
+          - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+            value: my-app
+          severities:
+          - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+          - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+        luceneQuery: luceneQuery
       externalDocs:
         url: ""
       properties:
@@ -5217,10 +4946,11 @@ components:
         logsFilter:
           $ref: "#/components/schemas/v3.LogsFilter"
         notificationPayloadFilter:
+          example:
+          - obj.field
           items:
             description: The filter to specify which fields to include in the notification
               payload
-            example: "[\"obj.field\"]"
             type: string
           type: array
         rules:
@@ -5291,8 +5021,9 @@ components:
         logsFilter:
           $ref: "#/components/schemas/v3.LogsFilter"
         notificationPayloadFilter:
+          example:
+          - obj.field
           items:
-            example: "[\"obj.field\"]"
             type: string
           type: array
         rules:
@@ -5364,10 +5095,11 @@ components:
           format: int64
           type: string
         notificationPayloadFilter:
+          example:
+          - obj.field
           items:
             description: The filter to specify which fields to include in the notification
               payload
-            example: "[\"obj.field\"]"
             type: string
           type: array
         rules:
@@ -5743,9 +5475,10 @@ components:
         url: ""
       properties:
         emails:
+          example:
+          - mail@gmail.com
           items:
             description: The list of email recipients for alert notifications
-            example: "[\"mail@gmail.com\"]"
             type: string
           type: array
       title: Recipients
@@ -5758,7 +5491,27 @@ components:
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
             entityLabels:
-              key: value
+              key: entityLabels
+            logsImmediate:
+              notificationPayloadFilter:
+              - obj.field
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -5837,8 +5590,8 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
+              - key1
+              - key2
             - router:
                 notifyOn: null
                 id: 123e4567-e89b-12d3-a456-426614174000
@@ -5915,72 +5668,15 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
-            tracingImmediate:
-              notificationPayloadFilter:
-              - "[\"obj.field\"]"
-              - "[\"obj.field\"]"
-              tracingFilter:
-                simpleFilter:
-                  tracingLabelFilters:
-                    operationName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    spanFields:
-                    - filterType:
-                        values:
-                        - "[\"value1\",\"value2\"]"
-                        - "[\"value1\",\"value2\"]"
-                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      key: span.field.key
-                    - filterType:
-                        values:
-                        - "[\"value1\",\"value2\"]"
-                        - "[\"value1\",\"value2\"]"
-                        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      key: span.field.key
-                    serviceName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    subsystemName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    applicationName:
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    - values:
-                      - "[\"value1\",\"value2\"]"
-                      - "[\"value1\",\"value2\"]"
-                      operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  latencyThresholdMs: "1000"
+              - key1
+              - key2
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
               - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
-              - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+              - DAY_OF_WEEK_TUESDAY
               startTime:
                 hours: 14
                 minutes: 30
@@ -6065,16 +5761,16 @@ components:
                 notifyOn: null
                 presetId: preset_id_example
               groupByKeys:
-              - "[\"key1\",\"key2\"]"
-              - "[\"key1\",\"key2\"]"
+              - key1
+              - key2
             deleted: false
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
             groupByKeys:
-            - "[\"key1\",\"key2\"]"
-            - "[\"key1\",\"key2\"]"
+            - key1
+            - key2
           createdTime: 2023-10-01T12:00:00Z
           id: 123e4567-e89b-12d3-a456-426614174000
           alertVersionId: alertVersionId
@@ -6191,59 +5887,6 @@ components:
       type: string
     TracingFilter:
       description: Filter configuration for tracing-based alerts
-      example:
-        simpleFilter:
-          tracingLabelFilters:
-            operationName:
-            - values:
-              - "[\"value1\",\"value2\"]"
-              - "[\"value1\",\"value2\"]"
-              operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            - values:
-              - "[\"value1\",\"value2\"]"
-              - "[\"value1\",\"value2\"]"
-              operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            spanFields:
-            - filterType:
-                values:
-                - "[\"value1\",\"value2\"]"
-                - "[\"value1\",\"value2\"]"
-                operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              key: span.field.key
-            - filterType:
-                values:
-                - "[\"value1\",\"value2\"]"
-                - "[\"value1\",\"value2\"]"
-                operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              key: span.field.key
-            serviceName:
-            - values:
-              - "[\"value1\",\"value2\"]"
-              - "[\"value1\",\"value2\"]"
-              operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            - values:
-              - "[\"value1\",\"value2\"]"
-              - "[\"value1\",\"value2\"]"
-              operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            subsystemName:
-            - values:
-              - "[\"value1\",\"value2\"]"
-              - "[\"value1\",\"value2\"]"
-              operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            - values:
-              - "[\"value1\",\"value2\"]"
-              - "[\"value1\",\"value2\"]"
-              operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            applicationName:
-            - values:
-              - "[\"value1\",\"value2\"]"
-              - "[\"value1\",\"value2\"]"
-              operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            - values:
-              - "[\"value1\",\"value2\"]"
-              - "[\"value1\",\"value2\"]"
-              operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          latencyThresholdMs: "1000"
       externalDocs:
         url: ""
       properties:
@@ -6261,91 +5904,32 @@ components:
       type: string
     TracingFilterType:
       description: Filter type for trace entries
-      example:
-        values:
-        - "[\"value1\",\"value2\"]"
-        - "[\"value1\",\"value2\"]"
-        operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
         operation:
           $ref: "#/components/schemas/TracingFilterOperationType"
         values:
+          example:
+          - value1
+          - value2
           items:
             description: The values of the label to filter by
-            example: "[\"value1\",\"value2\"]"
             type: string
           type: array
       title: Tracing filter type
       type: object
     TracingImmediateType:
       description: Configuration for immediate alerts triggered on trace entries
-      example:
-        notificationPayloadFilter:
-        - "[\"obj.field\"]"
-        - "[\"obj.field\"]"
-        tracingFilter:
-          simpleFilter:
-            tracingLabelFilters:
-              operationName:
-              - values:
-                - "[\"value1\",\"value2\"]"
-                - "[\"value1\",\"value2\"]"
-                operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              - values:
-                - "[\"value1\",\"value2\"]"
-                - "[\"value1\",\"value2\"]"
-                operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              spanFields:
-              - filterType:
-                  values:
-                  - "[\"value1\",\"value2\"]"
-                  - "[\"value1\",\"value2\"]"
-                  operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                key: span.field.key
-              - filterType:
-                  values:
-                  - "[\"value1\",\"value2\"]"
-                  - "[\"value1\",\"value2\"]"
-                  operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                key: span.field.key
-              serviceName:
-              - values:
-                - "[\"value1\",\"value2\"]"
-                - "[\"value1\",\"value2\"]"
-                operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              - values:
-                - "[\"value1\",\"value2\"]"
-                - "[\"value1\",\"value2\"]"
-                operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              subsystemName:
-              - values:
-                - "[\"value1\",\"value2\"]"
-                - "[\"value1\",\"value2\"]"
-                operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              - values:
-                - "[\"value1\",\"value2\"]"
-                - "[\"value1\",\"value2\"]"
-                operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              applicationName:
-              - values:
-                - "[\"value1\",\"value2\"]"
-                - "[\"value1\",\"value2\"]"
-                operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              - values:
-                - "[\"value1\",\"value2\"]"
-                - "[\"value1\",\"value2\"]"
-                operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            latencyThresholdMs: "1000"
       externalDocs:
         description: Learn more about trace-based alerts in our documentation.
         url: https://coralogix.com/docs/user-guides/alerting/create-an-alert/traces/tracing-alerts/
       properties:
         notificationPayloadFilter:
+          example:
+          - obj.field
           items:
             description: Notification payload field filter
-            example: "[\"obj.field\"]"
             type: string
           type: array
         tracingFilter:
@@ -6355,56 +5939,6 @@ components:
     TracingLabelFilters:
       description: "Filters for application name, subsystem name, service name, operation\
         \ name and span fields"
-      example:
-        operationName:
-        - values:
-          - "[\"value1\",\"value2\"]"
-          - "[\"value1\",\"value2\"]"
-          operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-        - values:
-          - "[\"value1\",\"value2\"]"
-          - "[\"value1\",\"value2\"]"
-          operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-        spanFields:
-        - filterType:
-            values:
-            - "[\"value1\",\"value2\"]"
-            - "[\"value1\",\"value2\"]"
-            operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          key: span.field.key
-        - filterType:
-            values:
-            - "[\"value1\",\"value2\"]"
-            - "[\"value1\",\"value2\"]"
-            operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          key: span.field.key
-        serviceName:
-        - values:
-          - "[\"value1\",\"value2\"]"
-          - "[\"value1\",\"value2\"]"
-          operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-        - values:
-          - "[\"value1\",\"value2\"]"
-          - "[\"value1\",\"value2\"]"
-          operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-        subsystemName:
-        - values:
-          - "[\"value1\",\"value2\"]"
-          - "[\"value1\",\"value2\"]"
-          operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-        - values:
-          - "[\"value1\",\"value2\"]"
-          - "[\"value1\",\"value2\"]"
-          operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-        applicationName:
-        - values:
-          - "[\"value1\",\"value2\"]"
-          - "[\"value1\",\"value2\"]"
-          operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-        - values:
-          - "[\"value1\",\"value2\"]"
-          - "[\"value1\",\"value2\"]"
-          operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -6433,58 +5967,6 @@ components:
     TracingSimpleFilter:
       description: Basic filter configuration using a latency threshold and label
         filters
-      example:
-        tracingLabelFilters:
-          operationName:
-          - values:
-            - "[\"value1\",\"value2\"]"
-            - "[\"value1\",\"value2\"]"
-            operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          - values:
-            - "[\"value1\",\"value2\"]"
-            - "[\"value1\",\"value2\"]"
-            operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          spanFields:
-          - filterType:
-              values:
-              - "[\"value1\",\"value2\"]"
-              - "[\"value1\",\"value2\"]"
-              operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            key: span.field.key
-          - filterType:
-              values:
-              - "[\"value1\",\"value2\"]"
-              - "[\"value1\",\"value2\"]"
-              operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            key: span.field.key
-          serviceName:
-          - values:
-            - "[\"value1\",\"value2\"]"
-            - "[\"value1\",\"value2\"]"
-            operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          - values:
-            - "[\"value1\",\"value2\"]"
-            - "[\"value1\",\"value2\"]"
-            operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          subsystemName:
-          - values:
-            - "[\"value1\",\"value2\"]"
-            - "[\"value1\",\"value2\"]"
-            operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          - values:
-            - "[\"value1\",\"value2\"]"
-            - "[\"value1\",\"value2\"]"
-            operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          applicationName:
-          - values:
-            - "[\"value1\",\"value2\"]"
-            - "[\"value1\",\"value2\"]"
-            operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          - values:
-            - "[\"value1\",\"value2\"]"
-            - "[\"value1\",\"value2\"]"
-            operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-        latencyThresholdMs: "1000"
       externalDocs:
         url: ""
       properties:
@@ -6499,13 +5981,6 @@ components:
       type: object
     TracingSpanFieldsFilterType:
       description: A filter for span fields in trace entries
-      example:
-        filterType:
-          values:
-          - "[\"value1\",\"value2\"]"
-          - "[\"value1\",\"value2\"]"
-          operation: TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-        key: span.field.key
       externalDocs:
         url: ""
       properties:
@@ -6552,9 +6027,10 @@ components:
         url: https://coralogix.com/docs/user-guides/alerting/create-an-alert/traces/tracing-alerts/
       properties:
         notificationPayloadFilter:
+          example:
+          - obj.field
           items:
             description: Notification payload field filter
-            example: "[\"obj.field\"]"
             type: string
           type: array
         rules:
@@ -6697,6 +6173,23 @@ components:
       - $ref: "#/components/schemas/V3IntegrationTypeRecipients"
     v3.LogsFilter:
       description: Filter configuration for log-based alerts
+      example:
+        simpleFilter:
+          labelFilters:
+            subsystemName:
+            - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+              value: my-app
+            - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+              value: my-app
+            applicationName:
+            - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+              value: my-app
+            - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+              value: my-app
+            severities:
+            - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+            - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+          luceneQuery: luceneQuery
       externalDocs:
         url: ""
       properties:

@@ -78,11 +78,12 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*EventsServiceAPI* | [**EventsServiceBatchGetEvent**](docs/EventsServiceAPI.md#eventsservicebatchgetevent) | **Get** /v3/events/events:batchGet | Batch Get Event
-*EventsServiceAPI* | [**EventsServiceGetEvent**](docs/EventsServiceAPI.md#eventsservicegetevent) | **Get** /v3/events/{id} | Get Event
-*EventsServiceAPI* | [**EventsServiceGetEventsStatistics**](docs/EventsServiceAPI.md#eventsservicegeteventsstatistics) | **Get** /v3/events:statistics | Get Events Statistics
-*EventsServiceAPI* | [**EventsServiceListEvents**](docs/EventsServiceAPI.md#eventsservicelistevents) | **Get** /v3/events | List Events
-*EventsServiceAPI* | [**EventsServiceListEventsCount**](docs/EventsServiceAPI.md#eventsservicelisteventscount) | **Get** /v3/events:count | List Events Count
+*EventsServiceAPI* | [**EventsServiceBatchGetEvent**](docs/EventsServiceAPI.md#eventsservicebatchgetevent) | **Get** /alerts/events/v3/batch | Batch Get Event
+*EventsServiceAPI* | [**EventsServiceGetEvent**](docs/EventsServiceAPI.md#eventsservicegetevent) | **Get** /alerts/events/v3/{id} | Get Event
+*EventsServiceAPI* | [**EventsServiceGetEventsStatistics**](docs/EventsServiceAPI.md#eventsservicegeteventsstatistics) | **Get** /alerts/events/v3/statistics | Get Events Statistics
+*EventsServiceAPI* | [**EventsServiceListAlertEvents**](docs/EventsServiceAPI.md#eventsservicelistalertevents) | **Get** /alerts/events/v3/alert-events | List Alert Events
+*EventsServiceAPI* | [**EventsServiceListEvents**](docs/EventsServiceAPI.md#eventsservicelistevents) | **Get** /alerts/events/v3 | List Events
+*EventsServiceAPI* | [**EventsServiceListEventsCount**](docs/EventsServiceAPI.md#eventsservicelisteventscount) | **Get** /alerts/events/v3/count | List Events Count
 
 
 ## Documentation For Models
@@ -112,8 +113,10 @@ Class | Method | HTTP request | Description
  - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [GetEventsStatisticsResponse](docs/GetEventsStatisticsResponse.md)
+ - [ListAlertEventsResponse](docs/ListAlertEventsResponse.md)
  - [ListEventsCountResponse](docs/ListEventsCountResponse.md)
  - [MultipleValues](docs/MultipleValues.md)
+ - [TimestampRange](docs/TimestampRange.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
  - [V3GetEventResponse](docs/V3GetEventResponse.md)
  - [V3ListEventsResponse](docs/V3ListEventsResponse.md)

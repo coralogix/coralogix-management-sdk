@@ -464,6 +464,7 @@
             "format": "int64"
           },
           "limit": {
+            "example": "",
             "type": "string",
             "format": "int64"
           },
@@ -509,6 +510,7 @@
             }
           },
           "lastEvalDurationMs": {
+            "example": "",
             "type": "string",
             "format": "int64"
           },
@@ -528,10 +530,12 @@
             "format": "int64"
           },
           "lastEvalAt": {
+            "example": "",
             "type": "string",
             "format": "int64"
           },
           "limit": {
+            "example": "",
             "type": "string",
             "format": "int64"
           },
