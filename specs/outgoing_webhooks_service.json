@@ -652,9 +652,6 @@
         "type": "object",
         "properties": {
           "detail": {
-            "example": {
-              "key": "value"
-            },
             "type": "string"
           },
           "detailType": {
@@ -730,9 +727,6 @@
         "type": "object",
         "properties": {
           "payload": {
-            "example": {
-              "key": "value"
-            },
             "type": "string"
           },
           "uuid": {
@@ -774,11 +768,11 @@
         "type": "object",
         "properties": {
           "emailAddresses": {
+            "example": [
+              "example@coralogix.com"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "example@coralogix.com"
-              ],
               "type": "string"
             }
           }
@@ -886,9 +880,6 @@
         "type": "object",
         "properties": {
           "headers": {
-            "example": {
-              "Content-Type": "application/json"
-            },
             "type": "object",
             "additionalProperties": {
               "type": "string"
@@ -898,9 +889,6 @@
             "$ref": "#/components/schemas/MethodType"
           },
           "payload": {
-            "example": {
-              "key": "value"
-            },
             "type": "string"
           },
           "uuid": {
@@ -1115,13 +1103,7 @@
       "OutgoingWebhook": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/OutgoingWebhookEmailGroup"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookMicrosoftTeams"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookIbmEventNotifications"
+            "$ref": "#/components/schemas/OutgoingWebhookGenericWebhook"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookSlack"
@@ -1133,13 +1115,7 @@
             "$ref": "#/components/schemas/OutgoingWebhookSendLog"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookJira"
-          },
-          {
             "$ref": "#/components/schemas/OutgoingWebhookOpsgenie"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookDemisto"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookAwsEventBridge"
@@ -1148,7 +1124,19 @@
             "$ref": "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookGenericWebhook"
+            "$ref": "#/components/schemas/OutgoingWebhookEmailGroup"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookMicrosoftTeams"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookJira"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookDemisto"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookIbmEventNotifications"
           }
         ]
       },
@@ -1413,16 +1401,7 @@
       "OutgoingWebhookInputData": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataGenericWebhook"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataSendLog"
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
@@ -1431,22 +1410,31 @@
             "$ref": "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataOpsgenie"
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataJira"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataDemisto"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataGenericWebhook"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataSlack"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataSendLog"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataJira"
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataOpsgenie"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataDemisto"
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
           }
         ]
       },
@@ -2101,9 +2089,6 @@
         "type": "object",
         "properties": {
           "payload": {
-            "example": {
-              "key": "value"
-            },
             "type": "string"
           },
           "uuid": {
@@ -2136,10 +2121,10 @@
       "TestOutgoingWebhookResponse": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TestOutgoingWebhookResponseSuccess"
+            "$ref": "#/components/schemas/TestOutgoingWebhookResponseFailure"
           },
           {
-            "$ref": "#/components/schemas/TestOutgoingWebhookResponseFailure"
+            "$ref": "#/components/schemas/TestOutgoingWebhookResponseSuccess"
           }
         ]
       },

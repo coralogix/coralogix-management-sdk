@@ -249,6 +249,7 @@
             "schema": {
               "type": "array",
               "items": {
+                "example": "",
                 "type": "string"
               }
             },
@@ -473,7 +474,8 @@
           "GENERIC_HTTPS",
           "PAGERDUTY",
           "IBM_EVENT_NOTIFICATIONS",
-          "SERVICE_NOW"
+          "SERVICE_NOW",
+          "EMAIL"
         ]
       },
       "CreateCustomPresetResponse": {

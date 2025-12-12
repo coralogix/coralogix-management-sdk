@@ -151,6 +151,7 @@
             "schema": {
               "type": "array",
               "items": {
+                "example": "",
                 "type": "string"
               }
             },
@@ -1001,13 +1002,13 @@
       "RuleMatcher": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/RuleMatcherSeverity"
-          },
-          {
             "$ref": "#/components/schemas/RuleMatcherApplicationName"
           },
           {
             "$ref": "#/components/schemas/RuleMatcherSubsystemName"
+          },
+          {
+            "$ref": "#/components/schemas/RuleMatcherSeverity"
           }
         ]
       },
@@ -1044,31 +1045,31 @@
             "$ref": "#/components/schemas/RuleParametersExtractParameters"
           },
           {
-            "$ref": "#/components/schemas/RuleParametersReplaceParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersExtractTimestampParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersRemoveFieldsParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersJsonStringifyParameters"
-          },
-          {
             "$ref": "#/components/schemas/RuleParametersJsonExtractParameters"
           },
           {
-            "$ref": "#/components/schemas/RuleParametersParseParameters"
+            "$ref": "#/components/schemas/RuleParametersReplaceParameters"
           },
           {
             "$ref": "#/components/schemas/RuleParametersAllowParameters"
           },
           {
-            "$ref": "#/components/schemas/RuleParametersBlockParameters"
+            "$ref": "#/components/schemas/RuleParametersExtractTimestampParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersJsonStringifyParameters"
           },
           {
             "$ref": "#/components/schemas/RuleParametersJsonParseParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersParseParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersBlockParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersRemoveFieldsParameters"
           }
         ]
       },

@@ -126,8 +126,10 @@ paths:
         name: ids
         required: false
         schema:
+          example:
+          - slo_id1
+          - slo_id2
           items:
-            example: "[\"slo_id1\",\"slo_id2\"]"
             type: string
           type: array
         style: form
@@ -233,8 +235,8 @@ components:
         SLOs.
       example:
         notFoundIds:
-        - "[\"slo_id1\",\"slo_id2\"]"
-        - "[\"slo_id1\",\"slo_id2\"]"
+        - slo_id1
+        - slo_id2
         slos:
           key:
             createdAt: 2021-01-01T00:00:00Z
@@ -249,13 +251,13 @@ components:
             - compareType: COMPARE_TYPE_UNSPECIFIED
               field: field_name
               fieldValues:
-              - "[\"value1\",\"value2\"]"
-              - "[\"value1\",\"value2\"]"
+              - value1
+              - value2
             - compareType: COMPARE_TYPE_UNSPECIFIED
               field: field_name
               fieldValues:
-              - "[\"value1\",\"value2\"]"
-              - "[\"value1\",\"value2\"]"
+              - value1
+              - value2
             id: slo_id
             serviceName: service_name
             remainingErrorBudgetPercentage: 1
@@ -265,8 +267,10 @@ components:
         url: https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/
       properties:
         notFoundIds:
+          example:
+          - slo_id1
+          - slo_id2
           items:
-            example: "[\"slo_id1\",\"slo_id2\"]"
             type: string
           type: array
         slos:
@@ -319,13 +323,13 @@ components:
           - compareType: COMPARE_TYPE_UNSPECIFIED
             field: field_name
             fieldValues:
-            - "[\"value1\",\"value2\"]"
-            - "[\"value1\",\"value2\"]"
+            - value1
+            - value2
           - compareType: COMPARE_TYPE_UNSPECIFIED
             field: field_name
             fieldValues:
-            - "[\"value1\",\"value2\"]"
-            - "[\"value1\",\"value2\"]"
+            - value1
+            - value2
           id: slo_id
           serviceName: service_name
           remainingErrorBudgetPercentage: 1
@@ -418,13 +422,13 @@ components:
           - compareType: COMPARE_TYPE_UNSPECIFIED
             field: field_name
             fieldValues:
-            - "[\"value1\",\"value2\"]"
-            - "[\"value1\",\"value2\"]"
+            - value1
+            - value2
           - compareType: COMPARE_TYPE_UNSPECIFIED
             field: field_name
             fieldValues:
-            - "[\"value1\",\"value2\"]"
-            - "[\"value1\",\"value2\"]"
+            - value1
+            - value2
           id: slo_id
           serviceName: service_name
           remainingErrorBudgetPercentage: 1
@@ -475,13 +479,13 @@ components:
           - compareType: COMPARE_TYPE_UNSPECIFIED
             field: field_name
             fieldValues:
-            - "[\"value1\",\"value2\"]"
-            - "[\"value1\",\"value2\"]"
+            - value1
+            - value2
           - compareType: COMPARE_TYPE_UNSPECIFIED
             field: field_name
             fieldValues:
-            - "[\"value1\",\"value2\"]"
-            - "[\"value1\",\"value2\"]"
+            - value1
+            - value2
           id: slo_id
           serviceName: service_name
           remainingErrorBudgetPercentage: 1
@@ -498,13 +502,13 @@ components:
           - compareType: COMPARE_TYPE_UNSPECIFIED
             field: field_name
             fieldValues:
-            - "[\"value1\",\"value2\"]"
-            - "[\"value1\",\"value2\"]"
+            - value1
+            - value2
           - compareType: COMPARE_TYPE_UNSPECIFIED
             field: field_name
             fieldValues:
-            - "[\"value1\",\"value2\"]"
-            - "[\"value1\",\"value2\"]"
+            - value1
+            - value2
           id: slo_id
           serviceName: service_name
           remainingErrorBudgetPercentage: 1
@@ -546,13 +550,13 @@ components:
           - compareType: COMPARE_TYPE_UNSPECIFIED
             field: field_name
             fieldValues:
-            - "[\"value1\",\"value2\"]"
-            - "[\"value1\",\"value2\"]"
+            - value1
+            - value2
           - compareType: COMPARE_TYPE_UNSPECIFIED
             field: field_name
             fieldValues:
-            - "[\"value1\",\"value2\"]"
-            - "[\"value1\",\"value2\"]"
+            - value1
+            - value2
           id: slo_id
           serviceName: service_name
           remainingErrorBudgetPercentage: 1
@@ -641,13 +645,13 @@ components:
         - compareType: COMPARE_TYPE_UNSPECIFIED
           field: field_name
           fieldValues:
-          - "[\"value1\",\"value2\"]"
-          - "[\"value1\",\"value2\"]"
+          - value1
+          - value2
         - compareType: COMPARE_TYPE_UNSPECIFIED
           field: field_name
           fieldValues:
-          - "[\"value1\",\"value2\"]"
-          - "[\"value1\",\"value2\"]"
+          - value1
+          - value2
         id: slo_id
         serviceName: service_name
         remainingErrorBudgetPercentage: 1
@@ -708,8 +712,8 @@ components:
         compareType: COMPARE_TYPE_UNSPECIFIED
         field: field_name
         fieldValues:
-        - "[\"value1\",\"value2\"]"
-        - "[\"value1\",\"value2\"]"
+        - value1
+        - value2
       externalDocs:
         description: Find out more about SLOs in Coralogix APM
         url: https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/
@@ -720,8 +724,10 @@ components:
           example: field_name
           type: string
         fieldValues:
+          example:
+          - value1
+          - value2
           items:
-            example: "[\"value1\",\"value2\"]"
             type: string
           type: array
       required:

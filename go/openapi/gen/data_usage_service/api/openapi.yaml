@@ -375,8 +375,12 @@ components:
         sizeGb: 0.8008282
         units: 6.0274563
         dimensions:
-        - priority: PRIORITY_UNSPECIFIED
-        - priority: PRIORITY_UNSPECIFIED
+        - genericDimension:
+            value: value
+            key: key
+        - genericDimension:
+            value: value
+            key: key
         timestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about data usage.
@@ -538,13 +542,17 @@ components:
       type: object
     Dimension:
       oneOf:
-      - $ref: "#/components/schemas/DimensionPriority"
-      - $ref: "#/components/schemas/DimensionPillar"
       - $ref: "#/components/schemas/DimensionGenericDimension"
       - $ref: "#/components/schemas/DimensionTier"
       - $ref: "#/components/schemas/DimensionSeverity"
+      - $ref: "#/components/schemas/DimensionPriority"
+      - $ref: "#/components/schemas/DimensionPillar"
     DimensionGenericDimension:
       additionalProperties: false
+      example:
+        genericDimension:
+          value: value
+          key: key
       properties:
         genericDimension:
           $ref: "#/components/schemas/GenericDimension"
@@ -557,8 +565,6 @@ components:
       type: object
     DimensionPriority:
       additionalProperties: false
-      example:
-        priority: PRIORITY_UNSPECIFIED
       properties:
         priority:
           $ref: "#/components/schemas/v2.Priority"
@@ -646,6 +652,9 @@ components:
       type: object
     GenericDimension:
       description: This data structure represents a generic dimension.
+      example:
+        value: value
+        key: key
       externalDocs:
         description: Find out more about data usage.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
@@ -866,14 +875,22 @@ components:
         - sizeGb: 0.8008282
           units: 6.0274563
           dimensions:
-          - priority: PRIORITY_UNSPECIFIED
-          - priority: PRIORITY_UNSPECIFIED
+          - genericDimension:
+              value: value
+              key: key
+          - genericDimension:
+              value: value
+              key: key
           timestamp: 2000-01-23T04:56:07.000+00:00
         - sizeGb: 0.8008282
           units: 6.0274563
           dimensions:
-          - priority: PRIORITY_UNSPECIFIED
-          - priority: PRIORITY_UNSPECIFIED
+          - genericDimension:
+              value: value
+              key: key
+          - genericDimension:
+              value: value
+              key: key
           timestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about data usage.
@@ -1160,11 +1177,11 @@ components:
       type: object
     DataUsageService_GetDataUsage_dimension_filters_parameter_inner:
       oneOf:
+      - $ref: "#/components/schemas/DimensionGenericDimension"
       - $ref: "#/components/schemas/DimensionTier"
       - $ref: "#/components/schemas/DimensionSeverity"
       - $ref: "#/components/schemas/DimensionPriority"
       - $ref: "#/components/schemas/DimensionPillar"
-      - $ref: "#/components/schemas/DimensionGenericDimension"
     DataUsageService_GetDailyUsageEvaluationTokens_request:
       oneOf:
       - $ref: "#/components/schemas/GetDailyUsageEvaluationTokensRequestRange"
@@ -1172,8 +1189,8 @@ components:
       type: object
     DataUsageService_GetDailyUsageProcessedGbs_request:
       oneOf:
-      - $ref: "#/components/schemas/GetDailyUsageProcessedGbsRequestRange"
       - $ref: "#/components/schemas/GetDailyUsageProcessedGbsRequestDateRange"
+      - $ref: "#/components/schemas/GetDailyUsageProcessedGbsRequestRange"
       type: object
     DataUsageService_GetDailyUsageUnits_request:
       oneOf:

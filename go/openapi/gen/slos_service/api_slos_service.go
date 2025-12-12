@@ -260,7 +260,7 @@ type ApiSlosServiceCreateSloRequest struct {
 	ctx context.Context
 	ApiService *SlosServiceAPIService
 	silenceDataValidations *bool
-	slosServiceCreateSloRequest *SlosServiceCreateSloRequest
+	slosServiceReplaceSloRequest *SlosServiceReplaceSloRequest
 }
 
 func (r ApiSlosServiceCreateSloRequest) SilenceDataValidations(silenceDataValidations bool) ApiSlosServiceCreateSloRequest {
@@ -268,8 +268,8 @@ func (r ApiSlosServiceCreateSloRequest) SilenceDataValidations(silenceDataValida
 	return r
 }
 
-func (r ApiSlosServiceCreateSloRequest) SlosServiceCreateSloRequest(slosServiceCreateSloRequest SlosServiceCreateSloRequest) ApiSlosServiceCreateSloRequest {
-	r.slosServiceCreateSloRequest = &slosServiceCreateSloRequest
+func (r ApiSlosServiceCreateSloRequest) SlosServiceReplaceSloRequest(slosServiceReplaceSloRequest SlosServiceReplaceSloRequest) ApiSlosServiceCreateSloRequest {
+	r.slosServiceReplaceSloRequest = &slosServiceReplaceSloRequest
 	return r
 }
 
@@ -334,7 +334,7 @@ func (a *SlosServiceAPIService) SlosServiceCreateSloExecute(r ApiSlosServiceCrea
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.slosServiceCreateSloRequest
+	localVarPostBody = r.slosServiceReplaceSloRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -904,11 +904,11 @@ func (a *SlosServiceAPIService) SlosServiceReplaceSloExecute(r ApiSlosServiceRep
 type ApiSlosServiceValidateReplaceSloAlertsRequest struct {
 	ctx context.Context
 	ApiService *SlosServiceAPIService
-	slosServiceCreateSloRequest *SlosServiceCreateSloRequest
+	slosServiceValidateReplaceSloAlertsRequest *SlosServiceValidateReplaceSloAlertsRequest
 }
 
-func (r ApiSlosServiceValidateReplaceSloAlertsRequest) SlosServiceCreateSloRequest(slosServiceCreateSloRequest SlosServiceCreateSloRequest) ApiSlosServiceValidateReplaceSloAlertsRequest {
-	r.slosServiceCreateSloRequest = &slosServiceCreateSloRequest
+func (r ApiSlosServiceValidateReplaceSloAlertsRequest) SlosServiceValidateReplaceSloAlertsRequest(slosServiceValidateReplaceSloAlertsRequest SlosServiceValidateReplaceSloAlertsRequest) ApiSlosServiceValidateReplaceSloAlertsRequest {
+	r.slosServiceValidateReplaceSloAlertsRequest = &slosServiceValidateReplaceSloAlertsRequest
 	return r
 }
 
@@ -970,7 +970,7 @@ func (a *SlosServiceAPIService) SlosServiceValidateReplaceSloAlertsExecute(r Api
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.slosServiceCreateSloRequest
+	localVarPostBody = r.slosServiceValidateReplaceSloAlertsRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

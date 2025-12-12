@@ -18,6 +18,7 @@ paths:
         required: false
         schema:
           items:
+            example: ""
             type: string
           type: array
         style: form
@@ -284,6 +285,8 @@ components:
           type: string
       type: object
     ApplicationNameConstraint:
+      example:
+        value: value
       properties:
         value:
           type: string
@@ -410,10 +413,10 @@ components:
           creator: creator
           hidden: true
           ruleMatchers:
-          - severity:
-              value: VALUE_DEBUG_OR_UNSPECIFIED
-          - severity:
-              value: VALUE_DEBUG_OR_UNSPECIFIED
+          - applicationName:
+              value: value
+          - applicationName:
+              value: value
           name: name
           description: description
           id: id
@@ -621,10 +624,10 @@ components:
           creator: creator
           hidden: true
           ruleMatchers:
-          - severity:
-              value: VALUE_DEBUG_OR_UNSPECIFIED
-          - severity:
-              value: VALUE_DEBUG_OR_UNSPECIFIED
+          - applicationName:
+              value: value
+          - applicationName:
+              value: value
           name: name
           description: description
           id: id
@@ -712,10 +715,10 @@ components:
           creator: creator
           hidden: true
           ruleMatchers:
-          - severity:
-              value: VALUE_DEBUG_OR_UNSPECIFIED
-          - severity:
-              value: VALUE_DEBUG_OR_UNSPECIFIED
+          - applicationName:
+              value: value
+          - applicationName:
+              value: value
           name: name
           description: description
           id: id
@@ -769,10 +772,10 @@ components:
           creator: creator
           hidden: true
           ruleMatchers:
-          - severity:
-              value: VALUE_DEBUG_OR_UNSPECIFIED
-          - severity:
-              value: VALUE_DEBUG_OR_UNSPECIFIED
+          - applicationName:
+              value: value
+          - applicationName:
+              value: value
           name: name
           description: description
           id: id
@@ -866,10 +869,10 @@ components:
         creator: creator
         hidden: true
         ruleMatchers:
-        - severity:
-            value: VALUE_DEBUG_OR_UNSPECIFIED
-        - severity:
-            value: VALUE_DEBUG_OR_UNSPECIFIED
+        - applicationName:
+            value: value
+        - applicationName:
+            value: value
         name: name
         description: description
         id: id
@@ -902,20 +905,20 @@ components:
       type: object
     RuleMatcher:
       oneOf:
-      - $ref: "#/components/schemas/RuleMatcherSeverity"
       - $ref: "#/components/schemas/RuleMatcherApplicationName"
       - $ref: "#/components/schemas/RuleMatcherSubsystemName"
+      - $ref: "#/components/schemas/RuleMatcherSeverity"
     RuleMatcherApplicationName:
       additionalProperties: false
+      example:
+        applicationName:
+          value: value
       properties:
         applicationName:
           $ref: "#/components/schemas/ApplicationNameConstraint"
       type: object
     RuleMatcherSeverity:
       additionalProperties: false
-      example:
-        severity:
-          value: VALUE_DEBUG_OR_UNSPECIFIED
       properties:
         severity:
           $ref: "#/components/schemas/SeverityConstraint"
@@ -929,15 +932,15 @@ components:
     RuleParameters:
       oneOf:
       - $ref: "#/components/schemas/RuleParametersExtractParameters"
-      - $ref: "#/components/schemas/RuleParametersReplaceParameters"
-      - $ref: "#/components/schemas/RuleParametersExtractTimestampParameters"
-      - $ref: "#/components/schemas/RuleParametersRemoveFieldsParameters"
-      - $ref: "#/components/schemas/RuleParametersJsonStringifyParameters"
       - $ref: "#/components/schemas/RuleParametersJsonExtractParameters"
-      - $ref: "#/components/schemas/RuleParametersParseParameters"
+      - $ref: "#/components/schemas/RuleParametersReplaceParameters"
       - $ref: "#/components/schemas/RuleParametersAllowParameters"
-      - $ref: "#/components/schemas/RuleParametersBlockParameters"
+      - $ref: "#/components/schemas/RuleParametersExtractTimestampParameters"
+      - $ref: "#/components/schemas/RuleParametersJsonStringifyParameters"
       - $ref: "#/components/schemas/RuleParametersJsonParseParameters"
+      - $ref: "#/components/schemas/RuleParametersParseParameters"
+      - $ref: "#/components/schemas/RuleParametersBlockParameters"
+      - $ref: "#/components/schemas/RuleParametersRemoveFieldsParameters"
     RuleParametersAllowParameters:
       additionalProperties: false
       properties:
@@ -1039,8 +1042,6 @@ components:
           type: array
       type: object
     SeverityConstraint:
-      example:
-        value: VALUE_DEBUG_OR_UNSPECIFIED
       properties:
         value:
           $ref: "#/components/schemas/Value"
@@ -1101,10 +1102,10 @@ components:
           creator: creator
           hidden: true
           ruleMatchers:
-          - severity:
-              value: VALUE_DEBUG_OR_UNSPECIFIED
-          - severity:
-              value: VALUE_DEBUG_OR_UNSPECIFIED
+          - applicationName:
+              value: value
+          - applicationName:
+              value: value
           name: name
           description: description
           id: id

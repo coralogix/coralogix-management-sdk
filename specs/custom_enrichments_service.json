@@ -87,9 +87,62 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Custom Enrichments Service"
+        ],
+        "summary": "Create Custom Enrichments",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CustomEnrichmentService_CreateCustomEnrichment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Create Custom Enrichment Request",
+                "description": "This request data structure is used to create a custom enrichment",
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "example": "custom_enrichment_description",
+                    "type": "string"
+                  },
+                  "file": {
+                    "$ref": "#/components/schemas/File"
+                  },
+                  "name": {
+                    "example": "custom_enrichment_name",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "description",
+                  "file"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCustomEnrichmentResponse"
+                }
+              }
+            }
+          }
+        }
       }
     },
-    "/enrichment-rules/custom-enrichment-rules/v1/search": {
+    "/enrichment-rules/custom-enrichment-rules/v1/all/contents": {
       "post": {
         "tags": [
           "Custom Enrichments Service"
@@ -209,66 +262,6 @@
           }
         }
       }
-    },
-    "/v1/custom_enrichment": {
-      "post": {
-        "tags": [
-          "Custom Enrichments Service"
-        ],
-        "summary": "Create Custom Enrichments",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "CustomEnrichmentService_CreateCustomEnrichment",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "name",
-            "schema": {
-              "example": "custom_enrichment_name",
-              "type": "string"
-            },
-            "style": "form"
-          },
-          {
-            "in": "query",
-            "name": "description",
-            "schema": {
-              "example": "custom_enrichment_description",
-              "type": "string"
-            },
-            "style": "form"
-          },
-          {
-            "in": "query",
-            "name": "file",
-            "schema": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/FileBinary"
-                },
-                {
-                  "$ref": "#/components/schemas/FileTextual"
-                }
-              ]
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateCustomEnrichmentResponse"
-                }
-              }
-            }
-          }
-        }
-      }
     }
   },
   "components": {
@@ -316,10 +309,7 @@
             "example": "Custom enrichment created successfully",
             "type": "string"
           }
-        },
-        "required": [
-          "customEnrichment"
-        ]
+        }
       },
       "CustomEnrichment": {
         "type": "object",
@@ -587,10 +577,7 @@
               "$ref": "#/components/schemas/CustomEnrichment"
             }
           }
-        },
-        "required": [
-          "customEnrichments"
-        ]
+        }
       },
       "MultipleValues": {
         "type": "object",
@@ -621,9 +608,6 @@
             "format": "int64"
           }
         },
-        "required": [
-          "searchBy"
-        ],
         "additionalProperties": false
       },
       "SearchClauseName": {
@@ -640,9 +624,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "searchBy"
-        ],
         "additionalProperties": false
       },
       "SearchCustomEnrichmentDataResponse": {
@@ -672,10 +653,7 @@
             "example": "Custom enrichment updated successfully",
             "type": "string"
           }
-        },
-        "required": [
-          "customEnrichment"
-        ]
+        }
       },
       "common.Group": {
         "type": "object",

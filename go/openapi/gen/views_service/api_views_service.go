@@ -438,7 +438,7 @@ func (a *ViewsServiceAPIService) ViewsServiceListViewsExecute(r ApiViewsServiceL
 type ApiViewsServiceReplaceViewRequest struct {
 	ctx context.Context
 	ApiService *ViewsServiceAPIService
-	viewId int32
+	id int32
 	view1 *View1
 }
 
@@ -457,14 +457,14 @@ ViewsServiceReplaceView Replace a view service
 Replaces an existing view
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param viewId
+ @param id
  @return ApiViewsServiceReplaceViewRequest
 */
-func (a *ViewsServiceAPIService) ViewsServiceReplaceView(ctx context.Context, viewId int32) ApiViewsServiceReplaceViewRequest {
+func (a *ViewsServiceAPIService) ViewsServiceReplaceView(ctx context.Context, id int32) ApiViewsServiceReplaceViewRequest {
 	return ApiViewsServiceReplaceViewRequest{
 		ApiService: a,
 		ctx: ctx,
-		viewId: viewId,
+		id: id,
 	}
 }
 
@@ -483,8 +483,8 @@ func (a *ViewsServiceAPIService) ViewsServiceReplaceViewExecute(r ApiViewsServic
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/data-exploration/saved-views/v1/{view.id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"view.id"+"}", url.PathEscape(parameterValueToString(r.viewId, "viewId")), -1)
+	localVarPath := localBasePath + "/data-exploration/saved-views/v1/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

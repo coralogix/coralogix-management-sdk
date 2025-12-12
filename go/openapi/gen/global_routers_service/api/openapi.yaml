@@ -138,6 +138,7 @@ paths:
         required: false
         schema:
           items:
+            example: ""
             type: string
           type: array
         style: form
@@ -158,8 +159,7 @@ components:
         routers ids
       example:
         notFoundIds:
-        - "[\"global-router-id-3\"]"
-        - "[\"global-router-id-3\"]"
+        - global-router-id-3
         routers:
           key:
             entityLabels:
@@ -172,8 +172,6 @@ components:
             entityType: ENTITY_TYPE_UNSPECIFIED
             name: My Router
             description: description
-            entityLabelMatcher:
-              key: entityLabelMatcher
             rules:
             - condition: alertDef.priority == 'P3'
               entityType: null
@@ -219,8 +217,9 @@ components:
         url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
       properties:
         notFoundIds:
+          example:
+          - global-router-id-3
           items:
-            example: "[\"global-router-id-3\"]"
             type: string
           type: array
         routers:
@@ -261,8 +260,6 @@ components:
           entityType: ENTITY_TYPE_UNSPECIFIED
           name: My Router
           description: description
-          entityLabelMatcher:
-            key: entityLabelMatcher
           rules:
           - condition: alertDef.priority == 'P3'
             entityType: null
@@ -385,8 +382,6 @@ components:
           entityType: ENTITY_TYPE_UNSPECIFIED
           name: My Router
           description: description
-          entityLabelMatcher:
-            key: entityLabelMatcher
           rules:
           - condition: alertDef.priority == 'P3'
             entityType: null
@@ -448,8 +443,6 @@ components:
         entityType: ENTITY_TYPE_UNSPECIFIED
         name: My Router
         description: description
-        entityLabelMatcher:
-          key: entityLabelMatcher
         rules:
         - condition: alertDef.priority == 'P3'
           entityType: null
@@ -499,11 +492,6 @@ components:
           type: string
         description:
           type: string
-        entityLabelMatcher:
-          additionalProperties:
-            type: string
-          deprecated: true
-          type: object
         entityLabels:
           additionalProperties:
             type: string
@@ -545,8 +533,6 @@ components:
           entityType: ENTITY_TYPE_UNSPECIFIED
           name: My Router
           description: description
-          entityLabelMatcher:
-            key: entityLabelMatcher
           rules:
           - condition: alertDef.priority == 'P3'
             entityType: null
@@ -597,8 +583,6 @@ components:
           entityType: ENTITY_TYPE_UNSPECIFIED
           name: My Router
           description: description
-          entityLabelMatcher:
-            key: entityLabelMatcher
           rules:
           - condition: alertDef.priority == 'P3'
             entityType: null
@@ -672,8 +656,6 @@ components:
           entityType: ENTITY_TYPE_UNSPECIFIED
           name: My Router
           description: description
-          entityLabelMatcher:
-            key: entityLabelMatcher
           rules:
           - condition: alertDef.priority == 'P3'
             entityType: null
@@ -832,6 +814,7 @@ components:
       properties:
         values:
           items:
+            example: ""
             type: string
           type: array
       type: object

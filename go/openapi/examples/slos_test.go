@@ -32,10 +32,12 @@ func TestSLOs(t *testing.T) {
 
 	sloName := "example_slo_" + uuid.NewString()
 	sloPayload := getRequestBasedSlo(sloName)
-	createReq := slos.SlosServiceCreateSloRequest{
+	createReq := slos.SlosServiceReplaceSloRequest{
 		SloRequestBasedMetricSli: sloPayload,
 	}
-	createResp, httpResp, err := client.SlosServiceCreateSlo(ctx).SlosServiceCreateSloRequest(createReq).Execute()
+	createResp, httpResp, err := client.SlosServiceCreateSlo(ctx).
+		SlosServiceReplaceSloRequest(createReq).
+		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	sloID := createResp.GetSlo().SloRequestBasedMetricSli.GetId()
@@ -91,10 +93,10 @@ func getRequestBasedSlo(name string) *slos.SloRequestBasedMetricSli {
 		TargetThresholdPercentage: target,
 		RequestBasedMetricSli: &slos.RequestBasedMetricSli{
 			GoodEvents: slos.Metric{
-				Query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)",
+				Query: "avg(rate(cpu_usage_seconds_total[1m])) by (instance)",
 			},
 			TotalEvents: slos.Metric{
-				Query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)",
+				Query: "avg(rate(cpu_usage_seconds_total[1m])) by (instance)",
 			},
 		},
 		SloTimeFrame: slos.SLOTIMEFRAME_SLO_TIME_FRAME_7_DAYS.Ptr(),

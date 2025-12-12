@@ -222,12 +222,12 @@
             "in": "query",
             "name": "incident_ids",
             "schema": {
+              "example": [
+                "incident_id_1",
+                "incident_id_2"
+              ],
               "type": "array",
               "items": {
-                "example": [
-                  "incident_id_1",
-                  "incident_id_2"
-                ],
                 "description": "List of incident IDs to acknowledge",
                 "type": "string"
               }
@@ -546,12 +546,12 @@
             "in": "query",
             "name": "incident_ids",
             "schema": {
+              "example": [
+                "incident_id_1",
+                "incident_id_2"
+              ],
               "type": "array",
               "items": {
-                "example": [
-                  "incident_id_1",
-                  "incident_id_2"
-                ],
                 "description": "List of incident IDs to assign",
                 "type": "string"
               }
@@ -629,12 +629,12 @@
             "in": "query",
             "name": "incident_ids",
             "schema": {
+              "example": [
+                "incident_id_1",
+                "incident_id_2"
+              ],
               "type": "array",
               "items": {
-                "example": [
-                  "incident_id_1",
-                  "incident_id_2"
-                ],
                 "description": "List of incident IDs to unassign",
                 "type": "string"
               }
@@ -693,12 +693,12 @@
             "in": "query",
             "name": "incident_ids",
             "schema": {
+              "example": [
+                "incident_id_1",
+                "incident_id_2"
+              ],
               "type": "array",
               "items": {
-                "example": [
-                  "incident_id_1",
-                  "incident_id_2"
-                ],
                 "description": "List of incident IDs to close",
                 "type": "string"
               }
@@ -1422,12 +1422,12 @@
             "in": "query",
             "name": "incident_ids",
             "schema": {
+              "example": [
+                "incident_id_1",
+                "incident_id_2"
+              ],
               "type": "array",
               "items": {
-                "example": [
-                  "incident_id_1",
-                  "incident_id_2"
-                ],
                 "description": "List of incident IDs to resolve",
                 "type": "string"
               }
@@ -1702,12 +1702,12 @@
             }
           },
           "notFoundIds": {
+            "example": [
+              "not_found_id_1",
+              "not_found_id_2"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "not_found_id_1",
-                "not_found_id_2"
-              ],
               "description": "List of IDs that were not found",
               "type": "string"
             }
@@ -2271,31 +2271,10 @@
       "IncidentEvent": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventCloseAdministrativeEvent"
-          },
-          {
             "$ref": "#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent"
           },
           {
-            "$ref": "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventCloseOperationalEvent"
-          },
-          {
             "$ref": "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventAssignmentOperationalEvent"
           },
           {
             "$ref": "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
@@ -2305,6 +2284,27 @@
           },
           {
             "$ref": "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventAssignmentOperationalEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventCloseAdministrativeEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventCloseOperationalEvent"
           }
         ]
       },
@@ -2912,13 +2912,25 @@
       "IncidentFieldOneOf": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IncidentFieldOneOfStatus"
+            "$ref": "#/components/schemas/IncidentFieldOneOfDuration"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfName"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfSubsystemName"
           },
           {
             "$ref": "#/components/schemas/IncidentFieldOneOfId"
           },
           {
-            "$ref": "#/components/schemas/IncidentFieldOneOfName"
+            "$ref": "#/components/schemas/IncidentFieldOneOfSeverity"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfCreatedAt"
           },
           {
             "$ref": "#/components/schemas/IncidentFieldOneOfClosedAt"
@@ -2927,22 +2939,10 @@
             "$ref": "#/components/schemas/IncidentFieldOneOfState"
           },
           {
-            "$ref": "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
+            "$ref": "#/components/schemas/IncidentFieldOneOfStatus"
           },
           {
             "$ref": "#/components/schemas/IncidentFieldOneOfApplicationName"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfSubsystemName"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfDuration"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfSeverity"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfCreatedAt"
           }
         ]
       },
@@ -3392,7 +3392,7 @@
         "type": "object",
         "properties": {
           "count": {
-            "example": 100,
+            "example": "100",
             "description": "Total number of incident events matching the filter",
             "type": "string",
             "format": "uint64"

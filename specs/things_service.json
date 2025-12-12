@@ -235,74 +235,6 @@
           }
         ]
       },
-      "delete": {
-        "tags": [
-          "Things Service"
-        ],
-        "summary": "Delete Thing",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "ThingService_DeleteThing",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "example": "43B9880C-A880-418F-91DF-8463063A30ED",
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteThingResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-bumblebee": [
-          {
-            "action": [
-              "create"
-            ],
-            "guard": "status==201 && exists($.body.id)",
-            "name": "resource_management",
-            "reachable": [
-              "ThingService_ListThings"
-            ],
-            "root": true
-          }
-        ]
-      }
-    },
-    "/stuff/things/v1/{thing.id}": {
       "put": {
         "tags": [
           "Things Service"
@@ -316,7 +248,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "thing.id",
+            "name": "id",
             "required": true,
             "schema": {
               "example": "123e4567-e89b-12d3-a456-426614174000",
@@ -398,6 +330,72 @@
               "ThingService_GetThing",
               "ThingService_ReplaceThing",
               "ThingService_DeleteThing"
+            ],
+            "root": true
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Things Service"
+        ],
+        "summary": "Delete Thing",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ThingService_DeleteThing",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": "43B9880C-A880-418F-91DF-8463063A30ED",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteThingResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-bumblebee": [
+          {
+            "action": [
+              "create"
+            ],
+            "guard": "status==201 && exists($.body.id)",
+            "name": "resource_management",
+            "reachable": [
+              "ThingService_ListThings"
             ],
             "root": true
           }

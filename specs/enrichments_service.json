@@ -140,13 +140,13 @@
             "in": "query",
             "name": "enrichment_ids",
             "schema": {
+              "example": [
+                1,
+                2,
+                3
+              ],
               "type": "array",
               "items": {
-                "example": [
-                  1,
-                  2,
-                  3
-                ],
                 "type": "integer",
                 "format": "int64"
               }
@@ -304,6 +304,7 @@
             "format": "int64"
           },
           "queryOnlySizeLimitBytes": {
+            "example": "",
             "type": "string",
             "format": "int64"
           },
@@ -312,6 +313,7 @@
             "format": "int64"
           },
           "sizeLimitBytes": {
+            "example": "",
             "type": "string",
             "format": "int64"
           }
@@ -337,14 +339,14 @@
         "type": "object",
         "properties": {
           "enrichedFieldName": {
-            "example": 1,
+            "example": "1",
             "type": "string"
           },
           "enrichmentType": {
             "$ref": "#/components/schemas/EnrichmentType"
           },
           "fieldName": {
-            "example": 1,
+            "example": "1",
             "type": "string"
           },
           "id": {
@@ -353,12 +355,12 @@
             "format": "int64"
           },
           "selectedColumns": {
+            "example": [
+              "city",
+              "population"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "city",
-                "population"
-              ],
               "type": "string"
             }
           }

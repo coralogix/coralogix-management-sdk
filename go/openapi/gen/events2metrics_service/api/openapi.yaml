@@ -1453,8 +1453,8 @@ components:
       type: string
     Events2MetricService_ReplaceE2M_request:
       oneOf:
-      - $ref: "#/components/schemas/E2MLogsQuery"
       - $ref: "#/components/schemas/E2MSpansQuery"
+      - $ref: "#/components/schemas/E2MLogsQuery"
       type: object
     Events2MetricService_CreateE2M_request:
       oneOf:

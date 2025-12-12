@@ -216,12 +216,12 @@
             "in": "query",
             "name": "connector_ids",
             "schema": {
+              "example": [
+                "connector-id-1",
+                "connector-id-2"
+              ],
               "type": "array",
               "items": {
-                "example": [
-                  "connector-id-1",
-                  "connector-id-2"
-                ],
                 "type": "string"
               }
             },
@@ -260,6 +260,7 @@
             "schema": {
               "type": "array",
               "items": {
+                "example": "",
                 "type": "string"
               }
             },
@@ -377,11 +378,11 @@
             }
           },
           "notFoundIds": {
+            "example": [
+              "connector-id-3"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "connector-id-3"
-              ],
               "type": "string"
             }
           }
@@ -403,11 +404,11 @@
             }
           },
           "notFoundIds": {
+            "example": [
+              "connector-id-3"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "connector-id-3"
-              ],
               "type": "string"
             }
           }
@@ -480,7 +481,7 @@
             "maxLength": 200
           },
           "teamId": {
-            "example": "12345",
+            "example": 12345,
             "type": "integer",
             "format": "int64"
           },
@@ -547,7 +548,8 @@
           "GENERIC_HTTPS",
           "PAGERDUTY",
           "IBM_EVENT_NOTIFICATIONS",
-          "SERVICE_NOW"
+          "SERVICE_NOW",
+          "EMAIL"
         ]
       },
       "ConnectorTypeSummary": {
@@ -560,7 +562,7 @@
         "type": "object",
         "properties": {
           "count": {
-            "example": "5",
+            "example": 5,
             "type": "integer",
             "format": "int64"
           },

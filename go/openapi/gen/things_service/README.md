@@ -82,7 +82,7 @@ Class | Method | HTTP request | Description
 *ThingsServiceAPI* | [**ThingServiceDeleteThing**](docs/ThingsServiceAPI.md#thingservicedeletething) | **Delete** /stuff/things/v1/{id} | Delete Thing
 *ThingsServiceAPI* | [**ThingServiceGetThing**](docs/ThingsServiceAPI.md#thingservicegetthing) | **Get** /stuff/things/v1/{id} | Get Thing
 *ThingsServiceAPI* | [**ThingServiceListThings**](docs/ThingsServiceAPI.md#thingservicelistthings) | **Get** /stuff/things/v1 | List Things
-*ThingsServiceAPI* | [**ThingServiceReplaceThing**](docs/ThingsServiceAPI.md#thingservicereplacething) | **Put** /stuff/things/v1/{thing.id} | Replace Thing
+*ThingsServiceAPI* | [**ThingServiceReplaceThing**](docs/ThingsServiceAPI.md#thingservicereplacething) | **Put** /stuff/things/v1/{id} | Replace Thing
 
 
 ## Documentation For Models

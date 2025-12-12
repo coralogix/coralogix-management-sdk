@@ -21,6 +21,26 @@ paths:
       summary: Get Custom Enrichments
       tags:
       - Custom Enrichments Service
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: CustomEnrichmentService_CreateCustomEnrichment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Create_Custom_Enrichment_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateCustomEnrichmentResponse"
+          description: ""
+      summary: Create Custom Enrichments
+      tags:
+      - Custom Enrichments Service
     put:
       description: No description available
       externalDocs:
@@ -41,7 +61,7 @@ paths:
       summary: Update Custom Enrichment
       tags:
       - Custom Enrichments Service
-  /enrichment-rules/custom-enrichment-rules/v1/search:
+  /enrichment-rules/custom-enrichment-rules/v1/all/contents:
     post:
       description: No description available
       externalDocs:
@@ -119,46 +139,6 @@ paths:
       summary: Get Custom Enrichment
       tags:
       - Custom Enrichments Service
-  /v1/custom_enrichment:
-    post:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: CustomEnrichmentService_CreateCustomEnrichment
-      parameters:
-      - explode: true
-        in: query
-        name: name
-        required: false
-        schema:
-          example: custom_enrichment_name
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: description
-        required: false
-        schema:
-          example: custom_enrichment_description
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: file
-        required: false
-        schema:
-          $ref: "#/components/schemas/CustomEnrichmentService_CreateCustomEnrichment_file_parameter"
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateCustomEnrichmentResponse"
-          description: ""
-      summary: Create Custom Enrichments
-      tags:
-      - Custom Enrichments Service
 components:
   schemas:
     ColorsByAggregation:
@@ -201,8 +181,6 @@ components:
         message:
           example: Custom enrichment created successfully
           type: string
-      required:
-      - customEnrichment
       title: Create Custom Enrichment Response
       type: object
     CustomEnrichment:
@@ -434,8 +412,6 @@ components:
           items:
             $ref: "#/components/schemas/CustomEnrichment"
           type: array
-      required:
-      - customEnrichments
       title: Get Custom Enrichments Response
       type: object
     MultipleValues:
@@ -458,8 +434,6 @@ components:
           example: 1
           format: int64
           type: integer
-      required:
-      - searchBy
       title: Search Clause
       type: object
     SearchClauseName:
@@ -472,8 +446,6 @@ components:
         name:
           example: custom_enrichment_name
           type: string
-      required:
-      - searchBy
       title: Search Clause
       type: object
     SearchCustomEnrichmentDataResponse:
@@ -525,8 +497,6 @@ components:
         message:
           example: Custom enrichment updated successfully
           type: string
-      required:
-      - customEnrichment
       title: Update Custom Enrichment Response
       type: object
     common.Group:
@@ -574,14 +544,28 @@ components:
       - name
       title: Update Custom Enrichment Request
       type: object
+    Create_Custom_Enrichment_Request:
+      additionalProperties: false
+      description: This request data structure is used to create a custom enrichment
+      properties:
+        description:
+          example: custom_enrichment_description
+          type: string
+        file:
+          $ref: "#/components/schemas/File"
+        name:
+          example: custom_enrichment_name
+          type: string
+      required:
+      - description
+      - file
+      - name
+      title: Create Custom Enrichment Request
+      type: object
     CustomEnrichmentService_SearchCustomEnrichmentData_search_clauses_parameter_inner:
       oneOf:
       - $ref: "#/components/schemas/SearchClauseId"
       - $ref: "#/components/schemas/SearchClauseName"
-    CustomEnrichmentService_CreateCustomEnrichment_file_parameter:
-      oneOf:
-      - $ref: "#/components/schemas/FileBinary"
-      - $ref: "#/components/schemas/FileTextual"
   securitySchemes:
     apiKeyAuth:
       description: API key authentication

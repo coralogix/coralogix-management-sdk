@@ -83,10 +83,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/UpdatePolicyRequestSpanRules"
+                    "$ref": "#/components/schemas/UpdatePolicyRequestLogRules"
                   },
                   {
-                    "$ref": "#/components/schemas/UpdatePolicyRequestLogRules"
+                    "$ref": "#/components/schemas/UpdatePolicyRequestSpanRules"
                   }
                 ]
               }
@@ -1340,10 +1340,10 @@
       "Placement": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/PlacementFirst"
+            "$ref": "#/components/schemas/PlacementLast"
           },
           {
-            "$ref": "#/components/schemas/PlacementLast"
+            "$ref": "#/components/schemas/PlacementFirst"
           }
         ]
       },
@@ -1368,10 +1368,10 @@
       "Policy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/PolicyLogRules"
+            "$ref": "#/components/schemas/PolicySpanRules"
           },
           {
-            "$ref": "#/components/schemas/PolicySpanRules"
+            "$ref": "#/components/schemas/PolicyLogRules"
           }
         ]
       },

@@ -306,7 +306,7 @@ components:
       example:
         keyInfo:
           owner:
-            userId: userId
+            organisationId: organisationId
           name: my_api_key
           active: true
           hashed: true
@@ -339,7 +339,7 @@ components:
       example:
         keys:
         - owner:
-            userId: userId
+            organisationId: organisationId
           name: my_api_key
           active: true
           hashed: true
@@ -359,7 +359,7 @@ components:
             - permissions
           value: value
         - owner:
-            userId: userId
+            organisationId: organisationId
           name: my_api_key
           active: true
           hashed: true
@@ -393,7 +393,7 @@ components:
         an API key.
       example:
         owner:
-          userId: userId
+          organisationId: organisationId
         name: my_api_key
         active: true
         hashed: true
@@ -475,11 +475,13 @@ components:
       type: object
     Owner:
       oneOf:
+      - $ref: "#/components/schemas/OwnerOrganisationId"
       - $ref: "#/components/schemas/OwnerUserId"
       - $ref: "#/components/schemas/OwnerTeamId"
-      - $ref: "#/components/schemas/OwnerOrganisationId"
     OwnerOrganisationId:
       additionalProperties: false
+      example:
+        organisationId: organisationId
       properties:
         organisationId:
           type: string
@@ -493,8 +495,6 @@ components:
       type: object
     OwnerUserId:
       additionalProperties: false
-      example:
-        userId: userId
       properties:
         userId:
           type: string

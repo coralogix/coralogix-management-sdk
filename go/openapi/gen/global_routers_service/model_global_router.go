@@ -22,8 +22,6 @@ var _ MappedNullable = &GlobalRouter{}
 type GlobalRouter struct {
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	Description *string `json:"description,omitempty"`
-	// Deprecated
-	EntityLabelMatcher *map[string]string `json:"entityLabelMatcher,omitempty"`
 	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
 	Fallback []RoutingTarget `json:"fallback,omitempty"`
@@ -113,41 +111,6 @@ func (o *GlobalRouter) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *GlobalRouter) SetDescription(v string) {
 	o.Description = &v
-}
-
-// GetEntityLabelMatcher returns the EntityLabelMatcher field value if set, zero value otherwise.
-// Deprecated
-func (o *GlobalRouter) GetEntityLabelMatcher() map[string]string {
-	if o == nil || IsNil(o.EntityLabelMatcher) {
-		var ret map[string]string
-		return ret
-	}
-	return *o.EntityLabelMatcher
-}
-
-// GetEntityLabelMatcherOk returns a tuple with the EntityLabelMatcher field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// Deprecated
-func (o *GlobalRouter) GetEntityLabelMatcherOk() (*map[string]string, bool) {
-	if o == nil || IsNil(o.EntityLabelMatcher) {
-		return nil, false
-	}
-	return o.EntityLabelMatcher, true
-}
-
-// HasEntityLabelMatcher returns a boolean if a field has been set.
-func (o *GlobalRouter) HasEntityLabelMatcher() bool {
-	if o != nil && !IsNil(o.EntityLabelMatcher) {
-		return true
-	}
-
-	return false
-}
-
-// SetEntityLabelMatcher gets a reference to the given map[string]string and assigns it to the EntityLabelMatcher field.
-// Deprecated
-func (o *GlobalRouter) SetEntityLabelMatcher(v map[string]string) {
-	o.EntityLabelMatcher = &v
 }
 
 // GetEntityLabels returns the EntityLabels field value if set, zero value otherwise.
@@ -421,9 +384,6 @@ func (o GlobalRouter) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
-	}
-	if !IsNil(o.EntityLabelMatcher) {
-		toSerialize["entityLabelMatcher"] = o.EntityLabelMatcher
 	}
 	if !IsNil(o.EntityLabels) {
 		toSerialize["entityLabels"] = o.EntityLabels

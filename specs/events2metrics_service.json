@@ -46,10 +46,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/E2MLogsQuery"
+                    "$ref": "#/components/schemas/E2MSpansQuery"
                   },
                   {
-                    "$ref": "#/components/schemas/E2MSpansQuery"
+                    "$ref": "#/components/schemas/E2MLogsQuery"
                   }
                 ]
               }

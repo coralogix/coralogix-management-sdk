@@ -87,7 +87,7 @@ func (a *EventsServiceAPIService) EventsServiceBatchGetEventExecute(r ApiEventsS
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v3/events/events:batchGet"
+	localVarPath := localBasePath + "/alerts/events/v3/batch"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -229,7 +229,7 @@ func (a *EventsServiceAPIService) EventsServiceGetEventExecute(r ApiEventsServic
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v3/events/{id}"
+	localVarPath := localBasePath + "/alerts/events/v3/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -349,7 +349,7 @@ func (a *EventsServiceAPIService) EventsServiceGetEventsStatisticsExecute(r ApiE
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v3/events:statistics"
+	localVarPath := localBasePath + "/alerts/events/v3/statistics"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -357,6 +357,166 @@ func (a *EventsServiceAPIService) EventsServiceGetEventsStatisticsExecute(r ApiE
 
 	if r.filter != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiEventsServiceListAlertEventsRequest struct {
+	ctx context.Context
+	ApiService *EventsServiceAPIService
+	alertIds *[]string
+	timestampRange *TimestampRange
+	cxEventLabels *map[string]string
+	orderBys *[]EventsServiceListEventsOrderBysParameterInner
+	pagination *EventsServiceListEventsPaginationParameter
+}
+
+func (r ApiEventsServiceListAlertEventsRequest) AlertIds(alertIds []string) ApiEventsServiceListAlertEventsRequest {
+	r.alertIds = &alertIds
+	return r
+}
+
+func (r ApiEventsServiceListAlertEventsRequest) TimestampRange(timestampRange TimestampRange) ApiEventsServiceListAlertEventsRequest {
+	r.timestampRange = &timestampRange
+	return r
+}
+
+func (r ApiEventsServiceListAlertEventsRequest) CxEventLabels(cxEventLabels map[string]string) ApiEventsServiceListAlertEventsRequest {
+	r.cxEventLabels = &cxEventLabels
+	return r
+}
+
+func (r ApiEventsServiceListAlertEventsRequest) OrderBys(orderBys []EventsServiceListEventsOrderBysParameterInner) ApiEventsServiceListAlertEventsRequest {
+	r.orderBys = &orderBys
+	return r
+}
+
+func (r ApiEventsServiceListAlertEventsRequest) Pagination(pagination EventsServiceListEventsPaginationParameter) ApiEventsServiceListAlertEventsRequest {
+	r.pagination = &pagination
+	return r
+}
+
+func (r ApiEventsServiceListAlertEventsRequest) Execute() (*ListAlertEventsResponse, *http.Response, error) {
+	return r.ApiService.EventsServiceListAlertEventsExecute(r)
+}
+
+/*
+EventsServiceListAlertEvents List Alert Events
+
+No description available
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiEventsServiceListAlertEventsRequest
+*/
+func (a *EventsServiceAPIService) EventsServiceListAlertEvents(ctx context.Context) ApiEventsServiceListAlertEventsRequest {
+	return ApiEventsServiceListAlertEventsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return ListAlertEventsResponse
+func (a *EventsServiceAPIService) EventsServiceListAlertEventsExecute(r ApiEventsServiceListAlertEventsRequest) (*ListAlertEventsResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListAlertEventsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsServiceAPIService.EventsServiceListAlertEvents")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/alerts/events/v3/alert-events"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.alertIds != nil {
+		t := *r.alertIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "alert_ids", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "alert_ids", t, "form", "multi")
+		}
+	}
+	if r.timestampRange != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "timestamp_range", r.timestampRange, "form", "")
+	}
+	if r.cxEventLabels != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cx_event_labels", r.cxEventLabels, "form", "")
+	}
+	if r.orderBys != nil {
+		t := *r.orderBys
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", t, "form", "multi")
+		}
+	}
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -469,7 +629,7 @@ func (a *EventsServiceAPIService) EventsServiceListEventsExecute(r ApiEventsServ
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v3/events"
+	localVarPath := localBasePath + "/alerts/events/v3"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -591,7 +751,7 @@ func (a *EventsServiceAPIService) EventsServiceListEventsCountExecute(r ApiEvent
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v3/events:count"
+	localVarPath := localBasePath + "/alerts/events/v3/count"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

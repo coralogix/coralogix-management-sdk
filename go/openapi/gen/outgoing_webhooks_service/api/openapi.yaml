@@ -408,7 +408,6 @@ components:
         url: ""
       properties:
         detail:
-          example: "{\"key\":\"value\"}"
           type: string
         detailType:
           example: detail_type
@@ -463,7 +462,6 @@ components:
         url: ""
       properties:
         payload:
-          example: "{\"key\":\"value\"}"
           type: string
         uuid:
           example: d838cd7b-087b-40c6-bc33-80997020f5d0
@@ -489,16 +487,13 @@ components:
       - DATA_USAGE
       type: string
     EmailGroupConfig:
-      example:
-        emailAddresses:
-        - "[\"example@coralogix.com\"]"
-        - "[\"example@coralogix.com\"]"
       externalDocs:
         url: ""
       properties:
         emailAddresses:
+          example:
+          - example@coralogix.com
           items:
-            example: "[\"example@coralogix.com\"]"
             type: string
           type: array
       title: Email group configuration
@@ -567,19 +562,22 @@ components:
       title: Filters
       type: object
     GenericWebhookConfig:
+      example:
+        headers:
+          key: headers
+        method: UNKNOWN
+        payload: payload
+        uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
       externalDocs:
         url: ""
       properties:
         headers:
           additionalProperties:
             type: string
-          example:
-            Content-Type: application/json
           type: object
         method:
           $ref: "#/components/schemas/MethodType"
         payload:
-          example: "{\"key\":\"value\"}"
           type: string
         uuid:
           example: d838cd7b-087b-40c6-bc33-80997020f5d0
@@ -590,10 +588,12 @@ components:
       example:
         webhook:
           createdAt: 2000-01-23T04:56:07.000+00:00
-          emailGroup:
-            emailAddresses:
-            - "[\"example@coralogix.com\"]"
-            - "[\"example@coralogix.com\"]"
+          genericWebhook:
+            headers:
+              key: headers
+            method: UNKNOWN
+            payload: payload
+            uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
           name: my_webhook
           externalId: 123456
           id: webhook_id
@@ -803,18 +803,18 @@ components:
       type: object
     OutgoingWebhook:
       oneOf:
-      - $ref: "#/components/schemas/OutgoingWebhookEmailGroup"
-      - $ref: "#/components/schemas/OutgoingWebhookMicrosoftTeams"
-      - $ref: "#/components/schemas/OutgoingWebhookIbmEventNotifications"
+      - $ref: "#/components/schemas/OutgoingWebhookGenericWebhook"
       - $ref: "#/components/schemas/OutgoingWebhookSlack"
       - $ref: "#/components/schemas/OutgoingWebhookPagerDuty"
       - $ref: "#/components/schemas/OutgoingWebhookSendLog"
-      - $ref: "#/components/schemas/OutgoingWebhookJira"
       - $ref: "#/components/schemas/OutgoingWebhookOpsgenie"
-      - $ref: "#/components/schemas/OutgoingWebhookDemisto"
       - $ref: "#/components/schemas/OutgoingWebhookAwsEventBridge"
       - $ref: "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
-      - $ref: "#/components/schemas/OutgoingWebhookGenericWebhook"
+      - $ref: "#/components/schemas/OutgoingWebhookEmailGroup"
+      - $ref: "#/components/schemas/OutgoingWebhookMicrosoftTeams"
+      - $ref: "#/components/schemas/OutgoingWebhookJira"
+      - $ref: "#/components/schemas/OutgoingWebhookDemisto"
+      - $ref: "#/components/schemas/OutgoingWebhookIbmEventNotifications"
     OutgoingWebhookAwsEventBridge:
       additionalProperties: false
       externalDocs:
@@ -891,18 +891,6 @@ components:
       type: object
     OutgoingWebhookEmailGroup:
       additionalProperties: false
-      example:
-        createdAt: 2000-01-23T04:56:07.000+00:00
-        emailGroup:
-          emailAddresses:
-          - "[\"example@coralogix.com\"]"
-          - "[\"example@coralogix.com\"]"
-        name: my_webhook
-        externalId: 123456
-        id: webhook_id
-        type: UNKNOWN
-        url: slack.webhook.com
-        updatedAt: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
       properties:
@@ -968,6 +956,20 @@ components:
       type: object
     OutgoingWebhookGenericWebhook:
       additionalProperties: false
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        genericWebhook:
+          headers:
+            key: headers
+          method: UNKNOWN
+          payload: payload
+          uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
+        name: my_webhook
+        externalId: 123456
+        id: webhook_id
+        type: UNKNOWN
+        url: slack.webhook.com
+        updatedAt: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
       properties:
@@ -1028,18 +1030,18 @@ components:
       type: object
     OutgoingWebhookInputData:
       oneOf:
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataGenericWebhook"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataSendLog"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataOpsgenie"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataSlack"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataJira"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataDemisto"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataGenericWebhook"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataSlack"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataSendLog"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataOpsgenie"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
     OutgoingWebhookInputDataAwsEventBridge:
       additionalProperties: false
       externalDocs:
@@ -1537,7 +1539,6 @@ components:
         url: ""
       properties:
         payload:
-          example: "{\"key\":\"value\"}"
           type: string
         uuid:
           example: d838cd7b-087b-40c6-bc33-80997020f5d0
@@ -1560,9 +1561,13 @@ components:
       type: object
     TestOutgoingWebhookResponse:
       oneOf:
-      - $ref: "#/components/schemas/TestOutgoingWebhookResponseSuccess"
       - $ref: "#/components/schemas/TestOutgoingWebhookResponseFailure"
+      - $ref: "#/components/schemas/TestOutgoingWebhookResponseSuccess"
     TestOutgoingWebhookResponse.Failure:
+      example:
+        displayMessage: example_display_message
+        errorMessage: example_error_message
+        statusCode: 400
       externalDocs:
         url: ""
       properties:
@@ -1585,6 +1590,11 @@ components:
       type: object
     TestOutgoingWebhookResponseFailure:
       additionalProperties: false
+      example:
+        failure:
+          displayMessage: example_display_message
+          errorMessage: example_error_message
+          statusCode: 400
       externalDocs:
         url: ""
       properties:
@@ -1594,8 +1604,6 @@ components:
       type: object
     TestOutgoingWebhookResponseSuccess:
       additionalProperties: false
-      example:
-        success: "{}"
       externalDocs:
         url: ""
       properties:

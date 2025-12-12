@@ -155,6 +155,7 @@ paths:
         required: false
         schema:
           items:
+            example: ""
             type: string
           type: array
         style: form
@@ -358,6 +359,7 @@ components:
       - PAGERDUTY
       - IBM_EVENT_NOTIFICATIONS
       - SERVICE_NOW
+      - EMAIL
       type: string
     CreateCustomPresetResponse:
       description: Response containing the created custom preset

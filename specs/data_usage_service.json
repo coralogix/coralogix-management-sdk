@@ -70,6 +70,9 @@
               "items": {
                 "oneOf": [
                   {
+                    "$ref": "#/components/schemas/DimensionGenericDimension"
+                  },
+                  {
                     "$ref": "#/components/schemas/DimensionTier"
                   },
                   {
@@ -80,9 +83,6 @@
                   },
                   {
                     "$ref": "#/components/schemas/DimensionPillar"
-                  },
-                  {
-                    "$ref": "#/components/schemas/DimensionGenericDimension"
                   }
                 ]
               }
@@ -200,10 +200,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestRange"
+                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestDateRange"
                   },
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestDateRange"
+                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestRange"
                   }
                 ]
               }
@@ -823,12 +823,6 @@
       "Dimension": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DimensionPriority"
-          },
-          {
-            "$ref": "#/components/schemas/DimensionPillar"
-          },
-          {
             "$ref": "#/components/schemas/DimensionGenericDimension"
           },
           {
@@ -836,6 +830,12 @@
           },
           {
             "$ref": "#/components/schemas/DimensionSeverity"
+          },
+          {
+            "$ref": "#/components/schemas/DimensionPriority"
+          },
+          {
+            "$ref": "#/components/schemas/DimensionPillar"
           }
         ]
       },
@@ -1167,7 +1167,7 @@
             "type": "string"
           },
           "logsCount": {
-            "example": 100,
+            "example": "100",
             "type": "string",
             "format": "int64"
           },
@@ -1210,32 +1210,32 @@
         "type": "object",
         "properties": {
           "errorSpanCount": {
-            "example": 10,
+            "example": "10",
             "type": "string",
             "format": "int64"
           },
           "lowErrorSpanCount": {
-            "example": 5,
+            "example": "5",
             "type": "string",
             "format": "int64"
           },
           "lowSuccessSpanCount": {
-            "example": 50,
+            "example": "50",
             "type": "string",
             "format": "int64"
           },
           "mediumErrorSpanCount": {
-            "example": 20,
+            "example": "20",
             "type": "string",
             "format": "int64"
           },
           "mediumSuccessSpanCount": {
-            "example": 200,
+            "example": "200",
             "type": "string",
             "format": "int64"
           },
           "successSpanCount": {
-            "example": 100,
+            "example": "100",
             "type": "string",
             "format": "int64"
           },

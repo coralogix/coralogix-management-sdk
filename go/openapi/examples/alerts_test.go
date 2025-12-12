@@ -535,12 +535,12 @@ func TestSloAlerts(t *testing.T) {
 	sloClient := clientSet.SLOs()
 	sloPayload := getRequestBasedSlo("example_slo_for_alert")
 
-	createSloReq := slos.SlosServiceCreateSloRequest{
+	createSloReq := slos.SlosServiceReplaceSloRequest{
 		SloRequestBasedMetricSli: sloPayload,
 	}
 	sloResp, httpResp, err := sloClient.
 		SlosServiceCreateSlo(ctx).
-		SlosServiceCreateSloRequest(createSloReq).
+		SlosServiceReplaceSloRequest(createSloReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	sloID := sloResp.GetSlo().SloRequestBasedMetricSli.GetId()

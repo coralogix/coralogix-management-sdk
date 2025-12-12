@@ -203,7 +203,6 @@ paths:
         - ThingService_ReplaceThing
         - ThingService_DeleteThing
         root: true
-  /stuff/things/v1/{thing.id}:
     put:
       description: No description available
       externalDocs:
@@ -212,7 +211,7 @@ paths:
       parameters:
       - explode: false
         in: path
-        name: thing.id
+        name: id
         required: true
         schema:
           example: 123e4567-e89b-12d3-a456-426614174000

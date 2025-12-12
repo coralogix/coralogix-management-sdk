@@ -21,6 +21,7 @@
             "in": "query",
             "name": "id",
             "schema": {
+              "example": "",
               "description": "The ID of the company IP access settings to get. If it's not provided, the id will be derived from the authorization header.",
               "type": "string"
             },
@@ -290,7 +291,6 @@
             "type": "string"
           },
           "ipAccess": {
-            "example": "d662a2f1-21c3-493c-8f8a-595d3ab05ef3",
             "description": "The list of IP access entries.",
             "type": "object",
             "additionalProperties": {

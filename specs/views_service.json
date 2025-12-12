@@ -135,45 +135,6 @@
           }
         }
       },
-      "delete": {
-        "tags": [
-          "Views service"
-        ],
-        "summary": "Delete view service",
-        "description": "Deletes a view by ID",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "ViewsService_DeleteView",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "example": 52,
-              "description": "id",
-              "type": "integer",
-              "format": "int32"
-            },
-            "style": "simple"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteViewResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/data-exploration/saved-views/v1/{view.id}": {
       "put": {
         "tags": [
           "Views service"
@@ -187,7 +148,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "view.id",
+            "name": "id",
             "required": true,
             "schema": {
               "example": 52,
@@ -253,6 +214,43 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/View"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Views service"
+        ],
+        "summary": "Delete view service",
+        "description": "Deletes a view by ID",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ViewsService_DeleteView",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": 52,
+              "description": "id",
+              "type": "integer",
+              "format": "int32"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteViewResponse"
                 }
               }
             }
@@ -626,10 +624,6 @@
             "minLength": 1
           },
           "selectedValues": {
-            "example": {
-              "cs-rest-test1": true,
-              "demo": true
-            },
             "description": "Filter selected values",
             "type": "object",
             "additionalProperties": {

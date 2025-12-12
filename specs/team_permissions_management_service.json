@@ -381,7 +381,7 @@
         }
       }
     },
-    "/aaa/team-groups/v1/{group_id.id}": {
+    "/aaa/team-groups/v1/{id}": {
       "get": {
         "tags": [
           "Team Permissions Management Service"
@@ -395,7 +395,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "group_id.id",
+            "name": "id",
             "required": true,
             "schema": {
               "type": "integer",
@@ -448,7 +448,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "group_id.id",
+            "name": "id",
             "required": true,
             "schema": {
               "type": "integer",
@@ -489,7 +489,7 @@
         }
       }
     },
-    "/aaa/team-groups/v1/{group_id.id}/users": {
+    "/aaa/team-groups/v1/{id}/users": {
       "get": {
         "tags": [
           "Team Permissions Management Service"
@@ -503,7 +503,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "group_id.id",
+            "name": "id",
             "required": true,
             "schema": {
               "type": "integer",
@@ -524,6 +524,7 @@
             "in": "query",
             "name": "page_token",
             "schema": {
+              "example": "",
               "type": "string"
             },
             "style": "form"
@@ -573,7 +574,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "group_id.id",
+            "name": "id",
             "required": true,
             "schema": {
               "type": "integer",
@@ -646,7 +647,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "group_id.id",
+            "name": "id",
             "required": true,
             "schema": {
               "type": "integer",
@@ -663,6 +664,7 @@
                 "type": "object",
                 "properties": {
                   "id": {
+                    "example": "",
                     "type": "string"
                   }
                 }
@@ -757,7 +759,7 @@
         }
       }
     },
-    "/v1/teams/groups/{group_id.id}/scope": {
+    "/v1/teams/groups/{id}/scope": {
       "get": {
         "tags": [
           "Team Permissions Management Service"
@@ -771,7 +773,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "group_id.id",
+            "name": "id",
             "required": true,
             "schema": {
               "type": "integer",
@@ -824,7 +826,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "group_id.id",
+            "name": "id",
             "required": true,
             "schema": {
               "type": "integer",

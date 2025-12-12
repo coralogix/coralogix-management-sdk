@@ -27,7 +27,7 @@ type TeamPermissionsManagementServiceAPIService service
 type ApiTeamPermissionsMgmtServiceAddUsersToTeamGroupRequest struct {
 	ctx context.Context
 	ApiService *TeamPermissionsManagementServiceAPIService
-	groupIdId int64
+	id int64
 	addUsersToTeamGroupRequest *AddUsersToTeamGroupRequest
 }
 
@@ -46,14 +46,14 @@ TeamPermissionsMgmtServiceAddUsersToTeamGroup Add Users To Team Group
 No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupIdId
+ @param id
  @return ApiTeamPermissionsMgmtServiceAddUsersToTeamGroupRequest
 */
-func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceAddUsersToTeamGroup(ctx context.Context, groupIdId int64) ApiTeamPermissionsMgmtServiceAddUsersToTeamGroupRequest {
+func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceAddUsersToTeamGroup(ctx context.Context, id int64) ApiTeamPermissionsMgmtServiceAddUsersToTeamGroupRequest {
 	return ApiTeamPermissionsMgmtServiceAddUsersToTeamGroupRequest{
 		ApiService: a,
 		ctx: ctx,
-		groupIdId: groupIdId,
+		id: id,
 	}
 }
 
@@ -72,8 +72,8 @@ func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceA
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/aaa/team-groups/v1/{group_id.id}/users"
-	localVarPath = strings.Replace(localVarPath, "{"+"group_id.id"+"}", url.PathEscape(parameterValueToString(r.groupIdId, "groupIdId")), -1)
+	localVarPath := localBasePath + "/aaa/team-groups/v1/{id}/users"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -352,7 +352,7 @@ func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceC
 type ApiTeamPermissionsMgmtServiceDeleteTeamGroupRequest struct {
 	ctx context.Context
 	ApiService *TeamPermissionsManagementServiceAPIService
-	groupIdId int64
+	id int64
 }
 
 func (r ApiTeamPermissionsMgmtServiceDeleteTeamGroupRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -365,14 +365,14 @@ TeamPermissionsMgmtServiceDeleteTeamGroup Delete Team Group
 No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupIdId
+ @param id
  @return ApiTeamPermissionsMgmtServiceDeleteTeamGroupRequest
 */
-func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceDeleteTeamGroup(ctx context.Context, groupIdId int64) ApiTeamPermissionsMgmtServiceDeleteTeamGroupRequest {
+func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceDeleteTeamGroup(ctx context.Context, id int64) ApiTeamPermissionsMgmtServiceDeleteTeamGroupRequest {
 	return ApiTeamPermissionsMgmtServiceDeleteTeamGroupRequest{
 		ApiService: a,
 		ctx: ctx,
-		groupIdId: groupIdId,
+		id: id,
 	}
 }
 
@@ -391,8 +391,8 @@ func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceD
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/aaa/team-groups/v1/{group_id.id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"group_id.id"+"}", url.PathEscape(parameterValueToString(r.groupIdId, "groupIdId")), -1)
+	localVarPath := localBasePath + "/aaa/team-groups/v1/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -455,7 +455,7 @@ func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceD
 type ApiTeamPermissionsMgmtServiceGetGroupUsersRequest struct {
 	ctx context.Context
 	ApiService *TeamPermissionsManagementServiceAPIService
-	groupIdId int64
+	id int64
 	pageSize *int64
 	pageToken *string
 }
@@ -480,14 +480,14 @@ TeamPermissionsMgmtServiceGetGroupUsers Get Group Users
 No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupIdId
+ @param id
  @return ApiTeamPermissionsMgmtServiceGetGroupUsersRequest
 */
-func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceGetGroupUsers(ctx context.Context, groupIdId int64) ApiTeamPermissionsMgmtServiceGetGroupUsersRequest {
+func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceGetGroupUsers(ctx context.Context, id int64) ApiTeamPermissionsMgmtServiceGetGroupUsersRequest {
 	return ApiTeamPermissionsMgmtServiceGetGroupUsersRequest{
 		ApiService: a,
 		ctx: ctx,
-		groupIdId: groupIdId,
+		id: id,
 	}
 }
 
@@ -506,8 +506,8 @@ func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceG
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/aaa/team-groups/v1/{group_id.id}/users"
-	localVarPath = strings.Replace(localVarPath, "{"+"group_id.id"+"}", url.PathEscape(parameterValueToString(r.groupIdId, "groupIdId")), -1)
+	localVarPath := localBasePath + "/aaa/team-groups/v1/{id}/users"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -576,7 +576,7 @@ func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceG
 type ApiTeamPermissionsMgmtServiceGetTeamGroupRequest struct {
 	ctx context.Context
 	ApiService *TeamPermissionsManagementServiceAPIService
-	groupIdId int64
+	id int64
 }
 
 func (r ApiTeamPermissionsMgmtServiceGetTeamGroupRequest) Execute() (*GetTeamGroupResponse, *http.Response, error) {
@@ -589,14 +589,14 @@ TeamPermissionsMgmtServiceGetTeamGroup Get Team Group
 No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupIdId
+ @param id
  @return ApiTeamPermissionsMgmtServiceGetTeamGroupRequest
 */
-func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceGetTeamGroup(ctx context.Context, groupIdId int64) ApiTeamPermissionsMgmtServiceGetTeamGroupRequest {
+func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceGetTeamGroup(ctx context.Context, id int64) ApiTeamPermissionsMgmtServiceGetTeamGroupRequest {
 	return ApiTeamPermissionsMgmtServiceGetTeamGroupRequest{
 		ApiService: a,
 		ctx: ctx,
-		groupIdId: groupIdId,
+		id: id,
 	}
 }
 
@@ -615,8 +615,8 @@ func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceG
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/aaa/team-groups/v1/{group_id.id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"group_id.id"+"}", url.PathEscape(parameterValueToString(r.groupIdId, "groupIdId")), -1)
+	localVarPath := localBasePath + "/aaa/team-groups/v1/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -782,7 +782,7 @@ func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceG
 type ApiTeamPermissionsMgmtServiceGetTeamGroupScopeRequest struct {
 	ctx context.Context
 	ApiService *TeamPermissionsManagementServiceAPIService
-	groupIdId int64
+	id int64
 }
 
 func (r ApiTeamPermissionsMgmtServiceGetTeamGroupScopeRequest) Execute() (*GetTeamGroupScopeResponse, *http.Response, error) {
@@ -795,14 +795,14 @@ TeamPermissionsMgmtServiceGetTeamGroupScope Get Team Group Scope
 No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupIdId
+ @param id
  @return ApiTeamPermissionsMgmtServiceGetTeamGroupScopeRequest
 */
-func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceGetTeamGroupScope(ctx context.Context, groupIdId int64) ApiTeamPermissionsMgmtServiceGetTeamGroupScopeRequest {
+func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceGetTeamGroupScope(ctx context.Context, id int64) ApiTeamPermissionsMgmtServiceGetTeamGroupScopeRequest {
 	return ApiTeamPermissionsMgmtServiceGetTeamGroupScopeRequest{
 		ApiService: a,
 		ctx: ctx,
-		groupIdId: groupIdId,
+		id: id,
 	}
 }
 
@@ -821,8 +821,8 @@ func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceG
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/teams/groups/{group_id.id}/scope"
-	localVarPath = strings.Replace(localVarPath, "{"+"group_id.id"+"}", url.PathEscape(parameterValueToString(r.groupIdId, "groupIdId")), -1)
+	localVarPath := localBasePath + "/v1/teams/groups/{id}/scope"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -993,7 +993,7 @@ func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceG
 type ApiTeamPermissionsMgmtServiceRemoveUsersFromTeamGroupRequest struct {
 	ctx context.Context
 	ApiService *TeamPermissionsManagementServiceAPIService
-	groupIdId int64
+	id int64
 	userIds *[]TeamPermissionsMgmtServiceRemoveUsersFromTeamGroupUserIdsParameterInner
 }
 
@@ -1012,14 +1012,14 @@ TeamPermissionsMgmtServiceRemoveUsersFromTeamGroup Remove Users From Team Group
 No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupIdId
+ @param id
  @return ApiTeamPermissionsMgmtServiceRemoveUsersFromTeamGroupRequest
 */
-func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceRemoveUsersFromTeamGroup(ctx context.Context, groupIdId int64) ApiTeamPermissionsMgmtServiceRemoveUsersFromTeamGroupRequest {
+func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceRemoveUsersFromTeamGroup(ctx context.Context, id int64) ApiTeamPermissionsMgmtServiceRemoveUsersFromTeamGroupRequest {
 	return ApiTeamPermissionsMgmtServiceRemoveUsersFromTeamGroupRequest{
 		ApiService: a,
 		ctx: ctx,
-		groupIdId: groupIdId,
+		id: id,
 	}
 }
 
@@ -1038,8 +1038,8 @@ func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceR
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/aaa/team-groups/v1/{group_id.id}/users"
-	localVarPath = strings.Replace(localVarPath, "{"+"group_id.id"+"}", url.PathEscape(parameterValueToString(r.groupIdId, "groupIdId")), -1)
+	localVarPath := localBasePath + "/aaa/team-groups/v1/{id}/users"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1238,7 +1238,7 @@ func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceR
 type ApiTeamPermissionsMgmtServiceSetTeamGroupScopeRequest struct {
 	ctx context.Context
 	ApiService *TeamPermissionsManagementServiceAPIService
-	groupIdId int64
+	id int64
 	setTeamGroupScopeRequest *SetTeamGroupScopeRequest
 }
 
@@ -1257,14 +1257,14 @@ TeamPermissionsMgmtServiceSetTeamGroupScope Set Team Group Scope
 No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupIdId
+ @param id
  @return ApiTeamPermissionsMgmtServiceSetTeamGroupScopeRequest
 */
-func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceSetTeamGroupScope(ctx context.Context, groupIdId int64) ApiTeamPermissionsMgmtServiceSetTeamGroupScopeRequest {
+func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceSetTeamGroupScope(ctx context.Context, id int64) ApiTeamPermissionsMgmtServiceSetTeamGroupScopeRequest {
 	return ApiTeamPermissionsMgmtServiceSetTeamGroupScopeRequest{
 		ApiService: a,
 		ctx: ctx,
-		groupIdId: groupIdId,
+		id: id,
 	}
 }
 
@@ -1283,8 +1283,8 @@ func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceS
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/teams/groups/{group_id.id}/scope"
-	localVarPath = strings.Replace(localVarPath, "{"+"group_id.id"+"}", url.PathEscape(parameterValueToString(r.groupIdId, "groupIdId")), -1)
+	localVarPath := localBasePath + "/v1/teams/groups/{id}/scope"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

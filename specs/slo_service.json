@@ -226,12 +226,12 @@
             "in": "query",
             "name": "ids",
             "schema": {
+              "example": [
+                "slo_id1",
+                "slo_id2"
+              ],
               "type": "array",
               "items": {
-                "example": [
-                  "slo_id1",
-                  "slo_id2"
-                ],
                 "type": "string"
               }
             },
@@ -391,12 +391,12 @@
         "type": "object",
         "properties": {
           "notFoundIds": {
+            "example": [
+              "slo_id1",
+              "slo_id2"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "slo_id1",
-                "slo_id2"
-              ],
               "type": "string"
             }
           },
@@ -811,12 +811,12 @@
             "type": "string"
           },
           "fieldValues": {
+            "example": [
+              "value1",
+              "value2"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "value1",
-                "value2"
-              ],
               "type": "string"
             }
           }

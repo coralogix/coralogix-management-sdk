@@ -59,7 +59,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SlosService_CreateSlo_request"
+              $ref: "#/components/schemas/SlosService_ReplaceSlo_request"
       responses:
         "200":
           content:
@@ -133,7 +133,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SlosService_CreateSlo_request"
+              $ref: "#/components/schemas/SlosService_ValidateReplaceSloAlerts_request"
       responses:
         "200":
           content:
@@ -306,6 +306,7 @@ paths:
         required: false
         schema:
           items:
+            example: ""
             type: string
           type: array
         style: form
@@ -1286,6 +1287,7 @@ components:
       properties:
         is:
           items:
+            example: ""
             type: string
           type: array
       title: IsFilterPredicate
@@ -1329,16 +1331,16 @@ components:
       - $ref: "#/components/schemas/SloWindowBasedMetricSli"
       - $ref: "#/components/schemas/SloRequestBasedMetricSli"
       type: object
-    SlosService_CreateSlo_request:
+    SlosService_ValidateReplaceSloAlerts_request:
       oneOf:
       - $ref: "#/components/schemas/SloRequestBasedMetricSli"
       - $ref: "#/components/schemas/SloWindowBasedMetricSli"
       type: object
     SlosService_BatchExecuteSlo_requests_parameter_inner:
       oneOf:
-      - $ref: "#/components/schemas/SloExecutionRequestCreateSloRequest"
       - $ref: "#/components/schemas/SloExecutionRequestReplaceSloRequest"
       - $ref: "#/components/schemas/SloExecutionRequestDeleteSloRequest"
+      - $ref: "#/components/schemas/SloExecutionRequestCreateSloRequest"
   securitySchemes:
     apiKeyAuth:
       description: API key authentication

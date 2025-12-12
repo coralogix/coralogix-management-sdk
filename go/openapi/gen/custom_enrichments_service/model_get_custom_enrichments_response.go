@@ -12,8 +12,6 @@ package custom_enrichments_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the GetCustomEnrichmentsResponse type satisfies the MappedNullable interface at compile time
@@ -21,18 +19,15 @@ var _ MappedNullable = &GetCustomEnrichmentsResponse{}
 
 // GetCustomEnrichmentsResponse This response data structure is obtained when all custom enrichments are retrieved
 type GetCustomEnrichmentsResponse struct {
-	CustomEnrichments []CustomEnrichment `json:"customEnrichments"`
+	CustomEnrichments []CustomEnrichment `json:"customEnrichments,omitempty"`
 }
-
-type _GetCustomEnrichmentsResponse GetCustomEnrichmentsResponse
 
 // NewGetCustomEnrichmentsResponse instantiates a new GetCustomEnrichmentsResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetCustomEnrichmentsResponse(customEnrichments []CustomEnrichment) *GetCustomEnrichmentsResponse {
+func NewGetCustomEnrichmentsResponse() *GetCustomEnrichmentsResponse {
 	this := GetCustomEnrichmentsResponse{}
-	this.CustomEnrichments = customEnrichments
 	return &this
 }
 
@@ -44,26 +39,34 @@ func NewGetCustomEnrichmentsResponseWithDefaults() *GetCustomEnrichmentsResponse
 	return &this
 }
 
-// GetCustomEnrichments returns the CustomEnrichments field value
+// GetCustomEnrichments returns the CustomEnrichments field value if set, zero value otherwise.
 func (o *GetCustomEnrichmentsResponse) GetCustomEnrichments() []CustomEnrichment {
-	if o == nil {
+	if o == nil || IsNil(o.CustomEnrichments) {
 		var ret []CustomEnrichment
 		return ret
 	}
-
 	return o.CustomEnrichments
 }
 
-// GetCustomEnrichmentsOk returns a tuple with the CustomEnrichments field value
+// GetCustomEnrichmentsOk returns a tuple with the CustomEnrichments field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetCustomEnrichmentsResponse) GetCustomEnrichmentsOk() ([]CustomEnrichment, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.CustomEnrichments) {
 		return nil, false
 	}
 	return o.CustomEnrichments, true
 }
 
-// SetCustomEnrichments sets field value
+// HasCustomEnrichments returns a boolean if a field has been set.
+func (o *GetCustomEnrichmentsResponse) HasCustomEnrichments() bool {
+	if o != nil && !IsNil(o.CustomEnrichments) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomEnrichments gets a reference to the given []CustomEnrichment and assigns it to the CustomEnrichments field.
 func (o *GetCustomEnrichmentsResponse) SetCustomEnrichments(v []CustomEnrichment) {
 	o.CustomEnrichments = v
 }
@@ -78,45 +81,10 @@ func (o GetCustomEnrichmentsResponse) MarshalJSON() ([]byte, error) {
 
 func (o GetCustomEnrichmentsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["customEnrichments"] = o.CustomEnrichments
+	if !IsNil(o.CustomEnrichments) {
+		toSerialize["customEnrichments"] = o.CustomEnrichments
+	}
 	return toSerialize, nil
-}
-
-func (o *GetCustomEnrichmentsResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"customEnrichments",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varGetCustomEnrichmentsResponse := _GetCustomEnrichmentsResponse{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetCustomEnrichmentsResponse)
-
-	if err != nil {
-		return err
-	}
-
-	*o = GetCustomEnrichmentsResponse(varGetCustomEnrichmentsResponse)
-
-	return err
 }
 
 type NullableGetCustomEnrichmentsResponse struct {

@@ -5,7 +5,7 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/v3/events": {
+    "/alerts/events/v3": {
       "get": {
         "tags": [
           "Events Service"
@@ -29,22 +29,22 @@
               "type": "object",
               "properties": {
                 "cxEventKeys": {
+                  "example": [
+                    "test_key"
+                  ],
                   "type": "array",
                   "items": {
-                    "example": [
-                      "test_key"
-                    ],
                     "type": "string"
                   }
                 },
                 "cxEventLabelsFilters": {},
                 "cxEventMetadataFilters": {},
                 "cxEventTypes": {
+                  "example": [
+                    "test_type"
+                  ],
                   "type": "array",
                   "items": {
-                    "example": [
-                      "test_type"
-                    ],
                     "type": "string"
                   }
                 },
@@ -129,7 +129,145 @@
         }
       }
     },
-    "/v3/events/events:batchGet": {
+    "/alerts/events/v3/alert-events": {
+      "get": {
+        "tags": [
+          "Events Service"
+        ],
+        "summary": "List Alert Events",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "EventsService_ListAlertEvents",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "alert_ids",
+            "schema": {
+              "example": [
+                "32144a8a-7ee0-4c16-a093-2bf1f9c12e1e"
+              ],
+              "type": "array",
+              "items": {
+                "description": "Alert version IDs to filter events by",
+                "type": "string"
+              }
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "timestamp_range",
+            "schema": {
+              "externalDocs": {
+                "url": ""
+              },
+              "title": "TimestampRange",
+              "description": "This data structure represents a timestamp range",
+              "type": "object",
+              "properties": {
+                "from": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "to": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              },
+              "required": [
+                "from",
+                "to"
+              ]
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "cx_event_labels",
+            "schema": {
+              "description": "Optional event labels to filter by (e.g., app, subsystem, region)",
+              "type": "object",
+              "additionalProperties": {
+                "example": "",
+                "type": "string"
+              }
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "order_bys",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "$ref": "#/components/schemas/events.v3.OrderByDirection"
+                  },
+                  "fieldName": {
+                    "$ref": "#/components/schemas/events.v3.OrderByFields"
+                  }
+                }
+              }
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "pagination",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "pageSize": {
+                  "example": 10,
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "pageToken": {
+                  "example": "test",
+                  "type": "string"
+                }
+              }
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListAlertEventsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/alerts/events/v3/batch": {
       "get": {
         "tags": [
           "Events Service"
@@ -234,7 +372,179 @@
         }
       }
     },
-    "/v3/events/{id}": {
+    "/alerts/events/v3/count": {
+      "get": {
+        "tags": [
+          "Events Service"
+        ],
+        "summary": "List Events Count",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "EventsService_ListEventsCount",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "externalDocs": {
+                "url": ""
+              },
+              "title": "EventsFilter",
+              "description": "This data structure represents an events filter",
+              "type": "object",
+              "properties": {
+                "cxEventKeys": {
+                  "example": [
+                    "test_key"
+                  ],
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "cxEventLabelsFilters": {},
+                "cxEventMetadataFilters": {},
+                "cxEventTypes": {
+                  "example": [
+                    "test_type"
+                  ],
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "timestamp": {}
+              },
+              "required": [
+                "timestamp",
+                "cxEventTypes",
+                "cxEventKeys"
+              ]
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListEventsCountResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/alerts/events/v3/statistics": {
+      "get": {
+        "tags": [
+          "Events Service"
+        ],
+        "summary": "Get Events Statistics",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "EventsService_GetEventsStatistics",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "externalDocs": {
+                "url": ""
+              },
+              "title": "EventsFilter",
+              "description": "This data structure represents an events filter",
+              "type": "object",
+              "properties": {
+                "cxEventKeys": {
+                  "example": [
+                    "test_key"
+                  ],
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "cxEventLabelsFilters": {},
+                "cxEventMetadataFilters": {},
+                "cxEventTypes": {
+                  "example": [
+                    "test_type"
+                  ],
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "timestamp": {}
+              },
+              "required": [
+                "timestamp",
+                "cxEventTypes",
+                "cxEventKeys"
+              ]
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetEventsStatisticsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/alerts/events/v3/{id}": {
       "get": {
         "tags": [
           "Events Service"
@@ -302,178 +612,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/v3.GetEventResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/v3/events:count": {
-      "get": {
-        "tags": [
-          "Events Service"
-        ],
-        "summary": "List Events Count",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "EventsService_ListEventsCount",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "filter",
-            "schema": {
-              "externalDocs": {
-                "url": ""
-              },
-              "title": "EventsFilter",
-              "description": "This data structure represents an events filter",
-              "type": "object",
-              "properties": {
-                "cxEventKeys": {
-                  "type": "array",
-                  "items": {
-                    "example": [
-                      "test_key"
-                    ],
-                    "type": "string"
-                  }
-                },
-                "cxEventLabelsFilters": {},
-                "cxEventMetadataFilters": {},
-                "cxEventTypes": {
-                  "type": "array",
-                  "items": {
-                    "example": [
-                      "test_type"
-                    ],
-                    "type": "string"
-                  }
-                },
-                "timestamp": {}
-              },
-              "required": [
-                "timestamp",
-                "cxEventTypes",
-                "cxEventKeys"
-              ]
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ListEventsCountResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/v3/events:statistics": {
-      "get": {
-        "tags": [
-          "Events Service"
-        ],
-        "summary": "Get Events Statistics",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "EventsService_GetEventsStatistics",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "filter",
-            "schema": {
-              "externalDocs": {
-                "url": ""
-              },
-              "title": "EventsFilter",
-              "description": "This data structure represents an events filter",
-              "type": "object",
-              "properties": {
-                "cxEventKeys": {
-                  "type": "array",
-                  "items": {
-                    "example": [
-                      "test_key"
-                    ],
-                    "type": "string"
-                  }
-                },
-                "cxEventLabelsFilters": {},
-                "cxEventMetadataFilters": {},
-                "cxEventTypes": {
-                  "type": "array",
-                  "items": {
-                    "example": [
-                      "test_type"
-                    ],
-                    "type": "string"
-                  }
-                },
-                "timestamp": {}
-              },
-              "required": [
-                "timestamp",
-                "cxEventTypes",
-                "cxEventKeys"
-              ]
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetEventsStatisticsResponse"
                 }
               }
             }
@@ -572,27 +710,18 @@
             "type": "string"
           },
           "cxEventLabels": {
-            "example": {
-              "test": "test"
-            },
             "type": "object",
             "additionalProperties": {
               "type": "string"
             }
           },
           "cxEventMetadata": {
-            "example": {
-              "test": "test"
-            },
             "type": "object",
             "additionalProperties": {
               "type": "string"
             }
           },
           "cxEventPayload": {
-            "example": {
-              "test": "test"
-            },
             "type": "object"
           },
           "cxEventPayloadType": {
@@ -600,7 +729,7 @@
             "type": "string"
           },
           "cxEventTimestamp": {
-            "example": 1714857600,
+            "example": "1714857600",
             "type": "string",
             "format": "date-time"
           },
@@ -661,9 +790,6 @@
             "$ref": "#/components/schemas/CxEventArray"
           }
         },
-        "required": [
-          "event"
-        ],
         "additionalProperties": false
       },
       "CxEventSingleOrMultipleSingleEvent": {
@@ -678,9 +804,6 @@
             "$ref": "#/components/schemas/CxEvent"
           }
         },
-        "required": [
-          "event"
-        ],
         "additionalProperties": false
       },
       "FieldGroup": {
@@ -807,6 +930,28 @@
           "cxEventMetadataFieldStatisticscxEventLabelsFieldStatistics"
         ]
       },
+      "ListAlertEventsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "ListAlertEventsResponse",
+        "description": "Response containing events associated with the alert",
+        "type": "object",
+        "properties": {
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CxEvent"
+            }
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/events.v3.PaginationResponse"
+          }
+        },
+        "required": [
+          "events"
+        ]
+      },
       "ListEventsCountResponse": {
         "externalDocs": {
           "url": ""
@@ -816,7 +961,7 @@
         "type": "object",
         "properties": {
           "count": {
-            "example": 10,
+            "example": "10",
             "type": "string",
             "format": "uint64"
           },
