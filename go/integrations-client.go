@@ -87,7 +87,7 @@ type IntegrationParameterSensitiveData = ext.Parameter_SensitiveData
 type IntegrationTestSuccess = ext.TestIntegrationResult_Success_
 
 // IntegrationTestFail indicates whether a test was a failure
-type IntegrationTestFail = ext.TestIntegrationResult_Failure_
+type IntegrationTestFail = ext.TestIntegrationResult_Failure
 
 // IntegrationDetailsDefault the type for all registered instances
 type IntegrationDetailsDefault = ext.IntegrationDetails_Default
