@@ -111,15 +111,17 @@ func TestEnrichmentsCustom(t *testing.T) {
 
 	data, httpResp, err := customEClient.
 		CustomEnrichmentServiceCreateCustomEnrichment(context.Background()).
-		Name(name).
-		Description(name).
-		File(custom_enrichments_service.
-			CustomEnrichmentServiceCreateCustomEnrichmentFileParameter{
-			FileTextual: &custom_enrichments_service.FileTextual{
-				Extension: &ext,
-				Name:      &name,
-				Textual:   &contents,
+		CreateCustomEnrichmentRequest(custom_enrichments_service.
+			CreateCustomEnrichmentRequest{
+			File: custom_enrichments_service.File{
+				FileTextual: &custom_enrichments_service.FileTextual{
+					Extension: &ext,
+					Name:      &name,
+					Textual:   &contents,
+				},
 			},
+			Description: name,
+			Name:        name,
 		}).
 		Execute()
 
