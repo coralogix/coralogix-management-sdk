@@ -91,7 +91,7 @@ func getRequestBasedSlo(name string) *slos.SloRequestBasedMetricSli {
 		TargetThresholdPercentage: target,
 		RequestBasedMetricSli: &slos.RequestBasedMetricSli{
 			GoodEvents: slos.Metric{
-				Query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)",
+				Query: "avg(rate(cpu_usage_seconds_total[1m])) by (instance)",
 			},
 			TotalEvents: slos.Metric{
 				Query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)",
