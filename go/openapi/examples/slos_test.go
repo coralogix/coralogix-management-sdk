@@ -94,7 +94,7 @@ func getRequestBasedSlo(name string) *slos.SloRequestBasedMetricSli {
 				Query: "avg(rate(cpu_usage_seconds_total[1m])) by (instance)",
 			},
 			TotalEvents: slos.Metric{
-				Query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)",
+				Query: "avg(rate(cpu_usage_seconds_total[1m])) by (instance)",
 			},
 		},
 		SloTimeFrame: slos.SLOTIMEFRAME_SLO_TIME_FRAME_7_DAYS.Ptr(),
