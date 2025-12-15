@@ -117,8 +117,8 @@ commit_hash = "155abd2f2f18deca869cac0cd0d175201b75f758"
 [[dependencies]]
 name = "cx-api-quota"
 url = "github.com/coralogix/cx-api-quota"
-revision = "v0.0.17"
-commit_hash = "f3976a2bf8b4494948977717983f034f7bcd030d"
+revision = "v0.0.18"
+commit_hash = "d3201300c0a4a47f2641c9174685a67087046407"
 
 [[dependencies]]
 name = "cx-api-scopes"
@@ -137,6 +137,12 @@ name = "cx-api-views"
 url = "github.com/coralogix/cx-api-views"
 revision = "v1.12"
 commit_hash = "500a28e2a68808cb1249c7d85a59d2331c137c26"
+
+[[dependencies]]
+name = "cx-management-apis"
+url = "github.com/coralogix/cx-management-apis"
+branch = "master"
+commit_hash = "0c46c752bb4c314f1e8c06a7ebf159263c4e01b4"
 
 [[dependencies]]
 name = "global-mapping"
