@@ -5,7 +5,7 @@ info:
 servers:
 - url: /
 paths:
-  /v3/events:
+  /alerts/events/v3:
     get:
       description: No description available
       externalDocs:
@@ -57,7 +57,83 @@ paths:
       summary: List Events
       tags:
       - Events Service
-  /v3/events/events:batchGet:
+  /alerts/events/v3/alert-events:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: EventsService_ListAlertEvents
+      parameters:
+      - explode: true
+        in: query
+        name: alert_ids
+        required: false
+        schema:
+          example:
+          - 32144a8a-7ee0-4c16-a093-2bf1f9c12e1e
+          items:
+            description: Alert version IDs to filter events by
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: timestamp_range
+        required: false
+        schema:
+          $ref: "#/components/schemas/TimestampRange"
+        style: form
+      - explode: true
+        in: query
+        name: cx_event_labels
+        required: false
+        schema:
+          additionalProperties:
+            example: ""
+            type: string
+          description: "Optional event labels to filter by (e.g., app, subsystem,\
+            \ region)"
+          type: object
+        style: form
+      - explode: true
+        in: query
+        name: order_bys
+        required: false
+        schema:
+          items:
+            $ref: "#/components/schemas/EventsService_ListEvents_order_bys_parameter_inner"
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: pagination
+        required: false
+        schema:
+          $ref: "#/components/schemas/EventsService_ListEvents_pagination_parameter"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAlertEventsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List Alert Events
+      tags:
+      - Events Service
+  /alerts/events/v3/batch:
     get:
       description: No description available
       externalDocs:
@@ -118,7 +194,79 @@ paths:
       summary: Batch Get Event
       tags:
       - Events Service
-  /v3/events/{id}:
+  /alerts/events/v3/count:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: EventsService_ListEventsCount
+      parameters:
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          $ref: "#/components/schemas/EventsFilter"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListEventsCountResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List Events Count
+      tags:
+      - Events Service
+  /alerts/events/v3/statistics:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: EventsService_GetEventsStatistics
+      parameters:
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          $ref: "#/components/schemas/EventsFilter"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetEventsStatisticsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Events Statistics
+      tags:
+      - Events Service
+  /alerts/events/v3/{id}:
     get:
       description: No description available
       externalDocs:
@@ -171,78 +319,6 @@ paths:
       summary: Get Event
       tags:
       - Events Service
-  /v3/events:count:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: EventsService_ListEventsCount
-      parameters:
-      - explode: true
-        in: query
-        name: filter
-        required: false
-        schema:
-          $ref: "#/components/schemas/EventsFilter"
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListEventsCountResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: List Events Count
-      tags:
-      - Events Service
-  /v3/events:statistics:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: EventsService_GetEventsStatistics
-      parameters:
-      - explode: true
-        in: query
-        name: filter
-        required: false
-        schema:
-          $ref: "#/components/schemas/EventsFilter"
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetEventsStatisticsResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Get Events Statistics
-      tags:
-      - Events Service
 components:
   schemas:
     BatchGetEventResponse:
@@ -261,25 +337,23 @@ components:
                 companyId: 1
                 cxEventKey: test
                 cxEventMetadata:
-                  test: test
-                cxEventPayload:
-                  test: test
+                  key: cxEventMetadata
+                cxEventPayload: "{}"
                 cxEventPayloadType: test_payload_type
                 cxEventDedupKey: test_dedup_key
                 cxEventLabels:
-                  test: test
+                  key: cxEventLabels
                 cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
               - cxEventType: test_type
                 companyId: 1
                 cxEventKey: test
                 cxEventMetadata:
-                  test: test
-                cxEventPayload:
-                  test: test
+                  key: cxEventMetadata
+                cxEventPayload: "{}"
                 cxEventPayloadType: test_payload_type
                 cxEventDedupKey: test_dedup_key
                 cxEventLabels:
-                  test: test
+                  key: cxEventLabels
                 cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         events:
@@ -318,13 +392,12 @@ components:
         companyId: 1
         cxEventKey: test
         cxEventMetadata:
-          test: test
-        cxEventPayload:
-          test: test
+          key: cxEventMetadata
+        cxEventPayload: "{}"
         cxEventPayloadType: test_payload_type
         cxEventDedupKey: test_dedup_key
         cxEventLabels:
-          test: test
+          key: cxEventLabels
         cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about events
@@ -343,18 +416,12 @@ components:
         cxEventLabels:
           additionalProperties:
             type: string
-          example:
-            test: test
           type: object
         cxEventMetadata:
           additionalProperties:
             type: string
-          example:
-            test: test
           type: object
         cxEventPayload:
-          example:
-            test: test
           type: object
         cxEventPayloadType:
           example: test_payload_type
@@ -383,25 +450,23 @@ components:
           companyId: 1
           cxEventKey: test
           cxEventMetadata:
-            test: test
-          cxEventPayload:
-            test: test
+            key: cxEventMetadata
+          cxEventPayload: "{}"
           cxEventPayloadType: test_payload_type
           cxEventDedupKey: test_dedup_key
           cxEventLabels:
-            test: test
+            key: cxEventLabels
           cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
         - cxEventType: test_type
           companyId: 1
           cxEventKey: test
           cxEventMetadata:
-            test: test
-          cxEventPayload:
-            test: test
+            key: cxEventMetadata
+          cxEventPayload: "{}"
           cxEventPayloadType: test_payload_type
           cxEventDedupKey: test_dedup_key
           cxEventLabels:
-            test: test
+            key: cxEventLabels
           cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about events
@@ -429,33 +494,29 @@ components:
             companyId: 1
             cxEventKey: test
             cxEventMetadata:
-              test: test
-            cxEventPayload:
-              test: test
+              key: cxEventMetadata
+            cxEventPayload: "{}"
             cxEventPayloadType: test_payload_type
             cxEventDedupKey: test_dedup_key
             cxEventLabels:
-              test: test
+              key: cxEventLabels
             cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
           - cxEventType: test_type
             companyId: 1
             cxEventKey: test
             cxEventMetadata:
-              test: test
-            cxEventPayload:
-              test: test
+              key: cxEventMetadata
+            cxEventPayload: "{}"
             cxEventPayloadType: test_payload_type
             cxEventDedupKey: test_dedup_key
             cxEventLabels:
-              test: test
+              key: cxEventLabels
             cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
       properties:
         multipleEvents:
           $ref: "#/components/schemas/CxEventArray"
-      required:
-      - event
       title: CxEventSingleOrMultiple
       type: object
     CxEventSingleOrMultipleSingleEvent:
@@ -466,8 +527,6 @@ components:
       properties:
         singleEvent:
           $ref: "#/components/schemas/CxEvent"
-      required:
-      - event
       title: CxEventSingleOrMultiple
       type: object
     FieldGroup:
@@ -565,6 +624,48 @@ components:
       - cxEventMetadataFieldStatisticscxEventLabelsFieldStatistics
       title: GetEventsStatisticsResponse
       type: object
+    ListAlertEventsResponse:
+      description: Response containing events associated with the alert
+      example:
+        pagination:
+          totalSize: 10
+          nextPageToken: test
+        events:
+        - cxEventType: test_type
+          companyId: 1
+          cxEventKey: test
+          cxEventMetadata:
+            key: cxEventMetadata
+          cxEventPayload: "{}"
+          cxEventPayloadType: test_payload_type
+          cxEventDedupKey: test_dedup_key
+          cxEventLabels:
+            key: cxEventLabels
+          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+        - cxEventType: test_type
+          companyId: 1
+          cxEventKey: test
+          cxEventMetadata:
+            key: cxEventMetadata
+          cxEventPayload: "{}"
+          cxEventPayloadType: test_payload_type
+          cxEventDedupKey: test_dedup_key
+          cxEventLabels:
+            key: cxEventLabels
+          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        events:
+          items:
+            $ref: "#/components/schemas/CxEvent"
+          type: array
+        pagination:
+          $ref: "#/components/schemas/events.v3.PaginationResponse"
+      required:
+      - events
+      title: ListAlertEventsResponse
+      type: object
     ListEventsCountResponse:
       description: This data structure represents a response to list events count
       example:
@@ -652,25 +753,23 @@ components:
               companyId: 1
               cxEventKey: test
               cxEventMetadata:
-                test: test
-              cxEventPayload:
-                test: test
+                key: cxEventMetadata
+              cxEventPayload: "{}"
               cxEventPayloadType: test_payload_type
               cxEventDedupKey: test_dedup_key
               cxEventLabels:
-                test: test
+                key: cxEventLabels
               cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
             - cxEventType: test_type
               companyId: 1
               cxEventKey: test
               cxEventMetadata:
-                test: test
-              cxEventPayload:
-                test: test
+                key: cxEventMetadata
+              cxEventPayload: "{}"
               cxEventPayloadType: test_payload_type
               cxEventDedupKey: test_dedup_key
               cxEventLabels:
-                test: test
+                key: cxEventLabels
               cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         event:
@@ -689,25 +788,23 @@ components:
           companyId: 1
           cxEventKey: test
           cxEventMetadata:
-            test: test
-          cxEventPayload:
-            test: test
+            key: cxEventMetadata
+          cxEventPayload: "{}"
           cxEventPayloadType: test_payload_type
           cxEventDedupKey: test_dedup_key
           cxEventLabels:
-            test: test
+            key: cxEventLabels
           cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
         - cxEventType: test_type
           companyId: 1
           cxEventKey: test
           cxEventMetadata:
-            test: test
-          cxEventPayload:
-            test: test
+            key: cxEventMetadata
+          cxEventPayload: "{}"
           cxEventPayloadType: test_payload_type
           cxEventDedupKey: test_dedup_key
           cxEventLabels:
-            test: test
+            key: cxEventLabels
           cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
@@ -728,15 +825,17 @@ components:
         url: ""
       properties:
         cxEventKeys:
+          example:
+          - test_key
           items:
-            example: "[\"test_key\"]"
             type: string
           type: array
         cxEventLabelsFilters: {}
         cxEventMetadataFilters: {}
         cxEventTypes:
+          example:
+          - test_type
           items:
-            example: "[\"test_type\"]"
             type: string
           type: array
         timestamp: {}
@@ -762,6 +861,22 @@ components:
         pageToken:
           example: test
           type: string
+      type: object
+    TimestampRange:
+      description: This data structure represents a timestamp range
+      externalDocs:
+        url: ""
+      properties:
+        from:
+          format: date-time
+          type: string
+        to:
+          format: date-time
+          type: string
+      required:
+      - from
+      - to
+      title: TimestampRange
       type: object
     EventsService_BatchGetEvent_filter_parameter:
       properties:

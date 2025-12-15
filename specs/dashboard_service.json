@@ -1110,16 +1110,16 @@
       "BarChart.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/BarChartQueryLogs"
-          },
-          {
-            "$ref": "#/components/schemas/BarChartQuerySpans"
-          },
-          {
             "$ref": "#/components/schemas/BarChartQueryMetrics"
           },
           {
             "$ref": "#/components/schemas/BarChartQueryDataprime"
+          },
+          {
+            "$ref": "#/components/schemas/BarChartQueryLogs"
+          },
+          {
+            "$ref": "#/components/schemas/BarChartQuerySpans"
           }
         ]
       },
@@ -1324,16 +1324,10 @@
             "$ref": "#/components/schemas/SectionColor"
           },
           "description": {
-            "example": {
-              "value": "Section with important statistics"
-            },
             "description": "Short description of a section",
             "type": "string"
           },
           "name": {
-            "example": {
-              "value": "Main stats section"
-            },
             "description": "Section custom name",
             "type": "string"
           },
@@ -1345,22 +1339,16 @@
       "Dashboard": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DashboardTwoMinutesFolderPathAbsoluteTimeFrame"
-          },
-          {
-            "$ref": "#/components/schemas/DashboardTwoMinutesFolderPathRelativeTimeFrame"
-          },
-          {
-            "$ref": "#/components/schemas/DashboardFiveMinutesFolderIdAbsoluteTimeFrame"
+            "$ref": "#/components/schemas/DashboardOffFolderIdAbsoluteTimeFrame"
           },
           {
             "$ref": "#/components/schemas/DashboardOffFolderIdRelativeTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardTwoMinutesFolderIdAbsoluteTimeFrame"
+            "$ref": "#/components/schemas/DashboardTwoMinutesFolderPathAbsoluteTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardTwoMinutesFolderIdRelativeTimeFrame"
+            "$ref": "#/components/schemas/DashboardTwoMinutesFolderPathRelativeTimeFrame"
           },
           {
             "$ref": "#/components/schemas/DashboardFiveMinutesFolderIdRelativeTimeFrame"
@@ -1369,16 +1357,22 @@
             "$ref": "#/components/schemas/DashboardFiveMinutesFolderPathAbsoluteTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardFiveMinutesFolderPathRelativeTimeFrame"
-          },
-          {
-            "$ref": "#/components/schemas/DashboardOffFolderIdAbsoluteTimeFrame"
-          },
-          {
             "$ref": "#/components/schemas/DashboardOffFolderPathAbsoluteTimeFrame"
           },
           {
             "$ref": "#/components/schemas/DashboardOffFolderPathRelativeTimeFrame"
+          },
+          {
+            "$ref": "#/components/schemas/DashboardTwoMinutesFolderIdAbsoluteTimeFrame"
+          },
+          {
+            "$ref": "#/components/schemas/DashboardTwoMinutesFolderIdRelativeTimeFrame"
+          },
+          {
+            "$ref": "#/components/schemas/DashboardFiveMinutesFolderIdAbsoluteTimeFrame"
+          },
+          {
+            "$ref": "#/components/schemas/DashboardFiveMinutesFolderPathRelativeTimeFrame"
           }
         ]
       },
@@ -2452,9 +2446,6 @@
         "type": "object",
         "properties": {
           "field": {
-            "example": {
-              "value": "coralogix.metadata.applicationName"
-            },
             "description": "Name of the field to display in the column",
             "type": "string"
           },
@@ -2784,16 +2775,16 @@
       "Dynamic.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DynamicQueryMetrics"
-          },
-          {
-            "$ref": "#/components/schemas/DynamicQueryDataprime"
-          },
-          {
             "$ref": "#/components/schemas/DynamicQueryLogs"
           },
           {
             "$ref": "#/components/schemas/DynamicQuerySpans"
+          },
+          {
+            "$ref": "#/components/schemas/DynamicQueryMetrics"
+          },
+          {
+            "$ref": "#/components/schemas/DynamicQueryDataprime"
           }
         ]
       },
@@ -3034,10 +3025,10 @@
       "Filter.Operator": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterOperatorNotEquals"
+            "$ref": "#/components/schemas/FilterOperatorEquals"
           },
           {
-            "$ref": "#/components/schemas/FilterOperatorEquals"
+            "$ref": "#/components/schemas/FilterOperatorNotEquals"
           }
         ]
       },
@@ -3602,9 +3593,6 @@
             "format": "float"
           },
           "customUnit": {
-            "example": {
-              "value": "rpm"
-            },
             "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
             "type": "string"
           },
@@ -3671,9 +3659,6 @@
             }
           },
           "messageTemplate": {
-            "example": {
-              "value": "value = {{_count}}"
-            },
             "description": "Custom template for the heatmap tooltip",
             "type": "string"
           }
@@ -3683,9 +3668,6 @@
         "type": "object",
         "properties": {
           "customUnit": {
-            "example": {
-              "value": "rpm"
-            },
             "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)",
             "type": "string"
           },
@@ -3890,9 +3872,6 @@
             }
           },
           "customUnit": {
-            "example": {
-              "value": "rpm"
-            },
             "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)",
             "type": "string"
           },
@@ -3977,9 +3956,6 @@
         "type": "object",
         "properties": {
           "colorScheme": {
-            "example": {
-              "value": "classic"
-            },
             "description": "Applied color scheme, one of the predefined values",
             "type": "string"
           },
@@ -3987,9 +3963,6 @@
             "$ref": "#/components/schemas/ColorsBy"
           },
           "customUnit": {
-            "example": {
-              "value": "mph"
-            },
             "description": "Custom unit (requires to have unit field set to custom to take effect)",
             "type": "string"
           },
@@ -4012,9 +3985,6 @@
             "type": "boolean"
           },
           "groupNameTemplate": {
-            "example": {
-              "value": "Result - {{ variable }}"
-            },
             "description": "Custom template name for a bar group, can contain variables",
             "type": "string"
           },
@@ -4187,16 +4157,16 @@
       "HorizontalBarChart.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/HorizontalBarChartQueryMetrics"
-          },
-          {
-            "$ref": "#/components/schemas/HorizontalBarChartQueryDataprime"
-          },
-          {
             "$ref": "#/components/schemas/HorizontalBarChartQueryLogs"
           },
           {
             "$ref": "#/components/schemas/HorizontalBarChartQuerySpans"
+          },
+          {
+            "$ref": "#/components/schemas/HorizontalBarChartQueryMetrics"
+          },
+          {
+            "$ref": "#/components/schemas/HorizontalBarChartQueryDataprime"
           }
         ]
       },
@@ -4260,10 +4230,10 @@
       "HorizontalBarChart.YAxisViewBy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/HorizontalBarChartYAxisViewByValue"
+            "$ref": "#/components/schemas/HorizontalBarChartYAxisViewByCategory"
           },
           {
-            "$ref": "#/components/schemas/HorizontalBarChartYAxisViewByCategory"
+            "$ref": "#/components/schemas/HorizontalBarChartYAxisViewByValue"
           }
         ]
       },
@@ -4336,9 +4306,6 @@
             }
           },
           "colorScheme": {
-            "example": {
-              "value": "classic"
-            },
             "description": "Applied color scheme, one of the predefined values",
             "type": "string"
           },
@@ -4346,9 +4313,6 @@
             "$ref": "#/components/schemas/ColorsBy"
           },
           "customUnit": {
-            "example": {
-              "value": "mph"
-            },
             "description": "Custom unit (requires to have unit field set to custom to take effect)",
             "type": "string"
           },
@@ -4363,9 +4327,6 @@
             "type": "boolean"
           },
           "groupNameTemplate": {
-            "example": {
-              "value": "Slice - {{ variable }}"
-            },
             "description": "Custom template name for a group, can contain variables",
             "type": "string"
           },
@@ -4479,6 +4440,11 @@
         "type": "object",
         "properties": {
           "columns": {
+            "example": [
+              1,
+              2,
+              6
+            ],
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LegendColumn"
@@ -4753,16 +4719,10 @@
             "$ref": "#/components/schemas/UUID"
           },
           "name": {
-            "example": {
-              "value": "My custom link"
-            },
             "description": "Name of the link action",
             "type": "string"
           },
           "url": {
-            "example": {
-              "value": "https://coralogix.com/#/dashboards/{{$p.dashboardId}}?severity={{severity}}"
-            },
             "description": "Static URL that may contain variables using {{variable_name}} syntax",
             "type": "string"
           }
@@ -4816,6 +4776,12 @@
       "LogsAggregation": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/LogsAggregationPercentile"
+          },
+          {
+            "$ref": "#/components/schemas/LogsAggregationCount"
+          },
+          {
             "$ref": "#/components/schemas/LogsAggregationCountDistinct"
           },
           {
@@ -4829,12 +4795,6 @@
           },
           {
             "$ref": "#/components/schemas/LogsAggregationMax"
-          },
-          {
-            "$ref": "#/components/schemas/LogsAggregationPercentile"
-          },
-          {
-            "$ref": "#/components/schemas/LogsAggregationCount"
           }
         ]
       },
@@ -4919,9 +4879,6 @@
             "$ref": "#/components/schemas/LogsAggregation"
           },
           "id": {
-            "example": {
-              "value": "52d192ac-a28f-4c51-97f5-5ba004249ba1"
-            },
             "description": "Aggregation unique identifier",
             "type": "string"
           },
@@ -5148,16 +5105,10 @@
         "type": "object",
         "properties": {
           "markdownText": {
-            "example": {
-              "value": "# This is a markdown example"
-            },
             "description": "Markdown text",
             "type": "string"
           },
           "tooltipText": {
-            "example": {
-              "value": "This is a description in a tooltip"
-            },
             "description": "Tooltip text to display on widget hover",
             "type": "string"
           }
@@ -5419,6 +5370,12 @@
       "MultiSelect.Source": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/MultiSelectSourceSpanField"
+          },
+          {
+            "$ref": "#/components/schemas/MultiSelectSourceQuery"
+          },
+          {
             "$ref": "#/components/schemas/MultiSelectSourceLogsPath"
           },
           {
@@ -5426,12 +5383,6 @@
           },
           {
             "$ref": "#/components/schemas/MultiSelectSourceConstantList"
-          },
-          {
-            "$ref": "#/components/schemas/MultiSelectSourceSpanField"
-          },
-          {
-            "$ref": "#/components/schemas/MultiSelectSourceQuery"
           }
         ]
       },
@@ -5539,10 +5490,10 @@
       "MultiStringValue": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/MultiStringValueList"
+            "$ref": "#/components/schemas/MultiStringValueAll"
           },
           {
-            "$ref": "#/components/schemas/MultiStringValueAll"
+            "$ref": "#/components/schemas/MultiStringValueList"
           }
         ]
       },
@@ -5646,9 +5597,6 @@
         "type": "object",
         "properties": {
           "field": {
-            "example": {
-              "value": "coralogix.metadata.applicationName"
-            },
             "description": "Field name to order by",
             "type": "string"
           },
@@ -5795,6 +5743,9 @@
       "PieChart.Query": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/PieChartQueryDataprime"
+          },
+          {
             "$ref": "#/components/schemas/PieChartQueryLogs"
           },
           {
@@ -5802,9 +5753,6 @@
           },
           {
             "$ref": "#/components/schemas/PieChartQueryMetrics"
-          },
-          {
-            "$ref": "#/components/schemas/PieChartQueryDataprime"
           }
         ]
       },
@@ -5860,9 +5808,6 @@
             "format": "int32"
           },
           "stackNameTemplate": {
-            "example": {
-              "value": "Slice {{ group }} - subslice {{ subgroup }}"
-            },
             "description": "Custom template name of an individual slice in the stack",
             "type": "string"
           }
@@ -5981,9 +5926,6 @@
         "type": "object",
         "properties": {
           "regexExtract": {
-            "example": {
-              "value": "gr[ae]y"
-            },
             "description": "Value of Regex Extract property, a regex string",
             "type": "string"
           }
@@ -6023,17 +5965,11 @@
         "type": "object",
         "properties": {
           "max": {
-            "example": {
-              "value": 5000
-            },
             "description": "A maximum value used in relative thresholds to calculate the threshold levels",
             "type": "number",
             "format": "double"
           },
           "min": {
-            "example": {
-              "value": 0
-            },
             "description": "A minimum value used in relative thresholds to calculate the threshold levels",
             "type": "number",
             "format": "double"
@@ -6058,32 +5994,20 @@
             "type": "boolean"
           },
           "customUnit": {
-            "example": {
-              "value": "rpm"
-            },
             "description": "Custom unit (requires to set unit field as 'custom' to take effect)",
             "type": "string"
           },
           "decimalPrecision": {
-            "example": {
-              "value": 4
-            },
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32"
           },
           "max": {
-            "example": {
-              "value": 10000
-            },
             "description": "A maximum value used in percentage type unit (UNIT_PERCENT) for calculating displayed value",
             "type": "number",
             "format": "double"
           },
           "min": {
-            "example": {
-              "value": 0
-            },
             "description": "A minimum value used in percentage type unit (UNIT_PERCENT) for calculating displayed value",
             "type": "number",
             "format": "double"
@@ -6104,10 +6028,10 @@
       "Query.LogsQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QueryLogsQueryTypeFieldValue"
+            "$ref": "#/components/schemas/QueryLogsQueryTypeFieldName"
           },
           {
-            "$ref": "#/components/schemas/QueryLogsQueryTypeFieldName"
+            "$ref": "#/components/schemas/QueryLogsQueryTypeFieldValue"
           }
         ]
       },
@@ -6168,10 +6092,10 @@
       "Query.MetricsQuery.Operator": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QueryMetricsQueryOperatorEquals"
+            "$ref": "#/components/schemas/QueryMetricsQueryOperatorNotEquals"
           },
           {
-            "$ref": "#/components/schemas/QueryMetricsQueryOperatorNotEquals"
+            "$ref": "#/components/schemas/QueryMetricsQueryOperatorEquals"
           }
         ]
       },
@@ -6197,23 +6121,23 @@
       "Query.MetricsQuery.StringOrVariable": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QueryMetricsQueryStringOrVariableStringValue"
+            "$ref": "#/components/schemas/QueryMetricsQueryStringOrVariableVariableName"
           },
           {
-            "$ref": "#/components/schemas/QueryMetricsQueryStringOrVariableVariableName"
+            "$ref": "#/components/schemas/QueryMetricsQueryStringOrVariableStringValue"
           }
         ]
       },
       "Query.MetricsQuery.Type": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/QueryMetricsQueryTypeLabelValue"
+          },
+          {
             "$ref": "#/components/schemas/QueryMetricsQueryTypeMetricName"
           },
           {
             "$ref": "#/components/schemas/QueryMetricsQueryTypeLabelName"
-          },
-          {
-            "$ref": "#/components/schemas/QueryMetricsQueryTypeLabelValue"
           }
         ]
       },
@@ -6261,10 +6185,10 @@
       "Query.SpansQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QuerySpansQueryTypeFieldName"
+            "$ref": "#/components/schemas/QuerySpansQueryTypeFieldValue"
           },
           {
-            "$ref": "#/components/schemas/QuerySpansQueryTypeFieldValue"
+            "$ref": "#/components/schemas/QuerySpansQueryTypeFieldName"
           }
         ]
       },
@@ -6296,16 +6220,10 @@
         "type": "object",
         "properties": {
           "colorScheme": {
-            "example": {
-              "value": "classic"
-            },
             "description": "Applied color scheme for this query, one of the predefined values",
             "type": "string"
           },
           "customUnit": {
-            "example": {
-              "value": "rpm"
-            },
             "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
             "type": "string"
           },
@@ -6329,9 +6247,6 @@
             "type": "boolean"
           },
           "id": {
-            "example": {
-              "value": "73c65643-91d5-dba2-35cd-baa49dc65331"
-            },
             "description": "Unique id of the query definition",
             "type": "string"
           },
@@ -6341,9 +6256,6 @@
             "type": "boolean"
           },
           "name": {
-            "example": {
-              "value": "Query A"
-            },
             "description": "Custom name of the query",
             "type": "string"
           },
@@ -6357,17 +6269,11 @@
             "$ref": "#/components/schemas/ScaleType"
           },
           "seriesCountLimit": {
-            "example": {
-              "value": 50
-            },
             "description": "Max count of the series per query",
             "type": "string",
             "format": "int64"
           },
           "seriesNameTemplate": {
-            "example": {
-              "value": "Trace of {{ application }}"
-            },
             "description": "Custom template for the series name",
             "type": "string"
           },
@@ -6868,9 +6774,6 @@
         "type": "object",
         "properties": {
           "height": {
-            "example": {
-              "value": 16
-            },
             "description": "Height of a row, defined as a multiplier number of the base height, where 1 = 1 * base height, 2 = 2 * base height etc",
             "type": "integer",
             "format": "int32"
@@ -7030,13 +6933,13 @@
       "SpanField": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SpanFieldProcessTagField"
-          },
-          {
             "$ref": "#/components/schemas/SpanFieldMetadataField"
           },
           {
             "$ref": "#/components/schemas/SpanFieldTagField"
+          },
+          {
+            "$ref": "#/components/schemas/SpanFieldProcessTagField"
           }
         ]
       },
@@ -7189,9 +7092,6 @@
             "$ref": "#/components/schemas/SpansAggregation"
           },
           "id": {
-            "example": {
-              "value": "52d192ac-a28f-4c51-97f5-5ba004249ba1"
-            },
             "description": "Aggregation unique identifier",
             "type": "string"
           },
@@ -7254,13 +7154,13 @@
       "SpansSource.Strategy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SpansSourceStrategyDuration"
-          },
-          {
             "$ref": "#/components/schemas/SpansSourceStrategyInstant"
           },
           {
             "$ref": "#/components/schemas/SpansSourceStrategyRange"
+          },
+          {
+            "$ref": "#/components/schemas/SpansSourceStrategyDuration"
           }
         ]
       },
@@ -7350,9 +7250,6 @@
             }
           },
           "customUnit": {
-            "example": {
-              "value": "rpm"
-            },
             "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)",
             "type": "string"
           },
@@ -7564,15 +7461,6 @@
       "TextboxDefaultValue": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TextboxDefaultValueDefaultLuceneValue"
-          },
-          {
-            "$ref": "#/components/schemas/TextboxDefaultValueDefaultRegexValue"
-          },
-          {
-            "$ref": "#/components/schemas/TextboxDefaultValueDefaultIntervalValue"
-          },
-          {
             "$ref": "#/components/schemas/TextboxDefaultValueSingleString"
           },
           {
@@ -7583,6 +7471,15 @@
           },
           {
             "$ref": "#/components/schemas/TextboxDefaultValueDefaultNumericValue"
+          },
+          {
+            "$ref": "#/components/schemas/TextboxDefaultValueDefaultLuceneValue"
+          },
+          {
+            "$ref": "#/components/schemas/TextboxDefaultValueDefaultRegexValue"
+          },
+          {
+            "$ref": "#/components/schemas/TextboxDefaultValueDefaultIntervalValue"
           }
         ]
       },
@@ -7727,16 +7624,10 @@
             }
           },
           "colorScheme": {
-            "example": {
-              "value": "classic"
-            },
             "description": "Applied color scheme for this query, one of the predefined values",
             "type": "string"
           },
           "customUnit": {
-            "example": {
-              "value": "rpm"
-            },
             "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
             "type": "string"
           },
@@ -7755,9 +7646,6 @@
             "$ref": "#/components/schemas/Legend"
           },
           "maxSlicesPerBar": {
-            "example": {
-              "value": 8
-            },
             "description": "How many slices can fit in a single bar",
             "type": "integer",
             "format": "int32"
@@ -7766,9 +7654,6 @@
             "$ref": "#/components/schemas/ScaleType"
           },
           "seriesNameTemplate": {
-            "example": {
-              "value": "Trace of {{ application }}"
-            },
             "description": "Custom template for the series name",
             "type": "string"
           },
@@ -7819,9 +7704,6 @@
             }
           },
           "colorScheme": {
-            "example": {
-              "value": "classic"
-            },
             "description": "Applied color scheme for this query, one of the predefined values",
             "type": "string"
           },
@@ -7831,9 +7713,6 @@
             "type": "boolean"
           },
           "customUnit": {
-            "example": {
-              "value": "rpm"
-            },
             "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
             "type": "string"
           },
@@ -7855,17 +7734,11 @@
             "$ref": "#/components/schemas/ScaleType"
           },
           "seriesCountLimit": {
-            "example": {
-              "value": 50
-            },
             "description": "Max count of the series per query",
             "type": "string",
             "format": "int64"
           },
           "seriesNameTemplate": {
-            "example": {
-              "value": "Trace of {{ application }}"
-            },
             "description": "Custom template for the series name",
             "type": "string"
           },
@@ -8072,16 +7945,16 @@
       "VariableSourceV2.QuerySource": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/VariableSourceV2QuerySourceLogsQuery"
-          },
-          {
-            "$ref": "#/components/schemas/VariableSourceV2QuerySourceMetricsQuery"
-          },
-          {
             "$ref": "#/components/schemas/VariableSourceV2QuerySourceSpansQuery"
           },
           {
             "$ref": "#/components/schemas/VariableSourceV2QuerySourceDataprimeQuery"
+          },
+          {
+            "$ref": "#/components/schemas/VariableSourceV2QuerySourceLogsQuery"
+          },
+          {
+            "$ref": "#/components/schemas/VariableSourceV2QuerySourceMetricsQuery"
           }
         ]
       },
@@ -8244,9 +8117,6 @@
       "VariableValueV2": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/VariableValueV2SingleNumeric"
-          },
-          {
             "$ref": "#/components/schemas/VariableValueV2Regex"
           },
           {
@@ -8260,6 +8130,9 @@
           },
           {
             "$ref": "#/components/schemas/VariableValueV2SingleString"
+          },
+          {
+            "$ref": "#/components/schemas/VariableValueV2SingleNumeric"
           }
         ]
       },
@@ -8343,9 +8216,6 @@
             }
           },
           "colorScheme": {
-            "example": {
-              "value": "classic"
-            },
             "description": "Applied color scheme, one of the predefined values",
             "type": "string"
           },
@@ -8353,9 +8223,6 @@
             "$ref": "#/components/schemas/ColorsBy"
           },
           "customUnit": {
-            "example": {
-              "value": "mph"
-            },
             "description": "Custom unit (requires to have unit field set to custom to take effect)",
             "type": "string"
           },
@@ -8366,9 +8233,6 @@
             "format": "int32"
           },
           "groupNameTemplate": {
-            "example": {
-              "value": "Slice - {{ variable }}"
-            },
             "description": "Custom template name for a group, can contain variables",
             "type": "string"
           },
@@ -8430,13 +8294,16 @@
       "Visualization": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/VisualizationHorizontalBars"
+            "$ref": "#/components/schemas/VisualizationTimeSeriesBars"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationHexagonBins"
           },
           {
             "$ref": "#/components/schemas/VisualizationVerticalBars"
           },
           {
-            "$ref": "#/components/schemas/VisualizationHeatmap"
+            "$ref": "#/components/schemas/VisualizationTable"
           },
           {
             "$ref": "#/components/schemas/VisualizationTimeSeriesLines"
@@ -8448,16 +8315,13 @@
             "$ref": "#/components/schemas/VisualizationGauge"
           },
           {
-            "$ref": "#/components/schemas/VisualizationHexagonBins"
-          },
-          {
             "$ref": "#/components/schemas/VisualizationPieChart"
           },
           {
-            "$ref": "#/components/schemas/VisualizationTable"
+            "$ref": "#/components/schemas/VisualizationHorizontalBars"
           },
           {
-            "$ref": "#/components/schemas/VisualizationTimeSeriesBars"
+            "$ref": "#/components/schemas/VisualizationHeatmap"
           }
         ]
       },
@@ -8485,9 +8349,6 @@
             }
           },
           "customUnit": {
-            "example": {
-              "value": "rpm"
-            },
             "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)",
             "type": "string"
           },
@@ -8567,16 +8428,10 @@
             }
           },
           "colorScheme": {
-            "example": {
-              "value": "classic"
-            },
             "description": "Applied color scheme, one of the predefined values",
             "type": "string"
           },
           "customUnit": {
-            "example": {
-              "value": "mph"
-            },
             "description": "Custom unit (requires the unit field to be set to custom to take effect)",
             "type": "string"
           },
@@ -8587,9 +8442,6 @@
             "format": "int32"
           },
           "groupNameTemplate": {
-            "example": {
-              "value": "Slice - {{ variable }}"
-            },
             "description": "Custom template name for a group, can contain variables",
             "type": "string"
           },
@@ -8627,9 +8479,6 @@
             "type": "boolean"
           },
           "stackNameTemplate": {
-            "example": {
-              "value": "Slice {{ group }} - subslice {{ subgroup }}"
-            },
             "description": "Custom template name of an individual slice in the stack",
             "type": "string"
           },
@@ -8813,9 +8662,6 @@
             "$ref": "#/components/schemas/Widget.Definition"
           },
           "description": {
-            "example": {
-              "value": "Average delay of application"
-            },
             "description": "Short description of the widget",
             "type": "string"
           },
@@ -8823,9 +8669,6 @@
             "$ref": "#/components/schemas/UUID"
           },
           "title": {
-            "example": {
-              "value": "Gauge"
-            },
             "description": "Name of the widget",
             "type": "string"
           },
@@ -8847,21 +8690,6 @@
       "Widget.Definition": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/WidgetDefinitionLineChart"
-          },
-          {
-            "$ref": "#/components/schemas/WidgetDefinitionBarChart"
-          },
-          {
-            "$ref": "#/components/schemas/WidgetDefinitionHorizontalBarChart"
-          },
-          {
-            "$ref": "#/components/schemas/WidgetDefinitionMarkdown"
-          },
-          {
-            "$ref": "#/components/schemas/WidgetDefinitionDynamic"
-          },
-          {
             "$ref": "#/components/schemas/WidgetDefinitionDataTable"
           },
           {
@@ -8871,7 +8699,22 @@
             "$ref": "#/components/schemas/WidgetDefinitionPieChart"
           },
           {
+            "$ref": "#/components/schemas/WidgetDefinitionMarkdown"
+          },
+          {
+            "$ref": "#/components/schemas/WidgetDefinitionBarChart"
+          },
+          {
+            "$ref": "#/components/schemas/WidgetDefinitionHorizontalBarChart"
+          },
+          {
             "$ref": "#/components/schemas/WidgetDefinitionHexagon"
+          },
+          {
+            "$ref": "#/components/schemas/WidgetDefinitionDynamic"
+          },
+          {
+            "$ref": "#/components/schemas/WidgetDefinitionLineChart"
           }
         ]
       },
@@ -8987,10 +8830,10 @@
       "XAxis": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/XAxisTime"
+            "$ref": "#/components/schemas/XAxisValue"
           },
           {
-            "$ref": "#/components/schemas/XAxisValue"
+            "$ref": "#/components/schemas/XAxisTime"
           }
         ]
       },
@@ -9206,9 +9049,6 @@
         "type": "object",
         "properties": {
           "customUnit": {
-            "example": {
-              "value": "kvs"
-            },
             "description": "Custom unit (requires to have unit field set as 'custom' to take effect)",
             "type": "string"
           },
@@ -9282,16 +9122,10 @@
         "type": "object",
         "properties": {
           "colorScheme": {
-            "example": {
-              "value": "classic"
-            },
             "description": "Applied color scheme, one of the predefined values",
             "type": "string"
           },
           "customUnit": {
-            "example": {
-              "value": "mph"
-            },
             "description": "Custom unit (requires the unit field to be set to custom to take effect)",
             "type": "string"
           },
@@ -9310,9 +9144,6 @@
             "type": "boolean"
           },
           "groupNameTemplate": {
-            "example": {
-              "value": "Slice - {{ variable }}"
-            },
             "description": "Custom template name for a group, can contain variables",
             "type": "string"
           },

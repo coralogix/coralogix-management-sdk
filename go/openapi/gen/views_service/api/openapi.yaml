@@ -94,7 +94,6 @@ paths:
       summary: Get view service
       tags:
       - Views service
-  /data-exploration/saved-views/v1/{view.id}:
     put:
       description: Replaces an existing view
       externalDocs:
@@ -103,7 +102,7 @@ paths:
       parameters:
       - explode: false
         in: path
-        name: view.id
+        name: id
         required: true
         schema:
           description: id
@@ -236,12 +235,10 @@ components:
           filters:
             filters:
             - selectedValues:
-                cs-rest-test1: true
-                demo: true
+                key: true
               name: applicationName
             - selectedValues:
-                cs-rest-test1: true
-                demo: true
+                key: true
               name: applicationName
           id: 52
           folderId: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
@@ -258,12 +255,10 @@ components:
           filters:
             filters:
             - selectedValues:
-                cs-rest-test1: true
-                demo: true
+                key: true
               name: applicationName
             - selectedValues:
-                cs-rest-test1: true
-                demo: true
+                key: true
               name: applicationName
           id: 52
           folderId: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
@@ -327,12 +322,10 @@ components:
       example:
         filters:
         - selectedValues:
-            cs-rest-test1: true
-            demo: true
+            key: true
           name: applicationName
         - selectedValues:
-            cs-rest-test1: true
-            demo: true
+            key: true
           name: applicationName
       properties:
         filters:
@@ -378,12 +371,10 @@ components:
         filters:
           filters:
           - selectedValues:
-              cs-rest-test1: true
-              demo: true
+              key: true
             name: applicationName
           - selectedValues:
-              cs-rest-test1: true
-              demo: true
+              key: true
             name: applicationName
         id: 52
         folderId: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
@@ -461,8 +452,7 @@ components:
       description: View folder.
       example:
         selectedValues:
-          cs-rest-test1: true
-          demo: true
+          key: true
         name: applicationName
       externalDocs:
         url: ""
@@ -476,9 +466,6 @@ components:
           additionalProperties:
             type: boolean
           description: Filter selected values
-          example:
-            cs-rest-test1: true
-            demo: true
           type: object
       required:
       - name
@@ -497,12 +484,10 @@ components:
         filters:
           filters:
           - selectedValues:
-              cs-rest-test1: true
-              demo: true
+              key: true
             name: applicationName
           - selectedValues:
-              cs-rest-test1: true
-              demo: true
+              key: true
             name: applicationName
         folderId: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
         timeSelection:

@@ -16,29 +16,29 @@ import (
 	"gopkg.in/validator.v2"
 )
 
-// SlosServiceCreateSloRequest - struct for SlosServiceCreateSloRequest
-type SlosServiceCreateSloRequest struct {
+// SlosServiceValidateReplaceSloAlertsRequest - struct for SlosServiceValidateReplaceSloAlertsRequest
+type SlosServiceValidateReplaceSloAlertsRequest struct {
 	SloRequestBasedMetricSli *SloRequestBasedMetricSli
 	SloWindowBasedMetricSli *SloWindowBasedMetricSli
 }
 
-// SloRequestBasedMetricSliAsSlosServiceCreateSloRequest is a convenience function that returns SloRequestBasedMetricSli wrapped in SlosServiceCreateSloRequest
-func SloRequestBasedMetricSliAsSlosServiceCreateSloRequest(v *SloRequestBasedMetricSli) SlosServiceCreateSloRequest {
-	return SlosServiceCreateSloRequest{
+// SloRequestBasedMetricSliAsSlosServiceValidateReplaceSloAlertsRequest is a convenience function that returns SloRequestBasedMetricSli wrapped in SlosServiceValidateReplaceSloAlertsRequest
+func SloRequestBasedMetricSliAsSlosServiceValidateReplaceSloAlertsRequest(v *SloRequestBasedMetricSli) SlosServiceValidateReplaceSloAlertsRequest {
+	return SlosServiceValidateReplaceSloAlertsRequest{
 		SloRequestBasedMetricSli: v,
 	}
 }
 
-// SloWindowBasedMetricSliAsSlosServiceCreateSloRequest is a convenience function that returns SloWindowBasedMetricSli wrapped in SlosServiceCreateSloRequest
-func SloWindowBasedMetricSliAsSlosServiceCreateSloRequest(v *SloWindowBasedMetricSli) SlosServiceCreateSloRequest {
-	return SlosServiceCreateSloRequest{
+// SloWindowBasedMetricSliAsSlosServiceValidateReplaceSloAlertsRequest is a convenience function that returns SloWindowBasedMetricSli wrapped in SlosServiceValidateReplaceSloAlertsRequest
+func SloWindowBasedMetricSliAsSlosServiceValidateReplaceSloAlertsRequest(v *SloWindowBasedMetricSli) SlosServiceValidateReplaceSloAlertsRequest {
+	return SlosServiceValidateReplaceSloAlertsRequest{
 		SloWindowBasedMetricSli: v,
 	}
 }
 
 
 // Unmarshal JSON data into one of the pointers in the struct
-func (dst *SlosServiceCreateSloRequest) UnmarshalJSON(data []byte) error {
+func (dst *SlosServiceValidateReplaceSloAlertsRequest) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into SloRequestBasedMetricSli
@@ -80,16 +80,16 @@ func (dst *SlosServiceCreateSloRequest) UnmarshalJSON(data []byte) error {
 		dst.SloRequestBasedMetricSli = nil
 		dst.SloWindowBasedMetricSli = nil
 
-		return fmt.Errorf("data matches more than one schema in oneOf(SlosServiceCreateSloRequest)")
+		return fmt.Errorf("data matches more than one schema in oneOf(SlosServiceValidateReplaceSloAlertsRequest)")
 	} else if match == 1 {
 		return nil // exactly one match
 	} else { // no match
-		return fmt.Errorf("data failed to match schemas in oneOf(SlosServiceCreateSloRequest)")
+		return fmt.Errorf("data failed to match schemas in oneOf(SlosServiceValidateReplaceSloAlertsRequest)")
 	}
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
-func (src SlosServiceCreateSloRequest) MarshalJSON() ([]byte, error) {
+func (src SlosServiceValidateReplaceSloAlertsRequest) MarshalJSON() ([]byte, error) {
 	if src.SloRequestBasedMetricSli != nil {
 		return json.Marshal(&src.SloRequestBasedMetricSli)
 	}
@@ -102,7 +102,7 @@ func (src SlosServiceCreateSloRequest) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *SlosServiceCreateSloRequest) GetActualInstance() (interface{}) {
+func (obj *SlosServiceValidateReplaceSloAlertsRequest) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -119,7 +119,7 @@ func (obj *SlosServiceCreateSloRequest) GetActualInstance() (interface{}) {
 }
 
 // Get the actual instance value
-func (obj SlosServiceCreateSloRequest) GetActualInstanceValue() (interface{}) {
+func (obj SlosServiceValidateReplaceSloAlertsRequest) GetActualInstanceValue() (interface{}) {
 	if obj.SloRequestBasedMetricSli != nil {
 		return *obj.SloRequestBasedMetricSli
 	}
@@ -132,38 +132,38 @@ func (obj SlosServiceCreateSloRequest) GetActualInstanceValue() (interface{}) {
 	return nil
 }
 
-type NullableSlosServiceCreateSloRequest struct {
-	value *SlosServiceCreateSloRequest
+type NullableSlosServiceValidateReplaceSloAlertsRequest struct {
+	value *SlosServiceValidateReplaceSloAlertsRequest
 	isSet bool
 }
 
-func (v NullableSlosServiceCreateSloRequest) Get() *SlosServiceCreateSloRequest {
+func (v NullableSlosServiceValidateReplaceSloAlertsRequest) Get() *SlosServiceValidateReplaceSloAlertsRequest {
 	return v.value
 }
 
-func (v *NullableSlosServiceCreateSloRequest) Set(val *SlosServiceCreateSloRequest) {
+func (v *NullableSlosServiceValidateReplaceSloAlertsRequest) Set(val *SlosServiceValidateReplaceSloAlertsRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSlosServiceCreateSloRequest) IsSet() bool {
+func (v NullableSlosServiceValidateReplaceSloAlertsRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSlosServiceCreateSloRequest) Unset() {
+func (v *NullableSlosServiceValidateReplaceSloAlertsRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSlosServiceCreateSloRequest(val *SlosServiceCreateSloRequest) *NullableSlosServiceCreateSloRequest {
-	return &NullableSlosServiceCreateSloRequest{value: val, isSet: true}
+func NewNullableSlosServiceValidateReplaceSloAlertsRequest(val *SlosServiceValidateReplaceSloAlertsRequest) *NullableSlosServiceValidateReplaceSloAlertsRequest {
+	return &NullableSlosServiceValidateReplaceSloAlertsRequest{value: val, isSet: true}
 }
 
-func (v NullableSlosServiceCreateSloRequest) MarshalJSON() ([]byte, error) {
+func (v NullableSlosServiceValidateReplaceSloAlertsRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSlosServiceCreateSloRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableSlosServiceValidateReplaceSloAlertsRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -67,6 +67,7 @@
                               "is": {
                                 "type": "array",
                                 "items": {
+                                  "example": "",
                                   "type": "string"
                                 }
                               }
@@ -214,10 +215,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
+                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
                   },
                   {
-                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
+                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
                   }
                 ]
               }
@@ -485,13 +486,13 @@
               "items": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/SloExecutionRequestCreateSloRequest"
-                  },
-                  {
                     "$ref": "#/components/schemas/SloExecutionRequestReplaceSloRequest"
                   },
                   {
                     "$ref": "#/components/schemas/SloExecutionRequestDeleteSloRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/SloExecutionRequestCreateSloRequest"
                   }
                 ]
               }
@@ -549,6 +550,7 @@
             "schema": {
               "type": "array",
               "items": {
+                "example": "",
                 "type": "string"
               }
             },

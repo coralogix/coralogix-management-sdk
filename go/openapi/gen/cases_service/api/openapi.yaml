@@ -916,6 +916,9 @@ components:
             $ref: "#/components/schemas/AssigneeOption"
           type: array
         categories:
+          example:
+          - CASE_CATEGORY_SECURITY
+          - CASE_CATEGORY_AVAILABILITY
           items:
             $ref: "#/components/schemas/CaseCategory"
           type: array
@@ -930,14 +933,22 @@ components:
             $ref: "#/components/schemas/FilterGroup"
           type: array
         priorities:
+          example:
+          - CASE_PRIORITY_P1
+          - CASE_PRIORITY_P2
           items:
             $ref: "#/components/schemas/CasePriority"
           type: array
         states:
+          example:
+          - CASE_STATE_ACTIVE
+          - CASE_STATE_RESOLVED
           items:
             $ref: "#/components/schemas/CaseState"
           type: array
         statuses:
+          example:
+          - ACKNOWLEDGED
           items:
             $ref: "#/components/schemas/CaseStatus"
           type: array

@@ -82,7 +82,7 @@ Class | Method | HTTP request | Description
 *ViewsServiceAPI* | [**ViewsServiceDeleteView**](docs/ViewsServiceAPI.md#viewsservicedeleteview) | **Delete** /data-exploration/saved-views/v1/{id} | Delete view service
 *ViewsServiceAPI* | [**ViewsServiceGetView**](docs/ViewsServiceAPI.md#viewsservicegetview) | **Get** /data-exploration/saved-views/v1/{id} | Get view service
 *ViewsServiceAPI* | [**ViewsServiceListViews**](docs/ViewsServiceAPI.md#viewsservicelistviews) | **Get** /data-exploration/saved-views/v1 | List views service
-*ViewsServiceAPI* | [**ViewsServiceReplaceView**](docs/ViewsServiceAPI.md#viewsservicereplaceview) | **Put** /data-exploration/saved-views/v1/{view.id} | Replace a view service
+*ViewsServiceAPI* | [**ViewsServiceReplaceView**](docs/ViewsServiceAPI.md#viewsservicereplaceview) | **Put** /data-exploration/saved-views/v1/{id} | Replace a view service
 
 
 ## Documentation For Models

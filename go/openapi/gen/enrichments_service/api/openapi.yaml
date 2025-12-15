@@ -17,6 +17,10 @@ paths:
         name: enrichment_ids
         required: false
         schema:
+          example:
+          - 1
+          - 2
+          - 3
           items:
             format: int64
             type: integer
@@ -129,8 +133,8 @@ components:
             geoIp:
               withAsn: true
           selectedColumns:
-          - "[\"city\",\"population\"]"
-          - "[\"city\",\"population\"]"
+          - city
+          - population
           fieldName: "1"
           enrichedFieldName: "1"
           id: 1
@@ -138,8 +142,8 @@ components:
             geoIp:
               withAsn: true
           selectedColumns:
-          - "[\"city\",\"population\"]"
-          - "[\"city\",\"population\"]"
+          - city
+          - population
           fieldName: "1"
           enrichedFieldName: "1"
           id: 1
@@ -162,8 +166,8 @@ components:
             geoIp:
               withAsn: true
           selectedColumns:
-          - "[\"city\",\"population\"]"
-          - "[\"city\",\"population\"]"
+          - city
+          - population
           fieldName: "1"
           enrichedFieldName: "1"
           id: 1
@@ -171,8 +175,8 @@ components:
             geoIp:
               withAsn: true
           selectedColumns:
-          - "[\"city\",\"population\"]"
-          - "[\"city\",\"population\"]"
+          - city
+          - population
           fieldName: "1"
           enrichedFieldName: "1"
           id: 1
@@ -209,11 +213,11 @@ components:
     CompanyEnrichmentSettings:
       example:
         rowLimit: 5
-        sizeLimitBytes: sizeLimitBytes
+        sizeLimitBytes: ""
         enrichmentsInUse: 6
         queryOnlyRowLimit: 1
         enrichmentAmountLimit: 0
-        queryOnlySizeLimitBytes: queryOnlySizeLimitBytes
+        queryOnlySizeLimitBytes: ""
       properties:
         enrichmentAmountLimit:
           format: int64
@@ -225,12 +229,14 @@ components:
           format: int64
           type: integer
         queryOnlySizeLimitBytes:
+          example: ""
           format: int64
           type: string
         rowLimit:
           format: int64
           type: integer
         sizeLimitBytes:
+          example: ""
           format: int64
           type: string
       type: object
@@ -248,8 +254,8 @@ components:
           geoIp:
             withAsn: true
         selectedColumns:
-        - "[\"city\",\"population\"]"
-        - "[\"city\",\"population\"]"
+        - city
+        - population
         fieldName: "1"
         enrichedFieldName: "1"
         id: 1
@@ -270,8 +276,10 @@ components:
           format: int64
           type: integer
         selectedColumns:
+          example:
+          - city
+          - population
           items:
-            example: "[\"city\",\"population\"]"
             type: string
           type: array
       required:
@@ -415,11 +423,11 @@ components:
       example:
         enrichmentSettings:
           rowLimit: 5
-          sizeLimitBytes: sizeLimitBytes
+          sizeLimitBytes: ""
           enrichmentsInUse: 6
           queryOnlyRowLimit: 1
           enrichmentAmountLimit: 0
-          queryOnlySizeLimitBytes: queryOnlySizeLimitBytes
+          queryOnlySizeLimitBytes: ""
       properties:
         enrichmentSettings:
           $ref: "#/components/schemas/CompanyEnrichmentSettings"
@@ -454,8 +462,8 @@ components:
             geoIp:
               withAsn: true
           selectedColumns:
-          - "[\"city\",\"population\"]"
-          - "[\"city\",\"population\"]"
+          - city
+          - population
           fieldName: "1"
           enrichedFieldName: "1"
           id: 1
@@ -463,8 +471,8 @@ components:
             geoIp:
               withAsn: true
           selectedColumns:
-          - "[\"city\",\"population\"]"
-          - "[\"city\",\"population\"]"
+          - city
+          - population
           fieldName: "1"
           enrichedFieldName: "1"
           id: 1
@@ -497,8 +505,8 @@ components:
             geoIp:
               withAsn: true
           selectedColumns:
-          - "[\"city\",\"population\"]"
-          - "[\"city\",\"population\"]"
+          - city
+          - population
           fieldName: "1"
           enrichedFieldName: "1"
           id: 1
@@ -506,8 +514,8 @@ components:
             geoIp:
               withAsn: true
           selectedColumns:
-          - "[\"city\",\"population\"]"
-          - "[\"city\",\"population\"]"
+          - city
+          - population
           fieldName: "1"
           enrichedFieldName: "1"
           id: 1

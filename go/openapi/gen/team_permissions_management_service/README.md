@@ -78,18 +78,18 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceAddUsersToTeamGroup**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtserviceadduserstoteamgroup) | **Post** /aaa/team-groups/v1/{group_id.id}/users | Add Users To Team Group
+*TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceAddUsersToTeamGroup**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtserviceadduserstoteamgroup) | **Post** /aaa/team-groups/v1/{id}/users | Add Users To Team Group
 *TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceAddUsersToTeamGroups**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtserviceadduserstoteamgroups) | **Post** /aaa/team-groups/v1/users | Add Users To Team Groups
 *TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceCreateTeamGroup**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicecreateteamgroup) | **Post** /aaa/team-groups/v1 | Create Team Group
-*TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceDeleteTeamGroup**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicedeleteteamgroup) | **Delete** /aaa/team-groups/v1/{group_id.id} | Delete Team Group
-*TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceGetGroupUsers**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicegetgroupusers) | **Get** /aaa/team-groups/v1/{group_id.id}/users | Get Group Users
-*TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceGetTeamGroup**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicegetteamgroup) | **Get** /aaa/team-groups/v1/{group_id.id} | Get Team Group
+*TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceDeleteTeamGroup**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicedeleteteamgroup) | **Delete** /aaa/team-groups/v1/{id} | Delete Team Group
+*TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceGetGroupUsers**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicegetgroupusers) | **Get** /aaa/team-groups/v1/{id}/users | Get Group Users
+*TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceGetTeamGroup**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicegetteamgroup) | **Get** /aaa/team-groups/v1/{id} | Get Team Group
 *TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceGetTeamGroupByName**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicegetteamgroupbyname) | **Get** /aaa/team-groups/v1/{name} | Get Team Group By Name
-*TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceGetTeamGroupScope**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicegetteamgroupscope) | **Get** /v1/teams/groups/{group_id.id}/scope | Get Team Group Scope
+*TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceGetTeamGroupScope**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicegetteamgroupscope) | **Get** /v1/teams/groups/{id}/scope | Get Team Group Scope
 *TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceGetTeamGroups**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicegetteamgroups) | **Get** /aaa/team-groups/v1 | Get Team Groups
-*TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceRemoveUsersFromTeamGroup**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtserviceremoveusersfromteamgroup) | **Delete** /aaa/team-groups/v1/{group_id.id}/users | Remove Users From Team Group
+*TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceRemoveUsersFromTeamGroup**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtserviceremoveusersfromteamgroup) | **Delete** /aaa/team-groups/v1/{id}/users | Remove Users From Team Group
 *TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceRemoveUsersFromTeamGroups**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtserviceremoveusersfromteamgroups) | **Delete** /aaa/team-groups/v1/users | Remove Users From Team Groups
-*TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceSetTeamGroupScope**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicesetteamgroupscope) | **Post** /v1/teams/groups/{group_id.id}/scope | Set Team Group Scope
+*TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceSetTeamGroupScope**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicesetteamgroupscope) | **Post** /v1/teams/groups/{id}/scope | Set Team Group Scope
 *TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceUpdateTeamGroup**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtserviceupdateteamgroup) | **Put** /aaa/team-groups/v1 | Update Team Group
 
 

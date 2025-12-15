@@ -460,13 +460,23 @@ components:
       example:
         createResponses:
         - policy:
+            spanRules:
+              actionRule:
+                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+                name: name
+              serviceRule:
+                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+                name: name
+              tagRules:
+              - ruleTypeId: null
+                tagValue: tag_value
+                tagName: tag_name
+              - ruleTypeId: null
+                tagValue: tag_value
+                tagName: tag_name
             subsystemRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
               name: name
-            logRules:
-              severities:
-              - SEVERITY_UNSPECIFIED
-              - SEVERITY_UNSPECIFIED
             description: My Policy Description
             applicationRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -483,13 +493,23 @@ components:
             order: 1
             updatedAt: 2021-01-01T00:00:00.000Z
         - policy:
+            spanRules:
+              actionRule:
+                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+                name: name
+              serviceRule:
+                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+                name: name
+              tagRules:
+              - ruleTypeId: null
+                tagValue: tag_value
+                tagName: tag_name
+              - ruleTypeId: null
+                tagValue: tag_value
+                tagName: tag_name
             subsystemRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
               name: name
-            logRules:
-              severities:
-              - SEVERITY_UNSPECIFIED
-              - SEVERITY_UNSPECIFIED
             description: My Policy Description
             applicationRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -522,13 +542,23 @@ components:
       example:
         createResponses:
         - policy:
+            spanRules:
+              actionRule:
+                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+                name: name
+              serviceRule:
+                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+                name: name
+              tagRules:
+              - ruleTypeId: null
+                tagValue: tag_value
+                tagName: tag_name
+              - ruleTypeId: null
+                tagValue: tag_value
+                tagName: tag_name
             subsystemRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
               name: name
-            logRules:
-              severities:
-              - SEVERITY_UNSPECIFIED
-              - SEVERITY_UNSPECIFIED
             description: My Policy Description
             applicationRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -545,13 +575,23 @@ components:
             order: 1
             updatedAt: 2021-01-01T00:00:00.000Z
         - policy:
+            spanRules:
+              actionRule:
+                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+                name: name
+              serviceRule:
+                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+                name: name
+              tagRules:
+              - ruleTypeId: null
+                tagValue: tag_value
+                tagName: tag_name
+              - ruleTypeId: null
+                tagValue: tag_value
+                tagName: tag_name
             subsystemRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
               name: name
-            logRules:
-              severities:
-              - SEVERITY_UNSPECIFIED
-              - SEVERITY_UNSPECIFIED
             description: My Policy Description
             applicationRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -582,13 +622,23 @@ components:
       example:
         createResponses:
         - policy:
+            spanRules:
+              actionRule:
+                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+                name: name
+              serviceRule:
+                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+                name: name
+              tagRules:
+              - ruleTypeId: null
+                tagValue: tag_value
+                tagName: tag_name
+              - ruleTypeId: null
+                tagValue: tag_value
+                tagName: tag_name
             subsystemRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
               name: name
-            logRules:
-              severities:
-              - SEVERITY_UNSPECIFIED
-              - SEVERITY_UNSPECIFIED
             description: My Policy Description
             applicationRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -605,13 +655,23 @@ components:
             order: 1
             updatedAt: 2021-01-01T00:00:00.000Z
         - policy:
+            spanRules:
+              actionRule:
+                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+                name: name
+              serviceRule:
+                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+                name: name
+              tagRules:
+              - ruleTypeId: null
+                tagValue: tag_value
+                tagName: tag_name
+              - ruleTypeId: null
+                tagValue: tag_value
+                tagName: tag_name
             subsystemRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
               name: name
-            logRules:
-              severities:
-              - SEVERITY_UNSPECIFIED
-              - SEVERITY_UNSPECIFIED
             description: My Policy Description
             applicationRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -647,13 +707,23 @@ components:
             severityValues: severity
           matched: true
           policy:
+            spanRules:
+              actionRule:
+                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+                name: name
+              serviceRule:
+                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+                name: name
+              tagRules:
+              - ruleTypeId: null
+                tagValue: tag_value
+                tagName: tag_name
+              - ruleTypeId: null
+                tagValue: tag_value
+                tagName: tag_name
             subsystemRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
               name: name
-            logRules:
-              severities:
-              - SEVERITY_UNSPECIFIED
-              - SEVERITY_UNSPECIFIED
             description: My Policy Description
             applicationRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -675,13 +745,23 @@ components:
             severityValues: severity
           matched: true
           policy:
+            spanRules:
+              actionRule:
+                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+                name: name
+              serviceRule:
+                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+                name: name
+              tagRules:
+              - ruleTypeId: null
+                tagValue: tag_value
+                tagName: tag_name
+              - ruleTypeId: null
+                tagValue: tag_value
+                tagName: tag_name
             subsystemRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
               name: name
-            logRules:
-              severities:
-              - SEVERITY_UNSPECIFIED
-              - SEVERITY_UNSPECIFIED
             description: My Policy Description
             applicationRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -842,13 +922,23 @@ components:
       description: This data structue is obtained when creating a policy.
       example:
         policy:
+          spanRules:
+            actionRule:
+              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+              name: name
+            serviceRule:
+              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+              name: name
+            tagRules:
+            - ruleTypeId: null
+              tagValue: tag_value
+              tagName: tag_name
+            - ruleTypeId: null
+              tagValue: tag_value
+              tagName: tag_name
           subsystemRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
             name: name
-          logRules:
-            severities:
-            - SEVERITY_UNSPECIFIED
-            - SEVERITY_UNSPECIFIED
           description: My Policy Description
           applicationRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -969,13 +1059,23 @@ components:
         a company.
       example:
         policies:
-        - subsystemRule:
+        - spanRules:
+            actionRule:
+              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+              name: name
+            serviceRule:
+              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+              name: name
+            tagRules:
+            - ruleTypeId: null
+              tagValue: tag_value
+              tagName: tag_name
+            - ruleTypeId: null
+              tagValue: tag_value
+              tagName: tag_name
+          subsystemRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
             name: name
-          logRules:
-            severities:
-            - SEVERITY_UNSPECIFIED
-            - SEVERITY_UNSPECIFIED
           description: My Policy Description
           applicationRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -991,13 +1091,23 @@ components:
           id: policy_id
           order: 1
           updatedAt: 2021-01-01T00:00:00.000Z
-        - subsystemRule:
+        - spanRules:
+            actionRule:
+              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+              name: name
+            serviceRule:
+              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+              name: name
+            tagRules:
+            - ruleTypeId: null
+              tagValue: tag_value
+              tagName: tag_name
+            - ruleTypeId: null
+              tagValue: tag_value
+              tagName: tag_name
+          subsystemRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
             name: name
-          logRules:
-            severities:
-            - SEVERITY_UNSPECIFIED
-            - SEVERITY_UNSPECIFIED
           description: My Policy Description
           applicationRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -1030,13 +1140,23 @@ components:
         ID.
       example:
         policy:
+          spanRules:
+            actionRule:
+              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+              name: name
+            serviceRule:
+              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+              name: name
+            tagRules:
+            - ruleTypeId: null
+              tagValue: tag_value
+              tagName: tag_name
+            - ruleTypeId: null
+              tagValue: tag_value
+              tagName: tag_name
           subsystemRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
             name: name
-          logRules:
-            severities:
-            - SEVERITY_UNSPECIFIED
-            - SEVERITY_UNSPECIFIED
           description: My Policy Description
           applicationRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -1103,10 +1223,6 @@ components:
       type: object
     LogRules:
       description: Log rules for a policy.
-      example:
-        severities:
-        - SEVERITY_UNSPECIFIED
-        - SEVERITY_UNSPECIFIED
       externalDocs:
         description: Find out more about quota management.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
@@ -1137,8 +1253,8 @@ components:
       type: object
     Placement:
       oneOf:
-      - $ref: "#/components/schemas/PlacementFirst"
       - $ref: "#/components/schemas/PlacementLast"
+      - $ref: "#/components/schemas/PlacementFirst"
     PlacementFirst:
       additionalProperties: false
       properties:
@@ -1153,35 +1269,12 @@ components:
       type: object
     Policy:
       oneOf:
-      - $ref: "#/components/schemas/PolicyLogRules"
       - $ref: "#/components/schemas/PolicySpanRules"
+      - $ref: "#/components/schemas/PolicyLogRules"
     PolicyLogRules:
       additionalProperties: false
       description: A policy is a set of rules that define the behavior of the Coralogix
         system for a specific company.
-      example:
-        subsystemRule:
-          ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-          name: name
-        logRules:
-          severities:
-          - SEVERITY_UNSPECIFIED
-          - SEVERITY_UNSPECIFIED
-        description: My Policy Description
-        applicationRule:
-          ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-          name: name
-        priority: PRIORITY_TYPE_UNSPECIFIED
-        enabled: true
-        archiveRetention:
-          id: id
-        createdAt: 2021-01-01T00:00:00.000Z
-        companyId: 1234
-        deleted: false
-        name: My Policy
-        id: policy_id
-        order: 1
-        updatedAt: 2021-01-01T00:00:00.000Z
       externalDocs:
         description: Find out more about quota management.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
@@ -1260,6 +1353,39 @@ components:
       additionalProperties: false
       description: A policy is a set of rules that define the behavior of the Coralogix
         system for a specific company.
+      example:
+        spanRules:
+          actionRule:
+            ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+            name: name
+          serviceRule:
+            ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+            name: name
+          tagRules:
+          - ruleTypeId: null
+            tagValue: tag_value
+            tagName: tag_name
+          - ruleTypeId: null
+            tagValue: tag_value
+            tagName: tag_name
+        subsystemRule:
+          ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+          name: name
+        description: My Policy Description
+        applicationRule:
+          ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+          name: name
+        priority: PRIORITY_TYPE_UNSPECIFIED
+        enabled: true
+        archiveRetention:
+          id: id
+        createdAt: 2021-01-01T00:00:00.000Z
+        companyId: 1234
+        deleted: false
+        name: My Policy
+        id: policy_id
+        order: 1
+        updatedAt: 2021-01-01T00:00:00.000Z
       externalDocs:
         description: Find out more about quota management.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
@@ -1354,6 +1480,20 @@ components:
       - RULE_TYPE_ID_INCLUDES
       type: string
     SpanRules:
+      example:
+        actionRule:
+          ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+          name: name
+        serviceRule:
+          ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+          name: name
+        tagRules:
+        - ruleTypeId: null
+          tagValue: tag_value
+          tagName: tag_name
+        - ruleTypeId: null
+          tagValue: tag_value
+          tagName: tag_name
       properties:
         actionRule:
           $ref: "#/components/schemas/quota.v1.Rule"
@@ -1373,6 +1513,10 @@ components:
       type: object
     TagRule:
       description: Tag rule for a policy.
+      example:
+        ruleTypeId: null
+        tagValue: tag_value
+        tagName: tag_name
       externalDocs:
         description: Find out more about quota management.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
@@ -1400,13 +1544,23 @@ components:
           severityValues: severity
         matched: true
         policy:
+          spanRules:
+            actionRule:
+              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+              name: name
+            serviceRule:
+              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+              name: name
+            tagRules:
+            - ruleTypeId: null
+              tagValue: tag_value
+              tagName: tag_name
+            - ruleTypeId: null
+              tagValue: tag_value
+              tagName: tag_name
           subsystemRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
             name: name
-          logRules:
-            severities:
-            - SEVERITY_UNSPECIFIED
-            - SEVERITY_UNSPECIFIED
           description: My Policy Description
           applicationRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -1529,13 +1683,23 @@ components:
       description: This data structue is obtained when updating a policy.
       example:
         policy:
+          spanRules:
+            actionRule:
+              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+              name: name
+            serviceRule:
+              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+              name: name
+            tagRules:
+            - ruleTypeId: null
+              tagValue: tag_value
+              tagName: tag_name
+            - ruleTypeId: null
+              tagValue: tag_value
+              tagName: tag_name
           subsystemRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
             name: name
-          logRules:
-            severities:
-            - SEVERITY_UNSPECIFIED
-            - SEVERITY_UNSPECIFIED
           description: My Policy Description
           applicationRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -1619,8 +1783,8 @@ components:
       type: string
     PoliciesService_UpdatePolicy_request:
       oneOf:
-      - $ref: "#/components/schemas/UpdatePolicyRequestSpanRules"
       - $ref: "#/components/schemas/UpdatePolicyRequestLogRules"
+      - $ref: "#/components/schemas/UpdatePolicyRequestSpanRules"
       type: object
     PoliciesService_CreatePolicy_request:
       oneOf:

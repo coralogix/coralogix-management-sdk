@@ -136,8 +136,10 @@ paths:
         name: connector_ids
         required: false
         schema:
+          example:
+          - connector-id-1
+          - connector-id-2
           items:
-            example: "[\"connector-id-1\",\"connector-id-2\"]"
             type: string
           type: array
         style: form
@@ -164,6 +166,7 @@ paths:
         required: false
         schema:
           items:
+            example: ""
             type: string
           type: array
         style: form
@@ -239,8 +242,7 @@ components:
         not found
       example:
         notFoundIds:
-        - "[\"connector-id-3\"]"
-        - "[\"connector-id-3\"]"
+        - connector-id-3
         connectorSummaries:
           key:
             createTime: 2000-01-23T04:56:07.000+00:00
@@ -259,8 +261,9 @@ components:
             $ref: "#/components/schemas/ConnectorSummary"
           type: object
         notFoundIds:
+          example:
+          - connector-id-3
           items:
-            example: "[\"connector-id-3\"]"
             type: string
           type: array
       title: Batch Get Connector Summaries Response
@@ -269,8 +272,7 @@ components:
       description: Response containing the requested connectors and any IDs not found
       example:
         notFoundIds:
-        - "[\"connector-id-3\"]"
-        - "[\"connector-id-3\"]"
+        - connector-id-3
         connectors:
           key:
             diagnostics:
@@ -310,8 +312,9 @@ components:
             $ref: "#/components/schemas/Connector"
           type: object
         notFoundIds:
+          example:
+          - connector-id-3
           items:
-            example: "[\"connector-id-3\"]"
             type: string
           type: array
       title: Batch Get Connectors Response
@@ -456,6 +459,7 @@ components:
       - PAGERDUTY
       - IBM_EVENT_NOTIFICATIONS
       - SERVICE_NOW
+      - EMAIL
       type: string
     ConnectorTypeSummary:
       description: Summary information about a connector type

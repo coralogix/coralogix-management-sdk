@@ -474,7 +474,7 @@ func (a *ThingsServiceAPIService) ThingServiceListThingsExecute(r ApiThingServic
 type ApiThingServiceReplaceThingRequest struct {
 	ctx context.Context
 	ApiService *ThingsServiceAPIService
-	thingId string
+	id string
 	replaceThingRequest *ReplaceThingRequest
 }
 
@@ -493,14 +493,14 @@ ThingServiceReplaceThing Replace Thing
 No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param thingId
+ @param id
  @return ApiThingServiceReplaceThingRequest
 */
-func (a *ThingsServiceAPIService) ThingServiceReplaceThing(ctx context.Context, thingId string) ApiThingServiceReplaceThingRequest {
+func (a *ThingsServiceAPIService) ThingServiceReplaceThing(ctx context.Context, id string) ApiThingServiceReplaceThingRequest {
 	return ApiThingServiceReplaceThingRequest{
 		ApiService: a,
 		ctx: ctx,
-		thingId: thingId,
+		id: id,
 	}
 }
 
@@ -519,8 +519,8 @@ func (a *ThingsServiceAPIService) ThingServiceReplaceThingExecute(r ApiThingServ
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/stuff/things/v1/{thing.id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"thing.id"+"}", url.PathEscape(parameterValueToString(r.thingId, "thingId")), -1)
+	localVarPath := localBasePath + "/stuff/things/v1/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

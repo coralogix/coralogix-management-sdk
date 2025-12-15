@@ -691,6 +691,10 @@
         "type": "object",
         "properties": {
           "dayOfWeek": {
+            "example": [
+              "DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED",
+              "DAY_OF_WEEK_TUESDAY"
+            ],
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DayOfWeek"
@@ -780,12 +784,12 @@
             }
           },
           "groupByKeys": {
+            "example": [
+              "key1",
+              "key2"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "key1",
-                "key2"
-              ],
               "description": "The keys to group the alerts by",
               "type": "string"
             }
@@ -843,40 +847,40 @@
       "AlertDefProperties": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsThreshold"
+            "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
+            "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesFlow"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesSloThreshold"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsThreshold"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
+            "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesMetricAnomaly"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
@@ -910,9 +914,6 @@
             "type": "boolean"
           },
           "entityLabels": {
-            "example": {
-              "key": "value"
-            },
             "description": "Labels used to identify and categorize the alert entity",
             "type": "object",
             "additionalProperties": {
@@ -923,12 +924,12 @@
             "$ref": "#/components/schemas/FlowType"
           },
           "groupByKeys": {
+            "example": [
+              "key1",
+              "key2"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "key1",
-                "key2"
-              ],
               "description": "Keys used to group and aggregate alert data",
               "type": "string"
             }
@@ -991,9 +992,6 @@
             "type": "boolean"
           },
           "entityLabels": {
-            "example": {
-              "key": "value"
-            },
             "description": "Labels used to identify and categorize the alert entity",
             "type": "object",
             "additionalProperties": {
@@ -1001,12 +999,12 @@
             }
           },
           "groupByKeys": {
+            "example": [
+              "key1",
+              "key2"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "key1",
-                "key2"
-              ],
               "description": "Keys used to group and aggregate alert data",
               "type": "string"
             }
@@ -1072,9 +1070,6 @@
             "type": "boolean"
           },
           "entityLabels": {
-            "example": {
-              "key": "value"
-            },
             "description": "Labels used to identify and categorize the alert entity",
             "type": "object",
             "additionalProperties": {
@@ -1082,12 +1077,12 @@
             }
           },
           "groupByKeys": {
+            "example": [
+              "key1",
+              "key2"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "key1",
-                "key2"
-              ],
               "description": "Keys used to group and aggregate alert data",
               "type": "string"
             }
@@ -1153,9 +1148,6 @@
             "type": "boolean"
           },
           "entityLabels": {
-            "example": {
-              "key": "value"
-            },
             "description": "Labels used to identify and categorize the alert entity",
             "type": "object",
             "additionalProperties": {
@@ -1163,12 +1155,12 @@
             }
           },
           "groupByKeys": {
+            "example": [
+              "key1",
+              "key2"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "key1",
-                "key2"
-              ],
               "description": "Keys used to group and aggregate alert data",
               "type": "string"
             }
@@ -1234,9 +1226,6 @@
             "type": "boolean"
           },
           "entityLabels": {
-            "example": {
-              "key": "value"
-            },
             "description": "Labels used to identify and categorize the alert entity",
             "type": "object",
             "additionalProperties": {
@@ -1244,12 +1233,12 @@
             }
           },
           "groupByKeys": {
+            "example": [
+              "key1",
+              "key2"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "key1",
-                "key2"
-              ],
               "description": "Keys used to group and aggregate alert data",
               "type": "string"
             }
@@ -1315,9 +1304,6 @@
             "type": "boolean"
           },
           "entityLabels": {
-            "example": {
-              "key": "value"
-            },
             "description": "Labels used to identify and categorize the alert entity",
             "type": "object",
             "additionalProperties": {
@@ -1325,12 +1311,12 @@
             }
           },
           "groupByKeys": {
+            "example": [
+              "key1",
+              "key2"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "key1",
-                "key2"
-              ],
               "description": "Keys used to group and aggregate alert data",
               "type": "string"
             }
@@ -1396,9 +1382,6 @@
             "type": "boolean"
           },
           "entityLabels": {
-            "example": {
-              "key": "value"
-            },
             "description": "Labels used to identify and categorize the alert entity",
             "type": "object",
             "additionalProperties": {
@@ -1406,12 +1389,12 @@
             }
           },
           "groupByKeys": {
+            "example": [
+              "key1",
+              "key2"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "key1",
-                "key2"
-              ],
               "description": "Keys used to group and aggregate alert data",
               "type": "string"
             }
@@ -1477,9 +1460,6 @@
             "type": "boolean"
           },
           "entityLabels": {
-            "example": {
-              "key": "value"
-            },
             "description": "Labels used to identify and categorize the alert entity",
             "type": "object",
             "additionalProperties": {
@@ -1487,12 +1467,12 @@
             }
           },
           "groupByKeys": {
+            "example": [
+              "key1",
+              "key2"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "key1",
-                "key2"
-              ],
               "description": "Keys used to group and aggregate alert data",
               "type": "string"
             }
@@ -1558,9 +1538,6 @@
             "type": "boolean"
           },
           "entityLabels": {
-            "example": {
-              "key": "value"
-            },
             "description": "Labels used to identify and categorize the alert entity",
             "type": "object",
             "additionalProperties": {
@@ -1568,12 +1545,12 @@
             }
           },
           "groupByKeys": {
+            "example": [
+              "key1",
+              "key2"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "key1",
-                "key2"
-              ],
               "description": "Keys used to group and aggregate alert data",
               "type": "string"
             }
@@ -1639,9 +1616,6 @@
             "type": "boolean"
           },
           "entityLabels": {
-            "example": {
-              "key": "value"
-            },
             "description": "Labels used to identify and categorize the alert entity",
             "type": "object",
             "additionalProperties": {
@@ -1649,12 +1623,12 @@
             }
           },
           "groupByKeys": {
+            "example": [
+              "key1",
+              "key2"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "key1",
-                "key2"
-              ],
               "description": "Keys used to group and aggregate alert data",
               "type": "string"
             }
@@ -1720,9 +1694,6 @@
             "type": "boolean"
           },
           "entityLabels": {
-            "example": {
-              "key": "value"
-            },
             "description": "Labels used to identify and categorize the alert entity",
             "type": "object",
             "additionalProperties": {
@@ -1730,12 +1701,12 @@
             }
           },
           "groupByKeys": {
+            "example": [
+              "key1",
+              "key2"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "key1",
-                "key2"
-              ],
               "description": "Keys used to group and aggregate alert data",
               "type": "string"
             }
@@ -1801,9 +1772,6 @@
             "type": "boolean"
           },
           "entityLabels": {
-            "example": {
-              "key": "value"
-            },
             "description": "Labels used to identify and categorize the alert entity",
             "type": "object",
             "additionalProperties": {
@@ -1811,12 +1779,12 @@
             }
           },
           "groupByKeys": {
+            "example": [
+              "key1",
+              "key2"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "key1",
-                "key2"
-              ],
               "description": "Keys used to group and aggregate alert data",
               "type": "string"
             }
@@ -1882,9 +1850,6 @@
             "type": "boolean"
           },
           "entityLabels": {
-            "example": {
-              "key": "value"
-            },
             "description": "Labels used to identify and categorize the alert entity",
             "type": "object",
             "additionalProperties": {
@@ -1892,12 +1857,12 @@
             }
           },
           "groupByKeys": {
+            "example": [
+              "key1",
+              "key2"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "key1",
-                "key2"
-              ],
               "description": "Keys used to group and aggregate alert data",
               "type": "string"
             }
@@ -2046,21 +2011,21 @@
             }
           },
           "notFoundIds": {
+            "example": [
+              "123e4567-e89b-12d3-a456-426614174000"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "123e4567-e89b-12d3-a456-426614174000"
-              ],
               "description": "List of alert definition IDs that were not found",
               "type": "string"
             }
           },
           "skippedIds": {
+            "example": [
+              "123e4567-e89b-12d3-a456-426614174000"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "123e4567-e89b-12d3-a456-426614174000"
-              ],
               "description": "List of alert definition IDs that were skipped (no changes detected)",
               "type": "string"
             }
@@ -2716,11 +2681,11 @@
             "$ref": "#/components/schemas/v3.LogsFilter"
           },
           "notificationPayloadFilter": {
+            "example": [
+              "obj.field"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "obj.field"
-              ],
               "description": "The filter to specify which fields to include in the notification payload",
               "type": "string"
             }
@@ -2746,11 +2711,11 @@
             "$ref": "#/components/schemas/v3.LogsFilter"
           },
           "notificationPayloadFilter": {
+            "example": [
+              "obj.field"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "obj.field"
-              ],
               "type": "string"
             }
           }
@@ -2825,11 +2790,11 @@
             "$ref": "#/components/schemas/v3.LogsFilter"
           },
           "notificationPayloadFilter": {
+            "example": [
+              "obj.field"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "obj.field"
-              ],
               "description": "The filter to specify which fields to include in the notification payload.",
               "type": "string"
             }
@@ -2927,11 +2892,11 @@
             "type": "boolean"
           },
           "notificationPayloadFilter": {
+            "example": [
+              "obj.field"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "obj.field"
-              ],
               "type": "string"
             }
           },
@@ -3064,11 +3029,11 @@
             "$ref": "#/components/schemas/v3.LogsFilter"
           },
           "notificationPayloadFilter": {
+            "example": [
+              "obj.field"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "obj.field"
-              ],
               "description": "The filter to specify which fields to include in the notification payload",
               "type": "string"
             }
@@ -3163,11 +3128,11 @@
             "$ref": "#/components/schemas/v3.LogsFilter"
           },
           "notificationPayloadFilter": {
+            "example": [
+              "obj.field"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "obj.field"
-              ],
               "type": "string"
             }
           },
@@ -3221,7 +3186,7 @@
         "type": "object",
         "properties": {
           "maxUniqueCount": {
-            "example": 100,
+            "example": "100",
             "description": "The maximum unique count",
             "type": "string",
             "format": "int64"
@@ -3257,17 +3222,17 @@
             "$ref": "#/components/schemas/v3.LogsFilter"
           },
           "maxUniqueCountPerGroupByKey": {
-            "example": 100,
+            "example": "100",
             "description": "The maximum unique count per group by key",
             "type": "string",
             "format": "int64"
           },
           "notificationPayloadFilter": {
+            "example": [
+              "obj.field"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "obj.field"
-              ],
               "description": "The filter to specify which fields to include in the notification payload",
               "type": "string"
             }
@@ -3712,11 +3677,11 @@
         "type": "object",
         "properties": {
           "emails": {
+            "example": [
+              "mail@gmail.com"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "mail@gmail.com"
-              ],
               "description": "The list of email recipients for alert notifications",
               "type": "string"
             }
@@ -3838,7 +3803,7 @@
         "type": "object",
         "properties": {
           "duration": {
-            "example": 60,
+            "example": "60",
             "description": "The duration value",
             "type": "string",
             "format": "uint64"
@@ -3910,12 +3875,12 @@
             "$ref": "#/components/schemas/TracingFilterOperationType"
           },
           "values": {
+            "example": [
+              "value1",
+              "value2"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "value1",
-                "value2"
-              ],
               "description": "The values of the label to filter by",
               "type": "string"
             }
@@ -3932,11 +3897,11 @@
         "type": "object",
         "properties": {
           "notificationPayloadFilter": {
+            "example": [
+              "obj.field"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "obj.field"
-              ],
               "description": "Notification payload field filter",
               "type": "string"
             }
@@ -3995,7 +3960,7 @@
         "type": "object",
         "properties": {
           "latencyThresholdMs": {
-            "example": 1000,
+            "example": "1000",
             "description": "The latency threshold to filter traces in milliseconds",
             "type": "string",
             "format": "uint64"
@@ -4073,11 +4038,11 @@
         "type": "object",
         "properties": {
           "notificationPayloadFilter": {
+            "example": [
+              "obj.field"
+            ],
             "type": "array",
             "items": {
-              "example": [
-                "obj.field"
-              ],
               "description": "Notification payload field filter",
               "type": "string"
             }

@@ -168,11 +168,6 @@ components:
       type: object
     IBMCosTargetSpec:
       description: This data structure represents an IBM COS target.
-      example:
-        endpoint: http://some.endpoint.com:8081
-        bucketType: IBM_BUCKET_TYPE_UNSPECIFIED
-        bucketCrn: bucket_crn
-        serviceCrn: service_crn
       externalDocs:
         description: Find out more about archives
         url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
@@ -212,15 +207,13 @@ components:
       description: This data structure is used to retrieve a storage target for logs.
       example:
         target:
+          s3:
+            bucket: bucket
+            region: us-west-2
           archiveSpec:
             enableTags: true
             archivingFormatId: json_id
             isActive: true
-          ibmCos:
-            endpoint: http://some.endpoint.com:8081
-            bucketType: IBM_BUCKET_TYPE_UNSPECIFIED
-            bucketCrn: bucket_crn
-            serviceCrn: service_crn
       externalDocs:
         description: Find out more about archives
         url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
@@ -236,15 +229,13 @@ components:
         for logs.
       example:
         target:
+          s3:
+            bucket: bucket
+            region: us-west-2
           archiveSpec:
             enableTags: true
             archivingFormatId: json_id
             isActive: true
-          ibmCos:
-            endpoint: http://some.endpoint.com:8081
-            bucketType: IBM_BUCKET_TYPE_UNSPECIFIED
-            bucketCrn: bucket_crn
-            serviceCrn: service_crn
       externalDocs:
         description: Find out more about archives
         url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
@@ -257,6 +248,9 @@ components:
       type: object
     S3TargetSpec:
       description: This data structure represents an S3 target.
+      example:
+        bucket: bucket
+        region: us-west-2
       externalDocs:
         description: Find out more about archives
         url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
@@ -273,21 +267,11 @@ components:
       type: object
     Target:
       oneOf:
-      - $ref: "#/components/schemas/TargetIbmCos"
       - $ref: "#/components/schemas/TargetS3"
+      - $ref: "#/components/schemas/TargetIbmCos"
     TargetIbmCos:
       additionalProperties: false
       description: This data structure represents a target to archive logs.
-      example:
-        archiveSpec:
-          enableTags: true
-          archivingFormatId: json_id
-          isActive: true
-        ibmCos:
-          endpoint: http://some.endpoint.com:8081
-          bucketType: IBM_BUCKET_TYPE_UNSPECIFIED
-          bucketCrn: bucket_crn
-          serviceCrn: service_crn
       externalDocs:
         description: Find out more about archives
         url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
@@ -303,6 +287,14 @@ components:
     TargetS3:
       additionalProperties: false
       description: This data structure represents a target to archive logs.
+      example:
+        s3:
+          bucket: bucket
+          region: us-west-2
+        archiveSpec:
+          enableTags: true
+          archivingFormatId: json_id
+          isActive: true
       externalDocs:
         description: Find out more about archives
         url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
