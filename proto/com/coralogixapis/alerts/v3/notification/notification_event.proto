@@ -4,11 +4,18 @@ package com.coralogixapis.alerts.v3;
 
 import "com/coralogixapis/alerts/v3/alert_def_priority.proto";
 import "com/coralogixapis/alerts/v3/event/alert_event.proto";
+import "com/coralogixapis/alerts/v3/notification/flow_notification.proto";
 import "com/coralogixapis/alerts/v3/notification/logs_immediate_notification.proto";
 import "com/coralogixapis/alerts/v3/notification/logs_threshold_notification.proto";
 import "com/coralogixapis/alerts/v3/notification/metric_threshold_notification.proto";
+import "com/coralogixapis/alerts/v3/notification/new_value_notification.proto";
+import "com/coralogixapis/alerts/v3/notification/ratio_threshold_notification.proto";
 import "com/coralogixapis/alerts/v3/notification/slo_burn_rate_threshold_notification.proto";
 import "com/coralogixapis/alerts/v3/notification/slo_error_budget_threshold_notification.proto";
+import "com/coralogixapis/alerts/v3/notification/time_relative_threshold_notification.proto";
+import "com/coralogixapis/alerts/v3/notification/tracing_immediate_notification.proto";
+import "com/coralogixapis/alerts/v3/notification/tracing_threshold_notification.proto";
+import "com/coralogixapis/alerts/v3/notification/unique_count_notification.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
@@ -44,6 +51,13 @@ message Group {
     MetricThresholdNotification metric_threshold = 102;
     SloBurnRateThresholdNotification slo_burn_rate_threshold = 103;
     SloErrorBudgetThresholdNotification slo_error_budget_threshold = 104;
+    FlowNotification flow = 105;
+    NewValueNotification new_value = 106;
+    RatioThresholdNotification ratio_threshold = 107;
+    TimeRelativeThresholdNotification time_relative_threshold = 108;
+    TracingImmediateNotification tracing_immediate = 109;
+    TracingThresholdNotification tracing_threshold = 110;
+    UniqueCountNotification unique_count = 111;
   }
 }
 
