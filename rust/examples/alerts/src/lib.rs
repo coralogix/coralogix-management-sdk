@@ -422,10 +422,10 @@ mod tests {
             update_time: None,
             sli: Some(Sli::RequestBasedMetricSli(RequestBasedMetricSli {
                 good_events: Some(Metric {
-                    query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)".to_string(),
+                    query: "avg(rate(cpu_usage_seconds_total[1m])) by (instance)".to_string(),
                 }),
                 total_events: Some(Metric {
-                    query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)".to_string(),
+                    query: "avg(rate(cpu_usage_seconds_total[1m])) by (instance)".to_string(),
                 }),
             })),
             window: Some(Window::SloTimeFrame(SloTimeFrame::SloTimeFrame7Days.into())),
@@ -515,10 +515,10 @@ mod tests {
             update_time: None,
             sli: Some(Sli::RequestBasedMetricSli(RequestBasedMetricSli {
                 good_events: Some(Metric {
-                    query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)".to_string(),
+                    query: "avg(rate(cpu_usage_seconds_total[1m])) by (instance)".to_string(),
                 }),
                 total_events: Some(Metric {
-                    query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)".to_string(),
+                    query: "avg(rate(cpu_usage_seconds_total[1m])) by (instance)".to_string(),
                 }),
             })),
             window: Some(Window::SloTimeFrame(SloTimeFrame::SloTimeFrame7Days.into())),
@@ -608,10 +608,10 @@ mod tests {
             update_time: None,
             sli: Some(Sli::RequestBasedMetricSli(RequestBasedMetricSli {
                 good_events: Some(Metric {
-                    query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)".to_string(),
+                    query: "avg(rate(cpu_usage_seconds_total[1m])) by (instance)".to_string(),
                 }),
                 total_events: Some(Metric {
-                    query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)".to_string(),
+                    query: "avg(rate(cpu_usage_seconds_total[1m])) by (instance)".to_string(),
                 }),
             })),
             window: Some(Window::SloTimeFrame(SloTimeFrame::SloTimeFrame7Days.into())),

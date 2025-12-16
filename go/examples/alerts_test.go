@@ -356,10 +356,10 @@ func TestBurnRateSloAlerts(t *testing.T) {
 			Sli: &cxsdk.SloRequestBasedMetricSli{
 				RequestBasedMetricSli: &cxsdk.RequestBasedMetricSli{
 					GoodEvents: &cxsdk.Metric{
-						Query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)",
+						Query: "avg(rate(cpu_usage_seconds_total[1m])) by (instance)",
 					},
 					TotalEvents: &cxsdk.Metric{
-						Query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)",
+						Query: "avg(rate(cpu_usage_seconds_total[1m])) by (instance)",
 					},
 				},
 			},
@@ -432,10 +432,10 @@ func TestAlertGetsDeletedOnSloDeletion(t *testing.T) {
 			Sli: &cxsdk.SloRequestBasedMetricSli{
 				RequestBasedMetricSli: &cxsdk.RequestBasedMetricSli{
 					GoodEvents: &cxsdk.Metric{
-						Query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)",
+						Query: "avg(rate(cpu_usage_seconds_total[1m])) by (instance)",
 					},
 					TotalEvents: &cxsdk.Metric{
-						Query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)",
+						Query: "avg(rate(cpu_usage_seconds_total[1m])) by (instance)",
 					},
 				},
 			},
