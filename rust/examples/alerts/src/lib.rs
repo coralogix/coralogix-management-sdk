@@ -395,7 +395,6 @@ mod tests {
     }
 
     #[tokio::test]
-    #[ignore = "Unstable test"]
     async fn test_burn_rate_slo_alert() {
         let alerts_client = AlertsClient::new(
             CoralogixRegion::from_env().unwrap(),
@@ -488,7 +487,6 @@ mod tests {
     }
 
     #[tokio::test]
-    #[ignore = "Unstable test"]
     async fn test_error_budget_slo_alert() {
         let alerts_client = AlertsClient::new(
             CoralogixRegion::from_env().unwrap(),
@@ -581,7 +579,6 @@ mod tests {
     }
 
     #[tokio::test]
-    #[ignore = "Unstable test"]
     async fn test_alert_gets_deleted_on_slo_deletion() {
         let alerts_client = AlertsClient::new(
             CoralogixRegion::from_env().unwrap(),
