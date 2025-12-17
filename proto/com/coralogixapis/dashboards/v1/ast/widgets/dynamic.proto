@@ -987,6 +987,8 @@ message Dynamic {
         example: "4"
       }];
 
+      GeomapTooltip tooltip = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Tooltip settings for the widget"}];
+
       /* Core geomap config */
 
       message GeomapFieldConfig {
@@ -1036,6 +1038,16 @@ message Dynamic {
 
           common.ColorGradientType color_range = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Geomap clusters will have same size, but gradient color will be applied to distinguish data values and/or applied aggregation"}];
         }
+      }
+
+      /* Tooltip display value config */
+
+      message GeomapTooltip {
+        google.protobuf.StringValue message_template = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "Custom template for the geomap tooltip"
+          example: '{ "value": "value = {{_count}}" }'
+        }];
+        repeated v1.common.ObservationField labels = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Labels to display on the tooltip, should reference fields from clusters or points on the map."}];
       }
     }
   }
