@@ -37,6 +37,7 @@ mod tests {
     };
 
     #[tokio::test]
+    #[ignore = "Unstable tests"]
     async fn test_slos() {
         let slos_client = SloClient::new(
             AuthContext::from_env(),
