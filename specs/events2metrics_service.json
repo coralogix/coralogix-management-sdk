@@ -561,10 +561,10 @@
       "E2MCreateParams": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/E2MCreateParamsSpansQuery"
+            "$ref": "#/components/schemas/E2MCreateParamsLogsQuery"
           },
           {
-            "$ref": "#/components/schemas/E2MCreateParamsLogsQuery"
+            "$ref": "#/components/schemas/E2MCreateParamsSpansQuery"
           }
         ]
       },
@@ -703,13 +703,13 @@
       "E2MExecutionResponse": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/E2MExecutionResponseCreated"
-          },
-          {
             "$ref": "#/components/schemas/E2MExecutionResponseReplaced"
           },
           {
             "$ref": "#/components/schemas/E2MExecutionResponseDeleted"
+          },
+          {
+            "$ref": "#/components/schemas/E2MExecutionResponseCreated"
           }
         ]
       },
@@ -1098,6 +1098,34 @@
           "targetLabel",
           "sourceField"
         ]
+      },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",

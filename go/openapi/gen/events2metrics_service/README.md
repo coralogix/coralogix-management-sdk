@@ -135,6 +135,8 @@ Class | Method | HTTP request | Description
  - [ListLabelsCardinalityResponse](docs/ListLabelsCardinalityResponse.md)
  - [Logs2metricsV2Severity](docs/Logs2metricsV2Severity.md)
  - [MetricLabel](docs/MetricLabel.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [ReplaceE2MRequest](docs/ReplaceE2MRequest.md)
  - [ReplaceE2MResponse](docs/ReplaceE2MResponse.md)

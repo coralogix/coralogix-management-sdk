@@ -19,7 +19,7 @@ var _ MappedNullable = &TestIntegrationResultFailure{}
 
 // TestIntegrationResultFailure struct for TestIntegrationResultFailure
 type TestIntegrationResultFailure struct {
-	Failure *TestIntegrationResultFailure `json:"failure,omitempty"`
+	Failure *V1Failure `json:"failure,omitempty"`
 }
 
 // NewTestIntegrationResultFailure instantiates a new TestIntegrationResultFailure object
@@ -40,9 +40,9 @@ func NewTestIntegrationResultFailureWithDefaults() *TestIntegrationResultFailure
 }
 
 // GetFailure returns the Failure field value if set, zero value otherwise.
-func (o *TestIntegrationResultFailure) GetFailure() TestIntegrationResultFailure {
+func (o *TestIntegrationResultFailure) GetFailure() V1Failure {
 	if o == nil || IsNil(o.Failure) {
-		var ret TestIntegrationResultFailure
+		var ret V1Failure
 		return ret
 	}
 	return *o.Failure
@@ -50,7 +50,7 @@ func (o *TestIntegrationResultFailure) GetFailure() TestIntegrationResultFailure
 
 // GetFailureOk returns a tuple with the Failure field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TestIntegrationResultFailure) GetFailureOk() (*TestIntegrationResultFailure, bool) {
+func (o *TestIntegrationResultFailure) GetFailureOk() (*V1Failure, bool) {
 	if o == nil || IsNil(o.Failure) {
 		return nil, false
 	}
@@ -66,8 +66,8 @@ func (o *TestIntegrationResultFailure) HasFailure() bool {
 	return false
 }
 
-// SetFailure gets a reference to the given TestIntegrationResultFailure and assigns it to the Failure field.
-func (o *TestIntegrationResultFailure) SetFailure(v TestIntegrationResultFailure) {
+// SetFailure gets a reference to the given V1Failure and assigns it to the Failure field.
+func (o *TestIntegrationResultFailure) SetFailure(v V1Failure) {
 	o.Failure = &v
 }
 

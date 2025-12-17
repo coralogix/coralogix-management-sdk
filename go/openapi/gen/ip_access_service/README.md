@@ -102,6 +102,8 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [GetCompanyIpAccessSettingsResponse](docs/GetCompanyIpAccessSettingsResponse.md)
  - [IpAccess](docs/IpAccess.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [ReplaceCompanyIPAccessSettingsRequest](docs/ReplaceCompanyIPAccessSettingsRequest.md)
  - [ReplaceCompanyIpAccessSettingsResponse](docs/ReplaceCompanyIpAccessSettingsResponse.md)

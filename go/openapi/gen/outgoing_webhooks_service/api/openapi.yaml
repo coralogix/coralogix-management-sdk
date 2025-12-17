@@ -759,6 +759,28 @@ components:
         url: ""
       title: Microsoft Teams configuration
       type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     MultipleValues:
       properties:
         matcher:
@@ -804,17 +826,17 @@ components:
     OutgoingWebhook:
       oneOf:
       - $ref: "#/components/schemas/OutgoingWebhookGenericWebhook"
-      - $ref: "#/components/schemas/OutgoingWebhookSlack"
-      - $ref: "#/components/schemas/OutgoingWebhookPagerDuty"
       - $ref: "#/components/schemas/OutgoingWebhookSendLog"
       - $ref: "#/components/schemas/OutgoingWebhookOpsgenie"
-      - $ref: "#/components/schemas/OutgoingWebhookAwsEventBridge"
+      - $ref: "#/components/schemas/OutgoingWebhookDemisto"
+      - $ref: "#/components/schemas/OutgoingWebhookIbmEventNotifications"
       - $ref: "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
+      - $ref: "#/components/schemas/OutgoingWebhookSlack"
+      - $ref: "#/components/schemas/OutgoingWebhookPagerDuty"
       - $ref: "#/components/schemas/OutgoingWebhookEmailGroup"
       - $ref: "#/components/schemas/OutgoingWebhookMicrosoftTeams"
       - $ref: "#/components/schemas/OutgoingWebhookJira"
-      - $ref: "#/components/schemas/OutgoingWebhookDemisto"
-      - $ref: "#/components/schemas/OutgoingWebhookIbmEventNotifications"
+      - $ref: "#/components/schemas/OutgoingWebhookAwsEventBridge"
     OutgoingWebhookAwsEventBridge:
       additionalProperties: false
       externalDocs:
@@ -1030,18 +1052,18 @@ components:
       type: object
     OutgoingWebhookInputData:
       oneOf:
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataSlack"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataSendLog"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataJira"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataDemisto"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataGenericWebhook"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataSlack"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataSendLog"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataOpsgenie"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataGenericWebhook"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataDemisto"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
     OutgoingWebhookInputDataAwsEventBridge:
       additionalProperties: false
       externalDocs:
@@ -1561,13 +1583,9 @@ components:
       type: object
     TestOutgoingWebhookResponse:
       oneOf:
-      - $ref: "#/components/schemas/TestOutgoingWebhookResponseFailure"
       - $ref: "#/components/schemas/TestOutgoingWebhookResponseSuccess"
+      - $ref: "#/components/schemas/TestOutgoingWebhookResponseFailure"
     TestOutgoingWebhookResponse.Failure:
-      example:
-        displayMessage: example_display_message
-        errorMessage: example_error_message
-        statusCode: 400
       externalDocs:
         url: ""
       properties:
@@ -1590,11 +1608,6 @@ components:
       type: object
     TestOutgoingWebhookResponseFailure:
       additionalProperties: false
-      example:
-        failure:
-          displayMessage: example_display_message
-          errorMessage: example_error_message
-          statusCode: 400
       externalDocs:
         url: ""
       properties:
@@ -1604,6 +1617,8 @@ components:
       type: object
     TestOutgoingWebhookResponseSuccess:
       additionalProperties: false
+      example:
+        success: "{}"
       externalDocs:
         url: ""
       properties:

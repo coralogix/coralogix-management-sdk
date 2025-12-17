@@ -427,6 +427,28 @@ components:
             $ref: "#/components/schemas/v2.SystemRole"
           type: array
       type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     MultipleValues:
       properties:
         matcher:
@@ -522,8 +544,8 @@ components:
       type: string
     RoleManagementService_CreateRole_request:
       oneOf:
-      - $ref: "#/components/schemas/CreateRoleRequestParentRoleId"
       - $ref: "#/components/schemas/CreateRoleRequestParentRoleName"
+      - $ref: "#/components/schemas/CreateRoleRequestParentRoleId"
       type: object
     RoleManagementService_UpdateRole_request:
       additionalProperties: false

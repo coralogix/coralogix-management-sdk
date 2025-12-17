@@ -24,6 +24,8 @@ model_get_api_key_response.go
 model_get_send_data_api_keys_response.go
 model_key_info.go
 model_key_info_key_permissions.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_owner.go
 model_owner_organisation_id.go

@@ -103,6 +103,8 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [GetDeployedExtensionsResponse](docs/GetDeployedExtensionsResponse.md)
  - [ItemCounts](docs/ItemCounts.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [RevertDeploymentOfExtensionRequest](docs/RevertDeploymentOfExtensionRequest.md)
  - [UndeployExtensionResponse](docs/UndeployExtensionResponse.md)

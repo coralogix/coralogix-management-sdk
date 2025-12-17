@@ -459,7 +459,6 @@ components:
       - PAGERDUTY
       - IBM_EVENT_NOTIFICATIONS
       - SERVICE_NOW
-      - EMAIL
       type: string
     ConnectorTypeSummary:
       description: Summary information about a connector type
@@ -768,6 +767,28 @@ components:
             $ref: "#/components/schemas/Connector"
           type: array
       title: List Connectors Response
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:

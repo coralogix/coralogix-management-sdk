@@ -19,6 +19,7 @@ import (
 // Visualization - struct for Visualization
 type Visualization struct {
 	VisualizationGauge *VisualizationGauge
+	VisualizationGeomap *VisualizationGeomap
 	VisualizationHeatmap *VisualizationHeatmap
 	VisualizationHexagonBins *VisualizationHexagonBins
 	VisualizationHorizontalBars *VisualizationHorizontalBars
@@ -34,6 +35,13 @@ type Visualization struct {
 func VisualizationGaugeAsVisualization(v *VisualizationGauge) Visualization {
 	return Visualization{
 		VisualizationGauge: v,
+	}
+}
+
+// VisualizationGeomapAsVisualization is a convenience function that returns VisualizationGeomap wrapped in Visualization
+func VisualizationGeomapAsVisualization(v *VisualizationGeomap) Visualization {
+	return Visualization{
+		VisualizationGeomap: v,
 	}
 }
 
@@ -120,6 +128,23 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.VisualizationGauge = nil
+	}
+
+	// try to unmarshal data into VisualizationGeomap
+	err = newStrictDecoder(data).Decode(&dst.VisualizationGeomap)
+	if err == nil {
+		jsonVisualizationGeomap, _ := json.Marshal(dst.VisualizationGeomap)
+		if string(jsonVisualizationGeomap) == "{}" { // empty struct
+			dst.VisualizationGeomap = nil
+		} else {
+			if err = validator.Validate(dst.VisualizationGeomap); err != nil {
+				dst.VisualizationGeomap = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.VisualizationGeomap = nil
 	}
 
 	// try to unmarshal data into VisualizationHeatmap
@@ -278,6 +303,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.VisualizationGauge = nil
+		dst.VisualizationGeomap = nil
 		dst.VisualizationHeatmap = nil
 		dst.VisualizationHexagonBins = nil
 		dst.VisualizationHorizontalBars = nil
@@ -300,6 +326,10 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 func (src Visualization) MarshalJSON() ([]byte, error) {
 	if src.VisualizationGauge != nil {
 		return json.Marshal(&src.VisualizationGauge)
+	}
+
+	if src.VisualizationGeomap != nil {
+		return json.Marshal(&src.VisualizationGeomap)
 	}
 
 	if src.VisualizationHeatmap != nil {
@@ -350,6 +380,10 @@ func (obj *Visualization) GetActualInstance() (interface{}) {
 		return obj.VisualizationGauge
 	}
 
+	if obj.VisualizationGeomap != nil {
+		return obj.VisualizationGeomap
+	}
+
 	if obj.VisualizationHeatmap != nil {
 		return obj.VisualizationHeatmap
 	}
@@ -394,6 +428,10 @@ func (obj *Visualization) GetActualInstance() (interface{}) {
 func (obj Visualization) GetActualInstanceValue() (interface{}) {
 	if obj.VisualizationGauge != nil {
 		return *obj.VisualizationGauge
+	}
+
+	if obj.VisualizationGeomap != nil {
+		return *obj.VisualizationGeomap
 	}
 
 	if obj.VisualizationHeatmap != nil {

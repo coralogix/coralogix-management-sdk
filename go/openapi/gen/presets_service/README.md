@@ -113,6 +113,8 @@ Class | Method | HTTP request | Description
  - [ListPresetSummariesResponse](docs/ListPresetSummariesResponse.md)
  - [MatchEntityTypeAndSubTypeCondition](docs/MatchEntityTypeAndSubTypeCondition.md)
  - [MessageConfig](docs/MessageConfig.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [NotificationCenterConditionType](docs/NotificationCenterConditionType.md)
  - [NotificationCenterConditionTypeMatchEntityType](docs/NotificationCenterConditionTypeMatchEntityType.md)

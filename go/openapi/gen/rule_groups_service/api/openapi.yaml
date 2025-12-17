@@ -372,8 +372,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -381,8 +383,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             id: id
@@ -394,8 +398,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -403,8 +409,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             id: id
@@ -438,8 +446,6 @@ components:
       - DESTINATION_FIELD_TEXT
       type: string
     ExtractParameters:
-      example:
-        rule: rule
       properties:
         rule:
           type: string
@@ -583,8 +589,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -592,8 +600,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             id: id
@@ -605,8 +615,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -614,8 +626,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             id: id
@@ -674,8 +688,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -683,8 +699,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             id: id
@@ -696,8 +714,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -705,8 +725,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             id: id
@@ -731,8 +753,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -740,8 +764,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             id: id
@@ -753,8 +779,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -762,8 +790,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             id: id
@@ -787,6 +817,28 @@ components:
             $ref: "#/components/schemas/RuleGroup"
           type: array
       type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     MultipleValues:
       properties:
         matcher:
@@ -804,6 +856,10 @@ components:
           type: string
       type: object
     RemoveFieldsParameters:
+      example:
+        fields:
+        - fields
+        - fields
       properties:
         fields:
           items:
@@ -828,8 +884,10 @@ components:
             description: description
             id: id
             parameters:
-              extractParameters:
-                rule: rule
+              removeFieldsParameters:
+                fields:
+                - fields
+                - fields
             enabled: true
             order: 1
           - sourceField: sourceField
@@ -837,8 +895,10 @@ components:
             description: description
             id: id
             parameters:
-              extractParameters:
-                rule: rule
+              removeFieldsParameters:
+                fields:
+                - fields
+                - fields
             enabled: true
             order: 1
           id: id
@@ -850,8 +910,10 @@ components:
             description: description
             id: id
             parameters:
-              extractParameters:
-                rule: rule
+              removeFieldsParameters:
+                fields:
+                - fields
+                - fields
             enabled: true
             order: 1
           - sourceField: sourceField
@@ -859,8 +921,10 @@ components:
             description: description
             id: id
             parameters:
-              extractParameters:
-                rule: rule
+              removeFieldsParameters:
+                fields:
+                - fields
+                - fields
             enabled: true
             order: 1
           id: id
@@ -931,16 +995,16 @@ components:
       type: object
     RuleParameters:
       oneOf:
+      - $ref: "#/components/schemas/RuleParametersRemoveFieldsParameters"
+      - $ref: "#/components/schemas/RuleParametersJsonStringifyParameters"
+      - $ref: "#/components/schemas/RuleParametersJsonParseParameters"
       - $ref: "#/components/schemas/RuleParametersExtractParameters"
+      - $ref: "#/components/schemas/RuleParametersParseParameters"
+      - $ref: "#/components/schemas/RuleParametersBlockParameters"
+      - $ref: "#/components/schemas/RuleParametersExtractTimestampParameters"
       - $ref: "#/components/schemas/RuleParametersJsonExtractParameters"
       - $ref: "#/components/schemas/RuleParametersReplaceParameters"
       - $ref: "#/components/schemas/RuleParametersAllowParameters"
-      - $ref: "#/components/schemas/RuleParametersExtractTimestampParameters"
-      - $ref: "#/components/schemas/RuleParametersJsonStringifyParameters"
-      - $ref: "#/components/schemas/RuleParametersJsonParseParameters"
-      - $ref: "#/components/schemas/RuleParametersParseParameters"
-      - $ref: "#/components/schemas/RuleParametersBlockParameters"
-      - $ref: "#/components/schemas/RuleParametersRemoveFieldsParameters"
     RuleParametersAllowParameters:
       additionalProperties: false
       properties:
@@ -955,9 +1019,6 @@ components:
       type: object
     RuleParametersExtractParameters:
       additionalProperties: false
-      example:
-        extractParameters:
-          rule: rule
       properties:
         extractParameters:
           $ref: "#/components/schemas/ExtractParameters"
@@ -994,6 +1055,11 @@ components:
       type: object
     RuleParametersRemoveFieldsParameters:
       additionalProperties: false
+      example:
+        removeFieldsParameters:
+          fields:
+          - fields
+          - fields
       properties:
         removeFieldsParameters:
           $ref: "#/components/schemas/RemoveFieldsParameters"
@@ -1012,8 +1078,10 @@ components:
           description: description
           id: id
           parameters:
-            extractParameters:
-              rule: rule
+            removeFieldsParameters:
+              fields:
+              - fields
+              - fields
           enabled: true
           order: 1
         - sourceField: sourceField
@@ -1021,8 +1089,10 @@ components:
           description: description
           id: id
           parameters:
-            extractParameters:
-              rule: rule
+            removeFieldsParameters:
+              fields:
+              - fields
+              - fields
           enabled: true
           order: 1
         id: id
@@ -1061,8 +1131,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -1070,8 +1142,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             id: id
@@ -1083,8 +1157,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -1092,8 +1168,10 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                removeFieldsParameters:
+                  fields:
+                  - fields
+                  - fields
               enabled: true
               order: 1
             id: id
@@ -1148,8 +1226,10 @@ components:
         description: description
         id: id
         parameters:
-          extractParameters:
-            rule: rule
+          removeFieldsParameters:
+            fields:
+            - fields
+            - fields
         enabled: true
         order: 1
       properties:

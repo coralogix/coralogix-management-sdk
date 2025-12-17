@@ -117,6 +117,8 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [GetActionResponse](docs/GetActionResponse.md)
  - [ListActionsResponse](docs/ListActionsResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [ReplaceActionRequest](docs/ReplaceActionRequest.md)
  - [ReplaceActionResponse](docs/ReplaceActionResponse.md)

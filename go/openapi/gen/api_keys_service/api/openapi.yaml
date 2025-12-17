@@ -306,10 +306,14 @@ components:
       example:
         keyInfo:
           owner:
-            organisationId: organisationId
+            userId: userId
           name: my_api_key
           active: true
           hashed: true
+          accessPolicy: "{\"version\":\"2025-01-01\",\"default\":{\"permissions\"\
+            :{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\"\
+            :\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\"\
+            :\"grant\"}},\"rules\":[]}"
           id: id
           keyPermissions:
             presets:
@@ -339,10 +343,14 @@ components:
       example:
         keys:
         - owner:
-            organisationId: organisationId
+            userId: userId
           name: my_api_key
           active: true
           hashed: true
+          accessPolicy: "{\"version\":\"2025-01-01\",\"default\":{\"permissions\"\
+            :{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\"\
+            :\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\"\
+            :\"grant\"}},\"rules\":[]}"
           id: id
           keyPermissions:
             presets:
@@ -359,10 +367,14 @@ components:
             - permissions
           value: value
         - owner:
-            organisationId: organisationId
+            userId: userId
           name: my_api_key
           active: true
           hashed: true
+          accessPolicy: "{\"version\":\"2025-01-01\",\"default\":{\"permissions\"\
+            :{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\"\
+            :\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\"\
+            :\"grant\"}},\"rules\":[]}"
           id: id
           keyPermissions:
             presets:
@@ -393,10 +405,14 @@ components:
         an API key.
       example:
         owner:
-          organisationId: organisationId
+          userId: userId
         name: my_api_key
         active: true
         hashed: true
+        accessPolicy: "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"\
+          data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\"\
+          :\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\"\
+          :\"grant\"}},\"rules\":[]}"
         id: id
         keyPermissions:
           presets:
@@ -416,6 +432,13 @@ components:
         description: Find out more about api keys
         url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
       properties:
+        accessPolicy:
+          description: JSON string representing the access policy for this API key.
+            Defines granular permissions for users and groups.
+          example: "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\"\
+            :\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\"\
+            :\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}"
+          type: string
         active:
           example: true
           type: boolean
@@ -464,6 +487,28 @@ components:
           type: array
       title: Key Permissions
       type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     MultipleValues:
       properties:
         matcher:
@@ -475,13 +520,11 @@ components:
       type: object
     Owner:
       oneOf:
-      - $ref: "#/components/schemas/OwnerOrganisationId"
       - $ref: "#/components/schemas/OwnerUserId"
       - $ref: "#/components/schemas/OwnerTeamId"
+      - $ref: "#/components/schemas/OwnerOrganisationId"
     OwnerOrganisationId:
       additionalProperties: false
-      example:
-        organisationId: organisationId
       properties:
         organisationId:
           type: string
@@ -495,6 +538,8 @@ components:
       type: object
     OwnerUserId:
       additionalProperties: false
+      example:
+        userId: userId
       properties:
         userId:
           type: string
@@ -574,6 +619,13 @@ components:
       additionalProperties: false
       description: This data structure is used to create an API key.
       properties:
+        accessPolicy:
+          description: JSON string representing the access policy for this API key.
+            Defines granular permissions for users and groups.
+          example: "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\"\
+            :\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\"\
+            :\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}"
+          type: string
         hashed:
           example: true
           type: boolean
@@ -590,6 +642,14 @@ components:
       additionalProperties: false
       description: This data structure is used to update an API key.
       properties:
+        accessPolicy:
+          description: "JSON string representing the access policy for this API key.\
+            \ Defines granular permissions for users and groups. To delete an existing\
+            \ policy, pass an empty string."
+          example: "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\"\
+            :\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\"\
+            :\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}"
+          type: string
         isActive:
           example: true
           type: boolean

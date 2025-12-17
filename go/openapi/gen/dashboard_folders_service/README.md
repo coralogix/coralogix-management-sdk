@@ -102,6 +102,8 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [GetDashboardFolderResponse](docs/GetDashboardFolderResponse.md)
  - [ListDashboardFoldersResponse](docs/ListDashboardFoldersResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [ReplaceDashboardFolderRequestDataStructure](docs/ReplaceDashboardFolderRequestDataStructure.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)

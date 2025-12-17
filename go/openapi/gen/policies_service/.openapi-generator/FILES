@@ -40,6 +40,8 @@ model_get_policy_settings_response.go
 model_log_meta_fields_values.go
 model_log_rules.go
 model_logs_policy_settings.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_placement.go
 model_placement_first.go

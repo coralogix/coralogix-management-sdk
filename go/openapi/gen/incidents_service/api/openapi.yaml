@@ -1682,7 +1682,7 @@ components:
       additionalProperties: false
       example:
         incidentField:
-          duration: duration
+          severity: null
       properties:
         incidentField:
           $ref: "#/components/schemas/IncidentFieldOneOf"
@@ -1815,9 +1815,9 @@ components:
       example:
         groupBysValue:
         - incidentField:
-            duration: duration
+            severity: null
         - incidentField:
-            duration: duration
+            severity: null
         aggAssignmentsCount:
         - count: 10
           assignedTo:
@@ -1935,16 +1935,16 @@ components:
     IncidentEvent:
       oneOf:
       - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
       - $ref: "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
       - $ref: "#/components/schemas/IncidentEventUnassignOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventAssignmentOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventCloseAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventAssignmentOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
       - $ref: "#/components/schemas/IncidentEventCloseOperationalEvent"
     IncidentEventAcknowledge:
       properties:
@@ -2447,17 +2447,17 @@ components:
       type: object
     IncidentFieldOneOf:
       oneOf:
-      - $ref: "#/components/schemas/IncidentFieldOneOfDuration"
-      - $ref: "#/components/schemas/IncidentFieldOneOfName"
-      - $ref: "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
-      - $ref: "#/components/schemas/IncidentFieldOneOfSubsystemName"
-      - $ref: "#/components/schemas/IncidentFieldOneOfId"
       - $ref: "#/components/schemas/IncidentFieldOneOfSeverity"
       - $ref: "#/components/schemas/IncidentFieldOneOfCreatedAt"
       - $ref: "#/components/schemas/IncidentFieldOneOfClosedAt"
-      - $ref: "#/components/schemas/IncidentFieldOneOfState"
       - $ref: "#/components/schemas/IncidentFieldOneOfStatus"
       - $ref: "#/components/schemas/IncidentFieldOneOfApplicationName"
+      - $ref: "#/components/schemas/IncidentFieldOneOfSubsystemName"
+      - $ref: "#/components/schemas/IncidentFieldOneOfName"
+      - $ref: "#/components/schemas/IncidentFieldOneOfState"
+      - $ref: "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
+      - $ref: "#/components/schemas/IncidentFieldOneOfDuration"
+      - $ref: "#/components/schemas/IncidentFieldOneOfId"
     IncidentFieldOneOfApplicationName:
       additionalProperties: false
       properties:
@@ -2480,8 +2480,6 @@ components:
       type: object
     IncidentFieldOneOfDuration:
       additionalProperties: false
-      example:
-        duration: duration
       properties:
         duration:
           type: string
@@ -2507,6 +2505,8 @@ components:
       type: object
     IncidentFieldOneOfSeverity:
       additionalProperties: false
+      example:
+        severity: null
       properties:
         severity:
           $ref: "#/components/schemas/IncidentSeverity"
@@ -2813,9 +2813,9 @@ components:
         incidentAggs:
         - groupBysValue:
           - incidentField:
-              duration: duration
+              severity: null
           - incidentField:
-              duration: duration
+              severity: null
           aggAssignmentsCount:
           - count: 10
             assignedTo:
@@ -2856,9 +2856,9 @@ components:
           lastStateUpdateTime: 2000-01-23T04:56:07.000+00:00
         - groupBysValue:
           - incidentField:
-              duration: duration
+              severity: null
           - incidentField:
-              duration: duration
+              severity: null
           aggAssignmentsCount:
           - count: 10
             assignedTo:
@@ -3185,6 +3185,28 @@ components:
       - incidents
       - pagination
       title: List incidents response
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:
@@ -3765,8 +3787,8 @@ components:
       type: object
     IncidentsService_ListIncidents_order_bys_parameter_inner:
       oneOf:
-      - $ref: "#/components/schemas/V1OrderByIncidentField"
       - $ref: "#/components/schemas/V1OrderByContextualLabel"
+      - $ref: "#/components/schemas/V1OrderByIncidentField"
     IncidentsService_ListIncidentAggregations_group_bys_parameter_inner:
       oneOf:
       - $ref: "#/components/schemas/GroupByIncidentField"

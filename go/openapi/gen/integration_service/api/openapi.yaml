@@ -541,6 +541,8 @@ components:
       type: object
     AzureArmTemplate:
       description: This data structure represents an azure ARM template.
+      example:
+        templateUrl: templateUrl
       externalDocs:
         url: ""
       properties:
@@ -575,37 +577,6 @@ components:
       title: CloudFormation stack
       type: object
     CloudFormationTemplate:
-      example:
-        postInstallationSteps:
-          key: postInstallationSteps
-        parameters:
-          key: parameters
-        commands:
-        - tooltipText: tooltipText
-          name: name
-          description: description
-          language: UNKNOWN
-          links:
-          - text: text
-            key: key
-            url: url
-          - text: text
-            key: key
-            url: url
-          command: command
-        - tooltipText: tooltipText
-          name: name
-          description: description
-          language: UNKNOWN
-          links:
-          - text: text
-            key: key
-            url: url
-          - text: text
-            key: key
-            url: url
-          command: command
-        templateUrl: templateUrl
       externalDocs:
         url: ""
       properties:
@@ -650,19 +621,6 @@ components:
           $ref: "#/components/schemas/ColorsByStack"
       type: object
     CommandInformation:
-      example:
-        tooltipText: tooltipText
-        name: name
-        description: description
-        language: UNKNOWN
-        links:
-        - text: text
-          key: key
-          url: url
-        - text: text
-          key: key
-          url: url
-        command: command
       externalDocs:
         url: ""
       properties:
@@ -721,15 +679,9 @@ components:
               key: details
           id: id
           parameters:
-          - stringList:
-              values:
-              - values
-              - values
+          - numericValue: 0.8008281904610115
             key: key
-          - stringList:
-              values:
-              - values
-              - values
+          - numericValue: 0.8008281904610115
             key: key
           isTesting: true
           empty: "{}"
@@ -744,15 +696,9 @@ components:
               key: details
           id: id
           parameters:
-          - stringList:
-              values:
-              - values
-              - values
+          - numericValue: 0.8008281904610115
             key: key
-          - stringList:
-              values:
-              - values
-              - values
+          - numericValue: 0.8008281904610115
             key: key
           isTesting: true
           empty: "{}"
@@ -780,15 +726,9 @@ components:
             key: details
         id: id
         parameters:
-        - stringList:
-            values:
-            - values
-            - values
+        - numericValue: 0.8008281904610115
           key: key
-        - stringList:
-            values:
-            - values
-            - values
+        - numericValue: 0.8008281904610115
           key: key
       externalDocs:
         url: ""
@@ -1036,6 +976,8 @@ components:
       title: Extension revision
       type: object
     ExternalUrl:
+      example:
+        url: url
       externalDocs:
         url: ""
       properties:
@@ -1090,14 +1032,42 @@ components:
       type: object
     FieldInformation:
       oneOf:
+      - $ref: "#/components/schemas/FieldInformationMultiText"
       - $ref: "#/components/schemas/FieldInformationMultipleSelection"
       - $ref: "#/components/schemas/FieldInformationSingleBoolean"
       - $ref: "#/components/schemas/FieldInformationSelection"
       - $ref: "#/components/schemas/FieldInformationSingleNumber"
       - $ref: "#/components/schemas/FieldInformationSingle"
-      - $ref: "#/components/schemas/FieldInformationMultiText"
     FieldInformationMultiText:
       additionalProperties: false
+      example:
+        visible: true
+        groupId: groupId
+        tooltip: tooltip
+        multiText:
+          options:
+          - options
+          - options
+          defaultValues:
+          - defaultValues
+          - defaultValues
+        type: API_KEY
+        upgradeNotice: upgradeNotice
+        predefined: true
+        required: true
+        templateParamName: templateParamName
+        readonly: true
+        documentationReference: documentationReference
+        name: name
+        placeholder: placeholder
+        applicableIf:
+          values:
+          - fieldName: fieldName
+            valuePattern: valuePattern
+          - fieldName: fieldName
+            valuePattern: valuePattern
+          type: UNKNOWN
+        allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -1135,31 +1105,6 @@ components:
       type: object
     FieldInformationMultipleSelection:
       additionalProperties: false
-      example:
-        visible: true
-        groupId: groupId
-        tooltip: tooltip
-        type: API_KEY
-        upgradeNotice: upgradeNotice
-        predefined: true
-        required: true
-        templateParamName: templateParamName
-        readonly: true
-        documentationReference: documentationReference
-        name: name
-        placeholder: placeholder
-        applicableIf:
-          values:
-          - fieldName: fieldName
-            valuePattern: valuePattern
-          - fieldName: fieldName
-            valuePattern: valuePattern
-          type: UNKNOWN
-        allowedPattern: allowedPattern
-        multipleSelection:
-          options:
-          - options
-          - options
       externalDocs:
         url: ""
       properties:
@@ -1424,15 +1369,9 @@ components:
               key: details
           id: id
           parameters:
-          - stringList:
-              values:
-              - values
-              - values
+          - numericValue: 0.8008281904610115
             key: key
-          - stringList:
-              values:
-              - values
-              - values
+          - numericValue: 0.8008281904610115
             key: key
       externalDocs:
         url: ""
@@ -1447,41 +1386,12 @@ components:
         integrationDefinition:
           featureFlag: featureFlag
           integrationType:
-            genericWebhook: "{}"
+            untracked: "{}"
           revisions:
           - revisionDeploymentSupported: true
             featureFlag: featureFlag
             upgradeInstructionsMd: upgradeInstructionsMd
-            cloudFormation:
-              postInstallationSteps:
-                key: postInstallationSteps
-              parameters:
-                key: parameters
-              commands:
-              - tooltipText: tooltipText
-                name: name
-                description: description
-                language: UNKNOWN
-                links:
-                - text: text
-                  key: key
-                  url: url
-                - text: text
-                  key: key
-                  url: url
-                command: command
-              - tooltipText: tooltipText
-                name: name
-                description: description
-                language: UNKNOWN
-                links:
-                - text: text
-                  key: key
-                  url: url
-                - text: text
-                  key: key
-                  url: url
-                command: command
+            azureArmTemplate:
               templateUrl: templateUrl
             groups:
             - name: name
@@ -1493,6 +1403,13 @@ components:
             - visible: true
               groupId: groupId
               tooltip: tooltip
+              multiText:
+                options:
+                - options
+                - options
+                defaultValues:
+                - defaultValues
+                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
@@ -1510,13 +1427,16 @@ components:
                   valuePattern: valuePattern
                 type: UNKNOWN
               allowedPattern: allowedPattern
-              multipleSelection:
-                options:
-                - options
-                - options
             - visible: true
               groupId: groupId
               tooltip: tooltip
+              multiText:
+                options:
+                - options
+                - options
+                defaultValues:
+                - defaultValues
+                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
@@ -1534,43 +1454,10 @@ components:
                   valuePattern: valuePattern
                 type: UNKNOWN
               allowedPattern: allowedPattern
-              multipleSelection:
-                options:
-                - options
-                - options
           - revisionDeploymentSupported: true
             featureFlag: featureFlag
             upgradeInstructionsMd: upgradeInstructionsMd
-            cloudFormation:
-              postInstallationSteps:
-                key: postInstallationSteps
-              parameters:
-                key: parameters
-              commands:
-              - tooltipText: tooltipText
-                name: name
-                description: description
-                language: UNKNOWN
-                links:
-                - text: text
-                  key: key
-                  url: url
-                - text: text
-                  key: key
-                  url: url
-                command: command
-              - tooltipText: tooltipText
-                name: name
-                description: description
-                language: UNKNOWN
-                links:
-                - text: text
-                  key: key
-                  url: url
-                - text: text
-                  key: key
-                  url: url
-                command: command
+            azureArmTemplate:
               templateUrl: templateUrl
             groups:
             - name: name
@@ -1582,6 +1469,13 @@ components:
             - visible: true
               groupId: groupId
               tooltip: tooltip
+              multiText:
+                options:
+                - options
+                - options
+                defaultValues:
+                - defaultValues
+                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
@@ -1599,13 +1493,16 @@ components:
                   valuePattern: valuePattern
                 type: UNKNOWN
               allowedPattern: allowedPattern
-              multipleSelection:
-                options:
-                - options
-                - options
             - visible: true
               groupId: groupId
               tooltip: tooltip
+              multiText:
+                options:
+                - options
+                - options
+                defaultValues:
+                - defaultValues
+                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
@@ -1623,10 +1520,6 @@ components:
                   valuePattern: valuePattern
                 type: UNKNOWN
               allowedPattern: allowedPattern
-              multipleSelection:
-                options:
-                - options
-                - options
           key: key
       externalDocs:
         url: ""
@@ -1651,15 +1544,9 @@ components:
                   key: details
               id: id
               parameters:
-              - stringList:
-                  values:
-                  - values
-                  - values
+              - numericValue: 0.8008281904610115
                 key: key
-              - stringList:
-                  values:
-                  - values
-                  - values
+              - numericValue: 0.8008281904610115
                 key: key
               isTesting: true
               empty: "{}"
@@ -1674,15 +1561,9 @@ components:
                   key: details
               id: id
               parameters:
-              - stringList:
-                  values:
-                  - values
-                  - values
+              - numericValue: 0.8008281904610115
                 key: key
-              - stringList:
-                  values:
-                  - values
-                  - values
+              - numericValue: 0.8008281904610115
                 key: key
               isTesting: true
               empty: "{}"
@@ -2429,6 +2310,8 @@ components:
             - integrations
             - integrations
             isHidden: true
+          external:
+            url: url
           docs:
           - link: link
             name: name
@@ -2437,7 +2320,7 @@ components:
           integration:
             featureFlag: featureFlag
             integrationType:
-              genericWebhook: "{}"
+              untracked: "{}"
             versions:
             - versions
             - versions
@@ -2449,12 +2332,6 @@ components:
             tags:
             - tags
             - tags
-          local:
-            changes:
-            - descriptionMd: descriptionMd
-              version: version
-            - descriptionMd: descriptionMd
-              version: version
       externalDocs:
         url: ""
       properties:
@@ -2469,7 +2346,7 @@ components:
         - integration:
             featureFlag: featureFlag
             integrationType:
-              genericWebhook: "{}"
+              untracked: "{}"
             versions:
             - versions
             - versions
@@ -2490,7 +2367,7 @@ components:
         - integration:
             featureFlag: featureFlag
             integrationType:
-              genericWebhook: "{}"
+              untracked: "{}"
             versions:
             - versions
             - versions
@@ -2522,7 +2399,7 @@ components:
         integration:
           featureFlag: featureFlag
           integrationType:
-            genericWebhook: "{}"
+            untracked: "{}"
           versions:
           - versions
           - versions
@@ -2646,7 +2523,7 @@ components:
       example:
         featureFlag: featureFlag
         integrationType:
-          genericWebhook: "{}"
+          untracked: "{}"
         versions:
         - versions
         - versions
@@ -2690,41 +2567,12 @@ components:
       example:
         featureFlag: featureFlag
         integrationType:
-          genericWebhook: "{}"
+          untracked: "{}"
         revisions:
         - revisionDeploymentSupported: true
           featureFlag: featureFlag
           upgradeInstructionsMd: upgradeInstructionsMd
-          cloudFormation:
-            postInstallationSteps:
-              key: postInstallationSteps
-            parameters:
-              key: parameters
-            commands:
-            - tooltipText: tooltipText
-              name: name
-              description: description
-              language: UNKNOWN
-              links:
-              - text: text
-                key: key
-                url: url
-              - text: text
-                key: key
-                url: url
-              command: command
-            - tooltipText: tooltipText
-              name: name
-              description: description
-              language: UNKNOWN
-              links:
-              - text: text
-                key: key
-                url: url
-              - text: text
-                key: key
-                url: url
-              command: command
+          azureArmTemplate:
             templateUrl: templateUrl
           groups:
           - name: name
@@ -2736,6 +2584,13 @@ components:
           - visible: true
             groupId: groupId
             tooltip: tooltip
+            multiText:
+              options:
+              - options
+              - options
+              defaultValues:
+              - defaultValues
+              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
@@ -2753,13 +2608,16 @@ components:
                 valuePattern: valuePattern
               type: UNKNOWN
             allowedPattern: allowedPattern
-            multipleSelection:
-              options:
-              - options
-              - options
           - visible: true
             groupId: groupId
             tooltip: tooltip
+            multiText:
+              options:
+              - options
+              - options
+              defaultValues:
+              - defaultValues
+              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
@@ -2777,43 +2635,10 @@ components:
                 valuePattern: valuePattern
               type: UNKNOWN
             allowedPattern: allowedPattern
-            multipleSelection:
-              options:
-              - options
-              - options
         - revisionDeploymentSupported: true
           featureFlag: featureFlag
           upgradeInstructionsMd: upgradeInstructionsMd
-          cloudFormation:
-            postInstallationSteps:
-              key: postInstallationSteps
-            parameters:
-              key: parameters
-            commands:
-            - tooltipText: tooltipText
-              name: name
-              description: description
-              language: UNKNOWN
-              links:
-              - text: text
-                key: key
-                url: url
-              - text: text
-                key: key
-                url: url
-              command: command
-            - tooltipText: tooltipText
-              name: name
-              description: description
-              language: UNKNOWN
-              links:
-              - text: text
-                key: key
-                url: url
-              - text: text
-                key: key
-                url: url
-              command: command
+          azureArmTemplate:
             templateUrl: templateUrl
           groups:
           - name: name
@@ -2825,6 +2650,13 @@ components:
           - visible: true
             groupId: groupId
             tooltip: tooltip
+            multiText:
+              options:
+              - options
+              - options
+              defaultValues:
+              - defaultValues
+              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
@@ -2842,13 +2674,16 @@ components:
                 valuePattern: valuePattern
               type: UNKNOWN
             allowedPattern: allowedPattern
-            multipleSelection:
-              options:
-              - options
-              - options
           - visible: true
             groupId: groupId
             tooltip: tooltip
+            multiText:
+              options:
+              - options
+              - options
+              defaultValues:
+              - defaultValues
+              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
@@ -2866,10 +2701,6 @@ components:
                 valuePattern: valuePattern
               type: UNKNOWN
             allowedPattern: allowedPattern
-            multipleSelection:
-              options:
-              - options
-              - options
         key: key
       externalDocs:
         url: ""
@@ -2901,11 +2732,813 @@ components:
       type: object
     IntegrationDetails:
       oneOf:
-      - $ref: "#/components/schemas/IntegrationDetailsLocal"
       - $ref: "#/components/schemas/IntegrationDetailsExternal"
+      - $ref: "#/components/schemas/IntegrationDetailsLocal"
     IntegrationDetailsExternal:
       additionalProperties: false
       description: This data structure represents a set of integration details.
+      example:
+        default:
+          registered:
+          - lastUpdated: 2000-01-23T04:56:07.000+00:00
+            definitionVersion: definitionVersion
+            integrationStatus:
+              connectionStatus: PENDING
+              messages:
+              - messages
+              - messages
+              details:
+                key: details
+            id: id
+            parameters:
+            - numericValue: 0.8008281904610115
+              key: key
+            - numericValue: 0.8008281904610115
+              key: key
+            isTesting: true
+            empty: "{}"
+          - lastUpdated: 2000-01-23T04:56:07.000+00:00
+            definitionVersion: definitionVersion
+            integrationStatus:
+              connectionStatus: PENDING
+              messages:
+              - messages
+              - messages
+              details:
+                key: details
+            id: id
+            parameters:
+            - numericValue: 0.8008281904610115
+              key: key
+            - numericValue: 0.8008281904610115
+              key: key
+            isTesting: true
+            empty: "{}"
+        extensions:
+        - image: image
+          darkModeImage: darkModeImage
+          keywords:
+          - keywords
+          - keywords
+          permissionDeniedRevisions:
+          - permissionDeniedItems:
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            description: description
+            excerpt: excerpt
+            binaries:
+            - data: data
+              type: KIBANA_INDEX_PATTERN
+            - data: data
+              type: KIBANA_INDEX_PATTERN
+            items:
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            version: version
+            integrationDetails:
+            - link: link
+              name: name
+            - link: link
+              name: name
+            isTesting: true
+            labels:
+            - labels
+            - labels
+          - permissionDeniedItems:
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            description: description
+            excerpt: excerpt
+            binaries:
+            - data: data
+              type: KIBANA_INDEX_PATTERN
+            - data: data
+              type: KIBANA_INDEX_PATTERN
+            items:
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            version: version
+            integrationDetails:
+            - link: link
+              name: name
+            - link: link
+              name: name
+            isTesting: true
+            labels:
+            - labels
+            - labels
+          name: name
+          changelog:
+          - descriptionMd: descriptionMd
+            version: version
+          - descriptionMd: descriptionMd
+            version: version
+          revisions:
+          - permissionDeniedItems:
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            description: description
+            excerpt: excerpt
+            binaries:
+            - data: data
+              type: KIBANA_INDEX_PATTERN
+            - data: data
+              type: KIBANA_INDEX_PATTERN
+            items:
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            version: version
+            integrationDetails:
+            - link: link
+              name: name
+            - link: link
+              name: name
+            isTesting: true
+            labels:
+            - labels
+            - labels
+          - permissionDeniedItems:
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            description: description
+            excerpt: excerpt
+            binaries:
+            - data: data
+              type: KIBANA_INDEX_PATTERN
+            - data: data
+              type: KIBANA_INDEX_PATTERN
+            items:
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            version: version
+            integrationDetails:
+            - link: link
+              name: name
+            - link: link
+              name: name
+            isTesting: true
+            labels:
+            - labels
+            - labels
+          id: id
+          deprecation:
+            reason: reason
+            replacementExtensions:
+            - replacementExtensions
+            - replacementExtensions
+          integrations:
+          - integrations
+          - integrations
+          isHidden: true
+        - image: image
+          darkModeImage: darkModeImage
+          keywords:
+          - keywords
+          - keywords
+          permissionDeniedRevisions:
+          - permissionDeniedItems:
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            description: description
+            excerpt: excerpt
+            binaries:
+            - data: data
+              type: KIBANA_INDEX_PATTERN
+            - data: data
+              type: KIBANA_INDEX_PATTERN
+            items:
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            version: version
+            integrationDetails:
+            - link: link
+              name: name
+            - link: link
+              name: name
+            isTesting: true
+            labels:
+            - labels
+            - labels
+          - permissionDeniedItems:
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            description: description
+            excerpt: excerpt
+            binaries:
+            - data: data
+              type: KIBANA_INDEX_PATTERN
+            - data: data
+              type: KIBANA_INDEX_PATTERN
+            items:
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            version: version
+            integrationDetails:
+            - link: link
+              name: name
+            - link: link
+              name: name
+            isTesting: true
+            labels:
+            - labels
+            - labels
+          name: name
+          changelog:
+          - descriptionMd: descriptionMd
+            version: version
+          - descriptionMd: descriptionMd
+            version: version
+          revisions:
+          - permissionDeniedItems:
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            description: description
+            excerpt: excerpt
+            binaries:
+            - data: data
+              type: KIBANA_INDEX_PATTERN
+            - data: data
+              type: KIBANA_INDEX_PATTERN
+            items:
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            version: version
+            integrationDetails:
+            - link: link
+              name: name
+            - link: link
+              name: name
+            isTesting: true
+            labels:
+            - labels
+            - labels
+          - permissionDeniedItems:
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            description: description
+            excerpt: excerpt
+            binaries:
+            - data: data
+              type: KIBANA_INDEX_PATTERN
+            - data: data
+              type: KIBANA_INDEX_PATTERN
+            items:
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            - permissionResource: UNKNOWN
+              stableId: stableId
+              targetDomain: ACTION
+              data: "{}"
+              extendedInternalId: extendedInternalId
+              name: name
+              description: description
+              id: id
+              binaries:
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              - fileName: fileName
+                data: data
+                type: PREVIEW_IMAGE
+              isMandatory: true
+              uniqueId: uniqueId
+            version: version
+            integrationDetails:
+            - link: link
+              name: name
+            - link: link
+              name: name
+            isTesting: true
+            labels:
+            - labels
+            - labels
+          id: id
+          deprecation:
+            reason: reason
+            replacementExtensions:
+            - replacementExtensions
+            - replacementExtensions
+          integrations:
+          - integrations
+          - integrations
+          isHidden: true
+        external:
+          url: url
+        docs:
+        - link: link
+          name: name
+        - link: link
+          name: name
+        integration:
+          featureFlag: featureFlag
+          integrationType:
+            untracked: "{}"
+          versions:
+          - versions
+          - versions
+          icon: icon
+          name: name
+          description: description
+          id: id
+          darkIcon: darkIcon
+          tags:
+          - tags
+          - tags
       externalDocs:
         url: ""
       properties:
@@ -2928,824 +3561,6 @@ components:
     IntegrationDetailsLocal:
       additionalProperties: false
       description: This data structure represents a set of integration details.
-      example:
-        default:
-          registered:
-          - lastUpdated: 2000-01-23T04:56:07.000+00:00
-            definitionVersion: definitionVersion
-            integrationStatus:
-              connectionStatus: PENDING
-              messages:
-              - messages
-              - messages
-              details:
-                key: details
-            id: id
-            parameters:
-            - stringList:
-                values:
-                - values
-                - values
-              key: key
-            - stringList:
-                values:
-                - values
-                - values
-              key: key
-            isTesting: true
-            empty: "{}"
-          - lastUpdated: 2000-01-23T04:56:07.000+00:00
-            definitionVersion: definitionVersion
-            integrationStatus:
-              connectionStatus: PENDING
-              messages:
-              - messages
-              - messages
-              details:
-                key: details
-            id: id
-            parameters:
-            - stringList:
-                values:
-                - values
-                - values
-              key: key
-            - stringList:
-                values:
-                - values
-                - values
-              key: key
-            isTesting: true
-            empty: "{}"
-        extensions:
-        - image: image
-          darkModeImage: darkModeImage
-          keywords:
-          - keywords
-          - keywords
-          permissionDeniedRevisions:
-          - permissionDeniedItems:
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            description: description
-            excerpt: excerpt
-            binaries:
-            - data: data
-              type: KIBANA_INDEX_PATTERN
-            - data: data
-              type: KIBANA_INDEX_PATTERN
-            items:
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            version: version
-            integrationDetails:
-            - link: link
-              name: name
-            - link: link
-              name: name
-            isTesting: true
-            labels:
-            - labels
-            - labels
-          - permissionDeniedItems:
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            description: description
-            excerpt: excerpt
-            binaries:
-            - data: data
-              type: KIBANA_INDEX_PATTERN
-            - data: data
-              type: KIBANA_INDEX_PATTERN
-            items:
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            version: version
-            integrationDetails:
-            - link: link
-              name: name
-            - link: link
-              name: name
-            isTesting: true
-            labels:
-            - labels
-            - labels
-          name: name
-          changelog:
-          - descriptionMd: descriptionMd
-            version: version
-          - descriptionMd: descriptionMd
-            version: version
-          revisions:
-          - permissionDeniedItems:
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            description: description
-            excerpt: excerpt
-            binaries:
-            - data: data
-              type: KIBANA_INDEX_PATTERN
-            - data: data
-              type: KIBANA_INDEX_PATTERN
-            items:
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            version: version
-            integrationDetails:
-            - link: link
-              name: name
-            - link: link
-              name: name
-            isTesting: true
-            labels:
-            - labels
-            - labels
-          - permissionDeniedItems:
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            description: description
-            excerpt: excerpt
-            binaries:
-            - data: data
-              type: KIBANA_INDEX_PATTERN
-            - data: data
-              type: KIBANA_INDEX_PATTERN
-            items:
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            version: version
-            integrationDetails:
-            - link: link
-              name: name
-            - link: link
-              name: name
-            isTesting: true
-            labels:
-            - labels
-            - labels
-          id: id
-          deprecation:
-            reason: reason
-            replacementExtensions:
-            - replacementExtensions
-            - replacementExtensions
-          integrations:
-          - integrations
-          - integrations
-          isHidden: true
-        - image: image
-          darkModeImage: darkModeImage
-          keywords:
-          - keywords
-          - keywords
-          permissionDeniedRevisions:
-          - permissionDeniedItems:
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            description: description
-            excerpt: excerpt
-            binaries:
-            - data: data
-              type: KIBANA_INDEX_PATTERN
-            - data: data
-              type: KIBANA_INDEX_PATTERN
-            items:
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            version: version
-            integrationDetails:
-            - link: link
-              name: name
-            - link: link
-              name: name
-            isTesting: true
-            labels:
-            - labels
-            - labels
-          - permissionDeniedItems:
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            description: description
-            excerpt: excerpt
-            binaries:
-            - data: data
-              type: KIBANA_INDEX_PATTERN
-            - data: data
-              type: KIBANA_INDEX_PATTERN
-            items:
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            version: version
-            integrationDetails:
-            - link: link
-              name: name
-            - link: link
-              name: name
-            isTesting: true
-            labels:
-            - labels
-            - labels
-          name: name
-          changelog:
-          - descriptionMd: descriptionMd
-            version: version
-          - descriptionMd: descriptionMd
-            version: version
-          revisions:
-          - permissionDeniedItems:
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            description: description
-            excerpt: excerpt
-            binaries:
-            - data: data
-              type: KIBANA_INDEX_PATTERN
-            - data: data
-              type: KIBANA_INDEX_PATTERN
-            items:
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            version: version
-            integrationDetails:
-            - link: link
-              name: name
-            - link: link
-              name: name
-            isTesting: true
-            labels:
-            - labels
-            - labels
-          - permissionDeniedItems:
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            description: description
-            excerpt: excerpt
-            binaries:
-            - data: data
-              type: KIBANA_INDEX_PATTERN
-            - data: data
-              type: KIBANA_INDEX_PATTERN
-            items:
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            - permissionResource: UNKNOWN
-              stableId: stableId
-              targetDomain: ACTION
-              data: "{}"
-              extendedInternalId: extendedInternalId
-              name: name
-              description: description
-              id: id
-              binaries:
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              - fileName: fileName
-                data: data
-                type: PREVIEW_IMAGE
-              isMandatory: true
-              uniqueId: uniqueId
-            version: version
-            integrationDetails:
-            - link: link
-              name: name
-            - link: link
-              name: name
-            isTesting: true
-            labels:
-            - labels
-            - labels
-          id: id
-          deprecation:
-            reason: reason
-            replacementExtensions:
-            - replacementExtensions
-            - replacementExtensions
-          integrations:
-          - integrations
-          - integrations
-          isHidden: true
-        docs:
-        - link: link
-          name: name
-        - link: link
-          name: name
-        integration:
-          featureFlag: featureFlag
-          integrationType:
-            genericWebhook: "{}"
-          versions:
-          - versions
-          - versions
-          icon: icon
-          name: name
-          description: description
-          id: id
-          darkIcon: darkIcon
-          tags:
-          - tags
-          - tags
-        local:
-          changes:
-          - descriptionMd: descriptionMd
-            version: version
-          - descriptionMd: descriptionMd
-            version: version
       externalDocs:
         url: ""
       properties:
@@ -3804,12 +3619,12 @@ components:
       type: object
     IntegrationRevision:
       oneOf:
-      - $ref: "#/components/schemas/IntegrationRevisionCloudFormation"
-      - $ref: "#/components/schemas/IntegrationRevisionManagedService"
-      - $ref: "#/components/schemas/IntegrationRevisionHelmChart"
       - $ref: "#/components/schemas/IntegrationRevisionAzureArmTemplate"
       - $ref: "#/components/schemas/IntegrationRevisionRum"
       - $ref: "#/components/schemas/IntegrationRevisionTerraform"
+      - $ref: "#/components/schemas/IntegrationRevisionCloudFormation"
+      - $ref: "#/components/schemas/IntegrationRevisionManagedService"
+      - $ref: "#/components/schemas/IntegrationRevisionHelmChart"
     IntegrationRevision.Group:
       example:
         name: name
@@ -3835,6 +3650,73 @@ components:
     IntegrationRevisionAzureArmTemplate:
       additionalProperties: false
       description: This data structure represents an integration revision.
+      example:
+        revisionDeploymentSupported: true
+        featureFlag: featureFlag
+        upgradeInstructionsMd: upgradeInstructionsMd
+        azureArmTemplate:
+          templateUrl: templateUrl
+        groups:
+        - name: name
+          id: id
+        - name: name
+          id: id
+        id: id
+        fields:
+        - visible: true
+          groupId: groupId
+          tooltip: tooltip
+          multiText:
+            options:
+            - options
+            - options
+            defaultValues:
+            - defaultValues
+            - defaultValues
+          type: API_KEY
+          upgradeNotice: upgradeNotice
+          predefined: true
+          required: true
+          templateParamName: templateParamName
+          readonly: true
+          documentationReference: documentationReference
+          name: name
+          placeholder: placeholder
+          applicableIf:
+            values:
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            type: UNKNOWN
+          allowedPattern: allowedPattern
+        - visible: true
+          groupId: groupId
+          tooltip: tooltip
+          multiText:
+            options:
+            - options
+            - options
+            defaultValues:
+            - defaultValues
+            - defaultValues
+          type: API_KEY
+          upgradeNotice: upgradeNotice
+          predefined: true
+          required: true
+          templateParamName: templateParamName
+          readonly: true
+          documentationReference: documentationReference
+          name: name
+          placeholder: placeholder
+          applicableIf:
+            values:
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            type: UNKNOWN
+          allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -3861,96 +3743,6 @@ components:
     IntegrationRevisionCloudFormation:
       additionalProperties: false
       description: This data structure represents an integration revision.
-      example:
-        revisionDeploymentSupported: true
-        featureFlag: featureFlag
-        upgradeInstructionsMd: upgradeInstructionsMd
-        cloudFormation:
-          postInstallationSteps:
-            key: postInstallationSteps
-          parameters:
-            key: parameters
-          commands:
-          - tooltipText: tooltipText
-            name: name
-            description: description
-            language: UNKNOWN
-            links:
-            - text: text
-              key: key
-              url: url
-            - text: text
-              key: key
-              url: url
-            command: command
-          - tooltipText: tooltipText
-            name: name
-            description: description
-            language: UNKNOWN
-            links:
-            - text: text
-              key: key
-              url: url
-            - text: text
-              key: key
-              url: url
-            command: command
-          templateUrl: templateUrl
-        groups:
-        - name: name
-          id: id
-        - name: name
-          id: id
-        id: id
-        fields:
-        - visible: true
-          groupId: groupId
-          tooltip: tooltip
-          type: API_KEY
-          upgradeNotice: upgradeNotice
-          predefined: true
-          required: true
-          templateParamName: templateParamName
-          readonly: true
-          documentationReference: documentationReference
-          name: name
-          placeholder: placeholder
-          applicableIf:
-            values:
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            type: UNKNOWN
-          allowedPattern: allowedPattern
-          multipleSelection:
-            options:
-            - options
-            - options
-        - visible: true
-          groupId: groupId
-          tooltip: tooltip
-          type: API_KEY
-          upgradeNotice: upgradeNotice
-          predefined: true
-          required: true
-          templateParamName: templateParamName
-          readonly: true
-          documentationReference: documentationReference
-          name: name
-          placeholder: placeholder
-          applicableIf:
-            values:
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            type: UNKNOWN
-          allowedPattern: allowedPattern
-          multipleSelection:
-            options:
-            - options
-            - options
       externalDocs:
         url: ""
       properties:
@@ -4113,10 +3905,6 @@ components:
       - JAVASCRIPT
       type: string
     Link:
-      example:
-        text: text
-        key: key
-        url: url
       externalDocs:
         url: ""
       properties:
@@ -4143,6 +3931,13 @@ components:
       title: List managed integration keys response
       type: object
     ListTextValue:
+      example:
+        options:
+        - options
+        - options
+        defaultValues:
+        - defaultValues
+        - defaultValues
       externalDocs:
         url: ""
       properties:
@@ -4157,12 +3952,6 @@ components:
       title: List text value
       type: object
     LocalChangelog:
-      example:
-        changes:
-        - descriptionMd: descriptionMd
-          version: version
-        - descriptionMd: descriptionMd
-          version: version
       externalDocs:
         url: ""
       properties:
@@ -4202,11 +3991,29 @@ components:
         url: ""
       title: Managed service
       type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     MultipleSelectionValue:
-      example:
-        options:
-        - options
-        - options
       externalDocs:
         url: ""
       properties:
@@ -4234,12 +4041,12 @@ components:
       type: object
     Parameter:
       oneOf:
-      - $ref: "#/components/schemas/ParameterStringList"
-      - $ref: "#/components/schemas/ParameterApiKey"
       - $ref: "#/components/schemas/ParameterNumericValue"
       - $ref: "#/components/schemas/ParameterSensitiveData"
       - $ref: "#/components/schemas/ParameterStringValue"
       - $ref: "#/components/schemas/ParameterBooleanValue"
+      - $ref: "#/components/schemas/ParameterStringList"
+      - $ref: "#/components/schemas/ParameterApiKey"
     ParameterApiKey:
       additionalProperties: false
       externalDocs:
@@ -4264,6 +4071,9 @@ components:
       type: object
     ParameterNumericValue:
       additionalProperties: false
+      example:
+        numericValue: 0.8008281904610115
+        key: key
       externalDocs:
         url: ""
       properties:
@@ -4290,12 +4100,6 @@ components:
       type: object
     ParameterStringList:
       additionalProperties: false
-      example:
-        stringList:
-          values:
-          - values
-          - values
-        key: key
       externalDocs:
         url: ""
       properties:
@@ -4407,15 +4211,9 @@ components:
             key: details
         id: id
         parameters:
-        - stringList:
-            values:
-            - values
-            - values
+        - numericValue: 0.8008281904610115
           key: key
-        - stringList:
-            values:
-            - values
-            - values
+        - numericValue: 0.8008281904610115
           key: key
         isTesting: true
         empty: "{}"
@@ -4447,9 +4245,6 @@ components:
       title: Registered instance
       type: object
     RevisionRef:
-      example:
-        descriptionMd: descriptionMd
-        version: version
       externalDocs:
         url: ""
       properties:
@@ -4582,10 +4377,6 @@ components:
       title: Source map metadata
       type: object
     StringList:
-      example:
-        values:
-        - values
-        - values
       externalDocs:
         url: ""
       properties:
@@ -4637,8 +4428,7 @@ components:
     TestIntegrationResponse:
       example:
         result:
-          failure:
-            errorMessage: errorMessage
+          success: "{}"
       externalDocs:
         url: ""
       properties:
@@ -4648,18 +4438,8 @@ components:
       type: object
     TestIntegrationResult:
       oneOf:
-      - $ref: "#/components/schemas/TestIntegrationResultFailure"
       - $ref: "#/components/schemas/TestIntegrationResultSuccess"
-    TestIntegrationResult.Failure:
-      example:
-        errorMessage: errorMessage
-      externalDocs:
-        url: ""
-      properties:
-        errorMessage:
-          type: string
-      title: Failure
-      type: object
+      - $ref: "#/components/schemas/TestIntegrationResultFailure"
     TestIntegrationResult.Success:
       externalDocs:
         url: ""
@@ -4667,18 +4447,17 @@ components:
       type: object
     TestIntegrationResultFailure:
       additionalProperties: false
-      example:
-        failure:
-          errorMessage: errorMessage
       externalDocs:
         url: ""
       properties:
         failure:
-          $ref: "#/components/schemas/TestIntegrationResult.Failure"
+          $ref: "#/components/schemas/v1.Failure"
       title: Test integration result
       type: object
     TestIntegrationResultSuccess:
       additionalProperties: false
+      example:
+        success: "{}"
       externalDocs:
         url: ""
       properties:
@@ -4742,8 +4521,6 @@ components:
     V1IntegrationTypeGenericWebhook:
       additionalProperties: false
       description: This data structure represents an integration type.
-      example:
-        genericWebhook: "{}"
       externalDocs:
         url: ""
       properties:
@@ -4783,6 +4560,8 @@ components:
     V1IntegrationTypeUntracked:
       additionalProperties: false
       description: This data structure represents an integration type.
+      example:
+        untracked: "{}"
       externalDocs:
         url: ""
       properties:
@@ -5228,15 +5007,23 @@ components:
           type: array
       title: Extension metadata
       type: object
+    v1.Failure:
+      externalDocs:
+        url: ""
+      properties:
+        errorMessage:
+          type: string
+      title: Failure
+      type: object
     v1.IntegrationType:
       oneOf:
-      - $ref: "#/components/schemas/V1IntegrationTypeGenericWebhook"
-      - $ref: "#/components/schemas/V1IntegrationTypeManaged"
       - $ref: "#/components/schemas/V1IntegrationTypeUntracked"
       - $ref: "#/components/schemas/V1IntegrationTypeCloudformation"
       - $ref: "#/components/schemas/V1IntegrationTypeArm"
       - $ref: "#/components/schemas/V1IntegrationTypePushBasedContextualData"
       - $ref: "#/components/schemas/V1IntegrationTypeContextualData"
+      - $ref: "#/components/schemas/V1IntegrationTypeGenericWebhook"
+      - $ref: "#/components/schemas/V1IntegrationTypeManaged"
     v3.FilterOperator:
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED

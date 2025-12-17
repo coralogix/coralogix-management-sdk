@@ -203,7 +203,7 @@ components:
     AtomicBatchExecuteE2MResponse:
       example:
         matchingResponses:
-        - created:
+        - replaced:
             e2m:
               isInternal: true
               metricFields:
@@ -261,7 +261,7 @@ components:
                 limit: 30000
                 hasExceededLimit: true
               type: E2M_TYPE_UNSPECIFIED
-        - created:
+        - replaced:
             e2m:
               isInternal: true
               metricFields:
@@ -479,8 +479,8 @@ components:
       type: object
     E2MCreateParams:
       oneOf:
-      - $ref: "#/components/schemas/E2MCreateParamsSpansQuery"
       - $ref: "#/components/schemas/E2MCreateParamsLogsQuery"
+      - $ref: "#/components/schemas/E2MCreateParamsSpansQuery"
     E2MCreateParamsLogsQuery:
       additionalProperties: false
       description: This data structure is used to create a new event to metric definition
@@ -572,13 +572,25 @@ components:
       type: object
     E2MExecutionResponse:
       oneOf:
-      - $ref: "#/components/schemas/E2MExecutionResponseCreated"
       - $ref: "#/components/schemas/E2MExecutionResponseReplaced"
       - $ref: "#/components/schemas/E2MExecutionResponseDeleted"
+      - $ref: "#/components/schemas/E2MExecutionResponseCreated"
     E2MExecutionResponseCreated:
       additionalProperties: false
-      example:
+      properties:
         created:
+          $ref: "#/components/schemas/CreateE2MResponse"
+      type: object
+    E2MExecutionResponseDeleted:
+      additionalProperties: false
+      properties:
+        deleted:
+          $ref: "#/components/schemas/DeleteE2MResponse"
+      type: object
+    E2MExecutionResponseReplaced:
+      additionalProperties: false
+      example:
+        replaced:
           e2m:
             isInternal: true
             metricFields:
@@ -636,18 +648,6 @@ components:
               limit: 30000
               hasExceededLimit: true
             type: E2M_TYPE_UNSPECIFIED
-      properties:
-        created:
-          $ref: "#/components/schemas/CreateE2MResponse"
-      type: object
-    E2MExecutionResponseDeleted:
-      additionalProperties: false
-      properties:
-        deleted:
-          $ref: "#/components/schemas/DeleteE2MResponse"
-      type: object
-    E2MExecutionResponseReplaced:
-      additionalProperties: false
       properties:
         replaced:
           $ref: "#/components/schemas/ReplaceE2MResponse"
@@ -1163,6 +1163,28 @@ components:
       - sourceField
       - targetLabel
       title: Metric Label
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:

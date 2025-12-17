@@ -910,6 +910,34 @@
           }
         }
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -1042,7 +1070,25 @@
       "RuleParameters": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/RuleParametersRemoveFieldsParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersJsonStringifyParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersJsonParseParameters"
+          },
+          {
             "$ref": "#/components/schemas/RuleParametersExtractParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersParseParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersBlockParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersExtractTimestampParameters"
           },
           {
             "$ref": "#/components/schemas/RuleParametersJsonExtractParameters"
@@ -1052,24 +1098,6 @@
           },
           {
             "$ref": "#/components/schemas/RuleParametersAllowParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersExtractTimestampParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersJsonStringifyParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersJsonParseParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersParseParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersBlockParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersRemoveFieldsParameters"
           }
         ]
       },

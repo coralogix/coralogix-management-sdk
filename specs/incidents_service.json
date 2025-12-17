@@ -160,10 +160,10 @@
               "items": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/V1OrderByIncidentField"
+                    "$ref": "#/components/schemas/V1OrderByContextualLabel"
                   },
                   {
-                    "$ref": "#/components/schemas/V1OrderByContextualLabel"
+                    "$ref": "#/components/schemas/V1OrderByIncidentField"
                   }
                 ]
               }
@@ -2274,7 +2274,7 @@
             "$ref": "#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent"
           },
           {
-            "$ref": "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
+            "$ref": "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
           },
           {
             "$ref": "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
@@ -2286,22 +2286,22 @@
             "$ref": "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
           },
           {
+            "$ref": "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
+          },
+          {
             "$ref": "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
           },
           {
-            "$ref": "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
+            "$ref": "#/components/schemas/IncidentEventCloseAdministrativeEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
           },
           {
             "$ref": "#/components/schemas/IncidentEventAssignmentOperationalEvent"
           },
           {
-            "$ref": "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
-          },
-          {
             "$ref": "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventCloseAdministrativeEvent"
           },
           {
             "$ref": "#/components/schemas/IncidentEventCloseOperationalEvent"
@@ -2912,21 +2912,6 @@
       "IncidentFieldOneOf": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IncidentFieldOneOfDuration"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfName"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfSubsystemName"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfId"
-          },
-          {
             "$ref": "#/components/schemas/IncidentFieldOneOfSeverity"
           },
           {
@@ -2936,13 +2921,28 @@
             "$ref": "#/components/schemas/IncidentFieldOneOfClosedAt"
           },
           {
-            "$ref": "#/components/schemas/IncidentFieldOneOfState"
-          },
-          {
             "$ref": "#/components/schemas/IncidentFieldOneOfStatus"
           },
           {
             "$ref": "#/components/schemas/IncidentFieldOneOfApplicationName"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfSubsystemName"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfName"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfState"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfDuration"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfId"
           }
         ]
       },
@@ -3426,6 +3426,34 @@
           "incidents",
           "pagination"
         ]
+      },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",
