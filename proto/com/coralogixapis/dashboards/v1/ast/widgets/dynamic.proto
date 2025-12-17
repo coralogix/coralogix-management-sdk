@@ -25,7 +25,11 @@ import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
 
 message Dynamic {
-  Query query = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "A query object describing how to retrieve data"}];
+  // Deprecated: Use query_definitions instead. This field was deprecated because of multi-query support.
+  Query query = 1 [
+    deprecated = true,
+    (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "A query object describing how to retrieve data"}
+  ];
 
   v1.common.TimeFrameSelect time_frame = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Time frame which overrides the dashboard time frame"}];
 
@@ -234,6 +238,11 @@ message Dynamic {
             example: '{ "value": "gr[ae]y" }'
           }];
           PropertyLinks link = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Link property (see PropertyLinks for full reference)"}];
+          google.protobuf.StringValue values_alias = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+            description: "Value alias property, used to give alias names to selected fields"
+            example: '{ "value": "Pod: {{$d.pod}}" }'
+          }];
+          PropertyValuesMapping values_mapping = 7;
         }
       }
 
@@ -298,6 +307,22 @@ message Dynamic {
           example: '{ "value": "https://coralogix.com/#/dashboards/{{$p.dashboardId}}?severity={{severity}}" }'
         }];
         google.protobuf.BoolValue should_open_in_new_window = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Defines if the link action should open in a new window or current window in the browser"}];
+      }
+    }
+
+    message PropertyValuesMapping {
+      repeated ValueMapping mappings = 1;
+
+      message ValueMapping {
+        ValuesMappingType type = 1;
+        google.protobuf.StringValue input_value = 2;
+        google.protobuf.StringValue replace_value = 3;
+      }
+
+      enum ValuesMappingType {
+        VALUES_MAPPING_TYPE_UNSPECIFIED = 0;
+        VALUES_MAPPING_TYPE_VALUE = 1;
+        VALUES_MAPPING_TYPE_REGEX = 2;
       }
     }
 
