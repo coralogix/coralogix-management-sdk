@@ -97,7 +97,7 @@ mod tests {
                 fields: vec![
                     ConnectorConfigField {
                         field_name: "url".into(),
-                        value: "https://httpbin.org/post".into(),
+                        value: "https://api.staging.coralogix.net/mgmt/testing/tools/httpbin/post".into(),
                     },
                     ConnectorConfigField {
                         field_name: "method".into(),
