@@ -918,13 +918,13 @@
       "Recurring.Dynamic": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/RecurringDynamicMonthly"
+          },
+          {
             "$ref": "#/components/schemas/RecurringDynamicDaily"
           },
           {
             "$ref": "#/components/schemas/RecurringDynamicWeekly"
-          },
-          {
-            "$ref": "#/components/schemas/RecurringDynamicMonthly"
           }
         ]
       },
@@ -1006,10 +1006,10 @@
       "Schedule": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ScheduleRecurring"
+            "$ref": "#/components/schemas/ScheduleOneTime"
           },
           {
-            "$ref": "#/components/schemas/ScheduleOneTime"
+            "$ref": "#/components/schemas/ScheduleRecurring"
           }
         ]
       },
@@ -1048,10 +1048,10 @@
       "Timeframe": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TimeframeDuration"
+            "$ref": "#/components/schemas/TimeframeEndTime"
           },
           {
-            "$ref": "#/components/schemas/TimeframeEndTime"
+            "$ref": "#/components/schemas/TimeframeDuration"
           }
         ]
       },
@@ -1154,10 +1154,10 @@
       "alert_scheduler_rule_protobuf.v1.Filter": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertUniqueIds"
+            "$ref": "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertMetaLabels"
           },
           {
-            "$ref": "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertMetaLabels"
+            "$ref": "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertUniqueIds"
           }
         ]
       },

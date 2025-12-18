@@ -1082,10 +1082,10 @@
       "GetGroupUsersResponse": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/GetGroupUsersResponseNoMorePages"
+            "$ref": "#/components/schemas/GetGroupUsersResponseToken"
           },
           {
-            "$ref": "#/components/schemas/GetGroupUsersResponseToken"
+            "$ref": "#/components/schemas/GetGroupUsersResponseNoMorePages"
           }
         ]
       },

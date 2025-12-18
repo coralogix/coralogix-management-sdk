@@ -75,10 +75,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/CreateRoleRequestParentRoleName"
+                    "$ref": "#/components/schemas/CreateRoleRequestParentRoleId"
                   },
                   {
-                    "$ref": "#/components/schemas/CreateRoleRequestParentRoleId"
+                    "$ref": "#/components/schemas/CreateRoleRequestParentRoleName"
                   }
                 ]
               }

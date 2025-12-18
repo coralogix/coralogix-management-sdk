@@ -1070,7 +1070,7 @@
       "RuleParameters": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/RuleParametersRemoveFieldsParameters"
+            "$ref": "#/components/schemas/RuleParametersBlockParameters"
           },
           {
             "$ref": "#/components/schemas/RuleParametersJsonStringifyParameters"
@@ -1079,25 +1079,25 @@
             "$ref": "#/components/schemas/RuleParametersJsonParseParameters"
           },
           {
-            "$ref": "#/components/schemas/RuleParametersExtractParameters"
+            "$ref": "#/components/schemas/RuleParametersReplaceParameters"
           },
           {
-            "$ref": "#/components/schemas/RuleParametersParseParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersBlockParameters"
+            "$ref": "#/components/schemas/RuleParametersAllowParameters"
           },
           {
             "$ref": "#/components/schemas/RuleParametersExtractTimestampParameters"
           },
           {
+            "$ref": "#/components/schemas/RuleParametersRemoveFieldsParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersExtractParameters"
+          },
+          {
             "$ref": "#/components/schemas/RuleParametersJsonExtractParameters"
           },
           {
-            "$ref": "#/components/schemas/RuleParametersReplaceParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersAllowParameters"
+            "$ref": "#/components/schemas/RuleParametersParseParameters"
           }
         ]
       },

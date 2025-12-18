@@ -703,13 +703,13 @@
       "E2MExecutionResponse": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/E2MExecutionResponseReplaced"
-          },
-          {
             "$ref": "#/components/schemas/E2MExecutionResponseDeleted"
           },
           {
             "$ref": "#/components/schemas/E2MExecutionResponseCreated"
+          },
+          {
+            "$ref": "#/components/schemas/E2MExecutionResponseReplaced"
           }
         ]
       },

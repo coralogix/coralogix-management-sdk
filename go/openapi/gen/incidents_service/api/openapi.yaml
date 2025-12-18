@@ -1682,7 +1682,7 @@ components:
       additionalProperties: false
       example:
         incidentField:
-          severity: null
+          lastStateUpdateTime: 2000-01-23T04:56:07.000+00:00
       properties:
         incidentField:
           $ref: "#/components/schemas/IncidentFieldOneOf"
@@ -1815,9 +1815,9 @@ components:
       example:
         groupBysValue:
         - incidentField:
-            severity: null
+            lastStateUpdateTime: 2000-01-23T04:56:07.000+00:00
         - incidentField:
-            severity: null
+            lastStateUpdateTime: 2000-01-23T04:56:07.000+00:00
         aggAssignmentsCount:
         - count: 10
           assignedTo:
@@ -1936,16 +1936,16 @@ components:
       oneOf:
       - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent"
       - $ref: "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventAssignmentOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventCloseAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventCloseOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
       - $ref: "#/components/schemas/IncidentEventUnassignOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventCloseAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventAssignmentOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventCloseOperationalEvent"
     IncidentEventAcknowledge:
       properties:
         acknowledgedBy:
@@ -2447,17 +2447,17 @@ components:
       type: object
     IncidentFieldOneOf:
       oneOf:
-      - $ref: "#/components/schemas/IncidentFieldOneOfSeverity"
-      - $ref: "#/components/schemas/IncidentFieldOneOfCreatedAt"
-      - $ref: "#/components/schemas/IncidentFieldOneOfClosedAt"
-      - $ref: "#/components/schemas/IncidentFieldOneOfStatus"
+      - $ref: "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
       - $ref: "#/components/schemas/IncidentFieldOneOfApplicationName"
       - $ref: "#/components/schemas/IncidentFieldOneOfSubsystemName"
+      - $ref: "#/components/schemas/IncidentFieldOneOfSeverity"
       - $ref: "#/components/schemas/IncidentFieldOneOfName"
+      - $ref: "#/components/schemas/IncidentFieldOneOfCreatedAt"
       - $ref: "#/components/schemas/IncidentFieldOneOfState"
-      - $ref: "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
+      - $ref: "#/components/schemas/IncidentFieldOneOfStatus"
       - $ref: "#/components/schemas/IncidentFieldOneOfDuration"
       - $ref: "#/components/schemas/IncidentFieldOneOfId"
+      - $ref: "#/components/schemas/IncidentFieldOneOfClosedAt"
     IncidentFieldOneOfApplicationName:
       additionalProperties: false
       properties:
@@ -2492,6 +2492,8 @@ components:
       type: object
     IncidentFieldOneOfLastStateUpdateTime:
       additionalProperties: false
+      example:
+        lastStateUpdateTime: 2000-01-23T04:56:07.000+00:00
       properties:
         lastStateUpdateTime:
           format: date-time
@@ -2505,8 +2507,6 @@ components:
       type: object
     IncidentFieldOneOfSeverity:
       additionalProperties: false
-      example:
-        severity: null
       properties:
         severity:
           $ref: "#/components/schemas/IncidentSeverity"
@@ -2813,9 +2813,9 @@ components:
         incidentAggs:
         - groupBysValue:
           - incidentField:
-              severity: null
+              lastStateUpdateTime: 2000-01-23T04:56:07.000+00:00
           - incidentField:
-              severity: null
+              lastStateUpdateTime: 2000-01-23T04:56:07.000+00:00
           aggAssignmentsCount:
           - count: 10
             assignedTo:
@@ -2856,9 +2856,9 @@ components:
           lastStateUpdateTime: 2000-01-23T04:56:07.000+00:00
         - groupBysValue:
           - incidentField:
-              severity: null
+              lastStateUpdateTime: 2000-01-23T04:56:07.000+00:00
           - incidentField:
-              severity: null
+              lastStateUpdateTime: 2000-01-23T04:56:07.000+00:00
           aggAssignmentsCount:
           - count: 10
             assignedTo:
@@ -3791,8 +3791,8 @@ components:
       - $ref: "#/components/schemas/V1OrderByIncidentField"
     IncidentsService_ListIncidentAggregations_group_bys_parameter_inner:
       oneOf:
-      - $ref: "#/components/schemas/GroupByIncidentField"
       - $ref: "#/components/schemas/GroupByContextualLabel"
+      - $ref: "#/components/schemas/GroupByIncidentField"
     User_details:
       externalDocs:
         url: ""

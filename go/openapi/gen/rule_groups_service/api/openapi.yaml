@@ -292,6 +292,9 @@ components:
           type: string
       type: object
     BlockParameters:
+      example:
+        rule: rule
+        keepBlockedLogs: true
       properties:
         keepBlockedLogs:
           type: boolean
@@ -372,10 +375,9 @@ components:
               description: description
               id: id
               parameters:
-                removeFieldsParameters:
-                  fields:
-                  - fields
-                  - fields
+                blockParameters:
+                  rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -383,10 +385,9 @@ components:
               description: description
               id: id
               parameters:
-                removeFieldsParameters:
-                  fields:
-                  - fields
-                  - fields
+                blockParameters:
+                  rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -398,10 +399,9 @@ components:
               description: description
               id: id
               parameters:
-                removeFieldsParameters:
-                  fields:
-                  - fields
-                  - fields
+                blockParameters:
+                  rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -409,10 +409,9 @@ components:
               description: description
               id: id
               parameters:
-                removeFieldsParameters:
-                  fields:
-                  - fields
-                  - fields
+                blockParameters:
+                  rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -589,10 +588,9 @@ components:
               description: description
               id: id
               parameters:
-                removeFieldsParameters:
-                  fields:
-                  - fields
-                  - fields
+                blockParameters:
+                  rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -600,10 +598,9 @@ components:
               description: description
               id: id
               parameters:
-                removeFieldsParameters:
-                  fields:
-                  - fields
-                  - fields
+                blockParameters:
+                  rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -615,10 +612,9 @@ components:
               description: description
               id: id
               parameters:
-                removeFieldsParameters:
-                  fields:
-                  - fields
-                  - fields
+                blockParameters:
+                  rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -626,10 +622,9 @@ components:
               description: description
               id: id
               parameters:
-                removeFieldsParameters:
-                  fields:
-                  - fields
-                  - fields
+                blockParameters:
+                  rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -688,10 +683,9 @@ components:
               description: description
               id: id
               parameters:
-                removeFieldsParameters:
-                  fields:
-                  - fields
-                  - fields
+                blockParameters:
+                  rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -699,10 +693,9 @@ components:
               description: description
               id: id
               parameters:
-                removeFieldsParameters:
-                  fields:
-                  - fields
-                  - fields
+                blockParameters:
+                  rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -714,10 +707,9 @@ components:
               description: description
               id: id
               parameters:
-                removeFieldsParameters:
-                  fields:
-                  - fields
-                  - fields
+                blockParameters:
+                  rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -725,10 +717,9 @@ components:
               description: description
               id: id
               parameters:
-                removeFieldsParameters:
-                  fields:
-                  - fields
-                  - fields
+                blockParameters:
+                  rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -753,10 +744,9 @@ components:
               description: description
               id: id
               parameters:
-                removeFieldsParameters:
-                  fields:
-                  - fields
-                  - fields
+                blockParameters:
+                  rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -764,10 +754,9 @@ components:
               description: description
               id: id
               parameters:
-                removeFieldsParameters:
-                  fields:
-                  - fields
-                  - fields
+                blockParameters:
+                  rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -779,10 +768,9 @@ components:
               description: description
               id: id
               parameters:
-                removeFieldsParameters:
-                  fields:
-                  - fields
-                  - fields
+                blockParameters:
+                  rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -790,10 +778,9 @@ components:
               description: description
               id: id
               parameters:
-                removeFieldsParameters:
-                  fields:
-                  - fields
-                  - fields
+                blockParameters:
+                  rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -856,10 +843,6 @@ components:
           type: string
       type: object
     RemoveFieldsParameters:
-      example:
-        fields:
-        - fields
-        - fields
       properties:
         fields:
           items:
@@ -884,10 +867,9 @@ components:
             description: description
             id: id
             parameters:
-              removeFieldsParameters:
-                fields:
-                - fields
-                - fields
+              blockParameters:
+                rule: rule
+                keepBlockedLogs: true
             enabled: true
             order: 1
           - sourceField: sourceField
@@ -895,10 +877,9 @@ components:
             description: description
             id: id
             parameters:
-              removeFieldsParameters:
-                fields:
-                - fields
-                - fields
+              blockParameters:
+                rule: rule
+                keepBlockedLogs: true
             enabled: true
             order: 1
           id: id
@@ -910,10 +891,9 @@ components:
             description: description
             id: id
             parameters:
-              removeFieldsParameters:
-                fields:
-                - fields
-                - fields
+              blockParameters:
+                rule: rule
+                keepBlockedLogs: true
             enabled: true
             order: 1
           - sourceField: sourceField
@@ -921,10 +901,9 @@ components:
             description: description
             id: id
             parameters:
-              removeFieldsParameters:
-                fields:
-                - fields
-                - fields
+              blockParameters:
+                rule: rule
+                keepBlockedLogs: true
             enabled: true
             order: 1
           id: id
@@ -995,16 +974,16 @@ components:
       type: object
     RuleParameters:
       oneOf:
-      - $ref: "#/components/schemas/RuleParametersRemoveFieldsParameters"
+      - $ref: "#/components/schemas/RuleParametersBlockParameters"
       - $ref: "#/components/schemas/RuleParametersJsonStringifyParameters"
       - $ref: "#/components/schemas/RuleParametersJsonParseParameters"
-      - $ref: "#/components/schemas/RuleParametersExtractParameters"
-      - $ref: "#/components/schemas/RuleParametersParseParameters"
-      - $ref: "#/components/schemas/RuleParametersBlockParameters"
-      - $ref: "#/components/schemas/RuleParametersExtractTimestampParameters"
-      - $ref: "#/components/schemas/RuleParametersJsonExtractParameters"
       - $ref: "#/components/schemas/RuleParametersReplaceParameters"
       - $ref: "#/components/schemas/RuleParametersAllowParameters"
+      - $ref: "#/components/schemas/RuleParametersExtractTimestampParameters"
+      - $ref: "#/components/schemas/RuleParametersRemoveFieldsParameters"
+      - $ref: "#/components/schemas/RuleParametersExtractParameters"
+      - $ref: "#/components/schemas/RuleParametersJsonExtractParameters"
+      - $ref: "#/components/schemas/RuleParametersParseParameters"
     RuleParametersAllowParameters:
       additionalProperties: false
       properties:
@@ -1013,6 +992,10 @@ components:
       type: object
     RuleParametersBlockParameters:
       additionalProperties: false
+      example:
+        blockParameters:
+          rule: rule
+          keepBlockedLogs: true
       properties:
         blockParameters:
           $ref: "#/components/schemas/BlockParameters"
@@ -1055,11 +1038,6 @@ components:
       type: object
     RuleParametersRemoveFieldsParameters:
       additionalProperties: false
-      example:
-        removeFieldsParameters:
-          fields:
-          - fields
-          - fields
       properties:
         removeFieldsParameters:
           $ref: "#/components/schemas/RemoveFieldsParameters"
@@ -1078,10 +1056,9 @@ components:
           description: description
           id: id
           parameters:
-            removeFieldsParameters:
-              fields:
-              - fields
-              - fields
+            blockParameters:
+              rule: rule
+              keepBlockedLogs: true
           enabled: true
           order: 1
         - sourceField: sourceField
@@ -1089,10 +1066,9 @@ components:
           description: description
           id: id
           parameters:
-            removeFieldsParameters:
-              fields:
-              - fields
-              - fields
+            blockParameters:
+              rule: rule
+              keepBlockedLogs: true
           enabled: true
           order: 1
         id: id
@@ -1131,10 +1107,9 @@ components:
               description: description
               id: id
               parameters:
-                removeFieldsParameters:
-                  fields:
-                  - fields
-                  - fields
+                blockParameters:
+                  rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -1142,10 +1117,9 @@ components:
               description: description
               id: id
               parameters:
-                removeFieldsParameters:
-                  fields:
-                  - fields
-                  - fields
+                blockParameters:
+                  rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -1157,10 +1131,9 @@ components:
               description: description
               id: id
               parameters:
-                removeFieldsParameters:
-                  fields:
-                  - fields
-                  - fields
+                blockParameters:
+                  rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -1168,10 +1141,9 @@ components:
               description: description
               id: id
               parameters:
-                removeFieldsParameters:
-                  fields:
-                  - fields
-                  - fields
+                blockParameters:
+                  rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -1226,10 +1198,9 @@ components:
         description: description
         id: id
         parameters:
-          removeFieldsParameters:
-            fields:
-            - fields
-            - fields
+          blockParameters:
+            rule: rule
+            keepBlockedLogs: true
         enabled: true
         order: 1
       properties:

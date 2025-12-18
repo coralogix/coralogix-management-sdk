@@ -544,8 +544,8 @@ components:
       type: string
     RoleManagementService_CreateRole_request:
       oneOf:
-      - $ref: "#/components/schemas/CreateRoleRequestParentRoleName"
       - $ref: "#/components/schemas/CreateRoleRequestParentRoleId"
+      - $ref: "#/components/schemas/CreateRoleRequestParentRoleName"
       type: object
     RoleManagementService_UpdateRole_request:
       additionalProperties: false

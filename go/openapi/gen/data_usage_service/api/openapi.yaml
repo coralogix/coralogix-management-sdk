@@ -375,8 +375,8 @@ components:
         sizeGb: 0.8008282
         units: 6.0274563
         dimensions:
-        - pillar: PILLAR_UNSPECIFIED
-        - pillar: PILLAR_UNSPECIFIED
+        - severity: SEVERITY_UNSPECIFIED
+        - severity: SEVERITY_UNSPECIFIED
         timestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about data usage.
@@ -538,11 +538,11 @@ components:
       type: object
     Dimension:
       oneOf:
+      - $ref: "#/components/schemas/DimensionSeverity"
+      - $ref: "#/components/schemas/DimensionPriority"
       - $ref: "#/components/schemas/DimensionPillar"
       - $ref: "#/components/schemas/DimensionGenericDimension"
       - $ref: "#/components/schemas/DimensionTier"
-      - $ref: "#/components/schemas/DimensionSeverity"
-      - $ref: "#/components/schemas/DimensionPriority"
     DimensionGenericDimension:
       additionalProperties: false
       properties:
@@ -551,8 +551,6 @@ components:
       type: object
     DimensionPillar:
       additionalProperties: false
-      example:
-        pillar: PILLAR_UNSPECIFIED
       properties:
         pillar:
           $ref: "#/components/schemas/v2.Pillar"
@@ -565,6 +563,8 @@ components:
       type: object
     DimensionSeverity:
       additionalProperties: false
+      example:
+        severity: SEVERITY_UNSPECIFIED
       properties:
         severity:
           $ref: "#/components/schemas/datausage.v2.Severity"
@@ -866,14 +866,14 @@ components:
         - sizeGb: 0.8008282
           units: 6.0274563
           dimensions:
-          - pillar: PILLAR_UNSPECIFIED
-          - pillar: PILLAR_UNSPECIFIED
+          - severity: SEVERITY_UNSPECIFIED
+          - severity: SEVERITY_UNSPECIFIED
           timestamp: 2000-01-23T04:56:07.000+00:00
         - sizeGb: 0.8008282
           units: 6.0274563
           dimensions:
-          - pillar: PILLAR_UNSPECIFIED
-          - pillar: PILLAR_UNSPECIFIED
+          - severity: SEVERITY_UNSPECIFIED
+          - severity: SEVERITY_UNSPECIFIED
           timestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about data usage.
@@ -1194,13 +1194,13 @@ components:
       type: object
     DataUsageService_GetDailyUsageProcessedGbs_request:
       oneOf:
-      - $ref: "#/components/schemas/GetDailyUsageProcessedGbsRequestDateRange"
       - $ref: "#/components/schemas/GetDailyUsageProcessedGbsRequestRange"
+      - $ref: "#/components/schemas/GetDailyUsageProcessedGbsRequestDateRange"
       type: object
     DataUsageService_GetDailyUsageUnits_request:
       oneOf:
-      - $ref: "#/components/schemas/GetDailyUsageUnitsRequestRange"
       - $ref: "#/components/schemas/GetDailyUsageUnitsRequestDateRange"
+      - $ref: "#/components/schemas/GetDailyUsageUnitsRequestRange"
       type: object
     Update_Data_Usage_Metrics_Export_Status_Request:
       additionalProperties: false

@@ -459,6 +459,7 @@ components:
       - PAGERDUTY
       - IBM_EVENT_NOTIFICATIONS
       - SERVICE_NOW
+      - EMAIL
       type: string
     ConnectorTypeSummary:
       description: Summary information about a connector type

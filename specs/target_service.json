@@ -396,10 +396,10 @@
       "Target": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TargetS3"
+            "$ref": "#/components/schemas/TargetIbmCos"
           },
           {
-            "$ref": "#/components/schemas/TargetIbmCos"
+            "$ref": "#/components/schemas/TargetS3"
           }
         ]
       },

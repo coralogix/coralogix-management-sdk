@@ -411,10 +411,10 @@
       "IDPParameters": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IDPParametersMetadataUrl"
+            "$ref": "#/components/schemas/IDPParametersMetadataContent"
           },
           {
-            "$ref": "#/components/schemas/IDPParametersMetadataContent"
+            "$ref": "#/components/schemas/IDPParametersMetadataUrl"
           }
         ]
       },

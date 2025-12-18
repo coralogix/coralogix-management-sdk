@@ -281,15 +281,22 @@ components:
     AlertSchedulerRule:
       example:
         filter:
-          alertUniqueIds:
+          alertMetaLabels:
             value:
-            - value
-            - value
+            - id: id
+              value: value
+              key: key
+            - id: id
+              value: value
+              key: key
           whatExpression: whatExpression
         createdAt: createdAt
         schedule:
-          recurring:
-            always: "{}"
+          oneTime:
+            timeframe:
+              timezone: timezone
+              startTime: startTime
+              endTime: endTime
           scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
         name: name
         description: description
@@ -337,6 +344,16 @@ components:
       type: object
     AlertSchedulerRuleProtobufV1FilterAlertMetaLabels:
       additionalProperties: false
+      example:
+        alertMetaLabels:
+          value:
+          - id: id
+            value: value
+            key: key
+          - id: id
+            value: value
+            key: key
+        whatExpression: whatExpression
       properties:
         alertMetaLabels:
           $ref: "#/components/schemas/MetaLabels"
@@ -345,12 +362,6 @@ components:
       type: object
     AlertSchedulerRuleProtobufV1FilterAlertUniqueIds:
       additionalProperties: false
-      example:
-        alertUniqueIds:
-          value:
-          - value
-          - value
-        whatExpression: whatExpression
       properties:
         alertUniqueIds:
           $ref: "#/components/schemas/AlertUniqueIds"
@@ -375,15 +386,22 @@ components:
           endTime: endTime
         alertSchedulerRule:
           filter:
-            alertUniqueIds:
+            alertMetaLabels:
               value:
-              - value
-              - value
+              - id: id
+                value: value
+                key: key
+              - id: id
+                value: value
+                key: key
             whatExpression: whatExpression
           createdAt: createdAt
           schedule:
-            recurring:
-              always: "{}"
+            oneTime:
+              timeframe:
+                timezone: timezone
+                startTime: startTime
+                endTime: endTime
             scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
           name: name
           description: description
@@ -407,10 +425,6 @@ components:
           type: array
       type: object
     AlertUniqueIds:
-      example:
-        value:
-        - value
-        - value
       properties:
         value:
           items:
@@ -454,15 +468,22 @@ components:
       example:
         alertSchedulerRule:
           filter:
-            alertUniqueIds:
+            alertMetaLabels:
               value:
-              - value
-              - value
+              - id: id
+                value: value
+                key: key
+              - id: id
+                value: value
+                key: key
             whatExpression: whatExpression
           createdAt: createdAt
           schedule:
-            recurring:
-              always: "{}"
+            oneTime:
+              timeframe:
+                timezone: timezone
+                startTime: startTime
+                endTime: endTime
             scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
           name: name
           description: description
@@ -494,15 +515,22 @@ components:
         createSuppressionResponses:
         - alertSchedulerRule:
             filter:
-              alertUniqueIds:
+              alertMetaLabels:
                 value:
-                - value
-                - value
+                - id: id
+                  value: value
+                  key: key
+                - id: id
+                  value: value
+                  key: key
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
-              recurring:
-                always: "{}"
+              oneTime:
+                timeframe:
+                  timezone: timezone
+                  startTime: startTime
+                  endTime: endTime
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -519,15 +547,22 @@ components:
             updatedAt: updatedAt
         - alertSchedulerRule:
             filter:
-              alertUniqueIds:
+              alertMetaLabels:
                 value:
-                - value
-                - value
+                - id: id
+                  value: value
+                  key: key
+                - id: id
+                  value: value
+                  key: key
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
-              recurring:
-                always: "{}"
+              oneTime:
+                timeframe:
+                  timezone: timezone
+                  startTime: startTime
+                  endTime: endTime
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -640,15 +675,22 @@ components:
       example:
         alertSchedulerRule:
           filter:
-            alertUniqueIds:
+            alertMetaLabels:
               value:
-              - value
-              - value
+              - id: id
+                value: value
+                key: key
+              - id: id
+                value: value
+                key: key
             whatExpression: whatExpression
           createdAt: createdAt
           schedule:
-            recurring:
-              always: "{}"
+            oneTime:
+              timeframe:
+                timezone: timezone
+                startTime: startTime
+                endTime: endTime
             scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
           name: name
           description: description
@@ -688,15 +730,22 @@ components:
             endTime: endTime
           alertSchedulerRule:
             filter:
-              alertUniqueIds:
+              alertMetaLabels:
                 value:
-                - value
-                - value
+                - id: id
+                  value: value
+                  key: key
+                - id: id
+                  value: value
+                  key: key
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
-              recurring:
-                always: "{}"
+              oneTime:
+                timeframe:
+                  timezone: timezone
+                  startTime: startTime
+                  endTime: endTime
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -720,15 +769,22 @@ components:
             endTime: endTime
           alertSchedulerRule:
             filter:
-              alertUniqueIds:
+              alertMetaLabels:
                 value:
-                - value
-                - value
+                - id: id
+                  value: value
+                  key: key
+                - id: id
+                  value: value
+                  key: key
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
-              recurring:
-                always: "{}"
+              oneTime:
+                timeframe:
+                  timezone: timezone
+                  startTime: startTime
+                  endTime: endTime
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -758,6 +814,14 @@ components:
       title: Get bulk alert scheduler rule response data structure
       type: object
     MetaLabels:
+      example:
+        value:
+        - id: id
+          value: value
+          key: key
+        - id: id
+          value: value
+          key: key
       properties:
         value:
           items:
@@ -804,6 +868,11 @@ components:
           type: array
       type: object
     OneTime:
+      example:
+        timeframe:
+          timezone: timezone
+          startTime: startTime
+          endTime: endTime
       properties:
         timeframe:
           $ref: "#/components/schemas/Timeframe"
@@ -814,13 +883,11 @@ components:
       - $ref: "#/components/schemas/RecurringDynamic"
     Recurring.Dynamic:
       oneOf:
+      - $ref: "#/components/schemas/RecurringDynamicMonthly"
       - $ref: "#/components/schemas/RecurringDynamicDaily"
       - $ref: "#/components/schemas/RecurringDynamicWeekly"
-      - $ref: "#/components/schemas/RecurringDynamicMonthly"
     RecurringAlways:
       additionalProperties: false
-      example:
-        always: "{}"
       properties:
         always:
           type: object
@@ -872,10 +939,17 @@ components:
       type: object
     Schedule:
       oneOf:
-      - $ref: "#/components/schemas/ScheduleRecurring"
       - $ref: "#/components/schemas/ScheduleOneTime"
+      - $ref: "#/components/schemas/ScheduleRecurring"
     ScheduleOneTime:
       additionalProperties: false
+      example:
+        oneTime:
+          timeframe:
+            timezone: timezone
+            startTime: startTime
+            endTime: endTime
+        scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
       properties:
         oneTime:
           $ref: "#/components/schemas/OneTime"
@@ -890,10 +964,6 @@ components:
       type: string
     ScheduleRecurring:
       additionalProperties: false
-      example:
-        recurring:
-          always: "{}"
-        scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
       properties:
         recurring:
           $ref: "#/components/schemas/Recurring"
@@ -902,8 +972,8 @@ components:
       type: object
     Timeframe:
       oneOf:
-      - $ref: "#/components/schemas/TimeframeDuration"
       - $ref: "#/components/schemas/TimeframeEndTime"
+      - $ref: "#/components/schemas/TimeframeDuration"
     TimeframeDuration:
       additionalProperties: false
       properties:
@@ -916,6 +986,10 @@ components:
       type: object
     TimeframeEndTime:
       additionalProperties: false
+      example:
+        timezone: timezone
+        startTime: startTime
+        endTime: endTime
       properties:
         endTime:
           type: string
@@ -941,15 +1015,22 @@ components:
       example:
         alertSchedulerRule:
           filter:
-            alertUniqueIds:
+            alertMetaLabels:
               value:
-              - value
-              - value
+              - id: id
+                value: value
+                key: key
+              - id: id
+                value: value
+                key: key
             whatExpression: whatExpression
           createdAt: createdAt
           schedule:
-            recurring:
-              always: "{}"
+            oneTime:
+              timeframe:
+                timezone: timezone
+                startTime: startTime
+                endTime: endTime
             scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
           name: name
           description: description
@@ -981,15 +1062,22 @@ components:
         updateSuppressionResponses:
         - alertSchedulerRule:
             filter:
-              alertUniqueIds:
+              alertMetaLabels:
                 value:
-                - value
-                - value
+                - id: id
+                  value: value
+                  key: key
+                - id: id
+                  value: value
+                  key: key
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
-              recurring:
-                always: "{}"
+              oneTime:
+                timeframe:
+                  timezone: timezone
+                  startTime: startTime
+                  endTime: endTime
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -1006,15 +1094,22 @@ components:
             updatedAt: updatedAt
         - alertSchedulerRule:
             filter:
-              alertUniqueIds:
+              alertMetaLabels:
                 value:
-                - value
-                - value
+                - id: id
+                  value: value
+                  key: key
+                - id: id
+                  value: value
+                  key: key
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
-              recurring:
-                always: "{}"
+              oneTime:
+                timeframe:
+                  timezone: timezone
+                  startTime: startTime
+                  endTime: endTime
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -1051,8 +1146,8 @@ components:
       type: object
     alert_scheduler_rule_protobuf.v1.Filter:
       oneOf:
-      - $ref: "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertUniqueIds"
       - $ref: "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertMetaLabels"
+      - $ref: "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertUniqueIds"
     common.Group:
       properties:
         field:

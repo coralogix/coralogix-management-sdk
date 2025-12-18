@@ -1166,13 +1166,13 @@
       "SloExecutionResponse": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SloExecutionResponseDeleteSloResponse"
-          },
-          {
             "$ref": "#/components/schemas/SloExecutionResponseCreateSloResponse"
           },
           {
             "$ref": "#/components/schemas/SloExecutionResponseReplaceSloResponse"
+          },
+          {
+            "$ref": "#/components/schemas/SloExecutionResponseDeleteSloResponse"
           }
         ]
       },

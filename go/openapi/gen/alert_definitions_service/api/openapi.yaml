@@ -440,44 +440,6 @@ components:
         updatedTime: 2023-10-01T12:00:00Z
         lastTriggeredTime: 2023-10-01T12:00:00Z
         alertDefProperties:
-          logsTimeRelativeThreshold:
-            notificationPayloadFilter:
-            - obj.field
-            ignoreInfinity: true
-            undetectedValuesManagement:
-              triggerUndetectedValues: true
-              autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-            evaluationDelayMs: 60000
-            rules:
-            - condition:
-                comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                threshold: 0.8008281904610115
-              override:
-                priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-            - condition:
-                comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                threshold: 0.8008281904610115
-              override:
-                priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-            logsFilter:
-              simpleFilter:
-                labelFilters:
-                  subsystemName:
-                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    value: my-app
-                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    value: my-app
-                  applicationName:
-                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    value: my-app
-                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    value: my-app
-                  severities:
-                  - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                luceneQuery: luceneQuery
           entityLabels:
             key: entityLabels
           phantomMode: false
@@ -735,6 +697,32 @@ components:
           incidentsSettings:
             minutes: 30
             notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+          metricThreshold:
+            missingValues:
+              replaceWithZero: true
+            undetectedValuesManagement:
+              triggerUndetectedValues: true
+              autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+            evaluationDelayMs: 60000
+            metricFilter:
+              promql: "avg_over_time(metric_name[5m]) > 10"
+            rules:
+            - condition:
+                forOverPct: 80
+                conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                ofTheLast:
+                  metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                threshold: 100
+              override:
+                priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+            - condition:
+                forOverPct: 80
+                conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                ofTheLast:
+                  metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                threshold: 100
+              override:
+                priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
           name: My Alert
           groupByKeys:
           - key1
@@ -927,19 +915,19 @@ components:
       type: string
     AlertDefProperties:
       oneOf:
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesTracingThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsAnomaly"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesMetricThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesTracingThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesFlow"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsAnomaly"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesMetricAnomaly"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsNewValue"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
       - $ref: "#/components/schemas/AlertDefPropertiesSloThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsImmediate"
       - $ref: "#/components/schemas/AlertDefPropertiesTracingImmediate"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
     AlertDefPropertiesFlow:
       additionalProperties: false
       description: User-configurable properties of an alert definition
@@ -1297,45 +1285,184 @@ components:
     AlertDefPropertiesLogsTimeRelativeThreshold:
       additionalProperties: false
       description: User-configurable properties of an alert definition
-      example:
+      externalDocs:
+        url: ""
+      properties:
+        activeOn:
+          $ref: "#/components/schemas/ActivitySchedule"
+        deleted:
+          description: Whether the alert has been marked as deleted
+          example: false
+          type: boolean
+        description:
+          description: A detailed description of what the alert monitors and when
+            it triggers
+          example: Alert description
+          type: string
+        enabled:
+          description: Whether the alert is currently active and monitoring
+          example: true
+          type: boolean
+        entityLabels:
+          additionalProperties:
+            type: string
+          description: Labels used to identify and categorize the alert entity
+          type: object
+        groupByKeys:
+          example:
+          - key1
+          - key2
+          items:
+            description: Keys used to group and aggregate alert data
+            type: string
+          type: array
+        incidentsSettings:
+          $ref: "#/components/schemas/AlertDefIncidentSettings"
         logsTimeRelativeThreshold:
-          notificationPayloadFilter:
-          - obj.field
-          ignoreInfinity: true
-          undetectedValuesManagement:
-            triggerUndetectedValues: true
-            autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-          evaluationDelayMs: 60000
-          rules:
-          - condition:
-              comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-              conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-              threshold: 0.8008281904610115
-            override:
-              priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-          - condition:
-              comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-              conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-              threshold: 0.8008281904610115
-            override:
-              priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-          logsFilter:
-            simpleFilter:
-              labelFilters:
-                subsystemName:
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                applicationName:
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                severities:
-                - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-              luceneQuery: luceneQuery
+          $ref: "#/components/schemas/LogsTimeRelativeThresholdType"
+        name:
+          description: The name of the alert definition
+          example: My Alert
+          type: string
+        notificationGroup:
+          $ref: "#/components/schemas/AlertDefNotificationGroup"
+        notificationGroupExcess:
+          items:
+            $ref: "#/components/schemas/AlertDefNotificationGroup"
+          type: array
+        phantomMode:
+          description: Whether the alert is in phantom mode (creating incidents or
+            not)
+          example: false
+          type: boolean
+        priority:
+          $ref: "#/components/schemas/AlertDefPriority"
+        type:
+          $ref: "#/components/schemas/AlertDefType"
+      title: Alert definition properties
+      type: object
+    AlertDefPropertiesLogsUniqueCount:
+      additionalProperties: false
+      description: User-configurable properties of an alert definition
+      externalDocs:
+        url: ""
+      properties:
+        activeOn:
+          $ref: "#/components/schemas/ActivitySchedule"
+        deleted:
+          description: Whether the alert has been marked as deleted
+          example: false
+          type: boolean
+        description:
+          description: A detailed description of what the alert monitors and when
+            it triggers
+          example: Alert description
+          type: string
+        enabled:
+          description: Whether the alert is currently active and monitoring
+          example: true
+          type: boolean
+        entityLabels:
+          additionalProperties:
+            type: string
+          description: Labels used to identify and categorize the alert entity
+          type: object
+        groupByKeys:
+          example:
+          - key1
+          - key2
+          items:
+            description: Keys used to group and aggregate alert data
+            type: string
+          type: array
+        incidentsSettings:
+          $ref: "#/components/schemas/AlertDefIncidentSettings"
+        logsUniqueCount:
+          $ref: "#/components/schemas/LogsUniqueCountType"
+        name:
+          description: The name of the alert definition
+          example: My Alert
+          type: string
+        notificationGroup:
+          $ref: "#/components/schemas/AlertDefNotificationGroup"
+        notificationGroupExcess:
+          items:
+            $ref: "#/components/schemas/AlertDefNotificationGroup"
+          type: array
+        phantomMode:
+          description: Whether the alert is in phantom mode (creating incidents or
+            not)
+          example: false
+          type: boolean
+        priority:
+          $ref: "#/components/schemas/AlertDefPriority"
+        type:
+          $ref: "#/components/schemas/AlertDefType"
+      title: Alert definition properties
+      type: object
+    AlertDefPropertiesMetricAnomaly:
+      additionalProperties: false
+      description: User-configurable properties of an alert definition
+      externalDocs:
+        url: ""
+      properties:
+        activeOn:
+          $ref: "#/components/schemas/ActivitySchedule"
+        deleted:
+          description: Whether the alert has been marked as deleted
+          example: false
+          type: boolean
+        description:
+          description: A detailed description of what the alert monitors and when
+            it triggers
+          example: Alert description
+          type: string
+        enabled:
+          description: Whether the alert is currently active and monitoring
+          example: true
+          type: boolean
+        entityLabels:
+          additionalProperties:
+            type: string
+          description: Labels used to identify and categorize the alert entity
+          type: object
+        groupByKeys:
+          example:
+          - key1
+          - key2
+          items:
+            description: Keys used to group and aggregate alert data
+            type: string
+          type: array
+        incidentsSettings:
+          $ref: "#/components/schemas/AlertDefIncidentSettings"
+        metricAnomaly:
+          $ref: "#/components/schemas/MetricAnomalyType"
+        name:
+          description: The name of the alert definition
+          example: My Alert
+          type: string
+        notificationGroup:
+          $ref: "#/components/schemas/AlertDefNotificationGroup"
+        notificationGroupExcess:
+          items:
+            $ref: "#/components/schemas/AlertDefNotificationGroup"
+          type: array
+        phantomMode:
+          description: Whether the alert is in phantom mode (creating incidents or
+            not)
+          example: false
+          type: boolean
+        priority:
+          $ref: "#/components/schemas/AlertDefPriority"
+        type:
+          $ref: "#/components/schemas/AlertDefType"
+      title: Alert definition properties
+      type: object
+    AlertDefPropertiesMetricThreshold:
+      additionalProperties: false
+      description: User-configurable properties of an alert definition
+      example:
         entityLabels:
           key: entityLabels
         phantomMode: false
@@ -1593,187 +1720,36 @@ components:
         incidentsSettings:
           minutes: 30
           notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+        metricThreshold:
+          missingValues:
+            replaceWithZero: true
+          undetectedValuesManagement:
+            triggerUndetectedValues: true
+            autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+          evaluationDelayMs: 60000
+          metricFilter:
+            promql: "avg_over_time(metric_name[5m]) > 10"
+          rules:
+          - condition:
+              forOverPct: 80
+              conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+              ofTheLast:
+                metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+              threshold: 100
+            override:
+              priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+          - condition:
+              forOverPct: 80
+              conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+              ofTheLast:
+                metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+              threshold: 100
+            override:
+              priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
         name: My Alert
         groupByKeys:
         - key1
         - key2
-      externalDocs:
-        url: ""
-      properties:
-        activeOn:
-          $ref: "#/components/schemas/ActivitySchedule"
-        deleted:
-          description: Whether the alert has been marked as deleted
-          example: false
-          type: boolean
-        description:
-          description: A detailed description of what the alert monitors and when
-            it triggers
-          example: Alert description
-          type: string
-        enabled:
-          description: Whether the alert is currently active and monitoring
-          example: true
-          type: boolean
-        entityLabels:
-          additionalProperties:
-            type: string
-          description: Labels used to identify and categorize the alert entity
-          type: object
-        groupByKeys:
-          example:
-          - key1
-          - key2
-          items:
-            description: Keys used to group and aggregate alert data
-            type: string
-          type: array
-        incidentsSettings:
-          $ref: "#/components/schemas/AlertDefIncidentSettings"
-        logsTimeRelativeThreshold:
-          $ref: "#/components/schemas/LogsTimeRelativeThresholdType"
-        name:
-          description: The name of the alert definition
-          example: My Alert
-          type: string
-        notificationGroup:
-          $ref: "#/components/schemas/AlertDefNotificationGroup"
-        notificationGroupExcess:
-          items:
-            $ref: "#/components/schemas/AlertDefNotificationGroup"
-          type: array
-        phantomMode:
-          description: Whether the alert is in phantom mode (creating incidents or
-            not)
-          example: false
-          type: boolean
-        priority:
-          $ref: "#/components/schemas/AlertDefPriority"
-        type:
-          $ref: "#/components/schemas/AlertDefType"
-      title: Alert definition properties
-      type: object
-    AlertDefPropertiesLogsUniqueCount:
-      additionalProperties: false
-      description: User-configurable properties of an alert definition
-      externalDocs:
-        url: ""
-      properties:
-        activeOn:
-          $ref: "#/components/schemas/ActivitySchedule"
-        deleted:
-          description: Whether the alert has been marked as deleted
-          example: false
-          type: boolean
-        description:
-          description: A detailed description of what the alert monitors and when
-            it triggers
-          example: Alert description
-          type: string
-        enabled:
-          description: Whether the alert is currently active and monitoring
-          example: true
-          type: boolean
-        entityLabels:
-          additionalProperties:
-            type: string
-          description: Labels used to identify and categorize the alert entity
-          type: object
-        groupByKeys:
-          example:
-          - key1
-          - key2
-          items:
-            description: Keys used to group and aggregate alert data
-            type: string
-          type: array
-        incidentsSettings:
-          $ref: "#/components/schemas/AlertDefIncidentSettings"
-        logsUniqueCount:
-          $ref: "#/components/schemas/LogsUniqueCountType"
-        name:
-          description: The name of the alert definition
-          example: My Alert
-          type: string
-        notificationGroup:
-          $ref: "#/components/schemas/AlertDefNotificationGroup"
-        notificationGroupExcess:
-          items:
-            $ref: "#/components/schemas/AlertDefNotificationGroup"
-          type: array
-        phantomMode:
-          description: Whether the alert is in phantom mode (creating incidents or
-            not)
-          example: false
-          type: boolean
-        priority:
-          $ref: "#/components/schemas/AlertDefPriority"
-        type:
-          $ref: "#/components/schemas/AlertDefType"
-      title: Alert definition properties
-      type: object
-    AlertDefPropertiesMetricAnomaly:
-      additionalProperties: false
-      description: User-configurable properties of an alert definition
-      externalDocs:
-        url: ""
-      properties:
-        activeOn:
-          $ref: "#/components/schemas/ActivitySchedule"
-        deleted:
-          description: Whether the alert has been marked as deleted
-          example: false
-          type: boolean
-        description:
-          description: A detailed description of what the alert monitors and when
-            it triggers
-          example: Alert description
-          type: string
-        enabled:
-          description: Whether the alert is currently active and monitoring
-          example: true
-          type: boolean
-        entityLabels:
-          additionalProperties:
-            type: string
-          description: Labels used to identify and categorize the alert entity
-          type: object
-        groupByKeys:
-          example:
-          - key1
-          - key2
-          items:
-            description: Keys used to group and aggregate alert data
-            type: string
-          type: array
-        incidentsSettings:
-          $ref: "#/components/schemas/AlertDefIncidentSettings"
-        metricAnomaly:
-          $ref: "#/components/schemas/MetricAnomalyType"
-        name:
-          description: The name of the alert definition
-          example: My Alert
-          type: string
-        notificationGroup:
-          $ref: "#/components/schemas/AlertDefNotificationGroup"
-        notificationGroupExcess:
-          items:
-            $ref: "#/components/schemas/AlertDefNotificationGroup"
-          type: array
-        phantomMode:
-          description: Whether the alert is in phantom mode (creating incidents or
-            not)
-          example: false
-          type: boolean
-        priority:
-          $ref: "#/components/schemas/AlertDefPriority"
-        type:
-          $ref: "#/components/schemas/AlertDefType"
-      title: Alert definition properties
-      type: object
-    AlertDefPropertiesMetricThreshold:
-      additionalProperties: false
-      description: User-configurable properties of an alert definition
       externalDocs:
         url: ""
       properties:
@@ -2095,44 +2071,6 @@ components:
         - updatedTime: 2023-10-01T12:00:00Z
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
-            logsTimeRelativeThreshold:
-              notificationPayloadFilter:
-              - obj.field
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              rules:
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             entityLabels:
               key: entityLabels
             phantomMode: false
@@ -2390,6 +2328,32 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+            metricThreshold:
+              missingValues:
+                replaceWithZero: true
+              undetectedValuesManagement:
+                triggerUndetectedValues: true
+                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+              evaluationDelayMs: 60000
+              metricFilter:
+                promql: "avg_over_time(metric_name[5m]) > 10"
+              rules:
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             name: My Alert
             groupByKeys:
             - key1
@@ -2401,44 +2365,6 @@ components:
         - updatedTime: 2023-10-01T12:00:00Z
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
-            logsTimeRelativeThreshold:
-              notificationPayloadFilter:
-              - obj.field
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              rules:
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             entityLabels:
               key: entityLabels
             phantomMode: false
@@ -2696,6 +2622,32 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+            metricThreshold:
+              missingValues:
+                replaceWithZero: true
+              undetectedValuesManagement:
+                triggerUndetectedValues: true
+                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+              evaluationDelayMs: 60000
+              metricFilter:
+                promql: "avg_over_time(metric_name[5m]) > 10"
+              rules:
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             name: My Alert
             groupByKeys:
             - key1
@@ -2807,44 +2759,6 @@ components:
           updatedTime: 2023-10-01T12:00:00Z
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
-            logsTimeRelativeThreshold:
-              notificationPayloadFilter:
-              - obj.field
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              rules:
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             entityLabels:
               key: entityLabels
             phantomMode: false
@@ -3102,6 +3016,32 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+            metricThreshold:
+              missingValues:
+                replaceWithZero: true
+              undetectedValuesManagement:
+                triggerUndetectedValues: true
+                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+              evaluationDelayMs: 60000
+              metricFilter:
+                promql: "avg_over_time(metric_name[5m]) > 10"
+              rules:
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             name: My Alert
             groupByKeys:
             - key1
@@ -3449,44 +3389,6 @@ components:
           updatedTime: 2023-10-01T12:00:00Z
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
-            logsTimeRelativeThreshold:
-              notificationPayloadFilter:
-              - obj.field
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              rules:
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             entityLabels:
               key: entityLabels
             phantomMode: false
@@ -3744,6 +3646,32 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+            metricThreshold:
+              missingValues:
+                replaceWithZero: true
+              undetectedValuesManagement:
+                triggerUndetectedValues: true
+                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+              evaluationDelayMs: 60000
+              metricFilter:
+                promql: "avg_over_time(metric_name[5m]) > 10"
+              rules:
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             name: My Alert
             groupByKeys:
             - key1
@@ -3766,44 +3694,6 @@ components:
           updatedTime: 2023-10-01T12:00:00Z
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
-            logsTimeRelativeThreshold:
-              notificationPayloadFilter:
-              - obj.field
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              rules:
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             entityLabels:
               key: entityLabels
             phantomMode: false
@@ -4061,6 +3951,32 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+            metricThreshold:
+              missingValues:
+                replaceWithZero: true
+              undetectedValuesManagement:
+                triggerUndetectedValues: true
+                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+              evaluationDelayMs: 60000
+              metricFilter:
+                promql: "avg_over_time(metric_name[5m]) > 10"
+              rules:
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             name: My Alert
             groupByKeys:
             - key1
@@ -4078,9 +3994,6 @@ components:
       type: object
     LabelFilterType:
       description: Label filter type for log entries
-      example:
-        operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-        value: my-app
       externalDocs:
         url: ""
       properties:
@@ -4094,20 +4007,6 @@ components:
       type: object
     LabelFilters:
       description: "Filters for application name, subsystem name, and log severities"
-      example:
-        subsystemName:
-        - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          value: my-app
-        - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          value: my-app
-        applicationName:
-        - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          value: my-app
-        - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          value: my-app
-        severities:
-        - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-        - LOG_SEVERITY_VERBOSE_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -4129,50 +4028,12 @@ components:
       description: A response that contains a list of alert definitions
       example:
         pagination:
-          totalSize: 6
+          totalSize: 0
           nextPageToken: nextPageToken
         alertDefs:
         - updatedTime: 2023-10-01T12:00:00Z
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
-            logsTimeRelativeThreshold:
-              notificationPayloadFilter:
-              - obj.field
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              rules:
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             entityLabels:
               key: entityLabels
             phantomMode: false
@@ -4430,6 +4291,32 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+            metricThreshold:
+              missingValues:
+                replaceWithZero: true
+              undetectedValuesManagement:
+                triggerUndetectedValues: true
+                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+              evaluationDelayMs: 60000
+              metricFilter:
+                promql: "avg_over_time(metric_name[5m]) > 10"
+              rules:
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             name: My Alert
             groupByKeys:
             - key1
@@ -4441,44 +4328,6 @@ components:
         - updatedTime: 2023-10-01T12:00:00Z
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
-            logsTimeRelativeThreshold:
-              notificationPayloadFilter:
-              - obj.field
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              rules:
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             entityLabels:
               key: entityLabels
             phantomMode: false
@@ -4736,6 +4585,32 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+            metricThreshold:
+              missingValues:
+                replaceWithZero: true
+              undetectedValuesManagement:
+                triggerUndetectedValues: true
+                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+              evaluationDelayMs: 60000
+              metricFilter:
+                promql: "avg_over_time(metric_name[5m]) > 10"
+              rules:
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             name: My Alert
             groupByKeys:
             - key1
@@ -5016,22 +4891,6 @@ components:
       type: string
     LogsSimpleFilter:
       description: Basic filter configuration using a Lucene query and label filters
-      example:
-        labelFilters:
-          subsystemName:
-          - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            value: my-app
-          - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            value: my-app
-          applicationName:
-          - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            value: my-app
-          - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            value: my-app
-          severities:
-          - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-          - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-        luceneQuery: luceneQuery
       externalDocs:
         url: ""
       properties:
@@ -5116,10 +4975,6 @@ components:
       type: string
     LogsTimeRelativeCondition:
       description: Defines conditions for time-relative comparison alerts
-      example:
-        comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-        conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-        threshold: 0.8008281904610115
       externalDocs:
         url: ""
       properties:
@@ -5141,13 +4996,6 @@ components:
     LogsTimeRelativeRule:
       description: LogsTimeRelativeRule is a message that defines a rule for log-based
         time-relative alerts
-      example:
-        condition:
-          comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-          conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-          threshold: 0.8008281904610115
-        override:
-          priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -5160,44 +5008,6 @@ components:
     LogsTimeRelativeThresholdType:
       description: Configuration for alerts that are triggered when a fixed ratio
         reaches a set threshold compared to a past time frame.
-      example:
-        notificationPayloadFilter:
-        - obj.field
-        ignoreInfinity: true
-        undetectedValuesManagement:
-          triggerUndetectedValues: true
-          autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-        evaluationDelayMs: 60000
-        rules:
-        - condition:
-            comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-            conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-            threshold: 0.8008281904610115
-          override:
-            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-        - condition:
-            comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-            conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-            threshold: 0.8008281904610115
-          override:
-            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-        logsFilter:
-          simpleFilter:
-            labelFilters:
-              subsystemName:
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              applicationName:
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              severities:
-              - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-              - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-            luceneQuery: luceneQuery
       externalDocs:
         description: "Learn more about log-based, time-relative alerts in our documentation"
         url: https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/time-relative-alerts/
@@ -5392,6 +5202,8 @@ components:
       title: Metric-based anomaly alert type
       type: object
     MetricFilter:
+      example:
+        promql: "avg_over_time(metric_name[5m]) > 10"
       externalDocs:
         url: ""
       properties:
@@ -5422,6 +5234,8 @@ components:
     MetricMissingValuesReplaceWithZero:
       additionalProperties: false
       description: Configuration for handling missing values in metric threshold alerts.
+      example:
+        replaceWithZero: true
       externalDocs:
         url: ""
       properties:
@@ -5433,6 +5247,12 @@ components:
       type: object
     MetricThresholdCondition:
       description: Defines conditions for metric threshold alerts
+      example:
+        forOverPct: 80
+        conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+        ofTheLast:
+          metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+        threshold: 100
       externalDocs:
         url: ""
       properties:
@@ -5462,6 +5282,15 @@ components:
       type: string
     MetricThresholdRule:
       description: Defines a rule for metric-based threshold alerts
+      example:
+        condition:
+          forOverPct: 80
+          conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+          ofTheLast:
+            metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+          threshold: 100
+        override:
+          priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -5473,6 +5302,32 @@ components:
       type: object
     MetricThresholdType:
       description: Configuration for alerts based on metric threshold violations
+      example:
+        missingValues:
+          replaceWithZero: true
+        undetectedValuesManagement:
+          triggerUndetectedValues: true
+          autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+        evaluationDelayMs: 60000
+        metricFilter:
+          promql: "avg_over_time(metric_name[5m]) > 10"
+        rules:
+        - condition:
+            forOverPct: 80
+            conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+            ofTheLast:
+              metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+            threshold: 100
+          override:
+            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+        - condition:
+            forOverPct: 80
+            conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+            ofTheLast:
+              metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+            threshold: 100
+          override:
+            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
       externalDocs:
         description: Learn more about metric-based threshold alerts in our documentation
         url: https://coralogix.com/docs/user-guides/alerting/create-an-alert/metrics/threshold-alerts/
@@ -5511,6 +5366,8 @@ components:
       type: object
     MetricTimeWindowMetricTimeWindowSpecificValue:
       additionalProperties: false
+      example:
+        metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -5705,44 +5562,6 @@ components:
           updatedTime: 2023-10-01T12:00:00Z
           lastTriggeredTime: 2023-10-01T12:00:00Z
           alertDefProperties:
-            logsTimeRelativeThreshold:
-              notificationPayloadFilter:
-              - obj.field
-              ignoreInfinity: true
-              undetectedValuesManagement:
-                triggerUndetectedValues: true
-                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
-              evaluationDelayMs: 60000
-              rules:
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              - condition:
-                  comparedTo: LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-                  conditionType: LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-                  threshold: 0.8008281904610115
-                override:
-                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             entityLabels:
               key: entityLabels
             phantomMode: false
@@ -6000,6 +5819,32 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+            metricThreshold:
+              missingValues:
+                replaceWithZero: true
+              undetectedValuesManagement:
+                triggerUndetectedValues: true
+                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+              evaluationDelayMs: 60000
+              metricFilter:
+                promql: "avg_over_time(metric_name[5m]) > 10"
+              rules:
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             name: My Alert
             groupByKeys:
             - key1
@@ -6341,7 +6186,7 @@ components:
       type: object
     alerts.v3.PaginationResponse:
       example:
-        totalSize: 6
+        totalSize: 0
         nextPageToken: nextPageToken
       properties:
         nextPageToken:
@@ -6406,23 +6251,6 @@ components:
       - $ref: "#/components/schemas/V3IntegrationTypeRecipients"
     v3.LogsFilter:
       description: Filter configuration for log-based alerts
-      example:
-        simpleFilter:
-          labelFilters:
-            subsystemName:
-            - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              value: my-app
-            - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              value: my-app
-            applicationName:
-            - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              value: my-app
-            - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              value: my-app
-            severities:
-            - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-            - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-          luceneQuery: luceneQuery
       externalDocs:
         url: ""
       properties:

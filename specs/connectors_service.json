@@ -548,7 +548,8 @@
           "GENERIC_HTTPS",
           "PAGERDUTY",
           "IBM_EVENT_NOTIFICATIONS",
-          "SERVICE_NOW"
+          "SERVICE_NOW",
+          "EMAIL"
         ]
       },
       "ConnectorTypeSummary": {

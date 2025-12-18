@@ -359,6 +359,7 @@ components:
       - PAGERDUTY
       - IBM_EVENT_NOTIFICATIONS
       - SERVICE_NOW
+      - EMAIL
       type: string
     CreateCustomPresetResponse:
       description: Response containing the created custom preset

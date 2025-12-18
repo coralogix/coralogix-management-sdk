@@ -541,8 +541,6 @@ components:
       type: object
     AzureArmTemplate:
       description: This data structure represents an azure ARM template.
-      example:
-        templateUrl: templateUrl
       externalDocs:
         url: ""
       properties:
@@ -577,6 +575,37 @@ components:
       title: CloudFormation stack
       type: object
     CloudFormationTemplate:
+      example:
+        postInstallationSteps:
+          key: postInstallationSteps
+        parameters:
+          key: parameters
+        commands:
+        - tooltipText: tooltipText
+          name: name
+          description: description
+          language: UNKNOWN
+          links:
+          - text: text
+            key: key
+            url: url
+          - text: text
+            key: key
+            url: url
+          command: command
+        - tooltipText: tooltipText
+          name: name
+          description: description
+          language: UNKNOWN
+          links:
+          - text: text
+            key: key
+            url: url
+          - text: text
+            key: key
+            url: url
+          command: command
+        templateUrl: templateUrl
       externalDocs:
         url: ""
       properties:
@@ -621,6 +650,19 @@ components:
           $ref: "#/components/schemas/ColorsByStack"
       type: object
     CommandInformation:
+      example:
+        tooltipText: tooltipText
+        name: name
+        description: description
+        language: UNKNOWN
+        links:
+        - text: text
+          key: key
+          url: url
+        - text: text
+          key: key
+          url: url
+        command: command
       externalDocs:
         url: ""
       properties:
@@ -976,8 +1018,6 @@ components:
       title: Extension revision
       type: object
     ExternalUrl:
-      example:
-        url: url
       externalDocs:
         url: ""
       properties:
@@ -1032,42 +1072,14 @@ components:
       type: object
     FieldInformation:
       oneOf:
+      - $ref: "#/components/schemas/FieldInformationSingle"
       - $ref: "#/components/schemas/FieldInformationMultiText"
       - $ref: "#/components/schemas/FieldInformationMultipleSelection"
       - $ref: "#/components/schemas/FieldInformationSingleBoolean"
       - $ref: "#/components/schemas/FieldInformationSelection"
       - $ref: "#/components/schemas/FieldInformationSingleNumber"
-      - $ref: "#/components/schemas/FieldInformationSingle"
     FieldInformationMultiText:
       additionalProperties: false
-      example:
-        visible: true
-        groupId: groupId
-        tooltip: tooltip
-        multiText:
-          options:
-          - options
-          - options
-          defaultValues:
-          - defaultValues
-          - defaultValues
-        type: API_KEY
-        upgradeNotice: upgradeNotice
-        predefined: true
-        required: true
-        templateParamName: templateParamName
-        readonly: true
-        documentationReference: documentationReference
-        name: name
-        placeholder: placeholder
-        applicableIf:
-          values:
-          - fieldName: fieldName
-            valuePattern: valuePattern
-          - fieldName: fieldName
-            valuePattern: valuePattern
-          type: UNKNOWN
-        allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -1179,6 +1191,29 @@ components:
       type: object
     FieldInformationSingle:
       additionalProperties: false
+      example:
+        visible: true
+        groupId: groupId
+        tooltip: tooltip
+        type: API_KEY
+        upgradeNotice: upgradeNotice
+        predefined: true
+        required: true
+        templateParamName: templateParamName
+        single:
+          defaultValue: defaultValue
+        readonly: true
+        documentationReference: documentationReference
+        name: name
+        placeholder: placeholder
+        applicableIf:
+          values:
+          - fieldName: fieldName
+            valuePattern: valuePattern
+          - fieldName: fieldName
+            valuePattern: valuePattern
+          type: UNKNOWN
+        allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -1386,12 +1421,42 @@ components:
         integrationDefinition:
           featureFlag: featureFlag
           integrationType:
-            untracked: "{}"
+            managed:
+              variant: DEFAULT
           revisions:
           - revisionDeploymentSupported: true
             featureFlag: featureFlag
             upgradeInstructionsMd: upgradeInstructionsMd
-            azureArmTemplate:
+            cloudFormation:
+              postInstallationSteps:
+                key: postInstallationSteps
+              parameters:
+                key: parameters
+              commands:
+              - tooltipText: tooltipText
+                name: name
+                description: description
+                language: UNKNOWN
+                links:
+                - text: text
+                  key: key
+                  url: url
+                - text: text
+                  key: key
+                  url: url
+                command: command
+              - tooltipText: tooltipText
+                name: name
+                description: description
+                language: UNKNOWN
+                links:
+                - text: text
+                  key: key
+                  url: url
+                - text: text
+                  key: key
+                  url: url
+                command: command
               templateUrl: templateUrl
             groups:
             - name: name
@@ -1403,18 +1468,13 @@ components:
             - visible: true
               groupId: groupId
               tooltip: tooltip
-              multiText:
-                options:
-                - options
-                - options
-                defaultValues:
-                - defaultValues
-                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
               required: true
               templateParamName: templateParamName
+              single:
+                defaultValue: defaultValue
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -1430,18 +1490,13 @@ components:
             - visible: true
               groupId: groupId
               tooltip: tooltip
-              multiText:
-                options:
-                - options
-                - options
-                defaultValues:
-                - defaultValues
-                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
               required: true
               templateParamName: templateParamName
+              single:
+                defaultValue: defaultValue
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -1457,7 +1512,36 @@ components:
           - revisionDeploymentSupported: true
             featureFlag: featureFlag
             upgradeInstructionsMd: upgradeInstructionsMd
-            azureArmTemplate:
+            cloudFormation:
+              postInstallationSteps:
+                key: postInstallationSteps
+              parameters:
+                key: parameters
+              commands:
+              - tooltipText: tooltipText
+                name: name
+                description: description
+                language: UNKNOWN
+                links:
+                - text: text
+                  key: key
+                  url: url
+                - text: text
+                  key: key
+                  url: url
+                command: command
+              - tooltipText: tooltipText
+                name: name
+                description: description
+                language: UNKNOWN
+                links:
+                - text: text
+                  key: key
+                  url: url
+                - text: text
+                  key: key
+                  url: url
+                command: command
               templateUrl: templateUrl
             groups:
             - name: name
@@ -1469,18 +1553,13 @@ components:
             - visible: true
               groupId: groupId
               tooltip: tooltip
-              multiText:
-                options:
-                - options
-                - options
-                defaultValues:
-                - defaultValues
-                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
               required: true
               templateParamName: templateParamName
+              single:
+                defaultValue: defaultValue
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -1496,18 +1575,13 @@ components:
             - visible: true
               groupId: groupId
               tooltip: tooltip
-              multiText:
-                options:
-                - options
-                - options
-                defaultValues:
-                - defaultValues
-                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
               required: true
               templateParamName: templateParamName
+              single:
+                defaultValue: defaultValue
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -2310,8 +2384,6 @@ components:
             - integrations
             - integrations
             isHidden: true
-          external:
-            url: url
           docs:
           - link: link
             name: name
@@ -2320,7 +2392,8 @@ components:
           integration:
             featureFlag: featureFlag
             integrationType:
-              untracked: "{}"
+              managed:
+                variant: DEFAULT
             versions:
             - versions
             - versions
@@ -2332,6 +2405,12 @@ components:
             tags:
             - tags
             - tags
+          local:
+            changes:
+            - descriptionMd: descriptionMd
+              version: version
+            - descriptionMd: descriptionMd
+              version: version
       externalDocs:
         url: ""
       properties:
@@ -2346,7 +2425,8 @@ components:
         - integration:
             featureFlag: featureFlag
             integrationType:
-              untracked: "{}"
+              managed:
+                variant: DEFAULT
             versions:
             - versions
             - versions
@@ -2367,7 +2447,8 @@ components:
         - integration:
             featureFlag: featureFlag
             integrationType:
-              untracked: "{}"
+              managed:
+                variant: DEFAULT
             versions:
             - versions
             - versions
@@ -2399,7 +2480,8 @@ components:
         integration:
           featureFlag: featureFlag
           integrationType:
-            untracked: "{}"
+            managed:
+              variant: DEFAULT
           versions:
           - versions
           - versions
@@ -2523,7 +2605,8 @@ components:
       example:
         featureFlag: featureFlag
         integrationType:
-          untracked: "{}"
+          managed:
+            variant: DEFAULT
         versions:
         - versions
         - versions
@@ -2567,12 +2650,42 @@ components:
       example:
         featureFlag: featureFlag
         integrationType:
-          untracked: "{}"
+          managed:
+            variant: DEFAULT
         revisions:
         - revisionDeploymentSupported: true
           featureFlag: featureFlag
           upgradeInstructionsMd: upgradeInstructionsMd
-          azureArmTemplate:
+          cloudFormation:
+            postInstallationSteps:
+              key: postInstallationSteps
+            parameters:
+              key: parameters
+            commands:
+            - tooltipText: tooltipText
+              name: name
+              description: description
+              language: UNKNOWN
+              links:
+              - text: text
+                key: key
+                url: url
+              - text: text
+                key: key
+                url: url
+              command: command
+            - tooltipText: tooltipText
+              name: name
+              description: description
+              language: UNKNOWN
+              links:
+              - text: text
+                key: key
+                url: url
+              - text: text
+                key: key
+                url: url
+              command: command
             templateUrl: templateUrl
           groups:
           - name: name
@@ -2584,18 +2697,13 @@ components:
           - visible: true
             groupId: groupId
             tooltip: tooltip
-            multiText:
-              options:
-              - options
-              - options
-              defaultValues:
-              - defaultValues
-              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
             required: true
             templateParamName: templateParamName
+            single:
+              defaultValue: defaultValue
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -2611,18 +2719,13 @@ components:
           - visible: true
             groupId: groupId
             tooltip: tooltip
-            multiText:
-              options:
-              - options
-              - options
-              defaultValues:
-              - defaultValues
-              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
             required: true
             templateParamName: templateParamName
+            single:
+              defaultValue: defaultValue
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -2638,7 +2741,36 @@ components:
         - revisionDeploymentSupported: true
           featureFlag: featureFlag
           upgradeInstructionsMd: upgradeInstructionsMd
-          azureArmTemplate:
+          cloudFormation:
+            postInstallationSteps:
+              key: postInstallationSteps
+            parameters:
+              key: parameters
+            commands:
+            - tooltipText: tooltipText
+              name: name
+              description: description
+              language: UNKNOWN
+              links:
+              - text: text
+                key: key
+                url: url
+              - text: text
+                key: key
+                url: url
+              command: command
+            - tooltipText: tooltipText
+              name: name
+              description: description
+              language: UNKNOWN
+              links:
+              - text: text
+                key: key
+                url: url
+              - text: text
+                key: key
+                url: url
+              command: command
             templateUrl: templateUrl
           groups:
           - name: name
@@ -2650,18 +2782,13 @@ components:
           - visible: true
             groupId: groupId
             tooltip: tooltip
-            multiText:
-              options:
-              - options
-              - options
-              defaultValues:
-              - defaultValues
-              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
             required: true
             templateParamName: templateParamName
+            single:
+              defaultValue: defaultValue
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -2677,18 +2804,13 @@ components:
           - visible: true
             groupId: groupId
             tooltip: tooltip
-            multiText:
-              options:
-              - options
-              - options
-              defaultValues:
-              - defaultValues
-              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
             required: true
             templateParamName: templateParamName
+            single:
+              defaultValue: defaultValue
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -2732,9 +2854,31 @@ components:
       type: object
     IntegrationDetails:
       oneOf:
-      - $ref: "#/components/schemas/IntegrationDetailsExternal"
       - $ref: "#/components/schemas/IntegrationDetailsLocal"
+      - $ref: "#/components/schemas/IntegrationDetailsExternal"
     IntegrationDetailsExternal:
+      additionalProperties: false
+      description: This data structure represents a set of integration details.
+      externalDocs:
+        url: ""
+      properties:
+        default:
+          $ref: "#/components/schemas/DefaultIntegrationDetails"
+        docs:
+          items:
+            $ref: "#/components/schemas/IntegrationDoc"
+          type: array
+        extensions:
+          items:
+            $ref: "#/components/schemas/v1.Extension"
+          type: array
+        external:
+          $ref: "#/components/schemas/ExternalUrl"
+        integration:
+          $ref: "#/components/schemas/Integration"
+      title: Integration details
+      type: object
+    IntegrationDetailsLocal:
       additionalProperties: false
       description: This data structure represents a set of integration details.
       example:
@@ -3517,8 +3661,6 @@ components:
           - integrations
           - integrations
           isHidden: true
-        external:
-          url: url
         docs:
         - link: link
           name: name
@@ -3527,7 +3669,8 @@ components:
         integration:
           featureFlag: featureFlag
           integrationType:
-            untracked: "{}"
+            managed:
+              variant: DEFAULT
           versions:
           - versions
           - versions
@@ -3539,28 +3682,12 @@ components:
           tags:
           - tags
           - tags
-      externalDocs:
-        url: ""
-      properties:
-        default:
-          $ref: "#/components/schemas/DefaultIntegrationDetails"
-        docs:
-          items:
-            $ref: "#/components/schemas/IntegrationDoc"
-          type: array
-        extensions:
-          items:
-            $ref: "#/components/schemas/v1.Extension"
-          type: array
-        external:
-          $ref: "#/components/schemas/ExternalUrl"
-        integration:
-          $ref: "#/components/schemas/Integration"
-      title: Integration details
-      type: object
-    IntegrationDetailsLocal:
-      additionalProperties: false
-      description: This data structure represents a set of integration details.
+        local:
+          changes:
+          - descriptionMd: descriptionMd
+            version: version
+          - descriptionMd: descriptionMd
+            version: version
       externalDocs:
         url: ""
       properties:
@@ -3619,12 +3746,12 @@ components:
       type: object
     IntegrationRevision:
       oneOf:
-      - $ref: "#/components/schemas/IntegrationRevisionAzureArmTemplate"
-      - $ref: "#/components/schemas/IntegrationRevisionRum"
-      - $ref: "#/components/schemas/IntegrationRevisionTerraform"
       - $ref: "#/components/schemas/IntegrationRevisionCloudFormation"
       - $ref: "#/components/schemas/IntegrationRevisionManagedService"
       - $ref: "#/components/schemas/IntegrationRevisionHelmChart"
+      - $ref: "#/components/schemas/IntegrationRevisionAzureArmTemplate"
+      - $ref: "#/components/schemas/IntegrationRevisionRum"
+      - $ref: "#/components/schemas/IntegrationRevisionTerraform"
     IntegrationRevision.Group:
       example:
         name: name
@@ -3650,73 +3777,6 @@ components:
     IntegrationRevisionAzureArmTemplate:
       additionalProperties: false
       description: This data structure represents an integration revision.
-      example:
-        revisionDeploymentSupported: true
-        featureFlag: featureFlag
-        upgradeInstructionsMd: upgradeInstructionsMd
-        azureArmTemplate:
-          templateUrl: templateUrl
-        groups:
-        - name: name
-          id: id
-        - name: name
-          id: id
-        id: id
-        fields:
-        - visible: true
-          groupId: groupId
-          tooltip: tooltip
-          multiText:
-            options:
-            - options
-            - options
-            defaultValues:
-            - defaultValues
-            - defaultValues
-          type: API_KEY
-          upgradeNotice: upgradeNotice
-          predefined: true
-          required: true
-          templateParamName: templateParamName
-          readonly: true
-          documentationReference: documentationReference
-          name: name
-          placeholder: placeholder
-          applicableIf:
-            values:
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            type: UNKNOWN
-          allowedPattern: allowedPattern
-        - visible: true
-          groupId: groupId
-          tooltip: tooltip
-          multiText:
-            options:
-            - options
-            - options
-            defaultValues:
-            - defaultValues
-            - defaultValues
-          type: API_KEY
-          upgradeNotice: upgradeNotice
-          predefined: true
-          required: true
-          templateParamName: templateParamName
-          readonly: true
-          documentationReference: documentationReference
-          name: name
-          placeholder: placeholder
-          applicableIf:
-            values:
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            type: UNKNOWN
-          allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -3743,6 +3803,92 @@ components:
     IntegrationRevisionCloudFormation:
       additionalProperties: false
       description: This data structure represents an integration revision.
+      example:
+        revisionDeploymentSupported: true
+        featureFlag: featureFlag
+        upgradeInstructionsMd: upgradeInstructionsMd
+        cloudFormation:
+          postInstallationSteps:
+            key: postInstallationSteps
+          parameters:
+            key: parameters
+          commands:
+          - tooltipText: tooltipText
+            name: name
+            description: description
+            language: UNKNOWN
+            links:
+            - text: text
+              key: key
+              url: url
+            - text: text
+              key: key
+              url: url
+            command: command
+          - tooltipText: tooltipText
+            name: name
+            description: description
+            language: UNKNOWN
+            links:
+            - text: text
+              key: key
+              url: url
+            - text: text
+              key: key
+              url: url
+            command: command
+          templateUrl: templateUrl
+        groups:
+        - name: name
+          id: id
+        - name: name
+          id: id
+        id: id
+        fields:
+        - visible: true
+          groupId: groupId
+          tooltip: tooltip
+          type: API_KEY
+          upgradeNotice: upgradeNotice
+          predefined: true
+          required: true
+          templateParamName: templateParamName
+          single:
+            defaultValue: defaultValue
+          readonly: true
+          documentationReference: documentationReference
+          name: name
+          placeholder: placeholder
+          applicableIf:
+            values:
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            type: UNKNOWN
+          allowedPattern: allowedPattern
+        - visible: true
+          groupId: groupId
+          tooltip: tooltip
+          type: API_KEY
+          upgradeNotice: upgradeNotice
+          predefined: true
+          required: true
+          templateParamName: templateParamName
+          single:
+            defaultValue: defaultValue
+          readonly: true
+          documentationReference: documentationReference
+          name: name
+          placeholder: placeholder
+          applicableIf:
+            values:
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            type: UNKNOWN
+          allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -3905,6 +4051,10 @@ components:
       - JAVASCRIPT
       type: string
     Link:
+      example:
+        text: text
+        key: key
+        url: url
       externalDocs:
         url: ""
       properties:
@@ -3931,13 +4081,6 @@ components:
       title: List managed integration keys response
       type: object
     ListTextValue:
-      example:
-        options:
-        - options
-        - options
-        defaultValues:
-        - defaultValues
-        - defaultValues
       externalDocs:
         url: ""
       properties:
@@ -3952,6 +4095,12 @@ components:
       title: List text value
       type: object
     LocalChangelog:
+      example:
+        changes:
+        - descriptionMd: descriptionMd
+          version: version
+        - descriptionMd: descriptionMd
+          version: version
       externalDocs:
         url: ""
       properties:
@@ -3978,6 +4127,8 @@ components:
       type: object
     Managed:
       description: This data structure represents a managed integration.
+      example:
+        variant: DEFAULT
       externalDocs:
         url: ""
       properties:
@@ -4245,6 +4396,9 @@ components:
       title: Registered instance
       type: object
     RevisionRef:
+      example:
+        descriptionMd: descriptionMd
+        version: version
       externalDocs:
         url: ""
       properties:
@@ -4355,6 +4509,8 @@ components:
       title: Single boolean value
       type: object
     SingleValue:
+      example:
+        defaultValue: defaultValue
       externalDocs:
         url: ""
       properties:
@@ -4535,6 +4691,9 @@ components:
     V1IntegrationTypeManaged:
       additionalProperties: false
       description: This data structure represents an integration type.
+      example:
+        managed:
+          variant: DEFAULT
       externalDocs:
         url: ""
       properties:
@@ -4560,8 +4719,6 @@ components:
     V1IntegrationTypeUntracked:
       additionalProperties: false
       description: This data structure represents an integration type.
-      example:
-        untracked: "{}"
       externalDocs:
         url: ""
       properties:
@@ -5017,13 +5174,13 @@ components:
       type: object
     v1.IntegrationType:
       oneOf:
+      - $ref: "#/components/schemas/V1IntegrationTypeManaged"
       - $ref: "#/components/schemas/V1IntegrationTypeUntracked"
       - $ref: "#/components/schemas/V1IntegrationTypeCloudformation"
       - $ref: "#/components/schemas/V1IntegrationTypeArm"
       - $ref: "#/components/schemas/V1IntegrationTypePushBasedContextualData"
       - $ref: "#/components/schemas/V1IntegrationTypeContextualData"
       - $ref: "#/components/schemas/V1IntegrationTypeGenericWebhook"
-      - $ref: "#/components/schemas/V1IntegrationTypeManaged"
     v3.FilterOperator:
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED

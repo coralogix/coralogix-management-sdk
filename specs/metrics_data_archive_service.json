@@ -122,10 +122,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/ConfigureTenantRequestS3"
+                    "$ref": "#/components/schemas/ConfigureTenantRequestIbm"
                   },
                   {
-                    "$ref": "#/components/schemas/ConfigureTenantRequestIbm"
+                    "$ref": "#/components/schemas/ConfigureTenantRequestS3"
                   }
                 ]
               }
@@ -582,10 +582,10 @@
       "TenantConfigV2": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TenantConfigV2Ibm"
+            "$ref": "#/components/schemas/TenantConfigV2S3"
           },
           {
-            "$ref": "#/components/schemas/TenantConfigV2S3"
+            "$ref": "#/components/schemas/TenantConfigV2Ibm"
           }
         ]
       },

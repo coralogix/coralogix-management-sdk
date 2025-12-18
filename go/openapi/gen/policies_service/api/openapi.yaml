@@ -1159,8 +1159,8 @@ components:
       type: object
     Placement:
       oneOf:
-      - $ref: "#/components/schemas/PlacementFirst"
       - $ref: "#/components/schemas/PlacementLast"
+      - $ref: "#/components/schemas/PlacementFirst"
     PlacementFirst:
       additionalProperties: false
       properties:

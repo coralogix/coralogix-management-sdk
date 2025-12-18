@@ -847,31 +847,28 @@
       "AlertDefProperties": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
+            "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
           },
           {
+            "$ref": "#/components/schemas/AlertDefPropertiesFlow"
+          },
+          {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
-          },
-          {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesFlow"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesMetricAnomaly"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesSloThreshold"
@@ -884,6 +881,9 @@
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
           }
         ]
       },

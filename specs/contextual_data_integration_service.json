@@ -908,6 +908,9 @@
       "FieldInformation": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/FieldInformationSingle"
+          },
+          {
             "$ref": "#/components/schemas/FieldInformationMultiText"
           },
           {
@@ -921,9 +924,6 @@
           },
           {
             "$ref": "#/components/schemas/FieldInformationSingleNumber"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationSingle"
           }
         ]
       },
@@ -1546,10 +1546,10 @@
       "IntegrationDetails": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IntegrationDetailsExternal"
+            "$ref": "#/components/schemas/IntegrationDetailsLocal"
           },
           {
-            "$ref": "#/components/schemas/IntegrationDetailsLocal"
+            "$ref": "#/components/schemas/IntegrationDetailsExternal"
           }
         ]
       },
@@ -1670,15 +1670,6 @@
       "IntegrationRevision": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IntegrationRevisionAzureArmTemplate"
-          },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionRum"
-          },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionTerraform"
-          },
-          {
             "$ref": "#/components/schemas/IntegrationRevisionCloudFormation"
           },
           {
@@ -1686,6 +1677,15 @@
           },
           {
             "$ref": "#/components/schemas/IntegrationRevisionHelmChart"
+          },
+          {
+            "$ref": "#/components/schemas/IntegrationRevisionAzureArmTemplate"
+          },
+          {
+            "$ref": "#/components/schemas/IntegrationRevisionRum"
+          },
+          {
+            "$ref": "#/components/schemas/IntegrationRevisionTerraform"
           }
         ]
       },
@@ -2802,6 +2802,9 @@
       "v1.IntegrationType": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/V1IntegrationTypeManaged"
+          },
+          {
             "$ref": "#/components/schemas/V1IntegrationTypeUntracked"
           },
           {
@@ -2818,9 +2821,6 @@
           },
           {
             "$ref": "#/components/schemas/V1IntegrationTypeGenericWebhook"
-          },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeManaged"
           }
         ]
       },

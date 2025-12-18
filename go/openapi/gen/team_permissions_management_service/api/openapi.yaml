@@ -662,31 +662,12 @@ components:
       type: object
     GetGroupUsersResponse:
       oneOf:
-      - $ref: "#/components/schemas/GetGroupUsersResponseNoMorePages"
       - $ref: "#/components/schemas/GetGroupUsersResponseToken"
+      - $ref: "#/components/schemas/GetGroupUsersResponseNoMorePages"
     GetGroupUsersResponseNoMorePages:
       additionalProperties: false
       description: Response containing the list of all users currently assigned to
         the requested team group.
-      example:
-        noMorePages: "{}"
-        users:
-        - firstName: firstName
-          lastName: lastName
-          userAccountId:
-            id: 0
-          userId:
-            id: id
-          status: USER_STATUS_UNSPECIFIED
-          username: username
-        - firstName: firstName
-          lastName: lastName
-          userAccountId:
-            id: 0
-          userId:
-            id: id
-          status: USER_STATUS_UNSPECIFIED
-          username: username
       externalDocs:
         description: Find out more about groups
         url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
@@ -709,6 +690,26 @@ components:
       additionalProperties: false
       description: Response containing the list of all users currently assigned to
         the requested team group.
+      example:
+        users:
+        - firstName: firstName
+          lastName: lastName
+          userAccountId:
+            id: 0
+          userId:
+            id: id
+          status: USER_STATUS_UNSPECIFIED
+          username: username
+        - firstName: firstName
+          lastName: lastName
+          userAccountId:
+            id: 0
+          userId:
+            id: id
+          status: USER_STATUS_UNSPECIFIED
+          username: username
+        token:
+          nextPageToken: nextPageToken
       externalDocs:
         description: Find out more about groups
         url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
@@ -975,6 +976,8 @@ components:
     NextPageToken:
       description: This data structure represents the information associated with
         an API key.
+      example:
+        nextPageToken: nextPageToken
       externalDocs:
         description: Find out more about groups
         url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
