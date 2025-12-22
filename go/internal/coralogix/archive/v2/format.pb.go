@@ -234,7 +234,7 @@ var File_com_coralogix_archive_v2_format_proto protoreflect.FileDescriptor
 
 const file_com_coralogix_archive_v2_format_proto_rawDesc = "" +
 	"\n" +
-	"%com/coralogix/archive/v2/format.proto\x12\x18com.coralogix.archive.v2\x1a5com/coralogix/archive/format/generic/v1/generic.proto\x1a?com/coralogix/archive/format/wide_parquet/v1/wide_parquet.proto\x1a-com/coralogix/archive/format/csv/v1/csv.proto\"\n" +
+	"%com/coralogix/archive/v2/format.proto\x12\x18com.coralogix.archive.v2\x1a-com/coralogix/archive/format/csv/v1/csv.proto\x1a5com/coralogix/archive/format/generic/v1/generic.proto\x1a?com/coralogix/archive/format/wide_parquet/v1/wide_parquet.proto\"\n" +
 	"\n" +
 	"\bLogsAvro\"\v\n" +
 	"\tSpansAvro\"\xac\x03\n" +

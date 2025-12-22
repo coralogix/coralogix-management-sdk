@@ -457,7 +457,7 @@ var File_com_coralogix_archive_v1_retentions_service_proto protoreflect.FileDesc
 
 const file_com_coralogix_archive_v1_retentions_service_proto_rawDesc = "" +
 	"\n" +
-	"1com/coralogix/archive/v1/retentions_service.proto\x12\x18com.coralogix.archive.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a google/protobuf/descriptor.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a(com/coralogix/archive/v1/retention.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\x16\n" +
+	"1com/coralogix/archive/v1/retentions_service.proto\x12\x18com.coralogix.archive.v1\x1a(com/coralogix/archive/v1/retention.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x16\n" +
 	"\x14GetRetentionsRequest\"\\\n" +
 	"\x15GetRetentionsResponse\x12C\n" +
 	"\n" +
