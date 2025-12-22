@@ -28,6 +28,7 @@ const (
 	IncidentStatus_INCIDENT_STATUS_TRIGGERED    IncidentStatus = 1
 	IncidentStatus_INCIDENT_STATUS_ACKNOWLEDGED IncidentStatus = 2
 	IncidentStatus_INCIDENT_STATUS_RESOLVED     IncidentStatus = 3
+	IncidentStatus_INCIDENT_STATUS_NO_DATA      IncidentStatus = 4
 )
 
 // Enum value maps for IncidentStatus.
@@ -37,12 +38,14 @@ var (
 		1: "INCIDENT_STATUS_TRIGGERED",
 		2: "INCIDENT_STATUS_ACKNOWLEDGED",
 		3: "INCIDENT_STATUS_RESOLVED",
+		4: "INCIDENT_STATUS_NO_DATA",
 	}
 	IncidentStatus_value = map[string]int32{
 		"INCIDENT_STATUS_UNSPECIFIED":  0,
 		"INCIDENT_STATUS_TRIGGERED":    1,
 		"INCIDENT_STATUS_ACKNOWLEDGED": 2,
 		"INCIDENT_STATUS_RESOLVED":     3,
+		"INCIDENT_STATUS_NO_DATA":      4,
 	}
 )
 
@@ -77,12 +80,13 @@ var File_com_coralogixapis_incidents_v1_incident_status_proto protoreflect.FileD
 
 const file_com_coralogixapis_incidents_v1_incident_status_proto_rawDesc = "" +
 	"\n" +
-	"4com/coralogixapis/incidents/v1/incident_status.proto\x12\x1ecom.coralogixapis.incidents.v1*\x90\x01\n" +
+	"4com/coralogixapis/incidents/v1/incident_status.proto\x12\x1ecom.coralogixapis.incidents.v1*\xad\x01\n" +
 	"\x0eIncidentStatus\x12\x1f\n" +
 	"\x1bINCIDENT_STATUS_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19INCIDENT_STATUS_TRIGGERED\x10\x01\x12 \n" +
 	"\x1cINCIDENT_STATUS_ACKNOWLEDGED\x10\x02\x12\x1c\n" +
-	"\x18INCIDENT_STATUS_RESOLVED\x10\x03b\x06proto3"
+	"\x18INCIDENT_STATUS_RESOLVED\x10\x03\x12\x1b\n" +
+	"\x17INCIDENT_STATUS_NO_DATA\x10\x04b\x06proto3"
 
 var (
 	file_com_coralogixapis_incidents_v1_incident_status_proto_rawDescOnce sync.Once
