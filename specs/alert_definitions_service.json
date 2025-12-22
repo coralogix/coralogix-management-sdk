@@ -11,7 +11,6 @@
           "Alert definitions service"
         ],
         "summary": "Get a list of all accessible alert definitions",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -132,7 +131,6 @@
           "Alert definitions service"
         ],
         "summary": "Replace an alert definition",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -198,7 +196,6 @@
           "Alert definitions service"
         ],
         "summary": "Create an alert",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -261,7 +258,6 @@
           "Alert definitions service"
         ],
         "summary": "Get alert definition by alert version ID",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -320,7 +316,6 @@
           "Alert definitions service"
         ],
         "summary": "Bulk replace alert definitions",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -386,7 +381,7 @@
           "Alert definitions service"
         ],
         "summary": "Download alerts",
-        "description": "Download a list of all accessible alert definitions in base64-encoded byte format.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
+        "description": "Download a list of all accessible alert definitions in base64-encoded byte format.",
         "externalDocs": {
           "url": ""
         },
@@ -432,7 +427,7 @@
           "Alert definitions service"
         ],
         "summary": "Get counts for filter options",
-        "description": "Returns counts for different filter options based on the provided filters\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
+        "description": "Returns counts for different filter options based on the provided filters",
         "externalDocs": {
           "url": ""
         },
@@ -501,7 +496,6 @@
           "Alert definitions service"
         ],
         "summary": "Get alert definition by ID",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -558,7 +552,6 @@
           "Alert definitions service"
         ],
         "summary": "DeleteAlertDef",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -616,7 +609,6 @@
           "Alert definitions service"
         ],
         "summary": "Disable or enable an alert",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -725,7 +717,7 @@
             "type": "string"
           },
           "createdTime": {
-            "example": "2023-10-01T12:00:00.000Z",
+            "example": "2023-10-01T12:00:00Z",
             "description": "The time when the alert definition was created",
             "type": "string",
             "format": "date-time"
@@ -736,7 +728,7 @@
             "type": "string"
           },
           "lastTriggeredTime": {
-            "example": "2023-10-01T12:00:00.000Z",
+            "example": "2023-10-01T12:00:00Z",
             "description": "The last time the alert definition was triggered",
             "type": "string",
             "format": "date-time"
@@ -745,7 +737,7 @@
             "$ref": "#/components/schemas/AlertDefStatus"
           },
           "updatedTime": {
-            "example": "2023-10-01T12:00:00.000Z",
+            "example": "2023-10-01T12:00:00Z",
             "description": "The time when the alert definition was last updated",
             "type": "string",
             "format": "date-time"
@@ -847,19 +839,25 @@
       "AlertDefProperties": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
+            "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesSloThreshold"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
           },
           {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsThreshold"
+          },
+          {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
+            "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesFlow"
@@ -868,22 +866,16 @@
             "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesSloThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
-          },
-          {
             "$ref": "#/components/schemas/AlertDefPropertiesMetricAnomaly"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
           }
         ]
       },
@@ -3561,6 +3553,34 @@
           "METRIC_TIME_WINDOW_VALUE_HOURS_36"
         ]
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -4322,14 +4342,6 @@
             "type": "boolean"
           }
         }
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

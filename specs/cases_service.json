@@ -11,7 +11,7 @@
           "Cases service"
         ],
         "summary": "List cases with filters",
-        "description": "List cases using filters, pagination and custom ordering.\n\nRequires the following permissions:\n- `case:Read`",
+        "description": "List cases using filters, pagination and custom ordering.",
         "externalDocs": {
           "url": ""
         },
@@ -80,7 +80,7 @@
           "Cases service"
         ],
         "summary": "Get case by ID",
-        "description": "Retrieve detailed information about a single case by its unique identifier.\n\nRequires the following permissions:\n- `case:Read`",
+        "description": "Retrieve detailed information about a single case by its unique identifier.",
         "externalDocs": {
           "url": ""
         },
@@ -137,7 +137,7 @@
           "Cases service"
         ],
         "summary": "Update case fields",
-        "description": "Apply a partial update (patch) to a case.\n\nRequires the following permissions:\n- `case:Update`",
+        "description": "Apply a partial update (patch) to a case.",
         "externalDocs": {
           "url": ""
         },
@@ -220,7 +220,7 @@
           "Cases service"
         ],
         "summary": "Acknowledge a case",
-        "description": "Mark the case as acknowledged by a user.\n\nRequires the following permissions:\n- `case:Acknowledge`",
+        "description": "Mark the case as acknowledged by a user.",
         "externalDocs": {
           "url": ""
         },
@@ -299,7 +299,7 @@
           "Cases service"
         ],
         "summary": "Assign a case to a user",
-        "description": "Assign a case to a specific user.\n\nRequires the following permissions:\n- `case:Assign`",
+        "description": "Assign a case to a specific user.",
         "externalDocs": {
           "url": ""
         },
@@ -378,7 +378,7 @@
           "Cases service"
         ],
         "summary": "Close a case",
-        "description": "Close a case that no longer requires action.\n\nRequires the following permissions:\n- `case:Close`",
+        "description": "Close a case that no longer requires action.",
         "externalDocs": {
           "url": ""
         },
@@ -447,7 +447,7 @@
           "Cases service"
         ],
         "summary": "Resolve a case",
-        "description": "Mark a case as resolved.\n\nRequires the following permissions:\n- `case:Close`",
+        "description": "Mark a case as resolved.",
         "externalDocs": {
           "url": ""
         },
@@ -516,7 +516,7 @@
           "Cases service"
         ],
         "summary": "Set priority override",
-        "description": "Override a case's computed priority with a specific value.\n\nRequires the following permissions:\n- `case:Update`",
+        "description": "Override a case's computed priority with a specific value.",
         "externalDocs": {
           "url": ""
         },
@@ -595,7 +595,7 @@
           "Cases service"
         ],
         "summary": "Remove case assignment",
-        "description": "Remove the current assignee from a case.\n\nRequires the following permissions:\n- `case:Assign`",
+        "description": "Remove the current assignee from a case.",
         "externalDocs": {
           "url": ""
         },
@@ -654,7 +654,7 @@
           "Cases service"
         ],
         "summary": "Remove priority override",
-        "description": "Remove a previously set priority override for a case.\n\nRequires the following permissions:\n- `case:Update`",
+        "description": "Remove a previously set priority override for a case.",
         "externalDocs": {
           "url": ""
         },
@@ -713,7 +713,7 @@
           "Cases service"
         ],
         "summary": "Get available filter values",
-        "description": "Retrieve available filter and aggregation values for cases.\n\nRequires the following permissions:\n- `case:Read`",
+        "description": "Retrieve available filter and aggregation values for cases.",
         "externalDocs": {
           "url": ""
         },
@@ -827,7 +827,7 @@
             "$ref": "#/components/schemas/AlertPriority"
           },
           "resolveTime": {
-            "example": "2025-09-22T11:05:00.000Z",
+            "example": "2025-09-22T11:05:00Z",
             "description": "When present, timestamp when the alert resolved.",
             "type": "string",
             "format": "date-time"
@@ -836,7 +836,7 @@
             "$ref": "#/components/schemas/AlertIndicatorState"
           },
           "triggerTime": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "Timestamp when the alert triggered.",
             "type": "string",
             "format": "date-time"
@@ -916,10 +916,10 @@
       "AssigneeOption": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AssigneeOptionUnassigned"
+            "$ref": "#/components/schemas/AssigneeOptionAssignee"
           },
           {
-            "$ref": "#/components/schemas/AssigneeOptionAssignee"
+            "$ref": "#/components/schemas/AssigneeOptionUnassigned"
           }
         ]
       },
@@ -967,7 +967,7 @@
             "$ref": "#/components/schemas/CaseCategory"
           },
           "createTime": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "When the case was created",
             "type": "string",
             "format": "date-time"
@@ -1259,13 +1259,13 @@
         "type": "object",
         "properties": {
           "from": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "Timestamp marking the start of the date range",
             "type": "string",
             "format": "date-time"
           },
           "to": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "Timestamp marking the end of the date range",
             "type": "string",
             "format": "date-time"
@@ -1449,6 +1449,34 @@
           "pagination"
         ]
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -1506,7 +1534,7 @@
         "type": "object",
         "properties": {
           "resolveTime": {
-            "example": "2025-09-22T11:15:00.000Z",
+            "example": "2025-09-22T11:15:00Z",
             "description": "Timestamp when the case was resolved",
             "type": "string",
             "format": "date-time"
@@ -1815,14 +1843,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }
