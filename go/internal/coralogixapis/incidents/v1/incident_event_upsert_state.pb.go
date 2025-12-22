@@ -28,6 +28,7 @@ type IncidentEventUpsertState struct {
 	StateType     UpsertIncidentStateType     `protobuf:"varint,1,opt,name=state_type,json=stateType,proto3,enum=com.coralogixapis.incidents.v1.UpsertIncidentStateType" json:"state_type,omitempty"`
 	Payload       *UpsertIncidentStatePayload `protobuf:"bytes,2,opt,name=payload,proto3" json:"payload,omitempty"`
 	IsMuted       *wrapperspb.BoolValue       `protobuf:"bytes,3,opt,name=is_muted,json=isMuted,proto3" json:"is_muted,omitempty"`
+	IsNoData      *wrapperspb.BoolValue       `protobuf:"bytes,4,opt,name=is_no_data,json=isNoData,proto3" json:"is_no_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -83,16 +84,25 @@ func (x *IncidentEventUpsertState) GetIsMuted() *wrapperspb.BoolValue {
 	return nil
 }
 
+func (x *IncidentEventUpsertState) GetIsNoData() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.IsNoData
+	}
+	return nil
+}
+
 var File_com_coralogixapis_incidents_v1_incident_event_incident_event_upsert_state_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_incidents_v1_incident_event_incident_event_upsert_state_proto_rawDesc = "" +
 	"\n" +
-	"Ocom/coralogixapis/incidents/v1/incident_event/incident_event_upsert_state.proto\x12\x1ecom.coralogixapis.incidents.v1\x1ahcom/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_payload.proto\x1aecom/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xba\x02\n" +
+	"Ocom/coralogixapis/incidents/v1/incident_event/incident_event_upsert_state.proto\x12\x1ecom.coralogixapis.incidents.v1\x1ahcom/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_payload.proto\x1aecom/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xf4\x02\n" +
 	"\x18IncidentEventUpsertState\x12V\n" +
 	"\n" +
 	"state_type\x18\x01 \x01(\x0e27.com.coralogixapis.incidents.v1.UpsertIncidentStateTypeR\tstateType\x12T\n" +
 	"\apayload\x18\x02 \x01(\v2:.com.coralogixapis.incidents.v1.UpsertIncidentStatePayloadR\apayload\x125\n" +
-	"\bis_muted\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\aisMuted:9\x9aA6\n" +
+	"\bis_muted\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\aisMuted\x128\n" +
+	"\n" +
+	"is_no_data\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\bisNoData:9\x9aA6\n" +
 	"4*\x1bIncident event upsert state\xd2\x01\n" +
 	"state_type\xd2\x01\apayloadb\x06proto3"
 
@@ -119,11 +129,12 @@ var file_com_coralogixapis_incidents_v1_incident_event_incident_event_upsert_sta
 	1, // 0: com.coralogixapis.incidents.v1.IncidentEventUpsertState.state_type:type_name -> com.coralogixapis.incidents.v1.UpsertIncidentStateType
 	2, // 1: com.coralogixapis.incidents.v1.IncidentEventUpsertState.payload:type_name -> com.coralogixapis.incidents.v1.UpsertIncidentStatePayload
 	3, // 2: com.coralogixapis.incidents.v1.IncidentEventUpsertState.is_muted:type_name -> google.protobuf.BoolValue
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	3, // 3: com.coralogixapis.incidents.v1.IncidentEventUpsertState.is_no_data:type_name -> google.protobuf.BoolValue
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() {

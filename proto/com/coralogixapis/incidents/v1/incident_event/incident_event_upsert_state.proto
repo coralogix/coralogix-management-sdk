@@ -20,4 +20,5 @@ message IncidentEventUpsertState {
   UpsertIncidentStateType state_type = 1;
   UpsertIncidentStatePayload payload = 2;
   google.protobuf.BoolValue is_muted = 3;
+  google.protobuf.BoolValue is_no_data = 4;
 }
