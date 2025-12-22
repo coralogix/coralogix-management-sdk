@@ -768,7 +768,7 @@ var File_com_coralogix_archive_v2_target_service_proto protoreflect.FileDescript
 
 const file_com_coralogix_archive_v2_target_service_proto_rawDesc = "" +
 	"\n" +
-	"-com/coralogix/archive/v2/target_service.proto\x12\x18com.coralogix.archive.v2\x1a%com/coralogix/archive/v2/target.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\x12\n" +
+	"-com/coralogix/archive/v2/target_service.proto\x12\x18com.coralogix.archive.v2\x1a%com/coralogix/archive/v2/target.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x12\n" +
 	"\x10GetTargetRequest\"\xa9\x02\n" +
 	"\x11GetTargetResponse\x128\n" +
 	"\x06target\x18\x01 \x01(\v2 .com.coralogix.archive.v2.TargetR\x06target:\xd9\x01\x9aA\xd5\x01\n" +

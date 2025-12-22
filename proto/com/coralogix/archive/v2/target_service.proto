@@ -4,8 +4,8 @@ package com.coralogix.archive.v2;
 
 import "com/coralogix/archive/v2/target.proto";
 import "com/coralogixapis/common/v1/audit_log.proto";
-import "protoc-gen-openapiv3/options/annotations.proto";
 import "google/api/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message GetTargetRequest {}
 
@@ -14,9 +14,7 @@ message GetTargetResponse {
     json_schema: {
       title: "Get Target Response"
       description: "This data structure is used to retrieve a storage target for logs."
-      required: [
-        "target"
-      ]
+      required: ["target"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
@@ -43,7 +41,7 @@ message SetTargetRequest {
     }
   };
 
-  bool is_active = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
+  bool is_active = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "true"}];
   oneof target_spec {
     S3TargetSpec s3 = 2;
     IBMCosTargetSpec ibm_cos = 3;
@@ -55,9 +53,7 @@ message SetTargetResponse {
     json_schema: {
       title: "Set Target Response"
       description: "This data structure is obtained after setting a storage target for logs."
-      required: [
-        "target"
-      ]
+      required: ["target"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
@@ -83,12 +79,12 @@ message SetExternalTargetRequest {
       description: "Find out more about archives"
     }
   };
-  bool is_active = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
+  bool is_active = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "true"}];
   oneof target_spec {
     S3TargetSpec s3 = 2;
     IBMCosTargetSpec ibm_cos = 3;
   }
-  uint32 company_id = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
+  uint32 company_id = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "true"}];
 }
 
 message SetExternalTargetResponse {
@@ -96,9 +92,7 @@ message SetExternalTargetResponse {
     json_schema: {
       title: "Set Target Response"
       description: "This data structure is obtained after setting an external storage target for logs."
-      required: [
-        "target"
-      ]
+      required: ["target"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
@@ -113,17 +107,15 @@ message CompanyArchiveConfig {
     json_schema: {
       title: "Common Archive Config"
       description: "This data structure represents a common archive configuration for a company within the organization."
-      required: [
-        "target"
-      ]
+      required: ["target"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
       description: "Find out more about archives"
     }
   };
-  uint32 company_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "1234567" }];
-  bool archive_configured = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
+  uint32 company_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "1234567"}];
+  bool archive_configured = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "true"}];
 }
 
 message ValidateTargetRequest {
@@ -153,16 +145,14 @@ message ValidateTargetResponse {
     json_schema: {
       title: "Validate Target Response"
       description: "This data structure is obtained after validating a storage target for logs."
-      required: [
-        "is_valid"
-      ]
+      required: ["is_valid"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
       description: "Find out more about archives"
     }
   };
-  bool is_valid = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
+  bool is_valid = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "true"}];
 }
 
 service TargetService {
@@ -192,9 +182,7 @@ service S3TargetService {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get target";
     option (google.api.http) = {
       get: "/logs/data-setup/v2"
-      additional_bindings: {
-        get: "/v2/target"
-      }
+      additional_bindings: {get: "/v2/target"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -219,9 +207,7 @@ service S3TargetService {
     option (google.api.http) = {
       post: "/logs/data-setup/v2"
       body: "*"
-      additional_bindings: {
-        post: "/v2/target"
-      }
+      additional_bindings: {post: "/v2/target"}
     };
 
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -250,9 +236,7 @@ message S3TargetServiceGetTargetResponse {
     json_schema: {
       title: "Get Target Response"
       description: "This data structure is used to retrieve a storage target for logs."
-      required: [
-        "target"
-      ]
+      required: ["target"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
@@ -279,7 +263,7 @@ message S3TargetServiceSetTargetRequest {
     }
   };
 
-  bool is_active = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
+  bool is_active = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "true"}];
   oneof target_spec {
     S3TargetSpec s3 = 2;
   }
@@ -290,9 +274,7 @@ message S3TargetServiceSetTargetResponse {
     json_schema: {
       title: "Set Target Response"
       description: "This data structure is obtained after setting a storage target for logs."
-      required: [
-        "target"
-      ]
+      required: ["target"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"

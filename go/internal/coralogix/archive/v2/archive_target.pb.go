@@ -220,7 +220,7 @@ var File_com_coralogix_archive_v2_archive_target_proto protoreflect.FileDescript
 
 const file_com_coralogix_archive_v2_archive_target_proto_rawDesc = "" +
 	"\n" +
-	"-com/coralogix/archive/v2/archive_target.proto\x12\x18com.coralogix.archive.v2\x1a%com/coralogix/archive/v2/target.proto\x1a%com/coralogix/archive/v2/format.proto\x1a)com/coralogix/archive/v2/object_tag.proto\x1a2com/coralogix/archive/v2/partitioning_scheme.proto\"\x8c\x05\n" +
+	"-com/coralogix/archive/v2/archive_target.proto\x12\x18com.coralogix.archive.v2\x1a%com/coralogix/archive/v2/format.proto\x1a)com/coralogix/archive/v2/object_tag.proto\x1a2com/coralogix/archive/v2/partitioning_scheme.proto\x1a%com/coralogix/archive/v2/target.proto\"\x8c\x05\n" +
 	"\rArchiveTarget\x128\n" +
 	"\x06format\x18\x01 \x01(\v2 .com.coralogix.archive.v2.FormatR\x06format\x128\n" +
 	"\x02s3\x18\x02 \x01(\v2&.com.coralogix.archive.v2.S3TargetSpecH\x00R\x02s3\x12E\n" +
@@ -284,10 +284,10 @@ func file_com_coralogix_archive_v2_archive_target_proto_init() {
 	if File_com_coralogix_archive_v2_archive_target_proto != nil {
 		return
 	}
-	file_com_coralogix_archive_v2_target_proto_init()
 	file_com_coralogix_archive_v2_format_proto_init()
 	file_com_coralogix_archive_v2_object_tag_proto_init()
 	file_com_coralogix_archive_v2_partitioning_scheme_proto_init()
+	file_com_coralogix_archive_v2_target_proto_init()
 	file_com_coralogix_archive_v2_archive_target_proto_msgTypes[0].OneofWrappers = []any{
 		(*ArchiveTarget_S3)(nil),
 		(*ArchiveTarget_IbmCos)(nil),
