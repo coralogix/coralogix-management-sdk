@@ -145,7 +145,7 @@ allow_policies = ["src/com/coralogixapis/actions/v2/actions_service.proto"]
 
 [cx-api-extensions]
 url = 'github.com/coralogix/cx-api-extensions'
-revision = "v1.0.17"
+revision = "v1.0.18"
 allow_policies = [
     "src/com/coralogix/extensions/v1/extension_service.proto",
     "src/com/coralogix/extensions/v1/extension.proto",
