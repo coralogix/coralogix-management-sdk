@@ -11,7 +11,6 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Update an alert scheduler rule",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -72,7 +71,6 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Create an alert scheduler rule",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -135,7 +133,6 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Get multiple alert scheduler rules",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -232,7 +229,6 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Update multiple alert scheduler rules",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -296,7 +292,6 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Create multiple alert scheduler rules",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -362,7 +357,6 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Get an alert scheduler rule",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -414,7 +408,6 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Delete an alert scheduler rule",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -843,6 +836,34 @@
           }
         }
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "Monthly": {
         "type": "object",
         "properties": {
@@ -890,13 +911,13 @@
       "Recurring.Dynamic": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/RecurringDynamicDaily"
+          },
+          {
             "$ref": "#/components/schemas/RecurringDynamicWeekly"
           },
           {
             "$ref": "#/components/schemas/RecurringDynamicMonthly"
-          },
-          {
-            "$ref": "#/components/schemas/RecurringDynamicDaily"
           }
         ]
       },
@@ -1190,14 +1211,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

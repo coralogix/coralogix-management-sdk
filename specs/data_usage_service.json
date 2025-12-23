@@ -11,7 +11,6 @@
           "Data Usage Service"
         ],
         "summary": "Get Data Usage",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -30,12 +29,12 @@
               "type": "object",
               "properties": {
                 "fromDate": {
-                  "example": "2021-01-01T00:00:00.000Z",
+                  "example": "2021-01-01T00:00:00Z",
                   "type": "string",
                   "format": "date-time"
                 },
                 "toDate": {
-                  "example": "2021-01-01T00:00:00.000Z",
+                  "example": "2021-01-01T00:00:00Z",
                   "type": "string",
                   "format": "date-time"
                 }
@@ -70,6 +69,12 @@
               "items": {
                 "oneOf": [
                   {
+                    "$ref": "#/components/schemas/DimensionPriority"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DimensionPillar"
+                  },
+                  {
                     "$ref": "#/components/schemas/DimensionGenericDimension"
                   },
                   {
@@ -77,12 +82,6 @@
                   },
                   {
                     "$ref": "#/components/schemas/DimensionSeverity"
-                  },
-                  {
-                    "$ref": "#/components/schemas/DimensionPriority"
-                  },
-                  {
-                    "$ref": "#/components/schemas/DimensionPillar"
                   }
                 ]
               }
@@ -128,7 +127,6 @@
           "Data Usage Service"
         ],
         "summary": "Get Daily Usage Evaluation Tokens",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -140,10 +138,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageEvaluationTokensRequestRange"
+                    "$ref": "#/components/schemas/GetDailyUsageEvaluationTokensRequestDateRange"
                   },
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageEvaluationTokensRequestDateRange"
+                    "$ref": "#/components/schemas/GetDailyUsageEvaluationTokensRequestRange"
                   }
                 ]
               }
@@ -188,7 +186,6 @@
           "Data Usage Service"
         ],
         "summary": "Get Daily Usage Processed GBs",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -248,7 +245,6 @@
           "Data Usage Service"
         ],
         "summary": "Get Daily Usage Units",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -308,7 +304,6 @@
           "Data Usage Service"
         ],
         "summary": "Get Data Usage Metrics Export Status",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -349,7 +344,6 @@
           "Data Usage Service"
         ],
         "summary": "Update Data Usage Metrics Export Status",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -410,7 +404,6 @@
           "Data Usage Service"
         ],
         "summary": "Get Logs Count",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -429,12 +422,12 @@
               "type": "object",
               "properties": {
                 "fromDate": {
-                  "example": "2021-01-01T00:00:00.000Z",
+                  "example": "2021-01-01T00:00:00Z",
                   "type": "string",
                   "format": "date-time"
                 },
                 "toDate": {
-                  "example": "2021-01-01T00:00:00.000Z",
+                  "example": "2021-01-01T00:00:00Z",
                   "type": "string",
                   "format": "date-time"
                 }
@@ -535,7 +528,6 @@
           "Data Usage Service"
         ],
         "summary": "Get Spans Count",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -554,12 +546,12 @@
               "type": "object",
               "properties": {
                 "fromDate": {
-                  "example": "2021-01-01T00:00:00.000Z",
+                  "example": "2021-01-01T00:00:00Z",
                   "type": "string",
                   "format": "date-time"
                 },
                 "toDate": {
-                  "example": "2021-01-01T00:00:00.000Z",
+                  "example": "2021-01-01T00:00:00Z",
                   "type": "string",
                   "format": "date-time"
                 }
@@ -823,6 +815,9 @@
       "Dimension": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/DimensionPillar"
+          },
+          {
             "$ref": "#/components/schemas/DimensionGenericDimension"
           },
           {
@@ -833,9 +828,6 @@
           },
           {
             "$ref": "#/components/schemas/DimensionPriority"
-          },
-          {
-            "$ref": "#/components/schemas/DimensionPillar"
           }
         ]
       },
@@ -1186,6 +1178,34 @@
           }
         }
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -1240,7 +1260,7 @@
             "format": "int64"
           },
           "timestamp": {
-            "example": "2021-01-01T00:00:00.000Z",
+            "example": "2021-01-01T00:00:00Z",
             "type": "string",
             "format": "date-time"
           }
@@ -1317,12 +1337,12 @@
         "type": "object",
         "properties": {
           "fromDate": {
-            "example": "2021-01-01T00:00:00.000Z",
+            "example": "2021-01-01T00:00:00Z",
             "type": "string",
             "format": "date-time"
           },
           "toDate": {
-            "example": "2021-01-01T00:00:00.000Z",
+            "example": "2021-01-01T00:00:00Z",
             "type": "string",
             "format": "date-time"
           }
@@ -1394,14 +1414,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

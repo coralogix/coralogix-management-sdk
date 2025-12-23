@@ -11,7 +11,6 @@
           "Events Service"
         ],
         "summary": "List Events",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -135,7 +134,6 @@
           "Events Service"
         ],
         "summary": "List Alert Events",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -273,7 +271,6 @@
           "Events Service"
         ],
         "summary": "Batch Get Event",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -378,7 +375,6 @@
           "Events Service"
         ],
         "summary": "List Events Count",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -464,7 +460,6 @@
           "Events Service"
         ],
         "summary": "Get Events Statistics",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -550,7 +545,6 @@
           "Events Service"
         ],
         "summary": "Get Event",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -771,10 +765,10 @@
       "CxEventSingleOrMultiple": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/CxEventSingleOrMultipleMultipleEvents"
+            "$ref": "#/components/schemas/CxEventSingleOrMultipleSingleEvent"
           },
           {
-            "$ref": "#/components/schemas/CxEventSingleOrMultipleSingleEvent"
+            "$ref": "#/components/schemas/CxEventSingleOrMultipleMultipleEvents"
           }
         ]
       },
@@ -975,6 +969,34 @@
           "reachedLimit"
         ]
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -1082,14 +1104,6 @@
         "required": [
           "events"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

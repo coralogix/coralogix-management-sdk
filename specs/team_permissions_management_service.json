@@ -11,7 +11,6 @@
           "Team Permissions Management Service"
         ],
         "summary": "Get Team Groups",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -68,7 +67,6 @@
           "Team Permissions Management Service"
         ],
         "summary": "Update Team Group",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -150,7 +148,6 @@
           "Team Permissions Management Service"
         ],
         "summary": "Create Team Group",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -234,13 +231,119 @@
         }
       }
     },
+    "/aaa/team-groups/v1/id/{id}": {
+      "get": {
+        "tags": [
+          "Team Permissions Management Service"
+        ],
+        "summary": "Get Team Group",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamPermissionsMgmtService_GetTeamGroup",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTeamGroupResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/aaa/team-groups/v1/name/{name}": {
+      "get": {
+        "tags": [
+          "Team Permissions Management Service"
+        ],
+        "summary": "Get Team Group By Name",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamPermissionsMgmtService_GetTeamGroupByName",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTeamGroupByNameResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
     "/aaa/team-groups/v1/users": {
       "post": {
         "tags": [
           "Team Permissions Management Service"
         ],
         "summary": "Add Users To Team Groups",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -304,7 +407,6 @@
           "Team Permissions Management Service"
         ],
         "summary": "Remove Users From Team Groups",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -382,65 +484,11 @@
       }
     },
     "/aaa/team-groups/v1/{id}": {
-      "get": {
-        "tags": [
-          "Team Permissions Management Service"
-        ],
-        "summary": "Get Team Group",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "TeamPermissionsMgmtService_GetTeamGroup",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "style": "simple"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetTeamGroupResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      },
       "delete": {
         "tags": [
           "Team Permissions Management Service"
         ],
         "summary": "Delete Team Group",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -495,7 +543,6 @@
           "Team Permissions Management Service"
         ],
         "summary": "Get Group Users",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -566,7 +613,6 @@
           "Team Permissions Management Service"
         ],
         "summary": "Add Users To Team Group",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -639,7 +685,6 @@
           "Team Permissions Management Service"
         ],
         "summary": "Remove Users From Team Group",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -705,67 +750,12 @@
         }
       }
     },
-    "/aaa/team-groups/v1/{name}": {
-      "get": {
-        "tags": [
-          "Team Permissions Management Service"
-        ],
-        "summary": "Get Team Group By Name",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "TeamPermissionsMgmtService_GetTeamGroupByName",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "name",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetTeamGroupByNameResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
     "/v1/teams/groups/{id}/scope": {
       "get": {
         "tags": [
           "Team Permissions Management Service"
         ],
         "summary": "Get Team Group Scope",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -818,7 +808,6 @@
           "Team Permissions Management Service"
         ],
         "summary": "Set Team Group Scope",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -1205,6 +1194,34 @@
           "GROUP_TYPE_RESTRICTED"
         ]
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -1537,14 +1554,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

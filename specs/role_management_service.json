@@ -11,7 +11,6 @@
           "Role Management Service"
         ],
         "summary": "List Custom Roles",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -63,7 +62,6 @@
           "Role Management Service"
         ],
         "summary": "Create Role",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -135,7 +133,6 @@
           "Role Management Service"
         ],
         "summary": "Get Custom Role",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -194,7 +191,6 @@
           "Role Management Service"
         ],
         "summary": "Update Role",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -274,7 +270,6 @@
           "Role Management Service"
         ],
         "summary": "Delete Role",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -341,7 +336,6 @@
           "Role Management Service"
         ],
         "summary": "List System Roles",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -588,6 +582,34 @@
           }
         }
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -700,14 +722,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }
