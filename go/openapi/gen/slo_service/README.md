@@ -105,6 +105,8 @@ Class | Method | HTTP request | Description
  - [GetServiceSloResponse](docs/GetServiceSloResponse.md)
  - [LatencySli](docs/LatencySli.md)
  - [ListServiceSlosResponse](docs/ListServiceSlosResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [OrderBy](docs/OrderBy.md)
  - [ReplaceServiceSLORequest](docs/ReplaceServiceSLORequest.md)

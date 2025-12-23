@@ -100,6 +100,8 @@ Class | Method | HTTP request | Description
  - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [GetScopesResponse](docs/GetScopesResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [ScopesV1Filter](docs/ScopesV1Filter.md)
  - [ScopesV1Scope](docs/ScopesV1Scope.md)

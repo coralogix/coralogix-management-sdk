@@ -97,6 +97,8 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [IBMCosTargetSpec](docs/IBMCosTargetSpec.md)
  - [IbmBucketType](docs/IbmBucketType.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [S3TargetServiceGetTargetResponse](docs/S3TargetServiceGetTargetResponse.md)
  - [S3TargetServiceSetTargetResponse](docs/S3TargetServiceSetTargetResponse.md)

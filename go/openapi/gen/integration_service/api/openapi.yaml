@@ -721,15 +721,9 @@ components:
               key: details
           id: id
           parameters:
-          - stringList:
-              values:
-              - values
-              - values
+          - numericValue: 0.8008281904610115
             key: key
-          - stringList:
-              values:
-              - values
-              - values
+          - numericValue: 0.8008281904610115
             key: key
           isTesting: true
           empty: "{}"
@@ -744,15 +738,9 @@ components:
               key: details
           id: id
           parameters:
-          - stringList:
-              values:
-              - values
-              - values
+          - numericValue: 0.8008281904610115
             key: key
-          - stringList:
-              values:
-              - values
-              - values
+          - numericValue: 0.8008281904610115
             key: key
           isTesting: true
           empty: "{}"
@@ -780,15 +768,9 @@ components:
             key: details
         id: id
         parameters:
-        - stringList:
-            values:
-            - values
-            - values
+        - numericValue: 0.8008281904610115
           key: key
-        - stringList:
-            values:
-            - values
-            - values
+        - numericValue: 0.8008281904610115
           key: key
       externalDocs:
         url: ""
@@ -1090,12 +1072,12 @@ components:
       type: object
     FieldInformation:
       oneOf:
+      - $ref: "#/components/schemas/FieldInformationSingle"
+      - $ref: "#/components/schemas/FieldInformationMultiText"
       - $ref: "#/components/schemas/FieldInformationMultipleSelection"
       - $ref: "#/components/schemas/FieldInformationSingleBoolean"
       - $ref: "#/components/schemas/FieldInformationSelection"
       - $ref: "#/components/schemas/FieldInformationSingleNumber"
-      - $ref: "#/components/schemas/FieldInformationSingle"
-      - $ref: "#/components/schemas/FieldInformationMultiText"
     FieldInformationMultiText:
       additionalProperties: false
       externalDocs:
@@ -1135,31 +1117,6 @@ components:
       type: object
     FieldInformationMultipleSelection:
       additionalProperties: false
-      example:
-        visible: true
-        groupId: groupId
-        tooltip: tooltip
-        type: API_KEY
-        upgradeNotice: upgradeNotice
-        predefined: true
-        required: true
-        templateParamName: templateParamName
-        readonly: true
-        documentationReference: documentationReference
-        name: name
-        placeholder: placeholder
-        applicableIf:
-          values:
-          - fieldName: fieldName
-            valuePattern: valuePattern
-          - fieldName: fieldName
-            valuePattern: valuePattern
-          type: UNKNOWN
-        allowedPattern: allowedPattern
-        multipleSelection:
-          options:
-          - options
-          - options
       externalDocs:
         url: ""
       properties:
@@ -1234,6 +1191,29 @@ components:
       type: object
     FieldInformationSingle:
       additionalProperties: false
+      example:
+        visible: true
+        groupId: groupId
+        tooltip: tooltip
+        type: API_KEY
+        upgradeNotice: upgradeNotice
+        predefined: true
+        required: true
+        templateParamName: templateParamName
+        single:
+          defaultValue: defaultValue
+        readonly: true
+        documentationReference: documentationReference
+        name: name
+        placeholder: placeholder
+        applicableIf:
+          values:
+          - fieldName: fieldName
+            valuePattern: valuePattern
+          - fieldName: fieldName
+            valuePattern: valuePattern
+          type: UNKNOWN
+        allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -1424,15 +1404,9 @@ components:
               key: details
           id: id
           parameters:
-          - stringList:
-              values:
-              - values
-              - values
+          - numericValue: 0.8008281904610115
             key: key
-          - stringList:
-              values:
-              - values
-              - values
+          - numericValue: 0.8008281904610115
             key: key
       externalDocs:
         url: ""
@@ -1447,7 +1421,8 @@ components:
         integrationDefinition:
           featureFlag: featureFlag
           integrationType:
-            genericWebhook: "{}"
+            managed:
+              variant: DEFAULT
           revisions:
           - revisionDeploymentSupported: true
             featureFlag: featureFlag
@@ -1498,6 +1473,8 @@ components:
               predefined: true
               required: true
               templateParamName: templateParamName
+              single:
+                defaultValue: defaultValue
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -1510,10 +1487,6 @@ components:
                   valuePattern: valuePattern
                 type: UNKNOWN
               allowedPattern: allowedPattern
-              multipleSelection:
-                options:
-                - options
-                - options
             - visible: true
               groupId: groupId
               tooltip: tooltip
@@ -1522,6 +1495,8 @@ components:
               predefined: true
               required: true
               templateParamName: templateParamName
+              single:
+                defaultValue: defaultValue
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -1534,10 +1509,6 @@ components:
                   valuePattern: valuePattern
                 type: UNKNOWN
               allowedPattern: allowedPattern
-              multipleSelection:
-                options:
-                - options
-                - options
           - revisionDeploymentSupported: true
             featureFlag: featureFlag
             upgradeInstructionsMd: upgradeInstructionsMd
@@ -1587,6 +1558,8 @@ components:
               predefined: true
               required: true
               templateParamName: templateParamName
+              single:
+                defaultValue: defaultValue
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -1599,10 +1572,6 @@ components:
                   valuePattern: valuePattern
                 type: UNKNOWN
               allowedPattern: allowedPattern
-              multipleSelection:
-                options:
-                - options
-                - options
             - visible: true
               groupId: groupId
               tooltip: tooltip
@@ -1611,6 +1580,8 @@ components:
               predefined: true
               required: true
               templateParamName: templateParamName
+              single:
+                defaultValue: defaultValue
               readonly: true
               documentationReference: documentationReference
               name: name
@@ -1623,10 +1594,6 @@ components:
                   valuePattern: valuePattern
                 type: UNKNOWN
               allowedPattern: allowedPattern
-              multipleSelection:
-                options:
-                - options
-                - options
           key: key
       externalDocs:
         url: ""
@@ -1651,15 +1618,9 @@ components:
                   key: details
               id: id
               parameters:
-              - stringList:
-                  values:
-                  - values
-                  - values
+              - numericValue: 0.8008281904610115
                 key: key
-              - stringList:
-                  values:
-                  - values
-                  - values
+              - numericValue: 0.8008281904610115
                 key: key
               isTesting: true
               empty: "{}"
@@ -1674,15 +1635,9 @@ components:
                   key: details
               id: id
               parameters:
-              - stringList:
-                  values:
-                  - values
-                  - values
+              - numericValue: 0.8008281904610115
                 key: key
-              - stringList:
-                  values:
-                  - values
-                  - values
+              - numericValue: 0.8008281904610115
                 key: key
               isTesting: true
               empty: "{}"
@@ -2437,7 +2392,8 @@ components:
           integration:
             featureFlag: featureFlag
             integrationType:
-              genericWebhook: "{}"
+              managed:
+                variant: DEFAULT
             versions:
             - versions
             - versions
@@ -2469,7 +2425,8 @@ components:
         - integration:
             featureFlag: featureFlag
             integrationType:
-              genericWebhook: "{}"
+              managed:
+                variant: DEFAULT
             versions:
             - versions
             - versions
@@ -2490,7 +2447,8 @@ components:
         - integration:
             featureFlag: featureFlag
             integrationType:
-              genericWebhook: "{}"
+              managed:
+                variant: DEFAULT
             versions:
             - versions
             - versions
@@ -2522,7 +2480,8 @@ components:
         integration:
           featureFlag: featureFlag
           integrationType:
-            genericWebhook: "{}"
+            managed:
+              variant: DEFAULT
           versions:
           - versions
           - versions
@@ -2646,7 +2605,8 @@ components:
       example:
         featureFlag: featureFlag
         integrationType:
-          genericWebhook: "{}"
+          managed:
+            variant: DEFAULT
         versions:
         - versions
         - versions
@@ -2690,7 +2650,8 @@ components:
       example:
         featureFlag: featureFlag
         integrationType:
-          genericWebhook: "{}"
+          managed:
+            variant: DEFAULT
         revisions:
         - revisionDeploymentSupported: true
           featureFlag: featureFlag
@@ -2741,6 +2702,8 @@ components:
             predefined: true
             required: true
             templateParamName: templateParamName
+            single:
+              defaultValue: defaultValue
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -2753,10 +2716,6 @@ components:
                 valuePattern: valuePattern
               type: UNKNOWN
             allowedPattern: allowedPattern
-            multipleSelection:
-              options:
-              - options
-              - options
           - visible: true
             groupId: groupId
             tooltip: tooltip
@@ -2765,6 +2724,8 @@ components:
             predefined: true
             required: true
             templateParamName: templateParamName
+            single:
+              defaultValue: defaultValue
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -2777,10 +2738,6 @@ components:
                 valuePattern: valuePattern
               type: UNKNOWN
             allowedPattern: allowedPattern
-            multipleSelection:
-              options:
-              - options
-              - options
         - revisionDeploymentSupported: true
           featureFlag: featureFlag
           upgradeInstructionsMd: upgradeInstructionsMd
@@ -2830,6 +2787,8 @@ components:
             predefined: true
             required: true
             templateParamName: templateParamName
+            single:
+              defaultValue: defaultValue
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -2842,10 +2801,6 @@ components:
                 valuePattern: valuePattern
               type: UNKNOWN
             allowedPattern: allowedPattern
-            multipleSelection:
-              options:
-              - options
-              - options
           - visible: true
             groupId: groupId
             tooltip: tooltip
@@ -2854,6 +2809,8 @@ components:
             predefined: true
             required: true
             templateParamName: templateParamName
+            single:
+              defaultValue: defaultValue
             readonly: true
             documentationReference: documentationReference
             name: name
@@ -2866,10 +2823,6 @@ components:
                 valuePattern: valuePattern
               type: UNKNOWN
             allowedPattern: allowedPattern
-            multipleSelection:
-              options:
-              - options
-              - options
         key: key
       externalDocs:
         url: ""
@@ -2942,15 +2895,9 @@ components:
                 key: details
             id: id
             parameters:
-            - stringList:
-                values:
-                - values
-                - values
+            - numericValue: 0.8008281904610115
               key: key
-            - stringList:
-                values:
-                - values
-                - values
+            - numericValue: 0.8008281904610115
               key: key
             isTesting: true
             empty: "{}"
@@ -2965,15 +2912,9 @@ components:
                 key: details
             id: id
             parameters:
-            - stringList:
-                values:
-                - values
-                - values
+            - numericValue: 0.8008281904610115
               key: key
-            - stringList:
-                values:
-                - values
-                - values
+            - numericValue: 0.8008281904610115
               key: key
             isTesting: true
             empty: "{}"
@@ -3728,7 +3669,8 @@ components:
         integration:
           featureFlag: featureFlag
           integrationType:
-            genericWebhook: "{}"
+            managed:
+              variant: DEFAULT
           versions:
           - versions
           - versions
@@ -3911,6 +3853,8 @@ components:
           predefined: true
           required: true
           templateParamName: templateParamName
+          single:
+            defaultValue: defaultValue
           readonly: true
           documentationReference: documentationReference
           name: name
@@ -3923,10 +3867,6 @@ components:
               valuePattern: valuePattern
             type: UNKNOWN
           allowedPattern: allowedPattern
-          multipleSelection:
-            options:
-            - options
-            - options
         - visible: true
           groupId: groupId
           tooltip: tooltip
@@ -3935,6 +3875,8 @@ components:
           predefined: true
           required: true
           templateParamName: templateParamName
+          single:
+            defaultValue: defaultValue
           readonly: true
           documentationReference: documentationReference
           name: name
@@ -3947,10 +3889,6 @@ components:
               valuePattern: valuePattern
             type: UNKNOWN
           allowedPattern: allowedPattern
-          multipleSelection:
-            options:
-            - options
-            - options
       externalDocs:
         url: ""
       properties:
@@ -4189,6 +4127,8 @@ components:
       type: object
     Managed:
       description: This data structure represents a managed integration.
+      example:
+        variant: DEFAULT
       externalDocs:
         url: ""
       properties:
@@ -4202,11 +4142,29 @@ components:
         url: ""
       title: Managed service
       type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     MultipleSelectionValue:
-      example:
-        options:
-        - options
-        - options
       externalDocs:
         url: ""
       properties:
@@ -4234,12 +4192,12 @@ components:
       type: object
     Parameter:
       oneOf:
-      - $ref: "#/components/schemas/ParameterStringList"
-      - $ref: "#/components/schemas/ParameterApiKey"
       - $ref: "#/components/schemas/ParameterNumericValue"
       - $ref: "#/components/schemas/ParameterSensitiveData"
       - $ref: "#/components/schemas/ParameterStringValue"
       - $ref: "#/components/schemas/ParameterBooleanValue"
+      - $ref: "#/components/schemas/ParameterStringList"
+      - $ref: "#/components/schemas/ParameterApiKey"
     ParameterApiKey:
       additionalProperties: false
       externalDocs:
@@ -4264,6 +4222,9 @@ components:
       type: object
     ParameterNumericValue:
       additionalProperties: false
+      example:
+        numericValue: 0.8008281904610115
+        key: key
       externalDocs:
         url: ""
       properties:
@@ -4290,12 +4251,6 @@ components:
       type: object
     ParameterStringList:
       additionalProperties: false
-      example:
-        stringList:
-          values:
-          - values
-          - values
-        key: key
       externalDocs:
         url: ""
       properties:
@@ -4407,15 +4362,9 @@ components:
             key: details
         id: id
         parameters:
-        - stringList:
-            values:
-            - values
-            - values
+        - numericValue: 0.8008281904610115
           key: key
-        - stringList:
-            values:
-            - values
-            - values
+        - numericValue: 0.8008281904610115
           key: key
         isTesting: true
         empty: "{}"
@@ -4560,6 +4509,8 @@ components:
       title: Single boolean value
       type: object
     SingleValue:
+      example:
+        defaultValue: defaultValue
       externalDocs:
         url: ""
       properties:
@@ -4582,10 +4533,6 @@ components:
       title: Source map metadata
       type: object
     StringList:
-      example:
-        values:
-        - values
-        - values
       externalDocs:
         url: ""
       properties:
@@ -4637,8 +4584,7 @@ components:
     TestIntegrationResponse:
       example:
         result:
-          failure:
-            errorMessage: errorMessage
+          success: "{}"
       externalDocs:
         url: ""
       properties:
@@ -4648,18 +4594,8 @@ components:
       type: object
     TestIntegrationResult:
       oneOf:
-      - $ref: "#/components/schemas/TestIntegrationResultFailure"
       - $ref: "#/components/schemas/TestIntegrationResultSuccess"
-    TestIntegrationResult.Failure:
-      example:
-        errorMessage: errorMessage
-      externalDocs:
-        url: ""
-      properties:
-        errorMessage:
-          type: string
-      title: Failure
-      type: object
+      - $ref: "#/components/schemas/TestIntegrationResultFailure"
     TestIntegrationResult.Success:
       externalDocs:
         url: ""
@@ -4667,18 +4603,17 @@ components:
       type: object
     TestIntegrationResultFailure:
       additionalProperties: false
-      example:
-        failure:
-          errorMessage: errorMessage
       externalDocs:
         url: ""
       properties:
         failure:
-          $ref: "#/components/schemas/TestIntegrationResult.Failure"
+          $ref: "#/components/schemas/v1.Failure"
       title: Test integration result
       type: object
     TestIntegrationResultSuccess:
       additionalProperties: false
+      example:
+        success: "{}"
       externalDocs:
         url: ""
       properties:
@@ -4742,8 +4677,6 @@ components:
     V1IntegrationTypeGenericWebhook:
       additionalProperties: false
       description: This data structure represents an integration type.
-      example:
-        genericWebhook: "{}"
       externalDocs:
         url: ""
       properties:
@@ -4758,6 +4691,9 @@ components:
     V1IntegrationTypeManaged:
       additionalProperties: false
       description: This data structure represents an integration type.
+      example:
+        managed:
+          variant: DEFAULT
       externalDocs:
         url: ""
       properties:
@@ -5228,15 +5164,23 @@ components:
           type: array
       title: Extension metadata
       type: object
+    v1.Failure:
+      externalDocs:
+        url: ""
+      properties:
+        errorMessage:
+          type: string
+      title: Failure
+      type: object
     v1.IntegrationType:
       oneOf:
-      - $ref: "#/components/schemas/V1IntegrationTypeGenericWebhook"
       - $ref: "#/components/schemas/V1IntegrationTypeManaged"
       - $ref: "#/components/schemas/V1IntegrationTypeUntracked"
       - $ref: "#/components/schemas/V1IntegrationTypeCloudformation"
       - $ref: "#/components/schemas/V1IntegrationTypeArm"
       - $ref: "#/components/schemas/V1IntegrationTypePushBasedContextualData"
       - $ref: "#/components/schemas/V1IntegrationTypeContextualData"
+      - $ref: "#/components/schemas/V1IntegrationTypeGenericWebhook"
     v3.FilterOperator:
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED

@@ -102,6 +102,8 @@ Class | Method | HTTP request | Description
  - [IDPParameters](docs/IDPParameters.md)
  - [IDPParametersMetadataContent](docs/IDPParametersMetadataContent.md)
  - [IDPParametersMetadataUrl](docs/IDPParametersMetadataUrl.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [SPParameters](docs/SPParameters.md)
  - [SetActiveRequest](docs/SetActiveRequest.md)

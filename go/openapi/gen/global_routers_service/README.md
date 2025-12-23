@@ -105,6 +105,8 @@ Class | Method | HTTP request | Description
  - [GlobalRouter](docs/GlobalRouter.md)
  - [GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue](docs/GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue.md)
  - [ListGlobalRoutersResponse](docs/ListGlobalRoutersResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [NotificationCenterEntityType](docs/NotificationCenterEntityType.md)
  - [ReplaceGlobalRouterRequest](docs/ReplaceGlobalRouterRequest.md)

@@ -101,6 +101,8 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [GetThingResponse](docs/GetThingResponse.md)
  - [ListThingsResponse](docs/ListThingsResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [ReplaceThingRequest](docs/ReplaceThingRequest.md)
  - [ReplaceThingRequestThing](docs/ReplaceThingRequestThing.md)

@@ -122,6 +122,8 @@ Class | Method | HTTP request | Description
  - [GetBulkAlertSchedulerRuleResponse](docs/GetBulkAlertSchedulerRuleResponse.md)
  - [MetaLabels](docs/MetaLabels.md)
  - [MetaLabelsProtobufV1MetaLabel](docs/MetaLabelsProtobufV1MetaLabel.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [Monthly](docs/Monthly.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [OneTime](docs/OneTime.md)

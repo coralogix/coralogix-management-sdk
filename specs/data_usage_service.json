@@ -70,6 +70,9 @@
               "items": {
                 "oneOf": [
                   {
+                    "$ref": "#/components/schemas/DimensionPillar"
+                  },
+                  {
                     "$ref": "#/components/schemas/DimensionGenericDimension"
                   },
                   {
@@ -80,9 +83,6 @@
                   },
                   {
                     "$ref": "#/components/schemas/DimensionPriority"
-                  },
-                  {
-                    "$ref": "#/components/schemas/DimensionPillar"
                   }
                 ]
               }
@@ -200,10 +200,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestDateRange"
+                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestRange"
                   },
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestRange"
+                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestDateRange"
                   }
                 ]
               }
@@ -260,10 +260,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestRange"
+                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestDateRange"
                   },
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestDateRange"
+                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestRange"
                   }
                 ]
               }
@@ -823,12 +823,6 @@
       "Dimension": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DimensionGenericDimension"
-          },
-          {
-            "$ref": "#/components/schemas/DimensionTier"
-          },
-          {
             "$ref": "#/components/schemas/DimensionSeverity"
           },
           {
@@ -836,6 +830,12 @@
           },
           {
             "$ref": "#/components/schemas/DimensionPillar"
+          },
+          {
+            "$ref": "#/components/schemas/DimensionGenericDimension"
+          },
+          {
+            "$ref": "#/components/schemas/DimensionTier"
           }
         ]
       },
@@ -1185,6 +1185,34 @@
             "format": "date-time"
           }
         }
+      },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",

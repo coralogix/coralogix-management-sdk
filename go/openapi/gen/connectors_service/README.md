@@ -117,6 +117,8 @@ Class | Method | HTTP request | Description
  - [GetConnectorTypeSummariesResponse](docs/GetConnectorTypeSummariesResponse.md)
  - [ListConnectorSummariesResponse](docs/ListConnectorSummariesResponse.md)
  - [ListConnectorsResponse](docs/ListConnectorsResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [NotificationCenterConnectorConfigField](docs/NotificationCenterConnectorConfigField.md)
  - [NotificationCenterEntityType](docs/NotificationCenterEntityType.md)

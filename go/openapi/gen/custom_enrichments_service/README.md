@@ -111,6 +111,8 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [GetCustomEnrichmentResponse](docs/GetCustomEnrichmentResponse.md)
  - [GetCustomEnrichmentsResponse](docs/GetCustomEnrichmentsResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [SearchClauseId](docs/SearchClauseId.md)
  - [SearchClauseName](docs/SearchClauseName.md)

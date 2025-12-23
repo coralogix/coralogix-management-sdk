@@ -33,6 +33,8 @@ model_get_connector_response.go
 model_get_connector_type_summaries_response.go
 model_list_connector_summaries_response.go
 model_list_connectors_response.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_notification_center_connector_config_field.go
 model_notification_center_entity_type.go

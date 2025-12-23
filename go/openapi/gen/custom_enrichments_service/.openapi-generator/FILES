@@ -30,6 +30,8 @@ model_filter_path_and_values_multiple_values.go
 model_filters.go
 model_get_custom_enrichment_response.go
 model_get_custom_enrichments_response.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_search_clause_id.go
 model_search_clause_name.go

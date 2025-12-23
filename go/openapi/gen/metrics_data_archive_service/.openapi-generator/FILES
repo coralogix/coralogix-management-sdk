@@ -24,6 +24,8 @@ model_ibm_config_v2.go
 model_metrics_configurator_public_service_configure_tenant_request.go
 model_metrics_configurator_public_service_update_request.go
 model_metrics_configurator_public_service_validate_bucket_request.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_retention_policy_request.go
 model_s3_config.go

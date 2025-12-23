@@ -40,6 +40,8 @@ model_get_alert_scheduler_rule_response.go
 model_get_bulk_alert_scheduler_rule_response.go
 model_meta_labels.go
 model_meta_labels_protobuf_v1_meta_label.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_monthly.go
 model_multiple_values.go
 model_one_time.go

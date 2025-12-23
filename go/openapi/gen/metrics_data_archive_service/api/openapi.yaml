@@ -293,10 +293,9 @@ components:
     GetTenantConfigResponseV2:
       example:
         tenantConfig:
-          ibm:
-            endpoint: s3.us-south.cloud-object-storage.appdomain.cloud
-            serviceCrn: "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::"
-            crn: "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::"
+          s3:
+            bucket: bucket
+            region: region
           prefix: prefix
           tenantId: 0
           disabled: true
@@ -310,10 +309,6 @@ components:
       type: object
     IbmConfigV2:
       description: This data structure is used to configure an IBM bucket.
-      example:
-        endpoint: s3.us-south.cloud-object-storage.appdomain.cloud
-        serviceCrn: "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::"
-        crn: "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::"
       externalDocs:
         description: Find out more about metrics cost optimization
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/
@@ -328,6 +323,28 @@ components:
           example: "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::"
           type: string
       title: IBM Bucket Configuration
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:
@@ -364,6 +381,9 @@ components:
       type: object
     S3Config:
       description: This data structure represents the S3 configuration for a tenant.
+      example:
+        bucket: bucket
+        region: region
       externalDocs:
         description: Find out more about metrics cost optimization
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/
@@ -376,22 +396,10 @@ components:
       type: object
     TenantConfigV2:
       oneOf:
-      - $ref: "#/components/schemas/TenantConfigV2Ibm"
       - $ref: "#/components/schemas/TenantConfigV2S3"
+      - $ref: "#/components/schemas/TenantConfigV2Ibm"
     TenantConfigV2Ibm:
       additionalProperties: false
-      example:
-        ibm:
-          endpoint: s3.us-south.cloud-object-storage.appdomain.cloud
-          serviceCrn: "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::"
-          crn: "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::"
-        prefix: prefix
-        tenantId: 0
-        disabled: true
-        retentionPolicy:
-          fiveMinutesResolution: 2
-          oneHourResolution: 3
-          rawResolution: 1
       properties:
         disabled:
           type: boolean
@@ -407,6 +415,17 @@ components:
       type: object
     TenantConfigV2S3:
       additionalProperties: false
+      example:
+        s3:
+          bucket: bucket
+          region: region
+        prefix: prefix
+        tenantId: 0
+        disabled: true
+        retentionPolicy:
+          fiveMinutesResolution: 2
+          oneHourResolution: 3
+          rawResolution: 1
       properties:
         disabled:
           type: boolean
@@ -494,8 +513,8 @@ components:
       type: string
     MetricsConfiguratorPublicService_Update_request:
       oneOf:
-      - $ref: "#/components/schemas/UpdateRequestIbm"
       - $ref: "#/components/schemas/UpdateRequestS3"
+      - $ref: "#/components/schemas/UpdateRequestIbm"
       type: object
     MetricsConfiguratorPublicService_ConfigureTenant_request:
       oneOf:

@@ -21,6 +21,7 @@ var _ MappedNullable = &WidgetsDynamic{}
 type WidgetsDynamic struct {
 	Interpretation *Interpretation `json:"interpretation,omitempty"`
 	Query *DynamicQuery `json:"query,omitempty"`
+	QueryDefinitions []DynamicQueryDefinition `json:"queryDefinitions,omitempty"`
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
 	Visualization *Visualization `json:"visualization,omitempty"`
 }
@@ -106,6 +107,38 @@ func (o *WidgetsDynamic) SetQuery(v DynamicQuery) {
 	o.Query = &v
 }
 
+// GetQueryDefinitions returns the QueryDefinitions field value if set, zero value otherwise.
+func (o *WidgetsDynamic) GetQueryDefinitions() []DynamicQueryDefinition {
+	if o == nil || IsNil(o.QueryDefinitions) {
+		var ret []DynamicQueryDefinition
+		return ret
+	}
+	return o.QueryDefinitions
+}
+
+// GetQueryDefinitionsOk returns a tuple with the QueryDefinitions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WidgetsDynamic) GetQueryDefinitionsOk() ([]DynamicQueryDefinition, bool) {
+	if o == nil || IsNil(o.QueryDefinitions) {
+		return nil, false
+	}
+	return o.QueryDefinitions, true
+}
+
+// HasQueryDefinitions returns a boolean if a field has been set.
+func (o *WidgetsDynamic) HasQueryDefinitions() bool {
+	if o != nil && !IsNil(o.QueryDefinitions) {
+		return true
+	}
+
+	return false
+}
+
+// SetQueryDefinitions gets a reference to the given []DynamicQueryDefinition and assigns it to the QueryDefinitions field.
+func (o *WidgetsDynamic) SetQueryDefinitions(v []DynamicQueryDefinition) {
+	o.QueryDefinitions = v
+}
+
 // GetTimeFrame returns the TimeFrame field value if set, zero value otherwise.
 func (o *WidgetsDynamic) GetTimeFrame() TimeFrameSelect {
 	if o == nil || IsNil(o.TimeFrame) {
@@ -185,6 +218,9 @@ func (o WidgetsDynamic) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Query) {
 		toSerialize["query"] = o.Query
+	}
+	if !IsNil(o.QueryDefinitions) {
+		toSerialize["queryDefinitions"] = o.QueryDefinitions
 	}
 	if !IsNil(o.TimeFrame) {
 		toSerialize["timeFrame"] = o.TimeFrame

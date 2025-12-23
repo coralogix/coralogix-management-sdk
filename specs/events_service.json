@@ -771,10 +771,10 @@
       "CxEventSingleOrMultiple": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/CxEventSingleOrMultipleMultipleEvents"
+            "$ref": "#/components/schemas/CxEventSingleOrMultipleSingleEvent"
           },
           {
-            "$ref": "#/components/schemas/CxEventSingleOrMultipleSingleEvent"
+            "$ref": "#/components/schemas/CxEventSingleOrMultipleMultipleEvents"
           }
         ]
       },
@@ -974,6 +974,34 @@
           "count",
           "reachedLimit"
         ]
+      },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",

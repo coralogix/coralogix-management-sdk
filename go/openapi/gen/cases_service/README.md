@@ -140,6 +140,8 @@ Class | Method | HTTP request | Description
  - [GetCaseResponse](docs/GetCaseResponse.md)
  - [ListCasesRequest](docs/ListCasesRequest.md)
  - [ListCasesResponse](docs/ListCasesResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [PriorityAggregation](docs/PriorityAggregation.md)
  - [PriorityDetails](docs/PriorityDetails.md)

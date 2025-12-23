@@ -101,6 +101,8 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [InRule](docs/InRule.md)
  - [InRuleGroup](docs/InRuleGroup.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [OutRule](docs/OutRule.md)
  - [OutRuleGroup](docs/OutRuleGroup.md)

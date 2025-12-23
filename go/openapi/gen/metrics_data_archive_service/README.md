@@ -105,6 +105,8 @@ Class | Method | HTTP request | Description
  - [MetricsConfiguratorPublicServiceConfigureTenantRequest](docs/MetricsConfiguratorPublicServiceConfigureTenantRequest.md)
  - [MetricsConfiguratorPublicServiceUpdateRequest](docs/MetricsConfiguratorPublicServiceUpdateRequest.md)
  - [MetricsConfiguratorPublicServiceValidateBucketRequest](docs/MetricsConfiguratorPublicServiceValidateBucketRequest.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [RetentionPolicyRequest](docs/RetentionPolicyRequest.md)
  - [S3Config](docs/S3Config.md)

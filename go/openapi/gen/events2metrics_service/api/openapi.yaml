@@ -203,122 +203,10 @@ components:
     AtomicBatchExecuteE2MResponse:
       example:
         matchingResponses:
-        - created:
-            e2m:
-              isInternal: true
-              metricFields:
-              - sourceField: log_obj.numeric_field
-                targetBaseMetricName: alias_field_name
-                aggregations:
-                - targetMetricName: alias_field_name_agg_func
-                  aggType: AGG_TYPE_UNSPECIFIED
-                  enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
-                - targetMetricName: alias_field_name_agg_func
-                  aggType: AGG_TYPE_UNSPECIFIED
-                  enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
-              - sourceField: log_obj.numeric_field
-                targetBaseMetricName: alias_field_name
-                aggregations:
-                - targetMetricName: alias_field_name_agg_func
-                  aggType: AGG_TYPE_UNSPECIFIED
-                  enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
-                - targetMetricName: alias_field_name_agg_func
-                  aggType: AGG_TYPE_UNSPECIFIED
-                  enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
-              createTime: 2022-06-30T12:30:00Z'
-              metricLabels:
-              - sourceField: log_obj.string_value
-                targetLabel: alias_label_name
-              - sourceField: log_obj.string_value
-                targetLabel: alias_label_name
-              name: Service_catalog_latency
-              spansQuery:
-                applicationnameFilters:
-                - myApp
-                - myApp
-                lucene: applicationName:myApp
-                serviceFilters:
-                - myService
-                - myService
-                actionFilters:
-                - myAction
-                - myAction
-                subsystemnameFilters:
-                - mySubsystem
-                - mySubsystem
-              description: avg and max the latency of catalog service
-              updateTime: 2022-06-30T12:30:00Z'
-              id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
-              permutations:
-                limit: 30000
-                hasExceededLimit: true
-              type: E2M_TYPE_UNSPECIFIED
-        - created:
-            e2m:
-              isInternal: true
-              metricFields:
-              - sourceField: log_obj.numeric_field
-                targetBaseMetricName: alias_field_name
-                aggregations:
-                - targetMetricName: alias_field_name_agg_func
-                  aggType: AGG_TYPE_UNSPECIFIED
-                  enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
-                - targetMetricName: alias_field_name_agg_func
-                  aggType: AGG_TYPE_UNSPECIFIED
-                  enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
-              - sourceField: log_obj.numeric_field
-                targetBaseMetricName: alias_field_name
-                aggregations:
-                - targetMetricName: alias_field_name_agg_func
-                  aggType: AGG_TYPE_UNSPECIFIED
-                  enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
-                - targetMetricName: alias_field_name_agg_func
-                  aggType: AGG_TYPE_UNSPECIFIED
-                  enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
-              createTime: 2022-06-30T12:30:00Z'
-              metricLabels:
-              - sourceField: log_obj.string_value
-                targetLabel: alias_label_name
-              - sourceField: log_obj.string_value
-                targetLabel: alias_label_name
-              name: Service_catalog_latency
-              spansQuery:
-                applicationnameFilters:
-                - myApp
-                - myApp
-                lucene: applicationName:myApp
-                serviceFilters:
-                - myService
-                - myService
-                actionFilters:
-                - myAction
-                - myAction
-                subsystemnameFilters:
-                - mySubsystem
-                - mySubsystem
-              description: avg and max the latency of catalog service
-              updateTime: 2022-06-30T12:30:00Z'
-              id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
-              permutations:
-                limit: 30000
-                hasExceededLimit: true
-              type: E2M_TYPE_UNSPECIFIED
+        - deleted:
+            id: id
+        - deleted:
+            id: id
       properties:
         matchingResponses:
           items:
@@ -479,8 +367,8 @@ components:
       type: object
     E2MCreateParams:
       oneOf:
-      - $ref: "#/components/schemas/E2MCreateParamsSpansQuery"
       - $ref: "#/components/schemas/E2MCreateParamsLogsQuery"
+      - $ref: "#/components/schemas/E2MCreateParamsSpansQuery"
     E2MCreateParamsLogsQuery:
       additionalProperties: false
       description: This data structure is used to create a new event to metric definition
@@ -572,76 +460,20 @@ components:
       type: object
     E2MExecutionResponse:
       oneOf:
+      - $ref: "#/components/schemas/E2MExecutionResponseDeleted"
       - $ref: "#/components/schemas/E2MExecutionResponseCreated"
       - $ref: "#/components/schemas/E2MExecutionResponseReplaced"
-      - $ref: "#/components/schemas/E2MExecutionResponseDeleted"
     E2MExecutionResponseCreated:
       additionalProperties: false
-      example:
-        created:
-          e2m:
-            isInternal: true
-            metricFields:
-            - sourceField: log_obj.numeric_field
-              targetBaseMetricName: alias_field_name
-              aggregations:
-              - targetMetricName: alias_field_name_agg_func
-                aggType: AGG_TYPE_UNSPECIFIED
-                enabled: true
-                samples:
-                  sampleType: SAMPLE_TYPE_UNSPECIFIED
-              - targetMetricName: alias_field_name_agg_func
-                aggType: AGG_TYPE_UNSPECIFIED
-                enabled: true
-                samples:
-                  sampleType: SAMPLE_TYPE_UNSPECIFIED
-            - sourceField: log_obj.numeric_field
-              targetBaseMetricName: alias_field_name
-              aggregations:
-              - targetMetricName: alias_field_name_agg_func
-                aggType: AGG_TYPE_UNSPECIFIED
-                enabled: true
-                samples:
-                  sampleType: SAMPLE_TYPE_UNSPECIFIED
-              - targetMetricName: alias_field_name_agg_func
-                aggType: AGG_TYPE_UNSPECIFIED
-                enabled: true
-                samples:
-                  sampleType: SAMPLE_TYPE_UNSPECIFIED
-            createTime: 2022-06-30T12:30:00Z'
-            metricLabels:
-            - sourceField: log_obj.string_value
-              targetLabel: alias_label_name
-            - sourceField: log_obj.string_value
-              targetLabel: alias_label_name
-            name: Service_catalog_latency
-            spansQuery:
-              applicationnameFilters:
-              - myApp
-              - myApp
-              lucene: applicationName:myApp
-              serviceFilters:
-              - myService
-              - myService
-              actionFilters:
-              - myAction
-              - myAction
-              subsystemnameFilters:
-              - mySubsystem
-              - mySubsystem
-            description: avg and max the latency of catalog service
-            updateTime: 2022-06-30T12:30:00Z'
-            id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
-            permutations:
-              limit: 30000
-              hasExceededLimit: true
-            type: E2M_TYPE_UNSPECIFIED
       properties:
         created:
           $ref: "#/components/schemas/CreateE2MResponse"
       type: object
     E2MExecutionResponseDeleted:
       additionalProperties: false
+      example:
+        deleted:
+          id: id
       properties:
         deleted:
           $ref: "#/components/schemas/DeleteE2MResponse"
@@ -1163,6 +995,28 @@ components:
       - sourceField
       - targetLabel
       title: Metric Label
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:

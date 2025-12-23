@@ -108,6 +108,8 @@ Class | Method | HTTP request | Description
  - [GetAlertEventResponseMultiplePermutation](docs/GetAlertEventResponseMultiplePermutation.md)
  - [GetAlertEventResponseSinglePermutation](docs/GetAlertEventResponseSinglePermutation.md)
  - [GetAlertEventStatsResponse](docs/GetAlertEventStatsResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [OrderByAlertEventDirection](docs/OrderByAlertEventDirection.md)
  - [OrderByAlertEventFields](docs/OrderByAlertEventFields.md)
