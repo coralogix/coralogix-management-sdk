@@ -27,7 +27,6 @@ const (
 	UpsertIncidentStateType_UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED UpsertIncidentStateType = 0
 	UpsertIncidentStateType_UPSERT_INCIDENT_STATE_TYPE_TRIGGERED   UpsertIncidentStateType = 1
 	UpsertIncidentStateType_UPSERT_INCIDENT_STATE_TYPE_RESOLVED    UpsertIncidentStateType = 2
-	UpsertIncidentStateType_UPSERT_INCIDENT_STATE_TYPE_NO_DATA     UpsertIncidentStateType = 3
 )
 
 // Enum value maps for UpsertIncidentStateType.
@@ -36,13 +35,11 @@ var (
 		0: "UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED",
 		1: "UPSERT_INCIDENT_STATE_TYPE_TRIGGERED",
 		2: "UPSERT_INCIDENT_STATE_TYPE_RESOLVED",
-		3: "UPSERT_INCIDENT_STATE_TYPE_NO_DATA",
 	}
 	UpsertIncidentStateType_value = map[string]int32{
 		"UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED": 0,
 		"UPSERT_INCIDENT_STATE_TYPE_TRIGGERED":   1,
 		"UPSERT_INCIDENT_STATE_TYPE_RESOLVED":    2,
-		"UPSERT_INCIDENT_STATE_TYPE_NO_DATA":     3,
 	}
 )
 
@@ -77,12 +74,11 @@ var File_com_coralogixapis_incidents_v1_incident_action_upsert_incident_state_up
 
 const file_com_coralogixapis_incidents_v1_incident_action_upsert_incident_state_upsert_incident_state_type_proto_rawDesc = "" +
 	"\n" +
-	"ecom/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_type.proto\x12\x1ecom.coralogixapis.incidents.v1*\xc0\x01\n" +
+	"ecom/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_type.proto\x12\x1ecom.coralogixapis.incidents.v1*\x98\x01\n" +
 	"\x17UpsertIncidentStateType\x12*\n" +
 	"&UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED\x10\x00\x12(\n" +
 	"$UPSERT_INCIDENT_STATE_TYPE_TRIGGERED\x10\x01\x12'\n" +
-	"#UPSERT_INCIDENT_STATE_TYPE_RESOLVED\x10\x02\x12&\n" +
-	"\"UPSERT_INCIDENT_STATE_TYPE_NO_DATA\x10\x03b\x06proto3"
+	"#UPSERT_INCIDENT_STATE_TYPE_RESOLVED\x10\x02b\x06proto3"
 
 var (
 	file_com_coralogixapis_incidents_v1_incident_action_upsert_incident_state_upsert_incident_state_type_proto_rawDescOnce sync.Once
