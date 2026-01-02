@@ -3,15 +3,6 @@ name = "release-management"
 version = "0.1.0"
 edition = "2024"
 
-
-[[bin]]
-name = "protofetch_tags_updater"
-path = "src/bin/protofetch_tags_updater.rs"
-
-[[bin]]
-name = "version_updater"
-path = "src/bin/version_updater.rs"
-
 [[bin]]
 name = "create_release_branch"
 path = "src/bin/create_release_branch.rs"
@@ -31,6 +22,6 @@ git_cmd = "0.6"
 time = { version = "0.3.36", features = ["formatting"] }
 clap = "4.5"
 tracing = "*"
-tracing-subscriber = {features = ["env-filter"], version = "*"}
+tracing-subscriber = { features = ["env-filter"], version = "*" }
 lazy_static = "1.5.0"
 cx-sdk = "*"
