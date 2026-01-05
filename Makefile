@@ -26,14 +26,6 @@ test:
 test-openapi:
 	cd ./go; make test-openapi TESTARGS=${TESTARGS}
 
-proto-renew:
-	protofetch clear-cache
-	protofetch clean
-	protofetch fetch
-	cp -a proto/src/** proto/
-	rm -rf proto/src
-	rm -rf proto/deps
-
 proto-go-generate: proto-renew
 	cd ./go; make proto-clean; make proto-compile
 
