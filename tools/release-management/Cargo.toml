@@ -15,12 +15,11 @@ path = "src/bin/cleanup.rs"
 octocrab = "0.42"
 serde = { version = "1", features = ["derive"] }
 toml_edit = "0.22"
-protofetch = "0"
 tokio = { version = "1", features = ["full"] }
 eyre = "0"
 git_cmd = "0.6"
 time = { version = "0.3.36", features = ["formatting"] }
-clap = "4.5"
+clap = { version = "4.5", features = ["derive"] }
 tracing = "*"
 tracing-subscriber = { features = ["env-filter"], version = "*" }
 lazy_static = "1.5.0"

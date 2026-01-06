@@ -18,8 +18,6 @@ const PROTOS_DIR: &str = "proto";
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("cargo:rerun-if-changed=build.rs");
     println!("cargo:rerun-if-changed=../Cargo.lock");
-    println!("cargo:rerun-if-changed=../../protofetch.toml");
-    println!("cargo:rerun-if-changed=../../protofetch.lock");
 
     let mut project_root = PathBuf::from(std::env::var("CARGO_MANIFEST_DIR").unwrap());
     project_root.pop();
