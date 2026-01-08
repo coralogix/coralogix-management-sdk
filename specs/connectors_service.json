@@ -11,7 +11,6 @@
           "Connectors service"
         ],
         "summary": "Replace a Connector",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -53,7 +52,6 @@
           "Connectors service"
         ],
         "summary": "List Connectors",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -94,7 +92,6 @@
           "Connectors service"
         ],
         "summary": "Create a Connector",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -136,7 +133,6 @@
           "Connectors service"
         ],
         "summary": "Get a Connector",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -170,7 +166,6 @@
           "Connectors service"
         ],
         "summary": "Delete a Connector",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -206,7 +201,6 @@
           "Connectors service"
         ],
         "summary": "Batch Get Connectors",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -248,7 +242,6 @@
           "Connectors service"
         ],
         "summary": "Batch Get Connectors Summaries",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -287,7 +280,6 @@
           "Connectors service"
         ],
         "summary": "Get Connector Type Summaries",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -322,7 +314,6 @@
           "Connectors service"
         ],
         "summary": "List Connector Summaries",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -776,6 +767,34 @@
           }
         }
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -866,14 +885,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

@@ -30,7 +30,7 @@ for spec in "$SPECS_DIR"/*; do
   echo ">>> Processing file: '$filename' (name='$name')"
   echo ">>> Outdir: '$outdir'"
 
-  if ! openapi-generator-cli generate \
+  if ! openapi-generator generate \
     -i "$spec" \
     -g go \
     -o "$outdir" \

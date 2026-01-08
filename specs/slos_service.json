@@ -11,7 +11,6 @@
           "Slos Service"
         ],
         "summary": "List Slos",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -41,10 +40,10 @@
                       "field": {
                         "oneOf": [
                           {
-                            "$ref": "#/components/schemas/SloFilterFieldConstFilter"
+                            "$ref": "#/components/schemas/SloFilterFieldLabelName"
                           },
                           {
-                            "$ref": "#/components/schemas/SloFilterFieldLabelName"
+                            "$ref": "#/components/schemas/SloFilterFieldConstFilter"
                           }
                         ]
                       },
@@ -123,7 +122,6 @@
           "Slos Service"
         ],
         "summary": "Replace Slo",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -146,10 +144,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
+                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
                   },
                   {
-                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
+                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
                   }
                 ]
               }
@@ -192,7 +190,6 @@
           "Slos Service"
         ],
         "summary": "Create Slo",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -215,10 +212,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
+                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
                   },
                   {
-                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
+                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
                   }
                 ]
               }
@@ -263,7 +260,6 @@
           "Slos Service"
         ],
         "summary": "Replace Slo Pre-Validate Alerts",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -323,7 +319,6 @@
           "Slos Service"
         ],
         "summary": "Get Slo Zero State",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -366,7 +361,6 @@
           "Slos Service"
         ],
         "summary": "Get Slo",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -418,7 +412,6 @@
           "Slos Service"
         ],
         "summary": "Delete Slo",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -472,7 +465,6 @@
           "Slos Service"
         ],
         "summary": "Batch Execute Slo",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -538,7 +530,6 @@
           "Slos Service"
         ],
         "summary": "Batch Get Slo",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -921,6 +912,34 @@
           "query"
         ]
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MissingDataStrategy": {
         "type": "string",
         "enum": [
@@ -1052,10 +1071,10 @@
       "Slo": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SloRequestBasedMetricSli"
+            "$ref": "#/components/schemas/SloWindowBasedMetricSli"
           },
           {
-            "$ref": "#/components/schemas/SloWindowBasedMetricSli"
+            "$ref": "#/components/schemas/SloRequestBasedMetricSli"
           }
         ]
       },
@@ -1138,13 +1157,13 @@
       "SloExecutionResponse": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SloExecutionResponseCreateSloResponse"
-          },
-          {
             "$ref": "#/components/schemas/SloExecutionResponseReplaceSloResponse"
           },
           {
             "$ref": "#/components/schemas/SloExecutionResponseDeleteSloResponse"
+          },
+          {
+            "$ref": "#/components/schemas/SloExecutionResponseCreateSloResponse"
           }
         ]
       },
@@ -1472,14 +1491,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }
