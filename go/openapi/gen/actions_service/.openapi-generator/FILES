@@ -35,6 +35,8 @@ model_filter_path_and_values_multiple_values.go
 model_filters.go
 model_get_action_response.go
 model_list_actions_response.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_replace_action_request.go
 model_replace_action_response.go

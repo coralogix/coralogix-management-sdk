@@ -104,6 +104,8 @@ Class | Method | HTTP request | Description
  - [GetCustomRoleResponse](docs/GetCustomRoleResponse.md)
  - [ListCustomRolesResponse](docs/ListCustomRolesResponse.md)
  - [ListSystemRolesResponse](docs/ListSystemRolesResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [RoleManagementServiceCreateRoleRequest](docs/RoleManagementServiceCreateRoleRequest.md)
  - [RoleManagementServiceUpdateRoleRequest](docs/RoleManagementServiceUpdateRoleRequest.md)

@@ -23,6 +23,7 @@ type VariableV2 struct {
 	DisplayFullRow *bool `json:"displayFullRow,omitempty"`
 	DisplayName *string `json:"displayName,omitempty"`
 	DisplayType *VariableDisplayTypeV2 `json:"displayType,omitempty"`
+	Id *UUID `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Source *VariableSourceV2 `json:"source,omitempty"`
 	Value *VariableValueV2 `json:"value,omitempty"`
@@ -173,6 +174,38 @@ func (o *VariableV2) SetDisplayType(v VariableDisplayTypeV2) {
 	o.DisplayType = &v
 }
 
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *VariableV2) GetId() UUID {
+	if o == nil || IsNil(o.Id) {
+		var ret UUID
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VariableV2) GetIdOk() (*UUID, bool) {
+	if o == nil || IsNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *VariableV2) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given UUID and assigns it to the Id field.
+func (o *VariableV2) SetId(v UUID) {
+	o.Id = &v
+}
+
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *VariableV2) GetName() string {
 	if o == nil || IsNil(o.Name) {
@@ -290,6 +323,9 @@ func (o VariableV2) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.DisplayType) {
 		toSerialize["displayType"] = o.DisplayType
+	}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
 	}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name

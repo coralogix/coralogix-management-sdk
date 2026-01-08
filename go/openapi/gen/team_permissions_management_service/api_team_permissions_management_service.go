@@ -615,7 +615,7 @@ func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceG
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/aaa/team-groups/v1/{id}"
+	localVarPath := localBasePath + "/aaa/team-groups/v1/id/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -718,7 +718,7 @@ func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceG
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/aaa/team-groups/v1/{name}"
+	localVarPath := localBasePath + "/aaa/team-groups/v1/name/{name}"
 	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", url.PathEscape(parameterValueToString(r.name, "name")), -1)
 
 	localVarHeaderParams := make(map[string]string)

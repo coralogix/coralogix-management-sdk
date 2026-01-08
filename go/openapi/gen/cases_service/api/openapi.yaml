@@ -759,8 +759,8 @@ components:
       type: object
     AssigneeOption:
       oneOf:
-      - $ref: "#/components/schemas/AssigneeOptionUnassigned"
       - $ref: "#/components/schemas/AssigneeOptionAssignee"
+      - $ref: "#/components/schemas/AssigneeOptionUnassigned"
     AssigneeOptionAssignee:
       additionalProperties: false
       properties:
@@ -1429,6 +1429,28 @@ components:
       - cases
       - pagination
       title: List cases response
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:

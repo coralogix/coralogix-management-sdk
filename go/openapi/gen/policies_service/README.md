@@ -128,6 +128,8 @@ Class | Method | HTTP request | Description
  - [LogMetaFieldsValues](docs/LogMetaFieldsValues.md)
  - [LogRules](docs/LogRules.md)
  - [LogsPolicySettings](docs/LogsPolicySettings.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [Placement](docs/Placement.md)
  - [PlacementFirst](docs/PlacementFirst.md)

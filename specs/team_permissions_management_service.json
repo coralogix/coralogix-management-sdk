@@ -234,6 +234,115 @@
         }
       }
     },
+    "/aaa/team-groups/v1/id/{id}": {
+      "get": {
+        "tags": [
+          "Team Permissions Management Service"
+        ],
+        "summary": "Get Team Group",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamPermissionsMgmtService_GetTeamGroup",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTeamGroupResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/aaa/team-groups/v1/name/{name}": {
+      "get": {
+        "tags": [
+          "Team Permissions Management Service"
+        ],
+        "summary": "Get Team Group By Name",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamPermissionsMgmtService_GetTeamGroupByName",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTeamGroupByNameResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
     "/aaa/team-groups/v1/users": {
       "post": {
         "tags": [
@@ -382,59 +491,6 @@
       }
     },
     "/aaa/team-groups/v1/{id}": {
-      "get": {
-        "tags": [
-          "Team Permissions Management Service"
-        ],
-        "summary": "Get Team Group",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "TeamPermissionsMgmtService_GetTeamGroup",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "style": "simple"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetTeamGroupResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      },
       "delete": {
         "tags": [
           "Team Permissions Management Service"
@@ -680,60 +736,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RemoveUsersFromTeamGroupResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/aaa/team-groups/v1/{name}": {
-      "get": {
-        "tags": [
-          "Team Permissions Management Service"
-        ],
-        "summary": "Get Team Group By Name",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "TeamPermissionsMgmtService_GetTeamGroupByName",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "name",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetTeamGroupByNameResponse"
                 }
               }
             }
@@ -1080,10 +1082,10 @@
       "GetGroupUsersResponse": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/GetGroupUsersResponseNoMorePages"
+            "$ref": "#/components/schemas/GetGroupUsersResponseToken"
           },
           {
-            "$ref": "#/components/schemas/GetGroupUsersResponseToken"
+            "$ref": "#/components/schemas/GetGroupUsersResponseNoMorePages"
           }
         ]
       },
@@ -1204,6 +1206,34 @@
           "GROUP_TYPE_CLOSED",
           "GROUP_TYPE_RESTRICTED"
         ]
+      },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",

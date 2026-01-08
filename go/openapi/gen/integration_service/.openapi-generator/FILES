@@ -84,6 +84,8 @@ model_list_text_value.go
 model_local_changelog.go
 model_log_metadata.go
 model_managed.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_selection_value.go
 model_multiple_values.go
 model_parameter.go
@@ -120,6 +122,7 @@ model_test_integration_result_failure.go
 model_test_integration_result_success.go
 model_update_integration_request.go
 model_v1_extension.go
+model_v1_failure.go
 model_v1_integration_type.go
 model_v1_integration_type_arm_.go
 model_v1_integration_type_cloudformation.go

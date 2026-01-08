@@ -99,6 +99,8 @@ Class | Method | HTTP request | Description
  - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [ListViewsResponse](docs/ListViewsResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [QuickTimeSelection](docs/QuickTimeSelection.md)
  - [SearchQuery](docs/SearchQuery.md)

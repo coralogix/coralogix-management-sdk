@@ -23,6 +23,8 @@ model_idp_details.go
 model_idp_parameters.go
 model_idp_parameters_metadata_content.go
 model_idp_parameters_metadata_url.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_set_active_request.go
 model_set_idp_parameters_request.go

@@ -1299,6 +1299,12 @@
       "FieldInformation": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/FieldInformationSingle"
+          },
+          {
+            "$ref": "#/components/schemas/FieldInformationMultiText"
+          },
+          {
             "$ref": "#/components/schemas/FieldInformationMultipleSelection"
           },
           {
@@ -1309,12 +1315,6 @@
           },
           {
             "$ref": "#/components/schemas/FieldInformationSingleNumber"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationSingle"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationMultiText"
           }
         ]
       },
@@ -2529,6 +2529,34 @@
         "description": "This data structure represents a managed service.",
         "type": "object"
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleSelectionValue": {
         "externalDocs": {
           "url": ""
@@ -2569,12 +2597,6 @@
       "Parameter": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ParameterStringList"
-          },
-          {
-            "$ref": "#/components/schemas/ParameterApiKey"
-          },
-          {
             "$ref": "#/components/schemas/ParameterNumericValue"
           },
           {
@@ -2585,6 +2607,12 @@
           },
           {
             "$ref": "#/components/schemas/ParameterBooleanValue"
+          },
+          {
+            "$ref": "#/components/schemas/ParameterStringList"
+          },
+          {
+            "$ref": "#/components/schemas/ParameterApiKey"
           }
         ]
       },
@@ -3060,24 +3088,12 @@
       "TestIntegrationResult": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TestIntegrationResultFailure"
+            "$ref": "#/components/schemas/TestIntegrationResultSuccess"
           },
           {
-            "$ref": "#/components/schemas/TestIntegrationResultSuccess"
+            "$ref": "#/components/schemas/TestIntegrationResultFailure"
           }
         ]
-      },
-      "TestIntegrationResult.Failure": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Failure",
-        "type": "object",
-        "properties": {
-          "errorMessage": {
-            "type": "string"
-          }
-        }
       },
       "TestIntegrationResult.Success": {
         "externalDocs": {
@@ -3094,7 +3110,7 @@
         "type": "object",
         "properties": {
           "failure": {
-            "$ref": "#/components/schemas/TestIntegrationResult.Failure"
+            "$ref": "#/components/schemas/v1.Failure"
           }
         },
         "additionalProperties": false
@@ -3312,11 +3328,20 @@
           }
         }
       },
+      "v1.Failure": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Failure",
+        "type": "object",
+        "properties": {
+          "errorMessage": {
+            "type": "string"
+          }
+        }
+      },
       "v1.IntegrationType": {
         "oneOf": [
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeGenericWebhook"
-          },
           {
             "$ref": "#/components/schemas/V1IntegrationTypeManaged"
           },
@@ -3334,6 +3359,9 @@
           },
           {
             "$ref": "#/components/schemas/V1IntegrationTypeContextualData"
+          },
+          {
+            "$ref": "#/components/schemas/V1IntegrationTypeGenericWebhook"
           }
         ]
       },

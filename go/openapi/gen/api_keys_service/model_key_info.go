@@ -19,6 +19,8 @@ var _ MappedNullable = &KeyInfo{}
 
 // KeyInfo This data structure represents the information associated with an API key.
 type KeyInfo struct {
+	// JSON string representing the access policy for this API key. Defines granular permissions for users and groups.
+	AccessPolicy *string `json:"accessPolicy,omitempty"`
 	Active *bool `json:"active,omitempty"`
 	Hashed *bool `json:"hashed,omitempty"`
 	Id *string `json:"id,omitempty"`
@@ -43,6 +45,38 @@ func NewKeyInfo() *KeyInfo {
 func NewKeyInfoWithDefaults() *KeyInfo {
 	this := KeyInfo{}
 	return &this
+}
+
+// GetAccessPolicy returns the AccessPolicy field value if set, zero value otherwise.
+func (o *KeyInfo) GetAccessPolicy() string {
+	if o == nil || IsNil(o.AccessPolicy) {
+		var ret string
+		return ret
+	}
+	return *o.AccessPolicy
+}
+
+// GetAccessPolicyOk returns a tuple with the AccessPolicy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KeyInfo) GetAccessPolicyOk() (*string, bool) {
+	if o == nil || IsNil(o.AccessPolicy) {
+		return nil, false
+	}
+	return o.AccessPolicy, true
+}
+
+// HasAccessPolicy returns a boolean if a field has been set.
+func (o *KeyInfo) HasAccessPolicy() bool {
+	if o != nil && !IsNil(o.AccessPolicy) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessPolicy gets a reference to the given string and assigns it to the AccessPolicy field.
+func (o *KeyInfo) SetAccessPolicy(v string) {
+	o.AccessPolicy = &v
 }
 
 // GetActive returns the Active field value if set, zero value otherwise.
@@ -279,6 +313,9 @@ func (o KeyInfo) MarshalJSON() ([]byte, error) {
 
 func (o KeyInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AccessPolicy) {
+		toSerialize["accessPolicy"] = o.AccessPolicy
+	}
 	if !IsNil(o.Active) {
 		toSerialize["active"] = o.Active
 	}

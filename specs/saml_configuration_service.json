@@ -411,10 +411,10 @@
       "IDPParameters": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IDPParametersMetadataUrl"
+            "$ref": "#/components/schemas/IDPParametersMetadataContent"
           },
           {
-            "$ref": "#/components/schemas/IDPParametersMetadataContent"
+            "$ref": "#/components/schemas/IDPParametersMetadataUrl"
           }
         ]
       },
@@ -478,6 +478,34 @@
             "example": 1234567,
             "type": "integer",
             "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
           }
         },
         "additionalProperties": false

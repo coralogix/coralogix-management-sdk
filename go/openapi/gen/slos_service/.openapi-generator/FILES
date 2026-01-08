@@ -30,6 +30,8 @@ model_get_zero_state_response.go
 model_is_filter_predicate.go
 model_list_slos_response.go
 model_metric.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_missing_data_strategy.go
 model_multiple_values.go
 model_replace_slo_alerts_validations_response.go
@@ -58,7 +60,6 @@ model_slo_time_frame.go
 model_slo_window_based_metric_sli.go
 model_slos_service_batch_execute_slo_requests_parameter_inner.go
 model_slos_service_replace_slo_request.go
-model_slos_service_validate_replace_slo_alerts_request.go
 model_v1_grouping.go
 model_v1_revision.go
 model_v3_filter_operator.go

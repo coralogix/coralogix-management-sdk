@@ -24,6 +24,8 @@ model_filters.go
 model_get_service_slo_response.go
 model_latency_sli.go
 model_list_service_slos_response.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_order_by.go
 model_replace_service_slo_request.go

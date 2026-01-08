@@ -197,6 +197,8 @@ Class | Method | HTTP request | Description
  - [ListIncidentEventsResponse](docs/ListIncidentEventsResponse.md)
  - [ListIncidentEventsTotalCountResponse](docs/ListIncidentEventsTotalCountResponse.md)
  - [ListIncidentsResponse](docs/ListIncidentsResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [OriginatorType](docs/OriginatorType.md)
  - [PaginationRequest](docs/PaginationRequest.md)

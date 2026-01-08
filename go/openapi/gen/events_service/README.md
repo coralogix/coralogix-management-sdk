@@ -115,6 +115,8 @@ Class | Method | HTTP request | Description
  - [GetEventsStatisticsResponse](docs/GetEventsStatisticsResponse.md)
  - [ListAlertEventsResponse](docs/ListAlertEventsResponse.md)
  - [ListEventsCountResponse](docs/ListEventsCountResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [TimestampRange](docs/TimestampRange.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)

@@ -104,6 +104,8 @@ Class | Method | HTTP request | Description
  - [GetSendDataApiKeysResponse](docs/GetSendDataApiKeysResponse.md)
  - [KeyInfo](docs/KeyInfo.md)
  - [KeyInfoKeyPermissions](docs/KeyInfoKeyPermissions.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [Owner](docs/Owner.md)
  - [OwnerOrganisationId](docs/OwnerOrganisationId.md)

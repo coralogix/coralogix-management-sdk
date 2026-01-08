@@ -23,6 +23,8 @@ model_filters.go
 model_get_custom_role_response.go
 model_list_custom_roles_response.go
 model_list_system_roles_response.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_role_management_service_create_role_request.go
 model_role_management_service_update_role_request.go

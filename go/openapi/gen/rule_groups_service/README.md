@@ -120,6 +120,8 @@ Class | Method | HTTP request | Description
  - [JsonParseParameters](docs/JsonParseParameters.md)
  - [JsonStringifyParameters](docs/JsonStringifyParameters.md)
  - [ListRuleGroupsResponse](docs/ListRuleGroupsResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [ParseParameters](docs/ParseParameters.md)
  - [RemoveFieldsParameters](docs/RemoveFieldsParameters.md)

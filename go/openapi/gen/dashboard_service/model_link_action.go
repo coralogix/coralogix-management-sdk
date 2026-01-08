@@ -22,6 +22,8 @@ type LinkAction struct {
 	Id *UUID `json:"id,omitempty"`
 	// Name of the link action
 	Name *string `json:"name,omitempty"`
+	// Defines if the link action should open in a new window or current window in the browser
+	ShouldOpenInNewWindow *bool `json:"shouldOpenInNewWindow,omitempty"`
 	// Static URL that may contain variables using {{variable_name}} syntax
 	Url *string `json:"url,omitempty"`
 }
@@ -107,6 +109,38 @@ func (o *LinkAction) SetName(v string) {
 	o.Name = &v
 }
 
+// GetShouldOpenInNewWindow returns the ShouldOpenInNewWindow field value if set, zero value otherwise.
+func (o *LinkAction) GetShouldOpenInNewWindow() bool {
+	if o == nil || IsNil(o.ShouldOpenInNewWindow) {
+		var ret bool
+		return ret
+	}
+	return *o.ShouldOpenInNewWindow
+}
+
+// GetShouldOpenInNewWindowOk returns a tuple with the ShouldOpenInNewWindow field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LinkAction) GetShouldOpenInNewWindowOk() (*bool, bool) {
+	if o == nil || IsNil(o.ShouldOpenInNewWindow) {
+		return nil, false
+	}
+	return o.ShouldOpenInNewWindow, true
+}
+
+// HasShouldOpenInNewWindow returns a boolean if a field has been set.
+func (o *LinkAction) HasShouldOpenInNewWindow() bool {
+	if o != nil && !IsNil(o.ShouldOpenInNewWindow) {
+		return true
+	}
+
+	return false
+}
+
+// SetShouldOpenInNewWindow gets a reference to the given bool and assigns it to the ShouldOpenInNewWindow field.
+func (o *LinkAction) SetShouldOpenInNewWindow(v bool) {
+	o.ShouldOpenInNewWindow = &v
+}
+
 // GetUrl returns the Url field value if set, zero value otherwise.
 func (o *LinkAction) GetUrl() string {
 	if o == nil || IsNil(o.Url) {
@@ -154,6 +188,9 @@ func (o LinkAction) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.ShouldOpenInNewWindow) {
+		toSerialize["shouldOpenInNewWindow"] = o.ShouldOpenInNewWindow
 	}
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
