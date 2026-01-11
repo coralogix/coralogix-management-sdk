@@ -85,3 +85,10 @@ func Code(err error) int {
 func IsNotFound(err error) bool {
 	return Code(err) == http.StatusNotFound
 }
+
+// IsDeserializationError checks if the error represents a deserialization error,
+// which we define as any error with a 2xx HTTP status code.
+func IsDeserializationError(err error) bool {
+	code := Code(err)
+	return code >= 200 && code < 300
+}
