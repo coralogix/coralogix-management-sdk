@@ -292,6 +292,9 @@ components:
           type: string
       type: object
     BlockParameters:
+      example:
+        rule: rule
+        keepBlockedLogs: true
       properties:
         keepBlockedLogs:
           type: boolean
@@ -372,8 +375,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
+                blockParameters:
                   rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -381,8 +385,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
+                blockParameters:
                   rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -394,8 +399,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
+                blockParameters:
                   rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -403,8 +409,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
+                blockParameters:
                   rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -438,8 +445,6 @@ components:
       - DESTINATION_FIELD_TEXT
       type: string
     ExtractParameters:
-      example:
-        rule: rule
       properties:
         rule:
           type: string
@@ -583,8 +588,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
+                blockParameters:
                   rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -592,8 +598,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
+                blockParameters:
                   rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -605,8 +612,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
+                blockParameters:
                   rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -614,8 +622,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
+                blockParameters:
                   rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -674,8 +683,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
+                blockParameters:
                   rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -683,8 +693,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
+                blockParameters:
                   rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -696,8 +707,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
+                blockParameters:
                   rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -705,8 +717,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
+                blockParameters:
                   rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -731,8 +744,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
+                blockParameters:
                   rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -740,8 +754,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
+                blockParameters:
                   rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -753,8 +768,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
+                blockParameters:
                   rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -762,8 +778,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
+                blockParameters:
                   rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -786,6 +803,28 @@ components:
           items:
             $ref: "#/components/schemas/RuleGroup"
           type: array
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:
@@ -828,8 +867,9 @@ components:
             description: description
             id: id
             parameters:
-              extractParameters:
+              blockParameters:
                 rule: rule
+                keepBlockedLogs: true
             enabled: true
             order: 1
           - sourceField: sourceField
@@ -837,8 +877,9 @@ components:
             description: description
             id: id
             parameters:
-              extractParameters:
+              blockParameters:
                 rule: rule
+                keepBlockedLogs: true
             enabled: true
             order: 1
           id: id
@@ -850,8 +891,9 @@ components:
             description: description
             id: id
             parameters:
-              extractParameters:
+              blockParameters:
                 rule: rule
+                keepBlockedLogs: true
             enabled: true
             order: 1
           - sourceField: sourceField
@@ -859,8 +901,9 @@ components:
             description: description
             id: id
             parameters:
-              extractParameters:
+              blockParameters:
                 rule: rule
+                keepBlockedLogs: true
             enabled: true
             order: 1
           id: id
@@ -931,16 +974,16 @@ components:
       type: object
     RuleParameters:
       oneOf:
-      - $ref: "#/components/schemas/RuleParametersExtractParameters"
-      - $ref: "#/components/schemas/RuleParametersJsonExtractParameters"
+      - $ref: "#/components/schemas/RuleParametersBlockParameters"
+      - $ref: "#/components/schemas/RuleParametersJsonStringifyParameters"
+      - $ref: "#/components/schemas/RuleParametersJsonParseParameters"
       - $ref: "#/components/schemas/RuleParametersReplaceParameters"
       - $ref: "#/components/schemas/RuleParametersAllowParameters"
       - $ref: "#/components/schemas/RuleParametersExtractTimestampParameters"
-      - $ref: "#/components/schemas/RuleParametersJsonStringifyParameters"
-      - $ref: "#/components/schemas/RuleParametersJsonParseParameters"
-      - $ref: "#/components/schemas/RuleParametersParseParameters"
-      - $ref: "#/components/schemas/RuleParametersBlockParameters"
       - $ref: "#/components/schemas/RuleParametersRemoveFieldsParameters"
+      - $ref: "#/components/schemas/RuleParametersExtractParameters"
+      - $ref: "#/components/schemas/RuleParametersJsonExtractParameters"
+      - $ref: "#/components/schemas/RuleParametersParseParameters"
     RuleParametersAllowParameters:
       additionalProperties: false
       properties:
@@ -949,15 +992,16 @@ components:
       type: object
     RuleParametersBlockParameters:
       additionalProperties: false
+      example:
+        blockParameters:
+          rule: rule
+          keepBlockedLogs: true
       properties:
         blockParameters:
           $ref: "#/components/schemas/BlockParameters"
       type: object
     RuleParametersExtractParameters:
       additionalProperties: false
-      example:
-        extractParameters:
-          rule: rule
       properties:
         extractParameters:
           $ref: "#/components/schemas/ExtractParameters"
@@ -1012,8 +1056,9 @@ components:
           description: description
           id: id
           parameters:
-            extractParameters:
+            blockParameters:
               rule: rule
+              keepBlockedLogs: true
           enabled: true
           order: 1
         - sourceField: sourceField
@@ -1021,8 +1066,9 @@ components:
           description: description
           id: id
           parameters:
-            extractParameters:
+            blockParameters:
               rule: rule
+              keepBlockedLogs: true
           enabled: true
           order: 1
         id: id
@@ -1061,8 +1107,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
+                blockParameters:
                   rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -1070,8 +1117,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
+                blockParameters:
                   rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -1083,8 +1131,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
+                blockParameters:
                   rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -1092,8 +1141,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
+                blockParameters:
                   rule: rule
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -1148,8 +1198,9 @@ components:
         description: description
         id: id
         parameters:
-          extractParameters:
+          blockParameters:
             rule: rule
+            keepBlockedLogs: true
         enabled: true
         order: 1
       properties:

@@ -133,7 +133,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SlosService_ValidateReplaceSloAlerts_request"
+              $ref: "#/components/schemas/SlosService_ReplaceSlo_request"
       responses:
         "200":
           content:
@@ -778,6 +778,28 @@ components:
       - query
       title: Metric
       type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     MissingDataStrategy:
       enum:
       - MISSING_DATA_STRATEGY_UNCOUNTED
@@ -1328,19 +1350,14 @@ components:
       type: object
     SlosService_ReplaceSlo_request:
       oneOf:
-      - $ref: "#/components/schemas/SloWindowBasedMetricSli"
-      - $ref: "#/components/schemas/SloRequestBasedMetricSli"
-      type: object
-    SlosService_ValidateReplaceSloAlerts_request:
-      oneOf:
       - $ref: "#/components/schemas/SloRequestBasedMetricSli"
       - $ref: "#/components/schemas/SloWindowBasedMetricSli"
       type: object
     SlosService_BatchExecuteSlo_requests_parameter_inner:
       oneOf:
+      - $ref: "#/components/schemas/SloExecutionRequestCreateSloRequest"
       - $ref: "#/components/schemas/SloExecutionRequestReplaceSloRequest"
       - $ref: "#/components/schemas/SloExecutionRequestDeleteSloRequest"
-      - $ref: "#/components/schemas/SloExecutionRequestCreateSloRequest"
   securitySchemes:
     apiKeyAuth:
       description: API key authentication

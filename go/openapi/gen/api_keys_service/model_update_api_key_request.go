@@ -19,6 +19,8 @@ var _ MappedNullable = &UpdateApiKeyRequest{}
 
 // UpdateApiKeyRequest This data structure is used to update an API key.
 type UpdateApiKeyRequest struct {
+	// JSON string representing the access policy for this API key. Defines granular permissions for users and groups. To delete an existing policy, pass an empty string.
+	AccessPolicy *string `json:"accessPolicy,omitempty"`
 	IsActive *bool `json:"isActive,omitempty"`
 	NewName *string `json:"newName,omitempty"`
 	Permissions *UpdateApiKeyRequestPermissions `json:"permissions,omitempty"`
@@ -40,6 +42,38 @@ func NewUpdateApiKeyRequest() *UpdateApiKeyRequest {
 func NewUpdateApiKeyRequestWithDefaults() *UpdateApiKeyRequest {
 	this := UpdateApiKeyRequest{}
 	return &this
+}
+
+// GetAccessPolicy returns the AccessPolicy field value if set, zero value otherwise.
+func (o *UpdateApiKeyRequest) GetAccessPolicy() string {
+	if o == nil || IsNil(o.AccessPolicy) {
+		var ret string
+		return ret
+	}
+	return *o.AccessPolicy
+}
+
+// GetAccessPolicyOk returns a tuple with the AccessPolicy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateApiKeyRequest) GetAccessPolicyOk() (*string, bool) {
+	if o == nil || IsNil(o.AccessPolicy) {
+		return nil, false
+	}
+	return o.AccessPolicy, true
+}
+
+// HasAccessPolicy returns a boolean if a field has been set.
+func (o *UpdateApiKeyRequest) HasAccessPolicy() bool {
+	if o != nil && !IsNil(o.AccessPolicy) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessPolicy gets a reference to the given string and assigns it to the AccessPolicy field.
+func (o *UpdateApiKeyRequest) SetAccessPolicy(v string) {
+	o.AccessPolicy = &v
 }
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
@@ -180,6 +214,9 @@ func (o UpdateApiKeyRequest) MarshalJSON() ([]byte, error) {
 
 func (o UpdateApiKeyRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AccessPolicy) {
+		toSerialize["accessPolicy"] = o.AccessPolicy
+	}
 	if !IsNil(o.IsActive) {
 		toSerialize["isActive"] = o.IsActive
 	}

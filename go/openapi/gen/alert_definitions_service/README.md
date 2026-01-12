@@ -216,6 +216,8 @@ Class | Method | HTTP request | Description
  - [MetricTimeWindowMetricTimeWindowDynamicDuration](docs/MetricTimeWindowMetricTimeWindowDynamicDuration.md)
  - [MetricTimeWindowMetricTimeWindowSpecificValue](docs/MetricTimeWindowMetricTimeWindowSpecificValue.md)
  - [MetricTimeWindowValue](docs/MetricTimeWindowValue.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [NextOp](docs/NextOp.md)
  - [NotificationDestination](docs/NotificationDestination.md)

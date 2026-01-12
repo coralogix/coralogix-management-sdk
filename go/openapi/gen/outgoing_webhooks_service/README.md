@@ -123,6 +123,8 @@ Class | Method | HTTP request | Description
  - [ListOutgoingWebhookTypesResponse](docs/ListOutgoingWebhookTypesResponse.md)
  - [ListOutgoingWebhooksResponse](docs/ListOutgoingWebhooksResponse.md)
  - [MethodType](docs/MethodType.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [OutboundWebhookSummary](docs/OutboundWebhookSummary.md)
  - [OutgoingWebhook](docs/OutgoingWebhook.md)

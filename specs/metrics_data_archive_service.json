@@ -64,10 +64,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/UpdateRequestIbm"
+                    "$ref": "#/components/schemas/UpdateRequestS3"
                   },
                   {
-                    "$ref": "#/components/schemas/UpdateRequestS3"
+                    "$ref": "#/components/schemas/UpdateRequestIbm"
                   }
                 ]
               }
@@ -494,6 +494,34 @@
           }
         }
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -554,10 +582,10 @@
       "TenantConfigV2": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TenantConfigV2Ibm"
+            "$ref": "#/components/schemas/TenantConfigV2S3"
           },
           {
-            "$ref": "#/components/schemas/TenantConfigV2S3"
+            "$ref": "#/components/schemas/TenantConfigV2Ibm"
           }
         ]
       },

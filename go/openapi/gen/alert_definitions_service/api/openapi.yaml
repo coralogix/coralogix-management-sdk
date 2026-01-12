@@ -442,26 +442,6 @@ components:
         alertDefProperties:
           entityLabels:
             key: entityLabels
-          logsImmediate:
-            notificationPayloadFilter:
-            - obj.field
-            logsFilter:
-              simpleFilter:
-                labelFilters:
-                  subsystemName:
-                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    value: my-app
-                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    value: my-app
-                  applicationName:
-                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    value: my-app
-                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    value: my-app
-                  severities:
-                  - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                luceneQuery: luceneQuery
           phantomMode: false
           notificationGroupExcess:
           - router:
@@ -621,7 +601,7 @@ components:
             - key1
             - key2
           description: Alert description
-          priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+          priority: null
           type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
           activeOn:
             dayOfWeek:
@@ -717,6 +697,32 @@ components:
           incidentsSettings:
             minutes: 30
             notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+          metricThreshold:
+            missingValues:
+              replaceWithZero: true
+            undetectedValuesManagement:
+              triggerUndetectedValues: true
+              autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+            evaluationDelayMs: 60000
+            metricFilter:
+              promql: "avg_over_time(metric_name[5m]) > 10"
+            rules:
+            - condition:
+                forOverPct: 80
+                conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                ofTheLast:
+                  metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                threshold: 100
+              override:
+                priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+            - condition:
+                forOverPct: 80
+                conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                ofTheLast:
+                  metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                threshold: 100
+              override:
+                priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
           name: My Alert
           groupByKeys:
           - key1
@@ -890,6 +896,8 @@ components:
       - ALERT_DEF_ORDER_BY_FIELDS_ENABLED
       type: string
     AlertDefOverride:
+      example:
+        priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -907,19 +915,19 @@ components:
       type: string
     AlertDefProperties:
       oneOf:
+      - $ref: "#/components/schemas/AlertDefPropertiesMetricThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesTracingThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesFlow"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsAnomaly"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesMetricAnomaly"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsNewValue"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
+      - $ref: "#/components/schemas/AlertDefPropertiesSloThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsImmediate"
       - $ref: "#/components/schemas/AlertDefPropertiesTracingImmediate"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesMetricThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesFlow"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsAnomaly"
-      - $ref: "#/components/schemas/AlertDefPropertiesSloThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesTracingThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesMetricAnomaly"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsNewValue"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
     AlertDefPropertiesFlow:
       additionalProperties: false
       description: User-configurable properties of an alert definition
@@ -1041,288 +1049,6 @@ components:
     AlertDefPropertiesLogsImmediate:
       additionalProperties: false
       description: User-configurable properties of an alert definition
-      example:
-        entityLabels:
-          key: entityLabels
-        logsImmediate:
-          notificationPayloadFilter:
-          - obj.field
-          logsFilter:
-            simpleFilter:
-              labelFilters:
-                subsystemName:
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                applicationName:
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                severities:
-                - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-              luceneQuery: luceneQuery
-        phantomMode: false
-        notificationGroupExcess:
-        - router:
-            notifyOn: null
-            id: 123e4567-e89b-12d3-a456-426614174000
-          webhooks:
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          destinations:
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          groupByKeys:
-          - key1
-          - key2
-        - router:
-            notifyOn: null
-            id: 123e4567-e89b-12d3-a456-426614174000
-          webhooks:
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          destinations:
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          groupByKeys:
-          - key1
-          - key2
-        description: Alert description
-        priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
-        type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
-        activeOn:
-          dayOfWeek:
-          - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
-          - DAY_OF_WEEK_TUESDAY
-          startTime:
-            hours: 14
-            minutes: 30
-          endTime:
-            hours: 14
-            minutes: 30
-        enabled: true
-        notificationGroup:
-          router:
-            notifyOn: null
-            id: 123e4567-e89b-12d3-a456-426614174000
-          webhooks:
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          - minutes: 15
-            notifyOn: null
-            integration:
-              integrationId: 123
-          destinations:
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          - resolvedRouteOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            triggeredRoutingOverrides:
-              configOverrides:
-                messageConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
-                  \ generic_https_default"
-                connectorConfigFields:
-                - template: template_example
-                  fieldName: description
-                - template: template_example
-                  fieldName: description
-            connectorId: connector_id_example
-            notifyOn: null
-            presetId: preset_id_example
-          groupByKeys:
-          - key1
-          - key2
-        deleted: false
-        incidentsSettings:
-          minutes: 30
-          notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
-        name: My Alert
-        groupByKeys:
-        - key1
-        - key2
       externalDocs:
         url: ""
       properties:
@@ -1736,6 +1462,294 @@ components:
     AlertDefPropertiesMetricThreshold:
       additionalProperties: false
       description: User-configurable properties of an alert definition
+      example:
+        entityLabels:
+          key: entityLabels
+        phantomMode: false
+        notificationGroupExcess:
+        - router:
+            notifyOn: null
+            id: 123e4567-e89b-12d3-a456-426614174000
+          webhooks:
+          - minutes: 15
+            notifyOn: null
+            integration:
+              integrationId: 123
+          - minutes: 15
+            notifyOn: null
+            integration:
+              integrationId: 123
+          destinations:
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          groupByKeys:
+          - key1
+          - key2
+        - router:
+            notifyOn: null
+            id: 123e4567-e89b-12d3-a456-426614174000
+          webhooks:
+          - minutes: 15
+            notifyOn: null
+            integration:
+              integrationId: 123
+          - minutes: 15
+            notifyOn: null
+            integration:
+              integrationId: 123
+          destinations:
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          groupByKeys:
+          - key1
+          - key2
+        description: Alert description
+        priority: null
+        type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
+        activeOn:
+          dayOfWeek:
+          - DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+          - DAY_OF_WEEK_TUESDAY
+          startTime:
+            hours: 14
+            minutes: 30
+          endTime:
+            hours: 14
+            minutes: 30
+        enabled: true
+        notificationGroup:
+          router:
+            notifyOn: null
+            id: 123e4567-e89b-12d3-a456-426614174000
+          webhooks:
+          - minutes: 15
+            notifyOn: null
+            integration:
+              integrationId: 123
+          - minutes: 15
+            notifyOn: null
+            integration:
+              integrationId: 123
+          destinations:
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          - resolvedRouteOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            triggeredRoutingOverrides:
+              configOverrides:
+                messageConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+                payloadType: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
+                  \ generic_https_default"
+                connectorConfigFields:
+                - template: template_example
+                  fieldName: description
+                - template: template_example
+                  fieldName: description
+            connectorId: connector_id_example
+            notifyOn: null
+            presetId: preset_id_example
+          groupByKeys:
+          - key1
+          - key2
+        deleted: false
+        incidentsSettings:
+          minutes: 30
+          notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+        metricThreshold:
+          missingValues:
+            replaceWithZero: true
+          undetectedValuesManagement:
+            triggerUndetectedValues: true
+            autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+          evaluationDelayMs: 60000
+          metricFilter:
+            promql: "avg_over_time(metric_name[5m]) > 10"
+          rules:
+          - condition:
+              forOverPct: 80
+              conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+              ofTheLast:
+                metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+              threshold: 100
+            override:
+              priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+          - condition:
+              forOverPct: 80
+              conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+              ofTheLast:
+                metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+              threshold: 100
+            override:
+              priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+        name: My Alert
+        groupByKeys:
+        - key1
+        - key2
       externalDocs:
         url: ""
       properties:
@@ -2059,26 +2073,6 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
-            logsImmediate:
-              notificationPayloadFilter:
-              - obj.field
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -2238,7 +2232,7 @@ components:
               - key1
               - key2
             description: Alert description
-            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+            priority: null
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -2334,6 +2328,32 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+            metricThreshold:
+              missingValues:
+                replaceWithZero: true
+              undetectedValuesManagement:
+                triggerUndetectedValues: true
+                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+              evaluationDelayMs: 60000
+              metricFilter:
+                promql: "avg_over_time(metric_name[5m]) > 10"
+              rules:
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             name: My Alert
             groupByKeys:
             - key1
@@ -2347,26 +2367,6 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
-            logsImmediate:
-              notificationPayloadFilter:
-              - obj.field
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -2526,7 +2526,7 @@ components:
               - key1
               - key2
             description: Alert description
-            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+            priority: null
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -2622,6 +2622,32 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+            metricThreshold:
+              missingValues:
+                replaceWithZero: true
+              undetectedValuesManagement:
+                triggerUndetectedValues: true
+                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+              evaluationDelayMs: 60000
+              metricFilter:
+                promql: "avg_over_time(metric_name[5m]) > 10"
+              rules:
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             name: My Alert
             groupByKeys:
             - key1
@@ -2735,26 +2761,6 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
-            logsImmediate:
-              notificationPayloadFilter:
-              - obj.field
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -2914,7 +2920,7 @@ components:
               - key1
               - key2
             description: Alert description
-            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+            priority: null
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -3010,6 +3016,32 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+            metricThreshold:
+              missingValues:
+                replaceWithZero: true
+              undetectedValuesManagement:
+                triggerUndetectedValues: true
+                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+              evaluationDelayMs: 60000
+              metricFilter:
+                promql: "avg_over_time(metric_name[5m]) > 10"
+              rules:
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             name: My Alert
             groupByKeys:
             - key1
@@ -3359,26 +3391,6 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
-            logsImmediate:
-              notificationPayloadFilter:
-              - obj.field
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -3538,7 +3550,7 @@ components:
               - key1
               - key2
             description: Alert description
-            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+            priority: null
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -3634,6 +3646,32 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+            metricThreshold:
+              missingValues:
+                replaceWithZero: true
+              undetectedValuesManagement:
+                triggerUndetectedValues: true
+                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+              evaluationDelayMs: 60000
+              metricFilter:
+                promql: "avg_over_time(metric_name[5m]) > 10"
+              rules:
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             name: My Alert
             groupByKeys:
             - key1
@@ -3658,26 +3696,6 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
-            logsImmediate:
-              notificationPayloadFilter:
-              - obj.field
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -3837,7 +3855,7 @@ components:
               - key1
               - key2
             description: Alert description
-            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+            priority: null
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -3933,6 +3951,32 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+            metricThreshold:
+              missingValues:
+                replaceWithZero: true
+              undetectedValuesManagement:
+                triggerUndetectedValues: true
+                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+              evaluationDelayMs: 60000
+              metricFilter:
+                promql: "avg_over_time(metric_name[5m]) > 10"
+              rules:
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             name: My Alert
             groupByKeys:
             - key1
@@ -3950,9 +3994,6 @@ components:
       type: object
     LabelFilterType:
       description: Label filter type for log entries
-      example:
-        operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-        value: my-app
       externalDocs:
         url: ""
       properties:
@@ -3966,20 +4007,6 @@ components:
       type: object
     LabelFilters:
       description: "Filters for application name, subsystem name, and log severities"
-      example:
-        subsystemName:
-        - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          value: my-app
-        - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          value: my-app
-        applicationName:
-        - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          value: my-app
-        - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-          value: my-app
-        severities:
-        - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-        - LOG_SEVERITY_VERBOSE_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -4009,26 +4036,6 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
-            logsImmediate:
-              notificationPayloadFilter:
-              - obj.field
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -4188,7 +4195,7 @@ components:
               - key1
               - key2
             description: Alert description
-            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+            priority: null
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -4284,6 +4291,32 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+            metricThreshold:
+              missingValues:
+                replaceWithZero: true
+              undetectedValuesManagement:
+                triggerUndetectedValues: true
+                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+              evaluationDelayMs: 60000
+              metricFilter:
+                promql: "avg_over_time(metric_name[5m]) > 10"
+              rules:
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             name: My Alert
             groupByKeys:
             - key1
@@ -4297,26 +4330,6 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
-            logsImmediate:
-              notificationPayloadFilter:
-              - obj.field
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -4476,7 +4489,7 @@ components:
               - key1
               - key2
             description: Alert description
-            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+            priority: null
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -4572,6 +4585,32 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+            metricThreshold:
+              missingValues:
+                replaceWithZero: true
+              undetectedValuesManagement:
+                triggerUndetectedValues: true
+                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+              evaluationDelayMs: 60000
+              metricFilter:
+                promql: "avg_over_time(metric_name[5m]) > 10"
+              rules:
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             name: My Alert
             groupByKeys:
             - key1
@@ -4668,26 +4707,6 @@ components:
     LogsImmediateType:
       description: Configuration for immediate alerts triggered on log entries matching
         specific filters.
-      example:
-        notificationPayloadFilter:
-        - obj.field
-        logsFilter:
-          simpleFilter:
-            labelFilters:
-              subsystemName:
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              applicationName:
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              severities:
-              - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-              - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-            luceneQuery: luceneQuery
       externalDocs:
         description: Learn more about logs immediate alerts in our documentation
         url: https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/immediate-notifications/
@@ -4872,22 +4891,6 @@ components:
       type: string
     LogsSimpleFilter:
       description: Basic filter configuration using a Lucene query and label filters
-      example:
-        labelFilters:
-          subsystemName:
-          - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            value: my-app
-          - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            value: my-app
-          applicationName:
-          - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            value: my-app
-          - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-            value: my-app
-          severities:
-          - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-          - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-        luceneQuery: luceneQuery
       externalDocs:
         url: ""
       properties:
@@ -5199,6 +5202,8 @@ components:
       title: Metric-based anomaly alert type
       type: object
     MetricFilter:
+      example:
+        promql: "avg_over_time(metric_name[5m]) > 10"
       externalDocs:
         url: ""
       properties:
@@ -5229,6 +5234,8 @@ components:
     MetricMissingValuesReplaceWithZero:
       additionalProperties: false
       description: Configuration for handling missing values in metric threshold alerts.
+      example:
+        replaceWithZero: true
       externalDocs:
         url: ""
       properties:
@@ -5240,6 +5247,12 @@ components:
       type: object
     MetricThresholdCondition:
       description: Defines conditions for metric threshold alerts
+      example:
+        forOverPct: 80
+        conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+        ofTheLast:
+          metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+        threshold: 100
       externalDocs:
         url: ""
       properties:
@@ -5269,6 +5282,15 @@ components:
       type: string
     MetricThresholdRule:
       description: Defines a rule for metric-based threshold alerts
+      example:
+        condition:
+          forOverPct: 80
+          conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+          ofTheLast:
+            metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+          threshold: 100
+        override:
+          priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -5280,6 +5302,32 @@ components:
       type: object
     MetricThresholdType:
       description: Configuration for alerts based on metric threshold violations
+      example:
+        missingValues:
+          replaceWithZero: true
+        undetectedValuesManagement:
+          triggerUndetectedValues: true
+          autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+        evaluationDelayMs: 60000
+        metricFilter:
+          promql: "avg_over_time(metric_name[5m]) > 10"
+        rules:
+        - condition:
+            forOverPct: 80
+            conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+            ofTheLast:
+              metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+            threshold: 100
+          override:
+            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+        - condition:
+            forOverPct: 80
+            conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+            ofTheLast:
+              metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+            threshold: 100
+          override:
+            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
       externalDocs:
         description: Learn more about metric-based threshold alerts in our documentation
         url: https://coralogix.com/docs/user-guides/alerting/create-an-alert/metrics/threshold-alerts/
@@ -5318,6 +5366,8 @@ components:
       type: object
     MetricTimeWindowMetricTimeWindowSpecificValue:
       additionalProperties: false
+      example:
+        metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -5341,6 +5391,28 @@ components:
       - METRIC_TIME_WINDOW_VALUE_HOURS_24
       - METRIC_TIME_WINDOW_VALUE_HOURS_36
       type: string
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     MultipleValues:
       properties:
         matcher:
@@ -5492,26 +5564,6 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
-            logsImmediate:
-              notificationPayloadFilter:
-              - obj.field
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -5671,7 +5723,7 @@ components:
               - key1
               - key2
             description: Alert description
-            priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+            priority: null
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
             activeOn:
               dayOfWeek:
@@ -5767,6 +5819,32 @@ components:
             incidentsSettings:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+            metricThreshold:
+              missingValues:
+                replaceWithZero: true
+              undetectedValuesManagement:
+                triggerUndetectedValues: true
+                autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+              evaluationDelayMs: 60000
+              metricFilter:
+                promql: "avg_over_time(metric_name[5m]) > 10"
+              rules:
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+              - condition:
+                  forOverPct: 80
+                  conditionType: METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+                  ofTheLast:
+                    metricTimeWindowSpecificValue: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+                  threshold: 100
+                override:
+                  priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             name: My Alert
             groupByKeys:
             - key1
@@ -6173,23 +6251,6 @@ components:
       - $ref: "#/components/schemas/V3IntegrationTypeRecipients"
     v3.LogsFilter:
       description: Filter configuration for log-based alerts
-      example:
-        simpleFilter:
-          labelFilters:
-            subsystemName:
-            - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              value: my-app
-            - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              value: my-app
-            applicationName:
-            - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              value: my-app
-            - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-              value: my-app
-            severities:
-            - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-            - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-          luceneQuery: luceneQuery
       externalDocs:
         url: ""
       properties:
@@ -6266,6 +6327,9 @@ components:
       type: object
     v3.UndetectedValuesManagement:
       description: Configuration for handling undetected values in alerts
+      example:
+        triggerUndetectedValues: true
+        autoRetireTimeframe: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:

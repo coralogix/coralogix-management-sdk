@@ -99,6 +99,8 @@ Class | Method | HTTP request | Description
  - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [ListViewFoldersResponse](docs/ListViewFoldersResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
  - [ViewFolder](docs/ViewFolder.md)

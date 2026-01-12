@@ -131,6 +131,8 @@ model_metric_time_window.go
 model_metric_time_window_metric_time_window_dynamic_duration.go
 model_metric_time_window_metric_time_window_specific_value.go
 model_metric_time_window_value.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_next_op.go
 model_notification_destination.go

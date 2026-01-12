@@ -133,6 +133,8 @@ Class | Method | HTTP request | Description
  - [GetLogsCountResponse](docs/GetLogsCountResponse.md)
  - [GetSpansCountResponse](docs/GetSpansCountResponse.md)
  - [LogsCount](docs/LogsCount.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [ScopesFilter](docs/ScopesFilter.md)
  - [SpansCount](docs/SpansCount.md)

@@ -828,6 +828,28 @@ components:
             $ref: "#/components/schemas/meta_labels_protobuf.v1.MetaLabel"
           type: array
       type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     Monthly:
       properties:
         daysOfMonth:
@@ -861,9 +883,9 @@ components:
       - $ref: "#/components/schemas/RecurringDynamic"
     Recurring.Dynamic:
       oneOf:
-      - $ref: "#/components/schemas/RecurringDynamicWeekly"
       - $ref: "#/components/schemas/RecurringDynamicMonthly"
       - $ref: "#/components/schemas/RecurringDynamicDaily"
+      - $ref: "#/components/schemas/RecurringDynamicWeekly"
     RecurringAlways:
       additionalProperties: false
       properties:

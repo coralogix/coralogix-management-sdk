@@ -106,6 +106,8 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [InitializeTestingRevisionRequest](docs/InitializeTestingRevisionRequest.md)
  - [IntegrationDetail](docs/IntegrationDetail.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [PermissionResource](docs/PermissionResource.md)
  - [TargetDomain](docs/TargetDomain.md)

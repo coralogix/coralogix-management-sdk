@@ -96,6 +96,8 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [ListEntitySubTypesResponse](docs/ListEntitySubTypesResponse.md)
  - [ListEntityTypesResponse](docs/ListEntityTypesResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [NotificationCenterEntityType](docs/NotificationCenterEntityType.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)

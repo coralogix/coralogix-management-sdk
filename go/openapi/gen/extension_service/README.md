@@ -109,6 +109,8 @@ Class | Method | HTTP request | Description
  - [GetAllExtensionsResponseRevision](docs/GetAllExtensionsResponseRevision.md)
  - [IntegrationDetail](docs/IntegrationDetail.md)
  - [ItemCounts](docs/ItemCounts.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [PermissionResource](docs/PermissionResource.md)
  - [RevisionSummary](docs/RevisionSummary.md)

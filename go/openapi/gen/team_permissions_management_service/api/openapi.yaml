@@ -105,6 +105,79 @@ paths:
       summary: Update Team Group
       tags:
       - Team Permissions Management Service
+  /aaa/team-groups/v1/id/{id}:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: TeamPermissionsMgmtService_GetTeamGroup
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetTeamGroupResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Team Group
+      tags:
+      - Team Permissions Management Service
+  /aaa/team-groups/v1/name/{name}:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: TeamPermissionsMgmtService_GetTeamGroupByName
+      parameters:
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetTeamGroupByNameResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Team Group By Name
+      tags:
+      - Team Permissions Management Service
   /aaa/team-groups/v1/users:
     delete:
       description: No description available
@@ -217,42 +290,6 @@ paths:
             application/json: {}
           description: Internal server error
       summary: Delete Team Group
-      tags:
-      - Team Permissions Management Service
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: TeamPermissionsMgmtService_GetTeamGroup
-      parameters:
-      - explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetTeamGroupResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Get Team Group
       tags:
       - Team Permissions Management Service
   /aaa/team-groups/v1/{id}/users:
@@ -392,42 +429,6 @@ paths:
             application/json: {}
           description: Internal server error
       summary: Add Users To Team Group
-      tags:
-      - Team Permissions Management Service
-  /aaa/team-groups/v1/{name}:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: TeamPermissionsMgmtService_GetTeamGroupByName
-      parameters:
-      - explode: false
-        in: path
-        name: name
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetTeamGroupByNameResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Get Team Group By Name
       tags:
       - Team Permissions Management Service
   /v1/teams/groups/{id}/scope:
@@ -661,31 +662,12 @@ components:
       type: object
     GetGroupUsersResponse:
       oneOf:
-      - $ref: "#/components/schemas/GetGroupUsersResponseNoMorePages"
       - $ref: "#/components/schemas/GetGroupUsersResponseToken"
+      - $ref: "#/components/schemas/GetGroupUsersResponseNoMorePages"
     GetGroupUsersResponseNoMorePages:
       additionalProperties: false
       description: Response containing the list of all users currently assigned to
         the requested team group.
-      example:
-        noMorePages: "{}"
-        users:
-        - firstName: firstName
-          lastName: lastName
-          userAccountId:
-            id: 0
-          userId:
-            id: id
-          status: USER_STATUS_UNSPECIFIED
-          username: username
-        - firstName: firstName
-          lastName: lastName
-          userAccountId:
-            id: 0
-          userId:
-            id: id
-          status: USER_STATUS_UNSPECIFIED
-          username: username
       externalDocs:
         description: Find out more about groups
         url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
@@ -708,6 +690,26 @@ components:
       additionalProperties: false
       description: Response containing the list of all users currently assigned to
         the requested team group.
+      example:
+        users:
+        - firstName: firstName
+          lastName: lastName
+          userAccountId:
+            id: 0
+          userId:
+            id: id
+          status: USER_STATUS_UNSPECIFIED
+          username: username
+        - firstName: firstName
+          lastName: lastName
+          userAccountId:
+            id: 0
+          userId:
+            id: id
+          status: USER_STATUS_UNSPECIFIED
+          username: username
+        token:
+          nextPageToken: nextPageToken
       externalDocs:
         description: Find out more about groups
         url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
@@ -940,6 +942,28 @@ components:
       - GROUP_TYPE_CLOSED
       - GROUP_TYPE_RESTRICTED
       type: string
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     MultipleValues:
       properties:
         matcher:
@@ -952,6 +976,8 @@ components:
     NextPageToken:
       description: This data structure represents the information associated with
         an API key.
+      example:
+        nextPageToken: nextPageToken
       externalDocs:
         description: Find out more about groups
         url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
