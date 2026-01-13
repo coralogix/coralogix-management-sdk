@@ -11,7 +11,6 @@
           "API Keys Service"
         ],
         "summary": "Create API Key",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -24,6 +23,11 @@
                 "description": "This data structure is used to create an API key.",
                 "type": "object",
                 "properties": {
+                  "accessPolicy": {
+                    "example": "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}",
+                    "description": "JSON string representing the access policy for this API key. Defines granular permissions for users and groups.",
+                    "type": "string"
+                  },
                   "hashed": {
                     "example": true,
                     "type": "boolean"
@@ -82,7 +86,6 @@
           "API Keys Service"
         ],
         "summary": "Get \"Send Data\" API Keys",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -125,7 +128,6 @@
           "API Keys Service"
         ],
         "summary": "Get API Key",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -178,7 +180,6 @@
           "API Keys Service"
         ],
         "summary": "Update API Key",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -203,6 +204,11 @@
                 "description": "This data structure is used to update an API key.",
                 "type": "object",
                 "properties": {
+                  "accessPolicy": {
+                    "example": "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}",
+                    "description": "JSON string representing the access policy for this API key. Defines granular permissions for users and groups. To delete an existing policy, pass an empty string.",
+                    "type": "string"
+                  },
                   "isActive": {
                     "example": true,
                     "type": "boolean"
@@ -259,7 +265,6 @@
           "API Keys Service"
         ],
         "summary": "Delete API Key",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -515,6 +520,11 @@
         "description": "This data structure represents the information associated with an API key.",
         "type": "object",
         "properties": {
+          "accessPolicy": {
+            "example": "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}",
+            "description": "JSON string representing the access policy for this API key. Defines granular permissions for users and groups.",
+            "type": "string"
+          },
           "active": {
             "example": true,
             "type": "boolean"
@@ -564,6 +574,34 @@
           }
         }
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -581,13 +619,13 @@
       "Owner": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/OwnerOrganisationId"
-          },
-          {
             "$ref": "#/components/schemas/OwnerUserId"
           },
           {
             "$ref": "#/components/schemas/OwnerTeamId"
+          },
+          {
+            "$ref": "#/components/schemas/OwnerOrganisationId"
           }
         ]
       },
@@ -709,14 +747,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

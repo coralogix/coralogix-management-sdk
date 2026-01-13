@@ -5,130 +5,25 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/v1/rule-group-sets": {
+    "/quota-rules/v1/quota-allocation-rule-set": {
       "get": {
         "tags": [
-          "Recording Rules Service"
+          "Quota Allocation Rule Set service"
         ],
-        "summary": "List Recording Rules",
+        "summary": "Get quota allocation rule set",
         "externalDocs": {
           "url": ""
         },
-        "operationId": "RuleGroupSets_List",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RuleGroupSetListing"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Recording Rules Service"
-        ],
-        "summary": "Create Recording Rules",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "RuleGroupSets_Create",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "title": "Create Rule Group Set",
-                "description": "A set of rule groups to create.",
-                "type": "object",
-                "properties": {
-                  "groups": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/InRuleGroup"
-                    }
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateRuleGroupSetResult"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/v1/rule-group-sets/{id}": {
-      "get": {
-        "tags": [
-          "Recording Rules Service"
-        ],
-        "summary": "Get Recording Rules",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "RuleGroupSets_Fetch",
+        "operationId": "QuotaAllocationRuleSetService_GetQuotaAllocationRuleSet",
         "parameters": [
           {
-            "in": "path",
+            "in": "query",
             "name": "id",
-            "required": true,
             "schema": {
+              "example": "",
               "type": "string"
             },
-            "style": "simple"
+            "style": "form"
           }
         ],
         "responses": {
@@ -137,7 +32,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OutRuleGroupSet"
+                  "$ref": "#/components/schemas/GetQuotaAllocationRuleSetResponse"
                 }
               }
             }
@@ -154,52 +49,47 @@
               "application/json": {}
             }
           },
+          "404": {
+            "description": "Rule set not found",
+            "content": {
+              "application/json": {}
+            }
+          },
           "500": {
             "description": "Internal server error",
             "content": {
               "application/json": {}
             }
           }
-        }
+        },
+        "x-coralogixPermissions": [
+          "team-quota-rules:Read"
+        ]
       },
       "put": {
         "tags": [
-          "Recording Rules Service"
+          "Quota Allocation Rule Set service"
         ],
-        "summary": "Update Recording Rules",
+        "summary": "Replace quota allocation rule set",
         "externalDocs": {
           "url": ""
         },
-        "operationId": "RuleGroupSets_Update",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
+        "operationId": "QuotaAllocationRuleSetService_ReplaceQuotaAllocationRuleSet",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Update Rule Group Set",
-                "description": "A set of rule groups to update.",
+                "title": "Replace quota allocation rule set request",
+                "description": "Request to replace quota allocation rule set",
                 "type": "object",
                 "properties": {
-                  "groups": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/InRuleGroup"
-                    }
-                  },
-                  "name": {
-                    "type": "string"
+                  "ruleSet": {
+                    "$ref": "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
                   }
                 },
+                "required": [
+                  "ruleSet"
+                ],
                 "additionalProperties": false
               }
             }
@@ -211,7 +101,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/ReplaceQuotaAllocationRuleSetResponse"
                 }
               }
             }
@@ -228,41 +118,59 @@
               "application/json": {}
             }
           },
+          "404": {
+            "description": "Rule set not found",
+            "content": {
+              "application/json": {}
+            }
+          },
           "500": {
             "description": "Internal server error",
             "content": {
               "application/json": {}
             }
           }
-        }
+        },
+        "x-coralogixPermissions": [
+          "team-quota-rules:Manage"
+        ]
       },
-      "delete": {
+      "post": {
         "tags": [
-          "Recording Rules Service"
+          "Quota Allocation Rule Set service"
         ],
-        "summary": "Delete Recording Rules",
+        "summary": "Create quota allocation rule set",
         "externalDocs": {
           "url": ""
         },
-        "operationId": "RuleGroupSets_Delete",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "style": "simple"
+        "operationId": "QuotaAllocationRuleSetService_CreateQuotaAllocationRuleSet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Create quota allocation rule set request",
+                "description": "Request to create a new quota allocation rule set",
+                "type": "object",
+                "properties": {
+                  "ruleSet": {
+                    "$ref": "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
+                  }
+                },
+                "required": [
+                  "ruleSet"
+                ],
+                "additionalProperties": false
+              }
+            }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/CreateQuotaAllocationRuleSetResponse"
                 }
               }
             }
@@ -279,13 +187,71 @@
               "application/json": {}
             }
           },
+          "409": {
+            "description": "Rule set already exists",
+            "content": {
+              "application/json": {}
+            }
+          },
           "500": {
             "description": "Internal server error",
             "content": {
               "application/json": {}
             }
           }
-        }
+        },
+        "x-coralogixPermissions": [
+          "team-quota-rules:Manage"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Quota Allocation Rule Set service"
+        ],
+        "summary": "Delete quota allocation rule set",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "QuotaAllocationRuleSetService_DeleteQuotaAllocationRuleSet",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteQuotaAllocationRuleSetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Rule set not found",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "team-quota-rules:Manage"
+        ]
       }
     }
   },
@@ -318,13 +284,25 @@
         },
         "additionalProperties": false
       },
-      "CreateRuleGroupSetResult": {
+      "CreateQuotaAllocationRuleSetResponse": {
         "externalDocs": {
-          "description": "Find out more about recording rules",
-          "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+          "url": ""
         },
-        "title": "Create Rule Group Set Result",
-        "description": "Result of creating a rule group set.",
+        "title": "Create quota allocation rule set response",
+        "description": "Response confirming quota allocation rule set has been successfully created",
+        "type": "object",
+        "properties": {
+          "ruleSet": {
+            "$ref": "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
+          }
+        }
+      },
+      "DeleteQuotaAllocationRuleSetResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Delete quota allocation rule set response",
+        "description": "Response confirming quota allocation rule set has been successfully deleted",
         "type": "object",
         "properties": {
           "id": {
@@ -419,62 +397,16 @@
           "pathAndValues"
         ]
       },
-      "InRule": {
+      "GetQuotaAllocationRuleSetResponse": {
         "externalDocs": {
-          "description": "Find out more about recording rules",
-          "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+          "url": ""
         },
-        "title": "In Rule",
-        "description": "A rule within a group that defines a recording rule expression.",
+        "title": "Get quota allocation rule set response",
+        "description": "Response containing quota allocation rule set",
         "type": "object",
         "properties": {
-          "expr": {
-            "type": "string"
-          },
-          "labels": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "record": {
-            "type": "string"
-          }
-        }
-      },
-      "InRuleGroup": {
-        "externalDocs": {
-          "description": "Find out more about recording rules",
-          "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
-        },
-        "title": "In Rule Group",
-        "description": "A group of recording rules.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "interval": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "limit": {
-            "example": "",
-            "type": "string",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          },
-          "rules": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/InRule"
-            }
-          },
-          "version": {
-            "type": "integer",
-            "format": "int64"
+          "ruleSet": {
+            "$ref": "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
           }
         }
       },
@@ -520,100 +452,67 @@
           }
         }
       },
-      "OutRule": {
+      "QuotaAllocationEntityTypeRule": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Quota allocation entity type rule",
+        "description": "Defines quota allocation rule for a specific entity type",
         "type": "object",
         "properties": {
-          "expr": {
-            "type": "string"
+          "allocation": {
+            "type": "number",
+            "format": "float"
           },
-          "labels": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
+          "canOverflow": {
+            "type": "boolean"
           },
-          "lastEvalDurationMs": {
-            "example": "",
-            "type": "string",
-            "format": "int64"
+          "enabled": {
+            "type": "boolean"
           },
-          "record": {
+          "entityType": {
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "entityType",
+          "allocation",
+          "enabled",
+          "canOverflow"
+        ]
       },
-      "OutRuleGroup": {
+      "QuotaAllocationEntityTypeRuleSet": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Quota allocation entity type rule set",
+        "description": "Contains a collection of quota allocation rules for entity types",
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
-          },
-          "interval": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "lastEvalAt": {
-            "example": "",
-            "type": "string",
-            "format": "int64"
-          },
-          "limit": {
-            "example": "",
-            "type": "string",
-            "format": "int64"
-          },
-          "name": {
             "type": "string"
           },
           "rules": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/OutRule"
+              "$ref": "#/components/schemas/QuotaAllocationEntityTypeRule"
             }
-          },
-          "version": {
-            "type": "integer",
-            "format": "int64"
           }
-        }
-      },
-      "OutRuleGroupSet": {
-        "externalDocs": {
-          "description": "Find out more about recording rules",
-          "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
         },
-        "title": "Out Rule Group Set",
-        "description": "An output set of rule groups.",
+        "required": [
+          "rules"
+        ]
+      },
+      "ReplaceQuotaAllocationRuleSetResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Replace quota allocation rule set response",
+        "description": "Response confirming quota allocation rule set has been successfully replaced",
         "type": "object",
         "properties": {
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OutRuleGroup"
-            }
-          },
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          }
-        }
-      },
-      "RuleGroupSetListing": {
-        "externalDocs": {
-          "description": "Find out more about recording rules",
-          "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
-        },
-        "title": "Rule Group Set Listing",
-        "description": "A listing of rule group sets.",
-        "type": "object",
-        "properties": {
-          "sets": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OutRuleGroupSet"
-            }
+          "ruleSet": {
+            "$ref": "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
           }
         }
       },
