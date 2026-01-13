@@ -83,8 +83,8 @@ Class | Method | HTTP request | Description
 *TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceCreateTeamGroup**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicecreateteamgroup) | **Post** /aaa/team-groups/v1 | Create Team Group
 *TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceDeleteTeamGroup**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicedeleteteamgroup) | **Delete** /aaa/team-groups/v1/{id} | Delete Team Group
 *TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceGetGroupUsers**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicegetgroupusers) | **Get** /aaa/team-groups/v1/{id}/users | Get Group Users
-*TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceGetTeamGroup**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicegetteamgroup) | **Get** /aaa/team-groups/v1/{id} | Get Team Group
-*TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceGetTeamGroupByName**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicegetteamgroupbyname) | **Get** /aaa/team-groups/v1/{name} | Get Team Group By Name
+*TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceGetTeamGroup**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicegetteamgroup) | **Get** /aaa/team-groups/v1/id/{id} | Get Team Group
+*TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceGetTeamGroupByName**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicegetteamgroupbyname) | **Get** /aaa/team-groups/v1/name/{name} | Get Team Group By Name
 *TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceGetTeamGroupScope**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicegetteamgroupscope) | **Get** /v1/teams/groups/{id}/scope | Get Team Group Scope
 *TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceGetTeamGroups**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtservicegetteamgroups) | **Get** /aaa/team-groups/v1 | Get Team Groups
 *TeamPermissionsManagementServiceAPI* | [**TeamPermissionsMgmtServiceRemoveUsersFromTeamGroup**](docs/TeamPermissionsManagementServiceAPI.md#teampermissionsmgmtserviceremoveusersfromteamgroup) | **Delete** /aaa/team-groups/v1/{id}/users | Remove Users From Team Group
@@ -121,6 +121,8 @@ Class | Method | HTTP request | Description
  - [GetTeamGroupsResponse](docs/GetTeamGroupsResponse.md)
  - [GroupOrigin](docs/GroupOrigin.md)
  - [GroupType](docs/GroupType.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [NextPageToken](docs/NextPageToken.md)
  - [PermissionsV1Scope](docs/PermissionsV1Scope.md)
@@ -149,28 +151,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
-
-Authentication schemes defined for the API:
-### apiKeyAuth
-
-- **Type**: API key
-- **API key parameter name**: Authorization
-- **Location**: HTTP header
-
-Note, each API key must be added to a map of `map[string]APIKey` where the key is: apiKeyAuth and passed in as the auth context for each request.
-
-Example
-
-```go
-auth := context.WithValue(
-		context.Background(),
-		team_permissions_management_service.ContextAPIKeys,
-		map[string]team_permissions_management_service.APIKey{
-			"apiKeyAuth": {Key: "API_KEY_STRING"},
-		},
-	)
-r, err := client.Service.Operation(auth, args)
-```
+Endpoints do not require authorization.
 
 
 ## Documentation for Utility Methods

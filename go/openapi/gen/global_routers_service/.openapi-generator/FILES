@@ -24,6 +24,8 @@ model_get_global_router_response.go
 model_global_router.go
 model_global_routers_service_list_global_routers_source_entity_labels_parameter_value.go
 model_list_global_routers_response.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_notification_center_entity_type.go
 model_replace_global_router_request.go

@@ -44,9 +44,6 @@ CasesServiceAcknowledgeCase Acknowledge a case
 
 Mark the case as acknowledged by a user.
 
-Requires the following permissions:
-- `case:Acknowledge`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiCasesServiceAcknowledgeCaseRequest
@@ -158,9 +155,6 @@ CasesServiceAssignCase Assign a case to a user
 
 Assign a case to a specific user.
 
-Requires the following permissions:
-- `case:Assign`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiCasesServiceAssignCaseRequest
@@ -251,16 +245,862 @@ func (a *CasesServiceAPIService) CasesServiceAssignCaseExecute(r ApiCasesService
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCasesServiceBulkAcknowledgeRequest struct {
+	ctx context.Context
+	ApiService *CasesServiceAPIService
+	bulkAcknowledgeRequest *BulkAcknowledgeRequest
+}
+
+func (r ApiCasesServiceBulkAcknowledgeRequest) BulkAcknowledgeRequest(bulkAcknowledgeRequest BulkAcknowledgeRequest) ApiCasesServiceBulkAcknowledgeRequest {
+	r.bulkAcknowledgeRequest = &bulkAcknowledgeRequest
+	return r
+}
+
+func (r ApiCasesServiceBulkAcknowledgeRequest) Execute() (*BulkAcknowledgeResponse, *http.Response, error) {
+	return r.ApiService.CasesServiceBulkAcknowledgeExecute(r)
+}
+
+/*
+CasesServiceBulkAcknowledge Acknowledge multiple cases
+
+Mark multiple cases as acknowledged in a single operation.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCasesServiceBulkAcknowledgeRequest
+*/
+func (a *CasesServiceAPIService) CasesServiceBulkAcknowledge(ctx context.Context) ApiCasesServiceBulkAcknowledgeRequest {
+	return ApiCasesServiceBulkAcknowledgeRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return BulkAcknowledgeResponse
+func (a *CasesServiceAPIService) CasesServiceBulkAcknowledgeExecute(r ApiCasesServiceBulkAcknowledgeRequest) (*BulkAcknowledgeResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BulkAcknowledgeResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceBulkAcknowledge")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/cases/cases/v1:bulkAcknowledge"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.bulkAcknowledgeRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCasesServiceBulkAssignRequest struct {
+	ctx context.Context
+	ApiService *CasesServiceAPIService
+	bulkAssignRequest *BulkAssignRequest
+}
+
+func (r ApiCasesServiceBulkAssignRequest) BulkAssignRequest(bulkAssignRequest BulkAssignRequest) ApiCasesServiceBulkAssignRequest {
+	r.bulkAssignRequest = &bulkAssignRequest
+	return r
+}
+
+func (r ApiCasesServiceBulkAssignRequest) Execute() (*BulkAssignResponse, *http.Response, error) {
+	return r.ApiService.CasesServiceBulkAssignExecute(r)
+}
+
+/*
+CasesServiceBulkAssign Assign multiple cases to a user
+
+Assign multiple cases to a specific user in a single operation.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCasesServiceBulkAssignRequest
+*/
+func (a *CasesServiceAPIService) CasesServiceBulkAssign(ctx context.Context) ApiCasesServiceBulkAssignRequest {
+	return ApiCasesServiceBulkAssignRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return BulkAssignResponse
+func (a *CasesServiceAPIService) CasesServiceBulkAssignExecute(r ApiCasesServiceBulkAssignRequest) (*BulkAssignResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BulkAssignResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceBulkAssign")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/cases/cases/v1:bulkAssign"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.bulkAssignRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCasesServiceBulkClearPriorityOverrideRequest struct {
+	ctx context.Context
+	ApiService *CasesServiceAPIService
+	bulkClearPriorityOverrideRequest *BulkClearPriorityOverrideRequest
+}
+
+func (r ApiCasesServiceBulkClearPriorityOverrideRequest) BulkClearPriorityOverrideRequest(bulkClearPriorityOverrideRequest BulkClearPriorityOverrideRequest) ApiCasesServiceBulkClearPriorityOverrideRequest {
+	r.bulkClearPriorityOverrideRequest = &bulkClearPriorityOverrideRequest
+	return r
+}
+
+func (r ApiCasesServiceBulkClearPriorityOverrideRequest) Execute() (*BulkClearPriorityOverrideResponse, *http.Response, error) {
+	return r.ApiService.CasesServiceBulkClearPriorityOverrideExecute(r)
+}
+
+/*
+CasesServiceBulkClearPriorityOverride Remove priority override from multiple cases
+
+Remove previously set priority overrides from multiple cases in a single operation.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCasesServiceBulkClearPriorityOverrideRequest
+*/
+func (a *CasesServiceAPIService) CasesServiceBulkClearPriorityOverride(ctx context.Context) ApiCasesServiceBulkClearPriorityOverrideRequest {
+	return ApiCasesServiceBulkClearPriorityOverrideRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return BulkClearPriorityOverrideResponse
+func (a *CasesServiceAPIService) CasesServiceBulkClearPriorityOverrideExecute(r ApiCasesServiceBulkClearPriorityOverrideRequest) (*BulkClearPriorityOverrideResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BulkClearPriorityOverrideResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceBulkClearPriorityOverride")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/cases/cases/v1:bulkClearPriorityOverride"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.bulkClearPriorityOverrideRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCasesServiceBulkCloseRequest struct {
+	ctx context.Context
+	ApiService *CasesServiceAPIService
+	bulkCloseRequest *BulkCloseRequest
+}
+
+func (r ApiCasesServiceBulkCloseRequest) BulkCloseRequest(bulkCloseRequest BulkCloseRequest) ApiCasesServiceBulkCloseRequest {
+	r.bulkCloseRequest = &bulkCloseRequest
+	return r
+}
+
+func (r ApiCasesServiceBulkCloseRequest) Execute() (*BulkCloseResponse, *http.Response, error) {
+	return r.ApiService.CasesServiceBulkCloseExecute(r)
+}
+
+/*
+CasesServiceBulkClose Close multiple cases
+
+Close multiple cases in a single operation.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCasesServiceBulkCloseRequest
+*/
+func (a *CasesServiceAPIService) CasesServiceBulkClose(ctx context.Context) ApiCasesServiceBulkCloseRequest {
+	return ApiCasesServiceBulkCloseRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return BulkCloseResponse
+func (a *CasesServiceAPIService) CasesServiceBulkCloseExecute(r ApiCasesServiceBulkCloseRequest) (*BulkCloseResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BulkCloseResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceBulkClose")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/cases/cases/v1:bulkClose"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.bulkCloseRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCasesServiceBulkResolveRequest struct {
+	ctx context.Context
+	ApiService *CasesServiceAPIService
+	bulkResolveRequest *BulkResolveRequest
+}
+
+func (r ApiCasesServiceBulkResolveRequest) BulkResolveRequest(bulkResolveRequest BulkResolveRequest) ApiCasesServiceBulkResolveRequest {
+	r.bulkResolveRequest = &bulkResolveRequest
+	return r
+}
+
+func (r ApiCasesServiceBulkResolveRequest) Execute() (*BulkResolveResponse, *http.Response, error) {
+	return r.ApiService.CasesServiceBulkResolveExecute(r)
+}
+
+/*
+CasesServiceBulkResolve Resolve multiple cases
+
+Resolve multiple cases in a single operation.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCasesServiceBulkResolveRequest
+*/
+func (a *CasesServiceAPIService) CasesServiceBulkResolve(ctx context.Context) ApiCasesServiceBulkResolveRequest {
+	return ApiCasesServiceBulkResolveRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return BulkResolveResponse
+func (a *CasesServiceAPIService) CasesServiceBulkResolveExecute(r ApiCasesServiceBulkResolveRequest) (*BulkResolveResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BulkResolveResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceBulkResolve")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/cases/cases/v1:bulkResolve"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.bulkResolveRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCasesServiceBulkSetPriorityOverrideRequest struct {
+	ctx context.Context
+	ApiService *CasesServiceAPIService
+	bulkOverridePriorityRequest *BulkOverridePriorityRequest
+}
+
+func (r ApiCasesServiceBulkSetPriorityOverrideRequest) BulkOverridePriorityRequest(bulkOverridePriorityRequest BulkOverridePriorityRequest) ApiCasesServiceBulkSetPriorityOverrideRequest {
+	r.bulkOverridePriorityRequest = &bulkOverridePriorityRequest
+	return r
+}
+
+func (r ApiCasesServiceBulkSetPriorityOverrideRequest) Execute() (*BulkSetPriorityOverrideResponse, *http.Response, error) {
+	return r.ApiService.CasesServiceBulkSetPriorityOverrideExecute(r)
+}
+
+/*
+CasesServiceBulkSetPriorityOverride Override priority for multiple cases
+
+Override the priority with for multiple cases in a single operation.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCasesServiceBulkSetPriorityOverrideRequest
+*/
+func (a *CasesServiceAPIService) CasesServiceBulkSetPriorityOverride(ctx context.Context) ApiCasesServiceBulkSetPriorityOverrideRequest {
+	return ApiCasesServiceBulkSetPriorityOverrideRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return BulkSetPriorityOverrideResponse
+func (a *CasesServiceAPIService) CasesServiceBulkSetPriorityOverrideExecute(r ApiCasesServiceBulkSetPriorityOverrideRequest) (*BulkSetPriorityOverrideResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BulkSetPriorityOverrideResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceBulkSetPriorityOverride")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/cases/cases/v1:bulkSetPriorityOverride"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.bulkOverridePriorityRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCasesServiceBulkUnassignRequest struct {
+	ctx context.Context
+	ApiService *CasesServiceAPIService
+	bulkUnassignRequest *BulkUnassignRequest
+}
+
+func (r ApiCasesServiceBulkUnassignRequest) BulkUnassignRequest(bulkUnassignRequest BulkUnassignRequest) ApiCasesServiceBulkUnassignRequest {
+	r.bulkUnassignRequest = &bulkUnassignRequest
+	return r
+}
+
+func (r ApiCasesServiceBulkUnassignRequest) Execute() (*BulkUnassignResponse, *http.Response, error) {
+	return r.ApiService.CasesServiceBulkUnassignExecute(r)
+}
+
+/*
+CasesServiceBulkUnassign Remove assignment from multiple cases
+
+Remove the current assignee from multiple cases in a single operation.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCasesServiceBulkUnassignRequest
+*/
+func (a *CasesServiceAPIService) CasesServiceBulkUnassign(ctx context.Context) ApiCasesServiceBulkUnassignRequest {
+	return ApiCasesServiceBulkUnassignRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return BulkUnassignResponse
+func (a *CasesServiceAPIService) CasesServiceBulkUnassignExecute(r ApiCasesServiceBulkUnassignRequest) (*BulkUnassignResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BulkUnassignResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceBulkUnassign")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/cases/cases/v1:bulkUnassign"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.bulkUnassignRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCasesServiceClearPriorityOverrideRequest struct {
+	ctx context.Context
+	ApiService *CasesServiceAPIService
+	id string
+}
+
+func (r ApiCasesServiceClearPriorityOverrideRequest) Execute() (*ClearPriorityOverrideResponse, *http.Response, error) {
+	return r.ApiService.CasesServiceClearPriorityOverrideExecute(r)
+}
+
+/*
+CasesServiceClearPriorityOverride Remove priority override
+
+Remove a previously set priority override for a case.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiCasesServiceClearPriorityOverrideRequest
+*/
+func (a *CasesServiceAPIService) CasesServiceClearPriorityOverride(ctx context.Context, id string) ApiCasesServiceClearPriorityOverrideRequest {
+	return ApiCasesServiceClearPriorityOverrideRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return ClearPriorityOverrideResponse
+func (a *CasesServiceAPIService) CasesServiceClearPriorityOverrideExecute(r ApiCasesServiceClearPriorityOverrideRequest) (*ClearPriorityOverrideResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ClearPriorityOverrideResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceClearPriorityOverride")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/cases/cases/v1/{id}:clearPriorityOverride"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCasesServiceCloseCaseRequest struct {
 	ctx context.Context
 	ApiService *CasesServiceAPIService
 	id string
-	reason *string
-}
-
-func (r ApiCasesServiceCloseCaseRequest) Reason(reason string) ApiCasesServiceCloseCaseRequest {
-	r.reason = &reason
-	return r
 }
 
 func (r ApiCasesServiceCloseCaseRequest) Execute() (*CloseCaseResponse, *http.Response, error) {
@@ -271,9 +1111,6 @@ func (r ApiCasesServiceCloseCaseRequest) Execute() (*CloseCaseResponse, *http.Re
 CasesServiceCloseCase Close a case
 
 Close a case that no longer requires action.
-
-Requires the following permissions:
-- `case:Close`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -309,9 +1146,6 @@ func (a *CasesServiceAPIService) CasesServiceCloseCaseExecute(r ApiCasesServiceC
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.reason != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "form", "")
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -380,9 +1214,6 @@ func (r ApiCasesServiceGetCaseRequest) Execute() (*GetCaseResponse, *http.Respon
 CasesServiceGetCase Get case by ID
 
 Retrieve detailed information about a single case by its unique identifier.
-
-Requires the following permissions:
-- `case:Read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -472,6 +1303,109 @@ func (a *CasesServiceAPIService) CasesServiceGetCaseExecute(r ApiCasesServiceGet
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCasesServiceGetCaseExternalReferencesRequest struct {
+	ctx context.Context
+	ApiService *CasesServiceAPIService
+	caseId string
+}
+
+func (r ApiCasesServiceGetCaseExternalReferencesRequest) Execute() (*GetCaseExternalReferencesResponse, *http.Response, error) {
+	return r.ApiService.CasesServiceGetCaseExternalReferencesExecute(r)
+}
+
+/*
+CasesServiceGetCaseExternalReferences Get external references for a case
+
+Retrieve all external references that link a case to external systems such as ServiceNow. Returns the complete list of external references associated with the specified case.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param caseId
+ @return ApiCasesServiceGetCaseExternalReferencesRequest
+*/
+func (a *CasesServiceAPIService) CasesServiceGetCaseExternalReferences(ctx context.Context, caseId string) ApiCasesServiceGetCaseExternalReferencesRequest {
+	return ApiCasesServiceGetCaseExternalReferencesRequest{
+		ApiService: a,
+		ctx: ctx,
+		caseId: caseId,
+	}
+}
+
+// Execute executes the request
+//  @return GetCaseExternalReferencesResponse
+func (a *CasesServiceAPIService) CasesServiceGetCaseExternalReferencesExecute(r ApiCasesServiceGetCaseExternalReferencesRequest) (*GetCaseExternalReferencesResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetCaseExternalReferencesResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceGetCaseExternalReferences")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/cases/cases/v1/{case_id}/external-references"
+	localVarPath = strings.Replace(localVarPath, "{"+"case_id"+"}", url.PathEscape(parameterValueToString(r.caseId, "caseId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCasesServiceGetFilterValuesRequest struct {
 	ctx context.Context
 	ApiService *CasesServiceAPIService
@@ -491,9 +1425,6 @@ func (r ApiCasesServiceGetFilterValuesRequest) Execute() (*CasesV1GetFilterValue
 CasesServiceGetFilterValues Get available filter values
 
 Retrieve available filter and aggregation values for cases.
-
-Requires the following permissions:
-- `case:Read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCasesServiceGetFilterValuesRequest
@@ -582,6 +1513,105 @@ func (a *CasesServiceAPIService) CasesServiceGetFilterValuesExecute(r ApiCasesSe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCasesServiceGetGroupingKeysRequest struct {
+	ctx context.Context
+	ApiService *CasesServiceAPIService
+}
+
+func (r ApiCasesServiceGetGroupingKeysRequest) Execute() (*GetGroupingKeysResponse, *http.Response, error) {
+	return r.ApiService.CasesServiceGetGroupingKeysExecute(r)
+}
+
+/*
+CasesServiceGetGroupingKeys Get available grouping keys
+
+Retrieve all available grouping keys that can be used for organizing and filtering Cases.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCasesServiceGetGroupingKeysRequest
+*/
+func (a *CasesServiceAPIService) CasesServiceGetGroupingKeys(ctx context.Context) ApiCasesServiceGetGroupingKeysRequest {
+	return ApiCasesServiceGetGroupingKeysRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return GetGroupingKeysResponse
+func (a *CasesServiceAPIService) CasesServiceGetGroupingKeysExecute(r ApiCasesServiceGetGroupingKeysRequest) (*GetGroupingKeysResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetGroupingKeysResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceGetGroupingKeys")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/cases/cases/v1:groupingKeys"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCasesServiceListCasesRequest struct {
 	ctx context.Context
 	ApiService *CasesServiceAPIService
@@ -601,9 +1631,6 @@ func (r ApiCasesServiceListCasesRequest) Execute() (*ListCasesResponse, *http.Re
 CasesServiceListCases List cases with filters
 
 List cases using filters, pagination and custom ordering.
-
-Requires the following permissions:
-- `case:Read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCasesServiceListCasesRequest
@@ -712,9 +1739,6 @@ func (r ApiCasesServiceResolveCaseRequest) Execute() (*ResolveCaseResponse, *htt
 CasesServiceResolveCase Resolve a case
 
 Mark a case as resolved.
-
-Requires the following permissions:
-- `case:Close`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -828,9 +1852,6 @@ CasesServiceSetPriorityOverride Set priority override
 
 Override a case's computed priority with a specific value.
 
-Requires the following permissions:
-- `case:Update`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiCasesServiceSetPriorityOverrideRequest
@@ -936,9 +1957,6 @@ CasesServiceUnassignCase Remove case assignment
 
 Remove the current assignee from a case.
 
-Requires the following permissions:
-- `case:Assign`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiCasesServiceUnassignCaseRequest
@@ -1027,112 +2045,6 @@ func (a *CasesServiceAPIService) CasesServiceUnassignCaseExecute(r ApiCasesServi
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCasesServiceUnsetPriorityOverrideRequest struct {
-	ctx context.Context
-	ApiService *CasesServiceAPIService
-	id string
-}
-
-func (r ApiCasesServiceUnsetPriorityOverrideRequest) Execute() (*UnsetPriorityOverrideResponse, *http.Response, error) {
-	return r.ApiService.CasesServiceUnsetPriorityOverrideExecute(r)
-}
-
-/*
-CasesServiceUnsetPriorityOverride Remove priority override
-
-Remove a previously set priority override for a case.
-
-Requires the following permissions:
-- `case:Update`
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiCasesServiceUnsetPriorityOverrideRequest
-*/
-func (a *CasesServiceAPIService) CasesServiceUnsetPriorityOverride(ctx context.Context, id string) ApiCasesServiceUnsetPriorityOverrideRequest {
-	return ApiCasesServiceUnsetPriorityOverrideRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return UnsetPriorityOverrideResponse
-func (a *CasesServiceAPIService) CasesServiceUnsetPriorityOverrideExecute(r ApiCasesServiceUnsetPriorityOverrideRequest) (*UnsetPriorityOverrideResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UnsetPriorityOverrideResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceUnsetPriorityOverride")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/cases/cases/v1/{id}:unsetPriorityOverride"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiCasesServiceUpdateCaseRequest struct {
 	ctx context.Context
 	ApiService *CasesServiceAPIService
@@ -1153,9 +2065,6 @@ func (r ApiCasesServiceUpdateCaseRequest) Execute() (*UpdateCaseResponse, *http.
 CasesServiceUpdateCase Update case fields
 
 Apply a partial update (patch) to a case.
-
-Requires the following permissions:
-- `case:Update`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id

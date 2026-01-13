@@ -17,7 +17,7 @@ import (
 // checks if the ListActionsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListActionsResponse{}
 
-// ListActionsResponse struct for ListActionsResponse
+// ListActionsResponse This data structure represents the response containing a list of Actions.
 type ListActionsResponse struct {
 	Actions []V2Action `json:"actions,omitempty"`
 }

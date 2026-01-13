@@ -9,6 +9,7 @@ configuration.go
 git_push.sh
 model_activity_schedule.go
 model_alert_def.go
+model_alert_def_data_source.go
 model_alert_def_incident_settings.go
 model_alert_def_notification_group.go
 model_alert_def_order_by_direction.go
@@ -131,8 +132,12 @@ model_metric_time_window.go
 model_metric_time_window_metric_time_window_dynamic_duration.go
 model_metric_time_window_metric_time_window_specific_value.go
 model_metric_time_window_value.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_next_op.go
+model_no_data_policy.go
+model_no_data_policy_state.go
 model_notification_destination.go
 model_notification_router.go
 model_notification_routing.go

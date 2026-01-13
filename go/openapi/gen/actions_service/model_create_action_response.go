@@ -17,7 +17,7 @@ import (
 // checks if the CreateActionResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateActionResponse{}
 
-// CreateActionResponse struct for CreateActionResponse
+// CreateActionResponse This data structure represents the response to create an Action.
 type CreateActionResponse struct {
 	Action *V2Action `json:"action,omitempty"`
 }

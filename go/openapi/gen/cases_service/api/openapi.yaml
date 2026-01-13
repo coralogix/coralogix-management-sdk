@@ -7,11 +7,7 @@ servers:
 paths:
   /cases/cases/v1:
     post:
-      description: |-
-        List cases using filters, pagination and custom ordering.
-
-        Requires the following permissions:
-        - `case:Read`
+      description: "List cases using filters, pagination and custom ordering."
       externalDocs:
         url: ""
       operationId: CasesService_ListCases
@@ -44,13 +40,56 @@ paths:
       - Cases service
       x-coralogixPermissions:
       - case:Read
+  /cases/cases/v1/{case_id}/external-references:
+    get:
+      description: Retrieve all external references that link a case to external systems
+        such as ServiceNow. Returns the complete list of external references associated
+        with the specified case.
+      externalDocs:
+        url: ""
+      operationId: CasesService_GetCaseExternalReferences
+      parameters:
+      - explode: false
+        in: path
+        name: case_id
+        required: true
+        schema:
+          description: The unique identifier of the case in UUID format
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetCaseExternalReferencesResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "404":
+          content:
+            application/json: {}
+          description: Case not found
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get external references for a case
+      tags:
+      - Cases service
+      x-coralogixPermissions:
+      - case:Read
   /cases/cases/v1/{id}:
     get:
-      description: |-
-        Retrieve detailed information about a single case by its unique identifier.
-
-        Requires the following permissions:
-        - `case:Read`
+      description: Retrieve detailed information about a single case by its unique
+        identifier.
       externalDocs:
         url: ""
       operationId: CasesService_GetCase
@@ -89,11 +128,7 @@ paths:
       x-coralogixPermissions:
       - case:Read
     patch:
-      description: |-
-        Apply a partial update (patch) to a case.
-
-        Requires the following permissions:
-        - `case:Update`
+      description: Apply a partial update (patch) to a case.
       externalDocs:
         url: ""
       operationId: CasesService_UpdateCase
@@ -138,11 +173,7 @@ paths:
       - case:Update
   /cases/cases/v1/{id}:acknowledge:
     post:
-      description: |-
-        Mark the case as acknowledged by a user.
-
-        Requires the following permissions:
-        - `case:Acknowledge`
+      description: Mark the case as acknowledged by a user.
       externalDocs:
         url: ""
       operationId: CasesService_AcknowledgeCase
@@ -187,11 +218,7 @@ paths:
       - case:Acknowledge
   /cases/cases/v1/{id}:assign:
     post:
-      description: |-
-        Assign a case to a specific user.
-
-        Requires the following permissions:
-        - `case:Assign`
+      description: Assign a case to a specific user.
       externalDocs:
         url: ""
       operationId: CasesService_AssignCase
@@ -234,13 +261,49 @@ paths:
       - Cases service
       x-coralogixPermissions:
       - case:Assign
+  /cases/cases/v1/{id}:clearPriorityOverride:
+    post:
+      description: Remove a previously set priority override for a case.
+      externalDocs:
+        url: ""
+      operationId: CasesService_ClearPriorityOverride
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          description: ID of the case
+          example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClearPriorityOverrideResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Remove priority override
+      tags:
+      - Cases service
+      x-coralogixPermissions:
+      - case:Update
   /cases/cases/v1/{id}:close:
     post:
-      description: |-
-        Close a case that no longer requires action.
-
-        Requires the following permissions:
-        - `case:Close`
+      description: Close a case that no longer requires action.
       externalDocs:
         url: ""
       operationId: CasesService_CloseCase
@@ -254,15 +317,6 @@ paths:
           example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
           type: string
         style: simple
-      - explode: true
-        in: query
-        name: reason
-        required: false
-        schema:
-          description: Reason to resolve
-          example: This case is not applicable.
-          type: string
-        style: form
       responses:
         "200":
           content:
@@ -289,11 +343,7 @@ paths:
       - case:Close
   /cases/cases/v1/{id}:resolve:
     post:
-      description: |-
-        Mark a case as resolved.
-
-        Requires the following permissions:
-        - `case:Close`
+      description: Mark a case as resolved.
       externalDocs:
         url: ""
       operationId: CasesService_ResolveCase
@@ -342,11 +392,7 @@ paths:
       - case:Close
   /cases/cases/v1/{id}:setPriorityOverride:
     post:
-      description: |-
-        Override a case's computed priority with a specific value.
-
-        Requires the following permissions:
-        - `case:Update`
+      description: Override a case's computed priority with a specific value.
       externalDocs:
         url: ""
       operationId: CasesService_SetPriorityOverride
@@ -391,11 +437,7 @@ paths:
       - case:Update
   /cases/cases/v1/{id}:unassign:
     post:
-      description: |-
-        Remove the current assignee from a case.
-
-        Requires the following permissions:
-        - `case:Assign`
+      description: Remove the current assignee from a case.
       externalDocs:
         url: ""
       operationId: CasesService_UnassignCase
@@ -433,32 +475,23 @@ paths:
       - Cases service
       x-coralogixPermissions:
       - case:Assign
-  /cases/cases/v1/{id}:unsetPriorityOverride:
+  /cases/cases/v1:bulkAcknowledge:
     post:
-      description: |-
-        Remove a previously set priority override for a case.
-
-        Requires the following permissions:
-        - `case:Update`
+      description: Mark multiple cases as acknowledged in a single operation.
       externalDocs:
         url: ""
-      operationId: CasesService_UnsetPriorityOverride
-      parameters:
-      - explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          description: ID of the case
-          example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
-          type: string
-        style: simple
+      operationId: CasesService_BulkAcknowledge
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Bulk_acknowledge_request"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UnsetPriorityOverrideResponse"
+                $ref: "#/components/schemas/BulkAcknowledgeResponse"
           description: ""
         "400":
           content:
@@ -472,18 +505,225 @@ paths:
           content:
             application/json: {}
           description: Internal server error
-      summary: Remove priority override
+      summary: Acknowledge multiple cases
+      tags:
+      - Cases service
+      x-coralogixPermissions:
+      - case:Acknowledge
+  /cases/cases/v1:bulkAssign:
+    post:
+      description: Assign multiple cases to a specific user in a single operation.
+      externalDocs:
+        url: ""
+      operationId: CasesService_BulkAssign
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Bulk_assign_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BulkAssignResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Assign multiple cases to a user
+      tags:
+      - Cases service
+      x-coralogixPermissions:
+      - case:Assign
+  /cases/cases/v1:bulkClearPriorityOverride:
+    post:
+      description: Remove previously set priority overrides from multiple cases in
+        a single operation.
+      externalDocs:
+        url: ""
+      operationId: CasesService_BulkClearPriorityOverride
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Bulk_clear_priority_override_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BulkClearPriorityOverrideResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Remove priority override from multiple cases
       tags:
       - Cases service
       x-coralogixPermissions:
       - case:Update
+  /cases/cases/v1:bulkClose:
+    post:
+      description: Close multiple cases in a single operation.
+      externalDocs:
+        url: ""
+      operationId: CasesService_BulkClose
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Bulk_close_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BulkCloseResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Close multiple cases
+      tags:
+      - Cases service
+      x-coralogixPermissions:
+      - case:Close
+  /cases/cases/v1:bulkResolve:
+    post:
+      description: Resolve multiple cases in a single operation.
+      externalDocs:
+        url: ""
+      operationId: CasesService_BulkResolve
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Bulk_resolve_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BulkResolveResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Resolve multiple cases
+      tags:
+      - Cases service
+      x-coralogixPermissions:
+      - case:Close
+  /cases/cases/v1:bulkSetPriorityOverride:
+    post:
+      description: Override the priority with for multiple cases in a single operation.
+      externalDocs:
+        url: ""
+      operationId: CasesService_BulkSetPriorityOverride
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Bulk_override_priority_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BulkSetPriorityOverrideResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Override priority for multiple cases
+      tags:
+      - Cases service
+      x-coralogixPermissions:
+      - case:Update
+  /cases/cases/v1:bulkUnassign:
+    post:
+      description: Remove the current assignee from multiple cases in a single operation.
+      externalDocs:
+        url: ""
+      operationId: CasesService_BulkUnassign
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Bulk_unassign_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BulkUnassignResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Remove assignment from multiple cases
+      tags:
+      - Cases service
+      x-coralogixPermissions:
+      - case:Assign
   /cases/cases/v1:get-filter-values:
     post:
-      description: |-
-        Retrieve available filter and aggregation values for cases.
-
-        Requires the following permissions:
-        - `case:Read`
+      description: Retrieve available filter and aggregation values for cases.
       externalDocs:
         url: ""
       operationId: CasesService_GetFilterValues
@@ -516,6 +756,37 @@ paths:
       - Cases service
       x-coralogixPermissions:
       - case:Read
+  /cases/cases/v1:groupingKeys:
+    get:
+      description: Retrieve all available grouping keys that can be used for organizing
+        and filtering Cases.
+      externalDocs:
+        url: ""
+      operationId: CasesService_GetGroupingKeys
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetGroupingKeysResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get available grouping keys
+      tags:
+      - Cases service
+      x-coralogixPermissions:
+      - case:Read
 components:
   schemas:
     AcknowledgeCaseResponse:
@@ -534,6 +805,7 @@ components:
             key: service
           - value: payments
             key: service
+          duration: 0
           createTime: 2025-09-22T10:30:00Z
           groupings:
           - value: payments
@@ -541,38 +813,44 @@ components:
           - value: payments
             key: service
           resolutionDetails:
-            resolvedBy: CASE_RESOLVER_UNSPECIFIED
+            resolvedBy:
+              system: "{}"
             resolveTime: 2025-09-22T11:15:00Z
           readableId: CASE-123
           assignee:
             userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
           id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
-          state: CASE_STATE_UNSPECIFIED
           alertIndicators:
-          - groupings:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
             - value: payments
               key: service
             - value: payments
               key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
             groupingType: GROUPING_TYPE_UNSPECIFIED
             alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
             resolveTime: 2025-09-22T11:05:00Z
             triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
-          - groupings:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
             - value: payments
               key: service
             - value: payments
               key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
             groupingType: GROUPING_TYPE_UNSPECIFIED
             alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
             resolveTime: 2025-09-22T11:05:00Z
             triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
           category: CASE_CATEGORY_UNSPECIFIED
           status: CASE_STATUS_UNSPECIFIED
       externalDocs:
@@ -584,6 +862,32 @@ components:
       - case
       title: Acknowledge case response
       type: object
+    AlertFilters:
+      description: Filters applied to cases based on alert properties.
+      externalDocs:
+        url: ""
+      properties:
+        alertIds:
+          example:
+          - f56645c5-9cd4-4b9f-961f-4f852d8835a0
+          - a0a08c31-0ae4-4600-928e-cb6b7da50a99
+          items:
+            description: List of alert IDs to filter on. Cases containing any of these
+              alert IDs will be returned (OR logic).
+            type: string
+          type: array
+        alertVersions:
+          example:
+          - 550e8400-e29b-41d4-a716-446655440000
+          - 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+          items:
+            description: List of alert version IDs to filter on. Cases containing
+              indicators with any of these alert version IDs will be returned (OR
+              logic).
+            type: string
+          type: array
+      title: Alert filters
+      type: object
     AlertGroupingType:
       enum:
       - GROUPING_TYPE_UNSPECIFIED
@@ -592,21 +896,24 @@ components:
       - GROUPING_TYPE_NONE
       type: string
     AlertIndicator:
-      description: Metadata describing a triggered alert instance and its lifecycle
-        relative to a case.
+      description: Data describing a triggered alert instance and its lifecycle relative
+        to a case.
       example:
+        latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
         groupings:
         - value: payments
           key: service
         - value: payments
           key: service
+        alertVersions:
+        - 1eae3615-79e7-4b54-88e0-6a77def653bf
+        - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
         groupingType: GROUPING_TYPE_UNSPECIFIED
         alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-        state: ALERT_INDICATOR_STATE_UNSPECIFIED
-        priority: ALERT_PRIORITY_UNSPECIFIED
+        state: INDICATOR_STATE_UNSPECIFIED
+        priority: INDICATOR_PRIORITY_UNSPECIFIED
         resolveTime: 2025-09-22T11:05:00Z
         triggerTime: 2025-09-22T10:30:00Z
-        alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
       externalDocs:
         url: ""
       properties:
@@ -614,25 +921,34 @@ components:
           description: The unique alert ID (stable across versions).
           example: f56645c5-9cd4-4b9f-961f-4f852d8835a0
           type: string
-        alertVersionId:
-          description: Specific version ID of the alert definition that triggered.
-          example: 1eae3615-79e7-4b54-88e0-6a77def653bf
-          type: string
+        alertVersions:
+          example:
+          - 1eae3615-79e7-4b54-88e0-6a77def653bf
+          - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+          items:
+            description: Array of all alert version IDs for this indicator in the
+              case. Includes the latest_alert_version.
+            type: string
+          type: array
         groupingType:
           $ref: "#/components/schemas/AlertGroupingType"
         groupings:
           items:
             $ref: "#/components/schemas/v1.KeyValue"
           type: array
+        latestAlertVersion:
+          description: Last seen version ID of the triggered alert definition.
+          example: 1eae3615-79e7-4b54-88e0-6a77def653bf
+          type: string
         priority:
-          $ref: "#/components/schemas/AlertPriority"
+          $ref: "#/components/schemas/IndicatorPriority"
         resolveTime:
           description: "When present, timestamp when the alert resolved."
           example: 2025-09-22T11:05:00Z
           format: date-time
           type: string
         state:
-          $ref: "#/components/schemas/AlertIndicatorState"
+          $ref: "#/components/schemas/IndicatorState"
         triggerTime:
           description: Timestamp when the alert triggered.
           example: 2025-09-22T10:30:00Z
@@ -640,29 +956,14 @@ components:
           type: string
       required:
       - alertId
-      - alertVersionId
       - groupingType
       - groupings
+      - latestAlertVersion
       - priority
       - state
       - triggerTime
       title: Alert indicator
       type: object
-    AlertIndicatorState:
-      enum:
-      - ALERT_INDICATOR_STATE_UNSPECIFIED
-      - ALERT_INDICATOR_STATE_TRIGGERED
-      - ALERT_INDICATOR_STATE_RESOLVED
-      type: string
-    AlertPriority:
-      enum:
-      - ALERT_PRIORITY_UNSPECIFIED
-      - ALERT_PRIORITY_P1
-      - ALERT_PRIORITY_P2
-      - ALERT_PRIORITY_P3
-      - ALERT_PRIORITY_P4
-      - ALERT_PRIORITY_P5
-      type: string
     AssignCaseResponse:
       example:
         case:
@@ -679,6 +980,7 @@ components:
             key: service
           - value: payments
             key: service
+          duration: 0
           createTime: 2025-09-22T10:30:00Z
           groupings:
           - value: payments
@@ -686,38 +988,44 @@ components:
           - value: payments
             key: service
           resolutionDetails:
-            resolvedBy: CASE_RESOLVER_UNSPECIFIED
+            resolvedBy:
+              system: "{}"
             resolveTime: 2025-09-22T11:15:00Z
           readableId: CASE-123
           assignee:
             userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
           id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
-          state: CASE_STATE_UNSPECIFIED
           alertIndicators:
-          - groupings:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
             - value: payments
               key: service
             - value: payments
               key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
             groupingType: GROUPING_TYPE_UNSPECIFIED
             alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
             resolveTime: 2025-09-22T11:05:00Z
             triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
-          - groupings:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
             - value: payments
               key: service
             - value: payments
               key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
             groupingType: GROUPING_TYPE_UNSPECIFIED
             alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
             resolveTime: 2025-09-22T11:05:00Z
             triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
           category: CASE_CATEGORY_UNSPECIFIED
           status: CASE_STATUS_UNSPECIFIED
       externalDocs:
@@ -773,6 +1081,965 @@ components:
         unassigned:
           type: object
       type: object
+    BulkAcknowledgeResponse:
+      description: Response containing the updated cases
+      example:
+        cases:
+        - priorityDetails:
+            system: null
+            override: null
+          acknowledgeTime: 2000-01-23T04:56:07.000+00:00
+          description: Investigating DB connection errors in prod
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          priority: CASE_PRIORITY_UNSPECIFIED
+          title: Database outage investigation
+          labels:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          duration: 0
+          createTime: 2025-09-22T10:30:00Z
+          groupings:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          resolutionDetails:
+            resolvedBy:
+              system: "{}"
+            resolveTime: 2025-09-22T11:15:00Z
+          readableId: CASE-123
+          assignee:
+            userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          alertIndicators:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          category: CASE_CATEGORY_UNSPECIFIED
+          status: CASE_STATUS_UNSPECIFIED
+        - priorityDetails:
+            system: null
+            override: null
+          acknowledgeTime: 2000-01-23T04:56:07.000+00:00
+          description: Investigating DB connection errors in prod
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          priority: CASE_PRIORITY_UNSPECIFIED
+          title: Database outage investigation
+          labels:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          duration: 0
+          createTime: 2025-09-22T10:30:00Z
+          groupings:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          resolutionDetails:
+            resolvedBy:
+              system: "{}"
+            resolveTime: 2025-09-22T11:15:00Z
+          readableId: CASE-123
+          assignee:
+            userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          alertIndicators:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          category: CASE_CATEGORY_UNSPECIFIED
+          status: CASE_STATUS_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        cases:
+          items:
+            $ref: "#/components/schemas/Case"
+          type: array
+      required:
+      - cases
+      title: Bulk acknowledge response
+      type: object
+    BulkAssignResponse:
+      description: Response containing the updated cases
+      example:
+        cases:
+        - priorityDetails:
+            system: null
+            override: null
+          acknowledgeTime: 2000-01-23T04:56:07.000+00:00
+          description: Investigating DB connection errors in prod
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          priority: CASE_PRIORITY_UNSPECIFIED
+          title: Database outage investigation
+          labels:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          duration: 0
+          createTime: 2025-09-22T10:30:00Z
+          groupings:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          resolutionDetails:
+            resolvedBy:
+              system: "{}"
+            resolveTime: 2025-09-22T11:15:00Z
+          readableId: CASE-123
+          assignee:
+            userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          alertIndicators:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          category: CASE_CATEGORY_UNSPECIFIED
+          status: CASE_STATUS_UNSPECIFIED
+        - priorityDetails:
+            system: null
+            override: null
+          acknowledgeTime: 2000-01-23T04:56:07.000+00:00
+          description: Investigating DB connection errors in prod
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          priority: CASE_PRIORITY_UNSPECIFIED
+          title: Database outage investigation
+          labels:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          duration: 0
+          createTime: 2025-09-22T10:30:00Z
+          groupings:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          resolutionDetails:
+            resolvedBy:
+              system: "{}"
+            resolveTime: 2025-09-22T11:15:00Z
+          readableId: CASE-123
+          assignee:
+            userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          alertIndicators:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          category: CASE_CATEGORY_UNSPECIFIED
+          status: CASE_STATUS_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        cases:
+          items:
+            $ref: "#/components/schemas/Case"
+          type: array
+      required:
+      - cases
+      title: Bulk assign response
+      type: object
+    BulkClearPriorityOverrideResponse:
+      description: Response containing the updated cases
+      example:
+        cases:
+        - priorityDetails:
+            system: null
+            override: null
+          acknowledgeTime: 2000-01-23T04:56:07.000+00:00
+          description: Investigating DB connection errors in prod
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          priority: CASE_PRIORITY_UNSPECIFIED
+          title: Database outage investigation
+          labels:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          duration: 0
+          createTime: 2025-09-22T10:30:00Z
+          groupings:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          resolutionDetails:
+            resolvedBy:
+              system: "{}"
+            resolveTime: 2025-09-22T11:15:00Z
+          readableId: CASE-123
+          assignee:
+            userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          alertIndicators:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          category: CASE_CATEGORY_UNSPECIFIED
+          status: CASE_STATUS_UNSPECIFIED
+        - priorityDetails:
+            system: null
+            override: null
+          acknowledgeTime: 2000-01-23T04:56:07.000+00:00
+          description: Investigating DB connection errors in prod
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          priority: CASE_PRIORITY_UNSPECIFIED
+          title: Database outage investigation
+          labels:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          duration: 0
+          createTime: 2025-09-22T10:30:00Z
+          groupings:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          resolutionDetails:
+            resolvedBy:
+              system: "{}"
+            resolveTime: 2025-09-22T11:15:00Z
+          readableId: CASE-123
+          assignee:
+            userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          alertIndicators:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          category: CASE_CATEGORY_UNSPECIFIED
+          status: CASE_STATUS_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        cases:
+          items:
+            $ref: "#/components/schemas/Case"
+          type: array
+      required:
+      - cases
+      title: Bulk clear priority override response
+      type: object
+    BulkCloseResponse:
+      description: Response containing the updated cases
+      example:
+        cases:
+        - priorityDetails:
+            system: null
+            override: null
+          acknowledgeTime: 2000-01-23T04:56:07.000+00:00
+          description: Investigating DB connection errors in prod
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          priority: CASE_PRIORITY_UNSPECIFIED
+          title: Database outage investigation
+          labels:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          duration: 0
+          createTime: 2025-09-22T10:30:00Z
+          groupings:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          resolutionDetails:
+            resolvedBy:
+              system: "{}"
+            resolveTime: 2025-09-22T11:15:00Z
+          readableId: CASE-123
+          assignee:
+            userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          alertIndicators:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          category: CASE_CATEGORY_UNSPECIFIED
+          status: CASE_STATUS_UNSPECIFIED
+        - priorityDetails:
+            system: null
+            override: null
+          acknowledgeTime: 2000-01-23T04:56:07.000+00:00
+          description: Investigating DB connection errors in prod
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          priority: CASE_PRIORITY_UNSPECIFIED
+          title: Database outage investigation
+          labels:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          duration: 0
+          createTime: 2025-09-22T10:30:00Z
+          groupings:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          resolutionDetails:
+            resolvedBy:
+              system: "{}"
+            resolveTime: 2025-09-22T11:15:00Z
+          readableId: CASE-123
+          assignee:
+            userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          alertIndicators:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          category: CASE_CATEGORY_UNSPECIFIED
+          status: CASE_STATUS_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        cases:
+          items:
+            $ref: "#/components/schemas/Case"
+          type: array
+      required:
+      - cases
+      title: Bulk close response
+      type: object
+    BulkResolveResponse:
+      description: Response containing the updated cases
+      example:
+        cases:
+        - priorityDetails:
+            system: null
+            override: null
+          acknowledgeTime: 2000-01-23T04:56:07.000+00:00
+          description: Investigating DB connection errors in prod
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          priority: CASE_PRIORITY_UNSPECIFIED
+          title: Database outage investigation
+          labels:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          duration: 0
+          createTime: 2025-09-22T10:30:00Z
+          groupings:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          resolutionDetails:
+            resolvedBy:
+              system: "{}"
+            resolveTime: 2025-09-22T11:15:00Z
+          readableId: CASE-123
+          assignee:
+            userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          alertIndicators:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          category: CASE_CATEGORY_UNSPECIFIED
+          status: CASE_STATUS_UNSPECIFIED
+        - priorityDetails:
+            system: null
+            override: null
+          acknowledgeTime: 2000-01-23T04:56:07.000+00:00
+          description: Investigating DB connection errors in prod
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          priority: CASE_PRIORITY_UNSPECIFIED
+          title: Database outage investigation
+          labels:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          duration: 0
+          createTime: 2025-09-22T10:30:00Z
+          groupings:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          resolutionDetails:
+            resolvedBy:
+              system: "{}"
+            resolveTime: 2025-09-22T11:15:00Z
+          readableId: CASE-123
+          assignee:
+            userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          alertIndicators:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          category: CASE_CATEGORY_UNSPECIFIED
+          status: CASE_STATUS_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        cases:
+          items:
+            $ref: "#/components/schemas/Case"
+          type: array
+      required:
+      - cases
+      title: Bulk resolve response
+      type: object
+    BulkSetPriorityOverrideResponse:
+      description: Response containing the updated cases
+      example:
+        cases:
+        - priorityDetails:
+            system: null
+            override: null
+          acknowledgeTime: 2000-01-23T04:56:07.000+00:00
+          description: Investigating DB connection errors in prod
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          priority: CASE_PRIORITY_UNSPECIFIED
+          title: Database outage investigation
+          labels:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          duration: 0
+          createTime: 2025-09-22T10:30:00Z
+          groupings:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          resolutionDetails:
+            resolvedBy:
+              system: "{}"
+            resolveTime: 2025-09-22T11:15:00Z
+          readableId: CASE-123
+          assignee:
+            userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          alertIndicators:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          category: CASE_CATEGORY_UNSPECIFIED
+          status: CASE_STATUS_UNSPECIFIED
+        - priorityDetails:
+            system: null
+            override: null
+          acknowledgeTime: 2000-01-23T04:56:07.000+00:00
+          description: Investigating DB connection errors in prod
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          priority: CASE_PRIORITY_UNSPECIFIED
+          title: Database outage investigation
+          labels:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          duration: 0
+          createTime: 2025-09-22T10:30:00Z
+          groupings:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          resolutionDetails:
+            resolvedBy:
+              system: "{}"
+            resolveTime: 2025-09-22T11:15:00Z
+          readableId: CASE-123
+          assignee:
+            userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          alertIndicators:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          category: CASE_CATEGORY_UNSPECIFIED
+          status: CASE_STATUS_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        cases:
+          items:
+            $ref: "#/components/schemas/Case"
+          type: array
+      required:
+      - cases
+      title: Bulk override priority response
+      type: object
+    BulkUnassignResponse:
+      description: Response containing the updated cases
+      example:
+        cases:
+        - priorityDetails:
+            system: null
+            override: null
+          acknowledgeTime: 2000-01-23T04:56:07.000+00:00
+          description: Investigating DB connection errors in prod
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          priority: CASE_PRIORITY_UNSPECIFIED
+          title: Database outage investigation
+          labels:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          duration: 0
+          createTime: 2025-09-22T10:30:00Z
+          groupings:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          resolutionDetails:
+            resolvedBy:
+              system: "{}"
+            resolveTime: 2025-09-22T11:15:00Z
+          readableId: CASE-123
+          assignee:
+            userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          alertIndicators:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          category: CASE_CATEGORY_UNSPECIFIED
+          status: CASE_STATUS_UNSPECIFIED
+        - priorityDetails:
+            system: null
+            override: null
+          acknowledgeTime: 2000-01-23T04:56:07.000+00:00
+          description: Investigating DB connection errors in prod
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          priority: CASE_PRIORITY_UNSPECIFIED
+          title: Database outage investigation
+          labels:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          duration: 0
+          createTime: 2025-09-22T10:30:00Z
+          groupings:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          resolutionDetails:
+            resolvedBy:
+              system: "{}"
+            resolveTime: 2025-09-22T11:15:00Z
+          readableId: CASE-123
+          assignee:
+            userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          alertIndicators:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          category: CASE_CATEGORY_UNSPECIFIED
+          status: CASE_STATUS_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        cases:
+          items:
+            $ref: "#/components/schemas/Case"
+          type: array
+      required:
+      - cases
+      title: Bulk unassign response
+      type: object
     Case:
       description: Represents a case within the Cases service.
       example:
@@ -789,6 +2056,7 @@ components:
           key: service
         - value: payments
           key: service
+        duration: 0
         createTime: 2025-09-22T10:30:00Z
         groupings:
         - value: payments
@@ -796,38 +2064,44 @@ components:
         - value: payments
           key: service
         resolutionDetails:
-          resolvedBy: CASE_RESOLVER_UNSPECIFIED
+          resolvedBy:
+            system: "{}"
           resolveTime: 2025-09-22T11:15:00Z
         readableId: CASE-123
         assignee:
           userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
         id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
-        state: CASE_STATE_UNSPECIFIED
         alertIndicators:
-        - groupings:
+        - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+          groupings:
           - value: payments
             key: service
           - value: payments
             key: service
+          alertVersions:
+          - 1eae3615-79e7-4b54-88e0-6a77def653bf
+          - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
           groupingType: GROUPING_TYPE_UNSPECIFIED
           alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-          state: ALERT_INDICATOR_STATE_UNSPECIFIED
-          priority: ALERT_PRIORITY_UNSPECIFIED
+          state: INDICATOR_STATE_UNSPECIFIED
+          priority: INDICATOR_PRIORITY_UNSPECIFIED
           resolveTime: 2025-09-22T11:05:00Z
           triggerTime: 2025-09-22T10:30:00Z
-          alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
-        - groupings:
+        - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+          groupings:
           - value: payments
             key: service
           - value: payments
             key: service
+          alertVersions:
+          - 1eae3615-79e7-4b54-88e0-6a77def653bf
+          - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
           groupingType: GROUPING_TYPE_UNSPECIFIED
           alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-          state: ALERT_INDICATOR_STATE_UNSPECIFIED
-          priority: ALERT_PRIORITY_UNSPECIFIED
+          state: INDICATOR_STATE_UNSPECIFIED
+          priority: INDICATOR_PRIORITY_UNSPECIFIED
           resolveTime: 2025-09-22T11:05:00Z
           triggerTime: 2025-09-22T10:30:00Z
-          alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
         category: CASE_CATEGORY_UNSPECIFIED
         status: CASE_STATUS_UNSPECIFIED
       externalDocs:
@@ -854,6 +2128,10 @@ components:
           description: Detailed description of the case
           example: Investigating DB connection errors in prod
           type: string
+        duration:
+          description: Measures how long the Case is/was opened in milliseconds
+          format: int64
+          type: integer
         groupings:
           items:
             $ref: "#/components/schemas/v1.KeyValue"
@@ -877,8 +2155,6 @@ components:
           type: string
         resolutionDetails:
           $ref: "#/components/schemas/ResolutionDetails"
-        state:
-          $ref: "#/components/schemas/CaseState"
         status:
           $ref: "#/components/schemas/CaseStatus"
         title:
@@ -894,7 +2170,6 @@ components:
       - createTime
       - id
       - priority
-      - state
       - status
       - title
       title: Case
@@ -905,16 +2180,41 @@ components:
       - CASE_CATEGORY_SECURITY
       - CASE_CATEGORY_AVAILABILITY
       type: string
+    CaseExternalReference:
+      description: External reference linking a case to an external system
+      example:
+        vendor: EXTERNAL_REFERENCE_VENDOR_UNSPECIFIED
+        id: INC0012345
+        url: https://instance.service-now.com/nav_to.do?uri=incident.do?sys_id=abc123
+      externalDocs:
+        url: ""
+      properties:
+        id:
+          description: The unique identifier of the case in the external system
+          example: INC0012345
+          type: string
+        url:
+          description: The direct URL to view the case in the external system
+          example: https://instance.service-now.com/nav_to.do?uri=incident.do?sys_id=abc123
+          type: string
+        vendor:
+          $ref: "#/components/schemas/ExternalReferenceVendor"
+      title: Case external reference
+      type: object
     CaseFilters:
-      description: "Filters applied when querying cases, including states, priorities,\
+      description: "Filters applied when querying cases, including statuses, priorities,\
         \ categories, groupings, and labels."
       externalDocs:
         url: ""
       properties:
+        alertFilters:
+          $ref: "#/components/schemas/AlertFilters"
         assignees:
           items:
             $ref: "#/components/schemas/AssigneeOption"
           type: array
+        caseLabelsFilter:
+          $ref: "#/components/schemas/CaseLabelsFilter"
         categories:
           example:
           - CASE_CATEGORY_SECURITY
@@ -939,13 +2239,6 @@ components:
           items:
             $ref: "#/components/schemas/CasePriority"
           type: array
-        states:
-          example:
-          - CASE_STATE_ACTIVE
-          - CASE_STATE_RESOLVED
-          items:
-            $ref: "#/components/schemas/CaseState"
-          type: array
         statuses:
           example:
           - ACKNOWLEDGED
@@ -957,6 +2250,17 @@ components:
           example: Vulnerability
           type: string
       title: Case filters
+      type: object
+    CaseLabelsFilter:
+      description: Filters applied against Case's labels when queries/filters counted
+      externalDocs:
+        url: ""
+      properties:
+        flatLabels:
+          items:
+            $ref: "#/components/schemas/v1.KeyValue"
+          type: array
+      title: Case Labels Filter
       type: object
     CaseOrderBy:
       description: "Defines how cases should be sorted in the response. By default,\
@@ -982,9 +2286,9 @@ components:
       - CASE_ORDER_BY_FIELD_UNSPECIFIED
       - CASE_ORDER_BY_FIELD_PRIORITY
       - CASE_ORDER_BY_FIELD_STATUS
-      - CASE_ORDER_BY_FIELD_STATE
       - CASE_ORDER_BY_FIELD_UPDATED_AT
       - CASE_ORDER_BY_FIELD_CATEGORY
+      - CASE_ORDER_BY_FIELD_DURATION
       type: string
     CasePriority:
       enum:
@@ -996,23 +2300,49 @@ components:
       - CASE_PRIORITY_P5
       type: string
     CaseResolver:
-      enum:
-      - CASE_RESOLVER_UNSPECIFIED
-      - CASE_RESOLVER_SYSTEM
-      - CASE_RESOLVER_USER
-      type: string
-    CaseState:
-      enum:
-      - CASE_STATE_UNSPECIFIED
-      - CASE_STATE_CREATED
-      - CASE_STATE_ACTIVE
-      - CASE_STATE_RESOLVED
-      type: string
+      oneOf:
+      - $ref: "#/components/schemas/CaseResolverSystem"
+      - $ref: "#/components/schemas/CaseResolverCxUser"
+      - $ref: "#/components/schemas/CaseResolverServiceNow"
+    CaseResolverCxUser:
+      additionalProperties: false
+      description: Entity responsible for resolving the case.
+      externalDocs:
+        url: ""
+      properties:
+        cxUser:
+          type: object
+      title: Case resolver
+      type: object
+    CaseResolverServiceNow:
+      additionalProperties: false
+      description: Entity responsible for resolving the case.
+      externalDocs:
+        url: ""
+      properties:
+        serviceNow:
+          type: object
+      title: Case resolver
+      type: object
+    CaseResolverSystem:
+      additionalProperties: false
+      description: Entity responsible for resolving the case.
+      example:
+        system: "{}"
+      externalDocs:
+        url: ""
+      properties:
+        system:
+          type: object
+      title: Case resolver
+      type: object
     CaseStatus:
       enum:
       - CASE_STATUS_UNSPECIFIED
-      - CASE_STATUS_OPEN
+      - CASE_STATUS_PENDING_ACTIVATION
+      - CASE_STATUS_ACTIVE
       - CASE_STATUS_ACKNOWLEDGED
+      - CASE_STATUS_RESOLVED
       - CASE_STATUS_CLOSED
       type: string
     CategoryAggregation:
@@ -1031,6 +2361,79 @@ components:
           type: integer
       title: Category aggregation
       type: object
+    ClearPriorityOverrideResponse:
+      example:
+        case:
+          priorityDetails:
+            system: null
+            override: null
+          acknowledgeTime: 2000-01-23T04:56:07.000+00:00
+          description: Investigating DB connection errors in prod
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          priority: CASE_PRIORITY_UNSPECIFIED
+          title: Database outage investigation
+          labels:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          duration: 0
+          createTime: 2025-09-22T10:30:00Z
+          groupings:
+          - value: payments
+            key: service
+          - value: payments
+            key: service
+          resolutionDetails:
+            resolvedBy:
+              system: "{}"
+            resolveTime: 2025-09-22T11:15:00Z
+          readableId: CASE-123
+          assignee:
+            userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          alertIndicators:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
+            - value: payments
+              key: service
+            - value: payments
+              key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+            groupingType: GROUPING_TYPE_UNSPECIFIED
+            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
+            resolveTime: 2025-09-22T11:05:00Z
+            triggerTime: 2025-09-22T10:30:00Z
+          category: CASE_CATEGORY_UNSPECIFIED
+          status: CASE_STATUS_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        case:
+          $ref: "#/components/schemas/Case"
+      required:
+      - case
+      title: Clear priority override response
+      type: object
     CloseCaseResponse:
       example:
         case:
@@ -1047,6 +2450,7 @@ components:
             key: service
           - value: payments
             key: service
+          duration: 0
           createTime: 2025-09-22T10:30:00Z
           groupings:
           - value: payments
@@ -1054,38 +2458,44 @@ components:
           - value: payments
             key: service
           resolutionDetails:
-            resolvedBy: CASE_RESOLVER_UNSPECIFIED
+            resolvedBy:
+              system: "{}"
             resolveTime: 2025-09-22T11:15:00Z
           readableId: CASE-123
           assignee:
             userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
           id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
-          state: CASE_STATE_UNSPECIFIED
           alertIndicators:
-          - groupings:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
             - value: payments
               key: service
             - value: payments
               key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
             groupingType: GROUPING_TYPE_UNSPECIFIED
             alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
             resolveTime: 2025-09-22T11:05:00Z
             triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
-          - groupings:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
             - value: payments
               key: service
             - value: payments
               key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
             groupingType: GROUPING_TYPE_UNSPECIFIED
             alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
             resolveTime: 2025-09-22T11:05:00Z
             triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
           category: CASE_CATEGORY_UNSPECIFIED
           status: CASE_STATUS_UNSPECIFIED
       externalDocs:
@@ -1115,6 +2525,8 @@ components:
         stack:
           $ref: "#/components/schemas/ColorsByStack"
       type: object
+    CoralogixUser:
+      type: object
     DateRangeFilter:
       description: A filter defining a date range with 'from' and 'to' timestamps.
       externalDocs:
@@ -1135,12 +2547,30 @@ components:
       - to
       title: Date Range Filter
       type: object
+    ExternalReferenceVendor:
+      enum:
+      - EXTERNAL_REFERENCE_VENDOR_UNSPECIFIED
+      - EXTERNAL_REFERENCE_VENDOR_SERVICE_NOW
+      type: string
     FieldGroup:
       properties:
         name:
           type: string
         value:
           type: string
+      type: object
+    FilterAggregation:
+      example:
+        filter:
+          value: payments
+          key: service
+        count: 1
+      properties:
+        count:
+          format: int64
+          type: integer
+        filter:
+          $ref: "#/components/schemas/v1.KeyValue"
       type: object
     FilterGroup:
       description: A filter group containing a key and its possible values.
@@ -1234,6 +2664,25 @@ components:
       - pathAndValues
       title: Filters
       type: object
+    GetCaseExternalReferencesResponse:
+      description: Response containing the list of external references for a case
+      example:
+        externalReferences:
+        - vendor: EXTERNAL_REFERENCE_VENDOR_UNSPECIFIED
+          id: INC0012345
+          url: https://instance.service-now.com/nav_to.do?uri=incident.do?sys_id=abc123
+        - vendor: EXTERNAL_REFERENCE_VENDOR_UNSPECIFIED
+          id: INC0012345
+          url: https://instance.service-now.com/nav_to.do?uri=incident.do?sys_id=abc123
+      externalDocs:
+        url: ""
+      properties:
+        externalReferences:
+          items:
+            $ref: "#/components/schemas/CaseExternalReference"
+          type: array
+      title: Get case external references response
+      type: object
     GetCaseResponse:
       description: Response containing the requested case
       example:
@@ -1251,6 +2700,7 @@ components:
             key: service
           - value: payments
             key: service
+          duration: 0
           createTime: 2025-09-22T10:30:00Z
           groupings:
           - value: payments
@@ -1258,38 +2708,44 @@ components:
           - value: payments
             key: service
           resolutionDetails:
-            resolvedBy: CASE_RESOLVER_UNSPECIFIED
+            resolvedBy:
+              system: "{}"
             resolveTime: 2025-09-22T11:15:00Z
           readableId: CASE-123
           assignee:
             userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
           id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
-          state: CASE_STATE_UNSPECIFIED
           alertIndicators:
-          - groupings:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
             - value: payments
               key: service
             - value: payments
               key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
             groupingType: GROUPING_TYPE_UNSPECIFIED
             alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
             resolveTime: 2025-09-22T11:05:00Z
             triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
-          - groupings:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
             - value: payments
               key: service
             - value: payments
               key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
             groupingType: GROUPING_TYPE_UNSPECIFIED
             alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
             resolveTime: 2025-09-22T11:05:00Z
             triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
           category: CASE_CATEGORY_UNSPECIFIED
           status: CASE_STATUS_UNSPECIFIED
       externalDocs:
@@ -1301,6 +2757,50 @@ components:
       - case
       title: Get case response
       type: object
+    GetGroupingKeysResponse:
+      description: Response containing available grouping keys
+      example:
+        groupingKeys:
+        - service
+        - team
+        - environment
+        - severity
+        - source
+      externalDocs:
+        url: ""
+      properties:
+        groupingKeys:
+          example:
+          - service
+          - team
+          - environment
+          - severity
+          - source
+          items:
+            description: List of available grouping keys for organizing and filtering
+              cases
+            type: string
+          type: array
+      required:
+      - groupingKeys
+      title: Get grouping keys response
+      type: object
+    IndicatorPriority:
+      enum:
+      - INDICATOR_PRIORITY_UNSPECIFIED
+      - INDICATOR_PRIORITY_P1
+      - INDICATOR_PRIORITY_P2
+      - INDICATOR_PRIORITY_P3
+      - INDICATOR_PRIORITY_P4
+      - INDICATOR_PRIORITY_P5
+      type: string
+    IndicatorState:
+      enum:
+      - INDICATOR_STATE_UNSPECIFIED
+      - INDICATOR_STATE_TRIGGERED
+      - INDICATOR_STATE_RESOLVED
+      - INDICATOR_STATE_NO_DATA
+      type: string
     ListCasesResponse:
       description: Response containing a list of cases and pagination information
       example:
@@ -1318,6 +2818,7 @@ components:
             key: service
           - value: payments
             key: service
+          duration: 0
           createTime: 2025-09-22T10:30:00Z
           groupings:
           - value: payments
@@ -1325,38 +2826,44 @@ components:
           - value: payments
             key: service
           resolutionDetails:
-            resolvedBy: CASE_RESOLVER_UNSPECIFIED
+            resolvedBy:
+              system: "{}"
             resolveTime: 2025-09-22T11:15:00Z
           readableId: CASE-123
           assignee:
             userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
           id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
-          state: CASE_STATE_UNSPECIFIED
           alertIndicators:
-          - groupings:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
             - value: payments
               key: service
             - value: payments
               key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
             groupingType: GROUPING_TYPE_UNSPECIFIED
             alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
             resolveTime: 2025-09-22T11:05:00Z
             triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
-          - groupings:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
             - value: payments
               key: service
             - value: payments
               key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
             groupingType: GROUPING_TYPE_UNSPECIFIED
             alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
             resolveTime: 2025-09-22T11:05:00Z
             triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
           category: CASE_CATEGORY_UNSPECIFIED
           status: CASE_STATUS_UNSPECIFIED
         - priorityDetails:
@@ -1372,6 +2879,7 @@ components:
             key: service
           - value: payments
             key: service
+          duration: 0
           createTime: 2025-09-22T10:30:00Z
           groupings:
           - value: payments
@@ -1379,38 +2887,44 @@ components:
           - value: payments
             key: service
           resolutionDetails:
-            resolvedBy: CASE_RESOLVER_UNSPECIFIED
+            resolvedBy:
+              system: "{}"
             resolveTime: 2025-09-22T11:15:00Z
           readableId: CASE-123
           assignee:
             userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
           id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
-          state: CASE_STATE_UNSPECIFIED
           alertIndicators:
-          - groupings:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
             - value: payments
               key: service
             - value: payments
               key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
             groupingType: GROUPING_TYPE_UNSPECIFIED
             alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
             resolveTime: 2025-09-22T11:05:00Z
             triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
-          - groupings:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
             - value: payments
               key: service
             - value: payments
               key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
             groupingType: GROUPING_TYPE_UNSPECIFIED
             alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
             resolveTime: 2025-09-22T11:05:00Z
             triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
           category: CASE_CATEGORY_UNSPECIFIED
           status: CASE_STATUS_UNSPECIFIED
         pagination:
@@ -1429,6 +2943,28 @@ components:
       - cases
       - pagination
       title: List cases response
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:
@@ -1473,7 +3009,8 @@ components:
     ResolutionDetails:
       description: Information about how and when a case was resolved.
       example:
-        resolvedBy: CASE_RESOLVER_UNSPECIFIED
+        resolvedBy:
+          system: "{}"
         resolveTime: 2025-09-22T11:15:00Z
       externalDocs:
         url: ""
@@ -1503,6 +3040,7 @@ components:
             key: service
           - value: payments
             key: service
+          duration: 0
           createTime: 2025-09-22T10:30:00Z
           groupings:
           - value: payments
@@ -1510,38 +3048,44 @@ components:
           - value: payments
             key: service
           resolutionDetails:
-            resolvedBy: CASE_RESOLVER_UNSPECIFIED
+            resolvedBy:
+              system: "{}"
             resolveTime: 2025-09-22T11:15:00Z
           readableId: CASE-123
           assignee:
             userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
           id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
-          state: CASE_STATE_UNSPECIFIED
           alertIndicators:
-          - groupings:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
             - value: payments
               key: service
             - value: payments
               key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
             groupingType: GROUPING_TYPE_UNSPECIFIED
             alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
             resolveTime: 2025-09-22T11:05:00Z
             triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
-          - groupings:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
             - value: payments
               key: service
             - value: payments
               key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
             groupingType: GROUPING_TYPE_UNSPECIFIED
             alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
             resolveTime: 2025-09-22T11:05:00Z
             triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
           category: CASE_CATEGORY_UNSPECIFIED
           status: CASE_STATUS_UNSPECIFIED
       externalDocs:
@@ -1552,6 +3096,8 @@ components:
       required:
       - case
       title: Resolve case response
+      type: object
+    ServiceNow:
       type: object
     SetPriorityOverrideResponse:
       example:
@@ -1569,6 +3115,7 @@ components:
             key: service
           - value: payments
             key: service
+          duration: 0
           createTime: 2025-09-22T10:30:00Z
           groupings:
           - value: payments
@@ -1576,38 +3123,44 @@ components:
           - value: payments
             key: service
           resolutionDetails:
-            resolvedBy: CASE_RESOLVER_UNSPECIFIED
+            resolvedBy:
+              system: "{}"
             resolveTime: 2025-09-22T11:15:00Z
           readableId: CASE-123
           assignee:
             userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
           id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
-          state: CASE_STATE_UNSPECIFIED
           alertIndicators:
-          - groupings:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
             - value: payments
               key: service
             - value: payments
               key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
             groupingType: GROUPING_TYPE_UNSPECIFIED
             alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
             resolveTime: 2025-09-22T11:05:00Z
             triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
-          - groupings:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
             - value: payments
               key: service
             - value: payments
               key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
             groupingType: GROUPING_TYPE_UNSPECIFIED
             alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
             resolveTime: 2025-09-22T11:05:00Z
             triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
           category: CASE_CATEGORY_UNSPECIFIED
           status: CASE_STATUS_UNSPECIFIED
       externalDocs:
@@ -1619,25 +3172,9 @@ components:
       - case
       title: Set priority override response
       type: object
-    StateAggregation:
-      example:
-        count: 42
-        state: CASE_STATE_UNSPECIFIED
-      externalDocs:
-        url: ""
-      properties:
-        count:
-          description: Number of cases in this state
-          example: 42
-          format: int64
-          type: integer
-        state:
-          $ref: "#/components/schemas/CaseState"
-      title: State aggregation
-      type: object
     StatusAggregation:
       example:
-        count: 1
+        count: 5
         status: CASE_STATUS_UNSPECIFIED
       properties:
         count:
@@ -1645,6 +3182,8 @@ components:
           type: integer
         status:
           $ref: "#/components/schemas/CaseStatus"
+      type: object
+    System:
       type: object
     UnassignCaseResponse:
       example:
@@ -1662,6 +3201,7 @@ components:
             key: service
           - value: payments
             key: service
+          duration: 0
           createTime: 2025-09-22T10:30:00Z
           groupings:
           - value: payments
@@ -1669,38 +3209,44 @@ components:
           - value: payments
             key: service
           resolutionDetails:
-            resolvedBy: CASE_RESOLVER_UNSPECIFIED
+            resolvedBy:
+              system: "{}"
             resolveTime: 2025-09-22T11:15:00Z
           readableId: CASE-123
           assignee:
             userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
           id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
-          state: CASE_STATE_UNSPECIFIED
           alertIndicators:
-          - groupings:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
             - value: payments
               key: service
             - value: payments
               key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
             groupingType: GROUPING_TYPE_UNSPECIFIED
             alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
             resolveTime: 2025-09-22T11:05:00Z
             triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
-          - groupings:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
             - value: payments
               key: service
             - value: payments
               key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
             groupingType: GROUPING_TYPE_UNSPECIFIED
             alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
             resolveTime: 2025-09-22T11:05:00Z
             triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
           category: CASE_CATEGORY_UNSPECIFIED
           status: CASE_STATUS_UNSPECIFIED
       externalDocs:
@@ -1713,72 +3259,6 @@ components:
       title: Unassign case response
       type: object
     Unassigned:
-      type: object
-    UnsetPriorityOverrideResponse:
-      example:
-        case:
-          priorityDetails:
-            system: null
-            override: null
-          acknowledgeTime: 2000-01-23T04:56:07.000+00:00
-          description: Investigating DB connection errors in prod
-          updateTime: 2000-01-23T04:56:07.000+00:00
-          priority: CASE_PRIORITY_UNSPECIFIED
-          title: Database outage investigation
-          labels:
-          - value: payments
-            key: service
-          - value: payments
-            key: service
-          createTime: 2025-09-22T10:30:00Z
-          groupings:
-          - value: payments
-            key: service
-          - value: payments
-            key: service
-          resolutionDetails:
-            resolvedBy: CASE_RESOLVER_UNSPECIFIED
-            resolveTime: 2025-09-22T11:15:00Z
-          readableId: CASE-123
-          assignee:
-            userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
-          id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
-          state: CASE_STATE_UNSPECIFIED
-          alertIndicators:
-          - groupings:
-            - value: payments
-              key: service
-            - value: payments
-              key: service
-            groupingType: GROUPING_TYPE_UNSPECIFIED
-            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
-            resolveTime: 2025-09-22T11:05:00Z
-            triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
-          - groupings:
-            - value: payments
-              key: service
-            - value: payments
-              key: service
-            groupingType: GROUPING_TYPE_UNSPECIFIED
-            alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
-            resolveTime: 2025-09-22T11:05:00Z
-            triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
-          category: CASE_CATEGORY_UNSPECIFIED
-          status: CASE_STATUS_UNSPECIFIED
-      externalDocs:
-        url: ""
-      properties:
-        case:
-          $ref: "#/components/schemas/Case"
-      required:
-      - case
-      title: Unset priority override response
       type: object
     UpdateCaseResponse:
       description: Response containing the updated case
@@ -1797,6 +3277,7 @@ components:
             key: service
           - value: payments
             key: service
+          duration: 0
           createTime: 2025-09-22T10:30:00Z
           groupings:
           - value: payments
@@ -1804,38 +3285,44 @@ components:
           - value: payments
             key: service
           resolutionDetails:
-            resolvedBy: CASE_RESOLVER_UNSPECIFIED
+            resolvedBy:
+              system: "{}"
             resolveTime: 2025-09-22T11:15:00Z
           readableId: CASE-123
           assignee:
             userId: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
           id: 3f166e9f-3c88-4af2-b52e-138f339dab3e
-          state: CASE_STATE_UNSPECIFIED
           alertIndicators:
-          - groupings:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
             - value: payments
               key: service
             - value: payments
               key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
             groupingType: GROUPING_TYPE_UNSPECIFIED
             alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
             resolveTime: 2025-09-22T11:05:00Z
             triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
-          - groupings:
+          - latestAlertVersion: 1eae3615-79e7-4b54-88e0-6a77def653bf
+            groupings:
             - value: payments
               key: service
             - value: payments
               key: service
+            alertVersions:
+            - 1eae3615-79e7-4b54-88e0-6a77def653bf
+            - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
             groupingType: GROUPING_TYPE_UNSPECIFIED
             alertId: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            state: ALERT_INDICATOR_STATE_UNSPECIFIED
-            priority: ALERT_PRIORITY_UNSPECIFIED
+            state: INDICATOR_STATE_UNSPECIFIED
+            priority: INDICATOR_PRIORITY_UNSPECIFIED
             resolveTime: 2025-09-22T11:05:00Z
             triggerTime: 2025-09-22T10:30:00Z
-            alertVersionId: 1eae3615-79e7-4b54-88e0-6a77def653bf
           category: CASE_CATEGORY_UNSPECIFIED
           status: CASE_STATUS_UNSPECIFIED
       externalDocs:
@@ -1868,15 +3355,19 @@ components:
     cases.v1.GetFilterValuesResponse:
       description: Aggregated counts for building filters in the UI
       example:
-        stateAggregations:
-        - count: 42
-          state: CASE_STATE_UNSPECIFIED
-        - count: 42
-          state: CASE_STATE_UNSPECIFIED
+        flatLabelsAggregation:
+        - filter:
+            value: payments
+            key: service
+          count: 1
+        - filter:
+            value: payments
+            key: service
+          count: 1
         statusAggregations:
-        - count: 1
+        - count: 5
           status: CASE_STATUS_UNSPECIFIED
-        - count: 1
+        - count: 5
           status: CASE_STATUS_UNSPECIFIED
         assigneeAggregations:
           unassignedCount: 6
@@ -1930,6 +3421,10 @@ components:
           items:
             $ref: "#/components/schemas/CategoryAggregation"
           type: array
+        flatLabelsAggregation:
+          items:
+            $ref: "#/components/schemas/FilterAggregation"
+          type: array
         groupingAggregations:
           items:
             $ref: "#/components/schemas/FilterGroupAggregation"
@@ -1941,10 +3436,6 @@ components:
         priorityAggregations:
           items:
             $ref: "#/components/schemas/PriorityAggregation"
-          type: array
-        stateAggregations:
-          items:
-            $ref: "#/components/schemas/StateAggregation"
           type: array
         statusAggregations:
           items:
@@ -2107,6 +3598,131 @@ components:
       - priority
       title: Set priority override request
       type: object
+    Bulk_acknowledge_request:
+      additionalProperties: false
+      description: Request to acknowledge multiple cases
+      properties:
+        actor:
+          $ref: "#/components/schemas/cases.v1.UserDetails"
+        ids:
+          example:
+          - 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          - a4c7d2e8-5f99-4b3a-c53f-239f440dbe4f
+          items:
+            description: IDs of the cases to acknowledge
+            type: string
+          type: array
+      required:
+      - actor
+      - ids
+      title: Bulk acknowledge request
+      type: object
+    Bulk_assign_request:
+      additionalProperties: false
+      description: Request to assign multiple cases to a user
+      properties:
+        assignee:
+          $ref: "#/components/schemas/cases.v1.UserDetails"
+        ids:
+          example:
+          - 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          - a4c7d2e8-5f99-4b3a-c53f-239f440dbe4f
+          items:
+            description: IDs of the cases to assign
+            type: string
+          type: array
+      required:
+      - assignee
+      - ids
+      title: Bulk assign request
+      type: object
+    Bulk_clear_priority_override_request:
+      additionalProperties: false
+      description: Request to clear priority override for multiple cases
+      properties:
+        ids:
+          example:
+          - 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          - a4c7d2e8-5f99-4b3a-c53f-239f440dbe4f
+          items:
+            description: IDs of the cases to clear priority override for
+            type: string
+          type: array
+      required:
+      - ids
+      title: Bulk clear priority override request
+      type: object
+    Bulk_close_request:
+      additionalProperties: false
+      description: Request to close multiple cases
+      properties:
+        ids:
+          example:
+          - 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          - a4c7d2e8-5f99-4b3a-c53f-239f440dbe4f
+          items:
+            description: IDs of the cases to close
+            type: string
+          type: array
+      required:
+      - ids
+      title: Bulk close request
+      type: object
+    Bulk_resolve_request:
+      additionalProperties: false
+      description: Request to resolve multiple cases
+      properties:
+        ids:
+          example:
+          - 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          - a4c7d2e8-5f99-4b3a-c53f-239f440dbe4f
+          items:
+            description: IDs of the cases to resolve
+            type: string
+          type: array
+        reason:
+          description: Reason for resolution
+          example: These cases are no longer active.
+          type: string
+      required:
+      - ids
+      title: Bulk resolve request
+      type: object
+    Bulk_override_priority_request:
+      additionalProperties: false
+      description: Request to override priority for multiple cases
+      properties:
+        ids:
+          example:
+          - 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          - a4c7d2e8-5f99-4b3a-c53f-239f440dbe4f
+          items:
+            description: IDs of the cases to override priority for
+            type: string
+          type: array
+        priority:
+          $ref: "#/components/schemas/CasePriority"
+      required:
+      - ids
+      - priority
+      title: Bulk override priority request
+      type: object
+    Bulk_unassign_request:
+      additionalProperties: false
+      description: Request to unassign multiple cases
+      properties:
+        ids:
+          example:
+          - 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          - a4c7d2e8-5f99-4b3a-c53f-239f440dbe4f
+          items:
+            description: IDs of the cases to unassign
+            type: string
+          type: array
+      required:
+      - ids
+      title: Bulk unassign request
+      type: object
     Get_case_filter_values_request:
       additionalProperties: false
       properties:
@@ -2114,9 +3730,3 @@ components:
           $ref: "#/components/schemas/CaseFilters"
       title: Get case filter values request
       type: object
-  securitySchemes:
-    apiKeyAuth:
-      description: API key authentication
-      in: header
-      name: Authorization
-      type: apiKey

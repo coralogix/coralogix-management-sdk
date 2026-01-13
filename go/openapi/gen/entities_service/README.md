@@ -96,6 +96,8 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [ListEntitySubTypesResponse](docs/ListEntitySubTypesResponse.md)
  - [ListEntityTypesResponse](docs/ListEntityTypesResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [NotificationCenterEntityType](docs/NotificationCenterEntityType.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
@@ -103,28 +105,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
-
-Authentication schemes defined for the API:
-### apiKeyAuth
-
-- **Type**: API key
-- **API key parameter name**: Authorization
-- **Location**: HTTP header
-
-Note, each API key must be added to a map of `map[string]APIKey` where the key is: apiKeyAuth and passed in as the auth context for each request.
-
-Example
-
-```go
-auth := context.WithValue(
-		context.Background(),
-		entities_service.ContextAPIKeys,
-		map[string]entities_service.APIKey{
-			"apiKeyAuth": {Key: "API_KEY_STRING"},
-		},
-	)
-r, err := client.Service.Operation(auth, args)
-```
+Endpoints do not require authorization.
 
 
 ## Documentation for Utility Methods

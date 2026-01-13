@@ -135,6 +135,8 @@ Class | Method | HTTP request | Description
  - [ListLabelsCardinalityResponse](docs/ListLabelsCardinalityResponse.md)
  - [Logs2metricsV2Severity](docs/Logs2metricsV2Severity.md)
  - [MetricLabel](docs/MetricLabel.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [ReplaceE2MRequest](docs/ReplaceE2MRequest.md)
  - [ReplaceE2MResponse](docs/ReplaceE2MResponse.md)
@@ -152,28 +154,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
-
-Authentication schemes defined for the API:
-### apiKeyAuth
-
-- **Type**: API key
-- **API key parameter name**: Authorization
-- **Location**: HTTP header
-
-Note, each API key must be added to a map of `map[string]APIKey` where the key is: apiKeyAuth and passed in as the auth context for each request.
-
-Example
-
-```go
-auth := context.WithValue(
-		context.Background(),
-		events2metrics_service.ContextAPIKeys,
-		map[string]events2metrics_service.APIKey{
-			"apiKeyAuth": {Key: "API_KEY_STRING"},
-		},
-	)
-r, err := client.Service.Operation(auth, args)
-```
+Endpoints do not require authorization.
 
 
 ## Documentation for Utility Methods

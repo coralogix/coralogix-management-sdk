@@ -42,8 +42,6 @@ func (r ApiEvents2MetricServiceAtomicBatchExecuteE2MRequest) Execute() (*AtomicB
 /*
 Events2MetricServiceAtomicBatchExecuteE2M Atomic Batch Execute E2M
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEvents2MetricServiceAtomicBatchExecuteE2MRequest
 */
@@ -149,8 +147,6 @@ func (r ApiEvents2MetricServiceCreateE2MRequest) Execute() (*CreateE2MResponse, 
 /*
 Events2MetricServiceCreateE2M Create a new E2M
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEvents2MetricServiceCreateE2MRequest
 */
@@ -250,8 +246,6 @@ func (r ApiEvents2MetricServiceDeleteE2MRequest) Execute() (*DeleteE2MResponse, 
 
 /*
 Events2MetricServiceDeleteE2M Delete an E2M
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -354,8 +348,6 @@ func (r ApiEvents2MetricServiceGetE2MRequest) Execute() (*GetE2MResponse, *http.
 /*
 Events2MetricServiceGetE2M Get an E2M
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiEvents2MetricServiceGetE2MRequest
@@ -456,8 +448,6 @@ func (r ApiEvents2MetricServiceGetLimitsRequest) Execute() (*GetLimitsResponse, 
 /*
 Events2MetricServiceGetLimits Get E2M Limits
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEvents2MetricServiceGetLimitsRequest
 */
@@ -554,8 +544,6 @@ func (r ApiEvents2MetricServiceListE2MRequest) Execute() (*ListE2MResponse, *htt
 
 /*
 Events2MetricServiceListE2M List E2Ms
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEvents2MetricServiceListE2MRequest
@@ -671,8 +659,6 @@ func (r ApiEvents2MetricServiceListLabelsCardinalityRequest) Execute() (*ListLab
 
 /*
 Events2MetricServiceListLabelsCardinality List E2M Labels Cardinality
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEvents2MetricServiceListLabelsCardinalityRequest
@@ -793,8 +779,6 @@ func (r ApiEvents2MetricServiceReplaceE2MRequest) Execute() (*ReplaceE2MResponse
 
 /*
 Events2MetricServiceReplaceE2M Replace an E2M
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEvents2MetricServiceReplaceE2MRequest

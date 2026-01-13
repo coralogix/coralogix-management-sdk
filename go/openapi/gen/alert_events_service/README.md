@@ -108,6 +108,8 @@ Class | Method | HTTP request | Description
  - [GetAlertEventResponseMultiplePermutation](docs/GetAlertEventResponseMultiplePermutation.md)
  - [GetAlertEventResponseSinglePermutation](docs/GetAlertEventResponseSinglePermutation.md)
  - [GetAlertEventStatsResponse](docs/GetAlertEventStatsResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [OrderByAlertEventDirection](docs/OrderByAlertEventDirection.md)
  - [OrderByAlertEventFields](docs/OrderByAlertEventFields.md)
@@ -117,28 +119,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
-
-Authentication schemes defined for the API:
-### apiKeyAuth
-
-- **Type**: API key
-- **API key parameter name**: Authorization
-- **Location**: HTTP header
-
-Note, each API key must be added to a map of `map[string]APIKey` where the key is: apiKeyAuth and passed in as the auth context for each request.
-
-Example
-
-```go
-auth := context.WithValue(
-		context.Background(),
-		alert_events_service.ContextAPIKeys,
-		map[string]alert_events_service.APIKey{
-			"apiKeyAuth": {Key: "API_KEY_STRING"},
-		},
-	)
-r, err := client.Service.Operation(auth, args)
-```
+Endpoints do not require authorization.
 
 
 ## Documentation for Utility Methods

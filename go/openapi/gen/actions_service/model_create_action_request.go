@@ -17,7 +17,7 @@ import (
 // checks if the CreateActionRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateActionRequest{}
 
-// CreateActionRequest struct for CreateActionRequest
+// CreateActionRequest This data structure represents the request to create an Action.
 type CreateActionRequest struct {
 	ApplicationNames []string `json:"applicationNames,omitempty"`
 	IsPrivate *bool `json:"isPrivate,omitempty"`

@@ -42,8 +42,6 @@ func (r ApiPresetsServiceBatchGetPresetsRequest) Execute() (*BatchGetPresetsResp
 /*
 PresetsServiceBatchGetPresets Batch Get Presets
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPresetsServiceBatchGetPresetsRequest
 */
@@ -158,8 +156,6 @@ func (r ApiPresetsServiceCreateCustomPresetRequest) Execute() (*CreateCustomPres
 /*
 PresetsServiceCreateCustomPreset Create Custom Preset
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPresetsServiceCreateCustomPresetRequest
 */
@@ -259,8 +255,6 @@ func (r ApiPresetsServiceDeleteCustomPresetRequest) Execute() (map[string]interf
 
 /*
 PresetsServiceDeleteCustomPreset Delete Custom Preset
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -374,8 +368,6 @@ func (r ApiPresetsServiceGetDefaultPresetSummaryRequest) Execute() (*GetDefaultP
 /*
 PresetsServiceGetDefaultPresetSummary Get Default Preset Summary
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPresetsServiceGetDefaultPresetSummaryRequest
 */
@@ -479,8 +471,6 @@ func (r ApiPresetsServiceGetPresetRequest) Execute() (*GetPresetResponse, *http.
 
 /*
 PresetsServiceGetPreset Get Preset
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -593,8 +583,6 @@ func (r ApiPresetsServiceGetSystemDefaultPresetSummaryRequest) Execute() (*GetSy
 
 /*
 PresetsServiceGetSystemDefaultPresetSummary Get System Default Preset Summary
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPresetsServiceGetSystemDefaultPresetSummaryRequest
@@ -711,8 +699,6 @@ func (r ApiPresetsServiceListPresetSummariesRequest) Execute() (*ListPresetSumma
 /*
 PresetsServiceListPresetSummaries List Preset Summaries
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPresetsServiceListPresetSummariesRequest
 */
@@ -822,8 +808,6 @@ func (r ApiPresetsServiceReplaceCustomPresetRequest) Execute() (*ReplaceCustomPr
 /*
 PresetsServiceReplaceCustomPreset Replace Custom Preset
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPresetsServiceReplaceCustomPresetRequest
 */
@@ -923,8 +907,6 @@ func (r ApiPresetsServiceSetCustomPresetAsDefaultRequest) Execute() (map[string]
 
 /*
 PresetsServiceSetCustomPresetAsDefault Set Custom Preset As Default
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -1026,8 +1008,6 @@ func (r ApiPresetsServiceSetPresetAsDefaultRequest) Execute() (map[string]interf
 
 /*
 PresetsServiceSetPresetAsDefault Set Preset As Default
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id

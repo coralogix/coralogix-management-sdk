@@ -7,7 +7,6 @@ servers:
 paths:
   /integrations/extensions/v1/deployed:
     delete:
-      description: No description available
       externalDocs:
         url: ""
       operationId: ExtensionDeploymentService_UndeployExtension
@@ -41,7 +40,6 @@ paths:
       x-coralogixPermissions:
       - extensions:Deploy
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: ExtensionDeploymentService_GetDeployedExtensions
@@ -70,7 +68,6 @@ paths:
       x-coralogixPermissions:
       - extensions:ReadConfig
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: ExtensionDeploymentService_UpdateExtension
@@ -148,7 +145,6 @@ paths:
       x-coralogixPermissions:
       - extensions:Deploy
     put:
-      description: No description available
       externalDocs:
         url: ""
       operationId: ExtensionDeploymentService_DeployExtension
@@ -547,6 +543,28 @@ components:
           type: integer
       title: Item counts
       type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     MultipleValues:
       properties:
         matcher:
@@ -664,9 +682,3 @@ components:
           type: array
       title: Revert deployment of extension request
       type: object
-  securitySchemes:
-    apiKeyAuth:
-      description: API key authentication
-      in: header
-      name: Authorization
-      type: apiKey

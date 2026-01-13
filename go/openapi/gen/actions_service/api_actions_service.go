@@ -26,11 +26,11 @@ type ActionsServiceAPIService service
 type ApiActionsServiceAtomicBatchExecuteActionsRequest struct {
 	ctx context.Context
 	ApiService *ActionsServiceAPIService
-	actionsServiceAtomicBatchExecuteActionsRequest *ActionsServiceAtomicBatchExecuteActionsRequest
+	atomicBatchExecuteActionsRequest *AtomicBatchExecuteActionsRequest
 }
 
-func (r ApiActionsServiceAtomicBatchExecuteActionsRequest) ActionsServiceAtomicBatchExecuteActionsRequest(actionsServiceAtomicBatchExecuteActionsRequest ActionsServiceAtomicBatchExecuteActionsRequest) ApiActionsServiceAtomicBatchExecuteActionsRequest {
-	r.actionsServiceAtomicBatchExecuteActionsRequest = &actionsServiceAtomicBatchExecuteActionsRequest
+func (r ApiActionsServiceAtomicBatchExecuteActionsRequest) AtomicBatchExecuteActionsRequest(atomicBatchExecuteActionsRequest AtomicBatchExecuteActionsRequest) ApiActionsServiceAtomicBatchExecuteActionsRequest {
+	r.atomicBatchExecuteActionsRequest = &atomicBatchExecuteActionsRequest
 	return r
 }
 
@@ -40,8 +40,6 @@ func (r ApiActionsServiceAtomicBatchExecuteActionsRequest) Execute() (*AtomicBat
 
 /*
 ActionsServiceAtomicBatchExecuteActions Atomic Batch Execute Actions
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiActionsServiceAtomicBatchExecuteActionsRequest
@@ -68,7 +66,7 @@ func (a *ActionsServiceAPIService) ActionsServiceAtomicBatchExecuteActionsExecut
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/actions/actions:atomicBatchExecute"
+	localVarPath := localBasePath + "/actions/batch/v2"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -92,7 +90,7 @@ func (a *ActionsServiceAPIService) ActionsServiceAtomicBatchExecuteActionsExecut
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.actionsServiceAtomicBatchExecuteActionsRequest
+	localVarPostBody = r.atomicBatchExecuteActionsRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -133,11 +131,11 @@ func (a *ActionsServiceAPIService) ActionsServiceAtomicBatchExecuteActionsExecut
 type ApiActionsServiceCreateActionRequest struct {
 	ctx context.Context
 	ApiService *ActionsServiceAPIService
-	actionsServiceCreateActionRequest *ActionsServiceCreateActionRequest
+	createActionRequest1 *CreateActionRequest1
 }
 
-func (r ApiActionsServiceCreateActionRequest) ActionsServiceCreateActionRequest(actionsServiceCreateActionRequest ActionsServiceCreateActionRequest) ApiActionsServiceCreateActionRequest {
-	r.actionsServiceCreateActionRequest = &actionsServiceCreateActionRequest
+func (r ApiActionsServiceCreateActionRequest) CreateActionRequest1(createActionRequest1 CreateActionRequest1) ApiActionsServiceCreateActionRequest {
+	r.createActionRequest1 = &createActionRequest1
 	return r
 }
 
@@ -147,8 +145,6 @@ func (r ApiActionsServiceCreateActionRequest) Execute() (*CreateActionResponse, 
 
 /*
 ActionsServiceCreateAction Create Action
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiActionsServiceCreateActionRequest
@@ -175,7 +171,7 @@ func (a *ActionsServiceAPIService) ActionsServiceCreateActionExecute(r ApiAction
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/actions"
+	localVarPath := localBasePath + "/actions/actions/v2"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -199,7 +195,7 @@ func (a *ActionsServiceAPIService) ActionsServiceCreateActionExecute(r ApiAction
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.actionsServiceCreateActionRequest
+	localVarPostBody = r.createActionRequest1
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -250,8 +246,6 @@ func (r ApiActionsServiceDeleteActionRequest) Execute() (map[string]interface{},
 /*
 ActionsServiceDeleteAction Delete Action
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiActionsServiceDeleteActionRequest
@@ -279,7 +273,7 @@ func (a *ActionsServiceAPIService) ActionsServiceDeleteActionExecute(r ApiAction
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/actions/{id}"
+	localVarPath := localBasePath + "/actions/actions/v2/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -353,8 +347,6 @@ func (r ApiActionsServiceGetActionRequest) Execute() (*GetActionResponse, *http.
 /*
 ActionsServiceGetAction Get Action
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiActionsServiceGetActionRequest
@@ -382,7 +374,7 @@ func (a *ActionsServiceAPIService) ActionsServiceGetActionExecute(r ApiActionsSe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/actions/{id}"
+	localVarPath := localBasePath + "/actions/actions/v2/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -455,8 +447,6 @@ func (r ApiActionsServiceListActionsRequest) Execute() (*ListActionsResponse, *h
 /*
 ActionsServiceListActions List Actions
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiActionsServiceListActionsRequest
 */
@@ -482,7 +472,7 @@ func (a *ActionsServiceAPIService) ActionsServiceListActionsExecute(r ApiActions
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/actions"
+	localVarPath := localBasePath + "/actions/actions/v2"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -545,11 +535,11 @@ func (a *ActionsServiceAPIService) ActionsServiceListActionsExecute(r ApiActions
 type ApiActionsServiceOrderActionsRequest struct {
 	ctx context.Context
 	ApiService *ActionsServiceAPIService
-	actionsServiceOrderActionsRequest *ActionsServiceOrderActionsRequest
+	orderActionsRequest *OrderActionsRequest
 }
 
-func (r ApiActionsServiceOrderActionsRequest) ActionsServiceOrderActionsRequest(actionsServiceOrderActionsRequest ActionsServiceOrderActionsRequest) ApiActionsServiceOrderActionsRequest {
-	r.actionsServiceOrderActionsRequest = &actionsServiceOrderActionsRequest
+func (r ApiActionsServiceOrderActionsRequest) OrderActionsRequest(orderActionsRequest OrderActionsRequest) ApiActionsServiceOrderActionsRequest {
+	r.orderActionsRequest = &orderActionsRequest
 	return r
 }
 
@@ -559,8 +549,6 @@ func (r ApiActionsServiceOrderActionsRequest) Execute() (map[string]interface{},
 
 /*
 ActionsServiceOrderActions Order Actions
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiActionsServiceOrderActionsRequest
@@ -587,7 +575,7 @@ func (a *ActionsServiceAPIService) ActionsServiceOrderActionsExecute(r ApiAction
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/actions/actions:order"
+	localVarPath := localBasePath + "/actions/order/v2"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -611,7 +599,7 @@ func (a *ActionsServiceAPIService) ActionsServiceOrderActionsExecute(r ApiAction
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.actionsServiceOrderActionsRequest
+	localVarPostBody = r.orderActionsRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -652,11 +640,11 @@ func (a *ActionsServiceAPIService) ActionsServiceOrderActionsExecute(r ApiAction
 type ApiActionsServiceReplaceActionRequest struct {
 	ctx context.Context
 	ApiService *ActionsServiceAPIService
-	actionsServiceReplaceActionRequest *ActionsServiceReplaceActionRequest
+	replaceActionRequest1 *ReplaceActionRequest1
 }
 
-func (r ApiActionsServiceReplaceActionRequest) ActionsServiceReplaceActionRequest(actionsServiceReplaceActionRequest ActionsServiceReplaceActionRequest) ApiActionsServiceReplaceActionRequest {
-	r.actionsServiceReplaceActionRequest = &actionsServiceReplaceActionRequest
+func (r ApiActionsServiceReplaceActionRequest) ReplaceActionRequest1(replaceActionRequest1 ReplaceActionRequest1) ApiActionsServiceReplaceActionRequest {
+	r.replaceActionRequest1 = &replaceActionRequest1
 	return r
 }
 
@@ -666,8 +654,6 @@ func (r ApiActionsServiceReplaceActionRequest) Execute() (*ReplaceActionResponse
 
 /*
 ActionsServiceReplaceAction Replace Action
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiActionsServiceReplaceActionRequest
@@ -694,7 +680,7 @@ func (a *ActionsServiceAPIService) ActionsServiceReplaceActionExecute(r ApiActio
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/actions"
+	localVarPath := localBasePath + "/actions/actions/v2"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -718,7 +704,7 @@ func (a *ActionsServiceAPIService) ActionsServiceReplaceActionExecute(r ApiActio
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.actionsServiceReplaceActionRequest
+	localVarPostBody = r.replaceActionRequest1
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

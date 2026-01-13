@@ -17,7 +17,7 @@ import (
 // checks if the V2Action type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V2Action{}
 
-// V2Action struct for V2Action
+// V2Action This data structure represents an Action.
 type V2Action struct {
 	ApplicationNames []string `json:"applicationNames,omitempty"`
 	CreatedBy *string `json:"createdBy,omitempty"`

@@ -105,6 +105,8 @@ model_list_incident_events_order_by_request.go
 model_list_incident_events_response.go
 model_list_incident_events_total_count_response.go
 model_list_incidents_response.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_originator_type.go
 model_pagination_request.go

@@ -5,9 +5,8 @@ info:
 servers:
 - url: /
 paths:
-  /v1/slo/slos:
+  /slo/slo/v1:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_ListSlos
@@ -17,7 +16,9 @@ paths:
         name: filters
         required: false
         schema:
-          $ref: "#/components/schemas/SloFilters"
+          items:
+            $ref: "#/components/schemas/SloFilter"
+          type: array
         style: form
       responses:
         "200":
@@ -42,7 +43,6 @@ paths:
       tags:
       - Slos Service
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_CreateSlo
@@ -59,7 +59,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SlosService_ReplaceSlo_request"
+              $ref: "#/components/schemas/SlosService_CreateSlo_request"
       responses:
         "200":
           content:
@@ -83,7 +83,6 @@ paths:
       tags:
       - Slos Service
     put:
-      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_ReplaceSlo
@@ -123,179 +122,8 @@ paths:
       summary: Replace Slo
       tags:
       - Slos Service
-  /v1/slo/slos/validate:
-    post:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: SlosService_ValidateReplaceSloAlerts
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SlosService_ValidateReplaceSloAlerts_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ReplaceSloAlertsValidationsResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Replace Slo Pre-Validate Alerts
-      tags:
-      - Slos Service
-  /v1/slo/slos/zeroState:
+  /slo/slo/v1/batch:
     get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: SlosService_GetZeroState
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetZeroStateResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Get Slo Zero State
-      tags:
-      - Slos Service
-  /v1/slo/slos/{id}:
-    delete:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: SlosService_DeleteSlo
-      parameters:
-      - explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeleteSloResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Delete Slo
-      tags:
-      - Slos Service
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: SlosService_GetSlo
-      parameters:
-      - explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetSloResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Get Slo
-      tags:
-      - Slos Service
-  /v1/slo/slos:batchExecute:
-    post:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: SlosService_BatchExecuteSlo
-      parameters:
-      - explode: true
-        in: query
-        name: requests
-        required: false
-        schema:
-          items:
-            $ref: "#/components/schemas/SlosService_BatchExecuteSlo_requests_parameter_inner"
-          type: array
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BatchExecuteSloResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Batch Execute Slo
-      tags:
-      - Slos Service
-  /v1/slo/slos:batchGet:
-    get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_BatchGetSlos
@@ -332,6 +160,170 @@ paths:
       summary: Batch Get Slo
       tags:
       - Slos Service
+    post:
+      externalDocs:
+        url: ""
+      operationId: SlosService_BatchExecuteSlo
+      parameters:
+      - explode: true
+        in: query
+        name: requests
+        required: false
+        schema:
+          items:
+            $ref: "#/components/schemas/SlosService_BatchExecuteSlo_requests_parameter_inner"
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchExecuteSloResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Batch Execute Slo
+      tags:
+      - Slos Service
+  /slo/slo/v1/validate:
+    post:
+      externalDocs:
+        url: ""
+      operationId: SlosService_ValidateReplaceSloAlerts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SlosService_CreateSlo_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReplaceSloAlertsValidationsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Replace Slo Pre-Validate Alerts
+      tags:
+      - Slos Service
+  /slo/slo/v1/zeroState:
+    get:
+      externalDocs:
+        url: ""
+      operationId: SlosService_GetZeroState
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetZeroStateResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Slo Zero State
+      tags:
+      - Slos Service
+  /slo/slo/v1/{id}:
+    delete:
+      externalDocs:
+        url: ""
+      operationId: SlosService_DeleteSlo
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteSloResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Delete Slo
+      tags:
+      - Slos Service
+    get:
+      externalDocs:
+        url: ""
+      operationId: SlosService_GetSlo
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetSloResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Slo
+      tags:
+      - Slos Service
 components:
   schemas:
     BatchExecuteSloResponse:
@@ -349,6 +341,7 @@ components:
               description: A brief description of my SLO
               sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
               updateTime: 2000-01-23T04:56:07.000+00:00
+              sloType: SLO_TYPE_REQUEST
               type: request
               grouping:
                 labels:
@@ -374,6 +367,7 @@ components:
               description: A brief description of my SLO
               sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
               updateTime: 2000-01-23T04:56:07.000+00:00
+              sloType: SLO_TYPE_REQUEST
               type: request
               grouping:
                 labels:
@@ -422,6 +416,7 @@ components:
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
+          sloType: SLO_TYPE_REQUEST
           type: request
           grouping:
             labels:
@@ -445,6 +440,7 @@ components:
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
+          sloType: SLO_TYPE_REQUEST
           type: request
           grouping:
             labels:
@@ -547,6 +543,7 @@ components:
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
+          sloType: SLO_TYPE_REQUEST
           type: request
           grouping:
             labels:
@@ -667,6 +664,7 @@ components:
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
+          sloType: SLO_TYPE_REQUEST
           type: request
           grouping:
             labels:
@@ -703,6 +701,28 @@ components:
       - zeroState
       title: GetZeroStateResponse
       type: object
+    IsFilterPredicateStringValues:
+      additionalProperties: false
+      description: Predicate for SLO filters that checks if a field is equal to one
+        of multiple values
+      externalDocs:
+        url: ""
+      properties:
+        stringValues:
+          $ref: "#/components/schemas/StringValues"
+      title: IsFilterPredicate
+      type: object
+    IsFilterPredicateTypeValues:
+      additionalProperties: false
+      description: Predicate for SLO filters that checks if a field is equal to one
+        of multiple values
+      externalDocs:
+        url: ""
+      properties:
+        typeValues:
+          $ref: "#/components/schemas/TypeValues"
+      title: IsFilterPredicate
+      type: object
     ListSlosResponse:
       description: Response containing a list of SLOs.
       example:
@@ -716,6 +736,7 @@ components:
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
+          sloType: SLO_TYPE_REQUEST
           type: request
           grouping:
             labels:
@@ -739,6 +760,7 @@ components:
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
+          sloType: SLO_TYPE_REQUEST
           type: request
           grouping:
             labels:
@@ -777,6 +799,28 @@ components:
       required:
       - query
       title: Metric
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MissingDataStrategy:
       enum:
@@ -846,6 +890,7 @@ components:
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
+          sloType: SLO_TYPE_REQUEST
           type: request
           grouping:
             labels:
@@ -996,6 +1041,7 @@ components:
             description: A brief description of my SLO
             sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
             updateTime: 2000-01-23T04:56:07.000+00:00
+            sloType: SLO_TYPE_REQUEST
             type: request
             grouping:
               labels:
@@ -1058,6 +1104,16 @@ components:
           type: string
       title: SloFilterField
       type: object
+    SloFilterFieldSloType:
+      additionalProperties: false
+      description: Field used for filtering SLOs
+      externalDocs:
+        url: ""
+      properties:
+        sloType:
+          type: boolean
+      title: SloFilterField
+      type: object
     SloRequestBasedMetricSli:
       additionalProperties: false
       description: Definition of an SLO
@@ -1071,6 +1127,7 @@ components:
         description: A brief description of my SLO
         sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
         updateTime: 2000-01-23T04:56:07.000+00:00
+        sloType: SLO_TYPE_REQUEST
         type: request
         grouping:
           labels:
@@ -1115,11 +1172,14 @@ components:
           $ref: "#/components/schemas/v1.Revision"
         sloTimeFrame:
           $ref: "#/components/schemas/SloTimeFrame"
+        sloType:
+          $ref: "#/components/schemas/SloType"
         targetThresholdPercentage:
           example: 99.999
           format: float
           type: number
         type:
+          deprecated: true
           example: request
           type: string
         updateTime:
@@ -1139,6 +1199,11 @@ components:
       - SLO_TIME_FRAME_14_DAYS
       - SLO_TIME_FRAME_21_DAYS
       - SLO_TIME_FRAME_28_DAYS
+      type: string
+    SloType:
+      enum:
+      - SLO_TYPE_REQUEST
+      - SLO_TYPE_WINDOW
       type: string
     SloWindowBasedMetricSli:
       additionalProperties: false
@@ -1171,11 +1236,14 @@ components:
           $ref: "#/components/schemas/v1.Revision"
         sloTimeFrame:
           $ref: "#/components/schemas/SloTimeFrame"
+        sloType:
+          $ref: "#/components/schemas/SloType"
         targetThresholdPercentage:
           example: 99.999
           format: float
           type: number
         type:
+          deprecated: true
           example: request
           type: string
         updateTime:
@@ -1189,6 +1257,20 @@ components:
       - targetThresholdPercentage
       - window
       title: Slo
+      type: object
+    StringValues:
+      properties:
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    TypeValues:
+      properties:
+        values:
+          items:
+            $ref: "#/components/schemas/SloType"
+          type: array
       type: object
     WindowBasedMetricSli:
       description: Definition of a window-based SLI based on metrics
@@ -1277,28 +1359,20 @@ components:
       type: string
     SloFilter_field:
       oneOf:
+      - $ref: "#/components/schemas/SloFilterFieldSloType"
       - $ref: "#/components/schemas/SloFilterFieldConstFilter"
       - $ref: "#/components/schemas/SloFilterFieldLabelName"
-    IsFilterPredicate:
-      description: Predicate for SLO filters that checks if a field is equal to one
-        of multiple values
-      externalDocs:
-        url: ""
-      properties:
-        is:
-          items:
-            example: ""
-            type: string
-          type: array
-      title: IsFilterPredicate
-      type: object
+    SloFilterPredicate_is:
+      oneOf:
+      - $ref: "#/components/schemas/IsFilterPredicateStringValues"
+      - $ref: "#/components/schemas/IsFilterPredicateTypeValues"
     SloFilterPredicate:
       description: Predicate used for filtering SLOs
       externalDocs:
         url: ""
       properties:
         is:
-          $ref: "#/components/schemas/IsFilterPredicate"
+          $ref: "#/components/schemas/SloFilterPredicate_is"
       title: SloFilterPredicate
       type: object
     SloFilter:
@@ -1315,35 +1389,18 @@ components:
       - predicate
       title: SloFilter
       type: object
-    SloFilters:
-      description: A collection of filters for SLOs
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          items:
-            $ref: "#/components/schemas/SloFilter"
-          type: array
-      title: SloFilters
-      type: object
     SlosService_ReplaceSlo_request:
       oneOf:
       - $ref: "#/components/schemas/SloWindowBasedMetricSli"
       - $ref: "#/components/schemas/SloRequestBasedMetricSli"
       type: object
-    SlosService_ValidateReplaceSloAlerts_request:
+    SlosService_CreateSlo_request:
       oneOf:
       - $ref: "#/components/schemas/SloRequestBasedMetricSli"
       - $ref: "#/components/schemas/SloWindowBasedMetricSli"
       type: object
     SlosService_BatchExecuteSlo_requests_parameter_inner:
       oneOf:
-      - $ref: "#/components/schemas/SloExecutionRequestReplaceSloRequest"
       - $ref: "#/components/schemas/SloExecutionRequestDeleteSloRequest"
       - $ref: "#/components/schemas/SloExecutionRequestCreateSloRequest"
-  securitySchemes:
-    apiKeyAuth:
-      description: API key authentication
-      in: header
-      name: Authorization
-      type: apiKey
+      - $ref: "#/components/schemas/SloExecutionRequestReplaceSloRequest"

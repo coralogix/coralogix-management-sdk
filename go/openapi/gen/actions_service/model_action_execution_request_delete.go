@@ -17,7 +17,7 @@ import (
 // checks if the ActionExecutionRequestDelete type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActionExecutionRequestDelete{}
 
-// ActionExecutionRequestDelete struct for ActionExecutionRequestDelete
+// ActionExecutionRequestDelete This data structure represents a request to execute an Action operation.
 type ActionExecutionRequestDelete struct {
 	Delete *DeleteActionRequest `json:"delete,omitempty"`
 }

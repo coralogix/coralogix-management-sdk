@@ -7,7 +7,6 @@ servers:
 paths:
   /integrations/webhooks/v1:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: OutgoingWebhooksService_ListAllOutgoingWebhooks
@@ -36,7 +35,6 @@ paths:
       x-coralogixPermissions:
       - outbound-webhooks:ReadConfig
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: OutgoingWebhooksService_CreateOutgoingWebhook
@@ -70,7 +68,6 @@ paths:
       x-coralogixPermissions:
       - outbound-webhooks:UpdateConfig
     put:
-      description: No description available
       externalDocs:
         url: ""
       operationId: OutgoingWebhooksService_UpdateOutgoingWebhook
@@ -105,7 +102,6 @@ paths:
       - outbound-webhooks:UpdateConfig
   /integrations/webhooks/v1/summary:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: OutgoingWebhooksService_ListOutboundWebhooksSummary
@@ -135,7 +131,6 @@ paths:
       - outbound-webhooks:ReadSummary
   /integrations/webhooks/v1/test:
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: OutgoingWebhooksService_TestOutgoingWebhook
@@ -170,7 +165,6 @@ paths:
       - outbound-webhooks:ReadConfig
   /integrations/webhooks/v1/test-existing:
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: OutgoingWebhooksService_TestExistingOutgoingWebhook
@@ -205,7 +199,6 @@ paths:
       - outbound-webhooks:ReadConfig
   /integrations/webhooks/v1/types:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: OutgoingWebhooksService_ListOutgoingWebhookTypes
@@ -235,7 +228,6 @@ paths:
       - outbound-webhooks:ReadConfig
   /integrations/webhooks/v1/types/{type}:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: OutgoingWebhooksService_GetOutgoingWebhookTypeDetails
@@ -273,7 +265,6 @@ paths:
       - outbound-webhooks:ReadConfig
   /integrations/webhooks/v1/{id}:
     delete:
-      description: No description available
       externalDocs:
         url: ""
       operationId: OutgoingWebhooksService_DeleteOutgoingWebhook
@@ -311,7 +302,6 @@ paths:
       x-coralogixPermissions:
       - outbound-webhooks:UpdateConfig
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: OutgoingWebhooksService_GetOutgoingWebhook
@@ -349,7 +339,6 @@ paths:
       - outbound-webhooks:ReadConfig
   /integrations/webhooks/v1:listByType:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: OutgoingWebhooksService_ListOutgoingWebhooks
@@ -388,6 +377,9 @@ paths:
 components:
   schemas:
     Attachment:
+      example:
+        isActive: true
+        type: EMPTY
       externalDocs:
         url: ""
       properties:
@@ -469,6 +461,9 @@ components:
       title: Demisto configuration
       type: object
     Digest:
+      example:
+        isActive: true
+        type: UNKNOWN
       externalDocs:
         url: ""
       properties:
@@ -562,12 +557,6 @@ components:
       title: Filters
       type: object
     GenericWebhookConfig:
-      example:
-        headers:
-          key: headers
-        method: UNKNOWN
-        payload: payload
-        uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
       externalDocs:
         url: ""
       properties:
@@ -588,12 +577,17 @@ components:
       example:
         webhook:
           createdAt: 2000-01-23T04:56:07.000+00:00
-          genericWebhook:
-            headers:
-              key: headers
-            method: UNKNOWN
-            payload: payload
-            uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
+          slack:
+            attachments:
+            - isActive: true
+              type: EMPTY
+            - isActive: true
+              type: EMPTY
+            digests:
+            - isActive: true
+              type: UNKNOWN
+            - isActive: true
+              type: UNKNOWN
           name: my_webhook
           externalId: 123456
           id: webhook_id
@@ -759,6 +753,28 @@ components:
         url: ""
       title: Microsoft Teams configuration
       type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     MultipleValues:
       properties:
         matcher:
@@ -803,18 +819,18 @@ components:
       type: object
     OutgoingWebhook:
       oneOf:
-      - $ref: "#/components/schemas/OutgoingWebhookGenericWebhook"
       - $ref: "#/components/schemas/OutgoingWebhookSlack"
       - $ref: "#/components/schemas/OutgoingWebhookPagerDuty"
       - $ref: "#/components/schemas/OutgoingWebhookSendLog"
       - $ref: "#/components/schemas/OutgoingWebhookOpsgenie"
+      - $ref: "#/components/schemas/OutgoingWebhookDemisto"
       - $ref: "#/components/schemas/OutgoingWebhookAwsEventBridge"
+      - $ref: "#/components/schemas/OutgoingWebhookIbmEventNotifications"
       - $ref: "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
+      - $ref: "#/components/schemas/OutgoingWebhookGenericWebhook"
       - $ref: "#/components/schemas/OutgoingWebhookEmailGroup"
       - $ref: "#/components/schemas/OutgoingWebhookMicrosoftTeams"
       - $ref: "#/components/schemas/OutgoingWebhookJira"
-      - $ref: "#/components/schemas/OutgoingWebhookDemisto"
-      - $ref: "#/components/schemas/OutgoingWebhookIbmEventNotifications"
     OutgoingWebhookAwsEventBridge:
       additionalProperties: false
       externalDocs:
@@ -956,20 +972,6 @@ components:
       type: object
     OutgoingWebhookGenericWebhook:
       additionalProperties: false
-      example:
-        createdAt: 2000-01-23T04:56:07.000+00:00
-        genericWebhook:
-          headers:
-            key: headers
-          method: UNKNOWN
-          payload: payload
-          uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
-        name: my_webhook
-        externalId: 123456
-        id: webhook_id
-        type: UNKNOWN
-        url: slack.webhook.com
-        updatedAt: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
       properties:
@@ -1030,18 +1032,18 @@ components:
       type: object
     OutgoingWebhookInputData:
       oneOf:
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataJira"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataDemisto"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataGenericWebhook"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataSlack"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataSendLog"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataJira"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataOpsgenie"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
     OutgoingWebhookInputDataAwsEventBridge:
       additionalProperties: false
       externalDocs:
@@ -1446,6 +1448,25 @@ components:
       type: object
     OutgoingWebhookSlack:
       additionalProperties: false
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        slack:
+          attachments:
+          - isActive: true
+            type: EMPTY
+          - isActive: true
+            type: EMPTY
+          digests:
+          - isActive: true
+            type: UNKNOWN
+          - isActive: true
+            type: UNKNOWN
+        name: my_webhook
+        externalId: 123456
+        id: webhook_id
+        type: UNKNOWN
+        url: slack.webhook.com
+        updatedAt: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
       properties:
@@ -1546,6 +1567,17 @@ components:
       title: Send log configuration
       type: object
     SlackConfig:
+      example:
+        attachments:
+        - isActive: true
+          type: EMPTY
+        - isActive: true
+          type: EMPTY
+        digests:
+        - isActive: true
+          type: UNKNOWN
+        - isActive: true
+          type: UNKNOWN
       externalDocs:
         url: ""
       properties:
@@ -1561,13 +1593,9 @@ components:
       type: object
     TestOutgoingWebhookResponse:
       oneOf:
-      - $ref: "#/components/schemas/TestOutgoingWebhookResponseFailure"
       - $ref: "#/components/schemas/TestOutgoingWebhookResponseSuccess"
+      - $ref: "#/components/schemas/TestOutgoingWebhookResponseFailure"
     TestOutgoingWebhookResponse.Failure:
-      example:
-        displayMessage: example_display_message
-        errorMessage: example_error_message
-        statusCode: 400
       externalDocs:
         url: ""
       properties:
@@ -1590,11 +1618,6 @@ components:
       type: object
     TestOutgoingWebhookResponseFailure:
       additionalProperties: false
-      example:
-        failure:
-          displayMessage: example_display_message
-          errorMessage: example_error_message
-          statusCode: 400
       externalDocs:
         url: ""
       properties:
@@ -1604,6 +1627,8 @@ components:
       type: object
     TestOutgoingWebhookResponseSuccess:
       additionalProperties: false
+      example:
+        success: "{}"
       externalDocs:
         url: ""
       properties:
@@ -1689,9 +1714,3 @@ components:
           type: string
       title: Test existing outgoing webhook request
       type: object
-  securitySchemes:
-    apiKeyAuth:
-      description: API key authentication
-      in: header
-      name: Authorization
-      type: apiKey

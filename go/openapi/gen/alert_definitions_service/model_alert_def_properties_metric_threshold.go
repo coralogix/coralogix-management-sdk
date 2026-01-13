@@ -20,6 +20,7 @@ var _ MappedNullable = &AlertDefPropertiesMetricThreshold{}
 // AlertDefPropertiesMetricThreshold User-configurable properties of an alert definition
 type AlertDefPropertiesMetricThreshold struct {
 	ActiveOn *ActivitySchedule `json:"activeOn,omitempty"`
+	DataSources []AlertDefDataSource `json:"dataSources,omitempty"`
 	// Whether the alert has been marked as deleted
 	Deleted *bool `json:"deleted,omitempty"`
 	// A detailed description of what the alert monitors and when it triggers
@@ -88,6 +89,38 @@ func (o *AlertDefPropertiesMetricThreshold) HasActiveOn() bool {
 // SetActiveOn gets a reference to the given ActivitySchedule and assigns it to the ActiveOn field.
 func (o *AlertDefPropertiesMetricThreshold) SetActiveOn(v ActivitySchedule) {
 	o.ActiveOn = &v
+}
+
+// GetDataSources returns the DataSources field value if set, zero value otherwise.
+func (o *AlertDefPropertiesMetricThreshold) GetDataSources() []AlertDefDataSource {
+	if o == nil || IsNil(o.DataSources) {
+		var ret []AlertDefDataSource
+		return ret
+	}
+	return o.DataSources
+}
+
+// GetDataSourcesOk returns a tuple with the DataSources field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefPropertiesMetricThreshold) GetDataSourcesOk() ([]AlertDefDataSource, bool) {
+	if o == nil || IsNil(o.DataSources) {
+		return nil, false
+	}
+	return o.DataSources, true
+}
+
+// HasDataSources returns a boolean if a field has been set.
+func (o *AlertDefPropertiesMetricThreshold) HasDataSources() bool {
+	if o != nil && !IsNil(o.DataSources) {
+		return true
+	}
+
+	return false
+}
+
+// SetDataSources gets a reference to the given []AlertDefDataSource and assigns it to the DataSources field.
+func (o *AlertDefPropertiesMetricThreshold) SetDataSources(v []AlertDefDataSource) {
+	o.DataSources = v
 }
 
 // GetDeleted returns the Deleted field value if set, zero value otherwise.
@@ -518,6 +551,9 @@ func (o AlertDefPropertiesMetricThreshold) ToMap() (map[string]interface{}, erro
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.ActiveOn) {
 		toSerialize["activeOn"] = o.ActiveOn
+	}
+	if !IsNil(o.DataSources) {
+		toSerialize["dataSources"] = o.DataSources
 	}
 	if !IsNil(o.Deleted) {
 		toSerialize["deleted"] = o.Deleted

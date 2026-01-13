@@ -17,15 +17,16 @@ import (
 // checks if the CaseFilters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CaseFilters{}
 
-// CaseFilters Filters applied when querying cases, including states, priorities, categories, groupings, and labels.
+// CaseFilters Filters applied when querying cases, including statuses, priorities, categories, groupings, and labels.
 type CaseFilters struct {
+	AlertFilters *AlertFilters `json:"alertFilters,omitempty"`
 	Assignees []AssigneeOption `json:"assignees,omitempty"`
+	CaseLabelsFilter *CaseLabelsFilter `json:"caseLabelsFilter,omitempty"`
 	Categories []CaseCategory `json:"categories,omitempty"`
 	DateRange *DateRangeFilter `json:"dateRange,omitempty"`
 	Groupings []FilterGroup `json:"groupings,omitempty"`
 	Labels []FilterGroup `json:"labels,omitempty"`
 	Priorities []CasePriority `json:"priorities,omitempty"`
-	States []CaseState `json:"states,omitempty"`
 	Statuses []CaseStatus `json:"statuses,omitempty"`
 	// Test search query applied to case titles
 	TextSearch *string `json:"textSearch,omitempty"`
@@ -46,6 +47,38 @@ func NewCaseFilters() *CaseFilters {
 func NewCaseFiltersWithDefaults() *CaseFilters {
 	this := CaseFilters{}
 	return &this
+}
+
+// GetAlertFilters returns the AlertFilters field value if set, zero value otherwise.
+func (o *CaseFilters) GetAlertFilters() AlertFilters {
+	if o == nil || IsNil(o.AlertFilters) {
+		var ret AlertFilters
+		return ret
+	}
+	return *o.AlertFilters
+}
+
+// GetAlertFiltersOk returns a tuple with the AlertFilters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseFilters) GetAlertFiltersOk() (*AlertFilters, bool) {
+	if o == nil || IsNil(o.AlertFilters) {
+		return nil, false
+	}
+	return o.AlertFilters, true
+}
+
+// HasAlertFilters returns a boolean if a field has been set.
+func (o *CaseFilters) HasAlertFilters() bool {
+	if o != nil && !IsNil(o.AlertFilters) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlertFilters gets a reference to the given AlertFilters and assigns it to the AlertFilters field.
+func (o *CaseFilters) SetAlertFilters(v AlertFilters) {
+	o.AlertFilters = &v
 }
 
 // GetAssignees returns the Assignees field value if set, zero value otherwise.
@@ -78,6 +111,38 @@ func (o *CaseFilters) HasAssignees() bool {
 // SetAssignees gets a reference to the given []AssigneeOption and assigns it to the Assignees field.
 func (o *CaseFilters) SetAssignees(v []AssigneeOption) {
 	o.Assignees = v
+}
+
+// GetCaseLabelsFilter returns the CaseLabelsFilter field value if set, zero value otherwise.
+func (o *CaseFilters) GetCaseLabelsFilter() CaseLabelsFilter {
+	if o == nil || IsNil(o.CaseLabelsFilter) {
+		var ret CaseLabelsFilter
+		return ret
+	}
+	return *o.CaseLabelsFilter
+}
+
+// GetCaseLabelsFilterOk returns a tuple with the CaseLabelsFilter field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseFilters) GetCaseLabelsFilterOk() (*CaseLabelsFilter, bool) {
+	if o == nil || IsNil(o.CaseLabelsFilter) {
+		return nil, false
+	}
+	return o.CaseLabelsFilter, true
+}
+
+// HasCaseLabelsFilter returns a boolean if a field has been set.
+func (o *CaseFilters) HasCaseLabelsFilter() bool {
+	if o != nil && !IsNil(o.CaseLabelsFilter) {
+		return true
+	}
+
+	return false
+}
+
+// SetCaseLabelsFilter gets a reference to the given CaseLabelsFilter and assigns it to the CaseLabelsFilter field.
+func (o *CaseFilters) SetCaseLabelsFilter(v CaseLabelsFilter) {
+	o.CaseLabelsFilter = &v
 }
 
 // GetCategories returns the Categories field value if set, zero value otherwise.
@@ -240,38 +305,6 @@ func (o *CaseFilters) SetPriorities(v []CasePriority) {
 	o.Priorities = v
 }
 
-// GetStates returns the States field value if set, zero value otherwise.
-func (o *CaseFilters) GetStates() []CaseState {
-	if o == nil || IsNil(o.States) {
-		var ret []CaseState
-		return ret
-	}
-	return o.States
-}
-
-// GetStatesOk returns a tuple with the States field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CaseFilters) GetStatesOk() ([]CaseState, bool) {
-	if o == nil || IsNil(o.States) {
-		return nil, false
-	}
-	return o.States, true
-}
-
-// HasStates returns a boolean if a field has been set.
-func (o *CaseFilters) HasStates() bool {
-	if o != nil && !IsNil(o.States) {
-		return true
-	}
-
-	return false
-}
-
-// SetStates gets a reference to the given []CaseState and assigns it to the States field.
-func (o *CaseFilters) SetStates(v []CaseState) {
-	o.States = v
-}
-
 // GetStatuses returns the Statuses field value if set, zero value otherwise.
 func (o *CaseFilters) GetStatuses() []CaseStatus {
 	if o == nil || IsNil(o.Statuses) {
@@ -346,8 +379,14 @@ func (o CaseFilters) MarshalJSON() ([]byte, error) {
 
 func (o CaseFilters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AlertFilters) {
+		toSerialize["alertFilters"] = o.AlertFilters
+	}
 	if !IsNil(o.Assignees) {
 		toSerialize["assignees"] = o.Assignees
+	}
+	if !IsNil(o.CaseLabelsFilter) {
+		toSerialize["caseLabelsFilter"] = o.CaseLabelsFilter
 	}
 	if !IsNil(o.Categories) {
 		toSerialize["categories"] = o.Categories
@@ -363,9 +402,6 @@ func (o CaseFilters) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Priorities) {
 		toSerialize["priorities"] = o.Priorities
-	}
-	if !IsNil(o.States) {
-		toSerialize["states"] = o.States
 	}
 	if !IsNil(o.Statuses) {
 		toSerialize["statuses"] = o.Statuses

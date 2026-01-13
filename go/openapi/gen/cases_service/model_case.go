@@ -31,6 +31,8 @@ type Case struct {
 	CreateTime time.Time `json:"createTime"`
 	// Detailed description of the case
 	Description *string `json:"description,omitempty"`
+	// Measures how long the Case is/was opened in milliseconds
+	Duration *int64 `json:"duration,omitempty"`
 	Groupings []V1KeyValue `json:"groupings,omitempty"`
 	// Unique identifier of the case
 	Id string `json:"id"`
@@ -40,7 +42,6 @@ type Case struct {
 	// Readable identifier of the case, available only for the cases that became Active
 	ReadableId *string `json:"readableId,omitempty"`
 	ResolutionDetails *ResolutionDetails `json:"resolutionDetails,omitempty"`
-	State CaseState `json:"state"`
 	Status CaseStatus `json:"status"`
 	// Case title
 	Title string `json:"title"`
@@ -54,13 +55,12 @@ type _Case Case
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCase(category CaseCategory, createTime time.Time, id string, priority CasePriority, state CaseState, status CaseStatus, title string) *Case {
+func NewCase(category CaseCategory, createTime time.Time, id string, priority CasePriority, status CaseStatus, title string) *Case {
 	this := Case{}
 	this.Category = category
 	this.CreateTime = createTime
 	this.Id = id
 	this.Priority = priority
-	this.State = state
 	this.Status = status
 	this.Title = title
 	return &this
@@ -248,6 +248,38 @@ func (o *Case) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *Case) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetDuration returns the Duration field value if set, zero value otherwise.
+func (o *Case) GetDuration() int64 {
+	if o == nil || IsNil(o.Duration) {
+		var ret int64
+		return ret
+	}
+	return *o.Duration
+}
+
+// GetDurationOk returns a tuple with the Duration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Case) GetDurationOk() (*int64, bool) {
+	if o == nil || IsNil(o.Duration) {
+		return nil, false
+	}
+	return o.Duration, true
+}
+
+// HasDuration returns a boolean if a field has been set.
+func (o *Case) HasDuration() bool {
+	if o != nil && !IsNil(o.Duration) {
+		return true
+	}
+
+	return false
+}
+
+// SetDuration gets a reference to the given int64 and assigns it to the Duration field.
+func (o *Case) SetDuration(v int64) {
+	o.Duration = &v
 }
 
 // GetGroupings returns the Groupings field value if set, zero value otherwise.
@@ -458,30 +490,6 @@ func (o *Case) SetResolutionDetails(v ResolutionDetails) {
 	o.ResolutionDetails = &v
 }
 
-// GetState returns the State field value
-func (o *Case) GetState() CaseState {
-	if o == nil {
-		var ret CaseState
-		return ret
-	}
-
-	return o.State
-}
-
-// GetStateOk returns a tuple with the State field value
-// and a boolean to check if the value has been set.
-func (o *Case) GetStateOk() (*CaseState, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.State, true
-}
-
-// SetState sets field value
-func (o *Case) SetState(v CaseState) {
-	o.State = v
-}
-
 // GetStatus returns the Status field value
 func (o *Case) GetStatus() CaseStatus {
 	if o == nil {
@@ -586,6 +594,9 @@ func (o Case) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
+	if !IsNil(o.Duration) {
+		toSerialize["duration"] = o.Duration
+	}
 	if !IsNil(o.Groupings) {
 		toSerialize["groupings"] = o.Groupings
 	}
@@ -603,7 +614,6 @@ func (o Case) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ResolutionDetails) {
 		toSerialize["resolutionDetails"] = o.ResolutionDetails
 	}
-	toSerialize["state"] = o.State
 	toSerialize["status"] = o.Status
 	toSerialize["title"] = o.Title
 	if !IsNil(o.UpdateTime) {
@@ -621,7 +631,6 @@ func (o *Case) UnmarshalJSON(data []byte) (err error) {
 		"createTime",
 		"id",
 		"priority",
-		"state",
 		"status",
 		"title",
 	}

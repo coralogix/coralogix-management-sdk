@@ -78,15 +78,15 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*SlosServiceAPI* | [**SlosServiceBatchExecuteSlo**](docs/SlosServiceAPI.md#slosservicebatchexecuteslo) | **Post** /v1/slo/slos:batchExecute | Batch Execute Slo
-*SlosServiceAPI* | [**SlosServiceBatchGetSlos**](docs/SlosServiceAPI.md#slosservicebatchgetslos) | **Get** /v1/slo/slos:batchGet | Batch Get Slo
-*SlosServiceAPI* | [**SlosServiceCreateSlo**](docs/SlosServiceAPI.md#slosservicecreateslo) | **Post** /v1/slo/slos | Create Slo
-*SlosServiceAPI* | [**SlosServiceDeleteSlo**](docs/SlosServiceAPI.md#slosservicedeleteslo) | **Delete** /v1/slo/slos/{id} | Delete Slo
-*SlosServiceAPI* | [**SlosServiceGetSlo**](docs/SlosServiceAPI.md#slosservicegetslo) | **Get** /v1/slo/slos/{id} | Get Slo
-*SlosServiceAPI* | [**SlosServiceGetZeroState**](docs/SlosServiceAPI.md#slosservicegetzerostate) | **Get** /v1/slo/slos/zeroState | Get Slo Zero State
-*SlosServiceAPI* | [**SlosServiceListSlos**](docs/SlosServiceAPI.md#slosservicelistslos) | **Get** /v1/slo/slos | List Slos
-*SlosServiceAPI* | [**SlosServiceReplaceSlo**](docs/SlosServiceAPI.md#slosservicereplaceslo) | **Put** /v1/slo/slos | Replace Slo
-*SlosServiceAPI* | [**SlosServiceValidateReplaceSloAlerts**](docs/SlosServiceAPI.md#slosservicevalidatereplacesloalerts) | **Post** /v1/slo/slos/validate | Replace Slo Pre-Validate Alerts
+*SlosServiceAPI* | [**SlosServiceBatchExecuteSlo**](docs/SlosServiceAPI.md#slosservicebatchexecuteslo) | **Post** /slo/slo/v1/batch | Batch Execute Slo
+*SlosServiceAPI* | [**SlosServiceBatchGetSlos**](docs/SlosServiceAPI.md#slosservicebatchgetslos) | **Get** /slo/slo/v1/batch | Batch Get Slo
+*SlosServiceAPI* | [**SlosServiceCreateSlo**](docs/SlosServiceAPI.md#slosservicecreateslo) | **Post** /slo/slo/v1 | Create Slo
+*SlosServiceAPI* | [**SlosServiceDeleteSlo**](docs/SlosServiceAPI.md#slosservicedeleteslo) | **Delete** /slo/slo/v1/{id} | Delete Slo
+*SlosServiceAPI* | [**SlosServiceGetSlo**](docs/SlosServiceAPI.md#slosservicegetslo) | **Get** /slo/slo/v1/{id} | Get Slo
+*SlosServiceAPI* | [**SlosServiceGetZeroState**](docs/SlosServiceAPI.md#slosservicegetzerostate) | **Get** /slo/slo/v1/zeroState | Get Slo Zero State
+*SlosServiceAPI* | [**SlosServiceListSlos**](docs/SlosServiceAPI.md#slosservicelistslos) | **Get** /slo/slo/v1 | List Slos
+*SlosServiceAPI* | [**SlosServiceReplaceSlo**](docs/SlosServiceAPI.md#slosservicereplaceslo) | **Put** /slo/slo/v1 | Replace Slo
+*SlosServiceAPI* | [**SlosServiceValidateReplaceSloAlerts**](docs/SlosServiceAPI.md#slosservicevalidatereplacesloalerts) | **Post** /slo/slo/v1/validate | Replace Slo Pre-Validate Alerts
 
 
 ## Documentation For Models
@@ -111,9 +111,12 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [GetSloResponse](docs/GetSloResponse.md)
  - [GetZeroStateResponse](docs/GetZeroStateResponse.md)
- - [IsFilterPredicate](docs/IsFilterPredicate.md)
+ - [IsFilterPredicateStringValues](docs/IsFilterPredicateStringValues.md)
+ - [IsFilterPredicateTypeValues](docs/IsFilterPredicateTypeValues.md)
  - [ListSlosResponse](docs/ListSlosResponse.md)
  - [Metric](docs/Metric.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MissingDataStrategy](docs/MissingDataStrategy.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [ReplaceSloAlertsValidationsResponse](docs/ReplaceSloAlertsValidationsResponse.md)
@@ -135,14 +138,18 @@ Class | Method | HTTP request | Description
  - [SloFilterField](docs/SloFilterField.md)
  - [SloFilterFieldConstFilter](docs/SloFilterFieldConstFilter.md)
  - [SloFilterFieldLabelName](docs/SloFilterFieldLabelName.md)
+ - [SloFilterFieldSloType](docs/SloFilterFieldSloType.md)
  - [SloFilterPredicate](docs/SloFilterPredicate.md)
- - [SloFilters](docs/SloFilters.md)
+ - [SloFilterPredicateIs](docs/SloFilterPredicateIs.md)
  - [SloRequestBasedMetricSli](docs/SloRequestBasedMetricSli.md)
  - [SloTimeFrame](docs/SloTimeFrame.md)
+ - [SloType](docs/SloType.md)
  - [SloWindowBasedMetricSli](docs/SloWindowBasedMetricSli.md)
  - [SlosServiceBatchExecuteSloRequestsParameterInner](docs/SlosServiceBatchExecuteSloRequestsParameterInner.md)
+ - [SlosServiceCreateSloRequest](docs/SlosServiceCreateSloRequest.md)
  - [SlosServiceReplaceSloRequest](docs/SlosServiceReplaceSloRequest.md)
- - [SlosServiceValidateReplaceSloAlertsRequest](docs/SlosServiceValidateReplaceSloAlertsRequest.md)
+ - [StringValues](docs/StringValues.md)
+ - [TypeValues](docs/TypeValues.md)
  - [V1Grouping](docs/V1Grouping.md)
  - [V1Revision](docs/V1Revision.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
@@ -152,28 +159,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
-
-Authentication schemes defined for the API:
-### apiKeyAuth
-
-- **Type**: API key
-- **API key parameter name**: Authorization
-- **Location**: HTTP header
-
-Note, each API key must be added to a map of `map[string]APIKey` where the key is: apiKeyAuth and passed in as the auth context for each request.
-
-Example
-
-```go
-auth := context.WithValue(
-		context.Background(),
-		slos_service.ContextAPIKeys,
-		map[string]slos_service.APIKey{
-			"apiKeyAuth": {Key: "API_KEY_STRING"},
-		},
-	)
-r, err := client.Service.Operation(auth, args)
-```
+Endpoints do not require authorization.
 
 
 ## Documentation for Utility Methods

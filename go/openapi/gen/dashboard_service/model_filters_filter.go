@@ -25,6 +25,7 @@ type FiltersFilter struct {
 	DisplayName *string `json:"displayName,omitempty"`
 	// Indicates if the filter is currently enabled or not.
 	Enabled *bool `json:"enabled,omitempty"`
+	Id *UUID `json:"id,omitempty"`
 	Source *FilterSource `json:"source,omitempty"`
 }
 
@@ -141,6 +142,38 @@ func (o *FiltersFilter) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *FiltersFilter) GetId() UUID {
+	if o == nil || IsNil(o.Id) {
+		var ret UUID
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FiltersFilter) GetIdOk() (*UUID, bool) {
+	if o == nil || IsNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *FiltersFilter) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given UUID and assigns it to the Id field.
+func (o *FiltersFilter) SetId(v UUID) {
+	o.Id = &v
+}
+
 // GetSource returns the Source field value if set, zero value otherwise.
 func (o *FiltersFilter) GetSource() FilterSource {
 	if o == nil || IsNil(o.Source) {
@@ -191,6 +224,9 @@ func (o FiltersFilter) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
+	}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
 	}
 	if !IsNil(o.Source) {
 		toSerialize["source"] = o.Source

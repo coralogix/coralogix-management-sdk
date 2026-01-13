@@ -120,6 +120,8 @@ Class | Method | HTTP request | Description
  - [BarChartQuerySpans](docs/BarChartQuerySpans.md)
  - [BarChartSpansQuery](docs/BarChartSpansQuery.md)
  - [BarChartStackDefinition](docs/BarChartStackDefinition.md)
+ - [ColorGradientType](docs/ColorGradientType.md)
+ - [ColorSolidType](docs/ColorSolidType.md)
  - [ColorsBy](docs/ColorsBy.md)
  - [ColorsByAggregation](docs/ColorsByAggregation.md)
  - [ColorsByGroupBy](docs/ColorsByGroupBy.md)
@@ -140,19 +142,13 @@ Class | Method | HTTP request | Description
  - [Dashboard](docs/Dashboard.md)
  - [DashboardAction](docs/DashboardAction.md)
  - [DashboardCatalogItem](docs/DashboardCatalogItem.md)
- - [DashboardFiveMinutesFolderIdAbsoluteTimeFrame](docs/DashboardFiveMinutesFolderIdAbsoluteTimeFrame.md)
- - [DashboardFiveMinutesFolderIdRelativeTimeFrame](docs/DashboardFiveMinutesFolderIdRelativeTimeFrame.md)
- - [DashboardFiveMinutesFolderPathAbsoluteTimeFrame](docs/DashboardFiveMinutesFolderPathAbsoluteTimeFrame.md)
- - [DashboardFiveMinutesFolderPathRelativeTimeFrame](docs/DashboardFiveMinutesFolderPathRelativeTimeFrame.md)
+ - [DashboardFiveMinutesAbsoluteTimeFrame](docs/DashboardFiveMinutesAbsoluteTimeFrame.md)
+ - [DashboardFiveMinutesRelativeTimeFrame](docs/DashboardFiveMinutesRelativeTimeFrame.md)
  - [DashboardFolder](docs/DashboardFolder.md)
- - [DashboardOffFolderIdAbsoluteTimeFrame](docs/DashboardOffFolderIdAbsoluteTimeFrame.md)
- - [DashboardOffFolderIdRelativeTimeFrame](docs/DashboardOffFolderIdRelativeTimeFrame.md)
- - [DashboardOffFolderPathAbsoluteTimeFrame](docs/DashboardOffFolderPathAbsoluteTimeFrame.md)
- - [DashboardOffFolderPathRelativeTimeFrame](docs/DashboardOffFolderPathRelativeTimeFrame.md)
- - [DashboardTwoMinutesFolderIdAbsoluteTimeFrame](docs/DashboardTwoMinutesFolderIdAbsoluteTimeFrame.md)
- - [DashboardTwoMinutesFolderIdRelativeTimeFrame](docs/DashboardTwoMinutesFolderIdRelativeTimeFrame.md)
- - [DashboardTwoMinutesFolderPathAbsoluteTimeFrame](docs/DashboardTwoMinutesFolderPathAbsoluteTimeFrame.md)
- - [DashboardTwoMinutesFolderPathRelativeTimeFrame](docs/DashboardTwoMinutesFolderPathRelativeTimeFrame.md)
+ - [DashboardOffAbsoluteTimeFrame](docs/DashboardOffAbsoluteTimeFrame.md)
+ - [DashboardOffRelativeTimeFrame](docs/DashboardOffRelativeTimeFrame.md)
+ - [DashboardTwoMinutesAbsoluteTimeFrame](docs/DashboardTwoMinutesAbsoluteTimeFrame.md)
+ - [DashboardTwoMinutesRelativeTimeFrame](docs/DashboardTwoMinutesRelativeTimeFrame.md)
  - [DataTable](docs/DataTable.md)
  - [DataTableColumn](docs/DataTableColumn.md)
  - [DataTableDataprimeQuery](docs/DataTableDataprimeQuery.md)
@@ -177,6 +173,7 @@ Class | Method | HTTP request | Description
  - [DimensionField](docs/DimensionField.md)
  - [DynamicQuery](docs/DynamicQuery.md)
  - [DynamicQueryDataprime](docs/DynamicQueryDataprime.md)
+ - [DynamicQueryDefinition](docs/DynamicQueryDefinition.md)
  - [DynamicQueryLogs](docs/DynamicQueryLogs.md)
  - [DynamicQueryMetrics](docs/DynamicQueryMetrics.md)
  - [DynamicQuerySpans](docs/DynamicQuerySpans.md)
@@ -220,12 +217,31 @@ Class | Method | HTTP request | Description
  - [GaugeThreshold](docs/GaugeThreshold.md)
  - [GaugeThresholdBy](docs/GaugeThresholdBy.md)
  - [GaugeUnit](docs/GaugeUnit.md)
+ - [Geomap](docs/Geomap.md)
+ - [GeomapAggregation](docs/GeomapAggregation.md)
+ - [GeomapAggregationAvg](docs/GeomapAggregationAvg.md)
+ - [GeomapAggregationCount](docs/GeomapAggregationCount.md)
+ - [GeomapAggregationFieldBased](docs/GeomapAggregationFieldBased.md)
+ - [GeomapAggregationMax](docs/GeomapAggregationMax.md)
+ - [GeomapAggregationMin](docs/GeomapAggregationMin.md)
+ - [GeomapAggregationSum](docs/GeomapAggregationSum.md)
+ - [GeomapAwsRegionConfig](docs/GeomapAwsRegionConfig.md)
+ - [GeomapColor](docs/GeomapColor.md)
+ - [GeomapColorColorRange](docs/GeomapColorColorRange.md)
+ - [GeomapColorSize](docs/GeomapColorSize.md)
+ - [GeomapCoordinateConfig](docs/GeomapCoordinateConfig.md)
+ - [GeomapFieldConfig](docs/GeomapFieldConfig.md)
+ - [GeomapFieldConfigAwsRegionConfig](docs/GeomapFieldConfigAwsRegionConfig.md)
+ - [GeomapFieldConfigCoordinateConfig](docs/GeomapFieldConfigCoordinateConfig.md)
+ - [GeomapTooltip](docs/GeomapTooltip.md)
  - [GetDashboardBySlugResponse](docs/GetDashboardBySlugResponse.md)
  - [GetDashboardCatalogResponse](docs/GetDashboardCatalogResponse.md)
  - [GetDashboardResponse](docs/GetDashboardResponse.md)
  - [GoToDashboardTemplateAction](docs/GoToDashboardTemplateAction.md)
  - [Heatmap](docs/Heatmap.md)
  - [HeatmapColorPreset](docs/HeatmapColorPreset.md)
+ - [HeatmapColorRange](docs/HeatmapColorRange.md)
+ - [HeatmapPreset](docs/HeatmapPreset.md)
  - [HeatmapTooltip](docs/HeatmapTooltip.md)
  - [Hexagon](docs/Hexagon.md)
  - [HexagonBins](docs/HexagonBins.md)
@@ -267,6 +283,7 @@ Class | Method | HTTP request | Description
  - [LineChartMetricsQuery](docs/LineChartMetricsQuery.md)
  - [LineChartQuery](docs/LineChartQuery.md)
  - [LineChartQueryDataprime](docs/LineChartQueryDataprime.md)
+ - [LineChartQueryDefinition](docs/LineChartQueryDefinition.md)
  - [LineChartQueryLogs](docs/LineChartQueryLogs.md)
  - [LineChartQueryMetrics](docs/LineChartQueryMetrics.md)
  - [LineChartQuerySpans](docs/LineChartQuerySpans.md)
@@ -312,6 +329,9 @@ Class | Method | HTTP request | Description
  - [MetricsSource](docs/MetricsSource.md)
  - [MetricsSourceStrategy](docs/MetricsSourceStrategy.md)
  - [Min](docs/Min.md)
+ - [MinMax](docs/MinMax.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultiSelect](docs/MultiSelect.md)
  - [MultiSelectQuery](docs/MultiSelectQuery.md)
  - [MultiSelectQueryLogsQuery](docs/MultiSelectQueryLogsQuery.md)
@@ -357,14 +377,17 @@ Class | Method | HTTP request | Description
  - [Property](docs/Property.md)
  - [PropertyDefinition](docs/PropertyDefinition.md)
  - [PropertyDefinitionAlignment](docs/PropertyDefinitionAlignment.md)
+ - [PropertyDefinitionColumnDisplayName](docs/PropertyDefinitionColumnDisplayName.md)
  - [PropertyDefinitionLink](docs/PropertyDefinitionLink.md)
  - [PropertyDefinitionRegexExtract](docs/PropertyDefinitionRegexExtract.md)
  - [PropertyDefinitionThresholds](docs/PropertyDefinitionThresholds.md)
  - [PropertyDefinitionUnits](docs/PropertyDefinitionUnits.md)
+ - [PropertyDefinitionValuesAlias](docs/PropertyDefinitionValuesAlias.md)
+ - [PropertyDefinitionValuesMapping](docs/PropertyDefinitionValuesMapping.md)
  - [PropertyLinks](docs/PropertyLinks.md)
  - [PropertyThresholds](docs/PropertyThresholds.md)
  - [PropertyUnits](docs/PropertyUnits.md)
- - [QueryDefinition](docs/QueryDefinition.md)
+ - [PropertyValuesMapping](docs/PropertyValuesMapping.md)
  - [QueryLogsQuery](docs/QueryLogsQuery.md)
  - [QueryLogsQueryType](docs/QueryLogsQueryType.md)
  - [QueryLogsQueryTypeFieldName](docs/QueryLogsQueryTypeFieldName.md)
@@ -496,6 +519,8 @@ Class | Method | HTTP request | Description
  - [V1CommonDataModeType](docs/V1CommonDataModeType.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
  - [ValueLabel](docs/ValueLabel.md)
+ - [ValueMapping](docs/ValueMapping.md)
+ - [ValuesMappingType](docs/ValuesMappingType.md)
  - [Variable](docs/Variable.md)
  - [VariableDefinition](docs/VariableDefinition.md)
  - [VariableDefinitionConstant](docs/VariableDefinitionConstant.md)
@@ -527,6 +552,7 @@ Class | Method | HTTP request | Description
  - [Visualization](docs/Visualization.md)
  - [VisualizationBarValueDisplay](docs/VisualizationBarValueDisplay.md)
  - [VisualizationGauge](docs/VisualizationGauge.md)
+ - [VisualizationGeomap](docs/VisualizationGeomap.md)
  - [VisualizationHeatmap](docs/VisualizationHeatmap.md)
  - [VisualizationHexagonBins](docs/VisualizationHexagonBins.md)
  - [VisualizationHorizontalBars](docs/VisualizationHorizontalBars.md)
@@ -570,28 +596,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
-
-Authentication schemes defined for the API:
-### apiKeyAuth
-
-- **Type**: API key
-- **API key parameter name**: Authorization
-- **Location**: HTTP header
-
-Note, each API key must be added to a map of `map[string]APIKey` where the key is: apiKeyAuth and passed in as the auth context for each request.
-
-Example
-
-```go
-auth := context.WithValue(
-		context.Background(),
-		dashboard_service.ContextAPIKeys,
-		map[string]dashboard_service.APIKey{
-			"apiKeyAuth": {Key: "API_KEY_STRING"},
-		},
-	)
-r, err := client.Service.Operation(auth, args)
-```
+Endpoints do not require authorization.
 
 
 ## Documentation for Utility Methods

@@ -20,6 +20,7 @@ import (
 type SloFilterField struct {
 	SloFilterFieldConstFilter *SloFilterFieldConstFilter
 	SloFilterFieldLabelName *SloFilterFieldLabelName
+	SloFilterFieldSloType *SloFilterFieldSloType
 }
 
 // SloFilterFieldConstFilterAsSloFilterField is a convenience function that returns SloFilterFieldConstFilter wrapped in SloFilterField
@@ -33,6 +34,13 @@ func SloFilterFieldConstFilterAsSloFilterField(v *SloFilterFieldConstFilter) Slo
 func SloFilterFieldLabelNameAsSloFilterField(v *SloFilterFieldLabelName) SloFilterField {
 	return SloFilterField{
 		SloFilterFieldLabelName: v,
+	}
+}
+
+// SloFilterFieldSloTypeAsSloFilterField is a convenience function that returns SloFilterFieldSloType wrapped in SloFilterField
+func SloFilterFieldSloTypeAsSloFilterField(v *SloFilterFieldSloType) SloFilterField {
+	return SloFilterField{
+		SloFilterFieldSloType: v,
 	}
 }
 
@@ -75,10 +83,28 @@ func (dst *SloFilterField) UnmarshalJSON(data []byte) error {
 		dst.SloFilterFieldLabelName = nil
 	}
 
+	// try to unmarshal data into SloFilterFieldSloType
+	err = newStrictDecoder(data).Decode(&dst.SloFilterFieldSloType)
+	if err == nil {
+		jsonSloFilterFieldSloType, _ := json.Marshal(dst.SloFilterFieldSloType)
+		if string(jsonSloFilterFieldSloType) == "{}" { // empty struct
+			dst.SloFilterFieldSloType = nil
+		} else {
+			if err = validator.Validate(dst.SloFilterFieldSloType); err != nil {
+				dst.SloFilterFieldSloType = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.SloFilterFieldSloType = nil
+	}
+
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.SloFilterFieldConstFilter = nil
 		dst.SloFilterFieldLabelName = nil
+		dst.SloFilterFieldSloType = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(SloFilterField)")
 	} else if match == 1 {
@@ -98,6 +124,10 @@ func (src SloFilterField) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.SloFilterFieldLabelName)
 	}
 
+	if src.SloFilterFieldSloType != nil {
+		return json.Marshal(&src.SloFilterFieldSloType)
+	}
+
 	return nil, nil // no data in oneOf schemas
 }
 
@@ -114,6 +144,10 @@ func (obj *SloFilterField) GetActualInstance() (interface{}) {
 		return obj.SloFilterFieldLabelName
 	}
 
+	if obj.SloFilterFieldSloType != nil {
+		return obj.SloFilterFieldSloType
+	}
+
 	// all schemas are nil
 	return nil
 }
@@ -126,6 +160,10 @@ func (obj SloFilterField) GetActualInstanceValue() (interface{}) {
 
 	if obj.SloFilterFieldLabelName != nil {
 		return *obj.SloFilterFieldLabelName
+	}
+
+	if obj.SloFilterFieldSloType != nil {
+		return *obj.SloFilterFieldSloType
 	}
 
 	// all schemas are nil

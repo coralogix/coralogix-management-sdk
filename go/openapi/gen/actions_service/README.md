@@ -78,13 +78,13 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ActionsServiceAPI* | [**ActionsServiceAtomicBatchExecuteActions**](docs/ActionsServiceAPI.md#actionsserviceatomicbatchexecuteactions) | **Post** /v2/actions/actions:atomicBatchExecute | Atomic Batch Execute Actions
-*ActionsServiceAPI* | [**ActionsServiceCreateAction**](docs/ActionsServiceAPI.md#actionsservicecreateaction) | **Post** /v2/actions | Create Action
-*ActionsServiceAPI* | [**ActionsServiceDeleteAction**](docs/ActionsServiceAPI.md#actionsservicedeleteaction) | **Delete** /v2/actions/{id} | Delete Action
-*ActionsServiceAPI* | [**ActionsServiceGetAction**](docs/ActionsServiceAPI.md#actionsservicegetaction) | **Get** /v2/actions/{id} | Get Action
-*ActionsServiceAPI* | [**ActionsServiceListActions**](docs/ActionsServiceAPI.md#actionsservicelistactions) | **Get** /v2/actions | List Actions
-*ActionsServiceAPI* | [**ActionsServiceOrderActions**](docs/ActionsServiceAPI.md#actionsserviceorderactions) | **Post** /v2/actions/actions:order | Order Actions
-*ActionsServiceAPI* | [**ActionsServiceReplaceAction**](docs/ActionsServiceAPI.md#actionsservicereplaceaction) | **Put** /v2/actions | Replace Action
+*ActionsServiceAPI* | [**ActionsServiceAtomicBatchExecuteActions**](docs/ActionsServiceAPI.md#actionsserviceatomicbatchexecuteactions) | **Post** /actions/batch/v2 | Atomic Batch Execute Actions
+*ActionsServiceAPI* | [**ActionsServiceCreateAction**](docs/ActionsServiceAPI.md#actionsservicecreateaction) | **Post** /actions/actions/v2 | Create Action
+*ActionsServiceAPI* | [**ActionsServiceDeleteAction**](docs/ActionsServiceAPI.md#actionsservicedeleteaction) | **Delete** /actions/actions/v2/{id} | Delete Action
+*ActionsServiceAPI* | [**ActionsServiceGetAction**](docs/ActionsServiceAPI.md#actionsservicegetaction) | **Get** /actions/actions/v2/{id} | Get Action
+*ActionsServiceAPI* | [**ActionsServiceListActions**](docs/ActionsServiceAPI.md#actionsservicelistactions) | **Get** /actions/actions/v2 | List Actions
+*ActionsServiceAPI* | [**ActionsServiceOrderActions**](docs/ActionsServiceAPI.md#actionsserviceorderactions) | **Post** /actions/order/v2 | Order Actions
+*ActionsServiceAPI* | [**ActionsServiceReplaceAction**](docs/ActionsServiceAPI.md#actionsservicereplaceaction) | **Put** /actions/actions/v2 | Replace Action
 
 
 ## Documentation For Models
@@ -97,16 +97,14 @@ Class | Method | HTTP request | Description
  - [ActionExecutionResponseCreate](docs/ActionExecutionResponseCreate.md)
  - [ActionExecutionResponseDelete](docs/ActionExecutionResponseDelete.md)
  - [ActionExecutionResponseReplace](docs/ActionExecutionResponseReplace.md)
- - [ActionsServiceAtomicBatchExecuteActionsRequest](docs/ActionsServiceAtomicBatchExecuteActionsRequest.md)
- - [ActionsServiceCreateActionRequest](docs/ActionsServiceCreateActionRequest.md)
- - [ActionsServiceOrderActionsRequest](docs/ActionsServiceOrderActionsRequest.md)
- - [ActionsServiceReplaceActionRequest](docs/ActionsServiceReplaceActionRequest.md)
+ - [AtomicBatchExecuteActionsRequest](docs/AtomicBatchExecuteActionsRequest.md)
  - [AtomicBatchExecuteActionsResponse](docs/AtomicBatchExecuteActionsResponse.md)
  - [ColorsByAggregation](docs/ColorsByAggregation.md)
  - [ColorsByGroupBy](docs/ColorsByGroupBy.md)
  - [ColorsByStack](docs/ColorsByStack.md)
  - [CommonGroup](docs/CommonGroup.md)
  - [CreateActionRequest](docs/CreateActionRequest.md)
+ - [CreateActionRequest1](docs/CreateActionRequest1.md)
  - [CreateActionResponse](docs/CreateActionResponse.md)
  - [DeleteActionRequest](docs/DeleteActionRequest.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
@@ -117,8 +115,12 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [GetActionResponse](docs/GetActionResponse.md)
  - [ListActionsResponse](docs/ListActionsResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
+ - [OrderActionsRequest](docs/OrderActionsRequest.md)
  - [ReplaceActionRequest](docs/ReplaceActionRequest.md)
+ - [ReplaceActionRequest1](docs/ReplaceActionRequest1.md)
  - [ReplaceActionResponse](docs/ReplaceActionResponse.md)
  - [V2Action](docs/V2Action.md)
  - [V2SourceType](docs/V2SourceType.md)
@@ -127,28 +129,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
-
-Authentication schemes defined for the API:
-### apiKeyAuth
-
-- **Type**: API key
-- **API key parameter name**: Authorization
-- **Location**: HTTP header
-
-Note, each API key must be added to a map of `map[string]APIKey` where the key is: apiKeyAuth and passed in as the auth context for each request.
-
-Example
-
-```go
-auth := context.WithValue(
-		context.Background(),
-		actions_service.ContextAPIKeys,
-		map[string]actions_service.APIKey{
-			"apiKeyAuth": {Key: "API_KEY_STRING"},
-		},
-	)
-r, err := client.Service.Operation(auth, args)
-```
+Endpoints do not require authorization.
 
 
 ## Documentation for Utility Methods

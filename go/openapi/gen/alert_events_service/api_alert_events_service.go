@@ -49,8 +49,6 @@ func (r ApiAlertEventServiceGetAlertEventRequest) Execute() (*GetAlertEventRespo
 /*
 AlertEventServiceGetAlertEvent Get alert event by ID
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiAlertEventServiceGetAlertEventRequest
@@ -176,8 +174,6 @@ func (r ApiAlertEventServiceGetAlertEventsStatsRequest) Execute() (*GetAlertEven
 
 /*
 AlertEventServiceGetAlertEventsStats Get alert events statistics
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertEventServiceGetAlertEventsStatsRequest

@@ -36,6 +36,8 @@ model_geo_ip_type.go
 model_get_company_enrichment_settings_response.go
 model_get_enrichment_limit_response.go
 model_get_enrichments_response.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_remove_enrichments_response.go
 model_v3_filter_operator.go

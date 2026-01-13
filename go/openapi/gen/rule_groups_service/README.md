@@ -120,6 +120,8 @@ Class | Method | HTTP request | Description
  - [JsonParseParameters](docs/JsonParseParameters.md)
  - [JsonStringifyParameters](docs/JsonStringifyParameters.md)
  - [ListRuleGroupsResponse](docs/ListRuleGroupsResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [ParseParameters](docs/ParseParameters.md)
  - [RemoveFieldsParameters](docs/RemoveFieldsParameters.md)
@@ -154,28 +156,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
-
-Authentication schemes defined for the API:
-### apiKeyAuth
-
-- **Type**: API key
-- **API key parameter name**: Authorization
-- **Location**: HTTP header
-
-Note, each API key must be added to a map of `map[string]APIKey` where the key is: apiKeyAuth and passed in as the auth context for each request.
-
-Example
-
-```go
-auth := context.WithValue(
-		context.Background(),
-		rule_groups_service.ContextAPIKeys,
-		map[string]rule_groups_service.APIKey{
-			"apiKeyAuth": {Key: "API_KEY_STRING"},
-		},
-	)
-r, err := client.Service.Operation(auth, args)
-```
+Endpoints do not require authorization.
 
 
 ## Documentation for Utility Methods

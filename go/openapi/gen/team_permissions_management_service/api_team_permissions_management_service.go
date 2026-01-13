@@ -43,8 +43,6 @@ func (r ApiTeamPermissionsMgmtServiceAddUsersToTeamGroupRequest) Execute() (*Add
 /*
 TeamPermissionsMgmtServiceAddUsersToTeamGroup Add Users To Team Group
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiTeamPermissionsMgmtServiceAddUsersToTeamGroupRequest
@@ -153,8 +151,6 @@ func (r ApiTeamPermissionsMgmtServiceAddUsersToTeamGroupsRequest) Execute() (map
 /*
 TeamPermissionsMgmtServiceAddUsersToTeamGroups Add Users To Team Groups
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiTeamPermissionsMgmtServiceAddUsersToTeamGroupsRequest
 */
@@ -260,8 +256,6 @@ func (r ApiTeamPermissionsMgmtServiceCreateTeamGroupRequest) Execute() (*CreateT
 /*
 TeamPermissionsMgmtServiceCreateTeamGroup Create Team Group
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiTeamPermissionsMgmtServiceCreateTeamGroupRequest
 */
@@ -361,8 +355,6 @@ func (r ApiTeamPermissionsMgmtServiceDeleteTeamGroupRequest) Execute() (map[stri
 
 /*
 TeamPermissionsMgmtServiceDeleteTeamGroup Delete Team Group
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -477,8 +469,6 @@ func (r ApiTeamPermissionsMgmtServiceGetGroupUsersRequest) Execute() (*GetGroupU
 /*
 TeamPermissionsMgmtServiceGetGroupUsers Get Group Users
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiTeamPermissionsMgmtServiceGetGroupUsersRequest
@@ -586,8 +576,6 @@ func (r ApiTeamPermissionsMgmtServiceGetTeamGroupRequest) Execute() (*GetTeamGro
 /*
 TeamPermissionsMgmtServiceGetTeamGroup Get Team Group
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiTeamPermissionsMgmtServiceGetTeamGroupRequest
@@ -615,7 +603,7 @@ func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceG
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/aaa/team-groups/v1/{id}"
+	localVarPath := localBasePath + "/aaa/team-groups/v1/id/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -689,8 +677,6 @@ func (r ApiTeamPermissionsMgmtServiceGetTeamGroupByNameRequest) Execute() (*GetT
 /*
 TeamPermissionsMgmtServiceGetTeamGroupByName Get Team Group By Name
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param name
  @return ApiTeamPermissionsMgmtServiceGetTeamGroupByNameRequest
@@ -718,7 +704,7 @@ func (a *TeamPermissionsManagementServiceAPIService) TeamPermissionsMgmtServiceG
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/aaa/team-groups/v1/{name}"
+	localVarPath := localBasePath + "/aaa/team-groups/v1/name/{name}"
 	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", url.PathEscape(parameterValueToString(r.name, "name")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -791,8 +777,6 @@ func (r ApiTeamPermissionsMgmtServiceGetTeamGroupScopeRequest) Execute() (*GetTe
 
 /*
 TeamPermissionsMgmtServiceGetTeamGroupScope Get Team Group Scope
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -900,8 +884,6 @@ func (r ApiTeamPermissionsMgmtServiceGetTeamGroupsRequest) Execute() (*GetTeamGr
 /*
 TeamPermissionsMgmtServiceGetTeamGroups Get Team Groups
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiTeamPermissionsMgmtServiceGetTeamGroupsRequest
 */
@@ -1008,8 +990,6 @@ func (r ApiTeamPermissionsMgmtServiceRemoveUsersFromTeamGroupRequest) Execute() 
 
 /*
 TeamPermissionsMgmtServiceRemoveUsersFromTeamGroup Remove Users From Team Group
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -1134,8 +1114,6 @@ func (r ApiTeamPermissionsMgmtServiceRemoveUsersFromTeamGroupsRequest) Execute()
 /*
 TeamPermissionsMgmtServiceRemoveUsersFromTeamGroups Remove Users From Team Groups
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiTeamPermissionsMgmtServiceRemoveUsersFromTeamGroupsRequest
 */
@@ -1254,8 +1232,6 @@ func (r ApiTeamPermissionsMgmtServiceSetTeamGroupScopeRequest) Execute() (*SetTe
 /*
 TeamPermissionsMgmtServiceSetTeamGroupScope Set Team Group Scope
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiTeamPermissionsMgmtServiceSetTeamGroupScopeRequest
@@ -1363,8 +1339,6 @@ func (r ApiTeamPermissionsMgmtServiceUpdateTeamGroupRequest) Execute() (map[stri
 
 /*
 TeamPermissionsMgmtServiceUpdateTeamGroup Update Team Group
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiTeamPermissionsMgmtServiceUpdateTeamGroupRequest

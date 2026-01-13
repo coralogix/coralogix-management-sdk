@@ -80,14 +80,23 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *CasesServiceAPI* | [**CasesServiceAcknowledgeCase**](docs/CasesServiceAPI.md#casesserviceacknowledgecase) | **Post** /cases/cases/v1/{id}:acknowledge | Acknowledge a case
 *CasesServiceAPI* | [**CasesServiceAssignCase**](docs/CasesServiceAPI.md#casesserviceassigncase) | **Post** /cases/cases/v1/{id}:assign | Assign a case to a user
+*CasesServiceAPI* | [**CasesServiceBulkAcknowledge**](docs/CasesServiceAPI.md#casesservicebulkacknowledge) | **Post** /cases/cases/v1:bulkAcknowledge | Acknowledge multiple cases
+*CasesServiceAPI* | [**CasesServiceBulkAssign**](docs/CasesServiceAPI.md#casesservicebulkassign) | **Post** /cases/cases/v1:bulkAssign | Assign multiple cases to a user
+*CasesServiceAPI* | [**CasesServiceBulkClearPriorityOverride**](docs/CasesServiceAPI.md#casesservicebulkclearpriorityoverride) | **Post** /cases/cases/v1:bulkClearPriorityOverride | Remove priority override from multiple cases
+*CasesServiceAPI* | [**CasesServiceBulkClose**](docs/CasesServiceAPI.md#casesservicebulkclose) | **Post** /cases/cases/v1:bulkClose | Close multiple cases
+*CasesServiceAPI* | [**CasesServiceBulkResolve**](docs/CasesServiceAPI.md#casesservicebulkresolve) | **Post** /cases/cases/v1:bulkResolve | Resolve multiple cases
+*CasesServiceAPI* | [**CasesServiceBulkSetPriorityOverride**](docs/CasesServiceAPI.md#casesservicebulksetpriorityoverride) | **Post** /cases/cases/v1:bulkSetPriorityOverride | Override priority for multiple cases
+*CasesServiceAPI* | [**CasesServiceBulkUnassign**](docs/CasesServiceAPI.md#casesservicebulkunassign) | **Post** /cases/cases/v1:bulkUnassign | Remove assignment from multiple cases
+*CasesServiceAPI* | [**CasesServiceClearPriorityOverride**](docs/CasesServiceAPI.md#casesserviceclearpriorityoverride) | **Post** /cases/cases/v1/{id}:clearPriorityOverride | Remove priority override
 *CasesServiceAPI* | [**CasesServiceCloseCase**](docs/CasesServiceAPI.md#casesserviceclosecase) | **Post** /cases/cases/v1/{id}:close | Close a case
 *CasesServiceAPI* | [**CasesServiceGetCase**](docs/CasesServiceAPI.md#casesservicegetcase) | **Get** /cases/cases/v1/{id} | Get case by ID
+*CasesServiceAPI* | [**CasesServiceGetCaseExternalReferences**](docs/CasesServiceAPI.md#casesservicegetcaseexternalreferences) | **Get** /cases/cases/v1/{case_id}/external-references | Get external references for a case
 *CasesServiceAPI* | [**CasesServiceGetFilterValues**](docs/CasesServiceAPI.md#casesservicegetfiltervalues) | **Post** /cases/cases/v1:get-filter-values | Get available filter values
+*CasesServiceAPI* | [**CasesServiceGetGroupingKeys**](docs/CasesServiceAPI.md#casesservicegetgroupingkeys) | **Get** /cases/cases/v1:groupingKeys | Get available grouping keys
 *CasesServiceAPI* | [**CasesServiceListCases**](docs/CasesServiceAPI.md#casesservicelistcases) | **Post** /cases/cases/v1 | List cases with filters
 *CasesServiceAPI* | [**CasesServiceResolveCase**](docs/CasesServiceAPI.md#casesserviceresolvecase) | **Post** /cases/cases/v1/{id}:resolve | Resolve a case
 *CasesServiceAPI* | [**CasesServiceSetPriorityOverride**](docs/CasesServiceAPI.md#casesservicesetpriorityoverride) | **Post** /cases/cases/v1/{id}:setPriorityOverride | Set priority override
 *CasesServiceAPI* | [**CasesServiceUnassignCase**](docs/CasesServiceAPI.md#casesserviceunassigncase) | **Post** /cases/cases/v1/{id}:unassign | Remove case assignment
-*CasesServiceAPI* | [**CasesServiceUnsetPriorityOverride**](docs/CasesServiceAPI.md#casesserviceunsetpriorityoverride) | **Post** /cases/cases/v1/{id}:unsetPriorityOverride | Remove priority override
 *CasesServiceAPI* | [**CasesServiceUpdateCase**](docs/CasesServiceAPI.md#casesserviceupdatecase) | **Patch** /cases/cases/v1/{id} | Update case fields
 
 
@@ -95,10 +104,9 @@ Class | Method | HTTP request | Description
 
  - [AcknowledgeCaseRequest](docs/AcknowledgeCaseRequest.md)
  - [AcknowledgeCaseResponse](docs/AcknowledgeCaseResponse.md)
+ - [AlertFilters](docs/AlertFilters.md)
  - [AlertGroupingType](docs/AlertGroupingType.md)
  - [AlertIndicator](docs/AlertIndicator.md)
- - [AlertIndicatorState](docs/AlertIndicatorState.md)
- - [AlertPriority](docs/AlertPriority.md)
  - [AssignCaseRequest](docs/AssignCaseRequest.md)
  - [AssignCaseResponse](docs/AssignCaseResponse.md)
  - [AssigneeAggregation](docs/AssigneeAggregation.md)
@@ -106,22 +114,41 @@ Class | Method | HTTP request | Description
  - [AssigneeOption](docs/AssigneeOption.md)
  - [AssigneeOptionAssignee](docs/AssigneeOptionAssignee.md)
  - [AssigneeOptionUnassigned](docs/AssigneeOptionUnassigned.md)
+ - [BulkAcknowledgeRequest](docs/BulkAcknowledgeRequest.md)
+ - [BulkAcknowledgeResponse](docs/BulkAcknowledgeResponse.md)
+ - [BulkAssignRequest](docs/BulkAssignRequest.md)
+ - [BulkAssignResponse](docs/BulkAssignResponse.md)
+ - [BulkClearPriorityOverrideRequest](docs/BulkClearPriorityOverrideRequest.md)
+ - [BulkClearPriorityOverrideResponse](docs/BulkClearPriorityOverrideResponse.md)
+ - [BulkCloseRequest](docs/BulkCloseRequest.md)
+ - [BulkCloseResponse](docs/BulkCloseResponse.md)
+ - [BulkOverridePriorityRequest](docs/BulkOverridePriorityRequest.md)
+ - [BulkResolveRequest](docs/BulkResolveRequest.md)
+ - [BulkResolveResponse](docs/BulkResolveResponse.md)
+ - [BulkSetPriorityOverrideResponse](docs/BulkSetPriorityOverrideResponse.md)
+ - [BulkUnassignRequest](docs/BulkUnassignRequest.md)
+ - [BulkUnassignResponse](docs/BulkUnassignResponse.md)
  - [Case](docs/Case.md)
  - [CaseCategory](docs/CaseCategory.md)
+ - [CaseExternalReference](docs/CaseExternalReference.md)
  - [CaseFilters](docs/CaseFilters.md)
+ - [CaseLabelsFilter](docs/CaseLabelsFilter.md)
  - [CaseOrderBy](docs/CaseOrderBy.md)
  - [CaseOrderByDirection](docs/CaseOrderByDirection.md)
  - [CaseOrderByField](docs/CaseOrderByField.md)
  - [CasePatch](docs/CasePatch.md)
  - [CasePriority](docs/CasePriority.md)
  - [CaseResolver](docs/CaseResolver.md)
- - [CaseState](docs/CaseState.md)
+ - [CaseResolverCxUser](docs/CaseResolverCxUser.md)
+ - [CaseResolverServiceNow](docs/CaseResolverServiceNow.md)
+ - [CaseResolverSystem](docs/CaseResolverSystem.md)
  - [CaseStatus](docs/CaseStatus.md)
  - [CasesV1GetFilterValuesResponse](docs/CasesV1GetFilterValuesResponse.md)
  - [CasesV1PaginationRequest](docs/CasesV1PaginationRequest.md)
  - [CasesV1PaginationResponse](docs/CasesV1PaginationResponse.md)
  - [CasesV1UserDetails](docs/CasesV1UserDetails.md)
  - [CategoryAggregation](docs/CategoryAggregation.md)
+ - [ClearPriorityOverrideResponse](docs/ClearPriorityOverrideResponse.md)
  - [CloseCaseResponse](docs/CloseCaseResponse.md)
  - [ColorsByAggregation](docs/ColorsByAggregation.md)
  - [ColorsByGroupBy](docs/ColorsByGroupBy.md)
@@ -129,17 +156,25 @@ Class | Method | HTTP request | Description
  - [CommonGroup](docs/CommonGroup.md)
  - [DateRangeFilter](docs/DateRangeFilter.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
+ - [ExternalReferenceVendor](docs/ExternalReferenceVendor.md)
  - [FieldGroup](docs/FieldGroup.md)
+ - [FilterAggregation](docs/FilterAggregation.md)
  - [FilterGroup](docs/FilterGroup.md)
  - [FilterGroupAggregation](docs/FilterGroupAggregation.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
  - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
+ - [GetCaseExternalReferencesResponse](docs/GetCaseExternalReferencesResponse.md)
  - [GetCaseFilterValuesRequest](docs/GetCaseFilterValuesRequest.md)
  - [GetCaseResponse](docs/GetCaseResponse.md)
+ - [GetGroupingKeysResponse](docs/GetGroupingKeysResponse.md)
+ - [IndicatorPriority](docs/IndicatorPriority.md)
+ - [IndicatorState](docs/IndicatorState.md)
  - [ListCasesRequest](docs/ListCasesRequest.md)
  - [ListCasesResponse](docs/ListCasesResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [PriorityAggregation](docs/PriorityAggregation.md)
  - [PriorityDetails](docs/PriorityDetails.md)
@@ -147,10 +182,8 @@ Class | Method | HTTP request | Description
  - [ResolveCaseResponse](docs/ResolveCaseResponse.md)
  - [SetPriorityOverrideRequest](docs/SetPriorityOverrideRequest.md)
  - [SetPriorityOverrideResponse](docs/SetPriorityOverrideResponse.md)
- - [StateAggregation](docs/StateAggregation.md)
  - [StatusAggregation](docs/StatusAggregation.md)
  - [UnassignCaseResponse](docs/UnassignCaseResponse.md)
- - [UnsetPriorityOverrideResponse](docs/UnsetPriorityOverrideResponse.md)
  - [UpdateCaseResponse](docs/UpdateCaseResponse.md)
  - [V1KeyValue](docs/V1KeyValue.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
@@ -159,28 +192,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
-
-Authentication schemes defined for the API:
-### apiKeyAuth
-
-- **Type**: API key
-- **API key parameter name**: Authorization
-- **Location**: HTTP header
-
-Note, each API key must be added to a map of `map[string]APIKey` where the key is: apiKeyAuth and passed in as the auth context for each request.
-
-Example
-
-```go
-auth := context.WithValue(
-		context.Background(),
-		cases_service.ContextAPIKeys,
-		map[string]cases_service.APIKey{
-			"apiKeyAuth": {Key: "API_KEY_STRING"},
-		},
-	)
-r, err := client.Service.Operation(auth, args)
-```
+Endpoints do not require authorization.
 
 
 ## Documentation for Utility Methods

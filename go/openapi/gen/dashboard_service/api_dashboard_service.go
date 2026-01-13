@@ -37,9 +37,6 @@ DashboardCatalogServiceGetDashboardCatalog Get dashboard catalog
 
 Get a list of all dashboards accessible.
 
-Requires the following permissions:
-- `team-dashboards:Read`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDashboardCatalogServiceGetDashboardCatalogRequest
 */
@@ -143,8 +140,6 @@ func (r ApiDashboardsServiceAssignDashboardFolderRequest) Execute() (map[string]
 
 /*
 DashboardsServiceAssignDashboardFolder Assign a dashboard to a folder
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dashboardId
@@ -254,8 +249,6 @@ func (r ApiDashboardsServiceCreateDashboardRequest) Execute() (*CreateDashboardR
 /*
 DashboardsServiceCreateDashboard Create a new dashboard
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDashboardsServiceCreateDashboardRequest
 */
@@ -362,8 +355,6 @@ func (r ApiDashboardsServiceDeleteDashboardRequest) Execute() (map[string]interf
 /*
 DashboardsServiceDeleteDashboard Delete a dashboard
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dashboardId
  @return ApiDashboardsServiceDeleteDashboardRequest
@@ -468,8 +459,6 @@ func (r ApiDashboardsServiceGetDashboardRequest) Execute() (*GetDashboardRespons
 /*
 DashboardsServiceGetDashboard Get a dashboard
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dashboardId
  @return ApiDashboardsServiceGetDashboardRequest
@@ -570,8 +559,6 @@ func (r ApiDashboardsServiceGetDashboardBySlugRequest) Execute() (*GetDashboardB
 
 /*
 DashboardsServiceGetDashboardBySlug Get a dashboard by URL slug
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param slug
@@ -679,8 +666,6 @@ func (r ApiDashboardsServicePinDashboardRequest) Execute() (map[string]interface
 
 /*
 DashboardsServicePinDashboard Add dashboard to favorites
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dashboardId
@@ -790,8 +775,6 @@ func (r ApiDashboardsServiceReplaceDashboardRequest) Execute() (map[string]inter
 /*
 DashboardsServiceReplaceDashboard Replace a dashboard
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDashboardsServiceReplaceDashboardRequest
 */
@@ -897,8 +880,6 @@ func (r ApiDashboardsServiceReplaceDefaultDashboardRequest) Execute() (map[strin
 
 /*
 DashboardsServiceReplaceDefaultDashboard Replace the default dashboard
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dashboardId
@@ -1008,8 +989,6 @@ func (r ApiDashboardsServiceUnpinDashboardRequest) Execute() (map[string]interfa
 
 /*
 DashboardsServiceUnpinDashboard Remove dashboard from favorites
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dashboardId

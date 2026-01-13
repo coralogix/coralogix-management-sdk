@@ -7,7 +7,6 @@ servers:
 paths:
   /aaa/team-saml/v1/active:
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: SamlConfigurationService_SetActive
@@ -40,7 +39,6 @@ paths:
       - SAML Configuration Service
   /aaa/team-saml/v1/configuration:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: SamlConfigurationService_GetConfiguration
@@ -77,7 +75,6 @@ paths:
       - SAML Configuration Service
   /aaa/team-saml/v1/idp_parameters:
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: SamlConfigurationService_SetIDPParameters
@@ -110,7 +107,6 @@ paths:
       - SAML Configuration Service
   /aaa/team-saml/v1/sp_parameters:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: SamlConfigurationService_GetSPParameters
@@ -349,6 +345,28 @@ components:
           type: integer
       title: IDP Parameters
       type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     MultipleValues:
       properties:
         matcher:
@@ -438,9 +456,3 @@ components:
           type: integer
       title: Set IDP Parameters Request
       type: object
-  securitySchemes:
-    apiKeyAuth:
-      description: API key authentication
-      in: header
-      name: Authorization
-      type: apiKey

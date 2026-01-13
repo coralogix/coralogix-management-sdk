@@ -17,7 +17,7 @@ import (
 // checks if the AtomicBatchExecuteActionsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AtomicBatchExecuteActionsResponse{}
 
-// AtomicBatchExecuteActionsResponse struct for AtomicBatchExecuteActionsResponse
+// AtomicBatchExecuteActionsResponse This data structure represents the response to a batch Action execution request.
 type AtomicBatchExecuteActionsResponse struct {
 	MatchingResponses []ActionExecutionResponse `json:"matchingResponses,omitempty"`
 }

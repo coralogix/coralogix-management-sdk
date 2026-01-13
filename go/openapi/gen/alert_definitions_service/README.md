@@ -94,6 +94,7 @@ Class | Method | HTTP request | Description
 
  - [ActivitySchedule](docs/ActivitySchedule.md)
  - [AlertDef](docs/AlertDef.md)
+ - [AlertDefDataSource](docs/AlertDefDataSource.md)
  - [AlertDefIncidentSettings](docs/AlertDefIncidentSettings.md)
  - [AlertDefNotificationGroup](docs/AlertDefNotificationGroup.md)
  - [AlertDefOrderByDirection](docs/AlertDefOrderByDirection.md)
@@ -216,8 +217,12 @@ Class | Method | HTTP request | Description
  - [MetricTimeWindowMetricTimeWindowDynamicDuration](docs/MetricTimeWindowMetricTimeWindowDynamicDuration.md)
  - [MetricTimeWindowMetricTimeWindowSpecificValue](docs/MetricTimeWindowMetricTimeWindowSpecificValue.md)
  - [MetricTimeWindowValue](docs/MetricTimeWindowValue.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [NextOp](docs/NextOp.md)
+ - [NoDataPolicy](docs/NoDataPolicy.md)
+ - [NoDataPolicyState](docs/NoDataPolicyState.md)
  - [NotificationDestination](docs/NotificationDestination.md)
  - [NotificationRouter](docs/NotificationRouter.md)
  - [NotificationRouting](docs/NotificationRouting.md)
@@ -264,28 +269,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
-
-Authentication schemes defined for the API:
-### apiKeyAuth
-
-- **Type**: API key
-- **API key parameter name**: Authorization
-- **Location**: HTTP header
-
-Note, each API key must be added to a map of `map[string]APIKey` where the key is: apiKeyAuth and passed in as the auth context for each request.
-
-Example
-
-```go
-auth := context.WithValue(
-		context.Background(),
-		alert_definitions_service.ContextAPIKeys,
-		map[string]alert_definitions_service.APIKey{
-			"apiKeyAuth": {Key: "API_KEY_STRING"},
-		},
-	)
-r, err := client.Service.Operation(auth, args)
-```
+Endpoints do not require authorization.
 
 
 ## Documentation for Utility Methods

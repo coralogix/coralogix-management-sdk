@@ -78,6 +78,7 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*APIKeysAdminServiceAPI* | [**ApiKeysAdminServiceGetTeamMembersApiKeys**](docs/APIKeysAdminServiceAPI.md#apikeysadminservicegetteammembersapikeys) | **Get** /aaa/api-keys/v3 | Get Team Members API Keys
 *APIKeysServiceAPI* | [**ApiKeysServiceCreateApiKey**](docs/APIKeysServiceAPI.md#apikeysservicecreateapikey) | **Post** /aaa/api-keys/v3 | Create API Key
 *APIKeysServiceAPI* | [**ApiKeysServiceDeleteApiKey**](docs/APIKeysServiceAPI.md#apikeysservicedeleteapikey) | **Delete** /aaa/api-keys/v3/{key_id} | Delete API Key
 *APIKeysServiceAPI* | [**ApiKeysServiceGetApiKey**](docs/APIKeysServiceAPI.md#apikeysservicegetapikey) | **Get** /aaa/api-keys/v3/{key_id} | Get API Key
@@ -87,6 +88,10 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [ApiKey](docs/ApiKey.md)
+ - [ApiKeyOwner](docs/ApiKeyOwner.md)
+ - [ApiKeySummary](docs/ApiKeySummary.md)
+ - [ApiKeyUserOwner](docs/ApiKeyUserOwner.md)
  - [ColorsByAggregation](docs/ColorsByAggregation.md)
  - [ColorsByGroupBy](docs/ColorsByGroupBy.md)
  - [ColorsByStack](docs/ColorsByStack.md)
@@ -102,13 +107,17 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [GetApiKeyResponse](docs/GetApiKeyResponse.md)
  - [GetSendDataApiKeysResponse](docs/GetSendDataApiKeysResponse.md)
+ - [GetTeamMembersApiKeysResponse](docs/GetTeamMembersApiKeysResponse.md)
  - [KeyInfo](docs/KeyInfo.md)
  - [KeyInfoKeyPermissions](docs/KeyInfoKeyPermissions.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [Owner](docs/Owner.md)
  - [OwnerOrganisationId](docs/OwnerOrganisationId.md)
  - [OwnerTeamId](docs/OwnerTeamId.md)
  - [OwnerUserId](docs/OwnerUserId.md)
+ - [PermissionsPreset](docs/PermissionsPreset.md)
  - [PresetInfo](docs/PresetInfo.md)
  - [Presets](docs/Presets.md)
  - [UpdateApiKeyRequest](docs/UpdateApiKeyRequest.md)
@@ -118,28 +127,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
-
-Authentication schemes defined for the API:
-### apiKeyAuth
-
-- **Type**: API key
-- **API key parameter name**: Authorization
-- **Location**: HTTP header
-
-Note, each API key must be added to a map of `map[string]APIKey` where the key is: apiKeyAuth and passed in as the auth context for each request.
-
-Example
-
-```go
-auth := context.WithValue(
-		context.Background(),
-		api_keys_service.ContextAPIKeys,
-		map[string]api_keys_service.APIKey{
-			"apiKeyAuth": {Key: "API_KEY_STRING"},
-		},
-	)
-r, err := client.Service.Operation(auth, args)
-```
+Endpoints do not require authorization.
 
 
 ## Documentation for Utility Methods

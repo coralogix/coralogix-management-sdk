@@ -60,8 +60,6 @@ func (r ApiEventsServiceBatchGetEventRequest) Execute() (*BatchGetEventResponse,
 /*
 EventsServiceBatchGetEvent Batch Get Event
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEventsServiceBatchGetEventRequest
 */
@@ -200,8 +198,6 @@ func (r ApiEventsServiceGetEventRequest) Execute() (*V3GetEventResponse, *http.R
 /*
 EventsServiceGetEvent Get Event
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiEventsServiceGetEventRequest
@@ -321,8 +317,6 @@ func (r ApiEventsServiceGetEventsStatisticsRequest) Execute() (*GetEventsStatist
 
 /*
 EventsServiceGetEventsStatistics Get Events Statistics
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEventsServiceGetEventsStatisticsRequest
@@ -453,8 +447,6 @@ func (r ApiEventsServiceListAlertEventsRequest) Execute() (*ListAlertEventsRespo
 
 /*
 EventsServiceListAlertEvents List Alert Events
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEventsServiceListAlertEventsRequest
@@ -602,8 +594,6 @@ func (r ApiEventsServiceListEventsRequest) Execute() (*V3ListEventsResponse, *ht
 /*
 EventsServiceListEvents List Events
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEventsServiceListEventsRequest
 */
@@ -723,8 +713,6 @@ func (r ApiEventsServiceListEventsCountRequest) Execute() (*ListEventsCountRespo
 
 /*
 EventsServiceListEventsCount List Events Count
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEventsServiceListEventsCountRequest

@@ -23,7 +23,7 @@ type GetAllExtensionsResponseRevision struct {
 	Excerpt *string `json:"excerpt,omitempty"`
 	IntegrationDetails []IntegrationDetail `json:"integrationDetails,omitempty"`
 	Labels []string `json:"labels,omitempty"`
-	Summary *RevisionSummary `json:"summary,omitempty"`
+	Summary *GetAllExtensionsResponseRevisionSummary `json:"summary,omitempty"`
 	Version *string `json:"version,omitempty"`
 }
 
@@ -173,9 +173,9 @@ func (o *GetAllExtensionsResponseRevision) SetLabels(v []string) {
 }
 
 // GetSummary returns the Summary field value if set, zero value otherwise.
-func (o *GetAllExtensionsResponseRevision) GetSummary() RevisionSummary {
+func (o *GetAllExtensionsResponseRevision) GetSummary() GetAllExtensionsResponseRevisionSummary {
 	if o == nil || IsNil(o.Summary) {
-		var ret RevisionSummary
+		var ret GetAllExtensionsResponseRevisionSummary
 		return ret
 	}
 	return *o.Summary
@@ -183,7 +183,7 @@ func (o *GetAllExtensionsResponseRevision) GetSummary() RevisionSummary {
 
 // GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetAllExtensionsResponseRevision) GetSummaryOk() (*RevisionSummary, bool) {
+func (o *GetAllExtensionsResponseRevision) GetSummaryOk() (*GetAllExtensionsResponseRevisionSummary, bool) {
 	if o == nil || IsNil(o.Summary) {
 		return nil, false
 	}
@@ -199,8 +199,8 @@ func (o *GetAllExtensionsResponseRevision) HasSummary() bool {
 	return false
 }
 
-// SetSummary gets a reference to the given RevisionSummary and assigns it to the Summary field.
-func (o *GetAllExtensionsResponseRevision) SetSummary(v RevisionSummary) {
+// SetSummary gets a reference to the given GetAllExtensionsResponseRevisionSummary and assigns it to the Summary field.
+func (o *GetAllExtensionsResponseRevision) SetSummary(v GetAllExtensionsResponseRevisionSummary) {
 	o.Summary = &v
 }
 

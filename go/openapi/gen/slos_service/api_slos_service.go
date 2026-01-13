@@ -42,8 +42,6 @@ func (r ApiSlosServiceBatchExecuteSloRequest) Execute() (*BatchExecuteSloRespons
 /*
 SlosServiceBatchExecuteSlo Batch Execute Slo
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceBatchExecuteSloRequest
 */
@@ -69,7 +67,7 @@ func (a *SlosServiceAPIService) SlosServiceBatchExecuteSloExecute(r ApiSlosServi
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/slo/slos:batchExecute"
+	localVarPath := localBasePath + "/slo/slo/v1/batch"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -158,8 +156,6 @@ func (r ApiSlosServiceBatchGetSlosRequest) Execute() (*BatchGetSlosResponse, *ht
 /*
 SlosServiceBatchGetSlos Batch Get Slo
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceBatchGetSlosRequest
 */
@@ -185,7 +181,7 @@ func (a *SlosServiceAPIService) SlosServiceBatchGetSlosExecute(r ApiSlosServiceB
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/slo/slos:batchGet"
+	localVarPath := localBasePath + "/slo/slo/v1/batch"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -260,7 +256,7 @@ type ApiSlosServiceCreateSloRequest struct {
 	ctx context.Context
 	ApiService *SlosServiceAPIService
 	silenceDataValidations *bool
-	slosServiceReplaceSloRequest *SlosServiceReplaceSloRequest
+	slosServiceCreateSloRequest *SlosServiceCreateSloRequest
 }
 
 func (r ApiSlosServiceCreateSloRequest) SilenceDataValidations(silenceDataValidations bool) ApiSlosServiceCreateSloRequest {
@@ -268,8 +264,8 @@ func (r ApiSlosServiceCreateSloRequest) SilenceDataValidations(silenceDataValida
 	return r
 }
 
-func (r ApiSlosServiceCreateSloRequest) SlosServiceReplaceSloRequest(slosServiceReplaceSloRequest SlosServiceReplaceSloRequest) ApiSlosServiceCreateSloRequest {
-	r.slosServiceReplaceSloRequest = &slosServiceReplaceSloRequest
+func (r ApiSlosServiceCreateSloRequest) SlosServiceCreateSloRequest(slosServiceCreateSloRequest SlosServiceCreateSloRequest) ApiSlosServiceCreateSloRequest {
+	r.slosServiceCreateSloRequest = &slosServiceCreateSloRequest
 	return r
 }
 
@@ -279,8 +275,6 @@ func (r ApiSlosServiceCreateSloRequest) Execute() (*CreateSloResponse, *http.Res
 
 /*
 SlosServiceCreateSlo Create Slo
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceCreateSloRequest
@@ -307,7 +301,7 @@ func (a *SlosServiceAPIService) SlosServiceCreateSloExecute(r ApiSlosServiceCrea
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/slo/slos"
+	localVarPath := localBasePath + "/slo/slo/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -334,7 +328,7 @@ func (a *SlosServiceAPIService) SlosServiceCreateSloExecute(r ApiSlosServiceCrea
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.slosServiceReplaceSloRequest
+	localVarPostBody = r.slosServiceCreateSloRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -385,8 +379,6 @@ func (r ApiSlosServiceDeleteSloRequest) Execute() (*DeleteSloResponse, *http.Res
 /*
 SlosServiceDeleteSlo Delete Slo
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiSlosServiceDeleteSloRequest
@@ -414,7 +406,7 @@ func (a *SlosServiceAPIService) SlosServiceDeleteSloExecute(r ApiSlosServiceDele
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/slo/slos/{id}"
+	localVarPath := localBasePath + "/slo/slo/v1/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -488,8 +480,6 @@ func (r ApiSlosServiceGetSloRequest) Execute() (*GetSloResponse, *http.Response,
 /*
 SlosServiceGetSlo Get Slo
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiSlosServiceGetSloRequest
@@ -517,7 +507,7 @@ func (a *SlosServiceAPIService) SlosServiceGetSloExecute(r ApiSlosServiceGetSloR
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/slo/slos/{id}"
+	localVarPath := localBasePath + "/slo/slo/v1/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -590,8 +580,6 @@ func (r ApiSlosServiceGetZeroStateRequest) Execute() (*GetZeroStateResponse, *ht
 /*
 SlosServiceGetZeroState Get Slo Zero State
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceGetZeroStateRequest
 */
@@ -617,7 +605,7 @@ func (a *SlosServiceAPIService) SlosServiceGetZeroStateExecute(r ApiSlosServiceG
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/slo/slos/zeroState"
+	localVarPath := localBasePath + "/slo/slo/v1/zeroState"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -680,10 +668,10 @@ func (a *SlosServiceAPIService) SlosServiceGetZeroStateExecute(r ApiSlosServiceG
 type ApiSlosServiceListSlosRequest struct {
 	ctx context.Context
 	ApiService *SlosServiceAPIService
-	filters *SloFilters
+	filters *[]SloFilter
 }
 
-func (r ApiSlosServiceListSlosRequest) Filters(filters SloFilters) ApiSlosServiceListSlosRequest {
+func (r ApiSlosServiceListSlosRequest) Filters(filters []SloFilter) ApiSlosServiceListSlosRequest {
 	r.filters = &filters
 	return r
 }
@@ -694,8 +682,6 @@ func (r ApiSlosServiceListSlosRequest) Execute() (*ListSlosResponse, *http.Respo
 
 /*
 SlosServiceListSlos List Slos
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceListSlosRequest
@@ -722,14 +708,22 @@ func (a *SlosServiceAPIService) SlosServiceListSlosExecute(r ApiSlosServiceListS
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/slo/slos"
+	localVarPath := localBasePath + "/slo/slo/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
 	if r.filters != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "filters", r.filters, "form", "")
+		t := *r.filters
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "filters", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "filters", t, "form", "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -809,8 +803,6 @@ func (r ApiSlosServiceReplaceSloRequest) Execute() (*ReplaceSloResponse, *http.R
 /*
 SlosServiceReplaceSlo Replace Slo
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceReplaceSloRequest
 */
@@ -836,7 +828,7 @@ func (a *SlosServiceAPIService) SlosServiceReplaceSloExecute(r ApiSlosServiceRep
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/slo/slos"
+	localVarPath := localBasePath + "/slo/slo/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -904,11 +896,11 @@ func (a *SlosServiceAPIService) SlosServiceReplaceSloExecute(r ApiSlosServiceRep
 type ApiSlosServiceValidateReplaceSloAlertsRequest struct {
 	ctx context.Context
 	ApiService *SlosServiceAPIService
-	slosServiceValidateReplaceSloAlertsRequest *SlosServiceValidateReplaceSloAlertsRequest
+	slosServiceCreateSloRequest *SlosServiceCreateSloRequest
 }
 
-func (r ApiSlosServiceValidateReplaceSloAlertsRequest) SlosServiceValidateReplaceSloAlertsRequest(slosServiceValidateReplaceSloAlertsRequest SlosServiceValidateReplaceSloAlertsRequest) ApiSlosServiceValidateReplaceSloAlertsRequest {
-	r.slosServiceValidateReplaceSloAlertsRequest = &slosServiceValidateReplaceSloAlertsRequest
+func (r ApiSlosServiceValidateReplaceSloAlertsRequest) SlosServiceCreateSloRequest(slosServiceCreateSloRequest SlosServiceCreateSloRequest) ApiSlosServiceValidateReplaceSloAlertsRequest {
+	r.slosServiceCreateSloRequest = &slosServiceCreateSloRequest
 	return r
 }
 
@@ -918,8 +910,6 @@ func (r ApiSlosServiceValidateReplaceSloAlertsRequest) Execute() (*ReplaceSloAle
 
 /*
 SlosServiceValidateReplaceSloAlerts Replace Slo Pre-Validate Alerts
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceValidateReplaceSloAlertsRequest
@@ -946,7 +936,7 @@ func (a *SlosServiceAPIService) SlosServiceValidateReplaceSloAlertsExecute(r Api
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/slo/slos/validate"
+	localVarPath := localBasePath + "/slo/slo/v1/validate"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -970,7 +960,7 @@ func (a *SlosServiceAPIService) SlosServiceValidateReplaceSloAlertsExecute(r Api
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.slosServiceValidateReplaceSloAlertsRequest
+	localVarPostBody = r.slosServiceCreateSloRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

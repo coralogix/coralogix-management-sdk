@@ -52,6 +52,8 @@ model_list_e2_m_response.go
 model_list_labels_cardinality_response.go
 model_logs2metrics_v2_severity.go
 model_metric_label.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_replace_e2_m_request.go
 model_replace_e2_m_response.go

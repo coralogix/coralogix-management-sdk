@@ -13,66 +13,161 @@ package cases_service
 import (
 	"encoding/json"
 	"fmt"
+	"gopkg.in/validator.v2"
 )
 
-// CaseResolver the model 'CaseResolver'
-type CaseResolver string
-
-// List of CaseResolver
-const (
-	CASERESOLVER_CASE_RESOLVER_UNSPECIFIED CaseResolver = "CASE_RESOLVER_UNSPECIFIED"
-	CASERESOLVER_CASE_RESOLVER_SYSTEM CaseResolver = "CASE_RESOLVER_SYSTEM"
-	CASERESOLVER_CASE_RESOLVER_USER CaseResolver = "CASE_RESOLVER_USER"
-)
-
-// All allowed values of CaseResolver enum
-var AllowedCaseResolverEnumValues = []CaseResolver{
-	"CASE_RESOLVER_UNSPECIFIED",
-	"CASE_RESOLVER_SYSTEM",
-	"CASE_RESOLVER_USER",
+// CaseResolver - struct for CaseResolver
+type CaseResolver struct {
+	CaseResolverCxUser *CaseResolverCxUser
+	CaseResolverServiceNow *CaseResolverServiceNow
+	CaseResolverSystem *CaseResolverSystem
 }
 
-func (v *CaseResolver) UnmarshalJSON(src []byte) error {
-	var value string
-	err := json.Unmarshal(src, &value)
-	if err != nil {
-		return err
+// CaseResolverCxUserAsCaseResolver is a convenience function that returns CaseResolverCxUser wrapped in CaseResolver
+func CaseResolverCxUserAsCaseResolver(v *CaseResolverCxUser) CaseResolver {
+	return CaseResolver{
+		CaseResolverCxUser: v,
 	}
-	enumTypeValue := CaseResolver(value)
-	for _, existing := range AllowedCaseResolverEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
+}
+
+// CaseResolverServiceNowAsCaseResolver is a convenience function that returns CaseResolverServiceNow wrapped in CaseResolver
+func CaseResolverServiceNowAsCaseResolver(v *CaseResolverServiceNow) CaseResolver {
+	return CaseResolver{
+		CaseResolverServiceNow: v,
+	}
+}
+
+// CaseResolverSystemAsCaseResolver is a convenience function that returns CaseResolverSystem wrapped in CaseResolver
+func CaseResolverSystemAsCaseResolver(v *CaseResolverSystem) CaseResolver {
+	return CaseResolver{
+		CaseResolverSystem: v,
+	}
+}
+
+
+// Unmarshal JSON data into one of the pointers in the struct
+func (dst *CaseResolver) UnmarshalJSON(data []byte) error {
+	var err error
+	match := 0
+	// try to unmarshal data into CaseResolverCxUser
+	err = newStrictDecoder(data).Decode(&dst.CaseResolverCxUser)
+	if err == nil {
+		jsonCaseResolverCxUser, _ := json.Marshal(dst.CaseResolverCxUser)
+		if string(jsonCaseResolverCxUser) == "{}" { // empty struct
+			dst.CaseResolverCxUser = nil
+		} else {
+			if err = validator.Validate(dst.CaseResolverCxUser); err != nil {
+				dst.CaseResolverCxUser = nil
+			} else {
+				match++
+			}
 		}
-	}
-
-	return fmt.Errorf("%+v is not a valid CaseResolver", value)
-}
-
-// NewCaseResolverFromValue returns a pointer to a valid CaseResolver
-// for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewCaseResolverFromValue(v string) (*CaseResolver, error) {
-	ev := CaseResolver(v)
-	if ev.IsValid() {
-		return &ev, nil
 	} else {
-		return nil, fmt.Errorf("invalid value '%v' for CaseResolver: valid values are %v", v, AllowedCaseResolverEnumValues)
+		dst.CaseResolverCxUser = nil
 	}
-}
 
-// IsValid return true if the value is valid for the enum, false otherwise
-func (v CaseResolver) IsValid() bool {
-	for _, existing := range AllowedCaseResolverEnumValues {
-		if existing == v {
-			return true
+	// try to unmarshal data into CaseResolverServiceNow
+	err = newStrictDecoder(data).Decode(&dst.CaseResolverServiceNow)
+	if err == nil {
+		jsonCaseResolverServiceNow, _ := json.Marshal(dst.CaseResolverServiceNow)
+		if string(jsonCaseResolverServiceNow) == "{}" { // empty struct
+			dst.CaseResolverServiceNow = nil
+		} else {
+			if err = validator.Validate(dst.CaseResolverServiceNow); err != nil {
+				dst.CaseResolverServiceNow = nil
+			} else {
+				match++
+			}
 		}
+	} else {
+		dst.CaseResolverServiceNow = nil
 	}
-	return false
+
+	// try to unmarshal data into CaseResolverSystem
+	err = newStrictDecoder(data).Decode(&dst.CaseResolverSystem)
+	if err == nil {
+		jsonCaseResolverSystem, _ := json.Marshal(dst.CaseResolverSystem)
+		if string(jsonCaseResolverSystem) == "{}" { // empty struct
+			dst.CaseResolverSystem = nil
+		} else {
+			if err = validator.Validate(dst.CaseResolverSystem); err != nil {
+				dst.CaseResolverSystem = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.CaseResolverSystem = nil
+	}
+
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.CaseResolverCxUser = nil
+		dst.CaseResolverServiceNow = nil
+		dst.CaseResolverSystem = nil
+
+		return fmt.Errorf("data matches more than one schema in oneOf(CaseResolver)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("data failed to match schemas in oneOf(CaseResolver)")
+	}
 }
 
-// Ptr returns reference to CaseResolver value
-func (v CaseResolver) Ptr() *CaseResolver {
-	return &v
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src CaseResolver) MarshalJSON() ([]byte, error) {
+	if src.CaseResolverCxUser != nil {
+		return json.Marshal(&src.CaseResolverCxUser)
+	}
+
+	if src.CaseResolverServiceNow != nil {
+		return json.Marshal(&src.CaseResolverServiceNow)
+	}
+
+	if src.CaseResolverSystem != nil {
+		return json.Marshal(&src.CaseResolverSystem)
+	}
+
+	return nil, nil // no data in oneOf schemas
+}
+
+// Get the actual instance
+func (obj *CaseResolver) GetActualInstance() (interface{}) {
+	if obj == nil {
+		return nil
+	}
+	if obj.CaseResolverCxUser != nil {
+		return obj.CaseResolverCxUser
+	}
+
+	if obj.CaseResolverServiceNow != nil {
+		return obj.CaseResolverServiceNow
+	}
+
+	if obj.CaseResolverSystem != nil {
+		return obj.CaseResolverSystem
+	}
+
+	// all schemas are nil
+	return nil
+}
+
+// Get the actual instance value
+func (obj CaseResolver) GetActualInstanceValue() (interface{}) {
+	if obj.CaseResolverCxUser != nil {
+		return *obj.CaseResolverCxUser
+	}
+
+	if obj.CaseResolverServiceNow != nil {
+		return *obj.CaseResolverServiceNow
+	}
+
+	if obj.CaseResolverSystem != nil {
+		return *obj.CaseResolverSystem
+	}
+
+	// all schemas are nil
+	return nil
 }
 
 type NullableCaseResolver struct {
@@ -110,4 +205,5 @@ func (v *NullableCaseResolver) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
 

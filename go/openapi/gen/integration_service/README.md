@@ -172,6 +172,8 @@ Class | Method | HTTP request | Description
  - [LocalChangelog](docs/LocalChangelog.md)
  - [LogMetadata](docs/LogMetadata.md)
  - [Managed](docs/Managed.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleSelectionValue](docs/MultipleSelectionValue.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [Parameter](docs/Parameter.md)
@@ -186,6 +188,7 @@ Class | Method | HTTP request | Description
  - [RegisteredInstanceArm](docs/RegisteredInstanceArm.md)
  - [RegisteredInstanceCloudformation](docs/RegisteredInstanceCloudformation.md)
  - [RegisteredInstanceEmpty](docs/RegisteredInstanceEmpty.md)
+ - [RevisionLifecycle](docs/RevisionLifecycle.md)
  - [RevisionRef](docs/RevisionRef.md)
  - [Rum](docs/Rum.md)
  - [RumVersionData](docs/RumVersionData.md)
@@ -208,6 +211,7 @@ Class | Method | HTTP request | Description
  - [TestIntegrationResultSuccess](docs/TestIntegrationResultSuccess.md)
  - [UpdateIntegrationRequest](docs/UpdateIntegrationRequest.md)
  - [V1Extension](docs/V1Extension.md)
+ - [V1Failure](docs/V1Failure.md)
  - [V1IntegrationType](docs/V1IntegrationType.md)
  - [V1IntegrationTypeArm](docs/V1IntegrationTypeArm.md)
  - [V1IntegrationTypeCloudformation](docs/V1IntegrationTypeCloudformation.md)
@@ -216,34 +220,14 @@ Class | Method | HTTP request | Description
  - [V1IntegrationTypeManaged](docs/V1IntegrationTypeManaged.md)
  - [V1IntegrationTypePushBasedContextualData](docs/V1IntegrationTypePushBasedContextualData.md)
  - [V1IntegrationTypeUntracked](docs/V1IntegrationTypeUntracked.md)
+ - [V1RevisionSummary](docs/V1RevisionSummary.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
  - [Variant](docs/Variant.md)
 
 
 ## Documentation For Authorization
 
-
-Authentication schemes defined for the API:
-### apiKeyAuth
-
-- **Type**: API key
-- **API key parameter name**: Authorization
-- **Location**: HTTP header
-
-Note, each API key must be added to a map of `map[string]APIKey` where the key is: apiKeyAuth and passed in as the auth context for each request.
-
-Example
-
-```go
-auth := context.WithValue(
-		context.Background(),
-		integration_service.ContextAPIKeys,
-		map[string]integration_service.APIKey{
-			"apiKeyAuth": {Key: "API_KEY_STRING"},
-		},
-	)
-r, err := client.Service.Operation(auth, args)
-```
+Endpoints do not require authorization.
 
 
 ## Documentation for Utility Methods

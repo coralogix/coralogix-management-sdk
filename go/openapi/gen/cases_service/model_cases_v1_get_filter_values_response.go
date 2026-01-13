@@ -21,10 +21,10 @@ var _ MappedNullable = &CasesV1GetFilterValuesResponse{}
 type CasesV1GetFilterValuesResponse struct {
 	AssigneeAggregations *AssigneeAggregation `json:"assigneeAggregations,omitempty"`
 	CategoryAggregations []CategoryAggregation `json:"categoryAggregations,omitempty"`
+	FlatLabelsAggregation []FilterAggregation `json:"flatLabelsAggregation,omitempty"`
 	GroupingAggregations []FilterGroupAggregation `json:"groupingAggregations,omitempty"`
 	LabelAggregations []FilterGroupAggregation `json:"labelAggregations,omitempty"`
 	PriorityAggregations []PriorityAggregation `json:"priorityAggregations,omitempty"`
-	StateAggregations []StateAggregation `json:"stateAggregations,omitempty"`
 	StatusAggregations []StatusAggregation `json:"statusAggregations,omitempty"`
 }
 
@@ -107,6 +107,38 @@ func (o *CasesV1GetFilterValuesResponse) HasCategoryAggregations() bool {
 // SetCategoryAggregations gets a reference to the given []CategoryAggregation and assigns it to the CategoryAggregations field.
 func (o *CasesV1GetFilterValuesResponse) SetCategoryAggregations(v []CategoryAggregation) {
 	o.CategoryAggregations = v
+}
+
+// GetFlatLabelsAggregation returns the FlatLabelsAggregation field value if set, zero value otherwise.
+func (o *CasesV1GetFilterValuesResponse) GetFlatLabelsAggregation() []FilterAggregation {
+	if o == nil || IsNil(o.FlatLabelsAggregation) {
+		var ret []FilterAggregation
+		return ret
+	}
+	return o.FlatLabelsAggregation
+}
+
+// GetFlatLabelsAggregationOk returns a tuple with the FlatLabelsAggregation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CasesV1GetFilterValuesResponse) GetFlatLabelsAggregationOk() ([]FilterAggregation, bool) {
+	if o == nil || IsNil(o.FlatLabelsAggregation) {
+		return nil, false
+	}
+	return o.FlatLabelsAggregation, true
+}
+
+// HasFlatLabelsAggregation returns a boolean if a field has been set.
+func (o *CasesV1GetFilterValuesResponse) HasFlatLabelsAggregation() bool {
+	if o != nil && !IsNil(o.FlatLabelsAggregation) {
+		return true
+	}
+
+	return false
+}
+
+// SetFlatLabelsAggregation gets a reference to the given []FilterAggregation and assigns it to the FlatLabelsAggregation field.
+func (o *CasesV1GetFilterValuesResponse) SetFlatLabelsAggregation(v []FilterAggregation) {
+	o.FlatLabelsAggregation = v
 }
 
 // GetGroupingAggregations returns the GroupingAggregations field value if set, zero value otherwise.
@@ -205,38 +237,6 @@ func (o *CasesV1GetFilterValuesResponse) SetPriorityAggregations(v []PriorityAgg
 	o.PriorityAggregations = v
 }
 
-// GetStateAggregations returns the StateAggregations field value if set, zero value otherwise.
-func (o *CasesV1GetFilterValuesResponse) GetStateAggregations() []StateAggregation {
-	if o == nil || IsNil(o.StateAggregations) {
-		var ret []StateAggregation
-		return ret
-	}
-	return o.StateAggregations
-}
-
-// GetStateAggregationsOk returns a tuple with the StateAggregations field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CasesV1GetFilterValuesResponse) GetStateAggregationsOk() ([]StateAggregation, bool) {
-	if o == nil || IsNil(o.StateAggregations) {
-		return nil, false
-	}
-	return o.StateAggregations, true
-}
-
-// HasStateAggregations returns a boolean if a field has been set.
-func (o *CasesV1GetFilterValuesResponse) HasStateAggregations() bool {
-	if o != nil && !IsNil(o.StateAggregations) {
-		return true
-	}
-
-	return false
-}
-
-// SetStateAggregations gets a reference to the given []StateAggregation and assigns it to the StateAggregations field.
-func (o *CasesV1GetFilterValuesResponse) SetStateAggregations(v []StateAggregation) {
-	o.StateAggregations = v
-}
-
 // GetStatusAggregations returns the StatusAggregations field value if set, zero value otherwise.
 func (o *CasesV1GetFilterValuesResponse) GetStatusAggregations() []StatusAggregation {
 	if o == nil || IsNil(o.StatusAggregations) {
@@ -285,6 +285,9 @@ func (o CasesV1GetFilterValuesResponse) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.CategoryAggregations) {
 		toSerialize["categoryAggregations"] = o.CategoryAggregations
 	}
+	if !IsNil(o.FlatLabelsAggregation) {
+		toSerialize["flatLabelsAggregation"] = o.FlatLabelsAggregation
+	}
 	if !IsNil(o.GroupingAggregations) {
 		toSerialize["groupingAggregations"] = o.GroupingAggregations
 	}
@@ -293,9 +296,6 @@ func (o CasesV1GetFilterValuesResponse) ToMap() (map[string]interface{}, error) 
 	}
 	if !IsNil(o.PriorityAggregations) {
 		toSerialize["priorityAggregations"] = o.PriorityAggregations
-	}
-	if !IsNil(o.StateAggregations) {
-		toSerialize["stateAggregations"] = o.StateAggregations
 	}
 	if !IsNil(o.StatusAggregations) {
 		toSerialize["statusAggregations"] = o.StatusAggregations

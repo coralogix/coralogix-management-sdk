@@ -7,11 +7,8 @@ servers:
 paths:
   /incidents/incidents/v1:
     post:
-      description: |-
-        Lists all available incidents based on specified filters and order. The list is ordered in an unspecified direction and sorted by creation time.
-
-        Requires the following permissions:
-        - `incidents:read`
+      description: Lists all available incidents based on specified filters and order.
+        The list is ordered in an unspecified direction and sorted by creation time.
       externalDocs:
         url: ""
       operationId: IncidentsService_ListIncidents
@@ -65,11 +62,7 @@ paths:
       - incidents:read
   /incidents/incidents/v1/acknowledge:
     post:
-      description: |-
-        Mark one or more incidents as acknowledged.
-
-        Requires the following permissions:
-        - `incidents:acknowledge`
+      description: Mark one or more incidents as acknowledged.
       externalDocs:
         url: ""
       operationId: IncidentsService_AcknowledgeIncidents
@@ -113,11 +106,8 @@ paths:
       - incidents:acknowledge
   /incidents/incidents/v1/aggregations:
     get:
-      description: |-
-        Retrieve aggregated incident data with support for grouping and filtering.
-
-        Requires the following permissions:
-        - `incidents:read`
+      description: Retrieve aggregated incident data with support for grouping and
+        filtering.
       externalDocs:
         url: ""
       operationId: IncidentsService_ListIncidentAggregations
@@ -171,11 +161,7 @@ paths:
       - incidents:read
   /incidents/incidents/v1/batch:
     get:
-      description: |-
-        Retrieve multiple incidents by their IDs in a single request.
-
-        Requires the following permissions:
-        - `incidents:read`
+      description: Retrieve multiple incidents by their IDs in a single request.
       externalDocs:
         url: ""
       operationId: IncidentsService_BatchGetIncident
@@ -215,11 +201,7 @@ paths:
       - incidents:read
   /incidents/incidents/v1/by-user:
     delete:
-      description: |-
-        Remove user assignments from one or more incidents.
-
-        Requires the following permissions:
-        - `incidents:assign`
+      description: Remove user assignments from one or more incidents.
       externalDocs:
         url: ""
       operationId: IncidentsService_UnassignIncidents
@@ -262,11 +244,7 @@ paths:
       x-coralogixPermissions:
       - incidents:assign
     post:
-      description: |-
-        Assign one or more incidents to a specific user.
-
-        Requires the following permissions:
-        - `incidents:assign`
+      description: Assign one or more incidents to a specific user.
       externalDocs:
         url: ""
       operationId: IncidentsService_AssignIncidents
@@ -317,7 +295,6 @@ paths:
       - incidents:assign
   /incidents/incidents/v1/close:
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: IncidentsService_CloseIncidents
@@ -361,11 +338,8 @@ paths:
       - incidents:close
   /incidents/incidents/v1/events:
     get:
-      description: |-
-        List incident events with support for filtering, pagination, and ordering.
-
-        Requires the following permissions:
-        - `incidents:read`
+      description: "List incident events with support for filtering, pagination, and\
+        \ ordering."
       externalDocs:
         url: ""
       operationId: IncidentsService_ListIncidentEvents
@@ -417,11 +391,7 @@ paths:
       - incidents:read
   /incidents/incidents/v1/events/count:
     get:
-      description: |-
-        Retrieve the total count of incident events matching a filter.
-
-        Requires the following permissions:
-        - `incidents:read`
+      description: Retrieve the total count of incident events matching a filter.
       externalDocs:
         url: ""
       operationId: IncidentsService_ListIncidentEventsTotalCount
@@ -459,7 +429,6 @@ paths:
       - incidents:read
   /incidents/incidents/v1/events/filter-values:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: IncidentsService_ListIncidentEventsFilterValues
@@ -497,11 +466,8 @@ paths:
       - incidents:read
   /incidents/incidents/v1/events/{event_id}:
     get:
-      description: |-
-        Retrieve detailed information about a single incident by related alert event id.
-
-        Requires the following permissions:
-        - `incidents:read`
+      description: Retrieve detailed information about a single incident by related
+        alert event id.
       externalDocs:
         url: ""
       operationId: IncidentsService_GetIncidentByEventId
@@ -541,11 +507,7 @@ paths:
       - incidents:read
   /incidents/incidents/v1/events/{event_id}/acknowledge:
     post:
-      description: |-
-        Mark incident as acknowledged by event id.
-
-        Requires the following permissions:
-        - `incidents:acknowledge`
+      description: Mark incident as acknowledged by event id.
       externalDocs:
         url: ""
       operationId: IncidentsService_AcknowledgeIncidentByEventId
@@ -585,11 +547,7 @@ paths:
       - incidents:acknowledge
   /incidents/incidents/v1/events/{event_id}/resolve:
     post:
-      description: |-
-        Mark incident as resolved by event id.
-
-        Requires the following permissions:
-        - `incidents:close`
+      description: Mark incident as resolved by event id.
       externalDocs:
         url: ""
       operationId: IncidentsService_ResolveIncidentByEventId
@@ -629,7 +587,6 @@ paths:
       - incidents:close
   /incidents/incidents/v1/filter-values:
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: IncidentsService_GetFilterValues
@@ -667,11 +624,7 @@ paths:
       - incidents:read
   /incidents/incidents/v1/resolve:
     post:
-      description: |-
-        Mark one or more incidents as resolved.
-
-        Requires the following permissions:
-        - `incidents:close`
+      description: Mark one or more incidents as resolved.
       externalDocs:
         url: ""
       operationId: IncidentsService_ResolveIncidents
@@ -715,11 +668,8 @@ paths:
       - incidents:close
   /incidents/incidents/v1/{id}:
     get:
-      description: |-
-        Retrieve detailed information about a single incident by its unique identifier.
-
-        Requires the following permissions:
-        - `incidents:read`
+      description: Retrieve detailed information about a single incident by its unique
+        identifier.
       externalDocs:
         url: ""
       operationId: IncidentsService_GetIncident
@@ -758,11 +708,9 @@ paths:
       - incidents:read
   /incidents/incidents/v1/{incident_id}/events:
     get:
-      description: |-
-        Retrieve a chronological list of all events associated with a specific incident. Includes state changes, assignments, acknowledgments, and resolutions.
-
-        Requires the following permissions:
-        - `incidents:read`
+      description: "Retrieve a chronological list of all events associated with a\
+        \ specific incident. Includes state changes, assignments, acknowledgments,\
+        \ and resolutions."
       externalDocs:
         url: ""
       operationId: IncidentsService_GetIncidentEvents
@@ -835,24 +783,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+            unassign: "{}"
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -897,24 +839,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+            unassign: "{}"
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
         - displayLabels:
@@ -946,24 +882,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+            unassign: "{}"
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -1010,24 +940,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+            unassign: "{}"
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
         - displayLabels:
@@ -1059,24 +983,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+            unassign: "{}"
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -1167,24 +1085,18 @@ components:
             state: INCIDENT_STATE_UNSPECIFIED
             closedAt: 2024-01-01T00:00:00Z
             events:
-            - snoozeIndicator:
-                durationMinutes: 0
-                startTime: 2000-01-23T04:56:07.000+00:00
-                userId: userId
-              id: incident_event_id
+            - id: incident_event_id
               administrativeEvent:
                 userId: userId
               originatorType: ORIGINATOR_TYPE_UNSPECIFIED
               incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            - snoozeIndicator:
-                durationMinutes: 0
-                startTime: 2000-01-23T04:56:07.000+00:00
-                userId: userId
-              id: incident_event_id
+              unassign: "{}"
+            - id: incident_event_id
               administrativeEvent:
                 userId: userId
               originatorType: ORIGINATOR_TYPE_UNSPECIFIED
               incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+              unassign: "{}"
             isMuted: false
             status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -1241,24 +1153,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+            unassign: "{}"
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
         - displayLabels:
@@ -1290,24 +1196,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+            unassign: "{}"
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -1377,6 +1277,9 @@ components:
       title: Contextual label values with count
       type: object
     ContextualLabels:
+      example:
+        fieldName: field_name
+        fieldValue: field_value
       externalDocs:
         url: ""
       properties:
@@ -1519,24 +1422,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+            unassign: "{}"
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -1552,24 +1449,18 @@ components:
       description: Response containing all events associated with the requested incident
       example:
         incidentEvents:
-        - snoozeIndicator:
-            durationMinutes: 0
-            startTime: 2000-01-23T04:56:07.000+00:00
-            userId: userId
-          id: incident_event_id
+        - id: incident_event_id
           administrativeEvent:
             userId: userId
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-        - snoozeIndicator:
-            durationMinutes: 0
-            startTime: 2000-01-23T04:56:07.000+00:00
-            userId: userId
-          id: incident_event_id
+          unassign: "{}"
+        - id: incident_event_id
           administrativeEvent:
             userId: userId
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          unassign: "{}"
       externalDocs:
         url: ""
       properties:
@@ -1612,24 +1503,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+            unassign: "{}"
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -1670,19 +1555,20 @@ components:
       type: object
     GroupByValues:
       oneOf:
-      - $ref: "#/components/schemas/GroupByValuesIncidentField"
       - $ref: "#/components/schemas/GroupByValuesContextualLabels"
+      - $ref: "#/components/schemas/GroupByValuesIncidentField"
     GroupByValuesContextualLabels:
       additionalProperties: false
+      example:
+        contextualLabels:
+          fieldName: field_name
+          fieldValue: field_value
       properties:
         contextualLabels:
           $ref: "#/components/schemas/ContextualLabels"
       type: object
     GroupByValuesIncidentField:
       additionalProperties: false
-      example:
-        incidentField:
-          duration: duration
       properties:
         incidentField:
           $ref: "#/components/schemas/IncidentFieldOneOf"
@@ -1718,24 +1604,18 @@ components:
         state: INCIDENT_STATE_UNSPECIFIED
         closedAt: 2024-01-01T00:00:00Z
         events:
-        - snoozeIndicator:
-            durationMinutes: 0
-            startTime: 2000-01-23T04:56:07.000+00:00
-            userId: userId
-          id: incident_event_id
+        - id: incident_event_id
           administrativeEvent:
             userId: userId
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-        - snoozeIndicator:
-            durationMinutes: 0
-            startTime: 2000-01-23T04:56:07.000+00:00
-            userId: userId
-          id: incident_event_id
+          unassign: "{}"
+        - id: incident_event_id
           administrativeEvent:
             userId: userId
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          unassign: "{}"
         isMuted: false
         status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -1814,10 +1694,12 @@ components:
     IncidentAggregation:
       example:
         groupBysValue:
-        - incidentField:
-            duration: duration
-        - incidentField:
-            duration: duration
+        - contextualLabels:
+            fieldName: field_name
+            fieldValue: field_value
+        - contextualLabels:
+            fieldName: field_name
+            fieldValue: field_value
         aggAssignmentsCount:
         - count: 10
           assignedTo:
@@ -1934,18 +1816,18 @@ components:
       type: object
     IncidentEvent:
       oneOf:
-      - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventUnassignOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventAssignmentOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventUnassignOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventCloseAdministrativeEvent"
       - $ref: "#/components/schemas/IncidentEventCloseOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventAssignmentOperationalEvent"
     IncidentEventAcknowledge:
       properties:
         acknowledgedBy:
@@ -2129,15 +2011,12 @@ components:
     IncidentEventExtended:
       example:
         incidentEvent:
-          snoozeIndicator:
-            durationMinutes: 0
-            startTime: 2000-01-23T04:56:07.000+00:00
-            userId: userId
           id: incident_event_id
           administrativeEvent:
             userId: userId
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          unassign: "{}"
         cxEventKey: cxEventKey
         incidentEventExtendedMetadata:
           alertType: INCIDENT_EVENT_ALERT_TYPE_STANDARD_OR_UNSPECIFIED
@@ -2240,10 +2119,6 @@ components:
           type: string
       type: object
     IncidentEventSnoozeIndicator:
-      example:
-        durationMinutes: 0
-        startTime: 2000-01-23T04:56:07.000+00:00
-        userId: userId
       externalDocs:
         url: ""
       properties:
@@ -2259,16 +2134,6 @@ components:
       type: object
     IncidentEventSnoozeIndicatorAdministrativeEvent:
       additionalProperties: false
-      example:
-        snoozeIndicator:
-          durationMinutes: 0
-          startTime: 2000-01-23T04:56:07.000+00:00
-          userId: userId
-        id: incident_event_id
-        administrativeEvent:
-          userId: userId
-        originatorType: ORIGINATOR_TYPE_UNSPECIFIED
-        incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -2332,6 +2197,13 @@ components:
       type: object
     IncidentEventUnassignAdministrativeEvent:
       additionalProperties: false
+      example:
+        id: incident_event_id
+        administrativeEvent:
+          userId: userId
+        originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+        incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+        unassign: "{}"
       externalDocs:
         url: ""
       properties:
@@ -2447,17 +2319,17 @@ components:
       type: object
     IncidentFieldOneOf:
       oneOf:
-      - $ref: "#/components/schemas/IncidentFieldOneOfDuration"
-      - $ref: "#/components/schemas/IncidentFieldOneOfName"
       - $ref: "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
-      - $ref: "#/components/schemas/IncidentFieldOneOfSubsystemName"
-      - $ref: "#/components/schemas/IncidentFieldOneOfId"
-      - $ref: "#/components/schemas/IncidentFieldOneOfSeverity"
+      - $ref: "#/components/schemas/IncidentFieldOneOfApplicationName"
+      - $ref: "#/components/schemas/IncidentFieldOneOfName"
       - $ref: "#/components/schemas/IncidentFieldOneOfCreatedAt"
       - $ref: "#/components/schemas/IncidentFieldOneOfClosedAt"
+      - $ref: "#/components/schemas/IncidentFieldOneOfSubsystemName"
+      - $ref: "#/components/schemas/IncidentFieldOneOfDuration"
+      - $ref: "#/components/schemas/IncidentFieldOneOfId"
+      - $ref: "#/components/schemas/IncidentFieldOneOfSeverity"
       - $ref: "#/components/schemas/IncidentFieldOneOfState"
       - $ref: "#/components/schemas/IncidentFieldOneOfStatus"
-      - $ref: "#/components/schemas/IncidentFieldOneOfApplicationName"
     IncidentFieldOneOfApplicationName:
       additionalProperties: false
       properties:
@@ -2480,8 +2352,6 @@ components:
       type: object
     IncidentFieldOneOfDuration:
       additionalProperties: false
-      example:
-        duration: duration
       properties:
         duration:
           type: string
@@ -2812,10 +2682,12 @@ components:
           nextPageToken: next_page_token
         incidentAggs:
         - groupBysValue:
-          - incidentField:
-              duration: duration
-          - incidentField:
-              duration: duration
+          - contextualLabels:
+              fieldName: field_name
+              fieldValue: field_value
+          - contextualLabels:
+              fieldName: field_name
+              fieldValue: field_value
           aggAssignmentsCount:
           - count: 10
             assignedTo:
@@ -2855,10 +2727,12 @@ components:
           firstCreatedAt: 2000-01-23T04:56:07.000+00:00
           lastStateUpdateTime: 2000-01-23T04:56:07.000+00:00
         - groupBysValue:
-          - incidentField:
-              duration: duration
-          - incidentField:
-              duration: duration
+          - contextualLabels:
+              fieldName: field_name
+              fieldValue: field_value
+          - contextualLabels:
+              fieldName: field_name
+              fieldValue: field_value
           aggAssignmentsCount:
           - count: 10
             assignedTo:
@@ -2975,15 +2849,12 @@ components:
           nextPageToken: next_page_token
         items:
         - incidentEvent:
-            snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
             id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           cxEventKey: cxEventKey
           incidentEventExtendedMetadata:
             alertType: INCIDENT_EVENT_ALERT_TYPE_STANDARD_OR_UNSPECIFIED
@@ -3005,15 +2876,12 @@ components:
             incidentStatus: INCIDENT_STATUS_UNSPECIFIED
           cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
         - incidentEvent:
-            snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
             id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           cxEventKey: cxEventKey
           incidentEventExtendedMetadata:
             alertType: INCIDENT_EVENT_ALERT_TYPE_STANDARD_OR_UNSPECIFIED
@@ -3103,24 +2971,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+            unassign: "{}"
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
         - displayLabels:
@@ -3152,24 +3014,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+            unassign: "{}"
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -3185,6 +3041,28 @@ components:
       - incidents
       - pagination
       title: List incidents response
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:
@@ -3234,24 +3112,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+            unassign: "{}"
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -3296,24 +3168,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+            unassign: "{}"
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
         - displayLabels:
@@ -3345,24 +3211,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+            unassign: "{}"
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -3409,24 +3269,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+            unassign: "{}"
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
         - displayLabels:
@@ -3458,24 +3312,18 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - snoozeIndicator:
-              durationMinutes: 0
-              startTime: 2000-01-23T04:56:07.000+00:00
-              userId: userId
-            id: incident_event_id
+            unassign: "{}"
+          - id: incident_event_id
             administrativeEvent:
               userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            unassign: "{}"
           isMuted: false
           status: INCIDENT_STATUS_UNSPECIFIED
       externalDocs:
@@ -3769,8 +3617,8 @@ components:
       - $ref: "#/components/schemas/V1OrderByContextualLabel"
     IncidentsService_ListIncidentAggregations_group_bys_parameter_inner:
       oneOf:
-      - $ref: "#/components/schemas/GroupByIncidentField"
       - $ref: "#/components/schemas/GroupByContextualLabel"
+      - $ref: "#/components/schemas/GroupByIncidentField"
     User_details:
       externalDocs:
         url: ""
@@ -3823,9 +3671,3 @@ components:
           $ref: "#/components/schemas/IncidentEventOrderByFieldType"
       title: List incident events order by request
       type: object
-  securitySchemes:
-    apiKeyAuth:
-      description: API key authentication
-      in: header
-      name: Authorization
-      type: apiKey

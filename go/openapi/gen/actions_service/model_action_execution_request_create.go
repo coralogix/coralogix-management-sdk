@@ -17,7 +17,7 @@ import (
 // checks if the ActionExecutionRequestCreate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActionExecutionRequestCreate{}
 
-// ActionExecutionRequestCreate struct for ActionExecutionRequestCreate
+// ActionExecutionRequestCreate This data structure represents a request to execute an Action operation.
 type ActionExecutionRequestCreate struct {
 	Create *CreateActionRequest `json:"create,omitempty"`
 }

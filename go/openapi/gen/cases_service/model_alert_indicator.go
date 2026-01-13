@@ -20,18 +20,19 @@ import (
 // checks if the AlertIndicator type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertIndicator{}
 
-// AlertIndicator Metadata describing a triggered alert instance and its lifecycle relative to a case.
+// AlertIndicator Data describing a triggered alert instance and its lifecycle relative to a case.
 type AlertIndicator struct {
 	// The unique alert ID (stable across versions).
 	AlertId string `json:"alertId"`
-	// Specific version ID of the alert definition that triggered.
-	AlertVersionId string `json:"alertVersionId"`
+	AlertVersions []string `json:"alertVersions,omitempty"`
 	GroupingType AlertGroupingType `json:"groupingType"`
 	Groupings []V1KeyValue `json:"groupings"`
-	Priority AlertPriority `json:"priority"`
+	// Last seen version ID of the triggered alert definition.
+	LatestAlertVersion string `json:"latestAlertVersion"`
+	Priority IndicatorPriority `json:"priority"`
 	// When present, timestamp when the alert resolved.
 	ResolveTime *time.Time `json:"resolveTime,omitempty"`
-	State AlertIndicatorState `json:"state"`
+	State IndicatorState `json:"state"`
 	// Timestamp when the alert triggered.
 	TriggerTime time.Time `json:"triggerTime"`
 }
@@ -42,12 +43,12 @@ type _AlertIndicator AlertIndicator
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertIndicator(alertId string, alertVersionId string, groupingType AlertGroupingType, groupings []V1KeyValue, priority AlertPriority, state AlertIndicatorState, triggerTime time.Time) *AlertIndicator {
+func NewAlertIndicator(alertId string, groupingType AlertGroupingType, groupings []V1KeyValue, latestAlertVersion string, priority IndicatorPriority, state IndicatorState, triggerTime time.Time) *AlertIndicator {
 	this := AlertIndicator{}
 	this.AlertId = alertId
-	this.AlertVersionId = alertVersionId
 	this.GroupingType = groupingType
 	this.Groupings = groupings
+	this.LatestAlertVersion = latestAlertVersion
 	this.Priority = priority
 	this.State = state
 	this.TriggerTime = triggerTime
@@ -86,28 +87,36 @@ func (o *AlertIndicator) SetAlertId(v string) {
 	o.AlertId = v
 }
 
-// GetAlertVersionId returns the AlertVersionId field value
-func (o *AlertIndicator) GetAlertVersionId() string {
-	if o == nil {
-		var ret string
+// GetAlertVersions returns the AlertVersions field value if set, zero value otherwise.
+func (o *AlertIndicator) GetAlertVersions() []string {
+	if o == nil || IsNil(o.AlertVersions) {
+		var ret []string
 		return ret
 	}
-
-	return o.AlertVersionId
+	return o.AlertVersions
 }
 
-// GetAlertVersionIdOk returns a tuple with the AlertVersionId field value
+// GetAlertVersionsOk returns a tuple with the AlertVersions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AlertIndicator) GetAlertVersionIdOk() (*string, bool) {
-	if o == nil {
+func (o *AlertIndicator) GetAlertVersionsOk() ([]string, bool) {
+	if o == nil || IsNil(o.AlertVersions) {
 		return nil, false
 	}
-	return &o.AlertVersionId, true
+	return o.AlertVersions, true
 }
 
-// SetAlertVersionId sets field value
-func (o *AlertIndicator) SetAlertVersionId(v string) {
-	o.AlertVersionId = v
+// HasAlertVersions returns a boolean if a field has been set.
+func (o *AlertIndicator) HasAlertVersions() bool {
+	if o != nil && !IsNil(o.AlertVersions) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlertVersions gets a reference to the given []string and assigns it to the AlertVersions field.
+func (o *AlertIndicator) SetAlertVersions(v []string) {
+	o.AlertVersions = v
 }
 
 // GetGroupingType returns the GroupingType field value
@@ -158,10 +167,34 @@ func (o *AlertIndicator) SetGroupings(v []V1KeyValue) {
 	o.Groupings = v
 }
 
-// GetPriority returns the Priority field value
-func (o *AlertIndicator) GetPriority() AlertPriority {
+// GetLatestAlertVersion returns the LatestAlertVersion field value
+func (o *AlertIndicator) GetLatestAlertVersion() string {
 	if o == nil {
-		var ret AlertPriority
+		var ret string
+		return ret
+	}
+
+	return o.LatestAlertVersion
+}
+
+// GetLatestAlertVersionOk returns a tuple with the LatestAlertVersion field value
+// and a boolean to check if the value has been set.
+func (o *AlertIndicator) GetLatestAlertVersionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.LatestAlertVersion, true
+}
+
+// SetLatestAlertVersion sets field value
+func (o *AlertIndicator) SetLatestAlertVersion(v string) {
+	o.LatestAlertVersion = v
+}
+
+// GetPriority returns the Priority field value
+func (o *AlertIndicator) GetPriority() IndicatorPriority {
+	if o == nil {
+		var ret IndicatorPriority
 		return ret
 	}
 
@@ -170,7 +203,7 @@ func (o *AlertIndicator) GetPriority() AlertPriority {
 
 // GetPriorityOk returns a tuple with the Priority field value
 // and a boolean to check if the value has been set.
-func (o *AlertIndicator) GetPriorityOk() (*AlertPriority, bool) {
+func (o *AlertIndicator) GetPriorityOk() (*IndicatorPriority, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -178,7 +211,7 @@ func (o *AlertIndicator) GetPriorityOk() (*AlertPriority, bool) {
 }
 
 // SetPriority sets field value
-func (o *AlertIndicator) SetPriority(v AlertPriority) {
+func (o *AlertIndicator) SetPriority(v IndicatorPriority) {
 	o.Priority = v
 }
 
@@ -215,9 +248,9 @@ func (o *AlertIndicator) SetResolveTime(v time.Time) {
 }
 
 // GetState returns the State field value
-func (o *AlertIndicator) GetState() AlertIndicatorState {
+func (o *AlertIndicator) GetState() IndicatorState {
 	if o == nil {
-		var ret AlertIndicatorState
+		var ret IndicatorState
 		return ret
 	}
 
@@ -226,7 +259,7 @@ func (o *AlertIndicator) GetState() AlertIndicatorState {
 
 // GetStateOk returns a tuple with the State field value
 // and a boolean to check if the value has been set.
-func (o *AlertIndicator) GetStateOk() (*AlertIndicatorState, bool) {
+func (o *AlertIndicator) GetStateOk() (*IndicatorState, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -234,7 +267,7 @@ func (o *AlertIndicator) GetStateOk() (*AlertIndicatorState, bool) {
 }
 
 // SetState sets field value
-func (o *AlertIndicator) SetState(v AlertIndicatorState) {
+func (o *AlertIndicator) SetState(v IndicatorState) {
 	o.State = v
 }
 
@@ -273,9 +306,12 @@ func (o AlertIndicator) MarshalJSON() ([]byte, error) {
 func (o AlertIndicator) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["alertId"] = o.AlertId
-	toSerialize["alertVersionId"] = o.AlertVersionId
+	if !IsNil(o.AlertVersions) {
+		toSerialize["alertVersions"] = o.AlertVersions
+	}
 	toSerialize["groupingType"] = o.GroupingType
 	toSerialize["groupings"] = o.Groupings
+	toSerialize["latestAlertVersion"] = o.LatestAlertVersion
 	toSerialize["priority"] = o.Priority
 	if !IsNil(o.ResolveTime) {
 		toSerialize["resolveTime"] = o.ResolveTime
@@ -291,9 +327,9 @@ func (o *AlertIndicator) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"alertId",
-		"alertVersionId",
 		"groupingType",
 		"groupings",
+		"latestAlertVersion",
 		"priority",
 		"state",
 		"triggerTime",

@@ -146,6 +146,9 @@ components:
           $ref: "#/components/schemas/ColorsByStack"
       type: object
     CustomTimeSelection:
+      example:
+        fromTime: 2024-01-25T11:31:43.152Z
+        toTime: 2024-01-25T11:35:43.152Z
       externalDocs:
         url: ""
       properties:
@@ -243,9 +246,9 @@ components:
           id: 52
           folderId: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
           timeSelection:
-            quickSelection:
-              seconds: 3600
-              caption: Last Hour
+            customSelection:
+              fromTime: 2024-01-25T11:31:43.152Z
+              toTime: 2024-01-25T11:35:43.152Z
         - isCompactMode: true
           searchQuery:
             query: query
@@ -263,14 +266,36 @@ components:
           id: 52
           folderId: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
           timeSelection:
-            quickSelection:
-              seconds: 3600
-              caption: Last Hour
+            customSelection:
+              fromTime: 2024-01-25T11:31:43.152Z
+              toTime: 2024-01-25T11:35:43.152Z
       properties:
         views:
           items:
             $ref: "#/components/schemas/View"
           type: array
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:
@@ -282,9 +307,6 @@ components:
           type: array
       type: object
     QuickTimeSelection:
-      example:
-        seconds: 3600
-        caption: Last Hour
       externalDocs:
         url: ""
       properties:
@@ -341,20 +363,20 @@ components:
       type: string
     TimeSelection:
       oneOf:
-      - $ref: "#/components/schemas/TimeSelectionQuickSelection"
       - $ref: "#/components/schemas/TimeSelectionCustomSelection"
+      - $ref: "#/components/schemas/TimeSelectionQuickSelection"
     TimeSelectionCustomSelection:
       additionalProperties: false
+      example:
+        customSelection:
+          fromTime: 2024-01-25T11:31:43.152Z
+          toTime: 2024-01-25T11:35:43.152Z
       properties:
         customSelection:
           $ref: "#/components/schemas/CustomTimeSelection"
       type: object
     TimeSelectionQuickSelection:
       additionalProperties: false
-      example:
-        quickSelection:
-          seconds: 3600
-          caption: Last Hour
       properties:
         quickSelection:
           $ref: "#/components/schemas/QuickTimeSelection"
@@ -379,9 +401,9 @@ components:
         id: 52
         folderId: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
         timeSelection:
-          quickSelection:
-            seconds: 3600
-            caption: Last Hour
+          customSelection:
+            fromTime: 2024-01-25T11:31:43.152Z
+            toTime: 2024-01-25T11:35:43.152Z
       externalDocs:
         url: ""
       properties:
@@ -491,9 +513,9 @@ components:
             name: applicationName
         folderId: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
         timeSelection:
-          quickSelection:
-            seconds: 3600
-            caption: Last Hour
+          customSelection:
+            fromTime: 2024-01-25T11:31:43.152Z
+            toTime: 2024-01-25T11:35:43.152Z
       properties:
         filters:
           $ref: "#/components/schemas/SelectedFilters"
@@ -552,9 +574,3 @@ components:
       - timeSelection
       title: View
       type: object
-  securitySchemes:
-    apiKeyAuth:
-      description: API key authentication
-      in: header
-      name: Authorization
-      type: apiKey

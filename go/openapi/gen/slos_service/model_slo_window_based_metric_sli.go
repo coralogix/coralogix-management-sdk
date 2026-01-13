@@ -31,7 +31,9 @@ type SloWindowBasedMetricSli struct {
 	Name string `json:"name"`
 	Revision *V1Revision `json:"revision,omitempty"`
 	SloTimeFrame *SloTimeFrame `json:"sloTimeFrame,omitempty"`
+	SloType *SloType `json:"sloType,omitempty"`
 	TargetThresholdPercentage float32 `json:"targetThresholdPercentage"`
+	// Deprecated
 	Type *string `json:"type,omitempty"`
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 	WindowBasedMetricSli *WindowBasedMetricSli `json:"windowBasedMetricSli,omitempty"`
@@ -338,6 +340,38 @@ func (o *SloWindowBasedMetricSli) SetSloTimeFrame(v SloTimeFrame) {
 	o.SloTimeFrame = &v
 }
 
+// GetSloType returns the SloType field value if set, zero value otherwise.
+func (o *SloWindowBasedMetricSli) GetSloType() SloType {
+	if o == nil || IsNil(o.SloType) {
+		var ret SloType
+		return ret
+	}
+	return *o.SloType
+}
+
+// GetSloTypeOk returns a tuple with the SloType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloWindowBasedMetricSli) GetSloTypeOk() (*SloType, bool) {
+	if o == nil || IsNil(o.SloType) {
+		return nil, false
+	}
+	return o.SloType, true
+}
+
+// HasSloType returns a boolean if a field has been set.
+func (o *SloWindowBasedMetricSli) HasSloType() bool {
+	if o != nil && !IsNil(o.SloType) {
+		return true
+	}
+
+	return false
+}
+
+// SetSloType gets a reference to the given SloType and assigns it to the SloType field.
+func (o *SloWindowBasedMetricSli) SetSloType(v SloType) {
+	o.SloType = &v
+}
+
 // GetTargetThresholdPercentage returns the TargetThresholdPercentage field value
 func (o *SloWindowBasedMetricSli) GetTargetThresholdPercentage() float32 {
 	if o == nil {
@@ -363,6 +397,7 @@ func (o *SloWindowBasedMetricSli) SetTargetThresholdPercentage(v float32) {
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
+// Deprecated
 func (o *SloWindowBasedMetricSli) GetType() string {
 	if o == nil || IsNil(o.Type) {
 		var ret string
@@ -373,6 +408,7 @@ func (o *SloWindowBasedMetricSli) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *SloWindowBasedMetricSli) GetTypeOk() (*string, bool) {
 	if o == nil || IsNil(o.Type) {
 		return nil, false
@@ -390,6 +426,7 @@ func (o *SloWindowBasedMetricSli) HasType() bool {
 }
 
 // SetType gets a reference to the given string and assigns it to the Type field.
+// Deprecated
 func (o *SloWindowBasedMetricSli) SetType(v string) {
 	o.Type = &v
 }
@@ -492,6 +529,9 @@ func (o SloWindowBasedMetricSli) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SloTimeFrame) {
 		toSerialize["sloTimeFrame"] = o.SloTimeFrame
+	}
+	if !IsNil(o.SloType) {
+		toSerialize["sloType"] = o.SloType
 	}
 	toSerialize["targetThresholdPercentage"] = o.TargetThresholdPercentage
 	if !IsNil(o.Type) {

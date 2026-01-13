@@ -20,6 +20,8 @@ model_filter_path_and_values_multiple_values.go
 model_filters.go
 model_ibm_bucket_type.go
 model_ibm_cos_target_spec.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_s3_target_service_get_target_response.go
 model_s3_target_service_set_target_response.go
