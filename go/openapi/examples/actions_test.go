@@ -34,7 +34,7 @@ func TestActions(t *testing.T) {
 	url := "https://www.google.com/search?q={{$p.selected_value}}"
 	isPrivate := false
 
-	createReq := actions.ActionsServiceCreateActionRequest{
+	createReq := actions.CreateActionRequest1{
 		Name:             &name,
 		Url:              &url,
 		IsPrivate:        &isPrivate,
@@ -45,7 +45,7 @@ func TestActions(t *testing.T) {
 
 	created, httpResp, err := client.
 		ActionsServiceCreateAction(context.Background()).
-		ActionsServiceCreateActionRequest(createReq).
+		CreateActionRequest1(createReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.NotNil(t, created.Action.Id)
@@ -54,7 +54,7 @@ func TestActions(t *testing.T) {
 	newURL := "https://www.bing.com/search?q={{$p.selected_value}}"
 	isHidden := false
 
-	replaceReq := actions.ActionsServiceReplaceActionRequest{
+	replaceReq := actions.ReplaceActionRequest1{
 		Action: &actions.V2Action{
 			Id:               created.Action.Id,
 			Name:             &newName,
@@ -69,7 +69,7 @@ func TestActions(t *testing.T) {
 
 	_, httpResp, err = client.
 		ActionsServiceReplaceAction(context.Background()).
-		ActionsServiceReplaceActionRequest(replaceReq).
+		ReplaceActionRequest1(replaceReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 

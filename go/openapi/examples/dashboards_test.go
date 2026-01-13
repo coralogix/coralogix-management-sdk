@@ -40,13 +40,13 @@ func TestDashboards(t *testing.T) {
 	// We use specific dashboard type here because the client can't determine
 	// the type automatically when unmarshaling from JSON.
 	// Exact error: data matches more than one schema in oneOf(Dashboard).
-	var dashboard dashboards.DashboardOffFolderIdRelativeTimeFrame
+	var dashboard dashboards.DashboardOffRelativeTimeFrame
 	err = json.Unmarshal(data, &dashboard)
 	require.NoError(t, err)
 
 	req := dashboards.CreateDashboardRequestDataStructure{
 		Dashboard: dashboards.Dashboard{
-			DashboardOffFolderIdRelativeTimeFrame: &dashboard,
+			DashboardOffRelativeTimeFrame: &dashboard,
 		},
 	}
 	created, httpResp, err := client.
