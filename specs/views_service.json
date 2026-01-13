@@ -413,6 +413,34 @@
           }
         }
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -492,10 +520,10 @@
       "TimeSelection": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TimeSelectionQuickSelection"
+            "$ref": "#/components/schemas/TimeSelectionCustomSelection"
           },
           {
-            "$ref": "#/components/schemas/TimeSelectionCustomSelection"
+            "$ref": "#/components/schemas/TimeSelectionQuickSelection"
           }
         ]
       },
@@ -635,14 +663,6 @@
           "name",
           "selectedValues"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

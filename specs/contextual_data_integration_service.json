@@ -11,7 +11,6 @@
           "Contextual data integration service"
         ],
         "summary": "Get all contextual data integrations accessible",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -65,7 +64,6 @@
           "Contextual data integration service"
         ],
         "summary": "Update contextual data integration",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -128,7 +126,6 @@
           "Contextual data integration service"
         ],
         "summary": "Save contextual data integration",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -190,7 +187,6 @@
           "Contextual data integration service"
         ],
         "summary": "Get contextual data integration definition",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -255,7 +251,6 @@
           "Contextual data integration service"
         ],
         "summary": "Test contextual data integration",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -320,7 +315,6 @@
           "Contextual data integration service"
         ],
         "summary": "Get contextual data integration details",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -386,7 +380,6 @@
           "Contextual data integration service"
         ],
         "summary": "Delete contextual data integration",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -908,6 +901,12 @@
       "FieldInformation": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/FieldInformationSingle"
+          },
+          {
+            "$ref": "#/components/schemas/FieldInformationMultiText"
+          },
+          {
             "$ref": "#/components/schemas/FieldInformationMultipleSelection"
           },
           {
@@ -918,12 +917,6 @@
           },
           {
             "$ref": "#/components/schemas/FieldInformationSingleNumber"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationSingle"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationMultiText"
           }
         ]
       },
@@ -1415,6 +1408,9 @@
           "integration": {
             "$ref": "#/components/schemas/Integration"
           },
+          "isDeprecated": {
+            "type": "boolean"
+          },
           "isNew": {
             "type": "boolean"
           },
@@ -1488,6 +1484,12 @@
           },
           "name": {
             "type": "string"
+          },
+          "revisions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/v1.RevisionSummary"
+            }
           },
           "tags": {
             "type": "array",
@@ -1670,6 +1672,12 @@
       "IntegrationRevision": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/IntegrationRevisionRum"
+          },
+          {
+            "$ref": "#/components/schemas/IntegrationRevisionTerraform"
+          },
+          {
             "$ref": "#/components/schemas/IntegrationRevisionCloudFormation"
           },
           {
@@ -1680,12 +1688,6 @@
           },
           {
             "$ref": "#/components/schemas/IntegrationRevisionAzureArmTemplate"
-          },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionRum"
-          },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionTerraform"
           }
         ]
       },
@@ -2053,6 +2055,34 @@
         "description": "This data structure represents a managed service.",
         "type": "object"
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleSelectionValue": {
         "externalDocs": {
           "url": ""
@@ -2093,6 +2123,12 @@
       "Parameter": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/ParameterStringValue"
+          },
+          {
+            "$ref": "#/components/schemas/ParameterBooleanValue"
+          },
+          {
             "$ref": "#/components/schemas/ParameterStringList"
           },
           {
@@ -2103,12 +2139,6 @@
           },
           {
             "$ref": "#/components/schemas/ParameterSensitiveData"
-          },
-          {
-            "$ref": "#/components/schemas/ParameterStringValue"
-          },
-          {
-            "$ref": "#/components/schemas/ParameterBooleanValue"
           }
         ]
       },
@@ -2240,13 +2270,13 @@
       "RegisteredInstance": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/RegisteredInstanceEmpty"
-          },
-          {
             "$ref": "#/components/schemas/RegisteredInstanceCloudformation"
           },
           {
             "$ref": "#/components/schemas/RegisteredInstanceArm"
+          },
+          {
+            "$ref": "#/components/schemas/RegisteredInstanceEmpty"
           }
         ]
       },
@@ -2281,6 +2311,9 @@
             "items": {
               "$ref": "#/components/schemas/Parameter"
             }
+          },
+          "revisionLifecycle": {
+            "$ref": "#/components/schemas/RevisionLifecycle"
           }
         },
         "additionalProperties": false
@@ -2316,6 +2349,9 @@
             "items": {
               "$ref": "#/components/schemas/Parameter"
             }
+          },
+          "revisionLifecycle": {
+            "$ref": "#/components/schemas/RevisionLifecycle"
           }
         },
         "additionalProperties": false
@@ -2351,9 +2387,23 @@
             "items": {
               "$ref": "#/components/schemas/Parameter"
             }
+          },
+          "revisionLifecycle": {
+            "$ref": "#/components/schemas/RevisionLifecycle"
           }
         },
         "additionalProperties": false
+      },
+      "RevisionLifecycle": {
+        "type": "string",
+        "enum": [
+          "REVISION_LIFECYCLE_UNSPECIFIED",
+          "REVISION_LIFECYCLE_ALPHA",
+          "REVISION_LIFECYCLE_PRIVATE_BETA",
+          "REVISION_LIFECYCLE_PUBLIC_BETA",
+          "REVISION_LIFECYCLE_GA",
+          "REVISION_LIFECYCLE_DEPRECATED"
+        ]
       },
       "RevisionRef": {
         "externalDocs": {
@@ -2515,24 +2565,12 @@
       "TestIntegrationResult": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TestIntegrationResultFailure"
+            "$ref": "#/components/schemas/TestIntegrationResultSuccess"
           },
           {
-            "$ref": "#/components/schemas/TestIntegrationResultSuccess"
+            "$ref": "#/components/schemas/TestIntegrationResultFailure"
           }
         ]
-      },
-      "TestIntegrationResult.Failure": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Failure",
-        "type": "object",
-        "properties": {
-          "errorMessage": {
-            "type": "string"
-          }
-        }
       },
       "TestIntegrationResult.Success": {
         "externalDocs": {
@@ -2549,7 +2587,7 @@
         "type": "object",
         "properties": {
           "failure": {
-            "$ref": "#/components/schemas/TestIntegrationResult.Failure"
+            "$ref": "#/components/schemas/v1.Failure"
           }
         },
         "additionalProperties": false
@@ -2771,17 +2809,20 @@
           }
         }
       },
+      "v1.Failure": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Failure",
+        "type": "object",
+        "properties": {
+          "errorMessage": {
+            "type": "string"
+          }
+        }
+      },
       "v1.IntegrationType": {
         "oneOf": [
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeGenericWebhook"
-          },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeManaged"
-          },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeUntracked"
-          },
           {
             "$ref": "#/components/schemas/V1IntegrationTypeCloudformation"
           },
@@ -2793,8 +2834,28 @@
           },
           {
             "$ref": "#/components/schemas/V1IntegrationTypeContextualData"
+          },
+          {
+            "$ref": "#/components/schemas/V1IntegrationTypeGenericWebhook"
+          },
+          {
+            "$ref": "#/components/schemas/V1IntegrationTypeManaged"
+          },
+          {
+            "$ref": "#/components/schemas/V1IntegrationTypeUntracked"
           }
         ]
+      },
+      "v1.RevisionSummary": {
+        "type": "object",
+        "properties": {
+          "lifecycle": {
+            "$ref": "#/components/schemas/RevisionLifecycle"
+          },
+          "version": {
+            "type": "string"
+          }
+        }
       },
       "v3.FilterOperator": {
         "type": "string",
@@ -2802,14 +2863,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

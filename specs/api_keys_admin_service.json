@@ -5,23 +5,24 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/dataengine/retention-tags/v1": {
+    "/aaa/api-keys/v3": {
       "get": {
         "tags": [
-          "Retentions Service"
+          "API Keys Admin Service"
         ],
-        "summary": "Get Retentions",
+        "summary": "Get Team Members API Keys",
+        "description": "Retrieve all API keys for team members.",
         "externalDocs": {
           "url": ""
         },
-        "operationId": "RetentionsService_GetRetentions",
+        "operationId": "ApiKeysAdminService_GetTeamMembersApiKeys",
         "responses": {
           "200": {
             "description": "",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetRetentionsResponse"
+                  "$ref": "#/components/schemas/GetTeamMembersApiKeysResponse"
                 }
               }
             }
@@ -48,31 +49,41 @@
       },
       "post": {
         "tags": [
-          "Retentions Service"
+          "API Keys Service"
         ],
-        "summary": "Update Retentions",
+        "summary": "Create API Key",
         "externalDocs": {
           "url": ""
         },
-        "operationId": "RetentionsService_UpdateRetentions",
+        "operationId": "ApiKeysService_CreateApiKey",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Update Retentions Request",
-                "description": "This data structure is used to update retentions",
+                "title": "Create Api Key Request",
+                "description": "This data structure is used to create an API key.",
                 "type": "object",
                 "properties": {
-                  "retentionUpdateElements": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/RetentionUpdateElement"
-                    }
+                  "accessPolicy": {
+                    "example": "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}",
+                    "description": "JSON string representing the access policy for this API key. Defines granular permissions for users and groups.",
+                    "type": "string"
+                  },
+                  "hashed": {
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "keyPermissions": {
+                    "$ref": "#/components/schemas/CreateApiKeyRequest.KeyPermissions"
+                  },
+                  "name": {
+                    "example": "my_api_key",
+                    "type": "string"
+                  },
+                  "owner": {
+                    "$ref": "#/components/schemas/Owner"
                   }
                 },
-                "required": [
-                  "retentionUpdateElements"
-                ],
                 "additionalProperties": false
               }
             }
@@ -84,91 +95,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UpdateRetentionsResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/dataengine/retention-tags/v1/activate": {
-      "post": {
-        "tags": [
-          "Retentions Service"
-        ],
-        "summary": "Activate Retentions",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "RetentionsService_ActivateRetentions",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ActivateRetentionsResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/dataengine/retention-tags/v1/enabled": {
-      "get": {
-        "tags": [
-          "Retentions Service"
-        ],
-        "summary": "Get Retentions Enabled",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "RetentionsService_GetRetentionsEnabled",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetRetentionsEnabledResponse"
+                  "$ref": "#/components/schemas/CreateApiKeyResponse"
                 }
               }
             }
@@ -197,23 +124,100 @@
   },
   "components": {
     "schemas": {
-      "ActivateRetentionsResponse": {
+      "ApiKey": {
         "externalDocs": {
-          "description": "Find out more about archives",
-          "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
         },
-        "title": "Activate Retentions Response",
-        "description": "This data structure is obtained after setting the active status of retentions",
+        "title": "API Key",
+        "description": "This data structure represents an API key with its metadata.",
         "type": "object",
         "properties": {
-          "activateRetentions": {
-            "example": true,
+          "createdAt": {
+            "description": "The timestamp when the API key was created.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "example": "key_abc123",
+            "type": "string"
+          },
+          "isActive": {
             "type": "boolean"
+          },
+          "keyName": {
+            "example": "my_api_key",
+            "type": "string"
+          },
+          "lastActivated": {
+            "description": "The timestamp when the API key was last activated.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/ApiKeyOwner"
           }
+        }
+      },
+      "ApiKeyOwner": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
         },
-        "required": [
-          "retentions"
-        ]
+        "title": "API Key Owner",
+        "description": "This data structure represents the owner of an API key.",
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/ApiKeyUserOwner"
+          }
+        }
+      },
+      "ApiKeySummary": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "API Key Summary",
+        "description": "This data structure represents summary about an API key including its permissions.",
+        "type": "object",
+        "properties": {
+          "apiKey": {
+            "$ref": "#/components/schemas/ApiKey"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "example": "logs:read",
+              "type": "string"
+            }
+          },
+          "presets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PermissionsPreset"
+            }
+          }
+        }
+      },
+      "ApiKeyUserOwner": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "API Key User Owner",
+        "description": "This data structure represents the user owner of an API key.",
+        "type": "object",
+        "properties": {
+          "userEmail": {
+            "example": "test@example.com",
+            "type": "string"
+          },
+          "userId": {
+            "example": "user_123",
+            "type": "string"
+          }
+        }
       },
       "ColorsByAggregation": {
         "type": "object",
@@ -241,6 +245,54 @@
           }
         },
         "additionalProperties": false
+      },
+      "CreateApiKeyRequest.KeyPermissions": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "Key Permissions",
+        "description": "This data structure allows to specify loose permissions and permission presets for an API key.",
+        "type": "object",
+        "properties": {
+          "permissions": {
+            "type": "array",
+            "items": {
+              "example": "read_logs",
+              "type": "string"
+            }
+          },
+          "presets": {
+            "type": "array",
+            "items": {
+              "example": "my_preset",
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CreateApiKeyResponse": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "Create Api Key Response",
+        "description": "This data structure is the response obtained when creating an API key.",
+        "type": "object",
+        "properties": {
+          "keyId": {
+            "example": "my_key_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_api_key",
+            "type": "string"
+          },
+          "value": {
+            "example": "my_api_key_value",
+            "type": "string"
+          }
+        }
       },
       "FieldGroup": {
         "type": "object",
@@ -329,30 +381,19 @@
           "pathAndValues"
         ]
       },
-      "GetRetentionsEnabledResponse": {
+      "GetTeamMembersApiKeysResponse": {
         "externalDocs": {
-          "description": "Find out more about archives",
-          "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
         },
-        "title": "Get Retentions Enabled Response",
-        "description": "This data structure is obtained when retrieving the active status of retentions",
+        "title": "Get Team Members API Keys Response",
+        "description": "This data structure is the response obtained when retrieving team members API keys.",
         "type": "object",
         "properties": {
-          "enableTags": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "retentions"
-        ]
-      },
-      "GetRetentionsResponse": {
-        "type": "object",
-        "properties": {
-          "retentions": {
+          "keys": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/archive.v1.Retention"
+              "$ref": "#/components/schemas/ApiKeySummary"
             }
           }
         }
@@ -399,58 +440,71 @@
           }
         }
       },
-      "RetentionUpdateElement": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
+      "Owner": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/OwnerUserId"
           },
-          "name": {
-            "type": "string"
+          {
+            "$ref": "#/components/schemas/OwnerTeamId"
+          },
+          {
+            "$ref": "#/components/schemas/OwnerOrganisationId"
           }
-        }
-      },
-      "UpdateRetentionsResponse": {
-        "externalDocs": {
-          "description": "Find out more about archives",
-          "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
-        },
-        "title": "Update Retentions Response",
-        "description": "This data structure is obtained after updating retentions",
-        "type": "object",
-        "properties": {
-          "retentions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/archive.v1.Retention"
-            }
-          }
-        },
-        "required": [
-          "retentions"
         ]
       },
-      "archive.v1.Retention": {
-        "externalDocs": {
-          "description": "Find out more about archives",
-          "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
-        },
-        "title": "Retention",
-        "description": "This data structure represents a retention",
+      "OwnerOrganisationId": {
         "type": "object",
         "properties": {
-          "editable": {
-            "type": "boolean"
-          },
+          "organisationId": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OwnerTeamId": {
+        "type": "object",
+        "properties": {
+          "teamId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OwnerUserId": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PermissionsPreset": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "Permissions Preset",
+        "description": "This data structure represents a preset set of permissions on an API key.",
+        "type": "object",
+        "properties": {
           "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "order": {
+            "example": 1,
             "type": "integer",
             "format": "int32"
+          },
+          "name": {
+            "example": "my_preset",
+            "type": "string"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "example": "logs:read",
+              "type": "string"
+            }
           }
         }
       },

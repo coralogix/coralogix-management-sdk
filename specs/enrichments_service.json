@@ -11,7 +11,6 @@
           "Enrichments Service"
         ],
         "summary": "Get Enrichments",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -34,7 +33,6 @@
           "Enrichments Service"
         ],
         "summary": "Atomic Overwrite Enrichments",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -84,7 +82,6 @@
           "Enrichments Service"
         ],
         "summary": "Add Enrichments",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -130,7 +127,6 @@
           "Enrichments Service"
         ],
         "summary": "Delete Enrichments",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -174,7 +170,6 @@
           "Enrichments Service"
         ],
         "summary": "Get Enrichment Limit",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -199,7 +194,6 @@
           "Enrichments Service"
         ],
         "summary": "Get Company Enrichment Settings",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -619,6 +613,34 @@
           "enrichments"
         ]
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -684,14 +706,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

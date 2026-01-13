@@ -4,67 +4,7 @@
     "title": "",
     "version": "1.0.0"
   },
-  "paths": {
-    "/notifications/notification-center/v1/entity-types": {
-      "get": {
-        "tags": [
-          "Entities service"
-        ],
-        "summary": "List Entity Types",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "EntitiesService_ListEntityTypes",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ListEntityTypesResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/notifications/notification-center/v1/entity-types/{entity_type}/entity-subtypes": {
-      "get": {
-        "tags": [
-          "Entities service"
-        ],
-        "summary": "List Entity Subtypes",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "EntitiesService_ListEntitySubTypes",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "entity_type",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/notification_center.EntityType"
-            },
-            "style": "simple"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ListEntitySubTypesResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
+  "paths": {},
   "components": {
     "schemas": {
       "ColorsByAggregation": {
@@ -181,28 +121,6 @@
           "pathAndValues"
         ]
       },
-      "ListEntitySubTypesResponse": {
-        "type": "object",
-        "properties": {
-          "entitySubTypes": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "ListEntityTypesResponse": {
-        "type": "object",
-        "properties": {
-          "entityTypes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/notification_center.EntityType"
-            }
-          }
-        }
-      },
       "MinMaxAuto": {
         "externalDocs": {
           "url": ""
@@ -268,15 +186,6 @@
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
-      },
-      "notification_center.EntityType": {
-        "type": "string",
-        "enum": [
-          "ENTITY_TYPE_UNSPECIFIED",
-          "ALERTS",
-          "TEST_NOTIFICATIONS",
-          "CASES"
         ]
       },
       "v3.FilterOperator": {

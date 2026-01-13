@@ -5,13 +5,12 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/v2/actions": {
+    "/actions/actions/v2": {
       "get": {
         "tags": [
           "Actions Service"
         ],
         "summary": "List Actions",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -52,7 +51,6 @@
           "Actions Service"
         ],
         "summary": "Replace Action",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -61,6 +59,8 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "ReplaceActionRequest",
+                "description": "This data structure represents the request to replace an Action.",
                 "type": "object",
                 "properties": {
                   "action": {
@@ -108,7 +108,6 @@
           "Actions Service"
         ],
         "summary": "Create Action",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -117,6 +116,8 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "CreateActionRequest",
+                "description": "This data structure represents the request to create an Action.",
                 "type": "object",
                 "properties": {
                   "applicationNames": {
@@ -181,13 +182,116 @@
         }
       }
     },
-    "/v2/actions/actions:atomicBatchExecute": {
+    "/actions/actions/v2/{id}": {
+      "get": {
+        "tags": [
+          "Actions Service"
+        ],
+        "summary": "Get Action",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_GetAction",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Actions Service"
+        ],
+        "summary": "Delete Action",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_DeleteAction",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/actions/batch/v2": {
       "post": {
         "tags": [
           "Actions Service"
         ],
         "summary": "Atomic Batch Execute Actions",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -196,6 +300,8 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "AtomicBatchExecuteActionsRequest",
+                "description": "This data structure represents a request to execute a batch of Action operations atomically.",
                 "type": "object",
                 "properties": {
                   "requests": {
@@ -242,13 +348,12 @@
         }
       }
     },
-    "/v2/actions/actions:order": {
+    "/actions/order/v2": {
       "post": {
         "tags": [
           "Actions Service"
         ],
         "summary": "Order Actions",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -257,6 +362,8 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "OrderActionsRequest",
+                "description": "This data structure represents the request to order Actions.",
                 "type": "object",
                 "properties": {
                   "privateActionsOrder": {
@@ -310,112 +417,6 @@
           }
         }
       }
-    },
-    "/v2/actions/{id}": {
-      "get": {
-        "tags": [
-          "Actions Service"
-        ],
-        "summary": "Get Action",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "ActionsService_GetAction",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetActionResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Actions Service"
-        ],
-        "summary": "Delete Action",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "ActionsService_DeleteAction",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteActionResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
     }
   },
   "components": {
@@ -434,6 +435,11 @@
         ]
       },
       "ActionExecutionRequestCreate": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "ActionExecutionRequest",
+        "description": "This data structure represents a request to execute an Action operation.",
         "type": "object",
         "properties": {
           "create": {
@@ -443,6 +449,11 @@
         "additionalProperties": false
       },
       "ActionExecutionRequestDelete": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "ActionExecutionRequest",
+        "description": "This data structure represents a request to execute an Action operation.",
         "type": "object",
         "properties": {
           "delete": {
@@ -452,6 +463,11 @@
         "additionalProperties": false
       },
       "ActionExecutionRequestReplace": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "ActionExecutionRequest",
+        "description": "This data structure represents a request to execute an Action operation.",
         "type": "object",
         "properties": {
           "replace": {
@@ -474,6 +490,11 @@
         ]
       },
       "ActionExecutionResponseCreate": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "ActionExecutionResponse",
+        "description": "This data structure represents a response to an Action execution request.",
         "type": "object",
         "properties": {
           "create": {
@@ -483,6 +504,11 @@
         "additionalProperties": false
       },
       "ActionExecutionResponseDelete": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "ActionExecutionResponse",
+        "description": "This data structure represents a response to an Action execution request.",
         "type": "object",
         "properties": {
           "delete": {
@@ -492,6 +518,11 @@
         "additionalProperties": false
       },
       "ActionExecutionResponseReplace": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "ActionExecutionResponse",
+        "description": "This data structure represents a response to an Action execution request.",
         "type": "object",
         "properties": {
           "replace": {
@@ -501,6 +532,11 @@
         "additionalProperties": false
       },
       "AtomicBatchExecuteActionsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "AtomicBatchExecuteActionsResponse",
+        "description": "This data structure represents the response to a batch Action execution request.",
         "type": "object",
         "properties": {
           "matchingResponses": {
@@ -539,6 +575,11 @@
         "additionalProperties": false
       },
       "CreateActionRequest": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "CreateActionRequest",
+        "description": "This data structure represents the request to create an Action.",
         "type": "object",
         "properties": {
           "applicationNames": {
@@ -568,6 +609,11 @@
         }
       },
       "CreateActionResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "CreateActionResponse",
+        "description": "This data structure represents the response to create an Action.",
         "type": "object",
         "properties": {
           "action": {
@@ -576,6 +622,11 @@
         }
       },
       "DeleteActionRequest": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "DeleteActionRequest",
+        "description": "This data structure represents the request to delete an Action.",
         "type": "object",
         "properties": {
           "id": {
@@ -584,6 +635,11 @@
         }
       },
       "DeleteActionResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "DeleteActionResponse",
+        "description": "This data structure represents the response to delete an Action.",
         "type": "object"
       },
       "FieldGroup": {
@@ -674,6 +730,11 @@
         ]
       },
       "GetActionResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "GetActionResponse",
+        "description": "This data structure represents the response to get an Action.",
         "type": "object",
         "properties": {
           "action": {
@@ -682,6 +743,11 @@
         }
       },
       "ListActionsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "ListActionsResponse",
+        "description": "This data structure represents the response containing a list of Actions.",
         "type": "object",
         "properties": {
           "actions": {
@@ -691,6 +757,34 @@
             }
           }
         }
+      },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",
@@ -707,9 +801,19 @@
         }
       },
       "OrderActionsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "OrderActionsResponse",
+        "description": "This data structure represents the response to order Actions.",
         "type": "object"
       },
       "ReplaceActionRequest": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "ReplaceActionRequest",
+        "description": "This data structure represents the request to replace an Action.",
         "type": "object",
         "properties": {
           "action": {
@@ -718,6 +822,11 @@
         }
       },
       "ReplaceActionResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "ReplaceActionResponse",
+        "description": "This data structure represents the response to replace an Action.",
         "type": "object",
         "properties": {
           "action": {
@@ -751,6 +860,11 @@
         ]
       },
       "v2.Action": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Action",
+        "description": "This data structure represents an Action.",
         "type": "object",
         "properties": {
           "applicationNames": {
@@ -802,14 +916,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

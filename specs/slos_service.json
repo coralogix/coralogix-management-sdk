@@ -5,13 +5,12 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/v1/slo/slos": {
+    "/slo/slo/v1": {
       "get": {
         "tags": [
           "Slos Service"
         ],
         "summary": "List Slos",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -21,67 +20,53 @@
             "in": "query",
             "name": "filters",
             "schema": {
-              "externalDocs": {
-                "url": ""
-              },
-              "title": "SloFilters",
-              "description": "A collection of filters for SLOs",
-              "type": "object",
-              "properties": {
-                "filters": {
-                  "type": "array",
-                  "items": {
+              "type": "array",
+              "items": {
+                "externalDocs": {
+                  "url": ""
+                },
+                "title": "SloFilter",
+                "description": "A filter for SLOs, consisting of a field and a predicate",
+                "type": "object",
+                "properties": {
+                  "field": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/SloFilterFieldSloType"
+                      },
+                      {
+                        "$ref": "#/components/schemas/SloFilterFieldConstFilter"
+                      },
+                      {
+                        "$ref": "#/components/schemas/SloFilterFieldLabelName"
+                      }
+                    ]
+                  },
+                  "predicate": {
                     "externalDocs": {
                       "url": ""
                     },
-                    "title": "SloFilter",
-                    "description": "A filter for SLOs, consisting of a field and a predicate",
+                    "title": "SloFilterPredicate",
+                    "description": "Predicate used for filtering SLOs",
                     "type": "object",
                     "properties": {
-                      "field": {
+                      "is": {
                         "oneOf": [
                           {
-                            "$ref": "#/components/schemas/SloFilterFieldConstFilter"
+                            "$ref": "#/components/schemas/IsFilterPredicateStringValues"
                           },
                           {
-                            "$ref": "#/components/schemas/SloFilterFieldLabelName"
+                            "$ref": "#/components/schemas/IsFilterPredicateTypeValues"
                           }
                         ]
-                      },
-                      "predicate": {
-                        "externalDocs": {
-                          "url": ""
-                        },
-                        "title": "SloFilterPredicate",
-                        "description": "Predicate used for filtering SLOs",
-                        "type": "object",
-                        "properties": {
-                          "is": {
-                            "externalDocs": {
-                              "url": ""
-                            },
-                            "title": "IsFilterPredicate",
-                            "description": "Predicate for SLO filters that checks if a field is equal to one of multiple values",
-                            "type": "object",
-                            "properties": {
-                              "is": {
-                                "type": "array",
-                                "items": {
-                                  "example": "",
-                                  "type": "string"
-                                }
-                              }
-                            }
-                          }
-                        }
                       }
-                    },
-                    "required": [
-                      "field",
-                      "predicate"
-                    ]
+                    }
                   }
-                }
+                },
+                "required": [
+                  "field",
+                  "predicate"
+                ]
               }
             },
             "style": "form"
@@ -123,7 +108,6 @@
           "Slos Service"
         ],
         "summary": "Replace Slo",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -192,7 +176,6 @@
           "Slos Service"
         ],
         "summary": "Create Slo",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -215,10 +198,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
+                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
                   },
                   {
-                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
+                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
                   }
                 ]
               }
@@ -257,13 +240,131 @@
         }
       }
     },
-    "/v1/slo/slos/validate": {
+    "/slo/slo/v1/batch": {
+      "get": {
+        "tags": [
+          "Slos Service"
+        ],
+        "summary": "Batch Get Slo",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "SlosService_BatchGetSlos",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "ids",
+            "schema": {
+              "type": "array",
+              "items": {
+                "example": "",
+                "type": "string"
+              }
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchGetSlosResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Slos Service"
+        ],
+        "summary": "Batch Execute Slo",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "SlosService_BatchExecuteSlo",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "requests",
+            "schema": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/SloExecutionRequestDeleteSloRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/SloExecutionRequestCreateSloRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/SloExecutionRequestReplaceSloRequest"
+                  }
+                ]
+              }
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchExecuteSloResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/slo/slo/v1/validate": {
       "post": {
         "tags": [
           "Slos Service"
         ],
         "summary": "Replace Slo Pre-Validate Alerts",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -317,13 +418,12 @@
         }
       }
     },
-    "/v1/slo/slos/zeroState": {
+    "/slo/slo/v1/zeroState": {
       "get": {
         "tags": [
           "Slos Service"
         ],
         "summary": "Get Slo Zero State",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -360,13 +460,12 @@
         }
       }
     },
-    "/v1/slo/slos/{id}": {
+    "/slo/slo/v1/{id}": {
       "get": {
         "tags": [
           "Slos Service"
         ],
         "summary": "Get Slo",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -418,7 +517,6 @@
           "Slos Service"
         ],
         "summary": "Delete Slo",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -441,129 +539,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeleteSloResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/v1/slo/slos:batchExecute": {
-      "post": {
-        "tags": [
-          "Slos Service"
-        ],
-        "summary": "Batch Execute Slo",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "SlosService_BatchExecuteSlo",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "requests",
-            "schema": {
-              "type": "array",
-              "items": {
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/SloExecutionRequestReplaceSloRequest"
-                  },
-                  {
-                    "$ref": "#/components/schemas/SloExecutionRequestDeleteSloRequest"
-                  },
-                  {
-                    "$ref": "#/components/schemas/SloExecutionRequestCreateSloRequest"
-                  }
-                ]
-              }
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BatchExecuteSloResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/v1/slo/slos:batchGet": {
-      "get": {
-        "tags": [
-          "Slos Service"
-        ],
-        "summary": "Batch Get Slo",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "SlosService_BatchGetSlos",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "ids",
-            "schema": {
-              "type": "array",
-              "items": {
-                "example": "",
-                "type": "string"
-              }
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BatchGetSlosResponse"
                 }
               }
             }
@@ -885,6 +860,34 @@
           "zeroState"
         ]
       },
+      "IsFilterPredicateStringValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "IsFilterPredicate",
+        "description": "Predicate for SLO filters that checks if a field is equal to one of multiple values",
+        "type": "object",
+        "properties": {
+          "stringValues": {
+            "$ref": "#/components/schemas/StringValues"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IsFilterPredicateTypeValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "IsFilterPredicate",
+        "description": "Predicate for SLO filters that checks if a field is equal to one of multiple values",
+        "type": "object",
+        "properties": {
+          "typeValues": {
+            "$ref": "#/components/schemas/TypeValues"
+          }
+        },
+        "additionalProperties": false
+      },
       "ListSlosResponse": {
         "externalDocs": {
           "url": ""
@@ -920,6 +923,34 @@
         "required": [
           "query"
         ]
+      },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
       },
       "MissingDataStrategy": {
         "type": "string",
@@ -1219,6 +1250,20 @@
         },
         "additionalProperties": false
       },
+      "SloFilterFieldSloType": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SloFilterField",
+        "description": "Field used for filtering SLOs",
+        "type": "object",
+        "properties": {
+          "sloType": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "SloRequestBasedMetricSli": {
         "externalDocs": {
           "url": ""
@@ -1265,12 +1310,16 @@
           "sloTimeFrame": {
             "$ref": "#/components/schemas/SloTimeFrame"
           },
+          "sloType": {
+            "$ref": "#/components/schemas/SloType"
+          },
           "targetThresholdPercentage": {
             "example": 99.999,
             "type": "number",
             "format": "float"
           },
           "type": {
+            "deprecated": true,
             "example": "request",
             "type": "string"
           },
@@ -1295,6 +1344,13 @@
           "SLO_TIME_FRAME_14_DAYS",
           "SLO_TIME_FRAME_21_DAYS",
           "SLO_TIME_FRAME_28_DAYS"
+        ]
+      },
+      "SloType": {
+        "type": "string",
+        "enum": [
+          "SLO_TYPE_REQUEST",
+          "SLO_TYPE_WINDOW"
         ]
       },
       "SloWindowBasedMetricSli": {
@@ -1340,12 +1396,16 @@
           "sloTimeFrame": {
             "$ref": "#/components/schemas/SloTimeFrame"
           },
+          "sloType": {
+            "$ref": "#/components/schemas/SloType"
+          },
           "targetThresholdPercentage": {
             "example": 99.999,
             "type": "number",
             "format": "float"
           },
           "type": {
+            "deprecated": true,
             "example": "request",
             "type": "string"
           },
@@ -1364,6 +1424,28 @@
           "sli"
         ],
         "additionalProperties": false
+      },
+      "StringValues": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "TypeValues": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SloType"
+            }
+          }
+        }
       },
       "WindowBasedMetricSli": {
         "externalDocs": {
@@ -1472,14 +1554,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

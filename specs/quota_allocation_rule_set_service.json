@@ -5,187 +5,25 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/stuff/things/v1": {
+    "/quota-rules/v1/quota-allocation-rule-set": {
       "get": {
         "tags": [
-          "Things Service"
+          "Quota Allocation Rule Set service"
         ],
-        "summary": "List Things",
-        "description": "No description available",
+        "summary": "Get quota allocation rule set",
         "externalDocs": {
           "url": ""
         },
-        "operationId": "ThingService_ListThings",
+        "operationId": "QuotaAllocationRuleSetService_GetQuotaAllocationRuleSet",
         "parameters": [
           {
             "in": "query",
-            "name": "filter",
-            "schema": {
-              "example": "logs.id=100",
-              "type": "string"
-            },
-            "style": "form"
-          },
-          {
-            "in": "query",
-            "name": "page_size",
-            "schema": {
-              "example": 100,
-              "type": "integer",
-              "format": "int32"
-            },
-            "style": "form"
-          },
-          {
-            "in": "query",
-            "name": "skip",
-            "schema": {
-              "example": 100,
-              "type": "integer",
-              "format": "int32"
-            },
-            "style": "form"
-          },
-          {
-            "in": "query",
-            "name": "page_token",
-            "schema": {
-              "example": "asdf1234",
-              "type": "string"
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ListThingsResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Things Service"
-        ],
-        "summary": "Create Thing",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "ThingService_CreateThing",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "title": "Create Thing Request",
-                "description": "The data structure to create a thing",
-                "type": "object",
-                "properties": {
-                  "thing": {
-                    "$ref": "#/components/schemas/Thing"
-                  }
-                },
-                "required": [
-                  "thing"
-                ],
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateThingResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-bumblebee": [
-          {
-            "action": [
-              "create"
-            ],
-            "guard": "status==201 && exists($.body.id)",
-            "name": "resource_management",
-            "reachable": [
-              "ThingService_ListThings",
-              "ThingService_GetThing",
-              "ThingService_ReplaceThing",
-              "ThingService_DeleteThing"
-            ],
-            "root": true
-          }
-        ]
-      }
-    },
-    "/stuff/things/v1/{id}": {
-      "get": {
-        "tags": [
-          "Things Service"
-        ],
-        "summary": "Get Thing",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "ThingService_GetThing",
-        "parameters": [
-          {
-            "in": "path",
             "name": "id",
-            "required": true,
             "schema": {
-              "example": "43B9880C-A880-418F-91DF-8463063A30ED",
+              "example": "",
               "type": "string"
             },
-            "style": "simple"
+            "style": "form"
           }
         ],
         "responses": {
@@ -194,7 +32,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetThingResponse"
+                  "$ref": "#/components/schemas/GetQuotaAllocationRuleSetResponse"
                 }
               }
             }
@@ -211,6 +49,12 @@
               "application/json": {}
             }
           },
+          "404": {
+            "description": "Rule set not found",
+            "content": {
+              "application/json": {}
+            }
+          },
           "500": {
             "description": "Internal server error",
             "content": {
@@ -218,70 +62,33 @@
             }
           }
         },
-        "x-bumblebee": [
-          {
-            "action": [
-              "create"
-            ],
-            "guard": "status==201 && exists($.body.id)",
-            "name": "resource_management",
-            "reachable": [
-              "ThingService_ListThings",
-              "ThingService_GetThing",
-              "ThingService_ReplaceThing",
-              "ThingService_DeleteThing"
-            ],
-            "root": true
-          }
+        "x-coralogixPermissions": [
+          "team-quota-rules:Read"
         ]
       },
       "put": {
         "tags": [
-          "Things Service"
+          "Quota Allocation Rule Set service"
         ],
-        "summary": "Replace Thing",
-        "description": "No description available",
+        "summary": "Replace quota allocation rule set",
         "externalDocs": {
           "url": ""
         },
-        "operationId": "ThingService_ReplaceThing",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "example": "123e4567-e89b-12d3-a456-426614174000",
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
+        "operationId": "QuotaAllocationRuleSetService_ReplaceQuotaAllocationRuleSet",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Replace Thing Request",
-                "description": "The data structure to replace a thing",
+                "title": "Replace quota allocation rule set request",
+                "description": "Request to replace quota allocation rule set",
                 "type": "object",
                 "properties": {
-                  "thing": {
-                    "type": "object",
-                    "properties": {
-                      "createdAt": {
-                        "example": "2021-01-01T00:00:00.000Z",
-                        "type": "string",
-                        "format": "date-time"
-                      },
-                      "name": {
-                        "example": "A Thing's Name",
-                        "type": "string"
-                      }
-                    }
+                  "ruleSet": {
+                    "$ref": "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
                   }
                 },
                 "required": [
-                  "thing"
+                  "ruleSet"
                 ],
                 "additionalProperties": false
               }
@@ -294,7 +101,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReplaceThingResponse"
+                  "$ref": "#/components/schemas/ReplaceQuotaAllocationRuleSetResponse"
                 }
               }
             }
@@ -311,6 +118,12 @@
               "application/json": {}
             }
           },
+          "404": {
+            "description": "Rule set not found",
+            "content": {
+              "application/json": {}
+            }
+          },
           "500": {
             "description": "Internal server error",
             "content": {
@@ -318,52 +131,46 @@
             }
           }
         },
-        "x-bumblebee": [
-          {
-            "action": [
-              "create"
-            ],
-            "guard": "status==201 && exists($.body.id)",
-            "name": "resource_management",
-            "reachable": [
-              "ThingService_ListThings",
-              "ThingService_GetThing",
-              "ThingService_ReplaceThing",
-              "ThingService_DeleteThing"
-            ],
-            "root": true
-          }
+        "x-coralogixPermissions": [
+          "team-quota-rules:Manage"
         ]
       },
-      "delete": {
+      "post": {
         "tags": [
-          "Things Service"
+          "Quota Allocation Rule Set service"
         ],
-        "summary": "Delete Thing",
-        "description": "No description available",
+        "summary": "Create quota allocation rule set",
         "externalDocs": {
           "url": ""
         },
-        "operationId": "ThingService_DeleteThing",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "example": "43B9880C-A880-418F-91DF-8463063A30ED",
-              "type": "string"
-            },
-            "style": "simple"
+        "operationId": "QuotaAllocationRuleSetService_CreateQuotaAllocationRuleSet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Create quota allocation rule set request",
+                "description": "Request to create a new quota allocation rule set",
+                "type": "object",
+                "properties": {
+                  "ruleSet": {
+                    "$ref": "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
+                  }
+                },
+                "required": [
+                  "ruleSet"
+                ],
+                "additionalProperties": false
+              }
+            }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DeleteThingResponse"
+                  "$ref": "#/components/schemas/CreateQuotaAllocationRuleSetResponse"
                 }
               }
             }
@@ -380,6 +187,12 @@
               "application/json": {}
             }
           },
+          "409": {
+            "description": "Rule set already exists",
+            "content": {
+              "application/json": {}
+            }
+          },
           "500": {
             "description": "Internal server error",
             "content": {
@@ -387,18 +200,57 @@
             }
           }
         },
-        "x-bumblebee": [
-          {
-            "action": [
-              "create"
-            ],
-            "guard": "status==201 && exists($.body.id)",
-            "name": "resource_management",
-            "reachable": [
-              "ThingService_ListThings"
-            ],
-            "root": true
+        "x-coralogixPermissions": [
+          "team-quota-rules:Manage"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Quota Allocation Rule Set service"
+        ],
+        "summary": "Delete quota allocation rule set",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "QuotaAllocationRuleSetService_DeleteQuotaAllocationRuleSet",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteQuotaAllocationRuleSetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Rule set not found",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
           }
+        },
+        "x-coralogixPermissions": [
+          "team-quota-rules:Manage"
         ]
       }
     }
@@ -432,31 +284,31 @@
         },
         "additionalProperties": false
       },
-      "CreateThingResponse": {
+      "CreateQuotaAllocationRuleSetResponse": {
         "externalDocs": {
-          "description": "Find out more.",
-          "url": "https://coralogix.com/docs/user-guides/"
+          "url": ""
         },
-        "title": "Create Thing Response",
-        "description": "The data structure response from creating a thing",
+        "title": "Create quota allocation rule set response",
+        "description": "Response confirming quota allocation rule set has been successfully created",
         "type": "object",
         "properties": {
-          "thing": {
-            "$ref": "#/components/schemas/Thing"
+          "ruleSet": {
+            "$ref": "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
           }
-        },
-        "required": [
-          "thing"
-        ]
+        }
       },
-      "DeleteThingResponse": {
+      "DeleteQuotaAllocationRuleSetResponse": {
         "externalDocs": {
-          "description": "Find out more.",
-          "url": "https://coralogix.com/docs/user-guides/"
+          "url": ""
         },
-        "title": "Delete Thing Response",
-        "description": "Empty response if the request succeeded.",
-        "type": "object"
+        "title": "Delete quota allocation rule set response",
+        "description": "Response confirming quota allocation rule set has been successfully deleted",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
       },
       "FieldGroup": {
         "type": "object",
@@ -545,46 +397,46 @@
           "pathAndValues"
         ]
       },
-      "GetThingResponse": {
+      "GetQuotaAllocationRuleSetResponse": {
         "externalDocs": {
-          "description": "Find out more.",
-          "url": "https://coralogix.com/docs/user-guides/"
+          "url": ""
         },
-        "title": "Get Thing Response",
-        "description": "The data structure response from getting a thing",
+        "title": "Get quota allocation rule set response",
+        "description": "Response containing quota allocation rule set",
         "type": "object",
         "properties": {
-          "thing": {
-            "$ref": "#/components/schemas/Thing"
-          }
-        },
-        "required": [
-          "thing"
-        ]
-      },
-      "ListThingsResponse": {
-        "externalDocs": {
-          "description": "Find out more.",
-          "url": "https://coralogix.com/docs/user-guides/"
-        },
-        "title": "List Things Response",
-        "description": "Paginated response for listing things. Defaults to retrieving all things (probably a bad idea).",
-        "type": "object",
-        "properties": {
-          "nextPageToken": {
-            "type": "string"
-          },
-          "things": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Thing"
-            }
-          },
-          "totalCount": {
-            "type": "integer",
-            "format": "int32"
+          "ruleSet": {
+            "$ref": "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
           }
         }
+      },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",
@@ -600,38 +452,67 @@
           }
         }
       },
-      "ReplaceThingResponse": {
+      "QuotaAllocationEntityTypeRule": {
         "externalDocs": {
-          "description": "Find out more.",
-          "url": "https://coralogix.com/docs/user-guides/"
+          "url": ""
         },
-        "title": "Replace Thing Response",
-        "description": "The data structure response from replacing a thing",
+        "title": "Quota allocation entity type rule",
+        "description": "Defines quota allocation rule for a specific entity type",
         "type": "object",
         "properties": {
-          "thing": {
-            "$ref": "#/components/schemas/Thing"
+          "allocation": {
+            "type": "number",
+            "format": "float"
+          },
+          "canOverflow": {
+            "type": "boolean"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "entityType": {
+            "type": "string"
           }
         },
         "required": [
-          "thing"
+          "entityType",
+          "allocation",
+          "enabled",
+          "canOverflow"
         ]
       },
-      "Thing": {
+      "QuotaAllocationEntityTypeRuleSet": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Quota allocation entity type rule set",
+        "description": "Contains a collection of quota allocation rules for entity types",
         "type": "object",
         "properties": {
-          "createdAt": {
-            "example": "2021-01-01T00:00:00.000Z",
-            "type": "string",
-            "format": "date-time"
-          },
           "id": {
-            "example": "123e4567-e89b-12d3-a456-426614174000",
             "type": "string"
           },
-          "name": {
-            "example": "A Thing's Name",
-            "type": "string"
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuotaAllocationEntityTypeRule"
+            }
+          }
+        },
+        "required": [
+          "rules"
+        ]
+      },
+      "ReplaceQuotaAllocationRuleSetResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Replace quota allocation rule set response",
+        "description": "Response confirming quota allocation rule set has been successfully replaced",
+        "type": "object",
+        "properties": {
+          "ruleSet": {
+            "$ref": "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
           }
         }
       },
@@ -666,14 +547,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

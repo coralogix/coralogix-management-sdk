@@ -11,7 +11,7 @@
           "Cases service"
         ],
         "summary": "List cases with filters",
-        "description": "List cases using filters, pagination and custom ordering.\n\nRequires the following permissions:\n- `case:Read`",
+        "description": "List cases using filters, pagination and custom ordering.",
         "externalDocs": {
           "url": ""
         },
@@ -74,13 +74,78 @@
         ]
       }
     },
+    "/cases/cases/v1/{case_id}/external-references": {
+      "get": {
+        "tags": [
+          "Cases service"
+        ],
+        "summary": "Get external references for a case",
+        "description": "Retrieve all external references that link a case to external systems such as ServiceNow. Returns the complete list of external references associated with the specified case.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CasesService_GetCaseExternalReferences",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "case_id",
+            "required": true,
+            "schema": {
+              "example": "550e8400-e29b-41d4-a716-446655440000",
+              "description": "The unique identifier of the case in UUID format",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCaseExternalReferencesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Case not found",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "case:Read"
+        ]
+      }
+    },
     "/cases/cases/v1/{id}": {
       "get": {
         "tags": [
           "Cases service"
         ],
         "summary": "Get case by ID",
-        "description": "Retrieve detailed information about a single case by its unique identifier.\n\nRequires the following permissions:\n- `case:Read`",
+        "description": "Retrieve detailed information about a single case by its unique identifier.",
         "externalDocs": {
           "url": ""
         },
@@ -137,7 +202,7 @@
           "Cases service"
         ],
         "summary": "Update case fields",
-        "description": "Apply a partial update (patch) to a case.\n\nRequires the following permissions:\n- `case:Update`",
+        "description": "Apply a partial update (patch) to a case.",
         "externalDocs": {
           "url": ""
         },
@@ -220,7 +285,7 @@
           "Cases service"
         ],
         "summary": "Acknowledge a case",
-        "description": "Mark the case as acknowledged by a user.\n\nRequires the following permissions:\n- `case:Acknowledge`",
+        "description": "Mark the case as acknowledged by a user.",
         "externalDocs": {
           "url": ""
         },
@@ -299,7 +364,7 @@
           "Cases service"
         ],
         "summary": "Assign a case to a user",
-        "description": "Assign a case to a specific user.\n\nRequires the following permissions:\n- `case:Assign`",
+        "description": "Assign a case to a specific user.",
         "externalDocs": {
           "url": ""
         },
@@ -372,13 +437,72 @@
         ]
       }
     },
+    "/cases/cases/v1/{id}:clearPriorityOverride": {
+      "post": {
+        "tags": [
+          "Cases service"
+        ],
+        "summary": "Remove priority override",
+        "description": "Remove a previously set priority override for a case.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CasesService_ClearPriorityOverride",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": "3f166e9f-3c88-4af2-b52e-138f339dab3e",
+              "description": "ID of the case",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClearPriorityOverrideResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "case:Update"
+        ]
+      }
+    },
     "/cases/cases/v1/{id}:close": {
       "post": {
         "tags": [
           "Cases service"
         ],
         "summary": "Close a case",
-        "description": "Close a case that no longer requires action.\n\nRequires the following permissions:\n- `case:Close`",
+        "description": "Close a case that no longer requires action.",
         "externalDocs": {
           "url": ""
         },
@@ -394,16 +518,6 @@
               "type": "string"
             },
             "style": "simple"
-          },
-          {
-            "in": "query",
-            "name": "reason",
-            "schema": {
-              "example": "This case is not applicable.",
-              "description": "Reason to resolve",
-              "type": "string"
-            },
-            "style": "form"
           }
         ],
         "responses": {
@@ -447,7 +561,7 @@
           "Cases service"
         ],
         "summary": "Resolve a case",
-        "description": "Mark a case as resolved.\n\nRequires the following permissions:\n- `case:Close`",
+        "description": "Mark a case as resolved.",
         "externalDocs": {
           "url": ""
         },
@@ -516,7 +630,7 @@
           "Cases service"
         ],
         "summary": "Set priority override",
-        "description": "Override a case's computed priority with a specific value.\n\nRequires the following permissions:\n- `case:Update`",
+        "description": "Override a case's computed priority with a specific value.",
         "externalDocs": {
           "url": ""
         },
@@ -595,7 +709,7 @@
           "Cases service"
         ],
         "summary": "Remove case assignment",
-        "description": "Remove the current assignee from a case.\n\nRequires the following permissions:\n- `case:Assign`",
+        "description": "Remove the current assignee from a case.",
         "externalDocs": {
           "url": ""
         },
@@ -648,37 +762,208 @@
         ]
       }
     },
-    "/cases/cases/v1/{id}:unsetPriorityOverride": {
+    "/cases/cases/v1:bulkAcknowledge": {
       "post": {
         "tags": [
           "Cases service"
         ],
-        "summary": "Remove priority override",
-        "description": "Remove a previously set priority override for a case.\n\nRequires the following permissions:\n- `case:Update`",
+        "summary": "Acknowledge multiple cases",
+        "description": "Mark multiple cases as acknowledged in a single operation.",
         "externalDocs": {
           "url": ""
         },
-        "operationId": "CasesService_UnsetPriorityOverride",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "example": "3f166e9f-3c88-4af2-b52e-138f339dab3e",
-              "description": "ID of the case",
-              "type": "string"
-            },
-            "style": "simple"
+        "operationId": "CasesService_BulkAcknowledge",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Bulk acknowledge request",
+                "description": "Request to acknowledge multiple cases",
+                "type": "object",
+                "properties": {
+                  "actor": {
+                    "$ref": "#/components/schemas/cases.v1.UserDetails"
+                  },
+                  "ids": {
+                    "example": [
+                      "3f166e9f-3c88-4af2-b52e-138f339dab3e",
+                      "a4c7d2e8-5f99-4b3a-c53f-239f440dbe4f"
+                    ],
+                    "type": "array",
+                    "items": {
+                      "description": "IDs of the cases to acknowledge",
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "ids",
+                  "actor"
+                ],
+                "additionalProperties": false
+              }
+            }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UnsetPriorityOverrideResponse"
+                  "$ref": "#/components/schemas/BulkAcknowledgeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "case:Acknowledge"
+        ]
+      }
+    },
+    "/cases/cases/v1:bulkAssign": {
+      "post": {
+        "tags": [
+          "Cases service"
+        ],
+        "summary": "Assign multiple cases to a user",
+        "description": "Assign multiple cases to a specific user in a single operation.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CasesService_BulkAssign",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Bulk assign request",
+                "description": "Request to assign multiple cases to a user",
+                "type": "object",
+                "properties": {
+                  "assignee": {
+                    "$ref": "#/components/schemas/cases.v1.UserDetails"
+                  },
+                  "ids": {
+                    "example": [
+                      "3f166e9f-3c88-4af2-b52e-138f339dab3e",
+                      "a4c7d2e8-5f99-4b3a-c53f-239f440dbe4f"
+                    ],
+                    "type": "array",
+                    "items": {
+                      "description": "IDs of the cases to assign",
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "ids",
+                  "assignee"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkAssignResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "case:Assign"
+        ]
+      }
+    },
+    "/cases/cases/v1:bulkClearPriorityOverride": {
+      "post": {
+        "tags": [
+          "Cases service"
+        ],
+        "summary": "Remove priority override from multiple cases",
+        "description": "Remove previously set priority overrides from multiple cases in a single operation.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CasesService_BulkClearPriorityOverride",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Bulk clear priority override request",
+                "description": "Request to clear priority override for multiple cases",
+                "type": "object",
+                "properties": {
+                  "ids": {
+                    "example": [
+                      "3f166e9f-3c88-4af2-b52e-138f339dab3e",
+                      "a4c7d2e8-5f99-4b3a-c53f-239f440dbe4f"
+                    ],
+                    "type": "array",
+                    "items": {
+                      "description": "IDs of the cases to clear priority override for",
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "ids"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkClearPriorityOverrideResponse"
                 }
               }
             }
@@ -707,13 +992,318 @@
         ]
       }
     },
+    "/cases/cases/v1:bulkClose": {
+      "post": {
+        "tags": [
+          "Cases service"
+        ],
+        "summary": "Close multiple cases",
+        "description": "Close multiple cases in a single operation.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CasesService_BulkClose",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Bulk close request",
+                "description": "Request to close multiple cases",
+                "type": "object",
+                "properties": {
+                  "ids": {
+                    "example": [
+                      "3f166e9f-3c88-4af2-b52e-138f339dab3e",
+                      "a4c7d2e8-5f99-4b3a-c53f-239f440dbe4f"
+                    ],
+                    "type": "array",
+                    "items": {
+                      "description": "IDs of the cases to close",
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "ids"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkCloseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "case:Close"
+        ]
+      }
+    },
+    "/cases/cases/v1:bulkResolve": {
+      "post": {
+        "tags": [
+          "Cases service"
+        ],
+        "summary": "Resolve multiple cases",
+        "description": "Resolve multiple cases in a single operation.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CasesService_BulkResolve",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Bulk resolve request",
+                "description": "Request to resolve multiple cases",
+                "type": "object",
+                "properties": {
+                  "ids": {
+                    "example": [
+                      "3f166e9f-3c88-4af2-b52e-138f339dab3e",
+                      "a4c7d2e8-5f99-4b3a-c53f-239f440dbe4f"
+                    ],
+                    "type": "array",
+                    "items": {
+                      "description": "IDs of the cases to resolve",
+                      "type": "string"
+                    }
+                  },
+                  "reason": {
+                    "example": "These cases are no longer active.",
+                    "description": "Reason for resolution",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "ids"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkResolveResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "case:Close"
+        ]
+      }
+    },
+    "/cases/cases/v1:bulkSetPriorityOverride": {
+      "post": {
+        "tags": [
+          "Cases service"
+        ],
+        "summary": "Override priority for multiple cases",
+        "description": "Override the priority with for multiple cases in a single operation.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CasesService_BulkSetPriorityOverride",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Bulk override priority request",
+                "description": "Request to override priority for multiple cases",
+                "type": "object",
+                "properties": {
+                  "ids": {
+                    "example": [
+                      "3f166e9f-3c88-4af2-b52e-138f339dab3e",
+                      "a4c7d2e8-5f99-4b3a-c53f-239f440dbe4f"
+                    ],
+                    "type": "array",
+                    "items": {
+                      "description": "IDs of the cases to override priority for",
+                      "type": "string"
+                    }
+                  },
+                  "priority": {
+                    "$ref": "#/components/schemas/CasePriority"
+                  }
+                },
+                "required": [
+                  "ids",
+                  "priority"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkSetPriorityOverrideResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "case:Update"
+        ]
+      }
+    },
+    "/cases/cases/v1:bulkUnassign": {
+      "post": {
+        "tags": [
+          "Cases service"
+        ],
+        "summary": "Remove assignment from multiple cases",
+        "description": "Remove the current assignee from multiple cases in a single operation.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CasesService_BulkUnassign",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Bulk unassign request",
+                "description": "Request to unassign multiple cases",
+                "type": "object",
+                "properties": {
+                  "ids": {
+                    "example": [
+                      "3f166e9f-3c88-4af2-b52e-138f339dab3e",
+                      "a4c7d2e8-5f99-4b3a-c53f-239f440dbe4f"
+                    ],
+                    "type": "array",
+                    "items": {
+                      "description": "IDs of the cases to unassign",
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "ids"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkUnassignResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "case:Assign"
+        ]
+      }
+    },
     "/cases/cases/v1:get-filter-values": {
       "post": {
         "tags": [
           "Cases service"
         ],
         "summary": "Get available filter values",
-        "description": "Retrieve available filter and aggregation values for cases.\n\nRequires the following permissions:\n- `case:Read`",
+        "description": "Retrieve available filter and aggregation values for cases.",
         "externalDocs": {
           "url": ""
         },
@@ -768,6 +1358,52 @@
           "case:Read"
         ]
       }
+    },
+    "/cases/cases/v1:groupingKeys": {
+      "get": {
+        "tags": [
+          "Cases service"
+        ],
+        "summary": "Get available grouping keys",
+        "description": "Retrieve all available grouping keys that can be used for organizing and filtering Cases.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CasesService_GetGroupingKeys",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetGroupingKeysResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "case:Read"
+        ]
+      }
     }
   },
   "components": {
@@ -787,6 +1423,38 @@
           "case"
         ]
       },
+      "AlertFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert filters",
+        "description": "Filters applied to cases based on alert properties.",
+        "type": "object",
+        "properties": {
+          "alertIds": {
+            "example": [
+              "f56645c5-9cd4-4b9f-961f-4f852d8835a0",
+              "a0a08c31-0ae4-4600-928e-cb6b7da50a99"
+            ],
+            "type": "array",
+            "items": {
+              "description": "List of alert IDs to filter on. Cases containing any of these alert IDs will be returned (OR logic).",
+              "type": "string"
+            }
+          },
+          "alertVersions": {
+            "example": [
+              "550e8400-e29b-41d4-a716-446655440000",
+              "6ba7b810-9dad-11d1-80b4-00c04fd430c8"
+            ],
+            "type": "array",
+            "items": {
+              "description": "List of alert version IDs to filter on. Cases containing indicators with any of these alert version IDs will be returned (OR logic).",
+              "type": "string"
+            }
+          }
+        }
+      },
       "AlertGroupingType": {
         "type": "string",
         "enum": [
@@ -801,7 +1469,7 @@
           "url": ""
         },
         "title": "Alert indicator",
-        "description": "Metadata describing a triggered alert instance and its lifecycle relative to a case.",
+        "description": "Data describing a triggered alert instance and its lifecycle relative to a case.",
         "type": "object",
         "properties": {
           "alertId": {
@@ -809,10 +1477,16 @@
             "description": "The unique alert ID (stable across versions).",
             "type": "string"
           },
-          "alertVersionId": {
-            "example": "1eae3615-79e7-4b54-88e0-6a77def653bf",
-            "description": "Specific version ID of the alert definition that triggered.",
-            "type": "string"
+          "alertVersions": {
+            "example": [
+              "1eae3615-79e7-4b54-88e0-6a77def653bf",
+              "2fbf4726-8af8-5c65-99f1-7b88ef764c0g"
+            ],
+            "type": "array",
+            "items": {
+              "description": "Array of all alert version IDs for this indicator in the case. Includes the latest_alert_version.",
+              "type": "string"
+            }
           },
           "groupingType": {
             "$ref": "#/components/schemas/AlertGroupingType"
@@ -823,20 +1497,25 @@
               "$ref": "#/components/schemas/v1.KeyValue"
             }
           },
+          "latestAlertVersion": {
+            "example": "1eae3615-79e7-4b54-88e0-6a77def653bf",
+            "description": "Last seen version ID of the triggered alert definition.",
+            "type": "string"
+          },
           "priority": {
-            "$ref": "#/components/schemas/AlertPriority"
+            "$ref": "#/components/schemas/IndicatorPriority"
           },
           "resolveTime": {
-            "example": "2025-09-22T11:05:00.000Z",
+            "example": "2025-09-22T11:05:00Z",
             "description": "When present, timestamp when the alert resolved.",
             "type": "string",
             "format": "date-time"
           },
           "state": {
-            "$ref": "#/components/schemas/AlertIndicatorState"
+            "$ref": "#/components/schemas/IndicatorState"
           },
           "triggerTime": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "Timestamp when the alert triggered.",
             "type": "string",
             "format": "date-time"
@@ -844,31 +1523,12 @@
         },
         "required": [
           "alertId",
-          "alertVersionId",
+          "latestAlertVersion",
           "priority",
           "groupingType",
           "groupings",
           "state",
           "triggerTime"
-        ]
-      },
-      "AlertIndicatorState": {
-        "type": "string",
-        "enum": [
-          "ALERT_INDICATOR_STATE_UNSPECIFIED",
-          "ALERT_INDICATOR_STATE_TRIGGERED",
-          "ALERT_INDICATOR_STATE_RESOLVED"
-        ]
-      },
-      "AlertPriority": {
-        "type": "string",
-        "enum": [
-          "ALERT_PRIORITY_UNSPECIFIED",
-          "ALERT_PRIORITY_P1",
-          "ALERT_PRIORITY_P2",
-          "ALERT_PRIORITY_P3",
-          "ALERT_PRIORITY_P4",
-          "ALERT_PRIORITY_P5"
         ]
       },
       "AssignCaseResponse": {
@@ -941,6 +1601,139 @@
         },
         "additionalProperties": false
       },
+      "BulkAcknowledgeResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Bulk acknowledge response",
+        "description": "Response containing the updated cases",
+        "type": "object",
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Case"
+            }
+          }
+        },
+        "required": [
+          "cases"
+        ]
+      },
+      "BulkAssignResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Bulk assign response",
+        "description": "Response containing the updated cases",
+        "type": "object",
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Case"
+            }
+          }
+        },
+        "required": [
+          "cases"
+        ]
+      },
+      "BulkClearPriorityOverrideResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Bulk clear priority override response",
+        "description": "Response containing the updated cases",
+        "type": "object",
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Case"
+            }
+          }
+        },
+        "required": [
+          "cases"
+        ]
+      },
+      "BulkCloseResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Bulk close response",
+        "description": "Response containing the updated cases",
+        "type": "object",
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Case"
+            }
+          }
+        },
+        "required": [
+          "cases"
+        ]
+      },
+      "BulkResolveResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Bulk resolve response",
+        "description": "Response containing the updated cases",
+        "type": "object",
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Case"
+            }
+          }
+        },
+        "required": [
+          "cases"
+        ]
+      },
+      "BulkSetPriorityOverrideResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Bulk override priority response",
+        "description": "Response containing the updated cases",
+        "type": "object",
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Case"
+            }
+          }
+        },
+        "required": [
+          "cases"
+        ]
+      },
+      "BulkUnassignResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Bulk unassign response",
+        "description": "Response containing the updated cases",
+        "type": "object",
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Case"
+            }
+          }
+        },
+        "required": [
+          "cases"
+        ]
+      },
       "Case": {
         "externalDocs": {
           "url": ""
@@ -967,7 +1760,7 @@
             "$ref": "#/components/schemas/CaseCategory"
           },
           "createTime": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "When the case was created",
             "type": "string",
             "format": "date-time"
@@ -976,6 +1769,11 @@
             "example": "Investigating DB connection errors in prod",
             "description": "Detailed description of the case",
             "type": "string"
+          },
+          "duration": {
+            "description": "Measures how long the Case is/was opened in milliseconds",
+            "type": "integer",
+            "format": "int64"
           },
           "groupings": {
             "type": "array",
@@ -1008,9 +1806,6 @@
           "resolutionDetails": {
             "$ref": "#/components/schemas/ResolutionDetails"
           },
-          "state": {
-            "$ref": "#/components/schemas/CaseState"
-          },
           "status": {
             "$ref": "#/components/schemas/CaseStatus"
           },
@@ -1028,7 +1823,6 @@
         "required": [
           "id",
           "title",
-          "state",
           "status",
           "priority",
           "category",
@@ -1043,19 +1837,48 @@
           "CASE_CATEGORY_AVAILABILITY"
         ]
       },
+      "CaseExternalReference": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Case external reference",
+        "description": "External reference linking a case to an external system",
+        "type": "object",
+        "properties": {
+          "id": {
+            "example": "INC0012345",
+            "description": "The unique identifier of the case in the external system",
+            "type": "string"
+          },
+          "url": {
+            "example": "https://instance.service-now.com/nav_to.do?uri=incident.do?sys_id=abc123",
+            "description": "The direct URL to view the case in the external system",
+            "type": "string"
+          },
+          "vendor": {
+            "$ref": "#/components/schemas/ExternalReferenceVendor"
+          }
+        }
+      },
       "CaseFilters": {
         "externalDocs": {
           "url": ""
         },
         "title": "Case filters",
-        "description": "Filters applied when querying cases, including states, priorities, categories, groupings, and labels.",
+        "description": "Filters applied when querying cases, including statuses, priorities, categories, groupings, and labels.",
         "type": "object",
         "properties": {
+          "alertFilters": {
+            "$ref": "#/components/schemas/AlertFilters"
+          },
           "assignees": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AssigneeOption"
             }
+          },
+          "caseLabelsFilter": {
+            "$ref": "#/components/schemas/CaseLabelsFilter"
           },
           "categories": {
             "example": [
@@ -1092,16 +1915,6 @@
               "$ref": "#/components/schemas/CasePriority"
             }
           },
-          "states": {
-            "example": [
-              "CASE_STATE_ACTIVE",
-              "CASE_STATE_RESOLVED"
-            ],
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CaseState"
-            }
-          },
           "statuses": {
             "example": [
               "ACKNOWLEDGED"
@@ -1115,6 +1928,22 @@
             "example": "Vulnerability",
             "description": "Test search query applied to case titles",
             "type": "string"
+          }
+        }
+      },
+      "CaseLabelsFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Case Labels Filter",
+        "description": "Filters applied against Case's labels when queries/filters counted",
+        "type": "object",
+        "properties": {
+          "flatLabels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/v1.KeyValue"
+            }
           }
         }
       },
@@ -1148,9 +1977,9 @@
           "CASE_ORDER_BY_FIELD_UNSPECIFIED",
           "CASE_ORDER_BY_FIELD_PRIORITY",
           "CASE_ORDER_BY_FIELD_STATUS",
-          "CASE_ORDER_BY_FIELD_STATE",
           "CASE_ORDER_BY_FIELD_UPDATED_AT",
-          "CASE_ORDER_BY_FIELD_CATEGORY"
+          "CASE_ORDER_BY_FIELD_CATEGORY",
+          "CASE_ORDER_BY_FIELD_DURATION"
         ]
       },
       "CasePriority": {
@@ -1165,28 +1994,68 @@
         ]
       },
       "CaseResolver": {
-        "type": "string",
-        "enum": [
-          "CASE_RESOLVER_UNSPECIFIED",
-          "CASE_RESOLVER_SYSTEM",
-          "CASE_RESOLVER_USER"
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/CaseResolverSystem"
+          },
+          {
+            "$ref": "#/components/schemas/CaseResolverCxUser"
+          },
+          {
+            "$ref": "#/components/schemas/CaseResolverServiceNow"
+          }
         ]
       },
-      "CaseState": {
-        "type": "string",
-        "enum": [
-          "CASE_STATE_UNSPECIFIED",
-          "CASE_STATE_CREATED",
-          "CASE_STATE_ACTIVE",
-          "CASE_STATE_RESOLVED"
-        ]
+      "CaseResolverCxUser": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Case resolver",
+        "description": "Entity responsible for resolving the case.",
+        "type": "object",
+        "properties": {
+          "cxUser": {
+            "$ref": "#/components/schemas/CoralogixUser"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CaseResolverServiceNow": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Case resolver",
+        "description": "Entity responsible for resolving the case.",
+        "type": "object",
+        "properties": {
+          "serviceNow": {
+            "$ref": "#/components/schemas/ServiceNow"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CaseResolverSystem": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Case resolver",
+        "description": "Entity responsible for resolving the case.",
+        "type": "object",
+        "properties": {
+          "system": {
+            "$ref": "#/components/schemas/System"
+          }
+        },
+        "additionalProperties": false
       },
       "CaseStatus": {
         "type": "string",
         "enum": [
           "CASE_STATUS_UNSPECIFIED",
-          "CASE_STATUS_OPEN",
+          "CASE_STATUS_PENDING_ACTIVATION",
+          "CASE_STATUS_ACTIVE",
           "CASE_STATUS_ACKNOWLEDGED",
+          "CASE_STATUS_RESOLVED",
           "CASE_STATUS_CLOSED"
         ]
       },
@@ -1207,6 +2076,21 @@
             "format": "int64"
           }
         }
+      },
+      "ClearPriorityOverrideResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Clear priority override response",
+        "type": "object",
+        "properties": {
+          "case": {
+            "$ref": "#/components/schemas/Case"
+          }
+        },
+        "required": [
+          "case"
+        ]
       },
       "CloseCaseResponse": {
         "externalDocs": {
@@ -1250,6 +2134,9 @@
         },
         "additionalProperties": false
       },
+      "CoralogixUser": {
+        "type": "object"
+      },
       "DateRangeFilter": {
         "externalDocs": {
           "url": ""
@@ -1259,13 +2146,13 @@
         "type": "object",
         "properties": {
           "from": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "Timestamp marking the start of the date range",
             "type": "string",
             "format": "date-time"
           },
           "to": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "Timestamp marking the end of the date range",
             "type": "string",
             "format": "date-time"
@@ -1276,6 +2163,13 @@
           "to"
         ]
       },
+      "ExternalReferenceVendor": {
+        "type": "string",
+        "enum": [
+          "EXTERNAL_REFERENCE_VENDOR_UNSPECIFIED",
+          "EXTERNAL_REFERENCE_VENDOR_SERVICE_NOW"
+        ]
+      },
       "FieldGroup": {
         "type": "object",
         "properties": {
@@ -1284,6 +2178,18 @@
           },
           "value": {
             "type": "string"
+          }
+        }
+      },
+      "FilterAggregation": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "filter": {
+            "$ref": "#/components/schemas/v1.KeyValue"
           }
         }
       },
@@ -1410,6 +2316,22 @@
           "pathAndValues"
         ]
       },
+      "GetCaseExternalReferencesResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Get case external references response",
+        "description": "Response containing the list of external references for a case",
+        "type": "object",
+        "properties": {
+          "externalReferences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CaseExternalReference"
+            }
+          }
+        }
+      },
       "GetCaseResponse": {
         "externalDocs": {
           "url": ""
@@ -1424,6 +2346,53 @@
         },
         "required": [
           "case"
+        ]
+      },
+      "GetGroupingKeysResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Get grouping keys response",
+        "description": "Response containing available grouping keys",
+        "type": "object",
+        "properties": {
+          "groupingKeys": {
+            "example": [
+              "service",
+              "team",
+              "environment",
+              "severity",
+              "source"
+            ],
+            "type": "array",
+            "items": {
+              "description": "List of available grouping keys for organizing and filtering cases",
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "groupingKeys"
+        ]
+      },
+      "IndicatorPriority": {
+        "type": "string",
+        "enum": [
+          "INDICATOR_PRIORITY_UNSPECIFIED",
+          "INDICATOR_PRIORITY_P1",
+          "INDICATOR_PRIORITY_P2",
+          "INDICATOR_PRIORITY_P3",
+          "INDICATOR_PRIORITY_P4",
+          "INDICATOR_PRIORITY_P5"
+        ]
+      },
+      "IndicatorState": {
+        "type": "string",
+        "enum": [
+          "INDICATOR_STATE_UNSPECIFIED",
+          "INDICATOR_STATE_TRIGGERED",
+          "INDICATOR_STATE_RESOLVED",
+          "INDICATOR_STATE_NO_DATA"
         ]
       },
       "ListCasesResponse": {
@@ -1448,6 +2417,34 @@
           "cases",
           "pagination"
         ]
+      },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",
@@ -1506,7 +2503,7 @@
         "type": "object",
         "properties": {
           "resolveTime": {
-            "example": "2025-09-22T11:15:00.000Z",
+            "example": "2025-09-22T11:15:00Z",
             "description": "Timestamp when the case was resolved",
             "type": "string",
             "format": "date-time"
@@ -1531,6 +2528,9 @@
           "case"
         ]
       },
+      "ServiceNow": {
+        "type": "object"
+      },
       "SetPriorityOverrideResponse": {
         "externalDocs": {
           "url": ""
@@ -1546,24 +2546,6 @@
           "case"
         ]
       },
-      "StateAggregation": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "State aggregation",
-        "type": "object",
-        "properties": {
-          "count": {
-            "example": 42,
-            "description": "Number of cases in this state",
-            "type": "integer",
-            "format": "int64"
-          },
-          "state": {
-            "$ref": "#/components/schemas/CaseState"
-          }
-        }
-      },
       "StatusAggregation": {
         "type": "object",
         "properties": {
@@ -1575,6 +2557,9 @@
             "$ref": "#/components/schemas/CaseStatus"
           }
         }
+      },
+      "System": {
+        "type": "object"
       },
       "UnassignCaseResponse": {
         "externalDocs": {
@@ -1593,21 +2578,6 @@
       },
       "Unassigned": {
         "type": "object"
-      },
-      "UnsetPriorityOverrideResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Unset priority override response",
-        "type": "object",
-        "properties": {
-          "case": {
-            "$ref": "#/components/schemas/Case"
-          }
-        },
-        "required": [
-          "case"
-        ]
       },
       "UpdateCaseResponse": {
         "externalDocs": {
@@ -1662,6 +2632,12 @@
               "$ref": "#/components/schemas/CategoryAggregation"
             }
           },
+          "flatLabelsAggregation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterAggregation"
+            }
+          },
           "groupingAggregations": {
             "type": "array",
             "items": {
@@ -1678,12 +2654,6 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PriorityAggregation"
-            }
-          },
-          "stateAggregations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StateAggregation"
             }
           },
           "statusAggregations": {
@@ -1815,14 +2785,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }
