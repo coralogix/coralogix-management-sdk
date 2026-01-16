@@ -65,7 +65,6 @@ jobs:
           LOGS_BUCKET: ${{ secrets.LOGS_BUCKET }}
           GOPRIVATE: ${{ secrets.GOPRIVATE }}
         run: |
-          git config --global url."git@github.com:".insteadOf "https://github.com/"
           go install google.golang.org/protobuf/cmd/protoc-gen-go
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
           make test
@@ -92,7 +91,6 @@ jobs:
           LOGS_BUCKET: ${{ secrets.LOGS_BUCKET }}
           GOPRIVATE: ${{ secrets.GOPRIVATE }}
         run: |
-          git config --global url."git@github.com:".insteadOf "https://github.com/"
           go install google.golang.org/protobuf/cmd/protoc-gen-go
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
           make test-openapi
