@@ -31,5 +31,5 @@ func TestViewsListRead(t *testing.T) {
 		ViewsServiceGetView(context.Background(), viewID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, viewID, getResp.GetView().GetId())
+	require.Equal(t, viewID, getResp.GetId())
 }

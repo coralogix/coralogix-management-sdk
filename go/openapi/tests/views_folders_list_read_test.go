@@ -31,5 +31,5 @@ func TestViewsFoldersListRead(t *testing.T) {
 		ViewsFoldersServiceGetViewFolder(context.Background(), folderID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, folderID, getResp.GetFolder().GetId())
+	require.Equal(t, folderID, getResp.GetId())
 }
