@@ -214,7 +214,7 @@ func TestWebhooks(t *testing.T) {
 				&webhooks.OutgoingWebhookInputDataOpsgenie{
 					Name:     webhooks.PtrString("opsgenie-webhook"),
 					Type:     webhooks.WEBHOOKTYPE_OPSGENIE.Ptr(),
-					Url:      webhooks.PtrString("https://example.opsgenie.com"),
+					Url:      webhooks.PtrString("https://api.opsgenie.com"),
 					Opsgenie: map[string]interface{}{},
 				},
 			),

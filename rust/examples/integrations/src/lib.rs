@@ -222,7 +222,7 @@ mod tests {
         crud(
             "opsgenie-webhook".into(),
             WebhookType::Opsgenie,
-            "https://example.opsgenie.com/".parse().unwrap(),
+            "https://api.opsgenie.com/".parse().unwrap(),
             Config::Opsgenie(OpsgenieConfig {}),
         )
         .await;

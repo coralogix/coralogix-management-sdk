@@ -236,7 +236,7 @@ func TestWebhooks(t *testing.T) {
 	crud(t, &cxsdk.CreateOutgoingWebhookRequest{
 		Data: &cxsdk.OutgoingWebhookInputData{
 			Name: wrapperspb.String("opsgenie-webhook"),
-			Url:  wrapperspb.String("https://example.opsgenie.com"),
+			Url:  wrapperspb.String("https://api.opsgenie.com"),
 			Type: cxsdk.WebhookTypeOpsgenie,
 			Config: &cxsdk.OpsgenieWebhookInputData{
 				Opsgenie: &cxsdk.OpsgenieConfig{},
