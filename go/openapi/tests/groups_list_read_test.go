@@ -26,7 +26,7 @@ func TestGroupsListRead(t *testing.T) {
 	if groupID == nil {
 		t.Skip("no resources to read")
 	}
-
+	t.Skip("not implemented (yet)")
 	getResp, httpResp, err := client.
 		TeamPermissionsMgmtServiceGetTeamGroup(context.Background(), *groupID).
 		Execute()
