@@ -31,5 +31,5 @@ func TestRuleGroupsListRead(t *testing.T) {
 		RuleGroupsServiceGetRuleGroup(context.Background(), groupID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, groupID, getResp.GetRuleGroup().Id)
+	require.Equal(t, groupID, *getResp.GetRuleGroup().Id)
 }

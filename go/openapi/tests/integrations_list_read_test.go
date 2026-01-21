@@ -44,5 +44,5 @@ func TestIntegrationsListRead(t *testing.T) {
 		IntegrationServiceGetIntegrationDetails(context.Background(), *integrationID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, integrationID, integrationDetailsID(getResp.GetIntegrationDetail()))
+	require.Equal(t, *integrationID, integrationDetailsID(getResp.GetIntegrationDetail()))
 }
