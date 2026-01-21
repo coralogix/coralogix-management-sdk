@@ -31,5 +31,5 @@ func TestAlertsListRead(t *testing.T) {
 		AlertDefsServiceGetAlertDef(context.Background(), alertID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, alertID, getResp.GetAlertDef().GetId())
+	require.Equal(t, alertID, getResp.GetAlertDef().Id)
 }

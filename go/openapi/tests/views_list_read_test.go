@@ -23,7 +23,7 @@ func TestViewsListRead(t *testing.T) {
 	}
 
 	viewID := listResp.Views[0].GetId()
-	if viewID == "" {
+	if viewID == 0 {
 		t.Skip("no resources to read")
 	}
 

@@ -31,5 +31,5 @@ func TestAPIKeysListRead(t *testing.T) {
 		ApiKeysServiceGetApiKey(context.Background(), keyID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, keyID, getResp.GetKeyInfo().GetId())
+	require.Equal(t, keyID, getResp.GetKeyInfo().Id)
 }

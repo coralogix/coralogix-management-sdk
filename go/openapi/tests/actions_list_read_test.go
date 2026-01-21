@@ -31,5 +31,5 @@ func TestActionsListRead(t *testing.T) {
 		ActionsServiceGetAction(context.Background(), actionID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, actionID, getResp.GetAction().GetId())
+	require.Equal(t, actionID, getResp.GetAction().Id)
 }

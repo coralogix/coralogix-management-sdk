@@ -22,14 +22,14 @@ func TestGroupsListRead(t *testing.T) {
 		t.Skip("no resources to read")
 	}
 
-	groupID := listResp.Groups[0].GetGroupId().GetId()
-	if groupID == 0 {
+	groupID := listResp.Groups[0].GetGroupId().Id
+	if groupID == nil {
 		t.Skip("no resources to read")
 	}
 
 	getResp, httpResp, err := client.
-		TeamPermissionsMgmtServiceGetTeamGroup(context.Background(), groupID).
+		TeamPermissionsMgmtServiceGetTeamGroup(context.Background(), *groupID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, groupID, getResp.GetGroup().GetGroupId().GetId())
+	require.Equal(t, groupID, getResp.GetGroup().GroupId.Id)
 }

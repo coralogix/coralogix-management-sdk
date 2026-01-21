@@ -14,9 +14,9 @@ func integrationDetailsID(details integrations.IntegrationDetails) string {
 	actual := details.GetActualInstance()
 	switch typed := actual.(type) {
 	case *integrations.IntegrationDetailsExternal:
-		return typed.GetIntegration().GetId()
+		return *typed.GetIntegration().Id
 	case *integrations.IntegrationDetailsLocal:
-		return typed.GetIntegration().GetId()
+		return *typed.GetIntegration().Id
 	default:
 		return ""
 	}
@@ -35,13 +35,13 @@ func TestIntegrationsListRead(t *testing.T) {
 		t.Skip("no resources to read")
 	}
 
-	integrationID := listResp.Integrations[0].GetIntegration().GetId()
-	if integrationID == "" {
+	integrationID := listResp.Integrations[0].GetIntegration().Id
+	if integrationID == nil {
 		t.Skip("no resources to read")
 	}
 
 	getResp, httpResp, err := client.
-		IntegrationServiceGetIntegrationDetails(context.Background(), integrationID).
+		IntegrationServiceGetIntegrationDetails(context.Background(), *integrationID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.Equal(t, integrationID, integrationDetailsID(getResp.GetIntegrationDetail()))

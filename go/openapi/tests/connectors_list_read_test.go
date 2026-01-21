@@ -31,5 +31,5 @@ func TestConnectorsListRead(t *testing.T) {
 		ConnectorsServiceGetConnector(context.Background(), connectorID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, connectorID, getResp.GetConnector().GetId())
+	require.Equal(t, connectorID, getResp.GetConnector().Id)
 }

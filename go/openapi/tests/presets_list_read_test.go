@@ -31,5 +31,5 @@ func TestPresetsListRead(t *testing.T) {
 		PresetsServiceGetPreset(context.Background(), presetID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, presetID, getResp.GetPreset().GetId())
+	require.Equal(t, presetID, getResp.GetPreset().Id)
 }

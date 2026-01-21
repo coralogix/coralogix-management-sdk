@@ -18,8 +18,8 @@ func TestIPAccessListRead(t *testing.T) {
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
-	settingsID := listResp.GetSettings().GetId()
-	if settingsID == "" {
+	settingsID := listResp.GetSettings().Id
+	if settingsID == nil {
 		t.Skip("no resources to read")
 	}
 
@@ -27,5 +27,5 @@ func TestIPAccessListRead(t *testing.T) {
 		IpAccessServiceGetCompanyIpAccessSettings(context.Background()).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, settingsID, getResp.GetSettings().GetId())
+	require.Equal(t, settingsID, getResp.GetSettings().Id)
 }

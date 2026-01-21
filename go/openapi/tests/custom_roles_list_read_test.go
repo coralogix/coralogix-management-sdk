@@ -31,5 +31,5 @@ func TestCustomRolesListRead(t *testing.T) {
 		RoleManagementServiceGetCustomRole(context.Background(), roleID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, roleID, getResp.GetRole().GetRoleId())
+	require.Equal(t, roleID, getResp.GetRole().RoleId)
 }

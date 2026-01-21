@@ -32,7 +32,7 @@ func TestDashboardsListRead(t *testing.T) {
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
-	actual := getResp.GetDashboard().GetActualInstance()
+	actual := getResp.GetDashboard().GetActualInstanceValue()
 	if actual == nil {
 		t.Skip("no resources to read")
 	}
