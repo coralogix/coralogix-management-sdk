@@ -173,7 +173,7 @@ func TestWebhooks(t *testing.T) {
 				&webhooks.OutgoingWebhookInputDataPagerDuty{
 					Name: webhooks.PtrString("pager-duty-webhook"),
 					Type: webhooks.WEBHOOKTYPE_PAGERDUTY.Ptr(),
-					Url:  webhooks.PtrString("https://example-url.com/"),
+					Url:  webhooks.PtrString("https://api.staging.coralogix.net/mgmt/testing/tools/httpbin/post/"),
 					PagerDuty: &webhooks.PagerDutyConfig{
 						ServiceKey: webhooks.PtrString("example-key"),
 					},
@@ -186,7 +186,7 @@ func TestWebhooks(t *testing.T) {
 				&webhooks.OutgoingWebhookInputDataEmailGroup{
 					Name: webhooks.PtrString("email-group-webhook"),
 					Type: webhooks.WEBHOOKTYPE_EMAIL_GROUP.Ptr(),
-					Url:  webhooks.PtrString("https://example-url.com/"),
+					Url:  webhooks.PtrString("https://api.staging.coralogix.net/mgmt/testing/tools/httpbin/post/"),
 					EmailGroup: &webhooks.EmailGroupConfig{
 						EmailAddresses: []string{"user@example.com"}},
 				},

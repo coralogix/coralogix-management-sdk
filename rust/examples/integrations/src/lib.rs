@@ -177,7 +177,7 @@ mod tests {
         crud(
             "custom-webhook".into(),
             WebhookType::Generic,
-            "https://example-url.com/".parse().unwrap(),
+            "https://api.staging.coralogix.net/mgmt/testing/tools/httpbin/post/".parse().unwrap(),
             Config::GenericWebhook(GenericWebhookConfig {
                 uuid: Some(Uuid::new_v4().to_string()),
                 method: generic_webhook_config::MethodType::Get.into(),
@@ -190,7 +190,7 @@ mod tests {
         crud(
             "pager-duty-webhook".into(),
             WebhookType::Pagerduty,
-            "https://example-url.com/".parse().unwrap(),
+            "https://api.staging.coralogix.net/mgmt/testing/tools/httpbin/post/".parse().unwrap(),
             Config::PagerDuty(PagerDutyConfig {
                 service_key: Some("service-key".into()),
             }),
@@ -200,7 +200,7 @@ mod tests {
         crud(
             "email-group-webhook".into(),
             WebhookType::EmailGroup,
-            "https://example-url.com/".parse().unwrap(),
+            "https://api.staging.coralogix.net/mgmt/testing/tools/httpbin/post/".parse().unwrap(),
             Config::EmailGroup(EmailGroupConfig {
                 email_addresses: vec!["user@example.com".into()],
             }),
