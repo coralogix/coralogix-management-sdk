@@ -10,7 +10,6 @@ import (
 )
 
 func TestSLOsListRead(t *testing.T) {
-	t.Skip("later")
 	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	client := cxsdk.NewSLOsClient(cfg)
 
@@ -23,7 +22,7 @@ func TestSLOsListRead(t *testing.T) {
 		t.Skip("no resources to read")
 	}
 
-	sloID := getIdFromSlo(listResp.Slos[0])
+	sloID := getIDFromSlo(listResp.Slos[0])
 
 	if sloID == "" {
 		t.Skip("no resources to read")
@@ -33,13 +32,13 @@ func TestSLOsListRead(t *testing.T) {
 		SlosServiceGetSlo(context.Background(), sloID).
 		Execute()
 
-	id := getIdFromSlo(getResp.Slo)
+	id := getIDFromSlo(getResp.Slo)
 
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.Equal(t, sloID, id)
 }
 
-func getIdFromSlo(slo slos_service.Slo) string {
+func getIDFromSlo(slo slos_service.Slo) string {
 	id := ""
 	if slo.SloRequestBasedMetricSli != nil {
 		id = *slo.SloRequestBasedMetricSli.Id

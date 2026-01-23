@@ -39,13 +39,13 @@ func TestPoliciesListRead(t *testing.T) {
 	getResp, httpResp, err := client.
 		PoliciesServiceGetPolicy(context.Background(), policyID).
 		Execute()
-	actualId := ""
+	actualID := ""
 	if span {
-		actualId = getResp.GetPolicy().PolicySpanRules.Id
+		actualID = getResp.GetPolicy().PolicySpanRules.Id
 	} else {
-		actualId = getResp.GetPolicy().PolicyLogRules.Id
+		actualID = getResp.GetPolicy().PolicyLogRules.Id
 	}
 
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, policyID, actualId)
+	require.Equal(t, policyID, actualID)
 }
