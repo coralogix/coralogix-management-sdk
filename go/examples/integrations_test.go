@@ -180,7 +180,7 @@ func TestWebhooks(t *testing.T) {
 	crud(t, &cxsdk.CreateOutgoingWebhookRequest{
 		Data: &cxsdk.OutgoingWebhookInputData{
 			Name: wrapperspb.String("custom-webhook"),
-			Url:  wrapperspb.String("https://example-url.com"),
+			Url:  wrapperspb.String("https://api.staging.coralogix.net/mgmt/testing/tools/httpbin/get/"),
 			Type: cxsdk.WebhookTypeGeneric,
 			Config: &cxsdk.GenericWebhookInputData{
 				GenericWebhook: &cxsdk.GenericWebhookConfig{
@@ -195,7 +195,7 @@ func TestWebhooks(t *testing.T) {
 	crud(t, &cxsdk.CreateOutgoingWebhookRequest{
 		Data: &cxsdk.OutgoingWebhookInputData{
 			Name: wrapperspb.String("pager-duty-webhook"),
-			Url:  wrapperspb.String("https://example-url.com/"),
+			Url:  wrapperspb.String("https://api.staging.coralogix.net/mgmt/testing/tools/httpbin/post/"),
 			Type: cxsdk.WebhookTypePagerduty,
 			Config: &cxsdk.PagerDutyWebhookInputData{
 				PagerDuty: &cxsdk.PagerDutyConfig{
@@ -208,7 +208,7 @@ func TestWebhooks(t *testing.T) {
 	crud(t, &cxsdk.CreateOutgoingWebhookRequest{
 		Data: &cxsdk.OutgoingWebhookInputData{
 			Name: wrapperspb.String("email-group-webhook"),
-			Url:  wrapperspb.String("https://example-url.com/"),
+			Url:  wrapperspb.String("https://api.staging.coralogix.net/mgmt/testing/tools/httpbin/post/"),
 			Type: cxsdk.WebhookTypeEmailGroup,
 			Config: &cxsdk.EmailGroupWebhookInputData{
 				EmailGroup: &cxsdk.EmailGroupConfig{
@@ -236,7 +236,7 @@ func TestWebhooks(t *testing.T) {
 	crud(t, &cxsdk.CreateOutgoingWebhookRequest{
 		Data: &cxsdk.OutgoingWebhookInputData{
 			Name: wrapperspb.String("opsgenie-webhook"),
-			Url:  wrapperspb.String("https://example.opsgenie.com"),
+			Url:  wrapperspb.String("https://api.opsgenie.com"),
 			Type: cxsdk.WebhookTypeOpsgenie,
 			Config: &cxsdk.OpsgenieWebhookInputData{
 				Opsgenie: &cxsdk.OpsgenieConfig{},
