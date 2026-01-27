@@ -31,5 +31,5 @@ func TestCustomEnrichmentsListRead(t *testing.T) {
 		CustomEnrichmentServiceGetCustomEnrichment(context.Background(), enrichmentID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, enrichmentID, getResp.GetCustomEnrichment().Id)
+	require.Equal(t, enrichmentID, *getResp.GetCustomEnrichment().Id)
 }
