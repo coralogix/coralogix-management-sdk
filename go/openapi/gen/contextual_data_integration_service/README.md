@@ -79,11 +79,11 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ContextualDataIntegrationServiceAPI* | [**ContextualDataIntegrationServiceDeleteContextualDataIntegration**](docs/ContextualDataIntegrationServiceAPI.md#contextualdataintegrationservicedeletecontextualdataintegration) | **Delete** /integrations/contextual-data/v1/{integration_id} | Delete contextual data integration
-*ContextualDataIntegrationServiceAPI* | [**ContextualDataIntegrationServiceGetContextualDataIntegrationDefinition**](docs/ContextualDataIntegrationServiceAPI.md#contextualdataintegrationservicegetcontextualdataintegrationdefinition) | **Get** /integrations/contextual-data/v1/definition/{id} | Get contextual data integration definition
+*ContextualDataIntegrationServiceAPI* | [**ContextualDataIntegrationServiceGetContextualDataIntegrationDefinition**](docs/ContextualDataIntegrationServiceAPI.md#contextualdataintegrationservicegetcontextualdataintegrationdefinition) | **Get** /integrations/contextual-data/v1/definitions/{id} | Get contextual data integration definition
 *ContextualDataIntegrationServiceAPI* | [**ContextualDataIntegrationServiceGetContextualDataIntegrationDetails**](docs/ContextualDataIntegrationServiceAPI.md#contextualdataintegrationservicegetcontextualdataintegrationdetails) | **Get** /integrations/contextual-data/v1/{id} | Get contextual data integration details
 *ContextualDataIntegrationServiceAPI* | [**ContextualDataIntegrationServiceGetContextualDataIntegrations**](docs/ContextualDataIntegrationServiceAPI.md#contextualdataintegrationservicegetcontextualdataintegrations) | **Get** /integrations/contextual-data/v1 | Get all contextual data integrations accessible
 *ContextualDataIntegrationServiceAPI* | [**ContextualDataIntegrationServiceSaveContextualDataIntegration**](docs/ContextualDataIntegrationServiceAPI.md#contextualdataintegrationservicesavecontextualdataintegration) | **Post** /integrations/contextual-data/v1 | Save contextual data integration
-*ContextualDataIntegrationServiceAPI* | [**ContextualDataIntegrationServiceTestContextualDataIntegration**](docs/ContextualDataIntegrationServiceAPI.md#contextualdataintegrationservicetestcontextualdataintegration) | **Post** /integrations/contextual-data/v1/test | Test contextual data integration
+*ContextualDataIntegrationServiceAPI* | [**ContextualDataIntegrationServiceTestContextualDataIntegration**](docs/ContextualDataIntegrationServiceAPI.md#contextualdataintegrationservicetestcontextualdataintegration) | **Post** /integrations/contextual-data/v1/{integration_id}/test | Test contextual data integration
 *ContextualDataIntegrationServiceAPI* | [**ContextualDataIntegrationServiceUpdateContextualDataIntegration**](docs/ContextualDataIntegrationServiceAPI.md#contextualdataintegrationserviceupdatecontextualdataintegration) | **Put** /integrations/contextual-data/v1 | Update contextual data integration
 
 
@@ -158,6 +158,8 @@ Class | Method | HTTP request | Description
  - [ListTextValue](docs/ListTextValue.md)
  - [LocalChangelog](docs/LocalChangelog.md)
  - [Managed](docs/Managed.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleSelectionValue](docs/MultipleSelectionValue.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [Parameter](docs/Parameter.md)
@@ -172,6 +174,7 @@ Class | Method | HTTP request | Description
  - [RegisteredInstanceArm](docs/RegisteredInstanceArm.md)
  - [RegisteredInstanceCloudformation](docs/RegisteredInstanceCloudformation.md)
  - [RegisteredInstanceEmpty](docs/RegisteredInstanceEmpty.md)
+ - [RevisionLifecycle](docs/RevisionLifecycle.md)
  - [RevisionRef](docs/RevisionRef.md)
  - [Rum](docs/Rum.md)
  - [SaveContextualDataIntegrationRequest](docs/SaveContextualDataIntegrationRequest.md)
@@ -189,6 +192,7 @@ Class | Method | HTTP request | Description
  - [TestIntegrationResultSuccess](docs/TestIntegrationResultSuccess.md)
  - [UpdateContextualDataIntegrationRequest](docs/UpdateContextualDataIntegrationRequest.md)
  - [V1Extension](docs/V1Extension.md)
+ - [V1Failure](docs/V1Failure.md)
  - [V1IntegrationType](docs/V1IntegrationType.md)
  - [V1IntegrationTypeArm](docs/V1IntegrationTypeArm.md)
  - [V1IntegrationTypeCloudformation](docs/V1IntegrationTypeCloudformation.md)
@@ -197,6 +201,7 @@ Class | Method | HTTP request | Description
  - [V1IntegrationTypeManaged](docs/V1IntegrationTypeManaged.md)
  - [V1IntegrationTypePushBasedContextualData](docs/V1IntegrationTypePushBasedContextualData.md)
  - [V1IntegrationTypeUntracked](docs/V1IntegrationTypeUntracked.md)
+ - [V1RevisionSummary](docs/V1RevisionSummary.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
  - [Variant](docs/Variant.md)
 

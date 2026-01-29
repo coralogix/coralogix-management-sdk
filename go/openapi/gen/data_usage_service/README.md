@@ -78,13 +78,13 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*DataUsageServiceAPI* | [**DataUsageServiceGetDailyUsageEvaluationTokens**](docs/DataUsageServiceAPI.md#datausageservicegetdailyusageevaluationtokens) | **Post** /dataplans/data-usage/v2/daily:evaluation-tokens | Get Daily Usage Evaluation Tokens
-*DataUsageServiceAPI* | [**DataUsageServiceGetDailyUsageProcessedGbs**](docs/DataUsageServiceAPI.md#datausageservicegetdailyusageprocessedgbs) | **Post** /dataplans/data-usage/v2/daily:processed-gbs | Get Daily Usage Processed GBs
-*DataUsageServiceAPI* | [**DataUsageServiceGetDailyUsageUnits**](docs/DataUsageServiceAPI.md#datausageservicegetdailyusageunits) | **Post** /dataplans/data-usage/v2/daily:units | Get Daily Usage Units
+*DataUsageServiceAPI* | [**DataUsageServiceGetDailyUsageEvaluationTokens**](docs/DataUsageServiceAPI.md#datausageservicegetdailyusageevaluationtokens) | **Post** /dataplans/data-usage/v2/daily/evaluation-tokens | Get Daily Usage Evaluation Tokens
+*DataUsageServiceAPI* | [**DataUsageServiceGetDailyUsageProcessedGbs**](docs/DataUsageServiceAPI.md#datausageservicegetdailyusageprocessedgbs) | **Post** /dataplans/data-usage/v2/daily/processed-gbs | Get Daily Usage Processed GBs
+*DataUsageServiceAPI* | [**DataUsageServiceGetDailyUsageUnits**](docs/DataUsageServiceAPI.md#datausageservicegetdailyusageunits) | **Post** /dataplans/data-usage/v2/daily/units | Get Daily Usage Units
 *DataUsageServiceAPI* | [**DataUsageServiceGetDataUsage**](docs/DataUsageServiceAPI.md#datausageservicegetdatausage) | **Get** /dataplans/data-usage/v2 | Get Data Usage
 *DataUsageServiceAPI* | [**DataUsageServiceGetDataUsageMetricsExportStatus**](docs/DataUsageServiceAPI.md#datausageservicegetdatausagemetricsexportstatus) | **Get** /dataplans/data-usage/v2/export-status | Get Data Usage Metrics Export Status
-*DataUsageServiceAPI* | [**DataUsageServiceGetLogsCount**](docs/DataUsageServiceAPI.md#datausageservicegetlogscount) | **Get** /dataplans/data-usage/v2/logs:count | Get Logs Count
-*DataUsageServiceAPI* | [**DataUsageServiceGetSpansCount**](docs/DataUsageServiceAPI.md#datausageservicegetspanscount) | **Get** /dataplans/data-usage/v2/spans:count | Get Spans Count
+*DataUsageServiceAPI* | [**DataUsageServiceGetLogsCount**](docs/DataUsageServiceAPI.md#datausageservicegetlogscount) | **Get** /dataplans/data-usage/v2/logs/count | Get Logs Count
+*DataUsageServiceAPI* | [**DataUsageServiceGetSpansCount**](docs/DataUsageServiceAPI.md#datausageservicegetspanscount) | **Get** /dataplans/data-usage/v2/spans/count | Get Spans Count
 *DataUsageServiceAPI* | [**DataUsageServiceUpdateDataUsageMetricsExportStatus**](docs/DataUsageServiceAPI.md#datausageserviceupdatedatausagemetricsexportstatus) | **Post** /dataplans/data-usage/v2/export-status | Update Data Usage Metrics Export Status
 
 
@@ -133,6 +133,8 @@ Class | Method | HTTP request | Description
  - [GetLogsCountResponse](docs/GetLogsCountResponse.md)
  - [GetSpansCountResponse](docs/GetSpansCountResponse.md)
  - [LogsCount](docs/LogsCount.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [ScopesFilter](docs/ScopesFilter.md)
  - [SpansCount](docs/SpansCount.md)

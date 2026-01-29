@@ -17,11 +17,11 @@ import (
 // checks if the LineChartResolution type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LineChartResolution{}
 
-// LineChartResolution struct for LineChartResolution
+// LineChartResolution Resolution settings for query values. (deprecated, use interval_resolution instead).
 type LineChartResolution struct {
-	// How many buckets to present in the selected timeframe
+	// How many buckets to present in the selected timeframe (deprecated)
 	BucketsPresented *int32 `json:"bucketsPresented,omitempty"`
-	// Interval of value sampling, i.e. every 5 minutes, every 1 second and so on
+	// Interval of value sampling, i.e. every 5 minutes, every 1 second and so on (deprecated)
 	Interval *string `json:"interval,omitempty"`
 }
 

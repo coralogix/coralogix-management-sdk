@@ -5,7 +5,7 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/integrations/extensions/v1/testing": {
+    "/integrations/testing/v1/extensions": {
       "post": {
         "tags": [
           "Extension testing service"
@@ -130,7 +130,7 @@
         ]
       }
     },
-    "/integrations/extensions/v1/testing/initialize": {
+    "/integrations/testing/v1/extensions/initialize": {
       "post": {
         "tags": [
           "Extension testing service"
@@ -548,6 +548,34 @@
             "type": "string"
           }
         }
+      },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",

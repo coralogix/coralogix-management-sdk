@@ -27,7 +27,7 @@ type RuleGroupsServiceCreateRuleGroupRequest struct {
 	Order *int64 `json:"order,omitempty"`
 	RuleMatchers []RuleMatcher `json:"ruleMatchers,omitempty"`
 	RuleSubgroups []CreateRuleGroupRequestCreateRuleSubgroup `json:"ruleSubgroups,omitempty"`
-	TeamId *RulesV1TeamId `json:"teamId,omitempty"`
+	TeamId *V1TeamId `json:"teamId,omitempty"`
 }
 
 // NewRuleGroupsServiceCreateRuleGroupRequest instantiates a new RuleGroupsServiceCreateRuleGroupRequest object
@@ -304,9 +304,9 @@ func (o *RuleGroupsServiceCreateRuleGroupRequest) SetRuleSubgroups(v []CreateRul
 }
 
 // GetTeamId returns the TeamId field value if set, zero value otherwise.
-func (o *RuleGroupsServiceCreateRuleGroupRequest) GetTeamId() RulesV1TeamId {
+func (o *RuleGroupsServiceCreateRuleGroupRequest) GetTeamId() V1TeamId {
 	if o == nil || IsNil(o.TeamId) {
-		var ret RulesV1TeamId
+		var ret V1TeamId
 		return ret
 	}
 	return *o.TeamId
@@ -314,7 +314,7 @@ func (o *RuleGroupsServiceCreateRuleGroupRequest) GetTeamId() RulesV1TeamId {
 
 // GetTeamIdOk returns a tuple with the TeamId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleGroupsServiceCreateRuleGroupRequest) GetTeamIdOk() (*RulesV1TeamId, bool) {
+func (o *RuleGroupsServiceCreateRuleGroupRequest) GetTeamIdOk() (*V1TeamId, bool) {
 	if o == nil || IsNil(o.TeamId) {
 		return nil, false
 	}
@@ -330,8 +330,8 @@ func (o *RuleGroupsServiceCreateRuleGroupRequest) HasTeamId() bool {
 	return false
 }
 
-// SetTeamId gets a reference to the given RulesV1TeamId and assigns it to the TeamId field.
-func (o *RuleGroupsServiceCreateRuleGroupRequest) SetTeamId(v RulesV1TeamId) {
+// SetTeamId gets a reference to the given V1TeamId and assigns it to the TeamId field.
+func (o *RuleGroupsServiceCreateRuleGroupRequest) SetTeamId(v V1TeamId) {
 	o.TeamId = &v
 }
 

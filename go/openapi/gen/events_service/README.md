@@ -78,12 +78,12 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*EventsServiceAPI* | [**EventsServiceBatchGetEvent**](docs/EventsServiceAPI.md#eventsservicebatchgetevent) | **Get** /alerts/events/v3/batch | Batch Get Event
+*EventsServiceAPI* | [**EventsServiceBatchGetEvent**](docs/EventsServiceAPI.md#eventsservicebatchgetevent) | **Get** /alerts/events/v3/all/list | Batch Get Event
 *EventsServiceAPI* | [**EventsServiceGetEvent**](docs/EventsServiceAPI.md#eventsservicegetevent) | **Get** /alerts/events/v3/{id} | Get Event
-*EventsServiceAPI* | [**EventsServiceGetEventsStatistics**](docs/EventsServiceAPI.md#eventsservicegeteventsstatistics) | **Get** /alerts/events/v3/statistics | Get Events Statistics
-*EventsServiceAPI* | [**EventsServiceListAlertEvents**](docs/EventsServiceAPI.md#eventsservicelistalertevents) | **Get** /alerts/events/v3/alert-events | List Alert Events
+*EventsServiceAPI* | [**EventsServiceGetEventsStatistics**](docs/EventsServiceAPI.md#eventsservicegeteventsstatistics) | **Get** /alerts/events/v3/all/statistics | Get Events Statistics
+*EventsServiceAPI* | [**EventsServiceListAlertEvents**](docs/EventsServiceAPI.md#eventsservicelistalertevents) | **Get** /alerts/alerts/v3/all/events | List Alert Events
 *EventsServiceAPI* | [**EventsServiceListEvents**](docs/EventsServiceAPI.md#eventsservicelistevents) | **Get** /alerts/events/v3 | List Events
-*EventsServiceAPI* | [**EventsServiceListEventsCount**](docs/EventsServiceAPI.md#eventsservicelisteventscount) | **Get** /alerts/events/v3/count | List Events Count
+*EventsServiceAPI* | [**EventsServiceListEventsCount**](docs/EventsServiceAPI.md#eventsservicelisteventscount) | **Get** /alerts/events/v3/all/count | List Events Count
 
 
 ## Documentation For Models
@@ -100,8 +100,8 @@ Class | Method | HTTP request | Description
  - [CxEventSingleOrMultipleSingleEvent](docs/CxEventSingleOrMultipleSingleEvent.md)
  - [EventsFilter](docs/EventsFilter.md)
  - [EventsServiceBatchGetEventFilterParameter](docs/EventsServiceBatchGetEventFilterParameter.md)
- - [EventsServiceListEventsOrderBysParameterInner](docs/EventsServiceListEventsOrderBysParameterInner.md)
- - [EventsServiceListEventsPaginationParameter](docs/EventsServiceListEventsPaginationParameter.md)
+ - [EventsServiceListAlertEventsOrderBysParameterInner](docs/EventsServiceListAlertEventsOrderBysParameterInner.md)
+ - [EventsServiceListAlertEventsPaginationParameter](docs/EventsServiceListAlertEventsPaginationParameter.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [EventsV3OrderByDirection](docs/EventsV3OrderByDirection.md)
  - [EventsV3OrderByFields](docs/EventsV3OrderByFields.md)
@@ -115,6 +115,8 @@ Class | Method | HTTP request | Description
  - [GetEventsStatisticsResponse](docs/GetEventsStatisticsResponse.md)
  - [ListAlertEventsResponse](docs/ListAlertEventsResponse.md)
  - [ListEventsCountResponse](docs/ListEventsCountResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [TimestampRange](docs/TimestampRange.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)

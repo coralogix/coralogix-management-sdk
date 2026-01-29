@@ -19,8 +19,10 @@ var _ MappedNullable = &ArchiveSpec{}
 
 // ArchiveSpec This data structure contains metadata about the archive.
 type ArchiveSpec struct {
+	// Deprecated
 	ArchivingFormatId *string `json:"archivingFormatId,omitempty"`
 	EnableTags *bool `json:"enableTags,omitempty"`
+	Format *TargetFormat `json:"format,omitempty"`
 	IsActive *bool `json:"isActive,omitempty"`
 }
 
@@ -42,6 +44,7 @@ func NewArchiveSpecWithDefaults() *ArchiveSpec {
 }
 
 // GetArchivingFormatId returns the ArchivingFormatId field value if set, zero value otherwise.
+// Deprecated
 func (o *ArchiveSpec) GetArchivingFormatId() string {
 	if o == nil || IsNil(o.ArchivingFormatId) {
 		var ret string
@@ -52,6 +55,7 @@ func (o *ArchiveSpec) GetArchivingFormatId() string {
 
 // GetArchivingFormatIdOk returns a tuple with the ArchivingFormatId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *ArchiveSpec) GetArchivingFormatIdOk() (*string, bool) {
 	if o == nil || IsNil(o.ArchivingFormatId) {
 		return nil, false
@@ -69,6 +73,7 @@ func (o *ArchiveSpec) HasArchivingFormatId() bool {
 }
 
 // SetArchivingFormatId gets a reference to the given string and assigns it to the ArchivingFormatId field.
+// Deprecated
 func (o *ArchiveSpec) SetArchivingFormatId(v string) {
 	o.ArchivingFormatId = &v
 }
@@ -103,6 +108,38 @@ func (o *ArchiveSpec) HasEnableTags() bool {
 // SetEnableTags gets a reference to the given bool and assigns it to the EnableTags field.
 func (o *ArchiveSpec) SetEnableTags(v bool) {
 	o.EnableTags = &v
+}
+
+// GetFormat returns the Format field value if set, zero value otherwise.
+func (o *ArchiveSpec) GetFormat() TargetFormat {
+	if o == nil || IsNil(o.Format) {
+		var ret TargetFormat
+		return ret
+	}
+	return *o.Format
+}
+
+// GetFormatOk returns a tuple with the Format field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ArchiveSpec) GetFormatOk() (*TargetFormat, bool) {
+	if o == nil || IsNil(o.Format) {
+		return nil, false
+	}
+	return o.Format, true
+}
+
+// HasFormat returns a boolean if a field has been set.
+func (o *ArchiveSpec) HasFormat() bool {
+	if o != nil && !IsNil(o.Format) {
+		return true
+	}
+
+	return false
+}
+
+// SetFormat gets a reference to the given TargetFormat and assigns it to the Format field.
+func (o *ArchiveSpec) SetFormat(v TargetFormat) {
+	o.Format = &v
 }
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
@@ -152,6 +189,9 @@ func (o ArchiveSpec) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.EnableTags) {
 		toSerialize["enableTags"] = o.EnableTags
+	}
+	if !IsNil(o.Format) {
+		toSerialize["format"] = o.Format
 	}
 	if !IsNil(o.IsActive) {
 		toSerialize["isActive"] = o.IsActive

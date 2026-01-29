@@ -5,7 +5,104 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/v1/alert-scheduler-rules": {
+    "/alerts/suppression-rules/v1": {
+      "get": {
+        "tags": [
+          "Alert Scheduler Rule service"
+        ],
+        "summary": "Get multiple alert scheduler rules",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertSchedulerRuleService_GetBulkAlertSchedulerRule",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "active_timeframe",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "endTime": {
+                  "example": "",
+                  "type": "string"
+                },
+                "startTime": {
+                  "example": "",
+                  "type": "string"
+                },
+                "timezone": {
+                  "example": "",
+                  "type": "string"
+                }
+              }
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "enabled",
+            "schema": {
+              "type": "boolean"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "alert_scheduler_rules_ids",
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds"
+                },
+                {
+                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds"
+                }
+              ]
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "next_page_token",
+            "schema": {
+              "example": "",
+              "type": "string"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBulkAlertSchedulerRuleResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "Alert Scheduler Rule service"
@@ -129,104 +226,7 @@
         }
       }
     },
-    "/v1/alert-scheduler-rules/bulk": {
-      "get": {
-        "tags": [
-          "Alert Scheduler Rule service"
-        ],
-        "summary": "Get multiple alert scheduler rules",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "AlertSchedulerRuleService_GetBulkAlertSchedulerRule",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "active_timeframe",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "endTime": {
-                  "example": "",
-                  "type": "string"
-                },
-                "startTime": {
-                  "example": "",
-                  "type": "string"
-                },
-                "timezone": {
-                  "example": "",
-                  "type": "string"
-                }
-              }
-            },
-            "style": "form"
-          },
-          {
-            "in": "query",
-            "name": "enabled",
-            "schema": {
-              "type": "boolean"
-            },
-            "style": "form"
-          },
-          {
-            "in": "query",
-            "name": "alert_scheduler_rules_ids",
-            "schema": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds"
-                },
-                {
-                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds"
-                }
-              ]
-            },
-            "style": "form"
-          },
-          {
-            "in": "query",
-            "name": "next_page_token",
-            "schema": {
-              "example": "",
-              "type": "string"
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetBulkAlertSchedulerRuleResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      },
+    "/alerts/suppression-rules/v1/all/rules": {
       "put": {
         "tags": [
           "Alert Scheduler Rule service"
@@ -356,7 +356,7 @@
         }
       }
     },
-    "/v1/alert-scheduler-rules/{alert_scheduler_rule_id}": {
+    "/alerts/suppression-rules/v1/{alert_scheduler_rule_id}": {
       "get": {
         "tags": [
           "Alert Scheduler Rule service"
@@ -843,6 +843,34 @@
           }
         }
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "Monthly": {
         "type": "object",
         "properties": {
@@ -880,10 +908,10 @@
       "Recurring": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/RecurringAlways"
+            "$ref": "#/components/schemas/RecurringAlwaysActive"
           },
           {
-            "$ref": "#/components/schemas/RecurringDynamic"
+            "$ref": "#/components/schemas/RecurringSchedule"
           }
         ]
       },
@@ -900,20 +928,11 @@
           }
         ]
       },
-      "RecurringAlways": {
+      "RecurringAlwaysActive": {
         "type": "object",
         "properties": {
-          "always": {
+          "alwaysActive": {
             "$ref": "#/components/schemas/Always"
-          }
-        },
-        "additionalProperties": false
-      },
-      "RecurringDynamic": {
-        "type": "object",
-        "properties": {
-          "dynamic": {
-            "$ref": "#/components/schemas/Recurring.Dynamic"
           }
         },
         "additionalProperties": false
@@ -975,6 +994,15 @@
         },
         "additionalProperties": false
       },
+      "RecurringSchedule": {
+        "type": "object",
+        "properties": {
+          "schedule": {
+            "$ref": "#/components/schemas/Recurring.Dynamic"
+          }
+        },
+        "additionalProperties": false
+      },
       "Schedule": {
         "oneOf": [
           {
@@ -1020,10 +1048,10 @@
       "Timeframe": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TimeframeEndTime"
+            "$ref": "#/components/schemas/TimeframeDuration"
           },
           {
-            "$ref": "#/components/schemas/TimeframeDuration"
+            "$ref": "#/components/schemas/TimeframeEndTime"
           }
         ]
       },

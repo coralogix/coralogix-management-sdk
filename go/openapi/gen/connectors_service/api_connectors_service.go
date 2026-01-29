@@ -69,7 +69,7 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceBatchGetConnectorSummarie
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/connectors:batchGetSummaries"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/connectors/all/summaries"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -185,7 +185,7 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceBatchGetConnectorsExecute
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/connectors:batchGet"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/connectors/all/list"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -614,7 +614,7 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceGetConnectorTypeSummaries
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/connectors:getTypeSummaries"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/connectors/types/summaries"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -728,7 +728,7 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceListConnectorSummariesExe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/connectors:listSummaries"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/connectors/list/summaries"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -956,7 +956,7 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceReplaceConnectorExecute(r
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/connector"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/connectors"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

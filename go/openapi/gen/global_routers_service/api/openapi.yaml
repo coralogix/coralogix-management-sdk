@@ -78,6 +78,33 @@ paths:
       summary: Replace Global Router
       tags:
       - Global routers service
+  /notifications/notification-center/v1/routers/all/summaries:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: GlobalRoutersService_BatchGetGlobalRouters
+      parameters:
+      - explode: true
+        in: query
+        name: global_router_ids
+        required: false
+        schema:
+          items:
+            example: ""
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchGetGlobalRoutersResponse"
+          description: ""
+      summary: Batch Get Global Routers
+      tags:
+      - Global routers service
   /notifications/notification-center/v1/routers/{id}:
     delete:
       description: No description available
@@ -125,33 +152,6 @@ paths:
       summary: Get Global Router
       tags:
       - Global routers service
-  /notifications/notification-center/v1/routers:batchGetSummaries:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: GlobalRoutersService_BatchGetGlobalRouters
-      parameters:
-      - explode: true
-        in: query
-        name: global_router_ids
-        required: false
-        schema:
-          items:
-            example: ""
-            type: string
-          type: array
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BatchGetGlobalRoutersResponse"
-          description: ""
-      summary: Batch Get Global Routers
-      tags:
-      - Global routers service
 components:
   schemas:
     BatchGetGlobalRoutersResponse:
@@ -180,10 +180,12 @@ components:
                 key: customDetails
               targets:
               - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
                 customDetails:
                   key: customDetails
                 presetId: presetId
               - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
                 customDetails:
                   key: customDetails
                 presetId: presetId
@@ -194,21 +196,40 @@ components:
                 key: customDetails
               targets:
               - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
                 customDetails:
                   key: customDetails
                 presetId: presetId
               - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
                 customDetails:
                   key: customDetails
                 presetId: presetId
             updateTime: 2000-01-23T04:56:07.000+00:00
+            fallbackTargets:
+            - entityType: null
+              target:
+                connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+            - entityType: null
+              target:
+                connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
             id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
             fallback:
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
@@ -268,10 +289,12 @@ components:
               key: customDetails
             targets:
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
@@ -282,21 +305,40 @@ components:
               key: customDetails
             targets:
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
           updateTime: 2000-01-23T04:56:07.000+00:00
+          fallbackTargets:
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           fallback:
           - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
             customDetails:
               key: customDetails
             presetId: presetId
           - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
             customDetails:
               key: customDetails
             presetId: presetId
@@ -309,6 +351,27 @@ components:
       title: Create Global Router Response
       type: object
     DeleteGlobalRouterResponse:
+      type: object
+    FallbackTarget:
+      description: Defines fallback target for notifications not matching any routing
+        rule
+      example:
+        entityType: null
+        target:
+          connectorId: connectorId
+          id: d4b56246-64bb-4714-a8bd-97c999f1d801
+          customDetails:
+            key: customDetails
+          presetId: presetId
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        entityType:
+          $ref: "#/components/schemas/notification_center.EntityType"
+        target:
+          $ref: "#/components/schemas/RoutingTarget"
+      title: FallbackTarget
       type: object
     FieldGroup:
       properties:
@@ -390,10 +453,12 @@ components:
               key: customDetails
             targets:
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
@@ -404,21 +469,40 @@ components:
               key: customDetails
             targets:
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
           updateTime: 2000-01-23T04:56:07.000+00:00
+          fallbackTargets:
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           fallback:
           - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
             customDetails:
               key: customDetails
             presetId: presetId
           - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
             customDetails:
               key: customDetails
             presetId: presetId
@@ -451,10 +535,12 @@ components:
             key: customDetails
           targets:
           - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
             customDetails:
               key: customDetails
             presetId: presetId
           - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
             customDetails:
               key: customDetails
             presetId: presetId
@@ -465,21 +551,40 @@ components:
             key: customDetails
           targets:
           - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
             customDetails:
               key: customDetails
             presetId: presetId
           - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
             customDetails:
               key: customDetails
             presetId: presetId
         updateTime: 2000-01-23T04:56:07.000+00:00
+        fallbackTargets:
+        - entityType: null
+          target:
+            connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+        - entityType: null
+          target:
+            connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
         id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
         fallback:
         - connectorId: connectorId
+          id: d4b56246-64bb-4714-a8bd-97c999f1d801
           customDetails:
             key: customDetails
           presetId: presetId
         - connectorId: connectorId
+          id: d4b56246-64bb-4714-a8bd-97c999f1d801
           customDetails:
             key: customDetails
           presetId: presetId
@@ -501,6 +606,10 @@ components:
         fallback:
           items:
             $ref: "#/components/schemas/RoutingTarget"
+          type: array
+        fallbackTargets:
+          items:
+            $ref: "#/components/schemas/FallbackTarget"
           type: array
         id:
           example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
@@ -541,10 +650,12 @@ components:
               key: customDetails
             targets:
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
@@ -555,21 +666,40 @@ components:
               key: customDetails
             targets:
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
           updateTime: 2000-01-23T04:56:07.000+00:00
+          fallbackTargets:
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           fallback:
           - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
             customDetails:
               key: customDetails
             presetId: presetId
           - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
             customDetails:
               key: customDetails
             presetId: presetId
@@ -591,10 +721,12 @@ components:
               key: customDetails
             targets:
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
@@ -605,21 +737,40 @@ components:
               key: customDetails
             targets:
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
           updateTime: 2000-01-23T04:56:07.000+00:00
+          fallbackTargets:
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           fallback:
           - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
             customDetails:
               key: customDetails
             presetId: presetId
           - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
             customDetails:
               key: customDetails
             presetId: presetId
@@ -632,6 +783,28 @@ components:
             $ref: "#/components/schemas/GlobalRouter"
           type: array
       title: List Global Routers Response
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:
@@ -664,10 +837,12 @@ components:
               key: customDetails
             targets:
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
@@ -678,21 +853,40 @@ components:
               key: customDetails
             targets:
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
             - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
                 key: customDetails
               presetId: presetId
           updateTime: 2000-01-23T04:56:07.000+00:00
+          fallbackTargets:
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           fallback:
           - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
             customDetails:
               key: customDetails
             presetId: presetId
           - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
             customDetails:
               key: customDetails
             presetId: presetId
@@ -732,10 +926,12 @@ components:
           key: customDetails
         targets:
         - connectorId: connectorId
+          id: d4b56246-64bb-4714-a8bd-97c999f1d801
           customDetails:
             key: customDetails
           presetId: presetId
         - connectorId: connectorId
+          id: d4b56246-64bb-4714-a8bd-97c999f1d801
           customDetails:
             key: customDetails
           presetId: presetId
@@ -764,6 +960,7 @@ components:
       description: Defines routing target for notifications
       example:
         connectorId: connectorId
+        id: d4b56246-64bb-4714-a8bd-97c999f1d801
         customDetails:
           key: customDetails
         presetId: presetId
@@ -777,6 +974,9 @@ components:
           additionalProperties:
             type: string
           type: object
+        id:
+          example: d4b56246-64bb-4714-a8bd-97c999f1d801
+          type: string
         presetId:
           type: string
       title: Routing Target

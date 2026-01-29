@@ -5,7 +5,7 @@ info:
 servers:
 - url: /
 paths:
-  /dashboards/dashboards/v1/folders:
+  /dashboards/folders/v1:
     get:
       description: |-
         List all dashboard folders accessible.
@@ -107,7 +107,7 @@ paths:
       - Dashboard folders service
       x-coralogixPermissions:
       - team-dashboards:Update
-  /dashboards/dashboards/v1/folders/{folder_id}:
+  /dashboards/folders/v1/{folder_id}:
     delete:
       description: No description available
       externalDocs:
@@ -340,6 +340,28 @@ components:
             $ref: "#/components/schemas/DashboardFolder"
           type: array
       title: List dashboard folders response data structure
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:

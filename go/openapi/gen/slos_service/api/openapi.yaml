@@ -5,7 +5,7 @@ info:
 servers:
 - url: /
 paths:
-  /v1/slo/slos:
+  /slo/slos/v1:
     get:
       description: No description available
       externalDocs:
@@ -17,7 +17,9 @@ paths:
         name: filters
         required: false
         schema:
-          $ref: "#/components/schemas/SloFilters"
+          items:
+            $ref: "#/components/schemas/SloFilter"
+          type: array
         style: form
       responses:
         "200":
@@ -123,23 +125,23 @@ paths:
       summary: Replace Slo
       tags:
       - Slos Service
-  /v1/slo/slos/validate:
+  /slo/slos/v1/all/execute:
     post:
       description: No description available
       externalDocs:
         url: ""
-      operationId: SlosService_ValidateReplaceSloAlerts
+      operationId: SlosService_BatchExecuteSlo
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SlosService_ValidateReplaceSloAlerts_request"
+              $ref: "#/components/schemas/BatchExecuteSloRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ReplaceSloAlertsValidationsResponse"
+                $ref: "#/components/schemas/BatchExecuteSloResponse"
           description: ""
         "400":
           content:
@@ -153,21 +155,32 @@ paths:
           content:
             application/json: {}
           description: Internal server error
-      summary: Replace Slo Pre-Validate Alerts
+      summary: Batch Execute Slo
       tags:
       - Slos Service
-  /v1/slo/slos/zeroState:
+  /slo/slos/v1/all/list:
     get:
       description: No description available
       externalDocs:
         url: ""
-      operationId: SlosService_GetZeroState
+      operationId: SlosService_BatchGetSlos
+      parameters:
+      - explode: true
+        in: query
+        name: ids
+        required: false
+        schema:
+          items:
+            example: ""
+            type: string
+          type: array
+        style: form
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GetZeroStateResponse"
+                $ref: "#/components/schemas/BatchGetSlosResponse"
           description: ""
         "400":
           content:
@@ -181,10 +194,10 @@ paths:
           content:
             application/json: {}
           description: Internal server error
-      summary: Get Slo Zero State
+      summary: Batch Get Slo
       tags:
       - Slos Service
-  /v1/slo/slos/{id}:
+  /slo/slos/v1/{id}:
     delete:
       description: No description available
       externalDocs:
@@ -255,28 +268,23 @@ paths:
       summary: Get Slo
       tags:
       - Slos Service
-  /v1/slo/slos:batchExecute:
-    post:
+  /slo/validated/v1:
+    put:
       description: No description available
       externalDocs:
         url: ""
-      operationId: SlosService_BatchExecuteSlo
-      parameters:
-      - explode: true
-        in: query
-        name: requests
-        required: false
-        schema:
-          items:
-            $ref: "#/components/schemas/SlosService_BatchExecuteSlo_requests_parameter_inner"
-          type: array
-        style: form
+      operationId: SlosService_ValidateReplaceSloAlerts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SlosService_ValidateReplaceSloAlerts_request"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BatchExecuteSloResponse"
+                $ref: "#/components/schemas/ReplaceSloAlertsValidationsResponse"
           description: ""
         "400":
           content:
@@ -290,32 +298,21 @@ paths:
           content:
             application/json: {}
           description: Internal server error
-      summary: Batch Execute Slo
+      summary: Replace Slo Pre-Validate Alerts
       tags:
       - Slos Service
-  /v1/slo/slos:batchGet:
+  /slo/zero-state/v1:
     get:
       description: No description available
       externalDocs:
         url: ""
-      operationId: SlosService_BatchGetSlos
-      parameters:
-      - explode: true
-        in: query
-        name: ids
-        required: false
-        schema:
-          items:
-            example: ""
-            type: string
-          type: array
-        style: form
+      operationId: SlosService_GetZeroState
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BatchGetSlosResponse"
+                $ref: "#/components/schemas/GetZeroStateResponse"
           description: ""
         "400":
           content:
@@ -329,11 +326,163 @@ paths:
           content:
             application/json: {}
           description: Internal server error
-      summary: Batch Get Slo
+      summary: Get Slo Zero State
       tags:
       - Slos Service
 components:
   schemas:
+    ApmErrorSli:
+      description: Configuration for error-based APM SLI
+      externalDocs:
+        url: ""
+      title: ApmErrorSli
+      type: object
+    ApmFilter:
+      description: "Key-value filter for APM metrics (exact match: label=\"value\"\
+        )"
+      externalDocs:
+        url: ""
+      properties:
+        key:
+          description: Label/tag name to filter on
+          example: environment
+          type: string
+        value:
+          description: Exact value to match
+          example: production
+          type: string
+      title: ApmFilter
+      type: object
+    ApmLatencyAverage:
+      description: Average/mean-based latency measurement
+      externalDocs:
+        url: ""
+      title: ApmLatencyAverage
+      type: object
+    ApmLatencyQuantile:
+      description: Quantile/percentile-based latency measurement
+      externalDocs:
+        url: ""
+      properties:
+        percentile:
+          description: "Percentile for latency SLOs (0.95 = P95, 0.99 = P99)"
+          example: 0.95
+          format: float
+          type: number
+      title: ApmLatencyQuantile
+      type: object
+    ApmLatencySli:
+      oneOf:
+      - $ref: "#/components/schemas/ApmLatencySliQuantile"
+      - $ref: "#/components/schemas/ApmLatencySliAverage"
+    ApmLatencySliAverage:
+      additionalProperties: false
+      description: Configuration for latency-based APM SLI
+      externalDocs:
+        url: ""
+      properties:
+        average:
+          description: Average/mean-based latency measurement
+          externalDocs:
+            url: ""
+          title: ApmLatencyAverage
+          type: object
+        threshold:
+          description: "Threshold in milliseconds. Good when latency <= threshold,\
+            \ bad when latency > threshold."
+          example: 500
+          format: float
+          type: number
+        timeWindow:
+          $ref: "#/components/schemas/WindowSloWindow"
+      title: ApmLatencySli
+      type: object
+    ApmLatencySliQuantile:
+      additionalProperties: false
+      description: Configuration for latency-based APM SLI
+      externalDocs:
+        url: ""
+      properties:
+        quantile:
+          $ref: "#/components/schemas/ApmLatencyQuantile"
+        threshold:
+          description: "Threshold in milliseconds. Good when latency <= threshold,\
+            \ bad when latency > threshold."
+          example: 500
+          format: float
+          type: number
+        timeWindow:
+          $ref: "#/components/schemas/WindowSloWindow"
+      title: ApmLatencySli
+      type: object
+    ApmSli:
+      oneOf:
+      - $ref: "#/components/schemas/ApmSliErrorConfig"
+      - $ref: "#/components/schemas/ApmSliLatencyConfig"
+    ApmSliErrorConfig:
+      additionalProperties: false
+      description: Definition of an APM-based SLI with automatic query generation
+      externalDocs:
+        url: ""
+      properties:
+        errorConfig:
+          description: Configuration for error-based APM SLI
+          externalDocs:
+            url: ""
+          title: ApmErrorSli
+          type: object
+        filters:
+          items:
+            $ref: "#/components/schemas/ApmFilter"
+          type: array
+        groupingKeys:
+          example:
+          - environment
+          - region
+          items:
+            description: Labels to group SLO results by
+            type: string
+          type: array
+        services:
+          example:
+          - my-service
+          - payment-service
+          items:
+            description: List of service names to monitor
+            type: string
+          type: array
+      title: ApmSli
+      type: object
+    ApmSliLatencyConfig:
+      additionalProperties: false
+      description: Definition of an APM-based SLI with automatic query generation
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          items:
+            $ref: "#/components/schemas/ApmFilter"
+          type: array
+        groupingKeys:
+          example:
+          - environment
+          - region
+          items:
+            description: Labels to group SLO results by
+            type: string
+          type: array
+        latencyConfig:
+          $ref: "#/components/schemas/ApmLatencySli"
+        services:
+          example:
+          - my-service
+          - payment-service
+          items:
+            description: List of service names to monitor
+            type: string
+          type: array
+      title: ApmSli
+      type: object
     BatchExecuteSloResponse:
       description: Response containing the results of batch executed SLO operations.
       example:
@@ -349,6 +498,7 @@ components:
               description: A brief description of my SLO
               sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
               updateTime: 2000-01-23T04:56:07.000+00:00
+              sloType: SLO_TYPE_REQUEST
               type: request
               grouping:
                 labels:
@@ -362,6 +512,7 @@ components:
               createTime: 2000-01-23T04:56:07.000+00:00
               name: Example Slo Name
               id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+              productType: SLO_PRODUCT_TYPE_UNSPECIFIED
               targetThresholdPercentage: 99.999
         - createSloResponse:
             slo:
@@ -374,6 +525,7 @@ components:
               description: A brief description of my SLO
               sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
               updateTime: 2000-01-23T04:56:07.000+00:00
+              sloType: SLO_TYPE_REQUEST
               type: request
               grouping:
                 labels:
@@ -387,6 +539,7 @@ components:
               createTime: 2000-01-23T04:56:07.000+00:00
               name: Example Slo Name
               id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+              productType: SLO_PRODUCT_TYPE_UNSPECIFIED
               targetThresholdPercentage: 99.999
         status:
           details:
@@ -422,6 +575,7 @@ components:
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
+          sloType: SLO_TYPE_REQUEST
           type: request
           grouping:
             labels:
@@ -435,6 +589,7 @@ components:
           createTime: 2000-01-23T04:56:07.000+00:00
           name: Example Slo Name
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+          productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
         - creator: test@domain.com
           requestBasedMetricSli:
@@ -445,6 +600,7 @@ components:
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
+          sloType: SLO_TYPE_REQUEST
           type: request
           grouping:
             labels:
@@ -458,6 +614,7 @@ components:
           createTime: 2000-01-23T04:56:07.000+00:00
           name: Example Slo Name
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+          productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
       externalDocs:
         url: ""
@@ -547,6 +704,7 @@ components:
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
+          sloType: SLO_TYPE_REQUEST
           type: request
           grouping:
             labels:
@@ -560,6 +718,7 @@ components:
           createTime: 2000-01-23T04:56:07.000+00:00
           name: Example Slo Name
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+          productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
       externalDocs:
         url: ""
@@ -667,6 +826,7 @@ components:
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
+          sloType: SLO_TYPE_REQUEST
           type: request
           grouping:
             labels:
@@ -680,6 +840,7 @@ components:
           createTime: 2000-01-23T04:56:07.000+00:00
           name: Example Slo Name
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+          productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
       externalDocs:
         url: ""
@@ -703,6 +864,39 @@ components:
       - zeroState
       title: GetZeroStateResponse
       type: object
+    IsFilterPredicateProductTypeValues:
+      additionalProperties: false
+      description: Predicate for SLO filters that checks if a field is equal to one
+        of multiple values
+      externalDocs:
+        url: ""
+      properties:
+        productTypeValues:
+          $ref: "#/components/schemas/ProductTypeValues"
+      title: IsFilterPredicate
+      type: object
+    IsFilterPredicateStringValues:
+      additionalProperties: false
+      description: Predicate for SLO filters that checks if a field is equal to one
+        of multiple values
+      externalDocs:
+        url: ""
+      properties:
+        stringValues:
+          $ref: "#/components/schemas/StringValues"
+      title: IsFilterPredicate
+      type: object
+    IsFilterPredicateTypeValues:
+      additionalProperties: false
+      description: Predicate for SLO filters that checks if a field is equal to one
+        of multiple values
+      externalDocs:
+        url: ""
+      properties:
+        typeValues:
+          $ref: "#/components/schemas/TypeValues"
+      title: IsFilterPredicate
+      type: object
     ListSlosResponse:
       description: Response containing a list of SLOs.
       example:
@@ -716,6 +910,7 @@ components:
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
+          sloType: SLO_TYPE_REQUEST
           type: request
           grouping:
             labels:
@@ -729,6 +924,7 @@ components:
           createTime: 2000-01-23T04:56:07.000+00:00
           name: Example Slo Name
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+          productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
         - creator: test@domain.com
           requestBasedMetricSli:
@@ -739,6 +935,7 @@ components:
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
+          sloType: SLO_TYPE_REQUEST
           type: request
           grouping:
             labels:
@@ -752,6 +949,7 @@ components:
           createTime: 2000-01-23T04:56:07.000+00:00
           name: Example Slo Name
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+          productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
       externalDocs:
         url: ""
@@ -774,9 +972,29 @@ components:
         query:
           example: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
           type: string
-      required:
-      - query
       title: Metric
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MissingDataStrategy:
       enum:
@@ -791,6 +1009,13 @@ components:
         values:
           items:
             type: string
+          type: array
+      type: object
+    ProductTypeValues:
+      properties:
+        values:
+          items:
+            $ref: "#/components/schemas/SloProductType"
           type: array
       type: object
     ReplaceSloAlertsValidationsResponse:
@@ -818,6 +1043,34 @@ components:
       type: object
     ReplaceSloRequest:
       description: Request to replace an existing SLO.
+      example:
+        slo:
+          creator: test@domain.com
+          requestBasedMetricSli:
+            goodEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+            totalEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+          description: A brief description of my SLO
+          sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          sloType: SLO_TYPE_REQUEST
+          type: request
+          grouping:
+            labels:
+            - labels
+            - labels
+          labels:
+            key: labels
+          revision:
+            updateTime: 2000-01-23T04:56:07.000+00:00
+            revision: 1
+          createTime: 2000-01-23T04:56:07.000+00:00
+          name: Example Slo Name
+          id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+          productType: SLO_PRODUCT_TYPE_UNSPECIFIED
+          targetThresholdPercentage: 99.999
+        silenceDataValidations: true
       externalDocs:
         url: ""
       properties:
@@ -846,6 +1099,7 @@ components:
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
+          sloType: SLO_TYPE_REQUEST
           type: request
           grouping:
             labels:
@@ -859,6 +1113,7 @@ components:
           createTime: 2000-01-23T04:56:07.000+00:00
           name: Example Slo Name
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+          productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
       externalDocs:
         url: ""
@@ -887,9 +1142,6 @@ components:
           $ref: "#/components/schemas/Metric"
         totalEvents:
           $ref: "#/components/schemas/Metric"
-      required:
-      - goodEvents
-      - totalEvents
       title: RequestBasedMetricSli
       type: object
     ResponseStatus:
@@ -918,6 +1170,7 @@ components:
       oneOf:
       - $ref: "#/components/schemas/SloRequestBasedMetricSli"
       - $ref: "#/components/schemas/SloWindowBasedMetricSli"
+      - $ref: "#/components/schemas/SloApmSli"
     SloAlertValidityResult:
       example:
         errorMessage: errorMessage
@@ -934,12 +1187,67 @@ components:
         name:
           type: string
       type: object
+    SloApmSli:
+      additionalProperties: false
+      description: Definition of an SLO
+      externalDocs:
+        url: ""
+      properties:
+        apmSli:
+          $ref: "#/components/schemas/ApmSli"
+        createTime:
+          format: date-time
+          type: string
+        creator:
+          example: test@domain.com
+          type: string
+        description:
+          example: A brief description of my SLO
+          type: string
+        grouping:
+          $ref: "#/components/schemas/v1.Grouping"
+        id:
+          example: b11919d5-ef85-4bb1-8655-02640dbe94d9
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          type: object
+        name:
+          example: Example Slo Name
+          type: string
+        productType:
+          $ref: "#/components/schemas/SloProductType"
+        revision:
+          $ref: "#/components/schemas/v1.Revision"
+        sloTimeFrame:
+          $ref: "#/components/schemas/SloTimeFrame"
+        sloType:
+          $ref: "#/components/schemas/SloType"
+        targetThresholdPercentage:
+          example: 99.999
+          format: float
+          type: number
+        type:
+          deprecated: true
+          example: request
+          type: string
+        updateTime:
+          format: date-time
+          type: string
+      title: Slo
+      type: object
     SloConstantFilterField:
       enum:
       - SLO_CONST_FILTER_FIELD_UNSPECIFIED
       - SLO_CONST_FILTER_FIELD_USER_NAME
       - SLO_CONST_FILTER_FIELD_SLO_NAME
       type: string
+    SloExecutionRequest:
+      oneOf:
+      - $ref: "#/components/schemas/SloExecutionRequestReplaceSloRequest"
+      - $ref: "#/components/schemas/SloExecutionRequestDeleteSloRequest"
+      - $ref: "#/components/schemas/SloExecutionRequestCreateSloRequest"
     SloExecutionRequestCreateSloRequest:
       additionalProperties: false
       description: Request for executing an SLO operation.
@@ -967,6 +1275,35 @@ components:
     SloExecutionRequestReplaceSloRequest:
       additionalProperties: false
       description: Request for executing an SLO operation.
+      example:
+        replaceSloRequest:
+          slo:
+            creator: test@domain.com
+            requestBasedMetricSli:
+              goodEvents:
+                query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+              totalEvents:
+                query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+            description: A brief description of my SLO
+            sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
+            updateTime: 2000-01-23T04:56:07.000+00:00
+            sloType: SLO_TYPE_REQUEST
+            type: request
+            grouping:
+              labels:
+              - labels
+              - labels
+            labels:
+              key: labels
+            revision:
+              updateTime: 2000-01-23T04:56:07.000+00:00
+              revision: 1
+            createTime: 2000-01-23T04:56:07.000+00:00
+            name: Example Slo Name
+            id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+            productType: SLO_PRODUCT_TYPE_UNSPECIFIED
+            targetThresholdPercentage: 99.999
+          silenceDataValidations: true
       externalDocs:
         url: ""
       properties:
@@ -996,6 +1333,7 @@ components:
             description: A brief description of my SLO
             sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
             updateTime: 2000-01-23T04:56:07.000+00:00
+            sloType: SLO_TYPE_REQUEST
             type: request
             grouping:
               labels:
@@ -1009,6 +1347,7 @@ components:
             createTime: 2000-01-23T04:56:07.000+00:00
             name: Example Slo Name
             id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+            productType: SLO_PRODUCT_TYPE_UNSPECIFIED
             targetThresholdPercentage: 99.999
       externalDocs:
         url: ""
@@ -1058,6 +1397,45 @@ components:
           type: string
       title: SloFilterField
       type: object
+    SloFilterFieldProductType:
+      additionalProperties: false
+      description: Field used for filtering SLOs
+      externalDocs:
+        url: ""
+      properties:
+        productType:
+          type: boolean
+      title: SloFilterField
+      type: object
+    SloFilterFieldServiceName:
+      additionalProperties: false
+      description: Field used for filtering SLOs
+      externalDocs:
+        url: ""
+      properties:
+        serviceName:
+          description: "Filter by service name. Only applicable to product types that\
+            \ support services (e.g., APM). MUST be used together with product_type\
+            \ filter. Will throw an error if used without product_type."
+          example: payment-service
+          type: string
+      title: SloFilterField
+      type: object
+    SloFilterFieldSloType:
+      additionalProperties: false
+      description: Field used for filtering SLOs
+      externalDocs:
+        url: ""
+      properties:
+        sloType:
+          type: boolean
+      title: SloFilterField
+      type: object
+    SloProductType:
+      enum:
+      - SLO_PRODUCT_TYPE_UNSPECIFIED
+      - SLO_PRODUCT_TYPE_APM
+      type: string
     SloRequestBasedMetricSli:
       additionalProperties: false
       description: Definition of an SLO
@@ -1071,6 +1449,7 @@ components:
         description: A brief description of my SLO
         sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
         updateTime: 2000-01-23T04:56:07.000+00:00
+        sloType: SLO_TYPE_REQUEST
         type: request
         grouping:
           labels:
@@ -1084,6 +1463,7 @@ components:
         createTime: 2000-01-23T04:56:07.000+00:00
         name: Example Slo Name
         id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+        productType: SLO_PRODUCT_TYPE_UNSPECIFIED
         targetThresholdPercentage: 99.999
       externalDocs:
         url: ""
@@ -1109,27 +1489,27 @@ components:
         name:
           example: Example Slo Name
           type: string
+        productType:
+          $ref: "#/components/schemas/SloProductType"
         requestBasedMetricSli:
           $ref: "#/components/schemas/RequestBasedMetricSli"
         revision:
           $ref: "#/components/schemas/v1.Revision"
         sloTimeFrame:
           $ref: "#/components/schemas/SloTimeFrame"
+        sloType:
+          $ref: "#/components/schemas/SloType"
         targetThresholdPercentage:
           example: 99.999
           format: float
           type: number
         type:
+          deprecated: true
           example: request
           type: string
         updateTime:
           format: date-time
           type: string
-      required:
-      - name
-      - sli
-      - targetThresholdPercentage
-      - window
       title: Slo
       type: object
     SloTimeFrame:
@@ -1139,6 +1519,11 @@ components:
       - SLO_TIME_FRAME_14_DAYS
       - SLO_TIME_FRAME_21_DAYS
       - SLO_TIME_FRAME_28_DAYS
+      type: string
+    SloType:
+      enum:
+      - SLO_TYPE_REQUEST
+      - SLO_TYPE_WINDOW
       type: string
     SloWindowBasedMetricSli:
       additionalProperties: false
@@ -1167,15 +1552,20 @@ components:
         name:
           example: Example Slo Name
           type: string
+        productType:
+          $ref: "#/components/schemas/SloProductType"
         revision:
           $ref: "#/components/schemas/v1.Revision"
         sloTimeFrame:
           $ref: "#/components/schemas/SloTimeFrame"
+        sloType:
+          $ref: "#/components/schemas/SloType"
         targetThresholdPercentage:
           example: 99.999
           format: float
           type: number
         type:
+          deprecated: true
           example: request
           type: string
         updateTime:
@@ -1183,12 +1573,21 @@ components:
           type: string
         windowBasedMetricSli:
           $ref: "#/components/schemas/WindowBasedMetricSli"
-      required:
-      - name
-      - sli
-      - targetThresholdPercentage
-      - window
       title: Slo
+      type: object
+    StringValues:
+      properties:
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    TypeValues:
+      properties:
+        values:
+          items:
+            $ref: "#/components/schemas/SloType"
+          type: array
       type: object
     WindowBasedMetricSli:
       description: Definition of a window-based SLI based on metrics
@@ -1207,11 +1606,6 @@ components:
           type: number
         window:
           $ref: "#/components/schemas/WindowSloWindow"
-      required:
-      - comparisonOperator
-      - query
-      - threshold
-      - window
       title: WindowBasedMetricSli
       type: object
     WindowSloWindow:
@@ -1277,28 +1671,23 @@ components:
       type: string
     SloFilter_field:
       oneOf:
+      - $ref: "#/components/schemas/SloFilterFieldSloType"
+      - $ref: "#/components/schemas/SloFilterFieldProductType"
+      - $ref: "#/components/schemas/SloFilterFieldServiceName"
       - $ref: "#/components/schemas/SloFilterFieldConstFilter"
       - $ref: "#/components/schemas/SloFilterFieldLabelName"
-    IsFilterPredicate:
-      description: Predicate for SLO filters that checks if a field is equal to one
-        of multiple values
-      externalDocs:
-        url: ""
-      properties:
-        is:
-          items:
-            example: ""
-            type: string
-          type: array
-      title: IsFilterPredicate
-      type: object
+    SloFilterPredicate_is:
+      oneOf:
+      - $ref: "#/components/schemas/IsFilterPredicateStringValues"
+      - $ref: "#/components/schemas/IsFilterPredicateTypeValues"
+      - $ref: "#/components/schemas/IsFilterPredicateProductTypeValues"
     SloFilterPredicate:
       description: Predicate used for filtering SLOs
       externalDocs:
         url: ""
       properties:
         is:
-          $ref: "#/components/schemas/IsFilterPredicate"
+          $ref: "#/components/schemas/SloFilterPredicate_is"
       title: SloFilterPredicate
       type: object
     SloFilter:
@@ -1310,37 +1699,90 @@ components:
           $ref: "#/components/schemas/SloFilter_field"
         predicate:
           $ref: "#/components/schemas/SloFilterPredicate"
-      required:
-      - field
-      - predicate
       title: SloFilter
-      type: object
-    SloFilters:
-      description: A collection of filters for SLOs
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          items:
-            $ref: "#/components/schemas/SloFilter"
-          type: array
-      title: SloFilters
       type: object
     SlosService_ReplaceSlo_request:
       oneOf:
-      - $ref: "#/components/schemas/SloWindowBasedMetricSli"
       - $ref: "#/components/schemas/SloRequestBasedMetricSli"
+      - $ref: "#/components/schemas/SloWindowBasedMetricSli"
+      - $ref: "#/components/schemas/SloApmSli"
+      type: object
+    BatchExecuteSloRequest:
+      additionalProperties: false
+      description: Request to batch execute multiple SLO operations.
+      example:
+        requests:
+        - replaceSloRequest:
+            slo:
+              creator: test@domain.com
+              requestBasedMetricSli:
+                goodEvents:
+                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                totalEvents:
+                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+              description: A brief description of my SLO
+              sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
+              updateTime: 2000-01-23T04:56:07.000+00:00
+              sloType: SLO_TYPE_REQUEST
+              type: request
+              grouping:
+                labels:
+                - labels
+                - labels
+              labels:
+                key: labels
+              revision:
+                updateTime: 2000-01-23T04:56:07.000+00:00
+                revision: 1
+              createTime: 2000-01-23T04:56:07.000+00:00
+              name: Example Slo Name
+              id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+              productType: SLO_PRODUCT_TYPE_UNSPECIFIED
+              targetThresholdPercentage: 99.999
+            silenceDataValidations: true
+        - replaceSloRequest:
+            slo:
+              creator: test@domain.com
+              requestBasedMetricSli:
+                goodEvents:
+                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                totalEvents:
+                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+              description: A brief description of my SLO
+              sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
+              updateTime: 2000-01-23T04:56:07.000+00:00
+              sloType: SLO_TYPE_REQUEST
+              type: request
+              grouping:
+                labels:
+                - labels
+                - labels
+              labels:
+                key: labels
+              revision:
+                updateTime: 2000-01-23T04:56:07.000+00:00
+                revision: 1
+              createTime: 2000-01-23T04:56:07.000+00:00
+              name: Example Slo Name
+              id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+              productType: SLO_PRODUCT_TYPE_UNSPECIFIED
+              targetThresholdPercentage: 99.999
+            silenceDataValidations: true
+      properties:
+        requests:
+          items:
+            $ref: "#/components/schemas/SloExecutionRequest"
+          type: array
+      required:
+      - requests
+      title: BatchExecuteSloRequest
       type: object
     SlosService_ValidateReplaceSloAlerts_request:
       oneOf:
-      - $ref: "#/components/schemas/SloRequestBasedMetricSli"
       - $ref: "#/components/schemas/SloWindowBasedMetricSli"
+      - $ref: "#/components/schemas/SloApmSli"
+      - $ref: "#/components/schemas/SloRequestBasedMetricSli"
       type: object
-    SlosService_BatchExecuteSlo_requests_parameter_inner:
-      oneOf:
-      - $ref: "#/components/schemas/SloExecutionRequestReplaceSloRequest"
-      - $ref: "#/components/schemas/SloExecutionRequestDeleteSloRequest"
-      - $ref: "#/components/schemas/SloExecutionRequestCreateSloRequest"
   securitySchemes:
     apiKeyAuth:
       description: API key authentication

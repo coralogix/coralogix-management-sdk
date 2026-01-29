@@ -28,8 +28,8 @@ type ApiEventsServiceBatchGetEventRequest struct {
 	ctx context.Context
 	ApiService *EventsServiceAPIService
 	ids *[]string
-	orderBys *[]EventsServiceListEventsOrderBysParameterInner
-	pagination *EventsServiceListEventsPaginationParameter
+	orderBys *[]EventsServiceListAlertEventsOrderBysParameterInner
+	pagination *EventsServiceListAlertEventsPaginationParameter
 	filter *EventsServiceBatchGetEventFilterParameter
 }
 
@@ -38,12 +38,12 @@ func (r ApiEventsServiceBatchGetEventRequest) Ids(ids []string) ApiEventsService
 	return r
 }
 
-func (r ApiEventsServiceBatchGetEventRequest) OrderBys(orderBys []EventsServiceListEventsOrderBysParameterInner) ApiEventsServiceBatchGetEventRequest {
+func (r ApiEventsServiceBatchGetEventRequest) OrderBys(orderBys []EventsServiceListAlertEventsOrderBysParameterInner) ApiEventsServiceBatchGetEventRequest {
 	r.orderBys = &orderBys
 	return r
 }
 
-func (r ApiEventsServiceBatchGetEventRequest) Pagination(pagination EventsServiceListEventsPaginationParameter) ApiEventsServiceBatchGetEventRequest {
+func (r ApiEventsServiceBatchGetEventRequest) Pagination(pagination EventsServiceListAlertEventsPaginationParameter) ApiEventsServiceBatchGetEventRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -87,7 +87,7 @@ func (a *EventsServiceAPIService) EventsServiceBatchGetEventExecute(r ApiEventsS
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/alerts/events/v3/batch"
+	localVarPath := localBasePath + "/alerts/events/v3/all/list"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -179,16 +179,16 @@ type ApiEventsServiceGetEventRequest struct {
 	ctx context.Context
 	ApiService *EventsServiceAPIService
 	id string
-	orderBys *[]EventsServiceListEventsOrderBysParameterInner
-	pagination *EventsServiceListEventsPaginationParameter
+	orderBys *[]EventsServiceListAlertEventsOrderBysParameterInner
+	pagination *EventsServiceListAlertEventsPaginationParameter
 }
 
-func (r ApiEventsServiceGetEventRequest) OrderBys(orderBys []EventsServiceListEventsOrderBysParameterInner) ApiEventsServiceGetEventRequest {
+func (r ApiEventsServiceGetEventRequest) OrderBys(orderBys []EventsServiceListAlertEventsOrderBysParameterInner) ApiEventsServiceGetEventRequest {
 	r.orderBys = &orderBys
 	return r
 }
 
-func (r ApiEventsServiceGetEventRequest) Pagination(pagination EventsServiceListEventsPaginationParameter) ApiEventsServiceGetEventRequest {
+func (r ApiEventsServiceGetEventRequest) Pagination(pagination EventsServiceListAlertEventsPaginationParameter) ApiEventsServiceGetEventRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -349,7 +349,7 @@ func (a *EventsServiceAPIService) EventsServiceGetEventsStatisticsExecute(r ApiE
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/alerts/events/v3/statistics"
+	localVarPath := localBasePath + "/alerts/events/v3/all/statistics"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -418,8 +418,8 @@ type ApiEventsServiceListAlertEventsRequest struct {
 	alertIds *[]string
 	timestampRange *TimestampRange
 	cxEventLabels *map[string]string
-	orderBys *[]EventsServiceListEventsOrderBysParameterInner
-	pagination *EventsServiceListEventsPaginationParameter
+	orderBys *[]EventsServiceListAlertEventsOrderBysParameterInner
+	pagination *EventsServiceListAlertEventsPaginationParameter
 }
 
 func (r ApiEventsServiceListAlertEventsRequest) AlertIds(alertIds []string) ApiEventsServiceListAlertEventsRequest {
@@ -437,12 +437,12 @@ func (r ApiEventsServiceListAlertEventsRequest) CxEventLabels(cxEventLabels map[
 	return r
 }
 
-func (r ApiEventsServiceListAlertEventsRequest) OrderBys(orderBys []EventsServiceListEventsOrderBysParameterInner) ApiEventsServiceListAlertEventsRequest {
+func (r ApiEventsServiceListAlertEventsRequest) OrderBys(orderBys []EventsServiceListAlertEventsOrderBysParameterInner) ApiEventsServiceListAlertEventsRequest {
 	r.orderBys = &orderBys
 	return r
 }
 
-func (r ApiEventsServiceListAlertEventsRequest) Pagination(pagination EventsServiceListEventsPaginationParameter) ApiEventsServiceListAlertEventsRequest {
+func (r ApiEventsServiceListAlertEventsRequest) Pagination(pagination EventsServiceListAlertEventsPaginationParameter) ApiEventsServiceListAlertEventsRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -481,7 +481,7 @@ func (a *EventsServiceAPIService) EventsServiceListAlertEventsExecute(r ApiEvent
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/alerts/events/v3/alert-events"
+	localVarPath := localBasePath + "/alerts/alerts/v3/all/events"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -576,8 +576,8 @@ type ApiEventsServiceListEventsRequest struct {
 	ctx context.Context
 	ApiService *EventsServiceAPIService
 	filter *EventsFilter
-	orderBys *[]EventsServiceListEventsOrderBysParameterInner
-	pagination *EventsServiceListEventsPaginationParameter
+	orderBys *[]EventsServiceListAlertEventsOrderBysParameterInner
+	pagination *EventsServiceListAlertEventsPaginationParameter
 }
 
 func (r ApiEventsServiceListEventsRequest) Filter(filter EventsFilter) ApiEventsServiceListEventsRequest {
@@ -585,12 +585,12 @@ func (r ApiEventsServiceListEventsRequest) Filter(filter EventsFilter) ApiEvents
 	return r
 }
 
-func (r ApiEventsServiceListEventsRequest) OrderBys(orderBys []EventsServiceListEventsOrderBysParameterInner) ApiEventsServiceListEventsRequest {
+func (r ApiEventsServiceListEventsRequest) OrderBys(orderBys []EventsServiceListAlertEventsOrderBysParameterInner) ApiEventsServiceListEventsRequest {
 	r.orderBys = &orderBys
 	return r
 }
 
-func (r ApiEventsServiceListEventsRequest) Pagination(pagination EventsServiceListEventsPaginationParameter) ApiEventsServiceListEventsRequest {
+func (r ApiEventsServiceListEventsRequest) Pagination(pagination EventsServiceListAlertEventsPaginationParameter) ApiEventsServiceListEventsRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -751,7 +751,7 @@ func (a *EventsServiceAPIService) EventsServiceListEventsCountExecute(r ApiEvent
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/alerts/events/v3/count"
+	localVarPath := localBasePath + "/alerts/events/v3/all/count"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

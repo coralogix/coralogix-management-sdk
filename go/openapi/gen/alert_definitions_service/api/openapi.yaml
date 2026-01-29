@@ -5,7 +5,7 @@ info:
 servers:
 - url: /
 paths:
-  /alerts/alerts-general/v3:
+  /alerts/alerts/v3:
     get:
       description: No description available
       externalDocs:
@@ -125,116 +125,7 @@ paths:
       - Alert definitions service
       x-coralogixPermissions:
       - alerts:UpdateConfig
-  /alerts/alerts-general/v3/alert-version-id/{alert_version_id}:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: AlertDefsService_GetAlertDefByVersionId
-      parameters:
-      - explode: false
-        in: path
-        name: alert_version_id
-        required: true
-        schema:
-          description: Alert version ID
-          example: 123e4567-e89b-12d3-a456-426614174000
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetAlertDefByVersionIdResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Get alert definition by alert version ID
-      tags:
-      - Alert definitions service
-      x-coralogixPermissions:
-      - alerts:ReadConfig
-  /alerts/alerts-general/v3/bulk:
-    put:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: AlertDefsService_BulkReplaceAlertDefs
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Bulk_replace_alert_definitions_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BulkReplaceAlertDefsResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Bulk replace alert definitions
-      tags:
-      - Alert definitions service
-      x-coralogixPermissions:
-      - alerts:UpdateConfig
-  /alerts/alerts-general/v3/download:
-    get:
-      description: |-
-        Download a list of all accessible alert definitions in base64-encoded byte format.
-
-        Requires the following permissions:
-        - `alerts:ReadConfig`
-      externalDocs:
-        url: ""
-      operationId: AlertDefsService_DownloadAlerts
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DownloadAlertsResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Download alerts
-      tags:
-      - Alert definitions service
-      x-coralogixPermissions:
-      - alerts:ReadConfig
-  /alerts/alerts-general/v3/filter-option-counts:
+  /alerts/alerts/v3/all/counts:
     get:
       description: |-
         Returns counts for different filter options based on the provided filters
@@ -276,7 +167,116 @@ paths:
       - Alert definitions service
       x-coralogixPermissions:
       - alerts:ReadConfig
-  /alerts/alerts-general/v3/{id}:
+  /alerts/alerts/v3/all/download:
+    get:
+      description: |-
+        Download a list of all accessible alert definitions in base64-encoded byte format.
+
+        Requires the following permissions:
+        - `alerts:ReadConfig`
+      externalDocs:
+        url: ""
+      operationId: AlertDefsService_DownloadAlerts
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DownloadAlertsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Download alerts
+      tags:
+      - Alert definitions service
+      x-coralogixPermissions:
+      - alerts:ReadConfig
+  /alerts/alerts/v3/all/replace:
+    put:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: AlertDefsService_BulkReplaceAlertDefs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Bulk_replace_alert_definitions_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BulkReplaceAlertDefsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Bulk replace alert definitions
+      tags:
+      - Alert definitions service
+      x-coralogixPermissions:
+      - alerts:UpdateConfig
+  /alerts/alerts/v3/version-ids/{alert_version_id}:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: AlertDefsService_GetAlertDefByVersionId
+      parameters:
+      - explode: false
+        in: path
+        name: alert_version_id
+        required: true
+        schema:
+          description: Alert version ID
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAlertDefByVersionIdResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get alert definition by alert version ID
+      tags:
+      - Alert definitions service
+      x-coralogixPermissions:
+      - alerts:ReadConfig
+  /alerts/alerts/v3/{id}:
     delete:
       description: No description available
       externalDocs:
@@ -354,55 +354,6 @@ paths:
       - Alert definitions service
       x-coralogixPermissions:
       - alerts:ReadConfig
-  /alerts/alerts-general/v3/{id}:setActive:
-    post:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: AlertDefsService_SetActive
-      parameters:
-      - explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          description: The alert definition ID
-          example: 123e4567-e89b-12d3-a456-426614174000
-          type: string
-        style: simple
-      - explode: true
-        in: query
-        name: active
-        required: false
-        schema:
-          description: Whether to enable or disable the alert definition
-          example: true
-          type: boolean
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/v3.SetActiveResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Disable or enable an alert
-      tags:
-      - Alert definitions service
-      x-coralogixPermissions:
-      - alerts:UpdateConfig
 components:
   schemas:
     ActivitySchedule:
@@ -442,26 +393,6 @@ components:
         alertDefProperties:
           entityLabels:
             key: entityLabels
-          logsImmediate:
-            notificationPayloadFilter:
-            - obj.field
-            logsFilter:
-              simpleFilter:
-                labelFilters:
-                  subsystemName:
-                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    value: my-app
-                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    value: my-app
-                  applicationName:
-                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    value: my-app
-                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                    value: my-app
-                  severities:
-                  - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                luceneQuery: luceneQuery
           phantomMode: false
           notificationGroupExcess:
           - router:
@@ -620,6 +551,40 @@ components:
             groupByKeys:
             - key1
             - key2
+          logsAnomaly:
+            notificationPayloadFilter:
+            - obj.field
+            anomalyAlertSettings:
+              percentageOfDeviation: 0.8008282
+            evaluationDelayMs: 60000
+            rules:
+            - condition:
+                timeWindow:
+                  logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+                conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+                minimumThreshold: 10
+            - condition:
+                timeWindow:
+                  logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+                conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+                minimumThreshold: 10
+            logsFilter:
+              simpleFilter:
+                labelFilters:
+                  subsystemName:
+                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    value: my-app
+                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    value: my-app
+                  applicationName:
+                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    value: my-app
+                  - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                    value: my-app
+                  severities:
+                  - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                luceneQuery: luceneQuery
           description: Alert description
           priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
           type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
@@ -718,6 +683,11 @@ components:
             minutes: 30
             notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
           name: My Alert
+          dataSources:
+          - dataSpace: dataSpace
+            dataSet: dataSet
+          - dataSpace: dataSpace
+            dataSet: dataSet
           groupByKeys:
           - key1
           - key2
@@ -756,6 +726,18 @@ components:
           format: date-time
           type: string
       title: Alert definition
+      type: object
+    AlertDefDataSource:
+      example:
+        dataSpace: dataSpace
+        dataSet: dataSet
+      properties:
+        dataSet:
+          description: File name of the dataset
+          type: string
+        dataSpace:
+          description: Folder name of the datasource
+          type: string
       type: object
     AlertDefIncidentSettings:
       example:
@@ -907,19 +889,19 @@ components:
       type: string
     AlertDefProperties:
       oneOf:
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsImmediate"
-      - $ref: "#/components/schemas/AlertDefPropertiesTracingImmediate"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesMetricThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesFlow"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsAnomaly"
-      - $ref: "#/components/schemas/AlertDefPropertiesSloThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesLogsThreshold"
-      - $ref: "#/components/schemas/AlertDefPropertiesTracingThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesMetricAnomaly"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsNewValue"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsImmediate"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesMetricThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesTracingThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesSloThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesTracingImmediate"
+      - $ref: "#/components/schemas/AlertDefPropertiesLogsThreshold"
+      - $ref: "#/components/schemas/AlertDefPropertiesFlow"
     AlertDefPropertiesFlow:
       additionalProperties: false
       description: User-configurable properties of an alert definition
@@ -928,6 +910,10 @@ components:
       properties:
         activeOn:
           $ref: "#/components/schemas/ActivitySchedule"
+        dataSources:
+          items:
+            $ref: "#/components/schemas/AlertDefDataSource"
+          type: array
         deleted:
           description: Whether the alert has been marked as deleted
           example: false
@@ -982,88 +968,9 @@ components:
     AlertDefPropertiesLogsAnomaly:
       additionalProperties: false
       description: User-configurable properties of an alert definition
-      externalDocs:
-        url: ""
-      properties:
-        activeOn:
-          $ref: "#/components/schemas/ActivitySchedule"
-        deleted:
-          description: Whether the alert has been marked as deleted
-          example: false
-          type: boolean
-        description:
-          description: A detailed description of what the alert monitors and when
-            it triggers
-          example: Alert description
-          type: string
-        enabled:
-          description: Whether the alert is currently active and monitoring
-          example: true
-          type: boolean
-        entityLabels:
-          additionalProperties:
-            type: string
-          description: Labels used to identify and categorize the alert entity
-          type: object
-        groupByKeys:
-          example:
-          - key1
-          - key2
-          items:
-            description: Keys used to group and aggregate alert data
-            type: string
-          type: array
-        incidentsSettings:
-          $ref: "#/components/schemas/AlertDefIncidentSettings"
-        logsAnomaly:
-          $ref: "#/components/schemas/LogsAnomalyType"
-        name:
-          description: The name of the alert definition
-          example: My Alert
-          type: string
-        notificationGroup:
-          $ref: "#/components/schemas/AlertDefNotificationGroup"
-        notificationGroupExcess:
-          items:
-            $ref: "#/components/schemas/AlertDefNotificationGroup"
-          type: array
-        phantomMode:
-          description: Whether the alert is in phantom mode (creating incidents or
-            not)
-          example: false
-          type: boolean
-        priority:
-          $ref: "#/components/schemas/AlertDefPriority"
-        type:
-          $ref: "#/components/schemas/AlertDefType"
-      title: Alert definition properties
-      type: object
-    AlertDefPropertiesLogsImmediate:
-      additionalProperties: false
-      description: User-configurable properties of an alert definition
       example:
         entityLabels:
           key: entityLabels
-        logsImmediate:
-          notificationPayloadFilter:
-          - obj.field
-          logsFilter:
-            simpleFilter:
-              labelFilters:
-                subsystemName:
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                applicationName:
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                  value: my-app
-                severities:
-                - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-              luceneQuery: luceneQuery
         phantomMode: false
         notificationGroupExcess:
         - router:
@@ -1222,6 +1129,40 @@ components:
           groupByKeys:
           - key1
           - key2
+        logsAnomaly:
+          notificationPayloadFilter:
+          - obj.field
+          anomalyAlertSettings:
+            percentageOfDeviation: 0.8008282
+          evaluationDelayMs: 60000
+          rules:
+          - condition:
+              timeWindow:
+                logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+              conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+              minimumThreshold: 10
+          - condition:
+              timeWindow:
+                logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+              conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+              minimumThreshold: 10
+          logsFilter:
+            simpleFilter:
+              labelFilters:
+                subsystemName:
+                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  value: my-app
+                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  value: my-app
+                applicationName:
+                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  value: my-app
+                - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                  value: my-app
+                severities:
+                - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+              luceneQuery: luceneQuery
         description: Alert description
         priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
         type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
@@ -1320,6 +1261,11 @@ components:
           minutes: 30
           notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
         name: My Alert
+        dataSources:
+        - dataSpace: dataSpace
+          dataSet: dataSet
+        - dataSpace: dataSpace
+          dataSet: dataSet
         groupByKeys:
         - key1
         - key2
@@ -1328,6 +1274,73 @@ components:
       properties:
         activeOn:
           $ref: "#/components/schemas/ActivitySchedule"
+        dataSources:
+          items:
+            $ref: "#/components/schemas/AlertDefDataSource"
+          type: array
+        deleted:
+          description: Whether the alert has been marked as deleted
+          example: false
+          type: boolean
+        description:
+          description: A detailed description of what the alert monitors and when
+            it triggers
+          example: Alert description
+          type: string
+        enabled:
+          description: Whether the alert is currently active and monitoring
+          example: true
+          type: boolean
+        entityLabels:
+          additionalProperties:
+            type: string
+          description: Labels used to identify and categorize the alert entity
+          type: object
+        groupByKeys:
+          example:
+          - key1
+          - key2
+          items:
+            description: Keys used to group and aggregate alert data
+            type: string
+          type: array
+        incidentsSettings:
+          $ref: "#/components/schemas/AlertDefIncidentSettings"
+        logsAnomaly:
+          $ref: "#/components/schemas/LogsAnomalyType"
+        name:
+          description: The name of the alert definition
+          example: My Alert
+          type: string
+        notificationGroup:
+          $ref: "#/components/schemas/AlertDefNotificationGroup"
+        notificationGroupExcess:
+          items:
+            $ref: "#/components/schemas/AlertDefNotificationGroup"
+          type: array
+        phantomMode:
+          description: Whether the alert is in phantom mode (creating incidents or
+            not)
+          example: false
+          type: boolean
+        priority:
+          $ref: "#/components/schemas/AlertDefPriority"
+        type:
+          $ref: "#/components/schemas/AlertDefType"
+      title: Alert definition properties
+      type: object
+    AlertDefPropertiesLogsImmediate:
+      additionalProperties: false
+      description: User-configurable properties of an alert definition
+      externalDocs:
+        url: ""
+      properties:
+        activeOn:
+          $ref: "#/components/schemas/ActivitySchedule"
+        dataSources:
+          items:
+            $ref: "#/components/schemas/AlertDefDataSource"
+          type: array
         deleted:
           description: Whether the alert has been marked as deleted
           example: false
@@ -1387,6 +1400,10 @@ components:
       properties:
         activeOn:
           $ref: "#/components/schemas/ActivitySchedule"
+        dataSources:
+          items:
+            $ref: "#/components/schemas/AlertDefDataSource"
+          type: array
         deleted:
           description: Whether the alert has been marked as deleted
           example: false
@@ -1446,6 +1463,10 @@ components:
       properties:
         activeOn:
           $ref: "#/components/schemas/ActivitySchedule"
+        dataSources:
+          items:
+            $ref: "#/components/schemas/AlertDefDataSource"
+          type: array
         deleted:
           description: Whether the alert has been marked as deleted
           example: false
@@ -1505,6 +1526,10 @@ components:
       properties:
         activeOn:
           $ref: "#/components/schemas/ActivitySchedule"
+        dataSources:
+          items:
+            $ref: "#/components/schemas/AlertDefDataSource"
+          type: array
         deleted:
           description: Whether the alert has been marked as deleted
           example: false
@@ -1564,6 +1589,10 @@ components:
       properties:
         activeOn:
           $ref: "#/components/schemas/ActivitySchedule"
+        dataSources:
+          items:
+            $ref: "#/components/schemas/AlertDefDataSource"
+          type: array
         deleted:
           description: Whether the alert has been marked as deleted
           example: false
@@ -1623,6 +1652,10 @@ components:
       properties:
         activeOn:
           $ref: "#/components/schemas/ActivitySchedule"
+        dataSources:
+          items:
+            $ref: "#/components/schemas/AlertDefDataSource"
+          type: array
         deleted:
           description: Whether the alert has been marked as deleted
           example: false
@@ -1682,6 +1715,10 @@ components:
       properties:
         activeOn:
           $ref: "#/components/schemas/ActivitySchedule"
+        dataSources:
+          items:
+            $ref: "#/components/schemas/AlertDefDataSource"
+          type: array
         deleted:
           description: Whether the alert has been marked as deleted
           example: false
@@ -1741,6 +1778,10 @@ components:
       properties:
         activeOn:
           $ref: "#/components/schemas/ActivitySchedule"
+        dataSources:
+          items:
+            $ref: "#/components/schemas/AlertDefDataSource"
+          type: array
         deleted:
           description: Whether the alert has been marked as deleted
           example: false
@@ -1800,6 +1841,10 @@ components:
       properties:
         activeOn:
           $ref: "#/components/schemas/ActivitySchedule"
+        dataSources:
+          items:
+            $ref: "#/components/schemas/AlertDefDataSource"
+          type: array
         deleted:
           description: Whether the alert has been marked as deleted
           example: false
@@ -1859,6 +1904,10 @@ components:
       properties:
         activeOn:
           $ref: "#/components/schemas/ActivitySchedule"
+        dataSources:
+          items:
+            $ref: "#/components/schemas/AlertDefDataSource"
+          type: array
         deleted:
           description: Whether the alert has been marked as deleted
           example: false
@@ -1918,6 +1967,10 @@ components:
       properties:
         activeOn:
           $ref: "#/components/schemas/ActivitySchedule"
+        dataSources:
+          items:
+            $ref: "#/components/schemas/AlertDefDataSource"
+          type: array
         deleted:
           description: Whether the alert has been marked as deleted
           example: false
@@ -2033,6 +2086,8 @@ components:
       type: string
     AnomalyAlertSettings:
       description: Common settings for anomaly-based alerts.
+      example:
+        percentageOfDeviation: 0.8008282
       externalDocs:
         url: ""
       properties:
@@ -2059,26 +2114,6 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
-            logsImmediate:
-              notificationPayloadFilter:
-              - obj.field
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -2237,6 +2272,40 @@ components:
               groupByKeys:
               - key1
               - key2
+            logsAnomaly:
+              notificationPayloadFilter:
+              - obj.field
+              anomalyAlertSettings:
+                percentageOfDeviation: 0.8008282
+              evaluationDelayMs: 60000
+              rules:
+              - condition:
+                  timeWindow:
+                    logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+                  conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+                  minimumThreshold: 10
+              - condition:
+                  timeWindow:
+                    logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+                  conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+                  minimumThreshold: 10
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
@@ -2335,6 +2404,11 @@ components:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
+            dataSources:
+            - dataSpace: dataSpace
+              dataSet: dataSet
+            - dataSpace: dataSpace
+              dataSet: dataSet
             groupByKeys:
             - key1
             - key2
@@ -2347,26 +2421,6 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
-            logsImmediate:
-              notificationPayloadFilter:
-              - obj.field
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -2525,6 +2579,40 @@ components:
               groupByKeys:
               - key1
               - key2
+            logsAnomaly:
+              notificationPayloadFilter:
+              - obj.field
+              anomalyAlertSettings:
+                percentageOfDeviation: 0.8008282
+              evaluationDelayMs: 60000
+              rules:
+              - condition:
+                  timeWindow:
+                    logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+                  conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+                  minimumThreshold: 10
+              - condition:
+                  timeWindow:
+                    logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+                  conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+                  minimumThreshold: 10
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
@@ -2623,6 +2711,11 @@ components:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
+            dataSources:
+            - dataSpace: dataSpace
+              dataSet: dataSet
+            - dataSpace: dataSpace
+              dataSet: dataSet
             groupByKeys:
             - key1
             - key2
@@ -2735,26 +2828,6 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
-            logsImmediate:
-              notificationPayloadFilter:
-              - obj.field
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -2913,6 +2986,40 @@ components:
               groupByKeys:
               - key1
               - key2
+            logsAnomaly:
+              notificationPayloadFilter:
+              - obj.field
+              anomalyAlertSettings:
+                percentageOfDeviation: 0.8008282
+              evaluationDelayMs: 60000
+              rules:
+              - condition:
+                  timeWindow:
+                    logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+                  conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+                  minimumThreshold: 10
+              - condition:
+                  timeWindow:
+                    logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+                  conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+                  minimumThreshold: 10
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
@@ -3011,6 +3118,11 @@ components:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
+            dataSources:
+            - dataSpace: dataSpace
+              dataSet: dataSet
+            - dataSpace: dataSpace
+              dataSet: dataSet
             groupByKeys:
             - key1
             - key2
@@ -3359,26 +3471,6 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
-            logsImmediate:
-              notificationPayloadFilter:
-              - obj.field
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -3537,6 +3629,40 @@ components:
               groupByKeys:
               - key1
               - key2
+            logsAnomaly:
+              notificationPayloadFilter:
+              - obj.field
+              anomalyAlertSettings:
+                percentageOfDeviation: 0.8008282
+              evaluationDelayMs: 60000
+              rules:
+              - condition:
+                  timeWindow:
+                    logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+                  conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+                  minimumThreshold: 10
+              - condition:
+                  timeWindow:
+                    logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+                  conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+                  minimumThreshold: 10
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
@@ -3635,6 +3761,11 @@ components:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
+            dataSources:
+            - dataSpace: dataSpace
+              dataSet: dataSet
+            - dataSpace: dataSpace
+              dataSet: dataSet
             groupByKeys:
             - key1
             - key2
@@ -3658,26 +3789,6 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
-            logsImmediate:
-              notificationPayloadFilter:
-              - obj.field
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -3836,6 +3947,40 @@ components:
               groupByKeys:
               - key1
               - key2
+            logsAnomaly:
+              notificationPayloadFilter:
+              - obj.field
+              anomalyAlertSettings:
+                percentageOfDeviation: 0.8008282
+              evaluationDelayMs: 60000
+              rules:
+              - condition:
+                  timeWindow:
+                    logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+                  conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+                  minimumThreshold: 10
+              - condition:
+                  timeWindow:
+                    logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+                  conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+                  minimumThreshold: 10
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
@@ -3934,6 +4079,11 @@ components:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
+            dataSources:
+            - dataSpace: dataSpace
+              dataSet: dataSet
+            - dataSpace: dataSpace
+              dataSet: dataSet
             groupByKeys:
             - key1
             - key2
@@ -4001,7 +4151,7 @@ components:
       description: A response that contains a list of alert definitions
       example:
         pagination:
-          totalSize: 0
+          totalSize: 6
           nextPageToken: nextPageToken
         alertDefs:
         - updatedTime: 2023-10-01T12:00:00Z
@@ -4009,26 +4159,6 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
-            logsImmediate:
-              notificationPayloadFilter:
-              - obj.field
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -4187,6 +4317,40 @@ components:
               groupByKeys:
               - key1
               - key2
+            logsAnomaly:
+              notificationPayloadFilter:
+              - obj.field
+              anomalyAlertSettings:
+                percentageOfDeviation: 0.8008282
+              evaluationDelayMs: 60000
+              rules:
+              - condition:
+                  timeWindow:
+                    logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+                  conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+                  minimumThreshold: 10
+              - condition:
+                  timeWindow:
+                    logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+                  conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+                  minimumThreshold: 10
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
@@ -4285,6 +4449,11 @@ components:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
+            dataSources:
+            - dataSpace: dataSpace
+              dataSet: dataSet
+            - dataSpace: dataSpace
+              dataSet: dataSet
             groupByKeys:
             - key1
             - key2
@@ -4297,26 +4466,6 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
-            logsImmediate:
-              notificationPayloadFilter:
-              - obj.field
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -4475,6 +4624,40 @@ components:
               groupByKeys:
               - key1
               - key2
+            logsAnomaly:
+              notificationPayloadFilter:
+              - obj.field
+              anomalyAlertSettings:
+                percentageOfDeviation: 0.8008282
+              evaluationDelayMs: 60000
+              rules:
+              - condition:
+                  timeWindow:
+                    logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+                  conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+                  minimumThreshold: 10
+              - condition:
+                  timeWindow:
+                    logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+                  conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+                  minimumThreshold: 10
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
@@ -4573,6 +4756,11 @@ components:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
+            dataSources:
+            - dataSpace: dataSpace
+              dataSet: dataSet
+            - dataSpace: dataSpace
+              dataSet: dataSet
             groupByKeys:
             - key1
             - key2
@@ -4609,6 +4797,11 @@ components:
       type: string
     LogsAnomalyCondition:
       description: Defines conditions for detecting log anomalies
+      example:
+        timeWindow:
+          logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+        conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+        minimumThreshold: 10
       externalDocs:
         url: ""
       properties:
@@ -4629,6 +4822,12 @@ components:
       type: string
     LogsAnomalyRule:
       description: Defines a rule for detecting log anomalies
+      example:
+        condition:
+          timeWindow:
+            logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+          conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+          minimumThreshold: 10
       externalDocs:
         url: ""
       properties:
@@ -4638,6 +4837,40 @@ components:
       type: object
     LogsAnomalyType:
       description: Configuration for alerts triggered by anomalous log patterns
+      example:
+        notificationPayloadFilter:
+        - obj.field
+        anomalyAlertSettings:
+          percentageOfDeviation: 0.8008282
+        evaluationDelayMs: 60000
+        rules:
+        - condition:
+            timeWindow:
+              logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+            conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+            minimumThreshold: 10
+        - condition:
+            timeWindow:
+              logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+            conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+            minimumThreshold: 10
+        logsFilter:
+          simpleFilter:
+            labelFilters:
+              subsystemName:
+              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                value: my-app
+              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                value: my-app
+              applicationName:
+              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                value: my-app
+              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                value: my-app
+              severities:
+              - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+              - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+            luceneQuery: luceneQuery
       externalDocs:
         description: Learn more about logs anomaly alerts in our documentation
         url: https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/anomaly-detection-alerts/
@@ -4668,26 +4901,6 @@ components:
     LogsImmediateType:
       description: Configuration for immediate alerts triggered on log entries matching
         specific filters.
-      example:
-        notificationPayloadFilter:
-        - obj.field
-        logsFilter:
-          simpleFilter:
-            labelFilters:
-              subsystemName:
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              applicationName:
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                value: my-app
-              severities:
-              - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-              - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-            luceneQuery: luceneQuery
       externalDocs:
         description: Learn more about logs immediate alerts in our documentation
         url: https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/immediate-notifications/
@@ -4945,6 +5158,8 @@ components:
           type: integer
         logsFilter:
           $ref: "#/components/schemas/v3.LogsFilter"
+        noDataPolicy:
+          $ref: "#/components/schemas/NoDataPolicy"
         notificationPayloadFilter:
           example:
           - obj.field
@@ -5036,6 +5251,8 @@ components:
       type: object
     LogsTimeWindow:
       description: Time window configuration for log-based alerts
+      example:
+        logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -5293,6 +5510,8 @@ components:
           $ref: "#/components/schemas/MetricFilter"
         missingValues:
           $ref: "#/components/schemas/MetricMissingValues"
+        noDataPolicy:
+          $ref: "#/components/schemas/NoDataPolicy"
         rules:
           items:
             $ref: "#/components/schemas/MetricThresholdRule"
@@ -5341,6 +5560,28 @@ components:
       - METRIC_TIME_WINDOW_VALUE_HOURS_24
       - METRIC_TIME_WINDOW_VALUE_HOURS_36
       type: string
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     MultipleValues:
       properties:
         matcher:
@@ -5354,6 +5595,25 @@ components:
       enum:
       - NEXT_OP_AND_OR_UNSPECIFIED
       - NEXT_OP_OR
+      type: string
+    NoDataPolicy:
+      properties:
+        autoRetireSeconds:
+          description: The timeframe in seconds for auto retiring values that were
+            detected as no-data. accepts only multiples of 60 seconds
+          example: 3600
+          format: int32
+          type: integer
+        state:
+          $ref: "#/components/schemas/NoDataPolicyState"
+      type: object
+    NoDataPolicyState:
+      enum:
+      - NO_DATA_POLICY_STATE_UNSPECIFIED
+      - NO_DATA_POLICY_STATE_OK
+      - NO_DATA_POLICY_STATE_ALERTING
+      - NO_DATA_POLICY_STATE_KEEP_LAST
+      - NO_DATA_POLICY_STATE_NO_DATA
       type: string
     NotificationDestination:
       description: Configuration for where and how alert notifications should be sent
@@ -5492,26 +5752,6 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
-            logsImmediate:
-              notificationPayloadFilter:
-              - obj.field
-              logsFilter:
-                simpleFilter:
-                  labelFilters:
-                    subsystemName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    applicationName:
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-                      value: my-app
-                    severities:
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
-                  luceneQuery: luceneQuery
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -5670,6 +5910,40 @@ components:
               groupByKeys:
               - key1
               - key2
+            logsAnomaly:
+              notificationPayloadFilter:
+              - obj.field
+              anomalyAlertSettings:
+                percentageOfDeviation: 0.8008282
+              evaluationDelayMs: 60000
+              rules:
+              - condition:
+                  timeWindow:
+                    logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+                  conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+                  minimumThreshold: 10
+              - condition:
+                  timeWindow:
+                    logsTimeWindowSpecificValue: LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+                  conditionType: LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+                  minimumThreshold: 10
+              logsFilter:
+                simpleFilter:
+                  labelFilters:
+                    subsystemName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    applicationName:
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    - operation: LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+                      value: my-app
+                    severities:
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                    - LOG_SEVERITY_VERBOSE_UNSPECIFIED
+                  luceneQuery: luceneQuery
             description: Alert description
             priority: ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
             type: ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
@@ -5768,6 +6042,11 @@ components:
               minutes: 30
               notifyOn: NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
             name: My Alert
+            dataSources:
+            - dataSpace: dataSpace
+              dataSet: dataSet
+            - dataSpace: dataSpace
+              dataSet: dataSet
             groupByKeys:
             - key1
             - key2
@@ -6108,7 +6387,7 @@ components:
       type: object
     alerts.v3.PaginationResponse:
       example:
-        totalSize: 0
+        totalSize: 6
         nextPageToken: nextPageToken
       properties:
         nextPageToken:
@@ -6214,12 +6493,6 @@ components:
           example: template_example
           type: string
       title: Message config field
-      type: object
-    v3.SetActiveResponse:
-      description: Response after enabling or disabling an alert definition
-      externalDocs:
-        url: ""
-      title: Set active response
       type: object
     v3.SloDefinition:
       description: Configuration for SLO definition
@@ -6344,16 +6617,6 @@ components:
           $ref: "#/components/schemas/AlertDefProperties"
       title: Create alert definition request
       type: object
-    Bulk_replace_alert_definitions_request:
-      additionalProperties: false
-      description: A request to bulk replace multiple alert definitions
-      properties:
-        alertDefsToReplace:
-          items:
-            $ref: "#/components/schemas/AlertDefToReplace"
-          type: array
-      title: Bulk replace alert definitions request
-      type: object
     Filter_option_counts_filter:
       description: Filter configuration for counting filter options
       externalDocs:
@@ -6366,6 +6629,16 @@ components:
         statusFilter: {}
         typeFilter: {}
       title: Filter option counts filter
+      type: object
+    Bulk_replace_alert_definitions_request:
+      additionalProperties: false
+      description: A request to bulk replace multiple alert definitions
+      properties:
+        alertDefsToReplace:
+          items:
+            $ref: "#/components/schemas/AlertDefToReplace"
+          type: array
+      title: Bulk replace alert definitions request
       type: object
   securitySchemes:
     apiKeyAuth:

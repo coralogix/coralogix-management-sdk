@@ -78,13 +78,13 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*Events2MetricsServiceAPI* | [**Events2MetricServiceAtomicBatchExecuteE2M**](docs/Events2MetricsServiceAPI.md#events2metricserviceatomicbatchexecutee2m) | **Post** /events2metrics/events2metrics/v2/batch | Atomic Batch Execute E2M
+*Events2MetricsServiceAPI* | [**Events2MetricServiceAtomicBatchExecuteE2M**](docs/Events2MetricsServiceAPI.md#events2metricserviceatomicbatchexecutee2m) | **Post** /events2metrics/events2metrics/v2/all/execute | Atomic Batch Execute E2M
 *Events2MetricsServiceAPI* | [**Events2MetricServiceCreateE2M**](docs/Events2MetricsServiceAPI.md#events2metricservicecreatee2m) | **Post** /events2metrics/events2metrics/v2 | Create a new E2M
 *Events2MetricsServiceAPI* | [**Events2MetricServiceDeleteE2M**](docs/Events2MetricsServiceAPI.md#events2metricservicedeletee2m) | **Delete** /events2metrics/events2metrics/v2/{id} | Delete an E2M
 *Events2MetricsServiceAPI* | [**Events2MetricServiceGetE2M**](docs/Events2MetricsServiceAPI.md#events2metricservicegete2m) | **Get** /events2metrics/events2metrics/v2/{id} | Get an E2M
-*Events2MetricsServiceAPI* | [**Events2MetricServiceGetLimits**](docs/Events2MetricsServiceAPI.md#events2metricservicegetlimits) | **Get** /events2metrics/events2metrics/v2/limits | Get E2M Limits
+*Events2MetricsServiceAPI* | [**Events2MetricServiceGetLimits**](docs/Events2MetricsServiceAPI.md#events2metricservicegetlimits) | **Get** /events2metrics/limits/v2 | Get E2M Limits
 *Events2MetricsServiceAPI* | [**Events2MetricServiceListE2M**](docs/Events2MetricsServiceAPI.md#events2metricserviceliste2m) | **Get** /events2metrics/events2metrics/v2 | List E2Ms
-*Events2MetricsServiceAPI* | [**Events2MetricServiceListLabelsCardinality**](docs/Events2MetricsServiceAPI.md#events2metricservicelistlabelscardinality) | **Get** /events2metrics/events2metrics/v2/labels:cardinality | List E2M Labels Cardinality
+*Events2MetricsServiceAPI* | [**Events2MetricServiceListLabelsCardinality**](docs/Events2MetricsServiceAPI.md#events2metricservicelistlabelscardinality) | **Get** /events2metrics/labels/v2/cardinalities | List E2M Labels Cardinality
 *Events2MetricsServiceAPI* | [**Events2MetricServiceReplaceE2M**](docs/Events2MetricsServiceAPI.md#events2metricservicereplacee2m) | **Put** /events2metrics/events2metrics/v2 | Replace an E2M
 
 
@@ -135,6 +135,8 @@ Class | Method | HTTP request | Description
  - [ListLabelsCardinalityResponse](docs/ListLabelsCardinalityResponse.md)
  - [Logs2metricsV2Severity](docs/Logs2metricsV2Severity.md)
  - [MetricLabel](docs/MetricLabel.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [ReplaceE2MRequest](docs/ReplaceE2MRequest.md)
  - [ReplaceE2MResponse](docs/ReplaceE2MResponse.md)
@@ -143,6 +145,7 @@ Class | Method | HTTP request | Description
  - [SpansQuery1](docs/SpansQuery1.md)
  - [V2Aggregation](docs/V2Aggregation.md)
  - [V2AggregationHistogram](docs/V2AggregationHistogram.md)
+ - [V2AggregationNone](docs/V2AggregationNone.md)
  - [V2AggregationSamples](docs/V2AggregationSamples.md)
  - [V2LogsQuery](docs/V2LogsQuery.md)
  - [V2MetricField](docs/V2MetricField.md)

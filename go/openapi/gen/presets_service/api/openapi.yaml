@@ -5,6 +5,33 @@ info:
 servers:
 - url: /
 paths:
+  /notifications/notification-center/v1/presets:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: PresetsService_BatchGetPresets
+      parameters:
+      - explode: true
+        in: query
+        name: preset_ids
+        required: false
+        schema:
+          items:
+            example: ""
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchGetPresetsResponse"
+          description: ""
+      summary: Batch Get Presets
+      tags:
+      - Presets service
   /notifications/notification-center/v1/presets/custom:
     post:
       description: No description available
@@ -70,7 +97,7 @@ paths:
       summary: Delete Custom Preset
       tags:
       - Presets service
-  /notifications/notification-center/v1/presets/custom/{id}:defaultSet:
+  /notifications/notification-center/v1/presets/custom/{id}/default:
     post:
       description: No description available
       externalDocs:
@@ -94,82 +121,7 @@ paths:
       summary: Set Custom Preset As Default
       tags:
       - Presets service
-  /notifications/notification-center/v1/presets/{id}:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: PresetsService_GetPreset
-      parameters:
-      - explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetPresetResponse"
-          description: ""
-      summary: Get Preset
-      tags:
-      - Presets service
-  /notifications/notification-center/v1/presets/{id}:defaultSet:
-    post:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: PresetsService_SetPresetAsDefault
-      parameters:
-      - explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SetPresetAsDefaultResponse"
-          description: ""
-      summary: Set Preset As Default
-      tags:
-      - Presets service
-  /notifications/notification-center/v1/presets:batchGet:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: PresetsService_BatchGetPresets
-      parameters:
-      - explode: true
-        in: query
-        name: preset_ids
-        required: false
-        schema:
-          items:
-            example: ""
-            type: string
-          type: array
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BatchGetPresetsResponse"
-          description: ""
-      summary: Batch Get Presets
-      tags:
-      - Presets service
-  /notifications/notification-center/v1/presets:defaultSummaryGet:
+  /notifications/notification-center/v1/presets/summaries:
     get:
       description: No description available
       externalDocs:
@@ -198,6 +150,85 @@ paths:
                 $ref: "#/components/schemas/GetDefaultPresetSummaryResponse"
           description: ""
       summary: Get Default Preset Summary
+      tags:
+      - Presets service
+  /notifications/notification-center/v1/presets/summaries/system:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: PresetsService_GetSystemDefaultPresetSummary
+      parameters:
+      - explode: true
+        in: query
+        name: connector_type
+        required: false
+        schema:
+          $ref: "#/components/schemas/ConnectorType"
+        style: form
+      - explode: true
+        in: query
+        name: entity_type
+        required: false
+        schema:
+          $ref: "#/components/schemas/notification_center.EntityType"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetSystemDefaultPresetSummaryResponse"
+          description: ""
+      summary: Get System Default Preset Summary
+      tags:
+      - Presets service
+  /notifications/notification-center/v1/presets/{id}:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: PresetsService_GetPreset
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetPresetResponse"
+          description: ""
+      summary: Get Preset
+      tags:
+      - Presets service
+  /notifications/notification-center/v1/presets/{id}/default:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: PresetsService_SetPresetAsDefault
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SetPresetAsDefaultResponse"
+          description: ""
+      summary: Set Preset As Default
       tags:
       - Presets service
   /notifications/notification-center/v1/presets:summariesList:
@@ -231,39 +262,21 @@ paths:
       summary: List Preset Summaries
       tags:
       - Presets service
-  /notifications/notification-center/v1/presets:systemDefaultSummaryGet:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: PresetsService_GetSystemDefaultPresetSummary
-      parameters:
-      - explode: true
-        in: query
-        name: connector_type
-        required: false
-        schema:
-          $ref: "#/components/schemas/ConnectorType"
-        style: form
-      - explode: true
-        in: query
-        name: entity_type
-        required: false
-        schema:
-          $ref: "#/components/schemas/notification_center.EntityType"
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetSystemDefaultPresetSummaryResponse"
-          description: ""
-      summary: Get System Default Preset Summary
-      tags:
-      - Presets service
 components:
   schemas:
+    AttachmentConfig:
+      example:
+        policy: AUTO
+      properties:
+        policy:
+          $ref: "#/components/schemas/AttachmentConfigPolicy"
+      type: object
+    AttachmentConfigPolicy:
+      enum:
+      - AUTO
+      - ENABLED
+      - DISABLED
+      type: string
     BatchGetPresetsResponse:
       description: Response containing the requested presets and any IDs not found
       example:
@@ -296,6 +309,8 @@ components:
             entityType: ENTITY_TYPE_UNSPECIFIED
             name: My Preset
             description: Custom preset for alerts
+            attachmentConfig:
+              policy: AUTO
             updateTime: 2000-01-23T04:56:07.000+00:00
             id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
             presetType: PRESET_TYPE_UNSPECIFIED
@@ -389,6 +404,8 @@ components:
           entityType: ENTITY_TYPE_UNSPECIFIED
           name: My Preset
           description: Custom preset for alerts
+          attachmentConfig:
+            policy: AUTO
           updateTime: 2000-01-23T04:56:07.000+00:00
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           presetType: PRESET_TYPE_UNSPECIFIED
@@ -469,6 +486,8 @@ components:
           entityType: ENTITY_TYPE_UNSPECIFIED
           name: My Preset
           description: Custom preset for alerts
+          attachmentConfig:
+            policy: AUTO
           updateTime: 2000-01-23T04:56:07.000+00:00
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           presetType: PRESET_TYPE_UNSPECIFIED
@@ -504,6 +523,8 @@ components:
           entityType: ENTITY_TYPE_UNSPECIFIED
           name: My Preset
           description: Custom preset for alerts
+          attachmentConfig:
+            policy: AUTO
           updateTime: 2000-01-23T04:56:07.000+00:00
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           presetType: PRESET_TYPE_UNSPECIFIED
@@ -520,6 +541,8 @@ components:
           entityType: ENTITY_TYPE_UNSPECIFIED
           name: My Preset
           description: Custom preset for alerts
+          attachmentConfig:
+            policy: AUTO
           updateTime: 2000-01-23T04:56:07.000+00:00
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           presetType: PRESET_TYPE_UNSPECIFIED
@@ -536,6 +559,8 @@ components:
           entityType: ENTITY_TYPE_UNSPECIFIED
           name: My Preset
           description: Custom preset for alerts
+          attachmentConfig:
+            policy: AUTO
           updateTime: 2000-01-23T04:56:07.000+00:00
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           presetType: PRESET_TYPE_UNSPECIFIED
@@ -545,6 +570,8 @@ components:
           entityType: ENTITY_TYPE_UNSPECIFIED
           name: My Preset
           description: Custom preset for alerts
+          attachmentConfig:
+            policy: AUTO
           updateTime: 2000-01-23T04:56:07.000+00:00
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           presetType: PRESET_TYPE_UNSPECIFIED
@@ -574,6 +601,28 @@ components:
           items:
             $ref: "#/components/schemas/notification_center.MessageConfigField"
           type: array
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:
@@ -625,6 +674,8 @@ components:
         entityType: ENTITY_TYPE_UNSPECIFIED
         name: My Preset
         description: Custom preset for alerts
+        attachmentConfig:
+          policy: AUTO
         updateTime: 2000-01-23T04:56:07.000+00:00
         id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
         presetType: PRESET_TYPE_UNSPECIFIED
@@ -633,6 +684,8 @@ components:
         description: Find out more about notification center
         url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
       properties:
+        attachmentConfig:
+          $ref: "#/components/schemas/AttachmentConfig"
         configOverrides:
           items:
             $ref: "#/components/schemas/ConfigOverrides"
@@ -671,6 +724,8 @@ components:
         entityType: ENTITY_TYPE_UNSPECIFIED
         name: My Preset
         description: Custom preset for alerts
+        attachmentConfig:
+          policy: AUTO
         updateTime: 2000-01-23T04:56:07.000+00:00
         id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
         presetType: PRESET_TYPE_UNSPECIFIED
@@ -679,6 +734,8 @@ components:
         description: Find out more about notification center
         url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
       properties:
+        attachmentConfig:
+          $ref: "#/components/schemas/AttachmentConfig"
         connectorType:
           $ref: "#/components/schemas/ConnectorType"
         createTime:
@@ -741,6 +798,8 @@ components:
           entityType: ENTITY_TYPE_UNSPECIFIED
           name: My Preset
           description: Custom preset for alerts
+          attachmentConfig:
+            policy: AUTO
           updateTime: 2000-01-23T04:56:07.000+00:00
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           presetType: PRESET_TYPE_UNSPECIFIED

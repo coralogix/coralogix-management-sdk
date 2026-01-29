@@ -78,11 +78,11 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*DashboardFoldersServiceAPI* | [**DashboardFoldersServiceCreateDashboardFolder**](docs/DashboardFoldersServiceAPI.md#dashboardfoldersservicecreatedashboardfolder) | **Post** /dashboards/dashboards/v1/folders | Create a dashboard folder
-*DashboardFoldersServiceAPI* | [**DashboardFoldersServiceDeleteDashboardFolder**](docs/DashboardFoldersServiceAPI.md#dashboardfoldersservicedeletedashboardfolder) | **Delete** /dashboards/dashboards/v1/folders/{folder_id} | Delete a dashboard folder
-*DashboardFoldersServiceAPI* | [**DashboardFoldersServiceGetDashboardFolder**](docs/DashboardFoldersServiceAPI.md#dashboardfoldersservicegetdashboardfolder) | **Get** /dashboards/dashboards/v1/folders/{folder_id} | Get a dashboard folder
-*DashboardFoldersServiceAPI* | [**DashboardFoldersServiceListDashboardFolders**](docs/DashboardFoldersServiceAPI.md#dashboardfoldersservicelistdashboardfolders) | **Get** /dashboards/dashboards/v1/folders | List dashboard folders
-*DashboardFoldersServiceAPI* | [**DashboardFoldersServiceReplaceDashboardFolder**](docs/DashboardFoldersServiceAPI.md#dashboardfoldersservicereplacedashboardfolder) | **Put** /dashboards/dashboards/v1/folders | Replace a dashboard folder
+*DashboardFoldersServiceAPI* | [**DashboardFoldersServiceCreateDashboardFolder**](docs/DashboardFoldersServiceAPI.md#dashboardfoldersservicecreatedashboardfolder) | **Post** /dashboards/folders/v1 | Create a dashboard folder
+*DashboardFoldersServiceAPI* | [**DashboardFoldersServiceDeleteDashboardFolder**](docs/DashboardFoldersServiceAPI.md#dashboardfoldersservicedeletedashboardfolder) | **Delete** /dashboards/folders/v1/{folder_id} | Delete a dashboard folder
+*DashboardFoldersServiceAPI* | [**DashboardFoldersServiceGetDashboardFolder**](docs/DashboardFoldersServiceAPI.md#dashboardfoldersservicegetdashboardfolder) | **Get** /dashboards/folders/v1/{folder_id} | Get a dashboard folder
+*DashboardFoldersServiceAPI* | [**DashboardFoldersServiceListDashboardFolders**](docs/DashboardFoldersServiceAPI.md#dashboardfoldersservicelistdashboardfolders) | **Get** /dashboards/folders/v1 | List dashboard folders
+*DashboardFoldersServiceAPI* | [**DashboardFoldersServiceReplaceDashboardFolder**](docs/DashboardFoldersServiceAPI.md#dashboardfoldersservicereplacedashboardfolder) | **Put** /dashboards/folders/v1 | Replace a dashboard folder
 
 
 ## Documentation For Models
@@ -102,6 +102,8 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [GetDashboardFolderResponse](docs/GetDashboardFolderResponse.md)
  - [ListDashboardFoldersResponse](docs/ListDashboardFoldersResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [ReplaceDashboardFolderRequestDataStructure](docs/ReplaceDashboardFolderRequestDataStructure.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)

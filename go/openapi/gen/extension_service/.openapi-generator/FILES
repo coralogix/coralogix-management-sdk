@@ -30,11 +30,13 @@ model_get_all_extensions_request_filter.go
 model_get_all_extensions_response.go
 model_get_all_extensions_response_extension.go
 model_get_all_extensions_response_revision.go
+model_get_all_extensions_response_revision_summary.go
 model_integration_detail.go
 model_item_counts.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_permission_resource.go
-model_revision_summary.go
 model_target_domain.go
 model_v1_extension.go
 model_v3_filter_operator.go

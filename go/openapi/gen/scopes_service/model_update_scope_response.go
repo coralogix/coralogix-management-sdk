@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdateScopeResponse{}
 
 // UpdateScopeResponse This data structure represents a response to update a scope
 type UpdateScopeResponse struct {
-	Scope ScopesV1Scope `json:"scope"`
+	Scope V1Scope `json:"scope"`
 }
 
 type _UpdateScopeResponse UpdateScopeResponse
@@ -30,7 +30,7 @@ type _UpdateScopeResponse UpdateScopeResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateScopeResponse(scope ScopesV1Scope) *UpdateScopeResponse {
+func NewUpdateScopeResponse(scope V1Scope) *UpdateScopeResponse {
 	this := UpdateScopeResponse{}
 	this.Scope = scope
 	return &this
@@ -45,9 +45,9 @@ func NewUpdateScopeResponseWithDefaults() *UpdateScopeResponse {
 }
 
 // GetScope returns the Scope field value
-func (o *UpdateScopeResponse) GetScope() ScopesV1Scope {
+func (o *UpdateScopeResponse) GetScope() V1Scope {
 	if o == nil {
-		var ret ScopesV1Scope
+		var ret V1Scope
 		return ret
 	}
 
@@ -56,7 +56,7 @@ func (o *UpdateScopeResponse) GetScope() ScopesV1Scope {
 
 // GetScopeOk returns a tuple with the Scope field value
 // and a boolean to check if the value has been set.
-func (o *UpdateScopeResponse) GetScopeOk() (*ScopesV1Scope, bool) {
+func (o *UpdateScopeResponse) GetScopeOk() (*V1Scope, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,7 +64,7 @@ func (o *UpdateScopeResponse) GetScopeOk() (*ScopesV1Scope, bool) {
 }
 
 // SetScope sets field value
-func (o *UpdateScopeResponse) SetScope(v ScopesV1Scope) {
+func (o *UpdateScopeResponse) SetScope(v V1Scope) {
 	o.Scope = v
 }
 

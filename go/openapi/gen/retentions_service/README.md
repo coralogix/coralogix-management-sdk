@@ -100,6 +100,8 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [GetRetentionsEnabledResponse](docs/GetRetentionsEnabledResponse.md)
  - [GetRetentionsResponse](docs/GetRetentionsResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [RetentionUpdateElement](docs/RetentionUpdateElement.md)
  - [UpdateRetentionsRequest](docs/UpdateRetentionsRequest.md)

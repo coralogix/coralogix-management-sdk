@@ -19,7 +19,7 @@ var _ MappedNullable = &ListSystemRolesResponse{}
 
 // ListSystemRolesResponse struct for ListSystemRolesResponse
 type ListSystemRolesResponse struct {
-	Roles []V2SystemRole `json:"roles,omitempty"`
+	Roles []SystemRole `json:"roles,omitempty"`
 }
 
 // NewListSystemRolesResponse instantiates a new ListSystemRolesResponse object
@@ -40,9 +40,9 @@ func NewListSystemRolesResponseWithDefaults() *ListSystemRolesResponse {
 }
 
 // GetRoles returns the Roles field value if set, zero value otherwise.
-func (o *ListSystemRolesResponse) GetRoles() []V2SystemRole {
+func (o *ListSystemRolesResponse) GetRoles() []SystemRole {
 	if o == nil || IsNil(o.Roles) {
-		var ret []V2SystemRole
+		var ret []SystemRole
 		return ret
 	}
 	return o.Roles
@@ -50,7 +50,7 @@ func (o *ListSystemRolesResponse) GetRoles() []V2SystemRole {
 
 // GetRolesOk returns a tuple with the Roles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListSystemRolesResponse) GetRolesOk() ([]V2SystemRole, bool) {
+func (o *ListSystemRolesResponse) GetRolesOk() ([]SystemRole, bool) {
 	if o == nil || IsNil(o.Roles) {
 		return nil, false
 	}
@@ -66,8 +66,8 @@ func (o *ListSystemRolesResponse) HasRoles() bool {
 	return false
 }
 
-// SetRoles gets a reference to the given []V2SystemRole and assigns it to the Roles field.
-func (o *ListSystemRolesResponse) SetRoles(v []V2SystemRole) {
+// SetRoles gets a reference to the given []SystemRole and assigns it to the Roles field.
+func (o *ListSystemRolesResponse) SetRoles(v []SystemRole) {
 	o.Roles = v
 }
 

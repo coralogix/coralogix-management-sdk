@@ -78,7 +78,7 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ExtensionServiceAPI* | [**ExtensionServiceGetAllExtensions**](docs/ExtensionServiceAPI.md#extensionservicegetallextensions) | **Post** /integrations/extensions/v1/all | Get all extensions
+*ExtensionServiceAPI* | [**ExtensionServiceGetAllExtensions**](docs/ExtensionServiceAPI.md#extensionservicegetallextensions) | **Post** /integrations/extensions/v1 | Get all extensions
 *ExtensionServiceAPI* | [**ExtensionServiceGetExtension**](docs/ExtensionServiceAPI.md#extensionservicegetextension) | **Get** /integrations/extensions/v1/{id} | Get extension by ID
 
 
@@ -107,11 +107,13 @@ Class | Method | HTTP request | Description
  - [GetAllExtensionsResponse](docs/GetAllExtensionsResponse.md)
  - [GetAllExtensionsResponseExtension](docs/GetAllExtensionsResponseExtension.md)
  - [GetAllExtensionsResponseRevision](docs/GetAllExtensionsResponseRevision.md)
+ - [GetAllExtensionsResponseRevisionSummary](docs/GetAllExtensionsResponseRevisionSummary.md)
  - [IntegrationDetail](docs/IntegrationDetail.md)
  - [ItemCounts](docs/ItemCounts.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [PermissionResource](docs/PermissionResource.md)
- - [RevisionSummary](docs/RevisionSummary.md)
  - [TargetDomain](docs/TargetDomain.md)
  - [V1Extension](docs/V1Extension.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)

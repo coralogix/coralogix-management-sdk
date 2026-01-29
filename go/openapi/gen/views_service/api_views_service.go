@@ -68,7 +68,7 @@ func (a *ViewsServiceAPIService) ViewsServiceCreateViewExecute(r ApiViewsService
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/data-exploration/saved-views/v1"
+	localVarPath := localBasePath + "/data-exploration/views/v1/views"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -172,7 +172,7 @@ func (a *ViewsServiceAPIService) ViewsServiceDeleteViewExecute(r ApiViewsService
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/data-exploration/saved-views/v1/{id}"
+	localVarPath := localBasePath + "/data-exploration/views/v1/views/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -275,7 +275,7 @@ func (a *ViewsServiceAPIService) ViewsServiceGetViewExecute(r ApiViewsServiceGet
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/data-exploration/saved-views/v1/{id}"
+	localVarPath := localBasePath + "/data-exploration/views/v1/views/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -375,7 +375,7 @@ func (a *ViewsServiceAPIService) ViewsServiceListViewsExecute(r ApiViewsServiceL
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/data-exploration/saved-views/v1"
+	localVarPath := localBasePath + "/data-exploration/views/v1/views"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -483,7 +483,7 @@ func (a *ViewsServiceAPIService) ViewsServiceReplaceViewExecute(r ApiViewsServic
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/data-exploration/saved-views/v1/{id}"
+	localVarPath := localBasePath + "/data-exploration/views/v1/views/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)

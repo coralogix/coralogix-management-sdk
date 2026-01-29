@@ -78,26 +78,22 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*PoliciesServiceAPI* | [**PoliciesServiceAtomicBatchCreatePolicy**](docs/PoliciesServiceAPI.md#policiesserviceatomicbatchcreatepolicy) | **Post** /dataplans/policies/v1/bulkCreate | Atomic Batch Create Policy
-*PoliciesServiceAPI* | [**PoliciesServiceAtomicOverwriteLogPolicies**](docs/PoliciesServiceAPI.md#policiesserviceatomicoverwritelogpolicies) | **Post** /dataplans/policies/v1/atomicOverwriteLogPolicies | Atomic Overwrite Log Policies
-*PoliciesServiceAPI* | [**PoliciesServiceAtomicOverwriteSpanPolicies**](docs/PoliciesServiceAPI.md#policiesserviceatomicoverwritespanpolicies) | **Post** /dataplans/policies/v1/atomicOverwriteSpanPolicies | Atomic Overwrite Span Policies
-*PoliciesServiceAPI* | [**PoliciesServiceBulkTestLogPolicies**](docs/PoliciesServiceAPI.md#policiesservicebulktestlogpolicies) | **Post** /dataplans/policies/v1/bulkTestLog | Bulk Test Log Policies
+*PoliciesServiceAPI* | [**PoliciesServiceAtomicOverwriteLogPolicies**](docs/PoliciesServiceAPI.md#policiesserviceatomicoverwritelogpolicies) | **Put** /dataplans/log-policies/v1 | Atomic Overwrite Log Policies
+*PoliciesServiceAPI* | [**PoliciesServiceAtomicOverwriteSpanPolicies**](docs/PoliciesServiceAPI.md#policiesserviceatomicoverwritespanpolicies) | **Put** /dataplans/span-policies/v1 | Atomic Overwrite Span Policies
+*PoliciesServiceAPI* | [**PoliciesServiceBulkTestLogPolicies**](docs/PoliciesServiceAPI.md#policiesservicebulktestlogpolicies) | **Post** /dataplans/policies/v1/all/test-policies | Bulk Test Log Policies
 *PoliciesServiceAPI* | [**PoliciesServiceCreatePolicy**](docs/PoliciesServiceAPI.md#policiesservicecreatepolicy) | **Post** /dataplans/policies/v1 | Create Policy
 *PoliciesServiceAPI* | [**PoliciesServiceDeletePolicy**](docs/PoliciesServiceAPI.md#policiesservicedeletepolicy) | **Delete** /dataplans/policies/v1/{id} | Delete Policy
 *PoliciesServiceAPI* | [**PoliciesServiceGetCompanyPolicies**](docs/PoliciesServiceAPI.md#policiesservicegetcompanypolicies) | **Get** /dataplans/policies/v1 | Get Company Policies
 *PoliciesServiceAPI* | [**PoliciesServiceGetPolicy**](docs/PoliciesServiceAPI.md#policiesservicegetpolicy) | **Get** /dataplans/policies/v1/{id} | Get Policy by ID
-*PoliciesServiceAPI* | [**PoliciesServiceGetPolicySettings**](docs/PoliciesServiceAPI.md#policiesservicegetpolicysettings) | **Get** /dataplans/policies/v1/getPolicyPrioritySettings | Get Policy Priority Settings
-*PoliciesServiceAPI* | [**PoliciesServiceReorderPolicies**](docs/PoliciesServiceAPI.md#policiesservicereorderpolicies) | **Post** /dataplans/policies/v1/reorder | Reorder Policies
-*PoliciesServiceAPI* | [**PoliciesServiceReplacePolicySettings**](docs/PoliciesServiceAPI.md#policiesservicereplacepolicysettings) | **Post** /dataplans/policies/v1/replacePolicySettings | Replace Policy Settings
-*PoliciesServiceAPI* | [**PoliciesServiceTogglePolicy**](docs/PoliciesServiceAPI.md#policiesservicetogglepolicy) | **Post** /dataplans/policies/v1/toggle | Toggle Policies
+*PoliciesServiceAPI* | [**PoliciesServiceGetPolicySettings**](docs/PoliciesServiceAPI.md#policiesservicegetpolicysettings) | **Get** /dataplans/policy-settings/v1 | Get Policy Priority Settings
+*PoliciesServiceAPI* | [**PoliciesServiceReorderPolicies**](docs/PoliciesServiceAPI.md#policiesservicereorderpolicies) | **Post** /dataplans/policies/v1/all/reorder | Reorder Policies
+*PoliciesServiceAPI* | [**PoliciesServiceReplacePolicySettings**](docs/PoliciesServiceAPI.md#policiesservicereplacepolicysettings) | **Post** /dataplans/policiy-settings/v1 | Replace Policy Settings
 *PoliciesServiceAPI* | [**PoliciesServiceUpdatePolicy**](docs/PoliciesServiceAPI.md#policiesserviceupdatepolicy) | **Put** /dataplans/policies/v1 | Update Policy
 
 
 ## Documentation For Models
 
  - [ArchiveRetention](docs/ArchiveRetention.md)
- - [AtomicBatchCreatePolicyRequest](docs/AtomicBatchCreatePolicyRequest.md)
- - [AtomicBatchCreatePolicyResponse](docs/AtomicBatchCreatePolicyResponse.md)
  - [AtomicOverwriteLogPoliciesRequest](docs/AtomicOverwriteLogPoliciesRequest.md)
  - [AtomicOverwriteLogPoliciesResponse](docs/AtomicOverwriteLogPoliciesResponse.md)
  - [AtomicOverwriteSpanPoliciesRequest](docs/AtomicOverwriteSpanPoliciesRequest.md)
@@ -110,7 +106,6 @@ Class | Method | HTTP request | Description
  - [CommonGroup](docs/CommonGroup.md)
  - [CreateGenericPolicyRequest](docs/CreateGenericPolicyRequest.md)
  - [CreateLogPolicyRequest](docs/CreateLogPolicyRequest.md)
- - [CreatePolicyRequest](docs/CreatePolicyRequest.md)
  - [CreatePolicyRequestLogRules](docs/CreatePolicyRequestLogRules.md)
  - [CreatePolicyRequestSpanRules](docs/CreatePolicyRequestSpanRules.md)
  - [CreatePolicyResponse](docs/CreatePolicyResponse.md)
@@ -128,12 +123,13 @@ Class | Method | HTTP request | Description
  - [LogMetaFieldsValues](docs/LogMetaFieldsValues.md)
  - [LogRules](docs/LogRules.md)
  - [LogsPolicySettings](docs/LogsPolicySettings.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [Placement](docs/Placement.md)
  - [PlacementFirst](docs/PlacementFirst.md)
  - [PlacementLast](docs/PlacementLast.md)
  - [PoliciesServiceCreatePolicyRequest](docs/PoliciesServiceCreatePolicyRequest.md)
- - [PoliciesServiceReplacePolicySettingsRequest](docs/PoliciesServiceReplacePolicySettingsRequest.md)
  - [PoliciesServiceUpdatePolicyRequest](docs/PoliciesServiceUpdatePolicyRequest.md)
  - [Policy](docs/Policy.md)
  - [PolicyLogRules](docs/PolicyLogRules.md)
@@ -144,14 +140,13 @@ Class | Method | HTTP request | Description
  - [QuotaV1Severity](docs/QuotaV1Severity.md)
  - [ReorderPoliciesRequest](docs/ReorderPoliciesRequest.md)
  - [ReorderPoliciesResponse](docs/ReorderPoliciesResponse.md)
+ - [ReplacePolicySettingsRequest](docs/ReplacePolicySettingsRequest.md)
  - [ReplacePolicySettingsResponse](docs/ReplacePolicySettingsResponse.md)
  - [RuleTypeId](docs/RuleTypeId.md)
  - [SpanRules](docs/SpanRules.md)
  - [SpansPolicySettings](docs/SpansPolicySettings.md)
  - [TagRule](docs/TagRule.md)
  - [TestPoliciesResult](docs/TestPoliciesResult.md)
- - [TogglePolicyRequest](docs/TogglePolicyRequest.md)
- - [TogglePolicyResponse](docs/TogglePolicyResponse.md)
  - [UpdatePolicyRequestLogRules](docs/UpdatePolicyRequestLogRules.md)
  - [UpdatePolicyRequestSpanRules](docs/UpdatePolicyRequestSpanRules.md)
  - [UpdatePolicyResponse](docs/UpdatePolicyResponse.md)

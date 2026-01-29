@@ -78,13 +78,13 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ActionsServiceAPI* | [**ActionsServiceAtomicBatchExecuteActions**](docs/ActionsServiceAPI.md#actionsserviceatomicbatchexecuteactions) | **Post** /v2/actions/actions:atomicBatchExecute | Atomic Batch Execute Actions
-*ActionsServiceAPI* | [**ActionsServiceCreateAction**](docs/ActionsServiceAPI.md#actionsservicecreateaction) | **Post** /v2/actions | Create Action
-*ActionsServiceAPI* | [**ActionsServiceDeleteAction**](docs/ActionsServiceAPI.md#actionsservicedeleteaction) | **Delete** /v2/actions/{id} | Delete Action
-*ActionsServiceAPI* | [**ActionsServiceGetAction**](docs/ActionsServiceAPI.md#actionsservicegetaction) | **Get** /v2/actions/{id} | Get Action
-*ActionsServiceAPI* | [**ActionsServiceListActions**](docs/ActionsServiceAPI.md#actionsservicelistactions) | **Get** /v2/actions | List Actions
-*ActionsServiceAPI* | [**ActionsServiceOrderActions**](docs/ActionsServiceAPI.md#actionsserviceorderactions) | **Post** /v2/actions/actions:order | Order Actions
-*ActionsServiceAPI* | [**ActionsServiceReplaceAction**](docs/ActionsServiceAPI.md#actionsservicereplaceaction) | **Put** /v2/actions | Replace Action
+*ActionsServiceAPI* | [**ActionsServiceAtomicBatchExecuteActions**](docs/ActionsServiceAPI.md#actionsserviceatomicbatchexecuteactions) | **Post** /actions/batch/v2 | Atomic Batch Execute Actions
+*ActionsServiceAPI* | [**ActionsServiceCreateAction**](docs/ActionsServiceAPI.md#actionsservicecreateaction) | **Post** /actions/actions/v2 | Create Action
+*ActionsServiceAPI* | [**ActionsServiceDeleteAction**](docs/ActionsServiceAPI.md#actionsservicedeleteaction) | **Delete** /actions/actions/v2/{id} | Delete Action
+*ActionsServiceAPI* | [**ActionsServiceGetAction**](docs/ActionsServiceAPI.md#actionsservicegetaction) | **Get** /actions/actions/v2/{id} | Get Action
+*ActionsServiceAPI* | [**ActionsServiceListActions**](docs/ActionsServiceAPI.md#actionsservicelistactions) | **Get** /actions/actions/v2 | List Actions
+*ActionsServiceAPI* | [**ActionsServiceOrderActions**](docs/ActionsServiceAPI.md#actionsserviceorderactions) | **Post** /actions/order/v2 | Order Actions
+*ActionsServiceAPI* | [**ActionsServiceReplaceAction**](docs/ActionsServiceAPI.md#actionsservicereplaceaction) | **Put** /actions/actions/v2 | Replace Action
 
 
 ## Documentation For Models
@@ -117,6 +117,8 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [GetActionResponse](docs/GetActionResponse.md)
  - [ListActionsResponse](docs/ListActionsResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [ReplaceActionRequest](docs/ReplaceActionRequest.md)
  - [ReplaceActionResponse](docs/ReplaceActionResponse.md)

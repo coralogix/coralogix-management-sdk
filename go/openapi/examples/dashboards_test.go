@@ -40,13 +40,13 @@ func TestDashboards(t *testing.T) {
 	// We use specific dashboard type here because the client can't determine
 	// the type automatically when unmarshaling from JSON.
 	// Exact error: data matches more than one schema in oneOf(Dashboard).
-	var dashboard dashboards.DashboardOffFolderIdRelativeTimeFrame
+	var dashboard dashboards.DashboardOffRelativeTimeFrame
 	err = json.Unmarshal(data, &dashboard)
 	require.NoError(t, err)
 
 	req := dashboards.CreateDashboardRequestDataStructure{
 		Dashboard: dashboards.Dashboard{
-			DashboardOffFolderIdRelativeTimeFrame: &dashboard,
+			DashboardOffRelativeTimeFrame: &dashboard,
 		},
 	}
 	created, httpResp, err := client.
@@ -60,13 +60,11 @@ func TestDashboards(t *testing.T) {
 
 	_, httpResp, err = client.
 		DashboardsServicePinDashboard(context.Background(), dashboardID).
-		PinDashboardRequestDataStructure(dashboards.PinDashboardRequestDataStructure{}).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = client.
 		DashboardsServiceUnpinDashboard(context.Background(), dashboardID).
-		UnpinDashboardRequestDataStructure(dashboards.UnpinDashboardRequestDataStructure{}).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
@@ -95,16 +93,15 @@ func TestDashboardFolders(t *testing.T) {
 	client := cxsdk.NewDashboardFoldersClient(cfg)
 
 	id := uuid.New().String()
-
-	createReq := dashboardfolders.CreateDashboardFolderRequestDataStructure{
-		Folder: &dashboardfolders.DashboardFolder{
-			Id:   dashboardfolders.PtrString(id),
-			Name: dashboardfolders.PtrString(id),
-		},
+	folder := dashboardfolders.DashboardFolder{
+		Id:   dashboardfolders.PtrString(id),
+		Name: dashboardfolders.PtrString(id),
+	}
+	createDashboardFolderRequest := dashboardfolders.CreateDashboardFolderRequestDataStructure{
+		Folder: &folder,
 	}
 	_, httpResp, err := client.
-		DashboardFoldersServiceCreateDashboardFolder(context.Background()).
-		CreateDashboardFolderRequestDataStructure(createReq).
+		DashboardFoldersServiceCreateDashboardFolder(context.Background()).CreateDashboardFolderRequestDataStructure(createDashboardFolderRequest).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 

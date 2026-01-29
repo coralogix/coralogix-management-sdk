@@ -375,7 +375,7 @@ func (a *APIKeysServiceAPIService) ApiKeysServiceGetSendDataApiKeysExecute(r Api
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/aaa/api-keys/v3/send_data"
+	localVarPath := localBasePath + "/aaa/send-data-keys/v3"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

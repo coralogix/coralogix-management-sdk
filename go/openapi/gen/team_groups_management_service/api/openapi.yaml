@@ -1,0 +1,1088 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /aaa/team-groups/v2:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: GroupsMgmtService_GetTeamGroups
+      parameters:
+      - explode: true
+        in: query
+        name: team_id
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
+          example: ""
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetTeamGroupsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Team Groups
+      tags:
+      - Team Groups Management Service
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: GroupsMgmtService_CreateTeamGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTeamGroupRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateTeamGroupResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "409":
+          content:
+            application/json: {}
+          description: Team group already exists
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Create Team Group
+      tags:
+      - Team Groups Management Service
+  /aaa/team-groups/v2/id/{group_id}:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: GroupsMgmtService_GetTeamGroup
+      parameters:
+      - explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetTeamGroupResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "404":
+          content:
+            application/json: {}
+          description: Team group not found
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Team Group
+      tags:
+      - Team Groups Management Service
+  /aaa/team-groups/v2/name/{name}:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: GroupsMgmtService_GetTeamGroupByName
+      parameters:
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetTeamGroupByNameResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "404":
+          content:
+            application/json: {}
+          description: Team group not found
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Team Group By Name
+      tags:
+      - Team Groups Management Service
+  /aaa/team-groups/v2/{group_id}:
+    delete:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: GroupsMgmtService_DeleteTeamGroup
+      parameters:
+      - explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteTeamGroupResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "404":
+          content:
+            application/json: {}
+          description: Team group not found
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Delete Team Group
+      tags:
+      - Team Groups Management Service
+    put:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: GroupsMgmtService_UpdateTeamGroup
+      parameters:
+      - explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTeamGroupRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateTeamGroupResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "404":
+          content:
+            application/json: {}
+          description: Team group not found
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Update Team Group
+      tags:
+      - Team Groups Management Service
+  /aaa/team-groups/v2/{group_id}/users:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: GroupsMgmtService_GetGroupUsers
+      parameters:
+      - explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
+          example: ""
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetGroupUsersResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "404":
+          content:
+            application/json: {}
+          description: Team group not found
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Group Users
+      tags:
+      - Team Groups Management Service
+components:
+  schemas:
+    ClearRole:
+      properties:
+        clear:
+          type: boolean
+      type: object
+    ClearScope:
+      properties:
+        clear:
+          type: boolean
+      type: object
+    ColorsByAggregation:
+      additionalProperties: false
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ColorsByAggregation"
+      type: object
+    ColorsByGroupBy:
+      additionalProperties: false
+      properties:
+        groupBy:
+          $ref: "#/components/schemas/ColorsByGroupBy"
+      type: object
+    ColorsByStack:
+      additionalProperties: false
+      properties:
+        stack:
+          $ref: "#/components/schemas/ColorsByStack"
+      type: object
+    CreateTeamGroupResponse:
+      description: Response containing the newly created team group.
+      example:
+        group:
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          groupType: GROUP_TYPE_UNSPECIFIED
+          role:
+            roleId: 6
+            name: name
+            description: description
+          groupId: 0
+          scope:
+            scopeId: scopeId
+          teamId: 1
+          name: name
+          description: description
+          externalId: externalId
+          groupOrigin: GROUP_ORIGIN_UNSPECIFIED
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        description: Find out more about groups
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
+      properties:
+        group:
+          $ref: "#/components/schemas/TeamGroup"
+      title: CreateTeamGroupResponse
+      type: object
+    DeleteTeamGroupResponse:
+      description: Response confirming the successful deletion of a team group and
+        its associated configurations.
+      example:
+        groupId: 0
+      externalDocs:
+        description: Find out more about groups
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
+      properties:
+        groupId:
+          format: int64
+          type: integer
+      title: DeleteTeamGroupResponse
+      type: object
+    FieldGroup:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    GetGroupUsersResponse:
+      description: Response containing the list of all users currently assigned to
+        the requested team group.
+      example:
+        nextPageToken: nextPageToken
+        totalCount: 0
+        users:
+        - firstName: firstName
+          lastName: lastName
+          userAccountId: 6
+          userId: userId
+          status: USER_STATUS_UNSPECIFIED
+          username: username
+        - firstName: firstName
+          lastName: lastName
+          userAccountId: 6
+          userId: userId
+          status: USER_STATUS_UNSPECIFIED
+          username: username
+      externalDocs:
+        description: Find out more about groups
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
+      properties:
+        nextPageToken:
+          type: string
+        totalCount:
+          format: int64
+          type: integer
+        users:
+          items:
+            $ref: "#/components/schemas/rbac.v2.User"
+          type: array
+      title: GetGroupUsersResponse
+      type: object
+    GetTeamGroupByNameResponse:
+      description: "Response containing the complete details of a team group that\
+        \ matches the requested name, including its members, roles, and scope settings."
+      example:
+        group:
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          groupType: GROUP_TYPE_UNSPECIFIED
+          role:
+            roleId: 6
+            name: name
+            description: description
+          groupId: 0
+          scope:
+            scopeId: scopeId
+          teamId: 1
+          name: name
+          description: description
+          externalId: externalId
+          groupOrigin: GROUP_ORIGIN_UNSPECIFIED
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        description: Find out more about groups
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
+      properties:
+        group:
+          $ref: "#/components/schemas/TeamGroup"
+      title: GetTeamGroupByNameResponse
+      type: object
+    GetTeamGroupResponse:
+      description: "Response containing the complete details of a requested team group,\
+        \ including its members, assigned roles, and scope configuration."
+      example:
+        group:
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          groupType: GROUP_TYPE_UNSPECIFIED
+          role:
+            roleId: 6
+            name: name
+            description: description
+          groupId: 0
+          scope:
+            scopeId: scopeId
+          teamId: 1
+          name: name
+          description: description
+          externalId: externalId
+          groupOrigin: GROUP_ORIGIN_UNSPECIFIED
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        description: Find out more about groups
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
+      properties:
+        group:
+          $ref: "#/components/schemas/TeamGroup"
+      title: GetTeamGroupResponse
+      type: object
+    GetTeamGroupsResponse:
+      description: Response containing a paginated list of team groups.
+      example:
+        nextPageToken: nextPageToken
+        groups:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          groupType: GROUP_TYPE_UNSPECIFIED
+          role:
+            roleId: 6
+            name: name
+            description: description
+          groupId: 0
+          scope:
+            scopeId: scopeId
+          teamId: 1
+          name: name
+          description: description
+          externalId: externalId
+          groupOrigin: GROUP_ORIGIN_UNSPECIFIED
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          groupType: GROUP_TYPE_UNSPECIFIED
+          role:
+            roleId: 6
+            name: name
+            description: description
+          groupId: 0
+          scope:
+            scopeId: scopeId
+          teamId: 1
+          name: name
+          description: description
+          externalId: externalId
+          groupOrigin: GROUP_ORIGIN_UNSPECIFIED
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        totalCount: 5
+      externalDocs:
+        description: Find out more about groups
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
+      properties:
+        groups:
+          items:
+            $ref: "#/components/schemas/TeamGroup"
+          type: array
+        nextPageToken:
+          type: string
+        totalCount:
+          format: int64
+          type: integer
+      title: GetTeamGroupsResponse
+      type: object
+    GroupOrigin:
+      enum:
+      - GROUP_ORIGIN_UNSPECIFIED
+      - GROUP_ORIGIN_BUILT_IN
+      - GROUP_ORIGIN_USER_DEFINED
+      type: string
+    GroupType:
+      enum:
+      - GROUP_TYPE_UNSPECIFIED
+      - GROUP_TYPE_OPEN
+      - GROUP_TYPE_CLOSED
+      - GROUP_TYPE_RESTRICTED
+      type: string
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    Role:
+      description: A role that can be assigned to a group. Each role has a collection
+        of permissions associated with it.
+      example:
+        roleId: 6
+        name: name
+        description: description
+      externalDocs:
+        url: ""
+      properties:
+        description:
+          description: Role description
+          type: string
+        name:
+          description: Unique role name
+          type: string
+        roleId:
+          description: Unique role identifier
+          format: int64
+          type: integer
+      title: Role
+      type: object
+    RoleUpdate:
+      description: Update the role assigned to the group. Either set a new role or
+        clear the existing one.
+      example:
+        action:
+          setRoleId:
+            value: 0
+          actionType: actionType
+      externalDocs:
+        description: Find out more about groups
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
+      properties:
+        action:
+          $ref: "#/components/schemas/RoleUpdateAction"
+      title: RoleUpdate
+      type: object
+    RoleUpdateAction:
+      oneOf:
+      - $ref: "#/components/schemas/RoleUpdateActionSetRoleId"
+      - $ref: "#/components/schemas/RoleUpdateActionClear"
+    RoleUpdateActionClear:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        actionType:
+          type: string
+        clear:
+          $ref: "#/components/schemas/ClearRole"
+      required:
+      - actionType
+      type: object
+    RoleUpdateActionSetRoleId:
+      additionalProperties: false
+      example:
+        setRoleId:
+          value: 0
+        actionType: actionType
+      externalDocs:
+        url: ""
+      properties:
+        actionType:
+          type: string
+        setRoleId:
+          $ref: "#/components/schemas/SetRoleId"
+      required:
+      - actionType
+      type: object
+    ScopeUpdate:
+      description: Update the scope assigned to the group. Either reference an existing
+        scope by ID or clear the scope.
+      example:
+        action:
+          actionType: actionType
+          setScopeId:
+            value: value
+      externalDocs:
+        description: Find out more about scopes
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/scopes/
+      properties:
+        action:
+          $ref: "#/components/schemas/ScopeUpdateAction"
+      title: ScopeUpdate
+      type: object
+    ScopeUpdateAction:
+      oneOf:
+      - $ref: "#/components/schemas/ScopeUpdateActionSetScopeId"
+      - $ref: "#/components/schemas/ScopeUpdateActionClear"
+    ScopeUpdateActionClear:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        actionType:
+          type: string
+        clear:
+          $ref: "#/components/schemas/ClearScope"
+      required:
+      - actionType
+      type: object
+    ScopeUpdateActionSetScopeId:
+      additionalProperties: false
+      example:
+        actionType: actionType
+        setScopeId:
+          value: value
+      externalDocs:
+        url: ""
+      properties:
+        actionType:
+          type: string
+        setScopeId:
+          $ref: "#/components/schemas/SetScopeId"
+      required:
+      - actionType
+      type: object
+    SetRoleId:
+      example:
+        value: 0
+      properties:
+        value:
+          format: int64
+          type: integer
+      type: object
+    SetScopeId:
+      example:
+        value: value
+      properties:
+        value:
+          type: string
+      type: object
+    TeamGroup:
+      description: A Team Group entity.
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        groupType: GROUP_TYPE_UNSPECIFIED
+        role:
+          roleId: 6
+          name: name
+          description: description
+        groupId: 0
+        scope:
+          scopeId: scopeId
+        teamId: 1
+        name: name
+        description: description
+        externalId: externalId
+        groupOrigin: GROUP_ORIGIN_UNSPECIFIED
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        description:
+          description: Group description
+          type: string
+        externalId:
+          description: Group external identifier. Applies if team is externally defined.
+          type: string
+        groupId:
+          description: Unique team group identifier
+          format: int64
+          type: integer
+        groupOrigin:
+          $ref: "#/components/schemas/GroupOrigin"
+        groupType:
+          $ref: "#/components/schemas/GroupType"
+        name:
+          description: Unique name
+          type: string
+        role:
+          $ref: "#/components/schemas/Role"
+        scope:
+          $ref: "#/components/schemas/v2.Scope"
+        teamId:
+          description: Team this group belongs to
+          format: int64
+          type: integer
+        updatedAt:
+          format: date-time
+          type: string
+      title: TeamGroup
+      type: object
+    UpdateTeamGroupResponse:
+      description: Response containing the updated team group.
+      example:
+        group:
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          groupType: GROUP_TYPE_UNSPECIFIED
+          role:
+            roleId: 6
+            name: name
+            description: description
+          groupId: 0
+          scope:
+            scopeId: scopeId
+          teamId: 1
+          name: name
+          description: description
+          externalId: externalId
+          groupOrigin: GROUP_ORIGIN_UNSPECIFIED
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        description: Find out more about groups
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
+      properties:
+        group:
+          $ref: "#/components/schemas/TeamGroup"
+      title: UpdateTeamGroupResponse
+      type: object
+    UserIdList:
+      example:
+        userIds:
+        - userIds
+        - userIds
+      properties:
+        userIds:
+          items:
+            type: string
+          type: array
+      type: object
+    UserStatus:
+      enum:
+      - USER_STATUS_UNSPECIFIED
+      - USER_STATUS_ACTIVE
+      - USER_STATUS_INACTIVE
+      type: string
+    UserUpdates:
+      description: "Patch object for updating group user membership. Choose one operation:\
+        \ add, remove, or replace all users."
+      example:
+        operation:
+          add:
+            userIds:
+            - userIds
+            - userIds
+          operationType: operationType
+      externalDocs:
+        description: Find out more about groups
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
+      properties:
+        operation:
+          $ref: "#/components/schemas/UserUpdatesOperation"
+      title: UserUpdates
+      type: object
+    UserUpdatesOperation:
+      oneOf:
+      - $ref: "#/components/schemas/UserUpdatesOperationAdd"
+      - $ref: "#/components/schemas/UserUpdatesOperationRemove"
+      - $ref: "#/components/schemas/UserUpdatesOperationSet"
+    UserUpdatesOperationAdd:
+      additionalProperties: false
+      example:
+        add:
+          userIds:
+          - userIds
+          - userIds
+        operationType: operationType
+      externalDocs:
+        url: ""
+      properties:
+        add:
+          $ref: "#/components/schemas/UserIdList"
+        operationType:
+          type: string
+      required:
+      - operationType
+      type: object
+    UserUpdatesOperationRemove:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        operationType:
+          type: string
+        remove:
+          $ref: "#/components/schemas/UserIdList"
+      required:
+      - operationType
+      type: object
+    UserUpdatesOperationSet:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        operationType:
+          type: string
+        set:
+          $ref: "#/components/schemas/UserIdList"
+      required:
+      - operationType
+      type: object
+    common.Group:
+      properties:
+        field:
+          $ref: "#/components/schemas/FieldGroup"
+        groups:
+          items:
+            $ref: "#/components/schemas/common.Group"
+          type: array
+        value:
+          format: double
+          type: number
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    rbac.v2.User:
+      description: A user is an entity that is always part of a team and has an account
+        associated with it
+      example:
+        firstName: firstName
+        lastName: lastName
+        userAccountId: 6
+        userId: userId
+        status: USER_STATUS_UNSPECIFIED
+        username: username
+      externalDocs:
+        url: ""
+      properties:
+        firstName:
+          description: User first name
+          type: string
+        lastName:
+          description: User last name
+          type: string
+        status:
+          $ref: "#/components/schemas/UserStatus"
+        userAccountId:
+          description: Associated account id. An account can have many users.
+          format: int64
+          type: integer
+        userId:
+          description: Unique user id
+          type: string
+        username:
+          description: Unique username
+          type: string
+      title: User
+      type: object
+    v2.Scope:
+      description: Scope assignment for a group. References an existing scope by ID.
+        Scopes can be created via the Scopes API.
+      example:
+        scopeId: scopeId
+      externalDocs:
+        description: Find out more about scopes
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/scopes/
+      properties:
+        scopeId:
+          description: Reference to an existing scope by ID
+          type: string
+      title: Scope
+      type: object
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    CreateTeamGroupRequest:
+      additionalProperties: false
+      description: "Request to create a new team group with specified name, description,\
+        \ roles, users, and optional scope filters. Can be associated with a specific\
+        \ team or the authenticated team."
+      example:
+        groupType: GROUP_TYPE_UNSPECIFIED
+        roleId: 0
+        scope:
+          scopeId: scopeId
+        teamId: 6
+        userIds:
+        - userIds
+        - userIds
+        name: name
+        description: description
+        externalId: externalId
+      properties:
+        description:
+          type: string
+        externalId:
+          type: string
+        groupType:
+          $ref: "#/components/schemas/GroupType"
+        name:
+          type: string
+        roleId:
+          format: int64
+          type: integer
+        scope:
+          $ref: "#/components/schemas/v2.Scope"
+        teamId:
+          format: int64
+          type: integer
+        userIds:
+          items:
+            type: string
+          type: array
+      title: CreateTeamGroupRequest
+      type: object
+    UpdateTeamGroupRequest:
+      additionalProperties: false
+      description: "Request to modify an existing team group's details, including\
+        \ its name, description, roles, users, and scope settings."
+      example:
+        scopeUpdate:
+          action:
+            actionType: actionType
+            setScopeId:
+              value: value
+        groupType: GROUP_TYPE_UNSPECIFIED
+        roleUpdate:
+          action:
+            setRoleId:
+              value: 0
+            actionType: actionType
+        userUpdates:
+          operation:
+            add:
+              userIds:
+              - userIds
+              - userIds
+            operationType: operationType
+        name: name
+        description: description
+        externalId: externalId
+      properties:
+        description:
+          type: string
+        externalId:
+          type: string
+        groupType:
+          $ref: "#/components/schemas/GroupType"
+        name:
+          type: string
+        roleUpdate:
+          $ref: "#/components/schemas/RoleUpdate"
+        scopeUpdate:
+          $ref: "#/components/schemas/ScopeUpdate"
+        userUpdates:
+          $ref: "#/components/schemas/UserUpdates"
+      title: UpdateTeamGroupRequest
+      type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

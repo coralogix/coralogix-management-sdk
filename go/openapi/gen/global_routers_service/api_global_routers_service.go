@@ -69,7 +69,7 @@ func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceBatchGetGlobalRoute
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/routers:batchGetSummaries"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/routers/all/summaries"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

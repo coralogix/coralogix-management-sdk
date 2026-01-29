@@ -17,7 +17,7 @@ import (
 // checks if the ReplacePolicySettingsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReplacePolicySettingsResponse{}
 
-// ReplacePolicySettingsResponse struct for ReplacePolicySettingsResponse
+// ReplacePolicySettingsResponse This data structure is returned when replacing policy settings. It contains the complete resource including server-generated fields.
 type ReplacePolicySettingsResponse struct {
 	LogsPolicySettings *LogsPolicySettings `json:"logsPolicySettings,omitempty"`
 	SpansPolicySettings *SpansPolicySettings `json:"spansPolicySettings,omitempty"`

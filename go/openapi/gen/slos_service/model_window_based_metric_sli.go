@@ -12,8 +12,6 @@ package slos_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the WindowBasedMetricSli type satisfies the MappedNullable interface at compile time
@@ -21,25 +19,19 @@ var _ MappedNullable = &WindowBasedMetricSli{}
 
 // WindowBasedMetricSli Definition of a window-based SLI based on metrics
 type WindowBasedMetricSli struct {
-	ComparisonOperator ComparisonOperator `json:"comparisonOperator"`
+	ComparisonOperator *ComparisonOperator `json:"comparisonOperator,omitempty"`
 	MissingDataStrategy *MissingDataStrategy `json:"missingDataStrategy,omitempty"`
-	Query Metric `json:"query"`
-	Threshold float32 `json:"threshold"`
-	Window WindowSloWindow `json:"window"`
+	Query *Metric `json:"query,omitempty"`
+	Threshold *float32 `json:"threshold,omitempty"`
+	Window *WindowSloWindow `json:"window,omitempty"`
 }
-
-type _WindowBasedMetricSli WindowBasedMetricSli
 
 // NewWindowBasedMetricSli instantiates a new WindowBasedMetricSli object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWindowBasedMetricSli(comparisonOperator ComparisonOperator, query Metric, threshold float32, window WindowSloWindow) *WindowBasedMetricSli {
+func NewWindowBasedMetricSli() *WindowBasedMetricSli {
 	this := WindowBasedMetricSli{}
-	this.ComparisonOperator = comparisonOperator
-	this.Query = query
-	this.Threshold = threshold
-	this.Window = window
 	return &this
 }
 
@@ -51,28 +43,36 @@ func NewWindowBasedMetricSliWithDefaults() *WindowBasedMetricSli {
 	return &this
 }
 
-// GetComparisonOperator returns the ComparisonOperator field value
+// GetComparisonOperator returns the ComparisonOperator field value if set, zero value otherwise.
 func (o *WindowBasedMetricSli) GetComparisonOperator() ComparisonOperator {
-	if o == nil {
+	if o == nil || IsNil(o.ComparisonOperator) {
 		var ret ComparisonOperator
 		return ret
 	}
-
-	return o.ComparisonOperator
+	return *o.ComparisonOperator
 }
 
-// GetComparisonOperatorOk returns a tuple with the ComparisonOperator field value
+// GetComparisonOperatorOk returns a tuple with the ComparisonOperator field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WindowBasedMetricSli) GetComparisonOperatorOk() (*ComparisonOperator, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ComparisonOperator) {
 		return nil, false
 	}
-	return &o.ComparisonOperator, true
+	return o.ComparisonOperator, true
 }
 
-// SetComparisonOperator sets field value
+// HasComparisonOperator returns a boolean if a field has been set.
+func (o *WindowBasedMetricSli) HasComparisonOperator() bool {
+	if o != nil && !IsNil(o.ComparisonOperator) {
+		return true
+	}
+
+	return false
+}
+
+// SetComparisonOperator gets a reference to the given ComparisonOperator and assigns it to the ComparisonOperator field.
 func (o *WindowBasedMetricSli) SetComparisonOperator(v ComparisonOperator) {
-	o.ComparisonOperator = v
+	o.ComparisonOperator = &v
 }
 
 // GetMissingDataStrategy returns the MissingDataStrategy field value if set, zero value otherwise.
@@ -107,76 +107,100 @@ func (o *WindowBasedMetricSli) SetMissingDataStrategy(v MissingDataStrategy) {
 	o.MissingDataStrategy = &v
 }
 
-// GetQuery returns the Query field value
+// GetQuery returns the Query field value if set, zero value otherwise.
 func (o *WindowBasedMetricSli) GetQuery() Metric {
-	if o == nil {
+	if o == nil || IsNil(o.Query) {
 		var ret Metric
 		return ret
 	}
-
-	return o.Query
+	return *o.Query
 }
 
-// GetQueryOk returns a tuple with the Query field value
+// GetQueryOk returns a tuple with the Query field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WindowBasedMetricSli) GetQueryOk() (*Metric, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Query) {
 		return nil, false
 	}
-	return &o.Query, true
+	return o.Query, true
 }
 
-// SetQuery sets field value
+// HasQuery returns a boolean if a field has been set.
+func (o *WindowBasedMetricSli) HasQuery() bool {
+	if o != nil && !IsNil(o.Query) {
+		return true
+	}
+
+	return false
+}
+
+// SetQuery gets a reference to the given Metric and assigns it to the Query field.
 func (o *WindowBasedMetricSli) SetQuery(v Metric) {
-	o.Query = v
+	o.Query = &v
 }
 
-// GetThreshold returns the Threshold field value
+// GetThreshold returns the Threshold field value if set, zero value otherwise.
 func (o *WindowBasedMetricSli) GetThreshold() float32 {
-	if o == nil {
+	if o == nil || IsNil(o.Threshold) {
 		var ret float32
 		return ret
 	}
-
-	return o.Threshold
+	return *o.Threshold
 }
 
-// GetThresholdOk returns a tuple with the Threshold field value
+// GetThresholdOk returns a tuple with the Threshold field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WindowBasedMetricSli) GetThresholdOk() (*float32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Threshold) {
 		return nil, false
 	}
-	return &o.Threshold, true
+	return o.Threshold, true
 }
 
-// SetThreshold sets field value
+// HasThreshold returns a boolean if a field has been set.
+func (o *WindowBasedMetricSli) HasThreshold() bool {
+	if o != nil && !IsNil(o.Threshold) {
+		return true
+	}
+
+	return false
+}
+
+// SetThreshold gets a reference to the given float32 and assigns it to the Threshold field.
 func (o *WindowBasedMetricSli) SetThreshold(v float32) {
-	o.Threshold = v
+	o.Threshold = &v
 }
 
-// GetWindow returns the Window field value
+// GetWindow returns the Window field value if set, zero value otherwise.
 func (o *WindowBasedMetricSli) GetWindow() WindowSloWindow {
-	if o == nil {
+	if o == nil || IsNil(o.Window) {
 		var ret WindowSloWindow
 		return ret
 	}
-
-	return o.Window
+	return *o.Window
 }
 
-// GetWindowOk returns a tuple with the Window field value
+// GetWindowOk returns a tuple with the Window field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WindowBasedMetricSli) GetWindowOk() (*WindowSloWindow, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Window) {
 		return nil, false
 	}
-	return &o.Window, true
+	return o.Window, true
 }
 
-// SetWindow sets field value
+// HasWindow returns a boolean if a field has been set.
+func (o *WindowBasedMetricSli) HasWindow() bool {
+	if o != nil && !IsNil(o.Window) {
+		return true
+	}
+
+	return false
+}
+
+// SetWindow gets a reference to the given WindowSloWindow and assigns it to the Window field.
 func (o *WindowBasedMetricSli) SetWindow(v WindowSloWindow) {
-	o.Window = v
+	o.Window = &v
 }
 
 func (o WindowBasedMetricSli) MarshalJSON() ([]byte, error) {
@@ -189,54 +213,22 @@ func (o WindowBasedMetricSli) MarshalJSON() ([]byte, error) {
 
 func (o WindowBasedMetricSli) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["comparisonOperator"] = o.ComparisonOperator
+	if !IsNil(o.ComparisonOperator) {
+		toSerialize["comparisonOperator"] = o.ComparisonOperator
+	}
 	if !IsNil(o.MissingDataStrategy) {
 		toSerialize["missingDataStrategy"] = o.MissingDataStrategy
 	}
-	toSerialize["query"] = o.Query
-	toSerialize["threshold"] = o.Threshold
-	toSerialize["window"] = o.Window
+	if !IsNil(o.Query) {
+		toSerialize["query"] = o.Query
+	}
+	if !IsNil(o.Threshold) {
+		toSerialize["threshold"] = o.Threshold
+	}
+	if !IsNil(o.Window) {
+		toSerialize["window"] = o.Window
+	}
 	return toSerialize, nil
-}
-
-func (o *WindowBasedMetricSli) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"comparisonOperator",
-		"query",
-		"threshold",
-		"window",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varWindowBasedMetricSli := _WindowBasedMetricSli{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWindowBasedMetricSli)
-
-	if err != nil {
-		return err
-	}
-
-	*o = WindowBasedMetricSli(varWindowBasedMetricSli)
-
-	return err
 }
 
 type NullableWindowBasedMetricSli struct {

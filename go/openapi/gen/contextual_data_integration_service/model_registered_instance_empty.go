@@ -28,6 +28,7 @@ type RegisteredInstanceEmpty struct {
 	IsTesting *bool `json:"isTesting,omitempty"`
 	LastUpdated *time.Time `json:"lastUpdated,omitempty"`
 	Parameters []Parameter `json:"parameters,omitempty"`
+	RevisionLifecycle *RevisionLifecycle `json:"revisionLifecycle,omitempty"`
 }
 
 // NewRegisteredInstanceEmpty instantiates a new RegisteredInstanceEmpty object
@@ -271,6 +272,38 @@ func (o *RegisteredInstanceEmpty) SetParameters(v []Parameter) {
 	o.Parameters = v
 }
 
+// GetRevisionLifecycle returns the RevisionLifecycle field value if set, zero value otherwise.
+func (o *RegisteredInstanceEmpty) GetRevisionLifecycle() RevisionLifecycle {
+	if o == nil || IsNil(o.RevisionLifecycle) {
+		var ret RevisionLifecycle
+		return ret
+	}
+	return *o.RevisionLifecycle
+}
+
+// GetRevisionLifecycleOk returns a tuple with the RevisionLifecycle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RegisteredInstanceEmpty) GetRevisionLifecycleOk() (*RevisionLifecycle, bool) {
+	if o == nil || IsNil(o.RevisionLifecycle) {
+		return nil, false
+	}
+	return o.RevisionLifecycle, true
+}
+
+// HasRevisionLifecycle returns a boolean if a field has been set.
+func (o *RegisteredInstanceEmpty) HasRevisionLifecycle() bool {
+	if o != nil && !IsNil(o.RevisionLifecycle) {
+		return true
+	}
+
+	return false
+}
+
+// SetRevisionLifecycle gets a reference to the given RevisionLifecycle and assigns it to the RevisionLifecycle field.
+func (o *RegisteredInstanceEmpty) SetRevisionLifecycle(v RevisionLifecycle) {
+	o.RevisionLifecycle = &v
+}
+
 func (o RegisteredInstanceEmpty) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -301,6 +334,9 @@ func (o RegisteredInstanceEmpty) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Parameters) {
 		toSerialize["parameters"] = o.Parameters
+	}
+	if !IsNil(o.RevisionLifecycle) {
+		toSerialize["revisionLifecycle"] = o.RevisionLifecycle
 	}
 	return toSerialize, nil
 }

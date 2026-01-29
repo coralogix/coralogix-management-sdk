@@ -81,13 +81,13 @@ Class | Method | HTTP request | Description
 *OutgoingWebhooksServiceAPI* | [**OutgoingWebhooksServiceCreateOutgoingWebhook**](docs/OutgoingWebhooksServiceAPI.md#outgoingwebhooksservicecreateoutgoingwebhook) | **Post** /integrations/webhooks/v1 | Create an outgoing webhook
 *OutgoingWebhooksServiceAPI* | [**OutgoingWebhooksServiceDeleteOutgoingWebhook**](docs/OutgoingWebhooksServiceAPI.md#outgoingwebhooksservicedeleteoutgoingwebhook) | **Delete** /integrations/webhooks/v1/{id} | Delete an outgoing webhook
 *OutgoingWebhooksServiceAPI* | [**OutgoingWebhooksServiceGetOutgoingWebhook**](docs/OutgoingWebhooksServiceAPI.md#outgoingwebhooksservicegetoutgoingwebhook) | **Get** /integrations/webhooks/v1/{id} | Get outgoing webhook
-*OutgoingWebhooksServiceAPI* | [**OutgoingWebhooksServiceGetOutgoingWebhookTypeDetails**](docs/OutgoingWebhooksServiceAPI.md#outgoingwebhooksservicegetoutgoingwebhooktypedetails) | **Get** /integrations/webhooks/v1/types/{type} | Get outgoing webhook type details
+*OutgoingWebhooksServiceAPI* | [**OutgoingWebhooksServiceGetOutgoingWebhookTypeDetails**](docs/OutgoingWebhooksServiceAPI.md#outgoingwebhooksservicegetoutgoingwebhooktypedetails) | **Get** /integrations/webhook-types/v1/{type} | Get outgoing webhook type details
 *OutgoingWebhooksServiceAPI* | [**OutgoingWebhooksServiceListAllOutgoingWebhooks**](docs/OutgoingWebhooksServiceAPI.md#outgoingwebhooksservicelistalloutgoingwebhooks) | **Get** /integrations/webhooks/v1 | List all outgoing webhooks
-*OutgoingWebhooksServiceAPI* | [**OutgoingWebhooksServiceListOutboundWebhooksSummary**](docs/OutgoingWebhooksServiceAPI.md#outgoingwebhooksservicelistoutboundwebhookssummary) | **Get** /integrations/webhooks/v1/summary | List outbound webhooks summary
-*OutgoingWebhooksServiceAPI* | [**OutgoingWebhooksServiceListOutgoingWebhookTypes**](docs/OutgoingWebhooksServiceAPI.md#outgoingwebhooksservicelistoutgoingwebhooktypes) | **Get** /integrations/webhooks/v1/types | Get outgoing webhook types
-*OutgoingWebhooksServiceAPI* | [**OutgoingWebhooksServiceListOutgoingWebhooks**](docs/OutgoingWebhooksServiceAPI.md#outgoingwebhooksservicelistoutgoingwebhooks) | **Get** /integrations/webhooks/v1:listByType | List outgoing webhooks
-*OutgoingWebhooksServiceAPI* | [**OutgoingWebhooksServiceTestExistingOutgoingWebhook**](docs/OutgoingWebhooksServiceAPI.md#outgoingwebhooksservicetestexistingoutgoingwebhook) | **Post** /integrations/webhooks/v1/test-existing | Test an existing outgoing webhook
-*OutgoingWebhooksServiceAPI* | [**OutgoingWebhooksServiceTestOutgoingWebhook**](docs/OutgoingWebhooksServiceAPI.md#outgoingwebhooksservicetestoutgoingwebhook) | **Post** /integrations/webhooks/v1/test | Test an outgoing webhook
+*OutgoingWebhooksServiceAPI* | [**OutgoingWebhooksServiceListOutboundWebhooksSummary**](docs/OutgoingWebhooksServiceAPI.md#outgoingwebhooksservicelistoutboundwebhookssummary) | **Get** /integrations/webhooks/v1/list/summaries | List outbound webhooks summary
+*OutgoingWebhooksServiceAPI* | [**OutgoingWebhooksServiceListOutgoingWebhookTypes**](docs/OutgoingWebhooksServiceAPI.md#outgoingwebhooksservicelistoutgoingwebhooktypes) | **Get** /integrations/webhook-types/v1 | Get outgoing webhook types
+*OutgoingWebhooksServiceAPI* | [**OutgoingWebhooksServiceListOutgoingWebhooks**](docs/OutgoingWebhooksServiceAPI.md#outgoingwebhooksservicelistoutgoingwebhooks) | **Get** /integrations/webhooks/v1/list/by-types | List outgoing webhooks
+*OutgoingWebhooksServiceAPI* | [**OutgoingWebhooksServiceTestExistingOutgoingWebhook**](docs/OutgoingWebhooksServiceAPI.md#outgoingwebhooksservicetestexistingoutgoingwebhook) | **Get** /integrations/webhooks/v1/{id}/test | Test an existing outgoing webhook
+*OutgoingWebhooksServiceAPI* | [**OutgoingWebhooksServiceTestOutgoingWebhook**](docs/OutgoingWebhooksServiceAPI.md#outgoingwebhooksservicetestoutgoingwebhook) | **Post** /integrations/webhooks-test/v1 | Test an outgoing webhook
 *OutgoingWebhooksServiceAPI* | [**OutgoingWebhooksServiceUpdateOutgoingWebhook**](docs/OutgoingWebhooksServiceAPI.md#outgoingwebhooksserviceupdateoutgoingwebhook) | **Put** /integrations/webhooks/v1 | Update an outgoing webhook
 
 
@@ -123,6 +123,8 @@ Class | Method | HTTP request | Description
  - [ListOutgoingWebhookTypesResponse](docs/ListOutgoingWebhookTypesResponse.md)
  - [ListOutgoingWebhooksResponse](docs/ListOutgoingWebhooksResponse.md)
  - [MethodType](docs/MethodType.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [OutboundWebhookSummary](docs/OutboundWebhookSummary.md)
  - [OutgoingWebhook](docs/OutgoingWebhook.md)
@@ -158,7 +160,6 @@ Class | Method | HTTP request | Description
  - [PagerDutyConfig](docs/PagerDutyConfig.md)
  - [SendLogConfig](docs/SendLogConfig.md)
  - [SlackConfig](docs/SlackConfig.md)
- - [TestExistingOutgoingWebhookRequest](docs/TestExistingOutgoingWebhookRequest.md)
  - [TestOutgoingWebhookRequest](docs/TestOutgoingWebhookRequest.md)
  - [TestOutgoingWebhookResponse](docs/TestOutgoingWebhookResponse.md)
  - [TestOutgoingWebhookResponseFailure](docs/TestOutgoingWebhookResponseFailure.md)

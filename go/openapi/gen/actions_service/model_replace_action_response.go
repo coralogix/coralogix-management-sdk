@@ -17,7 +17,7 @@ import (
 // checks if the ReplaceActionResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReplaceActionResponse{}
 
-// ReplaceActionResponse struct for ReplaceActionResponse
+// ReplaceActionResponse This data structure represents the response to replace an Action.
 type ReplaceActionResponse struct {
 	Action *V2Action `json:"action,omitempty"`
 }

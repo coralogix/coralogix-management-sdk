@@ -70,6 +70,9 @@
               "items": {
                 "oneOf": [
                   {
+                    "$ref": "#/components/schemas/DimensionPillar"
+                  },
+                  {
                     "$ref": "#/components/schemas/DimensionGenericDimension"
                   },
                   {
@@ -80,9 +83,6 @@
                   },
                   {
                     "$ref": "#/components/schemas/DimensionPriority"
-                  },
-                  {
-                    "$ref": "#/components/schemas/DimensionPillar"
                   }
                 ]
               }
@@ -122,7 +122,7 @@
         }
       }
     },
-    "/dataplans/data-usage/v2/daily:evaluation-tokens": {
+    "/dataplans/data-usage/v2/daily/evaluation-tokens": {
       "post": {
         "tags": [
           "Data Usage Service"
@@ -182,7 +182,7 @@
         }
       }
     },
-    "/dataplans/data-usage/v2/daily:processed-gbs": {
+    "/dataplans/data-usage/v2/daily/processed-gbs": {
       "post": {
         "tags": [
           "Data Usage Service"
@@ -242,7 +242,7 @@
         }
       }
     },
-    "/dataplans/data-usage/v2/daily:units": {
+    "/dataplans/data-usage/v2/daily/units": {
       "post": {
         "tags": [
           "Data Usage Service"
@@ -260,10 +260,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestRange"
+                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestDateRange"
                   },
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestDateRange"
+                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestRange"
                   }
                 ]
               }
@@ -404,7 +404,7 @@
         }
       }
     },
-    "/dataplans/data-usage/v2/logs:count": {
+    "/dataplans/data-usage/v2/logs/count": {
       "get": {
         "tags": [
           "Data Usage Service"
@@ -529,7 +529,7 @@
         }
       }
     },
-    "/dataplans/data-usage/v2/spans:count": {
+    "/dataplans/data-usage/v2/spans/count": {
       "get": {
         "tags": [
           "Data Usage Service"
@@ -823,6 +823,9 @@
       "Dimension": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/DimensionPillar"
+          },
+          {
             "$ref": "#/components/schemas/DimensionGenericDimension"
           },
           {
@@ -833,9 +836,6 @@
           },
           {
             "$ref": "#/components/schemas/DimensionPriority"
-          },
-          {
-            "$ref": "#/components/schemas/DimensionPillar"
           }
         ]
       },
@@ -1185,6 +1185,34 @@
             "format": "date-time"
           }
         }
+      },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",

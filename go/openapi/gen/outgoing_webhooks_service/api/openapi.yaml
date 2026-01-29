@@ -5,6 +5,109 @@ info:
 servers:
 - url: /
 paths:
+  /integrations/webhook-types/v1:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_ListOutgoingWebhookTypes
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOutgoingWebhookTypesResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get outgoing webhook types
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadConfig
+  /integrations/webhook-types/v1/{type}:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_GetOutgoingWebhookTypeDetails
+      parameters:
+      - explode: false
+        in: path
+        name: type
+        required: true
+        schema:
+          $ref: "#/components/schemas/WebhookType"
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetOutgoingWebhookTypeDetailsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get outgoing webhook type details
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadConfig
+  /integrations/webhooks-test/v1:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_TestOutgoingWebhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Test_outgoing_webhook_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestOutgoingWebhookResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Test an outgoing webhook
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadConfig
   /integrations/webhooks/v1:
     get:
       description: No description available
@@ -103,7 +206,45 @@ paths:
       - Outgoing webhooks service
       x-coralogixPermissions:
       - outbound-webhooks:UpdateConfig
-  /integrations/webhooks/v1/summary:
+  /integrations/webhooks/v1/list/by-types:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_ListOutgoingWebhooks
+      parameters:
+      - explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          $ref: "#/components/schemas/WebhookType"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOutgoingWebhooksResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List outgoing webhooks
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadConfig
+  /integrations/webhooks/v1/list/summaries:
     get:
       description: No description available
       externalDocs:
@@ -133,144 +274,6 @@ paths:
       - Outgoing webhooks service
       x-coralogixPermissions:
       - outbound-webhooks:ReadSummary
-  /integrations/webhooks/v1/test:
-    post:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: OutgoingWebhooksService_TestOutgoingWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Test_outgoing_webhook_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TestOutgoingWebhookResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Test an outgoing webhook
-      tags:
-      - Outgoing webhooks service
-      x-coralogixPermissions:
-      - outbound-webhooks:ReadConfig
-  /integrations/webhooks/v1/test-existing:
-    post:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: OutgoingWebhooksService_TestExistingOutgoingWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Test_existing_outgoing_webhook_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TestOutgoingWebhookResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Test an existing outgoing webhook
-      tags:
-      - Outgoing webhooks service
-      x-coralogixPermissions:
-      - outbound-webhooks:ReadConfig
-  /integrations/webhooks/v1/types:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: OutgoingWebhooksService_ListOutgoingWebhookTypes
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListOutgoingWebhookTypesResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Get outgoing webhook types
-      tags:
-      - Outgoing webhooks service
-      x-coralogixPermissions:
-      - outbound-webhooks:ReadConfig
-  /integrations/webhooks/v1/types/{type}:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: OutgoingWebhooksService_GetOutgoingWebhookTypeDetails
-      parameters:
-      - explode: false
-        in: path
-        name: type
-        required: true
-        schema:
-          $ref: "#/components/schemas/WebhookType"
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetOutgoingWebhookTypeDetailsResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Get outgoing webhook type details
-      tags:
-      - Outgoing webhooks service
-      x-coralogixPermissions:
-      - outbound-webhooks:ReadConfig
   /integrations/webhooks/v1/{id}:
     delete:
       description: No description available
@@ -347,26 +350,27 @@ paths:
       - Outgoing webhooks service
       x-coralogixPermissions:
       - outbound-webhooks:ReadConfig
-  /integrations/webhooks/v1:listByType:
+  /integrations/webhooks/v1/{id}/test:
     get:
       description: No description available
       externalDocs:
         url: ""
-      operationId: OutgoingWebhooksService_ListOutgoingWebhooks
+      operationId: OutgoingWebhooksService_TestExistingOutgoingWebhook
       parameters:
-      - explode: true
-        in: query
-        name: type
-        required: false
+      - explode: false
+        in: path
+        name: id
+        required: true
         schema:
-          $ref: "#/components/schemas/WebhookType"
-        style: form
+          example: example_id
+          type: string
+        style: simple
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListOutgoingWebhooksResponse"
+                $ref: "#/components/schemas/TestOutgoingWebhookResponse"
           description: ""
         "400":
           content:
@@ -380,7 +384,7 @@ paths:
           content:
             application/json: {}
           description: Internal server error
-      summary: List outgoing webhooks
+      summary: Test an existing outgoing webhook
       tags:
       - Outgoing webhooks service
       x-coralogixPermissions:
@@ -562,12 +566,6 @@ components:
       title: Filters
       type: object
     GenericWebhookConfig:
-      example:
-        headers:
-          key: headers
-        method: UNKNOWN
-        payload: payload
-        uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
       externalDocs:
         url: ""
       properties:
@@ -588,12 +586,7 @@ components:
       example:
         webhook:
           createdAt: 2000-01-23T04:56:07.000+00:00
-          genericWebhook:
-            headers:
-              key: headers
-            method: UNKNOWN
-            payload: payload
-            uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
+          microsoftTeams: "{}"
           name: my_webhook
           externalId: 123456
           id: webhook_id
@@ -759,6 +752,28 @@ components:
         url: ""
       title: Microsoft Teams configuration
       type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     MultipleValues:
       properties:
         matcher:
@@ -803,18 +818,18 @@ components:
       type: object
     OutgoingWebhook:
       oneOf:
-      - $ref: "#/components/schemas/OutgoingWebhookGenericWebhook"
-      - $ref: "#/components/schemas/OutgoingWebhookSlack"
-      - $ref: "#/components/schemas/OutgoingWebhookPagerDuty"
-      - $ref: "#/components/schemas/OutgoingWebhookSendLog"
-      - $ref: "#/components/schemas/OutgoingWebhookOpsgenie"
+      - $ref: "#/components/schemas/OutgoingWebhookMicrosoftTeams"
       - $ref: "#/components/schemas/OutgoingWebhookAwsEventBridge"
       - $ref: "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
+      - $ref: "#/components/schemas/OutgoingWebhookGenericWebhook"
+      - $ref: "#/components/schemas/OutgoingWebhookSlack"
+      - $ref: "#/components/schemas/OutgoingWebhookSendLog"
       - $ref: "#/components/schemas/OutgoingWebhookEmailGroup"
-      - $ref: "#/components/schemas/OutgoingWebhookMicrosoftTeams"
       - $ref: "#/components/schemas/OutgoingWebhookJira"
+      - $ref: "#/components/schemas/OutgoingWebhookOpsgenie"
       - $ref: "#/components/schemas/OutgoingWebhookDemisto"
       - $ref: "#/components/schemas/OutgoingWebhookIbmEventNotifications"
+      - $ref: "#/components/schemas/OutgoingWebhookPagerDuty"
     OutgoingWebhookAwsEventBridge:
       additionalProperties: false
       externalDocs:
@@ -956,20 +971,6 @@ components:
       type: object
     OutgoingWebhookGenericWebhook:
       additionalProperties: false
-      example:
-        createdAt: 2000-01-23T04:56:07.000+00:00
-        genericWebhook:
-          headers:
-            key: headers
-          method: UNKNOWN
-          payload: payload
-          uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
-        name: my_webhook
-        externalId: 123456
-        id: webhook_id
-        type: UNKNOWN
-        url: slack.webhook.com
-        updatedAt: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
       properties:
@@ -1033,13 +1034,13 @@ components:
       - $ref: "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataJira"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataDemisto"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataOpsgenie"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataGenericWebhook"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataSlack"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataSendLog"
-      - $ref: "#/components/schemas/OutgoingWebhookInputDataOpsgenie"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataJira"
+      - $ref: "#/components/schemas/OutgoingWebhookInputDataDemisto"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
       - $ref: "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
     OutgoingWebhookInputDataAwsEventBridge:
@@ -1287,6 +1288,15 @@ components:
       type: object
     OutgoingWebhookMicrosoftTeams:
       additionalProperties: false
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        microsoftTeams: "{}"
+        name: my_webhook
+        externalId: 123456
+        id: webhook_id
+        type: UNKNOWN
+        url: slack.webhook.com
+        updatedAt: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
       properties:
@@ -1561,13 +1571,9 @@ components:
       type: object
     TestOutgoingWebhookResponse:
       oneOf:
-      - $ref: "#/components/schemas/TestOutgoingWebhookResponseFailure"
       - $ref: "#/components/schemas/TestOutgoingWebhookResponseSuccess"
+      - $ref: "#/components/schemas/TestOutgoingWebhookResponseFailure"
     TestOutgoingWebhookResponse.Failure:
-      example:
-        displayMessage: example_display_message
-        errorMessage: example_error_message
-        statusCode: 400
       externalDocs:
         url: ""
       properties:
@@ -1590,11 +1596,6 @@ components:
       type: object
     TestOutgoingWebhookResponseFailure:
       additionalProperties: false
-      example:
-        failure:
-          displayMessage: example_display_message
-          errorMessage: example_error_message
-          statusCode: 400
       externalDocs:
         url: ""
       properties:
@@ -1604,6 +1605,8 @@ components:
       type: object
     TestOutgoingWebhookResponseSuccess:
       additionalProperties: false
+      example:
+        success: "{}"
       externalDocs:
         url: ""
       properties:
@@ -1657,6 +1660,13 @@ components:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
+    Test_outgoing_webhook_request:
+      additionalProperties: false
+      properties:
+        data:
+          $ref: "#/components/schemas/OutgoingWebhookInputData"
+      title: Test outgoing webhook request
+      type: object
     Update_outgoing_webhook_request:
       additionalProperties: false
       properties:
@@ -1673,21 +1683,6 @@ components:
         data:
           $ref: "#/components/schemas/OutgoingWebhookInputData"
       title: Create outgoing webhook request
-      type: object
-    Test_outgoing_webhook_request:
-      additionalProperties: false
-      properties:
-        data:
-          $ref: "#/components/schemas/OutgoingWebhookInputData"
-      title: Test outgoing webhook request
-      type: object
-    Test_existing_outgoing_webhook_request:
-      additionalProperties: false
-      properties:
-        id:
-          example: example_id
-          type: string
-      title: Test existing outgoing webhook request
       type: object
   securitySchemes:
     apiKeyAuth:

@@ -18,21 +18,21 @@ import (
 
 // Recurring - struct for Recurring
 type Recurring struct {
-	RecurringAlways *RecurringAlways
-	RecurringDynamic *RecurringDynamic
+	RecurringAlwaysActive *RecurringAlwaysActive
+	RecurringSchedule *RecurringSchedule
 }
 
-// RecurringAlwaysAsRecurring is a convenience function that returns RecurringAlways wrapped in Recurring
-func RecurringAlwaysAsRecurring(v *RecurringAlways) Recurring {
+// RecurringAlwaysActiveAsRecurring is a convenience function that returns RecurringAlwaysActive wrapped in Recurring
+func RecurringAlwaysActiveAsRecurring(v *RecurringAlwaysActive) Recurring {
 	return Recurring{
-		RecurringAlways: v,
+		RecurringAlwaysActive: v,
 	}
 }
 
-// RecurringDynamicAsRecurring is a convenience function that returns RecurringDynamic wrapped in Recurring
-func RecurringDynamicAsRecurring(v *RecurringDynamic) Recurring {
+// RecurringScheduleAsRecurring is a convenience function that returns RecurringSchedule wrapped in Recurring
+func RecurringScheduleAsRecurring(v *RecurringSchedule) Recurring {
 	return Recurring{
-		RecurringDynamic: v,
+		RecurringSchedule: v,
 	}
 }
 
@@ -41,44 +41,44 @@ func RecurringDynamicAsRecurring(v *RecurringDynamic) Recurring {
 func (dst *Recurring) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into RecurringAlways
-	err = newStrictDecoder(data).Decode(&dst.RecurringAlways)
+	// try to unmarshal data into RecurringAlwaysActive
+	err = newStrictDecoder(data).Decode(&dst.RecurringAlwaysActive)
 	if err == nil {
-		jsonRecurringAlways, _ := json.Marshal(dst.RecurringAlways)
-		if string(jsonRecurringAlways) == "{}" { // empty struct
-			dst.RecurringAlways = nil
+		jsonRecurringAlwaysActive, _ := json.Marshal(dst.RecurringAlwaysActive)
+		if string(jsonRecurringAlwaysActive) == "{}" { // empty struct
+			dst.RecurringAlwaysActive = nil
 		} else {
-			if err = validator.Validate(dst.RecurringAlways); err != nil {
-				dst.RecurringAlways = nil
+			if err = validator.Validate(dst.RecurringAlwaysActive); err != nil {
+				dst.RecurringAlwaysActive = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.RecurringAlways = nil
+		dst.RecurringAlwaysActive = nil
 	}
 
-	// try to unmarshal data into RecurringDynamic
-	err = newStrictDecoder(data).Decode(&dst.RecurringDynamic)
+	// try to unmarshal data into RecurringSchedule
+	err = newStrictDecoder(data).Decode(&dst.RecurringSchedule)
 	if err == nil {
-		jsonRecurringDynamic, _ := json.Marshal(dst.RecurringDynamic)
-		if string(jsonRecurringDynamic) == "{}" { // empty struct
-			dst.RecurringDynamic = nil
+		jsonRecurringSchedule, _ := json.Marshal(dst.RecurringSchedule)
+		if string(jsonRecurringSchedule) == "{}" { // empty struct
+			dst.RecurringSchedule = nil
 		} else {
-			if err = validator.Validate(dst.RecurringDynamic); err != nil {
-				dst.RecurringDynamic = nil
+			if err = validator.Validate(dst.RecurringSchedule); err != nil {
+				dst.RecurringSchedule = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.RecurringDynamic = nil
+		dst.RecurringSchedule = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.RecurringAlways = nil
-		dst.RecurringDynamic = nil
+		dst.RecurringAlwaysActive = nil
+		dst.RecurringSchedule = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(Recurring)")
 	} else if match == 1 {
@@ -90,12 +90,12 @@ func (dst *Recurring) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src Recurring) MarshalJSON() ([]byte, error) {
-	if src.RecurringAlways != nil {
-		return json.Marshal(&src.RecurringAlways)
+	if src.RecurringAlwaysActive != nil {
+		return json.Marshal(&src.RecurringAlwaysActive)
 	}
 
-	if src.RecurringDynamic != nil {
-		return json.Marshal(&src.RecurringDynamic)
+	if src.RecurringSchedule != nil {
+		return json.Marshal(&src.RecurringSchedule)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +106,12 @@ func (obj *Recurring) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.RecurringAlways != nil {
-		return obj.RecurringAlways
+	if obj.RecurringAlwaysActive != nil {
+		return obj.RecurringAlwaysActive
 	}
 
-	if obj.RecurringDynamic != nil {
-		return obj.RecurringDynamic
+	if obj.RecurringSchedule != nil {
+		return obj.RecurringSchedule
 	}
 
 	// all schemas are nil
@@ -120,12 +120,12 @@ func (obj *Recurring) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj Recurring) GetActualInstanceValue() (interface{}) {
-	if obj.RecurringAlways != nil {
-		return *obj.RecurringAlways
+	if obj.RecurringAlwaysActive != nil {
+		return *obj.RecurringAlwaysActive
 	}
 
-	if obj.RecurringDynamic != nil {
-		return *obj.RecurringDynamic
+	if obj.RecurringSchedule != nil {
+		return *obj.RecurringSchedule
 	}
 
 	// all schemas are nil

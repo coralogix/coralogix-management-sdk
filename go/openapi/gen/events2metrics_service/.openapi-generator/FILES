@@ -52,6 +52,8 @@ model_list_e2_m_response.go
 model_list_labels_cardinality_response.go
 model_logs2metrics_v2_severity.go
 model_metric_label.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_replace_e2_m_request.go
 model_replace_e2_m_response.go
@@ -60,6 +62,7 @@ model_spans_query.go
 model_spans_query_1.go
 model_v2_aggregation.go
 model_v2_aggregation_histogram.go
+model_v2_aggregation_none.go
 model_v2_aggregation_samples.go
 model_v2_logs_query.go
 model_v2_metric_field.go

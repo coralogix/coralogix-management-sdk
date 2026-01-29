@@ -37,6 +37,8 @@ model_list_outbound_webhooks_summary_response.go
 model_list_outgoing_webhook_types_response.go
 model_list_outgoing_webhooks_response.go
 model_method_type.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_outbound_webhook_summary.go
 model_outgoing_webhook.go
@@ -72,7 +74,6 @@ model_outgoing_webhook_type.go
 model_pager_duty_config.go
 model_send_log_config.go
 model_slack_config.go
-model_test_existing_outgoing_webhook_request.go
 model_test_outgoing_webhook_request.go
 model_test_outgoing_webhook_response.go
 model_test_outgoing_webhook_response_failure.go

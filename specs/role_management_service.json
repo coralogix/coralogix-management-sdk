@@ -5,7 +5,7 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/aaa/team-roles/v1/custom-roles": {
+    "/aaa/custom-roles/v1": {
       "get": {
         "tags": [
           "Role Management Service"
@@ -129,7 +129,7 @@
         }
       }
     },
-    "/aaa/team-roles/v1/custom-roles/{role_id}": {
+    "/aaa/custom-roles/v1/{role_id}": {
       "get": {
         "tags": [
           "Role Management Service"
@@ -335,7 +335,7 @@
         }
       }
     },
-    "/aaa/team-roles/v1/system-roles": {
+    "/aaa/system-roles/v1": {
       "get": {
         "tags": [
           "Role Management Service"
@@ -468,6 +468,38 @@
           }
         }
       },
+      "CustomRole": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "parentRoleId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "parentRoleName": {
+            "type": "string"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "roleId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "teamId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
       "DeleteRoleResponse": {
         "type": "object"
       },
@@ -562,7 +594,7 @@
         "type": "object",
         "properties": {
           "role": {
-            "$ref": "#/components/schemas/v2.CustomRole"
+            "$ref": "#/components/schemas/CustomRole"
           }
         }
       },
@@ -572,7 +604,7 @@
           "roles": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/v2.CustomRole"
+              "$ref": "#/components/schemas/CustomRole"
             }
           }
         }
@@ -583,10 +615,38 @@
           "roles": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/v2.SystemRole"
+              "$ref": "#/components/schemas/SystemRole"
             }
           }
         }
+      },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",
@@ -599,6 +659,27 @@
             "items": {
               "type": "string"
             }
+          }
+        }
+      },
+      "SystemRole": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "roleId": {
+            "type": "integer",
+            "format": "int64"
           }
         }
       },
@@ -630,38 +711,6 @@
           "FILTER_MATCHER_REGEXP"
         ]
       },
-      "v2.CustomRole": {
-        "type": "object",
-        "properties": {
-          "description": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "parentRoleId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "parentRoleName": {
-            "type": "string"
-          },
-          "permissions": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "roleId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "teamId": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
       "v2.Permissions": {
         "type": "object",
         "properties": {
@@ -670,27 +719,6 @@
             "items": {
               "type": "string"
             }
-          }
-        }
-      },
-      "v2.SystemRole": {
-        "type": "object",
-        "properties": {
-          "description": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "permissions": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "roleId": {
-            "type": "integer",
-            "format": "int64"
           }
         }
       },

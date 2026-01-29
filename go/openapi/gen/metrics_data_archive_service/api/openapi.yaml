@@ -329,6 +329,28 @@ components:
           type: string
       title: IBM Bucket Configuration
       type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     MultipleValues:
       properties:
         matcher:
@@ -494,8 +516,8 @@ components:
       type: string
     MetricsConfiguratorPublicService_Update_request:
       oneOf:
-      - $ref: "#/components/schemas/UpdateRequestIbm"
       - $ref: "#/components/schemas/UpdateRequestS3"
+      - $ref: "#/components/schemas/UpdateRequestIbm"
       type: object
     MetricsConfiguratorPublicService_ConfigureTenant_request:
       oneOf:

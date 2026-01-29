@@ -5,7 +5,7 @@ info:
 servers:
 - url: /
 paths:
-  /integrations/extensions/v1/all:
+  /integrations/extensions/v1:
     post:
       description: No description available
       externalDocs:
@@ -703,10 +703,33 @@ components:
             type: string
           type: array
         summary:
-          $ref: "#/components/schemas/RevisionSummary"
+          $ref: "#/components/schemas/GetAllExtensionsResponse.RevisionSummary"
         version:
           type: string
       title: Revision
+      type: object
+    GetAllExtensionsResponse.RevisionSummary:
+      example:
+        itemCounts:
+          alerts: 6
+          eventsToMetrics: 5
+          grafanaDashboards: 2
+          savedViews: 2
+          customDashboards: 1
+          kibanaDashboards: 7
+          actions: 0
+          metricsRuleGroup: 9
+          enrichments: 5
+          parsingRules: 3
+        isNew: true
+      externalDocs:
+        url: ""
+      properties:
+        isNew:
+          type: boolean
+        itemCounts:
+          $ref: "#/components/schemas/ItemCounts"
+      title: Revision summary
       type: object
     IntegrationDetail:
       example:
@@ -768,6 +791,28 @@ components:
           type: integer
       title: Item counts
       type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     MultipleValues:
       properties:
         matcher:
@@ -795,29 +840,6 @@ components:
       - SPAN_EVENTS_TO_METRICS
       - LOGS_EVENTS_TO_METRICS
       type: string
-    RevisionSummary:
-      example:
-        itemCounts:
-          alerts: 6
-          eventsToMetrics: 5
-          grafanaDashboards: 2
-          savedViews: 2
-          customDashboards: 1
-          kibanaDashboards: 7
-          actions: 0
-          metricsRuleGroup: 9
-          enrichments: 5
-          parsingRules: 3
-        isNew: true
-      externalDocs:
-        url: ""
-      properties:
-        isNew:
-          type: boolean
-        itemCounts:
-          $ref: "#/components/schemas/ItemCounts"
-      title: Revision summary
-      type: object
     TargetDomain:
       enum:
       - ACTION

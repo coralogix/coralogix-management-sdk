@@ -65,7 +65,7 @@ func (a *IntegrationServiceAPIService) IntegrationServiceDeleteIntegrationExecut
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/integrations/v1/instance/{integration_id}"
+	localVarPath := localBasePath + "/integrations/integrations/v1/instances/{integration_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"integration_id"+"}", url.PathEscape(parameterValueToString(r.integrationId, "integrationId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -277,7 +277,7 @@ func (a *IntegrationServiceAPIService) IntegrationServiceGetIntegrationDefinitio
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/integrations/v1/definition/{id}"
+	localVarPath := localBasePath + "/integrations/integrations/v1/definitions/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -603,7 +603,7 @@ func (a *IntegrationServiceAPIService) IntegrationServiceGetManagedIntegrationSt
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/integrations/v1/managed/{integration_id}"
+	localVarPath := localBasePath + "/integrations/managed/v1/{integration_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"integration_id"+"}", url.PathEscape(parameterValueToString(r.integrationId, "integrationId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -829,7 +829,7 @@ func (a *IntegrationServiceAPIService) IntegrationServiceGetTemplateExecute(r Ap
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/integrations/v1/template"
+	localVarPath := localBasePath + "/integrations/template/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -937,7 +937,7 @@ func (a *IntegrationServiceAPIService) IntegrationServiceListManagedIntegrationK
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/integrations/v1/managed"
+	localVarPath := localBasePath + "/integrations/managed/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1042,7 +1042,7 @@ func (a *IntegrationServiceAPIService) IntegrationServiceSaveIntegrationExecute(
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/integrations/v1/metadata"
+	localVarPath := localBasePath + "/integrations/metadata/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1256,7 +1256,7 @@ func (a *IntegrationServiceAPIService) IntegrationServiceTestIntegrationExecute(
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/integrations/v1/metadata/test"
+	localVarPath := localBasePath + "/integrations/metadata/v1/test"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1363,7 +1363,7 @@ func (a *IntegrationServiceAPIService) IntegrationServiceUpdateIntegrationExecut
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/integrations/v1/metadata"
+	localVarPath := localBasePath + "/integrations/metadata/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

@@ -222,7 +222,7 @@
         }
       }
     },
-    "/aaa/team-scopes/v1/list": {
+    "/aaa/team-scopes/v1/all/list": {
       "get": {
         "tags": [
           "Scopes Service"
@@ -360,7 +360,7 @@
         "type": "object",
         "properties": {
           "scope": {
-            "$ref": "#/components/schemas/scopes.v1.Scope"
+            "$ref": "#/components/schemas/v1.Scope"
           }
         },
         "required": [
@@ -469,13 +469,41 @@
           "scopes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/scopes.v1.Scope"
+              "$ref": "#/components/schemas/v1.Scope"
             }
           }
         },
         "required": [
           "scopes"
         ]
+      },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",
@@ -501,7 +529,7 @@
         "type": "object",
         "properties": {
           "scope": {
-            "$ref": "#/components/schemas/scopes.v1.Scope"
+            "$ref": "#/components/schemas/v1.Scope"
           }
         },
         "required": [
@@ -551,7 +579,15 @@
           }
         }
       },
-      "scopes.v1.Scope": {
+      "v1.EntityType": {
+        "type": "string",
+        "enum": [
+          "ENTITY_TYPE_UNSPECIFIED",
+          "ENTITY_TYPE_LOGS",
+          "ENTITY_TYPE_SPANS"
+        ]
+      },
+      "v1.Scope": {
         "externalDocs": {
           "description": "Find out more about scopes",
           "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
@@ -588,14 +624,6 @@
             "format": "int32"
           }
         }
-      },
-      "v1.EntityType": {
-        "type": "string",
-        "enum": [
-          "ENTITY_TYPE_UNSPECIFIED",
-          "ENTITY_TYPE_LOGS",
-          "ENTITY_TYPE_SPANS"
-        ]
       },
       "v3.FilterOperator": {
         "type": "string",

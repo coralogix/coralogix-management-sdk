@@ -81,9 +81,9 @@ Class | Method | HTTP request | Description
 *RuleGroupsServiceAPI* | [**RuleGroupsServiceBulkDeleteRuleGroup**](docs/RuleGroupsServiceAPI.md#rulegroupsservicebulkdeleterulegroup) | **Delete** /parsing-rules/rule-groups/v1 | Bulk Delete Rule Group
 *RuleGroupsServiceAPI* | [**RuleGroupsServiceCreateRuleGroup**](docs/RuleGroupsServiceAPI.md#rulegroupsservicecreaterulegroup) | **Post** /parsing-rules/rule-groups/v1 | Create Rule Group
 *RuleGroupsServiceAPI* | [**RuleGroupsServiceDeleteRuleGroup**](docs/RuleGroupsServiceAPI.md#rulegroupsservicedeleterulegroup) | **Delete** /parsing-rules/rule-groups/v1/{group_id} | Delete Rule Group
-*RuleGroupsServiceAPI* | [**RuleGroupsServiceGetCompanyUsageLimits**](docs/RuleGroupsServiceAPI.md#rulegroupsservicegetcompanyusagelimits) | **Post** /parsing-rules/rule-groups/v1/limits | Get Company Usage Limits
+*RuleGroupsServiceAPI* | [**RuleGroupsServiceGetCompanyUsageLimits**](docs/RuleGroupsServiceAPI.md#rulegroupsservicegetcompanyusagelimits) | **Post** /parsing-rules/limits/v1 | Get Company Usage Limits
 *RuleGroupsServiceAPI* | [**RuleGroupsServiceGetRuleGroup**](docs/RuleGroupsServiceAPI.md#rulegroupsservicegetrulegroup) | **Get** /parsing-rules/rule-groups/v1/{group_id} | Get Rule Group
-*RuleGroupsServiceAPI* | [**RuleGroupsServiceGetRuleGroupModelMapping**](docs/RuleGroupsServiceAPI.md#rulegroupsservicegetrulegroupmodelmapping) | **Post** /parsing-rules/rule-groups/v1/mapping | Get Rule Group Model Mapping
+*RuleGroupsServiceAPI* | [**RuleGroupsServiceGetRuleGroupModelMapping**](docs/RuleGroupsServiceAPI.md#rulegroupsservicegetrulegroupmodelmapping) | **Post** /parsing-rules/mapping/v1 | Get Rule Group Model Mapping
 *RuleGroupsServiceAPI* | [**RuleGroupsServiceListRuleGroups**](docs/RuleGroupsServiceAPI.md#rulegroupsservicelistrulegroups) | **Get** /parsing-rules/rule-groups/v1 | List Rule Groups
 *RuleGroupsServiceAPI* | [**RuleGroupsServiceUpdateRuleGroup**](docs/RuleGroupsServiceAPI.md#rulegroupsserviceupdaterulegroup) | **Put** /parsing-rules/rule-groups/v1/{group_id} | Update Rule Group
 
@@ -120,6 +120,8 @@ Class | Method | HTTP request | Description
  - [JsonParseParameters](docs/JsonParseParameters.md)
  - [JsonStringifyParameters](docs/JsonStringifyParameters.md)
  - [ListRuleGroupsResponse](docs/ListRuleGroupsResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [ParseParameters](docs/ParseParameters.md)
  - [RemoveFieldsParameters](docs/RemoveFieldsParameters.md)
@@ -144,10 +146,10 @@ Class | Method | HTTP request | Description
  - [RuleParametersReplaceParameters](docs/RuleParametersReplaceParameters.md)
  - [RuleSubgroup](docs/RuleSubgroup.md)
  - [RulesV1Rule](docs/RulesV1Rule.md)
- - [RulesV1TeamId](docs/RulesV1TeamId.md)
  - [SeverityConstraint](docs/SeverityConstraint.md)
  - [SubsystemNameConstraint](docs/SubsystemNameConstraint.md)
  - [UpdateRuleGroupResponse](docs/UpdateRuleGroupResponse.md)
+ - [V1TeamId](docs/V1TeamId.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
  - [Value](docs/Value.md)
 

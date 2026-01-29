@@ -19,16 +19,26 @@ import (
 // PropertyDefinition - struct for PropertyDefinition
 type PropertyDefinition struct {
 	PropertyDefinitionAlignment *PropertyDefinitionAlignment
+	PropertyDefinitionColumnDisplayName *PropertyDefinitionColumnDisplayName
 	PropertyDefinitionLink *PropertyDefinitionLink
 	PropertyDefinitionRegexExtract *PropertyDefinitionRegexExtract
 	PropertyDefinitionThresholds *PropertyDefinitionThresholds
 	PropertyDefinitionUnits *PropertyDefinitionUnits
+	PropertyDefinitionValuesAlias *PropertyDefinitionValuesAlias
+	PropertyDefinitionValuesMapping *PropertyDefinitionValuesMapping
 }
 
 // PropertyDefinitionAlignmentAsPropertyDefinition is a convenience function that returns PropertyDefinitionAlignment wrapped in PropertyDefinition
 func PropertyDefinitionAlignmentAsPropertyDefinition(v *PropertyDefinitionAlignment) PropertyDefinition {
 	return PropertyDefinition{
 		PropertyDefinitionAlignment: v,
+	}
+}
+
+// PropertyDefinitionColumnDisplayNameAsPropertyDefinition is a convenience function that returns PropertyDefinitionColumnDisplayName wrapped in PropertyDefinition
+func PropertyDefinitionColumnDisplayNameAsPropertyDefinition(v *PropertyDefinitionColumnDisplayName) PropertyDefinition {
+	return PropertyDefinition{
+		PropertyDefinitionColumnDisplayName: v,
 	}
 }
 
@@ -60,6 +70,20 @@ func PropertyDefinitionUnitsAsPropertyDefinition(v *PropertyDefinitionUnits) Pro
 	}
 }
 
+// PropertyDefinitionValuesAliasAsPropertyDefinition is a convenience function that returns PropertyDefinitionValuesAlias wrapped in PropertyDefinition
+func PropertyDefinitionValuesAliasAsPropertyDefinition(v *PropertyDefinitionValuesAlias) PropertyDefinition {
+	return PropertyDefinition{
+		PropertyDefinitionValuesAlias: v,
+	}
+}
+
+// PropertyDefinitionValuesMappingAsPropertyDefinition is a convenience function that returns PropertyDefinitionValuesMapping wrapped in PropertyDefinition
+func PropertyDefinitionValuesMappingAsPropertyDefinition(v *PropertyDefinitionValuesMapping) PropertyDefinition {
+	return PropertyDefinition{
+		PropertyDefinitionValuesMapping: v,
+	}
+}
+
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *PropertyDefinition) UnmarshalJSON(data []byte) error {
@@ -80,6 +104,23 @@ func (dst *PropertyDefinition) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.PropertyDefinitionAlignment = nil
+	}
+
+	// try to unmarshal data into PropertyDefinitionColumnDisplayName
+	err = newStrictDecoder(data).Decode(&dst.PropertyDefinitionColumnDisplayName)
+	if err == nil {
+		jsonPropertyDefinitionColumnDisplayName, _ := json.Marshal(dst.PropertyDefinitionColumnDisplayName)
+		if string(jsonPropertyDefinitionColumnDisplayName) == "{}" { // empty struct
+			dst.PropertyDefinitionColumnDisplayName = nil
+		} else {
+			if err = validator.Validate(dst.PropertyDefinitionColumnDisplayName); err != nil {
+				dst.PropertyDefinitionColumnDisplayName = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.PropertyDefinitionColumnDisplayName = nil
 	}
 
 	// try to unmarshal data into PropertyDefinitionLink
@@ -150,13 +191,50 @@ func (dst *PropertyDefinition) UnmarshalJSON(data []byte) error {
 		dst.PropertyDefinitionUnits = nil
 	}
 
+	// try to unmarshal data into PropertyDefinitionValuesAlias
+	err = newStrictDecoder(data).Decode(&dst.PropertyDefinitionValuesAlias)
+	if err == nil {
+		jsonPropertyDefinitionValuesAlias, _ := json.Marshal(dst.PropertyDefinitionValuesAlias)
+		if string(jsonPropertyDefinitionValuesAlias) == "{}" { // empty struct
+			dst.PropertyDefinitionValuesAlias = nil
+		} else {
+			if err = validator.Validate(dst.PropertyDefinitionValuesAlias); err != nil {
+				dst.PropertyDefinitionValuesAlias = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.PropertyDefinitionValuesAlias = nil
+	}
+
+	// try to unmarshal data into PropertyDefinitionValuesMapping
+	err = newStrictDecoder(data).Decode(&dst.PropertyDefinitionValuesMapping)
+	if err == nil {
+		jsonPropertyDefinitionValuesMapping, _ := json.Marshal(dst.PropertyDefinitionValuesMapping)
+		if string(jsonPropertyDefinitionValuesMapping) == "{}" { // empty struct
+			dst.PropertyDefinitionValuesMapping = nil
+		} else {
+			if err = validator.Validate(dst.PropertyDefinitionValuesMapping); err != nil {
+				dst.PropertyDefinitionValuesMapping = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.PropertyDefinitionValuesMapping = nil
+	}
+
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.PropertyDefinitionAlignment = nil
+		dst.PropertyDefinitionColumnDisplayName = nil
 		dst.PropertyDefinitionLink = nil
 		dst.PropertyDefinitionRegexExtract = nil
 		dst.PropertyDefinitionThresholds = nil
 		dst.PropertyDefinitionUnits = nil
+		dst.PropertyDefinitionValuesAlias = nil
+		dst.PropertyDefinitionValuesMapping = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(PropertyDefinition)")
 	} else if match == 1 {
@@ -170,6 +248,10 @@ func (dst *PropertyDefinition) UnmarshalJSON(data []byte) error {
 func (src PropertyDefinition) MarshalJSON() ([]byte, error) {
 	if src.PropertyDefinitionAlignment != nil {
 		return json.Marshal(&src.PropertyDefinitionAlignment)
+	}
+
+	if src.PropertyDefinitionColumnDisplayName != nil {
+		return json.Marshal(&src.PropertyDefinitionColumnDisplayName)
 	}
 
 	if src.PropertyDefinitionLink != nil {
@@ -188,6 +270,14 @@ func (src PropertyDefinition) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.PropertyDefinitionUnits)
 	}
 
+	if src.PropertyDefinitionValuesAlias != nil {
+		return json.Marshal(&src.PropertyDefinitionValuesAlias)
+	}
+
+	if src.PropertyDefinitionValuesMapping != nil {
+		return json.Marshal(&src.PropertyDefinitionValuesMapping)
+	}
+
 	return nil, nil // no data in oneOf schemas
 }
 
@@ -198,6 +288,10 @@ func (obj *PropertyDefinition) GetActualInstance() (interface{}) {
 	}
 	if obj.PropertyDefinitionAlignment != nil {
 		return obj.PropertyDefinitionAlignment
+	}
+
+	if obj.PropertyDefinitionColumnDisplayName != nil {
+		return obj.PropertyDefinitionColumnDisplayName
 	}
 
 	if obj.PropertyDefinitionLink != nil {
@@ -216,6 +310,14 @@ func (obj *PropertyDefinition) GetActualInstance() (interface{}) {
 		return obj.PropertyDefinitionUnits
 	}
 
+	if obj.PropertyDefinitionValuesAlias != nil {
+		return obj.PropertyDefinitionValuesAlias
+	}
+
+	if obj.PropertyDefinitionValuesMapping != nil {
+		return obj.PropertyDefinitionValuesMapping
+	}
+
 	// all schemas are nil
 	return nil
 }
@@ -224,6 +326,10 @@ func (obj *PropertyDefinition) GetActualInstance() (interface{}) {
 func (obj PropertyDefinition) GetActualInstanceValue() (interface{}) {
 	if obj.PropertyDefinitionAlignment != nil {
 		return *obj.PropertyDefinitionAlignment
+	}
+
+	if obj.PropertyDefinitionColumnDisplayName != nil {
+		return *obj.PropertyDefinitionColumnDisplayName
 	}
 
 	if obj.PropertyDefinitionLink != nil {
@@ -240,6 +346,14 @@ func (obj PropertyDefinition) GetActualInstanceValue() (interface{}) {
 
 	if obj.PropertyDefinitionUnits != nil {
 		return *obj.PropertyDefinitionUnits
+	}
+
+	if obj.PropertyDefinitionValuesAlias != nil {
+		return *obj.PropertyDefinitionValuesAlias
+	}
+
+	if obj.PropertyDefinitionValuesMapping != nil {
+		return *obj.PropertyDefinitionValuesMapping
 	}
 
 	// all schemas are nil

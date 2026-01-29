@@ -173,7 +173,7 @@ func (a *DashboardServiceAPIService) DashboardsServiceAssignDashboardFolderExecu
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/dashboards/dashboards/{dashboard_id}/folder"
+	localVarPath := localBasePath + "/dashboards/dashboards/v1/{dashboard_id}/folder"
 	localVarPath = strings.Replace(localVarPath, "{"+"dashboard_id"+"}", url.PathEscape(parameterValueToString(r.dashboardId, "dashboardId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -281,7 +281,7 @@ func (a *DashboardServiceAPIService) DashboardsServiceCreateDashboardExecute(r A
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/dashboards/dashboards"
+	localVarPath := localBasePath + "/dashboards/dashboards/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -391,7 +391,7 @@ func (a *DashboardServiceAPIService) DashboardsServiceDeleteDashboardExecute(r A
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/dashboards/dashboards/{dashboard_id}"
+	localVarPath := localBasePath + "/dashboards/dashboards/v1/{dashboard_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"dashboard_id"+"}", url.PathEscape(parameterValueToString(r.dashboardId, "dashboardId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -497,7 +497,7 @@ func (a *DashboardServiceAPIService) DashboardsServiceGetDashboardExecute(r ApiD
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/dashboards/dashboards/{dashboard_id}"
+	localVarPath := localBasePath + "/dashboards/dashboards/v1/{dashboard_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"dashboard_id"+"}", url.PathEscape(parameterValueToString(r.dashboardId, "dashboardId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -600,7 +600,7 @@ func (a *DashboardServiceAPIService) DashboardsServiceGetDashboardBySlugExecute(
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/dashboards/by-slug/{slug}"
+	localVarPath := localBasePath + "/dashboards/dashboards/v1/slugs/{slug}"
 	localVarPath = strings.Replace(localVarPath, "{"+"slug"+"}", url.PathEscape(parameterValueToString(r.slug, "slug")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -665,11 +665,11 @@ type ApiDashboardsServicePinDashboardRequest struct {
 	ctx context.Context
 	ApiService *DashboardServiceAPIService
 	dashboardId string
-	pinDashboardRequestDataStructure *PinDashboardRequestDataStructure
+	requestId *string
 }
 
-func (r ApiDashboardsServicePinDashboardRequest) PinDashboardRequestDataStructure(pinDashboardRequestDataStructure PinDashboardRequestDataStructure) ApiDashboardsServicePinDashboardRequest {
-	r.pinDashboardRequestDataStructure = &pinDashboardRequestDataStructure
+func (r ApiDashboardsServicePinDashboardRequest) RequestId(requestId string) ApiDashboardsServicePinDashboardRequest {
+	r.requestId = &requestId
 	return r
 }
 
@@ -698,7 +698,7 @@ func (a *DashboardServiceAPIService) DashboardsServicePinDashboard(ctx context.C
 //  @return map[string]interface{}
 func (a *DashboardServiceAPIService) DashboardsServicePinDashboardExecute(r ApiDashboardsServicePinDashboardRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
+		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  map[string]interface{}
@@ -709,15 +709,18 @@ func (a *DashboardServiceAPIService) DashboardsServicePinDashboardExecute(r ApiD
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/dashboards/dashboards/{dashboard_id}:pin"
+	localVarPath := localBasePath + "/dashboards/pinned/v1/{dashboard_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"dashboard_id"+"}", url.PathEscape(parameterValueToString(r.dashboardId, "dashboardId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.requestId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", "")
+	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -733,8 +736,6 @@ func (a *DashboardServiceAPIService) DashboardsServicePinDashboardExecute(r ApiD
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.pinDashboardRequestDataStructure
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -817,7 +818,7 @@ func (a *DashboardServiceAPIService) DashboardsServiceReplaceDashboardExecute(r 
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/dashboards/dashboards"
+	localVarPath := localBasePath + "/dashboards/dashboards/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -927,7 +928,7 @@ func (a *DashboardServiceAPIService) DashboardsServiceReplaceDefaultDashboardExe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/dashboards/dashboards/{dashboard_id}/default"
+	localVarPath := localBasePath + "/dashboards/dashboards/v1/{dashboard_id}/default"
 	localVarPath = strings.Replace(localVarPath, "{"+"dashboard_id"+"}", url.PathEscape(parameterValueToString(r.dashboardId, "dashboardId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -994,11 +995,11 @@ type ApiDashboardsServiceUnpinDashboardRequest struct {
 	ctx context.Context
 	ApiService *DashboardServiceAPIService
 	dashboardId string
-	unpinDashboardRequestDataStructure *UnpinDashboardRequestDataStructure
+	requestId *string
 }
 
-func (r ApiDashboardsServiceUnpinDashboardRequest) UnpinDashboardRequestDataStructure(unpinDashboardRequestDataStructure UnpinDashboardRequestDataStructure) ApiDashboardsServiceUnpinDashboardRequest {
-	r.unpinDashboardRequestDataStructure = &unpinDashboardRequestDataStructure
+func (r ApiDashboardsServiceUnpinDashboardRequest) RequestId(requestId string) ApiDashboardsServiceUnpinDashboardRequest {
+	r.requestId = &requestId
 	return r
 }
 
@@ -1027,7 +1028,7 @@ func (a *DashboardServiceAPIService) DashboardsServiceUnpinDashboard(ctx context
 //  @return map[string]interface{}
 func (a *DashboardServiceAPIService) DashboardsServiceUnpinDashboardExecute(r ApiDashboardsServiceUnpinDashboardRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
+		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  map[string]interface{}
@@ -1038,15 +1039,18 @@ func (a *DashboardServiceAPIService) DashboardsServiceUnpinDashboardExecute(r Ap
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/dashboards/dashboards/{dashboard_id}:unpin"
+	localVarPath := localBasePath + "/dashboards/pinned/v1/{dashboard_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"dashboard_id"+"}", url.PathEscape(parameterValueToString(r.dashboardId, "dashboardId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.requestId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", "")
+	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1062,8 +1066,6 @@ func (a *DashboardServiceAPIService) DashboardsServiceUnpinDashboardExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.unpinDashboardRequestDataStructure
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -68,7 +68,7 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceCreateDashboa
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/dashboards/dashboards/v1/folders"
+	localVarPath := localBasePath + "/dashboards/folders/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -178,7 +178,7 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceDeleteDashboa
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/dashboards/dashboards/v1/folders/{folder_id}"
+	localVarPath := localBasePath + "/dashboards/folders/v1/{folder_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"folder_id"+"}", url.PathEscape(parameterValueToString(r.folderId, "folderId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -293,7 +293,7 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceGetDashboardF
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/dashboards/dashboards/v1/folders/{folder_id}"
+	localVarPath := localBasePath + "/dashboards/folders/v1/{folder_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"folder_id"+"}", url.PathEscape(parameterValueToString(r.folderId, "folderId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -399,7 +399,7 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceListDashboard
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/dashboards/dashboards/v1/folders"
+	localVarPath := localBasePath + "/dashboards/folders/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -504,7 +504,7 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceReplaceDashbo
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/dashboards/dashboards/v1/folders"
+	localVarPath := localBasePath + "/dashboards/folders/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

@@ -19,6 +19,8 @@ var _ MappedNullable = &CreateApiKeyRequest{}
 
 // CreateApiKeyRequest This data structure is used to create an API key.
 type CreateApiKeyRequest struct {
+	// JSON string representing the access policy for this API key. Defines granular permissions for users and groups.
+	AccessPolicy *string `json:"accessPolicy,omitempty"`
 	Hashed *bool `json:"hashed,omitempty"`
 	KeyPermissions *CreateApiKeyRequestKeyPermissions `json:"keyPermissions,omitempty"`
 	Name *string `json:"name,omitempty"`
@@ -40,6 +42,38 @@ func NewCreateApiKeyRequest() *CreateApiKeyRequest {
 func NewCreateApiKeyRequestWithDefaults() *CreateApiKeyRequest {
 	this := CreateApiKeyRequest{}
 	return &this
+}
+
+// GetAccessPolicy returns the AccessPolicy field value if set, zero value otherwise.
+func (o *CreateApiKeyRequest) GetAccessPolicy() string {
+	if o == nil || IsNil(o.AccessPolicy) {
+		var ret string
+		return ret
+	}
+	return *o.AccessPolicy
+}
+
+// GetAccessPolicyOk returns a tuple with the AccessPolicy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateApiKeyRequest) GetAccessPolicyOk() (*string, bool) {
+	if o == nil || IsNil(o.AccessPolicy) {
+		return nil, false
+	}
+	return o.AccessPolicy, true
+}
+
+// HasAccessPolicy returns a boolean if a field has been set.
+func (o *CreateApiKeyRequest) HasAccessPolicy() bool {
+	if o != nil && !IsNil(o.AccessPolicy) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessPolicy gets a reference to the given string and assigns it to the AccessPolicy field.
+func (o *CreateApiKeyRequest) SetAccessPolicy(v string) {
+	o.AccessPolicy = &v
 }
 
 // GetHashed returns the Hashed field value if set, zero value otherwise.
@@ -180,6 +214,9 @@ func (o CreateApiKeyRequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateApiKeyRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AccessPolicy) {
+		toSerialize["accessPolicy"] = o.AccessPolicy
+	}
 	if !IsNil(o.Hashed) {
 		toSerialize["hashed"] = o.Hashed
 	}

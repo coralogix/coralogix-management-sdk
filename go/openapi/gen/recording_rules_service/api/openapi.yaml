@@ -5,7 +5,7 @@ info:
 servers:
 - url: /
 paths:
-  /v1/rule-group-sets:
+  /recording-rules/recording-rules/v1:
     get:
       description: No description available
       externalDocs:
@@ -65,7 +65,7 @@ paths:
       summary: Create Recording Rules
       tags:
       - Recording Rules Service
-  /v1/rule-group-sets/{id}:
+  /recording-rules/recording-rules/v1/{id}:
     delete:
       description: No description available
       externalDocs:
@@ -307,6 +307,28 @@ components:
           format: int64
           type: integer
       title: In Rule Group
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:

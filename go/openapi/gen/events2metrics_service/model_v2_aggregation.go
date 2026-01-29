@@ -19,6 +19,7 @@ import (
 // V2Aggregation - struct for V2Aggregation
 type V2Aggregation struct {
 	V2AggregationHistogram *V2AggregationHistogram
+	V2AggregationNone *V2AggregationNone
 	V2AggregationSamples *V2AggregationSamples
 }
 
@@ -26,6 +27,13 @@ type V2Aggregation struct {
 func V2AggregationHistogramAsV2Aggregation(v *V2AggregationHistogram) V2Aggregation {
 	return V2Aggregation{
 		V2AggregationHistogram: v,
+	}
+}
+
+// V2AggregationNoneAsV2Aggregation is a convenience function that returns V2AggregationNone wrapped in V2Aggregation
+func V2AggregationNoneAsV2Aggregation(v *V2AggregationNone) V2Aggregation {
+	return V2Aggregation{
+		V2AggregationNone: v,
 	}
 }
 
@@ -58,6 +66,23 @@ func (dst *V2Aggregation) UnmarshalJSON(data []byte) error {
 		dst.V2AggregationHistogram = nil
 	}
 
+	// try to unmarshal data into V2AggregationNone
+	err = newStrictDecoder(data).Decode(&dst.V2AggregationNone)
+	if err == nil {
+		jsonV2AggregationNone, _ := json.Marshal(dst.V2AggregationNone)
+		if string(jsonV2AggregationNone) == "{}" { // empty struct
+			dst.V2AggregationNone = nil
+		} else {
+			if err = validator.Validate(dst.V2AggregationNone); err != nil {
+				dst.V2AggregationNone = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.V2AggregationNone = nil
+	}
+
 	// try to unmarshal data into V2AggregationSamples
 	err = newStrictDecoder(data).Decode(&dst.V2AggregationSamples)
 	if err == nil {
@@ -78,6 +103,7 @@ func (dst *V2Aggregation) UnmarshalJSON(data []byte) error {
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.V2AggregationHistogram = nil
+		dst.V2AggregationNone = nil
 		dst.V2AggregationSamples = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(V2Aggregation)")
@@ -92,6 +118,10 @@ func (dst *V2Aggregation) UnmarshalJSON(data []byte) error {
 func (src V2Aggregation) MarshalJSON() ([]byte, error) {
 	if src.V2AggregationHistogram != nil {
 		return json.Marshal(&src.V2AggregationHistogram)
+	}
+
+	if src.V2AggregationNone != nil {
+		return json.Marshal(&src.V2AggregationNone)
 	}
 
 	if src.V2AggregationSamples != nil {
@@ -110,6 +140,10 @@ func (obj *V2Aggregation) GetActualInstance() (interface{}) {
 		return obj.V2AggregationHistogram
 	}
 
+	if obj.V2AggregationNone != nil {
+		return obj.V2AggregationNone
+	}
+
 	if obj.V2AggregationSamples != nil {
 		return obj.V2AggregationSamples
 	}
@@ -122,6 +156,10 @@ func (obj *V2Aggregation) GetActualInstance() (interface{}) {
 func (obj V2Aggregation) GetActualInstanceValue() (interface{}) {
 	if obj.V2AggregationHistogram != nil {
 		return *obj.V2AggregationHistogram
+	}
+
+	if obj.V2AggregationNone != nil {
+		return *obj.V2AggregationNone
 	}
 
 	if obj.V2AggregationSamples != nil {

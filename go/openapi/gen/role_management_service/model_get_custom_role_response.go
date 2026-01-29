@@ -19,7 +19,7 @@ var _ MappedNullable = &GetCustomRoleResponse{}
 
 // GetCustomRoleResponse struct for GetCustomRoleResponse
 type GetCustomRoleResponse struct {
-	Role *V2CustomRole `json:"role,omitempty"`
+	Role *CustomRole `json:"role,omitempty"`
 }
 
 // NewGetCustomRoleResponse instantiates a new GetCustomRoleResponse object
@@ -40,9 +40,9 @@ func NewGetCustomRoleResponseWithDefaults() *GetCustomRoleResponse {
 }
 
 // GetRole returns the Role field value if set, zero value otherwise.
-func (o *GetCustomRoleResponse) GetRole() V2CustomRole {
+func (o *GetCustomRoleResponse) GetRole() CustomRole {
 	if o == nil || IsNil(o.Role) {
-		var ret V2CustomRole
+		var ret CustomRole
 		return ret
 	}
 	return *o.Role
@@ -50,7 +50,7 @@ func (o *GetCustomRoleResponse) GetRole() V2CustomRole {
 
 // GetRoleOk returns a tuple with the Role field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetCustomRoleResponse) GetRoleOk() (*V2CustomRole, bool) {
+func (o *GetCustomRoleResponse) GetRoleOk() (*CustomRole, bool) {
 	if o == nil || IsNil(o.Role) {
 		return nil, false
 	}
@@ -66,8 +66,8 @@ func (o *GetCustomRoleResponse) HasRole() bool {
 	return false
 }
 
-// SetRole gets a reference to the given V2CustomRole and assigns it to the Role field.
-func (o *GetCustomRoleResponse) SetRole(v V2CustomRole) {
+// SetRole gets a reference to the given CustomRole and assigns it to the Role field.
+func (o *GetCustomRoleResponse) SetRole(v CustomRole) {
 	o.Role = &v
 }
 

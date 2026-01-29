@@ -50,7 +50,7 @@ func TestSLOs(t *testing.T) {
 	updatedName := "updated_example_slo_" + uuid.NewString()
 	updatePayload := sloPayload
 	updatePayload.Id = &sloID
-	updatePayload.Name = updatedName
+	updatePayload.Name = &updatedName
 
 	updateReq := slos.SlosServiceReplaceSloRequest{
 		SloRequestBasedMetricSli: updatePayload,
@@ -86,17 +86,19 @@ func TestSLOs(t *testing.T) {
 func getRequestBasedSlo(name string) *slos.SloRequestBasedMetricSli {
 	desc := "example SLO created via OpenAPI SDK"
 	target := float32(30.0)
+	goodEventsQuery := "avg(rate(cpu_usage_seconds_total[1m])) by (instance)"
+	totalEventsQuery := "avg(rate(cpu_usage_seconds_total[1m])) by (instance)"
 
 	return &slos.SloRequestBasedMetricSli{
-		Name:                      name,
+		Name:                      &name,
 		Description:               slos.PtrString(desc),
-		TargetThresholdPercentage: target,
+		TargetThresholdPercentage: &target,
 		RequestBasedMetricSli: &slos.RequestBasedMetricSli{
-			GoodEvents: slos.Metric{
-				Query: "avg(rate(cpu_usage_seconds_total[1m])) by (instance)",
+			GoodEvents: &slos.Metric{
+				Query: &goodEventsQuery,
 			},
-			TotalEvents: slos.Metric{
-				Query: "avg(rate(cpu_usage_seconds_total[1m])) by (instance)",
+			TotalEvents: &slos.Metric{
+				Query: &totalEventsQuery,
 			},
 		},
 		SloTimeFrame: slos.SLOTIMEFRAME_SLO_TIME_FRAME_7_DAYS.Ptr(),

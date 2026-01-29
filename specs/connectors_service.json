@@ -5,48 +5,6 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/notifications/notification-center/v1/connector": {
-      "put": {
-        "tags": [
-          "Connectors service"
-        ],
-        "summary": "Replace a Connector",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "ConnectorsService_ReplaceConnector",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "title": "Replace Connector Request",
-                "description": "Request to replace an existing connector",
-                "type": "object",
-                "properties": {
-                  "connector": {
-                    "$ref": "#/components/schemas/Connector"
-                  }
-                },
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ReplaceConnectorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/notifications/notification-center/v1/connectors": {
       "get": {
         "tags": [
@@ -89,6 +47,46 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "Connectors service"
+        ],
+        "summary": "Replace a Connector",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ConnectorsService_ReplaceConnector",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Replace Connector Request",
+                "description": "Request to replace an existing connector",
+                "type": "object",
+                "properties": {
+                  "connector": {
+                    "$ref": "#/components/schemas/Connector"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplaceConnectorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "tags": [
           "Connectors service"
@@ -123,6 +121,165 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CreateConnectorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/connectors/all/list": {
+      "get": {
+        "tags": [
+          "Connectors service"
+        ],
+        "summary": "Batch Get Connectors",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ConnectorsService_BatchGetConnectors",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "connector_ids",
+            "schema": {
+              "example": [
+                "connector-id-1",
+                "connector-id-2"
+              ],
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchGetConnectorsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/connectors/all/summaries": {
+      "get": {
+        "tags": [
+          "Connectors service"
+        ],
+        "summary": "Batch Get Connectors Summaries",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ConnectorsService_BatchGetConnectorSummaries",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "connector_ids",
+            "schema": {
+              "type": "array",
+              "items": {
+                "example": "",
+                "type": "string"
+              }
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchGetConnectorSummariesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/connectors/list/summaries": {
+      "get": {
+        "tags": [
+          "Connectors service"
+        ],
+        "summary": "List Connector Summaries",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ConnectorsService_ListConnectorSummaries",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "connector_type",
+            "schema": {
+              "$ref": "#/components/schemas/ConnectorType"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "supported_by_entity_type",
+            "schema": {
+              "$ref": "#/components/schemas/notification_center.EntityType"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListConnectorSummariesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/connectors/types/summaries": {
+      "get": {
+        "tags": [
+          "Connectors service"
+        ],
+        "summary": "Get Connector Type Summaries",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ConnectorsService_GetConnectorTypeSummaries",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "supported_by_entity_type",
+            "schema": {
+              "$ref": "#/components/schemas/notification_center.EntityType"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetConnectorTypeSummariesResponse"
                 }
               }
             }
@@ -193,165 +350,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeleteConnectorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/notifications/notification-center/v1/connectors:batchGet": {
-      "get": {
-        "tags": [
-          "Connectors service"
-        ],
-        "summary": "Batch Get Connectors",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "ConnectorsService_BatchGetConnectors",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "connector_ids",
-            "schema": {
-              "example": [
-                "connector-id-1",
-                "connector-id-2"
-              ],
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BatchGetConnectorsResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/notifications/notification-center/v1/connectors:batchGetSummaries": {
-      "get": {
-        "tags": [
-          "Connectors service"
-        ],
-        "summary": "Batch Get Connectors Summaries",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "ConnectorsService_BatchGetConnectorSummaries",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "connector_ids",
-            "schema": {
-              "type": "array",
-              "items": {
-                "example": "",
-                "type": "string"
-              }
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BatchGetConnectorSummariesResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/notifications/notification-center/v1/connectors:getTypeSummaries": {
-      "get": {
-        "tags": [
-          "Connectors service"
-        ],
-        "summary": "Get Connector Type Summaries",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "ConnectorsService_GetConnectorTypeSummaries",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "supported_by_entity_type",
-            "schema": {
-              "$ref": "#/components/schemas/notification_center.EntityType"
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetConnectorTypeSummariesResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/notifications/notification-center/v1/connectors:listSummaries": {
-      "get": {
-        "tags": [
-          "Connectors service"
-        ],
-        "summary": "List Connector Summaries",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "ConnectorsService_ListConnectorSummaries",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "connector_type",
-            "schema": {
-              "$ref": "#/components/schemas/ConnectorType"
-            },
-            "style": "form"
-          },
-          {
-            "in": "query",
-            "name": "supported_by_entity_type",
-            "schema": {
-              "$ref": "#/components/schemas/notification_center.EntityType"
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ListConnectorSummariesResponse"
                 }
               }
             }
@@ -775,6 +773,34 @@
             }
           }
         }
+      },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",

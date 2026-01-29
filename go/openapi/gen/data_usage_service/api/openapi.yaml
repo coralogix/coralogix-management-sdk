@@ -66,7 +66,7 @@ paths:
       summary: Get Data Usage
       tags:
       - Data Usage Service
-  /dataplans/data-usage/v2/daily:evaluation-tokens:
+  /dataplans/data-usage/v2/daily/evaluation-tokens:
     post:
       description: No description available
       externalDocs:
@@ -99,7 +99,7 @@ paths:
       summary: Get Daily Usage Evaluation Tokens
       tags:
       - Data Usage Service
-  /dataplans/data-usage/v2/daily:processed-gbs:
+  /dataplans/data-usage/v2/daily/processed-gbs:
     post:
       description: No description available
       externalDocs:
@@ -132,7 +132,7 @@ paths:
       summary: Get Daily Usage Processed GBs
       tags:
       - Data Usage Service
-  /dataplans/data-usage/v2/daily:units:
+  /dataplans/data-usage/v2/daily/units:
     post:
       description: No description available
       externalDocs:
@@ -225,7 +225,7 @@ paths:
       summary: Update Data Usage Metrics Export Status
       tags:
       - Data Usage Service
-  /dataplans/data-usage/v2/logs:count:
+  /dataplans/data-usage/v2/logs/count:
     get:
       description: No description available
       externalDocs:
@@ -289,7 +289,7 @@ paths:
       summary: Get Logs Count
       tags:
       - Data Usage Service
-  /dataplans/data-usage/v2/spans:count:
+  /dataplans/data-usage/v2/spans/count:
     get:
       description: No description available
       externalDocs:
@@ -375,12 +375,8 @@ components:
         sizeGb: 0.8008282
         units: 6.0274563
         dimensions:
-        - genericDimension:
-            value: value
-            key: key
-        - genericDimension:
-            value: value
-            key: key
+        - pillar: PILLAR_UNSPECIFIED
+        - pillar: PILLAR_UNSPECIFIED
         timestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about data usage.
@@ -542,23 +538,21 @@ components:
       type: object
     Dimension:
       oneOf:
+      - $ref: "#/components/schemas/DimensionPillar"
       - $ref: "#/components/schemas/DimensionGenericDimension"
       - $ref: "#/components/schemas/DimensionTier"
       - $ref: "#/components/schemas/DimensionSeverity"
       - $ref: "#/components/schemas/DimensionPriority"
-      - $ref: "#/components/schemas/DimensionPillar"
     DimensionGenericDimension:
       additionalProperties: false
-      example:
-        genericDimension:
-          value: value
-          key: key
       properties:
         genericDimension:
           $ref: "#/components/schemas/GenericDimension"
       type: object
     DimensionPillar:
       additionalProperties: false
+      example:
+        pillar: PILLAR_UNSPECIFIED
       properties:
         pillar:
           $ref: "#/components/schemas/v2.Pillar"
@@ -652,9 +646,6 @@ components:
       type: object
     GenericDimension:
       description: This data structure represents a generic dimension.
-      example:
-        value: value
-        key: key
       externalDocs:
         description: Find out more about data usage.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
@@ -875,22 +866,14 @@ components:
         - sizeGb: 0.8008282
           units: 6.0274563
           dimensions:
-          - genericDimension:
-              value: value
-              key: key
-          - genericDimension:
-              value: value
-              key: key
+          - pillar: PILLAR_UNSPECIFIED
+          - pillar: PILLAR_UNSPECIFIED
           timestamp: 2000-01-23T04:56:07.000+00:00
         - sizeGb: 0.8008282
           units: 6.0274563
           dimensions:
-          - genericDimension:
-              value: value
-              key: key
-          - genericDimension:
-              value: value
-              key: key
+          - pillar: PILLAR_UNSPECIFIED
+          - pillar: PILLAR_UNSPECIFIED
           timestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about data usage.
@@ -985,6 +968,28 @@ components:
           format: date-time
           type: string
       title: Logs Count
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:
@@ -1177,11 +1182,11 @@ components:
       type: object
     DataUsageService_GetDataUsage_dimension_filters_parameter_inner:
       oneOf:
+      - $ref: "#/components/schemas/DimensionPillar"
       - $ref: "#/components/schemas/DimensionGenericDimension"
       - $ref: "#/components/schemas/DimensionTier"
       - $ref: "#/components/schemas/DimensionSeverity"
       - $ref: "#/components/schemas/DimensionPriority"
-      - $ref: "#/components/schemas/DimensionPillar"
     DataUsageService_GetDailyUsageEvaluationTokens_request:
       oneOf:
       - $ref: "#/components/schemas/GetDailyUsageEvaluationTokensRequestRange"
@@ -1194,8 +1199,8 @@ components:
       type: object
     DataUsageService_GetDailyUsageUnits_request:
       oneOf:
-      - $ref: "#/components/schemas/GetDailyUsageUnitsRequestRange"
       - $ref: "#/components/schemas/GetDailyUsageUnitsRequestDateRange"
+      - $ref: "#/components/schemas/GetDailyUsageUnitsRequestRange"
       type: object
     Update_Data_Usage_Metrics_Export_Status_Request:
       additionalProperties: false

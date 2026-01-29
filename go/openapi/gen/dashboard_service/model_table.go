@@ -21,6 +21,7 @@ var _ MappedNullable = &Table{}
 type Table struct {
 	Columns []TableColumn `json:"columns,omitempty"`
 	Rules []TableRule `json:"rules,omitempty"`
+	Settings *TableSettings `json:"settings,omitempty"`
 }
 
 // NewTable instantiates a new Table object
@@ -104,6 +105,38 @@ func (o *Table) SetRules(v []TableRule) {
 	o.Rules = v
 }
 
+// GetSettings returns the Settings field value if set, zero value otherwise.
+func (o *Table) GetSettings() TableSettings {
+	if o == nil || IsNil(o.Settings) {
+		var ret TableSettings
+		return ret
+	}
+	return *o.Settings
+}
+
+// GetSettingsOk returns a tuple with the Settings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Table) GetSettingsOk() (*TableSettings, bool) {
+	if o == nil || IsNil(o.Settings) {
+		return nil, false
+	}
+	return o.Settings, true
+}
+
+// HasSettings returns a boolean if a field has been set.
+func (o *Table) HasSettings() bool {
+	if o != nil && !IsNil(o.Settings) {
+		return true
+	}
+
+	return false
+}
+
+// SetSettings gets a reference to the given TableSettings and assigns it to the Settings field.
+func (o *Table) SetSettings(v TableSettings) {
+	o.Settings = &v
+}
+
 func (o Table) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -119,6 +152,9 @@ func (o Table) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Rules) {
 		toSerialize["rules"] = o.Rules
+	}
+	if !IsNil(o.Settings) {
+		toSerialize["settings"] = o.Settings
 	}
 	return toSerialize, nil
 }

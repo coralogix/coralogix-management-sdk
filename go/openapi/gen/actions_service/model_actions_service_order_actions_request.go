@@ -17,7 +17,7 @@ import (
 // checks if the ActionsServiceOrderActionsRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActionsServiceOrderActionsRequest{}
 
-// ActionsServiceOrderActionsRequest struct for ActionsServiceOrderActionsRequest
+// ActionsServiceOrderActionsRequest This data structure represents the request to order Actions.
 type ActionsServiceOrderActionsRequest struct {
 	PrivateActionsOrder *map[string]int64 `json:"privateActionsOrder,omitempty"`
 	SharedActionsOrder *map[string]int64 `json:"sharedActionsOrder,omitempty"`

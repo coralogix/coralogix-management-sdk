@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateScopeResponse{}
 
 // CreateScopeResponse This data structure represents a response to create a scope
 type CreateScopeResponse struct {
-	Scope ScopesV1Scope `json:"scope"`
+	Scope V1Scope `json:"scope"`
 }
 
 type _CreateScopeResponse CreateScopeResponse
@@ -30,7 +30,7 @@ type _CreateScopeResponse CreateScopeResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateScopeResponse(scope ScopesV1Scope) *CreateScopeResponse {
+func NewCreateScopeResponse(scope V1Scope) *CreateScopeResponse {
 	this := CreateScopeResponse{}
 	this.Scope = scope
 	return &this
@@ -45,9 +45,9 @@ func NewCreateScopeResponseWithDefaults() *CreateScopeResponse {
 }
 
 // GetScope returns the Scope field value
-func (o *CreateScopeResponse) GetScope() ScopesV1Scope {
+func (o *CreateScopeResponse) GetScope() V1Scope {
 	if o == nil {
-		var ret ScopesV1Scope
+		var ret V1Scope
 		return ret
 	}
 
@@ -56,7 +56,7 @@ func (o *CreateScopeResponse) GetScope() ScopesV1Scope {
 
 // GetScopeOk returns a tuple with the Scope field value
 // and a boolean to check if the value has been set.
-func (o *CreateScopeResponse) GetScopeOk() (*ScopesV1Scope, bool) {
+func (o *CreateScopeResponse) GetScopeOk() (*V1Scope, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,7 +64,7 @@ func (o *CreateScopeResponse) GetScopeOk() (*ScopesV1Scope, bool) {
 }
 
 // SetScope sets field value
-func (o *CreateScopeResponse) SetScope(v ScopesV1Scope) {
+func (o *CreateScopeResponse) SetScope(v V1Scope) {
 	o.Scope = v
 }
 

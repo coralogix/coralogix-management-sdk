@@ -8,8 +8,6 @@ client.go
 configuration.go
 git_push.sh
 model_archive_retention.go
-model_atomic_batch_create_policy_request.go
-model_atomic_batch_create_policy_response.go
 model_atomic_overwrite_log_policies_request.go
 model_atomic_overwrite_log_policies_response.go
 model_atomic_overwrite_span_policies_request.go
@@ -22,7 +20,6 @@ model_colors_by_stack.go
 model_common_group.go
 model_create_generic_policy_request.go
 model_create_log_policy_request.go
-model_create_policy_request.go
 model_create_policy_request_log_rules.go
 model_create_policy_request_span_rules.go
 model_create_policy_response.go
@@ -40,12 +37,13 @@ model_get_policy_settings_response.go
 model_log_meta_fields_values.go
 model_log_rules.go
 model_logs_policy_settings.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_placement.go
 model_placement_first.go
 model_placement_last.go
 model_policies_service_create_policy_request.go
-model_policies_service_replace_policy_settings_request.go
 model_policies_service_update_policy_request.go
 model_policy.go
 model_policy_log_rules.go
@@ -56,14 +54,13 @@ model_quota_v1_rule.go
 model_quota_v1_severity.go
 model_reorder_policies_request.go
 model_reorder_policies_response.go
+model_replace_policy_settings_request.go
 model_replace_policy_settings_response.go
 model_rule_type_id.go
 model_span_rules.go
 model_spans_policy_settings.go
 model_tag_rule.go
 model_test_policies_result.go
-model_toggle_policy_request.go
-model_toggle_policy_response.go
 model_update_policy_request_log_rules.go
 model_update_policy_request_span_rules.go
 model_update_policy_response.go

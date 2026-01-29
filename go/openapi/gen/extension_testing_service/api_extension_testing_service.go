@@ -67,7 +67,7 @@ func (a *ExtensionTestingServiceAPIService) ExtensionTestingServiceCleanupTestin
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/extensions/v1/testing"
+	localVarPath := localBasePath + "/integrations/testing/v1/extensions"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -174,7 +174,7 @@ func (a *ExtensionTestingServiceAPIService) ExtensionTestingServiceInitializeTes
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/extensions/v1/testing/initialize"
+	localVarPath := localBasePath + "/integrations/testing/v1/extensions/initialize"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -281,7 +281,7 @@ func (a *ExtensionTestingServiceAPIService) ExtensionTestingServiceTestExtension
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/extensions/v1/testing"
+	localVarPath := localBasePath + "/integrations/testing/v1/extensions"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

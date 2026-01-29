@@ -20,6 +20,7 @@ var _ MappedNullable = &PresetSummary{}
 
 // PresetSummary Provides a concise overview of a preset
 type PresetSummary struct {
+	AttachmentConfig *AttachmentConfig `json:"attachmentConfig,omitempty"`
 	ConnectorType *ConnectorType `json:"connectorType,omitempty"`
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	Description *string `json:"description,omitempty"`
@@ -46,6 +47,38 @@ func NewPresetSummary() *PresetSummary {
 func NewPresetSummaryWithDefaults() *PresetSummary {
 	this := PresetSummary{}
 	return &this
+}
+
+// GetAttachmentConfig returns the AttachmentConfig field value if set, zero value otherwise.
+func (o *PresetSummary) GetAttachmentConfig() AttachmentConfig {
+	if o == nil || IsNil(o.AttachmentConfig) {
+		var ret AttachmentConfig
+		return ret
+	}
+	return *o.AttachmentConfig
+}
+
+// GetAttachmentConfigOk returns a tuple with the AttachmentConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PresetSummary) GetAttachmentConfigOk() (*AttachmentConfig, bool) {
+	if o == nil || IsNil(o.AttachmentConfig) {
+		return nil, false
+	}
+	return o.AttachmentConfig, true
+}
+
+// HasAttachmentConfig returns a boolean if a field has been set.
+func (o *PresetSummary) HasAttachmentConfig() bool {
+	if o != nil && !IsNil(o.AttachmentConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetAttachmentConfig gets a reference to the given AttachmentConfig and assigns it to the AttachmentConfig field.
+func (o *PresetSummary) SetAttachmentConfig(v AttachmentConfig) {
+	o.AttachmentConfig = &v
 }
 
 // GetConnectorType returns the ConnectorType field value if set, zero value otherwise.
@@ -346,6 +379,9 @@ func (o PresetSummary) MarshalJSON() ([]byte, error) {
 
 func (o PresetSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AttachmentConfig) {
+		toSerialize["attachmentConfig"] = o.AttachmentConfig
+	}
 	if !IsNil(o.ConnectorType) {
 		toSerialize["connectorType"] = o.ConnectorType
 	}

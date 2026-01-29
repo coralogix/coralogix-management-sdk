@@ -204,6 +204,42 @@ components:
       title: Alert event
       type: object
     AlertEventMultiplePermutation:
+      example:
+        alertEventMultiplePermutation:
+        - preGroupingEventId: preGroupingEventId
+          incidentCorrelationKey: incidentCorrelationKey
+          groupLabels:
+            key: groupLabels
+          payloadType: payloadType
+          payload: "{}"
+          alertId: alertId
+          activityAnalysis:
+            rules:
+            - rules
+            - rules
+            status: ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED
+          permutationLabels:
+            key: permutationLabels
+          permutationId: permutationId
+          status: ALERT_STATUS_RESOLVED_OR_UNSPECIFIED
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        - preGroupingEventId: preGroupingEventId
+          incidentCorrelationKey: incidentCorrelationKey
+          groupLabels:
+            key: groupLabels
+          payloadType: payloadType
+          payload: "{}"
+          alertId: alertId
+          activityAnalysis:
+            rules:
+            - rules
+            - rules
+            status: ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED
+          permutationLabels:
+            key: permutationLabels
+          permutationId: permutationId
+          status: ALERT_STATUS_RESOLVED_OR_UNSPECIFIED
+          timestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         alertEventMultiplePermutation:
           items:
@@ -214,6 +250,7 @@ components:
       enum:
       - ALERT_STATUS_RESOLVED_OR_UNSPECIFIED
       - ALERT_STATUS_TRIGGERED
+      - ALERT_STATUS_NO_DATA
       type: string
     ColorsByAggregation:
       additionalProperties: false
@@ -337,10 +374,51 @@ components:
       type: object
     GetAlertEventResponse:
       oneOf:
-      - $ref: "#/components/schemas/GetAlertEventResponseSinglePermutation"
       - $ref: "#/components/schemas/GetAlertEventResponseMultiplePermutation"
+      - $ref: "#/components/schemas/GetAlertEventResponseSinglePermutation"
     GetAlertEventResponseMultiplePermutation:
       additionalProperties: false
+      example:
+        pagination:
+          totalSize: 0
+          nextPageToken: nextPageToken
+        multiplePermutation:
+          alertEventMultiplePermutation:
+          - preGroupingEventId: preGroupingEventId
+            incidentCorrelationKey: incidentCorrelationKey
+            groupLabels:
+              key: groupLabels
+            payloadType: payloadType
+            payload: "{}"
+            alertId: alertId
+            activityAnalysis:
+              rules:
+              - rules
+              - rules
+              status: ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED
+            permutationLabels:
+              key: permutationLabels
+            permutationId: permutationId
+            status: ALERT_STATUS_RESOLVED_OR_UNSPECIFIED
+            timestamp: 2000-01-23T04:56:07.000+00:00
+          - preGroupingEventId: preGroupingEventId
+            incidentCorrelationKey: incidentCorrelationKey
+            groupLabels:
+              key: groupLabels
+            payloadType: payloadType
+            payload: "{}"
+            alertId: alertId
+            activityAnalysis:
+              rules:
+              - rules
+              - rules
+              status: ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED
+            permutationLabels:
+              key: permutationLabels
+            permutationId: permutationId
+            status: ALERT_STATUS_RESOLVED_OR_UNSPECIFIED
+            timestamp: 2000-01-23T04:56:07.000+00:00
+        id: id
       externalDocs:
         url: ""
       properties:
@@ -354,29 +432,6 @@ components:
       type: object
     GetAlertEventResponseSinglePermutation:
       additionalProperties: false
-      example:
-        pagination:
-          totalSize: 0
-          nextPageToken: nextPageToken
-        singlePermutation:
-          preGroupingEventId: preGroupingEventId
-          incidentCorrelationKey: incidentCorrelationKey
-          groupLabels:
-            key: groupLabels
-          payloadType: payloadType
-          payload: "{}"
-          alertId: alertId
-          activityAnalysis:
-            rules:
-            - rules
-            - rules
-            status: ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED
-          permutationLabels:
-            key: permutationLabels
-          permutationId: permutationId
-          status: ALERT_STATUS_RESOLVED_OR_UNSPECIFIED
-          timestamp: 2000-01-23T04:56:07.000+00:00
-        id: id
       externalDocs:
         url: ""
       properties:
@@ -418,6 +473,28 @@ components:
             $ref: "#/components/schemas/EventStats"
           type: object
       title: Get alert event statistics response
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:

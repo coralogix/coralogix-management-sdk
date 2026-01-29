@@ -78,15 +78,20 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*APIKeysAdminServiceAPI* | [**ApiKeysAdminServiceGetTeamMembersApiKeys**](docs/APIKeysAdminServiceAPI.md#apikeysadminservicegetteammembersapikeys) | **Get** /aaa/api-keys/v3 | Get Team Members API Keys
 *APIKeysServiceAPI* | [**ApiKeysServiceCreateApiKey**](docs/APIKeysServiceAPI.md#apikeysservicecreateapikey) | **Post** /aaa/api-keys/v3 | Create API Key
 *APIKeysServiceAPI* | [**ApiKeysServiceDeleteApiKey**](docs/APIKeysServiceAPI.md#apikeysservicedeleteapikey) | **Delete** /aaa/api-keys/v3/{key_id} | Delete API Key
 *APIKeysServiceAPI* | [**ApiKeysServiceGetApiKey**](docs/APIKeysServiceAPI.md#apikeysservicegetapikey) | **Get** /aaa/api-keys/v3/{key_id} | Get API Key
-*APIKeysServiceAPI* | [**ApiKeysServiceGetSendDataApiKeys**](docs/APIKeysServiceAPI.md#apikeysservicegetsenddataapikeys) | **Get** /aaa/api-keys/v3/send_data | Get \&quot;Send Data\&quot; API Keys
+*APIKeysServiceAPI* | [**ApiKeysServiceGetSendDataApiKeys**](docs/APIKeysServiceAPI.md#apikeysservicegetsenddataapikeys) | **Get** /aaa/send-data-keys/v3 | Get \&quot;Send Data\&quot; API Keys
 *APIKeysServiceAPI* | [**ApiKeysServiceUpdateApiKey**](docs/APIKeysServiceAPI.md#apikeysserviceupdateapikey) | **Put** /aaa/api-keys/v3/{key_id} | Update API Key
 
 
 ## Documentation For Models
 
+ - [ApiKey](docs/ApiKey.md)
+ - [ApiKeyOwner](docs/ApiKeyOwner.md)
+ - [ApiKeySummary](docs/ApiKeySummary.md)
+ - [ApiKeyUserOwner](docs/ApiKeyUserOwner.md)
  - [ColorsByAggregation](docs/ColorsByAggregation.md)
  - [ColorsByGroupBy](docs/ColorsByGroupBy.md)
  - [ColorsByStack](docs/ColorsByStack.md)
@@ -102,13 +107,17 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [GetApiKeyResponse](docs/GetApiKeyResponse.md)
  - [GetSendDataApiKeysResponse](docs/GetSendDataApiKeysResponse.md)
+ - [GetTeamMembersApiKeysResponse](docs/GetTeamMembersApiKeysResponse.md)
  - [KeyInfo](docs/KeyInfo.md)
  - [KeyInfoKeyPermissions](docs/KeyInfoKeyPermissions.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [Owner](docs/Owner.md)
  - [OwnerOrganisationId](docs/OwnerOrganisationId.md)
  - [OwnerTeamId](docs/OwnerTeamId.md)
  - [OwnerUserId](docs/OwnerUserId.md)
+ - [PermissionsPreset](docs/PermissionsPreset.md)
  - [PresetInfo](docs/PresetInfo.md)
  - [Presets](docs/Presets.md)
  - [UpdateApiKeyRequest](docs/UpdateApiKeyRequest.md)

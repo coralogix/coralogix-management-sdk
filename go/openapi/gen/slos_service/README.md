@@ -78,19 +78,28 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*SlosServiceAPI* | [**SlosServiceBatchExecuteSlo**](docs/SlosServiceAPI.md#slosservicebatchexecuteslo) | **Post** /v1/slo/slos:batchExecute | Batch Execute Slo
-*SlosServiceAPI* | [**SlosServiceBatchGetSlos**](docs/SlosServiceAPI.md#slosservicebatchgetslos) | **Get** /v1/slo/slos:batchGet | Batch Get Slo
-*SlosServiceAPI* | [**SlosServiceCreateSlo**](docs/SlosServiceAPI.md#slosservicecreateslo) | **Post** /v1/slo/slos | Create Slo
-*SlosServiceAPI* | [**SlosServiceDeleteSlo**](docs/SlosServiceAPI.md#slosservicedeleteslo) | **Delete** /v1/slo/slos/{id} | Delete Slo
-*SlosServiceAPI* | [**SlosServiceGetSlo**](docs/SlosServiceAPI.md#slosservicegetslo) | **Get** /v1/slo/slos/{id} | Get Slo
-*SlosServiceAPI* | [**SlosServiceGetZeroState**](docs/SlosServiceAPI.md#slosservicegetzerostate) | **Get** /v1/slo/slos/zeroState | Get Slo Zero State
-*SlosServiceAPI* | [**SlosServiceListSlos**](docs/SlosServiceAPI.md#slosservicelistslos) | **Get** /v1/slo/slos | List Slos
-*SlosServiceAPI* | [**SlosServiceReplaceSlo**](docs/SlosServiceAPI.md#slosservicereplaceslo) | **Put** /v1/slo/slos | Replace Slo
-*SlosServiceAPI* | [**SlosServiceValidateReplaceSloAlerts**](docs/SlosServiceAPI.md#slosservicevalidatereplacesloalerts) | **Post** /v1/slo/slos/validate | Replace Slo Pre-Validate Alerts
+*SlosServiceAPI* | [**SlosServiceBatchExecuteSlo**](docs/SlosServiceAPI.md#slosservicebatchexecuteslo) | **Post** /slo/slos/v1/all/execute | Batch Execute Slo
+*SlosServiceAPI* | [**SlosServiceBatchGetSlos**](docs/SlosServiceAPI.md#slosservicebatchgetslos) | **Get** /slo/slos/v1/all/list | Batch Get Slo
+*SlosServiceAPI* | [**SlosServiceCreateSlo**](docs/SlosServiceAPI.md#slosservicecreateslo) | **Post** /slo/slos/v1 | Create Slo
+*SlosServiceAPI* | [**SlosServiceDeleteSlo**](docs/SlosServiceAPI.md#slosservicedeleteslo) | **Delete** /slo/slos/v1/{id} | Delete Slo
+*SlosServiceAPI* | [**SlosServiceGetSlo**](docs/SlosServiceAPI.md#slosservicegetslo) | **Get** /slo/slos/v1/{id} | Get Slo
+*SlosServiceAPI* | [**SlosServiceGetZeroState**](docs/SlosServiceAPI.md#slosservicegetzerostate) | **Get** /slo/zero-state/v1 | Get Slo Zero State
+*SlosServiceAPI* | [**SlosServiceListSlos**](docs/SlosServiceAPI.md#slosservicelistslos) | **Get** /slo/slos/v1 | List Slos
+*SlosServiceAPI* | [**SlosServiceReplaceSlo**](docs/SlosServiceAPI.md#slosservicereplaceslo) | **Put** /slo/slos/v1 | Replace Slo
+*SlosServiceAPI* | [**SlosServiceValidateReplaceSloAlerts**](docs/SlosServiceAPI.md#slosservicevalidatereplacesloalerts) | **Put** /slo/validated/v1 | Replace Slo Pre-Validate Alerts
 
 
 ## Documentation For Models
 
+ - [ApmFilter](docs/ApmFilter.md)
+ - [ApmLatencyQuantile](docs/ApmLatencyQuantile.md)
+ - [ApmLatencySli](docs/ApmLatencySli.md)
+ - [ApmLatencySliAverage](docs/ApmLatencySliAverage.md)
+ - [ApmLatencySliQuantile](docs/ApmLatencySliQuantile.md)
+ - [ApmSli](docs/ApmSli.md)
+ - [ApmSliErrorConfig](docs/ApmSliErrorConfig.md)
+ - [ApmSliLatencyConfig](docs/ApmSliLatencyConfig.md)
+ - [BatchExecuteSloRequest](docs/BatchExecuteSloRequest.md)
  - [BatchExecuteSloResponse](docs/BatchExecuteSloResponse.md)
  - [BatchGetSlosResponse](docs/BatchGetSlosResponse.md)
  - [Code](docs/Code.md)
@@ -111,11 +120,16 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [GetSloResponse](docs/GetSloResponse.md)
  - [GetZeroStateResponse](docs/GetZeroStateResponse.md)
- - [IsFilterPredicate](docs/IsFilterPredicate.md)
+ - [IsFilterPredicateProductTypeValues](docs/IsFilterPredicateProductTypeValues.md)
+ - [IsFilterPredicateStringValues](docs/IsFilterPredicateStringValues.md)
+ - [IsFilterPredicateTypeValues](docs/IsFilterPredicateTypeValues.md)
  - [ListSlosResponse](docs/ListSlosResponse.md)
  - [Metric](docs/Metric.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MissingDataStrategy](docs/MissingDataStrategy.md)
  - [MultipleValues](docs/MultipleValues.md)
+ - [ProductTypeValues](docs/ProductTypeValues.md)
  - [ReplaceSloAlertsValidationsResponse](docs/ReplaceSloAlertsValidationsResponse.md)
  - [ReplaceSloRequest](docs/ReplaceSloRequest.md)
  - [ReplaceSloResponse](docs/ReplaceSloResponse.md)
@@ -123,7 +137,9 @@ Class | Method | HTTP request | Description
  - [ResponseStatus](docs/ResponseStatus.md)
  - [Slo](docs/Slo.md)
  - [SloAlertValidityResult](docs/SloAlertValidityResult.md)
+ - [SloApmSli](docs/SloApmSli.md)
  - [SloConstantFilterField](docs/SloConstantFilterField.md)
+ - [SloExecutionRequest](docs/SloExecutionRequest.md)
  - [SloExecutionRequestCreateSloRequest](docs/SloExecutionRequestCreateSloRequest.md)
  - [SloExecutionRequestDeleteSloRequest](docs/SloExecutionRequestDeleteSloRequest.md)
  - [SloExecutionRequestReplaceSloRequest](docs/SloExecutionRequestReplaceSloRequest.md)
@@ -135,14 +151,20 @@ Class | Method | HTTP request | Description
  - [SloFilterField](docs/SloFilterField.md)
  - [SloFilterFieldConstFilter](docs/SloFilterFieldConstFilter.md)
  - [SloFilterFieldLabelName](docs/SloFilterFieldLabelName.md)
+ - [SloFilterFieldProductType](docs/SloFilterFieldProductType.md)
+ - [SloFilterFieldServiceName](docs/SloFilterFieldServiceName.md)
+ - [SloFilterFieldSloType](docs/SloFilterFieldSloType.md)
  - [SloFilterPredicate](docs/SloFilterPredicate.md)
- - [SloFilters](docs/SloFilters.md)
+ - [SloFilterPredicateIs](docs/SloFilterPredicateIs.md)
+ - [SloProductType](docs/SloProductType.md)
  - [SloRequestBasedMetricSli](docs/SloRequestBasedMetricSli.md)
  - [SloTimeFrame](docs/SloTimeFrame.md)
+ - [SloType](docs/SloType.md)
  - [SloWindowBasedMetricSli](docs/SloWindowBasedMetricSli.md)
- - [SlosServiceBatchExecuteSloRequestsParameterInner](docs/SlosServiceBatchExecuteSloRequestsParameterInner.md)
  - [SlosServiceReplaceSloRequest](docs/SlosServiceReplaceSloRequest.md)
  - [SlosServiceValidateReplaceSloAlertsRequest](docs/SlosServiceValidateReplaceSloAlertsRequest.md)
+ - [StringValues](docs/StringValues.md)
+ - [TypeValues](docs/TypeValues.md)
  - [V1Grouping](docs/V1Grouping.md)
  - [V1Revision](docs/V1Revision.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)

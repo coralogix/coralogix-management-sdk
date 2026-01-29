@@ -378,7 +378,7 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceGetOutgoingWe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/webhooks/v1/types/{type}"
+	localVarPath := localBasePath + "/integrations/webhook-types/v1/{type}"
 	localVarPath = strings.Replace(localVarPath, "{"+"type"+"}", url.PathEscape(parameterValueToString(r.type_, "type_")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -577,7 +577,7 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutboundW
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/webhooks/v1/summary"
+	localVarPath := localBasePath + "/integrations/webhooks/v1/list/summaries"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -676,7 +676,7 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutgoingW
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/webhooks/v1/types"
+	localVarPath := localBasePath + "/integrations/webhook-types/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -781,7 +781,7 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutgoingW
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/webhooks/v1:listByType"
+	localVarPath := localBasePath + "/integrations/webhooks/v1/list/by-types"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -847,12 +847,7 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutgoingW
 type ApiOutgoingWebhooksServiceTestExistingOutgoingWebhookRequest struct {
 	ctx context.Context
 	ApiService *OutgoingWebhooksServiceAPIService
-	testExistingOutgoingWebhookRequest *TestExistingOutgoingWebhookRequest
-}
-
-func (r ApiOutgoingWebhooksServiceTestExistingOutgoingWebhookRequest) TestExistingOutgoingWebhookRequest(testExistingOutgoingWebhookRequest TestExistingOutgoingWebhookRequest) ApiOutgoingWebhooksServiceTestExistingOutgoingWebhookRequest {
-	r.testExistingOutgoingWebhookRequest = &testExistingOutgoingWebhookRequest
-	return r
+	id string
 }
 
 func (r ApiOutgoingWebhooksServiceTestExistingOutgoingWebhookRequest) Execute() (*TestOutgoingWebhookResponse, *http.Response, error) {
@@ -865,12 +860,14 @@ OutgoingWebhooksServiceTestExistingOutgoingWebhook Test an existing outgoing web
 No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
  @return ApiOutgoingWebhooksServiceTestExistingOutgoingWebhookRequest
 */
-func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceTestExistingOutgoingWebhook(ctx context.Context) ApiOutgoingWebhooksServiceTestExistingOutgoingWebhookRequest {
+func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceTestExistingOutgoingWebhook(ctx context.Context, id string) ApiOutgoingWebhooksServiceTestExistingOutgoingWebhookRequest {
 	return ApiOutgoingWebhooksServiceTestExistingOutgoingWebhookRequest{
 		ApiService: a,
 		ctx: ctx,
+		id: id,
 	}
 }
 
@@ -878,7 +875,7 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceTestExistingO
 //  @return TestOutgoingWebhookResponse
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceTestExistingOutgoingWebhookExecute(r ApiOutgoingWebhooksServiceTestExistingOutgoingWebhookRequest) (*TestOutgoingWebhookResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  *TestOutgoingWebhookResponse
@@ -889,14 +886,15 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceTestExistingO
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/webhooks/v1/test-existing"
+	localVarPath := localBasePath + "/integrations/webhooks/v1/{id}/test"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -912,8 +910,6 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceTestExistingO
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.testExistingOutgoingWebhookRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -996,7 +992,7 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceTestOutgoingW
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/webhooks/v1/test"
+	localVarPath := localBasePath + "/integrations/webhooks-test/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

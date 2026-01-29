@@ -22,6 +22,7 @@ type GetContextualDataIntegrationsResponseIntegrationWithCounts struct {
 	AmountIntegrations *int64 `json:"amountIntegrations,omitempty"`
 	Errors []string `json:"errors,omitempty"`
 	Integration *Integration `json:"integration,omitempty"`
+	IsDeprecated *bool `json:"isDeprecated,omitempty"`
 	IsNew *bool `json:"isNew,omitempty"`
 	UpgradeAvailable *bool `json:"upgradeAvailable,omitempty"`
 }
@@ -139,6 +140,38 @@ func (o *GetContextualDataIntegrationsResponseIntegrationWithCounts) SetIntegrat
 	o.Integration = &v
 }
 
+// GetIsDeprecated returns the IsDeprecated field value if set, zero value otherwise.
+func (o *GetContextualDataIntegrationsResponseIntegrationWithCounts) GetIsDeprecated() bool {
+	if o == nil || IsNil(o.IsDeprecated) {
+		var ret bool
+		return ret
+	}
+	return *o.IsDeprecated
+}
+
+// GetIsDeprecatedOk returns a tuple with the IsDeprecated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetContextualDataIntegrationsResponseIntegrationWithCounts) GetIsDeprecatedOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsDeprecated) {
+		return nil, false
+	}
+	return o.IsDeprecated, true
+}
+
+// HasIsDeprecated returns a boolean if a field has been set.
+func (o *GetContextualDataIntegrationsResponseIntegrationWithCounts) HasIsDeprecated() bool {
+	if o != nil && !IsNil(o.IsDeprecated) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsDeprecated gets a reference to the given bool and assigns it to the IsDeprecated field.
+func (o *GetContextualDataIntegrationsResponseIntegrationWithCounts) SetIsDeprecated(v bool) {
+	o.IsDeprecated = &v
+}
+
 // GetIsNew returns the IsNew field value if set, zero value otherwise.
 func (o *GetContextualDataIntegrationsResponseIntegrationWithCounts) GetIsNew() bool {
 	if o == nil || IsNil(o.IsNew) {
@@ -221,6 +254,9 @@ func (o GetContextualDataIntegrationsResponseIntegrationWithCounts) ToMap() (map
 	}
 	if !IsNil(o.Integration) {
 		toSerialize["integration"] = o.Integration
+	}
+	if !IsNil(o.IsDeprecated) {
+		toSerialize["isDeprecated"] = o.IsDeprecated
 	}
 	if !IsNil(o.IsNew) {
 		toSerialize["isNew"] = o.IsNew

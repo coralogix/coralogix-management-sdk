@@ -78,19 +78,19 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*IntegrationServiceAPI* | [**IntegrationServiceDeleteIntegration**](docs/IntegrationServiceAPI.md#integrationservicedeleteintegration) | **Delete** /integrations/integrations/v1/instance/{integration_id} | Delete integration
+*IntegrationServiceAPI* | [**IntegrationServiceDeleteIntegration**](docs/IntegrationServiceAPI.md#integrationservicedeleteintegration) | **Delete** /integrations/integrations/v1/instances/{integration_id} | Delete integration
 *IntegrationServiceAPI* | [**IntegrationServiceGetDeployedIntegration**](docs/IntegrationServiceAPI.md#integrationservicegetdeployedintegration) | **Get** /integrations/integrations/v1/deployed/{integration_id} | Get deployed integration
-*IntegrationServiceAPI* | [**IntegrationServiceGetIntegrationDefinition**](docs/IntegrationServiceAPI.md#integrationservicegetintegrationdefinition) | **Get** /integrations/integrations/v1/definition/{id} | Get integration definition
+*IntegrationServiceAPI* | [**IntegrationServiceGetIntegrationDefinition**](docs/IntegrationServiceAPI.md#integrationservicegetintegrationdefinition) | **Get** /integrations/integrations/v1/definitions/{id} | Get integration definition
 *IntegrationServiceAPI* | [**IntegrationServiceGetIntegrationDetails**](docs/IntegrationServiceAPI.md#integrationservicegetintegrationdetails) | **Get** /integrations/integrations/v1/{id} | Get integration details
 *IntegrationServiceAPI* | [**IntegrationServiceGetIntegrations**](docs/IntegrationServiceAPI.md#integrationservicegetintegrations) | **Get** /integrations/integrations/v1 | Get all integrations
-*IntegrationServiceAPI* | [**IntegrationServiceGetManagedIntegrationStatus**](docs/IntegrationServiceAPI.md#integrationservicegetmanagedintegrationstatus) | **Get** /integrations/integrations/v1/managed/{integration_id} | Get managed integration status
+*IntegrationServiceAPI* | [**IntegrationServiceGetManagedIntegrationStatus**](docs/IntegrationServiceAPI.md#integrationservicegetmanagedintegrationstatus) | **Get** /integrations/managed/v1/{integration_id} | Get managed integration status
 *IntegrationServiceAPI* | [**IntegrationServiceGetRumApplicationVersionData**](docs/IntegrationServiceAPI.md#integrationservicegetrumapplicationversiondata) | **Get** /integrations/integrations/v1/rum/app-versions | Get RUM integration versions data
-*IntegrationServiceAPI* | [**IntegrationServiceGetTemplate**](docs/IntegrationServiceAPI.md#integrationservicegettemplate) | **Get** /integrations/integrations/v1/template | Get integration template
-*IntegrationServiceAPI* | [**IntegrationServiceListManagedIntegrationKeys**](docs/IntegrationServiceAPI.md#integrationservicelistmanagedintegrationkeys) | **Get** /integrations/integrations/v1/managed | List managed integration keys
-*IntegrationServiceAPI* | [**IntegrationServiceSaveIntegration**](docs/IntegrationServiceAPI.md#integrationservicesaveintegration) | **Post** /integrations/integrations/v1/metadata | Save integration registration metadata
+*IntegrationServiceAPI* | [**IntegrationServiceGetTemplate**](docs/IntegrationServiceAPI.md#integrationservicegettemplate) | **Get** /integrations/template/v1 | Get integration template
+*IntegrationServiceAPI* | [**IntegrationServiceListManagedIntegrationKeys**](docs/IntegrationServiceAPI.md#integrationservicelistmanagedintegrationkeys) | **Get** /integrations/managed/v1 | List managed integration keys
+*IntegrationServiceAPI* | [**IntegrationServiceSaveIntegration**](docs/IntegrationServiceAPI.md#integrationservicesaveintegration) | **Post** /integrations/metadata/v1 | Save integration registration metadata
 *IntegrationServiceAPI* | [**IntegrationServiceSyncRumData**](docs/IntegrationServiceAPI.md#integrationservicesyncrumdata) | **Post** /integrations/integrations/v1/rum/sync | Trigger sync of RUM integration data
-*IntegrationServiceAPI* | [**IntegrationServiceTestIntegration**](docs/IntegrationServiceAPI.md#integrationservicetestintegration) | **Post** /integrations/integrations/v1/metadata/test | Test integration
-*IntegrationServiceAPI* | [**IntegrationServiceUpdateIntegration**](docs/IntegrationServiceAPI.md#integrationserviceupdateintegration) | **Put** /integrations/integrations/v1/metadata | Update integration
+*IntegrationServiceAPI* | [**IntegrationServiceTestIntegration**](docs/IntegrationServiceAPI.md#integrationservicetestintegration) | **Post** /integrations/metadata/v1/test | Test integration
+*IntegrationServiceAPI* | [**IntegrationServiceUpdateIntegration**](docs/IntegrationServiceAPI.md#integrationserviceupdateintegration) | **Put** /integrations/metadata/v1 | Update integration
 
 
 ## Documentation For Models
@@ -172,6 +172,8 @@ Class | Method | HTTP request | Description
  - [LocalChangelog](docs/LocalChangelog.md)
  - [LogMetadata](docs/LogMetadata.md)
  - [Managed](docs/Managed.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleSelectionValue](docs/MultipleSelectionValue.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [Parameter](docs/Parameter.md)
@@ -186,6 +188,7 @@ Class | Method | HTTP request | Description
  - [RegisteredInstanceArm](docs/RegisteredInstanceArm.md)
  - [RegisteredInstanceCloudformation](docs/RegisteredInstanceCloudformation.md)
  - [RegisteredInstanceEmpty](docs/RegisteredInstanceEmpty.md)
+ - [RevisionLifecycle](docs/RevisionLifecycle.md)
  - [RevisionRef](docs/RevisionRef.md)
  - [Rum](docs/Rum.md)
  - [RumVersionData](docs/RumVersionData.md)
@@ -208,6 +211,7 @@ Class | Method | HTTP request | Description
  - [TestIntegrationResultSuccess](docs/TestIntegrationResultSuccess.md)
  - [UpdateIntegrationRequest](docs/UpdateIntegrationRequest.md)
  - [V1Extension](docs/V1Extension.md)
+ - [V1Failure](docs/V1Failure.md)
  - [V1IntegrationType](docs/V1IntegrationType.md)
  - [V1IntegrationTypeArm](docs/V1IntegrationTypeArm.md)
  - [V1IntegrationTypeCloudformation](docs/V1IntegrationTypeCloudformation.md)
@@ -216,6 +220,7 @@ Class | Method | HTTP request | Description
  - [V1IntegrationTypeManaged](docs/V1IntegrationTypeManaged.md)
  - [V1IntegrationTypePushBasedContextualData](docs/V1IntegrationTypePushBasedContextualData.md)
  - [V1IntegrationTypeUntracked](docs/V1IntegrationTypeUntracked.md)
+ - [V1RevisionSummary](docs/V1RevisionSummary.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
  - [Variant](docs/Variant.md)
 

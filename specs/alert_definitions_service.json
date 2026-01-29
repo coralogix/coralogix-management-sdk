@@ -5,7 +5,7 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/alerts/alerts-general/v3": {
+    "/alerts/alerts/v3": {
       "get": {
         "tags": [
           "Alert definitions service"
@@ -255,178 +255,7 @@
         ]
       }
     },
-    "/alerts/alerts-general/v3/alert-version-id/{alert_version_id}": {
-      "get": {
-        "tags": [
-          "Alert definitions service"
-        ],
-        "summary": "Get alert definition by alert version ID",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "AlertDefsService_GetAlertDefByVersionId",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "alert_version_id",
-            "required": true,
-            "schema": {
-              "example": "123e4567-e89b-12d3-a456-426614174000",
-              "description": "Alert version ID",
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetAlertDefByVersionIdResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-coralogixPermissions": [
-          "alerts:ReadConfig"
-        ]
-      }
-    },
-    "/alerts/alerts-general/v3/bulk": {
-      "put": {
-        "tags": [
-          "Alert definitions service"
-        ],
-        "summary": "Bulk replace alert definitions",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "AlertDefsService_BulkReplaceAlertDefs",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "title": "Bulk replace alert definitions request",
-                "description": "A request to bulk replace multiple alert definitions",
-                "type": "object",
-                "properties": {
-                  "alertDefsToReplace": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/AlertDefToReplace"
-                    }
-                  }
-                },
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BulkReplaceAlertDefsResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-coralogixPermissions": [
-          "alerts:UpdateConfig"
-        ]
-      }
-    },
-    "/alerts/alerts-general/v3/download": {
-      "get": {
-        "tags": [
-          "Alert definitions service"
-        ],
-        "summary": "Download alerts",
-        "description": "Download a list of all accessible alert definitions in base64-encoded byte format.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "AlertDefsService_DownloadAlerts",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DownloadAlertsResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-coralogixPermissions": [
-          "alerts:ReadConfig"
-        ]
-      }
-    },
-    "/alerts/alerts-general/v3/filter-option-counts": {
+    "/alerts/alerts/v3/all/counts": {
       "get": {
         "tags": [
           "Alert definitions service"
@@ -495,7 +324,178 @@
         ]
       }
     },
-    "/alerts/alerts-general/v3/{id}": {
+    "/alerts/alerts/v3/all/download": {
+      "get": {
+        "tags": [
+          "Alert definitions service"
+        ],
+        "summary": "Download alerts",
+        "description": "Download a list of all accessible alert definitions in base64-encoded byte format.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertDefsService_DownloadAlerts",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DownloadAlertsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "alerts:ReadConfig"
+        ]
+      }
+    },
+    "/alerts/alerts/v3/all/replace": {
+      "put": {
+        "tags": [
+          "Alert definitions service"
+        ],
+        "summary": "Bulk replace alert definitions",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertDefsService_BulkReplaceAlertDefs",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Bulk replace alert definitions request",
+                "description": "A request to bulk replace multiple alert definitions",
+                "type": "object",
+                "properties": {
+                  "alertDefsToReplace": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/AlertDefToReplace"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkReplaceAlertDefsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "alerts:UpdateConfig"
+        ]
+      }
+    },
+    "/alerts/alerts/v3/version-ids/{alert_version_id}": {
+      "get": {
+        "tags": [
+          "Alert definitions service"
+        ],
+        "summary": "Get alert definition by alert version ID",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertDefsService_GetAlertDefByVersionId",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "alert_version_id",
+            "required": true,
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "description": "Alert version ID",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAlertDefByVersionIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "alerts:ReadConfig"
+        ]
+      }
+    },
+    "/alerts/alerts/v3/{id}": {
       "get": {
         "tags": [
           "Alert definitions service"
@@ -609,75 +609,6 @@
           "alerts:UpdateConfig"
         ]
       }
-    },
-    "/alerts/alerts-general/v3/{id}:setActive": {
-      "post": {
-        "tags": [
-          "Alert definitions service"
-        ],
-        "summary": "Disable or enable an alert",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "AlertDefsService_SetActive",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "example": "123e4567-e89b-12d3-a456-426614174000",
-              "description": "The alert definition ID",
-              "type": "string"
-            },
-            "style": "simple"
-          },
-          {
-            "in": "query",
-            "name": "active",
-            "schema": {
-              "example": true,
-              "description": "Whether to enable or disable the alert definition",
-              "type": "boolean"
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/v3.SetActiveResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-coralogixPermissions": [
-          "alerts:UpdateConfig"
-        ]
-      }
     }
   },
   "components": {
@@ -749,6 +680,19 @@
             "description": "The time when the alert definition was last updated",
             "type": "string",
             "format": "date-time"
+          }
+        }
+      },
+      "AlertDefDataSource": {
+        "type": "object",
+        "properties": {
+          "dataSet": {
+            "description": "File name of the dataset",
+            "type": "string"
+          },
+          "dataSpace": {
+            "description": "Folder name of the datasource",
+            "type": "string"
           }
         }
       },
@@ -847,10 +791,19 @@
       "AlertDefProperties": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
+            "$ref": "#/components/schemas/AlertDefPropertiesMetricAnomaly"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
@@ -862,28 +815,19 @@
             "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesFlow"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
+            "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesSloThreshold"
           },
           {
+            "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
+          },
+          {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsThreshold"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesMetricAnomaly"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
+            "$ref": "#/components/schemas/AlertDefPropertiesFlow"
           }
         ]
       },
@@ -897,6 +841,12 @@
         "properties": {
           "activeOn": {
             "$ref": "#/components/schemas/ActivitySchedule"
+          },
+          "dataSources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefDataSource"
+            }
           },
           "deleted": {
             "example": false,
@@ -976,6 +926,12 @@
           "activeOn": {
             "$ref": "#/components/schemas/ActivitySchedule"
           },
+          "dataSources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefDataSource"
+            }
+          },
           "deleted": {
             "example": false,
             "description": "Whether the alert has been marked as deleted",
@@ -1053,6 +1009,12 @@
         "properties": {
           "activeOn": {
             "$ref": "#/components/schemas/ActivitySchedule"
+          },
+          "dataSources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefDataSource"
+            }
           },
           "deleted": {
             "example": false,
@@ -1132,6 +1094,12 @@
           "activeOn": {
             "$ref": "#/components/schemas/ActivitySchedule"
           },
+          "dataSources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefDataSource"
+            }
+          },
           "deleted": {
             "example": false,
             "description": "Whether the alert has been marked as deleted",
@@ -1209,6 +1177,12 @@
         "properties": {
           "activeOn": {
             "$ref": "#/components/schemas/ActivitySchedule"
+          },
+          "dataSources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefDataSource"
+            }
           },
           "deleted": {
             "example": false,
@@ -1288,6 +1262,12 @@
           "activeOn": {
             "$ref": "#/components/schemas/ActivitySchedule"
           },
+          "dataSources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefDataSource"
+            }
+          },
           "deleted": {
             "example": false,
             "description": "Whether the alert has been marked as deleted",
@@ -1365,6 +1345,12 @@
         "properties": {
           "activeOn": {
             "$ref": "#/components/schemas/ActivitySchedule"
+          },
+          "dataSources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefDataSource"
+            }
           },
           "deleted": {
             "example": false,
@@ -1444,6 +1430,12 @@
           "activeOn": {
             "$ref": "#/components/schemas/ActivitySchedule"
           },
+          "dataSources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefDataSource"
+            }
+          },
           "deleted": {
             "example": false,
             "description": "Whether the alert has been marked as deleted",
@@ -1521,6 +1513,12 @@
         "properties": {
           "activeOn": {
             "$ref": "#/components/schemas/ActivitySchedule"
+          },
+          "dataSources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefDataSource"
+            }
           },
           "deleted": {
             "example": false,
@@ -1600,6 +1598,12 @@
           "activeOn": {
             "$ref": "#/components/schemas/ActivitySchedule"
           },
+          "dataSources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefDataSource"
+            }
+          },
           "deleted": {
             "example": false,
             "description": "Whether the alert has been marked as deleted",
@@ -1677,6 +1681,12 @@
         "properties": {
           "activeOn": {
             "$ref": "#/components/schemas/ActivitySchedule"
+          },
+          "dataSources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefDataSource"
+            }
           },
           "deleted": {
             "example": false,
@@ -1756,6 +1766,12 @@
           "activeOn": {
             "$ref": "#/components/schemas/ActivitySchedule"
           },
+          "dataSources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefDataSource"
+            }
+          },
           "deleted": {
             "example": false,
             "description": "Whether the alert has been marked as deleted",
@@ -1833,6 +1849,12 @@
         "properties": {
           "activeOn": {
             "$ref": "#/components/schemas/ActivitySchedule"
+          },
+          "dataSources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefDataSource"
+            }
           },
           "deleted": {
             "example": false,
@@ -3028,6 +3050,9 @@
           "logsFilter": {
             "$ref": "#/components/schemas/v3.LogsFilter"
           },
+          "noDataPolicy": {
+            "$ref": "#/components/schemas/NoDataPolicy"
+          },
           "notificationPayloadFilter": {
             "example": [
               "obj.field"
@@ -3494,6 +3519,9 @@
           "missingValues": {
             "$ref": "#/components/schemas/MetricMissingValues"
           },
+          "noDataPolicy": {
+            "$ref": "#/components/schemas/NoDataPolicy"
+          },
           "rules": {
             "type": "array",
             "items": {
@@ -3561,6 +3589,34 @@
           "METRIC_TIME_WINDOW_VALUE_HOURS_36"
         ]
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -3580,6 +3636,30 @@
         "enum": [
           "NEXT_OP_AND_OR_UNSPECIFIED",
           "NEXT_OP_OR"
+        ]
+      },
+      "NoDataPolicy": {
+        "type": "object",
+        "properties": {
+          "autoRetireSeconds": {
+            "example": 3600,
+            "description": "The timeframe in seconds for auto retiring values that were detected as no-data. accepts only multiples of 60 seconds",
+            "type": "integer",
+            "format": "int32"
+          },
+          "state": {
+            "$ref": "#/components/schemas/NoDataPolicyState"
+          }
+        }
+      },
+      "NoDataPolicyState": {
+        "type": "string",
+        "enum": [
+          "NO_DATA_POLICY_STATE_UNSPECIFIED",
+          "NO_DATA_POLICY_STATE_OK",
+          "NO_DATA_POLICY_STATE_ALERTING",
+          "NO_DATA_POLICY_STATE_KEEP_LAST",
+          "NO_DATA_POLICY_STATE_NO_DATA"
         ]
       },
       "NotificationDestination": {
@@ -4255,14 +4335,6 @@
             "type": "string"
           }
         }
-      },
-      "v3.SetActiveResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Set active response",
-        "description": "Response after enabling or disabling an alert definition",
-        "type": "object"
       },
       "v3.SloDefinition": {
         "externalDocs": {

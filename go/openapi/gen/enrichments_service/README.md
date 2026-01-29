@@ -117,6 +117,8 @@ Class | Method | HTTP request | Description
  - [GetCompanyEnrichmentSettingsResponse](docs/GetCompanyEnrichmentSettingsResponse.md)
  - [GetEnrichmentLimitResponse](docs/GetEnrichmentLimitResponse.md)
  - [GetEnrichmentsResponse](docs/GetEnrichmentsResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [RemoveEnrichmentsResponse](docs/RemoveEnrichmentsResponse.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)

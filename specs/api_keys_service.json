@@ -6,6 +6,47 @@
   },
   "paths": {
     "/aaa/api-keys/v3": {
+      "get": {
+        "tags": [
+          "API Keys Admin Service"
+        ],
+        "summary": "Get Team Members API Keys",
+        "description": "Retrieve all API keys for team members.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ApiKeysAdminService_GetTeamMembersApiKeys",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTeamMembersApiKeysResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
       "post": {
         "tags": [
           "API Keys Service"
@@ -24,6 +65,11 @@
                 "description": "This data structure is used to create an API key.",
                 "type": "object",
                 "properties": {
+                  "accessPolicy": {
+                    "example": "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}",
+                    "description": "JSON string representing the access policy for this API key. Defines granular permissions for users and groups.",
+                    "type": "string"
+                  },
                   "hashed": {
                     "example": true,
                     "type": "boolean"
@@ -51,49 +97,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CreateApiKeyResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/aaa/api-keys/v3/send_data": {
-      "get": {
-        "tags": [
-          "API Keys Service"
-        ],
-        "summary": "Get \"Send Data\" API Keys",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "ApiKeysService_GetSendDataApiKeys",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetSendDataApiKeysResponse"
                 }
               }
             }
@@ -203,6 +206,11 @@
                 "description": "This data structure is used to update an API key.",
                 "type": "object",
                 "properties": {
+                  "accessPolicy": {
+                    "example": "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}",
+                    "description": "JSON string representing the access policy for this API key. Defines granular permissions for users and groups. To delete an existing policy, pass an empty string.",
+                    "type": "string"
+                  },
                   "isActive": {
                     "example": true,
                     "type": "boolean"
@@ -306,10 +314,148 @@
           }
         }
       }
+    },
+    "/aaa/send-data-keys/v3": {
+      "get": {
+        "tags": [
+          "API Keys Service"
+        ],
+        "summary": "Get \"Send Data\" API Keys",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ApiKeysService_GetSendDataApiKeys",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSendDataApiKeysResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "ApiKey": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "API Key",
+        "description": "This data structure represents an API key with its metadata.",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "description": "The timestamp when the API key was created.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "example": "key_abc123",
+            "type": "string"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "keyName": {
+            "example": "my_api_key",
+            "type": "string"
+          },
+          "lastActivated": {
+            "description": "The timestamp when the API key was last activated.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/ApiKeyOwner"
+          }
+        }
+      },
+      "ApiKeyOwner": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "API Key Owner",
+        "description": "This data structure represents the owner of an API key.",
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/ApiKeyUserOwner"
+          }
+        }
+      },
+      "ApiKeySummary": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "API Key Summary",
+        "description": "This data structure represents summary about an API key including its permissions.",
+        "type": "object",
+        "properties": {
+          "apiKey": {
+            "$ref": "#/components/schemas/ApiKey"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "example": "logs:read",
+              "type": "string"
+            }
+          },
+          "presets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PermissionsPreset"
+            }
+          }
+        }
+      },
+      "ApiKeyUserOwner": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "API Key User Owner",
+        "description": "This data structure represents the user owner of an API key.",
+        "type": "object",
+        "properties": {
+          "userEmail": {
+            "example": "test@example.com",
+            "type": "string"
+          },
+          "userId": {
+            "example": "user_123",
+            "type": "string"
+          }
+        }
+      },
       "ColorsByAggregation": {
         "type": "object",
         "properties": {
@@ -506,6 +652,23 @@
           }
         }
       },
+      "GetTeamMembersApiKeysResponse": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "Get Team Members API Keys Response",
+        "description": "This data structure is the response obtained when retrieving team members API keys.",
+        "type": "object",
+        "properties": {
+          "keys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiKeySummary"
+            }
+          }
+        }
+      },
       "KeyInfo": {
         "externalDocs": {
           "description": "Find out more about api keys",
@@ -515,6 +678,11 @@
         "description": "This data structure represents the information associated with an API key.",
         "type": "object",
         "properties": {
+          "accessPolicy": {
+            "example": "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}",
+            "description": "JSON string representing the access policy for this API key. Defines granular permissions for users and groups.",
+            "type": "string"
+          },
           "active": {
             "example": true,
             "type": "boolean"
@@ -563,6 +731,34 @@
             }
           }
         }
+      },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",
@@ -618,6 +814,33 @@
           }
         },
         "additionalProperties": false
+      },
+      "PermissionsPreset": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "Permissions Preset",
+        "description": "This data structure represents a preset set of permissions on an API key.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "example": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "example": "my_preset",
+            "type": "string"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "example": "logs:read",
+              "type": "string"
+            }
+          }
+        }
       },
       "PresetInfo": {
         "externalDocs": {
