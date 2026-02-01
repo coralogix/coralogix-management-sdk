@@ -5,6 +5,67 @@ info:
 servers:
 - url: /
 paths:
+  /parsing-rules/limits/v1:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: RuleGroupsService_GetCompanyUsageLimits
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetCompanyUsageLimitsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Company Usage Limits
+      tags:
+      - Rule Groups Service
+  /parsing-rules/mapping/v1:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: RuleGroupsService_GetRuleGroupModelMapping
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RuleGroupsService_GetRuleGroupModelMapping_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetRuleGroupModelMappingResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Rule Group Model Mapping
+      tags:
+      - Rule Groups Service
   /parsing-rules/rule-groups/v1:
     delete:
       description: No description available
@@ -101,67 +162,6 @@ paths:
             application/json: {}
           description: Internal server error
       summary: Create Rule Group
-      tags:
-      - Rule Groups Service
-  /parsing-rules/rule-groups/v1/limits:
-    post:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: RuleGroupsService_GetCompanyUsageLimits
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetCompanyUsageLimitsResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Get Company Usage Limits
-      tags:
-      - Rule Groups Service
-  /parsing-rules/rule-groups/v1/mapping:
-    post:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: RuleGroupsService_GetRuleGroupModelMapping
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/RuleGroupsService_GetRuleGroupModelMapping_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetRuleGroupModelMappingResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Get Rule Group Model Mapping
       tags:
       - Rule Groups Service
   /parsing-rules/rule-groups/v1/{group_id}:
@@ -372,8 +372,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                jsonStringifyParameters:
+                  deleteSource: true
+                  destinationField: destinationField
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -381,8 +382,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                jsonStringifyParameters:
+                  deleteSource: true
+                  destinationField: destinationField
               enabled: true
               order: 1
             id: id
@@ -394,8 +396,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                jsonStringifyParameters:
+                  deleteSource: true
+                  destinationField: destinationField
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -403,8 +406,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                jsonStringifyParameters:
+                  deleteSource: true
+                  destinationField: destinationField
               enabled: true
               order: 1
             id: id
@@ -438,8 +442,6 @@ components:
       - DESTINATION_FIELD_TEXT
       type: string
     ExtractParameters:
-      example:
-        rule: rule
       properties:
         rule:
           type: string
@@ -583,8 +585,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                jsonStringifyParameters:
+                  deleteSource: true
+                  destinationField: destinationField
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -592,8 +595,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                jsonStringifyParameters:
+                  deleteSource: true
+                  destinationField: destinationField
               enabled: true
               order: 1
             id: id
@@ -605,8 +609,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                jsonStringifyParameters:
+                  deleteSource: true
+                  destinationField: destinationField
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -614,8 +619,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                jsonStringifyParameters:
+                  deleteSource: true
+                  destinationField: destinationField
               enabled: true
               order: 1
             id: id
@@ -658,6 +664,9 @@ components:
           type: boolean
       type: object
     JsonStringifyParameters:
+      example:
+        deleteSource: true
+        destinationField: destinationField
       properties:
         deleteSource:
           type: boolean
@@ -674,8 +683,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                jsonStringifyParameters:
+                  deleteSource: true
+                  destinationField: destinationField
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -683,8 +693,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                jsonStringifyParameters:
+                  deleteSource: true
+                  destinationField: destinationField
               enabled: true
               order: 1
             id: id
@@ -696,8 +707,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                jsonStringifyParameters:
+                  deleteSource: true
+                  destinationField: destinationField
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -705,8 +717,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                jsonStringifyParameters:
+                  deleteSource: true
+                  destinationField: destinationField
               enabled: true
               order: 1
             id: id
@@ -731,8 +744,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                jsonStringifyParameters:
+                  deleteSource: true
+                  destinationField: destinationField
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -740,8 +754,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                jsonStringifyParameters:
+                  deleteSource: true
+                  destinationField: destinationField
               enabled: true
               order: 1
             id: id
@@ -753,8 +768,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                jsonStringifyParameters:
+                  deleteSource: true
+                  destinationField: destinationField
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -762,8 +778,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                jsonStringifyParameters:
+                  deleteSource: true
+                  destinationField: destinationField
               enabled: true
               order: 1
             id: id
@@ -786,6 +803,28 @@ components:
           items:
             $ref: "#/components/schemas/RuleGroup"
           type: array
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:
@@ -828,8 +867,9 @@ components:
             description: description
             id: id
             parameters:
-              extractParameters:
-                rule: rule
+              jsonStringifyParameters:
+                deleteSource: true
+                destinationField: destinationField
             enabled: true
             order: 1
           - sourceField: sourceField
@@ -837,8 +877,9 @@ components:
             description: description
             id: id
             parameters:
-              extractParameters:
-                rule: rule
+              jsonStringifyParameters:
+                deleteSource: true
+                destinationField: destinationField
             enabled: true
             order: 1
           id: id
@@ -850,8 +891,9 @@ components:
             description: description
             id: id
             parameters:
-              extractParameters:
-                rule: rule
+              jsonStringifyParameters:
+                deleteSource: true
+                destinationField: destinationField
             enabled: true
             order: 1
           - sourceField: sourceField
@@ -859,8 +901,9 @@ components:
             description: description
             id: id
             parameters:
-              extractParameters:
-                rule: rule
+              jsonStringifyParameters:
+                deleteSource: true
+                destinationField: destinationField
             enabled: true
             order: 1
           id: id
@@ -931,16 +974,16 @@ components:
       type: object
     RuleParameters:
       oneOf:
+      - $ref: "#/components/schemas/RuleParametersJsonStringifyParameters"
+      - $ref: "#/components/schemas/RuleParametersJsonParseParameters"
+      - $ref: "#/components/schemas/RuleParametersAllowParameters"
+      - $ref: "#/components/schemas/RuleParametersExtractTimestampParameters"
+      - $ref: "#/components/schemas/RuleParametersRemoveFieldsParameters"
       - $ref: "#/components/schemas/RuleParametersExtractParameters"
       - $ref: "#/components/schemas/RuleParametersJsonExtractParameters"
       - $ref: "#/components/schemas/RuleParametersReplaceParameters"
-      - $ref: "#/components/schemas/RuleParametersAllowParameters"
-      - $ref: "#/components/schemas/RuleParametersExtractTimestampParameters"
-      - $ref: "#/components/schemas/RuleParametersJsonStringifyParameters"
-      - $ref: "#/components/schemas/RuleParametersJsonParseParameters"
       - $ref: "#/components/schemas/RuleParametersParseParameters"
       - $ref: "#/components/schemas/RuleParametersBlockParameters"
-      - $ref: "#/components/schemas/RuleParametersRemoveFieldsParameters"
     RuleParametersAllowParameters:
       additionalProperties: false
       properties:
@@ -955,9 +998,6 @@ components:
       type: object
     RuleParametersExtractParameters:
       additionalProperties: false
-      example:
-        extractParameters:
-          rule: rule
       properties:
         extractParameters:
           $ref: "#/components/schemas/ExtractParameters"
@@ -982,6 +1022,10 @@ components:
       type: object
     RuleParametersJsonStringifyParameters:
       additionalProperties: false
+      example:
+        jsonStringifyParameters:
+          deleteSource: true
+          destinationField: destinationField
       properties:
         jsonStringifyParameters:
           $ref: "#/components/schemas/JsonStringifyParameters"
@@ -1012,8 +1056,9 @@ components:
           description: description
           id: id
           parameters:
-            extractParameters:
-              rule: rule
+            jsonStringifyParameters:
+              deleteSource: true
+              destinationField: destinationField
           enabled: true
           order: 1
         - sourceField: sourceField
@@ -1021,8 +1066,9 @@ components:
           description: description
           id: id
           parameters:
-            extractParameters:
-              rule: rule
+            jsonStringifyParameters:
+              deleteSource: true
+              destinationField: destinationField
           enabled: true
           order: 1
         id: id
@@ -1061,8 +1107,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                jsonStringifyParameters:
+                  deleteSource: true
+                  destinationField: destinationField
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -1070,8 +1117,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                jsonStringifyParameters:
+                  deleteSource: true
+                  destinationField: destinationField
               enabled: true
               order: 1
             id: id
@@ -1083,8 +1131,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                jsonStringifyParameters:
+                  deleteSource: true
+                  destinationField: destinationField
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -1092,8 +1141,9 @@ components:
               description: description
               id: id
               parameters:
-                extractParameters:
-                  rule: rule
+                jsonStringifyParameters:
+                  deleteSource: true
+                  destinationField: destinationField
               enabled: true
               order: 1
             id: id
@@ -1148,8 +1198,9 @@ components:
         description: description
         id: id
         parameters:
-          extractParameters:
-            rule: rule
+          jsonStringifyParameters:
+            deleteSource: true
+            destinationField: destinationField
         enabled: true
         order: 1
       properties:
@@ -1169,7 +1220,7 @@ components:
         sourceField:
           type: string
       type: object
-    rules.v1.TeamId:
+    v1.TeamId:
       properties:
         id:
           format: int64
@@ -1180,6 +1231,31 @@ components:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
+    RuleGroupsService_GetRuleGroupModelMapping_request:
+      additionalProperties: false
+      properties:
+        creator:
+          type: string
+        description:
+          type: string
+        enabled:
+          type: boolean
+        hidden:
+          type: boolean
+        name:
+          type: string
+        order:
+          format: int64
+          type: integer
+        ruleMatchers:
+          items:
+            $ref: "#/components/schemas/RuleMatcher"
+          type: array
+        ruleSubgroups:
+          items:
+            $ref: "#/components/schemas/GetRuleGroupModelMappingRequest.CreateRuleSubgroup"
+          type: array
+      type: object
     RuleGroupsService_CreateRuleGroup_request:
       additionalProperties: false
       properties:
@@ -1205,32 +1281,7 @@ components:
             $ref: "#/components/schemas/CreateRuleGroupRequest.CreateRuleSubgroup"
           type: array
         teamId:
-          $ref: "#/components/schemas/rules.v1.TeamId"
-      type: object
-    RuleGroupsService_GetRuleGroupModelMapping_request:
-      additionalProperties: false
-      properties:
-        creator:
-          type: string
-        description:
-          type: string
-        enabled:
-          type: boolean
-        hidden:
-          type: boolean
-        name:
-          type: string
-        order:
-          format: int64
-          type: integer
-        ruleMatchers:
-          items:
-            $ref: "#/components/schemas/RuleMatcher"
-          type: array
-        ruleSubgroups:
-          items:
-            $ref: "#/components/schemas/GetRuleGroupModelMappingRequest.CreateRuleSubgroup"
-          type: array
+          $ref: "#/components/schemas/v1.TeamId"
       type: object
   securitySchemes:
     apiKeyAuth:

@@ -68,7 +68,7 @@ func (a *ExtensionServiceAPIService) ExtensionServiceGetAllExtensionsExecute(r A
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/extensions/v1/all"
+	localVarPath := localBasePath + "/integrations/extensions/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

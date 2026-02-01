@@ -5,6 +5,39 @@ info:
 servers:
 - url: /
 paths:
+  /dataplans/log-policies/v1:
+    put:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: PoliciesService_AtomicOverwriteLogPolicies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Atomic_Overwrite_Log_Policies_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AtomicOverwriteLogPoliciesResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Atomic Overwrite Log Policies
+      tags:
+      - Policies Service
   /dataplans/policies/v1:
     get:
       description: No description available
@@ -113,167 +146,7 @@ paths:
       summary: Update Policy
       tags:
       - Policies Service
-  /dataplans/policies/v1/atomicOverwriteLogPolicies:
-    post:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: PoliciesService_AtomicOverwriteLogPolicies
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Atomic_Overwrite_Log_Policies_Request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AtomicOverwriteLogPoliciesResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Atomic Overwrite Log Policies
-      tags:
-      - Policies Service
-  /dataplans/policies/v1/atomicOverwriteSpanPolicies:
-    post:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: PoliciesService_AtomicOverwriteSpanPolicies
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Atomic_Overwrite_Span_Policies_Request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AtomicOverwriteSpanPoliciesResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Atomic Overwrite Span Policies
-      tags:
-      - Policies Service
-  /dataplans/policies/v1/bulkCreate:
-    post:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: PoliciesService_AtomicBatchCreatePolicy
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Atomic_Batch_Create_Policy_Request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AtomicBatchCreatePolicyResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Atomic Batch Create Policy
-      tags:
-      - Policies Service
-  /dataplans/policies/v1/bulkTestLog:
-    post:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: PoliciesService_BulkTestLogPolicies
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Bulk_Test_Log_Policies_Request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BulkTestLogPoliciesResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Bulk Test Log Policies
-      tags:
-      - Policies Service
-  /dataplans/policies/v1/getPolicyPrioritySettings:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: PoliciesService_GetPolicySettings
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetPolicySettingsResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Get Policy Priority Settings
-      tags:
-      - Policies Service
-  /dataplans/policies/v1/reorder:
+  /dataplans/policies/v1/all/reorder:
     post:
       description: No description available
       externalDocs:
@@ -306,23 +179,23 @@ paths:
       summary: Reorder Policies
       tags:
       - Policies Service
-  /dataplans/policies/v1/replacePolicySettings:
+  /dataplans/policies/v1/all/test-policies:
     post:
       description: No description available
       externalDocs:
         url: ""
-      operationId: PoliciesService_ReplacePolicySettings
+      operationId: PoliciesService_BulkTestLogPolicies
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PoliciesService_ReplacePolicySettings_request"
+              $ref: "#/components/schemas/Bulk_Test_Log_Policies_Request"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ReplacePolicySettingsResponse"
+                $ref: "#/components/schemas/BulkTestLogPoliciesResponse"
           description: ""
         "400":
           content:
@@ -336,40 +209,7 @@ paths:
           content:
             application/json: {}
           description: Internal server error
-      summary: Replace Policy Settings
-      tags:
-      - Policies Service
-  /dataplans/policies/v1/toggle:
-    post:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: PoliciesService_TogglePolicy
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Toggle_Policy_Request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TogglePolicyResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Toggle Policies
+      summary: Bulk Test Log Policies
       tags:
       - Policies Service
   /dataplans/policies/v1/{id}:
@@ -445,6 +285,100 @@ paths:
       summary: Get Policy by ID
       tags:
       - Policies Service
+  /dataplans/policiy-settings/v1:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: PoliciesService_ReplacePolicySettings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Replace_Policy_Settings_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReplacePolicySettingsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Replace Policy Settings
+      tags:
+      - Policies Service
+  /dataplans/policy-settings/v1:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: PoliciesService_GetPolicySettings
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetPolicySettingsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Policy Priority Settings
+      tags:
+      - Policies Service
+  /dataplans/span-policies/v1:
+    put:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: PoliciesService_AtomicOverwriteSpanPolicies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Atomic_Overwrite_Span_Policies_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AtomicOverwriteSpanPoliciesResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Atomic Overwrite Span Policies
+      tags:
+      - Policies Service
 components:
   schemas:
     ArchiveRetention:
@@ -454,111 +388,18 @@ components:
         id:
           type: string
       type: object
-    AtomicBatchCreatePolicyResponse:
-      description: This data structure is obtained when creating multiple policies
-        atomically.
-      example:
-        createResponses:
-        - policy:
-            spanRules:
-              actionRule:
-                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-                name: name
-              serviceRule:
-                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-                name: name
-              tagRules:
-              - ruleTypeId: null
-                tagValue: tag_value
-                tagName: tag_name
-              - ruleTypeId: null
-                tagValue: tag_value
-                tagName: tag_name
-            subsystemRule:
-              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-              name: name
-            description: My Policy Description
-            applicationRule:
-              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-              name: name
-            priority: PRIORITY_TYPE_UNSPECIFIED
-            enabled: true
-            archiveRetention:
-              id: id
-            createdAt: 2021-01-01T00:00:00.000Z
-            companyId: 1234
-            deleted: false
-            name: My Policy
-            id: policy_id
-            order: 1
-            updatedAt: 2021-01-01T00:00:00.000Z
-        - policy:
-            spanRules:
-              actionRule:
-                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-                name: name
-              serviceRule:
-                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-                name: name
-              tagRules:
-              - ruleTypeId: null
-                tagValue: tag_value
-                tagName: tag_name
-              - ruleTypeId: null
-                tagValue: tag_value
-                tagName: tag_name
-            subsystemRule:
-              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-              name: name
-            description: My Policy Description
-            applicationRule:
-              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-              name: name
-            priority: PRIORITY_TYPE_UNSPECIFIED
-            enabled: true
-            archiveRetention:
-              id: id
-            createdAt: 2021-01-01T00:00:00.000Z
-            companyId: 1234
-            deleted: false
-            name: My Policy
-            id: policy_id
-            order: 1
-            updatedAt: 2021-01-01T00:00:00.000Z
-      externalDocs:
-        description: Find out more about quota management.
-        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
-      properties:
-        createResponses:
-          items:
-            $ref: "#/components/schemas/CreatePolicyResponse"
-          type: array
-      required:
-      - createResponses
-      title: Atomic Batch Create Policy Response
-      type: object
     AtomicOverwriteLogPoliciesResponse:
       description: This data structue is obtained when overwriting log policies atomically.
       example:
         createResponses:
         - policy:
-            spanRules:
-              actionRule:
-                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-                name: name
-              serviceRule:
-                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-                name: name
-              tagRules:
-              - ruleTypeId: null
-                tagValue: tag_value
-                tagName: tag_name
-              - ruleTypeId: null
-                tagValue: tag_value
-                tagName: tag_name
             subsystemRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
               name: name
+            logRules:
+              severities:
+              - SEVERITY_UNSPECIFIED
+              - SEVERITY_UNSPECIFIED
             description: My Policy Description
             applicationRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -575,23 +416,13 @@ components:
             order: 1
             updatedAt: 2021-01-01T00:00:00.000Z
         - policy:
-            spanRules:
-              actionRule:
-                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-                name: name
-              serviceRule:
-                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-                name: name
-              tagRules:
-              - ruleTypeId: null
-                tagValue: tag_value
-                tagName: tag_name
-              - ruleTypeId: null
-                tagValue: tag_value
-                tagName: tag_name
             subsystemRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
               name: name
+            logRules:
+              severities:
+              - SEVERITY_UNSPECIFIED
+              - SEVERITY_UNSPECIFIED
             description: My Policy Description
             applicationRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -622,23 +453,13 @@ components:
       example:
         createResponses:
         - policy:
-            spanRules:
-              actionRule:
-                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-                name: name
-              serviceRule:
-                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-                name: name
-              tagRules:
-              - ruleTypeId: null
-                tagValue: tag_value
-                tagName: tag_name
-              - ruleTypeId: null
-                tagValue: tag_value
-                tagName: tag_name
             subsystemRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
               name: name
+            logRules:
+              severities:
+              - SEVERITY_UNSPECIFIED
+              - SEVERITY_UNSPECIFIED
             description: My Policy Description
             applicationRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -655,23 +476,13 @@ components:
             order: 1
             updatedAt: 2021-01-01T00:00:00.000Z
         - policy:
-            spanRules:
-              actionRule:
-                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-                name: name
-              serviceRule:
-                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-                name: name
-              tagRules:
-              - ruleTypeId: null
-                tagValue: tag_value
-                tagName: tag_name
-              - ruleTypeId: null
-                tagValue: tag_value
-                tagName: tag_name
             subsystemRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
               name: name
+            logRules:
+              severities:
+              - SEVERITY_UNSPECIFIED
+              - SEVERITY_UNSPECIFIED
             description: My Policy Description
             applicationRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -707,23 +518,13 @@ components:
             severityValues: severity
           matched: true
           policy:
-            spanRules:
-              actionRule:
-                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-                name: name
-              serviceRule:
-                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-                name: name
-              tagRules:
-              - ruleTypeId: null
-                tagValue: tag_value
-                tagName: tag_name
-              - ruleTypeId: null
-                tagValue: tag_value
-                tagName: tag_name
             subsystemRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
               name: name
+            logRules:
+              severities:
+              - SEVERITY_UNSPECIFIED
+              - SEVERITY_UNSPECIFIED
             description: My Policy Description
             applicationRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -745,23 +546,13 @@ components:
             severityValues: severity
           matched: true
           policy:
-            spanRules:
-              actionRule:
-                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-                name: name
-              serviceRule:
-                ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-                name: name
-              tagRules:
-              - ruleTypeId: null
-                tagValue: tag_value
-                tagName: tag_name
-              - ruleTypeId: null
-                tagValue: tag_value
-                tagName: tag_name
             subsystemRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
               name: name
+            logRules:
+              severities:
+              - SEVERITY_UNSPECIFIED
+              - SEVERITY_UNSPECIFIED
             description: My Policy Description
             applicationRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -850,10 +641,6 @@ components:
       - policy
       title: Create Log Policy Request
       type: object
-    CreatePolicyRequest:
-      oneOf:
-      - $ref: "#/components/schemas/CreatePolicyRequestLogRules"
-      - $ref: "#/components/schemas/CreatePolicyRequestSpanRules"
     CreatePolicyRequestLogRules:
       additionalProperties: false
       description: This data structue is used to create a new policy.
@@ -922,23 +709,13 @@ components:
       description: This data structue is obtained when creating a policy.
       example:
         policy:
-          spanRules:
-            actionRule:
-              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-              name: name
-            serviceRule:
-              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-              name: name
-            tagRules:
-            - ruleTypeId: null
-              tagValue: tag_value
-              tagName: tag_name
-            - ruleTypeId: null
-              tagValue: tag_value
-              tagName: tag_name
           subsystemRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
             name: name
+          logRules:
+            severities:
+            - SEVERITY_UNSPECIFIED
+            - SEVERITY_UNSPECIFIED
           description: My Policy Description
           applicationRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -1059,23 +836,13 @@ components:
         a company.
       example:
         policies:
-        - spanRules:
-            actionRule:
-              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-              name: name
-            serviceRule:
-              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-              name: name
-            tagRules:
-            - ruleTypeId: null
-              tagValue: tag_value
-              tagName: tag_name
-            - ruleTypeId: null
-              tagValue: tag_value
-              tagName: tag_name
-          subsystemRule:
+        - subsystemRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
             name: name
+          logRules:
+            severities:
+            - SEVERITY_UNSPECIFIED
+            - SEVERITY_UNSPECIFIED
           description: My Policy Description
           applicationRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -1091,23 +858,13 @@ components:
           id: policy_id
           order: 1
           updatedAt: 2021-01-01T00:00:00.000Z
-        - spanRules:
-            actionRule:
-              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-              name: name
-            serviceRule:
-              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-              name: name
-            tagRules:
-            - ruleTypeId: null
-              tagValue: tag_value
-              tagName: tag_name
-            - ruleTypeId: null
-              tagValue: tag_value
-              tagName: tag_name
-          subsystemRule:
+        - subsystemRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
             name: name
+          logRules:
+            severities:
+            - SEVERITY_UNSPECIFIED
+            - SEVERITY_UNSPECIFIED
           description: My Policy Description
           applicationRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -1140,23 +897,13 @@ components:
         ID.
       example:
         policy:
-          spanRules:
-            actionRule:
-              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-              name: name
-            serviceRule:
-              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-              name: name
-            tagRules:
-            - ruleTypeId: null
-              tagValue: tag_value
-              tagName: tag_name
-            - ruleTypeId: null
-              tagValue: tag_value
-              tagName: tag_name
           subsystemRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
             name: name
+          logRules:
+            severities:
+            - SEVERITY_UNSPECIFIED
+            - SEVERITY_UNSPECIFIED
           description: My Policy Description
           applicationRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -1183,16 +930,20 @@ components:
       title: Get Policy Response
       type: object
     GetPolicySettingsResponse:
+      description: This data structure is returned when getting policy priority settings.
       example:
         logsPolicySettings:
           defaultPriority: PRIORITY_TYPE_UNSPECIFIED
         spansPolicySettings:
           defaultPriority: null
+      externalDocs:
+        url: ""
       properties:
         logsPolicySettings:
           $ref: "#/components/schemas/LogsPolicySettings"
         spansPolicySettings:
           $ref: "#/components/schemas/SpansPolicySettings"
+      title: Get Policy Priority Settings Response
       type: object
     Last:
       type: object
@@ -1223,6 +974,10 @@ components:
       type: object
     LogRules:
       description: Log rules for a policy.
+      example:
+        severities:
+        - SEVERITY_UNSPECIFIED
+        - SEVERITY_UNSPECIFIED
       externalDocs:
         description: Find out more about quota management.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
@@ -1236,11 +991,38 @@ components:
       title: Log Rules
       type: object
     LogsPolicySettings:
+      description: This data structure is used to define the default priority for
+        logs policies.
       example:
         defaultPriority: PRIORITY_TYPE_UNSPECIFIED
+      externalDocs:
+        url: ""
       properties:
         defaultPriority:
           $ref: "#/components/schemas/quota.v1.Priority"
+      title: Logs Source Policy
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:
@@ -1253,8 +1035,8 @@ components:
       type: object
     Placement:
       oneOf:
-      - $ref: "#/components/schemas/PlacementLast"
       - $ref: "#/components/schemas/PlacementFirst"
+      - $ref: "#/components/schemas/PlacementLast"
     PlacementFirst:
       additionalProperties: false
       properties:
@@ -1269,12 +1051,35 @@ components:
       type: object
     Policy:
       oneOf:
-      - $ref: "#/components/schemas/PolicySpanRules"
       - $ref: "#/components/schemas/PolicyLogRules"
+      - $ref: "#/components/schemas/PolicySpanRules"
     PolicyLogRules:
       additionalProperties: false
       description: A policy is a set of rules that define the behavior of the Coralogix
         system for a specific company.
+      example:
+        subsystemRule:
+          ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+          name: name
+        logRules:
+          severities:
+          - SEVERITY_UNSPECIFIED
+          - SEVERITY_UNSPECIFIED
+        description: My Policy Description
+        applicationRule:
+          ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
+          name: name
+        priority: PRIORITY_TYPE_UNSPECIFIED
+        enabled: true
+        archiveRetention:
+          id: id
+        createdAt: 2021-01-01T00:00:00.000Z
+        companyId: 1234
+        deleted: false
+        name: My Policy
+        id: policy_id
+        order: 1
+        updatedAt: 2021-01-01T00:00:00.000Z
       externalDocs:
         description: Find out more about quota management.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
@@ -1353,39 +1158,6 @@ components:
       additionalProperties: false
       description: A policy is a set of rules that define the behavior of the Coralogix
         system for a specific company.
-      example:
-        spanRules:
-          actionRule:
-            ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-            name: name
-          serviceRule:
-            ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-            name: name
-          tagRules:
-          - ruleTypeId: null
-            tagValue: tag_value
-            tagName: tag_name
-          - ruleTypeId: null
-            tagValue: tag_value
-            tagName: tag_name
-        subsystemRule:
-          ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-          name: name
-        description: My Policy Description
-        applicationRule:
-          ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-          name: name
-        priority: PRIORITY_TYPE_UNSPECIFIED
-        enabled: true
-        archiveRetention:
-          id: id
-        createdAt: 2021-01-01T00:00:00.000Z
-        companyId: 1234
-        deleted: false
-        name: My Policy
-        id: policy_id
-        order: 1
-        updatedAt: 2021-01-01T00:00:00.000Z
       externalDocs:
         description: Find out more about quota management.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
@@ -1460,16 +1232,21 @@ components:
       title: Reorder Policies Response
       type: object
     ReplacePolicySettingsResponse:
+      description: This data structure is returned when replacing policy settings.
+        It contains the complete resource including server-generated fields.
       example:
         logsPolicySettings:
           defaultPriority: PRIORITY_TYPE_UNSPECIFIED
         spansPolicySettings:
           defaultPriority: null
+      externalDocs:
+        url: ""
       properties:
         logsPolicySettings:
           $ref: "#/components/schemas/LogsPolicySettings"
         spansPolicySettings:
           $ref: "#/components/schemas/SpansPolicySettings"
+      title: Replace Policy Settings Response
       type: object
     RuleTypeId:
       enum:
@@ -1480,20 +1257,6 @@ components:
       - RULE_TYPE_ID_INCLUDES
       type: string
     SpanRules:
-      example:
-        actionRule:
-          ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-          name: name
-        serviceRule:
-          ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-          name: name
-        tagRules:
-        - ruleTypeId: null
-          tagValue: tag_value
-          tagName: tag_name
-        - ruleTypeId: null
-          tagValue: tag_value
-          tagName: tag_name
       properties:
         actionRule:
           $ref: "#/components/schemas/quota.v1.Rule"
@@ -1505,18 +1268,19 @@ components:
           type: array
       type: object
     SpansPolicySettings:
+      description: This data structure is used to define the default priority for
+        spans policies.
       example:
         defaultPriority: null
+      externalDocs:
+        url: ""
       properties:
         defaultPriority:
           $ref: "#/components/schemas/quota.v1.Priority"
+      title: Spans Source Policy
       type: object
     TagRule:
       description: Tag rule for a policy.
-      example:
-        ruleTypeId: null
-        tagValue: tag_value
-        tagName: tag_name
       externalDocs:
         description: Find out more about quota management.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
@@ -1544,23 +1308,13 @@ components:
           severityValues: severity
         matched: true
         policy:
-          spanRules:
-            actionRule:
-              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-              name: name
-            serviceRule:
-              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-              name: name
-            tagRules:
-            - ruleTypeId: null
-              tagValue: tag_value
-              tagName: tag_name
-            - ruleTypeId: null
-              tagValue: tag_value
-              tagName: tag_name
           subsystemRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
             name: name
+          logRules:
+            severities:
+            - SEVERITY_UNSPECIFIED
+            - SEVERITY_UNSPECIFIED
           description: My Policy Description
           applicationRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -1592,26 +1346,6 @@ components:
       - metaFieldsValues
       - policy
       title: Test Policies Result
-      type: object
-    TogglePolicyResponse:
-      description: This data structue is obtained when toggling a policy by its ID.
-      example:
-        id: id
-        enabled: true
-      externalDocs:
-        description: Find out more about quota management.
-        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
-      properties:
-        enabled:
-          example: true
-          type: boolean
-        id:
-          example: id
-          type: string
-      required:
-      - enabled
-      - id
-      title: Toggle Policy Response
       type: object
     UpdatePolicyRequestLogRules:
       additionalProperties: false
@@ -1683,23 +1417,13 @@ components:
       description: This data structue is obtained when updating a policy.
       example:
         policy:
-          spanRules:
-            actionRule:
-              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-              name: name
-            serviceRule:
-              ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
-              name: name
-            tagRules:
-            - ruleTypeId: null
-              tagValue: tag_value
-              tagName: tag_name
-            - ruleTypeId: null
-              tagValue: tag_value
-              tagName: tag_name
           subsystemRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
             name: name
+          logRules:
+            severities:
+            - SEVERITY_UNSPECIFIED
+            - SEVERITY_UNSPECIFIED
           description: My Policy Description
           applicationRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -1781,16 +1505,6 @@ components:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
-    PoliciesService_UpdatePolicy_request:
-      oneOf:
-      - $ref: "#/components/schemas/UpdatePolicyRequestLogRules"
-      - $ref: "#/components/schemas/UpdatePolicyRequestSpanRules"
-      type: object
-    PoliciesService_CreatePolicy_request:
-      oneOf:
-      - $ref: "#/components/schemas/CreatePolicyRequestLogRules"
-      - $ref: "#/components/schemas/CreatePolicyRequestSpanRules"
-      type: object
     Atomic_Overwrite_Log_Policies_Request:
       additionalProperties: false
       description: In an atomic operation delete all existing log policies and create
@@ -1804,42 +1518,15 @@ components:
       - policies
       title: Atomic Overwrite Log Policies Request
       type: object
-    Atomic_Overwrite_Span_Policies_Request:
-      additionalProperties: false
-      description: In an atomic operation delete all existing span policies and create
-        the provided list by order.
-      properties:
-        policies:
-          items:
-            $ref: "#/components/schemas/CreateSpanPolicyRequest"
-          type: array
-      required:
-      - policies
-      title: Atomic Overwrite Span Policies Request
+    PoliciesService_UpdatePolicy_request:
+      oneOf:
+      - $ref: "#/components/schemas/UpdatePolicyRequestLogRules"
+      - $ref: "#/components/schemas/UpdatePolicyRequestSpanRules"
       type: object
-    Atomic_Batch_Create_Policy_Request:
-      additionalProperties: false
-      description: This data structure is used to create multiple policies atomically.
-      properties:
-        policyRequests:
-          items:
-            $ref: "#/components/schemas/CreatePolicyRequest"
-          type: array
-      required:
-      - policyRequests
-      title: Atomic Batch Create Policy Request
-      type: object
-    Bulk_Test_Log_Policies_Request:
-      additionalProperties: false
-      description: Request to test multiple log policies.
-      properties:
-        metaFieldsValuesList:
-          items:
-            $ref: "#/components/schemas/LogMetaFieldsValues"
-          type: array
-      required:
-      - metaFieldsValuesList
-      title: Bulk Test Log Policies Request
+    PoliciesService_CreatePolicy_request:
+      oneOf:
+      - $ref: "#/components/schemas/CreatePolicyRequestLogRules"
+      - $ref: "#/components/schemas/CreatePolicyRequestSpanRules"
       type: object
     Reorder_Policies_Request:
       additionalProperties: false
@@ -1856,28 +1543,42 @@ components:
       - sourceType
       title: Reorder Policies Request
       type: object
-    PoliciesService_ReplacePolicySettings_request:
+    Bulk_Test_Log_Policies_Request:
       additionalProperties: false
+      description: Request to test multiple log policies.
+      properties:
+        metaFieldsValuesList:
+          items:
+            $ref: "#/components/schemas/LogMetaFieldsValues"
+          type: array
+      required:
+      - metaFieldsValuesList
+      title: Bulk Test Log Policies Request
+      type: object
+    Replace_Policy_Settings_Request:
+      additionalProperties: false
+      description: "This data structure is used to replace default policy priority\
+        \ settings for logs and/or spans. Server-generated fields (created_at, updated_at)\
+        \ will be ignored if provided."
       properties:
         logsPolicySettings:
           $ref: "#/components/schemas/LogsPolicySettings"
         spansPolicySettings:
           $ref: "#/components/schemas/SpansPolicySettings"
+      title: Replace Policy Settings Request
       type: object
-    Toggle_Policy_Request:
+    Atomic_Overwrite_Span_Policies_Request:
       additionalProperties: false
-      description: This data structue is used to toggle a policy by its ID.
+      description: In an atomic operation delete all existing span policies and create
+        the provided list by order.
       properties:
-        enabled:
-          example: true
-          type: boolean
-        id:
-          example: id
-          type: string
+        policies:
+          items:
+            $ref: "#/components/schemas/CreateSpanPolicyRequest"
+          type: array
       required:
-      - enabled
-      - id
-      title: Toggle Policy Request
+      - policies
+      title: Atomic Overwrite Span Policies Request
       type: object
   securitySchemes:
     apiKeyAuth:

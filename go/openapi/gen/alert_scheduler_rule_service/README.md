@@ -78,13 +78,13 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AlertSchedulerRuleServiceAPI* | [**AlertSchedulerRuleServiceCreateAlertSchedulerRule**](docs/AlertSchedulerRuleServiceAPI.md#alertschedulerruleservicecreatealertschedulerrule) | **Post** /v1/alert-scheduler-rules | Create an alert scheduler rule
-*AlertSchedulerRuleServiceAPI* | [**AlertSchedulerRuleServiceCreateBulkAlertSchedulerRule**](docs/AlertSchedulerRuleServiceAPI.md#alertschedulerruleservicecreatebulkalertschedulerrule) | **Post** /v1/alert-scheduler-rules/bulk | Create multiple alert scheduler rules
-*AlertSchedulerRuleServiceAPI* | [**AlertSchedulerRuleServiceDeleteAlertSchedulerRule**](docs/AlertSchedulerRuleServiceAPI.md#alertschedulerruleservicedeletealertschedulerrule) | **Delete** /v1/alert-scheduler-rules/{alert_scheduler_rule_id} | Delete an alert scheduler rule
-*AlertSchedulerRuleServiceAPI* | [**AlertSchedulerRuleServiceGetAlertSchedulerRule**](docs/AlertSchedulerRuleServiceAPI.md#alertschedulerruleservicegetalertschedulerrule) | **Get** /v1/alert-scheduler-rules/{alert_scheduler_rule_id} | Get an alert scheduler rule
-*AlertSchedulerRuleServiceAPI* | [**AlertSchedulerRuleServiceGetBulkAlertSchedulerRule**](docs/AlertSchedulerRuleServiceAPI.md#alertschedulerruleservicegetbulkalertschedulerrule) | **Get** /v1/alert-scheduler-rules/bulk | Get multiple alert scheduler rules
-*AlertSchedulerRuleServiceAPI* | [**AlertSchedulerRuleServiceUpdateAlertSchedulerRule**](docs/AlertSchedulerRuleServiceAPI.md#alertschedulerruleserviceupdatealertschedulerrule) | **Put** /v1/alert-scheduler-rules | Update an alert scheduler rule
-*AlertSchedulerRuleServiceAPI* | [**AlertSchedulerRuleServiceUpdateBulkAlertSchedulerRule**](docs/AlertSchedulerRuleServiceAPI.md#alertschedulerruleserviceupdatebulkalertschedulerrule) | **Put** /v1/alert-scheduler-rules/bulk | Update multiple alert scheduler rules
+*AlertSchedulerRuleServiceAPI* | [**AlertSchedulerRuleServiceCreateAlertSchedulerRule**](docs/AlertSchedulerRuleServiceAPI.md#alertschedulerruleservicecreatealertschedulerrule) | **Post** /alerts/suppression-rules/v1 | Create an alert scheduler rule
+*AlertSchedulerRuleServiceAPI* | [**AlertSchedulerRuleServiceCreateBulkAlertSchedulerRule**](docs/AlertSchedulerRuleServiceAPI.md#alertschedulerruleservicecreatebulkalertschedulerrule) | **Post** /alerts/suppression-rules/v1/all/rules | Create multiple alert scheduler rules
+*AlertSchedulerRuleServiceAPI* | [**AlertSchedulerRuleServiceDeleteAlertSchedulerRule**](docs/AlertSchedulerRuleServiceAPI.md#alertschedulerruleservicedeletealertschedulerrule) | **Delete** /alerts/suppression-rules/v1/{alert_scheduler_rule_id} | Delete an alert scheduler rule
+*AlertSchedulerRuleServiceAPI* | [**AlertSchedulerRuleServiceGetAlertSchedulerRule**](docs/AlertSchedulerRuleServiceAPI.md#alertschedulerruleservicegetalertschedulerrule) | **Get** /alerts/suppression-rules/v1/{alert_scheduler_rule_id} | Get an alert scheduler rule
+*AlertSchedulerRuleServiceAPI* | [**AlertSchedulerRuleServiceGetBulkAlertSchedulerRule**](docs/AlertSchedulerRuleServiceAPI.md#alertschedulerruleservicegetbulkalertschedulerrule) | **Get** /alerts/suppression-rules/v1 | Get multiple alert scheduler rules
+*AlertSchedulerRuleServiceAPI* | [**AlertSchedulerRuleServiceUpdateAlertSchedulerRule**](docs/AlertSchedulerRuleServiceAPI.md#alertschedulerruleserviceupdatealertschedulerrule) | **Put** /alerts/suppression-rules/v1 | Update an alert scheduler rule
+*AlertSchedulerRuleServiceAPI* | [**AlertSchedulerRuleServiceUpdateBulkAlertSchedulerRule**](docs/AlertSchedulerRuleServiceAPI.md#alertschedulerruleserviceupdatebulkalertschedulerrule) | **Put** /alerts/suppression-rules/v1/all/rules | Update multiple alert scheduler rules
 
 
 ## Documentation For Models
@@ -122,15 +122,18 @@ Class | Method | HTTP request | Description
  - [GetBulkAlertSchedulerRuleResponse](docs/GetBulkAlertSchedulerRuleResponse.md)
  - [MetaLabels](docs/MetaLabels.md)
  - [MetaLabelsProtobufV1MetaLabel](docs/MetaLabelsProtobufV1MetaLabel.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [Monthly](docs/Monthly.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [OneTime](docs/OneTime.md)
  - [Recurring](docs/Recurring.md)
- - [RecurringAlways](docs/RecurringAlways.md)
+ - [RecurringAlwaysActive](docs/RecurringAlwaysActive.md)
  - [RecurringDynamic](docs/RecurringDynamic.md)
  - [RecurringDynamicDaily](docs/RecurringDynamicDaily.md)
  - [RecurringDynamicMonthly](docs/RecurringDynamicMonthly.md)
  - [RecurringDynamicWeekly](docs/RecurringDynamicWeekly.md)
+ - [RecurringSchedule](docs/RecurringSchedule.md)
  - [Schedule](docs/Schedule.md)
  - [ScheduleOneTime](docs/ScheduleOneTime.md)
  - [ScheduleOperation](docs/ScheduleOperation.md)

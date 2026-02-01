@@ -5,7 +5,7 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/data-exploration/saved-views/v1": {
+    "/data-exploration/views/v1/views": {
       "get": {
         "tags": [
           "Views service"
@@ -97,7 +97,7 @@
         }
       }
     },
-    "/data-exploration/saved-views/v1/{id}": {
+    "/data-exploration/views/v1/views/{id}": {
       "get": {
         "tags": [
           "Views service"
@@ -412,6 +412,34 @@
             }
           }
         }
+      },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",

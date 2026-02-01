@@ -389,7 +389,7 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetCompanyUsageLimitsExec
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/parsing-rules/rule-groups/v1/limits"
+	localVarPath := localBasePath + "/parsing-rules/limits/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -597,7 +597,7 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetRuleGroupModelMappingE
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/parsing-rules/rule-groups/v1/mapping"
+	localVarPath := localBasePath + "/parsing-rules/mapping/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

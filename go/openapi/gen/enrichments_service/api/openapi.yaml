@@ -130,8 +130,7 @@ components:
       example:
         enrichments:
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            suspiciousIp: "{}"
           selectedColumns:
           - city
           - population
@@ -139,8 +138,7 @@ components:
           enrichedFieldName: "1"
           id: 1
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            suspiciousIp: "{}"
           selectedColumns:
           - city
           - population
@@ -163,8 +161,7 @@ components:
       example:
         enrichments:
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            suspiciousIp: "{}"
           selectedColumns:
           - city
           - population
@@ -172,8 +169,7 @@ components:
           enrichedFieldName: "1"
           id: 1
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            suspiciousIp: "{}"
           selectedColumns:
           - city
           - population
@@ -251,8 +247,7 @@ components:
       description: This data structure represents an enrichment
       example:
         enrichmentType:
-          geoIp:
-            withAsn: true
+          suspiciousIp: "{}"
         selectedColumns:
         - city
         - population
@@ -323,10 +318,10 @@ components:
       type: object
     EnrichmentType:
       oneOf:
-      - $ref: "#/components/schemas/EnrichmentTypeGeoIp"
       - $ref: "#/components/schemas/EnrichmentTypeSuspiciousIp"
       - $ref: "#/components/schemas/EnrichmentTypeAws"
       - $ref: "#/components/schemas/EnrichmentTypeCustomEnrichment"
+      - $ref: "#/components/schemas/EnrichmentTypeGeoIp"
     EnrichmentTypeAws:
       additionalProperties: false
       properties:
@@ -341,15 +336,14 @@ components:
       type: object
     EnrichmentTypeGeoIp:
       additionalProperties: false
-      example:
-        geoIp:
-          withAsn: true
       properties:
         geoIp:
           $ref: "#/components/schemas/GeoIpType"
       type: object
     EnrichmentTypeSuspiciousIp:
       additionalProperties: false
+      example:
+        suspiciousIp: "{}"
       properties:
         suspiciousIp:
           type: object
@@ -413,8 +407,6 @@ components:
       title: Filters
       type: object
     GeoIpType:
-      example:
-        withAsn: true
       properties:
         withAsn:
           type: boolean
@@ -459,8 +451,7 @@ components:
       example:
         enrichments:
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            suspiciousIp: "{}"
           selectedColumns:
           - city
           - population
@@ -468,8 +459,7 @@ components:
           enrichedFieldName: "1"
           id: 1
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            suspiciousIp: "{}"
           selectedColumns:
           - city
           - population
@@ -488,6 +478,28 @@ components:
       - enrichments
       title: Enrichment Collection
       type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     MultipleValues:
       properties:
         matcher:
@@ -502,8 +514,7 @@ components:
       example:
         remainingEnrichments:
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            suspiciousIp: "{}"
           selectedColumns:
           - city
           - population
@@ -511,8 +522,7 @@ components:
           enrichedFieldName: "1"
           id: 1
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            suspiciousIp: "{}"
           selectedColumns:
           - city
           - population

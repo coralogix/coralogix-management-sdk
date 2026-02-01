@@ -23,6 +23,7 @@ type MetricThresholdType struct {
 	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
 	MetricFilter *MetricFilter `json:"metricFilter,omitempty"`
 	MissingValues *MetricMissingValues `json:"missingValues,omitempty"`
+	NoDataPolicy *NoDataPolicy `json:"noDataPolicy,omitempty"`
 	Rules []MetricThresholdRule `json:"rules,omitempty"`
 	UndetectedValuesManagement *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
 }
@@ -140,6 +141,38 @@ func (o *MetricThresholdType) SetMissingValues(v MetricMissingValues) {
 	o.MissingValues = &v
 }
 
+// GetNoDataPolicy returns the NoDataPolicy field value if set, zero value otherwise.
+func (o *MetricThresholdType) GetNoDataPolicy() NoDataPolicy {
+	if o == nil || IsNil(o.NoDataPolicy) {
+		var ret NoDataPolicy
+		return ret
+	}
+	return *o.NoDataPolicy
+}
+
+// GetNoDataPolicyOk returns a tuple with the NoDataPolicy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MetricThresholdType) GetNoDataPolicyOk() (*NoDataPolicy, bool) {
+	if o == nil || IsNil(o.NoDataPolicy) {
+		return nil, false
+	}
+	return o.NoDataPolicy, true
+}
+
+// HasNoDataPolicy returns a boolean if a field has been set.
+func (o *MetricThresholdType) HasNoDataPolicy() bool {
+	if o != nil && !IsNil(o.NoDataPolicy) {
+		return true
+	}
+
+	return false
+}
+
+// SetNoDataPolicy gets a reference to the given NoDataPolicy and assigns it to the NoDataPolicy field.
+func (o *MetricThresholdType) SetNoDataPolicy(v NoDataPolicy) {
+	o.NoDataPolicy = &v
+}
+
 // GetRules returns the Rules field value if set, zero value otherwise.
 func (o *MetricThresholdType) GetRules() []MetricThresholdRule {
 	if o == nil || IsNil(o.Rules) {
@@ -222,6 +255,9 @@ func (o MetricThresholdType) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.MissingValues) {
 		toSerialize["missingValues"] = o.MissingValues
+	}
+	if !IsNil(o.NoDataPolicy) {
+		toSerialize["noDataPolicy"] = o.NoDataPolicy
 	}
 	if !IsNil(o.Rules) {
 		toSerialize["rules"] = o.Rules

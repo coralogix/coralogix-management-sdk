@@ -5,110 +5,7 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/dashboards/dashboards/v1/catalog": {
-      "get": {
-        "tags": [
-          "Dashboard service"
-        ],
-        "summary": "Get dashboard catalog",
-        "description": "Get a list of all dashboards accessible.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "DashboardCatalogService_GetDashboardCatalog",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetDashboardCatalogResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-coralogixPermissions": [
-          "team-dashboards:Read"
-        ]
-      }
-    },
-    "/v1/dashboards/by-slug/{slug}": {
-      "get": {
-        "tags": [
-          "Dashboard service"
-        ],
-        "summary": "Get a dashboard by URL slug",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "DashboardsService_GetDashboardBySlug",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "slug",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetDashboardBySlugResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-coralogixPermissions": [
-          "team-dashboards:Read"
-        ]
-      }
-    },
-    "/v1/dashboards/dashboards": {
+    "/dashboards/dashboards/v1": {
       "put": {
         "tags": [
           "Dashboard service"
@@ -252,7 +149,110 @@
         ]
       }
     },
-    "/v1/dashboards/dashboards/{dashboard_id}": {
+    "/dashboards/dashboards/v1/catalog": {
+      "get": {
+        "tags": [
+          "Dashboard service"
+        ],
+        "summary": "Get dashboard catalog",
+        "description": "Get a list of all dashboards accessible.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "DashboardCatalogService_GetDashboardCatalog",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDashboardCatalogResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "team-dashboards:Read"
+        ]
+      }
+    },
+    "/dashboards/dashboards/v1/slugs/{slug}": {
+      "get": {
+        "tags": [
+          "Dashboard service"
+        ],
+        "summary": "Get a dashboard by URL slug",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "DashboardsService_GetDashboardBySlug",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "slug",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDashboardBySlugResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "team-dashboards:Read"
+        ]
+      }
+    },
+    "/dashboards/dashboards/v1/{dashboard_id}": {
       "get": {
         "tags": [
           "Dashboard service"
@@ -372,7 +372,7 @@
         ]
       }
     },
-    "/v1/dashboards/dashboards/{dashboard_id}/default": {
+    "/dashboards/dashboards/v1/{dashboard_id}/default": {
       "put": {
         "tags": [
           "Dashboard service"
@@ -450,7 +450,7 @@
         ]
       }
     },
-    "/v1/dashboards/dashboards/{dashboard_id}/folder": {
+    "/dashboards/dashboards/v1/{dashboard_id}/folder": {
       "post": {
         "tags": [
           "Dashboard service"
@@ -531,8 +531,8 @@
         ]
       }
     },
-    "/v1/dashboards/dashboards/{dashboard_id}:pin": {
-      "patch": {
+    "/dashboards/pinned/v1/{dashboard_id}": {
+      "put": {
         "tags": [
           "Dashboard service"
         ],
@@ -551,29 +551,16 @@
               "type": "string"
             },
             "style": "simple"
+          },
+          {
+            "in": "query",
+            "name": "request_id",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "title": "Pin dashboard request data structure",
-                "description": "This is a request used to mark certain dashboard as pinned",
-                "type": "object",
-                "properties": {
-                  "requestId": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "requestId",
-                  "dashboardId"
-                ],
-                "additionalProperties": false
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "",
@@ -607,10 +594,8 @@
         "x-coralogixPermissions": [
           "team-dashboards:Read"
         ]
-      }
-    },
-    "/v1/dashboards/dashboards/{dashboard_id}:unpin": {
-      "patch": {
+      },
+      "delete": {
         "tags": [
           "Dashboard service"
         ],
@@ -629,29 +614,16 @@
               "type": "string"
             },
             "style": "simple"
+          },
+          {
+            "in": "query",
+            "name": "request_id",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "title": "Unpin dashboard request data structure",
-                "description": "This is a request used to unpin a certain dashboard",
-                "type": "object",
-                "properties": {
-                  "requestId": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "requestId",
-                  "dashboardId"
-                ],
-                "additionalProperties": false
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "",
@@ -877,6 +849,26 @@
         "title": "Assign dashboard to folder response data structure",
         "description": "This is a response confirming that folder has been successfully assigned to a dashboard",
         "type": "object"
+      },
+      "AutoIntervalResolution": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "AutoIntervalResolution",
+        "description": "Automatic interval resolution that calculates optimal time buckets based on the widget width, time range, and specified constraints.",
+        "type": "object",
+        "properties": {
+          "maximumDataPoints": {
+            "example": 500,
+            "description": "Maximum number of data points to display. The calculated interval ensures this limit is not exceeded.",
+            "type": "integer",
+            "format": "int32"
+          },
+          "minimumInterval": {
+            "description": "Minimum interval duration. The calculated interval will not be smaller than this value.",
+            "type": "string"
+          }
+        }
       },
       "AutoRefreshFiveMinutes": {
         "type": "object"
@@ -1110,16 +1102,16 @@
       "BarChart.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/BarChartQueryMetrics"
-          },
-          {
-            "$ref": "#/components/schemas/BarChartQueryDataprime"
-          },
-          {
             "$ref": "#/components/schemas/BarChartQueryLogs"
           },
           {
             "$ref": "#/components/schemas/BarChartQuerySpans"
+          },
+          {
+            "$ref": "#/components/schemas/BarChartQueryMetrics"
+          },
+          {
+            "$ref": "#/components/schemas/BarChartQueryDataprime"
           }
         ]
       },
@@ -1216,16 +1208,40 @@
         },
         "additionalProperties": false
       },
+      "ColorGradientType": {
+        "type": "string",
+        "enum": [
+          "COLOR_GRADIENT_TYPE_UNSPECIFIED",
+          "COLOR_GRADIENT_TYPE_BLUE",
+          "COLOR_GRADIENT_TYPE_GREEN",
+          "COLOR_GRADIENT_TYPE_RED",
+          "COLOR_GRADIENT_TYPE_THRESHOLD",
+          "COLOR_GRADIENT_TYPE_BLUE_REVERSED",
+          "COLOR_GRADIENT_TYPE_GREEN_REVERSED",
+          "COLOR_GRADIENT_TYPE_RED_REVERSED",
+          "COLOR_GRADIENT_TYPE_THRESHOLD_REVERSED"
+        ]
+      },
+      "ColorSolidType": {
+        "type": "string",
+        "enum": [
+          "COLOR_SOLID_TYPE_UNSPECIFIED",
+          "COLOR_SOLID_TYPE_BLUE",
+          "COLOR_SOLID_TYPE_GREEN",
+          "COLOR_SOLID_TYPE_RED",
+          "COLOR_SOLID_TYPE_PURPLE"
+        ]
+      },
       "ColorsBy": {
         "oneOf": [
-          {
-            "$ref": "#/components/schemas/ColorsByStack"
-          },
           {
             "$ref": "#/components/schemas/ColorsByGroupBy"
           },
           {
             "$ref": "#/components/schemas/ColorsByAggregation"
+          },
+          {
+            "$ref": "#/components/schemas/ColorsByStack"
           }
         ]
       },
@@ -1255,6 +1271,18 @@
           }
         },
         "additionalProperties": false
+      },
+      "ColumnWidthEntry": {
+        "type": "object",
+        "properties": {
+          "columnName": {
+            "type": "string"
+          },
+          "width": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
       },
       "Constant": {
         "type": "object",
@@ -1339,40 +1367,22 @@
       "Dashboard": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DashboardOffFolderIdAbsoluteTimeFrame"
+            "$ref": "#/components/schemas/DashboardOffAbsoluteTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardOffFolderIdRelativeTimeFrame"
+            "$ref": "#/components/schemas/DashboardOffRelativeTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardTwoMinutesFolderPathAbsoluteTimeFrame"
+            "$ref": "#/components/schemas/DashboardTwoMinutesAbsoluteTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardTwoMinutesFolderPathRelativeTimeFrame"
+            "$ref": "#/components/schemas/DashboardTwoMinutesRelativeTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardFiveMinutesFolderIdRelativeTimeFrame"
+            "$ref": "#/components/schemas/DashboardFiveMinutesAbsoluteTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardFiveMinutesFolderPathAbsoluteTimeFrame"
-          },
-          {
-            "$ref": "#/components/schemas/DashboardOffFolderPathAbsoluteTimeFrame"
-          },
-          {
-            "$ref": "#/components/schemas/DashboardOffFolderPathRelativeTimeFrame"
-          },
-          {
-            "$ref": "#/components/schemas/DashboardTwoMinutesFolderIdAbsoluteTimeFrame"
-          },
-          {
-            "$ref": "#/components/schemas/DashboardTwoMinutesFolderIdRelativeTimeFrame"
-          },
-          {
-            "$ref": "#/components/schemas/DashboardFiveMinutesFolderIdAbsoluteTimeFrame"
-          },
-          {
-            "$ref": "#/components/schemas/DashboardFiveMinutesFolderPathRelativeTimeFrame"
+            "$ref": "#/components/schemas/DashboardFiveMinutesRelativeTimeFrame"
           }
         ]
       },
@@ -1457,7 +1467,7 @@
           }
         }
       },
-      "DashboardFiveMinutesFolderIdAbsoluteTimeFrame": {
+      "DashboardFiveMinutesAbsoluteTimeFrame": {
         "externalDocs": {
           "description": "Learn more about Custom Dashboards in our documentation.",
           "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
@@ -1497,160 +1507,6 @@
           },
           "folderId": {
             "$ref": "#/components/schemas/UUID"
-          },
-          "id": {
-            "example": "GZLHSeqelCbD3I7HbIDtL",
-            "description": "A unique identifier of the dashboard",
-            "type": "string"
-          },
-          "layout": {
-            "$ref": "#/components/schemas/Layout"
-          },
-          "name": {
-            "example": "Example Name",
-            "description": "The display name of the dashboard",
-            "type": "string"
-          },
-          "slugName": {
-            "example": "system-health-monitoring",
-            "description": "A unique slug name serving as an alias for accessing the dashboard",
-            "type": "string"
-          },
-          "variables": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Variable"
-            }
-          },
-          "variablesV2": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VariableV2"
-            }
-          }
-        },
-        "required": [
-          "name",
-          "layout"
-        ],
-        "additionalProperties": false
-      },
-      "DashboardFiveMinutesFolderIdRelativeTimeFrame": {
-        "externalDocs": {
-          "description": "Learn more about Custom Dashboards in our documentation.",
-          "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
-        },
-        "title": "Dashboard",
-        "description": "Dashboard represents the structure and configuration of a Coralogix Custom Dashboard.",
-        "type": "object",
-        "properties": {
-          "actions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DashboardAction"
-            }
-          },
-          "annotations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Annotation"
-            }
-          },
-          "description": {
-            "example": "Sample description",
-            "description": "A brief description or summary of the dashboard's purpose or content",
-            "type": "string"
-          },
-          "filters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/filters.Filter"
-            }
-          },
-          "fiveMinutes": {
-            "$ref": "#/components/schemas/AutoRefreshFiveMinutes"
-          },
-          "folderId": {
-            "$ref": "#/components/schemas/UUID"
-          },
-          "id": {
-            "example": "GZLHSeqelCbD3I7HbIDtL",
-            "description": "A unique identifier of the dashboard",
-            "type": "string"
-          },
-          "layout": {
-            "$ref": "#/components/schemas/Layout"
-          },
-          "name": {
-            "example": "Example Name",
-            "description": "The display name of the dashboard",
-            "type": "string"
-          },
-          "relativeTimeFrame": {
-            "description": "Relative time frame specifying a duration from the current time",
-            "type": "string"
-          },
-          "slugName": {
-            "example": "system-health-monitoring",
-            "description": "A unique slug name serving as an alias for accessing the dashboard",
-            "type": "string"
-          },
-          "variables": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Variable"
-            }
-          },
-          "variablesV2": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VariableV2"
-            }
-          }
-        },
-        "required": [
-          "name",
-          "layout"
-        ],
-        "additionalProperties": false
-      },
-      "DashboardFiveMinutesFolderPathAbsoluteTimeFrame": {
-        "externalDocs": {
-          "description": "Learn more about Custom Dashboards in our documentation.",
-          "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
-        },
-        "title": "Dashboard",
-        "description": "Dashboard represents the structure and configuration of a Coralogix Custom Dashboard.",
-        "type": "object",
-        "properties": {
-          "absoluteTimeFrame": {
-            "$ref": "#/components/schemas/TimeFrame"
-          },
-          "actions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DashboardAction"
-            }
-          },
-          "annotations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Annotation"
-            }
-          },
-          "description": {
-            "example": "Sample description",
-            "description": "A brief description or summary of the dashboard's purpose or content",
-            "type": "string"
-          },
-          "filters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/filters.Filter"
-            }
-          },
-          "fiveMinutes": {
-            "$ref": "#/components/schemas/AutoRefreshFiveMinutes"
           },
           "folderPath": {
             "$ref": "#/components/schemas/FolderPath"
@@ -1692,7 +1548,7 @@
         ],
         "additionalProperties": false
       },
-      "DashboardFiveMinutesFolderPathRelativeTimeFrame": {
+      "DashboardFiveMinutesRelativeTimeFrame": {
         "externalDocs": {
           "description": "Learn more about Custom Dashboards in our documentation.",
           "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
@@ -1726,6 +1582,9 @@
           },
           "fiveMinutes": {
             "$ref": "#/components/schemas/AutoRefreshFiveMinutes"
+          },
+          "folderId": {
+            "$ref": "#/components/schemas/UUID"
           },
           "folderPath": {
             "$ref": "#/components/schemas/FolderPath"
@@ -1785,7 +1644,7 @@
           }
         }
       },
-      "DashboardOffFolderIdAbsoluteTimeFrame": {
+      "DashboardOffAbsoluteTimeFrame": {
         "externalDocs": {
           "description": "Learn more about Custom Dashboards in our documentation.",
           "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
@@ -1822,160 +1681,6 @@
           },
           "folderId": {
             "$ref": "#/components/schemas/UUID"
-          },
-          "id": {
-            "example": "GZLHSeqelCbD3I7HbIDtL",
-            "description": "A unique identifier of the dashboard",
-            "type": "string"
-          },
-          "layout": {
-            "$ref": "#/components/schemas/Layout"
-          },
-          "name": {
-            "example": "Example Name",
-            "description": "The display name of the dashboard",
-            "type": "string"
-          },
-          "off": {
-            "$ref": "#/components/schemas/AutoRefreshOff"
-          },
-          "slugName": {
-            "example": "system-health-monitoring",
-            "description": "A unique slug name serving as an alias for accessing the dashboard",
-            "type": "string"
-          },
-          "variables": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Variable"
-            }
-          },
-          "variablesV2": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VariableV2"
-            }
-          }
-        },
-        "required": [
-          "name",
-          "layout"
-        ],
-        "additionalProperties": false
-      },
-      "DashboardOffFolderIdRelativeTimeFrame": {
-        "externalDocs": {
-          "description": "Learn more about Custom Dashboards in our documentation.",
-          "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
-        },
-        "title": "Dashboard",
-        "description": "Dashboard represents the structure and configuration of a Coralogix Custom Dashboard.",
-        "type": "object",
-        "properties": {
-          "actions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DashboardAction"
-            }
-          },
-          "annotations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Annotation"
-            }
-          },
-          "description": {
-            "example": "Sample description",
-            "description": "A brief description or summary of the dashboard's purpose or content",
-            "type": "string"
-          },
-          "filters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/filters.Filter"
-            }
-          },
-          "folderId": {
-            "$ref": "#/components/schemas/UUID"
-          },
-          "id": {
-            "example": "GZLHSeqelCbD3I7HbIDtL",
-            "description": "A unique identifier of the dashboard",
-            "type": "string"
-          },
-          "layout": {
-            "$ref": "#/components/schemas/Layout"
-          },
-          "name": {
-            "example": "Example Name",
-            "description": "The display name of the dashboard",
-            "type": "string"
-          },
-          "off": {
-            "$ref": "#/components/schemas/AutoRefreshOff"
-          },
-          "relativeTimeFrame": {
-            "description": "Relative time frame specifying a duration from the current time",
-            "type": "string"
-          },
-          "slugName": {
-            "example": "system-health-monitoring",
-            "description": "A unique slug name serving as an alias for accessing the dashboard",
-            "type": "string"
-          },
-          "variables": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Variable"
-            }
-          },
-          "variablesV2": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VariableV2"
-            }
-          }
-        },
-        "required": [
-          "name",
-          "layout"
-        ],
-        "additionalProperties": false
-      },
-      "DashboardOffFolderPathAbsoluteTimeFrame": {
-        "externalDocs": {
-          "description": "Learn more about Custom Dashboards in our documentation.",
-          "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
-        },
-        "title": "Dashboard",
-        "description": "Dashboard represents the structure and configuration of a Coralogix Custom Dashboard.",
-        "type": "object",
-        "properties": {
-          "absoluteTimeFrame": {
-            "$ref": "#/components/schemas/TimeFrame"
-          },
-          "actions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DashboardAction"
-            }
-          },
-          "annotations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Annotation"
-            }
-          },
-          "description": {
-            "example": "Sample description",
-            "description": "A brief description or summary of the dashboard's purpose or content",
-            "type": "string"
-          },
-          "filters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/filters.Filter"
-            }
           },
           "folderPath": {
             "$ref": "#/components/schemas/FolderPath"
@@ -2020,7 +1725,7 @@
         ],
         "additionalProperties": false
       },
-      "DashboardOffFolderPathRelativeTimeFrame": {
+      "DashboardOffRelativeTimeFrame": {
         "externalDocs": {
           "description": "Learn more about Custom Dashboards in our documentation.",
           "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
@@ -2051,6 +1756,9 @@
             "items": {
               "$ref": "#/components/schemas/filters.Filter"
             }
+          },
+          "folderId": {
+            "$ref": "#/components/schemas/UUID"
           },
           "folderPath": {
             "$ref": "#/components/schemas/FolderPath"
@@ -2099,7 +1807,7 @@
         ],
         "additionalProperties": false
       },
-      "DashboardTwoMinutesFolderIdAbsoluteTimeFrame": {
+      "DashboardTwoMinutesAbsoluteTimeFrame": {
         "externalDocs": {
           "description": "Learn more about Custom Dashboards in our documentation.",
           "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
@@ -2136,160 +1844,6 @@
           },
           "folderId": {
             "$ref": "#/components/schemas/UUID"
-          },
-          "id": {
-            "example": "GZLHSeqelCbD3I7HbIDtL",
-            "description": "A unique identifier of the dashboard",
-            "type": "string"
-          },
-          "layout": {
-            "$ref": "#/components/schemas/Layout"
-          },
-          "name": {
-            "example": "Example Name",
-            "description": "The display name of the dashboard",
-            "type": "string"
-          },
-          "slugName": {
-            "example": "system-health-monitoring",
-            "description": "A unique slug name serving as an alias for accessing the dashboard",
-            "type": "string"
-          },
-          "twoMinutes": {
-            "$ref": "#/components/schemas/AutoRefreshTwoMinutes"
-          },
-          "variables": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Variable"
-            }
-          },
-          "variablesV2": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VariableV2"
-            }
-          }
-        },
-        "required": [
-          "name",
-          "layout"
-        ],
-        "additionalProperties": false
-      },
-      "DashboardTwoMinutesFolderIdRelativeTimeFrame": {
-        "externalDocs": {
-          "description": "Learn more about Custom Dashboards in our documentation.",
-          "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
-        },
-        "title": "Dashboard",
-        "description": "Dashboard represents the structure and configuration of a Coralogix Custom Dashboard.",
-        "type": "object",
-        "properties": {
-          "actions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DashboardAction"
-            }
-          },
-          "annotations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Annotation"
-            }
-          },
-          "description": {
-            "example": "Sample description",
-            "description": "A brief description or summary of the dashboard's purpose or content",
-            "type": "string"
-          },
-          "filters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/filters.Filter"
-            }
-          },
-          "folderId": {
-            "$ref": "#/components/schemas/UUID"
-          },
-          "id": {
-            "example": "GZLHSeqelCbD3I7HbIDtL",
-            "description": "A unique identifier of the dashboard",
-            "type": "string"
-          },
-          "layout": {
-            "$ref": "#/components/schemas/Layout"
-          },
-          "name": {
-            "example": "Example Name",
-            "description": "The display name of the dashboard",
-            "type": "string"
-          },
-          "relativeTimeFrame": {
-            "description": "Relative time frame specifying a duration from the current time",
-            "type": "string"
-          },
-          "slugName": {
-            "example": "system-health-monitoring",
-            "description": "A unique slug name serving as an alias for accessing the dashboard",
-            "type": "string"
-          },
-          "twoMinutes": {
-            "$ref": "#/components/schemas/AutoRefreshTwoMinutes"
-          },
-          "variables": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Variable"
-            }
-          },
-          "variablesV2": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VariableV2"
-            }
-          }
-        },
-        "required": [
-          "name",
-          "layout"
-        ],
-        "additionalProperties": false
-      },
-      "DashboardTwoMinutesFolderPathAbsoluteTimeFrame": {
-        "externalDocs": {
-          "description": "Learn more about Custom Dashboards in our documentation.",
-          "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
-        },
-        "title": "Dashboard",
-        "description": "Dashboard represents the structure and configuration of a Coralogix Custom Dashboard.",
-        "type": "object",
-        "properties": {
-          "absoluteTimeFrame": {
-            "$ref": "#/components/schemas/TimeFrame"
-          },
-          "actions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DashboardAction"
-            }
-          },
-          "annotations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Annotation"
-            }
-          },
-          "description": {
-            "example": "Sample description",
-            "description": "A brief description or summary of the dashboard's purpose or content",
-            "type": "string"
-          },
-          "filters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/filters.Filter"
-            }
           },
           "folderPath": {
             "$ref": "#/components/schemas/FolderPath"
@@ -2334,7 +1888,7 @@
         ],
         "additionalProperties": false
       },
-      "DashboardTwoMinutesFolderPathRelativeTimeFrame": {
+      "DashboardTwoMinutesRelativeTimeFrame": {
         "externalDocs": {
           "description": "Learn more about Custom Dashboards in our documentation.",
           "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
@@ -2365,6 +1919,9 @@
             "items": {
               "$ref": "#/components/schemas/filters.Filter"
             }
+          },
+          "folderId": {
+            "$ref": "#/components/schemas/UUID"
           },
           "folderPath": {
             "$ref": "#/components/schemas/FolderPath"
@@ -2534,6 +2091,9 @@
       "DataTable.Query": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/DataTableQueryDataprime"
+          },
+          {
             "$ref": "#/components/schemas/DataTableQueryLogs"
           },
           {
@@ -2541,9 +2101,6 @@
           },
           {
             "$ref": "#/components/schemas/DataTableQueryMetrics"
-          },
-          {
-            "$ref": "#/components/schemas/DataTableQueryDataprime"
           }
         ]
       },
@@ -2788,6 +2345,31 @@
           }
         ]
       },
+      "Dynamic.QueryDefinition": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "QueryDefinition",
+        "description": "Query definition for dynamic widget",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Unique id of the query definition",
+            "type": "string"
+          },
+          "name": {
+            "description": "Custom name of the query",
+            "type": "string"
+          },
+          "query": {
+            "$ref": "#/components/schemas/Dynamic.Query"
+          }
+        },
+        "required": [
+          "id",
+          "query"
+        ]
+      },
       "DynamicQueryDataprime": {
         "type": "object",
         "properties": {
@@ -2827,10 +2409,10 @@
       "Equals.Selection": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/EqualsSelectionAll"
+            "$ref": "#/components/schemas/EqualsSelectionList"
           },
           {
-            "$ref": "#/components/schemas/EqualsSelectionList"
+            "$ref": "#/components/schemas/EqualsSelectionAll"
           }
         ]
       },
@@ -3035,13 +2617,13 @@
       "Filter.Source": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/FilterSourceLogs"
+          },
+          {
             "$ref": "#/components/schemas/FilterSourceSpans"
           },
           {
             "$ref": "#/components/schemas/FilterSourceMetrics"
-          },
-          {
-            "$ref": "#/components/schemas/FilterSourceLogs"
           }
         ]
       },
@@ -3450,6 +3032,209 @@
         },
         "additionalProperties": false
       },
+      "Geomap": {
+        "type": "object",
+        "properties": {
+          "aggregation": {
+            "$ref": "#/components/schemas/GeomapAggregation"
+          },
+          "allowAbbreviation": {
+            "example": false,
+            "description": "Whether to render numeric value with abbreviation",
+            "type": "boolean"
+          },
+          "color": {
+            "$ref": "#/components/schemas/GeomapColor"
+          },
+          "config": {
+            "$ref": "#/components/schemas/GeomapFieldConfig"
+          },
+          "customUnit": {
+            "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
+            "type": "string"
+          },
+          "decimalPrecision": {
+            "example": 4,
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "type": "integer",
+            "format": "int32"
+          },
+          "minMax": {
+            "$ref": "#/components/schemas/MinMax"
+          },
+          "tooltip": {
+            "$ref": "#/components/schemas/GeomapTooltip"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/common.Unit"
+          }
+        }
+      },
+      "GeomapAggregation": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/GeomapAggregationCount"
+          },
+          {
+            "$ref": "#/components/schemas/GeomapAggregationSum"
+          },
+          {
+            "$ref": "#/components/schemas/GeomapAggregationMin"
+          },
+          {
+            "$ref": "#/components/schemas/GeomapAggregationMax"
+          },
+          {
+            "$ref": "#/components/schemas/GeomapAggregationAvg"
+          }
+        ]
+      },
+      "GeomapAggregationAvg": {
+        "type": "object",
+        "properties": {
+          "avg": {
+            "$ref": "#/components/schemas/GeomapAggregationFieldBased"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GeomapAggregationCount": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "$ref": "#/components/schemas/GeomapAggregationSimple"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GeomapAggregationFieldBased": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "$ref": "#/components/schemas/ObservationField"
+          }
+        }
+      },
+      "GeomapAggregationMax": {
+        "type": "object",
+        "properties": {
+          "max": {
+            "$ref": "#/components/schemas/GeomapAggregationFieldBased"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GeomapAggregationMin": {
+        "type": "object",
+        "properties": {
+          "min": {
+            "$ref": "#/components/schemas/GeomapAggregationFieldBased"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GeomapAggregationSimple": {
+        "type": "object"
+      },
+      "GeomapAggregationSum": {
+        "type": "object",
+        "properties": {
+          "sum": {
+            "$ref": "#/components/schemas/GeomapAggregationFieldBased"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GeomapAwsRegionConfig": {
+        "type": "object",
+        "properties": {
+          "awsRegionField": {
+            "$ref": "#/components/schemas/ObservationField"
+          }
+        }
+      },
+      "GeomapColor": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/GeomapColorSize"
+          },
+          {
+            "$ref": "#/components/schemas/GeomapColorColorRange"
+          }
+        ]
+      },
+      "GeomapColorColorRange": {
+        "type": "object",
+        "properties": {
+          "colorRange": {
+            "$ref": "#/components/schemas/ColorGradientType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GeomapColorSize": {
+        "type": "object",
+        "properties": {
+          "size": {
+            "$ref": "#/components/schemas/ColorSolidType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GeomapCoordinateConfig": {
+        "type": "object",
+        "properties": {
+          "latitudeField": {
+            "$ref": "#/components/schemas/ObservationField"
+          },
+          "longitudeField": {
+            "$ref": "#/components/schemas/ObservationField"
+          }
+        }
+      },
+      "GeomapFieldConfig": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/GeomapFieldConfigCoordinateConfig"
+          },
+          {
+            "$ref": "#/components/schemas/GeomapFieldConfigAwsRegionConfig"
+          }
+        ]
+      },
+      "GeomapFieldConfigAwsRegionConfig": {
+        "type": "object",
+        "properties": {
+          "awsRegionConfig": {
+            "$ref": "#/components/schemas/GeomapAwsRegionConfig"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GeomapFieldConfigCoordinateConfig": {
+        "type": "object",
+        "properties": {
+          "coordinateConfig": {
+            "$ref": "#/components/schemas/GeomapCoordinateConfig"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GeomapTooltip": {
+        "type": "object",
+        "properties": {
+          "labels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObservationField"
+            }
+          },
+          "messageTemplate": {
+            "description": "Custom template for the geomap tooltip",
+            "type": "string"
+          }
+        }
+      },
       "GetDashboardBySlugResponse": {
         "externalDocs": {
           "description": "Find out more about Dashboards in our documentation.",
@@ -3573,6 +3358,94 @@
         }
       },
       "Heatmap": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/HeatmapPreset"
+          },
+          {
+            "$ref": "#/components/schemas/HeatmapColorRange"
+          }
+        ]
+      },
+      "HeatmapColorPreset": {
+        "type": "string",
+        "enum": [
+          "HEATMAP_COLOR_PRESET_UNSPECIFIED",
+          "HEATMAP_COLOR_PRESET_BLUE",
+          "HEATMAP_COLOR_PRESET_GREEN",
+          "HEATMAP_COLOR_PRESET_RED",
+          "HEATMAP_COLOR_PRESET_THRESHOLD",
+          "HEATMAP_COLOR_PRESET_BLUE_REVERSED",
+          "HEATMAP_COLOR_PRESET_GREEN_REVERSED",
+          "HEATMAP_COLOR_PRESET_RED_REVERSED",
+          "HEATMAP_COLOR_PRESET_THRESHOLD_REVERSED"
+        ]
+      },
+      "HeatmapColorRange": {
+        "type": "object",
+        "properties": {
+          "allowAbbreviation": {
+            "example": false,
+            "description": "Whether to render numeric value with abbreviation",
+            "type": "boolean"
+          },
+          "colorAxisMax": {
+            "example": 1000,
+            "description": "Optional number indicating the max value for gradient color axis. Automatically calculated from data if not provided.",
+            "type": "number",
+            "format": "float"
+          },
+          "colorAxisMin": {
+            "example": -1000,
+            "description": "Optional number indicating the lowest value for gradient color axis. Automatically calculated from data if not provided.",
+            "type": "number",
+            "format": "float"
+          },
+          "colorRange": {
+            "$ref": "#/components/schemas/ColorGradientType"
+          },
+          "customUnit": {
+            "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
+            "type": "string"
+          },
+          "decimalPrecision": {
+            "example": 4,
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "type": "integer",
+            "format": "int32"
+          },
+          "scaleType": {
+            "$ref": "#/components/schemas/ScaleType"
+          },
+          "showNumbers": {
+            "description": "Whether to render numeric values inside the heatmap tiles",
+            "type": "boolean"
+          },
+          "tooltip": {
+            "$ref": "#/components/schemas/HeatmapTooltip"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/common.Unit"
+          },
+          "valueField": {
+            "$ref": "#/components/schemas/ObservationField"
+          },
+          "xAxisFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObservationField"
+            }
+          },
+          "yAxisFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObservationField"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "HeatmapPreset": {
         "type": "object",
         "properties": {
           "allowAbbreviation": {
@@ -3633,21 +3506,8 @@
               "$ref": "#/components/schemas/ObservationField"
             }
           }
-        }
-      },
-      "HeatmapColorPreset": {
-        "type": "string",
-        "enum": [
-          "HEATMAP_COLOR_PRESET_UNSPECIFIED",
-          "HEATMAP_COLOR_PRESET_BLUE",
-          "HEATMAP_COLOR_PRESET_GREEN",
-          "HEATMAP_COLOR_PRESET_RED",
-          "HEATMAP_COLOR_PRESET_THRESHOLD",
-          "HEATMAP_COLOR_PRESET_BLUE_REVERSED",
-          "HEATMAP_COLOR_PRESET_GREEN_REVERSED",
-          "HEATMAP_COLOR_PRESET_RED_REVERSED",
-          "HEATMAP_COLOR_PRESET_THRESHOLD_REVERSED"
-        ]
+        },
+        "additionalProperties": false
       },
       "HeatmapTooltip": {
         "type": "object",
@@ -3807,16 +3667,16 @@
       "Hexagon.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/HexagonQueryMetrics"
-          },
-          {
-            "$ref": "#/components/schemas/HexagonQueryLogs"
-          },
-          {
             "$ref": "#/components/schemas/HexagonQuerySpans"
           },
           {
             "$ref": "#/components/schemas/HexagonQueryDataprime"
+          },
+          {
+            "$ref": "#/components/schemas/HexagonQueryMetrics"
+          },
+          {
+            "$ref": "#/components/schemas/HexagonQueryLogs"
           }
         ]
       },
@@ -4157,16 +4017,16 @@
       "HorizontalBarChart.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/HorizontalBarChartQueryLogs"
-          },
-          {
-            "$ref": "#/components/schemas/HorizontalBarChartQuerySpans"
-          },
-          {
             "$ref": "#/components/schemas/HorizontalBarChartQueryMetrics"
           },
           {
             "$ref": "#/components/schemas/HorizontalBarChartQueryDataprime"
+          },
+          {
+            "$ref": "#/components/schemas/HorizontalBarChartQueryLogs"
+          },
+          {
+            "$ref": "#/components/schemas/HorizontalBarChartQuerySpans"
           }
         ]
       },
@@ -4417,6 +4277,44 @@
           "INTERPRETATION_CATEGORICAL_ANALYSIS_HORIZONTAL_BARS"
         ]
       },
+      "IntervalResolution": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/IntervalResolutionAuto"
+          },
+          {
+            "$ref": "#/components/schemas/IntervalResolutionManual"
+          }
+        ]
+      },
+      "IntervalResolutionAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "IntervalResolution",
+        "description": "Configuration for time bucket/interval resolution in time-series widgets. Supports automatic calculation based on widget width and time range, or manual interval specification.",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/AutoIntervalResolution"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IntervalResolutionManual": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "IntervalResolution",
+        "description": "Configuration for time bucket/interval resolution in time-series widgets. Supports automatic calculation based on widget width and time range, or manual interval specification.",
+        "type": "object",
+        "properties": {
+          "manual": {
+            "$ref": "#/components/schemas/ManualIntervalResolution"
+          }
+        },
+        "additionalProperties": false
+      },
       "IntervalValue": {
         "type": "object",
         "properties": {
@@ -4513,7 +4411,7 @@
           "queryDefinitions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/QueryDefinition"
+              "$ref": "#/components/schemas/LineChart.QueryDefinition"
             }
           },
           "stackedLine": {
@@ -4619,16 +4517,111 @@
           }
         ]
       },
+      "LineChart.QueryDefinition": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "LineChart",
+        "description": "LineChart represents the configuration of a line chart widget.",
+        "type": "object",
+        "properties": {
+          "colorScheme": {
+            "description": "Applied color scheme for this query, one of the predefined values",
+            "type": "string"
+          },
+          "customUnit": {
+            "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
+            "type": "string"
+          },
+          "dataModeType": {
+            "$ref": "#/components/schemas/widgets.common.DataModeType"
+          },
+          "decimal": {
+            "example": 4,
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "type": "integer",
+            "format": "int32"
+          },
+          "decimalPrecision": {
+            "example": false,
+            "description": "Whether to render numeric value without abbreviation",
+            "type": "boolean"
+          },
+          "hashColors": {
+            "example": false,
+            "description": "Whether to ignore color scheme and derive colors from algorithm",
+            "type": "boolean"
+          },
+          "id": {
+            "description": "Unique id of the query definition",
+            "type": "string"
+          },
+          "intervalResolution": {
+            "$ref": "#/components/schemas/IntervalResolution"
+          },
+          "isVisible": {
+            "example": true,
+            "description": "Is the query visible",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Custom name of the query",
+            "type": "string"
+          },
+          "query": {
+            "$ref": "#/components/schemas/LineChart.Query"
+          },
+          "resolution": {
+            "$ref": "#/components/schemas/LineChart.Resolution"
+          },
+          "scaleType": {
+            "$ref": "#/components/schemas/ScaleType"
+          },
+          "seriesCountLimit": {
+            "description": "Max count of the series per query",
+            "type": "string",
+            "format": "int64"
+          },
+          "seriesNameTemplate": {
+            "description": "Custom template for the series name",
+            "type": "string"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/common.Unit"
+          },
+          "yAxisMax": {
+            "example": 1000,
+            "description": "Number indicating the upper band for y axis",
+            "type": "number",
+            "format": "float"
+          },
+          "yAxisMin": {
+            "example": -1000,
+            "description": "Number indicating the lower band for y axis",
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "required": [
+          "id",
+          "query"
+        ]
+      },
       "LineChart.Resolution": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Resolution",
+        "description": "Resolution settings for query values. (deprecated, use interval_resolution instead).",
         "type": "object",
         "properties": {
           "bucketsPresented": {
-            "description": "How many buckets to present in the selected timeframe",
+            "description": "How many buckets to present in the selected timeframe (deprecated)",
             "type": "integer",
             "format": "int32"
           },
           "interval": {
-            "description": "Interval of value sampling, i.e. every 5 minutes, every 1 second and so on",
+            "description": "Interval of value sampling, i.e. every 5 minutes, every 1 second and so on (deprecated)",
             "type": "string"
           }
         }
@@ -4722,6 +4715,10 @@
             "description": "Name of the link action",
             "type": "string"
           },
+          "shouldOpenInNewWindow": {
+            "description": "Defines if the link action should open in a new window or current window in the browser",
+            "type": "boolean"
+          },
           "url": {
             "description": "Static URL that may contain variables using {{variable_name}} syntax",
             "type": "string"
@@ -4776,15 +4773,6 @@
       "LogsAggregation": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/LogsAggregationPercentile"
-          },
-          {
-            "$ref": "#/components/schemas/LogsAggregationCount"
-          },
-          {
-            "$ref": "#/components/schemas/LogsAggregationCountDistinct"
-          },
-          {
             "$ref": "#/components/schemas/LogsAggregationSum"
           },
           {
@@ -4795,6 +4783,15 @@
           },
           {
             "$ref": "#/components/schemas/LogsAggregationMax"
+          },
+          {
+            "$ref": "#/components/schemas/LogsAggregationPercentile"
+          },
+          {
+            "$ref": "#/components/schemas/LogsAggregationCount"
+          },
+          {
+            "$ref": "#/components/schemas/LogsAggregationCountDistinct"
           }
         ]
       },
@@ -5024,6 +5021,23 @@
             "$ref": "#/components/schemas/StringValueLabel"
           }
         }
+      },
+      "ManualIntervalResolution": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "ManualIntervalResolution",
+        "description": "Manual interval resolution with a fixed, user-specified interval for time buckets.",
+        "type": "object",
+        "properties": {
+          "interval": {
+            "description": "Fixed interval duration for time buckets, specified by the user.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "interval"
+        ]
       },
       "ManualSource": {
         "type": "object",
@@ -5278,6 +5292,44 @@
           }
         }
       },
+      "MinMax": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          },
+          {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        ]
+      },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultiSelect": {
         "type": "object",
         "properties": {
@@ -5370,12 +5422,6 @@
       "MultiSelect.Source": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/MultiSelectSourceSpanField"
-          },
-          {
-            "$ref": "#/components/schemas/MultiSelectSourceQuery"
-          },
-          {
             "$ref": "#/components/schemas/MultiSelectSourceLogsPath"
           },
           {
@@ -5383,6 +5429,12 @@
           },
           {
             "$ref": "#/components/schemas/MultiSelectSourceConstantList"
+          },
+          {
+            "$ref": "#/components/schemas/MultiSelectSourceSpanField"
+          },
+          {
+            "$ref": "#/components/schemas/MultiSelectSourceQuery"
           }
         ]
       },
@@ -5743,6 +5795,9 @@
       "PieChart.Query": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/PieChartQueryMetrics"
+          },
+          {
             "$ref": "#/components/schemas/PieChartQueryDataprime"
           },
           {
@@ -5750,9 +5805,6 @@
           },
           {
             "$ref": "#/components/schemas/PieChartQuerySpans"
-          },
-          {
-            "$ref": "#/components/schemas/PieChartQueryMetrics"
           }
         ]
       },
@@ -5888,12 +5940,6 @@
       "PropertyDefinition": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/PropertyDefinitionThresholds"
-          },
-          {
-            "$ref": "#/components/schemas/PropertyDefinitionAlignment"
-          },
-          {
             "$ref": "#/components/schemas/PropertyDefinitionUnits"
           },
           {
@@ -5901,6 +5947,21 @@
           },
           {
             "$ref": "#/components/schemas/PropertyDefinitionLink"
+          },
+          {
+            "$ref": "#/components/schemas/PropertyDefinitionValuesAlias"
+          },
+          {
+            "$ref": "#/components/schemas/PropertyDefinitionValuesMapping"
+          },
+          {
+            "$ref": "#/components/schemas/PropertyDefinitionColumnDisplayName"
+          },
+          {
+            "$ref": "#/components/schemas/PropertyDefinitionThresholds"
+          },
+          {
+            "$ref": "#/components/schemas/PropertyDefinitionAlignment"
           }
         ]
       },
@@ -5909,6 +5970,17 @@
         "properties": {
           "alignment": {
             "$ref": "#/components/schemas/TextAlignment"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PropertyDefinitionColumnDisplayName": {
+        "type": "object",
+        "properties": {
+          "columnDisplayName": {
+            "example": "Renamed header",
+            "description": "Column display name property, allows renaming the column header name",
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -5926,6 +5998,7 @@
         "type": "object",
         "properties": {
           "regexExtract": {
+            "example": "gr[ae]y",
             "description": "Value of Regex Extract property, a regex string",
             "type": "string"
           }
@@ -5946,6 +6019,26 @@
         "properties": {
           "units": {
             "$ref": "#/components/schemas/PropertyUnits"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PropertyDefinitionValuesAlias": {
+        "type": "object",
+        "properties": {
+          "valuesAlias": {
+            "example": "Pod: {{$d.pod}}",
+            "description": "Value alias property, used to give alias names to selected fields",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PropertyDefinitionValuesMapping": {
+        "type": "object",
+        "properties": {
+          "valuesMapping": {
+            "$ref": "#/components/schemas/PropertyValuesMapping"
           }
         },
         "additionalProperties": false
@@ -6014,6 +6107,17 @@
           },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
+          }
+        }
+      },
+      "PropertyValuesMapping": {
+        "type": "object",
+        "properties": {
+          "mappings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValueMapping"
+            }
           }
         }
       },
@@ -6092,10 +6196,10 @@
       "Query.MetricsQuery.Operator": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QueryMetricsQueryOperatorNotEquals"
+            "$ref": "#/components/schemas/QueryMetricsQueryOperatorEquals"
           },
           {
-            "$ref": "#/components/schemas/QueryMetricsQueryOperatorEquals"
+            "$ref": "#/components/schemas/QueryMetricsQueryOperatorNotEquals"
           }
         ]
       },
@@ -6121,23 +6225,23 @@
       "Query.MetricsQuery.StringOrVariable": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QueryMetricsQueryStringOrVariableVariableName"
+            "$ref": "#/components/schemas/QueryMetricsQueryStringOrVariableStringValue"
           },
           {
-            "$ref": "#/components/schemas/QueryMetricsQueryStringOrVariableStringValue"
+            "$ref": "#/components/schemas/QueryMetricsQueryStringOrVariableVariableName"
           }
         ]
       },
       "Query.MetricsQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QueryMetricsQueryTypeLabelValue"
-          },
-          {
             "$ref": "#/components/schemas/QueryMetricsQueryTypeMetricName"
           },
           {
             "$ref": "#/components/schemas/QueryMetricsQueryTypeLabelName"
+          },
+          {
+            "$ref": "#/components/schemas/QueryMetricsQueryTypeLabelValue"
           }
         ]
       },
@@ -6185,10 +6289,10 @@
       "Query.SpansQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QuerySpansQueryTypeFieldValue"
+            "$ref": "#/components/schemas/QuerySpansQueryTypeFieldName"
           },
           {
-            "$ref": "#/components/schemas/QuerySpansQueryTypeFieldName"
+            "$ref": "#/components/schemas/QuerySpansQueryTypeFieldValue"
           }
         ]
       },
@@ -6211,14 +6315,25 @@
           }
         }
       },
-      "QueryDefinition": {
+      "QueryDisplaySettings": {
         "externalDocs": {
           "url": ""
         },
-        "title": "LineChart",
-        "description": "LineChart represents the configuration of a line chart widget.",
+        "title": "TimeSeriesLinesMultiQueryDisplaySettings",
+        "description": "Query display settings for time series lines multi-query visualization",
         "type": "object",
         "properties": {
+          "allowAbbreviation": {
+            "example": false,
+            "description": "Whether to render numeric value with abbreviation",
+            "type": "boolean"
+          },
+          "categoryFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObservationField"
+            }
+          },
           "colorScheme": {
             "description": "Applied color scheme for this query, one of the predefined values",
             "type": "string"
@@ -6227,43 +6342,20 @@
             "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
             "type": "string"
           },
-          "dataModeType": {
-            "$ref": "#/components/schemas/widgets.common.DataModeType"
-          },
-          "decimal": {
+          "decimalPrecision": {
             "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32"
-          },
-          "decimalPrecision": {
-            "example": false,
-            "description": "Whether to render numeric value without abbreviation",
-            "type": "boolean"
           },
           "hashColors": {
             "example": false,
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "type": "boolean"
           },
-          "id": {
-            "description": "Unique id of the query definition",
+          "queryId": {
+            "description": "Reference to the query id from Dynamic.query_display_settings",
             "type": "string"
-          },
-          "isVisible": {
-            "example": true,
-            "description": "Is the query visible",
-            "type": "boolean"
-          },
-          "name": {
-            "description": "Custom name of the query",
-            "type": "string"
-          },
-          "query": {
-            "$ref": "#/components/schemas/LineChart.Query"
-          },
-          "resolution": {
-            "$ref": "#/components/schemas/LineChart.Resolution"
           },
           "scaleType": {
             "$ref": "#/components/schemas/ScaleType"
@@ -6277,8 +6369,17 @@
             "description": "Custom template for the series name",
             "type": "string"
           },
+          "temporalField": {
+            "$ref": "#/components/schemas/ObservationField"
+          },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
+          },
+          "valueFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObservationField"
+            }
           },
           "yAxisMax": {
             "example": 1000,
@@ -6294,8 +6395,7 @@
           }
         },
         "required": [
-          "id",
-          "query"
+          "queryId"
         ]
       },
       "QueryLogsQueryTypeFieldName": {
@@ -6462,10 +6562,10 @@
       "QuerySource.MetricsQuery.Operator": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QuerySourceMetricsQueryOperatorEquals"
+            "$ref": "#/components/schemas/QuerySourceMetricsQueryOperatorNotEquals"
           },
           {
-            "$ref": "#/components/schemas/QuerySourceMetricsQueryOperatorNotEquals"
+            "$ref": "#/components/schemas/QuerySourceMetricsQueryOperatorEquals"
           }
         ]
       },
@@ -6491,23 +6591,23 @@
       "QuerySource.MetricsQuery.StringOrVariable": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QuerySourceMetricsQueryStringOrVariableStringValue"
+            "$ref": "#/components/schemas/QuerySourceMetricsQueryStringOrVariableVariableName"
           },
           {
-            "$ref": "#/components/schemas/QuerySourceMetricsQueryStringOrVariableVariableName"
+            "$ref": "#/components/schemas/QuerySourceMetricsQueryStringOrVariableStringValue"
           }
         ]
       },
       "QuerySource.MetricsQuery.Type": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/QuerySourceMetricsQueryTypeMetricName"
+          },
+          {
             "$ref": "#/components/schemas/QuerySourceMetricsQueryTypeLabelName"
           },
           {
             "$ref": "#/components/schemas/QuerySourceMetricsQueryTypeLabelValue"
-          },
-          {
-            "$ref": "#/components/schemas/QuerySourceMetricsQueryTypeMetricName"
           }
         ]
       },
@@ -6867,10 +6967,10 @@
       "SectionOptions": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SectionOptionsInternal"
+            "$ref": "#/components/schemas/SectionOptionsCustom"
           },
           {
-            "$ref": "#/components/schemas/SectionOptionsCustom"
+            "$ref": "#/components/schemas/SectionOptionsInternal"
           }
         ]
       },
@@ -7360,6 +7460,9 @@
             "items": {
               "$ref": "#/components/schemas/Table.Rule"
             }
+          },
+          "settings": {
+            "$ref": "#/components/schemas/TableSettings"
           }
         }
       },
@@ -7391,6 +7494,20 @@
           },
           "ruleScope": {
             "$ref": "#/components/schemas/RuleScope"
+          }
+        }
+      },
+      "TableSettings": {
+        "type": "object",
+        "properties": {
+          "columnWidths": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ColumnWidthEntry"
+            }
+          },
+          "rowStyle": {
+            "$ref": "#/components/schemas/RowStyle"
           }
         }
       },
@@ -7461,12 +7578,6 @@
       "TextboxDefaultValue": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TextboxDefaultValueSingleString"
-          },
-          {
-            "$ref": "#/components/schemas/TextboxDefaultValueSingleNumeric"
-          },
-          {
             "$ref": "#/components/schemas/TextboxDefaultValueDefaultStringValue"
           },
           {
@@ -7480,6 +7591,12 @@
           },
           {
             "$ref": "#/components/schemas/TextboxDefaultValueDefaultIntervalValue"
+          },
+          {
+            "$ref": "#/components/schemas/TextboxDefaultValueSingleString"
+          },
+          {
+            "$ref": "#/components/schemas/TextboxDefaultValueSingleNumeric"
           }
         ]
       },
@@ -7743,7 +7860,7 @@
             "type": "string"
           },
           "stackedLine": {
-            "$ref": "#/components/schemas/TimeSeriesLines.StackedLine"
+            "$ref": "#/components/schemas/Visualization.StackedLine"
           },
           "temporalField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -7774,13 +7891,30 @@
           }
         }
       },
-      "TimeSeriesLines.StackedLine": {
-        "type": "string",
-        "enum": [
-          "STACKED_LINE_UNSPECIFIED",
-          "STACKED_LINE_ABSOLUTE",
-          "STACKED_LINE_RELATIVE"
-        ]
+      "TimeSeriesLinesMulti": {
+        "type": "object",
+        "properties": {
+          "connectNulls": {
+            "example": false,
+            "description": "Whether the line should remain connected instead of producing scattered points when null values are present in between",
+            "type": "boolean"
+          },
+          "legend": {
+            "$ref": "#/components/schemas/Legend"
+          },
+          "queryDisplaySettings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QueryDisplaySettings"
+            }
+          },
+          "stackedLine": {
+            "$ref": "#/components/schemas/Visualization.StackedLine"
+          },
+          "tooltip": {
+            "$ref": "#/components/schemas/TimeSeriesTooltip"
+          }
+        }
       },
       "TimeSeriesTooltip": {
         "type": "object",
@@ -7855,6 +7989,28 @@
           }
         }
       },
+      "ValueMapping": {
+        "type": "object",
+        "properties": {
+          "inputValue": {
+            "type": "string"
+          },
+          "replaceValue": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ValuesMappingType"
+          }
+        }
+      },
+      "ValuesMappingType": {
+        "type": "string",
+        "enum": [
+          "VALUES_MAPPING_TYPE_UNSPECIFIED",
+          "VALUES_MAPPING_TYPE_VALUE",
+          "VALUES_MAPPING_TYPE_REGEX"
+        ]
+      },
       "Variable": {
         "type": "object",
         "properties": {
@@ -7878,10 +8034,10 @@
       "Variable.Definition": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/VariableDefinitionConstant"
+            "$ref": "#/components/schemas/VariableDefinitionMultiSelect"
           },
           {
-            "$ref": "#/components/schemas/VariableDefinitionMultiSelect"
+            "$ref": "#/components/schemas/VariableDefinitionConstant"
           }
         ]
       },
@@ -8103,6 +8259,9 @@
           "displayType": {
             "$ref": "#/components/schemas/VariableDisplayTypeV2"
           },
+          "id": {
+            "$ref": "#/components/schemas/UUID"
+          },
           "name": {
             "type": "string"
           },
@@ -8117,15 +8276,6 @@
       "VariableValueV2": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/VariableValueV2Regex"
-          },
-          {
-            "$ref": "#/components/schemas/VariableValueV2Lucene"
-          },
-          {
-            "$ref": "#/components/schemas/VariableValueV2Interval"
-          },
-          {
             "$ref": "#/components/schemas/VariableValueV2MultiString"
           },
           {
@@ -8133,6 +8283,15 @@
           },
           {
             "$ref": "#/components/schemas/VariableValueV2SingleNumeric"
+          },
+          {
+            "$ref": "#/components/schemas/VariableValueV2Regex"
+          },
+          {
+            "$ref": "#/components/schemas/VariableValueV2Lucene"
+          },
+          {
+            "$ref": "#/components/schemas/VariableValueV2Interval"
           }
         ]
       },
@@ -8294,19 +8453,19 @@
       "Visualization": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/VisualizationTimeSeriesBars"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationHexagonBins"
-          },
-          {
             "$ref": "#/components/schemas/VisualizationVerticalBars"
           },
           {
-            "$ref": "#/components/schemas/VisualizationTable"
+            "$ref": "#/components/schemas/VisualizationHeatmap"
           },
           {
-            "$ref": "#/components/schemas/VisualizationTimeSeriesLines"
+            "$ref": "#/components/schemas/VisualizationGeomap"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationTimeSeriesLinesMulti"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationTimeSeriesBars"
           },
           {
             "$ref": "#/components/schemas/VisualizationStat"
@@ -8315,13 +8474,19 @@
             "$ref": "#/components/schemas/VisualizationGauge"
           },
           {
-            "$ref": "#/components/schemas/VisualizationPieChart"
+            "$ref": "#/components/schemas/VisualizationHexagonBins"
           },
           {
             "$ref": "#/components/schemas/VisualizationHorizontalBars"
           },
           {
-            "$ref": "#/components/schemas/VisualizationHeatmap"
+            "$ref": "#/components/schemas/VisualizationTable"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationTimeSeriesLines"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationPieChart"
           }
         ]
       },
@@ -8528,11 +8693,28 @@
           "LABEL_SOURCE_STACK"
         ]
       },
+      "Visualization.StackedLine": {
+        "type": "string",
+        "enum": [
+          "STACKED_LINE_UNSPECIFIED",
+          "STACKED_LINE_ABSOLUTE",
+          "STACKED_LINE_RELATIVE"
+        ]
+      },
       "VisualizationGauge": {
         "type": "object",
         "properties": {
           "gauge": {
             "$ref": "#/components/schemas/Visualization.Gauge"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VisualizationGeomap": {
+        "type": "object",
+        "properties": {
+          "geomap": {
+            "$ref": "#/components/schemas/Geomap"
           }
         },
         "additionalProperties": false
@@ -8605,6 +8787,15 @@
         "properties": {
           "timeSeriesLines": {
             "$ref": "#/components/schemas/TimeSeriesLines"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VisualizationTimeSeriesLinesMulti": {
+        "type": "object",
+        "properties": {
+          "timeSeriesLinesMulti": {
+            "$ref": "#/components/schemas/TimeSeriesLinesMulti"
           }
         },
         "additionalProperties": false
@@ -8690,31 +8881,31 @@
       "Widget.Definition": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/WidgetDefinitionDataTable"
-          },
-          {
-            "$ref": "#/components/schemas/WidgetDefinitionGauge"
-          },
-          {
-            "$ref": "#/components/schemas/WidgetDefinitionPieChart"
-          },
-          {
-            "$ref": "#/components/schemas/WidgetDefinitionMarkdown"
-          },
-          {
-            "$ref": "#/components/schemas/WidgetDefinitionBarChart"
-          },
-          {
             "$ref": "#/components/schemas/WidgetDefinitionHorizontalBarChart"
           },
           {
-            "$ref": "#/components/schemas/WidgetDefinitionHexagon"
+            "$ref": "#/components/schemas/WidgetDefinitionMarkdown"
           },
           {
             "$ref": "#/components/schemas/WidgetDefinitionDynamic"
           },
           {
             "$ref": "#/components/schemas/WidgetDefinitionLineChart"
+          },
+          {
+            "$ref": "#/components/schemas/WidgetDefinitionPieChart"
+          },
+          {
+            "$ref": "#/components/schemas/WidgetDefinitionHexagon"
+          },
+          {
+            "$ref": "#/components/schemas/WidgetDefinitionDataTable"
+          },
+          {
+            "$ref": "#/components/schemas/WidgetDefinitionGauge"
+          },
+          {
+            "$ref": "#/components/schemas/WidgetDefinitionBarChart"
           }
         ]
       },
@@ -8830,6 +9021,9 @@
       "XAxis": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/XAxisTimeBuckets"
+          },
+          {
             "$ref": "#/components/schemas/XAxisValue"
           },
           {
@@ -8838,15 +9032,20 @@
         ]
       },
       "XAxisByTime": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "XAxisByTime",
+        "description": "X axis by time configuration. (deprecated, use time_buckets instead)",
         "type": "object",
         "properties": {
           "bucketsPresented": {
-            "description": "How many buckets to present in the selected timeframe",
+            "description": "How many buckets to present in the selected timeframe (deprecated)",
             "type": "integer",
             "format": "int32"
           },
           "interval": {
-            "description": "Interval of value sampling, i.e. every 5 minutes, every 1 second and so on",
+            "description": "Interval of value sampling, i.e. every 5 minutes, every 1 second and so on (deprecated)",
             "type": "string"
           }
         }
@@ -8859,6 +9058,15 @@
         "properties": {
           "time": {
             "$ref": "#/components/schemas/XAxisByTime"
+          }
+        },
+        "additionalProperties": false
+      },
+      "XAxisTimeBuckets": {
+        "type": "object",
+        "properties": {
+          "timeBuckets": {
+            "$ref": "#/components/schemas/IntervalResolution"
           }
         },
         "additionalProperties": false
@@ -9000,6 +9208,9 @@
             "description": "Indicates if the filter is currently enabled or not.",
             "type": "boolean"
           },
+          "id": {
+            "$ref": "#/components/schemas/UUID"
+          },
           "source": {
             "$ref": "#/components/schemas/Filter.Source"
           }
@@ -9036,6 +9247,12 @@
           },
           "query": {
             "$ref": "#/components/schemas/Dynamic.Query"
+          },
+          "queryDefinitions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Dynamic.QueryDefinition"
+            }
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"

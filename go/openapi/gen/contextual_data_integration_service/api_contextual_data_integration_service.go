@@ -174,7 +174,7 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/contextual-data/v1/definition/{id}"
+	localVarPath := localBasePath + "/integrations/contextual-data/v1/definitions/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -568,6 +568,7 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 type ApiContextualDataIntegrationServiceTestContextualDataIntegrationRequest struct {
 	ctx context.Context
 	ApiService *ContextualDataIntegrationServiceAPIService
+	integrationId string
 	testContextualDataIntegrationRequest *TestContextualDataIntegrationRequest
 }
 
@@ -586,12 +587,14 @@ ContextualDataIntegrationServiceTestContextualDataIntegration Test contextual da
 No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param integrationId
  @return ApiContextualDataIntegrationServiceTestContextualDataIntegrationRequest
 */
-func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceTestContextualDataIntegration(ctx context.Context) ApiContextualDataIntegrationServiceTestContextualDataIntegrationRequest {
+func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceTestContextualDataIntegration(ctx context.Context, integrationId string) ApiContextualDataIntegrationServiceTestContextualDataIntegrationRequest {
 	return ApiContextualDataIntegrationServiceTestContextualDataIntegrationRequest{
 		ApiService: a,
 		ctx: ctx,
+		integrationId: integrationId,
 	}
 }
 
@@ -610,7 +613,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/contextual-data/v1/test"
+	localVarPath := localBasePath + "/integrations/contextual-data/v1/{integration_id}/test"
+	localVarPath = strings.Replace(localVarPath, "{"+"integration_id"+"}", url.PathEscape(parameterValueToString(r.integrationId, "integrationId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

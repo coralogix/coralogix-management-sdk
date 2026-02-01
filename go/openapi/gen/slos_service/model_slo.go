@@ -18,8 +18,16 @@ import (
 
 // Slo - struct for Slo
 type Slo struct {
+	SloApmSli *SloApmSli
 	SloRequestBasedMetricSli *SloRequestBasedMetricSli
 	SloWindowBasedMetricSli *SloWindowBasedMetricSli
+}
+
+// SloApmSliAsSlo is a convenience function that returns SloApmSli wrapped in Slo
+func SloApmSliAsSlo(v *SloApmSli) Slo {
+	return Slo{
+		SloApmSli: v,
+	}
 }
 
 // SloRequestBasedMetricSliAsSlo is a convenience function that returns SloRequestBasedMetricSli wrapped in Slo
@@ -41,6 +49,23 @@ func SloWindowBasedMetricSliAsSlo(v *SloWindowBasedMetricSli) Slo {
 func (dst *Slo) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
+	// try to unmarshal data into SloApmSli
+	err = newStrictDecoder(data).Decode(&dst.SloApmSli)
+	if err == nil {
+		jsonSloApmSli, _ := json.Marshal(dst.SloApmSli)
+		if string(jsonSloApmSli) == "{}" { // empty struct
+			dst.SloApmSli = nil
+		} else {
+			if err = validator.Validate(dst.SloApmSli); err != nil {
+				dst.SloApmSli = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.SloApmSli = nil
+	}
+
 	// try to unmarshal data into SloRequestBasedMetricSli
 	err = newStrictDecoder(data).Decode(&dst.SloRequestBasedMetricSli)
 	if err == nil {
@@ -77,6 +102,7 @@ func (dst *Slo) UnmarshalJSON(data []byte) error {
 
 	if match > 1 { // more than 1 match
 		// reset to nil
+		dst.SloApmSli = nil
 		dst.SloRequestBasedMetricSli = nil
 		dst.SloWindowBasedMetricSli = nil
 
@@ -90,6 +116,10 @@ func (dst *Slo) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src Slo) MarshalJSON() ([]byte, error) {
+	if src.SloApmSli != nil {
+		return json.Marshal(&src.SloApmSli)
+	}
+
 	if src.SloRequestBasedMetricSli != nil {
 		return json.Marshal(&src.SloRequestBasedMetricSli)
 	}
@@ -106,6 +136,10 @@ func (obj *Slo) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
+	if obj.SloApmSli != nil {
+		return obj.SloApmSli
+	}
+
 	if obj.SloRequestBasedMetricSli != nil {
 		return obj.SloRequestBasedMetricSli
 	}
@@ -120,6 +154,10 @@ func (obj *Slo) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj Slo) GetActualInstanceValue() (interface{}) {
+	if obj.SloApmSli != nil {
+		return *obj.SloApmSli
+	}
+
 	if obj.SloRequestBasedMetricSli != nil {
 		return *obj.SloRequestBasedMetricSli
 	}

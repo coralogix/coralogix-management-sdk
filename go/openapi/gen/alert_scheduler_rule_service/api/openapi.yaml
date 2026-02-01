@@ -5,7 +5,64 @@ info:
 servers:
 - url: /
 paths:
-  /v1/alert-scheduler-rules:
+  /alerts/suppression-rules/v1:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: AlertSchedulerRuleService_GetBulkAlertSchedulerRule
+      parameters:
+      - explode: true
+        in: query
+        name: active_timeframe
+        required: false
+        schema:
+          $ref: "#/components/schemas/AlertSchedulerRuleService_GetBulkAlertSchedulerRule_active_timeframe_parameter"
+        style: form
+      - explode: true
+        in: query
+        name: enabled
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: alert_scheduler_rules_ids
+        required: false
+        schema:
+          $ref: "#/components/schemas/AlertSchedulerRuleService_GetBulkAlertSchedulerRule_alert_scheduler_rules_ids_parameter"
+        style: form
+      - explode: true
+        in: query
+        name: next_page_token
+        required: false
+        schema:
+          example: ""
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetBulkAlertSchedulerRuleResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get multiple alert scheduler rules
+      tags:
+      - Alert Scheduler Rule service
     post:
       description: No description available
       externalDocs:
@@ -70,64 +127,7 @@ paths:
       summary: Update an alert scheduler rule
       tags:
       - Alert Scheduler Rule service
-  /v1/alert-scheduler-rules/bulk:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: AlertSchedulerRuleService_GetBulkAlertSchedulerRule
-      parameters:
-      - explode: true
-        in: query
-        name: active_timeframe
-        required: false
-        schema:
-          $ref: "#/components/schemas/AlertSchedulerRuleService_GetBulkAlertSchedulerRule_active_timeframe_parameter"
-        style: form
-      - explode: true
-        in: query
-        name: enabled
-        required: false
-        schema:
-          type: boolean
-        style: form
-      - explode: true
-        in: query
-        name: alert_scheduler_rules_ids
-        required: false
-        schema:
-          $ref: "#/components/schemas/AlertSchedulerRuleService_GetBulkAlertSchedulerRule_alert_scheduler_rules_ids_parameter"
-        style: form
-      - explode: true
-        in: query
-        name: next_page_token
-        required: false
-        schema:
-          example: ""
-          type: string
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetBulkAlertSchedulerRuleResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Get multiple alert scheduler rules
-      tags:
-      - Alert Scheduler Rule service
+  /alerts/suppression-rules/v1/all/rules:
     post:
       description: No description available
       externalDocs:
@@ -192,7 +192,7 @@ paths:
       summary: Update multiple alert scheduler rules
       tags:
       - Alert Scheduler Rule service
-  /v1/alert-scheduler-rules/{alert_scheduler_rule_id}:
+  /alerts/suppression-rules/v1/{alert_scheduler_rule_id}:
     delete:
       description: No description available
       externalDocs:
@@ -294,9 +294,11 @@ components:
         schedule:
           oneTime:
             timeframe:
+              duration:
+                forOver: 0
+                frequency: DURATION_FREQUENCY_UNSPECIFIED
               timezone: timezone
               startTime: startTime
-              endTime: endTime
           scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
         name: name
         description: description
@@ -399,9 +401,11 @@ components:
           schedule:
             oneTime:
               timeframe:
+                duration:
+                  forOver: 0
+                  frequency: DURATION_FREQUENCY_UNSPECIFIED
                 timezone: timezone
                 startTime: startTime
-                endTime: endTime
             scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
           name: name
           description: description
@@ -481,9 +485,11 @@ components:
           schedule:
             oneTime:
               timeframe:
+                duration:
+                  forOver: 0
+                  frequency: DURATION_FREQUENCY_UNSPECIFIED
                 timezone: timezone
                 startTime: startTime
-                endTime: endTime
             scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
           name: name
           description: description
@@ -528,9 +534,11 @@ components:
             schedule:
               oneTime:
                 timeframe:
+                  duration:
+                    forOver: 0
+                    frequency: DURATION_FREQUENCY_UNSPECIFIED
                   timezone: timezone
                   startTime: startTime
-                  endTime: endTime
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -560,9 +568,11 @@ components:
             schedule:
               oneTime:
                 timeframe:
+                  duration:
+                    forOver: 0
+                    frequency: DURATION_FREQUENCY_UNSPECIFIED
                   timezone: timezone
                   startTime: startTime
-                  endTime: endTime
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -688,9 +698,11 @@ components:
           schedule:
             oneTime:
               timeframe:
+                duration:
+                  forOver: 0
+                  frequency: DURATION_FREQUENCY_UNSPECIFIED
                 timezone: timezone
                 startTime: startTime
-                endTime: endTime
             scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
           name: name
           description: description
@@ -743,9 +755,11 @@ components:
             schedule:
               oneTime:
                 timeframe:
+                  duration:
+                    forOver: 0
+                    frequency: DURATION_FREQUENCY_UNSPECIFIED
                   timezone: timezone
                   startTime: startTime
-                  endTime: endTime
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -782,9 +796,11 @@ components:
             schedule:
               oneTime:
                 timeframe:
+                  duration:
+                    forOver: 0
+                    frequency: DURATION_FREQUENCY_UNSPECIFIED
                   timezone: timezone
                   startTime: startTime
-                  endTime: endTime
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -828,6 +844,28 @@ components:
             $ref: "#/components/schemas/meta_labels_protobuf.v1.MetaLabel"
           type: array
       type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     Monthly:
       properties:
         daysOfMonth:
@@ -848,33 +886,29 @@ components:
     OneTime:
       example:
         timeframe:
+          duration:
+            forOver: 0
+            frequency: DURATION_FREQUENCY_UNSPECIFIED
           timezone: timezone
           startTime: startTime
-          endTime: endTime
       properties:
         timeframe:
           $ref: "#/components/schemas/Timeframe"
       type: object
     Recurring:
       oneOf:
-      - $ref: "#/components/schemas/RecurringAlways"
-      - $ref: "#/components/schemas/RecurringDynamic"
+      - $ref: "#/components/schemas/RecurringAlwaysActive"
+      - $ref: "#/components/schemas/RecurringSchedule"
     Recurring.Dynamic:
       oneOf:
       - $ref: "#/components/schemas/RecurringDynamicWeekly"
       - $ref: "#/components/schemas/RecurringDynamicMonthly"
       - $ref: "#/components/schemas/RecurringDynamicDaily"
-    RecurringAlways:
+    RecurringAlwaysActive:
       additionalProperties: false
       properties:
-        always:
+        alwaysActive:
           type: object
-      type: object
-    RecurringDynamic:
-      additionalProperties: false
-      properties:
-        dynamic:
-          $ref: "#/components/schemas/Recurring.Dynamic"
       type: object
     RecurringDynamicDaily:
       additionalProperties: false
@@ -915,6 +949,12 @@ components:
         weekly:
           $ref: "#/components/schemas/Weekly"
       type: object
+    RecurringSchedule:
+      additionalProperties: false
+      properties:
+        schedule:
+          $ref: "#/components/schemas/Recurring.Dynamic"
+      type: object
     Schedule:
       oneOf:
       - $ref: "#/components/schemas/ScheduleOneTime"
@@ -924,9 +964,11 @@ components:
       example:
         oneTime:
           timeframe:
+            duration:
+              forOver: 0
+              frequency: DURATION_FREQUENCY_UNSPECIFIED
             timezone: timezone
             startTime: startTime
-            endTime: endTime
         scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
       properties:
         oneTime:
@@ -950,10 +992,16 @@ components:
       type: object
     Timeframe:
       oneOf:
-      - $ref: "#/components/schemas/TimeframeEndTime"
       - $ref: "#/components/schemas/TimeframeDuration"
+      - $ref: "#/components/schemas/TimeframeEndTime"
     TimeframeDuration:
       additionalProperties: false
+      example:
+        duration:
+          forOver: 0
+          frequency: DURATION_FREQUENCY_UNSPECIFIED
+        timezone: timezone
+        startTime: startTime
       properties:
         duration:
           $ref: "#/components/schemas/v1.Duration"
@@ -964,10 +1012,6 @@ components:
       type: object
     TimeframeEndTime:
       additionalProperties: false
-      example:
-        timezone: timezone
-        startTime: startTime
-        endTime: endTime
       properties:
         endTime:
           type: string
@@ -1006,9 +1050,11 @@ components:
           schedule:
             oneTime:
               timeframe:
+                duration:
+                  forOver: 0
+                  frequency: DURATION_FREQUENCY_UNSPECIFIED
                 timezone: timezone
                 startTime: startTime
-                endTime: endTime
             scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
           name: name
           description: description
@@ -1053,9 +1099,11 @@ components:
             schedule:
               oneTime:
                 timeframe:
+                  duration:
+                    forOver: 0
+                    frequency: DURATION_FREQUENCY_UNSPECIFIED
                   timezone: timezone
                   startTime: startTime
-                  endTime: endTime
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -1085,9 +1133,11 @@ components:
             schedule:
               oneTime:
                 timeframe:
+                  duration:
+                    forOver: 0
+                    frequency: DURATION_FREQUENCY_UNSPECIFIED
                   timezone: timezone
                   startTime: startTime
-                  endTime: endTime
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -1157,6 +1207,9 @@ components:
           type: string
       type: object
     v1.Duration:
+      example:
+        forOver: 0
+        frequency: DURATION_FREQUENCY_UNSPECIFIED
       properties:
         forOver:
           format: int32
@@ -1169,6 +1222,22 @@ components:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
+    AlertSchedulerRuleService_GetBulkAlertSchedulerRule_active_timeframe_parameter:
+      properties:
+        endTime:
+          example: ""
+          type: string
+        startTime:
+          example: ""
+          type: string
+        timezone:
+          example: ""
+          type: string
+      type: object
+    AlertSchedulerRuleService_GetBulkAlertSchedulerRule_alert_scheduler_rules_ids_parameter:
+      oneOf:
+      - $ref: "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds"
+      - $ref: "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds"
     Update_alert_scheduler_rule_request_data_structure:
       additionalProperties: false
       description: This is a request sent to update an alert scheduler rule
@@ -1189,22 +1258,6 @@ components:
       - alertSchedulerRule
       title: Create alert scheduler rule request data structure
       type: object
-    AlertSchedulerRuleService_GetBulkAlertSchedulerRule_active_timeframe_parameter:
-      properties:
-        endTime:
-          example: ""
-          type: string
-        startTime:
-          example: ""
-          type: string
-        timezone:
-          example: ""
-          type: string
-      type: object
-    AlertSchedulerRuleService_GetBulkAlertSchedulerRule_alert_scheduler_rules_ids_parameter:
-      oneOf:
-      - $ref: "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds"
-      - $ref: "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds"
     Update_bulk_alert_scheduler_rule_request_data_structure:
       additionalProperties: false
       description: This is a request sent to update multiple alert scheduler rules

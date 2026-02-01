@@ -68,7 +68,7 @@ func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceCreateViewFolderEx
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/data-exploration/saved-views/v1/folders"
+	localVarPath := localBasePath + "/data-exploration/views/v1/folders"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -172,7 +172,7 @@ func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceDeleteViewFolderEx
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/data-exploration/saved-views/v1/folders/{id}"
+	localVarPath := localBasePath + "/data-exploration/views/v1/folders/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -281,7 +281,7 @@ func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceGetViewFolderExecu
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/data-exploration/saved-views/v1/folders/{id}"
+	localVarPath := localBasePath + "/data-exploration/views/v1/folders/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -387,7 +387,7 @@ func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceListViewFoldersExe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/data-exploration/saved-views/v1/folders"
+	localVarPath := localBasePath + "/data-exploration/views/v1/folders"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -492,7 +492,7 @@ func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceReplaceViewFolderE
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/data-exploration/saved-views/v1/folders"
+	localVarPath := localBasePath + "/data-exploration/views/v1/folders"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

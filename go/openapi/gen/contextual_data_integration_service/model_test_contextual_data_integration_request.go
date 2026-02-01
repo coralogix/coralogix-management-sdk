@@ -20,7 +20,6 @@ var _ MappedNullable = &TestContextualDataIntegrationRequest{}
 // TestContextualDataIntegrationRequest struct for TestContextualDataIntegrationRequest
 type TestContextualDataIntegrationRequest struct {
 	IntegrationData *IntegrationMetadata `json:"integrationData,omitempty"`
-	IntegrationId *string `json:"integrationId,omitempty"`
 }
 
 // NewTestContextualDataIntegrationRequest instantiates a new TestContextualDataIntegrationRequest object
@@ -72,38 +71,6 @@ func (o *TestContextualDataIntegrationRequest) SetIntegrationData(v IntegrationM
 	o.IntegrationData = &v
 }
 
-// GetIntegrationId returns the IntegrationId field value if set, zero value otherwise.
-func (o *TestContextualDataIntegrationRequest) GetIntegrationId() string {
-	if o == nil || IsNil(o.IntegrationId) {
-		var ret string
-		return ret
-	}
-	return *o.IntegrationId
-}
-
-// GetIntegrationIdOk returns a tuple with the IntegrationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TestContextualDataIntegrationRequest) GetIntegrationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.IntegrationId) {
-		return nil, false
-	}
-	return o.IntegrationId, true
-}
-
-// HasIntegrationId returns a boolean if a field has been set.
-func (o *TestContextualDataIntegrationRequest) HasIntegrationId() bool {
-	if o != nil && !IsNil(o.IntegrationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetIntegrationId gets a reference to the given string and assigns it to the IntegrationId field.
-func (o *TestContextualDataIntegrationRequest) SetIntegrationId(v string) {
-	o.IntegrationId = &v
-}
-
 func (o TestContextualDataIntegrationRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -116,9 +83,6 @@ func (o TestContextualDataIntegrationRequest) ToMap() (map[string]interface{}, e
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.IntegrationData) {
 		toSerialize["integrationData"] = o.IntegrationData
-	}
-	if !IsNil(o.IntegrationId) {
-		toSerialize["integrationId"] = o.IntegrationId
 	}
 	return toSerialize, nil
 }

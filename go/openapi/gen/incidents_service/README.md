@@ -78,42 +78,47 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*IncidentsServiceAPI* | [**IncidentsServiceAcknowledgeIncidentByEventId**](docs/IncidentsServiceAPI.md#incidentsserviceacknowledgeincidentbyeventid) | **Post** /incidents/incidents/v1/events/{event_id}/acknowledge | Acknowledge incident by event id
-*IncidentsServiceAPI* | [**IncidentsServiceAcknowledgeIncidents**](docs/IncidentsServiceAPI.md#incidentsserviceacknowledgeincidents) | **Post** /incidents/incidents/v1/acknowledge | Acknowledge incidents
-*IncidentsServiceAPI* | [**IncidentsServiceAssignIncidents**](docs/IncidentsServiceAPI.md#incidentsserviceassignincidents) | **Post** /incidents/incidents/v1/by-user | Assign incidents to a user
-*IncidentsServiceAPI* | [**IncidentsServiceBatchGetIncident**](docs/IncidentsServiceAPI.md#incidentsservicebatchgetincident) | **Get** /incidents/incidents/v1/batch | Get multiple incidents by IDs
-*IncidentsServiceAPI* | [**IncidentsServiceCloseIncidents**](docs/IncidentsServiceAPI.md#incidentsservicecloseincidents) | **Post** /incidents/incidents/v1/close | Close incidents
-*IncidentsServiceAPI* | [**IncidentsServiceGetFilterValues**](docs/IncidentsServiceAPI.md#incidentsservicegetfiltervalues) | **Post** /incidents/incidents/v1/filter-values | Get available filter values
+*IncidentsServiceAPI* | [**IncidentsServiceAcknowledgeIncidentByEventId**](docs/IncidentsServiceAPI.md#incidentsserviceacknowledgeincidentbyeventid) | **Post** /incidents/events/v1/{event_id}/acknowledge | Acknowledge incident by event id
+*IncidentsServiceAPI* | [**IncidentsServiceAcknowledgeIncidents**](docs/IncidentsServiceAPI.md#incidentsserviceacknowledgeincidents) | **Post** /incidents/incidents/v1/all/acknowledge | Acknowledge incidents
+*IncidentsServiceAPI* | [**IncidentsServiceAssignIncidents**](docs/IncidentsServiceAPI.md#incidentsserviceassignincidents) | **Post** /incidents/incidents/v1/all/by-user | Assign incidents to a user
+*IncidentsServiceAPI* | [**IncidentsServiceBatchGetIncident**](docs/IncidentsServiceAPI.md#incidentsservicebatchgetincident) | **Get** /incidents/incidents/v1 | Get multiple incidents by IDs
+*IncidentsServiceAPI* | [**IncidentsServiceCloseIncidents**](docs/IncidentsServiceAPI.md#incidentsservicecloseincidents) | **Post** /incidents/incidents/v1/all/closed | Close incidents
+*IncidentsServiceAPI* | [**IncidentsServiceGetFilterValues**](docs/IncidentsServiceAPI.md#incidentsservicegetfiltervalues) | **Post** /incidents/filter-values/v1 | Get available filter values
 *IncidentsServiceAPI* | [**IncidentsServiceGetIncident**](docs/IncidentsServiceAPI.md#incidentsservicegetincident) | **Get** /incidents/incidents/v1/{id} | Get incident by ID
-*IncidentsServiceAPI* | [**IncidentsServiceGetIncidentByEventId**](docs/IncidentsServiceAPI.md#incidentsservicegetincidentbyeventid) | **Get** /incidents/incidents/v1/events/{event_id} | Get incident by event ID
+*IncidentsServiceAPI* | [**IncidentsServiceGetIncidentByEventId**](docs/IncidentsServiceAPI.md#incidentsservicegetincidentbyeventid) | **Get** /incidents/events/v1/{event_id} | Get incident by event ID
 *IncidentsServiceAPI* | [**IncidentsServiceGetIncidentEvents**](docs/IncidentsServiceAPI.md#incidentsservicegetincidentevents) | **Get** /incidents/incidents/v1/{incident_id}/events | Get incident events
-*IncidentsServiceAPI* | [**IncidentsServiceListIncidentAggregations**](docs/IncidentsServiceAPI.md#incidentsservicelistincidentaggregations) | **Get** /incidents/incidents/v1/aggregations | Get incident aggregations
-*IncidentsServiceAPI* | [**IncidentsServiceListIncidentEvents**](docs/IncidentsServiceAPI.md#incidentsservicelistincidentevents) | **Get** /incidents/incidents/v1/events | List incident events with filters
-*IncidentsServiceAPI* | [**IncidentsServiceListIncidentEventsFilterValues**](docs/IncidentsServiceAPI.md#incidentsservicelistincidenteventsfiltervalues) | **Get** /incidents/incidents/v1/events/filter-values | Get available incident event filter values
-*IncidentsServiceAPI* | [**IncidentsServiceListIncidentEventsTotalCount**](docs/IncidentsServiceAPI.md#incidentsservicelistincidenteventstotalcount) | **Get** /incidents/incidents/v1/events/count | Get total count of incident events
+*IncidentsServiceAPI* | [**IncidentsServiceListIncidentAggregations**](docs/IncidentsServiceAPI.md#incidentsservicelistincidentaggregations) | **Get** /incidents/aggregations/v1 | Get incident aggregations
+*IncidentsServiceAPI* | [**IncidentsServiceListIncidentEvents**](docs/IncidentsServiceAPI.md#incidentsservicelistincidentevents) | **Get** /incidents/events/v1 | List incident events with filters
+*IncidentsServiceAPI* | [**IncidentsServiceListIncidentEventsFilterValues**](docs/IncidentsServiceAPI.md#incidentsservicelistincidenteventsfiltervalues) | **Get** /incidents/filter-values/v1/events | Get available incident event filter values
+*IncidentsServiceAPI* | [**IncidentsServiceListIncidentEventsTotalCount**](docs/IncidentsServiceAPI.md#incidentsservicelistincidenteventstotalcount) | **Get** /incidents/events/v1/all/count | Get total count of incident events
 *IncidentsServiceAPI* | [**IncidentsServiceListIncidents**](docs/IncidentsServiceAPI.md#incidentsservicelistincidents) | **Post** /incidents/incidents/v1 | List incidents with filters
-*IncidentsServiceAPI* | [**IncidentsServiceResolveIncidentByEventId**](docs/IncidentsServiceAPI.md#incidentsserviceresolveincidentbyeventid) | **Post** /incidents/incidents/v1/events/{event_id}/resolve | Resolve incident by event id
-*IncidentsServiceAPI* | [**IncidentsServiceResolveIncidents**](docs/IncidentsServiceAPI.md#incidentsserviceresolveincidents) | **Post** /incidents/incidents/v1/resolve | Resolve incidents
-*IncidentsServiceAPI* | [**IncidentsServiceUnassignIncidents**](docs/IncidentsServiceAPI.md#incidentsserviceunassignincidents) | **Delete** /incidents/incidents/v1/by-user | Remove incident user assignments
+*IncidentsServiceAPI* | [**IncidentsServiceResolveIncidentByEventId**](docs/IncidentsServiceAPI.md#incidentsserviceresolveincidentbyeventid) | **Post** /incidents/events/v1/{event_id}/resolve | Resolve incident by event id
+*IncidentsServiceAPI* | [**IncidentsServiceResolveIncidents**](docs/IncidentsServiceAPI.md#incidentsserviceresolveincidents) | **Post** /incidents/incidents/v1/all/resolve | Resolve incidents
+*IncidentsServiceAPI* | [**IncidentsServiceUnassignIncidents**](docs/IncidentsServiceAPI.md#incidentsserviceunassignincidents) | **Delete** /incidents/incidents/v1/all/by-user | Remove incident user assignments
 
 
 ## Documentation For Models
 
  - [AcknowledgeIncidentByEventIdResponse](docs/AcknowledgeIncidentByEventIdResponse.md)
+ - [AcknowledgeIncidentsRequest](docs/AcknowledgeIncidentsRequest.md)
  - [AcknowledgeIncidentsResponse](docs/AcknowledgeIncidentsResponse.md)
+ - [AssignIncidentsRequest](docs/AssignIncidentsRequest.md)
  - [AssignIncidentsResponse](docs/AssignIncidentsResponse.md)
  - [AssigneeWithCount](docs/AssigneeWithCount.md)
  - [Assignment](docs/Assignment.md)
  - [BatchGetIncidentResponse](docs/BatchGetIncidentResponse.md)
+ - [CloseIncidentsRequest](docs/CloseIncidentsRequest.md)
  - [CloseIncidentsResponse](docs/CloseIncidentsResponse.md)
  - [ColorsByAggregation](docs/ColorsByAggregation.md)
  - [ColorsByGroupBy](docs/ColorsByGroupBy.md)
  - [ColorsByStack](docs/ColorsByStack.md)
  - [CommonGroup](docs/CommonGroup.md)
  - [ContextualLabelValueWithCount](docs/ContextualLabelValueWithCount.md)
+ - [ContextualLabelValues](docs/ContextualLabelValues.md)
  - [ContextualLabelValuesWithCount](docs/ContextualLabelValuesWithCount.md)
  - [ContextualLabels](docs/ContextualLabels.md)
  - [DisplayLabelValueWithCount](docs/DisplayLabelValueWithCount.md)
+ - [DisplayLabelValues](docs/DisplayLabelValues.md)
  - [DisplayLabelValuesWithCount](docs/DisplayLabelValuesWithCount.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FieldGroup](docs/FieldGroup.md)
@@ -121,6 +126,7 @@ Class | Method | HTTP request | Description
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
  - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
+ - [GetFilterValuesRequest](docs/GetFilterValuesRequest.md)
  - [GetIncidentByEventIdResponse](docs/GetIncidentByEventIdResponse.md)
  - [GetIncidentEventsResponse](docs/GetIncidentEventsResponse.md)
  - [GetIncidentResponse](docs/GetIncidentResponse.md)
@@ -176,6 +182,9 @@ Class | Method | HTTP request | Description
  - [IncidentMetaLabelsWithCount](docs/IncidentMetaLabelsWithCount.md)
  - [IncidentQueryFilter](docs/IncidentQueryFilter.md)
  - [IncidentQueryFiltersValues](docs/IncidentQueryFiltersValues.md)
+ - [IncidentSearchQuery](docs/IncidentSearchQuery.md)
+ - [IncidentSearchQueryContextualLabel](docs/IncidentSearchQueryContextualLabel.md)
+ - [IncidentSearchQueryIncidentField](docs/IncidentSearchQueryIncidentField.md)
  - [IncidentSeverity](docs/IncidentSeverity.md)
  - [IncidentSeverityCount](docs/IncidentSeverityCount.md)
  - [IncidentSeverityWithCount](docs/IncidentSeverityWithCount.md)
@@ -197,19 +206,22 @@ Class | Method | HTTP request | Description
  - [ListIncidentEventsResponse](docs/ListIncidentEventsResponse.md)
  - [ListIncidentEventsTotalCountResponse](docs/ListIncidentEventsTotalCountResponse.md)
  - [ListIncidentsResponse](docs/ListIncidentsResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [OriginatorType](docs/OriginatorType.md)
  - [PaginationRequest](docs/PaginationRequest.md)
  - [ResolveIncidentByEventIdResponse](docs/ResolveIncidentByEventIdResponse.md)
+ - [ResolveIncidentsRequest](docs/ResolveIncidentsRequest.md)
  - [ResolveIncidentsResponse](docs/ResolveIncidentsResponse.md)
  - [UnassignIncidentsResponse](docs/UnassignIncidentsResponse.md)
  - [UpsertIncidentStatePayload](docs/UpsertIncidentStatePayload.md)
  - [UpsertIncidentStateType](docs/UpsertIncidentStateType.md)
- - [UserDetails](docs/UserDetails.md)
  - [V1FilterOperator](docs/V1FilterOperator.md)
  - [V1OrderByContextualLabel](docs/V1OrderByContextualLabel.md)
  - [V1OrderByDirection](docs/V1OrderByDirection.md)
  - [V1OrderByIncidentField](docs/V1OrderByIncidentField.md)
+ - [V1TimeRange](docs/V1TimeRange.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
 
 

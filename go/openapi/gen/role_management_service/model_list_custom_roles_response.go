@@ -19,7 +19,7 @@ var _ MappedNullable = &ListCustomRolesResponse{}
 
 // ListCustomRolesResponse struct for ListCustomRolesResponse
 type ListCustomRolesResponse struct {
-	Roles []V2CustomRole `json:"roles,omitempty"`
+	Roles []CustomRole `json:"roles,omitempty"`
 }
 
 // NewListCustomRolesResponse instantiates a new ListCustomRolesResponse object
@@ -40,9 +40,9 @@ func NewListCustomRolesResponseWithDefaults() *ListCustomRolesResponse {
 }
 
 // GetRoles returns the Roles field value if set, zero value otherwise.
-func (o *ListCustomRolesResponse) GetRoles() []V2CustomRole {
+func (o *ListCustomRolesResponse) GetRoles() []CustomRole {
 	if o == nil || IsNil(o.Roles) {
-		var ret []V2CustomRole
+		var ret []CustomRole
 		return ret
 	}
 	return o.Roles
@@ -50,7 +50,7 @@ func (o *ListCustomRolesResponse) GetRoles() []V2CustomRole {
 
 // GetRolesOk returns a tuple with the Roles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListCustomRolesResponse) GetRolesOk() ([]V2CustomRole, bool) {
+func (o *ListCustomRolesResponse) GetRolesOk() ([]CustomRole, bool) {
 	if o == nil || IsNil(o.Roles) {
 		return nil, false
 	}
@@ -66,8 +66,8 @@ func (o *ListCustomRolesResponse) HasRoles() bool {
 	return false
 }
 
-// SetRoles gets a reference to the given []V2CustomRole and assigns it to the Roles field.
-func (o *ListCustomRolesResponse) SetRoles(v []V2CustomRole) {
+// SetRoles gets a reference to the given []CustomRole and assigns it to the Roles field.
+func (o *ListCustomRolesResponse) SetRoles(v []CustomRole) {
 	o.Roles = v
 }
 

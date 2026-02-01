@@ -21,6 +21,7 @@ var _ MappedNullable = &SetTargetResponse{}
 
 // SetTargetResponse This data structure is used to set a storage target for logs.
 type SetTargetResponse struct {
+	Format *TargetFormat `json:"format,omitempty"`
 	IsActive bool `json:"isActive"`
 	S3 *S3TargetSpec `json:"s3,omitempty"`
 }
@@ -43,6 +44,38 @@ func NewSetTargetResponse(isActive bool) *SetTargetResponse {
 func NewSetTargetResponseWithDefaults() *SetTargetResponse {
 	this := SetTargetResponse{}
 	return &this
+}
+
+// GetFormat returns the Format field value if set, zero value otherwise.
+func (o *SetTargetResponse) GetFormat() TargetFormat {
+	if o == nil || IsNil(o.Format) {
+		var ret TargetFormat
+		return ret
+	}
+	return *o.Format
+}
+
+// GetFormatOk returns a tuple with the Format field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SetTargetResponse) GetFormatOk() (*TargetFormat, bool) {
+	if o == nil || IsNil(o.Format) {
+		return nil, false
+	}
+	return o.Format, true
+}
+
+// HasFormat returns a boolean if a field has been set.
+func (o *SetTargetResponse) HasFormat() bool {
+	if o != nil && !IsNil(o.Format) {
+		return true
+	}
+
+	return false
+}
+
+// SetFormat gets a reference to the given TargetFormat and assigns it to the Format field.
+func (o *SetTargetResponse) SetFormat(v TargetFormat) {
+	o.Format = &v
 }
 
 // GetIsActive returns the IsActive field value
@@ -111,6 +144,9 @@ func (o SetTargetResponse) MarshalJSON() ([]byte, error) {
 
 func (o SetTargetResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Format) {
+		toSerialize["format"] = o.Format
+	}
 	toSerialize["isActive"] = o.IsActive
 	if !IsNil(o.S3) {
 		toSerialize["s3"] = o.S3

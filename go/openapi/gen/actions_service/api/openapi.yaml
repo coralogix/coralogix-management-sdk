@@ -5,7 +5,7 @@ info:
 servers:
 - url: /
 paths:
-  /v2/actions:
+  /actions/actions/v2:
     get:
       description: No description available
       externalDocs:
@@ -97,73 +97,7 @@ paths:
       summary: Replace Action
       tags:
       - Actions Service
-  /v2/actions/actions:atomicBatchExecute:
-    post:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: ActionsService_AtomicBatchExecuteActions
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ActionsService_AtomicBatchExecuteActions_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AtomicBatchExecuteActionsResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Atomic Batch Execute Actions
-      tags:
-      - Actions Service
-  /v2/actions/actions:order:
-    post:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: ActionsService_OrderActions
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ActionsService_OrderActions_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OrderActionsResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Order Actions
-      tags:
-      - Actions Service
-  /v2/actions/{id}:
+  /actions/actions/v2/{id}:
     delete:
       description: No description available
       externalDocs:
@@ -234,6 +168,72 @@ paths:
       summary: Get Action
       tags:
       - Actions Service
+  /actions/batch/v2:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ActionsService_AtomicBatchExecuteActions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ActionsService_AtomicBatchExecuteActions_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AtomicBatchExecuteActionsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Atomic Batch Execute Actions
+      tags:
+      - Actions Service
+  /actions/order/v2:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ActionsService_OrderActions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ActionsService_OrderActions_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderActionsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Order Actions
+      tags:
+      - Actions Service
 components:
   schemas:
     ActionExecutionRequest:
@@ -243,18 +243,27 @@ components:
       - $ref: "#/components/schemas/ActionExecutionRequestDelete"
     ActionExecutionRequestCreate:
       additionalProperties: false
+      description: This data structure represents a request to execute an Action operation.
+      externalDocs:
+        url: ""
       properties:
         create:
           $ref: "#/components/schemas/CreateActionRequest"
       type: object
     ActionExecutionRequestDelete:
       additionalProperties: false
+      description: This data structure represents a request to execute an Action operation.
+      externalDocs:
+        url: ""
       properties:
         delete:
           $ref: "#/components/schemas/DeleteActionRequest"
       type: object
     ActionExecutionRequestReplace:
       additionalProperties: false
+      description: This data structure represents a request to execute an Action operation.
+      externalDocs:
+        url: ""
       properties:
         replace:
           $ref: "#/components/schemas/ReplaceActionRequest"
@@ -266,6 +275,8 @@ components:
       - $ref: "#/components/schemas/ActionExecutionResponseDelete"
     ActionExecutionResponseCreate:
       additionalProperties: false
+      description: This data structure represents a response to an Action execution
+        request.
       example:
         create:
           action:
@@ -282,23 +293,38 @@ components:
             isPrivate: true
             url: url
             isHidden: true
+      externalDocs:
+        url: ""
       properties:
         create:
           $ref: "#/components/schemas/CreateActionResponse"
       type: object
     ActionExecutionResponseDelete:
       additionalProperties: false
+      description: This data structure represents a response to an Action execution
+        request.
+      externalDocs:
+        url: ""
       properties:
         delete:
+          description: This data structure represents the response to delete an Action.
+          externalDocs:
+            url: ""
           type: object
       type: object
     ActionExecutionResponseReplace:
       additionalProperties: false
+      description: This data structure represents a response to an Action execution
+        request.
+      externalDocs:
+        url: ""
       properties:
         replace:
           $ref: "#/components/schemas/ReplaceActionResponse"
       type: object
     AtomicBatchExecuteActionsResponse:
+      description: This data structure represents the response to a batch Action execution
+        request.
       example:
         matchingResponses:
         - create:
@@ -331,6 +357,8 @@ components:
               isPrivate: true
               url: url
               isHidden: true
+      externalDocs:
+        url: ""
       properties:
         matchingResponses:
           items:
@@ -356,6 +384,9 @@ components:
           $ref: "#/components/schemas/ColorsByStack"
       type: object
     CreateActionRequest:
+      description: This data structure represents the request to create an Action.
+      externalDocs:
+        url: ""
       properties:
         applicationNames:
           items:
@@ -375,6 +406,7 @@ components:
           type: string
       type: object
     CreateActionResponse:
+      description: This data structure represents the response to create an Action.
       example:
         action:
           createdBy: createdBy
@@ -390,16 +422,24 @@ components:
           isPrivate: true
           url: url
           isHidden: true
+      externalDocs:
+        url: ""
       properties:
         action:
           $ref: "#/components/schemas/v2.Action"
       type: object
     DeleteActionRequest:
+      description: This data structure represents the request to delete an Action.
+      externalDocs:
+        url: ""
       properties:
         id:
           type: string
       type: object
     DeleteActionResponse:
+      description: This data structure represents the response to delete an Action.
+      externalDocs:
+        url: ""
       type: object
     FieldGroup:
       properties:
@@ -460,6 +500,7 @@ components:
       title: Filters
       type: object
     GetActionResponse:
+      description: This data structure represents the response to get an Action.
       example:
         action:
           createdBy: createdBy
@@ -475,11 +516,15 @@ components:
           isPrivate: true
           url: url
           isHidden: true
+      externalDocs:
+        url: ""
       properties:
         action:
           $ref: "#/components/schemas/v2.Action"
       type: object
     ListActionsResponse:
+      description: This data structure represents the response containing a list of
+        Actions.
       example:
         actions:
         - createdBy: createdBy
@@ -508,11 +553,35 @@ components:
           isPrivate: true
           url: url
           isHidden: true
+      externalDocs:
+        url: ""
       properties:
         actions:
           items:
             $ref: "#/components/schemas/v2.Action"
           type: array
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:
@@ -524,13 +593,20 @@ components:
           type: array
       type: object
     OrderActionsResponse:
+      description: This data structure represents the response to order Actions.
+      externalDocs:
+        url: ""
       type: object
     ReplaceActionRequest:
+      description: This data structure represents the request to replace an Action.
+      externalDocs:
+        url: ""
       properties:
         action:
           $ref: "#/components/schemas/v2.Action"
       type: object
     ReplaceActionResponse:
+      description: This data structure represents the response to replace an Action.
       example:
         action:
           createdBy: createdBy
@@ -546,6 +622,8 @@ components:
           isPrivate: true
           url: url
           isHidden: true
+      externalDocs:
+        url: ""
       properties:
         action:
           $ref: "#/components/schemas/v2.Action"
@@ -568,6 +646,7 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     v2.Action:
+      description: This data structure represents an Action.
       example:
         createdBy: createdBy
         sourceType: SOURCE_TYPE_UNSPECIFIED
@@ -582,6 +661,8 @@ components:
         isPrivate: true
         url: url
         isHidden: true
+      externalDocs:
+        url: ""
       properties:
         applicationNames:
           items:
@@ -619,12 +700,14 @@ components:
       type: string
     ActionsService_ReplaceAction_request:
       additionalProperties: false
+      description: This data structure represents the request to replace an Action.
       properties:
         action:
           $ref: "#/components/schemas/v2.Action"
       type: object
     ActionsService_CreateAction_request:
       additionalProperties: false
+      description: This data structure represents the request to create an Action.
       properties:
         applicationNames:
           items:
@@ -645,6 +728,8 @@ components:
       type: object
     ActionsService_AtomicBatchExecuteActions_request:
       additionalProperties: false
+      description: This data structure represents a request to execute a batch of
+        Action operations atomically.
       properties:
         requests:
           items:
@@ -653,6 +738,7 @@ components:
       type: object
     ActionsService_OrderActions_request:
       additionalProperties: false
+      description: This data structure represents the request to order Actions.
       properties:
         privateActionsOrder:
           additionalProperties:

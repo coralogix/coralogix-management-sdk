@@ -61,7 +61,7 @@ paths:
       summary: Replace an E2M
       tags:
       - Events2Metrics Service
-  /events2metrics/events2metrics/v2/batch:
+  /events2metrics/events2metrics/v2/all/execute:
     post:
       description: No description available
       externalDocs:
@@ -80,62 +80,6 @@ paths:
                 $ref: "#/components/schemas/AtomicBatchExecuteE2MResponse"
           description: ""
       summary: Atomic Batch Execute E2M
-      tags:
-      - Events2Metrics Service
-  /events2metrics/events2metrics/v2/labels:cardinality:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: Events2MetricService_ListLabelsCardinality
-      parameters:
-      - explode: true
-        in: query
-        name: spans_query
-        required: false
-        schema:
-          $ref: "#/components/schemas/SpansQuery"
-        style: form
-      - explode: true
-        in: query
-        name: logs_query
-        required: false
-        schema:
-          $ref: "#/components/schemas/SpansQuery_1"
-        style: form
-      - explode: true
-        in: query
-        name: metric_labels
-        required: false
-        schema:
-          items:
-            $ref: "#/components/schemas/Metric_Label"
-          type: array
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListLabelsCardinalityResponse"
-          description: ""
-      summary: List E2M Labels Cardinality
-      tags:
-      - Events2Metrics Service
-  /events2metrics/events2metrics/v2/limits:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: Events2MetricService_GetLimits
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetLimitsResponse"
-          description: ""
-      summary: Get E2M Limits
       tags:
       - Events2Metrics Service
   /events2metrics/events2metrics/v2/{id}:
@@ -187,6 +131,62 @@ paths:
       summary: Get an E2M
       tags:
       - Events2Metrics Service
+  /events2metrics/labels/v2/cardinalities:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: Events2MetricService_ListLabelsCardinality
+      parameters:
+      - explode: true
+        in: query
+        name: spans_query
+        required: false
+        schema:
+          $ref: "#/components/schemas/SpansQuery"
+        style: form
+      - explode: true
+        in: query
+        name: logs_query
+        required: false
+        schema:
+          $ref: "#/components/schemas/SpansQuery_1"
+        style: form
+      - explode: true
+        in: query
+        name: metric_labels
+        required: false
+        schema:
+          items:
+            $ref: "#/components/schemas/Metric_Label"
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListLabelsCardinalityResponse"
+          description: ""
+      summary: List E2M Labels Cardinality
+      tags:
+      - Events2Metrics Service
+  /events2metrics/limits/v2:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: Events2MetricService_GetLimits
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetLimitsResponse"
+          description: ""
+      summary: Get E2M Limits
+      tags:
+      - Events2Metrics Service
 components:
   schemas:
     AggType:
@@ -212,27 +212,23 @@ components:
                 aggregations:
                 - targetMetricName: alias_field_name_agg_func
                   aggType: AGG_TYPE_UNSPECIFIED
+                  none: "{}"
                   enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
                 - targetMetricName: alias_field_name_agg_func
                   aggType: AGG_TYPE_UNSPECIFIED
+                  none: "{}"
                   enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
               - sourceField: log_obj.numeric_field
                 targetBaseMetricName: alias_field_name
                 aggregations:
                 - targetMetricName: alias_field_name_agg_func
                   aggType: AGG_TYPE_UNSPECIFIED
+                  none: "{}"
                   enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
                 - targetMetricName: alias_field_name_agg_func
                   aggType: AGG_TYPE_UNSPECIFIED
+                  none: "{}"
                   enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
               createTime: 2022-06-30T12:30:00Z'
               metricLabels:
               - sourceField: log_obj.string_value
@@ -270,27 +266,23 @@ components:
                 aggregations:
                 - targetMetricName: alias_field_name_agg_func
                   aggType: AGG_TYPE_UNSPECIFIED
+                  none: "{}"
                   enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
                 - targetMetricName: alias_field_name_agg_func
                   aggType: AGG_TYPE_UNSPECIFIED
+                  none: "{}"
                   enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
               - sourceField: log_obj.numeric_field
                 targetBaseMetricName: alias_field_name
                 aggregations:
                 - targetMetricName: alias_field_name_agg_func
                   aggType: AGG_TYPE_UNSPECIFIED
+                  none: "{}"
                   enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
                 - targetMetricName: alias_field_name_agg_func
                   aggType: AGG_TYPE_UNSPECIFIED
+                  none: "{}"
                   enabled: true
-                  samples:
-                    sampleType: SAMPLE_TYPE_UNSPECIFIED
               createTime: 2022-06-30T12:30:00Z'
               metricLabels:
               - sourceField: log_obj.string_value
@@ -365,27 +357,23 @@ components:
             aggregations:
             - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
+              none: "{}"
               enabled: true
-              samples:
-                sampleType: SAMPLE_TYPE_UNSPECIFIED
             - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
+              none: "{}"
               enabled: true
-              samples:
-                sampleType: SAMPLE_TYPE_UNSPECIFIED
           - sourceField: log_obj.numeric_field
             targetBaseMetricName: alias_field_name
             aggregations:
             - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
+              none: "{}"
               enabled: true
-              samples:
-                sampleType: SAMPLE_TYPE_UNSPECIFIED
             - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
+              none: "{}"
               enabled: true
-              samples:
-                sampleType: SAMPLE_TYPE_UNSPECIFIED
           createTime: 2022-06-30T12:30:00Z'
           metricLabels:
           - sourceField: log_obj.string_value
@@ -467,8 +455,6 @@ components:
       type: object
     E2MAggSamples:
       description: This data structure represents the e2m aggregate samples
-      example:
-        sampleType: SAMPLE_TYPE_UNSPECIFIED
       externalDocs:
         description: Find out more about events2metrics
         url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
@@ -587,27 +573,23 @@ components:
               aggregations:
               - targetMetricName: alias_field_name_agg_func
                 aggType: AGG_TYPE_UNSPECIFIED
+                none: "{}"
                 enabled: true
-                samples:
-                  sampleType: SAMPLE_TYPE_UNSPECIFIED
               - targetMetricName: alias_field_name_agg_func
                 aggType: AGG_TYPE_UNSPECIFIED
+                none: "{}"
                 enabled: true
-                samples:
-                  sampleType: SAMPLE_TYPE_UNSPECIFIED
             - sourceField: log_obj.numeric_field
               targetBaseMetricName: alias_field_name
               aggregations:
               - targetMetricName: alias_field_name_agg_func
                 aggType: AGG_TYPE_UNSPECIFIED
+                none: "{}"
                 enabled: true
-                samples:
-                  sampleType: SAMPLE_TYPE_UNSPECIFIED
               - targetMetricName: alias_field_name_agg_func
                 aggType: AGG_TYPE_UNSPECIFIED
+                none: "{}"
                 enabled: true
-                samples:
-                  sampleType: SAMPLE_TYPE_UNSPECIFIED
             createTime: 2022-06-30T12:30:00Z'
             metricLabels:
             - sourceField: log_obj.string_value
@@ -730,27 +712,23 @@ components:
           aggregations:
           - targetMetricName: alias_field_name_agg_func
             aggType: AGG_TYPE_UNSPECIFIED
+            none: "{}"
             enabled: true
-            samples:
-              sampleType: SAMPLE_TYPE_UNSPECIFIED
           - targetMetricName: alias_field_name_agg_func
             aggType: AGG_TYPE_UNSPECIFIED
+            none: "{}"
             enabled: true
-            samples:
-              sampleType: SAMPLE_TYPE_UNSPECIFIED
         - sourceField: log_obj.numeric_field
           targetBaseMetricName: alias_field_name
           aggregations:
           - targetMetricName: alias_field_name_agg_func
             aggType: AGG_TYPE_UNSPECIFIED
+            none: "{}"
             enabled: true
-            samples:
-              sampleType: SAMPLE_TYPE_UNSPECIFIED
           - targetMetricName: alias_field_name_agg_func
             aggType: AGG_TYPE_UNSPECIFIED
+            none: "{}"
             enabled: true
-            samples:
-              sampleType: SAMPLE_TYPE_UNSPECIFIED
         createTime: 2022-06-30T12:30:00Z'
         metricLabels:
         - sourceField: log_obj.string_value
@@ -898,27 +876,23 @@ components:
             aggregations:
             - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
+              none: "{}"
               enabled: true
-              samples:
-                sampleType: SAMPLE_TYPE_UNSPECIFIED
             - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
+              none: "{}"
               enabled: true
-              samples:
-                sampleType: SAMPLE_TYPE_UNSPECIFIED
           - sourceField: log_obj.numeric_field
             targetBaseMetricName: alias_field_name
             aggregations:
             - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
+              none: "{}"
               enabled: true
-              samples:
-                sampleType: SAMPLE_TYPE_UNSPECIFIED
             - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
+              none: "{}"
               enabled: true
-              samples:
-                sampleType: SAMPLE_TYPE_UNSPECIFIED
           createTime: 2022-06-30T12:30:00Z'
           metricLabels:
           - sourceField: log_obj.string_value
@@ -1013,27 +987,23 @@ components:
             aggregations:
             - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
+              none: "{}"
               enabled: true
-              samples:
-                sampleType: SAMPLE_TYPE_UNSPECIFIED
             - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
+              none: "{}"
               enabled: true
-              samples:
-                sampleType: SAMPLE_TYPE_UNSPECIFIED
           - sourceField: log_obj.numeric_field
             targetBaseMetricName: alias_field_name
             aggregations:
             - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
+              none: "{}"
               enabled: true
-              samples:
-                sampleType: SAMPLE_TYPE_UNSPECIFIED
             - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
+              none: "{}"
               enabled: true
-              samples:
-                sampleType: SAMPLE_TYPE_UNSPECIFIED
           createTime: 2022-06-30T12:30:00Z'
           metricLabels:
           - sourceField: log_obj.string_value
@@ -1069,27 +1039,23 @@ components:
             aggregations:
             - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
+              none: "{}"
               enabled: true
-              samples:
-                sampleType: SAMPLE_TYPE_UNSPECIFIED
             - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
+              none: "{}"
               enabled: true
-              samples:
-                sampleType: SAMPLE_TYPE_UNSPECIFIED
           - sourceField: log_obj.numeric_field
             targetBaseMetricName: alias_field_name
             aggregations:
             - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
+              none: "{}"
               enabled: true
-              samples:
-                sampleType: SAMPLE_TYPE_UNSPECIFIED
             - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
+              none: "{}"
               enabled: true
-              samples:
-                sampleType: SAMPLE_TYPE_UNSPECIFIED
           createTime: 2022-06-30T12:30:00Z'
           metricLabels:
           - sourceField: log_obj.string_value
@@ -1164,6 +1130,28 @@ components:
       - targetLabel
       title: Metric Label
       type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     MultipleValues:
       properties:
         matcher:
@@ -1198,27 +1186,23 @@ components:
             aggregations:
             - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
+              none: "{}"
               enabled: true
-              samples:
-                sampleType: SAMPLE_TYPE_UNSPECIFIED
             - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
+              none: "{}"
               enabled: true
-              samples:
-                sampleType: SAMPLE_TYPE_UNSPECIFIED
           - sourceField: log_obj.numeric_field
             targetBaseMetricName: alias_field_name
             aggregations:
             - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
+              none: "{}"
               enabled: true
-              samples:
-                sampleType: SAMPLE_TYPE_UNSPECIFIED
             - targetMetricName: alias_field_name_agg_func
               aggType: AGG_TYPE_UNSPECIFIED
+              none: "{}"
               enabled: true
-              samples:
-                sampleType: SAMPLE_TYPE_UNSPECIFIED
           createTime: 2022-06-30T12:30:00Z'
           metricLabels:
           - sourceField: log_obj.string_value
@@ -1281,15 +1265,32 @@ components:
           type: string
       title: Aggregation
       type: object
-    V2AggregationSamples:
+    V2AggregationNone:
       additionalProperties: false
       description: This data structure represents an aggregation
       example:
         targetMetricName: alias_field_name_agg_func
         aggType: AGG_TYPE_UNSPECIFIED
+        none: "{}"
         enabled: true
-        samples:
-          sampleType: SAMPLE_TYPE_UNSPECIFIED
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        aggType:
+          $ref: "#/components/schemas/AggType"
+        enabled:
+          type: boolean
+        none:
+          type: object
+        targetMetricName:
+          example: alias_field_name_agg_func
+          type: string
+      title: Aggregation
+      type: object
+    V2AggregationSamples:
+      additionalProperties: false
+      description: This data structure represents an aggregation
       externalDocs:
         description: Find out more about events2metrics
         url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
@@ -1334,6 +1335,7 @@ components:
       type: string
     v2.Aggregation:
       oneOf:
+      - $ref: "#/components/schemas/V2AggregationNone"
       - $ref: "#/components/schemas/V2AggregationSamples"
       - $ref: "#/components/schemas/V2AggregationHistogram"
     v2.LogsQuery:
@@ -1372,14 +1374,12 @@ components:
         aggregations:
         - targetMetricName: alias_field_name_agg_func
           aggType: AGG_TYPE_UNSPECIFIED
+          none: "{}"
           enabled: true
-          samples:
-            sampleType: SAMPLE_TYPE_UNSPECIFIED
         - targetMetricName: alias_field_name_agg_func
           aggType: AGG_TYPE_UNSPECIFIED
+          none: "{}"
           enabled: true
-          samples:
-            sampleType: SAMPLE_TYPE_UNSPECIFIED
       externalDocs:
         description: Find out more about events2metrics
         url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
@@ -1453,13 +1453,13 @@ components:
       type: string
     Events2MetricService_ReplaceE2M_request:
       oneOf:
-      - $ref: "#/components/schemas/E2MSpansQuery"
       - $ref: "#/components/schemas/E2MLogsQuery"
+      - $ref: "#/components/schemas/E2MSpansQuery"
       type: object
     Events2MetricService_CreateE2M_request:
       oneOf:
-      - $ref: "#/components/schemas/E2MCreateParamsSpansQuery"
       - $ref: "#/components/schemas/E2MCreateParamsLogsQuery"
+      - $ref: "#/components/schemas/E2MCreateParamsSpansQuery"
       type: object
     Events2MetricService_AtomicBatchExecuteE2M_request:
       additionalProperties: false

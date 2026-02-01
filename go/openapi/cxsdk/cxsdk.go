@@ -44,7 +44,6 @@ import (
 	rulegroups "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/rule_groups_service"
 	slos "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/slos_service"
 	targets "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/target_service"
-	groups "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/team_permissions_management_service"
 	views "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/views_service"
 )
 
@@ -67,7 +66,6 @@ type ClientSet struct {
 	extensions           *extensions.ExtensionServiceAPIService
 	events2metrics       *events2metrics.Events2MetricsServiceAPIService
 	extensionDeployments *extensiondeployments.ExtensionDeploymentServiceAPIService
-	groups               *groups.TeamPermissionsManagementServiceAPIService
 	integrations         *integrations.IntegrationServiceAPIService
 	globalRouters        *globalrouters.GlobalRoutersServiceAPIService
 	presets              *presets.PresetsServiceAPIService
@@ -166,11 +164,6 @@ func (c *ClientSet) ExtensionDeployments() *extensiondeployments.ExtensionDeploy
 	return c.extensionDeployments
 }
 
-// Groups returns the TeamPermissionsManagementServiceAPIService client.
-func (c *ClientSet) Groups() *groups.TeamPermissionsManagementServiceAPIService {
-	return c.groups
-}
-
 // Integrations returns the IntegrationServiceAPIService client.
 func (c *ClientSet) Integrations() *integrations.IntegrationServiceAPIService {
 	return c.integrations
@@ -246,7 +239,6 @@ func NewClientSet(c *Config) *ClientSet {
 		events2metrics:       NewEvents2MetricsClient(c),
 		extensions:           NewExtensionsClient(c),
 		extensionDeployments: NewExtensionDeploymentsClient(c),
-		groups:               NewGroupsClient(c),
 		integrations:         NewIntegrationsClient(c),
 		globalRouters:        NewGlobalRoutersClient(c),
 		presets:              NewPresetsClient(c),
@@ -455,19 +447,6 @@ func NewExtensionDeploymentsClient(c *Config) *extensiondeployments.ExtensionDep
 		cfg.AddDefaultHeader(k, v)
 	}
 	return extensiondeployments.NewAPIClient(cfg).ExtensionDeploymentServiceAPI
-}
-
-// NewGroupsClient builds a new TeamPermissionsManagementServiceAPIService from CallPropertiesCreator.
-func NewGroupsClient(c *Config) *groups.TeamPermissionsManagementServiceAPIService {
-	cfg := groups.NewConfiguration()
-	if c.httpClient != nil {
-		cfg.HTTPClient = c.httpClient
-	}
-	cfg.Servers = groups.ServerConfigurations{{URL: c.url}}
-	for k, v := range c.headers {
-		cfg.AddDefaultHeader(k, v)
-	}
-	return groups.NewAPIClient(cfg).TeamPermissionsManagementServiceAPI
 }
 
 // NewIntegrationsClient builds a new IntegrationServiceAPIService from CallPropertiesCreator.

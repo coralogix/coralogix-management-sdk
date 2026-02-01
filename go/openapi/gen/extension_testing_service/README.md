@@ -78,9 +78,9 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ExtensionTestingServiceAPI* | [**ExtensionTestingServiceCleanupTestingRevision**](docs/ExtensionTestingServiceAPI.md#extensiontestingservicecleanuptestingrevision) | **Delete** /integrations/extensions/v1/testing | Cleanup testing extension
-*ExtensionTestingServiceAPI* | [**ExtensionTestingServiceInitializeTestingRevision**](docs/ExtensionTestingServiceAPI.md#extensiontestingserviceinitializetestingrevision) | **Post** /integrations/extensions/v1/testing/initialize | Initialize testing revision
-*ExtensionTestingServiceAPI* | [**ExtensionTestingServiceTestExtensionRevision**](docs/ExtensionTestingServiceAPI.md#extensiontestingservicetestextensionrevision) | **Post** /integrations/extensions/v1/testing | Test extension revision
+*ExtensionTestingServiceAPI* | [**ExtensionTestingServiceCleanupTestingRevision**](docs/ExtensionTestingServiceAPI.md#extensiontestingservicecleanuptestingrevision) | **Delete** /integrations/testing/v1/extensions | Cleanup testing extension
+*ExtensionTestingServiceAPI* | [**ExtensionTestingServiceInitializeTestingRevision**](docs/ExtensionTestingServiceAPI.md#extensiontestingserviceinitializetestingrevision) | **Post** /integrations/testing/v1/extensions/initialize | Initialize testing revision
+*ExtensionTestingServiceAPI* | [**ExtensionTestingServiceTestExtensionRevision**](docs/ExtensionTestingServiceAPI.md#extensiontestingservicetestextensionrevision) | **Post** /integrations/testing/v1/extensions | Test extension revision
 
 
 ## Documentation For Models
@@ -106,6 +106,8 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [InitializeTestingRevisionRequest](docs/InitializeTestingRevisionRequest.md)
  - [IntegrationDetail](docs/IntegrationDetail.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [PermissionResource](docs/PermissionResource.md)
  - [TargetDomain](docs/TargetDomain.md)

@@ -5,7 +5,7 @@ info:
 servers:
 - url: /
 paths:
-  /data-exploration/saved-views/v1/folders:
+  /data-exploration/views/v1/folders:
     get:
       description: List view's folders
       externalDocs:
@@ -61,7 +61,7 @@ paths:
       summary: Replace View Folder service
       tags:
       - Folders for views service
-  /data-exploration/saved-views/v1/folders/{id}:
+  /data-exploration/views/v1/folders/{id}:
     delete:
       description: Deletes a view folder by ID
       externalDocs:
@@ -210,6 +210,28 @@ components:
           items:
             $ref: "#/components/schemas/ViewFolder"
           type: array
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:

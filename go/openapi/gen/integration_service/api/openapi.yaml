@@ -43,7 +43,7 @@ paths:
       - Integration service
       x-coralogixPermissions:
       - integrations:ReadConfig
-  /integrations/integrations/v1/definition/{id}:
+  /integrations/integrations/v1/definitions/{id}:
     get:
       description: No description available
       externalDocs:
@@ -128,7 +128,7 @@ paths:
       - Integration service
       x-coralogixPermissions:
       - integrations:ReadConfig
-  /integrations/integrations/v1/instance/{integration_id}:
+  /integrations/integrations/v1/instances/{integration_id}:
     delete:
       description: No description available
       externalDocs:
@@ -166,178 +166,6 @@ paths:
       - Integration service
       x-coralogixPermissions:
       - integrations:Deploy
-  /integrations/integrations/v1/managed:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: IntegrationService_ListManagedIntegrationKeys
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListManagedIntegrationKeysResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: List managed integration keys
-      tags:
-      - Integration service
-      x-coralogixPermissions:
-      - integrations:ReadConfig
-  /integrations/integrations/v1/managed/{integration_id}:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: IntegrationService_GetManagedIntegrationStatus
-      parameters:
-      - explode: false
-        in: path
-        name: integration_id
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetManagedIntegrationStatusResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Get managed integration status
-      tags:
-      - Integration service
-      x-coralogixPermissions:
-      - integrations:ReadConfig
-  /integrations/integrations/v1/metadata:
-    post:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: IntegrationService_SaveIntegration
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Save_integration_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SaveIntegrationResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Save integration registration metadata
-      tags:
-      - Integration service
-      x-coralogixPermissions:
-      - integrations:Deploy
-    put:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: IntegrationService_UpdateIntegration
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Update_integration_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UpdateIntegrationResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Update integration
-      tags:
-      - Integration service
-      x-coralogixPermissions:
-      - integrations:Deploy
-  /integrations/integrations/v1/metadata/test:
-    post:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: IntegrationService_TestIntegration
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Test_integration_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TestIntegrationResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Test integration
-      tags:
-      - Integration service
-      x-coralogixPermissions:
-      - integrations:ReadConfig
   /integrations/integrations/v1/rum/app-versions:
     get:
       description: No description available
@@ -411,7 +239,224 @@ paths:
       - Integration service
       x-coralogixPermissions:
       - integrations:ReadConfig
-  /integrations/integrations/v1/template:
+  /integrations/integrations/v1/{id}:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: IntegrationService_GetIntegrationDetails
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: include_testing_revision
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetIntegrationDetailsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get integration details
+      tags:
+      - Integration service
+      x-coralogixPermissions:
+      - integrations:ReadConfig
+  /integrations/managed/v1:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: IntegrationService_ListManagedIntegrationKeys
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListManagedIntegrationKeysResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List managed integration keys
+      tags:
+      - Integration service
+      x-coralogixPermissions:
+      - integrations:ReadConfig
+  /integrations/managed/v1/{integration_id}:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: IntegrationService_GetManagedIntegrationStatus
+      parameters:
+      - explode: false
+        in: path
+        name: integration_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetManagedIntegrationStatusResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get managed integration status
+      tags:
+      - Integration service
+      x-coralogixPermissions:
+      - integrations:ReadConfig
+  /integrations/metadata/v1:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: IntegrationService_SaveIntegration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Save_integration_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SaveIntegrationResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Save integration registration metadata
+      tags:
+      - Integration service
+      x-coralogixPermissions:
+      - integrations:Deploy
+    put:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: IntegrationService_UpdateIntegration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Update_integration_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateIntegrationResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Update integration
+      tags:
+      - Integration service
+      x-coralogixPermissions:
+      - integrations:Deploy
+  /integrations/metadata/v1/test:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: IntegrationService_TestIntegration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Test_integration_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestIntegrationResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Test integration
+      tags:
+      - Integration service
+      x-coralogixPermissions:
+      - integrations:ReadConfig
+  /integrations/template/v1:
     get:
       description: No description available
       externalDocs:
@@ -463,51 +508,6 @@ paths:
       - Integration service
       x-coralogixPermissions:
       - integrations:ReadConfig
-  /integrations/integrations/v1/{id}:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: IntegrationService_GetIntegrationDetails
-      parameters:
-      - explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: true
-        in: query
-        name: include_testing_revision
-        required: false
-        schema:
-          type: boolean
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetIntegrationDetailsResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Get integration details
-      tags:
-      - Integration service
-      x-coralogixPermissions:
-      - integrations:ReadConfig
 components:
   schemas:
     ARMStack:
@@ -541,6 +541,8 @@ components:
       type: object
     AzureArmTemplate:
       description: This data structure represents an azure ARM template.
+      example:
+        templateUrl: templateUrl
       externalDocs:
         url: ""
       properties:
@@ -575,37 +577,6 @@ components:
       title: CloudFormation stack
       type: object
     CloudFormationTemplate:
-      example:
-        postInstallationSteps:
-          key: postInstallationSteps
-        parameters:
-          key: parameters
-        commands:
-        - tooltipText: tooltipText
-          name: name
-          description: description
-          language: UNKNOWN
-          links:
-          - text: text
-            key: key
-            url: url
-          - text: text
-            key: key
-            url: url
-          command: command
-        - tooltipText: tooltipText
-          name: name
-          description: description
-          language: UNKNOWN
-          links:
-          - text: text
-            key: key
-            url: url
-          - text: text
-            key: key
-            url: url
-          command: command
-        templateUrl: templateUrl
       externalDocs:
         url: ""
       properties:
@@ -650,19 +621,6 @@ components:
           $ref: "#/components/schemas/ColorsByStack"
       type: object
     CommandInformation:
-      example:
-        tooltipText: tooltipText
-        name: name
-        description: description
-        language: UNKNOWN
-        links:
-        - text: text
-          key: key
-          url: url
-        - text: text
-          key: key
-          url: url
-        command: command
       externalDocs:
         url: ""
       properties:
@@ -712,6 +670,7 @@ components:
         registered:
         - lastUpdated: 2000-01-23T04:56:07.000+00:00
           definitionVersion: definitionVersion
+          revisionLifecycle: REVISION_LIFECYCLE_UNSPECIFIED
           integrationStatus:
             connectionStatus: PENDING
             messages:
@@ -721,20 +680,15 @@ components:
               key: details
           id: id
           parameters:
-          - stringList:
-              values:
-              - values
-              - values
+          - booleanValue: true
             key: key
-          - stringList:
-              values:
-              - values
-              - values
+          - booleanValue: true
             key: key
           isTesting: true
           empty: "{}"
         - lastUpdated: 2000-01-23T04:56:07.000+00:00
           definitionVersion: definitionVersion
+          revisionLifecycle: REVISION_LIFECYCLE_UNSPECIFIED
           integrationStatus:
             connectionStatus: PENDING
             messages:
@@ -744,15 +698,9 @@ components:
               key: details
           id: id
           parameters:
-          - stringList:
-              values:
-              - values
-              - values
+          - booleanValue: true
             key: key
-          - stringList:
-              values:
-              - values
-              - values
+          - booleanValue: true
             key: key
           isTesting: true
           empty: "{}"
@@ -780,15 +728,9 @@ components:
             key: details
         id: id
         parameters:
-        - stringList:
-            values:
-            - values
-            - values
+        - booleanValue: true
           key: key
-        - stringList:
-            values:
-            - values
-            - values
+        - booleanValue: true
           key: key
       externalDocs:
         url: ""
@@ -1090,12 +1032,12 @@ components:
       type: object
     FieldInformation:
       oneOf:
-      - $ref: "#/components/schemas/FieldInformationMultipleSelection"
-      - $ref: "#/components/schemas/FieldInformationSingleBoolean"
       - $ref: "#/components/schemas/FieldInformationSelection"
       - $ref: "#/components/schemas/FieldInformationSingleNumber"
       - $ref: "#/components/schemas/FieldInformationSingle"
       - $ref: "#/components/schemas/FieldInformationMultiText"
+      - $ref: "#/components/schemas/FieldInformationMultipleSelection"
+      - $ref: "#/components/schemas/FieldInformationSingleBoolean"
     FieldInformationMultiText:
       additionalProperties: false
       externalDocs:
@@ -1135,31 +1077,6 @@ components:
       type: object
     FieldInformationMultipleSelection:
       additionalProperties: false
-      example:
-        visible: true
-        groupId: groupId
-        tooltip: tooltip
-        type: API_KEY
-        upgradeNotice: upgradeNotice
-        predefined: true
-        required: true
-        templateParamName: templateParamName
-        readonly: true
-        documentationReference: documentationReference
-        name: name
-        placeholder: placeholder
-        applicableIf:
-          values:
-          - fieldName: fieldName
-            valuePattern: valuePattern
-          - fieldName: fieldName
-            valuePattern: valuePattern
-          type: UNKNOWN
-        allowedPattern: allowedPattern
-        multipleSelection:
-          options:
-          - options
-          - options
       externalDocs:
         url: ""
       properties:
@@ -1197,6 +1114,32 @@ components:
       type: object
     FieldInformationSelection:
       additionalProperties: false
+      example:
+        visible: true
+        groupId: groupId
+        tooltip: tooltip
+        type: API_KEY
+        upgradeNotice: upgradeNotice
+        predefined: true
+        required: true
+        templateParamName: templateParamName
+        readonly: true
+        selection:
+          defaultValue: defaultValue
+          options:
+          - options
+          - options
+        documentationReference: documentationReference
+        name: name
+        placeholder: placeholder
+        applicableIf:
+          values:
+          - fieldName: fieldName
+            valuePattern: valuePattern
+          - fieldName: fieldName
+            valuePattern: valuePattern
+          type: UNKNOWN
+        allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -1424,15 +1367,9 @@ components:
               key: details
           id: id
           parameters:
-          - stringList:
-              values:
-              - values
-              - values
+          - booleanValue: true
             key: key
-          - stringList:
-              values:
-              - values
-              - values
+          - booleanValue: true
             key: key
       externalDocs:
         url: ""
@@ -1447,41 +1384,12 @@ components:
         integrationDefinition:
           featureFlag: featureFlag
           integrationType:
-            genericWebhook: "{}"
+            contextualData: "{}"
           revisions:
           - revisionDeploymentSupported: true
             featureFlag: featureFlag
             upgradeInstructionsMd: upgradeInstructionsMd
-            cloudFormation:
-              postInstallationSteps:
-                key: postInstallationSteps
-              parameters:
-                key: parameters
-              commands:
-              - tooltipText: tooltipText
-                name: name
-                description: description
-                language: UNKNOWN
-                links:
-                - text: text
-                  key: key
-                  url: url
-                - text: text
-                  key: key
-                  url: url
-                command: command
-              - tooltipText: tooltipText
-                name: name
-                description: description
-                language: UNKNOWN
-                links:
-                - text: text
-                  key: key
-                  url: url
-                - text: text
-                  key: key
-                  url: url
-                command: command
+            azureArmTemplate:
               templateUrl: templateUrl
             groups:
             - name: name
@@ -1499,6 +1407,11 @@ components:
               required: true
               templateParamName: templateParamName
               readonly: true
+              selection:
+                defaultValue: defaultValue
+                options:
+                - options
+                - options
               documentationReference: documentationReference
               name: name
               placeholder: placeholder
@@ -1510,10 +1423,6 @@ components:
                   valuePattern: valuePattern
                 type: UNKNOWN
               allowedPattern: allowedPattern
-              multipleSelection:
-                options:
-                - options
-                - options
             - visible: true
               groupId: groupId
               tooltip: tooltip
@@ -1523,6 +1432,11 @@ components:
               required: true
               templateParamName: templateParamName
               readonly: true
+              selection:
+                defaultValue: defaultValue
+                options:
+                - options
+                - options
               documentationReference: documentationReference
               name: name
               placeholder: placeholder
@@ -1534,43 +1448,10 @@ components:
                   valuePattern: valuePattern
                 type: UNKNOWN
               allowedPattern: allowedPattern
-              multipleSelection:
-                options:
-                - options
-                - options
           - revisionDeploymentSupported: true
             featureFlag: featureFlag
             upgradeInstructionsMd: upgradeInstructionsMd
-            cloudFormation:
-              postInstallationSteps:
-                key: postInstallationSteps
-              parameters:
-                key: parameters
-              commands:
-              - tooltipText: tooltipText
-                name: name
-                description: description
-                language: UNKNOWN
-                links:
-                - text: text
-                  key: key
-                  url: url
-                - text: text
-                  key: key
-                  url: url
-                command: command
-              - tooltipText: tooltipText
-                name: name
-                description: description
-                language: UNKNOWN
-                links:
-                - text: text
-                  key: key
-                  url: url
-                - text: text
-                  key: key
-                  url: url
-                command: command
+            azureArmTemplate:
               templateUrl: templateUrl
             groups:
             - name: name
@@ -1588,6 +1469,11 @@ components:
               required: true
               templateParamName: templateParamName
               readonly: true
+              selection:
+                defaultValue: defaultValue
+                options:
+                - options
+                - options
               documentationReference: documentationReference
               name: name
               placeholder: placeholder
@@ -1599,10 +1485,6 @@ components:
                   valuePattern: valuePattern
                 type: UNKNOWN
               allowedPattern: allowedPattern
-              multipleSelection:
-                options:
-                - options
-                - options
             - visible: true
               groupId: groupId
               tooltip: tooltip
@@ -1612,6 +1494,11 @@ components:
               required: true
               templateParamName: templateParamName
               readonly: true
+              selection:
+                defaultValue: defaultValue
+                options:
+                - options
+                - options
               documentationReference: documentationReference
               name: name
               placeholder: placeholder
@@ -1623,10 +1510,6 @@ components:
                   valuePattern: valuePattern
                 type: UNKNOWN
               allowedPattern: allowedPattern
-              multipleSelection:
-                options:
-                - options
-                - options
           key: key
       externalDocs:
         url: ""
@@ -1642,6 +1525,7 @@ components:
             registered:
             - lastUpdated: 2000-01-23T04:56:07.000+00:00
               definitionVersion: definitionVersion
+              revisionLifecycle: REVISION_LIFECYCLE_UNSPECIFIED
               integrationStatus:
                 connectionStatus: PENDING
                 messages:
@@ -1651,20 +1535,15 @@ components:
                   key: details
               id: id
               parameters:
-              - stringList:
-                  values:
-                  - values
-                  - values
+              - booleanValue: true
                 key: key
-              - stringList:
-                  values:
-                  - values
-                  - values
+              - booleanValue: true
                 key: key
               isTesting: true
               empty: "{}"
             - lastUpdated: 2000-01-23T04:56:07.000+00:00
               definitionVersion: definitionVersion
+              revisionLifecycle: REVISION_LIFECYCLE_UNSPECIFIED
               integrationStatus:
                 connectionStatus: PENDING
                 messages:
@@ -1674,15 +1553,9 @@ components:
                   key: details
               id: id
               parameters:
-              - stringList:
-                  values:
-                  - values
-                  - values
+              - booleanValue: true
                 key: key
-              - stringList:
-                  values:
-                  - values
-                  - values
+              - booleanValue: true
                 key: key
               isTesting: true
               empty: "{}"
@@ -2437,13 +2310,18 @@ components:
           integration:
             featureFlag: featureFlag
             integrationType:
-              genericWebhook: "{}"
+              contextualData: "{}"
             versions:
             - versions
             - versions
             icon: icon
             name: name
             description: description
+            revisions:
+            - lifecycle: REVISION_LIFECYCLE_UNSPECIFIED
+              version: version
+            - lifecycle: REVISION_LIFECYCLE_UNSPECIFIED
+              version: version
             id: id
             darkIcon: darkIcon
             tags:
@@ -2466,16 +2344,22 @@ components:
       description: This data structure represents a list of outgoing webhook types.
       example:
         integrations:
-        - integration:
+        - isDeprecated: true
+          integration:
             featureFlag: featureFlag
             integrationType:
-              genericWebhook: "{}"
+              contextualData: "{}"
             versions:
             - versions
             - versions
             icon: icon
             name: name
             description: description
+            revisions:
+            - lifecycle: REVISION_LIFECYCLE_UNSPECIFIED
+              version: version
+            - lifecycle: REVISION_LIFECYCLE_UNSPECIFIED
+              version: version
             id: id
             darkIcon: darkIcon
             tags:
@@ -2487,16 +2371,22 @@ components:
           errors:
           - errors
           - errors
-        - integration:
+        - isDeprecated: true
+          integration:
             featureFlag: featureFlag
             integrationType:
-              genericWebhook: "{}"
+              contextualData: "{}"
             versions:
             - versions
             - versions
             icon: icon
             name: name
             description: description
+            revisions:
+            - lifecycle: REVISION_LIFECYCLE_UNSPECIFIED
+              version: version
+            - lifecycle: REVISION_LIFECYCLE_UNSPECIFIED
+              version: version
             id: id
             darkIcon: darkIcon
             tags:
@@ -2519,16 +2409,22 @@ components:
       type: object
     GetIntegrationsResponse.IntegrationWithCounts:
       example:
+        isDeprecated: true
         integration:
           featureFlag: featureFlag
           integrationType:
-            genericWebhook: "{}"
+            contextualData: "{}"
           versions:
           - versions
           - versions
           icon: icon
           name: name
           description: description
+          revisions:
+          - lifecycle: REVISION_LIFECYCLE_UNSPECIFIED
+            version: version
+          - lifecycle: REVISION_LIFECYCLE_UNSPECIFIED
+            version: version
           id: id
           darkIcon: darkIcon
           tags:
@@ -2552,6 +2448,8 @@ components:
           type: array
         integration:
           $ref: "#/components/schemas/Integration"
+        isDeprecated:
+          type: boolean
         isNew:
           type: boolean
         upgradeAvailable:
@@ -2646,13 +2544,18 @@ components:
       example:
         featureFlag: featureFlag
         integrationType:
-          genericWebhook: "{}"
+          contextualData: "{}"
         versions:
         - versions
         - versions
         icon: icon
         name: name
         description: description
+        revisions:
+        - lifecycle: REVISION_LIFECYCLE_UNSPECIFIED
+          version: version
+        - lifecycle: REVISION_LIFECYCLE_UNSPECIFIED
+          version: version
         id: id
         darkIcon: darkIcon
         tags:
@@ -2675,6 +2578,10 @@ components:
           $ref: "#/components/schemas/v1.IntegrationType"
         name:
           type: string
+        revisions:
+          items:
+            $ref: "#/components/schemas/v1.RevisionSummary"
+          type: array
         tags:
           items:
             type: string
@@ -2690,41 +2597,12 @@ components:
       example:
         featureFlag: featureFlag
         integrationType:
-          genericWebhook: "{}"
+          contextualData: "{}"
         revisions:
         - revisionDeploymentSupported: true
           featureFlag: featureFlag
           upgradeInstructionsMd: upgradeInstructionsMd
-          cloudFormation:
-            postInstallationSteps:
-              key: postInstallationSteps
-            parameters:
-              key: parameters
-            commands:
-            - tooltipText: tooltipText
-              name: name
-              description: description
-              language: UNKNOWN
-              links:
-              - text: text
-                key: key
-                url: url
-              - text: text
-                key: key
-                url: url
-              command: command
-            - tooltipText: tooltipText
-              name: name
-              description: description
-              language: UNKNOWN
-              links:
-              - text: text
-                key: key
-                url: url
-              - text: text
-                key: key
-                url: url
-              command: command
+          azureArmTemplate:
             templateUrl: templateUrl
           groups:
           - name: name
@@ -2742,6 +2620,11 @@ components:
             required: true
             templateParamName: templateParamName
             readonly: true
+            selection:
+              defaultValue: defaultValue
+              options:
+              - options
+              - options
             documentationReference: documentationReference
             name: name
             placeholder: placeholder
@@ -2753,10 +2636,6 @@ components:
                 valuePattern: valuePattern
               type: UNKNOWN
             allowedPattern: allowedPattern
-            multipleSelection:
-              options:
-              - options
-              - options
           - visible: true
             groupId: groupId
             tooltip: tooltip
@@ -2766,6 +2645,11 @@ components:
             required: true
             templateParamName: templateParamName
             readonly: true
+            selection:
+              defaultValue: defaultValue
+              options:
+              - options
+              - options
             documentationReference: documentationReference
             name: name
             placeholder: placeholder
@@ -2777,43 +2661,10 @@ components:
                 valuePattern: valuePattern
               type: UNKNOWN
             allowedPattern: allowedPattern
-            multipleSelection:
-              options:
-              - options
-              - options
         - revisionDeploymentSupported: true
           featureFlag: featureFlag
           upgradeInstructionsMd: upgradeInstructionsMd
-          cloudFormation:
-            postInstallationSteps:
-              key: postInstallationSteps
-            parameters:
-              key: parameters
-            commands:
-            - tooltipText: tooltipText
-              name: name
-              description: description
-              language: UNKNOWN
-              links:
-              - text: text
-                key: key
-                url: url
-              - text: text
-                key: key
-                url: url
-              command: command
-            - tooltipText: tooltipText
-              name: name
-              description: description
-              language: UNKNOWN
-              links:
-              - text: text
-                key: key
-                url: url
-              - text: text
-                key: key
-                url: url
-              command: command
+          azureArmTemplate:
             templateUrl: templateUrl
           groups:
           - name: name
@@ -2831,6 +2682,11 @@ components:
             required: true
             templateParamName: templateParamName
             readonly: true
+            selection:
+              defaultValue: defaultValue
+              options:
+              - options
+              - options
             documentationReference: documentationReference
             name: name
             placeholder: placeholder
@@ -2842,10 +2698,6 @@ components:
                 valuePattern: valuePattern
               type: UNKNOWN
             allowedPattern: allowedPattern
-            multipleSelection:
-              options:
-              - options
-              - options
           - visible: true
             groupId: groupId
             tooltip: tooltip
@@ -2855,6 +2707,11 @@ components:
             required: true
             templateParamName: templateParamName
             readonly: true
+            selection:
+              defaultValue: defaultValue
+              options:
+              - options
+              - options
             documentationReference: documentationReference
             name: name
             placeholder: placeholder
@@ -2866,10 +2723,6 @@ components:
                 valuePattern: valuePattern
               type: UNKNOWN
             allowedPattern: allowedPattern
-            multipleSelection:
-              options:
-              - options
-              - options
         key: key
       externalDocs:
         url: ""
@@ -2933,6 +2786,7 @@ components:
           registered:
           - lastUpdated: 2000-01-23T04:56:07.000+00:00
             definitionVersion: definitionVersion
+            revisionLifecycle: REVISION_LIFECYCLE_UNSPECIFIED
             integrationStatus:
               connectionStatus: PENDING
               messages:
@@ -2942,20 +2796,15 @@ components:
                 key: details
             id: id
             parameters:
-            - stringList:
-                values:
-                - values
-                - values
+            - booleanValue: true
               key: key
-            - stringList:
-                values:
-                - values
-                - values
+            - booleanValue: true
               key: key
             isTesting: true
             empty: "{}"
           - lastUpdated: 2000-01-23T04:56:07.000+00:00
             definitionVersion: definitionVersion
+            revisionLifecycle: REVISION_LIFECYCLE_UNSPECIFIED
             integrationStatus:
               connectionStatus: PENDING
               messages:
@@ -2965,15 +2814,9 @@ components:
                 key: details
             id: id
             parameters:
-            - stringList:
-                values:
-                - values
-                - values
+            - booleanValue: true
               key: key
-            - stringList:
-                values:
-                - values
-                - values
+            - booleanValue: true
               key: key
             isTesting: true
             empty: "{}"
@@ -3728,13 +3571,18 @@ components:
         integration:
           featureFlag: featureFlag
           integrationType:
-            genericWebhook: "{}"
+            contextualData: "{}"
           versions:
           - versions
           - versions
           icon: icon
           name: name
           description: description
+          revisions:
+          - lifecycle: REVISION_LIFECYCLE_UNSPECIFIED
+            version: version
+          - lifecycle: REVISION_LIFECYCLE_UNSPECIFIED
+            version: version
           id: id
           darkIcon: darkIcon
           tags:
@@ -3804,12 +3652,12 @@ components:
       type: object
     IntegrationRevision:
       oneOf:
-      - $ref: "#/components/schemas/IntegrationRevisionCloudFormation"
-      - $ref: "#/components/schemas/IntegrationRevisionManagedService"
-      - $ref: "#/components/schemas/IntegrationRevisionHelmChart"
       - $ref: "#/components/schemas/IntegrationRevisionAzureArmTemplate"
       - $ref: "#/components/schemas/IntegrationRevisionRum"
       - $ref: "#/components/schemas/IntegrationRevisionTerraform"
+      - $ref: "#/components/schemas/IntegrationRevisionCloudFormation"
+      - $ref: "#/components/schemas/IntegrationRevisionManagedService"
+      - $ref: "#/components/schemas/IntegrationRevisionHelmChart"
     IntegrationRevision.Group:
       example:
         name: name
@@ -3835,6 +3683,69 @@ components:
     IntegrationRevisionAzureArmTemplate:
       additionalProperties: false
       description: This data structure represents an integration revision.
+      example:
+        revisionDeploymentSupported: true
+        featureFlag: featureFlag
+        upgradeInstructionsMd: upgradeInstructionsMd
+        azureArmTemplate:
+          templateUrl: templateUrl
+        groups:
+        - name: name
+          id: id
+        - name: name
+          id: id
+        id: id
+        fields:
+        - visible: true
+          groupId: groupId
+          tooltip: tooltip
+          type: API_KEY
+          upgradeNotice: upgradeNotice
+          predefined: true
+          required: true
+          templateParamName: templateParamName
+          readonly: true
+          selection:
+            defaultValue: defaultValue
+            options:
+            - options
+            - options
+          documentationReference: documentationReference
+          name: name
+          placeholder: placeholder
+          applicableIf:
+            values:
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            type: UNKNOWN
+          allowedPattern: allowedPattern
+        - visible: true
+          groupId: groupId
+          tooltip: tooltip
+          type: API_KEY
+          upgradeNotice: upgradeNotice
+          predefined: true
+          required: true
+          templateParamName: templateParamName
+          readonly: true
+          selection:
+            defaultValue: defaultValue
+            options:
+            - options
+            - options
+          documentationReference: documentationReference
+          name: name
+          placeholder: placeholder
+          applicableIf:
+            values:
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            type: UNKNOWN
+          allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -3861,96 +3772,6 @@ components:
     IntegrationRevisionCloudFormation:
       additionalProperties: false
       description: This data structure represents an integration revision.
-      example:
-        revisionDeploymentSupported: true
-        featureFlag: featureFlag
-        upgradeInstructionsMd: upgradeInstructionsMd
-        cloudFormation:
-          postInstallationSteps:
-            key: postInstallationSteps
-          parameters:
-            key: parameters
-          commands:
-          - tooltipText: tooltipText
-            name: name
-            description: description
-            language: UNKNOWN
-            links:
-            - text: text
-              key: key
-              url: url
-            - text: text
-              key: key
-              url: url
-            command: command
-          - tooltipText: tooltipText
-            name: name
-            description: description
-            language: UNKNOWN
-            links:
-            - text: text
-              key: key
-              url: url
-            - text: text
-              key: key
-              url: url
-            command: command
-          templateUrl: templateUrl
-        groups:
-        - name: name
-          id: id
-        - name: name
-          id: id
-        id: id
-        fields:
-        - visible: true
-          groupId: groupId
-          tooltip: tooltip
-          type: API_KEY
-          upgradeNotice: upgradeNotice
-          predefined: true
-          required: true
-          templateParamName: templateParamName
-          readonly: true
-          documentationReference: documentationReference
-          name: name
-          placeholder: placeholder
-          applicableIf:
-            values:
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            type: UNKNOWN
-          allowedPattern: allowedPattern
-          multipleSelection:
-            options:
-            - options
-            - options
-        - visible: true
-          groupId: groupId
-          tooltip: tooltip
-          type: API_KEY
-          upgradeNotice: upgradeNotice
-          predefined: true
-          required: true
-          templateParamName: templateParamName
-          readonly: true
-          documentationReference: documentationReference
-          name: name
-          placeholder: placeholder
-          applicableIf:
-            values:
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            type: UNKNOWN
-          allowedPattern: allowedPattern
-          multipleSelection:
-            options:
-            - options
-            - options
       externalDocs:
         url: ""
       properties:
@@ -4113,10 +3934,6 @@ components:
       - JAVASCRIPT
       type: string
     Link:
-      example:
-        text: text
-        key: key
-        url: url
       externalDocs:
         url: ""
       properties:
@@ -4202,11 +4019,29 @@ components:
         url: ""
       title: Managed service
       type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     MultipleSelectionValue:
-      example:
-        options:
-        - options
-        - options
       externalDocs:
         url: ""
       properties:
@@ -4234,12 +4069,12 @@ components:
       type: object
     Parameter:
       oneOf:
+      - $ref: "#/components/schemas/ParameterBooleanValue"
       - $ref: "#/components/schemas/ParameterStringList"
       - $ref: "#/components/schemas/ParameterApiKey"
       - $ref: "#/components/schemas/ParameterNumericValue"
       - $ref: "#/components/schemas/ParameterSensitiveData"
       - $ref: "#/components/schemas/ParameterStringValue"
-      - $ref: "#/components/schemas/ParameterBooleanValue"
     ParameterApiKey:
       additionalProperties: false
       externalDocs:
@@ -4253,6 +4088,9 @@ components:
       type: object
     ParameterBooleanValue:
       additionalProperties: false
+      example:
+        booleanValue: true
+        key: key
       externalDocs:
         url: ""
       properties:
@@ -4290,12 +4128,6 @@ components:
       type: object
     ParameterStringList:
       additionalProperties: false
-      example:
-        stringList:
-          values:
-          - values
-          - values
-        key: key
       externalDocs:
         url: ""
       properties:
@@ -4367,6 +4199,8 @@ components:
           items:
             $ref: "#/components/schemas/Parameter"
           type: array
+        revisionLifecycle:
+          $ref: "#/components/schemas/RevisionLifecycle"
       title: Registered instance
       type: object
     RegisteredInstanceCloudformation:
@@ -4391,6 +4225,8 @@ components:
           items:
             $ref: "#/components/schemas/Parameter"
           type: array
+        revisionLifecycle:
+          $ref: "#/components/schemas/RevisionLifecycle"
       title: Registered instance
       type: object
     RegisteredInstanceEmpty:
@@ -4398,6 +4234,7 @@ components:
       example:
         lastUpdated: 2000-01-23T04:56:07.000+00:00
         definitionVersion: definitionVersion
+        revisionLifecycle: REVISION_LIFECYCLE_UNSPECIFIED
         integrationStatus:
           connectionStatus: PENDING
           messages:
@@ -4407,15 +4244,9 @@ components:
             key: details
         id: id
         parameters:
-        - stringList:
-            values:
-            - values
-            - values
+        - booleanValue: true
           key: key
-        - stringList:
-            values:
-            - values
-            - values
+        - booleanValue: true
           key: key
         isTesting: true
         empty: "{}"
@@ -4444,8 +4275,19 @@ components:
           items:
             $ref: "#/components/schemas/Parameter"
           type: array
+        revisionLifecycle:
+          $ref: "#/components/schemas/RevisionLifecycle"
       title: Registered instance
       type: object
+    RevisionLifecycle:
+      enum:
+      - REVISION_LIFECYCLE_UNSPECIFIED
+      - REVISION_LIFECYCLE_ALPHA
+      - REVISION_LIFECYCLE_PRIVATE_BETA
+      - REVISION_LIFECYCLE_PUBLIC_BETA
+      - REVISION_LIFECYCLE_GA
+      - REVISION_LIFECYCLE_DEPRECATED
+      type: string
     RevisionRef:
       example:
         descriptionMd: descriptionMd
@@ -4535,6 +4377,11 @@ components:
       title: Save integration response
       type: object
     SelectionValue:
+      example:
+        defaultValue: defaultValue
+        options:
+        - options
+        - options
       externalDocs:
         url: ""
       properties:
@@ -4582,10 +4429,6 @@ components:
       title: Source map metadata
       type: object
     StringList:
-      example:
-        values:
-        - values
-        - values
       externalDocs:
         url: ""
       properties:
@@ -4637,8 +4480,7 @@ components:
     TestIntegrationResponse:
       example:
         result:
-          failure:
-            errorMessage: errorMessage
+          success: "{}"
       externalDocs:
         url: ""
       properties:
@@ -4648,18 +4490,8 @@ components:
       type: object
     TestIntegrationResult:
       oneOf:
-      - $ref: "#/components/schemas/TestIntegrationResultFailure"
       - $ref: "#/components/schemas/TestIntegrationResultSuccess"
-    TestIntegrationResult.Failure:
-      example:
-        errorMessage: errorMessage
-      externalDocs:
-        url: ""
-      properties:
-        errorMessage:
-          type: string
-      title: Failure
-      type: object
+      - $ref: "#/components/schemas/TestIntegrationResultFailure"
     TestIntegrationResult.Success:
       externalDocs:
         url: ""
@@ -4667,18 +4499,17 @@ components:
       type: object
     TestIntegrationResultFailure:
       additionalProperties: false
-      example:
-        failure:
-          errorMessage: errorMessage
       externalDocs:
         url: ""
       properties:
         failure:
-          $ref: "#/components/schemas/TestIntegrationResult.Failure"
+          $ref: "#/components/schemas/v1.Failure"
       title: Test integration result
       type: object
     TestIntegrationResultSuccess:
       additionalProperties: false
+      example:
+        success: "{}"
       externalDocs:
         url: ""
       properties:
@@ -4728,6 +4559,8 @@ components:
     V1IntegrationTypeContextualData:
       additionalProperties: false
       description: This data structure represents an integration type.
+      example:
+        contextualData: "{}"
       externalDocs:
         url: ""
       properties:
@@ -4742,8 +4575,6 @@ components:
     V1IntegrationTypeGenericWebhook:
       additionalProperties: false
       description: This data structure represents an integration type.
-      example:
-        genericWebhook: "{}"
       externalDocs:
         url: ""
       properties:
@@ -5228,20 +5059,45 @@ components:
           type: array
       title: Extension metadata
       type: object
+    v1.Failure:
+      externalDocs:
+        url: ""
+      properties:
+        errorMessage:
+          type: string
+      title: Failure
+      type: object
     v1.IntegrationType:
       oneOf:
+      - $ref: "#/components/schemas/V1IntegrationTypeContextualData"
       - $ref: "#/components/schemas/V1IntegrationTypeGenericWebhook"
       - $ref: "#/components/schemas/V1IntegrationTypeManaged"
       - $ref: "#/components/schemas/V1IntegrationTypeUntracked"
       - $ref: "#/components/schemas/V1IntegrationTypeCloudformation"
       - $ref: "#/components/schemas/V1IntegrationTypeArm"
       - $ref: "#/components/schemas/V1IntegrationTypePushBasedContextualData"
-      - $ref: "#/components/schemas/V1IntegrationTypeContextualData"
+    v1.RevisionSummary:
+      example:
+        lifecycle: REVISION_LIFECYCLE_UNSPECIFIED
+        version: version
+      properties:
+        lifecycle:
+          $ref: "#/components/schemas/RevisionLifecycle"
+        version:
+          type: string
+      type: object
     v3.FilterOperator:
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
+    Sync_RUM_data_request:
+      additionalProperties: false
+      properties:
+        force:
+          type: boolean
+      title: Sync RUM data request
+      type: object
     Update_integration_request:
       additionalProperties: false
       description: This data structure represents a list of outgoing webhook types.
@@ -5267,13 +5123,6 @@ components:
         integrationId:
           type: string
       title: Test integration request
-      type: object
-    Sync_RUM_data_request:
-      additionalProperties: false
-      properties:
-        force:
-          type: boolean
-      title: Sync RUM data request
       type: object
     Common_ARM_integration_parameters:
       externalDocs:

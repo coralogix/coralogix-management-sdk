@@ -69,7 +69,7 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAcknowledgeIncidentByEventI
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/incidents/incidents/v1/events/{event_id}/acknowledge"
+	localVarPath := localBasePath + "/incidents/events/v1/{event_id}/acknowledge"
 	localVarPath = strings.Replace(localVarPath, "{"+"event_id"+"}", url.PathEscape(parameterValueToString(r.eventId, "eventId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -133,11 +133,11 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAcknowledgeIncidentByEventI
 type ApiIncidentsServiceAcknowledgeIncidentsRequest struct {
 	ctx context.Context
 	ApiService *IncidentsServiceAPIService
-	incidentIds *[]string
+	acknowledgeIncidentsRequest *AcknowledgeIncidentsRequest
 }
 
-func (r ApiIncidentsServiceAcknowledgeIncidentsRequest) IncidentIds(incidentIds []string) ApiIncidentsServiceAcknowledgeIncidentsRequest {
-	r.incidentIds = &incidentIds
+func (r ApiIncidentsServiceAcknowledgeIncidentsRequest) AcknowledgeIncidentsRequest(acknowledgeIncidentsRequest AcknowledgeIncidentsRequest) ApiIncidentsServiceAcknowledgeIncidentsRequest {
+	r.acknowledgeIncidentsRequest = &acknowledgeIncidentsRequest
 	return r
 }
 
@@ -178,25 +178,14 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAcknowledgeIncidentsExecute
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/incidents/incidents/v1/acknowledge"
+	localVarPath := localBasePath + "/incidents/incidents/v1/all/acknowledge"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.incidentIds != nil {
-		t := *r.incidentIds
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "incident_ids", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "incident_ids", t, "form", "multi")
-		}
-	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -212,6 +201,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAcknowledgeIncidentsExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.acknowledgeIncidentsRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -252,17 +243,11 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAcknowledgeIncidentsExecute
 type ApiIncidentsServiceAssignIncidentsRequest struct {
 	ctx context.Context
 	ApiService *IncidentsServiceAPIService
-	incidentIds *[]string
-	assignedTo *UserDetails
+	assignIncidentsRequest *AssignIncidentsRequest
 }
 
-func (r ApiIncidentsServiceAssignIncidentsRequest) IncidentIds(incidentIds []string) ApiIncidentsServiceAssignIncidentsRequest {
-	r.incidentIds = &incidentIds
-	return r
-}
-
-func (r ApiIncidentsServiceAssignIncidentsRequest) AssignedTo(assignedTo UserDetails) ApiIncidentsServiceAssignIncidentsRequest {
-	r.assignedTo = &assignedTo
+func (r ApiIncidentsServiceAssignIncidentsRequest) AssignIncidentsRequest(assignIncidentsRequest AssignIncidentsRequest) ApiIncidentsServiceAssignIncidentsRequest {
+	r.assignIncidentsRequest = &assignIncidentsRequest
 	return r
 }
 
@@ -303,28 +288,14 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAssignIncidentsExecute(r Ap
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/incidents/incidents/v1/by-user"
+	localVarPath := localBasePath + "/incidents/incidents/v1/all/by-user"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.incidentIds != nil {
-		t := *r.incidentIds
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "incident_ids", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "incident_ids", t, "form", "multi")
-		}
-	}
-	if r.assignedTo != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "assigned_to", r.assignedTo, "form", "")
-	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -340,6 +311,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAssignIncidentsExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.assignIncidentsRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -425,7 +398,7 @@ func (a *IncidentsServiceAPIService) IncidentsServiceBatchGetIncidentExecute(r A
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/incidents/incidents/v1/batch"
+	localVarPath := localBasePath + "/incidents/incidents/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -499,11 +472,11 @@ func (a *IncidentsServiceAPIService) IncidentsServiceBatchGetIncidentExecute(r A
 type ApiIncidentsServiceCloseIncidentsRequest struct {
 	ctx context.Context
 	ApiService *IncidentsServiceAPIService
-	incidentIds *[]string
+	closeIncidentsRequest *CloseIncidentsRequest
 }
 
-func (r ApiIncidentsServiceCloseIncidentsRequest) IncidentIds(incidentIds []string) ApiIncidentsServiceCloseIncidentsRequest {
-	r.incidentIds = &incidentIds
+func (r ApiIncidentsServiceCloseIncidentsRequest) CloseIncidentsRequest(closeIncidentsRequest CloseIncidentsRequest) ApiIncidentsServiceCloseIncidentsRequest {
+	r.closeIncidentsRequest = &closeIncidentsRequest
 	return r
 }
 
@@ -541,25 +514,14 @@ func (a *IncidentsServiceAPIService) IncidentsServiceCloseIncidentsExecute(r Api
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/incidents/incidents/v1/close"
+	localVarPath := localBasePath + "/incidents/incidents/v1/all/closed"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.incidentIds != nil {
-		t := *r.incidentIds
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "incident_ids", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "incident_ids", t, "form", "multi")
-		}
-	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -575,6 +537,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceCloseIncidentsExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.closeIncidentsRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -615,11 +579,11 @@ func (a *IncidentsServiceAPIService) IncidentsServiceCloseIncidentsExecute(r Api
 type ApiIncidentsServiceGetFilterValuesRequest struct {
 	ctx context.Context
 	ApiService *IncidentsServiceAPIService
-	filter *IncidentQueryFilter
+	getFilterValuesRequest *GetFilterValuesRequest
 }
 
-func (r ApiIncidentsServiceGetFilterValuesRequest) Filter(filter IncidentQueryFilter) ApiIncidentsServiceGetFilterValuesRequest {
-	r.filter = &filter
+func (r ApiIncidentsServiceGetFilterValuesRequest) GetFilterValuesRequest(getFilterValuesRequest GetFilterValuesRequest) ApiIncidentsServiceGetFilterValuesRequest {
+	r.getFilterValuesRequest = &getFilterValuesRequest
 	return r
 }
 
@@ -657,17 +621,14 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetFilterValuesExecute(r Ap
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/incidents/incidents/v1/filter-values"
+	localVarPath := localBasePath + "/incidents/filter-values/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "form", "")
-	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -683,6 +644,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetFilterValuesExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.getFilterValuesRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -871,7 +834,7 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentByEventIdExecute
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/incidents/incidents/v1/events/{event_id}"
+	localVarPath := localBasePath + "/incidents/events/v1/{event_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"event_id"+"}", url.PathEscape(parameterValueToString(r.eventId, "eventId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1098,7 +1061,7 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentAggregationsExe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/incidents/incidents/v1/aggregations"
+	localVarPath := localBasePath + "/incidents/aggregations/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1235,7 +1198,7 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEventsExecute(r
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/incidents/incidents/v1/events"
+	localVarPath := localBasePath + "/incidents/events/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1349,7 +1312,7 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEventsFilterVal
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/incidents/incidents/v1/events/filter-values"
+	localVarPath := localBasePath + "/incidents/filter-values/v1/events"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1460,7 +1423,7 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEventsTotalCoun
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/incidents/incidents/v1/events/count"
+	localVarPath := localBasePath + "/incidents/events/v1/all/count"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1705,7 +1668,7 @@ func (a *IncidentsServiceAPIService) IncidentsServiceResolveIncidentByEventIdExe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/incidents/incidents/v1/events/{event_id}/resolve"
+	localVarPath := localBasePath + "/incidents/events/v1/{event_id}/resolve"
 	localVarPath = strings.Replace(localVarPath, "{"+"event_id"+"}", url.PathEscape(parameterValueToString(r.eventId, "eventId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1769,11 +1732,11 @@ func (a *IncidentsServiceAPIService) IncidentsServiceResolveIncidentByEventIdExe
 type ApiIncidentsServiceResolveIncidentsRequest struct {
 	ctx context.Context
 	ApiService *IncidentsServiceAPIService
-	incidentIds *[]string
+	resolveIncidentsRequest *ResolveIncidentsRequest
 }
 
-func (r ApiIncidentsServiceResolveIncidentsRequest) IncidentIds(incidentIds []string) ApiIncidentsServiceResolveIncidentsRequest {
-	r.incidentIds = &incidentIds
+func (r ApiIncidentsServiceResolveIncidentsRequest) ResolveIncidentsRequest(resolveIncidentsRequest ResolveIncidentsRequest) ApiIncidentsServiceResolveIncidentsRequest {
+	r.resolveIncidentsRequest = &resolveIncidentsRequest
 	return r
 }
 
@@ -1814,25 +1777,14 @@ func (a *IncidentsServiceAPIService) IncidentsServiceResolveIncidentsExecute(r A
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/incidents/incidents/v1/resolve"
+	localVarPath := localBasePath + "/incidents/incidents/v1/all/resolve"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.incidentIds != nil {
-		t := *r.incidentIds
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "incident_ids", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "incident_ids", t, "form", "multi")
-		}
-	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1848,6 +1800,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceResolveIncidentsExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.resolveIncidentsRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1933,7 +1887,7 @@ func (a *IncidentsServiceAPIService) IncidentsServiceUnassignIncidentsExecute(r 
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/incidents/incidents/v1/by-user"
+	localVarPath := localBasePath + "/incidents/incidents/v1/all/by-user"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

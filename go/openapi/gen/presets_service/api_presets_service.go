@@ -69,7 +69,7 @@ func (a *PresetsServiceAPIService) PresetsServiceBatchGetPresetsExecute(r ApiPre
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/presets:batchGet"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/presets"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -401,7 +401,7 @@ func (a *PresetsServiceAPIService) PresetsServiceGetDefaultPresetSummaryExecute(
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/presets:defaultSummaryGet"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/presets/summaries"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -621,7 +621,7 @@ func (a *PresetsServiceAPIService) PresetsServiceGetSystemDefaultPresetSummaryEx
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/presets:systemDefaultSummaryGet"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/presets/summaries/system"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -953,7 +953,7 @@ func (a *PresetsServiceAPIService) PresetsServiceSetCustomPresetAsDefaultExecute
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/presets/custom/{id}:defaultSet"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/presets/custom/{id}/default"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1056,7 +1056,7 @@ func (a *PresetsServiceAPIService) PresetsServiceSetPresetAsDefaultExecute(r Api
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/presets/{id}:defaultSet"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/presets/{id}/default"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)

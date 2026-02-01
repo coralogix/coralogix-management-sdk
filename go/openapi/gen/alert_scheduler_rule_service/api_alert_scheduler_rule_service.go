@@ -68,7 +68,7 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceCreateAle
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/alert-scheduler-rules"
+	localVarPath := localBasePath + "/alerts/suppression-rules/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -175,7 +175,7 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceCreateBul
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/alert-scheduler-rules/bulk"
+	localVarPath := localBasePath + "/alerts/suppression-rules/v1/all/rules"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -279,7 +279,7 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceDeleteAle
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/alert-scheduler-rules/{alert_scheduler_rule_id}"
+	localVarPath := localBasePath + "/alerts/suppression-rules/v1/{alert_scheduler_rule_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"alert_scheduler_rule_id"+"}", url.PathEscape(parameterValueToString(r.alertSchedulerRuleId, "alertSchedulerRuleId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -382,7 +382,7 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceGetAlertS
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/alert-scheduler-rules/{alert_scheduler_rule_id}"
+	localVarPath := localBasePath + "/alerts/suppression-rules/v1/{alert_scheduler_rule_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"alert_scheduler_rule_id"+"}", url.PathEscape(parameterValueToString(r.alertSchedulerRuleId, "alertSchedulerRuleId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -506,7 +506,7 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceGetBulkAl
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/alert-scheduler-rules/bulk"
+	localVarPath := localBasePath + "/alerts/suppression-rules/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -623,7 +623,7 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceUpdateAle
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/alert-scheduler-rules"
+	localVarPath := localBasePath + "/alerts/suppression-rules/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -730,7 +730,7 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceUpdateBul
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/alert-scheduler-rules/bulk"
+	localVarPath := localBasePath + "/alerts/suppression-rules/v1/all/rules"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

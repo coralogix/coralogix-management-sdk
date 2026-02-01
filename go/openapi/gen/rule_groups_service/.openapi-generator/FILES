@@ -37,6 +37,8 @@ model_json_extract_parameters.go
 model_json_parse_parameters.go
 model_json_stringify_parameters.go
 model_list_rule_groups_response.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_parse_parameters.go
 model_remove_fields_parameters.go
@@ -61,10 +63,10 @@ model_rule_parameters_remove_fields_parameters.go
 model_rule_parameters_replace_parameters.go
 model_rule_subgroup.go
 model_rules_v1_rule.go
-model_rules_v1_team_id.go
 model_severity_constraint.go
 model_subsystem_name_constraint.go
 model_update_rule_group_response.go
+model_v1_team_id.go
 model_v3_filter_operator.go
 model_value.go
 response.go

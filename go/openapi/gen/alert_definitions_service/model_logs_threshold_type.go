@@ -22,6 +22,7 @@ type LogsThresholdType struct {
 	// The delay in milliseconds before evaluating the alert condition
 	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
 	LogsFilter *V3LogsFilter `json:"logsFilter,omitempty"`
+	NoDataPolicy *NoDataPolicy `json:"noDataPolicy,omitempty"`
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
 	Rules []LogsThresholdRule `json:"rules,omitempty"`
 	UndetectedValuesManagement *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
@@ -106,6 +107,38 @@ func (o *LogsThresholdType) HasLogsFilter() bool {
 // SetLogsFilter gets a reference to the given V3LogsFilter and assigns it to the LogsFilter field.
 func (o *LogsThresholdType) SetLogsFilter(v V3LogsFilter) {
 	o.LogsFilter = &v
+}
+
+// GetNoDataPolicy returns the NoDataPolicy field value if set, zero value otherwise.
+func (o *LogsThresholdType) GetNoDataPolicy() NoDataPolicy {
+	if o == nil || IsNil(o.NoDataPolicy) {
+		var ret NoDataPolicy
+		return ret
+	}
+	return *o.NoDataPolicy
+}
+
+// GetNoDataPolicyOk returns a tuple with the NoDataPolicy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LogsThresholdType) GetNoDataPolicyOk() (*NoDataPolicy, bool) {
+	if o == nil || IsNil(o.NoDataPolicy) {
+		return nil, false
+	}
+	return o.NoDataPolicy, true
+}
+
+// HasNoDataPolicy returns a boolean if a field has been set.
+func (o *LogsThresholdType) HasNoDataPolicy() bool {
+	if o != nil && !IsNil(o.NoDataPolicy) {
+		return true
+	}
+
+	return false
+}
+
+// SetNoDataPolicy gets a reference to the given NoDataPolicy and assigns it to the NoDataPolicy field.
+func (o *LogsThresholdType) SetNoDataPolicy(v NoDataPolicy) {
+	o.NoDataPolicy = &v
 }
 
 // GetNotificationPayloadFilter returns the NotificationPayloadFilter field value if set, zero value otherwise.
@@ -219,6 +252,9 @@ func (o LogsThresholdType) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.LogsFilter) {
 		toSerialize["logsFilter"] = o.LogsFilter
+	}
+	if !IsNil(o.NoDataPolicy) {
+		toSerialize["noDataPolicy"] = o.NoDataPolicy
 	}
 	if !IsNil(o.NotificationPayloadFilter) {
 		toSerialize["notificationPayloadFilter"] = o.NotificationPayloadFilter

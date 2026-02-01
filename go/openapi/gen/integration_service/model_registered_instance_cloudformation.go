@@ -27,6 +27,7 @@ type RegisteredInstanceCloudformation struct {
 	IsTesting *bool `json:"isTesting,omitempty"`
 	LastUpdated *time.Time `json:"lastUpdated,omitempty"`
 	Parameters []Parameter `json:"parameters,omitempty"`
+	RevisionLifecycle *RevisionLifecycle `json:"revisionLifecycle,omitempty"`
 }
 
 // NewRegisteredInstanceCloudformation instantiates a new RegisteredInstanceCloudformation object
@@ -270,6 +271,38 @@ func (o *RegisteredInstanceCloudformation) SetParameters(v []Parameter) {
 	o.Parameters = v
 }
 
+// GetRevisionLifecycle returns the RevisionLifecycle field value if set, zero value otherwise.
+func (o *RegisteredInstanceCloudformation) GetRevisionLifecycle() RevisionLifecycle {
+	if o == nil || IsNil(o.RevisionLifecycle) {
+		var ret RevisionLifecycle
+		return ret
+	}
+	return *o.RevisionLifecycle
+}
+
+// GetRevisionLifecycleOk returns a tuple with the RevisionLifecycle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RegisteredInstanceCloudformation) GetRevisionLifecycleOk() (*RevisionLifecycle, bool) {
+	if o == nil || IsNil(o.RevisionLifecycle) {
+		return nil, false
+	}
+	return o.RevisionLifecycle, true
+}
+
+// HasRevisionLifecycle returns a boolean if a field has been set.
+func (o *RegisteredInstanceCloudformation) HasRevisionLifecycle() bool {
+	if o != nil && !IsNil(o.RevisionLifecycle) {
+		return true
+	}
+
+	return false
+}
+
+// SetRevisionLifecycle gets a reference to the given RevisionLifecycle and assigns it to the RevisionLifecycle field.
+func (o *RegisteredInstanceCloudformation) SetRevisionLifecycle(v RevisionLifecycle) {
+	o.RevisionLifecycle = &v
+}
+
 func (o RegisteredInstanceCloudformation) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -300,6 +333,9 @@ func (o RegisteredInstanceCloudformation) ToMap() (map[string]interface{}, error
 	}
 	if !IsNil(o.Parameters) {
 		toSerialize["parameters"] = o.Parameters
+	}
+	if !IsNil(o.RevisionLifecycle) {
+		toSerialize["revisionLifecycle"] = o.RevisionLifecycle
 	}
 	return toSerialize, nil
 }

@@ -68,7 +68,7 @@ func (a *ActionsServiceAPIService) ActionsServiceAtomicBatchExecuteActionsExecut
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/actions/actions:atomicBatchExecute"
+	localVarPath := localBasePath + "/actions/batch/v2"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -175,7 +175,7 @@ func (a *ActionsServiceAPIService) ActionsServiceCreateActionExecute(r ApiAction
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/actions"
+	localVarPath := localBasePath + "/actions/actions/v2"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -279,7 +279,7 @@ func (a *ActionsServiceAPIService) ActionsServiceDeleteActionExecute(r ApiAction
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/actions/{id}"
+	localVarPath := localBasePath + "/actions/actions/v2/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -382,7 +382,7 @@ func (a *ActionsServiceAPIService) ActionsServiceGetActionExecute(r ApiActionsSe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/actions/{id}"
+	localVarPath := localBasePath + "/actions/actions/v2/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -482,7 +482,7 @@ func (a *ActionsServiceAPIService) ActionsServiceListActionsExecute(r ApiActions
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/actions"
+	localVarPath := localBasePath + "/actions/actions/v2"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -587,7 +587,7 @@ func (a *ActionsServiceAPIService) ActionsServiceOrderActionsExecute(r ApiAction
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/actions/actions:order"
+	localVarPath := localBasePath + "/actions/order/v2"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -694,7 +694,7 @@ func (a *ActionsServiceAPIService) ActionsServiceReplaceActionExecute(r ApiActio
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/actions"
+	localVarPath := localBasePath + "/actions/actions/v2"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

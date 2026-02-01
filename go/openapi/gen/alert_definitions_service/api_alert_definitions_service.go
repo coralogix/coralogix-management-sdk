@@ -68,7 +68,7 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceBulkReplaceAlertDefs
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/alerts/alerts-general/v3/bulk"
+	localVarPath := localBasePath + "/alerts/alerts/v3/all/replace"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -175,7 +175,7 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceCreateAlertDefExecut
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/alerts/alerts-general/v3"
+	localVarPath := localBasePath + "/alerts/alerts/v3"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -279,7 +279,7 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceDeleteAlertDefExecut
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/alerts/alerts-general/v3/{id}"
+	localVarPath := localBasePath + "/alerts/alerts/v3/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -382,7 +382,7 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceDownloadAlertsExecut
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/alerts/alerts-general/v3/download"
+	localVarPath := localBasePath + "/alerts/alerts/v3/all/download"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -490,7 +490,7 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceFilterOptionCountsEx
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/alerts/alerts-general/v3/filter-option-counts"
+	localVarPath := localBasePath + "/alerts/alerts/v3/all/counts"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -595,7 +595,7 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDefExecute(r
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/alerts/alerts-general/v3/{id}"
+	localVarPath := localBasePath + "/alerts/alerts/v3/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -698,7 +698,7 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDefByVersion
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/alerts/alerts-general/v3/alert-version-id/{alert_version_id}"
+	localVarPath := localBasePath + "/alerts/alerts/v3/version-ids/{alert_version_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"alert_version_id"+"}", url.PathEscape(parameterValueToString(r.alertVersionId, "alertVersionId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -816,7 +816,7 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceListAlertDefsExecute
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/alerts/alerts-general/v3"
+	localVarPath := localBasePath + "/alerts/alerts/v3"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -930,7 +930,7 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceReplaceAlertDefExecu
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/alerts/alerts-general/v3"
+	localVarPath := localBasePath + "/alerts/alerts/v3"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -955,118 +955,6 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceReplaceAlertDefExecu
 	}
 	// body params
 	localVarPostBody = r.replaceAlertDefinitionRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiAlertDefsServiceSetActiveRequest struct {
-	ctx context.Context
-	ApiService *AlertDefinitionsServiceAPIService
-	id string
-	active *bool
-}
-
-func (r ApiAlertDefsServiceSetActiveRequest) Active(active bool) ApiAlertDefsServiceSetActiveRequest {
-	r.active = &active
-	return r
-}
-
-func (r ApiAlertDefsServiceSetActiveRequest) Execute() (map[string]interface{}, *http.Response, error) {
-	return r.ApiService.AlertDefsServiceSetActiveExecute(r)
-}
-
-/*
-AlertDefsServiceSetActive Disable or enable an alert
-
-No description available
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiAlertDefsServiceSetActiveRequest
-*/
-func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceSetActive(ctx context.Context, id string) ApiAlertDefsServiceSetActiveRequest {
-	return ApiAlertDefsServiceSetActiveRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return map[string]interface{}
-func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceSetActiveExecute(r ApiAlertDefsServiceSetActiveRequest) (map[string]interface{}, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertDefinitionsServiceAPIService.AlertDefsServiceSetActive")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/alerts/alerts-general/v3/{id}:setActive"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.active != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "active", r.active, "form", "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

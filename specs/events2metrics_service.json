@@ -46,10 +46,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/E2MSpansQuery"
+                    "$ref": "#/components/schemas/E2MLogsQuery"
                   },
                   {
-                    "$ref": "#/components/schemas/E2MLogsQuery"
+                    "$ref": "#/components/schemas/E2MSpansQuery"
                   }
                 ]
               }
@@ -86,10 +86,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/E2MCreateParamsSpansQuery"
+                    "$ref": "#/components/schemas/E2MCreateParamsLogsQuery"
                   },
                   {
-                    "$ref": "#/components/schemas/E2MCreateParamsLogsQuery"
+                    "$ref": "#/components/schemas/E2MCreateParamsSpansQuery"
                   }
                 ]
               }
@@ -110,7 +110,7 @@
         }
       }
     },
-    "/events2metrics/events2metrics/v2/batch": {
+    "/events2metrics/events2metrics/v2/all/execute": {
       "post": {
         "tags": [
           "Events2Metrics Service"
@@ -153,7 +153,79 @@
         }
       }
     },
-    "/events2metrics/events2metrics/v2/labels:cardinality": {
+    "/events2metrics/events2metrics/v2/{id}": {
+      "get": {
+        "tags": [
+          "Events2Metrics Service"
+        ],
+        "summary": "Get an E2M",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "Events2MetricService_GetE2M",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetE2MResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Events2Metrics Service"
+        ],
+        "summary": "Delete an E2M",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "Events2MetricService_DeleteE2M",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteE2MResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events2metrics/labels/v2/cardinalities": {
       "get": {
         "tags": [
           "Events2Metrics Service"
@@ -304,7 +376,7 @@
         }
       }
     },
-    "/events2metrics/events2metrics/v2/limits": {
+    "/events2metrics/limits/v2": {
       "get": {
         "tags": [
           "Events2Metrics Service"
@@ -322,78 +394,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetLimitsResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/events2metrics/events2metrics/v2/{id}": {
-      "get": {
-        "tags": [
-          "Events2Metrics Service"
-        ],
-        "summary": "Get an E2M",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "Events2MetricService_GetE2M",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetE2MResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Events2Metrics Service"
-        ],
-        "summary": "Delete an E2M",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "Events2MetricService_DeleteE2M",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteE2MResponse"
                 }
               }
             }
@@ -1099,6 +1099,34 @@
           "sourceField"
         ]
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -1180,6 +1208,31 @@
         },
         "additionalProperties": false
       },
+      "V2AggregationNone": {
+        "externalDocs": {
+          "description": "Find out more about events2metrics",
+          "url": "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
+        },
+        "title": "Aggregation",
+        "description": "This data structure represents an aggregation",
+        "type": "object",
+        "properties": {
+          "aggType": {
+            "$ref": "#/components/schemas/AggType"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "none": {
+            "type": "object"
+          },
+          "targetMetricName": {
+            "example": "alias_field_name_agg_func",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
       "V2AggregationSamples": {
         "externalDocs": {
           "description": "Find out more about events2metrics",
@@ -1244,6 +1297,9 @@
       },
       "v2.Aggregation": {
         "oneOf": [
+          {
+            "$ref": "#/components/schemas/V2AggregationNone"
+          },
           {
             "$ref": "#/components/schemas/V2AggregationSamples"
           },

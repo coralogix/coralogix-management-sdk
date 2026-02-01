@@ -5,113 +5,7 @@ info:
 servers:
 - url: /
 paths:
-  /incidents/incidents/v1:
-    post:
-      description: |-
-        Lists all available incidents based on specified filters and order. The list is ordered in an unspecified direction and sorted by creation time.
-
-        Requires the following permissions:
-        - `incidents:read`
-      externalDocs:
-        url: ""
-      operationId: IncidentsService_ListIncidents
-      parameters:
-      - explode: true
-        in: query
-        name: filter
-        required: false
-        schema:
-          $ref: "#/components/schemas/Incident_query_filter"
-        style: form
-      - explode: true
-        in: query
-        name: pagination
-        required: false
-        schema:
-          $ref: "#/components/schemas/Pagination_request"
-        style: form
-      - explode: true
-        in: query
-        name: order_bys
-        required: false
-        schema:
-          items:
-            $ref: "#/components/schemas/IncidentsService_ListIncidents_order_bys_parameter_inner"
-          type: array
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListIncidentsResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: List incidents with filters
-      tags:
-      - Incidents service
-      x-coralogixPermissions:
-      - incidents:read
-  /incidents/incidents/v1/acknowledge:
-    post:
-      description: |-
-        Mark one or more incidents as acknowledged.
-
-        Requires the following permissions:
-        - `incidents:acknowledge`
-      externalDocs:
-        url: ""
-      operationId: IncidentsService_AcknowledgeIncidents
-      parameters:
-      - explode: true
-        in: query
-        name: incident_ids
-        required: false
-        schema:
-          example:
-          - incident_id_1
-          - incident_id_2
-          items:
-            description: List of incident IDs to acknowledge
-            type: string
-          type: array
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AcknowledgeIncidentsResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Acknowledge incidents
-      tags:
-      - Incidents service
-      x-coralogixPermissions:
-      - incidents:acknowledge
-  /incidents/incidents/v1/aggregations:
+  /incidents/aggregations/v1:
     get:
       description: |-
         Retrieve aggregated incident data with support for grouping and filtering.
@@ -169,7 +63,310 @@ paths:
       - Incidents service
       x-coralogixPermissions:
       - incidents:read
-  /incidents/incidents/v1/batch:
+  /incidents/events/v1:
+    get:
+      description: |-
+        List incident events with support for filtering, pagination, and ordering.
+
+        Requires the following permissions:
+        - `incidents:read`
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_ListIncidentEvents
+      parameters:
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          $ref: "#/components/schemas/Incident_event_query_filter"
+        style: form
+      - explode: true
+        in: query
+        name: pagination
+        required: false
+        schema:
+          $ref: "#/components/schemas/Pagination_request"
+        style: form
+      - explode: true
+        in: query
+        name: order_by
+        required: false
+        schema:
+          $ref: "#/components/schemas/List_incident_events_order_by_request"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListIncidentEventsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List incident events with filters
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:read
+  /incidents/events/v1/all/count:
+    get:
+      description: |-
+        Retrieve the total count of incident events matching a filter.
+
+        Requires the following permissions:
+        - `incidents:read`
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_ListIncidentEventsTotalCount
+      parameters:
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          $ref: "#/components/schemas/Incident_event_query_filter"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListIncidentEventsTotalCountResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get total count of incident events
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:read
+  /incidents/events/v1/{event_id}:
+    get:
+      description: |-
+        Retrieve detailed information about a single incident by related alert event id.
+
+        Requires the following permissions:
+        - `incidents:read`
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_GetIncidentByEventId
+      parameters:
+      - explode: false
+        in: path
+        name: event_id
+        required: true
+        schema:
+          description: Event ID associated to the Incident to acknowledge
+          example: event_id_1
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetIncidentByEventIdResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get incident by event ID
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:read
+  /incidents/events/v1/{event_id}/acknowledge:
+    post:
+      description: |-
+        Mark incident as acknowledged by event id.
+
+        Requires the following permissions:
+        - `incidents:acknowledge`
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_AcknowledgeIncidentByEventId
+      parameters:
+      - explode: false
+        in: path
+        name: event_id
+        required: true
+        schema:
+          description: Event ID associated to the Incident to acknowledge
+          example: event_id_1
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AcknowledgeIncidentByEventIdResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Acknowledge incident by event id
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:acknowledge
+  /incidents/events/v1/{event_id}/resolve:
+    post:
+      description: |-
+        Mark incident as resolved by event id.
+
+        Requires the following permissions:
+        - `incidents:close`
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_ResolveIncidentByEventId
+      parameters:
+      - explode: false
+        in: path
+        name: event_id
+        required: true
+        schema:
+          description: Event ID associated to the Incident to resolve
+          example: event_id_1
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResolveIncidentByEventIdResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Resolve incident by event id
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:close
+  /incidents/filter-values/v1:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_GetFilterValues
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Get_filter_values_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/incidents.v1.GetFilterValuesResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get available filter values
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:read
+  /incidents/filter-values/v1/events:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_ListIncidentEventsFilterValues
+      parameters:
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          $ref: "#/components/schemas/Incident_event_query_filter"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListIncidentEventsFilterValuesResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get available incident event filter values
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:read
+  /incidents/incidents/v1:
     get:
       description: |-
         Retrieve multiple incidents by their IDs in a single request.
@@ -213,7 +410,103 @@ paths:
       - Incidents service
       x-coralogixPermissions:
       - incidents:read
-  /incidents/incidents/v1/by-user:
+    post:
+      description: |-
+        Lists all available incidents based on specified filters and order. The list is ordered in an unspecified direction and sorted by creation time.
+
+        Requires the following permissions:
+        - `incidents:read`
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_ListIncidents
+      parameters:
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          $ref: "#/components/schemas/Incident_query_filter"
+        style: form
+      - explode: true
+        in: query
+        name: pagination
+        required: false
+        schema:
+          $ref: "#/components/schemas/Pagination_request"
+        style: form
+      - explode: true
+        in: query
+        name: order_bys
+        required: false
+        schema:
+          items:
+            $ref: "#/components/schemas/IncidentsService_ListIncidents_order_bys_parameter_inner"
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListIncidentsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List incidents with filters
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:read
+  /incidents/incidents/v1/all/acknowledge:
+    post:
+      description: |-
+        Mark one or more incidents as acknowledged.
+
+        Requires the following permissions:
+        - `incidents:acknowledge`
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_AcknowledgeIncidents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Acknowledge_incidents_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AcknowledgeIncidentsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Acknowledge incidents
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:acknowledge
+  /incidents/incidents/v1/all/by-user:
     delete:
       description: |-
         Remove user assignments from one or more incidents.
@@ -270,27 +563,11 @@ paths:
       externalDocs:
         url: ""
       operationId: IncidentsService_AssignIncidents
-      parameters:
-      - explode: true
-        in: query
-        name: incident_ids
-        required: false
-        schema:
-          example:
-          - incident_id_1
-          - incident_id_2
-          items:
-            description: List of incident IDs to assign
-            type: string
-          type: array
-        style: form
-      - explode: true
-        in: query
-        name: assigned_to
-        required: false
-        schema:
-          $ref: "#/components/schemas/User_details"
-        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Assign_incidents_request"
       responses:
         "200":
           content:
@@ -315,26 +592,17 @@ paths:
       - Incidents service
       x-coralogixPermissions:
       - incidents:assign
-  /incidents/incidents/v1/close:
+  /incidents/incidents/v1/all/closed:
     post:
       description: No description available
       externalDocs:
         url: ""
       operationId: IncidentsService_CloseIncidents
-      parameters:
-      - explode: true
-        in: query
-        name: incident_ids
-        required: false
-        schema:
-          example:
-          - incident_id_1
-          - incident_id_2
-          items:
-            description: List of incident IDs to close
-            type: string
-          type: array
-        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Close_incidents_request"
       responses:
         "200":
           content:
@@ -359,313 +627,7 @@ paths:
       - Incidents service
       x-coralogixPermissions:
       - incidents:close
-  /incidents/incidents/v1/events:
-    get:
-      description: |-
-        List incident events with support for filtering, pagination, and ordering.
-
-        Requires the following permissions:
-        - `incidents:read`
-      externalDocs:
-        url: ""
-      operationId: IncidentsService_ListIncidentEvents
-      parameters:
-      - explode: true
-        in: query
-        name: filter
-        required: false
-        schema:
-          $ref: "#/components/schemas/Incident_event_query_filter"
-        style: form
-      - explode: true
-        in: query
-        name: pagination
-        required: false
-        schema:
-          $ref: "#/components/schemas/Pagination_request"
-        style: form
-      - explode: true
-        in: query
-        name: order_by
-        required: false
-        schema:
-          $ref: "#/components/schemas/List_incident_events_order_by_request"
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListIncidentEventsResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: List incident events with filters
-      tags:
-      - Incidents service
-      x-coralogixPermissions:
-      - incidents:read
-  /incidents/incidents/v1/events/count:
-    get:
-      description: |-
-        Retrieve the total count of incident events matching a filter.
-
-        Requires the following permissions:
-        - `incidents:read`
-      externalDocs:
-        url: ""
-      operationId: IncidentsService_ListIncidentEventsTotalCount
-      parameters:
-      - explode: true
-        in: query
-        name: filter
-        required: false
-        schema:
-          $ref: "#/components/schemas/Incident_event_query_filter"
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListIncidentEventsTotalCountResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Get total count of incident events
-      tags:
-      - Incidents service
-      x-coralogixPermissions:
-      - incidents:read
-  /incidents/incidents/v1/events/filter-values:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: IncidentsService_ListIncidentEventsFilterValues
-      parameters:
-      - explode: true
-        in: query
-        name: filter
-        required: false
-        schema:
-          $ref: "#/components/schemas/Incident_event_query_filter"
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListIncidentEventsFilterValuesResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Get available incident event filter values
-      tags:
-      - Incidents service
-      x-coralogixPermissions:
-      - incidents:read
-  /incidents/incidents/v1/events/{event_id}:
-    get:
-      description: |-
-        Retrieve detailed information about a single incident by related alert event id.
-
-        Requires the following permissions:
-        - `incidents:read`
-      externalDocs:
-        url: ""
-      operationId: IncidentsService_GetIncidentByEventId
-      parameters:
-      - explode: false
-        in: path
-        name: event_id
-        required: true
-        schema:
-          description: Event ID associated to the Incident to acknowledge
-          example: event_id_1
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetIncidentByEventIdResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Get incident by event ID
-      tags:
-      - Incidents service
-      x-coralogixPermissions:
-      - incidents:read
-  /incidents/incidents/v1/events/{event_id}/acknowledge:
-    post:
-      description: |-
-        Mark incident as acknowledged by event id.
-
-        Requires the following permissions:
-        - `incidents:acknowledge`
-      externalDocs:
-        url: ""
-      operationId: IncidentsService_AcknowledgeIncidentByEventId
-      parameters:
-      - explode: false
-        in: path
-        name: event_id
-        required: true
-        schema:
-          description: Event ID associated to the Incident to acknowledge
-          example: event_id_1
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AcknowledgeIncidentByEventIdResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Acknowledge incident by event id
-      tags:
-      - Incidents service
-      x-coralogixPermissions:
-      - incidents:acknowledge
-  /incidents/incidents/v1/events/{event_id}/resolve:
-    post:
-      description: |-
-        Mark incident as resolved by event id.
-
-        Requires the following permissions:
-        - `incidents:close`
-      externalDocs:
-        url: ""
-      operationId: IncidentsService_ResolveIncidentByEventId
-      parameters:
-      - explode: false
-        in: path
-        name: event_id
-        required: true
-        schema:
-          description: Event ID associated to the Incident to resolve
-          example: event_id_1
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResolveIncidentByEventIdResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Resolve incident by event id
-      tags:
-      - Incidents service
-      x-coralogixPermissions:
-      - incidents:close
-  /incidents/incidents/v1/filter-values:
-    post:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: IncidentsService_GetFilterValues
-      parameters:
-      - explode: true
-        in: query
-        name: filter
-        required: false
-        schema:
-          $ref: "#/components/schemas/Incident_query_filter"
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/incidents.v1.GetFilterValuesResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Get available filter values
-      tags:
-      - Incidents service
-      x-coralogixPermissions:
-      - incidents:read
-  /incidents/incidents/v1/resolve:
+  /incidents/incidents/v1/all/resolve:
     post:
       description: |-
         Mark one or more incidents as resolved.
@@ -675,20 +637,11 @@ paths:
       externalDocs:
         url: ""
       operationId: IncidentsService_ResolveIncidents
-      parameters:
-      - explode: true
-        in: query
-        name: incident_ids
-        required: false
-        schema:
-          example:
-          - incident_id_1
-          - incident_id_2
-          items:
-            description: List of incident IDs to resolve
-            type: string
-          type: array
-        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Resolve_incidents_request"
       responses:
         "200":
           content:
@@ -1358,6 +1311,19 @@ components:
       - count
       title: Contextual label value with count
       type: object
+    ContextualLabelValues:
+      description: Represents contextual label values for filtering incidents
+      externalDocs:
+        url: ""
+      properties:
+        contextualLabelValues:
+          items:
+            type: string
+          type: array
+      required:
+      - contextualLabelValues
+      title: Contextual label values
+      type: object
     ContextualLabelValuesWithCount:
       example:
         valuesWithCount:
@@ -1409,6 +1375,19 @@ components:
       - count
       - displayLabelValue
       title: Display label value with count
+      type: object
+    DisplayLabelValues:
+      description: Represents display label values for filtering incidents
+      externalDocs:
+        url: ""
+      properties:
+        displayLabelValues:
+          items:
+            type: string
+          type: array
+      required:
+      - displayLabelValues
+      title: Display label values
       type: object
     DisplayLabelValuesWithCount:
       example:
@@ -1682,7 +1661,7 @@ components:
       additionalProperties: false
       example:
         incidentField:
-          duration: duration
+          id: id
       properties:
         incidentField:
           $ref: "#/components/schemas/IncidentFieldOneOf"
@@ -1815,9 +1794,9 @@ components:
       example:
         groupBysValue:
         - incidentField:
-            duration: duration
+            id: id
         - incidentField:
-            duration: duration
+            id: id
         aggAssignmentsCount:
         - count: 10
           assignedTo:
@@ -1938,10 +1917,10 @@ components:
       - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
       - $ref: "#/components/schemas/IncidentEventUnassignOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
       - $ref: "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
       - $ref: "#/components/schemas/IncidentEventAssignmentOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
       - $ref: "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
       - $ref: "#/components/schemas/IncidentEventCloseAdministrativeEvent"
@@ -2447,16 +2426,16 @@ components:
       type: object
     IncidentFieldOneOf:
       oneOf:
-      - $ref: "#/components/schemas/IncidentFieldOneOfDuration"
-      - $ref: "#/components/schemas/IncidentFieldOneOfName"
-      - $ref: "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
-      - $ref: "#/components/schemas/IncidentFieldOneOfSubsystemName"
       - $ref: "#/components/schemas/IncidentFieldOneOfId"
-      - $ref: "#/components/schemas/IncidentFieldOneOfSeverity"
+      - $ref: "#/components/schemas/IncidentFieldOneOfName"
       - $ref: "#/components/schemas/IncidentFieldOneOfCreatedAt"
       - $ref: "#/components/schemas/IncidentFieldOneOfClosedAt"
       - $ref: "#/components/schemas/IncidentFieldOneOfState"
+      - $ref: "#/components/schemas/IncidentFieldOneOfSubsystemName"
+      - $ref: "#/components/schemas/IncidentFieldOneOfDuration"
+      - $ref: "#/components/schemas/IncidentFieldOneOfSeverity"
       - $ref: "#/components/schemas/IncidentFieldOneOfStatus"
+      - $ref: "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
       - $ref: "#/components/schemas/IncidentFieldOneOfApplicationName"
     IncidentFieldOneOfApplicationName:
       additionalProperties: false
@@ -2480,14 +2459,14 @@ components:
       type: object
     IncidentFieldOneOfDuration:
       additionalProperties: false
-      example:
-        duration: duration
       properties:
         duration:
           type: string
       type: object
     IncidentFieldOneOfId:
       additionalProperties: false
+      example:
+        id: id
       properties:
         id:
           type: string
@@ -2584,6 +2563,77 @@ components:
       - metaLabel
       title: Incident meta labels with count
       type: object
+    IncidentQueryFilter:
+      description: Filter configuration for incidents
+      externalDocs:
+        url: ""
+      properties:
+        applicationName:
+          items:
+            description: Filter by application names
+            type: string
+          type: array
+        assignee:
+          items:
+            description: Filter by assignee
+            type: string
+          type: array
+        contextualLabels:
+          additionalProperties:
+            $ref: "#/components/schemas/ContextualLabelValues"
+          description: Filter by contextual labels
+          type: object
+        createdAtRange:
+          $ref: "#/components/schemas/v1.TimeRange"
+        displayLabels:
+          additionalProperties:
+            $ref: "#/components/schemas/DisplayLabelValues"
+          description: Filter by display labels
+          type: object
+        endTime:
+          deprecated: true
+          description: "Filters all incidents that were open in the given timeframe\
+            \ end time (deprecated, use incident_open_range instead)"
+          format: date-time
+          type: string
+        incidentDurationRange:
+          $ref: "#/components/schemas/v1.TimeRange"
+        isMuted:
+          description: Indicates if the incident is muted
+          type: boolean
+        metaLabels:
+          items:
+            $ref: "#/components/schemas/incidents.v1.MetaLabel"
+          type: array
+        metaLabelsOp:
+          $ref: "#/components/schemas/v1.FilterOperator"
+        searchQuery:
+          $ref: "#/components/schemas/IncidentSearchQuery"
+        severity:
+          items:
+            $ref: "#/components/schemas/IncidentSeverity"
+          type: array
+        startTime:
+          deprecated: true
+          description: "Filters all incidents that were open in the given timeframe\
+            \ start time (deprecated, use incident_open_range instead)"
+          format: date-time
+          type: string
+        state:
+          items:
+            $ref: "#/components/schemas/IncidentState"
+          type: array
+        status:
+          items:
+            $ref: "#/components/schemas/IncidentStatus"
+          type: array
+        subsystemName:
+          items:
+            description: Filter by subsystem names
+            type: string
+          type: array
+      title: Incident query filter
+      type: object
     IncidentQueryFiltersValues:
       example:
         displayLabels:
@@ -2673,6 +2723,43 @@ components:
       - stateWithCount
       - statusWithCount
       title: Incident query filter values
+      type: object
+    IncidentSearchQuery:
+      oneOf:
+      - $ref: "#/components/schemas/IncidentSearchQueryIncidentField"
+      - $ref: "#/components/schemas/IncidentSearchQueryContextualLabel"
+    IncidentSearchQueryContextualLabel:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        contextualLabel:
+          description: The contextual label to search in.
+          type: string
+        query:
+          description: The search query
+          example: error
+          type: string
+      required:
+      - field
+      - query
+      title: Incident search query
+      type: object
+    IncidentSearchQueryIncidentField:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        incidentField:
+          $ref: "#/components/schemas/IncidentFields"
+        query:
+          description: The search query
+          example: error
+          type: string
+      required:
+      - field
+      - query
+      title: Incident search query
       type: object
     IncidentSeverity:
       enum:
@@ -2813,9 +2900,9 @@ components:
         incidentAggs:
         - groupBysValue:
           - incidentField:
-              duration: duration
+              id: id
           - incidentField:
-              duration: duration
+              id: id
           aggAssignmentsCount:
           - count: 10
             assignedTo:
@@ -2856,9 +2943,9 @@ components:
           lastStateUpdateTime: 2000-01-23T04:56:07.000+00:00
         - groupBysValue:
           - incidentField:
-              duration: duration
+              id: id
           - incidentField:
-              duration: duration
+              id: id
           aggAssignmentsCount:
           - count: 10
             assignedTo:
@@ -3185,6 +3272,28 @@ components:
       - incidents
       - pagination
       title: List incidents response
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:
@@ -3662,6 +3771,24 @@ components:
       - ORDER_BY_DIRECTION_ASC
       - ORDER_BY_DIRECTION_DESC
       type: string
+    v1.TimeRange:
+      description: Represents a time range with start and end timestamps
+      externalDocs:
+        url: ""
+      properties:
+        endTime:
+          description: End time of the range
+          format: date-time
+          type: string
+        startTime:
+          description: Start time of the range
+          format: date-time
+          type: string
+      required:
+      - endTime
+      - startTime
+      title: Time range
+      type: object
     v3.FilterOperator:
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
@@ -3745,6 +3872,10 @@ components:
           type: array
       title: Incident query filter
       type: object
+    IncidentsService_ListIncidentAggregations_group_bys_parameter_inner:
+      oneOf:
+      - $ref: "#/components/schemas/GroupByIncidentField"
+      - $ref: "#/components/schemas/GroupByContextualLabel"
     Pagination_request:
       description: Pagination parameters for list requests
       externalDocs:
@@ -3762,25 +3893,6 @@ components:
       required:
       - pageSize
       title: Pagination request
-      type: object
-    IncidentsService_ListIncidents_order_bys_parameter_inner:
-      oneOf:
-      - $ref: "#/components/schemas/V1OrderByIncidentField"
-      - $ref: "#/components/schemas/V1OrderByContextualLabel"
-    IncidentsService_ListIncidentAggregations_group_bys_parameter_inner:
-      oneOf:
-      - $ref: "#/components/schemas/GroupByIncidentField"
-      - $ref: "#/components/schemas/GroupByContextualLabel"
-    User_details:
-      externalDocs:
-        url: ""
-      properties:
-        userId:
-          example: user_id
-          type: string
-      required:
-      - userId
-      title: User details
       type: object
     Incident_event_query_filter:
       description: Filter configuration for incident events
@@ -3822,6 +3934,85 @@ components:
         field:
           $ref: "#/components/schemas/IncidentEventOrderByFieldType"
       title: List incident events order by request
+      type: object
+    Get_filter_values_request:
+      additionalProperties: false
+      description: Request to get available filter values for incidents
+      properties:
+        filter:
+          $ref: "#/components/schemas/IncidentQueryFilter"
+      title: Get filter values request
+      type: object
+    IncidentsService_ListIncidents_order_bys_parameter_inner:
+      oneOf:
+      - $ref: "#/components/schemas/V1OrderByContextualLabel"
+      - $ref: "#/components/schemas/V1OrderByIncidentField"
+    Acknowledge_incidents_request:
+      additionalProperties: false
+      description: Request to acknowledge one or more incidents
+      properties:
+        incidentIds:
+          example:
+          - incident_id_1
+          - incident_id_2
+          items:
+            description: List of incident IDs to acknowledge
+            type: string
+          type: array
+      required:
+      - incidentIds
+      title: Acknowledge incidents request
+      type: object
+    Assign_incidents_request:
+      additionalProperties: false
+      description: Request to assign one or more incidents to a user
+      properties:
+        assignedTo:
+          $ref: "#/components/schemas/incidents.v1.UserDetails"
+        incidentIds:
+          example:
+          - incident_id_1
+          - incident_id_2
+          items:
+            description: List of incident IDs to assign
+            type: string
+          type: array
+      required:
+      - assignedTo
+      - incidentIds
+      title: Assign incidents request
+      type: object
+    Close_incidents_request:
+      additionalProperties: false
+      description: Request to close one or more incidents
+      properties:
+        incidentIds:
+          example:
+          - incident_id_1
+          - incident_id_2
+          items:
+            description: List of incident IDs to close
+            type: string
+          type: array
+      required:
+      - incidentIds
+      title: Close incidents request
+      type: object
+    Resolve_incidents_request:
+      additionalProperties: false
+      description: Request to resolve one or more incidents
+      properties:
+        incidentIds:
+          example:
+          - incident_id_1
+          - incident_id_2
+          items:
+            description: List of incident IDs to resolve
+            type: string
+          type: array
+      required:
+      - incidentIds
+      title: Resolve incidents request
       type: object
   securitySchemes:
     apiKeyAuth:

@@ -5,6 +5,72 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/dataplans/log-policies/v1": {
+      "put": {
+        "tags": [
+          "Policies Service"
+        ],
+        "summary": "Atomic Overwrite Log Policies",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PoliciesService_AtomicOverwriteLogPolicies",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Atomic Overwrite Log Policies Request",
+                "description": "In an atomic operation delete all existing log policies and create the provided list by order.",
+                "type": "object",
+                "properties": {
+                  "policies": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CreateLogPolicyRequest"
+                    }
+                  }
+                },
+                "required": [
+                  "policies"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AtomicOverwriteLogPoliciesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
     "/dataplans/policies/v1": {
       "get": {
         "tags": [
@@ -183,314 +249,7 @@
         }
       }
     },
-    "/dataplans/policies/v1/atomicOverwriteLogPolicies": {
-      "post": {
-        "tags": [
-          "Policies Service"
-        ],
-        "summary": "Atomic Overwrite Log Policies",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "PoliciesService_AtomicOverwriteLogPolicies",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "title": "Atomic Overwrite Log Policies Request",
-                "description": "In an atomic operation delete all existing log policies and create the provided list by order.",
-                "type": "object",
-                "properties": {
-                  "policies": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/CreateLogPolicyRequest"
-                    }
-                  }
-                },
-                "required": [
-                  "policies"
-                ],
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AtomicOverwriteLogPoliciesResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/dataplans/policies/v1/atomicOverwriteSpanPolicies": {
-      "post": {
-        "tags": [
-          "Policies Service"
-        ],
-        "summary": "Atomic Overwrite Span Policies",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "PoliciesService_AtomicOverwriteSpanPolicies",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "title": "Atomic Overwrite Span Policies Request",
-                "description": "In an atomic operation delete all existing span policies and create the provided list by order.",
-                "type": "object",
-                "properties": {
-                  "policies": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/CreateSpanPolicyRequest"
-                    }
-                  }
-                },
-                "required": [
-                  "policies"
-                ],
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AtomicOverwriteSpanPoliciesResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/dataplans/policies/v1/bulkCreate": {
-      "post": {
-        "tags": [
-          "Policies Service"
-        ],
-        "summary": "Atomic Batch Create Policy",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "PoliciesService_AtomicBatchCreatePolicy",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "title": "Atomic Batch Create Policy Request",
-                "description": "This data structure is used to create multiple policies atomically.",
-                "type": "object",
-                "properties": {
-                  "policyRequests": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/CreatePolicyRequest"
-                    }
-                  }
-                },
-                "required": [
-                  "policyRequests"
-                ],
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AtomicBatchCreatePolicyResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/dataplans/policies/v1/bulkTestLog": {
-      "post": {
-        "tags": [
-          "Policies Service"
-        ],
-        "summary": "Bulk Test Log Policies",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "PoliciesService_BulkTestLogPolicies",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "title": "Bulk Test Log Policies Request",
-                "description": "Request to test multiple log policies.",
-                "type": "object",
-                "properties": {
-                  "metaFieldsValuesList": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/LogMetaFieldsValues"
-                    }
-                  }
-                },
-                "required": [
-                  "metaFieldsValuesList"
-                ],
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BulkTestLogPoliciesResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/dataplans/policies/v1/getPolicyPrioritySettings": {
-      "get": {
-        "tags": [
-          "Policies Service"
-        ],
-        "summary": "Get Policy Priority Settings",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "PoliciesService_GetPolicySettings",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetPolicySettingsResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/dataplans/policies/v1/reorder": {
+    "/dataplans/policies/v1/all/reorder": {
       "post": {
         "tags": [
           "Policies Service"
@@ -560,98 +319,34 @@
         }
       }
     },
-    "/dataplans/policies/v1/replacePolicySettings": {
+    "/dataplans/policies/v1/all/test-policies": {
       "post": {
         "tags": [
           "Policies Service"
         ],
-        "summary": "Replace Policy Settings",
+        "summary": "Bulk Test Log Policies",
         "description": "No description available",
         "externalDocs": {
           "url": ""
         },
-        "operationId": "PoliciesService_ReplacePolicySettings",
+        "operationId": "PoliciesService_BulkTestLogPolicies",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
+                "title": "Bulk Test Log Policies Request",
+                "description": "Request to test multiple log policies.",
                 "type": "object",
                 "properties": {
-                  "logsPolicySettings": {
-                    "$ref": "#/components/schemas/LogsPolicySettings"
-                  },
-                  "spansPolicySettings": {
-                    "$ref": "#/components/schemas/SpansPolicySettings"
-                  }
-                },
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ReplacePolicySettingsResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/dataplans/policies/v1/toggle": {
-      "post": {
-        "tags": [
-          "Policies Service"
-        ],
-        "summary": "Toggle Policies",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "PoliciesService_TogglePolicy",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "title": "Toggle Policy Request",
-                "description": "This data structue is used to toggle a policy by its ID.",
-                "type": "object",
-                "properties": {
-                  "enabled": {
-                    "example": true,
-                    "type": "boolean"
-                  },
-                  "id": {
-                    "example": "id",
-                    "type": "string"
+                  "metaFieldsValuesList": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/LogMetaFieldsValues"
+                    }
                   }
                 },
                 "required": [
-                  "id",
-                  "enabled"
+                  "metaFieldsValuesList"
                 ],
                 "additionalProperties": false
               }
@@ -664,7 +359,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TogglePolicyResponse"
+                  "$ref": "#/components/schemas/BulkTestLogPoliciesResponse"
                 }
               }
             }
@@ -797,6 +492,178 @@
           }
         }
       }
+    },
+    "/dataplans/policiy-settings/v1": {
+      "post": {
+        "tags": [
+          "Policies Service"
+        ],
+        "summary": "Replace Policy Settings",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PoliciesService_ReplacePolicySettings",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Replace Policy Settings Request",
+                "description": "This data structure is used to replace default policy priority settings for logs and/or spans. Server-generated fields (created_at, updated_at) will be ignored if provided.",
+                "type": "object",
+                "properties": {
+                  "logsPolicySettings": {
+                    "$ref": "#/components/schemas/LogsPolicySettings"
+                  },
+                  "spansPolicySettings": {
+                    "$ref": "#/components/schemas/SpansPolicySettings"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplacePolicySettingsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/dataplans/policy-settings/v1": {
+      "get": {
+        "tags": [
+          "Policies Service"
+        ],
+        "summary": "Get Policy Priority Settings",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PoliciesService_GetPolicySettings",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetPolicySettingsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/dataplans/span-policies/v1": {
+      "put": {
+        "tags": [
+          "Policies Service"
+        ],
+        "summary": "Atomic Overwrite Span Policies",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PoliciesService_AtomicOverwriteSpanPolicies",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Atomic Overwrite Span Policies Request",
+                "description": "In an atomic operation delete all existing span policies and create the provided list by order.",
+                "type": "object",
+                "properties": {
+                  "policies": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CreateSpanPolicyRequest"
+                    }
+                  }
+                },
+                "required": [
+                  "policies"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AtomicOverwriteSpanPoliciesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -808,26 +675,6 @@
             "type": "string"
           }
         }
-      },
-      "AtomicBatchCreatePolicyResponse": {
-        "externalDocs": {
-          "description": "Find out more about quota management.",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
-        "title": "Atomic Batch Create Policy Response",
-        "description": "This data structure is obtained when creating multiple policies atomically.",
-        "type": "object",
-        "properties": {
-          "createResponses": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CreatePolicyResponse"
-            }
-          }
-        },
-        "required": [
-          "createResponses"
-        ]
       },
       "AtomicOverwriteLogPoliciesResponse": {
         "externalDocs": {
@@ -968,16 +815,6 @@
         "required": [
           "policy",
           "logRules"
-        ]
-      },
-      "CreatePolicyRequest": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/CreatePolicyRequestLogRules"
-          },
-          {
-            "$ref": "#/components/schemas/CreatePolicyRequestSpanRules"
-          }
         ]
       },
       "CreatePolicyRequestLogRules": {
@@ -1254,6 +1091,11 @@
         ]
       },
       "GetPolicySettingsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Get Policy Priority Settings Response",
+        "description": "This data structure is returned when getting policy priority settings.",
         "type": "object",
         "properties": {
           "logsPolicySettings": {
@@ -1316,12 +1158,45 @@
         ]
       },
       "LogsPolicySettings": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Logs Source Policy",
+        "description": "This data structure is used to define the default priority for logs policies.",
         "type": "object",
         "properties": {
           "defaultPriority": {
             "$ref": "#/components/schemas/quota.v1.Priority"
           }
         }
+      },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",
@@ -1340,10 +1215,10 @@
       "Placement": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/PlacementLast"
+            "$ref": "#/components/schemas/PlacementFirst"
           },
           {
-            "$ref": "#/components/schemas/PlacementFirst"
+            "$ref": "#/components/schemas/PlacementLast"
           }
         ]
       },
@@ -1368,10 +1243,10 @@
       "Policy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/PolicySpanRules"
+            "$ref": "#/components/schemas/PolicyLogRules"
           },
           {
-            "$ref": "#/components/schemas/PolicyLogRules"
+            "$ref": "#/components/schemas/PolicySpanRules"
           }
         ]
       },
@@ -1568,6 +1443,11 @@
         ]
       },
       "ReplacePolicySettingsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Replace Policy Settings Response",
+        "description": "This data structure is returned when replacing policy settings. It contains the complete resource including server-generated fields.",
         "type": "object",
         "properties": {
           "logsPolicySettings": {
@@ -1606,6 +1486,11 @@
         }
       },
       "SpansPolicySettings": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Spans Source Policy",
+        "description": "This data structure is used to define the default priority for spans policies.",
         "type": "object",
         "properties": {
           "defaultPriority": {
@@ -1664,29 +1549,6 @@
           "metaFieldsValues",
           "matched",
           "policy"
-        ]
-      },
-      "TogglePolicyResponse": {
-        "externalDocs": {
-          "description": "Find out more about quota management.",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
-        "title": "Toggle Policy Response",
-        "description": "This data structue is obtained when toggling a policy by its ID.",
-        "type": "object",
-        "properties": {
-          "enabled": {
-            "example": true,
-            "type": "boolean"
-          },
-          "id": {
-            "example": "id",
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "enabled"
         ]
       },
       "UpdatePolicyRequestLogRules": {

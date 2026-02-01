@@ -19,6 +19,7 @@ import (
 // XAxis - struct for XAxis
 type XAxis struct {
 	XAxisTime *XAxisTime
+	XAxisTimeBuckets *XAxisTimeBuckets
 	XAxisValue *XAxisValue
 }
 
@@ -26,6 +27,13 @@ type XAxis struct {
 func XAxisTimeAsXAxis(v *XAxisTime) XAxis {
 	return XAxis{
 		XAxisTime: v,
+	}
+}
+
+// XAxisTimeBucketsAsXAxis is a convenience function that returns XAxisTimeBuckets wrapped in XAxis
+func XAxisTimeBucketsAsXAxis(v *XAxisTimeBuckets) XAxis {
+	return XAxis{
+		XAxisTimeBuckets: v,
 	}
 }
 
@@ -58,6 +66,23 @@ func (dst *XAxis) UnmarshalJSON(data []byte) error {
 		dst.XAxisTime = nil
 	}
 
+	// try to unmarshal data into XAxisTimeBuckets
+	err = newStrictDecoder(data).Decode(&dst.XAxisTimeBuckets)
+	if err == nil {
+		jsonXAxisTimeBuckets, _ := json.Marshal(dst.XAxisTimeBuckets)
+		if string(jsonXAxisTimeBuckets) == "{}" { // empty struct
+			dst.XAxisTimeBuckets = nil
+		} else {
+			if err = validator.Validate(dst.XAxisTimeBuckets); err != nil {
+				dst.XAxisTimeBuckets = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.XAxisTimeBuckets = nil
+	}
+
 	// try to unmarshal data into XAxisValue
 	err = newStrictDecoder(data).Decode(&dst.XAxisValue)
 	if err == nil {
@@ -78,6 +103,7 @@ func (dst *XAxis) UnmarshalJSON(data []byte) error {
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.XAxisTime = nil
+		dst.XAxisTimeBuckets = nil
 		dst.XAxisValue = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(XAxis)")
@@ -92,6 +118,10 @@ func (dst *XAxis) UnmarshalJSON(data []byte) error {
 func (src XAxis) MarshalJSON() ([]byte, error) {
 	if src.XAxisTime != nil {
 		return json.Marshal(&src.XAxisTime)
+	}
+
+	if src.XAxisTimeBuckets != nil {
+		return json.Marshal(&src.XAxisTimeBuckets)
 	}
 
 	if src.XAxisValue != nil {
@@ -110,6 +140,10 @@ func (obj *XAxis) GetActualInstance() (interface{}) {
 		return obj.XAxisTime
 	}
 
+	if obj.XAxisTimeBuckets != nil {
+		return obj.XAxisTimeBuckets
+	}
+
 	if obj.XAxisValue != nil {
 		return obj.XAxisValue
 	}
@@ -122,6 +156,10 @@ func (obj *XAxis) GetActualInstance() (interface{}) {
 func (obj XAxis) GetActualInstanceValue() (interface{}) {
 	if obj.XAxisTime != nil {
 		return *obj.XAxisTime
+	}
+
+	if obj.XAxisTimeBuckets != nil {
+		return *obj.XAxisTimeBuckets
 	}
 
 	if obj.XAxisValue != nil {

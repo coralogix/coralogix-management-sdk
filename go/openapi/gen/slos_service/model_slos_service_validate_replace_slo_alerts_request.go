@@ -18,8 +18,16 @@ import (
 
 // SlosServiceValidateReplaceSloAlertsRequest - struct for SlosServiceValidateReplaceSloAlertsRequest
 type SlosServiceValidateReplaceSloAlertsRequest struct {
+	SloApmSli *SloApmSli
 	SloRequestBasedMetricSli *SloRequestBasedMetricSli
 	SloWindowBasedMetricSli *SloWindowBasedMetricSli
+}
+
+// SloApmSliAsSlosServiceValidateReplaceSloAlertsRequest is a convenience function that returns SloApmSli wrapped in SlosServiceValidateReplaceSloAlertsRequest
+func SloApmSliAsSlosServiceValidateReplaceSloAlertsRequest(v *SloApmSli) SlosServiceValidateReplaceSloAlertsRequest {
+	return SlosServiceValidateReplaceSloAlertsRequest{
+		SloApmSli: v,
+	}
 }
 
 // SloRequestBasedMetricSliAsSlosServiceValidateReplaceSloAlertsRequest is a convenience function that returns SloRequestBasedMetricSli wrapped in SlosServiceValidateReplaceSloAlertsRequest
@@ -41,6 +49,23 @@ func SloWindowBasedMetricSliAsSlosServiceValidateReplaceSloAlertsRequest(v *SloW
 func (dst *SlosServiceValidateReplaceSloAlertsRequest) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
+	// try to unmarshal data into SloApmSli
+	err = newStrictDecoder(data).Decode(&dst.SloApmSli)
+	if err == nil {
+		jsonSloApmSli, _ := json.Marshal(dst.SloApmSli)
+		if string(jsonSloApmSli) == "{}" { // empty struct
+			dst.SloApmSli = nil
+		} else {
+			if err = validator.Validate(dst.SloApmSli); err != nil {
+				dst.SloApmSli = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.SloApmSli = nil
+	}
+
 	// try to unmarshal data into SloRequestBasedMetricSli
 	err = newStrictDecoder(data).Decode(&dst.SloRequestBasedMetricSli)
 	if err == nil {
@@ -77,6 +102,7 @@ func (dst *SlosServiceValidateReplaceSloAlertsRequest) UnmarshalJSON(data []byte
 
 	if match > 1 { // more than 1 match
 		// reset to nil
+		dst.SloApmSli = nil
 		dst.SloRequestBasedMetricSli = nil
 		dst.SloWindowBasedMetricSli = nil
 
@@ -90,6 +116,10 @@ func (dst *SlosServiceValidateReplaceSloAlertsRequest) UnmarshalJSON(data []byte
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src SlosServiceValidateReplaceSloAlertsRequest) MarshalJSON() ([]byte, error) {
+	if src.SloApmSli != nil {
+		return json.Marshal(&src.SloApmSli)
+	}
+
 	if src.SloRequestBasedMetricSli != nil {
 		return json.Marshal(&src.SloRequestBasedMetricSli)
 	}
@@ -106,6 +136,10 @@ func (obj *SlosServiceValidateReplaceSloAlertsRequest) GetActualInstance() (inte
 	if obj == nil {
 		return nil
 	}
+	if obj.SloApmSli != nil {
+		return obj.SloApmSli
+	}
+
 	if obj.SloRequestBasedMetricSli != nil {
 		return obj.SloRequestBasedMetricSli
 	}
@@ -120,6 +154,10 @@ func (obj *SlosServiceValidateReplaceSloAlertsRequest) GetActualInstance() (inte
 
 // Get the actual instance value
 func (obj SlosServiceValidateReplaceSloAlertsRequest) GetActualInstanceValue() (interface{}) {
+	if obj.SloApmSli != nil {
+		return *obj.SloApmSli
+	}
+
 	if obj.SloRequestBasedMetricSli != nil {
 		return *obj.SloRequestBasedMetricSli
 	}

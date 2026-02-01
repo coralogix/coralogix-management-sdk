@@ -68,7 +68,7 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageEvaluationToke
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/dataplans/data-usage/v2/daily:evaluation-tokens"
+	localVarPath := localBasePath + "/dataplans/data-usage/v2/daily/evaluation-tokens"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -175,7 +175,7 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageProcessedGbsEx
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/dataplans/data-usage/v2/daily:processed-gbs"
+	localVarPath := localBasePath + "/dataplans/data-usage/v2/daily/processed-gbs"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -282,7 +282,7 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageUnitsExecute(r
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/dataplans/data-usage/v2/daily:units"
+	localVarPath := localBasePath + "/dataplans/data-usage/v2/daily/units"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -663,7 +663,7 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetLogsCountExecute(r ApiDa
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/dataplans/data-usage/v2/logs:count"
+	localVarPath := localBasePath + "/dataplans/data-usage/v2/logs/count"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -795,7 +795,7 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetSpansCountExecute(r ApiD
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/dataplans/data-usage/v2/spans:count"
+	localVarPath := localBasePath + "/dataplans/data-usage/v2/spans/count"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

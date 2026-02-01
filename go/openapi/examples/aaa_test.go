@@ -16,11 +16,9 @@ package examples
 
 import (
 	"context"
-	"fmt"
 	"os"
 	"strconv"
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/require"
 
@@ -29,7 +27,6 @@ import (
 	ipaccess "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/ip_access_service"
 	customroles "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/role_management_service"
 	scopes "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/scopes_service"
-	groups "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/team_permissions_management_service"
 )
 
 func TestApiKeys(t *testing.T) {
@@ -154,68 +151,6 @@ func TestIpAccess(t *testing.T) {
 
 	_, httpResp, err = client.
 		IpAccessServiceDeleteCompanyIpAccessSettings(context.Background()).
-		Execute()
-	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-}
-
-func TestGroups(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
-	client := cxsdk.NewGroupsClient(cfg)
-
-	ctx := context.Background()
-	teamIDEnv := os.Getenv("TEAM_ID")
-	if teamIDEnv == "" {
-		t.Fatal("TEAM_ID environment variable is not set")
-	}
-	teamID, err := strconv.ParseInt(teamIDEnv, 10, 64)
-	require.NoError(t, err)
-
-	// groupsResp, httpResp, err := client.
-	// 	TeamPermissionsMgmtServiceGetTeamGroups(ctx).
-	// 	TeamId(groups.TeamPermissionsMgmtServiceGetTeamGroupsTeamIdParameter{Id: &teamID}).
-	// 	Execute()
-	// require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	// require.Greater(t, len(groupsResp.Groups), 0)
-
-	groupName := fmt.Sprintf("Test Group %v", time.Now().UnixMilli())
-	groupDesc := "A Test Group"
-	createReq := groups.CreateTeamGroupRequest{
-		Name:        &groupName,
-		Description: &groupDesc,
-		TeamId:      &groups.PermissionsV1TeamId{Id: &teamID},
-		RoleIds:     []groups.RoleId{{Id: groups.PtrInt64(1)}},
-		UserIds:     []groups.V1UserId{},
-	}
-
-	createdGroup, httpResp, err := client.
-		TeamPermissionsMgmtServiceCreateTeamGroup(ctx).
-		CreateTeamGroupRequest(createReq).
-		Execute()
-	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.NotNil(t, createdGroup.GroupId)
-	groupID := createdGroup.GroupId.Id
-
-	//gotGroup, httpResp, err := client.
-	//	TeamPermissionsMgmtServiceGetTeamGroup(ctx, *groupID).
-	//	Execute()
-	//require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	//require.Equal(t, groupID, gotGroup.Group.GroupId.Id)
-
-	newName := fmt.Sprintf("Updated Test Group %v", time.Now().UnixMilli())
-	updateReq := groups.UpdateTeamGroupRequest{
-		GroupId:     &groups.TeamGroupId{Id: groupID},
-		Name:        &newName,
-		Description: &groupDesc,
-	}
-
-	_, httpResp, err = client.
-		TeamPermissionsMgmtServiceUpdateTeamGroup(ctx).
-		UpdateTeamGroupRequest(updateReq).
-		Execute()
-	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-
-	_, httpResp, err = client.
-		TeamPermissionsMgmtServiceDeleteTeamGroup(ctx, *groupID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }

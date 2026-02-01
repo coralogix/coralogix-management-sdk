@@ -21,7 +21,7 @@ var _ MappedNullable = &GetScopesResponse{}
 
 // GetScopesResponse This data structure represents a response to get scopes
 type GetScopesResponse struct {
-	Scopes []ScopesV1Scope `json:"scopes"`
+	Scopes []V1Scope `json:"scopes"`
 }
 
 type _GetScopesResponse GetScopesResponse
@@ -30,7 +30,7 @@ type _GetScopesResponse GetScopesResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetScopesResponse(scopes []ScopesV1Scope) *GetScopesResponse {
+func NewGetScopesResponse(scopes []V1Scope) *GetScopesResponse {
 	this := GetScopesResponse{}
 	this.Scopes = scopes
 	return &this
@@ -45,9 +45,9 @@ func NewGetScopesResponseWithDefaults() *GetScopesResponse {
 }
 
 // GetScopes returns the Scopes field value
-func (o *GetScopesResponse) GetScopes() []ScopesV1Scope {
+func (o *GetScopesResponse) GetScopes() []V1Scope {
 	if o == nil {
-		var ret []ScopesV1Scope
+		var ret []V1Scope
 		return ret
 	}
 
@@ -56,7 +56,7 @@ func (o *GetScopesResponse) GetScopes() []ScopesV1Scope {
 
 // GetScopesOk returns a tuple with the Scopes field value
 // and a boolean to check if the value has been set.
-func (o *GetScopesResponse) GetScopesOk() ([]ScopesV1Scope, bool) {
+func (o *GetScopesResponse) GetScopesOk() ([]V1Scope, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,7 +64,7 @@ func (o *GetScopesResponse) GetScopesOk() ([]ScopesV1Scope, bool) {
 }
 
 // SetScopes sets field value
-func (o *GetScopesResponse) SetScopes(v []ScopesV1Scope) {
+func (o *GetScopesResponse) SetScopes(v []V1Scope) {
 	o.Scopes = v
 }
 

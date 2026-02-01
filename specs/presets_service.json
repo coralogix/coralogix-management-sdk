@@ -5,6 +5,45 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/notifications/notification-center/v1/presets": {
+      "get": {
+        "tags": [
+          "Presets service"
+        ],
+        "summary": "Batch Get Presets",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PresetsService_BatchGetPresets",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "preset_ids",
+            "schema": {
+              "type": "array",
+              "items": {
+                "example": "",
+                "type": "string"
+              }
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchGetPresetsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/notifications/notification-center/v1/presets/custom": {
       "put": {
         "tags": [
@@ -123,7 +162,7 @@
         }
       }
     },
-    "/notifications/notification-center/v1/presets/custom/{id}:defaultSet": {
+    "/notifications/notification-center/v1/presets/custom/{id}/default": {
       "post": {
         "tags": [
           "Presets service"
@@ -152,6 +191,92 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SetCustomPresetAsDefaultResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/presets/summaries": {
+      "get": {
+        "tags": [
+          "Presets service"
+        ],
+        "summary": "Get Default Preset Summary",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PresetsService_GetDefaultPresetSummary",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "connector_type",
+            "schema": {
+              "$ref": "#/components/schemas/ConnectorType"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "entity_type",
+            "schema": {
+              "$ref": "#/components/schemas/notification_center.EntityType"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDefaultPresetSummaryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/presets/summaries/system": {
+      "get": {
+        "tags": [
+          "Presets service"
+        ],
+        "summary": "Get System Default Preset Summary",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PresetsService_GetSystemDefaultPresetSummary",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "connector_type",
+            "schema": {
+              "$ref": "#/components/schemas/ConnectorType"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "entity_type",
+            "schema": {
+              "$ref": "#/components/schemas/notification_center.EntityType"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSystemDefaultPresetSummaryResponse"
                 }
               }
             }
@@ -195,7 +320,7 @@
         }
       }
     },
-    "/notifications/notification-center/v1/presets/{id}:defaultSet": {
+    "/notifications/notification-center/v1/presets/{id}/default": {
       "post": {
         "tags": [
           "Presets service"
@@ -224,88 +349,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SetPresetAsDefaultResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/notifications/notification-center/v1/presets:batchGet": {
-      "get": {
-        "tags": [
-          "Presets service"
-        ],
-        "summary": "Batch Get Presets",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "PresetsService_BatchGetPresets",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "preset_ids",
-            "schema": {
-              "type": "array",
-              "items": {
-                "example": "",
-                "type": "string"
-              }
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BatchGetPresetsResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/notifications/notification-center/v1/presets:defaultSummaryGet": {
-      "get": {
-        "tags": [
-          "Presets service"
-        ],
-        "summary": "Get Default Preset Summary",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "PresetsService_GetDefaultPresetSummary",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "connector_type",
-            "schema": {
-              "$ref": "#/components/schemas/ConnectorType"
-            },
-            "style": "form"
-          },
-          {
-            "in": "query",
-            "name": "entity_type",
-            "schema": {
-              "$ref": "#/components/schemas/notification_center.EntityType"
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetDefaultPresetSummaryResponse"
                 }
               }
             }
@@ -355,53 +398,26 @@
           }
         }
       }
-    },
-    "/notifications/notification-center/v1/presets:systemDefaultSummaryGet": {
-      "get": {
-        "tags": [
-          "Presets service"
-        ],
-        "summary": "Get System Default Preset Summary",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "PresetsService_GetSystemDefaultPresetSummary",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "connector_type",
-            "schema": {
-              "$ref": "#/components/schemas/ConnectorType"
-            },
-            "style": "form"
-          },
-          {
-            "in": "query",
-            "name": "entity_type",
-            "schema": {
-              "$ref": "#/components/schemas/notification_center.EntityType"
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetSystemDefaultPresetSummaryResponse"
-                }
-              }
-            }
-          }
-        }
-      }
     }
   },
   "components": {
     "schemas": {
+      "AttachmentConfig": {
+        "type": "object",
+        "properties": {
+          "policy": {
+            "$ref": "#/components/schemas/AttachmentConfigPolicy"
+          }
+        }
+      },
+      "AttachmentConfigPolicy": {
+        "type": "string",
+        "enum": [
+          "AUTO",
+          "ENABLED",
+          "DISABLED"
+        ]
+      },
       "BatchGetPresetsResponse": {
         "externalDocs": {
           "description": "Find out more about notification center",
@@ -639,6 +655,34 @@
           }
         }
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -680,6 +724,9 @@
         "description": "Set of preconfigured templates for notification content rendering",
         "type": "object",
         "properties": {
+          "attachmentConfig": {
+            "$ref": "#/components/schemas/AttachmentConfig"
+          },
           "configOverrides": {
             "type": "array",
             "items": {
@@ -730,6 +777,9 @@
         "description": "Provides a concise overview of a preset",
         "type": "object",
         "properties": {
+          "attachmentConfig": {
+            "$ref": "#/components/schemas/AttachmentConfig"
+          },
           "connectorType": {
             "$ref": "#/components/schemas/ConnectorType"
           },

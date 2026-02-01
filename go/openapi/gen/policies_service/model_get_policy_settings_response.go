@@ -17,7 +17,7 @@ import (
 // checks if the GetPolicySettingsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetPolicySettingsResponse{}
 
-// GetPolicySettingsResponse struct for GetPolicySettingsResponse
+// GetPolicySettingsResponse This data structure is returned when getting policy priority settings.
 type GetPolicySettingsResponse struct {
 	LogsPolicySettings *LogsPolicySettings `json:"logsPolicySettings,omitempty"`
 	SpansPolicySettings *SpansPolicySettings `json:"spansPolicySettings,omitempty"`

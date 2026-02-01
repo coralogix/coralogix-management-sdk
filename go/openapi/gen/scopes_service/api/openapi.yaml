@@ -108,7 +108,7 @@ paths:
       summary: Update Scope
       tags:
       - Scopes Service
-  /aaa/team-scopes/v1/list:
+  /aaa/team-scopes/v1/all/list:
     get:
       description: No description available
       externalDocs:
@@ -212,7 +212,7 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/user-management/scopes/
       properties:
         scope:
-          $ref: "#/components/schemas/scopes.v1.Scope"
+          $ref: "#/components/schemas/v1.Scope"
       required:
       - scope
       title: Create Scope Response
@@ -307,11 +307,33 @@ components:
       properties:
         scopes:
           items:
-            $ref: "#/components/schemas/scopes.v1.Scope"
+            $ref: "#/components/schemas/v1.Scope"
           type: array
       required:
       - scopes
       title: Get Scopes Response
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:
@@ -341,7 +363,7 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/user-management/scopes/
       properties:
         scope:
-          $ref: "#/components/schemas/scopes.v1.Scope"
+          $ref: "#/components/schemas/v1.Scope"
       required:
       - scope
       title: Update Scope Response
@@ -379,7 +401,13 @@ components:
           type: string
       title: Filter
       type: object
-    scopes.v1.Scope:
+    v1.EntityType:
+      enum:
+      - ENTITY_TYPE_UNSPECIFIED
+      - ENTITY_TYPE_LOGS
+      - ENTITY_TYPE_SPANS
+      type: string
+    v1.Scope:
       description: This data structure represents a scope
       example:
         defaultExpression: <v1>true
@@ -418,12 +446,6 @@ components:
           type: integer
       title: Scope
       type: object
-    v1.EntityType:
-      enum:
-      - ENTITY_TYPE_UNSPECIFIED
-      - ENTITY_TYPE_LOGS
-      - ENTITY_TYPE_SPANS
-      type: string
     v3.FilterOperator:
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED

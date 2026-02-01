@@ -21,6 +21,7 @@ var _ MappedNullable = &RoutingTarget{}
 type RoutingTarget struct {
 	ConnectorId *string `json:"connectorId,omitempty"`
 	CustomDetails *map[string]string `json:"customDetails,omitempty"`
+	Id *string `json:"id,omitempty"`
 	PresetId *string `json:"presetId,omitempty"`
 }
 
@@ -105,6 +106,38 @@ func (o *RoutingTarget) SetCustomDetails(v map[string]string) {
 	o.CustomDetails = &v
 }
 
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *RoutingTarget) GetId() string {
+	if o == nil || IsNil(o.Id) {
+		var ret string
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RoutingTarget) GetIdOk() (*string, bool) {
+	if o == nil || IsNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *RoutingTarget) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *RoutingTarget) SetId(v string) {
+	o.Id = &v
+}
+
 // GetPresetId returns the PresetId field value if set, zero value otherwise.
 func (o *RoutingTarget) GetPresetId() string {
 	if o == nil || IsNil(o.PresetId) {
@@ -152,6 +185,9 @@ func (o RoutingTarget) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.CustomDetails) {
 		toSerialize["customDetails"] = o.CustomDetails
+	}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
 	}
 	if !IsNil(o.PresetId) {
 		toSerialize["presetId"] = o.PresetId

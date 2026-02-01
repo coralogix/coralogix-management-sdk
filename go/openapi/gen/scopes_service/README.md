@@ -80,7 +80,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ScopesServiceAPI* | [**ScopesServiceCreateScope**](docs/ScopesServiceAPI.md#scopesservicecreatescope) | **Post** /aaa/team-scopes/v1 | Create Scope
 *ScopesServiceAPI* | [**ScopesServiceDeleteScope**](docs/ScopesServiceAPI.md#scopesservicedeletescope) | **Delete** /aaa/team-scopes/v1/{id} | Delete Scope
-*ScopesServiceAPI* | [**ScopesServiceGetTeamScopes**](docs/ScopesServiceAPI.md#scopesservicegetteamscopes) | **Get** /aaa/team-scopes/v1/list | Get Team Scopes
+*ScopesServiceAPI* | [**ScopesServiceGetTeamScopes**](docs/ScopesServiceAPI.md#scopesservicegetteamscopes) | **Get** /aaa/team-scopes/v1/all/list | Get Team Scopes
 *ScopesServiceAPI* | [**ScopesServiceGetTeamScopesByIds**](docs/ScopesServiceAPI.md#scopesservicegetteamscopesbyids) | **Get** /aaa/team-scopes/v1 | Get Team Scopes By Ids
 *ScopesServiceAPI* | [**ScopesServiceUpdateScope**](docs/ScopesServiceAPI.md#scopesserviceupdatescope) | **Put** /aaa/team-scopes/v1 | Update Scope
 
@@ -100,12 +100,14 @@ Class | Method | HTTP request | Description
  - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [GetScopesResponse](docs/GetScopesResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [ScopesV1Filter](docs/ScopesV1Filter.md)
- - [ScopesV1Scope](docs/ScopesV1Scope.md)
  - [UpdateScopeRequest](docs/UpdateScopeRequest.md)
  - [UpdateScopeResponse](docs/UpdateScopeResponse.md)
  - [V1EntityType](docs/V1EntityType.md)
+ - [V1Scope](docs/V1Scope.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
 
 

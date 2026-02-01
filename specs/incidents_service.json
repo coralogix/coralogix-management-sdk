@@ -5,272 +5,7 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/incidents/incidents/v1": {
-      "post": {
-        "tags": [
-          "Incidents service"
-        ],
-        "summary": "List incidents with filters",
-        "description": "Lists all available incidents based on specified filters and order. The list is ordered in an unspecified direction and sorted by creation time.\n\nRequires the following permissions:\n- `incidents:read`",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "IncidentsService_ListIncidents",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "filter",
-            "schema": {
-              "externalDocs": {
-                "url": ""
-              },
-              "title": "Incident query filter",
-              "description": "Filter configuration for incidents",
-              "type": "object",
-              "properties": {
-                "applicationName": {
-                  "type": "array",
-                  "items": {
-                    "description": "Filter by application names",
-                    "type": "string"
-                  }
-                },
-                "assignee": {
-                  "type": "array",
-                  "items": {
-                    "description": "Filter by assignee",
-                    "type": "string"
-                  }
-                },
-                "contextualLabels": {
-                  "description": "Filter by contextual labels",
-                  "type": "object",
-                  "additionalProperties": {}
-                },
-                "createdAtRange": {},
-                "displayLabels": {
-                  "description": "Filter by display labels",
-                  "type": "object",
-                  "additionalProperties": {}
-                },
-                "endTime": {
-                  "deprecated": true,
-                  "description": "Filters all incidents that were open in the given timeframe end time (deprecated, use incident_open_range instead)",
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "incidentDurationRange": {},
-                "isMuted": {
-                  "description": "Indicates if the incident is muted",
-                  "type": "boolean"
-                },
-                "metaLabels": {
-                  "type": "array",
-                  "items": {
-                    "externalDocs": {
-                      "url": ""
-                    },
-                    "title": "Incident meta label",
-                    "type": "object",
-                    "properties": {
-                      "key": {
-                        "example": "key",
-                        "type": "string"
-                      },
-                      "value": {
-                        "example": "value",
-                        "type": "string"
-                      }
-                    }
-                  }
-                },
-                "metaLabelsOp": {
-                  "$ref": "#/components/schemas/v1.FilterOperator"
-                },
-                "searchQuery": {},
-                "severity": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/IncidentSeverity"
-                  }
-                },
-                "startTime": {
-                  "deprecated": true,
-                  "description": "Filters all incidents that were open in the given timeframe start time (deprecated, use incident_open_range instead)",
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "state": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/IncidentState"
-                  }
-                },
-                "status": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/IncidentStatus"
-                  }
-                },
-                "subsystemName": {
-                  "type": "array",
-                  "items": {
-                    "description": "Filter by subsystem names",
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "style": "form"
-          },
-          {
-            "in": "query",
-            "name": "pagination",
-            "schema": {
-              "externalDocs": {
-                "url": ""
-              },
-              "title": "Pagination request",
-              "description": "Pagination parameters for list requests",
-              "type": "object",
-              "properties": {
-                "pageSize": {
-                  "example": 10,
-                  "description": "Number of items to return per page",
-                  "type": "integer",
-                  "format": "int64"
-                },
-                "pageToken": {
-                  "example": "next_page_token",
-                  "description": "Token for the next page of results",
-                  "type": "string"
-                }
-              },
-              "required": [
-                "pageSize"
-              ]
-            },
-            "style": "form"
-          },
-          {
-            "in": "query",
-            "name": "order_bys",
-            "schema": {
-              "type": "array",
-              "items": {
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/V1OrderByIncidentField"
-                  },
-                  {
-                    "$ref": "#/components/schemas/V1OrderByContextualLabel"
-                  }
-                ]
-              }
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ListIncidentsResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-coralogixPermissions": [
-          "incidents:read"
-        ]
-      }
-    },
-    "/incidents/incidents/v1/acknowledge": {
-      "post": {
-        "tags": [
-          "Incidents service"
-        ],
-        "summary": "Acknowledge incidents",
-        "description": "Mark one or more incidents as acknowledged.\n\nRequires the following permissions:\n- `incidents:acknowledge`",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "IncidentsService_AcknowledgeIncidents",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "incident_ids",
-            "schema": {
-              "example": [
-                "incident_id_1",
-                "incident_id_2"
-              ],
-              "type": "array",
-              "items": {
-                "description": "List of incident IDs to acknowledge",
-                "type": "string"
-              }
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AcknowledgeIncidentsResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-coralogixPermissions": [
-          "incidents:acknowledge"
-        ]
-      }
-    },
-    "/incidents/incidents/v1/aggregations": {
+    "/incidents/aggregations/v1": {
       "get": {
         "tags": [
           "Incidents service"
@@ -471,277 +206,7 @@
         ]
       }
     },
-    "/incidents/incidents/v1/batch": {
-      "get": {
-        "tags": [
-          "Incidents service"
-        ],
-        "summary": "Get multiple incidents by IDs",
-        "description": "Retrieve multiple incidents by their IDs in a single request.\n\nRequires the following permissions:\n- `incidents:read`",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "IncidentsService_BatchGetIncident",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "ids",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BatchGetIncidentResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-coralogixPermissions": [
-          "incidents:read"
-        ]
-      }
-    },
-    "/incidents/incidents/v1/by-user": {
-      "post": {
-        "tags": [
-          "Incidents service"
-        ],
-        "summary": "Assign incidents to a user",
-        "description": "Assign one or more incidents to a specific user.\n\nRequires the following permissions:\n- `incidents:assign`",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "IncidentsService_AssignIncidents",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "incident_ids",
-            "schema": {
-              "example": [
-                "incident_id_1",
-                "incident_id_2"
-              ],
-              "type": "array",
-              "items": {
-                "description": "List of incident IDs to assign",
-                "type": "string"
-              }
-            },
-            "style": "form"
-          },
-          {
-            "in": "query",
-            "name": "assigned_to",
-            "schema": {
-              "externalDocs": {
-                "url": ""
-              },
-              "title": "User details",
-              "type": "object",
-              "properties": {
-                "userId": {
-                  "example": "user_id",
-                  "type": "string"
-                }
-              },
-              "required": [
-                "userId"
-              ]
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AssignIncidentsResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-coralogixPermissions": [
-          "incidents:assign"
-        ]
-      },
-      "delete": {
-        "tags": [
-          "Incidents service"
-        ],
-        "summary": "Remove incident user assignments",
-        "description": "Remove user assignments from one or more incidents.\n\nRequires the following permissions:\n- `incidents:assign`",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "IncidentsService_UnassignIncidents",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "incident_ids",
-            "schema": {
-              "example": [
-                "incident_id_1",
-                "incident_id_2"
-              ],
-              "type": "array",
-              "items": {
-                "description": "List of incident IDs to unassign",
-                "type": "string"
-              }
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UnassignIncidentsResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-coralogixPermissions": [
-          "incidents:assign"
-        ]
-      }
-    },
-    "/incidents/incidents/v1/close": {
-      "post": {
-        "tags": [
-          "Incidents service"
-        ],
-        "summary": "Close incidents",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "IncidentsService_CloseIncidents",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "incident_ids",
-            "schema": {
-              "example": [
-                "incident_id_1",
-                "incident_id_2"
-              ],
-              "type": "array",
-              "items": {
-                "description": "List of incident IDs to close",
-                "type": "string"
-              }
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CloseIncidentsResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-coralogixPermissions": [
-          "incidents:close"
-        ]
-      }
-    },
-    "/incidents/incidents/v1/events": {
+    "/incidents/events/v1": {
       "get": {
         "tags": [
           "Incidents service"
@@ -885,7 +350,7 @@
         ]
       }
     },
-    "/incidents/incidents/v1/events/count": {
+    "/incidents/events/v1/all/count": {
       "get": {
         "tags": [
           "Incidents service"
@@ -980,7 +445,247 @@
         ]
       }
     },
-    "/incidents/incidents/v1/events/filter-values": {
+    "/incidents/events/v1/{event_id}": {
+      "get": {
+        "tags": [
+          "Incidents service"
+        ],
+        "summary": "Get incident by event ID",
+        "description": "Retrieve detailed information about a single incident by related alert event id.\n\nRequires the following permissions:\n- `incidents:read`",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "IncidentsService_GetIncidentByEventId",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "event_id",
+            "required": true,
+            "schema": {
+              "example": "event_id_1",
+              "description": "Event ID associated to the Incident to acknowledge",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetIncidentByEventIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "incidents:read"
+        ]
+      }
+    },
+    "/incidents/events/v1/{event_id}/acknowledge": {
+      "post": {
+        "tags": [
+          "Incidents service"
+        ],
+        "summary": "Acknowledge incident by event id",
+        "description": "Mark incident as acknowledged by event id.\n\nRequires the following permissions:\n- `incidents:acknowledge`",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "IncidentsService_AcknowledgeIncidentByEventId",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "event_id",
+            "required": true,
+            "schema": {
+              "example": "event_id_1",
+              "description": "Event ID associated to the Incident to acknowledge",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AcknowledgeIncidentByEventIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "incidents:acknowledge"
+        ]
+      }
+    },
+    "/incidents/events/v1/{event_id}/resolve": {
+      "post": {
+        "tags": [
+          "Incidents service"
+        ],
+        "summary": "Resolve incident by event id",
+        "description": "Mark incident as resolved by event id.\n\nRequires the following permissions:\n- `incidents:close`",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "IncidentsService_ResolveIncidentByEventId",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "event_id",
+            "required": true,
+            "schema": {
+              "example": "event_id_1",
+              "description": "Event ID associated to the Incident to resolve",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResolveIncidentByEventIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "incidents:close"
+        ]
+      }
+    },
+    "/incidents/filter-values/v1": {
+      "post": {
+        "tags": [
+          "Incidents service"
+        ],
+        "summary": "Get available filter values",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "IncidentsService_GetFilterValues",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Get filter values request",
+                "description": "Request to get available filter values for incidents",
+                "type": "object",
+                "properties": {
+                  "filter": {
+                    "$ref": "#/components/schemas/IncidentQueryFilter"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/incidents.v1.GetFilterValuesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "incidents:read"
+        ]
+      }
+    },
+    "/incidents/filter-values/v1/events": {
       "get": {
         "tags": [
           "Incidents service"
@@ -1075,28 +780,28 @@
         ]
       }
     },
-    "/incidents/incidents/v1/events/{event_id}": {
+    "/incidents/incidents/v1": {
       "get": {
         "tags": [
           "Incidents service"
         ],
-        "summary": "Get incident by event ID",
-        "description": "Retrieve detailed information about a single incident by related alert event id.\n\nRequires the following permissions:\n- `incidents:read`",
+        "summary": "Get multiple incidents by IDs",
+        "description": "Retrieve multiple incidents by their IDs in a single request.\n\nRequires the following permissions:\n- `incidents:read`",
         "externalDocs": {
           "url": ""
         },
-        "operationId": "IncidentsService_GetIncidentByEventId",
+        "operationId": "IncidentsService_BatchGetIncident",
         "parameters": [
           {
-            "in": "path",
-            "name": "event_id",
-            "required": true,
+            "in": "query",
+            "name": "ids",
             "schema": {
-              "example": "event_id_1",
-              "description": "Event ID associated to the Incident to acknowledge",
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
-            "style": "simple"
+            "style": "form"
           }
         ],
         "responses": {
@@ -1105,7 +810,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetIncidentByEventIdResponse"
+                  "$ref": "#/components/schemas/BatchGetIncidentResponse"
                 }
               }
             }
@@ -1132,137 +837,17 @@
         "x-coralogixPermissions": [
           "incidents:read"
         ]
-      }
-    },
-    "/incidents/incidents/v1/events/{event_id}/acknowledge": {
+      },
       "post": {
         "tags": [
           "Incidents service"
         ],
-        "summary": "Acknowledge incident by event id",
-        "description": "Mark incident as acknowledged by event id.\n\nRequires the following permissions:\n- `incidents:acknowledge`",
+        "summary": "List incidents with filters",
+        "description": "Lists all available incidents based on specified filters and order. The list is ordered in an unspecified direction and sorted by creation time.\n\nRequires the following permissions:\n- `incidents:read`",
         "externalDocs": {
           "url": ""
         },
-        "operationId": "IncidentsService_AcknowledgeIncidentByEventId",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "event_id",
-            "required": true,
-            "schema": {
-              "example": "event_id_1",
-              "description": "Event ID associated to the Incident to acknowledge",
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AcknowledgeIncidentByEventIdResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-coralogixPermissions": [
-          "incidents:acknowledge"
-        ]
-      }
-    },
-    "/incidents/incidents/v1/events/{event_id}/resolve": {
-      "post": {
-        "tags": [
-          "Incidents service"
-        ],
-        "summary": "Resolve incident by event id",
-        "description": "Mark incident as resolved by event id.\n\nRequires the following permissions:\n- `incidents:close`",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "IncidentsService_ResolveIncidentByEventId",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "event_id",
-            "required": true,
-            "schema": {
-              "example": "event_id_1",
-              "description": "Event ID associated to the Incident to resolve",
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResolveIncidentByEventIdResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-coralogixPermissions": [
-          "incidents:close"
-        ]
-      }
-    },
-    "/incidents/incidents/v1/filter-values": {
-      "post": {
-        "tags": [
-          "Incidents service"
-        ],
-        "summary": "Get available filter values",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "IncidentsService_GetFilterValues",
+        "operationId": "IncidentsService_ListIncidents",
         "parameters": [
           {
             "in": "query",
@@ -1369,6 +954,53 @@
               }
             },
             "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "pagination",
+            "schema": {
+              "externalDocs": {
+                "url": ""
+              },
+              "title": "Pagination request",
+              "description": "Pagination parameters for list requests",
+              "type": "object",
+              "properties": {
+                "pageSize": {
+                  "example": 10,
+                  "description": "Number of items to return per page",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "pageToken": {
+                  "example": "next_page_token",
+                  "description": "Token for the next page of results",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pageSize"
+              ]
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "order_bys",
+            "schema": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/V1OrderByContextualLabel"
+                  },
+                  {
+                    "$ref": "#/components/schemas/V1OrderByIncidentField"
+                  }
+                ]
+              }
+            },
+            "style": "form"
           }
         ],
         "responses": {
@@ -1377,7 +1009,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/incidents.v1.GetFilterValuesResponse"
+                  "$ref": "#/components/schemas/ListIncidentsResponse"
                 }
               }
             }
@@ -1406,17 +1038,167 @@
         ]
       }
     },
-    "/incidents/incidents/v1/resolve": {
+    "/incidents/incidents/v1/all/acknowledge": {
       "post": {
         "tags": [
           "Incidents service"
         ],
-        "summary": "Resolve incidents",
-        "description": "Mark one or more incidents as resolved.\n\nRequires the following permissions:\n- `incidents:close`",
+        "summary": "Acknowledge incidents",
+        "description": "Mark one or more incidents as acknowledged.\n\nRequires the following permissions:\n- `incidents:acknowledge`",
         "externalDocs": {
           "url": ""
         },
-        "operationId": "IncidentsService_ResolveIncidents",
+        "operationId": "IncidentsService_AcknowledgeIncidents",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Acknowledge incidents request",
+                "description": "Request to acknowledge one or more incidents",
+                "type": "object",
+                "properties": {
+                  "incidentIds": {
+                    "example": [
+                      "incident_id_1",
+                      "incident_id_2"
+                    ],
+                    "type": "array",
+                    "items": {
+                      "description": "List of incident IDs to acknowledge",
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "incidentIds"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AcknowledgeIncidentsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "incidents:acknowledge"
+        ]
+      }
+    },
+    "/incidents/incidents/v1/all/by-user": {
+      "post": {
+        "tags": [
+          "Incidents service"
+        ],
+        "summary": "Assign incidents to a user",
+        "description": "Assign one or more incidents to a specific user.\n\nRequires the following permissions:\n- `incidents:assign`",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "IncidentsService_AssignIncidents",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Assign incidents request",
+                "description": "Request to assign one or more incidents to a user",
+                "type": "object",
+                "properties": {
+                  "assignedTo": {
+                    "$ref": "#/components/schemas/incidents.v1.UserDetails"
+                  },
+                  "incidentIds": {
+                    "example": [
+                      "incident_id_1",
+                      "incident_id_2"
+                    ],
+                    "type": "array",
+                    "items": {
+                      "description": "List of incident IDs to assign",
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "incidentIds",
+                  "assignedTo"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssignIncidentsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "incidents:assign"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Incidents service"
+        ],
+        "summary": "Remove incident user assignments",
+        "description": "Remove user assignments from one or more incidents.\n\nRequires the following permissions:\n- `incidents:assign`",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "IncidentsService_UnassignIncidents",
         "parameters": [
           {
             "in": "query",
@@ -1428,13 +1210,161 @@
               ],
               "type": "array",
               "items": {
-                "description": "List of incident IDs to resolve",
+                "description": "List of incident IDs to unassign",
                 "type": "string"
               }
             },
             "style": "form"
           }
         ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnassignIncidentsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "incidents:assign"
+        ]
+      }
+    },
+    "/incidents/incidents/v1/all/closed": {
+      "post": {
+        "tags": [
+          "Incidents service"
+        ],
+        "summary": "Close incidents",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "IncidentsService_CloseIncidents",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Close incidents request",
+                "description": "Request to close one or more incidents",
+                "type": "object",
+                "properties": {
+                  "incidentIds": {
+                    "example": [
+                      "incident_id_1",
+                      "incident_id_2"
+                    ],
+                    "type": "array",
+                    "items": {
+                      "description": "List of incident IDs to close",
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "incidentIds"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CloseIncidentsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "incidents:close"
+        ]
+      }
+    },
+    "/incidents/incidents/v1/all/resolve": {
+      "post": {
+        "tags": [
+          "Incidents service"
+        ],
+        "summary": "Resolve incidents",
+        "description": "Mark one or more incidents as resolved.\n\nRequires the following permissions:\n- `incidents:close`",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "IncidentsService_ResolveIncidents",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Resolve incidents request",
+                "description": "Request to resolve one or more incidents",
+                "type": "object",
+                "properties": {
+                  "incidentIds": {
+                    "example": [
+                      "incident_id_1",
+                      "incident_id_2"
+                    ],
+                    "type": "array",
+                    "items": {
+                      "description": "List of incident IDs to resolve",
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "incidentIds"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "",
@@ -1786,6 +1716,25 @@
           "count"
         ]
       },
+      "ContextualLabelValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Contextual label values",
+        "description": "Represents contextual label values for filtering incidents",
+        "type": "object",
+        "properties": {
+          "contextualLabelValues": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "contextualLabelValues"
+        ]
+      },
       "ContextualLabelValuesWithCount": {
         "externalDocs": {
           "url": ""
@@ -1845,6 +1794,25 @@
         "required": [
           "displayLabelValue",
           "count"
+        ]
+      },
+      "DisplayLabelValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Display label values",
+        "description": "Represents display label values for filtering incidents",
+        "type": "object",
+        "properties": {
+          "displayLabelValues": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "displayLabelValues"
         ]
       },
       "DisplayLabelValuesWithCount": {
@@ -2283,9 +2251,6 @@
             "$ref": "#/components/schemas/IncidentEventUnassignOperationalEvent"
           },
           {
-            "$ref": "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
-          },
-          {
             "$ref": "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
           },
           {
@@ -2293,6 +2258,9 @@
           },
           {
             "$ref": "#/components/schemas/IncidentEventAssignmentOperationalEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
           },
           {
             "$ref": "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
@@ -2912,22 +2880,10 @@
       "IncidentFieldOneOf": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IncidentFieldOneOfDuration"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfName"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfSubsystemName"
-          },
-          {
             "$ref": "#/components/schemas/IncidentFieldOneOfId"
           },
           {
-            "$ref": "#/components/schemas/IncidentFieldOneOfSeverity"
+            "$ref": "#/components/schemas/IncidentFieldOneOfName"
           },
           {
             "$ref": "#/components/schemas/IncidentFieldOneOfCreatedAt"
@@ -2939,7 +2895,19 @@
             "$ref": "#/components/schemas/IncidentFieldOneOfState"
           },
           {
+            "$ref": "#/components/schemas/IncidentFieldOneOfSubsystemName"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfDuration"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfSeverity"
+          },
+          {
             "$ref": "#/components/schemas/IncidentFieldOneOfStatus"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
           },
           {
             "$ref": "#/components/schemas/IncidentFieldOneOfApplicationName"
@@ -3107,6 +3075,103 @@
           "count"
         ]
       },
+      "IncidentQueryFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Incident query filter",
+        "description": "Filter configuration for incidents",
+        "type": "object",
+        "properties": {
+          "applicationName": {
+            "type": "array",
+            "items": {
+              "description": "Filter by application names",
+              "type": "string"
+            }
+          },
+          "assignee": {
+            "type": "array",
+            "items": {
+              "description": "Filter by assignee",
+              "type": "string"
+            }
+          },
+          "contextualLabels": {
+            "description": "Filter by contextual labels",
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ContextualLabelValues"
+            }
+          },
+          "createdAtRange": {
+            "$ref": "#/components/schemas/v1.TimeRange"
+          },
+          "displayLabels": {
+            "description": "Filter by display labels",
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/DisplayLabelValues"
+            }
+          },
+          "endTime": {
+            "deprecated": true,
+            "description": "Filters all incidents that were open in the given timeframe end time (deprecated, use incident_open_range instead)",
+            "type": "string",
+            "format": "date-time"
+          },
+          "incidentDurationRange": {
+            "$ref": "#/components/schemas/v1.TimeRange"
+          },
+          "isMuted": {
+            "description": "Indicates if the incident is muted",
+            "type": "boolean"
+          },
+          "metaLabels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/incidents.v1.MetaLabel"
+            }
+          },
+          "metaLabelsOp": {
+            "$ref": "#/components/schemas/v1.FilterOperator"
+          },
+          "searchQuery": {
+            "$ref": "#/components/schemas/IncidentSearchQuery"
+          },
+          "severity": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IncidentSeverity"
+            }
+          },
+          "startTime": {
+            "deprecated": true,
+            "description": "Filters all incidents that were open in the given timeframe start time (deprecated, use incident_open_range instead)",
+            "type": "string",
+            "format": "date-time"
+          },
+          "state": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IncidentState"
+            }
+          },
+          "status": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IncidentStatus"
+            }
+          },
+          "subsystemName": {
+            "type": "array",
+            "items": {
+              "description": "Filter by subsystem names",
+              "type": "string"
+            }
+          }
+        }
+      },
       "IncidentQueryFiltersValues": {
         "externalDocs": {
           "url": ""
@@ -3170,6 +3235,61 @@
           "metaLabelsWithCount",
           "metaLabelsOp"
         ]
+      },
+      "IncidentSearchQuery": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/IncidentSearchQueryIncidentField"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentSearchQueryContextualLabel"
+          }
+        ]
+      },
+      "IncidentSearchQueryContextualLabel": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Incident search query",
+        "type": "object",
+        "properties": {
+          "contextualLabel": {
+            "description": "The contextual label to search in.",
+            "type": "string"
+          },
+          "query": {
+            "example": "error",
+            "description": "The search query",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query",
+          "field"
+        ],
+        "additionalProperties": false
+      },
+      "IncidentSearchQueryIncidentField": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Incident search query",
+        "type": "object",
+        "properties": {
+          "incidentField": {
+            "$ref": "#/components/schemas/IncidentFields"
+          },
+          "query": {
+            "example": "error",
+            "description": "The search query",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query",
+          "field"
+        ],
+        "additionalProperties": false
       },
       "IncidentSeverity": {
         "type": "string",
@@ -3427,6 +3547,34 @@
           "pagination"
         ]
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -3670,6 +3818,30 @@
           "ORDER_BY_DIRECTION_UNSPECIFIED",
           "ORDER_BY_DIRECTION_ASC",
           "ORDER_BY_DIRECTION_DESC"
+        ]
+      },
+      "v1.TimeRange": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Time range",
+        "description": "Represents a time range with start and end timestamps",
+        "type": "object",
+        "properties": {
+          "endTime": {
+            "description": "End time of the range",
+            "type": "string",
+            "format": "date-time"
+          },
+          "startTime": {
+            "description": "Start time of the range",
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "startTime",
+          "endTime"
         ]
       },
       "v3.FilterOperator": {

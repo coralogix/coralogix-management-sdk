@@ -78,22 +78,22 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AlertDefinitionsServiceAPI* | [**AlertDefsServiceBulkReplaceAlertDefs**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicebulkreplacealertdefs) | **Put** /alerts/alerts-general/v3/bulk | Bulk replace alert definitions
-*AlertDefinitionsServiceAPI* | [**AlertDefsServiceCreateAlertDef**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicecreatealertdef) | **Post** /alerts/alerts-general/v3 | Create an alert
-*AlertDefinitionsServiceAPI* | [**AlertDefsServiceDeleteAlertDef**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicedeletealertdef) | **Delete** /alerts/alerts-general/v3/{id} | DeleteAlertDef
-*AlertDefinitionsServiceAPI* | [**AlertDefsServiceDownloadAlerts**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicedownloadalerts) | **Get** /alerts/alerts-general/v3/download | Download alerts
-*AlertDefinitionsServiceAPI* | [**AlertDefsServiceFilterOptionCounts**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicefilteroptioncounts) | **Get** /alerts/alerts-general/v3/filter-option-counts | Get counts for filter options
-*AlertDefinitionsServiceAPI* | [**AlertDefsServiceGetAlertDef**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicegetalertdef) | **Get** /alerts/alerts-general/v3/{id} | Get alert definition by ID
-*AlertDefinitionsServiceAPI* | [**AlertDefsServiceGetAlertDefByVersionId**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicegetalertdefbyversionid) | **Get** /alerts/alerts-general/v3/alert-version-id/{alert_version_id} | Get alert definition by alert version ID
-*AlertDefinitionsServiceAPI* | [**AlertDefsServiceListAlertDefs**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicelistalertdefs) | **Get** /alerts/alerts-general/v3 | Get a list of all accessible alert definitions
-*AlertDefinitionsServiceAPI* | [**AlertDefsServiceReplaceAlertDef**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicereplacealertdef) | **Put** /alerts/alerts-general/v3 | Replace an alert definition
-*AlertDefinitionsServiceAPI* | [**AlertDefsServiceSetActive**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicesetactive) | **Post** /alerts/alerts-general/v3/{id}:setActive | Disable or enable an alert
+*AlertDefinitionsServiceAPI* | [**AlertDefsServiceBulkReplaceAlertDefs**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicebulkreplacealertdefs) | **Put** /alerts/alerts/v3/all/replace | Bulk replace alert definitions
+*AlertDefinitionsServiceAPI* | [**AlertDefsServiceCreateAlertDef**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicecreatealertdef) | **Post** /alerts/alerts/v3 | Create an alert
+*AlertDefinitionsServiceAPI* | [**AlertDefsServiceDeleteAlertDef**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicedeletealertdef) | **Delete** /alerts/alerts/v3/{id} | DeleteAlertDef
+*AlertDefinitionsServiceAPI* | [**AlertDefsServiceDownloadAlerts**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicedownloadalerts) | **Get** /alerts/alerts/v3/all/download | Download alerts
+*AlertDefinitionsServiceAPI* | [**AlertDefsServiceFilterOptionCounts**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicefilteroptioncounts) | **Get** /alerts/alerts/v3/all/counts | Get counts for filter options
+*AlertDefinitionsServiceAPI* | [**AlertDefsServiceGetAlertDef**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicegetalertdef) | **Get** /alerts/alerts/v3/{id} | Get alert definition by ID
+*AlertDefinitionsServiceAPI* | [**AlertDefsServiceGetAlertDefByVersionId**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicegetalertdefbyversionid) | **Get** /alerts/alerts/v3/version-ids/{alert_version_id} | Get alert definition by alert version ID
+*AlertDefinitionsServiceAPI* | [**AlertDefsServiceListAlertDefs**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicelistalertdefs) | **Get** /alerts/alerts/v3 | Get a list of all accessible alert definitions
+*AlertDefinitionsServiceAPI* | [**AlertDefsServiceReplaceAlertDef**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicereplacealertdef) | **Put** /alerts/alerts/v3 | Replace an alert definition
 
 
 ## Documentation For Models
 
  - [ActivitySchedule](docs/ActivitySchedule.md)
  - [AlertDef](docs/AlertDef.md)
+ - [AlertDefDataSource](docs/AlertDefDataSource.md)
  - [AlertDefIncidentSettings](docs/AlertDefIncidentSettings.md)
  - [AlertDefNotificationGroup](docs/AlertDefNotificationGroup.md)
  - [AlertDefOrderByDirection](docs/AlertDefOrderByDirection.md)
@@ -216,8 +216,12 @@ Class | Method | HTTP request | Description
  - [MetricTimeWindowMetricTimeWindowDynamicDuration](docs/MetricTimeWindowMetricTimeWindowDynamicDuration.md)
  - [MetricTimeWindowMetricTimeWindowSpecificValue](docs/MetricTimeWindowMetricTimeWindowSpecificValue.md)
  - [MetricTimeWindowValue](docs/MetricTimeWindowValue.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [NextOp](docs/NextOp.md)
+ - [NoDataPolicy](docs/NoDataPolicy.md)
+ - [NoDataPolicyState](docs/NoDataPolicyState.md)
  - [NotificationDestination](docs/NotificationDestination.md)
  - [NotificationRouter](docs/NotificationRouter.md)
  - [NotificationRouting](docs/NotificationRouting.md)

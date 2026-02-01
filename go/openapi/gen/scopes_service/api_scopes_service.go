@@ -273,7 +273,7 @@ func (a *ScopesServiceAPIService) ScopesServiceGetTeamScopesExecute(r ApiScopesS
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/aaa/team-scopes/v1/list"
+	localVarPath := localBasePath + "/aaa/team-scopes/v1/all/list"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

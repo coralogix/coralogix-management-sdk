@@ -69,7 +69,7 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceAtomicBatchExecute
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/events2metrics/events2metrics/v2/batch"
+	localVarPath := localBasePath + "/events2metrics/events2metrics/v2/all/execute"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -483,7 +483,7 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceGetLimitsExecute(r
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/events2metrics/events2metrics/v2/limits"
+	localVarPath := localBasePath + "/events2metrics/limits/v2"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -699,7 +699,7 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceListLabelsCardinal
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/events2metrics/events2metrics/v2/labels:cardinality"
+	localVarPath := localBasePath + "/events2metrics/labels/v2/cardinalities"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

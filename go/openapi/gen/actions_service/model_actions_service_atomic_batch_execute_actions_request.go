@@ -17,7 +17,7 @@ import (
 // checks if the ActionsServiceAtomicBatchExecuteActionsRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActionsServiceAtomicBatchExecuteActionsRequest{}
 
-// ActionsServiceAtomicBatchExecuteActionsRequest struct for ActionsServiceAtomicBatchExecuteActionsRequest
+// ActionsServiceAtomicBatchExecuteActionsRequest This data structure represents a request to execute a batch of Action operations atomically.
 type ActionsServiceAtomicBatchExecuteActionsRequest struct {
 	Requests []ActionExecutionRequest `json:"requests,omitempty"`
 }

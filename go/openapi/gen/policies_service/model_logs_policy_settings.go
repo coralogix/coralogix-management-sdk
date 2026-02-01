@@ -17,7 +17,7 @@ import (
 // checks if the LogsPolicySettings type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsPolicySettings{}
 
-// LogsPolicySettings struct for LogsPolicySettings
+// LogsPolicySettings This data structure is used to define the default priority for logs policies.
 type LogsPolicySettings struct {
 	DefaultPriority *QuotaV1Priority `json:"defaultPriority,omitempty"`
 }

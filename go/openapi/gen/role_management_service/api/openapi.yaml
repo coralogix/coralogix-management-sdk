@@ -5,7 +5,7 @@ info:
 servers:
 - url: /
 paths:
-  /aaa/team-roles/v1/custom-roles:
+  /aaa/custom-roles/v1:
     get:
       description: No description available
       externalDocs:
@@ -82,7 +82,7 @@ paths:
       summary: Create Role
       tags:
       - Role Management Service
-  /aaa/team-roles/v1/custom-roles/{role_id}:
+  /aaa/custom-roles/v1/{role_id}:
     delete:
       description: No description available
       externalDocs:
@@ -212,7 +212,7 @@ paths:
       summary: Update Role
       tags:
       - Role Management Service
-  /aaa/team-roles/v1/system-roles:
+  /aaa/system-roles/v1:
     get:
       description: No description available
       externalDocs:
@@ -303,6 +303,38 @@ components:
           format: int64
           type: integer
       type: object
+    CustomRole:
+      example:
+        parentRoleName: parentRoleName
+        permissions:
+        - permissions
+        - permissions
+        roleId: 6
+        teamId: 1
+        name: name
+        description: description
+        parentRoleId: 0
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        parentRoleId:
+          format: int64
+          type: integer
+        parentRoleName:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+        roleId:
+          format: int64
+          type: integer
+        teamId:
+          format: int64
+          type: integer
+      type: object
     DeleteRoleResponse:
       type: object
     FieldGroup:
@@ -377,7 +409,7 @@ components:
           parentRoleId: 0
       properties:
         role:
-          $ref: "#/components/schemas/v2.CustomRole"
+          $ref: "#/components/schemas/CustomRole"
       type: object
     ListCustomRolesResponse:
       example:
@@ -403,7 +435,7 @@ components:
       properties:
         roles:
           items:
-            $ref: "#/components/schemas/v2.CustomRole"
+            $ref: "#/components/schemas/CustomRole"
           type: array
       type: object
     ListSystemRolesResponse:
@@ -424,8 +456,30 @@ components:
       properties:
         roles:
           items:
-            $ref: "#/components/schemas/v2.SystemRole"
+            $ref: "#/components/schemas/SystemRole"
           type: array
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:
@@ -435,6 +489,27 @@ components:
           items:
             type: string
           type: array
+      type: object
+    SystemRole:
+      example:
+        permissions:
+        - permissions
+        - permissions
+        roleId: 0
+        name: name
+        description: description
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+        roleId:
+          format: int64
+          type: integer
       type: object
     UpdateRoleResponse:
       type: object
@@ -455,65 +530,12 @@ components:
       - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
       - FILTER_MATCHER_REGEXP
       type: string
-    v2.CustomRole:
-      example:
-        parentRoleName: parentRoleName
-        permissions:
-        - permissions
-        - permissions
-        roleId: 6
-        teamId: 1
-        name: name
-        description: description
-        parentRoleId: 0
-      properties:
-        description:
-          type: string
-        name:
-          type: string
-        parentRoleId:
-          format: int64
-          type: integer
-        parentRoleName:
-          type: string
-        permissions:
-          items:
-            type: string
-          type: array
-        roleId:
-          format: int64
-          type: integer
-        teamId:
-          format: int64
-          type: integer
-      type: object
     v2.Permissions:
       properties:
         permissions:
           items:
             type: string
           type: array
-      type: object
-    v2.SystemRole:
-      example:
-        permissions:
-        - permissions
-        - permissions
-        roleId: 0
-        name: name
-        description: description
-      properties:
-        description:
-          type: string
-        name:
-          type: string
-        permissions:
-          items:
-            type: string
-          type: array
-        roleId:
-          format: int64
-          type: integer
       type: object
     v3.FilterOperator:
       enum:

@@ -140,6 +140,45 @@
         }
       }
     },
+    "/notifications/notification-center/v1/routers/all/summaries": {
+      "get": {
+        "tags": [
+          "Global routers service"
+        ],
+        "summary": "Batch Get Global Routers",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "GlobalRoutersService_BatchGetGlobalRouters",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "global_router_ids",
+            "schema": {
+              "type": "array",
+              "items": {
+                "example": "",
+                "type": "string"
+              }
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchGetGlobalRoutersResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/notifications/notification-center/v1/routers/{id}": {
       "get": {
         "tags": [
@@ -203,45 +242,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeleteGlobalRouterResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/notifications/notification-center/v1/routers:batchGetSummaries": {
-      "get": {
-        "tags": [
-          "Global routers service"
-        ],
-        "summary": "Batch Get Global Routers",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "GlobalRoutersService_BatchGetGlobalRouters",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "global_router_ids",
-            "schema": {
-              "type": "array",
-              "items": {
-                "example": "",
-                "type": "string"
-              }
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BatchGetGlobalRoutersResponse"
                 }
               }
             }
@@ -321,6 +321,23 @@
       },
       "DeleteGlobalRouterResponse": {
         "type": "object"
+      },
+      "FallbackTarget": {
+        "externalDocs": {
+          "description": "Find out more about notification center",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+        },
+        "title": "FallbackTarget",
+        "description": "Defines fallback target for notifications not matching any routing rule",
+        "type": "object",
+        "properties": {
+          "entityType": {
+            "$ref": "#/components/schemas/notification_center.EntityType"
+          },
+          "target": {
+            "$ref": "#/components/schemas/RoutingTarget"
+          }
+        }
       },
       "FieldGroup": {
         "type": "object",
@@ -454,6 +471,12 @@
               "$ref": "#/components/schemas/RoutingTarget"
             }
           },
+          "fallbackTargets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FallbackTarget"
+            }
+          },
           "id": {
             "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
             "type": "string"
@@ -493,6 +516,34 @@
             }
           }
         }
+      },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",
@@ -592,6 +643,10 @@
             "additionalProperties": {
               "type": "string"
             }
+          },
+          "id": {
+            "example": "d4b56246-64bb-4714-a8bd-97c999f1d801",
+            "type": "string"
           },
           "presetId": {
             "type": "string"

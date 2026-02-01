@@ -78,12 +78,12 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*RoleManagementServiceAPI* | [**RoleManagementServiceCreateRole**](docs/RoleManagementServiceAPI.md#rolemanagementservicecreaterole) | **Put** /aaa/team-roles/v1/custom-roles | Create Role
-*RoleManagementServiceAPI* | [**RoleManagementServiceDeleteRole**](docs/RoleManagementServiceAPI.md#rolemanagementservicedeleterole) | **Delete** /aaa/team-roles/v1/custom-roles/{role_id} | Delete Role
-*RoleManagementServiceAPI* | [**RoleManagementServiceGetCustomRole**](docs/RoleManagementServiceAPI.md#rolemanagementservicegetcustomrole) | **Get** /aaa/team-roles/v1/custom-roles/{role_id} | Get Custom Role
-*RoleManagementServiceAPI* | [**RoleManagementServiceListCustomRoles**](docs/RoleManagementServiceAPI.md#rolemanagementservicelistcustomroles) | **Get** /aaa/team-roles/v1/custom-roles | List Custom Roles
-*RoleManagementServiceAPI* | [**RoleManagementServiceListSystemRoles**](docs/RoleManagementServiceAPI.md#rolemanagementservicelistsystemroles) | **Get** /aaa/team-roles/v1/system-roles | List System Roles
-*RoleManagementServiceAPI* | [**RoleManagementServiceUpdateRole**](docs/RoleManagementServiceAPI.md#rolemanagementserviceupdaterole) | **Post** /aaa/team-roles/v1/custom-roles/{role_id} | Update Role
+*RoleManagementServiceAPI* | [**RoleManagementServiceCreateRole**](docs/RoleManagementServiceAPI.md#rolemanagementservicecreaterole) | **Put** /aaa/custom-roles/v1 | Create Role
+*RoleManagementServiceAPI* | [**RoleManagementServiceDeleteRole**](docs/RoleManagementServiceAPI.md#rolemanagementservicedeleterole) | **Delete** /aaa/custom-roles/v1/{role_id} | Delete Role
+*RoleManagementServiceAPI* | [**RoleManagementServiceGetCustomRole**](docs/RoleManagementServiceAPI.md#rolemanagementservicegetcustomrole) | **Get** /aaa/custom-roles/v1/{role_id} | Get Custom Role
+*RoleManagementServiceAPI* | [**RoleManagementServiceListCustomRoles**](docs/RoleManagementServiceAPI.md#rolemanagementservicelistcustomroles) | **Get** /aaa/custom-roles/v1 | List Custom Roles
+*RoleManagementServiceAPI* | [**RoleManagementServiceListSystemRoles**](docs/RoleManagementServiceAPI.md#rolemanagementservicelistsystemroles) | **Get** /aaa/system-roles/v1 | List System Roles
+*RoleManagementServiceAPI* | [**RoleManagementServiceUpdateRole**](docs/RoleManagementServiceAPI.md#rolemanagementserviceupdaterole) | **Post** /aaa/custom-roles/v1/{role_id} | Update Role
 
 
 ## Documentation For Models
@@ -95,6 +95,7 @@ Class | Method | HTTP request | Description
  - [CreateRoleRequestParentRoleId](docs/CreateRoleRequestParentRoleId.md)
  - [CreateRoleRequestParentRoleName](docs/CreateRoleRequestParentRoleName.md)
  - [CreateRoleResponse](docs/CreateRoleResponse.md)
+ - [CustomRole](docs/CustomRole.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FieldGroup](docs/FieldGroup.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
@@ -104,12 +105,13 @@ Class | Method | HTTP request | Description
  - [GetCustomRoleResponse](docs/GetCustomRoleResponse.md)
  - [ListCustomRolesResponse](docs/ListCustomRolesResponse.md)
  - [ListSystemRolesResponse](docs/ListSystemRolesResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [RoleManagementServiceCreateRoleRequest](docs/RoleManagementServiceCreateRoleRequest.md)
  - [RoleManagementServiceUpdateRoleRequest](docs/RoleManagementServiceUpdateRoleRequest.md)
- - [V2CustomRole](docs/V2CustomRole.md)
+ - [SystemRole](docs/SystemRole.md)
  - [V2Permissions](docs/V2Permissions.md)
- - [V2SystemRole](docs/V2SystemRole.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
 
 

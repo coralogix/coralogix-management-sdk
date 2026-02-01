@@ -24,7 +24,7 @@ type LineChart struct {
 	// Whether the line should remain connected instead of producing scattered points when null values are present in between
 	ConnectNulls *bool `json:"connectNulls,omitempty"`
 	Legend *Legend `json:"legend,omitempty"`
-	QueryDefinitions []QueryDefinition `json:"queryDefinitions"`
+	QueryDefinitions []LineChartQueryDefinition `json:"queryDefinitions"`
 	StackedLine *LineChartStackedLine `json:"stackedLine,omitempty"`
 	Tooltip *Tooltip `json:"tooltip,omitempty"`
 }
@@ -35,7 +35,7 @@ type _LineChart LineChart
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLineChart(queryDefinitions []QueryDefinition) *LineChart {
+func NewLineChart(queryDefinitions []LineChartQueryDefinition) *LineChart {
 	this := LineChart{}
 	this.QueryDefinitions = queryDefinitions
 	return &this
@@ -114,9 +114,9 @@ func (o *LineChart) SetLegend(v Legend) {
 }
 
 // GetQueryDefinitions returns the QueryDefinitions field value
-func (o *LineChart) GetQueryDefinitions() []QueryDefinition {
+func (o *LineChart) GetQueryDefinitions() []LineChartQueryDefinition {
 	if o == nil {
-		var ret []QueryDefinition
+		var ret []LineChartQueryDefinition
 		return ret
 	}
 
@@ -125,7 +125,7 @@ func (o *LineChart) GetQueryDefinitions() []QueryDefinition {
 
 // GetQueryDefinitionsOk returns a tuple with the QueryDefinitions field value
 // and a boolean to check if the value has been set.
-func (o *LineChart) GetQueryDefinitionsOk() ([]QueryDefinition, bool) {
+func (o *LineChart) GetQueryDefinitionsOk() ([]LineChartQueryDefinition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -133,7 +133,7 @@ func (o *LineChart) GetQueryDefinitionsOk() ([]QueryDefinition, bool) {
 }
 
 // SetQueryDefinitions sets field value
-func (o *LineChart) SetQueryDefinitions(v []QueryDefinition) {
+func (o *LineChart) SetQueryDefinitions(v []LineChartQueryDefinition) {
 	o.QueryDefinitions = v
 }
 

@@ -14,6 +14,7 @@ model_common_group.go
 model_create_role_request_parent_role_id.go
 model_create_role_request_parent_role_name.go
 model_create_role_response.go
+model_custom_role.go
 model_events_v3_filter_matcher.go
 model_field_group.go
 model_filter_path_and_values.go
@@ -23,12 +24,13 @@ model_filters.go
 model_get_custom_role_response.go
 model_list_custom_roles_response.go
 model_list_system_roles_response.go
+model_min_max_auto.go
+model_min_max_custom.go
 model_multiple_values.go
 model_role_management_service_create_role_request.go
 model_role_management_service_update_role_request.go
-model_v2_custom_role.go
+model_system_role.go
 model_v2_permissions.go
-model_v2_system_role.go
 model_v3_filter_operator.go
 response.go
 utils.go

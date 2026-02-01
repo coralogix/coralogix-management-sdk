@@ -12,79 +12,162 @@ package alert_scheduler_rule_service
 
 import (
 	"encoding/json"
+	"fmt"
+	"gopkg.in/validator.v2"
 )
 
-// checks if the RecurringDynamic type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &RecurringDynamic{}
-
-// RecurringDynamic struct for RecurringDynamic
+// RecurringDynamic - struct for RecurringDynamic
 type RecurringDynamic struct {
-	Dynamic *RecurringDynamic `json:"dynamic,omitempty"`
+	RecurringDynamicDaily *RecurringDynamicDaily
+	RecurringDynamicMonthly *RecurringDynamicMonthly
+	RecurringDynamicWeekly *RecurringDynamicWeekly
 }
 
-// NewRecurringDynamic instantiates a new RecurringDynamic object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewRecurringDynamic() *RecurringDynamic {
-	this := RecurringDynamic{}
-	return &this
-}
-
-// NewRecurringDynamicWithDefaults instantiates a new RecurringDynamic object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewRecurringDynamicWithDefaults() *RecurringDynamic {
-	this := RecurringDynamic{}
-	return &this
-}
-
-// GetDynamic returns the Dynamic field value if set, zero value otherwise.
-func (o *RecurringDynamic) GetDynamic() RecurringDynamic {
-	if o == nil || IsNil(o.Dynamic) {
-		var ret RecurringDynamic
-		return ret
+// RecurringDynamicDailyAsRecurringDynamic is a convenience function that returns RecurringDynamicDaily wrapped in RecurringDynamic
+func RecurringDynamicDailyAsRecurringDynamic(v *RecurringDynamicDaily) RecurringDynamic {
+	return RecurringDynamic{
+		RecurringDynamicDaily: v,
 	}
-	return *o.Dynamic
 }
 
-// GetDynamicOk returns a tuple with the Dynamic field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RecurringDynamic) GetDynamicOk() (*RecurringDynamic, bool) {
-	if o == nil || IsNil(o.Dynamic) {
-		return nil, false
+// RecurringDynamicMonthlyAsRecurringDynamic is a convenience function that returns RecurringDynamicMonthly wrapped in RecurringDynamic
+func RecurringDynamicMonthlyAsRecurringDynamic(v *RecurringDynamicMonthly) RecurringDynamic {
+	return RecurringDynamic{
+		RecurringDynamicMonthly: v,
 	}
-	return o.Dynamic, true
 }
 
-// HasDynamic returns a boolean if a field has been set.
-func (o *RecurringDynamic) HasDynamic() bool {
-	if o != nil && !IsNil(o.Dynamic) {
-		return true
+// RecurringDynamicWeeklyAsRecurringDynamic is a convenience function that returns RecurringDynamicWeekly wrapped in RecurringDynamic
+func RecurringDynamicWeeklyAsRecurringDynamic(v *RecurringDynamicWeekly) RecurringDynamic {
+	return RecurringDynamic{
+		RecurringDynamicWeekly: v,
+	}
+}
+
+
+// Unmarshal JSON data into one of the pointers in the struct
+func (dst *RecurringDynamic) UnmarshalJSON(data []byte) error {
+	var err error
+	match := 0
+	// try to unmarshal data into RecurringDynamicDaily
+	err = newStrictDecoder(data).Decode(&dst.RecurringDynamicDaily)
+	if err == nil {
+		jsonRecurringDynamicDaily, _ := json.Marshal(dst.RecurringDynamicDaily)
+		if string(jsonRecurringDynamicDaily) == "{}" { // empty struct
+			dst.RecurringDynamicDaily = nil
+		} else {
+			if err = validator.Validate(dst.RecurringDynamicDaily); err != nil {
+				dst.RecurringDynamicDaily = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.RecurringDynamicDaily = nil
 	}
 
-	return false
-}
-
-// SetDynamic gets a reference to the given RecurringDynamic and assigns it to the Dynamic field.
-func (o *RecurringDynamic) SetDynamic(v RecurringDynamic) {
-	o.Dynamic = &v
-}
-
-func (o RecurringDynamic) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	// try to unmarshal data into RecurringDynamicMonthly
+	err = newStrictDecoder(data).Decode(&dst.RecurringDynamicMonthly)
+	if err == nil {
+		jsonRecurringDynamicMonthly, _ := json.Marshal(dst.RecurringDynamicMonthly)
+		if string(jsonRecurringDynamicMonthly) == "{}" { // empty struct
+			dst.RecurringDynamicMonthly = nil
+		} else {
+			if err = validator.Validate(dst.RecurringDynamicMonthly); err != nil {
+				dst.RecurringDynamicMonthly = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.RecurringDynamicMonthly = nil
 	}
-	return json.Marshal(toSerialize)
+
+	// try to unmarshal data into RecurringDynamicWeekly
+	err = newStrictDecoder(data).Decode(&dst.RecurringDynamicWeekly)
+	if err == nil {
+		jsonRecurringDynamicWeekly, _ := json.Marshal(dst.RecurringDynamicWeekly)
+		if string(jsonRecurringDynamicWeekly) == "{}" { // empty struct
+			dst.RecurringDynamicWeekly = nil
+		} else {
+			if err = validator.Validate(dst.RecurringDynamicWeekly); err != nil {
+				dst.RecurringDynamicWeekly = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.RecurringDynamicWeekly = nil
+	}
+
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.RecurringDynamicDaily = nil
+		dst.RecurringDynamicMonthly = nil
+		dst.RecurringDynamicWeekly = nil
+
+		return fmt.Errorf("data matches more than one schema in oneOf(RecurringDynamic)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("data failed to match schemas in oneOf(RecurringDynamic)")
+	}
 }
 
-func (o RecurringDynamic) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Dynamic) {
-		toSerialize["dynamic"] = o.Dynamic
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src RecurringDynamic) MarshalJSON() ([]byte, error) {
+	if src.RecurringDynamicDaily != nil {
+		return json.Marshal(&src.RecurringDynamicDaily)
 	}
-	return toSerialize, nil
+
+	if src.RecurringDynamicMonthly != nil {
+		return json.Marshal(&src.RecurringDynamicMonthly)
+	}
+
+	if src.RecurringDynamicWeekly != nil {
+		return json.Marshal(&src.RecurringDynamicWeekly)
+	}
+
+	return nil, nil // no data in oneOf schemas
+}
+
+// Get the actual instance
+func (obj *RecurringDynamic) GetActualInstance() (interface{}) {
+	if obj == nil {
+		return nil
+	}
+	if obj.RecurringDynamicDaily != nil {
+		return obj.RecurringDynamicDaily
+	}
+
+	if obj.RecurringDynamicMonthly != nil {
+		return obj.RecurringDynamicMonthly
+	}
+
+	if obj.RecurringDynamicWeekly != nil {
+		return obj.RecurringDynamicWeekly
+	}
+
+	// all schemas are nil
+	return nil
+}
+
+// Get the actual instance value
+func (obj RecurringDynamic) GetActualInstanceValue() (interface{}) {
+	if obj.RecurringDynamicDaily != nil {
+		return *obj.RecurringDynamicDaily
+	}
+
+	if obj.RecurringDynamicMonthly != nil {
+		return *obj.RecurringDynamicMonthly
+	}
+
+	if obj.RecurringDynamicWeekly != nil {
+		return *obj.RecurringDynamicWeekly
+	}
+
+	// all schemas are nil
+	return nil
 }
 
 type NullableRecurringDynamic struct {

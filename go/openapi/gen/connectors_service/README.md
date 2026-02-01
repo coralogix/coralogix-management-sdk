@@ -78,15 +78,15 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ConnectorsServiceAPI* | [**ConnectorsServiceBatchGetConnectorSummaries**](docs/ConnectorsServiceAPI.md#connectorsservicebatchgetconnectorsummaries) | **Get** /notifications/notification-center/v1/connectors:batchGetSummaries | Batch Get Connectors Summaries
-*ConnectorsServiceAPI* | [**ConnectorsServiceBatchGetConnectors**](docs/ConnectorsServiceAPI.md#connectorsservicebatchgetconnectors) | **Get** /notifications/notification-center/v1/connectors:batchGet | Batch Get Connectors
+*ConnectorsServiceAPI* | [**ConnectorsServiceBatchGetConnectorSummaries**](docs/ConnectorsServiceAPI.md#connectorsservicebatchgetconnectorsummaries) | **Get** /notifications/notification-center/v1/connectors/all/summaries | Batch Get Connectors Summaries
+*ConnectorsServiceAPI* | [**ConnectorsServiceBatchGetConnectors**](docs/ConnectorsServiceAPI.md#connectorsservicebatchgetconnectors) | **Get** /notifications/notification-center/v1/connectors/all/list | Batch Get Connectors
 *ConnectorsServiceAPI* | [**ConnectorsServiceCreateConnector**](docs/ConnectorsServiceAPI.md#connectorsservicecreateconnector) | **Post** /notifications/notification-center/v1/connectors | Create a Connector
 *ConnectorsServiceAPI* | [**ConnectorsServiceDeleteConnector**](docs/ConnectorsServiceAPI.md#connectorsservicedeleteconnector) | **Delete** /notifications/notification-center/v1/connectors/{id} | Delete a Connector
 *ConnectorsServiceAPI* | [**ConnectorsServiceGetConnector**](docs/ConnectorsServiceAPI.md#connectorsservicegetconnector) | **Get** /notifications/notification-center/v1/connectors/{id} | Get a Connector
-*ConnectorsServiceAPI* | [**ConnectorsServiceGetConnectorTypeSummaries**](docs/ConnectorsServiceAPI.md#connectorsservicegetconnectortypesummaries) | **Get** /notifications/notification-center/v1/connectors:getTypeSummaries | Get Connector Type Summaries
-*ConnectorsServiceAPI* | [**ConnectorsServiceListConnectorSummaries**](docs/ConnectorsServiceAPI.md#connectorsservicelistconnectorsummaries) | **Get** /notifications/notification-center/v1/connectors:listSummaries | List Connector Summaries
+*ConnectorsServiceAPI* | [**ConnectorsServiceGetConnectorTypeSummaries**](docs/ConnectorsServiceAPI.md#connectorsservicegetconnectortypesummaries) | **Get** /notifications/notification-center/v1/connectors/types/summaries | Get Connector Type Summaries
+*ConnectorsServiceAPI* | [**ConnectorsServiceListConnectorSummaries**](docs/ConnectorsServiceAPI.md#connectorsservicelistconnectorsummaries) | **Get** /notifications/notification-center/v1/connectors/list/summaries | List Connector Summaries
 *ConnectorsServiceAPI* | [**ConnectorsServiceListConnectors**](docs/ConnectorsServiceAPI.md#connectorsservicelistconnectors) | **Get** /notifications/notification-center/v1/connectors | List Connectors
-*ConnectorsServiceAPI* | [**ConnectorsServiceReplaceConnector**](docs/ConnectorsServiceAPI.md#connectorsservicereplaceconnector) | **Put** /notifications/notification-center/v1/connector | Replace a Connector
+*ConnectorsServiceAPI* | [**ConnectorsServiceReplaceConnector**](docs/ConnectorsServiceAPI.md#connectorsservicereplaceconnector) | **Put** /notifications/notification-center/v1/connectors | Replace a Connector
 
 
 ## Documentation For Models
@@ -117,6 +117,8 @@ Class | Method | HTTP request | Description
  - [GetConnectorTypeSummariesResponse](docs/GetConnectorTypeSummariesResponse.md)
  - [ListConnectorSummariesResponse](docs/ListConnectorSummariesResponse.md)
  - [ListConnectorsResponse](docs/ListConnectorsResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [NotificationCenterConnectorConfigField](docs/NotificationCenterConnectorConfigField.md)
  - [NotificationCenterEntityType](docs/NotificationCenterEntityType.md)

@@ -68,7 +68,7 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsCreateExecute(r ApiRuleGr
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/rule-group-sets"
+	localVarPath := localBasePath + "/recording-rules/recording-rules/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -172,7 +172,7 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsDeleteExecute(r ApiRuleGr
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/rule-group-sets/{id}"
+	localVarPath := localBasePath + "/recording-rules/recording-rules/v1/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -275,7 +275,7 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsFetchExecute(r ApiRuleGro
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/rule-group-sets/{id}"
+	localVarPath := localBasePath + "/recording-rules/recording-rules/v1/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -375,7 +375,7 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsListExecute(r ApiRuleGrou
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/rule-group-sets"
+	localVarPath := localBasePath + "/recording-rules/recording-rules/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -483,7 +483,7 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsUpdateExecute(r ApiRuleGr
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/rule-group-sets/{id}"
+	localVarPath := localBasePath + "/recording-rules/recording-rules/v1/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)

@@ -25,6 +25,7 @@ type GlobalRouter struct {
 	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
 	Fallback []RoutingTarget `json:"fallback,omitempty"`
+	FallbackTargets []FallbackTarget `json:"fallbackTargets,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	RoutingLabels *RoutingLabels `json:"routingLabels,omitempty"`
@@ -207,6 +208,38 @@ func (o *GlobalRouter) HasFallback() bool {
 // SetFallback gets a reference to the given []RoutingTarget and assigns it to the Fallback field.
 func (o *GlobalRouter) SetFallback(v []RoutingTarget) {
 	o.Fallback = v
+}
+
+// GetFallbackTargets returns the FallbackTargets field value if set, zero value otherwise.
+func (o *GlobalRouter) GetFallbackTargets() []FallbackTarget {
+	if o == nil || IsNil(o.FallbackTargets) {
+		var ret []FallbackTarget
+		return ret
+	}
+	return o.FallbackTargets
+}
+
+// GetFallbackTargetsOk returns a tuple with the FallbackTargets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GlobalRouter) GetFallbackTargetsOk() ([]FallbackTarget, bool) {
+	if o == nil || IsNil(o.FallbackTargets) {
+		return nil, false
+	}
+	return o.FallbackTargets, true
+}
+
+// HasFallbackTargets returns a boolean if a field has been set.
+func (o *GlobalRouter) HasFallbackTargets() bool {
+	if o != nil && !IsNil(o.FallbackTargets) {
+		return true
+	}
+
+	return false
+}
+
+// SetFallbackTargets gets a reference to the given []FallbackTarget and assigns it to the FallbackTargets field.
+func (o *GlobalRouter) SetFallbackTargets(v []FallbackTarget) {
+	o.FallbackTargets = v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -393,6 +426,9 @@ func (o GlobalRouter) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Fallback) {
 		toSerialize["fallback"] = o.Fallback
+	}
+	if !IsNil(o.FallbackTargets) {
+		toSerialize["fallbackTargets"] = o.FallbackTargets
 	}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id

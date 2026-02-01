@@ -17,7 +17,7 @@ import (
 // checks if the SpansPolicySettings type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpansPolicySettings{}
 
-// SpansPolicySettings struct for SpansPolicySettings
+// SpansPolicySettings This data structure is used to define the default priority for spans policies.
 type SpansPolicySettings struct {
 	DefaultPriority *QuotaV1Priority `json:"defaultPriority,omitempty"`
 }

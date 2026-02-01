@@ -5,7 +5,7 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/integrations/extensions/v1/all": {
+    "/integrations/extensions/v1": {
       "post": {
         "tags": [
           "Extension service"
@@ -542,10 +542,25 @@
             }
           },
           "summary": {
-            "$ref": "#/components/schemas/RevisionSummary"
+            "$ref": "#/components/schemas/GetAllExtensionsResponse.RevisionSummary"
           },
           "version": {
             "type": "string"
+          }
+        }
+      },
+      "GetAllExtensionsResponse.RevisionSummary": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Revision summary",
+        "type": "object",
+        "properties": {
+          "isNew": {
+            "type": "boolean"
+          },
+          "itemCounts": {
+            "$ref": "#/components/schemas/ItemCounts"
           }
         }
       },
@@ -613,6 +628,34 @@
           }
         }
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -646,21 +689,6 @@
           "SPAN_EVENTS_TO_METRICS",
           "LOGS_EVENTS_TO_METRICS"
         ]
-      },
-      "RevisionSummary": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Revision summary",
-        "type": "object",
-        "properties": {
-          "isNew": {
-            "type": "boolean"
-          },
-          "itemCounts": {
-            "$ref": "#/components/schemas/ItemCounts"
-          }
-        }
       },
       "TargetDomain": {
         "type": "string",

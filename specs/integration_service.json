@@ -61,7 +61,7 @@
         ]
       }
     },
-    "/integrations/integrations/v1/definition/{id}": {
+    "/integrations/integrations/v1/definitions/{id}": {
       "get": {
         "tags": [
           "Integration service"
@@ -185,7 +185,7 @@
         ]
       }
     },
-    "/integrations/integrations/v1/instance/{integration_id}": {
+    "/integrations/integrations/v1/instances/{integration_id}": {
       "delete": {
         "tags": [
           "Integration service"
@@ -242,7 +242,190 @@
         ]
       }
     },
-    "/integrations/integrations/v1/managed": {
+    "/integrations/integrations/v1/rum/app-versions": {
+      "get": {
+        "tags": [
+          "Integration service"
+        ],
+        "summary": "Get RUM integration versions data",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "IntegrationService_GetRumApplicationVersionData",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "application_name",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRumApplicationVersionDataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "integrations:ReadConfig"
+        ]
+      }
+    },
+    "/integrations/integrations/v1/rum/sync": {
+      "post": {
+        "tags": [
+          "Integration service"
+        ],
+        "summary": "Trigger sync of RUM integration data",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "IntegrationService_SyncRumData",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Sync RUM data request",
+                "type": "object",
+                "properties": {
+                  "force": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyncRumDataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "integrations:ReadConfig"
+        ]
+      }
+    },
+    "/integrations/integrations/v1/{id}": {
+      "get": {
+        "tags": [
+          "Integration service"
+        ],
+        "summary": "Get integration details",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "IntegrationService_GetIntegrationDetails",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "in": "query",
+            "name": "include_testing_revision",
+            "schema": {
+              "type": "boolean"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetIntegrationDetailsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "integrations:ReadConfig"
+        ]
+      }
+    },
+    "/integrations/managed/v1": {
       "get": {
         "tags": [
           "Integration service"
@@ -288,7 +471,7 @@
         ]
       }
     },
-    "/integrations/integrations/v1/managed/{integration_id}": {
+    "/integrations/managed/v1/{integration_id}": {
       "get": {
         "tags": [
           "Integration service"
@@ -345,7 +528,7 @@
         ]
       }
     },
-    "/integrations/integrations/v1/metadata": {
+    "/integrations/metadata/v1": {
       "put": {
         "tags": [
           "Integration service"
@@ -471,7 +654,7 @@
         ]
       }
     },
-    "/integrations/integrations/v1/metadata/test": {
+    "/integrations/metadata/v1/test": {
       "post": {
         "tags": [
           "Integration service"
@@ -536,125 +719,7 @@
         ]
       }
     },
-    "/integrations/integrations/v1/rum/app-versions": {
-      "get": {
-        "tags": [
-          "Integration service"
-        ],
-        "summary": "Get RUM integration versions data",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "IntegrationService_GetRumApplicationVersionData",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "application_name",
-            "schema": {
-              "type": "string"
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetRumApplicationVersionDataResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-coralogixPermissions": [
-          "integrations:ReadConfig"
-        ]
-      }
-    },
-    "/integrations/integrations/v1/rum/sync": {
-      "post": {
-        "tags": [
-          "Integration service"
-        ],
-        "summary": "Trigger sync of RUM integration data",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "IntegrationService_SyncRumData",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "title": "Sync RUM data request",
-                "type": "object",
-                "properties": {
-                  "force": {
-                    "type": "boolean"
-                  }
-                },
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SyncRumDataResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-coralogixPermissions": [
-          "integrations:ReadConfig"
-        ]
-      }
-    },
-    "/integrations/integrations/v1/template": {
+    "/integrations/template/v1": {
       "get": {
         "tags": [
           "Integration service"
@@ -713,71 +778,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetTemplateResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-coralogixPermissions": [
-          "integrations:ReadConfig"
-        ]
-      }
-    },
-    "/integrations/integrations/v1/{id}": {
-      "get": {
-        "tags": [
-          "Integration service"
-        ],
-        "summary": "Get integration details",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "IntegrationService_GetIntegrationDetails",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "style": "simple"
-          },
-          {
-            "in": "query",
-            "name": "include_testing_revision",
-            "schema": {
-              "type": "boolean"
-            },
-            "style": "form"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetIntegrationDetailsResponse"
                 }
               }
             }
@@ -1299,12 +1299,6 @@
       "FieldInformation": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FieldInformationMultipleSelection"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationSingleBoolean"
-          },
-          {
             "$ref": "#/components/schemas/FieldInformationSelection"
           },
           {
@@ -1315,6 +1309,12 @@
           },
           {
             "$ref": "#/components/schemas/FieldInformationMultiText"
+          },
+          {
+            "$ref": "#/components/schemas/FieldInformationMultipleSelection"
+          },
+          {
+            "$ref": "#/components/schemas/FieldInformationSingleBoolean"
           }
         ]
       },
@@ -1820,6 +1820,9 @@
           "integration": {
             "$ref": "#/components/schemas/Integration"
           },
+          "isDeprecated": {
+            "type": "boolean"
+          },
           "isNew": {
             "type": "boolean"
           },
@@ -1932,6 +1935,12 @@
           },
           "name": {
             "type": "string"
+          },
+          "revisions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/v1.RevisionSummary"
+            }
           },
           "tags": {
             "type": "array",
@@ -2114,15 +2123,6 @@
       "IntegrationRevision": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IntegrationRevisionCloudFormation"
-          },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionManagedService"
-          },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionHelmChart"
-          },
-          {
             "$ref": "#/components/schemas/IntegrationRevisionAzureArmTemplate"
           },
           {
@@ -2130,6 +2130,15 @@
           },
           {
             "$ref": "#/components/schemas/IntegrationRevisionTerraform"
+          },
+          {
+            "$ref": "#/components/schemas/IntegrationRevisionCloudFormation"
+          },
+          {
+            "$ref": "#/components/schemas/IntegrationRevisionManagedService"
+          },
+          {
+            "$ref": "#/components/schemas/IntegrationRevisionHelmChart"
           }
         ]
       },
@@ -2529,6 +2538,34 @@
         "description": "This data structure represents a managed service.",
         "type": "object"
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleSelectionValue": {
         "externalDocs": {
           "url": ""
@@ -2569,6 +2606,9 @@
       "Parameter": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/ParameterBooleanValue"
+          },
+          {
             "$ref": "#/components/schemas/ParameterStringList"
           },
           {
@@ -2582,9 +2622,6 @@
           },
           {
             "$ref": "#/components/schemas/ParameterStringValue"
-          },
-          {
-            "$ref": "#/components/schemas/ParameterBooleanValue"
           }
         ]
       },
@@ -2757,6 +2794,9 @@
             "items": {
               "$ref": "#/components/schemas/Parameter"
             }
+          },
+          "revisionLifecycle": {
+            "$ref": "#/components/schemas/RevisionLifecycle"
           }
         },
         "additionalProperties": false
@@ -2792,6 +2832,9 @@
             "items": {
               "$ref": "#/components/schemas/Parameter"
             }
+          },
+          "revisionLifecycle": {
+            "$ref": "#/components/schemas/RevisionLifecycle"
           }
         },
         "additionalProperties": false
@@ -2827,9 +2870,23 @@
             "items": {
               "$ref": "#/components/schemas/Parameter"
             }
+          },
+          "revisionLifecycle": {
+            "$ref": "#/components/schemas/RevisionLifecycle"
           }
         },
         "additionalProperties": false
+      },
+      "RevisionLifecycle": {
+        "type": "string",
+        "enum": [
+          "REVISION_LIFECYCLE_UNSPECIFIED",
+          "REVISION_LIFECYCLE_ALPHA",
+          "REVISION_LIFECYCLE_PRIVATE_BETA",
+          "REVISION_LIFECYCLE_PUBLIC_BETA",
+          "REVISION_LIFECYCLE_GA",
+          "REVISION_LIFECYCLE_DEPRECATED"
+        ]
       },
       "RevisionRef": {
         "externalDocs": {
@@ -3060,24 +3117,12 @@
       "TestIntegrationResult": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TestIntegrationResultFailure"
+            "$ref": "#/components/schemas/TestIntegrationResultSuccess"
           },
           {
-            "$ref": "#/components/schemas/TestIntegrationResultSuccess"
+            "$ref": "#/components/schemas/TestIntegrationResultFailure"
           }
         ]
-      },
-      "TestIntegrationResult.Failure": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Failure",
-        "type": "object",
-        "properties": {
-          "errorMessage": {
-            "type": "string"
-          }
-        }
       },
       "TestIntegrationResult.Success": {
         "externalDocs": {
@@ -3094,7 +3139,7 @@
         "type": "object",
         "properties": {
           "failure": {
-            "$ref": "#/components/schemas/TestIntegrationResult.Failure"
+            "$ref": "#/components/schemas/v1.Failure"
           }
         },
         "additionalProperties": false
@@ -3312,8 +3357,23 @@
           }
         }
       },
+      "v1.Failure": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Failure",
+        "type": "object",
+        "properties": {
+          "errorMessage": {
+            "type": "string"
+          }
+        }
+      },
       "v1.IntegrationType": {
         "oneOf": [
+          {
+            "$ref": "#/components/schemas/V1IntegrationTypeContextualData"
+          },
           {
             "$ref": "#/components/schemas/V1IntegrationTypeGenericWebhook"
           },
@@ -3331,11 +3391,19 @@
           },
           {
             "$ref": "#/components/schemas/V1IntegrationTypePushBasedContextualData"
-          },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeContextualData"
           }
         ]
+      },
+      "v1.RevisionSummary": {
+        "type": "object",
+        "properties": {
+          "lifecycle": {
+            "$ref": "#/components/schemas/RevisionLifecycle"
+          },
+          "version": {
+            "type": "string"
+          }
+        }
       },
       "v3.FilterOperator": {
         "type": "string",

@@ -78,83 +78,28 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*CasesServiceAPI* | [**CasesServiceAcknowledgeCase**](docs/CasesServiceAPI.md#casesserviceacknowledgecase) | **Post** /cases/cases/v1/{id}:acknowledge | Acknowledge a case
-*CasesServiceAPI* | [**CasesServiceAssignCase**](docs/CasesServiceAPI.md#casesserviceassigncase) | **Post** /cases/cases/v1/{id}:assign | Assign a case to a user
-*CasesServiceAPI* | [**CasesServiceCloseCase**](docs/CasesServiceAPI.md#casesserviceclosecase) | **Post** /cases/cases/v1/{id}:close | Close a case
-*CasesServiceAPI* | [**CasesServiceGetCase**](docs/CasesServiceAPI.md#casesservicegetcase) | **Get** /cases/cases/v1/{id} | Get case by ID
-*CasesServiceAPI* | [**CasesServiceGetFilterValues**](docs/CasesServiceAPI.md#casesservicegetfiltervalues) | **Post** /cases/cases/v1:get-filter-values | Get available filter values
-*CasesServiceAPI* | [**CasesServiceListCases**](docs/CasesServiceAPI.md#casesservicelistcases) | **Post** /cases/cases/v1 | List cases with filters
-*CasesServiceAPI* | [**CasesServiceResolveCase**](docs/CasesServiceAPI.md#casesserviceresolvecase) | **Post** /cases/cases/v1/{id}:resolve | Resolve a case
-*CasesServiceAPI* | [**CasesServiceSetPriorityOverride**](docs/CasesServiceAPI.md#casesservicesetpriorityoverride) | **Post** /cases/cases/v1/{id}:setPriorityOverride | Set priority override
-*CasesServiceAPI* | [**CasesServiceUnassignCase**](docs/CasesServiceAPI.md#casesserviceunassigncase) | **Post** /cases/cases/v1/{id}:unassign | Remove case assignment
-*CasesServiceAPI* | [**CasesServiceUnsetPriorityOverride**](docs/CasesServiceAPI.md#casesserviceunsetpriorityoverride) | **Post** /cases/cases/v1/{id}:unsetPriorityOverride | Remove priority override
-*CasesServiceAPI* | [**CasesServiceUpdateCase**](docs/CasesServiceAPI.md#casesserviceupdatecase) | **Patch** /cases/cases/v1/{id} | Update case fields
+*CasesServiceAPI* | [**CasesServiceGetCaseExternalReferences**](docs/CasesServiceAPI.md#casesservicegetcaseexternalreferences) | **Get** /cases/cases/v1/{case_id}/external-references | Get external references for a case
 
 
 ## Documentation For Models
 
- - [AcknowledgeCaseRequest](docs/AcknowledgeCaseRequest.md)
- - [AcknowledgeCaseResponse](docs/AcknowledgeCaseResponse.md)
- - [AlertGroupingType](docs/AlertGroupingType.md)
- - [AlertIndicator](docs/AlertIndicator.md)
- - [AlertIndicatorState](docs/AlertIndicatorState.md)
- - [AlertPriority](docs/AlertPriority.md)
- - [AssignCaseRequest](docs/AssignCaseRequest.md)
- - [AssignCaseResponse](docs/AssignCaseResponse.md)
- - [AssigneeAggregation](docs/AssigneeAggregation.md)
- - [AssigneeCount](docs/AssigneeCount.md)
- - [AssigneeOption](docs/AssigneeOption.md)
- - [AssigneeOptionAssignee](docs/AssigneeOptionAssignee.md)
- - [AssigneeOptionUnassigned](docs/AssigneeOptionUnassigned.md)
- - [Case](docs/Case.md)
- - [CaseCategory](docs/CaseCategory.md)
- - [CaseFilters](docs/CaseFilters.md)
- - [CaseOrderBy](docs/CaseOrderBy.md)
- - [CaseOrderByDirection](docs/CaseOrderByDirection.md)
- - [CaseOrderByField](docs/CaseOrderByField.md)
- - [CasePatch](docs/CasePatch.md)
- - [CasePriority](docs/CasePriority.md)
- - [CaseResolver](docs/CaseResolver.md)
- - [CaseState](docs/CaseState.md)
- - [CaseStatus](docs/CaseStatus.md)
- - [CasesV1GetFilterValuesResponse](docs/CasesV1GetFilterValuesResponse.md)
- - [CasesV1PaginationRequest](docs/CasesV1PaginationRequest.md)
- - [CasesV1PaginationResponse](docs/CasesV1PaginationResponse.md)
- - [CasesV1UserDetails](docs/CasesV1UserDetails.md)
- - [CategoryAggregation](docs/CategoryAggregation.md)
- - [CloseCaseResponse](docs/CloseCaseResponse.md)
+ - [CaseExternalReference](docs/CaseExternalReference.md)
  - [ColorsByAggregation](docs/ColorsByAggregation.md)
  - [ColorsByGroupBy](docs/ColorsByGroupBy.md)
  - [ColorsByStack](docs/ColorsByStack.md)
  - [CommonGroup](docs/CommonGroup.md)
- - [DateRangeFilter](docs/DateRangeFilter.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
+ - [ExternalReferenceVendor](docs/ExternalReferenceVendor.md)
  - [FieldGroup](docs/FieldGroup.md)
- - [FilterGroup](docs/FilterGroup.md)
- - [FilterGroupAggregation](docs/FilterGroupAggregation.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
  - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
- - [GetCaseFilterValuesRequest](docs/GetCaseFilterValuesRequest.md)
- - [GetCaseResponse](docs/GetCaseResponse.md)
- - [ListCasesRequest](docs/ListCasesRequest.md)
- - [ListCasesResponse](docs/ListCasesResponse.md)
+ - [GetCaseExternalReferencesResponse](docs/GetCaseExternalReferencesResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
- - [PriorityAggregation](docs/PriorityAggregation.md)
- - [PriorityDetails](docs/PriorityDetails.md)
- - [ResolutionDetails](docs/ResolutionDetails.md)
- - [ResolveCaseResponse](docs/ResolveCaseResponse.md)
- - [SetPriorityOverrideRequest](docs/SetPriorityOverrideRequest.md)
- - [SetPriorityOverrideResponse](docs/SetPriorityOverrideResponse.md)
- - [StateAggregation](docs/StateAggregation.md)
- - [StatusAggregation](docs/StatusAggregation.md)
- - [UnassignCaseResponse](docs/UnassignCaseResponse.md)
- - [UnsetPriorityOverrideResponse](docs/UnsetPriorityOverrideResponse.md)
- - [UpdateCaseResponse](docs/UpdateCaseResponse.md)
- - [V1KeyValue](docs/V1KeyValue.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
- - [ValueCount](docs/ValueCount.md)
 
 
 ## Documentation For Authorization

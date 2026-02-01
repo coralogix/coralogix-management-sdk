@@ -213,10 +213,20 @@ components:
       type: object
     CustomEnrichmentData:
       oneOf:
-      - $ref: "#/components/schemas/CustomEnrichmentDataTextual"
       - $ref: "#/components/schemas/CustomEnrichmentDataBinary"
+      - $ref: "#/components/schemas/CustomEnrichmentDataTextual"
     CustomEnrichmentDataBinary:
       additionalProperties: false
+      example:
+        binary: binary
+        definition:
+          fileName: fileName
+          isQueryOnly: true
+          fileSize: 0
+          name: name
+          description: description
+          id: 6
+          version: 1
       properties:
         binary:
           format: byte
@@ -226,16 +236,6 @@ components:
       type: object
     CustomEnrichmentDataTextual:
       additionalProperties: false
-      example:
-        definition:
-          fileName: fileName
-          isQueryOnly: true
-          fileSize: 0
-          name: name
-          description: description
-          id: 6
-          version: 1
-        textual: textual
       properties:
         definition:
           $ref: "#/components/schemas/CustomEnrichment"
@@ -414,6 +414,28 @@ components:
           type: array
       title: Get Custom Enrichments Response
       type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     MultipleValues:
       properties:
         matcher:
@@ -451,7 +473,8 @@ components:
     SearchCustomEnrichmentDataResponse:
       example:
         customEnrichmentsData:
-        - definition:
+        - binary: binary
+          definition:
             fileName: fileName
             isQueryOnly: true
             fileSize: 0
@@ -459,8 +482,8 @@ components:
             description: description
             id: 6
             version: 1
-          textual: textual
-        - definition:
+        - binary: binary
+          definition:
             fileName: fileName
             isQueryOnly: true
             fileSize: 0
@@ -468,7 +491,6 @@ components:
             description: description
             id: 6
             version: 1
-          textual: textual
       properties:
         customEnrichmentsData:
           items:
@@ -564,8 +586,8 @@ components:
       type: object
     CustomEnrichmentService_SearchCustomEnrichmentData_search_clauses_parameter_inner:
       oneOf:
-      - $ref: "#/components/schemas/SearchClauseId"
       - $ref: "#/components/schemas/SearchClauseName"
+      - $ref: "#/components/schemas/SearchClauseId"
   securitySchemes:
     apiKeyAuth:
       description: API key authentication

@@ -78,7 +78,7 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*GlobalRoutersServiceAPI* | [**GlobalRoutersServiceBatchGetGlobalRouters**](docs/GlobalRoutersServiceAPI.md#globalroutersservicebatchgetglobalrouters) | **Get** /notifications/notification-center/v1/routers:batchGetSummaries | Batch Get Global Routers
+*GlobalRoutersServiceAPI* | [**GlobalRoutersServiceBatchGetGlobalRouters**](docs/GlobalRoutersServiceAPI.md#globalroutersservicebatchgetglobalrouters) | **Get** /notifications/notification-center/v1/routers/all/summaries | Batch Get Global Routers
 *GlobalRoutersServiceAPI* | [**GlobalRoutersServiceCreateGlobalRouter**](docs/GlobalRoutersServiceAPI.md#globalroutersservicecreateglobalrouter) | **Post** /notifications/notification-center/v1/routers | Create Global Router
 *GlobalRoutersServiceAPI* | [**GlobalRoutersServiceDeleteGlobalRouter**](docs/GlobalRoutersServiceAPI.md#globalroutersservicedeleteglobalrouter) | **Delete** /notifications/notification-center/v1/routers/{id} | Delete Global Router
 *GlobalRoutersServiceAPI* | [**GlobalRoutersServiceGetGlobalRouter**](docs/GlobalRoutersServiceAPI.md#globalroutersservicegetglobalrouter) | **Get** /notifications/notification-center/v1/routers/{id} | Get Global Router
@@ -96,6 +96,7 @@ Class | Method | HTTP request | Description
  - [CreateGlobalRouterRequest](docs/CreateGlobalRouterRequest.md)
  - [CreateGlobalRouterResponse](docs/CreateGlobalRouterResponse.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
+ - [FallbackTarget](docs/FallbackTarget.md)
  - [FieldGroup](docs/FieldGroup.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
@@ -105,6 +106,8 @@ Class | Method | HTTP request | Description
  - [GlobalRouter](docs/GlobalRouter.md)
  - [GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue](docs/GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue.md)
  - [ListGlobalRoutersResponse](docs/ListGlobalRoutersResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [NotificationCenterEntityType](docs/NotificationCenterEntityType.md)
  - [ReplaceGlobalRouterRequest](docs/ReplaceGlobalRouterRequest.md)

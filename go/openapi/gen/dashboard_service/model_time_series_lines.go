@@ -38,7 +38,7 @@ type TimeSeriesLines struct {
 	SeriesCountLimit *string `json:"seriesCountLimit,omitempty"`
 	// Custom template for the series name
 	SeriesNameTemplate *string `json:"seriesNameTemplate,omitempty"`
-	StackedLine *TimeSeriesLinesStackedLine `json:"stackedLine,omitempty"`
+	StackedLine *VisualizationStackedLine `json:"stackedLine,omitempty"`
 	TemporalField *ObservationField `json:"temporalField,omitempty"`
 	Tooltip *TimeSeriesTooltip `json:"tooltip,omitempty"`
 	Unit *CommonUnit `json:"unit,omitempty"`
@@ -419,9 +419,9 @@ func (o *TimeSeriesLines) SetSeriesNameTemplate(v string) {
 }
 
 // GetStackedLine returns the StackedLine field value if set, zero value otherwise.
-func (o *TimeSeriesLines) GetStackedLine() TimeSeriesLinesStackedLine {
+func (o *TimeSeriesLines) GetStackedLine() VisualizationStackedLine {
 	if o == nil || IsNil(o.StackedLine) {
-		var ret TimeSeriesLinesStackedLine
+		var ret VisualizationStackedLine
 		return ret
 	}
 	return *o.StackedLine
@@ -429,7 +429,7 @@ func (o *TimeSeriesLines) GetStackedLine() TimeSeriesLinesStackedLine {
 
 // GetStackedLineOk returns a tuple with the StackedLine field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TimeSeriesLines) GetStackedLineOk() (*TimeSeriesLinesStackedLine, bool) {
+func (o *TimeSeriesLines) GetStackedLineOk() (*VisualizationStackedLine, bool) {
 	if o == nil || IsNil(o.StackedLine) {
 		return nil, false
 	}
@@ -445,8 +445,8 @@ func (o *TimeSeriesLines) HasStackedLine() bool {
 	return false
 }
 
-// SetStackedLine gets a reference to the given TimeSeriesLinesStackedLine and assigns it to the StackedLine field.
-func (o *TimeSeriesLines) SetStackedLine(v TimeSeriesLinesStackedLine) {
+// SetStackedLine gets a reference to the given VisualizationStackedLine and assigns it to the StackedLine field.
+func (o *TimeSeriesLines) SetStackedLine(v VisualizationStackedLine) {
 	o.StackedLine = &v
 }
 

@@ -27,11 +27,11 @@ type SlosServiceAPIService service
 type ApiSlosServiceBatchExecuteSloRequest struct {
 	ctx context.Context
 	ApiService *SlosServiceAPIService
-	requests *[]SlosServiceBatchExecuteSloRequestsParameterInner
+	batchExecuteSloRequest *BatchExecuteSloRequest
 }
 
-func (r ApiSlosServiceBatchExecuteSloRequest) Requests(requests []SlosServiceBatchExecuteSloRequestsParameterInner) ApiSlosServiceBatchExecuteSloRequest {
-	r.requests = &requests
+func (r ApiSlosServiceBatchExecuteSloRequest) BatchExecuteSloRequest(batchExecuteSloRequest BatchExecuteSloRequest) ApiSlosServiceBatchExecuteSloRequest {
+	r.batchExecuteSloRequest = &batchExecuteSloRequest
 	return r
 }
 
@@ -69,25 +69,14 @@ func (a *SlosServiceAPIService) SlosServiceBatchExecuteSloExecute(r ApiSlosServi
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/slo/slos:batchExecute"
+	localVarPath := localBasePath + "/slo/slos/v1/all/execute"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.requests != nil {
-		t := *r.requests
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "requests", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "requests", t, "form", "multi")
-		}
-	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -103,6 +92,8 @@ func (a *SlosServiceAPIService) SlosServiceBatchExecuteSloExecute(r ApiSlosServi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.batchExecuteSloRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -185,7 +176,7 @@ func (a *SlosServiceAPIService) SlosServiceBatchGetSlosExecute(r ApiSlosServiceB
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/slo/slos:batchGet"
+	localVarPath := localBasePath + "/slo/slos/v1/all/list"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -307,7 +298,7 @@ func (a *SlosServiceAPIService) SlosServiceCreateSloExecute(r ApiSlosServiceCrea
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/slo/slos"
+	localVarPath := localBasePath + "/slo/slos/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -414,7 +405,7 @@ func (a *SlosServiceAPIService) SlosServiceDeleteSloExecute(r ApiSlosServiceDele
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/slo/slos/{id}"
+	localVarPath := localBasePath + "/slo/slos/v1/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -517,7 +508,7 @@ func (a *SlosServiceAPIService) SlosServiceGetSloExecute(r ApiSlosServiceGetSloR
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/slo/slos/{id}"
+	localVarPath := localBasePath + "/slo/slos/v1/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -617,7 +608,7 @@ func (a *SlosServiceAPIService) SlosServiceGetZeroStateExecute(r ApiSlosServiceG
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/slo/slos/zeroState"
+	localVarPath := localBasePath + "/slo/zero-state/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -680,10 +671,10 @@ func (a *SlosServiceAPIService) SlosServiceGetZeroStateExecute(r ApiSlosServiceG
 type ApiSlosServiceListSlosRequest struct {
 	ctx context.Context
 	ApiService *SlosServiceAPIService
-	filters *SloFilters
+	filters *[]SloFilter
 }
 
-func (r ApiSlosServiceListSlosRequest) Filters(filters SloFilters) ApiSlosServiceListSlosRequest {
+func (r ApiSlosServiceListSlosRequest) Filters(filters []SloFilter) ApiSlosServiceListSlosRequest {
 	r.filters = &filters
 	return r
 }
@@ -722,14 +713,22 @@ func (a *SlosServiceAPIService) SlosServiceListSlosExecute(r ApiSlosServiceListS
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/slo/slos"
+	localVarPath := localBasePath + "/slo/slos/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
 	if r.filters != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "filters", r.filters, "form", "")
+		t := *r.filters
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "filters", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "filters", t, "form", "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -836,7 +835,7 @@ func (a *SlosServiceAPIService) SlosServiceReplaceSloExecute(r ApiSlosServiceRep
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/slo/slos"
+	localVarPath := localBasePath + "/slo/slos/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -935,7 +934,7 @@ func (a *SlosServiceAPIService) SlosServiceValidateReplaceSloAlerts(ctx context.
 //  @return ReplaceSloAlertsValidationsResponse
 func (a *SlosServiceAPIService) SlosServiceValidateReplaceSloAlertsExecute(r ApiSlosServiceValidateReplaceSloAlertsRequest) (*ReplaceSloAlertsValidationsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  *ReplaceSloAlertsValidationsResponse
@@ -946,7 +945,7 @@ func (a *SlosServiceAPIService) SlosServiceValidateReplaceSloAlertsExecute(r Api
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/slo/slos/validate"
+	localVarPath := localBasePath + "/slo/validated/v1"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

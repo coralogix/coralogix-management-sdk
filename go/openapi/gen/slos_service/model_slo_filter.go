@@ -12,8 +12,6 @@ package slos_service
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the SloFilter type satisfies the MappedNullable interface at compile time
@@ -21,20 +19,16 @@ var _ MappedNullable = &SloFilter{}
 
 // SloFilter A filter for SLOs, consisting of a field and a predicate
 type SloFilter struct {
-	Field SloFilterField `json:"field"`
-	Predicate SloFilterPredicate `json:"predicate"`
+	Field *SloFilterField `json:"field,omitempty"`
+	Predicate *SloFilterPredicate `json:"predicate,omitempty"`
 }
-
-type _SloFilter SloFilter
 
 // NewSloFilter instantiates a new SloFilter object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSloFilter(field SloFilterField, predicate SloFilterPredicate) *SloFilter {
+func NewSloFilter() *SloFilter {
 	this := SloFilter{}
-	this.Field = field
-	this.Predicate = predicate
 	return &this
 }
 
@@ -46,52 +40,68 @@ func NewSloFilterWithDefaults() *SloFilter {
 	return &this
 }
 
-// GetField returns the Field field value
+// GetField returns the Field field value if set, zero value otherwise.
 func (o *SloFilter) GetField() SloFilterField {
-	if o == nil {
+	if o == nil || IsNil(o.Field) {
 		var ret SloFilterField
 		return ret
 	}
-
-	return o.Field
+	return *o.Field
 }
 
-// GetFieldOk returns a tuple with the Field field value
+// GetFieldOk returns a tuple with the Field field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SloFilter) GetFieldOk() (*SloFilterField, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Field) {
 		return nil, false
 	}
-	return &o.Field, true
+	return o.Field, true
 }
 
-// SetField sets field value
+// HasField returns a boolean if a field has been set.
+func (o *SloFilter) HasField() bool {
+	if o != nil && !IsNil(o.Field) {
+		return true
+	}
+
+	return false
+}
+
+// SetField gets a reference to the given SloFilterField and assigns it to the Field field.
 func (o *SloFilter) SetField(v SloFilterField) {
-	o.Field = v
+	o.Field = &v
 }
 
-// GetPredicate returns the Predicate field value
+// GetPredicate returns the Predicate field value if set, zero value otherwise.
 func (o *SloFilter) GetPredicate() SloFilterPredicate {
-	if o == nil {
+	if o == nil || IsNil(o.Predicate) {
 		var ret SloFilterPredicate
 		return ret
 	}
-
-	return o.Predicate
+	return *o.Predicate
 }
 
-// GetPredicateOk returns a tuple with the Predicate field value
+// GetPredicateOk returns a tuple with the Predicate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SloFilter) GetPredicateOk() (*SloFilterPredicate, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Predicate) {
 		return nil, false
 	}
-	return &o.Predicate, true
+	return o.Predicate, true
 }
 
-// SetPredicate sets field value
+// HasPredicate returns a boolean if a field has been set.
+func (o *SloFilter) HasPredicate() bool {
+	if o != nil && !IsNil(o.Predicate) {
+		return true
+	}
+
+	return false
+}
+
+// SetPredicate gets a reference to the given SloFilterPredicate and assigns it to the Predicate field.
 func (o *SloFilter) SetPredicate(v SloFilterPredicate) {
-	o.Predicate = v
+	o.Predicate = &v
 }
 
 func (o SloFilter) MarshalJSON() ([]byte, error) {
@@ -104,47 +114,13 @@ func (o SloFilter) MarshalJSON() ([]byte, error) {
 
 func (o SloFilter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["field"] = o.Field
-	toSerialize["predicate"] = o.Predicate
+	if !IsNil(o.Field) {
+		toSerialize["field"] = o.Field
+	}
+	if !IsNil(o.Predicate) {
+		toSerialize["predicate"] = o.Predicate
+	}
 	return toSerialize, nil
-}
-
-func (o *SloFilter) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"field",
-		"predicate",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varSloFilter := _SloFilter{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSloFilter)
-
-	if err != nil {
-		return err
-	}
-
-	*o = SloFilter(varSloFilter)
-
-	return err
 }
 
 type NullableSloFilter struct {

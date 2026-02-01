@@ -5,6 +5,171 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/integrations/webhook-types/v1": {
+      "get": {
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "summary": "Get outgoing webhook types",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_ListOutgoingWebhookTypes",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOutgoingWebhookTypesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "outbound-webhooks:ReadConfig"
+        ]
+      }
+    },
+    "/integrations/webhook-types/v1/{type}": {
+      "get": {
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "summary": "Get outgoing webhook type details",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_GetOutgoingWebhookTypeDetails",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "type",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/WebhookType"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOutgoingWebhookTypeDetailsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "outbound-webhooks:ReadConfig"
+        ]
+      }
+    },
+    "/integrations/webhooks-test/v1": {
+      "post": {
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "summary": "Test an outgoing webhook",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_TestOutgoingWebhook",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Test outgoing webhook request",
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/OutgoingWebhookInputData"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestOutgoingWebhookResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "outbound-webhooks:ReadConfig"
+        ]
+      }
+    },
     "/integrations/webhooks/v1": {
       "get": {
         "tags": [
@@ -175,7 +340,63 @@
         ]
       }
     },
-    "/integrations/webhooks/v1/summary": {
+    "/integrations/webhooks/v1/list/by-types": {
+      "get": {
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "summary": "List outgoing webhooks",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_ListOutgoingWebhooks",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "type",
+            "schema": {
+              "$ref": "#/components/schemas/WebhookType"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOutgoingWebhooksResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "outbound-webhooks:ReadConfig"
+        ]
+      }
+    },
+    "/integrations/webhooks/v1/list/summaries": {
       "get": {
         "tags": [
           "Outgoing webhooks service"
@@ -218,234 +439,6 @@
         },
         "x-coralogixPermissions": [
           "outbound-webhooks:ReadSummary"
-        ]
-      }
-    },
-    "/integrations/webhooks/v1/test": {
-      "post": {
-        "tags": [
-          "Outgoing webhooks service"
-        ],
-        "summary": "Test an outgoing webhook",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "OutgoingWebhooksService_TestOutgoingWebhook",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "title": "Test outgoing webhook request",
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/OutgoingWebhookInputData"
-                  }
-                },
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TestOutgoingWebhookResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-coralogixPermissions": [
-          "outbound-webhooks:ReadConfig"
-        ]
-      }
-    },
-    "/integrations/webhooks/v1/test-existing": {
-      "post": {
-        "tags": [
-          "Outgoing webhooks service"
-        ],
-        "summary": "Test an existing outgoing webhook",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "OutgoingWebhooksService_TestExistingOutgoingWebhook",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "title": "Test existing outgoing webhook request",
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "example": "example_id",
-                    "type": "string"
-                  }
-                },
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TestOutgoingWebhookResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-coralogixPermissions": [
-          "outbound-webhooks:ReadConfig"
-        ]
-      }
-    },
-    "/integrations/webhooks/v1/types": {
-      "get": {
-        "tags": [
-          "Outgoing webhooks service"
-        ],
-        "summary": "Get outgoing webhook types",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "OutgoingWebhooksService_ListOutgoingWebhookTypes",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ListOutgoingWebhookTypesResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-coralogixPermissions": [
-          "outbound-webhooks:ReadConfig"
-        ]
-      }
-    },
-    "/integrations/webhooks/v1/types/{type}": {
-      "get": {
-        "tags": [
-          "Outgoing webhooks service"
-        ],
-        "summary": "Get outgoing webhook type details",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "OutgoingWebhooksService_GetOutgoingWebhookTypeDetails",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "type",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/WebhookType"
-            },
-            "style": "simple"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetOutgoingWebhookTypeDetailsResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        },
-        "x-coralogixPermissions": [
-          "outbound-webhooks:ReadConfig"
         ]
       }
     },
@@ -562,25 +555,27 @@
         ]
       }
     },
-    "/integrations/webhooks/v1:listByType": {
+    "/integrations/webhooks/v1/{id}/test": {
       "get": {
         "tags": [
           "Outgoing webhooks service"
         ],
-        "summary": "List outgoing webhooks",
+        "summary": "Test an existing outgoing webhook",
         "description": "No description available",
         "externalDocs": {
           "url": ""
         },
-        "operationId": "OutgoingWebhooksService_ListOutgoingWebhooks",
+        "operationId": "OutgoingWebhooksService_TestExistingOutgoingWebhook",
         "parameters": [
           {
-            "in": "query",
-            "name": "type",
+            "in": "path",
+            "name": "id",
+            "required": true,
             "schema": {
-              "$ref": "#/components/schemas/WebhookType"
+              "example": "example_id",
+              "type": "string"
             },
-            "style": "form"
+            "style": "simple"
           }
         ],
         "responses": {
@@ -589,7 +584,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ListOutgoingWebhooksResponse"
+                  "$ref": "#/components/schemas/TestOutgoingWebhookResponse"
                 }
               }
             }
@@ -1049,6 +1044,34 @@
         "title": "Microsoft Teams configuration",
         "type": "object"
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -1103,19 +1126,7 @@
       "OutgoingWebhook": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/OutgoingWebhookGenericWebhook"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookSlack"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookPagerDuty"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookSendLog"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookOpsgenie"
+            "$ref": "#/components/schemas/OutgoingWebhookMicrosoftTeams"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookAwsEventBridge"
@@ -1124,19 +1135,31 @@
             "$ref": "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
           },
           {
+            "$ref": "#/components/schemas/OutgoingWebhookGenericWebhook"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookSlack"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookSendLog"
+          },
+          {
             "$ref": "#/components/schemas/OutgoingWebhookEmailGroup"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookMicrosoftTeams"
+            "$ref": "#/components/schemas/OutgoingWebhookJira"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookJira"
+            "$ref": "#/components/schemas/OutgoingWebhookOpsgenie"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookDemisto"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookIbmEventNotifications"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookPagerDuty"
           }
         ]
       },
@@ -1410,10 +1433,7 @@
             "$ref": "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataJira"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataDemisto"
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataOpsgenie"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
@@ -1428,7 +1448,10 @@
             "$ref": "#/components/schemas/OutgoingWebhookInputDataSendLog"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataOpsgenie"
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataJira"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataDemisto"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
@@ -2121,10 +2144,10 @@
       "TestOutgoingWebhookResponse": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TestOutgoingWebhookResponseFailure"
+            "$ref": "#/components/schemas/TestOutgoingWebhookResponseSuccess"
           },
           {
-            "$ref": "#/components/schemas/TestOutgoingWebhookResponseSuccess"
+            "$ref": "#/components/schemas/TestOutgoingWebhookResponseFailure"
           }
         ]
       },

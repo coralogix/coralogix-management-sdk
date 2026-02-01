@@ -65,6 +65,9 @@
                 "description": "This data structure is used to set a storage target for logs.",
                 "type": "object",
                 "properties": {
+                  "format": {
+                    "$ref": "#/components/schemas/TargetFormat"
+                  },
                   "isActive": {
                     "example": true,
                     "type": "boolean"
@@ -127,12 +130,16 @@
         "type": "object",
         "properties": {
           "archivingFormatId": {
+            "deprecated": true,
             "example": "json_id",
             "type": "string"
           },
           "enableTags": {
             "example": true,
             "type": "boolean"
+          },
+          "format": {
+            "$ref": "#/components/schemas/TargetFormat"
           },
           "isActive": {
             "example": true,
@@ -295,6 +302,34 @@
           "IBM_BUCKET_TYPE_INTERNAL"
         ]
       },
+      "MinMaxAuto": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "auto": {
+            "$ref": "#/components/schemas/MinMaxAuto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MinMaxCustom": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Min-Max",
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
+        "type": "object",
+        "properties": {
+          "custom": {
+            "$ref": "#/components/schemas/MinMaxCustom"
+          }
+        },
+        "additionalProperties": false
+      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -373,6 +408,13 @@
           {
             "$ref": "#/components/schemas/TargetIbmCos"
           }
+        ]
+      },
+      "TargetFormat": {
+        "type": "string",
+        "enum": [
+          "TARGET_FORMAT_UNSPECIFIED",
+          "TARGET_FORMAT_CX_DATA_V1"
         ]
       },
       "TargetIbmCos": {

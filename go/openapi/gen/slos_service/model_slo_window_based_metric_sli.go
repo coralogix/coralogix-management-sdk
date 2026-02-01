@@ -13,8 +13,6 @@ package slos_service
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the SloWindowBasedMetricSli type satisfies the MappedNullable interface at compile time
@@ -28,25 +26,24 @@ type SloWindowBasedMetricSli struct {
 	Grouping *V1Grouping `json:"grouping,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Labels *map[string]string `json:"labels,omitempty"`
-	Name string `json:"name"`
+	Name *string `json:"name,omitempty"`
+	ProductType *SloProductType `json:"productType,omitempty"`
 	Revision *V1Revision `json:"revision,omitempty"`
 	SloTimeFrame *SloTimeFrame `json:"sloTimeFrame,omitempty"`
-	TargetThresholdPercentage float32 `json:"targetThresholdPercentage"`
+	SloType *SloType `json:"sloType,omitempty"`
+	TargetThresholdPercentage *float32 `json:"targetThresholdPercentage,omitempty"`
+	// Deprecated
 	Type *string `json:"type,omitempty"`
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 	WindowBasedMetricSli *WindowBasedMetricSli `json:"windowBasedMetricSli,omitempty"`
 }
 
-type _SloWindowBasedMetricSli SloWindowBasedMetricSli
-
 // NewSloWindowBasedMetricSli instantiates a new SloWindowBasedMetricSli object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSloWindowBasedMetricSli(name string, targetThresholdPercentage float32) *SloWindowBasedMetricSli {
+func NewSloWindowBasedMetricSli() *SloWindowBasedMetricSli {
 	this := SloWindowBasedMetricSli{}
-	this.Name = name
-	this.TargetThresholdPercentage = targetThresholdPercentage
 	return &this
 }
 
@@ -250,28 +247,68 @@ func (o *SloWindowBasedMetricSli) SetLabels(v map[string]string) {
 	o.Labels = &v
 }
 
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *SloWindowBasedMetricSli) GetName() string {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SloWindowBasedMetricSli) GetNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *SloWindowBasedMetricSli) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *SloWindowBasedMetricSli) SetName(v string) {
-	o.Name = v
+	o.Name = &v
+}
+
+// GetProductType returns the ProductType field value if set, zero value otherwise.
+func (o *SloWindowBasedMetricSli) GetProductType() SloProductType {
+	if o == nil || IsNil(o.ProductType) {
+		var ret SloProductType
+		return ret
+	}
+	return *o.ProductType
+}
+
+// GetProductTypeOk returns a tuple with the ProductType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloWindowBasedMetricSli) GetProductTypeOk() (*SloProductType, bool) {
+	if o == nil || IsNil(o.ProductType) {
+		return nil, false
+	}
+	return o.ProductType, true
+}
+
+// HasProductType returns a boolean if a field has been set.
+func (o *SloWindowBasedMetricSli) HasProductType() bool {
+	if o != nil && !IsNil(o.ProductType) {
+		return true
+	}
+
+	return false
+}
+
+// SetProductType gets a reference to the given SloProductType and assigns it to the ProductType field.
+func (o *SloWindowBasedMetricSli) SetProductType(v SloProductType) {
+	o.ProductType = &v
 }
 
 // GetRevision returns the Revision field value if set, zero value otherwise.
@@ -338,31 +375,72 @@ func (o *SloWindowBasedMetricSli) SetSloTimeFrame(v SloTimeFrame) {
 	o.SloTimeFrame = &v
 }
 
-// GetTargetThresholdPercentage returns the TargetThresholdPercentage field value
+// GetSloType returns the SloType field value if set, zero value otherwise.
+func (o *SloWindowBasedMetricSli) GetSloType() SloType {
+	if o == nil || IsNil(o.SloType) {
+		var ret SloType
+		return ret
+	}
+	return *o.SloType
+}
+
+// GetSloTypeOk returns a tuple with the SloType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloWindowBasedMetricSli) GetSloTypeOk() (*SloType, bool) {
+	if o == nil || IsNil(o.SloType) {
+		return nil, false
+	}
+	return o.SloType, true
+}
+
+// HasSloType returns a boolean if a field has been set.
+func (o *SloWindowBasedMetricSli) HasSloType() bool {
+	if o != nil && !IsNil(o.SloType) {
+		return true
+	}
+
+	return false
+}
+
+// SetSloType gets a reference to the given SloType and assigns it to the SloType field.
+func (o *SloWindowBasedMetricSli) SetSloType(v SloType) {
+	o.SloType = &v
+}
+
+// GetTargetThresholdPercentage returns the TargetThresholdPercentage field value if set, zero value otherwise.
 func (o *SloWindowBasedMetricSli) GetTargetThresholdPercentage() float32 {
-	if o == nil {
+	if o == nil || IsNil(o.TargetThresholdPercentage) {
 		var ret float32
 		return ret
 	}
-
-	return o.TargetThresholdPercentage
+	return *o.TargetThresholdPercentage
 }
 
-// GetTargetThresholdPercentageOk returns a tuple with the TargetThresholdPercentage field value
+// GetTargetThresholdPercentageOk returns a tuple with the TargetThresholdPercentage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SloWindowBasedMetricSli) GetTargetThresholdPercentageOk() (*float32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.TargetThresholdPercentage) {
 		return nil, false
 	}
-	return &o.TargetThresholdPercentage, true
+	return o.TargetThresholdPercentage, true
 }
 
-// SetTargetThresholdPercentage sets field value
+// HasTargetThresholdPercentage returns a boolean if a field has been set.
+func (o *SloWindowBasedMetricSli) HasTargetThresholdPercentage() bool {
+	if o != nil && !IsNil(o.TargetThresholdPercentage) {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetThresholdPercentage gets a reference to the given float32 and assigns it to the TargetThresholdPercentage field.
 func (o *SloWindowBasedMetricSli) SetTargetThresholdPercentage(v float32) {
-	o.TargetThresholdPercentage = v
+	o.TargetThresholdPercentage = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
+// Deprecated
 func (o *SloWindowBasedMetricSli) GetType() string {
 	if o == nil || IsNil(o.Type) {
 		var ret string
@@ -373,6 +451,7 @@ func (o *SloWindowBasedMetricSli) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *SloWindowBasedMetricSli) GetTypeOk() (*string, bool) {
 	if o == nil || IsNil(o.Type) {
 		return nil, false
@@ -390,6 +469,7 @@ func (o *SloWindowBasedMetricSli) HasType() bool {
 }
 
 // SetType gets a reference to the given string and assigns it to the Type field.
+// Deprecated
 func (o *SloWindowBasedMetricSli) SetType(v string) {
 	o.Type = &v
 }
@@ -486,14 +566,24 @@ func (o SloWindowBasedMetricSli) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Labels) {
 		toSerialize["labels"] = o.Labels
 	}
-	toSerialize["name"] = o.Name
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.ProductType) {
+		toSerialize["productType"] = o.ProductType
+	}
 	if !IsNil(o.Revision) {
 		toSerialize["revision"] = o.Revision
 	}
 	if !IsNil(o.SloTimeFrame) {
 		toSerialize["sloTimeFrame"] = o.SloTimeFrame
 	}
-	toSerialize["targetThresholdPercentage"] = o.TargetThresholdPercentage
+	if !IsNil(o.SloType) {
+		toSerialize["sloType"] = o.SloType
+	}
+	if !IsNil(o.TargetThresholdPercentage) {
+		toSerialize["targetThresholdPercentage"] = o.TargetThresholdPercentage
+	}
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
@@ -504,44 +594,6 @@ func (o SloWindowBasedMetricSli) ToMap() (map[string]interface{}, error) {
 		toSerialize["windowBasedMetricSli"] = o.WindowBasedMetricSli
 	}
 	return toSerialize, nil
-}
-
-func (o *SloWindowBasedMetricSli) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"name",
-		"targetThresholdPercentage",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varSloWindowBasedMetricSli := _SloWindowBasedMetricSli{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSloWindowBasedMetricSli)
-
-	if err != nil {
-		return err
-	}
-
-	*o = SloWindowBasedMetricSli(varSloWindowBasedMetricSli)
-
-	return err
 }
 
 type NullableSloWindowBasedMetricSli struct {

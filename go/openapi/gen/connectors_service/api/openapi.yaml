@@ -5,27 +5,6 @@ info:
 servers:
 - url: /
 paths:
-  /notifications/notification-center/v1/connector:
-    put:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: ConnectorsService_ReplaceConnector
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Replace_Connector_Request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ReplaceConnectorResponse"
-          description: ""
-      summary: Replace a Connector
-      tags:
-      - Connectors service
   /notifications/notification-center/v1/connectors:
     get:
       description: No description available
@@ -77,6 +56,137 @@ paths:
       summary: Create a Connector
       tags:
       - Connectors service
+    put:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ConnectorsService_ReplaceConnector
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Replace_Connector_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReplaceConnectorResponse"
+          description: ""
+      summary: Replace a Connector
+      tags:
+      - Connectors service
+  /notifications/notification-center/v1/connectors/all/list:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ConnectorsService_BatchGetConnectors
+      parameters:
+      - explode: true
+        in: query
+        name: connector_ids
+        required: false
+        schema:
+          example:
+          - connector-id-1
+          - connector-id-2
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchGetConnectorsResponse"
+          description: ""
+      summary: Batch Get Connectors
+      tags:
+      - Connectors service
+  /notifications/notification-center/v1/connectors/all/summaries:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ConnectorsService_BatchGetConnectorSummaries
+      parameters:
+      - explode: true
+        in: query
+        name: connector_ids
+        required: false
+        schema:
+          items:
+            example: ""
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchGetConnectorSummariesResponse"
+          description: ""
+      summary: Batch Get Connectors Summaries
+      tags:
+      - Connectors service
+  /notifications/notification-center/v1/connectors/list/summaries:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ConnectorsService_ListConnectorSummaries
+      parameters:
+      - explode: true
+        in: query
+        name: connector_type
+        required: false
+        schema:
+          $ref: "#/components/schemas/ConnectorType"
+        style: form
+      - explode: true
+        in: query
+        name: supported_by_entity_type
+        required: false
+        schema:
+          $ref: "#/components/schemas/notification_center.EntityType"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListConnectorSummariesResponse"
+          description: ""
+      summary: List Connector Summaries
+      tags:
+      - Connectors service
+  /notifications/notification-center/v1/connectors/types/summaries:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ConnectorsService_GetConnectorTypeSummaries
+      parameters:
+      - explode: true
+        in: query
+        name: supported_by_entity_type
+        required: false
+        schema:
+          $ref: "#/components/schemas/notification_center.EntityType"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetConnectorTypeSummariesResponse"
+          description: ""
+      summary: Get Connector Type Summaries
+      tags:
+      - Connectors service
   /notifications/notification-center/v1/connectors/{id}:
     delete:
       description: No description available
@@ -122,117 +232,6 @@ paths:
                 $ref: "#/components/schemas/GetConnectorResponse"
           description: ""
       summary: Get a Connector
-      tags:
-      - Connectors service
-  /notifications/notification-center/v1/connectors:batchGet:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: ConnectorsService_BatchGetConnectors
-      parameters:
-      - explode: true
-        in: query
-        name: connector_ids
-        required: false
-        schema:
-          example:
-          - connector-id-1
-          - connector-id-2
-          items:
-            type: string
-          type: array
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BatchGetConnectorsResponse"
-          description: ""
-      summary: Batch Get Connectors
-      tags:
-      - Connectors service
-  /notifications/notification-center/v1/connectors:batchGetSummaries:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: ConnectorsService_BatchGetConnectorSummaries
-      parameters:
-      - explode: true
-        in: query
-        name: connector_ids
-        required: false
-        schema:
-          items:
-            example: ""
-            type: string
-          type: array
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BatchGetConnectorSummariesResponse"
-          description: ""
-      summary: Batch Get Connectors Summaries
-      tags:
-      - Connectors service
-  /notifications/notification-center/v1/connectors:getTypeSummaries:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: ConnectorsService_GetConnectorTypeSummaries
-      parameters:
-      - explode: true
-        in: query
-        name: supported_by_entity_type
-        required: false
-        schema:
-          $ref: "#/components/schemas/notification_center.EntityType"
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetConnectorTypeSummariesResponse"
-          description: ""
-      summary: Get Connector Type Summaries
-      tags:
-      - Connectors service
-  /notifications/notification-center/v1/connectors:listSummaries:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: ConnectorsService_ListConnectorSummaries
-      parameters:
-      - explode: true
-        in: query
-        name: connector_type
-        required: false
-        schema:
-          $ref: "#/components/schemas/ConnectorType"
-        style: form
-      - explode: true
-        in: query
-        name: supported_by_entity_type
-        required: false
-        schema:
-          $ref: "#/components/schemas/notification_center.EntityType"
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListConnectorSummariesResponse"
-          description: ""
-      summary: List Connector Summaries
       tags:
       - Connectors service
 components:
@@ -768,6 +767,28 @@ components:
             $ref: "#/components/schemas/Connector"
           type: array
       title: List Connectors Response
+      type: object
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
       type: object
     MultipleValues:
       properties:

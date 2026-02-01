@@ -72,17 +72,21 @@ components:
       example:
         enableTags: true
         archivingFormatId: json_id
+        format: TARGET_FORMAT_UNSPECIFIED
         isActive: true
       externalDocs:
         description: Find out more about archives
         url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
       properties:
         archivingFormatId:
+          deprecated: true
           example: json_id
           type: string
         enableTags:
           example: true
           type: boolean
+        format:
+          $ref: "#/components/schemas/TargetFormat"
         isActive:
           example: true
           type: boolean
@@ -194,6 +198,28 @@ components:
       - IBM_BUCKET_TYPE_EXTERNAL
       - IBM_BUCKET_TYPE_INTERNAL
       type: string
+    MinMaxAuto:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        auto:
+          $ref: "#/components/schemas/MinMaxAuto"
+      title: Min-Max
+      type: object
+    MinMaxCustom:
+      additionalProperties: false
+      description: "Definition of min/max value configuration, can be automatically\
+        \ derived from data or custom"
+      externalDocs:
+        url: ""
+      properties:
+        custom:
+          $ref: "#/components/schemas/MinMaxCustom"
+      title: Min-Max
+      type: object
     MultipleValues:
       properties:
         matcher:
@@ -213,6 +239,7 @@ components:
           archiveSpec:
             enableTags: true
             archivingFormatId: json_id
+            format: TARGET_FORMAT_UNSPECIFIED
             isActive: true
       externalDocs:
         description: Find out more about archives
@@ -235,6 +262,7 @@ components:
           archiveSpec:
             enableTags: true
             archivingFormatId: json_id
+            format: TARGET_FORMAT_UNSPECIFIED
             isActive: true
       externalDocs:
         description: Find out more about archives
@@ -269,6 +297,11 @@ components:
       oneOf:
       - $ref: "#/components/schemas/TargetS3"
       - $ref: "#/components/schemas/TargetIbmCos"
+    TargetFormat:
+      enum:
+      - TARGET_FORMAT_UNSPECIFIED
+      - TARGET_FORMAT_CX_DATA_V1
+      type: string
     TargetIbmCos:
       additionalProperties: false
       description: This data structure represents a target to archive logs.
@@ -294,6 +327,7 @@ components:
         archiveSpec:
           enableTags: true
           archivingFormatId: json_id
+          format: TARGET_FORMAT_UNSPECIFIED
           isActive: true
       externalDocs:
         description: Find out more about archives
@@ -333,6 +367,8 @@ components:
       additionalProperties: false
       description: This data structure is used to set a storage target for logs.
       properties:
+        format:
+          $ref: "#/components/schemas/TargetFormat"
         isActive:
           example: true
           type: boolean

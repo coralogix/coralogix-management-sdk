@@ -20,6 +20,7 @@ var _ MappedNullable = &Preset{}
 
 // Preset Set of preconfigured templates for notification content rendering
 type Preset struct {
+	AttachmentConfig *AttachmentConfig `json:"attachmentConfig,omitempty"`
 	ConfigOverrides []ConfigOverrides `json:"configOverrides,omitempty"`
 	ConnectorType *ConnectorType `json:"connectorType,omitempty"`
 	CreateTime *time.Time `json:"createTime,omitempty"`
@@ -47,6 +48,38 @@ func NewPreset() *Preset {
 func NewPresetWithDefaults() *Preset {
 	this := Preset{}
 	return &this
+}
+
+// GetAttachmentConfig returns the AttachmentConfig field value if set, zero value otherwise.
+func (o *Preset) GetAttachmentConfig() AttachmentConfig {
+	if o == nil || IsNil(o.AttachmentConfig) {
+		var ret AttachmentConfig
+		return ret
+	}
+	return *o.AttachmentConfig
+}
+
+// GetAttachmentConfigOk returns a tuple with the AttachmentConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Preset) GetAttachmentConfigOk() (*AttachmentConfig, bool) {
+	if o == nil || IsNil(o.AttachmentConfig) {
+		return nil, false
+	}
+	return o.AttachmentConfig, true
+}
+
+// HasAttachmentConfig returns a boolean if a field has been set.
+func (o *Preset) HasAttachmentConfig() bool {
+	if o != nil && !IsNil(o.AttachmentConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetAttachmentConfig gets a reference to the given AttachmentConfig and assigns it to the AttachmentConfig field.
+func (o *Preset) SetAttachmentConfig(v AttachmentConfig) {
+	o.AttachmentConfig = &v
 }
 
 // GetConfigOverrides returns the ConfigOverrides field value if set, zero value otherwise.
@@ -379,6 +412,9 @@ func (o Preset) MarshalJSON() ([]byte, error) {
 
 func (o Preset) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AttachmentConfig) {
+		toSerialize["attachmentConfig"] = o.AttachmentConfig
+	}
 	if !IsNil(o.ConfigOverrides) {
 		toSerialize["configOverrides"] = o.ConfigOverrides
 	}

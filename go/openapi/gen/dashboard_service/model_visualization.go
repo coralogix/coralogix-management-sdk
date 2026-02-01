@@ -19,6 +19,7 @@ import (
 // Visualization - struct for Visualization
 type Visualization struct {
 	VisualizationGauge *VisualizationGauge
+	VisualizationGeomap *VisualizationGeomap
 	VisualizationHeatmap *VisualizationHeatmap
 	VisualizationHexagonBins *VisualizationHexagonBins
 	VisualizationHorizontalBars *VisualizationHorizontalBars
@@ -27,6 +28,7 @@ type Visualization struct {
 	VisualizationTable *VisualizationTable
 	VisualizationTimeSeriesBars *VisualizationTimeSeriesBars
 	VisualizationTimeSeriesLines *VisualizationTimeSeriesLines
+	VisualizationTimeSeriesLinesMulti *VisualizationTimeSeriesLinesMulti
 	VisualizationVerticalBars *VisualizationVerticalBars
 }
 
@@ -34,6 +36,13 @@ type Visualization struct {
 func VisualizationGaugeAsVisualization(v *VisualizationGauge) Visualization {
 	return Visualization{
 		VisualizationGauge: v,
+	}
+}
+
+// VisualizationGeomapAsVisualization is a convenience function that returns VisualizationGeomap wrapped in Visualization
+func VisualizationGeomapAsVisualization(v *VisualizationGeomap) Visualization {
+	return Visualization{
+		VisualizationGeomap: v,
 	}
 }
 
@@ -93,6 +102,13 @@ func VisualizationTimeSeriesLinesAsVisualization(v *VisualizationTimeSeriesLines
 	}
 }
 
+// VisualizationTimeSeriesLinesMultiAsVisualization is a convenience function that returns VisualizationTimeSeriesLinesMulti wrapped in Visualization
+func VisualizationTimeSeriesLinesMultiAsVisualization(v *VisualizationTimeSeriesLinesMulti) Visualization {
+	return Visualization{
+		VisualizationTimeSeriesLinesMulti: v,
+	}
+}
+
 // VisualizationVerticalBarsAsVisualization is a convenience function that returns VisualizationVerticalBars wrapped in Visualization
 func VisualizationVerticalBarsAsVisualization(v *VisualizationVerticalBars) Visualization {
 	return Visualization{
@@ -120,6 +136,23 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.VisualizationGauge = nil
+	}
+
+	// try to unmarshal data into VisualizationGeomap
+	err = newStrictDecoder(data).Decode(&dst.VisualizationGeomap)
+	if err == nil {
+		jsonVisualizationGeomap, _ := json.Marshal(dst.VisualizationGeomap)
+		if string(jsonVisualizationGeomap) == "{}" { // empty struct
+			dst.VisualizationGeomap = nil
+		} else {
+			if err = validator.Validate(dst.VisualizationGeomap); err != nil {
+				dst.VisualizationGeomap = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.VisualizationGeomap = nil
 	}
 
 	// try to unmarshal data into VisualizationHeatmap
@@ -258,6 +291,23 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 		dst.VisualizationTimeSeriesLines = nil
 	}
 
+	// try to unmarshal data into VisualizationTimeSeriesLinesMulti
+	err = newStrictDecoder(data).Decode(&dst.VisualizationTimeSeriesLinesMulti)
+	if err == nil {
+		jsonVisualizationTimeSeriesLinesMulti, _ := json.Marshal(dst.VisualizationTimeSeriesLinesMulti)
+		if string(jsonVisualizationTimeSeriesLinesMulti) == "{}" { // empty struct
+			dst.VisualizationTimeSeriesLinesMulti = nil
+		} else {
+			if err = validator.Validate(dst.VisualizationTimeSeriesLinesMulti); err != nil {
+				dst.VisualizationTimeSeriesLinesMulti = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.VisualizationTimeSeriesLinesMulti = nil
+	}
+
 	// try to unmarshal data into VisualizationVerticalBars
 	err = newStrictDecoder(data).Decode(&dst.VisualizationVerticalBars)
 	if err == nil {
@@ -278,6 +328,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.VisualizationGauge = nil
+		dst.VisualizationGeomap = nil
 		dst.VisualizationHeatmap = nil
 		dst.VisualizationHexagonBins = nil
 		dst.VisualizationHorizontalBars = nil
@@ -286,6 +337,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 		dst.VisualizationTable = nil
 		dst.VisualizationTimeSeriesBars = nil
 		dst.VisualizationTimeSeriesLines = nil
+		dst.VisualizationTimeSeriesLinesMulti = nil
 		dst.VisualizationVerticalBars = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(Visualization)")
@@ -300,6 +352,10 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 func (src Visualization) MarshalJSON() ([]byte, error) {
 	if src.VisualizationGauge != nil {
 		return json.Marshal(&src.VisualizationGauge)
+	}
+
+	if src.VisualizationGeomap != nil {
+		return json.Marshal(&src.VisualizationGeomap)
 	}
 
 	if src.VisualizationHeatmap != nil {
@@ -334,6 +390,10 @@ func (src Visualization) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.VisualizationTimeSeriesLines)
 	}
 
+	if src.VisualizationTimeSeriesLinesMulti != nil {
+		return json.Marshal(&src.VisualizationTimeSeriesLinesMulti)
+	}
+
 	if src.VisualizationVerticalBars != nil {
 		return json.Marshal(&src.VisualizationVerticalBars)
 	}
@@ -348,6 +408,10 @@ func (obj *Visualization) GetActualInstance() (interface{}) {
 	}
 	if obj.VisualizationGauge != nil {
 		return obj.VisualizationGauge
+	}
+
+	if obj.VisualizationGeomap != nil {
+		return obj.VisualizationGeomap
 	}
 
 	if obj.VisualizationHeatmap != nil {
@@ -382,6 +446,10 @@ func (obj *Visualization) GetActualInstance() (interface{}) {
 		return obj.VisualizationTimeSeriesLines
 	}
 
+	if obj.VisualizationTimeSeriesLinesMulti != nil {
+		return obj.VisualizationTimeSeriesLinesMulti
+	}
+
 	if obj.VisualizationVerticalBars != nil {
 		return obj.VisualizationVerticalBars
 	}
@@ -394,6 +462,10 @@ func (obj *Visualization) GetActualInstance() (interface{}) {
 func (obj Visualization) GetActualInstanceValue() (interface{}) {
 	if obj.VisualizationGauge != nil {
 		return *obj.VisualizationGauge
+	}
+
+	if obj.VisualizationGeomap != nil {
+		return *obj.VisualizationGeomap
 	}
 
 	if obj.VisualizationHeatmap != nil {
@@ -426,6 +498,10 @@ func (obj Visualization) GetActualInstanceValue() (interface{}) {
 
 	if obj.VisualizationTimeSeriesLines != nil {
 		return *obj.VisualizationTimeSeriesLines
+	}
+
+	if obj.VisualizationTimeSeriesLinesMulti != nil {
+		return *obj.VisualizationTimeSeriesLinesMulti
 	}
 
 	if obj.VisualizationVerticalBars != nil {

@@ -78,11 +78,11 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ViewsServiceAPI* | [**ViewsServiceCreateView**](docs/ViewsServiceAPI.md#viewsservicecreateview) | **Post** /data-exploration/saved-views/v1 | Create a view service
-*ViewsServiceAPI* | [**ViewsServiceDeleteView**](docs/ViewsServiceAPI.md#viewsservicedeleteview) | **Delete** /data-exploration/saved-views/v1/{id} | Delete view service
-*ViewsServiceAPI* | [**ViewsServiceGetView**](docs/ViewsServiceAPI.md#viewsservicegetview) | **Get** /data-exploration/saved-views/v1/{id} | Get view service
-*ViewsServiceAPI* | [**ViewsServiceListViews**](docs/ViewsServiceAPI.md#viewsservicelistviews) | **Get** /data-exploration/saved-views/v1 | List views service
-*ViewsServiceAPI* | [**ViewsServiceReplaceView**](docs/ViewsServiceAPI.md#viewsservicereplaceview) | **Put** /data-exploration/saved-views/v1/{id} | Replace a view service
+*ViewsServiceAPI* | [**ViewsServiceCreateView**](docs/ViewsServiceAPI.md#viewsservicecreateview) | **Post** /data-exploration/views/v1/views | Create a view service
+*ViewsServiceAPI* | [**ViewsServiceDeleteView**](docs/ViewsServiceAPI.md#viewsservicedeleteview) | **Delete** /data-exploration/views/v1/views/{id} | Delete view service
+*ViewsServiceAPI* | [**ViewsServiceGetView**](docs/ViewsServiceAPI.md#viewsservicegetview) | **Get** /data-exploration/views/v1/views/{id} | Get view service
+*ViewsServiceAPI* | [**ViewsServiceListViews**](docs/ViewsServiceAPI.md#viewsservicelistviews) | **Get** /data-exploration/views/v1/views | List views service
+*ViewsServiceAPI* | [**ViewsServiceReplaceView**](docs/ViewsServiceAPI.md#viewsservicereplaceview) | **Put** /data-exploration/views/v1/views/{id} | Replace a view service
 
 
 ## Documentation For Models
@@ -99,6 +99,8 @@ Class | Method | HTTP request | Description
  - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [ListViewsResponse](docs/ListViewsResponse.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [QuickTimeSelection](docs/QuickTimeSelection.md)
  - [SearchQuery](docs/SearchQuery.md)

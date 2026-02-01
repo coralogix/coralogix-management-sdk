@@ -26,6 +26,7 @@ type Integration struct {
 	Id *string `json:"id,omitempty"`
 	IntegrationType *V1IntegrationType `json:"integrationType,omitempty"`
 	Name *string `json:"name,omitempty"`
+	Revisions []V1RevisionSummary `json:"revisions,omitempty"`
 	Tags []string `json:"tags,omitempty"`
 	Versions []string `json:"versions,omitempty"`
 }
@@ -271,6 +272,38 @@ func (o *Integration) SetName(v string) {
 	o.Name = &v
 }
 
+// GetRevisions returns the Revisions field value if set, zero value otherwise.
+func (o *Integration) GetRevisions() []V1RevisionSummary {
+	if o == nil || IsNil(o.Revisions) {
+		var ret []V1RevisionSummary
+		return ret
+	}
+	return o.Revisions
+}
+
+// GetRevisionsOk returns a tuple with the Revisions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Integration) GetRevisionsOk() ([]V1RevisionSummary, bool) {
+	if o == nil || IsNil(o.Revisions) {
+		return nil, false
+	}
+	return o.Revisions, true
+}
+
+// HasRevisions returns a boolean if a field has been set.
+func (o *Integration) HasRevisions() bool {
+	if o != nil && !IsNil(o.Revisions) {
+		return true
+	}
+
+	return false
+}
+
+// SetRevisions gets a reference to the given []V1RevisionSummary and assigns it to the Revisions field.
+func (o *Integration) SetRevisions(v []V1RevisionSummary) {
+	o.Revisions = v
+}
+
 // GetTags returns the Tags field value if set, zero value otherwise.
 func (o *Integration) GetTags() []string {
 	if o == nil || IsNil(o.Tags) {
@@ -365,6 +398,9 @@ func (o Integration) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Revisions) {
+		toSerialize["revisions"] = o.Revisions
 	}
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags

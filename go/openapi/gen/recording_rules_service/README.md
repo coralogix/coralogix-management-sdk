@@ -78,11 +78,11 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*RecordingRulesServiceAPI* | [**RuleGroupSetsCreate**](docs/RecordingRulesServiceAPI.md#rulegroupsetscreate) | **Post** /v1/rule-group-sets | Create Recording Rules
-*RecordingRulesServiceAPI* | [**RuleGroupSetsDelete**](docs/RecordingRulesServiceAPI.md#rulegroupsetsdelete) | **Delete** /v1/rule-group-sets/{id} | Delete Recording Rules
-*RecordingRulesServiceAPI* | [**RuleGroupSetsFetch**](docs/RecordingRulesServiceAPI.md#rulegroupsetsfetch) | **Get** /v1/rule-group-sets/{id} | Get Recording Rules
-*RecordingRulesServiceAPI* | [**RuleGroupSetsList**](docs/RecordingRulesServiceAPI.md#rulegroupsetslist) | **Get** /v1/rule-group-sets | List Recording Rules
-*RecordingRulesServiceAPI* | [**RuleGroupSetsUpdate**](docs/RecordingRulesServiceAPI.md#rulegroupsetsupdate) | **Put** /v1/rule-group-sets/{id} | Update Recording Rules
+*RecordingRulesServiceAPI* | [**RuleGroupSetsCreate**](docs/RecordingRulesServiceAPI.md#rulegroupsetscreate) | **Post** /recording-rules/recording-rules/v1 | Create Recording Rules
+*RecordingRulesServiceAPI* | [**RuleGroupSetsDelete**](docs/RecordingRulesServiceAPI.md#rulegroupsetsdelete) | **Delete** /recording-rules/recording-rules/v1/{id} | Delete Recording Rules
+*RecordingRulesServiceAPI* | [**RuleGroupSetsFetch**](docs/RecordingRulesServiceAPI.md#rulegroupsetsfetch) | **Get** /recording-rules/recording-rules/v1/{id} | Get Recording Rules
+*RecordingRulesServiceAPI* | [**RuleGroupSetsList**](docs/RecordingRulesServiceAPI.md#rulegroupsetslist) | **Get** /recording-rules/recording-rules/v1 | List Recording Rules
+*RecordingRulesServiceAPI* | [**RuleGroupSetsUpdate**](docs/RecordingRulesServiceAPI.md#rulegroupsetsupdate) | **Put** /recording-rules/recording-rules/v1/{id} | Update Recording Rules
 
 
 ## Documentation For Models
@@ -101,6 +101,8 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [InRule](docs/InRule.md)
  - [InRuleGroup](docs/InRuleGroup.md)
+ - [MinMaxAuto](docs/MinMaxAuto.md)
+ - [MinMaxCustom](docs/MinMaxCustom.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [OutRule](docs/OutRule.md)
  - [OutRuleGroup](docs/OutRuleGroup.md)
