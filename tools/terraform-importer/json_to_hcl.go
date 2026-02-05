@@ -196,6 +196,51 @@ func processFilterArray(filters []interface{}) {
 	}
 }
 
+// handleAlertGroupBy fixes group_by related validation issues for alert resources
+//
+// This handles two cases:
+// 1. logs_immediate, logs_new_value, tracing_immediate alerts should NOT have group_by
+// 2. logs_ratio_threshold alerts with group_by_for but no group_by should have group_by_for removed
+func handleAlertGroupBy(resourceMap map[string]interface{}) map[string]interface{} {
+	// Get type_definition
+	typeDefinition, ok := resourceMap["type_definition"].(map[string]interface{})
+	if !ok {
+		return resourceMap
+	}
+
+	// Case 1: Remove group_by from unsupported alert types
+	// These alert types do not support group_by attribute
+	unsupportedTypes := []string{"logs_immediate", "logs_new_value", "tracing_immediate"}
+	for _, alertType := range unsupportedTypes {
+		if _, exists := typeDefinition[alertType]; exists {
+			delete(resourceMap, "group_by")
+			return resourceMap
+		}
+	}
+
+	// Case 2: For logs_ratio_threshold, remove group_by_for if no group_by exists
+	// The provider requires group_by to be specified when group_by_for is specified
+	if logsRatio, ok := typeDefinition["logs_ratio_threshold"].(map[string]interface{}); ok {
+		if _, hasGroupByFor := logsRatio["group_by_for"]; hasGroupByFor {
+			if _, hasGroupBy := resourceMap["group_by"]; !hasGroupBy {
+				delete(logsRatio, "group_by_for")
+			}
+		}
+	}
+
+	return resourceMap
+}
+
+// handleAlertDescription ensures alerts have a description field set
+// This works around a Coralogix provider bug where null description vs empty string
+// causes "Provider produced inconsistent result after apply" errors
+func handleAlertDescription(resourceMap map[string]interface{}) map[string]interface{} {
+	if _, hasDescription := resourceMap["description"]; !hasDescription {
+		resourceMap["description"] = ""
+	}
+	return resourceMap
+}
+
 // generateTerraform converts parsed JSON into a Terraform HCL configuration.
 func generateTerraform(jsonData map[string]interface{}) string {
 	var terraformLines []string
@@ -212,6 +257,10 @@ func generateTerraform(jsonData map[string]interface{}) string {
 								}
 								if resourceType == "coralogix_dashboard" {
 									resourceMap = handleDataTableFilters(resourceMap)
+								}
+								if resourceType == "coralogix_alert" {
+									resourceMap = handleAlertGroupBy(resourceMap)
+									resourceMap = handleAlertDescription(resourceMap)
 								}
 
 								terraformLines = append(terraformLines, fmt.Sprintf(`resource "%s" "%s" {`, resourceType, resourceName))
