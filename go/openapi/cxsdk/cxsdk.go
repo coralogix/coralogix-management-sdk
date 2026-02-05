@@ -38,6 +38,7 @@ import (
 	archiveretention "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/retentions_service"
 	customroles "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/role_management_service"
 	scopes "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/scopes_service"
+	groups "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/team_groups_management_service"
 
 	// slo (no plural) is the legacy service. slos (plural) is the new one.
 	recordingrules "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/recording_rules_service"
@@ -62,6 +63,7 @@ type ClientSet struct {
 	dashboards           *dashboards.DashboardServiceAPIService
 	dashboardFolders     *dashboardfolders.DashboardFoldersServiceAPIService
 	enrichments          *enrichments.EnrichmentsServiceAPIService
+	groups               *groups.TeamGroupsManagementServiceAPIService
 	customEnrichments    *customEnrichments.CustomEnrichmentsServiceAPIService
 	extensions           *extensions.ExtensionServiceAPIService
 	events2metrics       *events2metrics.Events2MetricsServiceAPIService
@@ -137,6 +139,11 @@ func (c *ClientSet) DashboardFolders() *dashboardfolders.DashboardFoldersService
 // Enrichments returns the EnrichmentsServiceAPIService client.
 func (c *ClientSet) Enrichments() *enrichments.EnrichmentsServiceAPIService {
 	return c.enrichments
+}
+
+// Groups returns the TeamGroupsManagementServiceAPIService client.
+func (c *ClientSet) Groups() *groups.TeamGroupsManagementServiceAPIService {
+	return c.groups
 }
 
 // CustomEnrichments returns the CustomEnrichmentsServiceAPIService client.
@@ -235,6 +242,7 @@ func NewClientSet(c *Config) *ClientSet {
 		dashboards:           NewDashboardClient(c),
 		dashboardFolders:     NewDashboardFoldersClient(c),
 		enrichments:          NewEnrichmentsClient(c),
+		groups:               NewGroupsClient(c),
 		customEnrichments:    NewCustomEnrichmentsClient(c),
 		events2metrics:       NewEvents2MetricsClient(c),
 		extensions:           NewExtensionsClient(c),
@@ -395,6 +403,19 @@ func NewEnrichmentsClient(c *Config) *enrichments.EnrichmentsServiceAPIService {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return enrichments.NewAPIClient(cfg).EnrichmentsServiceAPI
+}
+
+// NewGroupsClient builds a new TeamGroupsManagementServiceAPIService from CallPropertiesCreator.
+func NewGroupsClient(c *Config) *groups.TeamGroupsManagementServiceAPIService {
+	cfg := groups.NewConfiguration()
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = groups.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.headers {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return groups.NewAPIClient(cfg).TeamGroupsManagementServiceAPI
 }
 
 // NewCustomEnrichmentsClient builds a new CustomEnrichmentsServiceAPIService from CallPropertiesCreator.

@@ -16,9 +16,11 @@ package examples
 
 import (
 	"context"
+	"fmt"
 	"os"
 	"strconv"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/require"
 
@@ -27,6 +29,7 @@ import (
 	ipaccess "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/ip_access_service"
 	customroles "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/role_management_service"
 	scopes "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/scopes_service"
+	groups "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/team_groups_management_service"
 )
 
 func TestApiKeys(t *testing.T) {
@@ -76,6 +79,59 @@ func TestApiKeys(t *testing.T) {
 	require.Equal(t, newName, *updated.KeyInfo.Name)
 
 	_, httpResp, err = client.ApiKeysServiceDeleteApiKey(context.Background(), *created.KeyId).Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+}
+
+func TestGroups(t *testing.T) {
+	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	client := cxsdk.NewGroupsClient(cfg)
+
+	ctx := context.Background()
+	teamIDEnv := os.Getenv("TEAM_ID")
+	if teamIDEnv == "" {
+		t.Fatal("TEAM_ID environment variable is not set")
+	}
+	teamID, err := strconv.ParseInt(teamIDEnv, 10, 64)
+	require.NoError(t, err)
+
+	groupName := fmt.Sprintf("Test Group %v", time.Now().UnixMilli())
+	groupDesc := "A Test Group"
+	createReq := groups.CreateTeamGroupRequest{
+		Name:        &groupName,
+		Description: &groupDesc,
+		TeamId:      &teamID,
+		RoleId:      groups.PtrInt64(1),
+	}
+
+	createdGroup, httpResp, err := client.
+		GroupsMgmtServiceCreateTeamGroup(ctx).
+		CreateTeamGroupRequest(createReq).
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, createdGroup.Group.GroupId)
+	groupID := createdGroup.Group.GroupId
+
+	gotGroup, httpResp, err := client.
+		GroupsMgmtServiceGetTeamGroup(ctx, *groupID).
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, groupID, gotGroup.Group.GroupId)
+
+	newName := fmt.Sprintf("Updated Test Group %v", time.Now().UnixMilli())
+	updateReq := groups.UpdateTeamGroupRequest{
+		Name:        &newName,
+		Description: &groupDesc,
+	}
+
+	_, httpResp, err = client.
+		GroupsMgmtServiceUpdateTeamGroup(ctx, *groupID).
+		UpdateTeamGroupRequest(updateReq).
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+
+	_, httpResp, err = client.
+		GroupsMgmtServiceDeleteTeamGroup(ctx, *groupID).
+		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
