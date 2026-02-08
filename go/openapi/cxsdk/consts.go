@@ -26,4 +26,6 @@ const (
 	sdkGoVersionHeaderName     = "x-cx-go-version"
 	sdkCorrelationIDHeaderName = "x-cx-correlation-id"
 	vanillaSdkVersion          = "1.12.0"
+
+	notFoundPrefix = "Not Found:"
 )
