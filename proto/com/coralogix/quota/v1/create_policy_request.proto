@@ -38,4 +38,5 @@ message CreatePolicyRequest {
   }
   bool disabled = 9;
   Placement placement = 10;
+  optional string dpxl_expression = 11;
 }

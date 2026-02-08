@@ -34,4 +34,5 @@ message UpdatePolicyRequest {
     SpanRules span_rules = 9;
   }
   google.protobuf.BoolValue enabled = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "true"}];
+  optional string dpxl_expression = 11; 
 }

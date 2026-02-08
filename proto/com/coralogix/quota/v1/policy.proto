@@ -47,4 +47,5 @@ message Policy {
   optional google.protobuf.StringValue created_at = 13 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"2021-01-01T00:00:00Z\""}];
   optional google.protobuf.StringValue updated_at = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"2021-01-01T00:00:00Z\""}];
   optional ArchiveRetention archive_retention = 15;
+  optional string dpxl_expression = 16;
 }
