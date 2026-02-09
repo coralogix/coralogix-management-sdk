@@ -119,6 +119,7 @@ impl TcoPoliciesClient {
         source_type_rules: Option<SourceTypeRules>,
         disabled: bool,
         placement: Option<Placement>,
+        dpxl_expression: Option<String>    
     ) -> Result<CreatePolicyResponse> {
         let request = make_request_with_metadata(
             CreatePolicyRequest {
@@ -173,6 +174,7 @@ impl TcoPoliciesClient {
         archive_retention: Option<ArchiveRetention>,
         enabled: Option<bool>,
         source_type_rules: Option<SourceTypeRules>,
+        dpxl_expression: Option<String>     
     ) -> Result<UpdatePolicyResponse> {
         let request = make_request_with_metadata(
             UpdatePolicyRequest {
