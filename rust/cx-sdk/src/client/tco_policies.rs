@@ -119,7 +119,7 @@ impl TcoPoliciesClient {
         source_type_rules: Option<SourceTypeRules>,
         disabled: bool,
         placement: Option<Placement>,
-        dpxl_expression: Option<String>    
+        dpxl_expression: Option<String>,
     ) -> Result<CreatePolicyResponse> {
         let request = make_request_with_metadata(
             CreatePolicyRequest {
@@ -132,7 +132,7 @@ impl TcoPoliciesClient {
                 source_type_rules,
                 disabled,
                 placement,
-                dpxl_expression
+                dpxl_expression,
             },
             &self.metadata_map,
         );
@@ -174,7 +174,7 @@ impl TcoPoliciesClient {
         archive_retention: Option<ArchiveRetention>,
         enabled: Option<bool>,
         source_type_rules: Option<SourceTypeRules>,
-        dpxl_expression: Option<String>     
+        dpxl_expression: Option<String>,    
     ) -> Result<UpdatePolicyResponse> {
         let request = make_request_with_metadata(
             UpdatePolicyRequest {
@@ -187,7 +187,7 @@ impl TcoPoliciesClient {
                 archive_retention,
                 enabled,
                 source_type_rules: source_type_rules.map(convert_source_types),
-                dpxl_expression
+                dpxl_expression,
             },
             &self.metadata_map,
         );
