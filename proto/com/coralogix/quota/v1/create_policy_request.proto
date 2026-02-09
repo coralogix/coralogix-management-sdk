@@ -38,5 +38,5 @@ message CreatePolicyRequest {
   }
   bool disabled = 9;
   Placement placement = 10;
-  optional string dpxl_expression = 11;
+  optional string dpxl_expression = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "<v1>$l.applicationName.in('coralogix')"}];
 }
