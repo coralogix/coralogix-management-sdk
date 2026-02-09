@@ -131,6 +131,7 @@ impl TcoPoliciesClient {
                 source_type_rules,
                 disabled,
                 placement,
+                dpxl_expression
             },
             &self.metadata_map,
         );
@@ -184,6 +185,7 @@ impl TcoPoliciesClient {
                 archive_retention,
                 enabled,
                 source_type_rules: source_type_rules.map(convert_source_types),
+                dpxl_expression
             },
             &self.metadata_map,
         );
