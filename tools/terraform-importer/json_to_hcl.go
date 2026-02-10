@@ -37,11 +37,9 @@ func formatValue(value interface{}) string {
 	case float64, int:
 		return fmt.Sprintf("%v", v)
 	case string:
-		// Check for multi-line strings
 		if strings.Contains(v, "\n") {
 			return fmt.Sprintf("<<EOF\n%s\nEOF", v)
 		}
-		// Escape special characters for HCL
 		escaped := strings.ReplaceAll(v, `\`, `\\`)
 		escaped = strings.ReplaceAll(escaped, `"`, `\"`)
 		return fmt.Sprintf(`"%s"`, escaped)
@@ -54,7 +52,6 @@ func formatValue(value interface{}) string {
 	case map[string]interface{}:
 		var lines []string
 		for key, val := range v {
-			// Quote keys that contain dots to handle cases like "tags.http.method"
 			quotedKey := key
 			if strings.Contains(key, ".") {
 				quotedKey = fmt.Sprintf(`"%s"`, key)
@@ -71,16 +68,12 @@ func formatValue(value interface{}) string {
 func processBlock(key string, value interface{}) string {
 	switch v := value.(type) {
 	case map[string]interface{}:
-		// Map: Output as an attribute (`key = { ... }`)
 		return fmt.Sprintf("  %s = %s", key, formatValue(v))
 	case []interface{}:
 		if len(v) > 0 {
 			if _, isSimple := v[0].(string); isSimple {
-				// List of simple values
 				return fmt.Sprintf("  %s = %s", key, formatValue(v))
 			}
-
-			// List of maps: Format as a list of maps
 			if _, isMap := v[0].(map[string]interface{}); isMap {
 				var items []string
 				for _, item := range v {
@@ -91,10 +84,8 @@ func processBlock(key string, value interface{}) string {
 				return fmt.Sprintf("  %s = [%s]", key, strings.Join(items, ", "))
 			}
 		}
-		// Empty list
 		return fmt.Sprintf("  %s = []", key)
 	default:
-		// Scalar value: Output as an attribute
 		return fmt.Sprintf("  %s = %s", key, formatValue(v))
 	}
 }
@@ -102,30 +93,25 @@ func processBlock(key string, value interface{}) string {
 // handleArchiveRetentions applies special logic for archive_retentions resource
 // The first retention is the default retention and can't have a name set
 func handleArchiveRetentions(resourceMap map[string]interface{}) map[string]interface{} {
-	// Use JSONPath to find the first retention's name and remove it
 	nameResult, err := jsonpath.Get("$.retentions[0].name", resourceMap)
 	if err != nil || nameResult == nil {
 		return resourceMap // No first retention or no name field
 	}
 
-	// Clone the resource map to avoid modifying the original
 	result := make(map[string]interface{})
 	for k, v := range resourceMap {
 		result[k] = v
 	}
 
-	// Get the retentions array
 	retentions, err := jsonpath.Get("$.retentions", resourceMap)
 	if err != nil {
 		return resourceMap
 	}
 
 	if retentionSlice, ok := retentions.([]interface{}); ok && len(retentionSlice) > 0 {
-		// Clone the retentions array
 		newRetentions := make([]interface{}, len(retentionSlice))
 		copy(newRetentions, retentionSlice)
 
-		// Clone the first retention map and remove the name field
 		if firstRetention, ok := newRetentions[0].(map[string]interface{}); ok {
 			newFirstRetention := make(map[string]interface{})
 			for key, value := range firstRetention {
@@ -144,13 +130,11 @@ func handleArchiveRetentions(resourceMap map[string]interface{}) map[string]inte
 
 // handleDataTableFilters ensures data_table filters have required metric attribute
 func handleDataTableFilters(resourceMap map[string]interface{}) map[string]interface{} {
-	// Use JSONPath to find all data_table filters
 	filtersResult, err := jsonpath.Get("$..data_table.query.metrics.filters", resourceMap)
 	if err != nil {
 		return resourceMap // No data_table filters found
 	}
 
-	// Convert to JSON and back to create a deep copy
 	jsonBytes, err := json.Marshal(resourceMap)
 	if err != nil {
 		return resourceMap
@@ -161,13 +145,10 @@ func handleDataTableFilters(resourceMap map[string]interface{}) map[string]inter
 		return resourceMap
 	}
 
-	// Process all filter arrays found
 	switch filters := filtersResult.(type) {
 	case []interface{}:
-		// Single filter array found
 		processFilterArray(filters)
 	case [][]interface{}:
-		// Multiple filter arrays found
 		for _, filterArray := range filters {
 			processFilterArray(filterArray)
 		}
@@ -181,7 +162,6 @@ func processFilterArray(filters []interface{}) {
 	for _, filter := range filters {
 		if filterMap, ok := filter.(map[string]interface{}); ok {
 			if _, hasMetric := filterMap["metric"]; !hasMetric {
-				// Add missing metric attribute with a default value
 				if label, hasLabel := filterMap["label"]; hasLabel {
 					if labelStr, ok := label.(string); ok {
 						filterMap["metric"] = labelStr
@@ -207,13 +187,11 @@ func processFilterArray(filters []interface{}) {
 // Case 2: logsRatioGroupByForSchema (common.go) - group_by_for has AlsoRequires(group_by).
 //   We remove group_by_for when group_by is missing to satisfy the provider.
 func handleAlertGroupBy(resourceMap map[string]interface{}) map[string]interface{} {
-	// Get type_definition
 	typeDefinition, ok := resourceMap["type_definition"].(map[string]interface{})
 	if !ok {
 		return resourceMap
 	}
 
-	// Case 1: Remove group_by from unsupported alert types (Schema V2 GroupByValidator)
 	unsupportedTypes := []string{"logs_immediate", "logs_new_value", "tracing_immediate"}
 	for _, alertType := range unsupportedTypes {
 		if _, exists := typeDefinition[alertType]; exists {
@@ -222,8 +200,6 @@ func handleAlertGroupBy(resourceMap map[string]interface{}) map[string]interface
 		}
 	}
 
-	// Case 2: For logs_ratio_threshold, remove group_by_for if no group_by exists
-	// The provider requires group_by to be specified when group_by_for is specified
 	if logsRatio, ok := typeDefinition["logs_ratio_threshold"].(map[string]interface{}); ok {
 		if _, hasGroupByFor := logsRatio["group_by_for"]; hasGroupByFor {
 			if _, hasGroupBy := resourceMap["group_by"]; !hasGroupBy {
