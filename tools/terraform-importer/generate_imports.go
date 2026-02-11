@@ -82,27 +82,22 @@ func findStateFile(folderPath string) (string, error) {
 
 // generateImports reads a Terraform state file and generates an imports.tf file
 func generateImportsFromState(tfstatePath string, outputPath string) error {
-	// Read the tfstate file
 	tfstateData, err := os.ReadFile(tfstatePath)
 	if err != nil {
 		return fmt.Errorf("error reading tfstate file: %v", err)
 	}
 
-	// Parse the JSON data
 	var tfstate TFState
 	err = json.Unmarshal(tfstateData, &tfstate)
 	if err != nil {
 		return fmt.Errorf("error parsing tfstate JSON: %v", err)
 	}
 
-	// Prepare the imports content
 	importsContent := ""
 
 	for _, resource := range tfstate.Resources {
-		// Process only coralogix resources
 		if strings.HasPrefix(resource.Type, "coralogix_") {
 			for _, instance := range resource.Instances {
-				// Add the import block to the content
 				importsContent += fmt.Sprintf(`import {
   to = %s.%s
   id = "%s"
@@ -113,7 +108,6 @@ func generateImportsFromState(tfstatePath string, outputPath string) error {
 		}
 	}
 
-	// Write the imports.tf file
 	err = os.WriteFile(outputPath, []byte(importsContent), 0644)
 	if err != nil {
 		return fmt.Errorf("error writing imports.tf file: %v", err)
@@ -128,7 +122,6 @@ type IdAndName struct {
 }
 
 func main() {
-	// Parse the folder path from the command-line arguments
 	resourceType := flag.String("type", "", "Type of the resource to import")
 	folderPath := flag.String("folder", "", "Path to the folder containing the .tfstate file")
 	outputPath := flag.String("output", "imports.tf", "Path to the output file")
@@ -263,13 +256,11 @@ func main() {
 			log.Fatal("Error: Please provide a folder path using the -folder flag")
 		}
 
-		// Find the .tfstate file in the folder
 		tfstatePath, err := findStateFile(*folderPath)
 		if err != nil {
 			log.Fatal("Error: %v\n", err)
 		}
 
-		// Generate the imports.tf file
 		err = generateImportsFromState(tfstatePath, *outputPath)
 		if err != nil {
 			fmt.Printf("Error generating imports.tf: %v\n", err)
@@ -281,18 +272,14 @@ func main() {
 }
 
 func convertToTerraformResourceName(input string) string {
-	// Convert to lowercase
 	input = strings.ToLower(input)
 
-	// Replace spaces and special characters with underscores
 	re := regexp.MustCompile(`[^a-z0-9_\-]`)
 	input = re.ReplaceAllString(input, "_")
 
-	// Remove leading non-alphabetic characters
 	re = regexp.MustCompile(`^[^a-z]+`)
 	input = re.ReplaceAllString(input, "")
 
-	// Collapse consecutive underscores
 	re = regexp.MustCompile(`_+`)
 	input = re.ReplaceAllString(input, "_")
 
@@ -308,25 +295,20 @@ func generateImportsFromIds(resourceType, outputFilePath string, idsAndNames []I
 		originalName := idAndName.Name
 		name := originalName
 
-		// Ensure uniqueness by appending a suffix if necessary
 		for {
 			if _, exists := uniqueNames[name]; !exists {
 				break
 			}
-			// Check if the name already has a suffix
 			suffixPattern := regexp.MustCompile(`_(\d+)$`)
 			match := suffixPattern.FindStringSubmatch(name)
 			if len(match) > 0 {
-				// Increment the existing numeric suffix
 				num, _ := strconv.Atoi(match[1])
 				name = fmt.Sprintf("%s_%d", strings.TrimSuffix(name, fmt.Sprintf("_%d", num)), num+1)
 			} else {
-				// Add a new numeric suffix
 				name = fmt.Sprintf("%s_2", name)
 			}
 		}
 
-		// Store the unique name to prevent future collisions
 		uniqueNames[name] = idAndName.Id
 		nameCounts[originalName]++ // Increment the counter for the original name
 
