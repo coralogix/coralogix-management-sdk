@@ -90,18 +90,25 @@ func Body(err error) []byte {
 	return nil
 }
 
-// IsNotFound checks if the error represents a resource not found error, which we define as having a 404 status code and
-// a body starting with "Not Found:" (to distinguish from other 404 cases like HTTP route not found).
+// IsNotFound reports whether the error is a real resource-not-found from the API (404 with body like
+// "Not Found: No rule group set with the given id"). It returns false for endpoint-not-found 404s
+// (e.g. body "Not Found: Not Found").
 func IsNotFound(err error) bool {
 	if Code(err) != http.StatusNotFound {
 		return false
 	}
-	return bodyStartsResourceNotFound(Body(err))
+	return isResourceNotFoundBody(Body(err))
 }
 
-// bodyStartsResourceNotFound reports whether the response body starts with "Not Found:" (API resource-not-found).
-func bodyStartsResourceNotFound(b []byte) bool {
-	return strings.HasPrefix(strings.TrimSpace(string(b)), notFoundPrefix)
+// isResourceNotFoundBody reports true only when the body is "Not Found: <message>" with a non-generic message
+// (i.e. not "Not Found: Not Found", which indicates the HTTP route/endpoint does not exist).
+func isResourceNotFoundBody(b []byte) bool {
+	s := strings.TrimSpace(string(b))
+	if !strings.HasPrefix(s, notFoundPrefix) {
+		return false
+	}
+	rest := strings.TrimSpace(strings.TrimPrefix(s, notFoundPrefix))
+	return rest != "" && rest != notFoundGenericSuffix
 }
 
 // IsDeserializationError checks if the error represents a deserialization error,

@@ -27,5 +27,6 @@ const (
 	sdkCorrelationIDHeaderName = "x-cx-correlation-id"
 	vanillaSdkVersion          = "1.12.0"
 
-	notFoundPrefix = "Not Found:"
+	notFoundPrefix        = "Not Found:"
+	notFoundGenericSuffix = "Not Found" // "Not Found: Not Found" = endpoint missing; "Not Found: <msg>" = resource not found
 )
