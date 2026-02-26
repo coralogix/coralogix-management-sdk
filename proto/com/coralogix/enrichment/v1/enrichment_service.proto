@@ -193,7 +193,7 @@ service EnrichmentService {
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Enrichments Service"]
-      summary: "Atomic Overwrite for ALL types of enrichments. The request is the desired state which will override ALL enrichments. FOR INTERNAL USE ONLY!"
+      summary: "Atomic Overwrite for ALL types of enrichments. The request is the desired state which will override ALL enrichments. WARNING: This operation that will delete all existing enrichments and replace them with the provided ones."
     };
   }
   rpc GetCompanyEnrichmentSettings(GetCompanyEnrichmentSettingsRequest) returns (GetCompanyEnrichmentSettingsResponse) {
