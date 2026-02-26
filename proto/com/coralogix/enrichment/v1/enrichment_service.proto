@@ -173,6 +173,18 @@ service EnrichmentService {
     };
   }
 
+    rpc AtomicOverwriteCustomEnrichments(AtomicOverwriteEnrichmentsRequest) returns (AtomicOverwriteEnrichmentsResponse) {
+    option (google.api.http) = {
+      put: "/enrichment-rules/enrichment-rules/v1"
+      body: "*"
+      additional_bindings: {patch: "/enrichments:atomicOverwrite"}
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      tags: ["Enrichments Service"]
+      summary: "Atomic Overwrite for CustomEnrichments to be used by the UI and external clients"
+    };
+  }
+
   rpc AtomicOverwriteEnrichments(AtomicOverwriteEnrichmentsRequest) returns (AtomicOverwriteEnrichmentsResponse) {
     option (google.api.http) = {
       put: "/enrichment-rules/enrichment-rules/v1"
@@ -181,7 +193,7 @@ service EnrichmentService {
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Enrichments Service"]
-      summary: "Atomic Overwrite Enrichments"
+      summary: "Atomic Overwrite for ALL types of enrichments. The request is the desired state which will override ALL enrichments. FOR INTERNAL USE ONLY!"
     };
   }
   rpc GetCompanyEnrichmentSettings(GetCompanyEnrichmentSettingsRequest) returns (GetCompanyEnrichmentSettingsResponse) {
