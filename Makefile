@@ -26,6 +26,9 @@ test:
 test-openapi:
 	cd ./go; make test-openapi TESTARGS=${TESTARGS}
 
+test-openapi-ro:
+	cd ./go; make test-openapi-ro TESTARGS=${TESTARGS}
+
 proto-go-generate: proto-renew
 	cd ./go; make proto-clean; make proto-compile
 

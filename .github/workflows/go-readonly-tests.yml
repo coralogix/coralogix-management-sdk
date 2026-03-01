@@ -1,0 +1,31 @@
+name: "[Tools] Go Readonly Tests Image"
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+    paths:
+      - 'go/**'
+      - 'proto/**'
+jobs:
+  build-example-image:
+    name: "[Tools] Build Go Readonly Tests Image"
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ vars.ECR_ROLE }}
+          aws-region: ${{ vars.DEFAULT_ECR_REGISTRY_REGION }}
+      - uses: aws-actions/amazon-ecr-login@v2
+      - uses: docker/build-push-action@v6
+        with:
+          platforms: linux/amd64,linux/arm64
+          context: .
+          file: go/openapi/Dockerfile
+          push: true
+          tags: ${{ vars.DEFAULT_ECR_REGISTRY }}/go-readonly-tests:latest

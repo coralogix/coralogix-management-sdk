@@ -53,5 +53,8 @@ test: build
 test-openapi: 
 	go test ${BUILD_ARGS} -v ${TESTARGS} -cover -timeout=120s -parallel=4 ./openapi/examples/...
 
+test-openapi-ro: 
+	go test ${BUILD_ARGS} -v ${TESTARGS} -cover -timeout=120s -parallel=8 ./openapi/tests/...
+
 generate:
 	go generate
