@@ -9260,7 +9260,8 @@
           "visualization": {
             "$ref": "#/components/schemas/Visualization"
           }
-        }
+        },
+        "required": ["queryDefinitions"]
       },
       "widgets.Gauge": {
         "type": "object",

@@ -293,6 +293,12 @@ type GaugeQueryLogs = widgets.Gauge_Query_Logs
 // GaugeQuerySpans is a type for gauge query for spans.
 type GaugeQuerySpans = widgets.Gauge_Query_Spans
 
+// GaugeQueryDataprime is a type for gauge query for dataprime.
+type GaugeQueryDataprime = widgets.Gauge_Query_Dataprime
+
+// GaugeDataprimeQuery is a type for gauge dataprime query.
+type GaugeDataprimeQuery = widgets.Gauge_DataprimeQuery
+
 // GaugeSpansQuery is a type of gauge query for spans.
 type GaugeSpansQuery = widgets.Gauge_SpansQuery
 

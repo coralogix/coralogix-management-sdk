@@ -9997,6 +9997,8 @@ components:
           $ref: "#/components/schemas/TimeFrameSelect"
         visualization:
           $ref: "#/components/schemas/Visualization"
+      required:
+      - queryDefinitions
       type: object
     widgets.Gauge:
       properties:
