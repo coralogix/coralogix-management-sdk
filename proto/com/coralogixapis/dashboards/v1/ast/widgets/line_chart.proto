@@ -1,9 +1,11 @@
 syntax = "proto3";
 
+// buf:lint:ignore PACKAGE_VERSION_SUFFIX
 package com.coralogixapis.dashboards.v1.ast.widgets;
 
 import "com/coralogixapis/dashboards/v1/ast/filters/filter.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/interval_resolution.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/scale.proto";
@@ -81,7 +83,10 @@ message LineChart {
       description: "Applied color scheme for this query, one of the predefined values"
       example: '{ "value": "classic" }'
     }];
-    Resolution resolution = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Resolution settings of the query values"}];
+    Resolution resolution = 10 [
+      deprecated = true,
+      (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Resolution settings of the query values (deprecated, use interval_resolution instead)"}
+    ];
     common.DataModeType data_mode_type = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Data mode type, either high or archive"}];
     google.protobuf.StringValue custom_unit = 12 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
       description: "Custom unit (requires to have unit field as 'custom' to take effect)"
@@ -107,6 +112,7 @@ message LineChart {
       description: "Whether to render numeric value without abbreviation"
       example: "false"
     }];
+    common.IntervalResolution interval_resolution = 18 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Interval resolution settings for time bucket calculations, supporting auto or manual modes"}];
   }
 
   message Query {
@@ -170,10 +176,19 @@ message LineChart {
     v1.common.TimeFrameSelect time_frame = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Specifies the time period for which the records should be returned"}];
   }
 
+  // Deprecated: Use IntervalResolution instead. Resolution will be removed in a future version.
   message Resolution {
+    option deprecated = true;
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+      json_schema: {
+        title: "Resolution"
+        description: "Resolution settings for query values. (deprecated, use interval_resolution instead)."
+      }
+    };
+
     // it should be oneof i think
-    google.protobuf.Duration interval = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Interval of value sampling, i.e. every 5 minutes, every 1 second and so on"}];
-    google.protobuf.Int32Value buckets_presented = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "How many buckets to present in the selected timeframe"}];
+    google.protobuf.Duration interval = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Interval of value sampling, i.e. every 5 minutes, every 1 second and so on (deprecated)"}];
+    google.protobuf.Int32Value buckets_presented = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "How many buckets to present in the selected timeframe (deprecated)"}];
   }
 
   enum TooltipType {

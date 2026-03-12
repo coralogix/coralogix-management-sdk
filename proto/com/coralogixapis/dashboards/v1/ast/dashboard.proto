@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+// buf:lint:ignore PACKAGE_VERSION_SUFFIX
 package com.coralogixapis.dashboards.v1.ast;
 
 import "com/coralogixapis/dashboards/v1/ast/annotations/annotation.proto";
@@ -89,6 +90,8 @@ message Dashboard {
     AutoRefreshOff off = 12;
     AutoRefreshTwoMinutes two_minutes = 13;
     AutoRefreshFiveMinutes five_minutes = 14;
+    AutoRefreshOneMinute one_minute = 18;
+    AutoRefreshFifteenMinutes fifteen_minutes = 19;
   }
 
   google.protobuf.StringValue slug_name = 15 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
@@ -97,8 +100,10 @@ message Dashboard {
   }];
 
   message AutoRefreshOff {}
+  message AutoRefreshOneMinute {}
   message AutoRefreshTwoMinutes {}
   message AutoRefreshFiveMinutes {}
+  message AutoRefreshFifteenMinutes {}
 
   repeated common.DashboardAction actions = 17 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "A list of public actions that are available within the dashboard context"}];
 }

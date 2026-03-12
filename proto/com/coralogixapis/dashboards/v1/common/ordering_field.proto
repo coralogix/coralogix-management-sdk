@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+// buf:lint:ignore PACKAGE_VERSION_SUFFIX
 package com.coralogixapis.dashboards.v1.common;
 
 import "com/coralogixapis/dashboards/v1/common/order_direction.proto";

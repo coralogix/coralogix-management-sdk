@@ -1,0 +1,104 @@
+syntax = "proto3";
+
+// buf:lint:ignore PACKAGE_VERSION_SUFFIX
+package com.coralogixapis.dashboards.v1.ast.widgets.common;
+
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
+
+enum SeriesVisibilityMode {
+  SERIES_VISIBILITY_MODE_UNSPECIFIED = 0;
+  SERIES_VISIBILITY_MODE_HIDE_ALL = 1;
+  SERIES_VISIBILITY_MODE_SHOW_ONLY = 2;
+}
+
+message SeriesVisibilityQueryMatcher {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "SeriesVisibilityQueryMatcher"
+      description: "Match series by query id"
+      required: ["query_id"]
+    }
+  };
+
+  google.protobuf.StringValue query_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Unique identifier of the query"
+    example: '{ "value": "73c65643-91d5-dba2-35cd-baa49dc65331" }'
+  }];
+}
+
+message SeriesVisibilityThresholdMatcher {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "SeriesVisibilityThresholdMatcher"
+      description: "Match series by threshold label"
+      required: ["threshold_label"]
+    }
+  };
+
+  google.protobuf.StringValue threshold_label = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Label of the threshold to match (matches Threshold.label)"
+    example: '{ "value": "Healthy" }'
+  }];
+}
+
+message QuerySeriesVisibility {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "QuerySeriesVisibility"
+      description: "Query series visibility config"
+      required: [
+        "matcher",
+        "query"
+      ]
+    }
+  };
+
+  SeriesVisibilityQueryMatcher query = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Match series by query id"}];
+  SeriesVisibilityThresholdMatcher threshold = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Match series by threshold label (when legend is grouped by thresholds)"}];
+
+  SeriesVisibilityMode visibility = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Visibility mode for the query series - hide all or show only specific series"}];
+
+  repeated google.protobuf.StringValue series_names = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "When visibility is SHOW_ONLY: list of series names to display (matches the final rendered series name after applying series_name_template if present)"
+    example: '[{ "value": "staging" }, { "value": "production" }]'
+  }];
+}
+
+message AnnotationSeriesVisibility {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "AnnotationSeriesVisibility"
+      description: "Annotation series visibility config"
+      required: [
+        "annotation_id",
+        "visibility"
+      ]
+    }
+  };
+
+  google.protobuf.StringValue annotation_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Unique identifier of the annotation"
+    example: '{ "value": "83aed974-510b-43be-bd19-c92daf56beff" }'
+  }];
+
+  SeriesVisibilityMode visibility = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Visibility mode for the annotation series"}];
+
+  repeated google.protobuf.StringValue series_names = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "When visibility is SHOW_ONLY: list of series names to display"
+    example: '[{ "value": "staging" }, { "value": "production" }]'
+  }];
+}
+
+message SeriesVisibility {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "SeriesVisibility"
+      description: "Configuration for specifying which series should be visible on a widget"
+    }
+  };
+
+  repeated QuerySeriesVisibility query_series = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of query series visibility settings"}];
+
+  repeated AnnotationSeriesVisibility annotation_series = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of annotation series visibility settings"}];
+}

@@ -1,7 +1,10 @@
 syntax = "proto3";
 
+// buf:lint:ignore PACKAGE_VERSION_SUFFIX
 package com.coralogixapis.dashboards.v1.ast.widgets.common;
 
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/series_visibility.proto";
+import "google/api/visibility.proto";
 import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
 
@@ -13,6 +16,10 @@ message Legend {
   }];
   google.protobuf.BoolValue group_by_query = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "In case of multiple queries, whether legend items should be grouped by their respective queries"}];
   LegendPlacement placement = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Location of the legend in the widget"}];
+  SeriesVisibility series_visibility = 5 [
+    (google.api.field_visibility) = {restriction: "INTERNAL"},
+    (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Configuration for specifying which query or annotation series should be visible on the widget, by default all annotations and query series are visible"}
+  ];
 
   enum LegendColumn {
     LEGEND_COLUMN_UNSPECIFIED = 0;

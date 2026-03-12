@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+// buf:lint:ignore PACKAGE_VERSION_SUFFIX
 package com.coralogixapis.dashboards.v1.services;
 
 import "com/coralogixapis/common/v1/audit_log.proto";
@@ -19,8 +20,12 @@ service DashboardsService {
   rpc CreateDashboard(CreateDashboardRequest) returns (CreateDashboardResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Create dashboard";
     option (google.api.http) = {
-      post: "/v1/dashboards/dashboards"
+      post: "/dashboards/dashboards/v1"
       body: "*"
+      additional_bindings: {
+        post: "/v1/dashboards/dashboards"
+        body: "*"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -51,8 +56,12 @@ service DashboardsService {
   rpc ReplaceDashboard(ReplaceDashboardRequest) returns (ReplaceDashboardResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Replace dashboard";
     option (google.api.http) = {
-      put: "/v1/dashboards/dashboards"
+      put: "/dashboards/dashboards/v1"
       body: "*"
+      additional_bindings: {
+        put: "/v1/dashboards/dashboards"
+        body: "*"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -82,7 +91,11 @@ service DashboardsService {
 
   rpc DeleteDashboard(DeleteDashboardRequest) returns (DeleteDashboardResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Delete dashboard";
-    option (google.api.http) = {delete: "/v1/dashboards/dashboards/{dashboard_id}"};
+
+    option (google.api.http) = {
+      delete: "/dashboards/dashboards/v1/{dashboard_id}"
+      additional_bindings: {delete: "/v1/dashboards/dashboards/{dashboard_id}"}
+    };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
@@ -111,7 +124,11 @@ service DashboardsService {
 
   rpc GetDashboard(GetDashboardRequest) returns (GetDashboardResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get dashboard";
-    option (google.api.http) = {get: "/v1/dashboards/dashboards/{dashboard_id}"};
+    option (google.api.http) = {
+      get: "/dashboards/dashboards/v1/{dashboard_id}"
+      additional_bindings: {get: "/v1/dashboards/dashboards/{dashboard_id}"}
+    };
+
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
@@ -140,7 +157,10 @@ service DashboardsService {
 
   rpc GetDashboardBySlug(GetDashboardBySlugRequest) returns (GetDashboardBySlugResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get dashboard by URL slug";
-    option (google.api.http) = {get: "/v1/dashboards/by-slug/{slug}"};
+    option (google.api.http) = {
+      get: "/dashboards/dashboards/v1/slugs/{slug}"
+      additional_bindings: {get: "/v1/dashboards/by-slug/{slug}"}
+    };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
@@ -170,8 +190,11 @@ service DashboardsService {
   rpc PinDashboard(PinDashboardRequest) returns (PinDashboardResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Pin dashboard";
     option (google.api.http) = {
-      patch: "/v1/dashboards/dashboards/{dashboard_id}:pin"
-      body: "*"
+      put: "/dashboards/pinned/v1/{dashboard_id}"
+      additional_bindings: {
+        patch: "/v1/dashboards/dashboards/{dashboard_id}:pin"
+        body: "*"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -202,8 +225,11 @@ service DashboardsService {
   rpc UnpinDashboard(UnpinDashboardRequest) returns (UnpinDashboardResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Unpin dashboard";
     option (google.api.http) = {
-      patch: "/v1/dashboards/dashboards/{dashboard_id}:unpin"
-      body: "*"
+      delete: "/dashboards/pinned/v1/{dashboard_id}"
+      additional_bindings: {
+        patch: "/v1/dashboards/dashboards/{dashboard_id}:unpin"
+        body: "*"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -234,8 +260,13 @@ service DashboardsService {
   rpc ReplaceDefaultDashboard(ReplaceDefaultDashboardRequest) returns (ReplaceDefaultDashboardResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Replace default dashboard";
     option (google.api.http) = {
-      put: "/v1/dashboards/dashboards/{dashboard_id}/default"
+      put: "/dashboards/dashboards/v1/{dashboard_id}/default"
       body: "*"
+
+      additional_bindings: {
+        put: "/v1/dashboards/dashboards/{dashboard_id}/default"
+        body: "*"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -266,8 +297,13 @@ service DashboardsService {
   rpc AssignDashboardFolder(AssignDashboardFolderRequest) returns (AssignDashboardFolderResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Assign a dashboard to a folder";
     option (google.api.http) = {
-      post: "/v1/dashboards/dashboards/{dashboard_id}/folder"
+      post: "/dashboards/dashboards/v1/{dashboard_id}/folder"
       body: "*"
+
+      additional_bindings: {
+        post: "/v1/dashboards/dashboards/{dashboard_id}/folder"
+        body: "*"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {

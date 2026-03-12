@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+// buf:lint:ignore PACKAGE_VERSION_SUFFIX
 package com.coralogixapis.dashboards.v1.common;
 
 import "google/protobuf/wrappers.proto";
@@ -58,6 +59,8 @@ message DashboardAction {
   google.protobuf.BoolValue should_open_in_new_window = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Defines if the action should open in a new window or current window in the browser"}];
 
   optional google.protobuf.StringValue widget_id = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Reference to specific widget within a dashboard, can be null if the action is dashboard wide"}];
+
+  optional google.protobuf.StringValue query_id = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Reference to specific query within a widget, can be null if the action is dashboard wide or related to single query widget"}];
 
   ActionDefinition definition = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Definition of the action"}];
 
