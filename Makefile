@@ -26,6 +26,9 @@ test:
 test-openapi:
 	cd ./go; make test-openapi TESTARGS=${TESTARGS}
 
+proto-renew: ## No-op: protos are synced manually or via copy from cx-management-apis
+	@true
+
 proto-go-generate: proto-renew
 	cd ./go; make proto-clean; make proto-compile
 

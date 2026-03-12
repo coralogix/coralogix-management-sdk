@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+// buf:lint:ignore PACKAGE_VERSION_SUFFIX
 package com.coralogixapis.dashboards.v1.ast.widgets.common;
 
 message ColorsBy {
@@ -7,9 +8,13 @@ message ColorsBy {
     ColorsByStack stack = 1;
     ColorsByGroupBy group_by = 2;
     ColorsByAggregation aggregation = 3;
+    ColorsByQuery query = 4;
+    ColorsByCategory category = 5;
   }
 
   message ColorsByStack {}
   message ColorsByGroupBy {}
   message ColorsByAggregation {}
+  message ColorsByQuery {}
+  message ColorsByCategory {}
 }

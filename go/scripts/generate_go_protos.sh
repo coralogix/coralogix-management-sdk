@@ -13,8 +13,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-# Directory containing the protobuf files
+# Prefer protoc from Homebrew (macOS) or common install paths
+export PATH="/opt/homebrew/bin:/usr/local/bin:${PATH}"
+# Ensure Go toolchain binaries (protoc-gen-go, protoc-gen-go-grpc) are on PATH
+if command -v go &>/dev/null; then
+  export PATH="$(go env GOPATH)/bin:${PATH}"
+fi
+export PATH="${HOME}/go/bin:${PATH}"
+if ! command -v protoc &>/dev/null; then
+    echo "error: protoc not found. Install with: brew install protobuf" >&2
+    exit 1
+fi
+if ! command -v protoc-gen-go &>/dev/null; then
+    echo "error: protoc-gen-go not found. Install with: go install google.golang.org/protobuf/cmd/protoc-gen-go@latest" >&2
+    exit 1
+fi
+if ! command -v protoc-gen-go-grpc &>/dev/null; then
+    echo "error: protoc-gen-go-grpc not found. Install with: go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest" >&2
+    exit 1
+fi
 proto_dir="../proto"
 go_out_dir="internal"
 mod_prefix="github.com/coralogix"

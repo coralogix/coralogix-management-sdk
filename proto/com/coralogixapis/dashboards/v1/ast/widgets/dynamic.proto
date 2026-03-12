@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+// buf:lint:ignore PACKAGE_VERSION_SUFFIX
 package com.coralogixapis.dashboards.v1.ast.widgets;
 
 import "com/coralogixapis/dashboards/v1/ast/filters/filter.proto";
@@ -15,9 +16,11 @@ import "com/coralogixapis/dashboards/v1/ast/widgets/common/sort_by.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/text_alignment.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/data_table.proto";
 import "com/coralogixapis/dashboards/v1/common/logs_aggregation.proto";
 import "com/coralogixapis/dashboards/v1/common/metrics_series_limit_type.proto";
 import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
+import "com/coralogixapis/dashboards/v1/common/order_direction.proto";
 import "com/coralogixapis/dashboards/v1/common/query.proto";
 import "com/coralogixapis/dashboards/v1/common/time_frame.proto";
 import "com/coralogixapis/dashboards/v1/types.proto";
@@ -25,7 +28,6 @@ import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
 
 message Dynamic {
-  // Deprecated: Use query_definitions instead. This field was deprecated because of multi-query support.
   Query query = 1 [
     deprecated = true,
     (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "A query object describing how to retrieve data"}
@@ -174,7 +176,7 @@ message Dynamic {
   message Visualization {
     oneof value {
       Table table = 1;
-      TimeSeriesLines time_series_lines = 2;
+      TimeSeriesLines time_series_lines = 2 [deprecated = true]; // Deprecated: Use time_series_lines_multi instead.
       TimeSeriesBars time_series_bars = 3;
       Stat stat = 4;
       Gauge gauge = 5;
@@ -184,11 +186,15 @@ message Dynamic {
       VerticalBars vertical_bars = 9;
       Heatmap heatmap = 10;
       Geomap geomap = 11;
+      TimeSeriesLinesMulti time_series_lines_multi = 12;
+      VerticalBarsMulti vertical_bars_multi = 13;
+      HorizontalBarsMulti horizontal_bars_multi = 14;
     }
 
     message Table {
       repeated Column columns = 1;
       repeated Rule rules = 2;
+      TableSettings settings = 3;
 
       message Column {
         v1.common.ObservationField field = 1;
@@ -200,6 +206,19 @@ message Dynamic {
         google.protobuf.StringValue description = 3;
         RuleScope rule_scope = 4;
         repeated Property properties = 5;
+      }
+
+      message TableSettings {
+        RowStyle row_style = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "Type of row view style in the table"
+          example: "1"
+        }];
+        repeated ColumnWidthEntry column_widths = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of configured column widths"}];
+      }
+
+      message ColumnWidthEntry {
+        google.protobuf.StringValue column_name = 1;
+        google.protobuf.Int32Value width = 2;
       }
 
       message RuleScope {
@@ -235,14 +254,18 @@ message Dynamic {
           PropertyUnits units = 3;
           google.protobuf.StringValue regex_extract = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
             description: "Value of Regex Extract property, a regex string"
-            example: '{ "value": "gr[ae]y" }'
+            example: "gr[ae]y"
           }];
           PropertyLinks link = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Link property (see PropertyLinks for full reference)"}];
           google.protobuf.StringValue values_alias = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
             description: "Value alias property, used to give alias names to selected fields"
-            example: '{ "value": "Pod: {{$d.pod}}" }'
+            example: "Pod: {{$d.pod}}"
           }];
           PropertyValuesMapping values_mapping = 7;
+          google.protobuf.StringValue column_display_name = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+            description: "Column display name property, allows renaming the column header name"
+            example: "Renamed header"
+          }];
         }
       }
 
@@ -394,12 +417,100 @@ message Dynamic {
         description: "Number indicating the upper band for y axis"
         example: "1000"
       }];
+    }
 
-      enum StackedLine {
-        STACKED_LINE_UNSPECIFIED = 0;
-        STACKED_LINE_ABSOLUTE = 1;
-        STACKED_LINE_RELATIVE = 2;
+    message TimeSeriesLinesMulti {
+      common.Legend legend = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Widget's legend settings"}];
+
+      TimeSeriesTooltip tooltip = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Tooltip settings for the widget"}];
+
+      StackedLine stacked_line = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Type of stacked line, can be undefined, absolute or relative"}];
+
+      google.protobuf.BoolValue connect_nulls = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether the line should remain connected instead of producing scattered points when null values are present in between"
+        example: "false"
+      }];
+
+      repeated QueryDisplaySettings query_display_settings = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Definitions of widget queries"}];
+
+      message QueryDisplaySettings {
+        option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+          json_schema: {
+            title: "TimeSeriesLinesMultiQueryDisplaySettings"
+            description: "Query display settings for time series lines multi-query visualization"
+            required: ["query_id"]
+          }
+        };
+
+        google.protobuf.StringValue query_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "Reference to the query id from Dynamic.query_display_settings"
+          example: '{ "value": "73c65643-91d5-dba2-35cd-baa49dc65331" }'
+        }];
+
+        google.protobuf.StringValue series_name_template = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "Custom template for the series name"
+          example: '{ "value": "Trace of {{ application }}" }'
+        }];
+
+        google.protobuf.Int64Value series_count_limit = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "Max count of the series per query"
+          example: '{ "value": 50 }'
+        }];
+
+        common.Unit unit = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "Unit of the query results - one from a predefined list, or custom"
+          example: "3"
+        }];
+
+        common.ScaleType scale_type = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Scale type - linear/logarithmic"}];
+
+        google.protobuf.StringValue color_scheme = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "Applied color scheme for this query, one of the predefined values"
+          example: '{ "value": "classic" }'
+        }];
+
+        google.protobuf.StringValue custom_unit = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "Custom unit (requires to have unit field as 'custom' to take effect)"
+          example: '{ "value": "rpm" }'
+        }];
+
+        google.protobuf.Int32Value decimal_precision = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "Number indicating the decimal precision of the numeric values, within range 0-15"
+          example: "4"
+        }];
+
+        google.protobuf.BoolValue hash_colors = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "Whether to ignore color scheme and derive colors from algorithm"
+          example: "false"
+        }];
+
+        google.protobuf.FloatValue y_axis_min = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "Number indicating the lower band for y axis"
+          example: "-1000"
+        }];
+
+        google.protobuf.FloatValue y_axis_max = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "Number indicating the upper band for y axis"
+          example: "1000"
+        }];
+
+        google.protobuf.BoolValue allow_abbreviation = 12 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "Whether to render numeric value with abbreviation"
+          example: "false"
+        }];
+
+        v1.common.ObservationField temporal_field = 13 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Temporal field for time series data"}];
+
+        repeated v1.common.ObservationField category_fields = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "A list of category fields for grouping the query results"}];
+
+        repeated v1.common.ObservationField value_fields = 15 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "A list of numeric/value observation fields to display from the query results"}];
       }
+    }
+
+    enum StackedLine {
+      STACKED_LINE_UNSPECIFIED = 0;
+      STACKED_LINE_ABSOLUTE = 1;
+      STACKED_LINE_RELATIVE = 2;
     }
 
     message TimeSeriesBars {
@@ -793,6 +904,97 @@ message Dynamic {
       }
     }
 
+    message HorizontalBarsMulti {
+      repeated v1.common.ObservationField category_fields = 1;
+
+      repeated QueryFieldSettings query_field_settings = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Per-query field settings"}];
+
+      message QueryFieldSettings {
+        option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+          json_schema: {
+            title: "HorizontalBarsMultiQueryFieldSettings"
+            description: "Per-query field settings for horizontal bars multi-query visualization"
+            required: ["query_id"]
+          }
+        };
+
+        google.protobuf.StringValue query_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "Reference to the query id from Dynamic.query_display_settings"
+          example: '{ "value": "73c65643-91d5-dba2-35cd-baa49dc65331" }'
+        }];
+
+        v1.common.ObservationField value_field = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Numeric field for this query - each bar gets one value column"}];
+      }
+
+      google.protobuf.Int32Value max_bars_per_chart = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Maximum number of bars on a chart"
+        example: "20"
+      }];
+
+      common.ScaleType scale_type = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Scale type - linear/logarithmic"}];
+
+      common.ColorsBy colors_by = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "How the bar colors should be organized"}];
+
+      google.protobuf.StringValue color_scheme = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Applied color scheme, one of the predefined values"
+        example: '{ "value": "classic" }'
+      }];
+
+      google.protobuf.BoolValue hash_colors = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to ignore color scheme and derive colors from algorithm"
+        example: "false"
+      }];
+
+      common.Unit unit = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Unit of the query results - one from a predefined list, or custom"
+        example: "3"
+      }];
+
+      google.protobuf.StringValue custom_unit = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Custom unit (requires to have unit field set to custom to take effect)"
+        example: '{ "value": "mph" }'
+      }];
+
+      google.protobuf.BoolValue display_on_bar = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Specifies where to display the bar value"}];
+
+      google.protobuf.Int32Value decimal_precision = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the decimal precision of the numeric values, within range 0-15"
+        example: "4"
+      }];
+
+      google.protobuf.BoolValue allow_abbreviation = 12 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to render numeric value with abbreviation"
+        example: "false"
+      }];
+
+      google.protobuf.FloatValue y_axis_min = 13 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the lower band for y axis"
+        example: "-1000"
+      }];
+
+      google.protobuf.FloatValue y_axis_max = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the upper band for y axis"
+        example: "1000"
+      }];
+
+      common.Legend legend = 15 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Widget's legend settings"}];
+
+      google.protobuf.StringValue group_name_template = 16 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Custom template name for a group, can contain variables"
+        example: '{ "value": "Slice - {{ variable }}" }'
+      }];
+
+      YAxisViewBy y_axis_view_by = 17 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Specifies how to organize the y-axis view"}];
+
+      SortOrder sort_order = 18 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Sort order for bars - by category or by a specific observation field"}];
+
+      enum YAxisViewBy {
+        Y_AXIS_VIEW_BY_UNSPECIFIED = 0;
+        Y_AXIS_VIEW_BY_CATEGORY = 1;
+        Y_AXIS_VIEW_BY_VALUE = 2;
+      }
+    }
+
     message VerticalBars {
       v1.common.ObservationField value_field = 1;
 
@@ -866,6 +1068,133 @@ message Dynamic {
         description: "Custom template name for a group, can contain variables"
         example: '{ "value": "Slice - {{ variable }}" }'
       }];
+    }
+
+    message VerticalBarsMulti {
+      repeated v1.common.ObservationField category_fields = 1;
+
+      repeated QueryFieldSettings query_field_settings = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Per-query field settings"}];
+
+      message QueryFieldSettings {
+        option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+          json_schema: {
+            title: "VerticalBarsMultiQueryFieldSettings"
+            description: "Per-query field settings for vertical bars multi-query visualization"
+            required: ["query_id"]
+          }
+        };
+
+        google.protobuf.StringValue query_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "Reference to the query id from Dynamic.query_display_settings"
+          example: '{ "value": "73c65643-91d5-dba2-35cd-baa49dc65331" }'
+        }];
+
+        v1.common.ObservationField value_field = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Numeric field for this query - each bar gets one value column"}];
+      }
+
+      google.protobuf.Int32Value max_bars_per_chart = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Maximum number of bars on a chart"
+        example: "20"
+      }];
+
+      common.ScaleType scale_type = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Scale type - linear/logarithmic"}];
+
+      common.ColorsBy colors_by = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "How the bar colors should be organized"}];
+
+      google.protobuf.StringValue color_scheme = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Applied color scheme, one of the predefined values"
+        example: '{ "value": "classic" }'
+      }];
+
+      google.protobuf.BoolValue hash_colors = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to ignore color scheme and derive colors from algorithm"
+        example: "false"
+      }];
+
+      common.Unit unit = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Unit of the query results - one from a predefined list, or custom"
+        example: "3"
+      }];
+
+      google.protobuf.StringValue custom_unit = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Custom unit (requires to have unit field set to custom to take effect)"
+        example: '{ "value": "mph" }'
+      }];
+
+      BarValueDisplay bar_value_display = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Specifies where to display the bar value"}];
+
+      google.protobuf.Int32Value decimal_precision = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the decimal precision of the numeric values, within range 0-15"
+        example: "4"
+      }];
+
+      google.protobuf.BoolValue allow_abbreviation = 12 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to render numeric value with abbreviation"
+        example: "false"
+      }];
+
+      google.protobuf.FloatValue y_axis_min = 13 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the lower band for y axis"
+        example: "-1000"
+      }];
+
+      google.protobuf.FloatValue y_axis_max = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the upper band for y axis"
+        example: "1000"
+      }];
+
+      common.Legend legend = 15 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Widget's legend settings"}];
+
+      google.protobuf.StringValue group_name_template = 16 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Custom template name for a group, can contain variables"
+        example: '{ "value": "Slice - {{ variable }}" }'
+      }];
+
+      SortOrder sort_order = 17 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Sort order for bars - by category or by a specific observation field"}];
+    }
+
+    message SortOrder {
+      option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+        json_schema: {
+          title: "SortOrder"
+          description: "Sort order with direction and strategy - either by category or by query value"
+        }
+      };
+
+      v1.common.OrderDirection order_direction = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Order direction, ascending or descending"
+        example: "1"
+      }];
+
+      SortStrategy strategy = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "How to determine sort key - by category or by query value"}];
+
+      message SortStrategy {
+        option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+          json_schema: {
+            title: "SortStrategy"
+            description: "Strategy for determining sort key"
+          }
+        };
+
+        string strategy_type = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+          description: "Discriminator field - STRATEGY_TYPE_CATEGORY or STRATEGY_TYPE_QUERY_VALUE"
+          example: '"STRATEGY_TYPE_CATEGORY"'
+        }];
+
+        oneof strategy {
+          SortByCategory category = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Order by category (e.g. bar label)"}];
+          SortByQueryValue query_value = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Order by values from a specific query"}];
+        }
+
+        message SortByCategory {}
+
+        message SortByQueryValue {
+          google.protobuf.StringValue query_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+            description: "Reference to the query id from Dynamic.query_display_settings"
+            example: '{ "value": "73c65643-91d5-dba2-35cd-baa49dc65331" }'
+          }];
+        }
+      }
     }
 
     message Heatmap {

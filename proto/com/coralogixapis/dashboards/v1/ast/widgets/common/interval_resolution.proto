@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+// buf:lint:ignore PACKAGE_VERSION_SUFFIX
+package com.coralogixapis.dashboards.v1.ast.widgets.common;
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
+
+// IntervalResolution represents the configuration for time bucket/interval resolution in time-series widgets.
+// This is the successor to the deprecated Resolution message.
+
+message IntervalResolution {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "IntervalResolution"
+      description: "Configuration for time bucket/interval resolution in time-series widgets. Supports automatic calculation based on widget width and time range, or manual interval specification."
+    }
+  };
+
+  oneof value {
+    AutoIntervalResolution auto = 1;
+    ManualIntervalResolution manual = 2;
+  }
+
+  google.protobuf.BoolValue use_advanced_limit = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Whether the max. data points and min. interval fields are user-editable. When true, users can modify these constraint fields; when false or unset, they are read-only."
+    example: "true"
+  }];
+}
+
+message AutoIntervalResolution {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "AutoIntervalResolution"
+      description: "Automatic interval resolution that calculates optimal time buckets based on the widget width, time range, and specified constraints."
+    }
+  };
+
+  google.protobuf.Duration minimum_interval = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Minimum interval duration. The calculated interval will not be smaller than this value."
+    example: '{ "seconds": 15 }'
+  }];
+
+  google.protobuf.Int32Value maximum_data_points = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Maximum number of data points to display. The calculated interval ensures this limit is not exceeded."
+    example: "500"
+  }];
+}
+
+message ManualIntervalResolution {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "ManualIntervalResolution"
+      description: "Manual interval resolution with a fixed, user-specified interval for time buckets. Optionally supports minimum interval and maximum data points constraints."
+      required: ["interval"]
+    }
+  };
+
+  google.protobuf.Duration interval = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Fixed interval duration for time buckets, specified by the user."
+    example: '{ "seconds": 60 }'
+  }];
+
+  google.protobuf.Duration minimum_interval = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Minimum interval duration constraint. The selected interval will not be smaller than this value."
+    example: '{ "seconds": 15 }'
+  }];
+
+  google.protobuf.Int32Value maximum_data_points = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Maximum number of data points constraint."
+    example: "500"
+  }];
+}
