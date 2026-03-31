@@ -1,0 +1,73 @@
+openapi: 3.0.0
+info:
+  title: Pet Service
+  version: 1.0.0
+paths: {}
+components:
+  schemas:
+    Pet:
+      oneOf:
+        - $ref: '#/components/schemas/PetDogAdopted'
+        - $ref: '#/components/schemas/PetDogAvailable'
+        - $ref: '#/components/schemas/PetCatAdopted'
+        - $ref: '#/components/schemas/PetCatAvailable'
+    PetDogAdopted:
+      type: object
+      properties:
+        name:
+          type: string
+        dog:
+          $ref: '#/components/schemas/Dog'
+        adopted:
+          $ref: '#/components/schemas/Adopted'
+      additionalProperties: false
+    PetDogAvailable:
+      type: object
+      properties:
+        name:
+          type: string
+        dog:
+          $ref: '#/components/schemas/Dog'
+        available:
+          $ref: '#/components/schemas/Available'
+      additionalProperties: false
+    PetCatAdopted:
+      type: object
+      properties:
+        name:
+          type: string
+        cat:
+          $ref: '#/components/schemas/Cat'
+        adopted:
+          $ref: '#/components/schemas/Adopted'
+      additionalProperties: false
+    PetCatAvailable:
+      type: object
+      properties:
+        name:
+          type: string
+        cat:
+          $ref: '#/components/schemas/Cat'
+        available:
+          $ref: '#/components/schemas/Available'
+      additionalProperties: false
+    Dog:
+      type: object
+      properties:
+        breed:
+          type: string
+    Cat:
+      type: object
+      properties:
+        color:
+          type: string
+    Adopted:
+      type: object
+      properties:
+        ownerName:
+          type: string
+    Available:
+      type: object
+      properties:
+        ready:
+          type: boolean

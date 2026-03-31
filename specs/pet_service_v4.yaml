@@ -1,0 +1,103 @@
+openapi: 3.0.0
+info:
+  title: Pet Service V4
+  version: 1.0.0
+paths: {}
+components:
+  schemas:
+    Pet:
+      allOf:
+        - $ref: '#/components/schemas/PetCommon'
+        - $ref: '#/components/schemas/PetType'
+        - $ref: '#/components/schemas/PetStatus'
+
+    PetCommon:
+      type: object
+      properties:
+        name:
+          type: string
+
+    PetType:
+      oneOf:
+        - $ref: '#/components/schemas/PetTypeDog'
+        - $ref: '#/components/schemas/PetTypeCat'
+      discriminator:
+        propertyName: petTypeKind
+        mapping:
+          dog: '#/components/schemas/PetTypeDog'
+          cat: '#/components/schemas/PetTypeCat'
+
+    PetTypeDog:
+      type: object
+      properties:
+        petTypeKind:
+          type: string
+        dog:
+          $ref: '#/components/schemas/Dog'
+      required:
+        - petTypeKind
+        - dog
+
+    PetTypeCat:
+      type: object
+      properties:
+        petTypeKind:
+          type: string
+        cat:
+          $ref: '#/components/schemas/Cat'
+      required:
+        - petTypeKind
+        - cat
+
+    PetStatus:
+      oneOf:
+        - $ref: '#/components/schemas/PetStatusAdopted'
+        - $ref: '#/components/schemas/PetStatusAvailable'
+      discriminator:
+        propertyName: petStatusKind
+        mapping:
+          adopted: '#/components/schemas/PetStatusAdopted'
+          available: '#/components/schemas/PetStatusAvailable'
+
+    PetStatusAdopted:
+      type: object
+      properties:
+        petStatusKind:
+          type: string
+        adopted:
+          $ref: '#/components/schemas/Adopted'
+      required:
+        - petStatusKind
+        - adopted
+
+    PetStatusAvailable:
+      type: object
+      properties:
+        petStatusKind:
+          type: string
+        available:
+          $ref: '#/components/schemas/Available'
+      required:
+        - petStatusKind
+        - available
+
+    Dog:
+      type: object
+      properties:
+        breed:
+          type: string
+    Cat:
+      type: object
+      properties:
+        color:
+          type: string
+    Adopted:
+      type: object
+      properties:
+        ownerName:
+          type: string
+    Available:
+      type: object
+      properties:
+        ready:
+          type: boolean

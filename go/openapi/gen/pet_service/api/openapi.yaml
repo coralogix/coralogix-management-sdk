@@ -1,0 +1,87 @@
+openapi: 3.0.0
+info:
+  title: Pet Service
+  version: 1.0.0
+servers:
+- url: /
+paths: {}
+components:
+  schemas:
+    Pet:
+      oneOf:
+      - $ref: "#/components/schemas/PetDogAdopted"
+      - $ref: "#/components/schemas/PetDogAvailable"
+      - $ref: "#/components/schemas/PetCatAdopted"
+      - $ref: "#/components/schemas/PetCatAvailable"
+    PetDogAdopted:
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+        dog:
+          $ref: "#/components/schemas/Dog"
+        adopted:
+          $ref: "#/components/schemas/Adopted"
+      required:
+      - adopted
+      - dog
+      type: object
+    PetDogAvailable:
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+        dog:
+          $ref: "#/components/schemas/Dog"
+        available:
+          $ref: "#/components/schemas/Available"
+      required:
+      - available
+      - dog
+      type: object
+    PetCatAdopted:
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+        cat:
+          $ref: "#/components/schemas/Cat"
+        adopted:
+          $ref: "#/components/schemas/Adopted"
+      required:
+      - adopted
+      - cat
+      type: object
+    PetCatAvailable:
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+        cat:
+          $ref: "#/components/schemas/Cat"
+        available:
+          $ref: "#/components/schemas/Available"
+      required:
+      - available
+      - cat
+      type: object
+    Dog:
+      properties:
+        breed:
+          type: string
+      type: object
+    Cat:
+      properties:
+        color:
+          type: string
+      type: object
+    Adopted:
+      properties:
+        ownerName:
+          type: string
+      type: object
+    Available:
+      properties:
+        ready:
+          type: boolean
+      type: object
