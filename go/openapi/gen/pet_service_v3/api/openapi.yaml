@@ -1,0 +1,99 @@
+openapi: 3.0.0
+info:
+  title: Pet Service V3
+  version: 1.0.0
+servers:
+- url: /
+paths: {}
+components:
+  schemas:
+    Pet:
+      oneOf:
+      - $ref: "#/components/schemas/PetDogAdoptedWrapper"
+      - $ref: "#/components/schemas/PetDogAvailableWrapper"
+      - $ref: "#/components/schemas/PetCatAdoptedWrapper"
+      - $ref: "#/components/schemas/PetCatAvailableWrapper"
+    PetDogAdoptedWrapper:
+      properties:
+        pet_dog_adopted:
+          $ref: "#/components/schemas/PetDogAdopted"
+      required:
+      - pet_dog_adopted
+      type: object
+    PetDogAvailableWrapper:
+      properties:
+        pet_dog_available:
+          $ref: "#/components/schemas/PetDogAvailable"
+      required:
+      - pet_dog_available
+      type: object
+    PetCatAdoptedWrapper:
+      properties:
+        pet_cat_adopted:
+          $ref: "#/components/schemas/PetCatAdopted"
+      required:
+      - pet_cat_adopted
+      type: object
+    PetCatAvailableWrapper:
+      properties:
+        pet_cat_available:
+          $ref: "#/components/schemas/PetCatAvailable"
+      required:
+      - pet_cat_available
+      type: object
+    PetDogAdopted:
+      properties:
+        name:
+          type: string
+        dog:
+          $ref: "#/components/schemas/Dog"
+        adopted:
+          $ref: "#/components/schemas/Adopted"
+      type: object
+    PetDogAvailable:
+      properties:
+        name:
+          type: string
+        dog:
+          $ref: "#/components/schemas/Dog"
+        available:
+          $ref: "#/components/schemas/Available"
+      type: object
+    PetCatAdopted:
+      properties:
+        name:
+          type: string
+        cat:
+          $ref: "#/components/schemas/Cat"
+        adopted:
+          $ref: "#/components/schemas/Adopted"
+      type: object
+    PetCatAvailable:
+      properties:
+        name:
+          type: string
+        cat:
+          $ref: "#/components/schemas/Cat"
+        available:
+          $ref: "#/components/schemas/Available"
+      type: object
+    Dog:
+      properties:
+        breed:
+          type: string
+      type: object
+    Cat:
+      properties:
+        color:
+          type: string
+      type: object
+    Adopted:
+      properties:
+        ownerName:
+          type: string
+      type: object
+    Available:
+      properties:
+        ready:
+          type: boolean
+      type: object

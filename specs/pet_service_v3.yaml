@@ -6,48 +6,77 @@ paths: {}
 components:
   schemas:
     Pet:
-      allOf:
-        - $ref: '#/components/schemas/PetCommon'
-        - $ref: '#/components/schemas/PetType'
-        - $ref: '#/components/schemas/PetStatus'
+      oneOf:
+        - $ref: '#/components/schemas/PetDogAdoptedWrapper'
+        - $ref: '#/components/schemas/PetDogAvailableWrapper'
+        - $ref: '#/components/schemas/PetCatAdoptedWrapper'
+        - $ref: '#/components/schemas/PetCatAvailableWrapper'
 
-    PetCommon:
+    PetDogAdoptedWrapper:
+      type: object
+      required: [pet_dog_adopted]
+      properties:
+        pet_dog_adopted:
+          $ref: '#/components/schemas/PetDogAdopted'
+
+    PetDogAvailableWrapper:
+      type: object
+      required: [pet_dog_available]
+      properties:
+        pet_dog_available:
+          $ref: '#/components/schemas/PetDogAvailable'
+
+    PetCatAdoptedWrapper:
+      type: object
+      required: [pet_cat_adopted]
+      properties:
+        pet_cat_adopted:
+          $ref: '#/components/schemas/PetCatAdopted'
+
+    PetCatAvailableWrapper:
+      type: object
+      required: [pet_cat_available]
+      properties:
+        pet_cat_available:
+          $ref: '#/components/schemas/PetCatAvailable'
+
+    PetDogAdopted:
       type: object
       properties:
         name:
           type: string
-
-    PetType:
-      oneOf:
-        - $ref: '#/components/schemas/PetTypeDog'
-        - $ref: '#/components/schemas/PetTypeCat'
-
-    PetTypeDog:
-      type: object
-      properties:
         dog:
           $ref: '#/components/schemas/Dog'
-
-    PetTypeCat:
-      type: object
-      properties:
-        cat:
-          $ref: '#/components/schemas/Cat'
-
-    PetStatus:
-      oneOf:
-        - $ref: '#/components/schemas/PetStatusAdopted'
-        - $ref: '#/components/schemas/PetStatusAvailable'
-
-    PetStatusAdopted:
-      type: object
-      properties:
         adopted:
           $ref: '#/components/schemas/Adopted'
 
-    PetStatusAvailable:
+    PetDogAvailable:
       type: object
       properties:
+        name:
+          type: string
+        dog:
+          $ref: '#/components/schemas/Dog'
+        available:
+          $ref: '#/components/schemas/Available'
+
+    PetCatAdopted:
+      type: object
+      properties:
+        name:
+          type: string
+        cat:
+          $ref: '#/components/schemas/Cat'
+        adopted:
+          $ref: '#/components/schemas/Adopted'
+
+    PetCatAvailable:
+      type: object
+      properties:
+        name:
+          type: string
+        cat:
+          $ref: '#/components/schemas/Cat'
         available:
           $ref: '#/components/schemas/Available'
 
