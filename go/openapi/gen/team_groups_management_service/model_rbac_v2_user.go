@@ -308,4 +308,3 @@ func (v *NullableRbacV2User) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

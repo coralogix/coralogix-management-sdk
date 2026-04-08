@@ -145,7 +145,6 @@ func (o *ViewFolder1) UnmarshalJSON(data []byte) (err error) {
 	varViewFolder1 := _ViewFolder1{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varViewFolder1)
 
 	if err != nil {
@@ -192,5 +191,4 @@ func (v *NullableViewFolder1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

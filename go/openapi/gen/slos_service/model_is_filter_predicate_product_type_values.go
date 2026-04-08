@@ -123,4 +123,3 @@ func (v *NullableIsFilterPredicateProductTypeValues) UnmarshalJSON(src []byte) e
 	return json.Unmarshal(src, &v.value)
 }
 
-

@@ -231,4 +231,3 @@ func (v *NullableOutgoingWebhookInputDataSendLog) UnmarshalJSON(src []byte) erro
 	return json.Unmarshal(src, &v.value)
 }
 
-

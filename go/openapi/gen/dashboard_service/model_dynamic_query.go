@@ -58,7 +58,7 @@ func (dst *DynamicQuery) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into DynamicQueryDataprime
-	err = newStrictDecoder(data).Decode(&dst.DynamicQueryDataprime)
+	err = json.Unmarshal(data, &dst.DynamicQueryDataprime)
 	if err == nil {
 		jsonDynamicQueryDataprime, _ := json.Marshal(dst.DynamicQueryDataprime)
 		if string(jsonDynamicQueryDataprime) == "{}" { // empty struct
@@ -75,7 +75,7 @@ func (dst *DynamicQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into DynamicQueryLogs
-	err = newStrictDecoder(data).Decode(&dst.DynamicQueryLogs)
+	err = json.Unmarshal(data, &dst.DynamicQueryLogs)
 	if err == nil {
 		jsonDynamicQueryLogs, _ := json.Marshal(dst.DynamicQueryLogs)
 		if string(jsonDynamicQueryLogs) == "{}" { // empty struct
@@ -92,7 +92,7 @@ func (dst *DynamicQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into DynamicQueryMetrics
-	err = newStrictDecoder(data).Decode(&dst.DynamicQueryMetrics)
+	err = json.Unmarshal(data, &dst.DynamicQueryMetrics)
 	if err == nil {
 		jsonDynamicQueryMetrics, _ := json.Marshal(dst.DynamicQueryMetrics)
 		if string(jsonDynamicQueryMetrics) == "{}" { // empty struct
@@ -109,7 +109,7 @@ func (dst *DynamicQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into DynamicQuerySpans
-	err = newStrictDecoder(data).Decode(&dst.DynamicQuerySpans)
+	err = json.Unmarshal(data, &dst.DynamicQuerySpans)
 	if err == nil {
 		jsonDynamicQuerySpans, _ := json.Marshal(dst.DynamicQuerySpans)
 		if string(jsonDynamicQuerySpans) == "{}" { // empty struct
@@ -243,5 +243,4 @@ func (v *NullableDynamicQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

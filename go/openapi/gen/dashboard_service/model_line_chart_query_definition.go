@@ -723,7 +723,6 @@ func (o *LineChartQueryDefinition) UnmarshalJSON(data []byte) (err error) {
 	varLineChartQueryDefinition := _LineChartQueryDefinition{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varLineChartQueryDefinition)
 
 	if err != nil {
@@ -770,5 +769,4 @@ func (v *NullableLineChartQueryDefinition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

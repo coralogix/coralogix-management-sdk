@@ -323,7 +323,6 @@ func (o *E2MCreateParamsSpansQuery) UnmarshalJSON(data []byte) (err error) {
 	varE2MCreateParamsSpansQuery := _E2MCreateParamsSpansQuery{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varE2MCreateParamsSpansQuery)
 
 	if err != nil {
@@ -370,5 +369,4 @@ func (v *NullableE2MCreateParamsSpansQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

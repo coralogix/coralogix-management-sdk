@@ -107,7 +107,6 @@ func (o *ResolveIncidentByEventIdResponse) UnmarshalJSON(data []byte) (err error
 	varResolveIncidentByEventIdResponse := _ResolveIncidentByEventIdResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResolveIncidentByEventIdResponse)
 
 	if err != nil {
@@ -154,5 +153,4 @@ func (v *NullableResolveIncidentByEventIdResponse) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

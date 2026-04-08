@@ -195,4 +195,3 @@ func (v *NullableRetentionPolicyRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

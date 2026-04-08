@@ -143,7 +143,6 @@ func (o *S3TargetSpec) UnmarshalJSON(data []byte) (err error) {
 	varS3TargetSpec := _S3TargetSpec{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varS3TargetSpec)
 
 	if err != nil {
@@ -190,5 +189,4 @@ func (v *NullableS3TargetSpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

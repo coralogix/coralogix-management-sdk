@@ -145,7 +145,6 @@ func (o *IncidentSearchQueryContextualLabel) UnmarshalJSON(data []byte) (err err
 	varIncidentSearchQueryContextualLabel := _IncidentSearchQueryContextualLabel{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varIncidentSearchQueryContextualLabel)
 
 	if err != nil {
@@ -192,5 +191,4 @@ func (v *NullableIncidentSearchQueryContextualLabel) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -143,7 +143,6 @@ func (o *SearchQuery) UnmarshalJSON(data []byte) (err error) {
 	varSearchQuery := _SearchQuery{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSearchQuery)
 
 	if err != nil {
@@ -190,5 +189,4 @@ func (v *NullableSearchQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

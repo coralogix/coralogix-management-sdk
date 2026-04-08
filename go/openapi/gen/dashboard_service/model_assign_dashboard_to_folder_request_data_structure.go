@@ -143,7 +143,6 @@ func (o *AssignDashboardToFolderRequestDataStructure) UnmarshalJSON(data []byte)
 	varAssignDashboardToFolderRequestDataStructure := _AssignDashboardToFolderRequestDataStructure{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varAssignDashboardToFolderRequestDataStructure)
 
 	if err != nil {
@@ -190,5 +189,4 @@ func (v *NullableAssignDashboardToFolderRequestDataStructure) UnmarshalJSON(src 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

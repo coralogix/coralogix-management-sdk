@@ -161,4 +161,3 @@ func (v *NullableEnabledCount) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

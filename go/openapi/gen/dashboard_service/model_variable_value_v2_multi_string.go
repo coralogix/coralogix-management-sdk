@@ -123,4 +123,3 @@ func (v *NullableVariableValueV2MultiString) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

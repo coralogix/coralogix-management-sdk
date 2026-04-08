@@ -236,7 +236,6 @@ func (o *IncidentEventCloseAdministrativeEvent) UnmarshalJSON(data []byte) (err 
 	varIncidentEventCloseAdministrativeEvent := _IncidentEventCloseAdministrativeEvent{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varIncidentEventCloseAdministrativeEvent)
 
 	if err != nil {
@@ -283,5 +282,4 @@ func (v *NullableIncidentEventCloseAdministrativeEvent) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

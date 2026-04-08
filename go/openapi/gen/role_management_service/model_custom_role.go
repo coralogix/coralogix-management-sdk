@@ -339,4 +339,3 @@ func (v *NullableCustomRole) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

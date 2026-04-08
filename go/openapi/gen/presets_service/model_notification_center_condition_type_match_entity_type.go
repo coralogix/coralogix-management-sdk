@@ -123,4 +123,3 @@ func (v *NullableNotificationCenterConditionTypeMatchEntityType) UnmarshalJSON(s
 	return json.Unmarshal(src, &v.value)
 }
 
-

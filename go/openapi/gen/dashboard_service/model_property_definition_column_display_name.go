@@ -124,4 +124,3 @@ func (v *NullablePropertyDefinitionColumnDisplayName) UnmarshalJSON(src []byte) 
 	return json.Unmarshal(src, &v.value)
 }
 
-

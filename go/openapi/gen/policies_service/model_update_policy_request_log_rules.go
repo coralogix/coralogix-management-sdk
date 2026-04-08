@@ -395,7 +395,6 @@ func (o *UpdatePolicyRequestLogRules) UnmarshalJSON(data []byte) (err error) {
 	varUpdatePolicyRequestLogRules := _UpdatePolicyRequestLogRules{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varUpdatePolicyRequestLogRules)
 
 	if err != nil {
@@ -442,5 +441,4 @@ func (v *NullableUpdatePolicyRequestLogRules) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

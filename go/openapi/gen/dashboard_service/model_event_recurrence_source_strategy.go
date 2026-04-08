@@ -42,7 +42,7 @@ func (dst *EventRecurrenceSourceStrategy) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into EventRecurrenceSourceStrategyDuration
-	err = newStrictDecoder(data).Decode(&dst.EventRecurrenceSourceStrategyDuration)
+	err = json.Unmarshal(data, &dst.EventRecurrenceSourceStrategyDuration)
 	if err == nil {
 		jsonEventRecurrenceSourceStrategyDuration, _ := json.Marshal(dst.EventRecurrenceSourceStrategyDuration)
 		if string(jsonEventRecurrenceSourceStrategyDuration) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *EventRecurrenceSourceStrategy) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into EventRecurrenceSourceStrategyInstant
-	err = newStrictDecoder(data).Decode(&dst.EventRecurrenceSourceStrategyInstant)
+	err = json.Unmarshal(data, &dst.EventRecurrenceSourceStrategyInstant)
 	if err == nil {
 		jsonEventRecurrenceSourceStrategyInstant, _ := json.Marshal(dst.EventRecurrenceSourceStrategyInstant)
 		if string(jsonEventRecurrenceSourceStrategyInstant) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableEventRecurrenceSourceStrategy) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

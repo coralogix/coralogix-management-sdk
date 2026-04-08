@@ -58,7 +58,7 @@ func (dst *BarChartQuery) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into BarChartQueryDataprime
-	err = newStrictDecoder(data).Decode(&dst.BarChartQueryDataprime)
+	err = json.Unmarshal(data, &dst.BarChartQueryDataprime)
 	if err == nil {
 		jsonBarChartQueryDataprime, _ := json.Marshal(dst.BarChartQueryDataprime)
 		if string(jsonBarChartQueryDataprime) == "{}" { // empty struct
@@ -75,7 +75,7 @@ func (dst *BarChartQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into BarChartQueryLogs
-	err = newStrictDecoder(data).Decode(&dst.BarChartQueryLogs)
+	err = json.Unmarshal(data, &dst.BarChartQueryLogs)
 	if err == nil {
 		jsonBarChartQueryLogs, _ := json.Marshal(dst.BarChartQueryLogs)
 		if string(jsonBarChartQueryLogs) == "{}" { // empty struct
@@ -92,7 +92,7 @@ func (dst *BarChartQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into BarChartQueryMetrics
-	err = newStrictDecoder(data).Decode(&dst.BarChartQueryMetrics)
+	err = json.Unmarshal(data, &dst.BarChartQueryMetrics)
 	if err == nil {
 		jsonBarChartQueryMetrics, _ := json.Marshal(dst.BarChartQueryMetrics)
 		if string(jsonBarChartQueryMetrics) == "{}" { // empty struct
@@ -109,7 +109,7 @@ func (dst *BarChartQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into BarChartQuerySpans
-	err = newStrictDecoder(data).Decode(&dst.BarChartQuerySpans)
+	err = json.Unmarshal(data, &dst.BarChartQuerySpans)
 	if err == nil {
 		jsonBarChartQuerySpans, _ := json.Marshal(dst.BarChartQuerySpans)
 		if string(jsonBarChartQuerySpans) == "{}" { // empty struct
@@ -243,5 +243,4 @@ func (v *NullableBarChartQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -377,4 +377,3 @@ func (v *NullableRegisteredInstanceEmpty) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

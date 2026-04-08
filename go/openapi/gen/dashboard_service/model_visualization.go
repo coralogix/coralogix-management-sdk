@@ -122,7 +122,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into VisualizationGauge
-	err = newStrictDecoder(data).Decode(&dst.VisualizationGauge)
+	err = json.Unmarshal(data, &dst.VisualizationGauge)
 	if err == nil {
 		jsonVisualizationGauge, _ := json.Marshal(dst.VisualizationGauge)
 		if string(jsonVisualizationGauge) == "{}" { // empty struct
@@ -139,7 +139,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VisualizationGeomap
-	err = newStrictDecoder(data).Decode(&dst.VisualizationGeomap)
+	err = json.Unmarshal(data, &dst.VisualizationGeomap)
 	if err == nil {
 		jsonVisualizationGeomap, _ := json.Marshal(dst.VisualizationGeomap)
 		if string(jsonVisualizationGeomap) == "{}" { // empty struct
@@ -156,7 +156,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VisualizationHeatmap
-	err = newStrictDecoder(data).Decode(&dst.VisualizationHeatmap)
+	err = json.Unmarshal(data, &dst.VisualizationHeatmap)
 	if err == nil {
 		jsonVisualizationHeatmap, _ := json.Marshal(dst.VisualizationHeatmap)
 		if string(jsonVisualizationHeatmap) == "{}" { // empty struct
@@ -173,7 +173,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VisualizationHexagonBins
-	err = newStrictDecoder(data).Decode(&dst.VisualizationHexagonBins)
+	err = json.Unmarshal(data, &dst.VisualizationHexagonBins)
 	if err == nil {
 		jsonVisualizationHexagonBins, _ := json.Marshal(dst.VisualizationHexagonBins)
 		if string(jsonVisualizationHexagonBins) == "{}" { // empty struct
@@ -190,7 +190,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VisualizationHorizontalBars
-	err = newStrictDecoder(data).Decode(&dst.VisualizationHorizontalBars)
+	err = json.Unmarshal(data, &dst.VisualizationHorizontalBars)
 	if err == nil {
 		jsonVisualizationHorizontalBars, _ := json.Marshal(dst.VisualizationHorizontalBars)
 		if string(jsonVisualizationHorizontalBars) == "{}" { // empty struct
@@ -207,7 +207,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VisualizationPieChart
-	err = newStrictDecoder(data).Decode(&dst.VisualizationPieChart)
+	err = json.Unmarshal(data, &dst.VisualizationPieChart)
 	if err == nil {
 		jsonVisualizationPieChart, _ := json.Marshal(dst.VisualizationPieChart)
 		if string(jsonVisualizationPieChart) == "{}" { // empty struct
@@ -224,7 +224,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VisualizationStat
-	err = newStrictDecoder(data).Decode(&dst.VisualizationStat)
+	err = json.Unmarshal(data, &dst.VisualizationStat)
 	if err == nil {
 		jsonVisualizationStat, _ := json.Marshal(dst.VisualizationStat)
 		if string(jsonVisualizationStat) == "{}" { // empty struct
@@ -241,7 +241,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VisualizationTable
-	err = newStrictDecoder(data).Decode(&dst.VisualizationTable)
+	err = json.Unmarshal(data, &dst.VisualizationTable)
 	if err == nil {
 		jsonVisualizationTable, _ := json.Marshal(dst.VisualizationTable)
 		if string(jsonVisualizationTable) == "{}" { // empty struct
@@ -258,7 +258,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VisualizationTimeSeriesBars
-	err = newStrictDecoder(data).Decode(&dst.VisualizationTimeSeriesBars)
+	err = json.Unmarshal(data, &dst.VisualizationTimeSeriesBars)
 	if err == nil {
 		jsonVisualizationTimeSeriesBars, _ := json.Marshal(dst.VisualizationTimeSeriesBars)
 		if string(jsonVisualizationTimeSeriesBars) == "{}" { // empty struct
@@ -275,7 +275,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VisualizationTimeSeriesLines
-	err = newStrictDecoder(data).Decode(&dst.VisualizationTimeSeriesLines)
+	err = json.Unmarshal(data, &dst.VisualizationTimeSeriesLines)
 	if err == nil {
 		jsonVisualizationTimeSeriesLines, _ := json.Marshal(dst.VisualizationTimeSeriesLines)
 		if string(jsonVisualizationTimeSeriesLines) == "{}" { // empty struct
@@ -292,7 +292,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VisualizationTimeSeriesLinesMulti
-	err = newStrictDecoder(data).Decode(&dst.VisualizationTimeSeriesLinesMulti)
+	err = json.Unmarshal(data, &dst.VisualizationTimeSeriesLinesMulti)
 	if err == nil {
 		jsonVisualizationTimeSeriesLinesMulti, _ := json.Marshal(dst.VisualizationTimeSeriesLinesMulti)
 		if string(jsonVisualizationTimeSeriesLinesMulti) == "{}" { // empty struct
@@ -309,7 +309,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VisualizationVerticalBars
-	err = newStrictDecoder(data).Decode(&dst.VisualizationVerticalBars)
+	err = json.Unmarshal(data, &dst.VisualizationVerticalBars)
 	if err == nil {
 		jsonVisualizationVerticalBars, _ := json.Marshal(dst.VisualizationVerticalBars)
 		if string(jsonVisualizationVerticalBars) == "{}" { // empty struct
@@ -547,5 +547,4 @@ func (v *NullableVisualization) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

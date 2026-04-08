@@ -107,7 +107,6 @@ func (o *DisplayLabelValues) UnmarshalJSON(data []byte) (err error) {
 	varDisplayLabelValues := _DisplayLabelValues{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varDisplayLabelValues)
 
 	if err != nil {
@@ -154,5 +153,4 @@ func (v *NullableDisplayLabelValues) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

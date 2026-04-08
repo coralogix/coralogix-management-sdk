@@ -143,7 +143,6 @@ func (o *V3ListEventsResponse) UnmarshalJSON(data []byte) (err error) {
 	varV3ListEventsResponse := _V3ListEventsResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varV3ListEventsResponse)
 
 	if err != nil {
@@ -190,5 +189,4 @@ func (v *NullableV3ListEventsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -124,4 +124,3 @@ func (v *NullableCreateViewFolderRequest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

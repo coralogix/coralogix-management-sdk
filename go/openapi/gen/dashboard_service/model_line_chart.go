@@ -252,7 +252,6 @@ func (o *LineChart) UnmarshalJSON(data []byte) (err error) {
 	varLineChart := _LineChart{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varLineChart)
 
 	if err != nil {
@@ -299,5 +298,4 @@ func (v *NullableLineChart) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

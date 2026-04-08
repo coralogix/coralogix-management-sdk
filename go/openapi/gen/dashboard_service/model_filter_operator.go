@@ -42,7 +42,7 @@ func (dst *FilterOperator) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into FilterOperatorEquals
-	err = newStrictDecoder(data).Decode(&dst.FilterOperatorEquals)
+	err = json.Unmarshal(data, &dst.FilterOperatorEquals)
 	if err == nil {
 		jsonFilterOperatorEquals, _ := json.Marshal(dst.FilterOperatorEquals)
 		if string(jsonFilterOperatorEquals) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *FilterOperator) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into FilterOperatorNotEquals
-	err = newStrictDecoder(data).Decode(&dst.FilterOperatorNotEquals)
+	err = json.Unmarshal(data, &dst.FilterOperatorNotEquals)
 	if err == nil {
 		jsonFilterOperatorNotEquals, _ := json.Marshal(dst.FilterOperatorNotEquals)
 		if string(jsonFilterOperatorNotEquals) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableFilterOperator) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

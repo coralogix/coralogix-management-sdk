@@ -159,4 +159,3 @@ func (v *NullableAlertEventServiceGetAlertEventPaginationParameter) UnmarshalJSO
 	return json.Unmarshal(src, &v.value)
 }
 
-

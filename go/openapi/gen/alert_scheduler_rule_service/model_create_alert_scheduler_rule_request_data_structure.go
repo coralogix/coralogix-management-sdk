@@ -107,7 +107,6 @@ func (o *CreateAlertSchedulerRuleRequestDataStructure) UnmarshalJSON(data []byte
 	varCreateAlertSchedulerRuleRequestDataStructure := _CreateAlertSchedulerRuleRequestDataStructure{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCreateAlertSchedulerRuleRequestDataStructure)
 
 	if err != nil {
@@ -154,5 +153,4 @@ func (v *NullableCreateAlertSchedulerRuleRequestDataStructure) UnmarshalJSON(src
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

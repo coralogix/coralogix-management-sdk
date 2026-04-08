@@ -42,7 +42,7 @@ func (dst *AlertSchedulerRuleProtobufV1Filter) UnmarshalJSON(data []byte) error 
 	var err error
 	match := 0
 	// try to unmarshal data into AlertSchedulerRuleProtobufV1FilterAlertMetaLabels
-	err = newStrictDecoder(data).Decode(&dst.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels)
+	err = json.Unmarshal(data, &dst.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels)
 	if err == nil {
 		jsonAlertSchedulerRuleProtobufV1FilterAlertMetaLabels, _ := json.Marshal(dst.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels)
 		if string(jsonAlertSchedulerRuleProtobufV1FilterAlertMetaLabels) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *AlertSchedulerRuleProtobufV1Filter) UnmarshalJSON(data []byte) error 
 	}
 
 	// try to unmarshal data into AlertSchedulerRuleProtobufV1FilterAlertUniqueIds
-	err = newStrictDecoder(data).Decode(&dst.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds)
+	err = json.Unmarshal(data, &dst.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds)
 	if err == nil {
 		jsonAlertSchedulerRuleProtobufV1FilterAlertUniqueIds, _ := json.Marshal(dst.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds)
 		if string(jsonAlertSchedulerRuleProtobufV1FilterAlertUniqueIds) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableAlertSchedulerRuleProtobufV1Filter) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

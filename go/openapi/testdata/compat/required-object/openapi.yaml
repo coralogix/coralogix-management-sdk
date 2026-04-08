@@ -1,0 +1,27 @@
+openapi: 3.0.3
+info:
+  title: Required Object Compat
+  version: 1.0.0
+paths:
+  /required-object:
+    get:
+      operationId: getRequiredObject
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequiredObject"
+components:
+  schemas:
+    RequiredObject:
+      type: object
+      additionalProperties: false
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        count:
+          type: integer

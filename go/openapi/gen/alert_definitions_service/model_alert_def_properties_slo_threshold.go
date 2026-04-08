@@ -633,4 +633,3 @@ func (v *NullableAlertDefPropertiesSloThreshold) UnmarshalJSON(src []byte) error
 	return json.Unmarshal(src, &v.value)
 }
 
-

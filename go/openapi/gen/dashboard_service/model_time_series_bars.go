@@ -744,4 +744,3 @@ func (v *NullableTimeSeriesBars) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

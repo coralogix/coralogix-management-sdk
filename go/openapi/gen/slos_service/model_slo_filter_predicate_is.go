@@ -50,7 +50,7 @@ func (dst *SloFilterPredicateIs) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into IsFilterPredicateProductTypeValues
-	err = newStrictDecoder(data).Decode(&dst.IsFilterPredicateProductTypeValues)
+	err = json.Unmarshal(data, &dst.IsFilterPredicateProductTypeValues)
 	if err == nil {
 		jsonIsFilterPredicateProductTypeValues, _ := json.Marshal(dst.IsFilterPredicateProductTypeValues)
 		if string(jsonIsFilterPredicateProductTypeValues) == "{}" { // empty struct
@@ -67,7 +67,7 @@ func (dst *SloFilterPredicateIs) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IsFilterPredicateStringValues
-	err = newStrictDecoder(data).Decode(&dst.IsFilterPredicateStringValues)
+	err = json.Unmarshal(data, &dst.IsFilterPredicateStringValues)
 	if err == nil {
 		jsonIsFilterPredicateStringValues, _ := json.Marshal(dst.IsFilterPredicateStringValues)
 		if string(jsonIsFilterPredicateStringValues) == "{}" { // empty struct
@@ -84,7 +84,7 @@ func (dst *SloFilterPredicateIs) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IsFilterPredicateTypeValues
-	err = newStrictDecoder(data).Decode(&dst.IsFilterPredicateTypeValues)
+	err = json.Unmarshal(data, &dst.IsFilterPredicateTypeValues)
 	if err == nil {
 		jsonIsFilterPredicateTypeValues, _ := json.Marshal(dst.IsFilterPredicateTypeValues)
 		if string(jsonIsFilterPredicateTypeValues) == "{}" { // empty struct
@@ -205,5 +205,4 @@ func (v *NullableSloFilterPredicateIs) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -163,7 +163,6 @@ func (o *TagRule) UnmarshalJSON(data []byte) (err error) {
 	varTagRule := _TagRule{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varTagRule)
 
 	if err != nil {
@@ -210,5 +209,4 @@ func (v *NullableTagRule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

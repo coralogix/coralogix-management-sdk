@@ -420,4 +420,3 @@ func (v *NullableAlertDefQueryFilter) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

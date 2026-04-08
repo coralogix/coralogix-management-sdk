@@ -42,7 +42,7 @@ func (dst *TestIntegrationResult) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into TestIntegrationResultFailure
-	err = newStrictDecoder(data).Decode(&dst.TestIntegrationResultFailure)
+	err = json.Unmarshal(data, &dst.TestIntegrationResultFailure)
 	if err == nil {
 		jsonTestIntegrationResultFailure, _ := json.Marshal(dst.TestIntegrationResultFailure)
 		if string(jsonTestIntegrationResultFailure) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *TestIntegrationResult) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into TestIntegrationResultSuccess
-	err = newStrictDecoder(data).Decode(&dst.TestIntegrationResultSuccess)
+	err = json.Unmarshal(data, &dst.TestIntegrationResultSuccess)
 	if err == nil {
 		jsonTestIntegrationResultSuccess, _ := json.Marshal(dst.TestIntegrationResultSuccess)
 		if string(jsonTestIntegrationResultSuccess) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableTestIntegrationResult) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

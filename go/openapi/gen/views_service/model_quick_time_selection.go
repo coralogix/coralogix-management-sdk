@@ -149,7 +149,6 @@ func (o *QuickTimeSelection) UnmarshalJSON(data []byte) (err error) {
 	varQuickTimeSelection := _QuickTimeSelection{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varQuickTimeSelection)
 
 	if err != nil {
@@ -196,5 +195,4 @@ func (v *NullableQuickTimeSelection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -138,7 +138,6 @@ func (o *V1TimeRange) UnmarshalJSON(data []byte) (err error) {
 	varV1TimeRange := _V1TimeRange{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varV1TimeRange)
 
 	if err != nil {
@@ -185,5 +184,4 @@ func (v *NullableV1TimeRange) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

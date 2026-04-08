@@ -42,7 +42,7 @@ func (dst *ManualSourceStrategy) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into ManualSourceStrategyInstant
-	err = newStrictDecoder(data).Decode(&dst.ManualSourceStrategyInstant)
+	err = json.Unmarshal(data, &dst.ManualSourceStrategyInstant)
 	if err == nil {
 		jsonManualSourceStrategyInstant, _ := json.Marshal(dst.ManualSourceStrategyInstant)
 		if string(jsonManualSourceStrategyInstant) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *ManualSourceStrategy) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into ManualSourceStrategyRange
-	err = newStrictDecoder(data).Decode(&dst.ManualSourceStrategyRange)
+	err = json.Unmarshal(data, &dst.ManualSourceStrategyRange)
 	if err == nil {
 		jsonManualSourceStrategyRange, _ := json.Marshal(dst.ManualSourceStrategyRange)
 		if string(jsonManualSourceStrategyRange) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableManualSourceStrategy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -447,4 +447,3 @@ func (v *NullableIntegration) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

@@ -143,7 +143,6 @@ func (o *V1OrderByIncidentField) UnmarshalJSON(data []byte) (err error) {
 	varV1OrderByIncidentField := _V1OrderByIncidentField{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varV1OrderByIncidentField)
 
 	if err != nil {
@@ -190,5 +189,4 @@ func (v *NullableV1OrderByIncidentField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

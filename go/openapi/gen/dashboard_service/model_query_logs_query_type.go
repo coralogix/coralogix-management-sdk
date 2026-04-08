@@ -42,7 +42,7 @@ func (dst *QueryLogsQueryType) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into QueryLogsQueryTypeFieldName
-	err = newStrictDecoder(data).Decode(&dst.QueryLogsQueryTypeFieldName)
+	err = json.Unmarshal(data, &dst.QueryLogsQueryTypeFieldName)
 	if err == nil {
 		jsonQueryLogsQueryTypeFieldName, _ := json.Marshal(dst.QueryLogsQueryTypeFieldName)
 		if string(jsonQueryLogsQueryTypeFieldName) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *QueryLogsQueryType) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into QueryLogsQueryTypeFieldValue
-	err = newStrictDecoder(data).Decode(&dst.QueryLogsQueryTypeFieldValue)
+	err = json.Unmarshal(data, &dst.QueryLogsQueryTypeFieldValue)
 	if err == nil {
 		jsonQueryLogsQueryTypeFieldValue, _ := json.Marshal(dst.QueryLogsQueryTypeFieldValue)
 		if string(jsonQueryLogsQueryTypeFieldValue) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableQueryLogsQueryType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

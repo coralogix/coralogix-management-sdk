@@ -159,4 +159,3 @@ func (v *NullableVariableSourceV2ValueDisplayOptions) UnmarshalJSON(src []byte) 
 	return json.Unmarshal(src, &v.value)
 }
 
-

@@ -50,7 +50,7 @@ func (dst *FilterSource) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into FilterSourceLogs
-	err = newStrictDecoder(data).Decode(&dst.FilterSourceLogs)
+	err = json.Unmarshal(data, &dst.FilterSourceLogs)
 	if err == nil {
 		jsonFilterSourceLogs, _ := json.Marshal(dst.FilterSourceLogs)
 		if string(jsonFilterSourceLogs) == "{}" { // empty struct
@@ -67,7 +67,7 @@ func (dst *FilterSource) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into FilterSourceMetrics
-	err = newStrictDecoder(data).Decode(&dst.FilterSourceMetrics)
+	err = json.Unmarshal(data, &dst.FilterSourceMetrics)
 	if err == nil {
 		jsonFilterSourceMetrics, _ := json.Marshal(dst.FilterSourceMetrics)
 		if string(jsonFilterSourceMetrics) == "{}" { // empty struct
@@ -84,7 +84,7 @@ func (dst *FilterSource) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into FilterSourceSpans
-	err = newStrictDecoder(data).Decode(&dst.FilterSourceSpans)
+	err = json.Unmarshal(data, &dst.FilterSourceSpans)
 	if err == nil {
 		jsonFilterSourceSpans, _ := json.Marshal(dst.FilterSourceSpans)
 		if string(jsonFilterSourceSpans) == "{}" { // empty struct
@@ -205,5 +205,4 @@ func (v *NullableFilterSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -123,4 +123,3 @@ func (v *NullableRuleParametersJsonParseParameters) UnmarshalJSON(src []byte) er
 	return json.Unmarshal(src, &v.value)
 }
 
-

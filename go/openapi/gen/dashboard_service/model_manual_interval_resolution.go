@@ -108,7 +108,6 @@ func (o *ManualIntervalResolution) UnmarshalJSON(data []byte) (err error) {
 	varManualIntervalResolution := _ManualIntervalResolution{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varManualIntervalResolution)
 
 	if err != nil {
@@ -155,5 +154,4 @@ func (v *NullableManualIntervalResolution) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -136,7 +136,6 @@ func (o *CustomTimeSelection) UnmarshalJSON(data []byte) (err error) {
 	varCustomTimeSelection := _CustomTimeSelection{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCustomTimeSelection)
 
 	if err != nil {
@@ -183,5 +182,4 @@ func (v *NullableCustomTimeSelection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

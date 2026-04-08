@@ -66,7 +66,7 @@ func (dst *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) Unmarshal
 	var err error
 	match := 0
 	// try to unmarshal data into DimensionGenericDimension
-	err = newStrictDecoder(data).Decode(&dst.DimensionGenericDimension)
+	err = json.Unmarshal(data, &dst.DimensionGenericDimension)
 	if err == nil {
 		jsonDimensionGenericDimension, _ := json.Marshal(dst.DimensionGenericDimension)
 		if string(jsonDimensionGenericDimension) == "{}" { // empty struct
@@ -83,7 +83,7 @@ func (dst *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) Unmarshal
 	}
 
 	// try to unmarshal data into DimensionPillar
-	err = newStrictDecoder(data).Decode(&dst.DimensionPillar)
+	err = json.Unmarshal(data, &dst.DimensionPillar)
 	if err == nil {
 		jsonDimensionPillar, _ := json.Marshal(dst.DimensionPillar)
 		if string(jsonDimensionPillar) == "{}" { // empty struct
@@ -100,7 +100,7 @@ func (dst *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) Unmarshal
 	}
 
 	// try to unmarshal data into DimensionPriority
-	err = newStrictDecoder(data).Decode(&dst.DimensionPriority)
+	err = json.Unmarshal(data, &dst.DimensionPriority)
 	if err == nil {
 		jsonDimensionPriority, _ := json.Marshal(dst.DimensionPriority)
 		if string(jsonDimensionPriority) == "{}" { // empty struct
@@ -117,7 +117,7 @@ func (dst *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) Unmarshal
 	}
 
 	// try to unmarshal data into DimensionSeverity
-	err = newStrictDecoder(data).Decode(&dst.DimensionSeverity)
+	err = json.Unmarshal(data, &dst.DimensionSeverity)
 	if err == nil {
 		jsonDimensionSeverity, _ := json.Marshal(dst.DimensionSeverity)
 		if string(jsonDimensionSeverity) == "{}" { // empty struct
@@ -134,7 +134,7 @@ func (dst *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) Unmarshal
 	}
 
 	// try to unmarshal data into DimensionTier
-	err = newStrictDecoder(data).Decode(&dst.DimensionTier)
+	err = json.Unmarshal(data, &dst.DimensionTier)
 	if err == nil {
 		jsonDimensionTier, _ := json.Marshal(dst.DimensionTier)
 		if string(jsonDimensionTier) == "{}" { // empty struct
@@ -281,5 +281,4 @@ func (v *NullableDataUsageServiceGetDataUsageDimensionFiltersParameterInner) Unm
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -107,7 +107,6 @@ func (o *ReplaceDefaultDashboardRequestDataStructure) UnmarshalJSON(data []byte)
 	varReplaceDefaultDashboardRequestDataStructure := _ReplaceDefaultDashboardRequestDataStructure{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varReplaceDefaultDashboardRequestDataStructure)
 
 	if err != nil {
@@ -154,5 +153,4 @@ func (v *NullableReplaceDefaultDashboardRequestDataStructure) UnmarshalJSON(src 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

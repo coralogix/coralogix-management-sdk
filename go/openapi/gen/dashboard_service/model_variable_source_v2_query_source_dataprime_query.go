@@ -267,4 +267,3 @@ func (v *NullableVariableSourceV2QuerySourceDataprimeQuery) UnmarshalJSON(src []
 	return json.Unmarshal(src, &v.value)
 }
 
-

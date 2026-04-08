@@ -74,7 +74,7 @@ func (dst *VariableValueV2) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into VariableValueV2Interval
-	err = newStrictDecoder(data).Decode(&dst.VariableValueV2Interval)
+	err = json.Unmarshal(data, &dst.VariableValueV2Interval)
 	if err == nil {
 		jsonVariableValueV2Interval, _ := json.Marshal(dst.VariableValueV2Interval)
 		if string(jsonVariableValueV2Interval) == "{}" { // empty struct
@@ -91,7 +91,7 @@ func (dst *VariableValueV2) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VariableValueV2Lucene
-	err = newStrictDecoder(data).Decode(&dst.VariableValueV2Lucene)
+	err = json.Unmarshal(data, &dst.VariableValueV2Lucene)
 	if err == nil {
 		jsonVariableValueV2Lucene, _ := json.Marshal(dst.VariableValueV2Lucene)
 		if string(jsonVariableValueV2Lucene) == "{}" { // empty struct
@@ -108,7 +108,7 @@ func (dst *VariableValueV2) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VariableValueV2MultiString
-	err = newStrictDecoder(data).Decode(&dst.VariableValueV2MultiString)
+	err = json.Unmarshal(data, &dst.VariableValueV2MultiString)
 	if err == nil {
 		jsonVariableValueV2MultiString, _ := json.Marshal(dst.VariableValueV2MultiString)
 		if string(jsonVariableValueV2MultiString) == "{}" { // empty struct
@@ -125,7 +125,7 @@ func (dst *VariableValueV2) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VariableValueV2Regex
-	err = newStrictDecoder(data).Decode(&dst.VariableValueV2Regex)
+	err = json.Unmarshal(data, &dst.VariableValueV2Regex)
 	if err == nil {
 		jsonVariableValueV2Regex, _ := json.Marshal(dst.VariableValueV2Regex)
 		if string(jsonVariableValueV2Regex) == "{}" { // empty struct
@@ -142,7 +142,7 @@ func (dst *VariableValueV2) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VariableValueV2SingleNumeric
-	err = newStrictDecoder(data).Decode(&dst.VariableValueV2SingleNumeric)
+	err = json.Unmarshal(data, &dst.VariableValueV2SingleNumeric)
 	if err == nil {
 		jsonVariableValueV2SingleNumeric, _ := json.Marshal(dst.VariableValueV2SingleNumeric)
 		if string(jsonVariableValueV2SingleNumeric) == "{}" { // empty struct
@@ -159,7 +159,7 @@ func (dst *VariableValueV2) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VariableValueV2SingleString
-	err = newStrictDecoder(data).Decode(&dst.VariableValueV2SingleString)
+	err = json.Unmarshal(data, &dst.VariableValueV2SingleString)
 	if err == nil {
 		jsonVariableValueV2SingleString, _ := json.Marshal(dst.VariableValueV2SingleString)
 		if string(jsonVariableValueV2SingleString) == "{}" { // empty struct
@@ -319,5 +319,4 @@ func (v *NullableVariableValueV2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

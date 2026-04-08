@@ -303,7 +303,6 @@ func (o *IncidentQueryFiltersValues) UnmarshalJSON(data []byte) (err error) {
 	varIncidentQueryFiltersValues := _IncidentQueryFiltersValues{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varIncidentQueryFiltersValues)
 
 	if err != nil {
@@ -350,5 +349,4 @@ func (v *NullableIncidentQueryFiltersValues) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -42,7 +42,7 @@ func (dst *VariableDefinition) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into VariableDefinitionConstant
-	err = newStrictDecoder(data).Decode(&dst.VariableDefinitionConstant)
+	err = json.Unmarshal(data, &dst.VariableDefinitionConstant)
 	if err == nil {
 		jsonVariableDefinitionConstant, _ := json.Marshal(dst.VariableDefinitionConstant)
 		if string(jsonVariableDefinitionConstant) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *VariableDefinition) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VariableDefinitionMultiSelect
-	err = newStrictDecoder(data).Decode(&dst.VariableDefinitionMultiSelect)
+	err = json.Unmarshal(data, &dst.VariableDefinitionMultiSelect)
 	if err == nil {
 		jsonVariableDefinitionMultiSelect, _ := json.Marshal(dst.VariableDefinitionMultiSelect)
 		if string(jsonVariableDefinitionMultiSelect) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableVariableDefinition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

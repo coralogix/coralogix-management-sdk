@@ -42,7 +42,7 @@ func (dst *GeomapFieldConfig) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into GeomapFieldConfigAwsRegionConfig
-	err = newStrictDecoder(data).Decode(&dst.GeomapFieldConfigAwsRegionConfig)
+	err = json.Unmarshal(data, &dst.GeomapFieldConfigAwsRegionConfig)
 	if err == nil {
 		jsonGeomapFieldConfigAwsRegionConfig, _ := json.Marshal(dst.GeomapFieldConfigAwsRegionConfig)
 		if string(jsonGeomapFieldConfigAwsRegionConfig) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *GeomapFieldConfig) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into GeomapFieldConfigCoordinateConfig
-	err = newStrictDecoder(data).Decode(&dst.GeomapFieldConfigCoordinateConfig)
+	err = json.Unmarshal(data, &dst.GeomapFieldConfigCoordinateConfig)
 	if err == nil {
 		jsonGeomapFieldConfigCoordinateConfig, _ := json.Marshal(dst.GeomapFieldConfigCoordinateConfig)
 		if string(jsonGeomapFieldConfigCoordinateConfig) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableGeomapFieldConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

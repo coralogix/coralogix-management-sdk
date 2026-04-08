@@ -42,7 +42,7 @@ func (dst *MetricsConfiguratorPublicServiceValidateBucketRequest) UnmarshalJSON(
 	var err error
 	match := 0
 	// try to unmarshal data into ValidateBucketRequestIbm
-	err = newStrictDecoder(data).Decode(&dst.ValidateBucketRequestIbm)
+	err = json.Unmarshal(data, &dst.ValidateBucketRequestIbm)
 	if err == nil {
 		jsonValidateBucketRequestIbm, _ := json.Marshal(dst.ValidateBucketRequestIbm)
 		if string(jsonValidateBucketRequestIbm) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *MetricsConfiguratorPublicServiceValidateBucketRequest) UnmarshalJSON(
 	}
 
 	// try to unmarshal data into ValidateBucketRequestS3
-	err = newStrictDecoder(data).Decode(&dst.ValidateBucketRequestS3)
+	err = json.Unmarshal(data, &dst.ValidateBucketRequestS3)
 	if err == nil {
 		jsonValidateBucketRequestS3, _ := json.Marshal(dst.ValidateBucketRequestS3)
 		if string(jsonValidateBucketRequestS3) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableMetricsConfiguratorPublicServiceValidateBucketRequest) Unmarsha
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

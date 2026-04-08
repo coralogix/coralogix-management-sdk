@@ -159,4 +159,3 @@ func (v *NullableEventsServiceListAlertEventsOrderBysParameterInner) UnmarshalJS
 	return json.Unmarshal(src, &v.value)
 }
 
-

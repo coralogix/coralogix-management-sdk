@@ -267,4 +267,3 @@ func (v *NullableSPParameters) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

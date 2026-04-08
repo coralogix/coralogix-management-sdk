@@ -231,4 +231,3 @@ func (v *NullableOutgoingWebhookInputDataEmailGroup) UnmarshalJSON(src []byte) e
 	return json.Unmarshal(src, &v.value)
 }
 
-

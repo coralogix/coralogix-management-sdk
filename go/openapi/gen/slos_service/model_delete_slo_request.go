@@ -107,7 +107,6 @@ func (o *DeleteSloRequest) UnmarshalJSON(data []byte) (err error) {
 	varDeleteSloRequest := _DeleteSloRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varDeleteSloRequest)
 
 	if err != nil {
@@ -154,5 +153,4 @@ func (v *NullableDeleteSloRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

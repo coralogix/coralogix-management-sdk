@@ -42,7 +42,7 @@ func (dst *MetricMissingValues) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into MetricMissingValuesMinNonNullValuesPct
-	err = newStrictDecoder(data).Decode(&dst.MetricMissingValuesMinNonNullValuesPct)
+	err = json.Unmarshal(data, &dst.MetricMissingValuesMinNonNullValuesPct)
 	if err == nil {
 		jsonMetricMissingValuesMinNonNullValuesPct, _ := json.Marshal(dst.MetricMissingValuesMinNonNullValuesPct)
 		if string(jsonMetricMissingValuesMinNonNullValuesPct) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *MetricMissingValues) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into MetricMissingValuesReplaceWithZero
-	err = newStrictDecoder(data).Decode(&dst.MetricMissingValuesReplaceWithZero)
+	err = json.Unmarshal(data, &dst.MetricMissingValuesReplaceWithZero)
 	if err == nil {
 		jsonMetricMissingValuesReplaceWithZero, _ := json.Marshal(dst.MetricMissingValuesReplaceWithZero)
 		if string(jsonMetricMissingValuesReplaceWithZero) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableMetricMissingValues) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

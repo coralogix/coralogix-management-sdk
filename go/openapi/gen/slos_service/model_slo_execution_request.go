@@ -50,7 +50,7 @@ func (dst *SloExecutionRequest) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into SloExecutionRequestCreateSloRequest
-	err = newStrictDecoder(data).Decode(&dst.SloExecutionRequestCreateSloRequest)
+	err = json.Unmarshal(data, &dst.SloExecutionRequestCreateSloRequest)
 	if err == nil {
 		jsonSloExecutionRequestCreateSloRequest, _ := json.Marshal(dst.SloExecutionRequestCreateSloRequest)
 		if string(jsonSloExecutionRequestCreateSloRequest) == "{}" { // empty struct
@@ -67,7 +67,7 @@ func (dst *SloExecutionRequest) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into SloExecutionRequestDeleteSloRequest
-	err = newStrictDecoder(data).Decode(&dst.SloExecutionRequestDeleteSloRequest)
+	err = json.Unmarshal(data, &dst.SloExecutionRequestDeleteSloRequest)
 	if err == nil {
 		jsonSloExecutionRequestDeleteSloRequest, _ := json.Marshal(dst.SloExecutionRequestDeleteSloRequest)
 		if string(jsonSloExecutionRequestDeleteSloRequest) == "{}" { // empty struct
@@ -84,7 +84,7 @@ func (dst *SloExecutionRequest) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into SloExecutionRequestReplaceSloRequest
-	err = newStrictDecoder(data).Decode(&dst.SloExecutionRequestReplaceSloRequest)
+	err = json.Unmarshal(data, &dst.SloExecutionRequestReplaceSloRequest)
 	if err == nil {
 		jsonSloExecutionRequestReplaceSloRequest, _ := json.Marshal(dst.SloExecutionRequestReplaceSloRequest)
 		if string(jsonSloExecutionRequestReplaceSloRequest) == "{}" { // empty struct
@@ -205,5 +205,4 @@ func (v *NullableSloExecutionRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

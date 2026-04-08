@@ -123,4 +123,3 @@ func (v *NullableLogsAggregationMin) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

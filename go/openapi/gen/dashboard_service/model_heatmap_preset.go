@@ -561,4 +561,3 @@ func (v *NullableHeatmapPreset) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

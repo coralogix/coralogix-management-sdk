@@ -159,4 +159,3 @@ func (v *NullableDigest) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

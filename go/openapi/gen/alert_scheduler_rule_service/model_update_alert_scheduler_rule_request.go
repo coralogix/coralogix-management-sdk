@@ -107,7 +107,6 @@ func (o *UpdateAlertSchedulerRuleRequest) UnmarshalJSON(data []byte) (err error)
 	varUpdateAlertSchedulerRuleRequest := _UpdateAlertSchedulerRuleRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varUpdateAlertSchedulerRuleRequest)
 
 	if err != nil {
@@ -154,5 +153,4 @@ func (v *NullableUpdateAlertSchedulerRuleRequest) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -50,7 +50,7 @@ func (dst *RegisteredInstance) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into RegisteredInstanceArm
-	err = newStrictDecoder(data).Decode(&dst.RegisteredInstanceArm)
+	err = json.Unmarshal(data, &dst.RegisteredInstanceArm)
 	if err == nil {
 		jsonRegisteredInstanceArm, _ := json.Marshal(dst.RegisteredInstanceArm)
 		if string(jsonRegisteredInstanceArm) == "{}" { // empty struct
@@ -67,7 +67,7 @@ func (dst *RegisteredInstance) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into RegisteredInstanceCloudformation
-	err = newStrictDecoder(data).Decode(&dst.RegisteredInstanceCloudformation)
+	err = json.Unmarshal(data, &dst.RegisteredInstanceCloudformation)
 	if err == nil {
 		jsonRegisteredInstanceCloudformation, _ := json.Marshal(dst.RegisteredInstanceCloudformation)
 		if string(jsonRegisteredInstanceCloudformation) == "{}" { // empty struct
@@ -84,7 +84,7 @@ func (dst *RegisteredInstance) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into RegisteredInstanceEmpty
-	err = newStrictDecoder(data).Decode(&dst.RegisteredInstanceEmpty)
+	err = json.Unmarshal(data, &dst.RegisteredInstanceEmpty)
 	if err == nil {
 		jsonRegisteredInstanceEmpty, _ := json.Marshal(dst.RegisteredInstanceEmpty)
 		if string(jsonRegisteredInstanceEmpty) == "{}" { // empty struct
@@ -205,5 +205,4 @@ func (v *NullableRegisteredInstance) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

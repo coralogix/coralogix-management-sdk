@@ -143,7 +143,6 @@ func (o *RoleUpdateActionSetRoleId) UnmarshalJSON(data []byte) (err error) {
 	varRoleUpdateActionSetRoleId := _RoleUpdateActionSetRoleId{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRoleUpdateActionSetRoleId)
 
 	if err != nil {
@@ -190,5 +189,4 @@ func (v *NullableRoleUpdateActionSetRoleId) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

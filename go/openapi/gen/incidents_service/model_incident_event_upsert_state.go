@@ -171,7 +171,6 @@ func (o *IncidentEventUpsertState) UnmarshalJSON(data []byte) (err error) {
 	varIncidentEventUpsertState := _IncidentEventUpsertState{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varIncidentEventUpsertState)
 
 	if err != nil {
@@ -218,5 +217,4 @@ func (v *NullableIncidentEventUpsertState) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

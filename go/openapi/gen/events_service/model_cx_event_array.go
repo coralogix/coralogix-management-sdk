@@ -107,7 +107,6 @@ func (o *CxEventArray) UnmarshalJSON(data []byte) (err error) {
 	varCxEventArray := _CxEventArray{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCxEventArray)
 
 	if err != nil {
@@ -154,5 +153,4 @@ func (v *NullableCxEventArray) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

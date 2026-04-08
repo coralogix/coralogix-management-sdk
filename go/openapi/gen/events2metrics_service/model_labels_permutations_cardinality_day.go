@@ -159,4 +159,3 @@ func (v *NullableLabelsPermutationsCardinalityDay) UnmarshalJSON(src []byte) err
 	return json.Unmarshal(src, &v.value)
 }
 
-

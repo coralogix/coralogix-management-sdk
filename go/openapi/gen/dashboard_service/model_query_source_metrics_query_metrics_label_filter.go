@@ -195,4 +195,3 @@ func (v *NullableQuerySourceMetricsQueryMetricsLabelFilter) UnmarshalJSON(src []
 	return json.Unmarshal(src, &v.value)
 }
 
-

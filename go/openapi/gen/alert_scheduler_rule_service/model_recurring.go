@@ -42,7 +42,7 @@ func (dst *Recurring) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into RecurringAlwaysActive
-	err = newStrictDecoder(data).Decode(&dst.RecurringAlwaysActive)
+	err = json.Unmarshal(data, &dst.RecurringAlwaysActive)
 	if err == nil {
 		jsonRecurringAlwaysActive, _ := json.Marshal(dst.RecurringAlwaysActive)
 		if string(jsonRecurringAlwaysActive) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *Recurring) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into RecurringSchedule
-	err = newStrictDecoder(data).Decode(&dst.RecurringSchedule)
+	err = json.Unmarshal(data, &dst.RecurringSchedule)
 	if err == nil {
 		jsonRecurringSchedule, _ := json.Marshal(dst.RecurringSchedule)
 		if string(jsonRecurringSchedule) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableRecurring) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

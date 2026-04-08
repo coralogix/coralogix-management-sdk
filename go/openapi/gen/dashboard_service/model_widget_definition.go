@@ -98,7 +98,7 @@ func (dst *WidgetDefinition) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into WidgetDefinitionBarChart
-	err = newStrictDecoder(data).Decode(&dst.WidgetDefinitionBarChart)
+	err = json.Unmarshal(data, &dst.WidgetDefinitionBarChart)
 	if err == nil {
 		jsonWidgetDefinitionBarChart, _ := json.Marshal(dst.WidgetDefinitionBarChart)
 		if string(jsonWidgetDefinitionBarChart) == "{}" { // empty struct
@@ -115,7 +115,7 @@ func (dst *WidgetDefinition) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into WidgetDefinitionDataTable
-	err = newStrictDecoder(data).Decode(&dst.WidgetDefinitionDataTable)
+	err = json.Unmarshal(data, &dst.WidgetDefinitionDataTable)
 	if err == nil {
 		jsonWidgetDefinitionDataTable, _ := json.Marshal(dst.WidgetDefinitionDataTable)
 		if string(jsonWidgetDefinitionDataTable) == "{}" { // empty struct
@@ -132,7 +132,7 @@ func (dst *WidgetDefinition) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into WidgetDefinitionDynamic
-	err = newStrictDecoder(data).Decode(&dst.WidgetDefinitionDynamic)
+	err = json.Unmarshal(data, &dst.WidgetDefinitionDynamic)
 	if err == nil {
 		jsonWidgetDefinitionDynamic, _ := json.Marshal(dst.WidgetDefinitionDynamic)
 		if string(jsonWidgetDefinitionDynamic) == "{}" { // empty struct
@@ -149,7 +149,7 @@ func (dst *WidgetDefinition) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into WidgetDefinitionGauge
-	err = newStrictDecoder(data).Decode(&dst.WidgetDefinitionGauge)
+	err = json.Unmarshal(data, &dst.WidgetDefinitionGauge)
 	if err == nil {
 		jsonWidgetDefinitionGauge, _ := json.Marshal(dst.WidgetDefinitionGauge)
 		if string(jsonWidgetDefinitionGauge) == "{}" { // empty struct
@@ -166,7 +166,7 @@ func (dst *WidgetDefinition) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into WidgetDefinitionHexagon
-	err = newStrictDecoder(data).Decode(&dst.WidgetDefinitionHexagon)
+	err = json.Unmarshal(data, &dst.WidgetDefinitionHexagon)
 	if err == nil {
 		jsonWidgetDefinitionHexagon, _ := json.Marshal(dst.WidgetDefinitionHexagon)
 		if string(jsonWidgetDefinitionHexagon) == "{}" { // empty struct
@@ -183,7 +183,7 @@ func (dst *WidgetDefinition) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into WidgetDefinitionHorizontalBarChart
-	err = newStrictDecoder(data).Decode(&dst.WidgetDefinitionHorizontalBarChart)
+	err = json.Unmarshal(data, &dst.WidgetDefinitionHorizontalBarChart)
 	if err == nil {
 		jsonWidgetDefinitionHorizontalBarChart, _ := json.Marshal(dst.WidgetDefinitionHorizontalBarChart)
 		if string(jsonWidgetDefinitionHorizontalBarChart) == "{}" { // empty struct
@@ -200,7 +200,7 @@ func (dst *WidgetDefinition) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into WidgetDefinitionLineChart
-	err = newStrictDecoder(data).Decode(&dst.WidgetDefinitionLineChart)
+	err = json.Unmarshal(data, &dst.WidgetDefinitionLineChart)
 	if err == nil {
 		jsonWidgetDefinitionLineChart, _ := json.Marshal(dst.WidgetDefinitionLineChart)
 		if string(jsonWidgetDefinitionLineChart) == "{}" { // empty struct
@@ -217,7 +217,7 @@ func (dst *WidgetDefinition) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into WidgetDefinitionMarkdown
-	err = newStrictDecoder(data).Decode(&dst.WidgetDefinitionMarkdown)
+	err = json.Unmarshal(data, &dst.WidgetDefinitionMarkdown)
 	if err == nil {
 		jsonWidgetDefinitionMarkdown, _ := json.Marshal(dst.WidgetDefinitionMarkdown)
 		if string(jsonWidgetDefinitionMarkdown) == "{}" { // empty struct
@@ -234,7 +234,7 @@ func (dst *WidgetDefinition) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into WidgetDefinitionPieChart
-	err = newStrictDecoder(data).Decode(&dst.WidgetDefinitionPieChart)
+	err = json.Unmarshal(data, &dst.WidgetDefinitionPieChart)
 	if err == nil {
 		jsonWidgetDefinitionPieChart, _ := json.Marshal(dst.WidgetDefinitionPieChart)
 		if string(jsonWidgetDefinitionPieChart) == "{}" { // empty struct
@@ -433,5 +433,4 @@ func (v *NullableWidgetDefinition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

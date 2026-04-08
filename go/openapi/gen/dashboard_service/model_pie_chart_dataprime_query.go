@@ -268,4 +268,3 @@ func (v *NullablePieChartDataprimeQuery) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

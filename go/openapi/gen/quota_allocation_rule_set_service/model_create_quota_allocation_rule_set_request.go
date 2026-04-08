@@ -107,7 +107,6 @@ func (o *CreateQuotaAllocationRuleSetRequest) UnmarshalJSON(data []byte) (err er
 	varCreateQuotaAllocationRuleSetRequest := _CreateQuotaAllocationRuleSetRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCreateQuotaAllocationRuleSetRequest)
 
 	if err != nil {
@@ -154,5 +153,4 @@ func (v *NullableCreateQuotaAllocationRuleSetRequest) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

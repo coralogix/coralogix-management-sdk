@@ -231,4 +231,3 @@ func (v *NullableTextboxDefaultNumericValue) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

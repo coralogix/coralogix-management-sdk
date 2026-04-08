@@ -82,7 +82,7 @@ func (dst *LogsAggregation) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into LogsAggregationAverage
-	err = newStrictDecoder(data).Decode(&dst.LogsAggregationAverage)
+	err = json.Unmarshal(data, &dst.LogsAggregationAverage)
 	if err == nil {
 		jsonLogsAggregationAverage, _ := json.Marshal(dst.LogsAggregationAverage)
 		if string(jsonLogsAggregationAverage) == "{}" { // empty struct
@@ -99,7 +99,7 @@ func (dst *LogsAggregation) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into LogsAggregationCount
-	err = newStrictDecoder(data).Decode(&dst.LogsAggregationCount)
+	err = json.Unmarshal(data, &dst.LogsAggregationCount)
 	if err == nil {
 		jsonLogsAggregationCount, _ := json.Marshal(dst.LogsAggregationCount)
 		if string(jsonLogsAggregationCount) == "{}" { // empty struct
@@ -116,7 +116,7 @@ func (dst *LogsAggregation) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into LogsAggregationCountDistinct
-	err = newStrictDecoder(data).Decode(&dst.LogsAggregationCountDistinct)
+	err = json.Unmarshal(data, &dst.LogsAggregationCountDistinct)
 	if err == nil {
 		jsonLogsAggregationCountDistinct, _ := json.Marshal(dst.LogsAggregationCountDistinct)
 		if string(jsonLogsAggregationCountDistinct) == "{}" { // empty struct
@@ -133,7 +133,7 @@ func (dst *LogsAggregation) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into LogsAggregationMax
-	err = newStrictDecoder(data).Decode(&dst.LogsAggregationMax)
+	err = json.Unmarshal(data, &dst.LogsAggregationMax)
 	if err == nil {
 		jsonLogsAggregationMax, _ := json.Marshal(dst.LogsAggregationMax)
 		if string(jsonLogsAggregationMax) == "{}" { // empty struct
@@ -150,7 +150,7 @@ func (dst *LogsAggregation) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into LogsAggregationMin
-	err = newStrictDecoder(data).Decode(&dst.LogsAggregationMin)
+	err = json.Unmarshal(data, &dst.LogsAggregationMin)
 	if err == nil {
 		jsonLogsAggregationMin, _ := json.Marshal(dst.LogsAggregationMin)
 		if string(jsonLogsAggregationMin) == "{}" { // empty struct
@@ -167,7 +167,7 @@ func (dst *LogsAggregation) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into LogsAggregationPercentile
-	err = newStrictDecoder(data).Decode(&dst.LogsAggregationPercentile)
+	err = json.Unmarshal(data, &dst.LogsAggregationPercentile)
 	if err == nil {
 		jsonLogsAggregationPercentile, _ := json.Marshal(dst.LogsAggregationPercentile)
 		if string(jsonLogsAggregationPercentile) == "{}" { // empty struct
@@ -184,7 +184,7 @@ func (dst *LogsAggregation) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into LogsAggregationSum
-	err = newStrictDecoder(data).Decode(&dst.LogsAggregationSum)
+	err = json.Unmarshal(data, &dst.LogsAggregationSum)
 	if err == nil {
 		jsonLogsAggregationSum, _ := json.Marshal(dst.LogsAggregationSum)
 		if string(jsonLogsAggregationSum) == "{}" { // empty struct
@@ -357,5 +357,4 @@ func (v *NullableLogsAggregation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

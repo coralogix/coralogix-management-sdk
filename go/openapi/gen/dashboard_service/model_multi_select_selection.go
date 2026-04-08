@@ -42,7 +42,7 @@ func (dst *MultiSelectSelection) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into MultiSelectSelectionAll
-	err = newStrictDecoder(data).Decode(&dst.MultiSelectSelectionAll)
+	err = json.Unmarshal(data, &dst.MultiSelectSelectionAll)
 	if err == nil {
 		jsonMultiSelectSelectionAll, _ := json.Marshal(dst.MultiSelectSelectionAll)
 		if string(jsonMultiSelectSelectionAll) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *MultiSelectSelection) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into MultiSelectSelectionList
-	err = newStrictDecoder(data).Decode(&dst.MultiSelectSelectionList)
+	err = json.Unmarshal(data, &dst.MultiSelectSelectionList)
 	if err == nil {
 		jsonMultiSelectSelectionList, _ := json.Marshal(dst.MultiSelectSelectionList)
 		if string(jsonMultiSelectSelectionList) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableMultiSelectSelection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

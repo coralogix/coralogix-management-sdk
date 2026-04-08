@@ -411,4 +411,3 @@ func (v *NullableV2Action) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

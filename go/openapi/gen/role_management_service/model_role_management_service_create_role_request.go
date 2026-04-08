@@ -42,7 +42,7 @@ func (dst *RoleManagementServiceCreateRoleRequest) UnmarshalJSON(data []byte) er
 	var err error
 	match := 0
 	// try to unmarshal data into CreateRoleRequestParentRoleId
-	err = newStrictDecoder(data).Decode(&dst.CreateRoleRequestParentRoleId)
+	err = json.Unmarshal(data, &dst.CreateRoleRequestParentRoleId)
 	if err == nil {
 		jsonCreateRoleRequestParentRoleId, _ := json.Marshal(dst.CreateRoleRequestParentRoleId)
 		if string(jsonCreateRoleRequestParentRoleId) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *RoleManagementServiceCreateRoleRequest) UnmarshalJSON(data []byte) er
 	}
 
 	// try to unmarshal data into CreateRoleRequestParentRoleName
-	err = newStrictDecoder(data).Decode(&dst.CreateRoleRequestParentRoleName)
+	err = json.Unmarshal(data, &dst.CreateRoleRequestParentRoleName)
 	if err == nil {
 		jsonCreateRoleRequestParentRoleName, _ := json.Marshal(dst.CreateRoleRequestParentRoleName)
 		if string(jsonCreateRoleRequestParentRoleName) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableRoleManagementServiceCreateRoleRequest) UnmarshalJSON(src []byt
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

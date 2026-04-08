@@ -124,4 +124,3 @@ func (v *NullableMetricMissingValuesMinNonNullValuesPct) UnmarshalJSON(src []byt
 	return json.Unmarshal(src, &v.value)
 }
 
-

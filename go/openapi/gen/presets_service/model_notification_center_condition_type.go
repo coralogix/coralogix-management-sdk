@@ -42,7 +42,7 @@ func (dst *NotificationCenterConditionType) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into NotificationCenterConditionTypeMatchEntityType
-	err = newStrictDecoder(data).Decode(&dst.NotificationCenterConditionTypeMatchEntityType)
+	err = json.Unmarshal(data, &dst.NotificationCenterConditionTypeMatchEntityType)
 	if err == nil {
 		jsonNotificationCenterConditionTypeMatchEntityType, _ := json.Marshal(dst.NotificationCenterConditionTypeMatchEntityType)
 		if string(jsonNotificationCenterConditionTypeMatchEntityType) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *NotificationCenterConditionType) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into NotificationCenterConditionTypeMatchEntityTypeAndSubType
-	err = newStrictDecoder(data).Decode(&dst.NotificationCenterConditionTypeMatchEntityTypeAndSubType)
+	err = json.Unmarshal(data, &dst.NotificationCenterConditionTypeMatchEntityTypeAndSubType)
 	if err == nil {
 		jsonNotificationCenterConditionTypeMatchEntityTypeAndSubType, _ := json.Marshal(dst.NotificationCenterConditionTypeMatchEntityTypeAndSubType)
 		if string(jsonNotificationCenterConditionTypeMatchEntityTypeAndSubType) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableNotificationCenterConditionType) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

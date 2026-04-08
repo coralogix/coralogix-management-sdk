@@ -267,4 +267,3 @@ func (v *NullableMetricsSource) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

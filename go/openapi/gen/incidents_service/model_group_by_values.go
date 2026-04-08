@@ -42,7 +42,7 @@ func (dst *GroupByValues) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into GroupByValuesContextualLabels
-	err = newStrictDecoder(data).Decode(&dst.GroupByValuesContextualLabels)
+	err = json.Unmarshal(data, &dst.GroupByValuesContextualLabels)
 	if err == nil {
 		jsonGroupByValuesContextualLabels, _ := json.Marshal(dst.GroupByValuesContextualLabels)
 		if string(jsonGroupByValuesContextualLabels) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *GroupByValues) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into GroupByValuesIncidentField
-	err = newStrictDecoder(data).Decode(&dst.GroupByValuesIncidentField)
+	err = json.Unmarshal(data, &dst.GroupByValuesIncidentField)
 	if err == nil {
 		jsonGroupByValuesIncidentField, _ := json.Marshal(dst.GroupByValuesIncidentField)
 		if string(jsonGroupByValuesIncidentField) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableGroupByValues) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

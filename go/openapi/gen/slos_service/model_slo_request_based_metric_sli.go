@@ -632,4 +632,3 @@ func (v *NullableSloRequestBasedMetricSli) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

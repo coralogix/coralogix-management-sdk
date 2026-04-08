@@ -50,7 +50,7 @@ func (dst *ActionExecutionRequest) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into ActionExecutionRequestCreate
-	err = newStrictDecoder(data).Decode(&dst.ActionExecutionRequestCreate)
+	err = json.Unmarshal(data, &dst.ActionExecutionRequestCreate)
 	if err == nil {
 		jsonActionExecutionRequestCreate, _ := json.Marshal(dst.ActionExecutionRequestCreate)
 		if string(jsonActionExecutionRequestCreate) == "{}" { // empty struct
@@ -67,7 +67,7 @@ func (dst *ActionExecutionRequest) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into ActionExecutionRequestDelete
-	err = newStrictDecoder(data).Decode(&dst.ActionExecutionRequestDelete)
+	err = json.Unmarshal(data, &dst.ActionExecutionRequestDelete)
 	if err == nil {
 		jsonActionExecutionRequestDelete, _ := json.Marshal(dst.ActionExecutionRequestDelete)
 		if string(jsonActionExecutionRequestDelete) == "{}" { // empty struct
@@ -84,7 +84,7 @@ func (dst *ActionExecutionRequest) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into ActionExecutionRequestReplace
-	err = newStrictDecoder(data).Decode(&dst.ActionExecutionRequestReplace)
+	err = json.Unmarshal(data, &dst.ActionExecutionRequestReplace)
 	if err == nil {
 		jsonActionExecutionRequestReplace, _ := json.Marshal(dst.ActionExecutionRequestReplace)
 		if string(jsonActionExecutionRequestReplace) == "{}" { // empty struct
@@ -205,5 +205,4 @@ func (v *NullableActionExecutionRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -123,4 +123,3 @@ func (v *NullableVariableSourceV2Textbox) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

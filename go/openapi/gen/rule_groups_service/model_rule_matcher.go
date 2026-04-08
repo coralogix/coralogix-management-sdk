@@ -50,7 +50,7 @@ func (dst *RuleMatcher) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into RuleMatcherApplicationName
-	err = newStrictDecoder(data).Decode(&dst.RuleMatcherApplicationName)
+	err = json.Unmarshal(data, &dst.RuleMatcherApplicationName)
 	if err == nil {
 		jsonRuleMatcherApplicationName, _ := json.Marshal(dst.RuleMatcherApplicationName)
 		if string(jsonRuleMatcherApplicationName) == "{}" { // empty struct
@@ -67,7 +67,7 @@ func (dst *RuleMatcher) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into RuleMatcherSeverity
-	err = newStrictDecoder(data).Decode(&dst.RuleMatcherSeverity)
+	err = json.Unmarshal(data, &dst.RuleMatcherSeverity)
 	if err == nil {
 		jsonRuleMatcherSeverity, _ := json.Marshal(dst.RuleMatcherSeverity)
 		if string(jsonRuleMatcherSeverity) == "{}" { // empty struct
@@ -84,7 +84,7 @@ func (dst *RuleMatcher) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into RuleMatcherSubsystemName
-	err = newStrictDecoder(data).Decode(&dst.RuleMatcherSubsystemName)
+	err = json.Unmarshal(data, &dst.RuleMatcherSubsystemName)
 	if err == nil {
 		jsonRuleMatcherSubsystemName, _ := json.Marshal(dst.RuleMatcherSubsystemName)
 		if string(jsonRuleMatcherSubsystemName) == "{}" { // empty struct
@@ -205,5 +205,4 @@ func (v *NullableRuleMatcher) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

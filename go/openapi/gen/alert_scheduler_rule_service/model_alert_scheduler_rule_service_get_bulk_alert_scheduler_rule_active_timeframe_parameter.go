@@ -195,4 +195,3 @@ func (v *NullableAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimefra
 	return json.Unmarshal(src, &v.value)
 }
 
-

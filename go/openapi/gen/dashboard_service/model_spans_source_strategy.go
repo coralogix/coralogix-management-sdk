@@ -50,7 +50,7 @@ func (dst *SpansSourceStrategy) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into SpansSourceStrategyDuration
-	err = newStrictDecoder(data).Decode(&dst.SpansSourceStrategyDuration)
+	err = json.Unmarshal(data, &dst.SpansSourceStrategyDuration)
 	if err == nil {
 		jsonSpansSourceStrategyDuration, _ := json.Marshal(dst.SpansSourceStrategyDuration)
 		if string(jsonSpansSourceStrategyDuration) == "{}" { // empty struct
@@ -67,7 +67,7 @@ func (dst *SpansSourceStrategy) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into SpansSourceStrategyInstant
-	err = newStrictDecoder(data).Decode(&dst.SpansSourceStrategyInstant)
+	err = json.Unmarshal(data, &dst.SpansSourceStrategyInstant)
 	if err == nil {
 		jsonSpansSourceStrategyInstant, _ := json.Marshal(dst.SpansSourceStrategyInstant)
 		if string(jsonSpansSourceStrategyInstant) == "{}" { // empty struct
@@ -84,7 +84,7 @@ func (dst *SpansSourceStrategy) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into SpansSourceStrategyRange
-	err = newStrictDecoder(data).Decode(&dst.SpansSourceStrategyRange)
+	err = json.Unmarshal(data, &dst.SpansSourceStrategyRange)
 	if err == nil {
 		jsonSpansSourceStrategyRange, _ := json.Marshal(dst.SpansSourceStrategyRange)
 		if string(jsonSpansSourceStrategyRange) == "{}" { // empty struct
@@ -205,5 +205,4 @@ func (v *NullableSpansSourceStrategy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

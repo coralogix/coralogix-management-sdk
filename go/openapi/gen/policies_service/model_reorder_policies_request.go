@@ -135,7 +135,6 @@ func (o *ReorderPoliciesRequest) UnmarshalJSON(data []byte) (err error) {
 	varReorderPoliciesRequest := _ReorderPoliciesRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varReorderPoliciesRequest)
 
 	if err != nil {
@@ -182,5 +181,4 @@ func (v *NullableReorderPoliciesRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

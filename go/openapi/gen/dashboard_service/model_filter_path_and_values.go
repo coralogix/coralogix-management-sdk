@@ -42,7 +42,7 @@ func (dst *FilterPathAndValues) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into FilterPathAndValuesFilters
-	err = newStrictDecoder(data).Decode(&dst.FilterPathAndValuesFilters)
+	err = json.Unmarshal(data, &dst.FilterPathAndValuesFilters)
 	if err == nil {
 		jsonFilterPathAndValuesFilters, _ := json.Marshal(dst.FilterPathAndValuesFilters)
 		if string(jsonFilterPathAndValuesFilters) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *FilterPathAndValues) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into FilterPathAndValuesMultipleValues
-	err = newStrictDecoder(data).Decode(&dst.FilterPathAndValuesMultipleValues)
+	err = json.Unmarshal(data, &dst.FilterPathAndValuesMultipleValues)
 	if err == nil {
 		jsonFilterPathAndValuesMultipleValues, _ := json.Marshal(dst.FilterPathAndValuesMultipleValues)
 		if string(jsonFilterPathAndValuesMultipleValues) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableFilterPathAndValues) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

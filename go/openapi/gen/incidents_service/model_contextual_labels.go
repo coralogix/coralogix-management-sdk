@@ -135,7 +135,6 @@ func (o *ContextualLabels) UnmarshalJSON(data []byte) (err error) {
 	varContextualLabels := _ContextualLabels{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varContextualLabels)
 
 	if err != nil {
@@ -182,5 +181,4 @@ func (v *NullableContextualLabels) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

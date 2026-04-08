@@ -323,7 +323,6 @@ func (o *E2MCreateParamsLogsQuery) UnmarshalJSON(data []byte) (err error) {
 	varE2MCreateParamsLogsQuery := _E2MCreateParamsLogsQuery{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varE2MCreateParamsLogsQuery)
 
 	if err != nil {
@@ -370,5 +369,4 @@ func (v *NullableE2MCreateParamsLogsQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

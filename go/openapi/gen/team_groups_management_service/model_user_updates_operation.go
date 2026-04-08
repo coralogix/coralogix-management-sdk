@@ -50,7 +50,7 @@ func (dst *UserUpdatesOperation) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into UserUpdatesOperationAdd
-	err = newStrictDecoder(data).Decode(&dst.UserUpdatesOperationAdd)
+	err = json.Unmarshal(data, &dst.UserUpdatesOperationAdd)
 	if err == nil {
 		jsonUserUpdatesOperationAdd, _ := json.Marshal(dst.UserUpdatesOperationAdd)
 		if string(jsonUserUpdatesOperationAdd) == "{}" { // empty struct
@@ -67,7 +67,7 @@ func (dst *UserUpdatesOperation) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into UserUpdatesOperationRemove
-	err = newStrictDecoder(data).Decode(&dst.UserUpdatesOperationRemove)
+	err = json.Unmarshal(data, &dst.UserUpdatesOperationRemove)
 	if err == nil {
 		jsonUserUpdatesOperationRemove, _ := json.Marshal(dst.UserUpdatesOperationRemove)
 		if string(jsonUserUpdatesOperationRemove) == "{}" { // empty struct
@@ -84,7 +84,7 @@ func (dst *UserUpdatesOperation) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into UserUpdatesOperationSet
-	err = newStrictDecoder(data).Decode(&dst.UserUpdatesOperationSet)
+	err = json.Unmarshal(data, &dst.UserUpdatesOperationSet)
 	if err == nil {
 		jsonUserUpdatesOperationSet, _ := json.Marshal(dst.UserUpdatesOperationSet)
 		if string(jsonUserUpdatesOperationSet) == "{}" { // empty struct
@@ -205,5 +205,4 @@ func (v *NullableUserUpdatesOperation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

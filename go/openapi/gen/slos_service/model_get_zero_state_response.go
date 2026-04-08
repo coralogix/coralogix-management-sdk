@@ -107,7 +107,6 @@ func (o *GetZeroStateResponse) UnmarshalJSON(data []byte) (err error) {
 	varGetZeroStateResponse := _GetZeroStateResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetZeroStateResponse)
 
 	if err != nil {
@@ -154,5 +153,4 @@ func (v *NullableGetZeroStateResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

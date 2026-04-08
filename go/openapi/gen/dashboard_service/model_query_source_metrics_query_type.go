@@ -50,7 +50,7 @@ func (dst *QuerySourceMetricsQueryType) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into QuerySourceMetricsQueryTypeLabelName
-	err = newStrictDecoder(data).Decode(&dst.QuerySourceMetricsQueryTypeLabelName)
+	err = json.Unmarshal(data, &dst.QuerySourceMetricsQueryTypeLabelName)
 	if err == nil {
 		jsonQuerySourceMetricsQueryTypeLabelName, _ := json.Marshal(dst.QuerySourceMetricsQueryTypeLabelName)
 		if string(jsonQuerySourceMetricsQueryTypeLabelName) == "{}" { // empty struct
@@ -67,7 +67,7 @@ func (dst *QuerySourceMetricsQueryType) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into QuerySourceMetricsQueryTypeLabelValue
-	err = newStrictDecoder(data).Decode(&dst.QuerySourceMetricsQueryTypeLabelValue)
+	err = json.Unmarshal(data, &dst.QuerySourceMetricsQueryTypeLabelValue)
 	if err == nil {
 		jsonQuerySourceMetricsQueryTypeLabelValue, _ := json.Marshal(dst.QuerySourceMetricsQueryTypeLabelValue)
 		if string(jsonQuerySourceMetricsQueryTypeLabelValue) == "{}" { // empty struct
@@ -84,7 +84,7 @@ func (dst *QuerySourceMetricsQueryType) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into QuerySourceMetricsQueryTypeMetricName
-	err = newStrictDecoder(data).Decode(&dst.QuerySourceMetricsQueryTypeMetricName)
+	err = json.Unmarshal(data, &dst.QuerySourceMetricsQueryTypeMetricName)
 	if err == nil {
 		jsonQuerySourceMetricsQueryTypeMetricName, _ := json.Marshal(dst.QuerySourceMetricsQueryTypeMetricName)
 		if string(jsonQuerySourceMetricsQueryTypeMetricName) == "{}" { // empty struct
@@ -205,5 +205,4 @@ func (v *NullableQuerySourceMetricsQueryType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -135,7 +135,6 @@ func (o *IncidentStatusCount) UnmarshalJSON(data []byte) (err error) {
 	varIncidentStatusCount := _IncidentStatusCount{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varIncidentStatusCount)
 
 	if err != nil {
@@ -182,5 +181,4 @@ func (v *NullableIncidentStatusCount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

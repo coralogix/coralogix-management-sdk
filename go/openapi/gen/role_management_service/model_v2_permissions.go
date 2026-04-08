@@ -123,4 +123,3 @@ func (v *NullableV2Permissions) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

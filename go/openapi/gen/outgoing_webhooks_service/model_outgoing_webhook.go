@@ -122,7 +122,7 @@ func (dst *OutgoingWebhook) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into OutgoingWebhookAwsEventBridge
-	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookAwsEventBridge)
+	err = json.Unmarshal(data, &dst.OutgoingWebhookAwsEventBridge)
 	if err == nil {
 		jsonOutgoingWebhookAwsEventBridge, _ := json.Marshal(dst.OutgoingWebhookAwsEventBridge)
 		if string(jsonOutgoingWebhookAwsEventBridge) == "{}" { // empty struct
@@ -139,7 +139,7 @@ func (dst *OutgoingWebhook) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into OutgoingWebhookDemisto
-	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookDemisto)
+	err = json.Unmarshal(data, &dst.OutgoingWebhookDemisto)
 	if err == nil {
 		jsonOutgoingWebhookDemisto, _ := json.Marshal(dst.OutgoingWebhookDemisto)
 		if string(jsonOutgoingWebhookDemisto) == "{}" { // empty struct
@@ -156,7 +156,7 @@ func (dst *OutgoingWebhook) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into OutgoingWebhookEmailGroup
-	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookEmailGroup)
+	err = json.Unmarshal(data, &dst.OutgoingWebhookEmailGroup)
 	if err == nil {
 		jsonOutgoingWebhookEmailGroup, _ := json.Marshal(dst.OutgoingWebhookEmailGroup)
 		if string(jsonOutgoingWebhookEmailGroup) == "{}" { // empty struct
@@ -173,7 +173,7 @@ func (dst *OutgoingWebhook) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into OutgoingWebhookGenericWebhook
-	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookGenericWebhook)
+	err = json.Unmarshal(data, &dst.OutgoingWebhookGenericWebhook)
 	if err == nil {
 		jsonOutgoingWebhookGenericWebhook, _ := json.Marshal(dst.OutgoingWebhookGenericWebhook)
 		if string(jsonOutgoingWebhookGenericWebhook) == "{}" { // empty struct
@@ -190,7 +190,7 @@ func (dst *OutgoingWebhook) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into OutgoingWebhookIbmEventNotifications
-	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookIbmEventNotifications)
+	err = json.Unmarshal(data, &dst.OutgoingWebhookIbmEventNotifications)
 	if err == nil {
 		jsonOutgoingWebhookIbmEventNotifications, _ := json.Marshal(dst.OutgoingWebhookIbmEventNotifications)
 		if string(jsonOutgoingWebhookIbmEventNotifications) == "{}" { // empty struct
@@ -207,7 +207,7 @@ func (dst *OutgoingWebhook) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into OutgoingWebhookJira
-	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookJira)
+	err = json.Unmarshal(data, &dst.OutgoingWebhookJira)
 	if err == nil {
 		jsonOutgoingWebhookJira, _ := json.Marshal(dst.OutgoingWebhookJira)
 		if string(jsonOutgoingWebhookJira) == "{}" { // empty struct
@@ -224,7 +224,7 @@ func (dst *OutgoingWebhook) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into OutgoingWebhookMicrosoftTeams
-	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookMicrosoftTeams)
+	err = json.Unmarshal(data, &dst.OutgoingWebhookMicrosoftTeams)
 	if err == nil {
 		jsonOutgoingWebhookMicrosoftTeams, _ := json.Marshal(dst.OutgoingWebhookMicrosoftTeams)
 		if string(jsonOutgoingWebhookMicrosoftTeams) == "{}" { // empty struct
@@ -241,7 +241,7 @@ func (dst *OutgoingWebhook) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into OutgoingWebhookMsTeamsWorkflow
-	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookMsTeamsWorkflow)
+	err = json.Unmarshal(data, &dst.OutgoingWebhookMsTeamsWorkflow)
 	if err == nil {
 		jsonOutgoingWebhookMsTeamsWorkflow, _ := json.Marshal(dst.OutgoingWebhookMsTeamsWorkflow)
 		if string(jsonOutgoingWebhookMsTeamsWorkflow) == "{}" { // empty struct
@@ -258,7 +258,7 @@ func (dst *OutgoingWebhook) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into OutgoingWebhookOpsgenie
-	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookOpsgenie)
+	err = json.Unmarshal(data, &dst.OutgoingWebhookOpsgenie)
 	if err == nil {
 		jsonOutgoingWebhookOpsgenie, _ := json.Marshal(dst.OutgoingWebhookOpsgenie)
 		if string(jsonOutgoingWebhookOpsgenie) == "{}" { // empty struct
@@ -275,7 +275,7 @@ func (dst *OutgoingWebhook) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into OutgoingWebhookPagerDuty
-	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookPagerDuty)
+	err = json.Unmarshal(data, &dst.OutgoingWebhookPagerDuty)
 	if err == nil {
 		jsonOutgoingWebhookPagerDuty, _ := json.Marshal(dst.OutgoingWebhookPagerDuty)
 		if string(jsonOutgoingWebhookPagerDuty) == "{}" { // empty struct
@@ -292,7 +292,7 @@ func (dst *OutgoingWebhook) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into OutgoingWebhookSendLog
-	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookSendLog)
+	err = json.Unmarshal(data, &dst.OutgoingWebhookSendLog)
 	if err == nil {
 		jsonOutgoingWebhookSendLog, _ := json.Marshal(dst.OutgoingWebhookSendLog)
 		if string(jsonOutgoingWebhookSendLog) == "{}" { // empty struct
@@ -309,7 +309,7 @@ func (dst *OutgoingWebhook) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into OutgoingWebhookSlack
-	err = newStrictDecoder(data).Decode(&dst.OutgoingWebhookSlack)
+	err = json.Unmarshal(data, &dst.OutgoingWebhookSlack)
 	if err == nil {
 		jsonOutgoingWebhookSlack, _ := json.Marshal(dst.OutgoingWebhookSlack)
 		if string(jsonOutgoingWebhookSlack) == "{}" { // empty struct
@@ -547,5 +547,4 @@ func (v *NullableOutgoingWebhook) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

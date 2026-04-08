@@ -123,4 +123,3 @@ func (v *NullableQuerySourceMetricsQueryStringOrVariableStringValue) UnmarshalJS
 	return json.Unmarshal(src, &v.value)
 }
 
-

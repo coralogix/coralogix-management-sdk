@@ -171,7 +171,6 @@ func (o *CreateDashboardRequestDataStructure) UnmarshalJSON(data []byte) (err er
 	varCreateDashboardRequestDataStructure := _CreateDashboardRequestDataStructure{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCreateDashboardRequestDataStructure)
 
 	if err != nil {
@@ -218,5 +217,4 @@ func (v *NullableCreateDashboardRequestDataStructure) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

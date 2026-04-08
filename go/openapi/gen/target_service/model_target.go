@@ -42,7 +42,7 @@ func (dst *Target) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into TargetIbmCos
-	err = newStrictDecoder(data).Decode(&dst.TargetIbmCos)
+	err = json.Unmarshal(data, &dst.TargetIbmCos)
 	if err == nil {
 		jsonTargetIbmCos, _ := json.Marshal(dst.TargetIbmCos)
 		if string(jsonTargetIbmCos) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *Target) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into TargetS3
-	err = newStrictDecoder(data).Decode(&dst.TargetS3)
+	err = json.Unmarshal(data, &dst.TargetS3)
 	if err == nil {
 		jsonTargetS3, _ := json.Marshal(dst.TargetS3)
 		if string(jsonTargetS3) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableTarget) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

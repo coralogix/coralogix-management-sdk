@@ -124,4 +124,3 @@ func (v *NullableEventsServiceBatchGetEventFilterParameter) UnmarshalJSON(src []
 	return json.Unmarshal(src, &v.value)
 }
 
-

@@ -143,7 +143,6 @@ func (o *UserUpdatesOperationSet) UnmarshalJSON(data []byte) (err error) {
 	varUserUpdatesOperationSet := _UserUpdatesOperationSet{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varUserUpdatesOperationSet)
 
 	if err != nil {
@@ -190,5 +189,4 @@ func (v *NullableUserUpdatesOperationSet) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

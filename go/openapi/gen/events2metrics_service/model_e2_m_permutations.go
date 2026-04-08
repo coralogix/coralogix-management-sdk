@@ -135,7 +135,6 @@ func (o *E2MPermutations) UnmarshalJSON(data []byte) (err error) {
 	varE2MPermutations := _E2MPermutations{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varE2MPermutations)
 
 	if err != nil {
@@ -182,5 +181,4 @@ func (v *NullableE2MPermutations) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

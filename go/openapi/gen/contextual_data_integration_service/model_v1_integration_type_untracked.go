@@ -124,4 +124,3 @@ func (v *NullableV1IntegrationTypeUntracked) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

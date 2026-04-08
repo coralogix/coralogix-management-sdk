@@ -236,7 +236,6 @@ func (o *IncidentEventAssignmentAdministrativeEvent) UnmarshalJSON(data []byte) 
 	varIncidentEventAssignmentAdministrativeEvent := _IncidentEventAssignmentAdministrativeEvent{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varIncidentEventAssignmentAdministrativeEvent)
 
 	if err != nil {
@@ -283,5 +282,4 @@ func (v *NullableIncidentEventAssignmentAdministrativeEvent) UnmarshalJSON(src [
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

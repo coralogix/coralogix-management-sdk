@@ -195,4 +195,3 @@ func (v *NullableMultiSelectQuerySource) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

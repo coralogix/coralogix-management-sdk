@@ -159,4 +159,3 @@ func (v *NullableV1RevisionSummary) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

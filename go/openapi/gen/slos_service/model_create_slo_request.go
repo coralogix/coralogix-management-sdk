@@ -147,7 +147,6 @@ func (o *CreateSloRequest) UnmarshalJSON(data []byte) (err error) {
 	varCreateSloRequest := _CreateSloRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCreateSloRequest)
 
 	if err != nil {
@@ -194,5 +193,4 @@ func (v *NullableCreateSloRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

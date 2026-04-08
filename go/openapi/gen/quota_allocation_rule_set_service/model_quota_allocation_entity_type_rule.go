@@ -191,7 +191,6 @@ func (o *QuotaAllocationEntityTypeRule) UnmarshalJSON(data []byte) (err error) {
 	varQuotaAllocationEntityTypeRule := _QuotaAllocationEntityTypeRule{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varQuotaAllocationEntityTypeRule)
 
 	if err != nil {
@@ -238,5 +237,4 @@ func (v *NullableQuotaAllocationEntityTypeRule) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

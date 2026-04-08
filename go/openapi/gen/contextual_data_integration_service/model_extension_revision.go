@@ -411,4 +411,3 @@ func (v *NullableExtensionRevision) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

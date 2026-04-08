@@ -123,4 +123,3 @@ func (v *NullableLineChartQueryMetrics) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

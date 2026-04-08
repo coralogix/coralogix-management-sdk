@@ -107,7 +107,6 @@ func (o *CloseIncidentsRequest) UnmarshalJSON(data []byte) (err error) {
 	varCloseIncidentsRequest := _CloseIncidentsRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCloseIncidentsRequest)
 
 	if err != nil {
@@ -154,5 +153,4 @@ func (v *NullableCloseIncidentsRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

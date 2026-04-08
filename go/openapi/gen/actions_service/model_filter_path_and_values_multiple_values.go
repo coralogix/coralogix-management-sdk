@@ -143,7 +143,6 @@ func (o *FilterPathAndValuesMultipleValues) UnmarshalJSON(data []byte) (err erro
 	varFilterPathAndValuesMultipleValues := _FilterPathAndValuesMultipleValues{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varFilterPathAndValuesMultipleValues)
 
 	if err != nil {
@@ -190,5 +189,4 @@ func (v *NullableFilterPathAndValuesMultipleValues) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

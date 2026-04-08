@@ -195,4 +195,3 @@ func (v *NullableStaticSource) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

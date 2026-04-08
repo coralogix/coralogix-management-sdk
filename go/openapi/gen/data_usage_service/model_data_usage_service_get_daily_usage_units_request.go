@@ -42,7 +42,7 @@ func (dst *DataUsageServiceGetDailyUsageUnitsRequest) UnmarshalJSON(data []byte)
 	var err error
 	match := 0
 	// try to unmarshal data into GetDailyUsageUnitsRequestDateRange
-	err = newStrictDecoder(data).Decode(&dst.GetDailyUsageUnitsRequestDateRange)
+	err = json.Unmarshal(data, &dst.GetDailyUsageUnitsRequestDateRange)
 	if err == nil {
 		jsonGetDailyUsageUnitsRequestDateRange, _ := json.Marshal(dst.GetDailyUsageUnitsRequestDateRange)
 		if string(jsonGetDailyUsageUnitsRequestDateRange) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *DataUsageServiceGetDailyUsageUnitsRequest) UnmarshalJSON(data []byte)
 	}
 
 	// try to unmarshal data into GetDailyUsageUnitsRequestRange
-	err = newStrictDecoder(data).Decode(&dst.GetDailyUsageUnitsRequestRange)
+	err = json.Unmarshal(data, &dst.GetDailyUsageUnitsRequestRange)
 	if err == nil {
 		jsonGetDailyUsageUnitsRequestRange, _ := json.Marshal(dst.GetDailyUsageUnitsRequestRange)
 		if string(jsonGetDailyUsageUnitsRequestRange) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableDataUsageServiceGetDailyUsageUnitsRequest) UnmarshalJSON(src []
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -74,7 +74,7 @@ func (dst *FieldInformation) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into FieldInformationMultiText
-	err = newStrictDecoder(data).Decode(&dst.FieldInformationMultiText)
+	err = json.Unmarshal(data, &dst.FieldInformationMultiText)
 	if err == nil {
 		jsonFieldInformationMultiText, _ := json.Marshal(dst.FieldInformationMultiText)
 		if string(jsonFieldInformationMultiText) == "{}" { // empty struct
@@ -91,7 +91,7 @@ func (dst *FieldInformation) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into FieldInformationMultipleSelection
-	err = newStrictDecoder(data).Decode(&dst.FieldInformationMultipleSelection)
+	err = json.Unmarshal(data, &dst.FieldInformationMultipleSelection)
 	if err == nil {
 		jsonFieldInformationMultipleSelection, _ := json.Marshal(dst.FieldInformationMultipleSelection)
 		if string(jsonFieldInformationMultipleSelection) == "{}" { // empty struct
@@ -108,7 +108,7 @@ func (dst *FieldInformation) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into FieldInformationSelection
-	err = newStrictDecoder(data).Decode(&dst.FieldInformationSelection)
+	err = json.Unmarshal(data, &dst.FieldInformationSelection)
 	if err == nil {
 		jsonFieldInformationSelection, _ := json.Marshal(dst.FieldInformationSelection)
 		if string(jsonFieldInformationSelection) == "{}" { // empty struct
@@ -125,7 +125,7 @@ func (dst *FieldInformation) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into FieldInformationSingle
-	err = newStrictDecoder(data).Decode(&dst.FieldInformationSingle)
+	err = json.Unmarshal(data, &dst.FieldInformationSingle)
 	if err == nil {
 		jsonFieldInformationSingle, _ := json.Marshal(dst.FieldInformationSingle)
 		if string(jsonFieldInformationSingle) == "{}" { // empty struct
@@ -142,7 +142,7 @@ func (dst *FieldInformation) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into FieldInformationSingleBoolean
-	err = newStrictDecoder(data).Decode(&dst.FieldInformationSingleBoolean)
+	err = json.Unmarshal(data, &dst.FieldInformationSingleBoolean)
 	if err == nil {
 		jsonFieldInformationSingleBoolean, _ := json.Marshal(dst.FieldInformationSingleBoolean)
 		if string(jsonFieldInformationSingleBoolean) == "{}" { // empty struct
@@ -159,7 +159,7 @@ func (dst *FieldInformation) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into FieldInformationSingleNumber
-	err = newStrictDecoder(data).Decode(&dst.FieldInformationSingleNumber)
+	err = json.Unmarshal(data, &dst.FieldInformationSingleNumber)
 	if err == nil {
 		jsonFieldInformationSingleNumber, _ := json.Marshal(dst.FieldInformationSingleNumber)
 		if string(jsonFieldInformationSingleNumber) == "{}" { // empty struct
@@ -319,5 +319,4 @@ func (v *NullableFieldInformation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

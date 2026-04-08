@@ -308,4 +308,3 @@ func (v *NullablePropertyUnits) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

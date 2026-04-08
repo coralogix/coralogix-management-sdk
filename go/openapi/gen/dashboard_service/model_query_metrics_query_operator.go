@@ -42,7 +42,7 @@ func (dst *QueryMetricsQueryOperator) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into QueryMetricsQueryOperatorEquals
-	err = newStrictDecoder(data).Decode(&dst.QueryMetricsQueryOperatorEquals)
+	err = json.Unmarshal(data, &dst.QueryMetricsQueryOperatorEquals)
 	if err == nil {
 		jsonQueryMetricsQueryOperatorEquals, _ := json.Marshal(dst.QueryMetricsQueryOperatorEquals)
 		if string(jsonQueryMetricsQueryOperatorEquals) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *QueryMetricsQueryOperator) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into QueryMetricsQueryOperatorNotEquals
-	err = newStrictDecoder(data).Decode(&dst.QueryMetricsQueryOperatorNotEquals)
+	err = json.Unmarshal(data, &dst.QueryMetricsQueryOperatorNotEquals)
 	if err == nil {
 		jsonQueryMetricsQueryOperatorNotEquals, _ := json.Marshal(dst.QueryMetricsQueryOperatorNotEquals)
 		if string(jsonQueryMetricsQueryOperatorNotEquals) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableQueryMetricsQueryOperator) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

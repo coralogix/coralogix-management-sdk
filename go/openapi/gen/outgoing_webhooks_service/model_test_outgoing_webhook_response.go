@@ -42,7 +42,7 @@ func (dst *TestOutgoingWebhookResponse) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into TestOutgoingWebhookResponseFailure
-	err = newStrictDecoder(data).Decode(&dst.TestOutgoingWebhookResponseFailure)
+	err = json.Unmarshal(data, &dst.TestOutgoingWebhookResponseFailure)
 	if err == nil {
 		jsonTestOutgoingWebhookResponseFailure, _ := json.Marshal(dst.TestOutgoingWebhookResponseFailure)
 		if string(jsonTestOutgoingWebhookResponseFailure) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *TestOutgoingWebhookResponse) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into TestOutgoingWebhookResponseSuccess
-	err = newStrictDecoder(data).Decode(&dst.TestOutgoingWebhookResponseSuccess)
+	err = json.Unmarshal(data, &dst.TestOutgoingWebhookResponseSuccess)
 	if err == nil {
 		jsonTestOutgoingWebhookResponseSuccess, _ := json.Marshal(dst.TestOutgoingWebhookResponseSuccess)
 		if string(jsonTestOutgoingWebhookResponseSuccess) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableTestOutgoingWebhookResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

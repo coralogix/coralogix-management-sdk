@@ -303,4 +303,3 @@ func (v *NullableGetContextualDataIntegrationsResponseIntegrationWithCounts) Unm
 	return json.Unmarshal(src, &v.value)
 }
 
-

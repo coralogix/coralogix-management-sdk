@@ -50,7 +50,7 @@ func (dst *VariableSourceV2) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into VariableSourceV2Query
-	err = newStrictDecoder(data).Decode(&dst.VariableSourceV2Query)
+	err = json.Unmarshal(data, &dst.VariableSourceV2Query)
 	if err == nil {
 		jsonVariableSourceV2Query, _ := json.Marshal(dst.VariableSourceV2Query)
 		if string(jsonVariableSourceV2Query) == "{}" { // empty struct
@@ -67,7 +67,7 @@ func (dst *VariableSourceV2) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VariableSourceV2Static
-	err = newStrictDecoder(data).Decode(&dst.VariableSourceV2Static)
+	err = json.Unmarshal(data, &dst.VariableSourceV2Static)
 	if err == nil {
 		jsonVariableSourceV2Static, _ := json.Marshal(dst.VariableSourceV2Static)
 		if string(jsonVariableSourceV2Static) == "{}" { // empty struct
@@ -84,7 +84,7 @@ func (dst *VariableSourceV2) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VariableSourceV2Textbox
-	err = newStrictDecoder(data).Decode(&dst.VariableSourceV2Textbox)
+	err = json.Unmarshal(data, &dst.VariableSourceV2Textbox)
 	if err == nil {
 		jsonVariableSourceV2Textbox, _ := json.Marshal(dst.VariableSourceV2Textbox)
 		if string(jsonVariableSourceV2Textbox) == "{}" { // empty struct
@@ -205,5 +205,4 @@ func (v *NullableVariableSourceV2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -42,7 +42,7 @@ func (dst *IDPParameters) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into IDPParametersMetadataContent
-	err = newStrictDecoder(data).Decode(&dst.IDPParametersMetadataContent)
+	err = json.Unmarshal(data, &dst.IDPParametersMetadataContent)
 	if err == nil {
 		jsonIDPParametersMetadataContent, _ := json.Marshal(dst.IDPParametersMetadataContent)
 		if string(jsonIDPParametersMetadataContent) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *IDPParameters) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IDPParametersMetadataUrl
-	err = newStrictDecoder(data).Decode(&dst.IDPParametersMetadataUrl)
+	err = json.Unmarshal(data, &dst.IDPParametersMetadataUrl)
 	if err == nil {
 		jsonIDPParametersMetadataUrl, _ := json.Marshal(dst.IDPParametersMetadataUrl)
 		if string(jsonIDPParametersMetadataUrl) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableIDPParameters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

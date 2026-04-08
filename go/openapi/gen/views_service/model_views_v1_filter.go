@@ -137,7 +137,6 @@ func (o *ViewsV1Filter) UnmarshalJSON(data []byte) (err error) {
 	varViewsV1Filter := _ViewsV1Filter{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varViewsV1Filter)
 
 	if err != nil {
@@ -184,5 +183,4 @@ func (v *NullableViewsV1Filter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

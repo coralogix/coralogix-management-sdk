@@ -107,7 +107,6 @@ func (o *CreateBulkAlertSchedulerRuleResponse) UnmarshalJSON(data []byte) (err e
 	varCreateBulkAlertSchedulerRuleResponse := _CreateBulkAlertSchedulerRuleResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCreateBulkAlertSchedulerRuleResponse)
 
 	if err != nil {
@@ -154,5 +153,4 @@ func (v *NullableCreateBulkAlertSchedulerRuleResponse) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

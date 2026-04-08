@@ -107,7 +107,6 @@ func (o *GetCustomEnrichmentResponse) UnmarshalJSON(data []byte) (err error) {
 	varGetCustomEnrichmentResponse := _GetCustomEnrichmentResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetCustomEnrichmentResponse)
 
 	if err != nil {
@@ -154,5 +153,4 @@ func (v *NullableGetCustomEnrichmentResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

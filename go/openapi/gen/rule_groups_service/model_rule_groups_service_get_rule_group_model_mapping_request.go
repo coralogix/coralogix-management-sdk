@@ -375,4 +375,3 @@ func (v *NullableRuleGroupsServiceGetRuleGroupModelMappingRequest) UnmarshalJSON
 	return json.Unmarshal(src, &v.value)
 }
 
-

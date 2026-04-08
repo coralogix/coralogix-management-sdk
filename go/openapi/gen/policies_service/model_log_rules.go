@@ -107,7 +107,6 @@ func (o *LogRules) UnmarshalJSON(data []byte) (err error) {
 	varLogRules := _LogRules{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varLogRules)
 
 	if err != nil {
@@ -154,5 +153,4 @@ func (v *NullableLogRules) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

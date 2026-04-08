@@ -135,7 +135,6 @@ func (o *MetricLabel) UnmarshalJSON(data []byte) (err error) {
 	varMetricLabel := _MetricLabel{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varMetricLabel)
 
 	if err != nil {
@@ -182,5 +181,4 @@ func (v *NullableMetricLabel) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -42,7 +42,7 @@ func (dst *MinMax) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into MinMaxAuto
-	err = newStrictDecoder(data).Decode(&dst.MinMaxAuto)
+	err = json.Unmarshal(data, &dst.MinMaxAuto)
 	if err == nil {
 		jsonMinMaxAuto, _ := json.Marshal(dst.MinMaxAuto)
 		if string(jsonMinMaxAuto) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *MinMax) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into MinMaxCustom
-	err = newStrictDecoder(data).Decode(&dst.MinMaxCustom)
+	err = json.Unmarshal(data, &dst.MinMaxCustom)
 	if err == nil {
 		jsonMinMaxCustom, _ := json.Marshal(dst.MinMaxCustom)
 		if string(jsonMinMaxCustom) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableMinMax) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

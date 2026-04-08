@@ -42,7 +42,7 @@ func (dst *IntervalResolution) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into IntervalResolutionAuto
-	err = newStrictDecoder(data).Decode(&dst.IntervalResolutionAuto)
+	err = json.Unmarshal(data, &dst.IntervalResolutionAuto)
 	if err == nil {
 		jsonIntervalResolutionAuto, _ := json.Marshal(dst.IntervalResolutionAuto)
 		if string(jsonIntervalResolutionAuto) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *IntervalResolution) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IntervalResolutionManual
-	err = newStrictDecoder(data).Decode(&dst.IntervalResolutionManual)
+	err = json.Unmarshal(data, &dst.IntervalResolutionManual)
 	if err == nil {
 		jsonIntervalResolutionManual, _ := json.Marshal(dst.IntervalResolutionManual)
 		if string(jsonIntervalResolutionManual) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableIntervalResolution) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

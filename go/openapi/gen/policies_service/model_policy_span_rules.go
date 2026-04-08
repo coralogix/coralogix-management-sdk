@@ -527,7 +527,6 @@ func (o *PolicySpanRules) UnmarshalJSON(data []byte) (err error) {
 	varPolicySpanRules := _PolicySpanRules{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varPolicySpanRules)
 
 	if err != nil {
@@ -574,5 +573,4 @@ func (v *NullablePolicySpanRules) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

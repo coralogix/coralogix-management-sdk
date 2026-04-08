@@ -592,4 +592,3 @@ func (v *NullableDetailedDailyUnits) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

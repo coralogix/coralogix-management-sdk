@@ -163,7 +163,6 @@ func (o *LogMetaFieldsValues) UnmarshalJSON(data []byte) (err error) {
 	varLogMetaFieldsValues := _LogMetaFieldsValues{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varLogMetaFieldsValues)
 
 	if err != nil {
@@ -210,5 +209,4 @@ func (v *NullableLogMetaFieldsValues) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -195,4 +195,3 @@ func (v *NullableEnrichmentServiceAtomicOverwriteEnrichmentsRequest) UnmarshalJS
 	return json.Unmarshal(src, &v.value)
 }
 
-

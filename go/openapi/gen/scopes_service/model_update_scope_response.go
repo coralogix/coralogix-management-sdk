@@ -107,7 +107,6 @@ func (o *UpdateScopeResponse) UnmarshalJSON(data []byte) (err error) {
 	varUpdateScopeResponse := _UpdateScopeResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varUpdateScopeResponse)
 
 	if err != nil {
@@ -154,5 +153,4 @@ func (v *NullableUpdateScopeResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

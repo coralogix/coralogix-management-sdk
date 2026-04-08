@@ -271,4 +271,3 @@ func (v *NullableVisualizationPieChartLabelDefinition) UnmarshalJSON(src []byte)
 	return json.Unmarshal(src, &v.value)
 }
 
-

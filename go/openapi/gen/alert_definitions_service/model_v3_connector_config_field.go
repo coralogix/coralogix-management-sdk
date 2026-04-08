@@ -161,4 +161,3 @@ func (v *NullableV3ConnectorConfigField) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

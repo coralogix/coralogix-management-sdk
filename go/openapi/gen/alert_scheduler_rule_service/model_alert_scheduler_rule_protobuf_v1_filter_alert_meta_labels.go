@@ -159,4 +159,3 @@ func (v *NullableAlertSchedulerRuleProtobufV1FilterAlertMetaLabels) UnmarshalJSO
 	return json.Unmarshal(src, &v.value)
 }
 
-

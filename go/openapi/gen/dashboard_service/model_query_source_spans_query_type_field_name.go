@@ -123,4 +123,3 @@ func (v *NullableQuerySourceSpansQueryTypeFieldName) UnmarshalJSON(src []byte) e
 	return json.Unmarshal(src, &v.value)
 }
 
-

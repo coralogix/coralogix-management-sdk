@@ -135,7 +135,6 @@ func (o *GetEnrichmentLimitResponse) UnmarshalJSON(data []byte) (err error) {
 	varGetEnrichmentLimitResponse := _GetEnrichmentLimitResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetEnrichmentLimitResponse)
 
 	if err != nil {
@@ -182,5 +181,4 @@ func (v *NullableGetEnrichmentLimitResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

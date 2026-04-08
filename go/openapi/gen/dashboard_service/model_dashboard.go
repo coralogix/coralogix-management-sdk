@@ -74,7 +74,7 @@ func (dst *Dashboard) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into DashboardFiveMinutesAbsoluteTimeFrame
-	err = newStrictDecoder(data).Decode(&dst.DashboardFiveMinutesAbsoluteTimeFrame)
+	err = json.Unmarshal(data, &dst.DashboardFiveMinutesAbsoluteTimeFrame)
 	if err == nil {
 		jsonDashboardFiveMinutesAbsoluteTimeFrame, _ := json.Marshal(dst.DashboardFiveMinutesAbsoluteTimeFrame)
 		if string(jsonDashboardFiveMinutesAbsoluteTimeFrame) == "{}" { // empty struct
@@ -91,7 +91,7 @@ func (dst *Dashboard) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into DashboardFiveMinutesRelativeTimeFrame
-	err = newStrictDecoder(data).Decode(&dst.DashboardFiveMinutesRelativeTimeFrame)
+	err = json.Unmarshal(data, &dst.DashboardFiveMinutesRelativeTimeFrame)
 	if err == nil {
 		jsonDashboardFiveMinutesRelativeTimeFrame, _ := json.Marshal(dst.DashboardFiveMinutesRelativeTimeFrame)
 		if string(jsonDashboardFiveMinutesRelativeTimeFrame) == "{}" { // empty struct
@@ -108,7 +108,7 @@ func (dst *Dashboard) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into DashboardOffAbsoluteTimeFrame
-	err = newStrictDecoder(data).Decode(&dst.DashboardOffAbsoluteTimeFrame)
+	err = json.Unmarshal(data, &dst.DashboardOffAbsoluteTimeFrame)
 	if err == nil {
 		jsonDashboardOffAbsoluteTimeFrame, _ := json.Marshal(dst.DashboardOffAbsoluteTimeFrame)
 		if string(jsonDashboardOffAbsoluteTimeFrame) == "{}" { // empty struct
@@ -125,7 +125,7 @@ func (dst *Dashboard) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into DashboardOffRelativeTimeFrame
-	err = newStrictDecoder(data).Decode(&dst.DashboardOffRelativeTimeFrame)
+	err = json.Unmarshal(data, &dst.DashboardOffRelativeTimeFrame)
 	if err == nil {
 		jsonDashboardOffRelativeTimeFrame, _ := json.Marshal(dst.DashboardOffRelativeTimeFrame)
 		if string(jsonDashboardOffRelativeTimeFrame) == "{}" { // empty struct
@@ -142,7 +142,7 @@ func (dst *Dashboard) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into DashboardTwoMinutesAbsoluteTimeFrame
-	err = newStrictDecoder(data).Decode(&dst.DashboardTwoMinutesAbsoluteTimeFrame)
+	err = json.Unmarshal(data, &dst.DashboardTwoMinutesAbsoluteTimeFrame)
 	if err == nil {
 		jsonDashboardTwoMinutesAbsoluteTimeFrame, _ := json.Marshal(dst.DashboardTwoMinutesAbsoluteTimeFrame)
 		if string(jsonDashboardTwoMinutesAbsoluteTimeFrame) == "{}" { // empty struct
@@ -159,7 +159,7 @@ func (dst *Dashboard) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into DashboardTwoMinutesRelativeTimeFrame
-	err = newStrictDecoder(data).Decode(&dst.DashboardTwoMinutesRelativeTimeFrame)
+	err = json.Unmarshal(data, &dst.DashboardTwoMinutesRelativeTimeFrame)
 	if err == nil {
 		jsonDashboardTwoMinutesRelativeTimeFrame, _ := json.Marshal(dst.DashboardTwoMinutesRelativeTimeFrame)
 		if string(jsonDashboardTwoMinutesRelativeTimeFrame) == "{}" { // empty struct
@@ -319,5 +319,4 @@ func (v *NullableDashboard) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

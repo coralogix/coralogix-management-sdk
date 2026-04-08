@@ -107,7 +107,6 @@ func (o *ReplaceSloAlertsValidationsResponse) UnmarshalJSON(data []byte) (err er
 	varReplaceSloAlertsValidationsResponse := _ReplaceSloAlertsValidationsResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varReplaceSloAlertsValidationsResponse)
 
 	if err != nil {
@@ -154,5 +153,4 @@ func (v *NullableReplaceSloAlertsValidationsResponse) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

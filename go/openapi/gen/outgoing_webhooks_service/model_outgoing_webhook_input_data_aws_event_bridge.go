@@ -231,4 +231,3 @@ func (v *NullableOutgoingWebhookInputDataAwsEventBridge) UnmarshalJSON(src []byt
 	return json.Unmarshal(src, &v.value)
 }
 
-

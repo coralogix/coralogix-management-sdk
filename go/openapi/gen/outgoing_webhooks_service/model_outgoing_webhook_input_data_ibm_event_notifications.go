@@ -231,4 +231,3 @@ func (v *NullableOutgoingWebhookInputDataIbmEventNotifications) UnmarshalJSON(sr
 	return json.Unmarshal(src, &v.value)
 }
 
-

@@ -42,7 +42,7 @@ func (dst *Placement) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into PlacementFirst
-	err = newStrictDecoder(data).Decode(&dst.PlacementFirst)
+	err = json.Unmarshal(data, &dst.PlacementFirst)
 	if err == nil {
 		jsonPlacementFirst, _ := json.Marshal(dst.PlacementFirst)
 		if string(jsonPlacementFirst) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *Placement) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into PlacementLast
-	err = newStrictDecoder(data).Decode(&dst.PlacementLast)
+	err = json.Unmarshal(data, &dst.PlacementLast)
 	if err == nil {
 		jsonPlacementLast, _ := json.Marshal(dst.PlacementLast)
 		if string(jsonPlacementLast) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullablePlacement) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

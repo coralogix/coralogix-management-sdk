@@ -123,4 +123,3 @@ func (v *NullableBurnRateTypeDual) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

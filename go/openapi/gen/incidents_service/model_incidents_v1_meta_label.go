@@ -159,4 +159,3 @@ func (v *NullableIncidentsV1MetaLabel) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

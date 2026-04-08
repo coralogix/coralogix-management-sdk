@@ -571,7 +571,6 @@ func (o *DashboardFiveMinutesAbsoluteTimeFrame) UnmarshalJSON(data []byte) (err 
 	varDashboardFiveMinutesAbsoluteTimeFrame := _DashboardFiveMinutesAbsoluteTimeFrame{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varDashboardFiveMinutesAbsoluteTimeFrame)
 
 	if err != nil {
@@ -618,5 +617,4 @@ func (v *NullableDashboardFiveMinutesAbsoluteTimeFrame) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

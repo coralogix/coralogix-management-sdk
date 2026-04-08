@@ -159,4 +159,3 @@ func (v *NullableConfigureTenantRequestIbm) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

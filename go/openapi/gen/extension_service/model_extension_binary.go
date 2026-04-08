@@ -159,4 +159,3 @@ func (v *NullableExtensionBinary) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

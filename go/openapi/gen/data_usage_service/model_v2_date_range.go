@@ -160,4 +160,3 @@ func (v *NullableV2DateRange) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

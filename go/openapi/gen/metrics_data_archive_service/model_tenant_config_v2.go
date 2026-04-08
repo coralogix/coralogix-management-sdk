@@ -42,7 +42,7 @@ func (dst *TenantConfigV2) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into TenantConfigV2Ibm
-	err = newStrictDecoder(data).Decode(&dst.TenantConfigV2Ibm)
+	err = json.Unmarshal(data, &dst.TenantConfigV2Ibm)
 	if err == nil {
 		jsonTenantConfigV2Ibm, _ := json.Marshal(dst.TenantConfigV2Ibm)
 		if string(jsonTenantConfigV2Ibm) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *TenantConfigV2) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into TenantConfigV2S3
-	err = newStrictDecoder(data).Decode(&dst.TenantConfigV2S3)
+	err = json.Unmarshal(data, &dst.TenantConfigV2S3)
 	if err == nil {
 		jsonTenantConfigV2S3, _ := json.Marshal(dst.TenantConfigV2S3)
 		if string(jsonTenantConfigV2S3) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableTenantConfigV2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

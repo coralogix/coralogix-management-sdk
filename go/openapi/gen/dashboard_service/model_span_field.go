@@ -50,7 +50,7 @@ func (dst *SpanField) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into SpanFieldMetadataField
-	err = newStrictDecoder(data).Decode(&dst.SpanFieldMetadataField)
+	err = json.Unmarshal(data, &dst.SpanFieldMetadataField)
 	if err == nil {
 		jsonSpanFieldMetadataField, _ := json.Marshal(dst.SpanFieldMetadataField)
 		if string(jsonSpanFieldMetadataField) == "{}" { // empty struct
@@ -67,7 +67,7 @@ func (dst *SpanField) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into SpanFieldProcessTagField
-	err = newStrictDecoder(data).Decode(&dst.SpanFieldProcessTagField)
+	err = json.Unmarshal(data, &dst.SpanFieldProcessTagField)
 	if err == nil {
 		jsonSpanFieldProcessTagField, _ := json.Marshal(dst.SpanFieldProcessTagField)
 		if string(jsonSpanFieldProcessTagField) == "{}" { // empty struct
@@ -84,7 +84,7 @@ func (dst *SpanField) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into SpanFieldTagField
-	err = newStrictDecoder(data).Decode(&dst.SpanFieldTagField)
+	err = json.Unmarshal(data, &dst.SpanFieldTagField)
 	if err == nil {
 		jsonSpanFieldTagField, _ := json.Marshal(dst.SpanFieldTagField)
 		if string(jsonSpanFieldTagField) == "{}" { // empty struct
@@ -205,5 +205,4 @@ func (v *NullableSpanField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

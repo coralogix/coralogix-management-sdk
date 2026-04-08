@@ -231,4 +231,3 @@ func (v *NullableV2AggregationSamples) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

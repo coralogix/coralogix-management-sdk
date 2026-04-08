@@ -339,4 +339,3 @@ func (v *NullableIntegrationRevisionCloudFormation) UnmarshalJSON(src []byte) er
 	return json.Unmarshal(src, &v.value)
 }
 
-

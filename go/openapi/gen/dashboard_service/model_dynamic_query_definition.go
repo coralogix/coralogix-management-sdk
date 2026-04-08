@@ -173,7 +173,6 @@ func (o *DynamicQueryDefinition) UnmarshalJSON(data []byte) (err error) {
 	varDynamicQueryDefinition := _DynamicQueryDefinition{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varDynamicQueryDefinition)
 
 	if err != nil {
@@ -220,5 +219,4 @@ func (v *NullableDynamicQueryDefinition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

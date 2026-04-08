@@ -621,7 +621,6 @@ func (o *QueryDisplaySettings) UnmarshalJSON(data []byte) (err error) {
 	varQueryDisplaySettings := _QueryDisplaySettings{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varQueryDisplaySettings)
 
 	if err != nil {
@@ -668,5 +667,4 @@ func (v *NullableQueryDisplaySettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

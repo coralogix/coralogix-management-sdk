@@ -143,7 +143,6 @@ func (o *ScopeUpdateActionSetScopeId) UnmarshalJSON(data []byte) (err error) {
 	varScopeUpdateActionSetScopeId := _ScopeUpdateActionSetScopeId{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varScopeUpdateActionSetScopeId)
 
 	if err != nil {
@@ -190,5 +189,4 @@ func (v *NullableScopeUpdateActionSetScopeId) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

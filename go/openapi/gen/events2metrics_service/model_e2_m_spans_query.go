@@ -459,7 +459,6 @@ func (o *E2MSpansQuery) UnmarshalJSON(data []byte) (err error) {
 	varE2MSpansQuery := _E2MSpansQuery{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varE2MSpansQuery)
 
 	if err != nil {
@@ -506,5 +505,4 @@ func (v *NullableE2MSpansQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -160,4 +160,3 @@ func (v *NullableReplaceAlertDefinitionRequest) UnmarshalJSON(src []byte) error 
 	return json.Unmarshal(src, &v.value)
 }
 
-

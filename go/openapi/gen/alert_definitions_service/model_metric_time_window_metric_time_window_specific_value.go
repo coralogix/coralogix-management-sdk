@@ -123,4 +123,3 @@ func (v *NullableMetricTimeWindowMetricTimeWindowSpecificValue) UnmarshalJSON(sr
 	return json.Unmarshal(src, &v.value)
 }
 
-

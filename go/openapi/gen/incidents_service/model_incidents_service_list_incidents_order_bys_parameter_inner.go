@@ -42,7 +42,7 @@ func (dst *IncidentsServiceListIncidentsOrderBysParameterInner) UnmarshalJSON(da
 	var err error
 	match := 0
 	// try to unmarshal data into V1OrderByContextualLabel
-	err = newStrictDecoder(data).Decode(&dst.V1OrderByContextualLabel)
+	err = json.Unmarshal(data, &dst.V1OrderByContextualLabel)
 	if err == nil {
 		jsonV1OrderByContextualLabel, _ := json.Marshal(dst.V1OrderByContextualLabel)
 		if string(jsonV1OrderByContextualLabel) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *IncidentsServiceListIncidentsOrderBysParameterInner) UnmarshalJSON(da
 	}
 
 	// try to unmarshal data into V1OrderByIncidentField
-	err = newStrictDecoder(data).Decode(&dst.V1OrderByIncidentField)
+	err = json.Unmarshal(data, &dst.V1OrderByIncidentField)
 	if err == nil {
 		jsonV1OrderByIncidentField, _ := json.Marshal(dst.V1OrderByIncidentField)
 		if string(jsonV1OrderByIncidentField) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableIncidentsServiceListIncidentsOrderBysParameterInner) UnmarshalJ
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

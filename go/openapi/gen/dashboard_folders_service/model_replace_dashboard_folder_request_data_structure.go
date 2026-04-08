@@ -159,4 +159,3 @@ func (v *NullableReplaceDashboardFolderRequestDataStructure) UnmarshalJSON(src [
 	return json.Unmarshal(src, &v.value)
 }
 
-

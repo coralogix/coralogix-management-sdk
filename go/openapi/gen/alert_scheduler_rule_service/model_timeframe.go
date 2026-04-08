@@ -42,7 +42,7 @@ func (dst *Timeframe) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into TimeframeDuration
-	err = newStrictDecoder(data).Decode(&dst.TimeframeDuration)
+	err = json.Unmarshal(data, &dst.TimeframeDuration)
 	if err == nil {
 		jsonTimeframeDuration, _ := json.Marshal(dst.TimeframeDuration)
 		if string(jsonTimeframeDuration) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *Timeframe) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into TimeframeEndTime
-	err = newStrictDecoder(data).Decode(&dst.TimeframeEndTime)
+	err = json.Unmarshal(data, &dst.TimeframeEndTime)
 	if err == nil {
 		jsonTimeframeEndTime, _ := json.Marshal(dst.TimeframeEndTime)
 		if string(jsonTimeframeEndTime) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableTimeframe) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

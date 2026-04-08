@@ -234,4 +234,3 @@ func (v *NullableLogsQueryAggregation) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

@@ -123,4 +123,3 @@ func (v *NullableTextboxDefaultValueDefaultIntervalValue) UnmarshalJSON(src []by
 	return json.Unmarshal(src, &v.value)
 }
 
-

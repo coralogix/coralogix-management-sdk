@@ -231,4 +231,3 @@ func (v *NullableSloAlertValidityResult) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

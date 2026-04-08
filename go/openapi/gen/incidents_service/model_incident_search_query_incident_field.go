@@ -144,7 +144,6 @@ func (o *IncidentSearchQueryIncidentField) UnmarshalJSON(data []byte) (err error
 	varIncidentSearchQueryIncidentField := _IncidentSearchQueryIncidentField{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varIncidentSearchQueryIncidentField)
 
 	if err != nil {
@@ -191,5 +190,4 @@ func (v *NullableIncidentSearchQueryIncidentField) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

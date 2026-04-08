@@ -107,7 +107,6 @@ func (o *ListSlosResponse) UnmarshalJSON(data []byte) (err error) {
 	varListSlosResponse := _ListSlosResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varListSlosResponse)
 
 	if err != nil {
@@ -154,5 +153,4 @@ func (v *NullableListSlosResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

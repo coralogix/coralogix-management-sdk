@@ -58,7 +58,7 @@ func (dst *HorizontalBarChartQuery) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into HorizontalBarChartQueryDataprime
-	err = newStrictDecoder(data).Decode(&dst.HorizontalBarChartQueryDataprime)
+	err = json.Unmarshal(data, &dst.HorizontalBarChartQueryDataprime)
 	if err == nil {
 		jsonHorizontalBarChartQueryDataprime, _ := json.Marshal(dst.HorizontalBarChartQueryDataprime)
 		if string(jsonHorizontalBarChartQueryDataprime) == "{}" { // empty struct
@@ -75,7 +75,7 @@ func (dst *HorizontalBarChartQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into HorizontalBarChartQueryLogs
-	err = newStrictDecoder(data).Decode(&dst.HorizontalBarChartQueryLogs)
+	err = json.Unmarshal(data, &dst.HorizontalBarChartQueryLogs)
 	if err == nil {
 		jsonHorizontalBarChartQueryLogs, _ := json.Marshal(dst.HorizontalBarChartQueryLogs)
 		if string(jsonHorizontalBarChartQueryLogs) == "{}" { // empty struct
@@ -92,7 +92,7 @@ func (dst *HorizontalBarChartQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into HorizontalBarChartQueryMetrics
-	err = newStrictDecoder(data).Decode(&dst.HorizontalBarChartQueryMetrics)
+	err = json.Unmarshal(data, &dst.HorizontalBarChartQueryMetrics)
 	if err == nil {
 		jsonHorizontalBarChartQueryMetrics, _ := json.Marshal(dst.HorizontalBarChartQueryMetrics)
 		if string(jsonHorizontalBarChartQueryMetrics) == "{}" { // empty struct
@@ -109,7 +109,7 @@ func (dst *HorizontalBarChartQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into HorizontalBarChartQuerySpans
-	err = newStrictDecoder(data).Decode(&dst.HorizontalBarChartQuerySpans)
+	err = json.Unmarshal(data, &dst.HorizontalBarChartQuerySpans)
 	if err == nil {
 		jsonHorizontalBarChartQuerySpans, _ := json.Marshal(dst.HorizontalBarChartQuerySpans)
 		if string(jsonHorizontalBarChartQuerySpans) == "{}" { // empty struct
@@ -243,5 +243,4 @@ func (v *NullableHorizontalBarChartQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

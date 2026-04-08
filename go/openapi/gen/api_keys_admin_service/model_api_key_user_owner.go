@@ -159,4 +159,3 @@ func (v *NullableApiKeyUserOwner) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

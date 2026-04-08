@@ -159,4 +159,3 @@ func (v *NullableGetAllExtensionsResponseRevisionSummary) UnmarshalJSON(src []by
 	return json.Unmarshal(src, &v.value)
 }
 
-

@@ -123,4 +123,3 @@ func (v *NullableIncidentFieldOneOfId) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

@@ -236,7 +236,6 @@ func (o *IncidentEventSnoozeIndicatorOperationalEvent) UnmarshalJSON(data []byte
 	varIncidentEventSnoozeIndicatorOperationalEvent := _IncidentEventSnoozeIndicatorOperationalEvent{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varIncidentEventSnoozeIndicatorOperationalEvent)
 
 	if err != nil {
@@ -283,5 +282,4 @@ func (v *NullableIncidentEventSnoozeIndicatorOperationalEvent) UnmarshalJSON(src
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

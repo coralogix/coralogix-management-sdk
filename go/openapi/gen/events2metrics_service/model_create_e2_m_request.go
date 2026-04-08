@@ -107,7 +107,6 @@ func (o *CreateE2MRequest) UnmarshalJSON(data []byte) (err error) {
 	varCreateE2MRequest := _CreateE2MRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCreateE2MRequest)
 
 	if err != nil {
@@ -154,5 +153,4 @@ func (v *NullableCreateE2MRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

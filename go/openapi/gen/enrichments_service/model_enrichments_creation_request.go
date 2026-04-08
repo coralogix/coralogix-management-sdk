@@ -107,7 +107,6 @@ func (o *EnrichmentsCreationRequest) UnmarshalJSON(data []byte) (err error) {
 	varEnrichmentsCreationRequest := _EnrichmentsCreationRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varEnrichmentsCreationRequest)
 
 	if err != nil {
@@ -154,5 +153,4 @@ func (v *NullableEnrichmentsCreationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

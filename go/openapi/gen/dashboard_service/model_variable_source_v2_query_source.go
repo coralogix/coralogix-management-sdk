@@ -58,7 +58,7 @@ func (dst *VariableSourceV2QuerySource) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into VariableSourceV2QuerySourceDataprimeQuery
-	err = newStrictDecoder(data).Decode(&dst.VariableSourceV2QuerySourceDataprimeQuery)
+	err = json.Unmarshal(data, &dst.VariableSourceV2QuerySourceDataprimeQuery)
 	if err == nil {
 		jsonVariableSourceV2QuerySourceDataprimeQuery, _ := json.Marshal(dst.VariableSourceV2QuerySourceDataprimeQuery)
 		if string(jsonVariableSourceV2QuerySourceDataprimeQuery) == "{}" { // empty struct
@@ -75,7 +75,7 @@ func (dst *VariableSourceV2QuerySource) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VariableSourceV2QuerySourceLogsQuery
-	err = newStrictDecoder(data).Decode(&dst.VariableSourceV2QuerySourceLogsQuery)
+	err = json.Unmarshal(data, &dst.VariableSourceV2QuerySourceLogsQuery)
 	if err == nil {
 		jsonVariableSourceV2QuerySourceLogsQuery, _ := json.Marshal(dst.VariableSourceV2QuerySourceLogsQuery)
 		if string(jsonVariableSourceV2QuerySourceLogsQuery) == "{}" { // empty struct
@@ -92,7 +92,7 @@ func (dst *VariableSourceV2QuerySource) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VariableSourceV2QuerySourceMetricsQuery
-	err = newStrictDecoder(data).Decode(&dst.VariableSourceV2QuerySourceMetricsQuery)
+	err = json.Unmarshal(data, &dst.VariableSourceV2QuerySourceMetricsQuery)
 	if err == nil {
 		jsonVariableSourceV2QuerySourceMetricsQuery, _ := json.Marshal(dst.VariableSourceV2QuerySourceMetricsQuery)
 		if string(jsonVariableSourceV2QuerySourceMetricsQuery) == "{}" { // empty struct
@@ -109,7 +109,7 @@ func (dst *VariableSourceV2QuerySource) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VariableSourceV2QuerySourceSpansQuery
-	err = newStrictDecoder(data).Decode(&dst.VariableSourceV2QuerySourceSpansQuery)
+	err = json.Unmarshal(data, &dst.VariableSourceV2QuerySourceSpansQuery)
 	if err == nil {
 		jsonVariableSourceV2QuerySourceSpansQuery, _ := json.Marshal(dst.VariableSourceV2QuerySourceSpansQuery)
 		if string(jsonVariableSourceV2QuerySourceSpansQuery) == "{}" { // empty struct
@@ -243,5 +243,4 @@ func (v *NullableVariableSourceV2QuerySource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

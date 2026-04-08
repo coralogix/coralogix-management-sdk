@@ -143,7 +143,6 @@ func (o *V1OrderByContextualLabel) UnmarshalJSON(data []byte) (err error) {
 	varV1OrderByContextualLabel := _V1OrderByContextualLabel{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varV1OrderByContextualLabel)
 
 	if err != nil {
@@ -190,5 +189,4 @@ func (v *NullableV1OrderByContextualLabel) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

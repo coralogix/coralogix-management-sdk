@@ -50,7 +50,7 @@ func (dst *V2Aggregation) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into V2AggregationHistogram
-	err = newStrictDecoder(data).Decode(&dst.V2AggregationHistogram)
+	err = json.Unmarshal(data, &dst.V2AggregationHistogram)
 	if err == nil {
 		jsonV2AggregationHistogram, _ := json.Marshal(dst.V2AggregationHistogram)
 		if string(jsonV2AggregationHistogram) == "{}" { // empty struct
@@ -67,7 +67,7 @@ func (dst *V2Aggregation) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into V2AggregationNone
-	err = newStrictDecoder(data).Decode(&dst.V2AggregationNone)
+	err = json.Unmarshal(data, &dst.V2AggregationNone)
 	if err == nil {
 		jsonV2AggregationNone, _ := json.Marshal(dst.V2AggregationNone)
 		if string(jsonV2AggregationNone) == "{}" { // empty struct
@@ -84,7 +84,7 @@ func (dst *V2Aggregation) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into V2AggregationSamples
-	err = newStrictDecoder(data).Decode(&dst.V2AggregationSamples)
+	err = json.Unmarshal(data, &dst.V2AggregationSamples)
 	if err == nil {
 		jsonV2AggregationSamples, _ := json.Marshal(dst.V2AggregationSamples)
 		if string(jsonV2AggregationSamples) == "{}" { // empty struct
@@ -205,5 +205,4 @@ func (v *NullableV2Aggregation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

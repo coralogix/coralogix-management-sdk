@@ -159,4 +159,3 @@ func (v *NullableUpdateContextualDataIntegrationRequest) UnmarshalJSON(src []byt
 	return json.Unmarshal(src, &v.value)
 }
 
-

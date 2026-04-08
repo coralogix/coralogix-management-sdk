@@ -376,4 +376,3 @@ func (v *NullableOutgoingWebhookSlack) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

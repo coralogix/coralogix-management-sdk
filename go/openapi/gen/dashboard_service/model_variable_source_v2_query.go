@@ -123,4 +123,3 @@ func (v *NullableVariableSourceV2Query) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

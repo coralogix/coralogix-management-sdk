@@ -58,7 +58,7 @@ func (dst *PieChartQuery) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into PieChartQueryDataprime
-	err = newStrictDecoder(data).Decode(&dst.PieChartQueryDataprime)
+	err = json.Unmarshal(data, &dst.PieChartQueryDataprime)
 	if err == nil {
 		jsonPieChartQueryDataprime, _ := json.Marshal(dst.PieChartQueryDataprime)
 		if string(jsonPieChartQueryDataprime) == "{}" { // empty struct
@@ -75,7 +75,7 @@ func (dst *PieChartQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into PieChartQueryLogs
-	err = newStrictDecoder(data).Decode(&dst.PieChartQueryLogs)
+	err = json.Unmarshal(data, &dst.PieChartQueryLogs)
 	if err == nil {
 		jsonPieChartQueryLogs, _ := json.Marshal(dst.PieChartQueryLogs)
 		if string(jsonPieChartQueryLogs) == "{}" { // empty struct
@@ -92,7 +92,7 @@ func (dst *PieChartQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into PieChartQueryMetrics
-	err = newStrictDecoder(data).Decode(&dst.PieChartQueryMetrics)
+	err = json.Unmarshal(data, &dst.PieChartQueryMetrics)
 	if err == nil {
 		jsonPieChartQueryMetrics, _ := json.Marshal(dst.PieChartQueryMetrics)
 		if string(jsonPieChartQueryMetrics) == "{}" { // empty struct
@@ -109,7 +109,7 @@ func (dst *PieChartQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into PieChartQuerySpans
-	err = newStrictDecoder(data).Decode(&dst.PieChartQuerySpans)
+	err = json.Unmarshal(data, &dst.PieChartQuerySpans)
 	if err == nil {
 		jsonPieChartQuerySpans, _ := json.Marshal(dst.PieChartQuerySpans)
 		if string(jsonPieChartQuerySpans) == "{}" { // empty struct
@@ -243,5 +243,4 @@ func (v *NullablePieChartQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

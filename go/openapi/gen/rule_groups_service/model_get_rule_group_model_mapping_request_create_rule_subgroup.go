@@ -195,4 +195,3 @@ func (v *NullableGetRuleGroupModelMappingRequestCreateRuleSubgroup) UnmarshalJSO
 	return json.Unmarshal(src, &v.value)
 }
 
-

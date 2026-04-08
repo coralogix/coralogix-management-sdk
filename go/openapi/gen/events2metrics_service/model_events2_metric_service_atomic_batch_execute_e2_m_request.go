@@ -123,4 +123,3 @@ func (v *NullableEvents2MetricServiceAtomicBatchExecuteE2MRequest) UnmarshalJSON
 	return json.Unmarshal(src, &v.value)
 }
 
-

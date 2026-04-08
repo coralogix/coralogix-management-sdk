@@ -123,4 +123,3 @@ func (v *NullableAtomicBatchExecuteE2MResponse) UnmarshalJSON(src []byte) error 
 	return json.Unmarshal(src, &v.value)
 }
 
-

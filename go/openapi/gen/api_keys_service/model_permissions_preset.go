@@ -195,4 +195,3 @@ func (v *NullablePermissionsPreset) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

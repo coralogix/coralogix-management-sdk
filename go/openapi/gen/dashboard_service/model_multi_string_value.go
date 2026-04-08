@@ -42,7 +42,7 @@ func (dst *MultiStringValue) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into MultiStringValueAll
-	err = newStrictDecoder(data).Decode(&dst.MultiStringValueAll)
+	err = json.Unmarshal(data, &dst.MultiStringValueAll)
 	if err == nil {
 		jsonMultiStringValueAll, _ := json.Marshal(dst.MultiStringValueAll)
 		if string(jsonMultiStringValueAll) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *MultiStringValue) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into MultiStringValueList
-	err = newStrictDecoder(data).Decode(&dst.MultiStringValueList)
+	err = json.Unmarshal(data, &dst.MultiStringValueList)
 	if err == nil {
 		jsonMultiStringValueList, _ := json.Marshal(dst.MultiStringValueList)
 		if string(jsonMultiStringValueList) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableMultiStringValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

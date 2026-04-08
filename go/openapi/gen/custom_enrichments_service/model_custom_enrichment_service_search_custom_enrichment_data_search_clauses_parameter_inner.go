@@ -42,7 +42,7 @@ func (dst *CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParamet
 	var err error
 	match := 0
 	// try to unmarshal data into SearchClauseId
-	err = newStrictDecoder(data).Decode(&dst.SearchClauseId)
+	err = json.Unmarshal(data, &dst.SearchClauseId)
 	if err == nil {
 		jsonSearchClauseId, _ := json.Marshal(dst.SearchClauseId)
 		if string(jsonSearchClauseId) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParamet
 	}
 
 	// try to unmarshal data into SearchClauseName
-	err = newStrictDecoder(data).Decode(&dst.SearchClauseName)
+	err = json.Unmarshal(data, &dst.SearchClauseName)
 	if err == nil {
 		jsonSearchClauseName, _ := json.Marshal(dst.SearchClauseName)
 		if string(jsonSearchClauseName) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableCustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesP
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

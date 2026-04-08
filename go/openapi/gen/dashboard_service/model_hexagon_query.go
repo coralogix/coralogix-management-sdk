@@ -58,7 +58,7 @@ func (dst *HexagonQuery) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into HexagonQueryDataprime
-	err = newStrictDecoder(data).Decode(&dst.HexagonQueryDataprime)
+	err = json.Unmarshal(data, &dst.HexagonQueryDataprime)
 	if err == nil {
 		jsonHexagonQueryDataprime, _ := json.Marshal(dst.HexagonQueryDataprime)
 		if string(jsonHexagonQueryDataprime) == "{}" { // empty struct
@@ -75,7 +75,7 @@ func (dst *HexagonQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into HexagonQueryLogs
-	err = newStrictDecoder(data).Decode(&dst.HexagonQueryLogs)
+	err = json.Unmarshal(data, &dst.HexagonQueryLogs)
 	if err == nil {
 		jsonHexagonQueryLogs, _ := json.Marshal(dst.HexagonQueryLogs)
 		if string(jsonHexagonQueryLogs) == "{}" { // empty struct
@@ -92,7 +92,7 @@ func (dst *HexagonQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into HexagonQueryMetrics
-	err = newStrictDecoder(data).Decode(&dst.HexagonQueryMetrics)
+	err = json.Unmarshal(data, &dst.HexagonQueryMetrics)
 	if err == nil {
 		jsonHexagonQueryMetrics, _ := json.Marshal(dst.HexagonQueryMetrics)
 		if string(jsonHexagonQueryMetrics) == "{}" { // empty struct
@@ -109,7 +109,7 @@ func (dst *HexagonQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into HexagonQuerySpans
-	err = newStrictDecoder(data).Decode(&dst.HexagonQuerySpans)
+	err = json.Unmarshal(data, &dst.HexagonQuerySpans)
 	if err == nil {
 		jsonHexagonQuerySpans, _ := json.Marshal(dst.HexagonQuerySpans)
 		if string(jsonHexagonQuerySpans) == "{}" { // empty struct
@@ -243,5 +243,4 @@ func (v *NullableHexagonQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

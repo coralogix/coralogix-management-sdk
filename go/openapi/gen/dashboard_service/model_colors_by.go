@@ -50,7 +50,7 @@ func (dst *ColorsBy) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into ColorsByAggregation
-	err = newStrictDecoder(data).Decode(&dst.ColorsByAggregation)
+	err = json.Unmarshal(data, &dst.ColorsByAggregation)
 	if err == nil {
 		jsonColorsByAggregation, _ := json.Marshal(dst.ColorsByAggregation)
 		if string(jsonColorsByAggregation) == "{}" { // empty struct
@@ -67,7 +67,7 @@ func (dst *ColorsBy) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into ColorsByGroupBy
-	err = newStrictDecoder(data).Decode(&dst.ColorsByGroupBy)
+	err = json.Unmarshal(data, &dst.ColorsByGroupBy)
 	if err == nil {
 		jsonColorsByGroupBy, _ := json.Marshal(dst.ColorsByGroupBy)
 		if string(jsonColorsByGroupBy) == "{}" { // empty struct
@@ -84,7 +84,7 @@ func (dst *ColorsBy) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into ColorsByStack
-	err = newStrictDecoder(data).Decode(&dst.ColorsByStack)
+	err = json.Unmarshal(data, &dst.ColorsByStack)
 	if err == nil {
 		jsonColorsByStack, _ := json.Marshal(dst.ColorsByStack)
 		if string(jsonColorsByStack) == "{}" { // empty struct
@@ -205,5 +205,4 @@ func (v *NullableColorsBy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

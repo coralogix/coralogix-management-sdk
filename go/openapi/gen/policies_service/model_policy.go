@@ -42,7 +42,7 @@ func (dst *Policy) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into PolicyLogRules
-	err = newStrictDecoder(data).Decode(&dst.PolicyLogRules)
+	err = json.Unmarshal(data, &dst.PolicyLogRules)
 	if err == nil {
 		jsonPolicyLogRules, _ := json.Marshal(dst.PolicyLogRules)
 		if string(jsonPolicyLogRules) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *Policy) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into PolicySpanRules
-	err = newStrictDecoder(data).Decode(&dst.PolicySpanRules)
+	err = json.Unmarshal(data, &dst.PolicySpanRules)
 	if err == nil {
 		jsonPolicySpanRules, _ := json.Marshal(dst.PolicySpanRules)
 		if string(jsonPolicySpanRules) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullablePolicy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

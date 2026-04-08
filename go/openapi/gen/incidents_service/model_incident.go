@@ -596,7 +596,6 @@ func (o *Incident) UnmarshalJSON(data []byte) (err error) {
 	varIncident := _Incident{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varIncident)
 
 	if err != nil {
@@ -643,5 +642,4 @@ func (v *NullableIncident) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

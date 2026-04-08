@@ -58,7 +58,7 @@ func (dst *DataTableQuery) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into DataTableQueryDataprime
-	err = newStrictDecoder(data).Decode(&dst.DataTableQueryDataprime)
+	err = json.Unmarshal(data, &dst.DataTableQueryDataprime)
 	if err == nil {
 		jsonDataTableQueryDataprime, _ := json.Marshal(dst.DataTableQueryDataprime)
 		if string(jsonDataTableQueryDataprime) == "{}" { // empty struct
@@ -75,7 +75,7 @@ func (dst *DataTableQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into DataTableQueryLogs
-	err = newStrictDecoder(data).Decode(&dst.DataTableQueryLogs)
+	err = json.Unmarshal(data, &dst.DataTableQueryLogs)
 	if err == nil {
 		jsonDataTableQueryLogs, _ := json.Marshal(dst.DataTableQueryLogs)
 		if string(jsonDataTableQueryLogs) == "{}" { // empty struct
@@ -92,7 +92,7 @@ func (dst *DataTableQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into DataTableQueryMetrics
-	err = newStrictDecoder(data).Decode(&dst.DataTableQueryMetrics)
+	err = json.Unmarshal(data, &dst.DataTableQueryMetrics)
 	if err == nil {
 		jsonDataTableQueryMetrics, _ := json.Marshal(dst.DataTableQueryMetrics)
 		if string(jsonDataTableQueryMetrics) == "{}" { // empty struct
@@ -109,7 +109,7 @@ func (dst *DataTableQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into DataTableQuerySpans
-	err = newStrictDecoder(data).Decode(&dst.DataTableQuerySpans)
+	err = json.Unmarshal(data, &dst.DataTableQuerySpans)
 	if err == nil {
 		jsonDataTableQuerySpans, _ := json.Marshal(dst.DataTableQuerySpans)
 		if string(jsonDataTableQuerySpans) == "{}" { // empty struct
@@ -243,5 +243,4 @@ func (v *NullableDataTableQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

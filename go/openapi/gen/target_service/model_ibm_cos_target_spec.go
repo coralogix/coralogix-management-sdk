@@ -207,7 +207,6 @@ func (o *IBMCosTargetSpec) UnmarshalJSON(data []byte) (err error) {
 	varIBMCosTargetSpec := _IBMCosTargetSpec{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varIBMCosTargetSpec)
 
 	if err != nil {
@@ -254,5 +253,4 @@ func (v *NullableIBMCosTargetSpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

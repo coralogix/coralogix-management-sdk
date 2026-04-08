@@ -459,7 +459,6 @@ func (o *E2MLogsQuery) UnmarshalJSON(data []byte) (err error) {
 	varE2MLogsQuery := _E2MLogsQuery{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varE2MLogsQuery)
 
 	if err != nil {
@@ -506,5 +505,4 @@ func (v *NullableE2MLogsQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

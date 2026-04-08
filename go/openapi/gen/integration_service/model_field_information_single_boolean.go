@@ -627,4 +627,3 @@ func (v *NullableFieldInformationSingleBoolean) UnmarshalJSON(src []byte) error 
 	return json.Unmarshal(src, &v.value)
 }
 
-

@@ -50,7 +50,7 @@ func (dst *Owner) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into OwnerOrganisationId
-	err = newStrictDecoder(data).Decode(&dst.OwnerOrganisationId)
+	err = json.Unmarshal(data, &dst.OwnerOrganisationId)
 	if err == nil {
 		jsonOwnerOrganisationId, _ := json.Marshal(dst.OwnerOrganisationId)
 		if string(jsonOwnerOrganisationId) == "{}" { // empty struct
@@ -67,7 +67,7 @@ func (dst *Owner) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into OwnerTeamId
-	err = newStrictDecoder(data).Decode(&dst.OwnerTeamId)
+	err = json.Unmarshal(data, &dst.OwnerTeamId)
 	if err == nil {
 		jsonOwnerTeamId, _ := json.Marshal(dst.OwnerTeamId)
 		if string(jsonOwnerTeamId) == "{}" { // empty struct
@@ -84,7 +84,7 @@ func (dst *Owner) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into OwnerUserId
-	err = newStrictDecoder(data).Decode(&dst.OwnerUserId)
+	err = json.Unmarshal(data, &dst.OwnerUserId)
 	if err == nil {
 		jsonOwnerUserId, _ := json.Marshal(dst.OwnerUserId)
 		if string(jsonOwnerUserId) == "{}" { // empty struct
@@ -205,5 +205,4 @@ func (v *NullableOwner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

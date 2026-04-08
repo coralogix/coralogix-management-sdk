@@ -303,4 +303,3 @@ func (v *NullableDeployedExtension) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

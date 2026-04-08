@@ -196,4 +196,3 @@ func (v *NullableLogsThresholdCondition) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

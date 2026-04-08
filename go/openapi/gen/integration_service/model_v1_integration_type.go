@@ -82,7 +82,7 @@ func (dst *V1IntegrationType) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into V1IntegrationTypeArm
-	err = newStrictDecoder(data).Decode(&dst.V1IntegrationTypeArm)
+	err = json.Unmarshal(data, &dst.V1IntegrationTypeArm)
 	if err == nil {
 		jsonV1IntegrationTypeArm, _ := json.Marshal(dst.V1IntegrationTypeArm)
 		if string(jsonV1IntegrationTypeArm) == "{}" { // empty struct
@@ -99,7 +99,7 @@ func (dst *V1IntegrationType) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into V1IntegrationTypeCloudformation
-	err = newStrictDecoder(data).Decode(&dst.V1IntegrationTypeCloudformation)
+	err = json.Unmarshal(data, &dst.V1IntegrationTypeCloudformation)
 	if err == nil {
 		jsonV1IntegrationTypeCloudformation, _ := json.Marshal(dst.V1IntegrationTypeCloudformation)
 		if string(jsonV1IntegrationTypeCloudformation) == "{}" { // empty struct
@@ -116,7 +116,7 @@ func (dst *V1IntegrationType) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into V1IntegrationTypeContextualData
-	err = newStrictDecoder(data).Decode(&dst.V1IntegrationTypeContextualData)
+	err = json.Unmarshal(data, &dst.V1IntegrationTypeContextualData)
 	if err == nil {
 		jsonV1IntegrationTypeContextualData, _ := json.Marshal(dst.V1IntegrationTypeContextualData)
 		if string(jsonV1IntegrationTypeContextualData) == "{}" { // empty struct
@@ -133,7 +133,7 @@ func (dst *V1IntegrationType) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into V1IntegrationTypeGenericWebhook
-	err = newStrictDecoder(data).Decode(&dst.V1IntegrationTypeGenericWebhook)
+	err = json.Unmarshal(data, &dst.V1IntegrationTypeGenericWebhook)
 	if err == nil {
 		jsonV1IntegrationTypeGenericWebhook, _ := json.Marshal(dst.V1IntegrationTypeGenericWebhook)
 		if string(jsonV1IntegrationTypeGenericWebhook) == "{}" { // empty struct
@@ -150,7 +150,7 @@ func (dst *V1IntegrationType) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into V1IntegrationTypeManaged
-	err = newStrictDecoder(data).Decode(&dst.V1IntegrationTypeManaged)
+	err = json.Unmarshal(data, &dst.V1IntegrationTypeManaged)
 	if err == nil {
 		jsonV1IntegrationTypeManaged, _ := json.Marshal(dst.V1IntegrationTypeManaged)
 		if string(jsonV1IntegrationTypeManaged) == "{}" { // empty struct
@@ -167,7 +167,7 @@ func (dst *V1IntegrationType) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into V1IntegrationTypePushBasedContextualData
-	err = newStrictDecoder(data).Decode(&dst.V1IntegrationTypePushBasedContextualData)
+	err = json.Unmarshal(data, &dst.V1IntegrationTypePushBasedContextualData)
 	if err == nil {
 		jsonV1IntegrationTypePushBasedContextualData, _ := json.Marshal(dst.V1IntegrationTypePushBasedContextualData)
 		if string(jsonV1IntegrationTypePushBasedContextualData) == "{}" { // empty struct
@@ -184,7 +184,7 @@ func (dst *V1IntegrationType) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into V1IntegrationTypeUntracked
-	err = newStrictDecoder(data).Decode(&dst.V1IntegrationTypeUntracked)
+	err = json.Unmarshal(data, &dst.V1IntegrationTypeUntracked)
 	if err == nil {
 		jsonV1IntegrationTypeUntracked, _ := json.Marshal(dst.V1IntegrationTypeUntracked)
 		if string(jsonV1IntegrationTypeUntracked) == "{}" { // empty struct
@@ -357,5 +357,4 @@ func (v *NullableV1IntegrationType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

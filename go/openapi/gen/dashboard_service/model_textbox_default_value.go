@@ -82,7 +82,7 @@ func (dst *TextboxDefaultValue) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into TextboxDefaultValueDefaultIntervalValue
-	err = newStrictDecoder(data).Decode(&dst.TextboxDefaultValueDefaultIntervalValue)
+	err = json.Unmarshal(data, &dst.TextboxDefaultValueDefaultIntervalValue)
 	if err == nil {
 		jsonTextboxDefaultValueDefaultIntervalValue, _ := json.Marshal(dst.TextboxDefaultValueDefaultIntervalValue)
 		if string(jsonTextboxDefaultValueDefaultIntervalValue) == "{}" { // empty struct
@@ -99,7 +99,7 @@ func (dst *TextboxDefaultValue) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into TextboxDefaultValueDefaultLuceneValue
-	err = newStrictDecoder(data).Decode(&dst.TextboxDefaultValueDefaultLuceneValue)
+	err = json.Unmarshal(data, &dst.TextboxDefaultValueDefaultLuceneValue)
 	if err == nil {
 		jsonTextboxDefaultValueDefaultLuceneValue, _ := json.Marshal(dst.TextboxDefaultValueDefaultLuceneValue)
 		if string(jsonTextboxDefaultValueDefaultLuceneValue) == "{}" { // empty struct
@@ -116,7 +116,7 @@ func (dst *TextboxDefaultValue) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into TextboxDefaultValueDefaultNumericValue
-	err = newStrictDecoder(data).Decode(&dst.TextboxDefaultValueDefaultNumericValue)
+	err = json.Unmarshal(data, &dst.TextboxDefaultValueDefaultNumericValue)
 	if err == nil {
 		jsonTextboxDefaultValueDefaultNumericValue, _ := json.Marshal(dst.TextboxDefaultValueDefaultNumericValue)
 		if string(jsonTextboxDefaultValueDefaultNumericValue) == "{}" { // empty struct
@@ -133,7 +133,7 @@ func (dst *TextboxDefaultValue) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into TextboxDefaultValueDefaultRegexValue
-	err = newStrictDecoder(data).Decode(&dst.TextboxDefaultValueDefaultRegexValue)
+	err = json.Unmarshal(data, &dst.TextboxDefaultValueDefaultRegexValue)
 	if err == nil {
 		jsonTextboxDefaultValueDefaultRegexValue, _ := json.Marshal(dst.TextboxDefaultValueDefaultRegexValue)
 		if string(jsonTextboxDefaultValueDefaultRegexValue) == "{}" { // empty struct
@@ -150,7 +150,7 @@ func (dst *TextboxDefaultValue) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into TextboxDefaultValueDefaultStringValue
-	err = newStrictDecoder(data).Decode(&dst.TextboxDefaultValueDefaultStringValue)
+	err = json.Unmarshal(data, &dst.TextboxDefaultValueDefaultStringValue)
 	if err == nil {
 		jsonTextboxDefaultValueDefaultStringValue, _ := json.Marshal(dst.TextboxDefaultValueDefaultStringValue)
 		if string(jsonTextboxDefaultValueDefaultStringValue) == "{}" { // empty struct
@@ -167,7 +167,7 @@ func (dst *TextboxDefaultValue) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into TextboxDefaultValueSingleNumeric
-	err = newStrictDecoder(data).Decode(&dst.TextboxDefaultValueSingleNumeric)
+	err = json.Unmarshal(data, &dst.TextboxDefaultValueSingleNumeric)
 	if err == nil {
 		jsonTextboxDefaultValueSingleNumeric, _ := json.Marshal(dst.TextboxDefaultValueSingleNumeric)
 		if string(jsonTextboxDefaultValueSingleNumeric) == "{}" { // empty struct
@@ -184,7 +184,7 @@ func (dst *TextboxDefaultValue) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into TextboxDefaultValueSingleString
-	err = newStrictDecoder(data).Decode(&dst.TextboxDefaultValueSingleString)
+	err = json.Unmarshal(data, &dst.TextboxDefaultValueSingleString)
 	if err == nil {
 		jsonTextboxDefaultValueSingleString, _ := json.Marshal(dst.TextboxDefaultValueSingleString)
 		if string(jsonTextboxDefaultValueSingleString) == "{}" { // empty struct
@@ -357,5 +357,4 @@ func (v *NullableTextboxDefaultValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

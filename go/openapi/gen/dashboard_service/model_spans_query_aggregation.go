@@ -234,4 +234,3 @@ func (v *NullableSpansQueryAggregation) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

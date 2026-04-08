@@ -339,4 +339,3 @@ func (v *NullableRulesV1Rule) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

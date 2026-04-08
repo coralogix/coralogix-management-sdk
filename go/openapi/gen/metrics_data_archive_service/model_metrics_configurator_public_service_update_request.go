@@ -42,7 +42,7 @@ func (dst *MetricsConfiguratorPublicServiceUpdateRequest) UnmarshalJSON(data []b
 	var err error
 	match := 0
 	// try to unmarshal data into UpdateRequestIbm
-	err = newStrictDecoder(data).Decode(&dst.UpdateRequestIbm)
+	err = json.Unmarshal(data, &dst.UpdateRequestIbm)
 	if err == nil {
 		jsonUpdateRequestIbm, _ := json.Marshal(dst.UpdateRequestIbm)
 		if string(jsonUpdateRequestIbm) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *MetricsConfiguratorPublicServiceUpdateRequest) UnmarshalJSON(data []b
 	}
 
 	// try to unmarshal data into UpdateRequestS3
-	err = newStrictDecoder(data).Decode(&dst.UpdateRequestS3)
+	err = json.Unmarshal(data, &dst.UpdateRequestS3)
 	if err == nil {
 		jsonUpdateRequestS3, _ := json.Marshal(dst.UpdateRequestS3)
 		if string(jsonUpdateRequestS3) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableMetricsConfiguratorPublicServiceUpdateRequest) UnmarshalJSON(sr
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

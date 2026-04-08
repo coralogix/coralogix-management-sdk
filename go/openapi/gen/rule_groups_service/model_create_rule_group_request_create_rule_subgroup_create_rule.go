@@ -303,4 +303,3 @@ func (v *NullableCreateRuleGroupRequestCreateRuleSubgroupCreateRule) UnmarshalJS
 	return json.Unmarshal(src, &v.value)
 }
 
-

@@ -159,4 +159,3 @@ func (v *NullableCreateApiKeyRequestKeyPermissions) UnmarshalJSON(src []byte) er
 	return json.Unmarshal(src, &v.value)
 }
 
-

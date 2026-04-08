@@ -123,4 +123,3 @@ func (v *NullableGetContextualDataIntegrationDefinitionResponse) UnmarshalJSON(s
 	return json.Unmarshal(src, &v.value)
 }
 
-

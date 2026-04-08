@@ -163,7 +163,6 @@ func (o *V2MetricField) UnmarshalJSON(data []byte) (err error) {
 	varV2MetricField := _V2MetricField{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varV2MetricField)
 
 	if err != nil {
@@ -210,5 +209,4 @@ func (v *NullableV2MetricField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

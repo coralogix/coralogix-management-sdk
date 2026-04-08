@@ -145,7 +145,6 @@ func (o *PaginationRequest) UnmarshalJSON(data []byte) (err error) {
 	varPaginationRequest := _PaginationRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varPaginationRequest)
 
 	if err != nil {
@@ -192,5 +191,4 @@ func (v *NullablePaginationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

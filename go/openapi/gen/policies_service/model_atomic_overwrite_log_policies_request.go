@@ -107,7 +107,6 @@ func (o *AtomicOverwriteLogPoliciesRequest) UnmarshalJSON(data []byte) (err erro
 	varAtomicOverwriteLogPoliciesRequest := _AtomicOverwriteLogPoliciesRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varAtomicOverwriteLogPoliciesRequest)
 
 	if err != nil {
@@ -154,5 +153,4 @@ func (v *NullableAtomicOverwriteLogPoliciesRequest) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

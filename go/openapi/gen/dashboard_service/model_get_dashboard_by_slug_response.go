@@ -520,4 +520,3 @@ func (v *NullableGetDashboardBySlugResponse) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

@@ -1,0 +1,79 @@
+openapi: 3.0.3
+info:
+  title: Combo OneOf Compat
+  version: 1.0.0
+paths:
+  /combo-oneof:
+    get:
+      operationId: getComboOneOf
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ComboOneOf"
+components:
+  schemas:
+    ComboOneOf:
+      oneOf:
+        - $ref: "#/components/schemas/AlphaXrayVariant"
+        - $ref: "#/components/schemas/AlphaYankeeVariant"
+        - $ref: "#/components/schemas/BetaXrayVariant"
+        - $ref: "#/components/schemas/BetaYankeeVariant"
+    AlphaXrayVariant:
+      type: object
+      additionalProperties: false
+      required:
+        - common
+        - alpha
+        - xray
+      properties:
+        common:
+          type: string
+        alpha:
+          type: string
+        xray:
+          type: string
+    AlphaYankeeVariant:
+      type: object
+      additionalProperties: false
+      required:
+        - common
+        - alpha
+        - yankee
+      properties:
+        common:
+          type: string
+        alpha:
+          type: string
+        yankee:
+          type: string
+    BetaXrayVariant:
+      type: object
+      additionalProperties: false
+      required:
+        - common
+        - beta
+        - xray
+      properties:
+        common:
+          type: string
+        beta:
+          type: string
+        xray:
+          type: string
+    BetaYankeeVariant:
+      type: object
+      additionalProperties: false
+      required:
+        - common
+        - beta
+        - yankee
+      properties:
+        common:
+          type: string
+        beta:
+          type: string
+        yankee:
+          type: string

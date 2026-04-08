@@ -231,4 +231,3 @@ func (v *NullableSystemRole) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

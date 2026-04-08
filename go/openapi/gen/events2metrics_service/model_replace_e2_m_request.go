@@ -107,7 +107,6 @@ func (o *ReplaceE2MRequest) UnmarshalJSON(data []byte) (err error) {
 	varReplaceE2MRequest := _ReplaceE2MRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varReplaceE2MRequest)
 
 	if err != nil {
@@ -154,5 +153,4 @@ func (v *NullableReplaceE2MRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

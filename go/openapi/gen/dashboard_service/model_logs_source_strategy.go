@@ -50,7 +50,7 @@ func (dst *LogsSourceStrategy) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into LogsSourceStrategyDuration
-	err = newStrictDecoder(data).Decode(&dst.LogsSourceStrategyDuration)
+	err = json.Unmarshal(data, &dst.LogsSourceStrategyDuration)
 	if err == nil {
 		jsonLogsSourceStrategyDuration, _ := json.Marshal(dst.LogsSourceStrategyDuration)
 		if string(jsonLogsSourceStrategyDuration) == "{}" { // empty struct
@@ -67,7 +67,7 @@ func (dst *LogsSourceStrategy) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into LogsSourceStrategyInstant
-	err = newStrictDecoder(data).Decode(&dst.LogsSourceStrategyInstant)
+	err = json.Unmarshal(data, &dst.LogsSourceStrategyInstant)
 	if err == nil {
 		jsonLogsSourceStrategyInstant, _ := json.Marshal(dst.LogsSourceStrategyInstant)
 		if string(jsonLogsSourceStrategyInstant) == "{}" { // empty struct
@@ -84,7 +84,7 @@ func (dst *LogsSourceStrategy) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into LogsSourceStrategyRange
-	err = newStrictDecoder(data).Decode(&dst.LogsSourceStrategyRange)
+	err = json.Unmarshal(data, &dst.LogsSourceStrategyRange)
 	if err == nil {
 		jsonLogsSourceStrategyRange, _ := json.Marshal(dst.LogsSourceStrategyRange)
 		if string(jsonLogsSourceStrategyRange) == "{}" { // empty struct
@@ -205,5 +205,4 @@ func (v *NullableLogsSourceStrategy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -42,7 +42,7 @@ func (dst *MetricsConfiguratorPublicServiceConfigureTenantRequest) UnmarshalJSON
 	var err error
 	match := 0
 	// try to unmarshal data into ConfigureTenantRequestIbm
-	err = newStrictDecoder(data).Decode(&dst.ConfigureTenantRequestIbm)
+	err = json.Unmarshal(data, &dst.ConfigureTenantRequestIbm)
 	if err == nil {
 		jsonConfigureTenantRequestIbm, _ := json.Marshal(dst.ConfigureTenantRequestIbm)
 		if string(jsonConfigureTenantRequestIbm) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *MetricsConfiguratorPublicServiceConfigureTenantRequest) UnmarshalJSON
 	}
 
 	// try to unmarshal data into ConfigureTenantRequestS3
-	err = newStrictDecoder(data).Decode(&dst.ConfigureTenantRequestS3)
+	err = json.Unmarshal(data, &dst.ConfigureTenantRequestS3)
 	if err == nil {
 		jsonConfigureTenantRequestS3, _ := json.Marshal(dst.ConfigureTenantRequestS3)
 		if string(jsonConfigureTenantRequestS3) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableMetricsConfiguratorPublicServiceConfigureTenantRequest) Unmarsh
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

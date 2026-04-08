@@ -671,4 +671,3 @@ func (v *NullableWidgetsGauge) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-

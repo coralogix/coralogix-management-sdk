@@ -123,4 +123,3 @@ func (v *NullableGetDefaultPresetSummaryResponse) UnmarshalJSON(src []byte) erro
 	return json.Unmarshal(src, &v.value)
 }
 
-

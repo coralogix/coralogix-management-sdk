@@ -50,7 +50,7 @@ func (dst *SlosServiceReplaceSloRequest) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into SloApmSli
-	err = newStrictDecoder(data).Decode(&dst.SloApmSli)
+	err = json.Unmarshal(data, &dst.SloApmSli)
 	if err == nil {
 		jsonSloApmSli, _ := json.Marshal(dst.SloApmSli)
 		if string(jsonSloApmSli) == "{}" { // empty struct
@@ -67,7 +67,7 @@ func (dst *SlosServiceReplaceSloRequest) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into SloRequestBasedMetricSli
-	err = newStrictDecoder(data).Decode(&dst.SloRequestBasedMetricSli)
+	err = json.Unmarshal(data, &dst.SloRequestBasedMetricSli)
 	if err == nil {
 		jsonSloRequestBasedMetricSli, _ := json.Marshal(dst.SloRequestBasedMetricSli)
 		if string(jsonSloRequestBasedMetricSli) == "{}" { // empty struct
@@ -84,7 +84,7 @@ func (dst *SlosServiceReplaceSloRequest) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into SloWindowBasedMetricSli
-	err = newStrictDecoder(data).Decode(&dst.SloWindowBasedMetricSli)
+	err = json.Unmarshal(data, &dst.SloWindowBasedMetricSli)
 	if err == nil {
 		jsonSloWindowBasedMetricSli, _ := json.Marshal(dst.SloWindowBasedMetricSli)
 		if string(jsonSloWindowBasedMetricSli) == "{}" { // empty struct
@@ -205,5 +205,4 @@ func (v *NullableSlosServiceReplaceSloRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

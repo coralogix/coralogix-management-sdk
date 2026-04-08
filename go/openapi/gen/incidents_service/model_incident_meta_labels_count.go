@@ -135,7 +135,6 @@ func (o *IncidentMetaLabelsCount) UnmarshalJSON(data []byte) (err error) {
 	varIncidentMetaLabelsCount := _IncidentMetaLabelsCount{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varIncidentMetaLabelsCount)
 
 	if err != nil {
@@ -182,5 +181,4 @@ func (v *NullableIncidentMetaLabelsCount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -42,7 +42,7 @@ func (dst *WidgetScope) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into WidgetScopeAllWidgets
-	err = newStrictDecoder(data).Decode(&dst.WidgetScopeAllWidgets)
+	err = json.Unmarshal(data, &dst.WidgetScopeAllWidgets)
 	if err == nil {
 		jsonWidgetScopeAllWidgets, _ := json.Marshal(dst.WidgetScopeAllWidgets)
 		if string(jsonWidgetScopeAllWidgets) == "{}" { // empty struct
@@ -59,7 +59,7 @@ func (dst *WidgetScope) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into WidgetScopeSpecificWidgets
-	err = newStrictDecoder(data).Decode(&dst.WidgetScopeSpecificWidgets)
+	err = json.Unmarshal(data, &dst.WidgetScopeSpecificWidgets)
 	if err == nil {
 		jsonWidgetScopeSpecificWidgets, _ := json.Marshal(dst.WidgetScopeSpecificWidgets)
 		if string(jsonWidgetScopeSpecificWidgets) == "{}" { // empty struct
@@ -167,5 +167,4 @@ func (v *NullableWidgetScope) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

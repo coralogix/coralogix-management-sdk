@@ -269,4 +269,3 @@ func (v *NullableNotificationDestination) UnmarshalJSON(src []byte) error {
 	return json.Unmarshal(src, &v.value)
 }
 
-
