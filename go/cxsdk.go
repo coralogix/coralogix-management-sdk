@@ -29,6 +29,7 @@ import (
 const (
 	GrpcUS1 = "ng-api-grpc.coralogix.us:443"
 	GrpcUS2 = "ng-api-grpc.cx498.coralogix.com:443"
+	GrpcUS3 = "ng-api-grpc.us3.coralogix.com:443"
 	GrpcEU1 = "ng-api-grpc.coralogix.com:443"
 	GrpcEU2 = "ng-api-grpc.eu2.coralogix.com:443"
 	GrpcAP1 = "ng-api-grpc.app.coralogix.in:443"
@@ -40,6 +41,7 @@ const (
 const (
 	RestUS1 = "https://ng-api-http.coralogix.us"
 	RestUS2 = "https://ng-api-http.cx498.coralogix.com"
+	RestUS3 = "https://ng-api-http.us3.coralogix.com"
 	RestEU1 = "https://ng-api-http.coralogix.com"
 	RestEU2 = "https://ng-api-http.eu2.coralogix.com"
 	RestAP1 = "https://ng-api-http.app.coralogix.in"
@@ -355,6 +357,8 @@ func CoralogixGrpcEndpointFromRegion(regionIdentifier string) string {
 		return GrpcUS1
 	case "us2":
 		return GrpcUS2
+	case "us3":
+		return GrpcUS3
 	case "eu1":
 		return GrpcEU1
 	case "eu2":
@@ -377,6 +381,8 @@ func CoralogixRestEndpointFromRegion(regionIdentifier string) string {
 		return RestUS1
 	case "us2":
 		return RestUS2
+	case "us3":
+		return RestUS3
 	case "eu1":
 		return RestEU1
 	case "eu2":

@@ -46,6 +46,8 @@ var terraformEnvironmentAliasToSdkEnvironment = map[string]string{
 	"US1":     "us1",
 	"USA2":    "us2",
 	"US2":     "us2",
+	"USA3":    "us3",
+	"US3":     "us3",
 }
 
 // Resource represents a resource in the Terraform state file
