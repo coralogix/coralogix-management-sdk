@@ -203,6 +203,8 @@ func URLFromRegion(region string) (string, bool) {
 		url.Host = "api.us1.coralogix.com"
 	case "us2":
 		url.Host = "api.us2.coralogix.com"
+	case "us3":
+		url.Host = "api.us3.coralogix.com"
 	case "ap1":
 		url.Host = "api.ap1.coralogix.com"
 	case "ap2":
