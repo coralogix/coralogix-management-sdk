@@ -11,7 +11,6 @@
           "SAML Configuration Service"
         ],
         "summary": "Activate/Deactivate SAML",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -31,8 +30,7 @@
                     "type": "integer",
                     "format": "int64"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -75,7 +73,6 @@
           "SAML Configuration Service"
         ],
         "summary": "Get SAML Configuration",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -129,7 +126,6 @@
           "SAML Configuration Service"
         ],
         "summary": "Set IDP Parameters",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -149,8 +145,7 @@
                     "type": "integer",
                     "format": "int64"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -193,7 +188,6 @@
           "SAML Configuration Service"
         ],
         "summary": "Get SP Parameters",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -252,7 +246,20 @@
             "$ref": "#/components/schemas/ColorsByAggregation"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "aggregation"
+        ]
+      },
+      "ColorsByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/ColorsByCategory"
+          }
+        },
+        "required": [
+          "category"
+        ]
       },
       "ColorsByGroupBy": {
         "type": "object",
@@ -261,7 +268,20 @@
             "$ref": "#/components/schemas/ColorsByGroupBy"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "groupBy"
+        ]
+      },
+      "ColorsByQuery": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "$ref": "#/components/schemas/ColorsByQuery"
+          }
+        },
+        "required": [
+          "query"
+        ]
       },
       "ColorsByStack": {
         "type": "object",
@@ -270,7 +290,9 @@
             "$ref": "#/components/schemas/ColorsByStack"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "stack"
+        ]
       },
       "FieldGroup": {
         "type": "object",
@@ -311,9 +333,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -333,9 +355,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -448,7 +470,9 @@
             "format": "int64"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "metadataContent"
+        ]
       },
       "IDPParametersMetadataUrl": {
         "externalDocs": {
@@ -480,7 +504,9 @@
             "format": "int64"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "metadataUrl"
+        ]
       },
       "MinMaxAuto": {
         "externalDocs": {
@@ -494,7 +520,9 @@
             "$ref": "#/components/schemas/MinMaxAuto"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "auto"
+        ]
       },
       "MinMaxCustom": {
         "externalDocs": {
@@ -508,7 +536,9 @@
             "$ref": "#/components/schemas/MinMaxCustom"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "custom"
+        ]
       },
       "MultipleValues": {
         "type": "object",
@@ -592,14 +622,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

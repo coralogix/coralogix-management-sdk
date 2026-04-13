@@ -11,7 +11,6 @@
           "Global routers service"
         ],
         "summary": "List Global Routers",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -64,7 +63,6 @@
           "Global routers service"
         ],
         "summary": "Replace Global Router",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -80,8 +78,7 @@
                   "router": {
                     "$ref": "#/components/schemas/GlobalRouter"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -104,7 +101,6 @@
           "Global routers service"
         ],
         "summary": "Create Global Router",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -120,8 +116,7 @@
                   "router": {
                     "$ref": "#/components/schemas/GlobalRouter"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -146,7 +141,6 @@
           "Global routers service"
         ],
         "summary": "Batch Get Global Routers",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -185,7 +179,6 @@
           "Global routers service"
         ],
         "summary": "Get Global Router",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -219,7 +212,6 @@
           "Global routers service"
         ],
         "summary": "Delete Global Router",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -285,7 +277,20 @@
             "$ref": "#/components/schemas/ColorsByAggregation"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "aggregation"
+        ]
+      },
+      "ColorsByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/ColorsByCategory"
+          }
+        },
+        "required": [
+          "category"
+        ]
       },
       "ColorsByGroupBy": {
         "type": "object",
@@ -294,7 +299,20 @@
             "$ref": "#/components/schemas/ColorsByGroupBy"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "groupBy"
+        ]
+      },
+      "ColorsByQuery": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "$ref": "#/components/schemas/ColorsByQuery"
+          }
+        },
+        "required": [
+          "query"
+        ]
       },
       "ColorsByStack": {
         "type": "object",
@@ -303,7 +321,9 @@
             "$ref": "#/components/schemas/ColorsByStack"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "stack"
+        ]
       },
       "CreateGlobalRouterResponse": {
         "externalDocs": {
@@ -378,9 +398,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -400,9 +420,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -455,6 +475,9 @@
           },
           "description": {
             "type": "string"
+          },
+          "disabled": {
+            "type": "boolean"
           },
           "entityLabels": {
             "type": "object",
@@ -529,7 +552,9 @@
             "$ref": "#/components/schemas/MinMaxAuto"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "auto"
+        ]
       },
       "MinMaxCustom": {
         "externalDocs": {
@@ -543,7 +568,9 @@
             "$ref": "#/components/schemas/MinMaxCustom"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "custom"
+        ]
       },
       "MultipleValues": {
         "type": "object",
@@ -693,14 +720,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

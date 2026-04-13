@@ -11,7 +11,6 @@
           "Presets service"
         ],
         "summary": "Batch Get Presets",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -50,7 +49,6 @@
           "Presets service"
         ],
         "summary": "Replace Custom Preset",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -66,8 +64,7 @@
                   "preset": {
                     "$ref": "#/components/schemas/Preset"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -90,7 +87,6 @@
           "Presets service"
         ],
         "summary": "Create Custom Preset",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -106,8 +102,7 @@
                   "preset": {
                     "$ref": "#/components/schemas/Preset"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -132,7 +127,6 @@
           "Presets service"
         ],
         "summary": "Delete Custom Preset",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -168,7 +162,6 @@
           "Presets service"
         ],
         "summary": "Set Custom Preset As Default",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -204,7 +197,6 @@
           "Presets service"
         ],
         "summary": "Get Default Preset Summary",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -214,7 +206,7 @@
             "in": "query",
             "name": "connector_type",
             "schema": {
-              "$ref": "#/components/schemas/ConnectorType"
+              "$ref": "#/components/schemas/notification_center.ConnectorType"
             },
             "style": "form"
           },
@@ -247,7 +239,6 @@
           "Presets service"
         ],
         "summary": "Get System Default Preset Summary",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -257,7 +248,7 @@
             "in": "query",
             "name": "connector_type",
             "schema": {
-              "$ref": "#/components/schemas/ConnectorType"
+              "$ref": "#/components/schemas/notification_center.ConnectorType"
             },
             "style": "form"
           },
@@ -290,7 +281,6 @@
           "Presets service"
         ],
         "summary": "Get Preset",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -326,7 +316,6 @@
           "Presets service"
         ],
         "summary": "Set Preset As Default",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -362,7 +351,6 @@
           "Presets service"
         ],
         "summary": "List Preset Summaries",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -372,7 +360,7 @@
             "in": "query",
             "name": "connector_type",
             "schema": {
-              "$ref": "#/components/schemas/ConnectorType"
+              "$ref": "#/components/schemas/notification_center.ConnectorType"
             },
             "style": "form"
           },
@@ -448,7 +436,20 @@
             "$ref": "#/components/schemas/ColorsByAggregation"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "aggregation"
+        ]
+      },
+      "ColorsByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/ColorsByCategory"
+          }
+        },
+        "required": [
+          "category"
+        ]
       },
       "ColorsByGroupBy": {
         "type": "object",
@@ -457,7 +458,20 @@
             "$ref": "#/components/schemas/ColorsByGroupBy"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "groupBy"
+        ]
+      },
+      "ColorsByQuery": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "$ref": "#/components/schemas/ColorsByQuery"
+          }
+        },
+        "required": [
+          "query"
+        ]
       },
       "ColorsByStack": {
         "type": "object",
@@ -466,7 +480,9 @@
             "$ref": "#/components/schemas/ColorsByStack"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "stack"
+        ]
       },
       "ConfigOverrides": {
         "type": "object",
@@ -481,18 +497,6 @@
             "type": "string"
           }
         }
-      },
-      "ConnectorType": {
-        "type": "string",
-        "enum": [
-          "CONNECTOR_TYPE_UNSPECIFIED",
-          "SLACK",
-          "GENERIC_HTTPS",
-          "PAGERDUTY",
-          "IBM_EVENT_NOTIFICATIONS",
-          "SERVICE_NOW",
-          "EMAIL"
-        ]
       },
       "CreateCustomPresetResponse": {
         "externalDocs": {
@@ -550,9 +554,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -572,9 +576,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -667,7 +671,9 @@
             "$ref": "#/components/schemas/MinMaxAuto"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "auto"
+        ]
       },
       "MinMaxCustom": {
         "externalDocs": {
@@ -681,7 +687,9 @@
             "$ref": "#/components/schemas/MinMaxCustom"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "custom"
+        ]
       },
       "MultipleValues": {
         "type": "object",
@@ -704,7 +712,9 @@
             "$ref": "#/components/schemas/MatchEntityTypeCondition"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "matchEntityType"
+        ]
       },
       "NotificationCenterConditionTypeMatchEntityTypeAndSubType": {
         "type": "object",
@@ -713,7 +723,9 @@
             "$ref": "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "matchEntityTypeAndSubType"
+        ]
       },
       "Preset": {
         "externalDocs": {
@@ -734,7 +746,7 @@
             }
           },
           "connectorType": {
-            "$ref": "#/components/schemas/ConnectorType"
+            "$ref": "#/components/schemas/notification_center.ConnectorType"
           },
           "createTime": {
             "type": "string",
@@ -781,7 +793,7 @@
             "$ref": "#/components/schemas/AttachmentConfig"
           },
           "connectorType": {
-            "$ref": "#/components/schemas/ConnectorType"
+            "$ref": "#/components/schemas/notification_center.ConnectorType"
           },
           "createTime": {
             "type": "string",
@@ -880,6 +892,18 @@
           }
         ]
       },
+      "notification_center.ConnectorType": {
+        "type": "string",
+        "enum": [
+          "CONNECTOR_TYPE_UNSPECIFIED",
+          "SLACK",
+          "GENERIC_HTTPS",
+          "PAGERDUTY",
+          "IBM_EVENT_NOTIFICATIONS",
+          "SERVICE_NOW",
+          "EMAIL"
+        ]
+      },
       "notification_center.EntityType": {
         "type": "string",
         "enum": [
@@ -914,14 +938,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

@@ -11,7 +11,6 @@
           "Connectors service"
         ],
         "summary": "List Connectors",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -21,7 +20,7 @@
             "in": "query",
             "name": "connector_type",
             "schema": {
-              "$ref": "#/components/schemas/ConnectorType"
+              "$ref": "#/components/schemas/notification_center.ConnectorType"
             },
             "style": "form"
           },
@@ -52,7 +51,6 @@
           "Connectors service"
         ],
         "summary": "Replace a Connector",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -68,8 +66,7 @@
                   "connector": {
                     "$ref": "#/components/schemas/Connector"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -92,7 +89,6 @@
           "Connectors service"
         ],
         "summary": "Create a Connector",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -108,8 +104,7 @@
                   "connector": {
                     "$ref": "#/components/schemas/Connector"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -134,7 +129,6 @@
           "Connectors service"
         ],
         "summary": "Batch Get Connectors",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -176,7 +170,6 @@
           "Connectors service"
         ],
         "summary": "Batch Get Connectors Summaries",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -215,7 +208,6 @@
           "Connectors service"
         ],
         "summary": "List Connector Summaries",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -225,7 +217,7 @@
             "in": "query",
             "name": "connector_type",
             "schema": {
-              "$ref": "#/components/schemas/ConnectorType"
+              "$ref": "#/components/schemas/notification_center.ConnectorType"
             },
             "style": "form"
           },
@@ -258,7 +250,6 @@
           "Connectors service"
         ],
         "summary": "Get Connector Type Summaries",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -293,7 +284,6 @@
           "Connectors service"
         ],
         "summary": "Get a Connector",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -327,7 +317,6 @@
           "Connectors service"
         ],
         "summary": "Delete a Connector",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -419,7 +408,20 @@
             "$ref": "#/components/schemas/ColorsByAggregation"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "aggregation"
+        ]
+      },
+      "ColorsByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/ColorsByCategory"
+          }
+        },
+        "required": [
+          "category"
+        ]
       },
       "ColorsByGroupBy": {
         "type": "object",
@@ -428,7 +430,20 @@
             "$ref": "#/components/schemas/ColorsByGroupBy"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "groupBy"
+        ]
+      },
+      "ColorsByQuery": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "$ref": "#/components/schemas/ColorsByQuery"
+          }
+        },
+        "required": [
+          "query"
+        ]
       },
       "ColorsByStack": {
         "type": "object",
@@ -437,7 +452,9 @@
             "$ref": "#/components/schemas/ColorsByStack"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "stack"
+        ]
       },
       "Connector": {
         "externalDocs": {
@@ -484,7 +501,7 @@
             "format": "int64"
           },
           "type": {
-            "$ref": "#/components/schemas/ConnectorType"
+            "$ref": "#/components/schemas/notification_center.ConnectorType"
           },
           "updateTime": {
             "type": "string",
@@ -512,6 +529,15 @@
       "ConnectorSummary": {
         "type": "object",
         "properties": {
+          "configOverrides": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityTypeConfigOverrides"
+            }
+          },
+          "connectorConfig": {
+            "$ref": "#/components/schemas/ConnectorConfig"
+          },
           "createTime": {
             "type": "string",
             "format": "date-time"
@@ -530,25 +556,13 @@
             "format": "int64"
           },
           "type": {
-            "$ref": "#/components/schemas/ConnectorType"
+            "$ref": "#/components/schemas/notification_center.ConnectorType"
           },
           "updateTime": {
             "type": "string",
             "format": "date-time"
           }
         }
-      },
-      "ConnectorType": {
-        "type": "string",
-        "enum": [
-          "CONNECTOR_TYPE_UNSPECIFIED",
-          "SLACK",
-          "GENERIC_HTTPS",
-          "PAGERDUTY",
-          "IBM_EVENT_NOTIFICATIONS",
-          "SERVICE_NOW",
-          "EMAIL"
-        ]
       },
       "ConnectorTypeSummary": {
         "externalDocs": {
@@ -565,7 +579,7 @@
             "format": "int64"
           },
           "type": {
-            "$ref": "#/components/schemas/ConnectorType"
+            "$ref": "#/components/schemas/notification_center.ConnectorType"
           }
         }
       },
@@ -661,9 +675,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -683,9 +697,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -786,7 +800,9 @@
             "$ref": "#/components/schemas/MinMaxAuto"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "auto"
+        ]
       },
       "MinMaxCustom": {
         "externalDocs": {
@@ -800,7 +816,9 @@
             "$ref": "#/components/schemas/MinMaxCustom"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "custom"
+        ]
       },
       "MultipleValues": {
         "type": "object",
@@ -877,6 +895,18 @@
           }
         }
       },
+      "notification_center.ConnectorType": {
+        "type": "string",
+        "enum": [
+          "CONNECTOR_TYPE_UNSPECIFIED",
+          "SLACK",
+          "GENERIC_HTTPS",
+          "PAGERDUTY",
+          "IBM_EVENT_NOTIFICATIONS",
+          "SERVICE_NOW",
+          "EMAIL"
+        ]
+      },
       "notification_center.EntityType": {
         "type": "string",
         "enum": [
@@ -892,14 +922,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

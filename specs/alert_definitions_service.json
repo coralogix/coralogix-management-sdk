@@ -11,7 +11,6 @@
           "Alert definitions service"
         ],
         "summary": "Get a list of all accessible alert definitions",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -30,6 +29,7 @@
               "properties": {
                 "enabledFilter": {},
                 "entityLabelsFilter": {},
+                "idFilter": {},
                 "lastTriggeredTimeRangeFilter": {},
                 "modifiedTimeRangeFilter": {},
                 "nameFilter": {},
@@ -132,7 +132,6 @@
           "Alert definitions service"
         ],
         "summary": "Replace an alert definition",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -153,8 +152,7 @@
                     "description": "Alert definition ID",
                     "type": "string"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -198,7 +196,6 @@
           "Alert definitions service"
         ],
         "summary": "Create an alert",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -214,8 +211,7 @@
                   "alertDefProperties": {
                     "$ref": "#/components/schemas/AlertDefProperties"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -261,7 +257,7 @@
           "Alert definitions service"
         ],
         "summary": "Get counts for filter options",
-        "description": "Returns counts for different filter options based on the provided filters\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
+        "description": "Returns counts for different filter options based on the provided filters",
         "externalDocs": {
           "url": ""
         },
@@ -324,13 +320,81 @@
         ]
       }
     },
+    "/alerts/alerts/v3/all/delete": {
+      "post": {
+        "tags": [
+          "Alert definitions service"
+        ],
+        "summary": "Bulk delete alert definitions",
+        "description": "Delete multiple alert definitions by their IDs. The operation is atomic - either all alerts are deleted or none are.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertDefsService_BulkDeleteAlertDefs",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Bulk delete alert definitions request",
+                "description": "A request to delete multiple alert defintions by their IDs",
+                "type": "object",
+                "properties": {
+                  "ids": {
+                    "example": [
+                      "123e4567-e89b-12d3-a456-426614174000"
+                    ],
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkDeleteAlertDefsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "alerts:UpdateConfig"
+        ]
+      }
+    },
     "/alerts/alerts/v3/all/download": {
       "get": {
         "tags": [
           "Alert definitions service"
         ],
         "summary": "Download alerts",
-        "description": "Download a list of all accessible alert definitions in base64-encoded byte format.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
+        "description": "Download a list of all accessible alert definitions in base64-encoded byte format.",
         "externalDocs": {
           "url": ""
         },
@@ -376,7 +440,6 @@
           "Alert definitions service"
         ],
         "summary": "Bulk replace alert definitions",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -395,8 +458,7 @@
                       "$ref": "#/components/schemas/AlertDefToReplace"
                     }
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -442,7 +504,6 @@
           "Alert definitions service"
         ],
         "summary": "Get alert definition by alert version ID",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -501,7 +562,6 @@
           "Alert definitions service"
         ],
         "summary": "Get alert definition by ID",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -558,7 +618,6 @@
           "Alert definitions service"
         ],
         "summary": "DeleteAlertDef",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -656,7 +715,7 @@
             "type": "string"
           },
           "createdTime": {
-            "example": "2023-10-01T12:00:00.000Z",
+            "example": "2023-10-01T12:00:00Z",
             "description": "The time when the alert definition was created",
             "type": "string",
             "format": "date-time"
@@ -667,7 +726,7 @@
             "type": "string"
           },
           "lastTriggeredTime": {
-            "example": "2023-10-01T12:00:00.000Z",
+            "example": "2023-10-01T12:00:00Z",
             "description": "The last time the alert definition was triggered",
             "type": "string",
             "format": "date-time"
@@ -676,7 +735,7 @@
             "$ref": "#/components/schemas/AlertDefStatus"
           },
           "updatedTime": {
-            "example": "2023-10-01T12:00:00.000Z",
+            "example": "2023-10-01T12:00:00Z",
             "description": "The time when the alert definition was last updated",
             "type": "string",
             "format": "date-time"
@@ -791,6 +850,18 @@
       "AlertDefProperties": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesFlow"
+          },
+          {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
           },
           {
@@ -803,22 +874,10 @@
             "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
-          },
-          {
             "$ref": "#/components/schemas/AlertDefPropertiesSloThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
@@ -827,7 +886,7 @@
             "$ref": "#/components/schemas/AlertDefPropertiesLogsThreshold"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesFlow"
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
           }
         ]
       },
@@ -913,7 +972,9 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "flow"
+        ]
       },
       "AlertDefPropertiesLogsAnomaly": {
         "externalDocs": {
@@ -997,7 +1058,9 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "logsAnomaly"
+        ]
       },
       "AlertDefPropertiesLogsImmediate": {
         "externalDocs": {
@@ -1081,7 +1144,9 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "logsImmediate"
+        ]
       },
       "AlertDefPropertiesLogsNewValue": {
         "externalDocs": {
@@ -1165,7 +1230,9 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "logsNewValue"
+        ]
       },
       "AlertDefPropertiesLogsRatioThreshold": {
         "externalDocs": {
@@ -1249,7 +1316,9 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "logsRatioThreshold"
+        ]
       },
       "AlertDefPropertiesLogsThreshold": {
         "externalDocs": {
@@ -1333,7 +1402,9 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "logsThreshold"
+        ]
       },
       "AlertDefPropertiesLogsTimeRelativeThreshold": {
         "externalDocs": {
@@ -1417,7 +1488,9 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "logsTimeRelativeThreshold"
+        ]
       },
       "AlertDefPropertiesLogsUniqueCount": {
         "externalDocs": {
@@ -1501,7 +1574,9 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "logsUniqueCount"
+        ]
       },
       "AlertDefPropertiesMetricAnomaly": {
         "externalDocs": {
@@ -1585,7 +1660,9 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "metricAnomaly"
+        ]
       },
       "AlertDefPropertiesMetricThreshold": {
         "externalDocs": {
@@ -1669,7 +1746,9 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "metricThreshold"
+        ]
       },
       "AlertDefPropertiesSloThreshold": {
         "externalDocs": {
@@ -1753,7 +1832,9 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "sloThreshold"
+        ]
       },
       "AlertDefPropertiesTracingImmediate": {
         "externalDocs": {
@@ -1837,7 +1918,9 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "tracingImmediate"
+        ]
       },
       "AlertDefPropertiesTracingThreshold": {
         "externalDocs": {
@@ -1921,7 +2004,9 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "tracingThreshold"
+        ]
       },
       "AlertDefStatus": {
         "type": "string",
@@ -2012,6 +2097,36 @@
           }
         }
       },
+      "BulkDeleteAlertDefsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Bulk delete alert definitions response",
+        "description": "A response to the bulk deletion of alert definitions. The operation is atomic - either all alerts are deleted or none are.",
+        "type": "object",
+        "properties": {
+          "deletedIds": {
+            "example": [
+              "123e4567-e89b-12d3-a456-426614174000"
+            ],
+            "type": "array",
+            "items": {
+              "description": "IDs of alert definitions that were successfully deleted",
+              "type": "string"
+            }
+          },
+          "notFoundIds": {
+            "example": [
+              "123e4567-e89b-12d3-a456-426614174000"
+            ],
+            "type": "array",
+            "items": {
+              "description": "IDs of alert definitions that were not found",
+              "type": "string"
+            }
+          }
+        }
+      },
       "BulkReplaceAlertDefsResponse": {
         "externalDocs": {
           "url": ""
@@ -2082,7 +2197,9 @@
             }
           }
         },
-        "additionalProperties": false
+        "required": [
+          "dual"
+        ]
       },
       "BurnRateThresholdSingle": {
         "externalDocs": {
@@ -2102,7 +2219,9 @@
             "$ref": "#/components/schemas/BurnRateTypeSingle"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "single"
+        ]
       },
       "BurnRateTypeDual": {
         "externalDocs": {
@@ -2137,7 +2256,20 @@
             "$ref": "#/components/schemas/ColorsByAggregation"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "aggregation"
+        ]
+      },
+      "ColorsByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/ColorsByCategory"
+          }
+        },
+        "required": [
+          "category"
+        ]
       },
       "ColorsByGroupBy": {
         "type": "object",
@@ -2146,7 +2278,20 @@
             "$ref": "#/components/schemas/ColorsByGroupBy"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "groupBy"
+        ]
+      },
+      "ColorsByQuery": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "$ref": "#/components/schemas/ColorsByQuery"
+          }
+        },
+        "required": [
+          "query"
+        ]
       },
       "ColorsByStack": {
         "type": "object",
@@ -2155,7 +2300,9 @@
             "$ref": "#/components/schemas/ColorsByStack"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "stack"
+        ]
       },
       "CreateAlertDefResponse": {
         "externalDocs": {
@@ -2383,9 +2530,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -2405,9 +2552,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -3427,7 +3574,9 @@
             "format": "int64"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "minNonNullValuesPct"
+        ]
       },
       "MetricMissingValuesReplaceWithZero": {
         "externalDocs": {
@@ -3443,7 +3592,9 @@
             "type": "boolean"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "replaceWithZero"
+        ]
       },
       "MetricThresholdCondition": {
         "externalDocs": {
@@ -3556,7 +3707,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "metricTimeWindowDynamicDuration"
+        ]
       },
       "MetricTimeWindowMetricTimeWindowSpecificValue": {
         "externalDocs": {
@@ -3569,7 +3722,9 @@
             "$ref": "#/components/schemas/MetricTimeWindowValue"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "metricTimeWindowSpecificValue"
+        ]
       },
       "MetricTimeWindowValue": {
         "type": "string",
@@ -3601,7 +3756,9 @@
             "$ref": "#/components/schemas/MinMaxAuto"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "auto"
+        ]
       },
       "MinMaxCustom": {
         "externalDocs": {
@@ -3615,7 +3772,9 @@
             "$ref": "#/components/schemas/MinMaxCustom"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "custom"
+        ]
       },
       "MultipleValues": {
         "type": "object",
@@ -3686,6 +3845,12 @@
           },
           "resolvedRouteOverrides": {
             "$ref": "#/components/schemas/NotificationRouting"
+          },
+          "retriggeringPeriodMinutes": {
+            "example": 600,
+            "description": "The time in minutes before a new notification is sent for this destination",
+            "type": "integer",
+            "format": "int64"
           },
           "triggeredRoutingOverrides": {
             "$ref": "#/components/schemas/NotificationRouting"
@@ -3836,7 +4001,9 @@
             "$ref": "#/components/schemas/v3.SloDefinition"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "burnRate"
+        ]
       },
       "SloThresholdTypeErrorBudget": {
         "externalDocs": {
@@ -3853,7 +4020,9 @@
             "$ref": "#/components/schemas/v3.SloDefinition"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "errorBudget"
+        ]
       },
       "StatusCount": {
         "externalDocs": {
@@ -4201,7 +4370,9 @@
             "format": "int64"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "integrationId"
+        ]
       },
       "V3IntegrationTypeRecipients": {
         "externalDocs": {
@@ -4215,7 +4386,9 @@
             "$ref": "#/components/schemas/Recipients"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "recipients"
+        ]
       },
       "alerts.v3.PaginationResponse": {
         "type": "object",
@@ -4394,14 +4567,6 @@
             "type": "boolean"
           }
         }
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }
