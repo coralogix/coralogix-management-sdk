@@ -34,7 +34,7 @@ for spec in "$SPECS_DIR"/*; do
     -i "$spec" \
     -g go \
     -o "$outdir" \
-    --additional-properties=withGoMod=false,packageName="$name",enumClassPrefix=true\
+    --additional-properties=withGoMod=false,packageName="$name",enumClassPrefix=true,disallowAdditionalPropertiesIfNotPresent=false \
     --global-property=apiTests=false,modelTests=false,apiDocs=false,modelDocs=false; then
       echo "FAILED to generate for $filename"
       continue
